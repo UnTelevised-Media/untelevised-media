@@ -17,24 +17,27 @@
   },
   "dependencies": {
     "@portabletext/react": "^3.0.4",
-
-
-
+    "@sanity/client": "^6.4.5",
+    "@sanity/icons": "^2.1.0",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/ui": "^1.2.0",
+    "@sanity/vision": "^3.15.1",
     "autoprefixer": "10.4.14",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
     "next": "13.4.13",
-
+    "next-sanity": "^5.2.4",
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-
-    "styled-components": "6.7.0",
+    "sanity": "^3.15.1",
+    "styled-components": "^5.3.9",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
   },
-    "devDependencies": {
+  "devDependencies": {
     "@next/eslint-plugin-next": "13.4.13",
+    "@sanity/eslint-config-studio": "^3.0.0",
     "@testing-library/dom": "9.3.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
@@ -42,11 +45,13 @@
     "@types/node": "20.4.9",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-config-sanity": "^6.0.0",
     "eslint-import-resolver-typescript": "3.6.0",
     "eslint-plugin-import": "2.28.0",
     "eslint-plugin-jest-dom": "^5.0.2",
@@ -62,6 +67,5 @@
     "prettier-plugin-tailwindcss": "^0.5.1",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1"
-
   }
 }
