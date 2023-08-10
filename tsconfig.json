@@ -50,6 +50,6 @@
     "src/**/*.tsx",
     ".next/types/**/*.ts",
     "types.d.ts"
-  ],
+, "src/app/studio/[[...index]]/page.tsx"  ],
   "exclude": ["node_modules"]
 }
