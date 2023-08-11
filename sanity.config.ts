@@ -2,6 +2,7 @@ import {defineConfig} from 'sanity';
 import {visionTool} from '@sanity/vision';
 import {deskTool} from 'sanity/desk';
 import {schemaTypes} from './schemas';
+import { myTheme } from '#/theme'
 
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
@@ -17,5 +18,6 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  theme: myTheme,
 });
 
