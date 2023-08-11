@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+
 'use client'
 
 import { NextStudio } from 'next-sanity/studio'
@@ -24,6 +24,8 @@ export const metadata: Metadata = {
  */
 
 
-export default function StudioPage() {
-  return <NextStudio config={config} />
+const StudioPage = () => {
+  return <NextStudio config={config} />;
 }
+
+export default StudioPage;
