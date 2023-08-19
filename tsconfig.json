@@ -1,55 +1,56 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noUnusedLocals": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "declaration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+ "compilerOptions": {
+  "target": "es5",
+  "lib": ["dom", "dom.iterable", "esnext"],
+  "allowJs": true,
+  "skipLibCheck": true,
+  "strict": true,
+  "forceConsistentCasingInFileNames": true,
+  "noEmit": true,
+  "esModuleInterop": true,
+  "resolveJsonModule": true,
+  "isolatedModules": true,
+  "noUnusedLocals": true,
+  "jsx": "preserve",
+  "incremental": true,
+  "declaration": true,
+  "emitDecoratorMetadata": true,
+  "experimentalDecorators": true,
+  "module": "ESNext",
+  "moduleResolution": "Node",
 
-    "noImplicitAny": false,
-    "noImplicitThis": true,
-    "sourceMap": true,
+  "noImplicitAny": false,
+  "noImplicitThis": true,
+  "sourceMap": true,
 
-    "strictNullChecks": false,
-    // "target": "ES2015",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "rootDir": "./",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@/c/*": ["./src/components/*"],
-      "@/h/*": ["./src/hooks/*"],
-      "@/l/*": ["./src/lib/*"],
-      "@/s/*": ["./src/store/*"],
-      "@/u/*": ["./src/util/*"],
-      "#/*": ["./*"],
-      "$/*": ["./public/*"]
-    },
-    "outDir": "./out"
+  "strictNullChecks": false,
+  // "target": "ES2015",
+  "plugins": [
+   {
+    "name": "next"
+   }
+  ],
+  "rootDir": "./",
+  "baseUrl": ".",
+  "paths": {
+   "@/*": ["./src/*"],
+   "@/c/*": ["./src/components/*"],
+   "@/h/*": ["./src/hooks/*"],
+   "@/l/*": ["./src/lib/*"],
+   "@/s/*": ["./src/store/*"],
+   "@/u/*": ["./src/util/*"],
+   "#/*": ["./*"],
+   "$/*": ["./public/*"]
   },
-  "include": [
-    "next-env.d.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    ".next/types/**/*.ts",
-    "types.d.ts"
-, "src/app/studio/[[...index]]/page.tsx"  ],
-  "exclude": ["node_modules"]
+  "outDir": "./out"
+ },
+ "include": [
+  "next-env.d.ts",
+  "src/**/*.ts",
+  "src/**/*.tsx",
+  ".next/types/**/*.ts",
+  "types.d.ts",
+  "src/app/studio/[[...index]]/page.tsx"
+ ],
+ "exclude": ["node_modules"]
 }

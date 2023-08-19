@@ -3,14 +3,14 @@ import { buildLegacyTheme } from "sanity";
 
 const props =  {
     
-    '--dark': '#505050',
-    '--light': '#B5B5B5',
+    '--dark': '#272727',
+    '--light': '#ECECEC',
     '--untele': '#D70606',
     '--accent-blue': '#0301F7',
     '--accent-yellow': '#F4F502',
     '--accent-green': '#0BE90B',
     '--slate-dark': '#594F4D',
-    '--slate-light': '#E0E0D6',
+    '--slate-light': '#Cfcfd4',
     
 }
 
@@ -20,7 +20,7 @@ export const myTheme = buildLegacyTheme({
     '--black': props['--dark'],
     '--white': props['--light'],
     '--gray': props['--slate-dark'],
-    '--gray-base': props['--slate-light'],
+    '--gray-base': props['--slate-dark'],
 
     '--component-bg': props['--dark'],
     '--component-text-color': props['--light'],

@@ -14,6 +14,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        untele: '#D70606',
         midnight: '#121063',
         copper: '#b87333',
         bronze: '#565584',
