@@ -35,6 +35,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 Build Tech Next JS Typescript Tailwind CSS
 
-Sanity CMS Grok Query
+Sanity CMS Groq Query
 
-Concepts NextJS Route Groups
+Concepts NextJS Route Groups Dynamic Page Routing 

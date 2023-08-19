@@ -85,9 +85,11 @@ module.exports = {
         144: '36rem',
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        static: 'url("/fuzzbar.png")',
+        alchemy: 'url("/bg-alchemy.png")',
+        circles: 'url("/bg-circles.png")',
+        circleStar: 'url("/circle-star.svg")',
+        site: 'url("/sgvs/hs.svg")',
       },
     },
   },
@@ -102,7 +104,7 @@ module.exports = {
           neonUtilities[`.neon-${color}`] = {
             boxShadow: `0 0 5px ${color1}, 0 0 20px ${color2}`,
           };
-}
+        }
       }
       addUtilities(neonUtilities);
     }),

@@ -1,18 +1,17 @@
+'use client';
 
-'use client'
+import { NextStudio } from 'next-sanity/studio';
+import config from '#/sanity.config';
 
-import { NextStudio } from 'next-sanity/studio'
-import config from '#/sanity.config'
-
-import type {Metadata} from 'next'
-import {metadata as studioMetadata} from 'next-sanity/studio/metadata'
+import type { Metadata } from 'next';
+import { metadata as studioMetadata } from 'next-sanity/studio/metadata';
 
 // Set the right `viewport`, `robots` and `referer` meta tags
 export const metadata: Metadata = {
   ...studioMetadata,
   // Overrides the viewport to resize behavior
   viewport: `${studioMetadata.viewport}, interactive-widget=resizes-content`,
-}
+};
 
 /**
  * This route is responsible for the built-in authoring environment using Sanity Studio.
@@ -23,9 +22,8 @@ export const metadata: Metadata = {
  * https://github.com/sanity-io/next-sanity
  */
 
-
 const StudioPage = () => {
   return <NextStudio config={config} />;
-}
+};
 
 export default StudioPage;
