@@ -19,7 +19,7 @@ export const metadata: Metadata = {
       url: 'https://digitl-alchemyst-portfolio.vercel.app/',
     },
   ],
-  colorScheme: 'dark',
+  // colorScheme: 'dark',
   creator: 'Radical Edward',
   publisher: 'Digitl Alchemyst',
   icons: {
@@ -34,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={` bg-slate-400/80 ${inter.className}`}>
         <Header />
         <Banner />
         {children}
