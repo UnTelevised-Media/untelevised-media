@@ -1,20 +1,23 @@
 /* eslint-disable react/function-component-definition */
-import { previewData } from 'next/headers';
+import { draftMode } from 'next/headers';
+import { LiveQuery } from 'next-sanity/preview/live-query';
+import DocumentsCount, { query } from '@/components/DocumentsCount';
+import PreviewDocumentsCount from '@/components/PreviewDocumentsCount';
+import { sanityFetch } from '@/lib/sanity.fetch';
 
-
-export default function Home() {
-  
-  if (previewData()) {
-    return (
-      <div>
-        This is preview Mode
-      </div>
-    )
-  }
+export default async function IndexPage() {
+  const data = await sanityFetch<number>({ query, tags: ['post'] });
 
   return (
-    <div>
-      <h1>Regular View</h1>
-    </div>
+    <LiveQuery
+      enabled={draftMode().isEnabled}
+      query={query}
+      initialData={data}
+      as={PreviewDocumentsCount}
+    >
+      <DocumentsCount data={data} />
+    </LiveQuery>
   );
 }
+
+
