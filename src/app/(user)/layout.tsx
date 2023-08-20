@@ -4,6 +4,10 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Header from '@/c/global/Header';
 import Banner from '@/c/global/Banner';
+import dynamic from 'next/dynamic';
+import { draftMode } from 'next/headers';
+import { token } from '@/lib/sanity.fetch';
+import PreviewProvider from '@/components/PreviewProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,7 +31,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
