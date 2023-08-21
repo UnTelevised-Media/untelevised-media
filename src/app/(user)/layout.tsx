@@ -6,8 +6,7 @@ import Header from '@/c/global/Header';
 import Banner from '@/c/global/Banner';
 import dynamic from 'next/dynamic';
 import { draftMode } from 'next/headers';
-import { token } from '@/lib/sanity.fetch';
-import PreviewProvider from '@/components/PreviewProvider';
+import { token } from '@/l/sanity.fetch';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,6 +30,8 @@ export const metadata: Metadata = {
   },
 };
 
+const PreviewProvider = dynamic(() => import('@/components/PreviewProvider'));
+
 export default async function RootLayout({
   children,
 }: {
@@ -39,9 +40,19 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body className={` bg-slate-400/80 ${inter.className}`}>
-        <Header />
-        <Banner />
-        {children}
+        {draftMode().isEnabled ? (
+          <PreviewProvider token={token}>
+            <Header />
+            <Banner />
+            {children}
+          </PreviewProvider>
+        ) : ( 
+            <>
+            <Header />
+            <Banner />
+            {children}
+            </>
+        )}
       </body>
     </html>
   );
