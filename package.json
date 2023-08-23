@@ -13,7 +13,8 @@
     "test:watch": "jest --verbose --watch",
     "test:coverage": "jest --coverage",
     "test:ci": "jest --ci",
-    "deploy": "vercel"
+    "deploy": "vercel",
+    "prod": "vercel --prod"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
