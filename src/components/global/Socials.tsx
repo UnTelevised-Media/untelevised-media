@@ -6,6 +6,7 @@ const Socials = () => {
       <SocialIcon url='https://www.youtube.com/@UnTelevised' />
       <SocialIcon url='https://twitter.com/UnTelevisedLive' />
       <SocialIcon url='https://www.twitch.tv/untelevised' />
+      <SocialIcon url='https://www.tiktok.com/@untelevisedmedia' />
       <SocialIcon url='https://www.instagram.com/untelevised.media/' />
       <SocialIcon url='https://www.facebook.com/UnTelevisedLive' />
       <SocialIcon url='https://www.reddit.com/r/UnTelevisedMedia/' />
