@@ -1,10 +1,10 @@
 /* eslint-disable react/function-component-definition */
 type Props = {
-    posts: Post[];
-}
+  posts: Post[];
+};
 
-function BlogList({posts}: Props) {
-// console.log("🚀 ~ BlogList.tsx: ~~ posts:", posts)
+function BlogList({ posts }: Props) {
+  // console.log("🚀 ~ BlogList.tsx: ~~ posts:", posts)
 
   return (
     <div>
@@ -21,4 +21,4 @@ function BlogList({posts}: Props) {
   );
 }
 
-export default BlogList
+export default BlogList;
