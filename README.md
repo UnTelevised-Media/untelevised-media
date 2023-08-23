@@ -37,4 +37,4 @@ Build Tech Next JS Typescript Tailwind CSS
 
 Sanity CMS Groq Query
 
-Concepts NextJS Route Groups Dynamic Page Routing 
+Concepts NextJS Route Groups Dynamic Page Routing
