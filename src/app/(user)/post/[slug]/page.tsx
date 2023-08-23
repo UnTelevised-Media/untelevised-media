@@ -1,6 +1,8 @@
 /* eslint-disable react/function-component-definition */
-import { client } from '@/lib/sanity.client';
+import { client } from '@/l/sanity.client';
+import urlForImage from '@/u/urlForImage';
 import { groq } from 'next-sanity';
+import Image from 'next/image';
 
 type Props = {
   params: {
@@ -8,7 +10,7 @@ type Props = {
   };
 };
 async function Article({ params: { slug } }: Props) {
-  
+
 const query = groq`
   *[_type == "post" && slug.current == $slug][0] {
         ...,
@@ -20,9 +22,22 @@ const query = groq`
           approved == true],
     }`;
 
-  const article: Post = await client.fetch(query, { slug });
+  const post: Post = await client.fetch(query, { slug });
   
 
-  return <div>My Post: {slug}</div>}
+  return <article>
+    <section>
+      <div>
+        <div>
+          <Image 
+            className=''
+            src={urlForImage(post.mainImage).url()}
+            fill
+            alt=''
+          />
+        </div>
+      </div>
+    </section>
+    </article>}
 
   export default Article
