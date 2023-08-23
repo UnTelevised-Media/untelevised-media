@@ -11,32 +11,30 @@ import type { DefaultDocumentNodeResolver } from 'sanity/desk';
 // }
 
 export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (
-    S,
-    { schemaType }
+  S,
+  { schemaType },
 ) => {
-   if (schemaType === 'post') {
-  
-           return S.document().views([
-             S.view.form(),
-             S.view
-               .component(Iframe)
-               .options({
-                 url: `${
-                    process.env.NEXT_PUBLIC_VERCEL_URL ||
-                    'http://localhost.3000'
-                    }/api/preview`,
-                    defaultSize: `desktop`, // default `desktop`
-                    reload: {
-                        button: true,
-                    },
-                    loader: true,
-                    attributes: {
-                      allow: 'fullscreen', // string, optional
-                    //   referrerPolicy: 'strict-origin-when-cross-origin', // string, optional
-                    //   sandbox: 'allow-same-origin', // string, optional
-                    }
-               })
-               .title('Preview'),
-           ]);
-       }
-     };
+  if (schemaType === 'post') {
+    return S.document().views([
+      S.view.form(),
+      S.view
+        .component(Iframe)
+        .options({
+          url: `${
+            process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost.3000'
+          }/api/preview`,
+          defaultSize: `desktop`, // default `desktop`
+          reload: {
+            button: true,
+          },
+          loader: true,
+          attributes: {
+            allow: 'fullscreen', // string, optional
+            //   referrerPolicy: 'strict-origin-when-cross-origin', // string, optional
+            //   sandbox: 'allow-same-origin', // string, optional
+          },
+        })
+        .title('Preview'),
+    ]);
+  }
+};

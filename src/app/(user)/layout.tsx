@@ -46,12 +46,12 @@ export default async function RootLayout({
             <Banner />
             {children}
           </PreviewProvider>
-        ) : ( 
-            <>
+        ) : (
+          <>
             <Header />
             <Banner />
             {children}
-            </>
+          </>
         )}
       </body>
     </html>
