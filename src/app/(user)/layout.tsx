@@ -4,6 +4,9 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Header from '@/c/global/Header';
 import Banner from '@/c/global/Banner';
+import dynamic from 'next/dynamic';
+import { draftMode } from 'next/headers';
+import { token } from '@/l/sanity.fetch';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +22,7 @@ export const metadata: Metadata = {
       url: 'https://digitl-alchemyst-portfolio.vercel.app/',
     },
   ],
-  colorScheme: 'dark',
+  // colorScheme: 'dark',
   creator: 'Radical Edward',
   publisher: 'Digitl Alchemyst',
   icons: {
@@ -27,17 +30,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+const PreviewProvider = dynamic(() => import('@/components/PreviewProvider'));
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
-        <Header />
-        <Banner />
-        {children}
+      <body className={` bg-slate-400/80  ${inter.className}`}>
+        {draftMode().isEnabled ? (
+          <PreviewProvider token={token}>
+            <Header />
+            <Banner />
+            {children}
+          </PreviewProvider>
+        ) : (
+          <>
+            <Header />
+            <Banner />
+            {children}
+          </>
+        )}
       </body>
     </html>
   );

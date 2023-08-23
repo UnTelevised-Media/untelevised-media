@@ -1,15 +1,31 @@
-import React from 'react'
+import React from 'react';
 
 const Banner = () => {
   return (
-    <div className='flex flex-col lg:flex-row lg:space-x-5 justify-between px-10 py-4 mb-10'>
-        <div className=''>
-            <h1 className='text-untele text-7xl font-bold'>UnTelevised Media</h1>
-            <h2 className='mt-5 md:mt-0'>The Revolution will be {' '}<span className='underline decoration-2 decoration-untele font-semibold'>UnTelevised</span></h2>
+    <div className='mb-3 flex flex-col justify-between px-10 py-4 lg:flex-row lg:space-x-5'>
+      <div className='w-full'>
+        <h1 className='w-full text-7xl font-bold text-untele'>
+          UnTelevised Media
+        </h1>
+        <h2 className='mt-5 md:mt-0'>
+          The Revolution will be{' '}
+          <span className='font-semibold underline decoration-untele decoration-2'>
+            UnTelevised
+          </span>
+        </h2>
+      </div>
+      <div className='flex w-full flex-col items-end justify-between'>
+        <p className='mt-5 max-w-md text-untele md:mt-2 lg:max-w-lg'>
+          The latest breaking news you wont see on mainstream media
+        </p>
+        <div className='w-full rounded-md border border-untele/30 bg-slate-500 px-3 py-2 shadow-lg'>
+          <p className='animate-pulse'>
+            Live News Ticker Placeholder Coming Soon
+          </p>
         </div>
-        <p className='mt-5 md:mt-2 text-untele max-w-md lg:max-w-lg'>The latest breaking news you wont hear on mainstream media</p> 
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Banner
+export default Banner;

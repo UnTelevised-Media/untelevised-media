@@ -6,7 +6,6 @@ import Socials from './Socials';
 const Header = () => {
   return (
     <header className='flex w-full items-center justify-between space-x-2 bg-static px-5 py-2'>
-      
       {/* Logo */}
       <div className='flex items-end space-x-2'>
         <Link href='/'>
@@ -17,7 +16,6 @@ const Header = () => {
         </h1>
       </div>
 
-
       {/* Support */}
       <div>
         <Image src='/sim.png' alt='' width={720} height={50} />
@@ -27,7 +25,6 @@ const Header = () => {
       <div>
         <Socials />
       </div>
-
     </header>
   );
 };
