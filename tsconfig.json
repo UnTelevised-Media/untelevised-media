@@ -13,7 +13,7 @@
     "noUnusedLocals": true,
     "jsx": "preserve",
     "incremental": true,
-    "declaration": true,
+    "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "ESNext",
@@ -34,13 +34,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
+      "@/a/*": ["./src/app/*"],
       "@/c/*": ["./src/components/*"],
       "@/h/*": ["./src/hooks/*"],
       "@/l/*": ["./src/lib/*"],
       "@/s/*": ["./src/store/*"],
       "@/u/*": ["./src/util/*"],
       "#/*": ["./*"],
-      "$/*": ["./public/*"]
+      "$/*": ["./schemas/*"]
     },
     "outDir": "./out"
   },

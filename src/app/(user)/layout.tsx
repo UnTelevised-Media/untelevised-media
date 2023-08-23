@@ -39,7 +39,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={` bg-slate-400/80 ${inter.className}`}>
+      <body className={` bg-slate-400/80  ${inter.className}`}>
         {draftMode().isEnabled ? (
           <PreviewProvider token={token}>
             <Header />

@@ -5,7 +5,7 @@
  **/
 const nextConfig = {
   images: {
-    domains: ['cloud.appwrite.io', 'links.papareact.com'],
+    domains: ['cloud.appwrite.io', 'cdn.sanity.io'],
   },
 
   typescript: {
