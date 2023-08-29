@@ -4,6 +4,7 @@
  * @type {import('next').NextConfig}
  **/
 const nextConfig = {
+  distDir: 'build',
   images: {
     domains: ['cloud.appwrite.io', 'cdn.sanity.io'],
   },
