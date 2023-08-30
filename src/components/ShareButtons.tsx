@@ -7,7 +7,7 @@ init();
 
 const ShareButtons = () => {
   return (
-    <div>
+    <div className='flex justify-center py-4'>
       <div className='shareon'>
         <a className='facebook' />
         <a className='linkedin' />

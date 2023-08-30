@@ -1,4 +1,3 @@
-
 /* eslint-disable react/function-component-definition */
 import { RichTextComponents } from '@/c/RichTextComponents';
 import { client } from '@/l/sanity.client';
@@ -6,8 +5,8 @@ import urlForImage from '@/u/urlForImage';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
-import ShareButtons from '@/components/ShareButtons';
 
+import SocialShare from '@/components/SocialShare';
 
 type Props = {
   params: {
@@ -101,8 +100,27 @@ async function Article({ params: { slug } }: Props) {
           </section>
         </div>
       </section>
-      
-      <ShareButtons />
+
+      <SocialShare
+        url={`https://untelevised.media/post/${slug}`}
+        title={post.title}
+        description={post.description}
+      />
+
+      <div className='mt-4 flex justify-center'>
+        <Image
+          src={urlForImage(post.mainImage).url()}
+          alt='Image Description'
+          sizes='60vw'
+          style={{
+            width: '70%',
+            height: 'auto',
+          }}
+          width={300}
+          height={300}
+          className='rounded-lg'
+        />
+      </div>
 
       <section className='mx-auto mt-12 max-w-[70vw] rounded-lg border border-untele bg-slate-700/30 px-10 py-5'>
         <PortableText value={post.body} components={RichTextComponents} />
