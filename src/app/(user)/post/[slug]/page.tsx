@@ -1,3 +1,4 @@
+
 /* eslint-disable react/function-component-definition */
 import { RichTextComponents } from '@/c/RichTextComponents';
 import { client } from '@/l/sanity.client';
@@ -5,6 +6,8 @@ import urlForImage from '@/u/urlForImage';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
+import ShareButtons from '@/components/ShareButtons';
+
 
 type Props = {
   params: {
@@ -23,9 +26,9 @@ export async function generateStaticParams() {
   const slugs: Post[] = await client.fetch(query);
   const slugRoutes = slugs.map((slug) => slug.slug.current);
 
-  return slugRoutes.map(slug => ({
+  return slugRoutes.map((slug) => ({
     slug,
-  }))
+  }));
 }
 
 async function Article({ params: { slug } }: Props) {
@@ -98,7 +101,10 @@ async function Article({ params: { slug } }: Props) {
           </section>
         </div>
       </section>
-      <section className='mx-auto max-w-[70vw] px-10 py-5 mt-12 bg-slate-700/30 rounded-lg border-untele border'>
+      
+      <ShareButtons />
+
+      <section className='mx-auto mt-12 max-w-[70vw] rounded-lg border border-untele bg-slate-700/30 px-10 py-5'>
         <PortableText value={post.body} components={RichTextComponents} />
       </section>
     </article>
