@@ -14,7 +14,7 @@ type Props = {
   };
 };
 
-export const revalidate = 300;
+export const revalidate = 120;
 
 export async function generateStaticParams() {
   const query = groq`*[_type=='post']
@@ -25,7 +25,7 @@ export async function generateStaticParams() {
   const slugs: Post[] = await client.fetch(query);
   const slugRoutes = slugs.map((slug) => slug.slug.current);
 
-  return slugRoutes.map((slug) => ({
+  return slugRoutes.map(slug => ({
     slug,
   }));
 }
@@ -104,7 +104,6 @@ async function Article({ params: { slug } }: Props) {
       <SocialShare
         url={`https://untelevised.media/post/${slug}`}
         title={post.title}
-        description={post.description}
       />
 
       <div className='mt-4 flex justify-center'>

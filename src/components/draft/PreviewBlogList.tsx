@@ -1,6 +1,6 @@
 /* eslint-disable react/function-component-definition */
 import { sanityFetch } from '@/l/sanity.fetch';
-import BlogList from '../BlogList';
+import BlogItem from '@/components/BlogItem';
 
 type Props = {
   query: string;
@@ -8,6 +8,6 @@ type Props = {
 
 export default function PreviewBlogList({ query }: Props) {
   const posts = sanityFetch<number>({ query, tags: ['post'] });
-  console.log('🚀 ~ file: PreviewBlogList.tsx ~~ posts:', posts);
-  return <BlogList posts={posts} />;
+
+  return <BlogItem posts={posts} />;
 }

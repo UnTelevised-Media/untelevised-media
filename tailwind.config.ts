@@ -94,7 +94,6 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/line-clamp'),
     plugin(({ theme, addUtilities }) => {
       const neonUtilities = {};
       const colors = theme('colors');

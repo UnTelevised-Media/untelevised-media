@@ -17,7 +17,7 @@ import {
 } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md'
 
-const SocialShare = ({ url, title, description }) => {
+const SocialShare = ({ url, title }) => {
   return (
     <div className='mx-auto flex w-full justify-center py-3'>
       <h3 className='mr-3 flex items-center justify-center text-xl font-semibold text-untele'>
