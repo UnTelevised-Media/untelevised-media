@@ -1,12 +1,12 @@
 /* eslint-disable react/function-component-definition */
+import Image from 'next/image';
+import { groq } from 'next-sanity';
+import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/c/RichTextComponents';
+import SocialShare from '@/c/SocialShare';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
-import { groq } from 'next-sanity';
-import Image from 'next/image';
-import { PortableText } from '@portabletext/react';
 
-import SocialShare from '@/components/SocialShare';
 
 type Props = {
   params: {
