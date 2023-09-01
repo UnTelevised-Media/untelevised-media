@@ -23,7 +23,7 @@ export async function generateStaticParams() {
   }`;
 
   const slugs: Post[] = await client.fetch(query);
-  const slugRoutes = slugs.map((slug) => slug.slug.current);
+  const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
 
   return slugRoutes.map(slug => ({
     slug,
@@ -87,14 +87,15 @@ async function Article({ params: { slug } }: Props) {
             <div className='flex items-center'>
               <h2 className='mt-6 italic'>{post.description}</h2>
               <div className='mt-auto flex items-center justify-end space-x-2'>
-                {post.categories.map((category) => (
-                  <div
-                    key={category._id}
-                    className='max-w-[160px] rounded-xl border border-untele bg-slate-900/80 px-5 py-2 text-center text-xs font-semibold text-untele lg:text-sm'
-                  >
-                    <p>{category.title}</p>
-                  </div>
-                ))}
+                {post.categories &&
+                  post.categories.map((category) => (
+                    <div
+                      key={category._id}
+                      className='max-w-[160px] rounded-xl border border-untele bg-slate-900/80 px-5 py-2 text-center text-xs font-semibold text-untele lg:text-sm'
+                    >
+                      <p>{category.title}</p>
+                    </div>
+                  ))}
               </div>
             </div>
           </section>
