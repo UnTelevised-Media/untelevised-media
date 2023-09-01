@@ -32,14 +32,15 @@ function BlogItem({ posts }: Props) {
                     </p>
                   </div>
                   <div className='flex flex-col items-center gap-y-2 md:flex-row md:gap-x-2'>
-                    {post.categories.map((category) => (
-                      <div
-                        key={category._id}
-                        className='rounded-xl border border-slate-900 bg-untele/70 px-5 py-2 text-center text-xs font-light text-slate-900 lg:text-sm'
-                      >
-                        <p>{category.title}</p>
-                      </div>
-                    ))}
+                    {post.categories &&
+                      post.categories.map((category) => (
+                        <div
+                          key={category._id}
+                          className='rounded-xl border border-slate-900 bg-untele/70 px-5 py-2 text-center text-xs font-light text-slate-900 lg:text-sm'
+                        >
+                          <p>{category.title}</p>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
