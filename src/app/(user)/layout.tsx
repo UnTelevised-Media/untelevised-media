@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 import { draftMode } from 'next/headers';
 import { token } from '@/l/sanity.fetch';
 
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -15,25 +16,35 @@ export const metadata: Metadata = {
     'UnTelevised Media - Breaking News Updates | Latest News Headlines | Photos &amp; News Videos',
   description: 'The Revolution will be UnTelevised',
   referrer: 'origin-when-cross-origin',
-  keywords: ['news', 
-  'daily news', 
-  'breaking news', 
-  'news today', 
-  'current events', 
-  'current news', 
-  'current', 
-  'national news', 
-  'world news', 
-  'news video', 
-  'political news', 
-  'technology news', 
-  'financial news', 
-  'news', 
-  'news', 
-  'news', 
-  'breaking'],
-
-
+  keywords: [
+    'news',
+    'daily news',
+    'breaking news',
+    'news today',
+    'current events',
+    'current news',
+    'current',
+    'national news',
+    'world news',
+    'news video',
+    'political news',
+    'technology news',
+    'financial news',
+    'news',
+    'news',
+    'news',
+    'breaking',
+  ],
+  openGraph: {
+    title:
+      'UnTelevised Media - Breaking News Updates | Latest News Headlines | Photos &amp; News Videos',
+    description: 'The Revolution will be UnTelevised',
+    url: `https://untelevised.media`,
+    //   siteName: 'UnTelevised Media',
+    images: {
+      url: `https://untelevised.media/Logo.png`,
+    },
+  },
   // colorScheme: 'dark',
   publisher: 'UnTelevised Media',
   icons: {

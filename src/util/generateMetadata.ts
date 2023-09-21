@@ -36,7 +36,7 @@ export async function generateMetadata({ params: {slug} }: Props ) {
     openGraph: {
       title: post.title,
       description: post.description,
-      url: `https://untelevised.media/post/${post.slug}`,
+      url: `https://untelevised.media/post/${slug}`,
       //   siteName: 'UnTelevised Media',
       images: {
         url: urlForImage(post.mainImage).url(),
