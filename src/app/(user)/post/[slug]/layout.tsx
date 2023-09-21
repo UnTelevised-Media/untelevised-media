@@ -9,9 +9,10 @@ import { draftMode } from 'next/headers';
 import { token } from '@/l/sanity.fetch';
 import { generateMetadata } from '@/u/generateMetadata';
 
+
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = generateMetadata; 
+
 
 const PreviewProvider = dynamic(() => import('@/components/PreviewProvider'));
 

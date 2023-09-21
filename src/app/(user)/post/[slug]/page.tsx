@@ -9,6 +9,7 @@ import SocialShare from '@/c/SocialShare';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
 // import { generateMetadata } from '@/u/generateMetadata';
+export { generateMetadata } from '@/u/generateMetadata';
 
 type Props = {
   params: {
