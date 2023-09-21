@@ -7,39 +7,11 @@ import Banner from '@/c/global/Banner';
 import dynamic from 'next/dynamic';
 import { draftMode } from 'next/headers';
 import { token } from '@/l/sanity.fetch';
+import { generateMetadata } from '@/u/generateMetadata';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title:
-    'UnTelevised Media - Breaking News Updates | Latest News Headlines | Photos &amp; News Videos',
-  description: 'The Revolution will be UnTelevised',
-  referrer: 'origin-when-cross-origin',
-  keywords: ['news', 
-  'daily news', 
-  'breaking news', 
-  'news today', 
-  'current events', 
-  'current news', 
-  'current', 
-  'national news', 
-  'world news', 
-  'news video', 
-  'political news', 
-  'technology news', 
-  'financial news', 
-  'news', 
-  'news', 
-  'news', 
-  'breaking'],
-
-
-  // colorScheme: 'dark',
-  publisher: 'UnTelevised Media',
-  icons: {
-    icon: '/favicon.ico',
-  },
-};
+export const metadata: Metadata = generateMetadata; 
 
 const PreviewProvider = dynamic(() => import('@/components/PreviewProvider'));
 

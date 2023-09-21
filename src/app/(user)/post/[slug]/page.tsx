@@ -1,12 +1,14 @@
 /* eslint-disable react/function-component-definition */
 import Image from 'next/image';
+// import Head from 'next/head';
+// import type { Metadata } from 'next';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/c/RichTextComponents';
 import SocialShare from '@/c/SocialShare';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
-
+// import { generateMetadata } from '@/u/generateMetadata';
 
 type Props = {
   params: {
@@ -15,6 +17,8 @@ type Props = {
 };
 
 export const revalidate = 120;
+
+// export const metadata: Metadata = generateMetadata;
 
 export async function generateStaticParams() {
   const query = groq`*[_type=='post']
@@ -25,21 +29,22 @@ export async function generateStaticParams() {
   const slugs: Post[] = await client.fetch(query);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
 
-  return slugRoutes.map(slug => ({
+  return slugRoutes.map((slug) => ({
     slug,
   }));
 }
 
 async function Article({ params: { slug } }: Props) {
   const query = groq`
-  *[_type == "post" && slug.current == $slug][0] {
-        ...,
-        author->,
-        categories[]->,
-        'comments': *[
-          _type == 'comment' &&
-          post._ref == ^._id &&
-          approved == true],
+    *[_type == "post" && slug.current == $slug][0] {
+      ...,
+      author->,
+      categories[]->,
+      'comments': *[
+        _type == 'comment' &&
+        post._ref == ^._id &&
+        approved == true
+      ],
     }`;
 
   const post: Post = await client.fetch(query, { slug });
