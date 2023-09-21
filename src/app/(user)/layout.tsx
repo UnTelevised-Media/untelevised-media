@@ -11,20 +11,31 @@ import { token } from '@/l/sanity.fetch';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'UnTelevised Media',
+  title:
+    'UnTelevised Media - Breaking News Updates | Latest News Headlines | Photos &amp; News Videos',
   description: 'The Revolution will be UnTelevised',
   referrer: 'origin-when-cross-origin',
-  keywords: ['Next.js', 'React', 'JavaScript'],
-  authors: [
-    { name: 'Radical Edward' },
-    {
-      name: 'Digitl Alchemyst',
-      url: 'https://digitl-alchemyst-portfolio.vercel.app/',
-    },
-  ],
+  keywords: ['news', 
+  'daily news', 
+  'breaking news', 
+  'news today', 
+  'current events', 
+  'current news', 
+  'current', 
+  'national news', 
+  'world news', 
+  'news video', 
+  'political news', 
+  'technology news', 
+  'financial news', 
+  'news', 
+  'news', 
+  'news', 
+  'breaking'],
+
+
   // colorScheme: 'dark',
-  creator: 'Radical Edward',
-  publisher: 'Digitl Alchemyst',
+  publisher: 'UnTelevised Media',
   icons: {
     icon: '/favicon.ico',
   },
