@@ -18,7 +18,9 @@ const Header = () => {
 
       {/* Support */}
       <div>
-        <Image src='/sim.png' alt='' width={720} height={50} />
+        <Link href='/donate'>
+          <Image src='/sim.png' alt='' width={520} height={50} />
+        </Link>
       </div>
 
       {/* Socials */}
