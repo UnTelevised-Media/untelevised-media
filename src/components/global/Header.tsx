@@ -17,7 +17,7 @@ const Header = () => {
       </div>
 
       {/* Support */}
-      <div>
+      <div className='hidden lg:flex'>
         <Link href='/donate'>
           <Image src='/sim.png' alt='' width={520} height={50} />
         </Link>

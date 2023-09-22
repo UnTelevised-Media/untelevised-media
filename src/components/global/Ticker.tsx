@@ -58,8 +58,8 @@ const Ticker = () => {
             Leader Arrested; Chester, PA: Retired Firefighter, Who Allegedly
             Threw Fire Extinguisher at Capitol Police During D.C. Riot, Is
             Arrested; VA: 2 Virginia Police Officers Arrested for Participating
-            in Capitol Riots; The Hill: Dozens on FBI's Terrorist Watchlist Were
-            in DC Day of Capitol Riot; Denver, CO: Denver Police Grilled By
+            in Capitol Riots; The Hill: Dozens on FBI&apso;s Terrorist Watchlist
+            Were in DC Day of Capitol Riot; Denver, CO: Denver Police Grilled By
             Lawmakers Over Summer Protest Response; Wilmington, DE: Man Seen
             Carrying Confederate Flag in Capitol Arrested, IDed as Kevin
             Seefried, Son Hunter Also Arrested; Internet: Parler is Offline, but
@@ -72,20 +72,21 @@ const Ticker = () => {
             Insurrection in Many Major US Cities; DC: Death of Capitol Police
             Officer 3 Days After Riots Was by Suicide, Family Says; Atlanta, GA:
             Man Arrested Hours After Capitol Riot Dies In Custody: Unicorn Riot:
-            "It's Time to Start Killing the News Media Live on Air": Oath
-            Keepers Private Chats Show Increased Desire for Post-Election
-            Violence; AP: FBI Warns of National Protest Planned for Inauguration
-            Day Across the US: DC: NPS Considers Closing National Mall on
-            Inauguration Day; Portland, OR: Man Charged with Shooting Portland
-            Federal Courthouse IDed as #StopTheSteal Attendee; Internet: Amazon
-            Removes Parler from Servers, Hackers Exploit Failing Servers to
-            Scrape Entire Database; Time: Security Officials Face the
-            Possibility of a Threat from the Inside on Inauguration Day; FBI:
-            Feds Report Heavy Amounts of Communications Around Inauguration Day
-            Violence; DC: Video Shows Capitol Police Removing Fencing to Allow
-            Right Wing Rioters into US Capitol; Houston, TX: Police Officer
-            Under Investigation After Participating in Capitol Riots; USA:
-            #StopTheSteal Riots are Planned for all State Capitols on J20;{' '}
+            &quot;It&apso;s Time to Start Killing the News Media Live on
+            Air&quot;: Oath Keepers Private Chats Show Increased Desire for
+            Post-Election Violence; AP: FBI Warns of National Protest Planned
+            for Inauguration Day Across the US: DC: NPS Considers Closing
+            National Mall on Inauguration Day; Portland, OR: Man Charged with
+            Shooting Portland Federal Courthouse IDed as #StopTheSteal Attendee;
+            Internet: Amazon Removes Parler from Servers, Hackers Exploit
+            Failing Servers to Scrape Entire Database; Time: Security Officials
+            Face the Possibility of a Threat from the Inside on Inauguration
+            Day; FBI: Feds Report Heavy Amounts of Communications Around
+            Inauguration Day Violence; DC: Video Shows Capitol Police Removing
+            Fencing to Allow Right Wing Rioters into US Capitol; Houston, TX:
+            Police Officer Under Investigation After Participating in Capitol
+            Riots; USA: #StopTheSteal Riots are Planned for all State Capitols
+            on J20;{' '}
           </div>
         </div>
       </div>

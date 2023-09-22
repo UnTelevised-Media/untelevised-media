@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     url: `https://untelevised.media`,
     //   siteName: 'UnTelevised Media',
     images: {
-      url: `https://untelevised.media/Logo.png`,
+      url: `/Logo.png`,
     },
   },
   // colorScheme: 'dark',
@@ -61,7 +61,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={` bg-slate-400/80 scrollbar-hide ${inter.className}`}>
+      <body className={` bg-slate-400/70 scrollbar-hide ${inter.className}`}>
         {draftMode().isEnabled ? (
           <PreviewProvider token={token}>
             <Header />
