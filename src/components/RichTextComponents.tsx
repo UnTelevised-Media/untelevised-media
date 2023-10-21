@@ -8,7 +8,7 @@ export const RichTextComponents = {
   types: {
     image: ({ value }: any) => {
       return (
-        <div className='relative m-10 mx-auto h-96 w-full'>
+        <div className='relative my-10 mx-auto h-96 w-full'>
           <Image
             className='object-contain'
             src={urlForImage(value).url()}
@@ -55,7 +55,7 @@ export const RichTextComponents = {
         <Link
           href={value.href}
           rel={rel}
-          className='underline decoration-untele hover:decoration-black'
+          className='underline decoration-untele hover:decoration-sky-600'
         >
           {children}
         </Link>

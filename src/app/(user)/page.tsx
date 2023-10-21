@@ -22,22 +22,16 @@ export const revalidate = 180;
 export default async function HomePage() {
   if (draftMode().isEnabled) {
     return (
-      // <PreviewProvider token={token}>
       <div>
         <h1>This is Draft Mode</h1>
         <Link href='/api/exit-draft'>Exit Draft Mode</Link>
       </div>
-      // </PreviewProvider>
     );
   }
 
   const posts = await client.fetch(query);
-  // console.log('🚀 ~ file: page.tsx:32 ~ HomePage ~ posts:', posts);
   return (
     <div className='mx-auto max-w-[85vw]'>
-      {/* <h1>This is Production Mode</h1>
-      <Link href='/api/draft'> Activate Draft Mode</Link> */}
-      {/* <BlogList posts={posts} /> */}
       <BlogItem posts={posts} />
     </div>
   );

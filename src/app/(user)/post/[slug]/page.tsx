@@ -8,6 +8,7 @@ import { RichTextComponents } from '@/c/RichTextComponents';
 import SocialShare from '@/c/SocialShare';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
+import Comments from '@/c/post/Comments';
 // import { generateMetadata } from '@/u/generateMetadata';
 export { generateMetadata } from '@/u/generateMetadata';
 
@@ -51,7 +52,7 @@ async function Article({ params: { slug } }: Props) {
   const post: Post = await client.fetch(query, { slug });
 
   return (
-    <article className='mx-auto max-w-[85vw] px-10 pb-28'>
+    <article className='mx-auto max-w-[85vw] lg:px-10 pb-28'>
       <section className='space-y-2 rounded-md border border-untele/80 text-slate-200 shadow-md'>
         <div className='min-h-96 relative flex flex-col justify-between md:flex-row'>
           <div className='absolute top-0 h-full w-full p-10 opacity-10 blur-sm'>
@@ -131,6 +132,9 @@ async function Article({ params: { slug } }: Props) {
       <section className='mx-auto mt-12 max-w-[70vw] rounded-lg border border-untele bg-slate-700/30 px-10 py-5'>
         <PortableText value={post.body} components={RichTextComponents} />
       </section>
+      <div className=''>
+          {/* <Comments post={post}/> */}
+      </div>
     </article>
   );
 }
