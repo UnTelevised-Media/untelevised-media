@@ -7,6 +7,8 @@ import Banner from '@/c/global/Banner';
 import dynamic from 'next/dynamic';
 import { draftMode } from 'next/headers';
 import { token } from '@/l/sanity.fetch';
+import GATag from '@/l/googleAnalytics';
+
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -59,9 +61,18 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+      // if (process.env.NODE_ENV === "production") {
+        
+      //     // Initialize Google Analytics
+      //     // eslint-disable-next-line react-hooks/rules-of-hooks
+      //     useGAPageviewTracking({ googleAnalyticsId: process.env.GOOGLEANALYTICS_ID });
+      // }
+      
   return (
     <html lang='en'>
-      <body className={` bg-slate-400/70 scrollbar-hide ${inter.className}`}>
+      <GATag googleAnalyticsId={process.env.GOOGLEANALYTICS_ID} />
+      <body className={`bg-slate-400/70 scrollbar-hide ${inter.className}`}>
         {draftMode().isEnabled ? (
           <PreviewProvider token={token}>
             <Header />
@@ -72,7 +83,10 @@ export default async function RootLayout({
           <>
             <Header />
             <Banner />
+
+
             {children}
+
           </>
         )}
       </body>

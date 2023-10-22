@@ -27,7 +27,7 @@ function BlogItem({ posts }: Props) {
                 />
                 <div className='absolute bottom-0 flex w-full justify-between rounded bg-slate-900 bg-opacity-20 px-5 py-2 text-slate-200 drop-shadow-lg backdrop-blur-lg'>
                   <div>
-                    <p className='text-sm font-bold md:text-base'>
+                    <p className='text-sm font-bold lg:text-base'>
                       {post.title}
                     </p>
                   </div>
@@ -36,7 +36,7 @@ function BlogItem({ posts }: Props) {
                       post.categories.map((category) => (
                         <div
                           key={category._id}
-                          className='rounded-xl border border-slate-900 bg-untele/70 px-5 py-2 text-center text-xs font-light text-slate-900 lg:text-sm'
+                          className='rounded-xl border border-slate-900 bg-untele/70 px-5 py-2 text-center text-xs font-light text-slate-900 lg:text-sm hidden md:flex'
                         >
                           <p>{category.title}</p>
                         </div>

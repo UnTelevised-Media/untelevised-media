@@ -10,21 +10,21 @@ const Header = () => {
       <div className='flex'>
         <Link href='/' className='flex items-end space-x-2'>
           <Image src='/Logo.png' alt='' width={50} height={50} />
-          <h1 className='text-xl font-semibold text-untele'>
+          {/* <h1 className='text-xl font-semibold text-untele'>
             UnTelevised Media
-          </h1>
+          </h1> */}
         </Link>
       </div>
 
       {/* Support */}
-      <div className='hidden lg:flex'>
+      <div className='hidden md:flex items-center'>
         <Link href='/donate'>
-          <Image src='/sim.png' alt='' width={520} height={50} />
+          <Image src='/sim.png' alt='' width={320} height={35} />
         </Link>
       </div>
 
       {/* Socials */}
-      <div>
+      <div className='relative'>
         <Socials />
       </div>
     </header>

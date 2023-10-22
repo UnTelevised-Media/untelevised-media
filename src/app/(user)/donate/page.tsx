@@ -3,6 +3,8 @@ import Image from 'next/image';
 
 const Donate = () => {
   return (
+    <>
+    <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
     <div className='mx-30 mt-12 flex flex-col items-center justify-center'>
       <Image src='/sim.png' alt='' width={520} height={50} />
       <p className='rounded-md border border-untele/30 bg-slate-500 p-5 my-5 shadow-lg'>
@@ -51,6 +53,7 @@ const Donate = () => {
         Donate@UnTelevised.Media
       </a>
     </div>
+    </>
   );
 };
 
