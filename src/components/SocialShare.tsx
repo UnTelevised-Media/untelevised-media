@@ -20,10 +20,10 @@ import { MdEmail } from 'react-icons/md'
 const SocialShare = ({ url, title }) => {
   return (
     <div className='mx-auto flex w-full justify-center py-3'>
-      <h3 className='mr-3 flex items-center justify-center text-xl font-semibold text-untele'>
+      <h3 className='mr-3 md:flex items-center justify-center text-xl font-semibold text-untele hidden'>
         Share On |
       </h3>
-      <div className='flex items-center justify-center space-x-2 rounded-md bg-slate-300 px-4 py-2'>
+      <div className='flex items-center justify-center space-x-2 rounded-md bg-slate-300 px-4 py-2 flex-wrap'>
         <a
           rel='noreferrer'
           target='_blank'

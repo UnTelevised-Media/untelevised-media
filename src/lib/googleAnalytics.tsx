@@ -1,17 +1,25 @@
+'use client';
 /* eslint-disable react/function-component-definition */
 /* eslint-disable react/no-unescaped-entities */
-'use client';
 import * as React from 'react';
 import Script from 'next/script';
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-
+// import { useRouter } from 'next/router';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export default function GATag({
   googleAnalyticsId,
 }: {
   googleAnalyticsId: string;
 }) {
+      const pathname = usePathname();
+      const searchParams = useSearchParams();
+
+      useEffect(() => {
+        const url = pathname + searchParams.toString();
+
+        pageView(url);
+      }, [pathname, searchParams, googleAnalyticsId]);
   return (
     <>
       <Script
@@ -43,11 +51,11 @@ export default function GATag({
 }
 
 // via https://github.com/vercel/next.js/blob/86a0c7b0f7133362b5a5358428fe8ca334fe394e/examples/with-google-analytics/lib/gtag.js
-export function pageView(url: string) {
+export const pageView = (url: string) => {
   window.gtag('config', process.env.GOOGLEANALYTICS_ID, {
     page_path: url,
   });
-}
+};
 
 export const event = ({ action, category, label, value }) => {
   window.gtag('event', action, {
@@ -57,15 +65,16 @@ export const event = ({ action, category, label, value }) => {
   })
 }
 
-export function useGAPageviewTracking() {
-  const router = useRouter()
-  useEffect(() => {
-    const handleRouteChange = (url) => {
-      pageView(url)
-    }
-    router.events.on('routeChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
-}
+// via https://gaudion.dev/blog/setup-google-analytics-with-gdpr-compliant-cookie-consent-in-nextjs13
+// export function useGAPageviewTracking({GA_MEASUREMENT_ID} : {GA_MEASUREMENT_ID : string}) {
+//   const router = useRouter()
+//   useEffect(() => {
+//     const handleRouteChange = (url) => {
+//       pageView(url)
+//     }
+//     router.events.on('routeChangeComplete', handleRouteChange)
+//     return () => {
+//       router.events.off('routeChangeComplete', handleRouteChange)
+//     }
+//   }, [router.events])
+// }

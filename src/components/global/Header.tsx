@@ -17,7 +17,7 @@ const Header = () => {
       </div>
 
       {/* Support */}
-      <div className='hidden lg:flex items-center'>
+      <div className='hidden md:flex items-center'>
         <Link href='/donate'>
           <Image src='/sim.png' alt='' width={320} height={35} />
         </Link>

@@ -52,7 +52,7 @@ async function Article({ params: { slug } }: Props) {
   const post: Post = await client.fetch(query, { slug });
 
   return (
-    <article className='mx-auto max-w-[85vw] lg:px-10 pb-28'>
+    <article className='mx-auto max-w-[95vw] md:max-w-[85vw] lg:px-10 pb-28'>
       <section className='space-y-2 rounded-md border border-untele/80 text-slate-200 shadow-md'>
         <div className='min-h-96 relative flex flex-col justify-between md:flex-row'>
           <div className='absolute top-0 h-full w-full p-10 opacity-10 blur-sm'>
@@ -118,9 +118,9 @@ async function Article({ params: { slug } }: Props) {
         <Image
           src={urlForImage(post.mainImage).url()}
           alt='Image Description'
-          sizes='60vw'
+          sizes='80vw'
           style={{
-            width: '70%',
+            width: '80%',
             height: 'auto',
           }}
           width={300}
@@ -129,7 +129,7 @@ async function Article({ params: { slug } }: Props) {
         />
       </div>
 
-      <section className='mx-auto mt-12 max-w-[70vw] rounded-lg border border-untele bg-slate-700/30 px-10 py-5'>
+      <section className='mx-auto mt-12 max-w-[85vw] md:max-w-[70vw] rounded-lg border border-untele bg-slate-700/30 px-10 py-5'>
         <PortableText value={post.body} components={RichTextComponents} />
       </section>
       <div className=''>

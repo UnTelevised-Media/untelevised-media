@@ -10,48 +10,48 @@ const Socials = () => {
         href='https://www.youtube.com/@UnTelevised'
         className='text-[#FF0000] '
       >
-        <BsYoutube className='h-8 w-8' />
+        <BsYoutube className='md:h-8 md:w-8 h-6 w-6' />
       </Link>
       <Link
         href='https://twitter.com/UnTelevisedLive'
         className='text-[#1DA1F2] '
       >
-        <BsTwitter className='h-8 w-8' />
+        <BsTwitter className='md:h-8 md:w-8 h-6 w-6' />
       </Link>
       <Link
         href='https://www.twitch.tv/untelevised'
         className='text-[#9146FF] '
       >
-        <BsTwitch className='h-8 w-8' />
+        <BsTwitch className='md:h-8 md:w-8 h-6 w-6' />
       </Link>
       <Link
         href='https://www.tiktok.com/@untelevisedmedia'
         className='text-[#ff0050] '
       >
-        <FaTiktok className='h-8 w-8' />
+        <FaTiktok className='md:h-8 md:w-8 h-6 w-6' />
       </Link>
       <Link
         href='https://www.instagram.com/untelevised.media/'
         className='text-[#C13584] '
       >
-        <GrInstagram className='h-8 w-8' />
+        <GrInstagram className='md:h-8 md:w-8 h-6 w-6' />
       </Link>
       <Link
         href='https://www.facebook.com/UnTelevisedLive'
         className='text-[#1DA1F2] '
       >
-        <FaFacebookF className='h-8 w-8' />
+        <FaFacebookF className='md:h-8 md:w-8 h-6 w-6' />
       </Link>
       <Link
         href='https://www.reddit.com/r/UnTelevisedMedia/'
         className='text-[#FF5700] '
       >
-        <FaRedditAlien className='h-8 w-8' />
+        <FaRedditAlien className='md:h-8 md:w-8 h-6 w-6' />
       </Link>
       <Link 
         href='https://discord.gg/w9vMH5zr6j' 
         className='text-[#738ADB] '>
-        <BsDiscord className='h-8 w-8' />
+        <BsDiscord className='md:h-8 md:w-8 h-6 w-6' />
       </Link>
     </div>
   );
