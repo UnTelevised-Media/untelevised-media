@@ -94,6 +94,7 @@ module.exports = {
     },
   },
   plugins: [
+    require('tailwind-scrollbar-hide'),
     plugin(({ theme, addUtilities }) => {
       const neonUtilities = {};
       const colors = theme('colors');

@@ -7,24 +7,48 @@ import Banner from '@/c/global/Banner';
 import dynamic from 'next/dynamic';
 import { draftMode } from 'next/headers';
 import { token } from '@/l/sanity.fetch';
+import GATag from '@/l/googleAnalytics';
+
+
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'UnTelevised Media',
+  title:
+    'UnTelevised Media - Breaking News Updates | Latest News Headlines | Photos &amp; News Videos',
   description: 'The Revolution will be UnTelevised',
   referrer: 'origin-when-cross-origin',
-  keywords: ['Next.js', 'React', 'JavaScript'],
-  authors: [
-    { name: 'Radical Edward' },
-    {
-      name: 'Digitl Alchemyst',
-      url: 'https://digitl-alchemyst-portfolio.vercel.app/',
-    },
+  keywords: [
+    'news',
+    'daily news',
+    'breaking news',
+    'news today',
+    'current events',
+    'current news',
+    'current',
+    'national news',
+    'world news',
+    'news video',
+    'political news',
+    'technology news',
+    'financial news',
+    'news',
+    'news',
+    'news',
+    'breaking',
   ],
+  openGraph: {
+    title:
+      'UnTelevised Media - Breaking News Updates | Latest News Headlines | Photos &amp; News Videos',
+    description: 'The Revolution will be UnTelevised',
+    url: `https://untelevised.media`,
+    //   siteName: 'UnTelevised Media',
+    images: {
+      url: `/Logo.png`,
+    },
+  },
   // colorScheme: 'dark',
-  creator: 'Radical Edward',
-  publisher: 'Digitl Alchemyst',
+  publisher: 'UnTelevised Media',
   icons: {
     icon: '/favicon.ico',
   },
@@ -37,9 +61,18 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+      // if (process.env.NODE_ENV === "production") {
+        
+      //     // Initialize Google Analytics
+      //     // eslint-disable-next-line react-hooks/rules-of-hooks
+      //     useGAPageviewTracking({ googleAnalyticsId: process.env.GOOGLEANALYTICS_ID });
+      // }
+      
   return (
     <html lang='en'>
-      <body className={` bg-slate-400/80  ${inter.className}`}>
+      <GATag googleAnalyticsId={process.env.GOOGLEANALYTICS_ID} />
+      <body className={`bg-slate-400/70 scrollbar-hide ${inter.className}`}>
         {draftMode().isEnabled ? (
           <PreviewProvider token={token}>
             <Header />
@@ -50,7 +83,10 @@ export default async function RootLayout({
           <>
             <Header />
             <Banner />
+
+
             {children}
+
           </>
         )}
       </body>

@@ -1,0 +1,65 @@
+/* (B) MOVING TICKER WRAPPER */
+.hmove {
+  display: flex;
+}
+
+/* (C) ITEMS - INTO A LONG HORIZONTAL ROW */
+.hitem {
+  flex-shrink: 0;
+  /* width: 100%; */
+  box-sizing: border-box;
+  padding: 8px;
+  text-align: center;
+}
+
+/* (D) ANIMATION - MOVE ITEMS FROM RIGHT TO LEFT */
+/* 4 ITEMS -400%, CHANGE THIS IF YOU ADD/REMOVE ITEMS */
+@keyframes tickerh {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-1100%, 0, 0);
+  }
+}
+.hmove {
+  animation: tickerh linear 200s infinite;
+}
+/* .hmove:hover { animation-play-state: paused; } */
+
+/* Stream Elements Method */
+
+
+darkred {
+  color: #d70606;
+}
+strokered {
+  color: #d7a5a5;
+}
+grayish {
+  color: #767676;
+}
+darkgreyish {
+  color: #232323;
+}
+
+.marquee {
+  font-family: 'Odibee Sans', sans-serif;
+  color: darkred;
+  -webkit-text-stroke: 1px lightcoral;
+}
+
+.track {
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 350s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
