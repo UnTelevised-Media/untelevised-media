@@ -6,20 +6,14 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 // import { useRouter } from 'next/router';
 import { usePathname, useSearchParams } from 'next/navigation';
+// import { useRouter } from 'next/router';
+
 
 export default function GATag({
   googleAnalyticsId,
 }: {
   googleAnalyticsId: string;
 }) {
-      const pathname = usePathname();
-      const searchParams = useSearchParams();
-
-      useEffect(() => {
-        const url = pathname + searchParams.toString();
-
-        pageView(url);
-      }, [pathname, searchParams, googleAnalyticsId]);
   return (
     <>
       <Script
@@ -66,15 +60,20 @@ export const event = ({ action, category, label, value }) => {
 }
 
 // via https://gaudion.dev/blog/setup-google-analytics-with-gdpr-compliant-cookie-consent-in-nextjs13
-// export function useGAPageviewTracking({GA_MEASUREMENT_ID} : {GA_MEASUREMENT_ID : string}) {
-//   const router = useRouter()
-//   useEffect(() => {
-//     const handleRouteChange = (url) => {
-//       pageView(url)
-//     }
-//     router.events.on('routeChangeComplete', handleRouteChange)
-//     return () => {
-//       router.events.off('routeChangeComplete', handleRouteChange)
-//     }
-//   }, [router.events])
-// }
+export function useGAPageviewTracking({
+  googleAnalyticsId,
+}: {
+  googleAnalyticsId: string;
+}) {
+
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const url = pathname + searchParams.toString();
+    
+    pageView(url);
+  }, [pathname, searchParams, googleAnalyticsId]);
+
+}

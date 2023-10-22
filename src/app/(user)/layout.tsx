@@ -10,6 +10,7 @@ import { token } from '@/l/sanity.fetch';
 import GATag from '@/l/googleAnalytics';
 
 
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -62,9 +63,10 @@ export default async function RootLayout({
 }) {
 
       // if (process.env.NODE_ENV === "production") {
+        
       //     // Initialize Google Analytics
       //     // eslint-disable-next-line react-hooks/rules-of-hooks
-      //     useGAPageviewTracking();
+      //     useGAPageviewTracking({ googleAnalyticsId: process.env.GOOGLEANALYTICS_ID });
       // }
       
   return (
@@ -81,7 +83,10 @@ export default async function RootLayout({
           <>
             <Header />
             <Banner />
+
+
             {children}
+
           </>
         )}
       </body>
