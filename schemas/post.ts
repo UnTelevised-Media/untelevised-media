@@ -6,11 +6,6 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-    }),
-    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -20,9 +15,19 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+    }),
+    defineField({
+      name: 'keywords',
+      title: 'Keywords',
+      type: 'string',
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
-      type: 'string',
+      type: 'text',
     }),
     defineField({
       name: 'author',

@@ -6,6 +6,28 @@ type Base = {
   _updatedAt: string;
 };
 
+interface LiveEvent extends Base {
+  body: Block[];
+  eventDate: string;
+  relatedArticles: Article[];
+  keyEvent: KeyEvent[];
+  eventTag: EventTag[];
+  title: string;
+  description: string;
+  subtitle: string;
+  keywords: string;
+  slug: Slug;
+  isCurrentEvent: boolean;
+}
+
+interface KeyEvent extends Base {
+  title: string;
+  slug: Slug;
+  date: string; // Assuming date is a string representing date and time
+  description: string;
+  eventTag: EventTag[];
+}
+
 interface Post extends Base {
   author: Author;
   body: Block[];
@@ -13,6 +35,7 @@ interface Post extends Base {
   mainImage: Image;
   slug: Slug;
   title: string;
+  keywords: string;
   description: string;
   comments: Comment[];
 }
@@ -59,6 +82,11 @@ interface Category extends Base {
   title: string;
 }
 
+interface EventTag extends Base {
+  description: string;
+  title: string;
+}
+
 interface MainImage {
   _type: 'string';
   asset: Reference;
@@ -84,4 +112,5 @@ interface Comment {
   _type: string;
   _updatedAt: string;
 }
+
 

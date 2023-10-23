@@ -4,5 +4,17 @@ import post from './post';
 import author from './author';
 import category from './category';
 import comments from './comments';
+import liveEvent from './liveEvent';
+import keyEvent from './keyEvent';
+import eventTag from './eventTag';
 
-export const schemaTypes = [post, author, category, blockContent, comments];
+export const schemaTypes = [
+  post,
+  author,
+  category,
+  blockContent,
+  comments,
+  liveEvent,
+  keyEvent,
+  eventTag,
+];
