@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { groq } from 'next-sanity';
 import { client } from '@/lib/sanity.client';
 import BlogItem from '@/components/BlogItem';
-// import { useGAPageviewTracking } from '@/lib/googleAnalytics';
+
 
 const query = groq`
   *[_type=='post'] {
@@ -12,6 +12,7 @@ const query = groq`
     author->,
     categories[]->,
     description,
+    publistedAt,
   } 
   | order(_createdAt desc)
 `;
@@ -19,12 +20,6 @@ const query = groq`
 export const revalidate = 180;
 
 export default async function HomePage() {
-  
-//         if (process.env.NODE_ENV === "production") {
-//           // Initialize Google Analytics
-//           // eslint-disable-next-line react-hooks/rules-of-hooks
-//           useGAPageviewTracking();
-//         }
       
   if (draftMode().isEnabled) {
     return (
