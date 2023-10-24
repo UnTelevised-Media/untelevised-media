@@ -142,18 +142,30 @@ async function Article({ params: { slug } }: Props) {
           title={liveEvent.title}
         />
 
-        {/* Coverage Video  */}
-        <div className='my-4 flex items-center justify-center'>
-          <iframe
-            width='720'
-            height='420'
-            className='rounded-lg border border-untele bg-slate-700/30'
-            src={`${liveEvent.videoLink}`}
-            title='YouTube video player'
-            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
-          />
-        </div>
+        <div className='flex space-x-4 flex-col 2xl:flex-row'>
+          {/* Coverage Video  */}
+          <div className='my-4 flex items-center justify-center'>
+            <iframe
+              width='720'
+              height='420'
+              className='rounded-lg border border-untele bg-slate-700/30'
+              src={`${liveEvent.videoLink}`}
+              title='YouTube video player'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
+            />
+          </div>
 
+          {/* Attack Map  */}
+          <div className='flex items-center justify-center rounded-lg border border-untele'>
+            <iframe
+              style={{ width: '850px', height: '500px', border: '0px'}}
+              src='https://israelpalestine.liveuamap.com/'
+              title='Live Map'
+              color='dark'
+              className='rounded-lg'
+            />
+          </div>
+        </div>
         {/* Timeline & Developments */}
         <section className='mt-12 flex flex-col space-y-4 lg:flex-row lg:space-x-5 lg:space-y-0'>
           {/* Timeline  */}

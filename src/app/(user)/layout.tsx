@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 import { draftMode } from 'next/headers';
 import { token } from '@/l/sanity.fetch';
 import GATag from '@/l/googleAnalytics';
+import GASVerify from '@/lib/googleAdSense';
 
 
 
@@ -61,17 +62,22 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // if (process.env.NODE_ENV === "production") {
 
-      // if (process.env.NODE_ENV === "production") {
-        
-      //     // Initialize Google Analytics
-      //     // eslint-disable-next-line react-hooks/rules-of-hooks
-      //     useGAPageviewTracking({ googleAnalyticsId: process.env.GOOGLEANALYTICS_ID });
-      // }
-      
+  //     // Initialize Google Analytics
+  //     // eslint-disable-next-line react-hooks/rules-of-hooks
+  //     useGAPageviewTracking({ googleAnalyticsId: process.env.GA4_ID });
+  // }
+
   return (
     <html lang='en'>
-      <GATag googleAnalyticsId={process.env.GOOGLEANALYTICS_ID} />
+      <GATag googleAnalyticsId={process.env.GA4_ID} />
+      {
+        // typeof window !== 'undefined' &&
+        process.env.NODE_ENV === 'production' && (
+          <GASVerify googleAdsenseId={process.env.GAS_ID} />
+        )
+      }
       <body className={`bg-slate-400/70 scrollbar-hide ${inter.className}`}>
         {draftMode().isEnabled ? (
           <PreviewProvider token={token}>
@@ -84,9 +90,7 @@ export default async function RootLayout({
             <Header />
             <Banner />
 
-
             {children}
-
           </>
         )}
       </body>
