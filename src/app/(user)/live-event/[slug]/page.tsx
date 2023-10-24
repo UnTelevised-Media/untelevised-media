@@ -67,7 +67,7 @@ async function Article({ params: { slug } }: Props) {
       return -1; // dateB is not a valid date, move it to the end
     } else {
       // Both dates are valid, perform the comparison
-      return dateB - dateA;
+      return dateB.valueOf() - dateA.valueOf();
     }
   });
   function calculateTimeDifference(eventDate) {
