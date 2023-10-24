@@ -70,6 +70,26 @@ async function Article({ params: { slug } }: Props) {
       return dateB - dateA;
     }
   });
+  function calculateTimeDifference(eventDate) {
+    const eventTime = new Date(eventDate).getTime();
+    const currentTime = new Date().getTime();
+    const timeDifference = currentTime - eventTime;
+
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+      return `${days} day${days > 1 ? 's' : ''} ago`;
+    } else if (hours > 0) {
+      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    } else if (minutes > 0) {
+      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    } else {
+      return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
+    }
+  }
   return (
     <>
       <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
@@ -121,6 +141,8 @@ async function Article({ params: { slug } }: Props) {
           url={`https://untelevised.media/live-event/${slug}`}
           title={liveEvent.title}
         />
+
+        {/* Coverage Video  */}
         <div className='my-4 flex items-center justify-center'>
           <iframe
             width='720'
@@ -129,10 +151,12 @@ async function Article({ params: { slug } }: Props) {
             src={`${liveEvent.videoLink}`}
             title='YouTube video player'
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
-            />
+          />
         </div>
-            
+
+        {/* Timeline & Developments */}
         <section className='mt-12 flex flex-col space-y-4 lg:flex-row lg:space-x-5 lg:space-y-0'>
+          {/* Timeline  */}
           <div className='h-full lg:w-3/5'>
             {allEvents.map((event) => (
               <li
@@ -143,17 +167,8 @@ async function Article({ params: { slug } }: Props) {
                   <h3 className='text-base font-bold underline'>
                     {event.title}
                   </h3>
-                  <h4 className='text-sm font-light text-untele/70'>
-                    {new Date(event.eventDate).toLocaleDateString('en-US', {
-                      day: 'numeric',
-                      month: 'long',
-                      year: 'numeric',
-                    })}{' '}
-                    {new Date(event.eventDate).toLocaleTimeString('en-US', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: true,
-                    })}
+                  <h4 className='text-sm text-untele/70'>
+                    {calculateTimeDifference(event.eventDate)}
                   </h4>
                   <p className='text-sm'>{event.description}</p>
                   {liveEvent.relatedArticles.includes(event) && (
@@ -170,6 +185,7 @@ async function Article({ params: { slug } }: Props) {
               </li>
             ))}
           </div>
+          {/* Developments / Story  */}
           <div className='mx-auto rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw] lg:w-2/5'>
             <PortableText
               value={liveEvent.body}
