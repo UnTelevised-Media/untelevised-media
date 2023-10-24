@@ -13,17 +13,19 @@ interface LiveEvent extends Base {
   keyEvent: KeyEvent[];
   eventTag: EventTag[];
   title: string;
+  videoLink: string;
   description: string;
   subtitle: string;
   keywords: string;
   slug: Slug;
   isCurrentEvent: boolean;
+  mainImage: Image;
 }
 
 interface KeyEvent extends Base {
   title: string;
   slug: Slug;
-  date: string; // Assuming date is a string representing date and time
+  eventDate: string;
   description: string;
   eventTag: EventTag[];
 }
@@ -37,6 +39,7 @@ interface Post extends Base {
   title: string;
   keywords: string;
   description: string;
+  eventDate: string;
   comments: Comment[];
 }
 

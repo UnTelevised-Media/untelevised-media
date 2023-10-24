@@ -5,23 +5,23 @@ export default defineType({
   title: 'Key Event',
   type: 'document',
   fields: [
-      defineField({
-        name: 'slug',
-        title: 'Slug',
-        type: 'slug',
-        options: {
-          source: 'title',
-          maxLength: 96,
-        },
-      }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+    }),
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
     }),
     defineField({
-      name: 'date',
-      title: 'Date/Time',
+      name: 'eventDate',
+      title: 'Event Date',
       type: 'datetime',
     }),
     defineField({

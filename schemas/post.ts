@@ -62,6 +62,11 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
+      name: 'eventDate',
+      title: 'Event Date',
+      type: 'datetime',
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
