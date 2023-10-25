@@ -14,6 +14,7 @@ export default function GATag({
 }) {
   return (
     <>
+
       <Script
         strategy='afterInteractive'
         src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
