@@ -124,7 +124,7 @@ async function Article({ params: { slug } }: Props) {
             alt='Image Description'
             sizes='80vw'
             style={{
-              width: '80%',
+              width: '65%',
               height: 'auto',
             }}
             width={300}
@@ -132,6 +132,21 @@ async function Article({ params: { slug } }: Props) {
             className='rounded-lg'
           />
         </div>
+
+         
+      {post.hasEmbeddedVideo && (
+        <div className='my-4 flex items-center justify-center'>
+          <iframe
+            width='720'
+            height='420'
+            className='rounded-lg border border-untele bg-slate-700/30'
+            src={`${post.videoLink}`}
+            title='YouTube video player'
+            // allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
+          />
+        </div>
+      )}
+
 
         <section className='mx-auto mt-12 max-w-[85vw] rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw]'>
           <PortableText value={post.body} components={RichTextComponents} />

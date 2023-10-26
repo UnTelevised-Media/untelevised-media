@@ -20,6 +20,26 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'hasEmbeddedVideo',
+      title: 'Has Embedded Youtube Video?',
+      type: 'boolean', // Adding a boolean field for isCurrentEvent
+    }),
+    defineField({
+      name: 'videoLink',
+      title: 'Video Link',
+      type: 'string',
+    }),
+    defineField({
+      name: 'hasEmbeddedTweet',
+      title: 'Has Embedded Tweet?',
+      type: 'boolean', // Adding a boolean field for isCurrentEvent
+    }),
+    defineField({
+      name: 'tweetLink',
+      title: 'Tweet Link',
+      type: 'string',
+    }),
+    defineField({
       name: 'keywords',
       title: 'Keywords',
       type: 'string',

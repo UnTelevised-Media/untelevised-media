@@ -7,9 +7,9 @@ import Banner from '@/c/global/Banner';
 import dynamic from 'next/dynamic';
 import { draftMode } from 'next/headers';
 import { token } from '@/l/sanity.fetch';
-import GATag from '@/l/googleAnalytics';
+// import GATag from '@/l/googleAnalytics';
 import GASVerify from '@/lib/googleAdSense';
-// import Script from 'next/script';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
 
 const PreviewProvider = dynamic(() => import('@/components/PreviewProvider'));
 
-// const GTM_ID = process.env.GTM_ID;
+const GTM_ID = process.env.GTM_ID;
 
 export default async function RootLayout({
   children,
@@ -72,7 +72,7 @@ export default async function RootLayout({
 
   return (
     <html lang='en'>
-      {/* <Script id='google-tag-manager' strategy='afterInteractive'>
+      <Script id='google-tag-manager' strategy='afterInteractive'>
         {`
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -80,11 +80,11 @@ export default async function RootLayout({
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','${GTM_ID}');
         `}
-      </Script> */}
+      </Script>
       {
         process.env.NODE_ENV === 'production' && (
           <>
-          <GATag googleAnalyticsId={process.env.GA4_ID} />
+          {/* <GATag googleAnalyticsId={process.env.GA4_ID} /> */}
           <GASVerify googleAdsenseId={process.env.GAS_ID} />
           </>
         )
@@ -104,11 +104,11 @@ export default async function RootLayout({
             {children}
           </>
         )}
-      {/* <noscript
+      <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
           }}
-        /> */}
+        />
       </body>
     </html>
   );

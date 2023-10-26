@@ -17,6 +17,7 @@ export async function generateMetadata({ params: {slug} }: Props ) {
     *[_type == "post" && slug.current == $slug][0] {
       title,
       mainImage,
+      keywords,
       description,
       author->,
       // Add more fields as needed for metadata
@@ -27,14 +28,14 @@ export async function generateMetadata({ params: {slug} }: Props ) {
   // Create metadata object with dynamic values
   const metadata = {
     // type: 'article',
-    title: post.title,
+    title: `${post.title} | UnTelevised Media`,
     description: post.description,
-    // keywords: post.keywords,
+    keywords: post.keywords,
     authors: post.author,
-    // publisher: 'UnTelevised Media',
+    publisher: 'UnTelevised Media',
 
     openGraph: {
-      title: post.title,
+      title: `${post.title} | UnTelevised Media`,
       description: post.description,
       url: `https://untelevised.media/post/${slug}`,
       //   siteName: 'UnTelevised Media',
@@ -50,10 +51,10 @@ export async function generateMetadata({ params: {slug} }: Props ) {
 
     twitter: {
       //   card: 'app',
-      title: post.title,
+      title: `${post.title} | UnTelevised Media`,
       description: post.description,
       //   siteId: '1467726470533754880',
-      //   creator: '@nextjs',
+      creator: '@UnTelevisedLive',
       //   creatorId: '1467726470533754880',
       images: {
         url: urlForImage(post.mainImage).url(),

@@ -18,6 +18,7 @@ const query = groq`
       ...,
       tag[]->,
       keyEvent[]->,
+      keywords,
       relatedArticles[]-> {
         slug,
         _id,
@@ -37,7 +38,6 @@ const query = groq`
     title: `${liveEvent.title} | Live Updates | UnTelevised Media`,
     description: liveEvent.description,
     keywords: liveEvent.keywords,
-    authors: liveEvent.author,
     publisher: 'UnTelevised Media',
 
     openGraph: {
@@ -60,7 +60,7 @@ const query = groq`
       title: `${liveEvent.title} | Live Updates | UnTelevised Media`,
       description: liveEvent.description,
       //   siteId: '1467726470533754880',
-      //   creator: '@nextjs',
+      creator: '@UnTelevisedLive',
       //   creatorId: '1467726470533754880',
       images: {
         url: urlForImage(liveEvent.mainImage).url(),

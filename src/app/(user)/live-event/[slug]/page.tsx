@@ -6,8 +6,8 @@ import { RichTextComponents } from '@/c/RichTextComponents';
 import SocialShare from '@/c/SocialShare';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
-import Comments from '@/c/post/Comments';
 import Link from 'next/link';
+import EventMap from '@/components/EventMap';
 export { generateMetadata } from '@/util/generateLiveEventMetadata';
 
 type Props = {
@@ -16,9 +16,7 @@ type Props = {
   };
 };
 
-export const revalidate = 120;
-
-// export const metadata: Metadata = generateMetadata;
+export const revalidate = 15;
 
 export async function generateStaticParams() {
   const query = groq`*[_type=='liveEvent']
@@ -117,6 +115,11 @@ async function Article({ params: { slug } }: Props) {
           <div className='flex w-full flex-col space-y-2 py-2'>
             {/* Title & Date    */}
             <div className='flex w-full  flex-col space-y-1'>
+              {liveEvent.isCurrentEvent && (
+                <h2 className='w-min animate-pulse rounded bg-untele px-3 py-1 text-2xl font-bold text-slate-200'>
+                  Live
+                </h2>
+              )}
               <h1 className='text-3xl font-bold'>{liveEvent.title}</h1>
 
               <div>
@@ -142,7 +145,7 @@ async function Article({ params: { slug } }: Props) {
           title={liveEvent.title}
         />
 
-        <div className='flex space-x-4 flex-col 2xl:flex-row'>
+        <div className='flex flex-col items-center justify-center space-x-4'>
           {/* Coverage Video  */}
           <div className='my-4 flex items-center justify-center'>
             <iframe
@@ -155,16 +158,7 @@ async function Article({ params: { slug } }: Props) {
             />
           </div>
 
-          {/* Attack Map  */}
-          <div className='flex items-center justify-center rounded-lg border border-untele'>
-            <iframe
-              style={{ width: '850px', height: '500px', border: '0px'}}
-              src='https://israelpalestine.liveuamap.com/'
-              title='Live Map'
-              color='dark'
-              className='rounded-lg'
-            />
-          </div>
+          <EventMap />
         </div>
         {/* Timeline & Developments */}
         <section className='mt-12 flex flex-col space-y-4 lg:flex-row lg:space-x-5 lg:space-y-0'>
@@ -198,7 +192,7 @@ async function Article({ params: { slug } }: Props) {
             ))}
           </div>
           {/* Developments / Story  */}
-          <div className='mx-auto rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw] lg:w-2/5'>
+          <div className='mx-auto h-min rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw] lg:w-2/5'>
             <PortableText
               value={liveEvent.body}
               components={RichTextComponents}

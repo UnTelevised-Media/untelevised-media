@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { groq } from 'next-sanity';
 import { client } from '@/lib/sanity.client';
 import BlogItem from '@/components/BlogItem';
+import LiveWidget from '@/components/LiveWidget';
 
-
-const query = groq`
+const queryPost = groq`
   *[_type=='post'] {
     ...,
     author->,
@@ -16,11 +16,29 @@ const query = groq`
   } 
   | order(_createdAt desc)
 `;
+const queryLiveEvent = groq`
+  *[_type=='liveEvent'] {
+    ...,
+    description,
+    title,
+    slug,
+    eventDate,
+    keyEvent[]->,
+      relatedArticles[]-> {
+        slug,
+        _id,
+        title,
+        _createdAt,
+        description,
+        eventDate,
+      // Add other fields you want to retrieve from relatedArticles
+    }
+  } 
+`;
 
 export const revalidate = 180;
 
 export default async function HomePage() {
-      
   if (draftMode().isEnabled) {
     return (
       <div>
@@ -30,9 +48,13 @@ export default async function HomePage() {
     );
   }
 
-  const posts = await client.fetch(query);
+  const posts = await client.fetch(queryPost);
+  const liveEvents = await client.fetch(queryLiveEvent);
+  const currentLiveEvents = liveEvents.filter((event) => event.isCurrentEvent);
+
   return (
-    <div className='mx-auto md:max-w-[85vw] max-w-[95wv]'>
+    <div className='mx-auto max-w-[95wv] md:max-w-[85vw]'>
+      <LiveWidget liveEvents={currentLiveEvents} />{' '}
       <BlogItem posts={posts} />
     </div>
   );

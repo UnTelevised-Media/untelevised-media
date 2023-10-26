@@ -39,8 +39,7 @@ export default function GATag({
         }}
       />
     </>
-  );
-  
+  );  
 }
 
 // via https://gaudion.dev/blog/setup-google-analytics-with-gdpr-compliant-cookie-consent-in-nextjs13

@@ -39,6 +39,10 @@ interface Post extends Base {
   title: string;
   keywords: string;
   description: string;
+  videoLink: string;
+  isCurrentEvent: boolean;
+  hasEmbeddedVideo: string;
+  hasEmbeddedTweet: boolean;
   eventDate: string;
   comments: Comment[];
 }
