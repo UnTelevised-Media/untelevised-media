@@ -13,6 +13,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      lineClamp: {
+        '8': '8', // You can add more line clamp values here if needed
+        '15': '15', 
+      },
       colors: {
         untele: '#D70606',
         midnight: '#121063',
@@ -109,6 +113,7 @@ module.exports = {
       }
       addUtilities(neonUtilities);
     }),
+
     plugin(({ addUtilities, theme, variants }) => {
       const customListStyles = {
         '.custom-list': {

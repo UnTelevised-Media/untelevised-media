@@ -24,7 +24,7 @@ export async function generateStaticParams() {
     slug
   }`;
 
-  const slugs: Post[] = await client.fetch(query);
+  const slugs: LiveEvent[] = await client.fetch(query);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
 
   return slugRoutes.map((slug) => ({
@@ -96,11 +96,11 @@ async function Article({ params: { slug } }: Props) {
         {/* Top Section: Image, Title, Date, Description  */}
         <section className='flex flex-col space-x-4 text-slate-700 lg:flex-row'>
           {/* Image  */}
-          <div className='h-auto min-w-max lg:w-full'>
+          <div className='h-auto min-w-max xl:w-full'>
             <Image
               src={urlForImage(liveEvent.mainImage).url()}
               alt='Image Description'
-              sizes='full'
+
               style={{
                 width: '100%',
                 height: 'auto',
@@ -120,7 +120,7 @@ async function Article({ params: { slug } }: Props) {
                   Live
                 </h2>
               )}
-              <h1 className='text-3xl font-bold'>{liveEvent.title}</h1>
+              <h1 className='text-3xl w-full font-bold'>{liveEvent.title}</h1>
 
               <div>
                 {/* <h3>{liveEvent.location}</h3> */}
@@ -134,8 +134,8 @@ async function Article({ params: { slug } }: Props) {
               </div>
             </div>
             {/* Description  */}
-            <div className=''>
-              <h2 className='italic'>{liveEvent.description}</h2>
+            <div className='w-full'>
+              <p className='italic w-full lg:text-xs xl:text-base'>{liveEvent.description}</p>
             </div>
           </div>
         </section>
