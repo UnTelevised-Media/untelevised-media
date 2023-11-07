@@ -15,12 +15,13 @@ const sizes = {
 
   return (
     <>
-      <div className='flex md:hidden items-center justify-center rounded-lg border border-untele'>
+      <div className='flex items-center justify-center rounded-lg border border-untele md:hidden'>
         <iframe
           style={{
             width: sizes.sm.width,
             height: sizes.sm.height,
             border: '0px',
+            filter: 'invert(80%)',
           }}
           src='https://israelpalestine.liveuamap.com/'
           title='Live Map'
@@ -28,12 +29,13 @@ const sizes = {
           className='rounded-lg'
         />
       </div>
-      <div className='md:flex hidden lg:hidden items-center justify-center rounded-lg border border-untele'>
+      <div className='hidden items-center justify-center rounded-lg border border-untele md:flex lg:hidden'>
         <iframe
           style={{
             width: sizes.md.width,
             height: sizes.md.height,
             border: '0px',
+            filter: 'invert(80%)',
           }}
           src='https://israelpalestine.liveuamap.com/'
           title='Live Map'
@@ -41,12 +43,13 @@ const sizes = {
           className='rounded-lg'
         />
       </div>
-      <div className='xl:hidden lg:flex hidden items-center justify-center rounded-lg border border-untele'>
+      <div className='hidden items-center justify-center rounded-lg border border-untele lg:flex xl:hidden'>
         <iframe
           style={{
             width: sizes.lg.width,
             height: sizes.lg.height,
             border: '0px',
+            filter: 'invert(80%)',
           }}
           src='https://israelpalestine.liveuamap.com/'
           title='Live Map'
@@ -54,12 +57,13 @@ const sizes = {
           className='rounded-lg'
         />
       </div>
-      <div className='xl:flex hidden 2xl:hidden items-center justify-center rounded-lg border border-untele'>
+      <div className='hidden items-center justify-center rounded-lg border border-untele xl:flex 2xl:hidden'>
         <iframe
           style={{
             width: sizes.xl.width,
             height: sizes.xl.height,
             border: '0px',
+            filter: 'invert(80%)',
           }}
           src='https://israelpalestine.liveuamap.com/'
           title='Live Map'
@@ -67,12 +71,13 @@ const sizes = {
           className='rounded-lg'
         />
       </div>
-      <div className='2xl:flex hidden items-center justify-center rounded-lg border border-untele'>
+      <div className='relative hidden items-center justify-center rounded-lg border border-untele 2xl:flex'>
         <iframe
           style={{
             width: sizes.xxl.width,
             height: sizes.xxl.height,
             border: '0px',
+            filter: 'invert(80%)',
           }}
           src='https://israelpalestine.liveuamap.com/'
           title='Live Map'
@@ -80,6 +85,18 @@ const sizes = {
           className='rounded-lg'
         />
       </div>
+      {/* <div
+        className='hidden 2xl:flex rounded-lg'
+        style={{
+          width: sizes.xxl.width,
+          height: sizes.xxl.height,
+          position: 'absolute', // Position the red overlay
+          top: '1216px',
+          backgroundColor: 'red', // Set the background color to red
+          opacity: '0.25', // Set the opacity if you want it to be semi-transparent
+          zIndex: '2', // Set a lower z-index than the iframe to overlay it
+        }}
+      /> */}
     </>
   );
 };

@@ -24,7 +24,7 @@ export async function generateStaticParams() {
     slug
   }`;
 
-  const slugs: LiveEvent[] = await client.fetch(query);
+  const slugs: Post[] = await client.fetch(query);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
 
   return slugRoutes.map((slug) => ({
@@ -52,22 +52,24 @@ async function Article({ params: { slug } }: Props) {
   const liveEvent: LiveEvent = await client.fetch(query, { slug });
 
   // Combine relatedArticles and keyEvent into a single array
-  const allEvents = [...liveEvent.relatedArticles, ...liveEvent.keyEvent];
+  const relatedArticles = liveEvent.relatedArticles || [];
+  const keyEvent = liveEvent.keyEvent || [];
+  const allEvents = [...relatedArticles, ...keyEvent];
 
   // Sort the combined array by date and time in descending order
   allEvents.sort((a, b) => {
     const dateA = new Date(a.eventDate);
     const dateB = new Date(b.eventDate);
-    // Check if dateA and dateB are valid dates before performing the comparison
+
     if (isNaN(dateA.getTime())) {
       return 1; // dateA is not a valid date, move it to the end
     } else if (isNaN(dateB.getTime())) {
       return -1; // dateB is not a valid date, move it to the end
     } else {
-      // Both dates are valid, perform the comparison
       return dateB.valueOf() - dateA.valueOf();
     }
   });
+
   function calculateTimeDifference(eventDate) {
     const eventTime = new Date(eventDate).getTime();
     const currentTime = new Date().getTime();
@@ -100,7 +102,6 @@ async function Article({ params: { slug } }: Props) {
             <Image
               src={urlForImage(liveEvent.mainImage).url()}
               alt='Image Description'
-
               style={{
                 width: '100%',
                 height: 'auto',
@@ -120,7 +121,7 @@ async function Article({ params: { slug } }: Props) {
                   Live
                 </h2>
               )}
-              <h1 className='text-3xl w-full font-bold'>{liveEvent.title}</h1>
+              <h1 className='w-full text-3xl font-bold'>{liveEvent.title}</h1>
 
               <div>
                 {/* <h3>{liveEvent.location}</h3> */}
@@ -135,7 +136,9 @@ async function Article({ params: { slug } }: Props) {
             </div>
             {/* Description  */}
             <div className='w-full'>
-              <p className='italic w-full lg:text-xs xl:text-base'>{liveEvent.description}</p>
+              <p className='w-full italic lg:text-xs xl:text-base'>
+                {liveEvent.description}
+              </p>
             </div>
           </div>
         </section>
@@ -160,38 +163,45 @@ async function Article({ params: { slug } }: Props) {
 
           <EventMap />
         </div>
-        {/* Timeline & Developments */}
         <section className='mt-12 flex flex-col space-y-4 lg:flex-row lg:space-x-5 lg:space-y-0'>
-          {/* Timeline  */}
+          {/* Timeline */}
           <div className='h-full lg:w-3/5'>
-            {allEvents.map((event) => (
-              <li
-                key={event.slug}
-                className='mb-3 flex flex-col rounded-lg border border-untele bg-slate-700/30 px-6 py-3'
-              >
-                <div className='flex flex-col space-y-1'>
-                  <h3 className='text-base font-bold underline'>
-                    {event.title}
-                  </h3>
-                  <h4 className='text-sm text-untele/70'>
-                    {calculateTimeDifference(event.eventDate)}
-                  </h4>
-                  <p className='text-sm'>{event.description}</p>
-                  {liveEvent.relatedArticles.includes(event) && (
-                    <Link
-                      href={`/post/${event.slug.current}`}
-                      className='cursor-pointer self-end text-blue-500 underline hover:opacity-80'
-                    >
-                      <button className='rounded-md border border-untele/40 bg-slate-700/30 px-3 py-1 font-bold text-untele/60'>
-                        Read More
-                      </button>
-                    </Link>
-                  )}
-                </div>
-              </li>
-            ))}
+            {allEvents.length > 0 ? (
+              <ul>
+                {allEvents.map((event) => (
+                  <li
+                    key={event.slug}
+                    className='mb-3 flex flex-col rounded-lg border border-untele bg-slate-700/30 px-6 py-3'
+                  >
+                    <div className='flex flex-col space-y-1'>
+                      <h3 className='text-base font-bold underline'>
+                        {event.title}
+                      </h3>
+                      <h4 className='text-sm text-untele/70'>
+                        {calculateTimeDifference(event.eventDate)}
+                      </h4>
+                      <p className='text-sm'>{event.description}</p>
+                      {liveEvent.relatedArticles.includes(event) && (
+                        <Link
+                          href={`/post/${event.slug.current}`}
+                          className='cursor-pointer self-end text-blue-500 underline hover:opacity-80'
+                        >
+                          <button className='rounded-md border border-untele/40 bg-slate-700/30 px-3 py-1 font-bold text-untele/60'>
+                            Read More
+                          </button>
+                        </Link>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className='mb-3 flex flex-col rounded-lg border border-untele bg-slate-700/30 px-6 py-3 text-slate-700'>
+                No events available at the moment. Please check back shortly.
+              </p>
+            )}
           </div>
-          {/* Developments / Story  */}
+          {/* Developments / Story */}
           <div className='mx-auto h-min rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw] lg:w-2/5'>
             <PortableText
               value={liveEvent.body}

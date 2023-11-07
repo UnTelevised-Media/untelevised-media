@@ -8,25 +8,24 @@ type Props = {
 };
 
 function calculateTimeDifference(eventDate: string) {
-    const eventTime = new Date(eventDate).getTime();
-    const currentTime = new Date().getTime();
-    const timeDifference = currentTime - eventTime;
+  const eventTime = new Date(eventDate).getTime();
+  const currentTime = new Date().getTime();
+  const timeDifference = currentTime - eventTime;
 
-    const seconds = Math.floor(timeDifference / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
 
-
-    if (days > 0) {
-      return `${days} day${days > 1 ? 's' : ''} ago`;
-    } else if (hours > 0) {
-      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-    } else if (minutes > 0) {
-      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-    } else {
-      return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
-    }
+  if (days > 0) {
+    return `${days} day${days > 1 ? 's' : ''} ago`;
+  } else if (hours > 0) {
+    return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+  } else if (minutes > 0) {
+    return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+  } else {
+    return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
+  }
 }
 
 const LiveWidget = ({ liveEvents }: Props) => {
@@ -34,7 +33,7 @@ const LiveWidget = ({ liveEvents }: Props) => {
   const { keyEvent, relatedArticles } = liveEvents[0];
 
   // Combine keyEvent and relatedArticles arrays and sort by date in descending order
-  const allEvents = [...keyEvent, ...relatedArticles].sort(
+  const allEvents = [...(keyEvent || []), ...(relatedArticles || [])].sort(
     (a, b) => new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime(),
   );
 
@@ -46,9 +45,12 @@ const LiveWidget = ({ liveEvents }: Props) => {
       <hr className='mb-8 border-untele' />
       <div className='gap-x-10 gap-y-12 px-4 pb-4'>
         {liveEvents.map((liveEvent) => (
-          <div className='flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4' key={liveEvent._id}>
+          <div
+            className='flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0'
+            key={liveEvent._id}
+          >
             {/* Image & Read More Container  */}
-            <div className='flex lg:w-1/3 flex-1 flex-col justify-between'>
+            <div className='flex flex-1 flex-col justify-between lg:w-1/3'>
               {/* Image  */}
               <div className='relative h-80 drop-shadow-xl'>
                 <Image
@@ -60,20 +62,20 @@ const LiveWidget = ({ liveEvents }: Props) => {
               </div>
 
               {/* Read More  */}
-              <div className='w-full lg:justify-start justify-center flex'>
-              <ClientSideRoute
-                route={`/live-event/${liveEvent.slug?.current}`}
-                key={liveEvent._id}
-              >
-                <button className='lg:mb-8 lg:ml-4 mt-6 lg:mt-2 rounded-lg border border-slate-800/70 bg-untele p-6 py-3 text-slate-200 shadow-md'>
-                  Full Event Info and Timeline Here: Read More
-                </button>
-              </ClientSideRoute>
+              <div className='flex w-full justify-center lg:justify-start'>
+                <ClientSideRoute
+                  route={`/live-event/${liveEvent.slug?.current}`}
+                  key={liveEvent._id}
+                >
+                  <button className='mt-6 rounded-lg border border-slate-800/70 bg-untele p-6 py-3 text-slate-200 shadow-md lg:mb-8 lg:ml-4 lg:mt-2'>
+                    Full Event Info and Timeline Here: Read More
+                  </button>
+                </ClientSideRoute>
               </div>
             </div>
 
             {/* Info Block  */}
-            <div className='flex lg:w-1/5 flex-col space-y-2'>
+            <div className='flex flex-col space-y-2 lg:w-1/5'>
               {/* Title & Date    */}
               <div className='flex w-full  flex-col space-y-1'>
                 {liveEvent.isCurrentEvent && (
@@ -96,26 +98,33 @@ const LiveWidget = ({ liveEvents }: Props) => {
               </div>
               {/* Description  */}
               <div className=''>
-                <p className='text-sm line-clamp-15'>{liveEvent.description}</p>
+                <p className='line-clamp-15 text-sm'>{liveEvent.description}</p>
               </div>
             </div>
 
-            {/* Timeline  */}
+            {/* Timeline */}
             <div className='lg:w-2/5'>
-              {/* Timeline */}
-              <ul className='custom-list'>
-                {sortedEvents.map((event) => (
-                  <li
-                    key={event._id}
-                    className='li li::before mb-2 rounded-lg border border-untele bg-slate-700/30 text-sm custom-list'
-                  >
-                    {event.title} -{' '}
-                    <span className='relative -top-[1px] transform text-sm font-light text-untele'>
-                      {calculateTimeDifference(event.eventDate)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              {liveEvent.keyEvent && liveEvent.relatedArticles ? (
+                // Proceed with mapping over keyEvent and relatedArticles
+                <ul className='custom-list'>
+                  {sortedEvents.map((event) => (
+                    <li
+                      key={event._id}
+                      className='li li::before mb-2 rounded-lg border border-untele bg-slate-700/30 text-sm custom-list'
+                    >
+                      {event.title} -{' '}
+                      <span className='relative -top-[1px] transform text-sm font-light text-untele'>
+                        {calculateTimeDifference(event.eventDate)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                // Handle the case when keyEvent or relatedArticles is missing
+                <div className='mb-2 rounded-lg border border-untele bg-slate-700/30 text-sm'>
+                  No events at this time, please stand by...
+                </div>
+              )}
             </div>
           </div>
         ))}

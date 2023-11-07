@@ -8,7 +8,8 @@ import { RichTextComponents } from '@/c/RichTextComponents';
 import SocialShare from '@/c/SocialShare';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
-import Comments from '@/c/post/Comments';
+// import Comments from '@/c/post/Comments';
+import LargeAdCard from '@/components/googleAds/LargeAdCard';
 // import { generateMetadata } from '@/u/generateMetadata';
 export { generateMetadata } from '@/u/generateMetadata';
 
@@ -117,7 +118,12 @@ async function Article({ params: { slug } }: Props) {
           url={`https://untelevised.media/post/${slug}`}
           title={post.title}
         />
-
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            {/* <GATag googleAnalyticsId={process.env.GA4_ID} /> */}
+            <LargeAdCard googleAdsenseId={process.env.GAS_ID} />
+          </>
+        )}
         <div className='mt-4 flex justify-center'>
           <Image
             src={urlForImage(post.mainImage).url()}
@@ -133,20 +139,18 @@ async function Article({ params: { slug } }: Props) {
           />
         </div>
 
-         
-      {post.hasEmbeddedVideo && (
-        <div className='my-4 flex items-center justify-center'>
-          <iframe
-            width='720'
-            height='420'
-            className='rounded-lg border border-untele bg-slate-700/30'
-            src={`${post.videoLink}`}
-            title='YouTube video player'
-            // allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
-          />
-        </div>
-      )}
-
+        {post.hasEmbeddedVideo && (
+          <div className='my-4 flex items-center justify-center'>
+            <iframe
+              width='720'
+              height='420'
+              className='rounded-lg border border-untele bg-slate-700/30'
+              src={`${post.videoLink}`}
+              title='YouTube video player'
+              // allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
+            />
+          </div>
+        )}
 
         <section className='mx-auto mt-12 max-w-[85vw] rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw]'>
           <PortableText value={post.body} components={RichTextComponents} />
