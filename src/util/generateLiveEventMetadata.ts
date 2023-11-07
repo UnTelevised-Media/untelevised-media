@@ -11,36 +11,42 @@ type Props = {
 };
 
 // Define the generateMetadata function
-export async function generateMetadata({ params: {slug} }: Props ) {
+export async function generateMetadata({ params: { slug } }: Props) {
   // Fetch the post data based on the slug
-  const query = groq`
-    *[_type == "post" && slug.current == $slug][0] {
-      title,
-      mainImage,
+const query = groq`
+    *[_type == "liveEvent" && slug.current == $slug][0] {
+      ...,
+      tag[]->,
+      keyEvent[]->,
       keywords,
-      description,
-      author->,
-      // Add more fields as needed for metadata
+      relatedArticles[]-> {
+        slug,
+        _id,
+        title,
+        _createdAt,
+        description,
+        eventDate,
+      // Add other fields you want to retrieve from relatedArticles
+    }
     }`;
 
-  const post: Post = await client.fetch(query, { slug });
+  const liveEvent: Post = await client.fetch(query, { slug });
 
   // Create metadata object with dynamic values
   const metadata = {
-    // type: 'article',
-    title: `${post.title} | UnTelevised Media`,
-    description: post.description,
-    keywords: post.keywords,
-    authors: post.author,
+    type: 'article',
+    title: `${liveEvent.title} | Live Updates | UnTelevised Media`,
+    description: liveEvent.description,
+    keywords: liveEvent.keywords,
     publisher: 'UnTelevised Media',
 
     openGraph: {
-      title: `${post.title} | UnTelevised Media`,
-      description: post.description,
-      url: `https://untelevised.media/post/${slug}`,
+      title: `${liveEvent.title} | Live Updates | UnTelevised Media`,
+      description: liveEvent.description,
+      url: `https://untelevised.media/live-event/${slug}`,
       //   siteName: 'UnTelevised Media',
       images: {
-        url: urlForImage(post.mainImage).url(),
+        url: urlForImage(liveEvent.mainImage).url(),
         //   width: 800,
         //   height: 600,
         // alt: post.mainImage.alt,
@@ -51,14 +57,14 @@ export async function generateMetadata({ params: {slug} }: Props ) {
 
     twitter: {
       //   card: 'app',
-      title: `${post.title} | UnTelevised Media`,
-      description: post.description,
+      title: `${liveEvent.title} | Live Updates | UnTelevised Media`,
+      description: liveEvent.description,
       //   siteId: '1467726470533754880',
       creator: '@UnTelevisedLive',
       //   creatorId: '1467726470533754880',
       images: {
-        url: urlForImage(post.mainImage).url(),
-        // alt: post.mainImage.alt,
+        url: urlForImage(liveEvent.mainImage).url(),
+        // alt: liveEvent.mainImage.alt,
       },
     },
 

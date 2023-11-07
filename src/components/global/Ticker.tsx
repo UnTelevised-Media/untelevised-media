@@ -54,38 +54,73 @@ const Ticker = () => {
       <div className='marquee flex h-12 items-center justify-center '>
         <div className='track'>
           <div className='content text-2xl font-semibold'>
-            Riots erupt in Ramallah follow Friday morning prayers; BREAKING - A
-            US Naval warship operating in the Middle East intercepted multiple
-            projectiles near the coast of Yemen, two US officials say.; Deadly
-            blast kills hundreds at Gaza hospital; Palestine blames Israel and
-            Israel Blames Hamas for Hospital Attack; Israel Orders Gaza Siege,
-            Hamas Threatens to Kill Hostages; Fake Gaza news floods Twitter;
-            Hamas calls for day of rage against Israel; UN says almost one
-            million people told to evacuate in Gaza; Hospitals, health system
-            are at &apos;breaking point&apos; in Gaza: WHO; Israeli officials
-            say images of dead babies taken in Kfar Aza; Blinken tells Muir US
-            exploring all options to free American hostages; No credible threats
-            in NYC ahead of &apos;Day of Rage&apos; protests; Tehran:
-            Iran&apos;s Khamenei says Tehran was not behind Hamas attack on
-            Israel; Gaza: Fighting escalates in war&apos;s fourth day as Israel
-            ups attacks on Gaza and Hamas vows to kill hostages; Gaza: Israel
-            pounds Gaza neighborhoods, as people scramble for safety in
-            sealed-off territory; DC: Biden&apos;s hopes for establishing
-            Israel-Saudi relations could become a casualty of the new Mideast
-            war; Gaza: Under heavy bombing, Palestinians in Gaza move from place
-            to place, only to discover nowhere is safe; New York: Donald
-            Trump&apos;s civil fraud trial resumes with ex-CFO Allen Weisselberg
-            on the witness stand; Philadelphia: RFK Jr.&apos;s independent run
-            for president draws GOP criticism and silence from national
-            Democrats; Moscow: Russia says it will talk to Israel and
+            Tragedy in Lewiston: 22 Dead, Dozens Wounded; City on Lockdown as
+            Police Launch Manhunt, Imposing Shelter-in-Place Order; Fire
+            underway after Israeli air strike on Gaza’s Tal al-Hawa; Israel
+            ramps up West Bank raids amid Gaza attacks; New Israeli raids on the
+            city of Khan Yunis; Barrage of Rockets Hits Tel Aviv, Injuring Three
+            Israeli Citizens; US Resolution does not pass U.N. Security council;
+            Australia pledges additional $15 million in aid to Gaza; Protesters
+            Stage Sit-In at Congressional Offices, Demanding Ceasefire in Gaza;
+            Israel to refuse visas to UN officials after Guterres speech on Gaza
+            war; Tragic Loss: Al Jazeera Correspondent&apos;s Family Victims of
+            Israeli Airstrike in Gaza - Heartbreaking Footage Reveals
+            Devastating Toll; Israeli Settlers attack West Bank village; U.N.
+            Reports Over 690,000 Women and Girls Displaced by Conflict; IDF
+            shares gruesome extended footage of Hamas attack with journalist; In
+            Gaza, Unidentified Bodies Buried in Mass Graves Prompt Families to
+            Use Bracelets for Identification; Hamas Alleges Israeli Strike on
+            Refugee Camp Bakery; WHO: 171 attacks on health care in occupied
+            Palestinian territory; Oxfam Director Condemns Starvation Used as a
+            Weapon of War; Fuel runs out in Gaza as Israel rejects cease-fire
+            calls; Gaza death toll spikes to more than 6,500; 3 killed in
+            Israeli raid near Jenin in the West Bank; 4th Convoy of Aid Enters
+            Gaza; Hezbollah has confirmed six of its members have been killed;
+            Palestine Red Crescent Society says 15 hospitals out of service in
+            Gaza; Google Maps and Waze Temporarily Halt Live Traffic Updates in
+            Israel and Gaza Amidst Rising Tensions; Macron in Israel warns
+            against widening Gaza conflict; Indonesian Hospital in Gaza Faces
+            Electricity Shortage Due to Fuel Scarcity, Hamas Reports; U.S.
+            readies plans for mass evacuations if Gaza war escalates; Two
+            Israeli hostages freed by Hamas; Hamas and Israeli troops clash in
+            Gaza as airstrikes intensify; IDF confirms Israel found Hamas files
+            with instructions for making chemical weapons; Israel Sets New
+            Evacuation Deadline for Al-Quds Hospital in Gaza City Amid Tensions;
+            Survival Struggles: Impact of Gaza Conflict on Palestinian
+            Businesses Demands Urgent Global Support; Israeli Artillery Strike
+            Claims Journalist&apos;s Life and Injures Reporters Near Lebanese
+            Border; Riots erupt in Ramallah follow Friday morning prayers;
+            BREAKING - A US Naval warship operating in the Middle East
+            intercepted multiple projectiles near the coast of Yemen, two US
+            officials say.; Deadly blast kills hundreds at Gaza hospital;
+            Palestine blames Israel and Israel Blames Hamas for Hospital Attack;
+            Israel Orders Gaza &apos;Siege,&apos; Hamas Threatens to Kill
+            Hostages; Fake Gaza news floods Twitter; Hamas calls for day of rage
+            against Israel; UN says almost one million people told to evacuate
+            in Gaza; Hospitals, health system are at &apos;breaking point&apos;
+            in Gaza: WHO; Israeli officials say images of dead babies taken in
+            Kfar Aza; Blinken tells Muir US exploring all options to free
+            American hostages; No credible threats in NYC ahead of &apos;Day of
+            Rage&apos; protests; Tehran: Iran&apos;s Khamenei says Tehran was
+            not behind Hamas attack on Israel; Gaza: Fighting escalates in war’s
+            fourth day as Israel ups attacks on Gaza and Hamas vows to kill
+            hostages; Gaza: Israel pounds Gaza neighborhoods, as people scramble
+            for safety in sealed-off territory; DC: Biden’s hopes for
+            establishing Israel-Saudi relations could become a casualty of the
+            new Mideast war; Gaza: Under heavy bombing, Palestinians in Gaza
+            move from place to place, only to discover nowhere is safe; New
+            York: Donald Trump’s civil fraud trial resumes with ex-CFO Allen
+            Weisselberg on the witness stand; Philadelphia: RFK Jr.&apos;s
+            independent run for president draws GOP criticism and silence from
+            national Democrats; Moscow: Russia says it will talk to Israel and
             Palestinians in hopes of reaching a settlement; France: France has
-            no formal trace of Iran&apos;s involvement in the attacks,
-            says Macron; Germany investigating kidnapping of its citizens in
-            Israel; Moscow: Putin says the latest Gaza war is a result of US
-            policy failures; UN human rights chief condemns alleged mass
-            killings in Israel; At least 11 US citizens have been killed in the
-            Israel Palestine Conflict, Biden says; Gaza: Israeli airstrikes
-            intensify in Gaza as war enters 4th day;{' '}
+            no ‘formal trace’ of Iran’s involvement in the attacks, says Macron;
+            Germany investigating kidnapping of its citizens in Israel; Moscow:
+            Putin says the latest Gaza war is a result of US policy failures; UN
+            human rights chief condemns alleged mass killings in Israel; At
+            least 11 US citizens have been killed in the Israel Palestine
+            Conflict, Biden says; Gaza: Israeli airstrikes intensify in Gaza as
+            war enters 4th day;{' '}
           </div>
         </div>
       </div>
