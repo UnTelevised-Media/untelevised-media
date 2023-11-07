@@ -61,6 +61,30 @@ export default defineType({
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
     defineArrayMember({
+      name: 'twitter',
+      type: 'object',
+      title: 'Twitter Embed',
+      fields: [
+        {
+          name: 'id',
+          type: 'string',
+          title: 'Twitter tweet ID',
+        },
+      ],
+    }),
+    defineArrayMember({
+      name: 'instagram',
+      type: 'object',
+      title: 'Instagram Embed',
+      fields: [
+        {
+          name: 'id',
+          type: 'string',
+          title: 'Instagram post ID',
+        },
+      ],
+    }),
+    defineArrayMember({
       type: 'image',
       options: { hotspot: true },
       fields: [
