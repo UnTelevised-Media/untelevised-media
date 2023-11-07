@@ -13,6 +13,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      lineClamp: {
+        '8': '8', // You can add more line clamp values here if needed
+        '15': '15', 
+      },
       colors: {
         untele: '#D70606',
         midnight: '#121063',
@@ -108,6 +112,32 @@ module.exports = {
         }
       }
       addUtilities(neonUtilities);
+    }),
+
+    plugin(({ addUtilities, theme, variants }) => {
+      const customListStyles = {
+        '.custom-list': {
+          listStyle: 'none',
+          paddingLeft: '28px',
+        },
+        '.custom-list li': {
+          position: 'relative',
+          paddingLeft: '15px',
+          marginBottom: '10px',
+        },
+        '.custom-list li::before': {
+          content: '""',
+          position: 'absolute',
+          left: '-38px',
+          top: '35%',
+          transform: 'translateY(-50%)',
+          width: '32px',
+          height: '32px',
+          background: `url('/favicon-32x32.png') no-repeat center center`,
+        },
+      };
+
+      addUtilities(customListStyles, variants('customList'));
     }),
   ],
 };

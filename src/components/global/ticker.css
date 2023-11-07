@@ -52,7 +52,7 @@ darkgreyish {
 .track {
   white-space: nowrap;
   will-change: transform;
-  animation: marquee 350s linear infinite;
+  animation: marquee 380s linear infinite;
 }
 
 @keyframes marquee {

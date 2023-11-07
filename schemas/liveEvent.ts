@@ -1,8 +1,8 @@
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
-  name: 'post',
-  title: 'Post',
+  name: 'liveEvent',
+  title: 'Live Event',
   type: 'document',
   fields: [
     defineField({
@@ -20,40 +20,14 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'hasEmbeddedVideo',
-      title: 'Has Embedded Youtube Video?',
+      name: 'isCurrentEvent',
+      title: 'Is Current Event',
       type: 'boolean', // Adding a boolean field for isCurrentEvent
     }),
     defineField({
-      name: 'videoLink',
-      title: 'Video Link',
+      name: 'subtitle',
+      title: 'Subtitle',
       type: 'string',
-    }),
-    defineField({
-      name: 'hasEmbeddedTweet',
-      title: 'Has Embedded Tweet?',
-      type: 'boolean', // Adding a boolean field for isCurrentEvent
-    }),
-    defineField({
-      name: 'tweetLink',
-      title: 'Tweet Link',
-      type: 'string',
-    }),
-    defineField({
-      name: 'keywords',
-      title: 'Keywords',
-      type: 'string',
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
-    defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: { type: 'author' },
     }),
     defineField({
       name: 'mainImage',
@@ -71,15 +45,14 @@ export default defineType({
       ],
     }),
     defineField({
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'category' } }],
+      name: 'videoLink',
+      title: 'Video Link',
+      type: 'string',
     }),
     defineField({
-      name: 'publishedAt',
-      title: 'Published at',
-      type: 'datetime',
+      name: 'description',
+      title: 'Description',
+      type: 'text',
     }),
     defineField({
       name: 'eventDate',
@@ -91,17 +64,42 @@ export default defineType({
       title: 'Body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'relatedArticles',
+      title: 'Related Articles',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'post' } }],
+    }),
+    defineField({
+      name: 'keyEvent',
+      title: 'Event',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'keyEvent' } }],
+    }),
+    defineField({
+      name: 'keywords',
+      title: 'Keywords',
+      type: 'string',
+    }),
+    defineField({
+      name: 'eventTag',
+      title: 'Event Tag',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'eventTag' } }],
+    }),
   ],
 
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
-      media: 'mainImage',
+      date: 'eventDate',
     },
     prepare(selection) {
-      const { author } = selection;
-      return { ...selection, subtitle: author && `by ${author}` };
+      const { title, date } = selection;
+      return {
+        title,
+        subtitle: `${date ? new Date(date).toDateString() : 'No date'}`,
+      };
     },
   },
 });

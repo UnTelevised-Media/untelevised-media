@@ -1,0 +1,91 @@
+{
+  "Sections": {
+    "US": [
+      "Crime + Justice",
+      "Energy + Environment",
+      "Extreme Weather",
+      "Space + Science"
+    ],
+    "World": [
+      "Africa",
+      "Americas",
+      "Asia",
+      "Australia",
+      "China",
+      "Europe",
+      "India",
+      "Middle East",
+      "United Kingdom"
+    ],
+    "Politics": ["SCOTUS", "Congress", "Facts First", "2024 Elections"],
+    "Business": ["Tech", "Media", "Calculators"],
+    "Markets": [
+      "Pre-markets",
+      "After-Hours",
+      "Market Movers",
+      "Fear & Greed",
+      "World Markets",
+      "Investing",
+      "Markets Now",
+      "Before the Bell",
+      "Nightcap"
+    ],
+    "Opinion": ["Political Op-Eds", "Social Commentary"],
+    "Health": [
+      "Life, But Better",
+      "Fitness",
+      "Food",
+      "Sleep",
+      "Mindfulness",
+      "Relationships"
+    ],
+    "Entertainment": ["Movies", "Television", "Celebrity"],
+    "Tech": [
+      "Innovate",
+      "Gadget",
+      "Foreseeable Future",
+      "Mission: Ahead",
+      "Upstarts",
+      "Work Transformed",
+      "Innovative Cities"
+    ],
+    "Style": [
+      "Arts",
+      "Design",
+      "Fashion",
+      "Architecture",
+      "Luxury",
+      "Beauty"
+    ],
+    "Travel": ["Destinations", "Food & Drink", "Stay"],
+    "Recipes": ["Food"],
+    "Sports": [
+      "Pro Football",
+      "College Football",
+      "Basketball",
+      "Baseball",
+      "Soccer",
+      "Olympics",
+      "Hockey"
+    ],
+    "Sustainability": [],
+    "Legal": [],
+    "Breakingviews": [],
+    "Investigations": [],
+    "Science": [],
+    "Lifestyle": [],
+    "Videos": [
+      "Live TV",
+      "CNN Headlines",
+      "CNN Max",
+      "Digital Studios",
+      "CNN Films",
+      "HLN",
+      "TV Schedule",
+      "TV Shows A-Z"
+    ],
+    "Audio": ["Audio"],
+    "Graphics": ["Graphics"],
+    "Photo": ["Photo"]
+  }
+}

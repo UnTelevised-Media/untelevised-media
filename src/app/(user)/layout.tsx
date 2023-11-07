@@ -7,15 +7,11 @@ import Banner from '@/c/global/Banner';
 import dynamic from 'next/dynamic';
 import { draftMode } from 'next/headers';
 import { token } from '@/l/sanity.fetch';
-import GATag from '@/l/googleAnalytics';
+// import GATag from '@/l/googleAnalytics';
+import GASVerify from '@/lib/googleAdSense';
 import Script from 'next/script';
 
-
-
 const inter = Inter({ subsets: ['latin'] });
-
-const GTM_ID = process.env.GTM_ID;
-
 
 export const metadata: Metadata = {
   title:
@@ -60,22 +56,23 @@ export const metadata: Metadata = {
 
 const PreviewProvider = dynamic(() => import('@/components/PreviewProvider'));
 
+const GTM_ID = process.env.GTM_ID;
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // if (process.env.NODE_ENV === "production") {
 
-      // if (process.env.NODE_ENV === "production") {
-        
-      //     // Initialize Google Analytics
-      //     // eslint-disable-next-line react-hooks/rules-of-hooks
-      //     useGAPageviewTracking({ googleAnalyticsId: process.env.GOOGLEANALYTICS_ID });
-      // }
-      
+  //     // Initialize Google Analytics
+  //     // eslint-disable-next-line react-hooks/rules-of-hooks
+  //     useGAPageviewTracking({ googleAnalyticsId: process.env.GA4_ID });
+  // }
+
   return (
     <html lang='en'>
-      {/* <Script id='google-tag-manager' strategy='afterInteractive'>
+      <Script id='google-tag-manager' strategy='afterInteractive'>
         {`
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -83,8 +80,15 @@ export default async function RootLayout({
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','${GTM_ID}');
         `}
-      </Script> */}
-      <GATag googleAnalyticsId={process.env.GA4_ID} />
+      </Script>
+      {
+        process.env.NODE_ENV === 'production' && (
+          <>
+          {/* <GATag googleAnalyticsId={process.env.GA4_ID} /> */}
+          <GASVerify googleAdsenseId={process.env.GAS_ID} />
+          </>
+        )
+      }
       <body className={`bg-slate-400/70 scrollbar-hide ${inter.className}`}>
         {draftMode().isEnabled ? (
           <PreviewProvider token={token}>
@@ -100,7 +104,7 @@ export default async function RootLayout({
             {children}
           </>
         )}
-        <noscript
+      <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
           }}
