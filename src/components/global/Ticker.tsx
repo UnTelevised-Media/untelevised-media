@@ -1,131 +1,66 @@
-import React from 'react'
+import React from 'react';
+import { groq } from 'next-sanity';
+import { client } from '@/lib/sanity.client';
 
-const Ticker = () => {
+const queryPost = groq`
+  *[_type=='post'] {
+    ...,
+    author->,
+    categories[]->,
+    description,
+    publistedAt,
+  } 
+  | order(_createdAt desc)
+`;
+
+const queryLiveEvent = groq`
+  *[_type=='liveEvent'] {
+    ...,
+    slug,
+    keyEvent[]->{
+      title,
+      eventDate,
+    },
+    relatedArticles[]-> {
+      slug,
+      _id,
+      title,
+      eventDate,
+    }
+  } 
+`;
+
+export default async function Ticker() {
+  const posts = await client.fetch(queryPost);
+  const liveEvents = await client.fetch(queryLiveEvent);
+
+  const keyEventTitles = liveEvents.reduce((titles, event) => {
+    if (event.keyEvent) {
+      const keyEventTitles = event.keyEvent.map((keyEvent) => keyEvent.title);
+      titles.push(...keyEventTitles);
+    }
+    return titles;
+  }, []);
+
+  const postTitles = posts.map((post) => post.title);
+
+  const allTitles = [...keyEventTitles, ...postTitles].sort(
+    (a, b) =>
+      new Date(b.eventDate || b.publishedAt).getTime() -
+      new Date(a.eventDate || a.publishedAt).getTime(),
+  );
+
   return (
-    <div className='flex w-full overflow-hidden rounded-md border border-untele/30 bg-static px-3 shadow-lg'>
-      {/* <div className='hmove mx-2 px-2 text-xl font-semibold text-slate-300'>
-        <div className='hitem'>
-          This ticker is a new addition to the site and contains old ticker news
-          from 2020-2021, the features to keep it up to date will be implmented
-          soon; DC: Proud Boys Sued For Vandalizing Black Church in DC, Leader
-          Arrested;
-        </div>
-        <div className='hitem'>
-          Chester, PA: Retired Firefighter, Who Allegedly Threw Fire
-          Extinguisher at Capitol Police During D.C. Riot, Is Arrested;
-        </div>
-        <div className='hitem'>
-          VA: 2 Virginia Police Officers Arrested for Participating in Capitol
-          Riots;
-        </div>
-        <div className='hitem'>
-          The Hill: Dozens on FBI&apos;s Terrorist Watchlist Were in DC Day of
-          Capitol Riot;
-        </div>
-        <div className='hitem'>
-          Denver, CO: Denver Police Grilled By Lawmakers Over Summer Protest
-          Response;
-        </div>
-        <div className='hitem'>
-          Wilmington, DE: Man Seen Carrying Confederate Flag in Capitol
-          Arrested, IDed as Kevin Seefried, Son Hunter Also Arrested;
-        </div>
-        <div className='hitem'>
-          Internet: Parler is Offline, but Violent Posts Scraped by Hackers Will
-          Haunt Users;
-        </div>
-        <div className='hitem'>
-          Denver, CO: Tyler Barrett May Loose Security Liscense Over Throwing OC
-          Grenade At Protesters In May;
-        </div>
-        <div className='hitem'>
-          Fort Worth, TX: US Air Force Veteran Lt Col Larry Randall Broke Jr
-          Intended to Take Hostages with Zip Ties;
-        </div>
-        <div className='hitem'>
-          Denver, CO: Businesses Begin to Board Up In Preparation for Violent
-          Protest;
-        </div>
-        <div className='hitem'>
-          USA: Counter-protest planned by Anti Fascist against Trump
-          Insurrection in Many Major US Cities;
-        </div>
-      </div> */}
+    <div className='flex w-full overflow-hidden rounded-md border border-untele/30 bg-static shadow-lg'>
       <div className='marquee flex h-12 items-center justify-center '>
         <div className='track'>
-          <div className='content text-2xl font-semibold'>
-            Tragedy in Lewiston: 22 Dead, Dozens Wounded; City on Lockdown as
-            Police Launch Manhunt, Imposing Shelter-in-Place Order; Fire
-            underway after Israeli air strike on Gaza’s Tal al-Hawa; Israel
-            ramps up West Bank raids amid Gaza attacks; New Israeli raids on the
-            city of Khan Yunis; Barrage of Rockets Hits Tel Aviv, Injuring Three
-            Israeli Citizens; US Resolution does not pass U.N. Security council;
-            Australia pledges additional $15 million in aid to Gaza; Protesters
-            Stage Sit-In at Congressional Offices, Demanding Ceasefire in Gaza;
-            Israel to refuse visas to UN officials after Guterres speech on Gaza
-            war; Tragic Loss: Al Jazeera Correspondent&apos;s Family Victims of
-            Israeli Airstrike in Gaza - Heartbreaking Footage Reveals
-            Devastating Toll; Israeli Settlers attack West Bank village; U.N.
-            Reports Over 690,000 Women and Girls Displaced by Conflict; IDF
-            shares gruesome extended footage of Hamas attack with journalist; In
-            Gaza, Unidentified Bodies Buried in Mass Graves Prompt Families to
-            Use Bracelets for Identification; Hamas Alleges Israeli Strike on
-            Refugee Camp Bakery; WHO: 171 attacks on health care in occupied
-            Palestinian territory; Oxfam Director Condemns Starvation Used as a
-            Weapon of War; Fuel runs out in Gaza as Israel rejects cease-fire
-            calls; Gaza death toll spikes to more than 6,500; 3 killed in
-            Israeli raid near Jenin in the West Bank; 4th Convoy of Aid Enters
-            Gaza; Hezbollah has confirmed six of its members have been killed;
-            Palestine Red Crescent Society says 15 hospitals out of service in
-            Gaza; Google Maps and Waze Temporarily Halt Live Traffic Updates in
-            Israel and Gaza Amidst Rising Tensions; Macron in Israel warns
-            against widening Gaza conflict; Indonesian Hospital in Gaza Faces
-            Electricity Shortage Due to Fuel Scarcity, Hamas Reports; U.S.
-            readies plans for mass evacuations if Gaza war escalates; Two
-            Israeli hostages freed by Hamas; Hamas and Israeli troops clash in
-            Gaza as airstrikes intensify; IDF confirms Israel found Hamas files
-            with instructions for making chemical weapons; Israel Sets New
-            Evacuation Deadline for Al-Quds Hospital in Gaza City Amid Tensions;
-            Survival Struggles: Impact of Gaza Conflict on Palestinian
-            Businesses Demands Urgent Global Support; Israeli Artillery Strike
-            Claims Journalist&apos;s Life and Injures Reporters Near Lebanese
-            Border; Riots erupt in Ramallah follow Friday morning prayers;
-            BREAKING - A US Naval warship operating in the Middle East
-            intercepted multiple projectiles near the coast of Yemen, two US
-            officials say.; Deadly blast kills hundreds at Gaza hospital;
-            Palestine blames Israel and Israel Blames Hamas for Hospital Attack;
-            Israel Orders Gaza &apos;Siege,&apos; Hamas Threatens to Kill
-            Hostages; Fake Gaza news floods Twitter; Hamas calls for day of rage
-            against Israel; UN says almost one million people told to evacuate
-            in Gaza; Hospitals, health system are at &apos;breaking point&apos;
-            in Gaza: WHO; Israeli officials say images of dead babies taken in
-            Kfar Aza; Blinken tells Muir US exploring all options to free
-            American hostages; No credible threats in NYC ahead of &apos;Day of
-            Rage&apos; protests; Tehran: Iran&apos;s Khamenei says Tehran was
-            not behind Hamas attack on Israel; Gaza: Fighting escalates in war’s
-            fourth day as Israel ups attacks on Gaza and Hamas vows to kill
-            hostages; Gaza: Israel pounds Gaza neighborhoods, as people scramble
-            for safety in sealed-off territory; DC: Biden’s hopes for
-            establishing Israel-Saudi relations could become a casualty of the
-            new Mideast war; Gaza: Under heavy bombing, Palestinians in Gaza
-            move from place to place, only to discover nowhere is safe; New
-            York: Donald Trump’s civil fraud trial resumes with ex-CFO Allen
-            Weisselberg on the witness stand; Philadelphia: RFK Jr.&apos;s
-            independent run for president draws GOP criticism and silence from
-            national Democrats; Moscow: Russia says it will talk to Israel and
-            Palestinians in hopes of reaching a settlement; France: France has
-            no ‘formal trace’ of Iran’s involvement in the attacks, says Macron;
-            Germany investigating kidnapping of its citizens in Israel; Moscow:
-            Putin says the latest Gaza war is a result of US policy failures; UN
-            human rights chief condemns alleged mass killings in Israel; At
-            least 11 US citizens have been killed in the Israel Palestine
-            Conflict, Biden says; Gaza: Israeli airstrikes intensify in Gaza as
-            war enters 4th day;{' '}
+          <div className='text-3xl font-bold'>
+            {allTitles.map((title, index) => (
+              <span key={index}>{title} • </span>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default Ticker
