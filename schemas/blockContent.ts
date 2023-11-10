@@ -31,7 +31,10 @@ export default defineType({
         { title: 'H4', value: 'h4' },
         { title: 'Quote', value: 'blockquote' },
       ],
-      lists: [{ title: 'Bullet', value: 'bullet' }],
+      lists: [
+        { title: 'Bullet', value: 'bullet' },
+        { title: 'Numbered', value: 'number' },
+      ],
       // Marks let you mark up inline text in the Portable Text Editor
       marks: {
         // Decorators usually describe a single property – e.g. a typographic
@@ -39,6 +42,8 @@ export default defineType({
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
+          { title: 'Code', value: 'code' },
+          { title: 'Highlight', value: 'highlight' },
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -61,30 +66,6 @@ export default defineType({
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
     defineArrayMember({
-      name: 'twitter',
-      type: 'object',
-      title: 'Twitter Embed',
-      fields: [
-        {
-          name: 'id',
-          type: 'string',
-          title: 'Twitter tweet ID',
-        },
-      ],
-    }),
-    defineArrayMember({
-      name: 'instagram',
-      type: 'object',
-      title: 'Instagram Embed',
-      fields: [
-        {
-          name: 'id',
-          type: 'string',
-          title: 'Instagram post ID',
-        },
-      ],
-    }),
-    defineArrayMember({
       type: 'image',
       options: { hotspot: true },
       fields: [
@@ -94,6 +75,15 @@ export default defineType({
           title: 'Alternative Text',
         },
       ],
+    }),
+    defineArrayMember({
+      type: 'youtubeEmbed',
+    }),
+    defineArrayMember({
+      type: 'twitterEmbed',
+    }),
+    defineArrayMember({
+      type: 'instagramEmbed',
     }),
   ],
 });

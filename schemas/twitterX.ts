@@ -1,14 +1,15 @@
-import { defineField, defineType } from 'sanity';
+import { defineType, defineField } from 'sanity';
 
+// twitter.ts
 export default defineType({
-  name: 'twitter',
+  name: 'twitterEmbed',
   type: 'object',
   title: 'Twitter Embed',
   fields: [
-    {
-      name: 'id',
+    defineField({
+      name: 'tweetId',
       type: 'string',
-      title: 'Twitter tweet ID',
-    },
+      title: 'Tweet ID',
+    }),
   ],
 });

@@ -1,15 +1,15 @@
 import { defineType, defineField } from 'sanity';
 
-// instagram.ts
 export default defineType({
-  name: 'instagramEmbed',
+  name: 'youtubeEmbed',
   type: 'object',
-  title: 'Instagram Embed',
+  title: 'YouTube Embed',
   fields: [
     defineField({
-      name: 'postId',
+      name: 'videoId',
       type: 'string',
-      title: 'Instagram Post ID',
+      title: 'YouTube Video ID',
     }),
   ],
 });
+

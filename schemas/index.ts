@@ -9,6 +9,7 @@ import keyEvent from './keyEvent';
 import eventTag from './eventTag';
 import twitterX from './twitterX';
 import instagram from './instagram';
+import youtube from './youtube';
 
 export const schemaTypes = [
   post,
@@ -21,4 +22,5 @@ export const schemaTypes = [
   eventTag,
   twitterX,
   instagram,
+  youtube,
 ];
