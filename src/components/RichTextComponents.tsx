@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import urlForImage from '@/util/urlForImage';
 import { Tweet } from 'react-tweet';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export const RichTextComponents = {
   types: {
@@ -31,7 +33,7 @@ export const RichTextComponents = {
     youtubeEmbed: ({ value }: any) => {
       const videoId = value.videoId;
       return (
-        <div className='mx-auto my-10 max-w-full flex justify-center items-center'>
+        <div className='mx-auto my-10 flex max-w-full items-center justify-center'>
           {/* Render YouTube embed using the video ID */}
           <iframe
             width='720'
@@ -59,7 +61,7 @@ export const RichTextComponents = {
         <div className='mx-auto my-10 flex max-w-full justify-center'>
           {/* Render Twitter embed using the ID and username */}
           <blockquote
-            className='instagram-media max-w-xl min-w-fit'
+            className='instagram-media min-w-fit max-w-xl'
             data-instgrm-captioned
             data-instgrm-permalink={`https://www.instagram.com/p/${postId}`}
             data-instgrm-version='14'
@@ -100,11 +102,6 @@ export const RichTextComponents = {
     h4: ({ children }: any) => (
       <h4 className='py-6 text-xl font-bold md:text-2xl'>{children}</h4>
     ),
-    blockquote: ({ children }: any) => (
-      <blockquote className='boreder-l-untele my-5 border-l-4 py-5 pl-5'>
-        {children}
-      </blockquote>
-    ),
   },
   marks: {
     link: ({ children, value }: any) => {
@@ -121,5 +118,17 @@ export const RichTextComponents = {
         </Link>
       );
     },
+    blockquote: ({ children }: any) => (
+      <blockquote className='boreder-l-untele my-5 border-l-4 py-5 pl-5'>
+        {children}
+      </blockquote>
+    ),
+    code: ({ children }: any) => (
+      <div>
+        <SyntaxHighlighter language='json' style={dark}>
+          {children}
+        </SyntaxHighlighter>
+      </div>
+    ),
   },
 };
