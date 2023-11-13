@@ -1,7 +1,5 @@
 /* eslint-disable react/function-component-definition */
 import Image from 'next/image';
-// import Head from 'next/head';
-// import type { Metadata } from 'next';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/c/RichTextComponents';
@@ -10,7 +8,6 @@ import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
 // import Comments from '@/c/post/Comments';
 import LargeAdCard from '@/components/googleAds/LargeAdCard';
-// import { generateMetadata } from '@/u/generateMetadata';
 export { generateMetadata } from '@/u/generateMetadata';
 
 type Props = {
@@ -138,7 +135,6 @@ async function Article({ params: { slug } }: Props) {
             className='rounded-lg'
           />
         </div>
-
         {post.hasEmbeddedVideo && (
           <div className='my-4 flex items-center justify-center'>
             <iframe
@@ -151,7 +147,6 @@ async function Article({ params: { slug } }: Props) {
             />
           </div>
         )}
-
         <section className='mx-auto mt-12 max-w-[85vw] rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw]'>
           <PortableText value={post.body} components={RichTextComponents} />
         </section>

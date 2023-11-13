@@ -30,16 +30,6 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'hasEmbeddedTweet',
-      title: 'Has Embedded Tweet?',
-      type: 'boolean', // Adding a boolean field for isCurrentEvent
-    }),
-    defineField({
-      name: 'tweetLink',
-      title: 'Tweet Link',
-      type: 'string',
-    }),
-    defineField({
       name: 'keywords',
       title: 'Keywords',
       type: 'string',
