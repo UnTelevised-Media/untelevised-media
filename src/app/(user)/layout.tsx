@@ -63,12 +63,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // if (process.env.NODE_ENV === "production") {
-
-  //     // Initialize Google Analytics
-  //     // eslint-disable-next-line react-hooks/rules-of-hooks
-  //     useGAPageviewTracking({ googleAnalyticsId: process.env.GA4_ID });
-  // }
 
   return (
     <html lang='en'>
@@ -84,7 +78,6 @@ export default async function RootLayout({
       {
         process.env.NODE_ENV === 'production' && (
           <>
-          {/* <GATag googleAnalyticsId={process.env.GA4_ID} /> */}
           <GASVerify googleAdsenseId={process.env.GAS_ID} />
           </>
         )
