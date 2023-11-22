@@ -3,13 +3,13 @@
 import Image from 'next/image';
 import urlForImage from '@/u/urlForImage';
 import { ArrowUpRightIcon, ShareIcon } from '@heroicons/react/24/solid';
-import ClientSideRoute from './ClientSideRoute';
+import ClientSideRoute from '../ClientSideRoute';
 
 type Props = {
   posts: Post[];
 };
 
-function BlogItem({ posts }: Props) {
+function ArticleCardLg({ posts }: Props) {
   return (
     <div>
       <hr className='mb-8 border-untele' />
@@ -36,7 +36,7 @@ function BlogItem({ posts }: Props) {
                       post.categories.map((category) => (
                         <div
                           key={category._id}
-                          className='rounded-xl border border-slate-900 bg-untele/70 px-5 py-2 text-center text-xs font-light text-slate-900 lg:text-sm hidden md:flex'
+                          className='hidden rounded-xl border border-slate-900 bg-untele/70 px-5 py-2 text-center text-xs font-light text-slate-900 md:flex lg:text-sm'
                         >
                           <p>{category.title}</p>
                         </div>
@@ -78,4 +78,4 @@ function BlogItem({ posts }: Props) {
   );
 }
 
-export default BlogItem;
+export default ArticleCardLg;
