@@ -5,10 +5,8 @@ import { client } from '@/lib/sanity.client';
 const queryPost = groq`
   *[_type=='post'] {
     ...,
-    author->,
-    categories[]->,
-    description,
-    publistedAt,
+    eventDate,
+    title,
   } 
   | order(_createdAt desc)
 `;

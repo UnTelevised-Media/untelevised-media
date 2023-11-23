@@ -51,7 +51,7 @@ export default async function HomePage() {
   // Fetch post & liveEvents from Database
   const posts = await client.fetch(queryPost);
   const liveEvents = await client.fetch(queryLiveEvent);
-  const currentLiveEvents = liveEvents.filter((event) => event.isCurrentEvent);
+  const currentLiveEvents = liveEvents.filter((event: { isCurrentEvent: boolean; }) => event.isCurrentEvent);
 
   return (
     <div className='mx-auto max-w-[95wv] md:max-w-[85vw]'>
