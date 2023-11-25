@@ -40,7 +40,6 @@ export default async function Ticker() {
     const allTitles = [...keyEventTitles, ...postTitles].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
       );
-      console.log("🚀 ~ file: Ticker.tsx:41 ~ Ticker ~ allTitles:", allTitles)
 
     // Return JSX here, inside the try block
     return (
