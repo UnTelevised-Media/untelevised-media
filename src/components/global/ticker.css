@@ -1,9 +1,4 @@
 
-.hmove {
-  display: flex;
-}
-
-
 .hitem {
   flex-shrink: 0;
   width: 100%;
@@ -11,7 +6,6 @@
   padding: 2px;
   text-align: center;
 }
-
 
 @keyframes tickerh {
   0% {
@@ -21,17 +15,12 @@
     transform: translate3d(-1100%, 0, 0);
   }
 }
-.hmove {
-  animation: tickerh linear 1400s infinite;
-}
-.hmove:hover { animation-play-state: paused; }
-
 
 darkred {
-  color: #d70606;
+  color: #00b22a;
 }
 strokered {
-  color: #d7a5a5;
+  color: #f39595;
 }
 grayish {
   color: #767676;
@@ -42,14 +31,14 @@ darkgreyish {
 
 .marquee {
   font-family: 'Odibee Sans', sans-serif;
-  color: white;
-  -webkit-text-stroke: 1px darkred;
+  color: rgb(232, 213, 213);
+  -webkit-text-stroke: 0.9px darkred;
 }
 
 .track {
   white-space: nowrap;
   will-change: transform;
-  animation: marquee 1280s linear infinite;
+  animation: marquee 1100s linear infinite;
 }
 
 @keyframes marquee {
