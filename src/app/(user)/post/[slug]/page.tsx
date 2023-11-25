@@ -18,7 +18,6 @@ type Props = {
 
 export const revalidate = 120;
 
-// export const metadata: Metadata = generateMetadata;
 
 export async function generateStaticParams() {
   const query = groq`*[_type=='post']

@@ -10,9 +10,9 @@ const Header = () => {
       <div className='flex'>
         <Link href='/' className='flex items-end space-x-2'>
           <Image src='/Logo.png' alt='' width={50} height={50} />
-          {/* <h1 className='text-xl font-semibold text-untele'>
+          <h1 className='text-2xl font-semibold text-slate-200'>
             UnTelevised Media
-          </h1> */}
+          </h1>
         </Link>
       </div>
 
