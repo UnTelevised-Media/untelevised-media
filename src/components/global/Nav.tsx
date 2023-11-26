@@ -31,7 +31,7 @@ async function Nav() {
     <div className='flex gap-x-3 px-6 py-4 text-lg font-semibold text-slate-800'>
       {sortedCategories.map((category, index) => (
         <ClientSideRoute
-          route={`category/${formatCategoryTitle(category.title)}`}
+          route={`/category/${formatCategoryTitle(category.title)}`}
           key={index}
         >
           <div className='rounded-md border border-untele/40 bg-slate-700/30 px-3 py-2'>
