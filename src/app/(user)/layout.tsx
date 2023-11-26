@@ -11,6 +11,7 @@ import { token } from '@/l/sanity.fetch';
 import GASVerify from '@/lib/googleAdSense';
 import Script from 'next/script';
 import Nav from '@/components/global/Nav';
+import Footer from '@/components/global/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -96,6 +97,7 @@ export default async function RootLayout({
             <Banner />
 
             {children}
+            <Footer />
           </>
         )}
         <noscript
