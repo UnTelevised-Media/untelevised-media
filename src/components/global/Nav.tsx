@@ -28,7 +28,7 @@ async function Nav() {
   const sortedCategories = categories.sort((a, b) => a.order - b.order);
 
   return (
-    <div className='flex gap-x-3 px-6 py-4 text-lg font-semibold text-slate-800'>
+    <nav className='flex gap-x-3 px-6 py-4 text-lg font-semibold text-slate-800'>
       {sortedCategories.map((category, index) => (
         <ClientSideRoute
           route={`/category/${formatCategoryTitle(category.title)}`}
@@ -39,7 +39,7 @@ async function Nav() {
           </div>
         </ClientSideRoute>
       ))}
-    </div>
+    </nav>
   );
 }
 
