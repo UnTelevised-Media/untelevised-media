@@ -10,6 +10,8 @@ import { token } from '@/l/sanity.fetch';
 // import GATag from '@/l/googleAnalytics';
 import GASVerify from '@/lib/googleAdSense';
 import Script from 'next/script';
+import Nav from '@/components/global/Nav';
+import Footer from '@/components/global/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -75,29 +77,30 @@ export default async function RootLayout({
         })(window,document,'script','dataLayer','${GTM_ID}');
         `}
       </Script>
-      {
-        process.env.NODE_ENV === 'production' && (
-          <>
+      {process.env.NODE_ENV === 'production' && (
+        <>
           <GASVerify googleAdsenseId={process.env.GAS_ID} />
-          </>
-        )
-      }
+        </>
+      )}
       <body className={`bg-slate-400/70 scrollbar-hide ${inter.className}`}>
         {draftMode().isEnabled ? (
           <PreviewProvider token={token}>
             <Header />
+            <Nav />
             <Banner />
             {children}
           </PreviewProvider>
         ) : (
           <>
             <Header />
+            <Nav />
             <Banner />
 
             {children}
+            <Footer />
           </>
         )}
-      <noscript
+        <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
           }}

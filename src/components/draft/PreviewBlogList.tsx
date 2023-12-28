@@ -1,6 +1,6 @@
 /* eslint-disable react/function-component-definition */
 import { sanityFetch } from '@/l/sanity.fetch';
-import BlogItem from '@/components/BlogItem';
+import BlogItem from '@/components/cards/ArticleCardLg';
 
 type Props = {
   query: string;

@@ -3,14 +3,14 @@
 import Image from 'next/image';
 import urlForImage from '@/u/urlForImage';
 import { ArrowUpRightIcon, ShareIcon } from '@heroicons/react/24/solid';
-import ClientSideRoute from './ClientSideRoute';
+import ClientSideRoute from '../ClientSideRoute';
 
 type Props = {
   posts: Post[];
 };
 
-function BlogItem({ posts }: Props) {
-  return (
+function ArticleCardLg({ posts }: Props) {
+      return (
     <div>
       <hr className='mb-8 border-untele' />
       <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
@@ -36,7 +36,7 @@ function BlogItem({ posts }: Props) {
                       post.categories.map((category) => (
                         <div
                           key={category._id}
-                          className='rounded-xl border border-slate-900 bg-untele/70 px-5 py-2 text-center text-xs font-light text-slate-900 lg:text-sm hidden md:flex'
+                          className='hidden rounded-xl border border-slate-900 bg-untele/70 px-5 py-2 text-center text-xs font-light text-slate-900 md:flex lg:text-sm'
                         >
                           <p>{category.title}</p>
                         </div>
@@ -67,7 +67,7 @@ function BlogItem({ posts }: Props) {
                   Read Article
                   <ArrowUpRightIcon className='group ml-2 h-4 w-4' />
                 </p>
-
+                
                 <ShareIcon className='mr-4 mt-4 h-6 w-6 transition-transform duration-200 ease-out hover:scale-110 hover:text-untele' />
               </div>
             </div>
@@ -78,4 +78,4 @@ function BlogItem({ posts }: Props) {
   );
 }
 
-export default BlogItem;
+export default ArticleCardLg;

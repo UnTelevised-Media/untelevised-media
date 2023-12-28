@@ -1,5 +1,5 @@
 import React from 'react';
-import ClientSideRoute from './ClientSideRoute';
+import ClientSideRoute from '../ClientSideRoute';
 import Image from 'next/image';
 import urlForImage from '@/u/urlForImage';
 
@@ -7,9 +7,13 @@ type Props = {
   liveEvents: LiveEvent[];
 };
 
+export const revalidate = 15;
+
+// A Function to calculate the difference between the current time and eventTime set from the Database.
 function calculateTimeDifference(eventDate: string) {
   const eventTime = new Date(eventDate).getTime();
   const currentTime = new Date().getTime();
+
   const timeDifference = currentTime - eventTime;
 
   const seconds = Math.floor(timeDifference / 1000);
@@ -29,21 +33,16 @@ function calculateTimeDifference(eventDate: string) {
 }
 
 const LiveWidget = ({ liveEvents }: Props) => {
-  // Extract keyEvent and relatedArticles from liveEvents
-  const { keyEvent, relatedArticles } = liveEvents[0];
-
-  // Combine keyEvent and relatedArticles arrays and sort by date in descending order
-  const allEvents = [...(keyEvent || []), ...(relatedArticles || [])].sort(
-    (a, b) => new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime(),
-  );
-
-  // Select the most recent items
-  const sortedEvents = allEvents.slice(0, 12);
+  // Check if liveEvents has any items and return nothing if empty
+  if (liveEvents.length === 0) {
+    return;
+  }
 
   return (
     <div>
       <hr className='mb-8 border-untele' />
       <div className='gap-x-10 gap-y-12 px-4 pb-4'>
+        {/* Map over active liveEvents that are passed from the main page */}
         {liveEvents.map((liveEvent) => (
           <div
             className='flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0'
@@ -53,12 +52,14 @@ const LiveWidget = ({ liveEvents }: Props) => {
             <div className='flex flex-1 flex-col justify-between lg:w-1/3'>
               {/* Image  */}
               <div className='relative h-80 drop-shadow-xl'>
-                <Image
-                  className='rounded-md object-cover object-left lg:object-center'
-                  src={urlForImage(liveEvent.mainImage).url()}
-                  fill
-                  alt='Post Main Image'
-                />
+                {liveEvent.mainImage && (
+                  <Image
+                    className='rounded-md object-cover object-left lg:object-center'
+                    src={urlForImage(liveEvent.mainImage).url()}
+                    fill
+                    alt='Post Main Image'
+                  />
+                )}
               </div>
 
               {/* Read More  */}
@@ -104,20 +105,28 @@ const LiveWidget = ({ liveEvents }: Props) => {
 
             {/* Timeline */}
             <div className='lg:w-2/5'>
+              {/* Proceed with mapping over keyEvent and relatedArticles */}
               {liveEvent.keyEvent && liveEvent.relatedArticles ? (
-                // Proceed with mapping over keyEvent and relatedArticles
                 <ul className='custom-list'>
-                  {sortedEvents.map((event) => (
-                    <li
-                      key={event._id}
-                      className='li li::before mb-2 rounded-lg border border-untele bg-slate-700/30 text-sm custom-list'
-                    >
-                      {event.title} -{' '}
-                      <span className='relative -top-[1px] transform text-sm font-light text-untele'>
-                        {calculateTimeDifference(event.eventDate)}
-                      </span>
-                    </li>
-                  ))}
+                  {/* Sort events inside the map function */}
+                  {[...liveEvent.keyEvent, ...liveEvent.relatedArticles]
+                    .sort(
+                      (a, b) =>
+                        new Date(b.eventDate).getTime() -
+                        new Date(a.eventDate).getTime(),
+                    )
+                    .slice(0, 12)
+                    .map((event) => (
+                      <li
+                        key={event._id}
+                        className='li li::before mb-2 rounded-lg border border-untele bg-slate-700/30 text-sm custom-list'
+                      >
+                        {event.title} -{' '}
+                        <span className='relative -top-[1px] transform text-sm font-light text-untele'>
+                          {calculateTimeDifference(event.eventDate)}
+                        </span>
+                      </li>
+                    ))}
                 </ul>
               ) : (
                 // Handle the case when keyEvent or relatedArticles is missing
