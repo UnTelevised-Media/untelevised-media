@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && create-ads-txt",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "create-ads-txt": "create-ads-txt",
     "check": "prettier --check .",
     "format": "prettier --write .",
     "deploy": "vercel",

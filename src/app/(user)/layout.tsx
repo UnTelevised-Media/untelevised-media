@@ -66,20 +66,19 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang='en'>
-      <Script id='google-tag-manager' strategy='afterInteractive'>
-        {`
+      {process.env.NODE_ENV === 'production' && (
+        <>
+          <Script id='google-tag-manager' strategy='afterInteractive'>
+            {`
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','${GTM_ID}');
         `}
-      </Script>
-      {process.env.NODE_ENV === 'production' && (
-        <>
+          </Script>
           <GASVerify googleAdsenseId={process.env.GAS_ID} />
         </>
       )}
@@ -93,20 +92,27 @@ export default async function RootLayout({
           </PreviewProvider>
         ) : (
           <>
-            <GoogleAdSense publisherId='pub-7412827340538951' />
+            {process.env.NODE_ENV === 'production' && (
+              <>
+                <GoogleAdSense />
+              </>
+            )}
             <Header />
             <Nav />
             <Banner />
-
             {children}
             <Footer />
           </>
         )}
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
-          }}
-        />
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <noscript
+              dangerouslySetInnerHTML={{
+                __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
+              }}
+            />
+          </>
+        )}
       </body>
     </html>
   );
