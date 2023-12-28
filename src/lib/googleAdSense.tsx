@@ -10,6 +10,7 @@ export default function GASVerify({
     <Script
       async
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${googleAdsenseId}`}
+      strategy='lazyOnload'
       crossOrigin='anonymous'
     />
   );

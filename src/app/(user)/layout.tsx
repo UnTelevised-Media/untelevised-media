@@ -12,6 +12,7 @@ import GASVerify from '@/lib/googleAdSense';
 import Script from 'next/script';
 import Nav from '@/components/global/Nav';
 import Footer from '@/components/global/Footer';
+import { GoogleAdSense } from 'next-google-adsense';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -92,6 +93,7 @@ export default async function RootLayout({
           </PreviewProvider>
         ) : (
           <>
+            <GoogleAdSense publisherId='pub-7412827340538951' />
             <Header />
             <Nav />
             <Banner />
