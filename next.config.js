@@ -5,7 +5,10 @@
  **/
 const nextConfig = {
   images: {
-    domains: ['cloud.appwrite.io', 'cdn.sanity.io'],
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: 'cdn.sanity.io',
+    },],
   },
 
   typescript: {
