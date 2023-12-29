@@ -19,10 +19,11 @@ function Comments({ post }: Props) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<Input>();
 
   const onSubmit: SubmitHandler<Input> = (data) => {
-    client.create({
+    client
+      .create({
         _type: 'comment',
         post: {
           _type: 'reference',

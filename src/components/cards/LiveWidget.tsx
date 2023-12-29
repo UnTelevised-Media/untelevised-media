@@ -106,10 +106,15 @@ const LiveWidget = ({ liveEvents }: Props) => {
             {/* Timeline */}
             <div className='lg:w-2/5'>
               {/* Proceed with mapping over keyEvent and relatedArticles */}
-              {liveEvent.keyEvent && liveEvent.relatedArticles ? (
+              {(liveEvent.keyEvent && liveEvent.keyEvent.length > 0) ||
+              (liveEvent.relatedArticles &&
+                liveEvent.relatedArticles.length > 0) ? (
                 <ul className='custom-list'>
                   {/* Sort events inside the map function */}
-                  {[...liveEvent.keyEvent, ...liveEvent.relatedArticles]
+                  {[
+                    ...(liveEvent.keyEvent || []),
+                    ...(liveEvent.relatedArticles || []),
+                  ]
                     .sort(
                       (a, b) =>
                         new Date(b.eventDate).getTime() -
@@ -129,7 +134,7 @@ const LiveWidget = ({ liveEvents }: Props) => {
                     ))}
                 </ul>
               ) : (
-                // Handle the case when keyEvent or relatedArticles is missing
+                // Handle the case when both keyEvent and relatedArticles are missing or empty
                 <div className='mb-2 rounded-lg border border-untele bg-slate-700/30 text-sm'>
                   No events at this time, please stand by...
                 </div>

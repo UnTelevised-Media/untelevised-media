@@ -27,13 +27,7 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
-    }),
-    defineField({
-      name: 'eventTag',
-      title: 'Event Tag',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'eventTag' } }],
+      type: 'blockContent',
     }),
   ],
   preview: {
