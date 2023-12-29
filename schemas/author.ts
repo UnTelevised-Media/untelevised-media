@@ -63,6 +63,26 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'facebook',
+      title: 'Facebook',
+      type: 'string',
+    }),
+    defineField({
+      name: 'tiktok',
+      title: 'Tiktok',
+      type: 'string',
+    }),
+    defineField({
+      name: 'youtube',
+      title: 'Youtube',
+      type: 'string',
+    }),
+    defineField({
+      name: 'linkedin',
+      title: 'Linkedin',
+      type: 'string',
+    }),
+    defineField({
       name: 'website',
       title: 'Website',
       type: 'string',

@@ -5,7 +5,15 @@ import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/c/RichTextComponents';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
-import { FaGlobe, FaInstagram, FaTwitter } from 'react-icons/fa';
+import {
+  FaFacebook,
+  FaGlobe,
+  FaInstagram,
+  FaLinkedin,
+  FaTiktok,
+  FaTwitter,
+  FaYoutube,
+} from 'react-icons/fa';
 import Link from 'next/link';
 
 type Props = {
@@ -14,7 +22,9 @@ type Props = {
   };
 };
 
-export const revalidate = 60 * 60 * 24 * 7;
+// export const revalidate = 60 * 60 * 24 * 7;
+export const revalidate = 15;
+
 export async function generateStaticParams() {
   const query = groq`*[_type=='author']
   {
@@ -42,6 +52,10 @@ async function Author({ params: { slug } }: Props) {
           twitter,
           instagram,
           website,
+          facebook,
+          youtube,
+          linkedin,
+          tiktok
         },
       },
     }`;
@@ -53,8 +67,8 @@ async function Author({ params: { slug } }: Props) {
   return (
     <>
       <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
-      <section className='py-4 mb-6'>
-        <div className='mx-auto flex max-w-4xl flex-col justify-center rounded-md border bg-slate-400 border-untele/80 text-slate-900 shadow-md'>
+      <section className='mb-6 py-4'>
+        <div className='mx-auto flex max-w-4xl flex-col justify-center rounded-md border border-untele/80 bg-slate-400 text-slate-900 shadow-md'>
           <div className='flex flex-row space-x-18 py-4'>
             <div>
               <Image
@@ -71,6 +85,11 @@ async function Author({ params: { slug } }: Props) {
                 {author.title}
               </h3>
               <div className='flex flex-row space-x-4 text-untele/70'>
+                {author.website && (
+                  <Link href={author.website}>
+                    <FaGlobe />
+                  </Link>
+                )}
                 {author.twitter && (
                   <Link href={author.twitter}>
                     <FaTwitter />
@@ -81,9 +100,24 @@ async function Author({ params: { slug } }: Props) {
                     <FaInstagram />
                   </Link>
                 )}
-                {author.website && (
-                  <Link href={author.website}>
-                    <FaGlobe />
+                {author.facebook && (
+                  <Link href={author.facebook}>
+                    <FaFacebook />
+                  </Link>
+                )}
+                {author.youtube && (
+                  <Link href={author.youtube}>
+                    <FaYoutube />
+                  </Link>
+                )}
+                {author.tiktok && (
+                  <Link href={author.tiktok}>
+                    <FaTiktok />
+                  </Link>
+                )}
+                {author.linkedin && (
+                  <Link href={author.linkedin}>
+                    <FaLinkedin />
                   </Link>
                 )}
               </div>
