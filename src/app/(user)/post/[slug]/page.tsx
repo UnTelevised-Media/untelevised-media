@@ -55,16 +55,18 @@ async function Article({ params: { slug } }: Props) {
       <article className='mx-auto max-w-[95vw] pb-28 md:max-w-[85vw] lg:px-10'>
         <section className='space-y-2 rounded-md border border-untele/80 text-slate-200 shadow-md'>
           <div className='relative flex min-h-96 flex-col justify-between md:flex-row'>
-            <div className='absolute top-0 h-full w-full p-10 opacity-10 blur-sm'>
+            <div className='absolute top-0 h-full w-full p-10 opacity-25 blur-sm'>
+              {/* Header Image  */}
               <Image
-                className='mx-auto object-cover object-center'
+                className='mx-auto object-cover object-center -z-1'
                 src={urlForImage(post.mainImage).url()}
                 fill
                 alt=''
               />
             </div>
 
-            <section className='w-full bg-untele/50 p-5'>
+            {/* Header Info  */}
+            <section className='w-full bg-untele/40 p-5 relative'>
               <div className='flex flex-col justify-between md:flex-row'>
                 <div className='space-y-2'>
                   <h1 className='text-3xl font-bold'>{post.title}</h1>
@@ -79,7 +81,7 @@ async function Article({ params: { slug } }: Props) {
                     </p>
                   </div>
                   <ClientSideRoute route={`/author/${post.author.slug?.current}`}>
-                    <div className='flex items-center justify-start space-x-3 pb-2'>
+                    <div className='flex items-center justify-start space-x-3 py-2'>
                       <Image
                         className='rounded-full object-cover object-center'
                         src={urlForImage(post.author.image).url()}
