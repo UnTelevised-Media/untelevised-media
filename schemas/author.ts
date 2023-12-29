@@ -87,6 +87,11 @@ export default defineType({
       title: 'Website',
       type: 'string',
     }),
+    defineField({
+      name: 'email',
+      title: 'Email',
+      type: 'string',
+    }),
   ],
   preview: {
     select: {

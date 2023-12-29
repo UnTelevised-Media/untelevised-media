@@ -6,6 +6,7 @@ import { RichTextComponents } from '@/c/RichTextComponents';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
 import {
+  FaEnvelope,
   FaFacebook,
   FaGlobe,
   FaInstagram,
@@ -59,6 +60,18 @@ async function Author({ params: { slug } }: Props) {
         },
       },
     }`;
+
+  const queryPost = groq`
+  *[_type=='post'] {
+    ...,
+    author->,
+    publistedAt,
+    categories[]->,
+  } 
+  | order(_createdAt desc)
+`;
+
+  const posts = await client.fetch(queryPost);
 
   const author: any = await client.fetch(query, { slug });
 
@@ -120,6 +133,11 @@ async function Author({ params: { slug } }: Props) {
                     <FaLinkedin />
                   </Link>
                 )}
+                {author.email && (
+                  <Link href={`mailto:${author.email}`}>
+                    <FaEnvelope />
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -135,6 +153,54 @@ async function Author({ params: { slug } }: Props) {
               </div>
             </div>
           )}
+        </div>
+      </section>
+      <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
+
+      {/* Authored Articles  */}
+      <section className='mx-18 my-12'>
+        <h1 className='text-3xl font-bold'>Latest Articles</h1>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 '>
+          {posts
+            .filter((post: Post) => post.author?.slug.current === slug) // Filter by author slug
+            .map((post: Post) => {
+              const date = new Date(post._createdAt);
+              const formattedDate = date.toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              });
+
+              return (
+                <Link
+                  key={post._id}
+                  href={`/post/${post.slug.current}`}
+                  className='flex flex-col justify-between rounded-md border border-untele/80 bg-slate-400 p-4 text-slate-900 shadow-md'
+                >
+                  <div className='flex flex-row space-x-4'>
+                    <Image
+                      src={urlForImage(post.mainImage).url()}
+                      width={320}
+                      height={320}
+                      alt='image'
+                    />
+                    <div className='flex flex-col space-y-2'>
+                      <h3 className='text-xl font-semibold'>{post.title}</h3>
+                      <p>{formattedDate}</p>
+                      {post.categories &&
+                        post.categories.map((category) => (
+                          <div
+                            key={category._id}
+                            className='max-w-[160px] rounded-xl border border-untele bg-slate-900/80 px-5 py-2 text-center text-xs font-semibold text-untele lg:text-sm'
+                          >
+                            <p>{category.title}</p>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
         </div>
       </section>
     </>
