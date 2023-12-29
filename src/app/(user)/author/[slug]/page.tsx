@@ -75,8 +75,6 @@ async function Author({ params: { slug } }: Props) {
 
   const author: any = await client.fetch(query, { slug });
 
-  console.log('Author Data:', author);
-
   return (
     <>
       <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
