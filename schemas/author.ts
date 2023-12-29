@@ -6,11 +6,6 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'name',
-      title: 'Name',
-      type: 'string',
-    }),
-    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -18,6 +13,11 @@ export default defineType({
         source: 'name',
         maxLength: 96,
       },
+    }),
+    defineField({
+      name: 'name',
+      title: 'Name',
+      type: 'string',
     }),
     defineField({
       name: 'image',
@@ -35,6 +35,11 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'title',
+      title: 'Job Title',
+      type: 'string',
+    }),
+    defineField({
       name: 'bio',
       title: 'Bio',
       type: 'array',
@@ -46,6 +51,21 @@ export default defineType({
           lists: [],
         },
       ],
+    }),
+    defineField({
+      name: 'twitter',
+      title: 'Twitter',
+      type: 'string',
+    }),
+    defineField({
+      name: 'instagram',
+      title: 'Instagram',
+      type: 'string',
+    }),
+    defineField({
+      name: 'website',
+      title: 'Website',
+      type: 'string',
     }),
   ],
   preview: {

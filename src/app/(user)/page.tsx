@@ -36,7 +36,7 @@ const queryLiveEvent = groq`
   | order(_createdAt desc)
 `;
 
-export const revalidate = 180;
+export const revalidate = 120;
 
 export default async function HomePage() {
   if (draftMode().isEnabled) {

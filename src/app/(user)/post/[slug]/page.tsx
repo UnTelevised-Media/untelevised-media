@@ -7,7 +7,7 @@ import SocialShare from '@/c/SocialShare';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
 // import Comments from '@/c/post/Comments';
-import LargeAdCard from '@/components/googleAds/LargeAdCard';
+
 export { generateMetadata } from '@/u/generateMetadata';
 
 type Props = {
@@ -117,7 +117,7 @@ async function Article({ params: { slug } }: Props) {
         {process.env.NODE_ENV === 'production' && (
           <>
             {/* <GATag googleAnalyticsId={process.env.GA4_ID} /> */}
-            <LargeAdCard googleAdsenseId={process.env.GAS_ID} />
+            {/* <LargeAdCard googleAdsenseId={process.env.GAS_ID} /> */}
           </>
         )}
         <div className='mt-4 flex justify-center'>
