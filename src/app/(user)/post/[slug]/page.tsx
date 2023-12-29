@@ -6,8 +6,10 @@ import { RichTextComponents } from '@/c/RichTextComponents';
 import SocialShare from '@/c/SocialShare';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/u/urlForImage';
+import Link from 'next/link';
+import ClientSideRoute from '@/components/ClientSideRoute';
 // import Comments from '@/c/post/Comments';
-import LargeAdCard from '@/components/googleAds/LargeAdCard';
+
 export { generateMetadata } from '@/u/generateMetadata';
 
 type Props = {
@@ -17,7 +19,6 @@ type Props = {
 };
 
 export const revalidate = 120;
-
 
 export async function generateStaticParams() {
   const query = groq`*[_type=='post']
@@ -53,17 +54,19 @@ async function Article({ params: { slug } }: Props) {
       <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
       <article className='mx-auto max-w-[95vw] pb-28 md:max-w-[85vw] lg:px-10'>
         <section className='space-y-2 rounded-md border border-untele/80 text-slate-200 shadow-md'>
-          <div className='min-h-96 relative flex flex-col justify-between md:flex-row'>
-            <div className='absolute top-0 h-full w-full p-10 opacity-10 blur-sm'>
+          <div className='relative flex min-h-96 flex-col justify-between md:flex-row'>
+            <div className='absolute top-0 h-full w-full p-10 opacity-25 blur-sm'>
+              {/* Header Image  */}
               <Image
-                className='mx-auto object-cover object-center'
+                className='mx-auto object-cover object-center -z-1'
                 src={urlForImage(post.mainImage).url()}
                 fill
                 alt=''
               />
             </div>
 
-            <section className='w-full bg-untele/50 p-5'>
+            {/* Header Info  */}
+            <section className='w-full bg-untele/40 p-5 relative'>
               <div className='flex flex-col justify-between md:flex-row'>
                 <div className='space-y-2'>
                   <h1 className='text-3xl font-bold'>{post.title}</h1>
@@ -77,18 +80,20 @@ async function Article({ params: { slug } }: Props) {
                       })}
                     </p>
                   </div>
-                  <div className='flex items-center justify-start space-x-3 pb-2'>
-                    <Image
-                      className='rounded-full object-cover object-center'
-                      src={urlForImage(post.author.image).url()}
-                      width={50}
-                      height={50}
-                      alt=''
-                    />
-                    <h3 className='text-lg font-semibold'>
-                      {post.author.name}
-                    </h3>
-                  </div>
+                  <ClientSideRoute route={`/author/${post.author.slug?.current}`}>
+                    <div className='flex items-center justify-start space-x-3 py-2'>
+                      <Image
+                        className='rounded-full object-cover object-center'
+                        src={urlForImage(post.author.image).url()}
+                        width={50}
+                        height={50}
+                        alt=''
+                      />
+                      <h3 className='text-lg font-semibold'>
+                        {post.author.name}
+                      </h3>
+                    </div>
+                  </ClientSideRoute>
                 </div>
               </div>
 
@@ -117,7 +122,7 @@ async function Article({ params: { slug } }: Props) {
         {process.env.NODE_ENV === 'production' && (
           <>
             {/* <GATag googleAnalyticsId={process.env.GA4_ID} /> */}
-            <LargeAdCard googleAdsenseId={process.env.GAS_ID} />
+            {/* <LargeAdCard googleAdsenseId={process.env.GAS_ID} /> */}
           </>
         )}
         <div className='mt-4 flex justify-center'>

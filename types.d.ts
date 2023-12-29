@@ -26,8 +26,7 @@ interface KeyEvent extends Base {
   title: string;
   slug: Slug;
   eventDate: string;
-  description: string;
-  eventTag: EventTag[];
+  description: Block[];
 }
 
 interface Post extends Base {

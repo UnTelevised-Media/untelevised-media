@@ -180,8 +180,16 @@ async function Article({ params: { slug } }: Props) {
                       <h4 className='text-sm text-untele/70'>
                         {calculateTimeDifference(event.eventDate)}
                       </h4>
-                      <p className='text-sm'>{event.description}</p>
-                      {liveEvent.relatedArticles.includes(event) && (
+                      {liveEvent.relatedArticles?.includes(event) ? (
+                        <p className='text-sm'>{event.description}</p>
+                      ) : (
+                        <PortableText
+                          value={event.description}
+                          components={RichTextComponents}
+                        />
+                      )}
+
+                      {liveEvent.relatedArticles?.includes(event) && (
                         <Link
                           href={`/post/${event.slug.current}`}
                           className='cursor-pointer self-end text-blue-500 underline hover:opacity-80'
