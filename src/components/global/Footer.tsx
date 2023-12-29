@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     // Footer
     <div className='flex flex-col space-y-10 bg-slate-600 px-2 py-3'>
-      <div className='flex flex-row space-x-6'>
+      <div className='flex flex-row space-x-6 justify-between px-12'>
         {/* News Sections & About  */}
         <div className='flex flex-col'>
           <p className='text-slate-950'>News Categories</p>
@@ -64,7 +64,7 @@ const Footer = () => {
       <div className='flex'>
         {/* Copywrite  */}
         <p className=''>
-          © Copyright 2023 UnTelevised Media™. All Rights Reserved.
+          © Copyright 2023 UnTelevised Media™ All Rights Reserved.
         </p>
       </div>
     </div>
