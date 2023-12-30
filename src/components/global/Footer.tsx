@@ -1,54 +1,208 @@
 import Link from 'next/link';
-import React from 'react';
+import { groq } from 'next-sanity';
+import { client } from '@/lib/sanity.client';
+import {
+  FaYoutube,
+  FaTwitch,
+  FaTiktok,
+  FaTwitter,
+  FaFacebook,
+  FaInstagram,
+  FaReddit,
+  FaDiscord,
+} from 'react-icons/fa';
+import { FaThreads } from 'react-icons/fa6';
+import { MdLiveTv } from 'react-icons/md';
+import { RiKickLine } from 'react-icons/ri';
+import ClientSideRoute from '../ClientSideRoute';
 
-const Footer = () => {
+const categoryQuery = groq`
+  *[_type == "category"] {
+    _id,
+    title,
+    order
+  }  
+`;
+
+const policyQuery = groq`
+  *[_type == "policies"] {
+    _id,
+    title,
+    order
+  }  
+`;
+
+async function Footer() {
+  const categories: any = await client.fetch(categoryQuery);
+  const formatCategoryTitle = (title) => {
+    // Convert to lowercase
+    let formattedTitle = title.toLowerCase();
+
+    // Remove symbols and spaces, and replace them with a dash
+    formattedTitle = formattedTitle.replace(/[^a-z0-9]+/g, '-');
+
+    return formattedTitle;
+  };
+
+  const policies: any = await client.fetch(policyQuery);
+  const formatPolicyTitle = (title) => {
+    // Convert to lowercase
+    let formattedName = title.toLowerCase();
+
+    // Remove symbols and spaces, and replace them with a dash
+    formattedName = formattedName.replace(/[^a-z0-9]+/g, '-');
+
+    return formattedName;
+  };
+
   return (
-    // Footer
     <div className='flex flex-col space-y-10 bg-slate-600 px-2 py-3'>
-      <div className='flex flex-row space-x-6 justify-between px-12'>
+      <div className='flex flex-row justify-between space-x-6 px-12'>
         {/* News Sections & About  */}
-        <div className='flex flex-col'>
-          <p className='text-slate-950'>News Categories</p>
+        <div className='flex flex-col text-slate-900'>
+          <h4 className='pb-2 text-xl font-semibold text-slate-950 underline'>
+            News Categories
+          </h4>
+          {categories
+            .sort((a, b) => a.order - b.order)
+            .map((category) => (
+              <ClientSideRoute
+                route={`/category/${formatCategoryTitle(category.title)}`}
+                key={category._id}
+              >
+                {category.title}
+              </ClientSideRoute>
+            ))}
         </div>
 
         {/* Media */}
-        <div className='flex flex-col'>
-          <p className='text-slate-950'>Media</p>
+        <div className='flex flex-col text-slate-900'>
+          <h4 className='pb-2 text-xl font-semibold text-slate-950 underline'>
+            Media
+          </h4>
           <Link href='/'>Photo</Link>
           <Link href='/'>Video</Link>
           <Link href='/'>Investigations</Link>
           <Link href='/'>RSS</Link>
         </div>
+
         {/* Social Links */}
-        <div className='flex flex-col'>
-          <p className='text-slate-950'>Social Links</p>
-          <Link href='/'>Youtube</Link>
-          <Link href='/'>Twitch</Link>
-          <Link href='/'>TikTok</Link>
-          <Link href='/'>Twitter/X</Link>
-          <Link href='/'>Threads</Link>
-          <Link href='/'>Facebook</Link>
-          <Link href='/'>Instagram</Link>
-          <Link href='/'>Reddit</Link>
-          <Link href='/'>Discord</Link>
-          <Link href='/'>D-Live</Link>
-          <Link href='/'>Kick</Link>
+        <div className='flex flex-col text-slate-900'>
+          <h4 className='pb-2 text-xl font-semibold text-slate-950 underline'>
+            Social Links
+          </h4>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://www.youtube.com/@UnTelevised'
+            target='_blank'
+          >
+            <FaYoutube className='h-4 w-4' />
+            Youtube
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://www.twitch.tv/untelevised'
+            target='_blank'
+          >
+            <FaTwitch className='h-4 w-4' />
+            Twitch
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://www.tiktok.com/@untelevisedmedia'
+            target='_blank'
+          >
+            <FaTiktok className='h-4 w-4' />
+            TikTok
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://twitter.com/UnTelevisedLive'
+            target='_blank'
+          >
+            <FaTwitter className='h-4 w-4' />
+            Twitter/X
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://www.threads.net/@untelevised.media'
+            target='_blank'
+          >
+            <FaThreads className='h-4 w-4' />
+            Threads
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://www.facebook.com/UnTelevisedLive'
+            target='_blank'
+          >
+            <FaFacebook className='h-4 w-4' />
+            Facebook
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://www.instagram.com/untelevised.media/'
+            target='_blank'
+          >
+            <FaInstagram className='h-4 w-4' />
+            Instagram
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://www.reddit.com/r/UnTelevisedMedia/'
+            target='_blank'
+          >
+            <FaReddit className='h-4 w-4' />
+            Reddit
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://discord.gg/w9vMH5zr6j'
+            target='_blank'
+          >
+            <FaDiscord className='h-4 w-4' />
+            Discord
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://dlive.tv/UnTelevised'
+            target='_blank'
+          >
+            <MdLiveTv className='h-4 w-4' />
+            D-Live
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://kick.com/untelevised'
+            target='_blank'
+          >
+            <RiKickLine className='h-4 w-4' />
+            Kick
+          </Link>
         </div>
+
         {/* Principles & Policies  */}
-        <div className='flex flex-col'>
-          <p className='text-slate-950'>Principles & Policies</p>
-          <Link href='/'>Terms of Service</Link>
-          <Link href='/'>Licensing Terms</Link>
-          <Link href='/'>Privacy Policy</Link>
-          <Link href='/'>Cookie Settings</Link>
-          <Link href='/'>RSS Terms of Service</Link>
-          <Link href='/'>Ad Choices</Link>
-          <Link href='/'>Discussion Policy</Link>
-          <Link href='/'>Submissions Policy</Link>
+        <div className='flex flex-col text-slate-900'>
+          <h4 className='pb-2 text-xl font-semibold text-slate-950 underline'>
+            Policies
+          </h4>
+          {policies
+            .sort((a, b) => a.order - b.order)
+            .map((policy) => (
+              <ClientSideRoute
+                route={`/policies/${formatPolicyTitle(policy.title)}`}
+                key={policy._id}
+              >
+                {policy.title}
+              </ClientSideRoute>
+            ))}
         </div>
+
         {/* About */}
-        <div className='flex flex-col'>
-          <p className='text-slate-950'>About</p>
+        <div className='flex flex-col text-slate-900'>
+          <h4 className='pb-2 text-xl font-semibold text-slate-950 underline'>
+            About
+          </h4>
           <Link href='/'>About UnTelevised</Link>
           <Link href='/'>Meet Our Staff</Link>
           <Link href='/'>Join Our Team</Link>
@@ -63,12 +217,12 @@ const Footer = () => {
       {/* Copywrite Notice */}
       <div className='flex'>
         {/* Copywrite  */}
-        <p className=''>
+        <p className='text-sm font-light text-slate-950'>
           © Copyright 2023 UnTelevised Media™ All Rights Reserved.
         </p>
       </div>
     </div>
   );
-};
+}
 
 export default Footer;
