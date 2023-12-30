@@ -221,6 +221,7 @@ async function Footer() {
           <Link href='/'>About UnTelevised</Link>
           <Link href='/'>Meet Our Staff</Link>
           <Link href='/'>Join Our Team</Link>
+          <Link href='/donate'>Donate/Support Our Outlet</Link>
           <Link href='/'>Contact the Newsroom</Link>
           <Link href='/'>Licensing & Syndication</Link>
           <Link href='/'>Advertise</Link>

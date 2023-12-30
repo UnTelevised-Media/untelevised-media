@@ -46,11 +46,17 @@ const Donate = () => {
       </div>
       If you wish to make a larger contribution or donate gear and equipment
       please contact us via email @{' '}
-      <a
+      {/* <a
         href='mailto:donate@untelevised.media'
-        className='text-untele underline'
+        className='text-untele underline mb-4'
       >
         Donate@UnTelevised.Media
+      </a> */}
+      <a
+        href='mailto:UnTelevisedMedia.Live@gmail.com'
+        className='text-untele underline mb-4'
+      >
+        UnTelevisedMedia.Live@gmail.com
       </a>
     </div>
     </>
