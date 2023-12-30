@@ -57,7 +57,7 @@ async function Footer() {
 
   return (
     <div className='flex flex-col space-y-10 bg-slate-600 px-2 py-3'>
-      <div className='flex justify-between space-y-2 px-12 flex-col md:flex-row md:space-x-6 md:space-y-0'>
+      <div className='flex flex-col justify-between space-y-2 px-12 md:flex-row md:space-x-6 md:space-y-0'>
         {/* News Sections & About  */}
         <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
           News Categories
@@ -231,10 +231,13 @@ async function Footer() {
       </div>
 
       {/* Copywrite Notice */}
-      <div className='flex'>
+      <div className='flex justify-between'>
         {/* Copywrite  */}
         <p className='text-sm font-light text-slate-950'>
           © Copyright 2023 UnTelevised Media™ All Rights Reserved.
+        </p>
+        <p className='text-sm font-light text-slate-600'>
+          1156 Humboldt St, Denver, CO 80218
         </p>
       </div>
     </div>
