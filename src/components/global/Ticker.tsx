@@ -46,7 +46,7 @@ export default async function Ticker() {
       <div className='flex w-full overflow-hidden rounded-md border border-untele/30 bg-static shadow-lg'>
         <div className='marquee flex h-12 items-center justify-center '>
           <div className='track'>
-            <div className='text-3xl font-bold'>
+            <div className='text-xl lg:text-3xl font-bold'>
               {allTitles.map((title, index) => (
                 <span key={index}>
                   {title.title} •{' '}

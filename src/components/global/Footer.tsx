@@ -57,10 +57,13 @@ async function Footer() {
 
   return (
     <div className='flex flex-col space-y-10 bg-slate-600 px-2 py-3'>
-      <div className='flex flex-row justify-between space-x-6 px-12'>
+      <div className='flex justify-between space-y-2 px-12 sm:flex-col md:flex-row md:space-x-6 md:space-y-0'>
         {/* News Sections & About  */}
-        <div className='flex flex-col text-slate-900'>
-          <h4 className='pb-2 text-xl font-semibold text-slate-950 underline'>
+        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
+          News Categories
+        </h4>
+        <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
+          <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
             News Categories
           </h4>
           {categories
@@ -76,8 +79,11 @@ async function Footer() {
         </div>
 
         {/* Media */}
-        <div className='flex flex-col text-slate-900'>
-          <h4 className='pb-2 text-xl font-semibold text-slate-950 underline'>
+        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
+          Media
+        </h4>
+        <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
+          <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
             Media
           </h4>
           <Link href='/'>Photo</Link>
@@ -87,9 +93,12 @@ async function Footer() {
         </div>
 
         {/* Social Links */}
-        <div className='flex flex-col text-slate-900'>
-          <h4 className='pb-2 text-xl font-semibold text-slate-950 underline'>
-            Social Links
+        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
+          Social Media Platforms
+        </h4>
+        <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
+          <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
+            Social Media Platforms
           </h4>
           <Link
             className='flex items-center gap-x-2'
@@ -182,8 +191,11 @@ async function Footer() {
         </div>
 
         {/* Principles & Policies  */}
-        <div className='flex flex-col text-slate-900'>
-          <h4 className='pb-2 text-xl font-semibold text-slate-950 underline'>
+        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
+          Policies
+        </h4>
+        <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
+          <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
             Policies
           </h4>
           {policies
@@ -199,8 +211,11 @@ async function Footer() {
         </div>
 
         {/* About */}
-        <div className='flex flex-col text-slate-900'>
-          <h4 className='pb-2 text-xl font-semibold text-slate-950 underline'>
+        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
+          About
+        </h4>
+        <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
+          <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
             About
           </h4>
           <Link href='/'>About UnTelevised</Link>
