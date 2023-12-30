@@ -57,7 +57,7 @@ async function Footer() {
 
   return (
     <div className='flex flex-col space-y-10 bg-slate-600 px-2 py-3'>
-      <div className='flex justify-between space-y-2 px-12 sm:flex-col md:flex-row md:space-x-6 md:space-y-0'>
+      <div className='flex justify-between space-y-2 px-12 flex-col md:flex-row md:space-x-6 md:space-y-0'>
         {/* News Sections & About  */}
         <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
           News Categories
@@ -194,7 +194,7 @@ async function Footer() {
         <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
           Policies
         </h4>
-        <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
+        <div className='flex flex-row flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
           <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
             Policies
           </h4>

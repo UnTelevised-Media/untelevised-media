@@ -79,8 +79,8 @@ async function Author({ params: { slug } }: Props) {
     <>
       <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
       <section className='mb-6 py-4'>
-        <div className='mx-auto flex max-w-4xl flex-col justify-center rounded-md border border-untele/80 bg-slate-400 text-slate-900 shadow-md'>
-          <div className='flex flex-row space-x-18 px-6 py-4'>
+        <div className='mx-4 md:mx-auto flex max-w-4xl flex-col justify-center rounded-md border border-untele/80 bg-slate-400 text-slate-900 shadow-md'>
+          <div className='flex flex-row space-x-8 md:space-x-18 px-6 py-4'>
             <div className='rounded-md border border-untele/80 shadow-md'>
               <Image
                 src={urlForImage(author.image).url()}
@@ -92,7 +92,7 @@ async function Author({ params: { slug } }: Props) {
             </div>
 
             <div className='flex flex-col space-y-2'>
-              <h1 className='text-4xl font-bold'>{author.name}</h1>
+              <h1 className='text-2xl md:text-3xl lg:text-4xl font-bold'>{author.name}</h1>
               <h3 className='text-xl font-semibold text-slate-700'>
                 {author.title}
               </h3>
@@ -157,7 +157,9 @@ async function Author({ params: { slug } }: Props) {
 
       {/* Authored Articles  */}
       <section className='mx-18 my-12'>
-        <h1 className='text-3xl font-bold mb-4 pb-2 border-b border-untele'>Latest Articles</h1>
+        <h1 className='mb-4 border-b border-untele pb-2 text-3xl font-bold'>
+          Latest Articles
+        </h1>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 '>
           {posts
             .filter((post: Post) => post.author?.slug.current === slug) // Filter by author slug
