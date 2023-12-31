@@ -8,7 +8,7 @@ const Logo = (props: any) => {
         src='/Logo.png'
         width={40}
         height={40}
-        alt=''
+        alt={title}
         className='object-cover'
       />
       {renderDefault && <>{renderDefault(props)}</>}

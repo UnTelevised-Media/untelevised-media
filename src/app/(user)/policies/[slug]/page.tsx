@@ -1,5 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-import Image from 'next/image';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/c/RichTextComponents';

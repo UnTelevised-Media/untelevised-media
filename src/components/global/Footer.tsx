@@ -218,15 +218,23 @@ async function Footer() {
           <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
             About
           </h4>
-          <Link href='/'>About UnTelevised</Link>
-          <Link href='/'>Meet Our Staff</Link>
-          <Link href='/'>Join Our Team</Link>
+          <Link href='/about'>About UnTelevised</Link>
+          <Link href='/staff'>Meet Our Staff</Link>
+          <Link href='https://forms.gle/nB9utZPukUCaCb179' target='_blank'>
+            Join Our Team
+          </Link>
           <Link href='/donate'>Donate/Support Our Outlet</Link>
-          <Link href='/'>Contact the Newsroom</Link>
-          <Link href='/'>Licensing & Syndication</Link>
-          <Link href='/'>Advertise</Link>
-          <Link href='/'>Send a News Tip</Link>
-          <Link href='/'>Request a Correction</Link>
+          <Link href='mailto:newsroom@untelevised.live'>
+            Contact the Newsroom
+          </Link>
+          <Link href='mailto:newsroom@untelevised.live'>
+            Licensing & Syndication
+          </Link>
+          <Link href='mailto:newsroom@untelevised.live'>Advertise</Link>
+          <Link href='mailto:newsroom@untelevised.live'>Send a News Tip</Link>
+          <Link href='mailto:newsroom@untelevised.live'>
+            Request a Correction
+          </Link>
         </div>
       </div>
 
@@ -236,7 +244,7 @@ async function Footer() {
         <p className='text-sm font-light text-slate-950'>
           © Copyright 2023 UnTelevised Media™ All Rights Reserved.
         </p>
-        <p className='text-sm font-light text-slate-600'>
+        <p className='text-sm font-extralight text-slate-600'>
           1156 Humboldt St, Denver, CO 80218
         </p>
       </div>
