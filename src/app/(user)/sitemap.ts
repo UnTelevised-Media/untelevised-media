@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<
   const postURLs = allNews
     .filter((item) => item._type === 'post')
     .map((post) => ({
-      url: `https://www.untelevised.media//post/${post.slug.current}`,
+      url: `https://www.untelevised.media/post/${post.slug.current}`,
       lastModified: post._updatedAt,
       changeFrequency: 'daily' as const,
       priority: 0.5,
@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<
   const liveEventURLs = allNews
     .filter((item) => item._type === 'liveEvent')
     .map((liveEvent) => ({
-      url: `https://www.untelevised.media//live-event/${liveEvent.slug.current}`,
+      url: `https://www.untelevised.media/live-event/${liveEvent.slug.current}`,
       lastModified: liveEvent._updatedAt, 
       changeFrequency: 'daily' as const,
       priority: 0.5,
@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<
     ...postURLs,
     ...liveEventURLs,
     {
-      url: 'https://www.untelevised.media//',
+      url: 'https://www.untelevised.media/',
       lastModified: new Date(),
       changeFrequency: 'hourly' as const,
       priority: 0.3,
