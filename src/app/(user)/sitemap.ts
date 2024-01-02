@@ -32,7 +32,7 @@ export default async function sitemap(): Promise<
     .map((liveEvent) => ({
       url: `https://www.untelevised.media/live-event/${liveEvent.slug.current}`,
       lastModified: liveEvent._updatedAt, 
-      changeFrequency: 'daily' as const,
+      changeFrequency: 'hourly' as const,
       priority: 0.5,
     }));
 
