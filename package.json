@@ -26,7 +26,7 @@
     "next": "14.0.4",
     "next-google-adsense": "^1.0.6",
     "next-sanity": "^7.0.5",
-    "postcss": "8.4.32",
+    "postcss": "8.4.33",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.49.2",
