@@ -1,10 +1,13 @@
-
 /* eslint-disable react/function-component-definition */
 import Script from 'next/script';
 
-export default function LargeAdCard({ googleAdsenseId }: { googleAdsenseId: string }) {
+export default function LargeAdCard({
+  googleAdsenseId,
+}: {
+  googleAdsenseId: string;
+}) {
   return (
-    <div className='flex w-full h-full'>
+    <div className='flex h-full w-full'>
       <ins
         className='adsbygoogle'
         style={{ display: 'block' }}
@@ -14,7 +17,9 @@ export default function LargeAdCard({ googleAdsenseId }: { googleAdsenseId: stri
         data-full-width-responsive='true'
       />
 
-      <Script id='GAS'>(adsbygoogle = window.adsbygoogle || []).push({});</Script>
+      <Script id='GAS'>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </Script>
     </div>
   );
 }

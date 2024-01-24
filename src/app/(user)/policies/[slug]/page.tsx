@@ -4,7 +4,6 @@ import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/c/RichTextComponents';
 import { client } from '@/l/sanity.client';
 
-
 type Props = {
   params: {
     slug: string;
@@ -39,17 +38,17 @@ async function Policies({ params: { slug } }: Props) {
       },
     }`;
 
-
-
-
   const policies = await client.fetch(query, { slug });
 
   return (
     <>
       <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
       <section className='mb-6 py-4'>
-        <div className='mx-auto flex max-w-4xl flex-col justify-center rounded-md border border-untele/80 bg-slate-400 text-slate-900 shadow-md px-4 py-6'>
-          <PortableText value={policies.description} components={RichTextComponents} />
+        <div className='mx-auto flex max-w-4xl flex-col justify-center rounded-md border border-untele/80 bg-slate-400 px-4 py-6 text-slate-900 shadow-md'>
+          <PortableText
+            value={policies.description}
+            components={RichTextComponents}
+          />
         </div>
       </section>
     </>

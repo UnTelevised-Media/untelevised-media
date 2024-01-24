@@ -39,18 +39,16 @@ export default async function Ticker() {
 
     const allTitles = [...keyEventTitles, ...postTitles].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-      );
+    );
 
     // Return JSX here, inside the try block
     return (
       <div className='flex w-full overflow-hidden rounded-md border border-untele/30 bg-static shadow-lg'>
         <div className='marquee flex h-12 items-center justify-center '>
           <div className='track'>
-            <div className='text-xl lg:text-3xl font-bold'>
+            <div className='text-xl font-bold lg:text-3xl'>
               {allTitles.map((title, index) => (
-                <span key={index}>
-                  {title.title} •{' '}
-                </span>
+                <span key={index}>{title.title} • </span>
               ))}
             </div>
           </div>

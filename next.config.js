@@ -5,10 +5,12 @@
  **/
 const nextConfig = {
   images: {
-    remotePatterns: [{
-      protocol: 'https',
-      hostname: 'cdn.sanity.io',
-    },],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
+    ],
   },
 
   typescript: {

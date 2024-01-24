@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-'use client'
+'use client';
 // Function to get window size
 export const getWindowSize = () => {
   if (typeof window !== 'undefined') {

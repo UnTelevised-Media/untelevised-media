@@ -10,7 +10,7 @@ type Props = {
 };
 
 function ArticleCardLg({ posts }: Props) {
-      return (
+  return (
     <div>
       <hr className='mb-8 border-untele' />
       <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
@@ -67,7 +67,7 @@ function ArticleCardLg({ posts }: Props) {
                   Read Article
                   <ArrowUpRightIcon className='group ml-2 h-4 w-4' />
                 </p>
-                
+
                 <ShareIcon className='mr-4 mt-4 h-6 w-6 transition-transform duration-200 ease-out hover:scale-110 hover:text-untele' />
               </div>
             </div>

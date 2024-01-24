@@ -11,7 +11,7 @@ type Props = {
 };
 
 // Define the generateMetadata function
-export async function generateMetadata({ params: {slug} }: Props ) {
+export async function generateMetadata({ params: { slug } }: Props) {
   // Fetch the post data based on the slug
   const query = groq`
     *[_type == "post" && slug.current == $slug][0] {

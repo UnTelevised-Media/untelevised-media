@@ -27,7 +27,10 @@ async function StaffPage() {
   return (
     <div className='flex flex-wrap justify-center space-x-3'>
       {sortedData.map((author) => (
-        <ClientSideRoute route={`/author/${author.slug?.current}`} key={author._id}>
+        <ClientSideRoute
+          route={`/author/${author.slug?.current}`}
+          key={author._id}
+        >
           <div className='flex max-w-72 flex-col  items-center justify-center space-y-2'>
             <div className='relative h-64 w-64 rounded-full border border-untele/80 object-contain shadow-md'>
               <Image
@@ -49,6 +52,5 @@ async function StaffPage() {
     </div>
   );
 }
-
 
 export default StaffPage;

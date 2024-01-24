@@ -92,11 +92,11 @@ export default async function RootLayout({
           </PreviewProvider>
         ) : (
           <>
-            {process.env.NODE_ENV === 'production' && (
+            {/* {process.env.NODE_ENV === 'production' && (
               <>
                 <GoogleAdSense />
               </>
-            )}
+            )} */}
             <Header />
             <Nav />
             <Banner />

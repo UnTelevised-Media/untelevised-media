@@ -36,8 +36,6 @@ export async function generateStaticParams() {
 }
 
 export default async function CategoryPage({ params: { slug } }: Props) {
-
-
   const posts = await client.fetch(queryPost, { slug });
 
   return (

@@ -118,5 +118,3 @@ interface Comment {
   _type: string;
   _updatedAt: string;
 }
-
-

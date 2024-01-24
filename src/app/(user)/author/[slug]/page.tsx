@@ -79,8 +79,8 @@ async function Author({ params: { slug } }: Props) {
     <>
       <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
       <section className='mb-6 py-4'>
-        <div className='mx-4 md:mx-auto flex max-w-4xl flex-col justify-center rounded-md border border-untele/80 bg-slate-400 text-slate-900 shadow-md'>
-          <div className='flex flex-row space-x-8 md:space-x-18 px-6 py-4'>
+        <div className='mx-4 flex max-w-4xl flex-col justify-center rounded-md border border-untele/80 bg-slate-400 text-slate-900 shadow-md md:mx-auto'>
+          <div className='flex flex-row space-x-8 px-6 py-4 md:space-x-18'>
             <div className='rounded-md border border-untele/80 shadow-md'>
               <Image
                 src={urlForImage(author.image).url()}
@@ -92,7 +92,9 @@ async function Author({ params: { slug } }: Props) {
             </div>
 
             <div className='flex flex-col space-y-2'>
-              <h1 className='text-2xl md:text-3xl lg:text-4xl font-bold'>{author.name}</h1>
+              <h1 className='text-2xl font-bold md:text-3xl lg:text-4xl'>
+                {author.name}
+              </h1>
               <h3 className='text-xl font-semibold text-slate-700'>
                 {author.title}
               </h3>

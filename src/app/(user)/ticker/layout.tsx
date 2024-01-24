@@ -7,12 +7,9 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title:
-    'UnTelevised Media - Breaking News Ticker ',
+  title: 'UnTelevised Media - Breaking News Ticker ',
   description: 'The Revolution will be UnTelevised',
-
 };
-
 
 export default async function RootLayout({
   children,

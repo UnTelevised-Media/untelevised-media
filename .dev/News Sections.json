@@ -49,14 +49,7 @@
       "Work Transformed",
       "Innovative Cities"
     ],
-    "Style": [
-      "Arts",
-      "Design",
-      "Fashion",
-      "Architecture",
-      "Luxury",
-      "Beauty"
-    ],
+    "Style": ["Arts", "Design", "Fashion", "Architecture", "Luxury", "Beauty"],
     "Travel": ["Destinations", "Food & Drink", "Stay"],
     "Recipes": ["Food"],
     "Sports": [

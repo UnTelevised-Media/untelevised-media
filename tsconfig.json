@@ -24,8 +24,8 @@
     "strictNullChecks": false,
     "plugins": [
       {
-        "name": "next"
-      }
+        "name": "next",
+      },
     ],
     "rootDir": "./",
     "baseUrl": ".",
@@ -40,9 +40,9 @@
       "#/*": ["./*"],
       "$/*": ["./schemas/*"],
       "matrix-js-sdk": ["node_modules/@types/matrix-js-sdk/index.d.ts"],
-      "react": ["node_modules/react"]
+      "react": ["node_modules/react"],
     },
-    "outDir": "./out"
+    "outDir": "./out",
   },
   "include": [
     "next-env.d.ts",
@@ -53,7 +53,7 @@
     "src/app/studio/[[...index]]/page.tsx",
     "src/loaders/resize-gif-loader.js",
     "build/types/**/*.ts",
-    "schemas/layout.tsx"
+    "schemas/layout.tsx",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

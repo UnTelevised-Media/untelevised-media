@@ -6,8 +6,9 @@ import { SanityDocument } from 'sanity';
 // Customise this function to show the correct URL based on the current document
 function getPreviewUrl(doc: SanityDocument) {
   return (doc as { slug?: { current?: string } })?.slug?.current
-    ? `${window.location.host}/${(doc as { slug?: { current?: string } })?.slug
-        ?.current}`
+    ? `${window.location.host}/${
+        (doc as { slug?: { current?: string } })?.slug?.current
+      }`
     : `${window.location.host}`;
 }
 

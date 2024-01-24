@@ -15,7 +15,7 @@ module.exports = {
     extend: {
       lineClamp: {
         '8': '8', // You can add more line clamp values here if needed
-        '15': '15', 
+        '15': '15',
       },
       colors: {
         untele: '#D70606',

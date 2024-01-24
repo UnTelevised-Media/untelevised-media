@@ -1,17 +1,11 @@
-
-
 const EventMap = () => {
-
-const sizes = {
-  xxl: { width: '1550px', height: '900px' },
-  xl: { width: '1150px', height: '800px' },
-  lg: { width: '940px', height: '600px' },
-  md: { width: '675px', height: '500px' },
-  sm: { width: '450px', height: '340px' },
-};
-
-
-
+  const sizes = {
+    xxl: { width: '1550px', height: '900px' },
+    xl: { width: '1150px', height: '800px' },
+    lg: { width: '940px', height: '600px' },
+    md: { width: '675px', height: '500px' },
+    sm: { width: '450px', height: '340px' },
+  };
 
   return (
     <>
