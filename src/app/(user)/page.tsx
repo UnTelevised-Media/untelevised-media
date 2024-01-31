@@ -5,6 +5,8 @@ import { groq } from 'next-sanity';
 import { client } from '@/lib/sanity.client';
 import ArticleCardLg from '@/components/cards/ArticleCardLg';
 import LiveWidget from '@/components/cards/LiveWidget';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const queryPost = groq`
   *[_type=='post'] {
@@ -59,6 +61,8 @@ export default async function HomePage() {
     <div className='mx-auto max-w-[95wv] md:max-w-[85vw]'>
       <LiveWidget liveEvents={currentLiveEvents} />{' '}
       <ArticleCardLg posts={posts} />
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
