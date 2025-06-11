@@ -1,4 +1,5 @@
 /* eslint-disable react/function-component-definition */
+// src/app/(user)/author/[slug]/page.tsx
 import Image from 'next/image';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
@@ -23,17 +24,26 @@ type Props = {
 export default async function Author({ params: { slug } }: Props) {
   const author = await getAuthorBySlug(slug);
 
+  if (!author) {
+    return (
+      <div className='mx-auto max-w-4xl p-8 text-center'>
+        <h1 className='text-3xl font-bold text-slate-900'>Author Not Found</h1>
+        <p className='mt-4 text-slate-600'>The requested author could not be found.</p>
+      </div>
+    );
+  }
+
   return (
     <>
-      <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
+      <hr className='border-untele mx-auto mb-8 max-w-[95wv] md:max-w-[85vw]' />
 
       {/* Author Information */}
-      <section className='mx-4 mb-6 flex max-w-4xl flex-col justify-center rounded-md border border-untele/80 bg-slate-400 py-4 text-slate-900 shadow-md md:mx-auto'>
+      <section className='border-untele/80 mx-4 mb-6 flex max-w-4xl flex-col justify-center rounded-md border bg-slate-400 py-4 text-slate-900 shadow-md md:mx-auto'>
         {/* Author Details  */}
         <div className='flex flex-row space-x-8 px-6 py-4 md:space-x-18'>
-          <div className='rounded-md border border-untele/80 shadow-md'>
+          <div className='border-untele/80 rounded-md border shadow-md'>
             <Image
-              src={author?.image ? urlForImage(author?.image as any).url() : ''}
+              src={author.image ? urlForImage(author.image as any).url() : ''}
               width={320}
               height={320}
               alt='image'
@@ -41,12 +51,8 @@ export default async function Author({ params: { slug } }: Props) {
             />
           </div>
           <div className='flex flex-col space-y-2'>
-            <h1 className='text-2xl font-bold md:text-3xl lg:text-4xl'>
-              {author?.name}
-            </h1>
-            <h3 className='text-xl font-semibold text-slate-700'>
-              {author?.title}
-            </h3>
+            <h1 className='text-2xl font-bold md:text-3xl lg:text-4xl'>{author.name}</h1>
+            <h3 className='text-xl font-semibold text-slate-700'>{author.title}</h3>
             <AuthorLinks author={author} />
           </div>
         </div>
@@ -59,15 +65,10 @@ export default async function Author({ params: { slug } }: Props) {
 
       {/* Authored Articles  */}
       <section className='mx-18 my-12'>
-        <h1 className='mb-4 border-b border-untele pb-2 text-3xl font-bold'>
-          Latest Articles
-        </h1>
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 '>
-          {author?.relatedArticles?.map((post) => (
-            <ClientSideRoute
-              key={post._id}
-              route={resolveHref('post', post.slug?.current) || ''}
-            >
+        <h1 className='border-untele mb-4 border-b pb-2 text-3xl font-bold'>Latest Articles</h1>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+          {author.relatedArticles?.map((post) => (
+            <ClientSideRoute key={post._id} route={resolveHref('post', post.slug?.current) || ''}>
               <ArticleCardLg post={post} />
             </ClientSideRoute>
           ))}
@@ -96,8 +97,8 @@ async function getAuthorBySlug(slug: string): Promise<Author | null> {
 // Generate the static params for the author list
 export async function generateStaticParams() {
   const query = groq`*[_type=='author'] { slug }`;
-  const slugs: any = await client.fetch(query);
-  const slugRoutes = slugs ? slugs.map((slug: any) => slug.slug.current) : [];
+  const slugs: { slug: { current: string } }[] = await client.fetch(query);
+  const slugRoutes = slugs ? slugs.map((item) => item.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,
   }));

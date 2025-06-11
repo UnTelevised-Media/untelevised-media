@@ -1,4 +1,5 @@
 /* eslint-disable react/function-component-definition */
+// src/app/(user)/category/[slug]/page.tsx
 import { groq } from 'next-sanity';
 
 import ArticleCardLg from '@/components/cards/ArticleCardLg';
@@ -21,13 +22,10 @@ export default async function CategoryPage({ params: { slug } }: Props) {
   return (
     <div className='mx-auto max-w-[95wv] md:max-w-[85vw]'>
       <div>
-        <hr className='mb-8 border-untele' />
+        <hr className='border-untele mb-8' />
         <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
           {articles?.map((post) => (
-            <ClientSideRoute
-              route={resolveHref('post', post.slug?.current) || ''}
-              key={post._id}
-            >
+            <ClientSideRoute route={resolveHref('post', post.slug?.current) || ''} key={post._id}>
               <ArticleCardLg post={post} />
             </ClientSideRoute>
           ))}
@@ -38,7 +36,7 @@ export default async function CategoryPage({ params: { slug } }: Props) {
 }
 
 // Call the Sanity Fetch Function for the Article Information Filtered by Category
-async function getArticlesByCategory(slug: string): Promise<Article[] | null> {
+async function getArticlesByCategory(slug: string): Promise<Article[]> {
   try {
     // Fetch article data by category from Sanity
     const articles: Article[] = await sanityFetch({
@@ -48,8 +46,8 @@ async function getArticlesByCategory(slug: string): Promise<Article[] | null> {
     });
     return articles;
   } catch (error) {
-    console.error('Failed to fetch author:', error);
-    return [] || null;
+    console.error('Failed to fetch articles:', error);
+    return [];
   }
 }
 // Generate the static params for the category list

@@ -1,4 +1,5 @@
 /* eslint-disable react/function-component-definition */
+// src/app/(user)/page.tsx
 import ArticleCardLg from '@/components/cards/ArticleCardLg';
 import LiveWidget from '@/components/cards/LiveWidget';
 import { Analytics } from '@vercel/analytics/react';
@@ -9,7 +10,6 @@ import resolveHref from '@/util/resolveHref';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAllPost, queryLiveEvents } from '@/lib/sanity/lib/queries';
 
-
 export default async function HomePage() {
   const frontPageNews = await getFrontPageNews();
   const { posts, liveEvents } = frontPageNews;
@@ -18,13 +18,10 @@ export default async function HomePage() {
     <div className='mx-auto max-w-[95wv] md:max-w-[85vw]'>
       <LiveWidget liveEvents={liveEvents} />
       <div>
-        <hr className='mb-8 border-untele' />
+        <hr className='border-untele mb-8' />
         <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
           {posts.map((post) => (
-            <ClientSideRoute
-              route={resolveHref('post', post.slug?.current) || ''}
-              key={post._id}
-            >
+            <ClientSideRoute route={resolveHref('post', post.slug?.current) || ''} key={post._id}>
               <ArticleCardLg post={post} />
             </ClientSideRoute>
           ))}
@@ -37,7 +34,7 @@ export default async function HomePage() {
 }
 
 // Call the Sanity Fetch Function for the Front Page News
-async function getFrontPageNews() {
+async function getFrontPageNews(): Promise<{ posts: Article[]; liveEvents: LiveEvent[] }> {
   try {
     // Fetch live event data from Sanity for only Live Events isCurrentEvent = ture
     const liveEvents: LiveEvent[] = await sanityFetch({
@@ -55,6 +52,6 @@ async function getFrontPageNews() {
     return { liveEvents, posts };
   } catch (error) {
     console.log('Failed to fetch article:', error);
-    return { posts: [] || null, liveEvents: [] || null }; // Return empty arrays or null in case of error
+    return { posts: [], liveEvents: [] }; // Return empty arrays in case of error
   }
 }

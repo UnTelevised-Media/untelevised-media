@@ -1,4 +1,5 @@
 /* eslint-disable react/function-component-definition */
+// src/app/(user)/staff/page.tsx
 import Image from 'next/image';
 import urlForImage from '@/u/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
@@ -18,8 +19,8 @@ export default async function StaffPage() {
             route={resolveHref('author', author.slug?.current) || ''}
             key={author._id}
           >
-            <div className='flex max-w-72 flex-col  items-center justify-center space-y-2'>
-              <div className='relative h-64 w-64 rounded-full border border-untele/80 object-contain shadow-md'>
+            <div className='flex max-w-72 flex-col items-center justify-center space-y-2'>
+              <div className='border-untele/80 relative h-64 w-64 rounded-full border object-contain shadow-md'>
                 <Image
                   src={urlForImage(author.image as any).url() || ''}
                   fill
@@ -29,9 +30,7 @@ export default async function StaffPage() {
               </div>
               <div className='flex flex-col items-center justify-center space-y-2'>
                 <h1 className='text-2xl'>{author.name}</h1>
-                <h2 className='flex items-center justify-center text-lg'>
-                  {author.title}
-                </h2>
+                <h2 className='flex items-center justify-center text-lg'>{author.title}</h2>
               </div>
             </div>
           </ClientSideRoute>
@@ -51,6 +50,6 @@ async function getAllStaff(): Promise<Author[]> {
     return staff;
   } catch (error) {
     console.error('Failed to fetch author:', error);
-    return null;
+    return [];
   }
 }

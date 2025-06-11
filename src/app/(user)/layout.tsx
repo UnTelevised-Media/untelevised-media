@@ -1,4 +1,5 @@
 /* eslint-disable react/function-component-definition */
+// src/app/(user)/layout.tsx
 import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -13,7 +14,6 @@ import Footer from '@/components/global/Footer';
 import { GoogleAdSense } from 'next-google-adsense';
 import { VisualEditing } from 'next-sanity';
 import GASVerify from '@/util/googleAdSense';
-
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -58,15 +58,11 @@ export const metadata: Metadata = {
   },
 };
 
-
-
 const GTM_ID = process.env.GTM_ID;
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const draftModeEnabled = (await draftMode()).isEnabled;
+
   return (
     <html lang='en'>
       {process.env.NODE_ENV === 'production' && (
@@ -80,7 +76,7 @@ export default async function RootLayout({
         })(window,document,'script','dataLayer','${GTM_ID}');
         `}
           </Script>
-          <GASVerify googleAdsenseId={process.env.GAS_ID ?? ''}/>
+          <GASVerify googleAdsenseId={process.env.GAS_ID ?? ''} />
         </>
       )}
       <body className={`bg-slate-400/70 scrollbar-hide ${inter.className}`}>
@@ -93,7 +89,7 @@ export default async function RootLayout({
           <Header />
           <Nav />
           <Banner />
-          {draftMode().isEnabled && (
+          {draftModeEnabled && (
             <div>
               <a className='block bg-blue-300 p-4' href='/api/disable-draft'>
                 Disable preview mode
@@ -101,7 +97,7 @@ export default async function RootLayout({
             </div>
           )}
           {children}
-          {draftMode().isEnabled && <VisualEditing />}
+          {draftModeEnabled && <VisualEditing />}
           <Footer />
         </>
 

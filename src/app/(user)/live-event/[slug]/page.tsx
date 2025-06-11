@@ -1,4 +1,5 @@
 /* eslint-disable react/function-component-definition */
+// src/app/(user)/live-event/[slug]/page.tsx
 import Image from 'next/image';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
@@ -57,7 +58,7 @@ export default async function LiveEvent({ params: { slug } }: Props) {
 
   return (
     <>
-      <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
+      <hr className='border-untele mx-auto mb-8 max-w-[95wv] md:max-w-[85vw]' />
       <article className='mx-auto max-w-[95vw] pb-28 md:max-w-[85vw] lg:px-10'>
         {/* Top Section: Image, Title, Date, Description  */}
         <section className='flex flex-col space-x-4 text-slate-700 lg:flex-row'>
@@ -79,9 +80,9 @@ export default async function LiveEvent({ params: { slug } }: Props) {
           {/* Info Block  */}
           <div className='flex w-full flex-col space-y-2 py-2'>
             {/* Title & Date */}
-            <div className='flex w-full  flex-col space-y-1'>
+            <div className='flex w-full flex-col space-y-1'>
               {liveEvent.isCurrentEvent && (
-                <h2 className='w-min animate-pulse rounded bg-untele px-3 py-1 text-2xl font-bold text-slate-200'>
+                <h2 className='bg-untele w-min animate-pulse rounded px-3 py-1 text-2xl font-bold text-slate-200'>
                   Live
                 </h2>
               )}
@@ -95,9 +96,7 @@ export default async function LiveEvent({ params: { slug } }: Props) {
             </div>
             {/* Description  */}
             <div className='w-full'>
-              <p className='w-full italic lg:text-xs xl:text-base'>
-                {liveEvent.description}
-              </p>
+              <p className='w-full italic lg:text-xs xl:text-base'>{liveEvent.description}</p>
             </div>
           </div>
         </section>
@@ -113,7 +112,7 @@ export default async function LiveEvent({ params: { slug } }: Props) {
             <iframe
               width='720'
               height='420'
-              className='rounded-lg border border-untele bg-slate-700/30'
+              className='border-untele rounded-lg border bg-slate-700/30'
               src={`${liveEvent.videoLink}`}
               title='YouTube video player'
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
@@ -130,24 +129,18 @@ export default async function LiveEvent({ params: { slug } }: Props) {
                 {allEvents.map((event) => (
                   <li
                     key={event._id}
-                    className='mb-3 flex flex-col rounded-lg border border-untele bg-slate-700/30 px-6 py-3'
+                    className='border-untele mb-3 flex flex-col rounded-lg border bg-slate-700/30 px-6 py-3'
                   >
                     <div className='flex flex-col space-y-1'>
-                      <h3 className='text-base font-bold underline'>
-                        {event.title}
-                      </h3>
-                      <h4 className='text-sm text-untele/70'>
+                      <h3 className='text-base font-bold underline'>{event.title}</h3>
+                      <h4 className='text-untele/70 text-sm'>
                         {getTimeSinceEvent(event.eventDate)}
                       </h4>
                       {event.source === 'relatedArticles' ? (
                         <>
                           <p>{event.description as string}</p>
-                          <ClientSideRoute
-                            route={
-                              resolveHref('post', event.slug?.current) || ''
-                            }
-                          >
-                            <button className='cursor-pointer self-end rounded-md border border-untele/40 bg-slate-700/30 px-3 py-1 font-bold text-untele/60 underline hover:text-blue-700 hover:opacity-80'>
+                          <ClientSideRoute route={resolveHref('post', event.slug?.current) || ''}>
+                            <button className='border-untele/40 text-untele/60 cursor-pointer self-end rounded-md border bg-slate-700/30 px-3 py-1 font-bold underline hover:text-blue-700 hover:opacity-80'>
                               Read More
                             </button>
                           </ClientSideRoute>
@@ -163,17 +156,14 @@ export default async function LiveEvent({ params: { slug } }: Props) {
                 ))}
               </ul>
             ) : (
-              <p className='mb-3 flex flex-col rounded-lg border border-untele bg-slate-700/30 px-6 py-3 text-slate-700'>
+              <p className='border-untele mb-3 flex flex-col rounded-lg border bg-slate-700/30 px-6 py-3 text-slate-700'>
                 No events available at the moment. Please check back shortly.
               </p>
             )}
           </div>
           {/* Developments / Story */}
-          <div className='mx-auto h-min rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw] lg:w-2/5'>
-            <PortableText
-              value={liveEvent.body}
-              components={RichTextComponents}
-            />
+          <div className='border-untele mx-auto h-min rounded-lg border bg-slate-700/30 px-10 py-5 md:max-w-[70vw] lg:w-2/5'>
+            <PortableText value={liveEvent.body} components={RichTextComponents} />
           </div>
         </section>
       </article>
@@ -182,18 +172,18 @@ export default async function LiveEvent({ params: { slug } }: Props) {
 }
 
 // Call the Sanity Fetch Function for the Article by Slug
-async function getEventBySlug(slug: string) {
+async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
   try {
     // Fetch article data from Sanity
-    const post = await sanityFetch({
+    const post = await sanityFetch<LiveEvent>({
       query: queryEventBySlug,
       params: { slug },
       tags: ['post'],
     });
-    return post || [];
+    return post;
   } catch (error) {
     console.log('Failed to fetch article:', error);
-    return [] || null;
+    return null;
   }
 }
 
