@@ -35,7 +35,8 @@
     },
     "rootDir": "./",
     "baseUrl": ".",
-    "outDir": "./out"
+    "outDir": "./out",
+    "typeRoots": ["./node_modules/@types", "./src/models/types"]
   },
   "include": [
     "next-env.d.ts",

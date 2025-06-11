@@ -1,4 +1,5 @@
 /* eslint-disable react/function-component-definition */
+// src/components/global/Footer.tsx
 import Link from 'next/link';
 import {
   FaYoutube,
@@ -15,18 +16,34 @@ import { MdLiveTv } from 'react-icons/md';
 import { RiKickLine } from 'react-icons/ri';
 import ClientSideRoute from '../providers/ClientSideRoute';
 
-
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import formatTitleForURL from '@/util/formatTitleForURL';
 import resolveHref from '@/util/resolveHref';
 import { queryCategories, queryPoliciesList } from '@/lib/sanity/lib/queries';
 
-async function Footer() {
-  const categories: any = await getNewsCategories();
-  const sortedCategories = categories.sort((a, b) => a.order - b.order);
+// Types for the specific query results
+interface CategoryQueryResult {
+  _id: string;
+  title: string;
+  order: number;
+}
 
-  const policies: any = await getPoliciesList();
-  const sortedPolicies = policies.sort((a, b) => a.order - b.order);
+interface PolicyQueryResult {
+  _id: string;
+  title: string;
+  order: number;
+}
+
+async function Footer() {
+  const categories: CategoryQueryResult[] = await getNewsCategories();
+  const sortedCategories = categories.sort(
+    (a: CategoryQueryResult, b: CategoryQueryResult) => a.order - b.order
+  );
+
+  const policies: PolicyQueryResult[] = await getPoliciesList();
+  const sortedPolicies = policies.sort(
+    (a: PolicyQueryResult, b: PolicyQueryResult) => a.order - b.order
+  );
 
   return (
     <div className='flex flex-col space-y-10 bg-slate-600 px-2 py-3'>
@@ -41,12 +58,9 @@ async function Footer() {
           </h4>
           {sortedCategories
             // .sort((a, b) => a.order - b.order)
-            .map((category) => (
+            .map((category: CategoryQueryResult) => (
               <ClientSideRoute
-                route={
-                  resolveHref('category', formatTitleForURL(category.title)) ||
-                  ''
-                }
+                route={resolveHref('category', formatTitleForURL(category.title)) || ''}
                 key={category._id}
               >
                 {category.title}
@@ -55,9 +69,7 @@ async function Footer() {
         </div>
 
         {/* Media */}
-        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
-          Media
-        </h4>
+        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>Media</h4>
         <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
           <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
             Media
@@ -167,18 +179,14 @@ async function Footer() {
         </div>
 
         {/* Principles & Policies  */}
-        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
-          Policies
-        </h4>
+        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>Policies</h4>
         <div className='flex flex-row flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
           <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
             Policies
           </h4>
-          {sortedPolicies.map((policy) => (
+          {sortedPolicies.map((policy: PolicyQueryResult) => (
             <ClientSideRoute
-              route={
-                resolveHref('policies', formatTitleForURL(policy.title)) || ''
-              }
+              route={resolveHref('policies', formatTitleForURL(policy.title)) || ''}
               key={policy._id}
             >
               {policy.title}
@@ -187,9 +195,7 @@ async function Footer() {
         </div>
 
         {/* About */}
-        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
-          About
-        </h4>
+        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>About</h4>
         <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
           <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
             About
@@ -200,17 +206,11 @@ async function Footer() {
             Join Our Team
           </Link>
           <Link href='/donate'>Donate/Support Our Outlet</Link>
-          <Link href='mailto:newsroom@untelevised.live'>
-            Contact the Newsroom
-          </Link>
-          <Link href='mailto:newsroom@untelevised.live'>
-            Licensing & Syndication
-          </Link>
+          <Link href='mailto:newsroom@untelevised.live'>Contact the Newsroom</Link>
+          <Link href='mailto:newsroom@untelevised.live'>Licensing & Syndication</Link>
           <Link href='mailto:newsroom@untelevised.live'>Advertise</Link>
           <Link href='mailto:newsroom@untelevised.live'>Send a News Tip</Link>
-          <Link href='mailto:newsroom@untelevised.live'>
-            Request a Correction
-          </Link>
+          <Link href='mailto:newsroom@untelevised.live'>Request a Correction</Link>
         </div>
       </div>
 
@@ -230,32 +230,32 @@ async function Footer() {
 
 export default Footer;
 
-// Call the Sanity Fetch Function for a list of All Authors
-async function getPoliciesList() {
+// Call the Sanity Fetch Function for a list of All Policies
+async function getPoliciesList(): Promise<PolicyQueryResult[]> {
   try {
-    // Fetch author data from Sanity
-    const policies = await sanityFetch({
+    // Fetch policy data from Sanity
+    const policies: PolicyQueryResult[] = await sanityFetch({
       query: queryPoliciesList,
-      tags: ['author'],
+      tags: ['policies'],
     });
     return policies;
   } catch (error) {
-    console.error('Failed to fetch author:', error);
-    return null;
+    console.error('Failed to fetch policies:', error);
+    return [];
   }
 }
 
-// Call the Sanity Fetch Function for a list of All Authors
-async function getNewsCategories() {
+// Call the Sanity Fetch Function for a list of All Categories
+async function getNewsCategories(): Promise<CategoryQueryResult[]> {
   try {
-    // Fetch author data from Sanity
-    const categories = await sanityFetch({
+    // Fetch category data from Sanity
+    const categories: CategoryQueryResult[] = await sanityFetch({
       query: queryCategories,
-      tags: ['author'],
+      tags: ['category'],
     });
     return categories;
   } catch (error) {
-    console.error('Failed to fetch author:', error);
-    return null;
+    console.error('Failed to fetch categories:', error);
+    return [];
   }
 }

@@ -1,4 +1,4 @@
-import { defineConfig, globalIgnores } from 'eslint/config';
+// eslint.config.mjs
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import globals from 'globals';
@@ -15,33 +15,31 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
-export default defineConfig([
-  globalIgnores([
-    '**/*.woff2',
-    '**/dist',
-    '**/out',
-    '**/node_modules',
-    '**/.next/',
-    '**/coverage',
-    '**/public',
-    '**/*.woff2',
-    '**/dist',
-    '**/out',
-    '**/node_modules',
-    '**/.next/',
-    '**/__tests__',
-    '**/tailwind.config',
-    'src/components/ui',
-    'src/hooks/use-toast.ts',
-  ]),
+export default [
+  // Global ignores
   {
-    extends: compat.extends(
-      'next',
-      'next/core-web-vitals',
-      'prettier',
-      'plugin:@typescript-eslint/recommended'
-    ),
-
+    ignores: [
+      '**/*.woff2',
+      '**/dist',
+      '**/out',
+      '**/node_modules',
+      '**/.next/',
+      '**/coverage',
+      '**/public',
+      '**/__tests__',
+      '**/tailwind.config.ts',
+      'src/components/ui/**',
+      'src/hooks/use-toast.ts',
+    ],
+  },
+  // Main configuration
+  ...compat.extends(
+    'next',
+    'next/core-web-vitals',
+    'prettier',
+    'plugin:@typescript-eslint/recommended'
+  ),
+  {
     plugins: {
       '@typescript-eslint': typescriptEslint,
     },
@@ -156,6 +154,7 @@ export default defineConfig([
       curly: ['error', 'all'],
     },
   },
+  // Test files configuration
   {
     files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
 
@@ -169,6 +168,7 @@ export default defineConfig([
       '@typescript-eslint/no-explicit-any': 'off',
     },
   },
+  // Config files configuration
   {
     files: ['**/next.config.ts', '**/tailwind.config.ts', '**/jest.config.ts'],
 
@@ -177,4 +177,4 @@ export default defineConfig([
       '@typescript-eslint/no-var-requires': 'off',
     },
   },
-]);
+];

@@ -3,8 +3,8 @@
 import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Header from '@/c/global/Header';
-import Banner from '@/c/global/Banner';
+import Header from '@/components/global/Header';
+import Banner from '@/components/global/Banner';
 import { draftMode } from 'next/headers';
 // import GATag from '@/l/googleAnalytics';
 
