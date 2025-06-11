@@ -1,3 +1,4 @@
+// src/components/global/Nav.tsx
 import React from 'react';
 import { groq } from 'next-sanity';
 
@@ -5,7 +6,6 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid';
 
 import ClientSideRoute from '../providers/ClientSideRoute';
 import client from '@/lib/sanity/lib/client';
-
 
 const queryCategory = groq`
   *[_type=='category'] {
@@ -15,7 +15,7 @@ const queryCategory = groq`
   } 
 `;
 
-const Nav = () => {
+const Nav = async () => {
   const categories = await client.fetch(queryCategory);
 
   const formatCategoryTitle = (title: string) => {
@@ -26,9 +26,7 @@ const Nav = () => {
     return formattedTitle;
   };
 
-  const sortedCategories = categories.sort(
-    (a: any, b: any) => a.order - b.order,
-  );
+  const sortedCategories = categories.sort((a: any, b: any) => a.order - b.order);
 
   return (
     <nav className='sticky top-[73px] z-40 border-b border-slate-700 bg-slate-800/95 shadow-lg backdrop-blur-md'>
@@ -42,13 +40,11 @@ const Nav = () => {
 
             {sortedCategories.map((category: any, index: number) => (
               <React.Fragment key={category._id}>
-                <ClientSideRoute
-                  route={`/category/${formatCategoryTitle(category.title)}`}
-                >
+                <ClientSideRoute route={`/category/${formatCategoryTitle(category.title)}`}>
                   <div className='group flex cursor-pointer items-center space-x-2 whitespace-nowrap rounded-lg border border-transparent px-4 py-2 text-sm font-medium text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-700/50 hover:text-white'>
                     <span className='relative'>
                       {category.title}
-                      <div className='absolute bottom-0 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
+                      <div className='bg-untele absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-200 group-hover:w-full' />
                     </span>
                   </div>
                 </ClientSideRoute>
@@ -59,7 +55,6 @@ const Nav = () => {
               </React.Fragment>
             ))}
           </div>
-
         </div>
 
         {/* Mobile Category Scroll Indicator */}
@@ -75,6 +70,6 @@ const Nav = () => {
       </div>
     </nav>
   );
-}
+};
 
 export default Nav;

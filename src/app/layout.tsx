@@ -70,36 +70,35 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-      <html lang='en' suppressHydrationWarning>
-        <head>
-          <link rel='icon' href='/favicon.ico' sizes='any' />
-        </head>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} ${inter.className} antialiased`}
-        >
-          <ErrorBoundary>
-            <ThemeProvider
-              attribute='class'
-              defaultTheme='system'
-              enableSystem
-              disableTransitionOnChange
-            >
-              <div className='relative flex min-h-screen flex-col'>
-                <main className='flex-1'>
-                  <ErrorBoundary>{children}</ErrorBoundary>
-                </main>
-                <Footer />
-              </div>
-              <Toaster />
-            </ThemeProvider>
-          </ErrorBoundary>
+    <html lang='en' suppressHydrationWarning>
+      <head>
+        <link rel='icon' href='/favicon.ico' sizes='any' />
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.className} antialiased`}
+      >
+        <ErrorBoundary>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className='relative flex min-h-screen flex-col'>
+              <main className='flex-1'>
+                <ErrorBoundary>{children}</ErrorBoundary>
+              </main>
+            </div>
+            <Toaster />
+          </ThemeProvider>
+        </ErrorBoundary>
 
-          {/* Analytics */}
-          <Analytics />
-          <SpeedInsights />
-        </body>
-      </html>
+        {/* Analytics */}
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   );
-}
+};
 
 export default RootLayout;

@@ -72,6 +72,7 @@
     "react-syntax-highlighter": "^15.6.1",
     "react-tweet": "^3.2.2",
     "react-twitter-embed": "^4.0.4",
+    "require-in-the-middle": "^7.5.2",
     "sanity": "^3.92.0",
     "sanity-plugin-asset-source-unsplash": "3.0.3",
     "sanity-plugin-iframe-pane": "^3.2.1",
