@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["jest", "node"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    // "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    // "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/c/*": ["./src/components/*"],
+      "@/l/*": ["./src/lib/*"],
+      "@/h/*": ["./src/hooks/*"],
+      "@/u/*": ["./src/util/*"],
+      "@/t/*": ["./src/models/types/*"],
+      "@/app/*": ["./src/app/*"],
+      "@/s/*": ["./src/server/*"],
+      "#/*": ["./*"]
+    },
+    "rootDir": "./",
+    "baseUrl": ".",
+    "outDir": "./out"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/lib/jest/jest.config.ts",
+    "src/lib/jest/jest.setup.ts",
+    "build-utilities/generateRobots.mjs"
+  ],
+  "exclude": ["node_modules"]
+}

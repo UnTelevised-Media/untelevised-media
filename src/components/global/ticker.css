@@ -1,0 +1,50 @@
+.hitem {
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2px;
+  text-align: center;
+}
+
+@keyframes tickerh {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-1100%, 0, 0);
+  }
+}
+
+darkred {
+  color: #00b22a;
+}
+strokered {
+  color: #f39595;
+}
+grayish {
+  color: #767676;
+}
+darkgreyish {
+  color: #232323;
+}
+
+.marquee {
+  font-family: 'Odibee Sans', sans-serif;
+  color: rgb(232, 213, 213);
+  -webkit-text-stroke: 0.9px darkred;
+}
+
+.track {
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 1100s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
