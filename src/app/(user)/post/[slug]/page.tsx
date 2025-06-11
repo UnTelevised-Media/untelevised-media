@@ -35,9 +35,9 @@ export default async function Article({ params: { slug } }: Props) {
               {/* Header Image  */}
               <Image
                 className='-z-1 mx-auto object-cover object-center'
-                src={urlForImage(article.mainImage as any)?.url() || ''}
+                src={urlForImage(article.mainImage as any)?.url() ?? ''}
                 fill
-                alt={article.mainImage?.alt || 'No Alt Tag Set'}
+                alt={article.mainImage?.alt ?? 'No Alt Tag Set'}
               />
             </div>
 
@@ -47,19 +47,19 @@ export default async function Article({ params: { slug } }: Props) {
                 <div className='space-y-2'>
                   <h1 className='text-3xl font-bold'>{article.title}</h1>
                   <div>
-                    <h3>{article.location || null}</h3>
-                    <p>{formatDate(article.eventDate || article._createdAt)}</p>
+                    <h3>{article.location ?? null}</h3>
+                    <p>{formatDate(article.eventDate ?? article._createdAt)}</p>
                   </div>
                   <ClientSideRoute
-                    route={resolveHref('author', article.author.slug?.current) || ''}
+                    route={resolveHref('author', article.author.slug?.current) ?? ''}
                   >
                     <div className='flex items-center justify-start space-x-3 py-2'>
                       <Image
                         className='rounded-full object-cover object-center'
-                        src={urlForImage(article.author.image as any)?.url() || ''}
+                        src={urlForImage(article.author.image as any)?.url() ?? ''}
                         width={50}
                         height={50}
-                        alt={article.author.image?.alt || ''}
+                        alt={article.author.image?.alt ?? ''}
                       />
                       <h3 className='text-lg font-semibold'>{article.author.name}</h3>
                     </div>
@@ -94,8 +94,8 @@ export default async function Article({ params: { slug } }: Props) {
         )}
         <div className='mt-4 flex justify-center'>
           <Image
-            src={urlForImage(article.mainImage as any)?.url() || ''}
-            alt={article.mainImage?.alt || 'No Alt Tag Set'}
+            src={urlForImage(article.mainImage as any)?.url() ?? ''}
+            alt={article.mainImage?.alt ?? 'No Alt Tag Set'}
             sizes='80vw'
             style={{
               width: '65%',

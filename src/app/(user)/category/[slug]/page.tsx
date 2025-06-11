@@ -25,7 +25,7 @@ export default async function CategoryPage({ params: { slug } }: Props) {
         <hr className='border-untele mb-8' />
         <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
           {articles?.map((post) => (
-            <ClientSideRoute route={resolveHref('post', post.slug?.current) || ''} key={post._id}>
+            <ClientSideRoute route={resolveHref('post', post.slug?.current) ?? ''} key={post._id}>
               <ArticleCardLg post={post} />
             </ClientSideRoute>
           ))}

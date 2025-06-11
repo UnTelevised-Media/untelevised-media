@@ -8,7 +8,6 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import ThemeProvider from '@/components/providers/ThemeProvider';
-import Header from '@/components/global/Header';
 import Footer from '@/components/global/Footer';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { Toaster } from '@/components/ui/toaster';

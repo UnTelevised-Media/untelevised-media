@@ -21,7 +21,7 @@ export default async function HomePage() {
         <hr className='border-untele mb-8' />
         <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
           {posts.map((post) => (
-            <ClientSideRoute route={resolveHref('post', post.slug?.current) || ''} key={post._id}>
+            <ClientSideRoute route={resolveHref('post', post.slug?.current) ?? ''} key={post._id}>
               <ArticleCardLg post={post} />
             </ClientSideRoute>
           ))}
@@ -51,7 +51,7 @@ async function getFrontPageNews(): Promise<{ posts: Article[]; liveEvents: LiveE
     // Return both post and liveEvent data
     return { liveEvents, posts };
   } catch (error) {
-    console.log('Failed to fetch article:', error);
+    console.error('Failed to fetch article:', error);
     return { posts: [], liveEvents: [] }; // Return empty arrays in case of error
   }
 }

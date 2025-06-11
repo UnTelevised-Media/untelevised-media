@@ -68,7 +68,7 @@ export default async function Author({ params: { slug } }: Props) {
         <h1 className='border-untele mb-4 border-b pb-2 text-3xl font-bold'>Latest Articles</h1>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {author.relatedArticles?.map((post) => (
-            <ClientSideRoute key={post._id} route={resolveHref('post', post.slug?.current) || ''}>
+            <ClientSideRoute key={post._id} route={resolveHref('post', post.slug?.current) ?? ''}>
               <ArticleCardLg post={post} />
             </ClientSideRoute>
           ))}

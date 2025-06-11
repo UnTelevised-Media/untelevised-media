@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { Alex_Brush } from 'next/font/google';
 import localFont from 'next/font/local';
 export const headerFontStyle = Alex_Brush({

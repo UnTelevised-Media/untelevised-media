@@ -9,20 +9,20 @@ import { queryAllAuthors } from '@/lib/sanity/lib/queries';
 
 export default async function StaffPage() {
   const staff = await getAllStaff();
-  const sortedStaff = staff.sort((a, b) => (a.order || 0) - (b.order || 0));
+  const sortedStaff = staff.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
   return (
     <div className='flex flex-wrap justify-center space-x-3'>
       {staff &&
         sortedStaff.map((author) => (
           <ClientSideRoute
-            route={resolveHref('author', author.slug?.current) || ''}
+            route={resolveHref('author', author.slug?.current) ?? ''}
             key={author._id}
           >
             <div className='flex max-w-72 flex-col items-center justify-center space-y-2'>
               <div className='border-untele/80 relative h-64 w-64 rounded-full border object-contain shadow-md'>
                 <Image
-                  src={urlForImage(author.image as any).url() || ''}
+                  src={urlForImage(author.image as any).url() ?? ''}
                   fill
                   alt='image'
                   className='rounded-full object-cover shadow-md'

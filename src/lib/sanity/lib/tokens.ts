@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+ 
 // src\lib\sanity\lib\tokens.ts
 import 'server-only';
 

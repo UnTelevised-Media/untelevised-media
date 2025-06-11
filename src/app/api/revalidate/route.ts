@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+ 
 /**
  * This code is responsible for revalidating queries as the dataset is updated.
  *

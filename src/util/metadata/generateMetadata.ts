@@ -51,10 +51,10 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       type: 'article',
       images: post.mainImage
         ? {
-            url: urlForImage(post.mainImage as any)?.url() || '',
+            url: urlForImage(post.mainImage as any)?.url() ?? '',
             width: 1200,
             height: 630,
-            alt: post.mainImage.alt || post.title,
+            alt: post.mainImage.alt ?? post.title,
           }
         : undefined,
     },

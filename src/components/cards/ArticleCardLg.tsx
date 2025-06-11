@@ -15,7 +15,7 @@ export default function ArticleCardLg({ post }: Props) {
       <div className='relative h-80 w-full drop-shadow-xl transition-transform duration-200 ease-out group-hover:scale-105'>
         <Image
           className='rounded-md object-cover object-left lg:object-center'
-          src={urlForImage(post.mainImage as any)?.url() || ''}
+          src={urlForImage(post.mainImage as any)?.url() ?? ''}
           fill
           alt={post.mainImage?.alt || 'No Alt Tag Set'}
         />

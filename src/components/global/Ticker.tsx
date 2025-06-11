@@ -60,7 +60,7 @@ export default async function Ticker() {
 
     const postTitles: TitleWithDate[] = posts.map((post: PostQueryResult) => ({
       title: post.title,
-      date: post.eventDate || post.publishedAt || '',
+      date: post.eventDate ?? post.publishedAt ?? '',
     }));
 
     const allTitles: TitleWithDate[] = [...keyEventTitles, ...postTitles].sort(

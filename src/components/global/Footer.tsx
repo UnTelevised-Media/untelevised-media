@@ -60,7 +60,7 @@ async function Footer() {
             // .sort((a, b) => a.order - b.order)
             .map((category: CategoryQueryResult) => (
               <ClientSideRoute
-                route={resolveHref('category', formatTitleForURL(category.title)) || ''}
+                route={resolveHref('category', formatTitleForURL(category.title)) ?? ''}
                 key={category._id}
               >
                 {category.title}
@@ -186,7 +186,7 @@ async function Footer() {
           </h4>
           {sortedPolicies.map((policy: PolicyQueryResult) => (
             <ClientSideRoute
-              route={resolveHref('policies', formatTitleForURL(policy.title)) || ''}
+              route={resolveHref('policies', formatTitleForURL(policy.title)) ?? ''}
               key={policy._id}
             >
               {policy.title}

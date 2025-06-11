@@ -9,7 +9,7 @@ export async function GET(req: any, res: NextApiResponse) {
   const draft = await draftMode();
   draft.disable();
 
-  const url = new URL(req.url || '');
+  const url = new URL(req.url ?? '');
 
   // Corrected line
   if (url.origin) {

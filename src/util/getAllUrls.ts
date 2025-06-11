@@ -1,6 +1,7 @@
 // getAllNews.ts
-import { groq } from 'next-sanity';
 import client from '@/lib/sanity/lib/client';
+import { groq } from 'next-sanity';
+
 
 export default async function getAllURLs() {
   const queryArticles = groq`

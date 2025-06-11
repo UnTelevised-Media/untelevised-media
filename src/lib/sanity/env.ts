@@ -14,7 +14,7 @@ export const projectId = assertValue(
   export const studioUrl = '/studio';
   
   // CMS Studio Title
-  export const title = process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'UnTelevised Studio';
+  export const title = process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE ?? 'UnTelevised Studio';
   
   // See the app/api/revalidate/route.ts for how this is used
   export const revalidateSecret = process.env.SANITY_REVALIDATE_SECRET;

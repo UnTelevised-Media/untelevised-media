@@ -35,7 +35,7 @@ export default function LiveWidget({ liveEvents }: Props) {
                 {liveEvent.mainImage && (
                   <Image
                     className='rounded-md object-cover object-left lg:object-center'
-                    src={urlForImage(liveEvent.mainImage as any)?.url() || ''}
+                    src={urlForImage(liveEvent.mainImage as any)?.url() ?? ''}
                     fill
                     alt='Post Main Image'
                   />
@@ -46,7 +46,7 @@ export default function LiveWidget({ liveEvents }: Props) {
               <div className='flex w-full justify-center lg:justify-start'>
                 <ClientSideRoute
                   route={
-                    resolveHref('liveevent', liveEvent.slug?.current) || ''
+                    resolveHref('liveevent', liveEvent.slug?.current) ?? ''
                   }
                   key={liveEvent._id}
                 >

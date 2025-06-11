@@ -15,7 +15,7 @@ const queryCategory = groq`
   } 
 `;
 
-async function Nav() {
+const Nav = () => {
   const categories = await client.fetch(queryCategory);
 
   const formatCategoryTitle = (title: string) => {

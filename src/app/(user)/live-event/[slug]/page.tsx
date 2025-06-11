@@ -65,7 +65,7 @@ export default async function LiveEvent({ params: { slug } }: Props) {
           {/* Image  */}
           <div className='h-auto min-w-max xl:w-full'>
             <Image
-              src={urlForImage(liveEvent.mainImage as any)?.url() || ''}
+              src={urlForImage(liveEvent.mainImage as any)?.url() ?? ''}
               alt='Image Description'
               style={{
                 width: '100%',
@@ -139,7 +139,7 @@ export default async function LiveEvent({ params: { slug } }: Props) {
                       {event.source === 'relatedArticles' ? (
                         <>
                           <p>{event.description as string}</p>
-                          <ClientSideRoute route={resolveHref('post', event.slug?.current) || ''}>
+                          <ClientSideRoute route={resolveHref('post', event.slug?.current) ?? ''}>
                             <button className='border-untele/40 text-untele/60 cursor-pointer self-end rounded-md border bg-slate-700/30 px-3 py-1 font-bold underline hover:text-blue-700 hover:opacity-80'>
                               Read More
                             </button>
