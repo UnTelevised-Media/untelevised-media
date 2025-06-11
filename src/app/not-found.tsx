@@ -4,27 +4,27 @@ import React from 'react';
 
 export default function NotFound() {
   return (
-    <div className='flex min-h-screen flex-col items-center justify-center bg-light-100 text-center transition-colors duration-300 dark:bg-dark-800'>
-      <h1 className='mb-8 rounded-full p-12 text-9xl font-bold neon-accent1 text-gradient-lime-violet'>
+    <div className='flex min-h-screen flex-col items-center justify-center bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900'>
+      <h1 className='mb-8 text-9xl font-bold text-untele'>
         404
       </h1>
-      <p className='inner-glow-light-700-80 dark:inner-glow-dark-700-80 mb-8 text-2xl text-dark-400 dark:text-light-400'>
-        Oops! The page you&apos;re looking for can&apos;t be found.
+      <p className='mb-8 text-2xl text-slate-200'>
+        Oops! The page you're looking for can't be found.
       </p>
-      <p className='mb-12 text-lg text-dark-300 dark:text-light-300'>
-        It seems you&apos;ve reached a broken link or a page that no longer exists.
+      <p className='mb-12 text-lg text-slate-300'>
+        It seems you've reached a broken link or a page that no longer exists.
       </p>
 
       <div className='flex gap-6'>
         <Link
           href='/'
-          className='rounded border border-accent1-300 bg-light-300 px-6 py-3 font-semibold text-dark-700 transition-colors duration-300 hover:bg-light-400 dark:bg-dark-100 dark:text-light-700 dark:hover:bg-dark-200'
+          className='rounded-lg bg-untele px-4 py-2 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:bg-untele/90'
         >
           Back to Home
         </Link>
         <Link
           href='/contact'
-          className='rounded border border-light-400 bg-light-300 px-6 py-3 font-semibold text-dark-700 transition-colors duration-300 hover:bg-light-400 dark:bg-dark-300 dark:text-light-200 dark:hover:bg-dark-400'
+          className='rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-2 font-medium text-slate-200 shadow-lg transition-all duration-200 hover:bg-slate-700/50 hover:text-white backdrop-blur-sm'
         >
           Contact Support
         </Link>
