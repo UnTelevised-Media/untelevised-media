@@ -1,9 +1,8 @@
 /* eslint-disable import/prefer-default-export */
-import { groq } from 'next-sanity';
-
-import urlForImage from '@/u/urlForImage';
+import type { Metadata } from 'next';
 import client from '@/lib/sanity/lib/client';
-// import type { Metadata } from 'next';
+import urlForImage from '@/util/urlForImage';
+import { queryEventBySlug } from '@/lib/sanity/lib/queries';
 
 type Props = {
   params: {
@@ -11,71 +10,64 @@ type Props = {
   };
 };
 
-// Define the generateMetadata function
-export async function generateMetadata({ params: { slug } }: Props) {
-  // Fetch the post data based on the slug
-  const query = groq`
-    *[_type == "liveEvent" && slug.current == $slug][0] {
-      ...,
-      tag[]->,
-      keyEvent[]->,
-      keywords,
-      relatedArticles[]-> {
-        slug,
-        _id,
-        title,
-        _createdAt,
-        description,
-        eventDate,
-      // Add other fields you want to retrieve from relatedArticles
-    }
-    }`;
+const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 
-  const liveEvent: Post = await client.fetch(query, { slug });
+// Define the generateMetadata function
+export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
+  // Fetch the live event data based on the slug
+  const liveEvent: LiveEvent = await client.fetch(queryEventBySlug, { slug });
+
+  if (!liveEvent) {
+    return {
+      title: 'Live Event Not Found | UnTelevised Media',
+      description: 'The requested live event could not be found.',
+    };
+  }
 
   // Create metadata object with dynamic values
-  const metadata = {
-    type: 'article',
+  const metadata: Metadata = {
     title: `${liveEvent.title} | Live Updates | UnTelevised Media`,
     description: liveEvent.description,
-    keywords: liveEvent.keywords,
+    keywords: liveEvent.keywords ? liveEvent.keywords.split(',') : undefined,
     publisher: 'UnTelevised Media',
 
     openGraph: {
       title: `${liveEvent.title} | Live Updates | UnTelevised Media`,
       description: liveEvent.description,
-      url: `https://untelevised.media/live-event/${slug}`,
-      //   siteName: 'UnTelevised Media',
-      images: {
-        url: urlForImage(liveEvent.mainImage).url(),
-        //   width: 800,
-        //   height: 600,
-        // alt: post.mainImage.alt,
-      },
-      //   locale: 'en_US',
-      //   type: 'article',
+      url: `${baseURL}/live-event/${slug}`,
+      locale: 'en_US',
+      siteName: 'UnTelevised Media',
+      type: 'article',
+      images: liveEvent.mainImage
+        ? {
+            url: urlForImage(liveEvent.mainImage as any)?.url() || '',
+            width: 1200,
+            height: 630,
+            alt: liveEvent.mainImage.alt || liveEvent.title,
+          }
+        : undefined,
     },
 
     twitter: {
-      //   card: 'app',
+      card: 'summary_large_image',
       title: `${liveEvent.title} | Live Updates | UnTelevised Media`,
       description: liveEvent.description,
-      //   siteId: '1467726470533754880',
+      site: '@UnTelevisedLive',
       creator: '@UnTelevisedLive',
-      //   creatorId: '1467726470533754880',
-      images: {
-        url: urlForImage(liveEvent.mainImage).url(),
-        // alt: liveEvent.mainImage.alt,
-      },
+      images: liveEvent.mainImage
+        ? {
+            url: urlForImage(liveEvent.mainImage as any)?.url() || '',
+            alt: liveEvent.mainImage.alt || liveEvent.title,
+          }
+        : undefined,
     },
 
-    // colorScheme: 'dark',
-    // referrer: 'origin-when-cross-origin',
-    // formatDetection: {
-    //   email: false,
-    //   address: false,
-    //   telephone: false,
-    // },
+    referrer: 'origin-when-cross-origin',
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
   };
 
   return metadata;

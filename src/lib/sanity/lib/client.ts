@@ -9,4 +9,8 @@ const client = createClient({
   useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
 });
 
+// Export as default
 export default client;
+
+// Also export as named export for compatibility
+export { client };

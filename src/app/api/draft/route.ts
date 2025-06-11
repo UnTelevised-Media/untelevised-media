@@ -3,9 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { validatePreviewUrl } from '@sanity/preview-url-secret';
-
-import { readToken as token } from '@/lib/sanity/lib/tokens';
-import client from '@/lib/sanity/lib/client';
+import { client } from '@/lib/sanity/client';
+import { readToken as token } from '@/lib/sanity/tokens';
 
 const clientWithToken = client.withConfig({ token });
 

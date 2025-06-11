@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable react/function-component-definition */
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { client } from '@/l/sanity/client';
+import client from '@/lib/sanity/lib/client';
 
 type Props = {
   post: Article;
@@ -47,12 +47,8 @@ function Comments({ post }: Props) {
         onSubmit={handleSubmit(onSubmit)}
         className='mx-auto my-10 mb-10 flex max-w-2xl flex-col p-5'
       >
-        <h1 className='text-3xl font-bold'>
-          Join the discussion on this article.
-        </h1>
-        <p className='text-xs font-light'>
-          This feature is not yet fully functional sorry.
-        </p>
+        <h1 className='text-3xl font-bold'>Join the discussion on this article.</h1>
+        <p className='text-xs font-light'>This feature is not yet fully functional sorry.</p>
         <input
           {...register('name', { required: true })}
           className='form-input mt-1 block w-full rounded border border-gray-400 bg-transparent px-3 py-2 shadow'
@@ -73,19 +69,13 @@ function Comments({ post }: Props) {
         />
         <input {...register('_id')} type='hidden' name='_id' value={post._id} />
         <div className='flex flex-col p-5'>
-          {errors.name && (
-            <span className='text-red-500'>The name field is required!</span>
-          )}
-          {errors.email && (
-            <span className='text-red-500'>The email field is required!</span>
-          )}
-          {errors.comment && (
-            <span className='text-red-500'>The comment field is required!</span>
-          )}
+          {errors.name && <span className='text-red-500'>The name field is required!</span>}
+          {errors.email && <span className='text-red-500'>The email field is required!</span>}
+          {errors.comment && <span className='text-red-500'>The comment field is required!</span>}
         </div>
         <input
           type='submit'
-          content='Submit Comment'
+          value='Submit Comment'
           className='focus:shadow-outline cursor-pointer rounded bg-sky-700 px-4 py-2 font-bold text-white shadow hover:bg-sky-500 focus:outline-none'
         />
       </form>

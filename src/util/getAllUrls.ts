@@ -1,6 +1,6 @@
 // getAllNews.ts
 import { groq } from 'next-sanity';
-import { client } from '@/l/sanity/client';
+import client from '@/lib/sanity/lib/client';
 
 export default async function getAllURLs() {
   const queryArticles = groq`
@@ -12,7 +12,7 @@ export default async function getAllURLs() {
   const queryLiveEvents = groq`
     *[_type == "liveEvent"] {
       ...,
-      title->,
+      title,
       slug,
     }`;
 
@@ -41,13 +41,7 @@ export default async function getAllURLs() {
     const categories = await client.fetch(queryCategories);
     const policies = await client.fetch(queryPolicies);
 
-    const allNews = [
-      ...posts,
-      ...liveEvents,
-      ...authors,
-      ...categories,
-      ...policies,
-    ];
+    const allNews = [...posts, ...liveEvents, ...authors, ...categories, ...policies];
 
     return allNews;
   } catch (error) {

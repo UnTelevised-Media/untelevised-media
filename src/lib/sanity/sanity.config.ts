@@ -11,7 +11,7 @@ import { structureTool } from 'sanity/structure';
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from './env';
 import { schemaTypes } from '@/models/schema/index'; // Changed from schemaTypes.d.ts to schemas/index.ts
-import { structure } from './structure';
+import  structure  from './structure';
 
 export default defineConfig({
   basePath: '/studio',

@@ -6,6 +6,9 @@ import { experimental_taintUniqueValue } from 'react';
 
 export const token = process.env.SANITY_API_TOKEN;
 
+// Also export as readToken for compatibility with other files
+export const readToken = token;
+
 if (!token) {
   throw new Error('Missing SANITY_API_READ_TOKEN');
 }

@@ -1,9 +1,8 @@
 /* eslint-disable import/prefer-default-export */
+import type { Metadata } from 'next';
 import { groq } from 'next-sanity';
-import { client } from '@/lib/sanity/client';
-import urlForImage, { urlForOpenGraphImage } from '@/u/urlForImage';
-import { queryBlogCatMetadata } from '@/l/sanity/queries';
-import { Metadata } from 'next';
+import client from '@/lib/sanity/lib/client';
+import urlForImage from '@/util/urlForImage';
 
 type Props = {
   params: {
@@ -14,44 +13,45 @@ type Props = {
 const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 
 // Define the generateMetadata function
-export async function generateMetadata({ params: { slug } }: Props) {
-  // Fetch the blog data based on the slug
-  const query = queryBlogCatMetadata;
+export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
+  // Fetch the category data based on the slug
+  const query = groq`
+    *[_type == "category" && slug.current == $slug][0] {
+      title,
+      description,
+      // Add more fields as needed for metadata
+    }`;
 
-  const post: blogCategory = await client.fetch(query, { slug });
+  const category: Category = await client.fetch(query, { slug });
+
+  if (!category) {
+    return {
+      title: 'Category Not Found | UnTelevised Media',
+      description: 'The requested category could not be found.',
+    };
+  }
 
   // Create metadata object with dynamic values
   const metadata: Metadata = {
-    title: `${post.title} | SW Photography`,
-    description: post.description,
-    keywords: post.keywords,
-    publisher: 'Digitl Alchemyst',
+    title: `${category.title} | UnTelevised Media`,
+    description: category.description || `Latest articles in ${category.title}`,
+    publisher: 'UnTelevised Media',
 
     openGraph: {
-      title: `${post.title} | SW Photography`,
-      description: post.description,
-      url: `${baseURL}blog/${slug}`,
+      title: `${category.title} | UnTelevised Media`,
+      description: category.description || `Latest articles in ${category.title}`,
+      url: `${baseURL}/category/${slug}`,
       locale: 'en_US',
-      siteName: 'Steven Watkins Photography',
-      images: {
-        url: urlForImage(post.featuredImage as any)?.url() || '',
-        width: 1200,
-        height: 6300,
-        alt: post.featuredImage.alt,
-      },
+      siteName: 'UnTelevised Media',
+      type: 'website',
     },
 
     twitter: {
       card: 'summary_large_image',
-      title: `${post.title} | SW Photography`,
-      description: post.description,
-      siteId: '@DigitlAlchemyst',
-      creator: '@DigitlAlchemyst',
-      creatorId: '@DigitlAlchemyst',
-      images: {
-        url: urlForImage(post.featuredImage as any)?.url() || '',
-        alt: post.featuredImage.alt,
-      },
+      title: `${category.title} | UnTelevised Media`,
+      description: category.description || `Latest articles in ${category.title}`,
+      site: '@UnTelevisedLive',
+      creator: '@UnTelevisedLive',
     },
 
     referrer: 'origin-when-cross-origin',

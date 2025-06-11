@@ -31,7 +31,7 @@ interface KeyEvent extends Base {
 }
 
 interface Article extends Base {
-  author: Author?;
+  author: Author;
   body: Block[];
   categories: Category[];
   mainImage: Image;
@@ -65,7 +65,6 @@ interface Author extends Base {
   image: Image;
   relatedArticles: Article[];
 }
-
 
 interface Image {
   _type: 'image';
