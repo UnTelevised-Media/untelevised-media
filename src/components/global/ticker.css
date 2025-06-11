@@ -1,3 +1,5 @@
+/* src/components/global/ticker.css */
+
 .hitem {
   flex-shrink: 0;
   width: 100%;
@@ -15,29 +17,39 @@
   }
 }
 
-darkred {
-  color: #00b22a;
+.darkred {
+  color: #dc2626;
 }
-strokered {
-  color: #f39595;
+
+.strokered {
+  color: #f87171;
 }
-grayish {
-  color: #767676;
+
+.grayish {
+  color: #9ca3af;
 }
-darkgreyish {
-  color: #232323;
+
+.darkgreyish {
+  color: #374151;
 }
 
 .marquee {
-  font-family: 'Odibee Sans', sans-serif;
-  color: rgb(232, 213, 213);
-  -webkit-text-stroke: 0.9px darkred;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: rgb(226, 232, 240);
+  -webkit-text-stroke: 0.5px rgba(220, 38, 38, 0.3);
+  text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
 }
 
 .track {
   white-space: nowrap;
   will-change: transform;
-  animation: marquee 1100s linear infinite;
+  animation: marquee 180s linear infinite;
+  display: inline-block;
+  padding-left: 100%;
 }
 
 @keyframes marquee {
@@ -45,6 +57,68 @@ darkgreyish {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
+}
+
+/* Enhanced animations for modern look */
+.marquee::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.8) 0%,
+    transparent 10%,
+    transparent 90%,
+    rgba(15, 23, 42, 0.8) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .track {
+    animation-duration: 120s;
+  }
+  
+  .marquee {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .track {
+    animation-duration: 100s;
+  }
+  
+  .marquee {
+    font-size: 0.8rem;
+  }
+}
+
+/* Smooth performance optimizations */
+.marquee,
+.track {
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Pause on hover for better UX */
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+/* Custom scrollbar for any overflow */
+.marquee::-webkit-scrollbar {
+  display: none;
+}
+
+.marquee {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

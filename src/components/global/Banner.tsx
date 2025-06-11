@@ -1,5 +1,6 @@
+// src/components/global/Banner.tsx
 import React from 'react';
-import { CalendarIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, ClockIcon, GlobeAltIcon, UsersIcon } from '@heroicons/react/24/outline';
 import '@/components/global/ticker.css';
 import Ticker from './Ticker';
 
@@ -18,88 +19,159 @@ const Banner = () => {
   });
 
   return (
-    <section className='relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-8'>
-      {/* Background Pattern */}
-      <div className='absolute inset-0 opacity-10'>
-        <div className='bg-[url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")] absolute inset-0' />
+    <section className='relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-12'>
+      {/* Animated Background Elements */}
+      <div className='absolute inset-0'>
+        {/* Grid Pattern */}
+        <div className='bg-[url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23dc2626" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")] absolute inset-0 opacity-40' />
+
+        {/* Floating Orbs */}
+        <div className='absolute left-1/4 top-20 h-64 w-64 animate-pulse rounded-full bg-gradient-to-r from-untele/20 to-red-400/20 blur-3xl' />
+        <div
+          className='absolute bottom-20 right-1/4 h-48 w-48 animate-pulse rounded-full bg-gradient-to-r from-blue-600/10 to-purple-600/10 blur-3xl'
+          style={{ animationDelay: '2s' }}
+        />
       </div>
 
       <div className='relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-        <div className='flex flex-col space-y-6 lg:flex-row lg:items-center lg:justify-between lg:space-y-0'>
+        <div className='flex flex-col space-y-8 lg:flex-row lg:items-center lg:justify-between lg:space-y-0'>
           {/* Brand Section */}
           <div className='text-center lg:flex-1 lg:text-left'>
-            <div className='mb-3 flex items-center justify-center space-x-3 lg:justify-start'>
-              <div className='h-1 w-12 rounded-full bg-untele' />
+            {/* Breaking News Alert */}
+            <div className='mb-6 inline-flex items-center space-x-3 rounded-full border border-untele/30 bg-untele/10 px-6 py-2 backdrop-blur-sm'>
+              <div className='h-2 w-2 animate-pulse rounded-full bg-untele' />
               <span className='text-sm font-bold uppercase tracking-wider text-untele'>
-                Independent Media
+                Breaking Coverage
               </span>
-              <div className='h-1 w-12 rounded-full bg-untele' />
+              <div className='h-2 w-2 animate-pulse rounded-full bg-untele' />
             </div>
 
-            <h1 className='text-4xl font-bold text-white sm:text-5xl lg:text-6xl'>
-              <span className='bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent'>
+            <h1 className='mb-4 text-5xl font-bold text-white sm:text-6xl lg:text-7xl'>
+              <span className='bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent'>
                 UnTelevised
               </span>
-              <span className='mt-1 block text-2xl font-normal text-untele sm:text-3xl lg:text-4xl'>
-                Media
-              </span>
+              <div className='mt-2 flex items-center justify-center space-x-3 lg:justify-start'>
+                <span className='bg-gradient-to-r from-untele to-red-400 bg-clip-text text-3xl font-normal text-transparent sm:text-4xl lg:text-5xl'>
+                  Media
+                </span>
+                <div className='flex space-x-1'>
+                  <div
+                    className='h-2 w-2 animate-bounce rounded-full bg-untele'
+                    style={{ animationDelay: '0s' }}
+                  />
+                  <div
+                    className='h-2 w-2 animate-bounce rounded-full bg-untele'
+                    style={{ animationDelay: '0.2s' }}
+                  />
+                  <div
+                    className='h-2 w-2 animate-bounce rounded-full bg-untele'
+                    style={{ animationDelay: '0.4s' }}
+                  />
+                </div>
+              </div>
             </h1>
 
-            <p className='mx-auto mt-4 max-w-md text-lg text-slate-300 lg:mx-0'>
+            <p className='mx-auto mb-6 max-w-2xl text-lg text-slate-300 lg:mx-0 lg:text-xl'>
+              <span className='font-semibold text-white'>Independent.</span>{' '}
+              <span className='font-semibold text-white'>Unfiltered.</span>{' '}
+              <span className='font-semibold text-untele'>Unstoppable.</span>
+              <br />
               The Revolution will be{' '}
               <span className='font-bold text-untele underline decoration-2 underline-offset-4'>
                 UnTelevised
               </span>
             </p>
 
-            {/* Date and Time */}
-            <div className='mt-6 flex flex-col items-center justify-center space-y-2 text-sm text-slate-400 sm:flex-row sm:space-x-6 sm:space-y-0 lg:justify-start'>
+            {/* Stats Row */}
+            <div className='flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400 lg:justify-start'>
               <div className='flex items-center space-x-2'>
-                <CalendarIcon className='h-4 w-4' />
+                <CalendarIcon className='h-4 w-4 text-untele' />
                 <span>{currentDate}</span>
               </div>
               <div className='flex items-center space-x-2'>
-                <ClockIcon className='h-4 w-4' />
+                <ClockIcon className='h-4 w-4 text-untele' />
                 <span>{currentTime}</span>
+              </div>
+              <div className='flex items-center space-x-2'>
+                <GlobeAltIcon className='h-4 w-4 text-untele' />
+                <span>Global Coverage</span>
+              </div>
+              <div className='flex items-center space-x-2'>
+                <UsersIcon className='h-4 w-4 text-untele' />
+                <span>Independent Reporting</span>
               </div>
             </div>
           </div>
 
-          {/* Ticker Section */}
-          <div className='lg:max-w-3xl lg:flex-1'>
-            <div className='mb-4 text-center lg:text-right'>
-              <h2 className='mb-2 text-lg font-semibold text-white'>
-                Latest Headlines
-              </h2>
-              <div className='h-px bg-gradient-to-r from-transparent via-untele to-transparent' />
+          {/* Enhanced Ticker Section */}
+          <div className='lg:max-w-2xl lg:flex-1'>
+            <div className='mb-6 text-center lg:text-right'>
+              <div className='mb-4 flex items-center justify-center space-x-3 lg:justify-end'>
+                <div className='h-1 w-8 rounded-full bg-gradient-to-r from-transparent to-untele' />
+                <h2 className='text-xl font-semibold text-white lg:text-2xl'>Live News Feed</h2>
+                <div className='h-1 w-8 rounded-full bg-gradient-to-l from-transparent to-untele' />
+              </div>
+              <div className='flex items-center justify-center space-x-2 lg:justify-end'>
+                <div className='h-2 w-2 animate-pulse rounded-full bg-green-400' />
+                <span className='text-sm text-slate-300'>Real-time updates</span>
+              </div>
             </div>
 
             <div className='relative'>
-              {/* Gradient overlays for fade effect */}
-              <div className='pointer-events-none absolute left-0 top-0 z-10 h-full w-8 bg-gradient-to-r from-slate-900 to-transparent' />
-              <div className='pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-slate-900 to-transparent' />
+              {/* Enhanced Gradient overlays */}
+              <div className='pointer-events-none absolute left-0 top-0 z-10 h-full w-12 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent' />
+              <div className='pointer-events-none absolute right-0 top-0 z-10 h-full w-12 bg-gradient-to-l from-slate-900 via-slate-900/80 to-transparent' />
 
-              <div className='overflow-hidden rounded-lg border border-slate-700 bg-slate-800/50 shadow-xl backdrop-blur-sm'>
+              <div className='overflow-hidden rounded-xl border border-slate-600/50 bg-gradient-to-r from-slate-800/60 to-slate-700/60 shadow-2xl backdrop-blur-sm'>
+                <div className='border-b border-slate-600/30 bg-slate-800/40 px-4 py-2'>
+                  <div className='flex items-center justify-between'>
+                    <div className='flex items-center space-x-2'>
+                      <div className='h-2 w-2 rounded-full bg-green-400' />
+                      <span className='text-xs font-medium text-slate-300'>LIVE FEED</span>
+                    </div>
+                    <div className='flex space-x-1'>
+                      <div className='h-1 w-6 rounded-full bg-untele/60' />
+                      <div className='h-1 w-4 rounded-full bg-slate-600' />
+                      <div className='h-1 w-3 rounded-full bg-slate-600' />
+                    </div>
+                  </div>
+                </div>
                 <Ticker />
+              </div>
+            </div>
+
+            {/* News Categories Quick Access */}
+            <div className='mt-6 hidden lg:block'>
+              <div className='flex flex-wrap justify-end gap-2'>
+                {['Breaking', 'Politics', 'International', 'Investigation'].map((category) => (
+                  <button
+                    key={category}
+                    className='rounded-full border border-slate-600/50 bg-slate-800/30 px-3 py-1 text-xs font-medium text-slate-300 backdrop-blur-sm transition-all duration-200 hover:border-untele/50 hover:bg-untele/10 hover:text-white'
+                  >
+                    {category}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Breaking News Alert (conditional) */}
-        <div className='mt-8 hidden'>
-          <div className='rounded-lg border border-red-500/30 bg-red-600/20 p-4 backdrop-blur-sm'>
-            <div className='flex items-center space-x-3'>
-              <div className='flex items-center space-x-2'>
-                <div className='h-2 w-2 animate-pulse rounded-full bg-red-500' />
-                <span className='text-sm font-bold uppercase tracking-wider text-red-400'>
-                  Breaking
-                </span>
-              </div>
-              <p className='text-white'>
-                Major development in ongoing story - Full coverage available
-              </p>
+        {/* Enhanced Breaking News Alert */}
+        <div className='mt-12 rounded-xl border border-red-500/30 bg-gradient-to-r from-red-600/10 to-red-800/10 p-6 backdrop-blur-sm'>
+          <div className='flex items-center justify-center space-x-4 md:justify-start'>
+            <div className='flex items-center space-x-2'>
+              <div className='h-3 w-3 animate-pulse rounded-full bg-red-500 shadow-lg' />
+              <span className='text-sm font-bold uppercase tracking-wider text-red-400'>
+                Alert
+              </span>
             </div>
+            <p className='text-center text-white md:text-left'>
+              <span className='font-semibold'>Major Story Developing:</span> Continuous coverage of
+              breaking events -
+              <span className='ml-1 cursor-pointer text-untele underline transition-colors hover:text-red-300'>
+                Follow live updates here
+              </span>
+            </p>
           </div>
         </div>
       </div>
