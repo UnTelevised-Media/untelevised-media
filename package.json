@@ -3,6 +3,7 @@
   "version": "15.3.3",
   "private": true,
   "scripts": {
+    "migrate:posts-to-articles": "node scripts/migrate-posts-to-articles.js",
     "dev:turbo": "next dev --turbopack",
     "dev": "next dev",
     "start": "next start",
@@ -51,6 +52,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^16.5.0",
     "eslint": "9.2.0",
     "eslint-config-next": "15.3.3",
     "framer-motion": "^12.16.0",

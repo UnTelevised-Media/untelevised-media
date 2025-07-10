@@ -20,6 +20,16 @@ const nextConfig: NextConfig = {
       process.env.NEXT_PUBLIC_DEVELOPMENT_URL || 'http://localhost:3000',
     NEXT_PUBLIC_PRODUCTION_URL: process.env.NEXT_PUBLIC_PRODUCTION_URL || '',
   },
+  // Redirects for old post URLs to new article URLs
+  async redirects() {
+    return [
+      {
+        source: '/post/:slug',
+        destination: '/articles/:slug',
+        permanent: true,
+      },
+    ];
+  },
   // These could cause issue may remove
   typescript: {
     // Set this to false if you want production builds to abort if there's type errors

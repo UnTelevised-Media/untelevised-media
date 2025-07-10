@@ -15,9 +15,9 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
   return (
     <>
       {articles.map((article) => (
-        <Link href={`/post/${article.slug?.current}`} key={article._id}>
+        <Link href={`/articles/${article.slug?.current}`} key={article._id}>
           <article
-            className='hover:border-untele/50 group relative flex flex-col overflow-hidden rounded-lg border border-slate-400 bg-slate-400/80 shadow-lg transition-all duration-300 hover:shadow-xl'
+            className='group relative flex flex-col overflow-hidden rounded-lg border border-slate-400 bg-slate-400/80 shadow-lg transition-all duration-300 hover:border-untele/50 hover:shadow-xl'
             aria-labelledby={`article-title-${article._id}`}
           >
             <div className='relative aspect-video overflow-hidden'>
@@ -36,7 +36,7 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
                 {article.categories?.map((category) => (
                   <span
                     key={category._id}
-                    className='bg-untele/10 border-untele/30 text-untele rounded-full border px-3 py-1 text-xs font-medium'
+                    className='rounded-full border border-untele/30 bg-untele/10 px-3 py-1 text-xs font-medium text-untele'
                   >
                     {category.title}
                   </span>
@@ -45,7 +45,7 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
 
               <h2
                 id={`article-title-${article._id}`}
-                className='group-hover:text-untele mb-2 text-xl font-bold text-slate-900 transition-colors'
+                className='mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele'
               >
                 {article.title}
               </h2>
@@ -60,7 +60,7 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
                   <span className='text-sm text-slate-600'>
                     {formatDate(article.eventDate || article._createdAt)}
                   </span>
-                  <ArrowUpRight className='text-untele h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1' />
+                  <ArrowUpRight className='h-4 w-4 text-untele transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1' />
                 </div>
               </div>
             </div>
@@ -78,8 +78,8 @@ const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
   return (
     <div className='flex flex-col gap-6 overflow-hidden'>
       {articles.map((article) => (
-        <Link key={article._id} href={`/post/${article.slug?.current}`}>
-          <article className='hover:border-untele/50 flex h-24 overflow-hidden rounded-lg border border-slate-400 bg-slate-400/80 shadow-sm transition-all duration-300 hover:bg-slate-300'>
+        <Link key={article._id} href={`/articles/${article.slug?.current}`}>
+          <article className='flex h-24 overflow-hidden rounded-lg border border-slate-400 bg-slate-400/80 shadow-sm transition-all duration-300 hover:border-untele/50 hover:bg-slate-300'>
             {/* Thumbnail */}
             <div className='relative h-full w-24 flex-shrink-0'>
               <Image
@@ -99,7 +99,7 @@ const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
                   {article.categories?.map((category) => (
                     <span
                       key={category._id}
-                      className='bg-untele/20 border-untele/30 text-untele rounded-full border px-1.5 py-0.5 text-[10px] font-medium'
+                      className='rounded-full border border-untele/30 bg-untele/20 px-1.5 py-0.5 text-[10px] font-medium text-untele'
                     >
                       {category.title}
                     </span>
@@ -129,7 +129,7 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
   if (!article) return null;
 
   return (
-    <Link href={`/post/${article.slug?.current}`}>
+    <Link href={`/articles/${article.slug?.current}`}>
       <div
         className='group relative mx-auto w-full max-w-6xl overflow-hidden rounded-lg border border-slate-400 shadow-xl transition-transform duration-500 hover:scale-105'
         aria-labelledby='featured-article-title'
@@ -148,7 +148,7 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
 
         <div className='absolute bottom-0 left-0 w-full border-none bg-slate-900/60 backdrop-blur-sm transition duration-500 group-hover:bg-slate-800/70'>
           {article.categories?.[0] && (
-            <span className='bg-untele/90 border-untele mb-1 ml-4 mt-2 inline-block rounded-full border px-3 py-1 text-xs font-medium text-white'>
+            <span className='mb-1 ml-4 mt-2 inline-block rounded-full border border-untele bg-untele/90 px-3 py-1 text-xs font-medium text-white'>
               {article.categories[0].title}
             </span>
           )}
@@ -164,8 +164,8 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
             <div className='flex items-center gap-4'>
               <p className='font-medium text-slate-300'>{article.author?.name}</p>
               <div className='flex items-center gap-2'>
-                <ShareIcon className='hover:text-untele h-4 w-4 cursor-pointer text-slate-400 transition-colors' />
-                <ArrowUpRight className='text-untele h-4 w-4' />
+                <ShareIcon className='h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-untele' />
+                <ArrowUpRight className='h-4 w-4 text-untele' />
               </div>
             </div>
             <p className='text-sm text-slate-400'>

@@ -22,11 +22,14 @@ export default async function CategoryPage({ params: { slug } }: Props) {
   return (
     <div className='mx-auto max-w-[95wv] md:max-w-[85vw]'>
       <div>
-        <hr className='border-untele mb-8' />
+        <hr className='mb-8 border-untele' />
         <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
-          {articles?.map((post) => (
-            <ClientSideRoute route={resolveHref('post', post.slug?.current) ?? ''} key={post._id}>
-              <ArticleCardLg post={post} />
+          {articles?.map((article) => (
+            <ClientSideRoute
+              route={resolveHref('article', article.slug?.current) ?? ''}
+              key={article._id}
+            >
+              <ArticleCardLg post={article} />
             </ClientSideRoute>
           ))}
         </div>
@@ -42,7 +45,7 @@ async function getArticlesByCategory(slug: string): Promise<Article[]> {
     const articles: Article[] = await sanityFetch({
       query: queryArticleByCategory,
       params: { slug },
-      tags: ['post'],
+      tags: ['article'],
     });
     return articles;
   } catch (error) {

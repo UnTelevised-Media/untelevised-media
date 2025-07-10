@@ -1,3 +1,5 @@
+// src/util/resolveHref.ts
+
 // Define a type for the PageInfo object
 type PageInfo = {
   path: string;
@@ -9,7 +11,7 @@ type PageRoutes = Record<string, PageInfo>;
 // Define the pageRoutes object with type annotations
 const pageRoutes: PageRoutes = {
   home: { path: '/' },
-  post: { path: '/post/:slug' },
+  article: { path: '/articles/:slug' },
   category: { path: '/category/:slug' },
   liveevent: { path: '/live-event/:slug' },
   policies: { path: '/policies/:slug' },

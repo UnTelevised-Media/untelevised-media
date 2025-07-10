@@ -4,7 +4,7 @@ import { groq } from 'next-sanity';
 import client from '@/lib/sanity/lib/client';
 
 // Types for the specific query results
-interface PostQueryResult {
+interface ArticleQueryResult {
   _id: string;
   title: string;
   slug: {
@@ -26,11 +26,11 @@ interface KeyEventQueryResult {
 interface TitleWithDate {
   title: string;
   date: string;
-  type: 'post' | 'keyEvent';
+  type: 'article' | 'keyEvent';
 }
 
-const queryPost = groq`
-  *[_type=='post'] {
+const queryArticles = groq`
+  *[_type=='article'] {
     ...,
     slug,
     eventDate,
@@ -52,8 +52,8 @@ const queryKeyEvent = groq`
 
 export default async function Ticker() {
   try {
-    const [posts, keyEvents] = await Promise.all([
-      client.fetch<PostQueryResult[]>(queryPost),
+    const [articles, keyEvents] = await Promise.all([
+      client.fetch<ArticleQueryResult[]>(queryArticles),
       client.fetch<KeyEventQueryResult[]>(queryKeyEvent),
     ]);
 
@@ -63,13 +63,13 @@ export default async function Ticker() {
       type: 'keyEvent',
     }));
 
-    const postTitles: TitleWithDate[] = posts.map((post: PostQueryResult) => ({
-      title: post.title,
-      date: post.eventDate ?? post.publishedAt ?? '',
-      type: 'post',
+    const articleTitles: TitleWithDate[] = articles.map((article: ArticleQueryResult) => ({
+      title: article.title,
+      date: article.eventDate ?? article.publishedAt ?? '',
+      type: 'article',
     }));
 
-    const allTitles: TitleWithDate[] = [...keyEventTitles, ...postTitles]
+    const allTitles: TitleWithDate[] = [...keyEventTitles, ...articleTitles]
       .filter((item) => item.date) // Filter out items without dates
       .sort(
         (a: TitleWithDate, b: TitleWithDate) =>

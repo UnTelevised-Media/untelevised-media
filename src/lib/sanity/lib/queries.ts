@@ -1,4 +1,4 @@
- 
+// src/lib/sanity/lib/queries.ts
 import { groq } from 'next-sanity';
 
 export const queryLiveEvents = groq`
@@ -36,8 +36,8 @@ export const queryEventBySlug = groq`
       }
     }`;
 
-export const queryAllPost = groq`
-  *[_type=='post'] {
+export const queryAllArticles = groq`
+  *[_type=='article'] {
     ...,
     author->,
     categories[]->,
@@ -48,7 +48,7 @@ export const queryAllPost = groq`
 `;
 
 export const queryArticleBySlug = groq`
-    *[_type == 'post' && slug.current == $slug][0] {
+    *[_type == 'article' && slug.current == $slug][0] {
       ...,
       author->,
       categories[]->,
@@ -60,7 +60,7 @@ export const queryArticleBySlug = groq`
     }`;
 
 export const queryArticleByCategory = groq`
-  *[_type == 'post' && references(categories, *[_type == 'category' && slug.current == $slug]._id)] {
+  *[_type == 'article' && references(categories, *[_type == 'category' && slug.current == $slug]._id)] {
     ...,
     author->,
     categories[]->,
@@ -91,7 +91,7 @@ export const queryAllAuthors = groq`
 export const queryAuthorBySlug = groq`
   *[_type == 'author' && slug.current == $slug][0] {
     ...,
-    'relatedArticles': *[_type == 'post' && references(^._id)]| order(_createdAt desc) {
+    'relatedArticles': *[_type == 'article' && references(^._id)]| order(_createdAt desc) {
       ...,
       author->,
       categories[]->,

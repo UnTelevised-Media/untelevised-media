@@ -1,30 +1,22 @@
-// sitemap.ts
+// src/app/(user)/sitemap.ts
 
-import getAllURLs from "@/util/getAllUrls";
-
+import getAllURLs from '@/util/getAllUrls';
 
 export default async function sitemap(): Promise<
   {
     url: string;
     lastModified?: string | Date;
-    changeFrequency?:
-      | 'hourly'
-      | 'always'
-      | 'daily'
-      | 'weekly'
-      | 'monthly'
-      | 'yearly'
-      | 'never';
+    changeFrequency?: 'hourly' | 'always' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
     priority?: number;
   }[]
 > {
   const allNews = await getAllURLs();
 
-  const postURLs = allNews
-    .filter((item) => item._type === 'post')
-    .map((post) => ({
-      url: `https://www.untelevised.media/post/${post.slug.current}`,
-      lastModified: post._updatedAt,
+  const articleURLs = allNews
+    .filter((item) => item._type === 'article')
+    .map((article) => ({
+      url: `https://www.untelevised.media/articles/${article.slug.current}`,
+      lastModified: article._updatedAt,
       changeFrequency: 'daily' as const,
       priority: 0.5,
     }));
@@ -66,7 +58,7 @@ export default async function sitemap(): Promise<
     }));
 
   return [
-    ...postURLs,
+    ...articleURLs,
     ...liveEventURLs,
     ...authorURLs,
     ...categoryURLs,

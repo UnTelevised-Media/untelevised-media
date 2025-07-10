@@ -9,18 +9,18 @@ import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 
 import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryAllPost, queryLiveEvents, queryCategories } from '@/lib/sanity/lib/queries';
+import { queryAllArticles, queryLiveEvents, queryCategories } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
-  const { posts, liveEvents, categories } = frontPageData;
+  const { articles, liveEvents, categories } = frontPageData;
 
   // Split articles for different sections
-  const heroArticle = posts[0];
-  const breakingNews = posts.slice(1, 4);
-  const featuredStories = posts.slice(4, 10);
-  const moreNews = posts.slice(10);
+  const heroArticle = articles[0];
+  const breakingNews = articles.slice(1, 4);
+  const featuredStories = articles.slice(4, 10);
+  const moreNews = articles.slice(10);
 
   return (
     <div className='min-h-screen bg-black text-slate-100'>
@@ -93,15 +93,18 @@ export default async function HomePage() {
                       🔥 BREAKING NOW
                     </h3>
                   </div>
-                  <div className='p-4 space-y-4'>
+                  <div className='space-y-4 p-4'>
                     {breakingNews.map((article, index) => (
-                      <div key={article._id} className='border-b border-slate-800 pb-4 last:border-b-0'>
+                      <div
+                        key={article._id}
+                        className='border-b border-slate-800 pb-4 last:border-b-0'
+                      >
                         <div className='flex items-start space-x-3'>
                           <span className='mt-1 flex h-6 w-6 items-center justify-center bg-untele text-xs font-black text-white'>
                             {index + 1}
                           </span>
                           <div>
-                            <h4 className='text-sm font-bold text-slate-200 hover:text-untele cursor-pointer'>
+                            <h4 className='cursor-pointer text-sm font-bold text-slate-200 hover:text-untele'>
                               {article.title}
                             </h4>
                             <p className='mt-1 text-xs text-slate-400'>
@@ -120,9 +123,10 @@ export default async function HomePage() {
                     SUPPORT INDEPENDENT MEDIA
                   </h3>
                   <p className='mb-4 text-xs text-slate-300'>
-                    We&rsquo;re ON THE GROUND where others won&rsquo;t go. Help us keep reporting the truth.
+                    We&rsquo;re ON THE GROUND where others won&rsquo;t go. Help us keep reporting
+                    the truth.
                   </p>
-                  <button className='w-full bg-untele py-3 text-xs font-black uppercase tracking-widest text-white hover:bg-red-600 transition-colors'>
+                  <button className='w-full bg-untele py-3 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'>
                     DONATE NOW
                   </button>
                 </div>
@@ -146,7 +150,10 @@ export default async function HomePage() {
 
           <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {featuredStories.map((article) => (
-              <div key={article._id} className='group border border-slate-700 bg-black transition-all hover:border-untele'>
+              <div
+                key={article._id}
+                className='group border border-slate-700 bg-black transition-all hover:border-untele'
+              >
                 <div className='aspect-video overflow-hidden'>
                   <img
                     src={urlForImage(article.mainImage as any)?.url() || ''}
@@ -160,12 +167,10 @@ export default async function HomePage() {
                       {article.categories[0].title}
                     </span>
                   )}
-                  <h3 className='mb-2 font-bold text-slate-200 group-hover:text-untele line-clamp-2'>
+                  <h3 className='mb-2 line-clamp-2 font-bold text-slate-200 group-hover:text-untele'>
                     {article.title}
                   </h3>
-                  <p className='mb-3 text-xs text-slate-400 line-clamp-2'>
-                    {article.description}
-                  </p>
+                  <p className='mb-3 line-clamp-2 text-xs text-slate-400'>{article.description}</p>
                   <div className='flex items-center justify-between text-xs text-slate-500'>
                     <span className='font-bold uppercase'>{article.author?.name}</span>
                     <span>JUST IN</span>
@@ -181,9 +186,7 @@ export default async function HomePage() {
       <section className='bg-black py-12'>
         <div className='mx-auto max-w-7xl px-4'>
           <div className='mb-8 border-b border-slate-800 pb-4'>
-            <h2 className='text-2xl font-black uppercase tracking-widest text-untele'>
-               RAW FEED
-            </h2>
+            <h2 className='text-2xl font-black uppercase tracking-widest text-untele'>RAW FEED</h2>
             <p className='mt-2 text-sm text-slate-400'>
               Unfiltered. Uncensored. Direct from our correspondents.
             </p>
@@ -191,7 +194,10 @@ export default async function HomePage() {
 
           <div className='grid gap-4 lg:grid-cols-2'>
             {moreNews.map((article, index) => (
-              <div key={article._id} className='group flex border-l-4 border-slate-700 bg-slate-950 p-4 transition-all hover:border-untele hover:bg-slate-900'>
+              <div
+                key={article._id}
+                className='group flex border-l-4 border-slate-700 bg-slate-950 p-4 transition-all hover:border-untele hover:bg-slate-900'
+              >
                 <div className='flex-shrink-0'>
                   <div className='flex h-12 w-12 items-center justify-center bg-untele text-sm font-black text-white'>
                     {index + 1}
@@ -214,9 +220,7 @@ export default async function HomePage() {
                   <h3 className='mt-1 font-bold text-slate-200 group-hover:text-untele'>
                     {article.title}
                   </h3>
-                  <p className='mt-1 text-sm text-slate-400 line-clamp-2'>
-                    {article.description}
-                  </p>
+                  <p className='mt-1 line-clamp-2 text-sm text-slate-400'>{article.description}</p>
                 </div>
               </div>
             ))}
@@ -230,14 +234,15 @@ export default async function HomePage() {
           <h2 className='mb-4 text-3xl font-black uppercase tracking-widest text-white'>
             THE TRUTH WON&rsquo;T REPORT ITSELF
           </h2>
-                            <p className='mb-8 text-lg text-slate-300'>
-            We go where mainstream media won&rsquo;t. Support independent journalism that exposes what they won&rsquo;t cover.
+          <p className='mb-8 text-lg text-slate-300'>
+            We go where mainstream media won&rsquo;t. Support independent journalism that exposes
+            what they won&rsquo;t cover.
           </p>
           <div className='flex flex-col gap-4 sm:flex-row sm:justify-center'>
-            <button className='bg-untele px-8 py-4 text-sm font-black uppercase tracking-widest text-white hover:bg-red-600 transition-colors'>
+            <button className='bg-untele px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'>
               FUND THE TRUTH
             </button>
-            <button className='border-2 border-white bg-transparent px-8 py-4 text-sm font-black uppercase tracking-widest text-white hover:bg-white hover:text-black transition-colors'>
+            <button className='border-2 border-white bg-transparent px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black'>
               JOIN THE MISSION
             </button>
           </div>
@@ -252,31 +257,31 @@ export default async function HomePage() {
 }
 
 // Enhanced data fetching function
-async function getFrontPageData(): Promise<{ 
-  posts: Article[]; 
-  liveEvents: LiveEvent[]; 
-  categories: Category[] 
+async function getFrontPageData(): Promise<{
+  articles: Article[];
+  liveEvents: LiveEvent[];
+  categories: Category[];
 }> {
   try {
     // Fetch all data in parallel for better performance
-    const [liveEvents, posts, categories] = await Promise.all([
+    const [liveEvents, articles, categories] = await Promise.all([
       sanityFetch({
         query: queryLiveEvents,
         tags: ['liveEvent'],
       }) as Promise<LiveEvent[]>,
       sanityFetch({
-        query: queryAllPost,
-        tags: ['post'],
+        query: queryAllArticles,
+        tags: ['article'],
       }) as Promise<Article[]>,
       sanityFetch({
         query: queryCategories,
         tags: ['category'],
-      }) as Promise<Category[]>
+      }) as Promise<Category[]>,
     ]);
 
-    return { liveEvents, posts, categories };
+    return { liveEvents, articles, categories };
   } catch (error) {
     console.error('Failed to fetch front page data:', error);
-    return { posts: [], liveEvents: [], categories: [] };
+    return { articles: [], liveEvents: [], categories: [] };
   }
 }

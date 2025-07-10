@@ -1,10 +1,11 @@
+// src/components/post/Comments.tsx
 'use client';
 /* eslint-disable react/function-component-definition */
 import { useForm, SubmitHandler } from 'react-hook-form';
 import client from '@/lib/sanity/lib/client';
 
 type Props = {
-  post: Article;
+  article: Article;
 };
 
 type Input = {
@@ -14,7 +15,7 @@ type Input = {
   comment: string;
 };
 
-function Comments({ post }: Props) {
+function Comments({ article }: Props) {
   const {
     register,
     handleSubmit,
@@ -25,7 +26,7 @@ function Comments({ post }: Props) {
     client
       .create({
         _type: 'comment',
-        post: {
+        article: {
           _type: 'reference',
           _ref: data._id,
         },
@@ -67,7 +68,7 @@ function Comments({ post }: Props) {
           placeholder='Your comment'
           rows={8}
         />
-        <input {...register('_id')} type='hidden' name='_id' value={post._id} />
+        <input {...register('_id')} type='hidden' name='_id' value={article._id} />
         <div className='flex flex-col p-5'>
           {errors.name && <span className='text-red-500'>The name field is required!</span>}
           {errors.email && <span className='text-red-500'>The email field is required!</span>}
