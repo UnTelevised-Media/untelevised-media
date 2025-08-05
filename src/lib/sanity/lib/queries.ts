@@ -54,7 +54,7 @@ export const queryArticleBySlug = groq`
       categories[]->,
       'comments': *[
         _type == 'comment' &&
-        post._ref == ^._id &&
+        article._ref == ^._id &&
         approved == true
       ],
     }`;

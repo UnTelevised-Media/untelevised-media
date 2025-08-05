@@ -33,7 +33,7 @@ const LoadingSpinner = ({
       <div className='relative'>
         {/* Outer ring */}
         <div
-          className={`${sizeClasses[size]} animate-spin rounded-full border-2 border-slate-600`}
+          className={`${sizeClasses[size]} animate-spin rounded-full border-2 border-slate-400 dark:border-slate-600`}
         >
           <div className='absolute inset-0 animate-pulse rounded-full border-2 border-transparent border-r-untele border-t-untele'></div>
         </div>
@@ -49,7 +49,11 @@ const LoadingSpinner = ({
 
       {/* Loading Text */}
       <div className='flex items-center space-x-2'>
-        <span className={`font-medium text-slate-300 ${textSizeClasses[size]}`}>{text}</span>
+        <span
+          className={`font-medium text-slate-700 dark:text-slate-300 ${textSizeClasses[size]}`}
+        >
+          {text}
+        </span>
         <div className='flex space-x-1'>
           <div
             className='h-1 w-1 animate-bounce rounded-full bg-untele'

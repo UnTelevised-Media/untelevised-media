@@ -14,6 +14,9 @@ import Footer from '@/components/global/Footer';
 import { GoogleAdSense } from 'next-google-adsense';
 import { VisualEditing } from 'next-sanity';
 import GASVerify from '@/util/googleAdSense';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import ThemeProvider from '@/components/providers/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -64,7 +67,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const draftModeEnabled = (await draftMode()).isEnabled;
 
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       {process.env.NODE_ENV === 'production' && (
         <>
           <Script id='google-tag-manager' strategy='afterInteractive'>
@@ -79,27 +82,37 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <GASVerify googleAdsenseId={process.env.GAS_ID ?? ''} />
         </>
       )}
-      <body className={`bg-slate-400/70 scrollbar-hide ${inter.className}`}>
-        <>
-          {process.env.NODE_ENV === 'production' && (
-            <>
-              <GoogleAdSense />
-            </>
-          )}
-          <Header />
-          <Nav />
-          <Banner />
-          {draftModeEnabled && (
-            <div>
-              <a className='block bg-blue-300 p-4' href='/api/disable-draft'>
-                Disable preview mode
-              </a>
-            </div>
-          )}
-          {children}
-          {draftModeEnabled && <VisualEditing />}
-          <Footer />
-        </>
+      <body className={`${inter.className} antialiased`}>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='dark'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className='min-h-screen bg-white text-slate-900 transition-colors dark:bg-black dark:text-slate-100'>
+            {process.env.NODE_ENV === 'production' && (
+              <>
+                <GoogleAdSense />
+              </>
+            )}
+            <Header />
+            <Nav />
+            <Banner />
+            {draftModeEnabled && (
+              <div>
+                <a className='block bg-blue-300 p-4' href='/api/disable-draft'>
+                  Disable preview mode
+                </a>
+              </div>
+            )}
+            {children}
+            {draftModeEnabled && <VisualEditing />}
+            <Footer />
+            {/* Analytics */}
+            <Analytics />
+            <SpeedInsights />
+          </div>
+        </ThemeProvider>
 
         {process.env.NODE_ENV === 'production' && (
           <>

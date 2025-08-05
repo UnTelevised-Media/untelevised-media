@@ -46,14 +46,14 @@ async function Footer() {
   );
 
   return (
-    <div className='flex flex-col space-y-10 bg-slate-600 px-2 py-3'>
+    <div className='flex flex-col space-y-10 bg-slate-300 px-2 py-3 dark:bg-slate-600'>
       <div className='flex flex-col justify-between space-y-2 px-12 md:flex-row md:space-x-6 md:space-y-0'>
         {/* News Sections & About  */}
-        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
+        <h4 className='pb-2 text-lg font-semibold text-slate-900 underline dark:text-slate-50 md:hidden'>
           News Categories
         </h4>
-        <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
-          <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
+        <div className='flex flex-wrap space-x-3 text-slate-700 dark:text-slate-100 md:flex-col md:space-x-0'>
+          <h4 className='hidden pb-2 text-xl font-semibold text-slate-900 underline dark:text-slate-50 md:flex'>
             News Categories
           </h4>
           {sortedCategories
@@ -69,9 +69,11 @@ async function Footer() {
         </div>
 
         {/* Media */}
-        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>Media</h4>
-        <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
-          <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
+        <h4 className='pb-2 text-lg font-semibold text-slate-900 underline dark:text-slate-50 md:hidden'>
+          Media
+        </h4>
+        <div className='flex flex-wrap space-x-3 text-slate-700 dark:text-slate-100 md:flex-col md:space-x-0'>
+          <h4 className='hidden pb-2 text-xl font-semibold text-slate-900 underline dark:text-slate-50 md:flex'>
             Media
           </h4>
           <Link href='/'>Photo</Link>
@@ -81,11 +83,11 @@ async function Footer() {
         </div>
 
         {/* Social Links */}
-        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>
+        <h4 className='pb-2 text-lg font-semibold text-slate-900 underline dark:text-slate-50 md:hidden'>
           Social Media Platforms
         </h4>
-        <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
-          <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
+        <div className='flex flex-wrap space-x-3 text-slate-700 dark:text-slate-100 md:flex-col md:space-x-0'>
+          <h4 className='hidden pb-2 text-xl font-semibold text-slate-900 underline dark:text-slate-50 md:flex'>
             Social Media Platforms
           </h4>
           <Link
@@ -179,9 +181,11 @@ async function Footer() {
         </div>
 
         {/* Principles & Policies  */}
-        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>Policies</h4>
-        <div className='flex flex-row flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
-          <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
+        <h4 className='pb-2 text-lg font-semibold text-slate-900 underline dark:text-slate-50 md:hidden'>
+          Policies
+        </h4>
+        <div className='flex flex-row flex-wrap space-x-3 text-slate-700 dark:text-slate-100 md:flex-col md:space-x-0'>
+          <h4 className='hidden pb-2 text-xl font-semibold text-slate-900 underline dark:text-slate-50 md:flex'>
             Policies
           </h4>
           {sortedPolicies.map((policy: PolicyQueryResult) => (
@@ -195,9 +199,11 @@ async function Footer() {
         </div>
 
         {/* About */}
-        <h4 className='pb-2 text-lg font-semibold text-slate-950 underline md:hidden'>About</h4>
-        <div className='flex flex-wrap space-x-3 text-slate-900 md:flex-col md:space-x-0'>
-          <h4 className='hidden pb-2 text-xl font-semibold text-slate-950 underline md:flex'>
+        <h4 className='pb-2 text-lg font-semibold text-slate-900 underline dark:text-slate-50 md:hidden'>
+          About
+        </h4>
+        <div className='flex flex-wrap space-x-3 text-slate-700 dark:text-slate-100 md:flex-col md:space-x-0'>
+          <h4 className='hidden pb-2 text-xl font-semibold text-slate-900 underline dark:text-slate-50 md:flex'>
             About
           </h4>
           <Link href='/about'>About UnTelevised</Link>
@@ -217,10 +223,10 @@ async function Footer() {
       {/* Copywrite Notice */}
       <div className='flex justify-between'>
         {/* Copywrite  */}
-        <p className='text-sm font-light text-slate-950'>
+        <p className='text-sm font-light text-slate-900 dark:text-slate-50'>
           © Copyright 2023 UnTelevised Media™ All Rights Reserved.
         </p>
-        <p className='text-sm font-extralight text-slate-600'>
+        <p className='text-sm font-extralight text-slate-700 dark:text-slate-400'>
           1156 Humboldt St, Denver, CO 80218
         </p>
       </div>

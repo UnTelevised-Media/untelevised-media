@@ -16,6 +16,8 @@ import videoContent from './videoContent';
 // Form/contact schemas
 import contactSubmission from './contactSubmission';
 import newsletterSubscribe from './newsletterSubscribe';
+import secureContact from './secureContact';
+import whistleblower from './whistleblower';
 
 // UI/component schemas
 import ctaButton from './buttons';
@@ -50,6 +52,8 @@ export const schemaTypes = [
   // Form/contact schemas
   contactSubmission,
   newsletterSubscribe,
+  secureContact,
+  whistleblower,
 
   // UI/component schemas
   ctaButton,
@@ -84,6 +88,8 @@ export {
   // Form/contact schemas
   contactSubmission,
   newsletterSubscribe,
+  secureContact,
+  whistleblower,
 
   // UI/component schemas
   ctaButton,
