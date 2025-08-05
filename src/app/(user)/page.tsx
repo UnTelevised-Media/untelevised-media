@@ -3,24 +3,27 @@
 import { Suspense } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Link from 'next/link';
 
 import LiveWidget from '@/components/cards/LiveWidget';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
+import RawFeed from '@/components/homepage/RawFeed';
 
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAllArticles, queryLiveEvents, queryCategories } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
+import formatDate from '@/util/formatDate';
 
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
-  const { articles, liveEvents, categories } = frontPageData;
+  const { articles, liveEvents } = frontPageData;
 
   // Split articles for different sections
   const heroArticle = articles[0];
-  const breakingNews = articles.slice(1, 4);
-  const featuredStories = articles.slice(4, 10);
-  const moreNews = articles.slice(10);
+  const breakingNews = articles.slice(1, 5);
+  const featuredStories = articles.slice(5, 11);
+  const moreNews = articles.slice(11);
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
@@ -86,31 +89,27 @@ export default async function HomePage() {
               </div>
 
               {/* Breaking News Sidebar */}
-              <div className='space-y-4'>
+              <div className='flex h-full flex-col space-y-4'>
                 <div className='border border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-950'>
                   <div className='border-b border-slate-300 bg-slate-100 px-4 py-3 dark:border-slate-700 dark:bg-slate-900'>
                     <h3 className='text-sm font-black uppercase tracking-widest text-untele'>
                       🔥 BREAKING NOW
                     </h3>
                   </div>
-                  <div className='space-y-4 p-4'>
-                    {breakingNews.map((article, index) => (
+                  <div className='space-y-3 p-3'>
+                    {breakingNews.map((article) => (
                       <div
                         key={article._id}
-                        className='border-b border-slate-300 pb-4 last:border-b-0 dark:border-slate-800'
+                        className='border-b border-slate-300 pb-3 last:border-b-0 dark:border-slate-800'
                       >
-                        <div className='flex items-start space-x-3'>
-                          <span className='mt-1 flex h-6 w-6 items-center justify-center bg-untele text-xs font-black text-white'>
-                            {index + 1}
-                          </span>
-                          <div>
-                            <h4 className='cursor-pointer text-sm font-bold text-slate-800 hover:text-untele dark:text-slate-200'>
-                              {article.title}
-                            </h4>
-                            <p className='mt-1 text-xs text-slate-600 dark:text-slate-400'>
-                              {article.author?.name} • Just now
-                            </p>
-                          </div>
+                        <div>
+                          <h4 className='line-clamp-2 cursor-pointer text-xs font-bold text-slate-800 hover:text-untele dark:text-slate-200'>
+                            {article.title}
+                          </h4>
+                          <p className='mt-1 text-xs text-slate-600 dark:text-slate-400'>
+                            {article.author?.name} •{' '}
+                            {formatDate(article.eventDate || article._createdAt)}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -118,7 +117,7 @@ export default async function HomePage() {
                 </div>
 
                 {/* Emergency Support Box */}
-                <div className='border-2 border-untele bg-gradient-to-b from-untele/20 to-slate-100 p-6 dark:to-black'>
+                <div className='mt-auto border-2 border-untele bg-gradient-to-b from-untele/20 to-slate-100 p-6 dark:to-black'>
                   <h3 className='mb-3 text-sm font-black uppercase tracking-widest text-untele'>
                     SUPPORT INDEPENDENT MEDIA
                   </h3>
@@ -126,9 +125,11 @@ export default async function HomePage() {
                     We&rsquo;re ON THE GROUND where others won&rsquo;t go. Help us keep reporting
                     the truth.
                   </p>
-                  <button className='w-full bg-untele py-3 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'>
-                    DONATE NOW
-                  </button>
+                  <Link href='/donate'>
+                    <button className='w-full bg-untele py-3 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'>
+                      DONATE NOW
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -152,7 +153,7 @@ export default async function HomePage() {
             {featuredStories.map((article) => (
               <div
                 key={article._id}
-                className='group border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
+                className='group flex h-full flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
               >
                 <div className='aspect-video overflow-hidden'>
                   <img
@@ -161,7 +162,7 @@ export default async function HomePage() {
                     className='h-full w-full object-cover transition-transform group-hover:scale-105'
                   />
                 </div>
-                <div className='p-4'>
+                <div className='flex flex-1 flex-col p-4'>
                   {article.categories?.[0] && (
                     <span className='mb-2 inline-block bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
                       {article.categories[0].title}
@@ -170,12 +171,12 @@ export default async function HomePage() {
                   <h3 className='mb-2 line-clamp-2 font-bold text-slate-800 group-hover:text-untele dark:text-slate-200'>
                     {article.title}
                   </h3>
-                  <p className='mb-3 line-clamp-2 text-xs text-slate-600 dark:text-slate-400'>
+                  <p className='mb-3 line-clamp-2 flex-1 text-xs text-slate-600 dark:text-slate-400'>
                     {article.description}
                   </p>
-                  <div className='flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
+                  <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
                     <span className='font-bold uppercase'>{article.author?.name}</span>
-                    <span>JUST IN</span>
+                    <span>{formatDate(article.eventDate || article._createdAt)}</span>
                   </div>
                 </div>
               </div>
@@ -185,52 +186,7 @@ export default async function HomePage() {
       </section>
 
       {/* MORE NEWS - RAW FEED STYLE */}
-      <section className='bg-white py-12 dark:bg-black'>
-        <div className='mx-auto max-w-7xl px-4'>
-          <div className='mb-8 border-b border-slate-300 pb-4 dark:border-slate-800'>
-            <h2 className='text-2xl font-black uppercase tracking-widest text-untele'>RAW FEED</h2>
-            <p className='mt-2 text-sm text-slate-600 dark:text-slate-400'>
-              Unfiltered. Uncensored. Direct from our correspondents.
-            </p>
-          </div>
-
-          <div className='grid gap-4 lg:grid-cols-2'>
-            {moreNews.map((article, index) => (
-              <div
-                key={article._id}
-                className='group flex border-l-4 border-slate-300 bg-slate-50 p-4 transition-all hover:border-untele hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:hover:bg-slate-900'
-              >
-                <div className='flex-shrink-0'>
-                  <div className='flex h-12 w-12 items-center justify-center bg-untele text-sm font-black text-white'>
-                    {index + 1}
-                  </div>
-                </div>
-                <div className='ml-4 flex-1'>
-                  <div className='flex items-center space-x-2 text-xs text-slate-600 dark:text-slate-500'>
-                    <span className='font-black uppercase'>{article.author?.name}</span>
-                    <span>•</span>
-                    <span>MOMENTS AGO</span>
-                    {article.categories?.[0] && (
-                      <>
-                        <span>•</span>
-                        <span className='font-black uppercase text-untele'>
-                          {article.categories[0].title}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                  <h3 className='mt-1 font-bold text-slate-800 group-hover:text-untele dark:text-slate-200'>
-                    {article.title}
-                  </h3>
-                  <p className='mt-1 line-clamp-2 text-sm text-slate-600 dark:text-slate-400'>
-                    {article.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <RawFeed articles={moreNews} />
 
       {/* BOTTOM CTA */}
       <section className='border-t-4 border-untele bg-gradient-to-b from-untele/20 to-white py-12 dark:to-black'>

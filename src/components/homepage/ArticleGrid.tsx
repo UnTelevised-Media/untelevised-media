@@ -15,7 +15,6 @@ import {
 
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
-import getTimeSinceEvent from '@/util/getTimeSinceEvent';
 
 interface ArticleGridProps {
   articles: Article[];
@@ -108,11 +107,7 @@ const ArticleCard: React.FC<{ article: Article; priority?: boolean }> = ({
           {/* Time indicator */}
           <div className='absolute bottom-3 right-3 flex items-center space-x-1 rounded-full bg-slate-900/80 px-2 py-1 text-xs text-slate-300 backdrop-blur-sm'>
             <ClockIcon className='h-3 w-3' />
-            <span>
-              {article.eventDate
-                ? getTimeSinceEvent(article.eventDate)
-                : formatDate(article._createdAt)}
-            </span>
+            <span>{formatDate(article.eventDate || article._createdAt)}</span>
           </div>
         </div>
 

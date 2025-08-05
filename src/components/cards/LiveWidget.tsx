@@ -95,11 +95,11 @@ export default function LiveWidget({ liveEvents }: Props) {
                     .sort(
                       (a, b) => new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime()
                     )
-                    .slice(0, 12)
+                    .slice(0, 9)
                     .map((event) => (
                       <li
                         key={event._id}
-                        className='li li::before custom-list mb-2 rounded-lg border border-untele bg-slate-300/30 text-sm text-slate-800 dark:bg-slate-700/30 dark:text-slate-200'
+                        className='li li::before deco custom-list mb-2 rounded-lg border border-untele px-1 py-0.5 bg-slate-300/30 text-sm text-slate-800 dark:bg-slate-700/30 dark:text-slate-200'
                       >
                         {event.title} -{' '}
                         <span className='relative -top-[1px] transform text-sm font-light text-untele'>
