@@ -3,16 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  MagnifyingGlassIcon,
-  Bars3Icon,
-  XMarkIcon,
-  BellIcon,
-  PlayIcon,
-} from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import Socials from './Socials';
 import ThemeToggle from './ThemeToggle';
+import { Flame, Radio } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,11 +45,11 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className='flex w-full items-center justify-between px-4 py-3 lg:px-8'>
+      <div className='flex w-full items-center justify-between px-4 py-2 md:py-3 lg:px-8'>
         {/* Logo Section */}
         <Link
           href='/'
-          className='group flex items-center space-x-3 transition-transform hover:scale-105'
+          className='group flex items-center space-x-2 transition-transform hover:scale-105 md:space-x-3'
         >
           <div className='relative'>
             <div className='absolute -inset-1 rounded-full bg-gradient-to-r from-untele/50 to-red-400/50 opacity-75 blur transition-opacity group-hover:opacity-100' />
@@ -62,15 +57,15 @@ const Header = () => {
               <Image
                 src='/Logo.png'
                 alt='UnTelevised Media Logo'
-                width={50}
-                height={50}
-                className='rounded-full border-2 border-untele/50 shadow-lg'
+                width={40}
+                height={40}
+                className='rounded-full border-2 border-untele/50 shadow-lg md:h-[50px] md:w-[50px]'
               />
-              <div className='absolute -right-1 -top-1 h-3 w-3 animate-pulse rounded-full bg-untele shadow-sm' />
+              <div className='absolute -right-1 -top-1 h-2.5 w-2.5 animate-pulse rounded-full bg-untele shadow-sm md:h-3 md:w-3' />
             </div>
           </div>
-          <div className='hidden lg:block'>
-            <h1 className='bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-xl font-bold tracking-tight text-transparent dark:from-white dark:to-slate-200'>
+          <div className='hidden xl:block'>
+            <h1 className='bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-lg font-bold tracking-tight text-transparent dark:from-white dark:to-slate-200 md:text-xl'>
               UnTelevised
             </h1>
             <p className='text-xs font-medium text-untele'>Independent Media</p>
@@ -78,32 +73,36 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className='hidden items-center space-x-8 lg:flex'>
+        <nav className='hidden items-center space-x-6 lg:flex'>
           <Link
-            href='/'
-            className='group relative font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
+            href='https://www.untelevised.live'
+            className='group flex items-center space-x-2 rounded-lg py-2 transition-all duration-200 hover:bg-green-50 dark:hover:bg-green-900/20'
           >
-            Home
-            <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
+            <Radio className='h-4 w-4 animate-pulse text-green-500' />
+            <span className='text-sm font-medium text-green-600 dark:text-green-400'>
+              Live Coverage
+            </span>
           </Link>
+
           <Link
-            href='/live-events'
-            className='group flex items-center space-x-2 font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
+            href='/category/breaking'
+            className='group flex items-center space-x-2 rounded-lg py-2 transition-all duration-200 hover:bg-red-50 dark:hover:bg-red-900/20'
           >
-            <PlayIcon className='h-4 w-4 text-untele' />
-            <span>Live Coverage</span>
-            <div className='h-2 w-2 animate-pulse rounded-full bg-red-500' />
+            <Flame className='h-4 w-4 animate-pulse text-untele' />
+            <span className='text-sm font-medium text-untele'>Breaking Events</span>
           </Link>
+
           <Link
             href='/staff'
-            className='group relative font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
+            className='group relative text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
           >
             Our Team
             <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
           </Link>
+
           <Link
             href='/about'
-            className='group relative font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
+            className='group relative text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
           >
             Mission
             <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
@@ -111,23 +110,14 @@ const Header = () => {
         </nav>
 
         {/* Right Section */}
-        <div className='flex items-center space-x-3'>
-          {/* Notifications */}
-          <button
-            className='relative rounded-lg p-2 text-slate-700 transition-all duration-200 hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50'
-            aria-label='Notifications'
-          >
-            <BellIcon className='h-5 w-5' />
-            <div className='absolute right-1 top-1 h-2 w-2 rounded-full bg-untele' />
-          </button>
-
+        <div className='flex items-center space-x-2 md:space-x-3'>
           {/* Search Button */}
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
-            className='rounded-lg p-2 text-slate-700 transition-all duration-200 hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50'
+            className='rounded-lg p-1.5 text-slate-700 transition-all duration-200 hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2'
             aria-label='Search articles'
           >
-            <MagnifyingGlassIcon className='h-5 w-5' />
+            <MagnifyingGlassIcon className='h-4 w-4 md:h-5 md:w-5' />
           </button>
 
           {/* Theme Toggle */}
@@ -138,19 +128,23 @@ const Header = () => {
           {/* Support Button */}
           <Link
             href='/donate'
-            className='hidden items-center space-x-2 rounded-lg bg-gradient-to-r from-untele to-red-500 px-4 py-2 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl md:flex'
+            className='hidden items-center space-x-1.5 rounded-lg bg-gradient-to-r from-untele to-red-500 px-3 py-1.5 text-sm font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl md:flex md:px-4 md:py-2'
           >
             <span>Support</span>
-            <div className='h-2 w-2 animate-pulse rounded-full bg-white/80' />
+            <div className='h-1.5 w-1.5 animate-pulse rounded-full bg-white/80 md:h-2 md:w-2' />
           </Link>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className='rounded-lg p-2 text-slate-700 transition-all duration-200 hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 lg:hidden'
+            className='rounded-lg p-1.5 text-slate-700 transition-all duration-200 hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2 lg:hidden'
             aria-label='Toggle menu'
           >
-            {isMenuOpen ? <XMarkIcon className='h-6 w-6' /> : <Bars3Icon className='h-6 w-6' />}
+            {isMenuOpen ? (
+              <XMarkIcon className='h-5 w-5 md:h-6 md:w-6' />
+            ) : (
+              <Bars3Icon className='h-5 w-5 md:h-6 md:w-6' />
+            )}
           </button>
 
           {/* Desktop Socials */}
@@ -206,13 +200,28 @@ const Header = () => {
               <span>Home</span>
             </Link>
             <Link
-              href='/live-events'
+              href='https://www.untelevised.live'
               className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
               onClick={() => setIsMenuOpen(false)}
             >
-              <PlayIcon className='h-4 w-4 text-untele' />
-              <span>Live Coverage</span>
-              <span className='h-2 w-2 animate-pulse rounded-full bg-red-500' />
+              <div className='h-2 w-2 rounded-full bg-untele' />
+              {/* Breaking Events Link */}
+              <div className='group flex cursor-pointer items-center space-x-2 rounded-lg py-2 backdrop-blur-sm transition-all duration-200 hover:shadow-lg'>
+                <span className='text-sm font-bold tracking-wider text-green-400'>
+                  Live Coverage
+                </span>
+                <Radio className='h-4 w-4 animate-pulse text-green-400' />
+              </div>
+            </Link>
+
+            <Link
+              href='/live-events'
+              className='duration-20 group flex max-w-54 cursor-pointer items-center space-x-3 rounded-lg py-2 font-medium text-slate-700 backdrop-blur-sm transition-colors hover:text-untele hover:shadow-lg dark:text-slate-200'
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <div className='h-2 w-2 rounded-full bg-untele' />
+              <span className='text-sm font-bold tracking-wider text-untele'>Breaking Events</span>
+              <Flame className='h-4 w-4 animate-pulse text-untele' />
             </Link>
             <Link
               href='/staff'

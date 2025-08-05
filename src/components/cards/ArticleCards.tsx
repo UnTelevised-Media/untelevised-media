@@ -38,7 +38,7 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
                 {article.categories?.map((category) => (
                   <span
                     key={category._id}
-                    className='rounded-full border border-untele/30 bg-untele/10 px-3 py-1 text-xs font-medium text-untele'
+                    className='inline-block w-fit rounded-full border border-untele/30 bg-untele/10 px-3 py-1 text-xs font-medium text-untele'
                   >
                     {category.title}
                   </span>
@@ -52,7 +52,7 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
                 {article.title}
               </h2>
 
-              <p className='mb-4 line-clamp-3 flex-grow text-sm text-slate-700'>
+              <p className='mb-4 line-clamp-4 flex-grow text-sm text-slate-700'>
                 {article.description}
               </p>
 
@@ -103,7 +103,7 @@ const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
                   {article.categories?.map((category) => (
                     <span
                       key={category._id}
-                      className='rounded-full border border-untele/30 bg-untele/20 px-1.5 py-0.5 text-[10px] font-medium text-untele'
+                      className='inline-block w-fit rounded-full border border-untele/30 bg-untele/20 px-1.5 py-0.5 text-[10px] font-medium text-untele'
                     >
                       {category.title}
                     </span>

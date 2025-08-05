@@ -35,9 +35,6 @@
 
 .marquee {
   font-family: 'Inter', 'Segoe UI', sans-serif;
-  color: rgb(226, 232, 240);
-  -webkit-text-stroke: 0.5px rgba(220, 38, 38, 0.3);
-  text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
@@ -47,16 +44,16 @@
 .track {
   white-space: nowrap;
   will-change: transform;
-  animation: marquee 180s linear infinite;
+  animation: marquee 6000s linear infinite;
   display: inline-block;
   padding-left: 100%;
 }
 
 @keyframes marquee {
-  from {
+  0% {
     transform: translateX(0);
   }
-  to {
+  100% {
     transform: translateX(-100%);
   }
 }
@@ -71,21 +68,32 @@
   height: 100%;
   background: linear-gradient(
     90deg,
-    rgba(15, 23, 42, 0.8) 0%,
+    rgba(248, 250, 252, 0.8) 0%,
     transparent 10%,
     transparent 90%,
-    rgba(15, 23, 42, 0.8) 100%
+    rgba(248, 250, 252, 0.8) 100%
   );
   pointer-events: none;
   z-index: 1;
 }
 
+/* Dark mode overlay */
+.dark .marquee::before {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.8) 0%,
+    transparent 10%,
+    transparent 90%,
+    rgba(15, 23, 42, 0.8) 100%
+  );
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .track {
-    animation-duration: 120s;
+    animation-duration: 900s;
   }
-  
+
   .marquee {
     font-size: 0.9rem;
   }
@@ -93,9 +101,9 @@
 
 @media (max-width: 480px) {
   .track {
-    animation-duration: 100s;
+    animation-duration: 700s;
   }
-  
+
   .marquee {
     font-size: 0.8rem;
   }

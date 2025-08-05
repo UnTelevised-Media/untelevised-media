@@ -9,7 +9,7 @@ import { draftMode } from 'next/headers';
 // import GATag from '@/l/googleAnalytics';
 
 import Script from 'next/script';
-import Nav from '@/components/global/Nav';
+import NavWrapper from '@/components/global/NavWrapper';
 import Footer from '@/components/global/Footer';
 import { GoogleAdSense } from 'next-google-adsense';
 import GASVerify from '@/util/googleAdSense';
@@ -103,7 +103,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 </>
               )}
               <Header />
-              <Nav />
+              <NavWrapper />
               <Banner />
               {children}
               <Footer />

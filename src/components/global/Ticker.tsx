@@ -1,5 +1,6 @@
 // src/components/global/Ticker.tsx
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
 
@@ -7,178 +8,96 @@ import sanityClient from '@/lib/sanity/lib/client';
 interface ArticleQueryResult {
   _id: string;
   title: string;
-  slug: {
-    current: string;
-  };
-  eventDate?: string;
-  publishedAt?: string;
+  _createdAt: string;
 }
 
 interface KeyEventQueryResult {
   _id: string;
   title: string;
-  slug: {
-    current: string;
-  };
-  eventDate: string;
+  _createdAt: string;
 }
 
-interface TitleWithDate {
+interface TickerItem {
   title: string;
-  date: string;
+  createdAt: string;
   type: 'article' | 'keyEvent';
 }
 
 const queryArticles = groq`
   *[_type=='article'] {
-    ...,
-    slug,
-    eventDate,
-    publishedAt,
+    _id,
     title,
-  } 
-  | order(_createdAt desc)[0...20]
+    _createdAt
+  }
+  | order(_createdAt desc)
 `;
 
 const queryKeyEvent = groq`
   *[_type=='keyEvent'] {
-    ...,
-    slug,
-    eventDate,
+    _id,
     title,
-  } 
-  | order(eventDate desc)[0...10]
+    _createdAt
+  }
+  | order(_createdAt desc)
 `;
 
-export default async function Ticker() {
-  try {
-    const [articles, keyEvents] = await Promise.all([
-      sanityClient.fetch<ArticleQueryResult[]>(queryArticles),
-      sanityClient.fetch<KeyEventQueryResult[]>(queryKeyEvent),
-    ]);
+const  Ticker = () => {
+  const [allItems, setAllItems] = useState<TickerItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-    const keyEventTitles: TitleWithDate[] = keyEvents.map((keyEvent: KeyEventQueryResult) => ({
-      title: keyEvent.title,
-      date: keyEvent.eventDate,
-      type: 'keyEvent',
-    }));
+  useEffect(() => {
+    const fetchTickerData = async () => {
+      try {
+        setIsLoading(true);
+        const [articles, keyEvents] = await Promise.all([
+          sanityClient.fetch<ArticleQueryResult[]>(queryArticles),
+          sanityClient.fetch<KeyEventQueryResult[]>(queryKeyEvent),
+        ]);
 
-    const articleTitles: TitleWithDate[] = articles.map((article: ArticleQueryResult) => ({
-      title: article.title,
-      date: article.eventDate ?? article.publishedAt ?? '',
-      type: 'article',
-    }));
+        // Combine and sort by creation date - get ALL items, not just limited
+        const combinedItems: TickerItem[] = [
+          ...articles.map((article) => ({
+            title: article.title,
+            createdAt: article._createdAt,
+            type: 'article' as const,
+          })),
+          ...keyEvents.map((keyEvent) => ({
+            title: keyEvent.title,
+            createdAt: keyEvent._createdAt,
+            type: 'keyEvent' as const,
+          })),
+        ].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()); // Sort by creation order (oldest first for proper display)
 
-    const allTitles: TitleWithDate[] = [...keyEventTitles, ...articleTitles]
-      .filter((item) => item.date) // Filter out items without dates
-      .sort(
-        (a: TitleWithDate, b: TitleWithDate) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
-      )
-      .slice(0, 15); // Limit to top 15 most recent
+        setAllItems(combinedItems);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching ticker data:', err);
+        setError('Failed to load ticker data');
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    // If no content, show default message
-    if (allTitles.length === 0) {
-      return (
-        <div className='relative flex h-16 w-full items-center overflow-hidden bg-gradient-to-r from-slate-800/80 to-slate-700/80'>
-          <div className='marquee flex items-center justify-center'>
-            <div className='track'>
-              <div className='flex items-center space-x-8 text-lg font-bold text-slate-300 lg:text-xl'>
-                <span className='flex items-center space-x-2'>
-                  <div className='h-2 w-2 animate-pulse rounded-full bg-untele' />
-                  <span>Welcome to UnTelevised Media - Your source for independent news</span>
-                </span>
-                <span className='text-untele'>•</span>
-                <span>Breaking news and live coverage</span>
-                <span className='text-untele'>•</span>
-                <span>Unfiltered reporting from the field</span>
-                <span className='text-untele'>•</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    }
+    fetchTickerData();
 
+    // Refresh data every 5 minutes to get new content
+    const interval = setInterval(fetchTickerData, 5 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Loading state
+  if (isLoading) {
     return (
-      <div className='relative flex h-16 w-full items-center overflow-hidden bg-gradient-to-r from-slate-800/80 to-slate-700/80'>
-        {/* Animated background bars */}
-        <div className='absolute inset-0 flex items-center'>
-          <div className='h-0.5 w-full animate-pulse bg-gradient-to-r from-transparent via-untele/30 to-transparent' />
-        </div>
-
-        <div className='marquee relative flex items-center justify-center'>
-          <div className='track'>
-            <div className='flex items-center space-x-8 text-lg font-bold text-slate-200 lg:text-xl'>
-              {allTitles.map((titleItem: TitleWithDate, index: number) => (
-                <React.Fragment key={`${titleItem.type}-${index}`}>
-                  <span className='flex items-center space-x-3'>
-                    {/* Type indicator */}
-                    <div
-                      className={`h-2 w-2 rounded-full ${
-                        titleItem.type === 'keyEvent' ? 'animate-pulse bg-red-400' : 'bg-blue-400'
-                      }`}
-                    />
-
-                    {/* Breaking/Live indicator for recent items */}
-                    {index < 3 && (
-                      <span
-                        className={`rounded-full px-2 py-0.5 text-xs font-bold uppercase ${
-                          titleItem.type === 'keyEvent'
-                            ? 'border border-red-500/30 bg-red-500/20 text-red-300'
-                            : 'border border-blue-500/30 bg-blue-500/20 text-blue-300'
-                        }`}
-                      >
-                        {titleItem.type === 'keyEvent' ? 'LIVE' : 'NEW'}
-                      </span>
-                    )}
-
-                    {/* Title */}
-                    <span className='transition-colors duration-200 hover:text-white'>
-                      {titleItem.title}
-                    </span>
-                  </span>
-
-                  {/* Separator */}
-                  <span className='text-2xl font-bold text-untele'>•</span>
-                </React.Fragment>
-              ))}
-
-              {/* Loop back indicator */}
-              <span className='flex items-center space-x-3'>
-                <div className='h-2 w-2 animate-pulse rounded-full bg-untele' />
-                <span className='font-bold text-untele'>CONTINUING COVERAGE</span>
-              </span>
-              <span className='text-2xl font-bold text-untele'>•</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Volume/Activity indicator */}
-        <div className='absolute bottom-1 right-2 flex items-center space-x-1'>
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className='h-1 w-1 animate-pulse rounded-full bg-untele/60'
-              style={{ animationDelay: `${i * 0.2}s` }}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  } catch (error) {
-    console.error('Error fetching ticker data:', error);
-    return (
-      <div className='relative flex h-16 w-full items-center overflow-hidden bg-gradient-to-r from-slate-800/80 to-slate-700/80'>
+      <div className='relative flex h-12 w-full items-center overflow-hidden bg-slate-100 dark:bg-slate-800'>
         <div className='marquee flex items-center justify-center'>
           <div className='track'>
-            <div className='flex items-center space-x-8 text-lg font-bold text-slate-300 lg:text-xl'>
+            <div className='flex items-center space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300'>
               <span className='flex items-center space-x-2'>
-                <div className='h-2 w-2 animate-pulse rounded-full bg-yellow-500' />
-                <span>News feed temporarily unavailable</span>
+                <div className='h-1.5 w-1.5 animate-pulse rounded-full bg-blue-500' />
+                <span>Loading latest headlines...</span>
               </span>
-              <span className='text-untele'>•</span>
-              <span>Please check back shortly for live updates</span>
               <span className='text-untele'>•</span>
             </div>
           </div>
@@ -186,4 +105,79 @@ export default async function Ticker() {
       </div>
     );
   }
+
+  // Error state
+  if (error) {
+    return (
+      <div className='relative flex h-12 w-full items-center overflow-hidden bg-slate-100 dark:bg-slate-800'>
+        <div className='marquee flex items-center justify-center'>
+          <div className='track'>
+            <div className='flex items-center space-x-6 text-sm font-medium text-slate-600 dark:text-slate-300'>
+              <span className='flex items-center space-x-2'>
+                <div className='h-1.5 w-1.5 rounded-full bg-yellow-500' />
+                <span>News feed temporarily unavailable</span>
+              </span>
+              <span className='text-untele'>•</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // No content state
+  if (allItems.length === 0) {
+    return (
+      <div className='relative flex h-12 w-full items-center overflow-hidden bg-slate-100 dark:bg-slate-800'>
+        <div className='marquee flex items-center justify-center'>
+          <div className='track'>
+            <div className='flex items-center space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300'>
+              <span>Welcome to UnTelevised Media</span>
+              <span className='text-untele'>•</span>
+              <span>Independent news and live coverage</span>
+              <span className='text-untele'>•</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Create duplicated content for seamless looping
+  const tickerContent = (
+    <>
+      {allItems.map((item, index) => (
+        <React.Fragment key={`${item.type}-${item.createdAt}-${index}`}>
+          <span className='flex items-center space-x-2 whitespace-nowrap'>
+            {/* Simple type indicator */}
+            <div
+              className={`h-1.5 w-1.5 rounded-full ${
+                item.type === 'keyEvent' ? 'bg-red-500' : 'bg-blue-500'
+              }`}
+            />
+            {/* Clean title display */}
+            <span>{item.title}</span>
+          </span>
+          {/* Simple separator */}
+          <span className='text-untele'>•</span>
+        </React.Fragment>
+      ))}
+    </>
+  );
+
+  return (
+    <div className='relative flex h-12 w-full items-center overflow-hidden bg-slate-100 dark:bg-slate-800'>
+      <div className='marquee relative flex items-center justify-center'>
+        <div className='track'>
+          <div className='flex items-center space-x-6 text-sm font-medium text-slate-700 dark:text-slate-200'>
+            {tickerContent}
+            {/* Duplicate content for seamless loop */}
+            {tickerContent}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+
+export default Ticker;

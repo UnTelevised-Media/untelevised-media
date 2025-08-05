@@ -105,7 +105,19 @@ const Banner = () => {
 
           {/* Enhanced Ticker Section */}
           <div className='lg:max-w-2xl lg:flex-1'>
-            <div className='mb-6 text-center lg:text-right flex items-center justify-between'>
+
+            {/* Warning  */}
+            <div className='flex items-center justify-center mb-2 w-full mx-auto'>
+              <div className='h-1 w-8 rounded-full bg-gradient-to-r from-transparent to-untele' />
+              <h2 className='text-wrap text-xs font-light text-slate-900 dark:text-white'>
+                Please excuse our mess we are now testing and rolling out new features and UI on
+                the live site.
+              </h2>
+              <div className='h-1 w-8 rounded-full bg-gradient-to-l from-transparent to-untele' />
+            </div>
+
+            {/* Live News Feed */}
+            <div className='mb-6 flex items-center justify-between text-center lg:text-right'>
               <div className='flex items-center justify-center space-x-3 lg:justify-end'>
                 <div className='h-1 w-8 rounded-full bg-gradient-to-r from-transparent to-untele' />
                 <h2 className='text-xl font-semibold text-slate-900 dark:text-white lg:text-2xl'>
