@@ -58,7 +58,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       creator: '@UnTelevisedLive',
       images: article.mainImage
         ? {
-            url: urlForImage(article.mainImage as any)?.url() || '',
+            url: urlForImage(article.mainImage as any)?.url() ?? '',
             alt: article.mainImage.alt || article.title,
           }
         : undefined,

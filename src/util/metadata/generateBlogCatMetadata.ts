@@ -2,7 +2,6 @@
 import type { Metadata } from 'next';
 import { groq } from 'next-sanity';
 import client from '@/lib/sanity/lib/client';
-import urlForImage from '@/util/urlForImage';
 
 type Props = {
   params: {

@@ -2,7 +2,7 @@
 // src/app/api/disable-draft/route.ts
 
 import { draftMode } from 'next/headers';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { redirect } from 'next/navigation';
 
 export async function GET(request: NextRequest) {
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
 
   // Get the redirect URL from query params or default to home
   const { searchParams } = new URL(request.url);
-  const redirectTo = searchParams.get('redirect') || '/';
+  const redirectTo = searchParams.get('redirect') ?? '/';
 
   // Redirect to the specified path
   redirect(redirectTo);

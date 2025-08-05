@@ -169,8 +169,8 @@ export default defineType({
       const severityIcon = severity === 'critical' ? '🚨' : severity === 'high' ? '⚠️' : '';
       const categoryLabel = category ? category.replace('_', ' ').toUpperCase() : 'GENERAL';
       return {
-        title: title || 'Whistleblower Submission',
-        subtitle: `${severityIcon} ${categoryLabel} - ${status || 'new'}`,
+        title: title ?? 'Whistleblower Submission',
+        subtitle: `${severityIcon} ${categoryLabel} - ${status ?? 'new'}`,
       };
     },
   },

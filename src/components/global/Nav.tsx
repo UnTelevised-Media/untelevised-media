@@ -1,7 +1,7 @@
 // src/components/global/Nav.tsx
 import React from 'react';
 import { groq } from 'next-sanity';
-import { ChevronRight, Flame, TrendingUp } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import ClientSideRoute from '../providers/ClientSideRoute';
 import client from '@/lib/sanity/lib/client';
 

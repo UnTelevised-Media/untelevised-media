@@ -1,7 +1,6 @@
 /* eslint-disable react/function-component-definition */
 // src/app/(user)/donate/page.tsx
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function DonatePage() {

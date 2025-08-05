@@ -34,7 +34,7 @@ export default function WhistleblowerPage() {
   };
 
   const generateSubmissionId = () => {
-    return 'WB-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substr(2, 5).toUpperCase();
+    return `WB-${  Date.now().toString(36).toUpperCase()  }-${  Math.random().toString(36).substr(2, 5).toUpperCase()}`;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

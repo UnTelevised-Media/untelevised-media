@@ -106,8 +106,8 @@ export default defineType({
       const { title, subtitle, urgency } = selection;
       const urgencyIcon = urgency === 'critical' ? '🚨' : urgency === 'high' ? '⚠️' : '';
       return {
-        title: title || 'Secure Contact',
-        subtitle: `${urgencyIcon} ${subtitle || 'Anonymous'} - ${urgency || 'medium'} priority`,
+        title: title ?? 'Secure Contact',
+        subtitle: `${urgencyIcon} ${subtitle ?? 'Anonymous'} - ${urgency ?? 'medium'} priority`,
       };
     },
   },

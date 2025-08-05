@@ -183,7 +183,7 @@ async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
     });
     return post;
   } catch (error) {
-    console.log('Failed to fetch article:', error);
+    console.error('Failed to fetch article:', error);
     return null;
   }
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 
@@ -10,14 +11,14 @@ interface RawFeedProps {
 
 const ARTICLES_PER_PAGE = 6;
 
-export default function RawFeed({ articles }: RawFeedProps) {
+const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
   const [visibleCount, setVisibleCount] = useState(ARTICLES_PER_PAGE);
 
   const visibleArticles = articles.slice(0, visibleCount);
   const hasMore = visibleCount < articles.length;
 
   const loadMore = () => {
-    setVisibleCount(prev => Math.min(prev + ARTICLES_PER_PAGE, articles.length));
+    setVisibleCount((prev) => Math.min(prev + ARTICLES_PER_PAGE, articles.length));
   };
 
   return (
@@ -38,10 +39,11 @@ export default function RawFeed({ articles }: RawFeedProps) {
             >
               <div className='flex-shrink-0'>
                 <div className='relative h-16 w-16 overflow-hidden rounded'>
-                  <img
-                    src={urlForImage(article.mainImage as any)?.url() || ''}
+                  <Image
+                    src={urlForImage(article.mainImage as any)?.url() ?? ''}
                     alt={article.title}
-                    className='h-full w-full object-cover transition-transform group-hover:scale-105'
+                    fill
+                    className='object-cover transition-transform group-hover:scale-105'
                   />
                 </div>
               </div>
@@ -83,4 +85,6 @@ export default function RawFeed({ articles }: RawFeedProps) {
       </div>
     </section>
   );
-}
+};
+
+export default RawFeed;

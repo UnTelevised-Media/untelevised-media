@@ -1,9 +1,8 @@
 /* eslint-disable react/function-component-definition */
 // src/app/(user)/page.tsx - Alternative Version
 import { Suspense } from 'react';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import LiveWidget from '@/components/cards/LiveWidget';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
@@ -162,10 +161,12 @@ export default async function HomePage() {
                 className='group flex h-full flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
               >
                 <div className='aspect-video overflow-hidden'>
-                  <img
-                    src={urlForImage(article.mainImage as any)?.url() || ''}
+                  <Image
+                    src={urlForImage(article.mainImage as any)?.url() ?? ''}
                     alt={article.title}
-                    className='h-full w-full object-cover transition-transform group-hover:scale-105'
+                    width={800}
+                    height={450}
+                    className='object-cover transition-transform group-hover:scale-105'
                   />
                 </div>
                 <div className='flex flex-1 flex-col p-4'>

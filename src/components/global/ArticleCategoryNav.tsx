@@ -1,8 +1,7 @@
- // src/components/global/ArticleCategoryNav.tsx
+// src/components/global/ArticleCategoryNav.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import formatTitleForURL from '@/util/formatTitleForURL';
 
 interface ArticleCategoryNavProps {
   categories: Category[];
@@ -23,15 +22,21 @@ const ArticleCategoryNav: React.FC<ArticleCategoryNavProps> = ({
       let buttonsPerRow: number;
 
       // Determine buttons per row based on screen width
-      if (width < 640)
-        buttonsPerRow = 2; // sm
-      else if (width < 768)
-        buttonsPerRow = 3; // md
-      else if (width < 1024)
-        buttonsPerRow = 4; // lg
-      else if (width < 1280)
-        buttonsPerRow = 5; // xl
-      else buttonsPerRow = 6; // 2xl
+      if (width < 640) {
+        buttonsPerRow = 2;
+      } // sm
+      else if (width < 768) {
+        buttonsPerRow = 3;
+      } // md
+      else if (width < 1024) {
+        buttonsPerRow = 4;
+      } // lg
+      else if (width < 1280) {
+        buttonsPerRow = 5;
+      } // xl
+      else {
+        buttonsPerRow = 6;
+      } // 2xl
 
       // Calculate how many rows we need
       const totalButtons = categories.length;
@@ -57,11 +62,11 @@ const ArticleCategoryNav: React.FC<ArticleCategoryNavProps> = ({
 
   const CategoryButton: React.FC<{ category: Category }> = ({ category }) => {
     const isSelected = selectedCategory?.slug?.current === category.slug?.current;
-    
+
     return (
       <button
         onClick={() => onCategoryChange(category)}
-        className='group relative inline-flex w-full cursor-pointer items-center justify-center rounded-lg bg-slate-600/50 p-[2px] text-xs font-semibold leading-6 text-slate-200 no-underline shadow-lg border border-slate-500 transition-all duration-300 hover:border-untele/50'
+        className='group relative inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-slate-500 bg-slate-600/50 p-[2px] text-xs font-semibold leading-6 text-slate-200 no-underline shadow-lg transition-all duration-300 hover:border-untele/50'
       >
         <span className='absolute inset-0 overflow-hidden rounded-lg'>
           <span
@@ -73,7 +78,7 @@ const ArticleCategoryNav: React.FC<ArticleCategoryNavProps> = ({
 
         <span
           className={`relative z-10 flex w-full items-center justify-center rounded-lg bg-slate-700 px-6 py-2 transition duration-500 hover:bg-slate-600 ${
-            isSelected ? 'bg-untele/80 text-white border border-untele' : ''
+            isSelected ? 'border border-untele bg-untele/80 text-white' : ''
           }`}
         >
           {category.title}
@@ -84,8 +89,8 @@ const ArticleCategoryNav: React.FC<ArticleCategoryNavProps> = ({
   };
 
   return (
-    <nav className='space-y-3 py-4 px-4 bg-slate-600/30 rounded-lg border border-slate-500'>
-      <h3 className='text-lg font-bold text-slate-200 mb-4 border-b border-untele/30 pb-2'>
+    <nav className='space-y-3 rounded-lg border border-slate-500 bg-slate-600/30 px-4 py-4'>
+      <h3 className='mb-4 border-b border-untele/30 pb-2 text-lg font-bold text-slate-200'>
         Filter by Category
       </h3>
       {rows.map((row, rowIndex) => (

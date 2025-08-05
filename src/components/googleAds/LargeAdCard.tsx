@@ -2,7 +2,7 @@
 import Script from 'next/script';
 
 export default function LargeAdCard({
-  googleAdsenseId,
+  googleAdsenseId: _googleAdsenseId,
 }: {
   googleAdsenseId: string;
 }) {
@@ -17,9 +17,7 @@ export default function LargeAdCard({
         data-full-width-responsive='true'
       />
 
-      <Script id='GAS'>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </Script>
+      <Script id='GAS'>(adsbygoogle = window.adsbygoogle || []).push({});</Script>
     </div>
   );
 }

@@ -10,7 +10,9 @@ import urlForImage from '@/util/urlForImage';
 
 // Enhanced Article Card - matches your existing design but with the blog card layout
 const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
-  if (!articles) return null;
+  if (!articles) {
+    return null;
+  }
 
   return (
     <>
@@ -73,7 +75,9 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
 
 // Compact Article List Card
 const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
-  if (!articles?.length) return null;
+  if (!articles?.length) {
+    return null;
+  }
 
   return (
     <div className='flex flex-col gap-6 overflow-hidden'>
@@ -126,7 +130,9 @@ const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
 
 // Featured Article Card - Hero style
 const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
-  if (!article) return null;
+  if (!article) {
+    return null;
+  }
 
   return (
     <Link href={`/articles/${article.slug?.current}`}>

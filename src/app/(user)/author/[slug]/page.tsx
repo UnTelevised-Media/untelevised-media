@@ -9,7 +9,6 @@ import urlForImage from '@/u/urlForImage';
 
 import AuthorLinks from '@/components/global/AuthorLinks';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import ArticleCardLg from '@/components/cards/ArticleCardLg';
 import resolveHref from '@/util/resolveHref';
 import formatDate from '@/util/formatDate';
 import sanityFetch from '@/lib/sanity/lib/fetch';
@@ -132,7 +131,7 @@ export default async function Author({ params }: Props) {
                   <div className='relative aspect-video overflow-hidden'>
                     <Image
                       src={
-                        urlForImage(article.mainImage as any)?.url() || '/placeholder-image.jpg'
+                        urlForImage(article.mainImage as any)?.url() ?? '/placeholder-image.jpg'
                       }
                       alt={article.mainImage?.alt || article.title}
                       fill
@@ -156,7 +155,7 @@ export default async function Author({ params }: Props) {
 
                     <div className='flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>
                       <time>{formatDate(article.eventDate ?? article._createdAt)}</time>
-                      {article.categories && article.categories[0] && (
+                      {article.categories?.[0] && (
                         <span className='rounded-full bg-untele/10 px-2 py-1 text-untele'>
                           {article.categories[0].title}
                         </span>

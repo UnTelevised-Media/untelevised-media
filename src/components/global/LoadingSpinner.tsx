@@ -35,16 +35,16 @@ const LoadingSpinner = ({
         <div
           className={`${sizeClasses[size]} animate-spin rounded-full border-2 border-slate-400 dark:border-slate-600`}
         >
-          <div className='absolute inset-0 animate-pulse rounded-full border-2 border-transparent border-r-untele border-t-untele'></div>
+          <div className='absolute inset-0 animate-pulse rounded-full border-2 border-transparent border-r-untele border-t-untele' />
         </div>
 
         {/* Inner pulse */}
         <div
           className={`absolute inset-1 ${sizeClasses[size]} animate-pulse rounded-full bg-untele/20`}
-        ></div>
+         />
 
         {/* Center dot */}
-        <div className='absolute left-1/2 top-1/2 h-1 w-1 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-untele'></div>
+        <div className='absolute left-1/2 top-1/2 h-1 w-1 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-untele' />
       </div>
 
       {/* Loading Text */}
@@ -58,15 +58,15 @@ const LoadingSpinner = ({
           <div
             className='h-1 w-1 animate-bounce rounded-full bg-untele'
             style={{ animationDelay: '0s' }}
-          ></div>
+           />
           <div
             className='h-1 w-1 animate-bounce rounded-full bg-untele'
             style={{ animationDelay: '0.2s' }}
-          ></div>
+           />
           <div
             className='h-1 w-1 animate-bounce rounded-full bg-untele'
             style={{ animationDelay: '0.4s' }}
-          ></div>
+           />
         </div>
       </div>
 

@@ -5,7 +5,7 @@ import { draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { validatePreviewUrl } from '@sanity/preview-url-secret';
 import { client } from '@/lib/sanity/lib/client';
-import { readToken as token, previewSecret } from '@/lib/sanity/lib/tokens';
+import { readToken as token } from '@/lib/sanity/lib/tokens';
 
 const clientWithToken = client.withConfig({ token });
 

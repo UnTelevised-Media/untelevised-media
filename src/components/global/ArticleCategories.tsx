@@ -79,8 +79,8 @@ async function getArticleCategories() {
       tags: ['category'],
     });
     return categories.sort((a, b) => {
-      const orderA = parseInt(a.order || '0', 10);
-      const orderB = parseInt(b.order || '0', 10);
+      const orderA = parseInt(a.order ?? '0', 10);
+      const orderB = parseInt(b.order ?? '0', 10);
       return orderA - orderB;
     });
   } catch (error) {

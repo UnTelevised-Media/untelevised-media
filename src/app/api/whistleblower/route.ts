@@ -5,7 +5,7 @@ import client from '@/lib/sanity/lib/client';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
+
     // Validate required fields
     if (!body.title || !body.description || !body.category || !body.severity) {
       return NextResponse.json(
@@ -20,17 +20,17 @@ export async function POST(request: NextRequest) {
       submissionId: body.submissionId,
       title: body.title,
       description: body.description,
-      organization: body.organization || null,
-      location: body.location || null,
-      timeframe: body.timeframe || null,
+      organization: body.organization ?? null,
+      location: body.location ?? null,
+      timeframe: body.timeframe ?? null,
       category: body.category,
       severity: body.severity,
-      evidence: body.evidence || null,
-      witnessInfo: body.witnessInfo || null,
-      contactInfo: body.contactInfo || null,
+      evidence: body.evidence ?? null,
+      witnessInfo: body.witnessInfo ?? null,
+      contactInfo: body.contactInfo ?? null,
       isAnonymous: body.isAnonymous !== undefined ? body.isAnonymous : true,
-      protectionNeeded: body.protectionNeeded || false,
-      submittedAt: body.submittedAt || new Date().toISOString(),
+      protectionNeeded: body.protectionNeeded ?? false,
+      submittedAt: body.submittedAt ?? new Date().toISOString(),
       status: 'new',
       priority: 'medium',
       notes: null,
@@ -39,27 +39,20 @@ export async function POST(request: NextRequest) {
     const result = await client.create(doc);
 
     return NextResponse.json(
-      { 
-        success: true, 
+      {
+        success: true,
         id: result._id,
         submissionId: body.submissionId,
-        message: 'Whistleblower report submitted successfully' 
+        message: 'Whistleblower report submitted successfully',
       },
       { status: 201 }
     );
-
   } catch (error) {
     console.error('Error creating whistleblower submission:', error);
-    return NextResponse.json(
-      { error: 'Failed to submit whistleblower report' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to submit whistleblower report' }, { status: 500 });
   }
 }
 
 export async function GET() {
-  return NextResponse.json(
-    { error: 'Method not allowed' },
-    { status: 405 }
-  );
+  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
 }
