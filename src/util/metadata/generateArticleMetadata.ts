@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 // src/util/metadata/generateArticleMetadata.ts
 import type { Metadata } from 'next';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 import urlForImage from '@/util/urlForImage';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 
@@ -16,7 +16,7 @@ const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 // Define the generateMetadata function
 export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
   // Fetch the article data based on the slug
-  const article: Article = await client.fetch(queryArticleBySlug, { slug });
+  const article: Article = await sanityClient.fetch(queryArticleBySlug, { slug });
 
   if (!article) {
     return {
@@ -42,6 +42,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       type: 'article',
       images: article.mainImage
         ? {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(article.mainImage as any)?.url() ?? '',
             width: 1200,
             height: 630,
@@ -58,6 +59,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       creator: '@UnTelevisedLive',
       images: article.mainImage
         ? {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(article.mainImage as any)?.url() ?? '',
             alt: article.mainImage.alt || article.title,
           }

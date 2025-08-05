@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import type { Metadata } from 'next';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 import urlForImage from '@/util/urlForImage';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
 
@@ -15,7 +15,7 @@ const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 // Define the generateMetadata function
 export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
   // Fetch the live event data based on the slug
-  const liveEvent: LiveEvent = await client.fetch(queryEventBySlug, { slug });
+  const liveEvent: LiveEvent = await sanityClient.fetch(queryEventBySlug, { slug });
 
   if (!liveEvent) {
     return {
@@ -40,6 +40,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       type: 'article',
       images: liveEvent.mainImage
         ? {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(liveEvent.mainImage as any)?.url() ?? '',
             width: 1200,
             height: 630,
@@ -56,6 +57,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       creator: '@UnTelevisedLive',
       images: liveEvent.mainImage
         ? {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(liveEvent.mainImage as any)?.url() ?? '',
             alt: liveEvent.mainImage.alt || liveEvent.title,
           }

@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import type { Metadata } from 'next';
 import { groq } from 'next-sanity';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 
 type Props = {
   params: {
@@ -21,7 +21,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       // Add more fields as needed for metadata
     }`;
 
-  const category: Category = await client.fetch(query, { slug });
+  const category: Category = await sanityClient.fetch(query, { slug });
 
   if (!category) {
     return {

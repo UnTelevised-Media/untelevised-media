@@ -1,5 +1,5 @@
 // src/util/getAllUrls.ts
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 import { groq } from 'next-sanity';
 
 export default async function getAllURLs() {
@@ -35,11 +35,11 @@ export default async function getAllURLs() {
     }`;
 
   try {
-    const articles = await client.fetch(queryArticles);
-    const liveEvents = await client.fetch(queryLiveEvents);
-    const authors = await client.fetch(queryAuthors);
-    const categories = await client.fetch(queryCategories);
-    const policies = await client.fetch(queryPolicies);
+    const articles = await sanityClient.fetch(queryArticles);
+    const liveEvents = await sanityClient.fetch(queryLiveEvents);
+    const authors = await sanityClient.fetch(queryAuthors);
+    const categories = await sanityClient.fetch(queryCategories);
+    const policies = await sanityClient.fetch(queryPolicies);
 
     const allNews = [...articles, ...liveEvents, ...authors, ...categories, ...policies];
 

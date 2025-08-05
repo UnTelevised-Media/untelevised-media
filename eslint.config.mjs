@@ -30,6 +30,7 @@ export default [
       '**/tailwind.config.ts',
       'src/components/ui/**',
       'src/hooks/use-toast.ts',
+      'src/models/types/react-syntax-highlighter.d.ts',
     ],
   },
   // Main configuration

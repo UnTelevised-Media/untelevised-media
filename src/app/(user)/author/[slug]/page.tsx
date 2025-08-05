@@ -13,7 +13,7 @@ import resolveHref from '@/util/resolveHref';
 import formatDate from '@/util/formatDate';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 
 type Props = {
   params: Promise<{
@@ -191,7 +191,7 @@ async function getAuthorBySlug(slug: string): Promise<Author | null> {
 // Generate the static params for the author list
 export async function generateStaticParams() {
   const query = groq`*[_type=='author'] { slug }`;
-  const slugs: { slug: { current: string } }[] = await client.fetch(query);
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(query);
   const slugRoutes = slugs ? slugs.map((item) => item.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

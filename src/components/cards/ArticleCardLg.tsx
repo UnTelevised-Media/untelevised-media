@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import Image from 'next/image';
 import urlForImage from '@/u/urlForImage';
 import { ArrowUpRightIcon, ShareIcon } from '@heroicons/react/24/solid';
@@ -9,7 +8,7 @@ type Props = {
   post: Article;
 };
 
-export default function ArticleCardLg({ post }: Props) {
+const  ArticleCardLg = ({ post }: Props) => {
   return (
     <div className='group flex cursor-pointer flex-col rounded-lg border border-slate-400 pb-4 shadow-lg drop-shadow-sm'>
       <div className='relative h-80 w-full drop-shadow-xl transition-transform duration-200 ease-out group-hover:scale-105'>
@@ -59,3 +58,5 @@ export default function ArticleCardLg({ post }: Props) {
     </div>
   );
 }
+
+export default ArticleCardLg;

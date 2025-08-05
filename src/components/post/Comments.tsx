@@ -2,7 +2,7 @@
 'use client';
 /* eslint-disable react/function-component-definition */
 import { useForm, SubmitHandler } from 'react-hook-form';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 
 type Props = {
   article: Article;
@@ -23,7 +23,7 @@ function Comments({ article }: Props) {
   } = useForm<Input>();
 
   const onSubmit: SubmitHandler<Input> = (data) => {
-    client
+    sanityClient
       .create({
         _type: 'comment',
         article: {
@@ -35,10 +35,11 @@ function Comments({ article }: Props) {
         comment: data.comment,
       })
       .then(() => {
+        // eslint-disable-next-line no-console
         console.log('Submitted: ', data);
       })
-      .catch((err) => {
-        console.log('Not submitted: ', err);
+      .catch((err: unknown) => {
+        console.error('Not submitted: ', err);
       });
   };
 

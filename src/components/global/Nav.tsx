@@ -3,7 +3,7 @@ import React from 'react';
 import { groq } from 'next-sanity';
 import { ChevronRight } from 'lucide-react';
 import ClientSideRoute from '../providers/ClientSideRoute';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 
 const queryCategory = groq`
   *[_type=='category'] {
@@ -14,7 +14,7 @@ const queryCategory = groq`
 `;
 
 const Nav = async () => {
-  const categories = await client.fetch(queryCategory);
+  const categories = await sanityClient.fetch(queryCategory);
 
   const formatCategoryTitle = (title: string) => {
     // Convert to lowercase

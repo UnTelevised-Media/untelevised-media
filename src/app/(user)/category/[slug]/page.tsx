@@ -8,7 +8,7 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import { queryArticleByCategory } from '@/lib/sanity/lib/queries';
 import resolveHref from '@/util/resolveHref';
 import sanityFetch from '@/lib/sanity/lib/fetch';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 
 type Props = {
   params: Promise<{
@@ -57,7 +57,7 @@ async function getArticlesByCategory(slug: string): Promise<Article[]> {
 // Generate the static params for the category list
 export async function generateStaticParams() {
   const query = groq`*[_type=='category'] { slug }`;
-  const slugs: Category[] = await client.fetch(query);
+  const slugs: Category[] = await sanityClient.fetch(query);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

@@ -162,6 +162,7 @@ export default async function HomePage() {
               >
                 <div className='aspect-video overflow-hidden'>
                   <Image
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     src={urlForImage(article.mainImage as any)?.url() ?? ''}
                     alt={article.title}
                     width={800}

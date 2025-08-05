@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import type { Metadata } from 'next';
 import { groq } from 'next-sanity';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 import urlForImage from '@/util/urlForImage';
 
 type Props = {
@@ -25,7 +25,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       // Add more fields as needed for metadata
     }`;
 
-  const post: Article = await client.fetch(query, { slug });
+  const post: Article = await sanityClient.fetch(query, { slug });
 
   if (!post) {
     return {
@@ -51,6 +51,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       type: 'article',
       images: post.mainImage
         ? {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(post.mainImage as any)?.url() ?? '',
             width: 1200,
             height: 630,
@@ -67,6 +68,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       creator: '@UnTelevisedLive',
       images: post.mainImage
         ? {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(post.mainImage as any)?.url() ?? '',
             alt: post.mainImage.alt || post.title,
           }

@@ -15,7 +15,7 @@ import getTimeSinceEvent from '@/util/getTimeSinceEvent';
 import resolveHref from '@/util/resolveHref';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 
 // export { generateMetadata } from '@/util/generateLiveEventMetadata';
 
@@ -191,7 +191,7 @@ async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
 // // Generate the static params for the list of Live Events
 export async function generateStaticParams() {
   const query = groq`*[_type=='liveEvent'] { slug }`;
-  const slugs: LiveEvent[] = await client.fetch(query);
+  const slugs: LiveEvent[] = await sanityClient.fetch(query);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

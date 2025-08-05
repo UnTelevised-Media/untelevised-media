@@ -12,7 +12,7 @@ import formatDate from '@/util/formatDate';
 import resolveHref from '@/util/resolveHref';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 
 // import Comments from '@/c/post/Comments';
 
@@ -182,7 +182,7 @@ async function getArticleBySlug(slug: string): Promise<Article | null> {
     });
     return article;
   } catch (error) {
-    console.log('Failed to fetch article:', error);
+    console.error('Failed to fetch article:', error);
     return null;
   }
 }
@@ -190,7 +190,7 @@ async function getArticleBySlug(slug: string): Promise<Article | null> {
 // Generate the static params for the article list
 export async function generateStaticParams() {
   const query = groq`*[_type=='article'] { slug }`;
-  const slugs: Article[] = await client.fetch(query);
+  const slugs: Article[] = await sanityClient.fetch(query);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

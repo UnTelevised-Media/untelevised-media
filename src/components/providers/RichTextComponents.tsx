@@ -1,6 +1,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable import/prefer-default-export */
- 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Image from 'next/image';
 import Link from 'next/link';
 import urlForImage from '@/u/urlForImage';
@@ -14,7 +15,7 @@ export const RichTextComponents = {
       const alt = value.alt;
       return (
         <div className='my-3 space-y-2'>
-          <div className='relative h-144 w-full rounded-lg '>
+          <div className='relative h-144 w-full rounded-lg'>
             <Image
               className='mx-auto object-contain'
               src={urlForImage(value).url() as any}
@@ -69,7 +70,7 @@ export const RichTextComponents = {
             <div>
               <Link
                 href={`https://www.instagram.com/p/${postId}`}
-                className='hover:sky-600 text-untele '
+                className='hover:sky-600 text-untele'
                 target='_blank'
               >
                 View this post on Instagram
@@ -82,32 +83,18 @@ export const RichTextComponents = {
     },
   },
   list: {
-    bullet: ({ children }: any) => (
-      <ul className='ml-10 list-disc space-y-5 py-5'>{children}</ul>
-    ),
-    number: ({ children }: any) => (
-      <ol className='mt-lg list-decimal'>{children}</ol>
-    ),
+    bullet: ({ children }: any) => <ul className='ml-10 list-disc space-y-5 py-5'>{children}</ul>,
+    number: ({ children }: any) => <ol className='mt-lg list-decimal'>{children}</ol>,
   },
   block: {
-    h1: ({ children }: any) => (
-      <h1 className='py-6 text-4xl font-bold md:text-5xl'>{children}</h1>
-    ),
-    h2: ({ children }: any) => (
-      <h2 className='py-6 text-3xl font-bold md:text-4xl'>{children}</h2>
-    ),
-    h3: ({ children }: any) => (
-      <h3 className='py-6 text-2xl font-bold md:text-3xl'>{children}</h3>
-    ),
-    h4: ({ children }: any) => (
-      <h4 className='py-6 text-xl font-bold md:text-2xl'>{children}</h4>
-    ),
+    h1: ({ children }: any) => <h1 className='py-6 text-4xl font-bold md:text-5xl'>{children}</h1>,
+    h2: ({ children }: any) => <h2 className='py-6 text-3xl font-bold md:text-4xl'>{children}</h2>,
+    h3: ({ children }: any) => <h3 className='py-6 text-2xl font-bold md:text-3xl'>{children}</h3>,
+    h4: ({ children }: any) => <h4 className='py-6 text-xl font-bold md:text-2xl'>{children}</h4>,
   },
   marks: {
     link: ({ children, value }: any) => {
-      const rel = !value.href.startsWith('/')
-        ? 'noreferrer noopener'
-        : undefined;
+      const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined;
       return (
         <Link
           href={value.href}
@@ -119,9 +106,7 @@ export const RichTextComponents = {
       );
     },
     blockquote: ({ children }: any) => (
-      <blockquote className='boreder-l-untele my-5 border-l-4 py-5 pl-5'>
-        {children}
-      </blockquote>
+      <blockquote className='boreder-l-untele my-5 border-l-4 py-5 pl-5'>{children}</blockquote>
     ),
     code: ({ children }: any) => (
       <div>

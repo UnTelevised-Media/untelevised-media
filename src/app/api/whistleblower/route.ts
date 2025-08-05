@@ -1,6 +1,6 @@
 // src/app/api/whistleblower/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
       notes: null,
     };
 
-    const result = await client.create(doc);
+    const result = await sanityClient.create(doc);
 
     return NextResponse.json(
       {

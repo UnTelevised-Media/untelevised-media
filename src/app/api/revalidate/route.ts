@@ -1,4 +1,3 @@
- 
 /**
  * This code is responsible for revalidating queries as the dataset is updated.
  *
@@ -28,8 +27,6 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { parseBody } from 'next-sanity/webhook';
 import { revalidateSecret } from '@/lib/sanity/env';
 
-
-
 type WebhookPayload = {
   _type: string;
   slug?: string | undefined;
@@ -53,6 +50,7 @@ export async function POST(req: NextRequest) {
     // If the `_type` is `page`, then all `client.fetch` calls with
     // `{next: {tags: ['page']}}` will be revalidated
     revalidateTag(body._type);
+    // eslint-disable-next-line no-console
     console.log(`Revalidated ${body._type}`);
 
     if (body.slug) {
@@ -65,8 +63,9 @@ export async function POST(req: NextRequest) {
       now: Date.now(),
       body,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err);
-    return new Response(err.message, { status: 500 });
+    const message = err instanceof Error ? err.message : 'An unknown error occurred';
+    return new Response(message, { status: 500 });
   }
 }

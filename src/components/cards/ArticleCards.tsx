@@ -24,8 +24,8 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
           >
             <div className='relative aspect-video overflow-hidden'>
               <Image
-                src={urlForImage(article.mainImage as any)?.url() || ''}
-                alt={article.mainImage?.alt || article.title}
+                src={urlForImage(article.mainImage as any)?.url() ?? ''}
+                alt={article.mainImage?.alt ?? article.title}
                 fill
                 className='object-cover transition-transform duration-300 group-hover:scale-105'
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
@@ -87,8 +87,8 @@ const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
             {/* Thumbnail */}
             <div className='relative h-full w-24 flex-shrink-0'>
               <Image
-                src={urlForImage(article.mainImage as any)?.url() || ''}
-                alt={article.mainImage?.alt || article.title}
+                src={urlForImage(article.mainImage as any)?.url() ?? ''}
+                alt={article.mainImage?.alt ?? article.title}
                 fill
                 className='object-cover'
                 sizes='96px'
@@ -142,8 +142,8 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
       >
         <div className='relative h-[578px] w-full overflow-hidden'>
           <Image
-            src={urlForImage(article.mainImage as any)?.url() || ''}
-            alt={article.mainImage?.alt || article.title}
+            src={urlForImage(article.mainImage as any)?.url() ?? ''}
+            alt={article.mainImage?.alt ?? article.title}
             fill
             className='absolute object-cover'
             sizes='(max-width: 1200px) 100vw, 1200px'

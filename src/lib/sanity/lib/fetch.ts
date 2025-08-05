@@ -4,7 +4,7 @@ import 'server-only';
 import type { ClientPerspective } from 'next-sanity';
 import type { QueryParams } from '@sanity/client';
 import { draftMode } from 'next/headers';
-import client from './client';
+import sanityClient from './client';
 import { readToken } from './tokens';
 
 const DEFAULT_PARAMS = {} as QueryParams;
@@ -25,7 +25,7 @@ export default async function sanityFetch<QueryResponse>({
 
   // Use draft perspective and token in draft mode
   if (isDraftMode) {
-    return client.withConfig({ token: readToken }).fetch<QueryResponse>(query, params, {
+    return sanityClient.withConfig({ token: readToken }).fetch<QueryResponse>(query, params, {
       perspective: 'previewDrafts',
       useCdn: false,
       next: { tags },
@@ -33,7 +33,7 @@ export default async function sanityFetch<QueryResponse>({
   }
 
   // Use regular fetch for published content
-  return client.fetch<QueryResponse>(query, params, {
+  return sanityClient.fetch<QueryResponse>(query, params, {
     perspective,
     useCdn: true,
     next: { tags },

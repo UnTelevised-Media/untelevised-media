@@ -1,9 +1,8 @@
-
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 import createImageUrlBuilder from '@sanity/image-url';
 import type { Image } from 'sanity';
 
-const imageBuilder = createImageUrlBuilder(client);
+const imageBuilder = createImageUrlBuilder(sanityClient);
 
 // Cached images URLs for normal images
 const imageUrlCache = new Map();

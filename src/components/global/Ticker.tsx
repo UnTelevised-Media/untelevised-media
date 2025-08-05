@@ -1,7 +1,7 @@
 // src/components/global/Ticker.tsx
 import React from 'react';
 import { groq } from 'next-sanity';
-import client from '@/lib/sanity/lib/client';
+import sanityClient from '@/lib/sanity/lib/client';
 
 // Types for the specific query results
 interface ArticleQueryResult {
@@ -53,8 +53,8 @@ const queryKeyEvent = groq`
 export default async function Ticker() {
   try {
     const [articles, keyEvents] = await Promise.all([
-      client.fetch<ArticleQueryResult[]>(queryArticles),
-      client.fetch<KeyEventQueryResult[]>(queryKeyEvent),
+      sanityClient.fetch<ArticleQueryResult[]>(queryArticles),
+      sanityClient.fetch<KeyEventQueryResult[]>(queryKeyEvent),
     ]);
 
     const keyEventTitles: TitleWithDate[] = keyEvents.map((keyEvent: KeyEventQueryResult) => ({
