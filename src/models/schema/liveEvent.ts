@@ -1,13 +1,10 @@
-// src/models/schema/article.ts
 import { defineField, defineType } from 'sanity';
-import { FileText } from 'lucide-react';
 
 export default defineType({
-  name: 'article',
-  title: 'Article',
+  name: 'liveEvent',
+  title: 'Live Event',
   type: 'document',
-  icon: FileText,
-fields: [
+  fields: [
     defineField({
       name: 'slug',
       title: 'Slug',
@@ -23,30 +20,14 @@ fields: [
       type: 'string',
     }),
     defineField({
-      name: 'hasEmbeddedVideo',
-      title: 'Has Embedded Youtube Video?',
+      name: 'isCurrentEvent',
+      title: 'Is Current Event',
       type: 'boolean', // Adding a boolean field for isCurrentEvent
     }),
     defineField({
-      name: 'videoLink',
-      title: 'Video Link',
+      name: 'subtitle',
+      title: 'Subtitle',
       type: 'string',
-    }),
-    defineField({
-      name: 'keywords',
-      title: 'Keywords',
-      type: 'string',
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
-    defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: { type: 'author' },
     }),
     defineField({
       name: 'mainImage',
@@ -64,15 +45,14 @@ fields: [
       ],
     }),
     defineField({
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'category' } }],
+      name: 'videoLink',
+      title: 'Video Link',
+      type: 'string',
     }),
     defineField({
-      name: 'publishedAt',
-      title: 'Published at',
-      type: 'datetime',
+      name: 'description',
+      title: 'Description',
+      type: 'text',
     }),
     defineField({
       name: 'eventDate',
@@ -84,21 +64,41 @@ fields: [
       title: 'Body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'relatedArticles',
+      title: 'Related Articles',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'article' } }],
+    }),
+    defineField({
+      name: 'keyEvent',
+      title: 'Event',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'keyEvent' } }],
+    }),
+    defineField({
+      name: 'keywords',
+      title: 'Keywords',
+      type: 'string',
+    }),
+    defineField({
+      name: 'eventTag',
+      title: 'Event Tag',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'eventTag' } }],
+    }),
   ],
 
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
-      media: 'mainImage',
-      publishedAt: 'publishedAt',
+      date: 'eventDate',
     },
     prepare(selection) {
-      const { author, publishedAt } = selection;
-      const date = publishedAt ? new Date(publishedAt).toLocaleDateString() : 'No date';
+      const { title, date } = selection;
       return {
-        ...selection,
-        subtitle: author ? `by ${author} • ${date}` : `${date}`,
+        title,
+        subtitle: `${date ? new Date(date).toDateString() : 'No date'}`,
       };
     },
   },

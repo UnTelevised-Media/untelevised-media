@@ -33,8 +33,9 @@ const client = createClient({
   useCdn: false,
 });
 
-async function migratePosts() {
-  console.log('🚀 Starting migration from "post" to "article"...');
+async function copyPostsToArticles() {
+  console.log('🚀 Starting copy from "post" to "article"...');
+  console.log('📝 Note: Original posts will remain unchanged');
 
   try {
     // Step 1: Fetch all documents of type 'post'
@@ -42,37 +43,62 @@ async function migratePosts() {
     const posts = await client.fetch('*[_type == "post"]');
 
     if (posts.length === 0) {
-      console.log('✅ No posts found to migrate.');
+      console.log('✅ No posts found to copy.');
       return;
     }
 
-    console.log(`📊 Found ${posts.length} posts to migrate.`);
+    console.log(`📊 Found ${posts.length} posts to copy.`);
 
-    // Step 2: Create migration transaction
+    // Step 2: Check if articles already exist to avoid duplicates
+    console.log('🔍 Checking for existing articles...');
+    const existingArticles = await client.fetch('*[_type == "article"]');
+    console.log(`📊 Found ${existingArticles.length} existing articles.`);
+
+    // Step 3: Create copy operations
     const mutations = [];
+    let skippedCount = 0;
 
     for (const post of posts) {
+      // Generate new ID for the article
+      const newArticleId = `article-${post._id.replace(/^(drafts\.)?post-?/, '')}`;
+      
+      // Check if article with similar content already exists
+      const existingArticle = existingArticles.find(
+        article => article.title === post.title || article.slug?.current === post.slug?.current
+      );
+
+      if (existingArticle) {
+        console.log(`⚠️ Skipping "${post.title}" - similar article already exists`);
+        skippedCount++;
+        continue;
+      }
+
       // Create new article document
       const articleDoc = {
         ...post,
         _type: 'article',
-        _id: post._id.replace('drafts.', ''), // Remove draft prefix if present
+        _id: newArticleId,
       };
 
-      // Remove the old _id to avoid conflicts
-      delete articleDoc._id;
+      // Remove system fields that shouldn't be copied
+      delete articleDoc._rev;
+      delete articleDoc._createdAt;
+      delete articleDoc._updatedAt;
 
-      // Create mutations
+      // Create mutation
       mutations.push({
-        createOrReplace: {
-          ...articleDoc,
-          _id: post._id.replace('post-', 'article-'), // Change ID prefix
-          _type: 'article',
-        },
+        create: articleDoc
       });
     }
 
-    // Step 3: Execute migration in batches
+    if (mutations.length === 0) {
+      console.log('✅ No new articles to create. All posts already have corresponding articles.');
+      return;
+    }
+
+    console.log(`📝 Will create ${mutations.length} new articles (${skippedCount} skipped)`);
+
+    // Step 4: Execute copy operations in batches
     const batchSize = 100;
     const batches = [];
 
@@ -88,112 +114,19 @@ async function migratePosts() {
 
       const transaction = client.transaction();
       batch.forEach((mutation) => {
-        transaction.createOrReplace(mutation.createOrReplace);
+        transaction.create(mutation.create);
       });
 
       await transaction.commit();
       console.log(`✅ Batch ${i + 1} completed.`);
     }
 
-    console.log('🎉 Migration completed successfully!');
-    console.log(`📈 Migrated ${posts.length} posts to articles.`);
+    console.log('🎉 Copy operation completed successfully!');
+    console.log(`📈 Created ${mutations.length} new articles from posts.`);
+    console.log(`📝 Original ${posts.length} posts remain unchanged.`);
 
-    // Step 4: Update references (optional - you might want to run this separately)
-    console.log('🔗 Updating references...');
-    await updateReferences();
   } catch (error) {
-    console.error('❌ Migration failed:', error);
-    throw error;
-  }
-}
-
-async function updateReferences() {
-  try {
-    // Update live events that reference posts
-    const liveEvents = await client.fetch(`
-      *[_type == "liveEvent" && defined(relatedArticles)] {
-        _id,
-        relatedArticles[]-> {
-          _type,
-          _id
-        }
-      }
-    `);
-
-    for (const event of liveEvents) {
-      const updatedReferences = event.relatedArticles
-        .filter((ref) => ref._type === 'post')
-        .map((ref) => ({
-          _ref: ref._id.replace('post-', 'article-'),
-          _type: 'reference',
-        }));
-
-      if (updatedReferences.length > 0) {
-        await client.patch(event._id).set({ relatedArticles: updatedReferences }).commit();
-      }
-    }
-
-    // Update comments that reference posts
-    const comments = await client.fetch(`
-      *[_type == "comment" && defined(post)] {
-        _id,
-        post
-      }
-    `);
-
-    for (const comment of comments) {
-      if (comment.post._ref && comment.post._ref.includes('post-')) {
-        await client
-          .patch(comment._id)
-          .set({
-            post: {
-              _ref: comment.post._ref.replace('post-', 'article-'),
-              _type: 'reference',
-            },
-          })
-          .commit();
-      }
-    }
-
-    console.log('✅ References updated successfully.');
-  } catch (error) {
-    console.error('❌ Failed to update references:', error);
-    throw error;
-  }
-}
-
-async function cleanupOldPosts() {
-  console.log('🧹 Starting cleanup of old post documents...');
-
-  try {
-    const oldPosts = await client.fetch('*[_type == "post"]');
-
-    if (oldPosts.length === 0) {
-      console.log('✅ No old posts to clean up.');
-      return;
-    }
-
-    console.log(`🗑️ Found ${oldPosts.length} old posts to delete.`);
-
-    // Delete in batches
-    const batchSize = 50;
-    for (let i = 0; i < oldPosts.length; i += batchSize) {
-      const batch = oldPosts.slice(i, i + batchSize);
-      const transaction = client.transaction();
-
-      batch.forEach((post) => {
-        transaction.delete(post._id);
-      });
-
-      await transaction.commit();
-      console.log(
-        `🗑️ Deleted batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(oldPosts.length / batchSize)}`
-      );
-    }
-
-    console.log('✅ Cleanup completed successfully!');
-  } catch (error) {
-    console.error('❌ Cleanup failed:', error);
+    console.error('❌ Copy operation failed:', error);
     throw error;
   }
 }
@@ -225,6 +158,49 @@ async function backupDataset() {
   }
 }
 
+// Function to preview what will be copied
+async function previewCopy() {
+  console.log('👀 Preview: What will be copied...');
+
+  try {
+    const posts = await client.fetch('*[_type == "post"]{_id, title, slug, _createdAt}');
+    const existingArticles = await client.fetch('*[_type == "article"]{title, slug}');
+
+    if (posts.length === 0) {
+      console.log('✅ No posts found to copy.');
+      return;
+    }
+
+    console.log(`\n📊 Found ${posts.length} posts:`);
+    
+    let willCopy = 0;
+    let willSkip = 0;
+
+    posts.forEach((post, index) => {
+      const existingArticle = existingArticles.find(
+        article => article.title === post.title || article.slug?.current === post.slug?.current
+      );
+
+      if (existingArticle) {
+        console.log(`${index + 1}. ⚠️ "${post.title}" - WILL SKIP (similar article exists)`);
+        willSkip++;
+      } else {
+        console.log(`${index + 1}. ✅ "${post.title}" - WILL COPY`);
+        willCopy++;
+      }
+    });
+
+    console.log(`\n📈 Summary:`);
+    console.log(`   Will copy: ${willCopy} posts`);
+    console.log(`   Will skip: ${willSkip} posts`);
+    console.log(`   Total posts: ${posts.length}`);
+
+  } catch (error) {
+    console.error('❌ Preview failed:', error);
+    throw error;
+  }
+}
+
 // Main execution function
 async function main() {
   try {
@@ -244,41 +220,40 @@ async function main() {
 
     console.log('✅ Environment check passed.');
 
-    // Create backup
-    await backupDataset();
+    // Show preview first
+    await previewCopy();
 
-    // Run migration
-    await migratePosts();
-
-    // Ask user if they want to cleanup old posts
+    // Ask user for confirmation
     const readline = require('readline').createInterface({
       input: process.stdin,
       output: process.stdout,
     });
 
     readline.question(
-      'Do you want to delete the old "post" documents? (y/N): ',
+      '\nDo you want to proceed with copying posts to articles? (y/N): ',
       async (answer) => {
         if (answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes') {
-          await cleanupOldPosts();
+          // Create backup
+          await backupDataset();
+          
+          // Run copy operation
+          await copyPostsToArticles();
+          
+          console.log('🎯 Copy process completed!');
+          console.log('📝 Next steps:');
+          console.log('   1. Check your Sanity Studio to verify the articles were created');
+          console.log('   2. Test your application thoroughly');
+          console.log('   3. Update any code that references posts to also handle articles');
         } else {
-          console.log(
-            '⚠️ Old "post" documents were not deleted. You can run the cleanup later if needed.'
-          );
+          console.log('❌ Copy operation cancelled.');
         }
-
-        console.log('🎯 Migration process completed!');
-        console.log('📝 Next steps:');
-        console.log('   1. Deploy your updated schema to Sanity Studio');
-        console.log('   2. Test your application thoroughly');
-        console.log('   3. Update any remaining references in your codebase');
 
         readline.close();
         process.exit(0);
       }
     );
   } catch (error) {
-    console.error('💥 Migration process failed:', error);
+    console.error('💥 Copy process failed:', error);
     process.exit(1);
   }
 }
@@ -289,8 +264,7 @@ if (require.main === module) {
 }
 
 module.exports = {
-  migratePosts,
-  updateReferences,
-  cleanupOldPosts,
+  copyPostsToArticles,
   backupDataset,
+  previewCopy,
 };

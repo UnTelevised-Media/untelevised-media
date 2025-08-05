@@ -1,13 +1,10 @@
-// src/models/schema/article.ts
 import { defineField, defineType } from 'sanity';
-import { FileText } from 'lucide-react';
 
 export default defineType({
-  name: 'article',
-  title: 'Article',
+  name: 'post',
+  title: 'Post',
   type: 'document',
-  icon: FileText,
-fields: [
+  fields: [
     defineField({
       name: 'slug',
       title: 'Slug',
@@ -91,15 +88,10 @@ fields: [
       title: 'title',
       author: 'author.name',
       media: 'mainImage',
-      publishedAt: 'publishedAt',
     },
     prepare(selection) {
-      const { author, publishedAt } = selection;
-      const date = publishedAt ? new Date(publishedAt).toLocaleDateString() : 'No date';
-      return {
-        ...selection,
-        subtitle: author ? `by ${author} • ${date}` : `${date}`,
-      };
+      const { author } = selection;
+      return { ...selection, subtitle: author && `by ${author}` };
     },
   },
 });
