@@ -15,6 +15,7 @@ import {
 
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
+import getTimeSinceEvent from '@/util/getTimeSinceEvent';
 
 interface ArticleGridProps {
   articles: Article[];

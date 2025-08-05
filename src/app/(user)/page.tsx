@@ -64,9 +64,13 @@ export default async function HomePage() {
             <div className='bg-white p-4 dark:bg-black'>
               <div className='flex animate-pulse space-x-8 text-untele'>
                 {breakingNews.map((article, index) => (
-                  <span key={index} className='whitespace-nowrap font-bold'>
+                  <Link
+                    key={index}
+                    href={`/articles/${article.slug?.current}`}
+                    className='whitespace-nowrap font-bold transition-colors hover:text-red-600'
+                  >
                     • {article.title}
-                  </span>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -98,9 +102,10 @@ export default async function HomePage() {
                   </div>
                   <div className='space-y-3 p-3'>
                     {breakingNews.map((article) => (
-                      <div
+                      <Link
                         key={article._id}
-                        className='border-b border-slate-300 pb-3 last:border-b-0 dark:border-slate-800'
+                        href={`/articles/${article.slug?.current}`}
+                        className='block border-b border-slate-300 pb-3 last:border-b-0 dark:border-slate-800'
                       >
                         <div>
                           <h4 className='line-clamp-2 cursor-pointer text-xs font-bold text-slate-800 hover:text-untele dark:text-slate-200'>
@@ -111,7 +116,7 @@ export default async function HomePage() {
                             {formatDate(article.eventDate || article._createdAt)}
                           </p>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -151,8 +156,9 @@ export default async function HomePage() {
 
           <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {featuredStories.map((article) => (
-              <div
+              <Link
                 key={article._id}
+                href={`/articles/${article.slug?.current}`}
                 className='group flex h-full flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
               >
                 <div className='aspect-video overflow-hidden'>
@@ -179,7 +185,7 @@ export default async function HomePage() {
                     <span>{formatDate(article.eventDate || article._createdAt)}</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

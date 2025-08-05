@@ -17,12 +17,13 @@ import client from '@/lib/sanity/lib/client';
 // import Comments from '@/c/post/Comments';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export default async function Article({ params: { slug } }: Props) {
+export default async function Article({ params }: Props) {
+  const { slug } = await params;
   const article: Article = (await getArticleBySlug(slug)) as Article;
 
   if (!article) {

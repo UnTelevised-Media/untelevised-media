@@ -12,11 +12,13 @@ import Script from 'next/script';
 import Nav from '@/components/global/Nav';
 import Footer from '@/components/global/Footer';
 import { GoogleAdSense } from 'next-google-adsense';
-import { VisualEditing } from 'next-sanity';
 import GASVerify from '@/util/googleAdSense';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import ThemeProvider from '@/components/providers/ThemeProvider';
+import { SanityLive } from '@/lib/sanity/lib/live';
+import DraftModeBanner from '@/components/sanity/DraftModeBanner';
+import SanityVisualEditing from '@/components/sanity/VisualEditing';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -90,24 +92,27 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           disableTransitionOnChange
         >
           <div className='min-h-screen bg-white text-slate-900 transition-colors dark:bg-black dark:text-slate-100'>
-            {process.env.NODE_ENV === 'production' && (
-              <>
-                <GoogleAdSense />
-              </>
-            )}
-            <Header />
-            <Nav />
-            <Banner />
-            {draftModeEnabled && (
-              <div>
-                <a className='block bg-blue-300 p-4' href='/api/disable-draft'>
-                  Disable preview mode
-                </a>
-              </div>
-            )}
-            {children}
-            {draftModeEnabled && <VisualEditing />}
-            <Footer />
+            {/* Draft Mode Banner */}
+            <DraftModeBanner isEnabled={draftModeEnabled} />
+
+            {/* Main Content with offset for draft banner */}
+            <div className={draftModeEnabled ? 'pt-16' : ''}>
+              {process.env.NODE_ENV === 'production' && (
+                <>
+                  <GoogleAdSense />
+                </>
+              )}
+              <Header />
+              <Nav />
+              <Banner />
+              {children}
+              <Footer />
+            </div>
+
+            {/* Live Features */}
+            <SanityLive />
+            {draftModeEnabled && <SanityVisualEditing />}
+
             {/* Analytics */}
             <Analytics />
             <SpeedInsights />

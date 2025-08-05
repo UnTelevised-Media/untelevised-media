@@ -11,12 +11,13 @@ import sanityFetch from '@/lib/sanity/lib/fetch';
 import client from '@/lib/sanity/lib/client';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export default async function CategoryPage({ params: { slug } }: Props) {
+export default async function CategoryPage({ params }: Props) {
+  const { slug } = await params;
   const articles = await getArticlesByCategory(slug);
 
   return (

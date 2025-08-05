@@ -101,6 +101,7 @@ interface Category extends Base {
   slug: Slug;
   description: string;
   title: string;
+  order?: string;
 }
 
 interface EventTag extends Base {
@@ -135,8 +136,8 @@ interface Comment {
 }
 
 interface Policy {
-  title: Title;
+  title: string;
   slug: Slug;
-  order: number;
+  order: string;
   description: Block[];
 }

@@ -1,4 +1,4 @@
- // src/components/global/ArticleCategories.tsx
+// src/components/global/ArticleCategories.tsx
 /* eslint-disable react/function-component-definition */
 
 import sanityFetch from '@/lib/sanity/lib/fetch';
@@ -28,9 +28,7 @@ export default async function ArticleCategories({ activeSlug }: ArticleCategorie
 
     return (
       <Link href={`/category/${formatTitleForURL(category.title)}`} key={category._id}>
-        <button
-          className='group relative inline-flex w-full cursor-pointer items-center justify-center rounded-lg bg-slate-600/50 p-[2px] text-xs font-semibold leading-6 text-slate-200 no-underline shadow-lg border border-slate-500 transition-all duration-300 hover:border-untele/50'
-        >
+        <button className='group relative inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-slate-500 bg-slate-600/50 p-[2px] text-xs font-semibold leading-6 text-slate-200 no-underline shadow-lg transition-all duration-300 hover:border-untele/50'>
           <span className='absolute inset-0 overflow-hidden rounded-lg'>
             <span
               className={`absolute inset-0 rounded-lg bg-gradient-to-r from-untele/20 via-untele/40 to-untele/20 transition-opacity duration-500 ${
@@ -41,7 +39,7 @@ export default async function ArticleCategories({ activeSlug }: ArticleCategorie
 
           <span
             className={`relative z-10 flex w-full items-center justify-center rounded-lg bg-slate-700 px-6 py-2 transition duration-500 hover:bg-slate-600 ${
-              isSelected ? 'bg-untele/80 text-white border border-untele' : ''
+              isSelected ? 'border border-untele bg-untele/80 text-white' : ''
             }`}
           >
             {category.title}
@@ -53,8 +51,8 @@ export default async function ArticleCategories({ activeSlug }: ArticleCategorie
   };
 
   return (
-    <nav className='space-y-3 py-4 px-4'>
-      <h3 className='text-lg font-bold text-slate-200 mb-4 border-b border-untele/30 pb-2'>
+    <nav className='space-y-3 px-4 py-4'>
+      <h3 className='mb-4 border-b border-untele/30 pb-2 text-lg font-bold text-slate-200'>
         Browse by Category
       </h3>
       {rows.map((row, rowIndex) => (
@@ -80,7 +78,11 @@ async function getArticleCategories() {
       query: queryCategories,
       tags: ['category'],
     });
-    return categories.sort((a, b) => (a.order || 0) - (b.order || 0));
+    return categories.sort((a, b) => {
+      const orderA = parseInt(a.order || '0', 10);
+      const orderB = parseInt(b.order || '0', 10);
+      return orderA - orderB;
+    });
   } catch (error) {
     console.error('Failed to fetch categories:', error);
     return [];

@@ -1,9 +1,11 @@
 // src\lib\sanity\lib\fetch.ts
-// import 'server-only';
+import 'server-only';
 
 import type { ClientPerspective } from 'next-sanity';
 import type { QueryParams } from '@sanity/client';
+import { draftMode } from 'next/headers';
 import client from './client';
+import { readToken } from './tokens';
 
 const DEFAULT_PARAMS = {} as QueryParams;
 const DEFAULT_TAGS = [] as string[];
@@ -12,19 +14,27 @@ export default async function sanityFetch<QueryResponse>({
   query,
   params = DEFAULT_PARAMS,
   tags = DEFAULT_TAGS,
-  perspective,
+  perspective = 'published',
 }: {
   query: string;
   params?: QueryParams;
   tags?: string[];
-  perspective?: Omit<ClientPerspective, 'raw'>;
+  perspective?: ClientPerspective;
 }): Promise<QueryResponse> {
-  perspective ??= 'published';
+  const isDraftMode = (await draftMode()).isEnabled;
 
+  // Use draft perspective and token in draft mode
+  if (isDraftMode) {
+    return client.withConfig({ token: readToken }).fetch<QueryResponse>(query, params, {
+      perspective: 'previewDrafts',
+      useCdn: false,
+      next: { tags },
+    });
+  }
+
+  // Use regular fetch for published content
   return client.fetch<QueryResponse>(query, params, {
-    perspective: 'published',
-    // cache: 'force-cache',
-    // cache: 'no-store',
+    perspective,
     useCdn: true,
     next: { tags },
   });

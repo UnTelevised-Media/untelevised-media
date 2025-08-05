@@ -2,17 +2,18 @@
 // src/app/api/disable-draft/route.ts
 
 import { draftMode } from 'next/headers';
-import type { NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
+import { redirect } from 'next/navigation';
 
-export async function GET(req: any, res: NextApiResponse) {
+export async function GET(request: NextRequest) {
   // Disable draft mode
   const draft = await draftMode();
   draft.disable();
 
-  const url = new URL(req.url ?? '');
+  // Get the redirect URL from query params or default to home
+  const { searchParams } = new URL(request.url);
+  const redirectTo = searchParams.get('redirect') || '/';
 
-  // Corrected line
-  if (url.origin) {
-    res.redirect(new URL('/', url.origin).toString());
-  }
+  // Redirect to the specified path
+  redirect(redirectTo);
 }

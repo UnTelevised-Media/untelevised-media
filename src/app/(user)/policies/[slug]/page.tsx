@@ -8,12 +8,13 @@ import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryPolicyBySlug } from '@/lib/sanity/lib/queries';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export default async function Policies({ params: { slug } }: Props) {
+export default async function Policies({ params }: Props) {
+  const { slug } = await params;
   const policies = await getPolicyBySlug(slug);
 
   if (!policies) {

@@ -17,12 +17,13 @@ import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
 import client from '@/lib/sanity/lib/client';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export default async function Author({ params: { slug } }: Props) {
+export default async function Author({ params }: Props) {
+  const { slug } = await params;
   const author = await getAuthorBySlug(slug);
 
   if (!author) {
