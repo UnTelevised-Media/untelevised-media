@@ -6,23 +6,19 @@ const AD_CONFIG = {
   // Ad slot IDs for different placements
   AD_SLOTS: {
     // Homepage ads
-    HOMEPAGE_SIDEBAR: '9876543210',
-    HOMEPAGE_BANNER: '0987654321',
+    HOMEPAGE_SIDEBAR: '3380975563',
+    HOMEPAGE_BANNER: '2475351335',
 
     // Article page ads
-    ARTICLE_TOP: '2468135790',
-    ARTICLE_BOTTOM: '1357924680',
+    ARTICLE_TOP: '2438309423',
+    ARTICLE_BOTTOM: '8849187990',
 
     // Feed ads
-    IN_FEED: '1234567890',
-    FEED_PAGINATION: '0987654321',
+    IN_FEED: '3403906737',
+    FEED_PAGINATION: '3403906737',
 
     // Category page ads
-    CATEGORY_BANNER: '5432167890',
-
-    // Fallback/test slots
-    TEST_BANNER: '3940256099',
-    TEST_RECTANGLE: '6300978111',
+    CATEGORY_BANNER: '8209510850',
   },
 
   // Performance optimization settings
