@@ -3,6 +3,7 @@
 
 import { useEffect, useState, useRef, createContext, useContext } from 'react';
 import AD_CONFIG from '@/lib/ads/adConfig';
+import { useConsentCheck } from '@/lib/consent/context';
 
 interface AdManagerProps {
   children: React.ReactNode;
@@ -22,6 +23,7 @@ export default function AdManager({
     reducedMotion: false,
   });
   const adCountRef = useRef(0);
+  const { canUseMarketing, hasConsent } = useConsentCheck();
 
   useEffect(() => {
     // Check user preferences
@@ -72,6 +74,11 @@ export default function AdManager({
 
   // Check if more ads can be loaded
   const canLoadMoreAds = () => {
+    // Don't load ads if consent is pending or marketing cookies are denied
+    if (!hasConsent || !canUseMarketing) {
+      return false;
+    }
+
     return adCountRef.current < getMaxAdsForScreen();
   };
 
