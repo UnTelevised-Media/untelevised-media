@@ -15,7 +15,8 @@ import {
 
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
-import getTimeSinceEvent from '@/util/getTimeSinceEvent';
+import getArticleDate from '@/util/getArticleDate';
+import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 
 interface ArticleGridProps {
   articles: Article[];
@@ -108,7 +109,7 @@ const ArticleCard: React.FC<{ article: Article; priority?: boolean }> = ({
           {/* Time indicator */}
           <div className='absolute bottom-3 right-3 flex items-center space-x-1 rounded-full bg-slate-900/80 px-2 py-1 text-xs text-slate-300 backdrop-blur-sm'>
             <ClockIcon className='h-3 w-3' />
-            <span>{formatDate(article.eventDate || article._createdAt)}</span>
+            <span>{formatDate(getArticleDate(article))}</span>
           </div>
         </div>
 
@@ -192,11 +193,11 @@ const ArticleListItem: React.FC<{ article: Article }> = ({ article }) => {
 
           <div className='flex items-center justify-between text-xs text-slate-400'>
             <span>{article.author?.name}</span>
-            <span>
-              {article.eventDate
-                ? getTimeSinceEvent(article.eventDate)
-                : formatDate(article._createdAt)}
-            </span>
+            {article.eventDate ? (
+              <ClientTimeDisplay eventDate={article.eventDate} showRelativeTime={true} />
+            ) : (
+              <span>{formatDate(getArticleDate(article))}</span>
+            )}
           </div>
         </div>
       </article>

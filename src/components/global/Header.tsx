@@ -7,7 +7,7 @@ import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/o
 
 import Socials from './Socials';
 import ThemeToggle from './ThemeToggle';
-import { Flame, Radio } from 'lucide-react';
+import { Flame, Music, Radio } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -84,12 +84,22 @@ const Header = () => {
             </span>
           </Link>
 
+
           <Link
             href='/category/breaking'
             className='group flex items-center space-x-2 rounded-lg py-2 transition-all duration-200 hover:bg-red-50 dark:hover:bg-red-900/20'
           >
             <Flame className='h-4 w-4 animate-pulse text-untele' />
             <span className='text-sm font-medium text-untele'>Breaking Events</span>
+          </Link>
+          <Link
+            href='https://radio.untelevised.live'
+            className='group flex items-center space-x-2 rounded-lg py-2 transition-all duration-200 hover:bg-blue-50 dark:hover:bg-blue-900/20'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <Music className='h-4 w-4 animate-pulse text-blue-500' />
+            <span className='text-sm font-medium text-blue-600 dark:text-blue-400'>Radio</span>
           </Link>
 
           <Link
@@ -157,7 +167,7 @@ const Header = () => {
       {/* Enhanced Search Bar */}
       {isSearchOpen && (
         <div className='border-t border-slate-300 bg-gradient-to-r from-slate-100 to-slate-200 p-6 backdrop-blur-md dark:border-slate-700 dark:from-slate-900 dark:to-slate-800'>
-          <div className='mx-auto max-w-3xl'>
+          <div className='mx-auto max-w-[1400px]'>
             <div className='relative'>
               <div className='absolute inset-0 rounded-lg bg-gradient-to-r from-untele/20 to-red-400/20 blur' />
               <div className='relative flex items-center'>
@@ -205,12 +215,27 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               <div className='h-2 w-2 rounded-full bg-untele' />
-              {/* Breaking Events Link */}
+              {/* Live Coverage Link */}
               <div className='group flex cursor-pointer items-center space-x-2 rounded-lg py-2 backdrop-blur-sm transition-all duration-200 hover:shadow-lg'>
                 <span className='text-sm font-bold tracking-wider text-green-400'>
                   Live Coverage
                 </span>
                 <Radio className='h-4 w-4 animate-pulse text-green-400' />
+              </div>
+            </Link>
+
+            <Link
+              href='https://radio.untelevised.live'
+              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
+              onClick={() => setIsMenuOpen(false)}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <div className='h-2 w-2 rounded-full bg-untele' />
+              {/* Radio Link */}
+              <div className='group flex cursor-pointer items-center space-x-2 rounded-lg py-2 backdrop-blur-sm transition-all duration-200 hover:shadow-lg'>
+                <span className='text-sm font-bold tracking-wider text-blue-400'>Radio</span>
+                <Radio className='h-4 w-4 animate-pulse text-blue-400' />
               </div>
             </Link>
 

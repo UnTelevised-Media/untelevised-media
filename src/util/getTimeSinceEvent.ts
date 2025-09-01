@@ -1,9 +1,10 @@
 // A Function to calculate the difference between the current time and eventTime set from the Database.
-export default function getTimeSinceEvent(eventDate: string | Date): string {
+// This function should only be used on the client side to avoid hydration mismatches
+export default function getTimeSinceEvent(eventDate: string | Date, currentTime?: number): string {
   // Get the time difference between the current time and the event date
   const eventTime = new Date(eventDate).getTime();
-  const currentTime = new Date().getTime();
-  const timeDifference = currentTime - eventTime;
+  const now = currentTime ?? new Date().getTime();
+  const timeDifference = now - eventTime;
 
   // Calculate the difference in time between the event date and current time
   const secondsSinceEvent = Math.floor(timeDifference / 1000);

@@ -11,6 +11,7 @@ import AuthorLinks from '@/components/global/AuthorLinks';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import resolveHref from '@/util/resolveHref';
 import formatDate from '@/util/formatDate';
+import getArticleDate from '@/util/getArticleDate';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
@@ -154,7 +155,7 @@ export default async function Author({ params }: Props) {
                     )}
 
                     <div className='flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>
-                      <time>{formatDate(article.eventDate ?? article._createdAt)}</time>
+                      <time>{formatDate(getArticleDate(article))}</time>
                       {article.categories?.[0] && (
                         <span className='rounded-full bg-untele/10 px-2 py-1 text-untele'>
                           {article.categories[0].title}

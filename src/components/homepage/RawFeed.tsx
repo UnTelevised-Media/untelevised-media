@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
+import getArticleDate from '@/util/getArticleDate';
 
 interface RawFeedProps {
   articles: Article[];
@@ -23,7 +24,7 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
 
   return (
     <section className='bg-white py-12 dark:bg-black'>
-      <div className='mx-auto max-w-7xl px-4'>
+      <div className='mx-auto max-w-[1400px] px-4'>
         <div className='mb-8 border-b border-slate-300 pb-4 dark:border-slate-800'>
           <h2 className='text-2xl font-black uppercase tracking-widest text-untele'>RAW FEED</h2>
           <p className='mt-2 text-sm text-slate-600 dark:text-slate-400'>
@@ -51,7 +52,7 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
                 <div className='flex items-center space-x-2 text-xs text-slate-600 dark:text-slate-500'>
                   <span className='font-black uppercase'>{article.author?.name}</span>
                   <span>•</span>
-                  <span>{formatDate(article.eventDate || article._createdAt)}</span>
+                  <span>{formatDate(getArticleDate(article))}</span>
                   {article.categories?.[0] && (
                     <>
                       <span>•</span>

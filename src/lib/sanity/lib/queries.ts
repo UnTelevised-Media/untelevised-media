@@ -16,6 +16,7 @@ export const queryLiveEvents = groq`
         _createdAt,
         description,
         eventDate,
+        publishedAt,
     }
   } 
   | order(_createdAt desc)
@@ -33,6 +34,7 @@ export const queryEventBySlug = groq`
         _createdAt,
         description,
         eventDate,
+        publishedAt,
       }
     }`;
 
@@ -42,8 +44,8 @@ export const queryAllArticles = groq`
     author->,
     categories[]->,
     description,
-    publistedAt,
-  } 
+    publishedAt,
+  }
   | order(_createdAt desc)
 `;
 
@@ -65,7 +67,7 @@ export const queryArticleByCategory = groq`
     author->,
     categories[]->,
     description,
-    publistedAt,
+    publishedAt,
   } | order(_createdAt desc)
 `;
 
@@ -95,6 +97,7 @@ export const queryAuthorBySlug = groq`
       ...,
       author->,
       categories[]->,
+      publishedAt,
     }
   }
 `;

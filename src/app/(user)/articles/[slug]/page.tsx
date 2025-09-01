@@ -9,6 +9,7 @@ import SocialShare from '@/components/global/SocialShare';
 import urlForImage from '@/u/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
+import getArticleDate from '@/util/getArticleDate';
 import resolveHref from '@/util/resolveHref';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
@@ -112,9 +113,7 @@ export default async function Article({ params }: Props) {
                   {article.location && (
                     <span className='flex items-center text-sm'>📍 {article.location}</span>
                   )}
-                  <time className='text-sm'>
-                    {formatDate(article.eventDate ?? article._createdAt)}
-                  </time>
+                  <time className='text-sm'>{formatDate(getArticleDate(article))}</time>
                 </div>
               </div>
             </div>

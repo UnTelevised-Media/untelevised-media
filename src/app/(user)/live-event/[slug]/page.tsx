@@ -11,7 +11,7 @@ import EventMap from '@/components/post/EventMap';
 
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
-import getTimeSinceEvent from '@/util/getTimeSinceEvent';
+import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 import resolveHref from '@/util/resolveHref';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
@@ -134,9 +134,11 @@ export default async function LiveEvent({ params }: Props) {
                   >
                     <div className='flex flex-col space-y-1'>
                       <h3 className='text-base font-bold underline'>{event.title}</h3>
-                      <h4 className='text-sm text-untele/70'>
-                        {getTimeSinceEvent(event.eventDate)}
-                      </h4>
+                      <ClientTimeDisplay
+                        eventDate={event.eventDate}
+                        showRelativeTime={true}
+                        className='text-sm text-untele/70'
+                      />
                       {event.source === 'relatedArticles' ? (
                         <>
                           <p>{event.description as string}</p>

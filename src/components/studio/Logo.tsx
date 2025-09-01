@@ -1,9 +1,9 @@
 /* eslint-disable react/function-component-definition */
 import Image from 'next/image';
 
-function Logo(props: any) {
+function Logo(props: { renderDefault: () => React.ReactNode }) {
   const { renderDefault } = props;
-  
+
   return (
     <div className='flex items-center space-x-2'>
       <Image
@@ -13,9 +13,9 @@ function Logo(props: any) {
         alt='Logo'
         // className='object-cover'
       />
-      {renderDefault && <>{renderDefault(props)}</>}
+      {renderDefault && <>{renderDefault()}</>}
     </div>
   );
-};
+}
 
 export default Logo;

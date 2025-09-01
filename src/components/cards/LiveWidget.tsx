@@ -5,7 +5,7 @@ import Image from 'next/image';
 import urlForImage from '@/u/urlForImage';
 import resolveHref from '@/util/resolveHref';
 import formatDate from '@/util/formatDate';
-import getTimeSinceEvent from '@/util/getTimeSinceEvent';
+import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 
 type Props = {
   liveEvents: LiveEvent[];
@@ -20,7 +20,7 @@ export default function LiveWidget({ liveEvents }: Props) {
   return (
     <div>
       <hr className='mb-8 border-untele' />
-      <div className='mx-auto w-full max-w-[1500px] items-center justify-center gap-x-10 gap-y-12 px-4 pb-4'>
+      <div className='mx-auto w-full max-w-[1400px] items-center justify-center gap-x-10 gap-y-12 px-4 pb-4'>
         {/* Map over active liveEvents that are passed from the main page */}
         {liveEvents.map((liveEvent) => (
           <div
@@ -99,12 +99,14 @@ export default function LiveWidget({ liveEvents }: Props) {
                     .map((event) => (
                       <li
                         key={event._id}
-                        className='li li::before deco custom-list mb-2 rounded-lg border border-untele px-1 py-0.5 bg-slate-300/30 text-sm text-slate-800 dark:bg-slate-700/30 dark:text-slate-200'
+                        className='li li::before deco custom-list mb-2 rounded-lg border border-untele bg-slate-300/30 px-1 py-0.5 text-sm text-slate-800 dark:bg-slate-700/30 dark:text-slate-200'
                       >
                         {event.title} -{' '}
-                        <span className='relative -top-[1px] transform text-sm font-light text-untele'>
-                          {getTimeSinceEvent(event.eventDate)}
-                        </span>
+                        <ClientTimeDisplay
+                          eventDate={event.eventDate}
+                          showRelativeTime={true}
+                          className='relative -top-[1px] transform text-sm font-light text-untele'
+                        />
                       </li>
                     ))}
                 </ul>

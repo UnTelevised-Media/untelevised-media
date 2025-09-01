@@ -45,6 +45,7 @@ interface Article extends Base {
   hasEmbeddedVideo: string;
   hasEmbeddedTweet: boolean;
   eventDate: string;
+  publishedAt: string;
   comments: Comment[];
 }
 
@@ -140,4 +141,26 @@ interface Policy {
   slug: Slug;
   order: string;
   description: Block[];
+}
+
+interface JobApplication extends Base {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  location?: string;
+  positionsOfInterest: string[];
+  otherPosition?: string;
+  socialMediaPlatforms: string[];
+  portfolioWebsite?: string;
+  youtubeChannel?: string;
+  socialMediaLinks: Array<{ platform: string; url: string }>;
+  experienceLevel: 'beginner' | 'some' | 'experienced' | 'expert';
+  experienceDescription: string;
+  workSamples: Array<{ title: string; url: string }>;
+  availability: 'part-time' | 'full-time' | 'freelance' | 'volunteer' | 'flexible';
+  additionalInfo?: string;
+  applicationStatus: 'new' | 'review' | 'interview' | 'accepted' | 'declined' | 'hold';
+  submittedAt: string;
+  notes?: string;
 }

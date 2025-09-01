@@ -74,7 +74,8 @@ const RootLayout = ({
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.className} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.className} font-sans antialiased`}
+        style={{ fontFamily: inter.style.fontFamily }}
       >
         <ErrorBoundary>
           <ThemeProvider

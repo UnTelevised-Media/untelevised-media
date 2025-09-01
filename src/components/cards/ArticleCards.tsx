@@ -6,6 +6,7 @@ import { ArrowUpRight, ShareIcon } from 'lucide-react';
 import Link from 'next/link';
 
 import formatDate from '@/util/formatDate';
+import getArticleDate from '@/util/getArticleDate';
 import urlForImage from '@/util/urlForImage';
 
 // Enhanced Article Card - matches your existing design but with the blog card layout
@@ -60,7 +61,7 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
                 <div className='text-sm text-slate-600'>{article.author?.name}</div>
                 <div className='flex items-center gap-2'>
                   <span className='text-sm text-slate-600'>
-                    {formatDate(article.eventDate || article._createdAt)}
+                    {formatDate(getArticleDate(article))}
                   </span>
                   <ArrowUpRight className='h-4 w-4 text-untele transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1' />
                 </div>
@@ -118,7 +119,7 @@ const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
 
               <div className='mt-auto flex items-center justify-between text-xs text-slate-600'>
                 <span>{article.author?.name}</span>
-                <span>{formatDate(article.eventDate || article._createdAt)}</span>
+                <span>{formatDate(getArticleDate(article))}</span>
               </div>
             </div>
           </article>
@@ -137,7 +138,7 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
   return (
     <Link href={`/articles/${article.slug?.current}`}>
       <div
-        className='group relative mx-auto w-full max-w-6xl overflow-hidden rounded-lg border border-slate-400 shadow-xl transition-transform duration-500 hover:scale-105'
+        className='group relative mx-auto w-full max-w-[1400px] overflow-hidden rounded-lg border border-slate-400 shadow-xl transition-transform duration-500 hover:scale-105'
         aria-labelledby='featured-article-title'
       >
         <div className='relative h-[578px] w-full overflow-hidden'>
@@ -175,8 +176,8 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
               </div>
             </div>
             <p className='text-sm text-slate-400'>
-              {article.eventDate || article._createdAt
-                ? formatDate(article.eventDate || article._createdAt)
+              {getArticleDate(article)
+                ? formatDate(getArticleDate(article))
                 : 'Date not available'}
             </p>
           </div>

@@ -1,7 +1,7 @@
 // src/components/global/Nav.tsx
 'use client';
 import React from 'react';
-import Link from 'next/link';
+
 import { ChevronRight, Flame } from 'lucide-react';
 import ClientSideRoute from '../providers/ClientSideRoute';
 
@@ -31,22 +31,32 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
   const secondaryCategories = sortedCategories.slice(6);
 
   return (
-    <nav className='from-slate-100/98 to-slate-200/98 dark:from-slate-900/98 dark:to-slate-800/98 sticky top-[73px] z-40 border-b border-slate-300/50 bg-gradient-to-r shadow-xl backdrop-blur-md dark:border-slate-700/50'>
-      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+    <nav className='from-slate-100/98 to-slate-200/98 dark:from-slate-900/98 dark:to-slate-800/98 sticky top-[90px] z-30 border-b border-slate-300/50 bg-gradient-to-r shadow-xl backdrop-blur-md dark:border-slate-700/50 md:top-[95px]'>
+      <div className='mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8'>
         {/* Desktop Navigation */}
         <div className='hidden items-center justify-between py-3 md:flex'>
           {/* Left Section - Breaking Events */}
-          
+          <div className='flex items-center space-x-2'>
+            <div className='flex items-center space-x-1 rounded-lg border border-red-400/50 bg-red-50/30 px-3 py-1.5 backdrop-blur-sm dark:border-red-600/50 dark:bg-red-900/20'>
+              <Flame className='h-3 w-3 animate-pulse text-untele' />
+              <span className='text-xs font-bold uppercase tracking-wider text-untele'>
+                Breaking
+              </span>
+            </div>
+          </div>
+
           {/* Center Section - Primary Categories */}
-          <div className='flex items-center space-x-1 overflow-x-auto scrollbar-hide'>
+          <div className='flex flex-1 items-center justify-center space-x-1 overflow-x-auto px-4 scrollbar-hide'>
             {primaryCategories.map((category, index: number) => (
               <React.Fragment key={category._id}>
                 <ClientSideRoute route={`/category/${formatCategoryTitle(category.title)}`}>
-                  <div className='group relative flex cursor-pointer items-center space-x-2 whitespace-nowrap rounded-lg border border-transparent px-3 py-2  font-medium text-slate-700 transition-all duration-300 hover:border-slate-400/50 hover:bg-slate-300/30 hover:text-slate-900 hover:shadow-lg dark:text-slate-300 dark:hover:border-slate-600/50 dark:hover:bg-slate-700/30 dark:hover:text-white'>
+                  <div className='group relative flex cursor-pointer items-center space-x-2 whitespace-nowrap rounded-lg border border-transparent px-3 py-2 font-medium text-slate-700 transition-all duration-300 hover:border-slate-400/50 hover:bg-slate-300/30 hover:text-slate-900 hover:shadow-lg dark:text-slate-300 dark:hover:border-slate-600/50 dark:hover:bg-slate-700/30 dark:hover:text-white'>
                     {/* Animated background gradient */}
                     <div className='absolute inset-0 rounded-lg bg-gradient-to-r from-untele/0 via-untele/5 to-untele/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
 
-                    <span className='relative z-10 font-medium md:text-xs lg:text-sm'>{category.title}</span>
+                    <span className='relative z-10 font-medium md:text-xs lg:text-sm'>
+                      {category.title}
+                    </span>
 
                     {/* Active indicator line */}
                     <div className='absolute bottom-0 left-1/2 h-0.5 w-0 bg-gradient-to-r from-untele to-red-400 transition-all duration-300 group-hover:left-0 group-hover:w-full' />
@@ -72,7 +82,7 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
               </button>
 
               {/* Dropdown Menu */}
-              <div className='absolute right-0 top-full mt-2 w-64 rounded-lg border border-slate-400/50 bg-slate-200/95 p-2 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-200 group-hover:opacity-100 dark:border-slate-600/50 dark:bg-slate-800/95'>
+              <div className='absolute right-0 top-full z-[9999] mt-2 w-64 rounded-lg border border-slate-400/50 bg-slate-200/95 p-2 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-200 group-hover:opacity-100 dark:border-slate-600/50 dark:bg-slate-800/95'>
                 <div className='grid grid-cols-2 gap-2'>
                   {secondaryCategories.map((category) => (
                     <ClientSideRoute
@@ -95,7 +105,17 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
 
         {/* Mobile Navigation */}
         <div className='md:hidden'>
-          {/* Mobile Categories - Wrapping Layout */}
+          {/* Mobile Breaking Events */}
+          <div className='mb-3 flex items-center justify-center'>
+            <div className='flex items-center space-x-1 rounded-lg border border-red-400/50 bg-red-50/30 px-3 py-1.5 backdrop-blur-sm dark:border-red-600/50 dark:bg-red-900/20'>
+              <Flame className='h-3 w-3 animate-pulse text-untele' />
+              <span className='text-xs font-bold uppercase tracking-wider text-untele'>
+                Breaking
+              </span>
+            </div>
+          </div>
+
+          {/* Mobile Categories - Improved Layout */}
           <div className='py-3'>
             <div className='mb-2 flex items-center space-x-2'>
               <div className='h-1.5 w-1.5 animate-pulse rounded-full bg-untele' />

@@ -2,13 +2,13 @@ import Image from 'next/image';
 import urlForImage from '@/u/urlForImage';
 import { ArrowUpRightIcon, ShareIcon } from '@heroicons/react/24/solid';
 import formatDate from '@/util/formatDate';
-
+import getArticleDate from '@/util/getArticleDate';
 
 type Props = {
   post: Article;
 };
 
-const  ArticleCardLg = ({ post }: Props) => {
+const ArticleCardLg = ({ post }: Props) => {
   return (
     <div className='group flex cursor-pointer flex-col rounded-lg border border-slate-400 pb-4 shadow-lg drop-shadow-sm'>
       <div className='relative h-80 w-full drop-shadow-xl transition-transform duration-200 ease-out group-hover:scale-105'>
@@ -40,12 +40,8 @@ const  ArticleCardLg = ({ post }: Props) => {
       </div>
       <div className='mt-0 flex-1 bg-slate-400'>
         <div className='flex space-x-4 p-1'>
-          <h4 className='text-sm font-semibold md:text-base'>
-            By: {post.author.name}
-          </h4>
-          <h4 className='text-sm font-light md:text-base'>
-            {formatDate(post.eventDate || post._createdAt)}
-          </h4>
+          <h4 className='text-sm font-semibold md:text-base'>By: {post.author.name}</h4>
+          <h4 className='text-sm font-light md:text-base'>{formatDate(getArticleDate(post))}</h4>
         </div>
         <p className='line-clamp-3 px-4 pb-1 pt-2'>{post.description}</p>
       </div>
@@ -57,6 +53,6 @@ const  ArticleCardLg = ({ post }: Props) => {
       </div>
     </div>
   );
-}
+};
 
 export default ArticleCardLg;

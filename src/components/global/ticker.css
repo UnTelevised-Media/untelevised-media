@@ -44,9 +44,22 @@
 .track {
   white-space: nowrap;
   will-change: transform;
-  animation: marquee 6000s linear infinite;
+  animation-name: marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 300s;
   display: inline-block;
   padding-left: 100%;
+}
+
+/* High specificity override for dynamic speed */
+.marquee .track.dynamic-speed {
+  animation-duration: var(--dynamic-duration, 300s) !important;
+}
+
+/* Even higher specificity for inline styles */
+.marquee .track[style*='animation-duration'].dynamic-speed {
+  animation-duration: var(--dynamic-duration, 300s) !important;
 }
 
 @keyframes marquee {
@@ -88,22 +101,14 @@
   );
 }
 
-/* Responsive design */
+/* Responsive design - consistent speed across all devices */
 @media (max-width: 768px) {
-  .track {
-    animation-duration: 900s;
-  }
-
   .marquee {
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  .track {
-    animation-duration: 700s;
-  }
-
   .marquee {
     font-size: 0.8rem;
   }

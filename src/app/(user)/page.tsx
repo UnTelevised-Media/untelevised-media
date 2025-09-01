@@ -13,6 +13,7 @@ import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAllArticles, queryLiveEvents, queryCategories } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
+import getArticleDate from '@/util/getArticleDate';
 
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
@@ -28,7 +29,7 @@ export default async function HomePage() {
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
       {/* BREAKING ALERT BAR */}
       {/* <div className='border-b-2 border-untele bg-untele/95 py-2'>
-        <div className='mx-auto flex max-w-7xl items-center justify-center space-x-4 px-4'>
+        <div className='mx-auto flex max-w-[1400px] items-center justify-center space-x-4 px-4'>
           <div className='flex items-center space-x-2'>
             <div className='h-3 w-3 animate-pulse rounded-full bg-white' />
             <span className='text-sm font-black uppercase tracking-widest text-white'>
@@ -52,7 +53,7 @@ export default async function HomePage() {
 
       {/* MAIN HERO SECTION */}
       <section className='border-b border-slate-300 bg-gradient-to-b from-slate-50 to-white py-8 dark:border-slate-800 dark:from-slate-950 dark:to-black'>
-        <div className='mx-auto max-w-7xl px-4'>
+        <div className='mx-auto max-w-[1400px] px-4'>
           {/* Breaking News Ticker */}
           <div className='mb-8 overflow-hidden border border-untele bg-white dark:bg-black'>
             <div className='border-b border-untele bg-untele px-4 py-2'>
@@ -111,8 +112,7 @@ export default async function HomePage() {
                             {article.title}
                           </h4>
                           <p className='mt-1 text-xs text-slate-600 dark:text-slate-400'>
-                            {article.author?.name} •{' '}
-                            {formatDate(article.eventDate || article._createdAt)}
+                            {article.author?.name} • {formatDate(getArticleDate(article))}
                           </p>
                         </div>
                       </Link>
@@ -143,7 +143,7 @@ export default async function HomePage() {
 
       {/* FEATURED STORIES GRID */}
       <section className='border-b border-slate-300 bg-slate-50 py-12 dark:border-slate-800 dark:bg-slate-950'>
-        <div className='mx-auto max-w-7xl px-4'>
+        <div className='mx-auto max-w-[1400px] px-4'>
           <div className='mb-8 flex items-center space-x-4'>
             <div className='bg-untele px-4 py-2'>
               <h2 className='text-lg font-black uppercase tracking-widest text-white'>
@@ -184,7 +184,7 @@ export default async function HomePage() {
                   </p>
                   <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
                     <span className='font-bold uppercase'>{article.author?.name}</span>
-                    <span>{formatDate(article.eventDate || article._createdAt)}</span>
+                    <span>{formatDate(getArticleDate(article))}</span>
                   </div>
                 </div>
               </Link>
@@ -198,7 +198,7 @@ export default async function HomePage() {
 
       {/* BOTTOM CTA */}
       <section className='border-t-4 border-untele bg-gradient-to-b from-untele/20 to-white py-12 dark:to-black'>
-        <div className='mx-auto max-w-4xl px-4 text-center'>
+        <div className='mx-auto max-w-[1400px] px-4 text-center'>
           <h2 className='mb-4 text-3xl font-black uppercase tracking-widest text-slate-900 dark:text-white'>
             THE TRUTH WON&rsquo;T REPORT ITSELF
           </h2>
@@ -207,12 +207,18 @@ export default async function HomePage() {
             what they won&rsquo;t cover.
           </p>
           <div className='flex flex-col gap-4 sm:flex-row sm:justify-center'>
-            <button className='bg-untele px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'>
+            <Link
+              href='/donate'
+              className='bg-untele px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
+            >
               FUND THE TRUTH
-            </button>
-            <button className='border-2 border-slate-900 bg-transparent px-8 py-4 text-sm font-black uppercase tracking-widest text-slate-900 transition-colors hover:bg-slate-900 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black'>
+            </Link>
+            <Link
+              href='/join'
+              className='border-2 border-slate-900 bg-transparent px-8 py-4 text-sm font-black uppercase tracking-widest text-slate-900 transition-colors hover:bg-slate-900 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black'
+            >
               JOIN THE MISSION
-            </button>
+            </Link>
           </div>
         </div>
       </section>

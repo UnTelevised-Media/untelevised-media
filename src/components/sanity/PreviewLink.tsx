@@ -2,7 +2,8 @@
 'use client';
 
 // Function to generate preview URLs for different content types
-export function generatePreviewUrl(doc: any): Promise<string> {
+export function generatePreviewUrl(context: any): Promise<string> {
+  const doc = context.document ?? context;
   const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
     ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
     : 'http://localhost:3000';
