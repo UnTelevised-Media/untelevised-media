@@ -5,6 +5,7 @@ import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
+import { RectangleAd, BannerAd } from '@/components/ads';
 
 import urlForImage from '@/u/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
@@ -128,6 +129,14 @@ export default async function Article({ params }: Props) {
           <SocialShare url={`https://untelevised.media/articles/${slug}`} title={article.title} />
         </div>
 
+        {/* Rectangle Ad after social share */}
+        <div className='mb-8 flex justify-center'>
+          <RectangleAd
+            slot='2468135790'
+            className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+          />
+        </div>
+
         {/* Article Content */}
         <article className='prose prose-lg prose-slate dark:prose-invert max-w-none'>
           {/* Featured Image (if different from hero) */}
@@ -162,6 +171,14 @@ export default async function Article({ params }: Props) {
             <PortableText value={article.body} components={RichTextComponents} />
           </div>
         </article>
+
+        {/* Banner Ad after article content */}
+        <div className='mb-8 mt-12'>
+          <BannerAd
+            slot='1357924680'
+            className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+          />
+        </div>
 
         {/* Comments Section Placeholder */}
         <div className='mt-12'>{/* <Comments article={article}/> */}</div>

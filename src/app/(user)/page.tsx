@@ -8,6 +8,7 @@ import LiveWidget from '@/components/cards/LiveWidget';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 import RawFeed from '@/components/homepage/RawFeed';
+import { SidebarAd } from '@/components/ads';
 
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAllArticles, queryLiveEvents, queryCategories } from '@/lib/sanity/lib/queries';
@@ -134,6 +135,14 @@ export default async function HomePage() {
                       DONATE NOW
                     </button>
                   </Link>
+                </div>
+
+                {/* Sidebar Ad */}
+                <div className='mt-4'>
+                  <SidebarAd
+                    slot='9876543210'
+                    className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                  />
                 </div>
               </div>
             </div>

@@ -6,7 +6,7 @@ import { draftMode } from 'next/headers';
 import Script from 'next/script';
 import NavWrapper from '@/components/global/NavWrapper';
 import Footer from '@/components/global/Footer';
-import { GoogleAdSense } from 'next-google-adsense';
+
 import GASVerify from '@/util/googleAdSense';
 import { SanityLive } from '@/lib/sanity/lib/live';
 import DraftModeBanner from '@/components/sanity/DraftModeBanner';
@@ -40,11 +40,7 @@ export default async function UserLayout({ children }: { children: React.ReactNo
 
         {/* Main Content with offset for draft banner */}
         <div className={draftModeEnabled ? 'pt-16' : ''}>
-          {process.env.NODE_ENV === 'production' && (
-            <>
-              <GoogleAdSense />
-            </>
-          )}
+          {/* Auto-placement disabled - using custom ad components instead */}
           <Header />
           <NavWrapper />
           <Banner />
