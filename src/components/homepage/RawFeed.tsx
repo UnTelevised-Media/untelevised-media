@@ -5,7 +5,7 @@ import Image from 'next/image';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
-import { InFeedAd, BannerAd } from '@/components/ads';
+import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/ads';
 
 interface RawFeedProps {
   articles: Article[];
@@ -74,7 +74,7 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
               {(index + 1) % 6 === 0 && index < visibleArticles.length - 1 && (
                 <div className='lg:col-span-2'>
                   <InFeedAd
-                    slot='1234567890'
+                    slot={AD_CONFIG.AD_SLOTS.IN_FEED}
                     className='my-4 rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
                   />
                 </div>
@@ -87,7 +87,7 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
         {visibleCount >= 12 && (
           <div className='mt-8'>
             <BannerAd
-              slot='0987654321'
+              slot={AD_CONFIG.AD_SLOTS.FEED_PAGINATION}
               className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
             />
           </div>

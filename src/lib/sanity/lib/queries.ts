@@ -49,6 +49,159 @@ export const queryAllArticles = groq`
   | order(_createdAt desc)
 `;
 
+// Music/Lyrics Queries
+export const queryAllSongs = groq`
+  *[_type=='song'] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    contributingArtists[]{
+      artist->,
+      role
+    },
+    album->{
+      ...,
+      artist->
+    },
+    trackArt
+  }
+  | order(_createdAt desc)
+`;
+
+export const querySongBySlug = groq`
+  *[_type == "song" && slug.current == $slug][0] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    contributingArtists[]{
+      artist->,
+      role
+    },
+    album->{
+      ...,
+      artist->,
+      featuredArtists[]->
+    },
+    trackArt
+  }
+`;
+
+export const queryFeaturedSongs = groq`
+  *[_type=='song' && isFeatured == true] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    album->{
+      title,
+      albumArt
+    },
+    trackArt
+  }
+  | order(_createdAt desc)
+  [0...6]
+`;
+
+export const queryAllMusicArtists = groq`
+  *[_type=='musicArtist'] {
+    ...,
+  }
+  | order(name asc)
+`;
+
+export const queryMusicArtistBySlug = groq`
+  *[_type == "musicArtist" && slug.current == $slug][0] {
+    ...,
+    "songs": *[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)] {
+      ...,
+      primaryArtist->,
+      featuredArtists[]->,
+      album->{
+        title,
+        albumArt,
+        releaseDate
+      },
+      trackArt
+    } | order(releaseDate desc),
+    "albums": *[_type == "album" && (artist._ref == ^._id || ^._id in featuredArtists[]._ref)] {
+      ...,
+      artist->,
+      featuredArtists[]->
+    } | order(releaseDate desc)
+  }
+`;
+
+export const queryFeaturedMusicArtists = groq`
+  *[_type=='musicArtist' && isFeatured == true] {
+    ...,
+    "songCount": count(*[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)])
+  }
+  | order(name asc)
+  [0...8]
+`;
+
+export const queryAllAlbums = groq`
+  *[_type=='album'] {
+    ...,
+    artist->,
+    featuredArtists[]->,
+  }
+  | order(releaseDate desc)
+`;
+
+export const queryAlbumBySlug = groq`
+  *[_type == "album" && slug.current == $slug][0] {
+    ...,
+    artist->,
+    featuredArtists[]->,
+    "songs": *[_type == "song" && album._ref == ^._id] {
+      ...,
+      primaryArtist->,
+      featuredArtists[]->,
+      trackArt
+    } | order(trackNumber asc)
+  }
+`;
+
+export const queryFeaturedAlbums = groq`
+  *[_type=='album' && isFeatured == true] {
+    ...,
+    artist->,
+    featuredArtists[]->
+  }
+  | order(releaseDate desc)
+  [0...6]
+`;
+
+export const querySongsByArtist = groq`
+  *[_type == "song" && (primaryArtist._ref == $artistId || $artistId in featuredArtists[]._ref)] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    album->{
+      title,
+      albumArt,
+      releaseDate
+    },
+    trackArt
+  }
+  | order(releaseDate desc)
+`;
+
+export const queryRecentSongs = groq`
+  *[_type=='song'] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    album->{
+      title,
+      albumArt
+    },
+    trackArt
+  }
+  | order(releaseDate desc)
+  [0...10]
+`;
+
 export const queryArticleBySlug = groq`
     *[_type == 'article' && slug.current == $slug][0] {
       ...,

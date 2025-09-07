@@ -70,7 +70,8 @@ interface Author extends Base {
 interface Image {
   _type: 'image';
   asset: Reference;
-  alt: string;
+  alt?: string;
+  [key: string]: any; // Allow additional properties for Sanity compatibility
 }
 
 interface Reference {
@@ -141,6 +142,110 @@ interface Policy {
   slug: Slug;
   order: string;
   description: Block[];
+}
+
+// Music/Lyrics related interfaces
+interface MusicArtist extends Base {
+  slug: Slug;
+  name: string;
+  stageName?: string;
+  bio?: Block[];
+  image?: Image;
+  genres?: string[];
+  debutYear?: number;
+  hometown?: string;
+  recordLabel?: string;
+  website?: string;
+  socialMedia?: {
+    instagram?: string;
+    twitter?: string;
+    facebook?: string;
+    youtube?: string;
+    spotify?: string;
+    appleMusic?: string;
+    soundcloud?: string;
+    tiktok?: string;
+  };
+  isActive: boolean;
+  isFeatured: boolean;
+}
+
+interface Album extends Base {
+  slug: Slug;
+  title: string;
+  artist: MusicArtist;
+  featuredArtists?: MusicArtist[];
+  albumArt: Image;
+  releaseDate: string;
+  albumType: 'studio' | 'ep' | 'single' | 'compilation' | 'live' | 'remix' | 'mixtape';
+  genres?: string[];
+  recordLabel?: string;
+  producer?: string[];
+  description?: Block[];
+  totalTracks?: number;
+  duration?: string;
+  streamingLinks?: {
+    spotify?: string;
+    appleMusic?: string;
+    youtube?: string;
+    soundcloud?: string;
+    bandcamp?: string;
+    amazonMusic?: string;
+  };
+  isExplicit: boolean;
+  isFeatured: boolean;
+}
+
+interface Song extends Base {
+  slug: Slug;
+  title: string;
+  primaryArtist: MusicArtist;
+  featuredArtists?: MusicArtist[];
+  contributingArtists?: {
+    artist: MusicArtist;
+    role:
+      | 'producer'
+      | 'songwriter'
+      | 'composer'
+      | 'backing-vocals'
+      | 'additional-vocals'
+      | 'instrumentalist'
+      | 'engineer'
+      | 'mixer';
+  }[];
+  album?: Album;
+  trackArt?: Image;
+  trackNumber?: number;
+  lyrics: string;
+  lyricsStructure?: {
+    sectionType:
+      | 'verse'
+      | 'chorus'
+      | 'bridge'
+      | 'pre-chorus'
+      | 'outro'
+      | 'intro'
+      | 'hook'
+      | 'refrain';
+    content: string;
+    order: number;
+  }[];
+  releaseDate: string;
+  duration?: string;
+  genres?: string[];
+  recordLabel?: string;
+  description?: Block[];
+  streamingLinks?: {
+    spotify?: string;
+    appleMusic?: string;
+    youtube?: string;
+    soundcloud?: string;
+    bandcamp?: string;
+    amazonMusic?: string;
+  };
+  isExplicit: boolean;
+  isFeatured: boolean;
+  keywords?: string;
 }
 
 interface JobApplication extends Base {

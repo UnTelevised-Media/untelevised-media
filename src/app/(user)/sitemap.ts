@@ -57,17 +57,59 @@ export default async function sitemap(): Promise<
       priority: 0.5,
     }));
 
+  const songURLs = allNews
+    .filter((item) => item._type === 'song')
+    .map((song) => ({
+      url: `https://www.untelevised.media/lyrics/${song.slug.current}`,
+      lastModified: song._updatedAt,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }));
+
+  const musicArtistURLs = allNews
+    .filter((item) => item._type === 'musicArtist')
+    .map((artist) => ({
+      url: `https://www.untelevised.media/music-artists/${artist.slug.current}`,
+      lastModified: artist._updatedAt,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+
+  const albumURLs = allNews
+    .filter((item) => item._type === 'album')
+    .map((album) => ({
+      url: `https://www.untelevised.media/albums/${album.slug.current}`,
+      lastModified: album._updatedAt,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+
   return [
     ...articleURLs,
     ...liveEventURLs,
     ...authorURLs,
     ...categoryURLs,
     ...policyURLs,
+    ...songURLs,
+    ...musicArtistURLs,
+    ...albumURLs,
     {
       url: 'https://www.untelevised.media/',
       lastModified: new Date(),
       changeFrequency: 'hourly' as const,
       priority: 0.3,
+    },
+    {
+      url: 'https://www.untelevised.media/lyrics',
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.9,
+    },
+    {
+      url: 'https://www.untelevised.media/music-artists',
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
     },
   ];
 }

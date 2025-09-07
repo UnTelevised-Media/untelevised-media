@@ -1,23 +1,74 @@
 /* eslint-disable react/function-component-definition */
-import Script from 'next/script';
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { adsenseManager } from '@/lib/ads/adsenseInit';
+
+declare global {
+  interface Window {
+    adsbygoogle: any[];
+  }
+}
 
 export default function LargeAdCard({
   googleAdsenseId: _googleAdsenseId,
 }: {
   googleAdsenseId: string;
 }) {
+  const adRef = useRef<HTMLModElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const loadAd = async () => {
+      try {
+        if (!adRef.current) {
+          return;
+        }
+
+        const success = await adsenseManager.pushAd(adRef.current);
+        if (success) {
+          setIsLoaded(true);
+        } else {
+          throw new Error('Failed to load ad');
+        }
+      } catch (error) {
+        console.error('AdSense error:', error);
+        setHasError(true);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      // Small delay to ensure DOM is ready
+      const timer = setTimeout(loadAd, 100);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  if (hasError) {
+    return null; // Don't show anything if there's an error
+  }
+
   return (
     <div className='flex h-full w-full'>
       <ins
+        ref={adRef}
         className='adsbygoogle'
-        style={{ display: 'block' }}
+        style={{
+          display: 'block',
+          minHeight: isLoaded ? 'auto' : '250px',
+          backgroundColor: isLoaded ? 'transparent' : '#f8f9fa',
+        }}
         data-ad-client='ca-pub-7412827340538951'
         data-ad-slot='9662364496'
         data-ad-format='auto'
         data-full-width-responsive='true'
       />
-
-      <Script id='GAS'>(adsbygoogle = window.adsbygoogle || []).push({});</Script>
+      {!isLoaded && !hasError && (
+        <div className='flex h-64 items-center justify-center rounded bg-slate-50 dark:bg-slate-900'>
+          <div className='text-sm text-slate-400'>Loading advertisement...</div>
+        </div>
+      )}
     </div>
   );
 }

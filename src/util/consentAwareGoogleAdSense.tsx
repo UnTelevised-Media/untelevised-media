@@ -1,8 +1,9 @@
 // src/util/consentAwareGoogleAdSense.tsx
 'use client';
 
-import Script from 'next/script';
+import { useEffect } from 'react';
 import { useConsentCheck } from '@/lib/consent/context';
+import { adsenseManager } from '@/lib/ads/adsenseInit';
 
 interface ConsentAwareGoogleAdSenseProps {
   googleAdsenseId: string;
@@ -11,29 +12,55 @@ interface ConsentAwareGoogleAdSenseProps {
 const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSenseProps) => {
   const { canUseMarketing, hasConsent } = useConsentCheck();
 
-  // Don't load AdSense if consent is pending or marketing cookies are denied
-  if (!hasConsent || !canUseMarketing) {
-    return null;
-  }
+  useEffect(() => {
+    // In development, bypass consent checks for easier testing
+    const isDevelopment = process.env.NODE_ENV === 'development';
 
-  return (
-    <Script
-      async
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${googleAdsenseId}`}
-      strategy='afterInteractive'
-      crossOrigin='anonymous'
-      onLoad={() => {
-        // Initialize Google consent mode
-        if (typeof window !== 'undefined' && window.gtag) {
-          window.gtag('consent', 'update', {
-            ad_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
-          });
-        }
-      }}
-    />
-  );
+    // Initialize AdSense when consent is granted OR in development
+    if ((hasConsent && canUseMarketing) || isDevelopment) {
+      // eslint-disable-next-line no-console
+      console.log('ConsentAwareGoogleAdSense: Initializing AdSense...', {
+        hasConsent,
+        canUseMarketing,
+        isDevelopment,
+      });
+
+      adsenseManager
+        .initialize()
+        .then((success) => {
+          if (success) {
+            // eslint-disable-next-line no-console
+            console.log('ConsentAwareGoogleAdSense: AdSense initialized successfully');
+
+            // Initialize Google consent mode
+            if (typeof window !== 'undefined' && window.gtag) {
+              window.gtag('consent', 'update', {
+                ad_storage: 'granted',
+                ad_user_data: 'granted',
+                ad_personalization: 'granted',
+              });
+            }
+          } else {
+             
+            console.error('ConsentAwareGoogleAdSense: Failed to initialize AdSense');
+          }
+        })
+        .catch((error) => {
+           
+          console.error('ConsentAwareGoogleAdSense: AdSense initialization error:', error);
+        });
+    } else {
+      // eslint-disable-next-line no-console
+      console.log('ConsentAwareGoogleAdSense: Waiting for consent...', {
+        hasConsent,
+        canUseMarketing,
+        isDevelopment,
+      });
+    }
+  }, [hasConsent, canUseMarketing]);
+
+  // Don't render anything - the AdSense manager handles script loading
+  return null;
 };
 
 export default ConsentAwareGoogleAdSense;

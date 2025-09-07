@@ -84,6 +84,21 @@ const Header = () => {
             </span>
           </Link>
 
+          <Link
+            href='/lyrics'
+            className='group relative text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
+          >
+            Music & Lyrics
+            <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
+          </Link>
+
+          <Link
+            href='/music-artists'
+            className='group relative text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
+          >
+            Artists
+            <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
+          </Link>
 
           <Link
             href='/category/breaking'
@@ -247,6 +262,24 @@ const Header = () => {
               <div className='h-2 w-2 rounded-full bg-untele' />
               <span className='text-sm font-bold tracking-wider text-untele'>Breaking Events</span>
               <Flame className='h-4 w-4 animate-pulse text-untele' />
+            </Link>
+
+            <Link
+              href='/lyrics'
+              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <div className='h-2 w-2 rounded-full bg-untele' />
+              <span>Music & Lyrics</span>
+            </Link>
+
+            <Link
+              href='/music-artists'
+              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <div className='h-2 w-2 rounded-full bg-untele' />
+              <span>Artists</span>
             </Link>
             <Link
               href='/staff'

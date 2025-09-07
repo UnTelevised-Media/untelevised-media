@@ -13,6 +13,11 @@ import policies from './policies';
 import post from './post';
 import videoContent from './videoContent';
 
+// Music/lyrics schemas
+import musicArtist from './musicArtist';
+import album from './album';
+import song from './song';
+
 // Form/contact schemas
 import contactSubmission from './contactSubmission';
 import jobApplication from './jobApplication';
@@ -50,6 +55,11 @@ export const schemaTypes = [
   post,
   videoContent,
 
+  // Music/lyrics schemas
+  musicArtist,
+  album,
+  song,
+
   // Form/contact schemas
   contactSubmission,
   jobApplication,
@@ -86,6 +96,11 @@ export {
   policies,
   post,
   videoContent,
+
+  // Music/lyrics schemas
+  musicArtist,
+  album,
+  song,
 
   // Form/contact schemas
   contactSubmission,
