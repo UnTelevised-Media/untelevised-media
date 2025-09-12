@@ -1,4 +1,5 @@
 /* eslint-disable react/function-component-definition */
+/* eslint-disable react/function-component-definition */
 // src/app/(user)/lyrics/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -181,6 +182,39 @@ export default async function LyricsPage({ params }: Props) {
                       >
                         <ExternalLink className='h-4 w-4' />
                         YouTube
+                      </a>
+                    )}
+                    {song.streamingLinks.soundcloud && (
+                      <a
+                        href={song.streamingLinks.soundcloud}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='flex items-center gap-2 rounded-lg bg-orange-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-orange-700'
+                      >
+                        <ExternalLink className='h-4 w-4' />
+                        SoundCloud
+                      </a>
+                    )}
+                    {song.streamingLinks.bandcamp && (
+                      <a
+                        href={song.streamingLinks.bandcamp}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='flex items-center gap-2 rounded-lg bg-cyan-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-cyan-700'
+                      >
+                        <ExternalLink className='h-4 w-4' />
+                        Bandcamp
+                      </a>
+                    )}
+                    {song.streamingLinks.amazonMusic && (
+                      <a
+                        href={song.streamingLinks.amazonMusic}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700'
+                      >
+                        <ExternalLink className='h-4 w-4' />
+                        Amazon Music
                       </a>
                     )}
                   </div>
