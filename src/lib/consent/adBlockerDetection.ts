@@ -39,22 +39,67 @@ export class AdBlockerDetector {
       return false;
     }
 
-    const detectionMethods = [
+    // In development mode, be more conservative with detection
+    const isDevelopment = process.env.NODE_ENV === 'development';
+
+    if (isDevelopment) {
+      console.log('AdBlockerDetector: Running in development mode');
+    }
+
+    // Quick check: if AdSense manager already detected blocking, use that
+    if (typeof window !== 'undefined' && (window as any).adsenseManager?.isInFallbackMode?.()) {
+      console.log('AdBlockerDetector: AdSense manager already detected blocking');
+      return true;
+    }
+
+    // Use faster, less intrusive detection methods first
+    const quickDetectionMethods = [
       this.detectByBaitElement(),
       this.detectByAdSenseScript(),
-      this.detectByGoogleAds(),
-      this.detectByFetchBlocking(),
       this.detectByWindowProperties(),
     ];
 
+    // Only use network-based detection if quick methods are inconclusive
+    let detectionMethods = quickDetectionMethods;
+
     try {
+      const quickResults = await Promise.allSettled(quickDetectionMethods);
+      const quickDetectedCount = quickResults.filter(
+        (result) => result.status === 'fulfilled' && result.value === true
+      ).length;
+
+      // If we have strong evidence from quick methods, don't do network tests
+      if (quickDetectedCount >= 2) {
+        console.log('AdBlockerDetector: Quick detection found ad blocker, skipping network tests');
+        return true;
+      }
+
+      // If quick methods are inconclusive and not in development, add network tests
+      if (!isDevelopment && quickDetectedCount < 2) {
+        detectionMethods = [
+          ...quickDetectionMethods,
+          this.detectByGoogleAds(),
+          this.detectByFetchBlocking(),
+        ];
+      }
+
       const results = await Promise.allSettled(detectionMethods);
       const detectedCount = results.filter(
         (result) => result.status === 'fulfilled' && result.value === true
       ).length;
 
-      // Consider ad blocker detected if 2 or more methods detect it
-      return detectedCount >= 2;
+      // In development, require more evidence of ad blocking
+      const threshold = isDevelopment ? 3 : 2;
+      const isBlocked = detectedCount >= threshold;
+
+      if (isDevelopment && isBlocked) {
+        console.info('AdBlockerDetector: Ad blocker detected in development mode');
+        console.info(
+          'AdBlockerDetector: This is normal if you have browser extensions or ad blockers enabled'
+        );
+      }
+
+      return isBlocked;
     } catch (error) {
       console.warn('Ad blocker detection failed:', error);
       return false;
@@ -118,12 +163,24 @@ export class AdBlockerDetector {
     });
   }
 
-  // Method 3: Google Ads detection
+  // Method 3: Google Ads detection (improved to avoid conflicts)
   private detectByGoogleAds(): Promise<boolean> {
     return new Promise((resolve) => {
+      // Check if AdSense script already exists (loaded by main app)
+      const existingScript = document.querySelector('script[src*="adsbygoogle.js"]');
+
+      if (existingScript) {
+        // If script exists but adsbygoogle is not available, likely blocked
+        const adsbyGoogleAvailable = !!(window.adsbygoogle && Array.isArray(window.adsbygoogle));
+        resolve(!adsbyGoogleAvailable);
+        return;
+      }
+
+      // Only create test script if no existing script found
       const script = document.createElement('script');
       script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
       script.async = true;
+      script.setAttribute('data-ad-blocker-test', 'true'); // Mark as test script
 
       let resolved = false;
 
@@ -143,20 +200,21 @@ export class AdBlockerDetector {
 
       document.head.appendChild(script);
 
-      // Timeout fallback
+      // Timeout fallback (reduced timeout)
       setTimeout(() => {
         if (!resolved) {
           resolved = true;
           resolve(true);
         }
+        // Clean up test script
         if (script.parentNode) {
           script.parentNode.removeChild(script);
         }
-      }, 3000);
+      }, 2000); // Reduced from 3000ms to 2000ms
     });
   }
 
-  // Method 4: Fetch blocking detection
+  // Method 4: Fetch blocking detection (improved)
   private detectByFetchBlocking(): Promise<boolean> {
     return new Promise((resolve) => {
       if (!window.fetch) {
@@ -165,20 +223,30 @@ export class AdBlockerDetector {
       }
 
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      const timeoutId = setTimeout(() => {
+        controller.abort();
+        resolve(true); // Assume blocked if timeout
+      }, 1500); // Reduced timeout
 
+      // Use a smaller, less intrusive test URL
       fetch('https://googleads.g.doubleclick.net/pagead/id', {
         method: 'HEAD',
         mode: 'no-cors',
         signal: controller.signal,
+        cache: 'no-cache', // Prevent caching
       })
         .then(() => {
           clearTimeout(timeoutId);
           resolve(false);
         })
-        .catch(() => {
+        .catch((error) => {
           clearTimeout(timeoutId);
-          resolve(true);
+          // Check if it's an abort error (timeout) or network error (likely blocked)
+          if (error.name === 'AbortError') {
+            resolve(true); // Timeout suggests blocking
+          } else {
+            resolve(true); // Network error suggests blocking
+          }
         });
     });
   }

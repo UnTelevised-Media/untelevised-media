@@ -34,11 +34,30 @@ export default function SidebarAd({
           return;
         }
 
+        // Check if we're in fallback mode before attempting to load
+        if (adsenseManager.isInFallbackMode()) {
+          console.log('SidebarAd: Using fallback mode');
+          setIsLoaded(true);
+          return;
+        }
+
         const success = await adsenseManager.pushAd(adRef.current);
         if (success) {
           setIsLoaded(true);
+
+          // Check if the ad was loaded in fallback mode
+          const status = adRef.current.getAttribute('data-ad-status');
+          if (status === 'fallback') {
+            console.log('SidebarAd: Loaded in fallback mode');
+          }
         } else {
-          throw new Error('Failed to load ad');
+          // If AdSense failed and we're in development, don't show error
+          if (process.env.NODE_ENV === 'development' && adsenseManager.getFailedAttempts() > 0) {
+            console.log('SidebarAd: AdSense failed in development, hiding ad');
+            setHasError(true);
+          } else {
+            throw new Error('Failed to load ad');
+          }
         }
       } catch (error) {
         console.error('AdSense error:', error);
@@ -47,8 +66,8 @@ export default function SidebarAd({
     };
 
     if (typeof window !== 'undefined') {
-      // Small delay to ensure DOM is ready
-      const timer = setTimeout(loadAd, 100);
+      // Small delay to ensure DOM is ready and AdSense manager is initialized
+      const timer = setTimeout(loadAd, 300);
       return () => clearTimeout(timer);
     }
   }, []);

@@ -18,14 +18,27 @@ const TestAd = () => {
           throw new Error('Ad element ref not available');
         }
 
-        // Ensure AdSense is initialized first
-        if (!adsenseManager.isInitialized()) {
+        // Check if we're already in fallback mode
+        if (adsenseManager.isInFallbackMode()) {
           // eslint-disable-next-line no-console
-          console.log('TestAd: AdSense not initialized, initializing now...');
-          const initSuccess = await adsenseManager.initialize();
-          if (!initSuccess) {
-            throw new Error('Failed to initialize AdSense');
-          }
+          console.log('TestAd: Using fallback mode');
+          setStatus('success');
+          return;
+        }
+
+        // Wait a bit for AdSense to initialize if needed
+        let initAttempts = 0;
+        const maxAttempts = 5;
+
+        while (
+          !adsenseManager.isInitialized() &&
+          !adsenseManager.isInFallbackMode() &&
+          initAttempts < maxAttempts
+        ) {
+          // eslint-disable-next-line no-console
+          console.log(`TestAd: Waiting for AdSense initialization (attempt ${initAttempts + 1})`);
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          initAttempts++;
         }
 
         const success = await adsenseManager.pushAd(adRef.current);
@@ -33,11 +46,17 @@ const TestAd = () => {
           setStatus('success');
           // eslint-disable-next-line no-console
           console.log('TestAd: Successfully loaded');
+
+          // Check if we're in fallback mode
+          const status = adRef.current.getAttribute('data-ad-status');
+          if (status === 'fallback') {
+            // eslint-disable-next-line no-console
+            console.log('TestAd: Loaded in fallback mode');
+          }
         } else {
           throw new Error('Failed to push ad');
         }
       } catch (err) {
-         
         console.error('TestAd: Error loading ad:', err);
         setError(err instanceof Error ? err.message : 'Unknown error');
         setStatus('error');
