@@ -13,6 +13,11 @@ import policies from './policies';
 import post from './post';
 import videoContent from './videoContent';
 
+// Timeline schemas
+import timeline from './timeline';
+import timelineEvent from './timelineEvent';
+import timelineCategory from './timelineCategory';
+
 // Music/lyrics schemas
 import musicArtist from './musicArtist';
 import album from './album';
@@ -55,6 +60,11 @@ export const schemaTypes = [
   post,
   videoContent,
 
+  // Timeline schemas
+  timeline,
+  timelineEvent,
+  timelineCategory,
+
   // Music/lyrics schemas
   musicArtist,
   album,
@@ -96,6 +106,11 @@ export {
   policies,
   post,
   videoContent,
+
+  // Timeline schemas
+  timeline,
+  timelineEvent,
+  timelineCategory,
 
   // Music/lyrics schemas
   musicArtist,

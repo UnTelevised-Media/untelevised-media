@@ -111,6 +111,87 @@ interface EventTag extends Base {
   title: string;
 }
 
+interface TimelineEvent extends Base {
+  slug: Slug;
+  title: string;
+  description: string;
+  detailedDescription: Block[];
+  eventDate: string;
+  endDate?: string;
+  eventType:
+    | 'breaking'
+    | 'investigation'
+    | 'live'
+    | 'political'
+    | 'social'
+    | 'economic'
+    | 'environmental'
+    | 'technology'
+    | 'cultural'
+    | 'other';
+  importanceLevel: 'critical' | 'high' | 'medium' | 'low';
+  isMilestone: boolean;
+  location?: string;
+  mainImage?: Image;
+  mediaAttachments?: Array<Image | { _type: 'video'; url: string; title: string }>;
+  timelineCategories?: TimelineCategory[];
+  tags?: string[];
+  relatedArticles?: Article[];
+  relatedLiveEvents?: LiveEvent[];
+  relatedTimelineEvents?: TimelineEvent[];
+  externalLinks?: Array<{
+    title: string;
+    url: string;
+    description?: string;
+  }>;
+  isPublished: boolean;
+  publishedAt?: string;
+  author?: Author;
+  keywords?: string;
+}
+
+interface TimelineCategory extends Base {
+  slug: Slug;
+  title: string;
+  description?: string;
+  color: 'red' | 'blue' | 'green' | 'purple' | 'orange' | 'yellow' | 'pink' | 'teal' | 'gray';
+  icon?: string;
+  order: number;
+  isActive: boolean;
+  parentCategory?: TimelineCategory;
+}
+
+interface Timeline extends Base {
+  slug: Slug;
+  title: string;
+  description: Block[];
+  shortDescription?: string;
+  coverImage?: Image;
+  timelineType: 'event' | 'investigation' | 'breaking' | 'historical' | 'live' | 'custom';
+  timeRange?: {
+    startDate?: string;
+    endDate?: string;
+  };
+  events?: TimelineEvent[];
+  categories?: TimelineCategory[];
+  tags?: string[];
+  isFeatured: boolean;
+  isPublished: boolean;
+  publishedAt?: string;
+  author?: Author;
+  collaborators?: Author[];
+  viewSettings?: {
+    defaultZoomLevel: 'year' | 'month' | 'week' | 'day' | 'hour';
+    showMilestonesOnly: boolean;
+    allowPublicComments: boolean;
+  };
+  seoSettings?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    keywords?: string;
+  };
+}
+
 interface MainImage {
   _type: 'string';
   asset: Reference;

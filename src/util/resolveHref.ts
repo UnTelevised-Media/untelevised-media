@@ -16,6 +16,10 @@ const pageRoutes: PageRoutes = {
   liveevent: { path: '/live-event/:slug' },
   policies: { path: '/policies/:slug' },
   author: { path: '/author/:slug' },
+  timeline: { path: '/timeline/:slug' },
+  timelineevent: { path: '/timeline/event/:slug' },
+  timelinecategory: { path: '/timeline/category/:slug' },
+  timelines: { path: '/timelines' },
 };
 
 // Define the resolveHref function with type annotations

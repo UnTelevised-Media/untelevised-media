@@ -18,8 +18,75 @@ export const queryLiveEvents = groq`
         eventDate,
         publishedAt,
     }
-  } 
+  }
   | order(_createdAt desc)
+`;
+
+export const queryPastEvents = groq`
+  *[_type=='liveEvent' && isCurrentEvent == false] {
+    ...,
+    description,
+    title,
+    slug,
+    eventDate,
+    mainImage,
+    subtitle,
+    location,
+    videoLink,
+    keywords,
+    eventTag[]->,
+    keyEvent[]->{
+      title,
+      slug,
+      eventDate,
+      description
+    },
+    relatedArticles[]-> {
+      slug,
+      _id,
+      title,
+      _createdAt,
+      description,
+      eventDate,
+      publishedAt,
+      mainImage
+    }
+  }
+  | order(eventDate desc)
+`;
+
+export const queryPastEventsWithPagination = groq`
+  *[_type=='liveEvent' && isCurrentEvent == false] {
+    ...,
+    description,
+    title,
+    slug,
+    eventDate,
+    mainImage,
+    subtitle,
+    location,
+    videoLink,
+    keywords,
+    eventTag[]->,
+    keyEvent[]->{
+      title,
+      slug,
+      eventDate,
+      description
+    },
+    relatedArticles[]-> {
+      slug,
+      _id,
+      title,
+      _createdAt,
+      description,
+      eventDate,
+      publishedAt,
+      mainImage
+    }
+  }
+  | order(eventDate desc)
+  [$start...$end]
 `;
 
 export const queryEventBySlug = groq`
@@ -253,6 +320,169 @@ export const queryAuthorBySlug = groq`
       publishedAt,
     }
   }
+`;
+
+// Timeline Queries
+export const queryAllTimelines = groq`
+  *[_type=='timeline' && isPublished == true] {
+    ...,
+    author->,
+    collaborators[]->,
+    categories[]->,
+    'eventCount': count(events),
+  }
+  | order(publishedAt desc)
+`;
+
+export const queryFeaturedTimelines = groq`
+  *[_type=='timeline' && isPublished == true && isFeatured == true] {
+    ...,
+    author->,
+    categories[]->,
+    'eventCount': count(events),
+  }
+  | order(publishedAt desc)
+  [0...6]
+`;
+
+export const queryTimelineBySlug = groq`
+  *[_type == "timeline" && slug.current == $slug][0] {
+    ...,
+    author->,
+    collaborators[]->,
+    categories[]->,
+    events[]->{
+      ...,
+      author->,
+      timelineCategories[]->,
+      relatedArticles[]->{
+        slug,
+        title,
+        _id,
+        publishedAt,
+        mainImage
+      },
+      relatedLiveEvents[]->{
+        slug,
+        title,
+        _id,
+        eventDate,
+        mainImage
+      }
+    }
+  }
+`;
+
+export const queryTimelineEvents = groq`
+  *[_type=='timelineEvent' && isPublished == true] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
+`;
+
+export const queryTimelineEventsByDateRange = groq`
+  *[_type=='timelineEvent' && isPublished == true && eventDate >= $startDate && eventDate <= $endDate] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate asc)
+`;
+
+export const queryTimelineEventsByCategory = groq`
+  *[_type=='timelineEvent' && isPublished == true && references(*[_type == 'timelineCategory' && slug.current == $categorySlug]._id)] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
+`;
+
+export const queryMilestoneEvents = groq`
+  *[_type=='timelineEvent' && isPublished == true && isMilestone == true] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
+`;
+
+export const queryTimelineEventBySlug = groq`
+  *[_type == "timelineEvent" && slug.current == $slug][0] {
+    ...,
+    author->,
+    timelineCategories[]->,
+    relatedArticles[]->{
+      slug,
+      title,
+      _id,
+      publishedAt,
+      mainImage,
+      description,
+      author->
+    },
+    relatedLiveEvents[]->{
+      slug,
+      title,
+      _id,
+      eventDate,
+      mainImage,
+      description
+    },
+    relatedTimelineEvents[]->{
+      slug,
+      title,
+      _id,
+      eventDate,
+      eventType,
+      importanceLevel,
+      mainImage
+    }
+  }
+`;
+
+export const queryTimelineCategories = groq`
+  *[_type == "timelineCategory" && isActive == true] {
+    ...,
+    parentCategory->,
+    'eventCount': count(*[_type == 'timelineEvent' && references(^._id)])
+  }
+  | order(order asc)
+`;
+
+export const queryRecentTimelineEvents = groq`
+  *[_type=='timelineEvent' && isPublished == true] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
+  [0...10]
+`;
+
+export const queryTimelineEventsByImportance = groq`
+  *[_type=='timelineEvent' && isPublished == true && importanceLevel == $importance] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
+`;
+
+export const queryTimelineSearch = groq`
+  *[_type=='timelineEvent' && isPublished == true && (
+    title match $searchTerm + "*" ||
+    description match $searchTerm + "*" ||
+    location match $searchTerm + "*" ||
+    tags[] match $searchTerm + "*"
+  )] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
 `;
 
 export const queryPoliciesList = groq`
