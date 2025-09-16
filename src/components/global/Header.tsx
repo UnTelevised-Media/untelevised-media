@@ -75,7 +75,7 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className='hidden items-center space-x-6 lg:flex'>
           <Link
-            href='https://www.untelevised.live'
+            href='https://untelevised.live'
             className='group flex items-center space-x-2 rounded-lg py-2 transition-all duration-200 hover:bg-green-50 dark:hover:bg-green-900/20'
           >
             <Radio className='h-4 w-4 animate-pulse text-green-500' />
@@ -216,7 +216,7 @@ const Header = () => {
               <span>Home</span>
             </Link>
             <Link
-              href='https://www.untelevised.live'
+              href='https://untelevised.live'
               className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
               onClick={() => setIsMenuOpen(false)}
             >
