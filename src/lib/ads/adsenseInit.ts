@@ -89,6 +89,15 @@ export class AdSenseManager {
     let waitTime = 0;
 
     while (!this.isReady() && waitTime < maxWaitTime) {
+      // Try to initialize adsbygoogle array if it's missing
+      if (
+        typeof window !== 'undefined' &&
+        (!window.adsbygoogle || !Array.isArray(window.adsbygoogle))
+      ) {
+        window.adsbygoogle = [];
+        console.log('AdSense: Force initialized adsbygoogle array during wait');
+      }
+
       await new Promise((resolve) => setTimeout(resolve, checkInterval));
       waitTime += checkInterval;
     }

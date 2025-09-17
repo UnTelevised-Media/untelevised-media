@@ -31,12 +31,10 @@ const ConsentProvider = ({ children }: ConsentProviderProps) => {
         const existingConsent = consentStorage.loadConsent();
 
         if (existingConsent) {
-          console.log('ConsentProvider: Loading existing consent:', existingConsent.preferences);
           setPreferences(existingConsent.preferences);
           setStatus(getConsentStatus(existingConsent.preferences));
           setShowBanner(false);
         } else {
-          console.log('ConsentProvider: No existing consent found, showing banner');
           // No existing consent - show banner
           setShowBanner(true);
           setStatus('pending');

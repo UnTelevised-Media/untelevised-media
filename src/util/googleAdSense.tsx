@@ -27,7 +27,11 @@ export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAd
 
     // Initialize adsbygoogle array immediately on client
     if (typeof window !== 'undefined') {
-      window.adsbygoogle = window.adsbygoogle || [];
+      // Force initialize the array
+      if (!window.adsbygoogle || !Array.isArray(window.adsbygoogle)) {
+        window.adsbygoogle = [];
+        console.log('AdSense: Initialized adsbygoogle array');
+      }
 
       // Check if script is already loaded
       if (window.adsenseLoaded) {
@@ -40,6 +44,8 @@ export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAd
       const existingScript = document.querySelector('script[src*="adsbygoogle.js"]');
       if (existingScript) {
         console.log('AdSense: Script already exists in DOM');
+        // Still ensure array is available
+        window.adsbygoogle = window.adsbygoogle || [];
         return;
       }
 
@@ -58,8 +64,16 @@ export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAd
           window.adsenseLoaded = true;
           window.adsenseScriptError = false;
 
-          // Ensure adsbygoogle array is available
+          // Ensure adsbygoogle array is available and properly initialized
           window.adsbygoogle = window.adsbygoogle || [];
+
+          // Force initialization if needed
+          setTimeout(() => {
+            if (window.adsbygoogle && !Array.isArray(window.adsbygoogle)) {
+              window.adsbygoogle = [];
+            }
+            console.log('AdSense: adsbygoogle array initialized:', !!window.adsbygoogle);
+          }, 100);
         }
 
         onLoad?.();
