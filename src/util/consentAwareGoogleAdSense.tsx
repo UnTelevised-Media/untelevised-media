@@ -12,6 +12,13 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
   const { canUseMarketing, hasConsent } = useConsentCheck();
   const isDevelopment = process.env.NODE_ENV === 'development';
 
+  // Debug logging
+  console.log('ConsentAwareGoogleAdSense: Current state:', {
+    hasConsent,
+    canUseMarketing,
+    isDevelopment,
+  });
+
   // Only load AdSense script when we have proper consent OR in development mode
   const shouldLoadScript = (hasConsent && canUseMarketing) || isDevelopment;
 

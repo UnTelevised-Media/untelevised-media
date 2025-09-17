@@ -31,10 +31,12 @@ const ConsentProvider = ({ children }: ConsentProviderProps) => {
         const existingConsent = consentStorage.loadConsent();
 
         if (existingConsent) {
+          console.log('ConsentProvider: Loading existing consent:', existingConsent.preferences);
           setPreferences(existingConsent.preferences);
           setStatus(getConsentStatus(existingConsent.preferences));
           setShowBanner(false);
         } else {
+          console.log('ConsentProvider: No existing consent found, showing banner');
           // No existing consent - show banner
           setShowBanner(true);
           setStatus('pending');
@@ -56,8 +58,12 @@ const ConsentProvider = ({ children }: ConsentProviderProps) => {
     const nonEssentialPrefs = [prefs.analytics, prefs.marketing, prefs.preferences];
     const grantedCount = nonEssentialPrefs.filter(Boolean).length;
 
-    if (grantedCount === 0) {return 'denied';}
-    if (grantedCount === nonEssentialPrefs.length) {return 'granted';}
+    if (grantedCount === 0) {
+      return 'denied';
+    }
+    if (grantedCount === nonEssentialPrefs.length) {
+      return 'granted';
+    }
     return 'partial';
   };
 

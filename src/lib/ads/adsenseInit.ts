@@ -45,7 +45,13 @@ export class AdSenseManager {
     const scriptLoaded = window.adsenseLoaded;
     const arrayAvailable = window.adsbygoogle && Array.isArray(window.adsbygoogle);
 
-    return !!(scriptLoaded && arrayAvailable);
+    // Also check if the script element exists in DOM as a fallback
+    const scriptExists = document.querySelector('script[src*="adsbygoogle.js"]');
+
+    // Consider ready if either the flag is set OR we have the array and script exists
+    const isReady = (scriptLoaded && arrayAvailable) || (arrayAvailable && scriptExists);
+
+    return !!isReady;
   }
 
   /**
