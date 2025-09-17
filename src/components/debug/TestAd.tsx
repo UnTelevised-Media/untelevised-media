@@ -11,47 +11,24 @@ const TestAd = () => {
   useEffect(() => {
     const loadTestAd = async () => {
       try {
-        // eslint-disable-next-line no-console
         console.log('TestAd: Starting test ad load...');
 
         if (!adRef.current) {
           throw new Error('Ad element ref not available');
         }
 
-        // Check if we're already in fallback mode
-        if (adsenseManager.isInFallbackMode()) {
-          // eslint-disable-next-line no-console
-          console.log('TestAd: Using fallback mode');
-          setStatus('success');
-          return;
-        }
-
-        // Wait a bit for AdSense to initialize if needed
-        let initAttempts = 0;
-        const maxAttempts = 5;
-
-        while (
-          !adsenseManager.isInitialized() &&
-          !adsenseManager.isInFallbackMode() &&
-          initAttempts < maxAttempts
-        ) {
-          // eslint-disable-next-line no-console
-          console.log(`TestAd: Waiting for AdSense initialization (attempt ${initAttempts + 1})`);
-          await new Promise((resolve) => setTimeout(resolve, 500));
-          initAttempts++;
-        }
+        // Small delay to ensure DOM is ready
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         const success = await adsenseManager.pushAd(adRef.current);
         if (success) {
           setStatus('success');
-          // eslint-disable-next-line no-console
           console.log('TestAd: Successfully loaded');
 
-          // Check if we're in fallback mode
-          const status = adRef.current.getAttribute('data-ad-status');
-          if (status === 'fallback') {
-            // eslint-disable-next-line no-console
-            console.log('TestAd: Loaded in fallback mode');
+          // Check the ad status
+          const adStatus = adRef.current.getAttribute('data-ad-status');
+          if (adStatus === 'development-placeholder') {
+            console.log('TestAd: Loaded development placeholder');
           }
         } else {
           throw new Error('Failed to push ad');
@@ -63,9 +40,7 @@ const TestAd = () => {
       }
     };
 
-    // Delay to ensure DOM is ready
-    const timer = setTimeout(loadTestAd, 500);
-    return () => clearTimeout(timer);
+    loadTestAd();
   }, []);
 
   return (

@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
+import AD_CONFIG from '@/lib/ads/adConfig';
 
 interface InFeedAdProps {
   slot: string;
@@ -26,8 +27,16 @@ export default function InFeedAd({
   const adRef = useRef<HTMLModElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient || !adRef.current) {
+      return;
+    }
     const loadAd = async () => {
       try {
         if (!adRef.current) {
@@ -70,15 +79,25 @@ export default function InFeedAd({
       }
     };
 
-    if (typeof window !== 'undefined') {
-      // Small delay to ensure DOM is ready
-      const timer = setTimeout(loadAd, 100);
-      return () => clearTimeout(timer);
-    }
-  }, []);
+    loadAd();
+  }, [isClient]);
 
-  if (hasError) {
-    return null; // Don't show anything if there's an error
+  // Don't render anything on server side to prevent hydration issues
+  if (!isClient) {
+    return (
+      <div className={`ad-container my-6 ${className}`} style={style}>
+        <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
+          Advertisement
+        </div>
+        <div className='flex h-64 items-center justify-center rounded bg-slate-50 dark:bg-slate-900'>
+          <div className='text-sm text-slate-400'>Loading advertisement...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (hasError && !adsenseManager.isDevelopmentMode()) {
+    return null; // Don't show anything if there's an error in production
   }
 
   return (
@@ -97,7 +116,7 @@ export default function InFeedAd({
         }}
         data-ad-format='fluid'
         data-ad-layout-key={layoutKey}
-        data-ad-client='ca-pub-7412827340538951'
+        data-ad-client={AD_CONFIG.PUBLISHER_ID}
         data-ad-slot={slot}
       />
       {!isLoaded && !hasError && (

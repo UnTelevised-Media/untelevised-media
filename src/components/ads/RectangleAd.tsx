@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
+import AD_CONFIG from '@/lib/ads/adConfig';
 
 interface RectangleAdProps {
   slot: string;
@@ -11,12 +12,6 @@ interface RectangleAdProps {
   responsive?: boolean;
   className?: string;
   style?: React.CSSProperties;
-}
-
-declare global {
-  interface Window {
-    adsbygoogle: any[];
-  }
 }
 
 export default function RectangleAd({
@@ -30,10 +25,22 @@ export default function RectangleAd({
   const adRef = useRef<HTMLModElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient || !adRef.current) {
+      return;
+    }
+
     const loadAd = async () => {
       try {
+        // Small delay to ensure DOM is ready
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
         if (!adRef.current) {
           return;
         }
@@ -42,7 +49,7 @@ export default function RectangleAd({
         if (success) {
           setIsLoaded(true);
         } else {
-          throw new Error('Failed to load ad');
+          setHasError(true);
         }
       } catch (error) {
         console.error('AdSense error:', error);
@@ -50,15 +57,25 @@ export default function RectangleAd({
       }
     };
 
-    if (typeof window !== 'undefined') {
-      // Small delay to ensure DOM is ready
-      const timer = setTimeout(loadAd, 100);
-      return () => clearTimeout(timer);
-    }
-  }, []);
+    loadAd();
+  }, [isClient]);
 
-  if (hasError) {
-    return null; // Don't show anything if there's an error
+  // Don't render anything on server side to prevent hydration issues
+  if (!isClient) {
+    return (
+      <div className={`ad-container ${className}`} style={style}>
+        <div
+          className='flex items-center justify-center rounded bg-slate-50 dark:bg-slate-900'
+          style={{ height: `${height}px` }}
+        >
+          <div className='text-sm text-slate-400'>Loading advertisement...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (hasError && !adsenseManager.isDevelopmentMode()) {
+    return null; // Don't show anything if there's an error in production
   }
 
   return (
@@ -74,14 +91,14 @@ export default function RectangleAd({
           backgroundColor: isLoaded ? 'transparent' : '#f8f9fa',
           ...style,
         }}
-        data-ad-client='ca-pub-7412827340538951'
+        data-ad-client={AD_CONFIG.PUBLISHER_ID}
         data-ad-slot={slot}
         data-ad-format={responsive ? 'auto' : 'rectangle'}
         data-full-width-responsive={responsive.toString()}
       />
       {!isLoaded && !hasError && (
         <div
-          className="flex items-center justify-center rounded bg-slate-50 dark:bg-slate-900"
+          className='flex items-center justify-center rounded bg-slate-50 dark:bg-slate-900'
           style={{ height: `${height}px` }}
         >
           <div className='text-sm text-slate-400'>Loading advertisement...</div>

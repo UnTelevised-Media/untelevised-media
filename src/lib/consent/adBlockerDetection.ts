@@ -47,9 +47,14 @@ export class AdBlockerDetector {
     }
 
     // Quick check: if AdSense manager already detected blocking, use that
-    if (typeof window !== 'undefined' && (window as any).adsenseManager?.isInFallbackMode?.()) {
-      console.log('AdBlockerDetector: AdSense manager already detected blocking');
-      return true;
+    try {
+      const { adsenseManager } = await import('@/lib/ads/adsenseInit');
+      if (adsenseManager.isLikelyBlocked()) {
+        console.log('AdBlockerDetector: AdSense manager already detected blocking');
+        return true;
+      }
+    } catch (error) {
+      console.warn('AdBlockerDetector: Could not check AdSense manager status');
     }
 
     // Use faster, less intrusive detection methods first

@@ -1,9 +1,8 @@
 // src/util/consentAwareGoogleAdSense.tsx
 'use client';
 
-import { useEffect } from 'react';
 import { useConsentCheck } from '@/lib/consent/context';
-import { adsenseManager } from '@/lib/ads/adsenseInit';
+import GoogleAdSense from './googleAdSense';
 
 interface ConsentAwareGoogleAdSenseProps {
   googleAdsenseId: string;
@@ -11,96 +10,51 @@ interface ConsentAwareGoogleAdSenseProps {
 
 const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSenseProps) => {
   const { canUseMarketing, hasConsent } = useConsentCheck();
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
-  useEffect(() => {
-    // In development, bypass consent checks for easier testing
-    const isDevelopment = process.env.NODE_ENV === 'development';
+  // Only load AdSense script when we have proper consent OR in development mode
+  const shouldLoadScript = (hasConsent && canUseMarketing) || isDevelopment;
 
-    // Only initialize when we have proper consent OR in development mode
-    // Prevent double initialization by checking if already initialized or in fallback mode
-    const shouldInitialize = (hasConsent && canUseMarketing) || isDevelopment;
-    const alreadyHandled = adsenseManager.isInitialized() || adsenseManager.isInFallbackMode();
+  const handleScriptLoad = () => {
+    console.log('ConsentAwareGoogleAdSense: AdSense script loaded successfully');
 
-    if (shouldInitialize && !alreadyHandled) {
-      // eslint-disable-next-line no-console
-      console.log('ConsentAwareGoogleAdSense: Initializing AdSense...', {
-        hasConsent,
-        canUseMarketing,
-        isDevelopment,
-        alreadyHandled,
-      });
-
-      // Add a small delay to prevent race conditions
-      const initTimeout = setTimeout(() => {
-        adsenseManager
-          .initialize()
-          .then((success) => {
-            if (success) {
-              // eslint-disable-next-line no-console
-              console.log('ConsentAwareGoogleAdSense: AdSense initialized successfully');
-
-              // Initialize Google consent mode only if we have real consent
-              if (typeof window !== 'undefined' && window.gtag && hasConsent && canUseMarketing) {
-                window.gtag('consent', 'update', {
-                  ad_storage: 'granted',
-                  ad_user_data: 'granted',
-                  ad_personalization: 'granted',
-                });
-              }
-            } else {
-              // Check if we're in fallback mode
-              if (adsenseManager.isInFallbackMode()) {
-                console.info('ConsentAwareGoogleAdSense: Running in fallback mode (development)');
-              } else if (adsenseManager.isLikelyBlocked()) {
-                console.warn('ConsentAwareGoogleAdSense: AdSense likely blocked by ad blocker');
-                if (isDevelopment) {
-                  console.info(
-                    'ConsentAwareGoogleAdSense: This is expected in development with ad blockers'
-                  );
-                }
-              } else {
-                console.error('ConsentAwareGoogleAdSense: Failed to initialize AdSense');
-              }
-            }
-          })
-          .catch((error) => {
-            // More specific error handling
-            if (error.message.includes('blocked')) {
-              console.warn(
-                'ConsentAwareGoogleAdSense: AdSense blocked by ad blocker or network filter'
-              );
-              if (isDevelopment) {
-                console.info(
-                  'ConsentAwareGoogleAdSense: Consider disabling ad blocker for development'
-                );
-              }
-            } else {
-              console.error('ConsentAwareGoogleAdSense: AdSense initialization error:', error);
-            }
-          });
-      }, 200); // Slightly longer delay to ensure consent state is stable
-
-      return () => clearTimeout(initTimeout);
-    } else if (!shouldInitialize) {
-      // eslint-disable-next-line no-console
-      console.log('ConsentAwareGoogleAdSense: Waiting for consent...', {
-        hasConsent,
-        canUseMarketing,
-        isDevelopment,
-      });
-    } else {
-      // eslint-disable-next-line no-console
-      console.log('ConsentAwareGoogleAdSense: Already handled, skipping initialization', {
-        hasConsent,
-        canUseMarketing,
-        isDevelopment,
-        alreadyHandled,
+    // Initialize Google consent mode only if we have real consent
+    if (typeof window !== 'undefined' && window.gtag && hasConsent && canUseMarketing) {
+      window.gtag('consent', 'update', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
       });
     }
-  }, [hasConsent, canUseMarketing]);
+  };
 
-  // Don't render anything - the AdSense manager handles script loading
-  return null;
+  const handleScriptError = (error: Error) => {
+    console.warn('ConsentAwareGoogleAdSense: AdSense script failed to load', error);
+
+    // In development mode, this might be expected due to ad blockers
+    if (isDevelopment) {
+      console.info(
+        'ConsentAwareGoogleAdSense: This is normal in development if you have an ad blocker'
+      );
+    }
+  };
+
+  if (!shouldLoadScript) {
+    console.log('ConsentAwareGoogleAdSense: Waiting for consent...', {
+      hasConsent,
+      canUseMarketing,
+      isDevelopment,
+    });
+    return null;
+  }
+
+  return (
+    <GoogleAdSense
+      publisherId={googleAdsenseId}
+      onLoad={handleScriptLoad}
+      onError={handleScriptError}
+    />
+  );
 };
 
 export default ConsentAwareGoogleAdSense;

@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
+import AD_CONFIG from '@/lib/ads/adConfig';
 
 interface SidebarAdProps {
   slot: string;
@@ -26,6 +27,11 @@ export default function SidebarAd({
   const adRef = useRef<HTMLModElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const loadAd = async () => {
@@ -34,30 +40,18 @@ export default function SidebarAd({
           return;
         }
 
-        // Check if we're in fallback mode before attempting to load
-        if (adsenseManager.isInFallbackMode()) {
-          console.log('SidebarAd: Using fallback mode');
-          setIsLoaded(true);
+        // Small delay to ensure DOM is ready
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
+        if (!adRef.current) {
           return;
         }
 
         const success = await adsenseManager.pushAd(adRef.current);
         if (success) {
           setIsLoaded(true);
-
-          // Check if the ad was loaded in fallback mode
-          const status = adRef.current.getAttribute('data-ad-status');
-          if (status === 'fallback') {
-            console.log('SidebarAd: Loaded in fallback mode');
-          }
         } else {
-          // If AdSense failed and we're in development, don't show error
-          if (process.env.NODE_ENV === 'development' && adsenseManager.getFailedAttempts() > 0) {
-            console.log('SidebarAd: AdSense failed in development, hiding ad');
-            setHasError(true);
-          } else {
-            throw new Error('Failed to load ad');
-          }
+          setHasError(true);
         }
       } catch (error) {
         console.error('AdSense error:', error);
@@ -65,22 +59,34 @@ export default function SidebarAd({
       }
     };
 
-    if (typeof window !== 'undefined') {
-      // Small delay to ensure DOM is ready and AdSense manager is initialized
-      const timer = setTimeout(loadAd, 300);
-      return () => clearTimeout(timer);
+    if (isClient) {
+      loadAd();
     }
-  }, []);
-
-  if (hasError) {
-    return null; // Don't show anything if there's an error
-  }
+  }, [isClient]);
 
   const containerClasses = `
     ad-container
     ${sticky ? 'sticky top-24' : ''}
     ${className}
   `.trim();
+
+  // Don't render anything on server side to prevent hydration issues
+  if (!isClient) {
+    return (
+      <div className={containerClasses} style={style}>
+        <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
+          Advertisement
+        </div>
+        <div className='flex h-64 items-center justify-center rounded bg-slate-50 dark:bg-slate-900'>
+          <div className='text-sm text-slate-400'>Loading advertisement...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (hasError && !adsenseManager.isDevelopmentMode()) {
+    return null; // Don't show anything if there's an error in production
+  }
 
   return (
     <div className={containerClasses} style={style}>
@@ -98,7 +104,7 @@ export default function SidebarAd({
           backgroundColor: isLoaded ? 'transparent' : '#f8f9fa',
           ...style,
         }}
-        data-ad-client='ca-pub-7412827340538951'
+        data-ad-client={AD_CONFIG.PUBLISHER_ID}
         data-ad-slot={slot}
         data-ad-format='auto'
         data-full-width-responsive='true'
