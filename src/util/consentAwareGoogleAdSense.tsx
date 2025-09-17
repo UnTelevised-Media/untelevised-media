@@ -20,11 +20,17 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
 
     // Initialize Google consent mode only if we have real consent
     if (typeof window !== 'undefined' && window.gtag && hasConsent && canUseMarketing) {
-      window.gtag('consent', 'update', {
-        ad_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-      });
+      // Small delay to ensure gtag is ready
+      setTimeout(() => {
+        if (window.gtag) {
+          window.gtag('consent', 'update', {
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+          });
+          console.log('ConsentAwareGoogleAdSense: Consent mode updated for ads');
+        }
+      }, 100);
     }
   };
 
@@ -38,6 +44,12 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
       );
     }
   };
+
+  // Don't load script if consent is explicitly denied
+  if (hasConsent && !canUseMarketing && !isDevelopment) {
+    console.log('ConsentAwareGoogleAdSense: Marketing consent denied, not loading AdSense');
+    return null;
+  }
 
   if (!shouldLoadScript) {
     console.log('ConsentAwareGoogleAdSense: Waiting for consent...', {

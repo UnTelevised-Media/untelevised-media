@@ -14,19 +14,29 @@ declare global {
   interface Window {
     adsbygoogle: any[];
     adsenseLoaded?: boolean;
+    adsenseScriptError?: boolean;
   }
 }
 
 export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAdSenseProps) {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [scriptError, setScriptError] = useState<Error | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // Initialize adsbygoogle array immediately
+    setIsClient(true);
+
+    // Initialize adsbygoogle array immediately on client
     if (typeof window !== 'undefined') {
       window.adsbygoogle = window.adsbygoogle || [];
+
+      // Check if script is already loaded
+      if (window.adsenseLoaded) {
+        setScriptLoaded(true);
+        onLoad?.();
+      }
     }
-  }, []);
+  }, [onLoad]);
 
   const handleScriptLoad = () => {
     console.log('AdSense: Script loaded successfully');
@@ -34,6 +44,10 @@ export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAd
 
     if (typeof window !== 'undefined') {
       window.adsenseLoaded = true;
+      window.adsenseScriptError = false;
+
+      // Ensure adsbygoogle array is available
+      window.adsbygoogle = window.adsbygoogle || [];
     }
 
     onLoad?.();
@@ -43,8 +57,18 @@ export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAd
     const error = new Error('Failed to load Google AdSense script');
     console.error('AdSense: Script loading failed', error);
     setScriptError(error);
+
+    if (typeof window !== 'undefined') {
+      window.adsenseScriptError = true;
+    }
+
     onError?.(error);
   };
+
+  // Don't render on server side
+  if (!isClient) {
+    return null;
+  }
 
   // Don't render script if there's an error or if already loaded
   if (scriptError || (typeof window !== 'undefined' && window.adsenseLoaded)) {

@@ -5,6 +5,7 @@ declare global {
   interface Window {
     adsbygoogle: any[];
     adsenseLoaded?: boolean;
+    adsenseScriptError?: boolean;
   }
 }
 
@@ -35,7 +36,16 @@ export class AdSenseManager {
       return false;
     }
 
-    return !!(window.adsenseLoaded && window.adsbygoogle && Array.isArray(window.adsbygoogle));
+    // Check if script failed to load
+    if (window.adsenseScriptError) {
+      return false;
+    }
+
+    // Check if script is loaded and adsbygoogle array is available
+    const scriptLoaded = window.adsenseLoaded;
+    const arrayAvailable = window.adsbygoogle && Array.isArray(window.adsbygoogle);
+
+    return !!(scriptLoaded && arrayAvailable);
   }
 
   /**
@@ -54,16 +64,34 @@ export class AdSenseManager {
       return false;
     }
 
-    // Check if AdSense is ready
+    // In development mode, always show placeholder
+    if (this.isDevelopment) {
+      this.createDevelopmentPlaceholder(adElement);
+      return true;
+    }
+
+    // Check if script failed to load
+    if (window.adsenseScriptError) {
+      console.warn('AdSense: Script failed to load, cannot push ad');
+      this.isBlocked = true;
+      return false;
+    }
+
+    // Wait for script to be ready with timeout
+    const maxWaitTime = 10000; // 10 seconds
+    const checkInterval = 100; // 100ms
+    let waitTime = 0;
+
+    while (!this.isReady() && waitTime < maxWaitTime) {
+      await new Promise((resolve) => setTimeout(resolve, checkInterval));
+      waitTime += checkInterval;
+    }
+
+    // Check if AdSense is ready after waiting
     if (!this.isReady()) {
-      console.warn('AdSense: Script not ready, cannot push ad');
-
-      // In development mode, show a placeholder
-      if (this.isDevelopment) {
-        this.createDevelopmentPlaceholder(adElement);
-        return true;
-      }
-
+      console.warn('AdSense: Script not ready after waiting, cannot push ad');
+      this.failedAttempts++;
+      this.isBlocked = true;
       return false;
     }
 
@@ -92,12 +120,6 @@ export class AdSenseManager {
       // Track failed attempts
       this.failedAttempts++;
       this.isBlocked = true;
-
-      // In development mode, show a placeholder on error
-      if (this.isDevelopment) {
-        this.createDevelopmentPlaceholder(adElement);
-        return true;
-      }
 
       return false;
     }

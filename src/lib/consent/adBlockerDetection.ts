@@ -4,6 +4,14 @@
 import { AdBlockerStatus } from './types';
 import { adBlockerStorage } from './storage';
 
+declare global {
+  interface Window {
+    adsbygoogle: any[];
+    adsenseLoaded?: boolean;
+    adsenseScriptError?: boolean;
+  }
+}
+
 export class AdBlockerDetector {
   private static instance: AdBlockerDetector;
   private detectionPromise: Promise<boolean> | null = null;
@@ -94,7 +102,8 @@ export class AdBlockerDetector {
       ).length;
 
       // In development, require more evidence of ad blocking
-      const threshold = isDevelopment ? 3 : 2;
+      // In production, also be more conservative to reduce false positives
+      const threshold = isDevelopment ? 4 : 3;
       const isBlocked = detectedCount >= threshold;
 
       if (isDevelopment && isBlocked) {
@@ -135,19 +144,33 @@ export class AdBlockerDetector {
     });
   }
 
-  // Method 2: AdSense script detection
+  // Method 2: AdSense script detection (improved to reduce false positives)
   private detectByAdSenseScript(): Promise<boolean> {
     return new Promise((resolve) => {
-      if (!window.adsbygoogle) {
+      // Check if AdSense script explicitly failed to load
+      if (typeof window !== 'undefined' && window.adsenseScriptError) {
         resolve(true);
         return;
       }
 
-      // Check if AdSense is blocked
+      // If AdSense is not loaded yet, don't assume it's blocked
+      if (!window.adsbygoogle) {
+        resolve(false); // Changed from true to false to reduce false positives
+        return;
+      }
+
+      // Only test if we have a proper AdSense setup
+      const existingScript = document.querySelector('script[src*="adsbygoogle.js"]');
+      if (!existingScript) {
+        resolve(false); // No script means we haven't tried to load it yet
+        return;
+      }
+
+      // Check if AdSense is blocked by testing a minimal ad element
       const testAd = document.createElement('ins');
       testAd.className = 'adsbygoogle';
       testAd.style.cssText =
-        'display:block;width:1px;height:1px;position:absolute;left:-1000px;top:-1000px;';
+        'display:block;width:1px;height:1px;position:absolute;left:-10000px;top:-10000px;visibility:hidden;';
       testAd.setAttribute('data-ad-client', 'ca-pub-test');
       testAd.setAttribute('data-ad-slot', '1234567890');
 
@@ -157,10 +180,18 @@ export class AdBlockerDetector {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
 
         setTimeout(() => {
-          const detected = testAd.innerHTML === '';
+          // More robust detection - check multiple indicators
+          const hasContent = testAd.innerHTML !== '';
+          const hasHeight = testAd.offsetHeight > 0;
+          const hasWidth = testAd.offsetWidth > 0;
+          const isVisible = testAd.style.display !== 'none';
+
+          // Consider it blocked only if multiple indicators suggest blocking
+          const detected = !hasContent && !hasHeight && !hasWidth && isVisible;
+
           document.body.removeChild(testAd);
           resolve(detected);
-        }, 100);
+        }, 200); // Increased timeout for more reliable detection
       } catch (error) {
         document.body.removeChild(testAd);
         resolve(true);
@@ -168,54 +199,33 @@ export class AdBlockerDetector {
     });
   }
 
-  // Method 3: Google Ads detection (improved to avoid conflicts)
+  // Method 3: Google Ads detection (improved to avoid conflicts and false positives)
   private detectByGoogleAds(): Promise<boolean> {
     return new Promise((resolve) => {
       // Check if AdSense script already exists (loaded by main app)
       const existingScript = document.querySelector('script[src*="adsbygoogle.js"]');
 
       if (existingScript) {
-        // If script exists but adsbygoogle is not available, likely blocked
-        const adsbyGoogleAvailable = !!(window.adsbygoogle && Array.isArray(window.adsbygoogle));
-        resolve(!adsbyGoogleAvailable);
+        // If script exists and loaded successfully, check if it's functional
+        if (window.adsenseLoaded && window.adsbygoogle && Array.isArray(window.adsbygoogle)) {
+          resolve(false); // Script loaded and working
+          return;
+        }
+
+        // If script exists but failed to load
+        if (window.adsenseScriptError) {
+          resolve(true); // Explicitly failed
+          return;
+        }
+
+        // Script exists but status unclear - don't assume blocked
+        resolve(false);
         return;
       }
 
-      // Only create test script if no existing script found
-      const script = document.createElement('script');
-      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-      script.async = true;
-      script.setAttribute('data-ad-blocker-test', 'true'); // Mark as test script
-
-      let resolved = false;
-
-      script.onload = () => {
-        if (!resolved) {
-          resolved = true;
-          resolve(false);
-        }
-      };
-
-      script.onerror = () => {
-        if (!resolved) {
-          resolved = true;
-          resolve(true);
-        }
-      };
-
-      document.head.appendChild(script);
-
-      // Timeout fallback (reduced timeout)
-      setTimeout(() => {
-        if (!resolved) {
-          resolved = true;
-          resolve(true);
-        }
-        // Clean up test script
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
-      }, 2000); // Reduced from 3000ms to 2000ms
+      // Don't create additional test scripts if we already have one
+      // This prevents conflicts and false positives
+      resolve(false);
     });
   }
 
