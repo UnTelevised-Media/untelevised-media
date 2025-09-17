@@ -64,15 +64,18 @@ export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAd
           window.adsenseLoaded = true;
           window.adsenseScriptError = false;
 
-          // Ensure adsbygoogle array is available and properly initialized
-          window.adsbygoogle = window.adsbygoogle || [];
+          // Initialize adsbygoogle array immediately
+          if (!window.adsbygoogle || !Array.isArray(window.adsbygoogle)) {
+            window.adsbygoogle = [];
+            console.log('AdSense: Initialized adsbygoogle array');
+          }
 
-          // Force initialization if needed
+          // Give Google's script a moment to take over the array
           setTimeout(() => {
             if (window.adsbygoogle && !Array.isArray(window.adsbygoogle)) {
               window.adsbygoogle = [];
             }
-            console.log('AdSense: adsbygoogle array initialized:', !!window.adsbygoogle);
+            console.log('AdSense: Final array check completed');
           }, 100);
         }
 

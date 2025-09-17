@@ -12,8 +12,9 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
   const { canUseMarketing, hasConsent } = useConsentCheck();
   const isDevelopment = process.env.NODE_ENV === 'development';
 
-  // Only load AdSense script when we have proper consent OR in development mode
-  const shouldLoadScript = (hasConsent && canUseMarketing) || isDevelopment;
+  // In development mode, always load the script regardless of consent
+  // In production, only load when we have proper consent
+  const shouldLoadScript = isDevelopment || (hasConsent && canUseMarketing);
 
   const handleScriptLoad = () => {
     console.log('ConsentAwareGoogleAdSense: AdSense script loaded successfully');
@@ -45,13 +46,14 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
     }
   };
 
-  // Don't load script if consent is explicitly denied
-  if (hasConsent && !canUseMarketing && !isDevelopment) {
+  // In production, don't load script if consent is explicitly denied
+  if (!isDevelopment && hasConsent && !canUseMarketing) {
     console.log('ConsentAwareGoogleAdSense: Marketing consent denied, not loading AdSense');
     return null;
   }
 
-  if (!shouldLoadScript) {
+  // In production, wait for consent to be determined before loading
+  if (!isDevelopment && !shouldLoadScript) {
     console.log('ConsentAwareGoogleAdSense: Waiting for consent...', {
       hasConsent,
       canUseMarketing,
