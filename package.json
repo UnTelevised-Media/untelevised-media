@@ -6,6 +6,8 @@
     "migrate:posts-to-articles": "node scripts/migrate-posts-to-articles.js",
     "copy:posts-to-articles": "node scripts/copy-posts-to-articles.js",
     "preview:copy-posts-to-articles": "node scripts/preview-copy-posts-to-articles.js",
+    "populate:timeline-data": "node scripts/populate-timeline-data.js",
+    "verify:timeline-data": "node scripts/verify-timeline-data.js",
     "dev:turbo": "next dev --turbopack",
     "dev": "next dev",
     "start": "next start",

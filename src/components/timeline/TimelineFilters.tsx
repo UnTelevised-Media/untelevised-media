@@ -2,17 +2,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Search, 
-  Filter, 
-  Calendar, 
-  Star, 
-  AlertTriangle, 
+import {
+  Search,
+  Filter,
+  Calendar,
+  Star,
+  AlertTriangle,
   Clock,
   MapPin,
   X,
   ChevronDown,
-  SlidersHorizontal
+  SlidersHorizontal,
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -78,23 +78,25 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
 
   // Apply filters whenever filter state changes
   useEffect(() => {
-    const filteredEvents = events.filter(event => {
+    const filteredEvents = events.filter((event) => {
       // Search filter
       if (filters.searchTerm) {
         const searchLower = filters.searchTerm.toLowerCase();
-        const matchesSearch = 
+        const matchesSearch =
           event.title.toLowerCase().includes(searchLower) ||
           event.description?.toLowerCase().includes(searchLower) ||
           event.location?.toLowerCase().includes(searchLower) ||
-          event.tags?.some(tag => tag.toLowerCase().includes(searchLower));
-        
-        if (!matchesSearch) return false;
+          event.tags?.some((tag) => tag.toLowerCase().includes(searchLower));
+
+        if (!matchesSearch) {
+          return false;
+        }
       }
 
       // Category filter
       if (filters.selectedCategories.length > 0) {
-        const eventCategoryIds = event.timelineCategories?.map(cat => cat._id) || [];
-        if (!filters.selectedCategories.some(catId => eventCategoryIds.includes(catId))) {
+        const eventCategoryIds = event.timelineCategories?.map((cat) => cat._id) || [];
+        if (!filters.selectedCategories.some((catId) => eventCategoryIds.includes(catId))) {
           return false;
         }
       }
@@ -144,15 +146,18 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
   }, [filters, events, onFilterChange]);
 
   const updateFilter = (key: keyof FilterState, value: any) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
-  const toggleArrayFilter = (key: 'selectedCategories' | 'selectedEventTypes' | 'selectedImportanceLevels', value: string) => {
-    setFilters(prev => ({
+  const toggleArrayFilter = (
+    key: 'selectedCategories' | 'selectedEventTypes' | 'selectedImportanceLevels',
+    value: string
+  ) => {
+    setFilters((prev) => ({
       ...prev,
       [key]: prev[key].includes(value)
-        ? prev[key].filter(item => item !== value)
-        : [...prev[key], value]
+        ? prev[key].filter((item) => item !== value)
+        : [...prev[key], value],
     }));
   };
 
@@ -170,13 +175,27 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
 
   const getActiveFilterCount = () => {
     let count = 0;
-    if (filters.searchTerm) count++;
-    if (filters.selectedCategories.length > 0) count++;
-    if (filters.selectedEventTypes.length > 0) count++;
-    if (filters.selectedImportanceLevels.length > 0) count++;
-    if (filters.dateRange.start || filters.dateRange.end) count++;
-    if (filters.milestonesOnly) count++;
-    if (filters.location) count++;
+    if (filters.searchTerm) {
+      count++;
+    }
+    if (filters.selectedCategories.length > 0) {
+      count++;
+    }
+    if (filters.selectedEventTypes.length > 0) {
+      count++;
+    }
+    if (filters.selectedImportanceLevels.length > 0) {
+      count++;
+    }
+    if (filters.dateRange.start || filters.dateRange.end) {
+      count++;
+    }
+    if (filters.milestonesOnly) {
+      count++;
+    }
+    if (filters.location) {
+      count++;
+    }
     return count;
   };
 
@@ -185,39 +204,41 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
   return (
     <div className={`timeline-filters ${className}`}>
       {/* Search Bar */}
-      <div className="flex flex-wrap items-center gap-4 mb-4">
-        <div className="flex-1 min-w-64 relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+      <div className='mb-4 flex flex-wrap items-center gap-4'>
+        <div className='relative min-w-64 flex-1'>
+          <Search className='absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-slate-400' />
           <Input
-            type="text"
-            placeholder="Search timeline events..."
+            type='text'
+            placeholder='Search timeline events...'
             value={filters.searchTerm}
             onChange={(e) => updateFilter('searchTerm', e.target.value)}
-            className="pl-10"
+            className='pl-10'
           />
         </div>
-        
+
         <Button
-          variant="outline"
+          variant='outline'
           onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center gap-2 relative"
+          className='relative flex items-center gap-2'
         >
-          <SlidersHorizontal className="h-4 w-4" />
+          <SlidersHorizontal className='h-4 w-4' />
           Filters
           {activeFilterCount > 0 && (
-            <Badge className="ml-1 h-5 w-5 p-0 text-xs flex items-center justify-center">
+            <Badge className='ml-1 flex h-5 w-5 items-center justify-center p-0 text-xs'>
               {activeFilterCount}
             </Badge>
           )}
-          <ChevronDown className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+          <ChevronDown
+            className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`}
+          />
         </Button>
 
         {activeFilterCount > 0 && (
           <Button
-            variant="ghost"
-            size="sm"
+            variant='ghost'
+            size='sm'
             onClick={clearAllFilters}
-            className="text-slate-600 hover:text-slate-900"
+            className='text-slate-600 hover:text-slate-900'
           >
             Clear All
           </Button>
@@ -231,26 +252,26 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="border rounded-lg p-6 bg-slate-50 dark:bg-slate-900 space-y-6"
+            className='space-y-6 rounded-lg border bg-slate-50 p-6 dark:bg-slate-900'
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
               {/* Categories */}
               {categories.length > 0 && (
                 <div>
-                  <h4 className="text-sm font-medium mb-3 flex items-center gap-2">
-                    <Filter className="h-4 w-4" />
+                  <h4 className='mb-3 flex items-center gap-2 text-sm font-medium'>
+                    <Filter className='h-4 w-4' />
                     Categories
                   </h4>
-                  <div className="space-y-2 max-h-32 overflow-y-auto">
-                    {categories.map(category => (
-                      <label key={category._id} className="flex items-center gap-2 cursor-pointer">
+                  <div className='max-h-32 space-y-2 overflow-y-auto'>
+                    {categories.map((category) => (
+                      <label key={category._id} className='flex cursor-pointer items-center gap-2'>
                         <input
-                          type="checkbox"
+                          type='checkbox'
                           checked={filters.selectedCategories.includes(category._id)}
                           onChange={() => toggleArrayFilter('selectedCategories', category._id)}
-                          className="rounded"
+                          className='rounded'
                         />
-                        <span className="text-sm">{category.title}</span>
+                        <span className='text-sm'>{category.title}</span>
                       </label>
                     ))}
                   </div>
@@ -259,21 +280,21 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
 
               {/* Event Types */}
               <div>
-                <h4 className="text-sm font-medium mb-3 flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
+                <h4 className='mb-3 flex items-center gap-2 text-sm font-medium'>
+                  <Calendar className='h-4 w-4' />
                   Event Types
                 </h4>
-                <div className="space-y-2 max-h-32 overflow-y-auto">
-                  {EVENT_TYPES.map(type => (
-                    <label key={type.value} className="flex items-center gap-2 cursor-pointer">
+                <div className='max-h-32 space-y-2 overflow-y-auto'>
+                  {EVENT_TYPES.map((type) => (
+                    <label key={type.value} className='flex cursor-pointer items-center gap-2'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         checked={filters.selectedEventTypes.includes(type.value)}
                         onChange={() => toggleArrayFilter('selectedEventTypes', type.value)}
-                        className="rounded"
+                        className='rounded'
                       />
-                      <type.icon className="h-3 w-3" />
-                      <span className="text-sm">{type.label}</span>
+                      <type.icon className='h-3 w-3' />
+                      <span className='text-sm'>{type.label}</span>
                     </label>
                   ))}
                 </div>
@@ -281,21 +302,21 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
 
               {/* Importance Levels */}
               <div>
-                <h4 className="text-sm font-medium mb-3 flex items-center gap-2">
-                  <AlertTriangle className="h-4 w-4" />
+                <h4 className='mb-3 flex items-center gap-2 text-sm font-medium'>
+                  <AlertTriangle className='h-4 w-4' />
                   Importance
                 </h4>
-                <div className="space-y-2">
-                  {IMPORTANCE_LEVELS.map(level => (
-                    <label key={level.value} className="flex items-center gap-2 cursor-pointer">
+                <div className='space-y-2'>
+                  {IMPORTANCE_LEVELS.map((level) => (
+                    <label key={level.value} className='flex cursor-pointer items-center gap-2'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         checked={filters.selectedImportanceLevels.includes(level.value)}
                         onChange={() => toggleArrayFilter('selectedImportanceLevels', level.value)}
-                        className="rounded"
+                        className='rounded'
                       />
-                      <div className={`w-3 h-3 rounded-full ${level.color}`} />
-                      <span className="text-sm">{level.label}</span>
+                      <div className={`h-3 w-3 rounded-full ${level.color}`} />
+                      <span className='text-sm'>{level.label}</span>
                     </label>
                   ))}
                 </div>
@@ -303,55 +324,59 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
             </div>
 
             {/* Additional Filters Row */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+            <div className='grid grid-cols-1 gap-4 border-t border-slate-200 pt-4 dark:border-slate-700 md:grid-cols-3'>
               {/* Date Range */}
               <div>
-                <h4 className="text-sm font-medium mb-2">Date Range</h4>
-                <div className="space-y-2">
+                <h4 className='mb-2 text-sm font-medium'>Date Range</h4>
+                <div className='space-y-2'>
                   <Input
-                    type="date"
-                    placeholder="Start date"
+                    type='date'
+                    placeholder='Start date'
                     value={filters.dateRange.start}
-                    onChange={(e) => updateFilter('dateRange', { ...filters.dateRange, start: e.target.value })}
-                    className="text-sm"
+                    onChange={(e) =>
+                      updateFilter('dateRange', { ...filters.dateRange, start: e.target.value })
+                    }
+                    className='text-sm'
                   />
                   <Input
-                    type="date"
-                    placeholder="End date"
+                    type='date'
+                    placeholder='End date'
                     value={filters.dateRange.end}
-                    onChange={(e) => updateFilter('dateRange', { ...filters.dateRange, end: e.target.value })}
-                    className="text-sm"
+                    onChange={(e) =>
+                      updateFilter('dateRange', { ...filters.dateRange, end: e.target.value })
+                    }
+                    className='text-sm'
                   />
                 </div>
               </div>
 
               {/* Location */}
               <div>
-                <h4 className="text-sm font-medium mb-2 flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
+                <h4 className='mb-2 flex items-center gap-2 text-sm font-medium'>
+                  <MapPin className='h-4 w-4' />
                   Location
                 </h4>
                 <Input
-                  type="text"
-                  placeholder="Filter by location..."
+                  type='text'
+                  placeholder='Filter by location...'
                   value={filters.location}
                   onChange={(e) => updateFilter('location', e.target.value)}
-                  className="text-sm"
+                  className='text-sm'
                 />
               </div>
 
               {/* Special Filters */}
               <div>
-                <h4 className="text-sm font-medium mb-2">Special Filters</h4>
-                <label className="flex items-center gap-2 cursor-pointer">
+                <h4 className='mb-2 text-sm font-medium'>Special Filters</h4>
+                <label className='flex cursor-pointer items-center gap-2'>
                   <input
-                    type="checkbox"
+                    type='checkbox'
                     checked={filters.milestonesOnly}
                     onChange={(e) => updateFilter('milestonesOnly', e.target.checked)}
-                    className="rounded"
+                    className='rounded'
                   />
-                  <Star className="h-3 w-3 text-yellow-500" />
-                  <span className="text-sm">Milestones only</span>
+                  <Star className='h-3 w-3 text-yellow-500' />
+                  <span className='text-sm'>Milestones only</span>
                 </label>
               </div>
             </div>
@@ -361,48 +386,48 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
 
       {/* Active Filters Display */}
       {activeFilterCount > 0 && (
-        <div className="flex flex-wrap items-center gap-2 mt-4">
-          <span className="text-sm text-slate-600 dark:text-slate-400">Active filters:</span>
-          
+        <div className='mt-4 flex flex-wrap items-center gap-2'>
+          <span className='text-sm text-slate-600 dark:text-slate-400'>Active filters:</span>
+
           {filters.searchTerm && (
-            <Badge variant="secondary" className="flex items-center gap-1">
-              Search: "{filters.searchTerm}"
-              <X 
-                className="h-3 w-3 cursor-pointer" 
+            <Badge variant='secondary' className='flex items-center gap-1'>
+              Search: &quot;{filters.searchTerm}&quot;
+              <X
+                className='h-3 w-3 cursor-pointer'
                 onClick={() => updateFilter('searchTerm', '')}
               />
             </Badge>
           )}
 
-          {filters.selectedCategories.map(catId => {
-            const category = categories.find(c => c._id === catId);
+          {filters.selectedCategories.map((catId) => {
+            const category = categories.find((c) => c._id === catId);
             return category ? (
-              <Badge key={catId} variant="secondary" className="flex items-center gap-1">
+              <Badge key={catId} variant='secondary' className='flex items-center gap-1'>
                 {category.title}
-                <X 
-                  className="h-3 w-3 cursor-pointer" 
+                <X
+                  className='h-3 w-3 cursor-pointer'
                   onClick={() => toggleArrayFilter('selectedCategories', catId)}
                 />
               </Badge>
             ) : null;
           })}
 
-          {filters.selectedEventTypes.map(type => (
-            <Badge key={type} variant="secondary" className="flex items-center gap-1">
-              {EVENT_TYPES.find(t => t.value === type)?.label}
-              <X 
-                className="h-3 w-3 cursor-pointer" 
+          {filters.selectedEventTypes.map((type) => (
+            <Badge key={type} variant='secondary' className='flex items-center gap-1'>
+              {EVENT_TYPES.find((t) => t.value === type)?.label}
+              <X
+                className='h-3 w-3 cursor-pointer'
                 onClick={() => toggleArrayFilter('selectedEventTypes', type)}
               />
             </Badge>
           ))}
 
           {filters.milestonesOnly && (
-            <Badge variant="secondary" className="flex items-center gap-1">
-              <Star className="h-3 w-3" />
+            <Badge variant='secondary' className='flex items-center gap-1'>
+              <Star className='h-3 w-3' />
               Milestones
-              <X 
-                className="h-3 w-3 cursor-pointer" 
+              <X
+                className='h-3 w-3 cursor-pointer'
                 onClick={() => updateFilter('milestonesOnly', false)}
               />
             </Badge>

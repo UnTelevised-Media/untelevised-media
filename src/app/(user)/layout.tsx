@@ -42,7 +42,7 @@ export default async function UserLayout({ children }: { children: React.ReactNo
       </div>
 
       {/* Debug Component */}
-      <AdDebugger />
+      {/* <AdDebugger /> */}
     </>
   );
 }

@@ -42,7 +42,9 @@ const PastEventsPage: React.FC<PastEventsPageProps> = ({ initialEvents }) => {
     const tags = new Set<string>();
     events.forEach((event) => {
       event.eventTag?.forEach((tag) => {
-        if (tag.title) tags.add(tag.title);
+        if (tag.title) {
+          tags.add(tag.title);
+        }
       });
     });
     return Array.from(tags).sort();

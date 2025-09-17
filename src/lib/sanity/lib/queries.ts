@@ -400,6 +400,17 @@ export const queryTimelineEventsByCategory = groq`
   | order(eventDate desc)
 `;
 
+export const queryTimelinesByCategory = groq`
+  *[_type=='timeline' && isPublished == true && references(*[_type == 'timelineCategory' && slug.current == $categorySlug]._id)] {
+    ...,
+    author->,
+    collaborators[]->,
+    categories[]->,
+    'eventCount': count(events),
+  }
+  | order(publishedAt desc)
+`;
+
 export const queryMilestoneEvents = groq`
   *[_type=='timelineEvent' && isPublished == true && isMilestone == true] {
     ...,

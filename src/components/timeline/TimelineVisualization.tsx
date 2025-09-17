@@ -109,7 +109,9 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
 
   // Handle mouse drag for timeline scrolling
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (!timelineRef.current) return;
+    if (!timelineRef.current) {
+      return;
+    }
     setIsDragging(true);
     setDragStart({
       x: e.pageX - timelineRef.current.offsetLeft,
@@ -118,7 +120,9 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !timelineRef.current) return;
+    if (!isDragging || !timelineRef.current) {
+      return;
+    }
     e.preventDefault();
     const x = e.pageX - timelineRef.current.offsetLeft;
     const walk = (x - dragStart.x) * 2;
