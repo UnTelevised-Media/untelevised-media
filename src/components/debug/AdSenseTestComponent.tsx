@@ -1,7 +1,7 @@
 /* eslint-disable react/function-component-definition */
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
 import { useConsentCheck } from '@/lib/consent/context';
 
@@ -24,12 +24,13 @@ interface AdSenseTestInfo {
 export default function AdSenseTestComponent() {
   const [testInfo, setTestInfo] = useState<AdSenseTestInfo | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [adTestResults, setAdTestResults] = useState<string[]>([]);
   const { hasConsent, canUseMarketing } = useConsentCheck();
 
   // Function to detect ad blockers
   const detectAdBlocker = (): boolean => {
-    if (typeof window === 'undefined') return false;
+    if (typeof window === 'undefined') {
+      return false;
+    }
 
     // Check for common ad blocker indicators
     const adBlockerTests = [
@@ -57,7 +58,7 @@ export default function AdSenseTestComponent() {
     });
   };
 
-  const refreshInfo = () => {
+  const refreshInfo = useCallback(() => {
     setIsRefreshing(true);
 
     setTimeout(() => {
@@ -74,8 +75,8 @@ export default function AdSenseTestComponent() {
         canUseMarketing,
         isBlocked: adsenseManager.isLikelyBlocked(),
         failedAttempts: adsenseManager.getFailedAttempts(),
-        environment: process.env.NODE_ENV || 'unknown',
-        publisherId: process.env.NEXT_PUBLIC_GAS_ID || 'not-set',
+        environment: process.env.NODE_ENV ?? 'unknown',
+        publisherId: process.env.NEXT_PUBLIC_GAS_ID ?? 'not-set',
         currentUrl: typeof window !== 'undefined' ? window.location.href : 'server-side',
         userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'server-side',
         adBlockerDetected: detectAdBlocker(),
@@ -84,11 +85,11 @@ export default function AdSenseTestComponent() {
       setTestInfo(info);
       setIsRefreshing(false);
     }, 100);
-  };
+  }, [hasConsent, canUseMarketing, detectAdBlocker]);
 
   useEffect(() => {
     refreshInfo();
-  }, [hasConsent, canUseMarketing]);
+  }, [refreshInfo]);
 
   if (!testInfo) {
     return (
@@ -171,7 +172,7 @@ export default function AdSenseTestComponent() {
             </p>
             {testInfo.environment === 'development' && (
               <p className='mt-2 text-sm text-yellow-600 dark:text-yellow-400'>
-                ⚠️ You're in development mode. Ads may not show or may show as placeholders.
+                ⚠️ You&apos;re in development mode. Ads may not show or may show as placeholders.
               </p>
             )}
           </div>
@@ -208,7 +209,8 @@ export default function AdSenseTestComponent() {
             • <strong>Ad Inventory:</strong> Google may not have relevant ads for your audience
           </li>
           <li>
-            • <strong>Development Mode:</strong> Ads typically don't show in localhost/development
+            • <strong>Development Mode:</strong> Ads typically don&apos;t show in
+            localhost/development
           </li>
           <li>
             • <strong>Ad Blockers:</strong> Browser extensions may block ad requests
