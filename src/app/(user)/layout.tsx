@@ -14,6 +14,8 @@ import SanityVisualEditing from '@/components/sanity/VisualEditing';
 import AdDebugger from '@/components/debug/AdDebugger';
 import ConsentDebugger from '@/components/debug/ConsentDebugger';
 import AdSenseTestComponent from '@/components/debug/AdSenseTestComponent';
+import TestAdComponent from '@/components/debug/TestAdComponent';
+import AdSenseTroubleshooter from '@/components/debug/AdSenseTroubleshooter';
 
 export default async function UserLayout({ children }: { children: React.ReactNode }) {
   const draftModeEnabled = (await draftMode()).isEnabled;
@@ -46,6 +48,13 @@ export default async function UserLayout({ children }: { children: React.ReactNo
       {/* Debug Components */}
       <ConsentDebugger />
       <AdSenseTestComponent />
+      <AdSenseTroubleshooter />
+      {/* Test Ad Component for debugging */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className='fixed bottom-4 right-4 z-50 w-80'>
+          <TestAdComponent slot='1234567890' />
+        </div>
+      )}
       {/* <AdDebugger /> */}
     </>
   );

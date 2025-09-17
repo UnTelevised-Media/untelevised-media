@@ -124,6 +124,23 @@ export class AdSenseManager {
         if (status === 'processing') {
           adElement.setAttribute('data-ad-status', 'unfilled');
           console.log('AdSense: Ad unfilled after timeout');
+
+          // Log additional debugging info for unfilled ads
+          const slot = adElement.getAttribute('data-ad-slot');
+          const format = adElement.getAttribute('data-ad-format');
+          console.log(
+            `AdSense Debug: Unfilled ad details - Slot: ${slot}, Format: ${format}, Environment: ${process.env.NODE_ENV}`
+          );
+          console.log(
+            'AdSense Debug: This is normal for development, new accounts, or low-traffic sites'
+          );
+
+          // Check if this is a development environment
+          if (this.isDevelopment) {
+            console.log(
+              "AdSense Debug: You are in development mode - ads typically don't show on localhost"
+            );
+          }
         }
       }, 5000);
 
