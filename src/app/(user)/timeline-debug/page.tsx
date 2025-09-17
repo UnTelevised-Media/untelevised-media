@@ -7,6 +7,9 @@ import TimelineJSVisualization from '@/components/timeline/TimelineJSVisualizati
 const mockTimeline: Timeline = {
   _id: 'test-timeline',
   _type: 'timeline',
+  _createdAt: '2024-01-01T00:00:00Z',
+  _rev: 'test-rev-123',
+  _updatedAt: '2024-01-01T00:00:00Z',
   title: 'Test Timeline',
   shortDescription: 'A test timeline for debugging',
   description: [
@@ -29,6 +32,8 @@ const mockTimeline: Timeline = {
     current: 'test-timeline',
     _type: 'slug',
   },
+  timelineType: 'custom',
+  isFeatured: false,
   isPublished: true,
   publishedAt: '2024-01-01T00:00:00Z',
   events: [],
@@ -39,9 +44,12 @@ const mockEvents: TimelineEvent[] = [
   {
     _id: 'event-1',
     _type: 'timelineEvent',
+    _createdAt: '2024-01-01T00:00:00Z',
+    _rev: 'event-rev-123',
+    _updatedAt: '2024-01-01T00:00:00Z',
     title: 'First Event',
-    shortDescription: 'This is the first test event',
-    description: [
+    description: 'This is the first test event',
+    detailedDescription: [
       {
         _key: 'event1-block',
         _type: 'block',
@@ -58,7 +66,7 @@ const mockEvents: TimelineEvent[] = [
       },
     ],
     eventDate: '2024-01-01T00:00:00Z',
-    eventType: 'milestone',
+    eventType: 'other',
     importanceLevel: 'high',
     isMilestone: true,
     isPublished: true,
@@ -74,9 +82,12 @@ const mockEvents: TimelineEvent[] = [
   {
     _id: 'event-2',
     _type: 'timelineEvent',
+    _createdAt: '2024-01-01T00:00:00Z',
+    _rev: 'event-rev-456',
+    _updatedAt: '2024-01-01T00:00:00Z',
     title: 'Second Event',
-    shortDescription: 'This is the second test event',
-    description: [
+    description: 'This is the second test event',
+    detailedDescription: [
       {
         _key: 'event2-block',
         _type: 'block',
@@ -93,7 +104,7 @@ const mockEvents: TimelineEvent[] = [
       },
     ],
     eventDate: '2024-06-01T00:00:00Z',
-    eventType: 'event',
+    eventType: 'other',
     importanceLevel: 'medium',
     isMilestone: false,
     isPublished: true,
@@ -109,9 +120,12 @@ const mockEvents: TimelineEvent[] = [
   {
     _id: 'event-3',
     _type: 'timelineEvent',
+    _createdAt: '2024-01-01T00:00:00Z',
+    _rev: 'event-rev-789',
+    _updatedAt: '2024-01-01T00:00:00Z',
     title: 'Third Event',
-    shortDescription: 'This is the third test event',
-    description: [
+    description: 'This is the third test event',
+    detailedDescription: [
       {
         _key: 'event3-block',
         _type: 'block',
@@ -128,7 +142,7 @@ const mockEvents: TimelineEvent[] = [
       },
     ],
     eventDate: '2024-12-01T00:00:00Z',
-    eventType: 'milestone',
+    eventType: 'other',
     importanceLevel: 'critical',
     isMilestone: true,
     isPublished: true,
@@ -143,20 +157,21 @@ const mockEvents: TimelineEvent[] = [
   },
 ];
 
-export default function TimelineDebugPage() {
+const TimelineDebugPage = () => {
   return (
     <div className='min-h-screen bg-white dark:bg-black'>
       <div className='container mx-auto px-4 py-8'>
         <h1 className='mb-8 text-3xl font-bold text-slate-900 dark:text-slate-100'>
           TimelineJS Debug Page
         </h1>
-        
+
         <div className='mb-6 rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20'>
           <h2 className='mb-2 text-lg font-semibold text-blue-900 dark:text-blue-100'>
             Debug Information
           </h2>
           <p className='text-sm text-blue-800 dark:text-blue-200'>
-            This page tests the TimelineJS component with mock data. Check the browser console for debugging output.
+            This page tests the TimelineJS component with mock data. Check the browser console for
+            debugging output.
           </p>
           <div className='mt-2 text-xs text-blue-700 dark:text-blue-300'>
             <p>Timeline: {mockTimeline.title}</p>
@@ -178,4 +193,6 @@ export default function TimelineDebugPage() {
       </div>
     </div>
   );
-}
+};
+
+export default TimelineDebugPage;

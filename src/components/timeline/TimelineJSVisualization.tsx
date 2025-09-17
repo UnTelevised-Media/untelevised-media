@@ -282,7 +282,9 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
 
         // Create timeline ID
         const timelineId = `timeline-${timeline?._id || Date.now()}`;
-        timelineRef.current.id = timelineId;
+        if (timelineRef.current) {
+          timelineRef.current.id = timelineId;
+        }
         console.log('🏗️ Creating timeline with ID:', timelineId);
 
         // Get responsive options
@@ -309,11 +311,13 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
           };
           console.log('🧪 Using test data:', testData);
 
-          timelineInstanceRef.current = new window.TL.Timeline(
-            timelineId,
-            testData,
-            timelineOptions
-          );
+          if (window.TL) {
+            timelineInstanceRef.current = new window.TL.Timeline(
+              timelineId,
+              testData,
+              timelineOptions
+            );
+          }
           console.log('✅ Test timeline instance created successfully');
           setIsLoading(false);
           setError(null);
@@ -331,17 +335,19 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
         console.log('✅ Timeline data validation passed');
 
         // Clear any existing timeline
-        if (timelineInstanceRef.current) {
+        if (timelineInstanceRef.current && timelineRef.current) {
           console.log('🧹 Clearing existing timeline');
           timelineRef.current.innerHTML = '';
         }
 
         // Create new timeline instance
-        timelineInstanceRef.current = new window.TL.Timeline(
-          timelineId,
-          timelineData,
-          timelineOptions
-        );
+        if (window.TL) {
+          timelineInstanceRef.current = new window.TL.Timeline(
+            timelineId,
+            timelineData,
+            timelineOptions
+          );
+        }
 
         console.log('✅ Timeline instance created successfully');
         setIsLoading(false);

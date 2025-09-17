@@ -1,20 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { type TimelineJSData } from '@/util/timelineJSAdapter';
 
-declare global {
-  interface Window {
-    TL?: {
-      Timeline: new (
-        containerId: string,
-        data: any,
-        options?: any
-      ) => any;
-    };
-  }
-}
-
-export default function SimpleTimelineTest() {
+const SimpleTimelineTest = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState('Loading...');
   const [error, setError] = useState<string | null>(null);
@@ -57,46 +46,48 @@ export default function SimpleTimelineTest() {
           setTimeout(() => {
             if (window.TL && timelineRef.current) {
               console.log('✅ window.TL available, creating timeline');
-              
+
               // Simple test data
-              const testData = {
+              const testData: TimelineJSData = {
                 events: [
                   {
                     start_date: { year: 2024, month: 1, day: 1 },
                     text: {
                       headline: 'First Event',
-                      text: 'This is the first test event.'
-                    }
+                      text: 'This is the first test event.',
+                    },
                   },
                   {
                     start_date: { year: 2024, month: 6, day: 15 },
                     text: {
                       headline: 'Second Event',
-                      text: 'This is the second test event.'
-                    }
+                      text: 'This is the second test event.',
+                    },
                   },
                   {
                     start_date: { year: 2024, month: 12, day: 31 },
                     text: {
                       headline: 'Third Event',
-                      text: 'This is the third test event.'
-                    }
-                  }
-                ]
+                      text: 'This is the third test event.',
+                    },
+                  },
+                ],
               };
 
               try {
                 timelineRef.current.id = 'simple-timeline-test';
                 const timeline = new window.TL.Timeline('simple-timeline-test', testData, {
                   hash_bookmark: false,
-                  debug: true
+                  debug: true,
                 });
                 console.log('✅ Timeline created successfully:', timeline);
                 setStatus('Timeline loaded successfully!');
                 setError(null);
               } catch (err) {
                 console.error('❌ Error creating timeline:', err);
-                setError(`Failed to create timeline: ${err instanceof Error ? err.message : 'Unknown error'}`);
+                setError(
+                  `Failed to create timeline: ${err instanceof Error ? err.message : 'Unknown error'}`
+                );
               }
             } else {
               console.error('❌ window.TL not available or ref not ready');
@@ -127,19 +118,11 @@ export default function SimpleTimelineTest() {
         <h1 className='mb-8 text-3xl font-bold text-slate-900 dark:text-slate-100'>
           Simple TimelineJS Test
         </h1>
-        
+
         <div className='mb-6 rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20'>
-          <h2 className='mb-2 text-lg font-semibold text-blue-900 dark:text-blue-100'>
-            Status
-          </h2>
-          <p className='text-sm text-blue-800 dark:text-blue-200'>
-            {status}
-          </p>
-          {error && (
-            <p className='mt-2 text-sm text-red-800 dark:text-red-200'>
-              Error: {error}
-            </p>
-          )}
+          <h2 className='mb-2 text-lg font-semibold text-blue-900 dark:text-blue-100'>Status</h2>
+          <p className='text-sm text-blue-800 dark:text-blue-200'>{status}</p>
+          {error && <p className='mt-2 text-sm text-red-800 dark:text-red-200'>Error: {error}</p>}
         </div>
 
         <div className='mb-4 text-sm text-slate-600 dark:text-slate-400'>
@@ -155,4 +138,6 @@ export default function SimpleTimelineTest() {
       </div>
     </div>
   );
-}
+};
+
+export default SimpleTimelineTest;
