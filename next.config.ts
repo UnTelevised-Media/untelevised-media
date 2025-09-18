@@ -36,7 +36,6 @@ const nextConfig: NextConfig = {
     },
   },
   experimental: {
-    // * This is used for Sentry to prevent leakage to the client Read more about taint APIs here: https://nextjs.org/blog/security-nextjs-server-components-actions#server-only
     // * This is used for Sanity to prevent the client from accessing the Sanity API Read Token
     taint: true,
     // typedRoutes: true,

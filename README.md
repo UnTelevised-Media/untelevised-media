@@ -2,21 +2,19 @@
 
 A comprehensive, production-ready Next.js 15 boilerplate with TypeScript, custom Tailwind CSS plugins, Shadcn UI, and modern development tools. This boilerplate follows clean architecture principles and provides a solid foundation for scalable applications.
 
-![Next.js](https://img.shields.io/badge/Next.js-15.3.3-black)
-![React](https://img.shields.io/badge/React-19.1.0-blue)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.4.17-38B2AC)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Next.js](https://img.shields.io/badge/Next.js-15.3.3-black) ![React](https://img.shields.io/badge/React-19.1.0-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.4.17-38B2AC) ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## ✨ Features
 
 ### 🚀 Core Framework
+
 - **Next.js 15.3.3** with App Router
 - **React 19** with Server Components
 - **TypeScript 5.8.3** for type safety
 - **Next Form** component for enhanced forms
 
 ### 🎨 Styling & UI
+
 - **Tailwind CSS 3.4** with custom plugins
 - **Shadcn UI 2.1.2** components
 - **Custom Tailwind plugins** for visual effects:
@@ -29,6 +27,7 @@ A comprehensive, production-ready Next.js 15 boilerplate with TypeScript, custom
 - **Lucide React** icons + custom icon support
 
 ### 🛠 Development Tools
+
 - **ESLint 8.57** with custom rules
 - **Prettier 3.3** with Tailwind plugin
 - **Husky 8.0** for git hooks
@@ -36,16 +35,18 @@ A comprehensive, production-ready Next.js 15 boilerplate with TypeScript, custom
 - **Commitlint 16.2** for conventional commits
 
 ### 🧪 Testing
+
 - **Jest 29.7** testing framework
 - **React Testing Library 16.0**
 - **@testing-library/jest-dom** for custom matchers
 
 ### 📊 Monitoring & Analytics
-- **Sentry** for error monitoring
+
 - **Vercel Analytics** for performance insights
 - **Vercel Speed Insights** for Core Web Vitals
 
 ### 🏗 Architecture
+
 - Clean architecture patterns
 - Error boundaries for fault tolerance
 - Custom hooks and utilities
@@ -62,47 +63,51 @@ A comprehensive, production-ready Next.js 15 boilerplate with TypeScript, custom
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/your-username/next-alchemy-15.git
    cd next-alchemy-15
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
+
    Update the environment variables as needed.
 
 4. **Start the development server**
+
    ```bash
    npm run dev
    ```
 
-5. **Open your browser**
-   Visit [http://localhost:3000](http://localhost:3000)
+5. **Open your browser** Visit [http://localhost:3000](http://localhost:3000)
 
 ## 📦 Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server |
-| `npm run dev:turbo` | Start development server with Turbopack |
-| `npm run build` | Build for production |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Fix ESLint issues |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Check code formatting |
-| `npm run test` | Run tests |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run test:coverage` | Run tests with coverage |
-| `npm run type-check` | Check TypeScript types |
-| `npm run clean` | Clean build artifacts |
+| Script                  | Description                             |
+| ----------------------- | --------------------------------------- |
+| `npm run dev`           | Start development server                |
+| `npm run dev:turbo`     | Start development server with Turbopack |
+| `npm run build`         | Build for production                    |
+| `npm run start`         | Start production server                 |
+| `npm run lint`          | Run ESLint                              |
+| `npm run lint:fix`      | Fix ESLint issues                       |
+| `npm run format`        | Format code with Prettier               |
+| `npm run format:check`  | Check code formatting                   |
+| `npm run test`          | Run tests                               |
+| `npm run test:watch`    | Run tests in watch mode                 |
+| `npm run test:coverage` | Run tests with coverage                 |
+| `npm run type-check`    | Check TypeScript types                  |
+| `npm run clean`         | Clean build artifacts                   |
 
 ## 📁 Project Structure
 
@@ -121,8 +126,7 @@ src/
 │   └── error/             # Error handling components
 ├── hooks/                 # Custom React hooks
 ├── lib/                   # Library configurations
-│   ├── jest/              # Jest configuration
-│   └── sentry/            # Sentry configuration
+│   └── jest/              # Jest configuration
 ├── models/                # Data models and schemas
 ├── server/                # Server-side utilities
 └── util/                  # Utility functions
@@ -131,11 +135,13 @@ src/
 ## 🎨 Styling & Theming
 
 ### Advanced Theming System
+
 The project uses a sophisticated theming system with:
-* **120+ custom colors** including metals, gemstones, and social media colors
-* **Automatic shade generation** using Chroma.js
-* **Dark/light mode** with system preference detection
-* **Custom CSS variables** for Shadcn/UI integration
+
+- **120+ custom colors** including metals, gemstones, and social media colors
+- **Automatic shade generation** using Chroma.js
+- **Dark/light mode** with system preference detection
+- **Custom CSS variables** for Shadcn/UI integration
 
 #### Color Palette Examples
 
@@ -167,29 +173,34 @@ instagram: { primary: '#E4405F', gradientStart: '#F58529', gradientEnd: '#DD2A7B
 This boilerplate includes several custom Tailwind CSS plugins for stunning visual effects:
 
 #### Neon Glow Effects
+
 ```html
 <div class="neon-accent1">Neon glow effect</div>
 <button class="neon-accent2 hover:scale-105">Glowing button</button>
 ```
 
 #### Inner Glow Effects
+
 ```html
 <div class="inner-glow-accent1-45">Subtle inner glow</div>
 <div class="inner-glow-accent4-65">Stronger inner glow</div>
 ```
 
 #### Text Gradients
+
 ```html
 <h1 class="text-gradient-lime-violet">Gradient text</h1>
 <h2 class="text-gradient-red-yellow">Another gradient</h2>
 ```
 
 #### Text Stroke Effects
+
 ```html
 <h1 class="text-stroke-2 text-stroke-accent1-400">Outlined text</h1>
 ```
 
 #### Frosted Glass Effects
+
 ```html
 <div class="frosted-glass">Glassmorphism effect</div>
 <div class="frosted-glass-dark">Dark mode glass</div>
@@ -210,14 +221,18 @@ Each color automatically generates 9 shades (100-900) using chroma-js.
 ## 🔧 Configuration
 
 ### TypeScript
+
 The project uses strict TypeScript configuration with custom path mapping:
+
 - `@/*` → `./src/*`
 - `@/components/*` → `./src/components/*`
 - `@/lib/*` → `./src/lib/*`
 - `@/hooks/*` → `./src/hooks/*`
 
 ### ESLint
+
 Custom ESLint configuration includes:
+
 - Next.js recommended rules
 - TypeScript strict rules
 - Import/export optimization
@@ -225,7 +240,9 @@ Custom ESLint configuration includes:
 - Custom component patterns
 
 ### Prettier
+
 Configured with:
+
 - Tailwind CSS class sorting
 - 99 character line width
 - Single quotes for consistency
@@ -247,6 +264,7 @@ npm run test:coverage
 ```
 
 Test files should be placed in:
+
 - `__tests__/` directory
 - `.test.ts|tsx` files
 - `.spec.ts|tsx` files
@@ -254,12 +272,14 @@ Test files should be placed in:
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
+
 ```bash
 npm run deploy        # Deploy to preview
 npm run deploy:prod   # Deploy to production
 ```
 
 ### Manual Build
+
 ```bash
 npm run build
 npm start
@@ -275,11 +295,6 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_PRODUCTION_URL=https://your-domain.com
 NEXT_PUBLIC_DEVELOPMENT_URL=http://localhost:3000
 
-# Sentry Configuration
-SENTRY_DSN=your_sentry_dsn_here
-SENTRY_ORG=your_sentry_org
-SENTRY_PROJECT=your_sentry_project
-
 # Other services
 # Add your API keys and configuration here
 ```
@@ -290,7 +305,6 @@ The project includes comprehensive error handling:
 
 - **Error Boundaries** for React component errors
 - **Global Error Handler** for unhandled errors
-- **Sentry Integration** for error monitoring
 - **Custom Error Pages** (404, 500)
 
 ## 🎯 Performance
@@ -309,7 +323,9 @@ The project includes comprehensive error handling:
 5. Open a Pull Request
 
 ### Commit Convention
+
 This project follows [Conventional Commits](https://www.conventionalcommits.org/):
+
 - `feat:` - New features
 - `fix:` - Bug fixes
 - `docs:` - Documentation updates
@@ -322,7 +338,6 @@ This project follows [Conventional Commits](https://www.conventionalcommits.org/
 
 - [ ] Firebase integration
 - [ ] Auth.js implementation
-- [ ] Complete Sentry setup
 - [ ] Add Sanity CMS integration
 - [ ] Implement Clerk authentication
 - [ ] Add Stripe payment integration
@@ -344,6 +359,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 If you have any questions or need help, please:
+
 - Open an issue on GitHub
 - Check the [documentation](docs/)
 - Join our community discussions

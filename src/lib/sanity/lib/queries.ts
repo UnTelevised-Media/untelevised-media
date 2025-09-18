@@ -392,7 +392,7 @@ export const queryTimelineEventsByDateRange = groq`
 `;
 
 export const queryTimelineEventsByCategory = groq`
-  *[_type=='timelineEvent' && isPublished == true && references(*[_type == 'timelineCategory' && slug.current == $categorySlug]._id)] {
+  *[_type=='timelineEvent' && isPublished == true && references($categoryId)] {
     ...,
     author->,
     timelineCategories[]->,
@@ -401,7 +401,7 @@ export const queryTimelineEventsByCategory = groq`
 `;
 
 export const queryTimelinesByCategory = groq`
-  *[_type=='timeline' && isPublished == true && references(*[_type == 'timelineCategory' && slug.current == $categorySlug]._id)] {
+  *[_type=='timeline' && isPublished == true && references($categoryId)] {
     ...,
     author->,
     collaborators[]->,
