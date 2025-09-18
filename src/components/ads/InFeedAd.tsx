@@ -3,7 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
-import AD_CONFIG from '@/lib/ads/adConfig';
+import { AD_CONFIG } from '@/lib/ads/adConfig';
 
 interface InFeedAdProps {
   slot: string;
@@ -14,6 +14,7 @@ interface InFeedAdProps {
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     adsbygoogle: any[];
   }
 }
@@ -53,11 +54,17 @@ export default function InFeedAd({
             if (adRef.current) {
               const status = adRef.current.getAttribute('data-ad-status');
               if (status === 'unfilled') {
-                console.log('AdSense: Ad unfilled, hiding component');
+                if (process.env.NODE_ENV === 'development') {
+                  // eslint-disable-next-line no-console
+                  console.log('AdSense: Ad unfilled, hiding component');
+                }
                 setHasError(true);
                 observer.disconnect();
               } else if (status === 'filled') {
-                console.log('AdSense: Ad filled successfully');
+                if (process.env.NODE_ENV === 'development') {
+                  // eslint-disable-next-line no-console
+                  console.log('AdSense: Ad filled successfully');
+                }
                 observer.disconnect();
               }
             }

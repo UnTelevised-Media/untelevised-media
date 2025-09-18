@@ -1,10 +1,8 @@
 /* eslint-disable react/function-component-definition */
-// src/app/(user)/layout.tsx
+// src/app/(music)/layout.tsx
 import Header from '@/components/global/Header';
-import Banner from '@/components/global/Banner';
 import { draftMode } from 'next/headers';
 
-import NavWrapper from '@/components/global/NavWrapper';
 import Footer from '@/components/global/Footer';
 
 import ConsentAwareGoogleAdSense from '@/util/consentAwareGoogleAdSense';

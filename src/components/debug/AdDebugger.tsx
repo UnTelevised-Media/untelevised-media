@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useConsentCheck } from '@/lib/consent/context';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
 
@@ -28,7 +28,7 @@ const AdDebugger = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { hasConsent, canUseMarketing } = useConsentCheck();
 
-  const collectDebugInfo = async () => {
+  const collectDebugInfo = useCallback(async () => {
     setIsRefreshing(true);
     try {
       const errors: string[] = [];
@@ -137,7 +137,7 @@ const AdDebugger = () => {
     } finally {
       setIsRefreshing(false);
     }
-  };
+  }, [hasConsent, canUseMarketing]);
 
   useEffect(() => {
     collectDebugInfo();
@@ -146,7 +146,7 @@ const AdDebugger = () => {
     const interval = setInterval(collectDebugInfo, 2000);
 
     return () => clearInterval(interval);
-  }, [hasConsent, canUseMarketing]);
+  }, [hasConsent, canUseMarketing, collectDebugInfo]);
 
   // Only show in development or when explicitly enabled
   if (process.env.NODE_ENV === 'production' && !showDebug) {

@@ -165,7 +165,7 @@ export default async function TimelineEventPage({ params }: Props) {
               <div className='relative aspect-video overflow-hidden rounded-lg'>
                 <Image
                   src={urlForImage(event.mainImage)?.url() ?? ''}
-                  alt={event.mainImage.alt || event.title}
+                  alt={event.mainImage.alt ?? event.title}
                   fill
                   className='object-cover'
                   priority
@@ -206,7 +206,7 @@ export default async function TimelineEventPage({ params }: Props) {
                         <div className='relative aspect-video overflow-hidden rounded-lg'>
                           <Image
                             src={urlForImage(media)?.url() ?? ''}
-                            alt={media.alt || `Media ${index + 1}`}
+                            alt={media.alt ?? `Media ${index + 1}`}
                             fill
                             className='object-cover'
                           />
@@ -220,12 +220,14 @@ export default async function TimelineEventPage({ params }: Props) {
                             className='flex items-center gap-2 text-slate-600 hover:text-untele dark:text-slate-400'
                           >
                             <ExternalLink className='h-5 w-5' />
-                            <span>{media.title || 'Watch Video'}</span>
+                            <span>{media.title ?? 'Watch Video'}</span>
                           </a>
                         </div>
                       ) : null}
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {(media as any).caption && (
                         <p className='text-sm text-slate-600 dark:text-slate-400'>
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                           {(media as any).caption}
                         </p>
                       )}
@@ -376,12 +378,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const title = event.title;
-  const description = event.description || '';
+  const description = event.description ?? '';
 
   return {
     title: `${title} - Timeline Event - UnTelevised Media`,
     description,
-    keywords: event.keywords || event.tags?.join(', ') || '',
+    keywords: event.keywords ?? event.tags?.join(', ') ?? '',
     openGraph: {
       title,
       description,

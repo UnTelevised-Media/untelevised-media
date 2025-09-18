@@ -170,7 +170,7 @@ export default defineType({
       const { title, subtitle } = selection;
       return {
         ...selection,
-        title: subtitle || title,
+        title: subtitle ?? title,
         subtitle: subtitle ? `(${title})` : undefined,
       };
     },

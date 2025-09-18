@@ -46,7 +46,7 @@ const PrivacySettingsPage = () => {
         type: 'success',
         message: 'Your privacy data has been exported successfully.',
       });
-    } catch (error) {
+    } catch {
       setActionStatus({
         type: 'error',
         message: 'Failed to export data. Please try again.',
@@ -68,7 +68,7 @@ const PrivacySettingsPage = () => {
       setTimeout(() => {
         window.location.reload();
       }, 2000);
-    } catch (error) {
+    } catch {
       setActionStatus({
         type: 'error',
         message: 'Failed to delete data. Please try again.',
@@ -90,7 +90,7 @@ const PrivacySettingsPage = () => {
         type: 'success',
         message: 'Your preferences have been updated.',
       });
-    } catch (error) {
+    } catch {
       setActionStatus({
         type: 'error',
         message: 'Failed to update preferences. Please try again.',

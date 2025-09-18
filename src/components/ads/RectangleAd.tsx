@@ -3,7 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
-import AD_CONFIG from '@/lib/ads/adConfig';
+import { AD_CONFIG } from '@/lib/ads/adConfig';
 
 interface RectangleAdProps {
   slot: string;

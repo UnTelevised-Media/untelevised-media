@@ -59,7 +59,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
         ? {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(liveEvent.mainImage as any)?.url() ?? '',
-            alt: liveEvent.mainImage.alt || liveEvent.title,
+            alt: liveEvent.mainImage.alt ?? liveEvent.title,
           }
         : undefined,
     },

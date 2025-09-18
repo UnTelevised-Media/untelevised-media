@@ -1,23 +1,11 @@
 'use client';
 
 import React, { useState, useMemo, useTransition } from 'react';
-import {
-  Search,
-  Filter,
-  Calendar,
-  Grid3X3,
-  List,
-  SortAsc,
-  SortDesc,
-  Clock,
-  MapPin,
-  Tag,
-  Loader2,
-} from 'lucide-react';
+import { Search, Calendar, Grid3X3, List, Clock, Tag, Loader2 } from 'lucide-react';
 
 import PastEventCard from '@/components/cards/PastEventCard';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+
 import { loadMorePastEvents } from '@/lib/actions/pastEvents';
 
 interface PastEventsPageProps {
@@ -52,7 +40,7 @@ const PastEventsPage: React.FC<PastEventsPageProps> = ({ initialEvents }) => {
 
   // Filter and sort events
   const filteredAndSortedEvents = useMemo(() => {
-    let filtered = events.filter((event) => {
+    const filtered = events.filter((event) => {
       const matchesSearch =
         !searchTerm ||
         event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

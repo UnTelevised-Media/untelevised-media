@@ -55,7 +55,8 @@ export default async function Author({ params }: Props) {
                 <Image
                   src={
                     author.image
-                      ? urlForImage(author.image as any).url()
+                      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        urlForImage(author.image as any).url()
                       : '/placeholder-avatar.png'
                   }
                   width={240}
@@ -132,9 +133,10 @@ export default async function Author({ params }: Props) {
                   <div className='relative aspect-video overflow-hidden'>
                     <Image
                       src={
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         urlForImage(article.mainImage as any)?.url() ?? '/placeholder-image.jpg'
                       }
-                      alt={article.mainImage?.alt || article.title}
+                      alt={article.mainImage?.alt ?? article.title}
                       fill
                       className='object-cover transition-transform duration-300 group-hover:scale-105'
                       sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'

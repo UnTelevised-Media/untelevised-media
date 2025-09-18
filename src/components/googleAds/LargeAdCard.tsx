@@ -6,6 +6,7 @@ import { adsenseManager } from '@/lib/ads/adsenseInit';
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     adsbygoogle: any[];
   }
 }

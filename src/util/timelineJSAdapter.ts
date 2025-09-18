@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 // TimelineJS Data Adapter
 // Transforms Sanity CMS timeline data into TimelineJS-compatible format
 
@@ -160,10 +162,10 @@ function convertBlockContentToHTML(blocks: Block[]): string {
         const text = children
           .map((child) => {
             let content = child.text ?? '';
-            if (child.marks && child.marks.includes('strong')) {
+            if (child.marks?.includes('strong')) {
               content = `<strong>${content}</strong>`;
             }
-            if (child.marks && child.marks.includes('em')) {
+            if (child.marks?.includes('em')) {
               content = `<em>${content}</em>`;
             }
             return content;

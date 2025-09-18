@@ -27,7 +27,7 @@ export default function AdSenseTestComponent() {
   const { hasConsent, canUseMarketing } = useConsentCheck();
 
   // Function to detect ad blockers
-  const detectAdBlocker = (): boolean => {
+  const detectAdBlocker = useCallback((): boolean => {
     if (typeof window === 'undefined') {
       return false;
     }
@@ -56,7 +56,7 @@ export default function AdSenseTestComponent() {
         return false;
       }
     });
-  };
+  }, []);
 
   const refreshInfo = useCallback(() => {
     setIsRefreshing(true);

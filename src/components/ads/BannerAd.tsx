@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import AD_CONFIG from '@/lib/ads/adConfig';
+import { AD_CONFIG } from '@/lib/ads/adConfig';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
 
 interface BannerAdProps {

@@ -3,15 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  Calendar, 
-  Clock, 
-  MapPin, 
-  ExternalLink,
-  ArrowRight,
-  Users,
-  Tag
-} from 'lucide-react';
+import { Calendar, Clock, MapPin, ExternalLink, ArrowRight, Users, Tag } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -36,54 +28,54 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
   const eventUrl = `/live-event/${event.slug?.current}`;
 
   // Calculate event summary stats
-  const keyEventCount = event.keyEvent?.length || 0;
-  const relatedArticleCount = event.relatedArticles?.length || 0;
+  const keyEventCount = event.keyEvent?.length ?? 0;
+  const relatedArticleCount = event.relatedArticles?.length ?? 0;
   const totalContent = keyEventCount + relatedArticleCount;
 
   if (variant === 'compact') {
     return (
       <div className={`past-event-card-compact ${className}`}>
         <Link href={eventUrl}>
-          <div className="group flex items-center gap-4 p-4 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-untele/50 transition-all dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700">
+          <div className='group flex items-center gap-4 rounded-lg border border-slate-200 bg-white p-4 transition-all hover:border-untele/50 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700'>
             {/* Event Image */}
             {imageUrl && (
-              <div className="relative h-16 w-16 flex-shrink-0 rounded-lg overflow-hidden">
+              <div className='relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg'>
                 <Image
                   src={imageUrl}
-                  alt={event.mainImage?.alt || event.title}
+                  alt={event.mainImage?.alt ?? event.title}
                   fill
-                  className="object-cover"
+                  className='object-cover'
                 />
               </div>
             )}
 
             {/* Content */}
-            <div className="flex-1 min-w-0">
-              <h4 className="font-semibold text-sm line-clamp-1 group-hover:text-untele transition-colors mb-1">
+            <div className='min-w-0 flex-1'>
+              <h4 className='mb-1 line-clamp-1 text-sm font-semibold transition-colors group-hover:text-untele'>
                 {event.title}
               </h4>
-              
-              <div className="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400">
-                <span className="flex items-center gap-1">
-                  <Calendar className="h-3 w-3" />
+
+              <div className='flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400'>
+                <span className='flex items-center gap-1'>
+                  <Calendar className='h-3 w-3' />
                   {formatDate(event.eventDate)}
                 </span>
                 {event.location && (
-                  <span className="flex items-center gap-1">
-                    <MapPin className="h-3 w-3" />
+                  <span className='flex items-center gap-1'>
+                    <MapPin className='h-3 w-3' />
                     {event.location}
                   </span>
                 )}
                 {totalContent > 0 && (
-                  <span className="flex items-center gap-1">
-                    <Users className="h-3 w-3" />
+                  <span className='flex items-center gap-1'>
+                    <Users className='h-3 w-3' />
                     {totalContent} updates
                   </span>
                 )}
               </div>
             </div>
 
-            <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-untele transition-colors" />
+            <ArrowRight className='h-4 w-4 text-slate-400 transition-colors group-hover:text-untele' />
           </div>
         </Link>
       </div>
@@ -92,32 +84,32 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
 
   return (
     <div className={`past-event-card ${className}`}>
-      <div className="group relative overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] dark:border-slate-700 dark:bg-slate-800">
+      <div className='group relative overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
         {/* Event Image */}
         {imageUrl && (
-          <div className="relative aspect-video overflow-hidden">
+          <div className='relative aspect-video overflow-hidden'>
             <Image
               src={imageUrl}
-              alt={event.mainImage?.alt || event.title}
+              alt={event.mainImage?.alt ?? event.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className='object-cover transition-transform duration-300 group-hover:scale-105'
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            
+            <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent' />
+
             {/* Past Event Badge */}
-            <div className="absolute top-3 left-3">
-              <Badge className="bg-slate-600/90 text-white border-slate-500">
-                <Clock className="h-3 w-3 mr-1" />
+            <div className='absolute left-3 top-3'>
+              <Badge className='border-slate-500 bg-slate-600/90 text-white'>
+                <Clock className='mr-1 h-3 w-3' />
                 Past Event
               </Badge>
             </div>
 
             {/* Event Tags */}
             {event.eventTag && event.eventTag.length > 0 && (
-              <div className="absolute top-3 right-3">
-                <Badge className="bg-untele/90 text-white border-untele">
-                  <Tag className="h-3 w-3 mr-1" />
+              <div className='absolute right-3 top-3'>
+                <Badge className='border-untele bg-untele/90 text-white'>
+                  <Tag className='mr-1 h-3 w-3' />
                   {event.eventTag[0].title}
                 </Badge>
               </div>
@@ -126,14 +118,14 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
         )}
 
         {/* Content */}
-        <div className="p-6 space-y-4">
+        <div className='space-y-4 p-6'>
           {/* Title and Subtitle */}
           <div>
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white line-clamp-2 group-hover:text-untele transition-colors">
+            <h3 className='line-clamp-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele dark:text-white'>
               {event.title}
             </h3>
             {event.subtitle && (
-              <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 line-clamp-1">
+              <p className='mt-1 line-clamp-1 text-sm text-slate-600 dark:text-slate-400'>
                 {event.subtitle}
               </p>
             )}
@@ -141,26 +133,26 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
 
           {/* Description */}
           {event.description && (
-            <p className="text-slate-700 dark:text-slate-300 text-sm line-clamp-3">
+            <p className='line-clamp-3 text-sm text-slate-700 dark:text-slate-300'>
               {event.description}
             </p>
           )}
 
           {/* Event Details */}
-          <div className="space-y-2">
+          <div className='space-y-2'>
             {/* Date and Location */}
-            <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
-              <div className="flex items-center gap-1">
-                <Calendar className="h-3 w-3" />
-                <ClientTimeDisplay 
-                  eventDate={event.eventDate} 
+            <div className='flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400'>
+              <div className='flex items-center gap-1'>
+                <Calendar className='h-3 w-3' />
+                <ClientTimeDisplay
+                  eventDate={event.eventDate}
                   showRelativeTime={false}
-                  className="text-sm"
+                  className='text-sm'
                 />
               </div>
               {event.location && (
-                <div className="flex items-center gap-1">
-                  <MapPin className="h-3 w-3" />
+                <div className='flex items-center gap-1'>
+                  <MapPin className='h-3 w-3' />
                   <span>{event.location}</span>
                 </div>
               )}
@@ -169,24 +161,26 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
 
           {/* Content Summary */}
           {showRelated && totalContent > 0 && (
-            <div className="text-xs text-slate-600 dark:text-slate-400">
-              <div className="flex items-center gap-2">
-                <ExternalLink className="h-3 w-3" />
+            <div className='text-xs text-slate-600 dark:text-slate-400'>
+              <div className='flex items-center gap-2'>
+                <ExternalLink className='h-3 w-3' />
                 <span>
-                  {keyEventCount > 0 && `${keyEventCount} key event${keyEventCount !== 1 ? 's' : ''}`}
+                  {keyEventCount > 0 &&
+                    `${keyEventCount} key event${keyEventCount !== 1 ? 's' : ''}`}
                   {keyEventCount > 0 && relatedArticleCount > 0 && ', '}
-                  {relatedArticleCount > 0 && `${relatedArticleCount} article${relatedArticleCount !== 1 ? 's' : ''}`}
+                  {relatedArticleCount > 0 &&
+                    `${relatedArticleCount} article${relatedArticleCount !== 1 ? 's' : ''}`}
                 </span>
               </div>
             </div>
           )}
 
           {/* Action Button */}
-          <div className="pt-2">
+          <div className='pt-2'>
             <Link href={eventUrl}>
-              <Button className="w-full" size="sm">
+              <Button className='w-full' size='sm'>
                 View Event Details
-                <ArrowRight className="h-3 w-3 ml-1" />
+                <ArrowRight className='ml-1 h-3 w-3' />
               </Button>
             </Link>
           </div>

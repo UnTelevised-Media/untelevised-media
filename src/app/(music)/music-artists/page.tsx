@@ -88,7 +88,7 @@ export default async function MusicArtistsPage() {
                       <div className='aspect-square overflow-hidden'>
                         {artist.image ? (
                           <Image
-                            src={urlForImage(artist.image)?.url() || ''}
+                            src={urlForImage(artist.image)?.url() ?? ''}
                             alt={artist.name}
                             width={300}
                             height={300}
@@ -108,7 +108,7 @@ export default async function MusicArtistsPage() {
                           </span>
                         </div>
                         <h3 className='mb-2 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                          {artist.stageName || artist.name}
+                          {artist.stageName ?? artist.name}
                         </h3>
                         {artist.stageName && artist.name !== artist.stageName && (
                           <p className='mb-2 text-sm text-slate-500 dark:text-slate-400'>
@@ -168,7 +168,7 @@ export default async function MusicArtistsPage() {
                       <div className='aspect-square overflow-hidden'>
                         {artist.image ? (
                           <Image
-                            src={urlForImage(artist.image)?.url() || ''}
+                            src={urlForImage(artist.image)?.url() ?? ''}
                             alt={artist.name}
                             width={250}
                             height={250}
@@ -182,7 +182,7 @@ export default async function MusicArtistsPage() {
                       </div>
                       <div className='p-4'>
                         <h3 className='mb-1 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                          {artist.stageName || artist.name}
+                          {artist.stageName ?? artist.name}
                         </h3>
                         {artist.stageName && artist.name !== artist.stageName && (
                           <p className='mb-2 text-sm text-slate-500 dark:text-slate-400'>

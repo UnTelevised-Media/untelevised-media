@@ -109,12 +109,12 @@ export default async function LyricsIndexPage() {
                             {song.title}
                           </h3>
                           <p className='mb-3 text-slate-600 dark:text-slate-400'>
-                            by {song.primaryArtist.stageName || song.primaryArtist.name}
+                            by {song.primaryArtist.stageName ?? song.primaryArtist.name}
                             {song.featuredArtists && song.featuredArtists.length > 0 && (
                               <span>
                                 {' '}
                                 feat.{' '}
-                                {song.featuredArtists.map((a) => a.stageName || a.name).join(', ')}
+                                {song.featuredArtists.map((a) => a.stageName ?? a.name).join(', ')}
                               </span>
                             )}
                           </p>
@@ -167,7 +167,7 @@ export default async function LyricsIndexPage() {
                       <div className='mb-4 overflow-hidden rounded-full'>
                         {artist.image ? (
                           <Image
-                            src={urlForImage(artist.image)?.url() || ''}
+                            src={urlForImage(artist.image)?.url() ?? ''}
                             alt={artist.name}
                             width={200}
                             height={200}
@@ -180,7 +180,7 @@ export default async function LyricsIndexPage() {
                         )}
                       </div>
                       <h3 className='mb-2 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                        {artist.stageName || artist.name}
+                        {artist.stageName ?? artist.name}
                       </h3>
                       <p className='mb-2 text-sm text-slate-600 dark:text-slate-400'>
                         {artist.genres?.slice(0, 2).join(', ')}
@@ -241,13 +241,13 @@ export default async function LyricsIndexPage() {
                               {song.title}
                             </h3>
                             <p className='text-sm text-slate-600 dark:text-slate-400'>
-                              {song.primaryArtist.stageName || song.primaryArtist.name}
+                              {song.primaryArtist.stageName ?? song.primaryArtist.name}
                               {song.featuredArtists && song.featuredArtists.length > 0 && (
                                 <span>
                                   {' '}
                                   feat.{' '}
                                   {song.featuredArtists
-                                    .map((a) => a.stageName || a.name)
+                                    .map((a) => a.stageName ?? a.name)
                                     .join(', ')}
                                 </span>
                               )}

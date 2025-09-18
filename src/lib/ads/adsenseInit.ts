@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 // Modern AdSense manager with simplified logic
 'use client';
 
@@ -49,6 +51,7 @@ export class AdSenseManager {
     const scriptExists = document.querySelector('script[src*="adsbygoogle.js"]');
 
     // Consider ready if either the flag is set OR we have the array and script exists
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     const isReady = (scriptLoaded && arrayAvailable) || (arrayAvailable && scriptExists);
 
     return !!isReady;
@@ -177,7 +180,7 @@ export class AdSenseManager {
       align-items: center;
     `;
 
-    const slot = element.getAttribute('data-ad-slot') || 'unknown';
+    const slot = element.getAttribute('data-ad-slot') ?? 'unknown';
     placeholder.innerHTML = `
       <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">
         📢 Development Ad Placeholder

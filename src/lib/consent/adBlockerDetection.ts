@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 // src/lib/consent/adBlockerDetection.ts
 'use client';
 
@@ -61,7 +63,7 @@ export class AdBlockerDetector {
         console.log('AdBlockerDetector: AdSense manager already detected blocking');
         return true;
       }
-    } catch (error) {
+    } catch {
       console.warn('AdBlockerDetector: Could not check AdSense manager status');
     }
 
@@ -192,7 +194,7 @@ export class AdBlockerDetector {
           document.body.removeChild(testAd);
           resolve(detected);
         }, 200); // Increased timeout for more reliable detection
-      } catch (error) {
+      } catch {
         document.body.removeChild(testAd);
         resolve(true);
       }
@@ -288,8 +290,8 @@ export class AdBlockerDetector {
 
     const newStatus: AdBlockerStatus = {
       detected,
-      messageShown: currentStatus?.messageShown || false,
-      messageDismissed: currentStatus?.messageDismissed || false,
+      messageShown: currentStatus?.messageShown ?? false,
+      messageDismissed: currentStatus?.messageDismissed ?? false,
       lastChecked: now,
     };
 
@@ -299,7 +301,7 @@ export class AdBlockerDetector {
   // Get current status
   getStatus(): AdBlockerStatus {
     return (
-      adBlockerStorage.loadStatus() || {
+      adBlockerStorage.loadStatus() ?? {
         detected: false,
         messageShown: false,
         messageDismissed: false,

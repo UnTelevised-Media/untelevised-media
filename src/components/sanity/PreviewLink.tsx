@@ -2,6 +2,7 @@
 'use client';
 
 // Function to generate preview URLs for different content types
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function generatePreviewUrl(context: any): Promise<string> {
   const doc = context.document ?? context;
   const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL

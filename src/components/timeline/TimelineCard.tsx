@@ -23,7 +23,7 @@ const TimelineCard: React.FC<TimelineCardProps> = ({
   showAuthor = true,
   showEventCount = true,
 }) => {
-  const eventCount = timeline.events?.length || 0;
+  const eventCount = timeline.events?.length ?? 0;
   const startDate = timeline.timeRange?.startDate;
   const endDate = timeline.timeRange?.endDate;
 
@@ -45,24 +45,24 @@ const TimelineCard: React.FC<TimelineCardProps> = ({
   const getTimelineTypeIcon = (type: string) => {
     switch (type) {
       case 'breaking':
-        return <Clock className="h-3 w-3" />;
+        return <Clock className='h-3 w-3' />;
       case 'investigation':
-        return <MapPin className="h-3 w-3" />;
+        return <MapPin className='h-3 w-3' />;
       case 'live':
-        return <Calendar className="h-3 w-3" />;
+        return <Calendar className='h-3 w-3' />;
       default:
-        return <Calendar className="h-3 w-3" />;
+        return <Calendar className='h-3 w-3' />;
     }
   };
 
   return (
     <div className={`timeline-card ${className}`}>
-      <div className="group relative overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:border-untele/50 dark:border-slate-700 dark:bg-slate-800">
+      <div className='group relative overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:border-untele/50 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
         {/* Featured Badge */}
         {timeline.isFeatured && (
-          <div className="absolute top-3 right-3 z-10">
-            <Badge className="bg-yellow-500 text-yellow-900 flex items-center gap-1">
-              <Star className="h-3 w-3" />
+          <div className='absolute right-3 top-3 z-10'>
+            <Badge className='flex items-center gap-1 bg-yellow-500 text-yellow-900'>
+              <Star className='h-3 w-3' />
               Featured
             </Badge>
           </div>
@@ -70,66 +70,70 @@ const TimelineCard: React.FC<TimelineCardProps> = ({
 
         {/* Cover Image */}
         {timeline.coverImage && (
-          <div className="relative aspect-video overflow-hidden">
+          <div className='relative aspect-video overflow-hidden'>
             <Image
               src={urlForImage(timeline.coverImage)?.url() ?? ''}
-              alt={timeline.coverImage.alt || timeline.title}
+              alt={timeline.coverImage.alt ?? timeline.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className='object-cover transition-transform duration-300 group-hover:scale-105'
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            
+            <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent' />
+
             {/* Timeline Type Badge */}
-            <div className="absolute bottom-3 left-3">
-              <Badge className={`${getTimelineTypeColor(timeline.timelineType)} flex items-center gap-1`}>
+            <div className='absolute bottom-3 left-3'>
+              <Badge
+                className={`${getTimelineTypeColor(timeline.timelineType)} flex items-center gap-1`}
+              >
                 {getTimelineTypeIcon(timeline.timelineType)}
-                <span className="capitalize">{timeline.timelineType}</span>
+                <span className='capitalize'>{timeline.timelineType}</span>
               </Badge>
             </div>
           </div>
         )}
 
         {/* Content */}
-        <div className="p-4 space-y-3">
+        <div className='space-y-3 p-4'>
           {/* Title */}
           <div>
-            <h3 className="font-semibold text-lg text-slate-900 dark:text-slate-100 line-clamp-2 group-hover:text-untele transition-colors">
+            <h3 className='line-clamp-2 text-lg font-semibold text-slate-900 transition-colors group-hover:text-untele dark:text-slate-100'>
               {timeline.title}
             </h3>
             {timeline.shortDescription && (
-              <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-3 mt-1">
+              <p className='mt-1 line-clamp-3 text-sm text-slate-600 dark:text-slate-400'>
                 {timeline.shortDescription}
               </p>
             )}
           </div>
 
           {/* Timeline Info */}
-          <div className="space-y-2">
+          <div className='space-y-2'>
             {/* Date Range */}
-            {(startDate || endDate) && (
-              <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
-                <Calendar className="h-3 w-3" />
+            {(startDate ?? endDate) && (
+              <div className='flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400'>
+                <Calendar className='h-3 w-3' />
                 <span>
                   {startDate && formatDate(startDate)}
                   {startDate && endDate && ' - '}
-                  {endDate ? formatDate(endDate) : (startDate && 'Ongoing')}
+                  {endDate ? formatDate(endDate) : startDate && 'Ongoing'}
                 </span>
               </div>
             )}
 
             {/* Event Count */}
             {showEventCount && (
-              <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
-                <Clock className="h-3 w-3" />
-                <span>{eventCount} event{eventCount !== 1 ? 's' : ''}</span>
+              <div className='flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400'>
+                <Clock className='h-3 w-3' />
+                <span>
+                  {eventCount} event{eventCount !== 1 ? 's' : ''}
+                </span>
               </div>
             )}
 
             {/* Author */}
             {showAuthor && timeline.author && (
-              <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
-                <Users className="h-3 w-3" />
+              <div className='flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400'>
+                <Users className='h-3 w-3' />
                 <span>By {timeline.author.name}</span>
                 {timeline.collaborators && timeline.collaborators.length > 0 && (
                   <span>+{timeline.collaborators.length} more</span>
@@ -140,14 +144,14 @@ const TimelineCard: React.FC<TimelineCardProps> = ({
 
           {/* Categories */}
           {timeline.categories && timeline.categories.length > 0 && (
-            <div className="flex flex-wrap gap-1">
-              {timeline.categories.slice(0, 3).map(category => (
-                <Badge key={category._id} variant="secondary" className="text-xs">
+            <div className='flex flex-wrap gap-1'>
+              {timeline.categories.slice(0, 3).map((category) => (
+                <Badge key={category._id} variant='secondary' className='text-xs'>
                   {category.title}
                 </Badge>
               ))}
               {timeline.categories.length > 3 && (
-                <Badge variant="outline" className="text-xs">
+                <Badge variant='outline' className='text-xs'>
                   +{timeline.categories.length - 3} more
                 </Badge>
               )}
@@ -155,9 +159,9 @@ const TimelineCard: React.FC<TimelineCardProps> = ({
           )}
 
           {/* Action Button */}
-          <div className="pt-2">
+          <div className='pt-2'>
             <Link href={`/timeline/${timeline.slug.current}`}>
-              <Button className="w-full" size="sm">
+              <Button className='w-full' size='sm'>
                 View Timeline
               </Button>
             </Link>

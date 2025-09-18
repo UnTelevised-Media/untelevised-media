@@ -70,7 +70,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
         ? {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(post.mainImage as any)?.url() ?? '',
-            alt: post.mainImage.alt || post.title,
+            alt: post.mainImage.alt ?? post.title,
           }
         : undefined,
     },

@@ -1,5 +1,4 @@
 /* eslint-disable react/function-component-definition */
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/lyrics/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -35,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const artistNames = [
     song.primaryArtist.name,
-    ...(song.featuredArtists?.map((artist) => artist.name) || []),
+    ...(song.featuredArtists?.map((artist) => artist.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -44,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${song.title} - ${artistNames} | Lyrics`,
     description: `Read the lyrics to "${song.title}" by ${artistNames}. ${song.description ? 'Learn more about this song and its background.' : ''}`,
     keywords:
-      song.keywords || `${song.title}, ${artistNames}, lyrics, ${song.genres?.join(', ') || ''}`,
+      song.keywords ?? `${song.title}, ${artistNames}, lyrics, ${song.genres?.join(', ') ?? ''}`,
     openGraph: {
       title: `${song.title} - ${artistNames}`,
       description: `Lyrics to "${song.title}" by ${artistNames}`,
@@ -79,7 +78,7 @@ export default async function LyricsPage({ params }: Props) {
 
   const artistNames = [
     song.primaryArtist.name,
-    ...(song.featuredArtists?.map((artist) => artist.name) || []),
+    ...(song.featuredArtists?.map((artist) => artist.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -327,7 +326,7 @@ export default async function LyricsPage({ params }: Props) {
                       {song.primaryArtist.image && (
                         <div className='h-12 w-12 overflow-hidden rounded-full'>
                           <Image
-                            src={urlForImage(song.primaryArtist.image)?.url() || ''}
+                            src={urlForImage(song.primaryArtist.image)?.url() ?? ''}
                             alt={song.primaryArtist.name}
                             width={48}
                             height={48}
@@ -337,7 +336,7 @@ export default async function LyricsPage({ params }: Props) {
                       )}
                       <div>
                         <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                          {song.primaryArtist.stageName || song.primaryArtist.name}
+                          {song.primaryArtist.stageName ?? song.primaryArtist.name}
                         </h4>
                         <p className='text-sm text-slate-600 dark:text-slate-400'>
                           Primary Artist
@@ -355,7 +354,7 @@ export default async function LyricsPage({ params }: Props) {
                         {artist.image && (
                           <div className='h-12 w-12 overflow-hidden rounded-full'>
                             <Image
-                              src={urlForImage(artist.image)?.url() || ''}
+                              src={urlForImage(artist.image)?.url() ?? ''}
                               alt={artist.name}
                               width={48}
                               height={48}
@@ -365,7 +364,7 @@ export default async function LyricsPage({ params }: Props) {
                         )}
                         <div>
                           <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                            {artist.stageName || artist.name}
+                            {artist.stageName ?? artist.name}
                           </h4>
                           <p className='text-sm text-slate-600 dark:text-slate-400'>Featured</p>
                         </div>
@@ -385,7 +384,7 @@ export default async function LyricsPage({ params }: Props) {
                     {song.contributingArtists.map((contributor, index) => (
                       <div key={index} className='flex items-center justify-between'>
                         <span className='text-sm text-slate-900 dark:text-slate-100'>
-                          {contributor.artist.stageName || contributor.artist.name}
+                          {contributor.artist.stageName ?? contributor.artist.name}
                         </span>
                         <span className='text-sm text-slate-600 dark:text-slate-400'>
                           {contributor.role.replace('-', ' ')}

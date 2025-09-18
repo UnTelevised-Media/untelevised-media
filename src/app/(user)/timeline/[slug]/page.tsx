@@ -35,8 +35,8 @@ export default async function TimelinePage({ params }: Props) {
     notFound();
   }
 
-  const events = timeline.events || [];
-  const categories = timeline.categories || [];
+  const events = timeline.events ?? [];
+  const categories = timeline.categories ?? [];
 
   return (
     <div className='min-h-screen bg-white dark:bg-black'>
@@ -156,7 +156,7 @@ export default async function TimelinePage({ params }: Props) {
                 <div className='relative aspect-video overflow-hidden rounded-lg'>
                   <Image
                     src={urlForImage(timeline.coverImage)?.url() ?? ''}
-                    alt={timeline.coverImage.alt || timeline.title}
+                    alt={timeline.coverImage.alt ?? timeline.title}
                     fill
                     className='object-cover'
                   />
@@ -226,6 +226,7 @@ export default async function TimelinePage({ params }: Props) {
         </div>
 
         {/* Related Content */}
+        {/* eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing */}
         {(timeline.author || timeline.collaborators?.length) && (
           <div className='mt-12 rounded-lg bg-slate-50 p-6 dark:bg-slate-900'>
             <h3 className='mb-4 text-xl font-bold text-slate-900 dark:text-slate-100'>
@@ -249,7 +250,7 @@ export default async function TimelinePage({ params }: Props) {
                       {timeline.author.name}
                     </h4>
                     <p className='text-sm text-slate-600 dark:text-slate-400'>
-                      {timeline.author.title || 'Timeline Author'}
+                      {timeline.author.title ?? 'Timeline Author'}
                     </p>
                   </div>
                 </div>
@@ -294,17 +295,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const title = timeline.seoSettings?.metaTitle || timeline.title;
+  const title = timeline.seoSettings?.metaTitle ?? timeline.title;
   const description =
-    timeline.seoSettings?.metaDescription ||
-    timeline.shortDescription ||
-    timeline.description?.[0]?.children?.[0]?.text ||
+    timeline.seoSettings?.metaDescription ??
+    timeline.shortDescription ??
+    timeline.description?.[0]?.children?.[0]?.text ??
     '';
 
   return {
     title: `${title} - UnTelevised Media`,
     description,
-    keywords: timeline.seoSettings?.keywords || timeline.tags?.join(', ') || '',
+    keywords: timeline.seoSettings?.keywords ?? timeline.tags?.join(', ') ?? '',
     openGraph: {
       title,
       description,

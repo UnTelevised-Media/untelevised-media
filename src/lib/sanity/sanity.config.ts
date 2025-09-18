@@ -12,6 +12,7 @@ import { presentationTool } from 'sanity/presentation';
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from './env';
 import { schemaTypes } from '@/models/schema/index'; // Changed from schemaTypes.d.ts to schemas/index.ts
+// eslint-disable-next-line import/no-named-as-default
 import structure from './structure';
 import { generatePreviewUrl } from '@/components/sanity/PreviewLink';
 

@@ -37,19 +37,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const displayName = artist.stageName || artist.name;
+  const displayName = artist.stageName ?? artist.name;
 
   return {
     title: `${displayName} | Music Artist`,
     description: `Discover songs and albums by ${displayName}. ${artist.bio ? 'Learn more about this artist and their music.' : ''}`,
-    keywords: `${displayName}, ${artist.name}, music, artist, songs, albums, ${artist.genres?.join(', ') || ''}`,
+    keywords: `${displayName}, ${artist.name}, music, artist, songs, albums, ${artist.genres?.join(', ') ?? ''}`,
     openGraph: {
       title: displayName,
       description: `Music artist ${displayName}`,
       images: artist.image
         ? [
             {
-              url: urlForImage(artist.image)?.url() || '',
+              url: urlForImage(artist.image)?.url() ?? '',
               width: 1200,
               height: 630,
               alt: `${displayName} artist photo`,
@@ -75,7 +75,7 @@ export default async function MusicArtistPage({ params }: Props) {
     );
   }
 
-  const displayName = artist.stageName || artist.name;
+  const displayName = artist.stageName ?? artist.name;
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
@@ -89,7 +89,7 @@ export default async function MusicArtistPage({ params }: Props) {
                 {artist.image ? (
                   <div className='aspect-square overflow-hidden rounded-2xl bg-slate-200 shadow-xl dark:bg-slate-700'>
                     <Image
-                      src={urlForImage(artist.image)?.url() || ''}
+                      src={urlForImage(artist.image)?.url() ?? ''}
                       alt={`${displayName} artist photo`}
                       width={400}
                       height={400}
@@ -275,7 +275,7 @@ export default async function MusicArtistPage({ params }: Props) {
                             {song.featuredArtists && song.featuredArtists.length > 0 && (
                               <div className='text-sm text-slate-600 dark:text-slate-400'>
                                 feat.{' '}
-                                {song.featuredArtists.map((a) => a.stageName || a.name).join(', ')}
+                                {song.featuredArtists.map((a) => a.stageName ?? a.name).join(', ')}
                               </div>
                             )}
                           </div>
@@ -307,7 +307,7 @@ export default async function MusicArtistPage({ params }: Props) {
                           {album.albumArt && (
                             <div className='mb-4 aspect-square overflow-hidden rounded-lg'>
                               <Image
-                                src={urlForImage(album.albumArt)?.url() || ''}
+                                src={urlForImage(album.albumArt)?.url() ?? ''}
                                 alt={`${album.title} album artwork`}
                                 width={200}
                                 height={200}

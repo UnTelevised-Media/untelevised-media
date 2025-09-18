@@ -83,7 +83,10 @@ const ArticleCard: React.FC<{ article: Article; priority?: boolean }> = ({
         {/* Image Section */}
         <div className='relative aspect-video overflow-hidden'>
           <Image
-            src={urlForImage(article.mainImage as any)?.url() ?? ''}
+            src={
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              urlForImage(article.mainImage as any)?.url() ?? ''
+            }
             alt={article.mainImage?.alt ?? article.title}
             fill
             className='object-cover transition-transform duration-500 group-hover:scale-110'
@@ -162,7 +165,10 @@ const ArticleListItem: React.FC<{ article: Article }> = ({ article }) => {
         {/* Thumbnail */}
         <div className='relative h-24 w-32 flex-shrink-0'>
           <Image
-            src={urlForImage(article.mainImage as any)?.url() ?? ''}
+            src={
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              urlForImage(article.mainImage as any)?.url() ?? ''
+            }
             alt={article.mainImage?.alt ?? article.title}
             fill
             className='object-cover transition-transform duration-300 group-hover:scale-105'

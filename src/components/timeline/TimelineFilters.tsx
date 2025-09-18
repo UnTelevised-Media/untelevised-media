@@ -85,6 +85,7 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
         const matchesSearch =
           event.title.toLowerCase().includes(searchLower) ||
           event.description?.toLowerCase().includes(searchLower) ||
+          // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
           event.location?.toLowerCase().includes(searchLower) ||
           event.tags?.some((tag) => tag.toLowerCase().includes(searchLower));
 
@@ -95,7 +96,7 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
 
       // Category filter
       if (filters.selectedCategories.length > 0) {
-        const eventCategoryIds = event.timelineCategories?.map((cat) => cat._id) || [];
+        const eventCategoryIds = event.timelineCategories?.map((cat) => cat._id) ?? [];
         if (!filters.selectedCategories.some((catId) => eventCategoryIds.includes(catId))) {
           return false;
         }
@@ -145,6 +146,7 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
     onFilterChange(filteredEvents);
   }, [filters, events, onFilterChange]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateFilter = (key: keyof FilterState, value: any) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };

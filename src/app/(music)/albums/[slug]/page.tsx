@@ -36,21 +36,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const artistNames = [
-    album.artist.stageName || album.artist.name,
-    ...(album.featuredArtists?.map((artist) => artist.stageName || artist.name) || []),
+    album.artist.stageName ?? album.artist.name,
+    ...(album.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
   ].join(', ');
 
   return {
     title: `${album.title} - ${artistNames} | Album`,
     description: `Listen to ${album.title} by ${artistNames}. ${album.description ? 'Learn more about this album.' : ''}`,
-    keywords: `${album.title}, ${artistNames}, album, ${album.genres?.join(', ') || ''}`,
+    keywords: `${album.title}, ${artistNames}, album, ${album.genres?.join(', ') ?? ''}`,
     openGraph: {
       title: `${album.title} - ${artistNames}`,
       description: `Album: ${album.title} by ${artistNames}`,
       images: album.albumArt
         ? [
             {
-              url: urlForImage(album.albumArt)?.url() || '',
+              url: urlForImage(album.albumArt)?.url() ?? '',
               width: 1200,
               height: 630,
               alt: `${album.title} album artwork`,
@@ -77,8 +77,8 @@ export default async function AlbumPage({ params }: Props) {
   }
 
   const artistNames = [
-    album.artist.stageName || album.artist.name,
-    ...(album.featuredArtists?.map((artist) => artist.stageName || artist.name) || []),
+    album.artist.stageName ?? album.artist.name,
+    ...(album.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
   ].join(', ');
 
   return (
@@ -89,7 +89,7 @@ export default async function AlbumPage({ params }: Props) {
         <div className='relative h-[60vh] min-h-[400px]'>
           {album.albumArt && (
             <Image
-              src={urlForImage(album.albumArt)?.url() || ''}
+              src={urlForImage(album.albumArt)?.url() ?? ''}
               alt={`${album.title} album artwork`}
               fill
               className='object-cover'
@@ -196,7 +196,7 @@ export default async function AlbumPage({ params }: Props) {
                       <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
                         <div className='group flex cursor-pointer items-center gap-4 rounded-lg p-3 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700'>
                           <div className='flex h-8 w-8 items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400'>
-                            {song.trackNumber || index + 1}
+                            {song.trackNumber ?? index + 1}
                           </div>
                           <div className='flex-1'>
                             <h3 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
@@ -205,7 +205,7 @@ export default async function AlbumPage({ params }: Props) {
                             {song.featuredArtists && song.featuredArtists.length > 0 && (
                               <p className='text-sm text-slate-600 dark:text-slate-400'>
                                 feat.{' '}
-                                {song.featuredArtists.map((a) => a.stageName || a.name).join(', ')}
+                                {song.featuredArtists.map((a) => a.stageName ?? a.name).join(', ')}
                               </p>
                             )}
                           </div>
@@ -246,7 +246,7 @@ export default async function AlbumPage({ params }: Props) {
                 {album.albumArt && (
                   <div className='mb-4 aspect-square overflow-hidden rounded-lg'>
                     <Image
-                      src={urlForImage(album.albumArt)?.url() || ''}
+                      src={urlForImage(album.albumArt)?.url() ?? ''}
                       alt={`${album.title} album artwork`}
                       width={300}
                       height={300}
@@ -344,7 +344,7 @@ export default async function AlbumPage({ params }: Props) {
                       {album.artist.image && (
                         <div className='h-12 w-12 overflow-hidden rounded-full'>
                           <Image
-                            src={urlForImage(album.artist.image)?.url() || ''}
+                            src={urlForImage(album.artist.image)?.url() ?? ''}
                             alt={album.artist.name}
                             width={48}
                             height={48}
@@ -354,7 +354,7 @@ export default async function AlbumPage({ params }: Props) {
                       )}
                       <div>
                         <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                          {album.artist.stageName || album.artist.name}
+                          {album.artist.stageName ?? album.artist.name}
                         </h4>
                         <p className='text-sm text-slate-600 dark:text-slate-400'>
                           Primary Artist
@@ -372,7 +372,7 @@ export default async function AlbumPage({ params }: Props) {
                         {artist.image && (
                           <div className='h-12 w-12 overflow-hidden rounded-full'>
                             <Image
-                              src={urlForImage(artist.image)?.url() || ''}
+                              src={urlForImage(artist.image)?.url() ?? ''}
                               alt={artist.name}
                               width={48}
                               height={48}
@@ -382,7 +382,7 @@ export default async function AlbumPage({ params }: Props) {
                         )}
                         <div>
                           <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                            {artist.stageName || artist.name}
+                            {artist.stageName ?? artist.name}
                           </h4>
                           <p className='text-sm text-slate-600 dark:text-slate-400'>Featured</p>
                         </div>

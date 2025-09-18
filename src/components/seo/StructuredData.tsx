@@ -138,7 +138,7 @@ export const AlbumStructuredData = ({ album, songs }: AlbumStructuredDataProps) 
     track: songs?.map((song, index) => ({
       '@type': 'MusicRecording',
       name: song.title,
-      position: song.trackNumber || index + 1,
+      position: song.trackNumber ?? index + 1,
       url: `https://www.untelevised.media/lyrics/${song.slug.current}`,
       duration: song.duration ? `PT${song.duration.replace(':', 'M')}S` : undefined,
     })),

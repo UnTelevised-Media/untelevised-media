@@ -66,7 +66,10 @@ export default async function LiveEvent({ params }: Props) {
           {/* Image  */}
           <div className='h-auto min-w-max xl:w-full'>
             <Image
-              src={urlForImage(liveEvent.mainImage as any)?.url() ?? ''}
+              src={
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                urlForImage(liveEvent.mainImage as any)?.url() ?? ''
+              }
               alt='Image Description'
               style={{
                 width: '100%',

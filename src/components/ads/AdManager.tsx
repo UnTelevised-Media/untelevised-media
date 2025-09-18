@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useState, useRef, createContext, useContext } from 'react';
-import AD_CONFIG from '@/lib/ads/adConfig';
+import { AD_CONFIG } from '@/lib/ads/adConfig';
 import { useConsentCheck } from '@/lib/consent/context';
 
 interface AdManagerProps {
@@ -30,8 +30,8 @@ export default function AdManager({
     if (respectUserPreferences) {
       const doNotTrack =
         navigator.doNotTrack === '1' ||
-        (window as any).doNotTrack === '1' ||
-        (navigator as any).msDoNotTrack === '1';
+        (window as unknown as { doNotTrack?: string }).doNotTrack === '1' ||
+        (navigator as unknown as { msDoNotTrack?: string }).msDoNotTrack === '1';
 
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

@@ -3,7 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
-import AD_CONFIG from '@/lib/ads/adConfig';
+import { AD_CONFIG } from '@/lib/ads/adConfig';
 
 interface SidebarAdProps {
   slot: string;
@@ -14,6 +14,7 @@ interface SidebarAdProps {
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     adsbygoogle: any[];
   }
 }

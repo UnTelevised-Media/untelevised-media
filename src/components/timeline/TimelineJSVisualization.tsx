@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -296,7 +297,7 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
         console.log('✅ Timeline data converted:', timelineData);
 
         // Test with minimal data if conversion fails
-        if (!timelineData || !timelineData.events || timelineData.events.length === 0) {
+        if (!timelineData?.events || timelineData.events.length === 0) {
           console.warn('⚠️ No events found, creating minimal test data');
           const testData = {
             events: [

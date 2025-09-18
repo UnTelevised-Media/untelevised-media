@@ -1,26 +1,13 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Calendar,
-  Clock,
-  MapPin,
-  Star,
-  AlertTriangle,
-  Info,
-  ChevronLeft,
-  ChevronRight,
-  ZoomIn,
-  ZoomOut,
-  Filter,
-  Search,
-} from 'lucide-react';
+import { Calendar, Clock, MapPin, Star, AlertTriangle, Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+
 import { Badge } from '@/components/ui/badge';
 import TimelineFilters from './TimelineFilters';
 import TimelineNavigation from './TimelineNavigation';
@@ -31,25 +18,21 @@ interface TimelineVisualizationProps {
   events: TimelineEvent[];
   categories?: TimelineCategory[];
   initialZoomLevel?: 'year' | 'month' | 'week' | 'day' | 'hour';
-  showMilestonesOnly?: boolean;
   className?: string;
 }
 
 type ZoomLevel = 'year' | 'month' | 'week' | 'day' | 'hour';
 
-const ZOOM_LEVELS: ZoomLevel[] = ['year', 'month', 'week', 'day', 'hour'];
-
 const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
   events,
   categories = [],
   initialZoomLevel = 'month',
-  showMilestonesOnly = false,
   className = '',
 }) => {
   const [zoomLevel, setZoomLevel] = useState<ZoomLevel>(initialZoomLevel);
   const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
   const [filteredEvents, setFilteredEvents] = useState<TimelineEvent[]>(events);
-  const [currentViewDate, setCurrentViewDate] = useState(new Date());
+  const [, setCurrentViewDate] = useState(new Date());
 
   const timelineRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -73,7 +56,7 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
   };
 
   // Handle time range changes
-  const handleTimeRangeChange = (startDate: Date, endDate: Date) => {
+  const handleTimeRangeChange = (startDate: Date, _endDate: Date) => {
     setCurrentViewDate(startDate);
   };
 
@@ -196,7 +179,7 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
                       <div className='relative mb-3 h-32 w-full overflow-hidden rounded'>
                         <Image
                           src={urlForImage(event.mainImage)?.url() ?? ''}
-                          alt={event.mainImage.alt || event.title}
+                          alt={event.mainImage.alt ?? event.title}
                           fill
                           className='object-cover'
                         />
@@ -278,7 +261,7 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
                   <div className='relative h-48 w-full overflow-hidden rounded'>
                     <Image
                       src={urlForImage(selectedEvent.mainImage)?.url() ?? ''}
-                      alt={selectedEvent.mainImage.alt || selectedEvent.title}
+                      alt={selectedEvent.mainImage.alt ?? selectedEvent.title}
                       fill
                       className='object-cover'
                     />

@@ -17,7 +17,10 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
   const shouldLoadScript = isDevelopment || (hasConsent && canUseMarketing);
 
   const handleScriptLoad = () => {
-    console.log('ConsentAwareGoogleAdSense: AdSense script loaded successfully');
+    if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
+      console.log('ConsentAwareGoogleAdSense: AdSense script loaded successfully');
+    }
 
     // Initialize Google consent mode only if we have real consent
     if (typeof window !== 'undefined' && window.gtag && hasConsent && canUseMarketing) {
@@ -29,17 +32,19 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
             ad_user_data: 'granted',
             ad_personalization: 'granted',
           });
-          console.log('ConsentAwareGoogleAdSense: Consent mode updated for ads');
+          if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.log('ConsentAwareGoogleAdSense: Consent mode updated for ads');
+          }
         }
       }, 100);
     }
   };
 
   const handleScriptError = (error: Error) => {
-    console.warn('ConsentAwareGoogleAdSense: AdSense script failed to load', error);
-
-    // In development mode, this might be expected due to ad blockers
-    if (isDevelopment) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('ConsentAwareGoogleAdSense: AdSense script failed to load', error);
+      // eslint-disable-next-line no-console
       console.info(
         'ConsentAwareGoogleAdSense: This is normal in development if you have an ad blocker'
       );
@@ -48,17 +53,23 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
 
   // In production, don't load script if consent is explicitly denied
   if (!isDevelopment && hasConsent && !canUseMarketing) {
-    console.log('ConsentAwareGoogleAdSense: Marketing consent denied, not loading AdSense');
+    if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
+      console.log('ConsentAwareGoogleAdSense: Marketing consent denied, not loading AdSense');
+    }
     return null;
   }
 
   // In production, wait for consent to be determined before loading
   if (!isDevelopment && !shouldLoadScript) {
-    console.log('ConsentAwareGoogleAdSense: Waiting for consent...', {
-      hasConsent,
-      canUseMarketing,
-      isDevelopment,
-    });
+    if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
+      console.log('ConsentAwareGoogleAdSense: Waiting for consent...', {
+        hasConsent,
+        canUseMarketing,
+        isDevelopment,
+      });
+    }
     return null;
   }
 

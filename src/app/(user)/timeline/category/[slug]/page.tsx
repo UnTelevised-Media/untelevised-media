@@ -48,71 +48,76 @@ export default async function TimelineCategoryPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <div className="container mx-auto px-4 py-8">
+    <div className='min-h-screen bg-white dark:bg-black'>
+      <div className='container mx-auto px-4 py-8'>
         {/* Back Navigation */}
-        <div className="mb-6">
-          <Link href="/timelines">
-            <Button variant="outline" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
+        <div className='mb-6'>
+          <Link href='/timelines'>
+            <Button variant='outline' className='flex items-center gap-2'>
+              <ArrowLeft className='h-4 w-4' />
               Back to Timelines
             </Button>
           </Link>
         </div>
 
         {/* Category Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <div className={`w-6 h-6 rounded-full ${getCategoryColor(category.color)}`} />
-            <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-slate-100">
+        <div className='mb-8'>
+          <div className='mb-4 flex items-center gap-4'>
+            <div className={`h-6 w-6 rounded-full ${getCategoryColor(category.color)}`} />
+            <h1 className='text-3xl font-bold text-slate-900 dark:text-slate-100 lg:text-4xl'>
               {category.title}
             </h1>
           </div>
 
           {category.description && (
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl">
+            <p className='max-w-3xl text-lg text-slate-600 dark:text-slate-400'>
               {category.description}
             </p>
           )}
 
           {/* Category Stats */}
-          <div className="flex flex-wrap items-center gap-6 mt-6 text-sm text-slate-600 dark:text-slate-400">
-            <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4" />
-              <span>{timelines.length} timeline{timelines.length !== 1 ? 's' : ''}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              <span>{events.length} event{events.length !== 1 ? 's' : ''}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Star className="h-4 w-4" />
+          <div className='mt-6 flex flex-wrap items-center gap-6 text-sm text-slate-600 dark:text-slate-400'>
+            <div className='flex items-center gap-2'>
+              <Calendar className='h-4 w-4' />
               <span>
-                {events.filter(event => event.isMilestone).length} milestone{events.filter(event => event.isMilestone).length !== 1 ? 's' : ''}
+                {timelines.length} timeline{timelines.length !== 1 ? 's' : ''}
+              </span>
+            </div>
+            <div className='flex items-center gap-2'>
+              <Clock className='h-4 w-4' />
+              <span>
+                {events.length} event{events.length !== 1 ? 's' : ''}
+              </span>
+            </div>
+            <div className='flex items-center gap-2'>
+              <Star className='h-4 w-4' />
+              <span>
+                {events.filter((event) => event.isMilestone).length} milestone
+                {events.filter((event) => event.isMilestone).length !== 1 ? 's' : ''}
               </span>
             </div>
           </div>
         </div>
 
         {/* Banner Ad */}
-        <div className="mb-8">
+        <div className='mb-8'>
           <BannerAd
-            slot="timeline-category-header"
-            className="rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50"
+            slot='timeline-category-header'
+            className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className='space-y-8 lg:col-span-2'>
             {/* Timelines in this Category */}
             {timelines.length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">
+                <h2 className='mb-6 text-2xl font-bold text-slate-900 dark:text-slate-100'>
                   Timelines in {category.title}
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {timelines.map(timeline => (
+                <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+                  {timelines.map((timeline) => (
                     <TimelineCard
                       key={timeline._id}
                       timeline={timeline}
@@ -127,23 +132,23 @@ export default async function TimelineCategoryPage({ params }: Props) {
             {/* Recent Events in this Category */}
             {events.length > 0 && (
               <section>
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                <div className='mb-6 flex items-center justify-between'>
+                  <h2 className='text-2xl font-bold text-slate-900 dark:text-slate-100'>
                     Recent Events
                   </h2>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="text-xs">
+                  <div className='flex items-center gap-2'>
+                    <Badge variant='outline' className='text-xs'>
                       {events.length} total events
                     </Badge>
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  {events.slice(0, 10).map(event => (
+                <div className='space-y-4'>
+                  {events.slice(0, 10).map((event) => (
                     <TimelineEventCard
                       key={event._id}
                       event={event}
-                      variant="compact"
+                      variant='compact'
                       showAuthor={true}
                       showRelated={false}
                     />
@@ -151,31 +156,29 @@ export default async function TimelineCategoryPage({ params }: Props) {
                 </div>
 
                 {events.length > 10 && (
-                  <div className="mt-6 text-center">
-                    <Button variant="outline">
-                      Load More Events
-                    </Button>
+                  <div className='mt-6 text-center'>
+                    <Button variant='outline'>Load More Events</Button>
                   </div>
                 )}
               </section>
             )}
 
             {/* Milestone Events */}
-            {events.filter(event => event.isMilestone).length > 0 && (
+            {events.filter((event) => event.isMilestone).length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
-                  <Star className="h-6 w-6 text-yellow-500" />
+                <h2 className='mb-6 flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-slate-100'>
+                  <Star className='h-6 w-6 text-yellow-500' />
                   Milestone Events
                 </h2>
-                <div className="space-y-4">
+                <div className='space-y-4'>
                   {events
-                    .filter(event => event.isMilestone)
+                    .filter((event) => event.isMilestone)
                     .slice(0, 5)
-                    .map(event => (
+                    .map((event) => (
                       <TimelineEventCard
                         key={event._id}
                         event={event}
-                        variant="default"
+                        variant='default'
                         showAuthor={true}
                         showRelated={false}
                       />
@@ -186,36 +189,38 @@ export default async function TimelineCategoryPage({ params }: Props) {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className='space-y-6'>
             {/* Rectangle Ad */}
             <RectangleAd
-              slot="timeline-category-sidebar"
-              className="rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50"
+              slot='timeline-category-sidebar'
+              className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
             />
 
             {/* Category Details */}
-            <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-4 space-y-3">
-              <h3 className="font-semibold text-slate-900 dark:text-slate-100">Category Details</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-slate-600 dark:text-slate-400">Total Timelines</span>
-                  <span className="font-medium">{timelines.length}</span>
+            <div className='space-y-3 rounded-lg bg-slate-50 p-4 dark:bg-slate-900'>
+              <h3 className='font-semibold text-slate-900 dark:text-slate-100'>
+                Category Details
+              </h3>
+              <div className='space-y-2 text-sm'>
+                <div className='flex justify-between'>
+                  <span className='text-slate-600 dark:text-slate-400'>Total Timelines</span>
+                  <span className='font-medium'>{timelines.length}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-600 dark:text-slate-400">Total Events</span>
-                  <span className="font-medium">{events.length}</span>
+                <div className='flex justify-between'>
+                  <span className='text-slate-600 dark:text-slate-400'>Total Events</span>
+                  <span className='font-medium'>{events.length}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-600 dark:text-slate-400">Milestone Events</span>
-                  <span className="font-medium">
-                    {events.filter(event => event.isMilestone).length}
+                <div className='flex justify-between'>
+                  <span className='text-slate-600 dark:text-slate-400'>Milestone Events</span>
+                  <span className='font-medium'>
+                    {events.filter((event) => event.isMilestone).length}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-600 dark:text-slate-400">Category Color</span>
-                  <div className="flex items-center gap-2">
-                    <div className={`w-3 h-3 rounded-full ${getCategoryColor(category.color)}`} />
-                    <span className="font-medium capitalize">{category.color}</span>
+                <div className='flex justify-between'>
+                  <span className='text-slate-600 dark:text-slate-400'>Category Color</span>
+                  <div className='flex items-center gap-2'>
+                    <div className={`h-3 w-3 rounded-full ${getCategoryColor(category.color)}`} />
+                    <span className='font-medium capitalize'>{category.color}</span>
                   </div>
                 </div>
               </div>
@@ -223,34 +228,36 @@ export default async function TimelineCategoryPage({ params }: Props) {
 
             {/* Related Categories */}
             {category.parentCategory && (
-              <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-4">
-                <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-3">
+              <div className='rounded-lg bg-slate-50 p-4 dark:bg-slate-900'>
+                <h3 className='mb-3 font-semibold text-slate-900 dark:text-slate-100'>
                   Parent Category
                 </h3>
                 <Link href={`/timeline/category/${category.parentCategory.slug.current}`}>
-                  <div className="flex items-center gap-3 p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                    <div className={`w-3 h-3 rounded-full ${getCategoryColor(category.parentCategory.color)}`} />
-                    <span className="text-sm font-medium">{category.parentCategory.title}</span>
+                  <div className='flex items-center gap-3 rounded p-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800'>
+                    <div
+                      className={`h-3 w-3 rounded-full ${getCategoryColor(category.parentCategory.color)}`}
+                    />
+                    <span className='text-sm font-medium'>{category.parentCategory.title}</span>
                   </div>
                 </Link>
               </div>
             )}
 
             {/* Quick Actions */}
-            <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-4 space-y-3">
-              <h3 className="font-semibold text-slate-900 dark:text-slate-100">Quick Actions</h3>
-              <div className="space-y-2">
+            <div className='space-y-3 rounded-lg bg-slate-50 p-4 dark:bg-slate-900'>
+              <h3 className='font-semibold text-slate-900 dark:text-slate-100'>Quick Actions</h3>
+              <div className='space-y-2'>
                 <Link href={`/timeline/create?category=${category.slug.current}`}>
-                  <Button variant="outline" size="sm" className="w-full justify-start">
+                  <Button variant='outline' size='sm' className='w-full justify-start'>
                     Create Timeline in {category.title}
                   </Button>
                 </Link>
                 <Link href={`/timeline/event/create?category=${category.slug.current}`}>
-                  <Button variant="outline" size="sm" className="w-full justify-start">
+                  <Button variant='outline' size='sm' className='w-full justify-start'>
                     Add Event to {category.title}
                   </Button>
                 </Link>
-                <Button variant="outline" size="sm" className="w-full justify-start">
+                <Button variant='outline' size='sm' className='w-full justify-start'>
                   Subscribe to Updates
                 </Button>
               </div>
@@ -275,7 +282,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const { category, events, timelines } = categoryData;
   const title = category.title;
-  const description = category.description || `Browse timelines and events in the ${category.title} category. ${timelines.length} timelines and ${events.length} events available.`;
+  const description =
+    category.description ??
+    `Browse timelines and events in the ${category.title} category. ${timelines.length} timelines and ${events.length} events available.`;
 
   return {
     title: `${title} Timeline Category - UnTelevised Media`,
@@ -301,7 +310,7 @@ async function getCategoryData(slug: string): Promise<{
         color
       }
     }`;
-    
+
     const category: TimelineCategory = await sanityFetch({
       query: categoryQuery,
       params: { slug },

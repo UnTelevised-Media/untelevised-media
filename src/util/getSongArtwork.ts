@@ -10,12 +10,12 @@ import urlForImage from './urlForImage';
 export function getSongArtwork(song: Song): string | null {
   // First try to use track artwork
   if (song.trackArt) {
-    return urlForImage(song.trackArt)?.url() || null;
+    return urlForImage(song.trackArt)?.url() ?? null;
   }
 
   // Fallback to album artwork
   if (song.album?.albumArt) {
-    return urlForImage(song.album.albumArt)?.url() || null;
+    return urlForImage(song.album.albumArt)?.url() ?? null;
   }
 
   // No artwork available
