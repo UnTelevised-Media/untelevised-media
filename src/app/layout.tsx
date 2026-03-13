@@ -7,9 +7,13 @@ import './globals.css';
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { Toaster } from '@/components/ui/toaster';
+import dynamic from 'next/dynamic';
 import { ConsentProvider } from '@/lib/consent';
-import { CookieConsentBanner, AdBlockerMessage } from '@/components/consent';
 import ConsentAwareAnalytics from '@/components/analytics/ConsentAwareAnalytics';
+
+// Defer framer-motion consent UI into a separate code-split chunk
+const CookieConsentBanner = dynamic(() => import('@/components/consent/CookieConsentBanner'));
+const AdBlockerMessage = dynamic(() => import('@/components/consent/AdBlockerMessage'));
 
 // // Import environment validation
 // import '@/lib/env';

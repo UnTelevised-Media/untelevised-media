@@ -12,7 +12,7 @@ import { SidebarAd, AD_CONFIG } from '@/components/ads';
 import TestAd from '@/components/debug/TestAd';
 
 import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryAllArticles, queryLiveEvents, queryCategories } from '@/lib/sanity/lib/queries';
+import { queryAllArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
@@ -179,6 +179,7 @@ export default async function HomePage() {
                     alt={article.title}
                     width={800}
                     height={450}
+                    sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                     className='object-cover transition-transform group-hover:scale-105'
                   />
                 </div>
@@ -242,11 +243,9 @@ export default async function HomePage() {
 async function getFrontPageData(): Promise<{
   articles: Article[];
   liveEvents: LiveEvent[];
-  categories: Category[];
 }> {
   try {
-    // Fetch all data in parallel for better performance
-    const [liveEvents, articles, categories] = await Promise.all([
+    const [liveEvents, articles] = await Promise.all([
       sanityFetch({
         query: queryLiveEvents,
         tags: ['liveEvent'],
@@ -255,15 +254,11 @@ async function getFrontPageData(): Promise<{
         query: queryAllArticles,
         tags: ['article'],
       }) as Promise<Article[]>,
-      sanityFetch({
-        query: queryCategories,
-        tags: ['category'],
-      }) as Promise<Category[]>,
     ]);
 
-    return { liveEvents, articles, categories };
+    return { liveEvents, articles };
   } catch (error) {
     console.error('Failed to fetch front page data:', error);
-    return { articles: [], liveEvents: [], categories: [] };
+    return { articles: [], liveEvents: [] };
   }
 }

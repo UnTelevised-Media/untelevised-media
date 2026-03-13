@@ -1,5 +1,6 @@
 /* eslint-disable react/function-component-definition */
 // src/app/(user)/author/[slug]/page.tsx
+import { cache } from 'react';
 import Image from 'next/image';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
@@ -26,7 +27,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const author: Author = await sanityClient.fetch(queryAuthorBySlug, { slug });
+  const author = await getAuthorBySlug(slug);
   if (!author) return { title: 'Author Not Found' };
   return buildAuthorMetadata(author, slug);
 }
@@ -72,6 +73,7 @@ export default async function Author({ params }: Props) {
                   height={240}
                   alt={author.name}
                   className='h-60 w-60 object-cover'
+                  priority
                 />
               </div>
             </div>
@@ -184,10 +186,9 @@ export default async function Author({ params }: Props) {
   );
 }
 
-// Call the Sanity Fetch Function for the Author Information
-async function getAuthorBySlug(slug: string): Promise<Author | null> {
+// React.cache deduplicates this fetch across generateMetadata and the page component
+const getAuthorBySlug = cache(async (slug: string): Promise<Author | null> => {
   try {
-    // Fetch author data from Sanity
     const author: Author = await sanityFetch({
       query: queryAuthorBySlug,
       params: { slug },
@@ -198,7 +199,7 @@ async function getAuthorBySlug(slug: string): Promise<Author | null> {
     console.error('Failed to fetch author:', error);
     return null;
   }
-}
+});
 
 // Generate the static params for the author list
 export async function generateStaticParams() {
