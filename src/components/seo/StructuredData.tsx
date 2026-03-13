@@ -1,5 +1,5 @@
 // src/components/seo/StructuredData.tsx
-import Script from 'next/script';
+// Note: plain <script> tags are correct for inline JSON-LD in RSC. next/script is for third-party loading strategies.
 import { getSongArtwork } from '@/util/getSongArtwork';
 
 interface SongStructuredDataProps {
@@ -54,13 +54,13 @@ export const SongStructuredData = ({ song }: SongStructuredDataProps) => {
   };
 
   return (
-    <Script
+    <script
       id={`song-structured-data-${song._id}`}
       type='application/ld+json'
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(structuredData),
       }}
-    />
+    ></script>
   );
 };
 
@@ -101,13 +101,13 @@ export const ArtistStructuredData = ({ artist, songs }: ArtistStructuredDataProp
   };
 
   return (
-    <Script
+    <script
       id={`artist-structured-data-${artist._id}`}
       type='application/ld+json'
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(structuredData),
       }}
-    />
+    ></script>
   );
 };
 
@@ -146,13 +146,13 @@ export const AlbumStructuredData = ({ album, songs }: AlbumStructuredDataProps) 
   };
 
   return (
-    <Script
+    <script
       id={`album-structured-data-${album._id}`}
       type='application/ld+json'
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(structuredData),
       }}
-    />
+    ></script>
   );
 };
 
@@ -182,13 +182,13 @@ export const MusicWebsiteStructuredData = () => {
   };
 
   return (
-    <Script
+    <script
       id='music-website-structured-data'
       type='application/ld+json'
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(structuredData),
       }}
-    />
+    ></script>
   );
 };
 
@@ -209,12 +209,12 @@ export const BreadcrumbStructuredData = ({
   };
 
   return (
-    <Script
+    <script
       id='breadcrumb-structured-data'
       type='application/ld+json'
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(structuredData),
       }}
-    />
+    ></script>
   );
 };

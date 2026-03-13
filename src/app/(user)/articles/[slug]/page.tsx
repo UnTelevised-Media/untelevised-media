@@ -18,6 +18,7 @@ import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata';
+import { NewsArticleStructuredData } from '@/components/seo/NewsArticleStructuredData';
 
 // import Comments from '@/c/post/Comments';
 
@@ -42,6 +43,7 @@ export default async function Article({ params }: Props) {
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
+      <NewsArticleStructuredData article={article} slug={slug} />
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}

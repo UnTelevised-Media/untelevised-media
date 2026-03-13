@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- `GlobalStructuredData` component — NewsMediaOrganization + WebSite + SearchAction schema.org rendered in `(user)/layout.tsx`
+- `NewsArticleStructuredData` component — NewsArticle + BreadcrumbList schema.org on every article page
 - `generateMetadata()` to `/articles/[slug]` — unique title, description, OG image, canonical URL per article
 - `generateMetadata()` to `/live-event/[slug]` — per-event metadata with live status in title
 - `generateMetadata()` to `/category/[slug]` — per-category metadata using new `queryCategoryBySlug`
@@ -21,5 +23,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Update `next-sanity` v12 import paths: `VisualEditing` now from `next-sanity/visual-editing`, `defineLive` now from `next-sanity/live`
 - Replace boilerplate "Next.js 15 Boilerplate" root layout metadata with UnTelevised Media branding
 - Replace inline `notFound()` div fallback with proper `notFound()` from `next/navigation` in `/articles/[slug]`
+- Fix `StructuredData.tsx` — replace `next/script` with plain `<script>` tags for inline JSON-LD (correct RSC pattern)
+- Fix `sitemap.ts` — homepage priority `0.3` → `1.0`, article priorities now recency-based (`0.8/0.6/0.4`), live events `0.9`, all URLs use trailing slashes, added missing static pages (`/about/`, `/staff/`, `/donate/`, `/past-events/`)
+- Fix `robots.ts` — add `Disallow: /api/`, fix `BASEURL` with fallback to `NEXT_PUBLIC_APP_URL` then hardcoded production URL, explicitly allow all major AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, anthropic-ai, cohere-ai)
 
 ---
