@@ -131,6 +131,29 @@ export default defineType({
       description:
         '2–3 sentence plain text summary. Used for AI extraction and featured snippets. Falls back to description field.',
     }),
+    defineField({
+      name: 'faqs',
+      title: 'FAQ (for structured data)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'faqItem',
+          fields: [
+            defineField({ name: 'question', type: 'string', title: 'Question' }),
+            defineField({
+              name: 'answer',
+              type: 'text',
+              title: 'Answer',
+              description: 'Plain text only — used for FAQPage schema.org structured data',
+            }),
+          ],
+          preview: { select: { title: 'question' } },
+        },
+      ],
+      description:
+        'Q&A pairs that appear in FAQPage structured data — increases AI citation chance',
+    }),
     // SEO overrides
     defineField({
       name: 'seo',
