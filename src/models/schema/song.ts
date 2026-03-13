@@ -272,6 +272,11 @@ export default defineType({
       type: 'string',
       description: 'Keywords for SEO optimization',
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seoObject',
+    }),
   ],
   preview: {
     select: {

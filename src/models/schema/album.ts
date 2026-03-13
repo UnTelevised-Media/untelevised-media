@@ -179,6 +179,11 @@ export default defineType({
       description: 'Whether to feature this album prominently',
       initialValue: false,
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seoObject',
+    }),
   ],
   preview: {
     select: {
