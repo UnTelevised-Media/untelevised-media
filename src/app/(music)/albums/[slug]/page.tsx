@@ -40,24 +40,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ...(album.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
   ].join(', ');
 
+  const canonicalUrl = `https://www.untelevised.media/albums/${slug}/`;
+  const ogImageUrl = album.albumArt
+    ? urlForImage(album.albumArt)?.width(1200).height(630).url() ?? ''
+    : 'https://www.untelevised.media/og-default.jpg';
+  const title = `${album.title} - ${artistNames} | Album`;
+  const description = `Listen to ${album.title} by ${artistNames}. ${album.description ? 'Learn more about this album.' : ''}`;
+
   return {
-    title: `${album.title} - ${artistNames} | Album`,
-    description: `Listen to ${album.title} by ${artistNames}. ${album.description ? 'Learn more about this album.' : ''}`,
+    title,
+    description,
     keywords: `${album.title}, ${artistNames}, album, ${album.genres?.join(', ') ?? ''}`,
     openGraph: {
+      type: 'music.album',
       title: `${album.title} - ${artistNames}`,
-      description: `Album: ${album.title} by ${artistNames}`,
-      images: album.albumArt
-        ? [
-            {
-              url: urlForImage(album.albumArt)?.url() ?? '',
-              width: 1200,
-              height: 630,
-              alt: `${album.title} album artwork`,
-            },
-          ]
-        : [],
+      description,
+      url: canonicalUrl,
+      siteName: 'UnTelevised Media',
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: `${album.title} album artwork` }],
     },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@untelevised',
+      title,
+      description,
+      images: [ogImageUrl],
+    },
+    alternates: { canonical: canonicalUrl },
   };
 }
 

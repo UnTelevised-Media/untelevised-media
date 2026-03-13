@@ -9,6 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- Event schema.org structured data on `/live-event/[slug]` pages (eventStatus, location, organizer, image)
+- Canonical URL, Twitter card, and `alternates.canonical` to `/music-artists/[slug]` metadata
+- Canonical URL, Twitter card, and `alternates.canonical` to `/albums/[slug]` metadata
 - New Sanity schema `seoObject` — reusable SEO object with metaTitle, metaDescription, ogImage, noIndex, canonicalUrl fields; added to `article` schema
 - New Sanity schema `siteSettings` — singleton for global brand config (name, description, logo, social links, foundingDate, defaultOgImage)
 - EEAT fields on `article` schema: `location`, `updatedAt`, `corrections`, `sources[]`
