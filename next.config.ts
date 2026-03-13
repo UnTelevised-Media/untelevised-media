@@ -1,5 +1,4 @@
 import type { NextConfig } from 'next';
-import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -39,10 +38,11 @@ const nextConfig: NextConfig = {
   experimental: {
     // * This is used for Sanity to prevent the client from accessing the Sanity API Read Token
     taint: true,
-    typedRoutes: true,
+    // typedRoutes: true, — enable once Turbopack supports it fully
   },
 };
 
-export default withBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-})(nextConfig);
+// Bundle analyzer: run `ANALYZE=true next build` (uses webpack, not Turbopack)
+// To enable: const { default: withBundleAnalyzer } = await import('@next/bundle-analyzer')
+// export default withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig)
+export default nextConfig;

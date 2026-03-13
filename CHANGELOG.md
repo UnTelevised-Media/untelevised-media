@@ -28,6 +28,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Wire up `@next/bundle-analyzer` (already installed) via `withBundleAnalyzer()` wrapper in `next.config.ts`
 - Add `analyze` npm script — run `npm run analyze` to open interactive bundle treemap
 
+#### Deferred / Fixed (Turbopack incompatible in dev)
+- Reverted `typedRoutes: true` and `withBundleAnalyzer` config wrapper — both crash Turbopack dev server; safe to enable for `next build` (webpack) only; instructional comments left in `next.config.ts`
+
 ### SEO & AEO
 
 #### Added
