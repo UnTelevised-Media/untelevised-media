@@ -193,6 +193,14 @@ export default async function HomePage() {
                       height={450}
                       sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                       className='object-cover transition-transform group-hover:scale-105'
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      {...(urlForImage(article.mainImage as any)
+                        ? {
+                            placeholder: 'blur' as const,
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            blurDataURL: urlForImage(article.mainImage as any)!.width(20).blur(10).url(),
+                          }
+                        : {})}
                     />
                   </div>
                   <div className='flex flex-1 flex-col p-4'>

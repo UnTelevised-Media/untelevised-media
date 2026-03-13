@@ -95,6 +95,14 @@ export default async function Author({ params }: Props) {
                   alt={author.name}
                   className='h-60 w-60 object-cover'
                   priority
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  {...(author.image && urlForImage(author.image as any)
+                    ? {
+                        placeholder: 'blur' as const,
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        blurDataURL: urlForImage(author.image as any)!.width(20).blur(10).url(),
+                      }
+                    : {})}
                 />
               </div>
             </div>

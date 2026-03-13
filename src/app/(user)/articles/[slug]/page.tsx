@@ -59,6 +59,14 @@ export default async function Article({ params }: Props) {
             fill
             className='object-cover'
             priority
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            {...(urlForImage(article.mainImage as any)
+              ? {
+                  placeholder: 'blur' as const,
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  blurDataURL: urlForImage(article.mainImage as any)!.width(20).blur(10).url(),
+                }
+              : {})}
           />
           <div className='absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-slate-900/20' />
         </div>
