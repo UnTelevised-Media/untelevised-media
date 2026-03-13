@@ -123,6 +123,14 @@ export default defineType({
       ],
       description: 'Source links displayed at the bottom of the article',
     }),
+    defineField({
+      name: 'leadParagraph',
+      title: 'Lead / Summary',
+      type: 'text',
+      rows: 3,
+      description:
+        '2–3 sentence plain text summary. Used for AI extraction and featured snippets. Falls back to description field.',
+    }),
     // SEO overrides
     defineField({
       name: 'seo',
