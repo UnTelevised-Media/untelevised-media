@@ -13,17 +13,24 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
 import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 import resolveHref from '@/util/resolveHref';
+import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
-
-// export { generateMetadata } from '@/util/generateLiveEventMetadata';
+import { buildLiveEventMetadata } from '@/util/metadata';
 
 type Props = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const liveEvent: LiveEvent = await sanityClient.fetch(queryEventBySlug, { slug });
+  if (!liveEvent) return { title: 'Live Event Not Found' };
+  return buildLiveEventMetadata(liveEvent, slug);
+}
 
 export default async function LiveEvent({ params }: Props) {
   const { slug } = await params;
