@@ -38,7 +38,7 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
           '@type': 'NewsMediaOrganization',
           '@id': 'https://www.untelevised.media/#organization',
           name: 'UnTelevised Media',
-          url: 'https://www.untelevised.media',
+          url: 'https://www.untelevised.media/',
           logo: {
             '@type': 'ImageObject',
             url: 'https://www.untelevised.media/Logo.png',

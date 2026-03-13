@@ -9,7 +9,7 @@ export function GlobalStructuredData() {
         '@type': 'NewsMediaOrganization',
         '@id': 'https://www.untelevised.media/#organization',
         name: 'UnTelevised Media',
-        url: 'https://www.untelevised.media',
+        url: 'https://www.untelevised.media/',
         logo: {
           '@type': 'ImageObject',
           url: 'https://www.untelevised.media/Logo.png',
@@ -30,7 +30,7 @@ export function GlobalStructuredData() {
         '@type': 'WebSite',
         '@id': 'https://www.untelevised.media/#website',
         name: 'UnTelevised Media',
-        url: 'https://www.untelevised.media',
+        url: 'https://www.untelevised.media/',
         publisher: { '@id': 'https://www.untelevised.media/#organization' },
         potentialAction: {
           '@type': 'SearchAction',
