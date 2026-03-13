@@ -161,6 +161,14 @@ export default defineType({
       to: [{ type: 'author' }],
       description: 'Editorial reviewer or fact-checker',
     }),
+    defineField({
+      name: 'relatedArticles',
+      title: 'Related Articles',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'article' }] }],
+      validation: (Rule) => Rule.max(5),
+      description: 'Up to 5 related articles displayed at end of article',
+    }),
     // SEO overrides
     defineField({
       name: 'seo',
