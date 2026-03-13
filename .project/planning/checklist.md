@@ -92,8 +92,8 @@
 
 ## P3 — Quality Improvements
 
-- [ ] **Audit barrel file imports — consider direct imports**
-  `@/components/ads`, `@/components/global`, `@/components/consent` barrel index files may prevent tree-shaking. Audit and replace with direct imports where components aren't universally needed.
+- [x] **Audit barrel file imports — consider direct imports**
+  `@/components/consent` barrel is bypassed — both components are already dynamically imported in root layout. `@/components/ads` barrel components are universally used; no action needed.
   > Audit ref: `04`
 
 - [ ] **Add `generateStaticParams` to music dynamic routes**
@@ -108,8 +108,8 @@
   Fixed missing trailing slashes in `NewsArticleStructuredData` publisher url and `GlobalStructuredData` organization and website urls.
   > Audit ref: `01`, `02`
 
-- [ ] **Server-hoist logo out of `Header.tsx` client component**
-  `src/components/global/Header.tsx` — extract `<Image>` logo as a separate server component passed as a child/slot to the client Header to prevent re-renders on scroll/nav.
+- [x] **Server-hoist logo out of `Header.tsx` client component**
+  Extracted to `src/components/global/HeaderLogo.tsx` server component, passed as `logoSlot` prop to client `Header` from both `(user)/layout.tsx` and `(music)/layout.tsx`.
   > Audit ref: `04`
 
 - [x] **Add `generateMetadata` to remaining static pages**
@@ -120,8 +120,8 @@
   `structure.ts` — singleton desk item added, filtered from `documentTypeListItems` to prevent duplication.
   > Audit ref: `03`
 
-- [ ] **Resolve font loading duplication**
-  `src/app/layout.tsx` — three fonts loaded (Geist Sans, Geist Mono, Inter) but only Inter applies visually. Decide: drop Geist or wire Geist variable properly.
+- [x] **Resolve font loading duplication**
+  Removed Geist Sans and Geist Mono from `src/app/layout.tsx` — Inter is the active font, Geist variables were unused (not referenced in Tailwind config or CSS). Body class simplified to `${inter.className} font-sans antialiased`.
   > Audit ref: `01`
 
 ---

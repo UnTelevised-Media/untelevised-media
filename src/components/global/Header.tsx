@@ -2,14 +2,13 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import Socials from './Socials';
 import ThemeToggle from './ThemeToggle';
 import { Flame, Music, Radio } from 'lucide-react';
 
-const Header = () => {
+const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -53,31 +52,8 @@ const Header = () => {
 
       {/* Main Header */}
       <div className='flex w-full items-center justify-between px-4 py-2 md:py-3 lg:px-8'>
-        {/* Logo Section */}
-        <Link
-          href='/'
-          className='group flex items-center space-x-2 transition-transform hover:scale-105 md:space-x-3'
-        >
-          <div className='relative'>
-            <div className='absolute -inset-1 rounded-full bg-gradient-to-r from-untele/50 to-red-400/50 opacity-75 blur transition-opacity group-hover:opacity-100' />
-            <div className='relative'>
-              <Image
-                src='/Logo.png'
-                alt='UnTelevised Media Logo'
-                width={40}
-                height={40}
-                className='rounded-full border-2 border-untele/50 shadow-lg md:h-[50px] md:w-[50px]'
-              />
-              <div className='absolute -right-1 -top-1 h-2.5 w-2.5 animate-pulse rounded-full bg-untele shadow-sm md:h-3 md:w-3' />
-            </div>
-          </div>
-          <div className='hidden xl:block'>
-            <h1 className='bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-lg font-bold tracking-tight text-transparent dark:from-white dark:to-slate-200 md:text-xl'>
-              UnTelevised
-            </h1>
-            <p className='text-xs font-medium text-untele'>Independent Media</p>
-          </div>
-        </Link>
+        {/* Logo Section — server-hoisted to avoid re-renders on client interactions */}
+        {logoSlot}
 
         {/* Desktop Navigation */}
         <nav className='hidden items-center space-x-6 lg:flex'>
