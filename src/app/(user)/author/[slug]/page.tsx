@@ -47,8 +47,29 @@ export default async function Author({ params }: Props) {
     );
   }
 
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `https://www.untelevised.media/author/${slug}/#person`,
+    name: author.name,
+    url: `https://www.untelevised.media/author/${slug}/`,
+    jobTitle: author.title ?? undefined,
+    worksFor: {
+      '@type': 'NewsMediaOrganization',
+      '@id': 'https://www.untelevised.media/#organization',
+      name: 'UnTelevised Media',
+    },
+    sameAs: author.sameAs ?? [],
+    knowsAbout: author.expertise ?? [],
+    hasCredential: author.credentials ?? [],
+  };
+
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       {/* Hero Section */}
       <section className='relative overflow-hidden bg-gradient-to-br from-slate-100 via-slate-200 to-slate-100 py-16 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900'>
         {/* Background Pattern */}

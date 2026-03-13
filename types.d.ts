@@ -85,6 +85,9 @@ interface Author extends Base {
   bio: Block[];
   image: Image;
   relatedArticles: Article[];
+  sameAs?: string[];
+  expertise?: string[];
+  credentials?: string[];
 }
 
 interface Image {
