@@ -165,44 +165,57 @@ export default async function HomePage() {
             <div className='h-px flex-1 bg-slate-400 dark:bg-slate-700' />
           </div>
 
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-            {featuredStories.map((article) => (
-              <Link
-                key={article._id}
-                href={`/articles/${article.slug?.current}`}
-                className='group flex h-full flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
-              >
-                <div className='aspect-video overflow-hidden'>
-                  <Image
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    src={urlForImage(article.mainImage as any)?.url() ?? ''}
-                    alt={article.title}
-                    width={800}
-                    height={450}
-                    sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
-                    className='object-cover transition-transform group-hover:scale-105'
+          <Suspense
+            fallback={
+              <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className='h-64 animate-pulse rounded-lg bg-slate-100 dark:bg-slate-800'
                   />
-                </div>
-                <div className='flex flex-1 flex-col p-4'>
-                  {article.categories?.[0] && (
-                    <span className='mb-2 inline-block bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
-                      {article.categories[0].title}
-                    </span>
-                  )}
-                  <h3 className='mb-2 line-clamp-2 font-bold text-slate-800 group-hover:text-untele dark:text-slate-200'>
-                    {article.title}
-                  </h3>
-                  <p className='mb-3 line-clamp-2 flex-1 text-xs text-slate-600 dark:text-slate-400'>
-                    {article.description}
-                  </p>
-                  <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
-                    <span className='font-bold uppercase'>{article.author?.name}</span>
-                    <span>{formatDate(getArticleDate(article))}</span>
+                ))}
+              </div>
+            }
+          >
+            <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+              {featuredStories.map((article) => (
+                <Link
+                  key={article._id}
+                  href={`/articles/${article.slug?.current}`}
+                  className='group flex h-full flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
+                >
+                  <div className='aspect-video overflow-hidden'>
+                    <Image
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      src={urlForImage(article.mainImage as any)?.url() ?? ''}
+                      alt={article.title}
+                      width={800}
+                      height={450}
+                      sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
+                      className='object-cover transition-transform group-hover:scale-105'
+                    />
                   </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                  <div className='flex flex-1 flex-col p-4'>
+                    {article.categories?.[0] && (
+                      <span className='mb-2 inline-block bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
+                        {article.categories[0].title}
+                      </span>
+                    )}
+                    <h3 className='mb-2 line-clamp-2 font-bold text-slate-800 group-hover:text-untele dark:text-slate-200'>
+                      {article.title}
+                    </h3>
+                    <p className='mb-3 line-clamp-2 flex-1 text-xs text-slate-600 dark:text-slate-400'>
+                      {article.description}
+                    </p>
+                    <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
+                      <span className='font-bold uppercase'>{article.author?.name}</span>
+                      <span>{formatDate(getArticleDate(article))}</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </Suspense>
         </div>
       </section>
 
