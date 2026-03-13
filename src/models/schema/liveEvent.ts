@@ -87,6 +87,21 @@ export default defineType({
       type: 'array',
       of: [{ type: 'reference', to: { type: 'eventTag' } }],
     }),
+    defineField({ name: 'endDate', title: 'Event End Date', type: 'datetime' }),
+    defineField({
+      name: 'eventStatus',
+      title: 'Event Status',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Scheduled', value: 'EventScheduled' },
+          { title: 'Cancelled', value: 'EventCancelled' },
+          { title: 'Postponed', value: 'EventPostponed' },
+          { title: 'Moved Online', value: 'EventMovedOnline' },
+        ],
+      },
+      initialValue: 'EventScheduled',
+    }),
     defineField({
       name: 'seo',
       title: 'SEO',
