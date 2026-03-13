@@ -179,6 +179,7 @@ export default async function HomePage() {
                     alt={article.title}
                     width={800}
                     height={450}
+                    sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                     className='object-cover transition-transform group-hover:scale-105'
                   />
                 </div>

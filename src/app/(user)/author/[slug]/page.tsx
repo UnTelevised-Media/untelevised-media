@@ -72,6 +72,7 @@ export default async function Author({ params }: Props) {
                   height={240}
                   alt={author.name}
                   className='h-60 w-60 object-cover'
+                  priority
                 />
               </div>
             </div>

@@ -15,8 +15,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Defer `CookieConsentBanner` and `AdBlockerMessage` (framer-motion) via `next/dynamic` with `ssr: false` — removes framer-motion from the initial JS bundle on every page
 - Defer `TimelineJSVisualization` (framer-motion) via `next/dynamic` on timeline pages — only loads when a timeline page is visited
 - Defer `react-tweet` `Tweet` component and `react-syntax-highlighter` `Prism` via `next/dynamic` in `RichTextComponents` — only loaded when article body contains those block types
+- Remove unused `styled-components` and `@types/styled-components` from `package.json`
 
-### Added
+#### P2 — Images / Re-renders
+- Add `priority` to author hero photo on `/author/[slug]` — was LCP image without preload hint
+- Add `sizes` prop to homepage featured stories grid — prevents browser from fetching oversized images
+- Fix `Header.tsx` scroll handler: `requestAnimationFrame` throttle + `{ passive: true }` listener — eliminates forced reflows on scroll
+
+### SEO & AEO
+
+#### Added
 - Event schema.org structured data on `/live-event/[slug]` pages (eventStatus, location, organizer, image)
 - Canonical URL, Twitter card, and `alternates.canonical` to `/music-artists/[slug]` metadata
 - Canonical URL, Twitter card, and `alternates.canonical` to `/albums/[slug]` metadata
@@ -34,7 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Canonical URL, Twitter card, and `alternates.canonical` to `/lyrics/[slug]` metadata
 - `src/util/metadata.ts` — shared helpers: `getCanonicalUrl`, `getSanityOgImageUrl`, `truncate`, `buildArticleMetadata`, `buildLiveEventMetadata`, `buildCategoryMetadata`, `buildAuthorMetadata`
 
-### Fixed
+#### Fixed
 - Update `next-sanity` v12 import paths: `VisualEditing` now from `next-sanity/visual-editing`, `defineLive` now from `next-sanity/live`
 - Replace boilerplate "Next.js 15 Boilerplate" root layout metadata with UnTelevised Media branding
 - Replace inline `notFound()` div fallback with proper `notFound()` from `next/navigation` in `/articles/[slug]`
