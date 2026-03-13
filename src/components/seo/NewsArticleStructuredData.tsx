@@ -48,6 +48,18 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
         keywords: article.keywords,
         url: canonicalUrl,
       },
+      ...(article.faqs?.length
+        ? [
+            {
+              '@type': 'FAQPage',
+              mainEntity: article.faqs.map((faq: { question: string; answer: string }) => ({
+                '@type': 'Question',
+                name: faq.question,
+                acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+              })),
+            },
+          ]
+        : []),
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
