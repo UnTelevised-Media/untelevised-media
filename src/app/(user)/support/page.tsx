@@ -2,6 +2,13 @@
 // src/app/(user)/support/page.tsx
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Support Options — UnTelevised Media',
+  description:
+    'Support UnTelevised Media through donations, volunteering, sharing our work, or providing tips.',
+};
 
 export default function SupportPage() {
   return (
