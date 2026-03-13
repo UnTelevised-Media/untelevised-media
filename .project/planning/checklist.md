@@ -24,8 +24,8 @@
   `src/app/(user)/donate/page.tsx` → title: "Support Independent Journalism"
   > Audit ref: `01`, `02`, `05`
 
-- [ ] **Add `/public/og-default.jpg`** (1200×630 branded fallback)
-  Referenced in root layout `openGraph.images` but file does not exist — broken social preview on pages without a specific OG image.
+- [x] **Add `/public/og-default.jpg`** (1200×630 branded fallback)
+  Added as `public/og-default.png` — root layout updated to reference `.png`. Article pages use the dynamic `opengraph-image.tsx` instead.
   > Audit ref: `02`, `05`
 
 - [x] **Add Suspense boundary around `FeaturedStoriesGrid`**

@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     description: 'Independent journalism covering breaking news and investigative reporting.',
     siteName: 'UnTelevised Media',
     images: [{
-      url: '/og-default.jpg',
+      url: '/og-default.png',
       width: 1200,
       height: 630,
       alt: 'UnTelevised Media',
