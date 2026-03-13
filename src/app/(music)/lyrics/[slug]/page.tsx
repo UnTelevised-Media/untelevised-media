@@ -39,25 +39,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const artworkInfo = getSongArtworkInfo(song);
 
+  const canonicalUrl = `https://www.untelevised.media/lyrics/${slug}/`;
+  const ogImage = artworkInfo.url ?? 'https://www.untelevised.media/og-default.jpg';
+  const title = `${song.title} - ${artistNames} | Lyrics`;
+  const description = `Read the lyrics to "${song.title}" by ${artistNames}.${song.description ? ' Learn more about this song and its background.' : ''}`;
+
   return {
-    title: `${song.title} - ${artistNames} | Lyrics`,
-    description: `Read the lyrics to "${song.title}" by ${artistNames}. ${song.description ? 'Learn more about this song and its background.' : ''}`,
+    title,
+    description,
     keywords:
       song.keywords ?? `${song.title}, ${artistNames}, lyrics, ${song.genres?.join(', ') ?? ''}`,
     openGraph: {
+      type: 'article',
       title: `${song.title} - ${artistNames}`,
-      description: `Lyrics to "${song.title}" by ${artistNames}`,
-      images: artworkInfo.url
-        ? [
-            {
-              url: artworkInfo.url,
-              width: 1200,
-              height: 630,
-              alt: artworkInfo.alt,
-            },
-          ]
-        : [],
+      description,
+      url: canonicalUrl,
+      siteName: 'UnTelevised Media',
+      images: [{ url: ogImage, width: 1200, height: 630, alt: artworkInfo.alt }],
     },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@untelevised',
+      title,
+      description,
+      images: [ogImage],
+    },
+    alternates: { canonical: canonicalUrl },
   };
 }
 

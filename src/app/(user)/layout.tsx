@@ -11,6 +11,7 @@ import ConsentAwareGoogleAdSense from '@/util/consentAwareGoogleAdSense';
 import { SanityLive } from '@/lib/sanity/lib/live';
 import DraftModeBanner from '@/components/sanity/DraftModeBanner';
 import SanityVisualEditing from '@/components/sanity/VisualEditing';
+import { GlobalStructuredData } from '@/components/seo/GlobalStructuredData';
 
 export default async function UserLayout({ children }: { children: React.ReactNode }) {
   const draftModeEnabled = (await draftMode()).isEnabled;
@@ -20,6 +21,8 @@ export default async function UserLayout({ children }: { children: React.ReactNo
       <ConsentAwareGoogleAdSense
         googleAdsenseId={process.env.NEXT_PUBLIC_GAS_ID ?? 'ca-pub-7412827340538951'}
       />
+
+      <GlobalStructuredData />
 
       <div className='min-h-screen bg-white text-slate-900 transition-colors dark:bg-black dark:text-slate-100'>
         {/* Draft Mode Banner */}

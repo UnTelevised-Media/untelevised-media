@@ -12,15 +12,24 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import resolveHref from '@/util/resolveHref';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
+import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
+import { buildAuthorMetadata } from '@/util/metadata';
 
 type Props = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const author: Author = await sanityClient.fetch(queryAuthorBySlug, { slug });
+  if (!author) return { title: 'Author Not Found' };
+  return buildAuthorMetadata(author, slug);
+}
 
 export default async function Author({ params }: Props) {
   const { slug } = await params;

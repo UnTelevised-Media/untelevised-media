@@ -38,25 +38,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const displayName = artist.stageName ?? artist.name;
+  const canonicalUrl = `https://www.untelevised.media/music-artists/${slug}/`;
+  const ogImageUrl = artist.image
+    ? urlForImage(artist.image)?.width(1200).height(630).url() ?? ''
+    : 'https://www.untelevised.media/og-default.jpg';
+  const title = `${displayName} | Music Artist`;
+  const description = `Discover songs and albums by ${displayName}. ${artist.bio ? 'Learn more about this artist and their music.' : ''}`;
 
   return {
-    title: `${displayName} | Music Artist`,
-    description: `Discover songs and albums by ${displayName}. ${artist.bio ? 'Learn more about this artist and their music.' : ''}`,
+    title,
+    description,
     keywords: `${displayName}, ${artist.name}, music, artist, songs, albums, ${artist.genres?.join(', ') ?? ''}`,
     openGraph: {
+      type: 'profile',
       title: displayName,
-      description: `Music artist ${displayName}`,
-      images: artist.image
-        ? [
-            {
-              url: urlForImage(artist.image)?.url() ?? '',
-              width: 1200,
-              height: 630,
-              alt: `${displayName} artist photo`,
-            },
-          ]
-        : [],
+      description,
+      url: canonicalUrl,
+      siteName: 'UnTelevised Media',
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: `${displayName} artist photo` }],
     },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@untelevised',
+      title,
+      description,
+      images: [ogImageUrl],
+    },
+    alternates: { canonical: canonicalUrl },
   };
 }
 

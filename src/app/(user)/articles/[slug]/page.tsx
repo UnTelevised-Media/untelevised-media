@@ -12,9 +12,13 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import resolveHref from '@/util/resolveHref';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
+import { buildArticleMetadata } from '@/util/metadata';
+import { NewsArticleStructuredData } from '@/components/seo/NewsArticleStructuredData';
 
 // import Comments from '@/c/post/Comments';
 
@@ -24,25 +28,22 @@ type Props = {
   }>;
 };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const article: Article = await sanityClient.fetch(queryArticleBySlug, { slug });
+  if (!article) return { title: 'Article Not Found' };
+  return buildArticleMetadata(article, slug);
+}
+
 export default async function Article({ params }: Props) {
   const { slug } = await params;
   const article: Article = (await getArticleBySlug(slug)) as Article;
 
-  if (!article) {
-    return (
-      <div className='mx-auto max-w-4xl p-8 text-center'>
-        <h1 className='text-3xl font-bold text-slate-900 dark:text-slate-100'>
-          Article Not Found
-        </h1>
-        <p className='mt-4 text-slate-600 dark:text-slate-400'>
-          The requested article could not be found.
-        </p>
-      </div>
-    );
-  }
+  if (!article) notFound();
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
+      <NewsArticleStructuredData article={article} slug={slug} />
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}

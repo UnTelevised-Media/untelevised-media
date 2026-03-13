@@ -34,28 +34,37 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.untelevised.media'),
   title: {
-    default: 'Next.js 15 Boilerplate',
-    template: '%s | Next.js 15 Boilerplate',
+    default: 'UnTelevised Media — Independent Journalism',
+    template: '%s | UnTelevised Media',
   },
   description:
-    'A comprehensive Next.js 15 boilerplate with TypeScript, Tailwind CSS, Clerk Auth, Sanity CMS, and more.',
-  keywords: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Clerk', 'Sanity'],
-  authors: [{ name: 'Your Name' }],
-  creator: 'Your Name',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'),
+    'Independent journalism covering breaking news, live events, and investigative reporting that mainstream media won\'t cover.',
+  keywords: ['independent media', 'investigative journalism', 'breaking news', 'live events', 'untelevised'],
+  authors: [{ name: 'UnTelevised Media Editorial Team', url: 'https://www.untelevised.media/staff/' }],
+  creator: 'UnTelevised Media',
+  publisher: 'UnTelevised Media',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: process.env.NEXT_PUBLIC_APP_URL,
-    title: 'Next.js 15 Boilerplate',
-    description: 'A comprehensive Next.js 15 boilerplate',
-    siteName: 'Next.js 15 Boilerplate',
+    url: 'https://www.untelevised.media',
+    title: 'UnTelevised Media — Independent Journalism',
+    description: 'Independent journalism covering breaking news and investigative reporting.',
+    siteName: 'UnTelevised Media',
+    images: [{
+      url: '/og-default.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'UnTelevised Media',
+    }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Next.js 15 Boilerplate',
-    description: 'A comprehensive Next.js 15 boilerplate',
+    site: '@untelevised',
+    creator: '@untelevised',
+    title: 'UnTelevised Media — Independent Journalism',
+    description: 'Independent journalism covering breaking news and investigative reporting.',
   },
   robots: {
     index: true,

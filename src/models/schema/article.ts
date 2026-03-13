@@ -7,7 +7,7 @@ export default defineType({
   title: 'Article',
   type: 'document',
   icon: FileText,
-fields: [
+  fields: [
     defineField({
       name: 'slug',
       title: 'Slug',
@@ -83,6 +83,51 @@ fields: [
       name: 'body',
       title: 'Body',
       type: 'blockContent',
+    }),
+    // Location field — used in UI, now explicit in schema
+    defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      description: 'Where the story is reported from (e.g. "Atlanta, GA")',
+    }),
+    // EEAT fields — updated date, corrections, sources
+    defineField({
+      name: 'updatedAt',
+      title: 'Last Updated',
+      type: 'datetime',
+      description:
+        'When this article was last materially updated (shown as "Updated: [date]" near byline)',
+    }),
+    defineField({
+      name: 'corrections',
+      title: 'Corrections',
+      type: 'text',
+      rows: 3,
+      description:
+        'Any corrections or updates to the original article (displayed as a notice block)',
+    }),
+    defineField({
+      name: 'sources',
+      title: 'Sources',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'label', title: 'Source Name', type: 'string' }),
+            defineField({ name: 'url', title: 'Source URL', type: 'url' }),
+          ],
+          preview: { select: { title: 'label', subtitle: 'url' } },
+        },
+      ],
+      description: 'Source links displayed at the bottom of the article',
+    }),
+    // SEO overrides
+    defineField({
+      name: 'seo',
+      title: 'SEO Settings',
+      type: 'seoObject',
     }),
   ],
 

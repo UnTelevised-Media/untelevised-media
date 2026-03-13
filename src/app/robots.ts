@@ -1,14 +1,25 @@
 import { MetadataRoute } from 'next';
 
-const baseURL = process.env.BASEURL;
+const PRODUCTION_URL = 'https://www.untelevised.media';
+const baseURL = process.env.NEXT_PUBLIC_APP_URL ?? process.env.BASEURL ?? PRODUCTION_URL;
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: '/studio/',
-    },
-    sitemap: `${baseURL}sitemap.xml`,
+    rules: [
+      // All standard crawlers — allow everything except studio and API
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/studio/', '/api/'],
+      },
+      // Explicitly allow major AI crawlers for AEO (AI answer engine optimization)
+      { userAgent: 'GPTBot', allow: '/' },
+      { userAgent: 'ClaudeBot', allow: '/' },
+      { userAgent: 'PerplexityBot', allow: '/' },
+      { userAgent: 'Google-Extended', allow: '/' },
+      { userAgent: 'anthropic-ai', allow: '/' },
+      { userAgent: 'cohere-ai', allow: '/' },
+    ],
+    sitemap: `${baseURL}/sitemap.xml`,
   };
 }

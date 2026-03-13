@@ -97,6 +97,43 @@ export default defineType({
       title: 'Email',
       type: 'string',
     }),
+    // EEAT fields — establish expertise and authority for Google's YMYL guidelines
+    defineField({
+      name: 'credentials',
+      title: 'Credentials',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description:
+        'Professional credentials (e.g. "Investigative Journalist", "J-School Graduate")',
+    }),
+    defineField({
+      name: 'expertise',
+      title: 'Areas of Expertise',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Topics this author covers (e.g. "Criminal Justice", "Housing Policy")',
+    }),
+    defineField({
+      name: 'sameAs',
+      title: 'Profile URLs (sameAs)',
+      type: 'array',
+      of: [{ type: 'url' }],
+      description:
+        "External profile pages that confirm this person's identity (LinkedIn, Wikipedia, etc.)",
+    }),
+    defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      description: 'City/region this author is based in',
+    }),
+    defineField({
+      name: 'isActive',
+      title: 'Active Contributor',
+      type: 'boolean',
+      initialValue: true,
+      description: 'Uncheck for former contributors',
+    }),
   ],
   preview: {
     select: {
