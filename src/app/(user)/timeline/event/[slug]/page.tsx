@@ -409,8 +409,8 @@ async function getTimelineEventBySlug(slug: string): Promise<TimelineEvent | nul
 
 // Generate static params for the timeline event list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='timelineEvent' && isPublished == true] { slug }`;
-  const slugs: TimelineEvent[] = await sanityClient.fetch(query);
+  const queryTimelineEventStaticParams = groq`*[_type=='timelineEvent' && isPublished == true] { slug }`;
+  const slugs: TimelineEvent[] = await sanityClient.fetch(queryTimelineEventStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

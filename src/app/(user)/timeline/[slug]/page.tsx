@@ -338,8 +338,8 @@ async function getTimelineBySlug(slug: string): Promise<Timeline | null> {
 
 // Generate static params for the timeline list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='timeline' && isPublished == true] { slug }`;
-  const slugs: Timeline[] = await sanityClient.fetch(query);
+  const queryTimelineStaticParams = groq`*[_type=='timeline' && isPublished == true] { slug }`;
+  const slugs: Timeline[] = await sanityClient.fetch(queryTimelineStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

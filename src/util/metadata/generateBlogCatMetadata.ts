@@ -14,14 +14,14 @@ const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 // Define the generateMetadata function
 export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
   // Fetch the category data based on the slug
-  const query = groq`
+  const queryCategoryMetadata = groq`
     *[_type == "category" && slug.current == $slug][0] {
       title,
       description,
       // Add more fields as needed for metadata
     }`;
 
-  const category: Category = await sanityClient.fetch(query, { slug });
+  const category: Category = await sanityClient.fetch(queryCategoryMetadata, { slug });
 
   if (!category) {
     return {

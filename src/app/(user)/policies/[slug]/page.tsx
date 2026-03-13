@@ -127,8 +127,8 @@ async function getPolicyBySlug(slug: string): Promise<Policy | null> {
 
 // Generate the static params for the author list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='policies'] { slug }`;
-  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(query);
+  const queryPolicyStaticParams = groq`*[_type=='policies'] { slug }`;
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryPolicyStaticParams);
   const slugRoutes = slugs ? slugs.map((item) => item.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

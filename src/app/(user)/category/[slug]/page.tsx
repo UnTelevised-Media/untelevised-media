@@ -65,8 +65,8 @@ async function getArticlesByCategory(slug: string): Promise<Article[]> {
 }
 // Generate the static params for the category list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='category'] { slug }`;
-  const slugs: Category[] = await sanityClient.fetch(query);
+  const queryCategoryStaticParams = groq`*[_type=='category'] { slug }`;
+  const slugs: Category[] = await sanityClient.fetch(queryCategoryStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

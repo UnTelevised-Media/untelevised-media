@@ -231,8 +231,8 @@ async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
 
 // // Generate the static params for the list of Live Events
 export async function generateStaticParams() {
-  const query = groq`*[_type=='liveEvent'] { slug }`;
-  const slugs: LiveEvent[] = await sanityClient.fetch(query);
+  const queryLiveEventStaticParams = groq`*[_type=='liveEvent'] { slug }`;
+  const slugs: LiveEvent[] = await sanityClient.fetch(queryLiveEventStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

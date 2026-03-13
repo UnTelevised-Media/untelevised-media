@@ -128,12 +128,8 @@
 
 ## P4 — Future / Low Priority
 
-- [ ] **Run Sanity TypeGen** _(skipped — requires sanity.cli.ts in project root)_
-  ```bash
-  pnpm sanity typegen generate
-  ```
-  Produces `sanity.types.ts`. Replace manual `Article`, `LiveEvent`, etc. type interfaces to eliminate schema/type drift.
-  Note: TypeGen fails with `ProjectRootNotFoundError` because `sanity.cli.ts` is in `src/lib/sanity/` not the project root. Requires moving the CLI config or creating a root-level symlink.
+- [x] **Run Sanity TypeGen**
+  Created root-level `sanity.config.ts` (CLI-only, no `'use client'`, relative imports). `pnpm sanity schema extract && pnpm sanity typegen generate` now runs clean — 59 queries, 50 schema types. Fixed 10 duplicate query names across 9 files to eliminate all TypeGen warnings.
   > Audit ref: `03`, `05`
 
 - [ ] **`keywords` field migration: string → array**

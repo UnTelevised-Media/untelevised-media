@@ -344,8 +344,8 @@ async function getCategoryData(slug: string): Promise<{
 
 // Generate static params for the category list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='timelineCategory' && isActive == true] { slug }`;
-  const slugs: TimelineCategory[] = await sanityClient.fetch(query);
+  const queryTimelineCategoryStaticParams = groq`*[_type=='timelineCategory' && isActive == true] { slug }`;
+  const slugs: TimelineCategory[] = await sanityClient.fetch(queryTimelineCategoryStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

@@ -3,13 +3,13 @@ import sanityClient from '@/lib/sanity/lib/client';
 import { groq } from 'next-sanity';
 
 export default async function getAllURLs() {
-  const queryArticles = groq`
+  const queryAllArticleUrls = groq`
     *[_type == "article"] {
       ...,
       title,
       slug,
     }`;
-  const queryLiveEvents = groq`
+  const queryAllLiveEventUrls = groq`
     *[_type == "liveEvent"] {
       ...,
       title,
@@ -22,7 +22,7 @@ export default async function getAllURLs() {
       slug,
     }`;
 
-  const queryCategories = groq`
+  const queryAllCategoryUrls = groq`
     *[_type == "category"] {
       ...,
       slug,
@@ -56,10 +56,10 @@ export default async function getAllURLs() {
     }`;
 
   try {
-    const articles = await sanityClient.fetch(queryArticles);
-    const liveEvents = await sanityClient.fetch(queryLiveEvents);
+    const articles = await sanityClient.fetch(queryAllArticleUrls);
+    const liveEvents = await sanityClient.fetch(queryAllLiveEventUrls);
     const authors = await sanityClient.fetch(queryAuthors);
-    const categories = await sanityClient.fetch(queryCategories);
+    const categories = await sanityClient.fetch(queryAllCategoryUrls);
     const policies = await sanityClient.fetch(queryPolicies);
     const songs = await sanityClient.fetch(querySongs);
     const musicArtists = await sanityClient.fetch(queryMusicArtists);
