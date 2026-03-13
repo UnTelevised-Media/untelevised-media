@@ -11,7 +11,9 @@ import urlForImage from '@/util/urlForImage';
 import { getSongArtworkInfo } from '@/util/getSongArtwork';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { cacheLife, cacheTag } from 'next/cache';
+import { groq } from 'next-sanity';
+import sanityClient from '@/lib/sanity/lib/client';
 import { querySongBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Clock, Calendar, ExternalLink } from 'lucide-react';
 
@@ -428,17 +430,21 @@ export default async function LyricsPage({ params }: Props) {
   );
 }
 
-// Fetch song data by slug
+// Fetch song data by slug — cached per-function with fine-grained tags
 async function getSongBySlug(slug: string): Promise<Song | null> {
+  'use cache';
+  cacheTag('song', `song-${slug}`);
+  cacheLife('hours');
   try {
-    const song = await sanityFetch<Song>({
-      query: querySongBySlug,
-      params: { slug },
-      tags: ['song'],
-    });
-    return song;
+    return await sanityClient.fetch<Song>(querySongBySlug, { slug });
   } catch (error) {
     console.error('Failed to fetch song:', error);
     return null;
   }
+}
+
+export async function generateStaticParams() {
+  const querySongStaticParams = groq`*[_type=='song'] { slug }`;
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(querySongStaticParams);
+  return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
 }

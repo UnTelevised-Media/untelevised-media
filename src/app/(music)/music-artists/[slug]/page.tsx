@@ -11,7 +11,9 @@ import urlForImage from '@/util/urlForImage';
 import { getSongArtwork, getSongArtworkAlt } from '@/util/getSongArtwork';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { cacheLife, cacheTag } from 'next/cache';
+import { groq } from 'next-sanity';
+import sanityClient from '@/lib/sanity/lib/client';
 import { queryMusicArtistBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Calendar, MapPin, ExternalLink, Instagram, Twitter, Youtube } from 'lucide-react';
 
@@ -470,17 +472,21 @@ export default async function MusicArtistPage({ params }: Props) {
   );
 }
 
-// Fetch artist data by slug
+// Fetch artist data by slug — cached per-function with fine-grained tags
 async function getMusicArtistBySlug(slug: string): Promise<ArtistWithContent | null> {
+  'use cache';
+  cacheTag('musicArtist', `musicArtist-${slug}`);
+  cacheLife('hours');
   try {
-    const artist = await sanityFetch<ArtistWithContent>({
-      query: queryMusicArtistBySlug,
-      params: { slug },
-      tags: ['musicArtist'],
-    });
-    return artist;
+    return await sanityClient.fetch<ArtistWithContent>(queryMusicArtistBySlug, { slug });
   } catch (error) {
     console.error('Failed to fetch artist:', error);
     return null;
   }
+}
+
+export async function generateStaticParams() {
+  const queryMusicArtistStaticParams = groq`*[_type=='musicArtist'] { slug }`;
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryMusicArtistStaticParams);
+  return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
 }

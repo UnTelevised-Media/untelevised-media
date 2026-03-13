@@ -39,6 +39,9 @@ const nextConfig: NextConfig = {
     // * This is used for Sanity to prevent the client from accessing the Sanity API Read Token
     taint: true,
     // typedRoutes: true, — enable once Turbopack supports it fully
+    // Enables 'use cache' directive + cacheTag()/cacheLife() from next/cache
+    // for fine-grained per-function cache control (used on music pages)
+    useCache: true,
   },
 };
 

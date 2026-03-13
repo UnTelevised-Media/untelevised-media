@@ -10,7 +10,9 @@ import { RectangleAd, BannerAd } from '@/components/ads';
 import urlForImage from '@/util/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { cacheLife, cacheTag } from 'next/cache';
+import { groq } from 'next-sanity';
+import sanityClient from '@/lib/sanity/lib/client';
 import { queryAlbumBySlug } from '@/lib/sanity/lib/queries';
 import { Disc, Calendar, Clock, ExternalLink, Music } from 'lucide-react';
 
@@ -427,17 +429,21 @@ export default async function AlbumPage({ params }: Props) {
   );
 }
 
-// Fetch album data by slug
+// Fetch album data by slug — cached per-function with fine-grained tags
 async function getAlbumBySlug(slug: string): Promise<AlbumWithSongs | null> {
+  'use cache';
+  cacheTag('album', `album-${slug}`);
+  cacheLife('hours');
   try {
-    const album = await sanityFetch<AlbumWithSongs>({
-      query: queryAlbumBySlug,
-      params: { slug },
-      tags: ['album'],
-    });
-    return album;
+    return await sanityClient.fetch<AlbumWithSongs>(queryAlbumBySlug, { slug });
   } catch (error) {
     console.error('Failed to fetch album:', error);
     return null;
   }
+}
+
+export async function generateStaticParams() {
+  const queryAlbumStaticParams = groq`*[_type=='album'] { slug }`;
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryAlbumStaticParams);
+  return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
 }
