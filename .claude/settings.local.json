@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app:*)",
+      "Bash(robocopy:*)",
+      "Bash(echo:*)",
+      "Bash(for item in app eslint.config.mjs next.config.ts next-env.d.ts package.json package-lock.json postcss.config.mjs public README.md tsconfig.json)",
+      "Bash(do cp -r \"$item\" \"../untelevised-media/$item\")",
+      "Bash(done)",
+      "Bash(npm install:*)",
+      "Bash(sanity init:*)",
+      "Bash(sanity projects list:*)",
+      "Bash(sanity tokens create:*)",
+      "Bash(sanity tokens --help:*)",
+      "Bash(sanity tokens add --help:*)",
+      "Bash(SANITY_STUDIO_PROJECT_ID=ypejdt32 sanity tokens add:*)",
+      "Bash(sanity tokens add:*)",
+      "Bash(find:*)",
+      "Bash(sanity cors:*)",
+      "Bash(vercel env:*)",
+      "Bash(npm ls:*)",
+      "Bash(vercel ls:*)",
+      "Bash(vercel inspect:*)",
+      "Bash(test:*)",
+      "Bash(npm show:*)",
+      "Bash(printf:*)",
+      "Bash(npm run build:*)",
+      "Read(//r/Development/untelevised-media/src/app/\\(user\\)/**)",
+      "Bash(dir \"r:\\\\Development\\\\untelevised-media\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Windows\\Temp"
+    ]
+  }
+}
