@@ -2,6 +2,7 @@
 // src/app/(user)/articles/[slug]/page.tsx
 import { cache } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
@@ -190,6 +191,55 @@ export default async function Article({ params }: Props) {
             className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
           />
         </div>
+
+        {/* Related Articles */}
+        {article.relatedArticles && article.relatedArticles.length > 0 && (
+          <section className='mt-12'>
+            <h2 className='mb-6 text-2xl font-bold text-slate-900 dark:text-white'>
+              Related Articles
+            </h2>
+            <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+              {article.relatedArticles.map((related) => (
+                <Link
+                  key={related._id}
+                  href={`/articles/${related.slug}`}
+                  className='group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow transition-all hover:border-untele dark:border-slate-700 dark:bg-slate-800'
+                >
+                  {related.mainImage && (
+                    <div className='aspect-video overflow-hidden'>
+                      <Image
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        src={urlForImage(related.mainImage as any)?.url() ?? ''}
+                        alt={related.mainImage.alt ?? related.title}
+                        width={400}
+                        height={225}
+                        className='h-full w-full object-cover transition-transform group-hover:scale-105'
+                      />
+                    </div>
+                  )}
+                  <div className='flex flex-1 flex-col p-4'>
+                    <h3 className='mb-2 line-clamp-2 font-semibold text-slate-900 group-hover:text-untele dark:text-white'>
+                      {related.title}
+                    </h3>
+                    {related.description && (
+                      <p className='mb-3 line-clamp-2 flex-1 text-sm text-slate-600 dark:text-slate-400'>
+                        {related.description}
+                      </p>
+                    )}
+                    <div className='mt-auto flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>
+                      {related.author?.name && (
+                        <span className='font-medium'>{related.author.name}</span>
+                      )}
+                      {related.publishedAt && (
+                        <time>{formatDate(related.publishedAt)}</time>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Comments Section Placeholder */}
         <div className='mt-12'>{/* <Comments article={article}/> */}</div>
