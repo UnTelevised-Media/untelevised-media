@@ -24,8 +24,8 @@
   `src/app/(user)/donate/page.tsx` → title: "Support Independent Journalism"
   > Audit ref: `01`, `02`, `05`
 
-- [x] **Add `/public/og-default.jpg`** (1200×630 branded fallback)
-  Implemented as `src/app/(user)/opengraph-image.tsx` using Next.js `ImageResponse` (edge runtime). Removed broken static file reference from root layout metadata — Next.js file convention serves this automatically.
+- [ ] **Add `/public/og-default.jpg`** (1200×630 branded fallback)
+  Referenced in root layout `openGraph.images` but file does not exist — broken social preview on pages without a specific OG image.
   > Audit ref: `02`, `05`
 
 - [x] **Add Suspense boundary around `FeaturedStoriesGrid`**
