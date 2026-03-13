@@ -40,7 +40,7 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
   const canonicalUrl = getCanonicalUrl('articles', slug);
   const title = truncate(article.title, 60);
   const description = truncate(article.description, 160);
-  const keywords = article.keywords ? article.keywords.split(',').map((k) => k.trim()) : undefined;
+  const keywords = article.keywords?.length ? article.keywords : undefined;
 
   return {
     title,

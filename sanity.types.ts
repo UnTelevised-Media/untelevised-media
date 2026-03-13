@@ -855,7 +855,7 @@ export type Article = {
   title?: string;
   hasEmbeddedVideo?: boolean;
   videoLink?: string;
-  keywords?: string;
+  keywords?: Array<string>;
   description?: string;
   author?: AuthorReference;
   mainImage?: {
@@ -1476,7 +1476,7 @@ export type QueryAllArticlesResult = Array<{
   title?: string;
   hasEmbeddedVideo?: boolean;
   videoLink?: string;
-  keywords?: string;
+  keywords?: Array<string>;
   description: string | null;
   author: {
     _id: string;
@@ -3450,7 +3450,7 @@ export type QueryArticleBySlugResult = {
   title?: string;
   hasEmbeddedVideo?: boolean;
   videoLink?: string;
-  keywords?: string;
+  keywords?: Array<string>;
   description?: string;
   author: {
     _id: string;
@@ -3586,7 +3586,7 @@ export type QueryArticleByCategoryResult = Array<{
   title?: string;
   hasEmbeddedVideo?: boolean;
   videoLink?: string;
-  keywords?: string;
+  keywords?: Array<string>;
   description: string | null;
   author: {
     _id: string;
@@ -3811,7 +3811,7 @@ export type QueryAuthorBySlugResult = {
     title?: string;
     hasEmbeddedVideo?: boolean;
     videoLink?: string;
-    keywords?: string;
+    keywords?: Array<string>;
     description?: string;
     author: {
       _id: string;
@@ -6014,7 +6014,7 @@ export type QueryAllArticleUrlsResult = Array<{
   title: string | null;
   hasEmbeddedVideo?: boolean;
   videoLink?: string;
-  keywords?: string;
+  keywords?: Array<string>;
   description?: string;
   author?: AuthorReference;
   mainImage?: {

@@ -132,12 +132,8 @@
   Created root-level `sanity.config.ts` (CLI-only, no `'use client'`, relative imports). `pnpm sanity schema extract && pnpm sanity typegen generate` now runs clean — 59 queries, 50 schema types. Fixed 10 duplicate query names across 9 files to eliminate all TypeGen warnings.
   > Audit ref: `03`, `05`
 
-- [ ] **`keywords` field migration: string → array**
-  Article schema `keywords` is a plain `string`. Migrate to `string[]` with tags layout. Requires content migration script:
-  ```bash
-  pnpm sanity migration create keywords-string-to-array
-  ```
-  After migration, update `buildArticleMetadata` to pass array directly.
+- [x] **`keywords` field migration: string → array**
+  Schema updated to `array of string` with `options: { layout: 'tags' }` (type-and-Enter or comma to add tags). Migration script at `migrations/keywords-string-to-array/index.ts` — run `pnpm sanity migration run keywords-string-to-array --dry-run` then without `--dry-run` to convert existing comma-separated strings. Updated `buildArticleMetadata`, `generateArticleMetadata`, and `NewsArticleStructuredData` (joins array → string for JSON-LD).
   > Audit ref: `01`, `02`, `03`, `05`
 
 - [ ] **Dynamic OG image generation with `next/og`**

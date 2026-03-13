@@ -45,7 +45,7 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
           },
         },
         articleSection: article.categories?.[0]?.title,
-        keywords: article.keywords,
+        keywords: Array.isArray(article.keywords) ? article.keywords.join(', ') : article.keywords,
         url: canonicalUrl,
       },
       ...(article.faqs?.length
