@@ -1,7 +1,13 @@
 /* eslint-disable react/function-component-definition */
 // src/app/(user)/staff/page.tsx
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import urlForImage from '@/util/urlForImage';
+
+export const metadata: Metadata = {
+  title: 'Our Team — UnTelevised Media',
+  description: 'Meet the journalists, editors, and contributors behind UnTelevised Media.',
+};
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import AuthorLinks from '@/components/global/AuthorLinks';
 import resolveHref from '@/util/resolveHref';
