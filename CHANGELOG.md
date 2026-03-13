@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- New Sanity schema `seoObject` — reusable SEO object with metaTitle, metaDescription, ogImage, noIndex, canonicalUrl fields; added to `article` schema
+- New Sanity schema `siteSettings` — singleton for global brand config (name, description, logo, social links, foundingDate, defaultOgImage)
+- EEAT fields on `article` schema: `location`, `updatedAt`, `corrections`, `sources[]`
+- EEAT fields on `author` schema: `credentials[]`, `expertise[]`, `sameAs[]`, `location`, `isActive`
 - `GlobalStructuredData` component — NewsMediaOrganization + WebSite + SearchAction schema.org rendered in `(user)/layout.tsx`
 - `NewsArticleStructuredData` component — NewsArticle + BreadcrumbList schema.org on every article page
 - `generateMetadata()` to `/articles/[slug]` — unique title, description, OG image, canonical URL per article
