@@ -274,6 +274,20 @@ export const queryArticleBySlug = groq`
       ...,
       author->,
       categories[]->,
+      seo,
+      faqs,
+      sources,
+      updatedAt,
+      leadParagraph,
+      relatedArticles[]-> {
+        _id,
+        title,
+        "slug": slug.current,
+        mainImage,
+        description,
+        publishedAt,
+        author-> { name }
+      },
       'comments': *[
         _type == 'comment' &&
         article._ref == ^._id &&
