@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Performance
+
+#### P1 — Bundle Size / Waterfalls
+- Remove unused `categories` fetch from homepage `Promise.all` — eliminates one extra Sanity round-trip on every homepage load
+- Defer `CookieConsentBanner` and `AdBlockerMessage` (framer-motion) via `next/dynamic` with `ssr: false` — removes framer-motion from the initial JS bundle on every page
+- Defer `TimelineJSVisualization` (framer-motion) via `next/dynamic` on timeline pages — only loads when a timeline page is visited
+- Defer `react-tweet` `Tweet` component and `react-syntax-highlighter` `Prism` via `next/dynamic` in `RichTextComponents` — only loaded when article body contains those block types
+
 ### Added
 - Event schema.org structured data on `/live-event/[slug]` pages (eventStatus, location, organizer, image)
 - Canonical URL, Twitter card, and `alternates.canonical` to `/music-artists/[slug]` metadata

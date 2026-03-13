@@ -8,7 +8,14 @@ import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { Calendar, Clock, Users, Star, ArrowLeft, Bookmark } from 'lucide-react';
 
-import TimelineJSVisualization from '@/components/timeline/TimelineJSVisualization';
+import dynamic from 'next/dynamic';
+import LoadingSpinner from '@/components/global/LoadingSpinner';
+
+// Defer framer-motion heavy timeline visualization — only needed after page load
+const TimelineJSVisualization = dynamic(
+  () => import('@/components/timeline/TimelineJSVisualization'),
+  { loading: () => <LoadingSpinner /> },
+);
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 import { Button } from '@/components/ui/button';

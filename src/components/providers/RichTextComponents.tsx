@@ -2,12 +2,19 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import urlForImage from '@/u/urlForImage';
-import { Tweet } from 'react-tweet';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+// Defer heavy embed libraries — only loaded when content contains these block types
+const Tweet = dynamic(() => import('react-tweet').then((m) => m.Tweet), { ssr: false });
+const SyntaxHighlighter = dynamic(
+  () => import('react-syntax-highlighter').then((m) => m.Prism),
+  { ssr: false },
+);
 
 export const RichTextComponents = {
   types: {
