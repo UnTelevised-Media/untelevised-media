@@ -124,6 +124,11 @@ export default async function Article({ params }: Props) {
                     <span className='flex items-center text-sm'>📍 {article.location}</span>
                   )}
                   <time className='text-sm'>{formatDate(getArticleDate(article))}</time>
+                  {article.updatedAt && article.updatedAt !== article.publishedAt && (
+                    <span className='text-sm text-slate-400'>
+                      Updated: {formatDate(article.updatedAt)}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
