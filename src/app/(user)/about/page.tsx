@@ -2,6 +2,13 @@
 // src/app/(user)/about/page.tsx
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About UnTelevised Media',
+  description:
+    "Learn about UnTelevised Media — independent journalism covering stories mainstream media won't touch.",
+};
 
 export default function AboutPage() {
   return (
