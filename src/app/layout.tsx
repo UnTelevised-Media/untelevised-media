@@ -11,13 +11,9 @@ import dynamic from 'next/dynamic';
 import { ConsentProvider } from '@/lib/consent';
 import ConsentAwareAnalytics from '@/components/analytics/ConsentAwareAnalytics';
 
-// Defer framer-motion consent UI — not needed on initial paint
-const CookieConsentBanner = dynamic(() => import('@/components/consent/CookieConsentBanner'), {
-  ssr: false,
-});
-const AdBlockerMessage = dynamic(() => import('@/components/consent/AdBlockerMessage'), {
-  ssr: false,
-});
+// Defer framer-motion consent UI into a separate code-split chunk
+const CookieConsentBanner = dynamic(() => import('@/components/consent/CookieConsentBanner'));
+const AdBlockerMessage = dynamic(() => import('@/components/consent/AdBlockerMessage'));
 
 // // Import environment validation
 // import '@/lib/env';

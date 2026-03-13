@@ -1,5 +1,6 @@
 /* eslint-disable react/function-component-definition */
 // src/app/(user)/articles/[slug]/page.tsx
+import { cache } from 'react';
 import Image from 'next/image';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
@@ -30,7 +31,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article: Article = await sanityClient.fetch(queryArticleBySlug, { slug });
+  const article = await getArticleBySlug(slug);
   if (!article) return { title: 'Article Not Found' };
   return buildArticleMetadata(article, slug);
 }
@@ -197,10 +198,9 @@ export default async function Article({ params }: Props) {
   );
 }
 
-// Call the Sanity Fetch Function for the Article by Slug
-async function getArticleBySlug(slug: string): Promise<Article | null> {
+// React.cache deduplicates this fetch when called from both generateMetadata and the page component
+const getArticleBySlug = cache(async (slug: string): Promise<Article | null> => {
   try {
-    // Fetch article data from Sanity
     const article = await sanityFetch<Article>({
       query: queryArticleBySlug,
       params: { slug },
@@ -211,7 +211,7 @@ async function getArticleBySlug(slug: string): Promise<Article | null> {
     console.error('Failed to fetch article:', error);
     return null;
   }
-}
+});
 
 // Generate the static params for the article list
 export async function generateStaticParams() {

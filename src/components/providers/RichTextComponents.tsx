@@ -9,11 +9,10 @@ import urlForImage from '@/u/urlForImage';
 
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-// Defer heavy embed libraries — only loaded when content contains these block types
-const Tweet = dynamic(() => import('react-tweet').then((m) => m.Tweet), { ssr: false });
-const SyntaxHighlighter = dynamic(
-  () => import('react-syntax-highlighter').then((m) => m.Prism),
-  { ssr: false },
+// Code-split heavy embed libraries — loaded only when content contains these block types
+const Tweet = dynamic(() => import('react-tweet').then((m) => m.Tweet));
+const SyntaxHighlighter = dynamic(() =>
+  import('react-syntax-highlighter').then((m) => m.Prism),
 );
 
 export const RichTextComponents = {
