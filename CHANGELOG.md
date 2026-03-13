@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 #### P1 — Bundle Size / Waterfalls
 - Remove unused `categories` fetch from homepage `Promise.all` — eliminates one extra Sanity round-trip on every homepage load
-- Defer `CookieConsentBanner` and `AdBlockerMessage` (framer-motion) via `next/dynamic` with `ssr: false` — removes framer-motion from the initial JS bundle on every page
+- Defer `CookieConsentBanner` and `AdBlockerMessage` (framer-motion) via `next/dynamic` — code-splits framer-motion out of the initial JS bundle on every page
 - Defer `TimelineJSVisualization` (framer-motion) via `next/dynamic` on timeline pages — only loads when a timeline page is visited
 - Defer `react-tweet` `Tweet` component and `react-syntax-highlighter` `Prism` via `next/dynamic` in `RichTextComponents` — only loaded when article body contains those block types
 - Remove unused `styled-components` and `@types/styled-components` from `package.json`
@@ -21,6 +21,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Add `priority` to author hero photo on `/author/[slug]` — was LCP image without preload hint
 - Add `sizes` prop to homepage featured stories grid — prevents browser from fetching oversized images
 - Fix `Header.tsx` scroll handler: `requestAnimationFrame` throttle + `{ passive: true }` listener — eliminates forced reflows on scroll
+- Wrap `getArticleBySlug` and `getAuthorBySlug` in `React.cache()` — `generateMetadata` and the page component now share a single fetch per request instead of making two round-trips
+
+#### P3 — Tooling
+- Enable `typedRoutes: true` in `next.config.ts` experimental — catches broken internal `<Link href>` at build time
+- Wire up `@next/bundle-analyzer` (already installed) via `withBundleAnalyzer()` wrapper in `next.config.ts`
+- Add `analyze` npm script — run `npm run analyze` to open interactive bundle treemap
 
 ### SEO & AEO
 
