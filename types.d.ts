@@ -46,6 +46,26 @@ interface Article extends Base {
   hasEmbeddedTweet: boolean;
   eventDate: string;
   publishedAt: string;
+  updatedAt?: string;
+  leadParagraph?: string;
+  corrections?: string;
+  sources?: Array<{ label: string; url: string }>;
+  faqs?: Array<{ question: string; answer: string }>;
+  reviewedBy?: Author;
+  relatedArticles?: Array<{
+    _id: string;
+    title: string;
+    slug: string;
+    mainImage?: Image;
+    description?: string;
+    publishedAt: string;
+    author?: { name: string };
+  }>;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    ogImage?: Image;
+  };
   comments: Comment[];
 }
 

@@ -21,7 +21,7 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
         headline: article.title,
         description: article.description,
         datePublished: article.publishedAt,
-        dateModified: article.publishedAt,
+        dateModified: article.updatedAt ?? article._updatedAt ?? article.publishedAt,
         mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
         image: ogImageUrl
           ? { '@type': 'ImageObject', url: ogImageUrl, width: 1200, height: 630 }
