@@ -154,6 +154,13 @@ export default defineType({
       description:
         'Q&A pairs that appear in FAQPage structured data — increases AI citation chance',
     }),
+    defineField({
+      name: 'reviewedBy',
+      title: 'Reviewed By',
+      type: 'reference',
+      to: [{ type: 'author' }],
+      description: 'Editorial reviewer or fact-checker',
+    }),
     // SEO overrides
     defineField({
       name: 'seo',
