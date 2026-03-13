@@ -12,6 +12,8 @@ import liveEvent from './liveEvent';
 import policies from './policies';
 import post from './post';
 import videoContent from './videoContent';
+import seoObject from './seoObject';
+import siteSettings from './siteSettings';
 
 // Timeline schemas
 import timeline from './timeline';
@@ -59,6 +61,8 @@ export const schemaTypes = [
   policies,
   post,
   videoContent,
+  seoObject,
+  siteSettings,
 
   // Timeline schemas
   timeline,
@@ -106,6 +110,8 @@ export {
   policies,
   post,
   videoContent,
+  seoObject,
+  siteSettings,
 
   // Timeline schemas
   timeline,

@@ -281,6 +281,15 @@ export const queryArticleBySlug = groq`
       ],
     }`;
 
+export const queryCategoryBySlug = groq`
+  *[_type == "category" && slug.current == $slug][0] {
+    _id,
+    title,
+    description,
+    "slug": slug.current,
+  }
+`;
+
 export const queryArticleByCategory = groq`
   *[_type == 'article' && references(categories, *[_type == 'category' && slug.current == $slug]._id)] {
     ...,

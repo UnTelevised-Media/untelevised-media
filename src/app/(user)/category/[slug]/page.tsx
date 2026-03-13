@@ -5,16 +5,25 @@ import { groq } from 'next-sanity';
 import ArticleCardLg from '@/components/cards/ArticleCardLg';
 
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import { queryArticleByCategory } from '@/lib/sanity/lib/queries';
+import type { Metadata } from 'next';
+import { queryArticleByCategory, queryCategoryBySlug } from '@/lib/sanity/lib/queries';
 import resolveHref from '@/util/resolveHref';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
+import { buildCategoryMetadata } from '@/util/metadata';
 
 type Props = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const category: Category = await sanityClient.fetch(queryCategoryBySlug, { slug });
+  if (!category) return { title: 'Category Not Found' };
+  return buildCategoryMetadata(category, slug);
+}
 
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;

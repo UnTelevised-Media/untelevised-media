@@ -1,8 +1,15 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["jest", "node"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "types": [
+      "jest",
+      "node"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,7 +22,7 @@
     // "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -23,20 +30,41 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/c/*": ["./src/components/*"],
-      "@/l/*": ["./src/lib/*"],
-      "@/h/*": ["./src/hooks/*"],
-      "@/u/*": ["./src/util/*"],
-      "@/t/*": ["./src/models/types/*"],
-      "@/app/*": ["./src/app/*"],
-      "@/s/*": ["./src/server/*"],
-      "#/*": ["./*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/c/*": [
+        "./src/components/*"
+      ],
+      "@/l/*": [
+        "./src/lib/*"
+      ],
+      "@/h/*": [
+        "./src/hooks/*"
+      ],
+      "@/u/*": [
+        "./src/util/*"
+      ],
+      "@/t/*": [
+        "./src/models/types/*"
+      ],
+      "@/app/*": [
+        "./src/app/*"
+      ],
+      "@/s/*": [
+        "./src/server/*"
+      ],
+      "#/*": [
+        "./*"
+      ]
     },
     "rootDir": "./",
     "baseUrl": ".",
     "outDir": "./out",
-    "typeRoots": ["./node_modules/@types", "./src/models/types"]
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/models/types"
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -45,7 +73,10 @@
     ".next/types/**/*.ts",
     "src/lib/jest/jest.config.ts",
     "src/lib/jest/jest.setup.ts",
-    "build-utilities/generateRobots.mjs"
+    "build-utilities/generateRobots.mjs",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

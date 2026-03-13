@@ -13,17 +13,24 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
 import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 import resolveHref from '@/util/resolveHref';
+import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
-
-// export { generateMetadata } from '@/util/generateLiveEventMetadata';
+import { buildLiveEventMetadata, getSanityOgImageUrl } from '@/util/metadata';
 
 type Props = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const liveEvent: LiveEvent = await sanityClient.fetch(queryEventBySlug, { slug });
+  if (!liveEvent) return { title: 'Live Event Not Found' };
+  return buildLiveEventMetadata(liveEvent, slug);
+}
 
 export default async function LiveEvent({ params }: Props) {
   const { slug } = await params;
@@ -57,8 +64,35 @@ export default async function LiveEvent({ params }: Props) {
     return a.eventDate > b.eventDate ? -1 : a.eventDate < b.eventDate ? 1 : 0;
   });
 
+  const eventSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: liveEvent.title,
+    description: liveEvent.description,
+    startDate: liveEvent.eventDate,
+    eventStatus: liveEvent.isCurrentEvent
+      ? 'https://schema.org/EventScheduled'
+      : 'https://schema.org/EventCompleted',
+    eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
+    location: liveEvent.location
+      ? { '@type': 'Place', name: liveEvent.location }
+      : { '@type': 'VirtualLocation', url: `https://www.untelevised.media/live-event/${slug}/` },
+    image: getSanityOgImageUrl(liveEvent.mainImage),
+    organizer: {
+      '@type': 'NewsMediaOrganization',
+      '@id': 'https://www.untelevised.media/#organization',
+      name: 'UnTelevised Media',
+      url: 'https://www.untelevised.media',
+    },
+    url: `https://www.untelevised.media/live-event/${slug}/`,
+  };
+
   return (
     <>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
+      />
       <hr className='mx-auto mb-8 max-w-[95wv] border-untele md:max-w-[85vw]' />
       <article className='mx-auto max-w-[95vw] pb-28 md:max-w-[85vw] lg:px-10'>
         {/* Top Section: Image, Title, Date, Description  */}
