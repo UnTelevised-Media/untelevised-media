@@ -2,6 +2,13 @@
 // src/app/(user)/donate/page.tsx
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Support Independent Journalism',
+  description:
+    'Support UnTelevised Media and help fund independent investigative journalism.',
+};
 
 export default function DonatePage() {
   return (
