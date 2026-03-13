@@ -136,8 +136,8 @@
   Schema updated to `array of string` with `options: { layout: 'tags' }` (type-and-Enter or comma to add tags). Migration script at `migrations/keywords-string-to-array/index.ts` — run `pnpm sanity migration run keywords-string-to-array --dry-run` then without `--dry-run` to convert existing comma-separated strings. Updated `buildArticleMetadata`, `generateArticleMetadata`, and `NewsArticleStructuredData` (joins array → string for JSON-LD).
   > Audit ref: `01`, `02`, `03`, `05`
 
-- [ ] **Dynamic OG image generation with `next/og`**
-  `src/app/(user)/articles/[slug]/opengraph-image.tsx` — branded per-article OG with title, author, category overlay using `ImageResponse`.
+- [x] **Dynamic OG image generation with `next/og`**
+  `src/app/(user)/articles/[slug]/opengraph-image.tsx` — edge runtime ImageResponse. Fetches article via Sanity GROQ API (no client dependency), renders article mainImage as background with dark gradient overlay, category badge, title, author avatar+name, date, and UnTelevised branding. Falls back to dark branded card when no image exists.
   > Audit ref: `02`, `05`
 
 - [ ] **Migrate Sanity fetches to `use cache` directive (Next.js 16)**
