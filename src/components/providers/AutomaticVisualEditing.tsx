@@ -1,7 +1,7 @@
 /* eslint-disable react/function-component-definition */
 'use client';
 
-import { VisualEditing } from 'next-sanity';
+import { VisualEditing } from 'next-sanity/visual-editing';
 import { useEffect } from 'react';
 
 export default function AutomaticVisualEditing() {
