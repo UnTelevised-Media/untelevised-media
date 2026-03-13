@@ -8,19 +8,19 @@
 
 ## P1 — Critical / Quick Wins
 
-- [ ] **Wire `dateModified` into `NewsArticleStructuredData`**
+- [x] **Wire `dateModified` into `NewsArticleStructuredData`**
   `src/components/seo/NewsArticleStructuredData.tsx` — `updatedAt` is in the schema but `dateModified` in the structured data may still be using `publishedAt`. Fix: pass `article.updatedAt ?? article.publishedAt` to `dateModified`.
   > Audit ref: `02`, `05`
 
-- [ ] **Add `export const metadata` to `/about` page**
+- [x] **Add `export const metadata` to `/about` page**
   `src/app/(user)/about/page.tsx` → title: "About UnTelevised Media"
   > Audit ref: `01`, `02`, `05`
 
-- [ ] **Add `export const metadata` to `/staff` page**
+- [x] **Add `export const metadata` to `/staff` page**
   `src/app/(user)/staff/page.tsx` → title: "Our Team — UnTelevised Media"
   > Audit ref: `01`, `02`, `05`
 
-- [ ] **Add `export const metadata` to `/donate` page**
+- [x] **Add `export const metadata` to `/donate` page**
   `src/app/(user)/donate/page.tsx` → title: "Support Independent Journalism"
   > Audit ref: `01`, `02`, `05`
 
@@ -28,16 +28,11 @@
   Referenced in root layout `openGraph.images` but file does not exist — broken social preview on pages without a specific OG image.
   > Audit ref: `02`, `05`
 
-- [ ] **Add Suspense boundary around `FeaturedStoriesGrid`**
+- [x] **Add Suspense boundary around `FeaturedStoriesGrid`**
   `src/app/(user)/page.tsx` ~line 168 — not wrapped in Suspense, blocks full page render on slow Sanity fetch.
-  ```tsx
-  <Suspense fallback={<GridSkeleton count={6} />}>
-    <FeaturedStoriesGrid articles={featuredStories} />
-  </Suspense>
-  ```
   > Audit ref: `01`, `04`
 
-- [ ] **Replace `sanityClient.fetch` with `sanityFetch` in `generateStaticParams` (articles)**
+- [x] **Replace `sanityClient.fetch` with `sanityFetch` in `generateStaticParams` (articles)**
   `src/app/(user)/articles/[slug]/page.tsx:219` — raw client bypasses ISR tag system.
   > Audit ref: `01`, `04`
 
@@ -45,57 +40,51 @@
 
 ## P2 — High Value
 
-- [ ] **Add `leadParagraph` field to article Sanity schema**
+- [x] **Add `leadParagraph` field to article Sanity schema**
   `src/models/schema/article.ts` — 2–3 sentence plain text summary for AI extraction and featured snippets.
-  ```ts
-  defineField({ name: 'leadParagraph', title: 'Lead / Summary', type: 'text', rows: 3 })
-  ```
   > Audit ref: `02`, `03`
 
-- [ ] **Add `faqs[]` field to article Sanity schema**
+- [x] **Add `faqs[]` field to article Sanity schema**
   `src/models/schema/article.ts` — array of question/answer objects for FAQPage structured data.
   > Audit ref: `02`, `03`, `05`
 
-- [ ] **Render `FAQPage` structured data in `NewsArticleStructuredData`**
+- [x] **Render `FAQPage` structured data in `NewsArticleStructuredData`**
   Only render when `article.faqs?.length > 0`. Depends on schema field above.
   > Audit ref: `02`, `05`
 
-- [ ] **Add `reviewedBy` reference field to article schema**
+- [x] **Add `reviewedBy` reference field to article schema**
   `src/models/schema/article.ts` — reference to author, for editorial fact-checker.
   > Audit ref: `03`
 
-- [ ] **Add `relatedArticles[]` field to article Sanity schema**
+- [x] **Add `relatedArticles[]` field to article Sanity schema**
   `src/models/schema/article.ts` — up to 5 references to related articles (max: 5).
   > Audit ref: `03`, `05`
 
-- [ ] **Expand `queryArticleBySlug` GROQ to include new fields**
+- [x] **Expand `queryArticleBySlug` GROQ to include new fields**
   Add `seo`, `faqs`, `sources`, `updatedAt`, and `relatedArticles[]->` to the query in `src/lib/sanity/lib/queries.ts`.
   > Audit ref: `05`
 
-- [ ] **Render Related Articles section on article pages**
+- [x] **Render Related Articles section on article pages**
   `src/app/(user)/articles/[slug]/page.tsx` — render `relatedArticles` at end of article body. Depends on schema + GROQ changes above.
   > Audit ref: `02`, `05`
 
-- [ ] **Add `Person` structured data to author pages**
+- [x] **Add `Person` structured data to author pages**
   `src/app/(user)/author/[slug]/page.tsx` — render schema.org `Person` with `sameAs`, `knowsAbout`, `worksFor` fields.
   > Audit ref: `02`, `05`
 
-- [ ] **Display `updatedAt` in article UI near byline**
+- [x] **Display `updatedAt` in article UI near byline**
   Show "Updated: {date}" when `updatedAt > publishedAt`. Uses existing schema field.
   > Audit ref: `02`
 
-- [ ] **Add LQIP blur placeholders to images**
-  `plaiceholder` is installed but never used. Apply to article cards, homepage hero, author photos, event images using Sanity low-res URL:
-  ```tsx
-  <Image placeholder="blur" blurDataURL={urlForImage(image).width(20).url()} ... />
-  ```
+- [x] **Add LQIP blur placeholders to images**
+  Applied to homepage featured stories grid, article hero image, and author photo using Sanity low-res URL with `.width(20).blur(10).url()`.
   > Audit ref: `01`, `04`
 
-- [ ] **Add `seoObject` field to `liveEvent`, `category`, `musicArtist`, `album`, `song` schemas**
+- [x] **Add `seoObject` field to `liveEvent`, `category`, `musicArtist`, `album`, `song` schemas**
   Currently only `article` has the `seoObject` field. Purely additive — no migration needed.
   > Audit ref: `03`
 
-- [ ] **Add `endDate` and `eventStatus` fields to `liveEvent` schema**
+- [x] **Add `endDate` and `eventStatus` fields to `liveEvent` schema**
   `src/models/schema/liveEvent.ts` — needed for complete Event structured data.
   > Audit ref: `03`
 
@@ -111,24 +100,24 @@
   Once pages are built: `lyrics/[slug]`, `music-artists/[slug]`, `albums/[slug]` all lack `generateStaticParams`. Follow the article page pattern.
   > Audit ref: `01`
 
-- [ ] **Verify `await params` pattern on all dynamic routes**
-  Confirm `live-event/[slug]`, `author/[slug]`, `category/[slug]` all use `Promise<{ slug: string }>` (Next.js 15 async params).
+- [x] **Verify `await params` pattern on all dynamic routes**
+  Confirmed `live-event/[slug]`, `author/[slug]`, `category/[slug]` all use `Promise<{ slug: string }>` — no changes needed.
   > Audit ref: `01`
 
-- [ ] **Verify trailing slash consistency in all structured data URLs**
-  `next.config.ts` has `trailingSlash: true`. Spot-check all `@id` and `item` URLs in `NewsArticleStructuredData` and `GlobalStructuredData` for consistent trailing slashes.
+- [x] **Verify trailing slash consistency in all structured data URLs**
+  Fixed missing trailing slashes in `NewsArticleStructuredData` publisher url and `GlobalStructuredData` organization and website urls.
   > Audit ref: `01`, `02`
 
 - [ ] **Server-hoist logo out of `Header.tsx` client component**
   `src/components/global/Header.tsx` — extract `<Image>` logo as a separate server component passed as a child/slot to the client Header to prevent re-renders on scroll/nav.
   > Audit ref: `04`
 
-- [ ] **Add `generateMetadata` to remaining static pages**
-  `/secure-contact`, `/whistleblower`, `/join`, `/support`, `/lyrics` (index), `/music-artists` (index).
+- [x] **Add `generateMetadata` to remaining static pages**
+  Added to `/support` (server component metadata export) and layout files for `/secure-contact`, `/whistleblower`, `/join` (client components that require layout-level metadata).
   > Audit ref: `02`
 
-- [ ] **Add `siteSettings` singleton to Sanity Studio structure**
-  `structure.ts` — add singleton desk item for `siteSettings` if not already present.
+- [x] **Add `siteSettings` singleton to Sanity Studio structure**
+  `structure.ts` — singleton desk item added, filtered from `documentTypeListItems` to prevent duplication.
   > Audit ref: `03`
 
 - [ ] **Resolve font loading duplication**
@@ -139,11 +128,12 @@
 
 ## P4 — Future / Low Priority
 
-- [ ] **Run Sanity TypeGen**
+- [ ] **Run Sanity TypeGen** _(skipped — requires sanity.cli.ts in project root)_
   ```bash
   pnpm sanity typegen generate
   ```
   Produces `sanity.types.ts`. Replace manual `Article`, `LiveEvent`, etc. type interfaces to eliminate schema/type drift.
+  Note: TypeGen fails with `ProjectRootNotFoundError` because `sanity.cli.ts` is in `src/lib/sanity/` not the project root. Requires moving the CLI config or creating a root-level symlink.
   > Audit ref: `03`, `05`
 
 - [ ] **`keywords` field migration: string → array**
