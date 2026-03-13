@@ -18,8 +18,75 @@ export const queryLiveEvents = groq`
         eventDate,
         publishedAt,
     }
-  } 
+  }
   | order(_createdAt desc)
+`;
+
+export const queryPastEvents = groq`
+  *[_type=='liveEvent' && isCurrentEvent == false] {
+    ...,
+    description,
+    title,
+    slug,
+    eventDate,
+    mainImage,
+    subtitle,
+    location,
+    videoLink,
+    keywords,
+    eventTag[]->,
+    keyEvent[]->{
+      title,
+      slug,
+      eventDate,
+      description
+    },
+    relatedArticles[]-> {
+      slug,
+      _id,
+      title,
+      _createdAt,
+      description,
+      eventDate,
+      publishedAt,
+      mainImage
+    }
+  }
+  | order(eventDate desc)
+`;
+
+export const queryPastEventsWithPagination = groq`
+  *[_type=='liveEvent' && isCurrentEvent == false] {
+    ...,
+    description,
+    title,
+    slug,
+    eventDate,
+    mainImage,
+    subtitle,
+    location,
+    videoLink,
+    keywords,
+    eventTag[]->,
+    keyEvent[]->{
+      title,
+      slug,
+      eventDate,
+      description
+    },
+    relatedArticles[]-> {
+      slug,
+      _id,
+      title,
+      _createdAt,
+      description,
+      eventDate,
+      publishedAt,
+      mainImage
+    }
+  }
+  | order(eventDate desc)
+  [$start...$end]
 `;
 
 export const queryEventBySlug = groq`
@@ -47,6 +114,159 @@ export const queryAllArticles = groq`
     publishedAt,
   }
   | order(_createdAt desc)
+`;
+
+// Music/Lyrics Queries
+export const queryAllSongs = groq`
+  *[_type=='song'] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    contributingArtists[]{
+      artist->,
+      role
+    },
+    album->{
+      ...,
+      artist->
+    },
+    trackArt
+  }
+  | order(_createdAt desc)
+`;
+
+export const querySongBySlug = groq`
+  *[_type == "song" && slug.current == $slug][0] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    contributingArtists[]{
+      artist->,
+      role
+    },
+    album->{
+      ...,
+      artist->,
+      featuredArtists[]->
+    },
+    trackArt
+  }
+`;
+
+export const queryFeaturedSongs = groq`
+  *[_type=='song' && isFeatured == true] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    album->{
+      title,
+      albumArt
+    },
+    trackArt
+  }
+  | order(_createdAt desc)
+  [0...6]
+`;
+
+export const queryAllMusicArtists = groq`
+  *[_type=='musicArtist'] {
+    ...,
+  }
+  | order(name asc)
+`;
+
+export const queryMusicArtistBySlug = groq`
+  *[_type == "musicArtist" && slug.current == $slug][0] {
+    ...,
+    "songs": *[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)] {
+      ...,
+      primaryArtist->,
+      featuredArtists[]->,
+      album->{
+        title,
+        albumArt,
+        releaseDate
+      },
+      trackArt
+    } | order(releaseDate desc),
+    "albums": *[_type == "album" && (artist._ref == ^._id || ^._id in featuredArtists[]._ref)] {
+      ...,
+      artist->,
+      featuredArtists[]->
+    } | order(releaseDate desc)
+  }
+`;
+
+export const queryFeaturedMusicArtists = groq`
+  *[_type=='musicArtist' && isFeatured == true] {
+    ...,
+    "songCount": count(*[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)])
+  }
+  | order(name asc)
+  [0...8]
+`;
+
+export const queryAllAlbums = groq`
+  *[_type=='album'] {
+    ...,
+    artist->,
+    featuredArtists[]->,
+  }
+  | order(releaseDate desc)
+`;
+
+export const queryAlbumBySlug = groq`
+  *[_type == "album" && slug.current == $slug][0] {
+    ...,
+    artist->,
+    featuredArtists[]->,
+    "songs": *[_type == "song" && album._ref == ^._id] {
+      ...,
+      primaryArtist->,
+      featuredArtists[]->,
+      trackArt
+    } | order(trackNumber asc)
+  }
+`;
+
+export const queryFeaturedAlbums = groq`
+  *[_type=='album' && isFeatured == true] {
+    ...,
+    artist->,
+    featuredArtists[]->
+  }
+  | order(releaseDate desc)
+  [0...6]
+`;
+
+export const querySongsByArtist = groq`
+  *[_type == "song" && (primaryArtist._ref == $artistId || $artistId in featuredArtists[]._ref)] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    album->{
+      title,
+      albumArt,
+      releaseDate
+    },
+    trackArt
+  }
+  | order(releaseDate desc)
+`;
+
+export const queryRecentSongs = groq`
+  *[_type=='song'] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    album->{
+      title,
+      albumArt
+    },
+    trackArt
+  }
+  | order(releaseDate desc)
+  [0...10]
 `;
 
 export const queryArticleBySlug = groq`
@@ -100,6 +320,180 @@ export const queryAuthorBySlug = groq`
       publishedAt,
     }
   }
+`;
+
+// Timeline Queries
+export const queryAllTimelines = groq`
+  *[_type=='timeline' && isPublished == true] {
+    ...,
+    author->,
+    collaborators[]->,
+    categories[]->,
+    'eventCount': count(events),
+  }
+  | order(publishedAt desc)
+`;
+
+export const queryFeaturedTimelines = groq`
+  *[_type=='timeline' && isPublished == true && isFeatured == true] {
+    ...,
+    author->,
+    categories[]->,
+    'eventCount': count(events),
+  }
+  | order(publishedAt desc)
+  [0...6]
+`;
+
+export const queryTimelineBySlug = groq`
+  *[_type == "timeline" && slug.current == $slug][0] {
+    ...,
+    author->,
+    collaborators[]->,
+    categories[]->,
+    events[]->{
+      ...,
+      author->,
+      timelineCategories[]->,
+      relatedArticles[]->{
+        slug,
+        title,
+        _id,
+        publishedAt,
+        mainImage
+      },
+      relatedLiveEvents[]->{
+        slug,
+        title,
+        _id,
+        eventDate,
+        mainImage
+      }
+    }
+  }
+`;
+
+export const queryTimelineEvents = groq`
+  *[_type=='timelineEvent' && isPublished == true] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
+`;
+
+export const queryTimelineEventsByDateRange = groq`
+  *[_type=='timelineEvent' && isPublished == true && eventDate >= $startDate && eventDate <= $endDate] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate asc)
+`;
+
+export const queryTimelineEventsByCategory = groq`
+  *[_type=='timelineEvent' && isPublished == true && references($categoryId)] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
+`;
+
+export const queryTimelinesByCategory = groq`
+  *[_type=='timeline' && isPublished == true && references($categoryId)] {
+    ...,
+    author->,
+    collaborators[]->,
+    categories[]->,
+    'eventCount': count(events),
+  }
+  | order(publishedAt desc)
+`;
+
+export const queryMilestoneEvents = groq`
+  *[_type=='timelineEvent' && isPublished == true && isMilestone == true] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
+`;
+
+export const queryTimelineEventBySlug = groq`
+  *[_type == "timelineEvent" && slug.current == $slug][0] {
+    ...,
+    author->,
+    timelineCategories[]->,
+    relatedArticles[]->{
+      slug,
+      title,
+      _id,
+      publishedAt,
+      mainImage,
+      description,
+      author->
+    },
+    relatedLiveEvents[]->{
+      slug,
+      title,
+      _id,
+      eventDate,
+      mainImage,
+      description
+    },
+    relatedTimelineEvents[]->{
+      slug,
+      title,
+      _id,
+      eventDate,
+      eventType,
+      importanceLevel,
+      mainImage
+    }
+  }
+`;
+
+export const queryTimelineCategories = groq`
+  *[_type == "timelineCategory" && isActive == true] {
+    ...,
+    parentCategory->,
+    'eventCount': count(*[_type == 'timelineEvent' && references(^._id)])
+  }
+  | order(order asc)
+`;
+
+export const queryRecentTimelineEvents = groq`
+  *[_type=='timelineEvent' && isPublished == true] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
+  [0...10]
+`;
+
+export const queryTimelineEventsByImportance = groq`
+  *[_type=='timelineEvent' && isPublished == true && importanceLevel == $importance] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
+`;
+
+export const queryTimelineSearch = groq`
+  *[_type=='timelineEvent' && isPublished == true && (
+    title match $searchTerm + "*" ||
+    description match $searchTerm + "*" ||
+    location match $searchTerm + "*" ||
+    tags[] match $searchTerm + "*"
+  )] {
+    ...,
+    author->,
+    timelineCategories[]->,
+  }
+  | order(eventDate desc)
 `;
 
 export const queryPoliciesList = groq`

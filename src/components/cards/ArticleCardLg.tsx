@@ -14,9 +14,12 @@ const ArticleCardLg = ({ post }: Props) => {
       <div className='relative h-80 w-full drop-shadow-xl transition-transform duration-200 ease-out group-hover:scale-105'>
         <Image
           className='rounded-md object-cover object-left lg:object-center'
-          src={urlForImage(post.mainImage as any)?.url() ?? ''}
+          src={
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            urlForImage(post.mainImage as any)?.url() ?? ''
+          }
           fill
-          alt={post.mainImage?.alt || 'No Alt Tag Set'}
+          alt={post.mainImage?.alt ?? 'No Alt Tag Set'}
         />
         <div className='absolute bottom-0 flex w-full justify-between rounded bg-slate-900 bg-opacity-20 px-5 py-2 text-slate-200 drop-shadow-lg backdrop-blur-lg'>
           <div>

@@ -4,12 +4,12 @@ import localFont from 'next/font/local';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { Toaster } from '@/components/ui/toaster';
+import { ConsentProvider } from '@/lib/consent';
+import { CookieConsentBanner, AdBlockerMessage } from '@/components/consent';
+import ConsentAwareAnalytics from '@/components/analytics/ConsentAwareAnalytics';
 
 // // Import environment validation
 // import '@/lib/env';
@@ -78,24 +78,29 @@ const RootLayout = ({
         style={{ fontFamily: inter.style.fontFamily }}
       >
         <ErrorBoundary>
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='system'
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div className='relative flex min-h-screen flex-col'>
-              <main className='flex-1'>
-                <ErrorBoundary>{children}</ErrorBoundary>
-              </main>
-            </div>
-            <Toaster />
-          </ThemeProvider>
-        </ErrorBoundary>
+          <ConsentProvider>
+            <ThemeProvider
+              attribute='class'
+              defaultTheme='system'
+              enableSystem
+              disableTransitionOnChange
+            >
+              <div className='relative flex min-h-screen flex-col'>
+                <main className='flex-1'>
+                  <ErrorBoundary>{children}</ErrorBoundary>
+                </main>
+              </div>
+              <Toaster />
 
-        {/* Analytics */}
-        <Analytics />
-        <SpeedInsights />
+              {/* Consent Management */}
+              <CookieConsentBanner />
+              <AdBlockerMessage />
+            </ThemeProvider>
+
+            {/* Consent-Aware Analytics */}
+            <ConsentAwareAnalytics gtmId={process.env.GTM_ID} />
+          </ConsentProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

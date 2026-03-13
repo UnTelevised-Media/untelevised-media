@@ -1,12 +1,14 @@
 // Debug logging API endpoint
 import { NextRequest, NextResponse } from 'next/server';
 
+// eslint-disable-next-line import/prefer-default-export
 export async function POST(request: NextRequest) {
   try {
     const { message } = await request.json();
 
     // Log to server console with timestamp
     const timestamp = new Date().toISOString();
+    // eslint-disable-next-line no-console
     console.log(`[${timestamp}] TICKER DEBUG: ${message}`);
 
     return NextResponse.json({ success: true });

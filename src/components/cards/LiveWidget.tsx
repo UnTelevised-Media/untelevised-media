@@ -34,7 +34,10 @@ export default function LiveWidget({ liveEvents }: Props) {
                 {liveEvent.mainImage && (
                   <Image
                     className='rounded-md object-cover object-left lg:object-center'
-                    src={urlForImage(liveEvent.mainImage as any)?.url() ?? ''}
+                    src={
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      urlForImage(liveEvent.mainImage as any)?.url() ?? ''
+                    }
                     fill
                     alt='Post Main Image'
                   />

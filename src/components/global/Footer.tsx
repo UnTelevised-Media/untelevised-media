@@ -68,6 +68,15 @@ async function Footer() {
             ))}
         </div>
 
+        {/* Music Section */}
+        <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
+          <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
+            Music & Artists
+          </h4>
+          <ClientSideRoute route='/lyrics'>Music & Lyrics</ClientSideRoute>
+          <ClientSideRoute route='/music-artists'>Featured Artists</ClientSideRoute>
+        </div>
+
         {/* Media */}
         <h4 className='pb-2 text-lg font-semibold text-foreground underline md:hidden'>Media</h4>
         <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>

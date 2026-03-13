@@ -8,6 +8,8 @@ import LiveWidget from '@/components/cards/LiveWidget';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 import RawFeed from '@/components/homepage/RawFeed';
+import { SidebarAd, AD_CONFIG } from '@/components/ads';
+import TestAd from '@/components/debug/TestAd';
 
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAllArticles, queryLiveEvents, queryCategories } from '@/lib/sanity/lib/queries';
@@ -27,6 +29,8 @@ export default async function HomePage() {
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
+      {/* DEBUG TEST AD - Remove in production */}
+      {process.env.NODE_ENV === 'development' && <TestAd />}
       {/* BREAKING ALERT BAR */}
       {/* <div className='border-b-2 border-untele bg-untele/95 py-2'>
         <div className='mx-auto flex max-w-[1400px] items-center justify-center space-x-4 px-4'>
@@ -134,6 +138,14 @@ export default async function HomePage() {
                       DONATE NOW
                     </button>
                   </Link>
+                </div>
+
+                {/* Sidebar Ad */}
+                <div className='mt-4'>
+                  <SidebarAd
+                    slot={AD_CONFIG.AD_SLOTS.HOMEPAGE_SIDEBAR}
+                    className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                  />
                 </div>
               </div>
             </div>

@@ -70,7 +70,8 @@ interface Author extends Base {
 interface Image {
   _type: 'image';
   asset: Reference;
-  alt: string;
+  alt?: string;
+  [key: string]: any; // Allow additional properties for Sanity compatibility
 }
 
 interface Reference {
@@ -110,6 +111,87 @@ interface EventTag extends Base {
   title: string;
 }
 
+interface TimelineEvent extends Base {
+  slug: Slug;
+  title: string;
+  description: string;
+  detailedDescription: Block[];
+  eventDate: string;
+  endDate?: string;
+  eventType:
+    | 'breaking'
+    | 'investigation'
+    | 'live'
+    | 'political'
+    | 'social'
+    | 'economic'
+    | 'environmental'
+    | 'technology'
+    | 'cultural'
+    | 'other';
+  importanceLevel: 'critical' | 'high' | 'medium' | 'low';
+  isMilestone: boolean;
+  location?: string;
+  mainImage?: Image;
+  mediaAttachments?: Array<Image | { _type: 'video'; url: string; title: string }>;
+  timelineCategories?: TimelineCategory[];
+  tags?: string[];
+  relatedArticles?: Article[];
+  relatedLiveEvents?: LiveEvent[];
+  relatedTimelineEvents?: TimelineEvent[];
+  externalLinks?: Array<{
+    title: string;
+    url: string;
+    description?: string;
+  }>;
+  isPublished: boolean;
+  publishedAt?: string;
+  author?: Author;
+  keywords?: string;
+}
+
+interface TimelineCategory extends Base {
+  slug: Slug;
+  title: string;
+  description?: string;
+  color: 'red' | 'blue' | 'green' | 'purple' | 'orange' | 'yellow' | 'pink' | 'teal' | 'gray';
+  icon?: string;
+  order: number;
+  isActive: boolean;
+  parentCategory?: TimelineCategory;
+}
+
+interface Timeline extends Base {
+  slug: Slug;
+  title: string;
+  description: Block[];
+  shortDescription?: string;
+  coverImage?: Image;
+  timelineType: 'event' | 'investigation' | 'breaking' | 'historical' | 'live' | 'custom';
+  timeRange?: {
+    startDate?: string;
+    endDate?: string;
+  };
+  events?: TimelineEvent[];
+  categories?: TimelineCategory[];
+  tags?: string[];
+  isFeatured: boolean;
+  isPublished: boolean;
+  publishedAt?: string;
+  author?: Author;
+  collaborators?: Author[];
+  viewSettings?: {
+    defaultZoomLevel: 'year' | 'month' | 'week' | 'day' | 'hour';
+    showMilestonesOnly: boolean;
+    allowPublicComments: boolean;
+  };
+  seoSettings?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    keywords?: string;
+  };
+}
+
 interface MainImage {
   _type: 'string';
   asset: Reference;
@@ -141,6 +223,110 @@ interface Policy {
   slug: Slug;
   order: string;
   description: Block[];
+}
+
+// Music/Lyrics related interfaces
+interface MusicArtist extends Base {
+  slug: Slug;
+  name: string;
+  stageName?: string;
+  bio?: Block[];
+  image?: Image;
+  genres?: string[];
+  debutYear?: number;
+  hometown?: string;
+  recordLabel?: string;
+  website?: string;
+  socialMedia?: {
+    instagram?: string;
+    twitter?: string;
+    facebook?: string;
+    youtube?: string;
+    spotify?: string;
+    appleMusic?: string;
+    soundcloud?: string;
+    tiktok?: string;
+  };
+  isActive: boolean;
+  isFeatured: boolean;
+}
+
+interface Album extends Base {
+  slug: Slug;
+  title: string;
+  artist: MusicArtist;
+  featuredArtists?: MusicArtist[];
+  albumArt: Image;
+  releaseDate: string;
+  albumType: 'studio' | 'ep' | 'single' | 'compilation' | 'live' | 'remix' | 'mixtape';
+  genres?: string[];
+  recordLabel?: string;
+  producer?: string[];
+  description?: Block[];
+  totalTracks?: number;
+  duration?: string;
+  streamingLinks?: {
+    spotify?: string;
+    appleMusic?: string;
+    youtube?: string;
+    soundcloud?: string;
+    bandcamp?: string;
+    amazonMusic?: string;
+  };
+  isExplicit: boolean;
+  isFeatured: boolean;
+}
+
+interface Song extends Base {
+  slug: Slug;
+  title: string;
+  primaryArtist: MusicArtist;
+  featuredArtists?: MusicArtist[];
+  contributingArtists?: {
+    artist: MusicArtist;
+    role:
+      | 'producer'
+      | 'songwriter'
+      | 'composer'
+      | 'backing-vocals'
+      | 'additional-vocals'
+      | 'instrumentalist'
+      | 'engineer'
+      | 'mixer';
+  }[];
+  album?: Album;
+  trackArt?: Image;
+  trackNumber?: number;
+  lyrics: string;
+  lyricsStructure?: {
+    sectionType:
+      | 'verse'
+      | 'chorus'
+      | 'bridge'
+      | 'pre-chorus'
+      | 'outro'
+      | 'intro'
+      | 'hook'
+      | 'refrain';
+    content: string;
+    order: number;
+  }[];
+  releaseDate: string;
+  duration?: string;
+  genres?: string[];
+  recordLabel?: string;
+  description?: Block[];
+  streamingLinks?: {
+    spotify?: string;
+    appleMusic?: string;
+    youtube?: string;
+    soundcloud?: string;
+    bandcamp?: string;
+    amazonMusic?: string;
+  };
+  isExplicit: boolean;
+  isFeatured: boolean;
+  keywords?: string;
 }
 
 interface JobApplication extends Base {

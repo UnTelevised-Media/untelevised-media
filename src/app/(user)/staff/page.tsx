@@ -47,7 +47,10 @@ export default async function StaffPage() {
                   <ClientSideRoute route={resolveHref('author', author.slug?.current) ?? ''}>
                     <div className='aspect-square cursor-pointer overflow-hidden'>
                       <Image
-                        src={urlForImage(author.image as any).url() ?? ''}
+                        src={
+                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                          urlForImage(author.image as any).url() ?? ''
+                        }
                         width={400}
                         height={400}
                         alt={author.name || 'Staff member'}

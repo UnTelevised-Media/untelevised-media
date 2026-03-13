@@ -66,7 +66,10 @@ export default async function LiveEvent({ params }: Props) {
           {/* Image  */}
           <div className='h-auto min-w-max xl:w-full'>
             <Image
-              src={urlForImage(liveEvent.mainImage as any)?.url() ?? ''}
+              src={
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                urlForImage(liveEvent.mainImage as any)?.url() ?? ''
+              }
               alt='Image Description'
               style={{
                 width: '100%',
@@ -142,7 +145,9 @@ export default async function LiveEvent({ params }: Props) {
                       {event.source === 'relatedArticles' ? (
                         <>
                           <p>{event.description as string}</p>
-                          <ClientSideRoute route={resolveHref('post', event.slug?.current) ?? ''}>
+                          <ClientSideRoute
+                            route={resolveHref('article', event.slug?.current) ?? ''}
+                          >
                             <button className='cursor-pointer self-end rounded-md border border-untele/40 bg-slate-700/30 px-3 py-1 font-bold text-untele/60 underline hover:text-blue-700 hover:opacity-80'>
                               Read More
                             </button>
@@ -181,7 +186,7 @@ async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
     const post = await sanityFetch<LiveEvent>({
       query: queryEventBySlug,
       params: { slug },
-      tags: ['post'],
+      tags: ['liveEvent'],
     });
     return post;
   } catch (error) {

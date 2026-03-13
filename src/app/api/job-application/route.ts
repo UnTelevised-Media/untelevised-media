@@ -11,6 +11,7 @@ interface WorkSample {
   url: string;
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();

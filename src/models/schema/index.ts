@@ -13,6 +13,16 @@ import policies from './policies';
 import post from './post';
 import videoContent from './videoContent';
 
+// Timeline schemas
+import timeline from './timeline';
+import timelineEvent from './timelineEvent';
+import timelineCategory from './timelineCategory';
+
+// Music/lyrics schemas
+import musicArtist from './musicArtist';
+import album from './album';
+import song from './song';
+
 // Form/contact schemas
 import contactSubmission from './contactSubmission';
 import jobApplication from './jobApplication';
@@ -50,6 +60,16 @@ export const schemaTypes = [
   post,
   videoContent,
 
+  // Timeline schemas
+  timeline,
+  timelineEvent,
+  timelineCategory,
+
+  // Music/lyrics schemas
+  musicArtist,
+  album,
+  song,
+
   // Form/contact schemas
   contactSubmission,
   jobApplication,
@@ -86,6 +106,16 @@ export {
   policies,
   post,
   videoContent,
+
+  // Timeline schemas
+  timeline,
+  timelineEvent,
+  timelineCategory,
+
+  // Music/lyrics schemas
+  musicArtist,
+  album,
+  song,
 
   // Form/contact schemas
   contactSubmission,

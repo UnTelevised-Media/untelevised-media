@@ -75,7 +75,7 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className='hidden items-center space-x-6 lg:flex'>
           <Link
-            href='https://www.untelevised.live'
+            href='https://untelevised.live'
             className='group flex items-center space-x-2 rounded-lg py-2 transition-all duration-200 hover:bg-green-50 dark:hover:bg-green-900/20'
           >
             <Radio className='h-4 w-4 animate-pulse text-green-500' />
@@ -84,13 +84,20 @@ const Header = () => {
             </span>
           </Link>
 
-
           <Link
             href='/category/breaking'
             className='group flex items-center space-x-2 rounded-lg py-2 transition-all duration-200 hover:bg-red-50 dark:hover:bg-red-900/20'
           >
             <Flame className='h-4 w-4 animate-pulse text-untele' />
             <span className='text-sm font-medium text-untele'>Breaking Events</span>
+          </Link>
+
+          <Link
+            href='/past-events'
+            className='group relative text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
+          >
+            Past Events
+            <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
           </Link>
           <Link
             href='https://radio.untelevised.live'
@@ -100,6 +107,13 @@ const Header = () => {
           >
             <Music className='h-4 w-4 animate-pulse text-blue-500' />
             <span className='text-sm font-medium text-blue-600 dark:text-blue-400'>Radio</span>
+          </Link>
+          <Link
+            href='/lyrics'
+            className='group relative text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
+          >
+            Music
+            <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
           </Link>
 
           <Link
@@ -210,7 +224,7 @@ const Header = () => {
               <span>Home</span>
             </Link>
             <Link
-              href='https://www.untelevised.live'
+              href='https://untelevised.live'
               className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
               onClick={() => setIsMenuOpen(false)}
             >
@@ -248,6 +262,25 @@ const Header = () => {
               <span className='text-sm font-bold tracking-wider text-untele'>Breaking Events</span>
               <Flame className='h-4 w-4 animate-pulse text-untele' />
             </Link>
+
+            <Link
+              href='/past-events'
+              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <div className='h-2 w-2 rounded-full bg-untele' />
+              <span>Past Events</span>
+            </Link>
+
+            <Link
+              href='/lyrics'
+              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <div className='h-2 w-2 rounded-full bg-untele' />
+              <span>Music</span>
+            </Link>
+
             <Link
               href='/staff'
               className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
