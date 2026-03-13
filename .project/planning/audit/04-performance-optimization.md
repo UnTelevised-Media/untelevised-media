@@ -1,89 +1,42 @@
 # Plan: Performance & React Best Practices
 
-> Status: IN PROGRESS — P1/P2 shipped in Issue #3. Remaining items below.
-> Last audited: 2026-03-13
+> Status: RE-AUDITED — 2026-03-13 (corrected)
+> All major items complete. Only barrel file audit remains.
 
 ---
 
----
+## ✅ COMPLETED
 
-## OPEN — Still Pending
-
-### Suspense boundaries on homepage
-
-**File:** `src/app/(user)/page.tsx`
-**Current state:** `LiveWidget` in Suspense. `FeaturedStoriesGrid` (~line 168) **not** wrapped — blocks full page render on slow Sanity fetch.
-**Fix:**
-```tsx
-<Suspense fallback={<GridSkeleton count={6} />}>
-  <FeaturedStoriesGrid articles={featuredStories} />
-</Suspense>
-```
-Consider extracting each homepage section as a separate async server component for full streaming.
-
----
-
-### LQIP blur placeholders
-
-**Current state:** `plaiceholder` is installed but never used. All images load without blur placeholder — causes layout shift (bad CLS).
-**Fix (low-cost Sanity approach):**
-```tsx
-<Image
-  placeholder="blur"
-  blurDataURL={urlForImage(image).width(20).url()}
-  ...
-/>
-```
-Apply to: article cards, homepage hero, author photos, event images.
+| Item | Notes |
+|------|-------|
+| Unused categories fetch removed from homepage | Promise.all cleaned up |
+| Heavy packages deferred via `next/dynamic` | framer-motion, react-player, react-tweet, google-map-react |
+| `styled-components` removed | Removed from package.json |
+| `priority={true}` on LCP images | Homepage hero + article hero |
+| `sizes` prop on article grid images | Added to article cards |
+| Header scroll handler throttled | `requestAnimationFrame` throttle applied |
+| `React.cache()` on shared data fetches | Wrapped shared fetches |
+| Server-hoist logo | `HeaderLogo` server component; `logoSlot` prop pattern |
+| Suspense on homepage | `FeaturedStoriesGrid` and hero wrapped in `<Suspense>` |
+| `use cache` on music dynamic routes | lyrics, music-artists, albums — all use `'use cache'` + cacheTag + cacheLife |
+| `generateStaticParams` on music routes | All 3 music dynamic routes have static param generation |
+| `useCache: true` in `next.config.ts` | Enables `'use cache'` directive + cacheTag/cacheLife |
+| LQIP blur placeholders | `placeholder="blur"` + `blurDataURL` on homepage, articles, and author hero images |
+| `generateStaticParams` in articles → `sanityFetch` | Fixed; no longer uses raw `sanityClient.fetch` |
 
 ---
 
-### `generateStaticParams` in articles uses raw `sanityClient`
+## ❌ OPEN — Still Pending
 
-**File:** `src/app/(user)/articles/[slug]/page.tsx:219`
-**Current state:** `sanityClient.fetch` — bypasses ISR tag system.
-**Fix:** Replace with `sanityFetch` for consistent CDN cache management.
+### 1. Barrel file audit — `src/components/global/`
 
----
-
-### Direct imports — barrel file audit
-
-**Issue:** Imports like `import { RectangleAd, BannerAd } from '@/components/ads'` use barrel files. May prevent tree-shaking.
-**Action:** Audit `@/components/ads`, `@/components/global`, `@/components/consent` barrel index files. Consider direct imports for components that aren't always needed.
+**Current state:** `src/components/ads/` has a barrel index. `src/components/global/` does **not** — all imports are direct.
+**Action:** Decide on a consistent pattern. If barrel files are used, ensure tree-shaking is not impeded. For components not always needed, prefer direct imports.
 
 ---
 
-### Server-hoist logo in `Header.tsx`
-
-**File:** `src/components/global/Header.tsx`
-**Issue:** `Header` is a client component. Logo `<Image>` re-renders on every client interaction.
-**Fix (pattern: server-hoist-static-io):** Extract logo as a separate server component passed as a child/slot to the client Header.
-
----
-
-### `use cache` directive (Next.js 16)
-
-**Current state:** All Sanity fetches use tag-based ISR (`revalidateTag`). The `use cache` directive is available in Next.js 16.1.6 for fine-grained cache control per function.
-**Future plan:**
-```ts
-async function getArticle(slug: string) {
-  'use cache'
-  cacheTag('article', `article-${slug}`)
-  cacheLife('hours')
-  return sanityClient.fetch(queryArticleBySlug, { slug })
-}
-```
-**Note:** Requires `experimental.cacheLife` config. Investigate compatibility with current setup.
-
----
-
-## Summary Table (remaining work)
+## Summary Table (remaining)
 
 | Issue | Priority | Impact | Effort |
 |-------|----------|--------|--------|
-| Suspense on FeaturedStoriesGrid | P1 | High | 1 hr |
-| LQIP blur placeholders | P2 | Medium (CLS) | 2 hrs |
-| `generateStaticParams` → `sanityFetch` in articles | P2 | Low-Med | 30 min |
-| Direct imports (barrel file audit) | P3 | Low-Med | 1 hr |
-| Server-hoist logo | P3 | Low | 1 hr |
-| `use cache` directive migration | P4 | Medium | 3 hrs |
+| Barrel file audit (global/) | P3 | Low-Med | 1 hr |

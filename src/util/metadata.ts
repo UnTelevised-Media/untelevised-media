@@ -7,7 +7,7 @@ import urlForImage from './urlForImage';
 const BASE_URL = 'https://www.untelevised.media';
 const SITE_NAME = 'UnTelevised Media';
 const TWITTER_HANDLE = '@untelevised';
-const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.jpg`;
+const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.png`;
 
 // Canonical URL builder — always uses trailing slash (matches trailingSlash: true in next.config)
 export function getCanonicalUrl(...segments: string[]): string {
@@ -74,16 +74,16 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
 
 // Build live event Metadata object
 export function buildLiveEventMetadata(liveEvent: LiveEvent, slug: string): Metadata {
-  const ogImageUrl = getSanityOgImageUrl(liveEvent.mainImage) ?? DEFAULT_OG_IMAGE;
-  const canonicalUrl = getCanonicalUrl('live-event', slug);
-  const title = truncate(
+  const seoOgImageUrl = getSanityOgImageUrl(liveEvent.seo?.ogImage);
+  const ogImageUrl = seoOgImageUrl ?? getSanityOgImageUrl(liveEvent.mainImage) ?? DEFAULT_OG_IMAGE;
+  const canonicalUrl = liveEvent.seo?.canonicalUrl ?? getCanonicalUrl('live-event', slug);
+  const computedTitle = truncate(
     `${liveEvent.title}${liveEvent.isCurrentEvent ? ' — Live Updates' : ''}`,
     60
   );
-  const description = truncate(liveEvent.description, 160);
-  const keywords = liveEvent.keywords
-    ? liveEvent.keywords.split(',').map((k) => k.trim())
-    : undefined;
+  const title = truncate(liveEvent.seo?.metaTitle ?? computedTitle, 60);
+  const description = truncate(liveEvent.seo?.metaDescription ?? liveEvent.description, 160);
+  const keywords = liveEvent.keywords?.length ? liveEvent.keywords : undefined;
 
   return {
     title,
@@ -113,10 +113,13 @@ export function buildLiveEventMetadata(liveEvent: LiveEvent, slug: string): Meta
 
 // Build category Metadata object
 export function buildCategoryMetadata(category: Category, slug: string): Metadata {
-  const canonicalUrl = getCanonicalUrl('category', slug);
-  const title = truncate(`${category.title} — Latest Coverage`, 60);
+  const canonicalUrl = category.seo?.canonicalUrl ?? getCanonicalUrl('category', slug);
+  const computedTitle = truncate(`${category.title} — Latest Coverage`, 60);
+  const title = truncate(category.seo?.metaTitle ?? computedTitle, 60);
   const description = truncate(
-    category.description || `Browse all ${category.title} coverage from UnTelevised Media.`,
+    category.seo?.metaDescription ??
+      category.description ??
+      `Browse all ${category.title} coverage from UnTelevised Media.`,
     160
   );
 

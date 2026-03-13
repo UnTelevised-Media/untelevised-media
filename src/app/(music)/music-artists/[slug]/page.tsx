@@ -40,12 +40,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const displayName = artist.stageName ?? artist.name;
-  const canonicalUrl = `https://www.untelevised.media/music-artists/${slug}/`;
+  const canonicalUrl = artist.seo?.canonicalUrl ?? `https://www.untelevised.media/music-artists/${slug}/`;
   const ogImageUrl = artist.image
-    ? urlForImage(artist.image)?.width(1200).height(630).url() ?? ''
-    : 'https://www.untelevised.media/og-default.jpg';
-  const title = `${displayName} | Music Artist`;
-  const description = `Discover songs and albums by ${displayName}. ${artist.bio ? 'Learn more about this artist and their music.' : ''}`;
+    ? (urlForImage(artist.image)?.width(1200).height(630).url() ?? '')
+    : 'https://www.untelevised.media/og-default.png';
+  const computedTitle = `${displayName} | Music Artist`;
+  const title = artist.seo?.metaTitle ?? computedTitle;
+  const computedDescription = `Discover songs and albums by ${displayName}. ${artist.bio ? 'Learn more about this artist and their music.' : ''}`;
+  const description = artist.seo?.metaDescription ?? computedDescription;
 
   return {
     title,
@@ -487,6 +489,8 @@ async function getMusicArtistBySlug(slug: string): Promise<ArtistWithContent | n
 
 export async function generateStaticParams() {
   const queryMusicArtistStaticParams = groq`*[_type=='musicArtist'] { slug }`;
-  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryMusicArtistStaticParams);
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(
+    queryMusicArtistStaticParams
+  );
   return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
 }

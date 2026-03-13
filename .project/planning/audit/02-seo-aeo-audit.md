@@ -1,87 +1,56 @@
-
 # Plan: SEO & AEO Audit — UnTelevised Media
 
-> Status: IN PROGRESS — Critical metadata and structured data shipped in Issue #2. Remaining items below.
-> Last audited: 2026-03-13
+> Status: RE-AUDITED — 2026-03-13 Nearly all high/medium items complete. Remaining items listed below.
 
 ---
 
----
+## ✅ COMPLETED
 
-## OPEN — Still Pending
-
-### Metadata: Static pages missing `export const metadata`
-
-| Page | Suggested Title | Status |
-|------|-----------------|--------|
-| `/about` | About UnTelevised Media | ❌ Missing |
-| `/donate` | Support Independent Journalism | ❌ Missing |
-| `/staff` | Our Team — UnTelevised Media | ❌ Missing |
-| `/past-events` | Past Events Coverage Archive | ✅ Done |
-| `/lyrics` | Music Lyrics — UnTelevised | Not verified |
-| `/secure-contact` | Secure Contact — UnTelevised | Not verified |
-
----
-
-### Structured Data: FAQ schema
-
-**Opportunity:** `faqs[]` field has been planned in schema (Plan #3) but not yet added to schema or rendered as `FAQPage` structured data. High-value for AI citation.
+| Item | Notes |
+| --- | --- |
+| Static page metadata — about, staff, donate, support | All have `export const metadata` |
+| Static page metadata — secure-contact, whistleblower, join | Done via `layout.tsx` pattern |
+| Static page metadata — lyrics index, music-artists index | `export const metadata` present |
+| `dateModified` from `updatedAt` in structured data | `NewsArticleStructuredData` uses `article.updatedAt` |
+| `updatedAt` displayed in UI | Article page shows "Updated: {date}" near byline when different from publishedAt |
+| Author `Person` structured data | `author/[slug]/page.tsx` renders JSON-LD with `@type: 'Person'` |
+| FAQ schema — `faqs[]` in article schema | Field added; `FAQPage` structured data in `NewsArticleStructuredData` |
+| Related articles section | `relatedArticles[]->` in GROQ query; rendered at end of article body |
+| `leadParagraph` field | Added to article schema + included in `queryArticleBySlug` |
+| OG default fallback image | `og-default.png` added to `/public/` |
+| `keywords` → array (article) | Article schema migrated; `buildArticleMetadata` passes array directly |
+| AEO: `queryArticleBySlug` expanded | Includes `seo`, `faqs`, `sources`, `updatedAt`, `leadParagraph`, `relatedArticles` |
+| Dynamic OG image generation | N/A — user opted for static `og-default.png` instead |
 
 ---
 
-### Structured Data: Author Person schema
+## ❌ OPEN — Still Pending
 
-**File:** `src/app/(user)/author/[slug]/page.tsx`
-**Status:** Author page has `generateMetadata` but no `Person` schema.org structured data. Plan (#5 Step 6) documented the implementation. Not yet shipped.
+### 1. `og-default.png` reference stale in metadata utility and music pages
 
----
+**Files:** (details in audit #01, issue #3)
 
-### AEO: Related Articles section
-
-**Current state:** No related articles displayed on article pages.
-**Impact:** Improves crawl depth, time on site, AI content relationship understanding.
-**Plan:** Add `relatedArticles[]->` to article GROQ query, render at end of article body.
+- `src/util/metadata.ts` — `DEFAULT_OG_IMAGE` constant still uses `.jpg`
+- 3 music dynamic pages — fallback OG images still use `.jpg` URL
 
 ---
 
-### AEO: OG image dynamic generation
+### 2. `liveEvent.keywords` is still a plain `string`
 
-**Current state:** OG images come from Sanity image assets resized via URL builder. No branded template.
-**Option A (quick):** Ensure `/public/og-default.jpg` exists as branded fallback (1200×630).
-**Option B (full):** Use `next/og` (ImageResponse) at `src/app/(user)/articles/[slug]/opengraph-image.tsx` for per-article branded OGs with title, author, category overlay.
+**File:** `src/models/schema/liveEvent.ts` line 80–83 **Current state:** `type: 'string'` — inconsistent with article schema which is now `array`. **File:** `src/util/metadata.ts` line 84–86 — `buildLiveEventMetadata` still does `.split(',')`. **Fix:** Migrate liveEvent keywords to array (same pattern as article). Create migration script, update schema, update metadata handler.
 
 ---
 
-### AEO: Keywords as array
+### 3. `seoObject` on remaining content types — verify surfaced in metadata
 
-**Current state:** `keywords` in article schema is a `string`. Should be `string[]` for proper metadata and content tagging.
-**Requires:** Content migration script (split on commas). See Plan #3.
-
----
-
-### AEO: `updatedAt` / `dateModified` surface in UI
-
-**Current state:** `updatedAt` field added to schema but not yet displayed on article pages or included in `dateModified` of NewsArticle structured data.
-**Fix:** Add "Updated: {date}" near byline when `updatedAt > publishedAt`, and wire `dateModified` into `NewsArticleStructuredData`.
+**Status:** `seoObject` field was added to all schema types (liveEvent, category, musicArtist, album, song). However, `generateMetadata` for live-event, category, and music pages may not be reading `seo.title`/`seo.description` overrides from this field yet. **Action:** Check that `generateMetadata` in each dynamic route reads `seo.title` and `seo.description` if present, falling back to computed values.
 
 ---
 
-### AEO: `leadParagraph` field for AI extraction
-
-**Status:** Planned in schema (#3) but not yet added. Low effort, high AEO value.
-
----
-
-## IMPLEMENTATION PRIORITY (remaining work)
+## IMPLEMENTATION PRIORITY (remaining)
 
 | Priority | Task | Impact | Effort |
-|----------|------|--------|--------|
-| P1 | Static page metadata (about, staff, donate) | Medium | 30 min |
-| P1 | Wire `dateModified` into NewsArticle structured data | High | 30 min |
-| P1 | Add `/public/og-default.jpg` branded fallback | Medium | 1 hr |
-| P2 | Author `Person` structured data | Medium | 1 hr |
-| P2 | FAQ schema (add `faqs[]` to article schema + FAQPage component) | High AEO | 2 hrs |
-| P2 | Related articles section | Medium | 2 hrs |
-| P2 | `leadParagraph` field on article schema | Medium AEO | 30 min |
-| P3 | Dynamic OG image generation (`next/og`) | Medium | 3 hrs |
-| P3 | `keywords` → array migration | Low-Med | 2 hrs |
+| --- | --- | --- | --- |
+| P1 | `og-default.png` → `.png` in 4 files | Medium | 15 min |
+| P2 | `liveEvent.keywords` → array + migration | Medium | 1 hr |
+| P2 | Wire `seo.*` overrides into `generateMetadata` for music/event pages | Medium | 1 hr |

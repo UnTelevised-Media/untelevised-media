@@ -6,6 +6,14 @@ type Base = {
   _updatedAt: string;
 };
 
+interface SeoOverride {
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: Image;
+  noIndex?: boolean;
+  canonicalUrl?: string;
+}
+
 interface LiveEvent extends Base {
   body: Block[];
   eventDate: string;
@@ -17,10 +25,11 @@ interface LiveEvent extends Base {
   description: string;
   location: string;
   subtitle: string;
-  keywords: string;
+  keywords?: string[];
   slug: Slug;
   isCurrentEvent: boolean;
   mainImage: Image;
+  seo?: SeoOverride;
 }
 
 interface KeyEvent extends Base {
@@ -37,7 +46,7 @@ interface Article extends Base {
   mainImage: Image;
   slug: Slug;
   title: string;
-  keywords: string;
+  keywords?: string[];
   description: string;
   location: string;
   videoLink: string;
@@ -127,6 +136,7 @@ interface Category extends Base {
   description: string;
   title: string;
   order?: string;
+  seo?: SeoOverride;
 }
 
 interface EventTag extends Base {
@@ -272,6 +282,7 @@ interface MusicArtist extends Base {
   };
   isActive: boolean;
   isFeatured: boolean;
+  seo?: SeoOverride;
 }
 
 interface Album extends Base {
@@ -298,6 +309,7 @@ interface Album extends Base {
   };
   isExplicit: boolean;
   isFeatured: boolean;
+  seo?: SeoOverride;
 }
 
 interface Song extends Base {
@@ -350,6 +362,7 @@ interface Song extends Base {
   isExplicit: boolean;
   isFeatured: boolean;
   keywords?: string;
+  seo?: SeoOverride;
 }
 
 interface JobApplication extends Base {

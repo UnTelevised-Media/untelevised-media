@@ -79,7 +79,10 @@ export default defineType({
     defineField({
       name: 'keywords',
       title: 'Keywords',
-      type: 'string',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+      description: 'Type a keyword and press Enter or comma to add it. Used for SEO metadata.',
     }),
     defineField({
       name: 'eventTag',

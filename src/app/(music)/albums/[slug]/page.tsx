@@ -42,12 +42,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ...(album.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
   ].join(', ');
 
-  const canonicalUrl = `https://www.untelevised.media/albums/${slug}/`;
+  const canonicalUrl = album.seo?.canonicalUrl ?? `https://www.untelevised.media/albums/${slug}/`;
   const ogImageUrl = album.albumArt
-    ? urlForImage(album.albumArt)?.width(1200).height(630).url() ?? ''
-    : 'https://www.untelevised.media/og-default.jpg';
-  const title = `${album.title} - ${artistNames} | Album`;
-  const description = `Listen to ${album.title} by ${artistNames}. ${album.description ? 'Learn more about this album.' : ''}`;
+    ? (urlForImage(album.albumArt)?.width(1200).height(630).url() ?? '')
+    : 'https://www.untelevised.media/og-default.png';
+  const computedTitle = `${album.title} - ${artistNames} | Album`;
+  const title = album.seo?.metaTitle ?? computedTitle;
+  const computedDescription = `Listen to ${album.title} by ${artistNames}. ${album.description ? 'Learn more about this album.' : ''}`;
+  const description = album.seo?.metaDescription ?? computedDescription;
 
   return {
     title,

@@ -301,6 +301,7 @@ export const queryCategoryBySlug = groq`
     title,
     description,
     "slug": slug.current,
+    seo,
   }
 `;
 

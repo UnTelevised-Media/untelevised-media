@@ -1,81 +1,81 @@
 # Plan: Next.js Best Practices Audit & Upgrades
 
-> Status: IN PROGRESS — Issues #2 (SEO) and #3 (Performance) merged to `development`. Remaining items below.
-> Last audited: 2026-03-13
+> Status: RE-AUDITED — 2026-03-13 Most items complete. Remaining open items listed below.
 
 ---
 
+## ✅ COMPLETED
+
+| Item | Notes |
+| --- | --- |
+| Font loading duplication | Geist fonts removed; body uses `inter.className` only |
+| Server-hoist logo | `HeaderLogo` server component; passed as `logoSlot` prop to client Header |
+| `generateStaticParams` on music routes | lyrics, music-artists, albums — all have `generateStaticParams` |
+| `use cache` directive on music routes | All 3 music dynamic routes use `'use cache'` + `cacheTag` + `cacheLife` |
+| Suspense on homepage | `FeaturedStoriesGrid` and hero wrapped in Suspense |
+| Async params pattern | All dynamic routes verified |
+| `keywords` field migrated to array | Article schema uses array + tags layout |
+| Static page metadata | about, staff, donate, support — all have `export const metadata` |
+| Metadata via layout.tsx | secure-contact, whistleblower, join — use layout.tsx pattern |
+| TypeGen | `sanity.types.ts` generated at project root (59 queries, 50 types) |
+
 ---
 
-## OPEN — Still Pending
+## ❌ OPEN — Still Pending
 
-### 3. No `generateStaticParams` on music dynamic routes
+### 1. `generateStaticParams` in articles uses raw `sanityClient`
 
-**Status:** `lyrics/[slug]`, `music-artists/[slug]`, `albums/[slug]` page files do not exist yet — these routes are either not built or are placeholders. Once built, add `generateStaticParams` following the article page pattern.
+**File:** `src/app/(user)/articles/[slug]/page.tsx` line ~282 **Current state:** `generateStaticParams` calls `sanityClient.fetch` — bypasses the ISR tag system. **Fix:** Replace with `sanityFetch` to keep CDN cache consistent with tag-based revalidation.
 
 ---
 
-### 4. Missing Suspense boundaries around homepage sections
+### 2. LQIP blur placeholders not implemented
 
-**File:** `src/app/(user)/page.tsx`
-**Current state:** `LiveWidget` is in Suspense. Hero section may have partial Suspense. `FeaturedStoriesGrid` at line ~168 is **not** in Suspense — blocks full page render.
-**Fix:** Wrap `FeaturedStoriesGrid` and any remaining non-suspended sections:
+**Current state:** `plaiceholder` package is installed but never used. No `blurDataURL` on any `<Image>` component. Layout shift (bad CLS) occurs on image load. **Fix (low-cost Sanity approach):**
+
 ```tsx
-<Suspense fallback={<GridSkeleton count={6} />}>
-  <FeaturedStoriesGrid articles={featuredStories} />
-</Suspense>
+<Image
+  placeholder="blur"
+  blurDataURL={urlForImage(image).width(20).url()}
+  ...
+/>
 ```
 
----
-
-### 5. `generateStaticParams` in articles uses raw `sanityClient`
-
-**File:** `src/app/(user)/articles/[slug]/page.tsx` line 219
-**Current state:** Still uses `sanityClient.fetch` — bypasses ISR tag system.
-**Fix:** Replace with `sanityFetch` to keep CDN cache consistent.
+Apply to: article cards, homepage hero, author photos, event images.
 
 ---
 
-### 6. `keywords` field is a plain `string` not an `array`
+### 3. NEW: `og-default.png` → `og-default.png` mismatch
 
-**File:** `src/models/schema/article.ts`
-**Status:** Schema plan (#03) specifies changing to array with tags layout. Not yet migrated. Requires content migration script (split on commas).
+**Files with stale `.jpg` reference:**
 
----
+- `src/util/metadata.ts` line 10 — `DEFAULT_OG_IMAGE` constant
+- `src/app/(music)/lyrics/[slug]/page.tsx` line 45 — fallback OG image
+- `src/app/(music)/music-artists/[slug]/page.tsx` line 46 — fallback OG image
+- `src/app/(music)/albums/[slug]/page.tsx` line 48 — fallback OG image
 
-### 9. Async params pattern (Next.js 15)
-
-**Status:** Articles page uses correct `await params` pattern. Verify all other dynamic routes (`live-event`, `author`, `category`) also use `Promise<{ slug: string }>`.
-
----
-
-### 14. Font loading duplication
-
-**File:** `src/app/layout.tsx`
-**Status:** Three fonts loaded (Geist Sans, Geist Mono, Inter). Inter wins visually via `inter.className`. Geist variables set but not the primary font. Decide: pick one system or intentionally use both. No change made yet.
+**Root `layout.tsx` is correct** — uses `og-default.png`. **Fix:** Update all 4 files to use `og-default.png`.
 
 ---
 
-### 15. `trailingSlash: true` canonical URL consistency
+### 4. Barrel file audit — `src/components/global/`
 
-**File:** `next.config.ts`
-**Status:** Sitemap uses trailing slashes (fixed in #2). Verify all structured data `@id` URLs and `alternates.canonical` values consistently use trailing slashes. Spot-check `NewsArticleStructuredData` and `GlobalStructuredData`.
-
----
-
-### NEW: Static page metadata incomplete
-
-**Current state:** `past-events/page.tsx` has `export const metadata`. `about`, `staff`, `donate` pages are missing metadata exports.
-**Fix:** Add `export const metadata` to each. See `02-seo-aeo-audit.md` table for suggested titles.
+**Current state:** `src/components/ads/` has a barrel `index.ts`. `src/components/global/` does **not** have one (imports are direct). **Action:** Audit whether barrel files are causing unnecessary bundling. For components that aren't always needed, prefer direct imports over barrel exports. Decide: add barrel or keep direct imports consistently.
 
 ---
 
-### NEW: LQIP blur placeholders not implemented
+### 5. `trailingSlash: true` canonical URL consistency
 
-**Status:** `plaiceholder` package is installed but unused. No `blurDataURL` on any image. Layout shift occurs on image load.
-**Fix:** Use Sanity LQIP pattern (low-cost):
-```ts
-blurDataURL={urlForImage(image).width(20).url()}
-placeholder="blur"
-```
-Or use `getPlaiceholder` for richer base64 previews.
+**File:** `next.config.ts` — `trailingSlash: true` **Current state:** Root layout and sitemap use trailing slashes. Spot-check that all structured data `@id` URLs and `alternates.canonical` values consistently use trailing slashes. **Spot check:** `NewsArticleStructuredData` `@id` field, `GlobalStructuredData`.
+
+---
+
+## Summary Table (remaining)
+
+| Issue                                              | Priority | Impact       | Effort |
+| -------------------------------------------------- | -------- | ------------ | ------ |
+| `og-default.png` → `.png` fix (4 files)            | P1       | Medium       | 15 min |
+| `generateStaticParams` → `sanityFetch` in articles | P2       | Low-Med      | 30 min |
+| LQIP blur placeholders                             | P2       | Medium (CLS) | 2 hrs  |
+| Barrel file audit (global/)                        | P3       | Low-Med      | 1 hr   |
+| trailingSlash audit on structured data             | P3       | Low          | 30 min |

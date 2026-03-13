@@ -41,10 +41,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const artworkInfo = getSongArtworkInfo(song);
 
-  const canonicalUrl = `https://www.untelevised.media/lyrics/${slug}/`;
-  const ogImage = artworkInfo.url ?? 'https://www.untelevised.media/og-default.jpg';
-  const title = `${song.title} - ${artistNames} | Lyrics`;
-  const description = `Read the lyrics to "${song.title}" by ${artistNames}.${song.description ? ' Learn more about this song and its background.' : ''}`;
+  const canonicalUrl = song.seo?.canonicalUrl ?? `https://www.untelevised.media/lyrics/${slug}/`;
+  const ogImage = artworkInfo.url ?? 'https://www.untelevised.media/og-default.png';
+  const computedTitle = `${song.title} - ${artistNames} | Lyrics`;
+  const title = song.seo?.metaTitle ?? computedTitle;
+  const computedDescription = `Read the lyrics to "${song.title}" by ${artistNames}.${song.description ? ' Learn more about this song and its background.' : ''}`;
+  const description = song.seo?.metaDescription ?? computedDescription;
 
   return {
     title,
