@@ -41,12 +41,7 @@ export const metadata: Metadata = {
     title: 'UnTelevised Media — Independent Journalism',
     description: 'Independent journalism covering breaking news and investigative reporting.',
     siteName: 'UnTelevised Media',
-    images: [{
-      url: '/og-default.jpg',
-      width: 1200,
-      height: 630,
-      alt: 'UnTelevised Media',
-    }],
+    // Default OG image served by src/app/(user)/opengraph-image.tsx via Next.js file convention
   },
   twitter: {
     card: 'summary_large_image',
