@@ -9,6 +9,7 @@ import type { Metadata } from 'next';
 import { queryArticleByCategory, queryCategoryBySlug } from '@/lib/sanity/lib/queries';
 import resolveHref from '@/util/resolveHref';
 import sanityFetch from '@/lib/sanity/lib/fetch';
+import sanityClient from '@/lib/sanity/lib/client';
 import { buildCategoryMetadata } from '@/util/metadata';
 
 type Props = {
@@ -65,7 +66,8 @@ async function getArticlesByCategory(slug: string): Promise<Article[]> {
 // Generate the static params for the category list
 export async function generateStaticParams() {
   const queryCategoryStaticParams = groq`*[_type=='category'] { slug }`;
-  const slugs: Category[] = await sanityFetch({ query: queryCategoryStaticParams, tags: ['category'] });
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: Category[] = await sanityClient.fetch(queryCategoryStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

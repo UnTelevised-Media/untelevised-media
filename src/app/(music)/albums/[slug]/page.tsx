@@ -447,6 +447,7 @@ async function getAlbumBySlug(slug: string): Promise<AlbumWithSongs | null> {
 
 export async function generateStaticParams() {
   const queryAlbumStaticParams = groq`*[_type=='album'] { slug }`;
-  const slugs: { slug: { current: string } }[] = await sanityFetch({ query: queryAlbumStaticParams, tags: ['album'] });
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryAlbumStaticParams);
   return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
 }

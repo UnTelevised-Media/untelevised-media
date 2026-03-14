@@ -279,7 +279,8 @@ const getArticleBySlug = cache(async (slug: string): Promise<Article | null> => 
 // Generate the static params for the article list
 export async function generateStaticParams() {
   const query = groq`*[_type=='article'] { slug }`;
-  const slugs: Article[] = await sanityFetch({ query, tags: ['article'] });
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: Article[] = await sanityClient.fetch(query);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

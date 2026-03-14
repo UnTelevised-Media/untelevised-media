@@ -15,6 +15,7 @@ import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 import resolveHref from '@/util/resolveHref';
 import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
+import sanityClient from '@/lib/sanity/lib/client';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
 import { buildLiveEventMetadata, getSanityOgImageUrl } from '@/util/metadata';
 
@@ -231,7 +232,8 @@ async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
 // // Generate the static params for the list of Live Events
 export async function generateStaticParams() {
   const queryLiveEventStaticParams = groq`*[_type=='liveEvent'] { slug }`;
-  const slugs: LiveEvent[] = await sanityFetch({ query: queryLiveEventStaticParams, tags: ['liveEvent'] });
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: LiveEvent[] = await sanityClient.fetch(queryLiveEventStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

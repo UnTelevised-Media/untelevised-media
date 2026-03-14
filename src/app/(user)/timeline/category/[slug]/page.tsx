@@ -13,6 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { BannerAd, RectangleAd } from '@/components/ads';
 
 import sanityFetch from '@/lib/sanity/lib/fetch';
+import sanityClient from '@/lib/sanity/lib/client';
 import { queryTimelineEventsByCategory, queryTimelinesByCategory } from '@/lib/sanity/lib/queries';
 
 type Props = {
@@ -344,7 +345,8 @@ async function getCategoryData(slug: string): Promise<{
 // Generate static params for the category list
 export async function generateStaticParams() {
   const queryTimelineCategoryStaticParams = groq`*[_type=='timelineCategory' && isActive == true] { slug }`;
-  const slugs: TimelineCategory[] = await sanityFetch({ query: queryTimelineCategoryStaticParams, tags: ['timelineCategory'] });
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: TimelineCategory[] = await sanityClient.fetch(queryTimelineCategoryStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

@@ -490,6 +490,7 @@ async function getMusicArtistBySlug(slug: string): Promise<ArtistWithContent | n
 
 export async function generateStaticParams() {
   const queryMusicArtistStaticParams = groq`*[_type=='musicArtist'] { slug }`;
-  const slugs: { slug: { current: string } }[] = await sanityFetch({ query: queryMusicArtistStaticParams, tags: ['musicArtist'] });
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryMusicArtistStaticParams);
   return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
 }
