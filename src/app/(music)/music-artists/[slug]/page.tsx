@@ -14,6 +14,7 @@ import formatDate from '@/util/formatDate';
 import { cacheLife, cacheTag } from 'next/cache';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
+import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryMusicArtistBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Calendar, MapPin, ExternalLink, Instagram, Twitter, Youtube } from 'lucide-react';
 
@@ -489,8 +490,6 @@ async function getMusicArtistBySlug(slug: string): Promise<ArtistWithContent | n
 
 export async function generateStaticParams() {
   const queryMusicArtistStaticParams = groq`*[_type=='musicArtist'] { slug }`;
-  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(
-    queryMusicArtistStaticParams
-  );
+  const slugs: { slug: { current: string } }[] = await sanityFetch({ query: queryMusicArtistStaticParams, tags: ['musicArtist'] });
   return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
 }

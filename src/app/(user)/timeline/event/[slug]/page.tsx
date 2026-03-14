@@ -28,7 +28,6 @@ import { RectangleAd, BannerAd } from '@/components/ads';
 
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryTimelineEventBySlug } from '@/lib/sanity/lib/queries';
-import sanityClient from '@/lib/sanity/lib/client';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 
@@ -410,7 +409,7 @@ async function getTimelineEventBySlug(slug: string): Promise<TimelineEvent | nul
 // Generate static params for the timeline event list
 export async function generateStaticParams() {
   const queryTimelineEventStaticParams = groq`*[_type=='timelineEvent' && isPublished == true] { slug }`;
-  const slugs: TimelineEvent[] = await sanityClient.fetch(queryTimelineEventStaticParams);
+  const slugs: TimelineEvent[] = await sanityFetch({ query: queryTimelineEventStaticParams, tags: ['timelineEvent'] });
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

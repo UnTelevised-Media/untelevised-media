@@ -9,7 +9,6 @@ import type { Metadata } from 'next';
 import { queryArticleByCategory, queryCategoryBySlug } from '@/lib/sanity/lib/queries';
 import resolveHref from '@/util/resolveHref';
 import sanityFetch from '@/lib/sanity/lib/fetch';
-import sanityClient from '@/lib/sanity/lib/client';
 import { buildCategoryMetadata } from '@/util/metadata';
 
 type Props = {
@@ -20,7 +19,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const category: Category = await sanityClient.fetch(queryCategoryBySlug, { slug });
+  const category: Category = await sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] });
   if (!category) return { title: 'Category Not Found' };
   return buildCategoryMetadata(category, slug);
 }
@@ -66,7 +65,7 @@ async function getArticlesByCategory(slug: string): Promise<Article[]> {
 // Generate the static params for the category list
 export async function generateStaticParams() {
   const queryCategoryStaticParams = groq`*[_type=='category'] { slug }`;
-  const slugs: Category[] = await sanityClient.fetch(queryCategoryStaticParams);
+  const slugs: Category[] = await sanityFetch({ query: queryCategoryStaticParams, tags: ['category'] });
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

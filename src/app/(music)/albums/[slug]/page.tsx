@@ -13,6 +13,7 @@ import formatDate from '@/util/formatDate';
 import { cacheLife, cacheTag } from 'next/cache';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
+import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAlbumBySlug } from '@/lib/sanity/lib/queries';
 import { Disc, Calendar, Clock, ExternalLink, Music } from 'lucide-react';
 
@@ -446,6 +447,6 @@ async function getAlbumBySlug(slug: string): Promise<AlbumWithSongs | null> {
 
 export async function generateStaticParams() {
   const queryAlbumStaticParams = groq`*[_type=='album'] { slug }`;
-  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryAlbumStaticParams);
+  const slugs: { slug: { current: string } }[] = await sanityFetch({ query: queryAlbumStaticParams, tags: ['album'] });
   return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
 }

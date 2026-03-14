@@ -16,7 +16,6 @@ import getArticleDate from '@/util/getArticleDate';
 import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
-import sanityClient from '@/lib/sanity/lib/client';
 import { buildAuthorMetadata } from '@/util/metadata';
 
 type Props = {
@@ -233,7 +232,7 @@ const getAuthorBySlug = cache(async (slug: string): Promise<Author | null> => {
 // Generate the static params for the author list
 export async function generateStaticParams() {
   const queryAuthorStaticParams = groq`*[_type=='author'] { slug }`;
-  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryAuthorStaticParams);
+  const slugs: { slug: { current: string } }[] = await sanityFetch({ query: queryAuthorStaticParams, tags: ['author'] });
   const slugRoutes = slugs ? slugs.map((item) => item.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

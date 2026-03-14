@@ -14,7 +14,6 @@ import { BannerAd, RectangleAd } from '@/components/ads';
 
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryTimelineEventsByCategory, queryTimelinesByCategory } from '@/lib/sanity/lib/queries';
-import sanityClient from '@/lib/sanity/lib/client';
 
 type Props = {
   params: Promise<{
@@ -345,7 +344,7 @@ async function getCategoryData(slug: string): Promise<{
 // Generate static params for the category list
 export async function generateStaticParams() {
   const queryTimelineCategoryStaticParams = groq`*[_type=='timelineCategory' && isActive == true] { slug }`;
-  const slugs: TimelineCategory[] = await sanityClient.fetch(queryTimelineCategoryStaticParams);
+  const slugs: TimelineCategory[] = await sanityFetch({ query: queryTimelineCategoryStaticParams, tags: ['timelineCategory'] });
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

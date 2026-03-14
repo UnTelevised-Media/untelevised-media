@@ -16,7 +16,6 @@ import resolveHref from '@/util/resolveHref';
 import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
-import sanityClient from '@/lib/sanity/lib/client';
 import { buildLiveEventMetadata, getSanityOgImageUrl } from '@/util/metadata';
 
 type Props = {
@@ -27,7 +26,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const liveEvent: LiveEvent = await sanityClient.fetch(queryEventBySlug, { slug });
+  const liveEvent: LiveEvent = await sanityFetch({ query: queryEventBySlug, params: { slug }, tags: ['liveEvent'] });
   if (!liveEvent) return { title: 'Live Event Not Found' };
   return buildLiveEventMetadata(liveEvent, slug);
 }
@@ -232,7 +231,7 @@ async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
 // // Generate the static params for the list of Live Events
 export async function generateStaticParams() {
   const queryLiveEventStaticParams = groq`*[_type=='liveEvent'] { slug }`;
-  const slugs: LiveEvent[] = await sanityClient.fetch(queryLiveEventStaticParams);
+  const slugs: LiveEvent[] = await sanityFetch({ query: queryLiveEventStaticParams, tags: ['liveEvent'] });
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,
