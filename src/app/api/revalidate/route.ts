@@ -32,7 +32,6 @@ type WebhookPayload = {
   slug?: string | undefined;
 };
 
-export const runtime = 'edge';
 export async function POST(req: NextRequest) {
   try {
     const { body, isValidSignature } = await parseBody<WebhookPayload>(req, revalidateSecret);

@@ -38,7 +38,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
   const metadata: Metadata = {
     title: `${post.title} | UnTelevised Media`,
     description: post.description,
-    keywords: post.keywords ? post.keywords.split(',') : undefined,
+    keywords: post.keywords ?? undefined,
     authors: post.author ? [{ name: post.author.name }] : undefined,
     publisher: 'UnTelevised Media',
 
