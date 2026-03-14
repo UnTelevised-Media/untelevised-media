@@ -1,7 +1,7 @@
-# Plan: Sanity Schema Upgrades
+# Audit 03: Sanity Schema Upgrades
 
 > Status: RE-AUDITED — 2026-03-13
-> Core schema upgrades complete. Remaining items: liveEvent keywords migration, seo field wire-up.
+> All items complete, including production data migrations. No open items.
 
 ---
 
@@ -9,66 +9,37 @@
 
 | Item | Notes |
 |------|-------|
-| Article `leadParagraph` field | Added with `type: 'text'`, rows: 3 |
-| Article `faqs[]` field | Array of `{ question, answer }` objects with FAQPage structured data |
-| Article `relatedArticles[]->` | References to articles; rendered on article page |
-| Article `reviewedBy` field | Reference to author type |
-| Article `keywords` → array | Schema + tags layout + migration script in `migrations/keywords-string-to-array/` |
+| Article `leadParagraph` field | `type: 'text'`, rows: 3 — plain-text summary for AI extraction and featured snippets |
+| Article `faqs[]` field | Array of `{ question, answer }` objects; drives `FAQPage` structured data |
+| Article `relatedArticles[]->` | Reference array (max 5); rendered on article page |
+| Article `reviewedBy` field | Reference to `author` type |
+| Article `keywords` → array | `type: 'array'` with tags layout; `migrations/keywords-string-to-array/` created |
+| Article `keywords` migration — production | Run 2026-03-13: 41 docs scanned, 25 patched |
+| Article `seo` field | `seoObject` type with `metaTitle`, `metaDescription`, `ogImage`, `noIndex`, `canonicalUrl` |
 | LiveEvent `endDate` | `datetime` field added |
-| LiveEvent `eventStatus` | String with EventScheduled/Cancelled/Postponed/MovedOnline options |
+| LiveEvent `eventStatus` | String enum: EventScheduled / EventCancelled / EventPostponed / EventMovedOnline |
+| LiveEvent `keywords` → array | `type: 'array'` with tags layout; `migrations/liveEvent-keywords-string-to-array/` created |
+| LiveEvent `keywords` migration — production | Run 2026-03-13: 5 docs scanned, 5 patched |
 | LiveEvent `seo` field | `seoObject` type added |
 | `seoObject` on all content types | Added to: liveEvent, category, musicArtist, album, song |
-| TypeGen setup | `sanity.config.ts` at root + `sanity.cli.ts` at root; `sanity.types.ts` generated |
-| Duplicate GROQ query names | All 9 files with generic `query` variable names renamed; 0 TypeGen warnings |
+| `siteSettings` singleton | Added to Studio desk structure via `S.listItem()` in `src/lib/sanity/structure.ts` |
+| TypeGen setup | `sanity.config.ts` + `sanity.cli.ts` at project root; `sanity.types.ts` generated (59 queries, 50 types) |
+| Duplicate GROQ query names | All 9 files with generic `query` variable renamed; 0 TypeGen warnings |
+| Global `types.d.ts` — `SeoOverride` interface | `metaTitle?`, `metaDescription?`, `ogImage?`, `noIndex?`, `canonicalUrl?` |
+| Global `types.d.ts` — `seo?` field | Added to `LiveEvent`, `Category`, `MusicArtist`, `Album`, `Song` |
+| Global `types.d.ts` — keyword types | `Article.keywords: string[]`, `LiveEvent.keywords: string[]` (both corrected from `string`) |
 
 ---
 
-## ❌ OPEN — Still Pending
+## ❌ OPEN
 
-### 1. `liveEvent.keywords` still a plain `string`
-
-**File:** `src/models/schema/liveEvent.ts` line 80–83
-**Current state:** `keywords` is `type: 'string'` — inconsistent with article.
-**Fix:**
-1. Change field to `type: 'array'`, `of: [{ type: 'string' }]`, `options: { layout: 'tags' }`
-2. Create `migrations/liveEvent-keywords-string-to-array/index.ts`
-3. Update `buildLiveEventMetadata` in `src/util/metadata.ts` to drop `.split(',')`
+No open items. All schema upgrades and data migrations are complete.
 
 ---
 
-### 2. Keywords migration not run against production content
+## Migration Reference
 
-**Migration file:** `migrations/keywords-string-to-array/index.ts` — exists but may not have been executed.
-**Steps:**
-```bash
-pnpm sanity migration run keywords-string-to-array --dry-run
-pnpm sanity migration run keywords-string-to-array
-```
-**Note:** Run `--dry-run` first to verify no data loss.
-
----
-
-### 3. Studio Structure — `siteSettings` singleton
-
-**Status:** Not verified. The `siteSettings` singleton may not be added to `structure.ts`.
-**Fix:**
-```ts
-S.listItem()
-  .title('Site Settings')
-  .child(S.document().schemaType('siteSettings').documentId('siteSettings'))
-```
-
----
-
-### 4. `seoObject` field values not wired into `generateMetadata`
-
-**Status:** `seoObject` exists on all schemas but `generateMetadata` for music/event pages likely doesn't read `seo.title`/`seo.description` overrides yet.
-**Fix:** Update `generateMetadata` in each dynamic route to prefer `seo.title` / `seo.description` if present.
-
----
-
-## Migration Notes
-
-- All schema fields are optional — no existing documents break
-- `liveEvent.keywords` → array requires migration before removing the string field
-- `seoObject` additions are purely additive
+| Script | Dataset | Result |
+|--------|---------|--------|
+| `migrations/keywords-string-to-array` | `articles` | 25 articles patched — 2026-03-13 |
+| `migrations/liveEvent-keywords-string-to-array` | `articles` | 5 liveEvents patched — 2026-03-13 |

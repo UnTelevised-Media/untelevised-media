@@ -1,81 +1,51 @@
-# Plan: Next.js Best Practices Audit & Upgrades
+# Audit 01: Next.js Best Practices
 
-> Status: RE-AUDITED — 2026-03-13 Most items complete. Remaining open items listed below.
+> Status: RE-AUDITED — 2026-03-13
+> All prior open items resolved. One new P2 finding: `generateStaticParams` consistency.
 
 ---
 
 ## ✅ COMPLETED
 
 | Item | Notes |
-| --- | --- |
-| Font loading duplication | Geist fonts removed; body uses `inter.className` only |
-| Server-hoist logo | `HeaderLogo` server component; passed as `logoSlot` prop to client Header |
-| `generateStaticParams` on music routes | lyrics, music-artists, albums — all have `generateStaticParams` |
-| `use cache` directive on music routes | All 3 music dynamic routes use `'use cache'` + `cacheTag` + `cacheLife` |
-| Suspense on homepage | `FeaturedStoriesGrid` and hero wrapped in Suspense |
-| Async params pattern | All dynamic routes verified |
-| `keywords` field migrated to array | Article schema uses array + tags layout |
-| Static page metadata | about, staff, donate, support — all have `export const metadata` |
-| Metadata via layout.tsx | secure-contact, whistleblower, join — use layout.tsx pattern |
-| TypeGen | `sanity.types.ts` generated at project root (59 queries, 50 types) |
+|------|-------|
+| Async params pattern | All 10 dynamic routes use `params: Promise<{ slug: string }>` |
+| `generateStaticParams` on all dynamic routes | articles, live-event, category, author, timeline, timeline-event, timeline-category, lyrics, music-artists, albums |
+| `generateStaticParams` → `sanityFetch` in all 10 dynamic routes | Fixed — articles, live-event, category, author, timeline, timeline-event, timeline-category, policies, lyrics, music-artists, albums |
+| `'use cache'` on music dynamic routes | lyrics, music-artists, albums — all use `'use cache'` + `cacheTag` + `cacheLife('hours')` |
+| `useCache: true` in `next.config.ts` | `next.config.ts` line 44 — enables `'use cache'` directive |
+| `trailingSlash: true` in `next.config.ts` | `next.config.ts` line 5 |
+| Suspense on homepage | `FeaturedStoriesGrid` + hero wrapped in `<Suspense>` with `<LoadingSpinner>` fallbacks |
+| `next/dynamic` for heavy components | framer-motion (CookieConsentBanner, AdBlockerMessage), TimelineJSVisualization, react-tweet `Tweet`, react-syntax-highlighter `Prism` — all dynamically imported |
+| `priority={true}` on LCP images | Article hero, author hero, HeaderLogo — confirmed |
+| `sizes` prop on article grid images | Homepage featured stories: `sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'` |
+| LQIP blur placeholders | `placeholder="blur"` + `blurDataURL` on homepage, `articles/[slug]`, `author/[slug]` hero images |
+| Font loading | Only Inter (via `next/font/google`) active; Geist Sans/Mono removed |
+| Barrel file audit | `ads/` and `consent/` barrels intentional (co-imported client bundles); `global/` has no barrel (correct — direct imports for server components) |
+| `typedRoutes` | Disabled pending Turbopack support (`next.config.ts` — commented out with note) |
+| `@next/bundle-analyzer` wired | `withBundleAnalyzer()` in `next.config.ts`; `npm run analyze` script added |
 
 ---
 
-## ❌ OPEN — Still Pending
+## ❌ OPEN
 
-### 1. `generateStaticParams` in articles uses raw `sanityClient`
+> Re-audited 2026-03-13 (second pass). New findings added.
 
-**File:** `src/app/(user)/articles/[slug]/page.tsx` line ~282 **Current state:** `generateStaticParams` calls `sanityClient.fetch` — bypasses the ISR tag system. **Fix:** Replace with `sanityFetch` to keep CDN cache consistent with tag-based revalidation.
+| Item | Priority | Notes |
+|------|----------|-------|
+| `notFound()` on `author/[slug]` | P2 | Returns inline `<div>Author Not Found</div>` — should call `notFound()` for proper 404 HTTP status and `not-found.tsx` rendering |
+| `notFound()` on `live-event/[slug]` | P2 | `liveEvent` null check exists in `generateMetadata` but page body does not call `notFound()` — falls through to undefined errors |
+| `notFound()` on `albums/[slug]` | P2 | Returns inline `<div>Album Not Found</div>` instead of `notFound()` |
+| `notFound()` on `lyrics/[slug]` | P2 | No null guard or `notFound()` call found |
+| `notFound()` on `music-artists/[slug]` | P2 | No null guard or `notFound()` call found |
+| `notFound()` on `category/[slug]` | P2 | No null guard or `notFound()` call found |
 
----
-
-### 2. LQIP blur placeholders not implemented
-
-**Current state:** `plaiceholder` package is installed but never used. No `blurDataURL` on any `<Image>` component. Layout shift (bad CLS) occurs on image load. **Fix (low-cost Sanity approach):**
-
+**Pattern to apply** — replace inline fallback divs:
 ```tsx
-<Image
-  placeholder="blur"
-  blurDataURL={urlForImage(image).width(20).url()}
-  ...
-/>
+// ❌ current
+if (!album) return <div>Album Not Found</div>;
+
+// ✅ correct
+import { notFound } from 'next/navigation';
+if (!album) notFound();
 ```
-
-Apply to: article cards, homepage hero, author photos, event images.
-
----
-
-### 3. NEW: `og-default.png` → `og-default.png` mismatch
-
-**Files with stale `.jpg` reference:**
-
-- `src/util/metadata.ts` line 10 — `DEFAULT_OG_IMAGE` constant
-- `src/app/(music)/lyrics/[slug]/page.tsx` line 45 — fallback OG image
-- `src/app/(music)/music-artists/[slug]/page.tsx` line 46 — fallback OG image
-- `src/app/(music)/albums/[slug]/page.tsx` line 48 — fallback OG image
-
-**Root `layout.tsx` is correct** — uses `og-default.png`. **Fix:** Update all 4 files to use `og-default.png`.
-
----
-
-### 4. Barrel file audit — `src/components/global/`
-
-**Current state:** `src/components/ads/` has a barrel `index.ts`. `src/components/global/` does **not** have one (imports are direct). **Action:** Audit whether barrel files are causing unnecessary bundling. For components that aren't always needed, prefer direct imports over barrel exports. Decide: add barrel or keep direct imports consistently.
-
----
-
-### 5. `trailingSlash: true` canonical URL consistency
-
-**File:** `next.config.ts` — `trailingSlash: true` **Current state:** Root layout and sitemap use trailing slashes. Spot-check that all structured data `@id` URLs and `alternates.canonical` values consistently use trailing slashes. **Spot check:** `NewsArticleStructuredData` `@id` field, `GlobalStructuredData`.
-
----
-
-## Summary Table (remaining)
-
-| Issue                                              | Priority | Impact       | Effort |
-| -------------------------------------------------- | -------- | ------------ | ------ |
-| `og-default.png` → `.png` fix (4 files)            | P1       | Medium       | 15 min |
-| `generateStaticParams` → `sanityFetch` in articles | P2       | Low-Med      | 30 min |
-| LQIP blur placeholders                             | P2       | Medium (CLS) | 2 hrs  |
-| Barrel file audit (global/)                        | P3       | Low-Med      | 1 hr   |
-| trailingSlash audit on structured data             | P3       | Low          | 30 min |

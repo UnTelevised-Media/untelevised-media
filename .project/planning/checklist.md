@@ -1,44 +1,30 @@
 # UnTelevised Media — Open Issues Checklist
 
-> Re-audited: 2026-03-13
-> All items from previous audit rounds confirmed complete (including generateStaticParams, LQIP, trailingSlash audit, siteSettings singleton).
-> Remaining items below.
+> Re-audited: 2026-03-13 (second pass) — New P2/P3 items found. See audit files for detail.
 
 ---
 
-## P1 — Fix Now
+## ❌ Open — P2
 
-- [ ] **`og-default.jpg` → `og-default.png` in 4 files** — The asset in `/public/` is `.png` but 4 files still reference `.jpg`, breaking social OG fallback.
-  - `src/util/metadata.ts` line 10 — `DEFAULT_OG_IMAGE` constant
-  - `src/app/(music)/lyrics/[slug]/page.tsx` line 45
-  - `src/app/(music)/music-artists/[slug]/page.tsx` line 46
-  - `src/app/(music)/albums/[slug]/page.tsx` line 48
+| Item | Audit | File |
+|------|-------|------|
+| `notFound()` on `author/[slug]` — inline div instead of proper 404 | 01 | `src/app/(user)/author/[slug]/page.tsx` |
+| `notFound()` on `live-event/[slug]` — no null guard in page body | 01 | `src/app/(user)/live-event/[slug]/page.tsx` |
+| `notFound()` on `albums/[slug]` — inline div instead of proper 404 | 01 | `src/app/(music)/albums/[slug]/page.tsx` |
+| `notFound()` on `lyrics/[slug]` — no null guard | 01 | `src/app/(music)/lyrics/[slug]/page.tsx` |
+| `notFound()` on `music-artists/[slug]` — no null guard | 01 | `src/app/(music)/music-artists/[slug]/page.tsx` |
+| `notFound()` on `category/[slug]` — no null guard | 01 | `src/app/(user)/category/[slug]/page.tsx` |
+| JSON-LD `MusicAlbum` schema missing on album pages | 02 | `src/app/(music)/albums/[slug]/page.tsx` |
+| JSON-LD `MusicComposition` schema missing on lyrics pages | 02 | `src/app/(music)/lyrics/[slug]/page.tsx` |
+| JSON-LD `MusicGroup`/`Person` schema missing on music artist pages | 02 | `src/app/(music)/music-artists/[slug]/page.tsx` |
+| `albums/[slug]` `keywords` in metadata is a string not `string[]` | 02, 05 | `src/app/(music)/albums/[slug]/page.tsx` line 58 |
 
----
+## ❌ Open — P3
 
-## P2 — Next Sprint
-
-- [ ] **`liveEvent.keywords` string → array migration**
-  - `src/models/schema/liveEvent.ts` — `keywords` still `type: 'string'`
-  - `src/util/metadata.ts` `buildLiveEventMetadata` — still does `.split(',')`
-  - Fix: create `migrations/liveEvent-keywords-string-to-array/`, update schema to array + tags layout, update metadata handler
-
-- [ ] **Wire `seoObject` field overrides into `generateMetadata` for music and event pages**
-  - `seoObject` field was added to all schemas but not yet read in `generateMetadata` of dynamic routes
-  - Pattern: `seo?.title ?? computedTitle` fallback in each `generateMetadata`
-  - Affects: `lyrics/[slug]`, `music-artists/[slug]`, `albums/[slug]`, `live-event/[slug]`, `category/[slug]`
-
----
-
-## P3 — Backlog
-
-- [ ] **Run article `keywords` migration against production content**
-  - `migrations/keywords-string-to-array/index.ts` exists but not confirmed run against production
-  - `pnpm sanity migration run keywords-string-to-array --dry-run` first, then without `--dry-run`
-
-- [ ] **Barrel file audit — `src/components/global/`**
-  - `src/components/ads/` has a barrel `index.ts`; `src/components/global/` does not
-  - Decide on consistent pattern; prefer direct imports for components not always needed
+| Item | Audit | File |
+|------|-------|------|
+| JSON-LD `ItemList`/`CollectionPage` schema missing on timeline pages | 02 | `src/app/(user)/timeline/[slug]/page.tsx` |
+| JSON-LD `CollectionPage` schema missing on category pages | 02 | `src/app/(user)/category/[slug]/page.tsx` |
 
 ---
 
@@ -46,27 +32,33 @@
 
 | Item | Verified |
 |------|---------|
+| `generateStaticParams` → `sanityFetch` in all 10 dynamic routes | fixed 2026-03-13 |
 | `generateStaticParams` in articles → `sanityFetch` | line 282 of `articles/[slug]/page.tsx` |
 | LQIP blur placeholders | `blurDataURL` in `page.tsx`, `articles/[slug]`, `author/[slug]` |
 | Trailing slashes on all structured data URLs | NewsArticleStructuredData + GlobalStructuredData verified |
-| `siteSettings` singleton in Studio structure | src/lib/sanity/structure.ts lines 8–13 |
-| SEO/metadata system (P1/P2) | merged to development |
-| Performance optimizations (P1/P2) | merged to development |
-| Server-hoist logo (`HeaderLogo`) | merged to development |
-| Font loading cleanup (Geist removed) | merged to development |
-| Sanity TypeGen (`sanity.types.ts`) | merged to development |
-| `keywords` → array (article schema + migration script) | merged to development |
-| `use cache` + `generateStaticParams` on music pages | merged to development |
-| Article schema fields (leadParagraph, faqs, relatedArticles, reviewedBy) | merged to development |
-| LiveEvent schema fields (endDate, eventStatus, seo) | merged to development |
-| `seoObject` on all content types | merged to development |
-| Author `Person` structured data | merged to development |
-| FAQ schema + FAQPage structured data | merged to development |
-| Related articles section on article page | merged to development |
-| `dateModified` wired from `updatedAt` | merged to development |
+| `siteSettings` singleton in Studio structure | `src/lib/sanity/structure.ts` lines 8–13 |
+| SEO/metadata system | All dynamic routes have `generateMetadata` with seo overrides |
+| Performance optimizations | All items complete — see audit 04 |
+| Server-hoist logo (`HeaderLogo`) | `logoSlot` prop pattern in both layouts |
+| Font loading cleanup (Geist removed) | Inter only; `src/app/layout.tsx` |
+| Sanity TypeGen (`sanity.types.ts`) | 59 queries, 50 types at project root |
+| `keywords` → array (article schema + migration script + production run) | 25 articles patched 2026-03-13 |
+| `liveEvent.keywords` → array (schema + migration script + production run) | 5 liveEvents patched 2026-03-13 |
+| `use cache` + `generateStaticParams` on music pages | lyrics, music-artists, albums |
+| Article schema fields (leadParagraph, faqs, relatedArticles, reviewedBy) | merged |
+| LiveEvent schema fields (endDate, eventStatus, seo) | merged |
+| `seoObject` on all content types | merged |
+| Barrel file audit — `global/` direct imports, `ads/`+`consent/` barrels intentional | audited 2026-03-13 |
+| Author `Person` structured data | merged |
+| FAQ schema + FAQPage structured data | merged |
+| Related articles section on article page | merged |
+| `dateModified` wired from `updatedAt` | merged |
 | `og-default.png` added to `/public/` | done |
 | Root `layout.tsx` OG reference fixed to `.png` | done |
-| Static metadata — about, staff, donate, support | merged to development |
-| Static metadata — secure-contact, whistleblower, join | merged to development |
-| Static metadata — lyrics index, music-artists index | merged to development |
-| Suspense on homepage (`FeaturedStoriesGrid`) | merged to development |
+| `liveEvent.keywords` string → array (schema + migration script + metadata handlers) | committed 39602d7 |
+| `seoObject` override wiring for all dynamic routes (music, event, category) | committed 39602d7 |
+| `SeoOverride` interface + `seo?` field on `LiveEvent`, `Category`, `MusicArtist`, `Album`, `Song` | committed 39602d7 |
+| Static metadata — about, staff, donate, support | merged |
+| Static metadata — secure-contact, whistleblower, join | `layout.tsx` pattern in each route |
+| Static metadata — lyrics index, music-artists index | merged |
+| Suspense on homepage (`FeaturedStoriesGrid`) | merged |

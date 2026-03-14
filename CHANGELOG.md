@@ -10,6 +10,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+### Audit — Second Pass (2026-03-13)
+
+Full second-pass audit against Next.js, Sanity, SEO/AEO, and Vercel/React best-practice skills. All prior items confirmed complete. New open items surfaced and logged in `.project/planning/audit/` and `.project/planning/checklist.md`.
+
+#### Open — P2
+- `notFound()` missing on 6 dynamic routes: `author/[slug]`, `live-event/[slug]`, `albums/[slug]`, `lyrics/[slug]`, `music-artists/[slug]`, `category/[slug]` — all currently return inline "not found" divs instead of triggering the proper Next.js 404 mechanism
+- JSON-LD `MusicAlbum` structured data missing from `albums/[slug]`
+- JSON-LD `MusicComposition` structured data missing from `lyrics/[slug]`
+- JSON-LD `MusicGroup`/`Person` structured data missing from `music-artists/[slug]`
+- `albums/[slug]` `generateMetadata` emits `keywords` as a template-literal string instead of `string[]`
+
+#### Open — P3
+- JSON-LD `ItemList`/`CollectionPage` structured data missing from `timeline/[slug]`
+- JSON-LD `CollectionPage` structured data missing from `category/[slug]`
+
+---
+
 ### Sanity TypeGen
 
 - Add `sanity.config.ts` at project root (CLI-only config — no `'use client'`, no `@/` aliases) to enable `pnpm sanity typegen generate` without conflicts with the embedded studio config
@@ -143,5 +160,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fix `StructuredData.tsx` — replace `next/script` with plain `<script>` tags for inline JSON-LD (correct RSC pattern)
 - Fix `sitemap.ts` — homepage priority `0.3` → `1.0`, article priorities now recency-based (`0.8/0.6/0.4`), live events `0.9`, all URLs use trailing slashes, added missing static pages (`/about/`, `/staff/`, `/donate/`, `/past-events/`)
 - Fix `robots.ts` — add `Disallow: /api/`, fix `BASEURL` with fallback to `NEXT_PUBLIC_APP_URL` then hardcoded production URL, explicitly allow all major AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, anthropic-ai, cohere-ai)
+
+---
+
+### Sanity Schema — Live Event Keywords
+
+- Migrate `liveEvent.keywords` field from `type: 'string'` → `type: 'array'` of strings with tags layout (consistent with article keywords)
+- Create `migrations/liveEvent-keywords-string-to-array/index.ts` — splits existing comma-separated strings into arrays on migration run; skips documents already holding an array
+- Update `buildLiveEventMetadata` in `src/util/metadata.ts` — use keywords array directly, remove `.split(',')` splitting
+- Update `generateLiveEventMetadata` in `src/util/metadata/generateLiveEventMetadata.ts` — same array-aware fix
+
+---
+
+### Production Data Migrations
+
+- Run `keywords-string-to-array` against `articles` dataset — 41 documents scanned, 25 article documents patched (keywords field converted from comma-separated string to array)
+- Run `liveEvent-keywords-string-to-array` against `articles` dataset — 5 liveEvent documents scanned and patched
+
+---
+
+### SEO & Metadata — seoObject Override Wiring
+
+- Wire `seo.metaTitle`, `seo.metaDescription`, `seo.canonicalUrl`, `seo.ogImage` overrides into `buildLiveEventMetadata` — per-event Studio overrides now take precedence over computed defaults
+- Wire `seo` overrides into `buildCategoryMetadata` — per-category Studio SEO fields now applied
+- Wire `seo` overrides into `generateMetadata` for `/lyrics/[slug]` — `song.seo?.metaTitle ?? computedTitle` pattern
+- Wire `seo` overrides into `generateMetadata` for `/music-artists/[slug]` — same pattern
+- Wire `seo` overrides into `generateMetadata` for `/albums/[slug]` — same pattern
+- Add `seo` field to `queryCategoryBySlug` GROQ projection — was previously not returned from Sanity
+
+---
+
+### TypeScript Types
+
+- Add `SeoOverride` interface to `types.d.ts` — shared type with `metaTitle?`, `metaDescription?`, `ogImage?`, `noIndex?`, `canonicalUrl?` fields
+- Add `seo?: SeoOverride` to `LiveEvent`, `Category`, `MusicArtist`, `Album`, `Song` global interfaces
+- Correct `Article.keywords` type from `string` → `string[]` in `types.d.ts` (was mismatched with schema)
+- Correct `LiveEvent.keywords` type from `string` → `string[]` in `types.d.ts`
 
 ---

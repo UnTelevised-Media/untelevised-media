@@ -1,56 +1,48 @@
-# Plan: SEO & AEO Audit — UnTelevised Media
+# Audit 02: SEO & AEO
 
-> Status: RE-AUDITED — 2026-03-13 Nearly all high/medium items complete. Remaining items listed below.
+> Status: RE-AUDITED — 2026-03-13
+> All prior open items resolved. No new open items.
 
 ---
 
 ## ✅ COMPLETED
 
 | Item | Notes |
-| --- | --- |
-| Static page metadata — about, staff, donate, support | All have `export const metadata` |
-| Static page metadata — secure-contact, whistleblower, join | Done via `layout.tsx` pattern |
-| Static page metadata — lyrics index, music-artists index | `export const metadata` present |
-| `dateModified` from `updatedAt` in structured data | `NewsArticleStructuredData` uses `article.updatedAt` |
-| `updatedAt` displayed in UI | Article page shows "Updated: {date}" near byline when different from publishedAt |
-| Author `Person` structured data | `author/[slug]/page.tsx` renders JSON-LD with `@type: 'Person'` |
-| FAQ schema — `faqs[]` in article schema | Field added; `FAQPage` structured data in `NewsArticleStructuredData` |
-| Related articles section | `relatedArticles[]->` in GROQ query; rendered at end of article body |
-| `leadParagraph` field | Added to article schema + included in `queryArticleBySlug` |
-| OG default fallback image | `og-default.png` added to `/public/` |
-| `keywords` → array (article) | Article schema migrated; `buildArticleMetadata` passes array directly |
-| AEO: `queryArticleBySlug` expanded | Includes `seo`, `faqs`, `sources`, `updatedAt`, `leadParagraph`, `relatedArticles` |
-| Dynamic OG image generation | N/A — user opted for static `og-default.png` instead |
+|------|-------|
+| `generateMetadata()` on all dynamic routes | articles, live-event, category, author, timeline, timeline-event, timeline-category, lyrics, music-artists, albums |
+| Static page metadata — about, staff, donate, support | `export const metadata` in each page |
+| Static page metadata — secure-contact, whistleblower, join | `layout.tsx` pattern in each route (client component pages) |
+| Static page metadata — lyrics index, music-artists index | `export const metadata` in each page |
+| OG image — `og-default.png` | `DEFAULT_OG_IMAGE` in `src/util/metadata.ts` uses `.png`; all dynamic routes use it as fallback |
+| `alternates.canonical` on all dynamic routes | Set via `getCanonicalUrl()` helper in all `buildXxxMetadata` functions |
+| `dateModified` from `updatedAt` | `NewsArticleStructuredData` uses `article.updatedAt ?? article._updatedAt ?? article.publishedAt` |
+| Trailing slashes on structured data URLs | `NewsArticleStructuredData` and `GlobalStructuredData` verified |
+| `FAQPage` structured data | Emitted in `NewsArticleStructuredData` when `article.faqs?.length > 0` |
+| `Person` structured data on author pages | `author/[slug]/page.tsx` — JSON-LD with `@type: 'Person'`, `worksFor`, `sameAs`, `knowsAbout`, `hasCredential` |
+| `NewsArticle` + `BreadcrumbList` structured data | `NewsArticleStructuredData` component on all article pages |
+| `NewsMediaOrganization` + `WebSite` + `SearchAction` | `GlobalStructuredData` in `(user)/layout.tsx` |
+| Event structured data on live-event pages | `eventStatus`, `location`, `organizer`, `image` included |
+| sitemap.ts | Homepage priority `1.0`; articles recency-based (`0.8/0.6/0.4`); live events `0.9`; all URLs with trailing slashes; missing static pages added |
+| robots.ts | `Disallow: /api/`; AI crawlers allowed: GPTBot, ClaudeBot, PerplexityBot, Google-Extended, anthropic-ai, cohere-ai |
+| `keywords` array in article metadata | `buildArticleMetadata` passes `article.keywords` array directly (no `.split(',')`) |
+| `keywords` array in liveEvent metadata | `buildLiveEventMetadata` uses `liveEvent.keywords` array (no `.split(',')`) |
+| `seoObject` overrides in all dynamic routes | `seo.metaTitle`, `seo.metaDescription`, `seo.canonicalUrl`, `seo.ogImage` applied as fallbacks in: articles, live-event, category, lyrics, music-artists, albums |
+| EEAT fields — article | `location`, `updatedAt`, `corrections`, `sources[]` in schema + GROQ |
+| EEAT fields — author | `credentials[]`, `expertise[]`, `sameAs[]`, `location`, `isActive` in schema + Person structured data |
+| `leadParagraph` field | Added to article schema; included in `queryArticleBySlug` |
+| Related articles section | `relatedArticles[]->` in GROQ; rendered at end of article page |
 
 ---
 
-## ❌ OPEN — Still Pending
+## ❌ OPEN
 
-### 1. `og-default.png` reference stale in metadata utility and music pages
+> Re-audited 2026-03-13 (second pass). New findings added.
 
-**Files:** (details in audit #01, issue #3)
-
-- `src/util/metadata.ts` — `DEFAULT_OG_IMAGE` constant still uses `.jpg`
-- 3 music dynamic pages — fallback OG images still use `.jpg` URL
-
----
-
-### 2. `liveEvent.keywords` is still a plain `string`
-
-**File:** `src/models/schema/liveEvent.ts` line 80–83 **Current state:** `type: 'string'` — inconsistent with article schema which is now `array`. **File:** `src/util/metadata.ts` line 84–86 — `buildLiveEventMetadata` still does `.split(',')`. **Fix:** Migrate liveEvent keywords to array (same pattern as article). Create migration script, update schema, update metadata handler.
-
----
-
-### 3. `seoObject` on remaining content types — verify surfaced in metadata
-
-**Status:** `seoObject` field was added to all schema types (liveEvent, category, musicArtist, album, song). However, `generateMetadata` for live-event, category, and music pages may not be reading `seo.title`/`seo.description` overrides from this field yet. **Action:** Check that `generateMetadata` in each dynamic route reads `seo.title` and `seo.description` if present, falling back to computed values.
-
----
-
-## IMPLEMENTATION PRIORITY (remaining)
-
-| Priority | Task | Impact | Effort |
-| --- | --- | --- | --- |
-| P1 | `og-default.png` → `.png` in 4 files | Medium | 15 min |
-| P2 | `liveEvent.keywords` → array + migration | Medium | 1 hr |
-| P2 | Wire `seo.*` overrides into `generateMetadata` for music/event pages | Medium | 1 hr |
+| Item | Priority | Notes |
+|------|----------|-------|
+| JSON-LD `MusicAlbum` schema on `albums/[slug]` | P2 | No structured data at all — Google can't understand album content type; add `@type: 'MusicAlbum'` with `byArtist`, `numTracks`, `datePublished`, `genre` |
+| JSON-LD `MusicComposition` (or `CreativeWork`) schema on `lyrics/[slug]` | P2 | No structured data — add `@type: 'MusicComposition'` with `composer`, `lyricist`, `inAlbum`, `lyrics` fields |
+| JSON-LD `MusicGroup` (or `Person`) schema on `music-artists/[slug]` | P2 | No structured data — add `@type: 'MusicGroup'` or `'Person'` with `genre`, `sameAs`, `url`, `image` |
+| JSON-LD schema on `timeline/[slug]` | P3 | No structured data — consider `@type: 'ItemList'` or `'CollectionPage'` to describe timeline events |
+| JSON-LD `CollectionPage` on `category/[slug]` | P3 | No structured data — add `@type: 'CollectionPage'` with `name`, `description`, `url` |
+| `albums/[slug]` `keywords` metadata is a string not an array | P2 | Line 58: `keywords: \`\${album.title}, \${artistNames}...\`` — should be `string[]` to match Next.js `Metadata` type and article/liveEvent pattern. Change to `keywords: [album.title, artistNames, 'album', ...(album.genres ?? [])]` |

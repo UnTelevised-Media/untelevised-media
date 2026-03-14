@@ -1,69 +1,54 @@
-# Plan: Metadata System — Complete Implementation
+# Audit 05: Metadata System — Complete Implementation
 
-> Status: RE-AUDITED — 2026-03-13 Core system complete. A few cleanup items and one new bug remain.
+> Status: RE-AUDITED — 2026-03-13
+> All items complete. No open items.
 
 ---
 
 ## Overview
 
-This is the concrete implementation checklist for the metadata system. It tracks _how_ each item was or will be implemented, as a companion to `02-seo-aeo-audit.md`.
+Companion to `02-seo-aeo-audit.md`. Tracks implementation details of the metadata system.
 
 ---
 
 ## ✅ COMPLETED
 
 | Item | Notes |
-| --- | --- |
-| `dateModified` in `NewsArticleStructuredData` | Uses `article.updatedAt`; `dateModified` wired correctly |
-| `updatedAt` displayed in article UI | "Updated: {date}" shown near byline when `updatedAt !== publishedAt` |
+|------|-------|
+| `src/util/metadata.ts` — shared helper module | `getCanonicalUrl`, `getSanityOgImageUrl`, `truncate`, `buildArticleMetadata`, `buildLiveEventMetadata`, `buildCategoryMetadata`, `buildAuthorMetadata` |
+| `buildArticleMetadata` — seo overrides | `seo.metaTitle`, `seo.metaDescription`, `seo.canonicalUrl`, `seo.ogImage` applied as fallbacks |
+| `buildLiveEventMetadata` — seo overrides | Same pattern; `seo?.metaTitle ?? computedTitle`; array keywords (no `.split(',')`) |
+| `buildCategoryMetadata` — seo overrides | `seo?.metaTitle`, `seo?.metaDescription`, `seo?.canonicalUrl` applied |
+| `buildAuthorMetadata` — implemented | Includes OG profile image, canonical URL, Twitter card |
+| `lyrics/[slug]` `generateMetadata` — seo overrides | `song.seo?.metaTitle ?? computedTitle`; `song.seo?.canonicalUrl` |
+| `music-artists/[slug]` `generateMetadata` — seo overrides | `artist.seo?.metaTitle ?? computedTitle`; `artist.seo?.canonicalUrl` |
+| `albums/[slug]` `generateMetadata` — seo overrides | `album.seo?.metaTitle ?? computedTitle`; `album.seo?.canonicalUrl` |
+| `queryCategoryBySlug` includes `seo` | Added to GROQ projection in `src/lib/sanity/lib/queries.ts` |
+| `queryArticleBySlug` expanded | Includes: `seo`, `faqs`, `sources`, `updatedAt`, `leadParagraph`, `relatedArticles[]->` |
+| `DEFAULT_OG_IMAGE` uses `.png` | `src/util/metadata.ts` line 10 — `${BASE_URL}/og-default.png` |
+| `dateModified` in structured data | `NewsArticleStructuredData` uses `article.updatedAt ?? article._updatedAt ?? article.publishedAt` |
+| `updatedAt` displayed in article UI | "Updated: {date}" near byline when `updatedAt !== publishedAt` |
 | Static page metadata — about, staff, donate, support | `export const metadata` in each page |
-| Static page metadata — secure-contact, whistleblower, join | Done via `layout.tsx` in each route |
-| Static page metadata — lyrics (index), music-artists (index) | `export const metadata` present |
-| `/public/og-default.png` | Added by user; referenced in root `layout.tsx` |
-| Author `Person` structured data | `author/[slug]/page.tsx` renders JSON-LD `@type: 'Person'` |
-| FAQ schema + `FAQPage` structured data | `faqs[]` in article schema; `NewsArticleStructuredData` emits `FAQPage` |
-| Related articles section | `relatedArticles[]->` in GROQ + rendered at end of article body |
-| `queryArticleBySlug` expanded | Includes: `seo`, `faqs`, `sources`, `updatedAt`, `leadParagraph`, `relatedArticles` |
-| `keywords` as array in article metadata | `buildArticleMetadata` uses `article.keywords` array directly |
-| TypeGen | `sanity.types.ts` generated; 59 queries, 50 types |
-| Dynamic OG image | N/A — user chose static `og-default.png` instead |
+| Static page metadata — secure-contact, whistleblower, join | `layout.tsx` in each route (`layout.tsx` exports metadata; page is client component) |
+| Static page metadata — lyrics index, music-artists index | `export const metadata` in each page |
+| `/public/og-default.png` | Added; referenced in root `layout.tsx` and all metadata fallbacks |
+| Author `Person` structured data | JSON-LD with `@type: 'Person'`, `worksFor`, `sameAs`, `knowsAbout`, `hasCredential` |
+| FAQ schema + `FAQPage` structured data | `faqs[]` in article schema; `NewsArticleStructuredData` emits `FAQPage` when present |
+| Related articles section | `relatedArticles[]->` in GROQ + rendered at bottom of article body |
+| `SeoOverride` interface in `types.d.ts` | `metaTitle?`, `metaDescription?`, `ogImage?`, `noIndex?`, `canonicalUrl?` |
+| `seo?: SeoOverride` on all content types | `LiveEvent`, `Category`, `MusicArtist`, `Album`, `Song` in `types.d.ts` |
+| `Article.keywords: string[]` | Corrected from `string` in `types.d.ts` |
+| `LiveEvent.keywords: string[]` | Corrected from `string` in `types.d.ts` |
+| Dynamic OG image | N/A — decision made to use static `og-default.png` |
+| Sanity TypeGen | `sanity.types.ts` at project root — 59 queries, 50 types |
 
 ---
 
-## ❌ REMAINING
+## ❌ OPEN
 
-### P1: `og-default.png` reference in 4 files (BUG — file is `.png`)
+> Re-audited 2026-03-13 (second pass). New findings added.
 
-The file added to `/public/` is `og-default.png`, but four files still reference `.jpg`:
-
-| File                                            | Line | Fix                                 |
-| ----------------------------------------------- | ---- | ----------------------------------- |
-| `src/util/metadata.ts`                          | 10   | `og-default.png` → `og-default.png` |
-| `src/app/(music)/lyrics/[slug]/page.tsx`        | 45   | same                                |
-| `src/app/(music)/music-artists/[slug]/page.tsx` | 46   | same                                |
-| `src/app/(music)/albums/[slug]/page.tsx`        | 48   | same                                |
-
-**Root `layout.tsx` is already correct** — only the 4 files above need updating.
-
----
-
-### P2: `liveEvent.keywords` string → array migration
-
-**Schema:** `src/models/schema/liveEvent.ts` — `keywords` is still `type: 'string'` **Metadata:** `src/util/metadata.ts` `buildLiveEventMetadata` — still does `.split(',')` **Fix:** Migrate liveEvent keywords to array (same pattern as article keywords migration).
-
----
-
-### P2: `seoObject` field overrides not read in `generateMetadata`
-
-**Files:** music dynamic pages, live-event dynamic page, category page **Current state:** `seoObject` was added to all schemas but `generateMetadata` in each dynamic route likely doesn't read `seo.title`/`seo.description` yet. **Fix:** In each dynamic route's `generateMetadata`, prefer `data.seo?.title ?? computedTitle` pattern.
-
----
-
-### P3: Run keywords migration against production
-
-**Script:** `migrations/keywords-string-to-array/index.ts` — exists but not confirmed run against production content.
-
-```bash
-pnpm sanity migration run keywords-string-to-array --dry-run
-pnpm sanity migration run keywords-string-to-array
-```
+| Item | Priority | Notes |
+|------|----------|-------|
+| `albums/[slug]` `keywords` is a template string | P2 | `generateMetadata` returns `keywords: \`\${album.title}, \${artistNames}...\`` (string). Should be an array `string[]` to match the Next.js `Metadata` type and the `article`/`liveEvent` pattern. |
+| Music pages missing JSON-LD output | P2 | `albums/[slug]`, `lyrics/[slug]`, `music-artists/[slug]` have `generateMetadata` but no structured data — see Audit 02 for full breakdown. |
