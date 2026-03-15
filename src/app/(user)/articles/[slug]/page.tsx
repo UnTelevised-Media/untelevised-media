@@ -75,20 +75,6 @@ export default async function Article({ params }: Props) {
         <div className='absolute inset-0 flex items-end'>
           <div className='mx-auto w-full max-w-4xl px-4 pb-12 sm:px-6 lg:px-8'>
             <div className='space-y-6'>
-              {/* Categories */}
-              {article.categories && article.categories.length > 0 && (
-                <div className='flex flex-wrap gap-2'>
-                  {article.categories.map((category) => (
-                    <span
-                      key={category._id}
-                      className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm'
-                    >
-                      {category.title}
-                    </span>
-                  ))}
-                </div>
-              )}
-
               {/* Title */}
               <h1 className='text-4xl font-bold text-white sm:text-5xl lg:text-6xl'>
                 {article.title}
@@ -127,26 +113,41 @@ export default async function Article({ params }: Props) {
                   </ClientSideRoute>
                 </div>
 
-                <div className='flex flex-wrap items-center gap-3 text-slate-300'>
-                  {article.location && (
-                    <span className='flex items-center text-sm'>📍 {article.location}</span>
-                  )}
-                  <time className='text-sm'>{formatDate(getArticleDate(article))}</time>
-                  {article.updatedAt && article.updatedAt !== article.publishedAt && (
-                    <span className='text-sm text-slate-400'>
-                      Updated: {formatDate(article.updatedAt)}
-                    </span>
-                  )}
-                  {article.reviewedBy && (
-                    <span className='text-sm text-slate-400'>
-                      Reviewed by{' '}
-                      <Link
-                        href={`/author/${article.reviewedBy.slug?.current}`}
-                        className='font-medium text-slate-300 underline hover:text-white'
-                      >
-                        {article.reviewedBy.name}
-                      </Link>
-                    </span>
+                <div className='flex flex-col items-end gap-2'>
+                  <div className='flex flex-wrap items-center gap-3 text-slate-300'>
+                    {article.location && (
+                      <span className='flex items-center text-sm'>📍 {article.location}</span>
+                    )}
+                    <time className='text-sm'>{formatDate(getArticleDate(article))}</time>
+                    {article.updatedAt && article.updatedAt !== article.publishedAt && (
+                      <span className='text-sm text-slate-400'>
+                        Updated: {formatDate(article.updatedAt)}
+                      </span>
+                    )}
+                    {article.reviewedBy && (
+                      <span className='text-sm text-slate-400'>
+                        Reviewed by{' '}
+                        <Link
+                          href={`/author/${article.reviewedBy.slug?.current}`}
+                          className='font-medium text-slate-300 underline hover:text-white'
+                        >
+                          {article.reviewedBy.name}
+                        </Link>
+                      </span>
+                    )}
+                  </div>
+                  {/* Categories */}
+                  {article.categories && article.categories.length > 0 && (
+                    <div className='flex flex-wrap justify-end gap-2'>
+                      {article.categories.map((category) => (
+                        <span
+                          key={category._id}
+                          className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm'
+                        >
+                          {category.title}
+                        </span>
+                      ))}
+                    </div>
                   )}
                 </div>
               </div>
