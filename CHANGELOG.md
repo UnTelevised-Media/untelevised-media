@@ -48,6 +48,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   now use `IntersectionObserver` with `AD_CONFIG.PERFORMANCE.LAZY_LOAD_MARGIN`
   (`200px`) to defer `pushAd` until the container approaches the viewport,
   reducing initial page load impact for below-fold ad placements
+- **`.env.example`** — created with all required env vars documented, including
+  `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_GA4_ID`, and `NEXT_PUBLIC_GAS_ID` with
+  descriptions and where to find each value
 
 ---
 
