@@ -8,7 +8,7 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import type { Metadata } from 'next';
 import { queryArticleByCategory, queryCategoryBySlug } from '@/lib/sanity/lib/queries';
 import resolveHref from '@/util/resolveHref';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildCategoryMetadata } from '@/util/metadata';
 
@@ -20,16 +20,16 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const category: Category = await sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] });
+  const { data: category } = await sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] });
   if (!category) return { title: 'Category Not Found' };
   return buildCategoryMetadata(category, slug);
 }
 
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
-  const [articles, category] = await Promise.all([
+  const [articles, { data: category }] = await Promise.all([
     getArticlesByCategory(slug),
-    sanityFetch<Category>({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }),
+    sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }),
   ]);
 
   return (
@@ -65,7 +65,7 @@ export default async function CategoryPage({ params }: Props) {
 async function getArticlesByCategory(slug: string): Promise<Article[]> {
   try {
     // Fetch article data by category from Sanity
-    const articles: Article[] = await sanityFetch({
+    const { data: articles } = await sanityFetch({
       query: queryArticleByCategory,
       params: { slug },
       tags: ['article'],

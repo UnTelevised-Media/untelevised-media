@@ -14,7 +14,7 @@ import resolveHref from '@/util/resolveHref';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import type { Metadata } from 'next';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
 import { buildAuthorMetadata } from '@/util/metadata';
@@ -218,7 +218,7 @@ export default async function Author({ params }: Props) {
 // React.cache deduplicates this fetch across generateMetadata and the page component
 const getAuthorBySlug = cache(async (slug: string): Promise<Author | null> => {
   try {
-    const author: Author = await sanityFetch({
+    const { data: author } = await sanityFetch({
       query: queryAuthorBySlug,
       params: { slug },
       tags: ['author'],

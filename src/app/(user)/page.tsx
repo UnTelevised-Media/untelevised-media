@@ -12,7 +12,7 @@ import { SidebarAd, AD_CONFIG } from '@/components/ads';
 import TestAd from '@/components/debug/TestAd';
 import Banner from '@/components/global/Banner';
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryAllArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
@@ -268,15 +268,15 @@ async function getFrontPageData(): Promise<{
   liveEvents: LiveEvent[];
 }> {
   try {
-    const [liveEvents, articles] = await Promise.all([
+    const [{ data: liveEvents }, { data: articles }] = await Promise.all([
       sanityFetch({
         query: queryLiveEvents,
         tags: ['liveEvent'],
-      }) as Promise<LiveEvent[]>,
+      }),
       sanityFetch({
         query: queryAllArticles,
         tags: ['article'],
-      }) as Promise<Article[]>,
+      }),
     ]);
 
     return { liveEvents, articles };

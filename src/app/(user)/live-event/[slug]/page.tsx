@@ -14,7 +14,7 @@ import formatDate from '@/util/formatDate';
 import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 import resolveHref from '@/util/resolveHref';
 import type { Metadata } from 'next';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
 import { buildLiveEventMetadata, getSanityOgImageUrl } from '@/util/metadata';
@@ -27,7 +27,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const liveEvent: LiveEvent = await sanityFetch({ query: queryEventBySlug, params: { slug }, tags: ['liveEvent'] });
+  const { data: liveEvent } = await sanityFetch({ query: queryEventBySlug, params: { slug }, tags: ['liveEvent'] });
   if (!liveEvent) return { title: 'Live Event Not Found' };
   return buildLiveEventMetadata(liveEvent, slug);
 }
@@ -250,7 +250,7 @@ export default async function LiveEvent({ params }: Props) {
 async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
   try {
     // Fetch article data from Sanity
-    const post = await sanityFetch<LiveEvent>({
+    const { data: post } = await sanityFetch({
       query: queryEventBySlug,
       params: { slug },
       tags: ['liveEvent'],

@@ -11,10 +11,9 @@ import urlForImage from '@/util/urlForImage';
 import { getSongArtworkInfo } from '@/util/getSongArtwork';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
-import { cacheLife, cacheTag } from 'next/cache';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { querySongBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Clock, Calendar, ExternalLink } from 'lucide-react';
 
@@ -433,13 +432,11 @@ export default async function LyricsPage({ params }: Props) {
   );
 }
 
-// Fetch song data by slug — cached per-function with fine-grained tags
+// Fetch song data by slug
 async function getSongBySlug(slug: string): Promise<Song | null> {
-  'use cache';
-  cacheTag('song', `song-${slug}`);
-  cacheLife('hours');
   try {
-    return await sanityClient.fetch<Song>(querySongBySlug, { slug });
+    const { data } = await sanityFetch({ query: querySongBySlug, params: { slug }, tags: ['song'] });
+    return data;
   } catch (error) {
     console.error('Failed to fetch song:', error);
     return null;

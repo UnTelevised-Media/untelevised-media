@@ -16,7 +16,7 @@ import { MdLiveTv } from 'react-icons/md';
 import { RiKickLine } from 'react-icons/ri';
 import ClientSideRoute from '../providers/ClientSideRoute';
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import formatTitleForURL from '@/util/formatTitleForURL';
 import resolveHref from '@/util/resolveHref';
 import { queryCategories, queryPoliciesList } from '@/lib/sanity/lib/queries';
@@ -243,7 +243,7 @@ export default Footer;
 async function getPoliciesList(): Promise<PolicyQueryResult[]> {
   try {
     // Fetch policy data from Sanity
-    const policies: PolicyQueryResult[] = await sanityFetch({
+    const { data: policies } = await sanityFetch({
       query: queryPoliciesList,
       tags: ['policies'],
     });
@@ -258,7 +258,7 @@ async function getPoliciesList(): Promise<PolicyQueryResult[]> {
 async function getNewsCategories(): Promise<CategoryQueryResult[]> {
   try {
     // Fetch category data from Sanity
-    const categories: CategoryQueryResult[] = await sanityFetch({
+    const { data: categories } = await sanityFetch({
       query: queryCategories,
       tags: ['category'],
     });

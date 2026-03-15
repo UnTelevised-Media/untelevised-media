@@ -11,10 +11,9 @@ import urlForImage from '@/util/urlForImage';
 import { getSongArtwork, getSongArtworkAlt } from '@/util/getSongArtwork';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
-import { cacheLife, cacheTag } from 'next/cache';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryMusicArtistBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Calendar, MapPin, ExternalLink, Instagram, Twitter, Youtube } from 'lucide-react';
 
@@ -475,13 +474,11 @@ export default async function MusicArtistPage({ params }: Props) {
   );
 }
 
-// Fetch artist data by slug — cached per-function with fine-grained tags
+// Fetch artist data by slug
 async function getMusicArtistBySlug(slug: string): Promise<ArtistWithContent | null> {
-  'use cache';
-  cacheTag('musicArtist', `musicArtist-${slug}`);
-  cacheLife('hours');
   try {
-    return await sanityClient.fetch<ArtistWithContent>(queryMusicArtistBySlug, { slug });
+    const { data } = await sanityFetch({ query: queryMusicArtistBySlug, params: { slug }, tags: ['musicArtist'] });
+    return data;
   } catch (error) {
     console.error('Failed to fetch artist:', error);
     return null;

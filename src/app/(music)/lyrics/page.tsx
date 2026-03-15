@@ -8,7 +8,7 @@ import urlForImage from '@/util/urlForImage';
 import { getSongArtwork, getSongArtworkAlt } from '@/util/getSongArtwork';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import {
   queryFeaturedSongs,
   queryRecentSongs,
@@ -310,10 +310,11 @@ export default async function LyricsIndexPage() {
 // Data fetching functions
 async function getFeaturedSongs(): Promise<Song[]> {
   try {
-    return await sanityFetch<Song[]>({
+    const { data } = await sanityFetch({
       query: queryFeaturedSongs,
       tags: ['song'],
     });
+    return data;
   } catch (error) {
     console.error('Failed to fetch featured songs:', error);
     return [];
@@ -322,10 +323,11 @@ async function getFeaturedSongs(): Promise<Song[]> {
 
 async function getRecentSongs(): Promise<Song[]> {
   try {
-    return await sanityFetch<Song[]>({
+    const { data } = await sanityFetch({
       query: queryRecentSongs,
       tags: ['song'],
     });
+    return data;
   } catch (error) {
     console.error('Failed to fetch recent songs:', error);
     return [];
@@ -334,10 +336,11 @@ async function getRecentSongs(): Promise<Song[]> {
 
 async function getFeaturedArtists(): Promise<(MusicArtist & { songCount?: number })[]> {
   try {
-    return await sanityFetch<(MusicArtist & { songCount?: number })[]>({
+    const { data } = await sanityFetch({
       query: queryFeaturedMusicArtists,
       tags: ['musicArtist'],
     });
+    return data;
   } catch (error) {
     console.error('Failed to fetch featured artists:', error);
     return [];

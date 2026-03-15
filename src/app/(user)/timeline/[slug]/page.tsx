@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { RectangleAd, BannerAd } from '@/components/ads';
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryTimelineBySlug } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
@@ -324,7 +324,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // Fetch timeline data by slug
 async function getTimelineBySlug(slug: string): Promise<Timeline | null> {
   try {
-    const timeline: Timeline = await sanityFetch({
+    const { data: timeline } = await sanityFetch({
       query: queryTimelineBySlug,
       params: { slug },
       tags: ['timeline'],

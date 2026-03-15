@@ -7,7 +7,7 @@ import TimelineOverview from '@/components/timeline/TimelineOverview';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { BannerAd } from '@/components/ads';
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import {
   queryFeaturedTimelines,
   queryRecentTimelineEvents,
@@ -74,27 +74,33 @@ async function getTimelineData(): Promise<{
 }> {
   try {
     // Fetch all data in parallel for better performance
-    const [featuredTimelines, recentEvents, milestoneEvents, categories, allTimelines] = await Promise.all([
+    const [
+      { data: featuredTimelines },
+      { data: recentEvents },
+      { data: milestoneEvents },
+      { data: categories },
+      { data: allTimelines },
+    ] = await Promise.all([
       sanityFetch({
         query: queryFeaturedTimelines,
         tags: ['timeline'],
-      }) as Promise<Timeline[]>,
+      }),
       sanityFetch({
         query: queryRecentTimelineEvents,
         tags: ['timelineEvent'],
-      }) as Promise<TimelineEvent[]>,
+      }),
       sanityFetch({
         query: queryMilestoneEvents,
         tags: ['timelineEvent'],
-      }) as Promise<TimelineEvent[]>,
+      }),
       sanityFetch({
         query: queryTimelineCategories,
         tags: ['timelineCategory'],
-      }) as Promise<TimelineCategory[]>,
+      }),
       sanityFetch({
         query: queryAllTimelines,
         tags: ['timeline'],
-      }) as Promise<Timeline[]>,
+      }),
     ]);
 
     // Calculate statistics

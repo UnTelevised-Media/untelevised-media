@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import PastEventsPage from '@/components/pages/PastEventsPage';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryPastEvents } from '@/lib/sanity/lib/queries';
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 async function getPastEvents(): Promise<LiveEvent[]> {
   try {
-    const pastEvents = await sanityFetch<LiveEvent[]>({
+    const { data: pastEvents } = await sanityFetch({
       query: queryPastEvents,
       tags: ['liveEvent'],
     });

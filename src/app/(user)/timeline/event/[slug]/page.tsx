@@ -26,7 +26,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { RectangleAd, BannerAd } from '@/components/ads';
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryTimelineEventBySlug } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
@@ -395,7 +395,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // Fetch timeline event data by slug
 async function getTimelineEventBySlug(slug: string): Promise<TimelineEvent | null> {
   try {
-    const event: TimelineEvent = await sanityFetch({
+    const { data: event } = await sanityFetch({
       query: queryTimelineEventBySlug,
       params: { slug },
       tags: ['timelineEvent'],

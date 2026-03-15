@@ -16,7 +16,7 @@ import getArticleDate from '@/util/getArticleDate';
 import resolveHref from '@/util/resolveHref';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata';
@@ -333,7 +333,7 @@ export default async function Article({ params }: Props) {
 // React.cache deduplicates this fetch when called from both generateMetadata and the page component
 const getArticleBySlug = cache(async (slug: string): Promise<Article | null> => {
   try {
-    const article = await sanityFetch<Article>({
+    const { data: article } = await sanityFetch({
       query: queryArticleBySlug,
       params: { slug },
       tags: ['article'],

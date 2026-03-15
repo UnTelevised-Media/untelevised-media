@@ -6,7 +6,7 @@ import { BannerAd } from '@/components/ads';
 
 import urlForImage from '@/util/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryAllMusicArtists, queryFeaturedMusicArtists } from '@/lib/sanity/lib/queries';
 import { Users, Music, Star, MapPin } from 'lucide-react';
 
@@ -252,10 +252,11 @@ export default async function MusicArtistsPage() {
 // Data fetching functions
 async function getFeaturedArtists(): Promise<(MusicArtist & { songCount?: number })[]> {
   try {
-    return await sanityFetch<(MusicArtist & { songCount?: number })[]>({
+    const { data } = await sanityFetch({
       query: queryFeaturedMusicArtists,
       tags: ['musicArtist'],
     });
+    return data;
   } catch (error) {
     console.error('Failed to fetch featured artists:', error);
     return [];
@@ -264,10 +265,11 @@ async function getFeaturedArtists(): Promise<(MusicArtist & { songCount?: number
 
 async function getAllArtists(): Promise<MusicArtist[]> {
   try {
-    return await sanityFetch<MusicArtist[]>({
+    const { data } = await sanityFetch({
       query: queryAllMusicArtists,
       tags: ['musicArtist'],
     });
+    return data;
   } catch (error) {
     console.error('Failed to fetch all artists:', error);
     return [];
