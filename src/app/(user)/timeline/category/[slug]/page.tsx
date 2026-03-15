@@ -12,9 +12,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { BannerAd, RectangleAd } from '@/components/ads';
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryTimelineEventsByCategory, queryTimelinesByCategory } from '@/lib/sanity/lib/queries';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
+import { queryTimelineEventsByCategory, queryTimelinesByCategory } from '@/lib/sanity/lib/queries';
 
 type Props = {
   params: Promise<{
@@ -311,7 +311,7 @@ async function getCategoryData(slug: string): Promise<{
       }
     }`;
 
-    const category: TimelineCategory = await sanityFetch({
+    const { data: category } = await sanityFetch({
       query: categoryQuery,
       params: { slug },
       tags: ['timelineCategory'],
@@ -322,17 +322,17 @@ async function getCategoryData(slug: string): Promise<{
     }
 
     // Get events and timelines in parallel
-    const [events, timelines] = await Promise.all([
+    const [{ data: events }, { data: timelines }] = await Promise.all([
       sanityFetch({
         query: queryTimelineEventsByCategory,
         params: { categoryId: category._id },
         tags: ['timelineEvent'],
-      }) as Promise<TimelineEvent[]>,
+      }),
       sanityFetch({
         query: queryTimelinesByCategory,
         params: { categoryId: category._id },
         tags: ['timeline'],
-      }) as Promise<Timeline[]>,
+      }),
     ]);
 
     return { category, events, timelines };
@@ -344,8 +344,9 @@ async function getCategoryData(slug: string): Promise<{
 
 // Generate static params for the category list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='timelineCategory' && isActive == true] { slug }`;
-  const slugs: TimelineCategory[] = await sanityClient.fetch(query);
+  const queryTimelineCategoryStaticParams = groq`*[_type=='timelineCategory' && isActive == true] { slug }`;
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: TimelineCategory[] = await sanityClient.fetch(queryTimelineCategoryStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

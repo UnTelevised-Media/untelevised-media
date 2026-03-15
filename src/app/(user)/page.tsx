@@ -10,9 +10,10 @@ import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 import RawFeed from '@/components/homepage/RawFeed';
 import { SidebarAd, AD_CONFIG } from '@/components/ads';
 import TestAd from '@/components/debug/TestAd';
+import Banner from '@/components/global/Banner';
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryAllArticles, queryLiveEvents, queryCategories } from '@/lib/sanity/lib/queries';
+import { sanityFetch } from '@/lib/sanity/lib/live';
+import { queryAllArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
@@ -29,6 +30,7 @@ export default async function HomePage() {
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
+      <Banner />
       {/* DEBUG TEST AD - Remove in production */}
       {process.env.NODE_ENV === 'development' && <TestAd />}
       {/* BREAKING ALERT BAR */}
@@ -165,43 +167,65 @@ export default async function HomePage() {
             <div className='h-px flex-1 bg-slate-400 dark:bg-slate-700' />
           </div>
 
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-            {featuredStories.map((article) => (
-              <Link
-                key={article._id}
-                href={`/articles/${article.slug?.current}`}
-                className='group flex h-full flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
-              >
-                <div className='aspect-video overflow-hidden'>
-                  <Image
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    src={urlForImage(article.mainImage as any)?.url() ?? ''}
-                    alt={article.title}
-                    width={800}
-                    height={450}
-                    className='object-cover transition-transform group-hover:scale-105'
+          <Suspense
+            fallback={
+              <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className='h-64 animate-pulse rounded-lg bg-slate-100 dark:bg-slate-800'
                   />
-                </div>
-                <div className='flex flex-1 flex-col p-4'>
-                  {article.categories?.[0] && (
-                    <span className='mb-2 inline-block bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
-                      {article.categories[0].title}
-                    </span>
-                  )}
-                  <h3 className='mb-2 line-clamp-2 font-bold text-slate-800 group-hover:text-untele dark:text-slate-200'>
-                    {article.title}
-                  </h3>
-                  <p className='mb-3 line-clamp-2 flex-1 text-xs text-slate-600 dark:text-slate-400'>
-                    {article.description}
-                  </p>
-                  <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
-                    <span className='font-bold uppercase'>{article.author?.name}</span>
-                    <span>{formatDate(getArticleDate(article))}</span>
+                ))}
+              </div>
+            }
+          >
+            <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+              {featuredStories.map((article) => (
+                <Link
+                  key={article._id}
+                  href={`/articles/${article.slug?.current}`}
+                  className='group flex h-full flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
+                >
+                  <div className='aspect-video overflow-hidden'>
+                    <Image
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      src={urlForImage(article.mainImage as any)?.url() ?? ''}
+                      alt={article.title}
+                      width={800}
+                      height={450}
+                      sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
+                      className='object-cover transition-transform group-hover:scale-105'
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      {...(urlForImage(article.mainImage as any)
+                        ? {
+                            placeholder: 'blur' as const,
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            blurDataURL: urlForImage(article.mainImage as any)!.width(20).blur(10).url(),
+                          }
+                        : {})}
+                    />
                   </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                  <div className='flex flex-1 flex-col p-4'>
+                    {article.categories?.[0] && (
+                      <span className='mb-2 inline-block bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
+                        {article.categories[0].title}
+                      </span>
+                    )}
+                    <h3 className='mb-2 line-clamp-2 font-bold text-slate-800 group-hover:text-untele dark:text-slate-200'>
+                      {article.title}
+                    </h3>
+                    <p className='mb-3 line-clamp-2 flex-1 text-xs text-slate-600 dark:text-slate-400'>
+                      {article.description}
+                    </p>
+                    <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
+                      <span className='font-bold uppercase'>{article.author?.name}</span>
+                      <span>{formatDate(getArticleDate(article))}</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </Suspense>
         </div>
       </section>
 
@@ -242,28 +266,22 @@ export default async function HomePage() {
 async function getFrontPageData(): Promise<{
   articles: Article[];
   liveEvents: LiveEvent[];
-  categories: Category[];
 }> {
   try {
-    // Fetch all data in parallel for better performance
-    const [liveEvents, articles, categories] = await Promise.all([
+    const [{ data: liveEvents }, { data: articles }] = await Promise.all([
       sanityFetch({
         query: queryLiveEvents,
         tags: ['liveEvent'],
-      }) as Promise<LiveEvent[]>,
+      }),
       sanityFetch({
         query: queryAllArticles,
         tags: ['article'],
-      }) as Promise<Article[]>,
-      sanityFetch({
-        query: queryCategories,
-        tags: ['category'],
-      }) as Promise<Category[]>,
+      }),
     ]);
 
-    return { liveEvents, articles, categories };
+    return { liveEvents, articles };
   } catch (error) {
     console.error('Failed to fetch front page data:', error);
-    return { articles: [], liveEvents: [], categories: [] };
+    return { articles: [], liveEvents: [] };
   }
 }

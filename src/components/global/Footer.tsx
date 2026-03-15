@@ -16,7 +16,7 @@ import { MdLiveTv } from 'react-icons/md';
 import { RiKickLine } from 'react-icons/ri';
 import ClientSideRoute from '../providers/ClientSideRoute';
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import formatTitleForURL from '@/util/formatTitleForURL';
 import resolveHref from '@/util/resolveHref';
 import { queryCategories, queryPoliciesList } from '@/lib/sanity/lib/queries';
@@ -99,7 +99,7 @@ async function Footer() {
           </h4>
           <Link
             className='flex items-center gap-x-2'
-            href='https://www.youtube.com/@UnTelevised'
+            href='https://www.youtube.com/@AntiWarTV'
             target='_blank'
           >
             <FaYoutube className='h-4 w-4' />
@@ -115,7 +115,7 @@ async function Footer() {
           </Link>
           <Link
             className='flex items-center gap-x-2'
-            href='https://www.tiktok.com/@untelevisedmedia'
+            href='https://www.tiktok.com/@radical.edward'
             target='_blank'
           >
             <FaTiktok className='h-4 w-4' />
@@ -215,11 +215,11 @@ async function Footer() {
           <Link href='/staff'>Meet Our Staff</Link>
           <Link href='/join'>Join Our Team</Link>
           <Link href='/donate'>Donate/Support Our Outlet</Link>
-          <Link href='mailto:newsroom@untelevised.live'>Contact the Newsroom</Link>
-          <Link href='mailto:newsroom@untelevised.live'>Licensing & Syndication</Link>
-          <Link href='mailto:newsroom@untelevised.live'>Advertise</Link>
-          <Link href='mailto:newsroom@untelevised.live'>Send a News Tip</Link>
-          <Link href='mailto:newsroom@untelevised.live'>Request a Correction</Link>
+          <Link href='mailto:newsroom@untelevised.media'>Contact the Newsroom</Link>
+          <Link href='mailto:newsroom@untelevised.media'>Licensing & Syndication</Link>
+          <Link href='mailto:newsroom@untelevised.media'>Advertise</Link>
+          <Link href='mailto:newsroom@untelevised.media'>Send a News Tip</Link>
+          <Link href='mailto:newsroom@untelevised.media'>Request a Correction</Link>
         </div>
       </div>
 
@@ -243,7 +243,7 @@ export default Footer;
 async function getPoliciesList(): Promise<PolicyQueryResult[]> {
   try {
     // Fetch policy data from Sanity
-    const policies: PolicyQueryResult[] = await sanityFetch({
+    const { data: policies } = await sanityFetch({
       query: queryPoliciesList,
       tags: ['policies'],
     });
@@ -258,7 +258,7 @@ async function getPoliciesList(): Promise<PolicyQueryResult[]> {
 async function getNewsCategories(): Promise<CategoryQueryResult[]> {
   try {
     // Fetch category data from Sanity
-    const categories: CategoryQueryResult[] = await sanityFetch({
+    const { data: categories } = await sanityFetch({
       query: queryCategories,
       tags: ['category'],
     });

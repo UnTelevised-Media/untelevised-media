@@ -1,7 +1,7 @@
 /* eslint-disable react/function-component-definition */
 // src/app/(user)/layout.tsx
 import Header from '@/components/global/Header';
-import Banner from '@/components/global/Banner';
+import HeaderLogo from '@/components/global/HeaderLogo';
 import { draftMode } from 'next/headers';
 
 import NavWrapper from '@/components/global/NavWrapper';
@@ -31,9 +31,8 @@ export default async function UserLayout({ children }: { children: React.ReactNo
         {/* Main Content with offset for draft banner */}
         <div className={draftModeEnabled ? 'pt-16' : ''}>
           {/* Auto-placement disabled - using custom ad components instead */}
-          <Header />
+          <Header logoSlot={<HeaderLogo />} />
           <NavWrapper />
-          <Banner />
           {children}
           <Footer />
         </div>

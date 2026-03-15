@@ -11,7 +11,9 @@ import urlForImage from '@/util/urlForImage';
 import { getSongArtwork, getSongArtworkAlt } from '@/util/getSongArtwork';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { groq } from 'next-sanity';
+import sanityClient from '@/lib/sanity/lib/client';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryMusicArtistBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Calendar, MapPin, ExternalLink, Instagram, Twitter, Youtube } from 'lucide-react';
 
@@ -38,12 +40,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const displayName = artist.stageName ?? artist.name;
-  const canonicalUrl = `https://www.untelevised.media/music-artists/${slug}/`;
+  const canonicalUrl = artist.seo?.canonicalUrl ?? `https://www.untelevised.media/music-artists/${slug}/`;
   const ogImageUrl = artist.image
-    ? urlForImage(artist.image)?.width(1200).height(630).url() ?? ''
-    : 'https://www.untelevised.media/og-default.jpg';
-  const title = `${displayName} | Music Artist`;
-  const description = `Discover songs and albums by ${displayName}. ${artist.bio ? 'Learn more about this artist and their music.' : ''}`;
+    ? (urlForImage(artist.image)?.width(1200).height(630).url() ?? '')
+    : 'https://www.untelevised.media/og-default.png';
+  const computedTitle = `${displayName} | Music Artist`;
+  const title = artist.seo?.metaTitle ?? computedTitle;
+  const computedDescription = `Discover songs and albums by ${displayName}. ${artist.bio ? 'Learn more about this artist and their music.' : ''}`;
+  const description = artist.seo?.metaDescription ?? computedDescription;
 
   return {
     title,
@@ -473,14 +477,17 @@ export default async function MusicArtistPage({ params }: Props) {
 // Fetch artist data by slug
 async function getMusicArtistBySlug(slug: string): Promise<ArtistWithContent | null> {
   try {
-    const artist = await sanityFetch<ArtistWithContent>({
-      query: queryMusicArtistBySlug,
-      params: { slug },
-      tags: ['musicArtist'],
-    });
-    return artist;
+    const { data } = await sanityFetch({ query: queryMusicArtistBySlug, params: { slug }, tags: ['musicArtist'] });
+    return data;
   } catch (error) {
     console.error('Failed to fetch artist:', error);
     return null;
   }
+}
+
+export async function generateStaticParams() {
+  const queryMusicArtistStaticParams = groq`*[_type=='musicArtist'] { slug }`;
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryMusicArtistStaticParams);
+  return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
 }

@@ -6,9 +6,19 @@ type Base = {
   _updatedAt: string;
 };
 
+interface SeoOverride {
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: Image;
+  noIndex?: boolean;
+  canonicalUrl?: string;
+}
+
 interface LiveEvent extends Base {
   body: Block[];
   eventDate: string;
+  endDate?: string;
+  eventStatus?: 'EventScheduled' | 'EventCancelled' | 'EventPostponed' | 'EventMovedOnline';
   relatedArticles: Article[];
   keyEvent: KeyEvent[];
   eventTag: EventTag[];
@@ -17,10 +27,11 @@ interface LiveEvent extends Base {
   description: string;
   location: string;
   subtitle: string;
-  keywords: string;
+  keywords?: string[];
   slug: Slug;
   isCurrentEvent: boolean;
   mainImage: Image;
+  seo?: SeoOverride;
 }
 
 interface KeyEvent extends Base {
@@ -37,7 +48,7 @@ interface Article extends Base {
   mainImage: Image;
   slug: Slug;
   title: string;
-  keywords: string;
+  keywords?: string[];
   description: string;
   location: string;
   videoLink: string;
@@ -46,6 +57,26 @@ interface Article extends Base {
   hasEmbeddedTweet: boolean;
   eventDate: string;
   publishedAt: string;
+  updatedAt?: string;
+  leadParagraph?: string;
+  corrections?: string;
+  sources?: Array<{ label: string; url: string }>;
+  faqs?: Array<{ question: string; answer: string }>;
+  reviewedBy?: Author;
+  relatedArticles?: Array<{
+    _id: string;
+    title: string;
+    slug: string;
+    mainImage?: Image;
+    description?: string;
+    publishedAt: string;
+    author?: { name: string };
+  }>;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    ogImage?: Image;
+  };
   comments: Comment[];
 }
 
@@ -65,6 +96,9 @@ interface Author extends Base {
   bio: Block[];
   image: Image;
   relatedArticles: Article[];
+  sameAs?: string[];
+  expertise?: string[];
+  credentials?: string[];
 }
 
 interface Image {
@@ -104,6 +138,7 @@ interface Category extends Base {
   description: string;
   title: string;
   order?: string;
+  seo?: SeoOverride;
 }
 
 interface EventTag extends Base {
@@ -249,6 +284,7 @@ interface MusicArtist extends Base {
   };
   isActive: boolean;
   isFeatured: boolean;
+  seo?: SeoOverride;
 }
 
 interface Album extends Base {
@@ -275,6 +311,7 @@ interface Album extends Base {
   };
   isExplicit: boolean;
   isFeatured: boolean;
+  seo?: SeoOverride;
 }
 
 interface Song extends Base {
@@ -327,6 +364,7 @@ interface Song extends Base {
   isExplicit: boolean;
   isFeatured: boolean;
   keywords?: string;
+  seo?: SeoOverride;
 }
 
 interface JobApplication extends Base {

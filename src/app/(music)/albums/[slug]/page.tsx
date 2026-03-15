@@ -10,7 +10,9 @@ import { RectangleAd, BannerAd } from '@/components/ads';
 import urlForImage from '@/util/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { groq } from 'next-sanity';
+import sanityClient from '@/lib/sanity/lib/client';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryAlbumBySlug } from '@/lib/sanity/lib/queries';
 import { Disc, Calendar, Clock, ExternalLink, Music } from 'lucide-react';
 
@@ -40,12 +42,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ...(album.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
   ].join(', ');
 
-  const canonicalUrl = `https://www.untelevised.media/albums/${slug}/`;
+  const canonicalUrl = album.seo?.canonicalUrl ?? `https://www.untelevised.media/albums/${slug}/`;
   const ogImageUrl = album.albumArt
-    ? urlForImage(album.albumArt)?.width(1200).height(630).url() ?? ''
-    : 'https://www.untelevised.media/og-default.jpg';
-  const title = `${album.title} - ${artistNames} | Album`;
-  const description = `Listen to ${album.title} by ${artistNames}. ${album.description ? 'Learn more about this album.' : ''}`;
+    ? (urlForImage(album.albumArt)?.width(1200).height(630).url() ?? '')
+    : 'https://www.untelevised.media/og-default.png';
+  const computedTitle = `${album.title} - ${artistNames} | Album`;
+  const title = album.seo?.metaTitle ?? computedTitle;
+  const computedDescription = `Listen to ${album.title} by ${artistNames}. ${album.description ? 'Learn more about this album.' : ''}`;
+  const description = album.seo?.metaDescription ?? computedDescription;
 
   return {
     title,
@@ -430,14 +434,17 @@ export default async function AlbumPage({ params }: Props) {
 // Fetch album data by slug
 async function getAlbumBySlug(slug: string): Promise<AlbumWithSongs | null> {
   try {
-    const album = await sanityFetch<AlbumWithSongs>({
-      query: queryAlbumBySlug,
-      params: { slug },
-      tags: ['album'],
-    });
-    return album;
+    const { data } = await sanityFetch({ query: queryAlbumBySlug, params: { slug }, tags: ['album'] });
+    return data;
   } catch (error) {
     console.error('Failed to fetch album:', error);
     return null;
   }
+}
+
+export async function generateStaticParams() {
+  const queryAlbumStaticParams = groq`*[_type=='album'] { slug }`;
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryAlbumStaticParams);
+  return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
 }

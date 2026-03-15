@@ -1,11 +1,17 @@
 /* eslint-disable react/function-component-definition */
 // src/app/(user)/staff/page.tsx
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import urlForImage from '@/util/urlForImage';
+
+export const metadata: Metadata = {
+  title: 'Our Team — UnTelevised Media',
+  description: 'Meet the journalists, editors, and contributors behind UnTelevised Media.',
+};
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import AuthorLinks from '@/components/global/AuthorLinks';
 import resolveHref from '@/util/resolveHref';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryAllAuthors } from '@/lib/sanity/lib/queries';
 
 export default async function StaffPage() {
@@ -117,7 +123,7 @@ export default async function StaffPage() {
 async function getAllStaff(): Promise<Author[]> {
   try {
     // Fetch author data from Sanity
-    const staff: Author[] = await sanityFetch({
+    const { data: staff } = await sanityFetch({
       query: queryAllAuthors,
       tags: ['author'],
     });

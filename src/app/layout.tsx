@@ -1,32 +1,21 @@
 // src/app/(user)/layout.tsx
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { Toaster } from '@/components/ui/toaster';
+import dynamic from 'next/dynamic';
 import { ConsentProvider } from '@/lib/consent';
-import { CookieConsentBanner, AdBlockerMessage } from '@/components/consent';
 import ConsentAwareAnalytics from '@/components/analytics/ConsentAwareAnalytics';
+
+// Defer framer-motion consent UI into a separate code-split chunk
+const CookieConsentBanner = dynamic(() => import('@/components/consent/CookieConsentBanner'));
+const AdBlockerMessage = dynamic(() => import('@/components/consent/AdBlockerMessage'));
 
 // // Import environment validation
 // import '@/lib/env';
-
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-  display: 'swap',
-});
-
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-  display: 'swap',
-});
 
 const inter = Inter({
   subsets: ['latin'],
@@ -53,7 +42,7 @@ export const metadata: Metadata = {
     description: 'Independent journalism covering breaking news and investigative reporting.',
     siteName: 'UnTelevised Media',
     images: [{
-      url: '/og-default.jpg',
+      url: '/og-default.png',
       width: 1200,
       height: 630,
       alt: 'UnTelevised Media',
@@ -82,10 +71,7 @@ const RootLayout = ({
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.className} font-sans antialiased`}
-        style={{ fontFamily: inter.style.fontFamily }}
-      >
+      <body className={`${inter.className} font-sans antialiased`}>
         <ErrorBoundary>
           <ConsentProvider>
             <ThemeProvider

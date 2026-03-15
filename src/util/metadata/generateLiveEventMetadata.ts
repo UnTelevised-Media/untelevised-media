@@ -28,7 +28,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
   const metadata: Metadata = {
     title: `${liveEvent.title} | Live Updates | UnTelevised Media`,
     description: liveEvent.description,
-    keywords: liveEvent.keywords ? liveEvent.keywords.split(',') : undefined,
+    keywords: liveEvent.keywords?.length ? liveEvent.keywords : undefined,
     publisher: 'UnTelevised Media',
 
     openGraph: {

@@ -38,8 +38,14 @@ const nextConfig: NextConfig = {
   experimental: {
     // * This is used for Sanity to prevent the client from accessing the Sanity API Read Token
     taint: true,
-    // typedRoutes: true,
+    // typedRoutes: true, — enable once Turbopack supports it fully
+    // Enables 'use cache' directive + cacheTag()/cacheLife() from next/cache
+    // for fine-grained per-function cache control (used on music pages)
+    useCache: true,
   },
 };
 
+// Bundle analyzer: run `ANALYZE=true next build` (uses webpack, not Turbopack)
+// To enable: const { default: withBundleAnalyzer } = await import('@next/bundle-analyzer')
+// export default withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig)
 export default nextConfig;

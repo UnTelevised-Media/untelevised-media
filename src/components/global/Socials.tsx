@@ -7,7 +7,7 @@ const Socials = () => {
   return (
     <div className='flex items-center gap-1 sm:gap-1.5'>
       <Link
-        href='https://www.youtube.com/@UnTelevised'
+        href='https://www.youtube.com/@AntiWarTV'
         className='group rounded-lg border border-slate-300/50 bg-slate-200/30 p-1 backdrop-blur-sm transition-all duration-200 hover:border-[#FF0000]/50 hover:bg-[#FF0000]/10 hover:shadow-lg dark:border-slate-600/50 dark:bg-slate-800/30 dark:hover:bg-[#FF0000]/20 sm:p-1.5 md:p-2'
       >
         <BsYoutube className='h-4 w-4 text-slate-600 transition-colors duration-200 group-hover:text-[#FF0000] dark:text-slate-400 sm:h-3 sm:w-3 md:h-3 md:w-3 lg:h-4 lg:w-4 xl:w-5 xl:h-5' />
@@ -25,7 +25,7 @@ const Socials = () => {
         <BsTwitch className='h-4 w-4 text-slate-600 transition-colors duration-200 group-hover:text-[#9146FF] dark:text-slate-400 sm:h-3 sm:w-3 md:h-3 md:w-3 lg:h-4 lg:w-4 xl:w-5 xl:h-5' />
       </Link>
       <Link
-        href='https://www.tiktok.com/@untelevisedmedia'
+        href='https://www.tiktok.com/@radical.edward'
         className='group rounded-lg border border-slate-300/50 bg-slate-200/30 p-1 backdrop-blur-sm transition-all duration-200 hover:border-[#ff0050]/50 hover:bg-[#ff0050]/10 hover:shadow-lg dark:border-slate-600/50 dark:bg-slate-800/30 dark:hover:bg-[#ff0050]/20 sm:p-1.5 md:p-2'
       >
         <FaTiktok className='h-4 w-4 text-slate-600 transition-colors duration-200 group-hover:text-[#ff0050] dark:text-slate-400 sm:h-3 sm:w-3 md:h-3 md:w-3 lg:h-4 lg:w-4 xl:w-5 xl:h-5' />

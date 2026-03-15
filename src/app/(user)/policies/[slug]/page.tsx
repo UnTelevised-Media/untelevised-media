@@ -3,8 +3,8 @@
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
-import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryPolicyBySlug } from '@/lib/sanity/lib/queries';
 
 type Props = {
@@ -113,7 +113,7 @@ export default async function Policies({ params }: Props) {
 async function getPolicyBySlug(slug: string): Promise<Policy | null> {
   try {
     // Fetch author data from Sanity
-    const policy: Policy = await sanityFetch({
+    const { data: policy } = await sanityFetch({
       query: queryPolicyBySlug,
       params: { slug },
       tags: ['policies'],
@@ -127,8 +127,9 @@ async function getPolicyBySlug(slug: string): Promise<Policy | null> {
 
 // Generate the static params for the author list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='policies'] { slug }`;
-  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(query);
+  const queryPolicyStaticParams = groq`*[_type=='policies'] { slug }`;
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryPolicyStaticParams);
   const slugRoutes = slugs ? slugs.map((item) => item.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

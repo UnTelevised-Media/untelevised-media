@@ -35,7 +35,10 @@ export default defineType({
     defineField({
       name: 'keywords',
       title: 'Keywords',
-      type: 'string',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+      description: 'Type a keyword and press Enter or comma to add it. Used for SEO metadata.',
     }),
     defineField({
       name: 'description',
@@ -122,6 +125,52 @@ export default defineType({
         },
       ],
       description: 'Source links displayed at the bottom of the article',
+    }),
+    defineField({
+      name: 'leadParagraph',
+      title: 'Lead / Summary',
+      type: 'text',
+      rows: 3,
+      description:
+        '2–3 sentence plain text summary. Used for AI extraction and featured snippets. Falls back to description field.',
+    }),
+    defineField({
+      name: 'faqs',
+      title: 'FAQ (for structured data)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'faqItem',
+          fields: [
+            defineField({ name: 'question', type: 'string', title: 'Question' }),
+            defineField({
+              name: 'answer',
+              type: 'text',
+              title: 'Answer',
+              description: 'Plain text only — used for FAQPage schema.org structured data',
+            }),
+          ],
+          preview: { select: { title: 'question' } },
+        },
+      ],
+      description:
+        'Q&A pairs that appear in FAQPage structured data — increases AI citation chance',
+    }),
+    defineField({
+      name: 'reviewedBy',
+      title: 'Reviewed By',
+      type: 'reference',
+      to: [{ type: 'author' }],
+      description: 'Editorial reviewer or fact-checker',
+    }),
+    defineField({
+      name: 'relatedArticles',
+      title: 'Related Articles',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'article' }] }],
+      validation: (Rule) => Rule.max(5),
+      description: 'Up to 5 related articles displayed at end of article',
     }),
     // SEO overrides
     defineField({

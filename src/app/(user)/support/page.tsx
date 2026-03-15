@@ -2,6 +2,13 @@
 // src/app/(user)/support/page.tsx
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Support Options — UnTelevised Media',
+  description:
+    'Support UnTelevised Media through donations, volunteering, sharing our work, or providing tips.',
+};
 
 export default function SupportPage() {
   return (
@@ -250,7 +257,7 @@ export default function SupportPage() {
               DONATE NOW
             </Link>
             <a
-              href='mailto:UnTelevisedMedia.Live@gmail.com'
+              href='mailto:support@untelevised.media'
               className='border-2 border-white bg-transparent px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black'
             >
               VOLUNTEER

@@ -14,9 +14,9 @@ import formatDate from '@/util/formatDate';
 import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 import resolveHref from '@/util/resolveHref';
 import type { Metadata } from 'next';
-import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryEventBySlug } from '@/lib/sanity/lib/queries';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
+import { queryEventBySlug } from '@/lib/sanity/lib/queries';
 import { buildLiveEventMetadata, getSanityOgImageUrl } from '@/util/metadata';
 
 type Props = {
@@ -27,7 +27,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const liveEvent: LiveEvent = await sanityClient.fetch(queryEventBySlug, { slug });
+  const { data: liveEvent } = await sanityFetch({ query: queryEventBySlug, params: { slug }, tags: ['liveEvent'] });
   if (!liveEvent) return { title: 'Live Event Not Found' };
   return buildLiveEventMetadata(liveEvent, slug);
 }
@@ -64,15 +64,25 @@ export default async function LiveEvent({ params }: Props) {
     return a.eventDate > b.eventDate ? -1 : a.eventDate < b.eventDate ? 1 : 0;
   });
 
+  const schemaEventStatusMap: Record<string, string> = {
+    EventScheduled: 'https://schema.org/EventScheduled',
+    EventCancelled: 'https://schema.org/EventCancelled',
+    EventPostponed: 'https://schema.org/EventPostponed',
+    EventMovedOnline: 'https://schema.org/EventMovedOnline',
+  };
+
   const eventSchema = {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: liveEvent.title,
     description: liveEvent.description,
     startDate: liveEvent.eventDate,
-    eventStatus: liveEvent.isCurrentEvent
-      ? 'https://schema.org/EventScheduled'
-      : 'https://schema.org/EventCompleted',
+    endDate: liveEvent.endDate ?? undefined,
+    eventStatus: liveEvent.eventStatus
+      ? (schemaEventStatusMap[liveEvent.eventStatus] ?? 'https://schema.org/EventScheduled')
+      : liveEvent.isCurrentEvent
+        ? 'https://schema.org/EventScheduled'
+        : 'https://schema.org/EventCompleted',
     eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
     location: liveEvent.location
       ? { '@type': 'Place', name: liveEvent.location }
@@ -119,17 +129,40 @@ export default async function LiveEvent({ params }: Props) {
           <div className='flex w-full flex-col space-y-2 py-2'>
             {/* Title & Date */}
             <div className='flex w-full flex-col space-y-1'>
-              {liveEvent.isCurrentEvent && (
-                <h2 className='w-min animate-pulse rounded bg-untele px-3 py-1 text-2xl font-bold text-slate-200'>
-                  Live
-                </h2>
-              )}
+              <div className='flex flex-wrap items-center gap-2'>
+                {liveEvent.isCurrentEvent && (
+                  <span className='animate-pulse rounded bg-untele px-3 py-1 text-sm font-bold uppercase tracking-widest text-slate-200'>
+                    Live
+                  </span>
+                )}
+                {liveEvent.eventStatus && liveEvent.eventStatus !== 'EventScheduled' && (
+                  <span className={`rounded px-3 py-1 text-xs font-black uppercase tracking-widest text-white ${
+                    liveEvent.eventStatus === 'EventCancelled'
+                      ? 'bg-red-700'
+                      : liveEvent.eventStatus === 'EventPostponed'
+                        ? 'bg-amber-600'
+                        : 'bg-blue-600'
+                  }`}>
+                    {liveEvent.eventStatus === 'EventCancelled'
+                      ? 'Cancelled'
+                      : liveEvent.eventStatus === 'EventPostponed'
+                        ? 'Postponed'
+                        : 'Moved Online'}
+                  </span>
+                )}
+              </div>
               <h1 className='w-full text-3xl font-bold'>{liveEvent.title}</h1>
+              {liveEvent.subtitle && (
+                <p className='text-lg text-slate-500 dark:text-slate-400'>{liveEvent.subtitle}</p>
+              )}
 
-              {/* Location & Date  */}
-              <div>
-                <h3>{liveEvent.location}</h3>
-                <p>{formatDate(liveEvent.eventDate || liveEvent._createdAt)}</p>
+              {/* Location & Dates */}
+              <div className='flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400'>
+                {liveEvent.location && <span>📍 {liveEvent.location}</span>}
+                <span>{formatDate(liveEvent.eventDate || liveEvent._createdAt)}</span>
+                {liveEvent.endDate && (
+                  <span>– {formatDate(liveEvent.endDate)}</span>
+                )}
               </div>
             </div>
             {/* Description  */}
@@ -217,7 +250,7 @@ export default async function LiveEvent({ params }: Props) {
 async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
   try {
     // Fetch article data from Sanity
-    const post = await sanityFetch<LiveEvent>({
+    const { data: post } = await sanityFetch({
       query: queryEventBySlug,
       params: { slug },
       tags: ['liveEvent'],
@@ -231,8 +264,9 @@ async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
 
 // // Generate the static params for the list of Live Events
 export async function generateStaticParams() {
-  const query = groq`*[_type=='liveEvent'] { slug }`;
-  const slugs: LiveEvent[] = await sanityClient.fetch(query);
+  const queryLiveEventStaticParams = groq`*[_type=='liveEvent'] { slug }`;
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: LiveEvent[] = await sanityClient.fetch(queryLiveEventStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

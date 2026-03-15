@@ -32,7 +32,6 @@ type WebhookPayload = {
   slug?: string | undefined;
 };
 
-export const runtime = 'edge';
 export async function POST(req: NextRequest) {
   try {
     const { body, isValidSignature } = await parseBody<WebhookPayload>(req, revalidateSecret);
@@ -49,12 +48,12 @@ export async function POST(req: NextRequest) {
 
     // If the `_type` is `page`, then all `client.fetch` calls with
     // `{next: {tags: ['page']}}` will be revalidated
-    revalidateTag(body._type);
+    revalidateTag(body._type, 'default');
     // eslint-disable-next-line no-console
     console.log(`Revalidated ${body._type}`);
 
     if (body.slug) {
-      revalidateTag(`${body._type}:${body.slug}`);
+      revalidateTag(`${body._type}:${body.slug}`, 'default');
     }
 
     return NextResponse.json({

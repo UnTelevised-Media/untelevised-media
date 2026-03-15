@@ -8,16 +8,23 @@ import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { Calendar, Clock, Users, Star, ArrowLeft, Bookmark } from 'lucide-react';
 
-import TimelineJSVisualization from '@/components/timeline/TimelineJSVisualization';
+import dynamic from 'next/dynamic';
+import LoadingSpinner from '@/components/global/LoadingSpinner';
+
+// Defer framer-motion heavy timeline visualization — only needed after page load
+const TimelineJSVisualization = dynamic(
+  () => import('@/components/timeline/TimelineJSVisualization'),
+  { loading: () => <LoadingSpinner /> },
+);
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { RectangleAd, BannerAd } from '@/components/ads';
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryTimelineBySlug } from '@/lib/sanity/lib/queries';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
+import { queryTimelineBySlug } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 
@@ -317,7 +324,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // Fetch timeline data by slug
 async function getTimelineBySlug(slug: string): Promise<Timeline | null> {
   try {
-    const timeline: Timeline = await sanityFetch({
+    const { data: timeline } = await sanityFetch({
       query: queryTimelineBySlug,
       params: { slug },
       tags: ['timeline'],
@@ -331,8 +338,9 @@ async function getTimelineBySlug(slug: string): Promise<Timeline | null> {
 
 // Generate static params for the timeline list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='timeline' && isPublished == true] { slug }`;
-  const slugs: Timeline[] = await sanityClient.fetch(query);
+  const queryTimelineStaticParams = groq`*[_type=='timeline' && isPublished == true] { slug }`;
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: Timeline[] = await sanityClient.fetch(queryTimelineStaticParams);
   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

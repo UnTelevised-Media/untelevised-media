@@ -9,7 +9,7 @@ export function GlobalStructuredData() {
         '@type': 'NewsMediaOrganization',
         '@id': 'https://www.untelevised.media/#organization',
         name: 'UnTelevised Media',
-        url: 'https://www.untelevised.media',
+        url: 'https://www.untelevised.media/',
         logo: {
           '@type': 'ImageObject',
           url: 'https://www.untelevised.media/Logo.png',
@@ -18,7 +18,8 @@ export function GlobalStructuredData() {
           'https://twitter.com/untelevised',
           'https://instagram.com/untelevised',
           'https://facebook.com/untelevised',
-          'https://youtube.com/@untelevised',
+          'https://youtube.com/@AntiWarTV',
+          'https://www.tiktok.com/@radical.edward',
         ],
         contactPoint: {
           '@type': 'ContactPoint',
@@ -30,7 +31,7 @@ export function GlobalStructuredData() {
         '@type': 'WebSite',
         '@id': 'https://www.untelevised.media/#website',
         name: 'UnTelevised Media',
-        url: 'https://www.untelevised.media',
+        url: 'https://www.untelevised.media/',
         publisher: { '@id': 'https://www.untelevised.media/#organization' },
         potentialAction: {
           '@type': 'SearchAction',

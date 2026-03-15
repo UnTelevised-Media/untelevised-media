@@ -1,7 +1,7 @@
 // src/components/global/NavWrapper.tsx
 import React from 'react';
 import { groq } from 'next-sanity';
-import sanityClient from '@/lib/sanity/lib/client';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import Nav from './Nav';
 
 const queryCategory = groq`
@@ -9,12 +9,12 @@ const queryCategory = groq`
     ...,
     title,
     order,
-  } 
+  }
 `;
 
 const NavWrapper = async () => {
-  const categories = await sanityClient.fetch(queryCategory);
-  
+  const { data: categories } = await sanityFetch({ query: queryCategory, tags: ['category'] });
+
   return <Nav categories={categories} />;
 };
 

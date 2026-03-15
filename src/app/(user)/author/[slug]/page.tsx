@@ -1,5 +1,6 @@
 /* eslint-disable react/function-component-definition */
 // src/app/(user)/author/[slug]/page.tsx
+import { cache } from 'react';
 import Image from 'next/image';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
@@ -13,9 +14,9 @@ import resolveHref from '@/util/resolveHref';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import type { Metadata } from 'next';
-import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
+import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
 import { buildAuthorMetadata } from '@/util/metadata';
 
 type Props = {
@@ -26,7 +27,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const author: Author = await sanityClient.fetch(queryAuthorBySlug, { slug });
+  const author = await getAuthorBySlug(slug);
   if (!author) return { title: 'Author Not Found' };
   return buildAuthorMetadata(author, slug);
 }
@@ -46,8 +47,29 @@ export default async function Author({ params }: Props) {
     );
   }
 
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `https://www.untelevised.media/author/${slug}/#person`,
+    name: author.name,
+    url: `https://www.untelevised.media/author/${slug}/`,
+    jobTitle: author.title ?? undefined,
+    worksFor: {
+      '@type': 'NewsMediaOrganization',
+      '@id': 'https://www.untelevised.media/#organization',
+      name: 'UnTelevised Media',
+    },
+    sameAs: author.sameAs ?? [],
+    knowsAbout: author.expertise ?? [],
+    hasCredential: author.credentials ?? [],
+  };
+
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       {/* Hero Section */}
       <section className='relative overflow-hidden bg-gradient-to-br from-slate-100 via-slate-200 to-slate-100 py-16 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900'>
         {/* Background Pattern */}
@@ -72,6 +94,15 @@ export default async function Author({ params }: Props) {
                   height={240}
                   alt={author.name}
                   className='h-60 w-60 object-cover'
+                  priority
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  {...(author.image && urlForImage(author.image as any)
+                    ? {
+                        placeholder: 'blur' as const,
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        blurDataURL: urlForImage(author.image as any)!.width(20).blur(10).url(),
+                      }
+                    : {})}
                 />
               </div>
             </div>
@@ -184,11 +215,10 @@ export default async function Author({ params }: Props) {
   );
 }
 
-// Call the Sanity Fetch Function for the Author Information
-async function getAuthorBySlug(slug: string): Promise<Author | null> {
+// React.cache deduplicates this fetch across generateMetadata and the page component
+const getAuthorBySlug = cache(async (slug: string): Promise<Author | null> => {
   try {
-    // Fetch author data from Sanity
-    const author: Author = await sanityFetch({
+    const { data: author } = await sanityFetch({
       query: queryAuthorBySlug,
       params: { slug },
       tags: ['author'],
@@ -198,12 +228,13 @@ async function getAuthorBySlug(slug: string): Promise<Author | null> {
     console.error('Failed to fetch author:', error);
     return null;
   }
-}
+});
 
 // Generate the static params for the author list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='author'] { slug }`;
-  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(query);
+  const queryAuthorStaticParams = groq`*[_type=='author'] { slug }`;
+  // Use sanityClient directly to avoid draftMode() call during static generation
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryAuthorStaticParams);
   const slugRoutes = slugs ? slugs.map((item) => item.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,

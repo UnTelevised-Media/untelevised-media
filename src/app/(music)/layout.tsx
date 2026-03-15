@@ -1,6 +1,7 @@
 /* eslint-disable react/function-component-definition */
 // src/app/(music)/layout.tsx
 import Header from '@/components/global/Header';
+import HeaderLogo from '@/components/global/HeaderLogo';
 import { draftMode } from 'next/headers';
 
 import Footer from '@/components/global/Footer';
@@ -27,7 +28,7 @@ export default async function UserLayout({ children }: { children: React.ReactNo
         {/* Main Content with offset for draft banner */}
         <div className={draftModeEnabled ? 'pt-16' : ''}>
           {/* Auto-placement disabled - using custom ad components instead */}
-          <Header />
+          <Header logoSlot={<HeaderLogo />} />
           {children}
           <Footer />
         </div>

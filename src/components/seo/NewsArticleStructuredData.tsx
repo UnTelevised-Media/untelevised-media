@@ -21,7 +21,7 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
         headline: article.title,
         description: article.description,
         datePublished: article.publishedAt,
-        dateModified: article.publishedAt,
+        dateModified: article.updatedAt ?? article._updatedAt ?? article.publishedAt,
         mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
         image: ogImageUrl
           ? { '@type': 'ImageObject', url: ogImageUrl, width: 1200, height: 630 }
@@ -38,16 +38,28 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
           '@type': 'NewsMediaOrganization',
           '@id': 'https://www.untelevised.media/#organization',
           name: 'UnTelevised Media',
-          url: 'https://www.untelevised.media',
+          url: 'https://www.untelevised.media/',
           logo: {
             '@type': 'ImageObject',
             url: 'https://www.untelevised.media/Logo.png',
           },
         },
         articleSection: article.categories?.[0]?.title,
-        keywords: article.keywords,
+        keywords: Array.isArray(article.keywords) ? article.keywords.join(', ') : article.keywords,
         url: canonicalUrl,
       },
+      ...(article.faqs?.length
+        ? [
+            {
+              '@type': 'FAQPage',
+              mainEntity: article.faqs.map((faq: { question: string; answer: string }) => ({
+                '@type': 'Question',
+                name: faq.question,
+                acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+              })),
+            },
+          ]
+        : []),
       {
         '@type': 'BreadcrumbList',
         itemListElement: [

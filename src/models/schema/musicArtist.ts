@@ -159,6 +159,11 @@ export default defineType({
       description: 'Whether to feature this artist prominently on the site',
       initialValue: false,
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seoObject',
+    }),
   ],
   preview: {
     select: {
