@@ -108,7 +108,7 @@ async function getTimelineData(): Promise<{
       totalTimelines: allTimelines.length,
       totalEvents: recentEvents.length, // This would need a separate query for accurate count
       totalMilestones: milestoneEvents.length,
-      activeTimelines: allTimelines.filter(timeline => 
+      activeTimelines: allTimelines.filter((timeline: Timeline) =>
         !timeline.timeRange?.endDate || new Date(timeline.timeRange.endDate) > new Date()
       ).length,
     };

@@ -78,7 +78,7 @@ async function getArticleCategories() {
       query: queryCategories,
       tags: ['category'],
     });
-    return categories.sort((a, b) => {
+    return (categories as Category[]).sort((a: Category, b: Category) => {
       const orderA = parseInt(a.order ?? '0', 10);
       const orderB = parseInt(b.order ?? '0', 10);
       return orderA - orderB;
