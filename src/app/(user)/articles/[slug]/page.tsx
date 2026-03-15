@@ -16,7 +16,7 @@ import getArticleDate from '@/util/getArticleDate';
 import resolveHref from '@/util/resolveHref';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata';
@@ -89,8 +89,8 @@ export default async function Article({ params }: Props) {
 
               {/* Meta Information */}
               <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-                <div className='flex items-center space-x-4'>
-                  {/* Author */}
+                {/* Author + Reviewed By */}
+                <div className='flex flex-wrap items-center gap-3'>
                   <ClientSideRoute
                     route={resolveHref('author', article.author.slug?.current) ?? ''}
                   >
@@ -111,6 +111,18 @@ export default async function Article({ params }: Props) {
                       </div>
                     </div>
                   </ClientSideRoute>
+
+                  {article.reviewedBy && (
+                    <span className='text-sm text-slate-400'>
+                      Reviewed by{' '}
+                      <Link
+                        href={`/author/${article.reviewedBy.slug?.current}`}
+                        className='font-medium text-slate-300 underline hover:text-white'
+                      >
+                        {article.reviewedBy.name}
+                      </Link>
+                    </span>
+                  )}
                 </div>
 
                 <div className='flex flex-col items-end gap-2'>
@@ -122,17 +134,6 @@ export default async function Article({ params }: Props) {
                     {article.updatedAt && article.updatedAt !== article.publishedAt && (
                       <span className='text-sm text-slate-400'>
                         Updated: {formatDate(article.updatedAt)}
-                      </span>
-                    )}
-                    {article.reviewedBy && (
-                      <span className='text-sm text-slate-400'>
-                        Reviewed by{' '}
-                        <Link
-                          href={`/author/${article.reviewedBy.slug?.current}`}
-                          className='font-medium text-slate-300 underline hover:text-white'
-                        >
-                          {article.reviewedBy.name}
-                        </Link>
                       </span>
                     )}
                   </div>
@@ -333,7 +334,7 @@ export default async function Article({ params }: Props) {
 // React.cache deduplicates this fetch when called from both generateMetadata and the page component
 const getArticleBySlug = cache(async (slug: string): Promise<Article | null> => {
   try {
-    const article = await sanityFetch<Article>({
+    const { data: article } = await sanityFetch({
       query: queryArticleBySlug,
       params: { slug },
       tags: ['article'],

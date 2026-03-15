@@ -10,10 +10,9 @@ import { RectangleAd, BannerAd } from '@/components/ads';
 import urlForImage from '@/util/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
-import { cacheLife, cacheTag } from 'next/cache';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryAlbumBySlug } from '@/lib/sanity/lib/queries';
 import { Disc, Calendar, Clock, ExternalLink, Music } from 'lucide-react';
 
@@ -432,13 +431,11 @@ export default async function AlbumPage({ params }: Props) {
   );
 }
 
-// Fetch album data by slug — cached per-function with fine-grained tags
+// Fetch album data by slug
 async function getAlbumBySlug(slug: string): Promise<AlbumWithSongs | null> {
-  'use cache';
-  cacheTag('album', `album-${slug}`);
-  cacheLife('hours');
   try {
-    return await sanityClient.fetch<AlbumWithSongs>(queryAlbumBySlug, { slug });
+    const { data } = await sanityFetch({ query: queryAlbumBySlug, params: { slug }, tags: ['album'] });
+    return data;
   } catch (error) {
     console.error('Failed to fetch album:', error);
     return null;

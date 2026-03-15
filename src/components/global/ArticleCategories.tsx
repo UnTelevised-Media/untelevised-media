@@ -1,7 +1,7 @@
 // src/components/global/ArticleCategories.tsx
 /* eslint-disable react/function-component-definition */
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryCategories } from '@/lib/sanity/lib/queries';
 import Link from 'next/link';
 import formatTitleForURL from '@/util/formatTitleForURL';
@@ -74,11 +74,11 @@ export default async function ArticleCategories({ activeSlug }: ArticleCategorie
 
 async function getArticleCategories() {
   try {
-    const categories: Category[] = await sanityFetch({
+    const { data: categories } = await sanityFetch({
       query: queryCategories,
       tags: ['category'],
     });
-    return categories.sort((a, b) => {
+    return (categories as Category[]).sort((a: Category, b: Category) => {
       const orderA = parseInt(a.order ?? '0', 10);
       const orderB = parseInt(b.order ?? '0', 10);
       return orderA - orderB;

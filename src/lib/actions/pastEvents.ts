@@ -1,6 +1,6 @@
 'use server';
 
-import sanityFetch from '@/lib/sanity/lib/fetch';
+import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryPastEventsWithPagination } from '@/lib/sanity/lib/queries';
 
 export async function loadMorePastEvents(
@@ -9,14 +9,14 @@ export async function loadMorePastEvents(
 ): Promise<{ events: LiveEvent[]; hasMore: boolean }> {
   try {
     // Fetch events with pagination
-    const events = await sanityFetch<LiveEvent[]>({
+    const { data: events } = await sanityFetch({
       query: queryPastEventsWithPagination,
       params: { start, end },
       tags: ['liveEvent'],
     });
 
     // Check if there are more events by fetching one extra
-    const nextBatch = await sanityFetch<LiveEvent[]>({
+    const { data: nextBatch } = await sanityFetch({
       query: queryPastEventsWithPagination,
       params: { start: end, end: end + 1 },
       tags: ['liveEvent'],
@@ -115,12 +115,12 @@ export async function searchPastEvents(
     // Get paginated results
     const paginatedQuery = `${searchQuery}[${start}...${end}]`;
 
-    const [events, total] = await Promise.all([
-      sanityFetch<LiveEvent[]>({
+    const [{ data: events }, { data: total }] = await Promise.all([
+      sanityFetch({
         query: paginatedQuery,
         tags: ['liveEvent'],
       }),
-      sanityFetch<number>({
+      sanityFetch({
         query: countQuery,
         tags: ['liveEvent'],
       }),
