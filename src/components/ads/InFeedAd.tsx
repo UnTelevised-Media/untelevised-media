@@ -27,6 +27,7 @@ export default function InFeedAd({
   layoutKey = '-6t+ed+2i-1n-4w',
 }: InFeedAdProps) {
   const adRef = useRef<HTMLModElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -37,28 +38,19 @@ export default function InFeedAd({
   }, []);
 
   useEffect(() => {
-    if (!isClient || !adRef.current) {
-      return;
-    }
-
-    // Don't load ads without marketing consent
-    if (!hasConsent || !canUseMarketing) {
-      return;
-    }
+    if (!isClient || !adRef.current || !containerRef.current) return;
+    if (!hasConsent || !canUseMarketing) return;
 
     const loadAd = async () => {
       try {
-        if (!adRef.current) {
-          return;
-        }
+        if (!adRef.current) return;
 
         const success = await adsenseManager.pushAd(adRef.current);
         if (success) {
-          // Set loaded immediately - let AdSense handle the rest
           setIsLoaded(true);
 
-          // Monitor for ad status changes
-          const observer = new MutationObserver(() => {
+          // Monitor for ad fill status via MutationObserver
+          const mutationObserver = new MutationObserver(() => {
             if (adRef.current) {
               const status = adRef.current.getAttribute('data-ad-status');
               if (status === 'unfilled') {
@@ -67,24 +59,23 @@ export default function InFeedAd({
                   console.log('AdSense: Ad unfilled, hiding component');
                 }
                 setHasError(true);
-                observer.disconnect();
+                mutationObserver.disconnect();
               } else if (status === 'filled') {
                 if (process.env.NODE_ENV === 'development') {
                   // eslint-disable-next-line no-console
                   console.log('AdSense: Ad filled successfully');
                 }
-                observer.disconnect();
+                mutationObserver.disconnect();
               }
             }
           });
 
-          observer.observe(adRef.current, {
+          mutationObserver.observe(adRef.current, {
             attributes: true,
             attributeFilter: ['data-ad-status'],
           });
 
-          // Cleanup observer after 10 seconds
-          setTimeout(() => observer.disconnect(), 10000);
+          setTimeout(() => mutationObserver.disconnect(), 10000);
         } else {
           throw new Error('Failed to load ad');
         }
@@ -94,13 +85,24 @@ export default function InFeedAd({
       }
     };
 
-    loadAd();
+    // Lazy-load: only push the ad once the container enters the viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          observer.disconnect();
+          loadAd();
+        }
+      },
+      { rootMargin: AD_CONFIG.PERFORMANCE.LAZY_LOAD_MARGIN }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
   }, [isClient, hasConsent, canUseMarketing]);
 
-  // Don't render anything on server side to prevent hydration issues
   if (!isClient) {
     return (
-      <div className={`ad-container my-6 ${className}`} style={style}>
+      <div ref={containerRef} className={`ad-container my-6 ${className}`} style={style}>
         <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
           Advertisement
         </div>
@@ -112,11 +114,11 @@ export default function InFeedAd({
   }
 
   if (hasError && !adsenseManager.isDevelopmentMode()) {
-    return null; // Don't show anything if there's an error in production
+    return null;
   }
 
   return (
-    <div className={`ad-container my-6 ${className}`} style={style}>
+    <div ref={containerRef} className={`ad-container my-6 ${className}`} style={style}>
       <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
         Advertisement
       </div>

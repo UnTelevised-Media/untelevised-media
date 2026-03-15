@@ -43,6 +43,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   that removed the `<script>` tag on unmount; the script is a persistent global
   resource that must survive route changes
 
+### Added
+- **Ad lazy loading** — `BannerAd`, `SidebarAd`, `RectangleAd`, and `InFeedAd`
+  now use `IntersectionObserver` with `AD_CONFIG.PERFORMANCE.LAZY_LOAD_MARGIN`
+  (`200px`) to defer `pushAd` until the container approaches the viewport,
+  reducing initial page load impact for below-fold ad placements
+
 ---
 
 ## [2.2.0] — 2026-03-14 — Best Practices Refactor & Performance Upgrade

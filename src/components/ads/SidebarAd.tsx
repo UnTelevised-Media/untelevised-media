@@ -27,6 +27,7 @@ export default function SidebarAd({
   sticky = false,
 }: SidebarAdProps) {
   const adRef = useRef<HTMLModElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -37,24 +38,14 @@ export default function SidebarAd({
   }, []);
 
   useEffect(() => {
-    // Don't load ads without marketing consent
-    if (!hasConsent || !canUseMarketing) {
-      return;
-    }
+    if (!isClient || !adRef.current || !containerRef.current) return;
+    if (!hasConsent || !canUseMarketing) return;
 
     const loadAd = async () => {
       try {
-        if (!adRef.current) {
-          return;
-        }
-
-        // Small delay to ensure DOM is ready
+        if (!adRef.current) return;
         await new Promise((resolve) => setTimeout(resolve, 100));
-
-        if (!adRef.current) {
-          return;
-        }
-
+        if (!adRef.current) return;
         const success = await adsenseManager.pushAd(adRef.current);
         if (success) {
           setIsLoaded(true);
@@ -67,21 +58,26 @@ export default function SidebarAd({
       }
     };
 
-    if (isClient) {
-      loadAd();
-    }
+    // Lazy-load: only push the ad once the container enters the viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          observer.disconnect();
+          loadAd();
+        }
+      },
+      { rootMargin: AD_CONFIG.PERFORMANCE.LAZY_LOAD_MARGIN }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
   }, [isClient, hasConsent, canUseMarketing]);
 
-  const containerClasses = `
-    ad-container
-    ${sticky ? 'sticky top-24' : ''}
-    ${className}
-  `.trim();
+  const containerClasses = `ad-container ${sticky ? 'sticky top-24' : ''} ${className}`.trim();
 
-  // Don't render anything on server side to prevent hydration issues
   if (!isClient) {
     return (
-      <div className={containerClasses} style={style}>
+      <div ref={containerRef} className={containerClasses} style={style}>
         <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
           Advertisement
         </div>
@@ -93,11 +89,11 @@ export default function SidebarAd({
   }
 
   if (hasError && !adsenseManager.isDevelopmentMode()) {
-    return null; // Don't show anything if there's an error in production
+    return null;
   }
 
   return (
-    <div className={containerClasses} style={style}>
+    <div ref={containerRef} className={containerClasses} style={style}>
       <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
         Advertisement
       </div>

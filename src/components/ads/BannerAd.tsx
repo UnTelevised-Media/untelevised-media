@@ -24,6 +24,7 @@ export default function BannerAd({
   showLabel = true,
 }: BannerAdProps) {
   const adRef = useRef<HTMLModElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -34,24 +35,13 @@ export default function BannerAd({
   }, []);
 
   useEffect(() => {
-    if (!isClient || !adRef.current) {
-      return;
-    }
-
-    // Don't load ads without marketing consent
-    if (!hasConsent || !canUseMarketing) {
-      return;
-    }
+    if (!isClient || !adRef.current || !containerRef.current) return;
+    if (!hasConsent || !canUseMarketing) return;
 
     const loadAd = async () => {
       try {
-        // Wait for the configured delay
         await new Promise((resolve) => setTimeout(resolve, AD_CONFIG.PERFORMANCE.LOAD_DELAY));
-
-        if (!adRef.current) {
-          return;
-        }
-
+        if (!adRef.current) return;
         const success = await adsenseManager.pushAd(adRef.current);
         if (success) {
           setIsLoaded(true);
@@ -64,13 +54,24 @@ export default function BannerAd({
       }
     };
 
-    loadAd();
+    // Lazy-load: only push the ad once the container enters the viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          observer.disconnect();
+          loadAd();
+        }
+      },
+      { rootMargin: AD_CONFIG.PERFORMANCE.LAZY_LOAD_MARGIN }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
   }, [isClient, hasConsent, canUseMarketing]);
 
-  // Don't render anything on server side to prevent hydration issues
   if (!isClient) {
     return (
-      <div className={`ad-container ${className}`} style={style}>
+      <div ref={containerRef} className={`ad-container ${className}`} style={style}>
         {showLabel && AD_CONFIG.INTEGRATION.showAdLabel && (
           <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
             Advertisement
@@ -84,11 +85,11 @@ export default function BannerAd({
   }
 
   if (hasError && !adsenseManager.isDevelopmentMode()) {
-    return null; // Don't show anything if there's an error in production
+    return null;
   }
 
   return (
-    <div className={`ad-container ${className}`} style={style}>
+    <div ref={containerRef} className={`ad-container ${className}`} style={style}>
       {showLabel && AD_CONFIG.INTEGRATION.showAdLabel && (
         <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
           Advertisement
