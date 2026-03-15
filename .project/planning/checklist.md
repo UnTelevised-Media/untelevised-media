@@ -28,7 +28,22 @@
 
 ---
 
-## Reference — Confirmed Complete
+## Reference — Confirmed Complete (2026-03-14)
+
+| Item | Verified |
+|------|---------|
+| Schema-to-UI gap pass: article corrections, sources, faqs, reviewedBy rendered | 2026-03-14 |
+| Schema-to-UI gap pass: live event subtitle, eventStatus badge, endDate rendered | 2026-03-14 |
+| Schema-to-UI gap pass: category description rendered on category pages | 2026-03-14 |
+| Fix `queryEventBySlug` `tag[]->` → `eventTag[]->` bug | 2026-03-14 |
+| Fix `queryAllAuthors` self-reference bug | 2026-03-14 |
+| Live news banner restricted to homepage only | 2026-03-14 |
+| Social links updated: YouTube `@AntiWarTV`, TikTok `@radical.edward` | 2026-03-14 |
+| Email domain migration to `@untelevised.media` | 2026-03-14 |
+
+---
+
+## Reference — Confirmed Complete (prior)
 
 | Item | Verified |
 |------|---------|

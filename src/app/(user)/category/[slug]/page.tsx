@@ -27,12 +27,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
-  const articles = await getArticlesByCategory(slug);
+  const [articles, category] = await Promise.all([
+    getArticlesByCategory(slug),
+    sanityFetch<Category>({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }),
+  ]);
 
   return (
-    <div className='mx-auto max-w-[95wv] md:max-w-[85vw]'>
+    <div className='mx-auto max-w-[95vw] md:max-w-[85vw]'>
       <div>
         <hr className='mb-8 border-untele' />
+        {category && (
+          <div className='mb-10 px-10'>
+            <h1 className='mb-2 text-3xl font-black uppercase tracking-widest text-slate-900 dark:text-white'>
+              {category.title}
+            </h1>
+            {category.description && (
+              <p className='max-w-2xl text-slate-600 dark:text-slate-400'>{category.description}</p>
+            )}
+          </div>
+        )}
         <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
           {articles?.map((article) => (
             <ClientSideRoute

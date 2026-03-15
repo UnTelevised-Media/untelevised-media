@@ -127,7 +127,7 @@ export default async function Article({ params }: Props) {
                   </ClientSideRoute>
                 </div>
 
-                <div className='flex items-center space-x-4 text-slate-300'>
+                <div className='flex flex-wrap items-center gap-3 text-slate-300'>
                   {article.location && (
                     <span className='flex items-center text-sm'>📍 {article.location}</span>
                   )}
@@ -135,6 +135,17 @@ export default async function Article({ params }: Props) {
                   {article.updatedAt && article.updatedAt !== article.publishedAt && (
                     <span className='text-sm text-slate-400'>
                       Updated: {formatDate(article.updatedAt)}
+                    </span>
+                  )}
+                  {article.reviewedBy && (
+                    <span className='text-sm text-slate-400'>
+                      Reviewed by{' '}
+                      <Link
+                        href={`/author/${article.reviewedBy.slug?.current}`}
+                        className='font-medium text-slate-300 underline hover:text-white'
+                      >
+                        {article.reviewedBy.name}
+                      </Link>
                     </span>
                   )}
                 </div>
@@ -191,10 +202,67 @@ export default async function Article({ params }: Props) {
             </div>
           )}
 
+          {/* Corrections Notice */}
+          {article.corrections && (
+            <div className='not-prose mb-8 border-l-4 border-untele bg-untele/5 px-6 py-4 dark:bg-untele/10'>
+              <p className='mb-1 text-xs font-black uppercase tracking-widest text-untele'>
+                Correction
+              </p>
+              <p className='text-sm text-slate-700 dark:text-slate-300'>{article.corrections}</p>
+            </div>
+          )}
+
           {/* Article Body */}
           <div className='rounded-xl border border-slate-200 bg-white/50 p-8 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/50'>
             <PortableText value={article.body} components={RichTextComponents} />
           </div>
+
+          {/* Sources */}
+          {article.sources && article.sources.length > 0 && (
+            <div className='not-prose mt-8 rounded-xl border border-slate-200 bg-white/50 p-6 dark:border-slate-700 dark:bg-slate-900/50'>
+              <h3 className='mb-3 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400'>
+                Sources
+              </h3>
+              <ul className='space-y-1'>
+                {article.sources.map((source, i) => (
+                  <li key={i} className='flex items-start gap-2 text-sm'>
+                    <span className='mt-0.5 text-untele'>↗</span>
+                    {source.url ? (
+                      <a
+                        href={source.url}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='text-slate-700 underline hover:text-untele dark:text-slate-300'
+                      >
+                        {source.label || source.url}
+                      </a>
+                    ) : (
+                      <span className='text-slate-700 dark:text-slate-300'>{source.label}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* FAQs */}
+          {article.faqs && article.faqs.length > 0 && (
+            <div className='not-prose mt-8 rounded-xl border border-slate-200 bg-white/50 p-6 dark:border-slate-700 dark:bg-slate-900/50'>
+              <h3 className='mb-4 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400'>
+                Frequently Asked Questions
+              </h3>
+              <dl className='space-y-4'>
+                {article.faqs.map((faq, i) => (
+                  <div key={i} className='border-b border-slate-200 pb-4 last:border-0 last:pb-0 dark:border-slate-700'>
+                    <dt className='mb-1 font-semibold text-slate-900 dark:text-white'>
+                      {faq.question}
+                    </dt>
+                    <dd className='text-sm text-slate-600 dark:text-slate-400'>{faq.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
         </article>
 
         {/* Banner Ad after article content */}

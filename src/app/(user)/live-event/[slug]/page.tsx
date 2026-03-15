@@ -64,15 +64,25 @@ export default async function LiveEvent({ params }: Props) {
     return a.eventDate > b.eventDate ? -1 : a.eventDate < b.eventDate ? 1 : 0;
   });
 
+  const schemaEventStatusMap: Record<string, string> = {
+    EventScheduled: 'https://schema.org/EventScheduled',
+    EventCancelled: 'https://schema.org/EventCancelled',
+    EventPostponed: 'https://schema.org/EventPostponed',
+    EventMovedOnline: 'https://schema.org/EventMovedOnline',
+  };
+
   const eventSchema = {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: liveEvent.title,
     description: liveEvent.description,
     startDate: liveEvent.eventDate,
-    eventStatus: liveEvent.isCurrentEvent
-      ? 'https://schema.org/EventScheduled'
-      : 'https://schema.org/EventCompleted',
+    endDate: liveEvent.endDate ?? undefined,
+    eventStatus: liveEvent.eventStatus
+      ? (schemaEventStatusMap[liveEvent.eventStatus] ?? 'https://schema.org/EventScheduled')
+      : liveEvent.isCurrentEvent
+        ? 'https://schema.org/EventScheduled'
+        : 'https://schema.org/EventCompleted',
     eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
     location: liveEvent.location
       ? { '@type': 'Place', name: liveEvent.location }
@@ -119,17 +129,40 @@ export default async function LiveEvent({ params }: Props) {
           <div className='flex w-full flex-col space-y-2 py-2'>
             {/* Title & Date */}
             <div className='flex w-full flex-col space-y-1'>
-              {liveEvent.isCurrentEvent && (
-                <h2 className='w-min animate-pulse rounded bg-untele px-3 py-1 text-2xl font-bold text-slate-200'>
-                  Live
-                </h2>
-              )}
+              <div className='flex flex-wrap items-center gap-2'>
+                {liveEvent.isCurrentEvent && (
+                  <span className='animate-pulse rounded bg-untele px-3 py-1 text-sm font-bold uppercase tracking-widest text-slate-200'>
+                    Live
+                  </span>
+                )}
+                {liveEvent.eventStatus && liveEvent.eventStatus !== 'EventScheduled' && (
+                  <span className={`rounded px-3 py-1 text-xs font-black uppercase tracking-widest text-white ${
+                    liveEvent.eventStatus === 'EventCancelled'
+                      ? 'bg-red-700'
+                      : liveEvent.eventStatus === 'EventPostponed'
+                        ? 'bg-amber-600'
+                        : 'bg-blue-600'
+                  }`}>
+                    {liveEvent.eventStatus === 'EventCancelled'
+                      ? 'Cancelled'
+                      : liveEvent.eventStatus === 'EventPostponed'
+                        ? 'Postponed'
+                        : 'Moved Online'}
+                  </span>
+                )}
+              </div>
               <h1 className='w-full text-3xl font-bold'>{liveEvent.title}</h1>
+              {liveEvent.subtitle && (
+                <p className='text-lg text-slate-500 dark:text-slate-400'>{liveEvent.subtitle}</p>
+              )}
 
-              {/* Location & Date  */}
-              <div>
-                <h3>{liveEvent.location}</h3>
-                <p>{formatDate(liveEvent.eventDate || liveEvent._createdAt)}</p>
+              {/* Location & Dates */}
+              <div className='flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400'>
+                {liveEvent.location && <span>📍 {liveEvent.location}</span>}
+                <span>{formatDate(liveEvent.eventDate || liveEvent._createdAt)}</span>
+                {liveEvent.endDate && (
+                  <span>– {formatDate(liveEvent.endDate)}</span>
+                )}
               </div>
             </div>
             {/* Description  */}

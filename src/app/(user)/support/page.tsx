@@ -257,7 +257,7 @@ export default function SupportPage() {
               DONATE NOW
             </Link>
             <a
-              href='mailto:UnTelevisedMedia.Live@gmail.com'
+              href='mailto:support@untelevised.media'
               className='border-2 border-white bg-transparent px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black'
             >
               VOLUNTEER

@@ -138,7 +138,7 @@ export default function DonatePage() {
                 For larger contributions or equipment donations
               </p>
               <a
-                href='mailto:UnTelevisedMedia.Live@gmail.com'
+                href='mailto:support@untelevised.media'
                 className='bg-untele px-4 py-3 text-center text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
               >
                 CONTACT US

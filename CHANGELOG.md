@@ -10,6 +10,56 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+### Schema-to-UI Data Pass + Site Config (2026-03-14)
+
+#### Queries — Bug Fixes
+- Fix `queryEventBySlug`: `tag[]->` → `eventTag[]->` — was silently returning null for all event tags
+- Fix `queryAllAuthors`: remove nonsensical `author->` self-reference; correct sort to `order(order desc)`
+
+#### Queries — New Fields
+- `queryLiveEvents` (current events listing): add `endDate`, `eventStatus`, `mainImage`, `subtitle`, `videoLink` — homepage `LiveWidget` now receives full event data
+- `queryArticleBySlug`: add `reviewedBy->{ name, slug, title, image }` and explicit `corrections` field
+
+#### Article Detail Page (`articles/[slug]`)
+- Render **Reviewed By** link in byline when `reviewedBy` is set
+- Render **Corrections** notice block (red left-border alert) above article body when the field has content
+- Render **Sources** list with external links after article body
+- Render **FAQs** definition list after sources — surfaces structured Q&A already powering FAQPage JSON-LD
+
+#### Live Event Detail Page (`live-event/[slug]`)
+- Render `subtitle` below the event title
+- Render `eventStatus` badge: red for Cancelled, amber for Postponed, blue for Moved Online (no badge for Scheduled)
+- Render `endDate` alongside start date in the header
+- Fix JSON-LD `eventStatus`: now maps from CMS `eventStatus` field to correct `schema.org` URL instead of hardcoding based on `isCurrentEvent`
+
+#### Category Page (`category/[slug]`)
+- Fetch category object in parallel with articles (single extra query, no waterfall)
+- Render category `title` as `<h1>` and `description` above the article grid
+- Fix typo in container class: `95wv` → `95vw`
+
+#### TypeScript Types (`types.d.ts`)
+- Add `endDate?: string` to `LiveEvent` interface
+- Add `eventStatus?: 'EventScheduled' | 'EventCancelled' | 'EventPostponed' | 'EventMovedOnline'` to `LiveEvent` interface
+
+#### Social Media — Account Updates
+- YouTube: `@UnTelevised` → `@AntiWarTV` (banned, new account)
+- TikTok: `@untelevisedmedia` → `@radical.edward` (banned, new account)
+- Updated in: `Footer.tsx`, `Socials.tsx`, `GlobalStructuredData.tsx` (sameAs array — TikTok also added)
+
+#### Email — Domain Migration
+- `newsroom@untelevised.live` → `newsroom@untelevised.media` (all 5 footer contact links)
+- `UnTelevisedMedia.Live@gmail.com` → `support@untelevised.media` (donate page + support page)
+- Addresses to provision: `newsroom@untelevised.media`, `support@untelevised.media`
+
+#### Live News Banner
+- Remove `<Banner />` from `(user)/layout.tsx` — was appearing on every page
+- Add `<Banner />` to top of `(user)/page.tsx` — now homepage-only
+
+#### Project Docs
+- Add `.project/email-addresses.md` — inventory of all hardcoded email addresses with file locations and purpose
+
+---
+
 ### Audit — Second Pass (2026-03-13)
 
 Full second-pass audit against Next.js, Sanity, SEO/AEO, and Vercel/React best-practice skills. All prior items confirmed complete. New open items surfaced and logged in `.project/planning/audit/` and `.project/planning/checklist.md`.

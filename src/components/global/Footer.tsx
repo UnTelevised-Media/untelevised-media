@@ -99,7 +99,7 @@ async function Footer() {
           </h4>
           <Link
             className='flex items-center gap-x-2'
-            href='https://www.youtube.com/@UnTelevised'
+            href='https://www.youtube.com/@AntiWarTV'
             target='_blank'
           >
             <FaYoutube className='h-4 w-4' />
@@ -115,7 +115,7 @@ async function Footer() {
           </Link>
           <Link
             className='flex items-center gap-x-2'
-            href='https://www.tiktok.com/@untelevisedmedia'
+            href='https://www.tiktok.com/@radical.edward'
             target='_blank'
           >
             <FaTiktok className='h-4 w-4' />
@@ -215,11 +215,11 @@ async function Footer() {
           <Link href='/staff'>Meet Our Staff</Link>
           <Link href='/join'>Join Our Team</Link>
           <Link href='/donate'>Donate/Support Our Outlet</Link>
-          <Link href='mailto:newsroom@untelevised.live'>Contact the Newsroom</Link>
-          <Link href='mailto:newsroom@untelevised.live'>Licensing & Syndication</Link>
-          <Link href='mailto:newsroom@untelevised.live'>Advertise</Link>
-          <Link href='mailto:newsroom@untelevised.live'>Send a News Tip</Link>
-          <Link href='mailto:newsroom@untelevised.live'>Request a Correction</Link>
+          <Link href='mailto:newsroom@untelevised.media'>Contact the Newsroom</Link>
+          <Link href='mailto:newsroom@untelevised.media'>Licensing & Syndication</Link>
+          <Link href='mailto:newsroom@untelevised.media'>Advertise</Link>
+          <Link href='mailto:newsroom@untelevised.media'>Send a News Tip</Link>
+          <Link href='mailto:newsroom@untelevised.media'>Request a Correction</Link>
         </div>
       </div>
 

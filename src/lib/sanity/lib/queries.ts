@@ -3,20 +3,25 @@ import { groq } from 'next-sanity';
 
 export const queryLiveEvents = groq`
   *[_type=='liveEvent' && isCurrentEvent == true] {
-   ...,
+    ...,
     description,
     title,
     slug,
     eventDate,
+    endDate,
+    eventStatus,
+    mainImage,
+    subtitle,
+    videoLink,
     keyEvent[]->,
-      relatedArticles[]-> {
-        slug,
-        _id,
-        title,
-        _createdAt,
-        description,
-        eventDate,
-        publishedAt,
+    relatedArticles[]-> {
+      slug,
+      _id,
+      title,
+      _createdAt,
+      description,
+      eventDate,
+      publishedAt,
     }
   }
   | order(_createdAt desc)
@@ -92,7 +97,7 @@ export const queryPastEventsWithPagination = groq`
 export const queryEventBySlug = groq`
     *[_type == "liveEvent" && slug.current == $slug][0] {
       ...,
-      tag[]->,
+      eventTag[]->,
       keyEvent[]->,
       relatedArticles[]-> {
         slug,
@@ -274,9 +279,11 @@ export const queryArticleBySlug = groq`
       ...,
       author->,
       categories[]->,
+      reviewedBy->{ name, slug, title, image },
       seo,
       faqs,
       sources,
+      corrections,
       updatedAt,
       leadParagraph,
       relatedArticles[]-> {
@@ -324,16 +331,11 @@ export const queryCategories = groq`
 `;
 
 export const queryAllAuthors = groq`
-  *[_type == "author" ] {
+  *[_type == "author"] {
     ...,
-    author-> {
-      name,
-      image,
-      title,
-    },
-  } 
-  | order(author.order desc)
-  `;
+  }
+  | order(order desc)
+`;
 export const queryAuthorBySlug = groq`
   *[_type == 'author' && slug.current == $slug][0] {
     ...,

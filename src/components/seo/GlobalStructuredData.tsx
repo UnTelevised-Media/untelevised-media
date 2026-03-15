@@ -18,7 +18,8 @@ export function GlobalStructuredData() {
           'https://twitter.com/untelevised',
           'https://instagram.com/untelevised',
           'https://facebook.com/untelevised',
-          'https://youtube.com/@untelevised',
+          'https://youtube.com/@AntiWarTV',
+          'https://www.tiktok.com/@radical.edward',
         ],
         contactPoint: {
           '@type': 'ContactPoint',

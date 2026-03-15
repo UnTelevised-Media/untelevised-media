@@ -17,6 +17,8 @@ interface SeoOverride {
 interface LiveEvent extends Base {
   body: Block[];
   eventDate: string;
+  endDate?: string;
+  eventStatus?: 'EventScheduled' | 'EventCancelled' | 'EventPostponed' | 'EventMovedOnline';
   relatedArticles: Article[];
   keyEvent: KeyEvent[];
   eventTag: EventTag[];

@@ -2,7 +2,6 @@
 // src/app/(user)/layout.tsx
 import Header from '@/components/global/Header';
 import HeaderLogo from '@/components/global/HeaderLogo';
-import Banner from '@/components/global/Banner';
 import { draftMode } from 'next/headers';
 
 import NavWrapper from '@/components/global/NavWrapper';
@@ -34,7 +33,6 @@ export default async function UserLayout({ children }: { children: React.ReactNo
           {/* Auto-placement disabled - using custom ad components instead */}
           <Header logoSlot={<HeaderLogo />} />
           <NavWrapper />
-          <Banner />
           {children}
           <Footer />
         </div>

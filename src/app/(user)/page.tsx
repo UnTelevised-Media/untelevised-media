@@ -10,6 +10,7 @@ import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 import RawFeed from '@/components/homepage/RawFeed';
 import { SidebarAd, AD_CONFIG } from '@/components/ads';
 import TestAd from '@/components/debug/TestAd';
+import Banner from '@/components/global/Banner';
 
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAllArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
@@ -29,6 +30,7 @@ export default async function HomePage() {
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
+      <Banner />
       {/* DEBUG TEST AD - Remove in production */}
       {process.env.NODE_ENV === 'development' && <TestAd />}
       {/* BREAKING ALERT BAR */}
