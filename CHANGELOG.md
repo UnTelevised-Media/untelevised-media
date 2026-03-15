@@ -10,6 +10,48 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+### Sanity Live Content API — Real-Time UI Updates (2026-03-14)
+
+Closes [#6](https://github.com/UnTelevised-Media/untelevised-media-new/issues/6)
+
+#### Summary
+All server-rendered pages and components now use the Sanity Live Content API
+(`sanityFetch` from `lib/live.ts` / `next-sanity/live`). The `<SanityLive />`
+component was already mounted in both `(user)` and `(music)` layouts; this
+change wires every data query into the live system so that content published
+in Sanity Studio appears on the site immediately — no rebuild or manual
+revalidation required.
+
+#### Changed — Data Fetching (21 files)
+- Replace `import sanityFetch from '@/lib/sanity/lib/fetch'` (legacy ISR) with
+  `import { sanityFetch } from '@/lib/sanity/lib/live'` (live API) across all
+  server pages and components
+- Destructure `{ data }` from the live `sanityFetch` return value at every call
+  site (live API returns `{ data, sourceMap, tags }` instead of raw data)
+- Remove `as Promise<T>` type casts no longer needed after the destructuring change
+
+#### Changed — NavWrapper
+- `src/components/global/NavWrapper.tsx`: migrated from raw `sanityClient.fetch()`
+  to live `sanityFetch` so the navigation categories update in real time
+
+#### Changed — Music Detail Pages
+- `src/app/(music)/albums/[slug]/page.tsx`
+- `src/app/(music)/lyrics/[slug]/page.tsx`
+- `src/app/(music)/music-artists/[slug]/page.tsx`
+  - Removed `'use cache'` / `cacheTag` / `cacheLife` wrappers (from `next/cache`)
+  - Replaced direct `sanityClient.fetch()` calls with live `sanityFetch`
+  - Live API handles cache invalidation via EventSource; per-function caching
+    was redundant and prevented real-time updates
+
+#### Not Changed (intentional)
+- `generateStaticParams()` in all dynamic routes — continues to use direct
+  `sanityClient.fetch()` to avoid `draftMode()` during static generation
+- `src/components/global/Ticker.tsx` — client component; cannot use server-side
+  `sanityFetch`; polling via direct client call is retained
+- Metadata utility functions — run at build/revalidation time, direct calls appropriate
+
+---
+
 ### Schema-to-UI Data Pass + Site Config (2026-03-14)
 
 #### Queries — Bug Fixes
