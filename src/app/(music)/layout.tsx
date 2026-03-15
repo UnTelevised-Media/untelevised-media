@@ -18,7 +18,7 @@ export default async function UserLayout({ children }: { children: React.ReactNo
   return (
     <>
       <ConsentAwareGoogleAdSense
-        googleAdsenseId={process.env.NEXT_PUBLIC_GAS_ID ?? 'ca-pub-7412827340538951'}
+        googleAdsenseId={process.env.NEXT_PUBLIC_GAS_ID ?? ''}
       />
 
       <div className='min-h-screen bg-white text-slate-900 transition-colors dark:bg-black dark:text-slate-100'>

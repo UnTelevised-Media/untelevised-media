@@ -8,6 +8,7 @@ import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 import { RectangleAd, BannerAd } from '@/components/ads';
+import { AD_CONFIG } from '@/lib/ads/adConfig';
 
 import urlForImage from '@/u/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
@@ -167,7 +168,7 @@ export default async function Article({ params }: Props) {
         {/* Rectangle Ad after social share */}
         <div className='mb-8 flex justify-center'>
           <RectangleAd
-            slot='2468135790'
+            slot={AD_CONFIG.AD_SLOTS.ARTICLE_RECTANGLE}
             className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
           />
         </div>
@@ -270,7 +271,7 @@ export default async function Article({ params }: Props) {
         {/* Banner Ad after article content */}
         <div className='mb-8 mt-12'>
           <BannerAd
-            slot='1357924680'
+            slot={AD_CONFIG.AD_SLOTS.ARTICLE_BANNER_BOTTOM}
             className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
           />
         </div>

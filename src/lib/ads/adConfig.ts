@@ -1,9 +1,10 @@
 // Ad configuration for optimal performance and user experience
 const AD_CONFIG = {
-  // AdSense Publisher ID
-  PUBLISHER_ID: 'ca-pub-7412827340538951',
+  // AdSense Publisher ID — sourced from NEXT_PUBLIC_GAS_ID env var
+  PUBLISHER_ID: process.env.NEXT_PUBLIC_GAS_ID ?? '',
 
-  // Ad slot IDs for different placements
+  // Ad slot IDs for different placements.
+  // All IDs must be verified in the AdSense account dashboard before going live.
   AD_SLOTS: {
     // Homepage ads
     HOMEPAGE_SIDEBAR: '3380975563',
@@ -12,6 +13,8 @@ const AD_CONFIG = {
     // Article page ads
     ARTICLE_TOP: '2438309423',
     ARTICLE_BOTTOM: '8849187990',
+    ARTICLE_RECTANGLE: '2468135790', // rectangle below social share bar
+    ARTICLE_BANNER_BOTTOM: '1357924680', // leaderboard after article body
 
     // Feed ads
     IN_FEED: '3403906737',

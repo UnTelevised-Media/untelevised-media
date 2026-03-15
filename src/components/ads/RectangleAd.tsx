@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
 import { AD_CONFIG } from '@/lib/ads/adConfig';
+import { useConsentCheck } from '@/lib/consent/context';
 
 interface RectangleAdProps {
   slot: string;
@@ -26,6 +27,7 @@ export default function RectangleAd({
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const { canUseMarketing, hasConsent } = useConsentCheck();
 
   useEffect(() => {
     setIsClient(true);
@@ -33,6 +35,11 @@ export default function RectangleAd({
 
   useEffect(() => {
     if (!isClient || !adRef.current) {
+      return;
+    }
+
+    // Don't load ads without marketing consent
+    if (!hasConsent || !canUseMarketing) {
       return;
     }
 
@@ -58,7 +65,7 @@ export default function RectangleAd({
     };
 
     loadAd();
-  }, [isClient]);
+  }, [isClient, hasConsent, canUseMarketing]);
 
   // Don't render anything on server side to prevent hydration issues
   if (!isClient) {

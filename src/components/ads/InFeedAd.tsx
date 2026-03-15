@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
 import { AD_CONFIG } from '@/lib/ads/adConfig';
+import { useConsentCheck } from '@/lib/consent/context';
 
 interface InFeedAdProps {
   slot: string;
@@ -29,6 +30,7 @@ export default function InFeedAd({
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const { canUseMarketing, hasConsent } = useConsentCheck();
 
   useEffect(() => {
     setIsClient(true);
@@ -38,6 +40,12 @@ export default function InFeedAd({
     if (!isClient || !adRef.current) {
       return;
     }
+
+    // Don't load ads without marketing consent
+    if (!hasConsent || !canUseMarketing) {
+      return;
+    }
+
     const loadAd = async () => {
       try {
         if (!adRef.current) {
@@ -87,7 +95,7 @@ export default function InFeedAd({
     };
 
     loadAd();
-  }, [isClient]);
+  }, [isClient, hasConsent, canUseMarketing]);
 
   // Don't render anything on server side to prevent hydration issues
   if (!isClient) {

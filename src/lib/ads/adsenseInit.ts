@@ -23,7 +23,7 @@ export class AdSenseManager {
     this.isDevelopment = process.env.NODE_ENV === 'development';
   }
 
-  static getInstance(publisherId: string = 'ca-pub-7412827340538951'): AdSenseManager {
+  static getInstance(publisherId: string = process.env.NEXT_PUBLIC_GAS_ID ?? ''): AdSenseManager {
     if (!AdSenseManager.instance) {
       AdSenseManager.instance = new AdSenseManager(publisherId);
     }
@@ -278,7 +278,5 @@ export class AdSenseManager {
   }
 }
 
-// Export singleton instance
-export const adsenseManager = AdSenseManager.getInstance(
-  process.env.NEXT_PUBLIC_GAS_ID ?? 'ca-pub-7412827340538951'
-);
+// Export singleton instance — NEXT_PUBLIC_GAS_ID must be set in env
+export const adsenseManager = AdSenseManager.getInstance(process.env.NEXT_PUBLIC_GAS_ID ?? '');

@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { adsenseManager } from '@/lib/ads/adsenseInit';
 import { AD_CONFIG } from '@/lib/ads/adConfig';
+import { useConsentCheck } from '@/lib/consent/context';
 
 interface SidebarAdProps {
   slot: string;
@@ -29,12 +30,18 @@ export default function SidebarAd({
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const { canUseMarketing, hasConsent } = useConsentCheck();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   useEffect(() => {
+    // Don't load ads without marketing consent
+    if (!hasConsent || !canUseMarketing) {
+      return;
+    }
+
     const loadAd = async () => {
       try {
         if (!adRef.current) {
@@ -63,7 +70,7 @@ export default function SidebarAd({
     if (isClient) {
       loadAd();
     }
-  }, [isClient]);
+  }, [isClient, hasConsent, canUseMarketing]);
 
   const containerClasses = `
     ad-container

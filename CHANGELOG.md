@@ -27,6 +27,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   change, replacing the previous one-time `onLoad` callback
 - Renamed `GA4_ID` → `NEXT_PUBLIC_GA4_ID` and `GTM_ID` → `NEXT_PUBLIC_GTM_ID`
   in `.env.local`
+- **Ad components bypass consent gate** — `BannerAd`, `SidebarAd`, `RectangleAd`,
+  and `InFeedAd` now each call `useConsentCheck()` and skip `pushAd` until
+  `hasConsent && canUseMarketing` — prevents ad loads before user decides
+- **Article page ad slots not in config** — `ARTICLE_RECTANGLE` and
+  `ARTICLE_BANNER_BOTTOM` slot IDs added to `AD_CONFIG.AD_SLOTS`; article page
+  now references named constants instead of raw string literals
+- **Hardcoded AdSense publisher ID** — removed `'ca-pub-…'` fallback from
+  `adConfig.ts`, `adsenseInit.ts`, and both layout files; all now use
+  `NEXT_PUBLIC_GAS_ID` only (fails loudly if env var is missing)
 
 ---
 
