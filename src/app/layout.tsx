@@ -1,7 +1,8 @@
-// src/app/(user)/layout.tsx
+// src/app/layout.tsx
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import Script from 'next/script';
 
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
@@ -71,6 +72,28 @@ const RootLayout = ({
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
+      {/*
+        Google Consent Mode v2 — MUST run before any GTM/GA4 scripts load.
+        Sets all storage to 'denied' by default; ConsentAwareAnalytics will
+        call gtag('consent', 'update', ...) reactively once the user decides.
+      */}
+      <Script
+        id='gtag-consent-init'
+        strategy='beforeInteractive'
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              analytics_storage: 'denied',
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              wait_for_update: 500,
+            });
+          `,
+        }}
+      />
       <body className={`${inter.className} font-sans antialiased`}>
         <ErrorBoundary>
           <ConsentProvider>
@@ -92,8 +115,11 @@ const RootLayout = ({
               <AdBlockerMessage />
             </ThemeProvider>
 
-            {/* Consent-Aware Analytics */}
-            <ConsentAwareAnalytics gtmId={process.env.GTM_ID} />
+            {/* Consent-Aware Analytics — GTM + GA4 + Vercel */}
+            <ConsentAwareAnalytics
+              gtmId={process.env.NEXT_PUBLIC_GTM_ID}
+              ga4Id={process.env.NEXT_PUBLIC_GA4_ID}
+            />
           </ConsentProvider>
         </ErrorBoundary>
       </body>

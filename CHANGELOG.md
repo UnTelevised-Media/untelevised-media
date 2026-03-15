@@ -8,6 +8,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+- **GTM never loaded in production** — `GTM_ID` was a server-side env var passed
+  to a `'use client'` component where it evaluated to `undefined`; renamed to
+  `NEXT_PUBLIC_GTM_ID` so the client bundle can read it
+- **Dual GTM + GA4 script conflict** — `ConsentAwareAnalytics` was loading both
+  `gtag/js?id=GTM-…` (GA4 endpoint) and `gtm.js?id=GTM-…` (GTM endpoint) for
+  the same container ID; now loads only the GTM snippet via `gtm.js`, with a
+  separate optional `gtag/js?id=G-…` for direct GA4 (`NEXT_PUBLIC_GA4_ID`)
+- **Google Consent Mode v2 compliance** — consent defaults were set inside the
+  GTM `onLoad` callback (after GTM fired); moved to a `beforeInteractive` inline
+  script in `layout.tsx` so defaults are established before any tags execute
+- **Broken `trackPageView`** — called `gtag('config', '')` with an empty string
+  because `NEXT_PUBLIC_GA_ID` was never defined; removed the broken export;
+  `useConsentAwareTracking` now exposes only `trackEvent`
+- **Reactive consent updates** — `gtag('consent', 'update', …)` is now fired
+  from a `useEffect` in `ConsentAwareAnalytics` whenever consent preferences
+  change, replacing the previous one-time `onLoad` callback
+- Renamed `GA4_ID` → `NEXT_PUBLIC_GA4_ID` and `GTM_ID` → `NEXT_PUBLIC_GTM_ID`
+  in `.env.local`
+
 ---
 
 ## [2.2.0] — 2026-03-14 — Best Practices Refactor & Performance Upgrade
