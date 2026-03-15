@@ -71,29 +71,29 @@ const RootLayout = ({
     <html lang='en' suppressHydrationWarning>
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
+        {/*
+          Google Consent Mode v2 — MUST run before any GTM/GA4 scripts load.
+          Sets all storage to 'denied' by default; ConsentAwareAnalytics will
+          call gtag('consent', 'update', ...) reactively once the user decides.
+        */}
+        <Script
+          id='gtag-consent-init'
+          strategy='beforeInteractive'
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                wait_for_update: 500,
+              });
+            `,
+          }}
+        />
       </head>
-      {/*
-        Google Consent Mode v2 — MUST run before any GTM/GA4 scripts load.
-        Sets all storage to 'denied' by default; ConsentAwareAnalytics will
-        call gtag('consent', 'update', ...) reactively once the user decides.
-      */}
-      <Script
-        id='gtag-consent-init'
-        strategy='beforeInteractive'
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('consent', 'default', {
-              analytics_storage: 'denied',
-              ad_storage: 'denied',
-              ad_user_data: 'denied',
-              ad_personalization: 'denied',
-              wait_for_update: 500,
-            });
-          `,
-        }}
-      />
       <body className={`${inter.className} font-sans antialiased`}>
         <ErrorBoundary>
           <ConsentProvider>
