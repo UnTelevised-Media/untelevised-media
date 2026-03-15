@@ -87,8 +87,8 @@ Verify these slot IDs exist in your account:
 | `2475351335` | Homepage banner | Display |
 | `2438309423` | Article top | Display |
 | `8849187990` | Article bottom | Display |
-| `2468135790` | Article rectangle (below share bar) | Display |
-| `1357924680` | Article banner bottom | Display |
+| `8437036676` | Article rectangle (below share bar) | Display |
+| `7939310826` | Article banner bottom | Display |
 | `3403906737` | In-feed | In-feed / Native |
 | `8209510850` | Category banner | Display |
 

@@ -13,8 +13,8 @@ const AD_CONFIG = {
     // Article page ads
     ARTICLE_TOP: '2438309423',
     ARTICLE_BOTTOM: '8849187990',
-    ARTICLE_RECTANGLE: '2468135790', // rectangle below social share bar
-    ARTICLE_BANNER_BOTTOM: '1357924680', // leaderboard after article body
+    ARTICLE_RECTANGLE: '8437036676', // rectangle below social share bar
+    ARTICLE_BANNER_BOTTOM: '7939310826', // leaderboard after article body
 
     // Feed ads
     IN_FEED: '3403906737',
