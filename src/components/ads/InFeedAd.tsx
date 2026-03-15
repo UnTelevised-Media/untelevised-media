@@ -32,14 +32,15 @@ export default function InFeedAd({
   const [hasError, setHasError] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { canUseMarketing, hasConsent } = useConsentCheck();
+  const isDev = adsenseManager.isDevelopmentMode();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   useEffect(() => {
-    if (!isClient || !adRef.current || !containerRef.current) return;
-    if (!hasConsent || !canUseMarketing) return;
+    if (!isClient || !containerRef.current) return;
+    if (!isDev && (!hasConsent || !canUseMarketing)) return;
 
     const loadAd = async () => {
       try {
@@ -85,7 +86,6 @@ export default function InFeedAd({
       }
     };
 
-    // Lazy-load: only push the ad once the container enters the viewport
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0]?.isIntersecting) {
@@ -98,7 +98,7 @@ export default function InFeedAd({
 
     observer.observe(containerRef.current);
     return () => observer.disconnect();
-  }, [isClient, hasConsent, canUseMarketing]);
+  }, [isClient, isDev, hasConsent, canUseMarketing]);
 
   if (!isClient) {
     return (
@@ -113,7 +113,7 @@ export default function InFeedAd({
     );
   }
 
-  if (hasError && !adsenseManager.isDevelopmentMode()) {
+  if (hasError && !isDev) {
     return null;
   }
 
