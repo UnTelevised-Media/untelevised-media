@@ -112,15 +112,11 @@ export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAd
         onError?.(error);
       };
 
-      // Add script to document head
+      // Add script to document head.
+      // No cleanup return — the AdSense script is a persistent global resource
+      // that must survive route changes. Removing it on unmount would tear down
+      // the adsbygoogle array and break all ads until the script reloaded.
       document.head.appendChild(script);
-
-      // Cleanup function
-      return () => {
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
-      };
     }
   }, [publisherId, onLoad, onError]);
 

@@ -100,13 +100,9 @@ const ConsentProvider = ({ children }: ConsentProviderProps) => {
     setShowBanner(false);
 
     try {
+      // saveConsent calls gtag('consent', 'update') — no page reload needed.
+      // Google Consent Mode v2 handles dynamic consent updates without reload.
       await consentStorage.saveConsent(allAccepted);
-
-      // Trigger analytics events
-      if (typeof window !== 'undefined') {
-        // Reload page to ensure all scripts load with consent
-        window.location.reload();
-      }
     } catch (error) {
       console.error('Failed to save consent preferences:', error);
     }

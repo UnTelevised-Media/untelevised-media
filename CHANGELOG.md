@@ -36,6 +36,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Hardcoded AdSense publisher ID** — removed `'ca-pub-…'` fallback from
   `adConfig.ts`, `adsenseInit.ts`, and both layout files; all now use
   `NEXT_PUBLIC_GAS_ID` only (fails loudly if env var is missing)
+- **`acceptAll` forced full page reload** — `window.location.reload()` removed
+  from consent context; Consent Mode v2's `gtag('consent', 'update')` (already
+  called in `consentStorage.saveConsent`) handles dynamic updates without reload
+- **AdSense script torn down on route change** — removed `useEffect` cleanup
+  that removed the `<script>` tag on unmount; the script is a persistent global
+  resource that must survive route changes
 
 ---
 
