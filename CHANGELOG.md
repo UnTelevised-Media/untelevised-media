@@ -10,6 +10,51 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.2.0] — 2026-03-14 — Best Practices Refactor & Performance Upgrade
+
+### Summary
+Full migration to Sanity Live Content API for real-time UI updates, a
+complete rich text renderer overhaul, and a series of best-practice fixes
+across data fetching, caching, and article presentation.
+
+### Added
+- **Sanity Live Content API** — all 21 server pages and components now use
+  `sanityFetch` from `next-sanity/live`. Content published in Sanity Studio
+  appears on the site immediately with no rebuild or manual revalidation.
+- **Rich text renderer** — full `RichTextComponents` coverage:
+  - `table` block type with branded header row and striped body rows
+  - `code` block type with `vscDarkPlus` syntax highlighting and language label
+  - `mermaidDiagram` block type (code-block fallback until mermaid pkg added)
+  - `blockquote` block style with untele red left border
+  - `normal` paragraph block, `break` block
+  - Inline marks: `em`, `strong`, `underline`, `strikethrough`, `superscript`,
+    `subscript`, `code` (styled `<code>` tag)
+- **NavWrapper** — migrated from raw `sanityClient.fetch()` to live `sanityFetch`
+
+### Fixed
+- **`defineLive` misconfiguration** — token was inside `client.withConfig()`
+  instead of `serverToken`/`browserToken` options; `<SanityLive />` had no
+  credentials to open the browser-side EventSource subscription
+- **`perspective: 'previewDrafts'` hardcoded** — was serving draft content to
+  all production users; removed so `defineLive` manages perspective internally
+- **`experimental_taintUniqueValue` conflict** — was silently blocking
+  `browserToken` from reaching the client; sourced directly from `process.env`
+  in `live.ts` to bypass the taint check
+- **Inline `code` mark** — was incorrectly using `SyntaxHighlighter`; now uses
+  a styled `<code>` tag as intended
+- **Article byline** — Reviewed By repositioned from the date/location row to
+  sit directly next to the author card
+
+### Changed
+- Music detail pages (`albums/`, `lyrics/`, `music-artists/`) — removed
+  `'use cache'` / `cacheTag` / `cacheLife` wrappers; live API handles cache
+  invalidation via EventSource, making per-function caching redundant
+- `SyntaxHighlighter` theme updated from `dark` to `vscDarkPlus`
+- All `sanityFetch` call sites updated to destructure `{ data }` from the
+  live API return value
+
+---
+
 ### Sanity Live Content API — Real-Time UI Updates (2026-03-14)
 
 Closes [#6](https://github.com/UnTelevised-Media/untelevised-media-new/issues/6)
