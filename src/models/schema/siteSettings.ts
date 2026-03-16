@@ -70,7 +70,7 @@ export default defineType({
           isActive: 'isActive',
           headline: 'headline',
         },
-        prepare({ isActive, headline }: { isActive: boolean; headline: string }) {
+        prepare({ isActive, headline }: Record<string, any>) {
           return {
             title: isActive ? '🔴 ACTIVE' : '⚫ Inactive',
             subtitle: headline ?? 'No headline set',
