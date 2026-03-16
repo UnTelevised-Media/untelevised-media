@@ -17,6 +17,7 @@ import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 
+
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
   const { articles, liveEvents } = frontPageData;
@@ -30,20 +31,7 @@ export default async function HomePage() {
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
       <Banner />
-      {/* BREAKING ALERT BAR */}
-      {/* <div className='border-b-2 border-untele bg-untele/95 py-2'>
-        <div className='mx-auto flex max-w-[1400px] items-center justify-center space-x-4 px-4'>
-          <div className='flex items-center space-x-2'>
-            <div className='h-3 w-3 animate-pulse rounded-full bg-white' />
-            <span className='text-sm font-black uppercase tracking-widest text-white'>
-              BREAKING
-            </span>
-          </div>
-          <div className='hidden animate-pulse text-center text-sm font-bold text-white md:block'>
-            LIVE COVERAGE: Major events unfolding - Click for real-time updates
-          </div>
-        </div>
-      </div> */}
+
 
       {/* Live Events Section */}
       {liveEvents.length > 0 && (
