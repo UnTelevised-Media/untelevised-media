@@ -35,49 +35,67 @@ export function BreakingNewsBannerClient({ headline, linkUrl, linkLabel, expires
 
   return (
     <div
-      role='banner'
+      role='alert'
       aria-label='Breaking news alert'
-      className='relative flex items-center justify-between gap-4 bg-untele px-4 py-2 text-white'
+      className='w-full border-b-2 border-red-800 bg-untele'
     >
-      {/* BREAKING label + headline */}
-      <div className='flex min-w-0 flex-1 items-center gap-3'>
-        <span className='flex shrink-0 items-center gap-1.5'>
-          <span className='h-2 w-2 animate-pulse bg-white' aria-hidden='true' />
-          <span className='text-xs font-black uppercase tracking-widest'>Breaking</span>
-        </span>
-        <span className='truncate text-sm font-semibold'>{headline}</span>
+      <div className='mx-auto flex max-w-[1400px] items-center px-4'>
+        {/* BREAKING label — left block with right border */}
+        <div className='flex shrink-0 items-center gap-2 border-r border-white/25 py-2.5 pr-4'>
+          <span className='h-2 w-2 animate-pulse rounded-full bg-white' aria-hidden='true' />
+          <span className='text-[11px] font-black uppercase tracking-[0.2em] text-white'>
+            Breaking
+          </span>
+        </div>
+
+        {/* Headline — flexible middle */}
+        <p className='mx-4 flex-1 truncate text-sm font-bold leading-snug text-white'>
+          {headline}
+        </p>
+
+        {/* CTA + Dismiss — right side */}
+        <div className='flex shrink-0 items-center gap-3'>
+          {linkUrl &&
+            (isExternal ? (
+              <a
+                href={linkUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='border border-white/50 bg-white/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-untele'
+              >
+                {linkLabel} →
+              </a>
+            ) : (
+              <Link
+                href={linkUrl}
+                className='border border-white/50 bg-white/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-untele'
+              >
+                {linkLabel} →
+              </Link>
+            ))}
+
+          <button
+            onClick={handleDismiss}
+            aria-label='Dismiss breaking news alert'
+            className='flex h-6 w-6 shrink-0 items-center justify-center text-white/50 transition-colors hover:text-white focus:outline-none focus:ring-1 focus:ring-white/50'
+          >
+            <svg
+              aria-hidden='true'
+              className='h-3.5 w-3.5'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2.5}
+                d='M6 18L18 6M6 6l12 12'
+              />
+            </svg>
+          </button>
+        </div>
       </div>
-
-      {/* CTA link */}
-      {linkUrl &&
-        (isExternal ? (
-          <a
-            href={linkUrl}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='shrink-0 border border-white/40 px-3 py-1 text-xs font-black uppercase tracking-widest hover:bg-white/10'
-          >
-            {linkLabel} →
-          </a>
-        ) : (
-          <Link
-            href={linkUrl}
-            className='shrink-0 border border-white/40 px-3 py-1 text-xs font-black uppercase tracking-widest hover:bg-white/10'
-          >
-            {linkLabel} →
-          </Link>
-        ))}
-
-      {/* Dismiss */}
-      <button
-        onClick={handleDismiss}
-        aria-label='Dismiss breaking news banner'
-        className='shrink-0 p-1 text-white/70 hover:text-white focus:outline-none focus:ring-1 focus:ring-white'
-      >
-        <svg aria-hidden='true' className='h-4 w-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
-        </svg>
-      </button>
     </div>
   );
 }

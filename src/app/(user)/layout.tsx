@@ -32,9 +32,9 @@ export default async function UserLayout({ children }: { children: React.ReactNo
         {/* Main Content with offset for draft banner */}
         <div className={draftModeEnabled ? 'pt-16' : ''}>
           {/* Auto-placement disabled - using custom ad components instead */}
-          <BreakingNewsBanner />
           <Header logoSlot={<HeaderLogo />} />
           <NavWrapper />
+          <BreakingNewsBanner />
           {children}
           <Footer />
         </div>
