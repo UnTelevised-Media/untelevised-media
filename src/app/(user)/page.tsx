@@ -9,11 +9,10 @@ import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 import RawFeed from '@/components/homepage/RawFeed';
 import { SidebarAd, AD_CONFIG } from '@/components/ads';
-import TestAd from '@/components/debug/TestAd';
-import Banner from '@/components/global/Banner';
 
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryAllArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
+import { readingTimeFromWordCount, formatReadingTime } from '@/lib/readingTime';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
@@ -30,24 +29,6 @@ export default async function HomePage() {
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
-      <Banner />
-      {/* DEBUG TEST AD - Remove in production */}
-      {process.env.NODE_ENV === 'development' && <TestAd />}
-      {/* BREAKING ALERT BAR */}
-      {/* <div className='border-b-2 border-untele bg-untele/95 py-2'>
-        <div className='mx-auto flex max-w-[1400px] items-center justify-center space-x-4 px-4'>
-          <div className='flex items-center space-x-2'>
-            <div className='h-3 w-3 animate-pulse rounded-full bg-white' />
-            <span className='text-sm font-black uppercase tracking-widest text-white'>
-              BREAKING
-            </span>
-          </div>
-          <div className='hidden animate-pulse text-center text-sm font-bold text-white md:block'>
-            LIVE COVERAGE: Major events unfolding - Click for real-time updates
-          </div>
-        </div>
-      </div> */}
-
       {/* Live Events Section */}
       {liveEvents.length > 0 && (
         <section className='border-b border-slate-300 bg-slate-50 dark:border-slate-800 dark:bg-slate-950'>
@@ -219,7 +200,12 @@ export default async function HomePage() {
                     </p>
                     <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
                       <span className='font-bold uppercase'>{article.author?.name}</span>
-                      <span>{formatDate(getArticleDate(article))}</span>
+                      <div className='flex items-center gap-1'>
+                        <span>{formatDate(getArticleDate(article))}</span>
+                        {article.wordCount != null && (
+                          <span>· {formatReadingTime(readingTimeFromWordCount(article.wordCount))}</span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </Link>
