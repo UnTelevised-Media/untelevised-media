@@ -60,6 +60,13 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    types: {
+      'application/rss+xml': [
+        { url: '/feed.xml', title: 'UnTelevised Media RSS Feed' },
+      ],
+    },
+  },
 };
 
 const RootLayout = ({
