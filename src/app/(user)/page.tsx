@@ -12,7 +12,7 @@ import { SidebarAd, AD_CONFIG } from '@/components/ads';
 
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryAllArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
-import { readingTimeFromWordCount, formatReadingTime } from '@/lib/readingTime';
+import { getReadingTime } from '@/lib/readingTime';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
@@ -202,9 +202,7 @@ export default async function HomePage() {
                       <span className='font-bold uppercase'>{article.author?.name}</span>
                       <div className='flex items-center gap-1'>
                         <span>{formatDate(getArticleDate(article))}</span>
-                        {article.wordCount != null && (
-                          <span>· {formatReadingTime(readingTimeFromWordCount(article.wordCount))}</span>
-                        )}
+                        <span>· {getReadingTime(article.body)}</span>
                       </div>
                     </div>
                   </div>

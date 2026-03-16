@@ -8,7 +8,7 @@ import Link from 'next/link';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import urlForImage from '@/util/urlForImage';
-import { readingTimeFromWordCount, formatReadingTime } from '@/lib/readingTime';
+import { getReadingTime } from '@/lib/readingTime';
 
 // Enhanced Article Card - matches your existing design but with the blog card layout
 const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
@@ -64,11 +64,9 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
                   <span className='text-sm text-slate-600'>
                     {formatDate(getArticleDate(article))}
                   </span>
-                  {article.wordCount != null && (
-                    <span className='text-xs uppercase tracking-widest text-slate-500'>
-                      · {formatReadingTime(readingTimeFromWordCount(article.wordCount))}
-                    </span>
-                  )}
+                  <span className='text-xs uppercase tracking-widest text-slate-500'>
+                    · {getReadingTime(article.body)}
+                  </span>
                   <ArrowUpRight className='h-4 w-4 text-untele transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1' />
                 </div>
               </div>
@@ -185,11 +183,9 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
               <span>
                 {getArticleDate(article) ? formatDate(getArticleDate(article)) : 'Date not available'}
               </span>
-              {article.wordCount != null && (
-                <span className='text-xs uppercase tracking-widest'>
-                  · {formatReadingTime(readingTimeFromWordCount(article.wordCount))}
-                </span>
-              )}
+              <span className='text-xs uppercase tracking-widest'>
+                · {getReadingTime(article.body)}
+              </span>
             </div>
           </div>
         </div>
