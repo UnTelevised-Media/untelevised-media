@@ -10,12 +10,80 @@ export default defineType({
   title: 'Site Settings',
   type: 'document',
   icon: Settings,
+  groups: [
+    {
+      name: 'breaking',
+      title: '🔴 Breaking News Banner',
+      default: true,
+    },
+    {
+      name: 'general',
+      title: 'General',
+    },
+  ],
   fields: [
+    defineField({
+      name: 'breakingNewsBanner',
+      title: 'Breaking News Banner',
+      type: 'object',
+      group: 'breaking',
+      description: 'Configure the site-wide breaking news banner. Toggle on/off instantly.',
+      fields: [
+        defineField({
+          name: 'isActive',
+          title: 'Show Banner',
+          type: 'boolean',
+          initialValue: false,
+          description:
+            'Toggle ON to show the breaking news banner across the entire site. Toggle OFF to hide it.',
+        }),
+        defineField({
+          name: 'headline',
+          title: 'Headline',
+          type: 'string',
+          description: 'Short breaking news headline. Keep under 80 characters.',
+          validation: (Rule) => Rule.max(100).warning('Aim for 80 characters or fewer.'),
+        }),
+        defineField({
+          name: 'linkUrl',
+          title: 'Link URL',
+          type: 'string',
+          description: 'Internal path (e.g. /articles/my-article) or full external URL.',
+        }),
+        defineField({
+          name: 'linkLabel',
+          title: 'Link Label',
+          type: 'string',
+          initialValue: 'Read More',
+          description: 'Text for the CTA link. e.g. "Read More", "Watch Live", "Follow Coverage".',
+        }),
+        defineField({
+          name: 'expiresAt',
+          title: 'Auto-Expire At',
+          type: 'datetime',
+          description:
+            'Optional: banner automatically hides after this time without manual toggle.',
+        }),
+      ],
+      preview: {
+        select: {
+          isActive: 'isActive',
+          headline: 'headline',
+        },
+        prepare({ isActive, headline }: { isActive: boolean; headline: string }) {
+          return {
+            title: isActive ? '🔴 ACTIVE' : '⚫ Inactive',
+            subtitle: headline ?? 'No headline set',
+          };
+        },
+      },
+    }),
     defineField({
       name: 'name',
       title: 'Site Name',
       type: 'string',
       initialValue: 'UnTelevised Media',
+      group: 'general',
     }),
     defineField({
       name: 'description',

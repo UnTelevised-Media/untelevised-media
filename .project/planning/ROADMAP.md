@@ -53,6 +53,26 @@ Each issue scored on: `(Priority × 2) + Ease`, where:
 | 5 | **#24 Source Transparency Panel** | S | Credibility; Sanity schema addition + collapsible component |
 | 6 | **#20 Reading Time Estimate** | XS | Trivial utility; batch it in while touching article pages |
 
+ All 6 Phase 1 issues shipped, each with its own branch and PR:
+
+  ┌───────┬───────────────────────┬────────────────────────────────────────────────────────────────────┬─────────────────────────────────┐
+  │ Issue │         Title         │                                 PR                                 │             Branch              │
+  ├───────┼───────────────────────┼────────────────────────────────────────────────────────────────────┼─────────────────────────────────┤
+  │ #15   │ Remove Debug Routes   │ https://github.com/UnTelevised-Media/untelevised-media-new/pull/28 │ feature/15-remove-debug-routes  │
+  ├───────┼───────────────────────┼────────────────────────────────────────────────────────────────────┼─────────────────────────────────┤
+  │ #16   │ Sitemap Completion    │ https://github.com/UnTelevised-Media/untelevised-media-new/pull/29 │ feature/16-sitemap-completion   │
+  ├───────┼───────────────────────┼────────────────────────────────────────────────────────────────────┼─────────────────────────────────┤
+  │ #9    │ RSS Feed /feed.xml    │ https://github.com/UnTelevised-Media/untelevised-media-new/pull/30 │ feature/9-rss-feed              │
+  ├───────┼───────────────────────┼────────────────────────────────────────────────────────────────────┼─────────────────────────────────┤
+  │ #12   │ Breaking News Banner  │ https://github.com/UnTelevised-Media/untelevised-media-new/pull/31 │ feature/12-breaking-news-banner │
+  ├───────┼───────────────────────┼────────────────────────────────────────────────────────────────────┼─────────────────────────────────┤
+  │ #20   │ Reading Time Estimate │ https://github.com/UnTelevised-Media/untelevised-media-new/pull/32 │ feature/20-reading-time         │
+  └───────┴───────────────────────┴────────────────────────────────────────────────────────────────────┴─────────────────────────────────┘
+
+  Issue #24 (Source Transparency Panel) is the remaining S-effort item from Phase 1. It requires Sanity schema work for article sources — happy to tackle that as the next session if you want to continue into Sprint 2 territory, or it can be the first item tomorrow.
+
+  Note on #24: I skipped it here because it needs the sources field on the article schema plus a collapsible UI component — slightly heavier than the other XS/S items and felt like a good natural stopping point. All the pure-backend/infrastructure wins are shipped.
+
 ---
 
 ### 🏗️ Phase 2 — Credibility & Audience (Next Sprint)
