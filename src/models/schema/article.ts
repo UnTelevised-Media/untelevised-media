@@ -168,8 +168,8 @@ export default defineType({
       title: 'Related Articles',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'article' }] }],
-      validation: (Rule) => Rule.max(5),
-      description: 'Up to 5 related articles displayed at end of article',
+      validation: (Rule) => Rule.max(6),
+      description: 'Up to 6 related articles displayed at end of article',
     }),
     // SEO overrides
     defineField({

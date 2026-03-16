@@ -174,7 +174,21 @@ export default defineType({
                   type: 'array',
                   title: 'Cells',
                   description: 'Individual cell data for this row',
-                  of: [{ type: 'string' }],
+                  of: [
+                    {
+                      type: 'object',
+                      name: 'tableCell',
+                      title: 'Cell',
+                      fields: [
+                        defineField({
+                          name: 'content',
+                          title: 'Content',
+                          type: 'array',
+                          of: [{ type: 'block' }],
+                        }),
+                      ],
+                    },
+                  ],
                 }),
               ],
             },
