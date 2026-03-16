@@ -15,7 +15,6 @@ import { queryAllArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
-import Banner from '@/components/global/Banner';
 
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
@@ -29,7 +28,6 @@ export default async function HomePage() {
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
-      <Banner />
 
 
       {/* Live Events Section */}

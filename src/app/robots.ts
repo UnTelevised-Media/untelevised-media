@@ -9,8 +9,8 @@ export default function robots(): MetadataRoute.Robots {
       // All standard crawlers — allow everything except studio and API
       {
         userAgent: '*',
-        allow: '/',
-        disallow: ['/studio/', '/api/'],
+        allow: ['/', '/feed.xml'],
+        disallow: ['/studio/', '/api/', '/privacy-settings', '/reading-list', '/unlock'],
       },
       // Explicitly allow major AI crawlers for AEO (AI answer engine optimization)
       { userAgent: 'GPTBot', allow: '/' },

@@ -44,8 +44,6 @@ export default async function UserLayout({ children }: { children: React.ReactNo
         {draftModeEnabled && <SanityVisualEditing />}
       </div>
 
-      {/* Debug Components - Removed for production */}
-      {/* <AdDebugger /> */}
     </>
   );
 }
