@@ -167,7 +167,7 @@ export default defineType({
           of: [
             {
               type: 'object',
-              name: 'row',
+              name: 'tableRow',
               fields: [
                 defineField({
                   name: 'cells',
