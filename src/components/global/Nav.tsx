@@ -82,7 +82,7 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
               </button>
 
               {/* Dropdown Menu */}
-              <div className='absolute right-0 top-full z-[9999] mt-2 w-64 rounded-lg border border-slate-400/50 bg-slate-200/95 p-2 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-200 group-hover:opacity-100 dark:border-slate-600/50 dark:bg-slate-800/95'>
+              <div className='pointer-events-none absolute right-0 top-full z-[9999] mt-2 w-64 rounded-lg border border-slate-400/50 bg-slate-200/95 p-2 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100 dark:border-slate-600/50 dark:bg-slate-800/95'>
                 <div className='grid grid-cols-2 gap-2'>
                   {secondaryCategories.map((category) => (
                     <ClientSideRoute
