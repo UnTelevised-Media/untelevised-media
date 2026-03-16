@@ -27,6 +27,21 @@ import { CorrectionNotice } from '@/components/post/CorrectionNotice';
 
 // import Comments from '@/c/post/Comments';
 
+/**
+ * Guard against Sanity fields that may be stored as a block object instead of a plain
+ * string (e.g. from old schema versions or programmatic inserts). Returns the string
+ * value if it is a string, or extracts the `content` field if present, otherwise null.
+ */
+function safeText(value: unknown): string | null {
+  if (typeof value === 'string') return value || null;
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    const v = value as Record<string, unknown>;
+    if (typeof v.content === 'string') return v.content || null;
+    if (typeof v.text === 'string') return v.text || null;
+  }
+  return null;
+}
+
 type Props = {
   params: Promise<{
     slug: string;
@@ -86,9 +101,9 @@ export default async function Article({ params }: Props) {
               </h1>
 
               {/* Description */}
-              {article.description && (
+              {safeText(article.description) && (
                 <p className='max-w-3xl text-lg text-slate-200 sm:text-xl'>
-                  {article.description}
+                  {safeText(article.description)}
                 </p>
               )}
 
@@ -262,9 +277,9 @@ export default async function Article({ params }: Props) {
                 {article.faqs.map((faq, i) => (
                   <div key={i} className='border-b border-slate-200 pb-4 last:border-0 last:pb-0 dark:border-slate-700'>
                     <dt className='mb-1 font-semibold text-slate-900 dark:text-white'>
-                      {faq.question}
+                      {safeText(faq.question)}
                     </dt>
-                    <dd className='text-sm text-slate-600 dark:text-slate-400'>{faq.answer}</dd>
+                    <dd className='text-sm text-slate-600 dark:text-slate-400'>{safeText(faq.answer)}</dd>
                   </div>
                 ))}
               </dl>
@@ -309,9 +324,9 @@ export default async function Article({ params }: Props) {
                     <h3 className='mb-2 line-clamp-2 font-semibold text-slate-900 group-hover:text-untele dark:text-white'>
                       {related.title}
                     </h3>
-                    {related.description && (
+                    {safeText(related.description) && (
                       <p className='mb-3 line-clamp-2 flex-1 text-sm text-slate-600 dark:text-slate-400'>
-                        {related.description}
+                        {safeText(related.description)}
                       </p>
                     )}
                     <div className='mt-auto flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>

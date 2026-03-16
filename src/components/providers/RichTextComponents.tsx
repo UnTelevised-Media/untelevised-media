@@ -226,6 +226,17 @@ export const RichTextComponents = {
         {children}
       </blockquote>
     ),
+    // Fallback styles for list items authored as styled blocks (non-standard content)
+    bullet: ({ children }: any) => (
+      <ul className='my-4 ml-6 list-disc space-y-2 text-slate-800 dark:text-slate-200'>
+        <li>{children}</li>
+      </ul>
+    ),
+    number: ({ children }: any) => (
+      <ol className='my-4 ml-6 list-decimal space-y-2 text-slate-800 dark:text-slate-200'>
+        <li>{children}</li>
+      </ol>
+    ),
     break: () => <br />,
   },
 
