@@ -55,6 +55,13 @@ export default async function getAllURLs() {
       slug,
     }`;
 
+  const queryTimelines = groq`
+    *[_type == "timeline"] {
+      ...,
+      title,
+      slug,
+    }`;
+
   try {
     const articles = await sanityClient.fetch(queryAllArticleUrls);
     const liveEvents = await sanityClient.fetch(queryAllLiveEventUrls);
@@ -64,6 +71,7 @@ export default async function getAllURLs() {
     const songs = await sanityClient.fetch(querySongs);
     const musicArtists = await sanityClient.fetch(queryMusicArtists);
     const albums = await sanityClient.fetch(queryAlbums);
+    const timelines = await sanityClient.fetch(queryTimelines);
 
     const allNews = [
       ...articles,
@@ -74,6 +82,7 @@ export default async function getAllURLs() {
       ...songs,
       ...musicArtists,
       ...albums,
+      ...timelines,
     ];
 
     return allNews;
