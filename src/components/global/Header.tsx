@@ -37,19 +37,6 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
           : 'border-b-2 border-untele/30 bg-slate-100/95 shadow-lg backdrop-blur-md dark:bg-slate-900/95'
       }`}
     >
-      {/* Breaking News Ticker Bar */}
-      <div className='bg-untele/90 px-4 py-1 text-center'>
-        <div className='flex items-center justify-center space-x-2'>
-          <div className='flex items-center space-x-1'>
-            <div className='h-2 w-2 animate-pulse rounded-full bg-white' />
-            <span className='text-xs font-bold text-white'>LIVE</span>
-          </div>
-          <span className='text-xs text-white'>
-            Breaking: Ongoing coverage of major developments • Stay tuned for updates
-          </span>
-        </div>
-      </div>
-
       {/* Main Header */}
       <div className='flex w-full items-center justify-between px-4 py-2 md:py-3 lg:px-8'>
         {/* Logo Section — server-hoisted to avoid re-renders on client interactions */}

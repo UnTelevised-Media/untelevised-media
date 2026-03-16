@@ -580,3 +580,18 @@ export const queryPolicyBySlug = groq`
         description,
       },
     }`;
+
+export const querySiteSettings = groq`
+  *[_type == "siteSettings"][0] {
+    name,
+    description,
+    logo { asset-> },
+    "breakingBanner": breakingNewsBanner {
+      isActive,
+      headline,
+      linkUrl,
+      linkLabel,
+      expiresAt
+    }
+  }
+`;
