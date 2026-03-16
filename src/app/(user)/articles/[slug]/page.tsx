@@ -134,7 +134,7 @@ export default async function Article({ params }: Props) {
                     )}
                     <time className='text-sm'>{formatDate(getArticleDate(article))}</time>
                     <span className='text-sm' aria-label='Estimated reading time'>
-                      · {getReadingTime(article.body)}
+                      · {getReadingTime(article.body, { faqs: article.faqs, sources: article.sources })}
                     </span>
                     {article.updatedAt && article.updatedAt !== article.publishedAt && (
                       <span className='text-sm text-slate-400'>
