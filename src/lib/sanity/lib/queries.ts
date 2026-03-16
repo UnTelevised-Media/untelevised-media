@@ -523,6 +523,47 @@ export const queryTimelineSearch = groq`
   | order(eventDate desc)
 `;
 
+export const queryRSSFeed = groq`
+  *[_type == "article"] | order(publishedAt desc) [0...50] {
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    publishedAt,
+    _updatedAt,
+    mainImage {
+      asset->,
+      alt
+    },
+    "author": author-> {
+      name
+    },
+    "category": categories[0]-> {
+      title
+    }
+  }
+`;
+
+// ! TODO: When live events are renamed to "breaking", update:
+// !   - _type filter: 'liveEvent' → 'breaking'
+// !   - query name: queryRSSLiveEvents → queryRSSBreakingEvents
+export const queryRSSLiveEvents = groq`
+  *[_type == "liveEvent"] | order(eventDate desc) [0...20] {
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    subtitle,
+    eventDate,
+    _updatedAt,
+    eventStatus,
+    mainImage {
+      asset->,
+      alt
+    }
+  }
+`;
+
 export const queryPoliciesList = groq`
   *[_type == "policies"] {
     _id,
@@ -540,3 +581,18 @@ export const queryPolicyBySlug = groq`
         description,
       },
     }`;
+
+export const querySiteSettings = groq`
+  *[_type == "siteSettings"][0] {
+    name,
+    description,
+    logo { asset-> },
+    "breakingBanner": breakingNewsBanner {
+      isActive,
+      headline,
+      linkUrl,
+      linkLabel,
+      expiresAt
+    }
+  }
+`;

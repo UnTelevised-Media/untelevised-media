@@ -10,8 +10,6 @@ import ConsentAwareGoogleAdSense from '@/util/consentAwareGoogleAdSense';
 import { SanityLive } from '@/lib/sanity/lib/live';
 import DraftModeBanner from '@/components/sanity/DraftModeBanner';
 import SanityVisualEditing from '@/components/sanity/VisualEditing';
-import AdDebugger from '@/components/debug/AdDebugger';
-
 export default async function UserLayout({ children }: { children: React.ReactNode }) {
   const draftModeEnabled = (await draftMode()).isEnabled;
 
@@ -38,8 +36,6 @@ export default async function UserLayout({ children }: { children: React.ReactNo
         {draftModeEnabled && <SanityVisualEditing />}
       </div>
 
-      {/* Debug Component */}
-      <AdDebugger />
     </>
   );
 }
