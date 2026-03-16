@@ -129,6 +129,48 @@ export const RichTextComponents = {
       );
     },
 
+    // ── Non-standard "list" container blocks ─────────────────────────────────
+    // Blocks where _type="list" were inserted programmatically with inner block
+    // children. PortableText treats them as blocks, causing "Objects are not
+    // valid as a React child" errors. Render them as proper lists here.
+    list: ({ value }: any) => {
+      const isOrdered = value.listItem === 'number' || value.style === 'number';
+      const Tag = isOrdered ? 'ol' : 'ul';
+      const blocks: any[] = value.children ?? [];
+      if (!blocks.length) return null;
+      return (
+        <Tag
+          className={`my-4 ml-6 ${isOrdered ? 'list-decimal' : 'list-disc'} space-y-2 text-slate-800 dark:text-slate-200`}
+        >
+          {blocks.map((block: any, i: number) => {
+            const text = (block.children ?? [])
+              .filter((s: any) => s._type === 'span')
+              .map((s: any) => s.text ?? '')
+              .join('');
+            return <li key={block._key ?? i}>{text}</li>;
+          })}
+        </Tag>
+      );
+    },
+
+    // ── Non-standard "blockquote" container blocks ────────────────────────────
+    // Blocks where _type="blockquote" have inner block children instead of the
+    // standard style="blockquote" pattern. Extract and render as blockquote.
+    blockquote: ({ value }: any) => {
+      const text = (value.children ?? [])
+        .flatMap((block: any) =>
+          (block.children ?? [])
+            .filter((s: any) => s._type === 'span')
+            .map((s: any) => s.text ?? ''),
+        )
+        .join('');
+      return (
+        <blockquote className='my-6 border-l-4 border-untele bg-slate-50 py-4 pl-6 pr-4 italic text-slate-700 dark:bg-slate-900 dark:text-slate-300'>
+          {text}
+        </blockquote>
+      );
+    },
+
     // ── YouTube Embeds ────────────────────────────────────────────────────────
     youtubeEmbed: ({ value }: any) => {
       const videoId = value.videoId;
