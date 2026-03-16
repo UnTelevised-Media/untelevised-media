@@ -74,17 +74,33 @@ export const RichTextComponents = {
       const headerRow = rows[0];
       const bodyRows = rows.slice(1);
 
+      // Cells may be plain strings or tableCell objects with a Portable Text
+      // `content` array (e.g. from sanity-plugin-table rich-text cells).
+      function cellText(cell: any): string {
+        if (typeof cell === 'string') return cell;
+        if (cell && Array.isArray(cell.content)) {
+          return cell.content
+            .flatMap((block: any) =>
+              (block.children ?? [])
+                .filter((s: any) => s._type === 'span')
+                .map((s: any) => s.text ?? ''),
+            )
+            .join('');
+        }
+        return '';
+      }
+
       return (
         <div className='my-6 w-full overflow-x-auto border border-slate-300 dark:border-slate-700'>
           <table className='w-full border-collapse text-sm'>
             <thead>
               <tr className='border-b-2 border-untele bg-untele'>
-                {headerRow.cells.map((cell: string, i: number) => (
+                {headerRow.cells.map((cell: any, i: number) => (
                   <th
                     key={i}
                     className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-white'
                   >
-                    {cell}
+                    {cellText(cell)}
                   </th>
                 ))}
               </tr>
@@ -95,12 +111,12 @@ export const RichTextComponents = {
                   key={i}
                   className='border-b border-slate-200 odd:bg-white even:bg-slate-50 dark:border-slate-700 dark:odd:bg-black dark:even:bg-slate-900'
                 >
-                  {row.cells.map((cell: string, j: number) => (
+                  {row.cells.map((cell: any, j: number) => (
                     <td
                       key={j}
                       className='px-4 py-3 text-slate-800 dark:text-slate-200'
                     >
-                      {cell}
+                      {cellText(cell)}
                     </td>
                   ))}
                 </tr>
