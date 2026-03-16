@@ -1,82 +1,43 @@
 # UnTelevised Media — Changelog
 
+> Format: [Semantic Versioning](https://semver.org/) · Dates in YYYY-MM-DD
+
 ---
 
-## 2026-03-15 — Audit Close-Out: notFound() + Music/Category/Timeline JSON-LD
-
-### Fixed
-- `notFound()` on `author/[slug]` — replaced inline "Author Not Found" div with proper `notFound()` call (HTTP 404 + `not-found.tsx`)
-- `notFound()` on `live-event/[slug]` — added null guard after data fetch; page was casting null to `LiveEvent` and crashing at runtime
-- `notFound()` on `albums/[slug]` — replaced inline "Album Not Found" div with `notFound()`
-- `notFound()` on `lyrics/[slug]` — replaced inline "Song Not Found" div with `notFound()`
-- `notFound()` on `music-artists/[slug]` — replaced inline "Artist Not Found" div with `notFound()`
-- `notFound()` on `category/[slug]` — added null guard after data fetch
-- `albums/[slug]` `keywords` metadata changed from template-string to `string[]` to match Next.js `Metadata` type and the article/liveEvent pattern
+## [Unreleased]
 
 ### Added
-- JSON-LD `MusicAlbum` structured data on `albums/[slug]` — includes `byArtist`, `numTracks`, `datePublished`, `genre`, `image`, `url`
-- JSON-LD `MusicComposition` structured data on `lyrics/[slug]` — includes `composer`, `inAlbum` (when available), `genre`, `image`, `url`
-- JSON-LD `MusicGroup` structured data on `music-artists/[slug]` — includes `genre`, `sameAs` (all social links + website), `foundingLocation`, `image`, `url`
-- JSON-LD `CollectionPage` structured data on `category/[slug]` — includes `name`, `description`, `url`, `publisher`
-- JSON-LD `ItemList` structured data on `timeline/[slug]` — includes `numberOfItems` and `itemListElement` array with position + name for each event
-
----
-
-## 2026-03-14 — Schema-to-UI Gap Pass + Query Fixes
-
-### Fixed
-- Article: `corrections`, `sources`, `faqs`, `reviewedBy` fields now rendered in article body
-- Live event: `subtitle`, `eventStatus` badge, `endDate` rendered on event page
-- Category: `description` rendered on category pages
-- `queryEventBySlug` — `tag[]->` corrected to `eventTag[]->` (broken field reference)
-- `queryAllAuthors` — self-reference bug fixed
+- RSS Feed (`/feed.xml`) — RSS 2.0 route handler with articles + live events, auto-discovery link in root layout metadata (PR #30, Issue #9)
+- Breaking News Banner — editor-controlled site-wide alert strip via Sanity siteSettings singleton; instant live updates via SanityLive; session-dismissible (PR #31, Issue #12)
+- Reading Time Estimate — auto-calculated from Portable Text body on article detail pages and article cards; GROQ `wordCount` projection for card efficiency (PR #32, Issue #20)
+- Source Transparency Panel — pending (Issue #24)
 
 ### Changed
-- Live news banner restricted to homepage only (was appearing on all pages)
-- Social links updated: YouTube → `@AntiWarTV`, TikTok → `@radical.edward`
-- Email domain migration to `@untelevised.media`
+- Sitemap completion: added `/timelines`, `/join`, `/support`, `/secure-contact`, `/whistleblower` static pages; added dynamic timeline individual pages; added `wordCount` to article queries (PR #29, Issue #16)
+- `robots.ts`: added `Disallow` for `/privacy-settings`, `/reading-list`, `/unlock`; explicit `Allow: /feed.xml` (PR #29, Issue #16)
+- `privacy-settings/layout.tsx`: added `noindex` metadata to prevent search indexing of user preference page (PR #29, Issue #16)
+
+### Removed
+- All debug routes, components and API endpoint — deleted `src/components/debug/` (6 components), `/timeline-debug`, `/timeline-simple-test` routes, `/api/debug-log` endpoint; removed unconditional AdDebugger render from music layout (PR #28, Issue #15)
+- Decorative `Banner` component removed from homepage (consolidated into PR #31 work)
 
 ---
 
-## 2026-03-13 — Audit Pass: Static Params, Keywords, Metadata, Performance
+## [2.2.1] — 2026-03-16
 
 ### Fixed
-- `generateStaticParams` → `sanityFetch` across all 10 dynamic routes
-- `article.keywords` and `liveEvent.keywords` migrated string → array (schema + migration scripts; 25 articles + 5 liveEvents patched in production)
-- Root `layout.tsx` OG reference updated `.jpg` → `.png`
-
-### Added
-- `generateMetadata` with full SEO overrides on all dynamic routes (articles, live events, categories, music pages, author, timelines)
-- `SeoOverride` interface + `seo?` field on `LiveEvent`, `Category`, `MusicArtist`, `Album`, `Song`
-- Author `Person` structured data on `author/[slug]`
-- `Event` structured data on `live-event/[slug]`
-- `FAQPage` structured data on articles with FAQ sections
-- `NewsArticle` structured data on articles
-- Static metadata on all static routes (about, staff, donate, support, secure-contact, whistleblower, join, lyrics index, music-artists index)
-- LQIP blur placeholders on article, author, and homepage images
-- `Suspense` boundary on `FeaturedStoriesGrid` (homepage)
-- `siteSettings` singleton in Sanity Studio structure
-- `og-default.png` in `/public/`
-- Sanity TypeGen (`sanity.types.ts`) — 59 queries, 50 types
-
-### Changed
-- Server-hoisted `HeaderLogo` via `logoSlot` prop (eliminates client-side logo flash)
-- Font loading cleaned up — Inter only, Geist removed
-- Barrel file audit: `global/` direct imports; `ads/` + `consent/` barrels intentional
+- AdSense article page slot IDs updated to verified ad units
+- `notFound()` fixes on article/category/timeline pages
+- Music/category/timeline JSON-LD structured data improvements
 
 ---
 
-## 2026-03-12 — Ads Branch Merged (PR #1)
+## [2.2.0] — 2026-03-15
 
 ### Added
-- Google AdSense integration via `next-google-adsense`
-- `RectangleAd`, `BannerAd` components (`src/components/ads/`)
-- GTM integration via `ConsentAwareAnalytics` (GDPR-gated)
-- GDPR cookie consent + AdBlocker detection components
-- Dev mode bypass for ad components
-- `.env.example` with all env vars documented
-- `ADSENSE-SETUP.md` — full AdSense/GTM/Analytics setup & diagnosis guide
+- Full AdSense/GTM/Analytics audit and setup documentation (`ADSENSE-SETUP.md`)
+- Consent-aware analytics with GDPR compliance
 
-### Fixed
-- Consent-init `<Script>` moved inside `<head>` to fix hydration error
-- AdSense slot IDs updated to verified ad units on article pages
+---
+
+_Older entries pre-date this changelog. See git history for full record._
