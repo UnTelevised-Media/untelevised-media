@@ -2,6 +2,20 @@
 
 ---
 
+## 2026-03-16 — Sprint 1: Reading Time Estimates (Issue #20, PR #32)
+
+### Added
+- Reading Time Estimate — displayed on article detail pages, `FeaturedArticleCard`, featured stories grid, `ArticleCard`, and `RawFeed` items
+  - `src/lib/readingTime.ts` — `estimateReadingTime(body, extras?)` at 200 wpm (standard average adult pace), minimum 1 min
+  - Article detail page counts body + FAQ questions/answers + source labels via `extras` param
+  - `readingTimeFromWordCount()` for card-level computation from GROQ-projected `wordCount`
+  - `formatReadingTime()` returns `"N min read"`
+  - `getReadingTime()` convenience wrapper
+  - `"wordCount": length(string::split(pt::text(body), " "))` GROQ projection on `queryAllArticles` — actual word count (not char count)
+  - `wordCount?: number` added to global `Article` type in `types.d.ts`
+
+---
+
 ## 2026-03-15 — Audit Close-Out: notFound() + Music/Category/Timeline JSON-LD
 
 ### Fixed
