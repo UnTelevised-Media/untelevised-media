@@ -1,7 +1,10 @@
 import { MetadataRoute } from 'next';
 
 const PRODUCTION_URL = 'https://www.untelevised.media';
-const baseURL = process.env.NEXT_PUBLIC_APP_URL ?? process.env.BASEURL ?? PRODUCTION_URL;
+const baseURL = (process.env.NEXT_PUBLIC_APP_URL ?? process.env.BASEURL ?? PRODUCTION_URL).replace(
+  /\/$/,
+  ''
+);
 
 export default function robots(): MetadataRoute.Robots {
   return {
