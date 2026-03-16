@@ -117,6 +117,7 @@ export const queryAllArticles = groq`
     categories[]->,
     description,
     publishedAt,
+    "wordCount": length(pt::text(body)),
   }
   | order(_createdAt desc)
 `;

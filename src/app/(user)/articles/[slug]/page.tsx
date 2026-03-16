@@ -22,6 +22,7 @@ import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata';
 import { NewsArticleStructuredData } from '@/components/seo/NewsArticleStructuredData';
+import { getReadingTime } from '@/lib/readingTime';
 
 // import Comments from '@/c/post/Comments';
 
@@ -132,6 +133,9 @@ export default async function Article({ params }: Props) {
                       <span className='flex items-center text-sm'>📍 {article.location}</span>
                     )}
                     <time className='text-sm'>{formatDate(getArticleDate(article))}</time>
+                    <span className='text-sm' aria-label='Estimated reading time'>
+                      · {getReadingTime(article.body)}
+                    </span>
                     {article.updatedAt && article.updatedAt !== article.publishedAt && (
                       <span className='text-sm text-slate-400'>
                         Updated: {formatDate(article.updatedAt)}
