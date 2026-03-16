@@ -92,6 +92,15 @@ export default async function sitemap(): Promise<
       priority: 0.7,
     }));
 
+  const timelineURLs = allNews
+    .filter((item) => item._type === 'timeline')
+    .map((timeline) => ({
+      url: `https://www.untelevised.media/timeline/${timeline.slug.current}/`,
+      lastModified: timeline._updatedAt,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+
   return [
     // Homepage — highest priority
     {
@@ -109,7 +118,8 @@ export default async function sitemap(): Promise<
     ...songURLs,
     ...musicArtistURLs,
     ...albumURLs,
-    // Static section pages
+    ...timelineURLs,
+    // Static section pages — music
     {
       url: 'https://www.untelevised.media/lyrics/',
       lastModified: new Date(),
@@ -122,6 +132,7 @@ export default async function sitemap(): Promise<
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
+    // Static section pages — editorial & info
     {
       url: 'https://www.untelevised.media/about/',
       lastModified: new Date(),
@@ -135,16 +146,48 @@ export default async function sitemap(): Promise<
       priority: 0.5,
     },
     {
+      url: 'https://www.untelevised.media/past-events/',
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: 'https://www.untelevised.media/timelines/',
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    // Static section pages — engagement & conversion
+    {
+      url: 'https://www.untelevised.media/join/',
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
       url: 'https://www.untelevised.media/donate/',
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.4,
     },
     {
-      url: 'https://www.untelevised.media/past-events/',
+      url: 'https://www.untelevised.media/support/',
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.6,
+      changeFrequency: 'monthly' as const,
+      priority: 0.3,
+    },
+    // Static section pages — source protection
+    {
+      url: 'https://www.untelevised.media/secure-contact/',
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.4,
+    },
+    {
+      url: 'https://www.untelevised.media/whistleblower/',
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
     },
   ];
 }
