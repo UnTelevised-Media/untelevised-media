@@ -522,6 +522,27 @@ export const queryTimelineSearch = groq`
   | order(eventDate desc)
 `;
 
+export const queryRSSFeed = groq`
+  *[_type == "article"] | order(publishedAt desc) [0...50] {
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    publishedAt,
+    _updatedAt,
+    mainImage {
+      asset->,
+      alt
+    },
+    "author": author-> {
+      name
+    },
+    "category": categories[0]-> {
+      title
+    }
+  }
+`;
+
 export const queryPoliciesList = groq`
   *[_type == "policies"] {
     _id,
