@@ -45,8 +45,27 @@ export default async function TimelinePage({ params }: Props) {
   const events = timeline.events ?? [];
   const categories = timeline.categories ?? [];
 
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: timeline.title,
+    description: timeline.shortDescription ?? undefined,
+    url: `https://www.untelevised.media/timeline/${slug}/`,
+    numberOfItems: events.length,
+    itemListElement: events.map((event, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: event.title,
+      ...(event.eventDate ? { url: `https://www.untelevised.media/timeline/${slug}/#event-${index + 1}` } : {}),
+    })),
+  };
+
   return (
     <div className='min-h-screen bg-white dark:bg-black'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
       <div className='container mx-auto px-4 py-8'>
         {/* Back Navigation */}
         <div className='mb-6'>

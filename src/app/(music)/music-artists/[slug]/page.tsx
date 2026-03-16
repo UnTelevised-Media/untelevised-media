@@ -2,6 +2,7 @@
 // src/app/(user)/music-artists/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
@@ -76,21 +77,37 @@ export default async function MusicArtistPage({ params }: Props) {
   const { slug } = await params;
   const artist: ArtistWithContent = (await getMusicArtistBySlug(slug)) as ArtistWithContent;
 
-  if (!artist) {
-    return (
-      <div className='mx-auto max-w-4xl p-8 text-center'>
-        <h1 className='text-3xl font-bold text-slate-900 dark:text-slate-100'>Artist Not Found</h1>
-        <p className='mt-4 text-slate-600 dark:text-slate-400'>
-          The requested artist could not be found.
-        </p>
-      </div>
-    );
-  }
+  if (!artist) notFound();
 
   const displayName = artist.stageName ?? artist.name;
 
+  const sameAs = [
+    artist.socialMedia?.instagram ? `https://instagram.com/${artist.socialMedia.instagram}` : null,
+    artist.socialMedia?.twitter ? `https://twitter.com/${artist.socialMedia.twitter}` : null,
+    artist.socialMedia?.youtube ?? null,
+    artist.socialMedia?.spotify ?? null,
+    artist.website ?? null,
+  ].filter(Boolean);
+
+  const musicGroupSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'MusicGroup',
+    name: displayName,
+    genre: artist.genres ?? [],
+    url: `https://www.untelevised.media/music-artists/${slug}/`,
+    image: artist.image
+      ? (urlForImage(artist.image)?.width(1200).height(630).url() ?? undefined)
+      : undefined,
+    ...(sameAs.length > 0 ? { sameAs } : {}),
+    ...(artist.hometown ? { foundingLocation: { '@type': 'Place', name: artist.hometown } } : {}),
+  };
+
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(musicGroupSchema) }}
+      />
       {/* Hero Section */}
       <section className='bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900'>
         <div className='container mx-auto px-4 py-16'>

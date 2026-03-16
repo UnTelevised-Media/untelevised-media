@@ -2,6 +2,7 @@
 // src/app/(user)/albums/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
@@ -54,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    keywords: `${album.title}, ${artistNames}, album, ${album.genres?.join(', ') ?? ''}`,
+    keywords: [album.title, artistNames, 'album', ...(album.genres ?? [])],
     openGraph: {
       type: 'music.album',
       title: `${album.title} - ${artistNames}`,
@@ -78,24 +79,35 @@ export default async function AlbumPage({ params }: Props) {
   const { slug } = await params;
   const album: AlbumWithSongs = (await getAlbumBySlug(slug)) as AlbumWithSongs;
 
-  if (!album) {
-    return (
-      <div className='mx-auto max-w-4xl p-8 text-center'>
-        <h1 className='text-3xl font-bold text-slate-900 dark:text-slate-100'>Album Not Found</h1>
-        <p className='mt-4 text-slate-600 dark:text-slate-400'>
-          The requested album could not be found.
-        </p>
-      </div>
-    );
-  }
+  if (!album) notFound();
 
   const artistNames = [
     album.artist.stageName ?? album.artist.name,
     ...(album.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
   ].join(', ');
 
+  const musicAlbumSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'MusicAlbum',
+    name: album.title,
+    byArtist: {
+      '@type': 'MusicGroup',
+      name: album.artist.stageName ?? album.artist.name,
+      url: `https://www.untelevised.media/music-artists/${album.artist.slug.current}/`,
+    },
+    numTracks: album.totalTracks ?? undefined,
+    datePublished: album.releaseDate ?? undefined,
+    genre: album.genres ?? [],
+    image: urlForImage(album.albumArt)?.width(1200).height(630).url() ?? 'https://www.untelevised.media/og-default.png',
+    url: `https://www.untelevised.media/albums/${slug}/`,
+  };
+
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(musicAlbumSchema) }}
+      />
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}

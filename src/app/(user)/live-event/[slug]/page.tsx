@@ -14,6 +14,7 @@ import formatDate from '@/util/formatDate';
 import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 import resolveHref from '@/util/resolveHref';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
@@ -34,7 +35,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function LiveEvent({ params }: Props) {
   const { slug } = await params;
-  const liveEvent: LiveEvent = (await getEventBySlug(slug)) as LiveEvent;
+  const liveEvent = await getEventBySlug(slug);
+  if (!liveEvent) notFound();
 
   const allEvents = [
     // Check if liveEvent.relatedArticles is an array. If Truthy map over it and return an array of objects with the source property set to the source of the related article.

@@ -14,6 +14,7 @@ import resolveHref from '@/util/resolveHref';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
@@ -36,16 +37,7 @@ export default async function Author({ params }: Props) {
   const { slug } = await params;
   const author = await getAuthorBySlug(slug);
 
-  if (!author) {
-    return (
-      <div className='mx-auto max-w-4xl p-8 text-center'>
-        <h1 className='text-3xl font-bold text-slate-900 dark:text-slate-100'>Author Not Found</h1>
-        <p className='mt-4 text-slate-600 dark:text-slate-400'>
-          The requested author could not be found.
-        </p>
-      </div>
-    );
-  }
+  if (!author) notFound();
 
   const personSchema = {
     '@context': 'https://schema.org',

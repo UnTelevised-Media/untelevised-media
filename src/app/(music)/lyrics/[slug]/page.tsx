@@ -2,6 +2,7 @@
 // src/app/(user)/lyrics/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
@@ -76,16 +77,7 @@ export default async function LyricsPage({ params }: Props) {
   const { slug } = await params;
   const song: Song = (await getSongBySlug(slug)) as Song;
 
-  if (!song) {
-    return (
-      <div className='mx-auto max-w-4xl p-8 text-center'>
-        <h1 className='text-3xl font-bold text-slate-900 dark:text-slate-100'>Song Not Found</h1>
-        <p className='mt-4 text-slate-600 dark:text-slate-400'>
-          The requested song could not be found.
-        </p>
-      </div>
-    );
-  }
+  if (!song) notFound();
 
   const artistNames = [
     song.primaryArtist.name,
@@ -94,8 +86,33 @@ export default async function LyricsPage({ params }: Props) {
 
   const artworkInfo = getSongArtworkInfo(song);
 
+  const musicCompositionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'MusicComposition',
+    name: song.title,
+    composer: {
+      '@type': 'MusicGroup',
+      name: song.primaryArtist.stageName ?? song.primaryArtist.name,
+      url: `https://www.untelevised.media/music-artists/${song.primaryArtist.slug.current}/`,
+    },
+    ...(song.album ? {
+      inAlbum: {
+        '@type': 'MusicAlbum',
+        name: song.album.title,
+        url: `https://www.untelevised.media/albums/${song.album.slug.current}/`,
+      },
+    } : {}),
+    genre: song.genres ?? [],
+    url: `https://www.untelevised.media/lyrics/${slug}/`,
+    image: artworkInfo.url ?? 'https://www.untelevised.media/og-default.png',
+  };
+
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(musicCompositionSchema) }}
+      />
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}

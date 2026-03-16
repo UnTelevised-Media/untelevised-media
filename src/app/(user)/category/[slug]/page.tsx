@@ -8,6 +8,7 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import type { Metadata } from 'next';
 import { queryArticleByCategory, queryCategoryBySlug } from '@/lib/sanity/lib/queries';
 import resolveHref from '@/util/resolveHref';
+import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildCategoryMetadata } from '@/util/metadata';
@@ -32,8 +33,27 @@ export default async function CategoryPage({ params }: Props) {
     sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }),
   ]);
 
+  if (!category) notFound();
+
+  const collectionPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: category.title,
+    description: category.description ?? undefined,
+    url: `https://www.untelevised.media/category/${slug}/`,
+    publisher: {
+      '@type': 'NewsMediaOrganization',
+      '@id': 'https://www.untelevised.media/#organization',
+      name: 'UnTelevised Media',
+    },
+  };
+
   return (
     <div className='mx-auto max-w-[95vw] md:max-w-[85vw]'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
+      />
       <div>
         <hr className='mb-8 border-untele' />
         {category && (
