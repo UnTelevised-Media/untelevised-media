@@ -106,6 +106,13 @@ export default defineType({
       initialValue: 'EventScheduled',
     }),
     defineField({
+      name: 'correction',
+      title: 'Correction',
+      type: 'correctionObject',
+      description:
+        'Use for post-publication corrections or clarifications. Live events cannot be retracted — use the Correction, Clarification, or Update types only.',
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seoObject',

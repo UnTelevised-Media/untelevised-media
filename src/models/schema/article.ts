@@ -103,12 +103,11 @@ export default defineType({
         'When this article was last materially updated (shown as "Updated: [date]" near byline)',
     }),
     defineField({
-      name: 'corrections',
-      title: 'Corrections',
-      type: 'text',
-      rows: 3,
+      name: 'correction',
+      title: 'Correction / Retraction',
+      type: 'correctionObject',
       description:
-        'Any corrections or updates to the original article (displayed as a notice block)',
+        'Fill this out only when issuing a formal correction, clarification, update, or retraction. Leave empty if no correction applies.',
     }),
     defineField({
       name: 'sources',
