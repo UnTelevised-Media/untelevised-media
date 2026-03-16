@@ -77,6 +77,7 @@ interface Article extends Base {
     metaDescription?: string;
     ogImage?: Image;
   };
+  wordCount?: number;
   comments: Comment[];
 }
 

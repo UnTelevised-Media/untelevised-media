@@ -12,6 +12,7 @@ import { SidebarAd, AD_CONFIG } from '@/components/ads';
 
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryAllArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
+import { readingTimeFromWordCount, formatReadingTime } from '@/lib/readingTime';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
@@ -28,8 +29,6 @@ export default async function HomePage() {
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
-
-
       {/* Live Events Section */}
       {liveEvents.length > 0 && (
         <section className='border-b border-slate-300 bg-slate-50 dark:border-slate-800 dark:bg-slate-950'>
@@ -201,7 +200,12 @@ export default async function HomePage() {
                     </p>
                     <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
                       <span className='font-bold uppercase'>{article.author?.name}</span>
-                      <span>{formatDate(getArticleDate(article))}</span>
+                      <div className='flex items-center gap-1'>
+                        <span>{formatDate(getArticleDate(article))}</span>
+                        {article.wordCount != null && (
+                          <span>· {formatReadingTime(readingTimeFromWordCount(article.wordCount))}</span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </Link>

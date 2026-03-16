@@ -6,6 +6,7 @@ import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/ads';
+import { readingTimeFromWordCount, formatReadingTime } from '@/lib/readingTime';
 
 interface RawFeedProps {
   articles: Article[];
@@ -55,6 +56,12 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
                     <span className='font-black uppercase'>{article.author?.name}</span>
                     <span>•</span>
                     <span>{formatDate(getArticleDate(article))}</span>
+                    {article.wordCount != null && (
+                      <>
+                        <span>•</span>
+                        <span>{formatReadingTime(readingTimeFromWordCount(article.wordCount))}</span>
+                      </>
+                    )}
                     {article.categories?.[0] && (
                       <>
                         <span>•</span>

@@ -8,6 +8,7 @@ import Link from 'next/link';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import urlForImage from '@/util/urlForImage';
+import { readingTimeFromWordCount, formatReadingTime } from '@/lib/readingTime';
 
 // Enhanced Article Card - matches your existing design but with the blog card layout
 const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
@@ -63,6 +64,11 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
                   <span className='text-sm text-slate-600'>
                     {formatDate(getArticleDate(article))}
                   </span>
+                  {article.wordCount != null && (
+                    <span className='text-xs uppercase tracking-widest text-slate-500'>
+                      · {formatReadingTime(readingTimeFromWordCount(article.wordCount))}
+                    </span>
+                  )}
                   <ArrowUpRight className='h-4 w-4 text-untele transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1' />
                 </div>
               </div>
@@ -175,11 +181,16 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
                 <ArrowUpRight className='h-4 w-4 text-untele' />
               </div>
             </div>
-            <p className='text-sm text-slate-400'>
-              {getArticleDate(article)
-                ? formatDate(getArticleDate(article))
-                : 'Date not available'}
-            </p>
+            <div className='flex items-center gap-2 text-sm text-slate-400'>
+              <span>
+                {getArticleDate(article) ? formatDate(getArticleDate(article)) : 'Date not available'}
+              </span>
+              {article.wordCount != null && (
+                <span className='text-xs uppercase tracking-widest'>
+                  · {formatReadingTime(readingTimeFromWordCount(article.wordCount))}
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>
