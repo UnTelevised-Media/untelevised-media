@@ -6,6 +6,13 @@ type Base = {
   _updatedAt: string;
 };
 
+interface ArticleCorrection {
+  type: 'correction' | 'clarification' | 'update' | 'retraction';
+  issuedAt?: string;
+  summary?: string;
+  detail: string;
+}
+
 interface SeoOverride {
   metaTitle?: string;
   metaDescription?: string;
@@ -31,6 +38,7 @@ interface LiveEvent extends Base {
   slug: Slug;
   isCurrentEvent: boolean;
   mainImage: Image;
+  correction?: ArticleCorrection;
   seo?: SeoOverride;
 }
 
@@ -59,7 +67,7 @@ interface Article extends Base {
   publishedAt: string;
   updatedAt?: string;
   leadParagraph?: string;
-  corrections?: string;
+  correction?: ArticleCorrection;
   sources?: Array<{ label: string; url: string }>;
   faqs?: Array<{ question: string; answer: string }>;
   reviewedBy?: Author;

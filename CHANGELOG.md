@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- **Corrections & Retractions Workflow (#23)** — Full editorial correction pipeline:
+  - New reusable `correctionObject` Sanity schema supporting four correction types: `correction` (amber), `clarification` (blue), `update` (green), `retraction` (red)
+  - `Article` and `LiveEvent` Sanity schemas updated to use shared `correctionObject` field (live events support corrections/clarifications/updates only — not retractions)
+  - `CorrectionNotice` component renders inline above article body with per-type color, icon, label, issued date, and detail text
+  - Distinct retraction badge (red `bg-untele` + XCircle icon) vs correction badge (amber + AlertTriangle) on all card surfaces (`ArticleCard`, `FeaturedArticleCard`, `ArticleCardLg`)
+  - Retracted article titles display with `line-through opacity-60` on article page and all card surfaces
+  - GROQ queries updated to project `correction { type, issuedAt, summary, detail }` on all article and event fetch paths
+  - `ArticleCorrection` TypeScript interface added; `correction?` field on `Article` and `LiveEvent` global types
+
 ### Fixed
 - **GTM never loaded in production** — `GTM_ID` was a server-side env var passed
   to a `'use client'` component where it evaluated to `undefined`; renamed to

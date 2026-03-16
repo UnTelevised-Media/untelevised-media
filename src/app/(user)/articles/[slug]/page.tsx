@@ -23,6 +23,7 @@ import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata';
 import { NewsArticleStructuredData } from '@/components/seo/NewsArticleStructuredData';
 import { getReadingTime } from '@/lib/readingTime';
+import { CorrectionNotice } from '@/components/post/CorrectionNotice';
 
 // import Comments from '@/c/post/Comments';
 
@@ -78,7 +79,9 @@ export default async function Article({ params }: Props) {
           <div className='mx-auto w-full max-w-4xl px-4 pb-12 sm:px-6 lg:px-8'>
             <div className='space-y-6'>
               {/* Title */}
-              <h1 className='text-4xl font-bold text-white sm:text-5xl lg:text-6xl'>
+              <h1
+                className={`text-4xl font-bold text-white sm:text-5xl lg:text-6xl${article.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
+              >
                 {article.title}
               </h1>
 
@@ -209,13 +212,10 @@ export default async function Article({ params }: Props) {
             </div>
           )}
 
-          {/* Corrections Notice */}
-          {article.corrections && (
-            <div className='not-prose mb-8 border-l-4 border-untele bg-untele/5 px-6 py-4 dark:bg-untele/10'>
-              <p className='mb-1 text-xs font-black uppercase tracking-widest text-untele'>
-                Correction
-              </p>
-              <p className='text-sm text-slate-700 dark:text-slate-300'>{article.corrections}</p>
+          {/* Correction / Retraction Notice */}
+          {article.correction?.detail && (
+            <div className='not-prose'>
+              <CorrectionNotice correction={article.correction} />
             </div>
           )}
 

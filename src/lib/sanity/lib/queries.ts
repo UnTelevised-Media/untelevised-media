@@ -99,6 +99,7 @@ export const queryEventBySlug = groq`
       ...,
       eventTag[]->,
       keyEvent[]->,
+      "correction": correction { type, issuedAt, summary, detail },
       relatedArticles[]-> {
         slug,
         _id,
@@ -117,6 +118,7 @@ export const queryAllArticles = groq`
     categories[]->,
     description,
     publishedAt,
+    "correction": correction { type, summary },
   }
   | order(_createdAt desc)
 `;
@@ -283,7 +285,7 @@ export const queryArticleBySlug = groq`
       seo,
       faqs,
       sources,
-      corrections,
+      "correction": correction { type, issuedAt, summary, detail },
       updatedAt,
       leadParagraph,
       relatedArticles[]-> {

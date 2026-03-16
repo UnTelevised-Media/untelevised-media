@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import Image from 'next/image';
-import { ArrowUpRight, ShareIcon } from 'lucide-react';
+import { ArrowUpRight, ShareIcon, AlertTriangle, XCircle } from 'lucide-react';
 import Link from 'next/link';
 
 import formatDate from '@/util/formatDate';
@@ -47,9 +47,21 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
                 ))}
               </div>
 
+              {article.correction?.type === 'retraction' ? (
+                <span className='mb-2 inline-flex items-center gap-1 bg-untele px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
+                  <XCircle className='h-2.5 w-2.5' aria-hidden='true' />
+                  Retracted
+                </span>
+              ) : article.correction?.summary ? (
+                <span className='mb-2 inline-flex items-center gap-1 bg-amber-400 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-black'>
+                  <AlertTriangle className='h-2.5 w-2.5' aria-hidden='true' />
+                  Corrected
+                </span>
+              ) : null}
+
               <h2
                 id={`article-title-${article._id}`}
-                className='mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele'
+                className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele${article.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
               >
                 {article.title}
               </h2>
@@ -164,9 +176,21 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
             </span>
           )}
 
+          {article.correction?.type === 'retraction' ? (
+            <span className='mb-1 ml-4 inline-flex items-center gap-1 bg-untele px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
+              <XCircle className='h-2.5 w-2.5' aria-hidden='true' />
+              Retracted
+            </span>
+          ) : article.correction?.summary ? (
+            <span className='mb-1 ml-4 inline-flex items-center gap-1 bg-amber-400 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-black'>
+              <AlertTriangle className='h-2.5 w-2.5' aria-hidden='true' />
+              Corrected
+            </span>
+          ) : null}
+
           <h2
             id='featured-article-title'
-            className='mb-2 text-wrap px-4 text-2xl font-bold leading-6 text-white drop-shadow-lg'
+            className={`mb-2 text-wrap px-4 text-2xl font-bold leading-6 text-white drop-shadow-lg${article.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
           >
             {article.title}
           </h2>
