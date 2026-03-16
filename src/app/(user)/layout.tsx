@@ -12,6 +12,7 @@ import { SanityLive } from '@/lib/sanity/lib/live';
 import DraftModeBanner from '@/components/sanity/DraftModeBanner';
 import SanityVisualEditing from '@/components/sanity/VisualEditing';
 import { GlobalStructuredData } from '@/components/seo/GlobalStructuredData';
+import { BreakingNewsBanner } from '@/components/global/BreakingNewsBanner';
 
 export default async function UserLayout({ children }: { children: React.ReactNode }) {
   const draftModeEnabled = (await draftMode()).isEnabled;
@@ -31,6 +32,7 @@ export default async function UserLayout({ children }: { children: React.ReactNo
         {/* Main Content with offset for draft banner */}
         <div className={draftModeEnabled ? 'pt-16' : ''}>
           {/* Auto-placement disabled - using custom ad components instead */}
+          <BreakingNewsBanner />
           <Header logoSlot={<HeaderLogo />} />
           <NavWrapper />
           {children}
