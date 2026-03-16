@@ -543,6 +543,26 @@ export const queryRSSFeed = groq`
   }
 `;
 
+// ! TODO: When live events are renamed to "breaking", update:
+// !   - _type filter: 'liveEvent' → 'breaking'
+// !   - query name: queryRSSLiveEvents → queryRSSBreakingEvents
+export const queryRSSLiveEvents = groq`
+  *[_type == "liveEvent"] | order(eventDate desc) [0...20] {
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    subtitle,
+    eventDate,
+    _updatedAt,
+    eventStatus,
+    mainImage {
+      asset->,
+      alt
+    }
+  }
+`;
+
 export const queryPoliciesList = groq`
   *[_type == "policies"] {
     _id,

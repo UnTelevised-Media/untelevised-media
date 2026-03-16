@@ -15,6 +15,28 @@ interface RSSArticle {
   category?: { title: string };
 }
 
+// ! TODO: When live events are renamed to "breaking" (upcoming issue),
+// ! update the following:
+// !   - queryRSSLiveEvents → queryRSSBreakingEvents (in queries.ts)
+// !   - URL path: '/live-event/' → '/breaking/'
+// !   - Category label: 'Live Coverage' → 'Breaking News'
+// !   - Sanity _type filter: 'liveEvent' → 'breaking'
+interface RSSLiveEvent {
+  _id: string;
+  title: string;
+  slug: string;
+  // Live events use description (summary) and subtitle instead of article body
+  description?: string;
+  subtitle?: string;
+  // Live events use eventDate, not publishedAt
+  eventDate: string;
+  _updatedAt?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mainImage?: any;
+  // Live events have no author field — coverage is by the newsroom
+  eventStatus?: string;
+}
+
 function escapeXml(str: string): string {
   return str
     .replace(/&/g, '&amp;')
@@ -28,7 +50,7 @@ function toRFC2822(dateStr: string): string {
   return new Date(dateStr).toUTCString();
 }
 
-function buildItem(article: RSSArticle): string {
+function buildArticleItem(article: RSSArticle): string {
   const url = `${BASE_URL}/articles/${article.slug}`;
   const imageUrl = article.mainImage?.asset
     ? urlForImage(article.mainImage)?.width(1200).url()
@@ -47,9 +69,45 @@ function buildItem(article: RSSArticle): string {
     </item>`;
 }
 
-export function generateRSSXML(articles: RSSArticle[]): string {
+// ! TODO: rename path '/live-event/' → '/breaking/' when breaking-events rename ships
+function buildLiveEventItem(event: RSSLiveEvent): string {
+  const url = `${BASE_URL}/live-event/${event.slug}`;
+  const imageUrl = event.mainImage?.asset ? urlForImage(event.mainImage)?.width(1200).url() : null;
+  // Use subtitle as a secondary description if description is missing
+  const description = event.description ?? event.subtitle ?? '';
+  // Live events fall back to _updatedAt when no eventDate
+  const pubDate = event.eventDate ?? event._updatedAt ?? new Date().toISOString();
+
+  return `
+    <item>
+      <title><![CDATA[🔴 LIVE: ${event.title}]]></title>
+      <link>${escapeXml(url)}</link>
+      <guid isPermaLink="true">${escapeXml(url)}</guid>
+      <pubDate>${toRFC2822(pubDate)}</pubDate>
+      <description><![CDATA[${description}]]></description>
+      <author>newsroom@untelevised.media (UnTelevised Media Newsroom)</author>
+      <category><![CDATA[Live Coverage]]></category>
+      ${imageUrl ? `<media:content url="${escapeXml(imageUrl)}" medium="image" />` : ''}
+    </item>`;
+}
+
+export function generateRSSXML(articles: RSSArticle[], liveEvents: RSSLiveEvent[] = []): string {
   const lastBuildDate = new Date().toUTCString();
-  const items = articles.map(buildItem).join('\n');
+
+  // Merge and sort all items by date, newest first
+  const articleItems = articles.map((a) => ({
+    date: new Date(a.publishedAt),
+    xml: buildArticleItem(a),
+  }));
+  const liveItems = liveEvents.map((e) => ({
+    date: new Date(e.eventDate ?? e._updatedAt ?? 0),
+    xml: buildLiveEventItem(e),
+  }));
+
+  const allItems = [...articleItems, ...liveItems]
+    .sort((a, b) => b.date.getTime() - a.date.getTime())
+    .map((item) => item.xml)
+    .join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
@@ -71,7 +129,7 @@ export function generateRSSXML(articles: RSSArticle[]): string {
       <title>UnTelevised Media</title>
       <link>${BASE_URL}</link>
     </image>
-    ${items}
+    ${allItems}
   </channel>
 </rss>`;
 }

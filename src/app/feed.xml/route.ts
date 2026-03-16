@@ -1,18 +1,20 @@
 // src/app/feed.xml/route.ts
 import { sanityFetch } from '@/lib/sanity/lib/live';
-import { queryRSSFeed } from '@/lib/sanity/lib/queries';
+import { queryRSSFeed, queryRSSLiveEvents } from '@/lib/sanity/lib/queries';
 import { generateRSSXML } from '@/lib/rssUtils';
 
 export const revalidate = 3600;
 
 export async function GET() {
   try {
-    const { data: articles } = await sanityFetch({
-      query: queryRSSFeed,
-      tags: ['article'],
-    });
+    // Fetch articles and live events in parallel
+    // ! TODO: update queryRSSLiveEvents → queryRSSBreakingEvents when rename ships
+    const [{ data: articles }, { data: liveEvents }] = await Promise.all([
+      sanityFetch({ query: queryRSSFeed, tags: ['article'] }),
+      sanityFetch({ query: queryRSSLiveEvents, tags: ['liveEvent'] }),
+    ]);
 
-    const xml = generateRSSXML(articles ?? []);
+    const xml = generateRSSXML(articles ?? [], liveEvents ?? []);
 
     return new Response(xml, {
       status: 200,
