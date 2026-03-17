@@ -25,6 +25,7 @@ import { NewsArticleStructuredData } from '@/components/seo/NewsArticleStructure
 import { getReadingTime } from '@/lib/readingTime';
 import { CorrectionNotice } from '@/components/post/CorrectionNotice';
 import { SourcesPanel } from '@/components/post/SourcesPanel';
+import { BookmarkButton } from '@/components/bookmarks/BookmarkButton';
 
 // import Comments from '@/c/post/Comments';
 
@@ -183,9 +184,20 @@ export default async function Article({ params }: Props) {
 
       {/* Main Content */}
       <main className='mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8'>
-        {/* Social Share */}
-        <div className='mb-8'>
+        {/* Social Share + Bookmark */}
+        <div className='mb-8 flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:justify-between'>
           <SocialShare url={`https://untelevised.media/articles/${slug}`} title={article.title} />
+          <BookmarkButton
+            slug={slug}
+            title={article.title}
+            description={typeof article.description === 'string' ? article.description : undefined}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            imageUrl={urlForImage(article.mainImage as any)?.width(400).url() ?? undefined}
+            authorName={article.author?.name}
+            publishedAt={article.publishedAt}
+            readingTime={getReadingTime(article.body)}
+            variant='full'
+          />
         </div>
 
         {/* Rectangle Ad after social share */}
