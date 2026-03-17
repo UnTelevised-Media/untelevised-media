@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bookmark } from 'lucide-react';
 
 import Socials from './Socials';
 import ThemeToggle from './ThemeToggle';
@@ -113,6 +114,15 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
           >
             <MagnifyingGlassIcon className='h-4 w-4 md:h-5 md:w-5' />
           </button>
+
+          {/* Reading List */}
+          <Link
+            href='/reading-list'
+            className='rounded-lg p-1.5 text-slate-700 transition-all duration-200 hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2'
+            aria-label='Reading list'
+          >
+            <Bookmark className='h-4 w-4 md:h-5 md:w-5' />
+          </Link>
 
           {/* Theme Toggle */}
           <div className='hidden md:flex'>
