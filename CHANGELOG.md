@@ -9,6 +9,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Careers Page (#17)** — New `/careers` page with editor-managed job listings and application form:
+  - `jobListing` Sanity document type — fields: title, slug, department (6 options), type (full-time/part-time/freelance/volunteer), location, description (blockContent), requirements (string[]), compensation, isActive (default true), closingDate; registered in schema index and auto-appears in Studio
+  - `queryActiveJobListings` GROQ query — filters by `isActive == true` and `closingDate >= $today`; accepts `{ today: "YYYY-MM-DD" }` param
+  - `src/lib/validations/jobApplicationSchema.ts` — Zod schema: fullName, email, position, portfolioUrl (optional URL), linkedinUrl (optional URL), coverLetter (100–3000 chars), howDidYouFindUs (5 options), resume (optional File, max 5 MB, PDF/Word)
+  - `ApplicationForm` component (`'use client'`) — react-hook-form + zodResolver; FormData POST to `/api/careers-application`; success/error states
+  - `/api/careers-application` route — accepts FormData; server-side Zod validation; maps careers form fields onto existing `jobApplication` Sanity schema; uploads resume to Sanity Assets (best-effort, non-fatal); preserves existing `/api/job-application` route for the /join form
+  - `/careers` page — server component; hero + 3 value-prop cards; collapsible `<details>` per active listing with dept/type/location/compensation meta, rich text description, requirements list, embedded `ApplicationForm`; General Application section always shown; links to /join for detailed contributor form; graceful fallback if Sanity fetch fails
+  - `/join` page — "View open positions on our Careers page →" link added to hero
+  - Footer: "Careers" link added to About column
+  - Sitemap: `/careers/` at priority 0.6, monthly
+
 - **Editorial Standards Page (#26)** — New static `/editorial-standards` page:
   - Six core principles: Accuracy, Independence, Fairness, Verification, Transparency, Accountability
   - Verification process section (primary sourcing, multi-source requirement, document verification, right of reply)
