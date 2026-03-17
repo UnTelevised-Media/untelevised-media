@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { PortableText } from '@portabletext/react';
+import type { PortableTextBlock } from '@portabletext/types';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryActiveJobListings } from '@/lib/sanity/lib/queries';
@@ -32,7 +33,7 @@ interface JobListing {
   type?: string;
   location?: string;
   compensation?: string;
-  description?: unknown[];
+  description?: PortableTextBlock[];
   requirements?: string[];
   closingDate?: string;
 }
