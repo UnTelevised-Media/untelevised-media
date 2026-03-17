@@ -106,6 +106,21 @@ export default defineType({
       initialValue: 'EventScheduled',
     }),
     defineField({
+      name: 'sources',
+      title: 'Sources',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'source' }] }],
+      description: 'Reference source documents from the Sources library.',
+    }),
+    defineField({
+      name: 'methodology',
+      title: 'Methodology Note',
+      type: 'text',
+      rows: 4,
+      description:
+        'Optional note on how this live event is being covered — shown in the Sources panel.',
+    }),
+    defineField({
       name: 'correction',
       title: 'Correction',
       type: 'correctionObject',

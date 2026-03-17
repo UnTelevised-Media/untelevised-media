@@ -24,6 +24,7 @@ import { buildArticleMetadata } from '@/util/metadata';
 import { NewsArticleStructuredData } from '@/components/seo/NewsArticleStructuredData';
 import { getReadingTime } from '@/lib/readingTime';
 import { CorrectionNotice } from '@/components/post/CorrectionNotice';
+import { SourcesPanel } from '@/components/post/SourcesPanel';
 
 // import Comments from '@/c/post/Comments';
 
@@ -239,33 +240,10 @@ export default async function Article({ params }: Props) {
             <PortableText value={article.body} components={RichTextComponents} />
           </div>
 
-          {/* Sources */}
-          {article.sources && article.sources.length > 0 && (
-            <div className='not-prose mt-8 rounded-xl border border-slate-200 bg-white/50 p-6 dark:border-slate-700 dark:bg-slate-900/50'>
-              <h3 className='mb-3 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400'>
-                Sources
-              </h3>
-              <ul className='space-y-1'>
-                {article.sources.map((source, i) => (
-                  <li key={i} className='flex items-start gap-2 text-sm'>
-                    <span className='mt-0.5 text-untele'>↗</span>
-                    {source.url ? (
-                      <a
-                        href={source.url}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='text-slate-700 underline hover:text-untele dark:text-slate-300'
-                      >
-                        {source.label || source.url}
-                      </a>
-                    ) : (
-                      <span className='text-slate-700 dark:text-slate-300'>{source.label}</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          {/* Sources & Methodology */}
+          <div className='not-prose'>
+            <SourcesPanel sources={article.sources} methodology={article.methodology} />
+          </div>
 
           {/* FAQs */}
           {article.faqs && article.faqs.length > 0 && (

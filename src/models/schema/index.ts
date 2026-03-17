@@ -35,6 +35,7 @@ import whistleblower from './whistleblower';
 // UI/component schemas
 import ctaButton from './buttons';
 import correctionObject from './correction';
+import source from './source';
 
 // Embed schemas
 import instagramEmbed from './instagram';
@@ -93,6 +94,9 @@ export const schemaTypes = [
   // Shared object schemas
   correctionObject,
 
+  // Credibility schemas
+  source,
+
   // Add your new schemas here, grouped accordingly
   // newContentSchema,
   // newFormSchema,
@@ -144,6 +148,9 @@ export {
 
   // Shared object schemas
   correctionObject,
+
+  // Credibility schemas
+  source,
 
   // Add your new schemas here
   // newContentSchema,

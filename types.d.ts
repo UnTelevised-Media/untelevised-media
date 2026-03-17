@@ -6,6 +6,16 @@ type Base = {
   _updatedAt: string;
 };
 
+type SourceType = 'document' | 'interview' | 'statement' | 'data' | 'media' | 'onscene' | 'other';
+
+interface ArticleSource {
+  label: string;
+  type?: SourceType;
+  url?: string;
+  description?: string;
+  isAnonymous?: boolean;
+}
+
 interface ArticleCorrection {
   type: 'correction' | 'clarification' | 'update' | 'retraction';
   issuedAt?: string;
@@ -39,6 +49,8 @@ interface LiveEvent extends Base {
   isCurrentEvent: boolean;
   mainImage: Image;
   correction?: ArticleCorrection;
+  sources?: ArticleSource[];
+  methodology?: string;
   seo?: SeoOverride;
 }
 
@@ -47,6 +59,7 @@ interface KeyEvent extends Base {
   slug: Slug;
   eventDate: string;
   description: Block[];
+  sources?: ArticleSource[];
 }
 
 interface Article extends Base {
@@ -68,7 +81,8 @@ interface Article extends Base {
   updatedAt?: string;
   leadParagraph?: string;
   correction?: ArticleCorrection;
-  sources?: Array<{ label: string; url: string }>;
+  sources?: ArticleSource[];
+  methodology?: string;
   faqs?: Array<{ question: string; answer: string }>;
   reviewedBy?: Author;
   relatedArticles?: Array<{

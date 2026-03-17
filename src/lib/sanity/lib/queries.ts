@@ -98,7 +98,12 @@ export const queryEventBySlug = groq`
     *[_type == "liveEvent" && slug.current == $slug][0] {
       ...,
       eventTag[]->,
-      keyEvent[]->,
+      keyEvent[]-> {
+        ...,
+        sources[]-> { label, type, url, description, isAnonymous },
+      },
+      sources[]-> { label, type, url, description, isAnonymous },
+      methodology,
       "correction": correction { type, issuedAt, summary, detail },
       relatedArticles[]-> {
         slug,
@@ -284,7 +289,8 @@ export const queryArticleBySlug = groq`
       reviewedBy->{ name, slug, title, image },
       seo,
       faqs,
-      sources,
+      sources[]-> { label, type, url, description, isAnonymous },
+      methodology,
       "correction": correction { type, issuedAt, summary, detail },
       updatedAt,
       leadParagraph,
