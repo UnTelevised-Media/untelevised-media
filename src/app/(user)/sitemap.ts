@@ -134,6 +134,12 @@ export default async function sitemap(): Promise<
     },
     // Static section pages — editorial & info
     {
+      url: 'https://www.untelevised.media/editorial-standards/',
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
       url: 'https://www.untelevised.media/about/',
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
