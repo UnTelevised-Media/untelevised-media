@@ -9,6 +9,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Editorial Standards Page (#26)** — New static `/editorial-standards` page:
+  - Six core principles: Accuracy, Independence, Fairness, Verification, Transparency, Accountability
+  - Verification process section (primary sourcing, multi-source requirement, document verification, right of reply)
+  - Source standards explaining named vs. anonymous sourcing and how the Source Transparency Panel works
+  - Corrections policy with all four correction types (correction/clarification/update/retraction) explained with their visual color codes
+  - Independence & Conflicts of Interest section (editorial firewall, staff disclosures, no political alignment, funding transparency, native advertising, outside employment)
+  - Sensitive reporting guidelines (trauma & graphic content, suicide & self-harm, minors, national security)
+  - Contact CTAs to corrections desk (`corrections@untelevised.media`) and editorial board (`editorial@untelevised.media`)
+  - Added to sitemap at `/editorial-standards/` (priority 0.6, monthly)
+  - "Editorial Standards" link added to Footer About column
 - **Bookmarks & Reading List (#19)** — Zero-backend, pure localStorage article saving:
   - `src/lib/bookmarks/storage.ts` — CRUD utilities: `getBookmarks`, `isBookmarked`, `addBookmark`, `removeBookmark`, `clearBookmarks`. SSR-safe (`typeof window` guard), fails silently on quota exceeded. Storage key: `untele_bookmarks`
   - `BookmarkEntry` interface: slug, title, description, imageUrl, authorName, publishedAt, readingTime, bookmarkedAt
