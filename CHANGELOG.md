@@ -9,6 +9,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Editorial Standards Page (#26)** — New static `/editorial-standards` page:
+  - Six core principles: Accuracy, Independence, Fairness, Verification, Transparency, Accountability
+  - Verification process section (primary sourcing, multi-source requirement, document verification, right of reply)
+  - Source standards explaining named vs. anonymous sourcing and how the Source Transparency Panel works
+  - Corrections policy with all four correction types (correction/clarification/update/retraction) explained with their visual color codes
+  - Independence & Conflicts of Interest section (editorial firewall, staff disclosures, no political alignment, funding transparency, native advertising, outside employment)
+  - Sensitive reporting guidelines (trauma & graphic content, suicide & self-harm, minors, national security)
+  - Contact CTAs to corrections desk (`corrections@untelevised.media`) and editorial board (`editorial@untelevised.media`)
+  - Added to sitemap at `/editorial-standards/` (priority 0.6, monthly)
+  - "Editorial Standards" link added to Footer About column
+
 - **Source Transparency Panel (#24)** — Collapsible sources & methodology section for articles and live events:
   - New standalone `source` Sanity document type (reusable across articles, live events, and key events) — fields: label, type (7 options: document, interview, statement, data, media, on-scene, other), url, description, `isAnonymous` flag
   - `article`: `sources[]` upgraded from minimal inline objects to references; `methodology` text field added
