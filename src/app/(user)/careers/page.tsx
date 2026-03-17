@@ -1,12 +1,11 @@
 // src/app/(user)/careers/page.tsx
 import React from 'react';
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryActiveJobListings } from '@/lib/sanity/lib/queries';
-import { ApplicationForm } from '@/components/careers/ApplicationForm';
+import { ContributorApplicationForm } from '@/components/careers/ContributorApplicationForm';
 import formatDate from '@/util/formatDate';
 import { Briefcase, MapPin, Clock, DollarSign } from 'lucide-react';
 
@@ -230,7 +229,7 @@ export default async function CareersPage() {
                         </div>
                         <div className='h-px flex-1 bg-slate-300 dark:bg-slate-700' />
                       </div>
-                      <ApplicationForm prefilledPosition={job.title} />
+                      <ContributorApplicationForm prefilledPosition={job.title} />
                     </div>
                   </div>
                 </details>
@@ -256,21 +255,10 @@ export default async function CareersPage() {
                 ? "Don't see a role that fits? Submit a general application and we'll keep it on file for when the right opportunity opens."
                 : "We don't have specific open roles right now, but we're always looking for talented journalists, photographers, and storytellers. Submit a general application and we'll be in touch."}
             </p>
-            <ApplicationForm prefilledPosition='General Application' />
+            <ContributorApplicationForm />
           </div>
         </section>
 
-        {/* DETAILED APPLICATION LINK */}
-        <div className='mt-10 border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-950'>
-          <p className='text-sm text-slate-600 dark:text-slate-400'>
-            Looking to share more detail — social profiles, work samples, and availability?
-            Use our full{' '}
-            <Link href='/join' className='font-bold text-untele hover:underline'>
-              contributor application form
-            </Link>{' '}
-            instead.
-          </p>
-        </div>
       </div>
     </div>
   );
