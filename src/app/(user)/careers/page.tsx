@@ -3,7 +3,6 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { PortableText } from '@portabletext/react';
-import type { PortableTextBlock } from '@portabletext/types';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryActiveJobListings } from '@/lib/sanity/lib/queries';
@@ -33,7 +32,7 @@ interface JobListing {
   type?: string;
   location?: string;
   compensation?: string;
-  description?: PortableTextBlock[];
+  description?: unknown[];
   requirements?: string[];
   closingDate?: string;
 }
@@ -201,7 +200,8 @@ export default async function CareersPage() {
                   <div className='border-t border-slate-200 px-6 py-8 dark:border-slate-800'>
                     {job.description && Array.isArray(job.description) && job.description.length > 0 && (
                       <div className='prose prose-slate dark:prose-invert mb-6 max-w-none text-sm'>
-                        <PortableText value={job.description} components={RichTextComponents} />
+                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                        <PortableText value={job.description as any} components={RichTextComponents} />
                       </div>
                     )}
 
