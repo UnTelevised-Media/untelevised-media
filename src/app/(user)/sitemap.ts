@@ -165,6 +165,12 @@ export default async function sitemap(): Promise<
     },
     // Static section pages — engagement & conversion
     {
+      url: 'https://www.untelevised.media/careers/',
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
       // Reading list is user-specific; included for nav discoverability but noindexed via robots
       url: 'https://www.untelevised.media/reading-list/',
       lastModified: new Date(),
