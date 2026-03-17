@@ -165,6 +165,13 @@ export default async function sitemap(): Promise<
     },
     // Static section pages — engagement & conversion
     {
+      // Reading list is user-specific; included for nav discoverability but noindexed via robots
+      url: 'https://www.untelevised.media/reading-list/',
+      lastModified: new Date(),
+      changeFrequency: 'never' as const,
+      priority: 0.1,
+    },
+    {
       url: 'https://www.untelevised.media/join/',
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,

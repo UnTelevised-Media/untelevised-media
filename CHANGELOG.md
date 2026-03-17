@@ -19,6 +19,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Contact CTAs to corrections desk (`corrections@untelevised.media`) and editorial board (`editorial@untelevised.media`)
   - Added to sitemap at `/editorial-standards/` (priority 0.6, monthly)
   - "Editorial Standards" link added to Footer About column
+- **Bookmarks & Reading List (#19)** — Zero-backend, pure localStorage article saving:
+  - `src/lib/bookmarks/storage.ts` — CRUD utilities: `getBookmarks`, `isBookmarked`, `addBookmark`, `removeBookmark`, `clearBookmarks`. SSR-safe (`typeof window` guard), fails silently on quota exceeded. Storage key: `untele_bookmarks`
+  - `BookmarkEntry` interface: slug, title, description, imageUrl, authorName, publishedAt, readingTime, bookmarkedAt
+  - `BookmarkButton` component (`'use client'`) — icon-only or full (icon + label) variant; SSR-safe hydration (disabled placeholder → real state after mount); brand-color active state (untele red)
+  - `/reading-list` page (`'use client'`) — animated loading skeleton, empty state with CTA, article list with thumbnail/meta/actions, per-item Remove button, Clear All button, article count, browser storage disclaimer
+  - `BookmarkButton` integrated into article page next to social share row; passes slug, title, description, 400px image URL, author, publishedAt, and reading time
+  - Bookmark icon added to header right section, linking to `/reading-list`
+  - `/reading-list` added to sitemap (priority 0.1, changeFrequency: never)
 
 - **Source Transparency Panel (#24)** — Collapsible sources & methodology section for articles and live events:
   - New standalone `source` Sanity document type (reusable across articles, live events, and key events) — fields: label, type (7 options: document, interview, statement, data, media, on-scene, other), url, description, `isAnonymous` flag
