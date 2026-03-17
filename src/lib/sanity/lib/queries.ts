@@ -631,3 +631,28 @@ export const queryActiveJobListings = groq`
     closingDate
   }
 `;
+
+export const queryJobApplications = groq`
+  *[_type == "jobApplication"] | order(submittedAt desc) {
+    _id,
+    firstName,
+    lastName,
+    email,
+    phone,
+    location,
+    positionsOfInterest,
+    otherPosition,
+    experienceLevel,
+    experienceDescription,
+    availability,
+    applicationStatus,
+    submittedAt,
+    notes,
+    portfolioWebsite,
+    youtubeChannel,
+    socialMediaPlatforms,
+    socialMediaLinks,
+    workSamples,
+    additionalInfo
+  }
+`;

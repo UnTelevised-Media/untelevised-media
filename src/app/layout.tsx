@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Script from 'next/script';
+import { ClerkProvider } from '@clerk/nextjs';
 
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
@@ -75,6 +76,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
+    <ClerkProvider>
     <html lang='en' suppressHydrationWarning>
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
@@ -131,6 +133,7 @@ const RootLayout = ({
         </ErrorBoundary>
       </body>
     </html>
+    </ClerkProvider>
   );
 };
 
