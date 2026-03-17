@@ -178,12 +178,6 @@ export default async function sitemap(): Promise<
       priority: 0.1,
     },
     {
-      url: 'https://www.untelevised.media/join/',
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
-    {
       url: 'https://www.untelevised.media/donate/',
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,

@@ -117,14 +117,54 @@ export default async function CareersPage() {
                 body: 'Our coverage reaches readers across 50+ countries. Your work matters beyond your city.',
               },
             ].map(({ title, body }) => (
-              <div
-                key={title}
-                className='border-l-4 border-untele bg-white p-5 dark:bg-black'
-              >
+              <div key={title} className='border-l-4 border-untele bg-white p-5 dark:bg-black'>
                 <h3 className='mb-2 text-sm font-black uppercase tracking-widest text-slate-900 dark:text-white'>
                   {title}
                 </h3>
                 <p className='text-sm text-slate-600 dark:text-slate-400'>{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WE'RE LOOKING FOR — position grid */}
+      <section className='border-b border-slate-300 bg-white py-16 dark:border-slate-800 dark:bg-black'>
+        <div className='mx-auto max-w-5xl px-4'>
+          <div className='mb-10 flex items-center space-x-4'>
+            <div className='bg-untele px-4 py-2'>
+              <h2 className='text-lg font-black uppercase tracking-widest text-white'>
+                WE&rsquo;RE LOOKING FOR
+              </h2>
+            </div>
+            <div className='h-px flex-1 bg-slate-300 dark:bg-slate-700' />
+          </div>
+          <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+            {[
+              'Article Writer',
+              'Article Editor',
+              'Video Editor',
+              'Live Street Journalist',
+              'Social Media Manager',
+              'Content Creator',
+              'Radio Host',
+              'Video Producer',
+              'Photographer',
+              'Graphic Designer',
+              'Web Developer',
+              'Research Analyst',
+            ].map((role) => (
+              <div
+                key={role}
+                className='border border-slate-200 p-5 transition-colors hover:border-untele dark:border-slate-700'
+              >
+                <h3 className='mb-2 text-sm font-black uppercase tracking-wide text-slate-900 dark:text-white'>
+                  {role}
+                </h3>
+                <p className='text-xs text-slate-500 dark:text-slate-400'>
+                  Join our team and help expose the truth through{' '}
+                  {role.toLowerCase()} work.
+                </p>
               </div>
             ))}
           </div>
