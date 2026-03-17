@@ -29,6 +29,13 @@ export default defineType({
       title: 'Description',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'sources',
+      title: 'Sources',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'source' }] }],
+      description: 'Reference source documents from the Sources library.',
+    }),
   ],
   preview: {
     select: {

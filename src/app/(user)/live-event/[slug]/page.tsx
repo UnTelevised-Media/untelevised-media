@@ -8,6 +8,7 @@ import SocialShare from '@/components/global/SocialShare';
 
 import urlForImage from '@/u/urlForImage';
 import EventMap from '@/components/post/EventMap';
+import { SourcesPanel } from '@/components/post/SourcesPanel';
 
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
@@ -241,6 +242,7 @@ export default async function LiveEvent({ params }: Props) {
           {/* Developments / Story */}
           <div className='mx-auto h-min rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw] lg:w-2/5'>
             <PortableText value={liveEvent.body} components={RichTextComponents} />
+            <SourcesPanel sources={liveEvent.sources} methodology={liveEvent.methodology} />
           </div>
         </section>
       </article>
