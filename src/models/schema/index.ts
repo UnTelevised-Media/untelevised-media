@@ -28,6 +28,7 @@ import song from './song';
 // Form/contact schemas
 import contactSubmission from './contactSubmission';
 import jobApplication from './jobApplication';
+import jobListing from './jobListing';
 import newsletterSubscribe from './newsletterSubscribe';
 import secureContact from './secureContact';
 import whistleblower from './whistleblower';
@@ -79,6 +80,7 @@ export const schemaTypes = [
   // Form/contact schemas
   contactSubmission,
   jobApplication,
+  jobListing,
   newsletterSubscribe,
   secureContact,
   whistleblower,
@@ -134,6 +136,7 @@ export {
   // Form/contact schemas
   contactSubmission,
   jobApplication,
+  jobListing,
   newsletterSubscribe,
   secureContact,
   whistleblower,
