@@ -14,10 +14,17 @@ interface BannerData {
 }
 
 export async function BreakingNewsBanner() {
-  const { data: settings } = await sanityFetch({
-    query: querySiteSettings,
-    tags: ['siteSettings'],
-  });
+  let settings = null;
+  try {
+    const { data } = await sanityFetch({
+      query: querySiteSettings,
+      tags: ['siteSettings'],
+    });
+    settings = data;
+  } catch (err) {
+    console.error('[BreakingNewsBanner] sanityFetch failed:', err);
+    return null;
+  }
 
   const banner: BannerData | null = settings?.breakingBanner ?? null;
 
