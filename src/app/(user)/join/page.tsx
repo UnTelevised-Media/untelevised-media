@@ -238,6 +238,13 @@ export default function JoinPage() {
                 to truth-telling, we want to hear from you.
               </p>
             </div>
+
+            <p className='mt-6 text-sm text-slate-400'>
+              Looking for a specific open role?{' '}
+              <a href='/careers' className='font-bold text-untele hover:underline'>
+                View open positions on our Careers page →
+              </a>
+            </p>
           </div>
         </div>
       </section>
