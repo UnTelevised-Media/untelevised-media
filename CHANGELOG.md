@@ -14,6 +14,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **`src/lib/sanity/lib/write-client.ts`** — server-only write-enabled Sanity client using `SANITY_API_WRITE_TOKEN`
 - **`src/lib/bookmarks/actions.ts`** — Server Actions for authenticated bookmark CRUD: `getServerBookmarks`, `checkServerBookmarked`, `addServerBookmark`, `removeServerBookmark`, `clearServerBookmarks`, `syncLocalBookmarksToServer` (migration helper)
 - **`src/hooks/useBookmarks.ts`** — unified `useBookmarks()` hook; unauthenticated users use localStorage, authenticated users use Sanity; automatically migrates localStorage entries to Sanity on first sign-in then clears local storage; optimistic UI updates throughout
+- **`src/app/(user)/reading-list/layout.tsx`** — `robots: noindex, nofollow` metadata wrapper for the reading list page
+
+### Changed — Bookmarks Phase 2: Clerk + Sanity sync (#19)
+- **`BookmarkButton`** — refactored to consume `useBookmarks()` hook instead of calling localStorage directly; `ready` flag replaces the old `mounted` flag; behaviour identical for unauthenticated users
+- **`/reading-list` page** — consumes `useBookmarks()` hook; shows Cloud icon + sync message for signed-in users, Monitor icon + local-only message for guests; loading skeleton covers both pre-hydration and server fetch latency
 
 ---
 

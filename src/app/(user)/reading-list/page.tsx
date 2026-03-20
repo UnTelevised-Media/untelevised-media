@@ -1,35 +1,20 @@
 'use client';
 // src/app/(user)/reading-list/page.tsx
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Bookmark, BookmarkX, Trash2, ArrowUpRight, Clock } from 'lucide-react';
-import {
-  getBookmarks,
-  removeBookmark,
-  clearBookmarks,
-  type BookmarkEntry,
-} from '@/lib/bookmarks/storage';
+import { Bookmark, BookmarkX, Trash2, ArrowUpRight, Clock, Cloud, Monitor } from 'lucide-react';
+import { useBookmarks } from '@/hooks/useBookmarks';
+import { useUser } from '@clerk/nextjs';
 import formatDate from '@/util/formatDate';
 
 export default function ReadingListPage() {
-  const [bookmarks, setBookmarks] = useState<BookmarkEntry[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const { bookmarks, loading, ready, remove, clearAll } = useBookmarks();
+  const { isSignedIn } = useUser();
 
-  useEffect(() => {
-    setBookmarks(getBookmarks());
-    setMounted(true);
-  }, []);
-
-  const handleRemove = (slug: string) => {
-    const next = removeBookmark(slug);
-    setBookmarks(next);
-  };
-
-  const handleClearAll = () => {
-    clearBookmarks();
-    setBookmarks([]);
-  };
+  const storageNote = isSignedIn
+    ? 'Bookmarks are synced to your account and available on any device.'
+    : 'Bookmarks are stored only in this browser. Sign in to sync across devices.';
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
@@ -45,16 +30,20 @@ export default function ReadingListPage() {
             </div>
             <div className='h-px flex-1 bg-slate-400 dark:bg-slate-700' />
           </div>
-          <p className='max-w-2xl text-slate-600 dark:text-slate-400'>
-            Articles you&rsquo;ve saved for later. Stored locally in your browser — no account
-            required.
-          </p>
+          <div className='flex items-center gap-2 text-slate-600 dark:text-slate-400'>
+            {isSignedIn ? (
+              <Cloud className='h-4 w-4 shrink-0' />
+            ) : (
+              <Monitor className='h-4 w-4 shrink-0' />
+            )}
+            <p className='text-sm'>{storageNote}</p>
+          </div>
         </div>
       </section>
 
       {/* CONTENT */}
       <main className='mx-auto max-w-5xl px-4 py-10'>
-        {!mounted ? (
+        {!ready || loading ? (
           /* Loading skeleton — prevents flash of empty state on hydration */
           <div className='space-y-4'>
             {[1, 2, 3].map((n) => (
@@ -98,7 +87,7 @@ export default function ReadingListPage() {
                 {bookmarks.length} {bookmarks.length === 1 ? 'ARTICLE' : 'ARTICLES'} SAVED
               </p>
               <button
-                onClick={handleClearAll}
+                onClick={clearAll}
                 className='flex items-center gap-2 border border-slate-300 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-600 transition-colors hover:border-untele hover:text-untele dark:border-slate-700 dark:text-slate-400 dark:hover:border-untele dark:hover:text-untele'
               >
                 <Trash2 className='h-3.5 w-3.5' />
@@ -168,7 +157,7 @@ export default function ReadingListPage() {
                         {/* Actions */}
                         <div className='flex items-center gap-2'>
                           <button
-                            onClick={() => handleRemove(bookmark.slug)}
+                            onClick={() => remove(bookmark.slug)}
                             aria-label={`Remove "${bookmark.title}" from reading list`}
                             className='flex items-center gap-1 border border-slate-300 px-3 py-1.5 text-xs font-black uppercase tracking-widest text-slate-500 transition-colors hover:border-untele hover:text-untele dark:border-slate-700 dark:text-slate-500'
                           >
@@ -192,8 +181,7 @@ export default function ReadingListPage() {
 
             {/* Footer note */}
             <p className='mt-10 text-center text-xs text-slate-400 dark:text-slate-600'>
-              Bookmarks are stored only in this browser. Clearing your browser data will remove
-              them.
+              {storageNote}
             </p>
           </>
         )}

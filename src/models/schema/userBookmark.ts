@@ -10,8 +10,6 @@ export default defineType({
   title: 'User Bookmark',
   type: 'document',
   icon: BookmarkIcon,
-  // Hide from Studio structure — managed entirely via API
-  __experimental_actions: ['create', 'update', 'delete'],
   fields: [
     defineField({
       name: 'clerkUserId',
