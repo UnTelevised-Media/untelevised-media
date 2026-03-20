@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added — Bookmarks Phase 2: Clerk + Sanity sync (#19)
+
+- **`userBookmark` Sanity schema** — new document type storing per-user bookmarks keyed by `clerkUserId` + `slug`; deterministic `_id` (`userBookmark_{userId}_{slug}`) prevents duplicates; hidden from Studio structure, managed entirely via API
+- **`src/lib/sanity/lib/write-client.ts`** — server-only write-enabled Sanity client using `SANITY_API_WRITE_TOKEN`
+- **`src/lib/bookmarks/actions.ts`** — Server Actions for authenticated bookmark CRUD: `getServerBookmarks`, `checkServerBookmarked`, `addServerBookmark`, `removeServerBookmark`, `clearServerBookmarks`, `syncLocalBookmarksToServer` (migration helper)
+- **`src/hooks/useBookmarks.ts`** — unified `useBookmarks()` hook; unauthenticated users use localStorage, authenticated users use Sanity; automatically migrates localStorage entries to Sanity on first sign-in then clears local storage; optimistic UI updates throughout
+
 ---
 
 ## [2.2.2] — 2026-03-20
