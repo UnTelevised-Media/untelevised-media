@@ -3,6 +3,7 @@
   "version": "2.2.2",
   "private": true,
   "scripts": {
+    "claude-code": "claude --dangerously-skip-permissions",
     "dev:turbo": "next dev --turbopack",
     "dev": "next dev",
     "start": "next start",
