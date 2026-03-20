@@ -28,10 +28,9 @@ export const jobApplicationSchema = z.object({
     .min(100, 'Cover letter must be at least 100 characters')
     .max(3000, 'Cover letter must be under 3000 characters'),
 
-  howDidYouFindUs: z.enum(
-    ['existing-reader', 'social-media', 'word-of-mouth', 'google-search', 'other'],
-    { errorMap: () => ({ message: 'Please select how you found us' }) }
-  ),
+  howDidYouFindUs: z
+    .enum(['existing-reader', 'social-media', 'word-of-mouth', 'google-search', 'other'])
+    .refine((v) => v.length > 0, 'Please select how you found us'),
 
   // File validated client-side only — z.instanceof(File) throws on server
   resume: z
