@@ -603,3 +603,56 @@ export const querySiteSettings = groq`
     }
   }
 `;
+
+// ─── Careers ────────────────────────────────────────────────────────────────
+
+/**
+ * Active job listings — excludes inactive and expired (past closingDate).
+ * Accepts { today: "YYYY-MM-DD" } param.
+ */
+export const queryActiveJobListings = groq`
+  *[
+    _type == "jobListing"
+    && isActive == true
+    && (
+      !defined(closingDate)
+      || closingDate >= $today
+    )
+  ] | order(department asc) {
+    _id,
+    title,
+    slug,
+    department,
+    type,
+    location,
+    compensation,
+    description,
+    requirements,
+    closingDate
+  }
+`;
+
+export const queryJobApplications = groq`
+  *[_type == "jobApplication"] | order(submittedAt desc) {
+    _id,
+    firstName,
+    lastName,
+    email,
+    phone,
+    location,
+    positionsOfInterest,
+    otherPosition,
+    experienceLevel,
+    experienceDescription,
+    availability,
+    applicationStatus,
+    submittedAt,
+    notes,
+    portfolioWebsite,
+    youtubeChannel,
+    socialMediaPlatforms,
+    socialMediaLinks,
+    workSamples,
+    additionalInfo
+  }
+`;

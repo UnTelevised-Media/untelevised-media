@@ -9,6 +9,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Careers Page (#17)** — Full careers system with Sanity-managed listings, unified application form, and Clerk admin dashboard:
+  - `jobListing` Sanity document type — fields: title, slug, department (6 options), type (full-time/part-time/freelance/volunteer), location, description (blockContent), requirements (string[]), compensation, isActive (default true), closingDate; registered in schema index and auto-appears in Studio
+  - `queryActiveJobListings` GROQ query — filters by `isActive == true` and `closingDate >= $today`; accepts `{ today: "YYYY-MM-DD" }` param
+  - `ContributorApplicationForm` component (`'use client'`) — full application form with all fields: name, email, phone, location, positions (checkbox), social platforms, portfolio/YouTube/social links, experience level + description, work samples, availability, additional info; submits to `/api/job-application` (same Sanity schema as /join)
+  - `/api/careers-application` route — preserved for direct API use; maps to `jobApplication` Sanity schema; uploads resume to Sanity Assets (best-effort, non-fatal)
+  - `/careers` page — server component; hero ("WRITE FOR THE RESISTANCE") + 3 value-prop cards (Editorial Freedom, Portfolio Building, Global Reach); collapsible `<details>` per active listing with dept/type/location/compensation meta icons, rich text description, requirements list, embedded `ContributorApplicationForm`; "We're Always Hiring" section with full form; graceful fallback if Sanity fetch fails
+  - `/join` now permanently redirects to `/careers` — application flow consolidated
+  - Footer: "Careers" link added to About column
+  - Sitemap: `/careers/` at priority 0.6, monthly
+  - `@clerk/nextjs` installed; `ClerkProvider` wrapping root layout
+  - `src/middleware.ts` — `clerkMiddleware` protecting `/admin/*`: unsigned users → `/sign-in`; users without `publicMetadata.admin === 'true'` → homepage
+  - `/admin` dashboard — server-rendered page with status summary counters and `ApplicationsTable` client component: status filter tabs, expandable rows with experience description, portfolio/work-sample links, social platforms, phone, notes, and "Edit in Studio" CTA; requires Clerk account with `publicMetadata: { "admin": "true" }`
+
 - **Editorial Standards Page (#26)** — New static `/editorial-standards` page:
   - Six core principles: Accuracy, Independence, Fairness, Verification, Transparency, Accountability
   - Verification process section (primary sourcing, multi-source requirement, document verification, right of reply)

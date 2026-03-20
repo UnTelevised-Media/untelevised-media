@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Bookmark } from 'lucide-react';
+import { Show, UserButton } from '@clerk/nextjs';
 
 import Socials from './Socials';
 import ThemeToggle from './ThemeToggle';
@@ -128,6 +129,26 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
           <div className='hidden md:flex'>
             <ThemeToggle />
           </div>
+
+          {/* User Account */}
+          <Show when='signed-in'>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: 'h-8 w-8',
+                  userButtonPopoverCard: 'shadow-xl border border-slate-200 dark:border-slate-700',
+                },
+              }}
+            />
+          </Show>
+          <Show when='signed-out'>
+            <Link
+              href='/sign-in'
+              className='hidden text-xs font-bold uppercase tracking-widest text-slate-500 transition-colors hover:text-untele dark:text-slate-400 md:block'
+            >
+              Sign In
+            </Link>
+          </Show>
 
           {/* Support Button */}
           <Link
