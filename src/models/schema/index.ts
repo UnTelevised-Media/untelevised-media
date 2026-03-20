@@ -3,6 +3,7 @@
 // Content schemas
 import article from './article';
 import author from './author';
+import factCheck from './factCheck';
 import blockContent from './blockContent';
 import category from './category';
 import comments from './comments';
@@ -98,6 +99,7 @@ export const schemaTypes = [
 
   // Credibility schemas
   source,
+  factCheck,
 
   // Add your new schemas here, grouped accordingly
   // newContentSchema,
@@ -154,6 +156,7 @@ export {
 
   // Credibility schemas
   source,
+  factCheck,
 
   // Add your new schemas here
   // newContentSchema,
