@@ -16,7 +16,9 @@ export default clerkMiddleware(async (auth, req) => {
     }
 
     // Signed in but not an admin — redirect to home
-    const isAdmin = (sessionClaims?.publicMetadata as { admin?: string })?.admin === 'true';
+    // Clerk stores metadata values as-typed; accept boolean true or string "true"
+    const meta = sessionClaims?.publicMetadata as { admin?: string | boolean } | undefined;
+    const isAdmin = meta?.admin === true || meta?.admin === 'true';
     if (!isAdmin) {
       return NextResponse.redirect(new URL('/', req.url));
     }

@@ -60,7 +60,7 @@ export default function SignUpPage() {
         </div>
 
         {/* RIGHT — Clerk sign-up */}
-        <div className='flex w-full flex-col items-center justify-center px-6 py-12 md:w-1/2'>
+        <div className='flex w-full flex-col items-center justify-center px-10 py-14 md:w-1/2'>
           <SignUp
             appearance={{
               variables: {
@@ -73,6 +73,7 @@ export default function SignUpPage() {
                 borderRadius: '4px',
                 fontFamily: 'inherit',
                 fontSize: '14px',
+                spacingUnit: '18px',
               },
               elements: {
                 rootBox: 'w-full',

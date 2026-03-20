@@ -65,7 +65,7 @@ export default function SignInPage() {
         </div>
 
         {/* RIGHT — Clerk sign-in */}
-        <div className='flex w-full flex-col items-center justify-center px-6 py-12 md:w-1/2'>
+        <div className='flex w-full flex-col items-center justify-center px-10 py-14 md:w-1/2'>
           <SignIn
             appearance={{
               variables: {
@@ -78,6 +78,7 @@ export default function SignInPage() {
                 borderRadius: '4px',
                 fontFamily: 'inherit',
                 fontSize: '14px',
+                spacingUnit: '18px',
               },
               elements: {
                 rootBox: 'w-full',
