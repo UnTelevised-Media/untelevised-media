@@ -1,24 +1,27 @@
 // src/middleware.ts
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { clerkClient, clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 const isAdminRoute = createRouteMatcher(['/admin(/.*)?']);
 
 export default clerkMiddleware(async (auth, req) => {
   if (isAdminRoute(req)) {
-    const { userId, sessionClaims } = await auth();
+    const { userId } = await auth();
 
-    // Not signed in — redirect to Clerk sign-in
+    // Not signed in — redirect to sign-in
     if (!userId) {
       const signInUrl = new URL('/sign-in', req.url);
       signInUrl.searchParams.set('redirect_url', req.url);
       return NextResponse.redirect(signInUrl);
     }
 
-    // Signed in but not an admin — redirect to home
-    // Clerk stores metadata values as-typed; accept boolean true or string "true"
-    const meta = sessionClaims?.publicMetadata as { admin?: string | boolean } | undefined;
-    const isAdmin = meta?.admin === true || meta?.admin === 'true';
+    // Fetch user directly from Clerk API so we always get fresh publicMetadata
+    // (publicMetadata is not included in the JWT by default)
+    const client = await clerkClient();
+    const user = await client.users.getUser(userId);
+    const adminValue = user.publicMetadata?.admin;
+    const isAdmin = adminValue === true || adminValue === 'true';
+
     if (!isAdmin) {
       return NextResponse.redirect(new URL('/', req.url));
     }
