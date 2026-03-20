@@ -9,18 +9,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
-- **Careers Page (#17)** — Full careers system with Sanity-managed listings, unified application form, and Clerk admin dashboard:
-  - `jobListing` Sanity document type — fields: title, slug, department (6 options), type (full-time/part-time/freelance/volunteer), location, description (blockContent), requirements (string[]), compensation, isActive (default true), closingDate; registered in schema index and auto-appears in Studio
+- **Careers Page & Auth System (#17)** — Full careers system with Sanity-managed listings, unified application form, Clerk authentication, and a protected admin dashboard:
+
+  **Sanity schema & queries**
+  - `jobListing` Sanity document type — fields: title, slug, department (6 options: field-reporter, photojournalist, video-editor, writer, social-media, other), type (full-time/part-time/freelance/volunteer), location, description (blockContent), requirements (string[]), compensation, isActive (default true), closingDate; registered in schema index and auto-appears in Studio
   - `queryActiveJobListings` GROQ query — filters by `isActive == true` and `closingDate >= $today`; accepts `{ today: "YYYY-MM-DD" }` param
-  - `ContributorApplicationForm` component (`'use client'`) — full application form with all fields: name, email, phone, location, positions (checkbox), social platforms, portfolio/YouTube/social links, experience level + description, work samples, availability, additional info; submits to `/api/job-application` (same Sanity schema as /join)
-  - `/api/careers-application` route — preserved for direct API use; maps to `jobApplication` Sanity schema; uploads resume to Sanity Assets (best-effort, non-fatal)
-  - `/careers` page — server component; hero ("WRITE FOR THE RESISTANCE") + 3 value-prop cards (Editorial Freedom, Portfolio Building, Global Reach); collapsible `<details>` per active listing with dept/type/location/compensation meta icons, rich text description, requirements list, embedded `ContributorApplicationForm`; "We're Always Hiring" section with full form; graceful fallback if Sanity fetch fails
-  - `/join` now permanently redirects to `/careers` — application flow consolidated
-  - Footer: "Careers" link added to About column
-  - Sitemap: `/careers/` at priority 0.6, monthly
-  - `@clerk/nextjs` installed; `ClerkProvider` wrapping root layout
-  - `src/middleware.ts` — `clerkMiddleware` protecting `/admin/*`: unsigned users → `/sign-in`; users without `publicMetadata.admin === 'true'` → homepage
-  - `/admin` dashboard — server-rendered page with status summary counters and `ApplicationsTable` client component: status filter tabs, expandable rows with experience description, portfolio/work-sample links, social platforms, phone, notes, and "Edit in Studio" CTA; requires Clerk account with `publicMetadata: { "admin": "true" }`
+  - `queryJobApplications` GROQ query — fetches all `jobApplication` docs ordered by `submittedAt desc` for the admin dashboard
+  - 7 realistic seed `jobApplication` documents created directly in Sanity covering all 6 statuses (new, review, interview, accepted, declined, hold) and all schema fields
+
+  **Careers page (`/careers`)**
+  - Server component; sections: Hero ("WRITE FOR THE RESISTANCE"), 3 value-prop cards (Editorial Freedom, Portfolio Building, Global Reach), 12-role "We're Looking For" grid (Field Reporter, Documentary Filmmaker, Photojournalist, Video Editor, Social Media Strategist, Graphic Designer, Data Journalist, Podcast Producer, Live-Stream Operator, Copy Editor, Researcher, Web Developer), collapsible `<details>` accordion per active Sanity listing with dept/type/location/compensation meta, rich text description, requirements list, and embedded `ContributorApplicationForm`; "We're Always Hiring" section with full form; graceful try/catch fallback if Sanity fetch fails
+
+  **ContributorApplicationForm** (`src/components/careers/ContributorApplicationForm.tsx`, `'use client'`)
+  - All fields from former `/join` form: firstName, lastName, email, phone, location, positionsOfInterest (multi-checkbox), socialMediaPlatforms (checkbox), portfolioWebsite, youtubeChannel, socialMediaLinks (dynamic platform+url pairs), experienceLevel, experienceDescription, workSamples (dynamic title+url pairs), availability, additionalInfo
+  - Optional `prefilledPosition` prop to pre-check a position from the listing accordion
+  - Submits to `/api/job-application` (same `jobApplication` Sanity schema); success renders CheckCircle2 confirmation; error renders AlertCircle with message
+
+  **Route consolidation**
+  - `/join/page.tsx` deleted entirely — no redirect, no orphan route
+  - Sitemap: `/join/` entry removed; `/careers/` added at priority 0.6, monthly changeFrequency
+  - Footer: "Careers" and "Join Our Team" merged into single "Careers / Join Our Team" link pointing to `/careers`
+
+  **Clerk authentication setup**
+  - `@clerk/nextjs` ^7 installed
+  - `ClerkProvider` added to root `layout.tsx` wrapping the entire app (`afterSignOutUrl='/'`)
+  - `src/middleware.ts` — `clerkMiddleware` + `createRouteMatcher(['/admin(/.*)?'])`; uses `clerkClient().users.getUser(userId)` to read live `publicMetadata` (bypasses JWT claim limitation); accepts `admin: true` (boolean) or `admin: "true"` (string); unauthenticated → `/sign-in`; non-admin authenticated → homepage
+  - `Header.tsx` — `Show when='signed-in'` renders `UserButton`; `Show when='signed-out'` renders Sign In link (uses `Show` not `SignedIn`/`SignedOut` which don't exist in this Clerk version)
+
+  **Sign-in / Sign-up pages**
+  - `/sign-in/[[...sign-in]]/page.tsx` — two-column layout: left brand panel (logo with red glow halo, UnTelevised name, tagline, pill CTA) + right Clerk `<SignIn>` form; dark `slate-950` background; `untele` red accent; no rounded corners on form elements; `card: 'shadow-none bg-transparent w-full'`; `spacingUnit: '18px'`
+  - `/sign-up/[[...sign-up]]/page.tsx` — identical two-column layout using `<SignUp>`; both pages set `robots: { index: false, follow: false }`
+
+  **Admin dashboard (`/admin`)**
+  - Server component; `robots: noindex`; fetches all `jobApplication` docs via `queryJobApplications`
+  - Six status summary cards (new, review, interview, accepted, declined, hold) with per-status color coding
+  - `ApplicationsTable` client component: status filter tab bar, sortable rows (applicant name/email/location, positions, experience level, availability, submitted date, status badge), expandable detail rows showing experience description, portfolio/YouTube/social links, work samples, active social platforms, phone, internal notes, and "Edit in Studio" CTA linking to `/studio/structure/jobApplication;{id}`
+  - Protected by `clerkMiddleware`; requires Clerk user with `publicMetadata: { "admin": true }`
 
 - **Editorial Standards Page (#26)** — New static `/editorial-standards` page:
   - Six core principles: Accuracy, Independence, Fairness, Verification, Transparency, Accountability
