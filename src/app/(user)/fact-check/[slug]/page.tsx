@@ -3,7 +3,9 @@ import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
 import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryFactCheckBySlug, queryAllFactChecks } from '@/lib/sanity/lib/queries';
+import sanityClient from '@/lib/sanity/lib/client';
+import { queryFactCheckBySlug } from '@/lib/sanity/lib/queries';
+import { groq } from 'next-sanity';
 import { VerdictBadge } from '@/components/fact-check/VerdictBadge';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import { buildClaimReviewJsonLd } from '@/lib/factCheck/claimReviewJsonLd';
@@ -16,11 +18,12 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const factChecks = await sanityFetch<{ slug: { current: string } }[]>({
-    query: queryAllFactChecks,
-    tags: ['factCheck'],
-  });
-  return (factChecks ?? []).map((fc) => ({ slug: fc.slug.current }));
+  // Use sanityClient directly — sanityFetch calls draftMode() which requires
+  // a request context that does not exist during static param generation.
+  const slugs = await sanityClient.fetch<{ slug: { current: string } }[]>(
+    groq`*[_type == 'factCheck'] { slug }`,
+  );
+  return (slugs ?? []).map((fc) => ({ slug: fc.slug.current }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
