@@ -1,6 +1,6 @@
 {
   "name": "untelevised-media",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "private": true,
   "scripts": {
     "dev:turbo": "next dev --turbopack",
