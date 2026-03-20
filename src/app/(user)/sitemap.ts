@@ -1,6 +1,17 @@
 // src/app/(user)/sitemap.ts
 
 import getAllURLs from '@/util/getAllUrls';
+import sanityClient from '@/lib/sanity/lib/client';
+import { groq } from 'next-sanity';
+
+const queryFactCheckSlugs = groq`
+  *[_type == 'factCheck'] {
+    _type,
+    slug,
+    _updatedAt,
+    publishedAt
+  }
+`;
 
 export default async function sitemap(): Promise<
   {
@@ -11,6 +22,10 @@ export default async function sitemap(): Promise<
   }[]
 > {
   const allNews = await getAllURLs();
+  const factCheckDocs =
+    await sanityClient.fetch<{ slug: { current: string }; _updatedAt: string }[]>(
+      queryFactCheckSlugs
+    );
 
   const now = new Date();
   const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
@@ -101,6 +116,13 @@ export default async function sitemap(): Promise<
       priority: 0.7,
     }));
 
+  const factCheckURLs = (factCheckDocs ?? []).map((fc) => ({
+    url: `https://www.untelevised.media/fact-check/${fc.slug.current}/`,
+    lastModified: fc._updatedAt,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
   return [
     // Homepage — highest priority
     {
@@ -119,6 +141,7 @@ export default async function sitemap(): Promise<
     ...musicArtistURLs,
     ...albumURLs,
     ...timelineURLs,
+    ...factCheckURLs,
     // Static section pages — music
     {
       url: 'https://www.untelevised.media/lyrics/',
@@ -130,6 +153,13 @@ export default async function sitemap(): Promise<
       url: 'https://www.untelevised.media/music-artists/',
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    // Fact-checks index
+    {
+      url: 'https://www.untelevised.media/fact-checks/',
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
       priority: 0.8,
     },
     // Static section pages — editorial & info

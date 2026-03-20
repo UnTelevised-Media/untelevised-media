@@ -294,6 +294,21 @@ export const queryArticleBySlug = groq`
       "correction": correction { type, issuedAt, summary, detail },
       updatedAt,
       leadParagraph,
+      body[]{
+        ...,
+        _type == "factCheckEmbed" => {
+          ...,
+          factCheck-> {
+            _id,
+            title,
+            slug,
+            claim,
+            rating,
+            ratingExplanation,
+            claimSource
+          }
+        }
+      },
       relatedArticles[]-> {
         _id,
         title,
@@ -654,5 +669,56 @@ export const queryJobApplications = groq`
     socialMediaLinks,
     workSamples,
     additionalInfo
+  }
+`;
+
+// ── Fact-Check Queries ──────────────────────────────────────────────────────
+
+export const queryAllFactChecks = groq`
+  *[_type == 'factCheck'] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    claim,
+    claimSource,
+    rating,
+    ratingExplanation,
+    author-> { name, slug }
+  }
+`;
+
+export const queryFactCheckBySlug = groq`
+  *[_type == 'factCheck' && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    claim,
+    claimSource,
+    claimUrl,
+    claimDate,
+    rating,
+    ratingExplanation,
+    body[]{
+      ...,
+      _type == "factCheckEmbed" => {
+        ...,
+        factCheck-> {
+          _id,
+          title,
+          slug,
+          claim,
+          rating,
+          ratingExplanation,
+          claimSource
+        }
+      }
+    },
+    sources[] { label, url },
+    author-> { name, slug, image },
+    relatedArticles[]-> {
+      _id, title, slug, mainImage, publishedAt, description
+    }
   }
 `;

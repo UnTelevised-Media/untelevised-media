@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import urlForImage from '@/u/urlForImage';
+import { InlineFactCheckCard } from '@/components/fact-check/InlineFactCheckCard';
 
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
@@ -211,6 +212,13 @@ export const RichTextComponents = {
           <Tweet id={tweetId} />
         </div>
       );
+    },
+
+    // ── Inline Fact-Check Cards ───────────────────────────────────────────────
+    factCheckEmbed: ({ value }: any) => {
+      const fc = value?.factCheck;
+      if (!fc) return null;
+      return <InlineFactCheckCard factCheck={fc} />;
     },
 
     // ── Instagram Embeds ─────────────────────────────────────────────────────
