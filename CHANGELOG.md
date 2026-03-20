@@ -10,6 +10,43 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.3.0] — 2026-03-20
+
+### Summary
+Bookmarks full-stack release — completes Phase 2 of issue #19. localStorage bookmarking (Phase 1, v2.2.x) is preserved as the default for all unauthenticated users. Signed-in users now get server-backed bookmarks stored in Sanity, synced across all devices. Guest bookmarks are automatically migrated to the server on first sign-in with no data loss.
+
+### Added
+- **Bookmarks Phase 2: Clerk + Sanity sync (#19, PR #39)**
+
+  **Sanity**
+  - New `userBookmark` document type — fields: `clerkUserId`, `slug`, `title`, `description`, `imageUrl`, `authorName`, `publishedAt`, `readingTime`, `bookmarkedAt`
+  - Deterministic `_id` (`userBookmark_{userId}_{slug}`) enforces one document per user+slug — natural upsert deduplication
+  - `src/lib/sanity/lib/write-client.ts` — server-only Sanity client with write permissions via `SANITY_API_WRITE_TOKEN`
+
+  **Server Actions (`src/lib/bookmarks/actions.ts`)**
+  - `getServerBookmarks()` — fetch all bookmarks for the current Clerk user, newest first
+  - `checkServerBookmarked(slug)` — boolean check against Sanity
+  - `addServerBookmark(entry)` — upsert via `createOrReplace`
+  - `removeServerBookmark(slug)` — delete by deterministic doc ID
+  - `clearServerBookmarks()` — bulk delete all docs for user
+  - `syncLocalBookmarksToServer(entries[])` — transactional `createIfNotExists` migration; preserves original `bookmarkedAt` timestamps
+
+  **Hook (`src/hooks/useBookmarks.ts`)**
+  - `useBookmarks()` — unified hook abstracting both storage backends
+  - Anonymous: reads/writes `localStorage` only (unchanged behaviour)
+  - Authenticated: reads/writes Sanity; migration from localStorage runs once on first sign-in then local storage is cleared
+  - Optimistic UI throughout — state updates instantly before server confirms
+  - Exposes: `bookmarks`, `loading`, `ready`, `isBookmarked`, `toggle`, `remove`, `clearAll`
+
+  **Reading List UX**
+  - `src/app/(user)/reading-list/layout.tsx` — `robots: noindex, nofollow` metadata
+  - `/reading-list` page shows Cloud icon + "synced to your account" copy when signed in; Monitor icon + "stored in this browser" copy for guests
+
+### Changed
+- **`BookmarkButton`** — now consumes `useBookmarks()` hook; direct localStorage calls removed; `ready` flag replaces `mounted`; visual design and API unchanged for unauthenticated users
+
+---
+
 ## [2.2.2] — 2026-03-20
 
 ### Summary

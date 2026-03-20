@@ -26,6 +26,9 @@ import musicArtist from './musicArtist';
 import album from './album';
 import song from './song';
 
+// User data schemas
+import userBookmark from './userBookmark';
+
 // Form/contact schemas
 import contactSubmission from './contactSubmission';
 import jobApplication from './jobApplication';
@@ -101,6 +104,9 @@ export const schemaTypes = [
   source,
   factCheck,
 
+  // User data schemas
+  userBookmark,
+
   // Add your new schemas here, grouped accordingly
   // newContentSchema,
   // newFormSchema,
@@ -157,6 +163,9 @@ export {
   // Credibility schemas
   source,
   factCheck,
+
+  // User data schemas
+  userBookmark,
 
   // Add your new schemas here
   // newContentSchema,
