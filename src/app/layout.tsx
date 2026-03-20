@@ -76,7 +76,6 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <ClerkProvider>
     <html lang='en' suppressHydrationWarning>
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
@@ -104,36 +103,37 @@ const RootLayout = ({
         />
       </head>
       <body className={`${inter.className} font-sans antialiased`}>
-        <ErrorBoundary>
-          <ConsentProvider>
-            <ThemeProvider
-              attribute='class'
-              defaultTheme='system'
-              enableSystem
-              disableTransitionOnChange
-            >
-              <div className='relative flex min-h-screen flex-col'>
-                <main className='flex-1'>
-                  <ErrorBoundary>{children}</ErrorBoundary>
-                </main>
-              </div>
-              <Toaster />
+        <ClerkProvider afterSignOutUrl='/'>
+          <ErrorBoundary>
+            <ConsentProvider>
+              <ThemeProvider
+                attribute='class'
+                defaultTheme='system'
+                enableSystem
+                disableTransitionOnChange
+              >
+                <div className='relative flex min-h-screen flex-col'>
+                  <main className='flex-1'>
+                    <ErrorBoundary>{children}</ErrorBoundary>
+                  </main>
+                </div>
+                <Toaster />
 
-              {/* Consent Management */}
-              <CookieConsentBanner />
-              <AdBlockerMessage />
-            </ThemeProvider>
+                {/* Consent Management */}
+                <CookieConsentBanner />
+                <AdBlockerMessage />
+              </ThemeProvider>
 
-            {/* Consent-Aware Analytics — GTM + GA4 + Vercel */}
-            <ConsentAwareAnalytics
-              gtmId={process.env.NEXT_PUBLIC_GTM_ID}
-              ga4Id={process.env.NEXT_PUBLIC_GA4_ID}
-            />
-          </ConsentProvider>
-        </ErrorBoundary>
+              {/* Consent-Aware Analytics — GTM + GA4 + Vercel */}
+              <ConsentAwareAnalytics
+                gtmId={process.env.NEXT_PUBLIC_GTM_ID}
+                ga4Id={process.env.NEXT_PUBLIC_GA4_ID}
+              />
+            </ConsentProvider>
+          </ErrorBoundary>
+        </ClerkProvider>
       </body>
     </html>
-    </ClerkProvider>
   );
 };
 
