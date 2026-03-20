@@ -9,6 +9,47 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Fact Check Content Type (#25, PR #38)** — Full fact-checking infrastructure from Sanity schema to front-end render with ClaimReview JSON-LD and inline blockContent embedding:
+
+  **Sanity schema**
+  - New `factCheck` document type with 4 grouped Studio tabs — Claim, Verdict, Analysis, Meta
+  - Fields: `title`, `slug`, `publishedAt`, `author` (reference), `claim` (text), `claimSource`, `claimUrl`, `claimDate`, `rating` (radio enum — 6 verdicts with emoji labels), `ratingExplanation` (max 300 chars), `body` (blockContent), `sources[]` (label + url objects), `relatedArticles[]` (max 5 references)
+  - Studio preview shows verdict emoji + title + date
+  - `factCheckEmbed` object type added to `blockContent` — any rich text field on the site (articles, live events, etc.) can now embed an inline fact-check card via a Sanity reference; Studio preview shows verdict emoji + title
+  - `queryArticleBySlug` updated to resolve `factCheckEmbed` references within body arrays
+
+  **Verdict system**
+  - `src/lib/factCheck/verdictConfig.ts` — central config for all 6 verdicts with Tailwind colour classes and schema.org `ratingValue` mapping (TRUE=5, MOSTLY TRUE=4, MISLEADING=3, MOSTLY FALSE=2, FALSE=1, UNVERIFIABLE=0)
+  - `src/lib/factCheck/claimReviewJsonLd.ts` — `buildClaimReviewJsonLd()` generates valid `ClaimReview` structured data for Google's fact-check rich result badge
+
+  **GROQ queries**
+  - `queryAllFactChecks` — all fact-checks ordered by `publishedAt desc`, fields for index cards
+  - `queryFactCheckBySlug` — full detail including body (with `factCheckEmbed` reference resolution), sources, author, and related articles
+
+  **Components**
+  - `VerdictBadge` — `sm` and `lg` size variants; per-verdict colour coding; FALSE uses brand `#D70606`
+  - `InlineFactCheckCard` — compact card rendered inside `PortableText` when a `factCheckEmbed` block is encountered; shows verdict badge, the claim in a blockquote, verdict explanation, and link to full fact-check
+  - `RichTextComponents` extended with `factCheckEmbed` type renderer
+
+  **Routes**
+  - `/fact-checks` — index page listing all fact-checks with verdict badges, claim previews, claim source, and author/date meta; follows site card/section conventions
+  - `/fact-check/[slug]` — detail page with `generateMetadata`, `generateStaticParams` (uses raw `sanityClient` to avoid `draftMode()` outside request scope), `notFound()`, breadcrumb nav, claim blockquote with linked source, verdict explanation box, full `PortableText` analysis body, sources list, related articles, and `ClaimReview` JSON-LD injected via `<script type="application/ld+json">` in `<head>`
+
+  **Sitemap**
+  - `/fact-checks/` static route added (priority 0.8, daily)
+  - Dynamic `/fact-check/[slug]/` URLs fetched directly from Sanity and included (priority 0.7, weekly)
+
+  **Seed data**
+  - `scripts/seed-fact-checks.mjs` — idempotent seed script using `createOrReplace`
+  - 5 fact-checks pre-populated in Sanity covering all verdict types:
+    | Verdict | Claim |
+    |---|---|
+    | MISLEADING | "The national debt doubled under Biden" |
+    | TRUE | "U.S. inflation peaked at 9.1% in June 2022" |
+    | MOSTLY FALSE | "EVs produce more carbon than gas cars" |
+    | UNVERIFIABLE | "AI will eliminate 40% of jobs by 2030" |
+    | FALSE | "The southern border is wide open with no enforcement" |
+
 - **Careers Page & Auth System (#17)** — Full careers system with Sanity-managed listings, unified application form, Clerk authentication, and a protected admin dashboard:
 
   **Sanity schema & queries**
