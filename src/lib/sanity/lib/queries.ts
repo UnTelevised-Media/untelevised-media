@@ -98,7 +98,13 @@ export const queryEventBySlug = groq`
     *[_type == "liveEvent" && slug.current == $slug][0] {
       ...,
       eventTag[]->,
-      keyEvent[]->,
+      keyEvent[]-> {
+        ...,
+        sources[]-> { label, type, url, description, isAnonymous },
+      },
+      sources[]-> { label, type, url, description, isAnonymous },
+      methodology,
+      "correction": correction { type, issuedAt, summary, detail },
       relatedArticles[]-> {
         slug,
         _id,
@@ -117,6 +123,7 @@ export const queryAllArticles = groq`
     categories[]->,
     description,
     publishedAt,
+    "correction": correction { type, summary },
   }
   | order(_createdAt desc)
 `;
@@ -282,10 +289,26 @@ export const queryArticleBySlug = groq`
       reviewedBy->{ name, slug, title, image },
       seo,
       faqs,
-      sources,
-      corrections,
+      sources[]-> { label, type, url, description, isAnonymous },
+      methodology,
+      "correction": correction { type, issuedAt, summary, detail },
       updatedAt,
       leadParagraph,
+      body[]{
+        ...,
+        _type == "factCheckEmbed" => {
+          ...,
+          factCheck-> {
+            _id,
+            title,
+            slug,
+            claim,
+            rating,
+            ratingExplanation,
+            claimSource
+          }
+        }
+      },
       relatedArticles[]-> {
         _id,
         title,
@@ -592,6 +615,110 @@ export const querySiteSettings = groq`
       linkUrl,
       linkLabel,
       expiresAt
+    }
+  }
+`;
+
+// ─── Careers ────────────────────────────────────────────────────────────────
+
+/**
+ * Active job listings — excludes inactive and expired (past closingDate).
+ * Accepts { today: "YYYY-MM-DD" } param.
+ */
+export const queryActiveJobListings = groq`
+  *[
+    _type == "jobListing"
+    && isActive == true
+    && (
+      !defined(closingDate)
+      || closingDate >= $today
+    )
+  ] | order(department asc) {
+    _id,
+    title,
+    slug,
+    department,
+    type,
+    location,
+    compensation,
+    description,
+    requirements,
+    closingDate
+  }
+`;
+
+export const queryJobApplications = groq`
+  *[_type == "jobApplication"] | order(submittedAt desc) {
+    _id,
+    firstName,
+    lastName,
+    email,
+    phone,
+    location,
+    positionsOfInterest,
+    otherPosition,
+    experienceLevel,
+    experienceDescription,
+    availability,
+    applicationStatus,
+    submittedAt,
+    notes,
+    portfolioWebsite,
+    youtubeChannel,
+    socialMediaPlatforms,
+    socialMediaLinks,
+    workSamples,
+    additionalInfo
+  }
+`;
+
+// ── Fact-Check Queries ──────────────────────────────────────────────────────
+
+export const queryAllFactChecks = groq`
+  *[_type == 'factCheck'] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    claim,
+    claimSource,
+    rating,
+    ratingExplanation,
+    author-> { name, slug }
+  }
+`;
+
+export const queryFactCheckBySlug = groq`
+  *[_type == 'factCheck' && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    claim,
+    claimSource,
+    claimUrl,
+    claimDate,
+    rating,
+    ratingExplanation,
+    body[]{
+      ...,
+      _type == "factCheckEmbed" => {
+        ...,
+        factCheck-> {
+          _id,
+          title,
+          slug,
+          claim,
+          rating,
+          ratingExplanation,
+          claimSource
+        }
+      }
+    },
+    sources[] { label, url },
+    author-> { name, slug, image },
+    relatedArticles[]-> {
+      _id, title, slug, mainImage, publishedAt, description
     }
   }
 `;

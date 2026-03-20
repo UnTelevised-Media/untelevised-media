@@ -212,8 +212,9 @@ async function Footer() {
             About
           </h4>
           <Link href='/about'>About UnTelevised</Link>
+          <Link href='/editorial-standards'>Editorial Standards</Link>
           <Link href='/staff'>Meet Our Staff</Link>
-          <Link href='/join'>Join Our Team</Link>
+          <Link href='/careers'>Careers / Join Our Team</Link>
           <Link href='/donate'>Donate/Support Our Outlet</Link>
           <Link href='mailto:newsroom@untelevised.media'>Contact the Newsroom</Link>
           <Link href='mailto:newsroom@untelevised.media'>Licensing & Syndication</Link>

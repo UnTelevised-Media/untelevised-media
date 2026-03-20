@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bookmark } from 'lucide-react';
+import { Show, UserButton } from '@clerk/nextjs';
 
 import Socials from './Socials';
 import ThemeToggle from './ThemeToggle';
@@ -114,10 +116,39 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
             <MagnifyingGlassIcon className='h-4 w-4 md:h-5 md:w-5' />
           </button>
 
+          {/* Reading List */}
+          <Link
+            href='/reading-list'
+            className='rounded-lg p-1.5 text-slate-700 transition-all duration-200 hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2'
+            aria-label='Reading list'
+          >
+            <Bookmark className='h-4 w-4 md:h-5 md:w-5' />
+          </Link>
+
           {/* Theme Toggle */}
           <div className='hidden md:flex'>
             <ThemeToggle />
           </div>
+
+          {/* User Account */}
+          <Show when='signed-in'>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: 'h-8 w-8',
+                  userButtonPopoverCard: 'shadow-xl border border-slate-200 dark:border-slate-700',
+                },
+              }}
+            />
+          </Show>
+          <Show when='signed-out'>
+            <Link
+              href='/sign-in'
+              className='hidden text-xs font-bold uppercase tracking-widest text-slate-500 transition-colors hover:text-untele dark:text-slate-400 md:block'
+            >
+              Sign In
+            </Link>
+          </Show>
 
           {/* Support Button */}
           <Link

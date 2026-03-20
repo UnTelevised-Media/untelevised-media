@@ -174,7 +174,21 @@ export default defineType({
                   type: 'array',
                   title: 'Cells',
                   description: 'Individual cell data for this row',
-                  of: [{ type: 'string' }],
+                  of: [
+                    {
+                      type: 'object',
+                      name: 'tableCell',
+                      title: 'Cell',
+                      fields: [
+                        defineField({
+                          name: 'content',
+                          title: 'Content',
+                          type: 'array',
+                          of: [{ type: 'block' }],
+                        }),
+                      ],
+                    },
+                  ],
                 }),
               ],
             },
@@ -201,6 +215,41 @@ export default defineType({
     }),
     defineArrayMember({
       type: 'instagramEmbed',
+    }),
+    defineArrayMember({
+      name: 'factCheckEmbed',
+      title: 'Fact Check',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'factCheck',
+          title: 'Fact Check',
+          type: 'reference',
+          to: [{ type: 'factCheck' }],
+          description: 'Select a published fact-check to embed inline.',
+          validation: (Rule: any) => Rule.required(),
+        }),
+      ],
+      preview: {
+        select: {
+          title: 'factCheck.title',
+          rating: 'factCheck.rating',
+        },
+        prepare({ title, rating }: { title?: string; rating?: string }) {
+          const ratingEmoji: Record<string, string> = {
+            true: '✅',
+            'mostly-true': '🟢',
+            misleading: '🟡',
+            'mostly-false': '🟠',
+            false: '🔴',
+            unverifiable: '⬜',
+          };
+          return {
+            title: `${ratingEmoji[rating ?? ''] ?? '?'} ${title ?? 'Fact Check'}`,
+            subtitle: 'Embedded Fact Check',
+          };
+        },
+      },
     }),
   ],
 });

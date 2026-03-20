@@ -3,6 +3,7 @@
 // Content schemas
 import article from './article';
 import author from './author';
+import factCheck from './factCheck';
 import blockContent from './blockContent';
 import category from './category';
 import comments from './comments';
@@ -28,12 +29,15 @@ import song from './song';
 // Form/contact schemas
 import contactSubmission from './contactSubmission';
 import jobApplication from './jobApplication';
+import jobListing from './jobListing';
 import newsletterSubscribe from './newsletterSubscribe';
 import secureContact from './secureContact';
 import whistleblower from './whistleblower';
 
 // UI/component schemas
 import ctaButton from './buttons';
+import correctionObject from './correction';
+import source from './source';
 
 // Embed schemas
 import instagramEmbed from './instagram';
@@ -77,6 +81,7 @@ export const schemaTypes = [
   // Form/contact schemas
   contactSubmission,
   jobApplication,
+  jobListing,
   newsletterSubscribe,
   secureContact,
   whistleblower,
@@ -88,6 +93,13 @@ export const schemaTypes = [
   instagramEmbed,
   twitterEmbed,
   youtubeEmbed,
+
+  // Shared object schemas
+  correctionObject,
+
+  // Credibility schemas
+  source,
+  factCheck,
 
   // Add your new schemas here, grouped accordingly
   // newContentSchema,
@@ -126,6 +138,7 @@ export {
   // Form/contact schemas
   contactSubmission,
   jobApplication,
+  jobListing,
   newsletterSubscribe,
   secureContact,
   whistleblower,
@@ -137,6 +150,13 @@ export {
   instagramEmbed,
   twitterEmbed,
   youtubeEmbed,
+
+  // Shared object schemas
+  correctionObject,
+
+  // Credibility schemas
+  source,
+  factCheck,
 
   // Add your new schemas here
   // newContentSchema,

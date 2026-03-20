@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import urlForImage from '@/u/urlForImage';
+import { InlineFactCheckCard } from '@/components/fact-check/InlineFactCheckCard';
 
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
@@ -74,17 +75,33 @@ export const RichTextComponents = {
       const headerRow = rows[0];
       const bodyRows = rows.slice(1);
 
+      // Cells may be plain strings or tableCell objects with a Portable Text
+      // `content` array (e.g. from sanity-plugin-table rich-text cells).
+      function cellText(cell: any): string {
+        if (typeof cell === 'string') return cell;
+        if (cell && Array.isArray(cell.content)) {
+          return cell.content
+            .flatMap((block: any) =>
+              (block.children ?? [])
+                .filter((s: any) => s._type === 'span')
+                .map((s: any) => s.text ?? ''),
+            )
+            .join('');
+        }
+        return '';
+      }
+
       return (
         <div className='my-6 w-full overflow-x-auto border border-slate-300 dark:border-slate-700'>
           <table className='w-full border-collapse text-sm'>
             <thead>
               <tr className='border-b-2 border-untele bg-untele'>
-                {headerRow.cells.map((cell: string, i: number) => (
+                {headerRow.cells.map((cell: any, i: number) => (
                   <th
                     key={i}
                     className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-white'
                   >
-                    {cell}
+                    {cellText(cell)}
                   </th>
                 ))}
               </tr>
@@ -95,12 +112,12 @@ export const RichTextComponents = {
                   key={i}
                   className='border-b border-slate-200 odd:bg-white even:bg-slate-50 dark:border-slate-700 dark:odd:bg-black dark:even:bg-slate-900'
                 >
-                  {row.cells.map((cell: string, j: number) => (
+                  {row.cells.map((cell: any, j: number) => (
                     <td
                       key={j}
                       className='px-4 py-3 text-slate-800 dark:text-slate-200'
                     >
-                      {cell}
+                      {cellText(cell)}
                     </td>
                   ))}
                 </tr>
@@ -129,6 +146,48 @@ export const RichTextComponents = {
       );
     },
 
+    // ── Non-standard "list" container blocks ─────────────────────────────────
+    // Blocks where _type="list" were inserted programmatically with inner block
+    // children. PortableText treats them as blocks, causing "Objects are not
+    // valid as a React child" errors. Render them as proper lists here.
+    list: ({ value }: any) => {
+      const isOrdered = value.listItem === 'number' || value.style === 'number';
+      const Tag = isOrdered ? 'ol' : 'ul';
+      const blocks: any[] = value.children ?? [];
+      if (!blocks.length) return null;
+      return (
+        <Tag
+          className={`my-4 ml-6 ${isOrdered ? 'list-decimal' : 'list-disc'} space-y-2 text-slate-800 dark:text-slate-200`}
+        >
+          {blocks.map((block: any, i: number) => {
+            const text = (block.children ?? [])
+              .filter((s: any) => s._type === 'span')
+              .map((s: any) => s.text ?? '')
+              .join('');
+            return <li key={block._key ?? i}>{text}</li>;
+          })}
+        </Tag>
+      );
+    },
+
+    // ── Non-standard "blockquote" container blocks ────────────────────────────
+    // Blocks where _type="blockquote" have inner block children instead of the
+    // standard style="blockquote" pattern. Extract and render as blockquote.
+    blockquote: ({ value }: any) => {
+      const text = (value.children ?? [])
+        .flatMap((block: any) =>
+          (block.children ?? [])
+            .filter((s: any) => s._type === 'span')
+            .map((s: any) => s.text ?? ''),
+        )
+        .join('');
+      return (
+        <blockquote className='my-6 border-l-4 border-untele bg-slate-50 py-4 pl-6 pr-4 italic text-slate-700 dark:bg-slate-900 dark:text-slate-300'>
+          {text}
+        </blockquote>
+      );
+    },
+
     // ── YouTube Embeds ────────────────────────────────────────────────────────
     youtubeEmbed: ({ value }: any) => {
       const videoId = value.videoId;
@@ -153,6 +212,13 @@ export const RichTextComponents = {
           <Tweet id={tweetId} />
         </div>
       );
+    },
+
+    // ── Inline Fact-Check Cards ───────────────────────────────────────────────
+    factCheckEmbed: ({ value }: any) => {
+      const fc = value?.factCheck;
+      if (!fc) return null;
+      return <InlineFactCheckCard factCheck={fc} />;
     },
 
     // ── Instagram Embeds ─────────────────────────────────────────────────────
@@ -225,6 +291,17 @@ export const RichTextComponents = {
       <blockquote className='my-6 border-l-4 border-untele bg-slate-50 py-4 pl-6 pr-4 italic text-slate-700 dark:bg-slate-900 dark:text-slate-300'>
         {children}
       </blockquote>
+    ),
+    // Fallback styles for list items authored as styled blocks (non-standard content)
+    bullet: ({ children }: any) => (
+      <ul className='my-4 ml-6 list-disc space-y-2 text-slate-800 dark:text-slate-200'>
+        <li>{children}</li>
+      </ul>
+    ),
+    number: ({ children }: any) => (
+      <ol className='my-4 ml-6 list-decimal space-y-2 text-slate-800 dark:text-slate-200'>
+        <li>{children}</li>
+      </ol>
     ),
     break: () => <br />,
   },

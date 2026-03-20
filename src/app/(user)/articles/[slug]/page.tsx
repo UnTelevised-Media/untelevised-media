@@ -23,8 +23,26 @@ import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata';
 import { NewsArticleStructuredData } from '@/components/seo/NewsArticleStructuredData';
 import { getReadingTime } from '@/lib/readingTime';
+import { CorrectionNotice } from '@/components/post/CorrectionNotice';
+import { SourcesPanel } from '@/components/post/SourcesPanel';
+import { BookmarkButton } from '@/components/bookmarks/BookmarkButton';
 
 // import Comments from '@/c/post/Comments';
+
+/**
+ * Guard against Sanity fields that may be stored as a block object instead of a plain
+ * string (e.g. from old schema versions or programmatic inserts). Returns the string
+ * value if it is a string, or extracts the `content` field if present, otherwise null.
+ */
+function safeText(value: unknown): string | null {
+  if (typeof value === 'string') return value || null;
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    const v = value as Record<string, unknown>;
+    if (typeof v.content === 'string') return v.content || null;
+    if (typeof v.text === 'string') return v.text || null;
+  }
+  return null;
+}
 
 type Props = {
   params: Promise<{
@@ -78,14 +96,16 @@ export default async function Article({ params }: Props) {
           <div className='mx-auto w-full max-w-4xl px-4 pb-12 sm:px-6 lg:px-8'>
             <div className='space-y-6'>
               {/* Title */}
-              <h1 className='text-4xl font-bold text-white sm:text-5xl lg:text-6xl'>
+              <h1
+                className={`text-4xl font-bold text-white sm:text-5xl lg:text-6xl${article.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
+              >
                 {article.title}
               </h1>
 
               {/* Description */}
-              {article.description && (
+              {safeText(article.description) && (
                 <p className='max-w-3xl text-lg text-slate-200 sm:text-xl'>
-                  {article.description}
+                  {safeText(article.description)}
                 </p>
               )}
 
@@ -164,9 +184,20 @@ export default async function Article({ params }: Props) {
 
       {/* Main Content */}
       <main className='mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8'>
-        {/* Social Share */}
-        <div className='mb-8'>
+        {/* Social Share + Bookmark */}
+        <div className='mb-8 flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:justify-between'>
           <SocialShare url={`https://untelevised.media/articles/${slug}`} title={article.title} />
+          <BookmarkButton
+            slug={slug}
+            title={article.title}
+            description={typeof article.description === 'string' ? article.description : undefined}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            imageUrl={urlForImage(article.mainImage as any)?.width(400).url() ?? undefined}
+            authorName={article.author?.name}
+            publishedAt={article.publishedAt}
+            readingTime={getReadingTime(article.body)}
+            variant='full'
+          />
         </div>
 
         {/* Rectangle Ad after social share */}
@@ -209,13 +240,10 @@ export default async function Article({ params }: Props) {
             </div>
           )}
 
-          {/* Corrections Notice */}
-          {article.corrections && (
-            <div className='not-prose mb-8 border-l-4 border-untele bg-untele/5 px-6 py-4 dark:bg-untele/10'>
-              <p className='mb-1 text-xs font-black uppercase tracking-widest text-untele'>
-                Correction
-              </p>
-              <p className='text-sm text-slate-700 dark:text-slate-300'>{article.corrections}</p>
+          {/* Correction / Retraction Notice */}
+          {article.correction?.detail && (
+            <div className='not-prose'>
+              <CorrectionNotice correction={article.correction} />
             </div>
           )}
 
@@ -224,33 +252,10 @@ export default async function Article({ params }: Props) {
             <PortableText value={article.body} components={RichTextComponents} />
           </div>
 
-          {/* Sources */}
-          {article.sources && article.sources.length > 0 && (
-            <div className='not-prose mt-8 rounded-xl border border-slate-200 bg-white/50 p-6 dark:border-slate-700 dark:bg-slate-900/50'>
-              <h3 className='mb-3 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400'>
-                Sources
-              </h3>
-              <ul className='space-y-1'>
-                {article.sources.map((source, i) => (
-                  <li key={i} className='flex items-start gap-2 text-sm'>
-                    <span className='mt-0.5 text-untele'>↗</span>
-                    {source.url ? (
-                      <a
-                        href={source.url}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='text-slate-700 underline hover:text-untele dark:text-slate-300'
-                      >
-                        {source.label || source.url}
-                      </a>
-                    ) : (
-                      <span className='text-slate-700 dark:text-slate-300'>{source.label}</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          {/* Sources & Methodology */}
+          <div className='not-prose'>
+            <SourcesPanel sources={article.sources} methodology={article.methodology} />
+          </div>
 
           {/* FAQs */}
           {article.faqs && article.faqs.length > 0 && (
@@ -262,9 +267,9 @@ export default async function Article({ params }: Props) {
                 {article.faqs.map((faq, i) => (
                   <div key={i} className='border-b border-slate-200 pb-4 last:border-0 last:pb-0 dark:border-slate-700'>
                     <dt className='mb-1 font-semibold text-slate-900 dark:text-white'>
-                      {faq.question}
+                      {safeText(faq.question)}
                     </dt>
-                    <dd className='text-sm text-slate-600 dark:text-slate-400'>{faq.answer}</dd>
+                    <dd className='text-sm text-slate-600 dark:text-slate-400'>{safeText(faq.answer)}</dd>
                   </div>
                 ))}
               </dl>
@@ -309,9 +314,9 @@ export default async function Article({ params }: Props) {
                     <h3 className='mb-2 line-clamp-2 font-semibold text-slate-900 group-hover:text-untele dark:text-white'>
                       {related.title}
                     </h3>
-                    {related.description && (
+                    {safeText(related.description) && (
                       <p className='mb-3 line-clamp-2 flex-1 text-sm text-slate-600 dark:text-slate-400'>
-                        {related.description}
+                        {safeText(related.description)}
                       </p>
                     )}
                     <div className='mt-auto flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>

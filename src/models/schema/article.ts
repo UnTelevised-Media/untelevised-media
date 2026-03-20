@@ -103,28 +103,27 @@ export default defineType({
         'When this article was last materially updated (shown as "Updated: [date]" near byline)',
     }),
     defineField({
-      name: 'corrections',
-      title: 'Corrections',
-      type: 'text',
-      rows: 3,
+      name: 'correction',
+      title: 'Correction / Retraction',
+      type: 'correctionObject',
       description:
-        'Any corrections or updates to the original article (displayed as a notice block)',
+        'Fill this out only when issuing a formal correction, clarification, update, or retraction. Leave empty if no correction applies.',
     }),
     defineField({
       name: 'sources',
       title: 'Sources',
       type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({ name: 'label', title: 'Source Name', type: 'string' }),
-            defineField({ name: 'url', title: 'Source URL', type: 'url' }),
-          ],
-          preview: { select: { title: 'label', subtitle: 'url' } },
-        },
-      ],
-      description: 'Source links displayed at the bottom of the article',
+      of: [{ type: 'reference', to: [{ type: 'source' }] }],
+      description:
+        'Reference source documents from the Sources library. Create new sources via the Sources section in the Studio.',
+    }),
+    defineField({
+      name: 'methodology',
+      title: 'Methodology Note',
+      type: 'text',
+      rows: 4,
+      description:
+        'Optional editorial note on how this story was reported — shown in the Sources panel. E.g. "This story was reported over three weeks. Documents were obtained via FOIA request #2024-1234."',
     }),
     defineField({
       name: 'leadParagraph',
@@ -169,8 +168,8 @@ export default defineType({
       title: 'Related Articles',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'article' }] }],
-      validation: (Rule) => Rule.max(5),
-      description: 'Up to 5 related articles displayed at end of article',
+      validation: (Rule) => Rule.max(6),
+      description: 'Up to 6 related articles displayed at end of article',
     }),
     // SEO overrides
     defineField({

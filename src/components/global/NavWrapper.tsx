@@ -13,7 +13,13 @@ const queryCategory = groq`
 `;
 
 const NavWrapper = async () => {
-  const { data: categories } = await sanityFetch({ query: queryCategory, tags: ['category'] });
+  let categories: { _id: string; title: string; order: number }[] = [];
+  try {
+    const { data } = await sanityFetch({ query: queryCategory, tags: ['category'] });
+    categories = data ?? [];
+  } catch (err) {
+    console.error('[NavWrapper] sanityFetch failed:', err);
+  }
 
   return <Nav categories={categories} />;
 };

@@ -8,6 +8,133 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+---
+
+## [2.2.2] — 2026-03-20
+
+### Summary
+Credibility release — adds a complete Fact Check content type with `ClaimReview` JSON-LD for Google's fact-check rich results, inline fact-check cards embeddable in any blockContent rich text field, a full `/fact-checks` index and `/fact-check/[slug]` detail route, and five pre-seeded fact-checks covering all six verdict types.
+
+### Added
+- **Fact Check Content Type (#25, PR #38)** — Full fact-checking infrastructure from Sanity schema to front-end render with ClaimReview JSON-LD and inline blockContent embedding:
+
+  **Sanity schema**
+  - New `factCheck` document type with 4 grouped Studio tabs — Claim, Verdict, Analysis, Meta
+  - Fields: `title`, `slug`, `publishedAt`, `author` (reference), `claim` (text), `claimSource`, `claimUrl`, `claimDate`, `rating` (radio enum — 6 verdicts with emoji labels), `ratingExplanation` (max 300 chars), `body` (blockContent), `sources[]` (label + url objects), `relatedArticles[]` (max 5 references)
+  - Studio preview shows verdict emoji + title + date
+  - `factCheckEmbed` object type added to `blockContent` — any rich text field on the site (articles, live events, etc.) can now embed an inline fact-check card via a Sanity reference; Studio preview shows verdict emoji + title
+  - `queryArticleBySlug` updated to resolve `factCheckEmbed` references within body arrays
+
+  **Verdict system**
+  - `src/lib/factCheck/verdictConfig.ts` — central config for all 6 verdicts with Tailwind colour classes and schema.org `ratingValue` mapping (TRUE=5, MOSTLY TRUE=4, MISLEADING=3, MOSTLY FALSE=2, FALSE=1, UNVERIFIABLE=0)
+  - `src/lib/factCheck/claimReviewJsonLd.ts` — `buildClaimReviewJsonLd()` generates valid `ClaimReview` structured data for Google's fact-check rich result badge
+
+  **GROQ queries**
+  - `queryAllFactChecks` — all fact-checks ordered by `publishedAt desc`, fields for index cards
+  - `queryFactCheckBySlug` — full detail including body (with `factCheckEmbed` reference resolution), sources, author, and related articles
+
+  **Components**
+  - `VerdictBadge` — `sm` and `lg` size variants; per-verdict colour coding; FALSE uses brand `#D70606`
+  - `InlineFactCheckCard` — compact card rendered inside `PortableText` when a `factCheckEmbed` block is encountered; shows verdict badge, the claim in a blockquote, verdict explanation, and link to full fact-check
+  - `RichTextComponents` extended with `factCheckEmbed` type renderer
+
+  **Routes**
+  - `/fact-checks` — index page listing all fact-checks with verdict badges, claim previews, claim source, and author/date meta; follows site card/section conventions
+  - `/fact-check/[slug]` — detail page with `generateMetadata`, `generateStaticParams` (uses raw `sanityClient` to avoid `draftMode()` outside request scope), `notFound()`, breadcrumb nav, claim blockquote with linked source, verdict explanation box, full `PortableText` analysis body, sources list, related articles, and `ClaimReview` JSON-LD injected via `<script type="application/ld+json">` in `<head>`
+
+  **Sitemap**
+  - `/fact-checks/` static route added (priority 0.8, daily)
+  - Dynamic `/fact-check/[slug]/` URLs fetched directly from Sanity and included (priority 0.7, weekly)
+
+  **Seed data**
+  - `scripts/seed-fact-checks.mjs` — idempotent seed script using `createOrReplace`
+  - 5 fact-checks pre-populated in Sanity covering all verdict types:
+    | Verdict | Claim |
+    |---|---|
+    | MISLEADING | "The national debt doubled under Biden" |
+    | TRUE | "U.S. inflation peaked at 9.1% in June 2022" |
+    | MOSTLY FALSE | "EVs produce more carbon than gas cars" |
+    | UNVERIFIABLE | "AI will eliminate 40% of jobs by 2030" |
+    | FALSE | "The southern border is wide open with no enforcement" |
+
+- **Careers Page & Auth System (#17)** — Full careers system with Sanity-managed listings, unified application form, Clerk authentication, and a protected admin dashboard:
+
+  **Sanity schema & queries**
+  - `jobListing` Sanity document type — fields: title, slug, department (6 options: field-reporter, photojournalist, video-editor, writer, social-media, other), type (full-time/part-time/freelance/volunteer), location, description (blockContent), requirements (string[]), compensation, isActive (default true), closingDate; registered in schema index and auto-appears in Studio
+  - `queryActiveJobListings` GROQ query — filters by `isActive == true` and `closingDate >= $today`; accepts `{ today: "YYYY-MM-DD" }` param
+  - `queryJobApplications` GROQ query — fetches all `jobApplication` docs ordered by `submittedAt desc` for the admin dashboard
+  - 7 realistic seed `jobApplication` documents created directly in Sanity covering all 6 statuses (new, review, interview, accepted, declined, hold) and all schema fields
+
+  **Careers page (`/careers`)**
+  - Server component; sections: Hero ("WRITE FOR THE RESISTANCE"), 3 value-prop cards (Editorial Freedom, Portfolio Building, Global Reach), 12-role "We're Looking For" grid (Field Reporter, Documentary Filmmaker, Photojournalist, Video Editor, Social Media Strategist, Graphic Designer, Data Journalist, Podcast Producer, Live-Stream Operator, Copy Editor, Researcher, Web Developer), collapsible `<details>` accordion per active Sanity listing with dept/type/location/compensation meta, rich text description, requirements list, and embedded `ContributorApplicationForm`; "We're Always Hiring" section with full form; graceful try/catch fallback if Sanity fetch fails
+
+  **ContributorApplicationForm** (`src/components/careers/ContributorApplicationForm.tsx`, `'use client'`)
+  - All fields from former `/join` form: firstName, lastName, email, phone, location, positionsOfInterest (multi-checkbox), socialMediaPlatforms (checkbox), portfolioWebsite, youtubeChannel, socialMediaLinks (dynamic platform+url pairs), experienceLevel, experienceDescription, workSamples (dynamic title+url pairs), availability, additionalInfo
+  - Optional `prefilledPosition` prop to pre-check a position from the listing accordion
+  - Submits to `/api/job-application` (same `jobApplication` Sanity schema); success renders CheckCircle2 confirmation; error renders AlertCircle with message
+
+  **Route consolidation**
+  - `/join/page.tsx` deleted entirely — no redirect, no orphan route
+  - Sitemap: `/join/` entry removed; `/careers/` added at priority 0.6, monthly changeFrequency
+  - Footer: "Careers" and "Join Our Team" merged into single "Careers / Join Our Team" link pointing to `/careers`
+
+  **Clerk authentication setup**
+  - `@clerk/nextjs` ^7 installed
+  - `ClerkProvider` added to root `layout.tsx` wrapping the entire app (`afterSignOutUrl='/'`)
+  - `src/middleware.ts` — `clerkMiddleware` + `createRouteMatcher(['/admin(/.*)?'])`; uses `clerkClient().users.getUser(userId)` to read live `publicMetadata` (bypasses JWT claim limitation); accepts `admin: true` (boolean) or `admin: "true"` (string); unauthenticated → `/sign-in`; non-admin authenticated → homepage
+  - `Header.tsx` — `Show when='signed-in'` renders `UserButton`; `Show when='signed-out'` renders Sign In link (uses `Show` not `SignedIn`/`SignedOut` which don't exist in this Clerk version)
+
+  **Sign-in / Sign-up pages**
+  - `/sign-in/[[...sign-in]]/page.tsx` — two-column layout: left brand panel (logo with red glow halo, UnTelevised name, tagline, pill CTA) + right Clerk `<SignIn>` form; dark `slate-950` background; `untele` red accent; no rounded corners on form elements; `card: 'shadow-none bg-transparent w-full'`; `spacingUnit: '18px'`
+  - `/sign-up/[[...sign-up]]/page.tsx` — identical two-column layout using `<SignUp>`; both pages set `robots: { index: false, follow: false }`
+
+  **Admin dashboard (`/admin`)**
+  - Server component; `robots: noindex`; fetches all `jobApplication` docs via `queryJobApplications`
+  - Six status summary cards (new, review, interview, accepted, declined, hold) with per-status color coding
+  - `ApplicationsTable` client component: status filter tab bar, sortable rows (applicant name/email/location, positions, experience level, availability, submitted date, status badge), expandable detail rows showing experience description, portfolio/YouTube/social links, work samples, active social platforms, phone, internal notes, and "Edit in Studio" CTA linking to `/studio/structure/jobApplication;{id}`
+  - Protected by `clerkMiddleware`; requires Clerk user with `publicMetadata: { "admin": true }`
+
+- **Editorial Standards Page (#26)** — New static `/editorial-standards` page:
+  - Six core principles: Accuracy, Independence, Fairness, Verification, Transparency, Accountability
+  - Verification process section (primary sourcing, multi-source requirement, document verification, right of reply)
+  - Source standards explaining named vs. anonymous sourcing and how the Source Transparency Panel works
+  - Corrections policy with all four correction types (correction/clarification/update/retraction) explained with their visual color codes
+  - Independence & Conflicts of Interest section (editorial firewall, staff disclosures, no political alignment, funding transparency, native advertising, outside employment)
+  - Sensitive reporting guidelines (trauma & graphic content, suicide & self-harm, minors, national security)
+  - Contact CTAs to corrections desk (`corrections@untelevised.media`) and editorial board (`editorial@untelevised.media`)
+  - Added to sitemap at `/editorial-standards/` (priority 0.6, monthly)
+  - "Editorial Standards" link added to Footer About column
+- **Bookmarks & Reading List (#19)** — Zero-backend, pure localStorage article saving:
+  - `src/lib/bookmarks/storage.ts` — CRUD utilities: `getBookmarks`, `isBookmarked`, `addBookmark`, `removeBookmark`, `clearBookmarks`. SSR-safe (`typeof window` guard), fails silently on quota exceeded. Storage key: `untele_bookmarks`
+  - `BookmarkEntry` interface: slug, title, description, imageUrl, authorName, publishedAt, readingTime, bookmarkedAt
+  - `BookmarkButton` component (`'use client'`) — icon-only or full (icon + label) variant; SSR-safe hydration (disabled placeholder → real state after mount); brand-color active state (untele red)
+  - `/reading-list` page (`'use client'`) — animated loading skeleton, empty state with CTA, article list with thumbnail/meta/actions, per-item Remove button, Clear All button, article count, browser storage disclaimer
+  - `BookmarkButton` integrated into article page next to social share row; passes slug, title, description, 400px image URL, author, publishedAt, and reading time
+  - Bookmark icon added to header right section, linking to `/reading-list`
+  - `/reading-list` added to sitemap (priority 0.1, changeFrequency: never)
+
+- **Source Transparency Panel (#24)** — Collapsible sources & methodology section for articles and live events:
+  - New standalone `source` Sanity document type (reusable across articles, live events, and key events) — fields: label, type (7 options: document, interview, statement, data, media, on-scene, other), url, description, `isAnonymous` flag
+  - `article`: `sources[]` upgraded from minimal inline objects to references; `methodology` text field added
+  - `liveEvent`: `sources[]` references + `methodology` added
+  - `keyEvent`: `sources[]` references added
+  - GROQ queries updated — `queryArticleBySlug` and `queryEventBySlug` dereference `sources[]->` with all fields + project `methodology`
+  - `SourcesPanel` component — SSR-safe `<details>`/`<summary>` (no JS required); per-type icons (FileText, Mic, MessageSquare, Database, Video, Eye); anonymous sources show Shield icon and hide label/description; linked sources open in new tab; methodology rendered as a distinct blockquote
+  - `articles/[slug]`: replaces old minimal sources list with `SourcesPanel`
+  - `live-event/[slug]`: `SourcesPanel` added after body content
+  - `ArticleSource` interface and `SourceType` union added to `types.d.ts`; `Article`, `LiveEvent`, `KeyEvent` types updated
+  - Migration script `scripts/migrate-sources.mjs` — converted 22 inline `{ label, url }` objects across 4 articles to standalone `source` documents and patched references; supports `--dry-run`
+
+### Added
+- **Corrections & Retractions Workflow (#23)** — Full editorial correction pipeline:
+  - New reusable `correctionObject` Sanity schema supporting four correction types: `correction` (amber), `clarification` (blue), `update` (green), `retraction` (red)
+  - `Article` and `LiveEvent` Sanity schemas updated to use shared `correctionObject` field (live events support corrections/clarifications/updates only — not retractions)
+  - `CorrectionNotice` component renders inline above article body with per-type color, icon, label, issued date, and detail text
+  - Distinct retraction badge (red `bg-untele` + XCircle icon) vs correction badge (amber + AlertTriangle) on all card surfaces (`ArticleCard`, `FeaturedArticleCard`, `ArticleCardLg`)
+  - Retracted article titles display with `line-through opacity-60` on article page and all card surfaces
+  - GROQ queries updated to project `correction { type, issuedAt, summary, detail }` on all article and event fetch paths
+  - `ArticleCorrection` TypeScript interface added; `correction?` field on `Article` and `LiveEvent` global types
+
 ### Fixed
 - **GTM never loaded in production** — `GTM_ID` was a server-side env var passed
   to a `'use client'` component where it evaluated to `undefined`; renamed to
@@ -377,5 +504,79 @@ Full second-pass audit against Next.js, Sanity, SEO/AEO, and Vercel/React best-p
 - Add `seo?: SeoOverride` to `LiveEvent`, `Category`, `MusicArtist`, `Album`, `Song` global interfaces
 - Correct `Article.keywords` type from `string` → `string[]` in `types.d.ts` (was mismatched with schema)
 - Correct `LiveEvent.keywords` type from `string` → `string[]` in `types.d.ts`
+
+---
+
+## 2026-03-16 — Production Incident: Sanity Live API Hang → 502
+
+### Fixed
+- Production site intermittently returning blank page + HTTP 502 (no logs, no HTML)
+  - **Root cause:** `sanityFetch` from `next-sanity`'s `defineLive` (`vX` API) would hang
+    indefinitely when the Sanity Live Content API was slow or unresponsive. With no timeout,
+    Vercel's 30-second serverless function ceiling would kill the request → 502. Local dev was
+    unaffected because there is no timeout in `next dev`.
+  - **Diagnosis path:** Vercel logs showed 200 OK at 99ms (ISR PRERENDER cache hits), but fresh
+    renders triggered by ISR revalidation would hang. Confirmed not a Sanity quota issue, not a
+    missing env var issue. Pattern: works when cache is warm, 502s when cache expires and a
+    fresh server render is needed.
+  - `src/lib/sanity/lib/live.ts` — wrapped `sanityFetch` in `Promise.race` with an 8-second
+    timeout; throws a descriptive error logged to Vercel function logs instead of silently hanging
+  - `src/components/global/NavWrapper.tsx` — added try/catch; falls back to empty category list
+    so the nav renders rather than crashing the layout on fetch failure
+  - `src/components/global/BreakingNewsBanner.tsx` — added try/catch; returns null (no banner)
+    on fetch failure rather than propagating an error through the layout
+
+---
+
+## 2026-03-16 — Sprint 1: Security, SEO & Editorial Tools
+
+### Removed
+- All debug routes, components and API endpoint (Issue #15, PR #28)
+  - Deleted `src/components/debug/` — 6 components: AdDebugger, TestAd, TestAdComponent, AdSenseTestComponent, AdSenseTroubleshooter, ConsentDebugger
+  - Deleted `/timeline-debug` and `/timeline-simple-test` public routes
+  - Deleted `src/app/api/debug-log/route.ts` — unauthenticated POST endpoint
+  - Removed unconditional `<AdDebugger />` render from music layout
+- Removed decorative `Banner` component from homepage (consolidated in #12 work)
+
+### Added
+- RSS Feed `/feed.xml` — RFC-compliant RSS 2.0 route handler (Issue #9, PR #30)
+  - Latest 50 articles + latest 20 live events, merged and date-sorted
+  - Live events include `🔴 LIVE:` title prefix, newsroom attribution, `'Live Coverage'` category
+  - `media:content` image elements via `urlForImage`; RFC 2822 pubDate
+  - `s-maxage=3600` CDN cache + hourly ISR revalidation
+  - RSS auto-discovery `<link>` added to root layout metadata
+  - Better Comments `// !` TODO markers at all rename touchpoints for future `liveEvent → breaking` migration
+- Breaking News Banner (Issue #12, PR #31)
+  - Editor-controlled site-wide alert via Sanity `siteSettings.breakingNewsBanner` singleton
+  - Fields: `isActive`, `headline`, `linkUrl`, `linkLabel`, `expiresAt` (auto-expire)
+  - Instant live updates via `sanityFetch` from `lib/live` + `SanityLive` — no page refresh needed
+  - Per-session dismiss via `sessionStorage`; key derived from headline (resets on new headline)
+  - Positioned below `<NavWrapper />` (under category nav)
+  - Server-side `expiresAt` guard + client-side secondary guard
+  - Accessible: `role="alert"`, `aria-label`, keyboard-navigable dismiss with focus ring
+  - Fixed: More dropdown `pointer-events-none` when hidden to prevent hover bleed into banner area
+- Reading Time Estimate (Issue #20, PR #32)
+  - `src/lib/readingTime.ts` — `estimateReadingTime(body, extras?)` at 200 wpm (standard average adult pace), minimum 1 min
+  - Article detail page counts body + FAQ questions/answers + source labels via `extras` param
+  - `readingTimeFromWordCount()` for GROQ-projected `wordCount` on card components
+  - `"wordCount": length(string::split(pt::text(body), " "))` — actual word count (not char count)
+  - `wordCount?: number` added to global `Article` type in `types.d.ts`
+  - Displayed on: article detail page, `FeaturedArticleCard`, featured stories grid, `ArticleCard`, `RawFeed`
+
+### Changed
+- Sitemap completion (Issue #16, PR #29)
+  - Added static pages: `/timelines`, `/join`, `/support`, `/secure-contact`, `/whistleblower`
+  - Added dynamic timeline individual pages via new `queryTimelines` in `getAllURLs.ts`
+  - `robots.ts`: added `Disallow` for `/privacy-settings`, `/reading-list`, `/unlock`; `Allow: /feed.xml`
+  - `privacy-settings/layout.tsx`: added `noindex` metadata (page is `'use client'`, metadata via layout)
+
+---
+
+## [2.2.1] — 2026-03-16
+
+### Fixed
+- AdSense article page slot IDs updated to verified ad units
+- `notFound()` fixes on article/category/timeline pages
+- Music/category/timeline JSON-LD structured data improvements
 
 ---

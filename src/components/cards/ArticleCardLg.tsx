@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import urlForImage from '@/u/urlForImage';
 import { ArrowUpRightIcon, ShareIcon } from '@heroicons/react/24/solid';
+import { AlertTriangle, XCircle } from 'lucide-react';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 
@@ -23,7 +24,18 @@ const ArticleCardLg = ({ post }: Props) => {
         />
         <div className='absolute bottom-0 flex w-full justify-between rounded bg-slate-900 bg-opacity-20 px-5 py-2 text-slate-200 drop-shadow-lg backdrop-blur-lg'>
           <div>
-            <p className='text-sm font-bold lg:text-base'>{post.title}</p>
+            {post.correction?.type === 'retraction' ? (
+              <span className='mb-1 inline-flex items-center gap-1 bg-untele px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
+                <XCircle className='h-2.5 w-2.5' aria-hidden='true' />
+                Retracted
+              </span>
+            ) : post.correction?.summary ? (
+              <span className='mb-1 inline-flex items-center gap-1 bg-amber-400 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-black'>
+                <AlertTriangle className='h-2.5 w-2.5' aria-hidden='true' />
+                Corrected
+              </span>
+            ) : null}
+            <p className={`text-sm font-bold lg:text-base${post.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}>{post.title}</p>
           </div>
           <div className='flex flex-col items-center gap-y-2 md:flex-row md:gap-x-2'>
             {
