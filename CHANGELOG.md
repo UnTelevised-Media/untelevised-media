@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/app/api/algolia-sync/route.ts` — Sanity webhook POST handler with HMAC-SHA256 signature validation; syncs articles and live events to Algolia on create/update/delete
   - `scripts/algolia-initial-index.ts` — one-time backfill script; run via `pnpm algolia:index` to push all existing articles to Algolia
   - `algolia:index` npm script added to `package.json`
+  - Rebuilt `src/app/(user)/search/page.tsx` with Algolia `InstantSearch`, `SearchBox`, `Hits` with custom `ArticleHit` card, `RefinementList` facets (category, author), `Highlight` for match-highlighted titles and descriptions, `Pagination`, and a `NoResults` component; fully mobile-responsive with collapsible filter sidebar
 
 - **Tag Pages (#8)**
   - `tags` string-array field added to the `article` Sanity schema (max 10, tag-input layout); values become browsable `/tag/[slug]` pages
