@@ -15,6 +15,7 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import resolveHref from '@/util/resolveHref';
+import { tagToSlug } from '@/lib/tagUtils';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/live';
@@ -256,6 +257,26 @@ export default async function Article({ params }: Props) {
           <div className='not-prose'>
             <SourcesPanel sources={article.sources} methodology={article.methodology} />
           </div>
+
+          {/* Tags */}
+          {article.tags && article.tags.length > 0 && (
+            <div className='not-prose mt-8'>
+              <p className='mb-3 text-xs font-black uppercase tracking-widest text-muted-foreground'>
+                Filed Under
+              </p>
+              <div className='flex flex-wrap gap-2'>
+                {article.tags.map((tag: string) => (
+                  <Link
+                    key={tag}
+                    href={`/tag/${tagToSlug(tag)}`}
+                    className='border border-zinc-600 px-3 py-1 text-xs uppercase tracking-wide text-zinc-400 transition-colors hover:border-untele hover:text-white'
+                  >
+                    {tag}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* FAQs */}
           {article.faqs && article.faqs.length > 0 && (
