@@ -9,6 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Algolia Full-Text Search (#21)**
+  - Installed `algoliasearch` v5, `react-instantsearch` v7, and `@portabletext/toolkit` for search infrastructure
+
 - **Tag Pages (#8)**
   - `tags` string-array field added to the `article` Sanity schema (max 10, tag-input layout); values become browsable `/tag/[slug]` pages
 
