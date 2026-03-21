@@ -1,0 +1,29 @@
+# docker/Caddyfile
+# Caddy reverse proxy for Coral — automatic TLS via Let's Encrypt.
+# Replace coral.untelevised.live with your actual subdomain if different.
+
+coral.untelevised.live {
+    # Forward all traffic to Coral on the internal Docker network
+    reverse_proxy talk:5000
+
+    # Security headers
+    header {
+        # Prevent clickjacking — Coral embeds itself via iframe from the Next.js site
+        # so we allow framing only from our own domains
+        Content-Security-Policy "frame-ancestors 'self' https://untelevised.live https://www.untelevised.live https://untelevised.media https://www.untelevised.media"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    # Compress responses
+    encode gzip
+
+    # Access log
+    log {
+        output file /data/logs/coral-access.log {
+            roll_size 50mb
+            roll_keep 5
+        }
+    }
+}

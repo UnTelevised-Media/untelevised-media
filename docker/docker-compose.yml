@@ -1,0 +1,165 @@
+# docker/docker-compose.yml
+# Coral by Vox Media — self-hosted comments stack
+# Deploys: Coral Talk, MongoDB 8, Redis 7, Caddy (TLS termination)
+#
+# Usage:
+#   cp .env.example .env   # fill in real values
+#   docker compose up -d
+#
+# Coral Admin: https://coral.untelevised.live/admin (first boot runs setup wizard)
+
+services:
+  # ---------------------------------------------------------------------------
+  # Coral Talk — comment platform
+  # ---------------------------------------------------------------------------
+  talk:
+    image: coralproject/talk:latest
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      # MongoDB connection
+      MONGODB_URI: mongodb://mongo:27017/coral
+
+      # Redis connection
+      REDIS_URI: redis://redis:6379
+
+      # The public URL of this Coral instance (no trailing slash)
+      CORAL_URL: ${CORAL_URL}
+
+      # Origins allowed to embed the comment widget
+      CORAL_ALLOWED_ORIGINS: ${CORAL_ALLOWED_ORIGINS}
+
+      # Signing secret for Coral's internal JWT — generate with: openssl rand -base64 32
+      # This is DIFFERENT from CORAL_SSO_SECRET (which is for the Next.js SSO integration)
+      SIGNING_SECRET: ${CORAL_SIGNING_SECRET}
+
+      # Server port (Caddy proxies this internally — do not expose publicly)
+      PORT: 5000
+
+      # Email (SMTP) — required for password reset, comment notifications
+      EMAIL_SMTP_HOST: ${EMAIL_SMTP_HOST:-}
+      EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT:-587}
+      EMAIL_SMTP_USERNAME: ${EMAIL_SMTP_USERNAME:-}
+      EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD:-}
+      EMAIL_SMTP_SECURE: ${EMAIL_SMTP_SECURE:-false}
+      EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS:-noreply@untelevised.live}
+
+      # Optional: Google Perspective API for AI toxicity detection
+      PERSPECTIVE_API_KEY: ${PERSPECTIVE_API_KEY:-}
+
+    # Do NOT expose port 5000 publicly — Caddy handles ingress
+    expose:
+      - "5000"
+
+    volumes:
+      # Persist any Coral-generated assets / uploads
+      - coral_data:/opt/app/public/dist/assets/coral
+
+    networks:
+      - coral_internal
+      - caddy_proxy
+
+  # ---------------------------------------------------------------------------
+  # MongoDB 8 — primary datastore
+  # ---------------------------------------------------------------------------
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: coral
+    volumes:
+      - mongo_data:/data/db
+      - mongo_config:/data/configdb
+    expose:
+      - "27017"
+    networks:
+      - coral_internal
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ---------------------------------------------------------------------------
+  # Redis 7 — job queue, rate limiting, caching
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    expose:
+      - "6379"
+    networks:
+      - coral_internal
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # ---------------------------------------------------------------------------
+  # Caddy — automatic TLS via Let's Encrypt, reverse proxy for Coral
+  # ---------------------------------------------------------------------------
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"  # HTTP/3 (QUIC)
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - caddy_proxy
+    depends_on:
+      - talk
+
+  # ---------------------------------------------------------------------------
+  # Backup — nightly MongoDB dump to ./backups/
+  # ---------------------------------------------------------------------------
+  backup:
+    image: mongo:8
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      MONGO_HOST: mongo
+      MONGO_DB: coral
+      BACKUP_RETAIN_DAYS: ${BACKUP_RETAIN_DAYS:-14}
+    volumes:
+      - ./backups:/backups
+      - ./scripts/backup.sh:/backup.sh:ro
+    entrypoint: ["/bin/bash", "-c", "while true; do sleep 86400; /backup.sh; done"]
+    networks:
+      - coral_internal
+
+# -----------------------------------------------------------------------------
+# Named volumes — data is persisted across container restarts and upgrades
+# -----------------------------------------------------------------------------
+volumes:
+  coral_data:
+  mongo_data:
+  mongo_config:
+  redis_data:
+  caddy_data:
+  caddy_config:
+
+# -----------------------------------------------------------------------------
+# Networks
+# coral_internal — private, MongoDB + Redis are never reachable from outside
+# caddy_proxy    — Caddy ↔ Coral only
+# -----------------------------------------------------------------------------
+networks:
+  coral_internal:
+    internal: true
+  caddy_proxy:
