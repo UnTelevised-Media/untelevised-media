@@ -83,6 +83,7 @@ interface Article extends Base {
   correction?: ArticleCorrection;
   sources?: ArticleSource[];
   methodology?: string;
+  tags?: string[];
   faqs?: Array<{ question: string; answer: string }>;
   reviewedBy?: Author;
   relatedArticles?: Array<{

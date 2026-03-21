@@ -34,7 +34,7 @@ export default async function TagPage({ params }: Props) {
   const { slug } = await params;
 
   // Fetch all known tags to find the canonical raw tag string
-  const { data: allTags } = await sanityFetch<string[]>({
+  const { data: allTags } = await sanityFetch({
     query: queryAllTags,
     tags: ['article'],
   });
