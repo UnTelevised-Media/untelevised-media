@@ -737,9 +737,10 @@ export const queryArticlesByTag = groq`
     slug,
     description,
     publishedAt,
-    mainImage { asset->, alt },
-    "author": author->{ name, slug, image { asset-> } },
-    "categories": categories[]->{ title, slug },
+    mainImage { asset, alt },
+    "author": author->{ name, slug, image { asset } },
+    "categories": categories[]->{ _id, title, slug },
+    "correction": correction { type, summary },
     tags
   }
 `;
