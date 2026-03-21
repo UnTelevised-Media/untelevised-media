@@ -9,7 +9,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
-- **Tag Pages (#8, PR #N)**
+- **Algolia Full-Text Search (#21)**
+  - Installed `algoliasearch` v5, `react-instantsearch` v7, `instantsearch.js`, and `@portabletext/toolkit` for search infrastructure
+  - `src/lib/algolia/client.ts` — server-only Algolia admin client with lazy initialisation (never bundled to browser)
+  - `src/lib/algolia/types.ts` — `AlgoliaArticleRecord` and `AlgoliaEventRecord` type definitions
+  - `src/app/api/algolia-sync/route.ts` — Sanity webhook POST handler with HMAC-SHA256 signature validation; syncs articles and live events to Algolia on create/update/delete
+  - `scripts/algolia-initial-index.ts` — one-time backfill script; run via `pnpm algolia:index` to push all existing articles to Algolia
+  - Algolia index configured with `attributesForFaceting` (categories, author, tags) and `searchableAttributes` — filters now work correctly
+  - `bodyText` capped at 5,000 chars in both indexing script and webhook to stay within Algolia's 10 KB record limit
+  - `tags` field added to all Algolia records and a Tag facet filter added to the search UI
+  - `algolia:index` npm script added to `package.json`
+  - `src/app/(user)/search/page.tsx` — server component; reads `?q=` from `searchParams` and passes as `initialQuery` prop; delegates all Algolia rendering to `SearchClientLoader`
+  - `src/components/search/SearchClient.tsx` — full Algolia `InstantSearch` UI: `SearchBox`, `Hits` with custom `ArticleHitCard` (thumbnail, highlighted title/description, author, category, date), `RefinementList` facets (category, tag, author), `Pagination`, `NoResults`; `onStateChange` syncs query back to `?q=` URL so refresh preserves search state
+  - `src/components/search/SearchClientLoader.tsx` — client-only boundary; lazy-imports `SearchClient` via `useEffect` so Algolia never runs during SSR; shows animated skeleton while loading
+  - `src/app/(user)/search/layout.tsx` — search route layout with `robots: noindex, nofollow`
+  - `src/components/global/HeaderSearch.tsx` — Algolia-powered typeahead in the header: live dropdown (top 6 hits) as you type; "Browse all articles →" link; submit navigates to `/search?q=[query]`; loaded via `dynamic({ ssr: false })` in `Header.tsx` to prevent SSR crash
+  - `src/components/global/Footer.tsx` — "Search Articles" link added to Media column
+  - `src/components/global/Nav.tsx` — sub-header `top` offset corrected (`top-[56px]` / `md:top-[74px]`) to align with actual header height
+  - `.env.example` updated with Algolia env vars
+  - All search result and dropdown links converted to Next.js `<Link>` for correct App Router client-side navigation
+
+- **Tag Pages (#8, PR #40)**
 
   **Sanity schema**
   - `tags` string-array field on the `article` document type (max 10, tag-input layout in Studio); values are fine-grained topics, people, places, or events using lowercase-hyphen convention
@@ -25,31 +45,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `queryAllArticles` updated to include `tags` in its projection
 
   **Tag page route (`src/app/(user)/tag/[slug]/page.tsx`)**
-  - `generateStaticParams` fetches all tags via `sanityClient` and maps to `{ slug: tagToSlug(tag) }` params
-  - `generateMetadata` returns a canonical URL at `https://www.untelevised.media/tag/[slug]`
-  - CollectionPage JSON-LD structured data
-  - Breadcrumb nav: Home > Tags > [Label]
-  - `bg-untele` header bar with "TAG" pill, article count, and tag description line
-  - Article grid using `ArticleCardLg` — consistent with category pages
-  - Empty state rendered when no articles match
+  - `generateStaticParams`, `generateMetadata` with canonical URL, CollectionPage JSON-LD, breadcrumb nav, article grid, empty state
 
   **Article detail page (`src/app/(user)/articles/[slug]/page.tsx`)**
-  - Tag badges rendered below Sources panel; each links to the corresponding `/tag/[slug]` page
-  - Section labelled "Filed Under" using brand label typography
-  - Section hidden when `article.tags` is empty or undefined
-  - Tags and categories now displayed together in the article hero header with distinct visual styles — categories as solid `bg-untele` red pills (linked to `/category/[slug]`), tags as ghost outline pills with `#` prefix (linked to `/tag/[slug]`)
-  - Article breadcrumb fixed to use `formatTitleForURL(category.title)` for category href — was using `slug.current` which caused 404s; also now links correctly to `/category/[slug]`
-  - BreadcrumbList JSON-LD updated with correct category URL and 3-item trail (Home → Category → Article)
+  - Tags and categories displayed in article hero header — categories as solid red pills, tags as ghost `#pill` links
+  - Article breadcrumb fixed to use `formatTitleForURL(category.title)` — was 404ing with `slug.current`
+  - BreadcrumbList JSON-LD updated with correct category URL and 3-item trail
 
-  **Sitemap (`src/app/(user)/sitemap.ts`)**
-  - All tag pages added with `changeFrequency: 'daily'` and `priority: 0.5`
-
-  **Types (`types.d.ts`)**
-  - `tags?: string[]` added to the global `Article` interface
+  **Sitemap** — all `/tag/[slug]` URLs added (`changeFrequency: daily`, `priority: 0.5`)
 
 - **Instagram embed hydration fix**
-  - Extracted Instagram blockquote markup into `InstagramEmbedInner.tsx` (client component, never SSR'd)
-  - `InstagramEmbed.tsx` wraps it via `dynamic(..., { ssr: false })` — eliminates React hydration mismatch caused by Instagram's `embed.js` rewriting `<blockquote>` → `<iframe>` before hydration completes
+  - Extracted into `InstagramEmbedInner.tsx` + `dynamic(..., { ssr: false })` wrapper — eliminates React hydration mismatch from `embed.js` DOM mutation
 
 ---
 

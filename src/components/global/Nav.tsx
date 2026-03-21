@@ -31,7 +31,7 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
   const secondaryCategories = sortedCategories.slice(6);
 
   return (
-    <nav className='from-slate-100/98 to-slate-200/98 dark:from-slate-900/98 dark:to-slate-800/98 sticky top-[90px] z-30 border-b border-slate-300/50 bg-gradient-to-r shadow-xl backdrop-blur-md dark:border-slate-700/50 md:top-[95px]'>
+    <nav className='from-slate-100/98 to-slate-200/98 dark:from-slate-900/98 dark:to-slate-800/98 sticky top-[56px] z-30 border-b border-slate-300/50 bg-gradient-to-r shadow-xl backdrop-blur-md dark:border-slate-700/50 md:top-[74px]'>
       <div className='mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8'>
         {/* Desktop Navigation */}
         <div className='hidden items-center justify-between py-3 md:flex'>

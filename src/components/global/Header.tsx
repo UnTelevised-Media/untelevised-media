@@ -6,9 +6,13 @@ import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/o
 import { Bookmark } from 'lucide-react';
 import { Show, UserButton } from '@clerk/nextjs';
 
+import dynamic from 'next/dynamic';
 import Socials from './Socials';
 import ThemeToggle from './ThemeToggle';
 import { Flame, Music, Radio } from 'lucide-react';
+
+// algoliasearch uses browser-only APIs — must not run during SSR
+const HeaderSearch = dynamic(() => import('./HeaderSearch'), { ssr: false });
 
 const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -179,36 +183,10 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
         </div>
       </div>
 
-      {/* Enhanced Search Bar */}
+      {/* Search Bar — Algolia typeahead */}
       {isSearchOpen && (
         <div className='border-t border-slate-300 bg-gradient-to-r from-slate-100 to-slate-200 p-6 backdrop-blur-md dark:border-slate-700 dark:from-slate-900 dark:to-slate-800'>
-          <div className='mx-auto max-w-[1400px]'>
-            <div className='relative'>
-              <div className='absolute inset-0 rounded-lg bg-gradient-to-r from-untele/20 to-red-400/20 blur' />
-              <div className='relative flex items-center'>
-                <MagnifyingGlassIcon className='absolute left-4 h-5 w-5 text-slate-600 dark:text-slate-400' />
-                <input
-                  type='text'
-                  placeholder='Search breaking news, investigations, live coverage...'
-                  className='w-full rounded-lg border border-slate-400 bg-slate-200/90 py-4 pl-12 pr-4 text-slate-900 placeholder-slate-600 backdrop-blur-sm focus:border-untele focus:outline-none focus:ring-2 focus:ring-untele/50 dark:border-slate-600 dark:bg-slate-800/90 dark:text-slate-100 dark:placeholder-slate-400'
-                  autoFocus
-                />
-                <button className='absolute right-2 rounded-md bg-untele px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-untele/90'>
-                  Search
-                </button>
-              </div>
-            </div>
-            <div className='mt-4 flex flex-wrap gap-2'>
-              {['Breaking News', 'Live Events', 'Investigations', 'Field Reports'].map((tag) => (
-                <button
-                  key={tag}
-                  className='rounded-full border border-slate-400 bg-slate-200/50 px-3 py-1 text-xs text-slate-700 transition-colors hover:border-untele hover:text-slate-900 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:text-white'
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </div>
+          <HeaderSearch onClose={() => setIsSearchOpen(false)} />
         </div>
       )}
 

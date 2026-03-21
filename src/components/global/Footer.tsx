@@ -83,6 +83,7 @@ async function Footer() {
           <h4 className='hidden pb-2 text-xl font-semibold text-foreground underline md:flex'>
             Media
           </h4>
+          <Link href='/search'>Search Articles</Link>
           <Link href='/'>Photo</Link>
           <Link href='/'>Video</Link>
           <Link href='/'>Investigations</Link>

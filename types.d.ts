@@ -101,6 +101,7 @@ interface Article extends Base {
     ogImage?: Image;
   };
   comments: Comment[];
+  tags?: string[];
 }
 
 interface Author extends Base {
