@@ -18,7 +18,7 @@ const ArticleCardLg = ({ post }: Props) => {
 
   return (
     <article
-      className='group relative flex flex-col overflow-hidden rounded-lg border border-slate-400 bg-slate-400/80 shadow-lg transition-all duration-300 hover:border-untele/50 hover:shadow-xl'
+      className='group relative flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:border-untele hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-untele'
       aria-labelledby={`article-title-${post._id}`}
     >
       {/* Image */}
@@ -32,13 +32,13 @@ const ArticleCardLg = ({ post }: Props) => {
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
           />
         ) : (
-          <div className='h-full w-full bg-slate-700' />
+          <div className='h-full w-full bg-slate-200 dark:bg-slate-800' />
         )}
-        <div className='absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent' />
+        <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent' />
       </div>
 
       {/* Content */}
-      <div className='flex flex-1 flex-col bg-slate-400 p-6'>
+      <div className='flex flex-1 flex-col p-6'>
         {/* Category pills */}
         {post.categories && post.categories.length > 0 && (
           <div className='mb-4 flex flex-wrap gap-2'>
@@ -69,25 +69,25 @@ const ArticleCardLg = ({ post }: Props) => {
         {/* Title */}
         <h2
           id={`article-title-${post._id}`}
-          className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele${post.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
+          className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele dark:text-white${post.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
         >
           {post.title}
         </h2>
 
         {/* Description */}
-        <p className='mb-4 line-clamp-4 flex-grow text-sm text-slate-700'>
+        <p className='mb-4 line-clamp-4 flex-grow text-sm text-slate-600 dark:text-slate-400'>
           {post.description}
         </p>
 
         {/* Meta row */}
         <div className='mt-auto flex items-center justify-between'>
-          <span className='text-sm text-slate-600'>{post.author?.name}</span>
+          <span className='text-sm text-slate-500 dark:text-slate-400'>{post.author?.name}</span>
           <div className='flex items-center gap-2'>
-            <span className='text-sm text-slate-600'>
+            <span className='text-sm text-slate-500 dark:text-slate-400'>
               {formatDate(getArticleDate(post))}
             </span>
             {post.body && (
-              <span className='text-xs uppercase tracking-widest text-slate-500'>
+              <span className='text-xs uppercase tracking-widest text-slate-400 dark:text-slate-500'>
                 · {getReadingTime(post.body)}
               </span>
             )}
