@@ -15,6 +15,7 @@ const Tweet = dynamic(() => import('react-tweet').then((m) => m.Tweet));
 const SyntaxHighlighter = dynamic(() =>
   import('react-syntax-highlighter').then((m) => m.Prism),
 );
+import InstagramEmbed from './InstagramEmbed';
 
 export const RichTextComponents = {
   types: {
@@ -224,27 +225,7 @@ export const RichTextComponents = {
     // ── Instagram Embeds ─────────────────────────────────────────────────────
     instagramEmbed: ({ value }: any) => {
       const postId = value.postId;
-      return (
-        <div className='mx-auto my-8 flex max-w-full justify-center'>
-          <blockquote
-            className='instagram-media min-w-fit max-w-xl'
-            data-instgrm-captioned
-            data-instgrm-permalink={`https://www.instagram.com/p/${postId}`}
-            data-instgrm-version='14'
-          >
-            <div>
-              <Link
-                href={`https://www.instagram.com/p/${postId}`}
-                className='text-untele hover:text-red-700'
-                target='_blank'
-              >
-                View this post on Instagram
-              </Link>
-            </div>
-          </blockquote>
-          <script async src='//www.instagram.com/embed.js'></script>
-        </div>
-      );
+      return <InstagramEmbed postId={postId} />;
     },
   },
 

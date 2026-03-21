@@ -16,6 +16,7 @@ import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import resolveHref from '@/util/resolveHref';
 import { tagToSlug } from '@/lib/tagUtils';
+import formatTitleForURL from '@/util/formatTitleForURL';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/live';
@@ -86,11 +87,11 @@ export default async function Article({ params }: Props) {
                 '@type': 'ListItem',
                 position: 2,
                 name: cat.title,
-                item: `https://www.untelevised.media/category/${cat.slug?.current}`,
+                item: `https://www.untelevised.media/category/${formatTitleForURL(cat.title)}`,
               })) ?? []),
               {
                 '@type': 'ListItem',
-                position: (article.categories?.length ? 3 : 2),
+                position: article.categories?.length ? 3 : 2,
                 name: article.title,
                 item: `https://www.untelevised.media/articles/${slug}`,
               },
@@ -194,19 +195,29 @@ export default async function Article({ params }: Props) {
                       </span>
                     )}
                   </div>
-                  {/* Categories */}
-                  {article.categories && article.categories.length > 0 && (
-                    <div className='flex flex-wrap justify-end gap-2'>
-                      {article.categories.map((category) => (
-                        <span
+                  {/* Categories + Tags */}
+                  <div className='flex flex-wrap justify-end gap-2'>
+                    {article.categories && article.categories.length > 0 &&
+                      article.categories.map((category) => (
+                        <Link
                           key={category._id}
-                          className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm'
+                          href={`/category/${formatTitleForURL(category.title)}`}
+                          className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-untele'
                         >
                           {category.title}
-                        </span>
+                        </Link>
                       ))}
-                    </div>
-                  )}
+                    {article.tags && article.tags.length > 0 &&
+                      article.tags.map((tag) => (
+                        <Link
+                          key={tag}
+                          href={`/tag/${tagToSlug(tag)}`}
+                          className='inline-flex items-center rounded-full border border-white/40 bg-white/10 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur-sm transition-colors hover:border-white/70 hover:text-white'
+                        >
+                          #{tag}
+                        </Link>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -232,7 +243,7 @@ export default async function Article({ params }: Props) {
                 <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
                 <li>
                   <Link
-                    href={`/category/${article.categories[0].slug?.current}`}
+                    href={`/category/${formatTitleForURL(article.categories[0].title)}`}
                     className='transition-colors hover:text-untele'
                   >
                     {article.categories[0].title}
