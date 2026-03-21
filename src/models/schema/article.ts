@@ -73,6 +73,16 @@ export default defineType({
       of: [{ type: 'reference', to: { type: 'category' } }],
     }),
     defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+      description:
+        'Fine-grained topics, people, places, or events. Use lowercase with hyphens (e.g. "police-brutality", "eric-adams"). These become browsable /tag/[slug] pages.',
+      validation: (Rule) => Rule.max(10).warning('Keep tags focused — 10 max per article.'),
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
