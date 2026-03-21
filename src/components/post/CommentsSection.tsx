@@ -77,7 +77,7 @@ export default function CommentsSection({
   }, [functionalConsent, token, isSignedIn, articleId, articleUrl, allowComments]);
 
   // Comments disabled by editorial decision
-  if (!allowComments) {
+  if (allowComments === false) {
     return (
       <div className='flex items-center gap-3 border border-border px-6 py-8 text-muted-foreground'>
         <Lock className='h-4 w-4 shrink-0' />
