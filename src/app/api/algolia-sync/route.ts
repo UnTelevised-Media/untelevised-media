@@ -17,7 +17,7 @@ const sanityClient = createClient({
 
 const ARTICLE_QUERY = `
   *[_id == $id][0]{
-    title, slug, description, body, publishedAt,
+    title, slug, description, body, publishedAt, tags,
     "mainImage": mainImage.asset->url,
     "author": author->name,
     "authorSlug": author->slug.current,
@@ -25,6 +25,8 @@ const ARTICLE_QUERY = `
     "categorySlugs": categories[]->slug.current,
   }
 `;
+
+const BODY_TEXT_MAX_CHARS = 5_000;
 
 function verifySignature(body: string, signature: string, secret: string): boolean {
   const hmac = createHmac('sha256', secret);
@@ -77,7 +79,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: 'Document not found in Sanity' }, { status: 404 });
     }
 
-    const bodyText = doc.body ? toPlainText(doc.body).slice(0, 10_000) : '';
+    const bodyText = doc.body ? toPlainText(doc.body).slice(0, BODY_TEXT_MAX_CHARS) : '';
     const publishedAt = doc.publishedAt
       ? Math.floor(new Date(doc.publishedAt as string).getTime() / 1000)
       : 0;
@@ -91,6 +93,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       authorSlug: (doc.authorSlug as string) ?? '',
       categories: (doc.categories as string[]) ?? [],
       categorySlugList: (doc.categorySlugs as string[]) ?? [],
+      tags: (doc.tags as string[]) ?? [],
       publishedAt,
       imageUrl: (doc.mainImage as string) ?? '',
       type: 'article',

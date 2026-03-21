@@ -2,11 +2,12 @@ export interface AlgoliaArticleRecord {
   objectID: string; // article slug
   title: string;
   description: string;
-  bodyText: string; // plain text from Portable Text body, max 10,000 chars
+  bodyText: string; // plain text from Portable Text body, truncated to fit Algolia 10KB record limit
   author: string;
   authorSlug: string;
   categories: string[];
   categorySlugList: string[];
+  tags: string[];
   publishedAt: number; // Unix timestamp (seconds)
   imageUrl: string;
   type: 'article';

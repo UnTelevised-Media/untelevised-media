@@ -46,7 +46,7 @@ const ARTICLES_INDEX = 'untele_articles';
 // ── GROQ query ────────────────────────────────────────────────────────────────
 const QUERY = `
   *[_type == 'article'] | order(publishedAt desc) {
-    title, slug, description, body, publishedAt,
+    title, slug, description, body, publishedAt, tags,
     "mainImage": mainImage.asset->url,
     "author": author->name,
     "authorSlug": author->slug.current,
@@ -67,9 +67,27 @@ interface SanityArticleDoc {
   authorSlug?: string;
   categories?: string[];
   categorySlugs?: string[];
+  tags?: string[];
 }
 
+// Algolia free plan record limit is 10 KB. All fields combined must stay under that.
+// bodyText is the largest field — keep it small enough that title + description +
+// all other metadata still fits comfortably within the limit.
+const BODY_TEXT_MAX_CHARS = 5_000;
+
 async function run() {
+  console.log('Configuring Algolia index settings…');
+  await algoliaClient.setSettings({
+    indexName: ARTICLES_INDEX,
+    indexSettings: {
+      searchableAttributes: ['title', 'description', 'bodyText', 'author', 'categories', 'tags'],
+      attributesForFaceting: ['categories', 'author', 'tags'],
+      ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
+      customRanking: ['desc(publishedAt)'],
+    },
+  });
+  console.log('Index settings applied.');
+
   console.log('Fetching articles from Sanity…');
   const docs = await sanityClient.fetch<SanityArticleDoc[]>(QUERY);
   console.log(`Found ${docs.length} articles.`);
@@ -82,7 +100,7 @@ async function run() {
   const records: AlgoliaArticleRecord[] = docs
     .filter((doc) => Boolean(doc.slug?.current))
     .map((doc) => {
-      const bodyText = doc.body ? toPlainText(doc.body).slice(0, 10_000) : '';
+      const bodyText = doc.body ? toPlainText(doc.body).slice(0, BODY_TEXT_MAX_CHARS) : '';
       const publishedAt = doc.publishedAt
         ? Math.floor(new Date(doc.publishedAt).getTime() / 1000)
         : 0;
@@ -96,6 +114,7 @@ async function run() {
         authorSlug: doc.authorSlug ?? '',
         categories: doc.categories ?? [],
         categorySlugList: doc.categorySlugs ?? [],
+        tags: doc.tags ?? [],
         publishedAt,
         imageUrl: doc.mainImage ?? '',
         type: 'article' as const,
@@ -104,7 +123,6 @@ async function run() {
 
   console.log(`Indexing ${records.length} records to Algolia index "${ARTICLES_INDEX}"…`);
 
-  // Algolia v5: saveObjects accepts an array via batch
   await algoliaClient.saveObjects({
     indexName: ARTICLES_INDEX,
     objects: records,

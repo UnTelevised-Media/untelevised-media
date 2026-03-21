@@ -15,14 +15,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/lib/algolia/types.ts` — `AlgoliaArticleRecord` and `AlgoliaEventRecord` type definitions
   - `src/app/api/algolia-sync/route.ts` — Sanity webhook POST handler with HMAC-SHA256 signature validation; syncs articles and live events to Algolia on create/update/delete
   - `scripts/algolia-initial-index.ts` — one-time backfill script; run via `pnpm algolia:index` to push all existing articles to Algolia
+  - Algolia index configured with `attributesForFaceting` (categories, author, tags) and `searchableAttributes` — filters now work correctly
+  - `bodyText` capped at 5,000 chars in both indexing script and webhook to stay within Algolia's 10 KB record limit
+  - `tags` field added to all Algolia records and a Tag facet filter added to the search UI
   - `algolia:index` npm script added to `package.json`
-  - Rebuilt `src/app/(user)/search/page.tsx` — full Algolia `InstantSearch` UI with `SearchBox`, `Hits` with custom `ArticleHitCard` (thumbnail, `Highlight`-annotated title/description, author, category, date), `RefinementList` facets (category, author), `Pagination`, and `NoResults` component; mobile-responsive with collapsible filter sidebar; branded with `bg-untele` header, `hover:border-untele` card borders, and `bg-untele/20` match highlights
-  - `src/app/(user)/search/layout.tsx` — search route layout with `robots: noindex, nofollow` and `dynamic = 'force-dynamic'` to prevent prerender errors when Algolia env vars are absent
-  - `.env.example` updated with Algolia env vars: `ALGOLIA_APP_ID`, `ALGOLIA_ADMIN_API_KEY` (server-only), `NEXT_PUBLIC_ALGOLIA_APP_ID`, `NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY`, `SANITY_WEBHOOK_SECRET`
-  - Note: requires Algolia account setup and 4 env vars before search is live; run `pnpm algolia:index` once to backfill existing content
+  - Rebuilt `src/app/(user)/search/page.tsx` — full Algolia `InstantSearch` UI with `SearchBox`, `Hits` with custom `ArticleHitCard`, `RefinementList` facets (category, tag, author), `Pagination`, and `NoResults`; reads `?q=` URL param to pre-fill query from header navigation
+  - `src/app/(user)/search/layout.tsx` — search route layout with `robots: noindex, nofollow`
+  - `src/components/global/HeaderSearch.tsx` — Algolia-powered typeahead in the header: live dropdown (top 6 hits) as you type, submit navigates to `/search?q=[query]`
+  - `.env.example` updated with Algolia env vars
 
-- **Tag Pages (#8)**
-  - `tags` string-array field added to the `article` Sanity schema (max 10, tag-input layout); values become browsable `/tag/[slug]` pages
+- **Tag Pages (#8, PR #40)**
+
+  **Sanity schema**
+  - `tags` string-array field on the `article` document type (max 10, tag-input layout in Studio); values are fine-grained topics, people, places, or events using lowercase-hyphen convention
+
+  **Utilities (`src/lib/tagUtils.ts`)**
+  - `tagToSlug(tag)` — normalises raw tag string to a URL-safe slug
+  - `slugToTagLabel(slug)` — converts slug back to title-case display label
+  - `tagPageUrl(tag)` — convenience helper returning the `/tag/[slug]` path
+
+  **GROQ queries (`src/lib/sanity/lib/queries.ts`)**
+  - `queryAllTags` — returns a deduplicated flat array of every tag in use across published articles
+  - `queryArticlesByTag` — fetches articles containing a given raw tag string, ordered by `publishedAt desc`
+  - `queryAllArticles` updated to include `tags` in its projection
+
+  **Tag page route (`src/app/(user)/tag/[slug]/page.tsx`)**
+  - `generateStaticParams`, `generateMetadata` with canonical URL, CollectionPage JSON-LD, breadcrumb nav, article grid, empty state
+
+  **Article detail page (`src/app/(user)/articles/[slug]/page.tsx`)**
+  - Tags and categories displayed in article hero header — categories as solid red pills, tags as ghost `#pill` links
+  - Article breadcrumb fixed to use `formatTitleForURL(category.title)` — was 404ing with `slug.current`
+  - BreadcrumbList JSON-LD updated with correct category URL and 3-item trail
+
+  **Sitemap** — all `/tag/[slug]` URLs added (`changeFrequency: daily`, `priority: 0.5`)
+
+- **Instagram embed hydration fix**
+  - Extracted into `InstagramEmbedInner.tsx` + `dynamic(..., { ssr: false })` wrapper — eliminates React hydration mismatch from `embed.js` DOM mutation
 
 ---
 

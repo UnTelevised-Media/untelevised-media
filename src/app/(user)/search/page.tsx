@@ -1,6 +1,8 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import type { Hit } from 'instantsearch.js';
@@ -26,6 +28,7 @@ interface ArticleHitFields {
   description: string;
   author: string;
   categories: string[];
+  tags: string[];
   publishedAt: number;
   imageUrl: string;
 }
@@ -108,10 +111,18 @@ function RefinementSection({ attribute, label }: { attribute: string; label: str
   );
 }
 
-export default function SearchPage() {
+function SearchPageInner() {
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get('q') ?? '';
   const [filtersOpen, setFiltersOpen] = useState(false);
+
   return (
-    <InstantSearch searchClient={searchClient} indexName="untele_articles" future={{ preserveSharedStateOnUnmount: true }}>
+    <InstantSearch
+      searchClient={searchClient}
+      indexName="untele_articles"
+      initialUiState={{ untele_articles: { query: initialQuery } }}
+      future={{ preserveSharedStateOnUnmount: true }}
+    >
       <div className="bg-untele mb-6 flex items-center gap-3 px-4 py-3">
         <Search className="h-4 w-4 text-white" aria-hidden="true" />
         <h1 className="text-xs font-black uppercase tracking-widest text-white">Search</h1>
@@ -148,6 +159,7 @@ export default function SearchPage() {
             </div>
             <div className="space-y-6">
               <RefinementSection attribute="categories" label="Category" />
+              <RefinementSection attribute="tags" label="Tag" />
               <RefinementSection attribute="author" label="Author" />
             </div>
           </div>
@@ -175,5 +187,13 @@ export default function SearchPage() {
         </main>
       </div>
     </InstantSearch>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense>
+      <SearchPageInner />
+    </Suspense>
   );
 }

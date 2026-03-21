@@ -16,6 +16,7 @@ import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import resolveHref from '@/util/resolveHref';
 import { tagToSlug } from '@/lib/tagUtils';
+import formatTitleForURL from '@/util/formatTitleForURL';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/live';
@@ -67,6 +68,37 @@ export default async function Article({ params }: Props) {
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
       <NewsArticleStructuredData article={article} slug={slug} />
+
+      {/* BreadcrumbList JSON-LD */}
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.untelevised.media',
+              },
+              ...(article.categories?.slice(0, 1).map((cat) => ({
+                '@type': 'ListItem',
+                position: 2,
+                name: cat.title,
+                item: `https://www.untelevised.media/category/${formatTitleForURL(cat.title)}`,
+              })) ?? []),
+              {
+                '@type': 'ListItem',
+                position: article.categories?.length ? 3 : 2,
+                name: article.title,
+                item: `https://www.untelevised.media/articles/${slug}`,
+              },
+            ],
+          }),
+        }}
+      />
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}
@@ -163,19 +195,29 @@ export default async function Article({ params }: Props) {
                       </span>
                     )}
                   </div>
-                  {/* Categories */}
-                  {article.categories && article.categories.length > 0 && (
-                    <div className='flex flex-wrap justify-end gap-2'>
-                      {article.categories.map((category) => (
-                        <span
+                  {/* Categories + Tags */}
+                  <div className='flex flex-wrap justify-end gap-2'>
+                    {article.categories && article.categories.length > 0 &&
+                      article.categories.map((category) => (
+                        <Link
                           key={category._id}
-                          className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm'
+                          href={`/category/${formatTitleForURL(category.title)}`}
+                          className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-untele'
                         >
                           {category.title}
-                        </span>
+                        </Link>
                       ))}
-                    </div>
-                  )}
+                    {article.tags && article.tags.length > 0 &&
+                      article.tags.map((tag) => (
+                        <Link
+                          key={tag}
+                          href={`/tag/${tagToSlug(tag)}`}
+                          className='inline-flex items-center rounded-full border border-white/40 bg-white/10 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur-sm transition-colors hover:border-white/70 hover:text-white'
+                        >
+                          #{tag}
+                        </Link>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -185,6 +227,40 @@ export default async function Article({ params }: Props) {
 
       {/* Main Content */}
       <main className='mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8'>
+        {/* Breadcrumb */}
+        <nav
+          aria-label='Breadcrumb'
+          className='mb-8 text-xs font-medium uppercase tracking-widest text-slate-500 dark:text-slate-400'
+        >
+          <ol className='flex flex-wrap items-center gap-2'>
+            <li>
+              <Link href='/' className='transition-colors hover:text-untele'>
+                Home
+              </Link>
+            </li>
+            {article.categories && article.categories.length > 0 && (
+              <>
+                <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
+                <li>
+                  <Link
+                    href={`/category/${formatTitleForURL(article.categories[0].title)}`}
+                    className='transition-colors hover:text-untele'
+                  >
+                    {article.categories[0].title}
+                  </Link>
+                </li>
+              </>
+            )}
+            <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
+            <li
+              className='max-w-xs truncate text-slate-900 dark:text-white'
+              aria-current='page'
+            >
+              {article.title}
+            </li>
+          </ol>
+        </nav>
+
         {/* Social Share + Bookmark */}
         <div className='mb-8 flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:justify-between'>
           <SocialShare url={`https://untelevised.media/articles/${slug}`} title={article.title} />
