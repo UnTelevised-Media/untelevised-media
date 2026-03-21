@@ -67,6 +67,37 @@ export default async function Article({ params }: Props) {
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
       <NewsArticleStructuredData article={article} slug={slug} />
+
+      {/* BreadcrumbList JSON-LD */}
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.untelevised.media',
+              },
+              ...(article.categories?.slice(0, 1).map((cat) => ({
+                '@type': 'ListItem',
+                position: 2,
+                name: cat.title,
+                item: `https://www.untelevised.media/category/${cat.slug?.current}`,
+              })) ?? []),
+              {
+                '@type': 'ListItem',
+                position: (article.categories?.length ? 3 : 2),
+                name: article.title,
+                item: `https://www.untelevised.media/articles/${slug}`,
+              },
+            ],
+          }),
+        }}
+      />
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}
@@ -185,6 +216,40 @@ export default async function Article({ params }: Props) {
 
       {/* Main Content */}
       <main className='mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8'>
+        {/* Breadcrumb */}
+        <nav
+          aria-label='Breadcrumb'
+          className='mb-8 text-xs font-medium uppercase tracking-widest text-slate-500 dark:text-slate-400'
+        >
+          <ol className='flex flex-wrap items-center gap-2'>
+            <li>
+              <Link href='/' className='transition-colors hover:text-untele'>
+                Home
+              </Link>
+            </li>
+            {article.categories && article.categories.length > 0 && (
+              <>
+                <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
+                <li>
+                  <Link
+                    href={`/category/${article.categories[0].slug?.current}`}
+                    className='transition-colors hover:text-untele'
+                  >
+                    {article.categories[0].title}
+                  </Link>
+                </li>
+              </>
+            )}
+            <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
+            <li
+              className='max-w-xs truncate text-slate-900 dark:text-white'
+              aria-current='page'
+            >
+              {article.title}
+            </li>
+          </ol>
+        </nav>
+
         {/* Social Share + Bookmark */}
         <div className='mb-8 flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:justify-between'>
           <SocialShare url={`https://untelevised.media/articles/${slug}`} title={article.title} />
