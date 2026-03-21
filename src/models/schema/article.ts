@@ -181,6 +181,15 @@ export default defineType({
       validation: (Rule) => Rule.max(6),
       description: 'Up to 6 related articles displayed at end of article',
     }),
+    // Comments
+    defineField({
+      name: 'allowComments',
+      title: 'Allow Comments',
+      type: 'boolean',
+      description:
+        'Enable the Coral comment section for this article. Disable for sensitive breaking news or articles where discussion is inappropriate.',
+      initialValue: true,
+    }),
     // SEO overrides
     defineField({
       name: 'seo',

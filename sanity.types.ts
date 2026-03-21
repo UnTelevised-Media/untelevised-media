@@ -896,6 +896,7 @@ export type Article = {
       _key: string;
     } & ArticleReference
   >;
+  allowComments?: boolean;
   seo?: SeoObject;
   tags?: Array<string>;
 };

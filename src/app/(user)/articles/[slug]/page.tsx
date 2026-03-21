@@ -28,8 +28,7 @@ import { getReadingTime } from '@/lib/readingTime';
 import { CorrectionNotice } from '@/components/post/CorrectionNotice';
 import { SourcesPanel } from '@/components/post/SourcesPanel';
 import { BookmarkButton } from '@/components/bookmarks/BookmarkButton';
-
-// import Comments from '@/c/post/Comments';
+import CommentsSection from '@/components/post/CommentsSection';
 
 /**
  * Guard against Sanity fields that may be stored as a block object instead of a plain
@@ -431,8 +430,14 @@ export default async function Article({ params }: Props) {
           </section>
         )}
 
-        {/* Comments Section Placeholder */}
-        <div className='mt-12'>{/* <Comments article={article}/> */}</div>
+        {/* Comments Section */}
+        <div className='mt-12'>
+          <CommentsSection
+            articleId={article._id}
+            articleUrl={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/articles/${article.slug?.current ?? slug}`}
+            allowComments={article.allowComments}
+          />
+        </div>
       </main>
     </div>
   );
