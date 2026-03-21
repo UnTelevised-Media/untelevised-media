@@ -6,10 +6,13 @@ import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/o
 import { Bookmark } from 'lucide-react';
 import { Show, UserButton } from '@clerk/nextjs';
 
+import dynamic from 'next/dynamic';
 import Socials from './Socials';
 import ThemeToggle from './ThemeToggle';
-import HeaderSearch from './HeaderSearch';
 import { Flame, Music, Radio } from 'lucide-react';
+
+// algoliasearch uses browser-only APIs — must not run during SSR
+const HeaderSearch = dynamic(() => import('./HeaderSearch'), { ssr: false });
 
 const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

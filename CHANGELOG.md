@@ -19,10 +19,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `bodyText` capped at 5,000 chars in both indexing script and webhook to stay within Algolia's 10 KB record limit
   - `tags` field added to all Algolia records and a Tag facet filter added to the search UI
   - `algolia:index` npm script added to `package.json`
-  - Rebuilt `src/app/(user)/search/page.tsx` — full Algolia `InstantSearch` UI with `SearchBox`, `Hits` with custom `ArticleHitCard`, `RefinementList` facets (category, tag, author), `Pagination`, and `NoResults`; reads `?q=` URL param to pre-fill query from header navigation
+  - `src/app/(user)/search/page.tsx` — server component; reads `?q=` from `searchParams` and passes as `initialQuery` prop; delegates all Algolia rendering to `SearchClientLoader`
+  - `src/components/search/SearchClient.tsx` — full Algolia `InstantSearch` UI: `SearchBox`, `Hits` with custom `ArticleHitCard` (thumbnail, highlighted title/description, author, category, date), `RefinementList` facets (category, tag, author), `Pagination`, `NoResults`; `onStateChange` syncs query back to `?q=` URL so refresh preserves search state
+  - `src/components/search/SearchClientLoader.tsx` — client-only boundary; lazy-imports `SearchClient` via `useEffect` so Algolia never runs during SSR; shows animated skeleton while loading
   - `src/app/(user)/search/layout.tsx` — search route layout with `robots: noindex, nofollow`
-  - `src/components/global/HeaderSearch.tsx` — Algolia-powered typeahead in the header: live dropdown (top 6 hits) as you type, submit navigates to `/search?q=[query]`
+  - `src/components/global/HeaderSearch.tsx` — Algolia-powered typeahead in the header: live dropdown (top 6 hits) as you type; "Browse all articles →" link; submit navigates to `/search?q=[query]`; loaded via `dynamic({ ssr: false })` in `Header.tsx` to prevent SSR crash
+  - `src/components/global/Footer.tsx` — "Search Articles" link added to Media column
+  - `src/components/global/Nav.tsx` — sub-header `top` offset corrected (`top-[56px]` / `md:top-[74px]`) to align with actual header height
   - `.env.example` updated with Algolia env vars
+  - All search result and dropdown links converted to Next.js `<Link>` for correct App Router client-side navigation
 
 - **Tag Pages (#8, PR #40)**
 

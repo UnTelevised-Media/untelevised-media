@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import { InstantSearch, useSearchBox, useHits } from 'react-instantsearch';
@@ -71,11 +72,22 @@ function SearchInner({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
+      {/* Browse search page link — always visible when input is open */}
+      <div className="mt-2 flex justify-end">
+        <Link
+          href={query.trim() ? `/search?q=${encodeURIComponent(query.trim())}` : '/search'}
+          onClick={onClose}
+          className="text-xs font-bold uppercase tracking-widest text-untele hover:underline"
+        >
+          Browse all articles →
+        </Link>
+      </div>
+
       {/* Live results dropdown */}
       {showDropdown && (
         <div className="absolute left-0 right-0 top-full z-[9999] mt-1 border border-slate-400 bg-white shadow-2xl dark:border-slate-600 dark:bg-slate-900">
           {hits.slice(0, 6).map((hit: Hit<HitFields>) => (
-            <a
+            <Link
               key={hit.objectID}
               href={`/articles/${hit.objectID}`}
               onClick={onClose}
@@ -92,16 +104,16 @@ function SearchInner({ onClose }: { onClose: () => void }) {
                   </span>
                 )}
               </div>
-            </a>
+            </Link>
           ))}
-          <a
+          <Link
             href={`/search?q=${encodeURIComponent(query)}`}
             onClick={onClose}
             className="flex items-center gap-2 bg-slate-50 px-4 py-3 text-xs font-black uppercase tracking-widest text-untele hover:bg-slate-100 dark:bg-slate-800/50 dark:hover:bg-slate-800"
           >
             <MagnifyingGlassIcon className="h-3.5 w-3.5" />
             See all results for &ldquo;{query}&rdquo;
-          </a>
+          </Link>
         </div>
       )}
     </form>
