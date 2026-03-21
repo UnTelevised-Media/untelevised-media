@@ -23,6 +23,7 @@
 | #24 | Source Transparency Panel | [#34](https://github.com/UnTelevised-Media/untelevised-media-new/pull/34) |
 | #25 | Fact-Check Content Type & ClaimReview JSON-LD | [#38](https://github.com/UnTelevised-Media/untelevised-media-new/pull/38) |
 | #26 | Editorial Standards & About The Newsroom | [#35](https://github.com/UnTelevised-Media/untelevised-media-new/pull/35) |
+| #8  | Tag Pages | [#40](https://github.com/UnTelevised-Media/untelevised-media-new/pull/40) |
 
 ---
 
@@ -31,7 +32,7 @@
 | Issue | Title | Priority | Effort |
 |-------|-------|----------|--------|
 | #7  | Analytics Audit — 11 issues (4 critical) | **HIGH** (bug) | S |
-| #8  | Tag Pages | Medium | M |
+| ~~#8~~  | ~~Tag Pages~~ | ~~Medium~~ | ~~Done~~ |
 | #10 | PWA & Push Notifications | Medium | XL |
 | #11 | Live Event Auto-Refresh | Medium | M |
 | #13 | Membership / Supporter Tiers (Stripe) | Medium | XL |
