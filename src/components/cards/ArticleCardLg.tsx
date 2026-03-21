@@ -18,7 +18,7 @@ const ArticleCardLg = ({ post }: Props) => {
 
   return (
     <article
-      className='group relative flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:border-untele hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-untele'
+      className='group relative flex flex-col overflow-hidden border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:border-untele hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-untele'
       aria-labelledby={`article-title-${post._id}`}
     >
       {/* Image */}
