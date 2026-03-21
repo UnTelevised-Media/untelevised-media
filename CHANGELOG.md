@@ -8,6 +8,49 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- **Tag Pages (#8, PR #N)**
+
+  **Sanity schema**
+  - `tags` string-array field on the `article` document type (max 10, tag-input layout in Studio); values are fine-grained topics, people, places, or events using lowercase-hyphen convention
+
+  **Utilities (`src/lib/tagUtils.ts`)**
+  - `tagToSlug(tag)` — normalises raw tag string to a URL-safe slug
+  - `slugToTagLabel(slug)` — converts slug back to title-case display label
+  - `tagPageUrl(tag)` — convenience helper returning the `/tag/[slug]` path
+
+  **GROQ queries (`src/lib/sanity/lib/queries.ts`)**
+  - `queryAllTags` — returns a deduplicated flat array of every tag in use across published articles
+  - `queryArticlesByTag` — fetches articles containing a given raw tag string, ordered by `publishedAt desc`
+  - `queryAllArticles` updated to include `tags` in its projection
+
+  **Tag page route (`src/app/(user)/tag/[slug]/page.tsx`)**
+  - `generateStaticParams` fetches all tags via `sanityClient` and maps to `{ slug: tagToSlug(tag) }` params
+  - `generateMetadata` returns a canonical URL at `https://www.untelevised.media/tag/[slug]`
+  - CollectionPage JSON-LD structured data
+  - Breadcrumb nav: Home > Tags > [Label]
+  - `bg-untele` header bar with "TAG" pill, article count, and tag description line
+  - Article grid using `ArticleCardLg` — consistent with category pages
+  - Empty state rendered when no articles match
+
+  **Article detail page (`src/app/(user)/articles/[slug]/page.tsx`)**
+  - Tag badges rendered below Sources panel; each links to the corresponding `/tag/[slug]` page
+  - Section labelled "Filed Under" using brand label typography
+  - Section hidden when `article.tags` is empty or undefined
+  - Tags and categories now displayed together in the article hero header with distinct visual styles — categories as solid `bg-untele` red pills (linked to `/category/[slug]`), tags as ghost outline pills with `#` prefix (linked to `/tag/[slug]`)
+  - Article breadcrumb fixed to use `formatTitleForURL(category.title)` for category href — was using `slug.current` which caused 404s; also now links correctly to `/category/[slug]`
+  - BreadcrumbList JSON-LD updated with correct category URL and 3-item trail (Home → Category → Article)
+
+  **Sitemap (`src/app/(user)/sitemap.ts`)**
+  - All tag pages added with `changeFrequency: 'daily'` and `priority: 0.5`
+
+  **Types (`types.d.ts`)**
+  - `tags?: string[]` added to the global `Article` interface
+
+- **Instagram embed hydration fix**
+  - Extracted Instagram blockquote markup into `InstagramEmbedInner.tsx` (client component, never SSR'd)
+  - `InstagramEmbed.tsx` wraps it via `dynamic(..., { ssr: false })` — eliminates React hydration mismatch caused by Instagram's `embed.js` rewriting `<blockquote>` → `<iframe>` before hydration completes
+
 ---
 
 ## [2.3.0] — 2026-03-20

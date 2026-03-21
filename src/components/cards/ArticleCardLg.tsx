@@ -1,72 +1,101 @@
+// src/components/cards/ArticleCardLg.tsx
+// Single-article card used in category and tag grid pages.
+// Wrapped externally by ClientSideRoute (Link) — no internal Link element.
 import Image from 'next/image';
-import urlForImage from '@/u/urlForImage';
-import { ArrowUpRightIcon, ShareIcon } from '@heroicons/react/24/solid';
-import { AlertTriangle, XCircle } from 'lucide-react';
+import { ArrowUpRight, AlertTriangle, XCircle } from 'lucide-react';
+
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
+import urlForImage from '@/util/urlForImage';
+import { getReadingTime } from '@/lib/readingTime';
 
 type Props = {
   post: Article;
 };
 
 const ArticleCardLg = ({ post }: Props) => {
+  const imageUrl = urlForImage(post.mainImage as any)?.url();
+
   return (
-    <div className='group flex cursor-pointer flex-col rounded-lg border border-slate-400 pb-4 shadow-lg drop-shadow-sm'>
-      <div className='relative h-80 w-full drop-shadow-xl transition-transform duration-200 ease-out group-hover:scale-105'>
-        <Image
-          className='rounded-md object-cover object-left lg:object-center'
-          src={
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            urlForImage(post.mainImage as any)?.url() ?? ''
-          }
-          fill
-          alt={post.mainImage?.alt ?? 'No Alt Tag Set'}
-        />
-        <div className='absolute bottom-0 flex w-full justify-between rounded bg-slate-900 bg-opacity-20 px-5 py-2 text-slate-200 drop-shadow-lg backdrop-blur-lg'>
-          <div>
-            {post.correction?.type === 'retraction' ? (
-              <span className='mb-1 inline-flex items-center gap-1 bg-untele px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
-                <XCircle className='h-2.5 w-2.5' aria-hidden='true' />
-                Retracted
-              </span>
-            ) : post.correction?.summary ? (
-              <span className='mb-1 inline-flex items-center gap-1 bg-amber-400 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-black'>
-                <AlertTriangle className='h-2.5 w-2.5' aria-hidden='true' />
-                Corrected
-              </span>
-            ) : null}
-            <p className={`text-sm font-bold lg:text-base${post.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}>{post.title}</p>
-          </div>
-          <div className='flex flex-col items-center gap-y-2 md:flex-row md:gap-x-2'>
-            {
-              post.categories && post.categories.length > 0 // Check if categories exist and are not empty
-                ? post.categories.map((category) => (
-                    <div
-                      key={category._id}
-                      className='hidden rounded-xl border border-slate-900 bg-untele/70 px-5 py-2 text-center text-xs font-light text-slate-900 md:flex lg:text-sm'
-                    >
-                      <p>{category.title}</p>
-                    </div>
-                  ))
-                : null // Display nothing if no category for article
-            }
-          </div>
-        </div>
+    <article
+      className='group relative flex flex-col overflow-hidden border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:border-untele hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-untele'
+      aria-labelledby={`article-title-${post._id}`}
+    >
+      {/* Image */}
+      <div className='relative aspect-video overflow-hidden'>
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={post.mainImage?.alt ?? post.title}
+            fill
+            className='object-cover transition-transform duration-300 group-hover:scale-105'
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+          />
+        ) : (
+          <div className='h-full w-full bg-slate-200 dark:bg-slate-800' />
+        )}
+        <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent' />
       </div>
-      <div className='mt-0 flex-1 bg-slate-400'>
-        <div className='flex space-x-4 p-1'>
-          <h4 className='text-sm font-semibold md:text-base'>By: {post.author.name}</h4>
-          <h4 className='text-sm font-light md:text-base'>{formatDate(getArticleDate(post))}</h4>
-        </div>
-        <p className='line-clamp-3 px-4 pb-1 pt-2'>{post.description}</p>
-      </div>
-      <div className='flex justify-between drop-shadow-sm'>
-        <p className='ml-4 mt-3 flex items-center font-bold group-hover:underline'>
-          Read Article <ArrowUpRightIcon className='group ml-2 h-4 w-4' />
+
+      {/* Content */}
+      <div className='flex flex-1 flex-col p-6'>
+        {/* Category pills */}
+        {post.categories && post.categories.length > 0 && (
+          <div className='mb-4 flex flex-wrap gap-2'>
+            {post.categories.map((category) => (
+              <span
+                key={category._id ?? category.title}
+                className='inline-block w-fit rounded-full border border-untele/30 bg-untele/10 px-3 py-1 text-xs font-medium text-untele'
+              >
+                {category.title}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Correction badges */}
+        {post.correction?.type === 'retraction' ? (
+          <span className='mb-2 inline-flex items-center gap-1 bg-untele px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
+            <XCircle className='h-2.5 w-2.5' aria-hidden='true' />
+            Retracted
+          </span>
+        ) : post.correction?.summary ? (
+          <span className='mb-2 inline-flex items-center gap-1 bg-amber-400 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-black'>
+            <AlertTriangle className='h-2.5 w-2.5' aria-hidden='true' />
+            Corrected
+          </span>
+        ) : null}
+
+        {/* Title */}
+        <h2
+          id={`article-title-${post._id}`}
+          className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele dark:text-white${post.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
+        >
+          {post.title}
+        </h2>
+
+        {/* Description */}
+        <p className='mb-4 line-clamp-4 flex-grow text-sm text-slate-600 dark:text-slate-400'>
+          {post.description}
         </p>
-        <ShareIcon className='mr-4 mt-4 h-6 w-6 transition-transform duration-200 ease-out hover:scale-110 hover:text-untele' />
+
+        {/* Meta row */}
+        <div className='mt-auto flex items-center justify-between'>
+          <span className='text-sm text-slate-500 dark:text-slate-400'>{post.author?.name}</span>
+          <div className='flex items-center gap-2'>
+            <span className='text-sm text-slate-500 dark:text-slate-400'>
+              {formatDate(getArticleDate(post))}
+            </span>
+            {post.body && (
+              <span className='text-xs uppercase tracking-widest text-slate-400 dark:text-slate-500'>
+                · {getReadingTime(post.body)}
+              </span>
+            )}
+            <ArrowUpRight className='h-4 w-4 text-untele transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1' />
+          </div>
+        </div>
       </div>
-    </div>
+    </article>
   );
 };
 
