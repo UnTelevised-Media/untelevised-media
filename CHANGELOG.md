@@ -9,8 +9,40 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
-- **Tag Pages (#8)**
-  - `tags` string-array field added to the `article` Sanity schema (max 10, tag-input layout); values become browsable `/tag/[slug]` pages
+- **Tag Pages (#8, PR #N)**
+
+  **Sanity schema**
+  - `tags` string-array field on the `article` document type (max 10, tag-input layout in Studio); values are fine-grained topics, people, places, or events using lowercase-hyphen convention
+
+  **Utilities (`src/lib/tagUtils.ts`)**
+  - `tagToSlug(tag)` — normalises raw tag string to a URL-safe slug
+  - `slugToTagLabel(slug)` — converts slug back to title-case display label
+  - `tagPageUrl(tag)` — convenience helper returning the `/tag/[slug]` path
+
+  **GROQ queries (`src/lib/sanity/lib/queries.ts`)**
+  - `queryAllTags` — returns a deduplicated flat array of every tag in use across published articles
+  - `queryArticlesByTag` — fetches articles containing a given raw tag string, ordered by `publishedAt desc`
+  - `queryAllArticles` updated to include `tags` in its projection
+
+  **Tag page route (`src/app/(user)/tag/[slug]/page.tsx`)**
+  - `generateStaticParams` fetches all tags via `sanityClient` and maps to `{ slug: tagToSlug(tag) }` params
+  - `generateMetadata` returns a canonical URL at `https://www.untelevised.media/tag/[slug]`
+  - CollectionPage JSON-LD structured data
+  - Breadcrumb nav: Home > Tags > [Label]
+  - `bg-untele` header bar with "TAG" pill, article count, and tag description line
+  - Article grid using `ArticleCardLg` — consistent with category pages
+  - Empty state rendered when no articles match
+
+  **Article detail page (`src/app/(user)/articles/[slug]/page.tsx`)**
+  - Tag badges rendered below Sources panel; each links to the corresponding `/tag/[slug]` page
+  - Section labelled "Filed Under" using brand label typography
+  - Section hidden when `article.tags` is empty or undefined
+
+  **Sitemap (`src/app/(user)/sitemap.ts`)**
+  - All tag pages added with `changeFrequency: 'daily'` and `priority: 0.5`
+
+  **Types (`types.d.ts`)**
+  - `tags?: string[]` added to the global `Article` interface
 
 ---
 
