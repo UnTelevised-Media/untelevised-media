@@ -14,6 +14,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/lib/algolia/client.ts` — server-only Algolia admin client (never bundled to browser)
   - `src/lib/algolia/types.ts` — `AlgoliaArticleRecord` and `AlgoliaEventRecord` type definitions
   - `src/app/api/algolia-sync/route.ts` — Sanity webhook POST handler with HMAC-SHA256 signature validation; syncs articles and live events to Algolia on create/update/delete
+  - `scripts/algolia-initial-index.ts` — one-time backfill script; run via `pnpm algolia:index` to push all existing articles to Algolia
+  - `algolia:index` npm script added to `package.json`
 
 - **Tag Pages (#8)**
   - `tags` string-array field added to the `article` Sanity schema (max 10, tag-input layout); values become browsable `/tag/[slug]` pages

@@ -21,7 +21,8 @@
     "clean": "rm -rf .next out dist coverage",
     "rm -rf nm": "rm -rf node_modules",
     "deploy": "npx vercel",
-    "deploy:prod": "npx vercel --prod"
+    "deploy:prod": "npx vercel --prod",
+    "algolia:index": "npx tsx scripts/algolia-initial-index.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.0.5",
