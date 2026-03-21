@@ -3,6 +3,8 @@
 import getAllURLs from '@/util/getAllUrls';
 import sanityClient from '@/lib/sanity/lib/client';
 import { groq } from 'next-sanity';
+import { queryAllTags } from '@/lib/sanity/lib/queries';
+import { tagToSlug } from '@/lib/tagUtils';
 
 const queryFactCheckSlugs = groq`
   *[_type == 'factCheck'] {
@@ -22,10 +24,10 @@ export default async function sitemap(): Promise<
   }[]
 > {
   const allNews = await getAllURLs();
-  const factCheckDocs =
-    await sanityClient.fetch<{ slug: { current: string }; _updatedAt: string }[]>(
-      queryFactCheckSlugs
-    );
+  const [factCheckDocs, allTags] = await Promise.all([
+    sanityClient.fetch<{ slug: { current: string }; _updatedAt: string }[]>(queryFactCheckSlugs),
+    sanityClient.fetch<string[]>(queryAllTags),
+  ]);
 
   const now = new Date();
   const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
@@ -123,6 +125,13 @@ export default async function sitemap(): Promise<
     priority: 0.7,
   }));
 
+  const tagURLs = (allTags ?? []).map((tag) => ({
+    url: `https://www.untelevised.media/tag/${tagToSlug(tag)}`,
+    lastModified: now,
+    changeFrequency: 'daily' as const,
+    priority: 0.5,
+  }));
+
   return [
     // Homepage — highest priority
     {
@@ -142,6 +151,7 @@ export default async function sitemap(): Promise<
     ...albumURLs,
     ...timelineURLs,
     ...factCheckURLs,
+    ...tagURLs,
     // Static section pages — music
     {
       url: 'https://www.untelevised.media/lyrics/',
