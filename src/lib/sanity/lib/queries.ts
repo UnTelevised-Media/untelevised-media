@@ -727,7 +727,7 @@ export const queryFactCheckBySlug = groq`
 // ── Tag Queries ──────────────────────────────────────────────────────────────
 
 export const queryAllTags = groq`
-  array::unique(*[_type == "article" && defined(tags) && array::length(tags) > 0].tags[])
+  array::unique(*[_type == "article" && defined(tags) && count(tags) > 0].tags[])
 `;
 
 export const queryArticlesByTag = groq`
