@@ -10,6 +10,8 @@ export interface AlgoliaArticleRecord {
   publishedAt: number; // Unix timestamp (seconds)
   imageUrl: string;
   type: 'article';
+  // index signature required for Algolia v5 saveObjects / Record<string, unknown>
+  [key: string]: unknown;
 }
 
 export interface AlgoliaEventRecord {
@@ -18,4 +20,5 @@ export interface AlgoliaEventRecord {
   description: string;
   eventDate: number;
   type: 'live_event';
+  [key: string]: unknown;
 }

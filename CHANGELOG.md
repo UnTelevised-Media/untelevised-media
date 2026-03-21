@@ -10,15 +10,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - **Algolia Full-Text Search (#21)**
-  - Installed `algoliasearch` v5, `react-instantsearch` v7, and `@portabletext/toolkit` for search infrastructure
-  - `src/lib/algolia/client.ts` — server-only Algolia admin client (never bundled to browser)
+  - Installed `algoliasearch` v5, `react-instantsearch` v7, `instantsearch.js`, and `@portabletext/toolkit` for search infrastructure
+  - `src/lib/algolia/client.ts` — server-only Algolia admin client with lazy initialisation (never bundled to browser)
   - `src/lib/algolia/types.ts` — `AlgoliaArticleRecord` and `AlgoliaEventRecord` type definitions
   - `src/app/api/algolia-sync/route.ts` — Sanity webhook POST handler with HMAC-SHA256 signature validation; syncs articles and live events to Algolia on create/update/delete
   - `scripts/algolia-initial-index.ts` — one-time backfill script; run via `pnpm algolia:index` to push all existing articles to Algolia
   - `algolia:index` npm script added to `package.json`
+  - Rebuilt `src/app/(user)/search/page.tsx` — full Algolia `InstantSearch` UI with `SearchBox`, `Hits` with custom `ArticleHitCard` (thumbnail, `Highlight`-annotated title/description, author, category, date), `RefinementList` facets (category, author), `Pagination`, and `NoResults` component; mobile-responsive with collapsible filter sidebar; branded with `bg-untele` header, `hover:border-untele` card borders, and `bg-untele/20` match highlights
+  - `src/app/(user)/search/layout.tsx` — search route layout with `robots: noindex, nofollow` and `dynamic = 'force-dynamic'` to prevent prerender errors when Algolia env vars are absent
   - `.env.example` updated with Algolia env vars: `ALGOLIA_APP_ID`, `ALGOLIA_ADMIN_API_KEY` (server-only), `NEXT_PUBLIC_ALGOLIA_APP_ID`, `NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY`, `SANITY_WEBHOOK_SECRET`
-  - `src/app/(user)/search/layout.tsx` — search route layout with `robots: noindex, nofollow` to prevent search engine indexing of the search UI
-  - Rebuilt `src/app/(user)/search/page.tsx` with Algolia `InstantSearch`, `SearchBox`, `Hits` with custom `ArticleHit` card, `RefinementList` facets (category, author), `Highlight` for match-highlighted titles and descriptions, `Pagination`, and a `NoResults` component; fully mobile-responsive with collapsible filter sidebar
+  - Note: requires Algolia account setup and 4 env vars before search is live; run `pnpm algolia:index` once to backfill existing content
 
 - **Tag Pages (#8)**
   - `tags` string-array field added to the `article` Sanity schema (max 10, tag-input layout); values become browsable `/tag/[slug]` pages

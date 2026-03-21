@@ -61,6 +61,7 @@
     "framer-motion": "^12.36.0",
     "google-map-react": "^2.2.5",
     "import-in-the-middle": "^3.0.0",
+    "instantsearch.js": "^4.92.0",
     "lucide-react": "^0.577.0",
     "next": "16.1.6",
     "next-google-adsense": "^1.2.0",
