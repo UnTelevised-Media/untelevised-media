@@ -123,6 +123,7 @@ export const queryAllArticles = groq`
     categories[]->,
     description,
     publishedAt,
+    tags,
     "correction": correction { type, summary },
   }
   | order(_createdAt desc)
@@ -720,5 +721,25 @@ export const queryFactCheckBySlug = groq`
     relatedArticles[]-> {
       _id, title, slug, mainImage, publishedAt, description
     }
+  }
+`;
+
+// ── Tag Queries ──────────────────────────────────────────────────────────────
+
+export const queryAllTags = groq`
+  array::unique(*[_type == "article" && defined(tags) && array::length(tags) > 0].tags[])
+`;
+
+export const queryArticlesByTag = groq`
+  *[_type == "article" && defined(tags) && $tag in tags[]] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    description,
+    publishedAt,
+    mainImage { asset->, alt },
+    "author": author->{ name, slug, image { asset-> } },
+    "categories": categories[]->{ title, slug },
+    tags
   }
 `;
