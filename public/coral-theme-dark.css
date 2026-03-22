@@ -1,14 +1,18 @@
 /*
  * UnTelevised Media — Coral comments theme (DARK)
- * Coral always receives theme="LIGHT" so this file has full control.
+ * Uses Coral's documented CSS variables + stable class names
+ * Ref: https://docs.coralproject.net/css
+ *
  * Site dark bg:    #020817
- * Site dark fg:    #f8fafc
+ * Site dark input: #0f172a
  * Site dark muted: #1e293b
+ * Site dark fg:    #f8fafc
  * Brand red:       #d70606
  */
 
-/* ─── Kill Coral's blue via CSS custom properties ────────────────────────── */
+/* ─── CSS custom properties — single source of truth for Coral theming ───── */
 :root {
+  /* Brand color — replaces all Coral blues */
   --palette-primary-100: #fad7d7;
   --palette-primary-200: #f07070;
   --palette-primary-300: #e53535;
@@ -18,162 +22,131 @@
   --palette-primary-700: #9a0404;
   --palette-primary-800: #7a0303;
   --palette-primary-900: #5a0202;
+
+  /* Backgrounds */
+  --palette-background-body:              #020817;
+  --palette-background-popover:           #0f172a;
+  --palette-background-tooltip:           #1e293b;
+  --palette-background-input:             #0f172a;
+  --palette-background-input-disabled:    #1e293b;
+
+  /* Text */
+  --palette-text-000:             #f8fafc;
+  --palette-text-100:             #94a3b8;
+  --palette-text-500:             #cbd5e1;
+  --palette-text-900:             #f8fafc;
+  --palette-text-placeholder:     #64748b;
+  --palette-text-input-disabled:  #64748b;
+
+  /* Dividers */
+  --palette-divider: rgba(255, 255, 255, 0.08);
 }
 
-/* ─── Nuclear reset: everything dark ────────────────────────────────────── */
-html,
-body,
-body * {
-  background-color: #020817 !important;
-  color: #f8fafc !important;
-  border-color: #1e293b !important;
-}
-
-/* ─── Restore body padding ───────────────────────────────────────────────── */
-body {
-  padding: 1rem !important;
-  box-sizing: border-box !important;
+/* ─── Body padding and base ──────────────────────────────────────────────── */
+body.coral {
+  background-color: #020817;
+  color: #f8fafc;
+  padding: 16px;
 }
 
 /* ─── Links → brand red ──────────────────────────────────────────────────── */
-a,
-a * {
+a {
   color: #d70606 !important;
-  background-color: transparent !important;
 }
 
-a:hover,
-a:hover * {
+a:hover {
   color: #b80505 !important;
 }
 
-/* ─── Active tab indicator ───────────────────────────────────────────────── */
-[class*='Tab'][class*='active'],
-[class*='Tab'][class*='Active'],
-[class*='Tab'][class*='isActive'],
-[class*='Tab'][aria-selected='true'],
-[class*='Tab'][class*='active'] *,
-[class*='Tab'][class*='Active'] * {
-  color: #d70606 !important;
-  border-bottom-color: #d70606 !important;
-  border-color: #d70606 !important;
+/* ─── Tab bar ────────────────────────────────────────────────────────────── */
+.coral-tab-bar {
+  background-color: #020817;
+  border-bottom-color: #1e293b;
 }
 
-/* ─── Contenteditable comment box ────────────────────────────────────────── */
-[contenteditable],
-[contenteditable='true'],
-[role='textbox'],
-[contenteditable] *,
-[contenteditable='true'] * {
-  background-color: #0f172a !important;
-  color: #f8fafc !important;
-  caret-color: #f8fafc !important;
+.coral-tab {
+  color: #94a3b8;
 }
 
-[contenteditable]:focus,
-[contenteditable='true']:focus {
-  border-color: #d70606 !important;
-  outline: none !important;
+/* ─── Rich text editor ───────────────────────────────────────────────────── */
+.coral-rte {
+  background-color: #0f172a;
+  border-color: #1e293b;
+  color: #f8fafc;
+  /* Ensure toolbar is never clipped */
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ─── Rich text toolbar ──────────────────────────────────────────────────── */
-[class*='Toolbar'],
+.coral-rte [contenteditable],
+.coral-rte [role='textbox'] {
+  background-color: #0f172a;
+  color: #f8fafc;
+  caret-color: #f8fafc;
+  flex: 1;
+  min-height: 80px;
+}
+
+/* Toolbar row inside the RTE */
+.coral-rte-toolbar,
 [class*='toolbar'],
-[class*='ToolBar'],
-[class*='Toolbar'] *,
-[class*='toolbar'] * {
-  background-color: #0f172a !important;
-  color: #f8fafc !important;
-  border-top-color: #1e293b !important;
-  overflow: visible !important;
+[class*='Toolbar'] {
+  background-color: #0f172a;
+  border-top: 1px solid #1e293b;
+  flex-shrink: 0;
+  overflow: visible;
 }
 
-/* Editor container — prevent toolbar from being clipped */
-[class*='Editor'],
-[class*='editor'],
-[class*='CommentEditor'],
-[class*='CommentForm'],
-[class*='commentEditor'],
-[class*='commentForm'] {
-  overflow: visible !important;
-  height: auto !important;
+/* ─── Comments ───────────────────────────────────────────────────────────── */
+.coral-comment {
+  background-color: #020817;
+  color: #f8fafc;
+  border-top-color: #1e293b;
 }
 
-/* ─── Empty / no comments banner ─────────────────────────────────────────── */
-[class*='Empty'],
-[class*='empty'],
+/* ─── Empty / no-comments callout ────────────────────────────────────────── */
+.coral-callout,
 [class*='NoComments'],
 [class*='noComments'],
-[class*='CallOut'],
-[class*='callOut'],
-[class*='Callout'],
-[class*='callout'],
-[class*='Empty'] *,
-[class*='Callout'] * {
+[class*='Empty'],
+[class*='empty'] {
   background-color: #0f172a !important;
   color: #94a3b8 !important;
+  border-color: #1e293b !important;
 }
 
-/* ─── Sort by dropdown ───────────────────────────────────────────────────── */
-select,
-select * {
-  background-color: #1e293b !important;
-  color: #f8fafc !important;
-  border-color: #334155 !important;
+/* ─── Sort by select ──────────────────────────────────────────────────────── */
+select {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border-color: #1e293b;
 }
 
 /* ─── MODERATE button ────────────────────────────────────────────────────── */
-[class*='moderateButton'],
-[class*='ModerateButton'],
-button[class*='moderate'] {
-  background-color: transparent !important;
-  border: 1px solid #d70606 !important;
-  color: #d70606 !important;
+.coral-button-outline {
+  border-color: #d70606;
+  color: #d70606;
+  background-color: transparent;
 }
 
-[class*='moderateButton']:hover,
-[class*='ModerateButton']:hover {
-  background-color: #d70606 !important;
-  color: #ffffff !important;
+.coral-button-outline:hover {
+  background-color: #d70606;
+  color: #ffffff;
 }
 
-/* ─── SUBMIT button (active/filled) ──────────────────────────────────────── */
-[class*='SubmitButton'],
-button[class*='submit']:not(:disabled),
-[class*='Button'][class*='filled'],
-[class*='Button'][class*='primary'] {
-  background-color: #d70606 !important;
-  border-color: #d70606 !important;
-  color: #ffffff !important;
-}
-
-/* ─── Comment count badge ────────────────────────────────────────────────── */
+/* ─── Count badge ─────────────────────────────────────────────────────────── */
+.coral-count,
 [class*='Count'],
-[class*='TabCount'],
 [class*='count'] {
   background-color: #d70606 !important;
   color: #ffffff !important;
 }
 
-/* ─── Muted / timestamp ───────────────────────────────────────────────────── */
-[class*='Timestamp'],
-[class*='timestamp'] {
-  color: #94a3b8 !important;
-  background-color: transparent !important;
-}
-
-/* ─── Transparent bg for inline/icon elements ─────────────────────────────── */
-svg,
-svg *,
-button,
-span,
-i,
-em,
-strong,
-b {
-  background-color: transparent !important;
-}
-
-svg *[fill]:not([fill='none']) {
-  fill: #f8fafc !important;
+/* ─── Popover / dropdown ──────────────────────────────────────────────────── */
+.coral-popover,
+.coral-dropdown {
+  background-color: #0f172a;
+  border-color: #1e293b;
+  color: #f8fafc;
 }

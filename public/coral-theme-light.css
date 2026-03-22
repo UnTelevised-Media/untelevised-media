@@ -1,13 +1,17 @@
 /*
  * UnTelevised Media — Coral comments theme (LIGHT)
- * Site light bg:  #ffffff
- * Site light fg:  #020817  (hsl 222.2 84% 4.9%)
- * Site border:    #e2e8f0  (hsl 214.3 31.8% 91.4%)
- * Brand red: #d70606
+ * Uses Coral's documented CSS variables + stable class names
+ * Ref: https://docs.coralproject.net/css
+ *
+ * Site light bg:     #ffffff
+ * Site light fg:     #020817
+ * Site light border: #e2e8f0
+ * Brand red:         #d70606
  */
 
-/* ─── Override Coral's CSS custom properties (kills the blue) ────────────── */
+/* ─── CSS custom properties — single source of truth for Coral theming ───── */
 :root {
+  /* Brand color — replaces all Coral blues */
   --palette-primary-100: #fad7d7;
   --palette-primary-200: #f07070;
   --palette-primary-300: #e53535;
@@ -17,21 +21,34 @@
   --palette-primary-700: #9a0404;
   --palette-primary-800: #7a0303;
   --palette-primary-900: #5a0202;
+
+  /* Backgrounds */
+  --palette-background-body:              #ffffff;
+  --palette-background-popover:           #ffffff;
+  --palette-background-tooltip:           #64748b;
+  --palette-background-input:             #ffffff;
+  --palette-background-input-disabled:    #f1f5f9;
+
+  /* Text */
+  --palette-text-000:             #ffffff;
+  --palette-text-100:             #64748b;
+  --palette-text-500:             #334155;
+  --palette-text-900:             #020817;
+  --palette-text-placeholder:     #94a3b8;
+  --palette-text-input-disabled:  #94a3b8;
+
+  /* Dividers */
+  --palette-divider: rgba(0, 0, 0, 0.1);
 }
 
-/* ─── Base / body ────────────────────────────────────────────────────────── */
-html,
-body {
-  background-color: #ffffff !important;
-  color: #020817 !important;
-  box-sizing: border-box !important;
+/* ─── Body ───────────────────────────────────────────────────────────────── */
+body.coral {
+  background-color: #ffffff;
+  color: #020817;
+  padding: 16px;
 }
 
-body {
-  padding: 1rem !important;
-}
-
-/* ─── Catch-all links → brand red ───────────────────────────────────────── */
+/* ─── Links → brand red ──────────────────────────────────────────────────── */
 a {
   color: #d70606 !important;
 }
@@ -40,108 +57,93 @@ a:hover {
   color: #b80505 !important;
 }
 
-/* ─── Tabs ───────────────────────────────────────────────────────────────── */
-[class*='Tab'] {
-  color: #64748b !important;
+/* ─── Tab bar ────────────────────────────────────────────────────────────── */
+.coral-tab-bar {
+  background-color: #ffffff;
+  border-bottom-color: #e2e8f0;
 }
 
-[class*='Tab'][class*='active'],
-[class*='Tab'][class*='Active'],
-[class*='Tab'][class*='isActive'],
-[class*='Tab'][aria-selected='true'] {
-  color: #d70606 !important;
-  border-bottom-color: #d70606 !important;
+.coral-tab {
+  color: #64748b;
 }
 
-/* ─── Comment text area (contenteditable) ────────────────────────────────── */
-[contenteditable],
-[contenteditable='true'],
-[role='textbox'] {
-  background-color: #ffffff !important;
-  color: #020817 !important;
-  caret-color: #020817 !important;
-  border-color: #e2e8f0 !important;
+/* ─── Rich text editor ───────────────────────────────────────────────────── */
+.coral-rte {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  color: #020817;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
 }
 
-[contenteditable]:focus,
-[contenteditable='true']:focus {
-  outline-color: #d70606 !important;
-  border-color: #d70606 !important;
+.coral-rte [contenteditable],
+.coral-rte [role='textbox'] {
+  background-color: #ffffff;
+  color: #020817;
+  caret-color: #020817;
+  flex: 1;
+  min-height: 80px;
 }
 
-/* ─── Rich text toolbar ──────────────────────────────────────────────────── */
-[class*='Toolbar'],
+.coral-rte-toolbar,
 [class*='toolbar'],
-[class*='RichText'],
-[class*='richText'] {
-  background-color: #f8fafc !important;
-  border-color: #e2e8f0 !important;
-  color: #020817 !important;
+[class*='Toolbar'] {
+  background-color: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  flex-shrink: 0;
+  overflow: visible;
 }
 
-[class*='Toolbar'] button,
-[class*='toolbar'] button,
-[class*='Toolbar'] svg,
-[class*='toolbar'] svg {
-  color: #020817 !important;
-  fill: #020817 !important;
+/* ─── Comments ───────────────────────────────────────────────────────────── */
+.coral-comment {
+  background-color: #ffffff;
+  color: #020817;
+  border-top-color: #e2e8f0;
 }
 
-/* ─── "No comments" / empty state banner ────────────────────────────────── */
-[class*='Empty'],
-[class*='empty'],
-[class*='noComments'],
+/* ─── Empty / no-comments callout ────────────────────────────────────────── */
+.coral-callout,
 [class*='NoComments'],
-[class*='CallOut'],
-[class*='callOut'],
-[class*='callout'],
-[class*='Callout'] {
+[class*='noComments'],
+[class*='Empty'],
+[class*='empty'] {
   background-color: #f8fafc !important;
   color: #64748b !important;
   border-color: #e2e8f0 !important;
 }
 
-/* ─── MODERATE outlined button ───────────────────────────────────────────── */
-[class*='moderateButton'],
-[class*='ModerateButton'],
-button[class*='moderate'] {
-  border-color: #d70606 !important;
-  color: #d70606 !important;
-  background-color: transparent !important;
-}
-
-[class*='moderateButton']:hover,
-[class*='ModerateButton']:hover {
-  background-color: #d70606 !important;
-  color: #ffffff !important;
-}
-
-/* ─── SUBMIT / filled primary buttons ────────────────────────────────────── */
-[class*='Button'][class*='filled'],
-[class*='Button'][class*='primary'],
-button[class*='submit']:not(:disabled) {
-  background-color: #d70606 !important;
-  border-color: #d70606 !important;
-  color: #ffffff !important;
-}
-
-/* ─── Sort by dropdown ───────────────────────────────────────────────────── */
+/* ─── Sort by select ──────────────────────────────────────────────────────── */
 select {
-  background-color: #ffffff !important;
-  color: #020817 !important;
-  border-color: #e2e8f0 !important;
+  background-color: #ffffff;
+  color: #020817;
+  border-color: #e2e8f0;
 }
 
-/* ─── Comment count badge ────────────────────────────────────────────────── */
+/* ─── MODERATE button ────────────────────────────────────────────────────── */
+.coral-button-outline {
+  border-color: #d70606;
+  color: #d70606;
+  background-color: transparent;
+}
+
+.coral-button-outline:hover {
+  background-color: #d70606;
+  color: #ffffff;
+}
+
+/* ─── Count badge ─────────────────────────────────────────────────────────── */
+.coral-count,
 [class*='Count'],
-[class*='TabCount'],
 [class*='count'] {
   background-color: #d70606 !important;
   color: #ffffff !important;
 }
 
-/* ─── Dividers ───────────────────────────────────────────────────────────── */
-[class*='Divider'],
-hr {
-  border-color: #e2e8f0 !important;
+/* ─── Popover / dropdown ──────────────────────────────────────────────────── */
+.coral-popover,
+.coral-dropdown {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  color: #020817;
 }
