@@ -69,30 +69,41 @@ a:hover {
 
 /* ─── Rich text editor ───────────────────────────────────────────────────── */
 .coral-rte {
-  background-color: #ffffff;
-  border-color: #e2e8f0;
-  color: #020817;
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #020817 !important;
+  overflow: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.coral-rte *,
+[class*='rte'],
+[class*='RTE'],
+[class*='CommentForm'],
+[class*='commentForm'] {
+  overflow: visible !important;
+  height: auto !important;
 }
 
 .coral-rte [contenteditable],
 .coral-rte [role='textbox'] {
-  background-color: #ffffff;
-  color: #020817;
-  caret-color: #020817;
-  flex: 1;
-  min-height: 80px;
+  background-color: #ffffff !important;
+  color: #020817 !important;
+  caret-color: #020817 !important;
+  min-height: 80px !important;
 }
 
 .coral-rte-toolbar,
 [class*='toolbar'],
 [class*='Toolbar'] {
-  background-color: #f8fafc;
-  border-top: 1px solid #e2e8f0;
-  flex-shrink: 0;
-  overflow: visible;
+  background-color: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+  flex-shrink: 0 !important;
+  overflow: visible !important;
+  height: auto !important;
 }
 
 /* ─── Comments ───────────────────────────────────────────────────────────── */

@@ -70,32 +70,43 @@ a:hover {
 
 /* ─── Rich text editor ───────────────────────────────────────────────────── */
 .coral-rte {
-  background-color: #0f172a;
-  border-color: #1e293b;
-  color: #f8fafc;
-  /* Ensure toolbar is never clipped */
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+  overflow: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* Every ancestor of the toolbar must not clip */
+.coral-rte *,
+[class*='rte'],
+[class*='RTE'],
+[class*='CommentForm'],
+[class*='commentForm'] {
+  overflow: visible !important;
+  height: auto !important;
 }
 
 .coral-rte [contenteditable],
 .coral-rte [role='textbox'] {
-  background-color: #0f172a;
-  color: #f8fafc;
-  caret-color: #f8fafc;
-  flex: 1;
-  min-height: 80px;
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  caret-color: #f8fafc !important;
+  min-height: 80px !important;
 }
 
-/* Toolbar row inside the RTE */
+/* Toolbar row */
 .coral-rte-toolbar,
 [class*='toolbar'],
 [class*='Toolbar'] {
-  background-color: #0f172a;
-  border-top: 1px solid #1e293b;
-  flex-shrink: 0;
-  overflow: visible;
+  background-color: #0f172a !important;
+  border-top: 1px solid #1e293b !important;
+  flex-shrink: 0 !important;
+  overflow: visible !important;
+  height: auto !important;
 }
 
 /* ─── Comments ───────────────────────────────────────────────────────────── */
