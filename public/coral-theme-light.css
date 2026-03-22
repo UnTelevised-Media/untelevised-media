@@ -31,12 +31,11 @@
   --palette-divider:          rgba(0, 0, 0, 0.1);
 }
 
-/* ─── Body ───────────────────────────────────────────────────────────────── */
+/* ─── RTE iframe body ────────────────────────────────────────────────────── */
 body {
   background-color: #ffffff !important;
   color: #020817 !important;
-  padding: 16px !important;
-  box-sizing: border-box !important;
+  margin: 0 !important;
 }
 
 /* ─── Links ──────────────────────────────────────────────────────────────── */

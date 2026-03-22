@@ -32,12 +32,12 @@
   --palette-divider:          rgba(255, 255, 255, 0.08);
 }
 
-/* ─── Body (iframe body has no .coral class in this version) ─────────────── */
+/* ─── RTE iframe body ────────────────────────────────────────────────────── */
+/* No padding here — padding causes the toolbar to be clipped by the iframe height */
 body {
   background-color: #020817 !important;
   color: #f8fafc !important;
-  padding: 16px !important;
-  box-sizing: border-box !important;
+  margin: 0 !important;
 }
 
 /* ─── Links ──────────────────────────────────────────────────────────────── */

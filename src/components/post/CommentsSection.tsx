@@ -156,8 +156,54 @@ export default function CommentsSection({
     );
   }
 
+  const isDark = resolvedTheme === 'dark';
+
   return (
     <section aria-label='Article comments' className='space-y-4'>
+      {/* Inject scoped styles for the outer Coral stream (tabs, buttons, callout).
+          The RTE editor is inside its own iframe and styled via customCSSURL. */}
+      <style>{`
+        #coral_thread .coral-tabBar {
+          border-bottom-color: ${isDark ? '#1e293b' : '#e2e8f0'};
+        }
+        #coral_thread .coral-tabBar [aria-selected="true"],
+        #coral_thread [class*="Tab-active"],
+        #coral_thread [class*="Tab-streamPrimary"][aria-selected="true"] {
+          color: #d70606 !important;
+          border-bottom-color: #d70606 !important;
+        }
+        #coral_thread a {
+          color: #d70606 !important;
+        }
+        #coral_thread .coral-general-moderateStreamLink {
+          border-color: #d70606 !important;
+          color: #d70606 !important;
+          background: transparent !important;
+        }
+        #coral_thread [class*="CallOut-colorRegular"],
+        #coral_thread [class*="CallOut-root"],
+        #coral_thread [class*="CallOut-inner"] {
+          background-color: ${isDark ? '#0f172a' : '#f8fafc'} !important;
+          color: ${isDark ? '#94a3b8' : '#64748b'} !important;
+          border-color: ${isDark ? '#1e293b' : '#e2e8f0'} !important;
+        }
+        #coral_thread [class*="Button-colorPrimary"]:not([class*="outlined"]) {
+          background-color: #d70606 !important;
+          border-color: #d70606 !important;
+          color: #fff !important;
+        }
+        #coral_thread [class*="Count"],
+        #coral_thread [class*="count"] {
+          background-color: #d70606 !important;
+          color: #fff !important;
+        }
+        #coral_thread select {
+          background-color: ${isDark ? '#0f172a' : '#ffffff'} !important;
+          color: ${isDark ? '#f8fafc' : '#020817'} !important;
+          border-color: ${isDark ? '#1e293b' : '#e2e8f0'} !important;
+        }
+      `}</style>
+
       <div className='bg-untele px-4 py-2'>
         <h2 className='flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white'>
           <MessageSquare className='h-4 w-4' />
