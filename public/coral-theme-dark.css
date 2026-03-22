@@ -1,0 +1,108 @@
+/*
+ * UnTelevised Media — Coral comments theme (DARK)
+ * Site dark bg:    hsl(222.2 84% 4.9%) = #020817
+ * Site dark fg:    hsl(210 40% 98%)    = #f8fafc
+ * Site dark muted: hsl(217.2 32.6% 17.5%) = #1e293b
+ * Brand red: #d70606
+ */
+
+/* ─── Inner padding ──────────────────────────────────────────────────────── */
+body {
+  padding: 1rem !important;
+  box-sizing: border-box !important;
+  background-color: #020817 !important;
+  color: #f8fafc !important;
+}
+
+/* ─── Catch-all: every link → brand red ─────────────────────────────────── */
+a,
+button[class*='Link'] {
+  color: #d70606 !important;
+}
+
+a:hover {
+  color: #b80505 !important;
+}
+
+/* ─── Backgrounds ────────────────────────────────────────────────────────── */
+[class*='Stream'],
+[class*='Comment-'],
+[class*='Box'],
+[class*='Card'],
+[class*='Container'],
+[class*='Gutter'] {
+  background-color: #020817 !important;
+  color: #f8fafc !important;
+}
+
+/* ─── Inputs / textarea ──────────────────────────────────────────────────── */
+[class*='Textarea'],
+[class*='Input'],
+textarea,
+input {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* ─── Tabs ───────────────────────────────────────────────────────────────── */
+[class*='Tab'][class*='active'],
+[class*='Tab'][class*='Active'],
+[class*='isActive'] {
+  border-bottom-color: #d70606 !important;
+  color: #d70606 !important;
+}
+
+[class*='Tab']:not([class*='active']):not([class*='Active']) {
+  color: #94a3b8 !important;
+}
+
+/* ─── MODERATE button ────────────────────────────────────────────────────── */
+[class*='moderateButton'],
+[class*='ModerateButton'],
+button[class*='moderate'] {
+  border-color: #d70606 !important;
+  color: #d70606 !important;
+}
+
+[class*='moderateButton']:hover,
+[class*='ModerateButton']:hover {
+  background-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ─── SUBMIT / filled buttons ────────────────────────────────────────────── */
+[class*='Button'][class*='filled'],
+[class*='SubmitButton'],
+button[type='submit'],
+button[class*='submit'] {
+  background-color: #d70606 !important;
+  border-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ─── Comment count badge ────────────────────────────────────────────────── */
+[class*='Count'],
+[class*='TabCount'],
+[class*='count'] {
+  background-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ─── Dividers ───────────────────────────────────────────────────────────── */
+[class*='Divider'],
+hr {
+  border-color: #1e293b !important;
+}
+
+/* ─── Muted text ─────────────────────────────────────────────────────────── */
+[class*='muted'],
+[class*='Muted'],
+[class*='timestamp'],
+[class*='Timestamp'] {
+  color: #94a3b8 !important;
+}

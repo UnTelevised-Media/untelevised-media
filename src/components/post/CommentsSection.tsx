@@ -75,7 +75,7 @@ export default function CommentsSection({
           ...(token ? { accessToken: token } : {}),
           // Redirect Coral's "Sign in" button to Clerk instead of Coral's native form
           loginURL: `${window.location.origin}/sign-in`,
-          customCSSURL: `${window.location.origin}/coral-theme.css`,
+          customCSSURL: `${window.location.origin}/coral-theme-${resolvedTheme === 'dark' ? 'dark' : 'light'}.css`,
           theme: coralTheme,
           autoRender: true,
         }) ?? null;
