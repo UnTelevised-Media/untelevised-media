@@ -61,7 +61,10 @@ export default function CommentsSection({
       return;
     }
 
-    const coralTheme = resolvedTheme === 'dark' ? 'DARK' : 'LIGHT';
+    // Always pass LIGHT — we control dark mode entirely via customCSSURL.
+    // Passing DARK causes Coral to inject its own dark styles after our CSS,
+    // overriding our !important rules.
+    const coralTheme = 'LIGHT';
 
     const initEmbed = () => {
       // Destroy any existing embed before recreating (e.g. on theme switch)

@@ -1,12 +1,13 @@
 /*
  * UnTelevised Media — Coral comments theme (DARK)
- * Site dark bg:    #020817  (hsl 222.2 84% 4.9%)
- * Site dark fg:    #f8fafc  (hsl 210 40% 98%)
- * Site dark muted: #1e293b  (hsl 217.2 32.6% 17.5%)
- * Brand red: #d70606
+ * Coral always receives theme="LIGHT" so this file has full control.
+ * Site dark bg:    #020817
+ * Site dark fg:    #f8fafc
+ * Site dark muted: #1e293b
+ * Brand red:       #d70606
  */
 
-/* ─── Override Coral's CSS custom properties (kills the blue) ────────────── */
+/* ─── Kill Coral's blue via CSS custom properties ────────────────────────── */
 :root {
   --palette-primary-100: #fad7d7;
   --palette-primary-200: #f07070;
@@ -19,157 +20,115 @@
   --palette-primary-900: #5a0202;
 }
 
-/* ─── Base / body ────────────────────────────────────────────────────────── */
+/* ─── Nuclear reset: everything dark ────────────────────────────────────── */
 html,
-body {
+body,
+body * {
   background-color: #020817 !important;
   color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+/* ─── Restore body padding ───────────────────────────────────────────────── */
+body {
+  padding: 1rem !important;
   box-sizing: border-box !important;
 }
 
-body {
-  padding: 1rem !important;
-}
-
-/* ─── Catch-all links → brand red ───────────────────────────────────────── */
-a {
+/* ─── Links → brand red ──────────────────────────────────────────────────── */
+a,
+a * {
   color: #d70606 !important;
+  background-color: transparent !important;
 }
 
-a:hover {
+a:hover,
+a:hover * {
   color: #b80505 !important;
 }
 
-/* ─── All containers / cards / wrappers ──────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
+/* ─── Active tab indicator ───────────────────────────────────────────────── */
+[class*='Tab'][class*='active'],
+[class*='Tab'][class*='Active'],
+[class*='Tab'][class*='isActive'],
+[class*='Tab'][aria-selected='true'],
+[class*='Tab'][class*='active'] *,
+[class*='Tab'][class*='Active'] * {
+  color: #d70606 !important;
+  border-bottom-color: #d70606 !important;
+  border-color: #d70606 !important;
 }
 
-[class],
-div,
-section,
-article,
-aside,
-li,
-ul,
-ol,
-header,
-footer,
-nav,
-main {
-  background-color: inherit;
-}
-
-[class*='Stream'],
-[class*='Comment'],
-[class*='Box'],
-[class*='Card'],
-[class*='Container'],
-[class*='Gutter'],
-[class*='Root'],
-[class*='Thread'],
-[class*='wrapper'],
-[class*='Wrapper'],
-[class*='section'],
-[class*='Section'],
-[class*='Empty'],
-[class*='empty'],
-[class*='noComments'],
-[class*='NoComments'],
-[class*='AllComments'],
-[class*='CommentsList'],
-[class*='list'] {
-  background-color: #020817 !important;
-  color: #f8fafc !important;
-}
-
-/* ─── Comment text area (contenteditable) ────────────────────────────────── */
+/* ─── Contenteditable comment box ────────────────────────────────────────── */
 [contenteditable],
 [contenteditable='true'],
-[role='textbox'] {
-  background-color: #1e293b !important;
+[role='textbox'],
+[contenteditable] *,
+[contenteditable='true'] * {
+  background-color: #0f172a !important;
   color: #f8fafc !important;
   caret-color: #f8fafc !important;
-  border-color: #334155 !important;
 }
 
 [contenteditable]:focus,
 [contenteditable='true']:focus {
-  outline-color: #d70606 !important;
   border-color: #d70606 !important;
-}
-
-/* Placeholder text */
-[contenteditable][data-placeholder]::before,
-[class*='placeholder'] {
-  color: #64748b !important;
+  outline: none !important;
 }
 
 /* ─── Rich text toolbar ──────────────────────────────────────────────────── */
 [class*='Toolbar'],
 [class*='toolbar'],
-[class*='RichText'],
-[class*='richText'],
-[class*='EditorToolbar'],
-[class*='ToolBar'] {
-  background-color: #1e293b !important;
-  border-color: #334155 !important;
+[class*='ToolBar'],
+[class*='Toolbar'] *,
+[class*='toolbar'] * {
+  background-color: #0f172a !important;
   color: #f8fafc !important;
+  border-top-color: #1e293b !important;
   overflow: visible !important;
 }
 
-[class*='Toolbar'] button,
-[class*='toolbar'] button,
-[class*='Toolbar'] svg,
-[class*='toolbar'] svg {
-  color: #f8fafc !important;
-  fill: #f8fafc !important;
+/* Editor container — prevent toolbar from being clipped */
+[class*='Editor'],
+[class*='editor'],
+[class*='CommentEditor'],
+[class*='CommentForm'],
+[class*='commentEditor'],
+[class*='commentForm'] {
+  overflow: visible !important;
+  height: auto !important;
 }
 
-/* ─── Tabs ───────────────────────────────────────────────────────────────── */
-[class*='TabBar'],
-[class*='tabBar'],
-[class*='Tabs'],
-[class*='tabs'] {
-  background-color: #020817 !important;
-  border-bottom-color: #1e293b !important;
-}
-
-[class*='Tab'] {
-  color: #94a3b8 !important;
-}
-
-[class*='Tab'][class*='active'],
-[class*='Tab'][class*='Active'],
-[class*='Tab'][class*='isActive'],
-[class*='Tab'][aria-selected='true'] {
-  color: #d70606 !important;
-  border-bottom-color: #d70606 !important;
-}
-
-/* ─── "No comments" / empty state banner ────────────────────────────────── */
+/* ─── Empty / no comments banner ─────────────────────────────────────────── */
 [class*='Empty'],
 [class*='empty'],
-[class*='noComments'],
 [class*='NoComments'],
+[class*='noComments'],
 [class*='CallOut'],
 [class*='callOut'],
+[class*='Callout'],
 [class*='callout'],
-[class*='Callout'] {
+[class*='Empty'] *,
+[class*='Callout'] * {
   background-color: #0f172a !important;
   color: #94a3b8 !important;
-  border-color: #1e293b !important;
 }
 
-/* ─── MODERATE outlined button ───────────────────────────────────────────── */
+/* ─── Sort by dropdown ───────────────────────────────────────────────────── */
+select,
+select * {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+/* ─── MODERATE button ────────────────────────────────────────────────────── */
 [class*='moderateButton'],
 [class*='ModerateButton'],
 button[class*='moderate'] {
-  border-color: #d70606 !important;
-  color: #d70606 !important;
   background-color: transparent !important;
+  border: 1px solid #d70606 !important;
+  color: #d70606 !important;
 }
 
 [class*='moderateButton']:hover,
@@ -178,29 +137,14 @@ button[class*='moderate'] {
   color: #ffffff !important;
 }
 
-/* ─── SUBMIT / filled primary buttons ────────────────────────────────────── */
-button[class*='Button'],
+/* ─── SUBMIT button (active/filled) ──────────────────────────────────────── */
 [class*='SubmitButton'],
-button[type='submit'] {
-  background-color: transparent;
-  color: #f8fafc;
-}
-
+button[class*='submit']:not(:disabled),
 [class*='Button'][class*='filled'],
-[class*='Button'][class*='primary'],
-[class*='SubmitButton'][class*='active'],
-button[type='submit'][class*='active'],
-button[class*='submit']:not(:disabled) {
+[class*='Button'][class*='primary'] {
   background-color: #d70606 !important;
   border-color: #d70606 !important;
   color: #ffffff !important;
-}
-
-/* ─── Sort by dropdown ───────────────────────────────────────────────────── */
-select {
-  background-color: #1e293b !important;
-  color: #f8fafc !important;
-  border-color: #334155 !important;
 }
 
 /* ─── Comment count badge ────────────────────────────────────────────────── */
@@ -211,18 +155,25 @@ select {
   color: #ffffff !important;
 }
 
-/* ─── Dividers / borders ──────────────────────────────────────────────────── */
-[class*='Divider'],
-hr {
-  border-color: #1e293b !important;
+/* ─── Muted / timestamp ───────────────────────────────────────────────────── */
+[class*='Timestamp'],
+[class*='timestamp'] {
+  color: #94a3b8 !important;
+  background-color: transparent !important;
 }
 
-/* ─── Muted / timestamp text ──────────────────────────────────────────────── */
-[class*='Timestamp'],
-[class*='timestamp'],
-[class*='muted'],
-[class*='Muted'],
-[class*='secondary'],
-[class*='Secondary'] {
-  color: #94a3b8 !important;
+/* ─── Transparent bg for inline/icon elements ─────────────────────────────── */
+svg,
+svg *,
+button,
+span,
+i,
+em,
+strong,
+b {
+  background-color: transparent !important;
+}
+
+svg *[fill]:not([fill='none']) {
+  fill: #f8fafc !important;
 }
