@@ -24,8 +24,9 @@ export async function GET() {
   }
 
   const secret = process.env.CORAL_SSO_SECRET;
-  if (!secret) {
-    console.error('[coral-token] CORAL_SSO_SECRET is not set');
+  const keyId = process.env.CORAL_SSO_KEY_ID;
+  if (!secret || !keyId) {
+    console.error('[coral-token] CORAL_SSO_SECRET or CORAL_SSO_KEY_ID is not set');
     return NextResponse.json({ token: null }, { status: 500 });
   }
 
@@ -53,7 +54,7 @@ export async function GET() {
   const encodedSecret = new TextEncoder().encode(secret);
 
   const token = await new SignJWT({ user: coralUser })
-    .setProtectedHeader({ alg: 'HS256' })
+    .setProtectedHeader({ alg: 'HS256', kid: keyId })
     .setJti(randomUUID()) // enables logout via jti
     .setIssuedAt() // enables automatic user detail sync in Coral
     .setExpirationTime('24h')

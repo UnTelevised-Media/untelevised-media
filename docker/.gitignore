@@ -3,10 +3,6 @@
 # Real environment file — never commit
 .env
 
-# Un-ignore the example template so it stays in version control
-# (root .gitignore has .env* which would otherwise catch it)
-!.env.example
-
 # Runtime data volumes (if bind-mounted locally for dev)
 backups/
 data/

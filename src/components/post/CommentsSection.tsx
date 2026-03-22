@@ -26,7 +26,7 @@ export default function CommentsSection({
   articleUrl,
   allowComments = true,
 }: CommentsSectionProps) {
-  const { isSignedIn } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
   const { preferences } = useConsent();
   const [token, setToken] = useState<string | null>(null);
   const embedInitialized = useRef(false);
@@ -48,6 +48,8 @@ export default function CommentsSection({
   // Load and initialise Coral embed once consent + token state are settled
   useEffect(() => {
     if (!functionalConsent || !allowComments || embedInitialized.current) return;
+    // Wait until Clerk has determined auth state
+    if (!isLoaded) return;
     // Wait until signed-in token fetch has resolved (or user is a guest)
     if (isSignedIn && token === null) return;
 
@@ -61,8 +63,7 @@ export default function CommentsSection({
 
     const script = document.createElement('script');
     script.src = `${coralUrl}/assets/js/embed.js`;
-    script.async = false;
-    script.defer = true;
+    script.async = true;
     script.onload = () => {
       window.Coral?.createStreamEmbed({
         id: 'coral_thread',
@@ -76,7 +77,7 @@ export default function CommentsSection({
       });
     };
     document.head.appendChild(script);
-  }, [functionalConsent, token, isSignedIn, articleId, articleUrl, allowComments]);
+  }, [functionalConsent, token, isSignedIn, isLoaded, articleId, articleUrl, allowComments]);
 
   // Comments disabled by editorial decision
   if (allowComments === false) {

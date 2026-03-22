@@ -25,7 +25,7 @@ adduser deploy
 usermod -aG sudo deploy
 
 # Copy your SSH key to the new user so you can log in as deploy
-rsync --archive --chown=deploy:deploy ~/.ssh /home/deploy
+rsync --archive --chown=sysadmin:sysadmin ~/.ssh /home/sysadmin
 ```
 
 Log out and log back in as `deploy`:
@@ -52,7 +52,7 @@ sudo apt install -y git curl ufw
 sudo ufw allow OpenSSH
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
-sudo ufw allow 443/udp   # HTTP/3 / QUIC
+sudo ufw allow 443/udp
 sudo ufw enable
 sudo ufw status
 ```
@@ -114,13 +114,13 @@ Test with: `dig coral.untelevised.media +short`
 
 ## 7. Clone the Repository
 
-Clone the full repo into `/opt/untelevised-media`. This keeps deployment updates simple — a `git pull` picks up any changes to the docker configs.
+Clone the Coral container repo into `/opt/untelevised-media`.
 
 ```bash
 sudo mkdir -p /opt/untelevised-media
-sudo chown deploy:deploy /opt/untelevised-media
+sudo chown sysadmin:sysadmin /opt/untelevised-media
 
-git clone https://github.com/UnTelevised-Media/untelevised-media-new.git /opt/untelevised-media
+git clone https://github.com/Digitl-Alchemyst/coral-container.git /opt/untelevised-media
 
 cd /opt/untelevised-media
 ```
@@ -129,7 +129,7 @@ cd /opt/untelevised-media
 
 ## 8. Create the Environment File
 
-All docker configuration lives in the `docker/` subdirectory.
+All docker configuration lives in the `docker/` subdirectory.mkdir-p
 
 ```bash
 cd /opt/untelevised-media/docker
