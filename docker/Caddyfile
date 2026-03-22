@@ -1,8 +1,8 @@
 # docker/Caddyfile
 # Caddy reverse proxy for Coral — automatic TLS via Let's Encrypt.
-# Replace coral.untelevised.live with your actual subdomain if different.
+# Replace coral.untelevised.media with your actual subdomain if different.
 
-coral.untelevised.live {
+coral.untelevised.media {
     # Forward all traffic to Coral on the internal Docker network
     reverse_proxy talk:5000
 
