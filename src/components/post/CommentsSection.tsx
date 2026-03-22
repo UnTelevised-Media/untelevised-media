@@ -70,6 +70,8 @@ export default function CommentsSection({
         storyID: articleId,
         storyURL: articleUrl,
         ...(token ? { accessToken: token } : {}),
+        // Redirect Coral's "Sign in" button to Clerk instead of Coral's native form
+        loginURL: `${window.location.origin}/sign-in`,
         autoRender: true,
       });
     };
