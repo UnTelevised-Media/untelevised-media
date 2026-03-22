@@ -1,0 +1,73 @@
+/*
+ * UnTelevised Media — Coral comments theme
+ * Overrides Coral's default blue accent with brand red (#D70606)
+ * and tightens spacing to match the site aesthetic.
+ */
+
+/* ── Active tab underline ─────────────────────────────────────────────────── */
+[class*='Tab-'][class*='active'],
+[class*='tab'][class*='active'] {
+  border-color: #d70606 !important;
+  color: #d70606 !important;
+}
+
+/* ── All blue links / text ────────────────────────────────────────────────── */
+a[class*='Link'],
+[class*='Link-'],
+[class*='UsernameWithPopover'] a,
+[class*='AllCommentsTab'],
+[class*='ArchivedCommentsTab'] {
+  color: #d70606 !important;
+}
+
+[class*='AllCommentsTab'][class*='active'],
+[class*='Tab'][class*='isActive'] {
+  border-bottom-color: #d70606 !important;
+  color: #d70606 !important;
+}
+
+/* ── "MODERATE" button and other outlined primary buttons ─────────────────── */
+[class*='Button'][class*='outline'],
+[class*='ModerateButton'],
+button[class*='moderateButton'] {
+  border-color: #d70606 !important;
+  color: #d70606 !important;
+}
+
+[class*='Button'][class*='outline']:hover,
+[class*='ModerateButton']:hover {
+  background-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ── SUBMIT / filled primary buttons ──────────────────────────────────────── */
+[class*='Button'][class*='filled'][class*='primary'],
+[class*='SubmitButton'],
+button[class*='submitButton'] {
+  background-color: #d70606 !important;
+  border-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+[class*='Button'][class*='filled'][class*='primary']:hover {
+  background-color: #b80505 !important;
+}
+
+/* ── Bottom footer links ──────────────────────────────────────────────────── */
+[class*='Footer'] a,
+[class*='ViewersWatchingContainer'] {
+  color: #d70606 !important;
+}
+
+/* ── "Signed in as" bar ───────────────────────────────────────────────────── */
+[class*='SignIn'] a,
+[class*='signIn'] a {
+  color: #d70606 !important;
+}
+
+/* ── Comment count badge ──────────────────────────────────────────────────── */
+[class*='Count'],
+[class*='TabCount'] {
+  background-color: #d70606 !important;
+  color: #ffffff !important;
+}

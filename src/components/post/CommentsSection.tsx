@@ -73,6 +73,7 @@ export default function CommentsSection({
         ...(token ? { accessToken: token } : {}),
         // Redirect Coral's "Sign in" button to Clerk instead of Coral's native form
         loginURL: `${window.location.origin}/sign-in`,
+        customCSSURL: `${window.location.origin}/coral-theme.css`,
         autoRender: true,
       });
     };
@@ -123,7 +124,9 @@ export default function CommentsSection({
           Discussion
         </h2>
       </div>
-      <div id='coral_thread' />
+      <div className='border border-border px-4 pb-4'>
+        <div id='coral_thread' />
+      </div>
     </section>
   );
 }
