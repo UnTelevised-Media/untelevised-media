@@ -13,7 +13,6 @@ interface CommentsSectionProps {
   allowComments?: boolean;
 }
 
-// Extend window to include Coral embed API
 declare global {
   interface Window {
     Coral?: {
@@ -29,30 +28,32 @@ export default function CommentsSection({
 }: CommentsSectionProps) {
   const { isSignedIn, isLoaded } = useUser();
   const { resolvedTheme } = useTheme();
-  const { preferences } = useConsent();
+  // preferences.preferences is the "functional cookies" consent flag
+  const { preferences: { preferences: functionalConsent } } = useConsent();
   const [token, setToken] = useState<string | null>(null);
   const embedRef = useRef<{ remove: () => void } | null>(null);
 
-  // Gate Coral on the "preferences" (functional) consent flag
-  const functionalConsent = preferences.preferences;
-
-  // Fetch SSO token for signed-in users
+  // Fetch SSO token for signed-in users; abort on unmount or sign-out
   useEffect(() => {
     if (!isSignedIn) return;
-    fetch('/api/coral-token')
+    const controller = new AbortController();
+    fetch('/api/coral-token', { signal: controller.signal })
       .then((r) => r.json())
       .then((d: { token: string | null }) => setToken(d.token))
-      .catch(() => {
-        // Non-critical — guest view fallback
+      .catch((e: unknown) => {
+        if (e instanceof Error && e.name !== 'AbortError') {
+          // Token fetch failed — fall through to guest embed view
+          setToken(null);
+        }
       });
+    return () => controller.abort();
   }, [isSignedIn]);
 
-  // Load and initialise Coral embed — re-runs when theme changes to swap dark/light
+  // Load and initialise Coral embed — re-runs when theme or auth state changes
   useEffect(() => {
     if (!functionalConsent || !allowComments) return;
-    // Wait until Clerk has determined auth state
     if (!isLoaded) return;
-    // Wait until signed-in token fetch has resolved (or user is a guest)
+    // Wait for token fetch to resolve before initialising as authenticated user
     if (isSignedIn && token === null) return;
 
     const coralUrl = process.env.NEXT_PUBLIC_CORAL_URL;
@@ -61,13 +62,16 @@ export default function CommentsSection({
       return;
     }
 
-    // Always pass LIGHT — we control dark mode entirely via customCSSURL.
-    // Passing DARK causes Coral to inject its own dark styles after our CSS,
-    // overriding our !important rules.
-    const coralTheme = 'LIGHT';
+    // Always pass LIGHT to Coral — dark mode is handled entirely by customCSSURL.
+    // Passing DARK causes Coral to inject its own dark styles after our CSS loads,
+    // overriding our rules.
+    const cssTheme = resolvedTheme === 'dark' ? 'dark' : 'light';
+
+    let script: HTMLScriptElement | null = null;
+    let cancelled = false;
 
     const initEmbed = () => {
-      // Destroy any existing embed before recreating (e.g. on theme switch)
+      if (cancelled) return;
       embedRef.current?.remove();
       embedRef.current =
         window.Coral?.createStreamEmbed({
@@ -76,26 +80,34 @@ export default function CommentsSection({
           storyID: articleId,
           storyURL: articleUrl,
           ...(token ? { accessToken: token } : {}),
-          // Redirect Coral's "Sign in" button to Clerk instead of Coral's native form
           loginURL: `${window.location.origin}/sign-in`,
-          customCSSURL: `${window.location.origin}/coral-theme-${resolvedTheme === 'dark' ? 'dark' : 'light'}.css`,
-          theme: coralTheme,
+          customCSSURL: `${window.location.origin}/coral-theme-${cssTheme}.css`,
+          theme: 'LIGHT',
           autoRender: true,
         }) ?? null;
     };
 
-    // If the Coral script is already loaded, init immediately
     if (window.Coral) {
       initEmbed();
     } else {
-      const script = document.createElement('script');
-      script.src = `${coralUrl}/assets/js/embed.js`;
-      script.async = true;
-      script.onload = initEmbed;
-      document.head.appendChild(script);
+      // Avoid injecting the script twice if it is already in the DOM
+      const existingScript = document.querySelector<HTMLScriptElement>(
+        `script[src="${coralUrl}/assets/js/embed.js"]`,
+      );
+      if (existingScript) {
+        existingScript.addEventListener('load', initEmbed, { once: true });
+      } else {
+        script = document.createElement('script');
+        script.src = `${coralUrl}/assets/js/embed.js`;
+        script.async = true;
+        script.onload = initEmbed;
+        document.head.appendChild(script);
+      }
     }
 
     return () => {
+      cancelled = true;
+      script?.remove();
       embedRef.current?.remove();
       embedRef.current = null;
     };
@@ -110,7 +122,6 @@ export default function CommentsSection({
     resolvedTheme,
   ]);
 
-  // Comments disabled by editorial decision
   if (allowComments === false) {
     return (
       <div className='flex items-center gap-3 border border-border px-6 py-8 text-muted-foreground'>
@@ -122,7 +133,6 @@ export default function CommentsSection({
     );
   }
 
-  // Consent not yet granted for functional cookies
   if (!functionalConsent) {
     return (
       <div className='space-y-3 border border-border px-6 py-8'>
