@@ -1,128 +1,172 @@
 /*
  * UnTelevised Media — Coral comments theme
- * Overrides Coral's default blue accent with brand red (#D70606)
- * and tightens spacing to match the site aesthetic.
+ *
+ * Site colors (from globals.css):
+ *   Light bg:   hsl(0 0% 100%)           = #ffffff
+ *   Light fg:   hsl(222.2 84% 4.9%)      = #020817
+ *   Light border: hsl(214.3 31.8% 91.4%) = #e2e8f0
+ *   Dark bg:    hsl(222.2 84% 4.9%)      = #020817
+ *   Dark fg:    hsl(210 40% 98%)         = #f8fafc
+ *   Dark muted: hsl(217.2 32.6% 17.5%)  = #1e293b
+ *   Brand red:  #d70606
  */
 
-/* ── Active tab underline ─────────────────────────────────────────────────── */
-[class*='Tab-'][class*='active'],
-[class*='tab'][class*='active'] {
-  border-color: #d70606 !important;
+/* ─── Inner padding so content isn't edge-to-edge ────────────────────────── */
+body {
+  padding: 1rem !important;
+  box-sizing: border-box !important;
+}
+
+/* ─── Catch-all: every link in the embed → brand red ─────────────────────── */
+a,
+button[class*='Link'] {
   color: #d70606 !important;
 }
 
-/* ── All blue links / text ────────────────────────────────────────────────── */
-a[class*='Link'],
-[class*='Link-'],
-[class*='UsernameWithPopover'] a,
-[class*='AllCommentsTab'],
-[class*='ArchivedCommentsTab'] {
-  color: #d70606 !important;
+a:hover,
+button[class*='Link']:hover {
+  color: #b80505 !important;
 }
 
-[class*='AllCommentsTab'][class*='active'],
-[class*='Tab'][class*='isActive'] {
+/* ─── Active tab underline + text ────────────────────────────────────────── */
+[class*='Tab'][class*='active'],
+[class*='Tab'][class*='Active'],
+[class*='tab--active'],
+[class*='isActive'] {
   border-bottom-color: #d70606 !important;
   color: #d70606 !important;
 }
 
-/* ── "MODERATE" button and other outlined primary buttons ─────────────────── */
-[class*='Button'][class*='outline'],
+/* ─── "MODERATE" outlined button ─────────────────────────────────────────── */
+[class*='moderateButton'],
 [class*='ModerateButton'],
-button[class*='moderateButton'] {
+button[class*='moderate'] {
   border-color: #d70606 !important;
   color: #d70606 !important;
 }
 
-[class*='Button'][class*='outline']:hover,
+[class*='moderateButton']:hover,
 [class*='ModerateButton']:hover {
   background-color: #d70606 !important;
   color: #ffffff !important;
 }
 
-/* ── SUBMIT / filled primary buttons ──────────────────────────────────────── */
-[class*='Button'][class*='filled'][class*='primary'],
+/* ─── SUBMIT and other filled primary buttons ────────────────────────────── */
+[class*='Button'][class*='filled'],
 [class*='SubmitButton'],
-button[class*='submitButton'] {
+button[type='submit'],
+button[class*='submit'] {
   background-color: #d70606 !important;
   border-color: #d70606 !important;
   color: #ffffff !important;
 }
 
-[class*='Button'][class*='filled'][class*='primary']:hover {
+[class*='Button'][class*='filled']:hover {
   background-color: #b80505 !important;
 }
 
-/* ── Bottom footer links ──────────────────────────────────────────────────── */
-[class*='Footer'] a,
-[class*='ViewersWatchingContainer'] {
-  color: #d70606 !important;
-}
-
-/* ── "Signed in as" bar ───────────────────────────────────────────────────── */
-[class*='SignIn'] a,
-[class*='signIn'] a {
-  color: #d70606 !important;
-}
-
-/* ── Comment count badge ──────────────────────────────────────────────────── */
+/* ─── Comment count badge ────────────────────────────────────────────────── */
 [class*='Count'],
-[class*='TabCount'] {
+[class*='TabCount'],
+[class*='count'] {
   background-color: #d70606 !important;
   color: #ffffff !important;
 }
 
-/* ── Dark mode backgrounds / text ────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   LIGHT MODE  (default / Coral LIGHT theme)
+   ═══════════════════════════════════════════════════════════════════════════ */
+body,
+[class*='Stream'],
+[class*='Comment-'],
+[class*='Box'],
+[class*='Card'],
+[class*='Container'] {
+  background-color: #ffffff !important;
+  color: #020817 !important;
+}
+
+[class*='Textarea'],
+[class*='Input'],
+textarea,
+input {
+  background-color: #ffffff !important;
+  color: #020817 !important;
+  border-color: #e2e8f0 !important;
+}
+
+[class*='Tab']:not([class*='active']):not([class*='Active']) {
+  color: #64748b !important;
+}
+
+[class*='Divider'],
+hr {
+  border-color: #e2e8f0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DARK MODE  — Coral sets data-theme="DARK" on its root iframe element
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root[data-theme='DARK'] body,
+:root[data-theme='DARK'] [class*='Stream'],
+:root[data-theme='DARK'] [class*='Comment-'],
+:root[data-theme='DARK'] [class*='Box'],
+:root[data-theme='DARK'] [class*='Card'],
+:root[data-theme='DARK'] [class*='Container'] {
+  background-color: #020817 !important;
+  color: #f8fafc !important;
+}
+
+:root[data-theme='DARK'] [class*='Textarea'],
+:root[data-theme='DARK'] [class*='Input'],
+:root[data-theme='DARK'] textarea,
+:root[data-theme='DARK'] input {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+:root[data-theme='DARK'] [class*='Tab']:not([class*='active']):not([class*='Active']) {
+  color: #94a3b8 !important;
+}
+
+:root[data-theme='DARK'] [class*='Divider'],
+:root[data-theme='DARK'] hr {
+  border-color: #1e293b !important;
+}
+
+:root[data-theme='DARK'] [class*='placeholder'],
+:root[data-theme='DARK'] textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* prefers-color-scheme fallback for browsers/OS in dark mode */
 @media (prefers-color-scheme: dark) {
   body,
   [class*='Stream'],
-  [class*='Comment'],
+  [class*='Comment-'],
   [class*='Box'],
-  [class*='Card'] {
-    background-color: #0a0a0a !important;
-    color: #e5e5e5 !important;
+  [class*='Card'],
+  [class*='Container'] {
+    background-color: #020817 !important;
+    color: #f8fafc !important;
   }
 
   [class*='Textarea'],
   [class*='Input'],
-  textarea {
-    background-color: #1a1a1a !important;
-    color: #e5e5e5 !important;
-    border-color: #333333 !important;
-  }
-
-  [class*='Tab']:not([class*='active']) {
-    color: #a3a3a3 !important;
+  textarea,
+  input {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #1e293b !important;
   }
 
   [class*='Divider'],
   hr {
-    border-color: #262626 !important;
+    border-color: #1e293b !important;
   }
-}
 
-/* Coral sets data-theme="DARK" on the root when theme="DARK" is passed */
-[data-theme='DARK'] body,
-.coral--dark body {
-  background-color: #0a0a0a !important;
-  color: #e5e5e5 !important;
-}
-
-[data-theme='DARK'] [class*='Textarea'],
-[data-theme='DARK'] textarea,
-.coral--dark textarea {
-  background-color: #1a1a1a !important;
-  color: #e5e5e5 !important;
-  border-color: #333333 !important;
-}
-
-[data-theme='DARK'] [class*='Tab']:not([class*='active']),
-.coral--dark [class*='Tab']:not([class*='active']) {
-  color: #a3a3a3 !important;
-}
-
-[data-theme='DARK'] [class*='Divider'],
-[data-theme='DARK'] hr,
-.coral--dark hr {
-  border-color: #262626 !important;
+  [class*='Tab']:not([class*='active']):not([class*='Active']) {
+    color: #94a3b8 !important;
+  }
 }

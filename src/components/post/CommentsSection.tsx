@@ -151,9 +151,7 @@ export default function CommentsSection({
           Discussion
         </h2>
       </div>
-      <div className='border border-border px-4 pb-4'>
-        <div id='coral_thread' />
-      </div>
+      <div id='coral_thread' />
     </section>
   );
 }
