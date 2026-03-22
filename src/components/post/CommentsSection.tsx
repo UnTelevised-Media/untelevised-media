@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
+import { useTheme } from 'next-themes';
 import { useConsent } from '@/lib/consent/context';
 import { Lock, MessageSquare } from 'lucide-react';
 
@@ -16,7 +17,7 @@ interface CommentsSectionProps {
 declare global {
   interface Window {
     Coral?: {
-      createStreamEmbed: (config: Record<string, unknown>) => void;
+      createStreamEmbed: (config: Record<string, unknown>) => { remove: () => void };
     };
   }
 }
@@ -27,9 +28,10 @@ export default function CommentsSection({
   allowComments = true,
 }: CommentsSectionProps) {
   const { isSignedIn, isLoaded } = useUser();
+  const { resolvedTheme } = useTheme();
   const { preferences } = useConsent();
   const [token, setToken] = useState<string | null>(null);
-  const embedInitialized = useRef(false);
+  const embedRef = useRef<{ remove: () => void } | null>(null);
 
   // Gate Coral on the "preferences" (functional) consent flag
   const functionalConsent = preferences.preferences;
@@ -45,9 +47,9 @@ export default function CommentsSection({
       });
   }, [isSignedIn]);
 
-  // Load and initialise Coral embed once consent + token state are settled
+  // Load and initialise Coral embed — re-runs when theme changes to swap dark/light
   useEffect(() => {
-    if (!functionalConsent || !allowComments || embedInitialized.current) return;
+    if (!functionalConsent || !allowComments) return;
     // Wait until Clerk has determined auth state
     if (!isLoaded) return;
     // Wait until signed-in token fetch has resolved (or user is a guest)
@@ -59,26 +61,51 @@ export default function CommentsSection({
       return;
     }
 
-    embedInitialized.current = true;
+    const coralTheme = resolvedTheme === 'dark' ? 'DARK' : 'LIGHT';
 
-    const script = document.createElement('script');
-    script.src = `${coralUrl}/assets/js/embed.js`;
-    script.async = true;
-    script.onload = () => {
-      window.Coral?.createStreamEmbed({
-        id: 'coral_thread',
-        rootURL: coralUrl,
-        storyID: articleId,
-        storyURL: articleUrl,
-        ...(token ? { accessToken: token } : {}),
-        // Redirect Coral's "Sign in" button to Clerk instead of Coral's native form
-        loginURL: `${window.location.origin}/sign-in`,
-        customCSSURL: `${window.location.origin}/coral-theme.css`,
-        autoRender: true,
-      });
+    const initEmbed = () => {
+      // Destroy any existing embed before recreating (e.g. on theme switch)
+      embedRef.current?.remove();
+      embedRef.current =
+        window.Coral?.createStreamEmbed({
+          id: 'coral_thread',
+          rootURL: coralUrl,
+          storyID: articleId,
+          storyURL: articleUrl,
+          ...(token ? { accessToken: token } : {}),
+          // Redirect Coral's "Sign in" button to Clerk instead of Coral's native form
+          loginURL: `${window.location.origin}/sign-in`,
+          customCSSURL: `${window.location.origin}/coral-theme.css`,
+          theme: coralTheme,
+          autoRender: true,
+        }) ?? null;
     };
-    document.head.appendChild(script);
-  }, [functionalConsent, token, isSignedIn, isLoaded, articleId, articleUrl, allowComments]);
+
+    // If the Coral script is already loaded, init immediately
+    if (window.Coral) {
+      initEmbed();
+    } else {
+      const script = document.createElement('script');
+      script.src = `${coralUrl}/assets/js/embed.js`;
+      script.async = true;
+      script.onload = initEmbed;
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      embedRef.current?.remove();
+      embedRef.current = null;
+    };
+  }, [
+    functionalConsent,
+    token,
+    isSignedIn,
+    isLoaded,
+    articleId,
+    articleUrl,
+    allowComments,
+    resolvedTheme,
+  ]);
 
   // Comments disabled by editorial decision
   if (allowComments === false) {
