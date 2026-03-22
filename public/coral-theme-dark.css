@@ -1,22 +1,38 @@
 /*
  * UnTelevised Media — Coral comments theme (DARK)
- * Site dark bg:    hsl(222.2 84% 4.9%) = #020817
- * Site dark fg:    hsl(210 40% 98%)    = #f8fafc
- * Site dark muted: hsl(217.2 32.6% 17.5%) = #1e293b
+ * Site dark bg:    #020817  (hsl 222.2 84% 4.9%)
+ * Site dark fg:    #f8fafc  (hsl 210 40% 98%)
+ * Site dark muted: #1e293b  (hsl 217.2 32.6% 17.5%)
  * Brand red: #d70606
  */
 
-/* ─── Inner padding ──────────────────────────────────────────────────────── */
-body {
-  padding: 1rem !important;
-  box-sizing: border-box !important;
-  background-color: #020817 !important;
-  color: #f8fafc !important;
+/* ─── Override Coral's CSS custom properties (kills the blue) ────────────── */
+:root {
+  --palette-primary-100: #fad7d7;
+  --palette-primary-200: #f07070;
+  --palette-primary-300: #e53535;
+  --palette-primary-400: #e00808;
+  --palette-primary-500: #d70606;
+  --palette-primary-600: #b80505;
+  --palette-primary-700: #9a0404;
+  --palette-primary-800: #7a0303;
+  --palette-primary-900: #5a0202;
 }
 
-/* ─── Catch-all: every link → brand red ─────────────────────────────────── */
-a,
-button[class*='Link'] {
+/* ─── Base / body ────────────────────────────────────────────────────────── */
+html,
+body {
+  background-color: #020817 !important;
+  color: #f8fafc !important;
+  box-sizing: border-box !important;
+}
+
+body {
+  padding: 1rem !important;
+}
+
+/* ─── Catch-all links → brand red ───────────────────────────────────────── */
+a {
   color: #d70606 !important;
 }
 
@@ -24,49 +40,136 @@ a:hover {
   color: #b80505 !important;
 }
 
-/* ─── Backgrounds ────────────────────────────────────────────────────────── */
+/* ─── All containers / cards / wrappers ──────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+[class],
+div,
+section,
+article,
+aside,
+li,
+ul,
+ol,
+header,
+footer,
+nav,
+main {
+  background-color: inherit;
+}
+
 [class*='Stream'],
-[class*='Comment-'],
+[class*='Comment'],
 [class*='Box'],
 [class*='Card'],
 [class*='Container'],
-[class*='Gutter'] {
+[class*='Gutter'],
+[class*='Root'],
+[class*='Thread'],
+[class*='wrapper'],
+[class*='Wrapper'],
+[class*='section'],
+[class*='Section'],
+[class*='Empty'],
+[class*='empty'],
+[class*='noComments'],
+[class*='NoComments'],
+[class*='AllComments'],
+[class*='CommentsList'],
+[class*='list'] {
   background-color: #020817 !important;
   color: #f8fafc !important;
 }
 
-/* ─── Inputs / textarea ──────────────────────────────────────────────────── */
-[class*='Textarea'],
-[class*='Input'],
-textarea,
-input {
+/* ─── Comment text area (contenteditable) ────────────────────────────────── */
+[contenteditable],
+[contenteditable='true'],
+[role='textbox'] {
   background-color: #1e293b !important;
   color: #f8fafc !important;
-  border-color: #1e293b !important;
+  caret-color: #f8fafc !important;
+  border-color: #334155 !important;
 }
 
-textarea::placeholder {
+[contenteditable]:focus,
+[contenteditable='true']:focus {
+  outline-color: #d70606 !important;
+  border-color: #d70606 !important;
+}
+
+/* Placeholder text */
+[contenteditable][data-placeholder]::before,
+[class*='placeholder'] {
   color: #64748b !important;
 }
 
-/* ─── Tabs ───────────────────────────────────────────────────────────────── */
-[class*='Tab'][class*='active'],
-[class*='Tab'][class*='Active'],
-[class*='isActive'] {
-  border-bottom-color: #d70606 !important;
-  color: #d70606 !important;
+/* ─── Rich text toolbar ──────────────────────────────────────────────────── */
+[class*='Toolbar'],
+[class*='toolbar'],
+[class*='RichText'],
+[class*='richText'],
+[class*='EditorToolbar'],
+[class*='ToolBar'] {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+  overflow: visible !important;
 }
 
-[class*='Tab']:not([class*='active']):not([class*='Active']) {
+[class*='Toolbar'] button,
+[class*='toolbar'] button,
+[class*='Toolbar'] svg,
+[class*='toolbar'] svg {
+  color: #f8fafc !important;
+  fill: #f8fafc !important;
+}
+
+/* ─── Tabs ───────────────────────────────────────────────────────────────── */
+[class*='TabBar'],
+[class*='tabBar'],
+[class*='Tabs'],
+[class*='tabs'] {
+  background-color: #020817 !important;
+  border-bottom-color: #1e293b !important;
+}
+
+[class*='Tab'] {
   color: #94a3b8 !important;
 }
 
-/* ─── MODERATE button ────────────────────────────────────────────────────── */
+[class*='Tab'][class*='active'],
+[class*='Tab'][class*='Active'],
+[class*='Tab'][class*='isActive'],
+[class*='Tab'][aria-selected='true'] {
+  color: #d70606 !important;
+  border-bottom-color: #d70606 !important;
+}
+
+/* ─── "No comments" / empty state banner ────────────────────────────────── */
+[class*='Empty'],
+[class*='empty'],
+[class*='noComments'],
+[class*='NoComments'],
+[class*='CallOut'],
+[class*='callOut'],
+[class*='callout'],
+[class*='Callout'] {
+  background-color: #0f172a !important;
+  color: #94a3b8 !important;
+  border-color: #1e293b !important;
+}
+
+/* ─── MODERATE outlined button ───────────────────────────────────────────── */
 [class*='moderateButton'],
 [class*='ModerateButton'],
 button[class*='moderate'] {
   border-color: #d70606 !important;
   color: #d70606 !important;
+  background-color: transparent !important;
 }
 
 [class*='moderateButton']:hover,
@@ -75,14 +178,29 @@ button[class*='moderate'] {
   color: #ffffff !important;
 }
 
-/* ─── SUBMIT / filled buttons ────────────────────────────────────────────── */
-[class*='Button'][class*='filled'],
+/* ─── SUBMIT / filled primary buttons ────────────────────────────────────── */
+button[class*='Button'],
 [class*='SubmitButton'],
-button[type='submit'],
-button[class*='submit'] {
+button[type='submit'] {
+  background-color: transparent;
+  color: #f8fafc;
+}
+
+[class*='Button'][class*='filled'],
+[class*='Button'][class*='primary'],
+[class*='SubmitButton'][class*='active'],
+button[type='submit'][class*='active'],
+button[class*='submit']:not(:disabled) {
   background-color: #d70606 !important;
   border-color: #d70606 !important;
   color: #ffffff !important;
+}
+
+/* ─── Sort by dropdown ───────────────────────────────────────────────────── */
+select {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
 }
 
 /* ─── Comment count badge ────────────────────────────────────────────────── */
@@ -93,16 +211,18 @@ button[class*='submit'] {
   color: #ffffff !important;
 }
 
-/* ─── Dividers ───────────────────────────────────────────────────────────── */
+/* ─── Dividers / borders ──────────────────────────────────────────────────── */
 [class*='Divider'],
 hr {
   border-color: #1e293b !important;
 }
 
-/* ─── Muted text ─────────────────────────────────────────────────────────── */
+/* ─── Muted / timestamp text ──────────────────────────────────────────────── */
+[class*='Timestamp'],
+[class*='timestamp'],
 [class*='muted'],
 [class*='Muted'],
-[class*='timestamp'],
-[class*='Timestamp'] {
+[class*='secondary'],
+[class*='Secondary'] {
   color: #94a3b8 !important;
 }

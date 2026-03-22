@@ -1,22 +1,38 @@
 /*
  * UnTelevised Media — Coral comments theme (LIGHT)
- * Site light bg: hsl(0 0% 100%) = #ffffff
- * Site light fg: hsl(222.2 84% 4.9%) = #020817
- * Site border:   hsl(214.3 31.8% 91.4%) = #e2e8f0
+ * Site light bg:  #ffffff
+ * Site light fg:  #020817  (hsl 222.2 84% 4.9%)
+ * Site border:    #e2e8f0  (hsl 214.3 31.8% 91.4%)
  * Brand red: #d70606
  */
 
-/* ─── Inner padding ──────────────────────────────────────────────────────── */
-body {
-  padding: 1rem !important;
-  box-sizing: border-box !important;
-  background-color: #ffffff !important;
-  color: #020817 !important;
+/* ─── Override Coral's CSS custom properties (kills the blue) ────────────── */
+:root {
+  --palette-primary-100: #fad7d7;
+  --palette-primary-200: #f07070;
+  --palette-primary-300: #e53535;
+  --palette-primary-400: #e00808;
+  --palette-primary-500: #d70606;
+  --palette-primary-600: #b80505;
+  --palette-primary-700: #9a0404;
+  --palette-primary-800: #7a0303;
+  --palette-primary-900: #5a0202;
 }
 
-/* ─── Catch-all: every link → brand red ─────────────────────────────────── */
-a,
-button[class*='Link'] {
+/* ─── Base / body ────────────────────────────────────────────────────────── */
+html,
+body {
+  background-color: #ffffff !important;
+  color: #020817 !important;
+  box-sizing: border-box !important;
+}
+
+body {
+  padding: 1rem !important;
+}
+
+/* ─── Catch-all links → brand red ───────────────────────────────────────── */
+a {
   color: #d70606 !important;
 }
 
@@ -24,49 +40,74 @@ a:hover {
   color: #b80505 !important;
 }
 
-/* ─── Backgrounds ────────────────────────────────────────────────────────── */
-[class*='Stream'],
-[class*='Comment-'],
-[class*='Box'],
-[class*='Card'],
-[class*='Container'],
-[class*='Gutter'] {
-  background-color: #ffffff !important;
-  color: #020817 !important;
+/* ─── Tabs ───────────────────────────────────────────────────────────────── */
+[class*='Tab'] {
+  color: #64748b !important;
 }
 
-/* ─── Inputs / textarea ──────────────────────────────────────────────────── */
-[class*='Textarea'],
-[class*='Input'],
-textarea,
-input {
+[class*='Tab'][class*='active'],
+[class*='Tab'][class*='Active'],
+[class*='Tab'][class*='isActive'],
+[class*='Tab'][aria-selected='true'] {
+  color: #d70606 !important;
+  border-bottom-color: #d70606 !important;
+}
+
+/* ─── Comment text area (contenteditable) ────────────────────────────────── */
+[contenteditable],
+[contenteditable='true'],
+[role='textbox'] {
   background-color: #ffffff !important;
   color: #020817 !important;
+  caret-color: #020817 !important;
   border-color: #e2e8f0 !important;
 }
 
-textarea::placeholder {
+[contenteditable]:focus,
+[contenteditable='true']:focus {
+  outline-color: #d70606 !important;
+  border-color: #d70606 !important;
+}
+
+/* ─── Rich text toolbar ──────────────────────────────────────────────────── */
+[class*='Toolbar'],
+[class*='toolbar'],
+[class*='RichText'],
+[class*='richText'] {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+  color: #020817 !important;
+}
+
+[class*='Toolbar'] button,
+[class*='toolbar'] button,
+[class*='Toolbar'] svg,
+[class*='toolbar'] svg {
+  color: #020817 !important;
+  fill: #020817 !important;
+}
+
+/* ─── "No comments" / empty state banner ────────────────────────────────── */
+[class*='Empty'],
+[class*='empty'],
+[class*='noComments'],
+[class*='NoComments'],
+[class*='CallOut'],
+[class*='callOut'],
+[class*='callout'],
+[class*='Callout'] {
+  background-color: #f8fafc !important;
   color: #64748b !important;
+  border-color: #e2e8f0 !important;
 }
 
-/* ─── Tabs ───────────────────────────────────────────────────────────────── */
-[class*='Tab'][class*='active'],
-[class*='Tab'][class*='Active'],
-[class*='isActive'] {
-  border-bottom-color: #d70606 !important;
-  color: #d70606 !important;
-}
-
-[class*='Tab']:not([class*='active']):not([class*='Active']) {
-  color: #64748b !important;
-}
-
-/* ─── MODERATE button ────────────────────────────────────────────────────── */
+/* ─── MODERATE outlined button ───────────────────────────────────────────── */
 [class*='moderateButton'],
 [class*='ModerateButton'],
 button[class*='moderate'] {
   border-color: #d70606 !important;
   color: #d70606 !important;
+  background-color: transparent !important;
 }
 
 [class*='moderateButton']:hover,
@@ -75,14 +116,20 @@ button[class*='moderate'] {
   color: #ffffff !important;
 }
 
-/* ─── SUBMIT / filled buttons ────────────────────────────────────────────── */
+/* ─── SUBMIT / filled primary buttons ────────────────────────────────────── */
 [class*='Button'][class*='filled'],
-[class*='SubmitButton'],
-button[type='submit'],
-button[class*='submit'] {
+[class*='Button'][class*='primary'],
+button[class*='submit']:not(:disabled) {
   background-color: #d70606 !important;
   border-color: #d70606 !important;
   color: #ffffff !important;
+}
+
+/* ─── Sort by dropdown ───────────────────────────────────────────────────── */
+select {
+  background-color: #ffffff !important;
+  color: #020817 !important;
+  border-color: #e2e8f0 !important;
 }
 
 /* ─── Comment count badge ────────────────────────────────────────────────── */
