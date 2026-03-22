@@ -1,7 +1,6 @@
 /*
  * UnTelevised Media — Coral comments theme (DARK)
- * Uses Coral's documented CSS variables + stable class names
- * Ref: https://docs.coralproject.net/css
+ * Class names verified from live DOM inspection.
  *
  * Site dark bg:    #020817
  * Site dark input: #0f172a
@@ -10,9 +9,8 @@
  * Brand red:       #d70606
  */
 
-/* ─── CSS custom properties — single source of truth for Coral theming ───── */
+/* ─── Override Coral's palette CSS variables ─────────────────────────────── */
 :root {
-  /* Brand color — replaces all Coral blues */
   --palette-primary-100: #fad7d7;
   --palette-primary-200: #f07070;
   --palette-primary-300: #e53535;
@@ -22,131 +20,101 @@
   --palette-primary-700: #9a0404;
   --palette-primary-800: #7a0303;
   --palette-primary-900: #5a0202;
-
-  /* Backgrounds */
-  --palette-background-body:              #020817;
-  --palette-background-popover:           #0f172a;
-  --palette-background-tooltip:           #1e293b;
-  --palette-background-input:             #0f172a;
-  --palette-background-input-disabled:    #1e293b;
-
-  /* Text */
-  --palette-text-000:             #f8fafc;
-  --palette-text-100:             #94a3b8;
-  --palette-text-500:             #cbd5e1;
-  --palette-text-900:             #f8fafc;
-  --palette-text-placeholder:     #64748b;
-  --palette-text-input-disabled:  #64748b;
-
-  /* Dividers */
-  --palette-divider: rgba(255, 255, 255, 0.08);
+  --palette-background-body:           #020817;
+  --palette-background-popover:        #0f172a;
+  --palette-background-input:          #0f172a;
+  --palette-background-input-disabled: #1e293b;
+  --palette-text-000:         #f8fafc;
+  --palette-text-100:         #94a3b8;
+  --palette-text-500:         #cbd5e1;
+  --palette-text-900:         #f8fafc;
+  --palette-text-placeholder: #64748b;
+  --palette-divider:          rgba(255, 255, 255, 0.08);
 }
 
-/* ─── Body padding and base ──────────────────────────────────────────────── */
-body.coral {
-  background-color: #020817;
-  color: #f8fafc;
-  padding: 16px;
-}
-
-/* ─── Links → brand red ──────────────────────────────────────────────────── */
-a {
-  color: #d70606 !important;
-}
-
-a:hover {
-  color: #b80505 !important;
-}
-
-/* ─── Tab bar ────────────────────────────────────────────────────────────── */
-.coral-tab-bar {
-  background-color: #020817;
-  border-bottom-color: #1e293b;
-}
-
-.coral-tab {
-  color: #94a3b8;
-}
-
-/* ─── Rich text editor ───────────────────────────────────────────────────── */
-.coral-rte {
-  background-color: #0f172a !important;
-  border-color: #1e293b !important;
+/* ─── Body (iframe body has no .coral class in this version) ─────────────── */
+body {
+  background-color: #020817 !important;
   color: #f8fafc !important;
-  overflow: visible !important;
-  display: flex !important;
-  flex-direction: column !important;
-  height: auto !important;
-  min-height: 0 !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
 }
 
-/* Every ancestor of the toolbar must not clip */
-.coral-rte *,
-[class*='rte'],
-[class*='RTE'],
-[class*='CommentForm'],
-[class*='commentForm'] {
-  overflow: visible !important;
-  height: auto !important;
+/* ─── Links ──────────────────────────────────────────────────────────────── */
+a { color: #d70606 !important; }
+a:hover { color: #b80505 !important; }
+
+/* ─── Tab bar (.coral-tabBar confirmed in DOM) ───────────────────────────── */
+.coral-tabBar {
+  background-color: #020817 !important;
+  border-bottom-color: #1e293b !important;
 }
 
-.coral-rte [contenteditable],
-.coral-rte [role='textbox'] {
+/* ─── Editable comment area (.coral-rte-content confirmed in DOM) ─────────── */
+.coral-rte-content,
+[class*='contentEditable'],
+[class*='RTE-content'] {
   background-color: #0f172a !important;
   color: #f8fafc !important;
   caret-color: #f8fafc !important;
-  min-height: 80px !important;
+  border-color: #334155 !important;
 }
 
-/* Toolbar row */
+/* ─── Toolbar (.coral-rte-toolbar confirmed in DOM) ──────────────────────── */
 .coral-rte-toolbar,
-[class*='toolbar'],
-[class*='Toolbar'] {
+[class*='toolbarBottom'] {
   background-color: #0f172a !important;
   border-top: 1px solid #1e293b !important;
-  flex-shrink: 0 !important;
+  color: #f8fafc !important;
+}
+
+/* ─── Form field container — fixes toolbar clip ──────────────────────────── */
+/* .comments-postCommentForm-field confirmed as unhashed class in DOM */
+.comments-postCommentForm-field {
   overflow: visible !important;
   height: auto !important;
 }
 
-/* ─── Comments ───────────────────────────────────────────────────────────── */
-.coral-comment {
-  background-color: #020817;
-  color: #f8fafc;
-  border-top-color: #1e293b;
+.comments-postCommentForm-field > * {
+  overflow: visible !important;
 }
 
-/* ─── Empty / no-comments callout ────────────────────────────────────────── */
-.coral-callout,
-[class*='NoComments'],
-[class*='noComments'],
-[class*='Empty'],
-[class*='empty'] {
+/* ─── No-comments banner (CallOut — no stable coral class, use partial) ─── */
+[class*='CallOut-root'],
+[class*='CallOut-colorRegular'],
+[class*='CallOut-inner'] {
   background-color: #0f172a !important;
   color: #94a3b8 !important;
   border-color: #1e293b !important;
 }
 
-/* ─── Sort by select ──────────────────────────────────────────────────────── */
+/* ─── Sort dropdown ──────────────────────────────────────────────────────── */
 select {
-  background-color: #0f172a;
-  color: #f8fafc;
-  border-color: #1e293b;
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
 }
 
-/* ─── MODERATE button ────────────────────────────────────────────────────── */
-.coral-button-outline {
-  border-color: #d70606;
-  color: #d70606;
-  background-color: transparent;
+/* ─── MODERATE button (.coral-general-moderateStreamLink confirmed) ────────── */
+.coral-general-moderateStreamLink {
+  border-color: #d70606 !important;
+  color: #d70606 !important;
+  background-color: transparent !important;
 }
 
-.coral-button-outline:hover {
-  background-color: #d70606;
-  color: #ffffff;
+.coral-general-moderateStreamLink:hover {
+  background-color: #d70606 !important;
+  color: #ffffff !important;
 }
 
-/* ─── Count badge ─────────────────────────────────────────────────────────── */
+/* ─── SUBMIT / filled primary buttons ────────────────────────────────────── */
+[class*='Button-colorPrimary']:not([class*='outlined']) {
+  background-color: #d70606 !important;
+  border-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ─── Comment count badge ────────────────────────────────────────────────── */
 .coral-count,
 [class*='Count'],
 [class*='count'] {
@@ -156,8 +124,10 @@ select {
 
 /* ─── Popover / dropdown ──────────────────────────────────────────────────── */
 .coral-popover,
-.coral-dropdown {
-  background-color: #0f172a;
-  border-color: #1e293b;
-  color: #f8fafc;
+.coral-dropdown,
+[class*='Popover-root'],
+[class*='Dropdown-root'] {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
 }
