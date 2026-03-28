@@ -319,6 +319,7 @@ export const queryArticleBySlug = groq`
         publishedAt,
         author-> { name }
       },
+      "allowComments": coalesce(allowComments, true),
       'comments': *[
         _type == 'comment' &&
         article._ref == ^._id &&

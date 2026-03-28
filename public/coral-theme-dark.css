@@ -1,0 +1,135 @@
+/*
+ * UnTelevised Media — Coral comments theme (DARK)
+ * Class names verified from live DOM inspection.
+ *
+ * Site dark bg:    #020817
+ * Site dark input: #0f172a
+ * Site dark muted: #1e293b
+ * Site dark fg:    #f8fafc
+ * Brand red:       #d70606
+ */
+
+/* ─── Override Coral's palette CSS variables ─────────────────────────────── */
+/* Target #coral directly — Coral sets variables on this element, so :root    */
+/* loses to its own rules. #coral is the correct specificity to override.     */
+#coral {
+  --palette-primary-100: #fad7d7;
+  --palette-primary-200: #f07070;
+  --palette-primary-300: #e53535;
+  --palette-primary-400: #e00808;
+  --palette-primary-500: #d70606;
+  --palette-primary-600: #b80505;
+  --palette-primary-700: #9a0404;
+  --palette-primary-800: #7a0303;
+  --palette-primary-900: #5a0202;
+  --palette-background-body:           #020817;
+  --palette-background-popover:        #0f172a;
+  --palette-background-input:          #0f172a;
+  --palette-background-input-disabled: #1e293b;
+  --palette-text-000:         #f8fafc;
+  --palette-text-100:         #94a3b8;
+  --palette-text-500:         #cbd5e1;
+  --palette-text-900:         #f8fafc;
+  --palette-text-placeholder: #64748b;
+  --palette-divider:          rgba(255, 255, 255, 0.08);
+}
+
+/* ─── RTE iframe body ────────────────────────────────────────────────────── */
+/* No padding here — padding causes the toolbar to be clipped by the iframe height */
+body {
+  background-color: #020817 !important;
+  color: #f8fafc !important;
+  margin: 0 !important;
+}
+
+/* ─── Links ──────────────────────────────────────────────────────────────── */
+a { color: #d70606 !important; }
+a:hover { color: #b80505 !important; }
+
+/* ─── Tab bar (.coral-tabBar confirmed in DOM) ───────────────────────────── */
+.coral-tabBar {
+  background-color: #020817 !important;
+  border-bottom-color: #1e293b !important;
+}
+
+/* ─── Editable comment area (.coral-rte-content confirmed in DOM) ─────────── */
+.coral-rte-content,
+[class*='contentEditable'],
+[class*='RTE-content'] {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  caret-color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+/* ─── Toolbar (.coral-rte-toolbar confirmed in DOM) ──────────────────────── */
+.coral-rte-toolbar,
+[class*='toolbarBottom'] {
+  background-color: #0f172a !important;
+  border-top: 1px solid #1e293b !important;
+  color: #f8fafc !important;
+}
+
+/* ─── Form field container — fixes toolbar clip ──────────────────────────── */
+/* .comments-postCommentForm-field confirmed as unhashed class in DOM */
+.comments-postCommentForm-field {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+.comments-postCommentForm-field > * {
+  overflow: visible !important;
+}
+
+/* ─── No-comments banner (CallOut — no stable coral class, use partial) ─── */
+[class*='CallOut-root'],
+[class*='CallOut-colorRegular'],
+[class*='CallOut-inner'] {
+  background-color: #0f172a !important;
+  color: #94a3b8 !important;
+  border-color: #1e293b !important;
+}
+
+/* ─── Sort dropdown ──────────────────────────────────────────────────────── */
+select {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+/* ─── MODERATE button (.coral-general-moderateStreamLink confirmed) ────────── */
+.coral-general-moderateStreamLink {
+  border-color: #d70606 !important;
+  color: #d70606 !important;
+  background-color: transparent !important;
+}
+
+.coral-general-moderateStreamLink:hover {
+  background-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ─── SUBMIT / filled primary buttons ────────────────────────────────────── */
+[class*='Button-colorPrimary']:not([class*='outlined']) {
+  background-color: #d70606 !important;
+  border-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ─── Comment count badge ────────────────────────────────────────────────── */
+.coral-count,
+[class*='Count'],
+[class*='count'] {
+  background-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ─── Popover / dropdown ──────────────────────────────────────────────────── */
+.coral-popover,
+.coral-dropdown,
+[class*='Popover-root'],
+[class*='Dropdown-root'] {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+}

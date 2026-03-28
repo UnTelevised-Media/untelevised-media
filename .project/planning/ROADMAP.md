@@ -1,7 +1,7 @@
 # UnTelevised Media — Feature Roadmap & Working Order
 
 > Last updated: 2026-03-21
-> Issues: [GitHub Issues Board](../../issues)
+> Issues: GitHub Issues Roadmap
 
 ---
 

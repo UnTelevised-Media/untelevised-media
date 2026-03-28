@@ -9,6 +9,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Coral Comments with Clerk SSO (#42)**
+  - `docker/docker-compose.yml` — full self-hosted Coral stack: Coral Talk, MongoDB 8, Redis 7-alpine, Caddy 2 (automatic Let's Encrypt TLS), nightly backup container; MongoDB and Redis on an internal-only network, never exposed publicly
+  - `docker/Caddyfile` — Caddy reverse proxy for `coral.untelevised.live` with security headers, gzip, and access logging
+  - `docker/.env.example` — all required environment variables documented with generation instructions; `CORAL_SIGNING_SECRET` vs `CORAL_SSO_SECRET` distinction called out explicitly
+  - `docker/scripts/backup.sh` — nightly `mongodump` with gzip, tar archive, and automatic pruning of dumps older than `BACKUP_RETAIN_DAYS` (default 14)
+  - `docker/.gitignore` — excludes `docker/.env` and runtime data directories
+  - Installed `jose` v6 for HS256 JWT signing
+  - `src/app/api/coral-token/route.ts` — server-only route that verifies the active Clerk session via `auth()` and `currentUser()`, then mints a 24-hour HS256 JWT for Coral SSO; returns `{ token: null }` for unauthenticated guests; automatically grants `MODERATOR` Coral role to Clerk users with `publicMetadata.role === 'admin' | 'staff'`
+  - `src/components/post/CommentsSection.tsx` — `'use client'` component that gates the Coral embed behind functional cookie consent (`preferences.preferences` from `useConsent()`); fetches SSO token from `/api/coral-token` for signed-in users; renders a consent CTA linking to `/privacy-settings` when functional cookies are declined; renders a locked state when `allowComments === false`; loads Coral embed script dynamically and calls `Coral.createStreamEmbed()` with the article `storyID` and `storyURL`
+  - `src/models/schema/article.ts` — `allowComments` boolean field added with `initialValue: true`; editors can disable comments per-article in Sanity Studio for sensitive content
+  - `src/lib/sanity/lib/queries.ts` — `allowComments` added to `queryArticleBySlug` GROQ projection
+  - `src/app/(user)/articles/[slug]/page.tsx` — `<CommentsSection>` rendered below article body, wired with `articleId`, `articleUrl`, and `allowComments` props
+  - `.env.example` updated with `NEXT_PUBLIC_CORAL_URL` and `CORAL_SSO_SECRET` with setup instructions
+
 - **Algolia Full-Text Search (#21)**
   - Installed `algoliasearch` v5, `react-instantsearch` v7, `instantsearch.js`, and `@portabletext/toolkit` for search infrastructure
   - `src/lib/algolia/client.ts` — server-only Algolia admin client with lazy initialisation (never bundled to browser)

@@ -100,6 +100,7 @@ interface Article extends Base {
     metaDescription?: string;
     ogImage?: Image;
   };
+  allowComments?: boolean;
   comments: Comment[];
   tags?: string[];
 }

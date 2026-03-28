@@ -1,0 +1,20 @@
+/*
+ * UnTelevised Media — Coral base theme (fallback)
+ * This file is referenced in Coral Admin → Configure → Advanced → Custom CSS.
+ * It only sets the brand red color. Dark/light backgrounds are handled by
+ * coral-theme-dark.css and coral-theme-light.css via customCSSURL in the embed config.
+ */
+:root {
+  --palette-primary-100: #fad7d7;
+  --palette-primary-200: #f07070;
+  --palette-primary-300: #e53535;
+  --palette-primary-400: #e00808;
+  --palette-primary-500: #d70606;
+  --palette-primary-600: #b80505;
+  --palette-primary-700: #9a0404;
+  --palette-primary-800: #7a0303;
+  --palette-primary-900: #5a0202;
+}
+
+a { color: #d70606 !important; }
+a:hover { color: #b80505 !important; }

@@ -1,0 +1,132 @@
+/*
+ * UnTelevised Media — Coral comments theme (LIGHT)
+ * Class names verified from live DOM inspection.
+ *
+ * Site light bg:     #ffffff
+ * Site light fg:     #020817
+ * Site light border: #e2e8f0
+ * Brand red:         #d70606
+ */
+
+/* ─── Override Coral's palette CSS variables ─────────────────────────────── */
+/* Target #coral directly — Coral sets variables on this element, so :root    */
+/* loses to its own rules. #coral is the correct specificity to override.     */
+#coral {
+  --palette-primary-100: #fad7d7;
+  --palette-primary-200: #f07070;
+  --palette-primary-300: #e53535;
+  --palette-primary-400: #e00808;
+  --palette-primary-500: #d70606;
+  --palette-primary-600: #b80505;
+  --palette-primary-700: #9a0404;
+  --palette-primary-800: #7a0303;
+  --palette-primary-900: #5a0202;
+  --palette-background-body:           #ffffff;
+  --palette-background-popover:        #ffffff;
+  --palette-background-input:          #ffffff;
+  --palette-background-input-disabled: #f1f5f9;
+  --palette-text-000:         #ffffff;
+  --palette-text-100:         #64748b;
+  --palette-text-500:         #334155;
+  --palette-text-900:         #020817;
+  --palette-text-placeholder: #94a3b8;
+  --palette-divider:          rgba(0, 0, 0, 0.1);
+}
+
+/* ─── RTE iframe body ────────────────────────────────────────────────────── */
+body {
+  background-color: #ffffff !important;
+  color: #020817 !important;
+  margin: 0 !important;
+}
+
+/* ─── Links ──────────────────────────────────────────────────────────────── */
+a { color: #d70606 !important; }
+a:hover { color: #b80505 !important; }
+
+/* ─── Tab bar ────────────────────────────────────────────────────────────── */
+.coral-tabBar {
+  background-color: #ffffff !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+/* ─── Editable comment area ──────────────────────────────────────────────── */
+.coral-rte-content,
+[class*='contentEditable'],
+[class*='RTE-content'] {
+  background-color: #ffffff !important;
+  color: #020817 !important;
+  caret-color: #020817 !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* ─── Toolbar ────────────────────────────────────────────────────────────── */
+.coral-rte-toolbar,
+[class*='toolbarBottom'] {
+  background-color: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+  color: #020817 !important;
+}
+
+/* ─── Form field container — fixes toolbar clip ──────────────────────────── */
+.comments-postCommentForm-field {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+.comments-postCommentForm-field > * {
+  overflow: visible !important;
+}
+
+/* ─── No-comments banner ─────────────────────────────────────────────────── */
+[class*='CallOut-root'],
+[class*='CallOut-colorRegular'],
+[class*='CallOut-inner'] {
+  background-color: #f8fafc !important;
+  color: #64748b !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* ─── Sort dropdown ──────────────────────────────────────────────────────── */
+select {
+  background-color: #ffffff !important;
+  color: #020817 !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* ─── MODERATE button ────────────────────────────────────────────────────── */
+.coral-general-moderateStreamLink {
+  border-color: #d70606 !important;
+  color: #d70606 !important;
+  background-color: transparent !important;
+}
+
+.coral-general-moderateStreamLink:hover {
+  background-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ─── SUBMIT / filled primary buttons ────────────────────────────────────── */
+[class*='Button-colorPrimary']:not([class*='outlined']) {
+  background-color: #d70606 !important;
+  border-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ─── Comment count badge ────────────────────────────────────────────────── */
+.coral-count,
+[class*='Count'],
+[class*='count'] {
+  background-color: #d70606 !important;
+  color: #ffffff !important;
+}
+
+/* ─── Popover / dropdown ─────────────────────────────────────────────────── */
+.coral-popover,
+.coral-dropdown,
+[class*='Popover-root'],
+[class*='Dropdown-root'] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #020817 !important;
+}
