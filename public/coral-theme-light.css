@@ -9,7 +9,9 @@
  */
 
 /* ─── Override Coral's palette CSS variables ─────────────────────────────── */
-:root {
+/* Target #coral directly — Coral sets variables on this element, so :root    */
+/* loses to its own rules. #coral is the correct specificity to override.     */
+#coral {
   --palette-primary-100: #fad7d7;
   --palette-primary-200: #f07070;
   --palette-primary-300: #e53535;
