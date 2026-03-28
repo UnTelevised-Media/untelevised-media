@@ -22,6 +22,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/lib/sanity/lib/queries.ts` — `allowComments` added to `queryArticleBySlug` GROQ projection
   - `src/app/(user)/articles/[slug]/page.tsx` — `<CommentsSection>` rendered below article body, wired with `articleId`, `articleUrl`, and `allowComments` props
   - `.env.example` updated with `NEXT_PUBLIC_CORAL_URL` and `CORAL_SSO_SECRET` with setup instructions
+  - `public/coral-theme-dark.css` / `coral-theme-light.css` — served as `customCSSURL` to Coral's RTE iframe; styles the editor body, editable area, toolbar, and form field container; two separate files so Coral can load the correct one via a static URL
+  - `CommentsSection` inline `<style>` — scoped overrides on `#coral` for the outer stream: CSS palette variables (red primary, dark/light bg/text), explicit `background-color` on the container (variables alone don't paint `#coral` itself), link colour override to replace Coral's default blue, active/inactive tab styling, count badge, callout banner, sort dropdown, and primary button variants; always passes `theme: 'LIGHT'` to `createStreamEmbed` so Coral never injects its own dark stylesheet after ours loads
 
 - **Algolia Full-Text Search (#21)**
   - Installed `algoliasearch` v5, `react-instantsearch` v7, `instantsearch.js`, and `@portabletext/toolkit` for search infrastructure
