@@ -9,6 +9,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+
+- **Author Portal — Clerk Role-Based Access Control (#44, Phase 1)**
+  - `src/lib/auth/roles-utils.ts` — pure, framework-agnostic utilities: `getRoleFromMeta(meta)` extracts a `PortalRole` (`'admin' | 'editor' | 'author'`) from Clerk `publicMetadata`; `hasRole(role, required)` enforces the hierarchy `admin > editor > author`; backwards-compatible with legacy `publicMetadata.admin === true` flag
+  - `src/lib/auth/roles.ts` — server-only helpers: `getRoleFromUser(user)`, `getCurrentRole()`, `getCurrentUserWithRole()`, `requireRole(role)` (redirects to sign-in or home on failure), `requireAdmin()`, `requireEditor()`, `requireAuthor()`, `isAdmin()`, `isEditor()`, `isAuthor()`; roles are read from fresh Clerk API data, never from the JWT alone
+  - `src/middleware.ts` — updated to protect `/portal/**` and `/api/portal/**` routes in addition to existing `/admin/**`; unauthenticated users redirected to `/sign-in`; authenticated users without a portal role redirected to `/`; admin check uses fresh `publicMetadata` from Clerk API on every request
+  - `src/app/api/admin/set-role/route.ts` — admin-only POST endpoint that writes `publicMetadata.role` to any target Clerk user; validated with Zod; re-verifies requester is admin on every call; role can only be set server-side — never from the client
+  - `jest.config.ts` — root-level Jest config using `next/jest` (SWC-based transform) that was previously only at `src/lib/jest/jest.config.ts` and not loaded
+  - `src/lib/auth/__tests__/roles.test.ts` — 20 unit tests covering all `getRoleFromMeta` and `hasRole` scenarios including null inputs, legacy admin flag, and full role hierarchy
+
+### Added
 - **Coral Comments with Clerk SSO (#42)**
   - `docker/docker-compose.yml` — full self-hosted Coral stack: Coral Talk, MongoDB 8, Redis 7-alpine, Caddy 2 (automatic Let's Encrypt TLS), nightly backup container; MongoDB and Redis on an internal-only network, never exposed publicly
   - `docker/Caddyfile` — Caddy reverse proxy for `coral.untelevised.live` with security headers, gzip, and access logging
