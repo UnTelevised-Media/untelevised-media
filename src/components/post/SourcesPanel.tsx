@@ -11,18 +11,17 @@ import {
   HelpCircle,
   Shield,
   ExternalLink,
+  Newspaper,
 } from 'lucide-react';
 
-const SOURCE_CONFIG: Record<
-  string,
-  { label: string; Icon: React.ElementType }
-> = {
+const SOURCE_CONFIG: Record<string, { label: string; Icon: React.ElementType }> = {
   document: { label: 'Document', Icon: FileText },
   interview: { label: 'Interview', Icon: Mic },
   statement: { label: 'Statement', Icon: MessageSquare },
   data: { label: 'Data', Icon: Database },
   media: { label: 'Video / Audio', Icon: Video },
   onscene: { label: 'On-Scene', Icon: Eye },
+  article: { label: 'News Article', Icon: Newspaper },
   other: { label: 'Source', Icon: HelpCircle },
 };
 
