@@ -147,6 +147,7 @@ export default function ArticleEditorForm({
     handleSubmit,
     setValue,
     watch,
+    getValues,
     formState: { errors, isDirty },
   } = useForm<FormValues>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -290,15 +291,29 @@ export default function ArticleEditorForm({
   // Autosave every 60 seconds when there are unsaved changes
   // ---------------------------------------------------------------------------
 
+  // Autosave every 60 seconds when there are unsaved changes (no redirect on success)
   useEffect(() => {
-    const interval = setInterval(async () => {
+    const interval = setInterval(() => {
       if (!isDirtyRef.current) return;
-      // Get current form values silently
+      const values = getValues();
       setSaveStatus('saving');
-      // We use handleSubmit internally for validation but skip redirect
-    }, 60000);
+      const input = buildInput(values as FormValues, 'draft');
+      const articleIdSnapshot = articleId;
+      startTransition(async () => {
+        const result = articleIdSnapshot
+          ? await updateArticle(articleIdSnapshot, input)
+          : await createArticle(input);
+        if (result.success) {
+          setSaveStatus('saved');
+          isDirtyRef.current = false;
+        } else {
+          setSaveStatus('unsaved');
+        }
+      });
+    }, 60_000);
     return () => clearInterval(interval);
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [articleId, buildInput, getValues]);
 
   // ---------------------------------------------------------------------------
   // Leave warning
@@ -321,20 +336,21 @@ export default function ArticleEditorForm({
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+      if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key === 's') {
         e.preventDefault();
-        handleSubmit(handleSaveDraft)();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        handleSubmit(handleSaveDraft as any)();
       }
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'P') {
         e.preventDefault();
-        const slug = watch('slug');
+        const slug = getValues('slug');
         if (slug) window.open(`/articles/${slug}`, '_blank');
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleSubmit, watch]);
+  }, [handleSubmit, getValues]);
 
   // ---------------------------------------------------------------------------
   // Render

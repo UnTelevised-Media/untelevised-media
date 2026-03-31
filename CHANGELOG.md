@@ -55,6 +55,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Security model summary: every portal write endpoint (1) re-verifies Clerk session + role on each call, never trusting props or client state; (2) enforces author ownership server-side (`author._ref === sanityAuthorId`) before any mutation; (3) strips HTML tags and encodes special chars on all text inputs via `sanitizeText`; (4) uses server-only `writeClient` with `SANITY_API_WRITE_TOKEN`; (5) excludes `clerkId` from all GROQ projections; (6) rate-limits writes via Upstash; (7) Next.js Server Actions provide native CSRF protection
   - `src/lib/portal/__tests__/rate-limit.test.ts` — 2 unit tests verifying graceful degradation when Upstash env vars are absent
 
+- **Author Portal — UI/UX Polish (#44, Phase 6 cont.)**
+  - `ArticleEditorForm.tsx` — autosave fully wired: `setInterval(60s)` reads `getValues()` and calls `updateArticle` / `createArticle` silently without redirecting; `setSaveStatus` drives visible Saving… / Saved / Unsaved changes indicator in sticky action bar
+  - `ArticleEditorForm.tsx` — `beforeunload` event listener prevents accidental tab close when `isDirtyRef.current === true`
+  - `ArticleEditorForm.tsx` — keyboard shortcuts: `Ctrl+S` / `⌘+S` = Save Draft; `Ctrl+Shift+P` / `⌘+Shift+P` = open article preview in new tab
+  - `src/app/(portal)/layout.tsx` — swapped `Toaster` import from shadcn to Sonner (consistent with `toast()` calls throughout portal)
+  - `src/lib/portal/__tests__/slug.test.ts` — 7 unit tests for slug-generation logic (spaces→hyphens, lowercase, special-char stripping, collapse, 100-char truncation)
+  - All portal pages use responsive grid/flex layouts; PortalNav collapses correctly on mobile (links hidden below sm, UserButton always visible); dashboard toolbar wraps on narrow viewports; editor form uses `sm:grid-cols-2` for metadata fields
+
 ### Added
 - **Coral Comments with Clerk SSO (#42)**
   - `docker/docker-compose.yml` — full self-hosted Coral stack: Coral Talk, MongoDB 8, Redis 7-alpine, Caddy 2 (automatic Let's Encrypt TLS), nightly backup container; MongoDB and Redis on an internal-only network, never exposed publicly
