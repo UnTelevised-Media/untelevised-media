@@ -7,6 +7,8 @@ import { writeClient } from '@/lib/sanity/lib/write-client';
 import { verifyArticleAccessForClerkUser } from './article-ownership';
 import { sanitizeText } from './sanitize';
 import { checkRateLimit } from './rate-limit';
+import { portalClient } from './fetch';
+import { queryPortalAllSources } from './queries';
 import { z } from 'zod';
 
 const sourceWriteSchema = z.object({
@@ -88,4 +90,16 @@ export async function deleteSource(sourceId: string): Promise<ActionResult> {
 
   await writeClient.delete(sourceId);
   return { success: true, data: undefined };
+}
+
+/** Fetch the sources list from Sanity — called by client components via server action. */
+export async function fetchAllSources(): Promise<
+  ActionResult<{ _id: string; label: string; type?: string; url?: string }[]>
+> {
+  await requireAuthor();
+  const data =
+    await portalClient.fetch<{ _id: string; label: string; type?: string; url?: string }[]>(
+      queryPortalAllSources
+    );
+  return { success: true, data: data ?? [] };
 }

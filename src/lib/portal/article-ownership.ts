@@ -1,5 +1,7 @@
 // src/lib/portal/article-ownership.ts
 // Shared ownership verification utility used by multiple portal server actions.
+import 'server-only';
+
 import { hasRole, getRoleFromMeta } from '@/lib/auth/roles-utils';
 import { writeClient } from '@/lib/sanity/lib/write-client';
 import { getSanityAuthorIdForCurrentUser } from './author-actions';

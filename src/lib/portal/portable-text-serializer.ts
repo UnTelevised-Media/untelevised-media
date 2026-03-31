@@ -75,12 +75,13 @@ export function tiptapToPortableText(doc: TiptapNode): SanityBlock_Any[] {
 
   for (const node of doc.content) {
     const block = nodeToBlock(node);
-    if (block) blocks.push(block);
+    if (Array.isArray(block)) blocks.push(...block);
+    else if (block) blocks.push(block);
   }
   return blocks;
 }
 
-function nodeToBlock(node: TiptapNode): SanityBlock_Any | null {
+function nodeToBlock(node: TiptapNode): SanityBlock_Any | SanityBlock_Any[] | null {
   switch (node.type) {
     case 'paragraph':
       return blockFromInline(node, 'normal');
@@ -105,7 +106,7 @@ function nodeToBlock(node: TiptapNode): SanityBlock_Any | null {
           items.push(b);
         }
       }
-      return items.length === 1 ? items[0] : (items as unknown as SanityBlock_Any);
+      return items;
     }
     case 'orderedList': {
       const items: SanityBlock[] = [];
@@ -118,7 +119,7 @@ function nodeToBlock(node: TiptapNode): SanityBlock_Any | null {
           items.push(b);
         }
       }
-      return items.length === 1 ? items[0] : (items as unknown as SanityBlock_Any);
+      return items;
     }
     case 'codeBlock':
       return {

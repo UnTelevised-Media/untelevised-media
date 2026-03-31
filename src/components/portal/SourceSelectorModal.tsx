@@ -21,9 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { createSource } from '@/lib/portal/source-actions';
-import { portalClient } from '@/lib/portal/fetch';
-import { queryPortalAllSources } from '@/lib/portal/queries';
+import { createSource, fetchAllSources } from '@/lib/portal/source-actions';
 import { toast } from 'sonner';
 
 interface SourceItem {
@@ -55,8 +53,8 @@ export default function SourceSelectorModal({ selectedIds, onSelect }: Props) {
     setOpen(true);
     // Load sources on open
     startTransition(async () => {
-      const data = await portalClient.fetch<SourceItem[]>(queryPortalAllSources);
-      setSources(data ?? []);
+      const result = await fetchAllSources();
+      if (result.success) setSources(result.data);
     });
   }
 

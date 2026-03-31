@@ -2,9 +2,9 @@
 // Admin-only API route to assign a portal role to a Clerk user.
 // Role is written to publicMetadata.role — never writable from the client.
 // Only accessible to users with admin role (verified server-side on every request).
-import { clerkClient } from '@clerk/nextjs/server';
+import { auth, currentUser, clerkClient } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/auth/roles';
+import { getRoleFromUser, hasRole } from '@/lib/auth/roles';
 import { z } from 'zod';
 
 const bodySchema = z.object({
@@ -13,11 +13,14 @@ const bodySchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  // Verify the requester is an admin — throws redirect if not (caught below)
-  try {
-    await requireAdmin();
-  } catch {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  // Verify the requester is an admin — use auth() directly to avoid catching
+  // Next.js redirect exceptions that requireAdmin() would throw.
+  const { userId } = await auth();
+  if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const user = await currentUser();
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!hasRole(getRoleFromUser(user), 'admin')) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 
   const parsed = bodySchema.safeParse(await req.json());
