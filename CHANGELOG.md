@@ -30,6 +30,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/components/portal/PortalNav.tsx` — top nav bar with Articles/Sources links, back-to-site link, Clerk UserButton; active link highlighted with `bg-untele`
   - `src/components/portal/ArticleDashboard.tsx` — full client-side dashboard: live search by title/tag/category; filter by status (published/draft/in-review); sort by last modified/created/title/status; table/card view toggle; per-article action menu (Edit, Preview, Delete with confirmation dialog); role-aware: editors see author column and all articles, authors see only their own; empty state with CTA; Sonner toast feedback on delete
 
+- **Author Portal — Article Editor (#44, Phase 3)**
+  - `src/lib/portal/portable-text-serializer.ts` — bidirectional Tiptap JSON ↔ Sanity Portable Text serializer covering: paragraphs, headings (h1–h4), blockquote, bullet/ordered lists, inline code, code blocks, horizontal rule, images, bold/italic/underline/strikethrough/link marks; 12 unit tests (round-trip, mark conversion, list conversion)
+  - `src/lib/portal/image-actions.ts` — server action to upload images directly to Sanity asset pipeline; validates file type (JPEG/PNG/WebP/GIF/AVIF) and 10 MB size limit; requires author role
+  - `src/lib/portal/article-ownership.ts` — shared ownership verification helper used by source and article mutations
+  - `src/lib/portal/source-actions.ts` — `createSource`, `updateSource`, `deleteSource` server actions; input sanitized; Zod-validated; ownership verified for deletes
+  - `src/components/portal/RichTextEditor.tsx` — Tiptap React editor with full toolbar: H1–H4, Bold, Italic, Underline, Strikethrough, Blockquote, Bullet list, Ordered list, Inline code, Code block (lowlight syntax highlight), Link (with URL prompt), Image, Horizontal rule, Undo/Redo; active state highlighted with `bg-untele`; SSR-safe (loaded via next/dynamic)
+  - `src/components/portal/SourceSelectorModal.tsx` — dialog for searching existing source docs or creating a new one inline (Section 5c); after creating, the source is immediately linked to the article
+  - `src/components/portal/ArticleEditorForm.tsx` — full article metadata form: title, slug (auto-generated from title for new articles), excerpt, lead paragraph, Tiptap body, categories (multi-select), author (editor+ only), tags, keywords, location, publish date/time, sources selector, featured/breaking (editor+ only), comments toggle, video embed, methodology note; sticky action bar with Save Draft / Submit for Review / Publish / Preview buttons; Ctrl+S = Save Draft, Ctrl+Shift+P = Preview; unsaved-changes leave-warning
+  - `src/app/(portal)/portal/articles/new/page.tsx` — server component fetching categories + authors in parallel, renders `ArticleEditorForm`
+  - `src/app/(portal)/portal/articles/[id]/edit/page.tsx` — server component; verifies author ownership before rendering; uses `notFound()` for missing or unauthorized articles
+
 ### Added
 - **Coral Comments with Clerk SSO (#42)**
   - `docker/docker-compose.yml` — full self-hosted Coral stack: Coral Talk, MongoDB 8, Redis 7-alpine, Caddy 2 (automatic Let's Encrypt TLS), nightly backup container; MongoDB and Redis on an internal-only network, never exposed publicly
