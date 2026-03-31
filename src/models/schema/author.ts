@@ -134,6 +134,16 @@ export default defineType({
       initialValue: true,
       description: 'Uncheck for former contributors',
     }),
+    // Portal linkage — admin-only. Never editable by the author via any API route.
+    defineField({
+      name: 'clerkId',
+      title: 'Clerk User ID',
+      type: 'string',
+      readOnly: true,
+      description: 'Linked Clerk account ID — set by Admin only. Do not share or edit directly.',
+      // Hidden from Studio users who are not Sanity administrators
+      hidden: ({ currentUser }) => !currentUser?.roles?.some((r) => r.name === 'administrator'),
+    }),
   ],
   preview: {
     select: {
