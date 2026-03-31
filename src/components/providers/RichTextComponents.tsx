@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import urlForImage from '@/u/urlForImage';
 import { InlineFactCheckCard } from '@/components/fact-check/InlineFactCheckCard';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
@@ -71,60 +72,35 @@ export const RichTextComponents = {
     // ── Tables ────────────────────────────────────────────────────────────────
     table: ({ value }: any) => {
       const { rows } = value;
-      if (!rows || rows.length === 0) return null;
-
-      const headerRow = rows[0];
-      const bodyRows = rows.slice(1);
-
-      // Cells may be plain strings or tableCell objects with a Portable Text
-      // `content` array (e.g. from sanity-plugin-table rich-text cells).
-      function cellText(cell: any): string {
-        if (typeof cell === 'string') return cell;
-        if (cell && Array.isArray(cell.content)) {
-          return cell.content
-            .flatMap((block: any) =>
-              (block.children ?? [])
-                .filter((s: any) => s._type === 'span')
-                .map((s: any) => s.text ?? ''),
-            )
-            .join('');
-        }
-        return '';
-      }
+      if (!rows) return null;
 
       return (
-        <div className='my-6 w-full overflow-x-auto border border-slate-300 dark:border-slate-700'>
-          <table className='w-full border-collapse text-sm'>
-            <thead>
-              <tr className='border-b-2 border-untele bg-untele'>
-                {headerRow.cells.map((cell: any, i: number) => (
-                  <th
+        <div className='mx-auto my-4 max-w-full overflow-x-auto rounded-md border'>
+          <Table className='w-full'>
+            <TableHeader>
+              <TableRow>
+                {rows[0]?.cells.map((cell: string, i: number) => (
+                  <TableHead
                     key={i}
-                    className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-white'
+                    className='whitespace-nowrap bg-untele p-2 text-sm font-semibold text-white md:px-4 md:py-2'
                   >
-                    {cellText(cell)}
-                  </th>
+                    {cell}
+                  </TableHead>
                 ))}
-              </tr>
-            </thead>
-            <tbody>
-              {bodyRows.map((row: any, i: number) => (
-                <tr
-                  key={i}
-                  className='border-b border-slate-200 odd:bg-white even:bg-slate-50 dark:border-slate-700 dark:odd:bg-black dark:even:bg-slate-900'
-                >
-                  {row.cells.map((cell: any, j: number) => (
-                    <td
-                      key={j}
-                      className='px-4 py-3 text-slate-800 dark:text-slate-200'
-                    >
-                      {cellText(cell)}
-                    </td>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {rows.slice(1).map((row: any, i: number) => (
+                <TableRow key={i}>
+                  {row.cells.map((cell: string, j: number) => (
+                    <TableCell key={j} className='p-2 text-sm md:px-4 md:py-2'>
+                      {cell}
+                    </TableCell>
                   ))}
-                </tr>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       );
     },
