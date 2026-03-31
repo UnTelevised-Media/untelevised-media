@@ -18,7 +18,7 @@ jest.mock('lucide-react', () => ({ Link: null, FileText: null }));
 
 import authorSchema from '../author';
 
-const fields = authorSchema.fields as Array<Record<string, unknown>>;
+const fields = authorSchema.fields as unknown as Array<Record<string, unknown>>;
 const clerkIdField = fields.find((f) => f.name === 'clerkId');
 
 describe('author schema — clerkId field', () => {

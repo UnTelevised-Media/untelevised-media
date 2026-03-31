@@ -18,6 +18,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `jest.config.ts` — root-level Jest config using `next/jest` (SWC-based transform) that was previously only at `src/lib/jest/jest.config.ts` and not loaded
   - `src/lib/auth/__tests__/roles.test.ts` — 20 unit tests covering all `getRoleFromMeta` and `hasRole` scenarios including null inputs, legacy admin flag, and full role hierarchy
 
+- **Author Portal — Article Schema Fields + Route Structure (#44, Phases 1–3)**
+  - `src/models/schema/article.ts` — added `status` (`draft` | `published`, default `draft`), `featured` (boolean), `breakingNews` (boolean), `needsReview` (boolean) fields required by the portal editor and dashboard
+  - `src/lib/portal/queries.ts` — GROQ queries for portal use: `queryPortalArticlesByAuthor` (author-scoped), `queryPortalAllArticles` (editor/admin), `queryPortalArticleById` (full edit projection), `queryPortalCategories`, `queryPortalAuthors`, `queryPortalAllSources`; `clerkId` intentionally excluded from all projections
+  - `src/lib/portal/fetch.ts` — authenticated Sanity client for portal queries (read token, CDN off)
+  - `src/lib/portal/sanitize.ts` — `sanitizeText()` strips HTML/encodes unsafe chars from plain text fields; `sanitizeHtml()` removes script/iframe/embed/event-handler injection from rich text; 10 unit tests
+  - `src/lib/portal/article-actions.ts` — server actions `createArticle`, `updateArticle`, `deleteArticle`, `submitArticleForReview`, `publishArticle`; all re-verify Clerk session and role on each call; ownership enforced server-side; authors cannot publish or set featured/breaking; Zod-validated
+  - `jest.config.ts` (root) — root-level jest config; fixes the missing config that caused Sanity ESM import errors in tests
+  - `src/app/(portal)/layout.tsx` — portal route group layout with server-side `requireAuthor()` check (defense-in-depth beyond middleware) and Toaster
+  - `src/app/(portal)/portal/page.tsx` — root portal page redirects to `/portal/articles`
+  - `src/components/portal/PortalNav.tsx` — top nav bar with Articles/Sources links, back-to-site link, Clerk UserButton; active link highlighted with `bg-untele`
+  - `src/components/portal/ArticleDashboard.tsx` — full client-side dashboard: live search by title/tag/category; filter by status (published/draft/in-review); sort by last modified/created/title/status; table/card view toggle; per-article action menu (Edit, Preview, Delete with confirmation dialog); role-aware: editors see author column and all articles, authors see only their own; empty state with CTA; Sonner toast feedback on delete
+
 ### Added
 - **Coral Comments with Clerk SSO (#42)**
   - `docker/docker-compose.yml` — full self-hosted Coral stack: Coral Talk, MongoDB 8, Redis 7-alpine, Caddy 2 (automatic Let's Encrypt TLS), nightly backup container; MongoDB and Redis on an internal-only network, never exposed publicly
