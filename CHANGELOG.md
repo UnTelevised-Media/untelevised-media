@@ -41,6 +41,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/app/(portal)/portal/articles/new/page.tsx` — server component fetching categories + authors in parallel, renders `ArticleEditorForm`
   - `src/app/(portal)/portal/articles/[id]/edit/page.tsx` — server component; verifies author ownership before rendering; uses `notFound()` for missing or unauthorized articles
 
+- **Author Portal — Source Document Management (#44, Phase 5)**
+  - `src/app/(portal)/portal/sources/page.tsx` — source library page; fetches all sources; renders `SourceLibrary` client component
+  - `src/app/(portal)/portal/sources/new/page.tsx` — new source page with `SourceForm`
+  - `src/app/(portal)/portal/sources/[id]/edit/page.tsx` — edit source page; fetches source by ID; renders `SourceForm` pre-filled
+  - `src/components/portal/SourceLibrary.tsx` — searchable source list: filter by title/URL/type; shows linked articles for each source; delete with confirmation dialog; empty state CTA
+  - `src/components/portal/SourceForm.tsx` — standalone create/edit form with label, type (dropdown), URL, notes, anonymous flag; Zod-validated; Sonner toasts on save/error; redirects to `/portal/sources` on success
+
 ### Added
 - **Coral Comments with Clerk SSO (#42)**
   - `docker/docker-compose.yml` — full self-hosted Coral stack: Coral Talk, MongoDB 8, Redis 7-alpine, Caddy 2 (automatic Let's Encrypt TLS), nightly backup container; MongoDB and Redis on an internal-only network, never exposed publicly
