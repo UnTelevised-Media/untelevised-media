@@ -11,6 +11,7 @@ import { getSanityAuthorIdForCurrentUser } from './author-actions';
 import { clerkClient } from '@clerk/nextjs/server';
 import { z } from 'zod';
 import { sanitizeText } from './sanitize';
+import { checkRateLimit } from './rate-limit';
 
 // Portable Text block — matches Sanity's block content structure
 type PortableTextBlock = Record<string, unknown>;
@@ -114,6 +115,10 @@ export async function createArticle(
 ): Promise<ActionResult<{ _id: string; slug: string }>> {
   const { id: clerkUserId } = await requireAuthor();
 
+  const rl = await checkRateLimit(clerkUserId);
+  if (!rl.allowed)
+    return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
+
   const parsed = articleWriteSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, error: parsed.error.issues[0]?.message ?? 'Validation error' };
@@ -185,6 +190,10 @@ export async function updateArticle(
 ): Promise<ActionResult<{ _id: string }>> {
   const { id: clerkUserId } = await requireAuthor();
 
+  const rl = await checkRateLimit(clerkUserId);
+  if (!rl.allowed)
+    return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
+
   const parsed = articleWriteSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, error: parsed.error.issues[0]?.message ?? 'Validation error' };
@@ -240,6 +249,10 @@ export async function updateArticle(
 
 export async function deleteArticle(articleId: string): Promise<ActionResult> {
   const { id: clerkUserId } = await requireAuthor();
+
+  const rl = await checkRateLimit(clerkUserId);
+  if (!rl.allowed)
+    return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
 
   const { canEdit, isEditorPlus } = await verifyArticleAccess(clerkUserId, articleId);
 

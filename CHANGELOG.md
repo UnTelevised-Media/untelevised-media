@@ -48,6 +48,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/components/portal/SourceLibrary.tsx` — searchable source list: filter by title/URL/type; shows linked articles for each source; delete with confirmation dialog; empty state CTA
   - `src/components/portal/SourceForm.tsx` — standalone create/edit form with label, type (dropdown), URL, notes, anonymous flag; Zod-validated; Sonner toasts on save/error; redirects to `/portal/sources` on success
 
+- **Author Portal — Security Hardening (#44, Phase 6)**
+  - `src/lib/portal/rate-limit.ts` — Upstash Redis sliding-window rate limiter (30 writes/min per user ID); gracefully degrades to always-allow when `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` are absent (dev/test environments); lazy-loaded to avoid bundling Redis in the client
+  - `src/lib/portal/article-actions.ts` — rate limit check added to `createArticle`, `updateArticle`, `deleteArticle`
+  - `src/lib/portal/source-actions.ts` — rate limit check added to `createSource`, `updateSource`
+  - Security model summary: every portal write endpoint (1) re-verifies Clerk session + role on each call, never trusting props or client state; (2) enforces author ownership server-side (`author._ref === sanityAuthorId`) before any mutation; (3) strips HTML tags and encodes special chars on all text inputs via `sanitizeText`; (4) uses server-only `writeClient` with `SANITY_API_WRITE_TOKEN`; (5) excludes `clerkId` from all GROQ projections; (6) rate-limits writes via Upstash; (7) Next.js Server Actions provide native CSRF protection
+  - `src/lib/portal/__tests__/rate-limit.test.ts` — 2 unit tests verifying graceful degradation when Upstash env vars are absent
+
 ### Added
 - **Coral Comments with Clerk SSO (#42)**
   - `docker/docker-compose.yml` — full self-hosted Coral stack: Coral Talk, MongoDB 8, Redis 7-alpine, Caddy 2 (automatic Let's Encrypt TLS), nightly backup container; MongoDB and Redis on an internal-only network, never exposed publicly

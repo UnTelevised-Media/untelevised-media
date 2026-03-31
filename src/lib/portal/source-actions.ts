@@ -6,6 +6,7 @@ import { requireAuthor } from '@/lib/auth/roles';
 import { writeClient } from '@/lib/sanity/lib/write-client';
 import { verifyArticleAccessForClerkUser } from './article-ownership';
 import { sanitizeText } from './sanitize';
+import { checkRateLimit } from './rate-limit';
 import { z } from 'zod';
 
 const sourceWriteSchema = z.object({
@@ -25,7 +26,11 @@ type ActionResult<T = void> = { success: true; data: T } | { success: false; err
 export async function createSource(
   input: SourceWriteInput
 ): Promise<ActionResult<{ _id: string; label: string }>> {
-  await requireAuthor();
+  const { id: clerkUserId } = await requireAuthor();
+
+  const rl = await checkRateLimit(clerkUserId);
+  if (!rl.allowed)
+    return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
 
   const parsed = sourceWriteSchema.safeParse(input);
   if (!parsed.success) {
@@ -49,7 +54,11 @@ export async function updateSource(
   sourceId: string,
   input: SourceWriteInput
 ): Promise<ActionResult> {
-  await requireAuthor();
+  const { id: clerkUserId } = await requireAuthor();
+
+  const rl = await checkRateLimit(clerkUserId);
+  if (!rl.allowed)
+    return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
 
   const parsed = sourceWriteSchema.safeParse(input);
   if (!parsed.success) {
