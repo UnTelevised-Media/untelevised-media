@@ -63,6 +63,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/lib/portal/__tests__/slug.test.ts` — 7 unit tests for slug-generation logic (spaces→hyphens, lowercase, special-char stripping, collapse, 100-char truncation)
   - All portal pages use responsive grid/flex layouts; PortalNav collapses correctly on mobile (links hidden below sm, UserButton always visible); dashboard toolbar wraps on narrow viewports; editor form uses `sm:grid-cols-2` for metadata fields
 
+### Fixed
+
+- **Author Portal — post-audit bug fixes (#44)**
+  - `SourceSelectorModal.tsx` — replaced direct `portalClient.fetch()` call (which imported `server-only`) with the new `fetchAllSources` server action; fixes a build-breaking Next.js server/client boundary violation
+  - `src/lib/portal/source-actions.ts` — added `fetchAllSources()` server action used by `SourceSelectorModal`
+  - `src/app/api/admin/set-role/route.ts` — replaced `requireAdmin()` wrapped in a try/catch (which silently swallowed Next.js redirect exceptions) with a direct `auth()` + `currentUser()` + `hasRole()` check; 401 vs 403 now returned correctly
+  - `src/lib/portal/article-ownership.ts` — added `import 'server-only'` guard to prevent accidental client-side import
+  - `src/lib/portal/portable-text-serializer.ts` — fixed `nodeToBlock` return type from `SanityBlock_Any | null` to `SanityBlock_Any | SanityBlock_Any[] | null`; list nodes now return `SanityBlock[]` arrays directly (no unsafe cast); `tiptapToPortableText` spreads array results so every list item becomes a top-level block in the Portable Text array
+
 ### Added
 - **Coral Comments with Clerk SSO (#42)**
   - `docker/docker-compose.yml` — full self-hosted Coral stack: Coral Talk, MongoDB 8, Redis 7-alpine, Caddy 2 (automatic Let's Encrypt TLS), nightly backup container; MongoDB and Redis on an internal-only network, never exposed publicly
