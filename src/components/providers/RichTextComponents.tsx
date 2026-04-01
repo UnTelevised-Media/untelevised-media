@@ -74,17 +74,33 @@ export const RichTextComponents = {
       const { rows } = value;
       if (!rows) return null;
 
+      // Handles both new string cells and legacy tableCell objects
+      // {_key, _type, content: [{type:'block', children:[{_type:'span', text}]}]}
+      function cellText(cell: any): string {
+        if (typeof cell === 'string') return cell;
+        if (cell && Array.isArray(cell.content)) {
+          return cell.content
+            .flatMap((block: any) =>
+              (block.children ?? [])
+                .filter((s: any) => s._type === 'span')
+                .map((s: any) => s.text ?? ''),
+            )
+            .join('');
+        }
+        return '';
+      }
+
       return (
         <div className='mx-auto my-4 max-w-full overflow-x-auto rounded-md border'>
           <Table className='w-full'>
             <TableHeader>
               <TableRow>
-                {rows[0]?.cells.map((cell: string, i: number) => (
+                {rows[0]?.cells.map((cell: any, i: number) => (
                   <TableHead
                     key={i}
                     className='whitespace-nowrap bg-untele p-2 text-sm font-semibold text-white md:px-4 md:py-2'
                   >
-                    {cell}
+                    {cellText(cell)}
                   </TableHead>
                 ))}
               </TableRow>
@@ -92,9 +108,9 @@ export const RichTextComponents = {
             <TableBody>
               {rows.slice(1).map((row: any, i: number) => (
                 <TableRow key={i}>
-                  {row.cells.map((cell: string, j: number) => (
+                  {row.cells.map((cell: any, j: number) => (
                     <TableCell key={j} className='p-2 text-sm md:px-4 md:py-2'>
-                      {cell}
+                      {cellText(cell)}
                     </TableCell>
                   ))}
                 </TableRow>
