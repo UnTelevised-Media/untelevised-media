@@ -137,6 +137,14 @@ function nodeToBlock(node: TiptapNode): SanityBlock_Any | SanityBlock_Any[] | nu
         asset: { _type: 'reference', _ref: (node.attrs?.src as string) ?? '' },
         alt: (node.attrs?.alt as string) ?? '',
       };
+    case 'passthroughBlock': {
+      // Restore the original Sanity block exactly as it was stored.
+      try {
+        return JSON.parse((node.attrs?.blockData as string) ?? '{}') as SanityBlock_Any;
+      } catch {
+        return null;
+      }
+    }
     default:
       return null;
   }
@@ -199,33 +207,63 @@ function markToPortableText(mark: TiptapMark, markDefs: SanityMarkDef[]): string
 // ---------------------------------------------------------------------------
 
 export function portableTextToTiptap(blocks: SanityBlock_Any[]): TiptapNode {
-  const content: TiptapNode[] = [];
+  const raw: TiptapNode[] = [];
   for (const block of blocks) {
     const node = blockToTiptap(block as SanityBlock);
-    if (Array.isArray(node)) content.push(...node);
-    else if (node) content.push(node);
+    if (Array.isArray(node)) raw.push(...node);
+    else if (node) raw.push(node);
   }
+  // Sanity stores one block per list item; Tiptap expects all items inside
+  // a single bulletList / orderedList wrapper — merge consecutive same-type lists.
+  const content = mergeAdjacentLists(raw);
   if (content.length === 0) {
     content.push({ type: 'paragraph', content: [] });
   }
   return { type: 'doc', content };
 }
 
+function mergeAdjacentLists(nodes: TiptapNode[]): TiptapNode[] {
+  const merged: TiptapNode[] = [];
+  for (const node of nodes) {
+    const last = merged[merged.length - 1];
+    if (
+      last &&
+      (node.type === 'bulletList' || node.type === 'orderedList') &&
+      last.type === node.type
+    ) {
+      // Append items into the existing list node
+      last.content = [...(last.content ?? []), ...(node.content ?? [])];
+    } else {
+      merged.push({ ...node });
+    }
+  }
+  return merged;
+}
+
 function blockToTiptap(block: SanityBlock): TiptapNode | TiptapNode[] | null {
   if (block._type !== 'block') {
+    const b = block as unknown as Record<string, unknown>;
     // Handle code blocks
-    if ((block as unknown as Record<string, unknown>)._type === 'code') {
-      const b = block as unknown as Record<string, unknown>;
+    if (b._type === 'code') {
       return {
         type: 'codeBlock',
         attrs: { language: (b.language as string) ?? 'text' },
         content: [{ type: 'text', text: (b.code as string) ?? '' }],
       };
     }
-    if ((block as unknown as Record<string, unknown>)._type === 'break') {
+    if (b._type === 'break') {
       return { type: 'horizontalRule' };
     }
-    return null;
+    // All other custom types (image, youtubeEmbed, twitterEmbed, instagramEmbed,
+    // mermaidDiagram, table, factCheckEmbed, etc.) — preserve as a non-editable
+    // passthrough node so content is not silently lost when the article is saved.
+    return {
+      type: 'passthroughBlock',
+      attrs: {
+        blockType: (b._type as string) ?? 'unknown',
+        blockData: JSON.stringify(block),
+      },
+    };
   }
 
   const markDefs: Record<string, SanityMarkDef> = {};

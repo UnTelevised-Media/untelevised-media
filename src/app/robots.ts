@@ -15,6 +15,15 @@ export default function robots(): MetadataRoute.Robots {
         allow: ['/', '/feed.xml'],
         disallow: ['/studio/', '/api/', '/privacy-settings', '/reading-list', '/unlock'],
       },
+      // Explicitly allow social media link-preview scrapers
+      { userAgent: 'facebookexternalhit', allow: '/' },
+      { userAgent: 'meta-externalagent', allow: '/' },
+      { userAgent: 'Twitterbot', allow: '/' },
+      { userAgent: 'LinkedInBot', allow: '/' },
+      { userAgent: 'Slackbot', allow: '/' },
+      { userAgent: 'Discordbot', allow: '/' },
+      { userAgent: 'WhatsApp', allow: '/' },
+      { userAgent: 'TelegramBot', allow: '/' },
       // Explicitly allow major AI crawlers for AEO (AI answer engine optimization)
       { userAgent: 'GPTBot', allow: '/' },
       { userAgent: 'ClaudeBot', allow: '/' },

@@ -1,4 +1,4 @@
-// src/middleware.ts
+// src/proxy.ts
 import { clerkClient, clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import type { PortalRole } from '@/lib/auth/roles';
@@ -14,7 +14,18 @@ function getRoleFromMeta(meta: Record<string, unknown>): PortalRole | null {
   return null;
 }
 
-export default clerkMiddleware(async (auth, req) => {
+// Social media / link-preview crawlers must bypass Clerk entirely so they
+// can read page HTML and og:image URLs without triggering auth challenges.
+const SOCIAL_CRAWLERS =
+  /facebookexternalhit|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|TelegramBot|Googlebot-Image/i;
+
+export const proxy = clerkMiddleware(async (auth, req) => {
+  // Pass social crawlers straight through — no auth processing needed.
+  const ua = req.headers.get('user-agent') ?? '';
+  if (SOCIAL_CRAWLERS.test(ua)) {
+    return NextResponse.next();
+  }
+
   // -------------------------------------------------------------------------
   // Legacy /admin routes — kept exactly as before
   // -------------------------------------------------------------------------
@@ -62,7 +73,7 @@ export default clerkMiddleware(async (auth, req) => {
   }
 });
 
-export const config = {
+export const proxyConfig = {
   matcher: [
     // Skip Next.js internals and static files
     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',

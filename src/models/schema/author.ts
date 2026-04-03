@@ -139,7 +139,7 @@ export default defineType({
       name: 'clerkId',
       title: 'Clerk User ID',
       type: 'string',
-      readOnly: true,
+      // readOnly: true,
       description: 'Linked Clerk account ID — set by Admin only. Do not share or edit directly.',
       // Hidden from Studio users who are not Sanity administrators
       hidden: ({ currentUser }) => !currentUser?.roles?.some((r) => r.name === 'administrator'),

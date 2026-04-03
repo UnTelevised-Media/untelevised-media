@@ -3,7 +3,7 @@
 // Outputs Tiptap JSON which is serialized to Portable Text on save.
 'use client';
 
-import { useEditor, EditorContent, type Editor } from '@tiptap/react';
+import { useEditor, EditorContent, type Editor, Node } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import Link from '@tiptap/extension-link';
@@ -15,6 +15,56 @@ import { common, createLowlight } from 'lowlight';
 import { useCallback, useEffect } from 'react';
 
 const lowlight = createLowlight(common);
+
+// ---------------------------------------------------------------------------
+// PassthroughBlock — non-editable atom node for unsupported Sanity block types
+// (embedded images, YouTube, Twitter, tables, etc.). Preserves original block
+// data so it survives a save without being lost.
+// ---------------------------------------------------------------------------
+
+const PassthroughBlock = Node.create({
+  name: 'passthroughBlock',
+  group: 'block',
+  atom: true,
+  selectable: true,
+  draggable: false,
+
+  addAttributes() {
+    return {
+      blockType: { default: 'unknown' },
+      blockData: { default: '' },
+    };
+  },
+
+  parseHTML() {
+    return [
+      {
+        tag: 'div[data-passthrough]',
+        getAttrs(element) {
+          const el = element as HTMLElement;
+          return {
+            blockType: el.getAttribute('data-block-type') ?? 'unknown',
+            blockData: el.getAttribute('data-block-data') ?? '',
+          };
+        },
+      },
+    ];
+  },
+
+  renderHTML({ node }) {
+    return [
+      'div',
+      {
+        'data-passthrough': '1',
+        'data-block-type': node.attrs.blockType as string,
+        'data-block-data': node.attrs.blockData as string,
+        contenteditable: 'false',
+        class: 'my-2 flex select-none items-center gap-2 rounded border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-xs text-slate-400 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-500',
+      },
+      `[${(node.attrs.blockType as string) ?? 'Embedded content'} — editable in Sanity Studio only]`,
+    ];
+  },
+});
 
 interface Props {
   content?: object; // Tiptap JSON doc
@@ -44,6 +94,7 @@ export default function RichTextEditor({
       HorizontalRule,
       Placeholder.configure({ placeholder }),
       CodeBlockLowlight.configure({ lowlight }),
+      PassthroughBlock,
     ],
     content: content ?? { type: 'doc', content: [{ type: 'paragraph' }] },
     editable,
