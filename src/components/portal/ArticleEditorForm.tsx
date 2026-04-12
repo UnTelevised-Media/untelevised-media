@@ -457,13 +457,25 @@ export default function ArticleEditorForm({
           Slug (URL)
         </Label>
         <div className='flex items-center gap-2'>
-          <span className='text-xs text-slate-400'>/articles/</span>
+          <span className='shrink-0 text-xs text-slate-400'>/articles/</span>
           <Input
             id='slug'
             {...register('slug')}
             placeholder='your-article-slug'
             className='font-mono text-sm'
           />
+          <Button
+            type='button'
+            variant='outline'
+            size='sm'
+            className='shrink-0'
+            onClick={() => {
+              const t = watch('title');
+              if (t) setValue('slug', titleToSlug(t), { shouldValidate: true });
+            }}
+          >
+            Generate
+          </Button>
         </div>
         {errors.slug && (
           <p className='mt-1 text-xs text-red-500'>{errors.slug.message}</p>
