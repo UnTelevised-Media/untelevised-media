@@ -22,7 +22,8 @@
     "rm -rf nm": "rm -rf node_modules",
     "deploy": "npx vercel",
     "deploy:prod": "npx vercel --prod",
-    "algolia:index": "npx tsx scripts/algolia-initial-index.ts"
+    "algolia:index": "npx tsx scripts/algolia-initial-index.ts",
+    "convert:webp": "node scripts/convert-to-webp.mjs"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.0.5",

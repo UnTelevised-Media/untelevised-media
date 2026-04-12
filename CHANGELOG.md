@@ -8,6 +8,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- **Article body images no longer cropped (`RichTextComponents.tsx`)**
+  - Removed fixed `h-96` container height and `overflow-hidden` that forced all inline article images into a 384 px box regardless of aspect ratio
+  - Replaced `fill` + `object-cover` with natural-dimension rendering: dimensions are parsed from the Sanity asset ref (`image-{id}-{W}x{H}-{ext}`) and passed as `width`/`height` props; `style={{ width: '100%', height: 'auto' }}` ensures the container always expands to the full image height
+
+- **Article featured image no longer cropped (`articles/[slug]/page.tsx`)**
+  - Featured image below the hero was hardcoded to `800×450` with `object-cover`, cropping portrait or non-16:9 images
+  - Same asset-ref dimension extraction applied; image now renders at its native aspect ratio
+
+- **Raw Feed cards are now clickable (`RawFeed.tsx`)**
+  - Feed cards were plain `<div>` elements with no link — clicking did nothing
+  - Replaced outer `<div>` with `<Link href="/articles/{slug}">` so each card navigates to the article
+
 ### Added
 
 - **Author Portal — Clerk Role-Based Access Control (#44, Phase 1)**

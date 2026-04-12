@@ -289,16 +289,26 @@ export default async function Article({ params }: Props) {
           {/* Featured Image (if different from hero) */}
           <div className='not-prose mb-8'>
             <div className='overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
-              <Image
-                src={
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  urlForImage(article.mainImage as any)?.url() ?? ''
-                }
-                alt={article.mainImage?.alt ?? 'Article image'}
-                width={800}
-                height={450}
-                className='h-auto w-full object-cover'
-              />
+              {(() => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const ref: string = (article.mainImage as any)?.asset?._ref ?? '';
+                const m = ref.match(/-(\d+)x(\d+)-/);
+                const imgW = m ? parseInt(m[1]) : 1200;
+                const imgH = m ? parseInt(m[2]) : 630;
+                return (
+                  <Image
+                    src={
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      urlForImage(article.mainImage as any)?.url() ?? ''
+                    }
+                    alt={article.mainImage?.alt ?? 'Article image'}
+                    width={imgW}
+                    height={imgH}
+                    style={{ width: '100%', height: 'auto' }}
+                    className='block'
+                  />
+                );
+              })()}
             </div>
           </div>
 

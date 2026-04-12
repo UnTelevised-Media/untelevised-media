@@ -23,14 +23,21 @@ export const RichTextComponents = {
     // ── Images ───────────────────────────────────────────────────────────────
     image: ({ value }: any) => {
       const alt = value.alt || 'Image';
+      // Sanity asset refs encode dimensions: image-{id}-{WIDTH}x{HEIGHT}-{ext}
+      const ref: string = value?.asset?._ref ?? '';
+      const dimMatch = ref.match(/-(\d+)x(\d+)-/);
+      const imgWidth = dimMatch ? parseInt(dimMatch[1]) : 1200;
+      const imgHeight = dimMatch ? parseInt(dimMatch[2]) : 630;
       return (
         <div className='my-6 space-y-2'>
-          <div className='relative h-96 w-full overflow-hidden border border-slate-300 dark:border-slate-700'>
+          <div className='w-full border border-slate-300 dark:border-slate-700'>
             <Image
-              className='object-cover'
+              className='h-full w-full'
               src={urlForImage(value)?.url() ?? ''}
               alt={alt}
-              fill
+              width={imgWidth}
+              height={imgHeight}
+              style={{ width: '100%', height: 'auto' }}
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px'
             />
           </div>
