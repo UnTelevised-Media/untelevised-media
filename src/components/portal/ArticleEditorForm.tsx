@@ -288,66 +288,77 @@ export default function ArticleEditorForm({
   // Save handlers
   // ---------------------------------------------------------------------------
 
-  async function handleSaveDraft(values: FormValues) {
+  function handleSaveDraft(values: FormValues) {
     setSaveStatus('saving');
     const input = buildInput(values, 'draft');
     startTransition(async () => {
-      const result = articleId
-        ? await updateArticle(articleId, input)
-        : await createArticle(input);
-      if (result.success) {
-        setSaveStatus('saved');
-        toast.success('Draft saved.');
-        if (!articleId && 'data' in result) {
-          router.replace(`/portal/articles/${result.data._id}/edit`);
+      try {
+        const result = articleId
+          ? await updateArticle(articleId, input)
+          : await createArticle(input);
+        if (result.success) {
+          setSaveStatus('saved');
+          toast.success('Draft saved.');
+          if (!articleId && 'data' in result) {
+            router.replace(`/portal/articles/${result.data._id}/edit`);
+          }
+        } else {
+          setSaveStatus('unsaved');
+          toast.error(result.error);
         }
-      } else {
+      } catch (err) {
         setSaveStatus('unsaved');
-        toast.error(result.error);
+        toast.error(err instanceof Error ? err.message : 'Save failed. Please try again.');
       }
     });
   }
 
-  async function handleSubmitForReview(values: FormValues) {
-    const input = buildInput(values, 'draft');
+  function handleSubmitForReview(values: FormValues) {
     startTransition(async () => {
-      let id = articleId;
-      if (!id) {
-        const result = await createArticle(input);
-        if (!result.success) { toast.error(result.error); return; }
-        id = result.data._id;
-      } else {
-        const result = await updateArticle(id, input);
-        if (!result.success) { toast.error(result.error); return; }
-      }
-      const reviewResult = await submitArticleForReview(id);
-      if (reviewResult.success) {
-        toast.success('Submitted for editorial review.');
-        router.push('/portal/articles');
-      } else {
-        toast.error(reviewResult.error);
+      try {
+        let id = articleId;
+        if (!id) {
+          const result = await createArticle(buildInput(values, 'draft'));
+          if (!result.success) { toast.error(result.error); return; }
+          id = result.data._id;
+        } else {
+          const result = await updateArticle(id, buildInput(values, 'draft'));
+          if (!result.success) { toast.error(result.error); return; }
+        }
+        const reviewResult = await submitArticleForReview(id);
+        if (reviewResult.success) {
+          toast.success('Submitted for editorial review.');
+          router.push('/portal/articles');
+        } else {
+          toast.error(reviewResult.error);
+        }
+      } catch (err) {
+        toast.error(err instanceof Error ? err.message : 'Submission failed. Please try again.');
       }
     });
   }
 
-  async function handlePublish(values: FormValues) {
-    const input = buildInput(values, 'published');
+  function handlePublish(values: FormValues) {
     startTransition(async () => {
-      let id = articleId;
-      if (!id) {
-        const result = await createArticle(input);
-        if (!result.success) { toast.error(result.error); return; }
-        id = result.data._id;
-      } else {
-        const result = await updateArticle(id, input);
-        if (!result.success) { toast.error(result.error); return; }
-      }
-      const pubResult = await publishArticle(id, values.publishedAt || undefined);
-      if (pubResult.success) {
-        toast.success('Article published!');
-        router.push('/portal/articles');
-      } else {
-        toast.error(pubResult.error);
+      try {
+        let id = articleId;
+        if (!id) {
+          const result = await createArticle(buildInput(values, 'published'));
+          if (!result.success) { toast.error(result.error); return; }
+          id = result.data._id;
+        } else {
+          const result = await updateArticle(id, buildInput(values, 'published'));
+          if (!result.success) { toast.error(result.error); return; }
+        }
+        const pubResult = await publishArticle(id, values.publishedAt || undefined);
+        if (pubResult.success) {
+          toast.success('Article published!');
+          router.push('/portal/articles');
+        } else {
+          toast.error(pubResult.error);
+        }
+      } catch (err) {
+        toast.error(err instanceof Error ? err.message : 'Publish failed. Please try again.');
       }
     });
   }
@@ -365,13 +376,17 @@ export default function ArticleEditorForm({
       const input = buildInput(values as FormValues, 'draft');
       const articleIdSnapshot = articleId;
       startTransition(async () => {
-        const result = articleIdSnapshot
-          ? await updateArticle(articleIdSnapshot, input)
-          : await createArticle(input);
-        if (result.success) {
-          setSaveStatus('saved');
-          isDirtyRef.current = false;
-        } else {
+        try {
+          const result = articleIdSnapshot
+            ? await updateArticle(articleIdSnapshot, input)
+            : await createArticle(input);
+          if (result.success) {
+            setSaveStatus('saved');
+            isDirtyRef.current = false;
+          } else {
+            setSaveStatus('unsaved');
+          }
+        } catch {
           setSaveStatus('unsaved');
         }
       });

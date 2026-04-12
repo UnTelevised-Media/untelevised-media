@@ -197,8 +197,15 @@ export async function createArticle(
     correction: sanitized.correction ?? undefined,
   };
 
-  const created = await writeClient.create(doc);
-  return { success: true, data: { _id: created._id, slug: sanitized.slug.current } };
+  try {
+    const created = await writeClient.create(doc);
+    return { success: true, data: { _id: created._id, slug: sanitized.slug.current } };
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Failed to create article',
+    };
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -263,8 +270,15 @@ export async function updateArticle(
     }
   }
 
-  await writeClient.patch(articleId).set(patch).commit();
-  return { success: true, data: { _id: articleId } };
+  try {
+    await writeClient.patch(articleId).set(patch).commit();
+    return { success: true, data: { _id: articleId } };
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Failed to update article',
+    };
+  }
 }
 
 // ---------------------------------------------------------------------------
