@@ -748,28 +748,41 @@ export default function ArticleEditorForm({
         <Label htmlFor='allowComments'>Allow comments on this article</Label>
       </section>
 
-      {/* Video embed */}
+      {/* Featured Video — separate from inline body embeds */}
       <section className='space-y-3'>
-        <div className='flex items-center gap-3'>
-          <Controller
-            name='hasEmbeddedVideo'
-            control={control}
-            render={({ field }) => (
-              <Checkbox
-                id='hasEmbeddedVideo'
-                checked={field.value}
-                onCheckedChange={(v) => field.onChange(!!v)}
-              />
-            )}
-          />
-          <Label htmlFor='hasEmbeddedVideo'>Has embedded YouTube video</Label>
-        </div>
-        {watch('hasEmbeddedVideo') && (
-          <Input
-            {...register('videoLink')}
-            placeholder='YouTube URL'
-          />
+        <Label className='block text-xs font-bold uppercase tracking-widest'>
+          Featured Video
+          <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+            appears as a video player above or alongside the article, not inside the body
+          </span>
+        </Label>
+        <Input
+          {...register('videoLink')}
+          placeholder='YouTube URL (e.g. https://www.youtube.com/watch?v=…)'
+        />
+        {watch('videoLink') && (
+          <div className='aspect-video max-w-md'>
+            <iframe
+              src={`https://www.youtube.com/embed/${
+                watch('videoLink')?.match(
+                  /(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/,
+                )?.[1] ?? ''
+              }`}
+              className='h-full w-full border-0'
+              allowFullScreen
+            />
+          </div>
         )}
+        {/* Hidden field keeps the boolean in sync */}
+        <Controller
+          name='hasEmbeddedVideo'
+          control={control}
+          render={({ field }) => {
+            const hasVideo = !!watch('videoLink');
+            if (field.value !== hasVideo) field.onChange(hasVideo);
+            return <input type='hidden' value={String(hasVideo)} />;
+          }}
+        />
       </section>
 
       {/* Methodology note */}
