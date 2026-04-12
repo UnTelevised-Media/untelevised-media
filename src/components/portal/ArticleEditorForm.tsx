@@ -32,7 +32,7 @@ import {
   submitArticleForReview,
   type ArticleWriteInput,
 } from '@/lib/portal/article-actions';
-import { tiptapToPortableText, portableTextToTiptap } from '@/lib/portal/portable-text-serializer';
+import { blockNoteToPortableText, portableTextToBlockNote } from '@/lib/portal/blocknote-serializer';
 import SourceSelectorModal from './SourceSelectorModal';
 
 // Lazy-load the WYSIWYG editor to avoid SSR
@@ -118,12 +118,14 @@ export default function ArticleEditorForm({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
-  // Editor JSON (Tiptap doc)
-  const [editorContent, setEditorContent] = useState<object>(() => {
+  // Editor blocks (BlockNote PartialBlock[])
+  const [editorContent, setEditorContent] = useState<object[]>(() => {
     if (initialData?.body && Array.isArray(initialData.body) && initialData.body.length > 0) {
-      return portableTextToTiptap(initialData.body as Parameters<typeof portableTextToTiptap>[0]);
+      return portableTextToBlockNote(
+        initialData.body as Parameters<typeof portableTextToBlockNote>[0],
+      );
     }
-    return { type: 'doc', content: [{ type: 'paragraph' }] };
+    return [];
   });
 
   // Selected categories
@@ -192,7 +194,7 @@ export default function ArticleEditorForm({
 
   const buildInput = useCallback(
     (values: FormValues, overrideStatus?: 'draft' | 'published'): ArticleWriteInput => {
-      const portableBody = tiptapToPortableText(editorContent as Parameters<typeof tiptapToPortableText>[0]);
+      const portableBody = blockNoteToPortableText(editorContent as Parameters<typeof blockNoteToPortableText>[0]);
       return {
         title: values.title,
         slug: { _type: 'slug', current: values.slug },
@@ -494,13 +496,13 @@ export default function ArticleEditorForm({
           Article Body
         </Label>
         <RichTextEditor
-          content={editorContent}
-          onChange={(json) => {
-            setEditorContent(json);
+          initialContent={editorContent}
+          onChange={(blocks) => {
+            setEditorContent(blocks);
             isDirtyRef.current = true;
             setSaveStatus('unsaved');
           }}
-          placeholder='Start writing your article…'
+          placeholder='Start writing your article… type / for commands'
         />
       </section>
 
