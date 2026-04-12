@@ -15,6 +15,7 @@ import {
 } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
 import { useState, useEffect, useCallback } from 'react';
+import { useTheme } from 'next-themes';
 import { Youtube, Twitter, Instagram } from 'lucide-react';
 
 // ─── Utility: extract YouTube video ID from URL or bare ID ───────────────────
@@ -269,6 +270,7 @@ export default function RichTextEditor({
   placeholder = 'Start writing… type / for commands',
   editable = true,
 }: Props) {
+  const { resolvedTheme } = useTheme();
   const editor = useCreateBlockNote({
     schema,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -295,7 +297,7 @@ export default function RichTextEditor({
         editor={editor}
         editable={editable}
         onChange={handleChange}
-        theme='light'
+        theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
         slashMenu={false}
       >
         <SuggestionMenuController
