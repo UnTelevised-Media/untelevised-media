@@ -34,6 +34,7 @@ import {
 } from '@/lib/portal/article-actions';
 import { blockNoteToPortableText, portableTextToBlockNote } from '@/lib/portal/blocknote-serializer';
 import urlFor from '@/lib/sanity/utils/image';
+import { uploadImageToSanity } from '@/lib/portal/image-actions';
 import SourceSelectorModal from './SourceSelectorModal';
 
 // Lazy-load the WYSIWYG editor to avoid SSR
@@ -141,6 +142,23 @@ export default function ArticleEditorForm({
     initialData?.sources ?? [],
   );
 
+  // Main image
+  const [mainImage, setMainImage] = useState<{
+    assetRef: string;
+    url: string;
+    alt: string;
+  } | null>(() => {
+    const img = initialData?.mainImage as
+      | { asset?: { _id?: string; url?: string }; alt?: string }
+      | null
+      | undefined;
+    if (img?.asset?.url) {
+      return { assetRef: img.asset._id ?? '', url: img.asset.url, alt: img.alt ?? '' };
+    }
+    return null;
+  });
+  const [imageUploading, setImageUploading] = useState(false);
+
   // Autosave indicator
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved' | 'idle'>('idle');
   const isDirtyRef = useRef(false);
@@ -230,9 +248,16 @@ export default function ArticleEditorForm({
         hasEmbeddedVideo: values.hasEmbeddedVideo,
         videoLink: values.videoLink || undefined,
         eventDate: values.eventDate || undefined,
+        mainImage: mainImage?.assetRef
+          ? {
+              _type: 'image' as const,
+              asset: { _type: 'reference' as const, _ref: mainImage.assetRef },
+              alt: mainImage.alt,
+            }
+          : undefined,
       };
     },
-    [editorContent, selectedCategories, selectedSources],
+    [editorContent, selectedCategories, selectedSources, mainImage],
   );
 
   // ---------------------------------------------------------------------------
@@ -514,6 +539,77 @@ export default function ArticleEditorForm({
           rows={3}
           placeholder='2–3 sentence plain text summary…'
         />
+      </section>
+
+      {/* Main Image */}
+      <section>
+        <Label className='mb-2 block text-xs font-bold uppercase tracking-widest'>
+          Main Image
+        </Label>
+        <div className='space-y-3'>
+          {mainImage?.url && (
+            <div className='relative'>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={mainImage.url}
+                alt={mainImage.alt || 'Article main image'}
+                className='max-h-48 w-full object-cover'
+              />
+              <button
+                type='button'
+                onClick={() => setMainImage(null)}
+                className='absolute right-2 top-2 bg-black/60 px-2 py-1 text-xs text-white hover:bg-black'
+              >
+                Remove
+              </button>
+            </div>
+          )}
+          <div className='flex items-center gap-2'>
+            <label
+              htmlFor='mainImageFile'
+              className={`cursor-pointer border border-slate-300 px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:border-untele dark:border-slate-600 ${imageUploading ? 'opacity-50' : ''}`}
+            >
+              {imageUploading ? 'Uploading…' : mainImage ? 'Replace Image' : 'Upload Image'}
+            </label>
+            <input
+              id='mainImageFile'
+              type='file'
+              accept='image/jpeg,image/png,image/webp,image/gif,image/avif'
+              className='sr-only'
+              disabled={imageUploading}
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                setImageUploading(true);
+                const fd = new FormData();
+                fd.append('file', file);
+                const result = await uploadImageToSanity(fd);
+                setImageUploading(false);
+                e.target.value = '';
+                if (result.success) {
+                  setMainImage({ assetRef: result.assetId, url: result.url, alt: mainImage?.alt ?? '' });
+                  isDirtyRef.current = true;
+                } else {
+                  toast.error(result.error);
+                }
+              }}
+            />
+          </div>
+          {mainImage && (
+            <div>
+              <Label htmlFor='mainImageAlt' className='mb-1 block text-xs text-slate-500'>
+                Alt text
+              </Label>
+              <Input
+                id='mainImageAlt'
+                value={mainImage.alt}
+                onChange={(e) => setMainImage((prev) => prev ? { ...prev, alt: e.target.value } : prev)}
+                placeholder='Describe the image for screen readers and SEO…'
+                className='text-sm'
+              />
+            </div>
+          )}
+        </div>
       </section>
 
       {/* Article body */}
