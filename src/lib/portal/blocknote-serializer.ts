@@ -257,7 +257,13 @@ function bnStylesToPTMarks(styles: BNStyles): string[] {
 // Returns plain objects compatible with BlockNote's PartialBlock shape.
 // We avoid importing BlockNote types here so the serializer is usable in both
 // client and server contexts.
-export function portableTextToBlockNote(blocks: SanityBlockAny[]): object[] {
+//
+// resolveImageUrl: optional callback to turn a Sanity asset _ref into a full
+// CDN URL. When omitted image blocks fall back to the raw _ref string.
+export function portableTextToBlockNote(
+  blocks: SanityBlockAny[],
+  resolveImageUrl?: (assetRef: string) => string
+): object[] {
   if (!blocks?.length) return [emptyParagraph()];
 
   const result: object[] = [];
@@ -286,14 +292,14 @@ export function portableTextToBlockNote(blocks: SanityBlockAny[]): object[] {
       continue;
     }
 
-    result.push(ptBlockToBN(block));
+    result.push(ptBlockToBN(block, resolveImageUrl));
     i++;
   }
 
   return result;
 }
 
-function ptBlockToBN(block: SanityBlock): object {
+function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (ref: string) => string): object {
   const b = block as unknown as Record<string, unknown>;
 
   if (b._type !== 'block') {
@@ -324,16 +330,25 @@ function ptBlockToBN(block: SanityBlock): object {
         };
       }
 
-      case 'image':
+      case 'image': {
+        const assetRef = (b.asset as Record<string, unknown> | undefined)?._ref as
+          | string
+          | undefined;
+        // Prefer a pre-resolved URL (e.g. asset->{ url }) then fall back to
+        // building via the injected resolver, then bare ref.
+        const preResolved = (b.asset as Record<string, unknown> | undefined)?.url as
+          | string
+          | undefined;
+        const url =
+          preResolved ??
+          (assetRef && resolveImageUrl ? resolveImageUrl(assetRef) : (assetRef ?? ''));
         return {
           type: 'image',
-          props: {
-            url: (b.asset as Record<string, unknown> | undefined)?._ref ?? '',
-            caption: (b.alt as string) ?? '',
-          },
+          props: { url, caption: (b.alt as string) ?? '' },
           content: undefined,
           children: [],
         };
+      }
 
       case 'break':
         return { type: 'divider', props: {}, content: undefined, children: [] };

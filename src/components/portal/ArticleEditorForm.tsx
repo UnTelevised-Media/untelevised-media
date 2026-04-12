@@ -33,6 +33,7 @@ import {
   type ArticleWriteInput,
 } from '@/lib/portal/article-actions';
 import { blockNoteToPortableText, portableTextToBlockNote } from '@/lib/portal/blocknote-serializer';
+import urlFor from '@/lib/sanity/utils/image';
 import SourceSelectorModal from './SourceSelectorModal';
 
 // Lazy-load the WYSIWYG editor to avoid SSR
@@ -123,6 +124,7 @@ export default function ArticleEditorForm({
     if (initialData?.body && Array.isArray(initialData.body) && initialData.body.length > 0) {
       return portableTextToBlockNote(
         initialData.body as Parameters<typeof portableTextToBlockNote>[0],
+        (ref) => urlFor({ asset: { _ref: ref } }).width(800).url(),
       );
     }
     return [];
