@@ -173,6 +173,13 @@ export default function ArticleEditorForm({
   const [articleResults, setArticleResults] = useState<RelatedArticleRef[]>([]);
   const [articleSearchPending, startArticleSearch] = useTransition();
 
+  // Correction
+  type CorrectionType = 'correction' | 'clarification' | 'update' | 'retraction';
+  type CorrectionState = { type: CorrectionType; issuedAt: string; summary: string; detail: string } | null;
+  const initCorrection = (initialData as Record<string, unknown>)?.correction as CorrectionState | undefined;
+  const [correction, setCorrection] = useState<CorrectionState>(initCorrection ?? null);
+  const [correctionOpen, setCorrectionOpen] = useState(!!initCorrection);
+
   // Autosave indicator
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved' | 'idle'>('idle');
   const isDirtyRef = useRef(false);
@@ -264,6 +271,7 @@ export default function ArticleEditorForm({
         videoLink: values.videoLink || undefined,
         eventDate: values.eventDate || undefined,
         faqs: faqs.filter((f) => f.question.trim() || f.answer.trim()),
+        correction: correction ?? undefined,
         mainImage: mainImage?.assetRef
           ? {
               _type: 'image' as const,
@@ -273,7 +281,7 @@ export default function ArticleEditorForm({
           : undefined,
       };
     },
-    [editorContent, selectedCategories, selectedSources, mainImage, faqs, relatedArticles],
+    [editorContent, selectedCategories, selectedSources, mainImage, faqs, relatedArticles, correction],
   );
 
   // ---------------------------------------------------------------------------
@@ -1095,6 +1103,156 @@ export default function ArticleEditorForm({
           rows={3}
           placeholder='How was this story reported? Any FOIA requests, documents obtained, etc.'
         />
+      </section>
+
+      <Separator />
+
+      {/* Corrections */}
+      <section>
+        <div className='flex items-center justify-between'>
+          <Label className='text-xs font-bold uppercase tracking-widest'>
+            Correction / Retraction
+            <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+              issue a formal correction, clarification, update, or retraction
+            </span>
+          </Label>
+          <Button
+            type='button'
+            variant='outline'
+            size='sm'
+            onClick={() => {
+              if (correctionOpen && correction) {
+                setCorrection(null);
+              }
+              setCorrectionOpen((v) => !v);
+            }}
+            className={correction ? 'border-untele text-untele' : ''}
+          >
+            {correction ? 'Edit Correction' : correctionOpen ? 'Cancel' : '+ Add Correction'}
+          </Button>
+        </div>
+
+        {correction && !correctionOpen && (
+          <div className='mt-3 border border-untele bg-red-50 px-4 py-3 dark:bg-red-950/20'>
+            <p className='mb-1 text-xs font-bold uppercase tracking-widest text-untele'>
+              {correction.type}
+            </p>
+            <p className='text-sm text-slate-700 dark:text-slate-300'>{correction.summary}</p>
+          </div>
+        )}
+
+        {correctionOpen && (
+          <div className='mt-3 space-y-4 border border-slate-200 p-4 dark:border-slate-700'>
+            {/* Type */}
+            <div>
+              <Label className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+                Type <span className='text-untele'>*</span>
+              </Label>
+              <Select
+                value={correction?.type ?? ''}
+                onValueChange={(v) =>
+                  setCorrection((prev) => ({
+                    type: v as CorrectionType,
+                    issuedAt: prev?.issuedAt ?? new Date().toISOString().slice(0, 16),
+                    summary: prev?.summary ?? '',
+                    detail: prev?.detail ?? '',
+                  }))
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder='Select correction type…' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value='correction'>Correction — factual error fixed</SelectItem>
+                  <SelectItem value='clarification'>Clarification — added context, no error</SelectItem>
+                  <SelectItem value='update'>Update — new developments added</SelectItem>
+                  <SelectItem value='retraction'>Retraction — article fully withdrawn</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Issued At */}
+            <div>
+              <Label className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+                Issued At <span className='text-untele'>*</span>
+              </Label>
+              <Input
+                type='datetime-local'
+                value={correction?.issuedAt ?? ''}
+                onChange={(e) =>
+                  setCorrection((prev) =>
+                    prev ? { ...prev, issuedAt: e.target.value } : {
+                      type: 'correction',
+                      issuedAt: e.target.value,
+                      summary: '',
+                      detail: '',
+                    },
+                  )
+                }
+              />
+            </div>
+
+            {/* Summary */}
+            <div>
+              <Label className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+                One-Line Summary
+                <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+                  max 120 chars — shown on article cards
+                </span>
+              </Label>
+              <Input
+                value={correction?.summary ?? ''}
+                onChange={(e) =>
+                  setCorrection((prev) =>
+                    prev ? { ...prev, summary: e.target.value } : null,
+                  )
+                }
+                maxLength={120}
+                placeholder='e.g. An earlier version misstated the vote count.'
+              />
+            </div>
+
+            {/* Detail */}
+            <div>
+              <Label className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+                Full Correction Text <span className='text-untele'>*</span>
+              </Label>
+              <Textarea
+                value={correction?.detail ?? ''}
+                onChange={(e) =>
+                  setCorrection((prev) =>
+                    prev ? { ...prev, detail: e.target.value } : null,
+                  )
+                }
+                rows={4}
+                placeholder='Full editorial notice displayed at the top of the article page…'
+              />
+            </div>
+
+            <div className='flex gap-2'>
+              <Button
+                type='button'
+                className='bg-untele text-white hover:opacity-90'
+                size='sm'
+                disabled={!correction?.type || !correction?.issuedAt || !correction?.detail}
+                onClick={() => setCorrectionOpen(false)}
+              >
+                Save Correction
+              </Button>
+              <Button
+                type='button'
+                variant='outline'
+                size='sm'
+                onClick={() => {
+                  setCorrection(null);
+                  setCorrectionOpen(false);
+                }}
+              >
+                Remove
+              </Button>
+            </div>
+          </div>
+        )}
       </section>
     </form>
   );

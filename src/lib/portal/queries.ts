@@ -78,6 +78,7 @@ export const queryPortalArticleById = groq`
     videoLink,
     eventDate,
     faqs[]{ question, answer },
+    correction{ type, issuedAt, summary, detail },
     reviewedBy->{ _id, name }
   }
 `;

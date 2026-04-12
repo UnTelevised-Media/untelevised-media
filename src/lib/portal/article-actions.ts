@@ -66,6 +66,15 @@ const articleWriteSchema = z.object({
       })
     )
     .optional(),
+  correction: z
+    .object({
+      type: z.enum(['correction', 'clarification', 'update', 'retraction']),
+      issuedAt: z.string().min(1, 'Issued date is required'),
+      summary: z.string().max(120).optional(),
+      detail: z.string().min(1, 'Full correction text is required'),
+    })
+    .optional()
+    .nullable(),
 });
 
 export type ArticleWriteInput = z.infer<typeof articleWriteSchema>;
@@ -185,6 +194,7 @@ export async function createArticle(
     videoLink: sanitized.videoLink ?? '',
     eventDate: sanitized.eventDate ?? undefined,
     faqs: sanitized.faqs ?? [],
+    correction: sanitized.correction ?? undefined,
   };
 
   const created = await writeClient.create(doc);
@@ -237,6 +247,7 @@ export async function updateArticle(
     videoLink: sanitized.videoLink ?? '',
     eventDate: sanitized.eventDate ?? undefined,
     faqs: sanitized.faqs ?? [],
+    correction: sanitized.correction ?? undefined,
     updatedAt: new Date().toISOString(),
   };
 
