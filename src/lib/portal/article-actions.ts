@@ -309,6 +309,26 @@ export async function submitArticleForReview(articleId: string): Promise<ActionR
 }
 
 // ---------------------------------------------------------------------------
+// Search articles by title (for related-article linking)
+// ---------------------------------------------------------------------------
+
+export async function searchArticles(
+  query: string
+): Promise<ActionResult<Array<{ _id: string; title: string; slug: { current: string } }>>> {
+  await requireAuthor();
+
+  if (!query.trim()) return { success: true, data: [] };
+
+  const results = await writeClient.fetch<
+    Array<{ _id: string; title: string; slug: { current: string } }>
+  >(`*[_type == "article" && title match $q][0...12]{ _id, title, slug }`, {
+    q: `${query.trim()}*`,
+  });
+
+  return { success: true, data: results ?? [] };
+}
+
+// ---------------------------------------------------------------------------
 // Publish article (editor+ only)
 // ---------------------------------------------------------------------------
 

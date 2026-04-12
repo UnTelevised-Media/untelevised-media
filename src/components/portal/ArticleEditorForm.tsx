@@ -30,6 +30,7 @@ import {
   updateArticle,
   publishArticle,
   submitArticleForReview,
+  searchArticles,
   type ArticleWriteInput,
 } from '@/lib/portal/article-actions';
 import { blockNoteToPortableText, portableTextToBlockNote } from '@/lib/portal/blocknote-serializer';
@@ -164,6 +165,14 @@ export default function ArticleEditorForm({
     () => (initialData?.faqs as { question: string; answer: string }[] | undefined) ?? [],
   );
 
+  // Related articles
+  const [relatedArticles, setRelatedArticles] = useState<RelatedArticleRef[]>(
+    initialData?.relatedArticles ?? [],
+  );
+  const [articleSearch, setArticleSearch] = useState('');
+  const [articleResults, setArticleResults] = useState<RelatedArticleRef[]>([]);
+  const [articleSearchPending, startArticleSearch] = useTransition();
+
   // Autosave indicator
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved' | 'idle'>('idle');
   const isDirtyRef = useRef(false);
@@ -249,6 +258,7 @@ export default function ArticleEditorForm({
         allowComments: values.allowComments,
         authorRef: values.authorRef,
         sources: selectedSources.map((s) => ({ _type: 'reference' as const, _ref: s._id })),
+        relatedArticles: relatedArticles.map((a) => ({ _type: 'reference' as const, _ref: a._id })),
         methodology: values.methodology,
         hasEmbeddedVideo: values.hasEmbeddedVideo,
         videoLink: values.videoLink || undefined,
@@ -263,7 +273,7 @@ export default function ArticleEditorForm({
           : undefined,
       };
     },
-    [editorContent, selectedCategories, selectedSources, mainImage, faqs],
+    [editorContent, selectedCategories, selectedSources, mainImage, faqs, relatedArticles],
   );
 
   // ---------------------------------------------------------------------------
@@ -825,6 +835,101 @@ export default function ArticleEditorForm({
             );
           }}
         />
+      </section>
+
+      <Separator />
+
+      <Separator />
+
+      {/* Related Articles */}
+      <section>
+        <Label className='mb-2 block text-xs font-bold uppercase tracking-widest'>
+          Related Articles
+          <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+            up to 6 — shown in the "Read More" section
+          </span>
+        </Label>
+        <div className='mb-3 space-y-1'>
+          {relatedArticles.map((a) => (
+            <div
+              key={a._id}
+              className='flex items-center justify-between gap-3 border border-slate-200 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900'
+            >
+              <span className='min-w-0 flex-1 truncate text-sm'>{a.title}</span>
+              <button
+                type='button'
+                onClick={() => setRelatedArticles((prev) => prev.filter((x) => x._id !== a._id))}
+                className='shrink-0 text-slate-400 hover:text-red-500'
+                aria-label={`Remove ${a.title}`}
+              >
+                ×
+              </button>
+            </div>
+          ))}
+          {relatedArticles.length === 0 && (
+            <p className='text-xs text-slate-400'>No related articles linked yet.</p>
+          )}
+        </div>
+
+        {relatedArticles.length < 6 && (
+          <div className='space-y-2'>
+            <div className='flex gap-2'>
+              <Input
+                value={articleSearch}
+                onChange={(e) => {
+                  const q = e.target.value;
+                  setArticleSearch(q);
+                  if (q.trim().length > 1) {
+                    startArticleSearch(async () => {
+                      const res = await searchArticles(q);
+                      if (res.success) setArticleResults(res.data);
+                    });
+                  } else {
+                    setArticleResults([]);
+                  }
+                }}
+                placeholder='Search articles by title…'
+                className='text-sm'
+              />
+              {articleSearchPending && (
+                <span className='self-center text-xs text-slate-400'>Searching…</span>
+              )}
+            </div>
+            {articleResults.length > 0 && (
+              <ul className='max-h-48 overflow-y-auto border border-slate-200 dark:border-slate-700'>
+                {articleResults.map((a) => {
+                  const alreadyLinked =
+                    relatedArticles.some((x) => x._id === a._id) || a._id === articleId;
+                  return (
+                    <li key={a._id}>
+                      <button
+                        type='button'
+                        disabled={alreadyLinked}
+                        onClick={() => {
+                          if (!alreadyLinked) {
+                            setRelatedArticles((prev) => [...prev, a]);
+                            setArticleSearch('');
+                            setArticleResults([]);
+                          }
+                        }}
+                        className={`w-full px-3 py-2 text-left text-sm transition-colors ${
+                          alreadyLinked
+                            ? 'cursor-not-allowed bg-slate-50 text-slate-400 dark:bg-slate-900'
+                            : 'hover:bg-slate-50 hover:text-untele dark:hover:bg-slate-800'
+                        }`}
+                      >
+                        {a.title}
+                        {alreadyLinked && (
+                          <span className='ml-2 text-xs text-green-600'>✓</span>
+                        )}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        )}
       </section>
 
       <Separator />
