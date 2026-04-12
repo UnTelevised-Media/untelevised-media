@@ -26,10 +26,15 @@
     "convert:webp": "node scripts/convert-to-webp.mjs"
   },
   "dependencies": {
+    "@blocknote/core": "^0.47.3",
+    "@blocknote/mantine": "^0.47.3",
+    "@blocknote/react": "^0.47.3",
     "@clerk/nextjs": "^7.0.5",
     "@edge-runtime/primitives": "^6.0.0",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^5.2.2",
+    "@mantine/core": "^8.3.18",
+    "@mantine/hooks": "^8.3.18",
     "@next/third-parties": "^16.1.6",
     "@portabletext/react": "^6.0.3",
     "@portabletext/toolkit": "^5.0.2",
