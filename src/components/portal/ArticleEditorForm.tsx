@@ -847,8 +847,6 @@ export default function ArticleEditorForm({
 
       <Separator />
 
-      <Separator />
-
       {/* Related Articles */}
       <section>
         <Label className='mb-2 block text-xs font-bold uppercase tracking-widest'>
@@ -942,173 +940,140 @@ export default function ArticleEditorForm({
 
       <Separator />
 
-      {/* Flags (editor+ only) */}
-      {isEditorPlus && (
-        <section className='space-y-4'>
-          <h3 className='text-xs font-bold uppercase tracking-widest text-slate-500'>
-            Editor controls
-          </h3>
-          <div className='flex items-center gap-3'>
-            <Controller
-              name='featured'
-              control={control}
-              render={({ field }) => (
-                <Switch
-                  id='featured'
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              )}
-            />
-            <Label htmlFor='featured'>Featured Article</Label>
-          </div>
-          <div className='flex items-center gap-3'>
-            <Controller
-              name='breakingNews'
-              control={control}
-              render={({ field }) => (
-                <Switch
-                  id='breakingNews'
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              )}
-            />
-            <Label htmlFor='breakingNews'>Breaking News</Label>
-          </div>
-        </section>
-      )}
+      {/* ── Author controls ──────────────────────────────────────────────── */}
+      <section className='space-y-6'>
+        <h3 className='text-xs font-bold uppercase tracking-widest text-slate-500'>
+          Article settings
+        </h3>
 
-      {/* Comments toggle */}
-      <section className='flex items-center gap-3'>
-        <Controller
-          name='allowComments'
-          control={control}
-          render={({ field }) => (
-            <Checkbox
-              id='allowComments'
-              checked={field.value}
-              onCheckedChange={(v) => field.onChange(!!v)}
-            />
-          )}
-        />
-        <Label htmlFor='allowComments'>Allow comments on this article</Label>
-      </section>
-
-      {/* Featured Video — separate from inline body embeds */}
-      <section className='space-y-3'>
-        <Label className='block text-xs font-bold uppercase tracking-widest'>
-          Featured Video
-          <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
-            appears as a video player above or alongside the article, not inside the body
-          </span>
-        </Label>
-        <Input
-          {...register('videoLink')}
-          placeholder='YouTube URL (e.g. https://www.youtube.com/watch?v=…)'
-        />
-        {watch('videoLink') && (
-          <div className='aspect-video max-w-md'>
-            <iframe
-              src={`https://www.youtube.com/embed/${
-                watch('videoLink')?.match(
-                  /(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/,
-                )?.[1] ?? ''
-              }`}
-              className='h-full w-full border-0'
-              allowFullScreen
-            />
-          </div>
-        )}
-        {/* Hidden field keeps the boolean in sync */}
-        <Controller
-          name='hasEmbeddedVideo'
-          control={control}
-          render={({ field }) => {
-            const hasVideo = !!watch('videoLink');
-            if (field.value !== hasVideo) field.onChange(hasVideo);
-            return <input type='hidden' value={String(hasVideo)} />;
-          }}
-        />
-      </section>
-
-      {/* FAQ */}
-      <section>
-        <Label className='mb-2 block text-xs font-bold uppercase tracking-widest'>
-          FAQ
-          <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
-            Q&amp;A pairs for structured data — boosts AI citation and rich snippets
-          </span>
-        </Label>
-        <div className='space-y-3'>
-          {faqs.map((faq, i) => (
-            <div key={i} className='space-y-2 border border-slate-200 p-3 dark:border-slate-700'>
-              <div className='flex items-center gap-2'>
-                <span className='text-xs font-bold uppercase tracking-widest text-slate-400'>
-                  Q{i + 1}
-                </span>
-                <button
-                  type='button'
-                  onClick={() => setFaqs((prev) => prev.filter((_, j) => j !== i))}
-                  className='ml-auto text-xs text-slate-400 hover:text-red-500'
-                >
-                  Remove
-                </button>
-              </div>
-              <Input
-                value={faq.question}
-                onChange={(e) =>
-                  setFaqs((prev) =>
-                    prev.map((f, j) => (j === i ? { ...f, question: e.target.value } : f)),
-                  )
-                }
-                placeholder='Question…'
-                className='text-sm'
+        {/* Comments toggle */}
+        <div className='flex items-center gap-3'>
+          <Controller
+            name='allowComments'
+            control={control}
+            render={({ field }) => (
+              <Checkbox
+                id='allowComments'
+                checked={field.value}
+                onCheckedChange={(v) => field.onChange(!!v)}
               />
-              <Textarea
-                value={faq.answer}
-                onChange={(e) =>
-                  setFaqs((prev) =>
-                    prev.map((f, j) => (j === i ? { ...f, answer: e.target.value } : f)),
-                  )
-                }
-                rows={3}
-                placeholder='Answer (plain text only)…'
-                className='text-sm'
+            )}
+          />
+          <Label htmlFor='allowComments'>Allow comments on this article</Label>
+        </div>
+
+        {/* Featured Video — separate from inline body embeds */}
+        <div className='space-y-3'>
+          <Label className='block text-xs font-bold uppercase tracking-widest'>
+            Featured Video
+            <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+              appears as a video player above or alongside the article, not inside the body
+            </span>
+          </Label>
+          <Input
+            {...register('videoLink')}
+            placeholder='YouTube URL (e.g. https://www.youtube.com/watch?v=…)'
+          />
+          {watch('videoLink') && (
+            <div className='aspect-video max-w-md'>
+              <iframe
+                src={`https://www.youtube.com/embed/${
+                  watch('videoLink')?.match(
+                    /(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/,
+                  )?.[1] ?? ''
+                }`}
+                className='h-full w-full border-0'
+                allowFullScreen
               />
             </div>
-          ))}
-          <Button
-            type='button'
-            variant='outline'
-            size='sm'
-            onClick={() => setFaqs((prev) => [...prev, { question: '', answer: '' }])}
-          >
-            + Add FAQ
-          </Button>
+          )}
+          {/* Hidden field keeps the boolean in sync */}
+          <Controller
+            name='hasEmbeddedVideo'
+            control={control}
+            render={({ field }) => {
+              const hasVideo = !!watch('videoLink');
+              if (field.value !== hasVideo) field.onChange(hasVideo);
+              return <input type='hidden' value={String(hasVideo)} />;
+            }}
+          />
         </div>
-      </section>
 
-      {/* Methodology note */}
-      <section>
-        <Label htmlFor='methodology' className='mb-1 block text-xs font-bold uppercase tracking-widest'>
-          Methodology Note
-          <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
-            optional — shown in Sources panel
-          </span>
-        </Label>
-        <Textarea
-          id='methodology'
-          {...register('methodology')}
-          rows={3}
-          placeholder='How was this story reported? Any FOIA requests, documents obtained, etc.'
-        />
-      </section>
+        {/* FAQ */}
+        <div>
+          <Label className='mb-2 block text-xs font-bold uppercase tracking-widest'>
+            FAQ
+            <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+              Q&amp;A pairs for structured data — boosts AI citation and rich snippets
+            </span>
+          </Label>
+          <div className='space-y-3'>
+            {faqs.map((faq, i) => (
+              <div key={i} className='space-y-2 border border-slate-200 p-3 dark:border-slate-700'>
+                <div className='flex items-center gap-2'>
+                  <span className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                    Q{i + 1}
+                  </span>
+                  <button
+                    type='button'
+                    onClick={() => setFaqs((prev) => prev.filter((_, j) => j !== i))}
+                    className='ml-auto text-xs text-slate-400 hover:text-red-500'
+                  >
+                    Remove
+                  </button>
+                </div>
+                <Input
+                  value={faq.question}
+                  onChange={(e) =>
+                    setFaqs((prev) =>
+                      prev.map((f, j) => (j === i ? { ...f, question: e.target.value } : f)),
+                    )
+                  }
+                  placeholder='Question…'
+                  className='text-sm'
+                />
+                <Textarea
+                  value={faq.answer}
+                  onChange={(e) =>
+                    setFaqs((prev) =>
+                      prev.map((f, j) => (j === i ? { ...f, answer: e.target.value } : f)),
+                    )
+                  }
+                  rows={3}
+                  placeholder='Answer (plain text only)…'
+                  className='text-sm'
+                />
+              </div>
+            ))}
+            <Button
+              type='button'
+              variant='outline'
+              size='sm'
+              onClick={() => setFaqs((prev) => [...prev, { question: '', answer: '' }])}
+            >
+              + Add FAQ
+            </Button>
+          </div>
+        </div>
 
-      <Separator />
+        {/* Methodology note */}
+        <div>
+          <Label htmlFor='methodology' className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+            Methodology Note
+            <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+              optional — shown in Sources panel
+            </span>
+          </Label>
+          <Textarea
+            id='methodology'
+            {...register('methodology')}
+            rows={3}
+            placeholder='How was this story reported? Any FOIA requests, documents obtained, etc.'
+          />
+        </div>
 
-      {/* Corrections */}
-      <section>
+        {/* Corrections */}
+        <div>
         <div className='flex items-center justify-between'>
           <Label className='text-xs font-bold uppercase tracking-widest'>
             Correction / Retraction
@@ -1253,7 +1218,48 @@ export default function ArticleEditorForm({
             </div>
           </div>
         )}
+        </div>
       </section>
+
+      {/* ── Editor controls ──────────────────────────────────────────────── */}
+      {isEditorPlus && (
+        <>
+          <Separator />
+          <section className='space-y-4'>
+            <h3 className='text-xs font-bold uppercase tracking-widest text-slate-500'>
+              Editor controls
+            </h3>
+            <div className='flex items-center gap-3'>
+              <Controller
+                name='featured'
+                control={control}
+                render={({ field }) => (
+                  <Switch
+                    id='featured'
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                )}
+              />
+              <Label htmlFor='featured'>Featured Article</Label>
+            </div>
+            <div className='flex items-center gap-3'>
+              <Controller
+                name='breakingNews'
+                control={control}
+                render={({ field }) => (
+                  <Switch
+                    id='breakingNews'
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                )}
+              />
+              <Label htmlFor='breakingNews'>Breaking News</Label>
+            </div>
+          </section>
+        </>
+      )}
     </form>
   );
 }
