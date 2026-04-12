@@ -76,6 +76,7 @@ export const queryPortalArticleById = groq`
     location,
     hasEmbeddedVideo,
     videoLink,
+    eventDate,
     faqs[]{ question, answer },
     reviewedBy->{ _id, name }
   }

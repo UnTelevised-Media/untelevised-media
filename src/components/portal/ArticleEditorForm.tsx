@@ -59,6 +59,7 @@ const formSchema = z.object({
   authorRef: z.string().optional(),
   hasEmbeddedVideo: z.boolean().default(false),
   videoLink: z.string().optional(),
+  eventDate: z.string().optional(),
   methodology: z.string().max(2000).optional(),
 });
 
@@ -179,6 +180,9 @@ export default function ArticleEditorForm({
         '',
       hasEmbeddedVideo: (initialData?.hasEmbeddedVideo as boolean) ?? false,
       videoLink: (initialData?.videoLink as string) ?? '',
+      eventDate: initialData?.eventDate
+        ? new Date(initialData.eventDate as string).toISOString().slice(0, 16)
+        : '',
       methodology: (initialData?.methodology as string) ?? '',
     },
   });
@@ -225,6 +229,7 @@ export default function ArticleEditorForm({
         methodology: values.methodology,
         hasEmbeddedVideo: values.hasEmbeddedVideo,
         videoLink: values.videoLink || undefined,
+        eventDate: values.eventDate || undefined,
       };
     },
     [editorContent, selectedCategories, selectedSources],
@@ -644,6 +649,21 @@ export default function ArticleEditorForm({
             id='publishedAt'
             type='datetime-local'
             {...register('publishedAt')}
+          />
+        </section>
+
+        {/* Event Date */}
+        <section>
+          <Label htmlFor='eventDate' className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+            Event Date &amp; Time
+            <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+              when the event occurred (optional)
+            </span>
+          </Label>
+          <Input
+            id='eventDate'
+            type='datetime-local'
+            {...register('eventDate')}
           />
         </section>
       </div>

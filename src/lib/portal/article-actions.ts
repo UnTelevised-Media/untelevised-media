@@ -57,6 +57,7 @@ const articleWriteSchema = z.object({
   methodology: z.string().max(2000).optional(),
   hasEmbeddedVideo: z.boolean().optional(),
   videoLink: z.string().url().optional().nullable(),
+  eventDate: z.string().optional().nullable(),
 });
 
 export type ArticleWriteInput = z.infer<typeof articleWriteSchema>;
@@ -174,6 +175,7 @@ export async function createArticle(
     methodology: sanitized.methodology ?? '',
     hasEmbeddedVideo: sanitized.hasEmbeddedVideo ?? false,
     videoLink: sanitized.videoLink ?? '',
+    eventDate: sanitized.eventDate ?? undefined,
   };
 
   const created = await writeClient.create(doc);
@@ -224,6 +226,7 @@ export async function updateArticle(
     methodology: sanitized.methodology ?? '',
     hasEmbeddedVideo: sanitized.hasEmbeddedVideo ?? false,
     videoLink: sanitized.videoLink ?? '',
+    eventDate: sanitized.eventDate ?? undefined,
     updatedAt: new Date().toISOString(),
   };
 
