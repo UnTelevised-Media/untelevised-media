@@ -159,6 +159,11 @@ export default function ArticleEditorForm({
   });
   const [imageUploading, setImageUploading] = useState(false);
 
+  // FAQ items
+  const [faqs, setFaqs] = useState<{ question: string; answer: string }[]>(
+    () => (initialData?.faqs as { question: string; answer: string }[] | undefined) ?? [],
+  );
+
   // Autosave indicator
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved' | 'idle'>('idle');
   const isDirtyRef = useRef(false);
@@ -248,6 +253,7 @@ export default function ArticleEditorForm({
         hasEmbeddedVideo: values.hasEmbeddedVideo,
         videoLink: values.videoLink || undefined,
         eventDate: values.eventDate || undefined,
+        faqs: faqs.filter((f) => f.question.trim() || f.answer.trim()),
         mainImage: mainImage?.assetRef
           ? {
               _type: 'image' as const,
@@ -257,7 +263,7 @@ export default function ArticleEditorForm({
           : undefined,
       };
     },
-    [editorContent, selectedCategories, selectedSources, mainImage],
+    [editorContent, selectedCategories, selectedSources, mainImage, faqs],
   );
 
   // ---------------------------------------------------------------------------
@@ -911,6 +917,63 @@ export default function ArticleEditorForm({
             return <input type='hidden' value={String(hasVideo)} />;
           }}
         />
+      </section>
+
+      {/* FAQ */}
+      <section>
+        <Label className='mb-2 block text-xs font-bold uppercase tracking-widest'>
+          FAQ
+          <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+            Q&amp;A pairs for structured data — boosts AI citation and rich snippets
+          </span>
+        </Label>
+        <div className='space-y-3'>
+          {faqs.map((faq, i) => (
+            <div key={i} className='space-y-2 border border-slate-200 p-3 dark:border-slate-700'>
+              <div className='flex items-center gap-2'>
+                <span className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                  Q{i + 1}
+                </span>
+                <button
+                  type='button'
+                  onClick={() => setFaqs((prev) => prev.filter((_, j) => j !== i))}
+                  className='ml-auto text-xs text-slate-400 hover:text-red-500'
+                >
+                  Remove
+                </button>
+              </div>
+              <Input
+                value={faq.question}
+                onChange={(e) =>
+                  setFaqs((prev) =>
+                    prev.map((f, j) => (j === i ? { ...f, question: e.target.value } : f)),
+                  )
+                }
+                placeholder='Question…'
+                className='text-sm'
+              />
+              <Textarea
+                value={faq.answer}
+                onChange={(e) =>
+                  setFaqs((prev) =>
+                    prev.map((f, j) => (j === i ? { ...f, answer: e.target.value } : f)),
+                  )
+                }
+                rows={3}
+                placeholder='Answer (plain text only)…'
+                className='text-sm'
+              />
+            </div>
+          ))}
+          <Button
+            type='button'
+            variant='outline'
+            size='sm'
+            onClick={() => setFaqs((prev) => [...prev, { question: '', answer: '' }])}
+          >
+            + Add FAQ
+          </Button>
+        </div>
       </section>
 
       {/* Methodology note */}

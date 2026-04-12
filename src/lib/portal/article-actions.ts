@@ -58,6 +58,14 @@ const articleWriteSchema = z.object({
   hasEmbeddedVideo: z.boolean().optional(),
   videoLink: z.string().url().optional().nullable(),
   eventDate: z.string().optional().nullable(),
+  faqs: z
+    .array(
+      z.object({
+        question: z.string().max(300),
+        answer: z.string().max(2000),
+      })
+    )
+    .optional(),
 });
 
 export type ArticleWriteInput = z.infer<typeof articleWriteSchema>;
@@ -176,6 +184,7 @@ export async function createArticle(
     hasEmbeddedVideo: sanitized.hasEmbeddedVideo ?? false,
     videoLink: sanitized.videoLink ?? '',
     eventDate: sanitized.eventDate ?? undefined,
+    faqs: sanitized.faqs ?? [],
   };
 
   const created = await writeClient.create(doc);
@@ -227,6 +236,7 @@ export async function updateArticle(
     hasEmbeddedVideo: sanitized.hasEmbeddedVideo ?? false,
     videoLink: sanitized.videoLink ?? '',
     eventDate: sanitized.eventDate ?? undefined,
+    faqs: sanitized.faqs ?? [],
     updatedAt: new Date().toISOString(),
   };
 
