@@ -166,10 +166,17 @@ export default function ArticleEditorForm({
       breakingNews: (initialData?.breakingNews as boolean) ?? false,
       location: (initialData?.location as string) ?? '',
       allowComments: (initialData?.allowComments as boolean) ?? true,
-      publishedAt: (initialData?.publishedAt as string) ?? '',
+      publishedAt: initialData?.publishedAt
+        ? new Date(initialData.publishedAt as string).toISOString().slice(0, 16)
+        : '',
       tags: ((initialData?.tags as string[] | undefined) ?? []).join(', '),
       keywords: ((initialData?.keywords as string[] | undefined) ?? []).join(', '),
-      authorRef: (initialData?.authorRef as string) ?? currentSanityAuthorId ?? '',
+      // author comes from Sanity as author->{ _id } not a bare authorRef field
+      authorRef:
+        (initialData?.author as { _id?: string } | undefined)?._id ??
+        (initialData?.authorRef as string | undefined) ??
+        currentSanityAuthorId ??
+        '',
       hasEmbeddedVideo: (initialData?.hasEmbeddedVideo as boolean) ?? false,
       videoLink: (initialData?.videoLink as string) ?? '',
       methodology: (initialData?.methodology as string) ?? '',
