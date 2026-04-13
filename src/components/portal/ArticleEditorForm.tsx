@@ -122,8 +122,11 @@ export default function ArticleEditorForm({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
-  // Editor blocks (BlockNote PartialBlock[])
-  const [editorContent, setEditorContent] = useState<object[]>(() => {
+  // Compute the initial BN content exactly once via lazy useState.
+  // Never call the setter — this value is only passed to RichTextEditor as
+  // `initialContent` so it stays stable across re-renders and never triggers
+  // the editor's internal replaceBlocks effect.
+  const [initialEditorContent] = useState<object[]>(() => {
     if (initialData?.body && Array.isArray(initialData.body) && initialData.body.length > 0) {
       return portableTextToBlockNote(
         initialData.body as Parameters<typeof portableTextToBlockNote>[0],
@@ -132,6 +135,11 @@ export default function ArticleEditorForm({
     }
     return [];
   });
+
+  // Live editor content — updated on every keystroke via the onChange callback,
+  // read only when building the save payload. A ref (not state) means typing
+  // does not re-render the rest of the form.
+  const editorContentRef = useRef<object[]>(initialEditorContent);
 
   // Selected categories
   const [selectedCategories, setSelectedCategories] = useState<CategoryRef[]>(
@@ -249,7 +257,7 @@ export default function ArticleEditorForm({
 
   const buildInput = useCallback(
     (values: FormValues, overrideStatus?: 'draft' | 'published'): ArticleWriteInput => {
-      const portableBody = blockNoteToPortableText(editorContent as Parameters<typeof blockNoteToPortableText>[0]);
+      const portableBody = blockNoteToPortableText(editorContentRef.current as Parameters<typeof blockNoteToPortableText>[0]);
       return {
         title: values.title,
         slug: { _type: 'slug', current: values.slug },
@@ -284,7 +292,7 @@ export default function ArticleEditorForm({
           : undefined,
       };
     },
-    [editorContent, selectedCategories, selectedSources, mainImage, faqs, relatedArticles, correction],
+    [selectedCategories, selectedSources, mainImage, faqs, relatedArticles, correction],
   );
 
   // ---------------------------------------------------------------------------
@@ -660,9 +668,9 @@ export default function ArticleEditorForm({
           Article Body
         </Label>
         <RichTextEditor
-          initialContent={editorContent}
+          initialContent={initialEditorContent}
           onChange={(blocks) => {
-            setEditorContent(blocks);
+            editorContentRef.current = blocks;
             isDirtyRef.current = true;
             setSaveStatus('unsaved');
           }}

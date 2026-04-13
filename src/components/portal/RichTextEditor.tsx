@@ -14,7 +14,7 @@ import {
   createReactBlockSpec,
 } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useTheme } from 'next-themes';
 import { Youtube, Twitter, Instagram } from 'lucide-react';
 
@@ -277,15 +277,6 @@ export default function RichTextEditor({
     initialContent: initialContent?.length ? (initialContent as any) : undefined,
     placeholderText: placeholder,
   });
-
-  // When initialContent changes externally (e.g. loading a different article),
-  // replace the editor's document.
-  useEffect(() => {
-    if (!editor || !initialContent?.length) return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    editor.replaceBlocks(editor.document, initialContent as any);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(initialContent)]);
 
   const handleChange = useCallback(() => {
     onChange?.(editor.document as unknown as object[]);
