@@ -506,5 +506,5 @@ export async function generateStaticParams() {
   const queryMusicArtistStaticParams = groq`*[_type=='musicArtist'] { slug }`;
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryMusicArtistStaticParams);
-  return (slugs ?? []).map((item) => ({ slug: item.slug.current }));
+  return (slugs ?? []).filter((item) => item?.slug?.current).map((item) => ({ slug: item.slug.current }));
 }

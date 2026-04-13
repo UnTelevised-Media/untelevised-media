@@ -360,7 +360,7 @@ export async function generateStaticParams() {
   const queryTimelineStaticParams = groq`*[_type=='timeline' && isPublished == true] { slug }`;
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: Timeline[] = await sanityClient.fetch(queryTimelineStaticParams);
-  const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
+  const slugRoutes = slugs ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current) : [];
   return slugRoutes.map((slug) => ({
     slug,
   }));

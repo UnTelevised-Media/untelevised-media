@@ -23,7 +23,7 @@ export async function generateStaticParams() {
   const slugs = await sanityClient.fetch<{ slug: { current: string } }[]>(
     groq`*[_type == 'factCheck'] { slug }`,
   );
-  return (slugs ?? []).map((fc) => ({ slug: fc.slug.current }));
+  return (slugs ?? []).filter((fc) => fc?.slug?.current).map((fc) => ({ slug: fc.slug.current }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
