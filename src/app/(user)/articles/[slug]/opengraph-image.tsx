@@ -20,7 +20,7 @@ function sanityImageUrl(ref: string, width = 1200): string {
 
 async function fetchArticle(slug: string) {
   const query = encodeURIComponent(
-    `*[_type == 'article' && slug.current == $slug][0]{
+    `*[_type == 'article' && slug.current == $slug && status == 'published'][0]{
       title,
       description,
       publishedAt,

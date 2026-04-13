@@ -50,7 +50,6 @@ const formSchema = z.object({
   slug: z.string().min(1, 'Slug is required').max(200).regex(/^[a-z0-9-]+$/, 'Slug: lowercase letters, numbers, hyphens only'),
   description: z.string().max(500).optional(),
   leadParagraph: z.string().max(1000).optional(),
-  status: z.enum(['draft', 'published']).default('draft'),
   featured: z.boolean().default(false),
   breakingNews: z.boolean().default(false),
   location: z.string().max(200).optional(),
@@ -212,7 +211,6 @@ export default function ArticleEditorForm({
       slug: (initialData?.slug as { current: string } | undefined)?.current ?? '',
       description: (initialData?.description as string) ?? '',
       leadParagraph: (initialData?.leadParagraph as string) ?? '',
-      status: (initialData?.status as 'draft' | 'published') ?? 'draft',
       featured: (initialData?.featured as boolean) ?? false,
       breakingNews: (initialData?.breakingNews as boolean) ?? false,
       location: (initialData?.location as string) ?? '',
@@ -256,7 +254,7 @@ export default function ArticleEditorForm({
   // ---------------------------------------------------------------------------
 
   const buildInput = useCallback(
-    (values: FormValues, overrideStatus?: 'draft' | 'published'): ArticleWriteInput => {
+    (values: FormValues, overrideStatus: 'draft' | 'published'): ArticleWriteInput => {
       const portableBody = blockNoteToPortableText(editorContentRef.current as Parameters<typeof blockNoteToPortableText>[0]);
       return {
         title: values.title,
@@ -264,7 +262,7 @@ export default function ArticleEditorForm({
         description: values.description,
         leadParagraph: values.leadParagraph,
         body: portableBody as Record<string, unknown>[],
-        status: overrideStatus ?? values.status,
+        status: overrideStatus,
         featured: values.featured,
         breakingNews: values.breakingNews,
         needsReview: false,

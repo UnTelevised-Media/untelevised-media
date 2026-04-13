@@ -4,7 +4,7 @@ import { groq } from 'next-sanity';
 
 export default async function getAllURLs() {
   const queryAllArticleUrls = groq`
-    *[_type == "article"] {
+    *[_type == "article" && status == 'published'] {
       ...,
       title,
       slug,
