@@ -46,13 +46,20 @@ export default async function EditArticlePage({
 
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
-  const [article, categories, authors] = await Promise.all([
+  const [article, categories, authorList] = await Promise.all([
     portalClient.fetch<PortalArticleFull | null>(queryPortalArticleById, { id }),
     portalClient.fetch<Category[]>(queryPortalCategories),
     isEditorPlus ? portalClient.fetch<Author[]>(queryPortalAuthors) : Promise.resolve([]),
   ]);
 
   if (!article) notFound();
+
+  // Ensure the article's current author always appears in the dropdown, even if
+  // they were excluded by the isActive filter (e.g. field not set on older records).
+  const authors: Author[] =
+    article.author && !authorList.some((a) => a._id === article.author!._id)
+      ? [{ _id: article.author._id, name: article.author.name }, ...authorList]
+      : authorList;
 
   // Authors can only access their own articles
   if (!isEditorPlus && article.authorId !== sanityAuthorId) notFound();

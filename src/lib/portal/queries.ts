@@ -77,7 +77,7 @@ export const queryPortalArticleById = groq`
     hasEmbeddedVideo,
     videoLink,
     eventDate,
-    faqs[]{ question, answer },
+    faqs[]{ _key, question, answer },
     correction{ type, issuedAt, summary, detail },
     reviewedBy->{ _id, name }
   }
@@ -96,7 +96,7 @@ export const queryPortalCategories = groq`
 `;
 
 export const queryPortalAuthors = groq`
-  *[_type == "author" && isActive == true] | order(name asc) {
+  *[_type == "author" && isActive != false] | order(name asc) {
     _id,
     name,
     slug,
