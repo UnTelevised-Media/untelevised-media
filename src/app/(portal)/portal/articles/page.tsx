@@ -37,8 +37,8 @@ export default async function PortalArticlesPage() {
     }
   }
 
-  const publishedCount = articles.filter((a) => a.status === 'published').length;
-  const draftCount = articles.filter((a) => a.status === 'draft').length;
+  const publishedCount = articles.filter((a) => !!a.publishedAt).length;
+  const draftCount = articles.filter((a) => !a.publishedAt).length;
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
