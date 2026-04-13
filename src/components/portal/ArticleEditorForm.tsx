@@ -384,7 +384,7 @@ export default function ArticleEditorForm({
       if (!isDirtyRef.current) return;
       const values = getValues();
       setSaveStatus('saving');
-      const input = buildInput(values as FormValues, 'draft');
+      const input = buildInput(values as FormValues);
       const articleIdSnapshot = articleId;
       startTransition(async () => {
         try {
