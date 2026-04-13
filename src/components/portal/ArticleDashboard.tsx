@@ -51,6 +51,7 @@ export interface PortalArticle {
   _updatedAt: string;
   title: string;
   slug: { current: string };
+  status?: string | null;
   featured: boolean;
   breakingNews: boolean;
   needsReview: boolean;
@@ -76,7 +77,8 @@ interface Props {
 // ---------------------------------------------------------------------------
 
 function StatusBadge({ article }: { article: PortalArticle }) {
-  if (article.publishedAt) {
+  const isPublished = !!article.publishedAt || article.status === 'published';
+  if (isPublished) {
     return (
       <Badge className='bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'>
         Published
@@ -132,9 +134,9 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
       if (filterStatus === 'needsReview') {
         list = list.filter((a) => a.needsReview);
       } else if (filterStatus === 'published') {
-        list = list.filter((a) => !!a.publishedAt);
+        list = list.filter((a) => !!a.publishedAt || a.status === 'published');
       } else if (filterStatus === 'draft') {
-        list = list.filter((a) => !a.publishedAt);
+        list = list.filter((a) => !a.publishedAt && a.status !== 'published');
       }
     }
 

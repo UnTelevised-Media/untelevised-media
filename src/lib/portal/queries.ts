@@ -14,6 +14,7 @@ const ARTICLE_LIST_PROJECTION = groq`{
   _updatedAt,
   title,
   slug,
+  status,
   featured,
   breakingNews,
   needsReview,
