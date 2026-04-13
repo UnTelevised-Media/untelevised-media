@@ -55,7 +55,7 @@ export default async function StaffPage() {
                       <Image
                         src={
                           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          urlForImage(author.image as any).url() ?? ''
+                          urlForImage(author.image as any)?.url() ?? '/placeholder-avatar.png'
                         }
                         width={400}
                         height={400}
