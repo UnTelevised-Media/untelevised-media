@@ -5,6 +5,7 @@
 import {
   blockNoteToPortableText,
   portableTextToBlockNote,
+  cdnUrlToAssetRef,
   type SanityBlockAny,
 } from '../blocknote-serializer';
 
@@ -283,7 +284,7 @@ describe('blockNoteToPortableText', () => {
       expect((pt[0] as Record<string, unknown>)._type).toBe('break');
     });
 
-    it('converts image block', () => {
+    it('converts image block — bare asset ID passes through unchanged', () => {
       const pt = blockNoteToPortableText([
         {
           id: 'img1',
@@ -297,6 +298,26 @@ describe('blockNoteToPortableText', () => {
       expect(img._type).toBe('image');
       expect((img.asset as Record<string, unknown>)._ref).toBe('image-abc123');
       expect(img.alt).toBe('A photo');
+    });
+
+    it('converts image block — CDN URL is reversed back to asset ID', () => {
+      // Regression: portableTextToBlockNote resolves asset refs to CDN URLs for display.
+      // blockNoteToPortableText must convert them back so Sanity gets a valid document ID.
+      const cdnUrl =
+        'https://cdn.sanity.io/images/ypejdt32/articles/0998b99a508a353fa1c426ff118b3be182f57714-1920x1080.webp?w=800';
+      const pt = blockNoteToPortableText([
+        {
+          id: 'img2',
+          type: 'image',
+          props: { url: cdnUrl, caption: '' },
+          content: undefined,
+          children: [],
+        },
+      ]);
+      const img = pt[0] as Record<string, unknown>;
+      expect((img.asset as Record<string, unknown>)._ref).toBe(
+        'image-0998b99a508a353fa1c426ff118b3be182f57714-1920x1080-webp'
+      );
     });
 
     it('converts youtubeEmbed block', () => {
@@ -757,5 +778,52 @@ describe('portableTextToBlockNote', () => {
       expect(restored[2].type).toBe('instagramEmbed');
       expect(restored[2].props.postId).toBe('igpost');
     });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// cdnUrlToAssetRef
+// ---------------------------------------------------------------------------
+
+describe('cdnUrlToAssetRef', () => {
+  it('converts a Sanity CDN URL to the correct asset _id', () => {
+    expect(
+      cdnUrlToAssetRef(
+        'https://cdn.sanity.io/images/ypejdt32/articles/0998b99a508a353fa1c426ff118b3be182f57714-1920x1080.webp'
+      )
+    ).toBe('image-0998b99a508a353fa1c426ff118b3be182f57714-1920x1080-webp');
+  });
+
+  it('strips query parameters before extracting the asset ID', () => {
+    expect(
+      cdnUrlToAssetRef(
+        'https://cdn.sanity.io/images/abc/prod/deadbeef-800x600.jpg?w=400&auto=format'
+      )
+    ).toBe('image-deadbeef-800x600-jpg');
+  });
+
+  it('handles png, jpg, gif, avif extensions', () => {
+    expect(cdnUrlToAssetRef('https://cdn.sanity.io/images/p/d/aabbcc-640x480.png')).toBe(
+      'image-aabbcc-640x480-png'
+    );
+    expect(cdnUrlToAssetRef('https://cdn.sanity.io/images/p/d/aabbcc-640x480.gif')).toBe(
+      'image-aabbcc-640x480-gif'
+    );
+    expect(cdnUrlToAssetRef('https://cdn.sanity.io/images/p/d/aabbcc-640x480.avif')).toBe(
+      'image-aabbcc-640x480-avif'
+    );
+  });
+
+  it('passes through an existing asset _id unchanged', () => {
+    expect(cdnUrlToAssetRef('image-abc123-400x300-jpg')).toBe('image-abc123-400x300-jpg');
+  });
+
+  it('passes through an empty string unchanged', () => {
+    expect(cdnUrlToAssetRef('')).toBe('');
+  });
+
+  it('passes through an external non-Sanity URL unchanged', () => {
+    const ext = 'https://example.com/photo.jpg';
+    expect(cdnUrlToAssetRef(ext)).toBe(ext);
   });
 });

@@ -84,6 +84,19 @@ export function genKey(): string {
   return `bnk${++_keyCounter}${Math.random().toString(36).slice(2, 5)}`;
 }
 
+// ─── Sanity CDN URL → asset _id ───────────────────────────────────────────────
+// Sanity CDN URL:  https://cdn.sanity.io/images/{proj}/{dataset}/{hash}-{WxH}.{ext}[?params]
+// Sanity asset ID: image-{hash}-{WxH}-{ext}
+// When portableTextToBlockNote resolves an asset _ref to a CDN URL for display,
+// blockNoteToPortableText must reverse the mapping so the _ref written back to
+// Sanity is the document ID, not the URL.
+export function cdnUrlToAssetRef(url: string): string {
+  const m = url.match(/cdn\.sanity\.io\/images\/[^/]+\/[^/]+\/([a-f0-9]+-\d+x\d+)\.([a-z0-9]+)/i);
+  if (m) return `image-${m[1]}-${m[2]}`;
+  // Already an asset ID (image-…) or an external URL — return as-is
+  return url;
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // BlockNote → Portable Text
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -166,13 +179,15 @@ function bnBlockToPT(block: BNBlock): SanityBlockAny | null {
       };
     }
 
-    case 'image':
+    case 'image': {
+      const rawUrl = (block.props.url as string) ?? '';
       return {
         _type: 'image',
         _key: genKey(),
-        asset: { _type: 'reference', _ref: (block.props.url as string) ?? '' },
+        asset: { _type: 'reference', _ref: cdnUrlToAssetRef(rawUrl) },
         alt: (block.props.caption as string) ?? '',
       };
+    }
 
     case 'divider':
       return { _type: 'break', _key: genKey() };
