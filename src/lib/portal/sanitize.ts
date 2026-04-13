@@ -7,18 +7,11 @@
  * Prevents script injection and XSS in text fields stored as strings in Sanity.
  */
 export function sanitizeText(input: string): string {
-  return input
-    .replace(/<[^>]*>/g, '') // strip all HTML tags
-    .replace(/[<>'"]/g, (c) => {
-      const map: Record<string, string> = {
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;',
-      };
-      return map[c] ?? c;
-    })
-    .trim();
+  // Strip any HTML tags so raw markup can't sneak into plain-text Sanity fields.
+  // Do NOT entity-encode quotes or angle brackets — Sanity stores raw strings and
+  // React escapes them automatically on render. Encoding them here produces
+  // literal &#39; / &quot; artefacts in titles, slugs, and metadata.
+  return input.replace(/<[^>]*>/g, '').trim();
 }
 
 /**

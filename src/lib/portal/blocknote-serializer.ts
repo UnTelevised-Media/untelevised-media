@@ -34,8 +34,16 @@ interface BNLink {
 
 type BNInline = BNStyledText | BNLink;
 
+// BlockNote 0.47 cells are TableCell objects { content, colspan?, rowspan? };
+// older builds exposed plain BNInline[] arrays. Both shapes are handled.
+interface BNTableCell {
+  content: BNInline[];
+  colspan?: number;
+  rowspan?: number;
+}
+
 interface BNTableRow {
-  cells: BNInline[][];
+  cells: (BNInline[] | BNTableCell)[];
 }
 
 interface BNTableContent {
@@ -169,12 +177,17 @@ function bnBlockToPT(block: BNBlock): SanityBlockAny | null {
         rows: tc.rows.map((row) => ({
           _type: 'row',
           _key: genKey(),
-          cells: row.cells.map((cell) =>
-            cell
+          cells: row.cells.map((cell) => {
+            // BlockNote 0.47 wraps each cell in a TableCell object { content, colspan?, rowspan? };
+            // earlier versions exposed plain BNInline[] arrays. Normalise both.
+            const inlines: BNInline[] = Array.isArray(cell)
+              ? (cell as BNInline[])
+              : ((cell as BNTableCell).content ?? []);
+            return inlines
               .filter((c) => c.type === 'text')
               .map((c) => (c as BNStyledText).text)
-              .join('')
-          ),
+              .join('');
+          }),
         })),
       };
     }
@@ -337,7 +350,11 @@ function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (ref: string) => stri
             rows: rows.map((row) => ({
               cells: (row.cells ?? []).map((cell) => {
                 const text = typeof cell === 'string' ? cell : String(cell ?? '');
-                return [{ type: 'text', text, styles: {} }];
+                // BlockNote 0.47 requires TableCell objects with `type: "tableCell"`.
+                // Without the `type` field BlockNote's internal normaliser wraps the
+                // whole object in a second array, corrupting the cell content and
+                // ultimately causing "e.filter is not a function" on serialisation.
+                return { type: 'tableCell', content: [{ type: 'text', text, styles: {} }] };
               }),
             })),
           },

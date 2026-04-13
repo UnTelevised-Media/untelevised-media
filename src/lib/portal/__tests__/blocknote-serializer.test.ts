@@ -262,7 +262,7 @@ describe('blockNoteToPortableText', () => {
       expect(pt[0].language).toBe('text');
     });
 
-    it('converts table with string cells', () => {
+    it('converts table with string cells (plain array format)', () => {
       const pt = blockNoteToPortableText([
         bnTable([
           ['A', 'B'],
@@ -275,6 +275,32 @@ describe('blockNoteToPortableText', () => {
       expect(rows).toHaveLength(2);
       expect(rows[0].cells).toEqual(['A', 'B']);
       expect(rows[1].cells).toEqual(['1', '2']);
+    });
+
+    it('converts table with BlockNote 0.47 TableCell objects', () => {
+      // BN 0.47 editor.document exposes cells as { content: BNInline[], colspan?, rowspan? }
+      const block = {
+        id: 't2',
+        type: 'table' as const,
+        props: {},
+        content: {
+          type: 'tableContent' as const,
+          rows: [
+            {
+              cells: [
+                { content: [{ type: 'text' as const, text: 'Header', styles: {} }] },
+                { content: [{ type: 'text' as const, text: 'Value', styles: {} }] },
+              ],
+            },
+          ],
+        },
+        children: [],
+      };
+      const pt = blockNoteToPortableText([block as never]);
+      const table = pt[0] as Record<string, unknown>;
+      expect(table._type).toBe('table');
+      const rows = table.rows as Array<{ cells: string[] }>;
+      expect(rows[0].cells).toEqual(['Header', 'Value']);
     });
 
     it('converts divider to break', () => {
@@ -597,12 +623,14 @@ describe('portableTextToBlockNote', () => {
         type: string;
         content: {
           type: string;
-          rows: Array<{ cells: Array<Array<{ text: string }>> }>;
+          rows: Array<{ cells: Array<{ type: string; content: Array<{ text: string }> }> }>;
         };
       }>;
       expect(b.type).toBe('table');
-      expect(b.content.rows[0].cells[0][0].text).toBe('Name');
-      expect(b.content.rows[1].cells[1][0].text).toBe('30');
+      // BlockNote 0.47 needs TableCell objects with type:"tableCell" and content
+      expect(b.content.rows[0].cells[0].type).toBe('tableCell');
+      expect(b.content.rows[0].cells[0].content[0].text).toBe('Name');
+      expect(b.content.rows[1].cells[1].content[0].text).toBe('30');
     });
 
     it('converts break to divider', () => {

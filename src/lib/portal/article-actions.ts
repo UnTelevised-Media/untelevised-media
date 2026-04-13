@@ -36,7 +36,11 @@ const articleWriteSchema = z.object({
   breakingNews: z.boolean().optional(),
   needsReview: z.boolean().optional(),
   publishedAt: z.string().optional().nullable(),
-  categories: z.array(z.object({ _type: z.literal('reference'), _ref: z.string() })).optional(),
+  categories: z
+    .array(
+      z.object({ _type: z.literal('reference'), _ref: z.string(), _key: z.string().optional() })
+    )
+    .optional(),
   tags: z.array(z.string()).max(10).optional(),
   keywords: z.array(z.string()).optional(),
   location: z.string().max(200).optional(),
@@ -50,9 +54,15 @@ const articleWriteSchema = z.object({
     .optional()
     .nullable(),
   authorRef: z.string().optional(), // sanity author _id — editors can change, authors cannot
-  sources: z.array(z.object({ _type: z.literal('reference'), _ref: z.string() })).optional(),
+  sources: z
+    .array(
+      z.object({ _type: z.literal('reference'), _ref: z.string(), _key: z.string().optional() })
+    )
+    .optional(),
   relatedArticles: z
-    .array(z.object({ _type: z.literal('reference'), _ref: z.string() }))
+    .array(
+      z.object({ _type: z.literal('reference'), _ref: z.string(), _key: z.string().optional() })
+    )
     .optional(),
   methodology: z.string().max(2000).optional(),
   hasEmbeddedVideo: z.boolean().optional(),
@@ -61,6 +71,7 @@ const articleWriteSchema = z.object({
   faqs: z
     .array(
       z.object({
+        _key: z.string().optional(),
         question: z.string().max(300),
         answer: z.string().max(2000),
       })

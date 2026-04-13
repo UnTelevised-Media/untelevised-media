@@ -161,8 +161,11 @@ export default function ArticleEditorForm({
   const [imageUploading, setImageUploading] = useState(false);
 
   // FAQ items
-  const [faqs, setFaqs] = useState<{ question: string; answer: string }[]>(
-    () => (initialData?.faqs as { question: string; answer: string }[] | undefined) ?? [],
+  const [faqs, setFaqs] = useState<{ _key: string; question: string; answer: string }[]>(
+    () =>
+      ((initialData?.faqs as { _key?: string; question: string; answer: string }[] | undefined) ?? []).map(
+        (f) => ({ ...f, _key: f._key ?? Math.random().toString(36).slice(2, 10) }),
+      ),
   );
 
   // Related articles
@@ -258,19 +261,19 @@ export default function ArticleEditorForm({
         breakingNews: values.breakingNews,
         needsReview: false,
         publishedAt: values.publishedAt || undefined,
-        categories: selectedCategories.map((c) => ({ _type: 'reference' as const, _ref: c._id })),
+        categories: selectedCategories.map((c) => ({ _type: 'reference' as const, _ref: c._id, _key: c._id })),
         tags: values.tags ? values.tags.split(',').map((t) => t.trim()).filter(Boolean) : [],
         keywords: values.keywords ? values.keywords.split(',').map((k) => k.trim()).filter(Boolean) : [],
         location: values.location,
         allowComments: values.allowComments,
         authorRef: values.authorRef,
-        sources: selectedSources.map((s) => ({ _type: 'reference' as const, _ref: s._id })),
-        relatedArticles: relatedArticles.map((a) => ({ _type: 'reference' as const, _ref: a._id })),
+        sources: selectedSources.map((s) => ({ _type: 'reference' as const, _ref: s._id, _key: s._id })),
+        relatedArticles: relatedArticles.map((a) => ({ _type: 'reference' as const, _ref: a._id, _key: a._id })),
         methodology: values.methodology,
         hasEmbeddedVideo: values.hasEmbeddedVideo,
         videoLink: values.videoLink || undefined,
         eventDate: values.eventDate || undefined,
-        faqs: faqs.filter((f) => f.question.trim() || f.answer.trim()),
+        faqs: faqs.filter((f) => f.question.trim() || f.answer.trim()).map((f) => ({ _key: f._key, question: f.question, answer: f.answer })),
         correction: correction ?? undefined,
         mainImage: mainImage?.assetRef
           ? {
@@ -1064,7 +1067,7 @@ export default function ArticleEditorForm({
               type='button'
               variant='outline'
               size='sm'
-              onClick={() => setFaqs((prev) => [...prev, { question: '', answer: '' }])}
+              onClick={() => setFaqs((prev) => [...prev, { _key: Math.random().toString(36).slice(2, 10), question: '', answer: '' }])}
             >
               + Add FAQ
             </Button>
