@@ -195,6 +195,7 @@ export default function ArticleEditorForm({
 
   // Autosave indicator
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved' | 'idle'>('idle');
+  const isAlreadyPublished = !!initialData?.publishedAt;
   const isDirtyRef = useRef(false);
 
   // Form
@@ -361,13 +362,13 @@ export default function ArticleEditorForm({
           const result = await updateArticle(id, buildInput(values));
           if (!result.success) { toast.error(result.error); return; }
         }
-        const pubResult = await publishArticle(id, values.publishedAt || undefined);
-        if (pubResult.success) {
-          toast.success('Article published!');
-          router.push('/portal/articles');
-        } else {
-          toast.error(pubResult.error);
+        // Only editors can call publishArticle; authors just update an already-published article
+        if (isEditorPlus) {
+          const pubResult = await publishArticle(id, values.publishedAt || undefined);
+          if (!pubResult.success) { toast.error(pubResult.error); return; }
         }
+        toast.success(isEditorPlus ? 'Article published!' : 'Article updated.');
+        router.push('/portal/articles');
       } catch (err) {
         toast.error(err instanceof Error ? err.message : 'Publish failed. Please try again.');
       }
@@ -475,7 +476,8 @@ export default function ArticleEditorForm({
             {isPending ? 'Saving…' : 'Save Draft'}
           </Button>
 
-          {!isEditorPlus && (
+          {/* Authors on unpublished articles: submit for editor review */}
+          {!isEditorPlus && !isAlreadyPublished && (
             <Button
               type='button'
               size='sm'
@@ -487,7 +489,8 @@ export default function ArticleEditorForm({
             </Button>
           )}
 
-          {isEditorPlus && (
+          {/* Publish: always for editors; authors can publish updates to already-published articles */}
+          {(isEditorPlus || isAlreadyPublished) && (
             <Button
               type='button'
               size='sm'
@@ -495,7 +498,7 @@ export default function ArticleEditorForm({
               disabled={isPending}
               onClick={handleSubmit(handlePublish)}
             >
-              Publish
+              {isEditorPlus ? 'Publish' : 'Publish Update'}
             </Button>
           )}
 
