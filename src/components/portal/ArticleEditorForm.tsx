@@ -187,7 +187,10 @@ export default function ArticleEditorForm({
   type CorrectionType = 'correction' | 'clarification' | 'update' | 'retraction';
   type CorrectionState = { type: CorrectionType; issuedAt: string; summary: string; detail: string } | null;
   const initCorrection = (initialData as Record<string, unknown>)?.correction as CorrectionState | undefined;
-  const [correction, setCorrection] = useState<CorrectionState>(initCorrection ?? null);
+  // Normalize issuedAt: Sanity stores full ISO strings; datetime-local inputs need "yyyy-MM-ddThh:mm"
+  const [correction, setCorrection] = useState<CorrectionState>(
+    initCorrection ? { ...initCorrection, issuedAt: initCorrection.issuedAt?.slice(0, 16) ?? '' } : null,
+  );
   const [correctionOpen, setCorrectionOpen] = useState(!!initCorrection);
 
   // Autosave indicator
