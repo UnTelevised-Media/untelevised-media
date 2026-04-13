@@ -51,7 +51,6 @@ export interface PortalArticle {
   _updatedAt: string;
   title: string;
   slug: { current: string };
-  status: 'draft' | 'published';
   featured: boolean;
   breakingNews: boolean;
   needsReview: boolean;
@@ -63,7 +62,7 @@ export interface PortalArticle {
   tags?: string[];
 }
 
-type SortKey = 'updatedAt' | 'createdAt' | 'title' | 'status';
+type SortKey = 'updatedAt' | 'createdAt' | 'title';
 type ViewMode = 'table' | 'card';
 
 interface Props {
@@ -77,7 +76,7 @@ interface Props {
 // ---------------------------------------------------------------------------
 
 function StatusBadge({ article }: { article: PortalArticle }) {
-  if (article.status === 'published') {
+  if (article.publishedAt) {
     return (
       <Badge className='bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'>
         Published
@@ -132,14 +131,15 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
     if (filterStatus !== 'all') {
       if (filterStatus === 'needsReview') {
         list = list.filter((a) => a.needsReview);
-      } else {
-        list = list.filter((a) => a.status === filterStatus);
+      } else if (filterStatus === 'published') {
+        list = list.filter((a) => !!a.publishedAt);
+      } else if (filterStatus === 'draft') {
+        list = list.filter((a) => !a.publishedAt);
       }
     }
 
     list.sort((a, b) => {
       if (sortBy === 'title') return (a.title ?? '').localeCompare(b.title ?? '');
-      if (sortBy === 'status') return (a.status ?? '').localeCompare(b.status ?? '');
       if (sortBy === 'createdAt') return b._createdAt.localeCompare(a._createdAt);
       // default: updatedAt
       return b._updatedAt.localeCompare(a._updatedAt);
@@ -227,7 +227,6 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
             <SelectItem value='updatedAt'>Last modified</SelectItem>
             <SelectItem value='createdAt'>Date created</SelectItem>
             <SelectItem value='title'>Title A–Z</SelectItem>
-            <SelectItem value='status'>Status</SelectItem>
           </SelectContent>
         </Select>
 
@@ -351,7 +350,7 @@ function ArticleTableRow({
 }) {
   const canDelete =
     isEditorPlus ||
-    (article.authorId === currentSanityAuthorId && article.status === 'draft');
+    (article.authorId === currentSanityAuthorId && !article.publishedAt);
 
   return (
     <TableRow>
@@ -409,7 +408,7 @@ function ArticleCard({
 }) {
   const canDelete =
     isEditorPlus ||
-    (article.authorId === currentSanityAuthorId && article.status === 'draft');
+    (article.authorId === currentSanityAuthorId && !article.publishedAt);
 
   return (
     <div className='border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900'>

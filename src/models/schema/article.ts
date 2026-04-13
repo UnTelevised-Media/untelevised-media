@@ -181,21 +181,7 @@ export default defineType({
       validation: (Rule) => Rule.max(6),
       description: 'Up to 6 related articles displayed at end of article',
     }),
-    // Portal fields — status, featured, breaking news, editorial review
-    defineField({
-      name: 'status',
-      title: 'Status',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Draft', value: 'draft' },
-          { title: 'Published', value: 'published' },
-        ],
-        layout: 'radio',
-      },
-      initialValue: 'draft',
-      description: 'Draft = not publicly visible. Published = live on site.',
-    }),
+    // Portal fields — featured, breaking news, editorial review
     defineField({
       name: 'featured',
       title: 'Featured Article',

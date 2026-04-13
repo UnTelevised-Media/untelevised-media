@@ -31,7 +31,6 @@ const articleWriteSchema = z.object({
   description: z.string().max(500).optional(),
   leadParagraph: z.string().max(1000).optional(),
   body: z.array(z.record(z.string(), z.unknown())).optional(), // Portable Text blocks
-  status: z.enum(['draft', 'published']).default('draft'),
   featured: z.boolean().optional(),
   breakingNews: z.boolean().optional(),
   needsReview: z.boolean().optional(),
@@ -172,8 +171,6 @@ export async function createArticle(
   // Authors are always assigned to themselves; editors can set any author
   const authorRef = isEditorPlus && sanitized.authorRef ? sanitized.authorRef : sanityAuthorId;
 
-  // Authors cannot publish directly
-  const status = isEditorPlus ? sanitized.status : 'draft';
   // Authors cannot set featured/breakingNews
   const featured = isEditorPlus ? (sanitized.featured ?? false) : false;
   const breakingNews = isEditorPlus ? (sanitized.breakingNews ?? false) : false;
@@ -185,12 +182,9 @@ export async function createArticle(
     description: sanitized.description ?? '',
     leadParagraph: sanitized.leadParagraph ?? '',
     body: (sanitized.body ?? []) as PortableTextBlock[],
-    status,
     featured,
     breakingNews,
     needsReview: sanitized.needsReview ?? false,
-    publishedAt:
-      status === 'published' ? (sanitized.publishedAt ?? new Date().toISOString()) : undefined,
     author: { _type: 'reference', _ref: authorRef },
     categories: sanitized.categories ?? [],
     tags: sanitized.tags ?? [],
@@ -270,12 +264,8 @@ export async function updateArticle(
   };
 
   if (isEditorPlus) {
-    patch.status = sanitized.status;
     patch.featured = sanitized.featured ?? false;
     patch.breakingNews = sanitized.breakingNews ?? false;
-    if (sanitized.status === 'published') {
-      patch.publishedAt = sanitized.publishedAt ?? new Date().toISOString();
-    }
     if (sanitized.authorRef) {
       patch.author = { _type: 'reference', _ref: sanitized.authorRef };
     }
@@ -305,14 +295,14 @@ export async function deleteArticle(articleId: string): Promise<ActionResult> {
 
   const { canEdit, isEditorPlus } = await verifyArticleAccess(clerkUserId, articleId);
 
-  // Authors can only delete their own drafts
+  // Authors can only delete their own unpublished articles (no publishedAt set)
   if (!isEditorPlus) {
-    const article = await writeClient.fetch<{ status: string } | null>(
-      `*[_type == "article" && _id == $id][0]{ status }`,
+    const article = await writeClient.fetch<{ publishedAt?: string } | null>(
+      `*[_type == "article" && _id == $id][0]{ publishedAt }`,
       { id: articleId }
     );
-    if (!article || article.status !== 'draft') {
-      return { success: false, error: 'Authors can only delete their own draft articles.' };
+    if (!article || article.publishedAt) {
+      return { success: false, error: 'Authors can only delete their own unpublished articles.' };
     }
   }
 
@@ -338,7 +328,7 @@ export async function submitArticleForReview(articleId: string): Promise<ActionR
 
   await writeClient
     .patch(articleId)
-    .set({ needsReview: true, status: 'draft', updatedAt: new Date().toISOString() })
+    .set({ needsReview: true, updatedAt: new Date().toISOString() })
     .commit();
 
   return { success: true, data: undefined };
@@ -381,7 +371,6 @@ export async function publishArticle(
   await writeClient
     .patch(articleId)
     .set({
-      status: 'published',
       publishedAt: scheduledAt ?? new Date().toISOString(),
       needsReview: false,
       updatedAt: new Date().toISOString(),

@@ -117,7 +117,7 @@ export const queryEventBySlug = groq`
     }`;
 
 export const queryAllArticles = groq`
-  *[_type=='article' && status == 'published'] {
+  *[_type=='article'] {
     ...,
     author->,
     categories[]->,
@@ -283,7 +283,7 @@ export const queryRecentSongs = groq`
 `;
 
 export const queryArticleBySlug = groq`
-    *[_type == 'article' && slug.current == $slug && status == 'published'][0] {
+    *[_type == 'article' && slug.current == $slug][0] {
       ...,
       author->,
       categories[]->,
@@ -338,7 +338,7 @@ export const queryCategoryBySlug = groq`
 `;
 
 export const queryArticleByCategory = groq`
-  *[_type == 'article' && status == 'published' && references(categories, *[_type == 'category' && slug.current == $slug]._id)] {
+  *[_type == 'article' && references(categories, *[_type == 'category' && slug.current == $slug]._id)] {
     ...,
     author->,
     categories[]->,
@@ -364,7 +364,7 @@ export const queryAllAuthors = groq`
 export const queryAuthorBySlug = groq`
   *[_type == 'author' && slug.current == $slug][0] {
     ...,
-    'relatedArticles': *[_type == 'article' && status == 'published' && references(^._id)]| order(_createdAt desc) {
+    'relatedArticles': *[_type == 'article' && references(^._id)]| order(_createdAt desc) {
       ...,
       author->,
       categories[]->,
@@ -548,7 +548,7 @@ export const queryTimelineSearch = groq`
 `;
 
 export const queryRSSFeed = groq`
-  *[_type == "article" && status == 'published'] | order(publishedAt desc) [0...50] {
+  *[_type == "article"] | order(publishedAt desc) [0...50] {
     _id,
     title,
     "slug": slug.current,
@@ -728,11 +728,11 @@ export const queryFactCheckBySlug = groq`
 // ── Tag Queries ──────────────────────────────────────────────────────────────
 
 export const queryAllTags = groq`
-  array::unique(*[_type == "article" && status == 'published' && defined(tags) && count(tags) > 0].tags[])
+  array::unique(*[_type == "article" && defined(tags) && count(tags) > 0].tags[])
 `;
 
 export const queryArticlesByTag = groq`
-  *[_type == "article" && status == 'published' && defined(tags) && $tag in tags[]] | order(publishedAt desc) {
+  *[_type == "article" && defined(tags) && $tag in tags[]] | order(publishedAt desc) {
     _id,
     title,
     slug,

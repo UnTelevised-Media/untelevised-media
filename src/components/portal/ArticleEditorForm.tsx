@@ -257,7 +257,7 @@ export default function ArticleEditorForm({
   // ---------------------------------------------------------------------------
 
   const buildInput = useCallback(
-    (values: FormValues, overrideStatus: 'draft' | 'published'): ArticleWriteInput => {
+    (values: FormValues): ArticleWriteInput => {
       const portableBody = blockNoteToPortableText(editorContentRef.current as Parameters<typeof blockNoteToPortableText>[0]);
       return {
         title: values.title,
@@ -265,7 +265,6 @@ export default function ArticleEditorForm({
         description: values.description,
         leadParagraph: values.leadParagraph,
         body: portableBody as Record<string, unknown>[],
-        status: overrideStatus,
         featured: values.featured,
         breakingNews: values.breakingNews,
         needsReview: false,
@@ -302,7 +301,7 @@ export default function ArticleEditorForm({
 
   function handleSaveDraft(values: FormValues) {
     setSaveStatus('saving');
-    const input = buildInput(values, 'draft');
+    const input = buildInput(values);
     startTransition(async () => {
       try {
         const result = articleId
@@ -330,11 +329,11 @@ export default function ArticleEditorForm({
       try {
         let id = articleId;
         if (!id) {
-          const result = await createArticle(buildInput(values, 'draft'));
+          const result = await createArticle(buildInput(values));
           if (!result.success) { toast.error(result.error); return; }
           id = result.data._id;
         } else {
-          const result = await updateArticle(id, buildInput(values, 'draft'));
+          const result = await updateArticle(id, buildInput(values));
           if (!result.success) { toast.error(result.error); return; }
         }
         const reviewResult = await submitArticleForReview(id);
@@ -355,11 +354,11 @@ export default function ArticleEditorForm({
       try {
         let id = articleId;
         if (!id) {
-          const result = await createArticle(buildInput(values, 'published'));
+          const result = await createArticle(buildInput(values));
           if (!result.success) { toast.error(result.error); return; }
           id = result.data._id;
         } else {
-          const result = await updateArticle(id, buildInput(values, 'published'));
+          const result = await updateArticle(id, buildInput(values));
           if (!result.success) { toast.error(result.error); return; }
         }
         const pubResult = await publishArticle(id, values.publishedAt || undefined);
