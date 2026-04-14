@@ -287,30 +287,151 @@ export async function updateArticle(
 // ---------------------------------------------------------------------------
 
 export async function deleteArticle(articleId: string): Promise<ActionResult> {
-  const { id: clerkUserId } = await requireAuthor();
+  const { id: clerkUserId, role } = await requireAuthor();
+
+  if (!hasRole(role, 'editor')) {
+    return {
+      success: false,
+      error: 'Only editors can delete articles. Authors may submit a removal request.',
+    };
+  }
 
   const rl = await checkRateLimit(clerkUserId);
   if (!rl.allowed)
     return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
 
-  const { canEdit, isEditorPlus } = await verifyArticleAccess(clerkUserId, articleId);
-
-  // Authors can only delete their own unpublished articles (no publishedAt set)
-  if (!isEditorPlus) {
-    const article = await writeClient.fetch<{ publishedAt?: string } | null>(
-      `*[_type == "article" && _id == $id][0]{ publishedAt }`,
-      { id: articleId }
-    );
-    if (!article || article.publishedAt) {
-      return { success: false, error: 'Authors can only delete their own unpublished articles.' };
-    }
-  }
-
+  const { canEdit } = await verifyArticleAccess(clerkUserId, articleId);
   if (!canEdit) {
     return { success: false, error: 'You do not have permission to delete this article.' };
   }
 
   await writeClient.delete(articleId);
+  return { success: true, data: undefined };
+}
+
+// ---------------------------------------------------------------------------
+// Request article removal (author action)
+// ---------------------------------------------------------------------------
+
+export async function requestArticleDeletion(
+  articleId: string,
+  reason: string
+): Promise<ActionResult> {
+  const { id: clerkUserId } = await requireAuthor();
+
+  const trimmedReason = reason.trim();
+  if (trimmedReason.length < 10) {
+    return { success: false, error: 'Please provide a reason (at least 10 characters).' };
+  }
+  if (trimmedReason.length > 1000) {
+    return { success: false, error: 'Reason must be 1000 characters or fewer.' };
+  }
+
+  const { canEdit, isEditorPlus } = await verifyArticleAccess(clerkUserId, articleId);
+  if (!canEdit) {
+    return {
+      success: false,
+      error: 'You do not have permission to request removal of this article.',
+    };
+  }
+  if (isEditorPlus) {
+    return { success: false, error: 'Editors can delete articles directly.' };
+  }
+
+  const article = await writeClient.fetch<{ publishedAt?: string; authorName?: string } | null>(
+    `*[_type == "article" && _id == $id][0]{ publishedAt, "authorName": author->name }`,
+    { id: articleId }
+  );
+
+  let patch = writeClient.patch(articleId).set({
+    deletionRequest: {
+      reason: sanitizeText(trimmedReason),
+      requestedAt: new Date().toISOString(),
+      requestedByName: article?.authorName ?? 'Unknown',
+      originalPublishedAt: article?.publishedAt ?? null,
+    },
+    needsReview: true,
+    updatedAt: new Date().toISOString(),
+  });
+
+  if (article?.publishedAt) {
+    patch = patch.unset(['publishedAt']);
+  }
+
+  await patch.commit();
+  return { success: true, data: undefined };
+}
+
+// ---------------------------------------------------------------------------
+// Approve deletion request (editor only) — hard deletes the article
+// ---------------------------------------------------------------------------
+
+export async function approveArticleDeletion(articleId: string): Promise<ActionResult> {
+  const { role } = await requireAuthor();
+  if (!hasRole(role, 'editor')) {
+    return { success: false, error: 'Only editors can approve deletion requests.' };
+  }
+  await writeClient.delete(articleId);
+  return { success: true, data: undefined };
+}
+
+// ---------------------------------------------------------------------------
+// Deny deletion request (editor only) — restores article to prior state
+// ---------------------------------------------------------------------------
+
+export async function denyArticleDeletion(articleId: string): Promise<ActionResult> {
+  const { role } = await requireAuthor();
+  if (!hasRole(role, 'editor')) {
+    return { success: false, error: 'Only editors can deny deletion requests.' };
+  }
+
+  const article = await writeClient.fetch<{
+    deletionRequest?: { originalPublishedAt?: string };
+  } | null>(`*[_type == "article" && _id == $id][0]{ deletionRequest }`, { id: articleId });
+
+  let patch = writeClient
+    .patch(articleId)
+    .unset(['deletionRequest'])
+    .set({ needsReview: false, updatedAt: new Date().toISOString() });
+
+  if (article?.deletionRequest?.originalPublishedAt) {
+    patch = patch.set({ publishedAt: article.deletionRequest.originalPublishedAt });
+  }
+
+  await patch.commit();
+  return { success: true, data: undefined };
+}
+
+// ---------------------------------------------------------------------------
+// Retract article (editor only) — stays published, marked as retracted
+// ---------------------------------------------------------------------------
+
+export async function retractArticle(
+  articleId: string,
+  data: { issuedAt: string; summary?: string; detail: string }
+): Promise<ActionResult> {
+  const { role } = await requireAuthor();
+  if (!hasRole(role, 'editor')) {
+    return { success: false, error: 'Only editors can retract articles.' };
+  }
+
+  if (!data.issuedAt || !data.detail.trim()) {
+    return { success: false, error: 'Issued date and retraction statement are required.' };
+  }
+
+  await writeClient
+    .patch(articleId)
+    .set({
+      correction: {
+        type: 'retraction',
+        issuedAt: data.issuedAt,
+        summary: data.summary?.trim() ?? '',
+        detail: data.detail.trim(),
+      },
+      updatedAt: new Date().toISOString(),
+    })
+    .commit();
+
   return { success: true, data: undefined };
 }
 

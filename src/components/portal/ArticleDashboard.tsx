@@ -1,5 +1,5 @@
 // src/components/portal/ArticleDashboard.tsx
-// Client component — handles article list UI: search, filter, sort, view toggle, actions.
+// Client component — article list with tabs, search, sort, view toggle, and editorial actions.
 'use client';
 
 import { useState, useMemo, useTransition } from 'react';
@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -38,7 +40,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { deleteArticle } from '@/lib/portal/article-actions';
+import {
+  deleteArticle,
+  requestArticleDeletion,
+  approveArticleDeletion,
+  denyArticleDeletion,
+  retractArticle,
+} from '@/lib/portal/article-actions';
 import { toast } from 'sonner';
 
 // ---------------------------------------------------------------------------
@@ -61,10 +69,19 @@ export interface PortalArticle {
   author?: { _id: string; name: string; slug?: { current: string } };
   categories?: Array<{ _id: string; title: string }>;
   tags?: string[];
+  mainImage?: { asset?: { url?: string }; alt?: string };
+  deletionRequest?: {
+    reason: string;
+    requestedAt: string;
+    requestedByName: string;
+    originalPublishedAt?: string;
+  };
+  correctionType?: string;
 }
 
 type SortKey = 'updatedAt' | 'createdAt' | 'title';
 type ViewMode = 'table' | 'card';
+type TabKey = 'drafts' | 'review' | 'published';
 
 interface Props {
   articles: PortalArticle[];
@@ -73,12 +90,41 @@ interface Props {
 }
 
 // ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+function isPublished(a: PortalArticle) {
+  return !!a.publishedAt || a.status === 'published';
+}
+
+function isInReview(a: PortalArticle) {
+  return (a.needsReview || !!a.deletionRequest) && !isPublished(a);
+}
+
+function isDraft(a: PortalArticle) {
+  return !isPublished(a) && !isInReview(a);
+}
+
+// ---------------------------------------------------------------------------
 // Status badge
 // ---------------------------------------------------------------------------
 
 function StatusBadge({ article }: { article: PortalArticle }) {
-  const isPublished = !!article.publishedAt || article.status === 'published';
-  if (isPublished) {
+  if (article.deletionRequest) {
+    return (
+      <Badge className='bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300'>
+        Removal Requested
+      </Badge>
+    );
+  }
+  if (article.correctionType === 'retraction') {
+    return (
+      <Badge className='bg-red-900/20 text-red-700 dark:bg-red-900/40 dark:text-red-300'>
+        Retracted
+      </Badge>
+    );
+  }
+  if (isPublished(article)) {
     return (
       <Badge className='bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'>
         Published
@@ -110,15 +156,43 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
   // UI state
   const [view, setView] = useState<ViewMode>('table');
   const [search, setSearch] = useState('');
-  const [filterStatus, setFilterStatus] = useState<string>('all');
+  const [activeTab, setActiveTab] = useState<TabKey>('drafts');
   const [sortBy, setSortBy] = useState<SortKey>('updatedAt');
+
+  // Editor hard-delete / approve deletion
   const [deleteTarget, setDeleteTarget] = useState<PortalArticle | null>(null);
 
+  // Author removal request
+  const [removalTarget, setRemovalTarget] = useState<PortalArticle | null>(null);
+  const [removalReason, setRemovalReason] = useState('');
+
+  // Editor retraction
+  const [retractionTarget, setRetractionTarget] = useState<PortalArticle | null>(null);
+  const [retractionData, setRetractionData] = useState({
+    issuedAt: new Date().toISOString().slice(0, 16),
+    summary: '',
+    detail: '',
+  });
+
   // ---------------------------------------------------------------------------
-  // Filtered + sorted articles
+  // Tab counts
+  // ---------------------------------------------------------------------------
+  const tabCounts = useMemo(
+    () => ({
+      drafts: articles.filter(isDraft).length,
+      review: articles.filter(isInReview).length,
+      published: articles.filter(isPublished).length,
+    }),
+    [articles],
+  );
+
+  // ---------------------------------------------------------------------------
+  // Filtered + sorted list
   // ---------------------------------------------------------------------------
   const filtered = useMemo(() => {
-    let list = [...articles];
+    let list = articles.filter(
+      activeTab === 'drafts' ? isDraft : activeTab === 'review' ? isInReview : isPublished,
+    );
 
     if (search.trim()) {
       const q = search.toLowerCase();
@@ -130,41 +204,74 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
       );
     }
 
-    if (filterStatus !== 'all') {
-      if (filterStatus === 'needsReview') {
-        list = list.filter((a) => a.needsReview);
-      } else if (filterStatus === 'published') {
-        list = list.filter((a) => !!a.publishedAt || a.status === 'published');
-      } else if (filterStatus === 'draft') {
-        list = list.filter((a) => !a.publishedAt && a.status !== 'published');
-      }
-    }
-
-    list.sort((a, b) => {
+    return [...list].sort((a, b) => {
       if (sortBy === 'title') return (a.title ?? '').localeCompare(b.title ?? '');
       if (sortBy === 'createdAt') return b._createdAt.localeCompare(a._createdAt);
-      // default: updatedAt
       return b._updatedAt.localeCompare(a._updatedAt);
     });
-
-    return list;
-  }, [articles, search, filterStatus, sortBy]);
+  }, [articles, activeTab, search, sortBy]);
 
   // ---------------------------------------------------------------------------
-  // Actions
+  // Action handlers
   // ---------------------------------------------------------------------------
-  function handleDelete(article: PortalArticle) {
-    setDeleteTarget(article);
-  }
 
   function confirmDelete() {
     if (!deleteTarget) return;
     const id = deleteTarget._id;
+    const approvingRequest = !!deleteTarget.deletionRequest;
     setDeleteTarget(null);
     startTransition(async () => {
-      const result = await deleteArticle(id);
+      const result = approvingRequest
+        ? await approveArticleDeletion(id)
+        : await deleteArticle(id);
       if (result.success) {
-        toast.success('Article deleted.');
+        toast.success(approvingRequest ? 'Removal approved — article deleted.' : 'Article deleted.');
+        router.refresh();
+      } else {
+        toast.error(result.error);
+      }
+    });
+  }
+
+  function confirmRemovalRequest() {
+    if (!removalTarget || removalReason.trim().length < 10) return;
+    const id = removalTarget._id;
+    const reason = removalReason.trim();
+    setRemovalTarget(null);
+    setRemovalReason('');
+    startTransition(async () => {
+      const result = await requestArticleDeletion(id, reason);
+      if (result.success) {
+        toast.success('Removal request submitted. An editor will review it.');
+        router.refresh();
+      } else {
+        toast.error(result.error);
+      }
+    });
+  }
+
+  function handleDenyDeletion(article: PortalArticle) {
+    startTransition(async () => {
+      const result = await denyArticleDeletion(article._id);
+      if (result.success) {
+        toast.success('Removal request denied — article restored.');
+        router.refresh();
+      } else {
+        toast.error(result.error);
+      }
+    });
+  }
+
+  function confirmRetraction() {
+    if (!retractionTarget || !retractionData.issuedAt || !retractionData.detail.trim()) return;
+    const id = retractionTarget._id;
+    const data = { ...retractionData };
+    setRetractionTarget(null);
+    setRetractionData({ issuedAt: new Date().toISOString().slice(0, 16), summary: '', detail: '' });
+    startTransition(async () => {
+      const result = await retractArticle(id, data);
+      if (result.success) {
+        toast.success('Retraction notice issued.');
         router.refresh();
       } else {
         toast.error(result.error);
@@ -178,12 +285,8 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
   if (articles.length === 0) {
     return (
       <div className='flex flex-col items-center justify-center py-24 text-center'>
-        <p className='mb-2 text-lg font-bold text-slate-700 dark:text-slate-300'>
-          No articles yet
-        </p>
-        <p className='mb-6 text-sm text-slate-500'>
-          Ready to write your first story?
-        </p>
+        <p className='mb-2 text-lg font-bold text-slate-700 dark:text-slate-300'>No articles yet</p>
+        <p className='mb-6 text-sm text-slate-500'>Ready to write your first story?</p>
         <Link
           href='/portal/articles/new'
           className='bg-untele px-6 py-3 text-xs font-black uppercase tracking-widest text-white hover:opacity-90'
@@ -194,12 +297,44 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
     );
   }
 
-  // ---------------------------------------------------------------------------
-  // Toolbar
-  // ---------------------------------------------------------------------------
+  const TABS: { key: TabKey; label: string }[] = [
+    { key: 'drafts', label: 'Drafts' },
+    { key: 'review', label: 'In Review' },
+    { key: 'published', label: 'Published' },
+  ];
+
   return (
     <div>
-      {/* Toolbar */}
+      {/* ── Tabs ─────────────────────────────────────────────────────────── */}
+      <div className='mb-6 flex border-b border-slate-200 dark:border-slate-800'>
+        {TABS.map((tab) => (
+          <button
+            key={tab.key}
+            type='button'
+            onClick={() => setActiveTab(tab.key)}
+            className={[
+              'flex items-center gap-1.5 border-b-2 px-5 py-2.5 text-sm font-semibold -mb-px transition-colors',
+              activeTab === tab.key
+                ? 'border-untele text-untele'
+                : 'border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300',
+            ].join(' ')}
+          >
+            {tab.label}
+            <span
+              className={[
+                'rounded-full px-1.5 py-0.5 text-xs font-bold',
+                activeTab === tab.key
+                  ? 'bg-untele/10 text-untele'
+                  : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
+              ].join(' ')}
+            >
+              {tabCounts[tab.key]}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* ── Toolbar ──────────────────────────────────────────────────────── */}
       <div className='mb-4 flex flex-col gap-3 sm:flex-row sm:items-center'>
         <Input
           placeholder='Search by title, tag, or category…'
@@ -208,18 +343,6 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
           className='sm:max-w-xs'
           aria-label='Search articles'
         />
-
-        <Select value={filterStatus} onValueChange={setFilterStatus}>
-          <SelectTrigger className='sm:w-40' aria-label='Filter by status'>
-            <SelectValue placeholder='Status' />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value='all'>All statuses</SelectItem>
-            <SelectItem value='published'>Published</SelectItem>
-            <SelectItem value='draft'>Draft</SelectItem>
-            <SelectItem value='needsReview'>In Review</SelectItem>
-          </SelectContent>
-        </Select>
 
         <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortKey)}>
           <SelectTrigger className='sm:w-44' aria-label='Sort articles'>
@@ -256,11 +379,11 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
 
       {filtered.length === 0 && (
         <p className='py-10 text-center text-sm text-slate-500'>
-          No articles match your filters.
+          No articles{search ? ' matching your search' : ''} in this tab.
         </p>
       )}
 
-      {/* TABLE VIEW */}
+      {/* ── Table view ───────────────────────────────────────────────────── */}
       {view === 'table' && filtered.length > 0 && (
         <div className='overflow-auto rounded border border-slate-200 dark:border-slate-800'>
           <Table>
@@ -281,7 +404,11 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
                   article={article}
                   isEditorPlus={isEditorPlus}
                   currentSanityAuthorId={currentSanityAuthorId}
-                  onDelete={() => handleDelete(article)}
+                  onDelete={() => setDeleteTarget(article)}
+                  onRequestRemoval={() => setRemovalTarget(article)}
+                  onApproveRemoval={() => setDeleteTarget(article)}
+                  onDenyRemoval={() => handleDenyDeletion(article)}
+                  onRetract={() => setRetractionTarget(article)}
                   isPending={isPending}
                 />
               ))}
@@ -290,7 +417,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
         </div>
       )}
 
-      {/* CARD VIEW */}
+      {/* ── Card view ────────────────────────────────────────────────────── */}
       {view === 'card' && filtered.length > 0 && (
         <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
           {filtered.map((article) => (
@@ -299,20 +426,50 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
               article={article}
               isEditorPlus={isEditorPlus}
               currentSanityAuthorId={currentSanityAuthorId}
-              onDelete={() => handleDelete(article)}
+              onDelete={() => setDeleteTarget(article)}
+              onRequestRemoval={() => setRemovalTarget(article)}
+              onApproveRemoval={() => setDeleteTarget(article)}
+              onDenyRemoval={() => handleDenyDeletion(article)}
+              onRetract={() => setRetractionTarget(article)}
               isPending={isPending}
             />
           ))}
         </div>
       )}
 
-      {/* Delete confirmation dialog */}
+      {/* ── Delete / approve-removal confirmation ────────────────────────── */}
       <Dialog open={!!deleteTarget} onOpenChange={(o) => !o && setDeleteTarget(null)}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete article?</DialogTitle>
-            <DialogDescription>
-              &ldquo;{deleteTarget?.title}&rdquo; will be permanently deleted. This cannot be undone.
+            <DialogTitle>
+              {deleteTarget?.deletionRequest ? 'Approve removal request?' : 'Delete article?'}
+            </DialogTitle>
+            <DialogDescription asChild>
+              <div>
+                {deleteTarget?.deletionRequest ? (
+                  <>
+                    <p>
+                      <strong>{deleteTarget.deletionRequest.requestedByName}</strong> requested
+                      removal of this article.
+                    </p>
+                    <blockquote className='mt-2 border-l-2 border-orange-400 pl-3 text-sm italic text-slate-600 dark:text-slate-400'>
+                      &ldquo;{deleteTarget.deletionRequest.reason}&rdquo;
+                    </blockquote>
+                    <p className='mt-3 text-sm font-semibold text-red-600'>
+                      This will permanently delete the article and cannot be undone.
+                    </p>
+                    <p className='mt-1 text-sm text-slate-500'>
+                      Consider using <strong>Retract</strong> instead if the article should remain
+                      visible with a notice.
+                    </p>
+                  </>
+                ) : (
+                  <p>
+                    &ldquo;{deleteTarget?.title}&rdquo; will be permanently deleted. This cannot be
+                    undone.
+                  </p>
+                )}
+              </div>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -324,13 +481,170 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
               onClick={confirmDelete}
               disabled={isPending}
             >
-              {isPending ? 'Deleting…' : 'Delete'}
+              {isPending ? 'Deleting…' : 'Delete permanently'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* ── Author removal request modal ─────────────────────────────────── */}
+      <Dialog
+        open={!!removalTarget}
+        onOpenChange={(o) => {
+          if (!o) {
+            setRemovalTarget(null);
+            setRemovalReason('');
+          }
+        }}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Request article removal</DialogTitle>
+            <DialogDescription>
+              This article will be unpublished and an editor will review your request. You must
+              provide a reason. If retraction is appropriate, your editor will handle that process.
+            </DialogDescription>
+          </DialogHeader>
+          <div className='py-2'>
+            <Label className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+              Reason <span className='text-untele'>*</span>
+            </Label>
+            <Textarea
+              placeholder='Explain why this article should be removed…'
+              value={removalReason}
+              onChange={(e) => setRemovalReason(e.target.value)}
+              rows={4}
+              maxLength={1000}
+            />
+            <p className='mt-1 text-xs text-slate-400'>
+              Minimum 10 characters ({removalReason.length}/1000)
+            </p>
+          </div>
+          <DialogFooter>
+            <Button
+              variant='outline'
+              onClick={() => {
+                setRemovalTarget(null);
+                setRemovalReason('');
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              className='bg-untele text-white hover:opacity-90'
+              onClick={confirmRemovalRequest}
+              disabled={isPending || removalReason.trim().length < 10}
+            >
+              {isPending ? 'Submitting…' : 'Submit removal request'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* ── Retraction modal (editor only) ───────────────────────────────── */}
+      <Dialog
+        open={!!retractionTarget}
+        onOpenChange={(o) => {
+          if (!o) {
+            setRetractionTarget(null);
+            setRetractionData({
+              issuedAt: new Date().toISOString().slice(0, 16),
+              summary: '',
+              detail: '',
+            });
+          }
+        }}
+      >
+        <DialogContent className='max-w-lg'>
+          <DialogHeader>
+            <DialogTitle>Issue retraction notice</DialogTitle>
+            <DialogDescription>
+              The article stays published but is prominently marked as retracted. This follows
+              standard journalistic retraction practice.
+            </DialogDescription>
+          </DialogHeader>
+          <div className='space-y-4 py-2'>
+            <div>
+              <Label className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+                Date issued <span className='text-untele'>*</span>
+              </Label>
+              <Input
+                type='datetime-local'
+                value={retractionData.issuedAt}
+                onChange={(e) =>
+                  setRetractionData((d) => ({ ...d, issuedAt: e.target.value }))
+                }
+              />
+            </div>
+            <div>
+              <Label className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+                One-line summary
+                <span className='ml-1 font-normal normal-case text-slate-400'>
+                  optional · max 120 chars
+                </span>
+              </Label>
+              <Input
+                value={retractionData.summary}
+                onChange={(e) =>
+                  setRetractionData((d) => ({ ...d, summary: e.target.value }))
+                }
+                maxLength={120}
+                placeholder='e.g. "Retracted due to inaccurate sourcing"'
+              />
+            </div>
+            <div>
+              <Label className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+                Full retraction statement <span className='text-untele'>*</span>
+              </Label>
+              <Textarea
+                rows={4}
+                value={retractionData.detail}
+                onChange={(e) =>
+                  setRetractionData((d) => ({ ...d, detail: e.target.value }))
+                }
+                placeholder='Explain what was inaccurate or misleading and why the article is being retracted…'
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant='outline'
+              onClick={() => {
+                setRetractionTarget(null);
+                setRetractionData({
+                  issuedAt: new Date().toISOString().slice(0, 16),
+                  summary: '',
+                  detail: '',
+                });
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              className='bg-untele text-white hover:opacity-90'
+              onClick={confirmRetraction}
+              disabled={isPending || !retractionData.issuedAt || !retractionData.detail.trim()}
+            >
+              {isPending ? 'Issuing…' : 'Issue retraction'}
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
   );
+}
+
+// ---------------------------------------------------------------------------
+// Shared action handler props
+// ---------------------------------------------------------------------------
+
+interface ActionHandlers {
+  onDelete: () => void;
+  onRequestRemoval: () => void;
+  onApproveRemoval: () => void;
+  onDenyRemoval: () => void;
+  onRetract: () => void;
+  isPending: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -341,19 +655,8 @@ function ArticleTableRow({
   article,
   isEditorPlus,
   currentSanityAuthorId,
-  onDelete,
-  isPending,
-}: {
-  article: PortalArticle;
-  isEditorPlus: boolean;
-  currentSanityAuthorId?: string;
-  onDelete: () => void;
-  isPending: boolean;
-}) {
-  const canDelete =
-    isEditorPlus ||
-    (article.authorId === currentSanityAuthorId && !article.publishedAt);
-
+  ...handlers
+}: { article: PortalArticle; isEditorPlus: boolean; currentSanityAuthorId?: string } & ActionHandlers) {
   return (
     <TableRow>
       <TableCell className='max-w-xs'>
@@ -365,6 +668,9 @@ function ArticleTableRow({
         </Link>
         {article.breakingNews && (
           <span className='ml-2 text-xs font-bold uppercase text-untele'>Breaking</span>
+        )}
+        {article.deletionRequest && (
+          <span className='ml-2 text-xs text-orange-500'>removal requested</span>
         )}
       </TableCell>
       {isEditorPlus && (
@@ -382,9 +688,9 @@ function ArticleTableRow({
       <TableCell className='text-right'>
         <ArticleActions
           article={article}
-          canDelete={canDelete}
-          onDelete={onDelete}
-          isPending={isPending}
+          isEditorPlus={isEditorPlus}
+          currentSanityAuthorId={currentSanityAuthorId}
+          {...handlers}
         />
       </TableCell>
     </TableRow>
@@ -399,54 +705,74 @@ function ArticleCard({
   article,
   isEditorPlus,
   currentSanityAuthorId,
-  onDelete,
-  isPending,
-}: {
-  article: PortalArticle;
-  isEditorPlus: boolean;
-  currentSanityAuthorId?: string;
-  onDelete: () => void;
-  isPending: boolean;
-}) {
-  const canDelete =
-    isEditorPlus ||
-    (article.authorId === currentSanityAuthorId && !article.publishedAt);
+  ...handlers
+}: { article: PortalArticle; isEditorPlus: boolean; currentSanityAuthorId?: string } & ActionHandlers) {
+  const imageUrl = article.mainImage?.asset?.url;
 
   return (
-    <div className='border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900'>
-      <div className='mb-2 flex items-start justify-between gap-2'>
-        <StatusBadge article={article} />
-        <ArticleActions
-          article={article}
-          canDelete={canDelete}
-          onDelete={onDelete}
-          isPending={isPending}
-        />
-      </div>
-      <Link
-        href={`/portal/articles/${article._id}/edit`}
-        className='mb-1 block text-sm font-bold leading-snug hover:text-untele hover:underline'
-      >
-        {article.title || 'Untitled'}
-      </Link>
-      {isEditorPlus && article.author?.name && (
-        <p className='mb-1 text-xs text-slate-500'>by {article.author.name}</p>
-      )}
-      <p className='mb-3 text-xs text-slate-400'>
-        Updated {new Date(article._updatedAt).toLocaleDateString()}
-      </p>
-      {article.categories && article.categories.length > 0 && (
-        <div className='flex flex-wrap gap-1'>
-          {article.categories.map((c) => (
-            <span
-              key={c._id}
-              className='bg-slate-100 px-1.5 py-0.5 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-400'
-            >
-              {c.title}
-            </span>
-          ))}
+    <div className='flex flex-col border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900'>
+      {/* Thumbnail */}
+      {imageUrl ? (
+        <div className='relative h-32 w-full overflow-hidden bg-slate-100 dark:bg-slate-800'>
+          <img
+            src={`${imageUrl}?w=480&h=128&fit=crop&auto=format`}
+            alt={article.mainImage?.alt ?? ''}
+            className='h-full w-full object-cover'
+          />
         </div>
+      ) : (
+        <div className='h-10 w-full bg-slate-100 dark:bg-slate-800' />
       )}
+
+      <div className='flex flex-1 flex-col p-4'>
+        <div className='mb-2 flex items-start justify-between gap-2'>
+          <StatusBadge article={article} />
+          <ArticleActions
+            article={article}
+            isEditorPlus={isEditorPlus}
+            currentSanityAuthorId={currentSanityAuthorId}
+            {...handlers}
+          />
+        </div>
+
+        <Link
+          href={`/portal/articles/${article._id}/edit`}
+          className='mb-1 block text-sm font-bold leading-snug hover:text-untele hover:underline'
+        >
+          {article.title || 'Untitled'}
+        </Link>
+
+        {isEditorPlus && article.author?.name && (
+          <p className='mb-1 text-xs text-slate-500'>by {article.author.name}</p>
+        )}
+
+        {article.deletionRequest && (
+          <p className='mb-2 text-xs italic text-orange-600 dark:text-orange-400'>
+            &ldquo;
+            {article.deletionRequest.reason.length > 90
+              ? article.deletionRequest.reason.slice(0, 90) + '…'
+              : article.deletionRequest.reason}
+            &rdquo;
+          </p>
+        )}
+
+        <p className='mt-auto pt-2 text-xs text-slate-400'>
+          Updated {new Date(article._updatedAt).toLocaleDateString()}
+        </p>
+
+        {article.categories && article.categories.length > 0 && (
+          <div className='mt-2 flex flex-wrap gap-1'>
+            {article.categories.map((c) => (
+              <span
+                key={c._id}
+                className='bg-slate-100 px-1.5 py-0.5 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-400'
+              >
+                {c.title}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -457,15 +783,18 @@ function ArticleCard({
 
 function ArticleActions({
   article,
-  canDelete,
+  isEditorPlus,
+  currentSanityAuthorId,
   onDelete,
+  onRequestRemoval,
+  onApproveRemoval,
+  onDenyRemoval,
+  onRetract,
   isPending,
-}: {
-  article: PortalArticle;
-  canDelete: boolean;
-  onDelete: () => void;
-  isPending: boolean;
-}) {
+}: { article: PortalArticle; isEditorPlus: boolean; currentSanityAuthorId?: string } & ActionHandlers) {
+  const isOwn = article.authorId === currentSanityAuthorId;
+  const canRequestRemoval = !isEditorPlus && isOwn && !article.deletionRequest;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -478,23 +807,51 @@ function ArticleActions({
           <Link href={`/portal/articles/${article._id}/edit`}>Edit</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <a
-            href={`/articles/${article.slug?.current}`}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <a href={`/articles/${article.slug?.current}`} target='_blank' rel='noopener noreferrer'>
             Preview ↗
           </a>
         </DropdownMenuItem>
-        {canDelete && (
+
+        {/* Author: request removal */}
+        {canRequestRemoval && (
           <>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              className='text-red-600 focus:text-red-600'
-              onClick={onDelete}
+              className='text-orange-600 focus:text-orange-600'
+              onClick={onRequestRemoval}
             >
-              Delete
+              Request removal
             </DropdownMenuItem>
+          </>
+        )}
+
+        {/* Editor actions */}
+        {isEditorPlus && (
+          <>
+            <DropdownMenuSeparator />
+            {article.deletionRequest ? (
+              <>
+                <DropdownMenuItem
+                  className='font-medium text-green-700 focus:text-green-700'
+                  onClick={onApproveRemoval}
+                >
+                  Approve removal
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={onDenyRemoval}>Deny removal</DropdownMenuItem>
+              </>
+            ) : (
+              <>
+                {isPublished(article) && article.correctionType !== 'retraction' && (
+                  <DropdownMenuItem onClick={onRetract}>Retract article</DropdownMenuItem>
+                )}
+                <DropdownMenuItem
+                  className='text-red-600 focus:text-red-600'
+                  onClick={onDelete}
+                >
+                  Delete
+                </DropdownMenuItem>
+              </>
+            )}
           </>
         )}
       </DropdownMenuContent>

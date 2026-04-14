@@ -38,7 +38,8 @@ export default async function PortalArticlesPage() {
   }
 
   const publishedCount = articles.filter((a) => !!a.publishedAt).length;
-  const draftCount = articles.filter((a) => !a.publishedAt).length;
+  const reviewCount = articles.filter((a) => (a.needsReview || !!a.deletionRequest) && !a.publishedAt).length;
+  const draftCount = articles.filter((a) => !a.publishedAt && !a.needsReview && !a.deletionRequest).length;
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
@@ -52,7 +53,7 @@ export default async function PortalArticlesPage() {
               {isEditorPlus ? 'All Articles' : 'My Articles'}
             </h1>
             <p className='mt-1 text-sm text-slate-500 dark:text-slate-400'>
-              {publishedCount} published &nbsp;·&nbsp; {draftCount} draft
+              {publishedCount} published &nbsp;·&nbsp; {reviewCount} in review &nbsp;·&nbsp; {draftCount} draft
             </p>
           </div>
           <Link

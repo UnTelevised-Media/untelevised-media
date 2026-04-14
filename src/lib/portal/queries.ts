@@ -26,7 +26,10 @@ const ARTICLE_LIST_PROJECTION = groq`{
   author->{ _id, name, slug },
   categories[]->{ _id, title, slug },
   tags,
-  keywords
+  keywords,
+  mainImage{ asset->{ url }, alt },
+  deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },
+  "correctionType": correction.type
 }`;
 
 /** Articles for an author — only their own documents. */
@@ -78,7 +81,8 @@ export const queryPortalArticleById = groq`
     eventDate,
     faqs[]{ _key, question, answer },
     correction{ type, issuedAt, summary, detail },
-    reviewedBy->{ _id, name }
+    reviewedBy->{ _id, name },
+    deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt }
   }
 `;
 

@@ -203,6 +203,23 @@ export default defineType({
       initialValue: false,
       description: 'Author has submitted this draft for editor review.',
     }),
+    defineField({
+      name: 'deletionRequest',
+      title: 'Deletion Request',
+      type: 'object',
+      readOnly: true,
+      description: 'Set when an author requests removal. Editors approve or deny via the portal.',
+      fields: [
+        defineField({ name: 'reason', type: 'text', title: 'Reason for removal' }),
+        defineField({ name: 'requestedAt', type: 'datetime', title: 'Requested at' }),
+        defineField({ name: 'requestedByName', type: 'string', title: 'Requested by' }),
+        defineField({
+          name: 'originalPublishedAt',
+          type: 'datetime',
+          title: 'Original published date',
+        }),
+      ],
+    }),
     // Comments
     defineField({
       name: 'allowComments',
