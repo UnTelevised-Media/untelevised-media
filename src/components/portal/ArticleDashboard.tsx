@@ -372,8 +372,8 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
             [
               { key: 'all', label: 'All' },
               { key: 'mine', label: 'Mine' },
-              { key: 'others', label: 'Others' },
               { key: 'reviewed', label: 'Reviewed' },
+              { key: 'others', label: 'Others' },
             ] as { key: AuthorFilter; label: string }[]
           ).map(({ key, label }) => (
               <button
