@@ -220,7 +220,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
       if (sortBy === 'createdAt') return b._createdAt.localeCompare(a._createdAt);
       return b._updatedAt.localeCompare(a._updatedAt);
     });
-  }, [articles, activeTab, search, sortBy]);
+  }, [authorScoped, activeTab, search, sortBy]);
 
   // ---------------------------------------------------------------------------
   // Action handlers
@@ -316,6 +316,15 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
 
   return (
     <div>
+      {/* ── Warning: editor has no linked author profile ─────────────────── */}
+      {isEditorPlus && authorFilter === 'mine' && !currentSanityAuthorId && (
+        <div className='mb-4 border border-yellow-300 bg-yellow-50 px-4 py-3 text-sm text-yellow-800 dark:border-yellow-700/50 dark:bg-yellow-900/20 dark:text-yellow-300'>
+          <strong>Author profile not linked.</strong> Your Clerk account isn&apos;t connected to a
+          Sanity author document, so &ldquo;Mine&rdquo; can&apos;t filter by your articles. Ask an
+          admin to link your account via the Author management panel.
+        </div>
+      )}
+
       {/* ── Tabs ─────────────────────────────────────────────────────────── */}
       <div className='mb-6 flex border-b border-slate-200 dark:border-slate-800'>
         {TABS.map((tab) => (
