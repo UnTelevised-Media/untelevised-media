@@ -126,6 +126,29 @@ export const queryPortalSourcesByAuthor = groq`
   }
 `;
 
+export const queryPortalMyProfile = groq`
+  *[_type == "author" && _id == $id][0]{
+    _id,
+    name,
+    "slug": slug.current,
+    title,
+    bio,
+    location,
+    email,
+    twitter,
+    instagram,
+    facebook,
+    tiktok,
+    youtube,
+    linkedin,
+    website,
+    credentials,
+    expertise,
+    sameAs,
+    image{ asset->{ _id, url }, alt }
+  }
+`;
+
 export const queryPortalAllSources = groq`
   *[_type == "source"] | order(_updatedAt desc) {
     _id,
@@ -137,5 +160,91 @@ export const queryPortalAllSources = groq`
     description,
     isAnonymous,
     "linkedArticles": *[_type == "article" && references(^._id)]{ _id, title, slug }
+  }
+`;
+
+// ---------------------------------------------------------------------------
+// Editor-only inbox queries
+// ---------------------------------------------------------------------------
+
+export const queryPortalJobApplications = groq`
+  *[_type == "jobApplication"] | order(submittedAt desc) {
+    _id,
+    firstName,
+    lastName,
+    email,
+    phone,
+    location,
+    positionsOfInterest,
+    otherPosition,
+    experienceLevel,
+    experienceDescription,
+    availability,
+    applicationStatus,
+    submittedAt,
+    notes,
+    portfolioWebsite,
+    youtubeChannel,
+    socialMediaPlatforms,
+    socialMediaLinks,
+    workSamples,
+    additionalInfo
+  }
+`;
+
+export const queryPortalContactSubmissions = groq`
+  *[_type == "contactSubmission"] | order(submittedAt desc) {
+    _id,
+    name,
+    email,
+    message,
+    submittedAt
+  }
+`;
+
+export const queryPortalSecureContacts = groq`
+  *[_type == "secureContact"] | order(submittedAt desc) {
+    _id,
+    name,
+    email,
+    phone,
+    subject,
+    message,
+    urgency,
+    contactMethod,
+    isAnonymous,
+    submittedAt,
+    status
+  }
+`;
+
+export const queryPortalWhistleblowers = groq`
+  *[_type == "whistleblower"] | order(submittedAt desc) {
+    _id,
+    submissionId,
+    title,
+    description,
+    organization,
+    location,
+    timeframe,
+    category,
+    severity,
+    evidence,
+    witnessInfo,
+    contactInfo,
+    isAnonymous,
+    protectionNeeded,
+    submittedAt,
+    status,
+    priority,
+    notes
+  }
+`;
+
+export const queryPortalNewsletterSubscribers = groq`
+  *[_type == "newsletterSubscribe"] | order(submittedAt desc) {
+    _id,
+    email,
+    submittedAt
   }
 `;

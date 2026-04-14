@@ -33,7 +33,7 @@ export default async function SourcesPage() {
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
-      <PortalNav />
+      <PortalNav isEditorPlus={isEditorPlus} />
       <main className='mx-auto max-w-5xl px-4 py-8 sm:px-6'>
         <div className='mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
           <h1 className='text-2xl font-black uppercase tracking-widest text-slate-900 dark:text-slate-100'>

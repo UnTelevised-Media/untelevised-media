@@ -1,18 +1,49 @@
 // src/components/portal/PortalNav.tsx
 // Top navigation bar for the Author Portal.
+// isEditorPlus is passed from the server component so links render on first paint.
 'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
 
-const links = [
+const authorLinks = [
+  { href: '/portal', label: 'Dashboard' },
   { href: '/portal/articles', label: 'Articles' },
   { href: '/portal/sources', label: 'Sources' },
+  { href: '/portal/profile', label: 'Profile' },
 ];
 
-export default function PortalNav() {
+const editorLinks = [
+  { href: '/portal/applications', label: 'Applications' },
+  { href: '/portal/contact', label: 'Contact' },
+  { href: '/portal/secure-contact', label: 'Secure' },
+  { href: '/portal/whistleblower', label: 'Whistleblower' },
+  { href: '/portal/subscribers', label: 'Subscribers' },
+];
+
+interface Props {
+  isEditorPlus?: boolean;
+}
+
+export default function PortalNav({ isEditorPlus = false }: Props) {
   const pathname = usePathname();
+
+  function NavLink({ href, label, exact }: { href: string; label: string; exact?: boolean }) {
+    const active = exact ? pathname === href : pathname.startsWith(href);
+    return (
+      <Link
+        href={href}
+        className={`px-3 py-1.5 text-xs font-bold uppercase tracking-widest transition-colors ${
+          active
+            ? 'bg-untele text-white'
+            : 'text-slate-600 hover:text-untele dark:text-slate-400 dark:hover:text-untele'
+        }`}
+      >
+        {label}
+      </Link>
+    );
+  }
 
   return (
     <header className='border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950'>
@@ -27,23 +58,19 @@ export default function PortalNav() {
         </Link>
 
         {/* Nav links */}
-        <nav className='hidden gap-1 sm:flex'>
-          {links.map((link) => {
-            const active = pathname.startsWith(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-3 py-1.5 text-xs font-bold uppercase tracking-widest transition-colors ${
-                  active
-                    ? 'bg-untele text-white'
-                    : 'text-slate-600 hover:text-untele dark:text-slate-400 dark:hover:text-untele'
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+        <nav className='hidden gap-1 sm:flex sm:items-center'>
+          {authorLinks.map((link) => (
+            <NavLink key={link.href} href={link.href} label={link.label} exact={link.href === '/portal'} />
+          ))}
+
+          {isEditorPlus && (
+            <>
+              <span className='mx-1 h-4 w-px bg-slate-300 dark:bg-slate-700' aria-hidden='true' />
+              {editorLinks.map((link) => (
+                <NavLink key={link.href} href={link.href} label={link.label} />
+              ))}
+            </>
+          )}
         </nav>
 
         {/* User controls */}

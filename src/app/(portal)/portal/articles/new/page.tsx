@@ -29,7 +29,7 @@ export default async function NewArticlePage() {
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
-      <PortalNav />
+      <PortalNav isEditorPlus={isEditorPlus} />
       <main className='mx-auto max-w-5xl px-4 py-8 sm:px-6'>
         <h1 className='mb-6 text-xl font-black uppercase tracking-widest text-slate-900 dark:text-slate-100'>
           New Article
