@@ -29,7 +29,8 @@ const ARTICLE_LIST_PROJECTION = groq`{
   keywords,
   mainImage{ asset->{ url }, alt },
   deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },
-  "correctionType": correction.type
+  "correctionType": correction.type,
+  "reviewedById": reviewedBy._ref
 }`;
 
 /** Articles for an author — only their own documents. */

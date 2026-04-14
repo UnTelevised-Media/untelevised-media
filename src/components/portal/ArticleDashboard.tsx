@@ -77,12 +77,13 @@ export interface PortalArticle {
     originalPublishedAt?: string;
   };
   correctionType?: string;
+  reviewedById?: string;
 }
 
 type SortKey = 'updatedAt' | 'createdAt' | 'title';
 type ViewMode = 'table' | 'card';
 type TabKey = 'drafts' | 'review' | 'published';
-type AuthorFilter = 'all' | 'mine' | 'others';
+type AuthorFilter = 'all' | 'mine' | 'others' | 'reviewed';
 
 interface Props {
   articles: PortalArticle[];
@@ -182,6 +183,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
   const authorScoped = useMemo(() => {
     if (!isEditorPlus || authorFilter === 'all') return articles;
     if (authorFilter === 'mine') return articles.filter((a) => a.authorId === currentSanityAuthorId);
+    if (authorFilter === 'reviewed') return articles.filter((a) => a.reviewedById === currentSanityAuthorId);
     return articles.filter((a) => a.authorId !== currentSanityAuthorId);
   }, [articles, isEditorPlus, authorFilter, currentSanityAuthorId]);
 
@@ -317,11 +319,11 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
   return (
     <div>
       {/* ── Warning: editor has no linked author profile ─────────────────── */}
-      {isEditorPlus && authorFilter === 'mine' && !currentSanityAuthorId && (
+      {isEditorPlus && (authorFilter === 'mine' || authorFilter === 'reviewed') && !currentSanityAuthorId && (
         <div className='mb-4 border border-yellow-300 bg-yellow-50 px-4 py-3 text-sm text-yellow-800 dark:border-yellow-700/50 dark:bg-yellow-900/20 dark:text-yellow-300'>
           <strong>Author profile not linked.</strong> Your Clerk account isn&apos;t connected to a
-          Sanity author document, so &ldquo;Mine&rdquo; can&apos;t filter by your articles. Ask an
-          admin to link your account via the Author management panel.
+          Sanity author document, so this filter can&apos;t resolve your identity. Ask an admin to
+          link your account via the Author management panel.
         </div>
       )}
 
@@ -366,19 +368,26 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
 
         {isEditorPlus && (
           <div className='flex items-center gap-1 rounded border border-slate-200 p-0.5 dark:border-slate-700'>
-            {(['all', 'mine', 'others'] as AuthorFilter[]).map((f) => (
+            {(
+            [
+              { key: 'all', label: 'All' },
+              { key: 'mine', label: 'Mine' },
+              { key: 'others', label: 'Others' },
+              { key: 'reviewed', label: 'Reviewed' },
+            ] as { key: AuthorFilter; label: string }[]
+          ).map(({ key, label }) => (
               <button
-                key={f}
+                key={key}
                 type='button'
-                onClick={() => setAuthorFilter(f)}
+                onClick={() => setAuthorFilter(key)}
                 className={[
-                  'px-3 py-1 text-xs font-semibold capitalize transition-colors',
-                  authorFilter === f
+                  'px-3 py-1 text-xs font-semibold transition-colors',
+                  authorFilter === key
                     ? 'bg-untele text-white'
                     : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200',
                 ].join(' ')}
               >
-                {f === 'all' ? 'All' : f === 'mine' ? 'Mine' : 'Others'}
+                {label}
               </button>
             ))}
           </div>
