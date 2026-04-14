@@ -82,6 +82,7 @@ interface Props {
   articleId?: string;
   initialData?: Partial<ArticleWriteInput> & {
     _id?: string;
+    status?: string | null;
     author?: { _id: string; name: string };
     categories?: CategoryRef[];
     sources?: SourceRef[];
@@ -203,7 +204,7 @@ export default function ArticleEditorForm({
 
   // Autosave indicator
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved' | 'idle'>('idle');
-  const isAlreadyPublished = !!initialData?.publishedAt;
+  const isAlreadyPublished = initialData?.status === 'published';
   const isDirtyRef = useRef(false);
 
   // Form

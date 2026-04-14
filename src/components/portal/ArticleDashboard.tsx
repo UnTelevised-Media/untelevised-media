@@ -96,7 +96,7 @@ interface Props {
 // ---------------------------------------------------------------------------
 
 function isPublished(a: PortalArticle) {
-  return !!a.publishedAt || a.status === 'published';
+  return a.status === 'published';
 }
 
 function isInReview(a: PortalArticle) {
