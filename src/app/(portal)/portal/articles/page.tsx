@@ -24,12 +24,12 @@ export default async function PortalArticlesPage() {
   const isEditorPlus = hasRole(role, 'editor');
 
   let articles: PortalArticle[] = [];
-  let sanityAuthorId: string | null = null;
+  // Always fetch the current user's Sanity author ID — editors need it for the "Mine" filter
+  const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
   if (isEditorPlus) {
     articles = await portalClient.fetch<PortalArticle[]>(queryPortalAllArticles);
   } else {
-    sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
     if (sanityAuthorId) {
       articles = await portalClient.fetch<PortalArticle[]>(queryPortalArticlesByAuthor, {
         sanityAuthorId,

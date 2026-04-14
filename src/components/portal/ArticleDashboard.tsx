@@ -82,6 +82,7 @@ export interface PortalArticle {
 type SortKey = 'updatedAt' | 'createdAt' | 'title';
 type ViewMode = 'table' | 'card';
 type TabKey = 'drafts' | 'review' | 'published';
+type AuthorFilter = 'all' | 'mine' | 'others';
 
 interface Props {
   articles: PortalArticle[];
@@ -158,6 +159,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
   const [search, setSearch] = useState('');
   const [activeTab, setActiveTab] = useState<TabKey>('drafts');
   const [sortBy, setSortBy] = useState<SortKey>('updatedAt');
+  const [authorFilter, setAuthorFilter] = useState<AuthorFilter>('all');
 
   // Editor hard-delete / approve deletion
   const [deleteTarget, setDeleteTarget] = useState<PortalArticle | null>(null);
@@ -175,22 +177,31 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
   });
 
   // ---------------------------------------------------------------------------
-  // Tab counts
+  // Author-scoped base list (editors only)
+  // ---------------------------------------------------------------------------
+  const authorScoped = useMemo(() => {
+    if (!isEditorPlus || authorFilter === 'all') return articles;
+    if (authorFilter === 'mine') return articles.filter((a) => a.authorId === currentSanityAuthorId);
+    return articles.filter((a) => a.authorId !== currentSanityAuthorId);
+  }, [articles, isEditorPlus, authorFilter, currentSanityAuthorId]);
+
+  // ---------------------------------------------------------------------------
+  // Tab counts (based on author-scoped list)
   // ---------------------------------------------------------------------------
   const tabCounts = useMemo(
     () => ({
-      drafts: articles.filter(isDraft).length,
-      review: articles.filter(isInReview).length,
-      published: articles.filter(isPublished).length,
+      drafts: authorScoped.filter(isDraft).length,
+      review: authorScoped.filter(isInReview).length,
+      published: authorScoped.filter(isPublished).length,
     }),
-    [articles],
+    [authorScoped],
   );
 
   // ---------------------------------------------------------------------------
   // Filtered + sorted list
   // ---------------------------------------------------------------------------
   const filtered = useMemo(() => {
-    let list = articles.filter(
+    let list = authorScoped.filter(
       activeTab === 'drafts' ? isDraft : activeTab === 'review' ? isInReview : isPublished,
     );
 
@@ -343,6 +354,26 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
           className='sm:max-w-xs'
           aria-label='Search articles'
         />
+
+        {isEditorPlus && (
+          <div className='flex items-center gap-1 rounded border border-slate-200 p-0.5 dark:border-slate-700'>
+            {(['all', 'mine', 'others'] as AuthorFilter[]).map((f) => (
+              <button
+                key={f}
+                type='button'
+                onClick={() => setAuthorFilter(f)}
+                className={[
+                  'px-3 py-1 text-xs font-semibold capitalize transition-colors',
+                  authorFilter === f
+                    ? 'bg-untele text-white'
+                    : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200',
+                ].join(' ')}
+              >
+                {f === 'all' ? 'All' : f === 'mine' ? 'Mine' : 'Others'}
+              </button>
+            ))}
+          </div>
+        )}
 
         <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortKey)}>
           <SelectTrigger className='sm:w-44' aria-label='Sort articles'>
