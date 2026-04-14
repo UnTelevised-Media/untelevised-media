@@ -3,7 +3,7 @@
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalClient } from '@/lib/portal/fetch';
+import { portalSanityFetch } from '@/lib/portal/live';
 import {
   queryPortalArticlesByAuthor,
   queryPortalAllArticles,
@@ -118,44 +118,42 @@ export default async function PortalDashboardPage() {
   // Fetch article data
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
-  const [latestBrief, allBriefs] = await Promise.all([
-    portalClient.fetch<Brief | null>(queryPortalLatestBrief),
-    portalClient.fetch<BriefSummary[]>(queryPortalAllBriefs),
+  type ArticleRow = { publishedAt?: string; needsReview?: boolean; deletionRequest?: unknown };
+
+  const [briefRes, allBriefsRes] = await Promise.all([
+    portalSanityFetch({ query: queryPortalLatestBrief }),
+    portalSanityFetch({ query: queryPortalAllBriefs }),
   ]);
+  const latestBrief = briefRes.data as Brief | null;
+  const allBriefs = (allBriefsRes.data ?? []) as BriefSummary[];
 
   // Fetch author's claimed pitches for this brief (storyKey → pitchId map)
-  const myPitchesRaw = sanityAuthorId && latestBrief
-    ? await portalClient.fetch<Array<{ _id: string; storyKey: string }>>(
-        queryPortalMyPitchesForBrief,
-        { authorId: sanityAuthorId, briefId: latestBrief._id },
-      )
-    : [];
+  const myPitchesRes = sanityAuthorId && latestBrief
+    ? await portalSanityFetch({
+        query: queryPortalMyPitchesForBrief,
+        params: { authorId: sanityAuthorId, briefId: latestBrief._id },
+      })
+    : null;
+  const myPitchesRaw = (myPitchesRes?.data ?? []) as Array<{ _id: string; storyKey: string }>;
   const myPitchMap: Record<string, string> = {};
-  for (const p of myPitchesRaw ?? []) {
-    myPitchMap[p.storyKey] = p._id;
-  }
+  for (const p of myPitchesRaw) myPitchMap[p.storyKey] = p._id;
 
-  const [myArticles, allArticles, authors, claimedPitches] = await Promise.all([
+  const [myArticlesRes, allArticlesRes, authorsRes, claimedPitchesRes] = await Promise.all([
     sanityAuthorId
-      ? portalClient.fetch<{ publishedAt?: string; needsReview?: boolean; deletionRequest?: unknown }[]>(
-          queryPortalArticlesByAuthor,
-          { sanityAuthorId },
-        )
-      : Promise.resolve([]),
+      ? portalSanityFetch({ query: queryPortalArticlesByAuthor, params: { sanityAuthorId } })
+      : null,
+    isEditorPlus ? portalSanityFetch({ query: queryPortalAllArticles }) : null,
+    isEditorPlus ? portalSanityFetch({ query: queryPortalAuthors }) : null,
     isEditorPlus
-      ? portalClient.fetch<{ publishedAt?: string; needsReview?: boolean; deletionRequest?: unknown }[]>(
-          queryPortalAllArticles,
-        )
-      : Promise.resolve([]),
-    isEditorPlus
-      ? portalClient.fetch<PortalAuthor[]>(queryPortalAuthors)
-      : Promise.resolve([]),
-    isEditorPlus
-      ? portalClient.fetch<ClaimedPitchSummary[]>(queryPortalAllClaimedPitches)
+      ? portalSanityFetch({ query: queryPortalAllClaimedPitches })
       : sanityAuthorId
-        ? portalClient.fetch<ClaimedPitchSummary[]>(queryPortalMyClaimedPitches, { authorId: sanityAuthorId })
-        : Promise.resolve([]),
+        ? portalSanityFetch({ query: queryPortalMyClaimedPitches, params: { authorId: sanityAuthorId } })
+        : null,
   ]);
+  const myArticles = ((myArticlesRes?.data ?? []) as ArticleRow[]);
+  const allArticles = ((allArticlesRes?.data ?? []) as ArticleRow[]);
+  const authors = ((authorsRes?.data ?? []) as PortalAuthor[]);
+  const claimedPitches = ((claimedPitchesRes?.data ?? []) as ClaimedPitchSummary[]);
 
   // My article stats
   const myPublished = myArticles.filter((a) => !!a.publishedAt).length;
@@ -177,21 +175,26 @@ export default async function PortalDashboardPage() {
   let subscribersCount = 0;
 
   if (isEditorPlus) {
-    const [contacts, secureContacts, whistleblowers, applications, subscribers] = await Promise.all([
-      portalClient.fetch<{ _id: string }[]>(queryPortalContactSubmissions),
-      portalClient.fetch<{ _id: string; status?: string }[]>(queryPortalSecureContacts),
-      portalClient.fetch<{ _id: string; severity?: string }[]>(queryPortalWhistleblowers),
-      portalClient.fetch<{ _id: string }[]>(queryPortalJobApplications),
-      portalClient.fetch<{ _id: string }[]>(queryPortalNewsletterSubscribers),
+    const [contactsRes, secureRes, whistleRes, appsRes, subsRes] = await Promise.all([
+      portalSanityFetch({ query: queryPortalContactSubmissions }),
+      portalSanityFetch({ query: queryPortalSecureContacts }),
+      portalSanityFetch({ query: queryPortalWhistleblowers }),
+      portalSanityFetch({ query: queryPortalJobApplications }),
+      portalSanityFetch({ query: queryPortalNewsletterSubscribers }),
     ]);
+    const contacts = (contactsRes.data ?? []) as { _id: string }[];
+    const secureContacts = (secureRes.data ?? []) as { _id: string; status?: string }[];
+    const whistleblowers = (whistleRes.data ?? []) as { _id: string; severity?: string }[];
+    const applications = (appsRes.data ?? []) as { _id: string }[];
+    const subscribers = (subsRes.data ?? []) as { _id: string }[];
 
-    contactCount = contacts?.length ?? 0;
-    secureCount = secureContacts?.length ?? 0;
-    newSecureCount = secureContacts?.filter((c) => (c.status ?? 'new') === 'new').length ?? 0;
-    whistleblowerCount = whistleblowers?.length ?? 0;
-    criticalWhistleCount = whistleblowers?.filter((w) => w.severity === 'critical').length ?? 0;
-    applicationsCount = applications?.length ?? 0;
-    subscribersCount = subscribers?.length ?? 0;
+    contactCount = contacts.length;
+    secureCount = secureContacts.length;
+    newSecureCount = secureContacts.filter((c) => (c.status ?? 'new') === 'new').length;
+    whistleblowerCount = whistleblowers.length;
+    criticalWhistleCount = whistleblowers.filter((w) => w.severity === 'critical').length;
+    applicationsCount = applications.length;
+    subscribersCount = subscribers.length;
   }
 
   return (
