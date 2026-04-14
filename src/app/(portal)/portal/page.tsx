@@ -22,7 +22,37 @@ export const metadata = {
 };
 
 // ---------------------------------------------------------------------------
-// Stat card
+// Inline stat strip — compact horizontal row, used for My Articles / Newsroom
+// ---------------------------------------------------------------------------
+
+function StatStrip({
+  stats,
+  href,
+}: {
+  stats: { label: string; value: number; accent?: boolean }[];
+  href: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className='group flex flex-wrap items-center gap-x-6 gap-y-1 border border-slate-200 bg-white px-4 py-3 transition-colors hover:border-untele dark:border-slate-700 dark:bg-slate-900'
+    >
+      {stats.map(({ label, value, accent }) => (
+        <div key={label} className='flex items-baseline gap-1.5'>
+          <span
+            className={`text-xl font-black leading-none ${accent ? 'text-untele' : 'text-slate-900 group-hover:text-untele dark:text-white'}`}
+          >
+            {value}
+          </span>
+          <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>{label}</span>
+        </div>
+      ))}
+    </Link>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Stat card — used for Inbox items
 // ---------------------------------------------------------------------------
 
 function StatCard({
@@ -39,14 +69,14 @@ function StatCard({
   return (
     <Link
       href={href}
-      className={`group block border bg-white p-5 transition-colors hover:border-untele dark:bg-slate-900 ${
+      className={`group block border bg-white px-3 py-2.5 transition-colors hover:border-untele dark:bg-slate-900 ${
         accent ? 'border-untele' : 'border-slate-200 dark:border-slate-700'
       }`}
     >
-      <p className={`text-3xl font-black ${accent ? 'text-untele' : 'text-slate-900 dark:text-white'}`}>
+      <p className={`text-xl font-black leading-none ${accent ? 'text-untele' : 'text-slate-900 dark:text-white'}`}>
         {value}
       </p>
-      <p className='mt-1 text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-untele'>
+      <p className='mt-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-500 group-hover:text-untele'>
         {label}
       </p>
     </Link>
@@ -59,9 +89,9 @@ function StatCard({
 
 function SectionHeader({ label }: { label: string }) {
   return (
-    <div className='mb-4 flex items-center gap-3'>
-      <div className='bg-untele px-3 py-1'>
-        <span className='text-xs font-black uppercase tracking-widest text-white'>{label}</span>
+    <div className='mb-2 flex items-center gap-3'>
+      <div className='bg-untele px-2 py-0.5'>
+        <span className='text-[10px] font-black uppercase tracking-widest text-white'>{label}</span>
       </div>
       <div className='h-px flex-1 bg-slate-200 dark:bg-slate-800' />
     </div>
@@ -134,61 +164,62 @@ export default async function PortalDashboardPage() {
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
       <PortalNav isEditorPlus={isEditorPlus} />
 
-      <main className='mx-auto max-w-7xl px-4 py-8 sm:px-6'>
+      <main className='mx-auto max-w-7xl px-4 py-5 sm:px-6'>
         {/* Page heading */}
-        <div className='mb-8'>
-          <h1 className='text-2xl font-black uppercase tracking-widest text-slate-900 dark:text-slate-100'>
+        <div className='mb-4'>
+          <h1 className='text-base font-black uppercase tracking-widest text-slate-900 dark:text-slate-100'>
             Staff Dashboard
+            <span className='ml-2 text-xs font-bold normal-case tracking-normal text-slate-400 capitalize'>
+              — {role ?? 'Author'}
+            </span>
           </h1>
-          <p className='mt-1 text-sm text-slate-500 dark:text-slate-400 capitalize'>
-            {role ?? 'Author'} view
-          </p>
         </div>
 
         {/* ── My Articles ─────────────────────────────────────────────── */}
-        <section className='mb-10'>
+        <section className='mb-3'>
           <SectionHeader label='My Articles' />
-          <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
-            <StatCard label='Total' value={myArticles.length} href='/portal/articles' />
-            <StatCard label='Published' value={myPublished} href='/portal/articles' />
-            <StatCard label='In Review' value={myInReview} href='/portal/articles' accent={myInReview > 0} />
-            <StatCard label='Drafts' value={myDrafts} href='/portal/articles' />
-          </div>
+          <StatStrip
+            href='/portal/articles'
+            stats={[
+              { label: 'Total', value: myArticles.length },
+              { label: 'Published', value: myPublished },
+              { label: 'In Review', value: myInReview, accent: myInReview > 0 },
+              { label: 'Drafts', value: myDrafts },
+            ]}
+          />
         </section>
 
         {/* ── Newsroom Overview (editor+) ──────────────────────────────── */}
         {isEditorPlus && (
-          <section className='mb-10'>
+          <section className='mb-3'>
             <SectionHeader label='Newsroom' />
-            <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
-              <StatCard label='All Articles' value={allArticles.length} href='/portal/articles' />
-              <StatCard label='Published' value={allPublished} href='/portal/articles' />
-              <StatCard
-                label='Pending Review'
-                value={allInReview}
-                href='/portal/articles'
-                accent={allInReview > 0}
-              />
-              <StatCard label='Drafts' value={allDrafts} href='/portal/articles' />
-            </div>
+            <StatStrip
+              href='/portal/articles'
+              stats={[
+                { label: 'All Articles', value: allArticles.length },
+                { label: 'Published', value: allPublished },
+                { label: 'Pending Review', value: allInReview, accent: allInReview > 0 },
+                { label: 'Drafts', value: allDrafts },
+              ]}
+            />
           </section>
         )}
 
         {/* ── Inbox (editor+) ──────────────────────────────────────────── */}
         {isEditorPlus && (
-          <section className='mb-10'>
+          <section className='mb-5'>
             <SectionHeader label='Inbox' />
-            <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+            <div className='grid gap-2 sm:grid-cols-3 lg:grid-cols-5'>
               <StatCard label='Applications' value={applicationsCount} href='/portal/applications' />
-              <StatCard label='Contact Submissions' value={contactCount} href='/portal/contact' />
+              <StatCard label='Contact' value={contactCount} href='/portal/contact' />
               <StatCard
-                label={`Secure Contact${newSecureCount > 0 ? ` (${newSecureCount} new)` : ''}`}
+                label={`Secure${newSecureCount > 0 ? ` · ${newSecureCount} new` : ''}`}
                 value={secureCount}
                 href='/portal/secure-contact'
                 accent={newSecureCount > 0}
               />
               <StatCard
-                label={`Whistleblower${criticalWhistleCount > 0 ? ` (${criticalWhistleCount} critical)` : ''}`}
+                label={`Whistleblower${criticalWhistleCount > 0 ? ` · ${criticalWhistleCount} crit` : ''}`}
                 value={whistleblowerCount}
                 href='/portal/whistleblower'
                 accent={criticalWhistleCount > 0}
