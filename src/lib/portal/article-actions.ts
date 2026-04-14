@@ -139,7 +139,8 @@ function sanitizeArticleInput(input: ArticleWriteInput): ArticleWriteInput {
 // ---------------------------------------------------------------------------
 
 export async function createArticle(
-  input: ArticleWriteInput
+  input: ArticleWriteInput,
+  linkedPitchId?: string
 ): Promise<ActionResult<{ _id: string; slug: string }>> {
   const { id: clerkUserId } = await requireAuthor();
 
@@ -200,10 +201,21 @@ export async function createArticle(
     eventDate: sanitized.eventDate ?? undefined,
     faqs: sanitized.faqs ?? [],
     correction: sanitized.correction ?? undefined,
+    ...(linkedPitchId ? { linkedPitch: { _type: 'reference', _ref: linkedPitchId } } : {}),
   };
 
   try {
     const created = await writeClient.create(doc);
+
+    // Link back from the pitch to this article (best-effort — non-fatal)
+    if (linkedPitchId) {
+      await writeClient
+        .patch(linkedPitchId)
+        .set({ linkedArticle: { _type: 'reference', _ref: created._id } })
+        .commit()
+        .catch(() => {});
+    }
+
     return { success: true, data: { _id: created._id, slug: sanitized.slug.current } };
   } catch (err) {
     return {

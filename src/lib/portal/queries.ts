@@ -83,7 +83,12 @@ export const queryPortalArticleById = groq`
     faqs[]{ _key, question, answer },
     correction{ type, issuedAt, summary, detail },
     reviewedBy->{ _id, name },
-    deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt }
+    deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },
+    linkedPitch->{
+      _id, headline, urgency, beat, angle, sourceSuggestions,
+      links[]{ _key, label, url },
+      notes
+    }
   }
 `;
 
@@ -246,5 +251,157 @@ export const queryPortalNewsletterSubscribers = groq`
     _id,
     email,
     submittedAt
+  }
+`;
+
+// ---------------------------------------------------------------------------
+// News Briefs
+// ---------------------------------------------------------------------------
+
+/** Minimal articles list for pitch "link article" dropdown. */
+export const queryPortalArticlesTitles = groq`
+  *[_type == "article"] | order(_updatedAt desc) {
+    _id,
+    title,
+    "authorId": author._ref
+  }
+`;
+
+/** Single brief by ID — same projection as latest brief. */
+export const queryPortalBriefById = groq`
+  *[_type == "brief" && _id == $briefId][0] {
+    _id,
+    title,
+    publishedAt,
+    period,
+    summary,
+    "storyPasses": storyPasses[] {
+      _key,
+      storyKey,
+      "authorId": author._ref,
+      passedAt
+    },
+    stories[] {
+      _key,
+      headline,
+      angle,
+      beat,
+      urgency,
+      sourceSuggestions,
+      links[] { _key, label, url },
+      status,
+      claimedBy->{ _id, name, "slug": slug.current },
+      claimedAt,
+      linkedArticle->{ _id, title, "slug": slug.current }
+    }
+  }
+`;
+
+/** Latest brief for the dashboard panel. */
+export const queryPortalLatestBrief = groq`
+  *[_type == "brief"] | order(publishedAt desc)[0] {
+    _id,
+    title,
+    publishedAt,
+    period,
+    summary,
+    "storyPasses": storyPasses[] {
+      _key,
+      storyKey,
+      "authorId": author._ref,
+      passedAt
+    },
+    stories[] {
+      _key,
+      headline,
+      angle,
+      beat,
+      urgency,
+      sourceSuggestions,
+      links[] { _key, label, url },
+      status,
+      claimedBy->{ _id, name, "slug": slug.current },
+      claimedAt,
+      linkedArticle->{ _id, title, "slug": slug.current }
+    }
+  }
+`;
+
+/** All briefs for a full archive view. */
+export const queryPortalAllBriefs = groq`
+  *[_type == "brief"] | order(publishedAt desc) {
+    _id,
+    title,
+    publishedAt,
+    period,
+    "storyCount": count(stories),
+    "unclaimedCount": count(stories[status == "unclaimed"])
+  }
+`;
+
+// ---------------------------------------------------------------------------
+// Claimed pitches
+// ---------------------------------------------------------------------------
+
+/** All claimed pitches for the current author. */
+export const queryPortalMyClaimedPitches = groq`
+  *[_type == "claimedPitch" && author._ref == $authorId] | order(claimedAt desc) {
+    _id,
+    headline,
+    beat,
+    urgency,
+    status,
+    briefId,
+    briefTitle,
+    storyKey,
+    claimedAt,
+    linkedArticle->{ _id, title, "slug": slug.current }
+  }
+`;
+
+/** Claimed pitches for the current author scoped to a specific brief (for the dashboard map). */
+export const queryPortalMyPitchesForBrief = groq`
+  *[_type == "claimedPitch" && author._ref == $authorId && briefId == $briefId] {
+    _id,
+    storyKey
+  }
+`;
+
+/** All claimed pitches — for editors to see the full newsroom view. */
+export const queryPortalAllClaimedPitches = groq`
+  *[_type == "claimedPitch"] | order(claimedAt desc) {
+    _id,
+    headline,
+    beat,
+    urgency,
+    status,
+    briefId,
+    briefTitle,
+    storyKey,
+    claimedAt,
+    author->{ _id, name },
+    linkedArticle->{ _id, title, "slug": slug.current }
+  }
+`;
+
+/** Full pitch detail for the notes page. */
+export const queryPortalClaimedPitchById = groq`
+  *[_type == "claimedPitch" && _id == $id][0] {
+    _id,
+    headline,
+    angle,
+    beat,
+    urgency,
+    sourceSuggestions,
+    links[] { _key, label, url },
+    briefId,
+    briefTitle,
+    storyKey,
+    claimedAt,
+    status,
+    notes,
+    author->{ _id, name },
+    assignedBy->{ _id, name },
+    linkedArticle->{ _id, title, "slug": slug.current }
   }
 `;

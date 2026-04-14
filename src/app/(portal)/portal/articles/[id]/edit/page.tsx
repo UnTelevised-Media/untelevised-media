@@ -13,6 +13,7 @@ import {
 import PortalNav from '@/components/portal/PortalNav';
 import ArticleEditorForm from '@/components/portal/ArticleEditorForm';
 import type { ArticleWriteInput } from '@/lib/portal/article-actions';
+import type { PitchForModal } from '@/components/portal/PitchQuickViewModal';
 
 export const metadata = {
   title: 'Edit Article — Author Portal',
@@ -33,6 +34,7 @@ type PortalArticleFull = ArticleWriteInput & {
     asset?: { _id?: string; url?: string };
     alt?: string;
   } | null;
+  linkedPitch?: PitchForModal | null;
 };
 
 export default async function EditArticlePage({
@@ -78,6 +80,7 @@ export default async function EditArticlePage({
           authors={authors}
           isEditorPlus={isEditorPlus}
           currentSanityAuthorId={sanityAuthorId ?? undefined}
+          linkedPitch={article.linkedPitch}
         />
       </main>
     </div>

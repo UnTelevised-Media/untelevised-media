@@ -12,8 +12,17 @@ import {
   queryPortalWhistleblowers,
   queryPortalJobApplications,
   queryPortalNewsletterSubscribers,
+  queryPortalLatestBrief,
+  queryPortalAuthors,
+  queryPortalMyPitchesForBrief,
+  queryPortalMyClaimedPitches,
+  queryPortalAllClaimedPitches,
+  queryPortalAllBriefs,
 } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
+import { BriefPanel, type Brief, type PortalAuthor, type BriefSummary } from '@/components/portal/BriefPanel';
+import { type ClaimedPitchSummary } from '@/components/portal/ClaimedPitchCard';
+import { ClaimedPitchesPanel } from '@/components/portal/ClaimedPitchesPanel';
 import Link from 'next/link';
 
 export const metadata = {
@@ -109,7 +118,24 @@ export default async function PortalDashboardPage() {
   // Fetch article data
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
-  const [myArticles, allArticles] = await Promise.all([
+  const [latestBrief, allBriefs] = await Promise.all([
+    portalClient.fetch<Brief | null>(queryPortalLatestBrief),
+    portalClient.fetch<BriefSummary[]>(queryPortalAllBriefs),
+  ]);
+
+  // Fetch author's claimed pitches for this brief (storyKey → pitchId map)
+  const myPitchesRaw = sanityAuthorId && latestBrief
+    ? await portalClient.fetch<Array<{ _id: string; storyKey: string }>>(
+        queryPortalMyPitchesForBrief,
+        { authorId: sanityAuthorId, briefId: latestBrief._id },
+      )
+    : [];
+  const myPitchMap: Record<string, string> = {};
+  for (const p of myPitchesRaw ?? []) {
+    myPitchMap[p.storyKey] = p._id;
+  }
+
+  const [myArticles, allArticles, authors, claimedPitches] = await Promise.all([
     sanityAuthorId
       ? portalClient.fetch<{ publishedAt?: string; needsReview?: boolean; deletionRequest?: unknown }[]>(
           queryPortalArticlesByAuthor,
@@ -121,6 +147,14 @@ export default async function PortalDashboardPage() {
           queryPortalAllArticles,
         )
       : Promise.resolve([]),
+    isEditorPlus
+      ? portalClient.fetch<PortalAuthor[]>(queryPortalAuthors)
+      : Promise.resolve([]),
+    isEditorPlus
+      ? portalClient.fetch<ClaimedPitchSummary[]>(queryPortalAllClaimedPitches)
+      : sanityAuthorId
+        ? portalClient.fetch<ClaimedPitchSummary[]>(queryPortalMyClaimedPitches, { authorId: sanityAuthorId })
+        : Promise.resolve([]),
   ]);
 
   // My article stats
@@ -169,7 +203,7 @@ export default async function PortalDashboardPage() {
         <div className='mb-4'>
           <h1 className='text-base font-black uppercase tracking-widest text-slate-900 dark:text-slate-100'>
             Staff Dashboard
-            <span className='ml-2 text-xs font-bold normal-case tracking-normal text-slate-400 capitalize'>
+            <span className='ml-2 text-xs font-bold tracking-normal text-slate-400 capitalize'>
               — {role ?? 'Author'}
             </span>
           </h1>
@@ -230,7 +264,7 @@ export default async function PortalDashboardPage() {
         )}
 
         {/* ── Quick links ───────────────────────────────────────────────── */}
-        <section>
+        <section className='mb-8'>
           <SectionHeader label='Quick Links' />
           <div className='flex flex-wrap gap-3'>
             <Link
@@ -262,6 +296,42 @@ export default async function PortalDashboardPage() {
               </a>
             )}
           </div>
+        </section>
+
+        {/* ── Claimed Pitches ──────────────────────────────────────────── */}
+        {claimedPitches && claimedPitches.length > 0 && (
+          <section className='mb-8'>
+            <SectionHeader label={isEditorPlus ? 'Claimed Pitches — Newsroom' : 'My Pitches'} />
+            <ClaimedPitchesPanel
+              pitches={claimedPitches}
+              currentSanityAuthorId={sanityAuthorId ?? undefined}
+              isEditorPlus={isEditorPlus}
+            />
+          </section>
+        )}
+
+        {/* ── Latest Brief ─────────────────────────────────────────────── */}
+        <section>
+          <SectionHeader label='Latest Brief' />
+          {latestBrief ? (
+            <BriefPanel
+            brief={latestBrief}
+            briefList={allBriefs ?? []}
+            currentSanityAuthorId={sanityAuthorId ?? undefined}
+            myPitchMap={myPitchMap}
+            authors={authors}
+            isEditorPlus={isEditorPlus}
+          />
+          ) : (
+            <div className='border border-slate-200 bg-white px-4 py-8 text-center dark:border-slate-700 dark:bg-slate-900'>
+              <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                No briefs posted yet
+              </p>
+              <p className='mt-1 text-xs text-slate-400'>
+                The AI agent will post briefs here once configured.
+              </p>
+            </div>
+          )}
         </section>
       </main>
     </div>

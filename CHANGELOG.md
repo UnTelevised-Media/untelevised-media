@@ -77,6 +77,53 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/lib/portal/__tests__/slug.test.ts` — 7 unit tests for slug-generation logic (spaces→hyphens, lowercase, special-char stripping, collapse, 100-char truncation)
   - All portal pages use responsive grid/flex layouts; PortalNav collapses correctly on mobile (links hidden below sm, UserButton always visible); dashboard toolbar wraps on narrow viewports; editor form uses `sm:grid-cols-2` for metadata fields
 
+- **Author Portal — Pitch Workflow (#44)**
+
+  *Schemas & data*
+  - `src/models/schema/claimedPitch.ts` — new `claimedPitch` document type: headline, urgency, beat, angle, sourceSuggestions, reference links, notes (Portable Text), status (`claimed` | `in_progress` | `published` | `abandoned`), author reference, assignedBy, briefId/briefTitle/storyKey provenance, claimedAt timestamp, and a weak `linkedArticle` reference back to the article once written
+  - `src/models/schema/brief.ts` — added top-level `storyPasses[]` array (`{ _key, storyKey, authorId, passedAt }`) so pass decisions are per-user and don't affect the story's canonical status for other authors
+  - `src/models/schema/article.ts` — added `linkedPitch` weak reference field (`type: 'reference', to: claimedPitch`)
+  - `src/models/schema/index.ts` — registered `brief` and `claimedPitch` schemas
+
+  *Server actions*
+  - `src/lib/portal/pitch-actions.ts` — `updatePitchDetails(pitchId, { headline, angle, sourceSuggestions, links, linkedArticleId })`: ownership-checked patch with unset for null linkedArticle; `savePitchNotes(pitchId, notesText)`: converts plain text → Portable Text blocks via `textToBlocks()`
+  - `src/lib/portal/brief-actions.ts` — `fetchBriefById(briefId)` server action: authenticates internally, fetches brief + current user's claimed pitches in parallel, builds `myPitchMap: Record<storyKey, pitchId>`, returns serializable data for client-side BriefPanel navigation
+  - `src/lib/portal/article-actions.ts` — `createArticle` now accepts optional `linkedPitchId`; includes `linkedPitch` reference on the new article doc and best-effort patches `claimedPitch.linkedArticle` for bidirectional linking
+
+  *GROQ queries (`src/lib/portal/queries.ts`)*
+  - `queryPortalBriefById` — full brief projection by `_id` (mirrors `queryPortalLatestBrief`)
+  - `queryPortalClaimedPitchById` — full claimedPitch projection including notes, links, linked article, author, assignedBy
+  - `queryPortalAllClaimedPitches` — all claimedPitch docs ordered by `claimedAt desc`; includes author dereference and linkedArticle
+  - `queryPortalMyClaimedPitches` — pitches where `author._ref == $authorId`; builds myPitchMap on dashboard
+  - `queryPortalArticlesTitles` — lightweight `{ _id, title, authorId }` list for linked-article dropdowns
+  - `queryPortalArticleById` — updated projection to include `linkedPitch` (notes, headline, urgency, beat, angle, sourceSuggestions, links)
+
+  *New components*
+  - `src/components/portal/PitchNotesEditor.tsx` — client textarea with char count; calls `savePitchNotes` server action; Sonner toast feedback
+  - `src/components/portal/PitchDetailsEditor.tsx` — read-only-first sidebar card; click Edit to open form; edits headline, angle, source suggestions, reference links (add/remove label+url), and linked article (dropdown); Cancel reverts; Save calls `updatePitchDetails`; always renders sources and links sections with "None — click Edit to add" empty states
+  - `src/components/portal/PitchQuickViewModal.tsx` — fixed right-side slide-in panel (not a center dialog); opened from article editor floating button; shows urgency/beat (read-only), editable headline/angle/sources/links/notes; ESC + backdrop dismiss; "Full Page" link to `/portal/pitch/[id]`; saves via `Promise.all([updatePitchDetails, savePitchNotes])`
+  - `src/components/portal/ClaimedPitchCard.tsx` — card for the dashboard claimed-pitches section: urgency + beat + status badges, optional author name/date (editor view), brief title, Open Pitch and Start Article/Edit Article actions
+  - `src/components/portal/ClaimedPitchesPanel.tsx` — client grid with Mine/All/Others filter pills (editor-only); sorts by status (`in_progress` → `claimed` → `published`) then urgency (breaking first); count label
+
+  *Updated components*
+  - `src/components/portal/BriefPanel.tsx` — full rewrite:
+    - `< >` navigation buttons in header cycle through `briefList` using `fetchBriefById`; `loadedBrief` / `loadedPitchMap` local state updated on navigate
+    - Per-user pass: `storyPasses[]` on the brief document; `myPassedKeys` Set computed client-side; passed cards hidden under "Show N hidden" toggle with strikethrough styling; "2nd Thought" button to restore
+    - Optimistic pass/unpass: clicking Pass/2nd Thought updates `loadedBrief.storyPasses` state immediately (card moves instantly); reverts on server action failure with Sonner toast
+    - Card sort order: breaking unclaimed → unclaimed → claimed/in_progress → published; breaking stories float to top within each bucket via secondary `URGENCY_ORDER` sort
+    - Rich unclaimed cards: Claim Story + Pass + editor Assign dropdown
+    - Rich claimed/in_progress cards: Open Pitch → `/portal/pitch/[id]`, Start Article, Mark In Progress, Release
+    - Editor controls on others' claimed stories: Release / Reassign
+  - `src/components/portal/ArticleEditorForm.tsx` — floating circular pitch-notes button (fixed bottom-right, `bg-untele`) renders when `linkedPitch` prop is present; opens `PitchQuickViewModal`; accepts `linkedPitchId` prop passed through to `createArticle`; wrapped return in React fragment to fix TS1005/TS1128 sibling-element error
+
+  *New pages*
+  - `src/app/(portal)/portal/pitch/[id]/page.tsx` — pitch detail page: left column = headline + urgency/beat/status badges + `PitchNotesEditor`; right sidebar = Quick Actions (Start Article, Edit Article if linked, ← Dashboard), `PitchDetailsEditor`, Provenance (read-only brief/author/assignedBy); non-owners get `notFound()`
+
+  *Updated pages*
+  - `src/app/(portal)/portal/page.tsx` — dashboard fetches `allBriefs`, `myPitchMap`, `claimedPitches`; renders `ClaimedPitchesPanel` between Quick Links and Brief panel; passes `briefList`, `myPitchMap`, `authors`, `isEditorPlus` to `BriefPanel`
+  - `src/app/(portal)/portal/articles/new/page.tsx` — accepts `?pitchId=` search param; fetches linked pitch; pre-fills article title from pitch headline; shows beat subtitle; passes `linkedPitch` + `linkedPitchId` to `ArticleEditorForm`
+  - `src/app/(portal)/portal/articles/[id]/edit/page.tsx` — updated `PortalArticleFull` type to include `linkedPitch`; passes it to `ArticleEditorForm`
+
 ### Fixed
 
 - **Author Portal — post-audit bug fixes (#44)**

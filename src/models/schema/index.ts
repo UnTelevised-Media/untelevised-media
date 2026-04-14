@@ -2,6 +2,8 @@
 
 // Content schemas
 import article from './article';
+import brief from './brief';
+import claimedPitch from './claimedPitch';
 import author from './author';
 import factCheck from './factCheck';
 import blockContent from './blockContent';
@@ -58,6 +60,8 @@ import youtubeEmbed from './youtube';
 export const schemaTypes = [
   // Content schemas
   article,
+  brief,
+  claimedPitch,
   author,
   blockContent,
   category,
@@ -118,6 +122,8 @@ export const schemaTypes = [
 export {
   // Content schemas
   article,
+  brief,
+  claimedPitch,
   author,
   blockContent,
   category,

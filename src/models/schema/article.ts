@@ -220,6 +220,15 @@ export default defineType({
         }),
       ],
     }),
+    // Pitch linkage
+    defineField({
+      name: 'linkedPitch',
+      title: 'Linked Pitch',
+      type: 'reference',
+      to: [{ type: 'claimedPitch' }],
+      weak: true,
+      description: 'The claimed pitch from the newsroom brief that led to this article.',
+    }),
     // Comments
     defineField({
       name: 'allowComments',
