@@ -118,7 +118,7 @@ export default async function PortalDashboardPage() {
   // Fetch article data
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
-  type ArticleRow = { status?: string | null; needsReview?: boolean; deletionRequest?: unknown };
+  type ArticleRow = { _id: string; needsReview?: boolean; deletionRequest?: unknown };
 
   const [briefRes, allBriefsRes] = await Promise.all([
     portalSanityFetch({ query: queryPortalLatestBrief }),
@@ -155,15 +155,15 @@ export default async function PortalDashboardPage() {
   const authors = ((authorsRes?.data ?? []) as PortalAuthor[]);
   const claimedPitches = ((claimedPitchesRes?.data ?? []) as ClaimedPitchSummary[]);
 
-  // My article stats
-  const myPublished = myArticles.filter((a) => a.status === 'published').length;
-  const myInReview = myArticles.filter((a) => a.status !== 'published' && (a.needsReview || !!a.deletionRequest)).length;
-  const myDrafts = myArticles.filter((a) => a.status !== 'published' && !a.needsReview && !a.deletionRequest).length;
+  // My article stats — "drafts." prefix is the authoritative published/draft signal
+  const myPublished = myArticles.filter((a) => !a._id.startsWith('drafts.')).length;
+  const myInReview = myArticles.filter((a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)).length;
+  const myDrafts = myArticles.filter((a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest).length;
 
   // Editor-wide article stats
-  const allPublished = allArticles.filter((a) => a.status === 'published').length;
-  const allInReview = allArticles.filter((a) => a.status !== 'published' && (a.needsReview || !!a.deletionRequest)).length;
-  const allDrafts = allArticles.filter((a) => a.status !== 'published' && !a.needsReview && !a.deletionRequest).length;
+  const allPublished = allArticles.filter((a) => !a._id.startsWith('drafts.')).length;
+  const allInReview = allArticles.filter((a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)).length;
+  const allDrafts = allArticles.filter((a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest).length;
 
   // Inbox counts (editor+ only)
   let contactCount = 0;

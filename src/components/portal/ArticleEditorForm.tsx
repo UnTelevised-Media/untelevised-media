@@ -204,7 +204,8 @@ export default function ArticleEditorForm({
 
   // Autosave indicator
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved' | 'idle'>('idle');
-  const isAlreadyPublished = initialData?.status === 'published';
+  // A document without the "drafts." prefix in its _id is live on the site.
+  const isAlreadyPublished = !!initialData?._id && !initialData._id.startsWith('drafts.');
   const isDirtyRef = useRef(false);
 
   // Form

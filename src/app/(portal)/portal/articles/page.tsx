@@ -35,9 +35,9 @@ export default async function PortalArticlesPage() {
     }
   }
 
-  const publishedCount = articles.filter((a) => a.status === 'published').length;
-  const reviewCount = articles.filter((a) => a.status !== 'published' && (a.needsReview || !!a.deletionRequest)).length;
-  const draftCount = articles.filter((a) => a.status !== 'published' && !a.needsReview && !a.deletionRequest).length;
+  const publishedCount = articles.filter((a) => !a._id.startsWith('drafts.')).length;
+  const reviewCount = articles.filter((a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)).length;
+  const draftCount = articles.filter((a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest).length;
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>

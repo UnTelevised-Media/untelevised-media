@@ -95,16 +95,18 @@ interface Props {
 // Helpers
 // ---------------------------------------------------------------------------
 
+// In previewDrafts perspective, unpublished docs always have a "drafts." prefix
+// regardless of what the status field says (e.g. unpublishing retains status:'published').
 function isPublished(a: PortalArticle) {
-  return a.status === 'published';
+  return !a._id.startsWith('drafts.');
 }
 
 function isInReview(a: PortalArticle) {
-  return (a.needsReview || !!a.deletionRequest) && !isPublished(a);
+  return !isPublished(a) && (a.needsReview || !!a.deletionRequest);
 }
 
 function isDraft(a: PortalArticle) {
-  return !isPublished(a) && !isInReview(a);
+  return !isPublished(a) && !a.needsReview && !a.deletionRequest;
 }
 
 // ---------------------------------------------------------------------------
