@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation';
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalClient } from '@/lib/portal/fetch';
+import { portalFetch } from '@/lib/portal/live';
 import PortalNav from '@/components/portal/PortalNav';
 import SourceForm from '@/components/portal/SourceForm';
 
@@ -29,7 +29,7 @@ export default async function EditSourcePage({
   const { role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
 
-  const source = await portalClient.fetch<SourceDoc | null>(
+  const source = await portalFetch<SourceDoc | null>(
     `*[_type == "source" && _id == $id][0]{ _id, label, type, url, description, isAnonymous }`,
     { id },
   );

@@ -2,7 +2,7 @@
 // Contact form submissions inbox — editor+ only.
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalClient } from '@/lib/portal/fetch';
+import { portalFetch } from '@/lib/portal/live';
 import { queryPortalContactSubmissions } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { ContactTable, type ContactSubmission } from '@/components/portal/ContactTable';
@@ -18,7 +18,7 @@ export default async function ContactPage() {
   const isEditorPlus = hasRole(role, 'editor');
   if (!isEditorPlus) redirect('/portal/articles');
 
-  const submissions = await portalClient.fetch<ContactSubmission[]>(queryPortalContactSubmissions) ?? [];
+  const submissions = await portalFetch<ContactSubmission[]>(queryPortalContactSubmissions) ?? [];
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>

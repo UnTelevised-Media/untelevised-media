@@ -4,7 +4,7 @@
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalClient } from '@/lib/portal/fetch';
+import { portalFetch } from '@/lib/portal/live';
 import {
   queryPortalArticlesByAuthor,
   queryPortalAllArticles,
@@ -28,12 +28,10 @@ export default async function PortalArticlesPage() {
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
   if (isEditorPlus) {
-    articles = await portalClient.fetch<PortalArticle[]>(queryPortalAllArticles);
+    articles = await portalFetch<PortalArticle[]>(queryPortalAllArticles);
   } else {
     if (sanityAuthorId) {
-      articles = await portalClient.fetch<PortalArticle[]>(queryPortalArticlesByAuthor, {
-        sanityAuthorId,
-      });
+      articles = await portalFetch<PortalArticle[]>(queryPortalArticlesByAuthor, { sanityAuthorId });
     }
   }
 

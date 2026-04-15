@@ -3,7 +3,7 @@
 // (editors/admins see all sources).
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalClient } from '@/lib/portal/fetch';
+import { portalFetch } from '@/lib/portal/live';
 import { queryPortalAllSources } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import SourceLibrary from '@/components/portal/SourceLibrary';
@@ -29,7 +29,7 @@ export default async function SourcesPage() {
   const { role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
 
-  const sources = await portalClient.fetch<PortalSource[]>(queryPortalAllSources);
+  const sources = await portalFetch<PortalSource[]>(queryPortalAllSources);
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>

@@ -3,7 +3,7 @@
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalClient } from '@/lib/portal/fetch';
+import { portalFetch } from '@/lib/portal/live';
 import { queryPortalMyProfile } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import AuthorProfileForm from '@/components/portal/AuthorProfileForm';
@@ -50,7 +50,10 @@ export default async function PortalProfilePage() {
 }
 
 async function ProfileLoader({ sanityAuthorId }: { sanityAuthorId: string }) {
-  const profile = await portalClient.fetch(queryPortalMyProfile, { id: sanityAuthorId });
+  const profile = await portalFetch<Parameters<typeof AuthorProfileForm>[0]['profile'] | null>(
+    queryPortalMyProfile,
+    { id: sanityAuthorId },
+  );
 
   if (!profile) {
     return (

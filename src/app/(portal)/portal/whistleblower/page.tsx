@@ -2,7 +2,7 @@
 // Whistleblower submissions — editor+ only.
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalClient } from '@/lib/portal/fetch';
+import { portalFetch } from '@/lib/portal/live';
 import { queryPortalWhistleblowers } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { WhistleblowerTable, type WhistleblowerSubmission } from '@/components/portal/WhistleblowerTable';
@@ -18,7 +18,7 @@ export default async function WhistleblowerPage() {
   const isEditorPlus = hasRole(role, 'editor');
   if (!isEditorPlus) redirect('/portal/articles');
 
-  const submissions = await portalClient.fetch<WhistleblowerSubmission[]>(queryPortalWhistleblowers) ?? [];
+  const submissions = await portalFetch<WhistleblowerSubmission[]>(queryPortalWhistleblowers) ?? [];
 
   const newCount = submissions.filter((s) => (s.status ?? 'new') === 'new').length;
   const criticalCount = submissions.filter((s) => s.severity === 'critical').length;

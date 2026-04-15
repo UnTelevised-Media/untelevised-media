@@ -3,7 +3,7 @@
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalClient } from '@/lib/portal/fetch';
+import { portalFetch } from '@/lib/portal/live';
 import {
   queryPortalCategories,
   queryPortalAuthors,
@@ -31,11 +31,11 @@ export default async function NewArticlePage({
   const isEditorPlus = hasRole(role, 'editor');
 
   const [categories, authors, sanityAuthorId, pitchRaw] = await Promise.all([
-    portalClient.fetch<Category[]>(queryPortalCategories),
-    isEditorPlus ? portalClient.fetch<Author[]>(queryPortalAuthors) : Promise.resolve([]),
+    portalFetch<Category[]>(queryPortalCategories),
+    isEditorPlus ? portalFetch<Author[]>(queryPortalAuthors) : Promise.resolve([]),
     getSanityAuthorIdForCurrentUser(clerkUserId),
     pitchId
-      ? portalClient.fetch<PitchForModal | null>(queryPortalClaimedPitchById, { id: pitchId })
+      ? portalFetch<PitchForModal | null>(queryPortalClaimedPitchById, { id: pitchId })
       : Promise.resolve(null),
   ]);
 

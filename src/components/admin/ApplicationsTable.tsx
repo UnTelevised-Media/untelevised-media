@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
 
-interface JobApplication {
+export interface JobApplication {
   _id: string;
   firstName: string;
   lastName: string;

@@ -2,7 +2,7 @@
 // Newsletter subscriber list — editor+ only.
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalClient } from '@/lib/portal/fetch';
+import { portalFetch } from '@/lib/portal/live';
 import { queryPortalNewsletterSubscribers } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { SubscribersList, type Subscriber } from '@/components/portal/SubscribersList';
@@ -18,7 +18,7 @@ export default async function SubscribersPage() {
   const isEditorPlus = hasRole(role, 'editor');
   if (!isEditorPlus) redirect('/portal/articles');
 
-  const subscribers = await portalClient.fetch<Subscriber[]>(queryPortalNewsletterSubscribers) ?? [];
+  const subscribers = await portalFetch<Subscriber[]>(queryPortalNewsletterSubscribers) ?? [];
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>

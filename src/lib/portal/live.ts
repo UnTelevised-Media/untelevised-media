@@ -25,3 +25,14 @@ export const { sanityFetch: portalSanityFetch, SanityLive: PortalSanityLive } = 
   serverToken,
   browserToken: serverToken,
 });
+
+/**
+ * Typed convenience wrapper around portalSanityFetch.
+ * Calling portalSanityFetch inside this function still registers the query
+ * with the live layer — React re-renders the calling RSC on any relevant
+ * Sanity mutation automatically.
+ */
+export async function portalFetch<T>(query: string, params?: Record<string, unknown>): Promise<T> {
+  const result = await portalSanityFetch({ query, ...(params ? { params } : {}) });
+  return result.data as T;
+}
