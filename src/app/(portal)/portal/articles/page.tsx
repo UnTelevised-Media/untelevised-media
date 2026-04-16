@@ -35,9 +35,14 @@ export default async function PortalArticlesPage() {
     }
   }
 
-  const publishedCount = articles.filter((a) => !a._id.startsWith('drafts.')).length;
-  const reviewCount = articles.filter((a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)).length;
-  const draftCount = articles.filter((a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest).length;
+  // Under previewDrafts perspective, _id is always the non-prefixed form.
+  // _originalId is the actual Sanity document ID and preserves the "drafts." prefix.
+  const isDraftDoc = (a: PortalArticle) => (a._originalId ?? a._id).startsWith('drafts.');
+  const publishedCount = articles.filter((a) => !isDraftDoc(a)).length;
+  const reviewCount = articles.filter((a) => isDraftDoc(a) && (a.needsReview || !!a.deletionRequest)).length;
+  // Unpublished = draft _originalId + publishedAt set (was previously live, now taken down in Studio)
+  const unpublishedCount = articles.filter((a) => isDraftDoc(a) && !a.needsReview && !a.deletionRequest && !!a.publishedAt).length;
+  const draftCount = articles.filter((a) => isDraftDoc(a) && !a.needsReview && !a.deletionRequest).length;
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
@@ -52,6 +57,9 @@ export default async function PortalArticlesPage() {
             </h1>
             <p className='mt-1 text-sm text-slate-500 dark:text-slate-400'>
               {publishedCount} published &nbsp;·&nbsp; {reviewCount} in review &nbsp;·&nbsp; {draftCount} draft
+              {unpublishedCount > 0 && (
+                <>&nbsp;·&nbsp; <span className='text-amber-600 dark:text-amber-400'>{unpublishedCount} unpublished</span></>
+              )}
             </p>
           </div>
           <Link

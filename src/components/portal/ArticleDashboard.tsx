@@ -55,6 +55,11 @@ import { toast } from 'sonner';
 
 export interface PortalArticle {
   _id: string;
+  // Sanity injects _originalId under previewDrafts perspective — it is the
+  // *actual* stored document ID ("drafts.xxx" for any draft, "xxx" for
+  // published-only).  _id is always the non-prefixed form.  Use _originalId
+  // for draft detection and for all write-client mutations.
+  _originalId?: string;
   _createdAt: string;
   _updatedAt: string;
   title: string;
@@ -95,14 +100,31 @@ interface Props {
 // Helpers
 // ---------------------------------------------------------------------------
 
-// In previewDrafts perspective, unpublished docs always have a "drafts." prefix
-// regardless of what the status field says (e.g. unpublishing retains status:'published').
+// Under the previewDrafts perspective Sanity normalises _id to the
+// non-prefixed (published) form for EVERY document — including draft-only
+// ones.  _originalId is the raw stored ID: "drafts.xxx" when a draft was
+// served, "xxx" when only a published document exists.
+// We therefore use _originalId (falling back to _id for safety) for all
+// draft-detection checks, and pass _originalId to every write-client
+// mutation so it always targets the correct Sanity document.
+function originalId(a: PortalArticle): string {
+  return a._originalId ?? a._id;
+}
+
 function isPublished(a: PortalArticle) {
-  return !a._id.startsWith('drafts.');
+  return !originalId(a).startsWith('drafts.');
 }
 
 function isInReview(a: PortalArticle) {
   return !isPublished(a) && (a.needsReview || !!a.deletionRequest);
+}
+
+// Previously-published articles that were unpublished in Studio: Sanity deletes the
+// published document but does NOT clear the publishedAt schema field. The draft retains
+// its drafts. prefix _id AND its publishedAt value — that combination is the only reliable
+// signal that this was formerly live content, not a brand-new draft.
+function wasUnpublished(a: PortalArticle) {
+  return !isPublished(a) && !a.needsReview && !a.deletionRequest && !!a.publishedAt;
 }
 
 function isDraft(a: PortalArticle) {
@@ -139,6 +161,13 @@ function StatusBadge({ article }: { article: PortalArticle }) {
     return (
       <Badge className='bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'>
         In Review
+      </Badge>
+    );
+  }
+  if (wasUnpublished(article)) {
+    return (
+      <Badge className='bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300'>
+        Unpublished
       </Badge>
     );
   }
@@ -232,7 +261,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
 
   function confirmDelete() {
     if (!deleteTarget) return;
-    const id = deleteTarget._id;
+    const id = originalId(deleteTarget);
     const approvingRequest = !!deleteTarget.deletionRequest;
     setDeleteTarget(null);
     startTransition(async () => {
@@ -250,7 +279,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
 
   function confirmRemovalRequest() {
     if (!removalTarget || removalReason.trim().length < 10) return;
-    const id = removalTarget._id;
+    const id = originalId(removalTarget);
     const reason = removalReason.trim();
     setRemovalTarget(null);
     setRemovalReason('');
@@ -267,7 +296,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
 
   function handleDenyDeletion(article: PortalArticle) {
     startTransition(async () => {
-      const result = await denyArticleDeletion(article._id);
+      const result = await denyArticleDeletion(originalId(article));
       if (result.success) {
         toast.success('Removal request denied — article restored.');
         router.refresh();
@@ -279,7 +308,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
 
   function confirmRetraction() {
     if (!retractionTarget || !retractionData.issuedAt || !retractionData.detail.trim()) return;
-    const id = retractionTarget._id;
+    const id = originalId(retractionTarget);
     const data = { ...retractionData };
     setRetractionTarget(null);
     setRetractionData({ issuedAt: new Date().toISOString().slice(0, 16), summary: '', detail: '' });

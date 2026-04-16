@@ -10,11 +10,16 @@ import { groq } from 'next-sanity';
 /** All fields needed for the dashboard article card/row. */
 const ARTICLE_LIST_PROJECTION = groq`{
   _id,
+  // _originalId is injected by Sanity when perspective is 'previewDrafts'.
+  // It holds the *actual* stored document ID — "drafts.xxx" when a draft was
+  // served, or "xxx" when only a published document exists.  We use it for
+  // all draft-detection logic and for write-client mutations so they always
+  // target the correct Sanity document.
+  _originalId,
   _createdAt,
   _updatedAt,
   title,
   slug,
-  status,
   featured,
   breakingNews,
   needsReview,
@@ -27,7 +32,6 @@ const ARTICLE_LIST_PROJECTION = groq`{
   categories[]->{ _id, title, slug },
   tags,
   keywords,
-  mainImage{ asset->{ url }, alt },
   deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },
   "correctionType": correction.type,
   "reviewedById": reviewedBy._ref
@@ -54,6 +58,7 @@ export const queryPortalAllArticles = groq`
 export const queryPortalArticleById = groq`
   *[_type == "article" && _id == $id][0]{
     _id,
+    _originalId,
     _createdAt,
     _updatedAt,
     title,

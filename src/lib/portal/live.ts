@@ -33,6 +33,10 @@ export const { sanityFetch: portalSanityFetch, SanityLive: PortalSanityLive } = 
  * Sanity mutation automatically.
  */
 export async function portalFetch<T>(query: string, params?: Record<string, unknown>): Promise<T> {
-  const result = await portalSanityFetch({ query, ...(params ? { params } : {}) });
+  const result = await portalSanityFetch({
+    query,
+    ...(params ? { params } : {}),
+    perspective: 'previewDrafts',
+  });
   return result.data as T;
 }
