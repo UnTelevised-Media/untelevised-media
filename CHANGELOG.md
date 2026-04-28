@@ -39,6 +39,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/app/(user)/shop/book/[slug]/page.tsx` — full book detail page with `generateStaticParams`, `generateMetadata`, and JSON-LD `Book` + `Offer` structured data; cover image, Portable Text description, format selector rows (with inventory/low-stock badges, compare-at price), `AddToCartButton`, book details section, author bio card
   - `src/components/shop/GenreFilter.tsx` — client-side genre filter tab bar using URL searchParams
   - `src/components/shop/AddToCartButton.tsx` — client component; adds to Zustand cart with 2-second "Added ✓" feedback
+- **Bookstore — Cart UI (#46, Phase 3 Steps 3.4–3.5)**
+  - `src/components/shop/MiniCart.tsx` — header mini-cart icon with item-count badge (bag SVG icon, badge hidden when empty)
+  - `src/app/(user)/shop/cart/page.tsx` — full cart page; quantity increment/decrement controls; remove; order summary sidebar with subtotal; checkout button POSTs to `/api/shop/checkout` and redirects to Stripe-hosted checkout on success
 
 ---
 

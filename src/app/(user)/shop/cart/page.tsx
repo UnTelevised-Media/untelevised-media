@@ -1,0 +1,205 @@
+'use client';
+// src/app/(user)/shop/cart/page.tsx
+// Full cart page — item list, quantity controls, subtotal, checkout button.
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useCart } from '@/lib/shop/cart';
+import type { CheckoutPayload } from '@/lib/shop/types';
+
+function CartQuantityControl({
+  quantity,
+  onDecrement,
+  onIncrement,
+  onRemove,
+}: {
+  quantity: number;
+  onDecrement: () => void;
+  onIncrement: () => void;
+  onRemove: () => void;
+}) {
+  return (
+    <div className='flex items-center gap-2'>
+      <button
+        onClick={onDecrement}
+        className='flex h-6 w-6 items-center justify-center border border-slate-300 text-xs hover:border-untele hover:text-untele dark:border-slate-600'
+      >
+        −
+      </button>
+      <span className='w-6 text-center text-sm font-bold'>{quantity}</span>
+      <button
+        onClick={onIncrement}
+        className='flex h-6 w-6 items-center justify-center border border-slate-300 text-xs hover:border-untele hover:text-untele dark:border-slate-600'
+      >
+        +
+      </button>
+      <button
+        onClick={onRemove}
+        className='ml-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-untele'
+      >
+        Remove
+      </button>
+    </div>
+  );
+}
+
+export default function CartPage() {
+  const { items, removeItem, updateQuantity, getTotal, clearCart } = useCart();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const total = getTotal();
+
+  const handleCheckout = async () => {
+    if (items.length === 0) return;
+
+    setLoading(true);
+    setError(null);
+
+    const payload: CheckoutPayload = {
+      items: items.map((item) => ({
+        stripePriceId: item.stripePriceId,
+        quantity: item.quantity,
+        sanityBookId: item.sanityBookId,
+        formatType: item.formatType,
+        formatKey: item.formatKey,
+        title: item.title,
+        isDigital: item.formatType === 'digital',
+      })),
+    };
+
+    try {
+      const res = await fetch('/api/shop/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json()) as { url?: string; error?: string };
+      if (!res.ok || !data.url) {
+        setError(data.error ?? 'Failed to start checkout');
+        return;
+      }
+      clearCart();
+      window.location.href = data.url;
+    } catch {
+      setError('Network error — please try again');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <main className='mx-auto max-w-4xl px-4 py-8 sm:px-6'>
+      {/* Page header */}
+      <div className='mb-6 flex items-center gap-3'>
+        <div className='bg-untele px-3 py-1'>
+          <span className='text-sm font-black uppercase tracking-widest text-white'>Cart</span>
+        </div>
+        <div className='h-px flex-1 bg-slate-200 dark:bg-slate-800' />
+        <Link
+          href='/shop'
+          className='text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-untele'
+        >
+          ← Continue Shopping
+        </Link>
+      </div>
+
+      {items.length === 0 ? (
+        <div className='border border-slate-200 bg-white px-4 py-16 text-center dark:border-slate-700 dark:bg-slate-900'>
+          <p className='mb-4 text-xs font-bold uppercase tracking-widest text-slate-400'>
+            Your cart is empty
+          </p>
+          <Link
+            href='/shop'
+            className='inline-block bg-untele px-6 py-3 text-xs font-black uppercase tracking-widest text-white hover:opacity-90'
+          >
+            Browse Books
+          </Link>
+        </div>
+      ) : (
+        <div className='flex flex-col gap-4 lg:flex-row lg:gap-8'>
+          {/* Item list */}
+          <div className='flex-1'>
+            <div className='divide-y divide-slate-100 border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-700 dark:bg-slate-900'>
+              {items.map((item) => (
+                <div key={`${item.sanityBookId}-${item.formatKey}`} className='flex gap-4 p-4'>
+                  <div className='flex-1'>
+                    <p className='text-sm font-black text-slate-900 dark:text-white'>
+                      {item.title}
+                    </p>
+                    <p className='text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+                      {item.formatType === 'physical' && 'Physical'}
+                      {item.formatType === 'digital' && 'Digital'}
+                      {item.formatType === 'bundle' && 'Bundle'}
+                    </p>
+                    <div className='mt-2'>
+                      <CartQuantityControl
+                        quantity={item.quantity}
+                        onDecrement={() =>
+                          updateQuantity(item.sanityBookId, item.formatKey, item.quantity - 1)
+                        }
+                        onIncrement={() =>
+                          updateQuantity(item.sanityBookId, item.formatKey, item.quantity + 1)
+                        }
+                        onRemove={() => removeItem(item.sanityBookId, item.formatKey)}
+                      />
+                    </div>
+                  </div>
+                  <div className='text-right'>
+                    <p className='text-sm font-black text-untele'>
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </p>
+                    {item.quantity > 1 && (
+                      <p className='text-[10px] text-slate-400'>
+                        ${item.price.toFixed(2)} each
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Order summary */}
+          <div className='w-full lg:w-72'>
+            <div className='border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900'>
+              <div className='mb-3 flex items-center gap-3'>
+                <div className='bg-untele px-2 py-0.5'>
+                  <span className='text-[10px] font-black uppercase tracking-widest text-white'>
+                    Summary
+                  </span>
+                </div>
+              </div>
+
+              <div className='mb-4 flex justify-between border-b border-slate-100 pb-3 dark:border-slate-800'>
+                <span className='text-sm text-slate-600 dark:text-slate-400'>Subtotal</span>
+                <span className='text-sm font-black text-slate-900 dark:text-white'>
+                  ${total.toFixed(2)}
+                </span>
+              </div>
+              <p className='mb-4 text-[10px] text-slate-400'>
+                Shipping and taxes calculated at checkout.
+              </p>
+
+              {error && (
+                <p className='mb-3 border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700'>
+                  {error}
+                </p>
+              )}
+
+              <button
+                onClick={handleCheckout}
+                disabled={loading}
+                className='w-full bg-untele py-3 text-xs font-black uppercase tracking-widest text-white hover:opacity-90 disabled:opacity-50'
+              >
+                {loading ? 'Redirecting...' : 'Checkout'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
+  );
+}
