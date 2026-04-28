@@ -27,6 +27,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/lib/auth/roles-utils.ts` — `PortalRole` type (`admin | editor | author | sales`); `getRoleFromMeta` extracts role from Clerk `publicMetadata`; `hasRole` enforces hierarchy (admin > editor > author; sales is orders-only peer); `isSalesOnly` predicate; backwards-compatible with legacy `admin: true` flag
   - `src/lib/auth/roles.ts` — server helpers: `requireRole`, `requireAdmin`, `requireEditor`, `requireAuthor`, `requireAnyPortalRole`, `isAdmin`, `isEditor`, `isAuthor`, `isSales`; all re-verify fresh Clerk data on every call
   - `src/middleware.ts` — portal route protection: unauthenticated → `/sign-in`; no-role → `/`; `sales` role redirected to `/portal/orders` if accessing any other portal path
+- **Bookstore — Stripe Checkout API (#46, Phase 2 Step 2.1)**
+  - `src/app/api/shop/checkout/route.ts` — `POST /api/shop/checkout`; accepts `CheckoutPayload` (items with `stripePriceId`, `quantity`, `sanityBookId`, `formatType`); creates Stripe Checkout Session with collected shipping address for physical items; stores `items_json` + `clerk_user_id` in session metadata; returns `{ url }` for client redirect
 
 ---
 
