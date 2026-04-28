@@ -159,41 +159,25 @@ export default defineType({
       type: 'object',
       title: 'Table',
       fields: [
-        defineField({
+        {
           name: 'rows',
           type: 'array',
           title: 'Rows',
-          description: 'Table data organized by rows',
           of: [
             {
               type: 'object',
               name: 'row',
               fields: [
-                defineField({
+                {
                   name: 'cells',
                   type: 'array',
                   title: 'Cells',
-                  description: 'Individual cell data for this row',
-                  of: [
-                    {
-                      type: 'object',
-                      name: 'tableCell',
-                      title: 'Cell',
-                      fields: [
-                        defineField({
-                          name: 'content',
-                          title: 'Content',
-                          type: 'array',
-                          of: [{ type: 'block' }],
-                        }),
-                      ],
-                    },
-                  ],
-                }),
+                  of: [{ type: 'string' }],
+                },
               ],
             },
           ],
-        }),
+        },
       ],
       preview: {
         select: {
@@ -215,6 +199,12 @@ export default defineType({
     }),
     defineArrayMember({
       type: 'instagramEmbed',
+    }),
+    defineArrayMember({
+      type: 'facebookEmbed',
+    }),
+    defineArrayMember({
+      type: 'tiktokEmbed',
     }),
     defineArrayMember({
       name: 'factCheckEmbed',

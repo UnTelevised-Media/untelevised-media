@@ -6,72 +6,146 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [Unreleased]
+## [3.0.0] — 2026-04-28
+
+### Summary
+Major release. Full Author Portal with BlockNote WYSIWYG editor, role-based access control, pitch workflow, and Sanity Live real-time updates (#44). Coral Comments with Clerk SSO (#42). Algolia full-text search with faceted filters (#21). Tag pages (#8). Expanded embed support: Facebook, TikTok, and Instagram hydration fix. Rendering, analytics, and image fixes throughout.
 
 ### Added
+
+- **Author Portal — Clerk Role-Based Access Control (#44, Phase 1)**
+  - `src/lib/auth/roles-utils.ts` — pure, framework-agnostic utilities: `getRoleFromMeta(meta)` extracts a `PortalRole` (`'admin' | 'editor' | 'author'`) from Clerk `publicMetadata`; `hasRole(role, required)` enforces the hierarchy `admin > editor > author`; backwards-compatible with legacy `publicMetadata.admin === true` flag
+  - `src/lib/auth/roles.ts` — server-only helpers: `getRoleFromUser(user)`, `getCurrentRole()`, `getCurrentUserWithRole()`, `requireRole(role)` (redirects to sign-in or home on failure), `requireAdmin()`, `requireEditor()`, `requireAuthor()`, `isAdmin()`, `isEditor()`, `isAuthor()`; roles are read from fresh Clerk API data, never from the JWT alone
+  - `src/middleware.ts` — updated to protect `/portal/**` and `/api/portal/**` routes; unauthenticated → `/sign-in`; no-role authenticated → `/`; admin check uses fresh `publicMetadata` from Clerk API on every request
+  - `src/app/api/admin/set-role/route.ts` — admin-only POST endpoint that writes `publicMetadata.role` to any target Clerk user; Zod-validated; re-verifies requester is admin on every call; role can only be set server-side
+  - `jest.config.ts` — root-level Jest config using `next/jest` (SWC transform); fixes missing config that caused Sanity ESM import errors in tests
+  - `src/lib/auth/__tests__/roles.test.ts` — 20 unit tests covering all `getRoleFromMeta` and `hasRole` scenarios
+
+- **Author Portal — Dashboard (#44, Phase 2)**
+  - `src/models/schema/article.ts` — added `featured`, `breakingNews`, `needsReview` fields
+  - `src/lib/portal/queries.ts` — `queryPortalArticlesByAuthor` (author-scoped), `queryPortalAllArticles` (editor/admin), `queryPortalArticleById`, `queryPortalCategories`, `queryPortalAuthors`, `queryPortalAllSources`; `clerkId` excluded from all projections
+  - `src/lib/portal/fetch.ts` — authenticated Sanity client for portal queries (read token, CDN off)
+  - `src/lib/portal/sanitize.ts` — `sanitizeText()` / `sanitizeHtml()` strip injection vectors from all inputs before Sanity writes; 10 unit tests
+  - `src/app/(portal)/layout.tsx` — portal route group with server-side `requireAuthor()` gate and Toaster
+  - `src/app/(portal)/portal/page.tsx` — dashboard root; redirects to `/portal/articles`
+  - `src/components/portal/PortalNav.tsx` — top nav with Articles/Sources links, back-to-site link, Clerk UserButton; active link uses `bg-untele`
+  - `src/components/portal/ArticleDashboard.tsx` — live search by title/tag/category; status filter (published/draft/in-review); sort by modified/created/title/status; table/card toggle; per-article action menu with delete confirmation; role-aware (editors see all articles + author column); empty state CTA; Sonner toasts
+  - Editor author filter toggle: All / Mine / Others / Reviewed
+
+- **Author Portal — Article Editor (#44, Phases 3–4)**
+  - **BlockNote** WYSIWYG editor (replaced Tiptap — better out-of-box UX; custom embed blocks are first-class BlockNote concepts)
+  - `src/lib/portal/blocknote-serializer.ts` — full bidirectional BlockNote JSON ↔ Sanity Portable Text: paragraphs, headings, blockquote, bullet/ordered lists, code blocks, table, image, divider, youtubeEmbed, twitterEmbed, instagramEmbed, facebookEmbed, tiktokEmbed; test suite for all round-trips
+  - `src/lib/portal/image-actions.ts` — server action to upload images to Sanity asset pipeline; validates JPEG/PNG/WebP/GIF/AVIF and 10 MB limit; requires author role
+  - `src/lib/portal/article-ownership.ts` — shared ownership verification helper; `import 'server-only'` guard
+  - `src/lib/portal/source-actions.ts` — `createSource`, `updateSource`, `deleteSource`, `fetchAllSources` server actions; sanitized, Zod-validated
+  - `src/lib/portal/article-actions.ts` — `createArticle`, `updateArticle`, `deleteArticle`, `submitArticleForReview`, `publishArticle`; all re-verify session and role; ownership enforced server-side; authors cannot publish or set featured/breaking; Zod-validated
+  - `src/components/portal/SourceSelectorModal.tsx` — search existing sources or inline-create without leaving the editor
+  - `src/components/portal/ArticleEditorForm.tsx` — full metadata form: title, slug (auto-generate + manual), excerpt, lead paragraph, BlockNote body, categories, author (editor+), tags, keywords, location, publish date/time, sources selector, featured/breaking (editor+), comments toggle, video embed (featured section with live preview), methodology note, related articles search, FAQs section, corrections system (correction/clarification/update/retraction), main image upload; sticky action bar with Save Draft / Submit for Review / Publish / Preview; autosave every 60s with Saving / Saved / Unsaved indicator; `beforeunload` leave-warning; `Ctrl+S` = Save Draft, `Ctrl+Shift+P` = Preview
+  - `src/app/(portal)/portal/articles/new/page.tsx` — fetches categories + authors in parallel; accepts `?pitchId=` to pre-fill from a claimed pitch
+  - `src/app/(portal)/portal/articles/[id]/edit/page.tsx` — verifies author ownership; `notFound()` for unauthorized or missing articles
+  - `src/lib/portal/__tests__/slug.test.ts` — 7 unit tests for slug generation
+
+- **Author Portal — Source Library (#44, Phase 5)**
+  - `src/app/(portal)/portal/sources/page.tsx` — source library with `SourceLibrary` client component
+  - `src/app/(portal)/portal/sources/new/page.tsx` and `[id]/edit/page.tsx` — create/edit source forms
+  - `src/components/portal/SourceLibrary.tsx` — searchable list filtered by title/URL/type; linked article count per source; delete confirmation; empty state CTA
+  - `src/components/portal/SourceForm.tsx` — label, type (dropdown), URL, notes, anonymous flag; Zod-validated; Sonner toasts; redirects to `/portal/sources` on success
+
+- **Author Portal — Security Hardening (#44, Phase 6)**
+  - `src/lib/portal/rate-limit.ts` — Upstash Redis sliding-window rate limiter (30 writes/min per user); degrades gracefully when env vars absent; lazy-loaded to avoid client bundling
+  - Rate limiting applied to `createArticle`, `updateArticle`, `deleteArticle`, `createSource`, `updateSource`
+  - Security model: session + role re-verified on every server action; ownership enforced (`author._ref === sanityAuthorId`); all text inputs sanitized; server-only write token; `clerkId` excluded from all GROQ projections; CSRF via Next.js Server Actions
+  - `src/lib/portal/__tests__/rate-limit.test.ts` — 2 unit tests for graceful degradation
+
+- **Author Portal — Pitch Workflow (#44)**
+
+  *Schemas*
+  - `src/models/schema/claimedPitch.ts` — headline, urgency, beat, angle, sourceSuggestions, reference links, notes (Portable Text), status (`claimed` | `in_progress` | `published` | `abandoned`), author reference, assignedBy, brief provenance, claimedAt, weak `linkedArticle` reference
+  - `src/models/schema/brief.ts` — top-level `storyPasses[]` array (`{ _key, storyKey, authorId, passedAt }`) — pass decisions are per-user; doesn't affect the story for other authors
+  - `src/models/schema/article.ts` — `linkedPitch` weak reference field
+
+  *Server actions*
+  - `src/lib/portal/pitch-actions.ts` — `updatePitchDetails` (ownership-checked patch), `savePitchNotes` (plain text → Portable Text blocks)
+  - `src/lib/portal/brief-actions.ts` — `fetchBriefById`: fetches brief + user's claimed pitches in parallel, builds `myPitchMap`
+  - `src/lib/portal/article-actions.ts` — `createArticle` accepts optional `linkedPitchId`; bidirectional pitch ↔ article linking on create
+
+  *Components*
+  - `src/components/portal/PitchNotesEditor.tsx` — textarea with char count; saves via `savePitchNotes`
+  - `src/components/portal/PitchDetailsEditor.tsx` — read-only-first sidebar; Edit mode for headline, angle, source suggestions, reference links, linked article dropdown
+  - `src/components/portal/PitchQuickViewModal.tsx` — fixed right-side slide-in from article editor; ESC + backdrop dismiss; saves via `Promise.all([updatePitchDetails, savePitchNotes])`
+  - `src/components/portal/ClaimedPitchCard.tsx` — urgency/beat/status badges; Open Pitch and Start/Edit Article actions
+  - `src/components/portal/ClaimedPitchesPanel.tsx` — Mine/All/Others filter; sorts by status then urgency; count label
+  - `src/components/portal/BriefPanel.tsx` — `< >` navigation between briefs; per-user pass/unpass with optimistic UI; card sort: breaking unclaimed → unclaimed → claimed → published; editor Assign/Release/Reassign controls
+
+  *Pages*
+  - `src/app/(portal)/portal/pitch/[id]/page.tsx` — headline + badges + `PitchNotesEditor` left column; Quick Actions + `PitchDetailsEditor` + Provenance right sidebar; `notFound()` for non-owners
+  - `src/app/(portal)/portal/page.tsx` — dashboard now fetches briefs, pitchMap, claimedPitches; renders `ClaimedPitchesPanel` and `BriefPanel`
+
+- **Author Portal — Sanity Live Integration (#44)**
+  - All portal pages migrated to Sanity Live Content API — dashboard, inbox, and article list update in real time; zero manual refresh required
+  - `_originalId` used for draft detection; `_id` prefix as authoritative draft/published signal under `previewDrafts`
+
 - **Coral Comments with Clerk SSO (#42)**
-  - `docker/docker-compose.yml` — full self-hosted Coral stack: Coral Talk, MongoDB 8, Redis 7-alpine, Caddy 2 (automatic Let's Encrypt TLS), nightly backup container; MongoDB and Redis on an internal-only network, never exposed publicly
-  - `docker/Caddyfile` — Caddy reverse proxy for `coral.untelevised.live` with security headers, gzip, and access logging
-  - `docker/.env.example` — all required environment variables documented with generation instructions; `CORAL_SIGNING_SECRET` vs `CORAL_SSO_SECRET` distinction called out explicitly
-  - `docker/scripts/backup.sh` — nightly `mongodump` with gzip, tar archive, and automatic pruning of dumps older than `BACKUP_RETAIN_DAYS` (default 14)
-  - `docker/.gitignore` — excludes `docker/.env` and runtime data directories
-  - Installed `jose` v6 for HS256 JWT signing
-  - `src/app/api/coral-token/route.ts` — server-only route that verifies the active Clerk session via `auth()` and `currentUser()`, then mints a 24-hour HS256 JWT for Coral SSO; returns `{ token: null }` for unauthenticated guests; automatically grants `MODERATOR` Coral role to Clerk users with `publicMetadata.role === 'admin' | 'staff'`
-  - `src/components/post/CommentsSection.tsx` — `'use client'` component that gates the Coral embed behind functional cookie consent (`preferences.preferences` from `useConsent()`); fetches SSO token from `/api/coral-token` for signed-in users; renders a consent CTA linking to `/privacy-settings` when functional cookies are declined; renders a locked state when `allowComments === false`; loads Coral embed script dynamically and calls `Coral.createStreamEmbed()` with the article `storyID` and `storyURL`
-  - `src/models/schema/article.ts` — `allowComments` boolean field added with `initialValue: true`; editors can disable comments per-article in Sanity Studio for sensitive content
-  - `src/lib/sanity/lib/queries.ts` — `allowComments` added to `queryArticleBySlug` GROQ projection
-  - `src/app/(user)/articles/[slug]/page.tsx` — `<CommentsSection>` rendered below article body, wired with `articleId`, `articleUrl`, and `allowComments` props
-  - `.env.example` updated with `NEXT_PUBLIC_CORAL_URL` and `CORAL_SSO_SECRET` with setup instructions
-  - `public/coral-theme-dark.css` / `coral-theme-light.css` — served as `customCSSURL` to Coral's RTE iframe; styles the editor body, editable area, toolbar, and form field container; two separate files so Coral can load the correct one via a static URL
-  - `CommentsSection` inline `<style>` — scoped overrides on `#coral` for the outer stream: CSS palette variables (red primary, dark/light bg/text), explicit `background-color` on the container (variables alone don't paint `#coral` itself), link colour override to replace Coral's default blue, active/inactive tab styling, count badge, callout banner, sort dropdown, and primary button variants; always passes `theme: 'LIGHT'` to `createStreamEmbed` so Coral never injects its own dark stylesheet after ours loads
+  - `docker/docker-compose.yml` — self-hosted Coral Talk + MongoDB 8 + Redis 7-alpine + Caddy 2 (auto TLS) + nightly backup container; MongoDB and Redis on internal-only network
+  - `docker/Caddyfile` — reverse proxy for `coral.untelevised.media` with security headers, gzip, access logging
+  - `docker/.env.example` — all required env vars documented; `CORAL_SIGNING_SECRET` vs `CORAL_SSO_SECRET` distinction noted
+  - `docker/scripts/backup.sh` — nightly `mongodump` with gzip + auto-prune after `BACKUP_RETAIN_DAYS` (default 14)
+  - `src/app/api/coral-token/route.ts` — mints 24-hour HS256 JWT for Coral SSO from active Clerk session; `{ token: null }` for guests; auto-grants `MODERATOR` to `admin`/`staff` Clerk roles
+  - `src/components/post/CommentsSection.tsx` — gates embed behind functional cookie consent; fetches SSO token for signed-in users; consent CTA for declined functional cookies; locked state when `allowComments === false`; brand-themed via CSS variables
+  - `src/models/schema/article.ts` — `allowComments` boolean with `initialValue: true`
+  - `public/coral-theme-dark.css` / `coral-theme-light.css` — served as `customCSSURL` to Coral's RTE iframe; two files for reliable theme matching
 
 - **Algolia Full-Text Search (#21)**
-  - Installed `algoliasearch` v5, `react-instantsearch` v7, `instantsearch.js`, and `@portabletext/toolkit` for search infrastructure
-  - `src/lib/algolia/client.ts` — server-only Algolia admin client with lazy initialisation (never bundled to browser)
-  - `src/lib/algolia/types.ts` — `AlgoliaArticleRecord` and `AlgoliaEventRecord` type definitions
-  - `src/app/api/algolia-sync/route.ts` — Sanity webhook POST handler with HMAC-SHA256 signature validation; syncs articles and live events to Algolia on create/update/delete
-  - `scripts/algolia-initial-index.ts` — one-time backfill script; run via `pnpm algolia:index` to push all existing articles to Algolia
-  - Algolia index configured with `attributesForFaceting` (categories, author, tags) and `searchableAttributes` — filters now work correctly
-  - `bodyText` capped at 5,000 chars in both indexing script and webhook to stay within Algolia's 10 KB record limit
-  - `tags` field added to all Algolia records and a Tag facet filter added to the search UI
-  - `algolia:index` npm script added to `package.json`
-  - `src/app/(user)/search/page.tsx` — server component; reads `?q=` from `searchParams` and passes as `initialQuery` prop; delegates all Algolia rendering to `SearchClientLoader`
-  - `src/components/search/SearchClient.tsx` — full Algolia `InstantSearch` UI: `SearchBox`, `Hits` with custom `ArticleHitCard` (thumbnail, highlighted title/description, author, category, date), `RefinementList` facets (category, tag, author), `Pagination`, `NoResults`; `onStateChange` syncs query back to `?q=` URL so refresh preserves search state
-  - `src/components/search/SearchClientLoader.tsx` — client-only boundary; lazy-imports `SearchClient` via `useEffect` so Algolia never runs during SSR; shows animated skeleton while loading
-  - `src/app/(user)/search/layout.tsx` — search route layout with `robots: noindex, nofollow`
-  - `src/components/global/HeaderSearch.tsx` — Algolia-powered typeahead in the header: live dropdown (top 6 hits) as you type; "Browse all articles →" link; submit navigates to `/search?q=[query]`; loaded via `dynamic({ ssr: false })` in `Header.tsx` to prevent SSR crash
-  - `src/components/global/Footer.tsx` — "Search Articles" link added to Media column
-  - `src/components/global/Nav.tsx` — sub-header `top` offset corrected (`top-[56px]` / `md:top-[74px]`) to align with actual header height
+  - `algoliasearch` v5, `react-instantsearch` v7, `@portabletext/toolkit` installed
+  - `src/lib/algolia/client.ts` — server-only admin client with lazy initialisation
+  - `src/app/api/algolia-sync/route.ts` — Sanity webhook handler with HMAC-SHA256 signature validation; syncs articles and live events on create/update/delete
+  - `scripts/algolia-initial-index.ts` — one-time backfill via `pnpm algolia:index`; `bodyText` capped at 5,000 chars
+  - `src/app/(user)/search/page.tsx` — reads `?q=` and passes as `initialQuery` to `SearchClientLoader`
+  - `src/components/search/SearchClient.tsx` — `InstantSearch` UI: `SearchBox`, `Hits` with `ArticleHitCard` (thumbnail, highlighted title/description, author, category, date), `RefinementList` facets (category, tag, author), `Pagination`, `NoResults`; `onStateChange` syncs `?q=` URL
+  - `src/components/global/HeaderSearch.tsx` — Algolia typeahead in header: live dropdown (top 6 hits); `dynamic({ ssr: false })`
   - `.env.example` updated with Algolia env vars
-  - All search result and dropdown links converted to Next.js `<Link>` for correct App Router client-side navigation
 
 - **Tag Pages (#8, PR #40)**
+  - `tags` string-array field on `article` (max 10, tag-input layout in Studio)
+  - `src/lib/tagUtils.ts` — `tagToSlug`, `slugToTagLabel`, `tagPageUrl` helpers
+  - `queryAllTags` / `queryArticlesByTag` GROQ queries; `queryAllArticles` updated to include `tags`
+  - `src/app/(user)/tag/[slug]/page.tsx` — `generateStaticParams`, `generateMetadata`, canonical URL, CollectionPage JSON-LD, breadcrumb, article grid, empty state
+  - Article detail page: categories as red pills, tags as ghost `#pill` links in hero header
+  - Sitemap: all `/tag/[slug]` URLs added (`changeFrequency: daily`, `priority: 0.5`)
 
-  **Sanity schema**
-  - `tags` string-array field on the `article` document type (max 10, tag-input layout in Studio); values are fine-grained topics, people, places, or events using lowercase-hyphen convention
+- **Facebook embed support**
+  - `src/models/schema/facebook.ts` — `facebookEmbed` Sanity object type with required `postUrl` field and Studio preview
+  - `src/components/providers/FacebookEmbed.tsx` / `FacebookEmbedInner.tsx` — SSR-safe dynamic import pattern (eliminates hydration mismatch)
+  - `RichTextComponents.tsx` — `facebookEmbed` type renderer
+  - `src/lib/portal/blocknote-serializer.ts` — full BlockNote ↔ Portable Text round-trip for `facebookEmbed` blocks
+  - Registered in `blockContent` array members and exported from `schema/index.ts`
 
-  **Utilities (`src/lib/tagUtils.ts`)**
-  - `tagToSlug(tag)` — normalises raw tag string to a URL-safe slug
-  - `slugToTagLabel(slug)` — converts slug back to title-case display label
-  - `tagPageUrl(tag)` — convenience helper returning the `/tag/[slug]` path
-
-  **GROQ queries (`src/lib/sanity/lib/queries.ts`)**
-  - `queryAllTags` — returns a deduplicated flat array of every tag in use across published articles
-  - `queryArticlesByTag` — fetches articles containing a given raw tag string, ordered by `publishedAt desc`
-  - `queryAllArticles` updated to include `tags` in its projection
-
-  **Tag page route (`src/app/(user)/tag/[slug]/page.tsx`)**
-  - `generateStaticParams`, `generateMetadata` with canonical URL, CollectionPage JSON-LD, breadcrumb nav, article grid, empty state
-
-  **Article detail page (`src/app/(user)/articles/[slug]/page.tsx`)**
-  - Tags and categories displayed in article hero header — categories as solid red pills, tags as ghost `#pill` links
-  - Article breadcrumb fixed to use `formatTitleForURL(category.title)` — was 404ing with `slug.current`
-  - BreadcrumbList JSON-LD updated with correct category URL and 3-item trail
-
-  **Sitemap** — all `/tag/[slug]` URLs added (`changeFrequency: daily`, `priority: 0.5`)
+- **TikTok embed support**
+  - `src/models/schema/tiktok.ts` — `tiktokEmbed` Sanity object type with required `videoUrl` field and Studio preview
+  - `src/components/providers/TikTokEmbed.tsx` / `TikTokEmbedInner.tsx` — SSR-safe dynamic import pattern
+  - `RichTextComponents.tsx` — `tiktokEmbed` type renderer
+  - `src/lib/portal/blocknote-serializer.ts` — full BlockNote ↔ Portable Text round-trip for `tiktokEmbed` blocks
+  - Registered in `blockContent` array members and exported from `schema/index.ts`
 
 - **Instagram embed hydration fix**
   - Extracted into `InstagramEmbedInner.tsx` + `dynamic(..., { ssr: false })` wrapper — eliminates React hydration mismatch from `embed.js` DOM mutation
+
+### Fixed
+
+- **Article body images no longer cropped (`RichTextComponents.tsx`)**
+  - Removed fixed `h-96` + `overflow-hidden`; dimensions parsed from Sanity asset ref (`image-{id}-{W}x{H}-{ext}`); `style={{ width: '100%', height: 'auto' }}` preserves full aspect ratio
+
+- **Article featured image no longer cropped (`articles/[slug]/page.tsx`)**
+  - Removed hardcoded `800×450` / `object-cover`; same asset-ref dimension extraction applied
+
+- **Raw Feed cards now clickable (`RawFeed.tsx`)**
+  - Replaced plain `<div>` wrapper with `<Link href="/articles/{slug}">` so cards navigate to the article
+
+- **Author Portal — post-audit fixes (#44)**
+  - `SourceSelectorModal.tsx` — replaced direct `portalClient.fetch()` (which imported `server-only`) with `fetchAllSources` server action; fixes build-breaking server/client boundary violation
+  - `src/app/api/admin/set-role/route.ts` — replaced `requireAdmin()` in try/catch (which silently swallowed Next.js redirect exceptions) with direct `auth()` + `currentUser()` + `hasRole()` check; 401 vs 403 now correct
+  - `src/lib/portal/blocknote-serializer.ts` — list nodes return `SanityBlock[]` arrays directly; `tiptapToPortableText` spreads arrays so every list item becomes a top-level Portable Text block
+  - Portal `_id` / `_originalId` handling hardened: `_originalId` used for draft detection and mutations under `previewDrafts`; `status === 'published'` replaces `publishedAt` as the authoritative published signal
 
 ---
 

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import urlForImage from '@/u/urlForImage';
 import { InlineFactCheckCard } from '@/components/fact-check/InlineFactCheckCard';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
@@ -16,20 +17,29 @@ const SyntaxHighlighter = dynamic(() =>
   import('react-syntax-highlighter').then((m) => m.Prism),
 );
 import InstagramEmbed from './InstagramEmbed';
+import FacebookEmbed from './FacebookEmbed';
+import TikTokEmbed from './TikTokEmbed';
 
 export const RichTextComponents = {
   types: {
     // ── Images ───────────────────────────────────────────────────────────────
     image: ({ value }: any) => {
       const alt = value.alt || 'Image';
+      // Sanity asset refs encode dimensions: image-{id}-{WIDTH}x{HEIGHT}-{ext}
+      const ref: string = value?.asset?._ref ?? '';
+      const dimMatch = ref.match(/-(\d+)x(\d+)-/);
+      const imgWidth = dimMatch ? parseInt(dimMatch[1]) : 1200;
+      const imgHeight = dimMatch ? parseInt(dimMatch[2]) : 630;
       return (
         <div className='my-6 space-y-2'>
-          <div className='relative h-96 w-full overflow-hidden border border-slate-300 dark:border-slate-700'>
+          <div className='w-full border border-slate-300 dark:border-slate-700'>
             <Image
-              className='object-cover'
+              className='h-full w-full'
               src={urlForImage(value)?.url() ?? ''}
               alt={alt}
-              fill
+              width={imgWidth}
+              height={imgHeight}
+              style={{ width: '100%', height: 'auto' }}
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px'
             />
           </div>
@@ -71,13 +81,10 @@ export const RichTextComponents = {
     // ── Tables ────────────────────────────────────────────────────────────────
     table: ({ value }: any) => {
       const { rows } = value;
-      if (!rows || rows.length === 0) return null;
+      if (!rows) return null;
 
-      const headerRow = rows[0];
-      const bodyRows = rows.slice(1);
-
-      // Cells may be plain strings or tableCell objects with a Portable Text
-      // `content` array (e.g. from sanity-plugin-table rich-text cells).
+      // Handles both new string cells and legacy tableCell objects
+      // {_key, _type, content: [{type:'block', children:[{_type:'span', text}]}]}
       function cellText(cell: any): string {
         if (typeof cell === 'string') return cell;
         if (cell && Array.isArray(cell.content)) {
@@ -93,38 +100,32 @@ export const RichTextComponents = {
       }
 
       return (
-        <div className='my-6 w-full overflow-x-auto border border-slate-300 dark:border-slate-700'>
-          <table className='w-full border-collapse text-sm'>
-            <thead>
-              <tr className='border-b-2 border-untele bg-untele'>
-                {headerRow.cells.map((cell: any, i: number) => (
-                  <th
+        <div className='mx-auto my-4 max-w-full overflow-x-auto rounded-md border'>
+          <Table className='w-full'>
+            <TableHeader>
+              <TableRow>
+                {rows[0]?.cells.map((cell: any, i: number) => (
+                  <TableHead
                     key={i}
-                    className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-white'
+                    className='whitespace-nowrap bg-untele p-2 text-sm font-semibold text-white md:px-4 md:py-2'
                   >
                     {cellText(cell)}
-                  </th>
+                  </TableHead>
                 ))}
-              </tr>
-            </thead>
-            <tbody>
-              {bodyRows.map((row: any, i: number) => (
-                <tr
-                  key={i}
-                  className='border-b border-slate-200 odd:bg-white even:bg-slate-50 dark:border-slate-700 dark:odd:bg-black dark:even:bg-slate-900'
-                >
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {rows.slice(1).map((row: any, i: number) => (
+                <TableRow key={i}>
                   {row.cells.map((cell: any, j: number) => (
-                    <td
-                      key={j}
-                      className='px-4 py-3 text-slate-800 dark:text-slate-200'
-                    >
+                    <TableCell key={j} className='p-2 text-sm md:px-4 md:py-2'>
                       {cellText(cell)}
-                    </td>
+                    </TableCell>
                   ))}
-                </tr>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       );
     },
@@ -226,6 +227,18 @@ export const RichTextComponents = {
     instagramEmbed: ({ value }: any) => {
       const postId = value.postId;
       return <InstagramEmbed postId={postId} />;
+    },
+
+    // ── Facebook Embeds ──────────────────────────────────────────────────────
+    facebookEmbed: ({ value }: any) => {
+      const postUrl = value.postUrl;
+      return <FacebookEmbed postUrl={postUrl} />;
+    },
+
+    // ── TikTok Embeds ────────────────────────────────────────────────────────
+    tiktokEmbed: ({ value }: any) => {
+      const videoUrl = value.videoUrl;
+      return <TikTokEmbed videoUrl={videoUrl} />;
     },
   },
 

@@ -2,6 +2,8 @@
 
 // Content schemas
 import article from './article';
+import brief from './brief';
+import claimedPitch from './claimedPitch';
 import author from './author';
 import factCheck from './factCheck';
 import blockContent from './blockContent';
@@ -46,6 +48,8 @@ import source from './source';
 import instagramEmbed from './instagram';
 import twitterEmbed from './twitterX';
 import youtubeEmbed from './youtube';
+import facebookEmbed from './facebook';
+import tiktokEmbed from './tiktok';
 
 // Add your new schemas below, organized into the appropriate sections
 // Example:
@@ -58,6 +62,8 @@ import youtubeEmbed from './youtube';
 export const schemaTypes = [
   // Content schemas
   article,
+  brief,
+  claimedPitch,
   author,
   blockContent,
   category,
@@ -96,6 +102,8 @@ export const schemaTypes = [
   instagramEmbed,
   twitterEmbed,
   youtubeEmbed,
+  facebookEmbed,
+  tiktokEmbed,
 
   // Shared object schemas
   correctionObject,
@@ -118,6 +126,8 @@ export const schemaTypes = [
 export {
   // Content schemas
   article,
+  brief,
+  claimedPitch,
   author,
   blockContent,
   category,
@@ -156,6 +166,8 @@ export {
   instagramEmbed,
   twitterEmbed,
   youtubeEmbed,
+  facebookEmbed,
+  tiktokEmbed,
 
   // Shared object schemas
   correctionObject,
