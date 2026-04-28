@@ -136,6 +136,13 @@ export default defineType({
     }),
     // Bookstore fields
     defineField({
+      name: 'clerkId',
+      title: 'Clerk User ID',
+      type: 'string',
+      description: 'Clerk user ID — links this author to their portal account',
+      hidden: ({ currentUser }) => !currentUser?.roles?.some((r) => r.name === 'administrator'),
+    }),
+    defineField({
       name: 'isLiteraryAuthor',
       title: 'Literary Author',
       type: 'boolean',

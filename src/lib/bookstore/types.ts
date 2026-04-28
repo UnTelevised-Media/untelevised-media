@@ -150,6 +150,8 @@ export interface SanityBook {
     image?: { asset: { _ref: string }; alt?: string };
     bio?: unknown[];
     slug?: { current: string };
+    clerkId?: string;
+    payoutEmail?: string;
   };
   coverImage?: { asset: { _ref: string }; alt?: string };
   description?: unknown[];

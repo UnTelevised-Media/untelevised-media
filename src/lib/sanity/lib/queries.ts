@@ -746,7 +746,9 @@ const bookFields = /* groq */ `
     slug,
     image { asset, alt },
     bio,
-    isLiteraryAuthor
+    isLiteraryAuthor,
+    clerkId,
+    payoutEmail
   },
   formats[] {
     _key,
@@ -783,6 +785,13 @@ export const queryBookBySlug = groq`
 
 export const queryBooksByAuthor = groq`
   *[_type == 'book' && author->clerkId == $clerkId] {
+    ${bookFields},
+    description
+  } | order(publishedAt desc)
+`;
+
+export const queryAllBooksAdmin = groq`
+  *[_type == 'book'] {
     ${bookFields},
     description
   } | order(publishedAt desc)
