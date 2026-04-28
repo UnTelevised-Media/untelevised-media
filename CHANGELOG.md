@@ -28,10 +28,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/lib/auth/roles.ts` — server helpers: `requireRole`, `requireAdmin`, `requireEditor`, `requireAuthor`, `requireAnyPortalRole`, `isAdmin`, `isEditor`, `isAuthor`, `isSales`; all re-verify fresh Clerk data on every call
   - `src/middleware.ts` — portal route protection: unauthenticated → `/sign-in`; no-role → `/`; `sales` role redirected to `/portal/orders` if accessing any other portal path
 - **Bookstore — Stripe Checkout API (#46, Phase 2 Step 2.1)**
-  - `src/app/api/shop/checkout/route.ts` — `POST /api/shop/checkout`; accepts `CheckoutPayload` (items with `stripePriceId`, `quantity`, `sanityBookId`, `formatType`); creates Stripe Checkout Session with collected shipping address for physical items; stores `items_json` + `clerk_user_id` in session metadata; returns `{ url }` for client redirect
+  - `src/app/api/bookstore/checkout/route.ts` — `POST /api/bookstore/checkout`; accepts `CheckoutPayload` (items with `stripePriceId`, `quantity`, `sanityBookId`, `formatType`); creates Stripe Checkout Session with collected shipping address for physical items; stores `items_json` + `clerk_user_id` in session metadata; returns `{ url }` for client redirect
 - **Bookstore — Stripe Webhook + Download API (#46, Phase 2 Steps 2.2–2.5 + Phase 3 Step 3.9)**
-  - `src/app/api/shop/webhook/route.ts` — `POST /api/shop/webhook`; Stripe signature verification via `STRIPE_WEBHOOK_SECRET`; handles `checkout.session.completed` (upserts customer, creates order + order_items, provisions `digital_downloads` records with 1-year expiry and 5-download limit, sends confirmation emails), `payment_intent.succeeded`, `payment_intent.payment_failed`, `charge.refunded` (updates status + sets `max_downloads = 0` to revoke access), `charge.dispute.created`
-  - `src/app/api/shop/download/route.ts` — `GET /api/shop/download?order_item_id=...`; validates Clerk auth, verifies customer ownership, checks expiry and download count, generates 15-minute Supabase Storage signed URL, increments `download_count` and updates timestamps
+  - `src/app/api/bookstore/webhook/route.ts` — `POST /api/bookstore/webhook`; Stripe signature verification via `STRIPE_WEBHOOK_SECRET`; handles `checkout.session.completed` (upserts customer, creates order + order_items, provisions `digital_downloads` records with 1-year expiry and 5-download limit, sends confirmation emails), `payment_intent.succeeded`, `payment_intent.payment_failed`, `charge.refunded` (updates status + sets `max_downloads = 0` to revoke access), `charge.dispute.created`
+  - `src/app/api/bookstore/download/route.ts` — `GET /api/bookstore/download?order_item_id=...`; validates Clerk auth, verifies customer ownership, checks expiry and download count, generates 15-minute Supabase Storage signed URL, increments `download_count` and updates timestamps
   - `src/lib/shop/email.ts` — Resend email helpers: `sendOrderConfirmationEmail`, `sendDigitalDownloadEmail`, `sendShipmentEmail`, `sendRefundEmail`; all gracefully no-op when `RESEND_API_KEY` is absent
 - **Bookstore — Public Storefront: Layout, Homepage, Book Detail (#46, Phase 3 Steps 3.1–3.3)**
   - `src/app/(user)/shop/layout.tsx` — shop route group layout within the (user) group (inherits Header/Nav/Footer)
@@ -40,13 +40,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/components/shop/GenreFilter.tsx` — client-side genre filter tab bar using URL searchParams
   - `src/components/shop/AddToCartButton.tsx` — client component; adds to Zustand cart with 2-second "Added ✓" feedback
 - **Bookstore — Cart UI (#46, Phase 3 Steps 3.4–3.5)**
-  - `src/components/shop/MiniCart.tsx` — header mini-cart icon with item-count badge (bag SVG icon, badge hidden when empty)
-  - `src/app/(user)/shop/cart/page.tsx` — full cart page; quantity increment/decrement controls; remove; order summary sidebar with subtotal; checkout button POSTs to `/api/shop/checkout` and redirects to Stripe-hosted checkout on success
+  - `src/components/bookstore/MiniCart.tsx` — header mini-cart icon with item-count badge (bag SVG icon, badge hidden when empty)
+  - `src/app/(user)/bookstore/cart/page.tsx` — full cart page; quantity increment/decrement controls; remove; order summary sidebar with subtotal; checkout button POSTs to `/api/bookstore/checkout` and redirects to Stripe-hosted checkout on success
 - **Bookstore — Order Success, Order History, Download Vault (#46, Phase 3 Steps 3.6–3.8)**
   - `src/app/(user)/shop/order-success/page.tsx` — retrieves Stripe session server-side via `session_id` searchParam; displays itemized order summary; shows digital download CTA when any item is digital; graceful fallback if session lookup fails
   - `src/app/(user)/shop/orders/page.tsx` — Clerk-authed server component; fetches customer + orders + order_items from Supabase; grouped order cards with status badge, total, item list, and "Download Files" link for digital orders
-  - `src/app/(user)/shop/downloads/page.tsx` — client component download vault; fetches from `GET /api/shop/my-downloads`; per-file download button calling `GET /api/shop/download`; shows download count, expiry, expired/exhausted states
-  - `src/app/api/shop/my-downloads/route.ts` — `GET /api/shop/my-downloads`; returns authenticated user's `digital_downloads` rows joined with `order_items` for display metadata
+  - `src/app/(user)/shop/downloads/page.tsx` — client component download vault; fetches from `GET /api/bookstore/my-downloads`; per-file download button calling `GET /api/bookstore/download`; shows download count, expiry, expired/exhausted states
+  - `src/app/api/bookstore/my-downloads/route.ts` — `GET /api/bookstore/my-downloads`; returns authenticated user's `digital_downloads` rows joined with `order_items` for display metadata
 
 ---
 

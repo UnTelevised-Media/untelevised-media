@@ -103,6 +103,13 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
             Mission
             <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
           </Link>
+
+          <Link
+            href='/bookstore'
+            className='flex items-center rounded-lg border border-untele/50 bg-untele/10 px-3 py-1.5 text-sm font-black uppercase tracking-widest text-untele transition-all duration-200 hover:bg-untele hover:text-white'
+          >
+            Bookstore
+          </Link>
         </nav>
 
         {/* Right Section */}
@@ -297,6 +304,15 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
             >
               <div className='h-2 w-2 rounded-full bg-untele' />
               <span>Mission</span>
+            </Link>
+
+            <Link
+              href='/bookstore'
+              className='flex items-center space-x-3 py-2 font-black uppercase tracking-widest text-untele transition-colors duration-200'
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <div className='h-2 w-2 rounded-full bg-untele' />
+              <span>Bookstore</span>
             </Link>
 
             <div className='border-t border-slate-300 pt-6 dark:border-slate-700'>
