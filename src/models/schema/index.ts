@@ -48,6 +48,8 @@ import source from './source';
 import instagramEmbed from './instagram';
 import twitterEmbed from './twitterX';
 import youtubeEmbed from './youtube';
+import facebookEmbed from './facebook';
+import tiktokEmbed from './tiktok';
 
 // Add your new schemas below, organized into the appropriate sections
 // Example:
@@ -100,6 +102,8 @@ export const schemaTypes = [
   instagramEmbed,
   twitterEmbed,
   youtubeEmbed,
+  facebookEmbed,
+  tiktokEmbed,
 
   // Shared object schemas
   correctionObject,
@@ -162,6 +166,8 @@ export {
   instagramEmbed,
   twitterEmbed,
   youtubeEmbed,
+  facebookEmbed,
+  tiktokEmbed,
 
   // Shared object schemas
   correctionObject,

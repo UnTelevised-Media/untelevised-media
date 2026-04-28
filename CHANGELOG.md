@@ -195,6 +195,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
   **Sitemap** — all `/tag/[slug]` URLs added (`changeFrequency: daily`, `priority: 0.5`)
 
+- **Facebook embed support**
+  - `src/models/schema/facebook.ts` — `facebookEmbed` Sanity object type with required `postUrl` field and Studio preview
+  - `src/components/providers/FacebookEmbed.tsx` / `FacebookEmbedInner.tsx` — SSR-safe dynamic import pattern (eliminates hydration mismatch)
+  - `RichTextComponents.tsx` — `facebookEmbed` type renderer
+  - `src/lib/portal/blocknote-serializer.ts` — full BlockNote ↔ Portable Text round-trip for `facebookEmbed` blocks
+  - Registered in `blockContent` array members and exported from `schema/index.ts`
+
+- **TikTok embed support**
+  - `src/models/schema/tiktok.ts` — `tiktokEmbed` Sanity object type with required `videoUrl` field and Studio preview
+  - `src/components/providers/TikTokEmbed.tsx` / `TikTokEmbedInner.tsx` — SSR-safe dynamic import pattern
+  - `RichTextComponents.tsx` — `tiktokEmbed` type renderer
+  - `src/lib/portal/blocknote-serializer.ts` — full BlockNote ↔ Portable Text round-trip for `tiktokEmbed` blocks
+  - Registered in `blockContent` array members and exported from `schema/index.ts`
+
 - **Instagram embed hydration fix**
   - Extracted into `InstagramEmbedInner.tsx` + `dynamic(..., { ssr: false })` wrapper — eliminates React hydration mismatch from `embed.js` DOM mutation
 

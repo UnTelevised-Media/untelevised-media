@@ -201,6 +201,12 @@ export default defineType({
       type: 'instagramEmbed',
     }),
     defineArrayMember({
+      type: 'facebookEmbed',
+    }),
+    defineArrayMember({
+      type: 'tiktokEmbed',
+    }),
+    defineArrayMember({
       name: 'factCheckEmbed',
       title: 'Fact Check',
       type: 'object',

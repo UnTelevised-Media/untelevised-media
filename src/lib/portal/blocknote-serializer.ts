@@ -7,7 +7,8 @@
 // BlockNote block types we handle:
 //   paragraph, heading, quote, bulletListItem, numberedListItem,
 //   codeBlock, table, image, divider,
-//   youtubeEmbed (custom), twitterEmbed (custom), instagramEmbed (custom)
+//   youtubeEmbed (custom), twitterEmbed (custom), instagramEmbed (custom),
+//   facebookEmbed (custom), tiktokEmbed (custom)
 
 // ─── Local types (avoid coupling to BlockNote generics) ──────────────────────
 
@@ -227,6 +228,20 @@ function bnBlockToPT(block: BNBlock): SanityBlockAny | null {
         postId: (block.props.postId as string) ?? '',
       };
 
+    case 'facebookEmbed':
+      return {
+        _type: 'facebookEmbed',
+        _key: genKey(),
+        postUrl: (block.props.postUrl as string) ?? '',
+      };
+
+    case 'tiktokEmbed':
+      return {
+        _type: 'tiktokEmbed',
+        _key: genKey(),
+        videoUrl: (block.props.videoUrl as string) ?? '',
+      };
+
     default:
       return null;
   }
@@ -405,6 +420,22 @@ function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (ref: string) => stri
         return {
           type: 'instagramEmbed',
           props: { postId: (b.postId as string) ?? '' },
+          content: undefined,
+          children: [],
+        };
+
+      case 'facebookEmbed':
+        return {
+          type: 'facebookEmbed',
+          props: { postUrl: (b.postUrl as string) ?? '' },
+          content: undefined,
+          children: [],
+        };
+
+      case 'tiktokEmbed':
+        return {
+          type: 'tiktokEmbed',
+          props: { videoUrl: (b.videoUrl as string) ?? '' },
           content: undefined,
           children: [],
         };

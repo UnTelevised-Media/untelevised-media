@@ -17,6 +17,8 @@ const SyntaxHighlighter = dynamic(() =>
   import('react-syntax-highlighter').then((m) => m.Prism),
 );
 import InstagramEmbed from './InstagramEmbed';
+import FacebookEmbed from './FacebookEmbed';
+import TikTokEmbed from './TikTokEmbed';
 
 export const RichTextComponents = {
   types: {
@@ -225,6 +227,18 @@ export const RichTextComponents = {
     instagramEmbed: ({ value }: any) => {
       const postId = value.postId;
       return <InstagramEmbed postId={postId} />;
+    },
+
+    // ── Facebook Embeds ──────────────────────────────────────────────────────
+    facebookEmbed: ({ value }: any) => {
+      const postUrl = value.postUrl;
+      return <FacebookEmbed postUrl={postUrl} />;
+    },
+
+    // ── TikTok Embeds ────────────────────────────────────────────────────────
+    tiktokEmbed: ({ value }: any) => {
+      const videoUrl = value.videoUrl;
+      return <TikTokEmbed videoUrl={videoUrl} />;
     },
   },
 
