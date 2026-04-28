@@ -134,6 +134,21 @@ export default defineType({
       initialValue: true,
       description: 'Uncheck for former contributors',
     }),
+    // Bookstore fields
+    defineField({
+      name: 'isLiteraryAuthor',
+      title: 'Literary Author',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Enable to show this author in the bookstore and allow book associations',
+    }),
+    defineField({
+      name: 'payoutEmail',
+      title: 'Payout Email',
+      type: 'string',
+      description: 'Author payout recipient address (for future Stripe Connect integration)',
+      hidden: ({ currentUser }) => !currentUser?.roles?.some((r) => r.name === 'administrator'),
+    }),
   ],
   preview: {
     select: {

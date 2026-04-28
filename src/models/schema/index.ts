@@ -1,5 +1,9 @@
 // src/models/schema/index.ts
 
+// Bookstore schemas
+import book, { bookFormat } from './book';
+import bookGenre from './bookGenre';
+
 // Content schemas
 import article from './article';
 import author from './author';
@@ -101,11 +105,10 @@ export const schemaTypes = [
   source,
   factCheck,
 
-  // Add your new schemas here, grouped accordingly
-  // newContentSchema,
-  // newFormSchema,
-  // newUiSchema,
-  // newEmbedSchema,
+  // Bookstore schemas
+  bookGenre,
+  book,
+  bookFormat,
 ];
 
 // Export individual schemas for type safety
@@ -158,11 +161,10 @@ export {
   source,
   factCheck,
 
-  // Add your new schemas here
-  // newContentSchema,
-  // newFormSchema,
-  // newUiSchema,
-  // newEmbedSchema,
+  // Bookstore schemas
+  bookGenre,
+  book,
+  bookFormat,
 };
 
 // Export default for convenience
