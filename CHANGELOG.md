@@ -42,6 +42,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Bookstore — Cart UI (#46, Phase 3 Steps 3.4–3.5)**
   - `src/components/shop/MiniCart.tsx` — header mini-cart icon with item-count badge (bag SVG icon, badge hidden when empty)
   - `src/app/(user)/shop/cart/page.tsx` — full cart page; quantity increment/decrement controls; remove; order summary sidebar with subtotal; checkout button POSTs to `/api/shop/checkout` and redirects to Stripe-hosted checkout on success
+- **Bookstore — Order Success, Order History, Download Vault (#46, Phase 3 Steps 3.6–3.8)**
+  - `src/app/(user)/shop/order-success/page.tsx` — retrieves Stripe session server-side via `session_id` searchParam; displays itemized order summary; shows digital download CTA when any item is digital; graceful fallback if session lookup fails
+  - `src/app/(user)/shop/orders/page.tsx` — Clerk-authed server component; fetches customer + orders + order_items from Supabase; grouped order cards with status badge, total, item list, and "Download Files" link for digital orders
+  - `src/app/(user)/shop/downloads/page.tsx` — client component download vault; fetches from `GET /api/shop/my-downloads`; per-file download button calling `GET /api/shop/download`; shows download count, expiry, expired/exhausted states
+  - `src/app/api/shop/my-downloads/route.ts` — `GET /api/shop/my-downloads`; returns authenticated user's `digital_downloads` rows joined with `order_items` for display metadata
 
 ---
 
