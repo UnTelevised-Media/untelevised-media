@@ -21,6 +21,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/lib/shop/types.ts` — full interface set: `Customer`, `Address`, `Order` (with `OrderStatus` enum), `OrderItem`, `DigitalDownload`, `Payout` (Supabase rows); `SanityBook`, `SanityBookFormat`, `SanityBookGenre` (GROQ projection shapes); `CartItem` (client-side cart); `CheckoutLineItem` + `CheckoutPayload` (API contract)
 - **Bookstore — Sanity GROQ Queries (#46, Phase 1 Step 1.5)**
   - Added to `src/lib/sanity/lib/queries.ts`: `queryAllBooks`, `queryFeaturedBooks`, `queryBookBySlug`, `queryBooksByAuthor`, `queryAllBookGenres`, `queryBooksByGenre`; all project the full `bookFields` fragment including resolved author, genre references, and format inventory/digital-asset data
+- **Bookstore — Cart State (#46, Phase 1 Step 1.6)**
+  - `src/lib/shop/cart.ts` — Zustand cart store with localStorage persistence (`untele-cart` key); `addItem` (merges duplicate format+book combos), `removeItem`, `updateQuantity`, `clearCart`, `getItemCount`, `getTotal`; `buildCartItem` helper for building cart items from Sanity book format data
+- **Bookstore — Role System with 'sales' Role (#46, Phase 1 Step 1.7)**
+  - `src/lib/auth/roles-utils.ts` — `PortalRole` type (`admin | editor | author | sales`); `getRoleFromMeta` extracts role from Clerk `publicMetadata`; `hasRole` enforces hierarchy (admin > editor > author; sales is orders-only peer); `isSalesOnly` predicate; backwards-compatible with legacy `admin: true` flag
+  - `src/lib/auth/roles.ts` — server helpers: `requireRole`, `requireAdmin`, `requireEditor`, `requireAuthor`, `requireAnyPortalRole`, `isAdmin`, `isEditor`, `isAuthor`, `isSales`; all re-verify fresh Clerk data on every call
+  - `src/middleware.ts` — portal route protection: unauthenticated → `/sign-in`; no-role → `/`; `sales` role redirected to `/portal/orders` if accessing any other portal path
 
 ---
 
