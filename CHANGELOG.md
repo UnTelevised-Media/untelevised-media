@@ -29,6 +29,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/middleware.ts` — portal route protection: unauthenticated → `/sign-in`; no-role → `/`; `sales` role redirected to `/portal/orders` if accessing any other portal path
 - **Bookstore — Stripe Checkout API (#46, Phase 2 Step 2.1)**
   - `src/app/api/shop/checkout/route.ts` — `POST /api/shop/checkout`; accepts `CheckoutPayload` (items with `stripePriceId`, `quantity`, `sanityBookId`, `formatType`); creates Stripe Checkout Session with collected shipping address for physical items; stores `items_json` + `clerk_user_id` in session metadata; returns `{ url }` for client redirect
+- **Bookstore — Stripe Webhook + Download API (#46, Phase 2 Steps 2.2–2.5 + Phase 3 Step 3.9)**
+  - `src/app/api/shop/webhook/route.ts` — `POST /api/shop/webhook`; Stripe signature verification via `STRIPE_WEBHOOK_SECRET`; handles `checkout.session.completed` (upserts customer, creates order + order_items, provisions `digital_downloads` records with 1-year expiry and 5-download limit, sends confirmation emails), `payment_intent.succeeded`, `payment_intent.payment_failed`, `charge.refunded` (updates status + sets `max_downloads = 0` to revoke access), `charge.dispute.created`
+  - `src/app/api/shop/download/route.ts` — `GET /api/shop/download?order_item_id=...`; validates Clerk auth, verifies customer ownership, checks expiry and download count, generates 15-minute Supabase Storage signed URL, increments `download_count` and updates timestamps
+  - `src/lib/shop/email.ts` — Resend email helpers: `sendOrderConfirmationEmail`, `sendDigitalDownloadEmail`, `sendShipmentEmail`, `sendRefundEmail`; all gracefully no-op when `RESEND_API_KEY` is absent
 
 ---
 
