@@ -17,6 +17,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/lib/shop/supabase.ts` — `shopClient` (anon key, RLS-enforced client reads) and `shopServiceClient` (service role, server-only writes) for the separate `untelevised-shop` Supabase project
   - `src/lib/shop/database.types.ts` — TypeScript type stubs for all shop tables (customers, addresses, orders, order_items, digital_downloads, payouts); replace with `supabase gen types typescript` output after project creation
   - Packages added: `@supabase/supabase-js`, `stripe`, `zustand`, `resend`
+- **Bookstore — TypeScript Interfaces (#46, Phase 1 Step 1.4)**
+  - `src/lib/shop/types.ts` — full interface set: `Customer`, `Address`, `Order` (with `OrderStatus` enum), `OrderItem`, `DigitalDownload`, `Payout` (Supabase rows); `SanityBook`, `SanityBookFormat`, `SanityBookGenre` (GROQ projection shapes); `CartItem` (client-side cart); `CheckoutLineItem` + `CheckoutPayload` (API contract)
+- **Bookstore — Sanity GROQ Queries (#46, Phase 1 Step 1.5)**
+  - Added to `src/lib/sanity/lib/queries.ts`: `queryAllBooks`, `queryFeaturedBooks`, `queryBookBySlug`, `queryBooksByAuthor`, `queryAllBookGenres`, `queryBooksByGenre`; all project the full `bookFields` fragment including resolved author, genre references, and format inventory/digital-asset data
 
 ---
 

@@ -722,3 +722,82 @@ export const queryFactCheckBySlug = groq`
     }
   }
 `;
+
+// ---------------------------------------------------------------------------
+// Bookstore queries (#46)
+// ---------------------------------------------------------------------------
+
+const bookFields = /* groq */ `
+  _id,
+  title,
+  slug,
+  status,
+  featured,
+  coverImage { asset, alt },
+  publishedAt,
+  isbn,
+  pages,
+  language,
+  samplePdfUrl,
+  genre[]-> { _id, title, slug },
+  author-> {
+    _id,
+    name,
+    slug,
+    image { asset, alt },
+    bio,
+    isLiteraryAuthor
+  },
+  formats[] {
+    _key,
+    formatType,
+    price,
+    compareAtPrice,
+    stripePriceId,
+    stripeProductId,
+    inventory,
+    digitalAsset,
+    weight,
+    dimensions
+  }
+`;
+
+export const queryAllBooks = groq`
+  *[_type == 'book' && status == 'published'] {
+    ${bookFields}
+  } | order(publishedAt desc)
+`;
+
+export const queryFeaturedBooks = groq`
+  *[_type == 'book' && status == 'published' && featured == true] {
+    ${bookFields}
+  } | order(publishedAt desc)
+`;
+
+export const queryBookBySlug = groq`
+  *[_type == 'book' && slug.current == $slug][0] {
+    ${bookFields},
+    description
+  }
+`;
+
+export const queryBooksByAuthor = groq`
+  *[_type == 'book' && author->clerkId == $clerkId] {
+    ${bookFields},
+    description
+  } | order(publishedAt desc)
+`;
+
+export const queryAllBookGenres = groq`
+  *[_type == 'bookGenre'] {
+    _id,
+    title,
+    slug
+  } | order(title asc)
+`;
+
+export const queryBooksByGenre = groq`
+  *[_type == 'book' && status == 'published' && $genreId in genre[]._ref] {
+    ${bookFields}
+  } | order(publishedAt desc)
+`;
