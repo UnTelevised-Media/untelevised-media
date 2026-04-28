@@ -33,6 +33,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/app/api/shop/webhook/route.ts` — `POST /api/shop/webhook`; Stripe signature verification via `STRIPE_WEBHOOK_SECRET`; handles `checkout.session.completed` (upserts customer, creates order + order_items, provisions `digital_downloads` records with 1-year expiry and 5-download limit, sends confirmation emails), `payment_intent.succeeded`, `payment_intent.payment_failed`, `charge.refunded` (updates status + sets `max_downloads = 0` to revoke access), `charge.dispute.created`
   - `src/app/api/shop/download/route.ts` — `GET /api/shop/download?order_item_id=...`; validates Clerk auth, verifies customer ownership, checks expiry and download count, generates 15-minute Supabase Storage signed URL, increments `download_count` and updates timestamps
   - `src/lib/shop/email.ts` — Resend email helpers: `sendOrderConfirmationEmail`, `sendDigitalDownloadEmail`, `sendShipmentEmail`, `sendRefundEmail`; all gracefully no-op when `RESEND_API_KEY` is absent
+- **Bookstore — Public Storefront: Layout, Homepage, Book Detail (#46, Phase 3 Steps 3.1–3.3)**
+  - `src/app/(user)/shop/layout.tsx` — shop route group layout within the (user) group (inherits Header/Nav/Footer)
+  - `src/app/(user)/shop/page.tsx` — bookstore homepage; fetches featured books, all books, genres in parallel; renders `FeaturedHero` for the top featured book and a `BookCard` grid for all books; includes `GenreFilter` for genre-based navigation
+  - `src/app/(user)/shop/book/[slug]/page.tsx` — full book detail page with `generateStaticParams`, `generateMetadata`, and JSON-LD `Book` + `Offer` structured data; cover image, Portable Text description, format selector rows (with inventory/low-stock badges, compare-at price), `AddToCartButton`, book details section, author bio card
+  - `src/components/shop/GenreFilter.tsx` — client-side genre filter tab bar using URL searchParams
+  - `src/components/shop/AddToCartButton.tsx` — client component; adds to Zustand cart with 2-second "Added ✓" feedback
 
 ---
 
