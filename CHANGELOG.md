@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **Bookstore — Infrastructure Setup (#46, Phase 1 Steps 1.1–1.2)**
+  - Added placeholder env var comments to `.env.local` (gitignored) for `SUPABASE_SHOP_URL`, `SUPABASE_SHOP_ANON_KEY`, `SUPABASE_SHOP_SERVICE_ROLE_KEY`, `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL` — values must be filled after Supabase shop project creation and Stripe webhook registration
+  - Supabase shop project (`untelevised-shop`) requires manual creation: run DDL from issue #46 §2.2, configure RLS per §2.3, create private `digital-books` storage bucket
+
 ---
 
 ## [2.2.2] — 2026-03-20
