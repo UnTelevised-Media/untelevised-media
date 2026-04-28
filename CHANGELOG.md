@@ -13,6 +13,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Bookstore — Infrastructure Setup (#46, Phase 1 Steps 1.1–1.2)**
   - Added placeholder env var comments to `.env.local` (gitignored) for `SUPABASE_SHOP_URL`, `SUPABASE_SHOP_ANON_KEY`, `SUPABASE_SHOP_SERVICE_ROLE_KEY`, `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL` — values must be filled after Supabase shop project creation and Stripe webhook registration
   - Supabase shop project (`untelevised-shop`) requires manual creation: run DDL from issue #46 §2.2, configure RLS per §2.3, create private `digital-books` storage bucket
+- **Bookstore — Supabase Shop Client (#46, Phase 1 Step 1.3)**
+  - `src/lib/shop/supabase.ts` — `shopClient` (anon key, RLS-enforced client reads) and `shopServiceClient` (service role, server-only writes) for the separate `untelevised-shop` Supabase project
+  - `src/lib/shop/database.types.ts` — TypeScript type stubs for all shop tables (customers, addresses, orders, order_items, digital_downloads, payouts); replace with `supabase gen types typescript` output after project creation
+  - Packages added: `@supabase/supabase-js`, `stripe`, `zustand`, `resend`
 
 ---
 
