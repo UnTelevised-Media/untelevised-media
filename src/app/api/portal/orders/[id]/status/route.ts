@@ -7,6 +7,7 @@ import { auth, currentUser } from '@clerk/nextjs/server';
 import { getRoleFromUser } from '@/lib/auth/roles';
 import { isSalesOnly } from '@/lib/auth/roles-utils';
 import { shopServiceClient } from '@/lib/bookstore/supabase';
+import { sendShipmentEmail, sendRefundEmail } from '@/lib/bookstore/email';
 import type { OrderStatus } from '@/lib/bookstore/types';
 import { z } from 'zod';
 
@@ -108,8 +109,32 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: 'Failed to update order status' }, { status: 500 });
   }
 
-  // If refunded, revoke digital download access
+  // Fetch order + customer for email triggers
+  const { data: fullOrder } = await shopServiceClient
+    .from('orders')
+    .select('order_number, customer:customers(email)')
+    .eq('id', orderId)
+    .maybeSingle();
+
+  const customerEmail = (fullOrder?.customer as { email: string } | null)?.email;
+
+  // Fire shipment email when marking shipped
+  if (newStatus === 'shipped' && customerEmail && fullOrder) {
+    sendShipmentEmail({
+      to: customerEmail,
+      orderNumber: fullOrder.order_number,
+      trackingNumber: parsed.data.tracking_number,
+    }).catch((e) => console.error('[portal/orders/status] shipment email failed:', e));
+  }
+
+  // Fire refund email and revoke digital downloads on refund
   if (newStatus === 'refunded') {
+    if (customerEmail && fullOrder) {
+      sendRefundEmail({ to: customerEmail, orderNumber: fullOrder.order_number }).catch((e) =>
+        console.error('[portal/orders/status] refund email failed:', e)
+      );
+    }
+
     const { data: digitalItems } = await shopServiceClient
       .from('order_items')
       .select('id')
