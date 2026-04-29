@@ -96,7 +96,7 @@ function DesktopPlainLink({ item }: { item: PlainLink }) {
   return (
     <Link
       href={item.href}
-      className='group relative text-sm font-medium text-slate-700 transition-colors duration-150 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+      className='group relative px-3 text-sm font-medium text-slate-700 transition-colors duration-150 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
     >
       {item.label}
       <span className='absolute -bottom-0.5 left-0 h-px w-0 bg-untele transition-all duration-200 group-hover:w-full' />
