@@ -140,6 +140,12 @@ export interface SanityBookFormat {
   dimensions?: string;
 }
 
+export interface SanityImageRef {
+  _type: 'image';
+  asset: { _type: 'reference'; _ref: string };
+  alt?: string;
+}
+
 export interface SanityBook {
   _id: string;
   title: string;
@@ -147,13 +153,13 @@ export interface SanityBook {
   author?: {
     _id: string;
     name: string;
-    image?: { asset: { _ref: string }; alt?: string };
+    image?: SanityImageRef;
     bio?: unknown[];
     slug?: { current: string };
     clerkId?: string;
     payoutEmail?: string;
   };
-  coverImage?: { asset: { _ref: string }; alt?: string };
+  coverImage?: SanityImageRef;
   description?: unknown[];
   genre?: SanityBookGenre[];
   publishedAt?: string;

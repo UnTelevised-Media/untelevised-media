@@ -35,8 +35,8 @@ export function hasRole(role: PortalRole | null, required: PortalRole): boolean 
   if (required === 'admin') return false;
   if (required === 'editor') return role === 'editor';
   if (required === 'author') return role === 'editor' || role === 'author';
-  // required === 'sales' — sales satisfies only 'sales' checks
-  if (required === 'sales') return role === 'sales' || role === 'admin';
+  // required === 'sales' — admin already handled above; sales role satisfies 'sales' check
+  if (required === 'sales') return role === 'sales';
   return false;
 }
 

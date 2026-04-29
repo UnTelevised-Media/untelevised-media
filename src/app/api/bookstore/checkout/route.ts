@@ -9,7 +9,7 @@ import { auth } from '@clerk/nextjs/server';
 import type { CheckoutPayload, FormatType } from '@/lib/bookstore/types';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
-  apiVersion: '2025-04-30.basil',
+  apiVersion: '2026-04-22.dahlia',
 });
 
 const baseUrl =
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     const hasPhysical = body.items.some((i) => i.formatType !== 'digital');
     const hasDigital = body.items.some((i) => i.isDigital);
 
-    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = body.items.map((item) => ({
+    const lineItems = body.items.map((item) => ({
       price: item.stripePriceId,
       quantity: item.quantity,
     }));

@@ -11,6 +11,10 @@ const imageUrlCache = new Map();
 // Cached images URLs for OpenGraph images
 const openGraphImageUrlCache = new Map();
 
+// Accepts both the strict Sanity Image type and any object with an asset._ref field
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ImageLike = Image | { asset?: { _ref?: string } } | null | undefined;
+
 // Helper to build URL
 function buildImageUrl(source: Image) {
   // Ensure imageBuilder is defined
@@ -23,20 +27,21 @@ function buildImageUrl(source: Image) {
 }
 
 // Main image URL function
-export default function urlForImage(source: Image | undefined) {
+export default function urlForImage(source: ImageLike) {
   // Ensure that source image contains a valid reference
-  if (!source?.asset?._ref) {
+  const s = source as { asset?: { _ref?: string } } | undefined;
+  if (!s?.asset?._ref) {
     return undefined;
   }
 
   // Use a unique identifier as the cache key
-  const cacheKey = source.asset._ref;
+  const cacheKey = s.asset._ref;
 
   if (imageUrlCache.has(cacheKey)) {
     return imageUrlCache.get(cacheKey);
   }
 
-  const url = buildImageUrl(source);
+  const url = buildImageUrl(source as Image);
   imageUrlCache.set(cacheKey, url);
   return url;
 }
