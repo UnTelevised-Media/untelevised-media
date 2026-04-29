@@ -28,6 +28,16 @@ const nextConfig: NextConfig = {
         destination: '/articles/:slug',
         permanent: true,
       },
+      {
+        source: '/breaking',
+        destination: '/category/breaking',
+        permanent: false,
+      },
+      {
+        source: '/live-events',
+        destination: '/category/breaking',
+        permanent: false,
+      },
     ];
   },
   logging: {
