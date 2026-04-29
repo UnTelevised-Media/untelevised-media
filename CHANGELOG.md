@@ -39,6 +39,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/components/bookstore/MiniCart.tsx` — header mini-cart with item count badge
   - Bookstore nav link added to main site navigation
 
+- **Bookstore — Internal Dashboard (Issue #46, Phase 4)**
+  - `src/app/(portal)/portal/books/page.tsx` — My Books dashboard (author-gated): product list table with Studio links, sales summary cards (units/revenue/month-over-month), inventory alerts section, payout history table; gracefully degrades when Supabase is not connected
+  - `src/app/(portal)/portal/orders/page.tsx` — Order Management (admin/sales/author-scoped): order stats, paginated + searchable table, status badges; authors see only orders containing their books
+  - `src/components/portal/OrdersTable.tsx` — client component: searchable + filterable order table; "Mark as shipped" with inline tracking number input; "Mark as [next status]" workflow; admin refund action with confirmation; pagination
+  - `src/app/api/portal/orders/[id]/status/route.ts` — PATCH: Zod-validated; validates status transition graph; sales cannot refund; fires shipment/refund emails on status change; revokes digital downloads on refund
+  - `src/components/portal/PortalNav.tsx` — My Books + Orders nav links already wired; `sales` role shows Sales Portal label and limits to orders link
+
+- **Bookstore — Build Fixes**
+  - `src/lib/bookstore/supabase.ts` — lazy proxy clients (throw at call time, not import time) to prevent build crash when env vars missing
+  - `src/lib/bookstore/email.ts` — lazy Resend initialization for same reason
+  - `src/lib/bookstore/database.types.ts` — added `Relationships` arrays (required by @supabase/supabase-js 2.105+)
+  - `src/lib/bookstore/types.ts` — `SanityImageRef` typed as `{ _type: 'image'; asset: { _type: 'reference'; _ref: string } }` to satisfy `urlForImage` parameter
+  - `src/util/urlForImage.ts` — broadened parameter type to accept `ImageLike` (Image | asset-ref-compatible object) for cross-schema compatibility
+  - Stripe API version updated: `2025-04-30.basil` → `2026-04-22.dahlia`
+  - `generateStaticParams` in book detail page uses raw Sanity client (not `sanityFetch`) to avoid `draftMode()` outside request scope error
+  - Removed `export const runtime = 'nodejs'` from webhook route (incompatible with `useCache` experimental flag)
+
 ---
 
 ## [3.0.0] — 2026-04-28
