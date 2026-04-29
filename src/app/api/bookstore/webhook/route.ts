@@ -15,9 +15,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
   apiVersion: '2026-04-22.dahlia',
 });
 
-// Stripe requires raw body for signature verification — disable body parsing
-export const runtime = 'nodejs';
-
 async function upsertCustomer(clerkUserId: string, email: string, name?: string) {
   const { data: existing } = await shopServiceClient
     .from('customers')

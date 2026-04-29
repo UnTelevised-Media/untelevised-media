@@ -5,7 +5,17 @@
 import { Resend } from 'resend';
 import type { FormatType } from './types';
 
-const resend = new Resend(process.env.RESEND_API_KEY ?? '');
+// Lazy-initialize so missing env vars don't crash at build/import time
+let _resend: Resend | null = null;
+function getResend(): Resend {
+  if (!_resend) {
+    const key = process.env.RESEND_API_KEY;
+    if (!key) throw new Error('[bookstore/email] RESEND_API_KEY is not set');
+    _resend = new Resend(key);
+  }
+  return _resend;
+}
+
 const from = process.env.RESEND_FROM_EMAIL ?? 'UnTelevised Media <orders@untelevised.media>';
 
 const baseUrl =
@@ -33,7 +43,7 @@ export async function sendOrderConfirmationEmail(params: OrderConfirmationParams
 
   const total = (params.totalCents / 100).toFixed(2);
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from,
     to: params.to,
     subject: `Order Confirmed — ${params.orderNumber} | UnTelevised Media`,
@@ -61,7 +71,7 @@ interface DigitalDownloadEmailParams {
 export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParams) {
   if (!process.env.RESEND_API_KEY) return;
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from,
     to: params.to,
     subject: `Your Digital Download Is Ready — ${params.orderNumber} | UnTelevised Media`,
@@ -96,7 +106,7 @@ export async function sendShipmentEmail(params: ShipmentEmailParams) {
     ? `<p style="font-family:sans-serif;">Tracking: <strong>${params.trackingNumber}</strong>${params.trackingUrl ? ` — <a href="${params.trackingUrl}">Track package</a>` : ''}</p>`
     : '';
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from,
     to: params.to,
     subject: `Your Order Has Shipped — ${params.orderNumber} | UnTelevised Media`,
@@ -116,7 +126,7 @@ export async function sendShipmentEmail(params: ShipmentEmailParams) {
 export async function sendRefundEmail(params: { to: string; orderNumber: string }) {
   if (!process.env.RESEND_API_KEY) return;
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from,
     to: params.to,
     subject: `Refund Processed — ${params.orderNumber} | UnTelevised Media`,

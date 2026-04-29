@@ -7,6 +7,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { PortableText } from '@portabletext/react';
 import sanityFetch from '@/lib/sanity/lib/fetch';
+import sanityClient from '@/lib/sanity/lib/client';
 import { queryBookBySlug, queryAllBooks } from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/lib/bookstore/types';
 import urlForImage from '@/util/urlForImage';
@@ -48,7 +49,8 @@ function buildProductJsonLd(book: SanityBook): string {
 }
 
 export async function generateStaticParams() {
-  const books = await sanityFetch<SanityBook[]>({ query: queryAllBooks, tags: ['book'] });
+  // Use the raw client (no draftMode) — safe to call outside request scope
+  const books = await sanityClient.fetch<SanityBook[]>(queryAllBooks);
   return (books ?? []).map((b) => ({ slug: b.slug.current }));
 }
 
