@@ -2,7 +2,7 @@
 // src/components/portal/OrdersTable.tsx
 // Client component: paginated, filterable, sortable order table with status update.
 
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useRef } from 'react';
 import type { Order, OrderItem, OrderStatus } from '@/lib/bookstore/types';
 
 export interface OrderWithItems extends Order {
@@ -44,6 +44,9 @@ export default function OrdersTable({ orders, canAdmin }: Props) {
   const [updating, setUpdating] = useState<string | null>(null);
   const [localOrders, setLocalOrders] = useState<OrderWithItems[]>(orders);
   const [, startTransition] = useTransition();
+  // Tracking number: map of orderId → input value (shown when advancing to 'shipped')
+  const [trackingInputs, setTrackingInputs] = useState<Record<string, string>>({});
+  const [showTrackingFor, setShowTrackingFor] = useState<string | null>(null);
 
   // Filter
   const filtered = localOrders.filter((o) => {
@@ -60,13 +63,14 @@ export default function OrdersTable({ orders, canAdmin }: Props) {
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
   const paginated = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
-  async function updateStatus(orderId: string, newStatus: OrderStatus) {
+  async function updateStatus(orderId: string, newStatus: OrderStatus, trackingNumber?: string) {
     setUpdating(orderId);
+    setShowTrackingFor(null);
     try {
       const res = await fetch(`/api/portal/orders/${orderId}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus }),
+        body: JSON.stringify({ status: newStatus, tracking_number: trackingNumber }),
       });
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
@@ -77,6 +81,7 @@ export default function OrdersTable({ orders, canAdmin }: Props) {
         setLocalOrders((prev) =>
           prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o)),
         );
+        setTrackingInputs((prev) => { const n = { ...prev }; delete n[orderId]; return n; });
       });
     } finally {
       setUpdating(null);
@@ -186,13 +191,49 @@ export default function OrdersTable({ orders, canAdmin }: Props) {
                         <div className='flex flex-col gap-1'>
                           {/* Physical: advance to next status */}
                           {hasPhysical && nextPhysStatus && (
-                            <button
-                              onClick={() => updateStatus(order.id, nextPhysStatus as OrderStatus)}
-                              disabled={isUpdating}
-                              className='text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-untele disabled:opacity-40'
-                            >
-                              {isUpdating ? '…' : `Mark ${nextPhysStatus}`}
-                            </button>
+                            nextPhysStatus === 'shipped' && showTrackingFor === order.id ? (
+                              /* Tracking number inline input */
+                              <div className='flex flex-col gap-1'>
+                                <input
+                                  type='text'
+                                  placeholder='Tracking # (optional)'
+                                  value={trackingInputs[order.id] ?? ''}
+                                  onChange={(e) =>
+                                    setTrackingInputs((p) => ({ ...p, [order.id]: e.target.value }))
+                                  }
+                                  className='border border-slate-300 bg-white px-2 py-1 text-[10px] text-slate-900 focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100'
+                                />
+                                <div className='flex gap-2'>
+                                  <button
+                                    onClick={() =>
+                                      updateStatus(order.id, 'shipped', trackingInputs[order.id])
+                                    }
+                                    disabled={isUpdating}
+                                    className='text-[10px] font-black uppercase tracking-widest text-untele hover:opacity-80 disabled:opacity-40'
+                                  >
+                                    {isUpdating ? '…' : 'Confirm'}
+                                  </button>
+                                  <button
+                                    onClick={() => setShowTrackingFor(null)}
+                                    className='text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-600'
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            ) : (
+                              <button
+                                onClick={() =>
+                                  nextPhysStatus === 'shipped'
+                                    ? setShowTrackingFor(order.id)
+                                    : updateStatus(order.id, nextPhysStatus as OrderStatus)
+                                }
+                                disabled={isUpdating}
+                                className='text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-untele disabled:opacity-40'
+                              >
+                                {isUpdating ? '…' : `Mark ${nextPhysStatus}`}
+                              </button>
+                            )
                           )}
                           {/* Admin: refund */}
                           {canAdmin && !['refunded', 'cancelled'].includes(order.status) && (
