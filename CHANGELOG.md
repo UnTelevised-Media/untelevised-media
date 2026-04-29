@@ -6,6 +6,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- **Bookstore — Foundation (Issue #46, Phase 1)**
+  - Supabase shop project env vars documented in `.env.local` (steps 1.1–1.2)
+  - Sanity schemas: `book`, `bookGenre`, embedded `bookFormat` object type; `author` schema updated with `isLiteraryAuthor`, `payoutEmail` fields (step 1.3)
+  - `src/lib/bookstore/supabase.ts` — typed Supabase clients (`shopClient` anon, `shopServiceClient` service-role) (step 1.4)
+  - `src/lib/bookstore/types.ts` — TypeScript interfaces: `Customer`, `Address`, `Order`, `OrderItem`, `DigitalDownload`, `Payout`, `SanityBook`, `SanityBookFormat`, `SanityBookGenre`, `CartItem`, `CheckoutPayload` (step 1.5)
+  - `src/lib/sanity/lib/queries.ts` — `queryAllBookGenres`, `queryFeaturedBooks`, `queryAllBooks`, `queryBookBySlug`, `queryBooksByAuthorClerkId` GROQ queries (step 1.6)
+  - `sales` portal role added to `src/lib/auth/roles-utils.ts` and `src/lib/auth/roles.ts`; `src/proxy.ts` enforces sales → `/portal/orders` only; `src/lib/auth/roles.ts` exports `requireAnyPortalRole`, `isSales`, `isSalesOnlyUser` (step 1.7)
+
+- **Bookstore — Stripe & Webhook (Issue #46, Phase 2)**
+  - `src/app/api/bookstore/checkout/route.ts` — POST creates Stripe Checkout Session from cart; collects shipping for physical items; metadata encodes items for webhook (step 2.1)
+  - `src/app/api/bookstore/webhook/route.ts` — verifies Stripe signature; handles `checkout.session.completed` (upsert customer, create order + order_items, digital fulfillment), `payment_intent.succeeded/failed`, `charge.refunded` (revoke downloads), `charge.dispute.created` (steps 2.2–2.5)
+  - `src/lib/bookstore/email.ts` — Resend email helpers: order confirmation, digital download delivery, shipment confirmation, refund confirmation (step 5 baseline)
+
+- **Bookstore — Public Storefront (Issue #46, Phase 3)**
+  - `src/app/(user)/bookstore/layout.tsx` — bookstore layout wrapper
+  - `src/app/(user)/bookstore/page.tsx` — featured hero + all-books grid + genre filter; full metadata
+  - `src/app/(user)/bookstore/book/[slug]/page.tsx` — full detail page; format selector; inventory badges; CTA buttons; author bio; Book + Offer JSON-LD; `generateMetadata`; `generateStaticParams`
+  - `src/app/(user)/bookstore/cart/page.tsx` — full cart page
+  - `src/app/(user)/bookstore/order-success/page.tsx` — post-checkout confirmation
+  - `src/app/(user)/bookstore/orders/page.tsx` — authenticated order history
+  - `src/app/(user)/bookstore/downloads/page.tsx` — digital download vault
+  - `src/app/api/bookstore/download/route.ts` — validates ownership, generates Supabase signed URL, increments counter
+  - `src/app/api/bookstore/my-downloads/route.ts` — returns customer's digital downloads
+  - `src/lib/bookstore/cart.ts` — Zustand cart store with localStorage persistence
+  - `src/components/bookstore/AddToCartButton.tsx` — client add-to-cart CTA
+  - `src/components/bookstore/GenreFilter.tsx` — client-side genre filter tabs
+  - `src/components/bookstore/MiniCart.tsx` — header mini-cart with item count badge
+  - Bookstore nav link added to main site navigation
+
+---
+
 ## [3.0.0] — 2026-04-28
 
 ### Summary
