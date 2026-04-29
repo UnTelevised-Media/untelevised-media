@@ -32,9 +32,9 @@ function BookCard({ book }: { book: SanityBook }) {
   return (
     <Link
       href={`/bookstore/book/${slug}`}
-      className='group block border border-slate-200 bg-white transition-colors hover:border-untele dark:border-slate-700 dark:bg-slate-900'
+      className='group block border border-hp-sand-border bg-white transition-colors hover:border-untele dark:border-hp-dark-border dark:bg-hp-dark-card'
     >
-      <div className='relative aspect-[5/7] overflow-hidden bg-slate-100 dark:bg-slate-800'>
+      <div className='relative aspect-[5/7] overflow-hidden bg-hp-sand dark:bg-hp-dark-border'>
         {cover ? (
           <Image
             src={cover}
@@ -45,7 +45,7 @@ function BookCard({ book }: { book: SanityBook }) {
           />
         ) : (
           <div className='flex h-full items-center justify-center p-4'>
-            <span className='text-center text-xs font-bold uppercase tracking-widest text-slate-400'>
+            <span className='text-center text-xs font-bold uppercase tracking-widest text-hp-muted'>
               {book.title}
             </span>
           </div>
@@ -59,10 +59,10 @@ function BookCard({ book }: { book: SanityBook }) {
         )}
       </div>
       <div className='p-3'>
-        <p className='mb-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+        <p className='mb-0.5 text-[10px] font-bold uppercase tracking-widest text-hp-muted dark:text-hp-muted'>
           {book.author?.name ?? 'Unknown Author'}
         </p>
-        <h3 className='text-sm font-black leading-tight text-slate-900 group-hover:text-untele dark:text-white'>
+        <h3 className='text-sm font-black leading-tight text-slate-900 group-hover:text-untele dark:text-hp-cream'>
           {book.title}
         </h3>
         {price != null && (
@@ -81,10 +81,10 @@ function FeaturedHero({ book }: { book: SanityBook }) {
     : null;
 
   return (
-    <div className='relative flex flex-col items-start gap-6 border border-untele bg-white p-6 dark:bg-slate-900 sm:flex-row sm:p-8 lg:p-12'>
+    <div className='relative flex flex-col items-start gap-6 border border-untele bg-white p-6 dark:bg-hp-dark-card sm:flex-row sm:p-8 lg:p-12'>
       {/* Cover */}
       <div className='relative w-full shrink-0 sm:w-56 lg:w-72'>
-        <div className='relative aspect-[5/7] overflow-hidden bg-slate-100 shadow-xl dark:bg-slate-800'>
+        <div className='relative aspect-[5/7] overflow-hidden bg-hp-sand shadow-xl dark:bg-hp-dark-border'>
           {cover ? (
             <Image
               src={cover}
@@ -96,7 +96,7 @@ function FeaturedHero({ book }: { book: SanityBook }) {
             />
           ) : (
             <div className='flex h-full items-center justify-center p-4'>
-              <span className='text-center text-sm font-black uppercase tracking-widest text-slate-400'>
+              <span className='text-center text-sm font-black uppercase tracking-widest text-hp-muted'>
                 {book.title}
               </span>
             </div>
@@ -111,10 +111,10 @@ function FeaturedHero({ book }: { book: SanityBook }) {
             Featured
           </span>
         </div>
-        <p className='mb-1 text-xs font-bold uppercase tracking-widest text-slate-400'>
+        <p className='mb-1 text-xs font-bold uppercase tracking-widest text-hp-muted'>
           {book.author?.name ?? 'Unknown Author'}
         </p>
-        <h2 className='mb-3 text-2xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-white lg:text-4xl'>
+        <h2 className='mb-3 text-2xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-hp-cream lg:text-4xl'>
           {book.title}
         </h2>
         {price != null && (
@@ -132,7 +132,7 @@ function FeaturedHero({ book }: { book: SanityBook }) {
               href={book.samplePdfUrl}
               target='_blank'
               rel='noopener noreferrer'
-              className='border border-slate-300 bg-white px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-700 hover:border-untele hover:text-untele dark:border-slate-600 dark:bg-transparent dark:text-slate-300'
+              className='border border-hp-sand-border bg-white px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-700 hover:border-untele hover:text-untele dark:border-hp-dark-border dark:bg-hp-dark-card dark:text-hp-cream'
             >
               Free Sample
             </a>
@@ -163,7 +163,7 @@ export default async function ShopPage() {
         <div className='bg-untele px-3 py-1'>
           <span className='text-sm font-black uppercase tracking-widest text-white'>Bookstore</span>
         </div>
-        <div className='h-px flex-1 bg-slate-200 dark:bg-slate-800' />
+        <div className='h-px flex-1 bg-hp-sand-border dark:bg-hp-dark-border' />
       </div>
 
       {/* Featured hero */}
@@ -181,7 +181,7 @@ export default async function ShopPage() {
               All Books
             </span>
           </div>
-          <div className='h-px flex-1 bg-slate-200 dark:bg-slate-800' />
+          <div className='h-px flex-1 bg-hp-sand-border dark:bg-hp-dark-border' />
         </div>
 
         {genres.length > 0 && (
@@ -191,8 +191,8 @@ export default async function ShopPage() {
         )}
 
         {allBooks.length === 0 ? (
-          <div className='border border-slate-200 bg-white px-4 py-12 text-center dark:border-slate-700 dark:bg-slate-900'>
-            <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+          <div className='border border-hp-sand-border bg-white px-4 py-12 text-center dark:border-hp-dark-border dark:bg-hp-dark-card'>
+            <p className='text-xs font-bold uppercase tracking-widest text-hp-muted'>
               No books available yet
             </p>
           </div>

@@ -70,6 +70,16 @@ const config: Config = {
       },
       colors: {
         untele: '#D70606',
+        // Hurriya Publications palette
+        'hp-sand': '#f4ede0',
+        'hp-sand-mid': '#e8dcc8',
+        'hp-sand-border': '#d4c4a0',
+        'hp-dark': '#1a1208',
+        'hp-dark-card': '#231810',
+        'hp-dark-border': '#3a2a18',
+        'hp-cream': '#f0e6d0',
+        'hp-muted': '#b8a888',
+        'hp-green': '#009736',
         dark: generateShades('#1A102B'), // Example dark color
         light: generateShades('#dae9dc'), // Example light color
         accent1: generateShades('#319bcf'), // Example accent color

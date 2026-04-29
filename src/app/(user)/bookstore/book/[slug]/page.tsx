@@ -86,11 +86,11 @@ export async function generateMetadata({
 function DetailRow({ label, value }: { label: string; value: string | number | undefined }) {
   if (!value && value !== 0) return null;
   return (
-    <div className='flex gap-3 border-b border-slate-100 py-2 dark:border-slate-800'>
-      <span className='w-24 shrink-0 text-[10px] font-black uppercase tracking-widest text-slate-400'>
+    <div className='flex gap-3 border-b border-hp-sand-border py-2 dark:border-hp-dark-border'>
+      <span className='w-24 shrink-0 text-[10px] font-black uppercase tracking-widest text-hp-muted'>
         {label}
       </span>
-      <span className='text-sm text-slate-700 dark:text-slate-300'>{value}</span>
+      <span className='text-sm text-slate-700 dark:text-hp-cream'>{value}</span>
     </div>
   );
 }
@@ -131,18 +131,18 @@ export default async function BookDetailPage({
       />
       <main className='mx-auto max-w-7xl px-4 py-8 sm:px-6'>
         {/* Breadcrumb */}
-        <nav className='mb-6 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+        <nav className='mb-6 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-hp-muted'>
           <Link href='/bookstore' className='hover:text-untele'>
             Bookstore
           </Link>
           <span>/</span>
-          <span className='text-slate-600 dark:text-slate-300'>{book.title}</span>
+          <span className='text-slate-600 dark:text-hp-cream'>{book.title}</span>
         </nav>
 
         <div className='flex flex-col gap-8 lg:flex-row lg:gap-12'>
           {/* Cover image */}
           <div className='shrink-0 lg:w-72 xl:w-80'>
-            <div className='relative aspect-[5/7] overflow-hidden bg-slate-100 shadow-xl dark:bg-slate-800'>
+            <div className='relative aspect-[5/7] overflow-hidden bg-hp-sand shadow-xl dark:bg-hp-dark-border'>
               {cover ? (
                 <Image
                   src={cover}
@@ -165,7 +165,7 @@ export default async function BookDetailPage({
                 href={book.samplePdfUrl}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='mt-3 flex items-center justify-center border border-slate-300 bg-white px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:border-untele hover:text-untele dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
+                className='mt-3 flex items-center justify-center border border-hp-sand-border bg-white px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:border-untele hover:text-untele dark:border-hp-dark-border dark:bg-hp-dark-card dark:text-hp-cream'
               >
                 Free Sample ↓
               </a>
@@ -174,10 +174,10 @@ export default async function BookDetailPage({
 
           {/* Book info */}
           <div className='flex-1'>
-            <p className='mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+            <p className='mb-1 text-[10px] font-bold uppercase tracking-widest text-hp-muted'>
               {book.author?.name ?? 'Unknown Author'}
             </p>
-            <h1 className='mb-2 text-3xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-white lg:text-5xl'>
+            <h1 className='mb-2 text-3xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-hp-cream lg:text-5xl'>
               {book.title}
             </h1>
 
@@ -187,7 +187,7 @@ export default async function BookDetailPage({
                 {book.genre.map((g) => (
                   <span
                     key={g._id}
-                    className='border border-slate-200 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:border-slate-700'
+                    className='border border-hp-sand-border px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-hp-muted dark:border-hp-dark-border'
                   >
                     {g.title}
                   </span>
@@ -197,7 +197,7 @@ export default async function BookDetailPage({
 
             {/* Description */}
             {book.description && (
-              <div className='prose prose-sm mb-6 max-w-none text-slate-700 dark:prose-invert dark:text-slate-300'>
+              <div className='prose prose-sm mb-6 max-w-none text-slate-700 dark:prose-invert dark:text-hp-cream'>
                 <PortableText value={book.description as Parameters<typeof PortableText>[0]['value']} />
               </div>
             )}
@@ -213,7 +213,7 @@ export default async function BookDetailPage({
               </div>
 
               {isOutOfStock ? (
-                <div className='border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-900'>
+                <div className='border border-hp-sand-border bg-hp-sand px-4 py-3 dark:border-hp-dark-border dark:bg-hp-dark-card'>
                   <p className='text-xs font-bold uppercase tracking-widest text-slate-500'>
                     Currently Out of Stock
                   </p>
@@ -233,10 +233,10 @@ export default async function BookDetailPage({
                     return (
                       <div
                         key={format._key}
-                        className='flex flex-col gap-2 border border-slate-200 p-4 dark:border-slate-700 sm:flex-row sm:items-center sm:justify-between'
+                        className='flex flex-col gap-2 border border-hp-sand-border bg-white p-4 dark:border-hp-dark-border dark:bg-hp-dark-card sm:flex-row sm:items-center sm:justify-between'
                       >
                         <div>
-                          <p className='text-sm font-black uppercase tracking-wide text-slate-900 dark:text-white'>
+                          <p className='text-sm font-black uppercase tracking-wide text-slate-900 dark:text-hp-cream'>
                             {format.formatType === 'physical' && 'Physical Book'}
                             {format.formatType === 'digital' && 'Digital Edition'}
                             {format.formatType === 'bundle' && 'Physical + Digital Bundle'}
@@ -301,7 +301,7 @@ export default async function BookDetailPage({
 
             {/* Author bio */}
             {book.author && (
-              <div className='border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900'>
+              <div className='border border-hp-sand-border bg-hp-sand p-4 dark:border-hp-dark-border dark:bg-hp-dark-card'>
                 <div className='mb-2 flex items-center gap-3'>
                   {authorCover && (
                     <div className='relative h-10 w-10 shrink-0 overflow-hidden'>
@@ -309,16 +309,16 @@ export default async function BookDetailPage({
                     </div>
                   )}
                   <div>
-                    <p className='text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+                    <p className='text-[10px] font-bold uppercase tracking-widest text-hp-muted'>
                       About the Author
                     </p>
-                    <p className='text-sm font-black text-slate-900 dark:text-white'>
+                    <p className='text-sm font-black text-slate-900 dark:text-hp-cream'>
                       {book.author.name}
                     </p>
                   </div>
                 </div>
                 {book.author.bio && (
-                  <div className='prose prose-sm max-w-none text-slate-600 dark:prose-invert dark:text-slate-400'>
+                  <div className='prose prose-sm max-w-none text-slate-600 dark:prose-invert dark:text-hp-muted'>
                     <PortableText value={book.author.bio as Parameters<typeof PortableText>[0]['value']} />
                   </div>
                 )}
