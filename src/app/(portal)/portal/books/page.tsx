@@ -276,6 +276,69 @@ export default async function PortalBooksPage() {
               </div>
             </section>
 
+            {/* Per-book sales chart */}
+            {supabaseAvailable && bookStats.some((b) => b.units > 0) && (
+              <section className='mb-8'>
+                <div className='mb-4 flex items-center gap-3'>
+                  <div className='bg-untele px-2 py-0.5'>
+                    <span className='text-[10px] font-black uppercase tracking-widest text-white'>
+                      Per-Book Breakdown
+                    </span>
+                  </div>
+                  <div className='h-px flex-1 bg-slate-200 dark:bg-slate-800' />
+                </div>
+                <div className='space-y-4'>
+                  {bookStats
+                    .filter((b) => b.units > 0)
+                    .map(({ book, units, revenue, digital, physical }) => {
+                      const maxUnits = Math.max(...bookStats.map((b) => b.units), 1);
+                      const pct = Math.round((units / maxUnits) * 100);
+                      const physPct = units > 0 ? Math.round((physical / units) * 100) : 0;
+                      const digPct = 100 - physPct;
+                      return (
+                        <div
+                          key={book._id}
+                          className='border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900'
+                        >
+                          <div className='mb-2 flex items-center justify-between'>
+                            <span className='text-sm font-black text-slate-900 dark:text-slate-100'>
+                              {book.title}
+                            </span>
+                            <span className='text-xs font-bold text-untele'>
+                              {centsToUsd(revenue)} — {units} unit{units !== 1 ? 's' : ''}
+                            </span>
+                          </div>
+                          {/* Total units bar */}
+                          <div className='mb-1 h-3 w-full bg-slate-100 dark:bg-slate-800'>
+                            <div
+                              className='h-full bg-untele transition-all'
+                              style={{ width: `${pct}%` }}
+                            />
+                          </div>
+                          {/* Physical / Digital split */}
+                          {units > 0 && (
+                            <div className='flex h-2 w-full overflow-hidden'>
+                              <div
+                                className='bg-slate-400 dark:bg-slate-600'
+                                style={{ width: `${physPct}%` }}
+                              />
+                              <div
+                                className='bg-blue-400 dark:bg-blue-600'
+                                style={{ width: `${digPct}%` }}
+                              />
+                            </div>
+                          )}
+                          <div className='mt-1 flex gap-4 text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+                            {physical > 0 && <span className='text-slate-500'>{physical} Physical</span>}
+                            {digital > 0 && <span className='text-blue-500'>{digital} Digital</span>}
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              </section>
+            )}
+
             {/* Inventory alerts */}
             {inventoryAlerts.length > 0 && (
               <section className='mb-8'>
