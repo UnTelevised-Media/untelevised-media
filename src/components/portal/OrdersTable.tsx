@@ -2,13 +2,13 @@
 // src/components/portal/OrdersTable.tsx
 // Client component: paginated, filterable, sortable order table with status update.
 
-import { useState, useTransition, useRef } from 'react';
+import React, { useState, useTransition, useRef } from 'react';
 import type { Order, OrderItem, OrderStatus } from '@/lib/bookstore/types';
 
 export interface OrderWithItems extends Order {
   customer_email?: string;
   customer_name?: string;
-  items: Pick<OrderItem, 'book_title' | 'sanity_format_type' | 'quantity' | 'is_digital'>[];
+  items: Pick<OrderItem, 'book_title' | 'format_label' | 'sanity_format_type' | 'quantity' | 'is_digital' | 'unit_price_cents'>[];
 }
 
 const STATUS_FLOW_PHYSICAL = ['paid', 'processing', 'shipped', 'delivered'] as const;
@@ -47,6 +47,7 @@ export default function OrdersTable({ orders, canAdmin }: Props) {
   // Tracking number: map of orderId → input value (shown when advancing to 'shipped')
   const [trackingInputs, setTrackingInputs] = useState<Record<string, string>>({});
   const [showTrackingFor, setShowTrackingFor] = useState<string | null>(null);
+  const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null);
 
   // Filter
   const filtered = localOrders.filter((o) => {
@@ -124,6 +125,7 @@ export default function OrdersTable({ orders, canAdmin }: Props) {
             <table className='w-full text-sm'>
               <thead>
                 <tr className='border-b border-slate-200 dark:border-slate-700'>
+                  <th className='w-6' />
                   <Th>Order #</Th>
                   <Th>Customer</Th>
                   <Th>Items</Th>
@@ -151,10 +153,19 @@ export default function OrdersTable({ orders, canAdmin }: Props) {
                     : null;
 
                   return (
+                    <React.Fragment key={order.id}>
                     <tr
-                      key={order.id}
-                      className='border-b border-slate-100 last:border-0 dark:border-slate-800'
+                      className='border-b border-slate-100 dark:border-slate-800'
                     >
+                      <td className='pl-3 pr-1 py-3'>
+                        <button
+                          onClick={() => setExpandedOrderId(expandedOrderId === order.id ? null : order.id)}
+                          className='text-[10px] font-black text-slate-400 hover:text-untele'
+                          aria-label='Toggle details'
+                        >
+                          {expandedOrderId === order.id ? '▲' : '▼'}
+                        </button>
+                      </td>
                       <td className='px-4 py-3 font-mono text-xs font-bold text-slate-900 dark:text-slate-100'>
                         {order.order_number}
                       </td>
@@ -252,6 +263,108 @@ export default function OrdersTable({ orders, canAdmin }: Props) {
                         </div>
                       </td>
                     </tr>
+                    {/* ── Expandable detail panel ── */}
+                    {expandedOrderId === order.id && (
+                      <tr className='border-b border-slate-100 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/50'>
+                        <td colSpan={9} className='px-6 py-4'>
+                          <div className='grid grid-cols-1 gap-6 sm:grid-cols-3'>
+                            {/* Payment breakdown */}
+                            <div>
+                              <p className='mb-2 text-[10px] font-black uppercase tracking-widest text-slate-400'>
+                                Payment
+                              </p>
+                              <div className='space-y-1 text-xs text-slate-700 dark:text-slate-300'>
+                                <div className='flex justify-between'>
+                                  <span>Subtotal</span>
+                                  <span>${(order.subtotal_cents / 100).toFixed(2)}</span>
+                                </div>
+                                {order.tax_cents > 0 && (
+                                  <div className='flex justify-between'>
+                                    <span>Tax</span>
+                                    <span>${(order.tax_cents / 100).toFixed(2)}</span>
+                                  </div>
+                                )}
+                                {order.shipping_cents > 0 && (
+                                  <div className='flex justify-between'>
+                                    <span>Shipping</span>
+                                    <span>${(order.shipping_cents / 100).toFixed(2)}</span>
+                                  </div>
+                                )}
+                                <div className='flex justify-between border-t border-slate-200 pt-1 font-bold dark:border-slate-700'>
+                                  <span>Total</span>
+                                  <span className='text-untele'>
+                                    ${(order.total_cents / 100).toFixed(2)}{' '}
+                                    {order.currency.toUpperCase()}
+                                  </span>
+                                </div>
+                              </div>
+                              {order.stripe_payment_intent_id && (
+                                <p className='mt-2 text-[10px] text-slate-400 break-all'>
+                                  PI:{' '}
+                                  <span className='font-mono text-slate-500'>
+                                    {order.stripe_payment_intent_id}
+                                  </span>
+                                </p>
+                              )}
+                              {order.notes && (
+                                <p className='mt-2 text-[10px] text-slate-500 italic'>{order.notes}</p>
+                              )}
+                            </div>
+
+                            {/* Item breakdown */}
+                            <div>
+                              <p className='mb-2 text-[10px] font-black uppercase tracking-widest text-slate-400'>
+                                Items
+                              </p>
+                              <ul className='space-y-1'>
+                                {order.items.map((item, idx) => (
+                                  <li key={idx} className='text-xs text-slate-700 dark:text-slate-300'>
+                                    <span className='font-bold'>{item.book_title}</span>
+                                    <span className='ml-1 text-slate-400'>
+                                      — {item.format_label || item.sanity_format_type} × {item.quantity}
+                                    </span>
+                                    {item.unit_price_cents > 0 && (
+                                      <span className='ml-1 text-slate-400'>
+                                        @ ${(item.unit_price_cents / 100).toFixed(2)}
+                                      </span>
+                                    )}
+                                    {item.is_digital && (
+                                      <span className='ml-1 inline-block bg-blue-100 px-1 text-[10px] font-bold uppercase text-blue-600 dark:bg-blue-900 dark:text-blue-300'>
+                                        Digital
+                                      </span>
+                                    )}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            {/* Metadata */}
+                            <div>
+                              <p className='mb-2 text-[10px] font-black uppercase tracking-widest text-slate-400'>
+                                Timestamps
+                              </p>
+                              <div className='space-y-1 text-[10px] text-slate-500'>
+                                <div>
+                                  <span className='font-bold'>Created:</span>{' '}
+                                  {new Date(order.created_at).toLocaleString()}
+                                </div>
+                                <div>
+                                  <span className='font-bold'>Updated:</span>{' '}
+                                  {new Date(order.updated_at).toLocaleString()}
+                                </div>
+                                {order.fulfilled_at && (
+                                  <div>
+                                    <span className='font-bold'>Fulfilled:</span>{' '}
+                                    {new Date(order.fulfilled_at).toLocaleString()}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                    </React.Fragment>
                   );
                 })}
               </tbody>

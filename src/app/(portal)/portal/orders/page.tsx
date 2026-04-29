@@ -47,7 +47,7 @@ export default async function PortalOrdersPage() {
         `
         *,
         customer:customers(email, full_name),
-        items:order_items(book_title, sanity_format_type, quantity, is_digital, sanity_book_id)
+        items:order_items(book_title, format_label, sanity_format_type, quantity, is_digital, sanity_book_id, unit_price_cents)
       `,
       )
       .order('created_at', { ascending: false })
@@ -78,10 +78,12 @@ export default async function PortalOrdersPage() {
       customer: { email: string; full_name: string | null } | null;
       items: {
         book_title: string;
+        format_label: string;
         sanity_format_type: string;
         quantity: number;
         is_digital: boolean;
         sanity_book_id: string;
+        unit_price_cents: number;
       }[];
     }>;
 
@@ -113,9 +115,11 @@ export default async function PortalOrdersPage() {
         customer_name: o.customer?.full_name ?? undefined,
         items: o.items.map((i) => ({
           book_title: i.book_title,
+          format_label: i.format_label,
           sanity_format_type: i.sanity_format_type as OrderWithItems['items'][0]['sanity_format_type'],
           quantity: i.quantity,
           is_digital: i.is_digital,
+          unit_price_cents: i.unit_price_cents,
         })),
       }));
   } catch {
