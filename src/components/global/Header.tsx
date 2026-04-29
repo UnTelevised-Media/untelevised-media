@@ -666,4 +666,3 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
 };
 
 export default Header;
->>>>>>> feat/issue-46-bookstore
