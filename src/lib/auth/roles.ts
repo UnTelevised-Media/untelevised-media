@@ -6,10 +6,10 @@
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import type { User } from '@clerk/nextjs/server';
-import { getRoleFromMeta, hasRole } from './roles-utils';
+import { getRoleFromMeta, hasRole, isSalesOnly } from './roles-utils';
 
 export type { PortalRole, UserWithRole } from './roles-utils';
-export { getRoleFromMeta, hasRole } from './roles-utils';
+export { getRoleFromMeta, hasRole, isSalesOnly, hasAnyPortalRole } from './roles-utils';
 
 /** Extract the portal role from a full Clerk User object. */
 export function getRoleFromUser(user: User): import('./roles-utils').PortalRole | null {
@@ -75,6 +75,20 @@ export async function requireAuthor(): Promise<import('./roles-utils').UserWithR
   return requireRole('author');
 }
 
+/** Require at least portal access (any role including sales). */
+export async function requireAnyPortalRole(): Promise<import('./roles-utils').UserWithRole> {
+  const { userId } = await auth();
+  if (!userId) redirect('/sign-in?redirect_url=/portal');
+
+  const user = await currentUser();
+  if (!user) redirect('/sign-in?redirect_url=/portal');
+
+  const userRole = getRoleFromUser(user);
+  if (!userRole) redirect('/');
+
+  return { id: user.id, role: userRole };
+}
+
 // ---------------------------------------------------------------------------
 // Boolean predicates (non-throwing — return false instead of redirecting)
 // ---------------------------------------------------------------------------
@@ -91,5 +105,16 @@ export async function isEditor(): Promise<boolean> {
 
 export async function isAuthor(): Promise<boolean> {
   const role = await getCurrentRole();
-  return role !== null;
+  return role !== null && role !== 'sales';
+}
+
+export async function isSales(): Promise<boolean> {
+  const role = await getCurrentRole();
+  return role === 'sales' || role === 'admin';
+}
+
+/** Returns true if the current user has the restricted sales-only role. */
+export async function isSalesOnlyUser(): Promise<boolean> {
+  const role = await getCurrentRole();
+  return isSalesOnly(role);
 }

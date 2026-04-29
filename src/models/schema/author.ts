@@ -141,7 +141,21 @@ export default defineType({
       type: 'string',
       // readOnly: true,
       description: 'Linked Clerk account ID — set by Admin only. Do not share or edit directly.',
-      // Hidden from Studio users who are not Sanity administrators
+      hidden: ({ currentUser }) => !currentUser?.roles?.some((r) => r.name === 'administrator'),
+    }),
+    // Bookstore fields
+    defineField({
+      name: 'isLiteraryAuthor',
+      title: 'Literary Author',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Enable to show this author in the bookstore and allow book associations',
+    }),
+    defineField({
+      name: 'payoutEmail',
+      title: 'Payout Email',
+      type: 'string',
+      description: 'Author payout recipient address (for future Stripe Connect integration)',
       hidden: ({ currentUser }) => !currentUser?.roles?.some((r) => r.name === 'administrator'),
     }),
   ],
