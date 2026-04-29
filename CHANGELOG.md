@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- **Bookstore — Supabase Infrastructure (Issue #46, Steps 1.1–1.2)**
+  - `supabase/migrations/20260428000001_bookstore_schema.sql` — DDL for all 6 bookstore tables (customers, addresses, orders, order_items, digital_downloads, payouts), 8 indexes, `set_updated_at()` trigger, RLS enabled on all tables with customer-scoped policies; pushed to project qdocpanuicwyhlcthudc
+  - `supabase/migrations/20260429000001_storage_rls.sql` — service-role-only RLS on `storage.objects` for `digital-books` bucket
+  - `digital-books` private Supabase Storage bucket created; no public access; downloads served via signed URLs only
+
 - **Bookstore — Foundation (Issue #46, Phase 1)**
   - Supabase shop project env vars documented in `.env.local` (steps 1.1–1.2)
   - Sanity schemas: `book`, `bookGenre`, embedded `bookFormat` object type; `author` schema updated with `isLiteraryAuthor`, `payoutEmail` fields (step 1.3)
