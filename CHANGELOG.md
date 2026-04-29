@@ -47,7 +47,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Bookstore — Internal Dashboard (Issue #46, Phase 4)**
   - `src/app/(portal)/portal/books/page.tsx` — My Books dashboard (author-gated): product list table with Studio links, sales summary cards (units/revenue/month-over-month), inventory alerts section, payout history table; gracefully degrades when Supabase is not connected
   - `src/app/(portal)/portal/orders/page.tsx` — Order Management (admin/sales/author-scoped): order stats, paginated + searchable table, status badges; authors see only orders containing their books
-  - `src/components/portal/OrdersTable.tsx` — client component: searchable + filterable order table; "Mark as shipped" with inline tracking number input; "Mark as [next status]" workflow; admin refund action with confirmation; pagination
+  - `src/components/portal/OrdersTable.tsx` — client component: searchable + filterable order table; expandable per-row detail panel (payment breakdown, item list with unit prices, Stripe payment intent ID, timestamps); "Mark as shipped" with inline tracking number input; "Mark as [next status]" workflow; admin refund action with confirmation; pagination
+  - Per-book CSS bar chart added to My Books dashboard showing relative units sold and physical/digital split per title
+  - Supabase env vars added to Vercel project settings (production + preview) via CLI
   - `src/app/api/portal/orders/[id]/status/route.ts` — PATCH: Zod-validated; validates status transition graph; sales cannot refund; fires shipment/refund emails on status change; revokes digital downloads on refund
   - `src/components/portal/PortalNav.tsx` — My Books + Orders nav links already wired; `sales` role shows Sales Portal label and limits to orders link
 
