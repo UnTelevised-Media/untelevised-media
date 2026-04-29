@@ -745,3 +745,61 @@ export const queryArticlesByTag = groq`
     tags
   }
 `;
+
+// ── Bookstore Queries ─────────────────────────────────────────────────────────
+
+const bookFragment = groq`
+  _id,
+  title,
+  slug,
+  status,
+  featured,
+  publishedAt,
+  isbn,
+  pages,
+  language,
+  samplePdfUrl,
+  coverImage { asset, alt },
+  "author": author-> {
+    _id, name, slug, clerkId, payoutEmail,
+    image { asset, alt },
+    bio
+  },
+  "genre": genre[]-> { _id, title, slug },
+  formats[] {
+    _key, formatType, price, compareAtPrice,
+    stripePriceId, stripeProductId,
+    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },
+    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },
+    weight, dimensions
+  },
+  description
+`;
+
+export const queryAllBookGenres = groq`
+  *[_type == "bookGenre"] | order(title asc) { _id, title, slug }
+`;
+
+export const queryFeaturedBooks = groq`
+  *[_type == "book" && featured == true && status == "published"] | order(publishedAt desc) [0..3] {
+    ${bookFragment}
+  }
+`;
+
+export const queryAllBooks = groq`
+  *[_type == "book" && status in ["published", "out-of-stock"]] | order(publishedAt desc) {
+    ${bookFragment}
+  }
+`;
+
+export const queryBookBySlug = groq`
+  *[_type == "book" && slug.current == $slug][0] {
+    ${bookFragment}
+  }
+`;
+
+export const queryBooksByAuthorClerkId = groq`
+  *[_type == "book" && author->clerkId == $clerkId] | order(publishedAt desc) {
+    ${bookFragment}
+  }
+`;
