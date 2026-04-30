@@ -10,6 +10,7 @@ import {
   uploadBookCover,
   uploadDigitalAsset,
   fetchBookGenres,
+  createBookGenre,
 } from '@/lib/portal/book-actions';
 import type { SanityBook, SanityBookGenre } from '@/lib/bookstore/types';
 
@@ -73,6 +74,11 @@ export default function EditBookModal({ book }: Props) {
   const [localGenres, setLocalGenres] = useState<SanityBookGenre[]>([]);
   const [selectedGenreIds, setSelectedGenreIds] = useState<string[]>([]);
   const [genresLoading, setGenresLoading] = useState(false);
+  const [showGenreForm, setShowGenreForm] = useState(false);
+  const [genreTitle, setGenreTitle] = useState('');
+  const [genreSlug, setGenreSlug] = useState('');
+  const [genreError, setGenreError] = useState('');
+  const [genreCreating, setGenreCreating] = useState(false);
 
   // UI state
   const [error, setError] = useState('');
@@ -107,6 +113,10 @@ export default function EditBookModal({ book }: Props) {
 
     setFictionType(book.fictionType ?? undefined);
     setGenreDropdownOpen(false);
+    setShowGenreForm(false);
+    setGenreTitle('');
+    setGenreSlug('');
+    setGenreError('');
 
     setGenresLoading(true);
     fetchBookGenres()
@@ -125,6 +135,34 @@ export default function EditBookModal({ book }: Props) {
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, [genreDropdownOpen]);
+
+  function slugifyLocal(str: string) {
+    return str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  async function handleCreateGenre() {
+    setGenreError('');
+    if (!genreTitle.trim()) { setGenreError('Title is required.'); return; }
+    if (!genreSlug.trim()) { setGenreError('Slug is required.'); return; }
+    setGenreCreating(true);
+    try {
+      const created = await createBookGenre(genreTitle, genreSlug);
+      setLocalGenres((prev) => [...prev, created].sort((a, b) => a.title.localeCompare(b.title)));
+      setSelectedGenreIds((prev) => [...prev, created._id]);
+      setGenreTitle('');
+      setGenreSlug('');
+      setShowGenreForm(false);
+    } catch (err) {
+      setGenreError(err instanceof Error ? err.message : 'Failed to create genre.');
+    } finally {
+      setGenreCreating(false);
+    }
+  }
 
   function handleCoverChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0] ?? null;
@@ -342,15 +380,65 @@ export default function EditBookModal({ book }: Props) {
                   <div>
                     <div className='mb-2 flex items-center justify-between'>
                       <label className={labelCls}>Genres</label>
-                      <a
-                        href='/portal/books'
-                        className='flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-untele'
-                        title='Add genres via Add Book modal'
+                      <button
+                        type='button'
+                        onClick={() => { setShowGenreForm((v) => !v); setGenreError(''); }}
+                        className='flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-untele hover:underline'
                       >
                         <Plus className='h-3 w-3' />
-                        New Genre in Add Book
-                      </a>
+                        {showGenreForm ? 'Cancel' : 'New Genre'}
+                      </button>
                     </div>
+
+                    {/* Inline genre creation sub-form */}
+                    {showGenreForm && (
+                      <div className='mb-3 border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800'>
+                        <p className='mb-2 text-[10px] font-black uppercase tracking-widest text-untele'>
+                          Create Genre
+                        </p>
+                        <div className='mb-2'>
+                          <label className={`mb-1 block ${labelCls}`}>Title *</label>
+                          <input
+                            type='text'
+                            value={genreTitle}
+                            onChange={(e) => setGenreTitle(e.target.value)}
+                            placeholder='e.g. Historical Fiction'
+                            className={inputCls}
+                          />
+                        </div>
+                        <div className='mb-3'>
+                          <label className={`mb-1 block ${labelCls}`}>Slug *</label>
+                          <div className='flex gap-2'>
+                            <input
+                              type='text'
+                              value={genreSlug}
+                              onChange={(e) => setGenreSlug(e.target.value)}
+                              placeholder='historical-fiction'
+                              className={`${inputCls} flex-1`}
+                            />
+                            <button
+                              type='button'
+                              onClick={() => setGenreSlug(slugifyLocal(genreTitle))}
+                              disabled={!genreTitle.trim()}
+                              className='shrink-0 border border-slate-300 bg-white px-3 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:border-untele hover:text-untele disabled:opacity-40 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300'
+                            >
+                              Slugify
+                            </button>
+                          </div>
+                        </div>
+                        {genreError && (
+                          <p className='mb-2 text-[10px] font-bold text-red-500'>{genreError}</p>
+                        )}
+                        <button
+                          type='button'
+                          onClick={handleCreateGenre}
+                          disabled={genreCreating}
+                          className='bg-untele px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-white hover:opacity-90 disabled:opacity-50'
+                        >
+                          {genreCreating ? 'Creating…' : 'Create'}
+                        </button>
+                      </div>
+                    )}
                     {genresLoading ? (
                       <p className='text-[10px] text-slate-400'>Loading genres…</p>
                     ) : (
