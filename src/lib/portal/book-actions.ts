@@ -47,6 +47,7 @@ export interface CreateBookInput {
   language?: string;
   publishedAt?: string;
   status: 'draft' | 'published';
+  fictionType?: 'fiction' | 'non-fiction';
   genreIds?: string[];
   formats: Array<{
     formatType: 'physical' | 'digital' | 'bundle';
@@ -104,6 +105,7 @@ export async function createBook(
     ...(input.pages != null ? { pages: input.pages } : {}),
     ...(input.publishedAt ? { publishedAt: input.publishedAt } : {}),
     ...(descriptionBlocks ? { description: descriptionBlocks } : {}),
+    ...(input.fictionType ? { fictionType: input.fictionType } : {}),
     ...(input.genreIds?.length
       ? { genre: input.genreIds.map((id) => ({ _type: 'reference', _ref: id })) }
       : {}),
@@ -248,6 +250,7 @@ export interface UpdateBookInput {
   language?: string;
   publishedAt?: string;
   status?: 'draft' | 'published' | 'out-of-stock' | 'discontinued';
+  fictionType?: 'fiction' | 'non-fiction' | null;
   genreIds?: string[];
   formatPrices?: Array<{
     key: string;
@@ -292,6 +295,11 @@ export async function updateBook(bookId: string, input: UpdateBookInput): Promis
     } else {
       unset.push('description');
     }
+  }
+
+  if (input.fictionType !== undefined) {
+    if (input.fictionType) patch.fictionType = input.fictionType;
+    else unset.push('fictionType');
   }
 
   if (input.genreIds !== undefined) {

@@ -239,6 +239,18 @@ export default defineType({
       initialValue: 'en',
     }),
     defineField({
+      name: 'fictionType',
+      title: 'Fiction / Non-Fiction',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Fiction', value: 'fiction' },
+          { title: 'Non-Fiction', value: 'non-fiction' },
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'formats',
       title: 'Formats',
       type: 'array',

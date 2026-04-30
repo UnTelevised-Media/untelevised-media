@@ -4,7 +4,7 @@
 // Submits via server action → creates Sanity book document.
 
 import { useState, useEffect, useRef, useTransition } from 'react';
-import { X, Plus, Trash2 } from 'lucide-react';
+import { X, Plus, Trash2, ChevronDown } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import {
   createBook,
@@ -54,9 +54,14 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
   // One ref per format slot (max 3); position:fixed escapes all parent overflow clipping
   const digitalInputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+  // Fiction / Non-Fiction
+  const [fictionType, setFictionType] = useState<'fiction' | 'non-fiction' | undefined>(undefined);
+
   // Genre state
   const [localGenres, setLocalGenres] = useState<SanityBookGenre[]>([]);
   const [selectedGenreIds, setSelectedGenreIds] = useState<string[]>([]);
+  const [genreDropdownOpen, setGenreDropdownOpen] = useState(false);
+  const genreDropdownRef = useRef<HTMLDivElement>(null);
   const [genresLoading, setGenresLoading] = useState(false);
   const [showGenreForm, setShowGenreForm] = useState(false);
   const [genreTitle, setGenreTitle] = useState('');
@@ -77,6 +82,18 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
       .then(setLocalGenres)
       .finally(() => setGenresLoading(false));
   }, [open]);
+
+  // Close genre dropdown on outside click
+  useEffect(() => {
+    if (!genreDropdownOpen) return;
+    function handler(e: MouseEvent) {
+      if (genreDropdownRef.current && !genreDropdownRef.current.contains(e.target as Node)) {
+        setGenreDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [genreDropdownOpen]);
 
   function slugifyLocal(str: string) {
     return str
@@ -118,7 +135,9 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
     setPublishedAt('');
     setFormats([blankFormat()]);
     setDigitalFiles([null]);
+    setFictionType(undefined);
     setSelectedGenreIds([]);
+    setGenreDropdownOpen(false);
     setShowGenreForm(false);
     setGenreTitle('');
     setGenreSlug('');
@@ -180,6 +199,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
           language: language.trim() || 'en',
           publishedAt: publishedAt || undefined,
           status,
+          fictionType,
           formats: parsedFormats,
           genreIds: selectedGenreIds.length ? selectedGenreIds : undefined,
         });
@@ -393,6 +413,27 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                     />
                   </FormField>
 
+                  {/* Fiction / Non-Fiction */}
+                  <div>
+                    <label className={`mb-2 block ${labelCls}`}>Type</label>
+                    <div className='flex gap-2'>
+                      {(['fiction', 'non-fiction'] as const).map((t) => (
+                        <button
+                          key={t}
+                          type='button'
+                          onClick={() => setFictionType((prev) => (prev === t ? undefined : t))}
+                          className={`px-3 py-1.5 text-[10px] font-black uppercase tracking-widest transition-colors ${
+                            fictionType === t
+                              ? 'bg-untele text-white'
+                              : 'border border-slate-300 text-slate-500 hover:border-untele hover:text-untele dark:border-slate-700 dark:text-slate-400'
+                          }`}
+                        >
+                          {t === 'fiction' ? 'Fiction' : 'Non-Fiction'}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
                   {/* Genres */}
                   <div>
                     <div className='mb-2 flex items-center justify-between'>
@@ -457,37 +498,79 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                       </div>
                     )}
 
-                    {/* Genre multi-select */}
+                    {/* Genre dropdown */}
                     {genresLoading ? (
                       <p className='text-[10px] text-slate-400'>Loading genres…</p>
-                    ) : localGenres.length === 0 ? (
-                      <p className='text-[10px] text-slate-400'>
-                        No genres yet — create one above.
-                      </p>
                     ) : (
-                      <div className='max-h-36 overflow-y-auto border border-slate-200 dark:border-slate-700'>
-                        {localGenres.map((g) => (
-                          <label
-                            key={g._id}
-                            className='flex cursor-pointer items-center gap-2.5 px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800'
-                          >
-                            <input
-                              type='checkbox'
-                              checked={selectedGenreIds.includes(g._id)}
-                              onChange={(e) =>
-                                setSelectedGenreIds((prev) =>
-                                  e.target.checked
-                                    ? [...prev, g._id]
-                                    : prev.filter((id) => id !== g._id),
-                                )
-                              }
-                              className='accent-untele'
-                            />
-                            <span className='text-xs text-slate-700 dark:text-slate-300'>
-                              {g.title}
-                            </span>
-                          </label>
-                        ))}
+                      <div ref={genreDropdownRef}>
+                        <button
+                          type='button'
+                          onClick={() => setGenreDropdownOpen((v) => !v)}
+                          className='flex min-h-[38px] w-full items-center justify-between border border-slate-200 bg-white px-3 py-2 text-left dark:border-slate-700 dark:bg-slate-800'
+                        >
+                          {selectedGenreIds.length === 0 ? (
+                            <span className='text-xs text-slate-400'>Select genres…</span>
+                          ) : (
+                            <div className='flex flex-wrap gap-1 pr-1'>
+                              {selectedGenreIds.map((id) => {
+                                const g = localGenres.find((x) => x._id === id);
+                                return g ? (
+                                  <span
+                                    key={id}
+                                    className='flex items-center gap-1 border border-untele/30 bg-untele/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-untele'
+                                  >
+                                    {g.title}
+                                    <button
+                                      type='button'
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedGenreIds((prev) => prev.filter((gid) => gid !== id));
+                                      }}
+                                      className='leading-none text-untele/60 hover:text-untele'
+                                    >
+                                      ×
+                                    </button>
+                                  </span>
+                                ) : null;
+                              })}
+                            </div>
+                          )}
+                          <ChevronDown
+                            className={`ml-2 h-3.5 w-3.5 shrink-0 text-slate-400 transition-transform duration-150 ${genreDropdownOpen ? 'rotate-180' : ''}`}
+                          />
+                        </button>
+                        {genreDropdownOpen && (
+                          <div className='mt-px max-h-44 overflow-y-auto border border-t-0 border-slate-200 dark:border-slate-700'>
+                            {localGenres.length === 0 ? (
+                              <p className='px-3 py-2 text-[10px] text-slate-400'>
+                                No genres yet — create one above.
+                              </p>
+                            ) : (
+                              localGenres.map((g) => (
+                                <label
+                                  key={g._id}
+                                  className='flex cursor-pointer items-center gap-2.5 px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800'
+                                >
+                                  <input
+                                    type='checkbox'
+                                    checked={selectedGenreIds.includes(g._id)}
+                                    onChange={(e) =>
+                                      setSelectedGenreIds((prev) =>
+                                        e.target.checked
+                                          ? [...prev, g._id]
+                                          : prev.filter((id) => id !== g._id),
+                                      )
+                                    }
+                                    className='accent-untele'
+                                  />
+                                  <span className='text-xs text-slate-700 dark:text-slate-300'>
+                                    {g.title}
+                                  </span>
+                                </label>
+                              ))
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>

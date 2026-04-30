@@ -167,6 +167,7 @@ export interface SanityBook {
   isbn?: string;
   pages?: number;
   language?: string;
+  fictionType?: 'fiction' | 'non-fiction';
   formats: SanityBookFormat[];
   samplePdfUrl?: string;
   featured: boolean;

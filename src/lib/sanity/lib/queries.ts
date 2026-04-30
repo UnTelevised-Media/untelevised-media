@@ -774,6 +774,7 @@ const bookFragment = groq`
   isbn,
   pages,
   language,
+  fictionType,
   samplePdfUrl,
   coverImage { asset, alt },
   coverImageUrl,
