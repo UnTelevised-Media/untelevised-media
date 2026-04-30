@@ -24,7 +24,9 @@ export const metadata: Metadata = {
 
 function BookCard({ book }: { book: SanityBook }) {
   const slug = book.slug.current;
-  const price = book.formats?.[0]?.price;
+  const firstFormat = book.formats?.[0];
+  const price = firstFormat?.price;
+  const compareAtPrice = firstFormat?.compareAtPrice;
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(400).height(560).url()
     : (book.coverImageUrl ?? null);
@@ -66,7 +68,12 @@ function BookCard({ book }: { book: SanityBook }) {
           {book.title}
         </h3>
         {price != null && (
-          <p className='mt-1 text-xs font-bold text-untele'>${price.toFixed(2)}</p>
+          <div className='mt-1'>
+            {compareAtPrice != null && (
+              <p className='text-[10px] text-hp-muted line-through'>${compareAtPrice.toFixed(2)}</p>
+            )}
+            <p className='text-xs font-bold text-untele'>${price.toFixed(2)}</p>
+          </div>
         )}
       </div>
     </Link>
@@ -75,7 +82,9 @@ function BookCard({ book }: { book: SanityBook }) {
 
 function FeaturedHero({ book }: { book: SanityBook }) {
   const slug = book.slug.current;
-  const price = book.formats?.[0]?.price;
+  const firstFormat = book.formats?.[0];
+  const price = firstFormat?.price;
+  const compareAtPrice = firstFormat?.compareAtPrice;
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(800).height(1120).url()
     : (book.coverImageUrl ?? null);
@@ -118,7 +127,12 @@ function FeaturedHero({ book }: { book: SanityBook }) {
           {book.title}
         </h2>
         {price != null && (
-          <p className='mb-4 text-lg font-black text-untele'>From ${price.toFixed(2)}</p>
+          <div className='mb-4'>
+            {compareAtPrice != null && (
+              <p className='text-sm text-hp-muted line-through'>From ${compareAtPrice.toFixed(2)}</p>
+            )}
+            <p className='text-lg font-black text-untele'>From ${price.toFixed(2)}</p>
+          </div>
         )}
         <div className='flex flex-wrap gap-3'>
           <Link
