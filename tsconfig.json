@@ -58,6 +58,7 @@
         "./*"
       ]
     },
+    "ignoreDeprecations": "6.0",
     "rootDir": "./",
     "baseUrl": ".",
     "outDir": "./out",

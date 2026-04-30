@@ -11,6 +11,31 @@ import resolveHref from '@/util/resolveHref';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryLiveEvents, queryBreakingArticles } from '@/lib/sanity/lib/queries';
 
+interface LiveEvent {
+  _id: string;
+  _createdAt: string;
+  title: string;
+  description?: string;
+  subtitle?: string;
+  mainImage?: unknown;
+  slug?: { current: string };
+  eventDate?: string;
+  endDate?: string;
+  eventStatus?: string;
+  isCurrentEvent?: boolean;
+  location?: string;
+}
+
+interface Article {
+  _id: string;
+  _createdAt: string;
+  title: string;
+  description?: string;
+  mainImage?: unknown;
+  slug?: { current: string };
+  publishedAt?: string;
+}
+
 export default function BreakingNewsClient() {
   const [liveEvents, setLiveEvents] = useState<LiveEvent[]>([]);
   const [breakingArticles, setBreakingArticles] = useState<Article[]>([]);

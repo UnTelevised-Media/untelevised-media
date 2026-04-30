@@ -1,9 +1,8 @@
 /* eslint-disable react/function-component-definition */
 // src/app/(news)/breaking/page.tsx
 
-import BreakingNewsClient from './BreakingNewsClient';
 import type { Metadata } from 'next';
-import { getSanityOgImageUrl } from '@/util/metadata';
+import BreakingNewsClient from './BreakingNewsClient';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

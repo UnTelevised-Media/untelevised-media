@@ -139,16 +139,6 @@ export function SecureContactTable({ contacts }: { contacts: SecureContact[] }) 
                               <p className='text-sm text-slate-700 dark:text-slate-300'>{contact.phone}</p>
                             </div>
                           )}
-                          <div className='md:col-span-2'>
-                            <a
-                              href={`/studio/structure/secureContact;${contact._id}`}
-                              target='_blank'
-                              rel='noopener noreferrer'
-                              className='inline-flex items-center gap-2 bg-untele px-4 py-2 text-xs font-black uppercase tracking-widest text-white hover:bg-red-700'
-                            >
-                              Manage in Studio ↗
-                            </a>
-                          </div>
                         </div>
                       </td>
                     </tr>

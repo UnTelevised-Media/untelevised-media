@@ -25,9 +25,10 @@ export default async function PortalOrdersPage() {
 
   let orders: OrderWithItems[] = [];
   let supabaseAvailable = true;
+  let supabaseError: string | null = null;
 
   try {
-    if (!process.env.SUPABASE_SHOP_URL) throw new Error('Supabase shop not configured');
+    if (!process.env.SUPABASE_SHOP_URL) throw new Error('SUPABASE_SHOP_URL is not set');
 
     // For authors: scope to their own books only
     let bookIds: string[] = [];
@@ -122,8 +123,9 @@ export default async function PortalOrdersPage() {
           unit_price_cents: i.unit_price_cents,
         })),
       }));
-  } catch {
+  } catch (err) {
     supabaseAvailable = false;
+    supabaseError = err instanceof Error ? err.message : String(err);
   }
 
   return (
@@ -154,9 +156,16 @@ export default async function PortalOrdersPage() {
 
         {!supabaseAvailable ? (
           <div className='border border-amber-200 bg-amber-50 px-6 py-8 dark:border-amber-800 dark:bg-amber-950'>
-            <p className='text-sm font-bold text-amber-700 dark:text-amber-300'>
-              Order data unavailable — Supabase shop database is not connected.
-              {/* TODO: set SUPABASE_SHOP_URL, SUPABASE_SHOP_ANON_KEY, SUPABASE_SHOP_SERVICE_ROLE_KEY */}
+            <p className='mb-2 text-sm font-bold text-amber-700 dark:text-amber-300'>
+              Order data unavailable — database query failed.
+            </p>
+            {supabaseError && (
+              <p className='font-mono text-xs text-amber-600 dark:text-amber-400'>{supabaseError}</p>
+            )}
+            <p className='mt-3 text-xs text-amber-600 dark:text-amber-400'>
+              If this is a &ldquo;relation does not exist&rdquo; error, run{' '}
+              <code className='rounded bg-amber-100 px-1 dark:bg-amber-900'>supabase db push</code>{' '}
+              to apply the bookstore schema migrations to your Supabase project.
             </p>
           </div>
         ) : (

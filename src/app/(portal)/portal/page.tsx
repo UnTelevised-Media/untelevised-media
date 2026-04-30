@@ -446,16 +446,6 @@ export default async function PortalDashboardPage() {
             >
               Edit Profile
             </Link>
-            {isEditorPlus && (
-              <a
-                href='/studio'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='border border-slate-300 bg-white px-5 py-2.5 text-xs font-black uppercase tracking-widest text-slate-700 hover:border-untele hover:text-untele dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
-              >
-                Open Studio ↗
-              </a>
-            )}
           </div>
         </section>
 

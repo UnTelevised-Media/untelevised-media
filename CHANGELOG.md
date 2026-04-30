@@ -54,13 +54,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/components/portal/PortalNav.tsx` — My Books + Orders nav links already wired; `sales` role shows Sales Portal label and limits to orders link
 
 - **Bookstore — Author Book Management (Issue #46, Phase 5)**
-  - `src/components/portal/AddBookModal.tsx` — slide-over book creation widget: title, description, multi-select genres with inline "New Genre" sub-form (title + slug + Slugify button), cover photo upload with preview, status radio (draft/published), per-format pricing (physical / digital / bundle, up to 3), digital file upload (PDF/EPUB/MOBI/ZIP) per digital/bundle format
-  - `src/components/portal/EditBookModal.tsx` — slide-over book editor: all fields pre-populated from existing Sanity document via `blocksToText()` PortableText helper; cover photo replacement; digital file replacement per format slot; all 4 status values (draft/published/out-of-stock/discontinued); genre multi-select; price editing by `_key`
-  - `src/lib/portal/book-actions.ts` — server actions: `createBook` (Sanity write + pre-generate format `_key`s), `updateBook` (patch/unset diff), `uploadBookCover` (FormData → Supabase `book-covers` public bucket → Sanity patch), `uploadDigitalAsset` (FormData → Supabase `digital-books` private bucket → Sanity format patch), `fetchBookGenres`, `createBookGenre`
+  - `src/components/portal/AddBookModal.tsx` — slide-over book creation widget: title, description, multi-select genres with inline "New Genre" sub-form (title + slug + Slugify button), cover photo upload with preview, status radio (draft/published), per-format pricing (physical / digital / bundle, up to 3), digital file upload (PDF/EPUB/MOBI/ZIP) per digital/bundle format; genre dropdown with clickable pills; Fiction/Non-Fiction type toggle (either-or, deselectable)
+  - `src/components/portal/EditBookModal.tsx` — slide-over book editor: all fields pre-populated from existing Sanity document via `blocksToText()` PortableText helper; cover photo replacement; digital file replacement per format slot; all 4 status values (draft/published/out-of-stock/discontinued); genre multi-select dropdown with pills; Fiction/Non-Fiction type toggle; inline New Genre sub-form (no modal redirect); price editing by `_key`
+  - `src/lib/portal/book-actions.ts` — server actions: `createBook` (Sanity write + pre-generate format `_key`s), `updateBook` (patch/unset diff), `uploadBookCover` (FormData → Supabase `book-covers` public bucket → Sanity patch), `uploadDigitalAsset` (FormData → Supabase `digital-books` private bucket → Sanity format patch), `fetchBookGenres`, `createBookGenre`; genre references include `_key` to satisfy Sanity array requirements; `fictionType` field supported in create and update
   - `supabase/migrations/20260429000002_book_covers_bucket.sql` — `book-covers` public bucket: 5 MB limit, image MIME types, service-role write policy
   - `supabase/migrations/20260429000003_digital_books_bucket.sql` — `digital-books` private bucket: 500 MB limit, no MIME restriction, service-role write policy
+  - `supabase/migrations/20260430000001_grant_role_privileges.sql` — grants `SELECT/INSERT/UPDATE/DELETE` on all bookstore tables to `service_role`, `anon`, `authenticated`; fixes `permission denied for table` errors that blocked portal order management and all Supabase queries despite correct env vars
   - `next.config.ts` — `serverActions.bodySizeLimit: '50mb'` to support large cover and digital file uploads (default 1 MB silently dropped payloads)
-  - `src/app/(portal)/portal/books/page.tsx` — `EditBookModal` integrated inline; Studio link kept as secondary action
+  - `src/app/(portal)/portal/books/page.tsx` — `EditBookModal` integrated inline; all Studio links removed from portal UI
+
+- **Portal — Studio Links Removed**
+  - Removed all direct Sanity Studio links from the author portal and component UI; portal is now self-contained
+  - `src/app/(portal)/portal/page.tsx` — removed "Open Studio ↗" button (editor+ only)
+  - `src/app/(portal)/portal/books/page.tsx` — removed "Manage in Studio →" header button and "Studio ↗" per-row action link; updated empty-state text
+  - `src/components/portal/AddBookModal.tsx` — updated post-create success state to reference the Edit button instead of Studio; removed "Stripe Price IDs can be added in Studio" note
+  - `src/components/portal/EditBookModal.tsx` — removed "To add or remove formats, use Studio" note
+  - `src/components/portal/SecureContactTable.tsx` — removed "Manage in Studio ↗" action link
+  - `src/components/portal/WhistleblowerTable.tsx` — removed "Manage in Studio ↗" action link
 
 - **Portal Dashboard — Bookstore Widgets (Issue #46, Phase 4 cont.)**
   - `src/components/portal/BookstoreOrdersWidget.tsx` — 2-panel switchable widget: Digital Sales tab (fulfilled digital orders) and Pending Shipments tab (physical orders awaiting dispatch); links to full Orders page
@@ -75,6 +85,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `public/hurriya-pub/` — full brand asset set: Logo, Logo-alt, Logo-invert, Banner, Banner-invert (PNG + PSD source files)
 
 ### Fixed
+
+- **Supabase `permission denied for table` on all bookstore tables** — schema migration created tables with RLS enabled but never granted base Postgres table privileges to `service_role`, `anon`, or `authenticated`; service role bypasses RLS row policies but still requires explicit `GRANT`; new migration `20260430000001_grant_role_privileges.sql` grants full DML to `service_role` and `authenticated`, read-only `payouts` to `authenticated`; applied to production Supabase project via `supabase db push`
+
+- **Portal Order Management showing "database not connected"** — catch block swallowed error silently; improved to capture and display the actual Supabase error message with a hint to run `supabase db push` if the error is a missing relation
+
+- **`BreakingNewsClient` "Cannot find module" TS error** — `LiveEvent` and `Article` types were used as implicit globals in `BreakingNewsClient.tsx` with no import or local declaration; TypeScript failed to compile the file, causing the parent `page.tsx` import to report "Cannot find module"; fixed by adding `interface LiveEvent` and `interface Article` at the top of the file
+
+- **`checkbox.tsx` duplicate border Tailwind classes** — shadcn codegen emitted `border-slate-200 border-slate-900` (and `dark:border-slate-800 dark:border-slate-50`) on the same element; only the last value wins; removed the duplicate dark-state values, keeping `border-slate-200 dark:border-slate-800` as the unchecked border (checked colors already handled by `data-[state=checked]` classes)
+
+- **`tsconfig.json` `baseUrl` deprecation warning** — added `"ignoreDeprecations": "6.0"` to silence the TypeScript 7.0 deprecation warning; `baseUrl` itself retained as it is still required for the `@/*` path alias resolution under `moduleResolution: "bundler"`
 
 - **File input clicks broken inside `overflow-hidden` containers** — `sr-only` applies `clip: rect(0,0,0,0)` which kills programmatic click targets; fixed across `AddBookModal`, `EditBookModal`, and `ArticleEditorForm` by switching to `useRef` + `className='hidden'` / `fixed left-[-9999px]` inputs with `ref.current?.click()`
 - **Digital file "first pick doesn't stick"** — shared `digitalInputRef` + `useState` index tracking has stale closure / batched-state race on first pick; fixed in both `AddBookModal` and `EditBookModal` by giving each format card its own dedicated `<input ref={(el) => { digitalInputRefs.current[i] = el; }}>` with an inline `onChange` that captures `i` directly from the `map()` closure — eliminates index tracking entirely

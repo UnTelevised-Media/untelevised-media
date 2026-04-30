@@ -138,14 +138,6 @@ export default async function PortalBooksPage() {
           </div>
           <div className='flex items-center gap-3'>
             <AddBookModal label='+ Add Book' variant='primary' />
-            <a
-              href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL ?? ''}/studio/desk/book`}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='border border-slate-300 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-600 hover:border-untele hover:text-untele dark:border-slate-700 dark:text-slate-400'
-            >
-              Manage in Studio →
-            </a>
           </div>
         </div>
 
@@ -156,7 +148,7 @@ export default async function PortalBooksPage() {
               No books yet
             </p>
             <p className='mb-4 text-xs text-slate-400'>
-              Create a book in Sanity Studio and set your author profile as the author.
+              Add your first book using the button above.
             </p>
             <AddBookModal label='+ Add Your First Book' variant='primary' />
           </div>
@@ -268,14 +260,6 @@ export default async function PortalBooksPage() {
                         <td className='px-4 py-3'>
                           <div className='flex items-center gap-3'>
                             <EditBookModal book={book} />
-                            <a
-                              href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL ?? ''}/studio/intent/edit/id=${book._id}/type=book/`}
-                              target='_blank'
-                              rel='noopener noreferrer'
-                              className='text-[10px] font-black uppercase tracking-widest text-slate-300 hover:text-untele dark:text-slate-600'
-                            >
-                              Studio ↗
-                            </a>
                           </div>
                         </td>
                       </tr>

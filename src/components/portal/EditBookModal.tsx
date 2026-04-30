@@ -616,9 +616,6 @@ export default function EditBookModal({ book }: Props) {
                           </div>
                         ))}
                       </div>
-                      <p className='mt-2 text-[10px] text-slate-400'>
-                        To add or remove formats, use Studio.
-                      </p>
                     </div>
                   )}
 

@@ -290,18 +290,9 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                   {title}
                 </p>
                 <p className='text-xs text-slate-400'>
-                  Status: <strong>{status}</strong>. Open Studio to add cover art, genres, and
-                  Stripe pricing before publishing.
+                  Status: <strong>{status}</strong>. Use the Edit button to add cover art, genres, and pricing before publishing.
                 </p>
                 <div className='flex flex-wrap justify-center gap-3'>
-                  <a
-                    href={`/studio/intent/edit/id=${createdId}/type=book/`}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='bg-untele px-5 py-2.5 text-xs font-black uppercase tracking-widest text-white hover:opacity-90'
-                  >
-                    Edit in Studio ↗
-                  </a>
                   <a
                     href={`/bookstore/book/${createdSlug}`}
                     target='_blank'
@@ -778,9 +769,6 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                     </FormField>
                   </div>
 
-                  <p className='text-[10px] text-slate-400'>
-                    Stripe Price IDs can be added in Studio after creation.
-                  </p>
 
                   {error && (
                     <p className='border border-red-200 bg-red-50 px-3 py-2 text-xs font-bold text-red-600 dark:border-red-900 dark:bg-red-950 dark:text-red-400'>
