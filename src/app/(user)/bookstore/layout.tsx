@@ -10,7 +10,6 @@ import { SanityLive } from '@/lib/sanity/lib/live';
 
 export default function BookstoreLayout({ children }: { children: React.ReactNode }) {
   return (
-    // Warm sand (light) / deep warm brown (dark) — base for all bookstore pages
     <div className='min-h-screen bg-hp-sand text-slate-900 dark:bg-hp-dark dark:text-hp-cream'>
       {/* ── Main UnTelevised header ── */}
       <Header logoSlot={<HeaderLogo />} />
@@ -20,17 +19,25 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
         className='relative overflow-hidden border-b-2 border-[#009736] bg-gradient-to-r from-hp-sand to-hp-sand-mid dark:from-hp-dark dark:to-hp-dark-card'
         aria-label='Hurriya Publications'
       >
-        <div className='mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8'>
-
+        <div className='mx-auto flex max-w-7xl items-stretch px-4 sm:px-6 lg:px-8'>
           {/* Left — logo + identity */}
-          <div className='flex items-center gap-5 py-5'>
-            {/* Cream pad keeps Logo.png consistent in both modes */}
-            <div className='relative h-[108px] w-[108px] shrink-0 bg-hp-sand p-1.5 shadow-sm dark:bg-hp-sand'>
+          <div className='flex shrink-0 items-center gap-5 py-5'>
+            <div className='relative h-[108px] w-[108px] shrink-0'>
+              {/* Light mode logo */}
+              <Image
+                src='/hurriya-pub/Logo-invert.png'
+                alt='Hurriya Publications'
+                fill
+                className='object-contain dark:hidden'
+                priority
+                sizes='108px'
+              />
+              {/* Dark mode logo */}
               <Image
                 src='/hurriya-pub/Logo.png'
                 alt='Hurriya Publications'
                 fill
-                className='object-contain'
+                className='object-contain hidden dark:block'
                 priority
                 sizes='108px'
               />
@@ -52,22 +59,30 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
             </div>
           </div>
 
-          {/* Right — Banner cropped to top */}
-          <div className='relative hidden h-40 w-40 shrink-0 overflow-hidden sm:block lg:h-44 lg:w-44'>
+          {/* Right — Banner filling remaining width, full section height */}
+          <div className='relative hidden flex-1 overflow-hidden sm:block'>
+            {/* Light mode banner */}
             <Image
               src='/hurriya-pub/Banner.png'
               alt=''
               fill
-              className='object-cover object-top'
+              className='object-contain object-right dark:hidden'
               priority
-              sizes='176px'
+              sizes='(max-width: 640px) 0px, 50vw'
+              aria-hidden='true'
+            />
+            {/* Dark mode banner */}
+            <Image
+              src='/hurriya-pub/Banner-invert.png'
+              alt=''
+              fill
+              className='object-contain object-right hidden dark:block'
+              priority
+              sizes='(max-width: 640px) 0px, 50vw'
               aria-hidden='true'
             />
           </div>
         </div>
-
-        {/* Left accent bar */}
-        <div className='absolute bottom-0 left-0 top-0 w-1 bg-[#009736]' aria-hidden='true' />
       </section>
 
       {/* ── Page content ── */}

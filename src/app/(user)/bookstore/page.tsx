@@ -27,7 +27,7 @@ function BookCard({ book }: { book: SanityBook }) {
   const price = book.formats?.[0]?.price;
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(400).height(560).url()
-    : null;
+    : (book.coverImageUrl ?? null);
 
   return (
     <Link
@@ -78,7 +78,7 @@ function FeaturedHero({ book }: { book: SanityBook }) {
   const price = book.formats?.[0]?.price;
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(800).height(1120).url()
-    : null;
+    : (book.coverImageUrl ?? null);
 
   return (
     <div className='relative flex flex-col items-start gap-6 border border-untele bg-white p-6 dark:bg-hp-dark-card sm:flex-row sm:p-8 lg:p-12'>

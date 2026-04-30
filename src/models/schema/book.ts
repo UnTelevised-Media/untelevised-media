@@ -168,7 +168,7 @@ export default defineType({
     }),
     defineField({
       name: 'coverImage',
-      title: 'Cover Image',
+      title: 'Cover Image (Sanity)',
       type: 'image',
       options: { hotspot: true },
       fields: [
@@ -178,6 +178,13 @@ export default defineType({
           title: 'Alternative Text',
         },
       ],
+    }),
+    defineField({
+      name: 'coverImageUrl',
+      title: 'Cover Image URL (Supabase)',
+      type: 'url',
+      description: 'Managed automatically — set via the author portal upload.',
+      readOnly: true,
     }),
     defineField({
       name: 'description',

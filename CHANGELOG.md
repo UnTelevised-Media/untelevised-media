@@ -53,6 +53,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/app/api/portal/orders/[id]/status/route.ts` — PATCH: Zod-validated; validates status transition graph; sales cannot refund; fires shipment/refund emails on status change; revokes digital downloads on refund
   - `src/components/portal/PortalNav.tsx` — My Books + Orders nav links already wired; `sales` role shows Sales Portal label and limits to orders link
 
+- **Bookstore — Author Book Management (Issue #46, Phase 5)**
+  - `src/components/portal/AddBookModal.tsx` — slide-over book creation widget: title, description, multi-select genres with inline "New Genre" sub-form (title + slug + Slugify button), cover photo upload with preview, status radio (draft/published), per-format pricing (physical / digital / bundle, up to 3), digital file upload (PDF/EPUB/MOBI/ZIP) per digital/bundle format
+  - `src/components/portal/EditBookModal.tsx` — slide-over book editor: all fields pre-populated from existing Sanity document via `blocksToText()` PortableText helper; cover photo replacement; digital file replacement per format slot; all 4 status values (draft/published/out-of-stock/discontinued); genre multi-select; price editing by `_key`
+  - `src/lib/portal/book-actions.ts` — server actions: `createBook` (Sanity write + pre-generate format `_key`s), `updateBook` (patch/unset diff), `uploadBookCover` (FormData → Supabase `book-covers` public bucket → Sanity patch), `uploadDigitalAsset` (FormData → Supabase `digital-books` private bucket → Sanity format patch), `fetchBookGenres`, `createBookGenre`
+  - `supabase/migrations/20260429000002_book_covers_bucket.sql` — `book-covers` public bucket: 5 MB limit, image MIME types, service-role write policy
+  - `supabase/migrations/20260429000003_digital_books_bucket.sql` — `digital-books` private bucket: 500 MB limit, no MIME restriction, service-role write policy
+  - `next.config.ts` — `serverActions.bodySizeLimit: '50mb'` to support large cover and digital file uploads (default 1 MB silently dropped payloads)
+  - `src/app/(portal)/portal/books/page.tsx` — `EditBookModal` integrated inline; Studio link kept as secondary action
+
+- **Portal Dashboard — Bookstore Widgets (Issue #46, Phase 4 cont.)**
+  - `src/components/portal/BookstoreOrdersWidget.tsx` — 2-panel switchable widget: Digital Sales tab (fulfilled digital orders) and Pending Shipments tab (physical orders awaiting dispatch); links to full Orders page
+  - `src/components/portal/PendingPayoutsWidget.tsx` — server-renderable payout display widget: totals, per-payout rows with period/gross/net; admin sees all authors' payouts
+  - `src/app/(portal)/portal/page.tsx` — portal dashboard wired with `BookstoreOrdersWidget` + `PendingPayoutsWidget`; Supabase data fetched server-side with graceful degradation
+
+- **Breaking News Page**
+  - `src/app/(news)/breaking/page.tsx` + `BreakingNewsClient.tsx` — dedicated `/breaking` route with `generateMetadata`; replaces old redirect target with a full rendered page
+  - Removed `src/app/(news)/live-event/[slug]/page.tsx` (superseded by breaking news + events architecture)
+
+- **Hurriya Publications — Brand Assets**
+  - `public/hurriya-pub/` — full brand asset set: Logo, Logo-alt, Logo-invert, Banner, Banner-invert (PNG + PSD source files)
+
+### Fixed
+
+- **File input clicks broken inside `overflow-hidden` containers** — `sr-only` applies `clip: rect(0,0,0,0)` which kills programmatic click targets; fixed across `AddBookModal`, `EditBookModal`, and `ArticleEditorForm` by switching to `useRef` + `className='hidden'` / `fixed left-[-9999px]` inputs with `ref.current?.click()`
+- **Digital file "first pick doesn't stick"** — shared `digitalInputRef` + `useState` index tracking has stale closure / batched-state race on first pick; fixed in both `AddBookModal` and `EditBookModal` by giving each format card its own dedicated `<input ref={(el) => { digitalInputRefs.current[i] = el; }}>` with an inline `onChange` that captures `i` directly from the `map()` closure — eliminates index tracking entirely
+- **Supabase upload failures (400 / type error)** — server actions must receive `FormData` (not serialized `Uint8Array`) across the wire; upload functions refactored to accept `FormData` and call `file.arrayBuffer()` server-side; `Buffer.from(bytes)` required by Supabase JS client (raw `Uint8Array` rejected)
+
+### Removed
+
+- `ADSENSE-SETUP.md` — one-time setup doc no longer needed
+
 - **Bookstore — Build Fixes**
   - `src/lib/bookstore/supabase.ts` — lazy proxy clients (throw at call time, not import time) to prevent build crash when env vars missing
   - `src/lib/bookstore/email.ts` — lazy Resend initialization for same reason

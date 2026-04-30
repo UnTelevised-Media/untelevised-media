@@ -103,6 +103,7 @@ interface Article extends Base {
   allowComments?: boolean;
   comments: Comment[];
   tags?: string[];
+  breakingNews?: boolean;
 }
 
 interface Author extends Base {

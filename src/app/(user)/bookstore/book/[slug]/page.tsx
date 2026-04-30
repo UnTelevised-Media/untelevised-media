@@ -21,7 +21,7 @@ function buildProductJsonLd(book: SanityBook): string {
   );
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(600).url()
-    : undefined;
+    : book.coverImageUrl;
 
   return JSON.stringify({
     '@context': 'https://schema.org',
@@ -69,7 +69,7 @@ export async function generateMetadata({
 
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(1200).height(630).url()
-    : undefined;
+    : book.coverImageUrl;
 
   return {
     title: `${book.title} — UnTelevised Media Bookstore`,
@@ -111,7 +111,7 @@ export default async function BookDetailPage({
 
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(600).height(840).url()
-    : null;
+    : (book.coverImageUrl ?? null);
 
   const authorCover = book.author?.image?.asset
     ? urlForImage(book.author.image).width(80).height(80).url()

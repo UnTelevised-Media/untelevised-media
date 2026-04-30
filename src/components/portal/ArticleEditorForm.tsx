@@ -207,6 +207,7 @@ export default function ArticleEditorForm({
   // A document without the "drafts." prefix in its _id is live on the site.
   const isAlreadyPublished = !!initialData?._id && !initialData._id.startsWith('drafts.');
   const isDirtyRef = useRef(false);
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   // Form
   const {
@@ -629,17 +630,11 @@ export default function ArticleEditorForm({
             </div>
           )}
           <div className='flex items-center gap-2'>
-            <label
-              htmlFor='mainImageFile'
-              className={`cursor-pointer border border-slate-300 px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:border-untele dark:border-slate-600 ${imageUploading ? 'opacity-50' : ''}`}
-            >
-              {imageUploading ? 'Uploading…' : mainImage ? 'Replace Image' : 'Upload Image'}
-            </label>
             <input
-              id='mainImageFile'
+              ref={imageInputRef}
               type='file'
               accept='image/jpeg,image/png,image/webp,image/gif,image/avif'
-              className='sr-only'
+              className='hidden'
               disabled={imageUploading}
               onChange={async (e) => {
                 const file = e.target.files?.[0];
@@ -658,6 +653,14 @@ export default function ArticleEditorForm({
                 }
               }}
             />
+            <button
+              type='button'
+              disabled={imageUploading}
+              onClick={() => imageInputRef.current?.click()}
+              className={`border border-slate-300 px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:border-untele dark:border-slate-600 ${imageUploading ? 'opacity-50' : ''}`}
+            >
+              {imageUploading ? 'Uploading…' : mainImage ? 'Replace Image' : 'Upload Image'}
+            </button>
           </div>
           {mainImage && (
             <div>

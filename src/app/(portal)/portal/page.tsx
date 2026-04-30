@@ -23,6 +23,16 @@ import PortalNav from '@/components/portal/PortalNav';
 import { BriefPanel, type Brief, type PortalAuthor, type BriefSummary } from '@/components/portal/BriefPanel';
 import { type ClaimedPitchSummary } from '@/components/portal/ClaimedPitchCard';
 import { ClaimedPitchesPanel } from '@/components/portal/ClaimedPitchesPanel';
+import BookstoreOrdersWidget, {
+  type DigitalSaleRow,
+  type ShipmentPendingRow,
+} from '@/components/portal/BookstoreOrdersWidget';
+import AddBookModal from '@/components/portal/AddBookModal';
+import PendingPayoutsWidget, { type PayoutRow } from '@/components/portal/PendingPayoutsWidget';
+import sanityFetch from '@/lib/sanity/lib/fetch';
+import { queryBooksByAuthorClerkId } from '@/lib/sanity/lib/queries';
+import { shopServiceClient } from '@/lib/bookstore/supabase';
+import type { SanityBook } from '@/lib/bookstore/types';
 import Link from 'next/link';
 
 export const metadata = {
@@ -165,6 +175,115 @@ export default async function PortalDashboardPage() {
   const allInReview = allArticles.filter((a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)).length;
   const allDrafts = allArticles.filter((a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest).length;
 
+  // ── Bookstore data for dashboard widget ────────────────────────────────────
+  let bookCount = 0;
+  let bookUnitsSold = 0;
+  let digitalSales: DigitalSaleRow[] = [];
+  let shipmentsPending: ShipmentPendingRow[] = [];
+  let pendingPayouts: PayoutRow[] = [];
+  let bookstoreAvailable = false;
+  const isAdmin = role === 'admin';
+
+  try {
+    if (process.env.SUPABASE_SHOP_URL) {
+      const myBooks = await sanityFetch<SanityBook[]>({
+        query: queryBooksByAuthorClerkId,
+        params: { clerkId: clerkUserId },
+        tags: ['book'],
+      });
+      const myBookList = myBooks ?? [];
+      bookCount = myBookList.length;
+      const myBookIds = myBookList.map((b) => b._id);
+
+      type ItemRow = {
+        book_title: string;
+        quantity: number;
+        is_digital: boolean;
+        order: {
+          id: string;
+          order_number: string;
+          status: string;
+          created_at: string;
+          fulfilled_at: string | null;
+          customer: { email: string; full_name: string | null } | null;
+        } | null;
+      };
+
+      let query = shopServiceClient
+        .from('order_items')
+        .select(
+          'book_title, quantity, is_digital, order:orders(id, order_number, status, created_at, fulfilled_at, customer:customers(email, full_name))',
+        )
+        .not('order', 'is', null)
+        .order('created_at', { ascending: false })
+        .limit(200);
+
+      if (myBookIds.length > 0 && !isEditorPlus) {
+        query = query.in('sanity_book_id', myBookIds);
+      }
+
+      const { data: rawItems } = await query;
+      const items = ((rawItems ?? []) as ItemRow[]).filter(
+        (i) => i.order && !['cancelled', 'refunded'].includes(i.order.status),
+      );
+
+      bookUnitsSold = items.reduce((s, i) => s + i.quantity, 0);
+
+      digitalSales = items
+        .filter((i) => i.is_digital)
+        .slice(0, 50)
+        .map((i, idx) => ({
+          id: `d-${idx}`,
+          order_number: i.order!.order_number,
+          book_title: i.book_title,
+          quantity: i.quantity,
+          created_at: i.order!.created_at,
+          customer_email: i.order!.customer?.email,
+        }));
+
+      shipmentsPending = items
+        .filter(
+          (i) =>
+            !i.is_digital &&
+            ['paid', 'processing'].includes(i.order!.status) &&
+            !i.order!.fulfilled_at,
+        )
+        .slice(0, 50)
+        .map((i, idx) => ({
+          id: `s-${idx}`,
+          order_number: i.order!.order_number,
+          book_title: i.book_title,
+          quantity: i.quantity,
+          created_at: i.order!.created_at,
+          status: i.order!.status,
+          customer_email: i.order!.customer?.email,
+          customer_name: i.order!.customer?.full_name,
+        }));
+
+      // Pending payouts — scoped by role
+      const payoutsQuery = isAdmin
+        ? shopServiceClient
+            .from('payouts')
+            .select('id, author_clerk_id, period_start, period_end, gross_cents, net_cents, notes, created_at')
+            .eq('status', 'pending')
+            .order('period_end', { ascending: false })
+            .limit(50)
+        : shopServiceClient
+            .from('payouts')
+            .select('id, author_clerk_id, period_start, period_end, gross_cents, net_cents, notes, created_at')
+            .eq('status', 'pending')
+            .eq('author_clerk_id', clerkUserId)
+            .order('period_end', { ascending: false });
+
+      const { data: payoutsData } = await payoutsQuery;
+      pendingPayouts = (payoutsData ?? []) as PayoutRow[];
+
+      bookstoreAvailable = true;
+    }
+  } catch {
+    // Supabase unavailable — widgets degrade gracefully
+  }
+
   // Inbox counts (editor+ only)
   let contactCount = 0;
   let secureCount = 0;
@@ -199,7 +318,7 @@ export default async function PortalDashboardPage() {
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
-      <PortalNav isEditorPlus={isEditorPlus} />
+      <PortalNav isEditorPlus={isEditorPlus} role={role} />
 
       <main className='mx-auto max-w-7xl px-4 py-5 sm:px-6'>
         {/* Page heading */}
@@ -224,6 +343,44 @@ export default async function PortalDashboardPage() {
               { label: 'Drafts', value: myDrafts },
             ]}
           />
+        </section>
+
+        {/* ── My Books ─────────────────────────────────────────────────── */}
+        <section className='mb-3'>
+          <SectionHeader label='My Books' />
+          <Link
+            href='/portal/books'
+            className='group flex flex-wrap items-center gap-x-6 gap-y-1 border border-slate-200 bg-white px-4 py-3 transition-colors hover:border-untele dark:border-slate-700 dark:bg-slate-900'
+          >
+            <div className='flex items-baseline gap-1.5'>
+              <span className='text-xl font-black leading-none text-slate-900 group-hover:text-untele dark:text-white'>
+                {bookCount}
+              </span>
+              <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                {bookCount === 1 ? 'Book' : 'Books'}
+              </span>
+            </div>
+            {bookstoreAvailable && (
+              <div className='flex items-baseline gap-1.5'>
+                <span className='text-xl font-black leading-none text-slate-900 group-hover:text-untele dark:text-white'>
+                  {bookUnitsSold}
+                </span>
+                <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                  Units Sold
+                </span>
+              </div>
+            )}
+            {bookstoreAvailable && shipmentsPending.length > 0 && (
+              <div className='flex items-baseline gap-1.5'>
+                <span className='text-xl font-black leading-none text-untele'>
+                  {shipmentsPending.length}
+                </span>
+                <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                  To Ship
+                </span>
+              </div>
+            )}
+          </Link>
         </section>
 
         {/* ── Newsroom Overview (editor+) ──────────────────────────────── */}
@@ -282,6 +439,7 @@ export default async function PortalDashboardPage() {
             >
               + New Source
             </Link>
+            <AddBookModal label='+ Add Book' variant='outline' />
             <Link
               href='/portal/profile'
               className='border border-slate-300 bg-white px-5 py-2.5 text-xs font-black uppercase tracking-widest text-slate-700 hover:border-untele hover:text-untele dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
@@ -313,29 +471,72 @@ export default async function PortalDashboardPage() {
           </section>
         )}
 
-        {/* ── Latest Brief ─────────────────────────────────────────────── */}
-        <section>
-          <SectionHeader label='Latest Brief' />
-          {latestBrief ? (
-            <BriefPanel
-            brief={latestBrief}
-            briefList={allBriefs ?? []}
-            currentSanityAuthorId={sanityAuthorId ?? undefined}
-            myPitchMap={myPitchMap}
-            authors={authors}
-            isEditorPlus={isEditorPlus}
-          />
-          ) : (
-            <div className='border border-slate-200 bg-white px-4 py-8 text-center dark:border-slate-700 dark:bg-slate-900'>
-              <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
-                No briefs posted yet
-              </p>
-              <p className='mt-1 text-xs text-slate-400'>
-                The AI agent will post briefs here once configured.
-              </p>
-            </div>
-          )}
-        </section>
+        {/* ── Bottom: Brief + right sidebar (Orders + Payouts) ────────── */}
+        <div className='grid grid-cols-1 gap-6 xl:grid-cols-[1fr_300px]'>
+          {/* Latest Brief */}
+          <section>
+            <SectionHeader label='Latest Brief' />
+            {latestBrief ? (
+              <BriefPanel
+                brief={latestBrief}
+                briefList={allBriefs ?? []}
+                currentSanityAuthorId={sanityAuthorId ?? undefined}
+                myPitchMap={myPitchMap}
+                authors={authors}
+                isEditorPlus={isEditorPlus}
+              />
+            ) : (
+              <div className='border border-slate-200 bg-white px-4 py-8 text-center dark:border-slate-700 dark:bg-slate-900'>
+                <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                  No briefs posted yet
+                </p>
+                <p className='mt-1 text-xs text-slate-400'>
+                  The AI agent will post briefs here once configured.
+                </p>
+              </div>
+            )}
+          </section>
+
+          {/* Right sidebar — stacked widgets */}
+          <div className='flex flex-col gap-6'>
+            {/* Bookstore Orders */}
+            <section>
+              <SectionHeader label='Bookstore Orders' />
+              {bookstoreAvailable ? (
+                <BookstoreOrdersWidget
+                  digitalSales={digitalSales}
+                  shipmentsPending={shipmentsPending}
+                />
+              ) : (
+                <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
+                  <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                    Bookstore not connected
+                  </p>
+                  <Link
+                    href='/portal/books'
+                    className='mt-2 inline-block text-[10px] font-black uppercase tracking-widest text-untele hover:underline'
+                  >
+                    My Books →
+                  </Link>
+                </div>
+              )}
+            </section>
+
+            {/* Pending Payouts */}
+            <section>
+              <SectionHeader label={isAdmin ? 'All Pending Payouts' : 'My Pending Payouts'} />
+              {bookstoreAvailable ? (
+                <PendingPayoutsWidget payouts={pendingPayouts} isAdmin={isAdmin} />
+              ) : (
+                <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
+                  <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                    Bookstore not connected
+                  </p>
+                </div>
+              )}
+            </section>
+          </div>
+        </div>
       </main>
     </div>
   );

@@ -3,6 +3,8 @@
 // Author-gated: only literary authors and admins access this route.
 
 import Link from 'next/link';
+import AddBookModal from '@/components/portal/AddBookModal';
+import EditBookModal from '@/components/portal/EditBookModal';
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import sanityFetch from '@/lib/sanity/lib/fetch';
@@ -134,25 +136,29 @@ export default async function PortalBooksPage() {
               Bookstore Dashboard
             </h1>
           </div>
-          <a
-            href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL ?? ''}/studio/desk/book`}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='border border-slate-300 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-600 hover:border-untele hover:text-untele dark:border-slate-700 dark:text-slate-400'
-          >
-            Manage in Studio →
-          </a>
+          <div className='flex items-center gap-3'>
+            <AddBookModal label='+ Add Book' variant='primary' />
+            <a
+              href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL ?? ''}/studio/desk/book`}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='border border-slate-300 px-4 py-2 text-xs font-black uppercase tracking-widest text-slate-600 hover:border-untele hover:text-untele dark:border-slate-700 dark:text-slate-400'
+            >
+              Manage in Studio →
+            </a>
+          </div>
         </div>
 
         {/* No books state */}
         {bookList.length === 0 && (
           <div className='border border-slate-200 bg-white px-6 py-12 text-center dark:border-slate-700 dark:bg-slate-900'>
             <p className='mb-2 text-sm font-bold uppercase tracking-widest text-slate-400'>
-              No books found
+              No books yet
             </p>
-            <p className='text-xs text-slate-400'>
-              Add a book in Sanity Studio and set your author profile as the author.
+            <p className='mb-4 text-xs text-slate-400'>
+              Create a book in Sanity Studio and set your author profile as the author.
             </p>
+            <AddBookModal label='+ Add Your First Book' variant='primary' />
           </div>
         )}
 
@@ -260,14 +266,17 @@ export default async function PortalBooksPage() {
                           </td>
                         )}
                         <td className='px-4 py-3'>
-                          <a
-                            href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL ?? ''}/studio/desk/book;${book._id}`}
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            className='text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-untele'
-                          >
-                            Edit in Studio
-                          </a>
+                          <div className='flex items-center gap-3'>
+                            <EditBookModal book={book} />
+                            <a
+                              href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL ?? ''}/studio/intent/edit/id=${book._id}/type=book/`}
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              className='text-[10px] font-black uppercase tracking-widest text-slate-300 hover:text-untele dark:text-slate-600'
+                            >
+                              Studio ↗
+                            </a>
+                          </div>
                         </td>
                       </tr>
                     ))}

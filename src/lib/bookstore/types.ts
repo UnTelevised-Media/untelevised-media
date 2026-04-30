@@ -160,6 +160,7 @@ export interface SanityBook {
     payoutEmail?: string;
   };
   coverImage?: SanityImageRef;
+  coverImageUrl?: string;
   description?: unknown[];
   genre?: SanityBookGenre[];
   publishedAt?: string;

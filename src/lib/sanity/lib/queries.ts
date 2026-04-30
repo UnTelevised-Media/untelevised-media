@@ -27,6 +27,22 @@ export const queryLiveEvents = groq`
   | order(_createdAt desc)
 `;
 
+export const queryBreakingArticles = groq`
+  *[_type=='article' && breakingNews == true] {
+    ...,
+    author->,
+    categories[]->,
+    description,
+    publishedAt,
+    mainImage,
+    slug,
+    title,
+    videoLink,
+    hasEmbeddedVideo
+  }
+  | order(publishedAt desc)
+`;
+
 export const queryPastEvents = groq`
   *[_type=='liveEvent' && isCurrentEvent == false] {
     ...,
@@ -760,6 +776,7 @@ const bookFragment = groq`
   language,
   samplePdfUrl,
   coverImage { asset, alt },
+  coverImageUrl,
   "author": author-> {
     _id, name, slug, clerkId, payoutEmail,
     image { asset, alt },
