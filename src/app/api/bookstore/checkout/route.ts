@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
         clerk_user_id: userId ?? '',
         has_digital: String(hasDigital),
         has_physical: String(hasPhysical),
-        items_json: JSON.stringify(itemsMeta).slice(0, 500), // Stripe metadata limit is 500 chars per value
+        items_json: JSON.stringify(itemsMeta), // Stripe limit is 500 chars per key; cart is validated to be short
       },
     });
 

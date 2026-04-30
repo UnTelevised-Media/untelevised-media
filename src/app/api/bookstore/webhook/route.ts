@@ -8,6 +8,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { shopServiceClient } from '@/lib/bookstore/supabase';
+import sanityClient from '@/lib/sanity/lib/client';
 import type { FormatType } from '@/lib/bookstore/types';
 import { sendOrderConfirmationEmail, sendDigitalDownloadEmail } from '@/lib/bookstore/email';
 
@@ -136,8 +137,19 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     const meta = items.find((m) => m.bookId === item.sanity_book_id);
     if (!meta) continue;
 
-    // Retrieve storage path from Sanity (via a simple GROQ lookup would be ideal,
-    // but we store what we have from metadata; real path comes from Sanity query in download API)
+    // Look up the storage path from the Sanity book's digitalAsset field
+    const storagePath: string =
+      (await sanityClient.fetch(
+        `*[_type == "book" && _id == $bookId][0].formats[_key == $formatKey][0].digitalAsset.supabaseStoragePath`,
+        { bookId: meta.bookId, formatKey: meta.formatKey }
+      )) ?? '';
+
+    if (!storagePath) {
+      console.warn(
+        `[webhook] No storage path found for book ${meta.bookId} format ${meta.formatKey} — download will not be available`
+      );
+    }
+
     const expiresAt = new Date();
     expiresAt.setFullYear(expiresAt.getFullYear() + 1);
 
@@ -145,7 +157,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       await shopServiceClient.from('digital_downloads').insert({
         order_item_id: item.id,
         customer_id: customerId,
-        supabase_storage_path: '', // filled by admin or set in Sanity — retrieved at download time
+        supabase_storage_path: storagePath,
         download_count: 0,
         max_downloads: 5,
         expires_at: expiresAt.toISOString(),
