@@ -107,7 +107,7 @@ export async function createBook(
     ...(descriptionBlocks ? { description: descriptionBlocks } : {}),
     ...(input.fictionType ? { fictionType: input.fictionType } : {}),
     ...(input.genreIds?.length
-      ? { genre: input.genreIds.map((id) => ({ _type: 'reference', _ref: id })) }
+      ? { genre: input.genreIds.map((id) => ({ _type: 'reference', _ref: id, _key: makeKey() })) }
       : {}),
     formats: formatEntries.map(({ key, data: f }) => ({
       _type: 'bookFormat',
