@@ -349,7 +349,7 @@ export default async function BookDetailPage({
               )}
 
               {/* Tip the author */}
-              {book.author?.tipStripeProductId && book.author.tipAmount != null && (
+              {book.author?.tipStripeProductId && (
                 <TipAuthorRow
                   author={
                     book.author as {

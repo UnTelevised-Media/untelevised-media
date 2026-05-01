@@ -54,7 +54,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
     }
 
-    const hasPhysical = chargeableItems.some((i) => i.formatType !== 'digital');
+    const hasPhysical = chargeableItems.some(
+      (i) => i.formatType === 'physical' || i.formatType === 'bundle'
+    );
     const hasDigital = chargeableItems.some((i) => i.isDigital);
 
     const keyPrefix = (process.env.STRIPE_SECRET_KEY ?? '').slice(0, 14);
