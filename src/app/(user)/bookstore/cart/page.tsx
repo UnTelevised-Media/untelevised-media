@@ -44,8 +44,7 @@ function CartQuantityControl({
 }
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, updatePrice, updateTipIncluded, getTotal, clearCart } =
-    useCart();
+  const { items, removeItem, updateQuantity, updatePrice, updateTipIncluded } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -92,7 +91,6 @@ export default function CartPage() {
         setError(data.error ?? 'Failed to start checkout');
         return;
       }
-      clearCart();
       window.location.href = data.url;
     } catch {
       setError('Network error — please try again');

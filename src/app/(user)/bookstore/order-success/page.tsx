@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import Stripe from 'stripe';
+import CartClearer from '@/components/bookstore/CartClearer';
 
 export const metadata: Metadata = {
   title: 'Order Confirmed — UnTelevised Media',
@@ -100,13 +101,12 @@ export default async function OrderSuccessPage({
       </div>
 
       {session_id ? (
-        <Suspense
-          fallback={
-            <p className='text-sm text-slate-500'>Loading order details...</p>
-          }
-        >
-          <OrderSummary sessionId={session_id} />
-        </Suspense>
+        <>
+          <CartClearer />
+          <Suspense fallback={<p className='text-sm text-slate-500'>Loading order details...</p>}>
+            <OrderSummary sessionId={session_id} />
+          </Suspense>
+        </>
       ) : (
         <p className='text-sm text-slate-500'>
           Order confirmation unavailable. Please check{' '}
