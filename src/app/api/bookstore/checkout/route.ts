@@ -73,23 +73,33 @@ export async function POST(req: NextRequest) {
       )
     );
 
-    const lineItems = chargeableItems.map((item) => {
-      const priceId = item.stripePriceId.trim();
-      if (item.formatType === 'tip' && item.unitAmountCents) {
-        return {
-          price_data: {
-            currency: 'usd',
-            product: priceId,
-            unit_amount: item.unitAmountCents,
-          },
-          quantity: 1,
-        };
-      }
-      return {
-        price: priceId,
-        quantity: item.quantity,
-      };
-    });
+    const lineItems = await Promise.all(
+      chargeableItems.map(async (item) => {
+        const storedId = item.stripePriceId.trim();
+
+        if (item.formatType === 'tip' && item.unitAmountCents) {
+          // Resolve to a Product ID — Sanity may store either prod_xxx or price_xxx
+          let productId = storedId;
+          if (storedId.startsWith('price_')) {
+            const price = await stripe.prices.retrieve(storedId);
+            productId =
+              typeof price.product === 'string'
+                ? price.product
+                : (price.product as { id: string }).id;
+          }
+          return {
+            price_data: {
+              currency: 'usd',
+              product: productId,
+              unit_amount: item.unitAmountCents,
+            },
+            quantity: 1,
+          };
+        }
+
+        return { price: storedId, quantity: item.quantity };
+      })
+    );
 
     // Build per-item metadata for the webhook handler
     const itemsMeta = chargeableItems.map((item) => ({
