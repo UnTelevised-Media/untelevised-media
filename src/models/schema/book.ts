@@ -264,6 +264,42 @@ export default defineType({
       description: 'Publicly accessible URL to a free sample PDF (optional)',
     }),
     defineField({
+      name: 'revenueTerms',
+      title: 'Revenue Sharing',
+      type: 'object',
+      description: 'How revenue from this book is split between author, publisher, and platform.',
+      fields: [
+        defineField({
+          name: 'authorPercentage',
+          title: 'Author %',
+          type: 'number',
+          description: 'Percentage going to the author, e.g. 65',
+          validation: (Rule) => Rule.min(0).max(100),
+        }),
+        defineField({
+          name: 'publisherPercentage',
+          title: 'Publisher %',
+          type: 'number',
+          description: 'Percentage going to the publisher, e.g. 25',
+          validation: (Rule) => Rule.min(0).max(100),
+        }),
+        defineField({
+          name: 'platformPercentage',
+          title: 'Platform %',
+          type: 'number',
+          description: 'Percentage retained by the platform, e.g. 10',
+          validation: (Rule) => Rule.min(0).max(100),
+        }),
+        defineField({
+          name: 'description',
+          title: 'Description',
+          type: 'text',
+          rows: 3,
+          description: 'Optional note explaining the revenue split',
+        }),
+      ],
+    }),
+    defineField({
       name: 'featured',
       title: 'Featured',
       type: 'boolean',

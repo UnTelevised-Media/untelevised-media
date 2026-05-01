@@ -41,6 +41,34 @@ export function getShopServiceClient(): SupabaseClient<Database> {
   return _shopServiceClient;
 }
 
+// ---------------------------------------------------------------------------
+// Audit logging — fire-and-forget, never throws
+// ---------------------------------------------------------------------------
+
+export async function writeAuditLog(params: {
+  eventType: string;
+  userId?: string;
+  orderId?: string;
+  ipAddress?: string;
+  userAgent?: string;
+  details?: Record<string, unknown>;
+}) {
+  try {
+    await getShopServiceClient()
+      .from('audit_logs')
+      .insert({
+        event_type: params.eventType,
+        user_id: params.userId ?? null,
+        order_id: params.orderId ?? null,
+        ip_address: params.ipAddress ?? null,
+        user_agent: params.userAgent ?? null,
+        details: params.details ?? null,
+      });
+  } catch {
+    // Audit failure must never break the request
+  }
+}
+
 // Convenience proxies that match the old API surface so callers can chain immediately.
 // These throw at call time (not import time) if env vars are missing.
 export const shopClient = new Proxy({} as SupabaseClient<Database>, {

@@ -29,7 +29,7 @@ function blocksToText(blocks: unknown): string {
 
 interface EditFormat {
   key: string;
-  formatType: 'physical' | 'digital' | 'bundle';
+  formatType: 'physical' | 'digital' | 'bundle' | 'tip';
   price: string;
   compareAtPrice: string;
   existingAssetPath?: string;

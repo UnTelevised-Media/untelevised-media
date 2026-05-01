@@ -4,7 +4,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/bookstore/cart';
 import type { CheckoutPayload } from '@/lib/bookstore/types';
 
@@ -45,12 +44,15 @@ function CartQuantityControl({
 }
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, getTotal, clearCart } = useCart();
-  const router = useRouter();
+  const { items, removeItem, updateQuantity, updatePrice, updateTipIncluded, getTotal, clearCart } =
+    useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const total = getTotal();
+  const total = items.reduce((sum, i) => {
+    if (i.formatType === 'tip') return i.tipIncluded !== false ? sum + i.price : sum;
+    return sum + i.price * i.quantity;
+  }, 0);
 
   const handleCheckout = async () => {
     if (items.length === 0) return;
@@ -59,16 +61,25 @@ export default function CartPage() {
     setError(null);
 
     const payload: CheckoutPayload = {
-      items: items.map((item) => ({
-        stripePriceId: item.stripePriceId,
-        quantity: item.quantity,
-        sanityBookId: item.sanityBookId,
-        formatType: item.formatType,
-        formatKey: item.formatKey,
-        title: item.title,
-        isDigital: item.formatType === 'digital',
-      })),
+      items: items
+        .filter((i) => i.formatType !== 'tip' || (i.tipIncluded !== false && i.price > 0))
+        .map((item) => ({
+          stripePriceId: item.stripePriceId,
+          quantity: item.quantity,
+          sanityBookId: item.sanityBookId,
+          formatType: item.formatType,
+          formatKey: item.formatKey,
+          title: item.title,
+          isDigital: item.formatType === 'digital',
+          ...(item.formatType === 'tip' && { unitAmountCents: Math.round(item.price * 100) }),
+        })),
     };
+
+    if (payload.items.length === 0) {
+      setError('No items to checkout');
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch('/api/bookstore/checkout', {
@@ -123,42 +134,107 @@ export default function CartPage() {
           {/* Item list */}
           <div className='flex-1'>
             <div className='divide-y divide-slate-100 border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-700 dark:bg-slate-900'>
-              {items.map((item) => (
-                <div key={`${item.sanityBookId}-${item.formatKey}`} className='flex gap-4 p-4'>
-                  <div className='flex-1'>
-                    <p className='text-sm font-black text-slate-900 dark:text-white'>
-                      {item.title}
-                    </p>
-                    <p className='text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-                      {item.formatType === 'physical' && 'Physical'}
-                      {item.formatType === 'digital' && 'Digital'}
-                      {item.formatType === 'bundle' && 'Bundle'}
-                    </p>
-                    <div className='mt-2'>
-                      <CartQuantityControl
-                        quantity={item.quantity}
-                        onDecrement={() =>
-                          updateQuantity(item.sanityBookId, item.formatKey, item.quantity - 1)
-                        }
-                        onIncrement={() =>
-                          updateQuantity(item.sanityBookId, item.formatKey, item.quantity + 1)
-                        }
-                        onRemove={() => removeItem(item.sanityBookId, item.formatKey)}
-                      />
+              {items.map((item) => {
+                if (item.formatType === 'tip') {
+                  const checked = item.tipIncluded !== false;
+                  return (
+                    <div
+                      key={`${item.sanityBookId}-${item.formatKey}`}
+                      className='flex gap-4 border-l-2 border-amber-400 p-4 dark:border-amber-600'
+                    >
+                      <div className='flex-1'>
+                        <label className='flex cursor-pointer items-center gap-2'>
+                          <input
+                            type='checkbox'
+                            checked={checked}
+                            onChange={(e) =>
+                              updateTipIncluded(item.sanityBookId, item.formatKey, e.target.checked)
+                            }
+                            className='h-3.5 w-3.5 accent-amber-500'
+                          />
+                          <span className='text-sm font-black text-amber-700 dark:text-amber-300'>
+                            {item.title}
+                          </span>
+                        </label>
+                        <p className='mt-0.5 text-[10px] font-bold uppercase tracking-widest text-amber-500'>
+                          ♥ Author Tip
+                        </p>
+                        <button
+                          onClick={() => removeItem(item.sanityBookId, item.formatKey)}
+                          className='mt-1.5 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-untele'
+                        >
+                          Remove
+                        </button>
+                      </div>
+                      <div className='flex flex-col items-end gap-1'>
+                        <div className='flex items-center gap-1'>
+                          <span className='text-sm font-bold text-amber-600 dark:text-amber-400'>
+                            $
+                          </span>
+                          <input
+                            type='number'
+                            min={0}
+                            step={0.5}
+                            value={item.price}
+                            onChange={(e) =>
+                              updatePrice(
+                                item.sanityBookId,
+                                item.formatKey,
+                                Math.max(0, parseFloat(e.target.value) || 0),
+                              )
+                            }
+                            disabled={!checked}
+                            className='w-20 border border-amber-300 bg-white px-2 py-1 text-sm font-bold text-amber-800 disabled:opacity-40 dark:border-amber-700 dark:bg-transparent dark:text-amber-200'
+                          />
+                        </div>
+                        {!checked && (
+                          <p className='text-[9px] text-slate-400 dark:text-slate-500'>
+                            Not included
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div
+                    key={`${item.sanityBookId}-${item.formatKey}`}
+                    className='flex gap-4 p-4'
+                  >
+                    <div className='flex-1'>
+                      <p className='text-sm font-black text-slate-900 dark:text-white'>
+                        {item.title}
+                      </p>
+                      <p className='text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+                        {item.formatType === 'physical' && 'Physical'}
+                        {item.formatType === 'digital' && 'Digital'}
+                        {item.formatType === 'bundle' && 'Bundle'}
+                      </p>
+                      <div className='mt-2'>
+                        <CartQuantityControl
+                          quantity={item.quantity}
+                          onDecrement={() =>
+                            updateQuantity(item.sanityBookId, item.formatKey, item.quantity - 1)
+                          }
+                          onIncrement={() =>
+                            updateQuantity(item.sanityBookId, item.formatKey, item.quantity + 1)
+                          }
+                          onRemove={() => removeItem(item.sanityBookId, item.formatKey)}
+                        />
+                      </div>
+                    </div>
+                    <div className='text-right'>
+                      <p className='text-sm font-black text-untele'>
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </p>
+                      {item.quantity > 1 && (
+                        <p className='text-[10px] text-slate-400'>${item.price.toFixed(2)} each</p>
+                      )}
                     </div>
                   </div>
-                  <div className='text-right'>
-                    <p className='text-sm font-black text-untele'>
-                      ${(item.price * item.quantity).toFixed(2)}
-                    </p>
-                    {item.quantity > 1 && (
-                      <p className='text-[10px] text-slate-400'>
-                        ${item.price.toFixed(2)} each
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

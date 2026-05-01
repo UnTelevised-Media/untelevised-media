@@ -780,6 +780,7 @@ const bookFragment = groq`
   coverImageUrl,
   "author": author-> {
     _id, name, slug, clerkId, payoutEmail,
+    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,
     image { asset, alt },
     bio
   },
@@ -791,6 +792,7 @@ const bookFragment = groq`
     digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },
     weight, dimensions
   },
+  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },
   description
 `;
 
@@ -818,6 +820,12 @@ export const queryBookBySlug = groq`
 
 export const queryBooksByAuthorClerkId = groq`
   *[_type == "book" && author->clerkId == $clerkId] | order(publishedAt desc) {
+    ${bookFragment}
+  }
+`;
+
+export const queryBooksByGenreSlug = groq`
+  *[_type == "book" && status in ["published", "out-of-stock"] && $genreSlug in genre[]->slug.current] | order(publishedAt desc) {
     ${bookFragment}
   }
 `;

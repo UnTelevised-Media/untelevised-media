@@ -269,6 +269,95 @@ export interface Database {
           },
         ];
       };
+      audit_logs: {
+        Row: {
+          id: string;
+          event_type: string;
+          user_id: string | null;
+          order_id: string | null;
+          ip_address: string | null;
+          user_agent: string | null;
+          details: Record<string, unknown> | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          event_type: string;
+          user_id?: string | null;
+          order_id?: string | null;
+          ip_address?: string | null;
+          user_agent?: string | null;
+          details?: Record<string, unknown> | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          event_type?: string;
+          user_id?: string | null;
+          order_id?: string | null;
+          ip_address?: string | null;
+          user_agent?: string | null;
+          details?: Record<string, unknown> | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      guest_download_tokens: {
+        Row: {
+          id: string;
+          order_id: string | null;
+          book_title: string | null;
+          format_label: string | null;
+          supabase_storage_path: string;
+          guest_email: string;
+          token: string;
+          download_count: number;
+          max_downloads: number;
+          expires_at: string;
+          downloaded_at: string | null;
+          resend_count: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          order_id?: string | null;
+          book_title?: string | null;
+          format_label?: string | null;
+          supabase_storage_path: string;
+          guest_email: string;
+          token: string;
+          download_count?: number;
+          max_downloads?: number;
+          expires_at: string;
+          downloaded_at?: string | null;
+          resend_count?: number;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          order_id?: string | null;
+          book_title?: string | null;
+          format_label?: string | null;
+          supabase_storage_path?: string;
+          guest_email?: string;
+          token?: string;
+          download_count?: number;
+          max_downloads?: number;
+          expires_at?: string;
+          downloaded_at?: string | null;
+          resend_count?: number;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'guest_download_tokens_order_id_fkey';
+            columns: ['order_id'];
+            isOneToOne: false;
+            referencedRelation: 'orders';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       payouts: {
         Row: {
           id: string;

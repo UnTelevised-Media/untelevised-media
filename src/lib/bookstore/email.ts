@@ -89,6 +89,50 @@ export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParam
 }
 
 // ---------------------------------------------------------------------------
+// Guest one-time download link
+// ---------------------------------------------------------------------------
+
+interface GuestDownloadEmailParams {
+  to: string;
+  orderNumber: string;
+  bookTitle: string;
+  downloadUrl: string;
+  expiresAt: Date;
+}
+
+export async function sendGuestDownloadEmail(params: GuestDownloadEmailParams) {
+  if (!process.env.RESEND_API_KEY) return;
+
+  const expires = params.expiresAt.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  await getResend().emails.send({
+    from,
+    to: params.to,
+    subject: `Your Download Link — ${params.orderNumber} | UnTelevised Media`,
+    html: `
+      <h2 style="font-family:sans-serif;">Your Download Is Ready</h2>
+      <p style="font-family:sans-serif;">Thank you for purchasing <strong>${params.bookTitle}</strong> (Order <strong>${params.orderNumber}</strong>).</p>
+      <p style="font-family:sans-serif;">
+        <a href="${params.downloadUrl}" style="font-size:16px;font-weight:bold;color:#D70606;">Download Your Book →</a>
+      </p>
+      <p style="font-family:sans-serif;color:#666;font-size:13px;">
+        This is a <strong>single-use link</strong> that expires on <strong>${expires}</strong>.
+        Save your file immediately after downloading — this link cannot be reused.
+      </p>
+      <p style="font-family:sans-serif;color:#666;font-size:12px;">
+        To access your purchases anytime, create a free account at
+        <a href="${baseUrl}/sign-up">untelevised.media/sign-up</a> and sign in with the same email address.
+      </p>
+      <p style="font-family:sans-serif;color:#888;font-size:12px;">UnTelevised Media — Unfiltered. Uncensored. Uncompromising.</p>
+    `,
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Shipment confirmation
 // ---------------------------------------------------------------------------
 

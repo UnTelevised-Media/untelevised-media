@@ -15,6 +15,7 @@ import ThemeToggle from './ThemeToggle';
 import { Flame, Radio, Music, BookOpen } from 'lucide-react';
 
 const HeaderSearch = dynamic(() => import('./HeaderSearch'), { ssr: false });
+const MiniCart = dynamic(() => import('@/components/bookstore/MiniCart'), { ssr: false });
 
 // ── Typed nav items ────────────────────────────────────────────────────────────
 
@@ -224,6 +225,9 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
           >
             <Bookmark className='h-4 w-4 md:h-5 md:w-5' />
           </Link>
+
+          {/* Shopping cart */}
+          <MiniCart />
 
           {/* Theme toggle — desktop only */}
           <div className='hidden md:flex'>

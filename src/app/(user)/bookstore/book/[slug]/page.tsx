@@ -12,6 +12,8 @@ import { queryBookBySlug, queryAllBooks } from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/lib/bookstore/types';
 import urlForImage from '@/util/urlForImage';
 import AddToCartButton from '@/components/bookstore/AddToCartButton';
+import BuyNowButton from '@/components/bookstore/BuyNowButton';
+import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
 
 // JSON-LD structured data
 function buildProductJsonLd(book: SanityBook): string {
@@ -92,6 +94,67 @@ function DetailRow({ label, value }: { label: string; value: string | number | u
       </span>
       <span className='text-sm text-slate-700 dark:text-hp-cream'>{value}</span>
     </div>
+  );
+}
+
+// Revenue sharing breakdown section
+function RevenueTermsCard({
+  terms,
+}: {
+  terms: NonNullable<import('@/lib/bookstore/types').SanityBook['revenueTerms']>;
+}) {
+  const { authorPercentage, publisherPercentage, platformPercentage, description } = terms;
+  const hasData = authorPercentage != null || publisherPercentage != null || platformPercentage != null;
+  if (!hasData) return null;
+
+  const slices = [
+    { label: 'Author', pct: authorPercentage ?? 0, color: 'bg-untele' },
+    { label: 'Publisher', pct: publisherPercentage ?? 0, color: 'bg-amber-500' },
+    { label: 'Platform', pct: platformPercentage ?? 0, color: 'bg-slate-400 dark:bg-slate-600' },
+  ].filter((s) => s.pct > 0);
+
+  return (
+    <details className='group mb-6 border border-hp-sand-border dark:border-hp-dark-border'>
+      <summary className='flex cursor-pointer items-center justify-between p-4 hover:bg-hp-sand dark:hover:bg-hp-dark-card'>
+        <div className='flex items-center gap-2'>
+          <div className='bg-untele px-2 py-0.5'>
+            <span className='text-[10px] font-black uppercase tracking-widest text-white'>
+              How Revenue is Shared
+            </span>
+          </div>
+        </div>
+        <span className='text-xs font-bold text-hp-muted transition-transform group-open:rotate-180'>
+          ▾
+        </span>
+      </summary>
+      <div className='border-t border-hp-sand-border p-4 dark:border-hp-dark-border'>
+        {/* Bar chart */}
+        <div className='mb-3 flex h-4 overflow-hidden'>
+          {slices.map((s) => (
+            <div
+              key={s.label}
+              className={`${s.color} transition-all`}
+              style={{ width: `${s.pct}%` }}
+              title={`${s.label}: ${s.pct}%`}
+            />
+          ))}
+        </div>
+        {/* Labels */}
+        <div className='mb-3 flex flex-wrap gap-4'>
+          {slices.map((s) => (
+            <div key={s.label} className='flex items-center gap-1.5'>
+              <span className={`h-2.5 w-2.5 shrink-0 ${s.color}`} />
+              <span className='text-[11px] font-bold text-slate-700 dark:text-hp-cream'>
+                {s.pct}% to {s.label}
+              </span>
+            </div>
+          ))}
+        </div>
+        {description && (
+          <p className='text-xs text-hp-muted'>{description}</p>
+        )}
+      </div>
+    </details>
   );
 }
 
@@ -259,7 +322,7 @@ export default async function BookDetailPage({
                             <p className='text-[10px] font-bold text-slate-400'>Out of stock</p>
                           )}
                         </div>
-                        <div className='flex items-center gap-4'>
+                        <div className='flex flex-wrap items-center gap-3'>
                           <div className='text-right'>
                             {format.compareAtPrice != null && (
                               <p className='text-xs text-slate-400 line-through'>
@@ -270,17 +333,35 @@ export default async function BookDetailPage({
                               ${format.price.toFixed(2)}
                             </p>
                           </div>
-                          {!outOfStock && format.stripePriceId && (
-                            <AddToCartButton
-                              book={book}
-                              format={format}
-                            />
+                          {!outOfStock && (
+                            <div className='flex flex-wrap gap-2'>
+                              <AddToCartButton book={book} format={format} />
+                              {format.stripePriceId && (
+                                <BuyNowButton book={book} format={format} />
+                              )}
+                            </div>
                           )}
                         </div>
                       </div>
                     );
                   })}
                 </div>
+              )}
+
+              {/* Tip the author */}
+              {book.author?.tipStripeProductId && book.author.tipAmount != null && (
+                <TipAuthorRow
+                  author={
+                    book.author as {
+                      _id: string;
+                      name: string;
+                      slug?: { current: string };
+                      tipStripeProductId: string;
+                      tipAmount: number;
+                    }
+                  }
+                  bookId={book._id}
+                />
               )}
             </div>
 
@@ -298,6 +379,11 @@ export default async function BookDetailPage({
               <DetailRow label='Language' value={book.language?.toUpperCase()} />
               <DetailRow label='Published' value={book.publishedAt} />
             </div>
+
+            {/* Revenue sharing */}
+            {book.revenueTerms && (
+              <RevenueTermsCard terms={book.revenueTerms} />
+            )}
 
             {/* Author bio */}
             {book.author && (

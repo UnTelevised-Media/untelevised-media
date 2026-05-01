@@ -77,6 +77,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `src/components/portal/PendingPayoutsWidget.tsx` — server-renderable payout display widget: totals, per-payout rows with period/gross/net; admin sees all authors' payouts
   - `src/app/(portal)/portal/page.tsx` — portal dashboard wired with `BookstoreOrdersWidget` + `PendingPayoutsWidget`; Supabase data fetched server-side with graceful degradation
 
+- **Bookstore — Buy Now & Add to Cart on Listing Cards (Issue #46)**
+  - `src/components/bookstore/BookCardActions.tsx` — client component rendered below each book card on the storefront grid; shows "+ Cart" and "Buy Now" buttons for the lowest-price format; compact amber tip row below (checkbox + inline amount input) when the book's author has a `tipStripeProductId`; tip included in Buy Now payload when checked and amount > 0; resolves inaccessible buy button on listing cards
+  - `src/components/bookstore/BuyNowButton.tsx` — standalone "Buy Now" client button used on the book detail page format rows; direct Stripe checkout redirect without cart
+  - `src/app/(user)/bookstore/page.tsx` — listing cards restructured from single `<Link>` wrapper to `<div>` with link on image/title and `BookCardActions` as a sibling; fixes buttons-inside-anchor nesting violation
+  - `src/app/(user)/bookstore/book/[slug]/page.tsx` — Add to Cart button no longer gated behind `format.stripePriceId &&` guard; compare-at strikethrough price shown on detail hero as well as listing card
+
+- **Bookstore — Name-Your-Price Tip System (Issue #46, §2.2)**
+  - `src/models/schema/author.ts` — `tipStripeProductId` (Stripe Product ID `prod_xxx`) and `tipAmount` (recommended default, USD) fields; tips are name-your-own-price so a Product ID is stored rather than a Price ID
+  - `src/lib/bookstore/types.ts` — `SanityBook.author.tipStripeProductId` (renamed from `tipStripePriceId`); `CartItem.tipIncluded?: boolean` for per-item opt-in toggle persisted in localStorage; `CheckoutLineItem.unitAmountCents?: number` for variable tip amount to checkout API
+  - `src/lib/bookstore/cart.ts` — `updatePrice(bookId, formatKey, price)` and `updateTipIncluded(bookId, formatKey, included)` actions; `addItem` no longer stacks quantity for tip items — re-adding updates price and `tipIncluded` instead
+  - `src/lib/sanity/lib/queries.ts` — author projection uses `coalesce(tipStripeProductId, tipStripePriceId)` for backward compatibility with documents saved before the field rename
+  - `src/app/api/bookstore/checkout/route.ts` — tip items built with `price_data: { product, unit_amount }` (Stripe name-your-price); tips with zero/missing `unitAmountCents` are filtered before session creation; non-tip price IDs trimmed to remove accidental whitespace; diagnostic `[shop/checkout]` log line emits key prefix and price IDs to aid Stripe env debugging
+  - `src/components/bookstore/TipAuthorRow.tsx` — full rewrite: "Include tip" checkbox (default checked), editable dollar input (default = `author.tipAmount`), buttons disabled when unchecked or amount = 0; uses `tipStripeProductId`; "+ Cart" passes `tipIncluded: true`; "Tip Now" passes `unitAmountCents` to checkout
+  - `src/components/bookstore/BookCardActions.tsx` — compact tip row below format buttons: include checkbox + inline amount input; tip added to cart or Buy Now payload only when checked and amount > 0
+  - `src/app/(user)/bookstore/cart/page.tsx` — tip items rendered with amber left-border styling, editable amount input (calls `updatePrice`), include checkbox (calls `updateTipIncluded`), no quantity controls; checkout payload filters unchecked/zero tips and passes `unitAmountCents` for included tips; subtotal respects `tipIncluded` flag
+
+- **Bookstore — Guest Download Token API (Issue #46, §7)**
+  - `src/app/api/bookstore/download/guest/` — one-time token download endpoint for guest purchases; validates token, marks used, returns Supabase signed URL
+  - `src/app/api/bookstore/download/guest-resend/` — accepts `order_number` + `guest_email`; verifies match; generates fresh token with new expiration; sends new delivery email via Resend; rate-limited to 3 resends per order
+  - `supabase/migrations/20260430000002_guest_download_tokens.sql` — `guest_download_tokens` table: token, order_item_id, guest_email, used_at, expires_at, resend_count
+  - `supabase/migrations/20260430000003_audit_logs.sql` — `audit_logs` table: event_type, user_id, purchase_id, ip_address, user_agent, details JSONB; indexed on event_type + created_at
+
 - **Breaking News Page**
   - `src/app/(news)/breaking/page.tsx` + `BreakingNewsClient.tsx` — dedicated `/breaking` route with `generateMetadata`; replaces old redirect target with a full rendered page
   - Removed `src/app/(news)/live-event/[slug]/page.tsx` (superseded by breaking news + events architecture)
@@ -94,7 +116,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - **`checkbox.tsx` duplicate border Tailwind classes** — shadcn codegen emitted `border-slate-200 border-slate-900` (and `dark:border-slate-800 dark:border-slate-50`) on the same element; only the last value wins; removed the duplicate dark-state values, keeping `border-slate-200 dark:border-slate-800` as the unchecked border (checked colors already handled by `data-[state=checked]` classes)
 
-- **`tsconfig.json` `baseUrl` deprecation warning** — added `"ignoreDeprecations": "6.0"` to silence the TypeScript 7.0 deprecation warning; `baseUrl` itself retained as it is still required for the `@/*` path alias resolution under `moduleResolution: "bundler"`
+- **`tsconfig.json` `ignoreDeprecations` invalid value** — `"6.0"` is not an accepted value by the TypeScript compiler; changed to `"5.0"` (the only valid value as of TS 5.x); was causing `Type error: Invalid value for '--ignoreDeprecations'` and failing the Next.js production build
 
 - **File input clicks broken inside `overflow-hidden` containers** — `sr-only` applies `clip: rect(0,0,0,0)` which kills programmatic click targets; fixed across `AddBookModal`, `EditBookModal`, and `ArticleEditorForm` by switching to `useRef` + `className='hidden'` / `fixed left-[-9999px]` inputs with `ref.current?.click()`
 - **Digital file "first pick doesn't stick"** — shared `digitalInputRef` + `useState` index tracking has stale closure / batched-state race on first pick; fixed in both `AddBookModal` and `EditBookModal` by giving each format card its own dedicated `<input ref={(el) => { digitalInputRefs.current[i] = el; }}>` with an inline `onChange` that captures `i` directly from the `map()` closure — eliminates index tracking entirely

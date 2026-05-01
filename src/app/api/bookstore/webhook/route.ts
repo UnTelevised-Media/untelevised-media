@@ -7,14 +7,23 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
+import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
 import sanityClient from '@/lib/sanity/lib/client';
 import type { FormatType } from '@/lib/bookstore/types';
-import { sendOrderConfirmationEmail, sendDigitalDownloadEmail } from '@/lib/bookstore/email';
+import {
+  sendOrderConfirmationEmail,
+  sendDigitalDownloadEmail,
+  sendGuestDownloadEmail,
+} from '@/lib/bookstore/email';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
   apiVersion: '2026-04-22.dahlia',
 });
+
+const baseUrl =
+  process.env.NEXT_PUBLIC_PRODUCTION_URL ??
+  process.env.NEXT_PUBLIC_DEVELOPMENT_URL ??
+  'http://localhost:3000';
 
 async function upsertCustomer(clerkUserId: string, email: string, name?: string) {
   const { data: existing } = await shopServiceClient
@@ -133,6 +142,9 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     (_, idx) => items[idx]?.isDigital && items[idx]?.bookId
   );
 
+  // For guest purchases (no Clerk user), we generate single-use download tokens
+  const guestDownloadLinks: Array<{ bookTitle: string; downloadUrl: string }> = [];
+
   for (const item of digitalItems) {
     const meta = items.find((m) => m.bookId === item.sanity_book_id);
     if (!meta) continue;
@@ -154,6 +166,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     expiresAt.setFullYear(expiresAt.getFullYear() + 1);
 
     if (customerId) {
+      // Authenticated user — create persistent download record
       await shopServiceClient.from('digital_downloads').insert({
         order_item_id: item.id,
         customer_id: customerId,
@@ -162,6 +175,29 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         max_downloads: 5,
         expires_at: expiresAt.toISOString(),
       });
+    } else if (storagePath) {
+      // Guest — generate a single-use token with 14-day expiry
+      const guestExpiry = new Date();
+      guestExpiry.setDate(guestExpiry.getDate() + 14);
+
+      const token = crypto.randomUUID();
+      const { error: tokenError } = await shopServiceClient.from('guest_download_tokens').insert({
+        order_id: order.id,
+        book_title: meta.title,
+        format_label: meta.formatType,
+        supabase_storage_path: storagePath,
+        guest_email: customerEmail,
+        token,
+        max_downloads: 1,
+        expires_at: guestExpiry.toISOString(),
+      });
+
+      if (tokenError) {
+        console.error('[webhook] Failed to create guest download token:', tokenError.message);
+      } else {
+        const downloadUrl = `${baseUrl}/api/bookstore/download/guest?token=${token}`;
+        guestDownloadLinks.push({ bookTitle: meta.title, downloadUrl });
+      }
     }
 
     // Mark item as fulfilled
@@ -170,6 +206,14 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       .update({ download_fulfilled: true })
       .eq('id', item.id);
   }
+
+  // Audit payment success
+  void writeAuditLog({
+    eventType: 'payment_success',
+    userId: clerkUserId || undefined,
+    orderId: order.id,
+    details: { orderNumber, customerEmail, totalCents, digitalItemCount: digitalItems.length },
+  });
 
   // Send emails
   try {
@@ -180,8 +224,21 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       totalCents,
     });
 
-    if (digitalItems.length > 0) {
+    if (customerId && digitalItems.length > 0) {
       await sendDigitalDownloadEmail({ to: customerEmail, orderNumber });
+    }
+
+    // Send individual guest download emails
+    for (const guestLink of guestDownloadLinks) {
+      const expiresAt = new Date();
+      expiresAt.setDate(expiresAt.getDate() + 14);
+      await sendGuestDownloadEmail({
+        to: customerEmail,
+        orderNumber,
+        bookTitle: guestLink.bookTitle,
+        downloadUrl: guestLink.downloadUrl,
+        expiresAt,
+      });
     }
   } catch (emailErr) {
     console.error('[webhook] Email send failed:', emailErr);

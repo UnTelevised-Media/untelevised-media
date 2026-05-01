@@ -6,7 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
+import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
 
 const SIGNED_URL_TTL_SECONDS = 15 * 60; // 15 minutes
 
@@ -49,11 +49,13 @@ export async function GET(req: NextRequest) {
 
   // Check expiry
   if (download.expires_at && new Date(download.expires_at) < new Date()) {
+    void writeAuditLog({ eventType: 'download_expired', userId, details: { orderItemId } });
     return NextResponse.json({ error: 'Download link has expired' }, { status: 410 });
   }
 
   // Check download count
   if (download.download_count >= download.max_downloads) {
+    void writeAuditLog({ eventType: 'download_limit_reached', userId, details: { orderItemId } });
     return NextResponse.json({ error: 'Maximum downloads reached' }, { status: 403 });
   }
 
@@ -81,6 +83,12 @@ export async function GET(req: NextRequest) {
       ...(download.first_downloaded_at == null ? { first_downloaded_at: now } : {}),
     })
     .eq('id', download.id);
+
+  void writeAuditLog({
+    eventType: 'download_success',
+    userId,
+    details: { orderItemId, downloadCount: download.download_count + 1 },
+  });
 
   return NextResponse.json({ url: signedData.signedUrl });
 }

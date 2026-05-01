@@ -26,9 +26,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
     }
 
-    // Validate all items have a stripePriceId
+    // Validate non-tip items have a stripePriceId
     for (const item of body.items) {
-      if (!item.stripePriceId) {
+      if (item.formatType !== 'tip' && !item.stripePriceId) {
         return NextResponse.json(
           { error: `Item "${item.title}" is missing a Stripe Price ID` },
           { status: 400 }
@@ -36,16 +36,52 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const hasPhysical = body.items.some((i) => i.formatType !== 'digital');
-    const hasDigital = body.items.some((i) => i.isDigital);
+    // Filter out tips with no amount or zero amount
+    const chargeableItems = body.items.filter(
+      (i) => i.formatType !== 'tip' || (i.unitAmountCents != null && i.unitAmountCents > 0)
+    );
 
-    const lineItems = body.items.map((item) => ({
-      price: item.stripePriceId,
-      quantity: item.quantity,
-    }));
+    if (chargeableItems.length === 0) {
+      return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
+    }
+
+    const hasPhysical = chargeableItems.some((i) => i.formatType !== 'digital');
+    const hasDigital = chargeableItems.some((i) => i.isDigital);
+
+    const keyPrefix = (process.env.STRIPE_SECRET_KEY ?? '').slice(0, 14);
+    console.log(
+      '[shop/checkout] key prefix:',
+      keyPrefix,
+      '| items:',
+      JSON.stringify(
+        chargeableItems.map((i) => ({
+          title: i.title,
+          priceId: i.stripePriceId,
+          type: i.formatType,
+        }))
+      )
+    );
+
+    const lineItems = chargeableItems.map((item) => {
+      const priceId = item.stripePriceId.trim();
+      if (item.formatType === 'tip' && item.unitAmountCents) {
+        return {
+          price_data: {
+            currency: 'usd',
+            product: priceId,
+            unit_amount: item.unitAmountCents,
+          },
+          quantity: 1,
+        };
+      }
+      return {
+        price: priceId,
+        quantity: item.quantity,
+      };
+    });
 
     // Build per-item metadata for the webhook handler
-    const itemsMeta = body.items.map((item) => ({
+    const itemsMeta = chargeableItems.map((item) => ({
       bookId: item.sanityBookId,
       formatType: item.formatType as FormatType,
       formatKey: item.formatKey,

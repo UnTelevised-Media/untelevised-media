@@ -158,6 +158,19 @@ export default defineType({
       description: 'Author payout recipient address (for future Stripe Connect integration)',
       hidden: ({ currentUser }) => !currentUser?.roles?.some((r) => r.name === 'administrator'),
     }),
+    defineField({
+      name: 'tipStripeProductId',
+      title: 'Tip — Stripe Product ID',
+      type: 'string',
+      description:
+        "Stripe Product ID (prod_xxx) for this author's tip product. Tips are name-your-price, so link the Product here — not a Price. The amount is set by the buyer at checkout.",
+    }),
+    defineField({
+      name: 'tipAmount',
+      title: 'Tip — Recommended Amount (USD)',
+      type: 'number',
+      description: 'Default tip amount shown to buyers, e.g. 5. Buyers can change it freely.',
+    }),
   ],
   preview: {
     select: {

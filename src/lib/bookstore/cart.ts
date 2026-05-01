@@ -12,6 +12,8 @@ interface CartState {
   addItem: (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => void;
   removeItem: (sanityBookId: string, formatKey: string) => void;
   updateQuantity: (sanityBookId: string, formatKey: string, quantity: number) => void;
+  updatePrice: (sanityBookId: string, formatKey: string, price: number) => void;
+  updateTipIncluded: (sanityBookId: string, formatKey: string, included: boolean) => void;
   clearCart: () => void;
   getItemCount: () => number;
   getTotal: () => number;
@@ -28,6 +30,16 @@ export const useCart = create<CartState>()(
             (i) => i.sanityBookId === incoming.sanityBookId && i.formatKey === incoming.formatKey
           );
           if (existing) {
+            // Tips don't stack quantity — update price and re-check instead
+            if (incoming.formatType === 'tip') {
+              return {
+                items: state.items.map((i) =>
+                  i.sanityBookId === incoming.sanityBookId && i.formatKey === incoming.formatKey
+                    ? { ...i, price: incoming.price, tipIncluded: incoming.tipIncluded ?? true }
+                    : i
+                ),
+              };
+            }
             return {
               items: state.items.map((i) =>
                 i.sanityBookId === incoming.sanityBookId && i.formatKey === incoming.formatKey
@@ -58,6 +70,24 @@ export const useCart = create<CartState>()(
         set((state) => ({
           items: state.items.map((i) =>
             i.sanityBookId === sanityBookId && i.formatKey === formatKey ? { ...i, quantity } : i
+          ),
+        }));
+      },
+
+      updatePrice: (sanityBookId, formatKey, price) => {
+        set((state) => ({
+          items: state.items.map((i) =>
+            i.sanityBookId === sanityBookId && i.formatKey === formatKey ? { ...i, price } : i
+          ),
+        }));
+      },
+
+      updateTipIncluded: (sanityBookId, formatKey, included) => {
+        set((state) => ({
+          items: state.items.map((i) =>
+            i.sanityBookId === sanityBookId && i.formatKey === formatKey
+              ? { ...i, tipIncluded: included }
+              : i
           ),
         }));
       },

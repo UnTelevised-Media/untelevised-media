@@ -60,7 +60,7 @@ export interface Order {
   fulfilled_at: string | null;
 }
 
-export type FormatType = 'physical' | 'digital' | 'bundle';
+export type FormatType = 'physical' | 'digital' | 'bundle' | 'tip';
 
 export interface OrderItem {
   id: string;
@@ -158,6 +158,8 @@ export interface SanityBook {
     slug?: { current: string };
     clerkId?: string;
     payoutEmail?: string;
+    tipStripeProductId?: string;
+    tipAmount?: number;
   };
   coverImage?: SanityImageRef;
   coverImageUrl?: string;
@@ -172,6 +174,12 @@ export interface SanityBook {
   samplePdfUrl?: string;
   featured: boolean;
   status: 'draft' | 'published' | 'out-of-stock' | 'discontinued';
+  revenueTerms?: {
+    authorPercentage?: number;
+    publisherPercentage?: number;
+    platformPercentage?: number;
+    description?: string;
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -186,8 +194,9 @@ export interface CartItem {
   formatType: FormatType;
   formatKey: string;
   price: number;
-  stripePriceId: string;
+  stripePriceId: string; // for tips: Stripe Product ID (prod_xxx); for others: Stripe Price ID
   quantity: number;
+  tipIncluded?: boolean; // tip items only — false excludes the tip from checkout
 }
 
 // ---------------------------------------------------------------------------
@@ -195,13 +204,14 @@ export interface CartItem {
 // ---------------------------------------------------------------------------
 
 export interface CheckoutLineItem {
-  stripePriceId: string;
+  stripePriceId: string; // for tips: Stripe Product ID; for others: Stripe Price ID
   quantity: number;
   sanityBookId: string;
   formatType: FormatType;
   formatKey: string;
   title: string;
   isDigital: boolean;
+  unitAmountCents?: number; // tips only — user-entered amount converted to cents
 }
 
 export interface CheckoutPayload {
