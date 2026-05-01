@@ -1,27 +1,50 @@
 // src/lib/bookstore/email.ts
-// Transactional email helpers using Resend.
-// TODO: set RESEND_API_KEY and RESEND_FROM_EMAIL env vars.
+// Transactional email helpers using Nodemailer + Google SMTP.
+// Env vars required:
+//   SMTP_HOST      e.g. smtp.gmail.com
+//   SMTP_PORT      587 (TLS) or 465 (SSL)
+//   SMTP_SECURE    false for 587/STARTTLS, true for 465/SSL
+//   SMTP_USER      Gmail address (untelevisedmedia.live@gmail.com)
+//   SMTP_PASS      Google App Password (16-char, spaces OK)
+//   ORDERS_SMTP_FROM  Display from address (must be a verified Gmail alias or SMTP_USER)
 
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import type { FormatType } from './types';
 
 // Lazy-initialize so missing env vars don't crash at build/import time
-let _resend: Resend | null = null;
-function getResend(): Resend {
-  if (!_resend) {
-    const key = process.env.RESEND_API_KEY;
-    if (!key) throw new Error('[bookstore/email] RESEND_API_KEY is not set');
-    _resend = new Resend(key);
+let _transporter: nodemailer.Transporter | null = null;
+
+function getTransporter(): nodemailer.Transporter {
+  if (!_transporter) {
+    const host = process.env.SMTP_HOST;
+    const user = process.env.SMTP_USER;
+    const pass = process.env.SMTP_PASS;
+    if (!host || !user || !pass) {
+      throw new Error('[bookstore/email] SMTP_HOST, SMTP_USER, and SMTP_PASS must be set');
+    }
+    _transporter = nodemailer.createTransport({
+      host,
+      port: parseInt(process.env.SMTP_PORT ?? '587', 10),
+      secure: process.env.SMTP_SECURE === 'true',
+      auth: { user, pass },
+    });
   }
-  return _resend;
+  return _transporter;
 }
 
-const from = process.env.RESEND_FROM_EMAIL ?? 'UnTelevised Media <orders@untelevised.media>';
+const from =
+  process.env.ORDERS_SMTP_FROM ??
+  process.env.SMTP_USER ??
+  'UnTelevised Media <orders@untelevised.media>';
 
 const baseUrl =
   process.env.NEXT_PUBLIC_PRODUCTION_URL ??
   process.env.NEXT_PUBLIC_DEVELOPMENT_URL ??
   'http://localhost:3000';
+
+function isConfigured(): boolean {
+  return !!(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
+}
 
 // ---------------------------------------------------------------------------
 // Order confirmation
@@ -35,15 +58,14 @@ interface OrderConfirmationParams {
 }
 
 export async function sendOrderConfirmationEmail(params: OrderConfirmationParams) {
-  if (!process.env.RESEND_API_KEY) return;
+  if (!isConfigured()) return;
 
   const itemLines = params.items
     .map((i) => `<li>${i.title} — ${i.formatType} × ${i.qty}</li>`)
     .join('');
-
   const total = (params.totalCents / 100).toFixed(2);
 
-  await getResend().emails.send({
+  await getTransporter().sendMail({
     from,
     to: params.to,
     subject: `Order Confirmed — ${params.orderNumber} | UnTelevised Media`,
@@ -69,9 +91,9 @@ interface DigitalDownloadEmailParams {
 }
 
 export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParams) {
-  if (!process.env.RESEND_API_KEY) return;
+  if (!isConfigured()) return;
 
-  await getResend().emails.send({
+  await getTransporter().sendMail({
     from,
     to: params.to,
     subject: `Your Digital Download Is Ready — ${params.orderNumber} | UnTelevised Media`,
@@ -101,7 +123,7 @@ interface GuestDownloadEmailParams {
 }
 
 export async function sendGuestDownloadEmail(params: GuestDownloadEmailParams) {
-  if (!process.env.RESEND_API_KEY) return;
+  if (!isConfigured()) return;
 
   const expires = params.expiresAt.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -109,7 +131,7 @@ export async function sendGuestDownloadEmail(params: GuestDownloadEmailParams) {
     day: 'numeric',
   });
 
-  await getResend().emails.send({
+  await getTransporter().sendMail({
     from,
     to: params.to,
     subject: `Your Download Link — ${params.orderNumber} | UnTelevised Media`,
@@ -144,13 +166,13 @@ interface ShipmentEmailParams {
 }
 
 export async function sendShipmentEmail(params: ShipmentEmailParams) {
-  if (!process.env.RESEND_API_KEY) return;
+  if (!isConfigured()) return;
 
   const trackingSection = params.trackingNumber
     ? `<p style="font-family:sans-serif;">Tracking: <strong>${params.trackingNumber}</strong>${params.trackingUrl ? ` — <a href="${params.trackingUrl}">Track package</a>` : ''}</p>`
     : '';
 
-  await getResend().emails.send({
+  await getTransporter().sendMail({
     from,
     to: params.to,
     subject: `Your Order Has Shipped — ${params.orderNumber} | UnTelevised Media`,
@@ -168,9 +190,9 @@ export async function sendShipmentEmail(params: ShipmentEmailParams) {
 // ---------------------------------------------------------------------------
 
 export async function sendRefundEmail(params: { to: string; orderNumber: string }) {
-  if (!process.env.RESEND_API_KEY) return;
+  if (!isConfigured()) return;
 
-  await getResend().emails.send({
+  await getTransporter().sendMail({
     from,
     to: params.to,
     subject: `Refund Processed — ${params.orderNumber} | UnTelevised Media`,
