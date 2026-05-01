@@ -6,10 +6,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
 import { sendGuestDownloadEmail } from '@/lib/bookstore/email';
+import { checkGuestResendRate } from '@/lib/bookstore/ratelimit';
 
 const MAX_RESENDS = 3;
 
 export async function POST(req: NextRequest) {
+  const rl = await checkGuestResendRate(req);
+  if (rl.limited) {
+    return NextResponse.json(
+      { error: 'Too many requests — please wait a few minutes before trying again' },
+      { status: 429 }
+    );
+  }
+
   let body: { orderNumber?: string; guestEmail?: string };
 
   try {

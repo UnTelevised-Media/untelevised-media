@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { auth } from '@clerk/nextjs/server';
 import type { CheckoutPayload, FormatType } from '@/lib/bookstore/types';
+import { checkCheckoutRate } from '@/lib/bookstore/ratelimit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
   apiVersion: '2026-04-22.dahlia',
@@ -18,6 +19,14 @@ const baseUrl =
   'http://localhost:3000';
 
 export async function POST(req: NextRequest) {
+  const rl = await checkCheckoutRate(req);
+  if (rl.limited) {
+    return NextResponse.json(
+      { error: 'Too many requests — please wait a moment' },
+      { status: 429 }
+    );
+  }
+
   try {
     const { userId } = await auth();
     const body = (await req.json()) as CheckoutPayload;

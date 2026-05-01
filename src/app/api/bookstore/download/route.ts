@@ -7,10 +7,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
+import { checkDownloadRate } from '@/lib/bookstore/ratelimit';
 
 const SIGNED_URL_TTL_SECONDS = 15 * 60; // 15 minutes
 
 export async function GET(req: NextRequest) {
+  const rl = await checkDownloadRate(req);
+  if (rl.limited) {
+    return NextResponse.json(
+      { error: 'Too many requests — please wait a moment' },
+      { status: 429 }
+    );
+  }
+
   const { userId } = await auth();
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

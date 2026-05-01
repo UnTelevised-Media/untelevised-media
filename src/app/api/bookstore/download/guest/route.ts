@@ -5,10 +5,19 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
+import { checkDownloadRate } from '@/lib/bookstore/ratelimit';
 
 const SIGNED_URL_TTL_SECONDS = 15 * 60; // 15 minutes
 
 export async function GET(req: NextRequest) {
+  const rl = await checkDownloadRate(req);
+  if (rl.limited) {
+    return new NextResponse(
+      buildErrorPage('Too many requests — please wait a moment and try again.', 'error'),
+      { status: 429, headers: { 'Content-Type': 'text/html' } }
+    );
+  }
+
   const token = req.nextUrl.searchParams.get('token');
 
   if (!token) {
