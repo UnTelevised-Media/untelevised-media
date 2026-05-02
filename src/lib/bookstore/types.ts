@@ -217,4 +217,5 @@ export interface CheckoutLineItem {
 export interface CheckoutPayload {
   items: CheckoutLineItem[];
   clerkUserId?: string;
+  customerEmail?: string;
 }

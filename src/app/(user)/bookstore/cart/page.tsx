@@ -4,8 +4,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useUser } from '@clerk/nextjs';
 import { useCart } from '@/lib/bookstore/cart';
 import type { CheckoutPayload } from '@/lib/bookstore/types';
+import PreCheckoutDialog from '@/components/bookstore/PreCheckoutDialog';
 
 function CartQuantityControl({
   quantity,
@@ -45,15 +47,27 @@ function CartQuantityControl({
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, updatePrice, updateTipIncluded } = useCart();
+  const { user, isLoaded } = useUser();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
 
   const total = items.reduce((sum, i) => {
     if (i.formatType === 'tip') return i.tipIncluded !== false ? sum + i.price : sum;
     return sum + i.price * i.quantity;
   }, 0);
 
-  const handleCheckout = async () => {
+  const handleCheckoutClick = () => {
+    if (items.length === 0) return;
+    if (!isLoaded) return;
+    if (!user) {
+      setShowAuthDialog(true);
+      return;
+    }
+    void handleCheckout(user.primaryEmailAddress?.emailAddress);
+  };
+
+  const handleCheckout = async (customerEmail?: string) => {
     if (items.length === 0) return;
 
     setLoading(true);
@@ -72,6 +86,7 @@ export default function CartPage() {
           isDigital: item.formatType === 'digital',
           ...(item.formatType === 'tip' && { unitAmountCents: Math.round(item.price * 100) }),
         })),
+      ...(customerEmail && { customerEmail }),
     };
 
     if (payload.items.length === 0) {
@@ -264,15 +279,33 @@ export default function CartPage() {
               )}
 
               <button
-                onClick={handleCheckout}
-                disabled={loading}
+                onClick={handleCheckoutClick}
+                disabled={loading || !isLoaded}
                 className='w-full bg-untele py-3 text-xs font-black uppercase tracking-widest text-white hover:opacity-90 disabled:opacity-50'
               >
                 {loading ? 'Redirecting...' : 'Checkout'}
               </button>
+              {user && (
+                <p className='mt-2 text-center text-[10px] text-hp-muted'>
+                  Checking out as{' '}
+                  <span className='font-bold text-slate-600 dark:text-hp-cream'>
+                    {user.primaryEmailAddress?.emailAddress}
+                  </span>
+                </p>
+              )}
             </div>
           </div>
         </div>
+      )}
+
+      {showAuthDialog && (
+        <PreCheckoutDialog
+          onClose={() => setShowAuthDialog(false)}
+          onGuest={() => {
+            setShowAuthDialog(false);
+            void handleCheckout();
+          }}
+        />
       )}
     </main>
   );

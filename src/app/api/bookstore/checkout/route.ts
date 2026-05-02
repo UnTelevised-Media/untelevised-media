@@ -116,6 +116,7 @@ export async function POST(req: NextRequest) {
       mode: 'payment',
       allow_promotion_codes: true,
       line_items: lineItems,
+      ...(body.customerEmail && { customer_email: body.customerEmail }),
       success_url: `${baseUrl}/bookstore/order-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/bookstore/cart`,
       // Collect shipping for physical items
