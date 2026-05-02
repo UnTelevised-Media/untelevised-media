@@ -1,0 +1,619 @@
+// supabase/functions/stripe-webhook/index.ts
+// Stripe webhook handler — runs as a Supabase Edge Function (Deno).
+// Stripe → this function → Supabase writes + Next.js email API.
+//
+// Register URL in Stripe Dashboard: https://<project>.supabase.co/functions/v1/stripe-webhook
+//
+// Required secrets (set via `supabase secrets set`):
+//   STRIPE_SECRET_KEY
+//   STRIPE_WEBHOOK_SECRET
+//   SANITY_PROJECT_ID
+//   SANITY_DATASET          (default: production)
+//   SITE_URL                (e.g. https://www.untelevised.media)
+//   INTERNAL_EMAIL_SECRET   (shared secret for Next.js /api/bookstore/internal/send-email)
+//
+// Auto-injected by Supabase runtime:
+//   SUPABASE_URL
+//   SUPABASE_SERVICE_ROLE_KEY
+
+import Stripe from 'npm:stripe@^22.1.0';
+import { createClient } from 'npm:@supabase/supabase-js@^2';
+
+// ---------------------------------------------------------------------------
+// Clients
+// ---------------------------------------------------------------------------
+
+function env(key: string, fallback = ''): string {
+  return Deno.env.get(key) ?? fallback;
+}
+
+const stripe = new Stripe(env('STRIPE_SECRET_KEY'), {
+  apiVersion: '2026-04-22.dahlia' as Stripe.LatestApiVersion,
+});
+
+function supabase() {
+  return createClient(env('SUPABASE_URL'), env('SUPABASE_SERVICE_ROLE_KEY'), {
+    auth: { persistSession: false },
+  });
+}
+
+const siteUrl = env('SITE_URL', 'https://www.untelevised.media');
+const sanityProjectId = env('SANITY_PROJECT_ID');
+const sanityDataset = env('SANITY_DATASET', 'production');
+const internalEmailSecret = env('INTERNAL_EMAIL_SECRET');
+
+// ---------------------------------------------------------------------------
+// Sanity HTTP helper — no npm dependency
+// ---------------------------------------------------------------------------
+
+async function sanityFetch<T>(groq: string, params: Record<string, unknown> = {}): Promise<T> {
+  const encodedQuery = encodeURIComponent(groq);
+  const queryString = Object.entries(params)
+    .map(([k, v]) => `$${k}=${encodeURIComponent(JSON.stringify(v))}`)
+    .join('&');
+  const url = `https://${sanityProjectId}.apicdn.sanity.io/v2021-10-21/data/query/${sanityDataset}?query=${encodedQuery}${queryString ? `&${queryString}` : ''}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Sanity fetch failed: ${res.status}`);
+  const json = (await res.json()) as { result: T };
+  return json.result;
+}
+
+// ---------------------------------------------------------------------------
+// Email — calls Next.js internal route
+// ---------------------------------------------------------------------------
+
+type EmailPayload =
+  | {
+      type: 'order-confirmation';
+      to: string;
+      orderNumber: string;
+      items: Array<{ title: string; formatType: string; qty: number }>;
+      totalCents: number;
+    }
+  | { type: 'digital-download'; to: string; orderNumber: string }
+  | {
+      type: 'guest-download';
+      to: string;
+      orderNumber: string;
+      bookTitle: string;
+      downloadUrl: string;
+      expiresAt: string;
+    };
+
+async function sendEmail(payload: EmailPayload): Promise<void> {
+  if (!internalEmailSecret) {
+    console.warn('[webhook] INTERNAL_EMAIL_SECRET not set — skipping email');
+    return;
+  }
+  try {
+    const res = await fetch(`${siteUrl}/api/bookstore/internal/send-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${internalEmailSecret}`,
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      console.error('[webhook] Email API returned', res.status, await res.text());
+    }
+  } catch (err) {
+    console.error('[webhook] Failed to call email API:', err);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Customer helpers
+// ---------------------------------------------------------------------------
+
+async function upsertAuthenticatedCustomer(
+  db: ReturnType<typeof supabase>,
+  clerkUserId: string,
+  email: string,
+  name?: string
+): Promise<string> {
+  const { data: existing } = await db
+    .from('customers')
+    .select('id')
+    .eq('clerk_user_id', clerkUserId)
+    .maybeSingle();
+
+  if (existing) return existing.id as string;
+
+  const { data, error } = await db
+    .from('customers')
+    .insert({ clerk_user_id: clerkUserId, email, full_name: name ?? null })
+    .select('id')
+    .single();
+
+  if (error) throw new Error(`Failed to create customer: ${error.message}`);
+  return (data as { id: string }).id;
+}
+
+async function upsertGuestCustomer(
+  db: ReturnType<typeof supabase>,
+  email: string,
+  name?: string
+): Promise<string> {
+  const { data: existing } = await db
+    .from('customers')
+    .select('id')
+    .is('clerk_user_id', null)
+    .eq('email', email)
+    .maybeSingle();
+
+  if (existing) return existing.id as string;
+
+  const { data, error } = await db
+    .from('customers')
+    .insert({ clerk_user_id: null, email, full_name: name ?? null })
+    .select('id')
+    .single();
+
+  if (error) throw new Error(`Failed to create guest customer: ${error.message}`);
+  return (data as { id: string }).id;
+}
+
+async function generateOrderNumber(db: ReturnType<typeof supabase>): Promise<string> {
+  const { count } = await db.from('orders').select('*', { count: 'exact', head: true });
+  const num = String(((count as number) ?? 0) + 1).padStart(5, '0');
+  return `UM-${num}`;
+}
+
+// ---------------------------------------------------------------------------
+// Shipping address
+// ---------------------------------------------------------------------------
+
+async function upsertShippingAddress(
+  db: ReturnType<typeof supabase>,
+  addr: {
+    line1?: string | null;
+    line2?: string | null;
+    city?: string | null;
+    state?: string | null;
+    postal_code?: string | null;
+    country?: string | null;
+  },
+  customerId: string | null,
+  guestEmail: string | null
+): Promise<string | null> {
+  if (!addr.line1) return null;
+
+  const { data, error } = await db
+    .from('addresses')
+    .insert({
+      customer_id: customerId,
+      guest_email: guestEmail,
+      label: 'Shipping',
+      line1: addr.line1,
+      line2: addr.line2 ?? null,
+      city: addr.city ?? '',
+      state: addr.state ?? '',
+      postal_code: addr.postal_code ?? '',
+      country: addr.country ?? 'US',
+      is_default: false,
+    })
+    .select('id')
+    .single();
+
+  if (error) {
+    console.error('[webhook] Failed to store shipping address:', error.message);
+    return null;
+  }
+  return (data as { id: string }).id;
+}
+
+// ---------------------------------------------------------------------------
+// Revenue split
+// ---------------------------------------------------------------------------
+
+interface RevenueTerms {
+  authorPercentage?: number;
+  publisherPercentage?: number;
+  platformPercentage?: number;
+}
+
+async function insertAuthorSale(
+  db: ReturnType<typeof supabase>,
+  opts: {
+    orderItemId: string;
+    orderId: string;
+    sanityBookId: string;
+    authorClerkId: string | null;
+    grossCents: number;
+    revenueTerms: RevenueTerms | null;
+    isTip: boolean;
+  }
+): Promise<void> {
+  let authorPct = 70;
+  let platformPct = 15;
+  let publisherPct = 15;
+
+  if (opts.isTip) {
+    authorPct = 100;
+    platformPct = 0;
+    publisherPct = 0;
+  } else if (opts.revenueTerms) {
+    authorPct = opts.revenueTerms.authorPercentage ?? 70;
+    platformPct = opts.revenueTerms.platformPercentage ?? 15;
+    publisherPct = opts.revenueTerms.publisherPercentage ?? 15;
+  }
+
+  const authorCents = Math.round(opts.grossCents * (authorPct / 100));
+  const platformCents = Math.round(opts.grossCents * (platformPct / 100));
+  const publisherCents = opts.grossCents - authorCents - platformCents;
+
+  const { error } = await db.from('author_sales').insert({
+    order_item_id: opts.orderItemId,
+    order_id: opts.orderId,
+    sanity_book_id: opts.sanityBookId,
+    author_clerk_id: opts.authorClerkId,
+    gross_cents: opts.grossCents,
+    author_cents: authorCents,
+    platform_cents: platformCents,
+    publisher_cents: publisherCents,
+    is_tip: opts.isTip,
+  });
+
+  if (error) console.error('[webhook] author_sale insert failed:', error.message);
+}
+
+// ---------------------------------------------------------------------------
+// Main event handler
+// ---------------------------------------------------------------------------
+
+interface ItemMeta {
+  bookId: string;
+  formatType: string;
+  formatKey: string;
+  isDigital: boolean;
+  qty: number;
+  title: string;
+  priceId: string;
+}
+
+async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promise<void> {
+  const db = supabase();
+  const clerkUserId = session.metadata?.clerk_user_id || null;
+  const customerEmail = session.customer_details?.email ?? '';
+  const customerName = session.customer_details?.name ?? undefined;
+
+  if (!customerEmail) {
+    console.error('[webhook] No customer email on session', session.id);
+    return;
+  }
+
+  // 1. Upsert customer
+  let customerId: string | null = null;
+  try {
+    customerId = clerkUserId
+      ? await upsertAuthenticatedCustomer(db, clerkUserId, customerEmail, customerName)
+      : await upsertGuestCustomer(db, customerEmail, customerName);
+  } catch (err) {
+    console.error('[webhook] Customer upsert failed:', err);
+  }
+
+  // 2. Parse cart metadata
+  let items: ItemMeta[] = [];
+  try {
+    items = JSON.parse(session.metadata?.items_json ?? '[]') as ItemMeta[];
+  } catch {
+    console.error('[webhook] Failed to parse items_json');
+  }
+
+  // 3. Expand line_items for accurate per-item pricing
+  let expandedSession = session;
+  try {
+    expandedSession = await stripe.checkout.sessions.retrieve(session.id, {
+      expand: ['line_items'],
+    });
+  } catch (err) {
+    console.error('[webhook] line_items expand failed, using session totals:', err);
+  }
+
+  const priceAmountMap = new Map<string, number>();
+  for (const li of expandedSession.line_items?.data ?? []) {
+    if (li.price?.id) priceAmountMap.set(li.price.id, li.amount_total ?? 0);
+  }
+
+  // 4. Capture shipping address
+  let shippingAddressId: string | null = null;
+  const shippingAddr = expandedSession.collected_information?.shipping_details?.address;
+  if (shippingAddr) {
+    shippingAddressId = await upsertShippingAddress(
+      db,
+      shippingAddr,
+      customerId,
+      clerkUserId ? null : customerEmail
+    );
+  }
+
+  // 5. Create order
+  const orderNumber = await generateOrderNumber(db);
+  const totalCents = session.amount_total ?? 0;
+  const shippingCents = session.shipping_cost?.amount_total ?? 0;
+  const taxCents = session.total_details?.amount_tax ?? 0;
+  const subtotalCents = totalCents - shippingCents - taxCents;
+
+  const { data: order, error: orderError } = await db
+    .from('orders')
+    .insert({
+      order_number: orderNumber,
+      customer_id: customerId,
+      stripe_checkout_session_id: session.id,
+      stripe_payment_intent_id:
+        typeof session.payment_intent === 'string' ? session.payment_intent : null,
+      status: 'paid',
+      subtotal_cents: subtotalCents,
+      tax_cents: taxCents,
+      shipping_cents: shippingCents,
+      total_cents: totalCents,
+      currency: session.currency ?? 'usd',
+      shipping_address_id: shippingAddressId,
+    })
+    .select('id')
+    .single();
+
+  if (orderError || !order) {
+    console.error('[webhook] Order insert failed:', orderError?.message);
+    return;
+  }
+
+  const orderId = (order as { id: string }).id;
+
+  // 6. Batch-fetch Sanity book data (revenue terms + author clerk ID + storage paths)
+  const uniqueBookIds = [...new Set(items.map((i) => i.bookId))];
+  interface SanityBookData {
+    _id: string;
+    revenueTerms: RevenueTerms | null;
+    author: { clerkId: string | null } | null;
+    formats: Array<{ _key: string; digitalAsset?: { supabaseStoragePath?: string } }>;
+  }
+  const bookData = await sanityFetch<SanityBookData[]>(
+    `*[_type == "book" && _id in $bookIds]{ _id, revenueTerms, "author": author->{clerkId}, formats[]{ _key, digitalAsset{ supabaseStoragePath } } }`,
+    { bookIds: uniqueBookIds }
+  ).catch((err) => {
+    console.error('[webhook] Sanity fetch failed:', err);
+    return [] as SanityBookData[];
+  });
+
+  const bookMap = new Map(bookData.map((b) => [b._id, b]));
+
+  // 7. Create order_items
+  const orderItemRows = items.map((item) => {
+    const stripeTotal = priceAmountMap.get(item.priceId) ?? null;
+    const unitPriceCents =
+      stripeTotal != null
+        ? Math.round(stripeTotal / Math.max(item.qty, 1))
+        : Math.round(totalCents / Math.max(items.length, 1));
+
+    return {
+      order_id: orderId,
+      sanity_book_id: item.bookId,
+      sanity_format_type: item.formatType,
+      book_title: item.title,
+      format_label: item.formatType.charAt(0).toUpperCase() + item.formatType.slice(1),
+      unit_price_cents: unitPriceCents,
+      quantity: item.qty,
+      stripe_price_id: item.priceId,
+      is_digital: item.isDigital,
+      download_fulfilled: false,
+    };
+  });
+
+  const { data: createdItems, error: itemsError } = await db
+    .from('order_items')
+    .insert(orderItemRows)
+    .select();
+
+  if (itemsError || !createdItems) {
+    console.error('[webhook] order_items insert failed:', itemsError?.message);
+    return;
+  }
+
+  // 8. Per-item: author_sales + digital fulfillment
+  const guestDownloadLinks: Array<{ bookTitle: string; downloadUrl: string }> = [];
+
+  for (let idx = 0; idx < createdItems.length; idx++) {
+    const createdItem = createdItems[idx] as {
+      id: string;
+      unit_price_cents: number;
+      quantity: number;
+    };
+    const meta = items[idx];
+    if (!meta) continue;
+
+    const bookInfo = bookMap.get(meta.bookId) ?? null;
+    const authorClerkId = bookInfo?.author?.clerkId ?? null;
+    const revenueTerms = bookInfo?.revenueTerms ?? null;
+    const isTip = meta.formatType === 'tip';
+    const grossCents = createdItem.unit_price_cents * createdItem.quantity;
+
+    await insertAuthorSale(db, {
+      orderItemId: createdItem.id,
+      orderId,
+      sanityBookId: meta.bookId,
+      authorClerkId,
+      grossCents,
+      revenueTerms,
+      isTip,
+    });
+
+    if (!meta.isDigital || isTip) continue;
+
+    const storagePath =
+      bookInfo?.formats?.find((f) => f._key === meta.formatKey)?.digitalAsset
+        ?.supabaseStoragePath ?? '';
+
+    if (!storagePath) {
+      console.warn(`[webhook] No storage path for book ${meta.bookId} format ${meta.formatKey}`);
+    }
+
+    const expiresAt = new Date();
+    expiresAt.setFullYear(expiresAt.getFullYear() + 1);
+
+    if (customerId && clerkUserId) {
+      const { error: dlErr } = await db.from('digital_downloads').insert({
+        order_item_id: createdItem.id,
+        customer_id: customerId,
+        supabase_storage_path: storagePath,
+        download_count: 0,
+        max_downloads: 5,
+        expires_at: expiresAt.toISOString(),
+      });
+      if (dlErr) console.error('[webhook] digital_download insert failed:', dlErr.message);
+    } else if (storagePath) {
+      const guestExpiry = new Date();
+      guestExpiry.setDate(guestExpiry.getDate() + 14);
+      const token = crypto.randomUUID();
+
+      const { error: tokenErr } = await db.from('guest_download_tokens').insert({
+        order_id: orderId,
+        book_title: meta.title,
+        format_label: meta.formatType,
+        supabase_storage_path: storagePath,
+        guest_email: customerEmail,
+        token,
+        max_downloads: 1,
+        expires_at: guestExpiry.toISOString(),
+      });
+
+      if (tokenErr) {
+        console.error('[webhook] guest_download_token insert failed:', tokenErr.message);
+      } else {
+        guestDownloadLinks.push({
+          bookTitle: meta.title,
+          downloadUrl: `${siteUrl}/api/bookstore/download/guest?token=${token}`,
+        });
+      }
+    }
+
+    await db.from('order_items').update({ download_fulfilled: true }).eq('id', createdItem.id);
+  }
+
+  // 9. Audit log
+  await db
+    .from('audit_logs')
+    .insert({
+      event_type: 'payment_success',
+      user_id: clerkUserId ?? null,
+      order_id: orderId,
+      details: {
+        orderNumber,
+        customerEmail,
+        totalCents,
+        digitalItemCount: items.filter((i) => i.isDigital).length,
+      },
+    })
+    .then(({ error }) => {
+      if (error) console.error('[webhook] audit_log insert failed:', error.message);
+    });
+
+  // 10. Emails (fire-and-forget via Next.js internal API)
+  const hasDigital = items.some((i) => i.isDigital && i.formatType !== 'tip');
+
+  void sendEmail({
+    type: 'order-confirmation',
+    to: customerEmail,
+    orderNumber,
+    items: items.map((i) => ({ title: i.title, formatType: i.formatType, qty: i.qty })),
+    totalCents,
+  });
+
+  if (clerkUserId && hasDigital) {
+    void sendEmail({ type: 'digital-download', to: customerEmail, orderNumber });
+  }
+
+  for (const link of guestDownloadLinks) {
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + 14);
+    void sendEmail({
+      type: 'guest-download',
+      to: customerEmail,
+      orderNumber,
+      bookTitle: link.bookTitle,
+      downloadUrl: link.downloadUrl,
+      expiresAt: expiresAt.toISOString(),
+    });
+  }
+}
+
+async function handleRefund(charge: Stripe.Charge): Promise<void> {
+  const db = supabase();
+  const piId = typeof charge.payment_intent === 'string' ? charge.payment_intent : null;
+  if (!piId) return;
+
+  const { data: order } = await db
+    .from('orders')
+    .select('id')
+    .eq('stripe_payment_intent_id', piId)
+    .maybeSingle();
+
+  if (!order) return;
+  const orderId = (order as { id: string }).id;
+
+  await db.from('orders').update({ status: 'refunded' }).eq('id', orderId);
+
+  const { data: items } = await db
+    .from('order_items')
+    .select('id')
+    .eq('order_id', orderId)
+    .eq('is_digital', true);
+
+  for (const item of (items ?? []) as Array<{ id: string }>) {
+    await db.from('digital_downloads').update({ max_downloads: 0 }).eq('order_item_id', item.id);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Entry point
+// ---------------------------------------------------------------------------
+
+Deno.serve(async (req: Request) => {
+  if (req.method !== 'POST') {
+    return new Response('Method not allowed', { status: 405 });
+  }
+
+  const sig = req.headers.get('stripe-signature');
+  const webhookSecret = env('STRIPE_WEBHOOK_SECRET');
+
+  const rawBody = await req.arrayBuffer();
+
+  let event: Stripe.Event;
+  try {
+    if (webhookSecret && sig) {
+      event = await stripe.webhooks.constructEventAsync(
+        new Uint8Array(rawBody),
+        sig,
+        webhookSecret
+      );
+    } else {
+      console.warn('[webhook] No STRIPE_WEBHOOK_SECRET — skipping signature verification');
+      event = JSON.parse(new TextDecoder().decode(rawBody)) as Stripe.Event;
+    }
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Signature verification failed';
+    console.error('[webhook] Verification error:', msg);
+    return new Response(JSON.stringify({ error: msg }), { status: 400 });
+  }
+
+  try {
+    switch (event.type) {
+      case 'checkout.session.completed':
+        await handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
+        break;
+      case 'charge.refunded':
+        await handleRefund(event.data.object as Stripe.Charge);
+        break;
+      default:
+        break;
+    }
+  } catch (err) {
+    console.error(`[webhook] Handler error for ${event.type}:`, err);
+    return new Response(JSON.stringify({ error: 'Handler failed' }), { status: 500 });
+  }
+
+  return new Response(JSON.stringify({ received: true }), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+});
