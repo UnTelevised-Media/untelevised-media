@@ -10,7 +10,7 @@ export interface Database {
       customers: {
         Row: {
           id: string;
-          clerk_user_id: string;
+          clerk_user_id: string | null;
           email: string;
           full_name: string | null;
           phone: string | null;
@@ -19,7 +19,7 @@ export interface Database {
         };
         Insert: {
           id?: string;
-          clerk_user_id: string;
+          clerk_user_id?: string | null;
           email: string;
           full_name?: string | null;
           phone?: string | null;
@@ -28,7 +28,7 @@ export interface Database {
         };
         Update: {
           id?: string;
-          clerk_user_id?: string;
+          clerk_user_id?: string | null;
           email?: string;
           full_name?: string | null;
           phone?: string | null;
@@ -40,7 +40,8 @@ export interface Database {
       addresses: {
         Row: {
           id: string;
-          customer_id: string;
+          customer_id: string | null;
+          guest_email: string | null;
           label: string | null;
           line1: string;
           line2: string | null;
@@ -53,7 +54,8 @@ export interface Database {
         };
         Insert: {
           id?: string;
-          customer_id: string;
+          customer_id?: string | null;
+          guest_email?: string | null;
           label?: string | null;
           line1: string;
           line2?: string | null;
@@ -66,7 +68,8 @@ export interface Database {
         };
         Update: {
           id?: string;
-          customer_id?: string;
+          customer_id?: string | null;
+          guest_email?: string | null;
           label?: string | null;
           line1?: string;
           line2?: string | null;
@@ -83,6 +86,63 @@ export interface Database {
             columns: ['customer_id'];
             isOneToOne: false;
             referencedRelation: 'customers';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      author_sales: {
+        Row: {
+          id: string;
+          order_item_id: string;
+          order_id: string;
+          sanity_book_id: string;
+          author_clerk_id: string | null;
+          gross_cents: number;
+          author_cents: number;
+          publisher_cents: number;
+          platform_cents: number;
+          is_tip: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          order_item_id: string;
+          order_id: string;
+          sanity_book_id: string;
+          author_clerk_id?: string | null;
+          gross_cents: number;
+          author_cents?: number;
+          publisher_cents?: number;
+          platform_cents?: number;
+          is_tip?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          order_item_id?: string;
+          order_id?: string;
+          sanity_book_id?: string;
+          author_clerk_id?: string | null;
+          gross_cents?: number;
+          author_cents?: number;
+          publisher_cents?: number;
+          platform_cents?: number;
+          is_tip?: boolean;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'author_sales_order_item_id_fkey';
+            columns: ['order_item_id'];
+            isOneToOne: false;
+            referencedRelation: 'order_items';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'author_sales_order_id_fkey';
+            columns: ['order_id'];
+            isOneToOne: false;
+            referencedRelation: 'orders';
             referencedColumns: ['id'];
           },
         ];
