@@ -26,6 +26,7 @@ import { ClaimedPitchesPanel } from '@/components/portal/ClaimedPitchesPanel';
 import BookstoreOrdersWidget, {
   type DigitalSaleRow,
   type ShipmentPendingRow,
+  type TipRow,
 } from '@/components/portal/BookstoreOrdersWidget';
 import AddBookModal from '@/components/portal/AddBookModal';
 import PendingPayoutsWidget, { type PayoutRow } from '@/components/portal/PendingPayoutsWidget';
@@ -180,6 +181,7 @@ export default async function PortalDashboardPage() {
   let bookUnitsSold = 0;
   let digitalSales: DigitalSaleRow[] = [];
   let shipmentsPending: ShipmentPendingRow[] = [];
+  let tips: TipRow[] = [];
   let pendingPayouts: PayoutRow[] = [];
   let bookstoreAvailable = false;
   const isAdmin = role === 'admin';
@@ -197,6 +199,8 @@ export default async function PortalDashboardPage() {
 
       type ItemRow = {
         book_title: string;
+        sanity_format_type: string;
+        unit_price_cents: number;
         quantity: number;
         is_digital: boolean;
         order: {
@@ -212,7 +216,7 @@ export default async function PortalDashboardPage() {
       let query = shopServiceClient
         .from('order_items')
         .select(
-          'book_title, quantity, is_digital, order:orders(id, order_number, status, created_at, fulfilled_at, customer:customers(email, full_name))',
+          'book_title, sanity_format_type, unit_price_cents, quantity, is_digital, order:orders(id, order_number, status, created_at, fulfilled_at, customer:customers(email, full_name))',
         )
         .order('created_at', { ascending: false })
         .limit(200);
@@ -258,6 +262,7 @@ export default async function PortalDashboardPage() {
       shipmentsPending = items
         .filter(
           (i) =>
+            i.sanity_format_type !== 'tip' &&
             !i.is_digital &&
             ['paid', 'processing'].includes(i.order!.status) &&
             !i.order!.fulfilled_at,
@@ -272,6 +277,18 @@ export default async function PortalDashboardPage() {
           status: i.order!.status,
           customer_email: i.order!.customer?.email,
           customer_name: i.order!.customer?.full_name,
+        }));
+
+      tips = items
+        .filter((i) => i.sanity_format_type === 'tip')
+        .slice(0, 50)
+        .map((i, idx) => ({
+          id: `t-${idx}`,
+          order_number: i.order!.order_number,
+          book_title: i.book_title,
+          amount_cents: i.unit_price_cents,
+          created_at: i.order!.created_at,
+          customer_email: i.order!.customer?.email,
         }));
 
       // Pending payouts — scoped by role
@@ -510,6 +527,7 @@ export default async function PortalDashboardPage() {
                 <BookstoreOrdersWidget
                   digitalSales={digitalSales}
                   shipmentsPending={shipmentsPending}
+                  tips={tips}
                 />
               ) : (
                 <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
