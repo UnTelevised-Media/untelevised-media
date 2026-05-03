@@ -25,50 +25,25 @@ export interface ShipmentPendingRow {
   customer_name?: string | null;
 }
 
-export interface TipRow {
-  id: string;
-  order_number: string;
-  book_title: string;
-  amount_cents: number;
-  created_at: string;
-  customer_email?: string;
-}
-
 interface Props {
   digitalSales: DigitalSaleRow[];
   shipmentsPending: ShipmentPendingRow[];
-  tips: TipRow[];
 }
 
-function centsToUsd(cents: number) {
-  return `$${(cents / 100).toFixed(2)}`;
-}
-
-export default function BookstoreOrdersWidget({ digitalSales, shipmentsPending, tips }: Props) {
-  const [panel, setPanel] = useState<'ship' | 'tips' | 'digital'>('ship');
-
-  const emptyLabel =
-    panel === 'ship' ? 'No pending shipments' :
-    panel === 'tips' ? 'No tips yet' :
-    'No digital sales yet';
+export default function BookstoreOrdersWidget({ digitalSales, shipmentsPending }: Props) {
+  const [panel, setPanel] = useState<'ship' | 'digital'>('ship');
+  const items = panel === 'ship' ? shipmentsPending : digitalSales;
 
   return (
     <div className='flex flex-col border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900'>
-      {/* Tab bar — 3 equal columns */}
-      <div className='grid grid-cols-3'>
+      {/* Tab bar */}
+      <div className='grid grid-cols-2'>
         <TabBtn
           active={panel === 'ship'}
           onClick={() => setPanel('ship')}
           label='Needs Shipping'
           count={shipmentsPending.length}
           urgent={shipmentsPending.length > 0}
-        />
-        <TabBtn
-          active={panel === 'tips'}
-          onClick={() => setPanel('tips')}
-          label='Tips'
-          count={tips.length}
-          bordered
         />
         <TabBtn
           active={panel === 'digital'}
@@ -81,113 +56,45 @@ export default function BookstoreOrdersWidget({ digitalSales, shipmentsPending, 
 
       {/* List */}
       <div className='flex-1 overflow-y-auto' style={{ maxHeight: 360 }}>
-        {panel === 'ship' && (
-          shipmentsPending.length === 0 ? (
-            <Empty label={emptyLabel} />
-          ) : (
-            <ul className='divide-y divide-slate-100 dark:divide-slate-800'>
-              {shipmentsPending.map((item) => (
-                <li key={item.id} className='flex items-start justify-between gap-3 px-4 py-3'>
-                  <div className='min-w-0 flex-1'>
-                    <p className='truncate text-xs font-bold text-slate-900 dark:text-slate-100'>
-                      {item.book_title}
+        {items.length === 0 ? (
+          <Empty label={panel === 'ship' ? 'No pending shipments' : 'No digital sales yet'} />
+        ) : (
+          <ul className='divide-y divide-slate-100 dark:divide-slate-800'>
+            {items.map((item) => (
+              <li key={item.id} className='flex items-start justify-between gap-3 px-4 py-3'>
+                <div className='min-w-0 flex-1'>
+                  <p className='truncate text-xs font-bold text-slate-900 dark:text-slate-100'>
+                    {item.book_title}
+                  </p>
+                  {item.customer_email && (
+                    <p className='truncate text-[10px] text-slate-400'>{item.customer_email}</p>
+                  )}
+                  {isShipment(item) && item.customer_name && (
+                    <p className='text-[10px] text-slate-500 dark:text-slate-400'>
+                      {item.customer_name}
                     </p>
-                    {item.customer_email && (
-                      <p className='truncate text-[10px] text-slate-400'>{item.customer_email}</p>
-                    )}
-                    {item.customer_name && (
-                      <p className='text-[10px] text-slate-500 dark:text-slate-400'>
-                        {item.customer_name}
-                      </p>
-                    )}
-                    <p className='text-[10px] text-slate-300 dark:text-slate-600'>
-                      {new Date(item.created_at).toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div className='shrink-0 text-right'>
-                    <Link
-                      href='/portal/orders'
-                      className='block text-[10px] font-black text-untele hover:underline'
-                    >
-                      #{item.order_number}
-                    </Link>
-                    <p className='text-[10px] text-slate-400'>× {item.quantity}</p>
+                  )}
+                  <p className='text-[10px] text-slate-300 dark:text-slate-600'>
+                    {new Date(item.created_at).toLocaleDateString()}
+                  </p>
+                </div>
+                <div className='shrink-0 text-right'>
+                  <Link
+                    href='/portal/orders'
+                    className='block text-[10px] font-black text-untele hover:underline'
+                  >
+                    #{item.order_number}
+                  </Link>
+                  <p className='text-[10px] text-slate-400'>× {item.quantity}</p>
+                  {isShipment(item) && (
                     <span className='text-[10px] font-bold uppercase tracking-wide text-amber-600 dark:text-amber-400'>
                       {item.status}
                     </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )
-        )}
-
-        {panel === 'tips' && (
-          tips.length === 0 ? (
-            <Empty label={emptyLabel} />
-          ) : (
-            <ul className='divide-y divide-slate-100 dark:divide-slate-800'>
-              {tips.map((item) => (
-                <li key={item.id} className='flex items-start justify-between gap-3 px-4 py-3'>
-                  <div className='min-w-0 flex-1'>
-                    <p className='truncate text-xs font-bold text-slate-900 dark:text-slate-100'>
-                      {item.book_title}
-                    </p>
-                    {item.customer_email && (
-                      <p className='truncate text-[10px] text-slate-400'>{item.customer_email}</p>
-                    )}
-                    <p className='text-[10px] text-slate-300 dark:text-slate-600'>
-                      {new Date(item.created_at).toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div className='shrink-0 text-right'>
-                    <Link
-                      href='/portal/orders'
-                      className='block text-[10px] font-black text-untele hover:underline'
-                    >
-                      #{item.order_number}
-                    </Link>
-                    <p className='text-xs font-black text-green-600 dark:text-green-400'>
-                      {centsToUsd(item.amount_cents)}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )
-        )}
-
-        {panel === 'digital' && (
-          digitalSales.length === 0 ? (
-            <Empty label={emptyLabel} />
-          ) : (
-            <ul className='divide-y divide-slate-100 dark:divide-slate-800'>
-              {digitalSales.map((item) => (
-                <li key={item.id} className='flex items-start justify-between gap-3 px-4 py-3'>
-                  <div className='min-w-0 flex-1'>
-                    <p className='truncate text-xs font-bold text-slate-900 dark:text-slate-100'>
-                      {item.book_title}
-                    </p>
-                    {item.customer_email && (
-                      <p className='truncate text-[10px] text-slate-400'>{item.customer_email}</p>
-                    )}
-                    <p className='text-[10px] text-slate-300 dark:text-slate-600'>
-                      {new Date(item.created_at).toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div className='shrink-0 text-right'>
-                    <Link
-                      href='/portal/orders'
-                      className='block text-[10px] font-black text-untele hover:underline'
-                    >
-                      #{item.order_number}
-                    </Link>
-                    <p className='text-[10px] text-slate-400'>× {item.quantity}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
 
@@ -202,6 +109,10 @@ export default function BookstoreOrdersWidget({ digitalSales, shipmentsPending, 
       </div>
     </div>
   );
+}
+
+function isShipment(item: DigitalSaleRow | ShipmentPendingRow): item is ShipmentPendingRow {
+  return 'status' in item;
 }
 
 function Empty({ label }: { label: string }) {

@@ -26,8 +26,8 @@ import { ClaimedPitchesPanel } from '@/components/portal/ClaimedPitchesPanel';
 import BookstoreOrdersWidget, {
   type DigitalSaleRow,
   type ShipmentPendingRow,
-  type TipRow,
 } from '@/components/portal/BookstoreOrdersWidget';
+import TipsWidget, { type TipRow } from '@/components/portal/TipsWidget';
 import AddBookModal from '@/components/portal/AddBookModal';
 import PendingPayoutsWidget, { type PayoutRow } from '@/components/portal/PendingPayoutsWidget';
 import sanityFetch from '@/lib/sanity/lib/fetch';
@@ -527,7 +527,6 @@ export default async function PortalDashboardPage() {
                 <BookstoreOrdersWidget
                   digitalSales={digitalSales}
                   shipmentsPending={shipmentsPending}
-                  tips={tips}
                 />
               ) : (
                 <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
@@ -540,6 +539,20 @@ export default async function PortalDashboardPage() {
                   >
                     My Books →
                   </Link>
+                </div>
+              )}
+            </section>
+
+            {/* Tips */}
+            <section>
+              <SectionHeader label='Tips' />
+              {bookstoreAvailable ? (
+                <TipsWidget tips={tips} />
+              ) : (
+                <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
+                  <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                    Bookstore not connected
+                  </p>
                 </div>
               )}
             </section>
