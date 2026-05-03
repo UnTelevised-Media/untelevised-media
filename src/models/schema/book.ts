@@ -267,35 +267,60 @@ export default defineType({
       name: 'revenueTerms',
       title: 'Revenue Sharing',
       type: 'object',
-      description: 'How revenue from this book is split between author, publisher, and platform.',
+      description:
+        'How revenue from this book is split. The three percentages must add up to 100.',
+      validation: (Rule) =>
+        Rule.custom(
+          (
+            terms:
+              | {
+                  authorPercentage?: number;
+                  publisherPercentage?: number;
+                  platformPercentage?: number;
+                }
+              | undefined
+          ) => {
+            if (!terms) return 'Revenue sharing is required before publishing';
+            const { authorPercentage, publisherPercentage, platformPercentage } = terms;
+            if (authorPercentage == null) return 'Author % is required';
+            if (publisherPercentage == null) return 'Publisher % is required';
+            if (platformPercentage == null) return 'Platform % is required';
+            const total = authorPercentage + publisherPercentage + platformPercentage;
+            if (total !== 100) return `Percentages must sum to 100 (currently ${total})`;
+            return true;
+          }
+        ),
       fields: [
         defineField({
           name: 'authorPercentage',
           title: 'Author %',
           type: 'number',
-          description: 'Percentage going to the author, e.g. 65',
-          validation: (Rule) => Rule.min(0).max(100),
+          description: 'Percentage going to the author',
+          initialValue: 70,
+          validation: (Rule) => Rule.required().min(0).max(100),
         }),
         defineField({
           name: 'publisherPercentage',
           title: 'Publisher %',
           type: 'number',
-          description: 'Percentage going to the publisher, e.g. 25',
-          validation: (Rule) => Rule.min(0).max(100),
+          description: 'Percentage going to the publisher (set to 0 if self-published)',
+          initialValue: 15,
+          validation: (Rule) => Rule.required().min(0).max(100),
         }),
         defineField({
           name: 'platformPercentage',
           title: 'Platform %',
           type: 'number',
-          description: 'Percentage retained by the platform, e.g. 10',
-          validation: (Rule) => Rule.min(0).max(100),
+          description: 'Percentage retained by UnTelevised Media',
+          initialValue: 15,
+          validation: (Rule) => Rule.required().min(0).max(100),
         }),
         defineField({
           name: 'description',
-          title: 'Description',
+          title: 'Notes',
           type: 'text',
-          rows: 3,
-          description: 'Optional note explaining the revenue split',
+          rows: 2,
+          description: 'Optional note about this revenue arrangement',
         }),
       ],
     }),
