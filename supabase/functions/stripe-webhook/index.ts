@@ -311,9 +311,20 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     console.error('[webhook] line_items expand failed, using session totals:', err);
   }
 
-  const priceAmountMap = new Map<string, number>();
+  // Two maps: post-discount (what customer paid) for order_items,
+  // pre-discount (original price) for author_sales so authors aren't penalised by platform coupons.
+  const pricePaidMap = new Map<string, number>(); // price_id / prod_id → amount_total
+  const priceOriginalMap = new Map<string, number>(); // price_id / prod_id → amount_subtotal
   for (const li of expandedSession.line_items?.data ?? []) {
-    if (li.price?.id) priceAmountMap.set(li.price.id, li.amount_total ?? 0);
+    const keys: string[] = [];
+    if (li.price?.id) keys.push(li.price.id);
+    // Tips use price_data so li.price.id is ephemeral — also index by product ID
+    const prod = li.price?.product;
+    if (typeof prod === 'string') keys.push(prod);
+    for (const key of keys) {
+      pricePaidMap.set(key, li.amount_total ?? 0);
+      priceOriginalMap.set(key, li.amount_subtotal ?? li.amount_total ?? 0);
+    }
   }
 
   // 4. Capture shipping address
@@ -379,12 +390,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
 
   const bookMap = new Map(bookData.map((b) => [b._id, b]));
 
-  // 7. Create order_items
+  // 7. Create order_items (unit_price_cents = what customer actually paid, post-discount)
   const orderItemRows = items.map((item) => {
-    const stripeTotal = priceAmountMap.get(item.priceId) ?? null;
+    const paid = pricePaidMap.get(item.priceId) ?? null;
     const unitPriceCents =
-      stripeTotal != null
-        ? Math.round(stripeTotal / Math.max(item.qty, 1))
+      paid != null
+        ? Math.round(paid / Math.max(item.qty, 1))
         : Math.round(totalCents / Math.max(items.length, 1));
 
     return {
@@ -427,7 +438,10 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     const authorClerkId = bookInfo?.author?.clerkId ?? null;
     const revenueTerms = bookInfo?.revenueTerms ?? null;
     const isTip = meta.formatType === 'tip';
-    const grossCents = createdItem.unit_price_cents * createdItem.quantity;
+    // Use pre-discount original price for author revenue — platform absorbs coupon cost
+    const originalTotal = priceOriginalMap.get(meta.priceId) ?? null;
+    const grossCents =
+      originalTotal != null ? originalTotal : createdItem.unit_price_cents * createdItem.quantity;
 
     await insertAuthorSale(db, {
       orderItemId: createdItem.id,
