@@ -18,6 +18,7 @@ import {
   queryPortalMyClaimedPitches,
   queryPortalAllClaimedPitches,
   queryPortalAllBriefs,
+  queryPortalMyAuthorFlags,
 } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { BriefPanel, type Brief, type PortalAuthor, type BriefSummary } from '@/components/portal/BriefPanel';
@@ -176,7 +177,31 @@ export default async function PortalDashboardPage() {
   const allInReview = allArticles.filter((a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)).length;
   const allDrafts = allArticles.filter((a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest).length;
 
-  // ── Bookstore data for dashboard widget ────────────────────────────────────
+  // ── Bookstore visibility — based on role + Sanity literary author flag ───────
+  const isAdmin = role === 'admin';
+  const isSalesRole = role === 'sales';
+  const isAuthorRole = role === 'author';
+
+  // Fetch isLiteraryAuthor from Sanity for author-role users only
+  let isLiteraryAuthor = false;
+  if (isAuthorRole) {
+    const flagsRes = await portalSanityFetch({
+      query: queryPortalMyAuthorFlags,
+      params: { clerkId: clerkUserId },
+    });
+    isLiteraryAuthor =
+      (flagsRes.data as { isLiteraryAuthor?: boolean } | null)?.isLiteraryAuthor ?? false;
+  }
+
+  // Who sees what:
+  //   showBookstoreOrders — Needs Shipping + Digital Sales widget + My Books strip
+  //   showTipsWidget      — Tips panel (only the author whose tips they are)
+  //   Payouts panel shown to everyone regardless
+  const showBookstoreOrders = isAdmin || isSalesRole || (isAuthorRole && isLiteraryAuthor);
+  const showTipsWidget = isAuthorRole && isLiteraryAuthor;
+  const showMyBooksStrip = showBookstoreOrders;
+
+  // ── Bookstore data ──────────────────────────────────────────────────────────
   let bookCount = 0;
   let bookUnitsSold = 0;
   let digitalSales: DigitalSaleRow[] = [];
@@ -184,19 +209,9 @@ export default async function PortalDashboardPage() {
   let tips: TipRow[] = [];
   let pendingPayouts: PayoutRow[] = [];
   let bookstoreAvailable = false;
-  const isAdmin = role === 'admin';
 
   try {
     if (process.env.SUPABASE_SHOP_URL) {
-      const myBooks = await sanityFetch<SanityBook[]>({
-        query: queryBooksByAuthorClerkId,
-        params: { clerkId: clerkUserId },
-        tags: ['book'],
-      });
-      const myBookList = myBooks ?? [];
-      bookCount = myBookList.length;
-      const myBookIds = myBookList.map((b) => b._id);
-
       type ItemRow = {
         book_title: string;
         sanity_format_type: string;
@@ -213,85 +228,103 @@ export default async function PortalDashboardPage() {
         } | null;
       };
 
-      let query = shopServiceClient
-        .from('order_items')
-        .select(
-          'book_title, sanity_format_type, unit_price_cents, quantity, is_digital, order:orders(id, order_number, status, created_at, fulfilled_at, customer:customers(email, full_name))',
-        )
-        .order('created_at', { ascending: false })
-        .limit(200);
+      // Only hit order_items if this user can see the bookstore widgets
+      if (showBookstoreOrders || showTipsWidget) {
+        const myBooks = await sanityFetch<SanityBook[]>({
+          query: queryBooksByAuthorClerkId,
+          params: { clerkId: clerkUserId },
+          tags: ['book'],
+        });
+        const myBookList = myBooks ?? [];
+        bookCount = myBookList.length;
+        const myBookIds = myBookList.map((b) => b._id);
 
-      if (myBookIds.length > 0 && !isEditorPlus) {
-        query = query.in('sanity_book_id', myBookIds);
+        let orderQuery = shopServiceClient
+          .from('order_items')
+          .select(
+            'book_title, sanity_format_type, unit_price_cents, quantity, is_digital, order:orders(id, order_number, status, created_at, fulfilled_at, customer:customers(email, full_name))',
+          )
+          .order('created_at', { ascending: false })
+          .limit(200);
+
+        // Admins + sales see all; literary authors scoped to own books
+        if (!isAdmin && !isSalesRole && myBookIds.length > 0) {
+          orderQuery = orderQuery.in('sanity_book_id', myBookIds);
+        }
+
+        // author_sales scoped by clerk ID for accurate unit count
+        const unitsSoldQuery = (isAdmin || isSalesRole)
+          ? shopServiceClient.from('author_sales').select('order_item:order_items(quantity)')
+          : shopServiceClient
+              .from('author_sales')
+              .select('order_item:order_items(quantity)')
+              .eq('author_clerk_id', clerkUserId)
+              .eq('is_tip', false);
+
+        const [{ data: rawItems, error: itemsError }, { data: unitRows }] = await Promise.all([
+          orderQuery,
+          unitsSoldQuery,
+        ]);
+        if (itemsError) console.error('[portal/dashboard] order_items query failed:', itemsError.message);
+
+        const items = ((rawItems ?? []) as ItemRow[]).filter(
+          (i) => i.order && !['cancelled', 'refunded'].includes(i.order.status),
+        );
+
+        bookUnitsSold = ((unitRows ?? []) as Array<{ order_item: { quantity: number } | null }>)
+          .reduce((s, r) => s + (r.order_item?.quantity ?? 0), 0);
+
+        if (showBookstoreOrders) {
+          digitalSales = items
+            .filter((i) => i.is_digital)
+            .slice(0, 50)
+            .map((i, idx) => ({
+              id: `d-${idx}`,
+              order_number: i.order!.order_number,
+              book_title: i.book_title,
+              quantity: i.quantity,
+              created_at: i.order!.created_at,
+              customer_email: i.order!.customer?.email,
+            }));
+
+          shipmentsPending = items
+            .filter(
+              (i) =>
+                i.sanity_format_type !== 'tip' &&
+                !i.is_digital &&
+                ['paid', 'processing'].includes(i.order!.status) &&
+                !i.order!.fulfilled_at,
+            )
+            .slice(0, 50)
+            .map((i, idx) => ({
+              id: `s-${idx}`,
+              order_number: i.order!.order_number,
+              book_title: i.book_title,
+              quantity: i.quantity,
+              created_at: i.order!.created_at,
+              status: i.order!.status,
+              customer_email: i.order!.customer?.email,
+              customer_name: i.order!.customer?.full_name,
+            }));
+        }
+
+        // Tips scoped to this author only — admins/sales don't see the tips widget
+        if (showTipsWidget) {
+          tips = items
+            .filter((i) => i.sanity_format_type === 'tip')
+            .slice(0, 50)
+            .map((i, idx) => ({
+              id: `t-${idx}`,
+              order_number: i.order!.order_number,
+              book_title: i.book_title,
+              amount_cents: i.unit_price_cents,
+              created_at: i.order!.created_at,
+              customer_email: i.order!.customer?.email,
+            }));
+        }
       }
 
-      // author_sales gives an accurate unit count scoped by clerk ID —
-      // unaffected by whether Sanity book IDs are populated in myBookIds
-      const unitsSoldQuery = isEditorPlus
-        ? shopServiceClient.from('author_sales').select('order_item:order_items(quantity)', { count: 'exact' })
-        : shopServiceClient
-            .from('author_sales')
-            .select('order_item:order_items(quantity)')
-            .eq('author_clerk_id', clerkUserId)
-            .eq('is_tip', false);
-
-      const [{ data: rawItems, error: itemsError }, { data: unitRows }] = await Promise.all([
-        query,
-        unitsSoldQuery,
-      ]);
-      if (itemsError) console.error('[portal/dashboard] order_items query failed:', itemsError.message);
-      const items = ((rawItems ?? []) as ItemRow[]).filter(
-        (i) => i.order && !['cancelled', 'refunded'].includes(i.order.status),
-      );
-
-      bookUnitsSold = ((unitRows ?? []) as Array<{ order_item: { quantity: number } | null }>)
-        .reduce((s, r) => s + (r.order_item?.quantity ?? 0), 0);
-
-      digitalSales = items
-        .filter((i) => i.is_digital)
-        .slice(0, 50)
-        .map((i, idx) => ({
-          id: `d-${idx}`,
-          order_number: i.order!.order_number,
-          book_title: i.book_title,
-          quantity: i.quantity,
-          created_at: i.order!.created_at,
-          customer_email: i.order!.customer?.email,
-        }));
-
-      shipmentsPending = items
-        .filter(
-          (i) =>
-            i.sanity_format_type !== 'tip' &&
-            !i.is_digital &&
-            ['paid', 'processing'].includes(i.order!.status) &&
-            !i.order!.fulfilled_at,
-        )
-        .slice(0, 50)
-        .map((i, idx) => ({
-          id: `s-${idx}`,
-          order_number: i.order!.order_number,
-          book_title: i.book_title,
-          quantity: i.quantity,
-          created_at: i.order!.created_at,
-          status: i.order!.status,
-          customer_email: i.order!.customer?.email,
-          customer_name: i.order!.customer?.full_name,
-        }));
-
-      tips = items
-        .filter((i) => i.sanity_format_type === 'tip')
-        .slice(0, 50)
-        .map((i, idx) => ({
-          id: `t-${idx}`,
-          order_number: i.order!.order_number,
-          book_title: i.book_title,
-          amount_cents: i.unit_price_cents,
-          created_at: i.order!.created_at,
-          customer_email: i.order!.customer?.email,
-        }));
-
-      // Pending payouts — scoped by role
+      // Pending payouts — everyone sees their own; admins see all
       const payoutsQuery = isAdmin
         ? shopServiceClient
             .from('payouts')
@@ -376,43 +409,45 @@ export default async function PortalDashboardPage() {
           />
         </section>
 
-        {/* ── My Books ─────────────────────────────────────────────────── */}
-        <section className='mb-3'>
-          <SectionHeader label='My Books' />
-          <Link
-            href='/portal/books'
-            className='group flex flex-wrap items-center gap-x-6 gap-y-1 border border-slate-200 bg-white px-4 py-3 transition-colors hover:border-untele dark:border-slate-700 dark:bg-slate-900'
-          >
-            <div className='flex items-baseline gap-1.5'>
-              <span className='text-xl font-black leading-none text-slate-900 group-hover:text-untele dark:text-white'>
-                {bookCount}
-              </span>
-              <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
-                {bookCount === 1 ? 'Book' : 'Books'}
-              </span>
-            </div>
-            {bookstoreAvailable && (
+        {/* ── My Books — literary authors, admins, sales only ──────────── */}
+        {showMyBooksStrip && (
+          <section className='mb-3'>
+            <SectionHeader label='My Books' />
+            <Link
+              href='/portal/books'
+              className='group flex flex-wrap items-center gap-x-6 gap-y-1 border border-slate-200 bg-white px-4 py-3 transition-colors hover:border-untele dark:border-slate-700 dark:bg-slate-900'
+            >
               <div className='flex items-baseline gap-1.5'>
                 <span className='text-xl font-black leading-none text-slate-900 group-hover:text-untele dark:text-white'>
-                  {bookUnitsSold}
+                  {bookCount}
                 </span>
                 <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
-                  Units Sold
+                  {bookCount === 1 ? 'Book' : 'Books'}
                 </span>
               </div>
-            )}
-            {bookstoreAvailable && shipmentsPending.length > 0 && (
-              <div className='flex items-baseline gap-1.5'>
-                <span className='text-xl font-black leading-none text-untele'>
-                  {shipmentsPending.length}
-                </span>
-                <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
-                  To Ship
-                </span>
-              </div>
-            )}
-          </Link>
-        </section>
+              {bookstoreAvailable && (
+                <div className='flex items-baseline gap-1.5'>
+                  <span className='text-xl font-black leading-none text-slate-900 group-hover:text-untele dark:text-white'>
+                    {bookUnitsSold}
+                  </span>
+                  <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                    Units Sold
+                  </span>
+                </div>
+              )}
+              {bookstoreAvailable && shipmentsPending.length > 0 && (
+                <div className='flex items-baseline gap-1.5'>
+                  <span className='text-xl font-black leading-none text-untele'>
+                    {shipmentsPending.length}
+                  </span>
+                  <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                    To Ship
+                  </span>
+                </div>
+              )}
+            </Link>
+          </section>
+        )}
 
         {/* ── Newsroom Overview (editor+) ──────────────────────────────── */}
         {isEditorPlus && (
@@ -520,44 +555,48 @@ export default async function PortalDashboardPage() {
 
           {/* Right sidebar — stacked widgets */}
           <div className='flex flex-col gap-6'>
-            {/* Bookstore Orders */}
-            <section>
-              <SectionHeader label='Bookstore Orders' />
-              {bookstoreAvailable ? (
-                <BookstoreOrdersWidget
-                  digitalSales={digitalSales}
-                  shipmentsPending={shipmentsPending}
-                />
-              ) : (
-                <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
-                  <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
-                    Bookstore not connected
-                  </p>
-                  <Link
-                    href='/portal/books'
-                    className='mt-2 inline-block text-[10px] font-black uppercase tracking-widest text-untele hover:underline'
-                  >
-                    My Books →
-                  </Link>
-                </div>
-              )}
-            </section>
+            {/* Bookstore Orders — literary authors + admins + sales */}
+            {showBookstoreOrders && (
+              <section>
+                <SectionHeader label='Bookstore Orders' />
+                {bookstoreAvailable ? (
+                  <BookstoreOrdersWidget
+                    digitalSales={digitalSales}
+                    shipmentsPending={shipmentsPending}
+                  />
+                ) : (
+                  <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
+                    <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                      Bookstore not connected
+                    </p>
+                    <Link
+                      href='/portal/books'
+                      className='mt-2 inline-block text-[10px] font-black uppercase tracking-widest text-untele hover:underline'
+                    >
+                      My Books →
+                    </Link>
+                  </div>
+                )}
+              </section>
+            )}
 
-            {/* Tips */}
-            <section>
-              <SectionHeader label='Tips' />
-              {bookstoreAvailable ? (
-                <TipsWidget tips={tips} />
-              ) : (
-                <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
-                  <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
-                    Bookstore not connected
-                  </p>
-                </div>
-              )}
-            </section>
+            {/* Tips — strictly the author whose tips they are */}
+            {showTipsWidget && (
+              <section>
+                <SectionHeader label='Tips' />
+                {bookstoreAvailable ? (
+                  <TipsWidget tips={tips} />
+                ) : (
+                  <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
+                    <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                      Bookstore not connected
+                    </p>
+                  </div>
+                )}
+              </section>
+            )}
 
-            {/* Pending Payouts */}
+            {/* Pending Payouts — all roles */}
             <section>
               <SectionHeader label={isAdmin ? 'All Pending Payouts' : 'My Pending Payouts'} />
               {bookstoreAvailable ? (
