@@ -5,8 +5,9 @@ import type { PortalRole } from '@/lib/auth/roles';
 
 const isAdminRoute = createRouteMatcher(['/admin(/.*)?']);
 const isPortalRoute = createRouteMatcher(['/portal(/.*)?', '/api/portal(/.*)?']);
-const isPortalOrdersRoute = createRouteMatcher([
-  '/portal/orders(/.*)?',
+const isPortalSalesRoute = createRouteMatcher([
+  '/portal/sales(/.*)?',
+  '/portal/orders(/.*)?', // keep old path accessible during redirect
   '/api/portal/orders(/.*)?',
 ]);
 
@@ -77,9 +78,9 @@ export const proxy = clerkMiddleware(async (auth, req) => {
       return NextResponse.redirect(new URL('/', req.url));
     }
 
-    // Sales role: only /portal/orders (and sub-paths) is allowed
-    if (role === 'sales' && !isPortalOrdersRoute(req)) {
-      return NextResponse.redirect(new URL('/portal/orders', req.url));
+    // Sales role: only /portal/sales (and legacy /portal/orders) is allowed
+    if (role === 'sales' && !isPortalSalesRoute(req)) {
+      return NextResponse.redirect(new URL('/portal/sales', req.url));
     }
   }
 });

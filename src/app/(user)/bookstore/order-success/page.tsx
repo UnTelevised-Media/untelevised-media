@@ -34,7 +34,9 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
     );
   }
 
-  const total = session.amount_total ? (session.amount_total / 100).toFixed(2) : null;
+  // amount_total is 0 when a 100% promo is applied — fall back to amount_subtotal (list price)
+  const displayTotal = session.amount_total || session.amount_subtotal;
+  const total = displayTotal ? (displayTotal / 100).toFixed(2) : null;
   const items = session.line_items?.data ?? [];
   const hasDigital = session.metadata?.has_digital === 'true';
 
@@ -53,7 +55,7 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
                 {item.description} × {item.quantity}
               </span>
               <span className='text-sm font-black text-slate-900 dark:text-white'>
-                ${((item.amount_total ?? 0) / 100).toFixed(2)}
+                ${(((item.amount_total || item.amount_subtotal) ?? 0) / 100).toFixed(2)}
               </span>
             </div>
           ))}

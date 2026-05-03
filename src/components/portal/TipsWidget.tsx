@@ -71,7 +71,7 @@ export default function TipsWidget({ tips }: Props) {
                     {centsToUsd(tip.amount_cents)}
                   </p>
                   <Link
-                    href='/portal/orders'
+                    href='/portal/sales'
                     className='block text-[10px] font-black text-untele hover:underline'
                   >
                     #{tip.order_number}
@@ -86,7 +86,7 @@ export default function TipsWidget({ tips }: Props) {
       {/* Footer */}
       <div className='border-t border-slate-200 px-4 py-2.5 dark:border-slate-700'>
         <Link
-          href='/portal/orders'
+          href='/portal/sales'
           className='text-[10px] font-black uppercase tracking-widest text-untele hover:underline'
         >
           View All Orders →

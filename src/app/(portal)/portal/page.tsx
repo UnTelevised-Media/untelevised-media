@@ -201,9 +201,30 @@ export default async function PortalDashboardPage() {
   const showTipsWidget = isAuthorRole && isLiteraryAuthor;
   const showMyBooksStrip = showBookstoreOrders;
 
+  // Bi-monthly payout helpers (1st or 16th)
+  const _now = new Date();
+  const _y = _now.getUTCFullYear();
+  const _mo = _now.getUTCMonth();
+  const _d = _now.getUTCDate();
+  const currentPayoutPeriodStart =
+    _d <= 15
+      ? `${_y}-${String(_mo + 1).padStart(2, '0')}-01`
+      : `${_y}-${String(_mo + 1).padStart(2, '0')}-16`;
+  // Period end: 1st→15th or 16th→last day of month
+  const _lastDay = new Date(Date.UTC(_y, _mo + 1, 0)).getUTCDate();
+  const currentPayoutPeriodEnd =
+    _d <= 15
+      ? `${_y}-${String(_mo + 1).padStart(2, '0')}-15`
+      : `${_y}-${String(_mo + 1).padStart(2, '0')}-${_lastDay}`;
+  const nextPayoutDate = (_d <= 15
+    ? new Date(Date.UTC(_y, _mo, 16))
+    : new Date(Date.UTC(_y, _mo + 1, 1))
+  ).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
   // ── Bookstore data ──────────────────────────────────────────────────────────
   let bookCount = 0;
   let bookUnitsSold = 0;
+  let currentPeriodAuthorCents = 0;
   let digitalSales: DigitalSaleRow[] = [];
   let shipmentsPending: ShipmentPendingRow[] = [];
   let tips: TipRow[] = [];
@@ -324,6 +345,17 @@ export default async function PortalDashboardPage() {
         }
       }
 
+      // Current period accruing earnings (author role only — admins see all in /portal/orders)
+      if (isAuthorRole && isLiteraryAuthor) {
+        const { data: periodRows } = await shopServiceClient
+          .from('author_earnings')
+          .select('gross_cents, stripe_fee_cents')
+          .eq('author_clerk_id', clerkUserId)
+          .eq('payout_period_start', currentPayoutPeriodStart);
+        currentPeriodAuthorCents = ((periodRows ?? []) as Array<{ gross_cents: number; stripe_fee_cents: number }>)
+          .reduce((s, e) => s + (e.gross_cents - e.stripe_fee_cents), 0);
+      }
+
       // Pending payouts — everyone sees their own; admins see all
       const payoutsQuery = isAdmin
         ? shopServiceClient
@@ -414,7 +446,7 @@ export default async function PortalDashboardPage() {
           <section className='mb-3'>
             <SectionHeader label='My Books' />
             <Link
-              href='/portal/books'
+              href='/portal/library'
               className='group flex flex-wrap items-center gap-x-6 gap-y-1 border border-slate-200 bg-white px-4 py-3 transition-colors hover:border-untele dark:border-slate-700 dark:bg-slate-900'
             >
               <div className='flex items-baseline gap-1.5'>
@@ -442,6 +474,16 @@ export default async function PortalDashboardPage() {
                   </span>
                   <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
                     To Ship
+                  </span>
+                </div>
+              )}
+              {bookstoreAvailable && currentPeriodAuthorCents > 0 && (
+                <div className='flex items-baseline gap-1.5'>
+                  <span className='text-xl font-black leading-none text-green-600 group-hover:text-untele dark:text-green-400'>
+                    ${(currentPeriodAuthorCents / 100).toFixed(2)}
+                  </span>
+                  <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                    Accruing · Payout {nextPayoutDate}
                   </span>
                 </div>
               )}
@@ -570,7 +612,7 @@ export default async function PortalDashboardPage() {
                       Bookstore not connected
                     </p>
                     <Link
-                      href='/portal/books'
+                      href='/portal/library'
                       className='mt-2 inline-block text-[10px] font-black uppercase tracking-widest text-untele hover:underline'
                     >
                       My Books →
@@ -600,7 +642,14 @@ export default async function PortalDashboardPage() {
             <section>
               <SectionHeader label={isAdmin ? 'All Pending Payouts' : 'My Pending Payouts'} />
               {bookstoreAvailable ? (
-                <PendingPayoutsWidget payouts={pendingPayouts} isAdmin={isAdmin} />
+                <PendingPayoutsWidget
+                payouts={pendingPayouts}
+                isAdmin={isAdmin}
+                accruing={currentPeriodAuthorCents}
+                nextPayoutDate={nextPayoutDate}
+                periodStart={currentPayoutPeriodStart}
+                periodEnd={currentPayoutPeriodEnd}
+              />
               ) : (
                 <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
                   <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>

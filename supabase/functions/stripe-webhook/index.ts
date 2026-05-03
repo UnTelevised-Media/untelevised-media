@@ -218,6 +218,7 @@ interface RevenueTerms {
   platformPercentage?: number;
 }
 
+// Returns the inserted author_sale id (needed to link author_earnings), or null on failure.
 async function insertAuthorSale(
   db: ReturnType<typeof supabase>,
   opts: {
@@ -229,7 +230,7 @@ async function insertAuthorSale(
     revenueTerms: RevenueTerms | null;
     isTip: boolean;
   }
-): Promise<void> {
+): Promise<string | null> {
   let authorPct = 70;
   let platformPct = 15;
   let publisherPct = 15;
@@ -248,19 +249,147 @@ async function insertAuthorSale(
   const platformCents = Math.round(opts.grossCents * (platformPct / 100));
   const publisherCents = opts.grossCents - authorCents - platformCents;
 
-  const { error } = await db.from('author_sales').insert({
+  const { data, error } = await db
+    .from('author_sales')
+    .insert({
+      order_item_id: opts.orderItemId,
+      order_id: opts.orderId,
+      sanity_book_id: opts.sanityBookId,
+      author_clerk_id: opts.authorClerkId,
+      gross_cents: opts.grossCents,
+      author_cents: authorCents,
+      platform_cents: platformCents,
+      publisher_cents: publisherCents,
+      is_tip: opts.isTip,
+    })
+    .select('id')
+    .single();
+
+  if (error) {
+    console.error('[webhook] author_sale insert failed:', error.message);
+    return null;
+  }
+  return (data as { id: string }).id;
+}
+
+// ---------------------------------------------------------------------------
+// Stripe fee helpers
+// ---------------------------------------------------------------------------
+
+// Returns the actual Stripe processing fee in cents from the balance transaction.
+// Handles all card types (domestic, international, corporate) automatically.
+// Non-fatal: returns 0 on failure so the order write still succeeds.
+async function fetchStripeFee(paymentIntentId: string): Promise<number> {
+  try {
+    const pi = await stripe.paymentIntents.retrieve(paymentIntentId, {
+      expand: ['latest_charge.balance_transaction'],
+    });
+    const charge = pi.latest_charge as Stripe.Charge | null;
+    if (!charge) return 0;
+    const balTx = charge.balance_transaction as Stripe.BalanceTransaction | null;
+    if (!balTx) return 0;
+    console.log('[webhook] stripe fee breakdown:', JSON.stringify(balTx.fee_details));
+    return balTx.fee;
+  } catch (err) {
+    console.error('[webhook] fetchStripeFee failed (fee recorded as 0):', err);
+    return 0;
+  }
+}
+
+// Distributes orderStripeFee across items proportionally by gross amount.
+// Guarantees sum(result) === orderStripeFee exactly (remainder on largest item).
+function distributeStripeFee(
+  orderStripeFee: number,
+  items: Array<{ grossCents: number }>
+): number[] {
+  if (items.length === 0 || orderStripeFee === 0) return items.map(() => 0);
+  const totalGross = items.reduce((s, i) => s + i.grossCents, 0);
+  if (totalGross === 0) return items.map(() => 0);
+
+  const fees = items.map((i) => Math.round(orderStripeFee * (i.grossCents / totalGross)));
+  const allocated = fees.reduce((s, f) => s + f, 0);
+  const remainder = orderStripeFee - allocated;
+  if (remainder !== 0) {
+    const largestIdx = items.reduce(
+      (maxIdx, item, idx, arr) => (item.grossCents > arr[maxIdx].grossCents ? idx : maxIdx),
+      0
+    );
+    fees[largestIdx] += remainder;
+  }
+  return fees;
+}
+
+// Returns the bi-monthly payout period containing the given date.
+// Periods: 1st-15th (pays out 16th) and 16th-last day (pays out 1st of next month).
+function getPayoutPeriod(date: Date): { start: string; end: string } {
+  const y = date.getUTCFullYear();
+  const m = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const d = date.getUTCDate();
+  const lastDay = new Date(
+    Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 0)
+  ).getUTCDate();
+  if (d <= 15) {
+    return { start: `${y}-${m}-01`, end: `${y}-${m}-15` };
+  }
+  return { start: `${y}-${m}-16`, end: `${y}-${m}-${lastDay}` };
+}
+
+// Inserts one author_earnings row for a single order item.
+// Splits are applied to net_after_stripe_cents (not gross).
+async function insertAuthorEarning(
+  db: ReturnType<typeof supabase>,
+  opts: {
+    authorSaleId: string;
+    orderItemId: string;
+    orderId: string;
+    sanityBookId: string;
+    authorClerkId: string | null;
+    grossCents: number;
+    itemStripeFee: number;
+    revenueTerms: RevenueTerms | null;
+    isTip: boolean;
+    saleDate: Date;
+  }
+): Promise<void> {
+  const net = opts.grossCents - opts.itemStripeFee;
+
+  let authorPct = 70,
+    platformPct = 15,
+    publisherPct = 15;
+  if (opts.isTip) {
+    authorPct = 100;
+    platformPct = 0;
+    publisherPct = 0;
+  } else if (opts.revenueTerms) {
+    authorPct = opts.revenueTerms.authorPercentage ?? 70;
+    platformPct = opts.revenueTerms.platformPercentage ?? 15;
+    publisherPct = opts.revenueTerms.publisherPercentage ?? 15;
+  }
+
+  const authorCents = Math.round(net * (authorPct / 100));
+  const platformCents = Math.round(net * (platformPct / 100));
+  const publisherCents = net - authorCents - platformCents;
+
+  const { start, end } = getPayoutPeriod(opts.saleDate);
+
+  const { error } = await db.from('author_earnings').insert({
+    author_sale_id: opts.authorSaleId,
     order_item_id: opts.orderItemId,
     order_id: opts.orderId,
     sanity_book_id: opts.sanityBookId,
     author_clerk_id: opts.authorClerkId,
     gross_cents: opts.grossCents,
+    stripe_fee_cents: opts.itemStripeFee,
+    net_after_stripe_cents: net,
     author_cents: authorCents,
     platform_cents: platformCents,
     publisher_cents: publisherCents,
     is_tip: opts.isTip,
+    payout_period_start: start,
+    payout_period_end: end,
   });
 
-  if (error) console.error('[webhook] author_sale insert failed:', error.message);
+  if (error) console.error('[webhook] author_earning insert failed:', error.message);
 }
 
 // ---------------------------------------------------------------------------
@@ -362,10 +491,20 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
 
   // 5. Create order
   const orderNumber = await generateOrderNumber(db);
-  const totalCents = session.amount_total ?? 0;
   const shippingCents = session.shipping_cost?.amount_total ?? 0;
   const taxCents = session.total_details?.amount_tax ?? 0;
+  // Test promo applies 100% discount → amount_total = 0. Record original list prices instead
+  // so the portal and order history show meaningful amounts rather than $0.
+  const rawTotalCents = session.amount_total ?? 0;
+  const totalCents =
+    isTestPromo && rawTotalCents === 0 ? (session.amount_subtotal ?? 0) : rawTotalCents;
   const subtotalCents = totalCents - shippingCents - taxCents;
+
+  // 5b. Fetch actual Stripe fee from balance transaction (handles domestic + international cards)
+  const paymentIntentId =
+    typeof session.payment_intent === 'string' ? session.payment_intent : null;
+  const orderStripeFee =
+    paymentIntentId && !isTestPromo ? await fetchStripeFee(paymentIntentId) : 0;
 
   const { data: order, error: orderError } = await db
     .from('orders')
@@ -373,13 +512,13 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
       order_number: orderNumber,
       customer_id: customerId,
       stripe_checkout_session_id: session.id,
-      stripe_payment_intent_id:
-        typeof session.payment_intent === 'string' ? session.payment_intent : null,
+      stripe_payment_intent_id: paymentIntentId,
       status: 'paid',
       subtotal_cents: subtotalCents,
       tax_cents: taxCents,
       shipping_cents: shippingCents,
       total_cents: totalCents,
+      stripe_fee_cents: orderStripeFee,
       currency: session.currency ?? 'usd',
       shipping_address_id: shippingAddressId,
     })
@@ -416,14 +555,43 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
 
   const bookMap = new Map(bookData.map((b) => [b._id, b]));
 
-  // 7. Create order_items (unit_price_cents = what customer actually paid, post-discount)
+  // 7. Create order_items
+  // unit_price_cents:
+  //   - tips always use the user-entered amount from metadata (price_data = ephemeral price ID,
+  //     so pricePaidMap lookup would fail)
+  //   - non-tips: paid amount for real orders, original list price for the internal test promo
+  //   - fallback for non-tips: spread (subtotal - known tip amounts) across non-tip qty so a
+  //     tip in a mixed order never inflates the book price
+
+  // Pre-compute: tip amounts we know from metadata (needed for fallback)
+  const metaTipCents = items
+    .filter((i) => i.formatType === 'tip')
+    .reduce((s, i) => s + (i.unitAmountCents ?? 0), 0);
+  const nonTipTotalQty = items
+    .filter((i) => i.formatType !== 'tip')
+    .reduce((s, i) => s + i.qty, 0);
+  // Estimated non-tip subtotal for fallback (strips tips from the subtotal)
+  const nonTipFallbackSubtotal = Math.max(0, subtotalCents - metaTipCents);
+
   const orderItemRows = items.map((item) => {
-    // Tips: use the amount the user entered (stored in metadata), not the Stripe line item
-    // lookup which fails because tip uses price_data with an ephemeral price ID.
+    // For both tips and non-tips:
+    //   test promo → use original (pre-discount) price so portal stats show real values
+    //   real orders / real coupons → use what the customer actually paid (post-discount)
+    const paidAmount = pricePaidMap.get(item.priceId) ?? null;
+    const originalAmount = priceOriginalMap.get(item.priceId) ?? null;
+    const relevantAmount = isTestPromo ? originalAmount : paidAmount;
+
     if (item.formatType === 'tip') {
-      const unitPriceCents = isTestPromo
-        ? (item.unitAmountCents ?? 0) // test promo: record intended tip amount
-        : (item.unitAmountCents ?? 0); // real order: also use intended amount (customer set it)
+      // Prefer unitAmountCents (set when tip uses price_data / user-entered variable amount).
+      // Fall back to pricePaidMap when tip uses a fixed Stripe Price object (no unitAmountCents).
+      let unitPriceCents: number;
+      if (item.unitAmountCents != null && item.unitAmountCents > 0) {
+        unitPriceCents = item.unitAmountCents;
+      } else if (relevantAmount != null) {
+        unitPriceCents = Math.round(relevantAmount / Math.max(item.qty, 1));
+      } else {
+        unitPriceCents = 0;
+      }
       return {
         order_id: orderId,
         sanity_book_id: item.bookId,
@@ -438,11 +606,14 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
       };
     }
 
-    const paid = pricePaidMap.get(item.priceId) ?? null;
+    // Non-tip items: look up by price ID from expanded line items.
+
     const unitPriceCents =
-      paid != null
-        ? Math.round(paid / Math.max(item.qty, 1))
-        : Math.round(totalCents / Math.max(items.length, 1));
+      relevantAmount != null
+        ? Math.round(relevantAmount / Math.max(item.qty, 1))
+        : // Fallback: divide the non-tip portion of the subtotal by total non-tip quantity.
+          // This avoids tip amounts inflating the per-book price.
+          Math.round(nonTipFallbackSubtotal / Math.max(nonTipTotalQty, 1));
 
     return {
       order_id: orderId,
@@ -468,7 +639,14 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     return;
   }
 
-  // 8. Per-item: author_sales + digital fulfillment
+  // 5d. Distribute Stripe fee proportionally across order items by gross amount
+  const grossPerItem = orderItemRows.map((row) => ({
+    grossCents: row.unit_price_cents * row.quantity,
+  }));
+  const itemStripeFees = distributeStripeFee(orderStripeFee, grossPerItem);
+
+  // 8. Per-item: author_sales + author_earnings + digital fulfillment
+  const saleDate = new Date();
   const guestDownloadLinks: Array<{ bookTitle: string; downloadUrl: string }> = [];
 
   for (let idx = 0; idx < createdItems.length; idx++) {
@@ -484,15 +662,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     const authorClerkId = bookInfo?.author?.clerkId ?? null;
     const revenueTerms = bookInfo?.revenueTerms ?? null;
     const isTip = meta.formatType === 'tip';
-    const paidTotal = pricePaidMap.get(meta.priceId) ?? null;
-    const originalTotal = priceOriginalMap.get(meta.priceId) ?? null;
-    // Test promo: log original list price so test orders don't zero out author revenue.
-    // Real customer coupons: log what was actually paid.
-    const grossCents = isTestPromo
-      ? (originalTotal ?? createdItem.unit_price_cents * createdItem.quantity)
-      : (paidTotal ?? createdItem.unit_price_cents * createdItem.quantity);
 
-    await insertAuthorSale(db, {
+    // Tips: pricePaidMap lookup always fails (ephemeral price ID), so use unit_price_cents
+    // which was set from unitAmountCents above.
+    // Non-tips: test promo records original list price; real orders/coupons record paid price.
+    let grossCents: number;
+    if (isTip) {
+      grossCents = createdItem.unit_price_cents * createdItem.quantity;
+    } else {
+      const paidTotal = pricePaidMap.get(meta.priceId) ?? null;
+      const originalTotal = priceOriginalMap.get(meta.priceId) ?? null;
+      grossCents = isTestPromo
+        ? (originalTotal ?? createdItem.unit_price_cents * createdItem.quantity)
+        : (paidTotal ?? createdItem.unit_price_cents * createdItem.quantity);
+    }
+
+    const saleId = await insertAuthorSale(db, {
       orderItemId: createdItem.id,
       orderId,
       sanityBookId: meta.bookId,
@@ -501,6 +686,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
       revenueTerms,
       isTip,
     });
+
+    // 8b. Insert author_earnings — net-of-Stripe splits + payout period assignment
+    if (saleId) {
+      await insertAuthorEarning(db, {
+        authorSaleId: saleId,
+        orderItemId: createdItem.id,
+        orderId,
+        sanityBookId: meta.bookId,
+        authorClerkId,
+        grossCents,
+        itemStripeFee: itemStripeFees[idx] ?? 0,
+        revenueTerms,
+        isTip,
+        saleDate,
+      });
+    }
 
     if (!meta.isDigital || isTip) continue;
 
@@ -552,6 +753,17 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     }
 
     await db.from('order_items').update({ download_fulfilled: true }).eq('id', createdItem.id);
+  }
+
+  // 8b. Auto-fulfill digital/tip-only orders — no physical shipping required
+  const allNonPhysical = orderItemRows.every(
+    (row) => row.is_digital || row.sanity_format_type === 'tip'
+  );
+  if (allNonPhysical) {
+    await db
+      .from('orders')
+      .update({ status: 'fulfilled', fulfilled_at: new Date().toISOString() })
+      .eq('id', orderId);
   }
 
   // 9. Audit log

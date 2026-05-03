@@ -12,8 +12,8 @@ import type { OrderStatus } from '@/lib/bookstore/types';
 import { z } from 'zod';
 
 const ALLOWED_TRANSITIONS: Record<string, OrderStatus[]> = {
-  paid: ['processing', 'cancelled', 'refunded'],
-  processing: ['shipped', 'cancelled', 'refunded'],
+  paid: ['processing', 'fulfilled', 'cancelled', 'refunded'],
+  processing: ['shipped', 'fulfilled', 'cancelled', 'refunded'],
   shipped: ['delivered', 'refunded'],
   delivered: ['refunded'],
   fulfilled: ['refunded'],
@@ -94,13 +94,14 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
 
   // Apply update
+  const setFulfilledAt =
+    newStatus === 'fulfilled' || newStatus === 'delivered' || newStatus === 'shipped';
+
   const { error: updateError } = await shopServiceClient
     .from('orders')
     .update({
       status: newStatus,
-      ...(newStatus === 'fulfilled' || newStatus === 'delivered'
-        ? { fulfilled_at: new Date().toISOString() }
-        : {}),
+      ...(setFulfilledAt ? { fulfilled_at: new Date().toISOString() } : {}),
     })
     .eq('id', orderId);
 

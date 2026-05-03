@@ -8,7 +8,51 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Added
+### Added — Stripe Earnings & Author Payout System (Issue #46)
+
+- **`author_earnings` table** (`supabase/migrations/20260503000002_stripe_earnings.sql`): authoritative post-Stripe record per order item — `gross_cents`, `stripe_fee_cents`, `net_after_stripe_cents`, `author_cents`, `platform_cents`, `publisher_cents`, `is_tip`, `payout_period_start`, `payout_period_end`; RLS + service_role grants included.
+- **`stripe_fee_cents` column** added to `orders` and `payouts` tables.
+- **Real Stripe Balance Transaction API**: webhook fetches `paymentIntents.retrieve` with `expand: ['latest_charge.balance_transaction']` — captures the actual Stripe fee for all card types (domestic 2.9%+30¢, international higher). No formula guessing.
+- **Proportional Stripe fee distribution** across order items with exact-remainder assignment to the largest item, ensuring per-item fees always sum exactly to the order-level total.
+- **`getPayoutPeriod()`** helper: bi-monthly periods (1st–15th payout on 16th; 16th–last day payout on 1st of next month). Returns `{start, end}` ISO date strings stored on each `author_earnings` row.
+- **`insertAuthorEarning()`** in stripe-webhook edge function: calculates `net = gross - itemStripeFee`, applies revenue split percentages, writes to `author_earnings` after each `insertAuthorSale`. Tips always credited at 100% author.
+- **Test promo edge case**: `isTestPromo` bypasses `fetchStripeFee` (returns 0) — correct because $0 test-promo transactions incur no Stripe fee; original prices still recorded.
+- **`AuthorEarning` interface** added to `src/lib/bookstore/types.ts`; `stripe_fee_cents` field added to `Order` and `Payout` interfaces.
+- **Stripe webhook JWT bypass fix**: edge function redeployed with `--no-verify-jwt` so Stripe webhook requests (no Supabase JWT) no longer return `UNAUTHORIZED_NO_AUTH_HEADER`.
+
+### Added — Author Portal: Earnings Dashboard (Issue #46)
+
+- **`/portal/earnings`** (new page `src/app/(portal)/portal/earnings/page.tsx`): dedicated financial dashboard — Sales Summary stat cards (Total Units Sold, This Month, Accruing This Period, Next Payout), all-time Gross / Stripe Fees / Your Earnings row, Sales by Title bar chart with physical/digital split, Tips Received per-book breakdown with gross/fees/net, full Payout History table.
+- **`/portal/library`** (new page `src/app/(portal)/portal/library/page.tsx`): focused book management — product table with units sold and net earnings per book, inventory low-stock alerts, Add Book / Edit Book modals. All financial data moved to `/portal/earnings`.
+- **`/portal/sales`** (new page `src/app/(portal)/portal/sales/page.tsx`): order management (renamed from `/portal/orders`) — all order stats, earnings breakdown panel for admin/sales, per-order author cut in OrdersTable expanded view, order status management.
+- **Old-route redirects**: `/portal/books` → `/portal/library`; `/portal/orders` → `/portal/sales` (both server-side `redirect()`).
+
+### Added — Payout Date UI (Issue #46)
+
+- **`getNextPayoutDate()`** helper in both `portal/library` and `portal/earnings` pages: computes the next scheduled payout (16th of current month if day ≤ 15, else 1st of next month). Advances automatically — no manual maintenance.
+- **Next Payout card** on `/portal/earnings`: shows accruing amount when no formal pending payout record exists yet, with "Scheduled May 16, 2026" sub-label in green.
+- **`PendingPayoutsWidget`** updated: when no pending payout rows exist but the author has accruing earnings, renders a projected "Upcoming · Scheduled" entry with the next payout date and period range instead of "No pending payouts". `accruing`, `nextPayoutDate`, `periodStart`, `periodEnd` props added.
+- **Main portal dashboard My Books strip**: shows accruing period amount in green alongside "Accruing · Payout [date]" — queries `author_earnings` for the current period via a dedicated Supabase call.
+
+### Fixed — Earnings Math (Issue #46)
+
+- **Tips `Your Tips` display**: was reading `author_cents` from DB (stale values from early orders). All calculations now derive `net = gross_cents - stripe_fee_cents` dynamically — always mathematically correct regardless of DB data quality. A `netCents()` helper function centralises this.
+- **"Your Earnings" bottom row** now includes both books and tips (was books only).
+- **Monthly earnings** (`This Month`, `Last Month`, `Accruing This Period`) now covers all earnings (books + tips), net of Stripe.
+
+### Changed — Navigation & Routing (Issue #46)
+
+- **`PortalNav`**: bookstore author links updated to `Library` (`/portal/library`) + `Earnings` (`/portal/earnings`); shared link updated to `Sales` (`/portal/sales`); sales-role brand link updated to `/portal/sales`.
+- **`proxy.ts`**: sales-role access guard redirects to `/portal/sales`; matcher updated to `isPortalSalesRoute` (includes legacy `/portal/orders` to preserve redirect chain during transition).
+- **`BookstoreOrdersWidget`**: "View All Orders" + order number links → `/portal/sales`.
+- **`TipsWidget`**: order number links → `/portal/sales`.
+- **`PendingPayoutsWidget`**: "Payout History" footer link → `/portal/earnings`.
+- **Main portal dashboard**: "My Books" strip link → `/portal/library`.
+- **`CHANGELOG.md`**: created at project root; back-filled with all work from the project's inception.
+
+---
+
+### Added — Bookstore Foundation (Issue #46, earlier work)
 
 - **Bookstore — Supabase Infrastructure (Issue #46, Steps 1.1–1.2)**
   - `supabase/migrations/20260428000001_bookstore_schema.sql` — DDL for all 6 bookstore tables (customers, addresses, orders, order_items, digital_downloads, payouts), 8 indexes, `set_updated_at()` trigger, RLS enabled on all tables with customer-scoped policies; pushed to project qdocpanuicwyhlcthudc

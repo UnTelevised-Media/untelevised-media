@@ -26,11 +26,12 @@ const contactDropdownLinks = [
 ];
 
 const bookstoreAuthorLinks = [
-  { href: '/portal/books', label: 'My Books' },
+  { href: '/portal/library', label: 'Library' },
+  { href: '/portal/earnings', label: 'Earnings' },
 ];
 
 const bookstoreSharedLinks = [
-  { href: '/portal/orders', label: 'Orders' },
+  { href: '/portal/sales', label: 'Sales' },
 ];
 
 // ── Sub-components ─────────────────────────────────────────────────────────────
@@ -118,7 +119,7 @@ export default function PortalNav({ isEditorPlus = false, role }: Props) {
 
         {/* Brand */}
         <Link
-          href={isSales ? '/portal/orders' : '/portal'}
+          href={isSales ? '/portal/sales' : '/portal'}
           className='flex items-center gap-2 text-sm font-black uppercase tracking-widest text-untele'
         >
           <span className='h-3 w-3 bg-untele' aria-hidden='true' />

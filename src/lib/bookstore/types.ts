@@ -52,6 +52,7 @@ export interface Order {
   tax_cents: number;
   shipping_cents: number;
   total_cents: number;
+  stripe_fee_cents: number;
   currency: string;
   shipping_address_id: string | null;
   notes: string | null;
@@ -91,6 +92,25 @@ export interface DigitalDownload {
   created_at: string;
 }
 
+export interface AuthorEarning {
+  id: string;
+  author_sale_id: string;
+  order_id: string;
+  order_item_id: string;
+  sanity_book_id: string;
+  author_clerk_id: string | null;
+  gross_cents: number;
+  stripe_fee_cents: number;
+  net_after_stripe_cents: number;
+  author_cents: number;
+  platform_cents: number;
+  publisher_cents: number;
+  is_tip: boolean;
+  payout_period_start: string;
+  payout_period_end: string;
+  created_at: string;
+}
+
 export type PayoutStatus = 'pending' | 'paid' | 'cancelled';
 
 export interface Payout {
@@ -99,6 +119,7 @@ export interface Payout {
   period_start: string;
   period_end: string;
   gross_cents: number;
+  stripe_fee_cents: number;
   platform_fee_cents: number;
   net_cents: number;
   status: PayoutStatus;
