@@ -42,6 +42,8 @@ const sanityProjectId = env('SANITY_PROJECT_ID');
 const sanityDataset = env('SANITY_DATASET', 'production');
 const sanityReadToken = env('SANITY_API_READ_TOKEN');
 const internalEmailSecret = env('INTERNAL_EMAIL_SECRET');
+// Internal test promo: when used, log original prices to author_sales (not $0)
+const testPromoCodeId = env('TEST_PROMO_CODE_ID');
 
 // ---------------------------------------------------------------------------
 // Sanity HTTP helper — no npm dependency
@@ -314,10 +316,11 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     console.error('[webhook] line_items expand failed, using session totals:', err);
   }
 
-  // Two maps: post-discount (what customer paid) for order_items,
-  // pre-discount (original price) for author_sales so authors aren't penalised by platform coupons.
-  const pricePaidMap = new Map<string, number>(); // price_id / prod_id → amount_total
-  const priceOriginalMap = new Map<string, number>(); // price_id / prod_id → amount_subtotal
+  // Two maps keyed by price_id or product_id:
+  //   pricePaidMap     — amount_total (post-discount, what customer actually paid)
+  //   priceOriginalMap — amount_subtotal (pre-discount, original list price)
+  const pricePaidMap = new Map<string, number>();
+  const priceOriginalMap = new Map<string, number>();
   for (const li of expandedSession.line_items?.data ?? []) {
     const keys: string[] = [];
     if (li.price?.id) keys.push(li.price.id);
@@ -328,6 +331,20 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
       pricePaidMap.set(key, li.amount_total ?? 0);
       priceOriginalMap.set(key, li.amount_subtotal ?? li.amount_total ?? 0);
     }
+  }
+
+  // Detect internal test promo — log original list prices to author_sales, not $0
+  const isTestPromo =
+    testPromoCodeId !== '' &&
+    (session.discounts ?? []).some((d) => {
+      const pc = d.promotion_code;
+      return (
+        (typeof pc === 'string' ? pc : (pc as { id?: string } | null)?.id) === testPromoCodeId
+      );
+    });
+
+  if (isTestPromo) {
+    console.log('[webhook] Test promo detected — author_sales will use original list prices');
   }
 
   // 4. Capture shipping address
@@ -446,10 +463,13 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     const authorClerkId = bookInfo?.author?.clerkId ?? null;
     const revenueTerms = bookInfo?.revenueTerms ?? null;
     const isTip = meta.formatType === 'tip';
-    // Use pre-discount original price for author revenue — platform absorbs coupon cost
+    const paidTotal = pricePaidMap.get(meta.priceId) ?? null;
     const originalTotal = priceOriginalMap.get(meta.priceId) ?? null;
-    const grossCents =
-      originalTotal != null ? originalTotal : createdItem.unit_price_cents * createdItem.quantity;
+    // Test promo: log original list price so test orders don't zero out author revenue.
+    // Real customer coupons: log what was actually paid.
+    const grossCents = isTestPromo
+      ? (originalTotal ?? createdItem.unit_price_cents * createdItem.quantity)
+      : (paidTotal ?? createdItem.unit_price_cents * createdItem.quantity);
 
     await insertAuthorSale(db, {
       orderItemId: createdItem.id,
