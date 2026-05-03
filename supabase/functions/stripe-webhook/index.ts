@@ -275,6 +275,7 @@ interface ItemMeta {
   qty: number;
   title: string;
   priceId: string;
+  unitAmountCents?: number; // tips only — user-entered amount stored at checkout time
 }
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promise<void> {
@@ -417,6 +418,26 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
 
   // 7. Create order_items (unit_price_cents = what customer actually paid, post-discount)
   const orderItemRows = items.map((item) => {
+    // Tips: use the amount the user entered (stored in metadata), not the Stripe line item
+    // lookup which fails because tip uses price_data with an ephemeral price ID.
+    if (item.formatType === 'tip') {
+      const unitPriceCents = isTestPromo
+        ? (item.unitAmountCents ?? 0) // test promo: record intended tip amount
+        : (item.unitAmountCents ?? 0); // real order: also use intended amount (customer set it)
+      return {
+        order_id: orderId,
+        sanity_book_id: item.bookId,
+        sanity_format_type: item.formatType,
+        book_title: item.title,
+        format_label: 'Tip',
+        unit_price_cents: unitPriceCents,
+        quantity: 1,
+        stripe_price_id: item.priceId,
+        is_digital: false,
+        download_fulfilled: false,
+      };
+    }
+
     const paid = pricePaidMap.get(item.priceId) ?? null;
     const unitPriceCents =
       paid != null

@@ -101,7 +101,9 @@ export async function POST(req: NextRequest) {
       })
     );
 
-    // Build per-item metadata for the webhook handler
+    // Build per-item metadata for the webhook handler.
+    // Tips store unitAmountCents so the webhook can recover the user-entered amount
+    // without needing to resolve the ephemeral price_data ID back to a product.
     const itemsMeta = chargeableItems.map((item) => ({
       bookId: item.sanityBookId,
       formatType: item.formatType as FormatType,
@@ -110,6 +112,9 @@ export async function POST(req: NextRequest) {
       qty: item.quantity,
       title: item.title,
       priceId: item.stripePriceId,
+      ...(item.formatType === 'tip' && item.unitAmountCents
+        ? { unitAmountCents: item.unitAmountCents }
+        : {}),
     }));
 
     const session = await stripe.checkout.sessions.create({
