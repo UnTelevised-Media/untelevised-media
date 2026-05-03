@@ -11,7 +11,7 @@ import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryBooksByAuthorClerkId } from '@/lib/sanity/lib/queries';
 import { shopServiceClient } from '@/lib/bookstore/supabase';
 import PortalNav from '@/components/portal/PortalNav';
-import type { SanityBook, OrderItem, Payout } from '@/lib/bookstore/types';
+import type { SanityBook, Payout } from '@/lib/bookstore/types';
 
 export const metadata = {
   title: 'My Books — Author Portal',
@@ -35,7 +35,13 @@ function isLastMonth(dateStr: string) {
   return d.getFullYear() === last.getFullYear() && d.getMonth() === last.getMonth();
 }
 
-interface OrderItemWithOrder extends OrderItem {
+// author_sales row with joined order_item + order for status/date
+interface AuthorSaleRow {
+  sanity_book_id: string;
+  gross_cents: number;
+  author_cents: number;
+  is_tip: boolean;
+  order_item: { quantity: number; is_digital: boolean } | null;
   order: { status: string; created_at: string } | null;
 }
 
@@ -51,23 +57,23 @@ export default async function PortalBooksPage() {
   });
 
   const bookList = books ?? [];
-  const bookIds = bookList.map((b) => b._id);
 
-  // Fetch order items + payouts from Supabase (graceful degradation if not configured)
-  let orderItems: OrderItemWithOrder[] = [];
+  // Fetch author_sales (keyed directly by clerk ID — no Sanity ID match needed)
+  // and payouts from Supabase (graceful degradation if not configured)
+  let authorSales: AuthorSaleRow[] = [];
   let payouts: Payout[] = [];
   let supabaseAvailable = true;
 
   try {
     if (!process.env.SUPABASE_SHOP_URL) throw new Error('Supabase shop not configured');
 
-    const [itemsResult, payoutsResult] = await Promise.all([
-      bookIds.length > 0
-        ? shopServiceClient
-            .from('order_items')
-            .select('*, order:orders(status, created_at)')
-            .in('sanity_book_id', bookIds)
-        : { data: [], error: null },
+    const [salesResult, payoutsResult] = await Promise.all([
+      shopServiceClient
+        .from('author_sales')
+        .select(
+          'sanity_book_id, gross_cents, author_cents, is_tip, order_item:order_items(quantity, is_digital), order:orders(status, created_at)',
+        )
+        .eq('author_clerk_id', clerkUserId),
       shopServiceClient
         .from('payouts')
         .select('*')
@@ -75,29 +81,34 @@ export default async function PortalBooksPage() {
         .order('period_end', { ascending: false }),
     ]);
 
-    orderItems = ((itemsResult.data as OrderItemWithOrder[]) ?? []).filter(
-      (i) => !['cancelled', 'refunded'].includes(i.order?.status ?? ''),
+    if (salesResult.error) console.error('[portal/books] author_sales query failed:', salesResult.error.message);
+    if (payoutsResult.error) console.error('[portal/books] payouts query failed:', payoutsResult.error.message);
+
+    authorSales = ((salesResult.data as AuthorSaleRow[]) ?? []).filter(
+      (s) => !['cancelled', 'refunded'].includes(s.order?.status ?? ''),
     );
     payouts = (payoutsResult.data as Payout[]) ?? [];
   } catch {
     supabaseAvailable = false;
   }
 
-  // Compute overall stats
-  const totalUnits = orderItems.reduce((s, i) => s + i.quantity, 0);
-  const totalRevenueCents = orderItems.reduce((s, i) => s + i.unit_price_cents * i.quantity, 0);
+  // Compute overall stats using author_cents (the author's actual earnings)
+  const totalUnits = authorSales.reduce((s, i) => s + (i.order_item?.quantity ?? 1), 0);
+  const totalRevenueCents = authorSales.reduce((s, i) => s + i.author_cents, 0);
 
-  const thisMonthItems = orderItems.filter((i) => isThisMonth(i.order?.created_at ?? ''));
-  const lastMonthItems = orderItems.filter((i) => isLastMonth(i.order?.created_at ?? ''));
-  const thisMonthRevenue = thisMonthItems.reduce((s, i) => s + i.unit_price_cents * i.quantity, 0);
-  const lastMonthRevenue = lastMonthItems.reduce((s, i) => s + i.unit_price_cents * i.quantity, 0);
+  const thisMonthItems = authorSales.filter((i) => isThisMonth(i.order?.created_at ?? ''));
+  const lastMonthItems = authorSales.filter((i) => isLastMonth(i.order?.created_at ?? ''));
+  const thisMonthRevenue = thisMonthItems.reduce((s, i) => s + i.author_cents, 0);
+  const lastMonthRevenue = lastMonthItems.reduce((s, i) => s + i.author_cents, 0);
 
-  // Per-book stats
+  // Per-book stats — group author_sales by sanity_book_id
   const bookStats = bookList.map((book) => {
-    const items = orderItems.filter((i) => i.sanity_book_id === book._id);
-    const units = items.reduce((s, i) => s + i.quantity, 0);
-    const revenue = items.reduce((s, i) => s + i.unit_price_cents * i.quantity, 0);
-    const digital = items.filter((i) => i.is_digital).reduce((s, i) => s + i.quantity, 0);
+    const items = authorSales.filter((s) => s.sanity_book_id === book._id);
+    const units = items.reduce((s, i) => s + (i.order_item?.quantity ?? 1), 0);
+    const revenue = items.reduce((s, i) => s + i.author_cents, 0);
+    const digital = items
+      .filter((i) => i.order_item?.is_digital)
+      .reduce((s, i) => s + (i.order_item?.quantity ?? 1), 0);
     const physical = units - digital;
     return { book, units, revenue, digital, physical };
   });
@@ -179,7 +190,7 @@ export default async function PortalBooksPage() {
                 </div>
                 <div className='grid grid-cols-2 gap-4 sm:grid-cols-4'>
                   <StatCard label='Total Units Sold' value={String(totalUnits)} />
-                  <StatCard label='Total Revenue' value={centsToUsd(totalRevenueCents)} />
+                  <StatCard label='Your Earnings' value={centsToUsd(totalRevenueCents)} />
                   <StatCard
                     label='This Month'
                     value={centsToUsd(thisMonthRevenue)}

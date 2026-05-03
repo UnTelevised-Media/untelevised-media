@@ -214,7 +214,6 @@ export default async function PortalDashboardPage() {
         .select(
           'book_title, quantity, is_digital, order:orders(id, order_number, status, created_at, fulfilled_at, customer:customers(email, full_name))',
         )
-        .not('order', 'is', null)
         .order('created_at', { ascending: false })
         .limit(200);
 
@@ -222,12 +221,27 @@ export default async function PortalDashboardPage() {
         query = query.in('sanity_book_id', myBookIds);
       }
 
-      const { data: rawItems } = await query;
+      // author_sales gives an accurate unit count scoped by clerk ID —
+      // unaffected by whether Sanity book IDs are populated in myBookIds
+      const unitsSoldQuery = isEditorPlus
+        ? shopServiceClient.from('author_sales').select('order_item:order_items(quantity)', { count: 'exact' })
+        : shopServiceClient
+            .from('author_sales')
+            .select('order_item:order_items(quantity)')
+            .eq('author_clerk_id', clerkUserId)
+            .eq('is_tip', false);
+
+      const [{ data: rawItems, error: itemsError }, { data: unitRows }] = await Promise.all([
+        query,
+        unitsSoldQuery,
+      ]);
+      if (itemsError) console.error('[portal/dashboard] order_items query failed:', itemsError.message);
       const items = ((rawItems ?? []) as ItemRow[]).filter(
         (i) => i.order && !['cancelled', 'refunded'].includes(i.order.status),
       );
 
-      bookUnitsSold = items.reduce((s, i) => s + i.quantity, 0);
+      bookUnitsSold = ((unitRows ?? []) as Array<{ order_item: { quantity: number } | null }>)
+        .reduce((s, r) => s + (r.order_item?.quantity ?? 0), 0);
 
       digitalSales = items
         .filter((i) => i.is_digital)
