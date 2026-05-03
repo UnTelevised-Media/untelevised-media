@@ -40,6 +40,7 @@ function supabase() {
 const siteUrl = env('SITE_URL', 'https://www.untelevised.media');
 const sanityProjectId = env('SANITY_PROJECT_ID');
 const sanityDataset = env('SANITY_DATASET', 'production');
+const sanityReadToken = env('SANITY_API_READ_TOKEN');
 const internalEmailSecret = env('INTERNAL_EMAIL_SECRET');
 
 // ---------------------------------------------------------------------------
@@ -52,8 +53,10 @@ async function sanityFetch<T>(groq: string, params: Record<string, unknown> = {}
     .map(([k, v]) => `$${k}=${encodeURIComponent(JSON.stringify(v))}`)
     .join('&');
   const url = `https://${sanityProjectId}.apicdn.sanity.io/v2021-10-21/data/query/${sanityDataset}?query=${encodedQuery}${queryString ? `&${queryString}` : ''}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Sanity fetch failed: ${res.status}`);
+  const headers: Record<string, string> = {};
+  if (sanityReadToken) headers['Authorization'] = `Bearer ${sanityReadToken}`;
+  const res = await fetch(url, { headers });
+  if (!res.ok) throw new Error(`Sanity fetch failed: ${res.status} ${await res.text()}`);
   const json = (await res.json()) as { result: T };
   return json.result;
 }
@@ -377,11 +380,16 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
   interface SanityBookData {
     _id: string;
     revenueTerms: RevenueTerms | null;
-    author: { clerkId: string | null } | null;
+    author: { clerkId: string | null; payoutEmail: string | null } | null;
     formats: Array<{ _key: string; digitalAsset?: { supabaseStoragePath?: string } }>;
   }
   const bookData = await sanityFetch<SanityBookData[]>(
-    `*[_type == "book" && _id in $bookIds]{ _id, revenueTerms, "author": author->{clerkId}, formats[]{ _key, digitalAsset{ supabaseStoragePath } } }`,
+    `*[_type == "book" && _id in $bookIds]{
+      _id,
+      revenueTerms{ authorPercentage, publisherPercentage, platformPercentage },
+      "author": author->{ clerkId, payoutEmail },
+      formats[]{ _key, digitalAsset{ supabaseStoragePath } }
+    }`,
     { bookIds: uniqueBookIds }
   ).catch((err) => {
     console.error('[webhook] Sanity fetch failed:', err);
