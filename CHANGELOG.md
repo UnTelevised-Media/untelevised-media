@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -7,6 +7,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ---
 
 ## [Unreleased]
+
+### Added — Email Delivery, Direct Downloads & Digital Asset Fixes (Issue #46, 2026-05-04)
+
+- **Transactional email delivery** (`src/lib/bookstore/email.ts`): full Nodemailer + Google SMTP stack. Order confirmation, digital download ready, guest one-time download, shipment, and refund emails all live. SMTP env vars (`SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`) added to Vercel production.
+- **BOM / CRLF env var corruption fix** (`cleanEnv()` helper): PowerShell `echo` pipes prepend a UTF-16 BOM (`﻿`) and append `\r\n` to values stored by the Vercel CLI. `cleanEnv()` strips both before use — prevents `getaddrinfo EBUSY` DNS failure on SMTP host.
+- **From-address fix**: `ORDERS_SMTP_FROM` (a non-verified alias) caused Gmail 550 rejection. `from` now always resolves to `Hurriya Publications <SMTP_USER>` — the authenticated sender.
+- **Stripe webhook signature fix**: `STRIPE_WEBHOOK_SECRET` corrected in Supabase secrets; `constructEventAsync` + `SubtleCryptoProvider` used for Deno-compatible HMAC — prevents 400 signature errors.
+- **Direct download links in emails**: the Stripe webhook edge function now calls `db.storage.from('digital-books').createSignedUrl(storagePath, 30 * 24 * 3600, { download: filename })` at purchase time and embeds the URL directly in the email. One click saves the file — no login required, no intermediate API route.
+  - Auth users: "⬇ Download Now" button in the digital download email (30-day signed URL).
+  - Guest users: "Download Your Book →" button in the guest download email (30-day signed URL).
+- **Force-save on all download surfaces**: `createSignedUrl` called with `{ download: filename }` option on both `/api/bookstore/download/route.ts` (vault) and `/api/bookstore/download/guest/route.ts` — browser saves the file instead of opening it in a new tab.
+- **Vault page force-save**: `window.location.href = data.url` replaces `window.open` in `downloads/page.tsx` to avoid a blank tab that customers might close before the file saves.
+- **Order confirmation email**: shows "Digital Download" notice pointing customers to the separate download email instead of a vault link guests can't access. Vault CTA remains for logged-in customers.
+- **Download email vault footer**: vault link restored in auth-user download email footer for re-downloads (up to 5, 1-year expiry).
+- **`DigitalDownloadItem` interface** (`src/lib/bookstore/email.ts`): `downloadUrl?: string` added — optional direct download URL embedded per item.
+- **Preserved filename on upload** (`src/lib/portal/book-actions.ts`): `uploadDigitalAsset` now stores `books/{bookId}/{formatKey}/{file.name}` instead of `books/{bookId}/{formatKey}/asset.{ext}` — original filename preserved in Supabase Storage and surfaced to customers on download.
+
+### Fixed — Email & Download Edge Cases (Issue #46, 2026-05-04)
+
+- **Missing file → honest fallback**: when `createSignedUrl` returns 400 (file not in Supabase Storage), the download email now shows a vault link + "contact us with your order number" note instead of the misleading "your file is being prepared — follow-up email coming" copy (no such retry mechanism exists).
+- **Guest download 30-day expiry**: guest download token TTL corrected from 14 → 30 days to match auth-user email tokens.
+- **`EmailPayload` type** in stripe-webhook edge function updated to include `downloadUrl?` on `digital-download` items — fixes TypeScript type mismatch after interface update.
+
+---
 
 ### Added — Stripe Earnings & Author Payout System (Issue #46)
 
