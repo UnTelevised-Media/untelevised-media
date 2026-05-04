@@ -2,17 +2,14 @@
 // Transactional email helpers using Nodemailer + Google SMTP.
 //
 // Required env vars:
-//   SMTP_HOST                     e.g. smtp.gmail.com
-//   SMTP_PORT                     587 (STARTTLS) or 465 (SSL)
-//   SMTP_SECURE                   "false" for 587, "true" for 465
-//   SMTP_USER                     Gmail address
-//   SMTP_PASS                     Google App Password (16-char)
-//   ORDERS_SMTP_FROM              Display from address
-//   SUPABASE_SHOP_URL             Supabase project URL (for attachment fetching)
-//   SUPABASE_SHOP_SERVICE_ROLE_KEY  Service role key (for Storage signed URLs)
+//   SMTP_HOST          e.g. smtp.gmail.com
+//   SMTP_PORT          587 (STARTTLS) or 465 (SSL)
+//   SMTP_SECURE        "false" for 587, "true" for 465
+//   SMTP_USER          Gmail address
+//   SMTP_PASS          Google App Password (16-char)
+//   ORDERS_SMTP_FROM   Display from address
 
 import nodemailer from 'nodemailer';
-import { createClient } from '@supabase/supabase-js';
 import type { FormatType } from './types';
 
 // ---------------------------------------------------------------------------
@@ -103,53 +100,6 @@ function emailLayout(content: string, title: string): string {
   </table>
 </body>
 </html>`;
-}
-
-// ---------------------------------------------------------------------------
-// File attachment helper — fetches from Supabase Storage if file ≤ maxBytes
-// Returns null when the file is too large, missing, or on any fetch error.
-// ---------------------------------------------------------------------------
-
-interface EmailAttachment {
-  filename: string;
-  content: Buffer;
-  contentType: string;
-}
-
-async function fetchAttachmentIfSmall(
-  storagePath: string,
-  maxBytes = 10 * 1024 * 1024 // 10 MB raw — ~13 MB base64-encoded in email
-): Promise<EmailAttachment | null> {
-  if (!storagePath) return null;
-  const url = process.env.SUPABASE_SHOP_URL;
-  const key = process.env.SUPABASE_SHOP_SERVICE_ROLE_KEY;
-  if (!url || !key) return null;
-
-  try {
-    const supabase = createClient(url, key, { auth: { persistSession: false } });
-
-    const { data: urlData, error: urlErr } = await supabase.storage
-      .from('digital-books')
-      .createSignedUrl(storagePath, 300); // 5-minute window just for the fetch
-
-    if (urlErr || !urlData?.signedUrl) return null;
-
-    // HEAD first to avoid downloading a file that's too large
-    const headRes = await fetch(urlData.signedUrl, { method: 'HEAD' });
-    const contentLength = parseInt(headRes.headers.get('content-length') ?? '0', 10);
-    if (contentLength > maxBytes) return null;
-
-    const fileRes = await fetch(urlData.signedUrl);
-    if (!fileRes.ok) return null;
-
-    const buffer = Buffer.from(await fileRes.arrayBuffer());
-    const filename = storagePath.split('/').pop() ?? 'download';
-    const contentType = fileRes.headers.get('content-type') ?? 'application/octet-stream';
-
-    return { filename, content: buffer, contentType };
-  } catch {
-    return null;
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -313,32 +263,18 @@ export interface DigitalDownloadEmailParams {
 export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParams) {
   if (!isConfigured()) return;
 
-  // Attempt to attach files ≤ 10 MB
-  const attachmentResults = await Promise.all(
-    params.items.map((item) => fetchAttachmentIfSmall(item.storagePath))
-  );
-  const attachments = attachmentResults.filter((a): a is EmailAttachment => a !== null);
   const vaultUrl = `${baseUrl}/bookstore/downloads`;
 
   const itemBlocks = params.items
     .map(
-      (item, idx) => `
+      (item) => `
       <tr><td style="padding:14px 0;border-bottom:1px solid #222222;">
         <p style="margin:0 0 2px;font-size:14px;font-weight:900;color:#ffffff;">${item.title}</p>
         <p style="margin:0 0 10px;font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#888888;">${item.formatLabel}</p>
-        ${
-          attachmentResults[idx]
-            ? `<p style="margin:0;font-size:12px;color:#4ade80;font-weight:700;">&#10003; File attached to this email</p>`
-            : `<a href="${vaultUrl}" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;text-decoration:none;">Download from Vault &rarr;</a>`
-        }
+        <a href="${vaultUrl}" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;text-decoration:none;">Download from Vault &rarr;</a>
       </td></tr>`
     )
     .join('');
-
-  const vaultNote =
-    attachments.length > 0
-      ? `Files too large to attach are also in your <a href="${vaultUrl}" style="color:#D70606;">Download Vault</a>.`
-      : `All your digital purchases are in your <a href="${vaultUrl}" style="color:#D70606;">Download Vault</a>.`;
 
   const content = `
     <p style="margin:0 0 4px;font-size:26px;font-weight:900;color:#ffffff;">Downloads Ready</p>
@@ -352,7 +288,7 @@ export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParam
 
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;">
       <tr><td style="background-color:#0d0d0d;border:1px solid #2a2a2a;padding:16px;">
-        <p style="margin:0 0 12px;font-size:12px;color:#aaaaaa;">${vaultNote} Downloads are valid for 1 year (up to 5 per title).</p>
+        <p style="margin:0 0 12px;font-size:12px;color:#aaaaaa;">All your digital purchases are in your Download Vault. Downloads are valid for 1 year (up to 5 per title).</p>
         <a href="${vaultUrl}" style="display:inline-block;border:1px solid #D70606;color:#D70606;font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;padding:10px 20px;text-decoration:none;">Open Download Vault &rarr;</a>
       </td></tr>
     </table>`;
@@ -362,11 +298,6 @@ export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParam
     to: params.to,
     subject: `Your Downloads Are Ready — ${params.orderNumber} | Hurriya Publications`,
     html: emailLayout(content, `Downloads Ready — ${params.orderNumber}`),
-    attachments: attachments.map((a) => ({
-      filename: a.filename,
-      content: a.content,
-      contentType: a.contentType,
-    })),
   });
 }
 
@@ -386,27 +317,11 @@ export interface GuestDownloadEmailParams {
 export async function sendGuestDownloadEmail(params: GuestDownloadEmailParams) {
   if (!isConfigured()) return;
 
-  const attachment = params.storagePath ? await fetchAttachmentIfSmall(params.storagePath) : null;
-
   const expires = params.expiresAt.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
-
-  const primaryAction = attachment
-    ? `<p style="margin:0 0 6px;font-size:13px;color:#4ade80;font-weight:700;">&#10003; Your file is attached to this email.</p>`
-    : `<a href="${params.downloadUrl}" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;text-decoration:none;">Download Your Book &rarr;</a>`;
-
-  const notice = attachment
-    ? `<p style="margin:0;font-size:12px;color:#888888;background-color:#0d0d0d;border:1px solid #2a2a2a;padding:14px;line-height:1.6;">
-        If the attachment doesn&rsquo;t open, use your backup link before <strong style="color:#e5e5e5;">${expires}</strong>:<br>
-        <a href="${params.downloadUrl}" style="color:#D70606;word-break:break-all;">${params.downloadUrl}</a>
-      </p>`
-    : `<p style="margin:16px 0 0;font-size:12px;color:#888888;background-color:#0d0d0d;border:1px solid #2a2a2a;padding:14px;line-height:1.6;">
-        This is a <strong style="color:#e5e5e5;">single-use link</strong> that expires on <strong style="color:#e5e5e5;">${expires}</strong>.
-        Save your file immediately &mdash; this link cannot be reused.
-      </p>`;
 
   const content = `
     <p style="margin:0 0 4px;font-size:26px;font-weight:900;color:#ffffff;">Your Download Is Ready</p>
@@ -415,10 +330,13 @@ export async function sendGuestDownloadEmail(params: GuestDownloadEmailParams) {
     </p>
 
     <div style="padding:24px 0;">
-      ${primaryAction}
+      <a href="${params.downloadUrl}" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;text-decoration:none;">Download Your Book &rarr;</a>
     </div>
 
-    ${notice}
+    <p style="margin:0;font-size:12px;color:#888888;background-color:#0d0d0d;border:1px solid #2a2a2a;padding:14px;line-height:1.6;">
+      This is a <strong style="color:#e5e5e5;">single-use link</strong> that expires on <strong style="color:#e5e5e5;">${expires}</strong>.
+      Save your file immediately &mdash; this link cannot be reused.
+    </p>
 
     <p style="margin:24px 0 0;font-size:11px;color:#666666;">
       Create a free account to access all your purchases anytime:<br>
@@ -430,17 +348,6 @@ export async function sendGuestDownloadEmail(params: GuestDownloadEmailParams) {
     to: params.to,
     subject: `Your Download — ${params.bookTitle} | Hurriya Publications`,
     html: emailLayout(content, `Download Ready — ${params.bookTitle}`),
-    ...(attachment
-      ? {
-          attachments: [
-            {
-              filename: attachment.filename,
-              content: attachment.content,
-              contentType: attachment.contentType,
-            },
-          ],
-        }
-      : {}),
   });
 }
 
