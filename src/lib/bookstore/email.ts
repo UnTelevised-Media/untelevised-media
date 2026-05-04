@@ -284,7 +284,8 @@ export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParam
           item.downloadUrl
             ? `<a href="${item.downloadUrl}" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;text-decoration:none;">&#11015; Download Now</a>
                <p style="margin:10px 0 0;font-size:10px;color:#666666;">Single-use link &mdash; valid for 30 days. Saves the file directly to your device.</p>`
-            : `<p style="margin:0;font-size:12px;color:#aaaaaa;">Your file is being prepared &mdash; you will receive a follow-up email with your download link shortly.</p>`
+            : `<a href="${vaultUrl}" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;text-decoration:none;">Open Download Vault &rarr;</a>
+               <p style="margin:10px 0 0;font-size:10px;color:#666666;">If your file isn&rsquo;t available yet, contact us with your order number and we&rsquo;ll get it to you.</p>`
         }
       </td></tr>`
     )
