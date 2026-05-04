@@ -33,7 +33,7 @@ function DownloadButton({ orderItemId }: { orderItemId: string }) {
         setError(data.error ?? 'Download failed');
         return;
       }
-      window.open(data.url, '_blank', 'noopener');
+      window.location.href = data.url;
     } catch {
       setError('Network error — please try again');
     } finally {

@@ -5,11 +5,18 @@ import type { PortalRole } from '@/lib/auth/roles';
 
 const isAdminRoute = createRouteMatcher(['/admin(/.*)?']);
 const isPortalRoute = createRouteMatcher(['/portal(/.*)?', '/api/portal(/.*)?']);
+const isPortalSalesRoute = createRouteMatcher([
+  '/portal/sales(/.*)?',
+  '/portal/orders(/.*)?', // keep old path accessible during redirect
+  '/api/portal/orders(/.*)?',
+]);
 
 /** Extract the portal role from raw Clerk publicMetadata (no User type import needed in edge). */
 function getRoleFromMeta(meta: Record<string, unknown>): PortalRole | null {
   const role = meta?.role;
-  if (role === 'admin' || role === 'editor' || role === 'author') return role as PortalRole;
+  if (role === 'admin' || role === 'editor' || role === 'author' || role === 'sales') {
+    return role as PortalRole;
+  }
   if (meta?.admin === true || meta?.admin === 'true') return 'admin';
   return null;
 }
@@ -49,7 +56,7 @@ export const proxy = clerkMiddleware(async (auth, req) => {
   }
 
   // -------------------------------------------------------------------------
-  // Portal routes — require auth + any portal role (admin | editor | author)
+  // Portal routes — require auth + any portal role (admin | editor | author | sales)
   // -------------------------------------------------------------------------
   if (isPortalRoute(req)) {
     const { userId } = await auth();
@@ -69,6 +76,11 @@ export const proxy = clerkMiddleware(async (auth, req) => {
     if (!role) {
       // Authenticated but has no portal role — redirect home
       return NextResponse.redirect(new URL('/', req.url));
+    }
+
+    // Sales role: only /portal/sales (and legacy /portal/orders) is allowed
+    if (role === 'sales' && !isPortalSalesRoute(req)) {
+      return NextResponse.redirect(new URL('/portal/sales', req.url));
     }
   }
 });

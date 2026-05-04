@@ -89,7 +89,7 @@ This is defined as a custom Tailwind token and used for:
 ```
 Primary Nav:
   Live Coverage → untelevised.live (external)
-  Breaking Events → /category/breaking
+  Breaking Events → /breaking
   Past Events → /past-events
   Radio → radio.untelevised.live (external)
   Music → /lyrics

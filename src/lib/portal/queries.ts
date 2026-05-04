@@ -410,3 +410,9 @@ export const queryPortalClaimedPitchById = groq`
     linkedArticle->{ _id, title, "slug": slug.current }
   }
 `;
+
+export const queryPortalMyAuthorFlags = groq`
+  *[_type == "author" && clerkId == $clerkId][0] {
+    isLiteraryAuthor
+  }
+`;

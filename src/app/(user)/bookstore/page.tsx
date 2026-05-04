@@ -6,10 +6,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryFeaturedBooks, queryAllBooks, queryAllBookGenres } from '@/lib/sanity/lib/queries';
+import {
+  queryFeaturedBooks,
+  queryAllBooks,
+  queryAllBookGenres,
+  queryBooksByGenreSlug,
+} from '@/lib/sanity/lib/queries';
 import type { SanityBook, SanityBookGenre } from '@/lib/bookstore/types';
 import urlForImage from '@/util/urlForImage';
 import GenreFilter from '@/components/bookstore/GenreFilter';
+import BookCardActions from '@/components/bookstore/BookCardActions';
 
 export const metadata: Metadata = {
   title: 'Bookstore — UnTelevised Media',
@@ -24,67 +30,84 @@ export const metadata: Metadata = {
 
 function BookCard({ book }: { book: SanityBook }) {
   const slug = book.slug.current;
-  const price = book.formats?.[0]?.price;
+  const firstFormat = book.formats?.[0];
+  const price = firstFormat?.price;
+  const compareAtPrice = firstFormat?.compareAtPrice;
+  const isOutOfStock = book.status === 'out-of-stock';
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(400).height(560).url()
-    : null;
+    : (book.coverImageUrl ?? null);
 
   return (
-    <Link
-      href={`/bookstore/book/${slug}`}
-      className='group block border border-slate-200 bg-white transition-colors hover:border-untele dark:border-slate-700 dark:bg-slate-900'
-    >
-      <div className='relative aspect-[5/7] overflow-hidden bg-slate-100 dark:bg-slate-800'>
-        {cover ? (
-          <Image
-            src={cover}
-            alt={book.coverImage?.alt ?? book.title}
-            fill
-            className='object-cover transition-transform duration-300 group-hover:scale-105'
-            sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
-          />
-        ) : (
-          <div className='flex h-full items-center justify-center p-4'>
-            <span className='text-center text-xs font-bold uppercase tracking-widest text-slate-400'>
-              {book.title}
-            </span>
-          </div>
-        )}
-        {book.status === 'out-of-stock' && (
-          <div className='absolute inset-0 flex items-center justify-center bg-black/60'>
-            <span className='bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
-              Out of Stock
-            </span>
-          </div>
-        )}
-      </div>
-      <div className='p-3'>
-        <p className='mb-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-          {book.author?.name ?? 'Unknown Author'}
-        </p>
-        <h3 className='text-sm font-black leading-tight text-slate-900 group-hover:text-untele dark:text-white'>
-          {book.title}
-        </h3>
-        {price != null && (
-          <p className='mt-1 text-xs font-bold text-untele'>${price.toFixed(2)}</p>
-        )}
-      </div>
-    </Link>
+    <div className='group flex flex-col border border-hp-sand-border bg-white transition-colors hover:border-untele dark:border-hp-dark-border dark:bg-hp-dark-card'>
+      {/* Clickable cover + info */}
+      <Link href={`/bookstore/book/${slug}`} className='block flex-1'>
+        <div className='relative aspect-[5/7] overflow-hidden bg-hp-sand dark:bg-hp-dark-border'>
+          {cover ? (
+            <Image
+              src={cover}
+              alt={book.coverImage?.alt ?? book.title}
+              fill
+              className='object-cover transition-transform duration-300 group-hover:scale-105'
+              sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
+            />
+          ) : (
+            <div className='flex h-full items-center justify-center p-4'>
+              <span className='text-center text-xs font-bold uppercase tracking-widest text-hp-muted'>
+                {book.title}
+              </span>
+            </div>
+          )}
+          {isOutOfStock && (
+            <div className='absolute inset-0 flex items-center justify-center bg-black/60'>
+              <span className='bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
+                Out of Stock
+              </span>
+            </div>
+          )}
+        </div>
+        <div className='p-3 pb-1'>
+          <p className='mb-0.5 text-[10px] font-bold uppercase tracking-widest text-hp-muted dark:text-hp-muted'>
+            {book.author?.name ?? 'Unknown Author'}
+          </p>
+          <h3 className='text-sm font-black leading-tight text-slate-900 group-hover:text-untele dark:text-hp-cream'>
+            {book.title}
+          </h3>
+          {price != null && (
+            <div className='mt-1'>
+              {compareAtPrice != null && (
+                <p className='text-[10px] text-hp-muted line-through'>${compareAtPrice.toFixed(2)}</p>
+              )}
+              <p className='text-xs font-bold text-untele'>${price.toFixed(2)}</p>
+            </div>
+          )}
+        </div>
+      </Link>
+
+      {/* Action buttons — outside the Link to avoid nested interactive elements */}
+      {!isOutOfStock && firstFormat && (
+        <div className='px-3 pb-3'>
+          <BookCardActions book={book} format={firstFormat} />
+        </div>
+      )}
+    </div>
   );
 }
 
 function FeaturedHero({ book }: { book: SanityBook }) {
   const slug = book.slug.current;
-  const price = book.formats?.[0]?.price;
+  const firstFormat = book.formats?.[0];
+  const price = firstFormat?.price;
+  const compareAtPrice = firstFormat?.compareAtPrice;
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(800).height(1120).url()
-    : null;
+    : (book.coverImageUrl ?? null);
 
   return (
-    <div className='relative flex flex-col items-start gap-6 border border-untele bg-white p-6 dark:bg-slate-900 sm:flex-row sm:p-8 lg:p-12'>
+    <div className='relative flex flex-col items-start gap-6 border border-untele bg-white p-6 dark:bg-hp-dark-card sm:flex-row sm:p-8 lg:p-12'>
       {/* Cover */}
       <div className='relative w-full shrink-0 sm:w-56 lg:w-72'>
-        <div className='relative aspect-[5/7] overflow-hidden bg-slate-100 shadow-xl dark:bg-slate-800'>
+        <div className='relative aspect-[5/7] overflow-hidden bg-hp-sand shadow-xl dark:bg-hp-dark-border'>
           {cover ? (
             <Image
               src={cover}
@@ -96,7 +119,7 @@ function FeaturedHero({ book }: { book: SanityBook }) {
             />
           ) : (
             <div className='flex h-full items-center justify-center p-4'>
-              <span className='text-center text-sm font-black uppercase tracking-widest text-slate-400'>
+              <span className='text-center text-sm font-black uppercase tracking-widest text-hp-muted'>
                 {book.title}
               </span>
             </div>
@@ -111,14 +134,19 @@ function FeaturedHero({ book }: { book: SanityBook }) {
             Featured
           </span>
         </div>
-        <p className='mb-1 text-xs font-bold uppercase tracking-widest text-slate-400'>
+        <p className='mb-1 text-xs font-bold uppercase tracking-widest text-hp-muted'>
           {book.author?.name ?? 'Unknown Author'}
         </p>
-        <h2 className='mb-3 text-2xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-white lg:text-4xl'>
+        <h2 className='mb-3 text-2xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-hp-cream lg:text-4xl'>
           {book.title}
         </h2>
         {price != null && (
-          <p className='mb-4 text-lg font-black text-untele'>From ${price.toFixed(2)}</p>
+          <div className='mb-4'>
+            {compareAtPrice != null && (
+              <p className='text-sm text-hp-muted line-through'>From ${compareAtPrice.toFixed(2)}</p>
+            )}
+            <p className='text-lg font-black text-untele'>From ${price.toFixed(2)}</p>
+          </div>
         )}
         <div className='flex flex-wrap gap-3'>
           <Link
@@ -132,7 +160,7 @@ function FeaturedHero({ book }: { book: SanityBook }) {
               href={book.samplePdfUrl}
               target='_blank'
               rel='noopener noreferrer'
-              className='border border-slate-300 bg-white px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-700 hover:border-untele hover:text-untele dark:border-slate-600 dark:bg-transparent dark:text-slate-300'
+              className='border border-hp-sand-border bg-white px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-700 hover:border-untele hover:text-untele dark:border-hp-dark-border dark:bg-hp-dark-card dark:text-hp-cream'
             >
               Free Sample
             </a>
@@ -143,10 +171,22 @@ function FeaturedHero({ book }: { book: SanityBook }) {
   );
 }
 
-export default async function ShopPage() {
+export default async function ShopPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ genre?: string }>;
+}) {
+  const { genre: activeGenre } = await searchParams;
+
   const [featuredResult, allBooksResult, genresResult] = await Promise.all([
     sanityFetch<SanityBook[]>({ query: queryFeaturedBooks, tags: ['book'] }),
-    sanityFetch<SanityBook[]>({ query: queryAllBooks, tags: ['book'] }),
+    activeGenre
+      ? sanityFetch<SanityBook[]>({
+          query: queryBooksByGenreSlug,
+          params: { genreSlug: activeGenre },
+          tags: ['book'],
+        })
+      : sanityFetch<SanityBook[]>({ query: queryAllBooks, tags: ['book'] }),
     sanityFetch<SanityBookGenre[]>({ query: queryAllBookGenres, tags: ['bookGenre'] }),
   ]);
 
@@ -163,7 +203,7 @@ export default async function ShopPage() {
         <div className='bg-untele px-3 py-1'>
           <span className='text-sm font-black uppercase tracking-widest text-white'>Bookstore</span>
         </div>
-        <div className='h-px flex-1 bg-slate-200 dark:bg-slate-800' />
+        <div className='h-px flex-1 bg-hp-sand-border dark:bg-hp-dark-border' />
       </div>
 
       {/* Featured hero */}
@@ -181,7 +221,7 @@ export default async function ShopPage() {
               All Books
             </span>
           </div>
-          <div className='h-px flex-1 bg-slate-200 dark:bg-slate-800' />
+          <div className='h-px flex-1 bg-hp-sand-border dark:bg-hp-dark-border' />
         </div>
 
         {genres.length > 0 && (
@@ -191,8 +231,8 @@ export default async function ShopPage() {
         )}
 
         {allBooks.length === 0 ? (
-          <div className='border border-slate-200 bg-white px-4 py-12 text-center dark:border-slate-700 dark:bg-slate-900'>
-            <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+          <div className='border border-hp-sand-border bg-white px-4 py-12 text-center dark:border-hp-dark-border dark:bg-hp-dark-card'>
+            <p className='text-xs font-bold uppercase tracking-widest text-hp-muted'>
               No books available yet
             </p>
           </div>

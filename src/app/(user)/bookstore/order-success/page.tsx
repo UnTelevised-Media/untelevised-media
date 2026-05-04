@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import Stripe from 'stripe';
+import CartClearer from '@/components/bookstore/CartClearer';
 
 export const metadata: Metadata = {
   title: 'Order Confirmed — UnTelevised Media',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 
 async function OrderSummary({ sessionId }: { sessionId: string }) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
-    apiVersion: '2025-04-30.basil',
+    apiVersion: '2026-04-22.dahlia',
   });
 
   let session: Stripe.Checkout.Session | null = null;
@@ -33,7 +34,9 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
     );
   }
 
-  const total = session.amount_total ? (session.amount_total / 100).toFixed(2) : null;
+  // amount_total is 0 when a 100% promo is applied — fall back to amount_subtotal (list price)
+  const displayTotal = session.amount_total || session.amount_subtotal;
+  const total = displayTotal ? (displayTotal / 100).toFixed(2) : null;
   const items = session.line_items?.data ?? [];
   const hasDigital = session.metadata?.has_digital === 'true';
 
@@ -52,7 +55,7 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
                 {item.description} × {item.quantity}
               </span>
               <span className='text-sm font-black text-slate-900 dark:text-white'>
-                ${((item.amount_total ?? 0) / 100).toFixed(2)}
+                ${(((item.amount_total || item.amount_subtotal) ?? 0) / 100).toFixed(2)}
               </span>
             </div>
           ))}
@@ -100,13 +103,12 @@ export default async function OrderSuccessPage({
       </div>
 
       {session_id ? (
-        <Suspense
-          fallback={
-            <p className='text-sm text-slate-500'>Loading order details...</p>
-          }
-        >
-          <OrderSummary sessionId={session_id} />
-        </Suspense>
+        <>
+          <CartClearer />
+          <Suspense fallback={<p className='text-sm text-slate-500'>Loading order details...</p>}>
+            <OrderSummary sessionId={session_id} />
+          </Suspense>
+        </>
       ) : (
         <p className='text-sm text-slate-500'>
           Order confirmation unavailable. Please check{' '}

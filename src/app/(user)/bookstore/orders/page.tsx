@@ -113,6 +113,10 @@ export default async function OrdersPage() {
           {(orders as Order[]).map((order) => {
             const items = itemsByOrder[order.id] ?? [];
             const hasDigital = items.some((i) => i.is_digital);
+            const displayCents =
+              order.total_cents > 0
+                ? order.total_cents
+                : items.reduce((s, i) => s + i.unit_price_cents * i.quantity, 0);
             return (
               <div
                 key={order.id}
@@ -134,7 +138,7 @@ export default async function OrdersPage() {
                       {STATUS_LABELS[order.status] ?? order.status}
                     </span>
                     <span className='text-sm font-black text-untele'>
-                      ${(order.total_cents / 100).toFixed(2)}
+                      ${(displayCents / 100).toFixed(2)}
                     </span>
                   </div>
                 </div>

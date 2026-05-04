@@ -168,7 +168,7 @@ export default defineType({
     }),
     defineField({
       name: 'coverImage',
-      title: 'Cover Image',
+      title: 'Cover Image (Sanity)',
       type: 'image',
       options: { hotspot: true },
       fields: [
@@ -178,6 +178,13 @@ export default defineType({
           title: 'Alternative Text',
         },
       ],
+    }),
+    defineField({
+      name: 'coverImageUrl',
+      title: 'Cover Image URL (Supabase)',
+      type: 'url',
+      description: 'Managed automatically — set via the author portal upload.',
+      readOnly: true,
     }),
     defineField({
       name: 'description',
@@ -232,6 +239,18 @@ export default defineType({
       initialValue: 'en',
     }),
     defineField({
+      name: 'fictionType',
+      title: 'Fiction / Non-Fiction',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Fiction', value: 'fiction' },
+          { title: 'Non-Fiction', value: 'non-fiction' },
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'formats',
       title: 'Formats',
       type: 'array',
@@ -243,6 +262,67 @@ export default defineType({
       title: 'Sample / Preview URL',
       type: 'url',
       description: 'Publicly accessible URL to a free sample PDF (optional)',
+    }),
+    defineField({
+      name: 'revenueTerms',
+      title: 'Revenue Sharing',
+      type: 'object',
+      description:
+        'How revenue from this book is split. The three percentages must add up to 100.',
+      validation: (Rule) =>
+        Rule.custom(
+          (
+            terms:
+              | {
+                  authorPercentage?: number;
+                  publisherPercentage?: number;
+                  platformPercentage?: number;
+                }
+              | undefined
+          ) => {
+            if (!terms) return 'Revenue sharing is required before publishing';
+            const { authorPercentage, publisherPercentage, platformPercentage } = terms;
+            if (authorPercentage == null) return 'Author % is required';
+            if (publisherPercentage == null) return 'Publisher % is required';
+            if (platformPercentage == null) return 'Platform % is required';
+            const total = authorPercentage + publisherPercentage + platformPercentage;
+            if (total !== 100) return `Percentages must sum to 100 (currently ${total})`;
+            return true;
+          }
+        ),
+      fields: [
+        defineField({
+          name: 'authorPercentage',
+          title: 'Author %',
+          type: 'number',
+          description: 'Percentage going to the author',
+          initialValue: 70,
+          validation: (Rule) => Rule.required().min(0).max(100),
+        }),
+        defineField({
+          name: 'publisherPercentage',
+          title: 'Publisher %',
+          type: 'number',
+          description: 'Percentage going to the publisher (set to 0 if self-published)',
+          initialValue: 15,
+          validation: (Rule) => Rule.required().min(0).max(100),
+        }),
+        defineField({
+          name: 'platformPercentage',
+          title: 'Platform %',
+          type: 'number',
+          description: 'Percentage retained by UnTelevised Media',
+          initialValue: 15,
+          validation: (Rule) => Rule.required().min(0).max(100),
+        }),
+        defineField({
+          name: 'description',
+          title: 'Notes',
+          type: 'text',
+          rows: 2,
+          description: 'Optional note about this revenue arrangement',
+        }),
+      ],
     }),
     defineField({
       name: 'featured',

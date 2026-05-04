@@ -200,16 +200,6 @@ export function WhistleblowerTable({ submissions }: { submissions: Whistleblower
                               <p className='font-mono text-xs text-slate-500'>{sub.submissionId}</p>
                             </div>
                           )}
-                          <div className='md:col-span-2'>
-                            <a
-                              href={`/studio/structure/whistleblower;${sub._id}`}
-                              target='_blank'
-                              rel='noopener noreferrer'
-                              className='inline-flex items-center gap-2 bg-untele px-4 py-2 text-xs font-black uppercase tracking-widest text-white hover:bg-red-700'
-                            >
-                              Manage in Studio ↗
-                            </a>
-                          </div>
                         </div>
                       </td>
                     </tr>

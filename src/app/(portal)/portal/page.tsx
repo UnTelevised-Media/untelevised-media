@@ -18,11 +18,23 @@ import {
   queryPortalMyClaimedPitches,
   queryPortalAllClaimedPitches,
   queryPortalAllBriefs,
+  queryPortalMyAuthorFlags,
 } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { BriefPanel, type Brief, type PortalAuthor, type BriefSummary } from '@/components/portal/BriefPanel';
 import { type ClaimedPitchSummary } from '@/components/portal/ClaimedPitchCard';
 import { ClaimedPitchesPanel } from '@/components/portal/ClaimedPitchesPanel';
+import BookstoreOrdersWidget, {
+  type DigitalSaleRow,
+  type ShipmentPendingRow,
+} from '@/components/portal/BookstoreOrdersWidget';
+import TipsWidget, { type TipRow } from '@/components/portal/TipsWidget';
+import AddBookModal from '@/components/portal/AddBookModal';
+import PendingPayoutsWidget, { type PayoutRow } from '@/components/portal/PendingPayoutsWidget';
+import sanityFetch from '@/lib/sanity/lib/fetch';
+import { queryBooksByAuthorClerkId } from '@/lib/sanity/lib/queries';
+import { shopServiceClient } from '@/lib/bookstore/supabase';
+import type { SanityBook } from '@/lib/bookstore/types';
 import Link from 'next/link';
 
 export const metadata = {
@@ -165,6 +177,209 @@ export default async function PortalDashboardPage() {
   const allInReview = allArticles.filter((a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)).length;
   const allDrafts = allArticles.filter((a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest).length;
 
+  // ── Bookstore visibility — based on role + Sanity literary author flag ───────
+  const isAdmin = role === 'admin';
+  const isSalesRole = role === 'sales';
+  const isAuthorRole = role === 'author';
+
+  // Fetch isLiteraryAuthor from Sanity for author-role users only
+  let isLiteraryAuthor = false;
+  if (isAuthorRole) {
+    const flagsRes = await portalSanityFetch({
+      query: queryPortalMyAuthorFlags,
+      params: { clerkId: clerkUserId },
+    });
+    isLiteraryAuthor =
+      (flagsRes.data as { isLiteraryAuthor?: boolean } | null)?.isLiteraryAuthor ?? false;
+  }
+
+  // Who sees what:
+  //   showBookstoreOrders — Needs Shipping + Digital Sales widget + My Books strip
+  //   showTipsWidget      — Tips panel (only the author whose tips they are)
+  //   Payouts panel shown to everyone regardless
+  const showBookstoreOrders = isAdmin || isSalesRole || (isAuthorRole && isLiteraryAuthor);
+  const showTipsWidget = isAuthorRole && isLiteraryAuthor;
+  const showMyBooksStrip = showBookstoreOrders;
+
+  // Bi-monthly payout helpers (1st or 16th)
+  const _now = new Date();
+  const _y = _now.getUTCFullYear();
+  const _mo = _now.getUTCMonth();
+  const _d = _now.getUTCDate();
+  const currentPayoutPeriodStart =
+    _d <= 15
+      ? `${_y}-${String(_mo + 1).padStart(2, '0')}-01`
+      : `${_y}-${String(_mo + 1).padStart(2, '0')}-16`;
+  // Period end: 1st→15th or 16th→last day of month
+  const _lastDay = new Date(Date.UTC(_y, _mo + 1, 0)).getUTCDate();
+  const currentPayoutPeriodEnd =
+    _d <= 15
+      ? `${_y}-${String(_mo + 1).padStart(2, '0')}-15`
+      : `${_y}-${String(_mo + 1).padStart(2, '0')}-${_lastDay}`;
+  const nextPayoutDate = (_d <= 15
+    ? new Date(Date.UTC(_y, _mo, 16))
+    : new Date(Date.UTC(_y, _mo + 1, 1))
+  ).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  // ── Bookstore data ──────────────────────────────────────────────────────────
+  let bookCount = 0;
+  let bookUnitsSold = 0;
+  let currentPeriodAuthorCents = 0;
+  let digitalSales: DigitalSaleRow[] = [];
+  let shipmentsPending: ShipmentPendingRow[] = [];
+  let tips: TipRow[] = [];
+  let pendingPayouts: PayoutRow[] = [];
+  let bookstoreAvailable = false;
+
+  try {
+    if (process.env.SUPABASE_SHOP_URL) {
+      type ItemRow = {
+        book_title: string;
+        sanity_format_type: string;
+        unit_price_cents: number;
+        quantity: number;
+        is_digital: boolean;
+        order: {
+          id: string;
+          order_number: string;
+          status: string;
+          created_at: string;
+          fulfilled_at: string | null;
+          customer: { email: string; full_name: string | null } | null;
+        } | null;
+      };
+
+      // Only hit order_items if this user can see the bookstore widgets
+      if (showBookstoreOrders || showTipsWidget) {
+        const myBooks = await sanityFetch<SanityBook[]>({
+          query: queryBooksByAuthorClerkId,
+          params: { clerkId: clerkUserId },
+          tags: ['book'],
+        });
+        const myBookList = myBooks ?? [];
+        bookCount = myBookList.length;
+        const myBookIds = myBookList.map((b) => b._id);
+
+        let orderQuery = shopServiceClient
+          .from('order_items')
+          .select(
+            'book_title, sanity_format_type, unit_price_cents, quantity, is_digital, order:orders(id, order_number, status, created_at, fulfilled_at, customer:customers(email, full_name))',
+          )
+          .order('created_at', { ascending: false })
+          .limit(200);
+
+        // Admins + sales see all; literary authors scoped to own books
+        if (!isAdmin && !isSalesRole && myBookIds.length > 0) {
+          orderQuery = orderQuery.in('sanity_book_id', myBookIds);
+        }
+
+        // author_sales scoped by clerk ID for accurate unit count
+        const unitsSoldQuery = (isAdmin || isSalesRole)
+          ? shopServiceClient.from('author_sales').select('order_item:order_items(quantity)')
+          : shopServiceClient
+              .from('author_sales')
+              .select('order_item:order_items(quantity)')
+              .eq('author_clerk_id', clerkUserId)
+              .eq('is_tip', false);
+
+        const [{ data: rawItems, error: itemsError }, { data: unitRows }] = await Promise.all([
+          orderQuery,
+          unitsSoldQuery,
+        ]);
+        if (itemsError) console.error('[portal/dashboard] order_items query failed:', itemsError.message);
+
+        const items = ((rawItems ?? []) as ItemRow[]).filter(
+          (i) => i.order && !['cancelled', 'refunded'].includes(i.order.status),
+        );
+
+        bookUnitsSold = ((unitRows ?? []) as Array<{ order_item: { quantity: number } | null }>)
+          .reduce((s, r) => s + (r.order_item?.quantity ?? 0), 0);
+
+        if (showBookstoreOrders) {
+          digitalSales = items
+            .filter((i) => i.is_digital)
+            .slice(0, 50)
+            .map((i, idx) => ({
+              id: `d-${idx}`,
+              order_number: i.order!.order_number,
+              book_title: i.book_title,
+              quantity: i.quantity,
+              created_at: i.order!.created_at,
+              customer_email: i.order!.customer?.email,
+            }));
+
+          shipmentsPending = items
+            .filter(
+              (i) =>
+                i.sanity_format_type !== 'tip' &&
+                !i.is_digital &&
+                ['paid', 'processing'].includes(i.order!.status) &&
+                !i.order!.fulfilled_at,
+            )
+            .slice(0, 50)
+            .map((i, idx) => ({
+              id: `s-${idx}`,
+              order_number: i.order!.order_number,
+              book_title: i.book_title,
+              quantity: i.quantity,
+              created_at: i.order!.created_at,
+              status: i.order!.status,
+              customer_email: i.order!.customer?.email,
+              customer_name: i.order!.customer?.full_name,
+            }));
+        }
+
+        // Tips scoped to this author only — admins/sales don't see the tips widget
+        if (showTipsWidget) {
+          tips = items
+            .filter((i) => i.sanity_format_type === 'tip')
+            .slice(0, 50)
+            .map((i, idx) => ({
+              id: `t-${idx}`,
+              order_number: i.order!.order_number,
+              book_title: i.book_title,
+              amount_cents: i.unit_price_cents,
+              created_at: i.order!.created_at,
+              customer_email: i.order!.customer?.email,
+            }));
+        }
+      }
+
+      // Current period accruing earnings (author role only — admins see all in /portal/orders)
+      if (isAuthorRole && isLiteraryAuthor) {
+        const { data: periodRows } = await shopServiceClient
+          .from('author_earnings')
+          .select('gross_cents, stripe_fee_cents')
+          .eq('author_clerk_id', clerkUserId)
+          .eq('payout_period_start', currentPayoutPeriodStart);
+        currentPeriodAuthorCents = ((periodRows ?? []) as Array<{ gross_cents: number; stripe_fee_cents: number }>)
+          .reduce((s, e) => s + (e.gross_cents - e.stripe_fee_cents), 0);
+      }
+
+      // Pending payouts — everyone sees their own; admins see all
+      const payoutsQuery = isAdmin
+        ? shopServiceClient
+            .from('payouts')
+            .select('id, author_clerk_id, period_start, period_end, gross_cents, net_cents, notes, created_at')
+            .eq('status', 'pending')
+            .order('period_end', { ascending: false })
+            .limit(50)
+        : shopServiceClient
+            .from('payouts')
+            .select('id, author_clerk_id, period_start, period_end, gross_cents, net_cents, notes, created_at')
+            .eq('status', 'pending')
+            .eq('author_clerk_id', clerkUserId)
+            .order('period_end', { ascending: false });
+
+      const { data: payoutsData } = await payoutsQuery;
+      pendingPayouts = (payoutsData ?? []) as PayoutRow[];
+
+      bookstoreAvailable = true;
+    }
+  } catch {
+    // Supabase unavailable — widgets degrade gracefully
+  }
+
   // Inbox counts (editor+ only)
   let contactCount = 0;
   let secureCount = 0;
@@ -199,7 +414,7 @@ export default async function PortalDashboardPage() {
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
-      <PortalNav isEditorPlus={isEditorPlus} />
+      <PortalNav isEditorPlus={isEditorPlus} role={role} />
 
       <main className='mx-auto max-w-7xl px-4 py-5 sm:px-6'>
         {/* Page heading */}
@@ -225,6 +440,56 @@ export default async function PortalDashboardPage() {
             ]}
           />
         </section>
+
+        {/* ── My Books — literary authors, admins, sales only ──────────── */}
+        {showMyBooksStrip && (
+          <section className='mb-3'>
+            <SectionHeader label='My Books' />
+            <Link
+              href='/portal/library'
+              className='group flex flex-wrap items-center gap-x-6 gap-y-1 border border-slate-200 bg-white px-4 py-3 transition-colors hover:border-untele dark:border-slate-700 dark:bg-slate-900'
+            >
+              <div className='flex items-baseline gap-1.5'>
+                <span className='text-xl font-black leading-none text-slate-900 group-hover:text-untele dark:text-white'>
+                  {bookCount}
+                </span>
+                <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                  {bookCount === 1 ? 'Book' : 'Books'}
+                </span>
+              </div>
+              {bookstoreAvailable && (
+                <div className='flex items-baseline gap-1.5'>
+                  <span className='text-xl font-black leading-none text-slate-900 group-hover:text-untele dark:text-white'>
+                    {bookUnitsSold}
+                  </span>
+                  <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                    Units Sold
+                  </span>
+                </div>
+              )}
+              {bookstoreAvailable && shipmentsPending.length > 0 && (
+                <div className='flex items-baseline gap-1.5'>
+                  <span className='text-xl font-black leading-none text-untele'>
+                    {shipmentsPending.length}
+                  </span>
+                  <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                    To Ship
+                  </span>
+                </div>
+              )}
+              {bookstoreAvailable && currentPeriodAuthorCents > 0 && (
+                <div className='flex items-baseline gap-1.5'>
+                  <span className='text-xl font-black leading-none text-green-600 group-hover:text-untele dark:text-green-400'>
+                    ${(currentPeriodAuthorCents / 100).toFixed(2)}
+                  </span>
+                  <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                    Accruing · Payout {nextPayoutDate}
+                  </span>
+                </div>
+              )}
+            </Link>
+          </section>
+        )}
 
         {/* ── Newsroom Overview (editor+) ──────────────────────────────── */}
         {isEditorPlus && (
@@ -282,22 +547,13 @@ export default async function PortalDashboardPage() {
             >
               + New Source
             </Link>
+            <AddBookModal label='+ Add Book' variant='outline' />
             <Link
               href='/portal/profile'
               className='border border-slate-300 bg-white px-5 py-2.5 text-xs font-black uppercase tracking-widest text-slate-700 hover:border-untele hover:text-untele dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
             >
               Edit Profile
             </Link>
-            {isEditorPlus && (
-              <a
-                href='/studio'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='border border-slate-300 bg-white px-5 py-2.5 text-xs font-black uppercase tracking-widest text-slate-700 hover:border-untele hover:text-untele dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
-              >
-                Open Studio ↗
-              </a>
-            )}
           </div>
         </section>
 
@@ -313,29 +569,97 @@ export default async function PortalDashboardPage() {
           </section>
         )}
 
-        {/* ── Latest Brief ─────────────────────────────────────────────── */}
-        <section>
-          <SectionHeader label='Latest Brief' />
-          {latestBrief ? (
-            <BriefPanel
-            brief={latestBrief}
-            briefList={allBriefs ?? []}
-            currentSanityAuthorId={sanityAuthorId ?? undefined}
-            myPitchMap={myPitchMap}
-            authors={authors}
-            isEditorPlus={isEditorPlus}
-          />
-          ) : (
-            <div className='border border-slate-200 bg-white px-4 py-8 text-center dark:border-slate-700 dark:bg-slate-900'>
-              <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
-                No briefs posted yet
-              </p>
-              <p className='mt-1 text-xs text-slate-400'>
-                The AI agent will post briefs here once configured.
-              </p>
-            </div>
-          )}
-        </section>
+        {/* ── Bottom: Brief + right sidebar (Orders + Payouts) ────────── */}
+        <div className='grid grid-cols-1 gap-6 xl:grid-cols-[1fr_300px]'>
+          {/* Latest Brief */}
+          <section>
+            <SectionHeader label='Latest Brief' />
+            {latestBrief ? (
+              <BriefPanel
+                brief={latestBrief}
+                briefList={allBriefs ?? []}
+                currentSanityAuthorId={sanityAuthorId ?? undefined}
+                myPitchMap={myPitchMap}
+                authors={authors}
+                isEditorPlus={isEditorPlus}
+              />
+            ) : (
+              <div className='border border-slate-200 bg-white px-4 py-8 text-center dark:border-slate-700 dark:bg-slate-900'>
+                <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                  No briefs posted yet
+                </p>
+                <p className='mt-1 text-xs text-slate-400'>
+                  The AI agent will post briefs here once configured.
+                </p>
+              </div>
+            )}
+          </section>
+
+          {/* Right sidebar — stacked widgets */}
+          <div className='flex flex-col gap-6'>
+            {/* Bookstore Orders — literary authors + admins + sales */}
+            {showBookstoreOrders && (
+              <section>
+                <SectionHeader label='Bookstore Orders' />
+                {bookstoreAvailable ? (
+                  <BookstoreOrdersWidget
+                    digitalSales={digitalSales}
+                    shipmentsPending={shipmentsPending}
+                  />
+                ) : (
+                  <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
+                    <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                      Bookstore not connected
+                    </p>
+                    <Link
+                      href='/portal/library'
+                      className='mt-2 inline-block text-[10px] font-black uppercase tracking-widest text-untele hover:underline'
+                    >
+                      My Books →
+                    </Link>
+                  </div>
+                )}
+              </section>
+            )}
+
+            {/* Tips — strictly the author whose tips they are */}
+            {showTipsWidget && (
+              <section>
+                <SectionHeader label='Tips' />
+                {bookstoreAvailable ? (
+                  <TipsWidget tips={tips} />
+                ) : (
+                  <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
+                    <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                      Bookstore not connected
+                    </p>
+                  </div>
+                )}
+              </section>
+            )}
+
+            {/* Pending Payouts — all roles */}
+            <section>
+              <SectionHeader label={isAdmin ? 'All Pending Payouts' : 'My Pending Payouts'} />
+              {bookstoreAvailable ? (
+                <PendingPayoutsWidget
+                payouts={pendingPayouts}
+                isAdmin={isAdmin}
+                accruing={currentPeriodAuthorCents}
+                nextPayoutDate={nextPayoutDate}
+                periodStart={currentPayoutPeriodStart}
+                periodEnd={currentPayoutPeriodEnd}
+              />
+              ) : (
+                <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
+                  <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                    Bookstore not connected
+                  </p>
+                </div>
+              )}
+            </section>
+          </div>
+        </div>
       </main>
     </div>
   );

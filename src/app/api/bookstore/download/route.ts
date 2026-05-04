@@ -6,11 +6,20 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
+import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
+import { checkDownloadRate } from '@/lib/bookstore/ratelimit';
 
 const SIGNED_URL_TTL_SECONDS = 15 * 60; // 15 minutes
 
 export async function GET(req: NextRequest) {
+  const rl = await checkDownloadRate(req);
+  if (rl.limited) {
+    return NextResponse.json(
+      { error: 'Too many requests — please wait a moment' },
+      { status: 429 }
+    );
+  }
+
   const { userId } = await auth();
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -49,11 +58,13 @@ export async function GET(req: NextRequest) {
 
   // Check expiry
   if (download.expires_at && new Date(download.expires_at) < new Date()) {
+    void writeAuditLog({ eventType: 'download_expired', userId, details: { orderItemId } });
     return NextResponse.json({ error: 'Download link has expired' }, { status: 410 });
   }
 
   // Check download count
   if (download.download_count >= download.max_downloads) {
+    void writeAuditLog({ eventType: 'download_limit_reached', userId, details: { orderItemId } });
     return NextResponse.json({ error: 'Maximum downloads reached' }, { status: 403 });
   }
 
@@ -61,10 +72,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'File not yet available' }, { status: 404 });
   }
 
-  // Generate signed URL
+  // Generate signed URL — { download: filename } adds Content-Disposition: attachment
+  // so the browser saves the file instead of opening it in a tab.
+  const filename = download.supabase_storage_path.split('/').pop() ?? 'download';
   const { data: signedData, error: signError } = await shopServiceClient.storage
     .from('digital-books')
-    .createSignedUrl(download.supabase_storage_path, SIGNED_URL_TTL_SECONDS);
+    .createSignedUrl(download.supabase_storage_path, SIGNED_URL_TTL_SECONDS, {
+      download: filename,
+    });
 
   if (signError || !signedData?.signedUrl) {
     console.error('[shop/download] Signed URL error:', signError?.message);
@@ -81,6 +96,12 @@ export async function GET(req: NextRequest) {
       ...(download.first_downloaded_at == null ? { first_downloaded_at: now } : {}),
     })
     .eq('id', download.id);
+
+  void writeAuditLog({
+    eventType: 'download_success',
+    userId,
+    details: { orderItemId, downloadCount: download.download_count + 1 },
+  });
 
   return NextResponse.json({ url: signedData.signedUrl });
 }

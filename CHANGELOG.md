@@ -1,8 +1,208 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+---
+
+## [Unreleased]
+
+### Added — Email Delivery, Direct Downloads & Digital Asset Fixes (Issue #46, 2026-05-04)
+
+- **Transactional email delivery** (`src/lib/bookstore/email.ts`): full Nodemailer + Google SMTP stack. Order confirmation, digital download ready, guest one-time download, shipment, and refund emails all live. SMTP env vars (`SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`) added to Vercel production.
+- **BOM / CRLF env var corruption fix** (`cleanEnv()` helper): PowerShell `echo` pipes prepend a UTF-16 BOM (`﻿`) and append `\r\n` to values stored by the Vercel CLI. `cleanEnv()` strips both before use — prevents `getaddrinfo EBUSY` DNS failure on SMTP host.
+- **From-address fix**: `ORDERS_SMTP_FROM` (a non-verified alias) caused Gmail 550 rejection. `from` now always resolves to `Hurriya Publications <SMTP_USER>` — the authenticated sender.
+- **Stripe webhook signature fix**: `STRIPE_WEBHOOK_SECRET` corrected in Supabase secrets; `constructEventAsync` + `SubtleCryptoProvider` used for Deno-compatible HMAC — prevents 400 signature errors.
+- **Direct download links in emails**: the Stripe webhook edge function now calls `db.storage.from('digital-books').createSignedUrl(storagePath, 30 * 24 * 3600, { download: filename })` at purchase time and embeds the URL directly in the email. One click saves the file — no login required, no intermediate API route.
+  - Auth users: "⬇ Download Now" button in the digital download email (30-day signed URL).
+  - Guest users: "Download Your Book →" button in the guest download email (30-day signed URL).
+- **Force-save on all download surfaces**: `createSignedUrl` called with `{ download: filename }` option on both `/api/bookstore/download/route.ts` (vault) and `/api/bookstore/download/guest/route.ts` — browser saves the file instead of opening it in a new tab.
+- **Vault page force-save**: `window.location.href = data.url` replaces `window.open` in `downloads/page.tsx` to avoid a blank tab that customers might close before the file saves.
+- **Order confirmation email**: shows "Digital Download" notice pointing customers to the separate download email instead of a vault link guests can't access. Vault CTA remains for logged-in customers.
+- **Download email vault footer**: vault link restored in auth-user download email footer for re-downloads (up to 5, 1-year expiry).
+- **`DigitalDownloadItem` interface** (`src/lib/bookstore/email.ts`): `downloadUrl?: string` added — optional direct download URL embedded per item.
+- **Preserved filename on upload** (`src/lib/portal/book-actions.ts`): `uploadDigitalAsset` now stores `books/{bookId}/{formatKey}/{file.name}` instead of `books/{bookId}/{formatKey}/asset.{ext}` — original filename preserved in Supabase Storage and surfaced to customers on download.
+
+### Fixed — Email & Download Edge Cases (Issue #46, 2026-05-04)
+
+- **Missing file → honest fallback**: when `createSignedUrl` returns 400 (file not in Supabase Storage), the download email now shows a vault link + "contact us with your order number" note instead of the misleading "your file is being prepared — follow-up email coming" copy (no such retry mechanism exists).
+- **Guest download 30-day expiry**: guest download token TTL corrected from 14 → 30 days to match auth-user email tokens.
+- **`EmailPayload` type** in stripe-webhook edge function updated to include `downloadUrl?` on `digital-download` items — fixes TypeScript type mismatch after interface update.
+
+---
+
+### Added — Stripe Earnings & Author Payout System (Issue #46)
+
+- **`author_earnings` table** (`supabase/migrations/20260503000002_stripe_earnings.sql`): authoritative post-Stripe record per order item — `gross_cents`, `stripe_fee_cents`, `net_after_stripe_cents`, `author_cents`, `platform_cents`, `publisher_cents`, `is_tip`, `payout_period_start`, `payout_period_end`; RLS + service_role grants included.
+- **`stripe_fee_cents` column** added to `orders` and `payouts` tables.
+- **Real Stripe Balance Transaction API**: webhook fetches `paymentIntents.retrieve` with `expand: ['latest_charge.balance_transaction']` — captures the actual Stripe fee for all card types (domestic 2.9%+30¢, international higher). No formula guessing.
+- **Proportional Stripe fee distribution** across order items with exact-remainder assignment to the largest item, ensuring per-item fees always sum exactly to the order-level total.
+- **`getPayoutPeriod()`** helper: bi-monthly periods (1st–15th payout on 16th; 16th–last day payout on 1st of next month). Returns `{start, end}` ISO date strings stored on each `author_earnings` row.
+- **`insertAuthorEarning()`** in stripe-webhook edge function: calculates `net = gross - itemStripeFee`, applies revenue split percentages, writes to `author_earnings` after each `insertAuthorSale`. Tips always credited at 100% author.
+- **Test promo edge case**: `isTestPromo` bypasses `fetchStripeFee` (returns 0) — correct because $0 test-promo transactions incur no Stripe fee; original prices still recorded.
+- **`AuthorEarning` interface** added to `src/lib/bookstore/types.ts`; `stripe_fee_cents` field added to `Order` and `Payout` interfaces.
+- **Stripe webhook JWT bypass fix**: edge function redeployed with `--no-verify-jwt` so Stripe webhook requests (no Supabase JWT) no longer return `UNAUTHORIZED_NO_AUTH_HEADER`.
+
+### Added — Author Portal: Earnings Dashboard (Issue #46)
+
+- **`/portal/earnings`** (new page `src/app/(portal)/portal/earnings/page.tsx`): dedicated financial dashboard — Sales Summary stat cards (Total Units Sold, This Month, Accruing This Period, Next Payout), all-time Gross / Stripe Fees / Your Earnings row, Sales by Title bar chart with physical/digital split, Tips Received per-book breakdown with gross/fees/net, full Payout History table.
+- **`/portal/library`** (new page `src/app/(portal)/portal/library/page.tsx`): focused book management — product table with units sold and net earnings per book, inventory low-stock alerts, Add Book / Edit Book modals. All financial data moved to `/portal/earnings`.
+- **`/portal/sales`** (new page `src/app/(portal)/portal/sales/page.tsx`): order management (renamed from `/portal/orders`) — all order stats, earnings breakdown panel for admin/sales, per-order author cut in OrdersTable expanded view, order status management.
+- **Old-route redirects**: `/portal/books` → `/portal/library`; `/portal/orders` → `/portal/sales` (both server-side `redirect()`).
+
+### Added — Payout Date UI (Issue #46)
+
+- **`getNextPayoutDate()`** helper in both `portal/library` and `portal/earnings` pages: computes the next scheduled payout (16th of current month if day ≤ 15, else 1st of next month). Advances automatically — no manual maintenance.
+- **Next Payout card** on `/portal/earnings`: shows accruing amount when no formal pending payout record exists yet, with "Scheduled May 16, 2026" sub-label in green.
+- **`PendingPayoutsWidget`** updated: when no pending payout rows exist but the author has accruing earnings, renders a projected "Upcoming · Scheduled" entry with the next payout date and period range instead of "No pending payouts". `accruing`, `nextPayoutDate`, `periodStart`, `periodEnd` props added.
+- **Main portal dashboard My Books strip**: shows accruing period amount in green alongside "Accruing · Payout [date]" — queries `author_earnings` for the current period via a dedicated Supabase call.
+
+### Fixed — Earnings Math (Issue #46)
+
+- **Tips `Your Tips` display**: was reading `author_cents` from DB (stale values from early orders). All calculations now derive `net = gross_cents - stripe_fee_cents` dynamically — always mathematically correct regardless of DB data quality. A `netCents()` helper function centralises this.
+- **"Your Earnings" bottom row** now includes both books and tips (was books only).
+- **Monthly earnings** (`This Month`, `Last Month`, `Accruing This Period`) now covers all earnings (books + tips), net of Stripe.
+
+### Changed — Navigation & Routing (Issue #46)
+
+- **`PortalNav`**: bookstore author links updated to `Library` (`/portal/library`) + `Earnings` (`/portal/earnings`); shared link updated to `Sales` (`/portal/sales`); sales-role brand link updated to `/portal/sales`.
+- **`proxy.ts`**: sales-role access guard redirects to `/portal/sales`; matcher updated to `isPortalSalesRoute` (includes legacy `/portal/orders` to preserve redirect chain during transition).
+- **`BookstoreOrdersWidget`**: "View All Orders" + order number links → `/portal/sales`.
+- **`TipsWidget`**: order number links → `/portal/sales`.
+- **`PendingPayoutsWidget`**: "Payout History" footer link → `/portal/earnings`.
+- **Main portal dashboard**: "My Books" strip link → `/portal/library`.
+- **`CHANGELOG.md`**: created at project root; back-filled with all work from the project's inception.
+
+---
+
+### Added — Bookstore Foundation (Issue #46, earlier work)
+
+- **Bookstore — Supabase Infrastructure (Issue #46, Steps 1.1–1.2)**
+  - `supabase/migrations/20260428000001_bookstore_schema.sql` — DDL for all 6 bookstore tables (customers, addresses, orders, order_items, digital_downloads, payouts), 8 indexes, `set_updated_at()` trigger, RLS enabled on all tables with customer-scoped policies; pushed to project qdocpanuicwyhlcthudc
+  - `supabase/migrations/20260429000001_storage_rls.sql` — service-role-only RLS on `storage.objects` for `digital-books` bucket
+  - `digital-books` private Supabase Storage bucket created; no public access; downloads served via signed URLs only
+
+- **Bookstore — Foundation (Issue #46, Phase 1)**
+  - Supabase shop project env vars documented in `.env.local` (steps 1.1–1.2)
+  - Sanity schemas: `book`, `bookGenre`, embedded `bookFormat` object type; `author` schema updated with `isLiteraryAuthor`, `payoutEmail` fields (step 1.3)
+  - `src/lib/bookstore/supabase.ts` — typed Supabase clients (`shopClient` anon, `shopServiceClient` service-role) (step 1.4)
+  - `src/lib/bookstore/types.ts` — TypeScript interfaces: `Customer`, `Address`, `Order`, `OrderItem`, `DigitalDownload`, `Payout`, `SanityBook`, `SanityBookFormat`, `SanityBookGenre`, `CartItem`, `CheckoutPayload` (step 1.5)
+  - `src/lib/sanity/lib/queries.ts` — `queryAllBookGenres`, `queryFeaturedBooks`, `queryAllBooks`, `queryBookBySlug`, `queryBooksByAuthorClerkId` GROQ queries (step 1.6)
+  - `sales` portal role added to `src/lib/auth/roles-utils.ts` and `src/lib/auth/roles.ts`; `src/proxy.ts` enforces sales → `/portal/orders` only; `src/lib/auth/roles.ts` exports `requireAnyPortalRole`, `isSales`, `isSalesOnlyUser` (step 1.7)
+
+- **Bookstore — Stripe & Webhook (Issue #46, Phase 2)**
+  - `src/app/api/bookstore/checkout/route.ts` — POST creates Stripe Checkout Session from cart; collects shipping for physical items; metadata encodes items for webhook (step 2.1)
+  - `src/app/api/bookstore/webhook/route.ts` — verifies Stripe signature; handles `checkout.session.completed` (upsert customer, create order + order_items, digital fulfillment), `payment_intent.succeeded/failed`, `charge.refunded` (revoke downloads), `charge.dispute.created` (steps 2.2–2.5)
+  - `src/lib/bookstore/email.ts` — Resend email helpers: order confirmation, digital download delivery, shipment confirmation, refund confirmation (step 5 baseline)
+
+- **Bookstore — Public Storefront (Issue #46, Phase 3)**
+  - `src/app/(user)/bookstore/layout.tsx` — bookstore layout wrapper
+  - `src/app/(user)/bookstore/page.tsx` — featured hero + all-books grid + genre filter; full metadata
+  - `src/app/(user)/bookstore/book/[slug]/page.tsx` — full detail page; format selector; inventory badges; CTA buttons; author bio; Book + Offer JSON-LD; `generateMetadata`; `generateStaticParams`
+  - `src/app/(user)/bookstore/cart/page.tsx` — full cart page
+  - `src/app/(user)/bookstore/order-success/page.tsx` — post-checkout confirmation
+  - `src/app/(user)/bookstore/orders/page.tsx` — authenticated order history
+  - `src/app/(user)/bookstore/downloads/page.tsx` — digital download vault
+  - `src/app/api/bookstore/download/route.ts` — validates ownership, generates Supabase signed URL, increments counter
+  - `src/app/api/bookstore/my-downloads/route.ts` — returns customer's digital downloads
+  - `src/lib/bookstore/cart.ts` — Zustand cart store with localStorage persistence
+  - `src/components/bookstore/AddToCartButton.tsx` — client add-to-cart CTA
+  - `src/components/bookstore/GenreFilter.tsx` — client-side genre filter tabs
+  - `src/components/bookstore/MiniCart.tsx` — header mini-cart with item count badge
+  - Bookstore nav link added to main site navigation
+
+- **Bookstore — Internal Dashboard (Issue #46, Phase 4)**
+  - `src/app/(portal)/portal/books/page.tsx` — My Books dashboard (author-gated): product list table with Studio links, sales summary cards (units/revenue/month-over-month), inventory alerts section, payout history table; gracefully degrades when Supabase is not connected
+  - `src/app/(portal)/portal/orders/page.tsx` — Order Management (admin/sales/author-scoped): order stats, paginated + searchable table, status badges; authors see only orders containing their books
+  - `src/components/portal/OrdersTable.tsx` — client component: searchable + filterable order table; expandable per-row detail panel (payment breakdown, item list with unit prices, Stripe payment intent ID, timestamps); "Mark as shipped" with inline tracking number input; "Mark as [next status]" workflow; admin refund action with confirmation; pagination
+  - Per-book CSS bar chart added to My Books dashboard showing relative units sold and physical/digital split per title
+  - Supabase env vars added to Vercel project settings (production + preview) via CLI
+  - `src/app/api/portal/orders/[id]/status/route.ts` — PATCH: Zod-validated; validates status transition graph; sales cannot refund; fires shipment/refund emails on status change; revokes digital downloads on refund
+  - `src/components/portal/PortalNav.tsx` — My Books + Orders nav links already wired; `sales` role shows Sales Portal label and limits to orders link
+
+- **Bookstore — Author Book Management (Issue #46, Phase 5)**
+  - `src/components/portal/AddBookModal.tsx` — slide-over book creation widget: title, description, multi-select genres with inline "New Genre" sub-form (title + slug + Slugify button), cover photo upload with preview, status radio (draft/published), per-format pricing (physical / digital / bundle, up to 3), digital file upload (PDF/EPUB/MOBI/ZIP) per digital/bundle format; genre dropdown with clickable pills; Fiction/Non-Fiction type toggle (either-or, deselectable)
+  - `src/components/portal/EditBookModal.tsx` — slide-over book editor: all fields pre-populated from existing Sanity document via `blocksToText()` PortableText helper; cover photo replacement; digital file replacement per format slot; all 4 status values (draft/published/out-of-stock/discontinued); genre multi-select dropdown with pills; Fiction/Non-Fiction type toggle; inline New Genre sub-form (no modal redirect); price editing by `_key`
+  - `src/lib/portal/book-actions.ts` — server actions: `createBook` (Sanity write + pre-generate format `_key`s), `updateBook` (patch/unset diff), `uploadBookCover` (FormData → Supabase `book-covers` public bucket → Sanity patch), `uploadDigitalAsset` (FormData → Supabase `digital-books` private bucket → Sanity format patch), `fetchBookGenres`, `createBookGenre`; genre references include `_key` to satisfy Sanity array requirements; `fictionType` field supported in create and update
+  - `supabase/migrations/20260429000002_book_covers_bucket.sql` — `book-covers` public bucket: 5 MB limit, image MIME types, service-role write policy
+  - `supabase/migrations/20260429000003_digital_books_bucket.sql` — `digital-books` private bucket: 500 MB limit, no MIME restriction, service-role write policy
+  - `supabase/migrations/20260430000001_grant_role_privileges.sql` — grants `SELECT/INSERT/UPDATE/DELETE` on all bookstore tables to `service_role`, `anon`, `authenticated`; fixes `permission denied for table` errors that blocked portal order management and all Supabase queries despite correct env vars
+  - `next.config.ts` — `serverActions.bodySizeLimit: '50mb'` to support large cover and digital file uploads (default 1 MB silently dropped payloads)
+  - `src/app/(portal)/portal/books/page.tsx` — `EditBookModal` integrated inline; all Studio links removed from portal UI
+
+- **Portal — Studio Links Removed**
+  - Removed all direct Sanity Studio links from the author portal and component UI; portal is now self-contained
+  - `src/app/(portal)/portal/page.tsx` — removed "Open Studio ↗" button (editor+ only)
+  - `src/app/(portal)/portal/books/page.tsx` — removed "Manage in Studio →" header button and "Studio ↗" per-row action link; updated empty-state text
+  - `src/components/portal/AddBookModal.tsx` — updated post-create success state to reference the Edit button instead of Studio; removed "Stripe Price IDs can be added in Studio" note
+  - `src/components/portal/EditBookModal.tsx` — removed "To add or remove formats, use Studio" note
+  - `src/components/portal/SecureContactTable.tsx` — removed "Manage in Studio ↗" action link
+  - `src/components/portal/WhistleblowerTable.tsx` — removed "Manage in Studio ↗" action link
+
+- **Portal Dashboard — Bookstore Widgets (Issue #46, Phase 4 cont.)**
+  - `src/components/portal/BookstoreOrdersWidget.tsx` — 2-panel switchable widget: Digital Sales tab (fulfilled digital orders) and Pending Shipments tab (physical orders awaiting dispatch); links to full Orders page
+  - `src/components/portal/PendingPayoutsWidget.tsx` — server-renderable payout display widget: totals, per-payout rows with period/gross/net; admin sees all authors' payouts
+  - `src/app/(portal)/portal/page.tsx` — portal dashboard wired with `BookstoreOrdersWidget` + `PendingPayoutsWidget`; Supabase data fetched server-side with graceful degradation
+
+- **Bookstore — Buy Now & Add to Cart on Listing Cards (Issue #46)**
+  - `src/components/bookstore/BookCardActions.tsx` — client component rendered below each book card on the storefront grid; shows "+ Cart" and "Buy Now" buttons for the lowest-price format; compact amber tip row below (checkbox + inline amount input) when the book's author has a `tipStripeProductId`; tip included in Buy Now payload when checked and amount > 0; resolves inaccessible buy button on listing cards
+  - `src/components/bookstore/BuyNowButton.tsx` — standalone "Buy Now" client button used on the book detail page format rows; direct Stripe checkout redirect without cart
+  - `src/app/(user)/bookstore/page.tsx` — listing cards restructured from single `<Link>` wrapper to `<div>` with link on image/title and `BookCardActions` as a sibling; fixes buttons-inside-anchor nesting violation
+  - `src/app/(user)/bookstore/book/[slug]/page.tsx` — Add to Cart button no longer gated behind `format.stripePriceId &&` guard; compare-at strikethrough price shown on detail hero as well as listing card
+
+- **Bookstore — Name-Your-Price Tip System (Issue #46, §2.2)**
+  - `src/models/schema/author.ts` — `tipStripeProductId` (Stripe Product ID `prod_xxx`) and `tipAmount` (recommended default, USD) fields; tips are name-your-own-price so a Product ID is stored rather than a Price ID
+  - `src/lib/bookstore/types.ts` — `SanityBook.author.tipStripeProductId` (renamed from `tipStripePriceId`); `CartItem.tipIncluded?: boolean` for per-item opt-in toggle persisted in localStorage; `CheckoutLineItem.unitAmountCents?: number` for variable tip amount to checkout API
+  - `src/lib/bookstore/cart.ts` — `updatePrice(bookId, formatKey, price)` and `updateTipIncluded(bookId, formatKey, included)` actions; `addItem` no longer stacks quantity for tip items — re-adding updates price and `tipIncluded` instead
+  - `src/lib/sanity/lib/queries.ts` — author projection uses `coalesce(tipStripeProductId, tipStripePriceId)` for backward compatibility with documents saved before the field rename
+  - `src/app/api/bookstore/checkout/route.ts` — tip items built with `price_data: { product, unit_amount }` (Stripe name-your-price); tips with zero/missing `unitAmountCents` are filtered before session creation; non-tip price IDs trimmed to remove accidental whitespace; diagnostic `[shop/checkout]` log line emits key prefix and price IDs to aid Stripe env debugging
+  - `src/components/bookstore/TipAuthorRow.tsx` — full rewrite: "Include tip" checkbox (default checked), editable dollar input (default = `author.tipAmount`), buttons disabled when unchecked or amount = 0; uses `tipStripeProductId`; "+ Cart" passes `tipIncluded: true`; "Tip Now" passes `unitAmountCents` to checkout
+  - `src/components/bookstore/BookCardActions.tsx` — compact tip row below format buttons: include checkbox + inline amount input; tip added to cart or Buy Now payload only when checked and amount > 0
+  - `src/app/(user)/bookstore/cart/page.tsx` — tip items rendered with amber left-border styling, editable amount input (calls `updatePrice`), include checkbox (calls `updateTipIncluded`), no quantity controls; checkout payload filters unchecked/zero tips and passes `unitAmountCents` for included tips; subtotal respects `tipIncluded` flag
+
+- **Bookstore — Guest Download Token API (Issue #46, §7)**
+  - `src/app/api/bookstore/download/guest/` — one-time token download endpoint for guest purchases; validates token, marks used, returns Supabase signed URL
+  - `src/app/api/bookstore/download/guest-resend/` — accepts `order_number` + `guest_email`; verifies match; generates fresh token with new expiration; sends new delivery email via Resend; rate-limited to 3 resends per order
+  - `supabase/migrations/20260430000002_guest_download_tokens.sql` — `guest_download_tokens` table: token, order_item_id, guest_email, used_at, expires_at, resend_count
+  - `supabase/migrations/20260430000003_audit_logs.sql` — `audit_logs` table: event_type, user_id, purchase_id, ip_address, user_agent, details JSONB; indexed on event_type + created_at
+
+- **Breaking News Page**
+  - `src/app/(news)/breaking/page.tsx` + `BreakingNewsClient.tsx` — dedicated `/breaking` route with `generateMetadata`; replaces old redirect target with a full rendered page
+  - Removed `src/app/(news)/live-event/[slug]/page.tsx` (superseded by breaking news + events architecture)
+
+- **Hurriya Publications — Brand Assets**
+  - `public/hurriya-pub/` — full brand asset set: Logo, Logo-alt, Logo-invert, Banner, Banner-invert (PNG + PSD source files)
+
+### Fixed
+
+- **Supabase `permission denied for table` on all bookstore tables** — schema migration created tables with RLS enabled but never granted base Postgres table privileges to `service_role`, `anon`, or `authenticated`; service role bypasses RLS row policies but still requires explicit `GRANT`; new migration `20260430000001_grant_role_privileges.sql` grants full DML to `service_role` and `authenticated`, read-only `payouts` to `authenticated`; applied to production Supabase project via `supabase db push`
+
+- **Portal Order Management showing "database not connected"** — catch block swallowed error silently; improved to capture and display the actual Supabase error message with a hint to run `supabase db push` if the error is a missing relation
+
+- **`BreakingNewsClient` "Cannot find module" TS error** — `LiveEvent` and `Article` types were used as implicit globals in `BreakingNewsClient.tsx` with no import or local declaration; TypeScript failed to compile the file, causing the parent `page.tsx` import to report "Cannot find module"; fixed by adding `interface LiveEvent` and `interface Article` at the top of the file
+
+- **`checkbox.tsx` duplicate border Tailwind classes** — shadcn codegen emitted `border-slate-200 border-slate-900` (and `dark:border-slate-800 dark:border-slate-50`) on the same element; only the last value wins; removed the duplicate dark-state values, keeping `border-slate-200 dark:border-slate-800` as the unchecked border (checked colors already handled by `data-[state=checked]` classes)
+
+- **`tsconfig.json` `ignoreDeprecations` invalid value** — `"6.0"` is not an accepted value by the TypeScript compiler; changed to `"5.0"` (the only valid value as of TS 5.x); was causing `Type error: Invalid value for '--ignoreDeprecations'` and failing the Next.js production build
+
+- **File input clicks broken inside `overflow-hidden` containers** — `sr-only` applies `clip: rect(0,0,0,0)` which kills programmatic click targets; fixed across `AddBookModal`, `EditBookModal`, and `ArticleEditorForm` by switching to `useRef` + `className='hidden'` / `fixed left-[-9999px]` inputs with `ref.current?.click()`
+- **Digital file "first pick doesn't stick"** — shared `digitalInputRef` + `useState` index tracking has stale closure / batched-state race on first pick; fixed in both `AddBookModal` and `EditBookModal` by giving each format card its own dedicated `<input ref={(el) => { digitalInputRefs.current[i] = el; }}>` with an inline `onChange` that captures `i` directly from the `map()` closure — eliminates index tracking entirely
+- **Supabase upload failures (400 / type error)** — server actions must receive `FormData` (not serialized `Uint8Array`) across the wire; upload functions refactored to accept `FormData` and call `file.arrayBuffer()` server-side; `Buffer.from(bytes)` required by Supabase JS client (raw `Uint8Array` rejected)
+
+### Removed
+
+- `ADSENSE-SETUP.md` — one-time setup doc no longer needed
+
+- **Bookstore — Build Fixes**
+  - `src/lib/bookstore/supabase.ts` — lazy proxy clients (throw at call time, not import time) to prevent build crash when env vars missing
+  - `src/lib/bookstore/email.ts` — lazy Resend initialization for same reason
+  - `src/lib/bookstore/database.types.ts` — added `Relationships` arrays (required by @supabase/supabase-js 2.105+)
+  - `src/lib/bookstore/types.ts` — `SanityImageRef` typed as `{ _type: 'image'; asset: { _type: 'reference'; _ref: string } }` to satisfy `urlForImage` parameter
+  - `src/util/urlForImage.ts` — broadened parameter type to accept `ImageLike` (Image | asset-ref-compatible object) for cross-schema compatibility
+  - Stripe API version updated: `2025-04-30.basil` → `2026-04-22.dahlia`
+  - `generateStaticParams` in book detail page uses raw Sanity client (not `sanityFetch`) to avoid `draftMode()` outside request scope error
+  - Removed `export const runtime = 'nodejs'` from webhook route (incompatible with `useCache` experimental flag)
 
 ---
 

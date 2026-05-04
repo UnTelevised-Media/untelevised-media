@@ -52,15 +52,19 @@ export interface Order {
   tax_cents: number;
   shipping_cents: number;
   total_cents: number;
+  stripe_fee_cents: number;
   currency: string;
   shipping_address_id: string | null;
   notes: string | null;
   created_at: string;
   updated_at: string;
   fulfilled_at: string | null;
+  shipping_tracking_number: string | null;
+  shipping_tracking_url: string | null;
+  shipped_at: string | null;
 }
 
-export type FormatType = 'physical' | 'digital' | 'bundle';
+export type FormatType = 'physical' | 'digital' | 'bundle' | 'tip';
 
 export interface OrderItem {
   id: string;
@@ -91,6 +95,25 @@ export interface DigitalDownload {
   created_at: string;
 }
 
+export interface AuthorEarning {
+  id: string;
+  author_sale_id: string;
+  order_id: string;
+  order_item_id: string;
+  sanity_book_id: string;
+  author_clerk_id: string | null;
+  gross_cents: number;
+  stripe_fee_cents: number;
+  net_after_stripe_cents: number;
+  author_cents: number;
+  platform_cents: number;
+  publisher_cents: number;
+  is_tip: boolean;
+  payout_period_start: string;
+  payout_period_end: string;
+  created_at: string;
+}
+
 export type PayoutStatus = 'pending' | 'paid' | 'cancelled';
 
 export interface Payout {
@@ -99,6 +122,7 @@ export interface Payout {
   period_start: string;
   period_end: string;
   gross_cents: number;
+  stripe_fee_cents: number;
   platform_fee_cents: number;
   net_cents: number;
   status: PayoutStatus;
@@ -140,6 +164,12 @@ export interface SanityBookFormat {
   dimensions?: string;
 }
 
+export interface SanityImageRef {
+  _type: 'image';
+  asset: { _type: 'reference'; _ref: string };
+  alt?: string;
+}
+
 export interface SanityBook {
   _id: string;
   title: string;
@@ -147,23 +177,33 @@ export interface SanityBook {
   author?: {
     _id: string;
     name: string;
-    image?: { asset: { _ref: string }; alt?: string };
+    image?: SanityImageRef;
     bio?: unknown[];
     slug?: { current: string };
     clerkId?: string;
     payoutEmail?: string;
+    tipStripeProductId?: string;
+    tipAmount?: number;
   };
-  coverImage?: { asset: { _ref: string }; alt?: string };
+  coverImage?: SanityImageRef;
+  coverImageUrl?: string;
   description?: unknown[];
   genre?: SanityBookGenre[];
   publishedAt?: string;
   isbn?: string;
   pages?: number;
   language?: string;
+  fictionType?: 'fiction' | 'non-fiction';
   formats: SanityBookFormat[];
   samplePdfUrl?: string;
   featured: boolean;
   status: 'draft' | 'published' | 'out-of-stock' | 'discontinued';
+  revenueTerms?: {
+    authorPercentage?: number;
+    publisherPercentage?: number;
+    platformPercentage?: number;
+    description?: string;
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -178,8 +218,9 @@ export interface CartItem {
   formatType: FormatType;
   formatKey: string;
   price: number;
-  stripePriceId: string;
+  stripePriceId: string; // for tips: Stripe Product ID (prod_xxx); for others: Stripe Price ID
   quantity: number;
+  tipIncluded?: boolean; // tip items only — false excludes the tip from checkout
 }
 
 // ---------------------------------------------------------------------------
@@ -187,16 +228,18 @@ export interface CartItem {
 // ---------------------------------------------------------------------------
 
 export interface CheckoutLineItem {
-  stripePriceId: string;
+  stripePriceId: string; // for tips: Stripe Product ID; for others: Stripe Price ID
   quantity: number;
   sanityBookId: string;
   formatType: FormatType;
   formatKey: string;
   title: string;
   isDigital: boolean;
+  unitAmountCents?: number; // tips only — user-entered amount converted to cents
 }
 
 export interface CheckoutPayload {
   items: CheckoutLineItem[];
   clerkUserId?: string;
+  customerEmail?: string;
 }
