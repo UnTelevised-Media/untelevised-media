@@ -207,8 +207,7 @@ export async function uploadDigitalAsset(formData: FormData): Promise<string> {
   );
   if (!bookId || !formatKey || !file) throw new Error('Missing bookId, formatKey, or file');
 
-  const ext = file.name.split('.').pop()?.toLowerCase() ?? 'bin';
-  const storagePath = `books/${bookId}/${formatKey}/asset.${ext}`;
+  const storagePath = `books/${bookId}/${formatKey}/${file.name}`;
   console.log('[uploadDigitalAsset] uploading to path:', storagePath);
   const supabase = getShopServiceClient();
 
