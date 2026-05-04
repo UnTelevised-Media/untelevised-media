@@ -108,6 +108,8 @@ export default async function PortalSalesPage() {
       updated_at: string; fulfilled_at: string | null; notes: string | null;
       customer_id: string | null; stripe_payment_intent_id: string | null;
       stripe_checkout_session_id: string | null; shipping_address_id: string | null;
+      shipping_tracking_number: string | null; shipping_tracking_url: string | null;
+      shipped_at: string | null;
       customer: { email: string; full_name: string | null } | null;
       shipping_address: { line1: string; line2: string | null; city: string; state: string; postal_code: string; country: string } | null;
       items: { book_title: string; format_label: string; sanity_format_type: string; quantity: number; is_digital: boolean; sanity_book_id: string; unit_price_cents: number }[];
@@ -138,6 +140,9 @@ export default async function PortalSalesPage() {
         created_at: o.created_at,
         updated_at: o.updated_at,
         fulfilled_at: o.fulfilled_at,
+        shipping_tracking_number: o.shipping_tracking_number,
+        shipping_tracking_url: o.shipping_tracking_url,
+        shipped_at: o.shipped_at,
         customer_email: o.customer?.email,
         customer_name: o.customer?.full_name ?? undefined,
         shipping_address: o.shipping_address ?? null,

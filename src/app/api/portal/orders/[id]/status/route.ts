@@ -1,6 +1,5 @@
 // src/app/api/portal/orders/[id]/status/route.ts
-// PATCH — update order status. Accessible to admin and sales roles.
-// Authors can also access if the order contains one of their books.
+// PATCH — update order status. Accessible to admin, sales, and authors (own book orders).
 
 import { NextRequest, NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
@@ -31,6 +30,7 @@ const schema = z.object({
     'cancelled',
   ]),
   tracking_number: z.string().optional(),
+  tracking_url: z.string().optional(),
 });
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -50,7 +50,11 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
 
-  const { status: newStatus } = parsed.data;
+  const {
+    status: newStatus,
+    tracking_number: trackingNumber,
+    tracking_url: trackingUrl,
+  } = parsed.data;
 
   // Fetch the current order to validate transition and ownership
   const { data: order, error: fetchError } = await shopServiceClient
@@ -88,20 +92,27 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       if (!items || items.length === 0) {
         return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
       }
-      // We'd need to cross-ref Sanity here; for now authors can only mark-shipped their own orders
-      // via the role-aware page which scopes orders to their books before rendering.
     }
   }
 
-  // Apply update
+  // Build the update payload
   const setFulfilledAt =
     newStatus === 'fulfilled' || newStatus === 'delivered' || newStatus === 'shipped';
+
+  const now = new Date().toISOString();
 
   const { error: updateError } = await shopServiceClient
     .from('orders')
     .update({
       status: newStatus,
-      ...(setFulfilledAt ? { fulfilled_at: new Date().toISOString() } : {}),
+      ...(setFulfilledAt ? { fulfilled_at: now } : {}),
+      ...(newStatus === 'shipped'
+        ? {
+            shipped_at: now,
+            ...(trackingNumber ? { shipping_tracking_number: trackingNumber } : {}),
+            ...(trackingUrl ? { shipping_tracking_url: trackingUrl } : {}),
+          }
+        : {}),
     })
     .eq('id', orderId);
 
@@ -110,26 +121,20 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: 'Failed to update order status' }, { status: 500 });
   }
 
-  // Fetch order + customer for email triggers
-  const { data: fullOrder } = await shopServiceClient
-    .from('orders')
-    .select('order_number, customer:customers(email)')
-    .eq('id', orderId)
-    .maybeSingle();
+  // Shipment email is handled exclusively by the Supabase DB webhook
+  // (POST /api/webhooks/supabase-order-update) which fires on the DB update above.
+  // Do NOT call sendShipmentEmail() here — that would send a duplicate.
 
-  const customerEmail = (fullOrder?.customer as { email: string } | null)?.email;
-
-  // Fire shipment email when marking shipped
-  if (newStatus === 'shipped' && customerEmail && fullOrder) {
-    sendShipmentEmail({
-      to: customerEmail,
-      orderNumber: fullOrder.order_number,
-      trackingNumber: parsed.data.tracking_number,
-    }).catch((e) => console.error('[portal/orders/status] shipment email failed:', e));
-  }
-
-  // Fire refund email and revoke digital downloads on refund
+  // Refund: send email directly (no DB webhook for refunds) and revoke digital access.
   if (newStatus === 'refunded') {
+    const { data: fullOrder } = await shopServiceClient
+      .from('orders')
+      .select('order_number, customer:customers(email)')
+      .eq('id', orderId)
+      .maybeSingle();
+
+    const customerEmail = (fullOrder?.customer as { email: string } | null)?.email;
+
     if (customerEmail && fullOrder) {
       sendRefundEmail({ to: customerEmail, orderNumber: fullOrder.order_number }).catch((e) =>
         console.error('[portal/orders/status] refund email failed:', e)

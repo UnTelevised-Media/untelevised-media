@@ -59,6 +59,9 @@ export interface Order {
   created_at: string;
   updated_at: string;
   fulfilled_at: string | null;
+  shipping_tracking_number: string | null;
+  shipping_tracking_url: string | null;
+  shipped_at: string | null;
 }
 
 export type FormatType = 'physical' | 'digital' | 'bundle' | 'tip';

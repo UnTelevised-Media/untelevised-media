@@ -7,6 +7,10 @@ import {
   sendOrderConfirmationEmail,
   sendDigitalDownloadEmail,
   sendGuestDownloadEmail,
+  sendRefundEmail,
+  type OrderConfirmationParams,
+  type DigitalDownloadEmailParams,
+  type GuestDownloadEmailParams,
 } from '@/lib/bookstore/email';
 import type { FormatType } from '@/lib/bookstore/types';
 
@@ -15,10 +19,25 @@ type Payload =
       type: 'order-confirmation';
       to: string;
       orderNumber: string;
-      items: Array<{ title: string; formatType: FormatType; qty: number }>;
+      items: Array<{
+        title: string;
+        formatType: FormatType;
+        qty: number;
+        unitPriceCents: number;
+      }>;
+      subtotalCents: number;
+      shippingCents: number;
+      taxCents: number;
       totalCents: number;
+      shippingAddress?: OrderConfirmationParams['shippingAddress'];
+      hasDigital: boolean;
     }
-  | { type: 'digital-download'; to: string; orderNumber: string }
+  | {
+      type: 'digital-download';
+      to: string;
+      orderNumber: string;
+      items: DigitalDownloadEmailParams['items'];
+    }
   | {
       type: 'guest-download';
       to: string;
@@ -26,6 +45,12 @@ type Payload =
       bookTitle: string;
       downloadUrl: string;
       expiresAt: string;
+      storagePath?: string;
+    }
+  | {
+      type: 'refund';
+      to: string;
+      orderNumber: string;
     };
 
 export async function POST(req: NextRequest) {
@@ -50,12 +75,21 @@ export async function POST(req: NextRequest) {
           to: payload.to,
           orderNumber: payload.orderNumber,
           items: payload.items,
+          subtotalCents: payload.subtotalCents,
+          shippingCents: payload.shippingCents,
+          taxCents: payload.taxCents,
           totalCents: payload.totalCents,
+          shippingAddress: payload.shippingAddress,
+          hasDigital: payload.hasDigital,
         });
         break;
 
       case 'digital-download':
-        await sendDigitalDownloadEmail({ to: payload.to, orderNumber: payload.orderNumber });
+        await sendDigitalDownloadEmail({
+          to: payload.to,
+          orderNumber: payload.orderNumber,
+          items: payload.items,
+        });
         break;
 
       case 'guest-download':
@@ -65,7 +99,12 @@ export async function POST(req: NextRequest) {
           bookTitle: payload.bookTitle,
           downloadUrl: payload.downloadUrl,
           expiresAt: new Date(payload.expiresAt),
+          storagePath: payload.storagePath,
         });
+        break;
+
+      case 'refund':
+        await sendRefundEmail({ to: payload.to, orderNumber: payload.orderNumber });
         break;
 
       default:

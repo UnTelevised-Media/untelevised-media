@@ -80,6 +80,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
   const [localOrders, setLocalOrders] = useState<OrderWithItems[]>(orders);
   const [, startTransition] = useTransition();
   const [trackingInputs, setTrackingInputs] = useState<Record<string, string>>({});
+  const [trackingUrlInputs, setTrackingUrlInputs] = useState<Record<string, string>>({});
   const [showTrackingFor, setShowTrackingFor] = useState<string | null>(null);
   const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null);
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
@@ -140,14 +141,23 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
     setPage(0);
   }
 
-  async function updateStatus(orderId: string, newStatus: OrderStatus, trackingNumber?: string) {
+  async function updateStatus(
+    orderId: string,
+    newStatus: OrderStatus,
+    trackingNumber?: string,
+    trackingUrl?: string,
+  ) {
     setUpdating(orderId);
     setShowTrackingFor(null);
     try {
       const res = await fetch(`/api/portal/orders/${orderId}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus, tracking_number: trackingNumber }),
+        body: JSON.stringify({
+          status: newStatus,
+          tracking_number: trackingNumber,
+          tracking_url: trackingUrl,
+        }),
       });
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
@@ -165,11 +175,23 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                     newStatus === 'fulfilled' || newStatus === 'delivered' || newStatus === 'shipped'
                       ? new Date().toISOString()
                       : o.fulfilled_at,
+                  ...(newStatus === 'shipped'
+                    ? {
+                        shipping_tracking_number: trackingNumber ?? null,
+                        shipping_tracking_url: trackingUrl ?? null,
+                        shipped_at: new Date().toISOString(),
+                      }
+                    : {}),
                 }
               : o,
           ),
         );
         setTrackingInputs((prev) => {
+          const n = { ...prev };
+          delete n[orderId];
+          return n;
+        });
+        setTrackingUrlInputs((prev) => {
           const n = { ...prev };
           delete n[orderId];
           return n;
@@ -438,13 +460,25 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                             {hasPhysical && nextPhysStatus && (
                               nextPhysStatus === 'shipped' &&
                               showTrackingFor === order.id ? (
-                                <div className='flex flex-col gap-1'>
+                                <div className='flex flex-col gap-1.5'>
                                   <input
                                     type='text'
                                     placeholder='Tracking # (optional)'
                                     value={trackingInputs[order.id] ?? ''}
                                     onChange={(e) =>
                                       setTrackingInputs((p) => ({
+                                        ...p,
+                                        [order.id]: e.target.value,
+                                      }))
+                                    }
+                                    className='border border-slate-300 bg-white px-2 py-1 text-[10px] text-slate-900 focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100'
+                                  />
+                                  <input
+                                    type='url'
+                                    placeholder='Tracking URL (optional)'
+                                    value={trackingUrlInputs[order.id] ?? ''}
+                                    onChange={(e) =>
+                                      setTrackingUrlInputs((p) => ({
                                         ...p,
                                         [order.id]: e.target.value,
                                       }))
@@ -458,6 +492,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                           order.id,
                                           'shipped',
                                           trackingInputs[order.id],
+                                          trackingUrlInputs[order.id],
                                         )
                                       }
                                       disabled={isUpdating}
@@ -764,6 +799,12 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                     <span className='font-bold'>Updated:</span>{' '}
                                     {new Date(order.updated_at).toLocaleString()}
                                   </div>
+                                  {order.shipped_at && (
+                                    <div>
+                                      <span className='font-bold'>Shipped:</span>{' '}
+                                      {new Date(order.shipped_at).toLocaleString()}
+                                    </div>
+                                  )}
                                   {order.fulfilled_at && (
                                     <div>
                                       <span className='font-bold'>Fulfilled:</span>{' '}
@@ -771,6 +812,26 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                     </div>
                                   )}
                                 </div>
+                                {order.shipping_tracking_number && (
+                                  <div className='mt-3 space-y-1 text-[10px]'>
+                                    <p className='font-black uppercase tracking-widest text-slate-400'>
+                                      Tracking
+                                    </p>
+                                    <p className='font-mono font-bold text-slate-700 dark:text-slate-300'>
+                                      {order.shipping_tracking_number}
+                                    </p>
+                                    {order.shipping_tracking_url && (
+                                      <a
+                                        href={order.shipping_tracking_url}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        className='font-black uppercase tracking-widest text-untele hover:opacity-80'
+                                      >
+                                        Track Package →
+                                      </a>
+                                    )}
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </td>

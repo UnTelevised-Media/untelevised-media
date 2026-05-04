@@ -29,7 +29,12 @@ function env(key: string, fallback = ''): string {
 
 const stripe = new Stripe(env('STRIPE_SECRET_KEY'), {
   apiVersion: '2026-04-22.dahlia' as Stripe.LatestApiVersion,
+  httpClient: Stripe.createFetchHttpClient(),
 });
+
+// Deno uses Web Crypto API — must use SubtleCryptoProvider for webhook verification.
+// Without this, constructEventAsync computes the wrong HMAC and always rejects.
+const cryptoProvider = Stripe.createSubtleCryptoProvider();
 
 function supabase() {
   return createClient(env('SUPABASE_URL'), env('SUPABASE_SERVICE_ROLE_KEY'), {
@@ -72,10 +77,32 @@ type EmailPayload =
       type: 'order-confirmation';
       to: string;
       orderNumber: string;
-      items: Array<{ title: string; formatType: string; qty: number }>;
+      items: Array<{ title: string; formatType: string; qty: number; unitPriceCents: number }>;
+      subtotalCents: number;
+      shippingCents: number;
+      taxCents: number;
       totalCents: number;
+      shippingAddress?: {
+        line1: string;
+        line2?: string | null;
+        city: string;
+        state: string;
+        postalCode: string;
+        country: string;
+      } | null;
+      hasDigital: boolean;
     }
-  | { type: 'digital-download'; to: string; orderNumber: string }
+  | {
+      type: 'digital-download';
+      to: string;
+      orderNumber: string;
+      items: Array<{
+        title: string;
+        formatLabel: string;
+        orderItemId: string;
+        storagePath: string;
+      }>;
+    }
   | {
       type: 'guest-download';
       to: string;
@@ -83,6 +110,12 @@ type EmailPayload =
       bookTitle: string;
       downloadUrl: string;
       expiresAt: string;
+      storagePath?: string;
+    }
+  | {
+      type: 'refund';
+      to: string;
+      orderNumber: string;
     };
 
 async function sendEmail(payload: EmailPayload): Promise<void> {
@@ -647,7 +680,17 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
 
   // 8. Per-item: author_sales + author_earnings + digital fulfillment
   const saleDate = new Date();
-  const guestDownloadLinks: Array<{ bookTitle: string; downloadUrl: string }> = [];
+  const guestDownloadLinks: Array<{
+    bookTitle: string;
+    downloadUrl: string;
+    storagePath: string;
+  }> = [];
+  const digitalEmailItems: Array<{
+    title: string;
+    formatLabel: string;
+    orderItemId: string;
+    storagePath: string;
+  }> = [];
 
   for (let idx = 0; idx < createdItems.length; idx++) {
     const createdItem = createdItems[idx] as {
@@ -725,7 +768,17 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
         max_downloads: 5,
         expires_at: expiresAt.toISOString(),
       });
-      if (dlErr) console.error('[webhook] digital_download insert failed:', dlErr.message);
+      if (dlErr) {
+        console.error('[webhook] digital_download insert failed:', dlErr.message);
+      } else {
+        // Collect for the download-ready email sent after the loop
+        digitalEmailItems.push({
+          title: meta.title,
+          formatLabel: meta.formatType.charAt(0).toUpperCase() + meta.formatType.slice(1),
+          orderItemId: createdItem.id,
+          storagePath,
+        });
+      }
     } else if (storagePath) {
       const guestExpiry = new Date();
       guestExpiry.setDate(guestExpiry.getDate() + 14);
@@ -748,6 +801,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
         guestDownloadLinks.push({
           bookTitle: meta.title,
           downloadUrl: `${siteUrl}/api/bookstore/download/guest?token=${token}`,
+          storagePath,
         });
       }
     }
@@ -787,28 +841,58 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
   // 10. Emails (fire-and-forget via Next.js internal API)
   const hasDigital = items.some((i) => i.isDigital && i.formatType !== 'tip');
 
+  // Build shipping address for the receipt if present (shippingAddr already declared above)
+  const shippingAddressForEmail = shippingAddr
+    ? {
+        line1: shippingAddr.line1 ?? '',
+        line2: shippingAddr.line2 ?? null,
+        city: shippingAddr.city ?? '',
+        state: shippingAddr.state ?? '',
+        postalCode: shippingAddr.postal_code ?? '',
+        country: shippingAddr.country ?? '',
+      }
+    : null;
+
   void sendEmail({
     type: 'order-confirmation',
     to: customerEmail,
     orderNumber,
-    items: items.map((i) => ({ title: i.title, formatType: i.formatType, qty: i.qty })),
+    items: items.map((i, idx) => ({
+      title: i.title,
+      formatType: i.formatType,
+      qty: i.qty,
+      unitPriceCents: orderItemRows[idx]?.unit_price_cents ?? 0,
+    })),
+    subtotalCents,
+    shippingCents,
+    taxCents,
     totalCents,
+    shippingAddress: shippingAddressForEmail,
+    hasDigital,
   });
 
-  if (clerkUserId && hasDigital) {
-    void sendEmail({ type: 'digital-download', to: customerEmail, orderNumber });
+  // Digital download email: auth users only, one email with all digital items + attachments
+  if (clerkUserId && digitalEmailItems.length > 0) {
+    void sendEmail({
+      type: 'digital-download',
+      to: customerEmail,
+      orderNumber,
+      items: digitalEmailItems,
+    });
   }
 
+  // Guest download emails: one per digital item (single-use tokens)
   for (const link of guestDownloadLinks) {
-    const expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + 14);
+    const guestExpiry = new Date();
+    guestExpiry.setDate(guestExpiry.getDate() + 14);
     void sendEmail({
       type: 'guest-download',
       to: customerEmail,
       orderNumber,
       bookTitle: link.bookTitle,
       downloadUrl: link.downloadUrl,
-      expiresAt: expiresAt.toISOString(),
+      expiresAt: guestExpiry.toISOString(),
+      storagePath: link.storagePath,
     });
   }
 }
@@ -829,14 +913,33 @@ async function handleRefund(charge: Stripe.Charge): Promise<void> {
 
   await db.from('orders').update({ status: 'refunded' }).eq('id', orderId);
 
-  const { data: items } = await db
+  // Revoke digital download access
+  const { data: digitalItems } = await db
     .from('order_items')
     .select('id')
     .eq('order_id', orderId)
     .eq('is_digital', true);
 
-  for (const item of (items ?? []) as Array<{ id: string }>) {
+  for (const item of (digitalItems ?? []) as Array<{ id: string }>) {
     await db.from('digital_downloads').update({ max_downloads: 0 }).eq('order_item_id', item.id);
+  }
+
+  // Send refund notification email
+  const { data: fullOrder } = await db
+    .from('orders')
+    .select('order_number, customer:customers(email)')
+    .eq('id', orderId)
+    .maybeSingle();
+
+  if (fullOrder) {
+    const customerEmail = (fullOrder.customer as { email: string } | null)?.email;
+    if (customerEmail) {
+      void sendEmail({
+        type: 'refund',
+        to: customerEmail,
+        orderNumber: fullOrder.order_number,
+      });
+    }
   }
 }
 
@@ -860,7 +963,9 @@ Deno.serve(async (req: Request) => {
       event = await stripe.webhooks.constructEventAsync(
         new Uint8Array(rawBody),
         sig,
-        webhookSecret
+        webhookSecret,
+        undefined,
+        cryptoProvider
       );
     } else {
       console.warn('[webhook] No STRIPE_WEBHOOK_SECRET — skipping signature verification');
