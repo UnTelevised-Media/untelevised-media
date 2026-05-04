@@ -260,6 +260,7 @@ export interface DigitalDownloadItem {
   formatLabel: string;
   orderItemId: string;
   storagePath: string;
+  downloadUrl?: string; // one-time token URL — lets customer download directly from email
 }
 
 export interface DigitalDownloadEmailParams {
@@ -276,18 +277,23 @@ export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParam
   const itemBlocks = params.items
     .map(
       (item) => `
-      <tr><td style="padding:14px 0;border-bottom:1px solid #222222;">
+      <tr><td style="padding:20px 0;border-bottom:1px solid #222222;">
         <p style="margin:0 0 2px;font-size:14px;font-weight:900;color:#ffffff;">${item.title}</p>
-        <p style="margin:0 0 10px;font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#888888;">${item.formatLabel}</p>
-        <a href="${vaultUrl}" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;text-decoration:none;">Download from Vault &rarr;</a>
+        <p style="margin:0 0 14px;font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#888888;">${item.formatLabel}</p>
+        ${
+          item.downloadUrl
+            ? `<a href="${item.downloadUrl}" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;text-decoration:none;">&#11015; Download Now</a>
+               <p style="margin:10px 0 0;font-size:10px;color:#666666;">Single-use link &mdash; saves the file directly to your device. Does not count against your vault limit.</p>`
+            : `<a href="${vaultUrl}" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;text-decoration:none;">Download from Vault &rarr;</a>`
+        }
       </td></tr>`
     )
     .join('');
 
   const content = `
-    <p style="margin:0 0 4px;font-size:26px;font-weight:900;color:#ffffff;">Downloads Ready</p>
+    <p style="margin:0 0 4px;font-size:26px;font-weight:900;color:#ffffff;">Your Download Is Ready</p>
     <p style="margin:0 0 24px;font-size:13px;color:#888888;">
-      Your digital purchase for order <strong style="color:#e5e5e5;">${params.orderNumber}</strong> is ready.
+      Order <strong style="color:#e5e5e5;">${params.orderNumber}</strong> &mdash; click the button below to save your file.
     </p>
 
     <table width="100%" cellpadding="0" cellspacing="0">
@@ -296,7 +302,7 @@ export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParam
 
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;">
       <tr><td style="background-color:#0d0d0d;border:1px solid #2a2a2a;padding:16px;">
-        <p style="margin:0 0 12px;font-size:12px;color:#aaaaaa;">All your digital purchases are in your Download Vault. Downloads are valid for 1 year (up to 5 per title).</p>
+        <p style="margin:0 0 12px;font-size:12px;color:#aaaaaa;">All your purchases are also in your <a href="${vaultUrl}" style="color:#D70606;">Download Vault</a> &mdash; available for 1 year, up to 5 downloads per title.</p>
         <a href="${vaultUrl}" style="display:inline-block;border:1px solid #D70606;color:#D70606;font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;padding:10px 20px;text-decoration:none;">Open Download Vault &rarr;</a>
       </td></tr>
     </table>`;

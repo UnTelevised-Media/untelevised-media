@@ -101,6 +101,7 @@ type EmailPayload =
         formatLabel: string;
         orderItemId: string;
         storagePath: string;
+        downloadUrl?: string;
       }>;
     }
   | {
@@ -690,6 +691,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     formatLabel: string;
     orderItemId: string;
     storagePath: string;
+    downloadUrl?: string;
   }> = [];
 
   for (let idx = 0; idx < createdItems.length; idx++) {
@@ -771,12 +773,34 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
       if (dlErr) {
         console.error('[webhook] digital_download insert failed:', dlErr.message);
       } else {
+        // Create a single-use email download token so the customer can download
+        // directly from the email without needing to log in first.
+        let emailDownloadUrl: string | undefined;
+        if (storagePath) {
+          const emailToken = crypto.randomUUID();
+          const emailExpiry = new Date();
+          emailExpiry.setDate(emailExpiry.getDate() + 30);
+          const { error: etErr } = await db.from('guest_download_tokens').insert({
+            order_id: orderId,
+            book_title: meta.title,
+            format_label: meta.formatType,
+            supabase_storage_path: storagePath,
+            guest_email: customerEmail,
+            token: emailToken,
+            max_downloads: 1,
+            expires_at: emailExpiry.toISOString(),
+          });
+          if (!etErr) {
+            emailDownloadUrl = `${siteUrl}/api/bookstore/download/guest?token=${emailToken}`;
+          }
+        }
         // Collect for the download-ready email sent after the loop
         digitalEmailItems.push({
           title: meta.title,
           formatLabel: meta.formatType.charAt(0).toUpperCase() + meta.formatType.slice(1),
           orderItemId: createdItem.id,
           storagePath,
+          downloadUrl: emailDownloadUrl,
         });
       }
     } else if (storagePath) {

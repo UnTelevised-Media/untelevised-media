@@ -72,10 +72,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'File not yet available' }, { status: 404 });
   }
 
-  // Generate signed URL
+  // Generate signed URL — { download: filename } adds Content-Disposition: attachment
+  // so the browser saves the file instead of opening it in a tab.
+  const filename = download.supabase_storage_path.split('/').pop() ?? 'download';
   const { data: signedData, error: signError } = await shopServiceClient.storage
     .from('digital-books')
-    .createSignedUrl(download.supabase_storage_path, SIGNED_URL_TTL_SECONDS);
+    .createSignedUrl(download.supabase_storage_path, SIGNED_URL_TTL_SECONDS, {
+      download: filename,
+    });
 
   if (signError || !signedData?.signedUrl) {
     console.error('[shop/download] Signed URL error:', signError?.message);

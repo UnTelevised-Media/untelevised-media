@@ -55,10 +55,13 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  // Generate signed URL
+  // { download: filename } adds Content-Disposition: attachment so browser saves the file.
+  const filename = record.supabase_storage_path.split('/').pop() ?? 'download';
   const { data: signedData, error: signError } = await shopServiceClient.storage
     .from('digital-books')
-    .createSignedUrl(record.supabase_storage_path, SIGNED_URL_TTL_SECONDS);
+    .createSignedUrl(record.supabase_storage_path, SIGNED_URL_TTL_SECONDS, {
+      download: filename,
+    });
 
   if (signError || !signedData?.signedUrl) {
     console.error('[guest-download] Signed URL error:', signError?.message);
