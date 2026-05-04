@@ -773,28 +773,25 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
       if (dlErr) {
         console.error('[webhook] digital_download insert failed:', dlErr.message);
       } else {
-        // Create a single-use email download token so the customer can download
-        // directly from the email without needing to log in first.
+        // Generate a 30-day Supabase signed URL directly — embedded in the email so
+        // the customer clicks once and the file saves. No intermediate API route.
         let emailDownloadUrl: string | undefined;
         if (storagePath) {
-          const emailToken = crypto.randomUUID();
-          const emailExpiry = new Date();
-          emailExpiry.setDate(emailExpiry.getDate() + 30);
-          const { error: etErr } = await db.from('guest_download_tokens').insert({
-            order_id: orderId,
-            book_title: meta.title,
-            format_label: meta.formatType,
-            supabase_storage_path: storagePath,
-            guest_email: customerEmail,
-            token: emailToken,
-            max_downloads: 1,
-            expires_at: emailExpiry.toISOString(),
-          });
-          if (!etErr) {
-            emailDownloadUrl = `${siteUrl}/api/bookstore/download/guest?token=${emailToken}`;
+          const filename = storagePath.split('/').pop() ?? 'download';
+          const { data: signedData, error: signErr } = await db.storage
+            .from('digital-books')
+            .createSignedUrl(storagePath, 30 * 24 * 3600, { download: filename });
+          if (signErr || !signedData?.signedUrl) {
+            console.error(
+              '[webhook] email signed URL failed:',
+              signErr?.message,
+              'path:',
+              storagePath
+            );
+          } else {
+            emailDownloadUrl = signedData.signedUrl;
           }
         }
-        // Collect for the download-ready email sent after the loop
         digitalEmailItems.push({
           title: meta.title,
           formatLabel: meta.formatType.charAt(0).toUpperCase() + meta.formatType.slice(1),
@@ -804,27 +801,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
         });
       }
     } else if (storagePath) {
-      const guestExpiry = new Date();
-      guestExpiry.setDate(guestExpiry.getDate() + 30);
-      const token = crypto.randomUUID();
-
-      const { error: tokenErr } = await db.from('guest_download_tokens').insert({
-        order_id: orderId,
-        book_title: meta.title,
-        format_label: meta.formatType,
-        supabase_storage_path: storagePath,
-        guest_email: customerEmail,
-        token,
-        max_downloads: 1,
-        expires_at: guestExpiry.toISOString(),
-      });
-
-      if (tokenErr) {
-        console.error('[webhook] guest_download_token insert failed:', tokenErr.message);
+      // Guest purchase — generate a 30-day signed URL directly for the email.
+      const filename = storagePath.split('/').pop() ?? 'download';
+      const { data: signedData, error: signErr } = await db.storage
+        .from('digital-books')
+        .createSignedUrl(storagePath, 30 * 24 * 3600, { download: filename });
+      if (signErr || !signedData?.signedUrl) {
+        console.error(
+          '[webhook] guest signed URL failed:',
+          signErr?.message,
+          'path:',
+          storagePath
+        );
       } else {
         guestDownloadLinks.push({
           bookTitle: meta.title,
-          downloadUrl: `${siteUrl}/api/bookstore/download/guest?token=${token}`,
+          downloadUrl: signedData.signedUrl,
           storagePath,
         });
       }

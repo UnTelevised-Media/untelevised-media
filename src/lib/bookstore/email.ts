@@ -206,9 +206,10 @@ export async function sendOrderConfirmationEmail(params: OrderConfirmationParams
 
   const digitalCta = params.hasDigital
     ? `<table width="100%" cellpadding="0" cellspacing="0" style="margin-top:24px;">
-        <tr><td style="background-color:#0d0d0d;border:1px solid #2a2a2a;padding:16px 20px;">
-          <p style="margin:0 0 4px;font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#D70606;">Digital Download</p>
-          <p style="margin:0;font-size:13px;color:#aaaaaa;">Your download link has been sent to this email — check for a separate message titled <strong style="color:#e5e5e5;">Your Download Is Ready</strong>.</p>
+        <tr><td style="background-color:#0d0d0d;border:1px solid #2a2a2a;padding:20px;">
+          <p style="margin:0 0 6px;font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#D70606;">Digital Files Ready</p>
+          <p style="margin:0 0 16px;font-size:13px;color:#aaaaaa;">Your download link has been sent to this email &mdash; check for a separate message titled <strong style="color:#e5e5e5;">Your Download Is Ready</strong>. Logged-in customers can also re-download from the vault.</p>
+          <a href="${baseUrl}/bookstore/downloads" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;padding:10px 20px;text-decoration:none;">Access Download Vault &rarr;</a>
         </td></tr>
       </table>`
     : '';
@@ -271,6 +272,8 @@ export interface DigitalDownloadEmailParams {
 export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParams) {
   if (!isConfigured()) return;
 
+  const vaultUrl = `${baseUrl}/bookstore/downloads`;
+
   const itemBlocks = params.items
     .map(
       (item) => `
@@ -295,6 +298,13 @@ export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParam
 
     <table width="100%" cellpadding="0" cellspacing="0">
       ${itemBlocks}
+    </table>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;">
+      <tr><td style="background-color:#0d0d0d;border:1px solid #2a2a2a;padding:16px;">
+        <p style="margin:0 0 12px;font-size:12px;color:#aaaaaa;">All your purchases are also in your <a href="${vaultUrl}" style="color:#D70606;">Download Vault</a> &mdash; available for 1 year, up to 5 downloads per title.</p>
+        <a href="${vaultUrl}" style="display:inline-block;border:1px solid #D70606;color:#D70606;font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;padding:10px 20px;text-decoration:none;">Open Download Vault &rarr;</a>
+      </td></tr>
     </table>`;
 
   await getTransporter().sendMail({
