@@ -18,19 +18,24 @@ import type { FormatType } from './types';
 
 let _transporter: nodemailer.Transporter | null = null;
 
+// PowerShell echo pipes values with a leading BOM (﻿) and trailing \r\n into the
+// Vercel CLI, which stores them verbatim. Strip both before use.
+function cleanEnv(key: string): string {
+  return (process.env[key] ?? '').replace(/﻿/g, '').trim();
+}
+
 function getTransporter(): nodemailer.Transporter {
   if (!_transporter) {
-    // .trim() strips any trailing \r\n introduced by PowerShell echo piping to Vercel CLI
-    const host = (process.env.SMTP_HOST ?? '').trim();
-    const user = (process.env.SMTP_USER ?? '').trim();
-    const pass = (process.env.SMTP_PASS ?? '').trim();
+    const host = cleanEnv('SMTP_HOST');
+    const user = cleanEnv('SMTP_USER');
+    const pass = cleanEnv('SMTP_PASS');
     if (!host || !user || !pass) {
       throw new Error('[bookstore/email] SMTP_HOST, SMTP_USER, and SMTP_PASS must be set');
     }
     _transporter = nodemailer.createTransport({
       host,
-      port: parseInt((process.env.SMTP_PORT ?? '587').trim(), 10),
-      secure: process.env.SMTP_SECURE?.trim() === 'true',
+      port: parseInt(cleanEnv('SMTP_PORT') || '587', 10),
+      secure: cleanEnv('SMTP_SECURE') === 'true',
       auth: { user, pass },
     });
   }
@@ -38,8 +43,8 @@ function getTransporter(): nodemailer.Transporter {
 }
 
 // Gmail rejects MAIL FROM if the address isn't a verified alias on the authenticated account.
-// Always use the authenticated SMTP_USER address; add a display name for readability.
-const smtpUser = (process.env.SMTP_USER ?? '').trim();
+// Always use the authenticated SMTP_USER address with a display name.
+const smtpUser = cleanEnv('SMTP_USER');
 const from = smtpUser
   ? `Hurriya Publications <${smtpUser}>`
   : 'Hurriya Publications <orders@untelevised.media>';
