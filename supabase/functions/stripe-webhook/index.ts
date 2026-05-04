@@ -805,7 +805,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
       }
     } else if (storagePath) {
       const guestExpiry = new Date();
-      guestExpiry.setDate(guestExpiry.getDate() + 14);
+      guestExpiry.setDate(guestExpiry.getDate() + 30);
       const token = crypto.randomUUID();
 
       const { error: tokenErr } = await db.from('guest_download_tokens').insert({
