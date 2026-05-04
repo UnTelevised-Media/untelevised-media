@@ -20,26 +20,29 @@ let _transporter: nodemailer.Transporter | null = null;
 
 function getTransporter(): nodemailer.Transporter {
   if (!_transporter) {
-    const host = process.env.SMTP_HOST;
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
+    // .trim() strips any trailing \r\n introduced by PowerShell echo piping to Vercel CLI
+    const host = (process.env.SMTP_HOST ?? '').trim();
+    const user = (process.env.SMTP_USER ?? '').trim();
+    const pass = (process.env.SMTP_PASS ?? '').trim();
     if (!host || !user || !pass) {
       throw new Error('[bookstore/email] SMTP_HOST, SMTP_USER, and SMTP_PASS must be set');
     }
     _transporter = nodemailer.createTransport({
       host,
-      port: parseInt(process.env.SMTP_PORT ?? '587', 10),
-      secure: process.env.SMTP_SECURE === 'true',
+      port: parseInt((process.env.SMTP_PORT ?? '587').trim(), 10),
+      secure: process.env.SMTP_SECURE?.trim() === 'true',
       auth: { user, pass },
     });
   }
   return _transporter;
 }
 
-const from =
-  process.env.ORDERS_SMTP_FROM ??
-  process.env.SMTP_USER ??
-  'Hurriya Publications <orders@untelevised.media>';
+// Gmail rejects MAIL FROM if the address isn't a verified alias on the authenticated account.
+// Always use the authenticated SMTP_USER address; add a display name for readability.
+const smtpUser = (process.env.SMTP_USER ?? '').trim();
+const from = smtpUser
+  ? `Hurriya Publications <${smtpUser}>`
+  : 'Hurriya Publications <orders@untelevised.media>';
 
 const baseUrl =
   process.env.NEXT_PUBLIC_PRODUCTION_URL ??
