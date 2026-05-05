@@ -8,7 +8,7 @@ import type { Metadata } from 'next';
 import { PortableText } from '@portabletext/react';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
-import { queryBookBySlug, queryAllBooks } from '@/lib/sanity/lib/queries';
+import { queryBookBySlug, queryAllBooks, queryApprovedReviewsByBookSlug } from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/lib/bookstore/types';
 import urlForImage from '@/util/urlForImage';
 import AddToCartButton from '@/components/bookstore/AddToCartButton';
@@ -16,6 +16,8 @@ import BuyNowButton from '@/components/bookstore/BuyNowButton';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
 import SocialShare from '@/components/global/SocialShare';
 import WishlistButton from '@/components/bookstore/WishlistButton';
+import BookReviews from '@/components/bookstore/BookReviews';
+import ReviewForm from '@/components/bookstore/ReviewForm';
 
 // JSON-LD structured data
 function buildProductJsonLd(book: SanityBook): string {
@@ -186,17 +188,33 @@ function RevenueTermsCard({
   );
 }
 
+interface BookReview {
+  _id: string;
+  reviewerName: string;
+  reviewerLocation?: string;
+  rating: number;
+  body: string;
+  submittedAt: string;
+}
+
 export default async function BookDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const book = await sanityFetch<SanityBook | null>({
-    query: queryBookBySlug,
-    params: { slug },
-    tags: ['book'],
-  });
+  const [book, reviews] = await Promise.all([
+    sanityFetch<SanityBook | null>({
+      query: queryBookBySlug,
+      params: { slug },
+      tags: ['book'],
+    }),
+    sanityFetch<BookReview[]>({
+      query: queryApprovedReviewsByBookSlug,
+      params: { slug },
+      tags: ['bookReview'],
+    }),
+  ]);
 
   if (!book || book.status === 'discontinued') notFound();
 
@@ -433,7 +451,7 @@ export default async function BookDetailPage({
 
             {/* Author bio */}
             {book.author && (
-              <div className='border border-hp-sand-border bg-hp-sand p-4 dark:border-hp-dark-border dark:bg-hp-dark-card'>
+              <div className='mb-6 border border-hp-sand-border bg-hp-sand p-4 dark:border-hp-dark-border dark:bg-hp-dark-card'>
                 <div className='mb-2 flex items-center gap-3'>
                   {authorCover && (
                     <div className='relative h-10 w-10 shrink-0 overflow-hidden'>
@@ -464,6 +482,12 @@ export default async function BookDetailPage({
                 )}
               </div>
             )}
+
+            {/* Reader reviews */}
+            <BookReviews reviews={reviews ?? []} bookSlug={slug} />
+
+            {/* Review submission form */}
+            <ReviewForm bookSlug={slug} />
           </div>
         </div>
       </main>
