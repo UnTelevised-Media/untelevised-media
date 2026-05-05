@@ -117,6 +117,16 @@ type EmailPayload =
       type: 'refund';
       to: string;
       orderNumber: string;
+    }
+  | {
+      type: 'gift';
+      to: string;
+      bookTitle: string;
+      bookCoverUrl?: string;
+      fromName?: string;
+      anonymous: boolean;
+      downloadUrl: string;
+      expiresAt: string;
     };
 
 async function sendEmail(payload: EmailPayload): Promise<void> {
@@ -446,6 +456,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
   const clerkUserId = session.metadata?.clerk_user_id || null;
   const customerEmail = session.customer_details?.email ?? '';
   const customerName = session.customer_details?.name ?? undefined;
+
+  // Gift purchasing metadata
+  const giftRecipientEmail = session.metadata?.gift_recipient_email || null;
+  const giftFromName = session.metadata?.gift_from_name || null;
+  const giftAnonymous = session.metadata?.gift_anonymous === 'true';
+  const isGift = !!giftRecipientEmail;
 
   if (!customerEmail) {
     console.error('[webhook] No customer email on session', session.id);
@@ -897,19 +913,37 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     });
   }
 
-  // Guest download emails: one per digital item (single-use tokens)
-  for (const link of guestDownloadLinks) {
-    const guestExpiry = new Date();
-    guestExpiry.setDate(guestExpiry.getDate() + 14);
-    void sendEmail({
-      type: 'guest-download',
-      to: customerEmail,
-      orderNumber,
-      bookTitle: link.bookTitle,
-      downloadUrl: link.downloadUrl,
-      expiresAt: guestExpiry.toISOString(),
-      storagePath: link.storagePath,
-    });
+  if (isGift && guestDownloadLinks.length > 0) {
+    // Gift purchase: send gift email(s) to recipient, order confirmation only to buyer
+    const giftExpiry = new Date();
+    giftExpiry.setDate(giftExpiry.getDate() + 14);
+
+    for (const link of guestDownloadLinks) {
+      void sendEmail({
+        type: 'gift',
+        to: giftRecipientEmail!,
+        bookTitle: link.bookTitle,
+        fromName: giftFromName ?? undefined,
+        anonymous: giftAnonymous,
+        downloadUrl: link.downloadUrl,
+        expiresAt: giftExpiry.toISOString(),
+      });
+    }
+  } else {
+    // Standard guest download emails: one per digital item
+    for (const link of guestDownloadLinks) {
+      const guestExpiry = new Date();
+      guestExpiry.setDate(guestExpiry.getDate() + 14);
+      void sendEmail({
+        type: 'guest-download',
+        to: customerEmail,
+        orderNumber,
+        bookTitle: link.bookTitle,
+        downloadUrl: link.downloadUrl,
+        expiresAt: guestExpiry.toISOString(),
+        storagePath: link.storagePath,
+      });
+    }
   }
 }
 

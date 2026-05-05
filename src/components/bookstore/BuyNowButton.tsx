@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import type { SanityBook, SanityBookFormat, CheckoutPayload } from '@/lib/bookstore/types';
+import type { SanityBook, SanityBookFormat, CheckoutPayload, GiftOptions } from '@/lib/bookstore/types';
 
 interface Props {
   book: SanityBook;
   format: SanityBookFormat;
   label?: string;
   className?: string;
+  giftOptions?: GiftOptions | null;
 }
 
 export default function BuyNowButton({
@@ -15,6 +16,7 @@ export default function BuyNowButton({
   format,
   label = 'Buy Now',
   className,
+  giftOptions,
 }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,6 +41,7 @@ export default function BuyNowButton({
           isDigital: format.formatType === 'digital',
         },
       ],
+      ...(giftOptions ? { giftOptions } : {}),
     };
 
     try {

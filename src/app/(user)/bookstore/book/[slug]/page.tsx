@@ -11,13 +11,12 @@ import sanityClient from '@/lib/sanity/lib/client';
 import { queryBookBySlug, queryAllBooks, queryApprovedReviewsByBookSlug } from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/lib/bookstore/types';
 import urlForImage from '@/util/urlForImage';
-import AddToCartButton from '@/components/bookstore/AddToCartButton';
-import BuyNowButton from '@/components/bookstore/BuyNowButton';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
 import SocialShare from '@/components/global/SocialShare';
 import WishlistButton from '@/components/bookstore/WishlistButton';
 import BookReviews from '@/components/bookstore/BookReviews';
 import ReviewForm from '@/components/bookstore/ReviewForm';
+import BookBuySection from '@/components/bookstore/BookBuySection';
 
 // JSON-LD structured data
 function buildProductJsonLd(book: SanityBook): string {
@@ -321,105 +320,24 @@ export default async function BookDetailPage({
               </div>
             )}
 
-            {/* Format selector + buy CTAs */}
-            <div className='mb-6'>
-              <div className='mb-3 flex items-center gap-3'>
-                <div className='bg-untele px-2 py-0.5'>
-                  <span className='text-[10px] font-black uppercase tracking-widest text-white'>
-                    Buy
-                  </span>
-                </div>
-              </div>
+            {/* Format selector + gift toggle + buy CTAs */}
+            <BookBuySection book={book} isOutOfStock={isOutOfStock} />
 
-              {isOutOfStock ? (
-                <div className='border border-hp-sand-border bg-hp-sand px-4 py-3 dark:border-hp-dark-border dark:bg-hp-dark-card'>
-                  <p className='text-xs font-bold uppercase tracking-widest text-slate-500'>
-                    Currently Out of Stock
-                  </p>
-                </div>
-              ) : (
-                <div className='flex flex-col gap-3'>
-                  {book.formats?.map((format) => {
-                    const outOfStock =
-                      format.inventory?.trackInventory &&
-                      format.inventory.quantity === 0 &&
-                      !format.inventory.allowBackorder;
-                    const lowStock =
-                      format.inventory?.trackInventory &&
-                      format.inventory.quantity > 0 &&
-                      format.inventory.quantity <= (format.inventory.lowStockThreshold ?? 5);
-
-                    return (
-                      <div
-                        key={format._key}
-                        className='flex flex-col gap-2 border border-hp-sand-border bg-white p-4 dark:border-hp-dark-border dark:bg-hp-dark-card sm:flex-row sm:items-center sm:justify-between'
-                      >
-                        <div>
-                          <p className='text-sm font-black uppercase tracking-wide text-slate-900 dark:text-hp-cream'>
-                            {format.formatType === 'physical' && 'Physical Book'}
-                            {format.formatType === 'digital' && 'Digital Edition'}
-                            {format.formatType === 'bundle' && 'Physical + Digital Bundle'}
-                          </p>
-                          {format.formatType === 'digital' && format.digitalAsset && (
-                            <p className='text-[10px] text-slate-400'>
-                              {format.digitalAsset.fileFormat}
-                              {format.digitalAsset.fileSize ? ` · ${format.digitalAsset.fileSize}` : ''}
-                            </p>
-                          )}
-                          {format.formatType !== 'digital' && format.dimensions && (
-                            <p className='text-[10px] text-slate-400'>{format.dimensions}</p>
-                          )}
-                          {lowStock && (
-                            <p className='text-[10px] font-bold text-amber-500'>
-                              Only {format.inventory?.quantity} left
-                            </p>
-                          )}
-                          {outOfStock && (
-                            <p className='text-[10px] font-bold text-slate-400'>Out of stock</p>
-                          )}
-                        </div>
-                        <div className='flex flex-wrap items-center gap-3'>
-                          <div className='text-right'>
-                            {format.compareAtPrice != null && (
-                              <p className='text-xs text-slate-400 line-through'>
-                                ${format.compareAtPrice.toFixed(2)}
-                              </p>
-                            )}
-                            <p className='text-lg font-black text-untele'>
-                              ${format.price.toFixed(2)}
-                            </p>
-                          </div>
-                          {!outOfStock && (
-                            <div className='flex flex-wrap gap-2'>
-                              <AddToCartButton book={book} format={format} />
-                              {format.stripePriceId && (
-                                <BuyNowButton book={book} format={format} />
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Tip the author */}
-              {book.author?.tipStripeProductId && (
-                <TipAuthorRow
-                  author={
-                    book.author as {
-                      _id: string;
-                      name: string;
-                      slug?: { current: string };
-                      tipStripeProductId: string;
-                      tipAmount: number;
-                    }
+            {/* Tip the author */}
+            {book.author?.tipStripeProductId && (
+              <TipAuthorRow
+                author={
+                  book.author as {
+                    _id: string;
+                    name: string;
+                    slug?: { current: string };
+                    tipStripeProductId: string;
+                    tipAmount: number;
                   }
-                  bookId={book._id}
-                />
-              )}
-            </div>
+                }
+                bookId={book._id}
+              />
+            )}
 
             {/* Book details */}
             <div className='mb-6'>
