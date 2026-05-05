@@ -14,6 +14,7 @@ import urlForImage from '@/util/urlForImage';
 import AddToCartButton from '@/components/bookstore/AddToCartButton';
 import BuyNowButton from '@/components/bookstore/BuyNowButton';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
+import SocialShare from '@/components/global/SocialShare';
 
 // JSON-LD structured data
 function buildProductJsonLd(book: SanityBook): string {
@@ -71,15 +72,41 @@ export async function generateMetadata({
 
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(1200).height(630).url()
-    : book.coverImageUrl;
+    : (book.coverImageUrl ?? null);
+
+  const lowestPrice = book.formats?.reduce<number | null>((min, f) => {
+    if (min === null) return f.price;
+    return f.price < min ? f.price : min;
+  }, null);
+
+  const genres = book.genre?.map((g) => g.title).join(', ');
+  const description = [
+    book.author?.name ? `By ${book.author.name}.` : null,
+    genres,
+    lowestPrice != null ? `From $${lowestPrice.toFixed(2)}.` : null,
+    'Available now in the Hurriya Publications bookstore.',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const ogImages = cover
+    ? [{ url: cover, width: 1200, height: 630, alt: book.title }]
+    : [{ url: '/hurriya-pub/Logo-alt.png', width: 1200, height: 630, alt: 'Hurriya Publications' }];
 
   return {
-    title: `${book.title} — UnTelevised Media Bookstore`,
-    description: `By ${book.author?.name ?? 'Unknown'}. Available now in the UnTelevised Media Bookstore.`,
+    title: `${book.title} — Hurriya Publications`,
+    description,
     openGraph: {
       title: book.title,
-      images: cover ? [{ url: cover }] : [],
+      description,
       type: 'website',
+      images: ogImages,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: book.title,
+      description,
+      images: [cover ?? '/hurriya-pub/Logo-alt.png'],
     },
   };
 }
@@ -384,6 +411,14 @@ export default async function BookDetailPage({
             {book.revenueTerms && (
               <RevenueTermsCard terms={book.revenueTerms} />
             )}
+
+            {/* Social sharing */}
+            <div className='mb-6'>
+              <SocialShare
+                url={`${process.env.NEXT_PUBLIC_PRODUCTION_URL ?? ''}/bookstore/book/${book.slug.current}`}
+                title={book.title}
+              />
+            </div>
 
             {/* Author bio */}
             {book.author && (
