@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Header from '@/components/global/Header';
 import HeaderLogo from '@/components/global/HeaderLogo';
 import Footer from '@/components/global/Footer';
+import BookstoreFooterNav from '@/components/bookstore/BookstoreFooterNav';
 import { SanityLive } from '@/lib/sanity/lib/live';
 
 export default function BookstoreLayout({ children }: { children: React.ReactNode }) {
@@ -88,6 +89,7 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
       {/* ── Page content ── */}
       {children}
 
+      <BookstoreFooterNav />
       <Footer />
       <SanityLive />
     </div>
