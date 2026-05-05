@@ -379,12 +379,25 @@ export const queryAllAuthors = groq`
 `;
 export const queryAuthorBySlug = groq`
   *[_type == 'author' && slug.current == $slug][0] {
-    ...,
-    'relatedArticles': *[_type == 'article' && references(^._id)]| order(_createdAt desc) {
-      ...,
-      author->,
-      categories[]->,
-      publishedAt,
+    _id, name, slug, title, bio, image,
+    twitter, instagram, facebook, tiktok, youtube, linkedin, website, email,
+    credentials, expertise, sameAs, location, isActive, isLiteraryAuthor,
+    tipStripeProductId, tipAmount,
+    'relatedArticles': *[_type == 'article' && author._ref == ^._id] | order(_createdAt desc) {
+      _id, title, slug, description, publishedAt, mainImage,
+      'categories': categories[]->{ _id, title, slug },
+    },
+    'books': *[_type == 'book' && author._ref == ^._id && status in ["published", "out-of-stock"]] | order(publishedAt desc) {
+      _id, title, slug, status, featured, publishedAt,
+      coverImage { asset, alt }, coverImageUrl,
+      "genre": genre[]->{ _id, title, slug },
+      "author": author->{ _id, name, slug, tipStripeProductId, tipAmount, image { asset, alt } },
+      formats[] {
+        _key, formatType, price, compareAtPrice,
+        stripePriceId, stripeProductId,
+        inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },
+        digitalAsset { supabaseStoragePath, fileSize, fileFormat, version }
+      }
     }
   }
 `;
@@ -827,5 +840,12 @@ export const queryBooksByAuthorClerkId = groq`
 export const queryBooksByGenreSlug = groq`
   *[_type == "book" && status in ["published", "out-of-stock"] && $genreSlug in genre[]->slug.current] | order(publishedAt desc) {
     ${bookFragment}
+  }
+`;
+
+export const queryApprovedReviewsByBookSlug = groq`
+  *[_type == "bookReview" && book->slug.current == $slug && approved == true]
+  | order(submittedAt desc) {
+    _id, reviewerName, reviewerLocation, rating, body, submittedAt
   }
 `;
