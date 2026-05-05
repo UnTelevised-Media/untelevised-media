@@ -84,12 +84,14 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
             />
           </div>
         </div>
+
+        {/* ── Section nav — bottom strip of the banner ── */}
+        <BookstoreFooterNav />
       </section>
 
       {/* ── Page content ── */}
       {children}
 
-      <BookstoreFooterNav />
       <Footer />
       <SanityLive />
     </div>
