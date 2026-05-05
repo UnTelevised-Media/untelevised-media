@@ -10,6 +10,7 @@ import {
   FaInstagram,
   FaReddit,
   FaDiscord,
+  FaTelegram,
 } from 'react-icons/fa';
 import { FaThreads } from 'react-icons/fa6';
 import { MdLiveTv } from 'react-icons/md';
@@ -181,6 +182,14 @@ async function Footer() {
           >
             <FaDiscord className='h-4 w-4' />
             Discord
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://t.me/UnTelevised_Media'
+            target='_blank'
+          >
+            <FaTelegram className='h-4 w-4' />
+            Telegram
           </Link>
           <Link
             className='flex items-center gap-x-2'
