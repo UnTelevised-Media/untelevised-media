@@ -6,8 +6,10 @@ import Link from 'next/link';
 const links = [
   { href: '/bookstore', label: 'Bookstore' },
   { href: '/bookstore/about', label: 'Our Story' },
+  { href: '/bookstore/wishlist', label: 'Wishlist' },
   { href: '/bookstore/orders', label: 'My Orders' },
   { href: '/bookstore/downloads', label: 'Download Vault' },
+  { href: '/bookstore/returns', label: 'Returns & Refunds' },
 ];
 
 export default function BookstoreFooterNav() {

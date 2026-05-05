@@ -17,6 +17,7 @@ import urlForImage from '@/util/urlForImage';
 import GenreFilter from '@/components/bookstore/GenreFilter';
 import BookCardActions from '@/components/bookstore/BookCardActions';
 import BookstoreNewsletter from '@/components/bookstore/BookstoreNewsletter';
+import WishlistButton from '@/components/bookstore/WishlistButton';
 
 export const metadata: Metadata = {
   title: 'Bookstore — Hurriya Publications',
@@ -81,6 +82,16 @@ function BookCard({ book }: { book: SanityBook }) {
               </span>
             </div>
           )}
+          {/* Wishlist star — top-right overlay */}
+          <div className='absolute right-1.5 top-1.5'>
+            <WishlistButton
+              slug={slug}
+              title={book.title}
+              coverImageUrl={cover ?? undefined}
+              authorName={book.author?.name}
+              price={book.formats?.[0]?.price}
+            />
+          </div>
         </div>
         <div className='p-3 pb-1'>
           <p className='mb-0.5 text-[10px] font-bold uppercase tracking-widest text-hp-muted dark:text-hp-muted'>

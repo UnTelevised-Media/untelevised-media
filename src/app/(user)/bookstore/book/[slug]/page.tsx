@@ -15,6 +15,7 @@ import AddToCartButton from '@/components/bookstore/AddToCartButton';
 import BuyNowButton from '@/components/bookstore/BuyNowButton';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
 import SocialShare from '@/components/global/SocialShare';
+import WishlistButton from '@/components/bookstore/WishlistButton';
 
 // JSON-LD structured data
 function buildProductJsonLd(book: SanityBook): string {
@@ -264,9 +265,19 @@ export default async function BookDetailPage({
 
           {/* Book info */}
           <div className='flex-1'>
-            <p className='mb-1 text-[10px] font-bold uppercase tracking-widest text-hp-muted'>
-              {book.author?.name ?? 'Unknown Author'}
-            </p>
+            <div className='mb-1 flex items-center justify-between gap-3'>
+              <p className='text-[10px] font-bold uppercase tracking-widest text-hp-muted'>
+                {book.author?.name ?? 'Unknown Author'}
+              </p>
+              <WishlistButton
+                slug={book.slug.current}
+                title={book.title}
+                coverImageUrl={cover ?? undefined}
+                authorName={book.author?.name}
+                price={book.formats?.[0]?.price}
+                variant='full'
+              />
+            </div>
             <h1 className='mb-2 text-3xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-hp-cream lg:text-5xl'>
               {book.title}
             </h1>

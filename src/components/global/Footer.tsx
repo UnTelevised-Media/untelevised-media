@@ -78,8 +78,10 @@ async function Footer() {
             </h4>
             <Link href='/bookstore'>Hurriya Publications</Link>
             <Link href='/bookstore/about'>Our Story</Link>
+            <Link href='/bookstore/wishlist'>Wishlist</Link>
             <Link href='/bookstore/orders'>My Orders</Link>
             <Link href='/bookstore/downloads'>Download Vault</Link>
+            <Link href='/bookstore/returns'>Returns &amp; Refunds</Link>
             <Link href='/secure-contact'>Publish With Us</Link>
           </div>
 
