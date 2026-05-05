@@ -7,7 +7,7 @@ const links = [
   { href: '/bookstore', label: 'Bookstore' },
   { href: '/bookstore/about', label: 'Our Story' },
   { href: '/bookstore/orders', label: 'My Orders' },
-  { href: '/bookstore/downloads', label: 'Downloads' },
+  { href: '/bookstore/downloads', label: 'Download Vault' },
 ];
 
 export default function BookstoreFooterNav() {
