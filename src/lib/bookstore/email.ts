@@ -103,6 +103,17 @@ function emailLayout(content: string, title: string): string {
           </td>
         </tr>
 
+        <!-- Transactional disclosure -->
+        <tr>
+          <td style="padding:12px 32px;border-top:1px solid #222222;text-align:center;">
+            <p style="margin:0;font-size:10px;color:#555555;line-height:1.6;">
+              This is a transactional email related to your Hurriya Publications purchase or account activity.
+              If you believe you received this in error, contact
+              <a href="mailto:bookstore@untelevised.media" style="color:#D70606;">bookstore@untelevised.media</a>.
+            </p>
+          </td>
+        </tr>
+
       </table>
     </td></tr>
   </table>
