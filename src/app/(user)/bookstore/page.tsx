@@ -16,15 +16,31 @@ import type { SanityBook, SanityBookGenre } from '@/lib/bookstore/types';
 import urlForImage from '@/util/urlForImage';
 import GenreFilter from '@/components/bookstore/GenreFilter';
 import BookCardActions from '@/components/bookstore/BookCardActions';
+import BookstoreNewsletter from '@/components/bookstore/BookstoreNewsletter';
 
 export const metadata: Metadata = {
-  title: 'Bookstore — UnTelevised Media',
+  title: 'Bookstore — Hurriya Publications',
   description:
-    'Independent books by literary authors. Physical and digital editions. Unfiltered. Uncensored. Uncompromising.',
+    'Independent books by literary authors. Author-first revenue. Physical and digital editions. An UnTelevised Media imprint.',
   openGraph: {
-    title: 'Bookstore — UnTelevised Media',
-    description: 'Independent books by literary authors — UnTelevised Media',
+    title: 'Hurriya Publications Bookstore',
+    description:
+      'Independent books by literary authors — author-first revenue, transparent splits, direct tipping. An UnTelevised Media imprint.',
     type: 'website',
+    images: [
+      {
+        url: '/hurriya-pub/Logo-alt.png',
+        width: 1200,
+        height: 630,
+        alt: 'Hurriya Publications — An UnTelevised Media Imprint',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hurriya Publications Bookstore',
+    description: 'Independent books by literary authors — author-first revenue. An UnTelevised Media imprint.',
+    images: ['/hurriya-pub/Logo-alt.png'],
   },
 };
 
@@ -243,6 +259,11 @@ export default async function ShopPage({
             ))}
           </div>
         )}
+      </section>
+
+      {/* Newsletter signup */}
+      <section className='mt-12'>
+        <BookstoreNewsletter source='bookstore-home' />
       </section>
     </main>
   );
