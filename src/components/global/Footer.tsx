@@ -69,25 +69,28 @@ async function Footer() {
             ))}
         </div>
 
-        {/* Music Section */}
-        <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
-          <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
-            Music & Artists
-          </h4>
-          <ClientSideRoute route='/lyrics'>Music & Lyrics</ClientSideRoute>
-          <ClientSideRoute route='/music-artists'>Featured Artists</ClientSideRoute>
-        </div>
+        {/* Bookstore + Music — shared column on desktop */}
+        <div className='flex flex-col gap-6'>
+          {/* Bookstore */}
+          <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
+            <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
+              Bookstore
+            </h4>
+            <Link href='/bookstore'>Hurriya Publications</Link>
+            <Link href='/bookstore/about'>Our Story</Link>
+            <Link href='/bookstore/orders'>My Orders</Link>
+            <Link href='/bookstore/downloads'>Download Vault</Link>
+            <Link href='/secure-contact'>Publish With Us</Link>
+          </div>
 
-        {/* Bookstore */}
-        <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
-          <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
-            Bookstore
-          </h4>
-          <Link href='/bookstore'>Hurriya Publications</Link>
-          <Link href='/bookstore/about'>Our Story</Link>
-          <Link href='/bookstore/orders'>My Orders</Link>
-          <Link href='/bookstore/downloads'>Download Vault</Link>
-          <Link href='/secure-contact'>Publish With Us</Link>
+          {/* Music Section */}
+          <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
+            <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
+              Music & Artists
+            </h4>
+            <ClientSideRoute route='/lyrics'>Music & Lyrics</ClientSideRoute>
+            <ClientSideRoute route='/music-artists'>Featured Artists</ClientSideRoute>
+          </div>
         </div>
 
         {/* Media */}
