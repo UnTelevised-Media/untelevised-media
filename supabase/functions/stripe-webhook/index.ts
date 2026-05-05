@@ -914,7 +914,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
   }
 
   if (isGift && guestDownloadLinks.length > 0) {
-    // Gift purchase: send gift email(s) to recipient, order confirmation only to buyer
+    // Gift purchase: send gift email to recipient, standard order confirmation to buyer
     const giftExpiry = new Date();
     giftExpiry.setDate(giftExpiry.getDate() + 14);
 
@@ -930,7 +930,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
       });
     }
   } else {
-    // Standard guest download emails: one per digital item
+    // Standard guest download emails: one per digital item (single-use tokens)
     for (const link of guestDownloadLinks) {
       const guestExpiry = new Date();
       guestExpiry.setDate(guestExpiry.getDate() + 14);

@@ -4,6 +4,11 @@
 
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Header from '@/components/global/Header';
+import HeaderLogo from '@/components/global/HeaderLogo';
+import Footer from '@/components/global/Footer';
+import BookstoreFooterNav from '@/components/bookstore/BookstoreFooterNav';
+import { SanityLive } from '@/lib/sanity/lib/live';
 
 export const metadata: Metadata = {
   openGraph: {
@@ -23,11 +28,6 @@ export const metadata: Metadata = {
     images: ['/hurriya-pub/Logo-alt.png'],
   },
 };
-import Header from '@/components/global/Header';
-import HeaderLogo from '@/components/global/HeaderLogo';
-import Footer from '@/components/global/Footer';
-import BookstoreFooterNav from '@/components/bookstore/BookstoreFooterNav';
-import { SanityLive } from '@/lib/sanity/lib/live';
 
 export default function BookstoreLayout({ children }: { children: React.ReactNode }) {
   return (

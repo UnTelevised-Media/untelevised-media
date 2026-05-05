@@ -427,6 +427,27 @@ export async function sendShipmentEmail(params: ShipmentEmailParams) {
 // 5. Refund Confirmation
 // ---------------------------------------------------------------------------
 
+export async function sendRefundEmail(params: { to: string; orderNumber: string }) {
+  if (!isConfigured()) return;
+
+  const content = `
+    <p style="margin:0 0 4px;font-size:26px;font-weight:900;color:#ffffff;">Refund Processed</p>
+    <p style="margin:0 0 24px;font-size:13px;color:#aaaaaa;">
+      Your refund for order <strong style="color:#e5e5e5;">${params.orderNumber}</strong> has been processed.
+      Please allow 5&ndash;10 business days for the credit to appear on your statement.
+    </p>
+    <p style="margin:0;font-size:12px;color:#666666;">
+      Questions? <a href="${baseUrl}/secure-contact" style="color:#D70606;">Contact us</a>
+    </p>`;
+
+  await getTransporter().sendMail({
+    from,
+    to: params.to,
+    subject: `Refund Processed — ${params.orderNumber} | Hurriya Publications`,
+    html: emailLayout(content, `Refund Processed — ${params.orderNumber}`),
+  });
+}
+
 // ---------------------------------------------------------------------------
 // 6. Gift Notification (to recipient, no pricing)
 // ---------------------------------------------------------------------------
@@ -494,30 +515,5 @@ export async function sendGiftEmail(params: GiftEmailParams) {
     to: params.to,
     subject: `${sender} sent you a book — ${params.bookTitle} | Hurriya Publications`,
     html: emailLayout(content, `Gift: ${params.bookTitle}`),
-  });
-}
-
-// ---------------------------------------------------------------------------
-// 5. Refund Confirmation
-// ---------------------------------------------------------------------------
-
-export async function sendRefundEmail(params: { to: string; orderNumber: string }) {
-  if (!isConfigured()) return;
-
-  const content = `
-    <p style="margin:0 0 4px;font-size:26px;font-weight:900;color:#ffffff;">Refund Processed</p>
-    <p style="margin:0 0 24px;font-size:13px;color:#aaaaaa;">
-      Your refund for order <strong style="color:#e5e5e5;">${params.orderNumber}</strong> has been processed.
-      Please allow 5&ndash;10 business days for the credit to appear on your statement.
-    </p>
-    <p style="margin:0;font-size:12px;color:#666666;">
-      Questions? <a href="${baseUrl}/secure-contact" style="color:#D70606;">Contact us</a>
-    </p>`;
-
-  await getTransporter().sendMail({
-    from,
-    to: params.to,
-    subject: `Refund Processed — ${params.orderNumber} | Hurriya Publications`,
-    html: emailLayout(content, `Refund Processed — ${params.orderNumber}`),
   });
 }
