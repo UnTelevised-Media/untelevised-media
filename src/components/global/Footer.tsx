@@ -77,6 +77,18 @@ async function Footer() {
           <ClientSideRoute route='/music-artists'>Featured Artists</ClientSideRoute>
         </div>
 
+        {/* Bookstore */}
+        <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
+          <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
+            Bookstore
+          </h4>
+          <Link href='/bookstore'>Hurriya Publications</Link>
+          <Link href='/bookstore/about'>Our Story</Link>
+          <Link href='/bookstore/orders'>My Orders</Link>
+          <Link href='/bookstore/downloads'>Download Vault</Link>
+          <Link href='/secure-contact'>Publish With Us</Link>
+        </div>
+
         {/* Media */}
         <h4 className='pb-2 text-lg font-semibold text-foreground underline md:hidden'>Media</h4>
         <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
