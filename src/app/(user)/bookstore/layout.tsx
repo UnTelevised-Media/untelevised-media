@@ -2,7 +2,27 @@
 // Bookstore section layout — main header + Hurriya Publications sub-brand + footer.
 // No article category NavWrapper (bookstore has its own context).
 
+import type { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+  openGraph: {
+    siteName: 'Hurriya Publications — UnTelevised Media',
+    images: [
+      {
+        url: '/hurriya-pub/Logo-alt.png',
+        width: 1200,
+        height: 630,
+        alt: 'Hurriya Publications — An UnTelevised Media Imprint',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@untelevised',
+    images: ['/hurriya-pub/Logo-alt.png'],
+  },
+};
 import Header from '@/components/global/Header';
 import HeaderLogo from '@/components/global/HeaderLogo';
 import Footer from '@/components/global/Footer';

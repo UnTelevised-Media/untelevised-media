@@ -8,7 +8,7 @@ import Stripe from 'stripe';
 import CartClearer from '@/components/bookstore/CartClearer';
 
 export const metadata: Metadata = {
-  title: 'Order Confirmed — UnTelevised Media',
+  title: 'Order Confirmed — Hurriya Publications',
   robots: { index: false, follow: false },
 };
 

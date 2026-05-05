@@ -9,7 +9,7 @@ import { shopServiceClient } from '@/lib/bookstore/supabase';
 import type { Order, OrderItem } from '@/lib/bookstore/types';
 
 export const metadata: Metadata = {
-  title: 'My Orders — UnTelevised Media',
+  title: 'My Orders — Hurriya Publications',
   robots: { index: false, follow: false },
 };
 
