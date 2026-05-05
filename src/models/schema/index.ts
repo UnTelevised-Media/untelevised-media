@@ -3,6 +3,9 @@
 // Bookstore schemas
 import book, { bookFormat } from './book';
 import bookGenre from './bookGenre';
+import bookstoreSubscriber from './bookstoreSubscriber';
+import userWishlist from './userWishlist';
+import bookReview from './bookReview';
 
 // Content schemas
 import article from './article';
@@ -123,6 +126,9 @@ export const schemaTypes = [
   bookGenre,
   book,
   bookFormat,
+  bookstoreSubscriber,
+  userWishlist,
+  bookReview,
 ];
 
 // Export individual schemas for type safety
@@ -186,6 +192,9 @@ export {
   bookGenre,
   book,
   bookFormat,
+  bookstoreSubscriber,
+  userWishlist,
+  bookReview,
 };
 
 // Export default for convenience

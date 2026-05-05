@@ -259,6 +259,15 @@ export const queryPortalNewsletterSubscribers = groq`
   }
 `;
 
+export const queryPortalBookstoreSubscribers = groq`
+  *[_type == "bookstoreSubscriber"] | order(submittedAt desc) {
+    _id,
+    email,
+    submittedAt,
+    source
+  }
+`;
+
 // ---------------------------------------------------------------------------
 // News Briefs
 // ---------------------------------------------------------------------------
