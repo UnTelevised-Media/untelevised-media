@@ -238,8 +238,15 @@ export interface CheckoutLineItem {
   unitAmountCents?: number; // tips only — user-entered amount converted to cents
 }
 
+export interface GiftOptions {
+  recipientEmail: string;
+  fromName?: string;
+  anonymous: boolean;
+}
+
 export interface CheckoutPayload {
   items: CheckoutLineItem[];
   clerkUserId?: string;
   customerEmail?: string;
+  giftOptions?: GiftOptions;
 }

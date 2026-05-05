@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { auth } from '@clerk/nextjs/server';
-import type { CheckoutPayload, FormatType } from '@/lib/bookstore/types';
+import type { CheckoutPayload, FormatType, GiftOptions } from '@/lib/bookstore/types';
 import { checkCheckoutRate } from '@/lib/bookstore/ratelimit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
@@ -33,6 +33,18 @@ export async function POST(req: NextRequest) {
 
     if (!body.items || body.items.length === 0) {
       return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
+    }
+
+    // Validate gift options if present
+    const gift: GiftOptions | undefined = body.giftOptions;
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (gift) {
+      if (!gift.recipientEmail || !EMAIL_RE.test(gift.recipientEmail)) {
+        return NextResponse.json(
+          { error: 'Valid recipient email required for gift' },
+          { status: 400 }
+        );
+      }
     }
 
     // Validate non-tip items have a stripePriceId
@@ -135,6 +147,11 @@ export async function POST(req: NextRequest) {
         has_digital: String(hasDigital),
         has_physical: String(hasPhysical),
         items_json: JSON.stringify(itemsMeta), // Stripe limit is 500 chars per key; cart is validated to be short
+        ...(gift && {
+          gift_recipient_email: gift.recipientEmail,
+          gift_from_name: gift.fromName ?? '',
+          gift_anonymous: String(gift.anonymous),
+        }),
       },
     });
 
