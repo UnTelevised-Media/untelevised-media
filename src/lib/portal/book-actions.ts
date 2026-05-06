@@ -158,6 +158,15 @@ export async function uploadBookCover(formData: FormData): Promise<string> {
   console.log('[uploadBookCover] uploading to path:', storagePath);
   const supabase = getShopServiceClient();
 
+  // Delete any existing cover with a different extension (upsert only overwrites same path)
+  const { data: existingFiles } = await supabase.storage.from('book-covers').list(bookId);
+  const oldCovers = (existingFiles ?? [])
+    .filter((f) => f.name.startsWith('cover.') && f.name !== `cover.${ext}`)
+    .map((f) => `${bookId}/${f.name}`);
+  if (oldCovers.length > 0) {
+    await supabase.storage.from('book-covers').remove(oldCovers);
+  }
+
   const bytes = await file.arrayBuffer();
   console.log('[uploadBookCover] bytes read, byteLength:', bytes.byteLength);
 
@@ -210,6 +219,17 @@ export async function uploadDigitalAsset(formData: FormData): Promise<string> {
   const storagePath = `books/${bookId}/${formatKey}/${file.name}`;
   console.log('[uploadDigitalAsset] uploading to path:', storagePath);
   const supabase = getShopServiceClient();
+
+  // Delete any existing files in this format's folder (handles filename changes)
+  const { data: existingFiles } = await supabase.storage
+    .from('digital-books')
+    .list(`books/${bookId}/${formatKey}`);
+  const oldPaths = (existingFiles ?? [])
+    .filter((f) => f.name !== file.name)
+    .map((f) => `books/${bookId}/${formatKey}/${f.name}`);
+  if (oldPaths.length > 0) {
+    await supabase.storage.from('digital-books').remove(oldPaths);
+  }
 
   const bytes = await file.arrayBuffer();
   console.log('[uploadDigitalAsset] bytes read, byteLength:', bytes.byteLength);

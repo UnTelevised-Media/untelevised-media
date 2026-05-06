@@ -44,9 +44,11 @@ export default function EditBookModal({ book }: Props) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
-  // File input refs
-  const coverInputRef = useRef<HTMLInputElement>(null);
-  const digitalInputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  // Keep a ref to the latest book value so the open-effect can read it without
+  // having book in its dependency array — prevents a new book object reference
+  // (e.g. from a router.refresh()) wiping an in-progress file selection.
+  const bookRef = useRef(book);
+  useEffect(() => { bookRef.current = book; });
 
   // Fiction / Non-Fiction
   const [fictionType, setFictionType] = useState<'fiction' | 'non-fiction' | undefined>(undefined);
@@ -84,19 +86,22 @@ export default function EditBookModal({ book }: Props) {
   const [error, setError] = useState('');
   const [saved, setSaved] = useState(false);
 
-  // Populate form + load genres when modal opens
+  // Populate form + load genres when modal opens.
+  // Uses bookRef.current (not book) so a new book object reference from router.refresh()
+  // or hot-reload does NOT re-fire this effect and wipe an in-progress file selection.
   useEffect(() => {
     if (!open) return;
+    const b = bookRef.current;
 
-    setTitle(book.title);
-    setDescription(blocksToText(book.description));
-    setStatus(book.status);
-    setIsbn(book.isbn ?? '');
-    setPages(book.pages != null ? String(book.pages) : '');
-    setLanguage(book.language ?? 'en');
-    setPublishedAt(book.publishedAt ?? '');
+    setTitle(b.title);
+    setDescription(blocksToText(b.description));
+    setStatus(b.status);
+    setIsbn(b.isbn ?? '');
+    setPages(b.pages != null ? String(b.pages) : '');
+    setLanguage(b.language ?? 'en');
+    setPublishedAt(b.publishedAt ?? '');
     setEditFormats(
-      (book.formats ?? []).map((f) => ({
+      (b.formats ?? []).map((f) => ({
         key: f._key,
         formatType: f.formatType,
         price: String(f.price ?? ''),
@@ -104,14 +109,14 @@ export default function EditBookModal({ book }: Props) {
         existingAssetPath: f.digitalAsset?.supabaseStoragePath,
       })),
     );
-    setDigitalFiles((book.formats ?? []).map(() => null));
-    setSelectedGenreIds((book.genre ?? []).map((g) => g._id));
+    setDigitalFiles((b.formats ?? []).map(() => null));
+    setSelectedGenreIds((b.genre ?? []).map((g) => g._id));
     setCoverFile(null);
     setCoverPreview(null);
     setError('');
     setSaved(false);
 
-    setFictionType(book.fictionType ?? undefined);
+    setFictionType(b.fictionType ?? undefined);
     setGenreDropdownOpen(false);
     setShowGenreForm(false);
     setGenreTitle('');
@@ -122,7 +127,7 @@ export default function EditBookModal({ book }: Props) {
     fetchBookGenres()
       .then(setLocalGenres)
       .finally(() => setGenresLoading(false));
-  }, [open, book]);
+  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Close genre dropdown on outside click
   useEffect(() => {
@@ -165,8 +170,9 @@ export default function EditBookModal({ book }: Props) {
   }
 
   function handleCoverChange(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log('[EditBookModal] handleCoverChange fired, files:', e.target.files?.length);
     const file = e.target.files?.[0] ?? null;
-    console.log('[EditBookModal] cover file selected:', file?.name, file?.size);
+    console.log('[EditBookModal] cover file:', file?.name, file?.size, file?.type);
     if (!file) return;
     setCoverFile(file);
     if (coverPreview) URL.revokeObjectURL(coverPreview);
@@ -183,6 +189,12 @@ export default function EditBookModal({ book }: Props) {
     setError('');
 
     if (!title.trim()) { setError('Title is required.'); return; }
+
+    // Capture file values synchronously — prevents a mid-transition state reset
+    // (e.g. useEffect re-firing on book prop change) from nulling them out.
+    const pendingCoverFile = coverFile;
+    const pendingDigitalFiles = [...digitalFiles];
+    console.log('[EditBookModal] handleSubmit — pendingCoverFile:', pendingCoverFile?.name ?? 'null', '| digitalFiles:', pendingDigitalFiles.map(f => f?.name ?? 'null'));
 
     const formatPrices = editFormats
       .map((f) => ({
@@ -212,17 +224,22 @@ export default function EditBookModal({ book }: Props) {
           formatPrices,
         });
 
-        if (coverFile) {
+        console.log('[EditBookModal] updateBook done, pendingCoverFile:', pendingCoverFile?.name ?? 'null');
+        if (pendingCoverFile) {
+          console.log('[EditBookModal] uploading cover…');
           const fd = new FormData();
           fd.append('bookId', book._id);
-          fd.append('file', coverFile);
+          fd.append('file', pendingCoverFile);
           await uploadBookCover(fd);
+          console.log('[EditBookModal] cover upload done');
+        } else {
+          console.log('[EditBookModal] no cover file to upload');
         }
 
         for (let i = 0; i < editFormats.length; i++) {
           const fmt = editFormats[i];
           if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') continue;
-          const file = digitalFiles[i];
+          const file = pendingDigitalFiles[i];
           if (!file) continue;
           const fd = new FormData();
           fd.append('bookId', book._id);
@@ -301,9 +318,10 @@ export default function EditBookModal({ book }: Props) {
               <form onSubmit={handleSubmit} className='flex flex-1 flex-col overflow-hidden'>
                 <div className='flex-1 space-y-5 overflow-y-auto p-6'>
 
-                  {/* Cover */}
+                  {/* Cover photo — input lives inside the label; clicking the label
+                      always activates it regardless of overflow/z-index/transforms. */}
                   <div>
-                    <label className={`mb-2 block ${labelCls}`}>Cover Photo</label>
+                    <span className={`mb-2 block ${labelCls}`}>Cover Photo</span>
                     <div className='flex gap-4'>
                       <div className='relative h-32 w-24 shrink-0 overflow-hidden border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800'>
                         {currentCover ? (
@@ -316,22 +334,17 @@ export default function EditBookModal({ book }: Props) {
                         )}
                       </div>
                       <div className='flex flex-1 flex-col justify-center gap-2'>
-                        <input
-                          ref={coverInputRef}
-                          type='file'
-                          accept='image/jpeg,image/png,image/webp,image/avif'
-                          className='hidden'
-                          onChange={handleCoverChange}
-                        />
-                        <button
-                          type='button'
-                          onClick={() => coverInputRef.current?.click()}
-                          className='border border-dashed border-slate-300 px-4 py-3 text-center hover:border-untele dark:border-slate-600'
-                        >
-                          <span className='text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-untele'>
+                        <label className='relative block cursor-pointer border border-dashed border-slate-300 px-4 py-3 text-center hover:border-untele dark:border-slate-600'>
+                          <span className='pointer-events-none text-xs font-bold uppercase tracking-widest text-slate-500'>
                             {coverFile ? 'Change Photo' : currentCover ? 'Replace Photo' : 'Choose Photo'}
                           </span>
-                        </button>
+                          <input
+                            type='file'
+                            accept='image/jpeg,image/png,image/webp,image/avif'
+                            className='absolute inset-0 h-full w-full cursor-pointer opacity-0'
+                            onChange={handleCoverChange}
+                          />
+                        </label>
                         {coverFile && (
                           <div className='flex items-center justify-between'>
                             <p className='truncate text-[10px] text-slate-400'>{coverFile.name}</p>
@@ -357,7 +370,7 @@ export default function EditBookModal({ book }: Props) {
 
                   {/* Fiction / Non-Fiction */}
                   <div>
-                    <label className={`mb-2 block ${labelCls}`}>Type</label>
+                    <span className={`mb-2 block ${labelCls}`}>Type</span>
                     <div className='flex gap-2'>
                       {(['fiction', 'non-fiction'] as const).map((t) => (
                         <button
@@ -379,7 +392,7 @@ export default function EditBookModal({ book }: Props) {
                   {/* Genres */}
                   <div>
                     <div className='mb-2 flex items-center justify-between'>
-                      <label className={labelCls}>Genres</label>
+                      <span className={labelCls}>Genres</span>
                       <button
                         type='button'
                         onClick={() => { setShowGenreForm((v) => !v); setGenreError(''); }}
@@ -517,7 +530,7 @@ export default function EditBookModal({ book }: Props) {
 
                   {/* Status */}
                   <div>
-                    <label className={`mb-2 block ${labelCls}`}>Status</label>
+                    <span className={`mb-2 block ${labelCls}`}>Status</span>
                     <div className='flex flex-wrap gap-4'>
                       {(['draft', 'published', 'out-of-stock', 'discontinued'] as const).map((s) => (
                         <label key={s} className='flex cursor-pointer items-center gap-2'>
@@ -531,7 +544,7 @@ export default function EditBookModal({ book }: Props) {
                   {/* Formats — edit prices only, type is locked */}
                   {editFormats.length > 0 && (
                     <div>
-                      <label className={`mb-2 block ${labelCls}`}>Format Prices</label>
+                      <span className={`mb-2 block ${labelCls}`}>Format Prices</span>
                       <div className='space-y-3'>
                         {editFormats.map((fmt, i) => (
                           <div key={fmt.key} className='border border-slate-200 p-3 dark:border-slate-700'>
@@ -566,21 +579,10 @@ export default function EditBookModal({ book }: Props) {
                               </div>
                             </div>
 
-                            {/* Digital file replacement */}
+                            {/* Digital file replacement — input inside label, always works */}
                             {(fmt.formatType === 'digital' || fmt.formatType === 'bundle') && (
                               <div className='mt-3 border-t border-slate-100 pt-3 dark:border-slate-700'>
-                                <label className={`mb-1.5 block ${labelCls}`}>Digital File</label>
-                                <input
-                                  ref={(el) => { digitalInputRefs.current[i] = el; }}
-                                  type='file'
-                                  accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip'
-                                  className='fixed left-[-9999px] top-0 opacity-0'
-                                  onChange={(e) => {
-                                    const file = e.target.files?.[0];
-                                    if (file) setDigitalFiles((prev) => prev.map((f, idx) => (idx === i ? file : f)));
-                                    e.target.value = '';
-                                  }}
-                                />
+                                <span className={`mb-1.5 block ${labelCls}`}>Digital File</span>
                                 {fmt.existingAssetPath && !digitalFiles[i] && (
                                   <p className='mb-1.5 truncate text-[10px] text-slate-400'>
                                     Current: {fmt.existingAssetPath.split('/').pop()}
@@ -601,15 +603,22 @@ export default function EditBookModal({ book }: Props) {
                                     </button>
                                   </div>
                                 ) : (
-                                  <button
-                                    type='button'
-                                    onClick={() => digitalInputRefs.current[i]?.click()}
-                                    className='flex w-full items-center justify-center border border-dashed border-slate-300 px-4 py-2.5 hover:border-untele dark:border-slate-600'
-                                  >
-                                    <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-untele'>
+                                  <label className='relative flex w-full cursor-pointer items-center justify-center border border-dashed border-slate-300 px-4 py-2.5 hover:border-untele dark:border-slate-600'>
+                                    <span className='pointer-events-none text-[10px] font-bold uppercase tracking-widest text-slate-500'>
                                       {fmt.existingAssetPath ? 'Replace File' : 'Choose File'}
                                     </span>
-                                  </button>
+                                    <input
+                                      type='file'
+                                      accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip'
+                                      className='absolute inset-0 h-full w-full cursor-pointer opacity-0'
+                                      onChange={(e) => {
+                                        console.log('[EditBookModal] digital file selected:', e.target.files?.[0]?.name, 'for format index', i);
+                                        const file = e.target.files?.[0];
+                                        if (file) setDigitalFiles((prev) => prev.map((f, idx) => (idx === i ? file : f)));
+                                        e.target.value = '';
+                                      }}
+                                    />
+                                  </label>
                                 )}
                               </div>
                             )}

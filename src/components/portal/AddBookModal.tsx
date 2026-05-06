@@ -350,7 +350,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           ref={coverInputRef}
                           type='file'
                           accept='image/jpeg,image/png,image/webp,image/avif'
-                          className='hidden'
+                          className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={handleCoverChange}
                         />
                         <button
