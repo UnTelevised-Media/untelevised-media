@@ -77,19 +77,33 @@ export function useWishlist(): UseWishlistReturn {
       const alreadySaved = wishlist.some((e) => e.slug === entry.slug);
 
       if (alreadySaved) {
+        // Optimistic remove
         setWishlist((prev) => prev.filter((e) => e.slug !== entry.slug));
-        if (isSignedIn) {
-          await removeServerWishlistEntry(entry.slug);
-        } else {
-          removeLocalWishlist(entry.slug);
+        try {
+          if (isSignedIn) {
+            await removeServerWishlistEntry(entry.slug);
+          } else {
+            removeLocalWishlist(entry.slug);
+          }
+        } catch (err) {
+          // Revert optimistic remove on failure
+          console.error('[useWishlist] remove failed:', err);
+          setWishlist((prev) => [...prev, { ...entry, addedAt: new Date().toISOString() }]);
         }
       } else {
         const newEntry: WishlistEntry = { ...entry, addedAt: new Date().toISOString() };
+        // Optimistic add
         setWishlist((prev) => [newEntry, ...prev]);
-        if (isSignedIn) {
-          await addServerWishlistEntry(entry);
-        } else {
-          addLocalWishlist(entry);
+        try {
+          if (isSignedIn) {
+            await addServerWishlistEntry(entry);
+          } else {
+            addLocalWishlist(entry);
+          }
+        } catch (err) {
+          // Revert optimistic add on failure
+          console.error('[useWishlist] add failed:', err);
+          setWishlist((prev) => prev.filter((e) => e.slug !== entry.slug));
         }
       }
     },

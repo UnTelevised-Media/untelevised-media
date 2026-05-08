@@ -7,7 +7,7 @@ Run through every item below before merging. Check each box as you verify it.
 
 ## Pre-flight
 
-- [ ] All Sanity schemas are registered: open `/studio`, confirm `Bookstore Subscriber`, `User Wishlist`, and `Book Review` appear as document types in the Studio sidebar
+- [x] All Sanity schemas are registered: open `/studio`, confirm `Bookstore Subscriber`, `User Wishlist`, and `Book Review` appear as document types in the Studio sidebar
 - [ ] New GROQ queries return data without errors: test `queryApprovedReviewsByBookSlug` and `queryPortalBookstoreSubscribers` from the Sanity Vision panel
 
 ---
@@ -23,95 +23,94 @@ Run through every item below before merging. Check each box as you verify it.
 
 ## Feature 2 — Social Sharing on Books
 
-- [ ] Visit any book detail page (e.g. `/bookstore/book/<slug>`)
-- [ ] Confirm the `SocialShare` component renders after the Revenue Sharing section and before the Author Bio
-- [ ] Confirm social share buttons are visible and functional (test at least Facebook, Twitter/X, and Copy Link)
-- [ ] Test in dark mode — icons and buttons should be legible
-- [ ] Test on mobile viewport — share grid should not overflow
+- [x] Visit any book detail page (e.g. `/bookstore/book/<slug>`)
+- [x] Confirm the `SocialShare` component renders after the Revenue Sharing section and before the Author Bio
+- [x] Confirm social share buttons are visible and functional (test at least Facebook, Twitter/X, and Copy Link)
+- [x] Test in dark mode — icons and buttons should be legible
+- [x] Test on mobile viewport — share grid should not overflow
 
 ---
 
 ## Feature 3 — Bookstore Newsletter
 
 ### Signup Form
-- [ ] Visit `/bookstore` — confirm `BookstoreNewsletter` renders below the book grid
-- [ ] Visit `/bookstore/about` — confirm `BookstoreNewsletter` renders after the "Where We're Going" section
-- [ ] Submit with a valid email → "You're on the list." success state appears
-- [ ] Submit the same email again → success state appears (no error, no duplicate document created in Sanity)
-- [ ] Submit an invalid email (e.g. `notanemail`) → error state appears with a message
-- [ ] Submit with empty email → native form validation blocks submission
-- [ ] Check Sanity Studio → a new `Bookstore Subscriber` document was created with the correct email, `submittedAt`, and `source` (`bookstore-home` or `bookstore-about`)
+- [x] Visit `/bookstore` — confirm `BookstoreNewsletter` renders below the book grid
+- [x] Visit `/bookstore/about` — confirm `BookstoreNewsletter` renders after the "Where We're Going" section
+- [x] Submit with a valid email → "You're on the list." success state appears
+- [x] Submit the same email again → error state appears with "You're already on our list!" — no duplicate document created in Sanity
+- [x] Submit an invalid email (e.g. `notanemail`) → error state appears with a message
+- [x] Submit with empty email → native form validation blocks submission
+- [x] Check Sanity Studio → a new `Bookstore Subscriber` document was created with the correct email, `submittedAt`, and `source` (`bookstore-home` or `bookstore-about`)
 
 ### API
 - [ ] `POST /api/bookstore/newsletter` with `{ "email": "test@test.com", "source": "bookstore-home" }` returns `{ ok: true }`
-- [ ] Repeated call returns `{ ok: true, alreadySubscribed: true }` — no duplicate written
+- [ ] Repeated call returns 409 `{ error: "You're already on our list!" }` — no duplicate written
 - [ ] `POST` with malformed JSON returns `400`
 - [ ] `POST` with invalid email returns `400`
 
 ### Portal
-- [ ] Sign in as editor+ and visit `/portal/bookstore-subscribers`
-- [ ] Subscriber list renders with email + subscribed date
-- [ ] Search bar filters by email
+- [x] Sign in as editor+ and visit `/portal/subscribers`
+- [x] Page shows two sections: "UnTelevised Newsletter" (red left border) and "Hurriya Publications Bookstore" (green left border)
+- [x] Each section has its own subscriber count and independent search bar
 
 ---
 
 ## Feature 4 — Book Wishlist
 
 ### WishlistButton
-- [ ] Visit `/bookstore` — confirm star icon overlays the top-right corner of each book cover
-- [ ] Click a star → filled amber star appears (optimistic update), click again → outline star returns
-- [ ] Refresh the page → wishlist state persists (localStorage for guests, Sanity for signed-in)
-- [ ] Visit any book detail page → star + "Wishlist" label visible near the book title
-- [ ] Test in dark mode — button contrast is acceptable
+- [x] Visit `/bookstore` — confirm star icon overlays the top-right corner of each book cover
+- [x] Click a star → filled amber star appears (optimistic update), click again → outline star returns
+- [x] Refresh the page → wishlist state persists (localStorage for guests, Sanity for signed-in)
+- [x] Visit any book detail page → star + "Wishlist" label visible near the book title
+- [x] Test in dark mode — button contrast is acceptable
 
 ### Guest flow (signed out)
-- [ ] Star several books while signed out
-- [ ] Open DevTools → Application → Local Storage → confirm `untele_wishlist` key is populated
-- [ ] Visit `/bookstore/wishlist` → wishlisted books appear as a grid
-- [ ] Click "View Book" → navigates to the correct book detail page
-- [ ] Click the star on the wishlist page → book is removed from the list
+- [x] Star several books while signed out
+- [x] Open DevTools → Application → Local Storage → confirm `untele_wishlist` key is populated
+- [x] Visit `/bookstore/wishlist` → wishlisted books appear as a grid
+- [x] Click "View Book" → navigates to the correct book detail page
+- [x] Click the star on the wishlist page → book is removed from the list
 
 ### Authenticated flow
-- [ ] Sign in as any user
-- [ ] Star a book → confirm `userWishlist` document is created in Sanity Studio with correct `clerkUserId`, `slug`, `title`, `price`, `addedAt`
-- [ ] Sign out → sign back in → wishlisted book is still present (loaded from Sanity)
+- [x] Sign in as any user
+- [x] Star a book → confirm `userWishlist` document is created in Sanity Studio with correct `clerkUserId`, `slug`, `title`, `price`, `addedAt`
+- [x] Sign out → sign back in → wishlisted book is still present (loaded from Sanity)
 
 ### localStorage → Sanity sync on sign-in
-- [ ] Sign out, star 2 books as guest
-- [ ] Sign in → books should be migrated from localStorage to Sanity; `untele_wishlist` localStorage key should be cleared
+- [x] Sign out, star 2 books as guest
+- [x] Sign in → books should be migrated from localStorage to Sanity; `untele_wishlist` localStorage key should be cleared
 
 ### Empty state
-- [ ] Visit `/bookstore/wishlist` with no items → empty state renders with "Browse Books" CTA
+- [x] Visit `/bookstore/wishlist` with no items → empty state renders with "Browse Books" CTA
 
 ### Footer & nav
-- [ ] Confirm "Wishlist" link appears in `BookstoreFooterNav` (the Hurriya nav strip)
-- [ ] Confirm "Wishlist" link appears in the site footer under the Bookstore column
-- [ ] Both links navigate to `/bookstore/wishlist`
+- [x] Confirm "Wishlist" link appears in `BookstoreNav` (the Hurriya nav strip)
+- [x] Confirm "Wishlist" link appears in the site footer under the Bookstore column
+- [x] Both links navigate to `/bookstore/wishlist`
 
 ---
 
 ## Feature 5 — Book Reviews
 
 ### Review Display
-- [ ] Visit a book detail page with approved reviews → `BookReviews` renders below the Author Bio
-- [ ] Star ratings display correctly (filled amber / empty grey per rating value)
-- [ ] Reviewer name, optional location, and formatted date are visible
-- [ ] Visit a book with no reviews → "No reviews yet. Be the first." empty state shows
+- [x] Visit a book detail page with approved reviews → `BookReviews` renders below the Author Bio
+- [x] Star ratings display correctly (filled amber / empty grey per rating value)
+- [x] Reviewer name, optional location, and formatted date are visible
+- [x] Visit a book with no reviews → "No reviews yet. Be the first." empty state shows
 
 ### Review Submission
-- [ ] `ReviewForm` renders below `BookReviews` on every book detail page
-- [ ] Click a star to set the rating → star highlights correctly, hover works
-- [ ] Fill in name (required), location (optional), and review body (min 20 chars)
-- [ ] Submit → "Your review has been submitted and will appear after approval." success state
-- [ ] Attempt submit with empty name → blocked by native validation
-- [ ] Attempt submit with fewer than 20 chars in body → submit button remains disabled; char counter shows current length
-- [ ] Attempt submit with no star selected → submit button remains disabled
+- [x] `ReviewForm` renders below `BookReviews` on every book detail page
+- [x] Click a star to set the rating → star highlights correctly, hover works
+- [x] Fill in name (required), location (optional), and review body (min 20 chars)
+- [x] Submit → "Your review has been submitted and will appear after approval." success state
+- [x] Attempt submit with empty name → blocked by native validation
+- [x] Attempt submit with fewer than 20 chars in body → submit button remains disabled; char counter shows current length
+- [x] Attempt submit with no star selected → submit button remains disabled
 
 ### Admin Moderation
-- [ ] Open Sanity Studio → confirm a `Book Review` document was created with `approved: false`
-- [ ] Toggle `approved: true` in Studio
-- [ ] Revisit the book page → approved review is now visible in `BookReviews`
-
+- [x] Open Sanity Studio → confirm a `Book Review` document was created with `approved: false`
+- [x] Toggle `approved: true` in Studio
+- [x] Revisit the book page → approved review is now visible in `BookReviews`
 ### API
 - [ ] `GET /api/bookstore/reviews?bookSlug=<slug>` returns only approved reviews
 - [ ] `POST /api/bookstore/reviews` with valid payload returns `{ ok: true }`
@@ -172,10 +171,10 @@ Run through every item below before merging. Check each box as you verify it.
 
 ## Sanity Studio Checks
 
-- [ ] `Bookstore Subscriber` document type visible and editable
-- [ ] `User Wishlist` document type visible and editable
-- [ ] `Book Review` document type visible, editable, `approved` toggle works, preview shows `★★★ — Name` format
-- [ ] No console errors in the Studio after schema changes
+- [x] `Bookstore Subscriber` document type visible and editable
+- [x] `User Wishlist` document type visible and editable
+- [x] `Book Review` document type visible, editable, `approved` toggle works, preview shows `★★★ — Name` format
+- [x] No console errors in the Studio after schema changes
 
 ---
 

@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Header from '@/components/global/Header';
 import HeaderLogo from '@/components/global/HeaderLogo';
 import Footer from '@/components/global/Footer';
-import BookstoreFooterNav from '@/components/bookstore/BookstoreFooterNav';
+import BookstoreNav from '@/components/bookstore/BookstoreNav';
 import { SanityLive } from '@/lib/sanity/lib/live';
 
 export const metadata: Metadata = {
@@ -106,7 +106,7 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
         </div>
 
         {/* ── Section nav — bottom strip of the banner ── */}
-        <BookstoreFooterNav />
+        <BookstoreNav />
       </section>
 
       {/* ── Page content ── */}

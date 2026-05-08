@@ -1,4 +1,4 @@
-// src/components/bookstore/BookstoreFooterNav.tsx
+// src/components/bookstore/BookstoreNav.tsx
 // Slim bookstore section nav — sits between page content and the site footer.
 
 import Link from 'next/link';
@@ -7,12 +7,13 @@ const links = [
   { href: '/bookstore', label: 'Bookstore' },
   { href: '/bookstore/about', label: 'Our Story' },
   { href: '/bookstore/wishlist', label: 'Wishlist' },
+  { href: '/bookstore/my-reviews', label: 'My Reviews' },
   { href: '/bookstore/orders', label: 'My Orders' },
   { href: '/bookstore/downloads', label: 'Download Vault' },
   { href: '/bookstore/returns', label: 'Returns & Refunds' },
 ];
 
-export default function BookstoreFooterNav() {
+export default function BookstoreNav() {
   return (
     <nav
       className='border-t-2 border-[#009736] bg-hp-sand-mid dark:bg-hp-dark-card'

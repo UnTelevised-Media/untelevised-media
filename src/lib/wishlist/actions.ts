@@ -5,7 +5,6 @@
 
 import { auth } from '@clerk/nextjs/server';
 import { writeClient } from '@/lib/sanity/lib/write-client';
-import { client } from '@/lib/sanity/lib/client';
 import type { WishlistEntry } from './storage';
 
 function wishlistDocId(userId: string, slug: string): string {
@@ -18,12 +17,13 @@ export async function getServerWishlist(): Promise<WishlistEntry[]> {
   const { userId } = await auth();
   if (!userId) return [];
 
-  return client.fetch<WishlistEntry[]>(
+  // writeClient has the API token — required for reads on non-public datasets
+  // and to bypass CDN staleness after a recent createOrReplace.
+  return writeClient.fetch<WishlistEntry[]>(
     `*[_type == "userWishlist" && clerkUserId == $userId] | order(addedAt desc) {
       slug, title, coverImageUrl, authorName, price, addedAt
     }`,
-    { userId },
-    { cache: 'no-store' }
+    { userId }
   );
 }
 

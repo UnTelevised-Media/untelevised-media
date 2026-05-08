@@ -16,6 +16,7 @@ const authorLinks = [
 
 const editorLinks = [
   { href: '/portal/applications', label: 'Applications' },
+  { href: '/portal/reviews', label: 'Reviews' },
 ];
 
 const contactDropdownLinks = [

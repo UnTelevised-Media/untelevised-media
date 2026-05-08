@@ -844,7 +844,7 @@ export const queryBooksByGenreSlug = groq`
 `;
 
 export const queryApprovedReviewsByBookSlug = groq`
-  *[_type == "bookReview" && book->slug.current == $slug && approved == true]
+  *[_type == "bookReview" && book->slug.current == $slug && (status == "approved" || (approved == true && !defined(status)))]
   | order(submittedAt desc) {
     _id, reviewerName, reviewerLocation, rating, body, submittedAt
   }

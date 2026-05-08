@@ -21,7 +21,11 @@ export default function ReviewForm({ bookSlug }: Props) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || rating === 0 || body.trim().length < 20) return;
+    if (!name.trim() || rating === 0 || body.trim().length < 20) {
+      setErrorMsg('Please fill in your name, select a rating, and write at least 20 characters.');
+      setState('error');
+      return;
+    }
 
     setState('submitting');
     setErrorMsg('');
@@ -158,13 +162,22 @@ export default function ReviewForm({ bookSlug }: Props) {
             <p className='text-[11px] text-red-500'>{errorMsg}</p>
           )}
 
-          <button
-            type='submit'
-            disabled={state === 'submitting' || rating === 0 || body.trim().length < 20}
-            className='self-start bg-untele px-6 py-2.5 text-[10px] font-black uppercase tracking-widest text-white hover:opacity-90 disabled:opacity-50'
-          >
-            {state === 'submitting' ? 'Submitting…' : 'Submit Review'}
-          </button>
+          {(() => {
+            const canSubmit = state !== 'submitting' && name.trim().length > 0 && rating > 0 && body.trim().length >= 20;
+            return (
+              <button
+                type='submit'
+                disabled={!canSubmit}
+                className={`self-start px-6 py-2.5 text-[10px] font-black uppercase tracking-widest text-white transition-colors ${
+                  canSubmit
+                    ? 'cursor-pointer bg-untele hover:opacity-90'
+                    : 'cursor-not-allowed bg-slate-300 dark:bg-slate-600'
+                }`}
+              >
+                {state === 'submitting' ? 'Submitting…' : 'Submit Review'}
+              </button>
+            );
+          })()}
         </form>
       )}
     </div>

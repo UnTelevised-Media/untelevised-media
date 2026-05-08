@@ -2,7 +2,7 @@
 // Bookstore newsletter signup endpoint.
 // POST { email, source? } → creates bookstoreSubscriber document in Sanity.
 // Rate-limited: 5 submissions / 60s per IP (via Upstash, fails open if not configured).
-// Duplicate email check: skips if already subscribed.
+// Duplicate email check: rejects with 409 if already subscribed.
 
 import { NextRequest, NextResponse } from 'next/server';
 import { writeClient } from '@/lib/sanity/lib/write-client';
@@ -46,18 +46,22 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Valid email address required' }, { status: 400 });
   }
 
-  // Check for existing subscription
+  // Check for existing subscription — force uncached read to avoid stale Next.js cache
   const existing = await client.fetch<number>(
     `count(*[_type == "bookstoreSubscriber" && email == $email])`,
     { email },
-    { cache: 'no-store' }
+    { cache: 'no-store', next: { revalidate: 0 } }
   );
 
   if (existing > 0) {
-    return NextResponse.json({ ok: true, alreadySubscribed: true });
+    return NextResponse.json({ error: "You're already on our list!" }, { status: 409 });
   }
 
-  await writeClient.create({
+  // Deterministic document ID prevents duplicates from race conditions
+  const docId = `bookstoreSubscriber_${email.replace(/[^a-z0-9]/g, '_')}`;
+
+  await writeClient.createIfNotExists({
+    _id: docId,
     _type: 'bookstoreSubscriber',
     email,
     submittedAt: new Date().toISOString(),

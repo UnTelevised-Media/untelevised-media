@@ -420,6 +420,26 @@ export const queryPortalClaimedPitchById = groq`
   }
 `;
 
+// ---------------------------------------------------------------------------
+// Book reviews — admin moderation queue
+// ---------------------------------------------------------------------------
+
+export const queryPortalAllReviews = groq`
+  *[_type == "bookReview"] | order(submittedAt desc) {
+    _id,
+    reviewerName,
+    reviewerLocation,
+    rating,
+    body,
+    status,
+    clerkUserId,
+    adminFeedback,
+    submittedAt,
+    "bookTitle": book->title,
+    "bookSlug": book->slug.current
+  }
+`;
+
 export const queryPortalMyAuthorFlags = groq`
   *[_type == "author" && clerkId == $clerkId][0] {
     isLiteraryAuthor

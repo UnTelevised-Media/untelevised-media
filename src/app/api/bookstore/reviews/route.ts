@@ -5,6 +5,7 @@
 // Rate-limit: 3 POSTs per hour per IP.
 
 import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@clerk/nextjs/server';
 import { writeClient } from '@/lib/sanity/lib/write-client';
 import { client } from '@/lib/sanity/lib/client';
 import { queryApprovedReviewsByBookSlug } from '@/lib/sanity/lib/queries';
@@ -90,6 +91,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Book not found' }, { status: 404 });
   }
 
+  const { userId } = await auth();
+
   await writeClient.create({
     _type: 'bookReview',
     book: { _type: 'reference', _ref: book._id },
@@ -97,7 +100,9 @@ export async function POST(req: NextRequest) {
     ...(reviewerLocation ? { reviewerLocation: reviewerLocation.trim() } : {}),
     rating,
     body: reviewBody.trim(),
+    status: 'pending',
     approved: false,
+    ...(userId ? { clerkUserId: userId } : {}),
     submittedAt: new Date().toISOString(),
   });
 
