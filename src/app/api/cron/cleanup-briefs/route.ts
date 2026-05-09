@@ -1,9 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { writeClient } from '@/lib/sanity/lib/write-client';
 
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
-
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get('authorization');
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {

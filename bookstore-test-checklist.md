@@ -43,10 +43,10 @@ Run through every item below before merging. Check each box as you verify it.
 - [x] Check Sanity Studio → a new `Bookstore Subscriber` document was created with the correct email, `submittedAt`, and `source` (`bookstore-home` or `bookstore-about`)
 
 ### API
-- [ ] `POST /api/bookstore/newsletter` with `{ "email": "test@test.com", "source": "bookstore-home" }` returns `{ ok: true }`
-- [ ] Repeated call returns 409 `{ error: "You're already on our list!" }` — no duplicate written
-- [ ] `POST` with malformed JSON returns `400`
-- [ ] `POST` with invalid email returns `400`
+- [x] `POST /api/bookstore/newsletter` with `{ "email": "test@test.com", "source": "bookstore-home" }` returns `{ ok: true }`
+- [x] Repeated call returns 409 `{ error: "You're already on our list!" }` — no duplicate written
+- [x] `POST` with malformed JSON returns `400`
+- [x] `POST` with invalid email returns `400`
 
 ### Portal
 - [x] Sign in as editor+ and visit `/portal/subscribers`
@@ -112,12 +112,12 @@ Run through every item below before merging. Check each box as you verify it.
 - [x] Toggle `approved: true` in Studio
 - [x] Revisit the book page → approved review is now visible in `BookReviews`
 ### API
-- [ ] `GET /api/bookstore/reviews?bookSlug=<slug>` returns only approved reviews
-- [ ] `POST /api/bookstore/reviews` with valid payload returns `{ ok: true }`
-- [ ] `POST` with missing `reviewerName` returns `400`
-- [ ] `POST` with `rating: 6` returns `400`
-- [ ] `POST` with `body` shorter than 20 chars returns `400`
-- [ ] `POST` with invalid `bookSlug` returns `404`
+- [x] `GET /api/bookstore/reviews?bookSlug=<slug>` returns only approved reviews
+- [x] `POST /api/bookstore/reviews` with valid payload returns `{ ok: true }`
+- [x] `POST` with missing `reviewerName` returns `400`
+- [x] `POST` with `rating: 6` returns `400`
+- [x] `POST` with `body` shorter than 20 chars returns `400`
+- [x] `POST` with invalid `bookSlug` returns `404`
 
 ---
 
