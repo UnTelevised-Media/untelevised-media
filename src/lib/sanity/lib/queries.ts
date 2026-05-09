@@ -394,6 +394,7 @@ export const queryAuthorBySlug = groq`
       "author": author->{ _id, name, slug, tipStripeProductId, tipAmount, image { asset, alt } },
       formats[] {
         _key, formatType, price, compareAtPrice,
+        nameYourPrice, minimumPrice, suggestedPrice,
         stripePriceId, stripeProductId,
         inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },
         digitalAsset { supabaseStoragePath, fileSize, fileFormat, version }
@@ -800,6 +801,7 @@ const bookFragment = groq`
   "genre": genre[]-> { _id, title, slug },
   formats[] {
     _key, formatType, price, compareAtPrice,
+    nameYourPrice, minimumPrice, suggestedPrice,
     stripePriceId, stripeProductId,
     inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },
     digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },

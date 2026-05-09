@@ -115,6 +115,7 @@ export function buildCartItem(params: {
   formatType: FormatType;
   price: number;
   stripePriceId: string;
+  nameYourPrice?: boolean;
 }): Omit<CartItem, 'quantity'> {
   return {
     sanityBookId: params.sanityBookId,
@@ -125,5 +126,6 @@ export function buildCartItem(params: {
     formatType: params.formatType,
     price: params.price,
     stripePriceId: params.stripePriceId,
+    ...(params.nameYourPrice ? { nameYourPrice: true } : {}),
   };
 }

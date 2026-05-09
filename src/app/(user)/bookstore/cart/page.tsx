@@ -85,6 +85,7 @@ export default function CartPage() {
           title: item.title,
           isDigital: item.formatType === 'digital',
           ...(item.formatType === 'tip' && { unitAmountCents: Math.round(item.price * 100) }),
+          ...(item.nameYourPrice && { unitAmountCents: Math.round(item.price * 100), isNyop: true }),
         })),
       ...(customerEmail && { customerEmail }),
     };

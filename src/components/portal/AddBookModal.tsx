@@ -19,9 +19,19 @@ interface Format {
   formatType: 'physical' | 'digital' | 'bundle';
   price: string;
   compareAtPrice: string;
+  nameYourPrice: boolean;
+  minimumPrice: string;
+  suggestedPrice: string;
 }
 
-const blankFormat = (): Format => ({ formatType: 'physical', price: '', compareAtPrice: '' });
+const blankFormat = (): Format => ({
+  formatType: 'physical',
+  price: '',
+  compareAtPrice: '',
+  nameYourPrice: false,
+  minimumPrice: '',
+  suggestedPrice: '',
+});
 
 interface Props {
   label?: string;
@@ -51,8 +61,11 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
 
   // File input refs — programmatic click is more reliable than label-wrapping inside overflow-hidden
   const coverInputRef = useRef<HTMLInputElement>(null);
-  // One ref per format slot (max 3); position:fixed escapes all parent overflow clipping
-  const digitalInputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  // Three named refs — same stable pattern as coverInputRef, one per format slot (max 3)
+  const digitalRef0 = useRef<HTMLInputElement>(null);
+  const digitalRef1 = useRef<HTMLInputElement>(null);
+  const digitalRef2 = useRef<HTMLInputElement>(null);
+  const digitalInputRefs = [digitalRef0, digitalRef1, digitalRef2];
 
   // Fiction / Non-Fiction
   const [fictionType, setFictionType] = useState<'fiction' | 'non-fiction' | undefined>(undefined);
@@ -176,11 +189,14 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
     }
 
     const parsedFormats = formats
-      .filter((f) => f.price !== '')
+      .filter((f) => f.nameYourPrice || f.price !== '')
       .map((f) => ({
         formatType: f.formatType,
-        price: parseFloat(f.price),
+        price: f.nameYourPrice ? (parseFloat(f.suggestedPrice) || 0) : parseFloat(f.price),
         ...(f.compareAtPrice ? { compareAtPrice: parseFloat(f.compareAtPrice) } : {}),
+        ...(f.nameYourPrice ? { nameYourPrice: true } : {}),
+        ...(f.nameYourPrice && f.minimumPrice ? { minimumPrice: parseFloat(f.minimumPrice) } : {}),
+        ...(f.nameYourPrice && f.suggestedPrice ? { suggestedPrice: parseFloat(f.suggestedPrice) } : {}),
       }));
 
     if (parsedFormats.some((f) => isNaN(f.price) || f.price < 0)) {
@@ -219,7 +235,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
         let fmtKeyIdx = 0;
         for (let i = 0; i < formats.length; i++) {
           const fmt = formats[i];
-          if (fmt.price === '') continue; // filtered out of parsedFormats
+          if (!fmt.nameYourPrice && fmt.price === '') continue; // filtered out of parsedFormats
           const fmtKey = result.formatKeys[fmtKeyIdx++];
           if (!fmtKey) continue;
           if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') continue;
@@ -353,6 +369,10 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={handleCoverChange}
                         />
+                        {/* Digital file inputs — always mounted, same pattern as cover. One per slot (max 3). */}
+                        <input ref={digitalRef0} type='file' accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip' className='fixed left-[-9999px] top-0 opacity-0' onChange={(e) => { const f = e.target.files?.[0]; if (f) setDigitalFiles((p) => p.map((x, idx) => idx === 0 ? f : x)); e.target.value = ''; }} />
+                        <input ref={digitalRef1} type='file' accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip' className='fixed left-[-9999px] top-0 opacity-0' onChange={(e) => { const f = e.target.files?.[0]; if (f) setDigitalFiles((p) => p.map((x, idx) => idx === 1 ? f : x)); e.target.value = ''; }} />
+                        <input ref={digitalRef2} type='file' accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip' className='fixed left-[-9999px] top-0 opacity-0' onChange={(e) => { const f = e.target.files?.[0]; if (f) setDigitalFiles((p) => p.map((x, idx) => idx === 2 ? f : x)); e.target.value = ''; }} />
                         <button
                           type='button'
                           onClick={() => coverInputRef.current?.click()}
@@ -650,49 +670,84 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                             ))}
                           </div>
 
-                          {/* Price fields */}
-                          <div className='grid grid-cols-2 gap-2'>
-                            <div>
-                              <label className={`mb-1 block ${labelCls}`}>Price (USD)</label>
-                              <input
-                                type='number'
-                                step='0.01'
-                                min='0'
-                                value={fmt.price}
-                                onChange={(e) => updateFormat(i, { price: e.target.value })}
-                                placeholder='19.99'
-                                className={inputCls}
+                          {/* Name Your Own Price toggle */}
+                          <div className='mb-2 flex items-center gap-2'>
+                            <button
+                              type='button'
+                              onClick={() => updateFormat(i, { nameYourPrice: !fmt.nameYourPrice })}
+                              className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full transition-colors ${fmt.nameYourPrice ? 'bg-untele' : 'bg-slate-200 dark:bg-slate-700'}`}
+                            >
+                              <span
+                                className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform ${fmt.nameYourPrice ? 'translate-x-4' : 'translate-x-1'}`}
                               />
-                            </div>
-                            <div>
-                              <label className={`mb-1 block ${labelCls}`}>Compare-at</label>
-                              <input
-                                type='number'
-                                step='0.01'
-                                min='0'
-                                value={fmt.compareAtPrice}
-                                onChange={(e) => updateFormat(i, { compareAtPrice: e.target.value })}
-                                placeholder='24.99'
-                                className={inputCls}
-                              />
-                            </div>
+                            </button>
+                            <span className='text-[10px] font-black uppercase tracking-widest text-slate-500'>
+                              Name Your Own Price
+                            </span>
                           </div>
+
+                          {/* Price fields — fixed price or NYOP min/suggested */}
+                          {fmt.nameYourPrice ? (
+                            <div className='grid grid-cols-2 gap-2'>
+                              <div>
+                                <label className={`mb-1 block ${labelCls}`}>Min Price (USD)</label>
+                                <input
+                                  type='number'
+                                  step='0.01'
+                                  min='0'
+                                  value={fmt.minimumPrice}
+                                  onChange={(e) => updateFormat(i, { minimumPrice: e.target.value })}
+                                  placeholder='0.00'
+                                  className={inputCls}
+                                />
+                                <p className='mt-0.5 text-[9px] text-slate-400'>0 = free / any amount</p>
+                              </div>
+                              <div>
+                                <label className={`mb-1 block ${labelCls}`}>Suggested (USD)</label>
+                                <input
+                                  type='number'
+                                  step='0.01'
+                                  min='0'
+                                  value={fmt.suggestedPrice}
+                                  onChange={(e) => updateFormat(i, { suggestedPrice: e.target.value })}
+                                  placeholder='9.99'
+                                  className={inputCls}
+                                />
+                              </div>
+                            </div>
+                          ) : (
+                            <div className='grid grid-cols-2 gap-2'>
+                              <div>
+                                <label className={`mb-1 block ${labelCls}`}>Price (USD)</label>
+                                <input
+                                  type='number'
+                                  step='0.01'
+                                  min='0'
+                                  value={fmt.price}
+                                  onChange={(e) => updateFormat(i, { price: e.target.value })}
+                                  placeholder='19.99'
+                                  className={inputCls}
+                                />
+                              </div>
+                              <div>
+                                <label className={`mb-1 block ${labelCls}`}>Compare-at</label>
+                                <input
+                                  type='number'
+                                  step='0.01'
+                                  min='0'
+                                  value={fmt.compareAtPrice}
+                                  onChange={(e) => updateFormat(i, { compareAtPrice: e.target.value })}
+                                  placeholder='24.99'
+                                  className={inputCls}
+                                />
+                              </div>
+                            </div>
+                          )}
 
                           {/* Digital file upload — only for digital/bundle formats */}
                           {(fmt.formatType === 'digital' || fmt.formatType === 'bundle') && (
                             <div className='mt-3 border-t border-slate-100 pt-3 dark:border-slate-700'>
                               <p className={`mb-1.5 ${labelCls}`}>Digital File (PDF / EPUB / MOBI)</p>
-                              <input
-                                ref={(el) => { digitalInputRefs.current[i] = el; }}
-                                type='file'
-                                accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip'
-                                className='fixed left-[-9999px] top-0 opacity-0'
-                                onChange={(e) => {
-                                  const file = e.target.files?.[0];
-                                  if (file) setDigitalFiles((prev) => prev.map((f, idx) => (idx === i ? file : f)));
-                                  e.target.value = '';
-                                }}
-                              />
                               {digitalFiles[i] ? (
                                 <div className='flex items-center justify-between gap-2 border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800'>
                                   <div className='min-w-0'>
@@ -714,7 +769,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                               ) : (
                                 <button
                                   type='button'
-                                  onClick={() => digitalInputRefs.current[i]?.click()}
+                                  onClick={() => digitalInputRefs[i]?.current?.click()}
                                   className='flex w-full items-center justify-center border border-dashed border-slate-300 px-4 py-2.5 hover:border-untele dark:border-slate-600'
                                 >
                                   <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-untele'>
@@ -770,29 +825,31 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                   </div>
 
 
-                  {error && (
-                    <p className='border border-red-200 bg-red-50 px-3 py-2 text-xs font-bold text-red-600 dark:border-red-900 dark:bg-red-950 dark:text-red-400'>
-                      {error}
-                    </p>
-                  )}
                 </div>
 
                 {/* Footer actions */}
-                <div className='flex shrink-0 items-center justify-between border-t border-slate-200 px-6 py-4 dark:border-slate-700'>
-                  <button
-                    type='button'
-                    onClick={close}
-                    className='text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-700'
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type='submit'
-                    disabled={isPending}
-                    className='bg-untele px-6 py-2.5 text-xs font-black uppercase tracking-widest text-white hover:opacity-90 disabled:opacity-50'
-                  >
-                    {isPending ? 'Creating…' : 'Create Book'}
-                  </button>
+                <div className='shrink-0 border-t border-slate-200 dark:border-slate-700'>
+                  {error && (
+                    <p className='border-b border-red-200 bg-red-50 px-6 py-2 text-xs font-bold text-red-600 dark:border-red-900 dark:bg-red-950 dark:text-red-400'>
+                      {error}
+                    </p>
+                  )}
+                  <div className='flex items-center justify-between px-6 py-4'>
+                    <button
+                      type='button'
+                      onClick={close}
+                      className='text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-700'
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type='submit'
+                      disabled={isPending}
+                      className='bg-untele px-6 py-2.5 text-xs font-black uppercase tracking-widest text-white hover:opacity-90 disabled:opacity-50'
+                    >
+                      {isPending ? 'Creating…' : 'Create Book'}
+                    </button>
+                  </div>
                 </div>
               </form>
             )}

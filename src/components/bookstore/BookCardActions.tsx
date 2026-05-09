@@ -17,7 +17,6 @@ export default function BookCardActions({ book, format }: Props) {
   // Tip state
   const tipProductId = book.author?.tipStripeProductId;
   const defaultTip = book.author?.tipAmount ?? 5;
-  const [tipIncluded, setTipIncluded] = useState(false);
   const [tipAmount, setTipAmount] = useState(defaultTip);
 
   const addItem = useCart((s) => s.addItem);
@@ -36,7 +35,7 @@ export default function BookCardActions({ book, format }: Props) {
         stripePriceId: format.stripePriceId ?? '',
       }),
     );
-    if (tipProductId && tipIncluded && tipAmount > 0) {
+    if (tipProductId && tipAmount > 0) {
       addItem({
         sanityBookId: book._id,
         slug: book.slug.current,
@@ -70,7 +69,7 @@ export default function BookCardActions({ book, format }: Props) {
           title: book.title,
           isDigital: format.formatType === 'digital',
         },
-        ...(tipProductId && tipIncluded && tipAmount > 0
+        ...(tipProductId && tipAmount > 0
           ? [
               {
                 stripePriceId: tipProductId,
@@ -132,13 +131,7 @@ export default function BookCardActions({ book, format }: Props) {
 
       {tipProductId && (
         <div className='border border-amber-200 bg-amber-50 px-2 py-1.5 dark:border-amber-800/40 dark:bg-amber-950/20'>
-          <label className='flex cursor-pointer items-center gap-1.5'>
-            <input
-              type='checkbox'
-              checked={tipIncluded}
-              onChange={(e) => setTipIncluded(e.target.checked)}
-              className='h-3 w-3 accent-amber-500'
-            />
+          <div className='flex items-center gap-1.5'>
             <span className='text-[9px] font-black uppercase tracking-widest text-amber-700 dark:text-amber-300'>
               ♥ Tip
             </span>
@@ -150,11 +143,10 @@ export default function BookCardActions({ book, format }: Props) {
                 step={0.5}
                 value={tipAmount}
                 onChange={(e) => setTipAmount(Math.max(0, parseFloat(e.target.value) || 0))}
-                disabled={!tipIncluded}
-                className='w-12 border border-amber-300 bg-white px-1 py-0.5 text-[9px] font-bold text-amber-800 disabled:opacity-40 dark:border-amber-700 dark:bg-transparent dark:text-amber-200'
+                className='w-12 border border-amber-300 bg-white px-1 py-0.5 text-[9px] font-bold text-amber-800 dark:border-amber-700 dark:bg-transparent dark:text-amber-200'
               />
             </span>
-          </label>
+          </div>
         </div>
       )}
 

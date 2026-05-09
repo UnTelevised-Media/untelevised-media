@@ -3,7 +3,7 @@
 // Client component that owns gift toggle state and passes it to BuyNowButton.
 // Extracted so GiftToggle and BuyNowButton share a single client boundary.
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { SanityBook, SanityBookFormat, GiftOptions } from '@/lib/bookstore/types';
 import AddToCartButton from './AddToCartButton';
 import BuyNowButton from './BuyNowButton';
@@ -23,6 +23,20 @@ function formatLabel(format: SanityBookFormat): string {
 
 export default function BookBuySection({ book, isOutOfStock }: Props) {
   const [giftOptions, setGiftOptions] = useState<GiftOptions | null>(null);
+  // Per-format user-entered amounts for Name Your Own Price formats
+  const [nyopAmounts, setNyopAmounts] = useState<Record<string, string>>({});
+
+  // Pre-fill NYOP inputs with suggested price (or minimum) when book loads
+  useEffect(() => {
+    const initial: Record<string, string> = {};
+    (book.formats ?? []).forEach((f) => {
+      if (f.nameYourPrice) {
+        const defaultAmt = f.suggestedPrice ?? f.minimumPrice ?? '';
+        initial[f._key] = defaultAmt !== '' ? String(defaultAmt) : '';
+      }
+    });
+    setNyopAmounts(initial);
+  }, [book.formats]);
 
   return (
     <div className='mb-6'>
@@ -56,61 +70,155 @@ export default function BookBuySection({ book, isOutOfStock }: Props) {
                 format.inventory.quantity > 0 &&
                 format.inventory.quantity <= (format.inventory.lowStockThreshold ?? 5);
 
+              // Name Your Own Price state
+              const isNyop = !!format.nameYourPrice;
+              const nyopRaw = nyopAmounts[format._key] ?? '';
+              const nyopAmount = nyopRaw !== '' ? parseFloat(nyopRaw) : NaN;
+              const minimum = format.minimumPrice ?? 0;
+              const nyopValid =
+                !isNyop ||
+                (!isNaN(nyopAmount) && nyopAmount >= minimum && nyopAmount >= 0.5);
+              const nyopError =
+                isNyop && nyopRaw !== '' && !isNaN(nyopAmount) && nyopAmount < minimum
+                  ? minimum === 0
+                    ? 'Minimum charge is $0.50'
+                    : `Minimum is $${minimum.toFixed(2)}`
+                  : isNyop && nyopRaw !== '' && !isNaN(nyopAmount) && nyopAmount < 0.5
+                    ? 'Minimum charge is $0.50'
+                    : null;
+
               return (
                 <div
                   key={format._key}
-                  className='flex flex-col gap-2 border border-hp-sand-border bg-white p-4 dark:border-hp-dark-border dark:bg-hp-dark-card sm:flex-row sm:items-center sm:justify-between'
+                  className='flex flex-col gap-2 border border-hp-sand-border bg-white p-4 dark:border-hp-dark-border dark:bg-hp-dark-card'
                 >
-                  <div>
-                    <p className='text-sm font-black uppercase tracking-wide text-slate-900 dark:text-hp-cream'>
-                      {formatLabel(format)}
-                    </p>
-                    {format.formatType === 'digital' && format.digitalAsset && (
-                      <p className='text-[10px] text-slate-400'>
-                        {format.digitalAsset.fileFormat}
-                        {format.digitalAsset.fileSize ? ` · ${format.digitalAsset.fileSize}` : ''}
+                  <div className='flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between'>
+                    <div>
+                      <p className='text-sm font-black uppercase tracking-wide text-slate-900 dark:text-hp-cream'>
+                        {formatLabel(format)}
                       </p>
-                    )}
-                    {format.formatType !== 'digital' && format.dimensions && (
-                      <p className='text-[10px] text-slate-400'>{format.dimensions}</p>
-                    )}
-                    {lowStock && (
-                      <p className='text-[10px] font-bold text-amber-500'>
-                        Only {format.inventory?.quantity} left
-                      </p>
-                    )}
-                    {outOfStock && (
-                      <p className='text-[10px] font-bold text-slate-400'>Out of stock</p>
-                    )}
-                  </div>
-
-                  <div className='flex flex-wrap items-center gap-3'>
-                    <div className='text-right'>
-                      {format.compareAtPrice != null && (
-                        <p className='text-xs text-slate-400 line-through'>
-                          ${format.compareAtPrice.toFixed(2)}
+                      {format.formatType === 'digital' && format.digitalAsset && (
+                        <p className='text-[10px] text-slate-400'>
+                          {format.digitalAsset.fileFormat}
+                          {format.digitalAsset.fileSize ? ` · ${format.digitalAsset.fileSize}` : ''}
                         </p>
                       )}
-                      <p className='text-lg font-black text-untele'>${format.price.toFixed(2)}</p>
+                      {format.formatType !== 'digital' && format.dimensions && (
+                        <p className='text-[10px] text-slate-400'>{format.dimensions}</p>
+                      )}
+                      {lowStock && (
+                        <p className='text-[10px] font-bold text-amber-500'>
+                          Only {format.inventory?.quantity} left
+                        </p>
+                      )}
+                      {outOfStock && (
+                        <p className='text-[10px] font-bold text-slate-400'>Out of stock</p>
+                      )}
                     </div>
 
-                    {!outOfStock && (
-                      <div className='flex flex-wrap gap-2'>
-                        {/* Add to Cart — hidden when gift mode is active */}
-                        {!giftOptions && <AddToCartButton book={book} format={format} />}
-                        {format.stripePriceId && (
-                          <BuyNowButton
-                            book={book}
-                            format={format}
-                            giftOptions={giftOptions ?? undefined}
-                          />
-                        )}
-                      </div>
-                    )}
+                    <div className='flex flex-wrap items-center gap-3'>
+                      {/* Price display */}
+                      {!isNyop && (
+                        <div className='text-right'>
+                          {format.compareAtPrice != null && (
+                            <p className='text-xs text-slate-400 line-through'>
+                              ${format.compareAtPrice.toFixed(2)}
+                            </p>
+                          )}
+                          <p className='text-lg font-black text-untele'>${format.price.toFixed(2)}</p>
+                        </div>
+                      )}
+                      {isNyop && (
+                        <div className='text-right'>
+                          <p className='text-[10px] font-bold uppercase tracking-widest text-untele'>
+                            Pay What You Want
+                          </p>
+                          {minimum > 0 && (
+                            <p className='text-[10px] text-slate-400'>
+                              from ${minimum.toFixed(2)}
+                            </p>
+                          )}
+                        </div>
+                      )}
+
+                      {!outOfStock && !isNyop && (
+                        <div className='flex flex-wrap gap-2'>
+                          {!giftOptions && <AddToCartButton book={book} format={format} />}
+                          {format.stripePriceId && (
+                            <BuyNowButton
+                              book={book}
+                              format={format}
+                              giftOptions={giftOptions ?? undefined}
+                            />
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
+
+                  {/* NYOP price input + action buttons */}
+                  {!outOfStock && isNyop && (
+                    <div className='border-t border-hp-sand-border pt-3 dark:border-hp-dark-border'>
+                      <div className='flex flex-wrap items-center gap-3'>
+                        <div>
+                          <p className='mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500'>
+                            Your Price (USD)
+                            {minimum > 0 && (
+                              <span className='ml-1 font-normal normal-case tracking-normal text-slate-400'>
+                                — min ${minimum.toFixed(2)}
+                              </span>
+                            )}
+                          </p>
+                          <div className='flex items-center gap-1'>
+                            <span className='text-sm font-bold text-slate-400'>$</span>
+                            <input
+                              type='number'
+                              step='0.01'
+                              min={Math.max(minimum, 0.5)}
+                              value={nyopRaw}
+                              onChange={(e) =>
+                                setNyopAmounts((prev) => ({ ...prev, [format._key]: e.target.value }))
+                              }
+                              placeholder={
+                                format.suggestedPrice != null
+                                  ? format.suggestedPrice.toFixed(2)
+                                  : minimum > 0
+                                    ? minimum.toFixed(2)
+                                    : '0.00'
+                              }
+                              className='w-20 border border-slate-200 bg-white px-2 py-1 text-sm font-bold text-slate-800 focus:border-untele focus:outline-none dark:border-slate-700 dark:bg-transparent dark:text-slate-200'
+                            />
+                          </div>
+                          {nyopError && (
+                            <p className='mt-0.5 text-[10px] font-bold text-red-500'>{nyopError}</p>
+                          )}
+                        </div>
+                        <div className='flex flex-wrap gap-2'>
+                          {!giftOptions && (
+                            <AddToCartButton
+                              book={book}
+                              format={format}
+                              customPrice={!isNaN(nyopAmount) ? nyopAmount : undefined}
+                              disabled={!nyopValid || nyopRaw === ''}
+                            />
+                          )}
+                          {format.stripeProductId && (
+                            <BuyNowButton
+                              book={book}
+                              format={format}
+                              giftOptions={giftOptions ?? undefined}
+                              customPrice={!isNaN(nyopAmount) ? nyopAmount : undefined}
+                              disabled={!nyopValid || nyopRaw === ''}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
+
           </div>
         </>
       )}

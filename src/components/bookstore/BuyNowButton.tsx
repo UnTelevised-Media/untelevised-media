@@ -9,6 +9,8 @@ interface Props {
   label?: string;
   className?: string;
   giftOptions?: GiftOptions | null;
+  customPrice?: number; // required when format.nameYourPrice is true
+  disabled?: boolean;
 }
 
 export default function BuyNowButton({
@@ -17,13 +19,20 @@ export default function BuyNowButton({
   label = 'Buy Now',
   className,
   giftOptions,
+  customPrice,
+  disabled,
 }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleBuyNow = async () => {
-    if (!format.stripePriceId) {
+    const isNyop = !!format.nameYourPrice;
+    if (!isNyop && !format.stripePriceId) {
       setError('Not yet available for direct purchase');
+      return;
+    }
+    if (isNyop && (!format.stripeProductId || !customPrice || customPrice < 0.5)) {
+      setError('Please enter a valid amount');
       return;
     }
     setLoading(true);
@@ -32,13 +41,15 @@ export default function BuyNowButton({
     const payload: CheckoutPayload = {
       items: [
         {
-          stripePriceId: format.stripePriceId,
+          // NYOP uses product ID so checkout route can build price_data
+          stripePriceId: isNyop ? (format.stripeProductId ?? '') : (format.stripePriceId ?? ''),
           quantity: 1,
           sanityBookId: book._id,
           formatType: format.formatType,
           formatKey: format._key,
           title: book.title,
           isDigital: format.formatType === 'digital',
+          ...(isNyop && customPrice ? { unitAmountCents: Math.round(customPrice * 100), isNyop: true } : {}),
         },
       ],
       ...(giftOptions ? { giftOptions } : {}),
@@ -67,7 +78,7 @@ export default function BuyNowButton({
     <div>
       <button
         onClick={handleBuyNow}
-        disabled={loading}
+        disabled={loading || disabled}
         className={
           className ??
           'border border-untele bg-white px-5 py-2.5 text-xs font-black uppercase tracking-widest text-untele hover:bg-untele hover:text-white disabled:opacity-50 dark:bg-transparent dark:text-untele dark:hover:bg-untele dark:hover:text-white'
