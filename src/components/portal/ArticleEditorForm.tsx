@@ -36,7 +36,6 @@ import {
 import { PitchQuickViewModal, type PitchForModal } from './PitchQuickViewModal';
 import { blockNoteToPortableText, portableTextToBlockNote } from '@/lib/portal/blocknote-serializer';
 import urlFor from '@/lib/sanity/utils/image';
-import { uploadImageToSanity } from '@/lib/portal/image-actions';
 import SourceSelectorModal from './SourceSelectorModal';
 
 // Lazy-load the WYSIWYG editor to avoid SSR
@@ -49,7 +48,7 @@ const RichTextEditor = dynamic(() => import('./RichTextEditor'), { ssr: false })
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   slug: z.string().min(1, 'Slug is required').max(200).regex(/^[a-z0-9-]+$/, 'Slug: lowercase letters, numbers, hyphens only'),
-  description: z.string().max(500).optional(),
+  description: z.string().max(1000).optional(),
   leadParagraph: z.string().max(1000).optional(),
   featured: z.boolean().default(false),
   breakingNews: z.boolean().default(false),
@@ -478,7 +477,7 @@ export default function ArticleEditorForm({
 
   return (
     <>
-    <form className='space-y-8'>
+    <form className='space-y-8' onSubmit={(e) => e.preventDefault()}>
       {/* Sticky action bar */}
       <div className='sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-white/95 px-4 py-2 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95'>
         <div className='flex items-center gap-2'>
@@ -603,8 +602,12 @@ export default function ArticleEditorForm({
           id='description'
           {...register('description')}
           rows={3}
+          maxLength={1000}
           placeholder='1–3 sentence summary shown on article cards and in search results…'
         />
+        {errors.description && (
+          <p className='mt-1 text-xs text-red-500'>{errors.description.message}</p>
+        )}
       </section>
 
       {/* Lead paragraph */}
@@ -657,16 +660,22 @@ export default function ArticleEditorForm({
                 const file = e.target.files?.[0];
                 if (!file) return;
                 setImageUploading(true);
-                const fd = new FormData();
-                fd.append('file', file);
-                const result = await uploadImageToSanity(fd);
-                setImageUploading(false);
-                e.target.value = '';
-                if (result.success) {
-                  setMainImage({ assetRef: result.assetId, url: result.url, alt: mainImage?.alt ?? '' });
+                try {
+                  const fd = new FormData();
+                  fd.append('file', file);
+                  const res = await fetch('/api/portal/upload-image', { method: 'POST', body: fd });
+                  const data = await res.json() as { assetId?: string; url?: string; error?: string };
+                  if (!res.ok) {
+                    toast.error(data.error ?? 'Image upload failed');
+                    return;
+                  }
+                  setMainImage({ assetRef: data.assetId!, url: data.url!, alt: mainImage?.alt ?? '' });
                   isDirtyRef.current = true;
-                } else {
-                  toast.error(result.error);
+                } catch {
+                  toast.error('Image upload failed. Please try again.');
+                } finally {
+                  setImageUploading(false);
+                  e.target.value = '';
                 }
               }}
             />
@@ -1034,7 +1043,10 @@ export default function ArticleEditorForm({
             {...register('videoLink')}
             placeholder='YouTube URL (e.g. https://www.youtube.com/watch?v=…)'
           />
-          {watch('videoLink') && (
+          {errors.videoLink && (
+            <p className='mt-1 text-xs text-red-500'>{errors.videoLink.message}</p>
+          )}
+          {watch('videoLink') && !errors.videoLink && (
             <div className='aspect-video max-w-md'>
               <iframe
                 src={`https://www.youtube.com/embed/${

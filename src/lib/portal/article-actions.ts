@@ -28,7 +28,7 @@ const slugSchema = z.object({
 const articleWriteSchema = z.object({
   title: z.string().min(1, 'Title is required').max(300),
   slug: slugSchema,
-  description: z.string().max(500).optional(),
+  description: z.string().max(1000).optional(),
   leadParagraph: z.string().max(1000).optional(),
   body: z.array(z.record(z.string(), z.unknown())).optional(), // Portable Text blocks
   featured: z.boolean().optional(),
@@ -203,6 +203,7 @@ export async function createArticle(
     location: sanitized.location ?? '',
     allowComments: sanitized.allowComments ?? true,
     mainImage: sanitized.mainImage ?? undefined,
+    ...(sanitized.publishedAt ? { publishedAt: sanitized.publishedAt } : {}),
     sources: sanitized.sources ?? [],
     relatedArticles: sanitized.relatedArticles ?? [],
     methodology: sanitized.methodology ?? '',
@@ -297,6 +298,11 @@ export async function updateArticle(
   // Nullable optional fields — use Sanity's unset when cleared, set when present.
   // Passing undefined to .set() silently skips the field and leaves stale data in Sanity.
   const fieldsToUnset: string[] = [];
+  if (sanitized.publishedAt) {
+    setFields.publishedAt = sanitized.publishedAt;
+  } else {
+    fieldsToUnset.push('publishedAt');
+  }
   if (sanitized.mainImage != null) {
     setFields.mainImage = sanitized.mainImage;
   } else {

@@ -37,7 +37,7 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
 
       {/* ── Hurriya Publications sub-brand ── */}
       <section
-        className='relative overflow-hidden border-b-2 border-[#009736] bg-gradient-to-r from-hp-sand to-hp-sand-mid dark:from-hp-dark dark:to-hp-dark-card'
+        className='relative overflow-hidden border-b border-slate-200 bg-gradient-to-r from-hp-sand to-hp-sand-mid dark:border-slate-700 dark:from-hp-dark dark:to-hp-dark-card'
         aria-label='Hurriya Publications'
       >
         <div className='mx-auto flex max-w-7xl items-stretch px-4 sm:px-6 lg:px-8'>
@@ -104,10 +104,10 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
             />
           </div>
         </div>
-
-        {/* ── Section nav — bottom strip of the banner ── */}
-        <BookstoreNav />
       </section>
+
+      {/* ── Bookstore nav — outside overflow-hidden so dropdowns aren't clipped ── */}
+      <BookstoreNav />
 
       {/* ── Page content ── */}
       {children}
