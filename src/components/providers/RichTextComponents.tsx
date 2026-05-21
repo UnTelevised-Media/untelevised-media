@@ -240,6 +240,23 @@ export const RichTextComponents = {
       const videoUrl = value.videoUrl;
       return <TikTokEmbed videoUrl={videoUrl} />;
     },
+
+    // ── Vimeo Embeds ─────────────────────────────────────────────────────────
+    vimeoEmbed: ({ value }: any) => {
+      const { videoId } = value;
+      if (!videoId) return null;
+      return (
+        <div className='my-8 aspect-video w-full border border-slate-300 dark:border-slate-700'>
+          <iframe
+            className='h-full w-full'
+            src={`https://player.vimeo.com/video/${videoId}`}
+            title='Vimeo Video'
+            allow='autoplay; fullscreen; picture-in-picture'
+            allowFullScreen
+          ></iframe>
+        </div>
+      );
+    },
   },
 
   // ── List Renderers ──────────────────────────────────────────────────────────

@@ -207,6 +207,9 @@ export default defineType({
       type: 'tiktokEmbed',
     }),
     defineArrayMember({
+      type: 'vimeoEmbed',
+    }),
+    defineArrayMember({
       name: 'factCheckEmbed',
       title: 'Fact Check',
       type: 'object',

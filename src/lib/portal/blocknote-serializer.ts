@@ -8,7 +8,7 @@
 //   paragraph, heading, quote, bulletListItem, numberedListItem,
 //   codeBlock, table, image, divider,
 //   youtubeEmbed (custom), twitterEmbed (custom), instagramEmbed (custom),
-//   facebookEmbed (custom), tiktokEmbed (custom)
+//   facebookEmbed (custom), tiktokEmbed (custom), vimeoEmbed (custom)
 
 // ─── Local types (avoid coupling to BlockNote generics) ──────────────────────
 
@@ -242,6 +242,13 @@ function bnBlockToPT(block: BNBlock): SanityBlockAny | null {
         videoUrl: (block.props.videoUrl as string) ?? '',
       };
 
+    case 'vimeoEmbed':
+      return {
+        _type: 'vimeoEmbed',
+        _key: genKey(),
+        videoId: (block.props.videoId as string) ?? '',
+      };
+
     default:
       return null;
   }
@@ -436,6 +443,14 @@ function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (ref: string) => stri
         return {
           type: 'tiktokEmbed',
           props: { videoUrl: (b.videoUrl as string) ?? '' },
+          content: undefined,
+          children: [],
+        };
+
+      case 'vimeoEmbed':
+        return {
+          type: 'vimeoEmbed',
+          props: { videoId: (b.videoId as string) ?? '' },
           content: undefined,
           children: [],
         };

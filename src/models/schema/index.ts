@@ -57,6 +57,7 @@ import twitterEmbed from './twitterX';
 import youtubeEmbed from './youtube';
 import facebookEmbed from './facebook';
 import tiktokEmbed from './tiktok';
+import vimeoEmbed from './vimeo';
 
 // Add your new schemas below, organized into the appropriate sections
 // Example:
@@ -111,6 +112,7 @@ export const schemaTypes = [
   youtubeEmbed,
   facebookEmbed,
   tiktokEmbed,
+  vimeoEmbed,
 
   // Shared object schemas
   correctionObject,
@@ -177,6 +179,7 @@ export {
   youtubeEmbed,
   facebookEmbed,
   tiktokEmbed,
+  vimeoEmbed,
 
   // Shared object schemas
   correctionObject,
