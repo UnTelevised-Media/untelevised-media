@@ -85,20 +85,6 @@ export async function POST(req: NextRequest) {
     );
     const hasDigital = chargeableItems.some((i) => i.isDigital);
 
-    const keyPrefix = (process.env.STRIPE_SECRET_KEY ?? '').slice(0, 14);
-    console.log(
-      '[shop/checkout] key prefix:',
-      keyPrefix,
-      '| items:',
-      JSON.stringify(
-        chargeableItems.map((i) => ({
-          title: i.title,
-          priceId: i.stripePriceId,
-          type: i.formatType,
-        }))
-      )
-    );
-
     const lineItems = await Promise.all(
       chargeableItems.map(async (item) => {
         const storedId = item.stripePriceId.trim();

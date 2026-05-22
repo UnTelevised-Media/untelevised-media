@@ -24,7 +24,5 @@ export async function GET(req: NextRequest) {
   }
   await transaction.commit();
 
-  console.log(`[cron] cleanup-briefs: deleted ${ids.length} brief(s) older than ${cutoff}`);
-
   return NextResponse.json({ deleted: ids.length, ids });
 }
