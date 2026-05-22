@@ -119,6 +119,12 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const role = getRoleFromUser(user);
   if (!role) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
+  // Explicit allowlist — only admin, sales, and authors may update order status.
+  // Editor role is intentionally excluded: editors manage content, not fulfillment.
+  if (role !== 'admin' && role !== 'sales' && role !== 'author') {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
   const parsed = schema.safeParse(await req.json().catch(() => ({})));
   if (!parsed.success) {
     return NextResponse.json(
