@@ -1039,7 +1039,7 @@ async function getOrCreateAuthor(name: string): Promise<string | null> {
 
   try {
     // Search existing authors
-    const existing = await client.fetch<Array<{ _id: string }>>(
+    const existing = await client.fetch<{ _id: string } | null>(
       `*[_type == "author" && name == $name][0]{ _id }`,
       { name: cleanName }
     );
@@ -1185,7 +1185,7 @@ async function migrateArticle(config: ArticleConfig): Promise<void> {
   const tags = [...new Set([...config.tags, ...hashtagTags])].slice(0, 10);
 
   // ── Article document ──
-  const articleDoc: Record<string, unknown> = {
+  const articleDoc: Record<string, unknown> & { _type: string } = {
     _type: 'article',
     title,
     slug: { _type: 'slug', current: slug },

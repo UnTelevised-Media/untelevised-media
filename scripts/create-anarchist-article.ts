@@ -207,7 +207,7 @@ async function main() {
   }
 
   // ── Build article document ──
-  const doc: Record<string, unknown> = {
+  const doc: Record<string, unknown> & { _type: string } = {
     _type: 'article',
     title: '11 Things Every Anarchist Should Be Doing',
     slug: { _type: 'slug', current: slug },

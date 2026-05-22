@@ -186,7 +186,7 @@ async function main() {
   }
 
   // ── Build article document ──
-  const doc: Record<string, unknown> = {
+  const doc: Record<string, unknown> & { _type: string } = {
     _type: 'article',
     title: 'ISRAEL AND PALESTINE – a Personal Reflection',
     slug: { _type: 'slug', current: slug },

@@ -218,7 +218,7 @@ async function main() {
   }
 
   // ── Build article document ──
-  const doc: Record<string, unknown> = {
+  const doc: Record<string, unknown> & { _type: string } = {
     _type: 'article',
     title: 'So, I was waterboarded…',
     slug: { _type: 'slug', current: slug },
