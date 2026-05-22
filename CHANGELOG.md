@@ -4,6 +4,39 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-05-22] — SEO/AEO Audit Remediation (feature/seo-aeo-audit-68-79 → main)
+
+Full SEO/AEO audit remediation pass covering 11 issues (#68–#79). All high and medium priority findings resolved; one issue (#78) found pre-resolved in existing code.
+
+### SEO/AEO — Added
+
+- **Music artist pages — MusicGroup JSON-LD** (`(music)/music-artists/[slug]/page.tsx`) — Replaced inline schema with `<ArtistStructuredData>` component (MusicGroup with sameAs social links, foundingLocation, track listing). Closes #68.
+- **Lyrics pages — MusicRecording JSON-LD** (`(music)/lyrics/[slug]/page.tsx`) — Replaced inline MusicComposition schema with `<SongStructuredData>` component (MusicRecording with byArtist, inAlbum, duration, datePublished). Closes #68.
+- **ClaimReview JSON-LD canonical URL fix** (`lib/factCheck/claimReviewJsonLd.ts`) — Fixed SITE_URL: `https://untelevised.media` → `https://www.untelevised.media`. Closes #69.
+- **Fact-check pages — full OG metadata** (`(news)/fact-check/[slug]/page.tsx`) — Replaced minimal metadata with `buildFactCheckMetadata()`: og:type article, og:image, modifiedTime, canonical URL, Twitter card. Closes #69.
+- **GlobalStructuredData in music layout** (`(music)/layout.tsx`) — NewsMediaOrganization + WebSite schema now present on all music pages; essential for E-E-A-T signals. Closes #70.
+- **Music collection pages — OG images** (`(music)/music-artists/page.tsx`, `(music)/lyrics/page.tsx`) — Added openGraph.images, canonical URL, Twitter card to both index pages. Closes #71.
+- **Breaking news canonical URL** (`(news)/breaking/[slug]/page.tsx`) — Overrides live-event canonical to `getCanonicalUrl('breaking', slug)`; adds og:section Breaking News. Closes #72.
+- **Portal layout noindex** (`(portal)/layout.tsx`) — `robots: { index: false, follow: false }` cascades to all portal routes. Auth pages already had noindex. Closes #73.
+- **Book JSON-LD — publisher, author URL, aggregateRating** (`(user)/bookstore/book/[slug]/page.tsx`) — Added Hurriya Publications publisher, `author.url`, conditional `aggregateRating` computed from approved reviews (included only when reviewCount > 0). Closes #77.
+
+### SEO/AEO — Fixed
+
+- **Article OG modifiedTime** (`util/metadata.ts` `buildArticleMetadata`) — Added `modifiedTime: article.updatedAt ?? article.publishedAt`. Closes #74.
+- **Bookstore OG image absolute URL** (`(user)/bookstore/layout.tsx`, `(user)/bookstore/book/[slug]/page.tsx`) — Relative `/hurriya-pub/Logo-alt.png` paths replaced with `HURRIYA_OG_IMAGE` constant (absolute HTTPS URL). Closes #75.
+- **Twitter handle standardized** (`util/metadata/generateArticleMetadata.ts`) — `@UnTelevisedLive` replaced with imported `TWITTER_HANDLE` constant (`@untelevised`). Closes #76.
+- **Tag page canonical URL** (`(news)/tag/[slug]/page.tsx`) — Hardcoded URL replaced with `getCanonicalUrl('tag', slug)`; full OG/Twitter metadata added. Closes #79.
+
+### SEO/AEO — No Change Required
+
+- **NewsArticle dateModified null case** (`components/seo/NewsArticleStructuredData.tsx`) — Audit finding pre-resolved: `article.updatedAt ?? article._updatedAt ?? article.publishedAt` triple-fallback already in place. Closes #78.
+
+### Changed
+
+- **`util/metadata.ts`** — Exports `TWITTER_HANDLE`, `DEFAULT_OG_IMAGE`, `HURRIYA_OG_IMAGE` constants; adds `buildBreakingNewsMetadata()` and `buildFactCheckMetadata()` helper functions.
+
+---
+
 ## [2026-05-22] — Security Remediation (security-issues → main)
 
 Full security audit and remediation pass. 13 vulnerabilities resolved across two audit rounds; all critical and high severity findings closed. Audit report at `audit-report/index.html`.
