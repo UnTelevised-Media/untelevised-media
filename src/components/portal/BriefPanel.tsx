@@ -4,7 +4,7 @@
 // Authors can claim, pass, 2nd-thought, mark-in-progress, open pitch.
 // Editors can assign to specific authors.
 
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { ExternalLink, ChevronDown, ChevronUp, EyeOff, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -132,6 +132,7 @@ function StoryCard({
   authors,
   onPass,
   onUnpass,
+  onClaim,
 }: {
   story: BriefStory;
   briefId: string;
@@ -142,15 +143,27 @@ function StoryCard({
   authors: PortalAuthor[];
   onPass?: (storyKey: string) => void;
   onUnpass?: (storyKey: string) => void;
+  onClaim?: (storyKey: string, pitchId: string) => void;
 }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [showSources, setShowSources] = useState(false);
   const [assignTargetId, setAssignTargetId] = useState('');
 
+  const hasNullKey = !story._key;
   const status = story.status ?? 'unclaimed';
   const isMyStory = !!currentSanityAuthorId && story.claimedBy?._id === currentSanityAuthorId;
   const isPublished = status === 'published';
+  const isClaimedByOther = !isMyStory && (status === 'claimed' || status === 'in_progress');
+  // Regular authors see the card dimmed; editors stay at full opacity so they can manage it
+  const shouldDim = isClaimedByOther && !isEditorPlus;
+  // Only render the actions footer when the current user actually has something to do
+  const hasActions =
+    !isPublished &&
+    (isPassed ||
+      status === 'unclaimed' ||
+      (isMyStory && (status === 'claimed' || status === 'in_progress')) ||
+      (isClaimedByOther && isEditorPlus));
   const urgency = story.urgency ?? 'medium';
   const urgencyMeta = URGENCY_META[urgency] ?? URGENCY_META.medium;
   const statusMeta = STATUS_META[status] ?? STATUS_META.unclaimed;
@@ -195,7 +208,7 @@ function StoryCard({
   return (
     <div
       className={`border bg-white p-4 transition-all dark:bg-slate-900 ${
-        isPassed ? 'opacity-40' : ''
+        isPassed ? 'opacity-40' : shouldDim ? 'opacity-50' : ''
       } ${
         urgency === 'breaking'
           ? 'border-red-400 dark:border-red-700'
@@ -295,8 +308,8 @@ function StoryCard({
         </div>
       )}
 
-      {/* Actions */}
-      {!isPublished && (
+      {/* Actions — only when the current user has something actionable */}
+      {hasActions && (
         <div className='mt-3 flex flex-wrap gap-2 border-t border-slate-100 pt-3 dark:border-slate-800'>
           {/* PASSED: 2nd Thought */}
           {isPassed && (
@@ -312,9 +325,24 @@ function StoryCard({
           {/* UNCLAIMED: Claim + Pass + Assign */}
           {!isPassed && status === 'unclaimed' && (
             <>
+              {hasNullKey && (
+                <span className='text-[10px] font-bold text-amber-600 dark:text-amber-400'>
+                  Brief needs repair — editor must re-save
+                </span>
+              )}
               <button
-                disabled={isPending}
-                onClick={() => act(() => claimStory(briefId, story._key))}
+                disabled={isPending || hasNullKey}
+                onClick={() => {
+                  startTransition(async () => {
+                    const result = await claimStory(briefId, story._key);
+                    if (result.success) {
+                      onClaim?.(story._key, result.pitchId);
+                      router.refresh();
+                    } else {
+                      toast.error(result.error);
+                    }
+                  });
+                }}
                 className='bg-untele px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white hover:opacity-90 disabled:opacity-50'
               >
                 {isPending ? 'Claiming…' : 'Claim Story'}
@@ -342,7 +370,7 @@ function StoryCard({
                   </select>
                   {assignTargetId && (
                     <button
-                      disabled={isPending}
+                      disabled={isPending || hasNullKey}
                       onClick={() => act(() => assignStory(briefId, story._key, assignTargetId))}
                       className='bg-slate-700 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white hover:opacity-90 disabled:opacity-50 dark:bg-slate-600'
                     >
@@ -419,10 +447,25 @@ export function BriefPanel({
   isEditorPlus = false,
 }: Props) {
   const [showHidden, setShowHidden] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(() =>
+    Math.max(0, briefList.findIndex((b) => b._id === brief._id)),
+  );
   const [loadedBrief, setLoadedBrief] = useState<Brief>(brief);
   const [loadedPitchMap, setLoadedPitchMap] = useState<Record<string, string>>(initialPitchMap);
   const [isNavigating, setIsNavigating] = useState(false);
+
+  // Track which brief the user is currently viewing so we can sync from server props
+  // after router.refresh() without clobbering manual navigation state.
+  const viewedBriefIdRef = useRef(brief._id);
+
+  useEffect(() => {
+    if (brief._id === viewedBriefIdRef.current) {
+      setLoadedBrief(brief);
+      setLoadedPitchMap(initialPitchMap);
+    }
+  // brief and initialPitchMap are new object refs every RSC render — that's the signal
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [brief, initialPitchMap]);
 
   async function navigateTo(index: number) {
     const target = briefList[index];
@@ -431,6 +474,7 @@ export function BriefPanel({
     try {
       const result = await fetchBriefById(target._id);
       if (result.brief) {
+        viewedBriefIdRef.current = target._id;
         setLoadedBrief(result.brief as Brief);
         setLoadedPitchMap(result.myPitchMap);
         setCurrentIndex(index);
@@ -439,6 +483,10 @@ export function BriefPanel({
     } finally {
       setIsNavigating(false);
     }
+  }
+
+  function handleOptimisticClaim(storyKey: string, pitchId: string) {
+    setLoadedPitchMap((prev) => ({ ...prev, [storyKey]: pitchId }));
   }
 
   function handleOptimisticPass(storyKey: string) {
@@ -589,18 +637,19 @@ export function BriefPanel({
           {/* Visible stories */}
           {visibleStories.length === 0 && hiddenStories.length === 0 ? null : (
             <div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
-              {visibleStories.map((story) => (
+              {visibleStories.map((story, idx) => (
                 <StoryCard
-                  key={story._key}
+                  key={story._key ?? `story-${idx}`}
                   story={story}
                   briefId={activeBrief._id}
                   currentSanityAuthorId={currentSanityAuthorId}
-                  myPitchId={loadedPitchMap[story._key]}
+                  myPitchId={story._key ? loadedPitchMap[story._key] : undefined}
                   isPassed={false}
                   isEditorPlus={isEditorPlus}
                   authors={authors}
                   onPass={handleOptimisticPass}
                   onUnpass={handleOptimisticUnpass}
+                  onClaim={handleOptimisticClaim}
                 />
               ))}
             </div>
@@ -620,18 +669,19 @@ export function BriefPanel({
               </button>
               {showHidden && (
                 <div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
-                  {hiddenStories.map((story) => (
+                  {hiddenStories.map((story, idx) => (
                     <StoryCard
-                      key={story._key}
+                      key={story._key ?? `hidden-${idx}`}
                       story={story}
                       briefId={activeBrief._id}
                       currentSanityAuthorId={currentSanityAuthorId}
-                      myPitchId={loadedPitchMap[story._key]}
+                      myPitchId={story._key ? loadedPitchMap[story._key] : undefined}
                       isPassed={true}
                       isEditorPlus={isEditorPlus}
                       authors={authors}
                       onPass={handleOptimisticPass}
                       onUnpass={handleOptimisticUnpass}
+                      onClaim={handleOptimisticClaim}
                     />
                   ))}
                 </div>

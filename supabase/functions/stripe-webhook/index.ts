@@ -117,6 +117,16 @@ type EmailPayload =
       type: 'refund';
       to: string;
       orderNumber: string;
+    }
+  | {
+      type: 'gift';
+      to: string;
+      bookTitle: string;
+      bookCoverUrl?: string;
+      fromName?: string;
+      anonymous: boolean;
+      downloadUrl: string;
+      expiresAt: string;
     };
 
 async function sendEmail(payload: EmailPayload): Promise<void> {
@@ -438,7 +448,8 @@ interface ItemMeta {
   qty: number;
   title: string;
   priceId: string;
-  unitAmountCents?: number; // tips only — user-entered amount stored at checkout time
+  unitAmountCents?: number; // tips and NYOP — user-entered amount stored at checkout time
+  isNyop?: boolean; // true when buyer chose their own price (Name Your Own Price)
 }
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promise<void> {
@@ -446,6 +457,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
   const clerkUserId = session.metadata?.clerk_user_id || null;
   const customerEmail = session.customer_details?.email ?? '';
   const customerName = session.customer_details?.name ?? undefined;
+
+  // Gift purchasing metadata
+  const giftRecipientEmail = session.metadata?.gift_recipient_email || null;
+  const giftFromName = session.metadata?.gift_from_name || null;
+  const giftAnonymous = session.metadata?.gift_anonymous === 'true';
+  const isGift = !!giftRecipientEmail;
 
   if (!customerEmail) {
     console.error('[webhook] No customer email on session', session.id);
@@ -597,15 +614,18 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
   //   - fallback for non-tips: spread (subtotal - known tip amounts) across non-tip qty so a
   //     tip in a mixed order never inflates the book price
 
-  // Pre-compute: tip amounts we know from metadata (needed for fallback)
+  // Pre-compute known amounts for fallback (tips and NYOP use price_data so pricePaidMap misses them)
   const metaTipCents = items
     .filter((i) => i.formatType === 'tip')
     .reduce((s, i) => s + (i.unitAmountCents ?? 0), 0);
-  const nonTipTotalQty = items
-    .filter((i) => i.formatType !== 'tip')
+  const metaNyopCents = items
+    .filter((i) => i.isNyop)
+    .reduce((s, i) => s + (i.unitAmountCents ?? 0) * i.qty, 0);
+  const fixedPriceTotalQty = items
+    .filter((i) => i.formatType !== 'tip' && !i.isNyop)
     .reduce((s, i) => s + i.qty, 0);
-  // Estimated non-tip subtotal for fallback (strips tips from the subtotal)
-  const nonTipFallbackSubtotal = Math.max(0, subtotalCents - metaTipCents);
+  // Estimated fixed-price subtotal for fallback (excludes tip and NYOP amounts)
+  const nonTipFallbackSubtotal = Math.max(0, subtotalCents - metaTipCents - metaNyopCents);
 
   const orderItemRows = items.map((item) => {
     // For both tips and non-tips:
@@ -640,14 +660,34 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
       };
     }
 
-    // Non-tip items: look up by price ID from expanded line items.
+    if (item.isNyop) {
+      // NYOP items use price_data (ephemeral price ID), so pricePaidMap lookup fails.
+      // Use unitAmountCents stored in checkout metadata as the authoritative price.
+      const unitPriceCents =
+        item.unitAmountCents != null && item.unitAmountCents > 0
+          ? item.unitAmountCents
+          : Math.round(nonTipFallbackSubtotal / Math.max(fixedPriceTotalQty + item.qty, 1));
+      return {
+        order_id: orderId,
+        sanity_book_id: item.bookId,
+        sanity_format_type: item.formatType,
+        book_title: item.title,
+        format_label: item.formatType.charAt(0).toUpperCase() + item.formatType.slice(1),
+        unit_price_cents: unitPriceCents,
+        quantity: item.qty,
+        stripe_price_id: item.priceId,
+        is_digital: item.isDigital,
+        download_fulfilled: false,
+      };
+    }
+
+    // Fixed-price items: look up by price ID from expanded line items.
 
     const unitPriceCents =
       relevantAmount != null
         ? Math.round(relevantAmount / Math.max(item.qty, 1))
-        : // Fallback: divide the non-tip portion of the subtotal by total non-tip quantity.
-          // This avoids tip amounts inflating the per-book price.
-          Math.round(nonTipFallbackSubtotal / Math.max(nonTipTotalQty, 1));
+        : // Fallback: divide the fixed-price portion of the subtotal by fixed-price quantity.
+          Math.round(nonTipFallbackSubtotal / Math.max(fixedPriceTotalQty, 1));
 
     return {
       order_id: orderId,
@@ -708,11 +748,11 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     const revenueTerms = bookInfo?.revenueTerms ?? null;
     const isTip = meta.formatType === 'tip';
 
-    // Tips: pricePaidMap lookup always fails (ephemeral price ID), so use unit_price_cents
-    // which was set from unitAmountCents above.
-    // Non-tips: test promo records original list price; real orders/coupons record paid price.
+    // Tips and NYOP: pricePaidMap lookup always fails (ephemeral price_data ID), so
+    // unit_price_cents (set from unitAmountCents) is the authoritative gross amount.
+    // Fixed-price items: test promo records original list price; real orders record paid price.
     let grossCents: number;
-    if (isTip) {
+    if (isTip || meta.isNyop) {
       grossCents = createdItem.unit_price_cents * createdItem.quantity;
     } else {
       const paidTotal = pricePaidMap.get(meta.priceId) ?? null;
@@ -897,19 +937,37 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session): Promis
     });
   }
 
-  // Guest download emails: one per digital item (single-use tokens)
-  for (const link of guestDownloadLinks) {
-    const guestExpiry = new Date();
-    guestExpiry.setDate(guestExpiry.getDate() + 14);
-    void sendEmail({
-      type: 'guest-download',
-      to: customerEmail,
-      orderNumber,
-      bookTitle: link.bookTitle,
-      downloadUrl: link.downloadUrl,
-      expiresAt: guestExpiry.toISOString(),
-      storagePath: link.storagePath,
-    });
+  if (isGift && guestDownloadLinks.length > 0) {
+    // Gift purchase: send gift email to recipient, standard order confirmation to buyer
+    const giftExpiry = new Date();
+    giftExpiry.setDate(giftExpiry.getDate() + 14);
+
+    for (const link of guestDownloadLinks) {
+      void sendEmail({
+        type: 'gift',
+        to: giftRecipientEmail!,
+        bookTitle: link.bookTitle,
+        fromName: giftFromName ?? undefined,
+        anonymous: giftAnonymous,
+        downloadUrl: link.downloadUrl,
+        expiresAt: giftExpiry.toISOString(),
+      });
+    }
+  } else {
+    // Standard guest download emails: one per digital item (single-use tokens)
+    for (const link of guestDownloadLinks) {
+      const guestExpiry = new Date();
+      guestExpiry.setDate(guestExpiry.getDate() + 14);
+      void sendEmail({
+        type: 'guest-download',
+        to: customerEmail,
+        orderNumber,
+        bookTitle: link.bookTitle,
+        downloadUrl: link.downloadUrl,
+        expiresAt: guestExpiry.toISOString(),
+        storagePath: link.storagePath,
+      });
+    }
   }
 }
 

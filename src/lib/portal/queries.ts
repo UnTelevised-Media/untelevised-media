@@ -259,6 +259,15 @@ export const queryPortalNewsletterSubscribers = groq`
   }
 `;
 
+export const queryPortalBookstoreSubscribers = groq`
+  *[_type == "bookstoreSubscriber"] | order(submittedAt desc) {
+    _id,
+    email,
+    submittedAt,
+    source
+  }
+`;
+
 // ---------------------------------------------------------------------------
 // News Briefs
 // ---------------------------------------------------------------------------
@@ -304,7 +313,7 @@ export const queryPortalBriefById = groq`
 
 /** Latest brief for the dashboard panel. */
 export const queryPortalLatestBrief = groq`
-  *[_type == "brief"] | order(publishedAt desc)[0] {
+  *[_type == "brief"] | order(publishedAt desc, _createdAt desc)[0] {
     _id,
     title,
     publishedAt,
@@ -334,7 +343,7 @@ export const queryPortalLatestBrief = groq`
 
 /** All briefs for a full archive view. */
 export const queryPortalAllBriefs = groq`
-  *[_type == "brief"] | order(publishedAt desc) {
+  *[_type == "brief"] | order(publishedAt desc, _createdAt desc) {
     _id,
     title,
     publishedAt,
@@ -366,7 +375,8 @@ export const queryPortalMyClaimedPitches = groq`
 
 /** Claimed pitches for the current author scoped to a specific brief (for the dashboard map). */
 export const queryPortalMyPitchesForBrief = groq`
-  *[_type == "claimedPitch" && author._ref == $authorId && briefId == $briefId] {
+  *[_type == "claimedPitch" && author._ref == $authorId && briefId == $briefId]
+    | order(_createdAt desc) {
     _id,
     storyKey
   }
@@ -408,6 +418,26 @@ export const queryPortalClaimedPitchById = groq`
     author->{ _id, name },
     assignedBy->{ _id, name },
     linkedArticle->{ _id, title, "slug": slug.current }
+  }
+`;
+
+// ---------------------------------------------------------------------------
+// Book reviews — admin moderation queue
+// ---------------------------------------------------------------------------
+
+export const queryPortalAllReviews = groq`
+  *[_type == "bookReview"] | order(submittedAt desc) {
+    _id,
+    reviewerName,
+    reviewerLocation,
+    rating,
+    body,
+    status,
+    clerkUserId,
+    adminFeedback,
+    submittedAt,
+    "bookTitle": book->title,
+    "bookSlug": book->slug.current
   }
 `;
 

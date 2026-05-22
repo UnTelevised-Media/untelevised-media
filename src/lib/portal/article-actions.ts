@@ -28,7 +28,7 @@ const slugSchema = z.object({
 const articleWriteSchema = z.object({
   title: z.string().min(1, 'Title is required').max(300),
   slug: slugSchema,
-  description: z.string().max(500).optional(),
+  description: z.string().max(1000).optional(),
   leadParagraph: z.string().max(1000).optional(),
   body: z.array(z.record(z.string(), z.unknown())).optional(), // Portable Text blocks
   featured: z.boolean().optional(),
@@ -110,10 +110,15 @@ async function verifyArticleAccess(
 
   if (isEditorPlus) return { canEdit: true, isEditorPlus: true, sanityAuthorId };
 
-  // Authors can only edit their own articles
+  // Authors can only edit their own articles.
+  // Query both the draft ID and the published ID so this works regardless of
+  // whether the document is a draft-only ("drafts.xxx") or published ("xxx").
+  const publishedId = articleId.startsWith('drafts.')
+    ? articleId.slice('drafts.'.length)
+    : articleId;
   const article = await writeClient.fetch<{ authorId: string } | null>(
-    `*[_type == "article" && _id == $id][0]{ "authorId": author._ref }`,
-    { id: articleId }
+    `*[_type == "article" && (_id == $id || _id == $publishedId)][0]{ "authorId": author._ref }`,
+    { id: articleId, publishedId }
   );
 
   const canEdit = !!article && article.authorId === sanityAuthorId;
@@ -176,7 +181,12 @@ export async function createArticle(
   const featured = isEditorPlus ? (sanitized.featured ?? false) : false;
   const breakingNews = isEditorPlus ? (sanitized.breakingNews ?? false) : false;
 
+  // Always create as a draft so articles go through editorial review before going live.
+  // crypto.randomUUID() is available in Node 18+ (required by Next.js 15).
+  const newDocId = `drafts.${crypto.randomUUID()}`;
+
   const doc = {
+    _id: newDocId,
     _type: 'article',
     title: sanitized.title,
     slug: sanitized.slug,
@@ -193,6 +203,7 @@ export async function createArticle(
     location: sanitized.location ?? '',
     allowComments: sanitized.allowComments ?? true,
     mainImage: sanitized.mainImage ?? undefined,
+    ...(sanitized.publishedAt ? { publishedAt: sanitized.publishedAt } : {}),
     sources: sanitized.sources ?? [],
     relatedArticles: sanitized.relatedArticles ?? [],
     methodology: sanitized.methodology ?? '',
@@ -216,6 +227,9 @@ export async function createArticle(
         .catch(() => {});
     }
 
+    // Return the actual stored _id ("drafts.xxx") so callers like handlePublish can
+    // pass it directly to publishArticle. The form's redirect handler strips the
+    // "drafts." prefix to keep the URL clean.
     return { success: true, data: { _id: created._id, slug: sanitized.slug.current } };
   } catch (err) {
     return {
@@ -251,7 +265,8 @@ export async function updateArticle(
 
   const sanitized = sanitizeArticleInput(parsed.data);
 
-  const patch: Record<string, unknown> = {
+  // Fields that must always be set (never null/undefined in a valid article)
+  const setFields: Record<string, unknown> = {
     title: sanitized.title,
     slug: sanitized.slug,
     description: sanitized.description ?? '',
@@ -263,28 +278,51 @@ export async function updateArticle(
     keywords: sanitized.keywords ?? [],
     location: sanitized.location ?? '',
     allowComments: sanitized.allowComments ?? true,
-    mainImage: sanitized.mainImage ?? undefined,
     sources: sanitized.sources ?? [],
     relatedArticles: sanitized.relatedArticles ?? [],
     methodology: sanitized.methodology ?? '',
     hasEmbeddedVideo: sanitized.hasEmbeddedVideo ?? false,
     videoLink: sanitized.videoLink ?? '',
-    eventDate: sanitized.eventDate ?? undefined,
     faqs: sanitized.faqs ?? [],
-    correction: sanitized.correction ?? undefined,
     updatedAt: new Date().toISOString(),
   };
 
   if (isEditorPlus) {
-    patch.featured = sanitized.featured ?? false;
-    patch.breakingNews = sanitized.breakingNews ?? false;
+    setFields.featured = sanitized.featured ?? false;
+    setFields.breakingNews = sanitized.breakingNews ?? false;
     if (sanitized.authorRef) {
-      patch.author = { _type: 'reference', _ref: sanitized.authorRef };
+      setFields.author = { _type: 'reference', _ref: sanitized.authorRef };
     }
   }
 
+  // Nullable optional fields — use Sanity's unset when cleared, set when present.
+  // Passing undefined to .set() silently skips the field and leaves stale data in Sanity.
+  const fieldsToUnset: string[] = [];
+  if (sanitized.publishedAt) {
+    setFields.publishedAt = sanitized.publishedAt;
+  } else {
+    fieldsToUnset.push('publishedAt');
+  }
+  if (sanitized.mainImage != null) {
+    setFields.mainImage = sanitized.mainImage;
+  } else {
+    fieldsToUnset.push('mainImage');
+  }
+  if (sanitized.eventDate != null) {
+    setFields.eventDate = sanitized.eventDate;
+  } else {
+    fieldsToUnset.push('eventDate');
+  }
+  if (sanitized.correction != null) {
+    setFields.correction = sanitized.correction;
+  } else {
+    fieldsToUnset.push('correction');
+  }
+
   try {
-    await writeClient.patch(articleId).set(patch).commit();
+    let patchBuilder = writeClient.patch(articleId).set(setFields);
+    if (fieldsToUnset.length > 0) patchBuilder = patchBuilder.unset(fieldsToUnset);
+    await patchBuilder.commit();
     return { success: true, data: { _id: articleId } };
   } catch (err) {
     return {
@@ -501,14 +539,43 @@ export async function publishArticle(
     return { success: false, error: 'Only editors and admins can publish articles.' };
   }
 
-  await writeClient
-    .patch(articleId)
-    .set({
-      publishedAt: scheduledAt ?? new Date().toISOString(),
+  const now = scheduledAt ?? new Date().toISOString();
+
+  if (articleId.startsWith('drafts.')) {
+    // Promote draft → published: fetch draft, createOrReplace published doc, delete draft.
+    // Simply patching publishedAt on the draft document does NOT publish it in Sanity —
+    // a published document (ID without "drafts." prefix) must exist for it to appear publicly.
+    const publishedId = articleId.slice('drafts.'.length);
+
+    const draft = await writeClient.getDocument(articleId);
+    if (!draft) {
+      return { success: false, error: 'Draft not found — it may have been deleted.' };
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { _id: _draftId, _rev: _draftRev, ...draftFields } = draft as Record<string, unknown>;
+
+    await writeClient.createOrReplace({
+      ...draftFields,
+      _id: publishedId,
+      _type: 'article',
+      publishedAt: now,
       needsReview: false,
-      updatedAt: new Date().toISOString(),
-    })
-    .commit();
+      updatedAt: now,
+    });
+
+    await writeClient.delete(articleId);
+  } else {
+    // Already a published document — just update publishedAt and clear review flag.
+    await writeClient
+      .patch(articleId)
+      .set({
+        publishedAt: now,
+        needsReview: false,
+        updatedAt: now,
+      })
+      .commit();
+  }
 
   return { success: true, data: undefined };
 }

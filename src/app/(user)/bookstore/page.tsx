@@ -16,15 +16,32 @@ import type { SanityBook, SanityBookGenre } from '@/lib/bookstore/types';
 import urlForImage from '@/util/urlForImage';
 import GenreFilter from '@/components/bookstore/GenreFilter';
 import BookCardActions from '@/components/bookstore/BookCardActions';
+import BookstoreNewsletter from '@/components/bookstore/BookstoreNewsletter';
+import WishlistButton from '@/components/bookstore/WishlistButton';
 
 export const metadata: Metadata = {
-  title: 'Bookstore — UnTelevised Media',
+  title: 'Bookstore — Hurriya Publications',
   description:
-    'Independent books by literary authors. Physical and digital editions. Unfiltered. Uncensored. Uncompromising.',
+    'Independent books by literary authors. Author-first revenue. Physical and digital editions. An UnTelevised Media imprint.',
   openGraph: {
-    title: 'Bookstore — UnTelevised Media',
-    description: 'Independent books by literary authors — UnTelevised Media',
+    title: 'Hurriya Publications Bookstore',
+    description:
+      'Independent books by literary authors — author-first revenue, transparent splits, direct tipping. An UnTelevised Media imprint.',
     type: 'website',
+    images: [
+      {
+        url: '/hurriya-pub/Logo-alt.png',
+        width: 1200,
+        height: 630,
+        alt: 'Hurriya Publications — An UnTelevised Media Imprint',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hurriya Publications Bookstore',
+    description: 'Independent books by literary authors — author-first revenue. An UnTelevised Media imprint.',
+    images: ['/hurriya-pub/Logo-alt.png'],
   },
 };
 
@@ -40,49 +57,62 @@ function BookCard({ book }: { book: SanityBook }) {
 
   return (
     <div className='group flex flex-col border border-hp-sand-border bg-white transition-colors hover:border-untele dark:border-hp-dark-border dark:bg-hp-dark-card'>
-      {/* Clickable cover + info */}
-      <Link href={`/bookstore/book/${slug}`} className='block flex-1'>
-        <div className='relative aspect-[5/7] overflow-hidden bg-hp-sand dark:bg-hp-dark-border'>
-          {cover ? (
-            <Image
-              src={cover}
-              alt={book.coverImage?.alt ?? book.title}
-              fill
-              className='object-cover transition-transform duration-300 group-hover:scale-105'
-              sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
-            />
-          ) : (
-            <div className='flex h-full items-center justify-center p-4'>
-              <span className='text-center text-xs font-bold uppercase tracking-widest text-hp-muted'>
-                {book.title}
-              </span>
-            </div>
-          )}
-          {isOutOfStock && (
-            <div className='absolute inset-0 flex items-center justify-center bg-black/60'>
-              <span className='bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
-                Out of Stock
-              </span>
-            </div>
-          )}
+      {/* Cover + info wrapper — relative so the wishlist button can be positioned over the cover */}
+      <div className='relative flex-1'>
+        <Link href={`/bookstore/book/${slug}`} className='block'>
+          <div className='relative aspect-[5/7] overflow-hidden bg-hp-sand dark:bg-hp-dark-border'>
+            {cover ? (
+              <Image
+                src={cover}
+                alt={book.coverImage?.alt ?? book.title}
+                fill
+                className='object-cover transition-transform duration-300 group-hover:scale-105'
+                sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
+              />
+            ) : (
+              <div className='flex h-full items-center justify-center p-4'>
+                <span className='text-center text-xs font-bold uppercase tracking-widest text-hp-muted'>
+                  {book.title}
+                </span>
+              </div>
+            )}
+            {isOutOfStock && (
+              <div className='absolute inset-0 flex items-center justify-center bg-black/60'>
+                <span className='bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
+                  Out of Stock
+                </span>
+              </div>
+            )}
+          </div>
+          <div className='p-3 pb-1'>
+            <p className='mb-0.5 text-[10px] font-bold uppercase tracking-widest text-hp-muted dark:text-hp-muted'>
+              {book.author?.name ?? 'Unknown Author'}
+            </p>
+            <h3 className='text-sm font-black leading-tight text-slate-900 group-hover:text-untele dark:text-hp-cream'>
+              {book.title}
+            </h3>
+            {price != null && (
+              <div className='mt-1'>
+                {compareAtPrice != null && (
+                  <p className='text-[10px] text-hp-muted line-through'>${compareAtPrice.toFixed(2)}</p>
+                )}
+                <p className='text-xs font-bold text-untele'>${price.toFixed(2)}</p>
+              </div>
+            )}
+          </div>
+        </Link>
+
+        {/* Wishlist button: sibling of Link (not inside it) so clicks don't trigger navigation */}
+        <div className='absolute right-1.5 top-1.5 z-10'>
+          <WishlistButton
+            slug={slug}
+            title={book.title}
+            coverImageUrl={cover ?? undefined}
+            authorName={book.author?.name}
+            price={book.formats?.[0]?.price}
+          />
         </div>
-        <div className='p-3 pb-1'>
-          <p className='mb-0.5 text-[10px] font-bold uppercase tracking-widest text-hp-muted dark:text-hp-muted'>
-            {book.author?.name ?? 'Unknown Author'}
-          </p>
-          <h3 className='text-sm font-black leading-tight text-slate-900 group-hover:text-untele dark:text-hp-cream'>
-            {book.title}
-          </h3>
-          {price != null && (
-            <div className='mt-1'>
-              {compareAtPrice != null && (
-                <p className='text-[10px] text-hp-muted line-through'>${compareAtPrice.toFixed(2)}</p>
-              )}
-              <p className='text-xs font-bold text-untele'>${price.toFixed(2)}</p>
-            </div>
-          )}
-        </div>
-      </Link>
+      </div>
 
       {/* Action buttons — outside the Link to avoid nested interactive elements */}
       {!isOutOfStock && firstFormat && (
@@ -243,6 +273,11 @@ export default async function ShopPage({
             ))}
           </div>
         )}
+      </section>
+
+      {/* Newsletter signup */}
+      <section className='mt-12'>
+        <BookstoreNewsletter source='bookstore-home' />
       </section>
     </main>
   );

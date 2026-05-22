@@ -2,12 +2,32 @@
 // Bookstore section layout — main header + Hurriya Publications sub-brand + footer.
 // No article category NavWrapper (bookstore has its own context).
 
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Header from '@/components/global/Header';
 import HeaderLogo from '@/components/global/HeaderLogo';
 import Footer from '@/components/global/Footer';
-import BookstoreFooterNav from '@/components/bookstore/BookstoreFooterNav';
+import BookstoreNav from '@/components/bookstore/BookstoreNav';
 import { SanityLive } from '@/lib/sanity/lib/live';
+
+export const metadata: Metadata = {
+  openGraph: {
+    siteName: 'Hurriya Publications — UnTelevised Media',
+    images: [
+      {
+        url: '/hurriya-pub/Logo-alt.png',
+        width: 1200,
+        height: 630,
+        alt: 'Hurriya Publications — An UnTelevised Media Imprint',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@untelevised',
+    images: ['/hurriya-pub/Logo-alt.png'],
+  },
+};
 
 export default function BookstoreLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,7 +37,7 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
 
       {/* ── Hurriya Publications sub-brand ── */}
       <section
-        className='relative overflow-hidden border-b-2 border-[#009736] bg-gradient-to-r from-hp-sand to-hp-sand-mid dark:from-hp-dark dark:to-hp-dark-card'
+        className='relative overflow-hidden border-b border-slate-200 bg-gradient-to-r from-hp-sand to-hp-sand-mid dark:border-slate-700 dark:from-hp-dark dark:to-hp-dark-card'
         aria-label='Hurriya Publications'
       >
         <div className='mx-auto flex max-w-7xl items-stretch px-4 sm:px-6 lg:px-8'>
@@ -84,10 +104,10 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
             />
           </div>
         </div>
-
-        {/* ── Section nav — bottom strip of the banner ── */}
-        <BookstoreFooterNav />
       </section>
+
+      {/* ── Bookstore nav — outside overflow-hidden so dropdowns aren't clipped ── */}
+      <BookstoreNav />
 
       {/* ── Page content ── */}
       {children}

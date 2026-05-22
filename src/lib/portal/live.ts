@@ -20,10 +20,12 @@ const _portalLiveClient = createClient({
   stega: false,
 });
 
+// browserToken intentionally omitted — the server read token is not CORS-configured
+// for browser use. Server-side live queries still re-run on Sanity mutations.
+// Add NEXT_PUBLIC_SANITY_API_BROWSER_TOKEN here if browser-push draft updates are needed.
 export const { sanityFetch: portalSanityFetch, SanityLive: PortalSanityLive } = defineLive({
   client: _portalLiveClient,
   serverToken,
-  browserToken: serverToken,
 });
 
 /**

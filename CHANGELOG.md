@@ -1,12 +1,68 @@
-﻿# Changelog
+# Changelog — UnTelevised Media / Hurriya Publications
 
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+All notable changes to this project are documented here.
 
 ---
 
-## [Unreleased]
+## [2026-05-21] — Portal & Content Tooling (feat/bookstore-upgrades-may2026)
+
+### Added
+
+- **Vimeo embed support** — `src/models/schema/vimeo.ts`: `vimeoEmbed` Sanity object type with required `videoUrl` field and Studio preview; registered in `blockContent` array and `schema/index.ts`; `RichTextComponents.tsx` renderer added; full BlockNote ↔ Portable Text round-trip in `blocknote-serializer.ts`
+
+- **Content migration scripts** — one-time Sanity seed/migration scripts for article content:
+  - `scripts/create-anarchist-article.ts` — seeds "11 Things Every Anarchist Should Be Doing"
+  - `scripts/create-israel-palestine-article.ts` — seeds "ISRAEL AND PALESTINE – a Personal Reflection"
+  - `scripts/create-waterboarding-article.ts` — seeds "So, I was waterboarded…"
+  - `scripts/migrate-ar-articles.ts` — bulk migration helper for AR article archive
+  - `scripts/create-insurgency-military-article.ts` — seeds "Full Spectrum Operations: How the US Military Would Respond to a Domestic Insurgency"
+  - `scripts/create-ira-article.ts` — seeds "Profiles in Insurgency: The Irish Republican Army"
+  - `scripts/find-protest-image.ts` — Sanity image search utility
+  - `scripts/patch-anarchist-image.ts` — patches cover image on the anarchist article
+  - `scripts/patch-waterboarding-image.ts` — patches cover image on the waterboarding article
+  - `scripts/repair-brief-keys.ts` — repairs missing `_key` fields on brief `storyPasses` arrays
+
+- **Portal — image upload API** — `src/app/api/portal/upload-image/route.ts`: authenticated POST endpoint that accepts FormData and pipes the image to the Sanity asset pipeline; returns the asset `_id` for use in editor forms
+
+- **Portal — brief key repair API** — `src/app/api/portal/repair-brief-keys/route.ts`: one-shot admin endpoint that patches malformed `storyPasses` arrays missing `_key` values; prevents Sanity array mutation errors
+
+### Fixed
+
+- **TypeScript `_type` field on script document objects** — `Record<string, unknown>` type widened to `Record<string, unknown> & { _type: string }` in `create-anarchist-article.ts`, `create-israel-palestine-article.ts`, `create-waterboarding-article.ts`, and `migrate-ar-articles.ts`; eliminates TS compiler error when `_type` is required by the Sanity client's `createOrReplace` call
+
+- **`migrate-ar-articles.ts` author fetch** — `client.fetch<Array<...>>(...)[0]` pattern replaced with `client.fetch<{ _id: string } | null>(query[0])` — avoids redundant array allocation and correctly types the single-document GROQ `[0]` projection
+
+### Changed
+
+- **`PortalNav`** — major navigation overhaul: grouped link sections with collapsible mobile drawer, role-aware link visibility (admin / editor / author / sales), active-link highlighting, Bookstore section links (Library, Earnings, Sales)
+- **`BriefPanel`** — improved pass/unpass UX with optimistic UI; editor Assign/Release/Reassign controls hardened; sort order: breaking unclaimed → unclaimed → claimed → published
+- **`ArticleEditorForm`** — autosave interval tuning; `beforeunload` guard reliability improvements
+- **`portal/page.tsx`** — dashboard widgets reordered; `BookstoreOrdersWidget` and `PendingPayoutsWidget` placement refined; Supabase data fetched with graceful degradation on missing env vars
+- **`brief-actions.ts`** — `fetchBriefById` parallel data fetching hardened; `myPitchMap` build logic corrected for multi-brief scenarios
+- **Bookstore layout** — minor structural/metadata adjustment to `src/app/(user)/bookstore/layout.tsx`
+
+---
+
+## [2026-05-05] — Bookstore Feature Upgrades (feat/bookstore-upgrades-may2026)
+
+### Added
+- **Feature 6** — Email transactional disclosure footer added to all Hurriya Publications emails (`emailLayout()`)
+- **Feature 2** — Social sharing (`SocialShare`) added to book detail pages
+- **Feature 3** — Bookstore newsletter signup: `bookstoreSubscriber` Sanity schema, `POST /api/bookstore/newsletter` endpoint, `BookstoreNewsletter` component, placements on bookstore home and about pages, portal subscriber view
+- **Feature 4** — Book wishlist: `userWishlist` Sanity schema, localStorage + Sanity sync (mirrors bookmark system), `WishlistButton` component (star icon), wishlist page, footer nav link
+- **Feature 5** — Book reviews & reader testimonials: `bookReview` Sanity schema, `GET/POST /api/bookstore/reviews` endpoint, `BookReviews` display component, `ReviewForm` submission component, placement on book detail pages
+- **Feature 1** — Gift purchasing: `GiftToggle` component, gift metadata passed through checkout to Stripe, `sendGiftEmail()` email template, webhook routing for gift vs. buyer emails
+- Returns & Refunds policy page (`/bookstore/returns`) — covers digital, physical, bundles, tips, dispute process
+- `noindex` metadata layouts for `/bookstore/cart` and `/bookstore/downloads` (transactional pages)
+- OpenGraph + Twitter card metadata on bookstore section layout
+- Author profile page now displays the author's Hurriya Publications books in a buy-ready grid
+
+### Fixed
+- Page titles for Order Confirmed and My Orders now use "Hurriya Publications" branding instead of "UnTelevised Media"
+
+---
+
+## [Unreleased] — Prior Bookstore Work (feat/issue-46-bookstore)
 
 ### Added — Email Delivery, Direct Downloads & Digital Asset Fixes (Issue #46, 2026-05-04)
 

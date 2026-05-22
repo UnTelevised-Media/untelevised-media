@@ -34,9 +34,10 @@ export async function fetchBriefById(briefId: string) {
       : Promise.resolve([]),
   ]);
 
+  // Sorted _createdAt desc → first-seen per storyKey is the newest pitch
   const myPitchMap: Record<string, string> = {};
   for (const p of myPitches ?? []) {
-    myPitchMap[p.storyKey] = p._id;
+    if (!myPitchMap[p.storyKey]) myPitchMap[p.storyKey] = p._id;
   }
 
   return { brief, myPitchMap };
@@ -47,7 +48,9 @@ export async function fetchBriefById(briefId: string) {
 // ---------------------------------------------------------------------------
 
 async function fetchStoryFromBrief(briefId: string, storyKey: string) {
-  return writeClient.fetch<{
+  // Use portalClient (previewDrafts) so the story keys and content match exactly
+  // what the portal UI is showing — avoids published/draft key mismatch.
+  return portalClient.fetch<{
     title: string;
     story: {
       headline?: string;
@@ -72,10 +75,31 @@ async function fetchStoryFromBrief(briefId: string, storyKey: string) {
 }
 
 // ---------------------------------------------------------------------------
+// Determine the correct document ID to patch for a brief.
+// The portal uses previewDrafts, so story edits live in the draft. We must
+// patch the draft when one exists so changes are visible immediately; fall back
+// to the published doc if no draft is present.
+// ---------------------------------------------------------------------------
+
+async function getBriefPatchTarget(briefId: string): Promise<string> {
+  const publishedId = briefId.replace(/^drafts\./, '');
+  const draftId = `drafts.${publishedId}`;
+  const draftDoc = await writeClient.getDocument(draftId);
+  return draftDoc ? draftId : publishedId;
+}
+
+// ---------------------------------------------------------------------------
 // Claim a story pitch — creates a claimedPitch document + updates brief
 // ---------------------------------------------------------------------------
 
 export async function claimStory(briefId: string, storyKey: string): Promise<ClaimResult> {
+  if (!storyKey) {
+    return {
+      success: false,
+      error: 'This story is missing its key — an editor must re-save the brief to fix it.',
+    };
+  }
+
   const { id: clerkUserId } = await requireAuthor();
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
   if (!sanityAuthorId) {
@@ -90,7 +114,13 @@ export async function claimStory(briefId: string, storyKey: string): Promise<Cla
   const now = new Date().toISOString();
 
   try {
-    // Create claimedPitch snapshot
+    // Create claimedPitch snapshot — ensure every link has a _key so the
+    // claimedPitch is editable in Studio (brief agent may omit _key values).
+    const safeLinks = (brief.story.links ?? []).map((l) => ({
+      ...l,
+      _key: l._key || makeKey(),
+    }));
+
     const pitch = await writeClient.create({
       _type: 'claimedPitch',
       briefId,
@@ -101,15 +131,16 @@ export async function claimStory(briefId: string, storyKey: string): Promise<Cla
       beat: brief.story.beat,
       urgency: brief.story.urgency,
       sourceSuggestions: brief.story.sourceSuggestions,
-      links: brief.story.links ?? [],
+      links: safeLinks,
       author: { _type: 'reference', _ref: sanityAuthorId },
       claimedAt: now,
       status: 'claimed',
     });
 
-    // Update brief story status
+    // Update brief story status on the correct doc (draft if one exists)
+    const patchTarget = await getBriefPatchTarget(briefId);
     await writeClient
-      .patch(briefId)
+      .patch(patchTarget)
       .set({
         [`stories[_key == "${storyKey}"].status`]: 'claimed',
         [`stories[_key == "${storyKey}"].claimedBy`]: { _type: 'reference', _ref: sanityAuthorId },
@@ -135,6 +166,13 @@ export async function assignStory(
   storyKey: string,
   targetAuthorId: string
 ): Promise<ClaimResult> {
+  if (!storyKey) {
+    return {
+      success: false,
+      error: 'This story is missing its key — re-save the brief to fix it.',
+    };
+  }
+
   const { id: clerkUserId, role } = await requireAuthor();
   if (!hasRole(role, 'editor')) {
     return { success: false, error: 'Editor role required to assign stories.' };
@@ -149,6 +187,11 @@ export async function assignStory(
   const now = new Date().toISOString();
 
   try {
+    const safeLinks = (brief.story.links ?? []).map((l) => ({
+      ...l,
+      _key: l._key || makeKey(),
+    }));
+
     const pitch = await writeClient.create({
       _type: 'claimedPitch',
       briefId,
@@ -159,15 +202,16 @@ export async function assignStory(
       beat: brief.story.beat,
       urgency: brief.story.urgency,
       sourceSuggestions: brief.story.sourceSuggestions,
-      links: brief.story.links ?? [],
+      links: safeLinks,
       author: { _type: 'reference', _ref: targetAuthorId },
       assignedBy: editorSanityId ? { _type: 'reference', _ref: editorSanityId } : undefined,
       claimedAt: now,
       status: 'claimed',
     });
 
+    const patchTarget = await getBriefPatchTarget(briefId);
     await writeClient
-      .patch(briefId)
+      .patch(patchTarget)
       .set({
         [`stories[_key == "${storyKey}"].status`]: 'claimed',
         [`stories[_key == "${storyKey}"].claimedBy`]: { _type: 'reference', _ref: targetAuthorId },
@@ -194,7 +238,8 @@ export async function unclaimStory(briefId: string, storyKey: string): Promise<R
 
   if (!isEditorPlus) {
     const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
-    const doc = await writeClient.fetch<{
+    // Use portalClient so we check ownership against the same doc the portal shows
+    const doc = await portalClient.fetch<{
       stories: Array<{ _key: string; claimedBy?: { _ref: string } }>;
     }>(`*[_type == "brief" && _id == $id][0]{ stories[]{ _key, claimedBy{ _ref } } }`, {
       id: briefId,
@@ -206,8 +251,9 @@ export async function unclaimStory(briefId: string, storyKey: string): Promise<R
   }
 
   try {
+    const patchTarget = await getBriefPatchTarget(briefId);
     await writeClient
-      .patch(briefId)
+      .patch(patchTarget)
       .set({ [`stories[_key == "${storyKey}"].status`]: 'unclaimed' })
       .unset([
         `stories[_key == "${storyKey}"].claimedBy`,
@@ -230,8 +276,9 @@ export async function unclaimStory(briefId: string, storyKey: string): Promise<R
 export async function markStoryInProgress(briefId: string, storyKey: string): Promise<Result> {
   try {
     await requireAuthor();
+    const patchTarget = await getBriefPatchTarget(briefId);
     await writeClient
-      .patch(briefId)
+      .patch(patchTarget)
       .set({ [`stories[_key == "${storyKey}"].status`]: 'in_progress' })
       .commit();
     return { success: true };
@@ -255,8 +302,9 @@ export async function passOnStory(briefId: string, storyKey: string): Promise<Re
   }
 
   try {
+    const patchTarget = await getBriefPatchTarget(briefId);
     await writeClient
-      .patch(briefId)
+      .patch(patchTarget)
       .setIfMissing({ storyPasses: [] })
       .append('storyPasses', [
         {
@@ -288,8 +336,9 @@ export async function unpassStory(briefId: string, storyKey: string): Promise<Re
   }
 
   try {
+    const patchTarget = await getBriefPatchTarget(briefId);
     await writeClient
-      .patch(briefId)
+      .patch(patchTarget)
       .unset([`storyPasses[storyKey == "${storyKey}" && author._ref == "${sanityAuthorId}"]`])
       .commit();
     return { success: true };

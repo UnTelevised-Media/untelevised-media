@@ -8,6 +8,7 @@ import {
   sendDigitalDownloadEmail,
   sendGuestDownloadEmail,
   sendRefundEmail,
+  sendGiftEmail,
   type OrderConfirmationParams,
   type DigitalDownloadEmailParams,
   type GuestDownloadEmailParams,
@@ -51,6 +52,16 @@ type Payload =
       type: 'refund';
       to: string;
       orderNumber: string;
+    }
+  | {
+      type: 'gift';
+      to: string;
+      bookTitle: string;
+      bookCoverUrl?: string;
+      fromName?: string;
+      anonymous: boolean;
+      downloadUrl: string;
+      expiresAt: string;
     };
 
 export async function POST(req: NextRequest) {
@@ -105,6 +116,18 @@ export async function POST(req: NextRequest) {
 
       case 'refund':
         await sendRefundEmail({ to: payload.to, orderNumber: payload.orderNumber });
+        break;
+
+      case 'gift':
+        await sendGiftEmail({
+          to: payload.to,
+          bookTitle: payload.bookTitle,
+          bookCoverUrl: payload.bookCoverUrl,
+          fromName: payload.fromName,
+          anonymous: payload.anonymous,
+          downloadUrl: payload.downloadUrl,
+          expiresAt: new Date(payload.expiresAt),
+        });
         break;
 
       default:

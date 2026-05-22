@@ -103,6 +103,17 @@ function emailLayout(content: string, title: string): string {
           </td>
         </tr>
 
+        <!-- Transactional disclosure -->
+        <tr>
+          <td style="padding:12px 32px;border-top:1px solid #222222;text-align:center;">
+            <p style="margin:0;font-size:10px;color:#555555;line-height:1.6;">
+              This is a transactional email related to your Hurriya Publications purchase or account activity.
+              If you believe you received this in error, contact
+              <a href="mailto:bookstore@untelevised.media" style="color:#D70606;">bookstore@untelevised.media</a>.
+            </p>
+          </td>
+        </tr>
+
       </table>
     </td></tr>
   </table>
@@ -434,5 +445,75 @@ export async function sendRefundEmail(params: { to: string; orderNumber: string 
     to: params.to,
     subject: `Refund Processed — ${params.orderNumber} | Hurriya Publications`,
     html: emailLayout(content, `Refund Processed — ${params.orderNumber}`),
+  });
+}
+
+// ---------------------------------------------------------------------------
+// 6. Gift Notification (to recipient, no pricing)
+// ---------------------------------------------------------------------------
+
+export interface GiftEmailParams {
+  to: string;
+  bookTitle: string;
+  bookCoverUrl?: string;
+  fromName?: string;
+  anonymous: boolean;
+  downloadUrl: string;
+  expiresAt: Date;
+}
+
+export async function sendGiftEmail(params: GiftEmailParams) {
+  if (!isConfigured()) return;
+
+  const expires = params.expiresAt.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  const sender = params.anonymous
+    ? 'A friend'
+    : params.fromName
+      ? params.fromName
+      : 'Someone special';
+
+  const coverBlock = params.bookCoverUrl
+    ? `<div style="text-align:center;margin-bottom:20px;">
+        <img src="${params.bookCoverUrl}" alt="${params.bookTitle}" style="max-width:160px;border:none;" />
+      </div>`
+    : '';
+
+  const content = `
+    <p style="margin:0 0 4px;font-size:26px;font-weight:900;color:#ffffff;">You&rsquo;ve received a gift.</p>
+    <p style="margin:0 0 24px;font-size:13px;color:#888888;">
+      <strong style="color:#e5e5e5;">${sender}</strong> sent you a book from Hurriya Publications.
+    </p>
+
+    ${coverBlock}
+
+    <div style="background-color:#0d0d0d;border-left:4px solid #D70606;padding:16px 20px;margin-bottom:24px;">
+      <p style="margin:0 0 4px;font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#888888;">Your Gift</p>
+      <p style="margin:0;font-size:18px;font-weight:900;color:#ffffff;">${params.bookTitle}</p>
+    </div>
+
+    <div style="padding:16px 0;">
+      <a href="${params.downloadUrl}" style="display:inline-block;background-color:#D70606;color:#ffffff;font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;text-decoration:none;">Download Your Book &rarr;</a>
+    </div>
+
+    <p style="margin:0;font-size:12px;color:#888888;background-color:#0d0d0d;border:1px solid #2a2a2a;padding:14px;line-height:1.6;">
+      This is a <strong style="color:#e5e5e5;">single-use link</strong> valid until <strong style="color:#e5e5e5;">${expires}</strong>.
+      Save your file immediately &mdash; this link cannot be reused.
+    </p>
+
+    <p style="margin:24px 0 0;font-size:11px;color:#666666;">
+      Create a free account to access all your Hurriya Publications purchases:<br>
+      <a href="${baseUrl}/sign-up" style="color:#D70606;">${baseUrl}/sign-up</a>
+    </p>`;
+
+  await getTransporter().sendMail({
+    from,
+    to: params.to,
+    subject: `${sender} sent you a book — ${params.bookTitle} | Hurriya Publications`,
+    html: emailLayout(content, `Gift: ${params.bookTitle}`),
   });
 }

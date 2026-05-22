@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { auth } from '@clerk/nextjs/server';
-import type { CheckoutPayload, FormatType } from '@/lib/bookstore/types';
+import type { CheckoutPayload, FormatType, GiftOptions } from '@/lib/bookstore/types';
 import { checkCheckoutRate } from '@/lib/bookstore/ratelimit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
@@ -35,17 +35,43 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
     }
 
-    // Validate non-tip items have a stripePriceId
-    for (const item of body.items) {
-      if (item.formatType !== 'tip' && !item.stripePriceId) {
+    // Validate gift options if present
+    const gift: GiftOptions | undefined = body.giftOptions;
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (gift) {
+      if (!gift.recipientEmail || !EMAIL_RE.test(gift.recipientEmail)) {
         return NextResponse.json(
-          { error: `Item "${item.title}" is missing a Stripe Price ID` },
+          { error: 'Valid recipient email required for gift' },
           { status: 400 }
         );
       }
     }
 
-    // Filter out tips with no amount or zero amount
+    // Validate all items have the required IDs and amounts
+    for (const item of body.items) {
+      if (item.formatType !== 'tip' && !item.isNyop && !item.stripePriceId) {
+        return NextResponse.json(
+          { error: `Item "${item.title}" is missing a Stripe Price ID` },
+          { status: 400 }
+        );
+      }
+      if (item.isNyop) {
+        if (!item.unitAmountCents || item.unitAmountCents < 50) {
+          return NextResponse.json(
+            { error: `"${item.title}": minimum payment is $0.50` },
+            { status: 400 }
+          );
+        }
+        if (!item.stripePriceId) {
+          return NextResponse.json(
+            { error: `Item "${item.title}" is not yet available for purchase` },
+            { status: 400 }
+          );
+        }
+      }
+    }
+
+    // Filter out tips with no amount or zero amount; NYOP items are always kept (validated above)
     const chargeableItems = body.items.filter(
       (i) => i.formatType !== 'tip' || (i.unitAmountCents != null && i.unitAmountCents > 0)
     );
@@ -77,7 +103,8 @@ export async function POST(req: NextRequest) {
       chargeableItems.map(async (item) => {
         const storedId = item.stripePriceId.trim();
 
-        if (item.formatType === 'tip' && item.unitAmountCents) {
+        // Tips and NYOP both use price_data with a product ID + user-entered amount
+        if ((item.formatType === 'tip' || item.isNyop) && item.unitAmountCents) {
           // Resolve to a Product ID — Sanity may store either prod_xxx or price_xxx
           let productId = storedId;
           if (storedId.startsWith('price_')) {
@@ -93,7 +120,8 @@ export async function POST(req: NextRequest) {
               product: productId,
               unit_amount: item.unitAmountCents,
             },
-            quantity: 1,
+            // Tips are always qty 1; NYOP respects the ordered quantity
+            quantity: item.formatType === 'tip' ? 1 : item.quantity,
           };
         }
 
@@ -112,9 +140,10 @@ export async function POST(req: NextRequest) {
       qty: item.quantity,
       title: item.title,
       priceId: item.stripePriceId,
-      ...(item.formatType === 'tip' && item.unitAmountCents
+      ...((item.formatType === 'tip' || item.isNyop) && item.unitAmountCents
         ? { unitAmountCents: item.unitAmountCents }
         : {}),
+      ...(item.isNyop ? { isNyop: true } : {}),
     }));
 
     const session = await stripe.checkout.sessions.create({
@@ -135,6 +164,11 @@ export async function POST(req: NextRequest) {
         has_digital: String(hasDigital),
         has_physical: String(hasPhysical),
         items_json: JSON.stringify(itemsMeta), // Stripe limit is 500 chars per key; cart is validated to be short
+        ...(gift && {
+          gift_recipient_email: gift.recipientEmail,
+          gift_from_name: gift.fromName ?? '',
+          gift_anonymous: String(gift.anonymous),
+        }),
       },
     });
 

@@ -46,61 +46,50 @@ export const metadata = {
 // Inline stat strip — compact horizontal row, used for My Articles / Newsroom
 // ---------------------------------------------------------------------------
 
-function StatStrip({
-  stats,
-  href,
-}: {
-  stats: { label: string; value: number; accent?: boolean }[];
-  href: string;
-}) {
+type StatEntry = { label: string; value: number | string; accent?: boolean };
+
+function StatBoardRow({ section, stats, href }: { section: string; stats: StatEntry[]; href: string }) {
   return (
     <Link
       href={href}
-      className='group flex flex-wrap items-center gap-x-6 gap-y-1 border border-slate-200 bg-white px-4 py-3 transition-colors hover:border-untele dark:border-slate-700 dark:bg-slate-900'
+      className='group flex min-h-[34px] flex-wrap items-center gap-x-5 gap-y-1 border-b border-slate-100 px-3 py-1.5 last:border-b-0 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/40'
     >
-      {stats.map(({ label, value, accent }) => (
-        <div key={label} className='flex items-baseline gap-1.5'>
-          <span
-            className={`text-xl font-black leading-none ${accent ? 'text-untele' : 'text-slate-900 group-hover:text-untele dark:text-white'}`}
-          >
-            {value}
+      <span className='w-[88px] shrink-0 text-[9px] font-black uppercase tracking-widest text-slate-400 group-hover:text-untele'>
+        {section}
+      </span>
+      <div className='flex flex-wrap items-baseline gap-x-5 gap-y-0.5'>
+        {stats.map(({ label, value, accent }) => (
+          <span key={label} className='flex items-baseline gap-1'>
+            <b className={`text-sm font-black leading-none tabular-nums ${accent ? 'text-untele' : 'text-slate-900 dark:text-white'}`}>
+              {value}
+            </b>
+            <span className='text-[9px] font-bold uppercase tracking-widest text-slate-400'>{label}</span>
           </span>
-          <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>{label}</span>
-        </div>
-      ))}
+        ))}
+      </div>
     </Link>
   );
 }
 
-// ---------------------------------------------------------------------------
-// Stat card — used for Inbox items
-// ---------------------------------------------------------------------------
-
-function StatCard({
-  label,
-  value,
-  href,
-  accent,
-}: {
-  label: string;
-  value: number;
-  href: string;
-  accent?: boolean;
-}) {
+function StatBoardInboxRow({ items }: { items: { label: string; value: number; href: string; accent?: boolean }[] }) {
   return (
-    <Link
-      href={href}
-      className={`group block border bg-white px-3 py-2.5 transition-colors hover:border-untele dark:bg-slate-900 ${
-        accent ? 'border-untele' : 'border-slate-200 dark:border-slate-700'
-      }`}
-    >
-      <p className={`text-xl font-black leading-none ${accent ? 'text-untele' : 'text-slate-900 dark:text-white'}`}>
-        {value}
-      </p>
-      <p className='mt-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-500 group-hover:text-untele'>
-        {label}
-      </p>
-    </Link>
+    <div className='flex min-h-[34px] flex-wrap items-center gap-x-5 gap-y-1 px-3 py-1.5'>
+      <span className='w-[88px] shrink-0 text-[9px] font-black uppercase tracking-widest text-slate-400'>
+        Inbox
+      </span>
+      <div className='flex flex-wrap items-baseline gap-x-5 gap-y-0.5'>
+        {items.map(({ label, value, href, accent }) => (
+          <Link key={label} href={href} className='group flex items-baseline gap-1 hover:opacity-80'>
+            <b className={`text-sm font-black leading-none tabular-nums ${accent ? 'text-untele' : 'text-slate-900 dark:text-white'}`}>
+              {value}
+            </b>
+            <span className={`text-[9px] font-bold uppercase tracking-widest ${accent ? 'text-untele' : 'text-slate-400'} group-hover:text-untele`}>
+              {label}
+            </span>
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -147,8 +136,11 @@ export default async function PortalDashboardPage() {
       })
     : null;
   const myPitchesRaw = (myPitchesRes?.data ?? []) as Array<{ _id: string; storyKey: string }>;
+  // Sorted _createdAt desc → first-seen per storyKey is the newest pitch
   const myPitchMap: Record<string, string> = {};
-  for (const p of myPitchesRaw) myPitchMap[p.storyKey] = p._id;
+  for (const p of myPitchesRaw) {
+    if (!myPitchMap[p.storyKey]) myPitchMap[p.storyKey] = p._id;
+  }
 
   const [myArticlesRes, allArticlesRes, authorsRes, claimedPitchesRes] = await Promise.all([
     sanityAuthorId
@@ -421,16 +413,16 @@ export default async function PortalDashboardPage() {
         <div className='mb-4'>
           <h1 className='text-base font-black uppercase tracking-widest text-slate-900 dark:text-slate-100'>
             Staff Dashboard
-            <span className='ml-2 text-xs font-bold tracking-normal text-slate-400 capitalize'>
+            <span className='ml-2 text-xs font-bold capitalize tracking-normal text-slate-400'>
               — {role ?? 'Author'}
             </span>
           </h1>
         </div>
 
-        {/* ── My Articles ─────────────────────────────────────────────── */}
-        <section className='mb-3'>
-          <SectionHeader label='My Articles' />
-          <StatStrip
+        {/* ── Stats Board ─────────────────────────────────────────────── */}
+        <section className='mb-4 overflow-hidden border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900'>
+          <StatBoardRow
+            section='My Articles'
             href='/portal/articles'
             stats={[
               { label: 'Total', value: myArticles.length },
@@ -439,63 +431,9 @@ export default async function PortalDashboardPage() {
               { label: 'Drafts', value: myDrafts },
             ]}
           />
-        </section>
-
-        {/* ── My Books — literary authors, admins, sales only ──────────── */}
-        {showMyBooksStrip && (
-          <section className='mb-3'>
-            <SectionHeader label='My Books' />
-            <Link
-              href='/portal/library'
-              className='group flex flex-wrap items-center gap-x-6 gap-y-1 border border-slate-200 bg-white px-4 py-3 transition-colors hover:border-untele dark:border-slate-700 dark:bg-slate-900'
-            >
-              <div className='flex items-baseline gap-1.5'>
-                <span className='text-xl font-black leading-none text-slate-900 group-hover:text-untele dark:text-white'>
-                  {bookCount}
-                </span>
-                <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
-                  {bookCount === 1 ? 'Book' : 'Books'}
-                </span>
-              </div>
-              {bookstoreAvailable && (
-                <div className='flex items-baseline gap-1.5'>
-                  <span className='text-xl font-black leading-none text-slate-900 group-hover:text-untele dark:text-white'>
-                    {bookUnitsSold}
-                  </span>
-                  <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
-                    Units Sold
-                  </span>
-                </div>
-              )}
-              {bookstoreAvailable && shipmentsPending.length > 0 && (
-                <div className='flex items-baseline gap-1.5'>
-                  <span className='text-xl font-black leading-none text-untele'>
-                    {shipmentsPending.length}
-                  </span>
-                  <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
-                    To Ship
-                  </span>
-                </div>
-              )}
-              {bookstoreAvailable && currentPeriodAuthorCents > 0 && (
-                <div className='flex items-baseline gap-1.5'>
-                  <span className='text-xl font-black leading-none text-green-600 group-hover:text-untele dark:text-green-400'>
-                    ${(currentPeriodAuthorCents / 100).toFixed(2)}
-                  </span>
-                  <span className='text-[10px] font-bold uppercase tracking-widest text-slate-500'>
-                    Accruing · Payout {nextPayoutDate}
-                  </span>
-                </div>
-              )}
-            </Link>
-          </section>
-        )}
-
-        {/* ── Newsroom Overview (editor+) ──────────────────────────────── */}
-        {isEditorPlus && (
-          <section className='mb-3'>
-            <SectionHeader label='Newsroom' />
-            <StatStrip
+          {isEditorPlus && (
+            <StatBoardRow
+              section='Newsroom'
               href='/portal/articles'
               stats={[
                 { label: 'All Articles', value: allArticles.length },
@@ -504,32 +442,54 @@ export default async function PortalDashboardPage() {
                 { label: 'Drafts', value: allDrafts },
               ]}
             />
-          </section>
-        )}
+          )}
+          {showMyBooksStrip && (
+            <StatBoardRow
+              section='My Books'
+              href='/portal/library'
+              stats={[
+                { label: bookCount === 1 ? 'Book' : 'Books', value: bookCount },
+                ...(bookstoreAvailable ? [{ label: 'Units Sold', value: bookUnitsSold }] : []),
+                ...(bookstoreAvailable && shipmentsPending.length > 0
+                  ? [{ label: 'To Ship', value: shipmentsPending.length, accent: true }]
+                  : []),
+                ...(bookstoreAvailable && currentPeriodAuthorCents > 0
+                  ? [
+                      {
+                        label: `Accruing · Payout ${nextPayoutDate}`,
+                        value: `$${(currentPeriodAuthorCents / 100).toFixed(2)}`,
+                      },
+                    ]
+                  : []),
+              ]}
+            />
+          )}
 
-        {/* ── Inbox (editor+) ──────────────────────────────────────────── */}
-        {isEditorPlus && (
-          <section className='mb-5'>
-            <SectionHeader label='Inbox' />
-            <div className='grid gap-2 sm:grid-cols-3 lg:grid-cols-5'>
-              <StatCard label='Applications' value={applicationsCount} href='/portal/applications' />
-              <StatCard label='Contact' value={contactCount} href='/portal/contact' />
-              <StatCard
-                label={`Secure${newSecureCount > 0 ? ` · ${newSecureCount} new` : ''}`}
-                value={secureCount}
-                href='/portal/secure-contact'
-                accent={newSecureCount > 0}
-              />
-              <StatCard
-                label={`Whistleblower${criticalWhistleCount > 0 ? ` · ${criticalWhistleCount} crit` : ''}`}
-                value={whistleblowerCount}
-                href='/portal/whistleblower'
-                accent={criticalWhistleCount > 0}
-              />
-              <StatCard label='Subscribers' value={subscribersCount} href='/portal/subscribers' />
-            </div>
-          </section>
-        )}
+          {isEditorPlus && (
+            <StatBoardInboxRow
+              items={[
+                { label: 'Applications', value: applicationsCount, href: '/portal/applications' },
+                { label: 'Contact', value: contactCount, href: '/portal/contact' },
+                {
+                  label: newSecureCount > 0 ? `Secure · ${newSecureCount} new` : 'Secure',
+                  value: secureCount,
+                  href: '/portal/secure-contact',
+                  accent: newSecureCount > 0,
+                },
+                {
+                  label:
+                    criticalWhistleCount > 0
+                      ? `Whistleblower · ${criticalWhistleCount} crit`
+                      : 'Whistleblower',
+                  value: whistleblowerCount,
+                  href: '/portal/whistleblower',
+                  accent: criticalWhistleCount > 0,
+                },
+                { label: 'Subscribers', value: subscribersCount, href: '/portal/subscribers' },
+              ]}
+            />
+          )}
+        </section>
 
         {/* ── Quick links ───────────────────────────────────────────────── */}
         <section className='mb-8'>
@@ -643,13 +603,13 @@ export default async function PortalDashboardPage() {
               <SectionHeader label={isAdmin ? 'All Pending Payouts' : 'My Pending Payouts'} />
               {bookstoreAvailable ? (
                 <PendingPayoutsWidget
-                payouts={pendingPayouts}
-                isAdmin={isAdmin}
-                accruing={currentPeriodAuthorCents}
-                nextPayoutDate={nextPayoutDate}
-                periodStart={currentPayoutPeriodStart}
-                periodEnd={currentPayoutPeriodEnd}
-              />
+                  payouts={pendingPayouts}
+                  isAdmin={isAdmin}
+                  accruing={currentPeriodAuthorCents}
+                  nextPayoutDate={nextPayoutDate}
+                  periodStart={currentPayoutPeriodStart}
+                  periodEnd={currentPayoutPeriodEnd}
+                />
               ) : (
                 <div className='border border-slate-200 bg-white px-4 py-6 text-center dark:border-slate-700 dark:bg-slate-900'>
                   <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>

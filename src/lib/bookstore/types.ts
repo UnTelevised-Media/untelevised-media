@@ -146,6 +146,9 @@ export interface SanityBookFormat {
   formatType: FormatType;
   price: number;
   compareAtPrice?: number;
+  nameYourPrice?: boolean;
+  minimumPrice?: number;
+  suggestedPrice?: number;
   stripePriceId?: string;
   stripeProductId?: string;
   inventory?: {
@@ -218,9 +221,10 @@ export interface CartItem {
   formatType: FormatType;
   formatKey: string;
   price: number;
-  stripePriceId: string; // for tips: Stripe Product ID (prod_xxx); for others: Stripe Price ID
+  stripePriceId: string; // for tips/NYOP: Stripe Product ID (prod_xxx); for others: Stripe Price ID
   quantity: number;
   tipIncluded?: boolean; // tip items only — false excludes the tip from checkout
+  nameYourPrice?: boolean; // true when buyer chose their own price
 }
 
 // ---------------------------------------------------------------------------
@@ -228,18 +232,26 @@ export interface CartItem {
 // ---------------------------------------------------------------------------
 
 export interface CheckoutLineItem {
-  stripePriceId: string; // for tips: Stripe Product ID; for others: Stripe Price ID
+  stripePriceId: string; // for tips/NYOP: Stripe Product ID; for others: Stripe Price ID
   quantity: number;
   sanityBookId: string;
   formatType: FormatType;
   formatKey: string;
   title: string;
   isDigital: boolean;
-  unitAmountCents?: number; // tips only — user-entered amount converted to cents
+  unitAmountCents?: number; // tips and NYOP — user-entered amount converted to cents
+  isNyop?: boolean; // true when buyer chose their own price
+}
+
+export interface GiftOptions {
+  recipientEmail: string;
+  fromName?: string;
+  anonymous: boolean;
 }
 
 export interface CheckoutPayload {
   items: CheckoutLineItem[];
   clerkUserId?: string;
   customerEmail?: string;
+  giftOptions?: GiftOptions;
 }

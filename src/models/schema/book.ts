@@ -34,6 +34,29 @@ const bookFormat = {
       description: 'Original price for strike-through display (optional)',
     }),
     defineField({
+      name: 'nameYourPrice',
+      title: 'Name Your Own Price',
+      type: 'boolean',
+      description: 'Let buyers choose how much to pay',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'minimumPrice',
+      title: 'Minimum Price (USD)',
+      type: 'number',
+      description: 'Minimum acceptable amount (0 = free / any amount)',
+      hidden: ({ parent }) => !(parent as { nameYourPrice?: boolean })?.nameYourPrice,
+      validation: (Rule) => Rule.min(0),
+    }),
+    defineField({
+      name: 'suggestedPrice',
+      title: 'Suggested Price (USD)',
+      type: 'number',
+      description: 'Pre-filled suggestion shown to buyers',
+      hidden: ({ parent }) => !(parent as { nameYourPrice?: boolean })?.nameYourPrice,
+      validation: (Rule) => Rule.min(0),
+    }),
+    defineField({
       name: 'stripePriceId',
       title: 'Stripe Price ID',
       type: 'string',
@@ -127,8 +150,8 @@ const bookFormat = {
     }),
   ],
   preview: {
-    select: { title: 'formatType', subtitle: 'price' },
-    prepare({ title, subtitle }: { title?: string; subtitle?: number }) {
+    select: { title: 'formatType', subtitle: 'price', nyop: 'nameYourPrice' },
+    prepare({ title, subtitle, nyop }: { title?: string; subtitle?: number; nyop?: boolean }) {
       const labels: Record<string, string> = {
         physical: 'Physical',
         digital: 'Digital',
@@ -136,7 +159,11 @@ const bookFormat = {
       };
       return {
         title: labels[title ?? ''] ?? title ?? 'Format',
-        subtitle: subtitle != null ? `$${subtitle.toFixed(2)}` : undefined,
+        subtitle: nyop
+          ? 'Pay What You Want'
+          : subtitle != null
+            ? `$${subtitle.toFixed(2)}`
+            : undefined,
       };
     },
   },

@@ -36,7 +36,6 @@ import {
 import { PitchQuickViewModal, type PitchForModal } from './PitchQuickViewModal';
 import { blockNoteToPortableText, portableTextToBlockNote } from '@/lib/portal/blocknote-serializer';
 import urlFor from '@/lib/sanity/utils/image';
-import { uploadImageToSanity } from '@/lib/portal/image-actions';
 import SourceSelectorModal from './SourceSelectorModal';
 
 // Lazy-load the WYSIWYG editor to avoid SSR
@@ -49,7 +48,7 @@ const RichTextEditor = dynamic(() => import('./RichTextEditor'), { ssr: false })
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   slug: z.string().min(1, 'Slug is required').max(200).regex(/^[a-z0-9-]+$/, 'Slug: lowercase letters, numbers, hyphens only'),
-  description: z.string().max(500).optional(),
+  description: z.string().max(1000).optional(),
   leadParagraph: z.string().max(1000).optional(),
   featured: z.boolean().default(false),
   breakingNews: z.boolean().default(false),
@@ -60,7 +59,11 @@ const formSchema = z.object({
   keywords: z.string().optional(),
   authorRef: z.string().optional(),
   hasEmbeddedVideo: z.boolean().default(false),
-  videoLink: z.string().optional(),
+  // Allow empty string (= no video) or a full URL. An empty value is coerced to
+  // undefined in buildInput, so the server-side z.string().url() schema never sees it.
+  // A non-empty value that isn't a valid URL would silently block ALL field saves on
+  // the server (the whole safeParse fails), so we validate it here too.
+  videoLink: z.union([z.string().url('Video link must be a full URL (https://…)'), z.literal(''), z.undefined()]).optional(),
   eventDate: z.string().optional(),
   methodology: z.string().max(2000).optional(),
 });
@@ -204,8 +207,11 @@ export default function ArticleEditorForm({
 
   // Autosave indicator
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved' | 'idle'>('idle');
-  // A document without the "drafts." prefix in its _id is live on the site.
-  const isAlreadyPublished = !!initialData?._id && !initialData._id.startsWith('drafts.');
+  // Under the previewDrafts perspective, _id is always normalised to the non-prefixed
+  // form — even for draft-only documents. articleId is always _originalId (the real
+  // stored Sanity document ID), so checking it is the only reliable way to tell
+  // whether this document is actually published vs. a draft.
+  const isAlreadyPublished = !!articleId && !articleId.startsWith('drafts.');
   const isDirtyRef = useRef(false);
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -295,13 +301,15 @@ export default function ArticleEditorForm({
         eventDate: values.eventDate || undefined,
         faqs: faqs.filter((f) => f.question.trim() || f.answer.trim()).map((f) => ({ _key: f._key, question: f.question, answer: f.answer })),
         correction: correction ?? undefined,
+        // null = explicitly removed (tells updateArticle to unset the field in Sanity)
+        // undefined would be silently excluded from the patch and leave the old image in place
         mainImage: mainImage?.assetRef
           ? {
               _type: 'image' as const,
               asset: { _type: 'reference' as const, _ref: mainImage.assetRef },
               alt: mainImage.alt,
             }
-          : undefined,
+          : null,
       };
     },
     [selectedCategories, selectedSources, mainImage, faqs, relatedArticles, correction],
@@ -323,7 +331,10 @@ export default function ArticleEditorForm({
           setSaveStatus('saved');
           toast.success('Draft saved.');
           if (!articleId && 'data' in result) {
-            router.replace(`/portal/articles/${result.data._id}/edit`);
+            // createArticle returns the full "drafts.xxx" _id — strip the prefix so the
+            // URL stays clean (/portal/articles/<id>/edit). The edit page normalises either form.
+            const urlId = result.data._id.replace(/^drafts\./, '');
+            router.replace(`/portal/articles/${urlId}/edit`);
           }
         } else {
           setSaveStatus('unsaved');
@@ -339,11 +350,13 @@ export default function ArticleEditorForm({
   function handleSubmitForReview(values: FormValues) {
     startTransition(async () => {
       try {
+        // createArticle now returns "drafts.xxx" — use that directly for the review
+        // action (which patches the draft) and strip it only if we ever needed a URL.
         let id = articleId;
         if (!id) {
           const result = await createArticle(buildInput(values), linkedPitchId);
           if (!result.success) { toast.error(result.error); return; }
-          id = result.data._id;
+          id = result.data._id; // "drafts.xxx" — correct for submitArticleForReview
         } else {
           const result = await updateArticle(id, buildInput(values));
           if (!result.success) { toast.error(result.error); return; }
@@ -366,19 +379,22 @@ export default function ArticleEditorForm({
       try {
         let id = articleId;
         if (!id) {
+          // New article — createArticle returns "drafts.xxx".
+          // publishArticle needs the real draft ID to promote it correctly.
           const result = await createArticle(buildInput(values), linkedPitchId);
           if (!result.success) { toast.error(result.error); return; }
-          id = result.data._id;
+          id = result.data._id; // "drafts.xxx"
         } else {
           const result = await updateArticle(id, buildInput(values));
           if (!result.success) { toast.error(result.error); return; }
         }
-        // Only editors can call publishArticle; authors just update an already-published article
+        // Authors can only publish updates to already-published articles (isAlreadyPublished = true
+        // means articleId had no "drafts." prefix). Editors/admins publish everything.
         if (isEditorPlus) {
           const pubResult = await publishArticle(id, values.publishedAt || undefined);
           if (!pubResult.success) { toast.error(pubResult.error); return; }
         }
-        toast.success(isEditorPlus ? 'Article published!' : 'Article updated.');
+        toast.success(isEditorPlus ? 'Article published!' : 'Update published.');
         router.push('/portal/articles');
       } catch (err) {
         toast.error(err instanceof Error ? err.message : 'Publish failed. Please try again.');
@@ -461,7 +477,7 @@ export default function ArticleEditorForm({
 
   return (
     <>
-    <form className='space-y-8'>
+    <form className='space-y-8' onSubmit={(e) => e.preventDefault()}>
       {/* Sticky action bar */}
       <div className='sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-white/95 px-4 py-2 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95'>
         <div className='flex items-center gap-2'>
@@ -586,8 +602,12 @@ export default function ArticleEditorForm({
           id='description'
           {...register('description')}
           rows={3}
+          maxLength={1000}
           placeholder='1–3 sentence summary shown on article cards and in search results…'
         />
+        {errors.description && (
+          <p className='mt-1 text-xs text-red-500'>{errors.description.message}</p>
+        )}
       </section>
 
       {/* Lead paragraph */}
@@ -640,16 +660,22 @@ export default function ArticleEditorForm({
                 const file = e.target.files?.[0];
                 if (!file) return;
                 setImageUploading(true);
-                const fd = new FormData();
-                fd.append('file', file);
-                const result = await uploadImageToSanity(fd);
-                setImageUploading(false);
-                e.target.value = '';
-                if (result.success) {
-                  setMainImage({ assetRef: result.assetId, url: result.url, alt: mainImage?.alt ?? '' });
+                try {
+                  const fd = new FormData();
+                  fd.append('file', file);
+                  const res = await fetch('/api/portal/upload-image', { method: 'POST', body: fd });
+                  const data = await res.json() as { assetId?: string; url?: string; error?: string };
+                  if (!res.ok) {
+                    toast.error(data.error ?? 'Image upload failed');
+                    return;
+                  }
+                  setMainImage({ assetRef: data.assetId!, url: data.url!, alt: mainImage?.alt ?? '' });
                   isDirtyRef.current = true;
-                } else {
-                  toast.error(result.error);
+                } catch {
+                  toast.error('Image upload failed. Please try again.');
+                } finally {
+                  setImageUploading(false);
+                  e.target.value = '';
                 }
               }}
             />
@@ -1017,7 +1043,10 @@ export default function ArticleEditorForm({
             {...register('videoLink')}
             placeholder='YouTube URL (e.g. https://www.youtube.com/watch?v=…)'
           />
-          {watch('videoLink') && (
+          {errors.videoLink && (
+            <p className='mt-1 text-xs text-red-500'>{errors.videoLink.message}</p>
+          )}
+          {watch('videoLink') && !errors.videoLink && (
             <div className='aspect-video max-w-md'>
               <iframe
                 src={`https://www.youtube.com/embed/${

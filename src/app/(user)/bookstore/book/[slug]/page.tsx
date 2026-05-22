@@ -8,12 +8,15 @@ import type { Metadata } from 'next';
 import { PortableText } from '@portabletext/react';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
-import { queryBookBySlug, queryAllBooks } from '@/lib/sanity/lib/queries';
+import { queryBookBySlug, queryAllBooks, queryApprovedReviewsByBookSlug } from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/lib/bookstore/types';
 import urlForImage from '@/util/urlForImage';
-import AddToCartButton from '@/components/bookstore/AddToCartButton';
-import BuyNowButton from '@/components/bookstore/BuyNowButton';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
+import SocialShare from '@/components/global/SocialShare';
+import WishlistButton from '@/components/bookstore/WishlistButton';
+import BookReviews from '@/components/bookstore/BookReviews';
+import ReviewForm from '@/components/bookstore/ReviewForm';
+import BookBuySection from '@/components/bookstore/BookBuySection';
 
 // JSON-LD structured data
 function buildProductJsonLd(book: SanityBook): string {
@@ -71,15 +74,41 @@ export async function generateMetadata({
 
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(1200).height(630).url()
-    : book.coverImageUrl;
+    : (book.coverImageUrl ?? null);
+
+  const lowestPrice = book.formats?.reduce<number | null>((min, f) => {
+    if (min === null) return f.price;
+    return f.price < min ? f.price : min;
+  }, null);
+
+  const genres = book.genre?.map((g) => g.title).join(', ');
+  const description = [
+    book.author?.name ? `By ${book.author.name}.` : null,
+    genres,
+    lowestPrice != null ? `From $${lowestPrice.toFixed(2)}.` : null,
+    'Available now in the Hurriya Publications bookstore.',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const ogImages = cover
+    ? [{ url: cover, width: 1200, height: 630, alt: book.title }]
+    : [{ url: '/hurriya-pub/Logo-alt.png', width: 1200, height: 630, alt: 'Hurriya Publications' }];
 
   return {
-    title: `${book.title} — UnTelevised Media Bookstore`,
-    description: `By ${book.author?.name ?? 'Unknown'}. Available now in the UnTelevised Media Bookstore.`,
+    title: `${book.title} — Hurriya Publications`,
+    description,
     openGraph: {
       title: book.title,
-      images: cover ? [{ url: cover }] : [],
+      description,
       type: 'website',
+      images: ogImages,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: book.title,
+      description,
+      images: [cover ?? '/hurriya-pub/Logo-alt.png'],
     },
   };
 }
@@ -158,17 +187,33 @@ function RevenueTermsCard({
   );
 }
 
+interface BookReview {
+  _id: string;
+  reviewerName: string;
+  reviewerLocation?: string;
+  rating: number;
+  body: string;
+  submittedAt: string;
+}
+
 export default async function BookDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const book = await sanityFetch<SanityBook | null>({
-    query: queryBookBySlug,
-    params: { slug },
-    tags: ['book'],
-  });
+  const [book, reviews] = await Promise.all([
+    sanityFetch<SanityBook | null>({
+      query: queryBookBySlug,
+      params: { slug },
+      tags: ['book'],
+    }),
+    sanityFetch<BookReview[]>({
+      query: queryApprovedReviewsByBookSlug,
+      params: { slug },
+      tags: ['bookReview'],
+    }),
+  ]);
 
   if (!book || book.status === 'discontinued') notFound();
 
@@ -237,9 +282,19 @@ export default async function BookDetailPage({
 
           {/* Book info */}
           <div className='flex-1'>
-            <p className='mb-1 text-[10px] font-bold uppercase tracking-widest text-hp-muted'>
-              {book.author?.name ?? 'Unknown Author'}
-            </p>
+            <div className='mb-1 flex items-center justify-between gap-3'>
+              <p className='text-[10px] font-bold uppercase tracking-widest text-hp-muted'>
+                {book.author?.name ?? 'Unknown Author'}
+              </p>
+              <WishlistButton
+                slug={book.slug.current}
+                title={book.title}
+                coverImageUrl={cover ?? undefined}
+                authorName={book.author?.name}
+                price={book.formats?.[0]?.price}
+                variant='full'
+              />
+            </div>
             <h1 className='mb-2 text-3xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-hp-cream lg:text-5xl'>
               {book.title}
             </h1>
@@ -265,105 +320,24 @@ export default async function BookDetailPage({
               </div>
             )}
 
-            {/* Format selector + buy CTAs */}
-            <div className='mb-6'>
-              <div className='mb-3 flex items-center gap-3'>
-                <div className='bg-untele px-2 py-0.5'>
-                  <span className='text-[10px] font-black uppercase tracking-widest text-white'>
-                    Buy
-                  </span>
-                </div>
-              </div>
+            {/* Format selector + gift toggle + buy CTAs */}
+            <BookBuySection book={book} isOutOfStock={isOutOfStock} />
 
-              {isOutOfStock ? (
-                <div className='border border-hp-sand-border bg-hp-sand px-4 py-3 dark:border-hp-dark-border dark:bg-hp-dark-card'>
-                  <p className='text-xs font-bold uppercase tracking-widest text-slate-500'>
-                    Currently Out of Stock
-                  </p>
-                </div>
-              ) : (
-                <div className='flex flex-col gap-3'>
-                  {book.formats?.map((format) => {
-                    const outOfStock =
-                      format.inventory?.trackInventory &&
-                      format.inventory.quantity === 0 &&
-                      !format.inventory.allowBackorder;
-                    const lowStock =
-                      format.inventory?.trackInventory &&
-                      format.inventory.quantity > 0 &&
-                      format.inventory.quantity <= (format.inventory.lowStockThreshold ?? 5);
-
-                    return (
-                      <div
-                        key={format._key}
-                        className='flex flex-col gap-2 border border-hp-sand-border bg-white p-4 dark:border-hp-dark-border dark:bg-hp-dark-card sm:flex-row sm:items-center sm:justify-between'
-                      >
-                        <div>
-                          <p className='text-sm font-black uppercase tracking-wide text-slate-900 dark:text-hp-cream'>
-                            {format.formatType === 'physical' && 'Physical Book'}
-                            {format.formatType === 'digital' && 'Digital Edition'}
-                            {format.formatType === 'bundle' && 'Physical + Digital Bundle'}
-                          </p>
-                          {format.formatType === 'digital' && format.digitalAsset && (
-                            <p className='text-[10px] text-slate-400'>
-                              {format.digitalAsset.fileFormat}
-                              {format.digitalAsset.fileSize ? ` · ${format.digitalAsset.fileSize}` : ''}
-                            </p>
-                          )}
-                          {format.formatType !== 'digital' && format.dimensions && (
-                            <p className='text-[10px] text-slate-400'>{format.dimensions}</p>
-                          )}
-                          {lowStock && (
-                            <p className='text-[10px] font-bold text-amber-500'>
-                              Only {format.inventory?.quantity} left
-                            </p>
-                          )}
-                          {outOfStock && (
-                            <p className='text-[10px] font-bold text-slate-400'>Out of stock</p>
-                          )}
-                        </div>
-                        <div className='flex flex-wrap items-center gap-3'>
-                          <div className='text-right'>
-                            {format.compareAtPrice != null && (
-                              <p className='text-xs text-slate-400 line-through'>
-                                ${format.compareAtPrice.toFixed(2)}
-                              </p>
-                            )}
-                            <p className='text-lg font-black text-untele'>
-                              ${format.price.toFixed(2)}
-                            </p>
-                          </div>
-                          {!outOfStock && (
-                            <div className='flex flex-wrap gap-2'>
-                              <AddToCartButton book={book} format={format} />
-                              {format.stripePriceId && (
-                                <BuyNowButton book={book} format={format} />
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Tip the author */}
-              {book.author?.tipStripeProductId && (
-                <TipAuthorRow
-                  author={
-                    book.author as {
-                      _id: string;
-                      name: string;
-                      slug?: { current: string };
-                      tipStripeProductId: string;
-                      tipAmount: number;
-                    }
+            {/* Tip the author */}
+            {book.author?.tipStripeProductId && (
+              <TipAuthorRow
+                author={
+                  book.author as {
+                    _id: string;
+                    name: string;
+                    slug?: { current: string };
+                    tipStripeProductId: string;
+                    tipAmount: number;
                   }
-                  bookId={book._id}
-                />
-              )}
-            </div>
+                }
+                bookId={book._id}
+              />
+            )}
 
             {/* Book details */}
             <div className='mb-6'>
@@ -385,9 +359,17 @@ export default async function BookDetailPage({
               <RevenueTermsCard terms={book.revenueTerms} />
             )}
 
+            {/* Social sharing */}
+            <div className='mb-6'>
+              <SocialShare
+                url={`${process.env.NEXT_PUBLIC_PRODUCTION_URL ?? ''}/bookstore/book/${book.slug.current}`}
+                title={book.title}
+              />
+            </div>
+
             {/* Author bio */}
             {book.author && (
-              <div className='border border-hp-sand-border bg-hp-sand p-4 dark:border-hp-dark-border dark:bg-hp-dark-card'>
+              <div className='mb-6 border border-hp-sand-border bg-hp-sand p-4 dark:border-hp-dark-border dark:bg-hp-dark-card'>
                 <div className='mb-2 flex items-center gap-3'>
                   {authorCover && (
                     <div className='relative h-10 w-10 shrink-0 overflow-hidden'>
@@ -418,6 +400,12 @@ export default async function BookDetailPage({
                 )}
               </div>
             )}
+
+            {/* Reader reviews */}
+            <BookReviews reviews={reviews ?? []} bookSlug={slug} />
+
+            {/* Review submission form */}
+            <ReviewForm bookSlug={slug} />
           </div>
         </div>
       </main>

@@ -3,6 +3,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import BookstoreNewsletter from '@/components/bookstore/BookstoreNewsletter';
 
 export const metadata: Metadata = {
   title: 'Our Story — Hurriya Publications',
@@ -13,6 +14,20 @@ export const metadata: Metadata = {
     description:
       'Born in solidarity. Built to endure. Hurriya Publications exists to put authors first and amplify voices the world cannot afford to ignore.',
     type: 'website',
+    images: [
+      {
+        url: '/hurriya-pub/Logo-alt.png',
+        width: 1200,
+        height: 630,
+        alt: 'Hurriya Publications — Born in Solidarity. Built to Endure.',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Our Story — Hurriya Publications',
+    description: 'Born in solidarity. Built to endure. An independent publisher under UnTelevised Media, built to put authors first.',
+    images: ['/hurriya-pub/Logo-alt.png'],
   },
 };
 
@@ -235,6 +250,11 @@ export default function AboutPage() {
             Get in Touch &rarr;
           </Link>
         </div>
+      </section>
+
+      {/* ── Newsletter signup ── */}
+      <section className='mb-12'>
+        <BookstoreNewsletter source='bookstore-about' />
       </section>
 
       {/* ── What hurriya means ── */}
