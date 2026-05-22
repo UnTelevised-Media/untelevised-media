@@ -9,13 +9,14 @@ import HeaderLogo from '@/components/global/HeaderLogo';
 import Footer from '@/components/global/Footer';
 import BookstoreNav from '@/components/bookstore/BookstoreNav';
 import { SanityLive } from '@/lib/sanity/lib/live';
+import { HURRIYA_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
 
 export const metadata: Metadata = {
   openGraph: {
     siteName: 'Hurriya Publications — UnTelevised Media',
     images: [
       {
-        url: '/hurriya-pub/Logo-alt.png',
+        url: HURRIYA_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: 'Hurriya Publications — An UnTelevised Media Imprint',
@@ -24,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@untelevised',
-    images: ['/hurriya-pub/Logo-alt.png'],
+    site: TWITTER_HANDLE,
+    images: [HURRIYA_OG_IMAGE],
   },
 };
 
