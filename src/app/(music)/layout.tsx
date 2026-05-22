@@ -10,11 +10,15 @@ import ConsentAwareGoogleAdSense from '@/util/consentAwareGoogleAdSense';
 import { SanityLive } from '@/lib/sanity/lib/live';
 import DraftModeBanner from '@/components/sanity/DraftModeBanner';
 import SanityVisualEditing from '@/components/sanity/VisualEditing';
+import { GlobalStructuredData } from '@/components/seo/GlobalStructuredData';
+
 export default async function UserLayout({ children }: { children: React.ReactNode }) {
   const draftModeEnabled = (await draftMode()).isEnabled;
 
   return (
     <>
+      <GlobalStructuredData />
+
       <ConsentAwareGoogleAdSense
         googleAdsenseId={process.env.NEXT_PUBLIC_GAS_ID ?? ''}
       />
