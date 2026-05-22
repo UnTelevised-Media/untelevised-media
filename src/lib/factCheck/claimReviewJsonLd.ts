@@ -13,7 +13,7 @@ export interface FactCheckDoc {
   ratingExplanation: string;
 }
 
-const SITE_URL = 'https://untelevised.media';
+const SITE_URL = 'https://www.untelevised.media';
 
 export function buildClaimReviewJsonLd(fc: FactCheckDoc): object {
   const config = VERDICT_CONFIG[fc.rating];

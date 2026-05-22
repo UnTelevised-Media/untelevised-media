@@ -12,6 +12,7 @@ import { buildClaimReviewJsonLd } from '@/lib/factCheck/claimReviewJsonLd';
 import type { FactCheckRating } from '@/lib/factCheck/verdictConfig';
 import formatDate from '@/util/formatDate';
 import Link from 'next/link';
+import { buildFactCheckMetadata } from '@/util/metadata';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -31,20 +32,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const fc = await sanityFetch<{
     title: string;
     ratingExplanation: string;
+    publishedAt: string;
+    updatedAt?: string;
+    mainImage?: unknown;
   } | null>({
     query: queryFactCheckBySlug,
     params: { slug },
     tags: ['factCheck'],
   });
   if (!fc) return {};
-  return {
-    title: `Fact Check: ${fc.title} | UnTelevised Media`,
-    description: fc.ratingExplanation,
-    openGraph: {
-      title: `Fact Check: ${fc.title}`,
-      description: fc.ratingExplanation,
-    },
-  };
+  return buildFactCheckMetadata(fc as FactCheck, slug);
 }
 
 export default async function FactCheckPage({ params }: Props) {
