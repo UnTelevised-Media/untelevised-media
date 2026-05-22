@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UnTelevised Media — Full Codebase Audit Report</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a24;
+      --border: #2a2a3a;
+      --text: #e8e8f0;
+      --text-dim: #888899;
+      --critical: #ff3b3b;
+      --high: #ff8c00;
+      --medium: #f5c400;
+      --low: #4dabf7;
+      --good: #40c057;
+      --accent: #7c4dff;
+      --accent2: #00d4ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    /* ─── HEADER ─────────────────────────────── */
+    .header {
+      background: linear-gradient(135deg, #0d0d1a 0%, #1a0a2e 50%, #0a1a2e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 40px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(124,77,255,.15) 0%, transparent 70%);
+    }
+    .header-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(124,77,255,.2); border: 1px solid rgba(124,77,255,.4);
+      border-radius: 20px; padding: 4px 14px; font-size: 12px;
+      color: #a78bfa; text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 16px;
+    }
+    .header h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; line-height: 1.15; }
+    .header h1 span { color: #a78bfa; }
+    .header-meta {
+      display: flex; flex-wrap: wrap; gap: 24px;
+      margin-top: 20px; color: var(--text-dim); font-size: 14px;
+    }
+    .header-meta strong { color: var(--text); }
+
+    /* ─── NAV TABS ─────────────────────────────── */
+    .nav-tabs {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-tabs-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; gap: 0; overflow-x: auto;
+    }
+    .tab-btn {
+      background: none; border: none; color: var(--text-dim);
+      padding: 16px 24px; cursor: pointer; font-size: 13px; font-weight: 500;
+      border-bottom: 2px solid transparent; transition: all .2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: #a78bfa; border-bottom-color: #a78bfa; }
+
+    /* ─── LAYOUT ─────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+    section { display: none; }
+    section.active { display: block; }
+
+    /* ─── CARDS ─────────────────────────────── */
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 32px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; margin-bottom: 32px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-bottom: 32px; }
+    @media(max-width:900px) { .grid-4{grid-template-columns:repeat(2,1fr)} .grid-3{grid-template-columns:1fr 1fr} }
+    @media(max-width:600px) { .grid-4,.grid-2,.grid-3{grid-template-columns:1fr} .container{padding:20px} }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 24px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .stat-card .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; }
+    .stat-card .value { font-size: 36px; font-weight: 800; line-height: 1; }
+    .stat-card .sub { font-size: 12px; color: var(--text-dim); }
+    .stat-card.critical .value { color: var(--critical); }
+    .stat-card.high .value { color: var(--high); }
+    .stat-card.medium .value { color: var(--medium); }
+    .stat-card.low .value { color: var(--low); }
+    .stat-card.total .value { color: var(--accent2); }
+
+    /* ─── CHART CONTAINERS ─────────────────────── */
+    .chart-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .chart-wrap h3 { font-size: 14px; font-weight: 600; color: var(--text-dim); margin-bottom: 20px; text-transform: uppercase; letter-spacing: .06em; }
+    .chart-canvas-wrap { position: relative; }
+
+    /* ─── HEALTH SCORES ─────────────────────────── */
+    .health-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 16px; margin-bottom: 32px; }
+    @media(max-width:900px){.health-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.health-grid{grid-template-columns:repeat(2,1fr)}}
+    .health-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; text-align: center;
+    }
+    .health-score {
+      font-size: 42px; font-weight: 900; line-height: 1;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      margin-bottom: 4px;
+    }
+    .health-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: .06em; }
+    .health-bar-wrap { background: var(--border); border-radius: 4px; height: 6px; margin-top: 12px; overflow: hidden; }
+    .health-bar { height: 100%; border-radius: 4px; transition: width .8s ease; }
+
+    /* ─── SEVERITY BADGE ─────────────────────────── */
+    .badge {
+      display: inline-block; padding: 2px 10px; border-radius: 20px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+    }
+    .badge.critical { background: rgba(255,59,59,.18); color: var(--critical); border: 1px solid rgba(255,59,59,.3); }
+    .badge.high { background: rgba(255,140,0,.18); color: var(--high); border: 1px solid rgba(255,140,0,.3); }
+    .badge.medium { background: rgba(245,196,0,.18); color: var(--medium); border: 1px solid rgba(245,196,0,.3); }
+    .badge.low { background: rgba(77,171,247,.18); color: var(--low); border: 1px solid rgba(77,171,247,.3); }
+    .badge.ok { background: rgba(64,192,87,.18); color: var(--good); border: 1px solid rgba(64,192,87,.3); }
+
+    /* ─── FINDING CARDS ─────────────────────────── */
+    .finding {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-left: 3px solid transparent; border-radius: 8px;
+      padding: 16px 20px; margin-bottom: 12px;
+    }
+    .finding.critical { border-left-color: var(--critical); }
+    .finding.high { border-left-color: var(--high); }
+    .finding.medium { border-left-color: var(--medium); }
+    .finding.low { border-left-color: var(--low); }
+    .finding-header { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+    .finding-title { font-size: 14px; font-weight: 600; flex: 1; min-width: 200px; }
+    .finding-file {
+      font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11px;
+      color: var(--accent2); background: rgba(0,212,255,.08);
+      border: 1px solid rgba(0,212,255,.2); border-radius: 4px;
+      padding: 2px 8px;
+    }
+    .finding-body { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+    .finding-rec { font-size: 12px; color: #a8e6a3; background: rgba(64,192,87,.08); border: 1px solid rgba(64,192,87,.15); border-radius: 6px; padding: 8px 12px; }
+    .finding-rec::before { content: '→ '; font-weight: 700; }
+    .finding.fixed { border-left-color: var(--good) !important; }
+    .finding.fixed .finding-title { color: var(--text-dim); }
+    .finding-fix { font-size: 12px; color: var(--good); background: rgba(64,192,87,.08); border: 1px solid rgba(64,192,87,.2); border-radius: 6px; padding: 8px 12px; margin-top: 8px; }
+    .finding-fix::before { content: '✓ Fixed — '; font-weight: 700; }
+    .badge.fixed { background: rgba(64,192,87,.18); color: var(--good); border: 1px solid rgba(64,192,87,.3); }
+    .badge.new { background: rgba(124,77,255,.18); color: #a78bfa; border: 1px solid rgba(124,77,255,.3); }
+    tr.done td { color: var(--text-dim); }
+    tr.done td:nth-child(2)::after { content: ' ✓'; color: var(--good); font-weight: 700; }
+
+    /* ─── SECTION HEADER ─────────────────────────── */
+    .section-header { margin-bottom: 24px; }
+    .section-header h2 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+    .section-header p { color: var(--text-dim); font-size: 14px; }
+
+    /* ─── PRIORITY TABLE ─────────────────────────── */
+    .priority-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .priority-table th {
+      text-align: left; padding: 10px 14px;
+      color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: .07em;
+      border-bottom: 1px solid var(--border); background: var(--surface);
+    }
+    .priority-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.04); vertical-align: top; }
+    .priority-table tr:hover td { background: rgba(255,255,255,.02); }
+    .file-tag {
+      font-family: monospace; font-size: 11px; color: var(--accent2);
+      background: rgba(0,212,255,.07); border: 1px solid rgba(0,212,255,.15);
+      border-radius: 4px; padding: 2px 6px; display: inline-block;
+    }
+
+    /* ─── DIVIDER ─────────────────────────────── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+    /* ─── FILTER BAR ─────────────────────────────── */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .filter-btn {
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text-dim); padding: 6px 16px; border-radius: 20px;
+      font-size: 12px; cursor: pointer; transition: all .15s;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .filter-btn.active { background: rgba(124,77,255,.2); border-color: var(--accent); color: #a78bfa; }
+
+    /* ─── PROGRESS BAR ─────────────────────────── */
+    .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .progress-label { min-width: 100px; font-size: 13px; color: var(--text-dim); }
+    .progress-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 4px; }
+    .progress-count { min-width: 32px; text-align: right; font-size: 12px; font-weight: 700; }
+
+    /* ─── CALLOUT ─────────────────────────── */
+    .callout {
+      border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+      display: flex; gap: 14px; align-items: flex-start; font-size: 13px;
+    }
+    .callout.green { background: rgba(64,192,87,.1); border: 1px solid rgba(64,192,87,.25); }
+    .callout.red { background: rgba(255,59,59,.1); border: 1px solid rgba(255,59,59,.25); }
+    .callout.yellow { background: rgba(245,196,0,.1); border: 1px solid rgba(245,196,0,.25); }
+    .callout-icon { font-size: 20px; line-height: 1; }
+
+    /* ─── FOOTER ─────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--border); padding: 32px 40px;
+      text-align: center; font-size: 13px; color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">
+      <span>●</span> Full Codebase Audit
+    </div>
+    <h1>UnTelevised Media<br /><span>Technical Audit Report</span></h1>
+    <div class="header-meta">
+      <span><strong>Audit Date:</strong> May 21, 2026</span>
+      <span><strong>Remediation:</strong> May 22, 2026</span>
+      <span><strong>Branch:</strong> security-issues → main</span>
+      <span><strong>Stack:</strong> Next.js 16.1 · Sanity 5 · Supabase · Clerk · Stripe</span>
+      <span><strong>Files Scanned:</strong> 384 TypeScript/TSX</span>
+      <span><strong>API Routes:</strong> 22</span>
+      <span><strong>Components:</strong> ~210</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<nav class="nav-tabs">
+  <div class="nav-tabs-inner">
+    <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+    <button class="tab-btn" onclick="showTab('security')">Security</button>
+    <button class="tab-btn" onclick="showTab('seo')">SEO / AEO</button>
+    <button class="tab-btn" onclick="showTab('accessibility')">Accessibility</button>
+    <button class="tab-btn" onclick="showTab('architecture')">Architecture</button>
+    <button class="tab-btn" onclick="showTab('roadmap')">Roadmap</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ OVERVIEW ═══════════════════════ -->
+<section id="overview" class="active">
+<div class="container">
+
+  <div class="section-header">
+    <h2>Executive Overview</h2>
+    <p>Comprehensive multi-domain audit covering security, SEO/AEO, accessibility, and architecture across 384 source files.</p>
+  </div>
+
+  <!-- OVERALL HEALTH SCORES -->
+  <div class="health-grid" style="margin-bottom:32px">
+    <div class="health-card">
+      <div class="health-score" style="color:#40c057">83</div>
+      <div class="health-label">Security <span style="font-size:10px;color:var(--good)">↑+34</span></div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:83%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
+    </div>
+    <div class="health-card">
+      <div class="health-score" style="color:#ff8c00">55</div>
+      <div class="health-label">SEO / AEO</div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:55%;background:linear-gradient(90deg,#ff8c00,#ffb347)"></div></div>
+    </div>
+    <div class="health-card">
+      <div class="health-score" style="color:#f5c400">46</div>
+      <div class="health-label">Accessibility</div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:46%;background:linear-gradient(90deg,#f5c400,#ffe066)"></div></div>
+    </div>
+    <div class="health-card">
+      <div class="health-score" style="color:#4dabf7">63</div>
+      <div class="health-label">Architecture</div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:63%;background:linear-gradient(90deg,#4dabf7,#74c0fc)"></div></div>
+    </div>
+    <div class="health-card">
+      <div class="health-score" style="color:#a78bfa">62</div>
+      <div class="health-label">Overall <span style="font-size:10px;color:var(--good)">↑+9</span></div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:62%;background:linear-gradient(90deg,#7c4dff,#a78bfa)"></div></div>
+    </div>
+  </div>
+
+  <!-- SEVERITY STATS -->
+  <div class="grid-4" style="margin-bottom:32px">
+    <div class="stat-card critical">
+      <div class="label">Critical Open</div>
+      <div class="value">17</div>
+      <div class="sub">was 19 — 2 resolved</div>
+    </div>
+    <div class="stat-card high">
+      <div class="label">High Open</div>
+      <div class="value">21</div>
+      <div class="sub">was 28 — 7 resolved</div>
+    </div>
+    <div class="stat-card medium">
+      <div class="label">Medium Issues</div>
+      <div class="value">43</div>
+      <div class="sub">Scheduled improvements</div>
+    </div>
+    <div class="stat-card low">
+      <div class="label">Low Issues</div>
+      <div class="value">23</div>
+      <div class="sub">Best practice enhancements</div>
+    </div>
+  </div>
+
+  <!-- CHARTS ROW -->
+  <div class="grid-2" style="margin-bottom:32px">
+    <div class="chart-wrap">
+      <h3>Issues by Category</h3>
+      <div class="chart-canvas-wrap" style="height:280px">
+        <canvas id="categoryDonut"></canvas>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <h3>Severity Distribution by Domain</h3>
+      <div class="chart-canvas-wrap" style="height:280px">
+        <canvas id="severityBar"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:32px">
+    <div class="chart-wrap">
+      <h3>Domain Health Radar</h3>
+      <div class="chart-canvas-wrap" style="height:280px">
+        <canvas id="healthRadar"></canvas>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <h3>Issue Severity Breakdown</h3>
+      <div class="chart-canvas-wrap" style="height:280px">
+        <canvas id="severityPie"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRENGTHS AND CALLOUTS -->
+  <div class="section-header" style="margin-top:8px">
+    <h2>Notable Strengths</h2>
+    <p>Well-implemented patterns that should be maintained.</p>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-icon">✓</div>
+    <div><strong>Secret Protection:</strong> Sanity read/write tokens are correctly marked <code>server-only</code> with <code>experimental_taintUniqueValue</code> preventing client-side leakage.</div>
+  </div>
+  <div class="callout green">
+    <div class="callout-icon">✓</div>
+    <div><strong>Rate Limiting:</strong> Upstash Redis rate limiting is properly integrated on bookstore checkout, download, and guest download endpoints with sliding windows.</div>
+  </div>
+  <div class="callout green">
+    <div class="callout-icon">✓</div>
+    <div><strong>Role-Based Access:</strong> Clerk integration with granular role checking (admin, editor, author, sales, contributor) is well structured across portal routes.</div>
+  </div>
+  <div class="callout green">
+    <div class="callout-icon">✓</div>
+    <div><strong>AEO Crawler Rules:</strong> <code>robots.ts</code> correctly allows GPTBot, ClaudeBot, PerplexityBot, and Google-Extended — excellent for AI answer engine discoverability.</div>
+  </div>
+  <div class="callout green">
+    <div class="callout-icon">✓</div>
+    <div><strong>NewsArticle Schema:</strong> Structured data for news articles is well-implemented with author, publisher, datePublished, and image fields.</div>
+  </div>
+
+  <div class="section-header" style="margin-top:32px">
+    <h2>Critical Issues Requiring Immediate Attention</h2>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-icon">✓</div>
+    <div><strong>RESOLVED — STRIPE KEY FRAGMENT LOGGED:</strong> <code>src/app/api/bookstore/checkout/route.ts</code> — All <code>console.log</code> key debug statements removed; checkout route fully rewritten with server-side Sanity price validation. <em>Fixed in commit 9e8de17 (issue #49).</em></div>
+  </div>
+  <div class="callout green">
+    <div class="callout-icon">✓</div>
+    <div><strong>RESOLVED — MISSING INPUT VALIDATION:</strong> <code>src/app/api/job-application/route.ts</code> — Strict Zod schema added; all fields allowlisted, no raw body passthrough. <em>Fixed in commit 9e8de17 (issue #50).</em></div>
+  </div>
+  <div class="callout red">
+    <div class="callout-icon">🔴</div>
+    <div><strong>11 MISSING ARIA LABELS:</strong> Icon-only buttons throughout the app have no accessible labels — screen reader users cannot operate theme toggle, search, modals, or portal controls.</div>
+  </div>
+  <div class="callout yellow">
+    <div class="callout-icon">⚠</div>
+    <div><strong>NO SKIP NAVIGATION:</strong> No skip-to-main-content link exists anywhere in the layout — keyboard users must tab through the entire navigation on every page.</div>
+  </div>
+  <div class="callout yellow">
+    <div class="callout-icon">⚠</div>
+    <div><strong>MISSING METADATA ON 12+ PAGES:</strong> Auth pages, portal pages, music artist/lyrics pages, and breaking article pages have no SEO metadata or structured data at all.</div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════ SECURITY ═══════════════════════ -->
+<section id="security">
+<div class="container">
+
+  <div class="section-header">
+    <h2>Security Audit</h2>
+    <p>Analysis of 22 API routes, authentication flows, file uploads, webhooks, and dependency configuration.</p>
+  </div>
+
+  <div class="grid-4" style="margin-bottom:28px">
+    <div class="stat-card ok"><div class="label">Critical Open</div><div class="value">0</div><div class="sub">was 2 — all resolved</div></div>
+    <div class="stat-card ok"><div class="label">High Open</div><div class="value">0</div><div class="sub">was 11 — all resolved</div></div>
+    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">6</div><div class="sub">This sprint</div></div>
+    <div class="stat-card low"><div class="label">Low Open</div><div class="value">5</div><div class="sub">Ongoing</div></div>
+  </div>
+
+  <div class="callout green" style="margin-bottom:24px">
+    <div class="callout-icon">✓</div>
+    <div><strong>Security Remediation Complete — May 22, 2026.</strong> All 13 critical and high severity findings have been resolved across two remediation sprints on branch <code>security-issues</code>. 9 issues from the original audit (issues #49–#51, #60–#65) plus 4 additional vulnerabilities found during PR code review (Algolia fail-open, author authorization bypass, unvalidated tracking URL, editor role authorization bypass). PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a> merged to main. Remaining open: 6 medium + 5 low (see below).</div>
+  </div>
+
+  <div class="chart-wrap" style="margin-bottom:32px">
+    <h3>Security Issue Distribution</h3>
+    <div style="height:200px"><canvas id="securityBar"></canvas></div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;color:var(--critical)">Critical Findings <span style="color:var(--good);font-size:13px;font-weight:400">(all resolved)</span></h3>
+
+  <div class="finding critical fixed">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">Stripe Secret Key Fragment Logged to Console</span>
+      <span class="finding-file">api/bookstore/checkout/route.ts:88-100</span>
+    </div>
+    <div class="finding-body">The first 14 characters of <code>STRIPE_SECRET_KEY</code> are logged on every checkout request: <code>console.log('[shop/checkout] key prefix:', keyPrefix)</code>. This exposes the key environment (sk_live_ vs sk_test_) and partial key entropy to anyone with log access (Vercel logs, third-party monitoring).</div>
+    <div class="finding-rec">Remove all secret key logging. Use a non-sensitive request ID (session UUID or user ID) for debugging traceability instead.</div>
+    <div class="finding-fix">All debug <code>console.log</code> statements removed; checkout route rewritten with server-side Sanity canonical price validation. Issue #49 · commit 9e8de17.</div>
+  </div>
+
+  <div class="finding critical fixed">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">Mass Assignment Vulnerability — Job Application Route</span>
+      <span class="finding-file">api/job-application/route.ts:15-70</span>
+    </div>
+    <div class="finding-body">Request body is parsed with <code>await request.json()</code> and fields are spread directly into a Sanity document with no Zod schema validation. An attacker can inject arbitrary fields (e.g., <code>_type</code>, <code>approved: true</code>) into the Sanity document store. The careers-application route has Zod validation — this route does not.</div>
+    <div class="finding-rec">Mirror the <code>/careers-application</code> pattern: add a strict Zod schema validating name, email, position, URLs, and enumerating allowed fields only. Reject any unrecognized field.</div>
+    <div class="finding-fix">Strict Zod schema added to job-application route; all fields explicitly typed and allowlisted; <code>_type</code> injection impossible. Issue #50 · commit 9e8de17.</div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--high)">High Severity Findings <span style="color:var(--good);font-size:13px;font-weight:400">(all resolved)</span></h3>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">No Rate Limiting on 3 Public Submission Endpoints</span>
+      <span class="finding-file">api/job-application · api/secure-contact · api/whistleblower</span>
+    </div>
+    <div class="finding-body">Whistleblower, secure-contact, and job-application routes accept unlimited POST submissions. The whistleblower endpoint is particularly sensitive — spam submissions could flood the Sanity dataset and overwhelm editorial staff review. Upstash is already integrated in the codebase for bookstore routes but not applied here.</div>
+    <div class="finding-rec">Apply <code>makeRatelimiter(5, 300)</code> (5 requests/5 min per IP) from the existing bookstore rate-limit pattern to all three endpoints.</div>
+    <div class="finding-fix">Upstash sliding-window rate limiters added to all three routes: <code>checkSubmissionRate</code> (5 req/300 s) for job-application and secure-contact; <code>checkWhistleblowerRate</code> (3 req/300 s, strictest) for whistleblower. Issue #60 · commit cb9d6d2.</div>
+  </div>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">Timing Attack on Cron & Webhook Secret Comparison</span>
+      <span class="finding-file">api/cron/cleanup-briefs/route.ts:6 · api/webhooks/supabase-order-update/route.ts:36 · api/bookstore/internal/send-email/route.ts</span>
+    </div>
+    <div class="finding-body">Both routes use plain string equality (<code>!== `Bearer ${secret}`</code>) to validate secrets. String comparison in JavaScript short-circuits on the first mismatched character, leaking timing information that can allow brute-force secret reconstruction via network timing attacks.</div>
+    <div class="finding-rec">Replace with <code>crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b))</code> for all secret comparisons.</div>
+    <div class="finding-fix"><code>verifyBearerToken()</code> using <code>crypto.timingSafeEqual</code> with fixed-length buffer padding added to cleanup-briefs, supabase-order-update, and internal/send-email. Issue #61 · commit cb9d6d2.</div>
+  </div>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">Client-Controlled Stripe Price IDs in Checkout</span>
+      <span class="finding-file">api/bookstore/checkout/route.ts:52, 65, 104</span>
+    </div>
+    <div class="finding-body">The <code>stripePriceId</code> is taken directly from the client-submitted cart body and passed to Stripe without server-side whitelist validation. A sophisticated attacker could substitute a price ID from a different product or a $0.01 price, purchasing books at arbitrary prices.</div>
+    <div class="finding-rec">Maintain a server-side allowlist of valid price IDs. For each cart item, look up the price in Sanity/Stripe server-side to get the authoritative amount before creating the session.</div>
+    <div class="finding-fix">Checkout route rewritten: <code>fetchCanonicalPricing()</code> batches a Sanity GROQ query (<code>cache:'no-store'</code>) for all cart book IDs; <code>resolveCanonicalPriceId()</code> returns the authoritative <code>stripePriceId</code> from Sanity — client-supplied IDs are completely ignored. Issue #62 · commit cb9d6d2.</div>
+  </div>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">Insufficient Authorization on Whistleblower Endpoint</span>
+      <span class="finding-file">api/whistleblower/route.ts:5-54</span>
+    </div>
+    <div class="finding-body">The endpoint accepts arbitrary <code>submissionId</code>, <code>organization</code>, and <code>severity</code> values from anonymous users with no validation, no CAPTCHA, and no rate limiting. Severity escalation allows attackers to flood the high-severity queue.</div>
+    <div class="finding-rec">Add Zod validation (enumerate severity enum values), rate limiting per IP, and consider a privacy-preserving proof-of-work or Turnstile CAPTCHA.</div>
+    <div class="finding-fix">Full Zod schema with enumerated severity and category; <code>submissionId</code> and <code>submittedAt</code> are server-generated (<code>randomUUID()</code>, <code>new Date().toISOString()</code>); all fields length-bounded; rate limiting applied. Issue #63 · commit cb9d6d2.</div>
+  </div>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">TOCTOU Race Condition on Download Counter</span>
+      <span class="finding-file">api/bookstore/download/route.ts:89-98</span>
+    </div>
+    <div class="finding-body">The download counter check-then-increment is not atomic. Between the check (<code>download_count &lt; max_downloads</code>) and the increment, a race condition allows a user to trigger multiple concurrent downloads, exceeding the purchased limit.</div>
+    <div class="finding-rec">Use a Supabase stored procedure with a <code>FOR UPDATE</code> lock, or increment before generating the signed URL and roll back on error.</div>
+    <div class="finding-fix">PL/pgSQL stored procedure <code>increment_download_if_allowed()</code> with <code>FOR UPDATE</code> row lock replaces check+increment; download route calls <code>.rpc('increment_download_if_allowed')</code> — signed URL only generated if procedure returns true. Migration 20260522000001. Issue #64 · commit cb9d6d2.</div>
+  </div>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">Service Role Client Bypasses RLS — Undocumented</span>
+      <span class="finding-file">api/bookstore/my-downloads/route.ts:14-38</span>
+    </div>
+    <div class="finding-body">The route uses <code>shopServiceClient</code> (Supabase service role) which bypasses all Row Level Security policies. If Clerk auth validation is ever misconfigured or bypassable, all customers' download records are exposed. No RLS policy documentation exists in <code>supabase/migrations/</code>.</div>
+    <div class="finding-rec">Document RLS policies in migration files. Use the anon/authenticated client wherever possible. Service role should only be used for server-side admin operations with explicit justification.</div>
+    <div class="finding-fix">Migration <code>20260522000002_rls_service_role_documentation.sql</code> added: documents per-route service-role justifications, confirms RLS enabled on all user-facing tables, and details the Clerk+Supabase JWT upgrade path. Code comments added inline. Issue #65 · commit cb9d6d2.</div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--high)">Additional Findings — Post-PR Audit <span style="color:var(--good);font-size:13px;font-weight:400">(all resolved)</span></h3>
+  <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px">Four additional vulnerabilities were discovered during code review of the security-issues PR and resolved before merge.</p>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge new">PR Audit</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">Algolia Sync Webhook Fails Open When Secret Not Configured</span>
+      <span class="finding-file">api/algolia-sync/route.ts</span>
+    </div>
+    <div class="finding-body">When <code>SANITY_WEBHOOK_SECRET</code> is not set in the environment, the original code skipped HMAC validation entirely and processed the webhook payload. Any caller could poison or delete Algolia index records without authentication.</div>
+    <div class="finding-rec">Fail closed: reject the request with 401 immediately if the secret is not configured.</div>
+    <div class="finding-fix">Fail-closed guard added: missing secret → immediate 401 with console.error log. Signature validation always runs when secret is present. Commit cb9d6d2.</div>
+  </div>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge new">PR Audit</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">Author Role Authorization Bypass — Any Author Could Modify Any Order</span>
+      <span class="finding-file">api/portal/orders/[id]/status/route.ts</span>
+    </div>
+    <div class="finding-body">The author ownership check fetched <code>order_items</code> and selected <code>sanity_book_id</code> but only tested <code>items.length > 0</code>. Since every real order has at least one item, any author-role user could PATCH any order in the system (cancel, mark shipped, issue refund, etc.).</div>
+    <div class="finding-rec">Run a GROQ query that resolves the Clerk user's Sanity author ID and counts how many of the order's book IDs reference that author. Return 403 if count is zero.</div>
+    <div class="finding-fix"><code>authorOwnsOrderItem()</code> added: single GROQ query cross-references Clerk user → Sanity author → book IDs in order items; <code>cache:'no-store'</code> ensures freshness. Commit cb9d6d2.</div>
+  </div>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge new">PR Audit</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">Unvalidated Tracking URL Injected into Customer Emails</span>
+      <span class="finding-file">api/portal/orders/[id]/status/route.ts</span>
+    </div>
+    <div class="finding-body"><code>tracking_url</code> was validated only as <code>z.string().optional()</code>. The value is stored in <code>orders.shipping_tracking_url</code> and injected as a raw <code>href</code> into customer shipment emails — a portal user who can set <code>status:'shipped'</code> could write an arbitrary phishing URL into branded customer email.</div>
+    <div class="finding-rec">Validate <code>tracking_url</code> against an HTTPS-only carrier domain allowlist before accepting it.</div>
+    <div class="finding-fix"><code>ALLOWED_TRACKING_HOSTS</code> set of 18 known carrier/aggregator hostnames added; Zod <code>.refine(isAllowedTrackingUrl)</code> rejects any URL not on the allowlist or not using HTTPS. Commit cb9d6d2.</div>
+  </div>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge new">PR Audit</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">Editor Role Bypasses All Order Authorization Guards</span>
+      <span class="finding-file">api/portal/orders/[id]/status/route.ts:119</span>
+    </div>
+    <div class="finding-body">The route is documented as accessible to <code>admin</code>, <code>sales</code>, and <code>author</code> only. The <code>editor</code> role passed <code>role !== 'admin'</code>, was not caught by <code>isSalesOnly()</code>, and was not caught by <code>role === 'author'</code> — giving editors unrestricted ability to update or refund any order in the system.</div>
+    <div class="finding-rec">Add an explicit role allowlist immediately after role resolution so unknown roles receive 403 before reaching business logic.</div>
+    <div class="finding-fix">Explicit allowlist guard added: <code>if (role !== 'admin' && role !== 'sales' && role !== 'author') return 403</code> — any role not in the set is denied before any business logic runs. Commit 0b42afb.</div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium Severity Findings</h3>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Missing Security Headers (CSP, X-Frame-Options, HSTS)</span>
+      <span class="finding-file">next.config.ts (missing headers() function)</span>
+    </div>
+    <div class="finding-body">No Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, or Referrer-Policy headers are configured. Without CSP, any XSS vulnerability has maximum impact. Without X-Frame-Options, the site can be embedded in iframes for clickjacking.</div>
+    <div class="finding-rec">Add a <code>headers()</code> function to <code>next.config.ts</code> with <code>Content-Security-Policy</code>, <code>X-Frame-Options: SAMEORIGIN</code>, <code>X-Content-Type-Options: nosniff</code>, and <code>Referrer-Policy: strict-origin-when-cross-origin</code>.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">File Upload MIME-Only Validation (No Magic Bytes)</span>
+      <span class="finding-file">api/portal/upload-image/route.ts:34-43</span>
+    </div>
+    <div class="finding-body">File uploads validate MIME type from the Content-Type header only. An attacker can rename a malicious file as <code>.jpg</code> and bypass the check, since MIME type comes from the request, not the file content.</div>
+    <div class="finding-rec">Add <code>file-type</code> npm package to read the first 12 bytes and validate actual file magic bytes. Reject files whose magic bytes don't match allowed image types.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Guest Download Token Doesn't Validate Original Purchaser Email</span>
+      <span class="finding-file">api/bookstore/download/guest-resend/route.ts:73-119</span>
+    </div>
+    <div class="finding-body">An attacker who knows a valid order number can trigger a download link resend to any email address, potentially redirecting download access. The endpoint validates the order exists but doesn't confirm the requested email matches the original purchaser.</div>
+    <div class="finding-rec">Store the original guest email in the order record and compare it against the email in the resend request before generating a new token.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Missing Stripe Idempotency Keys on Checkout Session</span>
+      <span class="finding-file">api/bookstore/checkout/route.ts:149</span>
+    </div>
+    <div class="finding-body">Stripe checkout sessions are created without idempotency keys. Network failures that trigger retries create duplicate sessions, potentially allowing a user to complete two payments for the same cart.</div>
+    <div class="finding-rec">Pass <code>{ idempotencyKey: \`checkout-\${userId}-\${cartHash}\` }</code> as the second argument to <code>stripe.checkout.sessions.create()</code>.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Permissive Email Validation Regex</span>
+      <span class="finding-file">api/bookstore/checkout/route.ts:40 · api/bookstore/newsletter/route.ts:22</span>
+    </div>
+    <div class="finding-body">The regex <code>/^[^\s@]+@[^\s@]+\.[^\s@]+$/</code> allows technically invalid emails like <code>test@..com</code>. Inconsistent with the Zod <code>.email()</code> validation used elsewhere in the codebase.</div>
+    <div class="finding-rec">Replace all custom email regexes with <code>z.string().email()</code> from Zod for consistent, RFC 5322-compliant validation.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Missing CAPTCHA on Sensitive Public Endpoints</span>
+      <span class="finding-file">api/careers-application · api/whistleblower · api/secure-contact</span>
+    </div>
+    <div class="finding-body">High-sensitivity endpoints (whistleblower submissions, secure contact, careers) accept anonymous form submissions with no bot protection. Automated abuse can flood queues and waste editorial resources.</div>
+    <div class="finding-rec">Integrate Cloudflare Turnstile (free, privacy-preserving) or hCaptcha with server-side token verification on all three endpoints.</div>
+  </div>
+
+  <div class="finding low">
+    <div class="finding-header">
+      <span class="badge low">Low</span>
+      <span class="finding-title">Stripe Error Details Returned in 500 Response Body</span>
+      <span class="finding-file">api/bookstore/checkout/route.ts:176-181</span>
+    </div>
+    <div class="finding-body"><code>err.message</code> is returned directly in the 500 JSON response, which may include Stripe internal error details that reveal payment processing internals.</div>
+    <div class="finding-rec">Return a generic user-facing message for 500 errors, log the full error internally (or to Sentry). Only differentiate error types (validation vs payment) without exposing internal details.</div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════ SEO / AEO ═══════════════════════ -->
+<section id="seo">
+<div class="container">
+
+  <div class="section-header">
+    <h2>SEO / AEO Audit</h2>
+    <p>Metadata completeness, structured data, Open Graph, robots.txt, sitemap, and AI answer engine optimization.</p>
+  </div>
+
+  <div class="grid-4" style="margin-bottom:28px">
+    <div class="stat-card critical"><div class="label">High</div><div class="value">8</div><div class="sub">Missing schemas/metadata</div></div>
+    <div class="stat-card high"><div class="label">Medium</div><div class="value">19</div><div class="sub">Incomplete tags</div></div>
+    <div class="stat-card medium"><div class="label">Low</div><div class="value">7</div><div class="sub">Consistency issues</div></div>
+    <div class="stat-card ok"><div class="label">Strengths</div><div class="value">5</div><div class="sub">Well implemented</div></div>
+  </div>
+
+  <div class="chart-wrap" style="margin-bottom:32px">
+    <h3>SEO Coverage by Route Group</h3>
+    <div style="height:220px"><canvas id="seoBar"></canvas></div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;color:var(--critical)">High Priority: Missing Metadata & Structured Data</h3>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">Music Artist & Lyrics Pages Have Zero Metadata</span>
+      <span class="finding-file">(music)/music-artists/[slug]/page.tsx · (music)/lyrics/[slug]/page.tsx</span>
+    </div>
+    <div class="finding-body">Individual music artist and lyrics pages have no <code>generateMetadata()</code> function. These pages are fully invisible to search engines and social sharing — no title, description, OG image, or Twitter card.</div>
+    <div class="finding-rec">Create <code>generateMetadata()</code> for both routes. Artist pages need MusicGroup JSON-LD; lyrics pages need MusicRecording schema with <code>inAlbum</code>, <code>byArtist</code>, <code>duration</code>, and <code>datePublished</code>.</div>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">Fact-Check Pages Missing ClaimReview Schema</span>
+      <span class="finding-file">(news)/fact-check/[slug]/page.tsx</span>
+    </div>
+    <div class="finding-body">Fact-check articles have no <code>ClaimReview</code> JSON-LD structured data. This is a key schema for appearing in Google's fact-check carousel and AI answer engines that specifically source claim reviews. This is a significant missed opportunity for a media organization publishing fact-checks.</div>
+    <div class="finding-rec">Add <code>ClaimReview</code> schema with <code>claimMade</code>, <code>claimant</code>, <code>author</code>, <code>reviewRating</code> (TRUE/FALSE/MIXTURE), and <code>url</code> fields. Google's Structured Data Testing Tool can validate the output.</div>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">GlobalStructuredData Missing from News & Music Layouts</span>
+      <span class="finding-file">(news)/layout.tsx · (music)/layout.tsx</span>
+    </div>
+    <div class="finding-body">The Organization schema (<code>GlobalStructuredData</code> component) is only rendered in the <code>(user)</code> layout (bookstore). All news and music pages are missing organization-level structured data, which is essential for E-E-A-T signals and knowledge panel eligibility.</div>
+    <div class="finding-rec">Import and render <code>&lt;GlobalStructuredData /&gt;</code> in both <code>(news)/layout.tsx</code> and <code>(music)/layout.tsx</code>.</div>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">Music Collection Pages Missing OG Images</span>
+      <span class="finding-file">(music)/music-artists/page.tsx:13-22 · (music)/lyrics/page.tsx:19-28</span>
+    </div>
+    <div class="finding-body">Both music index pages have title and description metadata but no <code>og:image</code>. Without OG images, social shares of these pages render as text-only link previews, dramatically reducing click-through rates.</div>
+    <div class="finding-rec">Add <code>openGraph: { images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630 }] }</code> to both page metadata exports.</div>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">Breaking News Article Pages Have No Metadata</span>
+      <span class="finding-file">(news)/breaking/[slug]/page.tsx</span>
+    </div>
+    <div class="finding-body">Breaking news articles — the most time-sensitive content — have no <code>generateMetadata()</code>. These pages won't appear in Google News or AI news feeds, which actively surface breaking content with proper Article/NewsArticle schema.</div>
+    <div class="finding-rec">Create <code>generateMetadata()</code> with <code>og:type: 'article'</code>, publication timestamps, and <code>NewsArticle</code> JSON-LD schema. Set higher sitemap priority (0.9) for breaking content.</div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium Priority: Incomplete & Inconsistent Tags</h3>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Auth & Portal Pages Not Marked noindex</span>
+      <span class="finding-file">(auth)/sign-in/page.tsx · (auth)/sign-up/page.tsx · (portal)/</span>
+    </div>
+    <div class="finding-body">Sign-in, sign-up, and all portal pages have no metadata. Without explicit <code>robots: { index: false }</code>, crawlers may index these pages, polluting search results with authentication screens and admin UI.</div>
+    <div class="finding-rec">Add <code>export const metadata = { robots: { index: false, follow: false } }</code> to auth page files, and set it in the portal layout to cascade to all portal pages.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Article OG Metadata Missing dateModified</span>
+      <span class="finding-file">util/metadata.ts:38-73 · (news)/articles/[slug]/page.tsx:54-59</span>
+    </div>
+    <div class="finding-body">The article metadata builder passes <code>publishedTime</code> to OG but omits <code>modifiedTime</code>. Social platforms and search engines use this to indicate freshness — missing it prevents articles from surfacing as "updated" content.</div>
+    <div class="finding-rec">Add <code>modifiedTime: article.updatedAt ?? article.publishedAt</code> to the <code>og:</code> object in <code>buildArticleMetadata()</code>.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Bookstore OG Image Uses Relative Path Without Domain</span>
+      <span class="finding-file">(user)/bookstore/layout.tsx:14-30</span>
+    </div>
+    <div class="finding-body">The bookstore layout hardcodes the OG image as <code>/hurriya-pub/Logo-alt.png</code> — a relative path. Open Graph requires absolute URLs. Scrapers that use this metadata will produce broken image previews on social shares.</div>
+    <div class="finding-rec">Change to the full absolute URL: <code>https://www.untelevised.media/hurriya-pub/Logo-alt.png</code>.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Twitter Handle Inconsistency Across Metadata Builders</span>
+      <span class="finding-file">app/layout.tsx:53-59 vs util/metadata/generateArticleMetadata.ts:58</span>
+    </div>
+    <div class="finding-body">Root layout uses <code>@untelevised</code> as the Twitter creator handle. The legacy <code>generateArticleMetadata.ts</code> uses <code>@UnTelevisedLive</code>. Inconsistent handles can dilute Twitter analytics attribution.</div>
+    <div class="finding-rec">Standardize to <code>@untelevised</code> across all metadata builders. Update <code>generateArticleMetadata.ts</code> line 58 and add a <code>TWITTER_HANDLE</code> constant to the shared metadata config.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Book Schema Missing Author URL, Publisher & AggregateRating</span>
+      <span class="finding-file">(user)/bookstore/book/[slug]/page.tsx:22-54</span>
+    </div>
+    <div class="finding-body">The Book JSON-LD schema uses <code>@type: Book</code> correctly but omits <code>author.url</code>, <code>publisher</code> (Hurriya Publications), and <code>aggregateRating</code>. Without aggregateRating, review stars won't appear in Google search results for book pages.</div>
+    <div class="finding-rec">Add publisher <code>@type: Organization</code> with Hurriya Publications details, and generate <code>aggregateRating</code> from the average review score and review count fetched alongside the book.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">NewsArticle Schema: dateModified Undefined When null</span>
+      <span class="finding-file">components/seo/NewsArticleStructuredData.tsx:24</span>
+    </div>
+    <div class="finding-body">When <code>article.updatedAt</code> is null, the <code>dateModified</code> field in the NewsArticle schema is set to <code>undefined</code>, which serializes as an invalid schema. Google's structured data validator flags this as an error.</div>
+    <div class="finding-rec">Change to: <code>dateModified: article.updatedAt ?? article.publishedAt ?? article._updatedAt</code> to always provide a valid ISO 8601 date.</div>
+  </div>
+
+  <div class="finding low">
+    <div class="finding-header">
+      <span class="badge low">Low</span>
+      <span class="finding-title">Tag Pages Hardcode Canonical URL String</span>
+      <span class="finding-file">(news)/tag/[slug]/page.tsx:28</span>
+    </div>
+    <div class="finding-body">Canonical URL is hardcoded as <code>`https://www.untelevised.media/tag/${slug}/`</code> instead of using the shared <code>getCanonicalUrl()</code> utility from <code>util/metadata.ts</code>. If the domain or URL pattern changes, this will create canonical mismatches.</div>
+    <div class="finding-rec">Replace with <code>getCanonicalUrl('tag', slug)</code> for consistency with all other pages.</div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════ ACCESSIBILITY ═══════════════════════ -->
+<section id="accessibility">
+<div class="container">
+
+  <div class="section-header">
+    <h2>Accessibility Audit</h2>
+    <p>WCAG 2.1 AA compliance review: ARIA labels, keyboard navigation, semantic HTML, forms, and focus management.</p>
+  </div>
+
+  <div class="grid-4" style="margin-bottom:28px">
+    <div class="stat-card critical"><div class="label">Critical</div><div class="value">11</div><div class="sub">WCAG A violations</div></div>
+    <div class="stat-card high"><div class="label">High</div><div class="value">9</div><div class="sub">WCAG AA violations</div></div>
+    <div class="stat-card medium"><div class="label">Medium</div><div class="value">7</div><div class="sub">WCAG AAA / best practice</div></div>
+    <div class="stat-card low"><div class="label">Low</div><div class="value">6</div><div class="sub">Enhancement opportunities</div></div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:28px">
+    <div class="chart-wrap">
+      <h3>WCAG Criterion Violations</h3>
+      <div style="height:220px"><canvas id="a11yWcag"></canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <h3>Issues by Component Type</h3>
+      <div style="height:220px"><canvas id="a11yComponents"></canvas></div>
+    </div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;color:var(--critical)">Critical: Icon-Only Buttons Without Accessible Labels</h3>
+
+  <div class="finding critical">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="finding-title">Theme Toggle Button Has No aria-label</span>
+      <span class="finding-file">components/global/ThemeToggle.tsx:12-20</span>
+    </div>
+    <div class="finding-body">The dark/light mode toggle button renders a Sun or Moon icon with no accessible text. Screen readers announce it as "button" with no purpose — users cannot toggle the theme.</div>
+    <div class="finding-rec">Add <code>aria-label="Toggle theme"</code> (or dynamic: <code>aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}</code>) to the button element.</div>
+  </div>
+
+  <div class="finding critical">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="finding-title">Search Submit Button Missing aria-label (WCAG 1.4.11)</span>
+      <span class="finding-file">components/global/Search.tsx:18-20</span>
+    </div>
+    <div class="finding-body">The search form's submit button renders only a search icon. Screen readers announce "button" with no context about its action.</div>
+    <div class="finding-rec">Add <code>aria-label="Search articles"</code> to the search submit button.</div>
+  </div>
+
+  <div class="finding critical">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="finding-title">Form Labels Not Associated with Inputs — ApplicationForm (WCAG 1.3.1)</span>
+      <span class="finding-file">components/careers/ApplicationForm.tsx:79-80</span>
+    </div>
+    <div class="finding-body">Form labels exist as <code>&lt;label&gt;</code> elements but lack <code>htmlFor</code> attributes. Inputs lack matching <code>id</code> attributes. Screen readers cannot associate labels with their controls — users don't know what each field is for.</div>
+    <div class="finding-rec">Add <code>htmlFor="fullName"</code> to the label and <code>id="fullName"</code> to the input for every form field pair throughout the form.</div>
+  </div>
+
+  <div class="finding critical">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="finding-title">Error Messages Not Associated with Form Fields (WCAG 3.3.1)</span>
+      <span class="finding-file">components/careers/ApplicationForm.tsx:76-179</span>
+    </div>
+    <div class="finding-body">Validation error messages are rendered as sibling paragraphs but not linked to their fields via <code>aria-describedby</code>. Screen reader users don't know which field has an error or what the error is.</div>
+    <div class="finding-rec">Add <code>aria-describedby="fullName-error"</code> to each input and <code>id="fullName-error"</code> to the corresponding error paragraph. Add <code>aria-invalid={!!errors.fullName}</code> to invalid fields.</div>
+  </div>
+
+  <div class="finding critical">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="finding-title">Portal Modal Icon Buttons Without Labels</span>
+      <span class="finding-file">components/portal/PitchQuickViewModal.tsx:145-147, 202-208, 227-233</span>
+    </div>
+    <div class="finding-body">Three icon-only buttons in the pitch modal (Add reference, Remove reference, Close) have no <code>aria-label</code>. Portal users who rely on screen readers cannot operate any modal actions.</div>
+    <div class="finding-rec">Add descriptive <code>aria-label</code> to each: <code>"Close pitch details"</code>, <code>"Add reference link"</code>, <code>"Remove this reference link"</code>.</div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--high)">High: Navigation & Modal Accessibility</h3>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">No Skip Navigation Link (WCAG 2.4.1)</span>
+      <span class="finding-file">app/layout.tsx:115-119</span>
+    </div>
+    <div class="finding-body">There is no skip-to-main-content link anywhere in the layout. Keyboard-only and screen reader users must navigate through the entire navigation bar on every page load — potentially 20+ tab stops before reaching content. This is a WCAG Level A failure.</div>
+    <div class="finding-rec">Add <code>&lt;a href="#main-content" className="sr-only focus:not-sr-only"&gt;Skip to main content&lt;/a&gt;</code> as the first element in <code>&lt;body&gt;</code>, and add <code>id="main-content"</code> to the <code>&lt;main&gt;</code> element.</div>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">Modal Lacks Focus Trap (WCAG 2.4.3)</span>
+      <span class="finding-file">components/portal/PitchQuickViewModal.tsx:107-276</span>
+    </div>
+    <div class="finding-body">When the pitch modal opens, focus is not trapped within it. Keyboard users can tab into background content behind the modal overlay, causing confusion about context and potentially activating hidden interactive elements.</div>
+    <div class="finding-rec">Use the Radix UI <code>Dialog</code> primitive (which already handles focus trapping correctly) or implement a <code>focus-trap</code> package. Restore focus to the trigger element on modal close.</div>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">Navigation Not Structured as Semantic List (WCAG 1.3.1)</span>
+      <span class="finding-file">components/global/Nav.tsx:49-74</span>
+    </div>
+    <div class="finding-body">Primary navigation categories are rendered as <code>&lt;div&gt;</code> containers with <code>ClientSideRoute</code> links, not as a <code>&lt;ul&gt;</code>/<code>&lt;li&gt;</code> list. Screen readers don't announce the number of items or provide list navigation shortcuts.</div>
+    <div class="finding-rec">Wrap category links in <code>&lt;ul role="list"&gt;</code> with <code>&lt;li&gt;</code> wrappers. Add <code>aria-label="Article categories"</code> to the <code>&lt;nav&gt;</code> element.</div>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">Table Headers Missing scope Attribute (WCAG 1.3.1)</span>
+      <span class="finding-file">components/admin/ApplicationsTable.tsx:83-354</span>
+    </div>
+    <div class="finding-body">The applications data table uses <code>&lt;th&gt;</code> header elements without <code>scope="col"</code> attributes. Screen readers cannot associate header cells with data cells, making the table difficult or impossible to interpret.</div>
+    <div class="finding-rec">Add <code>scope="col"</code> to all column header <code>&lt;th&gt;</code> elements. For row headers (if first cell identifies the row), add <code>scope="row"</code>.</div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium: Missing States & Descriptions</h3>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Active Navigation Items Missing aria-current</span>
+      <span class="finding-file">components/global/Nav.tsx:50-74</span>
+    </div>
+    <div class="finding-body">Active navigation category links have no <code>aria-current="page"</code> attribute. Screen reader users cannot determine which section they are currently browsing.</div>
+    <div class="finding-rec">Add <code>aria-current={isActive ? 'page' : undefined}</code> to the active category link in both desktop and mobile navigation views.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Timeline Progress Bar Has No Text Description</span>
+      <span class="finding-file">components/timeline/TimelineNavigation.tsx:365-380</span>
+    </div>
+    <div class="finding-body">The visual timeline progress bar conveys current position through width only, with no accessible text alternative. Screen readers skip this element entirely.</div>
+    <div class="finding-rec">Add <code>role="progressbar"</code>, <code>aria-valuenow={currentIndex + 1}</code>, <code>aria-valuemin={1}</code>, and <code>aria-valuemax={totalEvents}</code> to the progress bar element.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Search Result Images Use Empty alt Text</span>
+      <span class="finding-file">components/search/SearchClient.tsx:~96</span>
+    </div>
+    <div class="finding-body">Article preview images in search results have empty <code>alt=""</code>. While empty alt is correct for decorative images, these images convey meaningful article preview content and should have descriptive alt text.</div>
+    <div class="finding-rec">Use the article title or image description: <code>alt={result.mainImage?.alt ?? result.title}</code>.</div>
+  </div>
+
+  <div class="finding low">
+    <div class="finding-header">
+      <span class="badge low">Low</span>
+      <span class="finding-title">Decorative Icons Missing aria-hidden</span>
+      <span class="finding-file">components/global/Nav.tsx:70-71 · components/global/Banner.tsx</span>
+    </div>
+    <div class="finding-body">ChevronRight icons and animated Banner decorations are rendered without <code>aria-hidden="true"</code>. Screen readers may announce these as unlabeled images or SVG elements, creating noise in the accessibility tree.</div>
+    <div class="finding-rec">Add <code>aria-hidden="true"</code> to all purely decorative icons, chevrons, and animated decoration elements.</div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════ ARCHITECTURE ═══════════════════════ -->
+<section id="architecture">
+<div class="container">
+
+  <div class="section-header">
+    <h2>Architecture & Performance Audit</h2>
+    <p>Server/client component boundaries, data fetching patterns, state management, TypeScript safety, and infrastructure configuration.</p>
+  </div>
+
+  <div class="grid-4" style="margin-bottom:28px">
+    <div class="stat-card critical"><div class="label">Critical</div><div class="value">4</div><div class="sub">Production risks</div></div>
+    <div class="stat-card high"><div class="label">High</div><div class="value">6</div><div class="sub">Technical debt</div></div>
+    <div class="stat-card medium"><div class="label">Medium</div><div class="value">12</div><div class="sub">Improvements</div></div>
+    <div class="stat-card low"><div class="label">Low</div><div class="value">4</div><div class="sub">Nice to have</div></div>
+  </div>
+
+  <div class="chart-wrap" style="margin-bottom:32px">
+    <h3>Issues by Architecture Layer</h3>
+    <div style="height:200px"><canvas id="archBar"></canvas></div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;color:var(--critical)">Critical: Production Code Quality</h3>
+
+  <div class="finding critical">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="finding-title">Debug console.log Statements in Production API Routes</span>
+      <span class="finding-file">api/bookstore/checkout/route.ts:89-100 · api/bookstore/download/route.ts:85 · (news)/page.tsx:268</span>
+    </div>
+    <div class="finding-body">Multiple API routes contain <code>console.log()</code> statements that run in production. The checkout route specifically logs Stripe key prefixes, cart item details, and user identifiers — all visible in Vercel function logs to anyone with log access. This is both a security risk and performance overhead.</div>
+    <div class="finding-rec">Remove all <code>console.log</code> from production code. Gate debug logging with <code>if (process.env.DEBUG)</code>. Integrate Sentry for error tracking with contextual metadata.</div>
+  </div>
+
+  <div class="finding critical">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="finding-title">Widespread <code>as any</code> Type Assertions Bypass TypeScript Safety</span>
+      <span class="finding-file">(news)/articles/[slug]/page.tsx:108, 115, 119, 155, 271, 294, 302 · author/[slug]/page.tsx:156, 165 · (news)/page.tsx:173, 180</span>
+    </div>
+    <div class="finding-body">Over 15 instances of <code>as any</code> type assertions across news pages and article pages, primarily around Sanity image objects and author data. This completely eliminates TypeScript's safety guarantees and has likely already masked runtime bugs where undefined properties are accessed.</div>
+    <div class="finding-rec">Generate proper types from the Sanity schema using the existing TypeGen setup. Create a strongly-typed <code>SanityImageObject</code> type and update <code>urlForImage()</code> to accept it. Enable <code>"strictNullChecks": true</code> in tsconfig.json.</div>
+  </div>
+
+  <div class="finding critical">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="finding-title">Cart State vs Server Truth Mismatch at Checkout</span>
+      <span class="finding-file">(user)/bookstore/cart/page.tsx:48-70 · lib/bookstore/cart.ts</span>
+    </div>
+    <div class="finding-body">Cart state exists in three out-of-sync places: Zustand (localStorage), Stripe checkout session, and Supabase orders table. Prices in localStorage can go stale if Sanity book prices change. A user who adds books, leaves, returns after a price change, and checks out will be charged the cached price, not the current price.</div>
+    <div class="finding-rec">In the checkout API route, re-fetch book prices from Sanity/Stripe server-side for each cart item before creating the session. Never trust client-submitted prices.</div>
+  </div>
+
+  <div class="finding critical">
+    <div class="finding-header">
+      <span class="badge critical">Critical</span>
+      <span class="finding-title">Missing Revalidation Strategy — ISR Cache Never Expires</span>
+      <span class="finding-file">(user)/bookstore/page.tsx:211-221 · lib/sanity/lib/fetch.ts</span>
+    </div>
+    <div class="finding-body">Sanity fetches use tags (<code>'book'</code>, <code>'bookGenre'</code>) but no route calls <code>revalidateTag()</code> or <code>revalidatePath()</code> after mutations. Book data can remain indefinitely stale in the ISR cache after content editors publish changes in Sanity Studio.</div>
+    <div class="finding-rec">Configure the existing <code>/api/revalidate</code> webhook to call <code>revalidateTag('book')</code> on Sanity publish events. Set <code>revalidate: 3600</code> as a fallback ceiling on all book queries.</div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--high)">High: Technical Debt</h3>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">Zustand Cart Store Missing Size Limits & Persistence Debouncing</span>
+      <span class="finding-file">lib/bookstore/cart.ts</span>
+    </div>
+    <div class="finding-body">The cart Zustand store has no maximum item count limit and writes to localStorage on every state change with no debouncing. With large carts, this causes excessive synchronous localStorage writes. No cleanup or unsubscribe pattern means potential memory leaks in long-lived sessions.</div>
+    <div class="finding-rec">Add <code>MAX_CART_SIZE = 50</code>, debounce persistence writes by 300ms, and ensure <code>useEffect</code> cleanup patterns in components that subscribe to the store.</div>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">Incomplete Supabase RLS Policies Not Documented</span>
+      <span class="finding-file">supabase/ (missing migration RLS policies) · api/bookstore/my-downloads/route.ts</span>
+    </div>
+    <div class="finding-body">No RLS policy definitions exist in the <code>supabase/</code> directory. The service role client is used across download routes, which bypasses all RLS. Without documented RLS policies, there is no way to audit or verify data access controls are correctly configured in the Supabase dashboard.</div>
+    <div class="finding-rec">Create RLS policy migration files in <code>supabase/migrations/</code>. Document all intended access patterns (users see own orders, admins see all). Use the authenticated client wherever RLS should apply.</div>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title"><code>useCache</code> Enabled in Config But Not Used Anywhere</span>
+      <span class="finding-file">next.config.ts:53 · lib/sanity/lib/fetch.ts</span>
+    </div>
+    <div class="finding-body">The experimental <code>useCache: true</code> feature is enabled, enabling the <code>'use cache'</code> directive and <code>cacheTag()</code>/<code>cacheLife()</code> APIs from <code>next/cache</code>. However, no route or function in the codebase actually uses this directive. The feature has non-zero overhead for being enabled with no benefit.</div>
+    <div class="finding-rec">Either annotate expensive Sanity fetch wrappers with <code>'use cache'</code> and <code>cacheTag()</code> to gain the intended benefit, or remove <code>useCache: true</code> from config until ready to implement.</div>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="finding-title">TypeScript strictNullChecks Disabled</span>
+      <span class="finding-file">tsconfig.json:17</span>
+    </div>
+    <div class="finding-body"><code>strictNullChecks</code> is commented out in <code>tsconfig.json</code>. This means <code>null</code> and <code>undefined</code> are assignable to any type, making the TypeScript types lie about nullability throughout the codebase. This is likely the root cause of the widespread <code>as any</code> patterns.</div>
+    <div class="finding-rec">Enable <code>"strictNullChecks": true</code> and fix the resulting type errors. Start with a partial enablement using <code>// @ts-strict-ignore</code> on files needing time, and incrementally clean up.</div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium: Performance & Patterns</h3>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">BookBuySection Forces Entire Buy Flow to Client-Side</span>
+      <span class="finding-file">components/bookstore/BookBuySection.tsx:1</span>
+    </div>
+    <div class="finding-body"><code>BookBuySection</code> is marked <code>'use client'</code> and used inside a server component page. This forces the entire price display, format selection, and buy flow to hydrate client-side. Static price/format information that could be server-rendered is delayed until hydration completes.</div>
+    <div class="finding-rec">Split the component: render static pricing data as a server component, keep only interactive elements (quantity inputs, NYOP field, cart button) as client components using composition patterns.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">NYOP Stripe ID Selection Logic Scattered Across Files</span>
+      <span class="finding-file">components/bookstore/BookBuySection.tsx:74-88 · api/bookstore/checkout/route.ts:107-126</span>
+    </div>
+    <div class="finding-body">The logic for determining whether to use <code>stripeProductId</code> vs <code>stripePriceId</code> for name-your-own-price items is duplicated and inconsistently implemented across the client component and the API route. This is a maintenance hazard and a source of potential price bypass bugs.</div>
+    <div class="finding-rec">Create a shared <code>getStripeIdForFormat(format, isNyop)</code> utility function with unit tests covering all cases. Single source of truth for this logic.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">N+1 Risk in Deep GROQ Reference Chains</span>
+      <span class="finding-file">lib/sanity/lib/queries.ts (multiple queries)</span>
+    </div>
+    <div class="finding-body">Several GROQ queries chain deep reference dereferences: <code>keyEvent[]-&gt;</code>, <code>relatedArticles[]-&gt;</code>, <code>categories[]-&gt;</code>. While GROQ batches these internally, unguarded array expansions (e.g., <code>*[_type == 'article' &amp;&amp; author._ref == ^._id]</code>) on author pages can return arbitrarily large result sets.</div>
+    <div class="finding-rec">Limit array derefs: <code>relatedArticles[0..3]-&gt;</code>. Add <code>[0..49]</code> bounds to reverse-lookup queries on author pages. Profile with Sanity's API metrics dashboard.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">No Error Monitoring / Structured Logging Infrastructure</span>
+      <span class="finding-file">All API routes and page components</span>
+    </div>
+    <div class="finding-body">The codebase has no integration with Sentry, Datadog, or any structured logging service. Production errors are only visible in Vercel function logs (which don't aggregate, alert, or retain history well). Checkout failures, download errors, and Stripe errors go undetected until a user complains.</div>
+    <div class="finding-rec">Integrate Sentry for Next.js (<code>@sentry/nextjs</code>). Configure error boundaries to <code>Sentry.captureException()</code>. Add Vercel log drains to a logging service for structured queries on production issues.</div>
+  </div>
+
+  <div class="finding medium">
+    <div class="finding-header">
+      <span class="badge medium">Medium</span>
+      <span class="finding-title">Missing Error Boundaries on Key Pages</span>
+      <span class="finding-file">(user)/bookstore/book/[slug]/page.tsx:199-414</span>
+    </div>
+    <div class="finding-body">The book detail page makes parallel Sanity fetches but has no error boundaries. If the reviews fetch fails (network timeout, Sanity quota), the entire page 500s instead of gracefully showing the book with a "reviews unavailable" state.</div>
+    <div class="finding-rec">Wrap the reviews section in a <code>&lt;Suspense&gt;</code> boundary with an <code>error.tsx</code> sibling, or use React's <code>&lt;ErrorBoundary&gt;</code> component to catch and display fallback UI independently from the main content.</div>
+  </div>
+
+  <div class="finding low">
+    <div class="finding-header">
+      <span class="badge low">Low</span>
+      <span class="finding-title">Bookstore Conversion Events Not Tracked in Analytics</span>
+      <span class="finding-file">components/bookstore/AddToCartButton.tsx · api/bookstore/checkout/route.ts</span>
+    </div>
+    <div class="finding-body">Cart adds, checkout initiations, purchase completions, and download events are not tracked in the analytics pipeline. Without conversion funnel data, it's impossible to identify where users drop off or optimize the purchase experience.</div>
+    <div class="finding-rec">Add <code>gtag('event', 'add_to_cart', {...})</code> events to cart actions, and a <code>purchase</code> event (with revenue and items) in the <code>order-success</code> page.</div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════ ROADMAP ═══════════════════════ -->
+<section id="roadmap">
+<div class="container">
+
+  <div class="section-header">
+    <h2>Priority Roadmap</h2>
+    <p>Ordered action items grouped by urgency. Items within each phase are ordered by impact.</p>
+  </div>
+
+  <div class="chart-wrap" style="margin-bottom:32px">
+    <h3>Effort vs Impact Matrix</h3>
+    <div style="height:280px"><canvas id="effortImpact"></canvas></div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div style="margin-bottom:32px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="background:var(--critical);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">1</div>
+      <div>
+        <div style="font-size:18px;font-weight:700">Phase 1 — Today (Critical Fixes)</div>
+        <div style="font-size:13px;color:var(--text-dim)">Immediate security and production-blocking issues. Under 2 hours total.</div>
+      </div>
+    </div>
+    <table class="priority-table">
+      <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Est.</th></tr></thead>
+      <tbody>
+        <tr class="done"><td>1</td><td>Remove Stripe key fragment from console.log</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">checkout/route.ts:88-100</span></td><td>Issue #49</td></tr>
+        <tr class="done"><td>2</td><td>Add Zod schema validation to job-application route</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">job-application/route.ts</span></td><td>Issue #50</td></tr>
+        <tr><td>3</td><td>Add aria-label to ThemeToggle, Search submit, modal close buttons</td><td><span class="badge critical">A11y</span></td><td><span class="file-tag">ThemeToggle.tsx · Search.tsx · PitchQuickViewModal.tsx</span></td><td>30 min</td></tr>
+        <tr><td>4</td><td>Add skip navigation link to root layout</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">app/layout.tsx</span></td><td>15 min</td></tr>
+        <tr><td>5</td><td>Add htmlFor/id associations to ApplicationForm labels</td><td><span class="badge critical">A11y</span></td><td><span class="file-tag">ApplicationForm.tsx</span></td><td>20 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div style="margin-bottom:32px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="background:var(--high);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">2</div>
+      <div>
+        <div style="font-size:18px;font-weight:700">Phase 2 — This Week (High Priority)</div>
+        <div style="font-size:13px;color:var(--text-dim)">Security hardening, metadata gaps, and key UX accessibility fixes.</div>
+      </div>
+    </div>
+    <table class="priority-table">
+      <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Est.</th></tr></thead>
+      <tbody>
+        <tr class="done"><td>6</td><td>Add rate limiting to whistleblower, secure-contact, job-application</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">api/ (3 routes)</span></td><td>Issue #60</td></tr>
+        <tr class="done"><td>7</td><td>Replace string equality with crypto.timingSafeEqual on cron/webhook secrets</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">cron/cleanup-briefs · webhooks/supabase · send-email</span></td><td>Issue #61</td></tr>
+        <tr><td>8</td><td>Add Stripe idempotency keys to checkout session creation</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">checkout/route.ts:149</span></td><td>15 min</td></tr>
+        <tr><td>9</td><td>Add generateMetadata to music-artists/[slug] and lyrics/[slug]</td><td><span class="badge high">SEO</span></td><td><span class="file-tag">(music)/music-artists/[slug] · lyrics/[slug]</span></td><td>2h</td></tr>
+        <tr><td>10</td><td>Add ClaimReview JSON-LD schema to fact-check pages</td><td><span class="badge high">SEO</span></td><td><span class="file-tag">(news)/fact-check/[slug]/page.tsx</span></td><td>1.5h</td></tr>
+        <tr><td>11</td><td>Add GlobalStructuredData to (news) and (music) layouts</td><td><span class="badge high">SEO</span></td><td><span class="file-tag">(news)/layout.tsx · (music)/layout.tsx</span></td><td>20 min</td></tr>
+        <tr><td>12</td><td>Add noindex metadata to auth and portal pages</td><td><span class="badge medium">SEO</span></td><td><span class="file-tag">(auth)/ · (portal)/layout.tsx</span></td><td>30 min</td></tr>
+        <tr><td>13</td><td>Fix focus trap in PitchQuickViewModal — use Radix Dialog</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">PitchQuickViewModal.tsx</span></td><td>2h</td></tr>
+        <tr><td>14</td><td>Add scope="col" to ApplicationsTable headers</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">ApplicationsTable.tsx</span></td><td>15 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div style="margin-bottom:32px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="background:var(--medium);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0;color:#000">3</div>
+      <div>
+        <div style="font-size:18px;font-weight:700">Phase 3 — This Sprint (Medium Priority)</div>
+        <div style="font-size:13px;color:var(--text-dim)">Architecture improvements, TypeScript safety, and structured data completion.</div>
+      </div>
+    </div>
+    <table class="priority-table">
+      <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Est.</th></tr></thead>
+      <tbody>
+        <tr><td>15</td><td>Add security headers (CSP, X-Frame-Options) to next.config.ts</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">next.config.ts</span></td><td>1h</td></tr>
+        <tr><td>16</td><td>Add magic byte file validation with file-type package</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">api/portal/upload-image/route.ts</span></td><td>45 min</td></tr>
+        <tr><td>17</td><td>Enable strictNullChecks in tsconfig.json and fix critical type errors</td><td><span class="badge high">Architecture</span></td><td><span class="file-tag">tsconfig.json</span></td><td>4-8h</td></tr>
+        <tr><td>18</td><td>Remove all console.log from API routes; integrate Sentry</td><td><span class="badge critical">Architecture</span></td><td><span class="file-tag">api/ (multiple routes)</span></td><td>3h</td></tr>
+        <tr><td>19</td><td>Wire Sanity webhook to revalidateTag for book/article ISR</td><td><span class="badge critical">Architecture</span></td><td><span class="file-tag">api/revalidate/route.ts</span></td><td>2h</td></tr>
+        <tr class="done"><td>20</td><td>Re-fetch prices server-side in checkout (cart price validation)</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">api/bookstore/checkout/route.ts</span></td><td>Issue #62</td></tr>
+        <tr><td>21</td><td>Add og:image to music artists and lyrics collection pages</td><td><span class="badge high">SEO</span></td><td><span class="file-tag">(music)/music-artists/page.tsx · lyrics/page.tsx</span></td><td>30 min</td></tr>
+        <tr><td>22</td><td>Add dateModified to article OG metadata and NewsArticle schema</td><td><span class="badge medium">SEO</span></td><td><span class="file-tag">util/metadata.ts · NewsArticleStructuredData.tsx</span></td><td>30 min</td></tr>
+        <tr><td>23</td><td>Fix bookstore OG image to use absolute URL</td><td><span class="badge medium">SEO</span></td><td><span class="file-tag">(user)/bookstore/layout.tsx</span></td><td>5 min</td></tr>
+        <tr><td>24</td><td>Wrap navigation in ul/li semantic structure</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">components/global/Nav.tsx</span></td><td>45 min</td></tr>
+        <tr><td>25</td><td>Add aria-describedby to ApplicationForm error messages</td><td><span class="badge critical">A11y</span></td><td><span class="file-tag">ApplicationForm.tsx</span></td><td>1h</td></tr>
+        <tr><td>26</td><td>Add aria-current to active navigation items</td><td><span class="badge medium">A11y</span></td><td><span class="file-tag">Nav.tsx · ApplicationsTable.tsx</span></td><td>30 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="background:var(--low);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0;color:#000">4</div>
+      <div>
+        <div style="font-size:18px;font-weight:700">Phase 4 — Next Month (Ongoing Improvements)</div>
+        <div style="font-size:13px;color:var(--text-dim)">Infrastructure upgrades, advanced schema, and analytics.</div>
+      </div>
+    </div>
+    <table class="priority-table">
+      <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Est.</th></tr></thead>
+      <tbody>
+        <tr><td>27</td><td>Add CAPTCHA (Turnstile) to whistleblower, careers, secure-contact</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">api/ (3 public form routes)</span></td><td>4h</td></tr>
+        <tr class="done"><td>28</td><td>Document and codify Supabase RLS policies in migrations</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">supabase/migrations/20260522000002</span></td><td>Issue #65</td></tr>
+        <tr><td>29</td><td>Add MusicGroup & MusicRecording JSON-LD schemas</td><td><span class="badge high">SEO</span></td><td><span class="file-tag">(music)/music-artists/[slug] · lyrics/[slug]</span></td><td>3h</td></tr>
+        <tr><td>30</td><td>Add aggregateRating to Book schema from review data</td><td><span class="badge medium">SEO</span></td><td><span class="file-tag">bookstore/book/[slug]/page.tsx</span></td><td>2h</td></tr>
+        <tr><td>31</td><td>Standardize Twitter handle constant across all metadata builders</td><td><span class="badge low">SEO</span></td><td><span class="file-tag">util/metadata.ts · generateArticleMetadata.ts</span></td><td>20 min</td></tr>
+        <tr><td>32</td><td>Migrate cart to Supabase (cross-device sync, no localStorage)</td><td><span class="badge medium">Architecture</span></td><td><span class="file-tag">lib/bookstore/cart.ts</span></td><td>8h</td></tr>
+        <tr><td>33</td><td>Add bookstore conversion event tracking (add_to_cart, purchase)</td><td><span class="badge low">Architecture</span></td><td><span class="file-tag">bookstore/ (multiple components)</span></td><td>2h</td></tr>
+        <tr><td>34</td><td>Add aria-hidden to all decorative icons; progressbar role to timelines</td><td><span class="badge low">A11y</span></td><td><span class="file-tag">Nav.tsx · Banner.tsx · TimelineNavigation.tsx</span></td><td>1h</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  Automated codebase audit · UnTelevised Media · May 21, 2026 · 384 files scanned · 113 issues identified &nbsp;|&nbsp; Security remediation complete May 22, 2026 · 13 security vulnerabilities resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a>
+</div>
+
+<script>
+// ─── TAB SWITCHING ────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ─── CHART DEFAULTS ───────────────────────────────────────────
+Chart.defaults.color = '#888899';
+Chart.defaults.borderColor = '#2a2a3a';
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif";
+
+const CRIT = '#ff3b3b';
+const HIGH = '#ff8c00';
+const MED = '#f5c400';
+const LOW = '#4dabf7';
+const OK = '#40c057';
+
+// ─── OVERVIEW: CATEGORY DONUT ─────────────────────────────────
+new Chart(document.getElementById('categoryDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Security', 'SEO / AEO', 'Accessibility', 'Architecture'],
+    datasets: [{
+      data: [20, 34, 33, 26],
+      backgroundColor: ['#ff3b3b', '#ff8c00', '#f5c400', '#4dabf7'],
+      borderWidth: 2,
+      borderColor: '#111118',
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { padding: 16, font: { size: 12 } } },
+      tooltip: { callbacks: { label: (c) => ` ${c.label}: ${c.raw} issues` } }
+    },
+    cutout: '65%'
+  }
+});
+
+// ─── OVERVIEW: SEVERITY BAR BY DOMAIN ─────────────────────────
+new Chart(document.getElementById('severityBar'), {
+  type: 'bar',
+  data: {
+    labels: ['Security', 'SEO / AEO', 'Accessibility', 'Architecture'],
+    datasets: [
+      { label: 'Critical', data: [0, 0, 11, 4], backgroundColor: CRIT },
+      { label: 'High',     data: [0, 8, 9, 6],  backgroundColor: HIGH },
+      { label: 'Medium',   data: [6, 19, 7, 12], backgroundColor: MED },
+      { label: 'Low',      data: [5, 7, 6, 4],   backgroundColor: LOW },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, beginAtZero: true }
+    },
+    plugins: { legend: { position: 'bottom', labels: { padding: 12, font: { size: 11 } } } }
+  }
+});
+
+// ─── OVERVIEW: HEALTH RADAR ────────────────────────────────────
+new Chart(document.getElementById('healthRadar'), {
+  type: 'radar',
+  data: {
+    labels: ['Security', 'SEO / AEO', 'Accessibility', 'Architecture', 'Type Safety', 'Performance'],
+    datasets: [{
+      label: 'Health Score',
+      data: [83, 55, 46, 63, 40, 68],
+      backgroundColor: 'rgba(124,77,255,.2)',
+      borderColor: '#7c4dff',
+      pointBackgroundColor: '#7c4dff',
+      pointBorderColor: '#fff',
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      r: {
+        min: 0, max: 100,
+        ticks: { stepSize: 25, display: false },
+        grid: { color: '#2a2a3a' },
+        pointLabels: { font: { size: 11 } },
+        angleLines: { color: '#2a2a3a' }
+      }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// ─── OVERVIEW: SEVERITY PIE ────────────────────────────────────
+new Chart(document.getElementById('severityPie'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Critical (17)', 'High (21)', 'Medium (43)', 'Low (23)'],
+    datasets: [{
+      data: [17, 21, 43, 23],
+      backgroundColor: [CRIT, HIGH, MED, LOW],
+      borderWidth: 2, borderColor: '#111118'
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { padding: 14, font: { size: 12 } } }
+    },
+    cutout: '55%'
+  }
+});
+
+// ─── SECURITY: BAR ─────────────────────────────────────────────
+new Chart(document.getElementById('securityBar'), {
+  type: 'bar',
+  data: {
+    labels: ['Input Validation', 'Auth/AuthZ', 'Rate Limiting', 'Crypto/Timing', 'File Upload', 'Error Handling', 'Headers/CSP', 'Secrets/Logging'],
+    datasets: [
+      {
+        label: 'Resolved',
+        data: [2, 4, 3, 3, 0, 0, 0, 2],
+        backgroundColor: OK,
+      },
+      {
+        label: 'Open',
+        data: [1, 0, 0, 0, 2, 2, 1, 0],
+        backgroundColor: [MED, LOW, LOW, LOW, MED, MED, MED, LOW],
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+    scales: {
+      x: { stacked: true, beginAtZero: true },
+      y: { stacked: true, grid: { display: false } }
+    },
+    plugins: { legend: { position: 'bottom', labels: { padding: 12, font: { size: 11 } } } }
+  }
+});
+
+// ─── SEO: BAR ─────────────────────────────────────────────────
+new Chart(document.getElementById('seoBar'), {
+  type: 'bar',
+  data: {
+    labels: ['(news)', '(music)', '(user)/bookstore', '(portal)', '(auth)', '(studio)'],
+    datasets: [
+      { label: 'Has Metadata',     data: [85, 30, 70, 5, 0, 0],  backgroundColor: OK },
+      { label: 'Missing/Incomplete', data: [15, 70, 30, 95, 100, 100], backgroundColor: CRIT },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, max: 100, ticks: { callback: v => v + '%' } }
+    },
+    plugins: { legend: { position: 'bottom', labels: { padding: 12, font: { size: 11 } } } }
+  }
+});
+
+// ─── ACCESSIBILITY: WCAG CRITERION BAR ─────────────────────────
+new Chart(document.getElementById('a11yWcag'), {
+  type: 'bar',
+  data: {
+    labels: ['1.1.1 Alt Text', '1.3.1 Semantics', '2.4.1 Skip Nav', '2.4.3 Focus Order', '3.3.1 Errors', '4.1.3 Status', '1.4.11 Non-Text Contrast'],
+    datasets: [{
+      label: 'Violations',
+      data: [3, 7, 1, 3, 2, 2, 2],
+      backgroundColor: [MED, CRIT, CRIT, HIGH, CRIT, MED, LOW],
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+    scales: { x: { beginAtZero: true, ticks: { stepSize: 1 } }, y: { grid: { display: false } } },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// ─── ACCESSIBILITY: COMPONENT TYPE BAR ─────────────────────────
+new Chart(document.getElementById('a11yComponents'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Buttons/Controls', 'Forms', 'Navigation', 'Modals', 'Tables', 'Images', 'Structure'],
+    datasets: [{
+      data: [7, 5, 4, 3, 2, 3, 9],
+      backgroundColor: [CRIT, HIGH, HIGH, MED, MED, LOW, MED],
+      borderWidth: 2, borderColor: '#111118'
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'right', labels: { padding: 10, font: { size: 11 } } } },
+    cutout: '50%'
+  }
+});
+
+// ─── ARCHITECTURE: LAYER BAR ───────────────────────────────────
+new Chart(document.getElementById('archBar'), {
+  type: 'bar',
+  data: {
+    labels: ['Type Safety', 'API/Data Fetching', 'State Management', 'Error Handling', 'Performance', 'Config', 'Caching', 'Monitoring'],
+    datasets: [{
+      label: 'Issues',
+      data: [5, 5, 3, 4, 3, 3, 2, 1],
+      backgroundColor: [CRIT, CRIT, HIGH, HIGH, MED, MED, LOW, LOW],
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+    scales: { x: { beginAtZero: true }, y: { grid: { display: false } } },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// ─── ROADMAP: EFFORT VS IMPACT BUBBLE ─────────────────────────
+new Chart(document.getElementById('effortImpact'), {
+  type: 'bubble',
+  data: {
+    datasets: [
+      {
+        label: 'Phase 1 — Today',
+        data: [
+          { x: 1, y: 9, r: 14, label: 'Remove Stripe key log' },
+          { x: 2, y: 10, r: 12, label: 'Skip nav link' },
+          { x: 2, y: 9, r: 13, label: 'ARIA labels (buttons)' },
+          { x: 3, y: 9, r: 11, label: 'Zod on job-application' },
+          { x: 2, y: 8, r: 10, label: 'Form label htmlFor' },
+        ],
+        backgroundColor: 'rgba(255,59,59,.6)', borderColor: CRIT
+      },
+      {
+        label: 'Phase 2 — This Week',
+        data: [
+          { x: 3, y: 8, r: 13, label: 'Rate limiting (3 routes)' },
+          { x: 3, y: 9, r: 14, label: 'Music generateMetadata' },
+          { x: 4, y: 8, r: 12, label: 'ClaimReview schema' },
+          { x: 2, y: 7, r: 11, label: 'GlobalStructuredData' },
+          { x: 4, y: 7, r: 12, label: 'Focus trap in modal' },
+        ],
+        backgroundColor: 'rgba(255,140,0,.6)', borderColor: HIGH
+      },
+      {
+        label: 'Phase 3 — This Sprint',
+        data: [
+          { x: 7, y: 9, r: 15, label: 'strictNullChecks' },
+          { x: 5, y: 8, r: 13, label: 'Price server-validation' },
+          { x: 4, y: 7, r: 12, label: 'Sentry integration' },
+          { x: 5, y: 7, r: 11, label: 'ISR revalidation' },
+          { x: 3, y: 6, r: 9, label: 'Security headers' },
+        ],
+        backgroundColor: 'rgba(245,196,0,.6)', borderColor: MED
+      },
+      {
+        label: 'Phase 4 — Next Month',
+        data: [
+          { x: 8, y: 7, r: 13, label: 'Cart → Supabase' },
+          { x: 6, y: 6, r: 12, label: 'CAPTCHA integration' },
+          { x: 5, y: 8, r: 11, label: 'Music JSON-LD schemas' },
+          { x: 4, y: 5, r: 9, label: 'RLS policy docs' },
+        ],
+        backgroundColor: 'rgba(77,171,247,.6)', borderColor: LOW
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      x: { min: 0, max: 10, title: { display: true, text: 'Implementation Effort (1=Low, 10=High)', color: '#888899' } },
+      y: { min: 0, max: 11, title: { display: true, text: 'Impact / Priority (10=Critical)', color: '#888899' } }
+    },
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 14, font: { size: 11 } } },
+      tooltip: {
+        callbacks: {
+          label: (c) => {
+            const d = c.raw;
+            return ` ${d.label || ''} (Effort: ${d.x}, Impact: ${d.y})`;
+          }
+        }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

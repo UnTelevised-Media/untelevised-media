@@ -1,12 +1,13 @@
 // src/app/api/portal/orders/[id]/status/route.ts
-// PATCH — update order status. Accessible to admin, sales, and authors (own book orders).
+// PATCH — update order status. Accessible to admin, sales, and authors (own book orders only).
 
 import { NextRequest, NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { getRoleFromUser } from '@/lib/auth/roles';
 import { isSalesOnly } from '@/lib/auth/roles-utils';
 import { shopServiceClient } from '@/lib/bookstore/supabase';
-import { sendShipmentEmail, sendRefundEmail } from '@/lib/bookstore/email';
+import { sendRefundEmail } from '@/lib/bookstore/email';
+import { client as sanityReadClient } from '@/lib/sanity/lib/client';
 import type { OrderStatus } from '@/lib/bookstore/types';
 import { z } from 'zod';
 
@@ -17,6 +18,42 @@ const ALLOWED_TRANSITIONS: Record<string, OrderStatus[]> = {
   delivered: ['refunded'],
   fulfilled: ['refunded'],
 };
+
+// Allowlist of HTTPS carrier/tracking domains permitted in tracking_url.
+// Only URLs on these domains will be injected into customer shipment emails.
+// Add carriers here when a new shipping partner is onboarded.
+const ALLOWED_TRACKING_HOSTS = new Set([
+  'ups.com',
+  'www.ups.com',
+  'wwwapps.ups.com',
+  'fedex.com',
+  'www.fedex.com',
+  'usps.com',
+  'www.usps.com',
+  'tools.usps.com',
+  'dhl.com',
+  'www.dhl.com',
+  'parcelsapp.com',
+  'www.parcelsapp.com',
+  '17track.net',
+  'www.17track.net',
+  'track.amazon.com',
+  'aftership.com',
+  'www.aftership.com',
+  'shipbob.com',
+  'www.shipbob.com',
+  'shipstation.com',
+  'www.shipstation.com',
+]);
+
+function isAllowedTrackingUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:' && ALLOWED_TRACKING_HOSTS.has(parsed.hostname);
+  } catch {
+    return false;
+  }
+}
 
 const schema = z.object({
   status: z.enum([
@@ -29,9 +66,46 @@ const schema = z.object({
     'refunded',
     'cancelled',
   ]),
-  tracking_number: z.string().optional(),
-  tracking_url: z.string().optional(),
+  tracking_number: z.string().max(100).trim().optional(),
+  // tracking_url is stored in the DB and injected as a raw href into customer
+  // shipment emails — it must be validated against a carrier allowlist to prevent
+  // phishing URLs reaching customers via legitimate branded email.
+  tracking_url: z
+    .string()
+    .url()
+    .refine(isAllowedTrackingUrl, {
+      message: 'tracking_url must be an https:// link to a recognised carrier domain',
+    })
+    .optional(),
 });
+
+// ---------------------------------------------------------------------------
+// Author ownership check
+// ---------------------------------------------------------------------------
+// Returns true if the Clerk user (identified by clerkUserId) has at least one
+// book in the given order. This is done with a single GROQ query that resolves
+// the author's Sanity ID and checks it against the order items in one round-trip.
+//
+// We use the CDN read client with cache:'no-store' so the check always reflects
+// the current author-book assignment, not a stale cached response.
+async function authorOwnsOrderItem(
+  clerkUserId: string,
+  orderItemBookIds: string[]
+): Promise<boolean> {
+  if (orderItemBookIds.length === 0) return false;
+
+  // Resolve the Sanity author document for this Clerk user, then check whether
+  // any of the order's books reference that author.
+  const count = await sanityReadClient.fetch<number>(
+    `count(*[_type == "book" && _id in $bookIds && author._ref in *[_type == "author" && clerkId == $clerkId]._id])`,
+    { bookIds: orderItemBookIds, clerkId: clerkUserId },
+    { cache: 'no-store' }
+  );
+
+  return count > 0;
+}
+
+// ---------------------------------------------------------------------------
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id: orderId } = await params;
@@ -45,9 +119,18 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const role = getRoleFromUser(user);
   if (!role) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
+  // Explicit allowlist — only admin, sales, and authors may update order status.
+  // Editor role is intentionally excluded: editors manage content, not fulfillment.
+  if (role !== 'admin' && role !== 'sales' && role !== 'author') {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
   const parsed = schema.safeParse(await req.json().catch(() => ({})));
   if (!parsed.success) {
-    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
+    return NextResponse.json(
+      { error: 'Invalid request body', details: parsed.error.flatten() },
+      { status: 400 }
+    );
   }
 
   const {
@@ -78,18 +161,25 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         { status: 422 }
       );
     }
+
     // Sales-only: cannot issue refunds (admin-only)
     if (isSalesOnly(role) && newStatus === 'refunded') {
       return NextResponse.json({ error: 'Refunds require admin role' }, { status: 403 });
     }
-    // Authors: verify the order contains their books
+
+    // Authors: verify the order actually contains books they authored.
+    // The previous check only tested items.length > 0, which is always true
+    // for any real order — any author could modify any order in the system.
     if (role === 'author') {
       const { data: items } = await shopServiceClient
         .from('order_items')
         .select('sanity_book_id')
         .eq('order_id', orderId);
 
-      if (!items || items.length === 0) {
+      const bookIds = (items ?? []).map((i) => i.sanity_book_id).filter(Boolean);
+      const owns = await authorOwnsOrderItem(userId, bookIds);
+
+      if (!owns) {
         return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
       }
     }

@@ -36,6 +36,12 @@ const downloadLimiter = makeRatelimiter(30, 60);
 // Guest resend: 5 requests per 300 s per IP
 const guestResendLimiter = makeRatelimiter(5, 300);
 
+// Public submission forms (job-application, secure-contact): 5 requests per 300 s per IP
+const submissionLimiter = makeRatelimiter(5, 300);
+
+// Whistleblower: 3 requests per 300 s per IP — strictest limit, most sensitive endpoint
+const whistleblowerLimiter = makeRatelimiter(3, 300);
+
 export type RateLimitResult = { limited: boolean; remaining?: number; reset?: number };
 
 async function check(limiter: Ratelimit | null, key: string): Promise<RateLimitResult> {
@@ -64,4 +70,12 @@ export async function checkDownloadRate(req: NextRequest): Promise<RateLimitResu
 
 export async function checkGuestResendRate(req: NextRequest): Promise<RateLimitResult> {
   return check(guestResendLimiter, `guest-resend:${getIp(req)}`);
+}
+
+export async function checkSubmissionRate(req: NextRequest): Promise<RateLimitResult> {
+  return check(submissionLimiter, `submission:${getIp(req)}`);
+}
+
+export async function checkWhistleblowerRate(req: NextRequest): Promise<RateLimitResult> {
+  return check(whistleblowerLimiter, `whistleblower:${getIp(req)}`);
 }

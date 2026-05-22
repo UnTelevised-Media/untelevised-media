@@ -1,7 +1,7 @@
 // src/app/api/bookstore/download/route.ts
 // GET /api/bookstore/download?order_item_id=...
 // Validates the requesting user owns the download, checks limits and expiry,
-// generates a short-lived Supabase Storage signed URL, increments download_count.
+// atomically claims a download slot, then generates a short-lived signed URL.
 // Returns { url } for direct browser download.
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -56,13 +56,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Download record not found' }, { status: 404 });
   }
 
-  // Check expiry
+  // Check expiry before claiming a slot
   if (download.expires_at && new Date(download.expires_at) < new Date()) {
     void writeAuditLog({ eventType: 'download_expired', userId, details: { orderItemId } });
     return NextResponse.json({ error: 'Download link has expired' }, { status: 410 });
   }
 
-  // Check download count
+  // Fast pre-check to return a clear error before the RPC call.
+  // The RPC enforces the actual limit atomically; this check is only for UX.
   if (download.download_count >= download.max_downloads) {
     void writeAuditLog({ eventType: 'download_limit_reached', userId, details: { orderItemId } });
     return NextResponse.json({ error: 'Maximum downloads reached' }, { status: 403 });
@@ -70,6 +71,24 @@ export async function GET(req: NextRequest) {
 
   if (!download.supabase_storage_path) {
     return NextResponse.json({ error: 'File not yet available' }, { status: 404 });
+  }
+
+  // Atomically claim a download slot via a stored procedure that uses FOR UPDATE.
+  // This prevents the TOCTOU race where concurrent requests both read the same
+  // count, both see it below the limit, and both succeed — exceeding the cap.
+  const { data: allowed, error: rpcError } = await shopServiceClient.rpc(
+    'increment_download_if_allowed',
+    { p_download_id: download.id }
+  );
+
+  if (rpcError) {
+    console.error('[shop/download] RPC error:', rpcError.message);
+    return NextResponse.json({ error: 'Could not process download' }, { status: 500 });
+  }
+
+  if (!allowed) {
+    void writeAuditLog({ eventType: 'download_limit_reached', userId, details: { orderItemId } });
+    return NextResponse.json({ error: 'Maximum downloads reached' }, { status: 403 });
   }
 
   // Generate signed URL — { download: filename } adds Content-Disposition: attachment
@@ -83,19 +102,10 @@ export async function GET(req: NextRequest) {
 
   if (signError || !signedData?.signedUrl) {
     console.error('[shop/download] Signed URL error:', signError?.message);
+    // The slot was already claimed; the user can retry and it will count against their limit.
+    // This is intentional — storage errors are operational issues, not user errors.
     return NextResponse.json({ error: 'Could not generate download link' }, { status: 500 });
   }
-
-  // Increment counter and update timestamps
-  const now = new Date().toISOString();
-  await shopServiceClient
-    .from('digital_downloads')
-    .update({
-      download_count: download.download_count + 1,
-      last_downloaded_at: now,
-      ...(download.first_downloaded_at == null ? { first_downloaded_at: now } : {}),
-    })
-    .eq('id', download.id);
 
   void writeAuditLog({
     eventType: 'download_success',

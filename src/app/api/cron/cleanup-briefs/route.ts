@@ -1,9 +1,22 @@
+import { timingSafeEqual } from 'crypto';
 import { type NextRequest, NextResponse } from 'next/server';
 import { writeClient } from '@/lib/sanity/lib/write-client';
 
+function verifyBearerToken(authHeader: string | null, secret: string | undefined): boolean {
+  if (!secret || !authHeader) return false;
+  const expected = `Bearer ${secret}`;
+  // timingSafeEqual requires equal-length buffers; compare as fixed-width to avoid
+  // leaking the expected token length via the length-mismatch fast path.
+  const a = Buffer.from(authHeader.padEnd(expected.length));
+  const b = Buffer.from(expected.padEnd(authHeader.length));
+  return (
+    authHeader.length === expected.length &&
+    timingSafeEqual(a.subarray(0, expected.length), b.subarray(0, expected.length))
+  );
+}
+
 export async function GET(req: NextRequest) {
-  const authHeader = req.headers.get('authorization');
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (!verifyBearerToken(req.headers.get('authorization'), process.env.CRON_SECRET)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -23,8 +36,6 @@ export async function GET(req: NextRequest) {
     transaction.delete(id);
   }
   await transaction.commit();
-
-  console.log(`[cron] cleanup-briefs: deleted ${ids.length} brief(s) older than ${cutoff}`);
 
   return NextResponse.json({ deleted: ids.length, ids });
 }

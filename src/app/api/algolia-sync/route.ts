@@ -38,16 +38,21 @@ function verifySignature(body: string, signature: string, secret: string): boole
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const rawBody = await req.text();
 
-  // Validate HMAC signature if secret is configured
+  // Always require SANITY_WEBHOOK_SECRET — fail closed rather than open.
+  // An unconfigured secret would allow any caller to delete or poison Algolia
+  // index records without authentication.
   const webhookSecret = process.env.SANITY_WEBHOOK_SECRET;
-  if (webhookSecret) {
-    const signature = req.headers.get('sanity-webhook-signature') ?? '';
-    // Sanity sends the signature as "t=<timestamp>,v1=<hash>"
-    const hashMatch = signature.match(/v1=([a-f0-9]+)/);
-    const hash = hashMatch ? hashMatch[1] : signature;
-    if (!verifySignature(rawBody, hash, webhookSecret)) {
-      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
-    }
+  if (!webhookSecret) {
+    console.error('[algolia-sync] SANITY_WEBHOOK_SECRET is not configured — rejecting request');
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const signature = req.headers.get('sanity-webhook-signature') ?? '';
+  // Sanity sends the signature as "t=<timestamp>,v1=<hash>"
+  const hashMatch = signature.match(/v1=([a-f0-9]+)/);
+  const hash = hashMatch ? hashMatch[1] : signature;
+  if (!verifySignature(rawBody, hash, webhookSecret)) {
+    return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
   }
 
   let payload: { _type: string; _id: string; operation: string };

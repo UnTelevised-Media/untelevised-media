@@ -4,6 +4,37 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-05-22] — Security Remediation (security-issues → main)
+
+Full security audit and remediation pass. 13 vulnerabilities resolved across two audit rounds; all critical and high severity findings closed. Audit report at `audit-report/index.html`.
+
+### Security — Fixed (Critical)
+
+- **Stripe secret key fragment logged to console** (`api/bookstore/checkout/route.ts`) — All debug `console.log` statements removed. Closes #49, #51.
+- **Mass assignment on job-application route** (`api/job-application/route.ts`) — Strict Zod schema added; all fields explicitly typed and allowlisted; `_type` injection no longer possible. Closes #50.
+
+### Security — Fixed (High)
+
+- **No rate limiting on 3 public submission endpoints** — Upstash sliding-window limiters added: `checkSubmissionRate` (5 req/300 s) on job-application and secure-contact; `checkWhistleblowerRate` (3 req/300 s) on whistleblower. `src/lib/bookstore/ratelimit.ts`. Closes #60.
+- **Timing attack on secret comparison** (`api/cron/cleanup-briefs`, `api/webhooks/supabase-order-update`, `api/bookstore/internal/send-email`) — Plain `!==` string equality replaced with `crypto.timingSafeEqual` + fixed-length buffer padding on all three routes. Closes #61.
+- **Client-controlled Stripe price IDs** (`api/bookstore/checkout/route.ts`) — `fetchCanonicalPricing()` makes a batched `cache:'no-store'` Sanity GROQ query; `resolveCanonicalPriceId()` returns the authoritative `stripePriceId` — client-supplied IDs are completely ignored. Closes #62, #53.
+- **Insufficient input validation on whistleblower endpoint** (`api/whistleblower/route.ts`) — Full rewrite: Zod schema with enumerated `category`/`severity` values, all fields length-bounded, `submissionId` and `submittedAt` server-generated. Closes #63.
+- **TOCTOU race on download counter** (`api/bookstore/download/route.ts`) — Non-atomic check+increment replaced with `increment_download_if_allowed()` PL/pgSQL stored procedure using `FOR UPDATE` row lock. Migration `20260522000001_atomic_download_counter.sql`. Closes #64.
+- **Service role client bypasses RLS — undocumented** — Migration `20260522000002_rls_service_role_documentation.sql` added: documents per-route service-role justifications, confirms RLS enabled on all user-facing tables, details Clerk+Supabase JWT upgrade path. Closes #65.
+
+### Security — Fixed (High, found in PR audit)
+
+- **Algolia sync webhook fails open** (`api/algolia-sync/route.ts`) — When `SANITY_WEBHOOK_SECRET` is unset the route previously skipped HMAC validation entirely. Now fails closed: missing secret returns 401 immediately.
+- **Author role authorization bypass** (`api/portal/orders/[id]/status/route.ts`) — `authorOwnsOrderItem()` GROQ function replaces the broken `items.length > 0` check; verifies the Clerk user's Sanity author ID matches at least one book in the order. `cache:'no-store'` ensures freshness.
+- **Unvalidated tracking URL injected into customer emails** (`api/portal/orders/[id]/status/route.ts`) — `tracking_url` now validated with `z.string().url()` + `isAllowedTrackingUrl()` refine against `ALLOWED_TRACKING_HOSTS` — 18 known HTTPS carrier/aggregator domains; arbitrary URLs rejected.
+- **Editor role bypasses all order authorization guards** (`api/portal/orders/[id]/status/route.ts`) — Explicit `{admin, sales, author}` allowlist added immediately after role resolution; editor and any other unlisted role returns 403 before reaching business logic.
+
+### Changed
+
+- **Audit report updated** (`audit-report/index.html`) — All resolved findings marked Fixed; security health score updated 49 → 83; severity counts reflect current open state.
+
+---
+
 ## [2026-05-21] — Portal & Content Tooling (feat/bookstore-upgrades-may2026)
 
 ### Added

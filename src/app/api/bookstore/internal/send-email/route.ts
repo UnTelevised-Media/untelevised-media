@@ -2,7 +2,19 @@
 // Internal-only transactional email endpoint called by the Supabase stripe-webhook edge function.
 // Protected by INTERNAL_EMAIL_SECRET bearer token — never expose this route to clients.
 
+import { timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
+
+function verifyBearerToken(header: string, secret: string): boolean {
+  if (!secret || !header) return false;
+  const expected = `Bearer ${secret}`;
+  // Pad both to the same length before the constant-time comparison so a length
+  // mismatch cannot cause an early exit that leaks timing information.
+  const maxLen = Math.max(header.length, expected.length);
+  const a = Buffer.from(header.padEnd(maxLen));
+  const b = Buffer.from(expected.padEnd(maxLen));
+  return header.length === expected.length && timingSafeEqual(a, b);
+}
 import {
   sendOrderConfirmationEmail,
   sendDigitalDownloadEmail,
@@ -65,10 +77,11 @@ type Payload =
     };
 
 export async function POST(req: NextRequest) {
-  // Verify bearer token
-  const auth = req.headers.get('authorization') ?? '';
-  const secret = process.env.INTERNAL_EMAIL_SECRET;
-  if (!secret || auth !== `Bearer ${secret}`) {
+  // Verify bearer token with constant-time comparison (timing-safe, matches pattern
+  // used in cron/cleanup-briefs and webhooks/supabase-order-update).
+  const authHeader = req.headers.get('authorization') ?? '';
+  const secret = process.env.INTERNAL_EMAIL_SECRET ?? '';
+  if (!verifyBearerToken(authHeader, secret)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

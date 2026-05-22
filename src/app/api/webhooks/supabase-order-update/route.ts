@@ -11,9 +11,19 @@
 // Required env var:
 //   SUPABASE_WEBHOOK_SECRET — must match the header value configured in Supabase Dashboard
 
+import { timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { shopServiceClient } from '@/lib/bookstore/supabase';
 import { sendShipmentEmail } from '@/lib/bookstore/email';
+
+function timingSafeStringEqual(a: string, b: string): boolean {
+  // Pad both to the same length before comparing so a length mismatch doesn't
+  // short-circuit before timingSafeEqual runs.
+  const maxLen = Math.max(a.length, b.length);
+  const ba = Buffer.from(a.padEnd(maxLen));
+  const bb = Buffer.from(b.padEnd(maxLen));
+  return a.length === b.length && timingSafeEqual(ba, bb);
+}
 
 interface OrderRecord {
   id: string;
@@ -32,11 +42,11 @@ interface WebhookPayload {
 }
 
 export async function POST(req: NextRequest) {
-  // 1. Verify shared secret
-  const receivedSecret = req.headers.get('x-supabase-webhook-secret');
-  const expectedSecret = process.env.SUPABASE_WEBHOOK_SECRET;
+  // 1. Verify shared secret with constant-time comparison to prevent timing attacks
+  const receivedSecret = req.headers.get('x-supabase-webhook-secret') ?? '';
+  const expectedSecret = process.env.SUPABASE_WEBHOOK_SECRET ?? '';
 
-  if (!expectedSecret || receivedSecret !== expectedSecret) {
+  if (!expectedSecret || !timingSafeStringEqual(receivedSecret, expectedSecret)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
