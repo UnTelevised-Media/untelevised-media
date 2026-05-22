@@ -6,7 +6,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { auth } from '@clerk/nextjs/server';
-import type { CheckoutPayload, FormatType, GiftOptions } from '@/lib/bookstore/types';
+import { client as sanityReadClient } from '@/lib/sanity/lib/client';
+import type {
+  CheckoutPayload,
+  CheckoutLineItem,
+  FormatType,
+  GiftOptions,
+} from '@/lib/bookstore/types';
 import { checkCheckoutRate } from '@/lib/bookstore/ratelimit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
@@ -17,6 +23,75 @@ const baseUrl =
   process.env.NEXT_PUBLIC_PRODUCTION_URL ??
   process.env.NEXT_PUBLIC_DEVELOPMENT_URL ??
   'http://localhost:3000';
+
+// ---------------------------------------------------------------------------
+// Server-side price ID resolution — never trust the client's stripePriceId.
+// We batch-fetch all referenced books from Sanity in one query, then validate
+// each cart item against the authoritative data stored there.
+// ---------------------------------------------------------------------------
+
+interface SanityFormatSlot {
+  _key: string;
+  stripePriceId?: string;
+  nameYourPrice?: boolean;
+}
+
+interface SanityBookPricing {
+  _id: string;
+  formats: SanityFormatSlot[];
+  author?: { tipStripeProductId?: string };
+}
+
+async function fetchCanonicalPricing(
+  items: CheckoutLineItem[]
+): Promise<Map<string, SanityBookPricing>> {
+  const bookIds = [...new Set(items.map((i) => i.sanityBookId))];
+
+  const books: SanityBookPricing[] = await sanityReadClient.fetch(
+    `*[_type == "book" && _id in $ids]{
+      _id,
+      "formats": formats[]{_key, stripePriceId, nameYourPrice},
+      "author": author->{tipStripeProductId}
+    }`,
+    { ids: bookIds },
+    // Bypass CDN so we always get the live price — not a cached value.
+    { cache: 'no-store' }
+  );
+
+  return new Map(books.map((b) => [b._id, b]));
+}
+
+// Returns the canonical Stripe price/product ID for this item as stored in
+// Sanity. Throws a descriptive error if the item cannot be found or priced.
+function resolveCanonicalPriceId(
+  item: CheckoutLineItem,
+  bookMap: Map<string, SanityBookPricing>
+): string {
+  const book = bookMap.get(item.sanityBookId);
+  if (!book) {
+    throw new Error(`"${item.title}" was not found in the catalog`);
+  }
+
+  // Tip items use the author's Stripe product ID, not a format price ID.
+  if (item.formatType === 'tip') {
+    const tipProductId = book.author?.tipStripeProductId;
+    if (!tipProductId) {
+      throw new Error(`Tip payments are not configured for "${item.title}"`);
+    }
+    return tipProductId;
+  }
+
+  const format = book.formats?.find((f) => f._key === item.formatKey);
+  if (!format) {
+    throw new Error(`Format not available for "${item.title}"`);
+  }
+
+  if (!format.stripePriceId) {
+    throw new Error(`"${item.title}" is not yet available for purchase`);
+  }
+
+  return format.stripePriceId;
+}
 
 export async function POST(req: NextRequest) {
   const rl = await checkCheckoutRate(req);
@@ -47,14 +122,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Validate all items have the required IDs and amounts
+    // Validate NYOP minimum amounts before the Sanity round-trip
     for (const item of body.items) {
-      if (item.formatType !== 'tip' && !item.isNyop && !item.stripePriceId) {
-        return NextResponse.json(
-          { error: `Item "${item.title}" is missing a Stripe Price ID` },
-          { status: 400 }
-        );
-      }
       if (item.isNyop) {
         if (!item.unitAmountCents || item.unitAmountCents < 50) {
           return NextResponse.json(
@@ -62,16 +131,10 @@ export async function POST(req: NextRequest) {
             { status: 400 }
           );
         }
-        if (!item.stripePriceId) {
-          return NextResponse.json(
-            { error: `Item "${item.title}" is not yet available for purchase` },
-            { status: 400 }
-          );
-        }
       }
     }
 
-    // Filter out tips with no amount or zero amount; NYOP items are always kept (validated above)
+    // Filter out tips with no amount or zero amount before resolving prices
     const chargeableItems = body.items.filter(
       (i) => i.formatType !== 'tip' || (i.unitAmountCents != null && i.unitAmountCents > 0)
     );
@@ -80,21 +143,45 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
     }
 
+    // Resolve authoritative price IDs from Sanity — one batched query for all books.
+    // This replaces the client-supplied stripePriceId with the server-authoritative value,
+    // preventing price substitution attacks.
+    let bookMap: Map<string, SanityBookPricing>;
+    try {
+      bookMap = await fetchCanonicalPricing(chargeableItems);
+    } catch {
+      return NextResponse.json({ error: 'Could not verify product catalog' }, { status: 503 });
+    }
+
+    // Resolve canonical IDs up front so any catalog errors surface before we
+    // call Stripe, keeping the error surface clean and deterministic.
+    const canonicalIds: string[] = [];
+    for (const item of chargeableItems) {
+      try {
+        canonicalIds.push(resolveCanonicalPriceId(item, bookMap));
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : 'Unknown catalog error';
+        return NextResponse.json({ error: msg }, { status: 400 });
+      }
+    }
+
     const hasPhysical = chargeableItems.some(
       (i) => i.formatType === 'physical' || i.formatType === 'bundle'
     );
     const hasDigital = chargeableItems.some((i) => i.isDigital);
 
     const lineItems = await Promise.all(
-      chargeableItems.map(async (item) => {
-        const storedId = item.stripePriceId.trim();
+      chargeableItems.map(async (item, idx) => {
+        // Use the server-resolved canonical ID, not item.stripePriceId from the client.
+        const canonicalId = canonicalIds[idx];
 
-        // Tips and NYOP both use price_data with a product ID + user-entered amount
+        // Tips and NYOP both use price_data: a Stripe product + user-entered amount
         if ((item.formatType === 'tip' || item.isNyop) && item.unitAmountCents) {
-          // Resolve to a Product ID — Sanity may store either prod_xxx or price_xxx
-          let productId = storedId;
-          if (storedId.startsWith('price_')) {
-            const price = await stripe.prices.retrieve(storedId);
+          // canonicalId may be a price_xxx (format slot) or prod_xxx (tip product).
+          // Resolve down to a product ID for price_data.
+          let productId = canonicalId;
+          if (canonicalId.startsWith('price_')) {
+            const price = await stripe.prices.retrieve(canonicalId);
             productId =
               typeof price.product === 'string'
                 ? price.product
@@ -111,21 +198,20 @@ export async function POST(req: NextRequest) {
           };
         }
 
-        return { price: storedId, quantity: item.quantity };
+        return { price: canonicalId, quantity: item.quantity };
       })
     );
 
     // Build per-item metadata for the webhook handler.
-    // Tips store unitAmountCents so the webhook can recover the user-entered amount
-    // without needing to resolve the ephemeral price_data ID back to a product.
-    const itemsMeta = chargeableItems.map((item) => ({
+    const itemsMeta = chargeableItems.map((item, idx) => ({
       bookId: item.sanityBookId,
       formatType: item.formatType as FormatType,
       formatKey: item.formatKey,
       isDigital: item.isDigital,
       qty: item.quantity,
       title: item.title,
-      priceId: item.stripePriceId,
+      // Store the server-resolved canonical ID in metadata, not the client value.
+      priceId: canonicalIds[idx],
       ...((item.formatType === 'tip' || item.isNyop) && item.unitAmountCents
         ? { unitAmountCents: item.unitAmountCents }
         : {}),
