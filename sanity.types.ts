@@ -247,6 +247,7 @@ export type Song = {
   isFeatured?: boolean;
   keywords?: string;
   seo?: SeoObject;
+  tags?: Array<string>;
 };
 
 export type SeoObject = {
@@ -895,7 +896,9 @@ export type Article = {
       _key: string;
     } & ArticleReference
   >;
+  allowComments?: boolean;
   seo?: SeoObject;
+  tags?: Array<string>;
 };
 
 export type Author = {

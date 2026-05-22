@@ -73,6 +73,16 @@ export default defineType({
       of: [{ type: 'reference', to: { type: 'category' } }],
     }),
     defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+      description:
+        'Fine-grained topics, people, places, or events. Use lowercase with hyphens (e.g. "police-brutality", "eric-adams"). These become browsable /tag/[slug] pages.',
+      validation: (Rule) => Rule.max(10).warning('Keep tags focused — 10 max per article.'),
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
@@ -170,6 +180,63 @@ export default defineType({
       of: [{ type: 'reference', to: [{ type: 'article' }] }],
       validation: (Rule) => Rule.max(6),
       description: 'Up to 6 related articles displayed at end of article',
+    }),
+    // Portal fields — featured, breaking news, editorial review
+    defineField({
+      name: 'featured',
+      title: 'Featured Article',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Show in featured slots on the homepage. Editors and Admins only.',
+    }),
+    defineField({
+      name: 'breakingNews',
+      title: 'Breaking News',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Flag for breaking news ticker. Editors and Admins only.',
+    }),
+    defineField({
+      name: 'needsReview',
+      title: 'Needs Editorial Review',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Author has submitted this draft for editor review.',
+    }),
+    defineField({
+      name: 'deletionRequest',
+      title: 'Deletion Request',
+      type: 'object',
+      readOnly: true,
+      description: 'Set when an author requests removal. Editors approve or deny via the portal.',
+      fields: [
+        defineField({ name: 'reason', type: 'text', title: 'Reason for removal' }),
+        defineField({ name: 'requestedAt', type: 'datetime', title: 'Requested at' }),
+        defineField({ name: 'requestedByName', type: 'string', title: 'Requested by' }),
+        defineField({
+          name: 'originalPublishedAt',
+          type: 'datetime',
+          title: 'Original published date',
+        }),
+      ],
+    }),
+    // Pitch linkage
+    defineField({
+      name: 'linkedPitch',
+      title: 'Linked Pitch',
+      type: 'reference',
+      to: [{ type: 'claimedPitch' }],
+      weak: true,
+      description: 'The claimed pitch from the newsroom brief that led to this article.',
+    }),
+    // Comments
+    defineField({
+      name: 'allowComments',
+      title: 'Allow Comments',
+      type: 'boolean',
+      description:
+        'Enable the Coral comment section for this article. Disable for sensitive breaking news or articles where discussion is inappropriate.',
+      initialValue: true,
     }),
     // SEO overrides
     defineField({

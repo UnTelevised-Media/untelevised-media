@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { BsDiscord, BsTwitch, BsTwitter, BsYoutube } from 'react-icons/bs';
-import { FaFacebookF, FaRedditAlien, FaTiktok } from 'react-icons/fa';
+import { FaFacebookF, FaRedditAlien, FaTelegram, FaTiktok } from 'react-icons/fa';
 import { GrInstagram } from 'react-icons/gr';
 
 const Socials = () => {
@@ -53,6 +53,14 @@ const Socials = () => {
         className='group rounded-lg border border-slate-300/50 bg-slate-200/30 p-1 backdrop-blur-sm transition-all duration-200 hover:border-[#738ADB]/50 hover:bg-[#738ADB]/10 hover:shadow-lg dark:border-slate-600/50 dark:bg-slate-800/30 dark:hover:bg-[#738ADB]/20 sm:p-1.5 md:p-2'
       >
         <BsDiscord className='h-4 w-4 text-slate-600 transition-colors duration-200 group-hover:text-[#738ADB] dark:text-slate-400 sm:h-3 sm:w-3 md:h-3 md:w-3 lg:h-4 lg:w-4 xl:w-5 xl:h-5' />
+      </Link>
+      <Link
+        href='https://t.me/UnTelevised_Media'
+        target='_blank'
+        rel='noopener noreferrer'
+        className='group rounded-lg border border-slate-300/50 bg-slate-200/30 p-1 backdrop-blur-sm transition-all duration-200 hover:border-[#2CA5E0]/50 hover:bg-[#2CA5E0]/10 hover:shadow-lg dark:border-slate-600/50 dark:bg-slate-800/30 dark:hover:bg-[#2CA5E0]/20 sm:p-1.5 md:p-2'
+      >
+        <FaTelegram className='h-4 w-4 text-slate-600 transition-colors duration-200 group-hover:text-[#2CA5E0] dark:text-slate-400 sm:h-3 sm:w-3 md:h-3 md:w-3 lg:h-4 lg:w-4 xl:w-5 xl:h-5' />
       </Link>
     </div>
   );

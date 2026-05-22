@@ -30,6 +30,7 @@ export default defineType({
           { title: 'Data / Dataset', value: 'data' },
           { title: 'Video / Audio', value: 'media' },
           { title: 'On-Scene Reporting', value: 'onscene' },
+          { title: 'News Article', value: 'article' },
           { title: 'Other', value: 'other' },
         ],
         layout: 'dropdown',

@@ -2,13 +2,156 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  MagnifyingGlassIcon,
+  Bars3Icon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline';
 import { Bookmark } from 'lucide-react';
 import { Show, UserButton } from '@clerk/nextjs';
-
+import dynamic from 'next/dynamic';
 import Socials from './Socials';
 import ThemeToggle from './ThemeToggle';
-import { Flame, Music, Radio } from 'lucide-react';
+import { Flame, Radio, Music, BookOpen } from 'lucide-react';
+
+const HeaderSearch = dynamic(() => import('./HeaderSearch'), { ssr: false });
+const MiniCart = dynamic(() => import('@/components/bookstore/MiniCart'), { ssr: false });
+
+// ── Typed nav items ────────────────────────────────────────────────────────────
+
+type SpecialLink = {
+  kind: 'special';
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+  color: string;       // text color class
+  hover: string;       // hover bg class
+  external?: boolean;
+};
+
+type PlainLink = {
+  kind: 'plain';
+  href: string;
+  label: string;
+};
+
+type NavItem = SpecialLink | PlainLink;
+
+const NAV: NavItem[] = [
+  {
+    kind: 'special',
+    href: '/breaking',
+    label: 'Breaking News',
+    icon: <Flame className='h-3.5 w-3.5 animate-pulse' />,
+    color: 'text-untele',
+    hover: 'hover:bg-red-50 dark:hover:bg-red-950/40',
+  },
+  {
+    kind: 'special',
+    href: 'https://untelevised.live',
+    label: 'Live Coverage',
+    icon: <Radio className='h-3.5 w-3.5 animate-pulse' />,
+    color: 'text-green-600 dark:text-green-400',
+    hover: 'hover:bg-green-50 dark:hover:bg-green-950/40',
+    external: true,
+  },
+  {
+    kind: 'special',
+    href: '/bookstore',
+    label: 'Bookstore',
+    icon: <BookOpen className='h-3.5 w-3.5' />,
+    color: 'text-amber-600 dark:text-amber-400',
+    hover: 'hover:bg-amber-50 dark:hover:bg-amber-950/40',
+  },
+  {
+    kind: 'special',
+    href: 'https://radio.untelevised.live',
+    label: 'Radio',
+    icon: <Music className='h-3.5 w-3.5 animate-pulse' />,
+    color: 'text-blue-600 dark:text-blue-400',
+    hover: 'hover:bg-blue-50 dark:hover:bg-blue-950/40',
+    external: true,
+  },
+  { kind: 'plain', href: '/fact-checks', label: 'Fact Check' },
+  { kind: 'plain', href: '/lyrics', label: 'Music' },
+  { kind: 'plain', href: '/about', label: 'Mission' },
+  { kind: 'plain', href: '/staff', label: 'Our Team' },
+];
+
+// ── Sub-components ─────────────────────────────────────────────────────────────
+
+function DesktopSpecialLink({ item }: { item: SpecialLink }) {
+  return (
+    <Link
+      href={item.href}
+      target={item.external ? '_blank' : undefined}
+      rel={item.external ? 'noopener noreferrer' : undefined}
+      className={`flex items-center gap-1.5 rounded px-2.5 py-1.5 transition-colors duration-150 ${item.color} ${item.hover}`}
+    >
+      {item.icon}
+      <span className='text-sm font-semibold'>{item.label}</span>
+    </Link>
+  );
+}
+
+function DesktopPlainLink({ item }: { item: PlainLink }) {
+  return (
+    <Link
+      href={item.href}
+      className='group relative px-3 text-sm font-medium text-slate-700 transition-colors duration-150 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+    >
+      {item.label}
+      <span className='absolute -bottom-0.5 left-0 h-px w-0 bg-untele transition-all duration-200 group-hover:w-full' />
+    </Link>
+  );
+}
+
+function MobileSpecialLink({
+  item,
+  onClose,
+}: {
+  item: SpecialLink;
+  onClose: () => void;
+}) {
+  return (
+    <Link
+      href={item.href}
+      target={item.external ? '_blank' : undefined}
+      rel={item.external ? 'noopener noreferrer' : undefined}
+      onClick={onClose}
+      className={`flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors duration-150 ${item.color} ${item.hover}`}
+    >
+      <span className='shrink-0'>{item.icon}</span>
+      <span className='text-sm font-semibold'>{item.label}</span>
+      {item.external && (
+        <span className='ml-auto text-[10px] font-bold uppercase tracking-widest opacity-50'>
+          ↗
+        </span>
+      )}
+    </Link>
+  );
+}
+
+function MobilePlainLink({
+  item,
+  onClose,
+}: {
+  item: PlainLink;
+  onClose: () => void;
+}) {
+  return (
+    <Link
+      href={item.href}
+      onClick={onClose}
+      className='flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 transition-colors duration-150 hover:bg-slate-200/60 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800/60 dark:hover:text-white'
+    >
+      <span className='h-1.5 w-1.5 shrink-0 rounded-full bg-untele' />
+      {item.label}
+    </Link>
+  );
+}
+
+// ── Main component ─────────────────────────────────────────────────────────────
 
 const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,11 +162,8 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
     let rafId: number;
     const handleScroll = () => {
       cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        setIsScrolled(window.scrollY > 20);
-      });
+      rafId = requestAnimationFrame(() => setIsScrolled(window.scrollY > 20));
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -31,112 +171,77 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
     };
   }, []);
 
+  const closeMenu = () => setIsMenuOpen(false);
+  const specialItems = NAV.filter((n): n is SpecialLink => n.kind === 'special');
+  const plainItems = NAV.filter((n): n is PlainLink => n.kind === 'plain');
+
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? 'bg-slate-100/98 dark:bg-slate-900/98 border-b border-untele/20 shadow-2xl backdrop-blur-md'
+          ? 'border-b border-untele/20 bg-slate-100/98 shadow-2xl backdrop-blur-md dark:bg-slate-900/98'
           : 'border-b-2 border-untele/30 bg-slate-100/95 shadow-lg backdrop-blur-md dark:bg-slate-900/95'
       }`}
     >
-      {/* Main Header */}
+      {/* ── Main bar ── */}
       <div className='flex w-full items-center justify-between px-4 py-2 md:py-3 lg:px-8'>
-        {/* Logo Section — server-hoisted to avoid re-renders on client interactions */}
+
+        {/* Logo */}
         {logoSlot}
 
-        {/* Desktop Navigation */}
-        <nav className='hidden items-center space-x-6 lg:flex'>
-          <Link
-            href='https://untelevised.live'
-            className='group flex items-center space-x-2 rounded-lg py-2 transition-all duration-200 hover:bg-green-50 dark:hover:bg-green-900/20'
-          >
-            <Radio className='h-4 w-4 animate-pulse text-green-500' />
-            <span className='text-sm font-medium text-green-600 dark:text-green-400'>
-              Live Coverage
-            </span>
-          </Link>
-
-          <Link
-            href='/category/breaking'
-            className='group flex items-center space-x-2 rounded-lg py-2 transition-all duration-200 hover:bg-red-50 dark:hover:bg-red-900/20'
-          >
-            <Flame className='h-4 w-4 animate-pulse text-untele' />
-            <span className='text-sm font-medium text-untele'>Breaking Events</span>
-          </Link>
-
-          <Link
-            href='/past-events'
-            className='group relative text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
-          >
-            Past Events
-            <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
-          </Link>
-          <Link
-            href='https://radio.untelevised.live'
-            className='group flex items-center space-x-2 rounded-lg py-2 transition-all duration-200 hover:bg-blue-50 dark:hover:bg-blue-900/20'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <Music className='h-4 w-4 animate-pulse text-blue-500' />
-            <span className='text-sm font-medium text-blue-600 dark:text-blue-400'>Radio</span>
-          </Link>
-          <Link
-            href='/lyrics'
-            className='group relative text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
-          >
-            Music
-            <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
-          </Link>
-
-          <Link
-            href='/staff'
-            className='group relative text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
-          >
-            Our Team
-            <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
-          </Link>
-
-          <Link
-            href='/about'
-            className='group relative text-sm font-medium text-slate-700 transition-colors duration-200 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white'
-          >
-            Mission
-            <div className='absolute -bottom-1 left-0 h-0.5 w-0 bg-untele transition-all duration-200 group-hover:w-full' />
-          </Link>
+        {/* Desktop nav */}
+        <nav className='hidden items-center gap-1 lg:flex' aria-label='Main navigation'>
+          {NAV.map((item) =>
+            item.kind === 'special' ? (
+              <DesktopSpecialLink key={item.href} item={item} />
+            ) : (
+              <React.Fragment key={item.href}>
+                {/* divider before plain links group */}
+                {item === plainItems[0] && (
+                  <span className='mx-1 h-4 w-px bg-slate-300 dark:bg-slate-700' />
+                )}
+                <DesktopPlainLink item={item} />
+              </React.Fragment>
+            )
+          )}
         </nav>
 
-        {/* Right Section */}
-        <div className='flex items-center space-x-2 md:space-x-3'>
-          {/* Search Button */}
+        {/* Right section */}
+        <div className='flex items-center gap-1 md:gap-2'>
+          {/* Search */}
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
-            className='rounded-lg p-1.5 text-slate-700 transition-all duration-200 hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2'
+            className='rounded-lg p-1.5 text-slate-700 transition-colors hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2'
             aria-label='Search articles'
           >
             <MagnifyingGlassIcon className='h-4 w-4 md:h-5 md:w-5' />
           </button>
 
-          {/* Reading List */}
+          {/* Reading list */}
           <Link
             href='/reading-list'
-            className='rounded-lg p-1.5 text-slate-700 transition-all duration-200 hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2'
+            className='rounded-lg p-1.5 text-slate-700 transition-colors hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2'
             aria-label='Reading list'
           >
             <Bookmark className='h-4 w-4 md:h-5 md:w-5' />
           </Link>
 
-          {/* Theme Toggle */}
+          {/* Shopping cart */}
+          <MiniCart />
+
+          {/* Theme toggle — desktop only */}
           <div className='hidden md:flex'>
             <ThemeToggle />
           </div>
 
-          {/* User Account */}
+          {/* User account */}
           <Show when='signed-in'>
             <UserButton
               appearance={{
                 elements: {
                   avatarBox: 'h-8 w-8',
-                  userButtonPopoverCard: 'shadow-xl border border-slate-200 dark:border-slate-700',
+                  userButtonPopoverCard:
+                    'shadow-xl border border-slate-200 dark:border-slate-700',
                 },
               }}
             />
@@ -150,20 +255,20 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
             </Link>
           </Show>
 
-          {/* Support Button */}
+          {/* Support */}
           <Link
             href='/donate'
-            className='hidden items-center space-x-1.5 rounded-lg bg-gradient-to-r from-untele to-red-500 px-3 py-1.5 text-sm font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl md:flex md:px-4 md:py-2'
+            className='hidden items-center gap-1.5 bg-gradient-to-r from-untele to-red-500 px-3 py-1.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg md:flex md:px-4 md:py-2'
           >
             <span>Support</span>
-            <div className='h-1.5 w-1.5 animate-pulse rounded-full bg-white/80 md:h-2 md:w-2' />
+            <span className='h-1.5 w-1.5 animate-pulse rounded-full bg-white/80' />
           </Link>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className='rounded-lg p-1.5 text-slate-700 transition-all duration-200 hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2 lg:hidden'
-            aria-label='Toggle menu'
+            className='rounded-lg p-1.5 text-slate-700 transition-colors hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2 lg:hidden'
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMenuOpen ? (
               <XMarkIcon className='h-5 w-5 md:h-6 md:w-6' />
@@ -172,137 +277,53 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
             )}
           </button>
 
-          {/* Desktop Socials */}
+          {/* Socials — desktop only */}
           <div className='hidden lg:flex'>
             <Socials />
           </div>
         </div>
       </div>
 
-      {/* Enhanced Search Bar */}
+      {/* ── Algolia search bar ── */}
       {isSearchOpen && (
         <div className='border-t border-slate-300 bg-gradient-to-r from-slate-100 to-slate-200 p-6 backdrop-blur-md dark:border-slate-700 dark:from-slate-900 dark:to-slate-800'>
-          <div className='mx-auto max-w-[1400px]'>
-            <div className='relative'>
-              <div className='absolute inset-0 rounded-lg bg-gradient-to-r from-untele/20 to-red-400/20 blur' />
-              <div className='relative flex items-center'>
-                <MagnifyingGlassIcon className='absolute left-4 h-5 w-5 text-slate-600 dark:text-slate-400' />
-                <input
-                  type='text'
-                  placeholder='Search breaking news, investigations, live coverage...'
-                  className='w-full rounded-lg border border-slate-400 bg-slate-200/90 py-4 pl-12 pr-4 text-slate-900 placeholder-slate-600 backdrop-blur-sm focus:border-untele focus:outline-none focus:ring-2 focus:ring-untele/50 dark:border-slate-600 dark:bg-slate-800/90 dark:text-slate-100 dark:placeholder-slate-400'
-                  autoFocus
-                />
-                <button className='absolute right-2 rounded-md bg-untele px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-untele/90'>
-                  Search
-                </button>
-              </div>
-            </div>
-            <div className='mt-4 flex flex-wrap gap-2'>
-              {['Breaking News', 'Live Events', 'Investigations', 'Field Reports'].map((tag) => (
-                <button
-                  key={tag}
-                  className='rounded-full border border-slate-400 bg-slate-200/50 px-3 py-1 text-xs text-slate-700 transition-colors hover:border-untele hover:text-slate-900 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:text-white'
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </div>
+          <HeaderSearch onClose={() => setIsSearchOpen(false)} />
         </div>
       )}
 
-      {/* Enhanced Mobile Menu */}
+      {/* ── Mobile menu ── */}
       {isMenuOpen && (
-        <div className='border-t border-slate-300 bg-gradient-to-br from-slate-50 to-slate-100 backdrop-blur-md dark:border-slate-700 dark:from-slate-900 dark:to-slate-800 lg:hidden'>
-          <nav className='flex flex-col space-y-6 p-6'>
-            <Link
-              href='/'
-              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <div className='h-2 w-2 rounded-full bg-untele' />
-              <span>Home</span>
-            </Link>
-            <Link
-              href='https://untelevised.live'
-              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <div className='h-2 w-2 rounded-full bg-untele' />
-              {/* Live Coverage Link */}
-              <div className='group flex cursor-pointer items-center space-x-2 rounded-lg py-2 backdrop-blur-sm transition-all duration-200 hover:shadow-lg'>
-                <span className='text-sm font-bold tracking-wider text-green-400'>
-                  Live Coverage
-                </span>
-                <Radio className='h-4 w-4 animate-pulse text-green-400' />
-              </div>
-            </Link>
+        <div className='border-t border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900 lg:hidden'>
+          <div className='flex flex-col p-4'>
 
-            <Link
-              href='https://radio.untelevised.live'
-              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
-              onClick={() => setIsMenuOpen(false)}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <div className='h-2 w-2 rounded-full bg-untele' />
-              {/* Radio Link */}
-              <div className='group flex cursor-pointer items-center space-x-2 rounded-lg py-2 backdrop-blur-sm transition-all duration-200 hover:shadow-lg'>
-                <span className='text-sm font-bold tracking-wider text-blue-400'>Radio</span>
-                <Radio className='h-4 w-4 animate-pulse text-blue-400' />
-              </div>
-            </Link>
+            {/* Featured links */}
+            <p className='mb-2 px-3 text-[10px] font-black uppercase tracking-widest text-slate-400'>
+              Coverage
+            </p>
+            <div className='mb-4 flex flex-col gap-1'>
+              {specialItems.map((item) => (
+                <MobileSpecialLink key={item.href} item={item} onClose={closeMenu} />
+              ))}
+            </div>
 
-            <Link
-              href='/live-events'
-              className='duration-20 group flex max-w-54 cursor-pointer items-center space-x-3 rounded-lg py-2 font-medium text-slate-700 backdrop-blur-sm transition-colors hover:text-untele hover:shadow-lg dark:text-slate-200'
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <div className='h-2 w-2 rounded-full bg-untele' />
-              <span className='text-sm font-bold tracking-wider text-untele'>Breaking Events</span>
-              <Flame className='h-4 w-4 animate-pulse text-untele' />
-            </Link>
+            {/* Standard links */}
+            <p className='mb-2 px-3 text-[10px] font-black uppercase tracking-widest text-slate-400'>
+              More
+            </p>
+            <div className='mb-4 flex flex-col gap-1'>
+              <MobilePlainLink
+                item={{ kind: 'plain', href: '/', label: 'Home' }}
+                onClose={closeMenu}
+              />
+              {plainItems.map((item) => (
+                <MobilePlainLink key={item.href} item={item} onClose={closeMenu} />
+              ))}
+            </div>
 
-            <Link
-              href='/past-events'
-              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <div className='h-2 w-2 rounded-full bg-untele' />
-              <span>Past Events</span>
-            </Link>
-
-            <Link
-              href='/lyrics'
-              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <div className='h-2 w-2 rounded-full bg-untele' />
-              <span>Music</span>
-            </Link>
-
-            <Link
-              href='/staff'
-              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <div className='h-2 w-2 rounded-full bg-untele' />
-              <span>Our Team</span>
-            </Link>
-            <Link
-              href='/about'
-              className='flex items-center space-x-3 py-2 font-medium text-slate-700 transition-colors duration-200 hover:text-untele dark:text-slate-200'
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <div className='h-2 w-2 rounded-full bg-untele' />
-              <span>Mission</span>
-            </Link>
-
-            <div className='border-t border-slate-300 pt-6 dark:border-slate-700'>
-              {/* Mobile Theme Toggle */}
-              <div className='mb-4 flex items-center justify-between'>
-                <span className='text-sm font-medium text-slate-700 dark:text-slate-200'>
+            {/* Footer row */}
+            <div className='mt-2 border-t border-slate-200 pt-4 dark:border-slate-800'>
+              <div className='mb-4 flex items-center justify-between px-1'>
+                <span className='text-xs font-bold uppercase tracking-widest text-slate-500'>
                   Theme
                 </span>
                 <ThemeToggle />
@@ -310,15 +331,18 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
 
               <Link
                 href='/donate'
-                className='mb-6 flex items-center justify-center space-x-2 rounded-lg bg-gradient-to-r from-untele to-red-500 px-6 py-3 font-medium text-white shadow-lg transition-all duration-200 hover:shadow-xl'
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeMenu}
+                className='mb-4 flex items-center justify-center gap-2 bg-gradient-to-r from-untele to-red-500 px-6 py-3 text-sm font-bold text-white shadow-md'
               >
                 <span>Support Independent Journalism</span>
-                <div className='h-2 w-2 animate-pulse rounded-full bg-white/80' />
+                <span className='h-2 w-2 animate-pulse rounded-full bg-white/80' />
               </Link>
-              <Socials />
+
+              <div className='flex justify-center'>
+                <Socials />
+              </div>
             </div>
-          </nav>
+          </div>
         </div>
       )}
     </header>

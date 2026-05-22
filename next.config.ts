@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.pexels.com',
       },
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+      },
     ],
   },
   env: {
@@ -28,6 +32,11 @@ const nextConfig: NextConfig = {
         destination: '/articles/:slug',
         permanent: true,
       },
+      {
+        source: '/live-events',
+        destination: '/breaking',
+        permanent: false,
+      },
     ];
   },
   logging: {
@@ -42,6 +51,10 @@ const nextConfig: NextConfig = {
     // Enables 'use cache' directive + cacheTag()/cacheLife() from next/cache
     // for fine-grained per-function cache control (used on music pages)
     useCache: true,
+    serverActions: {
+      // Default 1 MB limit silently drops book cover and digital file uploads
+      bodySizeLimit: '50mb',
+    },
   },
 };
 

@@ -83,6 +83,7 @@ interface Article extends Base {
   correction?: ArticleCorrection;
   sources?: ArticleSource[];
   methodology?: string;
+  tags?: string[];
   faqs?: Array<{ question: string; answer: string }>;
   reviewedBy?: Author;
   relatedArticles?: Array<{
@@ -99,7 +100,10 @@ interface Article extends Base {
     metaDescription?: string;
     ogImage?: Image;
   };
+  allowComments?: boolean;
   comments: Comment[];
+  tags?: string[];
+  breakingNews?: boolean;
 }
 
 interface Author extends Base {

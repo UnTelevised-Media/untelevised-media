@@ -1,8 +1,8 @@
 'use client';
 // src/components/bookmarks/BookmarkButton.tsx
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { Bookmark, BookmarkCheck } from 'lucide-react';
-import { addBookmark, isBookmarked, removeBookmark } from '@/lib/bookmarks/storage';
+import { useBookmarks } from '@/hooks/useBookmarks';
 import type { BookmarkEntry } from '@/lib/bookmarks/storage';
 
 type BookmarkButtonProps = Omit<BookmarkEntry, 'bookmarkedAt'> & {
@@ -23,27 +23,15 @@ export function BookmarkButton({
   className = '',
   variant = 'icon',
 }: BookmarkButtonProps) {
-  const [saved, setSaved] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const { isBookmarked, toggle, ready } = useBookmarks();
+  const saved = isBookmarked(slug);
 
-  // Hydrate state from localStorage after mount (avoids SSR mismatch)
-  useEffect(() => {
-    setSaved(isBookmarked(slug));
-    setMounted(true);
-  }, [slug]);
+  const handleToggle = () => {
+    toggle({ slug, title, description, imageUrl, authorName, publishedAt, readingTime });
+  };
 
-  const toggle = useCallback(() => {
-    if (saved) {
-      removeBookmark(slug);
-      setSaved(false);
-    } else {
-      addBookmark({ slug, title, description, imageUrl, authorName, publishedAt, readingTime });
-      setSaved(true);
-    }
-  }, [saved, slug, title, description, imageUrl, authorName, publishedAt, readingTime]);
-
-  // Render a stable placeholder before hydration to avoid layout shift
-  if (!mounted) {
+  // Render stable placeholder before hook is ready (prevents hydration mismatch / layout shift)
+  if (!ready) {
     return (
       <button
         disabled
@@ -60,7 +48,7 @@ export function BookmarkButton({
 
   return (
     <button
-      onClick={toggle}
+      onClick={handleToggle}
       aria-label={saved ? 'Remove bookmark' : 'Bookmark this article'}
       aria-pressed={saved}
       type='button'

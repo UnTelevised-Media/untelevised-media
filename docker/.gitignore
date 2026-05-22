@@ -1,0 +1,8 @@
+# docker/.gitignore
+
+# Real environment file — never commit
+.env
+
+# Runtime data volumes (if bind-mounted locally for dev)
+backups/
+data/

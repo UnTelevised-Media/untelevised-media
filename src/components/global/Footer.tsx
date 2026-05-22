@@ -10,6 +10,7 @@ import {
   FaInstagram,
   FaReddit,
   FaDiscord,
+  FaTelegram,
 } from 'react-icons/fa';
 import { FaThreads } from 'react-icons/fa6';
 import { MdLiveTv } from 'react-icons/md';
@@ -68,13 +69,30 @@ async function Footer() {
             ))}
         </div>
 
-        {/* Music Section */}
-        <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
-          <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
-            Music & Artists
-          </h4>
-          <ClientSideRoute route='/lyrics'>Music & Lyrics</ClientSideRoute>
-          <ClientSideRoute route='/music-artists'>Featured Artists</ClientSideRoute>
+        {/* Bookstore + Music — shared column on desktop */}
+        <div className='flex flex-col gap-6'>
+          {/* Bookstore */}
+          <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
+            <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
+              Bookstore
+            </h4>
+            <Link href='/bookstore'>Hurriya Publications</Link>
+            <Link href='/bookstore/about'>Our Story</Link>
+            <Link href='/bookstore/wishlist'>Wishlist</Link>
+            <Link href='/bookstore/orders'>My Orders</Link>
+            <Link href='/bookstore/downloads'>Download Vault</Link>
+            <Link href='/bookstore/returns'>Returns &amp; Refunds</Link>
+            <Link href='/secure-contact'>Publish With Us</Link>
+          </div>
+
+          {/* Music Section */}
+          <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
+            <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
+              Music & Artists
+            </h4>
+            <ClientSideRoute route='/lyrics'>Music & Lyrics</ClientSideRoute>
+            <ClientSideRoute route='/music-artists'>Featured Artists</ClientSideRoute>
+          </div>
         </div>
 
         {/* Media */}
@@ -83,6 +101,7 @@ async function Footer() {
           <h4 className='hidden pb-2 text-xl font-semibold text-foreground underline md:flex'>
             Media
           </h4>
+          <Link href='/search'>Search Articles</Link>
           <Link href='/'>Photo</Link>
           <Link href='/'>Video</Link>
           <Link href='/'>Investigations</Link>
@@ -168,6 +187,14 @@ async function Footer() {
           >
             <FaDiscord className='h-4 w-4' />
             Discord
+          </Link>
+          <Link
+            className='flex items-center gap-x-2'
+            href='https://t.me/UnTelevised_Media'
+            target='_blank'
+          >
+            <FaTelegram className='h-4 w-4' />
+            Telegram
           </Link>
           <Link
             className='flex items-center gap-x-2'
