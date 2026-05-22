@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sanityClient from '@/lib/sanity/lib/client';
+import { checkSubmissionRate } from '@/lib/bookstore/ratelimit';
 
 const VALID_POSITIONS = [
   'article-writer',
@@ -69,6 +70,14 @@ const JobApplicationSchema = z.object({
 
 // eslint-disable-next-line import/prefer-default-export
 export async function POST(request: NextRequest) {
+  const rl = await checkSubmissionRate(request);
+  if (rl.limited) {
+    return NextResponse.json(
+      { error: 'Too many requests — please wait a moment before submitting again' },
+      { status: 429 }
+    );
+  }
+
   try {
     const rawBody = await request.json().catch(() => null);
 
