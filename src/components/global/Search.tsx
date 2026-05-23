@@ -13,10 +13,10 @@ const Search = () => {
         action='/search'
         className='w-full sm:w-auto sm:flex-1 sm:mx-4 mt-2 sm:mt-0 flex items-center space-x-2'
         >
-            <Label htmlFor='search' />
-            <Input type='text' name='query' placeholder='Search...' />
-            <Button variant='outline' size='icon' type='submit'>
-            <SearchIcon className='rotate-90 h-8 w-8' />
+            <Label htmlFor='search' className='sr-only'>Search</Label>
+            <Input id='search' type='text' name='query' placeholder='Search...' />
+            <Button variant='outline' size='icon' type='submit' aria-label='Submit search'>
+              <SearchIcon className='rotate-90 h-8 w-8' aria-hidden='true' />
             </Button>
         </Form>
     </div>

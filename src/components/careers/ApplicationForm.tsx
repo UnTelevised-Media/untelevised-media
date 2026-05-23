@@ -76,22 +76,23 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className='space-y-5' noValidate>
       {/* Full Name */}
       <div>
-        <label className={label}>Full Name *</label>
-        <input {...register('fullName')} placeholder='Jane Smith' className={input} />
+        <label htmlFor='fullName' className={label}>Full Name *</label>
+        <input id='fullName' {...register('fullName')} placeholder='Jane Smith' className={input} />
         {errors.fullName && <p className={err}>{errors.fullName.message}</p>}
       </div>
 
       {/* Email */}
       <div>
-        <label className={label}>Email Address *</label>
-        <input {...register('email')} type='email' placeholder='jane@example.com' className={input} />
+        <label htmlFor='email' className={label}>Email Address *</label>
+        <input id='email' {...register('email')} type='email' placeholder='jane@example.com' className={input} />
         {errors.email && <p className={err}>{errors.email.message}</p>}
       </div>
 
       {/* Position */}
       <div>
-        <label className={label}>Position *</label>
+        <label htmlFor='position' className={label}>Position *</label>
         <input
+          id='position'
           {...register('position')}
           placeholder='e.g. Freelance Reporter, Photographer, General Application'
           className={input}
@@ -101,8 +102,9 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
 
       {/* Portfolio URL */}
       <div>
-        <label className={label}>Portfolio / Website URL</label>
+        <label htmlFor='portfolioUrl' className={label}>Portfolio / Website URL</label>
         <input
+          id='portfolioUrl'
           {...register('portfolioUrl')}
           type='url'
           placeholder='https://yourportfolio.com'
@@ -113,8 +115,9 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
 
       {/* LinkedIn URL */}
       <div>
-        <label className={label}>LinkedIn Profile URL</label>
+        <label htmlFor='linkedinUrl' className={label}>LinkedIn Profile URL</label>
         <input
+          id='linkedinUrl'
           {...register('linkedinUrl')}
           type='url'
           placeholder='https://linkedin.com/in/yourname'
@@ -125,8 +128,9 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
 
       {/* Cover Letter */}
       <div>
-        <label className={label}>Cover Letter * (100–3000 characters)</label>
+        <label htmlFor='coverLetter' className={label}>Cover Letter * (100–3000 characters)</label>
         <textarea
+          id='coverLetter'
           {...register('coverLetter')}
           rows={7}
           placeholder="Tell us about yourself, your journalism experience, why you want to contribute to UnTelevised Media, and what stories you want to tell..."
@@ -137,8 +141,9 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
 
       {/* Resume Upload */}
       <div>
-        <label className={label}>Resume / CV — PDF or Word, max 5 MB (optional)</label>
+        <label htmlFor='resume' className={label}>Resume / CV — PDF or Word, max 5 MB (optional)</label>
         <input
+          id='resume'
           {...register('resume')}
           type='file'
           accept='.pdf,.doc,.docx'
@@ -149,8 +154,8 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
 
       {/* How did you find us */}
       <div>
-        <label className={label}>How did you find us? *</label>
-        <select {...register('howDidYouFindUs')} className={input}>
+        <label htmlFor='howDidYouFindUs' className={label}>How did you find us? *</label>
+        <select id='howDidYouFindUs' {...register('howDidYouFindUs')} className={input}>
           <option value=''>Select one...</option>
           <option value='existing-reader'>I&apos;m already a reader</option>
           <option value='social-media'>Social media</option>
