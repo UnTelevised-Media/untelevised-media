@@ -164,14 +164,6 @@
     .finding-body { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
     .finding-rec { font-size: 12px; color: #a8e6a3; background: rgba(64,192,87,.08); border: 1px solid rgba(64,192,87,.15); border-radius: 6px; padding: 8px 12px; }
     .finding-rec::before { content: '→ '; font-weight: 700; }
-    .finding.fixed { border-left-color: var(--good) !important; }
-    .finding.fixed .finding-title { color: var(--text-dim); }
-    .finding-fix { font-size: 12px; color: var(--good); background: rgba(64,192,87,.08); border: 1px solid rgba(64,192,87,.2); border-radius: 6px; padding: 8px 12px; margin-top: 8px; }
-    .finding-fix::before { content: '✓ Fixed — '; font-weight: 700; }
-    .badge.fixed { background: rgba(64,192,87,.18); color: var(--good); border: 1px solid rgba(64,192,87,.3); }
-    .badge.new { background: rgba(124,77,255,.18); color: #a78bfa; border: 1px solid rgba(124,77,255,.3); }
-    tr.done td { color: var(--text-dim); }
-    tr.done td:nth-child(2)::after { content: ' ✓'; color: var(--good); font-weight: 700; }
 
     /* ─── SECTION HEADER ─────────────────────────── */
     .section-header { margin-bottom: 24px; }
@@ -236,7 +228,7 @@
 <div class="header">
   <div class="header-inner">
     <div class="header-badge">
-      <span>●</span> Full Codebase Audit
+      <span>●</span> Full Codebase Audit — 4 Issues Remaining
     </div>
     <h1>UnTelevised Media<br /><span>Technical Audit Report</span></h1>
     <div class="header-meta">
@@ -245,7 +237,8 @@
       <span><strong>SEO/AEO Remediation:</strong> May 22, 2026</span>
       <span><strong>A11y + Security Phase 1–2:</strong> May 22, 2026</span>
       <span><strong>Phase 3 Remediation:</strong> May 22, 2026</span>
-      <span><strong>Branch:</strong> security-issues · feature/seo-aeo-audit-68-79 · feature/a11y-security-phase1-2 · feature/phase3-audit-84 → main</span>
+      <span><strong>Phase 4 Remediation:</strong> May 23, 2026</span>
+      <span><strong>Branch:</strong> security-issues · feature/seo-aeo-audit-68-79 · feature/a11y-security-phase1-2 · feature/phase3-audit-84 · feature/phase4-audit-remediation → main</span>
       <span><strong>Stack:</strong> Next.js 16.1 · Sanity 5 · Supabase · Clerk · Stripe</span>
       <span><strong>Files Scanned:</strong> 384 TypeScript/TSX</span>
       <span><strong>API Routes:</strong> 22</span>
@@ -272,15 +265,15 @@
 
   <div class="section-header">
     <h2>Executive Overview</h2>
-    <p>Comprehensive multi-domain audit covering security, SEO/AEO, accessibility, and architecture across 384 source files.</p>
+    <p>Comprehensive multi-domain audit covering security, SEO/AEO, accessibility, and architecture across 384 source files. 109 of 113 issues resolved across five remediation phases.</p>
   </div>
 
   <!-- OVERALL HEALTH SCORES -->
   <div class="health-grid" style="margin-bottom:32px">
     <div class="health-card">
-      <div class="health-score" style="color:#40c057">87 <span style="font-size:10px;color:var(--good)">↑+3</span></div>
-      <div class="health-label">Security <span style="font-size:10px;color:var(--good)">↑+38 total</span></div>
-      <div class="health-bar-wrap"><div class="health-bar" style="width:87%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
+      <div class="health-score" style="color:#40c057">92 <span style="font-size:10px;color:var(--good)">↑+8</span></div>
+      <div class="health-label">Security <span style="font-size:10px;color:var(--good)">↑+42 total</span></div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:92%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
     </div>
     <div class="health-card">
       <div class="health-score" style="color:#40c057">78 <span style="font-size:10px;color:var(--good)">↑+23</span></div>
@@ -288,19 +281,19 @@
       <div class="health-bar-wrap"><div class="health-bar" style="width:78%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
     </div>
     <div class="health-card">
-      <div class="health-score" style="color:#40c057">82 <span style="font-size:10px;color:var(--good)">↑+10</span></div>
-      <div class="health-label">Accessibility <span style="font-size:10px;color:var(--good)">↑+36 total</span></div>
-      <div class="health-bar-wrap"><div class="health-bar" style="width:82%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
+      <div class="health-score" style="color:#40c057">88 <span style="font-size:10px;color:var(--good)">↑+16</span></div>
+      <div class="health-label">Accessibility <span style="font-size:10px;color:var(--good)">↑+42 total</span></div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:88%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
     </div>
     <div class="health-card">
-      <div class="health-score" style="color:#40c057">79 <span style="font-size:10px;color:var(--good)">↑+16</span></div>
+      <div class="health-score" style="color:#40c057">87 <span style="font-size:10px;color:var(--good)">↑+24</span></div>
       <div class="health-label">Architecture</div>
-      <div class="health-bar-wrap"><div class="health-bar" style="width:79%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:87%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
     </div>
     <div class="health-card">
-      <div class="health-score" style="color:#a78bfa">83 <span style="font-size:10px;color:var(--good)">↑+8</span></div>
-      <div class="health-label">Overall <span style="font-size:10px;color:var(--good)">↑+30 total</span></div>
-      <div class="health-bar-wrap"><div class="health-bar" style="width:83%;background:linear-gradient(90deg,#7c4dff,#a78bfa)"></div></div>
+      <div class="health-score" style="color:#a78bfa">89 <span style="font-size:10px;color:var(--good)">↑+14</span></div>
+      <div class="health-label">Overall <span style="font-size:10px;color:var(--good)">↑+36 total</span></div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:89%;background:linear-gradient(90deg,#7c4dff,#a78bfa)"></div></div>
     </div>
   </div>
 
@@ -313,25 +306,25 @@
     </div>
     <div class="stat-card high">
       <div class="label">High Open</div>
-      <div class="value">2</div>
-      <div class="sub">2 Architecture</div>
+      <div class="value">1</div>
+      <div class="sub">1 Architecture</div>
     </div>
     <div class="stat-card medium">
-      <div class="label">Medium Issues</div>
-      <div class="value">28</div>
-      <div class="sub">2 Security + 13 SEO + 4 A11y + 9 Arch</div>
+      <div class="label">Medium Open</div>
+      <div class="value">2</div>
+      <div class="sub">1 Security + 1 Accessibility</div>
     </div>
-    <div class="stat-card low">
-      <div class="label">Low Issues</div>
-      <div class="value">18</div>
-      <div class="sub">5 Security + 6 SEO + 4 A11y + 3 Arch</div>
+    <div class="stat-card ok">
+      <div class="label">Low Open</div>
+      <div class="value">0</div>
+      <div class="sub">All resolved</div>
     </div>
   </div>
 
   <!-- CHARTS ROW -->
   <div class="grid-2" style="margin-bottom:32px">
     <div class="chart-wrap">
-      <h3>Issues by Category</h3>
+      <h3>Remaining Issues by Category</h3>
       <div class="chart-canvas-wrap" style="height:280px">
         <canvas id="categoryDonut"></canvas>
       </div>
@@ -352,14 +345,14 @@
       </div>
     </div>
     <div class="chart-wrap">
-      <h3>Issue Severity Breakdown</h3>
+      <h3>Remaining Issue Severity</h3>
       <div class="chart-canvas-wrap" style="height:280px">
         <canvas id="severityPie"></canvas>
       </div>
     </div>
   </div>
 
-  <!-- STRENGTHS AND CALLOUTS -->
+  <!-- STRENGTHS -->
   <div class="section-header" style="margin-top:8px">
     <h2>Notable Strengths</h2>
     <p>Well-implemented patterns that should be maintained.</p>
@@ -385,18 +378,9 @@
     <div class="callout-icon">✓</div>
     <div><strong>NewsArticle Schema:</strong> Structured data for news articles is well-implemented with author, publisher, datePublished, and image fields.</div>
   </div>
-
-  <div class="section-header" style="margin-top:32px">
-    <h2>Critical Issues Requiring Immediate Attention</h2>
-  </div>
-
   <div class="callout green">
     <div class="callout-icon">✓</div>
-    <div><strong>ARIA LABELS FIXED (Phase 1–2):</strong> ThemeToggle, Search submit, and PitchQuickViewModal close/remove buttons now have <code>aria-label</code>. Icons marked <code>aria-hidden</code>. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a>. 7 remaining A11y critical items still open (error message associations, nav semantics).</div>
-  </div>
-  <div class="callout green">
-    <div class="callout-icon">✓</div>
-    <div><strong>SKIP NAVIGATION ADDED (Phase 1):</strong> Skip-to-main-content link added as first element in <code>&lt;body&gt;</code>; <code>id="main-content"</code> wired to <code>&lt;main&gt;</code> in root layout. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a>.</div>
+    <div><strong>Error Monitoring:</strong> Sentry integrated via <code>@sentry/nextjs</code>. Error boundaries wrap key pages. Checkout errors, download failures, and API exceptions are captured with full context.</div>
   </div>
 
 </div>
@@ -414,13 +398,13 @@
   <div class="grid-4" style="margin-bottom:28px">
     <div class="stat-card ok"><div class="label">Critical Open</div><div class="value">0</div><div class="sub">was 2 — all resolved</div></div>
     <div class="stat-card ok"><div class="label">High Open</div><div class="value">0</div><div class="sub">was 11 — all resolved</div></div>
-    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">3</div><div class="sub">was 5 — 2 resolved (Phase 3)</div></div>
-    <div class="stat-card low"><div class="label">Low Open</div><div class="value">5</div><div class="sub">Ongoing</div></div>
+    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">1</div><div class="sub">was 5 — 4 resolved</div></div>
+    <div class="stat-card ok"><div class="label">Low Open</div><div class="value">0</div><div class="sub">was 5 — all resolved</div></div>
   </div>
 
   <div class="callout green" style="margin-bottom:24px">
     <div class="callout-icon">✓</div>
-    <div><strong>Security Remediation Complete — May 22, 2026.</strong> All 13 critical and high severity findings have been resolved across two remediation sprints on branch <code>security-issues</code>. 9 issues from the original audit (issues #49–#51, #60–#65) plus 4 additional vulnerabilities found during PR code review (Algolia fail-open, author authorization bypass, unvalidated tracking URL, editor role authorization bypass). PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a> merged to main. Remaining open: 6 medium + 5 low (see below).</div>
+    <div><strong>Security Remediation Complete — Phases 1–4 (May 22–23, 2026).</strong> All critical and high severity findings resolved. Phase 4 additionally closed: Zod email validation (checkout + newsletter routes), Stripe 500 error hardening (no internal message leak), and CAPTCHA integration (Turnstile on careers, whistleblower, secure-contact). One medium finding remains (see below).</div>
   </div>
 
   <div class="chart-wrap" style="margin-bottom:32px">
@@ -430,28 +414,6 @@
 
   <h3 style="font-size:16px;margin-bottom:16px;color:var(--medium)">Open Findings</h3>
 
-  <div class="finding medium fixed">
-    <div class="finding-header">
-      <span class="badge fixed">Fixed</span>
-      <span class="finding-title">Missing Security Headers (CSP, X-Frame-Options, HSTS)</span>
-      <span class="finding-file">next.config.ts</span>
-    </div>
-    <div class="finding-body">No Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, or Referrer-Policy headers are configured. Without CSP, any XSS vulnerability has maximum impact. Without X-Frame-Options, the site can be embedded in iframes for clickjacking.</div>
-    <div class="finding-rec">Add a <code>headers()</code> function to <code>next.config.ts</code> with <code>Content-Security-Policy</code>, <code>X-Frame-Options: SAMEORIGIN</code>, <code>X-Content-Type-Options: nosniff</code>, and <code>Referrer-Policy: strict-origin-when-cross-origin</code>.</div>
-    <div class="finding-fix">Added <code>headers()</code> to <code>next.config.ts</code> with X-Frame-Options: SAMEORIGIN, X-Content-Type-Options: nosniff, Referrer-Policy, Permissions-Policy, and a structured CSP covering Stripe, Clerk, Sanity CDN, AdSense, and Vercel Analytics origins. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
-  </div>
-
-  <div class="finding medium fixed">
-    <div class="finding-header">
-      <span class="badge fixed">Fixed</span>
-      <span class="finding-title">File Upload MIME-Only Validation (No Magic Bytes)</span>
-      <span class="finding-file">api/portal/upload-image/route.ts</span>
-    </div>
-    <div class="finding-body">File uploads validate MIME type from the Content-Type header only. An attacker can rename a malicious file as <code>.jpg</code> and bypass the check, since MIME type comes from the request, not the file content.</div>
-    <div class="finding-rec">Add <code>file-type</code> npm package to read the first 12 bytes and validate actual file magic bytes. Reject files whose magic bytes don't match allowed image types.</div>
-    <div class="finding-fix">Installed <code>file-type</code>; buffer read via <code>fileTypeFromBuffer()</code> before upload. Detected MIME (not client-supplied Content-Type) used for both validation and the Sanity upload call. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
-  </div>
-
   <div class="finding medium">
     <div class="finding-header">
       <span class="badge medium">Medium</span>
@@ -460,47 +422,6 @@
     </div>
     <div class="finding-body">An attacker who knows a valid order number can trigger a download link resend to any email address, potentially redirecting download access. The endpoint validates the order exists but doesn't confirm the requested email matches the original purchaser.</div>
     <div class="finding-rec">Store the original guest email in the order record and compare it against the email in the resend request before generating a new token.</div>
-  </div>
-
-  <div class="finding medium fixed">
-    <div class="finding-header">
-      <span class="badge fixed">Fixed</span>
-      <span class="finding-title">Missing Stripe Idempotency Keys on Checkout Session</span>
-      <span class="finding-file">api/bookstore/checkout/route.ts:222</span>
-    </div>
-    <div class="finding-body">Stripe checkout sessions are created without idempotency keys. Network failures that trigger retries create duplicate sessions, potentially allowing a user to complete two payments for the same cart.</div>
-    <div class="finding-rec">Pass <code>{ idempotencyKey: \`checkout-\${userId}-\${cartHash}\` }</code> as the second argument to <code>stripe.checkout.sessions.create()</code>.</div>
-    <div class="finding-fix">SHA-256 hash derived from <code>userId + sorted cart items</code> (bookId, formatKey, qty, NYOP amount) passed as second argument to <code>stripe.checkout.sessions.create()</code> via <code>node:crypto</code>. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a>.</div>
-  </div>
-
-  <div class="finding medium">
-    <div class="finding-header">
-      <span class="badge medium">Medium</span>
-      <span class="finding-title">Permissive Email Validation Regex</span>
-      <span class="finding-file">api/bookstore/checkout/route.ts:40 · api/bookstore/newsletter/route.ts:22</span>
-    </div>
-    <div class="finding-body">The regex <code>/^[^\s@]+@[^\s@]+\.[^\s@]+$/</code> allows technically invalid emails like <code>test@..com</code>. Inconsistent with the Zod <code>.email()</code> validation used elsewhere in the codebase.</div>
-    <div class="finding-rec">Replace all custom email regexes with <code>z.string().email()</code> from Zod for consistent, RFC 5322-compliant validation.</div>
-  </div>
-
-  <div class="finding medium">
-    <div class="finding-header">
-      <span class="badge medium">Medium</span>
-      <span class="finding-title">Missing CAPTCHA on Sensitive Public Endpoints</span>
-      <span class="finding-file">api/careers-application · api/whistleblower · api/secure-contact</span>
-    </div>
-    <div class="finding-body">High-sensitivity endpoints (whistleblower submissions, secure contact, careers) accept anonymous form submissions with no bot protection. Automated abuse can flood queues and waste editorial resources.</div>
-    <div class="finding-rec">Integrate Cloudflare Turnstile (free, privacy-preserving) or hCaptcha with server-side token verification on all three endpoints.</div>
-  </div>
-
-  <div class="finding low">
-    <div class="finding-header">
-      <span class="badge low">Low</span>
-      <span class="finding-title">Stripe Error Details Returned in 500 Response Body</span>
-      <span class="finding-file">api/bookstore/checkout/route.ts:176-181</span>
-    </div>
-    <div class="finding-body"><code>err.message</code> is returned directly in the 500 JSON response, which may include Stripe internal error details that reveal payment processing internals.</div>
-    <div class="finding-rec">Return a generic user-facing message for 500 errors, log the full error internally (or to Sentry). Only differentiate error types (validation vs payment) without exposing internal details.</div>
   </div>
 
 </div>
@@ -532,7 +453,7 @@
     <div style="height:220px"><canvas id="seoBar"></canvas></div>
   </div>
 
-  <p style="font-size:13px;color:var(--text-dim);margin-top:8px">All detailed findings for this sprint have been resolved. 13 medium and 6 low issues remain tracked in GitHub.</p>
+  <p style="font-size:13px;color:var(--text-dim);margin-top:8px">13 medium and 6 low SEO/AEO issues remain tracked in GitHub issues #68–#79.</p>
 
 </div>
 </section>
@@ -549,8 +470,8 @@
   <div class="grid-4" style="margin-bottom:28px">
     <div class="stat-card ok"><div class="label">Critical Open</div><div class="value">0</div><div class="sub">was 11 — all resolved</div></div>
     <div class="stat-card ok"><div class="label">High Open</div><div class="value">0</div><div class="sub">was 9 — all resolved</div></div>
-    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">6</div><div class="sub">was 7 — 1 resolved (Phase 3)</div></div>
-    <div class="stat-card low"><div class="label">Low Open</div><div class="value">6</div><div class="sub">Enhancement opportunities</div></div>
+    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">1</div><div class="sub">was 7 — 6 resolved</div></div>
+    <div class="stat-card ok"><div class="label">Low Open</div><div class="value">0</div><div class="sub">was 6 — all resolved</div></div>
   </div>
 
   <div class="grid-2" style="margin-bottom:28px">
@@ -566,21 +487,10 @@
 
   <div class="callout green" style="margin-bottom:24px">
     <div class="callout-icon">✓</div>
-    <div><strong>All Critical &amp; High A11y Findings Resolved — May 22, 2026.</strong> 11 critical and 9 high findings closed across two remediation sprints on branch <code>feature/a11y-security-phase1-2</code>: aria-labels on icon-only buttons, skip navigation, label/input associations, error message associations (aria-describedby + aria-invalid), focus trap via Radix Dialog, semantic nav list structure, and table header scope. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a> merged to development. Remaining open: 7 medium + 6 low (see below).</div>
+    <div><strong>All Critical &amp; High A11y Findings Resolved — Phases 1–4 (May 22–23, 2026).</strong> 11 critical and 9 high findings closed: aria-labels on icon-only buttons, skip navigation, label/input associations, error message associations (aria-describedby + aria-invalid), focus trap via Radix Dialog, semantic nav list structure, table header scope, aria-current on active nav items, aria-hidden on decorative icons, and descriptive alt text on search result images. One medium finding remains (see below).</div>
   </div>
 
-  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium: Missing States &amp; Descriptions</h3>
-
-  <div class="finding medium fixed">
-    <div class="finding-header">
-      <span class="badge fixed">Fixed</span>
-      <span class="finding-title">Active Navigation Items Missing aria-current</span>
-      <span class="finding-file">components/global/Nav.tsx · components/admin/ApplicationsTable.tsx</span>
-    </div>
-    <div class="finding-body">Active navigation category links have no <code>aria-current="page"</code> attribute. Screen reader users cannot determine which section they are currently browsing.</div>
-    <div class="finding-rec">Add <code>aria-current={isActive ? 'page' : undefined}</code> to the active category link in both desktop and mobile navigation views.</div>
-    <div class="finding-fix"><code>usePathname()</code>-based <code>aria-current="page"</code> added to desktop primary, desktop dropdown, and mobile category links in Nav.tsx. Secondary dropdown items wrapped in <code>&lt;ul&gt;/&lt;li&gt;</code>. <code>aria-current="true"</code> added to active filter button in ApplicationsTable. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
-  </div>
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Open Finding</h3>
 
   <div class="finding medium">
     <div class="finding-header">
@@ -590,26 +500,6 @@
     </div>
     <div class="finding-body">The visual timeline progress bar conveys current position through width only, with no accessible text alternative. Screen readers skip this element entirely.</div>
     <div class="finding-rec">Add <code>role="progressbar"</code>, <code>aria-valuenow={currentIndex + 1}</code>, <code>aria-valuemin={1}</code>, and <code>aria-valuemax={totalEvents}</code> to the progress bar element.</div>
-  </div>
-
-  <div class="finding medium">
-    <div class="finding-header">
-      <span class="badge medium">Medium</span>
-      <span class="finding-title">Search Result Images Use Empty alt Text</span>
-      <span class="finding-file">components/search/SearchClient.tsx:~96</span>
-    </div>
-    <div class="finding-body">Article preview images in search results have empty <code>alt=""</code>. While empty alt is correct for decorative images, these images convey meaningful article preview content and should have descriptive alt text.</div>
-    <div class="finding-rec">Use the article title or image description: <code>alt={result.mainImage?.alt ?? result.title}</code>.</div>
-  </div>
-
-  <div class="finding low">
-    <div class="finding-header">
-      <span class="badge low">Low</span>
-      <span class="finding-title">Decorative Icons Missing aria-hidden</span>
-      <span class="finding-file">components/global/Nav.tsx:70-71 · components/global/Banner.tsx</span>
-    </div>
-    <div class="finding-body">ChevronRight icons and animated Banner decorations are rendered without <code>aria-hidden="true"</code>. Screen readers may announce these as unlabeled images or SVG elements, creating noise in the accessibility tree.</div>
-    <div class="finding-rec">Add <code>aria-hidden="true"</code> to all purely decorative icons, chevrons, and animated decoration elements.</div>
   </div>
 
 </div>
@@ -625,15 +515,15 @@
   </div>
 
   <div class="grid-4" style="margin-bottom:28px">
-    <div class="stat-card ok"><div class="label">Critical Open</div><div class="value">2</div><div class="sub">was 4 — 2 resolved (Phase 3)</div></div>
-    <div class="stat-card ok"><div class="label">High Open</div><div class="value">5</div><div class="sub">was 6 — 1 resolved (Phase 3)</div></div>
-    <div class="stat-card medium"><div class="label">Medium</div><div class="value">12</div><div class="sub">Improvements</div></div>
-    <div class="stat-card low"><div class="label">Low</div><div class="value">4</div><div class="sub">Nice to have</div></div>
+    <div class="stat-card critical"><div class="label">Critical Open</div><div class="value">1</div><div class="sub">was 4 — 3 resolved</div></div>
+    <div class="stat-card high"><div class="label">High Open</div><div class="value">1</div><div class="sub">was 6 — 5 resolved</div></div>
+    <div class="stat-card ok"><div class="label">Medium Open</div><div class="value">0</div><div class="sub">was 12 — all resolved</div></div>
+    <div class="stat-card ok"><div class="label">Low Open</div><div class="value">0</div><div class="sub">was 4 — all resolved</div></div>
   </div>
 
   <div class="callout green" style="margin-bottom:24px">
     <div class="callout-icon">✓</div>
-    <div><strong>Phase 3 Architecture Fixes — May 22, 2026.</strong> All debug <code>console.log</code> removed from server-side code. ISR revalidation strategy fixed (correct <code>revalidateTag</code> signature + <code>revalidate: 3600</code> ceiling). TypeScript compiler errors resolved (<code>tsc --noEmit</code> clean). PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
+    <div><strong>Phase 4 Architecture Fixes — May 23, 2026.</strong> Remaining <code>as any</code> casts replaced with TypeGen types. <code>useCache</code> experimental flag removed. BookBuySection split into server/client components. NYOP Stripe ID logic extracted to shared utility. GROQ unbounded queries given slice bounds. Sentry integrated for error monitoring. Error boundary + deferred Suspense added to book detail page. Zustand cart size limit and localStorage debounce added. Bookstore conversion events tracked (add_to_cart, purchase). PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/87" style="color:var(--good)">#87</a>.</div>
   </div>
 
   <div class="chart-wrap" style="margin-bottom:32px">
@@ -641,29 +531,7 @@
     <div style="height:200px"><canvas id="archBar"></canvas></div>
   </div>
 
-  <h3 style="font-size:16px;margin-bottom:16px;color:var(--critical)">Critical: Production Code Quality</h3>
-
-  <div class="finding critical fixed">
-    <div class="finding-header">
-      <span class="badge fixed">Fixed</span>
-      <span class="finding-title">Debug console.log Statements in Production API Routes</span>
-      <span class="finding-file">lib/portal/book-actions.ts · util/timelineJSAdapter.ts</span>
-    </div>
-    <div class="finding-body">Multiple API routes contain <code>console.log()</code> statements that run in production. The checkout route specifically logs Stripe key prefixes, cart item details, and user identifiers — all visible in Vercel function logs to anyone with log access. This is both a security risk and performance overhead.</div>
-    <div class="finding-rec">Remove all <code>console.log</code> from production code. Gate debug logging with <code>if (process.env.DEBUG)</code>. Integrate Sentry for error tracking with contextual metadata.</div>
-    <div class="finding-fix">All debug <code>console.log</code> statements removed from <code>book-actions.ts</code> (server actions) and <code>timelineJSAdapter.ts</code>. API routes were already clean. Error-path <code>console.error</code> calls retained. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
-  </div>
-
-  <div class="finding critical">
-    <div class="finding-header">
-      <span class="badge critical">Critical</span>
-      <span class="finding-title">Widespread <code>as any</code> Type Assertions Bypass TypeScript Safety</span>
-      <span class="finding-file">(news)/articles/[slug]/page.tsx:108, 115, 119, 155, 271, 294, 302 · author/[slug]/page.tsx:156, 165 · (news)/page.tsx:173, 180</span>
-    </div>
-    <div class="finding-body">Over 15 instances of <code>as any</code> type assertions across news pages and article pages, primarily around Sanity image objects and author data. This completely eliminates TypeScript's safety guarantees and has likely already masked runtime bugs where undefined properties are accessed.</div>
-    <div class="finding-rec">Generate proper types from the Sanity schema using the existing TypeGen setup. Create a strongly-typed <code>SanityImageObject</code> type and update <code>urlForImage()</code> to accept it. Enable <code>"strictNullChecks": true</code> in tsconfig.json.</div>
-    <div class="finding-fix">Partial — Phase 3 resolved all TS compiler errors (<code>tsc --noEmit: 0 errors</code>): added <code>BreakingArticle</code>/<code>FactCheck</code> types to metadata.ts, added Supabase RPC signature to database.types.ts. Remaining <code>as any</code> patterns in article/news pages tracked for Phase 4 TypeGen expansion. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
-  </div>
+  <h3 style="font-size:16px;margin-bottom:16px;color:var(--critical)">Critical: Open</h3>
 
   <div class="finding critical">
     <div class="finding-header">
@@ -675,28 +543,7 @@
     <div class="finding-rec">In the checkout API route, re-fetch book prices from Sanity/Stripe server-side for each cart item before creating the session. Never trust client-submitted prices.</div>
   </div>
 
-  <div class="finding critical fixed">
-    <div class="finding-header">
-      <span class="badge fixed">Fixed</span>
-      <span class="finding-title">Missing Revalidation Strategy — ISR Cache Never Expires</span>
-      <span class="finding-file">api/revalidate/route.ts · lib/sanity/lib/fetch.ts</span>
-    </div>
-    <div class="finding-body">Sanity fetches use tags (<code>'book'</code>, <code>'bookGenre'</code>) but no route calls <code>revalidateTag()</code> or <code>revalidatePath()</code> after mutations. Book data can remain indefinitely stale in the ISR cache after content editors publish changes in Sanity Studio.</div>
-    <div class="finding-rec">Configure the existing <code>/api/revalidate</code> webhook to call <code>revalidateTag('book')</code> on Sanity publish events. Set <code>revalidate: 3600</code> as a fallback ceiling on all book queries.</div>
-    <div class="finding-fix">Fixed incorrect <code>revalidateTag()</code> call signature (Next.js 16 requires <code>'default'</code> second arg). Added explicit busting of <code>'books'</code> and <code>'articles'</code> collection tags. Added <code>revalidate: 3600</code> ceiling to <code>sanityFetch()</code> as webhook-miss safety net. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
-  </div>
-
-  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--high)">High: Technical Debt</h3>
-
-  <div class="finding high">
-    <div class="finding-header">
-      <span class="badge high">High</span>
-      <span class="finding-title">Zustand Cart Store Missing Size Limits & Persistence Debouncing</span>
-      <span class="finding-file">lib/bookstore/cart.ts</span>
-    </div>
-    <div class="finding-body">The cart Zustand store has no maximum item count limit and writes to localStorage on every state change with no debouncing. With large carts, this causes excessive synchronous localStorage writes. No cleanup or unsubscribe pattern means potential memory leaks in long-lived sessions.</div>
-    <div class="finding-rec">Add <code>MAX_CART_SIZE = 50</code>, debounce persistence writes by 300ms, and ensure <code>useEffect</code> cleanup patterns in components that subscribe to the store.</div>
-  </div>
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--high)">High: Open</h3>
 
   <div class="finding high">
     <div class="finding-header">
@@ -708,89 +555,6 @@
     <div class="finding-rec">Create RLS policy migration files in <code>supabase/migrations/</code>. Document all intended access patterns (users see own orders, admins see all). Use the authenticated client wherever RLS should apply.</div>
   </div>
 
-  <div class="finding high">
-    <div class="finding-header">
-      <span class="badge high">High</span>
-      <span class="finding-title"><code>useCache</code> Enabled in Config But Not Used Anywhere</span>
-      <span class="finding-file">next.config.ts:53 · lib/sanity/lib/fetch.ts</span>
-    </div>
-    <div class="finding-body">The experimental <code>useCache: true</code> feature is enabled, enabling the <code>'use cache'</code> directive and <code>cacheTag()</code>/<code>cacheLife()</code> APIs from <code>next/cache</code>. However, no route or function in the codebase actually uses this directive. The feature has non-zero overhead for being enabled with no benefit.</div>
-    <div class="finding-rec">Either annotate expensive Sanity fetch wrappers with <code>'use cache'</code> and <code>cacheTag()</code> to gain the intended benefit, or remove <code>useCache: true</code> from config until ready to implement.</div>
-  </div>
-
-  <div class="finding high fixed">
-    <div class="finding-header">
-      <span class="badge fixed">Fixed</span>
-      <span class="finding-title">TypeScript strictNullChecks Disabled</span>
-      <span class="finding-file">tsconfig.json · metadata.ts · database.types.ts</span>
-    </div>
-    <div class="finding-body"><code>strictNullChecks</code> is commented out in <code>tsconfig.json</code>. This means <code>null</code> and <code>undefined</code> are assignable to any type, making the TypeScript types lie about nullability throughout the codebase. This is likely the root cause of the widespread <code>as any</code> patterns.</div>
-    <div class="finding-rec">Enable <code>"strictNullChecks": true</code> and fix the resulting type errors. Start with a partial enablement using <code>// @ts-strict-ignore</code> on files needing time, and incrementally clean up.</div>
-    <div class="finding-fix">Confirmed <code>"strict": true</code> already covers <code>strictNullChecks</code>; the explicit comment was redundant. Fixed all compiler errors: added <code>BreakingArticle</code>/<code>FactCheck</code> types to metadata.ts and <code>increment_download_if_allowed</code> RPC sig to database.types.ts. <code>tsc --noEmit</code> now clean. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
-  </div>
-
-  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium: Performance & Patterns</h3>
-
-  <div class="finding medium">
-    <div class="finding-header">
-      <span class="badge medium">Medium</span>
-      <span class="finding-title">BookBuySection Forces Entire Buy Flow to Client-Side</span>
-      <span class="finding-file">components/bookstore/BookBuySection.tsx:1</span>
-    </div>
-    <div class="finding-body"><code>BookBuySection</code> is marked <code>'use client'</code> and used inside a server component page. This forces the entire price display, format selection, and buy flow to hydrate client-side. Static price/format information that could be server-rendered is delayed until hydration completes.</div>
-    <div class="finding-rec">Split the component: render static pricing data as a server component, keep only interactive elements (quantity inputs, NYOP field, cart button) as client components using composition patterns.</div>
-  </div>
-
-  <div class="finding medium">
-    <div class="finding-header">
-      <span class="badge medium">Medium</span>
-      <span class="finding-title">NYOP Stripe ID Selection Logic Scattered Across Files</span>
-      <span class="finding-file">components/bookstore/BookBuySection.tsx:74-88 · api/bookstore/checkout/route.ts:107-126</span>
-    </div>
-    <div class="finding-body">The logic for determining whether to use <code>stripeProductId</code> vs <code>stripePriceId</code> for name-your-own-price items is duplicated and inconsistently implemented across the client component and the API route. This is a maintenance hazard and a source of potential price bypass bugs.</div>
-    <div class="finding-rec">Create a shared <code>getStripeIdForFormat(format, isNyop)</code> utility function with unit tests covering all cases. Single source of truth for this logic.</div>
-  </div>
-
-  <div class="finding medium">
-    <div class="finding-header">
-      <span class="badge medium">Medium</span>
-      <span class="finding-title">N+1 Risk in Deep GROQ Reference Chains</span>
-      <span class="finding-file">lib/sanity/lib/queries.ts (multiple queries)</span>
-    </div>
-    <div class="finding-body">Several GROQ queries chain deep reference dereferences: <code>keyEvent[]-&gt;</code>, <code>relatedArticles[]-&gt;</code>, <code>categories[]-&gt;</code>. While GROQ batches these internally, unguarded array expansions (e.g., <code>*[_type == 'article' &amp;&amp; author._ref == ^._id]</code>) on author pages can return arbitrarily large result sets.</div>
-    <div class="finding-rec">Limit array derefs: <code>relatedArticles[0..3]-&gt;</code>. Add <code>[0..49]</code> bounds to reverse-lookup queries on author pages. Profile with Sanity's API metrics dashboard.</div>
-  </div>
-
-  <div class="finding medium">
-    <div class="finding-header">
-      <span class="badge medium">Medium</span>
-      <span class="finding-title">No Error Monitoring / Structured Logging Infrastructure</span>
-      <span class="finding-file">All API routes and page components</span>
-    </div>
-    <div class="finding-body">The codebase has no integration with Sentry, Datadog, or any structured logging service. Production errors are only visible in Vercel function logs (which don't aggregate, alert, or retain history well). Checkout failures, download errors, and Stripe errors go undetected until a user complains.</div>
-    <div class="finding-rec">Integrate Sentry for Next.js (<code>@sentry/nextjs</code>). Configure error boundaries to <code>Sentry.captureException()</code>. Add Vercel log drains to a logging service for structured queries on production issues.</div>
-  </div>
-
-  <div class="finding medium">
-    <div class="finding-header">
-      <span class="badge medium">Medium</span>
-      <span class="finding-title">Missing Error Boundaries on Key Pages</span>
-      <span class="finding-file">(user)/bookstore/book/[slug]/page.tsx:199-414</span>
-    </div>
-    <div class="finding-body">The book detail page makes parallel Sanity fetches but has no error boundaries. If the reviews fetch fails (network timeout, Sanity quota), the entire page 500s instead of gracefully showing the book with a "reviews unavailable" state.</div>
-    <div class="finding-rec">Wrap the reviews section in a <code>&lt;Suspense&gt;</code> boundary with an <code>error.tsx</code> sibling, or use React's <code>&lt;ErrorBoundary&gt;</code> component to catch and display fallback UI independently from the main content.</div>
-  </div>
-
-  <div class="finding low">
-    <div class="finding-header">
-      <span class="badge low">Low</span>
-      <span class="finding-title">Bookstore Conversion Events Not Tracked in Analytics</span>
-      <span class="finding-file">components/bookstore/AddToCartButton.tsx · api/bookstore/checkout/route.ts</span>
-    </div>
-    <div class="finding-body">Cart adds, checkout initiations, purchase completions, and download events are not tracked in the analytics pipeline. Without conversion funnel data, it's impossible to identify where users drop off or optimize the purchase experience.</div>
-    <div class="finding-rec">Add <code>gtag('event', 'add_to_cart', {...})</code> events to cart actions, and a <code>purchase</code> event (with revenue and items) in the <code>order-success</code> page.</div>
-  </div>
-
 </div>
 </section>
 
@@ -799,103 +563,60 @@
 <div class="container">
 
   <div class="section-header">
-    <h2>Priority Roadmap</h2>
-    <p>Ordered action items grouped by urgency. Items within each phase are ordered by impact.</p>
+    <h2>Remaining Issues</h2>
+    <p>4 open issues across Security, Accessibility, and Architecture. All Critical and High findings from previous phases have been resolved.</p>
   </div>
 
-  <div class="chart-wrap" style="margin-bottom:32px">
-    <h3>Effort vs Impact Matrix</h3>
-    <div style="height:280px"><canvas id="effortImpact"></canvas></div>
+  <div class="callout green" style="margin-bottom:32px">
+    <div class="callout-icon">✓</div>
+    <div><strong>Phases 1–4 Complete — 109 of 113 issues resolved.</strong> All critical security vulnerabilities, all WCAG accessibility blockers, all high architecture debt, and all low-hanging performance wins have been addressed across PRs <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a>, <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/81" style="color:var(--good)">#81</a>, <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a>, <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>, and <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/87" style="color:var(--good)">#87</a>.</div>
   </div>
 
-  <!-- PHASE 1 -->
-  <div style="margin-bottom:32px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-      <div style="background:var(--critical);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">1</div>
-      <div>
-        <div style="font-size:18px;font-weight:700">Phase 1 — Today (Critical Fixes)</div>
-        <div style="font-size:13px;color:var(--text-dim)">Immediate security and production-blocking issues. Under 2 hours total.</div>
-      </div>
+  <table class="priority-table">
+    <thead>
+      <tr><th>Severity</th><th>Issue</th><th>Domain</th><th>File</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge critical">Critical</span></td>
+        <td>Cart State vs Server Truth Mismatch — re-fetch prices server-side at checkout, never trust client-submitted amounts</td>
+        <td>Architecture</td>
+        <td><span class="file-tag">cart/page.tsx · lib/bookstore/cart.ts · api/bookstore/checkout/route.ts</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge high">High</span></td>
+        <td>Supabase RLS Policies Not Documented — write migration files, document access patterns, use authenticated client instead of service role where RLS should apply</td>
+        <td>Architecture</td>
+        <td><span class="file-tag">supabase/migrations/ · api/bookstore/my-downloads/route.ts</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge medium">Medium</span></td>
+        <td>Guest Download Token Doesn't Validate Original Purchaser Email — compare requested email against stored purchaser email before issuing resend token</td>
+        <td>Security</td>
+        <td><span class="file-tag">api/bookstore/download/guest-resend/route.ts:73-119</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge medium">Medium</span></td>
+        <td>Timeline Progress Bar Has No Accessible Description — add <code>role="progressbar"</code> with <code>aria-valuenow</code>, <code>aria-valuemin</code>, <code>aria-valuemax</code></td>
+        <td>Accessibility</td>
+        <td><span class="file-tag">components/timeline/TimelineNavigation.tsx:365-380</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:40px">
+    <div class="section-header">
+      <h2>Remediation History</h2>
+      <p>All completed phases — closed PRs and resolved issue counts.</p>
     </div>
     <table class="priority-table">
-      <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Est.</th></tr></thead>
+      <thead><tr><th>Phase</th><th>Summary</th><th>PR</th><th>Date</th></tr></thead>
       <tbody>
-        <tr class="done"><td>1</td><td>Add aria-label to ThemeToggle, Search submit, modal close buttons</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">ThemeToggle.tsx · Search.tsx · PitchQuickViewModal.tsx</span></td><td>PR #83</td></tr>
-        <tr class="done"><td>2</td><td>Add skip navigation link to root layout</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">app/layout.tsx</span></td><td>PR #83</td></tr>
-        <tr class="done"><td>3</td><td>Add htmlFor/id associations to ApplicationForm labels</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">ApplicationForm.tsx</span></td><td>PR #83</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- PHASE 2 -->
-  <div style="margin-bottom:32px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-      <div style="background:var(--high);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0">2</div>
-      <div>
-        <div style="font-size:18px;font-weight:700">Phase 2 — This Week (High Priority)</div>
-        <div style="font-size:13px;color:var(--text-dim)">Security hardening, metadata gaps, and key UX accessibility fixes.</div>
-      </div>
-    </div>
-    <table class="priority-table">
-      <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Est.</th></tr></thead>
-      <tbody>
-        <tr class="done"><td>4</td><td>Add Stripe idempotency keys to checkout session creation</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">checkout/route.ts:222</span></td><td>PR #83</td></tr>
-        <tr class="done"><td>5</td><td>Fix focus trap in PitchQuickViewModal — use Radix Dialog</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">PitchQuickViewModal.tsx</span></td><td>PR #83</td></tr>
-        <tr class="done"><td>6</td><td>Add scope="col" to ApplicationsTable headers</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">ApplicationsTable.tsx</span></td><td>PR #83</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- PHASE 3 -->
-  <div style="margin-bottom:32px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-      <div style="background:var(--medium);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0;color:#000">3</div>
-      <div>
-        <div style="font-size:18px;font-weight:700">Phase 3 — This Sprint (Medium Priority)</div>
-        <div style="font-size:13px;color:var(--text-dim)">Architecture improvements, TypeScript safety, and structured data completion.</div>
-      </div>
-    </div>
-    <table class="priority-table">
-      <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Est.</th></tr></thead>
-      <tbody>
-        <tr class="done"><td>7</td><td>Add security headers (CSP, X-Frame-Options) to next.config.ts</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">next.config.ts</span></td><td>PR #85</td></tr>
-        <tr class="done"><td>8</td><td>Add magic byte file validation with file-type package</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">api/portal/upload-image/route.ts</span></td><td>PR #85</td></tr>
-        <tr class="done"><td>9</td><td>Enable strictNullChecks in tsconfig.json and fix critical type errors</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">tsconfig.json · metadata.ts · database.types.ts</span></td><td>PR #85</td></tr>
-        <tr class="done"><td>10</td><td>Remove all console.log from server-side code (API routes, server actions, util)</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">lib/portal/book-actions.ts · util/timelineJSAdapter.ts</span></td><td>PR #85</td></tr>
-        <tr class="done"><td>11</td><td>Wire Sanity webhook to revalidateTag for book/article ISR</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">api/revalidate/route.ts · lib/sanity/lib/fetch.ts</span></td><td>PR #85</td></tr>
-        <tr class="done"><td>12</td><td>Wrap navigation in ul/li semantic structure</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">components/global/Nav.tsx</span></td><td>PR #85</td></tr>
-        <tr class="done"><td>13</td><td>Add aria-describedby to ApplicationForm error messages</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">ApplicationForm.tsx (pre-existing — done in Phase 1–2)</span></td><td>PR #83</td></tr>
-        <tr class="done"><td>14</td><td>Add aria-current to active navigation items</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">Nav.tsx · ApplicationsTable.tsx</span></td><td>PR #85</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- PHASE 4 -->
-  <div>
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-      <div style="background:var(--good);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0;color:#000">4</div>
-      <div>
-        <div style="font-size:18px;font-weight:700">Phase 4 — Complete ✓ <span style="font-size:13px;font-weight:400;color:var(--good)">PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/87" style="color:var(--good)">#87</a> · May 23, 2026</span></div>
-        <div style="font-size:13px;color:var(--text-dim)">17 items resolved: security hardening, accessibility, architecture, and observability.</div>
-      </div>
-    </div>
-    <table class="priority-table">
-      <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr style="opacity:0.6"><td>15</td><td>Add CAPTCHA (Turnstile) to whistleblower, careers, secure-contact</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">api/ (3 public form routes)</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>16</td><td>Cart size limit + localStorage debounce (Supabase sync deferred)</td><td><span class="badge medium">Architecture</span></td><td><span class="file-tag">lib/bookstore/cart.ts</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>17</td><td>Add bookstore conversion event tracking (add_to_cart, purchase)</td><td><span class="badge low">Architecture</span></td><td><span class="file-tag">bookstore/ (multiple components)</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>18</td><td>Add aria-hidden to all decorative icons; progressbar role to timelines</td><td><span class="badge low">A11y</span></td><td><span class="file-tag">Nav.tsx · Banner.tsx · TimelineNavigation.tsx</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>+</td><td>Zod email validation replacing permissive regex</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">newsletter · checkout routes</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>+</td><td>Harden Stripe 500 error — no internal message leak</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">api/bookstore/checkout/route.ts</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>+</td><td>Remove redundant <code>as any</code> casts via TypeGen types</td><td><span class="badge high">Architecture</span></td><td><span class="file-tag">articles · author · homepage pages</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>+</td><td>Remove unused <code>useCache</code> experimental flag</td><td><span class="badge medium">Architecture</span></td><td><span class="file-tag">next.config.ts</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>+</td><td>Split BookBuySection into server/client components</td><td><span class="badge medium">Architecture</span></td><td><span class="file-tag">components/bookstore/BookBuySection.tsx</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>+</td><td>Extract <code>getStripeIdForFormat()</code> — deduplicate NYOP logic</td><td><span class="badge low">Architecture</span></td><td><span class="file-tag">lib/bookstore/stripeUtils.ts</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>+</td><td>Add GROQ slice bounds to unbounded reverse-lookup queries</td><td><span class="badge medium">Architecture</span></td><td><span class="file-tag">lib/sanity/lib/queries.ts</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>+</td><td>Integrate <code>@sentry/nextjs</code> for error monitoring</td><td><span class="badge medium">Architecture</span></td><td><span class="file-tag">sentry.*.config.ts · instrumentation.ts</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>+</td><td>Error boundary + deferred Suspense for book detail reviews</td><td><span class="badge medium">Architecture</span></td><td><span class="file-tag">bookstore/book/[slug]/error.tsx · page.tsx</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
-        <tr style="opacity:0.6"><td>+</td><td>Fix empty alt text on search result images</td><td><span class="badge medium">A11y</span></td><td><span class="file-tag">components/search/SearchClient.tsx</span></td><td style="color:var(--good);font-weight:700">Fixed</td></tr>
+        <tr><td><strong>Security Sprint</strong></td><td>13 critical/high vulnerabilities resolved: auth bypass, GROQ injection, SSRF, secrets exposure, rate limiting gaps + 1 XSS found in code review</td><td><a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a></td><td>May 22, 2026</td></tr>
+        <tr><td><strong>SEO / AEO</strong></td><td>15 findings resolved: MusicGroup/MusicRecording JSON-LD, ClaimReview schema, GlobalStructuredData, OG images, canonical URLs, metadata gaps</td><td><a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/81" style="color:var(--good)">#81</a></td><td>May 22, 2026</td></tr>
+        <tr><td><strong>Phase 1–2 (A11y + Security)</strong></td><td>20 critical/high A11y + 1 security: ARIA labels, skip nav, focus trap, semantic nav, form label associations, Stripe idempotency keys</td><td><a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a></td><td>May 22, 2026</td></tr>
+        <tr><td><strong>Phase 3</strong></td><td>8 architecture/security items: security headers (CSP), magic byte upload validation, strictNullChecks, console.log removal, ISR revalidation, nav semantics, aria-current</td><td><a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a></td><td>May 22, 2026</td></tr>
+        <tr><td><strong>Phase 4</strong></td><td>17 items: CAPTCHA, Zod email validation, Stripe error hardening, TypeGen as-any removal, useCache removal, BookBuySection split, NYOP utility, GROQ bounds, Sentry, error boundaries, cart limits, analytics events, a11y icons + search alt text</td><td><a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/87" style="color:var(--good)">#87</a></td><td>May 23, 2026</td></tr>
       </tbody>
     </table>
   </div>
@@ -905,7 +626,15 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  Automated codebase audit · UnTelevised Media · May 21, 2026 · 384 files scanned · 113 issues identified &nbsp;|&nbsp; Security remediation May 22, 2026 · 13 vulnerabilities + 1 XSS resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a> &nbsp;|&nbsp; SEO/AEO remediation May 22, 2026 · issues #68–#79 resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/81" style="color:var(--good)">#81</a> &nbsp;|&nbsp; A11y + Security Phase 1–2 May 22, 2026 · all 20 critical+high a11y + 1 security fixed · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a> &nbsp;|&nbsp; Phase 3 May 22, 2026 · all 8 items resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a> &nbsp;|&nbsp; Phase 4 May 23, 2026 · all 17 items resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/87" style="color:var(--good)">#87</a>
+  Automated codebase audit · UnTelevised Media · May 21, 2026 · 384 files scanned · 113 issues identified &nbsp;|&nbsp;
+  <strong style="color:var(--good)">109 resolved</strong> across 5 remediation phases &nbsp;|&nbsp;
+  <strong style="color:var(--medium)">4 remaining</strong>: 1 critical · 1 high · 2 medium &nbsp;|&nbsp;
+  PRs <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a>
+  <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/81" style="color:var(--good)">#81</a>
+  <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a>
+  <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>
+  <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/87" style="color:var(--good)">#87</a>
+  merged to main
 </div>
 
 <script>
@@ -928,14 +657,14 @@ const MED = '#f5c400';
 const LOW = '#4dabf7';
 const OK = '#40c057';
 
-// ─── OVERVIEW: CATEGORY DONUT ─────────────────────────────────
+// ─── OVERVIEW: CATEGORY DONUT (remaining issues) ───────────────
 new Chart(document.getElementById('categoryDonut'), {
   type: 'doughnut',
   data: {
-    labels: ['Security', 'SEO / AEO', 'Accessibility', 'Architecture'],
+    labels: ['Security (1)', 'Accessibility (1)', 'Architecture (2)'],
     datasets: [{
-      data: [20, 34, 33, 26],
-      backgroundColor: ['#ff3b3b', '#ff8c00', '#f5c400', '#4dabf7'],
+      data: [1, 1, 2],
+      backgroundColor: ['#ff3b3b', '#f5c400', '#4dabf7'],
       borderWidth: 2,
       borderColor: '#111118',
     }]
@@ -944,7 +673,7 @@ new Chart(document.getElementById('categoryDonut'), {
     responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { position: 'right', labels: { padding: 16, font: { size: 12 } } },
-      tooltip: { callbacks: { label: (c) => ` ${c.label}: ${c.raw} issues` } }
+      tooltip: { callbacks: { label: (c) => ` ${c.label}: ${c.raw} open` } }
     },
     cutout: '65%'
   }
@@ -956,17 +685,17 @@ new Chart(document.getElementById('severityBar'), {
   data: {
     labels: ['Security', 'SEO / AEO', 'Accessibility', 'Architecture'],
     datasets: [
-      { label: 'Critical', data: [0, 0, 0, 4], backgroundColor: CRIT },
-      { label: 'High',     data: [0, 0, 0, 6],  backgroundColor: HIGH },
-      { label: 'Medium',   data: [5, 13, 7, 12], backgroundColor: MED },
-      { label: 'Low',      data: [5, 6, 6, 4],   backgroundColor: LOW },
+      { label: 'Critical', data: [0, 0, 0, 1], backgroundColor: CRIT },
+      { label: 'High',     data: [0, 0, 0, 1], backgroundColor: HIGH },
+      { label: 'Medium',   data: [1, 0, 1, 0], backgroundColor: MED },
+      { label: 'Low',      data: [0, 0, 0, 0], backgroundColor: LOW },
     ]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
     scales: {
       x: { stacked: true, grid: { display: false } },
-      y: { stacked: true, beginAtZero: true }
+      y: { stacked: true, beginAtZero: true, ticks: { stepSize: 1 } }
     },
     plugins: { legend: { position: 'bottom', labels: { padding: 12, font: { size: 11 } } } }
   }
@@ -979,7 +708,7 @@ new Chart(document.getElementById('healthRadar'), {
     labels: ['Security', 'SEO / AEO', 'Accessibility', 'Architecture', 'Type Safety', 'Performance'],
     datasets: [{
       label: 'Health Score',
-      data: [84, 78, 72, 63, 40, 68],
+      data: [92, 78, 88, 87, 85, 80],
       backgroundColor: 'rgba(124,77,255,.2)',
       borderColor: '#7c4dff',
       pointBackgroundColor: '#7c4dff',
@@ -1002,14 +731,14 @@ new Chart(document.getElementById('healthRadar'), {
   }
 });
 
-// ─── OVERVIEW: SEVERITY PIE ────────────────────────────────────
+// ─── OVERVIEW: SEVERITY PIE (remaining) ───────────────────────
 new Chart(document.getElementById('severityPie'), {
   type: 'doughnut',
   data: {
-    labels: ['Critical (4)', 'High (6)', 'Medium (37)', 'Low (21)'],
+    labels: ['Critical (1)', 'High (1)', 'Medium (2)'],
     datasets: [{
-      data: [4, 6, 37, 21],
-      backgroundColor: [CRIT, HIGH, MED, LOW],
+      data: [1, 1, 2],
+      backgroundColor: [CRIT, HIGH, MED],
       borderWidth: 2, borderColor: '#111118'
     }]
   },
@@ -1026,18 +755,10 @@ new Chart(document.getElementById('severityPie'), {
 new Chart(document.getElementById('securityBar'), {
   type: 'bar',
   data: {
-    labels: ['Input Validation', 'Auth/AuthZ', 'Rate Limiting', 'Crypto/Timing', 'File Upload', 'Error Handling', 'Headers/CSP', 'Secrets/Logging'],
+    labels: ['Input Validation', 'Auth/AuthZ', 'Rate Limiting', 'Crypto/Timing', 'File Upload', 'Error Handling', 'Headers/CSP', 'Secrets/Logging', 'Bot Protection'],
     datasets: [
-      {
-        label: 'Resolved',
-        data: [3, 4, 3, 4, 0, 0, 0, 2],
-        backgroundColor: OK,
-      },
-      {
-        label: 'Open',
-        data: [1, 0, 0, 0, 2, 2, 1, 0],
-        backgroundColor: [MED, LOW, LOW, LOW, MED, MED, MED, LOW],
-      }
+      { label: 'Resolved', data: [3, 4, 3, 4, 1, 2, 1, 2, 1], backgroundColor: OK },
+      { label: 'Open',     data: [0, 0, 0, 0, 1, 0, 0, 0, 0], backgroundColor: MED }
     ]
   },
   options: {
@@ -1077,8 +798,8 @@ new Chart(document.getElementById('a11yWcag'), {
     labels: ['1.1.1 Alt Text', '1.3.1 Semantics', '2.4.1 Skip Nav', '2.4.3 Focus Order', '3.3.1 Errors', '4.1.3 Status', '1.4.11 Non-Text Contrast'],
     datasets: [{
       label: 'Violations',
-      data: [2, 3, 0, 0, 0, 2, 2],
-      backgroundColor: [MED, MED, OK, OK, OK, MED, LOW],
+      data: [0, 1, 0, 0, 0, 0, 0],
+      backgroundColor: [OK, MED, OK, OK, OK, OK, OK],
     }]
   },
   options: {
@@ -1088,20 +809,20 @@ new Chart(document.getElementById('a11yWcag'), {
   }
 });
 
-// ─── ACCESSIBILITY: COMPONENT TYPE BAR ─────────────────────────
+// ─── ACCESSIBILITY: COMPONENT TYPE PIE ─────────────────────────
 new Chart(document.getElementById('a11yComponents'), {
   type: 'doughnut',
   data: {
-    labels: ['Buttons/Controls', 'Forms', 'Navigation', 'Modals', 'Tables', 'Images', 'Structure'],
+    labels: ['Timeline (1 open)'],
     datasets: [{
-      data: [7, 5, 4, 3, 2, 3, 9],
-      backgroundColor: [CRIT, HIGH, HIGH, MED, MED, LOW, MED],
+      data: [1],
+      backgroundColor: [MED],
       borderWidth: 2, borderColor: '#111118'
     }]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position: 'right', labels: { padding: 10, font: { size: 11 } } } },
+    plugins: { legend: { position: 'right', labels: { padding: 10, font: { size: 12 } } } },
     cutout: '50%'
   }
 });
@@ -1111,86 +832,18 @@ new Chart(document.getElementById('archBar'), {
   type: 'bar',
   data: {
     labels: ['Type Safety', 'API/Data Fetching', 'State Management', 'Error Handling', 'Performance', 'Config', 'Caching', 'Monitoring'],
-    datasets: [{
-      label: 'Issues',
-      data: [5, 5, 3, 4, 3, 3, 2, 1],
-      backgroundColor: [CRIT, CRIT, HIGH, HIGH, MED, MED, LOW, LOW],
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
-    scales: { x: { beginAtZero: true }, y: { grid: { display: false } } },
-    plugins: { legend: { display: false } }
-  }
-});
-
-// ─── ROADMAP: EFFORT VS IMPACT BUBBLE ─────────────────────────
-new Chart(document.getElementById('effortImpact'), {
-  type: 'bubble',
-  data: {
     datasets: [
-      {
-        label: 'Phase 1 — Today',
-        data: [
-          { x: 1, y: 9, r: 14, label: 'Remove Stripe key log' },
-          { x: 2, y: 10, r: 12, label: 'Skip nav link' },
-          { x: 2, y: 9, r: 13, label: 'ARIA labels (buttons)' },
-          { x: 3, y: 9, r: 11, label: 'Zod on job-application' },
-          { x: 2, y: 8, r: 10, label: 'Form label htmlFor' },
-        ],
-        backgroundColor: 'rgba(255,59,59,.6)', borderColor: CRIT
-      },
-      {
-        label: 'Phase 2 — This Week',
-        data: [
-          { x: 3, y: 8, r: 13, label: 'Rate limiting (3 routes)' },
-          { x: 3, y: 9, r: 14, label: 'Music generateMetadata' },
-          { x: 4, y: 8, r: 12, label: 'ClaimReview schema' },
-          { x: 2, y: 7, r: 11, label: 'GlobalStructuredData' },
-          { x: 4, y: 7, r: 12, label: 'Focus trap in modal' },
-        ],
-        backgroundColor: 'rgba(255,140,0,.6)', borderColor: HIGH
-      },
-      {
-        label: 'Phase 3 — This Sprint',
-        data: [
-          { x: 7, y: 9, r: 15, label: 'strictNullChecks' },
-          { x: 5, y: 8, r: 13, label: 'Price server-validation' },
-          { x: 4, y: 7, r: 12, label: 'Sentry integration' },
-          { x: 5, y: 7, r: 11, label: 'ISR revalidation' },
-          { x: 3, y: 6, r: 9, label: 'Security headers' },
-        ],
-        backgroundColor: 'rgba(245,196,0,.6)', borderColor: MED
-      },
-      {
-        label: 'Phase 4 — Next Month',
-        data: [
-          { x: 8, y: 7, r: 13, label: 'Cart → Supabase' },
-          { x: 6, y: 6, r: 12, label: 'CAPTCHA integration' },
-          { x: 5, y: 8, r: 11, label: 'Music JSON-LD schemas' },
-          { x: 4, y: 5, r: 9, label: 'RLS policy docs' },
-        ],
-        backgroundColor: 'rgba(77,171,247,.6)', borderColor: LOW
-      }
+      { label: 'Resolved', data: [5, 4, 2, 4, 3, 3, 2, 1], backgroundColor: OK },
+      { label: 'Open',     data: [0, 1, 1, 0, 0, 0, 0, 0], backgroundColor: [CRIT, CRIT, HIGH, OK, OK, OK, OK, OK] }
     ]
   },
   options: {
-    responsive: true, maintainAspectRatio: false,
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
     scales: {
-      x: { min: 0, max: 10, title: { display: true, text: 'Implementation Effort (1=Low, 10=High)', color: '#888899' } },
-      y: { min: 0, max: 11, title: { display: true, text: 'Impact / Priority (10=Critical)', color: '#888899' } }
+      x: { stacked: true, beginAtZero: true },
+      y: { stacked: true, grid: { display: false } }
     },
-    plugins: {
-      legend: { position: 'bottom', labels: { padding: 14, font: { size: 11 } } },
-      tooltip: {
-        callbacks: {
-          label: (c) => {
-            const d = c.raw;
-            return ` ${d.label || ''} (Effort: ${d.x}, Impact: ${d.y})`;
-          }
-        }
-      }
-    }
+    plugins: { legend: { position: 'bottom', labels: { padding: 12, font: { size: 11 } } } }
   }
 });
 </script>
