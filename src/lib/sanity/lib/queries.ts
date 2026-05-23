@@ -41,6 +41,7 @@ export const queryBreakingArticles = groq`
     hasEmbeddedVideo
   }
   | order(publishedAt desc)
+  [0..19]
 `;
 
 export const queryPastEvents = groq`
@@ -143,6 +144,7 @@ export const queryAllArticles = groq`
     "correction": correction { type, summary },
   }
   | order(_createdAt desc)
+  [0..99]
 `;
 
 // Music/Lyrics Queries
@@ -217,12 +219,12 @@ export const queryMusicArtistBySlug = groq`
         releaseDate
       },
       trackArt
-    } | order(releaseDate desc),
+    } | order(releaseDate desc) [0..99],
     "albums": *[_type == "album" && (artist._ref == ^._id || ^._id in featuredArtists[]._ref)] {
       ...,
       artist->,
       featuredArtists[]->
-    } | order(releaseDate desc)
+    } | order(releaseDate desc) [0..49]
   }
 `;
 
@@ -326,7 +328,7 @@ export const queryArticleBySlug = groq`
           }
         }
       },
-      relatedArticles[]-> {
+      relatedArticles[0..3]-> {
         _id,
         title,
         "slug": slug.current,
@@ -383,11 +385,11 @@ export const queryAuthorBySlug = groq`
     twitter, instagram, facebook, tiktok, youtube, linkedin, website, email,
     credentials, expertise, sameAs, location, isActive, isLiteraryAuthor,
     tipStripeProductId, tipAmount,
-    'relatedArticles': *[_type == 'article' && author._ref == ^._id] | order(_createdAt desc) {
+    'relatedArticles': *[_type == 'article' && author._ref == ^._id] | order(_createdAt desc) [0..49] {
       _id, title, slug, description, publishedAt, mainImage,
       'categories': categories[]->{ _id, title, slug },
     },
-    'books': *[_type == 'book' && author._ref == ^._id && status in ["published", "out-of-stock"]] | order(publishedAt desc) {
+    'books': *[_type == 'book' && author._ref == ^._id && status in ["published", "out-of-stock"]] | order(publishedAt desc) [0..49] {
       _id, title, slug, status, featured, publishedAt,
       coverImage { asset, alt }, coverImageUrl,
       "genre": genre[]->{ _id, title, slug },
@@ -749,7 +751,7 @@ export const queryFactCheckBySlug = groq`
     },
     sources[] { label, url },
     author-> { name, slug, image },
-    relatedArticles[]-> {
+    relatedArticles[0..3]-> {
       _id, title, slug, mainImage, publishedAt, description
     }
   }

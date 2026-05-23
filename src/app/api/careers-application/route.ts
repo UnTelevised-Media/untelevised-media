@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sanityClient from '@/lib/sanity/lib/client';
+import { verifyCaptcha } from '@/lib/captcha';
 
 // Server-side schema — mirrors jobApplicationSchema without File refinements
 const serverSchema = z.object({
@@ -23,6 +24,12 @@ const serverSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
+
+    const turnstileToken = (formData.get('turnstileToken') as string | null) ?? undefined;
+    const captchaOk = await verifyCaptcha(turnstileToken);
+    if (!captchaOk) {
+      return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 400 });
+    }
 
     const fields = {
       fullName: (formData.get('fullName') as string | null) ?? '',

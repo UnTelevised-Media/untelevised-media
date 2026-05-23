@@ -51,7 +51,7 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
           tabIndex={-1}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={hit.imageUrl} alt='' className='h-20 w-28 object-cover' loading='lazy' />
+          <img src={hit.imageUrl} alt={hit.title} className='h-20 w-28 object-cover' loading='lazy' />
         </Link>
       )}
       <div className='min-w-0 flex-1'>

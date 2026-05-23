@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { withSentryConfig } from '@sentry/nextjs';
 
 const securityHeaders = [
   { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
@@ -15,7 +16,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: blob: https://cdn.sanity.io https://images.pexels.com https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com",
-      "connect-src 'self' https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://vitals.vercel-insights.com",
+      "connect-src 'self' https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://vitals.vercel-insights.com https://*.sentry.io",
       "frame-src 'self' https://js.stripe.com https://hooks.stripe.com",
       "frame-ancestors 'self'",
       "object-src 'none'",
@@ -78,9 +79,6 @@ const nextConfig: NextConfig = {
     // * This is used for Sanity to prevent the client from accessing the Sanity API Read Token
     taint: true,
     // typedRoutes: true, — enable once Turbopack supports it fully
-    // Enables 'use cache' directive + cacheTag()/cacheLife() from next/cache
-    // for fine-grained per-function cache control (used on music pages)
-    useCache: true,
     serverActions: {
       // Default 1 MB limit silently drops book cover and digital file uploads
       bodySizeLimit: '50mb',
@@ -91,4 +89,20 @@ const nextConfig: NextConfig = {
 // Bundle analyzer: run `ANALYZE=true next build` (uses webpack, not Turbopack)
 // To enable: const { default: withBundleAnalyzer } = await import('@next/bundle-analyzer')
 // export default withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig)
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+
+  // Upload a wider set of client files for better stack trace resolution
+  widenClientFileUpload: true,
+
+  // Proxy Sentry requests through /monitoring to bypass ad-blockers
+  tunnelRoute: '/monitoring',
+
+  // Suppress non-CI build output
+  silent: !process.env.CI,
+
+  // Tree-shake Sentry logger statements in production (webpack only)
+  disableLogger: true,
+});

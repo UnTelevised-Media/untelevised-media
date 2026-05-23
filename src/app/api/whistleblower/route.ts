@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { randomUUID } from 'crypto';
 import sanityClient from '@/lib/sanity/lib/client';
 import { checkWhistleblowerRate } from '@/lib/bookstore/ratelimit';
+import { verifyCaptcha } from '@/lib/captcha';
 
 const VALID_CATEGORIES = [
   'corruption',
@@ -31,6 +32,7 @@ const WhistleblowerSchema = z.object({
   contactInfo: z.string().max(1000).trim().optional(),
   isAnonymous: z.boolean().default(true),
   protectionNeeded: z.boolean().default(false),
+  turnstileToken: z.string().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -57,6 +59,11 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data;
+
+    const captchaOk = await verifyCaptcha(data.turnstileToken);
+    if (!captchaOk) {
+      return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 400 });
+    }
 
     // submissionId and submittedAt are always server-generated — never trusted from the client.
     // A client-provided submissionId could be used to collide with or pollute existing records.

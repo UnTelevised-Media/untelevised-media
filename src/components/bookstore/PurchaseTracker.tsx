@@ -1,0 +1,39 @@
+'use client';
+// Fires a GA4 'purchase' event once when a confirmed order loads.
+
+import { useEffect, useRef } from 'react';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+
+export interface GA4Item {
+  item_id: string;
+  item_name: string;
+  item_variant?: string;
+  item_category?: string;
+  price?: number;
+  quantity?: number;
+}
+
+interface Props {
+  sessionId: string;
+  total: number | null;
+  currency?: string;
+  items?: GA4Item[];
+}
+
+export default function PurchaseTracker({ sessionId, total, currency = 'USD', items }: Props) {
+  const { trackEvent } = useConsentAwareTracking();
+  const fired = useRef(false);
+
+  useEffect(() => {
+    if (fired.current || total == null) return;
+    fired.current = true;
+    trackEvent('purchase', {
+      transaction_id: sessionId,
+      value: total,
+      currency,
+      ...(items && items.length > 0 ? { items } : {}),
+    });
+  }, [sessionId, total, currency, items, trackEvent]);
+
+  return null;
+}

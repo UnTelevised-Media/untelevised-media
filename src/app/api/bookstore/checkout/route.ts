@@ -5,6 +5,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { z } from 'zod';
 import { createHash } from 'node:crypto';
 import { auth } from '@clerk/nextjs/server';
 import { client as sanityReadClient } from '@/lib/sanity/lib/client';
@@ -113,9 +114,8 @@ export async function POST(req: NextRequest) {
 
     // Validate gift options if present
     const gift: GiftOptions | undefined = body.giftOptions;
-    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (gift) {
-      if (!gift.recipientEmail || !EMAIL_RE.test(gift.recipientEmail)) {
+      if (!gift.recipientEmail || !z.string().email().safeParse(gift.recipientEmail).success) {
         return NextResponse.json(
           { error: 'Valid recipient email required for gift' },
           { status: 400 }
@@ -266,8 +266,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ url: session.url });
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'Checkout session creation failed';
-    console.error('[shop/checkout]', message);
-    return NextResponse.json({ error: message }, { status: 500 });
+    console.error('[shop/checkout]', err instanceof Error ? err.message : err);
+    return NextResponse.json(
+      { error: 'Unable to create checkout session. Please try again.' },
+      { status: 500 }
+    );
   }
 }

@@ -2,6 +2,7 @@
 // Book detail / buy page — cover, description, format selector, buy CTA, author bio.
 
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -231,24 +232,31 @@ interface BookReview {
   submittedAt: string;
 }
 
+async function ReviewsSection({ slug }: { slug: string }) {
+  const reviews = await sanityFetch<BookReview[]>({
+    query: queryApprovedReviewsByBookSlug,
+    params: { slug },
+    tags: ['bookReview'],
+  });
+  return (
+    <>
+      <BookReviews reviews={reviews ?? []} bookSlug={slug} />
+      <ReviewForm bookSlug={slug} />
+    </>
+  );
+}
+
 export default async function BookDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [book, reviews] = await Promise.all([
-    sanityFetch<SanityBook | null>({
-      query: queryBookBySlug,
-      params: { slug },
-      tags: ['book'],
-    }),
-    sanityFetch<BookReview[]>({
-      query: queryApprovedReviewsByBookSlug,
-      params: { slug },
-      tags: ['bookReview'],
-    }),
-  ]);
+  const book = await sanityFetch<SanityBook | null>({
+    query: queryBookBySlug,
+    params: { slug },
+    tags: ['book'],
+  });
 
   if (!book || book.status === 'discontinued') notFound();
 
@@ -270,7 +278,7 @@ export default async function BookDetailPage({
     <>
       <script
         type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: buildProductJsonLd(book, reviews ?? []) }}
+        dangerouslySetInnerHTML={{ __html: buildProductJsonLd(book, []) }}
       />
       <main className='mx-auto max-w-7xl px-4 py-8 sm:px-6'>
         {/* Breadcrumb */}
@@ -436,11 +444,18 @@ export default async function BookDetailPage({
               </div>
             )}
 
-            {/* Reader reviews */}
-            <BookReviews reviews={reviews ?? []} bookSlug={slug} />
-
-            {/* Review submission form */}
-            <ReviewForm bookSlug={slug} />
+            {/* Reader reviews — deferred so a reviews fetch failure won't break the buy section */}
+            <Suspense
+              fallback={
+                <div className='animate-pulse space-y-3 py-4'>
+                  {[1, 2].map((i) => (
+                    <div key={i} className='h-20 rounded bg-slate-100 dark:bg-slate-800' />
+                  ))}
+                </div>
+              }
+            >
+              <ReviewsSection slug={slug} />
+            </Suspense>
           </div>
         </div>
       </main>

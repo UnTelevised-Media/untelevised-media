@@ -4,6 +4,8 @@
 // Separate from the main UnTelevised news newsletter.
 
 import { useState } from 'react';
+import * as Sentry from '@sentry/nextjs';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 
 interface Props {
   source?: string;
@@ -15,6 +17,7 @@ export default function BookstoreNewsletter({ source = 'bookstore-home' }: Props
   const [email, setEmail] = useState('');
   const [state, setState] = useState<State>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const { trackEvent } = useConsentAwareTracking();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,12 +34,16 @@ export default function BookstoreNewsletter({ source = 'bookstore-home' }: Props
       });
       const data = (await res.json()) as { ok?: boolean; alreadySubscribed?: boolean; error?: string };
       if (!res.ok || !data.ok) {
-        setErrorMsg(data.error ?? 'Something went wrong — please try again.');
+        const msg = data.error ?? 'Something went wrong — please try again.';
+        Sentry.captureMessage(msg, { level: 'error', extra: { source } });
+        setErrorMsg(msg);
         setState('error');
         return;
       }
+      trackEvent('newsletter_signup', { source, already_subscribed: data.alreadySubscribed });
       setState('success');
-    } catch {
+    } catch (err) {
+      Sentry.captureException(err, { extra: { source } });
       setErrorMsg('Network error — please try again.');
       setState('error');
     }

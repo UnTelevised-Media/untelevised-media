@@ -38,7 +38,7 @@ const Banner = () => {
   return (
     <section className='relative overflow-hidden bg-gradient-to-br from-slate-100 via-slate-200 to-slate-100 py-4 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900'>
       {/* Animated Background Elements */}
-      <div className='absolute inset-0'>
+      <div className='absolute inset-0' aria-hidden='true'>
         {/* Grid Pattern */}
         <div className='bg-[url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23dc2626" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")] absolute inset-0 opacity-40' />
 
@@ -71,7 +71,7 @@ const Banner = () => {
                 <span className='bg-gradient-to-r from-untele to-red-400 bg-clip-text text-2xl font-normal text-transparent sm:text-3xl lg:text-4xl'>
                   Media
                 </span>
-                <div className='flex space-x-1'>
+                <div className='flex space-x-1' aria-hidden='true'>
                   <div
                     className='h-2 w-2 animate-bounce rounded-full bg-untele'
                     style={{ animationDelay: '0s' }}
@@ -121,19 +121,19 @@ const Banner = () => {
               {/* Stats Row - Attached to Ticker */}
               <div className='mb-2 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400'>
                 <div className='flex items-center space-x-1'>
-                  <CalendarIcon className='h-3 w-3 text-untele' />
+                  <CalendarIcon className='h-3 w-3 text-untele' aria-hidden='true' />
                   <span>{currentDate}</span>
                 </div>
                 <div className='flex items-center space-x-1'>
-                  <ClockIcon className='h-3 w-3 text-untele' />
+                  <ClockIcon className='h-3 w-3 text-untele' aria-hidden='true' />
                   <span>{currentTime}</span>
                 </div>
                 <div className='flex items-center space-x-1'>
-                  <GlobeAltIcon className='h-3 w-3 text-untele' />
+                  <GlobeAltIcon className='h-3 w-3 text-untele' aria-hidden='true' />
                   <span>Global Coverage</span>
                 </div>
                 <div className='flex items-center space-x-1'>
-                  <UsersIcon className='h-3 w-3 text-untele' />
+                  <UsersIcon className='h-3 w-3 text-untele' aria-hidden='true' />
                   <span>Independent Reporting</span>
                 </div>
               </div>

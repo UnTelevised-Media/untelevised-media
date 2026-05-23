@@ -4,6 +4,7 @@
 
 import React, { useState } from 'react';
 import { Shield, Lock, Eye, AlertTriangle } from 'lucide-react';
+import { TurnstileWidget } from '@/components/global/TurnstileWidget';
 
 export default function SecureContactPage() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ export default function SecureContactPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -42,6 +44,7 @@ export default function SecureContactPage() {
         body: JSON.stringify({
           ...formData,
           submittedAt: new Date().toISOString(),
+          ...(captchaToken ? { turnstileToken: captchaToken } : {}),
         }),
       });
 
@@ -311,6 +314,12 @@ export default function SecureContactPage() {
                 </div>
               </div>
             </div>
+
+            <TurnstileWidget
+              onSuccess={setCaptchaToken}
+              onExpire={() => setCaptchaToken(null)}
+              onError={() => setCaptchaToken(null)}
+            />
 
             {/* Submit Button */}
             <button

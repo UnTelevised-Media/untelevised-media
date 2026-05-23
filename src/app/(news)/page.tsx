@@ -169,19 +169,16 @@ export default async function HomePage() {
                 >
                   <div className='aspect-video overflow-hidden'>
                     <Image
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      src={urlForImage(article.mainImage as any)?.url() ?? ''}
+                      src={urlForImage(article.mainImage)?.url() ?? ''}
                       alt={article.title}
                       width={800}
                       height={450}
                       sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                       className='object-cover transition-transform group-hover:scale-105'
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      {...(urlForImage(article.mainImage as any)
+                      {...(urlForImage(article.mainImage)
                         ? {
                             placeholder: 'blur' as const,
-                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                            blurDataURL: urlForImage(article.mainImage as any)!.width(20).blur(10).url(),
+                            blurDataURL: urlForImage(article.mainImage)!.width(20).blur(10).url(),
                           }
                         : {})}
                     />

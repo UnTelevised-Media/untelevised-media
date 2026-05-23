@@ -5,6 +5,7 @@
 // Duplicate email check: rejects with 409 if already subscribed.
 
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import { writeClient } from '@/lib/sanity/lib/write-client';
 import { client } from '@/lib/sanity/lib/client';
 import { makeRatelimiter } from '@/lib/bookstore/ratelimit';
@@ -18,8 +19,6 @@ function getIp(req: NextRequest): string {
     'unknown'
   );
 }
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: NextRequest) {
   if (newsletterLimiter) {
@@ -42,7 +41,7 @@ export async function POST(req: NextRequest) {
   const email = (body.email ?? '').trim().toLowerCase();
   const source = body.source ?? 'bookstore-home';
 
-  if (!email || !EMAIL_RE.test(email)) {
+  if (!email || !z.string().email().safeParse(email).success) {
     return NextResponse.json({ error: 'Valid email address required' }, { status: 400 });
   }
 
