@@ -2,13 +2,21 @@
 // src/app/(user)/bookstore/wishlist/page.tsx
 // Book wishlist page — reads from useWishlist hook (local + Sanity).
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useWishlist } from '@/hooks/useWishlist';
 import WishlistButton from '@/components/bookstore/WishlistButton';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 
 export default function WishlistPage() {
   const { wishlist, loading, ready } = useWishlist();
+  const { trackEvent } = useConsentAwareTracking();
+
+  useEffect(() => {
+    if (!ready || loading) return;
+    trackEvent('view_wishlist', { wishlist_item_count: wishlist.length });
+  }, [ready, loading, wishlist.length, trackEvent]);
 
   return (
     <main className='mx-auto max-w-7xl px-4 py-8 sm:px-6'>

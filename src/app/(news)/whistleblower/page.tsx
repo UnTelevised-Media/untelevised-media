@@ -5,6 +5,7 @@
 import React, { useState } from 'react';
 import { Eye, Shield, Lock, AlertTriangle, FileText } from 'lucide-react';
 import { TurnstileWidget } from '@/components/global/TurnstileWidget';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 
 export default function WhistleblowerPage() {
   const [formData, setFormData] = useState({
@@ -26,6 +27,7 @@ export default function WhistleblowerPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submissionId, setSubmissionId] = useState<string>('');
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const { trackEvent } = useConsentAwareTracking();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -61,6 +63,12 @@ export default function WhistleblowerPage() {
       });
 
       if (response.ok) {
+        trackEvent('whistleblower_submitted', {
+          category: formData.category,
+          severity: formData.severity,
+          is_anonymous: formData.isAnonymous,
+          protection_needed: formData.protectionNeeded,
+        });
         setSubmitStatus('success');
         setSubmissionId(newSubmissionId);
         setFormData({
