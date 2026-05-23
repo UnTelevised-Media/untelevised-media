@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { SanityBook, SanityBookFormat, CheckoutPayload, GiftOptions } from '@/lib/bookstore/types';
+import { getStripeIdForFormat } from '@/lib/bookstore/stripeUtils';
 
 interface Props {
   book: SanityBook;
@@ -27,11 +28,12 @@ export default function BuyNowButton({
 
   const handleBuyNow = async () => {
     const isNyop = !!format.nameYourPrice;
-    if (!isNyop && !format.stripePriceId) {
+    const stripeId = getStripeIdForFormat(format);
+    if (!stripeId) {
       setError('Not yet available for direct purchase');
       return;
     }
-    if (isNyop && (!format.stripeProductId || !customPrice || customPrice < 0.5)) {
+    if (isNyop && (!customPrice || customPrice < 0.5)) {
       setError('Please enter a valid amount');
       return;
     }
@@ -41,8 +43,7 @@ export default function BuyNowButton({
     const payload: CheckoutPayload = {
       items: [
         {
-          // NYOP uses product ID so checkout route can build price_data
-          stripePriceId: isNyop ? (format.stripeProductId ?? '') : (format.stripePriceId ?? ''),
+          stripePriceId: stripeId,
           quantity: 1,
           sanityBookId: book._id,
           formatType: format.formatType,

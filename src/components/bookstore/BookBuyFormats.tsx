@@ -4,6 +4,7 @@
 
 import { useState, useEffect } from 'react';
 import type { SanityBook, SanityBookFormat, GiftOptions } from '@/lib/bookstore/types';
+import { getStripeIdForFormat } from '@/lib/bookstore/stripeUtils';
 import AddToCartButton from './AddToCartButton';
 import BuyNowButton from './BuyNowButton';
 import GiftToggle from './GiftToggle';
@@ -123,7 +124,7 @@ export default function BookBuyFormats({ book }: Props) {
                   {!outOfStock && !isNyop && (
                     <div className='flex flex-wrap gap-2'>
                       {!giftOptions && <AddToCartButton book={book} format={format} />}
-                      {format.stripePriceId && (
+                      {getStripeIdForFormat(format) && (
                         <BuyNowButton
                           book={book}
                           format={format}
@@ -180,7 +181,7 @@ export default function BookBuyFormats({ book }: Props) {
                           disabled={!nyopValid || nyopRaw === ''}
                         />
                       )}
-                      {format.stripeProductId && (
+                      {getStripeIdForFormat(format) && (
                         <BuyNowButton
                           book={book}
                           format={format}
