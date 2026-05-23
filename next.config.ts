@@ -16,7 +16,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: blob: https://cdn.sanity.io https://images.pexels.com https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com",
-      "connect-src 'self' https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://vitals.vercel-insights.com",
+      "connect-src 'self' https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://vitals.vercel-insights.com https://*.sentry.io",
       "frame-src 'self' https://js.stripe.com https://hooks.stripe.com",
       "frame-ancestors 'self'",
       "object-src 'none'",
@@ -90,12 +90,19 @@ const nextConfig: NextConfig = {
 // To enable: const { default: withBundleAnalyzer } = await import('@next/bundle-analyzer')
 // export default withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig)
 export default withSentryConfig(nextConfig, {
-  silent: !process.env.CI,
   org: process.env.SENTRY_ORG,
   project: process.env.SENTRY_PROJECT,
   authToken: process.env.SENTRY_AUTH_TOKEN,
-  // Upload source maps only in CI/production to avoid local noise
-  sourcemaps: { disable: !process.env.CI },
-  // Automatically tree-shake Sentry logger messages in production
+
+  // Upload a wider set of client files for better stack trace resolution
+  widenClientFileUpload: true,
+
+  // Proxy Sentry requests through /monitoring to bypass ad-blockers
+  tunnelRoute: '/monitoring',
+
+  // Suppress non-CI build output
+  silent: !process.env.CI,
+
+  // Tree-shake Sentry logger statements in production (webpack only)
   disableLogger: true,
 });
