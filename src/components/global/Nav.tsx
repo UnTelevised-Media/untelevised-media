@@ -131,7 +131,7 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
           {/* Mobile Categories - Improved Layout */}
           <div className='py-3'>
             <div className='mb-2 flex items-center space-x-2'>
-              <div className='h-1.5 w-1.5 animate-pulse rounded-full bg-untele' />
+              <div className='h-1.5 w-1.5 animate-pulse rounded-full bg-untele' aria-hidden='true' />
               <span className='text-xs font-medium text-slate-600 dark:text-slate-400'>
                 Categories
               </span>
