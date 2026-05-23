@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     tags: ['factCheck'],
   });
   if (!fc) return {};
-  return buildFactCheckMetadata(fc as FactCheck, slug);
+  return buildFactCheckMetadata(fc, slug);
 }
 
 export default async function FactCheckPage({ params }: Props) {

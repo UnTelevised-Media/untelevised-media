@@ -4,6 +4,29 @@
 import type { Metadata } from 'next';
 import urlForImage from './urlForImage';
 
+// Local type aliases for Sanity document shapes not yet covered by TypeGen.
+// Update these when running `sanity typegen generate` adds the matching schemas.
+type BreakingArticle = {
+  heroImage?: unknown;
+  mainImage?: unknown;
+  title?: string;
+  summary?: string;
+  description?: string;
+  excerpt?: string;
+  author?: { name?: string } | null;
+  publishedAt?: string;
+  updatedAt?: string;
+};
+
+type FactCheck = {
+  mainImage?: unknown;
+  title?: string;
+  ratingExplanation?: string;
+  description?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+};
+
 const BASE_URL = 'https://www.untelevised.media';
 const SITE_NAME = 'UnTelevised Media';
 export const TWITTER_HANDLE = '@untelevised';
