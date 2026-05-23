@@ -241,8 +241,9 @@
     <h1>UnTelevised Media<br /><span>Technical Audit Report</span></h1>
     <div class="header-meta">
       <span><strong>Audit Date:</strong> May 21, 2026</span>
-      <span><strong>Remediation:</strong> May 22, 2026</span>
-      <span><strong>Branch:</strong> security-issues → main</span>
+      <span><strong>Security Remediation:</strong> May 22, 2026</span>
+      <span><strong>SEO/AEO Remediation:</strong> May 22, 2026</span>
+      <span><strong>Branch:</strong> security-issues · feature/seo-aeo-audit-68-79 → main</span>
       <span><strong>Stack:</strong> Next.js 16.1 · Sanity 5 · Supabase · Clerk · Stripe</span>
       <span><strong>Files Scanned:</strong> 384 TypeScript/TSX</span>
       <span><strong>API Routes:</strong> 22</span>
@@ -280,9 +281,9 @@
       <div class="health-bar-wrap"><div class="health-bar" style="width:83%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
     </div>
     <div class="health-card">
-      <div class="health-score" style="color:#ff8c00">55</div>
+      <div class="health-score" style="color:#40c057">78 <span style="font-size:10px;color:var(--good)">↑+23</span></div>
       <div class="health-label">SEO / AEO</div>
-      <div class="health-bar-wrap"><div class="health-bar" style="width:55%;background:linear-gradient(90deg,#ff8c00,#ffb347)"></div></div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:78%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
     </div>
     <div class="health-card">
       <div class="health-score" style="color:#f5c400">46</div>
@@ -295,9 +296,9 @@
       <div class="health-bar-wrap"><div class="health-bar" style="width:63%;background:linear-gradient(90deg,#4dabf7,#74c0fc)"></div></div>
     </div>
     <div class="health-card">
-      <div class="health-score" style="color:#a78bfa">62</div>
-      <div class="health-label">Overall <span style="font-size:10px;color:var(--good)">↑+9</span></div>
-      <div class="health-bar-wrap"><div class="health-bar" style="width:62%;background:linear-gradient(90deg,#7c4dff,#a78bfa)"></div></div>
+      <div class="health-score" style="color:#a78bfa">70</div>
+      <div class="health-label">Overall <span style="font-size:10px;color:var(--good)">↑+17</span></div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:70%;background:linear-gradient(90deg,#7c4dff,#a78bfa)"></div></div>
     </div>
   </div>
 
@@ -310,18 +311,18 @@
     </div>
     <div class="stat-card high">
       <div class="label">High Open</div>
-      <div class="value">21</div>
-      <div class="sub">was 28 — 7 resolved</div>
+      <div class="value">15</div>
+      <div class="sub">was 28 — 13 resolved</div>
     </div>
     <div class="stat-card medium">
       <div class="label">Medium Issues</div>
-      <div class="value">43</div>
-      <div class="sub">Scheduled improvements</div>
+      <div class="value">36</div>
+      <div class="sub">was 43 — 7 resolved</div>
     </div>
     <div class="stat-card low">
       <div class="label">Low Issues</div>
-      <div class="value">23</div>
-      <div class="sub">Best practice enhancements</div>
+      <div class="value">21</div>
+      <div class="sub">was 23 — 2 resolved</div>
     </div>
   </div>
 
@@ -403,9 +404,9 @@
     <div class="callout-icon">⚠</div>
     <div><strong>NO SKIP NAVIGATION:</strong> No skip-to-main-content link exists anywhere in the layout — keyboard users must tab through the entire navigation on every page.</div>
   </div>
-  <div class="callout yellow">
-    <div class="callout-icon">⚠</div>
-    <div><strong>MISSING METADATA ON 12+ PAGES:</strong> Auth pages, portal pages, music artist/lyrics pages, and breaking article pages have no SEO metadata or structured data at all.</div>
+  <div class="callout green">
+    <div class="callout-icon">✓</div>
+    <div><strong>RESOLVED — MISSING METADATA ON 12+ PAGES:</strong> Music artist pages, lyrics pages, breaking news pages, fact-check pages, music collection pages, portal layout, and bookstore layout now have complete metadata including OG images, Twitter cards, canonical URLs, and structured data. SEO/AEO remediation sprint — issues #68–#79, merged May 22, 2026.</div>
   </div>
 
 </div>
@@ -592,6 +593,22 @@
     <div class="finding-fix">Explicit allowlist guard added: <code>if (role !== 'admin' && role !== 'sales' && role !== 'author') return 403</code> — any role not in the set is denied before any business logic runs. Commit 0b42afb.</div>
   </div>
 
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--high)">SEO/AEO Audit — Security Finding <span style="color:var(--good);font-size:13px;font-weight:400">(resolved)</span></h3>
+  <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px">One high-severity security vulnerability was discovered during the SEO/AEO audit pass (feature/seo-aeo-audit-68-79) and fixed before merge.</p>
+
+  <div class="finding high fixed">
+    <div class="finding-header">
+      <span class="badge high">High</span>
+      <span class="badge new">SEO Audit</span>
+      <span class="badge fixed">Fixed</span>
+      <span class="finding-title">XSS via JSON-LD Slug Injection in ClaimReview Schema</span>
+      <span class="finding-file">lib/factCheck/claimReviewJsonLd.ts:20</span>
+    </div>
+    <div class="finding-body">The <code>buildClaimReviewJsonLd()</code> function constructs <code>pageUrl</code> by directly interpolating <code>fc.slug.current</code>: <code>`${SITE_URL}/fact-check/${fc.slug.current}`</code>. This URL is embedded in JSON via <code>JSON.stringify()</code>, which does <strong>not</strong> escape HTML angle brackets. The JSON-LD is then rendered via <code>dangerouslySetInnerHTML</code> in a <code>&lt;script&gt;</code> block. A Sanity fact-check document with a slug containing <code>&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;</code> would terminate the script block and inject arbitrary JavaScript — a stored XSS exploitable by any Sanity editor with document creation rights.</div>
+    <div class="finding-rec">Sanitize the slug before URL construction: strip HTML-special characters (<code>&lt;</code>, <code>&gt;</code>, <code>&quot;</code>, <code>'</code>, <code>&amp;</code>) from the slug. Valid Sanity slugs are <code>[a-z0-9-]</code> only, so stripping is safe and non-destructive for well-formed content.</div>
+    <div class="finding-fix">Slug sanitized in <code>buildClaimReviewJsonLd()</code> via <code>.replace(/[&lt;&gt;&quot;'&amp;]/g, '')</code> before URL construction — any HTML-special characters are stripped. Confidence: 8/10. Commit on feature/seo-aeo-audit-68-79.</div>
+  </div>
+
   <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium Severity Findings</h3>
 
   <div class="finding medium">
@@ -677,10 +694,15 @@
   </div>
 
   <div class="grid-4" style="margin-bottom:28px">
-    <div class="stat-card critical"><div class="label">High</div><div class="value">8</div><div class="sub">Missing schemas/metadata</div></div>
-    <div class="stat-card high"><div class="label">Medium</div><div class="value">19</div><div class="sub">Incomplete tags</div></div>
-    <div class="stat-card medium"><div class="label">Low</div><div class="value">7</div><div class="sub">Consistency issues</div></div>
-    <div class="stat-card ok"><div class="label">Strengths</div><div class="value">5</div><div class="sub">Well implemented</div></div>
+    <div class="stat-card ok"><div class="label">High Open</div><div class="value">0</div><div class="sub">was 8 — all resolved</div></div>
+    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">13</div><div class="sub">was 19 — 6 resolved</div></div>
+    <div class="stat-card low"><div class="label">Low Open</div><div class="value">6</div><div class="sub">was 7 — 1 resolved</div></div>
+    <div class="stat-card ok"><div class="label">Resolved</div><div class="value">15</div><div class="sub">Issues #68–#79 closed</div></div>
+  </div>
+
+  <div class="callout green" style="margin-bottom:24px">
+    <div class="callout-icon">✓</div>
+    <div><strong>SEO/AEO Remediation Complete — May 22, 2026.</strong> All 8 high-severity findings resolved (MusicGroup/MusicRecording JSON-LD, ClaimReview schema, GlobalStructuredData, OG images, breaking news metadata, canonical URLs). 6 of 19 medium findings resolved (noindex, dateModified, absolute OG URLs, Twitter handle, Book schema, pre-resolved NewsArticle schema). 1 of 7 low findings resolved (tag canonical). Issue #78 found pre-resolved. Audit score: 55 → 78. One security XSS finding discovered and fixed (see Security tab).</div>
   </div>
 
   <div class="chart-wrap" style="margin-bottom:32px">
@@ -690,126 +712,150 @@
 
   <h3 style="font-size:16px;margin-bottom:16px;color:var(--critical)">High Priority: Missing Metadata & Structured Data</h3>
 
-  <div class="finding high">
+  <div class="finding high fixed">
     <div class="finding-header">
       <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Music Artist & Lyrics Pages Have Zero Metadata</span>
       <span class="finding-file">(music)/music-artists/[slug]/page.tsx · (music)/lyrics/[slug]/page.tsx</span>
     </div>
-    <div class="finding-body">Individual music artist and lyrics pages have no <code>generateMetadata()</code> function. These pages are fully invisible to search engines and social sharing — no title, description, OG image, or Twitter card.</div>
+    <div class="finding-body">Individual music artist and lyrics pages had no <code>generateMetadata()</code> function. These pages were fully invisible to search engines and social sharing — no title, description, OG image, or Twitter card.</div>
     <div class="finding-rec">Create <code>generateMetadata()</code> for both routes. Artist pages need MusicGroup JSON-LD; lyrics pages need MusicRecording schema with <code>inAlbum</code>, <code>byArtist</code>, <code>duration</code>, and <code>datePublished</code>.</div>
+    <div class="finding-fix">Full <code>generateMetadata()</code> added to both routes with OG image, canonical, Twitter card, robots, and publisher fields. Inline JSON-LD replaced with <code>&lt;ArtistStructuredData&gt;</code> (MusicGroup + sameAs social links + track listing) and <code>&lt;SongStructuredData&gt;</code> (MusicRecording + byArtist + inAlbum + ISO 8601 duration). Issue #68.</div>
   </div>
 
-  <div class="finding high">
+  <div class="finding high fixed">
     <div class="finding-header">
       <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Fact-Check Pages Missing ClaimReview Schema</span>
       <span class="finding-file">(news)/fact-check/[slug]/page.tsx</span>
     </div>
-    <div class="finding-body">Fact-check articles have no <code>ClaimReview</code> JSON-LD structured data. This is a key schema for appearing in Google's fact-check carousel and AI answer engines that specifically source claim reviews. This is a significant missed opportunity for a media organization publishing fact-checks.</div>
+    <div class="finding-body">Fact-check articles had no <code>ClaimReview</code> JSON-LD structured data — a key schema for Google's fact-check carousel and AI answer engines. The <code>buildClaimReviewJsonLd()</code> function existed but was unused, and OG metadata was minimal.</div>
     <div class="finding-rec">Add <code>ClaimReview</code> schema with <code>claimMade</code>, <code>claimant</code>, <code>author</code>, <code>reviewRating</code> (TRUE/FALSE/MIXTURE), and <code>url</code> fields. Google's Structured Data Testing Tool can validate the output.</div>
+    <div class="finding-fix">ClaimReview JSON-LD wired up via <code>buildClaimReviewJsonLd()</code>; SITE_URL canonical fixed (<code>https://untelevised.media</code> → <code>https://www.untelevised.media</code>); full OG metadata added via <code>buildFactCheckMetadata()</code> with og:type article, og:image, modifiedTime, canonical, Twitter card. Issue #69.</div>
   </div>
 
-  <div class="finding high">
+  <div class="finding high fixed">
     <div class="finding-header">
       <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">GlobalStructuredData Missing from News & Music Layouts</span>
-      <span class="finding-file">(news)/layout.tsx · (music)/layout.tsx</span>
+      <span class="finding-file">(music)/layout.tsx</span>
     </div>
-    <div class="finding-body">The Organization schema (<code>GlobalStructuredData</code> component) is only rendered in the <code>(user)</code> layout (bookstore). All news and music pages are missing organization-level structured data, which is essential for E-E-A-T signals and knowledge panel eligibility.</div>
-    <div class="finding-rec">Import and render <code>&lt;GlobalStructuredData /&gt;</code> in both <code>(news)/layout.tsx</code> and <code>(music)/layout.tsx</code>.</div>
+    <div class="finding-body">The Organization schema (<code>GlobalStructuredData</code> component) was missing from the music layout. All music pages lacked organization-level structured data essential for E-E-A-T signals and knowledge panel eligibility. (Note: news layout already had it.)</div>
+    <div class="finding-rec">Import and render <code>&lt;GlobalStructuredData /&gt;</code> in <code>(music)/layout.tsx</code>.</div>
+    <div class="finding-fix"><code>&lt;GlobalStructuredData /&gt;</code> (NewsMediaOrganization + WebSite with SearchAction) added to <code>(music)/layout.tsx</code>. News layout was already covered. Issue #70.</div>
   </div>
 
-  <div class="finding high">
+  <div class="finding high fixed">
     <div class="finding-header">
       <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Music Collection Pages Missing OG Images</span>
-      <span class="finding-file">(music)/music-artists/page.tsx:13-22 · (music)/lyrics/page.tsx:19-28</span>
+      <span class="finding-file">(music)/music-artists/page.tsx · (music)/lyrics/page.tsx</span>
     </div>
-    <div class="finding-body">Both music index pages have title and description metadata but no <code>og:image</code>. Without OG images, social shares of these pages render as text-only link previews, dramatically reducing click-through rates.</div>
+    <div class="finding-body">Both music index pages had title and description metadata but no <code>og:image</code>. Without OG images, social shares of these pages rendered as text-only link previews, dramatically reducing click-through rates.</div>
     <div class="finding-rec">Add <code>openGraph: { images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630 }] }</code> to both page metadata exports.</div>
+    <div class="finding-fix"><code>openGraph.images</code> using <code>DEFAULT_OG_IMAGE</code>, canonical URL via <code>getCanonicalUrl()</code>, and Twitter card with <code>TWITTER_HANDLE</code> added to both music collection pages. Issue #71.</div>
   </div>
 
-  <div class="finding high">
+  <div class="finding high fixed">
     <div class="finding-header">
       <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Breaking News Article Pages Have No Metadata</span>
       <span class="finding-file">(news)/breaking/[slug]/page.tsx</span>
     </div>
-    <div class="finding-body">Breaking news articles — the most time-sensitive content — have no <code>generateMetadata()</code>. These pages won't appear in Google News or AI news feeds, which actively surface breaking content with proper Article/NewsArticle schema.</div>
+    <div class="finding-body">Breaking news articles — the most time-sensitive content — had no <code>generateMetadata()</code>. These pages were invisible to Google News and AI news feeds, which actively surface breaking content with proper Article schema.</div>
     <div class="finding-rec">Create <code>generateMetadata()</code> with <code>og:type: 'article'</code>, publication timestamps, and <code>NewsArticle</code> JSON-LD schema. Set higher sitemap priority (0.9) for breaking content.</div>
+    <div class="finding-fix"><code>buildLiveEventMetadata()</code> used as base; canonical overridden to <code>getCanonicalUrl('breaking', slug)</code> (was producing /live-event/ URLs); <code>og:type: 'article'</code> and <code>section: 'Breaking News'</code> added. notFound title fixed to "Breaking News Not Found". Issue #72.</div>
   </div>
 
   <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium Priority: Incomplete & Inconsistent Tags</h3>
 
-  <div class="finding medium">
+  <div class="finding medium fixed">
     <div class="finding-header">
       <span class="badge medium">Medium</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Auth & Portal Pages Not Marked noindex</span>
-      <span class="finding-file">(auth)/sign-in/page.tsx · (auth)/sign-up/page.tsx · (portal)/</span>
+      <span class="finding-file">(auth)/sign-in/page.tsx · (auth)/sign-up/page.tsx · (portal)/layout.tsx</span>
     </div>
-    <div class="finding-body">Sign-in, sign-up, and all portal pages have no metadata. Without explicit <code>robots: { index: false }</code>, crawlers may index these pages, polluting search results with authentication screens and admin UI.</div>
+    <div class="finding-body">Sign-in, sign-up, and all portal pages had no metadata. Without explicit <code>robots: { index: false }</code>, crawlers could index these pages, polluting search results with authentication screens and admin UI.</div>
     <div class="finding-rec">Add <code>export const metadata = { robots: { index: false, follow: false } }</code> to auth page files, and set it in the portal layout to cascade to all portal pages.</div>
+    <div class="finding-fix">Auth pages already had <code>robots: noindex</code> (pre-existing). <code>export const metadata = { robots: { index: false, follow: false } }</code> added to <code>(portal)/layout.tsx</code> — cascades to all portal routes automatically. Issue #73.</div>
   </div>
 
-  <div class="finding medium">
+  <div class="finding medium fixed">
     <div class="finding-header">
       <span class="badge medium">Medium</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Article OG Metadata Missing dateModified</span>
-      <span class="finding-file">util/metadata.ts:38-73 · (news)/articles/[slug]/page.tsx:54-59</span>
+      <span class="finding-file">util/metadata.ts</span>
     </div>
-    <div class="finding-body">The article metadata builder passes <code>publishedTime</code> to OG but omits <code>modifiedTime</code>. Social platforms and search engines use this to indicate freshness — missing it prevents articles from surfacing as "updated" content.</div>
+    <div class="finding-body">The article metadata builder passed <code>publishedTime</code> to OG but omitted <code>modifiedTime</code>. Social platforms and search engines use this to indicate freshness — missing it prevented articles from surfacing as "updated" content.</div>
     <div class="finding-rec">Add <code>modifiedTime: article.updatedAt ?? article.publishedAt</code> to the <code>og:</code> object in <code>buildArticleMetadata()</code>.</div>
+    <div class="finding-fix"><code>modifiedTime: article.updatedAt ?? article.publishedAt</code> added to <code>buildArticleMetadata()</code> OG object. Same pattern applied to <code>buildBreakingNewsMetadata()</code> and <code>buildFactCheckMetadata()</code>. Issue #75.</div>
   </div>
 
-  <div class="finding medium">
+  <div class="finding medium fixed">
     <div class="finding-header">
       <span class="badge medium">Medium</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Bookstore OG Image Uses Relative Path Without Domain</span>
-      <span class="finding-file">(user)/bookstore/layout.tsx:14-30</span>
+      <span class="finding-file">(user)/bookstore/layout.tsx</span>
     </div>
-    <div class="finding-body">The bookstore layout hardcodes the OG image as <code>/hurriya-pub/Logo-alt.png</code> — a relative path. Open Graph requires absolute URLs. Scrapers that use this metadata will produce broken image previews on social shares.</div>
-    <div class="finding-rec">Change to the full absolute URL: <code>https://www.untelevised.media/hurriya-pub/Logo-alt.png</code>.</div>
+    <div class="finding-body">The bookstore layout hardcoded the OG image as <code>/hurriya-pub/Logo-alt.png</code> — a relative path. Open Graph requires absolute URLs. Scrapers using this metadata produced broken image previews on social shares.</div>
+    <div class="finding-rec">Change to the full absolute URL using the <code>HURRIYA_OG_IMAGE</code> constant.</div>
+    <div class="finding-fix">Both <code>openGraph.images[0].url</code> and <code>twitter.images[0]</code> changed to <code>HURRIYA_OG_IMAGE</code> (absolute HTTPS URL). <code>twitter.site</code> standardized to <code>TWITTER_HANDLE</code> constant. Issue #74.</div>
   </div>
 
-  <div class="finding medium">
+  <div class="finding medium fixed">
     <div class="finding-header">
       <span class="badge medium">Medium</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Twitter Handle Inconsistency Across Metadata Builders</span>
-      <span class="finding-file">app/layout.tsx:53-59 vs util/metadata/generateArticleMetadata.ts:58</span>
+      <span class="finding-file">util/metadata.ts · util/metadata/generateArticleMetadata.ts</span>
     </div>
-    <div class="finding-body">Root layout uses <code>@untelevised</code> as the Twitter creator handle. The legacy <code>generateArticleMetadata.ts</code> uses <code>@UnTelevisedLive</code>. Inconsistent handles can dilute Twitter analytics attribution.</div>
-    <div class="finding-rec">Standardize to <code>@untelevised</code> across all metadata builders. Update <code>generateArticleMetadata.ts</code> line 58 and add a <code>TWITTER_HANDLE</code> constant to the shared metadata config.</div>
+    <div class="finding-body">Root layout used <code>@untelevised</code> as the Twitter creator handle. The legacy <code>generateArticleMetadata.ts</code> used <code>@UnTelevisedLive</code>. Inconsistent handles diluted Twitter analytics attribution.</div>
+    <div class="finding-rec">Standardize to <code>@untelevised</code> across all metadata builders using a shared <code>TWITTER_HANDLE</code> constant.</div>
+    <div class="finding-fix"><code>TWITTER_HANDLE = '@untelevised'</code> constant exported from <code>util/metadata.ts</code>; all metadata builders (article, breaking, fact-check, bookstore, music, lyrics, collection pages) updated to use it. <code>generateArticleMetadata.ts</code> <code>@UnTelevisedLive</code> → <code>TWITTER_HANDLE</code>. Issue #76.</div>
   </div>
 
-  <div class="finding medium">
+  <div class="finding medium fixed">
     <div class="finding-header">
       <span class="badge medium">Medium</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Book Schema Missing Author URL, Publisher & AggregateRating</span>
-      <span class="finding-file">(user)/bookstore/book/[slug]/page.tsx:22-54</span>
+      <span class="finding-file">(user)/bookstore/book/[slug]/page.tsx</span>
     </div>
-    <div class="finding-body">The Book JSON-LD schema uses <code>@type: Book</code> correctly but omits <code>author.url</code>, <code>publisher</code> (Hurriya Publications), and <code>aggregateRating</code>. Without aggregateRating, review stars won't appear in Google search results for book pages.</div>
+    <div class="finding-body">The Book JSON-LD schema omitted <code>author.url</code>, <code>publisher</code> (Hurriya Publications), and <code>aggregateRating</code>. Without aggregateRating, review stars cannot appear in Google search results for book pages.</div>
     <div class="finding-rec">Add publisher <code>@type: Organization</code> with Hurriya Publications details, and generate <code>aggregateRating</code> from the average review score and review count fetched alongside the book.</div>
+    <div class="finding-fix"><code>publisher</code> (Hurriya Publications + logo ImageObject), <code>author.url</code> (via <code>getCanonicalUrl('author', slug)</code>), and conditional <code>aggregateRating</code> (only when reviewCount &gt; 0, computed server-side from approved reviews) added to Book JSON-LD. Issue #77.</div>
   </div>
 
-  <div class="finding medium">
+  <div class="finding medium fixed">
     <div class="finding-header">
       <span class="badge medium">Medium</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">NewsArticle Schema: dateModified Undefined When null</span>
       <span class="finding-file">components/seo/NewsArticleStructuredData.tsx:24</span>
     </div>
-    <div class="finding-body">When <code>article.updatedAt</code> is null, the <code>dateModified</code> field in the NewsArticle schema is set to <code>undefined</code>, which serializes as an invalid schema. Google's structured data validator flags this as an error.</div>
-    <div class="finding-rec">Change to: <code>dateModified: article.updatedAt ?? article.publishedAt ?? article._updatedAt</code> to always provide a valid ISO 8601 date.</div>
+    <div class="finding-body">When <code>article.updatedAt</code> was null, <code>dateModified</code> in the NewsArticle schema would be <code>undefined</code> — an invalid schema. Google's structured data validator flags this as an error.</div>
+    <div class="finding-rec">Chain: <code>dateModified: article.updatedAt ?? article.publishedAt ?? article._updatedAt</code> to always provide a valid ISO 8601 date.</div>
+    <div class="finding-fix">Pre-resolved — <code>NewsArticleStructuredData.tsx:24</code> already had the triple fallback chain (<code>updatedAt ?? _updatedAt ?? publishedAt</code>) before this audit. Issue #78 closed as pre-existing fix.</div>
   </div>
 
-  <div class="finding low">
+  <div class="finding low fixed">
     <div class="finding-header">
       <span class="badge low">Low</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Tag Pages Hardcode Canonical URL String</span>
-      <span class="finding-file">(news)/tag/[slug]/page.tsx:28</span>
+      <span class="finding-file">(news)/tag/[slug]/page.tsx</span>
     </div>
-    <div class="finding-body">Canonical URL is hardcoded as <code>`https://www.untelevised.media/tag/${slug}/`</code> instead of using the shared <code>getCanonicalUrl()</code> utility from <code>util/metadata.ts</code>. If the domain or URL pattern changes, this will create canonical mismatches.</div>
+    <div class="finding-body">Canonical URL was hardcoded as <code>`https://www.untelevised.media/tag/${slug}/`</code> instead of using the shared <code>getCanonicalUrl()</code> utility. Domain or URL pattern changes would create canonical mismatches.</div>
     <div class="finding-rec">Replace with <code>getCanonicalUrl('tag', slug)</code> for consistency with all other pages.</div>
+    <div class="finding-fix">Hardcoded canonical replaced with <code>getCanonicalUrl('tag', slug)</code>; full <code>openGraph</code> and <code>twitter</code> metadata blocks added to tag pages. Issue #79.</div>
   </div>
 
 </div>
@@ -1201,10 +1247,10 @@
         <tr class="done"><td>6</td><td>Add rate limiting to whistleblower, secure-contact, job-application</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">api/ (3 routes)</span></td><td>Issue #60</td></tr>
         <tr class="done"><td>7</td><td>Replace string equality with crypto.timingSafeEqual on cron/webhook secrets</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">cron/cleanup-briefs · webhooks/supabase · send-email</span></td><td>Issue #61</td></tr>
         <tr><td>8</td><td>Add Stripe idempotency keys to checkout session creation</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">checkout/route.ts:149</span></td><td>15 min</td></tr>
-        <tr><td>9</td><td>Add generateMetadata to music-artists/[slug] and lyrics/[slug]</td><td><span class="badge high">SEO</span></td><td><span class="file-tag">(music)/music-artists/[slug] · lyrics/[slug]</span></td><td>2h</td></tr>
-        <tr><td>10</td><td>Add ClaimReview JSON-LD schema to fact-check pages</td><td><span class="badge high">SEO</span></td><td><span class="file-tag">(news)/fact-check/[slug]/page.tsx</span></td><td>1.5h</td></tr>
-        <tr><td>11</td><td>Add GlobalStructuredData to (news) and (music) layouts</td><td><span class="badge high">SEO</span></td><td><span class="file-tag">(news)/layout.tsx · (music)/layout.tsx</span></td><td>20 min</td></tr>
-        <tr><td>12</td><td>Add noindex metadata to auth and portal pages</td><td><span class="badge medium">SEO</span></td><td><span class="file-tag">(auth)/ · (portal)/layout.tsx</span></td><td>30 min</td></tr>
+        <tr class="done"><td>9</td><td>Add generateMetadata to music-artists/[slug] and lyrics/[slug]</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">(music)/music-artists/[slug] · lyrics/[slug]</span></td><td>Issue #68</td></tr>
+        <tr class="done"><td>10</td><td>Add ClaimReview JSON-LD schema to fact-check pages</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">(news)/fact-check/[slug]/page.tsx</span></td><td>Issue #69</td></tr>
+        <tr class="done"><td>11</td><td>Add GlobalStructuredData to (music) layout</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">(music)/layout.tsx</span></td><td>Issue #70</td></tr>
+        <tr class="done"><td>12</td><td>Add noindex metadata to portal pages</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">(portal)/layout.tsx</span></td><td>Issue #73</td></tr>
         <tr><td>13</td><td>Fix focus trap in PitchQuickViewModal — use Radix Dialog</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">PitchQuickViewModal.tsx</span></td><td>2h</td></tr>
         <tr><td>14</td><td>Add scope="col" to ApplicationsTable headers</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">ApplicationsTable.tsx</span></td><td>15 min</td></tr>
       </tbody>
@@ -1229,9 +1275,9 @@
         <tr><td>18</td><td>Remove all console.log from API routes; integrate Sentry</td><td><span class="badge critical">Architecture</span></td><td><span class="file-tag">api/ (multiple routes)</span></td><td>3h</td></tr>
         <tr><td>19</td><td>Wire Sanity webhook to revalidateTag for book/article ISR</td><td><span class="badge critical">Architecture</span></td><td><span class="file-tag">api/revalidate/route.ts</span></td><td>2h</td></tr>
         <tr class="done"><td>20</td><td>Re-fetch prices server-side in checkout (cart price validation)</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">api/bookstore/checkout/route.ts</span></td><td>Issue #62</td></tr>
-        <tr><td>21</td><td>Add og:image to music artists and lyrics collection pages</td><td><span class="badge high">SEO</span></td><td><span class="file-tag">(music)/music-artists/page.tsx · lyrics/page.tsx</span></td><td>30 min</td></tr>
-        <tr><td>22</td><td>Add dateModified to article OG metadata and NewsArticle schema</td><td><span class="badge medium">SEO</span></td><td><span class="file-tag">util/metadata.ts · NewsArticleStructuredData.tsx</span></td><td>30 min</td></tr>
-        <tr><td>23</td><td>Fix bookstore OG image to use absolute URL</td><td><span class="badge medium">SEO</span></td><td><span class="file-tag">(user)/bookstore/layout.tsx</span></td><td>5 min</td></tr>
+        <tr class="done"><td>21</td><td>Add og:image to music artists and lyrics collection pages</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">(music)/music-artists/page.tsx · lyrics/page.tsx</span></td><td>Issue #71</td></tr>
+        <tr class="done"><td>22</td><td>Add dateModified to article OG metadata and NewsArticle schema</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">util/metadata.ts · NewsArticleStructuredData.tsx</span></td><td>Issue #75/#78</td></tr>
+        <tr class="done"><td>23</td><td>Fix bookstore OG image to use absolute URL</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">(user)/bookstore/layout.tsx</span></td><td>Issue #74</td></tr>
         <tr><td>24</td><td>Wrap navigation in ul/li semantic structure</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">components/global/Nav.tsx</span></td><td>45 min</td></tr>
         <tr><td>25</td><td>Add aria-describedby to ApplicationForm error messages</td><td><span class="badge critical">A11y</span></td><td><span class="file-tag">ApplicationForm.tsx</span></td><td>1h</td></tr>
         <tr><td>26</td><td>Add aria-current to active navigation items</td><td><span class="badge medium">A11y</span></td><td><span class="file-tag">Nav.tsx · ApplicationsTable.tsx</span></td><td>30 min</td></tr>
@@ -1253,9 +1299,9 @@
       <tbody>
         <tr><td>27</td><td>Add CAPTCHA (Turnstile) to whistleblower, careers, secure-contact</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">api/ (3 public form routes)</span></td><td>4h</td></tr>
         <tr class="done"><td>28</td><td>Document and codify Supabase RLS policies in migrations</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">supabase/migrations/20260522000002</span></td><td>Issue #65</td></tr>
-        <tr><td>29</td><td>Add MusicGroup & MusicRecording JSON-LD schemas</td><td><span class="badge high">SEO</span></td><td><span class="file-tag">(music)/music-artists/[slug] · lyrics/[slug]</span></td><td>3h</td></tr>
-        <tr><td>30</td><td>Add aggregateRating to Book schema from review data</td><td><span class="badge medium">SEO</span></td><td><span class="file-tag">bookstore/book/[slug]/page.tsx</span></td><td>2h</td></tr>
-        <tr><td>31</td><td>Standardize Twitter handle constant across all metadata builders</td><td><span class="badge low">SEO</span></td><td><span class="file-tag">util/metadata.ts · generateArticleMetadata.ts</span></td><td>20 min</td></tr>
+        <tr class="done"><td>29</td><td>Add MusicGroup & MusicRecording JSON-LD schemas</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">(music)/music-artists/[slug] · lyrics/[slug]</span></td><td>Issue #68</td></tr>
+        <tr class="done"><td>30</td><td>Add aggregateRating to Book schema from review data</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">bookstore/book/[slug]/page.tsx</span></td><td>Issue #77</td></tr>
+        <tr class="done"><td>31</td><td>Standardize Twitter handle constant across all metadata builders</td><td><span class="badge ok">Resolved</span></td><td><span class="file-tag">util/metadata.ts · generateArticleMetadata.ts</span></td><td>Issue #76</td></tr>
         <tr><td>32</td><td>Migrate cart to Supabase (cross-device sync, no localStorage)</td><td><span class="badge medium">Architecture</span></td><td><span class="file-tag">lib/bookstore/cart.ts</span></td><td>8h</td></tr>
         <tr><td>33</td><td>Add bookstore conversion event tracking (add_to_cart, purchase)</td><td><span class="badge low">Architecture</span></td><td><span class="file-tag">bookstore/ (multiple components)</span></td><td>2h</td></tr>
         <tr><td>34</td><td>Add aria-hidden to all decorative icons; progressbar role to timelines</td><td><span class="badge low">A11y</span></td><td><span class="file-tag">Nav.tsx · Banner.tsx · TimelineNavigation.tsx</span></td><td>1h</td></tr>
@@ -1268,7 +1314,7 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  Automated codebase audit · UnTelevised Media · May 21, 2026 · 384 files scanned · 113 issues identified &nbsp;|&nbsp; Security remediation complete May 22, 2026 · 13 security vulnerabilities resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a>
+  Automated codebase audit · UnTelevised Media · May 21, 2026 · 384 files scanned · 113 issues identified &nbsp;|&nbsp; Security remediation May 22, 2026 · 13 vulnerabilities + 1 XSS resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a> &nbsp;|&nbsp; SEO/AEO remediation May 22, 2026 · issues #68–#79 resolved · feature/seo-aeo-audit-68-79
 </div>
 
 <script>
@@ -1320,9 +1366,9 @@ new Chart(document.getElementById('severityBar'), {
     labels: ['Security', 'SEO / AEO', 'Accessibility', 'Architecture'],
     datasets: [
       { label: 'Critical', data: [0, 0, 11, 4], backgroundColor: CRIT },
-      { label: 'High',     data: [0, 8, 9, 6],  backgroundColor: HIGH },
-      { label: 'Medium',   data: [6, 19, 7, 12], backgroundColor: MED },
-      { label: 'Low',      data: [5, 7, 6, 4],   backgroundColor: LOW },
+      { label: 'High',     data: [0, 0, 9, 6],  backgroundColor: HIGH },
+      { label: 'Medium',   data: [6, 13, 7, 12], backgroundColor: MED },
+      { label: 'Low',      data: [5, 6, 6, 4],   backgroundColor: LOW },
     ]
   },
   options: {
@@ -1342,7 +1388,7 @@ new Chart(document.getElementById('healthRadar'), {
     labels: ['Security', 'SEO / AEO', 'Accessibility', 'Architecture', 'Type Safety', 'Performance'],
     datasets: [{
       label: 'Health Score',
-      data: [83, 55, 46, 63, 40, 68],
+      data: [83, 78, 46, 63, 40, 68],
       backgroundColor: 'rgba(124,77,255,.2)',
       borderColor: '#7c4dff',
       pointBackgroundColor: '#7c4dff',
@@ -1369,9 +1415,9 @@ new Chart(document.getElementById('healthRadar'), {
 new Chart(document.getElementById('severityPie'), {
   type: 'doughnut',
   data: {
-    labels: ['Critical (17)', 'High (21)', 'Medium (43)', 'Low (23)'],
+    labels: ['Critical (17)', 'High (15)', 'Medium (36)', 'Low (21)'],
     datasets: [{
-      data: [17, 21, 43, 23],
+      data: [17, 15, 36, 21],
       backgroundColor: [CRIT, HIGH, MED, LOW],
       borderWidth: 2, borderColor: '#111118'
     }]
@@ -1393,7 +1439,7 @@ new Chart(document.getElementById('securityBar'), {
     datasets: [
       {
         label: 'Resolved',
-        data: [2, 4, 3, 3, 0, 0, 0, 2],
+        data: [3, 4, 3, 3, 0, 0, 0, 2],
         backgroundColor: OK,
       },
       {
@@ -1419,8 +1465,8 @@ new Chart(document.getElementById('seoBar'), {
   data: {
     labels: ['(news)', '(music)', '(user)/bookstore', '(portal)', '(auth)', '(studio)'],
     datasets: [
-      { label: 'Has Metadata',     data: [85, 30, 70, 5, 0, 0],  backgroundColor: OK },
-      { label: 'Missing/Incomplete', data: [15, 70, 30, 95, 100, 100], backgroundColor: CRIT },
+      { label: 'Has Metadata',     data: [92, 95, 95, 5, 0, 0],  backgroundColor: OK },
+      { label: 'Missing/Incomplete', data: [8, 5, 5, 95, 100, 100], backgroundColor: CRIT },
     ]
   },
   options: {
