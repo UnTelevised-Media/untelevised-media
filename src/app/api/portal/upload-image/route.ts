@@ -5,6 +5,7 @@
 // trailingSlash: true is set in next.config.ts.
 import { NextRequest, NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
+import { fileTypeFromBuffer } from 'file-type';
 import { getRoleFromUser } from '@/lib/auth/roles';
 import { writeClient } from '@/lib/sanity/lib/write-client';
 
@@ -44,9 +45,20 @@ export async function POST(req: NextRequest) {
 
   try {
     const buffer = Buffer.from(await file.arrayBuffer());
+
+    // Validate actual file content via magic bytes — Content-Type header is
+    // attacker-controlled and cannot be trusted on its own.
+    const detected = await fileTypeFromBuffer(buffer);
+    if (!detected || !ALLOWED_TYPES.includes(detected.mime)) {
+      return NextResponse.json(
+        { error: 'Invalid file content. Allowed: JPEG, PNG, WebP, GIF, AVIF.' },
+        { status: 400 }
+      );
+    }
+
     const asset = await writeClient.assets.upload('image', buffer, {
       filename: file.name,
-      contentType: file.type,
+      contentType: detected.mime,
     });
     return NextResponse.json({ assetId: asset._id, url: asset.url });
   } catch (err) {
