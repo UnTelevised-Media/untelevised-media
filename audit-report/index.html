@@ -244,7 +244,8 @@
       <span><strong>Security Remediation:</strong> May 22, 2026</span>
       <span><strong>SEO/AEO Remediation:</strong> May 22, 2026</span>
       <span><strong>A11y + Security Phase 1–2:</strong> May 22, 2026</span>
-      <span><strong>Branch:</strong> security-issues · feature/seo-aeo-audit-68-79 · feature/a11y-security-phase1-2 → main</span>
+      <span><strong>Phase 3 Remediation:</strong> May 22, 2026</span>
+      <span><strong>Branch:</strong> security-issues · feature/seo-aeo-audit-68-79 · feature/a11y-security-phase1-2 · feature/phase3-audit-84 → main</span>
       <span><strong>Stack:</strong> Next.js 16.1 · Sanity 5 · Supabase · Clerk · Stripe</span>
       <span><strong>Files Scanned:</strong> 384 TypeScript/TSX</span>
       <span><strong>API Routes:</strong> 22</span>
@@ -413,7 +414,7 @@
   <div class="grid-4" style="margin-bottom:28px">
     <div class="stat-card ok"><div class="label">Critical Open</div><div class="value">0</div><div class="sub">was 2 — all resolved</div></div>
     <div class="stat-card ok"><div class="label">High Open</div><div class="value">0</div><div class="sub">was 11 — all resolved</div></div>
-    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">5</div><div class="sub">was 6 — 1 resolved (Phase 2)</div></div>
+    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">3</div><div class="sub">was 5 — 2 resolved (Phase 3)</div></div>
     <div class="stat-card low"><div class="label">Low Open</div><div class="value">5</div><div class="sub">Ongoing</div></div>
   </div>
 
@@ -429,24 +430,26 @@
 
   <h3 style="font-size:16px;margin-bottom:16px;color:var(--medium)">Open Findings</h3>
 
-  <div class="finding medium">
+  <div class="finding medium fixed">
     <div class="finding-header">
-      <span class="badge medium">Medium</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Missing Security Headers (CSP, X-Frame-Options, HSTS)</span>
-      <span class="finding-file">next.config.ts (missing headers() function)</span>
+      <span class="finding-file">next.config.ts</span>
     </div>
     <div class="finding-body">No Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, or Referrer-Policy headers are configured. Without CSP, any XSS vulnerability has maximum impact. Without X-Frame-Options, the site can be embedded in iframes for clickjacking.</div>
     <div class="finding-rec">Add a <code>headers()</code> function to <code>next.config.ts</code> with <code>Content-Security-Policy</code>, <code>X-Frame-Options: SAMEORIGIN</code>, <code>X-Content-Type-Options: nosniff</code>, and <code>Referrer-Policy: strict-origin-when-cross-origin</code>.</div>
+    <div class="finding-fix">Added <code>headers()</code> to <code>next.config.ts</code> with X-Frame-Options: SAMEORIGIN, X-Content-Type-Options: nosniff, Referrer-Policy, Permissions-Policy, and a structured CSP covering Stripe, Clerk, Sanity CDN, AdSense, and Vercel Analytics origins. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
   </div>
 
-  <div class="finding medium">
+  <div class="finding medium fixed">
     <div class="finding-header">
-      <span class="badge medium">Medium</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">File Upload MIME-Only Validation (No Magic Bytes)</span>
-      <span class="finding-file">api/portal/upload-image/route.ts:34-43</span>
+      <span class="finding-file">api/portal/upload-image/route.ts</span>
     </div>
     <div class="finding-body">File uploads validate MIME type from the Content-Type header only. An attacker can rename a malicious file as <code>.jpg</code> and bypass the check, since MIME type comes from the request, not the file content.</div>
     <div class="finding-rec">Add <code>file-type</code> npm package to read the first 12 bytes and validate actual file magic bytes. Reject files whose magic bytes don't match allowed image types.</div>
+    <div class="finding-fix">Installed <code>file-type</code>; buffer read via <code>fileTypeFromBuffer()</code> before upload. Detected MIME (not client-supplied Content-Type) used for both validation and the Sanity upload call. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
   </div>
 
   <div class="finding medium">
@@ -546,7 +549,7 @@
   <div class="grid-4" style="margin-bottom:28px">
     <div class="stat-card ok"><div class="label">Critical Open</div><div class="value">0</div><div class="sub">was 11 — all resolved</div></div>
     <div class="stat-card ok"><div class="label">High Open</div><div class="value">0</div><div class="sub">was 9 — all resolved</div></div>
-    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">7</div><div class="sub">WCAG AAA / best practice</div></div>
+    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">6</div><div class="sub">was 7 — 1 resolved (Phase 3)</div></div>
     <div class="stat-card low"><div class="label">Low Open</div><div class="value">6</div><div class="sub">Enhancement opportunities</div></div>
   </div>
 
@@ -568,14 +571,15 @@
 
   <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium: Missing States &amp; Descriptions</h3>
 
-  <div class="finding medium">
+  <div class="finding medium fixed">
     <div class="finding-header">
-      <span class="badge medium">Medium</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Active Navigation Items Missing aria-current</span>
-      <span class="finding-file">components/global/Nav.tsx:50-74</span>
+      <span class="finding-file">components/global/Nav.tsx · components/admin/ApplicationsTable.tsx</span>
     </div>
     <div class="finding-body">Active navigation category links have no <code>aria-current="page"</code> attribute. Screen reader users cannot determine which section they are currently browsing.</div>
     <div class="finding-rec">Add <code>aria-current={isActive ? 'page' : undefined}</code> to the active category link in both desktop and mobile navigation views.</div>
+    <div class="finding-fix"><code>usePathname()</code>-based <code>aria-current="page"</code> added to desktop primary, desktop dropdown, and mobile category links in Nav.tsx. Secondary dropdown items wrapped in <code>&lt;ul&gt;/&lt;li&gt;</code>. <code>aria-current="true"</code> added to active filter button in ApplicationsTable. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
   </div>
 
   <div class="finding medium">
@@ -621,10 +625,15 @@
   </div>
 
   <div class="grid-4" style="margin-bottom:28px">
-    <div class="stat-card critical"><div class="label">Critical</div><div class="value">4</div><div class="sub">Production risks</div></div>
-    <div class="stat-card high"><div class="label">High</div><div class="value">6</div><div class="sub">Technical debt</div></div>
+    <div class="stat-card ok"><div class="label">Critical Open</div><div class="value">2</div><div class="sub">was 4 — 2 resolved (Phase 3)</div></div>
+    <div class="stat-card ok"><div class="label">High Open</div><div class="value">5</div><div class="sub">was 6 — 1 resolved (Phase 3)</div></div>
     <div class="stat-card medium"><div class="label">Medium</div><div class="value">12</div><div class="sub">Improvements</div></div>
     <div class="stat-card low"><div class="label">Low</div><div class="value">4</div><div class="sub">Nice to have</div></div>
+  </div>
+
+  <div class="callout green" style="margin-bottom:24px">
+    <div class="callout-icon">✓</div>
+    <div><strong>Phase 3 Architecture Fixes — May 22, 2026.</strong> All debug <code>console.log</code> removed from server-side code. ISR revalidation strategy fixed (correct <code>revalidateTag</code> signature + <code>revalidate: 3600</code> ceiling). TypeScript compiler errors resolved (<code>tsc --noEmit</code> clean). PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
   </div>
 
   <div class="chart-wrap" style="margin-bottom:32px">
@@ -634,14 +643,15 @@
 
   <h3 style="font-size:16px;margin-bottom:16px;color:var(--critical)">Critical: Production Code Quality</h3>
 
-  <div class="finding critical">
+  <div class="finding critical fixed">
     <div class="finding-header">
-      <span class="badge critical">Critical</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Debug console.log Statements in Production API Routes</span>
-      <span class="finding-file">api/bookstore/checkout/route.ts:89-100 · api/bookstore/download/route.ts:85 · (news)/page.tsx:268</span>
+      <span class="finding-file">lib/portal/book-actions.ts · util/timelineJSAdapter.ts</span>
     </div>
     <div class="finding-body">Multiple API routes contain <code>console.log()</code> statements that run in production. The checkout route specifically logs Stripe key prefixes, cart item details, and user identifiers — all visible in Vercel function logs to anyone with log access. This is both a security risk and performance overhead.</div>
     <div class="finding-rec">Remove all <code>console.log</code> from production code. Gate debug logging with <code>if (process.env.DEBUG)</code>. Integrate Sentry for error tracking with contextual metadata.</div>
+    <div class="finding-fix">All debug <code>console.log</code> statements removed from <code>book-actions.ts</code> (server actions) and <code>timelineJSAdapter.ts</code>. API routes were already clean. Error-path <code>console.error</code> calls retained. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
   </div>
 
   <div class="finding critical">
@@ -652,6 +662,7 @@
     </div>
     <div class="finding-body">Over 15 instances of <code>as any</code> type assertions across news pages and article pages, primarily around Sanity image objects and author data. This completely eliminates TypeScript's safety guarantees and has likely already masked runtime bugs where undefined properties are accessed.</div>
     <div class="finding-rec">Generate proper types from the Sanity schema using the existing TypeGen setup. Create a strongly-typed <code>SanityImageObject</code> type and update <code>urlForImage()</code> to accept it. Enable <code>"strictNullChecks": true</code> in tsconfig.json.</div>
+    <div class="finding-fix">Partial — Phase 3 resolved all TS compiler errors (<code>tsc --noEmit: 0 errors</code>): added <code>BreakingArticle</code>/<code>FactCheck</code> types to metadata.ts, added Supabase RPC signature to database.types.ts. Remaining <code>as any</code> patterns in article/news pages tracked for Phase 4 TypeGen expansion. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
   </div>
 
   <div class="finding critical">
@@ -664,14 +675,15 @@
     <div class="finding-rec">In the checkout API route, re-fetch book prices from Sanity/Stripe server-side for each cart item before creating the session. Never trust client-submitted prices.</div>
   </div>
 
-  <div class="finding critical">
+  <div class="finding critical fixed">
     <div class="finding-header">
-      <span class="badge critical">Critical</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Missing Revalidation Strategy — ISR Cache Never Expires</span>
-      <span class="finding-file">(user)/bookstore/page.tsx:211-221 · lib/sanity/lib/fetch.ts</span>
+      <span class="finding-file">api/revalidate/route.ts · lib/sanity/lib/fetch.ts</span>
     </div>
     <div class="finding-body">Sanity fetches use tags (<code>'book'</code>, <code>'bookGenre'</code>) but no route calls <code>revalidateTag()</code> or <code>revalidatePath()</code> after mutations. Book data can remain indefinitely stale in the ISR cache after content editors publish changes in Sanity Studio.</div>
     <div class="finding-rec">Configure the existing <code>/api/revalidate</code> webhook to call <code>revalidateTag('book')</code> on Sanity publish events. Set <code>revalidate: 3600</code> as a fallback ceiling on all book queries.</div>
+    <div class="finding-fix">Fixed incorrect <code>revalidateTag()</code> call signature (Next.js 16 requires <code>'default'</code> second arg). Added explicit busting of <code>'books'</code> and <code>'articles'</code> collection tags. Added <code>revalidate: 3600</code> ceiling to <code>sanityFetch()</code> as webhook-miss safety net. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
   </div>
 
   <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--high)">High: Technical Debt</h3>
@@ -706,14 +718,15 @@
     <div class="finding-rec">Either annotate expensive Sanity fetch wrappers with <code>'use cache'</code> and <code>cacheTag()</code> to gain the intended benefit, or remove <code>useCache: true</code> from config until ready to implement.</div>
   </div>
 
-  <div class="finding high">
+  <div class="finding high fixed">
     <div class="finding-header">
-      <span class="badge high">High</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">TypeScript strictNullChecks Disabled</span>
-      <span class="finding-file">tsconfig.json:17</span>
+      <span class="finding-file">tsconfig.json · metadata.ts · database.types.ts</span>
     </div>
     <div class="finding-body"><code>strictNullChecks</code> is commented out in <code>tsconfig.json</code>. This means <code>null</code> and <code>undefined</code> are assignable to any type, making the TypeScript types lie about nullability throughout the codebase. This is likely the root cause of the widespread <code>as any</code> patterns.</div>
     <div class="finding-rec">Enable <code>"strictNullChecks": true</code> and fix the resulting type errors. Start with a partial enablement using <code>// @ts-strict-ignore</code> on files needing time, and incrementally clean up.</div>
+    <div class="finding-fix">Confirmed <code>"strict": true</code> already covers <code>strictNullChecks</code>; the explicit comment was redundant. Fixed all compiler errors: added <code>BreakingArticle</code>/<code>FactCheck</code> types to metadata.ts and <code>increment_download_if_allowed</code> RPC sig to database.types.ts. <code>tsc --noEmit</code> now clean. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>.</div>
   </div>
 
   <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium: Performance & Patterns</h3>
@@ -845,14 +858,14 @@
     <table class="priority-table">
       <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Est.</th></tr></thead>
       <tbody>
-        <tr><td>7</td><td>Add security headers (CSP, X-Frame-Options) to next.config.ts</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">next.config.ts</span></td><td>1h</td></tr>
-        <tr><td>8</td><td>Add magic byte file validation with file-type package</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">api/portal/upload-image/route.ts</span></td><td>45 min</td></tr>
-        <tr><td>9</td><td>Enable strictNullChecks in tsconfig.json and fix critical type errors</td><td><span class="badge high">Architecture</span></td><td><span class="file-tag">tsconfig.json</span></td><td>4-8h</td></tr>
-        <tr><td>10</td><td>Remove all console.log from API routes; integrate Sentry</td><td><span class="badge critical">Architecture</span></td><td><span class="file-tag">api/ (multiple routes)</span></td><td>3h</td></tr>
-        <tr><td>11</td><td>Wire Sanity webhook to revalidateTag for book/article ISR</td><td><span class="badge critical">Architecture</span></td><td><span class="file-tag">api/revalidate/route.ts</span></td><td>2h</td></tr>
-        <tr><td>12</td><td>Wrap navigation in ul/li semantic structure</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">components/global/Nav.tsx</span></td><td>45 min</td></tr>
-        <tr><td>13</td><td>Add aria-describedby to ApplicationForm error messages</td><td><span class="badge critical">A11y</span></td><td><span class="file-tag">ApplicationForm.tsx</span></td><td>1h</td></tr>
-        <tr><td>14</td><td>Add aria-current to active navigation items</td><td><span class="badge medium">A11y</span></td><td><span class="file-tag">Nav.tsx · ApplicationsTable.tsx</span></td><td>30 min</td></tr>
+        <tr class="done"><td>7</td><td>Add security headers (CSP, X-Frame-Options) to next.config.ts</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">next.config.ts</span></td><td>PR #85</td></tr>
+        <tr class="done"><td>8</td><td>Add magic byte file validation with file-type package</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">api/portal/upload-image/route.ts</span></td><td>PR #85</td></tr>
+        <tr class="done"><td>9</td><td>Enable strictNullChecks in tsconfig.json and fix critical type errors</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">tsconfig.json · metadata.ts · database.types.ts</span></td><td>PR #85</td></tr>
+        <tr class="done"><td>10</td><td>Remove all console.log from server-side code (API routes, server actions, util)</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">lib/portal/book-actions.ts · util/timelineJSAdapter.ts</span></td><td>PR #85</td></tr>
+        <tr class="done"><td>11</td><td>Wire Sanity webhook to revalidateTag for book/article ISR</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">api/revalidate/route.ts · lib/sanity/lib/fetch.ts</span></td><td>PR #85</td></tr>
+        <tr class="done"><td>12</td><td>Wrap navigation in ul/li semantic structure</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">components/global/Nav.tsx</span></td><td>PR #85</td></tr>
+        <tr class="done"><td>13</td><td>Add aria-describedby to ApplicationForm error messages</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">ApplicationForm.tsx (pre-existing — done in Phase 1–2)</span></td><td>PR #83</td></tr>
+        <tr class="done"><td>14</td><td>Add aria-current to active navigation items</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">Nav.tsx · ApplicationsTable.tsx</span></td><td>PR #85</td></tr>
       </tbody>
     </table>
   </div>
@@ -882,7 +895,7 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  Automated codebase audit · UnTelevised Media · May 21, 2026 · 384 files scanned · 113 issues identified &nbsp;|&nbsp; Security remediation May 22, 2026 · 13 vulnerabilities + 1 XSS resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a> &nbsp;|&nbsp; SEO/AEO remediation May 22, 2026 · issues #68–#79 resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/81" style="color:var(--good)">#81</a> &nbsp;|&nbsp; A11y + Security Phase 1–2 May 22, 2026 · all 20 critical+high a11y + 1 security fixed · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a>
+  Automated codebase audit · UnTelevised Media · May 21, 2026 · 384 files scanned · 113 issues identified &nbsp;|&nbsp; Security remediation May 22, 2026 · 13 vulnerabilities + 1 XSS resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a> &nbsp;|&nbsp; SEO/AEO remediation May 22, 2026 · issues #68–#79 resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/81" style="color:var(--good)">#81</a> &nbsp;|&nbsp; A11y + Security Phase 1–2 May 22, 2026 · all 20 critical+high a11y + 1 security fixed · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a> &nbsp;|&nbsp; Phase 3 May 22, 2026 · all 8 items resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/85" style="color:var(--good)">#85</a>
 </div>
 
 <script>

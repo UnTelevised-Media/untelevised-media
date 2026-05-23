@@ -46,12 +46,25 @@ export async function POST(req: NextRequest) {
       return new Response(JSON.stringify({ message, body }), { status: 400 });
     }
 
-    // If the `_type` is `page`, then all `client.fetch` calls with
-    // `{next: {tags: ['page']}}` will be revalidated
+    // Revalidate by document type — all fetches tagged with this type are busted.
+    // For book and article types we also revalidate the canonical collection tags
+    // so that list pages (bookstore index, news index) pick up changes immediately.
+    // Next.js 16 revalidateTag requires a second 'default' argument for the
+    // standard fetch cache store (distinct from the 'use cache' store).
     revalidateTag(body._type, 'default');
 
     if (body.slug) {
       revalidateTag(`${body._type}:${body.slug}`, 'default');
+    }
+
+    // Bust canonical collection tags for the two most cache-sensitive types
+    // so that list pages (bookstore index, news index) invalidate alongside
+    // individual content pages.
+    if (body._type === 'book') {
+      revalidateTag('books', 'default');
+    }
+    if (body._type === 'post' || body._type === 'article') {
+      revalidateTag('articles', 'default');
     }
 
     return NextResponse.json({

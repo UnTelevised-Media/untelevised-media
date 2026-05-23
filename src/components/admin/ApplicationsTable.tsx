@@ -67,6 +67,7 @@ export function ApplicationsTable({
           <button
             key={s}
             onClick={() => setFilter(s)}
+            aria-current={filter === s ? 'true' : undefined}
             className={`px-4 py-2 text-xs font-black uppercase tracking-widest transition-colors ${
               filter === s
                 ? 'bg-untele text-white'

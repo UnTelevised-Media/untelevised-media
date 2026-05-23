@@ -139,29 +139,16 @@ export async function createBook(
 // ---------------------------------------------------------------------------
 
 export async function uploadBookCover(formData: FormData): Promise<string> {
-  console.log('[uploadBookCover] called');
   await requireAuthor();
-  console.log('[uploadBookCover] auth ok');
 
   if (!process.env.SUPABASE_SHOP_URL) throw new Error('Supabase not configured');
 
   const bookId = formData.get('bookId') as string;
   const file = formData.get('file') as File | null;
-  console.log(
-    '[uploadBookCover] bookId:',
-    bookId,
-    'file:',
-    file?.name,
-    'size:',
-    file?.size,
-    'type:',
-    file?.type
-  );
   if (!bookId || !file) throw new Error('Missing bookId or file');
 
   const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg';
   const storagePath = `${bookId}/cover.${ext}`;
-  console.log('[uploadBookCover] uploading to path:', storagePath);
   const supabase = getShopServiceClient();
 
   // Delete any existing cover with a different extension (upsert only overwrites same path)
@@ -174,7 +161,6 @@ export async function uploadBookCover(formData: FormData): Promise<string> {
   }
 
   const bytes = await file.arrayBuffer();
-  console.log('[uploadBookCover] bytes read, byteLength:', bytes.byteLength);
 
   const { error } = await supabase.storage
     .from('book-covers')
@@ -185,12 +171,10 @@ export async function uploadBookCover(formData: FormData): Promise<string> {
     throw new Error(`Cover upload failed: ${error.message}`);
   }
 
-  console.log('[uploadBookCover] upload ok');
   const { data: urlData } = supabase.storage.from('book-covers').getPublicUrl(storagePath);
   const publicUrl = urlData.publicUrl;
 
   await writeClient.patch(bookId).set({ coverImageUrl: publicUrl }).commit();
-  console.log('[uploadBookCover] sanity patched, url:', publicUrl);
 
   return publicUrl;
 }
@@ -201,29 +185,16 @@ export async function uploadBookCover(formData: FormData): Promise<string> {
 // ---------------------------------------------------------------------------
 
 export async function uploadDigitalAsset(formData: FormData): Promise<string> {
-  console.log('[uploadDigitalAsset] called');
   await requireAuthor();
-  console.log('[uploadDigitalAsset] auth ok');
 
   if (!process.env.SUPABASE_SHOP_URL) throw new Error('Supabase not configured');
 
   const bookId = formData.get('bookId') as string;
   const formatKey = formData.get('formatKey') as string;
   const file = formData.get('file') as File | null;
-  console.log(
-    '[uploadDigitalAsset] bookId:',
-    bookId,
-    'formatKey:',
-    formatKey,
-    'file:',
-    file?.name,
-    'size:',
-    file?.size
-  );
   if (!bookId || !formatKey || !file) throw new Error('Missing bookId, formatKey, or file');
 
   const storagePath = `books/${bookId}/${formatKey}/${file.name}`;
-  console.log('[uploadDigitalAsset] uploading to path:', storagePath);
   const supabase = getShopServiceClient();
 
   // Delete any existing files in this format's folder (handles filename changes)
@@ -238,7 +209,6 @@ export async function uploadDigitalAsset(formData: FormData): Promise<string> {
   }
 
   const bytes = await file.arrayBuffer();
-  console.log('[uploadDigitalAsset] bytes read, byteLength:', bytes.byteLength);
 
   const { error } = await supabase.storage
     .from('digital-books')
@@ -249,7 +219,6 @@ export async function uploadDigitalAsset(formData: FormData): Promise<string> {
     throw new Error(`Digital asset upload failed: ${error.message}`);
   }
 
-  console.log('[uploadDigitalAsset] upload ok');
   await writeClient
     .patch(bookId)
     .set({
@@ -258,7 +227,6 @@ export async function uploadDigitalAsset(formData: FormData): Promise<string> {
       [`formats[_key=="${formatKey}"].digitalAsset.fileSize`]: humanFileSize(file.size),
     })
     .commit();
-  console.log('[uploadDigitalAsset] sanity patched');
 
   return storagePath;
 }

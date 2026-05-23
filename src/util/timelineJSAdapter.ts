@@ -268,21 +268,8 @@ export function convertTimelineToTimelineJS(
   timeline: Timeline,
   events: TimelineEvent[]
 ): TimelineJSData {
-  console.log('🔄 Converting timeline to TimelineJS format...');
-  console.log('📊 Input:', {
-    timelineTitle: timeline?.title,
-    timelineId: timeline?._id,
-    eventsCount: events?.length,
-    events: events?.map((e) => ({ id: e._id, title: e.title, date: e.eventDate })),
-  });
-
   if (!timeline) {
-    console.error('❌ No timeline provided');
     throw new Error('Timeline is required');
-  }
-
-  if (!events || events.length === 0) {
-    console.warn('⚠️ No events provided, creating empty timeline');
   }
 
   // Sort events by date
@@ -290,17 +277,10 @@ export function convertTimelineToTimelineJS(
     (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
   );
 
-  console.log(
-    '📅 Sorted events:',
-    sortedEvents.map((e) => ({ title: e.title, date: e.eventDate }))
-  );
-
   const timelineJSData: TimelineJSData = {
     events: sortedEvents.map(convertEventToSlide),
     scale: 'human', // Can be 'human' or 'cosmological'
   };
-
-  console.log('📊 Converted events count:', timelineJSData.events.length);
 
   // Add title slide if timeline has description
   if (timeline.title || timeline.description) {
@@ -318,8 +298,6 @@ export function convertTimelineToTimelineJS(
       },
     };
 
-    console.log('📝 Added title slide:', timelineJSData.title);
-
     // Add title media if available
     const timelineWithImage = timeline as any;
     if (timelineWithImage.featuredImage) {
@@ -327,11 +305,9 @@ export function convertTimelineToTimelineJS(
         url: urlForImage(timelineWithImage.featuredImage).width(1200).height(600).url(),
         caption: timelineWithImage.featuredImage.alt ?? timeline.title,
       };
-      console.log('🖼️ Added title media:', timelineJSData.title.media);
     }
   }
 
-  console.log('✅ Final TimelineJS data:', timelineJSData);
   return timelineJSData;
 }
 
@@ -339,47 +315,13 @@ export function convertTimelineToTimelineJS(
  * Validates TimelineJS data format
  */
 export function validateTimelineJSData(data: TimelineJSData): boolean {
-  console.log('🔍 Validating TimelineJS data...');
-  console.log('📊 Data structure:', {
-    hasEvents: !!data.events,
-    eventsIsArray: Array.isArray(data.events),
-    eventsCount: data.events?.length,
-    hasTitle: !!data.title,
-    scale: data.scale,
-  });
+  if (!data.events || !Array.isArray(data.events)) return false;
+  if (data.events.length === 0) return false;
 
-  if (!data.events || !Array.isArray(data.events)) {
-    console.error('❌ TimelineJS data must have an events array');
-    return false;
+  for (const event of data.events) {
+    if (!event.start_date?.year) return false;
+    if (!event.text?.headline) return false;
   }
 
-  if (data.events.length === 0) {
-    console.error('❌ TimelineJS data must have at least one event');
-    return false;
-  }
-
-  console.log('🔍 Validating individual events...');
-  for (let i = 0; i < data.events.length; i++) {
-    const event = data.events[i];
-    console.log(`📊 Event ${i + 1}:`, {
-      hasStartDate: !!event.start_date,
-      startDateYear: event.start_date?.year,
-      hasText: !!event.text,
-      headline: event.text?.headline,
-      hasMedia: !!event.media,
-    });
-
-    if (!event.start_date?.year) {
-      console.error(`❌ Event ${i + 1} must have a start_date with year`);
-      return false;
-    }
-
-    if (!event.text?.headline) {
-      console.error(`❌ Event ${i + 1} must have text with headline`);
-      return false;
-    }
-  }
-
-  console.log('✅ TimelineJS data validation passed');
   return true;
 }
