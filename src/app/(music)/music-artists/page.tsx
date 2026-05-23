@@ -9,15 +9,26 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryAllMusicArtists, queryFeaturedMusicArtists } from '@/lib/sanity/lib/queries';
 import { Users, Music, Star, MapPin } from 'lucide-react';
+import { DEFAULT_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata';
 
 export const metadata: Metadata = {
   title: 'Music Artists | Discover Talented Musicians',
   description:
     'Explore our roster of talented music artists. Discover new music, read artist biographies, and listen to their latest songs.',
   keywords: 'music artists, musicians, singers, rappers, hip hop, r&b, pop, rock',
+  alternates: { canonical: getCanonicalUrl('music-artists') },
   openGraph: {
+    type: 'website',
     title: 'Music Artists | Discover Talented Musicians',
-    description: 'Explore our roster of talented music artists',
+    description: 'Explore our roster of talented music artists on UnTelevised Media.',
+    url: getCanonicalUrl('music-artists'),
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'UnTelevised Media — Music Artists' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: TWITTER_HANDLE,
+    title: 'Music Artists | Discover Talented Musicians',
+    description: 'Explore our roster of talented music artists on UnTelevised Media.',
   },
 };
 

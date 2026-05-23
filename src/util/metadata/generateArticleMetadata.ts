@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import sanityClient from '@/lib/sanity/lib/client';
 import urlForImage from '@/util/urlForImage';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
+import { TWITTER_HANDLE } from '@/util/metadata';
 
 type Props = {
   params: {
@@ -55,8 +56,8 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       card: 'summary_large_image',
       title: `${article.title} | UnTelevised Media`,
       description: article.description,
-      site: '@UnTelevisedLive',
-      creator: '@UnTelevisedLive',
+      site: TWITTER_HANDLE,
+      creator: TWITTER_HANDLE,
       images: article.mainImage
         ? {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,9 +1,14 @@
 // src/app/(portal)/layout.tsx
 // Portal route group layout — Clerk auth gate + portal role check.
 // All /portal/* routes are protected here AND in middleware.ts (defense in depth).
+import type { Metadata } from 'next';
 import { requireAnyPortalRole } from '@/lib/auth/roles';
 import { Toaster } from '@/components/ui/sonner';
 import { PortalSanityLive } from '@/lib/portal/live';
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default async function PortalLayout({ children }: { children: React.ReactNode }) {
   // Double-check server-side — middleware already blocks unauthenticated/role-less users,

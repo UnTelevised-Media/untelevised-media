@@ -11,6 +11,7 @@ import sanityClient from '@/lib/sanity/lib/client';
 import { queryBookBySlug, queryAllBooks, queryApprovedReviewsByBookSlug } from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/lib/bookstore/types';
 import urlForImage from '@/util/urlForImage';
+import { HURRIYA_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
 import SocialShare from '@/components/global/SocialShare';
 import WishlistButton from '@/components/bookstore/WishlistButton';
@@ -19,27 +20,55 @@ import ReviewForm from '@/components/bookstore/ReviewForm';
 import BookBuySection from '@/components/bookstore/BookBuySection';
 
 // JSON-LD structured data
-function buildProductJsonLd(book: SanityBook): string {
-  const lowestPrice = book.formats?.reduce(
-    (min, f) => (f.price < min ? f.price : min),
-    Infinity,
-  );
+function buildProductJsonLd(
+  book: SanityBook,
+  reviews: BookReview[],
+): string {
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(600).url()
     : book.coverImageUrl;
+
+  const reviewCount = reviews.length;
+  const averageRating =
+    reviewCount > 0
+      ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
+      : null;
+
+  const authorUrl =
+    book.author?.slug?.current
+      ? `https://www.untelevised.media/author/${book.author.slug.current}/`
+      : undefined;
 
   return JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Book',
     name: book.title,
     author: book.author?.name
-      ? { '@type': 'Person', name: book.author.name }
+      ? { '@type': 'Person', name: book.author.name, url: authorUrl }
       : undefined,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Hurriya Publications',
+      url: 'https://www.untelevised.media/bookstore/',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.untelevised.media/hurriya-pub/Logo-alt.png',
+      },
+    },
     isbn: book.isbn,
     numberOfPages: book.pages,
     inLanguage: book.language ?? 'en',
     datePublished: book.publishedAt,
     image: cover,
+    ...(averageRating !== null && {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: averageRating.toFixed(1),
+        ratingCount: reviewCount,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    }),
     offers: book.formats?.map((f) => ({
       '@type': 'Offer',
       price: f.price.toFixed(2),
@@ -93,22 +122,28 @@ export async function generateMetadata({
 
   const ogImages = cover
     ? [{ url: cover, width: 1200, height: 630, alt: book.title }]
-    : [{ url: '/hurriya-pub/Logo-alt.png', width: 1200, height: 630, alt: 'Hurriya Publications' }];
+    : [{ url: HURRIYA_OG_IMAGE, width: 1200, height: 630, alt: 'Hurriya Publications' }];
+
+  const canonicalUrl = getCanonicalUrl('bookstore', 'book', book.slug.current);
 
   return {
     title: `${book.title} — Hurriya Publications`,
     description,
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       title: book.title,
       description,
       type: 'website',
+      url: canonicalUrl,
+      siteName: 'Hurriya Publications — UnTelevised Media',
       images: ogImages,
     },
     twitter: {
       card: 'summary_large_image',
+      site: TWITTER_HANDLE,
       title: book.title,
       description,
-      images: [cover ?? '/hurriya-pub/Logo-alt.png'],
+      images: [cover ?? HURRIYA_OG_IMAGE],
     },
   };
 }
@@ -235,7 +270,7 @@ export default async function BookDetailPage({
     <>
       <script
         type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: buildProductJsonLd(book) }}
+        dangerouslySetInnerHTML={{ __html: buildProductJsonLd(book, reviews ?? []) }}
       />
       <main className='mx-auto max-w-7xl px-4 py-8 sm:px-6'>
         {/* Breadcrumb */}

@@ -15,15 +15,26 @@ import {
   queryFeaturedMusicArtists,
 } from '@/lib/sanity/lib/queries';
 import { Music, TrendingUp, Users, Clock } from 'lucide-react';
+import { DEFAULT_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata';
 
 export const metadata: Metadata = {
   title: 'Lyrics | Music & Songs',
   description:
     'Discover song lyrics from our featured artists. Read lyrics, learn about songs, and explore music from talented artists.',
   keywords: 'lyrics, songs, music, artists, hip hop, r&b, pop, rock',
+  alternates: { canonical: getCanonicalUrl('lyrics') },
   openGraph: {
+    type: 'website',
     title: 'Lyrics | Music & Songs',
-    description: 'Discover song lyrics from our featured artists',
+    description: 'Discover song lyrics from our featured artists on UnTelevised Media.',
+    url: getCanonicalUrl('lyrics'),
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'UnTelevised Media — Lyrics' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: TWITTER_HANDLE,
+    title: 'Lyrics | Music & Songs',
+    description: 'Discover song lyrics from our featured artists on UnTelevised Media.',
   },
 };
 

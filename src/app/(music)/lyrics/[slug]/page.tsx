@@ -17,6 +17,8 @@ import sanityClient from '@/lib/sanity/lib/client';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { querySongBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Clock, Calendar, ExternalLink } from 'lucide-react';
+import { SongStructuredData } from '@/components/seo/StructuredData';
+import { getCanonicalUrl, truncate, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
 
 type Props = {
   params: Promise<{
@@ -29,47 +31,48 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const song: Song = (await getSongBySlug(slug)) as Song;
 
   if (!song) {
-    return {
-      title: 'Song Not Found',
-      description: 'The requested song could not be found.',
-    };
+    return { title: 'Song Not Found', description: 'The requested song could not be found.' };
   }
 
+  const primaryName = song.primaryArtist.stageName ?? song.primaryArtist.name;
   const artistNames = [
-    song.primaryArtist.name,
-    ...(song.featuredArtists?.map((artist) => artist.name) ?? []),
+    primaryName,
+    ...(song.featuredArtists?.map((a) => a.stageName ?? a.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
-
-  const canonicalUrl = song.seo?.canonicalUrl ?? `https://www.untelevised.media/lyrics/${slug}/`;
-  const ogImage = artworkInfo.url ?? 'https://www.untelevised.media/og-default.png';
-  const computedTitle = `${song.title} - ${artistNames} | Lyrics`;
-  const title = song.seo?.metaTitle ?? computedTitle;
-  const computedDescription = `Read the lyrics to "${song.title}" by ${artistNames}.${song.description ? ' Learn more about this song and its background.' : ''}`;
-  const description = song.seo?.metaDescription ?? computedDescription;
+  const canonicalUrl = song.seo?.canonicalUrl ?? getCanonicalUrl('lyrics', slug);
+  const ogImage = artworkInfo.url ?? DEFAULT_OG_IMAGE;
+  const title = truncate(song.seo?.metaTitle ?? `${song.title} - ${artistNames} | Lyrics`, 60);
+  const description = truncate(
+    song.seo?.metaDescription ??
+      `Read the lyrics to "${song.title}" by ${artistNames} on UnTelevised Media.`,
+    160,
+  );
 
   return {
     title,
     description,
-    keywords:
-      song.keywords ?? `${song.title}, ${artistNames}, lyrics, ${song.genres?.join(', ') ?? ''}`,
+    keywords: [song.title, artistNames, 'lyrics', ...(song.genres ?? [])].join(', '),
+    publisher: 'UnTelevised Media',
     openGraph: {
-      type: 'article',
-      title: `${song.title} - ${artistNames}`,
+      type: 'music.song',
+      title: `${song.title} — ${primaryName}`,
       description,
       url: canonicalUrl,
       siteName: 'UnTelevised Media',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: artworkInfo.alt }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: artworkInfo.alt ?? song.title }],
     },
     twitter: {
       card: 'summary_large_image',
-      site: '@untelevised',
+      site: TWITTER_HANDLE,
+      creator: TWITTER_HANDLE,
       title,
       description,
       images: [ogImage],
     },
     alternates: { canonical: canonicalUrl },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -86,33 +89,9 @@ export default async function LyricsPage({ params }: Props) {
 
   const artworkInfo = getSongArtworkInfo(song);
 
-  const musicCompositionSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'MusicComposition',
-    name: song.title,
-    composer: {
-      '@type': 'MusicGroup',
-      name: song.primaryArtist.stageName ?? song.primaryArtist.name,
-      url: `https://www.untelevised.media/music-artists/${song.primaryArtist.slug.current}/`,
-    },
-    ...(song.album ? {
-      inAlbum: {
-        '@type': 'MusicAlbum',
-        name: song.album.title,
-        url: `https://www.untelevised.media/albums/${song.album.slug.current}/`,
-      },
-    } : {}),
-    genre: song.genres ?? [],
-    url: `https://www.untelevised.media/lyrics/${slug}/`,
-    image: artworkInfo.url ?? 'https://www.untelevised.media/og-default.png',
-  };
-
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(musicCompositionSchema) }}
-      />
+      <SongStructuredData song={song} />
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}

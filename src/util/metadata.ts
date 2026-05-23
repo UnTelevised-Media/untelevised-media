@@ -6,8 +6,9 @@ import urlForImage from './urlForImage';
 
 const BASE_URL = 'https://www.untelevised.media';
 const SITE_NAME = 'UnTelevised Media';
-const TWITTER_HANDLE = '@untelevised';
-const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.png`;
+export const TWITTER_HANDLE = '@untelevised';
+export const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.png`;
+export const HURRIYA_OG_IMAGE = `${BASE_URL}/hurriya-pub/Logo-alt.png`;
 
 // Canonical URL builder — always uses trailing slash (matches trailingSlash: true in next.config)
 export function getCanonicalUrl(...segments: string[]): string {
@@ -55,6 +56,7 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
       url: canonicalUrl,
       siteName: SITE_NAME,
       publishedTime: article.publishedAt,
+      modifiedTime: article.updatedAt ?? article.publishedAt,
       authors: article.author?.name ? [article.author.name] : undefined,
       section: article.categories?.[0]?.title,
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
@@ -140,6 +142,77 @@ export function buildCategoryMetadata(category: Category, slug: string): Metadat
       site: TWITTER_HANDLE,
       title,
       description,
+    },
+    alternates: { canonical: canonicalUrl },
+    robots: { index: true, follow: true },
+  };
+}
+
+// Build breaking news article Metadata object
+export function buildBreakingNewsMetadata(article: BreakingArticle, slug: string): Metadata {
+  const ogImageUrl =
+    getSanityOgImageUrl(article.heroImage ?? article.mainImage) ?? DEFAULT_OG_IMAGE;
+  const canonicalUrl = getCanonicalUrl('breaking', slug);
+  const title = truncate(article.title, 60);
+  const description = truncate(article.summary ?? article.description ?? article.excerpt, 160);
+
+  return {
+    title,
+    description,
+    authors: article.author ? [{ name: article.author.name }] : undefined,
+    publisher: SITE_NAME,
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: SITE_NAME,
+      publishedTime: article.publishedAt,
+      modifiedTime: article.updatedAt ?? article.publishedAt,
+      section: 'Breaking News',
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: TWITTER_HANDLE,
+      creator: TWITTER_HANDLE,
+      title,
+      description,
+      images: [ogImageUrl],
+    },
+    alternates: { canonical: canonicalUrl },
+    robots: { index: true, follow: true },
+  };
+}
+
+// Build fact-check Metadata object
+export function buildFactCheckMetadata(factCheck: FactCheck, slug: string): Metadata {
+  const ogImageUrl = getSanityOgImageUrl(factCheck.mainImage) ?? DEFAULT_OG_IMAGE;
+  const canonicalUrl = getCanonicalUrl('fact-check', slug);
+  const title = truncate(`Fact Check: ${factCheck.title}`, 60);
+  const description = truncate(factCheck.ratingExplanation ?? factCheck.description, 160);
+
+  return {
+    title,
+    description,
+    publisher: SITE_NAME,
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: SITE_NAME,
+      publishedTime: factCheck.publishedAt,
+      modifiedTime: factCheck.updatedAt ?? factCheck.publishedAt,
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: TWITTER_HANDLE,
+      creator: TWITTER_HANDLE,
+      title,
+      description,
+      images: [ogImageUrl],
     },
     alternates: { canonical: canonicalUrl },
     robots: { index: true, follow: true },

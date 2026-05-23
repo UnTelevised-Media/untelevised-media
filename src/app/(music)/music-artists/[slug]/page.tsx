@@ -17,6 +17,8 @@ import sanityClient from '@/lib/sanity/lib/client';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryMusicArtistBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Calendar, MapPin, ExternalLink, Instagram, Twitter, Youtube } from 'lucide-react';
+import { ArtistStructuredData } from '@/components/seo/StructuredData';
+import { getCanonicalUrl, getSanityOgImageUrl, truncate, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
 
 type Props = {
   params: Promise<{
@@ -34,26 +36,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const artist: ArtistWithContent = (await getMusicArtistBySlug(slug)) as ArtistWithContent;
 
   if (!artist) {
-    return {
-      title: 'Artist Not Found',
-      description: 'The requested artist could not be found.',
-    };
+    return { title: 'Artist Not Found', description: 'The requested artist could not be found.' };
   }
 
   const displayName = artist.stageName ?? artist.name;
-  const canonicalUrl = artist.seo?.canonicalUrl ?? `https://www.untelevised.media/music-artists/${slug}/`;
-  const ogImageUrl = artist.image
-    ? (urlForImage(artist.image)?.width(1200).height(630).url() ?? '')
-    : 'https://www.untelevised.media/og-default.png';
-  const computedTitle = `${displayName} | Music Artist`;
-  const title = artist.seo?.metaTitle ?? computedTitle;
-  const computedDescription = `Discover songs and albums by ${displayName}. ${artist.bio ? 'Learn more about this artist and their music.' : ''}`;
-  const description = artist.seo?.metaDescription ?? computedDescription;
+  const canonicalUrl = artist.seo?.canonicalUrl ?? getCanonicalUrl('music-artists', slug);
+  const ogImageUrl = getSanityOgImageUrl(artist.image) ?? DEFAULT_OG_IMAGE;
+  const title = truncate(artist.seo?.metaTitle ?? `${displayName} | Music Artist`, 60);
+  const description = truncate(
+    artist.seo?.metaDescription ??
+      `Discover songs and albums by ${displayName} on UnTelevised Media.`,
+    160,
+  );
 
   return {
     title,
     description,
-    keywords: `${displayName}, ${artist.name}, music, artist, songs, albums, ${artist.genres?.join(', ') ?? ''}`,
+    keywords: [displayName, artist.name, 'music', 'artist', 'songs', 'albums', ...(artist.genres ?? [])].join(', '),
+    publisher: 'UnTelevised Media',
     openGraph: {
       type: 'profile',
       title: displayName,
@@ -64,12 +64,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      site: '@untelevised',
+      site: TWITTER_HANDLE,
+      creator: TWITTER_HANDLE,
       title,
       description,
       images: [ogImageUrl],
     },
     alternates: { canonical: canonicalUrl },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -81,33 +83,9 @@ export default async function MusicArtistPage({ params }: Props) {
 
   const displayName = artist.stageName ?? artist.name;
 
-  const sameAs = [
-    artist.socialMedia?.instagram ? `https://instagram.com/${artist.socialMedia.instagram}` : null,
-    artist.socialMedia?.twitter ? `https://twitter.com/${artist.socialMedia.twitter}` : null,
-    artist.socialMedia?.youtube ?? null,
-    artist.socialMedia?.spotify ?? null,
-    artist.website ?? null,
-  ].filter(Boolean);
-
-  const musicGroupSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'MusicGroup',
-    name: displayName,
-    genre: artist.genres ?? [],
-    url: `https://www.untelevised.media/music-artists/${slug}/`,
-    image: artist.image
-      ? (urlForImage(artist.image)?.width(1200).height(630).url() ?? undefined)
-      : undefined,
-    ...(sameAs.length > 0 ? { sameAs } : {}),
-    ...(artist.hometown ? { foundingLocation: { '@type': 'Place', name: artist.hometown } } : {}),
-  };
-
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(musicGroupSchema) }}
-      />
+      <ArtistStructuredData artist={artist} songs={artist.songs} />
       {/* Hero Section */}
       <section className='bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900'>
         <div className='container mx-auto px-4 py-16'>

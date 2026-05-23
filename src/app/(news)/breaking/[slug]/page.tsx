@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+﻿/* eslint-disable react/function-component-definition */
 // src/app/(user)/live-event/[slug]/page.tsx
 import Image from 'next/image';
 import { groq } from 'next-sanity';
@@ -19,7 +19,7 @@ import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
-import { buildLiveEventMetadata, getSanityOgImageUrl } from '@/util/metadata';
+import { buildLiveEventMetadata, getSanityOgImageUrl, getCanonicalUrl } from '@/util/metadata';
 
 type Props = {
   params: Promise<{
@@ -30,8 +30,19 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const { data: liveEvent } = await sanityFetch({ query: queryEventBySlug, params: { slug }, tags: ['liveEvent'] });
-  if (!liveEvent) return { title: 'Live Event Not Found' };
-  return buildLiveEventMetadata(liveEvent, slug);
+  if (!liveEvent) return { title: 'Breaking News Not Found' };
+  const base = buildLiveEventMetadata(liveEvent, slug);
+  const canonicalUrl = getCanonicalUrl('breaking', slug);
+  return {
+    ...base,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      ...base.openGraph,
+      url: canonicalUrl,
+      type: 'article',
+      section: 'Breaking News',
+    },
+  };
 }
 
 export default async function LiveEvent({ params }: Props) {
@@ -161,10 +172,10 @@ export default async function LiveEvent({ params }: Props) {
 
               {/* Location & Dates */}
               <div className='flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400'>
-                {liveEvent.location && <span>📍 {liveEvent.location}</span>}
+                {liveEvent.location && <span>ðŸ“ {liveEvent.location}</span>}
                 <span>{formatDate(liveEvent.eventDate || liveEvent._createdAt)}</span>
                 {liveEvent.endDate && (
-                  <span>– {formatDate(liveEvent.endDate)}</span>
+                  <span>â€“ {formatDate(liveEvent.endDate)}</span>
                 )}
               </div>
             </div>
@@ -276,3 +287,4 @@ export async function generateStaticParams() {
     slug,
   }));
 }
+

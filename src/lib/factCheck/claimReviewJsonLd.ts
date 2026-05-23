@@ -13,11 +13,12 @@ export interface FactCheckDoc {
   ratingExplanation: string;
 }
 
-const SITE_URL = 'https://untelevised.media';
+const SITE_URL = 'https://www.untelevised.media';
 
 export function buildClaimReviewJsonLd(fc: FactCheckDoc): object {
   const config = VERDICT_CONFIG[fc.rating];
-  const pageUrl = `${SITE_URL}/fact-check/${fc.slug.current}`;
+  const safeSlug = fc.slug.current.replace(/[<>"'&]/g, '');
+  const pageUrl = `${SITE_URL}/fact-check/${safeSlug}`;
 
   return {
     '@context': 'https://schema.org',

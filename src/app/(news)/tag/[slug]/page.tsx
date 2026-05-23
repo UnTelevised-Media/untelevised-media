@@ -11,6 +11,7 @@ import { sanityFetch } from '@/lib/sanity/lib/live';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAllTags, queryArticlesByTag } from '@/lib/sanity/lib/queries';
 import { tagToSlug, slugToTagLabel } from '@/lib/tagUtils';
+import { getCanonicalUrl, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
 
 type Props = {
   params: Promise<{
@@ -21,11 +22,22 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const label = slugToTagLabel(slug);
+  const canonicalUrl = getCanonicalUrl('tag', slug);
   return {
     title: `${label} | UnTelevised Media`,
     description: `Browse all UnTelevised Media articles filed under the tag "${label}".`,
-    alternates: {
-      canonical: `https://www.untelevised.media/tag/${slug}`,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      type: 'website',
+      title: `${label} | UnTelevised Media`,
+      description: `Browse all UnTelevised Media articles filed under the tag "${label}".`,
+      url: canonicalUrl,
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: `${label} — UnTelevised Media` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: TWITTER_HANDLE,
+      title: `${label} | UnTelevised Media`,
     },
   };
 }
