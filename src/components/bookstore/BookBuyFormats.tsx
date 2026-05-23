@@ -2,9 +2,10 @@
 // src/components/bookstore/BookBuyFormats.tsx
 // Client component — owns gift toggle state and NYOP amounts, renders per-format buy actions.
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { SanityBook, SanityBookFormat, GiftOptions } from '@/lib/bookstore/types';
 import { getStripeIdForFormat } from '@/lib/bookstore/stripeUtils';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 import AddToCartButton from './AddToCartButton';
 import BuyNowButton from './BuyNowButton';
 import GiftToggle from './GiftToggle';
@@ -23,6 +24,8 @@ interface Props {
 export default function BookBuyFormats({ book }: Props) {
   const [giftOptions, setGiftOptions] = useState<GiftOptions | null>(null);
   const [nyopAmounts, setNyopAmounts] = useState<Record<string, string>>({});
+  const { trackEvent } = useConsentAwareTracking();
+  const viewFired = useRef(false);
 
   useEffect(() => {
     const initial: Record<string, string> = {};
@@ -34,6 +37,23 @@ export default function BookBuyFormats({ book }: Props) {
     });
     setNyopAmounts(initial);
   }, [book.formats]);
+
+  useEffect(() => {
+    if (viewFired.current || !book.formats?.length) return;
+    viewFired.current = true;
+    const lowestPrice = Math.min(...book.formats.map((f) => f.price ?? 0));
+    trackEvent('view_item', {
+      currency: 'USD',
+      value: lowestPrice,
+      items: book.formats.map((f) => ({
+        item_id: book._id,
+        item_name: book.title,
+        item_variant: f.formatType,
+        item_category: 'Book',
+        price: f.price,
+      })),
+    });
+  }, [trackEvent]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

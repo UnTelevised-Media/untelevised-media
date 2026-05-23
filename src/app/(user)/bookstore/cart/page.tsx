@@ -4,8 +4,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import * as Sentry from '@sentry/nextjs';
 import { useUser } from '@clerk/nextjs';
 import { useCart } from '@/lib/bookstore/cart';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 import type { CheckoutPayload } from '@/lib/bookstore/types';
 import PreCheckoutDialog from '@/components/bookstore/PreCheckoutDialog';
 
@@ -51,6 +53,7 @@ export default function CartPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showAuthDialog, setShowAuthDialog] = useState(false);
+  const { trackEvent } = useConsentAwareTracking();
 
   const total = items.reduce((sum, i) => {
     if (i.formatType === 'tip') return i.tipIncluded !== false ? sum + i.price : sum;
@@ -72,6 +75,18 @@ export default function CartPage() {
 
     setLoading(true);
     setError(null);
+
+    trackEvent('begin_checkout', {
+      currency: 'USD',
+      value: total,
+      items: items.map((i) => ({
+        item_id: i.sanityBookId,
+        item_name: i.title,
+        item_variant: i.formatType,
+        price: i.price,
+        quantity: i.quantity,
+      })),
+    });
 
     const payload: CheckoutPayload = {
       items: items
@@ -104,11 +119,14 @@ export default function CartPage() {
       });
       const data = (await res.json()) as { url?: string; error?: string };
       if (!res.ok || !data.url) {
-        setError(data.error ?? 'Failed to start checkout');
+        const msg = data.error ?? 'Failed to start checkout';
+        Sentry.captureMessage(msg, { level: 'error', extra: { itemCount: payload.items.length, total } });
+        setError(msg);
         return;
       }
       window.location.href = data.url;
-    } catch {
+    } catch (err) {
+      Sentry.captureException(err, { extra: { itemCount: payload.items.length } });
       setError('Network error — please try again');
     } finally {
       setLoading(false);

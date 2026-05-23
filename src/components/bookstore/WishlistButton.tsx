@@ -5,6 +5,7 @@
 
 import { Star } from 'lucide-react';
 import { useWishlist } from '@/hooks/useWishlist';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 import type { WishlistEntry } from '@/lib/wishlist/storage';
 
 type WishlistButtonProps = Omit<WishlistEntry, 'addedAt'> & {
@@ -22,10 +23,16 @@ export default function WishlistButton({
   variant = 'icon',
 }: WishlistButtonProps) {
   const { isWishlisted, toggle, ready } = useWishlist();
+  const { trackEvent } = useConsentAwareTracking();
   const saved = isWishlisted(slug);
 
   const handleToggle = () => {
     toggle({ slug, title, coverImageUrl, authorName, price });
+    trackEvent(saved ? 'remove_from_wishlist' : 'add_to_wishlist', {
+      item_id: slug,
+      item_name: title,
+      price,
+    });
   };
 
   if (!ready) {

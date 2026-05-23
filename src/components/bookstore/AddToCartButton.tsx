@@ -38,7 +38,7 @@ export default function AddToCartButton({ book, format, customPrice, disabled }:
     trackEvent('add_to_cart', {
       currency: 'USD',
       value: price,
-      items: [{ item_id: book._id, item_name: book.title, item_variant: format.formatType, price }],
+      items: [{ item_id: book._id, item_name: book.title, item_variant: format.formatType, item_category: 'Book', price, quantity: 1 }],
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);

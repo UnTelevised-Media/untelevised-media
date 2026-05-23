@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import * as Sentry from '@sentry/nextjs';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 import type { SanityBook, SanityBookFormat, CheckoutPayload, GiftOptions } from '@/lib/bookstore/types';
 import { getStripeIdForFormat } from '@/lib/bookstore/stripeUtils';
 
@@ -25,6 +27,7 @@ export default function BuyNowButton({
 }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { trackEvent } = useConsentAwareTracking();
 
   const handleBuyNow = async () => {
     const isNyop = !!format.nameYourPrice;
@@ -56,6 +59,19 @@ export default function BuyNowButton({
       ...(giftOptions ? { giftOptions } : {}),
     };
 
+    trackEvent('begin_checkout', {
+      currency: 'USD',
+      value: customPrice ?? format.price,
+      items: [{
+        item_id: book._id,
+        item_name: book.title,
+        item_variant: format.formatType,
+        item_category: 'Book',
+        price: customPrice ?? format.price,
+        quantity: 1,
+      }],
+    });
+
     try {
       const res = await fetch('/api/bookstore/checkout', {
         method: 'POST',
@@ -64,11 +80,14 @@ export default function BuyNowButton({
       });
       const data = (await res.json()) as { url?: string; error?: string };
       if (!res.ok || !data.url) {
-        setError(data.error ?? 'Checkout failed');
+        const msg = data.error ?? 'Checkout failed';
+        Sentry.captureMessage(msg, { level: 'error', extra: { bookId: book._id, formatType: format.formatType } });
+        setError(msg);
         return;
       }
       window.location.href = data.url;
-    } catch {
+    } catch (err) {
+      Sentry.captureException(err, { extra: { bookId: book._id, formatType: format.formatType } });
       setError('Network error — please try again');
     } finally {
       setLoading(false);

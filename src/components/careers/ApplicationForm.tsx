@@ -1,11 +1,13 @@
 'use client';
 // src/components/careers/ApplicationForm.tsx
 import React, { useState } from 'react';
+import * as Sentry from '@sentry/nextjs';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { jobApplicationSchema, type JobApplicationFormData } from '@/lib/validations/jobApplicationSchema';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 import { TurnstileWidget } from '@/components/global/TurnstileWidget';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 
 interface ApplicationFormProps {
   prefilledPosition?: string;
@@ -15,6 +17,7 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [serverError, setServerError] = useState('');
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const { trackEvent } = useConsentAwareTracking();
 
   const {
     register,
@@ -47,9 +50,11 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error ?? 'Submission failed');
+      trackEvent('job_application_submitted', { position: data.position });
       setSubmitState('success');
       reset();
     } catch (err: unknown) {
+      Sentry.captureException(err, { extra: { position: data.position } });
       setSubmitState('error');
       setServerError(err instanceof Error ? err.message : 'An error occurred. Please try again.');
     }

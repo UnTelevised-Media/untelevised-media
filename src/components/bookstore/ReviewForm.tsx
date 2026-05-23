@@ -3,6 +3,8 @@
 // Client component — allows readers to submit a review for admin moderation.
 
 import { useState } from 'react';
+import * as Sentry from '@sentry/nextjs';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 
 interface Props {
   bookSlug: string;
@@ -18,6 +20,7 @@ export default function ReviewForm({ bookSlug }: Props) {
   const [body, setBody] = useState('');
   const [state, setState] = useState<State>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const { trackEvent } = useConsentAwareTracking();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,12 +47,16 @@ export default function ReviewForm({ bookSlug }: Props) {
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok || !data.ok) {
-        setErrorMsg(data.error ?? 'Something went wrong — please try again.');
+        const msg = data.error ?? 'Something went wrong — please try again.';
+        Sentry.captureMessage(msg, { level: 'error', extra: { bookSlug, rating } });
+        setErrorMsg(msg);
         setState('error');
         return;
       }
+      trackEvent('review_submitted', { book_slug: bookSlug, rating });
       setState('success');
-    } catch {
+    } catch (err) {
+      Sentry.captureException(err, { extra: { bookSlug } });
       setErrorMsg('Network error — please try again.');
       setState('error');
     }

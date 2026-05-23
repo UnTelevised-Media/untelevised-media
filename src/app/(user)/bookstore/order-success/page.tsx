@@ -6,7 +6,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import Stripe from 'stripe';
 import CartClearer from '@/components/bookstore/CartClearer';
-import PurchaseTracker from '@/components/bookstore/PurchaseTracker';
+import PurchaseTracker, { type GA4Item } from '@/components/bookstore/PurchaseTracker';
 
 export const metadata: Metadata = {
   title: 'Order Confirmed — Hurriya Publications',
@@ -42,9 +42,27 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
   const items = session.line_items?.data ?? [];
   const hasDigital = session.metadata?.has_digital === 'true';
 
+  // Build GA4 items array from the server-side metadata written at checkout time.
+  // items_json mirrors the chargeableItems array so index-aligns with line_items.
+  interface ItemMeta { bookId: string; title: string; formatType: string; qty: number }
+  let itemsMeta: ItemMeta[] = [];
+  try { itemsMeta = JSON.parse(session.metadata?.items_json ?? '[]') as ItemMeta[]; } catch {}
+
+  const ga4Items: GA4Item[] = itemsMeta.map((meta, idx) => {
+    const lineItem = items[idx];
+    const lineTotal = lineItem ? ((lineItem.amount_total || lineItem.amount_subtotal) ?? 0) / 100 : undefined;
+    return {
+      item_id: meta.bookId,
+      item_name: meta.title,
+      item_variant: meta.formatType,
+      price: lineTotal != null && meta.qty > 0 ? lineTotal / meta.qty : lineTotal,
+      quantity: meta.qty,
+    };
+  });
+
   return (
     <div>
-      <PurchaseTracker sessionId={sessionId} total={totalCents ? totalCents / 100 : null} />
+      <PurchaseTracker sessionId={sessionId} total={totalCents ? totalCents / 100 : null} items={ga4Items} />
       <p className='mb-4 text-sm text-slate-600 dark:text-slate-400'>
         Thank you, {session.customer_details?.name ?? 'valued customer'}! Your payment was
         successful.

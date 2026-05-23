@@ -11,6 +11,7 @@ import { Toaster } from '@/components/ui/toaster';
 import dynamic from 'next/dynamic';
 import { ConsentProvider } from '@/lib/consent';
 import ConsentAwareAnalytics from '@/components/analytics/ConsentAwareAnalytics';
+import SentryUserSync from '@/components/providers/SentryUserSync';
 
 // Defer framer-motion consent UI into a separate code-split chunk
 const CookieConsentBanner = dynamic(() => import('@/components/consent/CookieConsentBanner'));
@@ -110,6 +111,7 @@ const RootLayout = ({
           Skip to main content
         </a>
         <ClerkProvider afterSignOutUrl='/'>
+          <SentryUserSync />
           <ErrorBoundary>
             <ConsentProvider>
               <ThemeProvider
