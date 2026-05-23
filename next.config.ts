@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { withSentryConfig } from '@sentry/nextjs';
 
 const securityHeaders = [
   { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
@@ -88,4 +89,13 @@ const nextConfig: NextConfig = {
 // Bundle analyzer: run `ANALYZE=true next build` (uses webpack, not Turbopack)
 // To enable: const { default: withBundleAnalyzer } = await import('@next/bundle-analyzer')
 // export default withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig)
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  silent: !process.env.CI,
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  // Upload source maps only in CI/production to avoid local noise
+  sourcemaps: { disable: !process.env.CI },
+  // Automatically tree-shake Sentry logger messages in production
+  disableLogger: true,
+});
