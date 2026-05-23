@@ -6,6 +6,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import Stripe from 'stripe';
 import CartClearer from '@/components/bookstore/CartClearer';
+import PurchaseTracker from '@/components/bookstore/PurchaseTracker';
 
 export const metadata: Metadata = {
   title: 'Order Confirmed — Hurriya Publications',
@@ -36,12 +37,14 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
 
   // amount_total is 0 when a 100% promo is applied — fall back to amount_subtotal (list price)
   const displayTotal = session.amount_total || session.amount_subtotal;
-  const total = displayTotal ? (displayTotal / 100).toFixed(2) : null;
+  const totalCents = displayTotal ?? null;
+  const total = totalCents ? (totalCents / 100).toFixed(2) : null;
   const items = session.line_items?.data ?? [];
   const hasDigital = session.metadata?.has_digital === 'true';
 
   return (
     <div>
+      <PurchaseTracker sessionId={sessionId} total={totalCents ? totalCents / 100 : null} />
       <p className='mb-4 text-sm text-slate-600 dark:text-slate-400'>
         Thank you, {session.customer_details?.name ?? 'valued customer'}! Your payment was
         successful.

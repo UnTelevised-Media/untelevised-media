@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import { useCart, buildCartItem } from '@/lib/bookstore/cart';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 import type { SanityBook, SanityBookFormat } from '@/lib/bookstore/types';
 
 interface Props {
@@ -15,9 +16,11 @@ interface Props {
 export default function AddToCartButton({ book, format, customPrice, disabled }: Props) {
   const [added, setAdded] = useState(false);
   const addItem = useCart((s) => s.addItem);
+  const { trackEvent } = useConsentAwareTracking();
 
   const handleAdd = () => {
     const isNyop = !!format.nameYourPrice;
+    const price = isNyop ? (customPrice ?? 0) : format.price;
     addItem(
       buildCartItem({
         sanityBookId: book._id,
@@ -26,12 +29,17 @@ export default function AddToCartButton({ book, format, customPrice, disabled }:
         coverImageRef: book.coverImage?.asset?._ref,
         formatKey: format._key,
         formatType: format.formatType,
-        price: isNyop ? (customPrice ?? 0) : format.price,
+        price,
         // NYOP items use the product ID so the checkout route can build price_data
         stripePriceId: isNyop ? (format.stripeProductId ?? '') : (format.stripePriceId ?? ''),
         nameYourPrice: isNyop || undefined,
       }),
     );
+    trackEvent('add_to_cart', {
+      currency: 'USD',
+      value: price,
+      items: [{ item_id: book._id, item_name: book.title, item_variant: format.formatType, price }],
+    });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
