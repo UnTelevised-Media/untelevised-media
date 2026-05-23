@@ -3,6 +3,7 @@
 import React from 'react';
 
 import { ChevronRight, Flame } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import ClientSideRoute from '../providers/ClientSideRoute';
 
 interface Category {
@@ -16,13 +17,16 @@ interface NavProps {
 }
 
 const Nav: React.FC<NavProps> = ({ categories }) => {
+  const pathname = usePathname();
+
   const formatCategoryTitle = (title: string) => {
-    // Convert to lowercase
     let formattedTitle = title.toLowerCase();
-    // Remove symbols and spaces, and replace them with a dash
     formattedTitle = formattedTitle.replace(/[^a-z0-9]+/g, '-');
     return formattedTitle;
   };
+
+  const isActive = (title: string) =>
+    pathname === `/category/${formatCategoryTitle(title)}`;
 
   const sortedCategories = categories.sort((a, b) => a.order - b.order);
 
@@ -51,7 +55,10 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
               <React.Fragment key={category._id}>
                 <li>
                   <ClientSideRoute route={`/category/${formatCategoryTitle(category.title)}`}>
-                    <div className='group relative flex cursor-pointer items-center space-x-2 whitespace-nowrap rounded-lg border border-transparent px-3 py-2 font-medium text-slate-700 transition-all duration-300 hover:border-slate-400/50 hover:bg-slate-300/30 hover:text-slate-900 hover:shadow-lg dark:text-slate-300 dark:hover:border-slate-600/50 dark:hover:bg-slate-700/30 dark:hover:text-white'>
+                    <div
+                      aria-current={isActive(category.title) ? 'page' : undefined}
+                      className='group relative flex cursor-pointer items-center space-x-2 whitespace-nowrap rounded-lg border border-transparent px-3 py-2 font-medium text-slate-700 transition-all duration-300 hover:border-slate-400/50 hover:bg-slate-300/30 hover:text-slate-900 hover:shadow-lg dark:text-slate-300 dark:hover:border-slate-600/50 dark:hover:bg-slate-700/30 dark:hover:text-white'
+                    >
                       {/* Animated background gradient */}
                       <div className='absolute inset-0 rounded-lg bg-gradient-to-r from-untele/0 via-untele/5 to-untele/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100' aria-hidden='true' />
 
@@ -87,21 +94,23 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
 
               {/* Dropdown Menu */}
               <div className='pointer-events-none absolute right-0 top-full z-[9999] mt-2 w-64 rounded-lg border border-slate-400/50 bg-slate-200/95 p-2 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100 dark:border-slate-600/50 dark:bg-slate-800/95'>
-                <div className='grid grid-cols-2 gap-2'>
+                <ul role='list' className='grid grid-cols-2 gap-2'>
                   {secondaryCategories.map((category) => (
-                    <ClientSideRoute
-                      key={category._id}
-                      route={`/category/${formatCategoryTitle(category.title)}`}
-                    >
-                      <div className='group/item cursor-pointer rounded-md px-3 py-2 text-sm text-slate-700 transition-colors duration-200 hover:bg-slate-300/50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white'>
-                        <div className='flex items-center space-x-2'>
-                          <div className='h-1.5 w-1.5 rounded-full bg-untele/60 transition-colors duration-200 group-hover/item:bg-untele' />
-                          <span>{category.title}</span>
+                    <li key={category._id}>
+                      <ClientSideRoute route={`/category/${formatCategoryTitle(category.title)}`}>
+                        <div
+                          aria-current={isActive(category.title) ? 'page' : undefined}
+                          className='group/item cursor-pointer rounded-md px-3 py-2 text-sm text-slate-700 transition-colors duration-200 hover:bg-slate-300/50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white'
+                        >
+                          <div className='flex items-center space-x-2'>
+                            <div className='h-1.5 w-1.5 rounded-full bg-untele/60 transition-colors duration-200 group-hover/item:bg-untele' aria-hidden='true' />
+                            <span>{category.title}</span>
+                          </div>
                         </div>
-                      </div>
-                    </ClientSideRoute>
+                      </ClientSideRoute>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
           )}
@@ -131,7 +140,10 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
               {sortedCategories.map((category) => (
                 <li key={category._id}>
                   <ClientSideRoute route={`/category/${formatCategoryTitle(category.title)}`}>
-                    <div className='flex cursor-pointer items-center space-x-1 whitespace-nowrap rounded-full border border-slate-400/50 bg-slate-200/30 px-2.5 py-1 text-xs font-medium text-slate-600 backdrop-blur-sm transition-all duration-200 hover:border-untele/50 hover:bg-untele/10 hover:text-slate-900 dark:border-slate-600/50 dark:bg-slate-800/30 dark:text-slate-400 dark:hover:text-white'>
+                    <div
+                      aria-current={isActive(category.title) ? 'page' : undefined}
+                      className='flex cursor-pointer items-center space-x-1 whitespace-nowrap rounded-full border border-slate-400/50 bg-slate-200/30 px-2.5 py-1 text-xs font-medium text-slate-600 backdrop-blur-sm transition-all duration-200 hover:border-untele/50 hover:bg-untele/10 hover:text-slate-900 dark:border-slate-600/50 dark:bg-slate-800/30 dark:text-slate-400 dark:hover:text-white'
+                    >
                       <div className='h-1 w-1 rounded-full bg-untele/60' aria-hidden='true' />
                       <span>{category.title}</span>
                     </div>
