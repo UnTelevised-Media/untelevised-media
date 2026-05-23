@@ -7,6 +7,34 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import type { CartItem, FormatType } from './types';
 
+const MAX_CART_SIZE = 50;
+
+// Debounce localStorage writes to avoid excessive synchronous I/O on
+// rapid state updates (e.g. quantity changes, multi-item adds).
+let _debounceTimer: ReturnType<typeof setTimeout> | null = null;
+const debouncedStorage: Storage = {
+  get length() {
+    return localStorage.length;
+  },
+  key: (index: number) => localStorage.key(index),
+  getItem: (name: string): string | null => localStorage.getItem(name),
+  setItem: (name: string, value: string): void => {
+    if (_debounceTimer !== null) clearTimeout(_debounceTimer);
+    _debounceTimer = setTimeout(() => {
+      localStorage.setItem(name, value);
+      _debounceTimer = null;
+    }, 300);
+  },
+  removeItem: (name: string): void => {
+    if (_debounceTimer !== null) {
+      clearTimeout(_debounceTimer);
+      _debounceTimer = null;
+    }
+    localStorage.removeItem(name);
+  },
+  clear: () => localStorage.clear(),
+};
+
 interface CartState {
   items: CartItem[];
   addItem: (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => void;
@@ -29,6 +57,7 @@ export const useCart = create<CartState>()(
           const existing = state.items.find(
             (i) => i.sanityBookId === incoming.sanityBookId && i.formatKey === incoming.formatKey
           );
+          if (!existing && state.items.length >= MAX_CART_SIZE) return state;
           if (existing) {
             // Tips don't stack quantity — update price and re-check instead
             if (incoming.formatType === 'tip') {
@@ -100,7 +129,7 @@ export const useCart = create<CartState>()(
     }),
     {
       name: 'untele-cart',
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => debouncedStorage),
     }
   )
 );
