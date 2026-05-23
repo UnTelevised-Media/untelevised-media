@@ -35,6 +35,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@mantine/core": "^8.3.18",
     "@mantine/hooks": "^8.3.18",
+    "@marsidev/react-turnstile": "^1.5.2",
     "@next/third-parties": "^16.1.6",
     "@portabletext/react": "^6.0.3",
     "@portabletext/toolkit": "^5.0.2",

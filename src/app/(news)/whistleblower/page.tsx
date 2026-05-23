@@ -4,6 +4,7 @@
 
 import React, { useState } from 'react';
 import { Eye, Shield, Lock, AlertTriangle, FileText } from 'lucide-react';
+import { TurnstileWidget } from '@/components/global/TurnstileWidget';
 
 export default function WhistleblowerPage() {
   const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ export default function WhistleblowerPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submissionId, setSubmissionId] = useState<string>('');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -54,6 +56,7 @@ export default function WhistleblowerPage() {
           ...formData,
           submissionId: newSubmissionId,
           submittedAt: new Date().toISOString(),
+          ...(captchaToken ? { turnstileToken: captchaToken } : {}),
         }),
       });
 
@@ -410,6 +413,12 @@ export default function WhistleblowerPage() {
                 </div>
               </div>
             </div>
+
+            <TurnstileWidget
+              onSuccess={setCaptchaToken}
+              onExpire={() => setCaptchaToken(null)}
+              onError={() => setCaptchaToken(null)}
+            />
 
             {/* Submit Button */}
             <button

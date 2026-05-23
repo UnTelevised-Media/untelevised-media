@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { jobApplicationSchema, type JobApplicationFormData } from '@/lib/validations/jobApplicationSchema';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { TurnstileWidget } from '@/components/global/TurnstileWidget';
 
 interface ApplicationFormProps {
   prefilledPosition?: string;
@@ -13,6 +14,7 @@ interface ApplicationFormProps {
 export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [serverError, setServerError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const {
     register,
@@ -36,6 +38,7 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
         formData.append(key, String(value));
       }
     });
+    if (captchaToken) formData.append('turnstileToken', captchaToken);
 
     try {
       const res = await fetch('/api/careers-application', {
@@ -220,6 +223,12 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
           <p className='text-sm text-red-400'>{serverError}</p>
         </div>
       )}
+
+      <TurnstileWidget
+        onSuccess={setCaptchaToken}
+        onExpire={() => setCaptchaToken(null)}
+        onError={() => setCaptchaToken(null)}
+      />
 
       <button
         type='submit'

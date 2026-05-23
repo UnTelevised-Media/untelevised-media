@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sanityClient from '@/lib/sanity/lib/client';
 import { checkSubmissionRate } from '@/lib/bookstore/ratelimit';
+import { verifyCaptcha } from '@/lib/captcha';
 
 const SecureContactSchema = z.object({
   name: z.string().max(200).trim().optional(),
@@ -13,6 +14,7 @@ const SecureContactSchema = z.object({
   urgency: z.enum(['low', 'medium', 'high', 'critical']).default('medium'),
   contactMethod: z.enum(['email', 'phone', 'signal', 'none']).default('email'),
   isAnonymous: z.boolean().default(false),
+  turnstileToken: z.string().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -39,6 +41,11 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data;
+
+    const captchaOk = await verifyCaptcha(data.turnstileToken);
+    if (!captchaOk) {
+      return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 400 });
+    }
 
     // Create the document in Sanity
     const doc = {
