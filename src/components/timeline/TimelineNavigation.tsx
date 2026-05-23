@@ -368,7 +368,14 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({
             <span>Timeline Progress</span>
             <span>{Math.round(((currentEventIndex + 1) / sortedEvents.length) * 100)}%</span>
           </div>
-          <div className='h-2 w-full rounded-full bg-slate-200 dark:bg-slate-700'>
+          <div
+            className='h-2 w-full rounded-full bg-slate-200 dark:bg-slate-700'
+            role='progressbar'
+            aria-valuenow={currentEventIndex + 1}
+            aria-valuemin={1}
+            aria-valuemax={sortedEvents.length}
+            aria-label='Timeline progress'
+          >
             <motion.div
               className='h-2 rounded-full bg-untele'
               initial={{ width: 0 }}
