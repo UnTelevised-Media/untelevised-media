@@ -4,6 +4,39 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-05-23] — Phase 4 Audit Remediation (feature/phase4-audit-remediation → development)
+
+All 17 Phase 4 audit items closed across security, accessibility, architecture, and observability. Issue [#86](https://github.com/UnTelevised-Media/untelevised-media-new/issues/86) · PR [#87](https://github.com/UnTelevised-Media/untelevised-media-new/pull/87).
+
+### Security — Fixed
+
+- **Permissive email regex → Zod** (`api/bookstore/newsletter/route.ts`, `api/bookstore/checkout/route.ts`) — Replaced hand-rolled `EMAIL_RE` regex with `z.string().email().safeParse()` in both routes. Closes Phase 4 #1.
+- **Cloudflare Turnstile CAPTCHA** (`lib/captcha.ts`, `components/global/TurnstileWidget.tsx`) — Server-side `verifyCaptcha()` helper added; integrated into careers application, whistleblower, and secure-contact endpoints. Widget hidden when `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is absent; endpoint fails open on network error. Closes Phase 4 #2.
+- **Stripe 500 leak hardened** (`api/bookstore/checkout/route.ts`) — Generic "Unable to create checkout session" message returned on all 500 errors; raw error logged server-side only. Closes Phase 4 #3.
+
+### Accessibility — Fixed
+
+- **Timeline progress bar ARIA** (`components/timeline/TimelineNavigation.tsx`) — `role="progressbar"`, `aria-valuenow`, `aria-valuemin`, `aria-valuemax`, and `aria-label` added to the track element. Closes Phase 4 #4.
+- **Search result alt text** (`components/search/SearchClient.tsx`) — `alt=""` replaced with `alt={hit.title}` on article preview images. Closes Phase 4 #5.
+- **Decorative icon aria-hidden** (`components/global/Banner.tsx`, `components/global/Nav.tsx`) — `aria-hidden="true"` added to animated background, icon decorations (Calendar, Clock, Globe, Users in Banner), and category pulse dot in Nav. Closes Phase 4 #6.
+
+### Architecture / TypeScript — Fixed
+
+- **`as any` elimination** (`app/(news)/articles/[slug]/page.tsx`, `app/(news)/author/[slug]/page.tsx`, `app/(news)/page.tsx`) — All `as any` casts and `// eslint-disable` suppressions around `urlForImage()` removed; TypeGen-compatible types used directly. Closes Phase 4 #7.
+- **Cart size limit + localStorage debounce** (`lib/bookstore/cart.ts`) — `MAX_CART_SIZE = 50` guard in `addItem`; `debouncedStorage` wrapper batches writes at 300 ms; full `Storage` interface via `createJSONStorage()`. Closes Phase 4 #9.
+- **Remove unused `useCache` flag** (`next.config.ts`) — `experimental.useCache: true` removed; `'use cache'` directive is unused in the codebase. Closes Phase 4 #11.
+- **`BookBuySection` server/client split** (`components/bookstore/BookBuySection.tsx`, `components/bookstore/BookBuyFormats.tsx`) — Static "Buy" header and out-of-stock banner rendered as a server component; interactive format selector (gift toggle, NYOP inputs, buy buttons) extracted to `BookBuyFormats` client component. Closes Phase 4 #12.
+- **`getStripeIdForFormat()` utility** (`lib/bookstore/stripeUtils.ts`) — Centralizes NYOP vs fixed-price Stripe ID selection (product ID for NYOP, price ID for fixed); used in `BuyNowButton` and `BookBuyFormats`. Closes Phase 4 #13.
+- **GROQ slice bounds** (`lib/sanity/lib/queries.ts`) — Slice bounds added to six unbounded queries: `queryAllArticles` `[0..99]`, `queryBreakingArticles` `[0..19]`, `queryAuthorBySlug` relatedArticles/books `[0..49]`, `queryMusicArtistBySlug` songs/albums `[0..99]`/`[0..49]`, `relatedArticles[]->` in article and fact-check queries `[0..3]`. Closes Phase 4 #14.
+
+### Observability — Added
+
+- **Sentry error monitoring** (`sentry.client.config.ts`, `sentry.server.config.ts`, `sentry.edge.config.ts`, `src/instrumentation.ts`, `next.config.ts`) — `@sentry/nextjs` installed and wired via Next.js instrumentation hook + `withSentryConfig` wrapper. All configs are no-ops without `SENTRY_DSN` / `NEXT_PUBLIC_SENTRY_DSN` env vars; source map upload restricted to CI. Closes Phase 4 #15.
+- **Book detail error boundary + deferred reviews** (`app/(user)/bookstore/book/[slug]/error.tsx`, `app/(user)/bookstore/book/[slug]/page.tsx`) — `error.tsx` added as route-level error boundary with retry button; `ReviewsSection` async component fetches and renders reviews independently, wrapped in `<Suspense>` — a reviews failure can no longer crash the buy section. Closes Phase 4 #16.
+- **GA4 conversion tracking** (`components/bookstore/AddToCartButton.tsx`, `components/bookstore/PurchaseTracker.tsx`, `app/(user)/bookstore/order-success/page.tsx`) — Consent-gated `add_to_cart` event fired on `AddToCartButton`; `purchase` event fired on order-success page via `PurchaseTracker` client component. Uses existing `useConsentAwareTracking` hook. Closes Phase 4 #17.
+
+---
+
 ## [2026-05-22] — A11y + Security Phase 1–2 (feature/a11y-security-phase1-2 → development)
 
 Accessibility hardening pass (Phase 1 critical + Phase 2 high) and one security medium finding closed. All six items from the audit roadmap rows #1–#6 resolved in a single PR. Audit report updated. Issue [#82](https://github.com/UnTelevised-Media/untelevised-media-new/issues/82) · PR [#83](https://github.com/UnTelevised-Media/untelevised-media-new/pull/83).
