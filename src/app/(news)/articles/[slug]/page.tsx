@@ -103,20 +103,15 @@ export default async function Article({ params }: Props) {
         {/* Background Image with Overlay */}
         <div className='relative h-[60vh] min-h-[400px]'>
           <Image
-            src={
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              urlForImage(article.mainImage as any)?.url() ?? ''
-            }
+            src={urlForImage(article.mainImage)?.url() ?? ''}
             alt={article.mainImage?.alt ?? 'Article image'}
             fill
             className='object-cover'
             priority
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            {...(urlForImage(article.mainImage as any)
+            {...(urlForImage(article.mainImage)
               ? {
                   placeholder: 'blur' as const,
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  blurDataURL: urlForImage(article.mainImage as any)!.width(20).blur(10).url(),
+                  blurDataURL: urlForImage(article.mainImage)!.width(20).blur(10).url(),
                 }
               : {})}
           />
@@ -150,10 +145,7 @@ export default async function Article({ params }: Props) {
                   >
                     <div className='flex items-center space-x-3 rounded-lg bg-slate-900/50 p-3 backdrop-blur-sm transition-colors hover:bg-slate-900/70'>
                       <Image
-                        src={
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          urlForImage(article.author.image as any)?.url() ?? ''
-                        }
+                        src={urlForImage(article.author.image)?.url() ?? ''}
                         alt={article.author.image?.alt ?? 'Author image'}
                         width={48}
                         height={48}
@@ -267,8 +259,7 @@ export default async function Article({ params }: Props) {
             slug={slug}
             title={article.title}
             description={typeof article.description === 'string' ? article.description : undefined}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            imageUrl={urlForImage(article.mainImage as any)?.width(400).url() ?? undefined}
+            imageUrl={urlForImage(article.mainImage)?.width(400).url() ?? undefined}
             authorName={article.author?.name}
             publishedAt={article.publishedAt}
             readingTime={getReadingTime(article.body)}
@@ -290,17 +281,13 @@ export default async function Article({ params }: Props) {
           <div className='not-prose mb-8'>
             <div className='overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
               {(() => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const ref: string = (article.mainImage as any)?.asset?._ref ?? '';
+                const ref: string = article.mainImage?.asset?._ref ?? '';
                 const m = ref.match(/-(\d+)x(\d+)-/);
                 const imgW = m ? parseInt(m[1]) : 1200;
                 const imgH = m ? parseInt(m[2]) : 630;
                 return (
                   <Image
-                    src={
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      urlForImage(article.mainImage as any)?.url() ?? ''
-                    }
+                    src={urlForImage(article.mainImage)?.url() ?? ''}
                     alt={article.mainImage?.alt ?? 'Article image'}
                     width={imgW}
                     height={imgH}
@@ -407,8 +394,7 @@ export default async function Article({ params }: Props) {
                   {related.mainImage && (
                     <div className='aspect-video overflow-hidden'>
                       <Image
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        src={urlForImage(related.mainImage as any)?.url() ?? ''}
+                        src={urlForImage(related.mainImage)?.url() ?? ''}
                         alt={related.mainImage.alt ?? related.title}
                         width={400}
                         height={225}
