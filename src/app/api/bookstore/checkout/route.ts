@@ -5,6 +5,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { createHash } from 'node:crypto';
 import { auth } from '@clerk/nextjs/server';
 import { client as sanityReadClient } from '@/lib/sanity/lib/client';
 import type {
@@ -218,31 +219,50 @@ export async function POST(req: NextRequest) {
       ...(item.isNyop ? { isNyop: true } : {}),
     }));
 
-    const session = await stripe.checkout.sessions.create({
-      mode: 'payment',
-      allow_promotion_codes: true,
-      line_items: lineItems,
-      ...(body.customerEmail && { customer_email: body.customerEmail }),
-      success_url: `${baseUrl}/bookstore/order-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/bookstore/cart`,
-      // Collect shipping for physical items
-      ...(hasPhysical && {
-        shipping_address_collection: {
-          allowed_countries: ['US', 'CA', 'GB'],
-        },
-      }),
-      metadata: {
-        clerk_user_id: userId ?? '',
-        has_digital: String(hasDigital),
-        has_physical: String(hasPhysical),
-        items_json: JSON.stringify(itemsMeta), // Stripe limit is 500 chars per key; cart is validated to be short
-        ...(gift && {
-          gift_recipient_email: gift.recipientEmail,
-          gift_from_name: gift.fromName ?? '',
-          gift_anonymous: String(gift.anonymous),
+    const idempotencyKey = createHash('sha256')
+      .update(
+        JSON.stringify({
+          userId: userId ?? 'anon',
+          items: chargeableItems
+            .map((i) => ({
+              id: i.sanityBookId,
+              fmt: i.formatKey,
+              qty: i.quantity,
+              nyop: i.unitAmountCents,
+            }))
+            .sort((a, b) => `${a.id}:${a.fmt}`.localeCompare(`${b.id}:${b.fmt}`)),
+        })
+      )
+      .digest('hex');
+
+    const session = await stripe.checkout.sessions.create(
+      {
+        mode: 'payment',
+        allow_promotion_codes: true,
+        line_items: lineItems,
+        ...(body.customerEmail && { customer_email: body.customerEmail }),
+        success_url: `${baseUrl}/bookstore/order-success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${baseUrl}/bookstore/cart`,
+        // Collect shipping for physical items
+        ...(hasPhysical && {
+          shipping_address_collection: {
+            allowed_countries: ['US', 'CA', 'GB'],
+          },
         }),
+        metadata: {
+          clerk_user_id: userId ?? '',
+          has_digital: String(hasDigital),
+          has_physical: String(hasPhysical),
+          items_json: JSON.stringify(itemsMeta), // Stripe limit is 500 chars per key; cart is validated to be short
+          ...(gift && {
+            gift_recipient_email: gift.recipientEmail,
+            gift_from_name: gift.fromName ?? '',
+            gift_anonymous: String(gift.anonymous),
+          }),
+        },
       },
-    });
+      { idempotencyKey }
+    );
 
     return NextResponse.json({ url: session.url });
   } catch (err) {

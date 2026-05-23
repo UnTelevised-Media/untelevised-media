@@ -4,6 +4,32 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2026-05-22] — A11y + Security Phase 1–2 (feature/a11y-security-phase1-2 → development)
+
+Accessibility hardening pass (Phase 1 critical + Phase 2 high) and one security medium finding closed. All six items from the audit roadmap rows #1–#6 resolved in a single PR. Audit report updated. Issue [#82](https://github.com/UnTelevised-Media/untelevised-media-new/issues/82) · PR [#83](https://github.com/UnTelevised-Media/untelevised-media-new/pull/83).
+
+### Accessibility — Fixed (Critical, Phase 1)
+
+- **ThemeToggle — aria-label** (`components/global/ThemeToggle.tsx`) — Added `aria-label="Toggle theme"` to the Button; Sun and Moon icons marked `aria-hidden="true"`. Resolves WCAG 1.1.1 / 4.1.2 violation.
+- **Search — label association + submit aria-label** (`components/global/Search.tsx`) — `id="search"` added to Input; Label given `className="sr-only"` text content; submit Button gets `aria-label="Submit search"`. Resolves WCAG 1.3.1 + 4.1.2 violations.
+- **Root layout — skip navigation link** (`app/layout.tsx`) — Visually-hidden `<a href="#main-content">Skip to main content</a>` added as the first element in `<body>`; `id="main-content"` added to `<main>`. Resolves WCAG 2.4.1 (Level A) violation.
+- **ApplicationForm — htmlFor/id associations** (`components/careers/ApplicationForm.tsx`) — All 8 form fields (`fullName`, `email`, `position`, `portfolioUrl`, `linkedinUrl`, `coverLetter`, `resume`, `howDidYouFindUs`) now have matching `htmlFor` on labels and `id` on their controls. Resolves WCAG 1.3.1 violation.
+
+### Accessibility — Fixed (High, Phase 2)
+
+- **PitchQuickViewModal — Radix Dialog focus trap** (`components/portal/PitchQuickViewModal.tsx`) — Full rewrite using `@radix-ui/react-dialog` primitives (`Root`, `Portal`, `Overlay`, `Content`, `Title`, `Close`). Provides automatic focus trap, `aria-modal="true"`, built-in Escape-key handling, and focus restoration on close. Removed manual `useEffect` Escape listener. Side-panel layout and all editable fields preserved. Resolves WCAG 2.4.3 violation.
+- **ApplicationsTable — scope="col" on headers** (`components/admin/ApplicationsTable.tsx`) — `scope="col"` added to all 7 `<th>` elements in `<thead>`. Resolves WCAG 1.3.1 table association violation.
+
+### Security — Fixed (Medium, Phase 2)
+
+- **Stripe idempotency key on checkout** (`app/api/bookstore/checkout/route.ts`) — SHA-256 hash of `userId + sorted cart items` (bookId, formatKey, quantity, NYOP amount) derived via `node:crypto` and passed as `{ idempotencyKey }` second argument to `stripe.checkout.sessions.create()`. Prevents duplicate sessions on network retries.
+
+### Changed
+
+- **Audit report updated** (`audit-report/index.html`) — Phase 1–2 remediation date and PR #83 added to header; 7 a11y findings and 1 security finding marked Fixed; critical open count 15 → 11; high open count 15 → 12; medium open count 38 → 37; accessibility health score 46 → 62; overall score 70 → 73; roadmap rows #1–#6 marked done.
+
+---
+
 ## [2026-05-22] — SEO/AEO Audit Remediation (feature/seo-aeo-audit-68-79 → main)
 
 Full SEO/AEO audit remediation pass covering 11 issues (#68–#79). All high and medium priority findings resolved; one issue (#78) found pre-resolved in existing code.

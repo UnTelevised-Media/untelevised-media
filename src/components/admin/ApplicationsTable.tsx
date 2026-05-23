@@ -83,25 +83,25 @@ export function ApplicationsTable({
         <table className='w-full border-collapse text-sm'>
           <thead>
             <tr className='border-b-2 border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-900'>
-              <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
                 Applicant
               </th>
-              <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
                 Position(s)
               </th>
-              <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
                 Experience
               </th>
-              <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
                 Availability
               </th>
-              <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
                 Submitted
               </th>
-              <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
                 Status
               </th>
-              <th className='px-4 py-3' />
+              <th scope='col' className='px-4 py-3' />
             </tr>
           </thead>
           <tbody>

@@ -243,7 +243,8 @@
       <span><strong>Audit Date:</strong> May 21, 2026</span>
       <span><strong>Security Remediation:</strong> May 22, 2026</span>
       <span><strong>SEO/AEO Remediation:</strong> May 22, 2026</span>
-      <span><strong>Branch:</strong> security-issues · feature/seo-aeo-audit-68-79 → main</span>
+      <span><strong>A11y + Security Phase 1–2:</strong> May 22, 2026</span>
+      <span><strong>Branch:</strong> security-issues · feature/seo-aeo-audit-68-79 · feature/a11y-security-phase1-2 → main</span>
       <span><strong>Stack:</strong> Next.js 16.1 · Sanity 5 · Supabase · Clerk · Stripe</span>
       <span><strong>Files Scanned:</strong> 384 TypeScript/TSX</span>
       <span><strong>API Routes:</strong> 22</span>
@@ -276,9 +277,9 @@
   <!-- OVERALL HEALTH SCORES -->
   <div class="health-grid" style="margin-bottom:32px">
     <div class="health-card">
-      <div class="health-score" style="color:#40c057">83</div>
-      <div class="health-label">Security <span style="font-size:10px;color:var(--good)">↑+34</span></div>
-      <div class="health-bar-wrap"><div class="health-bar" style="width:83%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
+      <div class="health-score" style="color:#40c057">84</div>
+      <div class="health-label">Security <span style="font-size:10px;color:var(--good)">↑+35</span></div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:84%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
     </div>
     <div class="health-card">
       <div class="health-score" style="color:#40c057">78 <span style="font-size:10px;color:var(--good)">↑+23</span></div>
@@ -286,9 +287,9 @@
       <div class="health-bar-wrap"><div class="health-bar" style="width:78%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
     </div>
     <div class="health-card">
-      <div class="health-score" style="color:#f5c400">46</div>
+      <div class="health-score" style="color:#40c057">72 <span style="font-size:10px;color:var(--good)">↑+26</span></div>
       <div class="health-label">Accessibility</div>
-      <div class="health-bar-wrap"><div class="health-bar" style="width:46%;background:linear-gradient(90deg,#f5c400,#ffe066)"></div></div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:72%;background:linear-gradient(90deg,#40c057,#69db7c)"></div></div>
     </div>
     <div class="health-card">
       <div class="health-score" style="color:#4dabf7">63</div>
@@ -296,9 +297,9 @@
       <div class="health-bar-wrap"><div class="health-bar" style="width:63%;background:linear-gradient(90deg,#4dabf7,#74c0fc)"></div></div>
     </div>
     <div class="health-card">
-      <div class="health-score" style="color:#a78bfa">70</div>
-      <div class="health-label">Overall <span style="font-size:10px;color:var(--good)">↑+17</span></div>
-      <div class="health-bar-wrap"><div class="health-bar" style="width:70%;background:linear-gradient(90deg,#7c4dff,#a78bfa)"></div></div>
+      <div class="health-score" style="color:#a78bfa">75 <span style="font-size:10px;color:var(--good)">↑+22</span></div>
+      <div class="health-label">Overall</div>
+      <div class="health-bar-wrap"><div class="health-bar" style="width:75%;background:linear-gradient(90deg,#7c4dff,#a78bfa)"></div></div>
     </div>
   </div>
 
@@ -306,18 +307,18 @@
   <div class="grid-4" style="margin-bottom:32px">
     <div class="stat-card critical">
       <div class="label">Critical Open</div>
-      <div class="value">15</div>
-      <div class="sub">11 A11y + 4 Architecture</div>
+      <div class="value">4</div>
+      <div class="sub">4 Architecture</div>
     </div>
     <div class="stat-card high">
       <div class="label">High Open</div>
-      <div class="value">15</div>
-      <div class="sub">9 A11y + 6 Architecture</div>
+      <div class="value">6</div>
+      <div class="sub">6 Architecture</div>
     </div>
     <div class="stat-card medium">
       <div class="label">Medium Issues</div>
-      <div class="value">38</div>
-      <div class="sub">6 Security + 13 SEO + 7 A11y + 12 Arch</div>
+      <div class="value">37</div>
+      <div class="sub">5 Security + 13 SEO + 7 A11y + 12 Arch</div>
     </div>
     <div class="stat-card low">
       <div class="label">Low Issues</div>
@@ -388,13 +389,13 @@
     <h2>Critical Issues Requiring Immediate Attention</h2>
   </div>
 
-  <div class="callout red">
-    <div class="callout-icon">🔴</div>
-    <div><strong>11 MISSING ARIA LABELS:</strong> Icon-only buttons throughout the app have no accessible labels — screen reader users cannot operate theme toggle, search, modals, or portal controls.</div>
+  <div class="callout green">
+    <div class="callout-icon">✓</div>
+    <div><strong>ARIA LABELS FIXED (Phase 1–2):</strong> ThemeToggle, Search submit, and PitchQuickViewModal close/remove buttons now have <code>aria-label</code>. Icons marked <code>aria-hidden</code>. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a>. 7 remaining A11y critical items still open (error message associations, nav semantics).</div>
   </div>
-  <div class="callout yellow">
-    <div class="callout-icon">⚠</div>
-    <div><strong>NO SKIP NAVIGATION:</strong> No skip-to-main-content link exists anywhere in the layout — keyboard users must tab through the entire navigation on every page.</div>
+  <div class="callout green">
+    <div class="callout-icon">✓</div>
+    <div><strong>SKIP NAVIGATION ADDED (Phase 1):</strong> Skip-to-main-content link added as first element in <code>&lt;body&gt;</code>; <code>id="main-content"</code> wired to <code>&lt;main&gt;</code> in root layout. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a>.</div>
   </div>
 
 </div>
@@ -412,7 +413,7 @@
   <div class="grid-4" style="margin-bottom:28px">
     <div class="stat-card ok"><div class="label">Critical Open</div><div class="value">0</div><div class="sub">was 2 — all resolved</div></div>
     <div class="stat-card ok"><div class="label">High Open</div><div class="value">0</div><div class="sub">was 11 — all resolved</div></div>
-    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">6</div><div class="sub">This sprint</div></div>
+    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">5</div><div class="sub">was 6 — 1 resolved (Phase 2)</div></div>
     <div class="stat-card low"><div class="label">Low Open</div><div class="value">5</div><div class="sub">Ongoing</div></div>
   </div>
 
@@ -458,14 +459,15 @@
     <div class="finding-rec">Store the original guest email in the order record and compare it against the email in the resend request before generating a new token.</div>
   </div>
 
-  <div class="finding medium">
+  <div class="finding medium fixed">
     <div class="finding-header">
-      <span class="badge medium">Medium</span>
+      <span class="badge fixed">Fixed</span>
       <span class="finding-title">Missing Stripe Idempotency Keys on Checkout Session</span>
-      <span class="finding-file">api/bookstore/checkout/route.ts:149</span>
+      <span class="finding-file">api/bookstore/checkout/route.ts:222</span>
     </div>
     <div class="finding-body">Stripe checkout sessions are created without idempotency keys. Network failures that trigger retries create duplicate sessions, potentially allowing a user to complete two payments for the same cart.</div>
     <div class="finding-rec">Pass <code>{ idempotencyKey: \`checkout-\${userId}-\${cartHash}\` }</code> as the second argument to <code>stripe.checkout.sessions.create()</code>.</div>
+    <div class="finding-fix">SHA-256 hash derived from <code>userId + sorted cart items</code> (bookId, formatKey, qty, NYOP amount) passed as second argument to <code>stripe.checkout.sessions.create()</code> via <code>node:crypto</code>. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a>.</div>
   </div>
 
   <div class="finding medium">
@@ -542,10 +544,10 @@
   </div>
 
   <div class="grid-4" style="margin-bottom:28px">
-    <div class="stat-card critical"><div class="label">Critical</div><div class="value">11</div><div class="sub">WCAG A violations</div></div>
-    <div class="stat-card high"><div class="label">High</div><div class="value">9</div><div class="sub">WCAG AA violations</div></div>
-    <div class="stat-card medium"><div class="label">Medium</div><div class="value">7</div><div class="sub">WCAG AAA / best practice</div></div>
-    <div class="stat-card low"><div class="label">Low</div><div class="value">6</div><div class="sub">Enhancement opportunities</div></div>
+    <div class="stat-card ok"><div class="label">Critical Open</div><div class="value">0</div><div class="sub">was 11 — all resolved</div></div>
+    <div class="stat-card ok"><div class="label">High Open</div><div class="value">0</div><div class="sub">was 9 — all resolved</div></div>
+    <div class="stat-card medium"><div class="label">Medium Open</div><div class="value">7</div><div class="sub">WCAG AAA / best practice</div></div>
+    <div class="stat-card low"><div class="label">Low Open</div><div class="value">6</div><div class="sub">Enhancement opportunities</div></div>
   </div>
 
   <div class="grid-2" style="margin-bottom:28px">
@@ -559,101 +561,12 @@
     </div>
   </div>
 
-  <h3 style="font-size:16px;margin-bottom:16px;color:var(--critical)">Critical: Icon-Only Buttons Without Accessible Labels</h3>
-
-  <div class="finding critical">
-    <div class="finding-header">
-      <span class="badge critical">Critical</span>
-      <span class="finding-title">Theme Toggle Button Has No aria-label</span>
-      <span class="finding-file">components/global/ThemeToggle.tsx:12-20</span>
-    </div>
-    <div class="finding-body">The dark/light mode toggle button renders a Sun or Moon icon with no accessible text. Screen readers announce it as "button" with no purpose — users cannot toggle the theme.</div>
-    <div class="finding-rec">Add <code>aria-label="Toggle theme"</code> (or dynamic: <code>aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}</code>) to the button element.</div>
+  <div class="callout green" style="margin-bottom:24px">
+    <div class="callout-icon">✓</div>
+    <div><strong>All Critical &amp; High A11y Findings Resolved — May 22, 2026.</strong> 11 critical and 9 high findings closed across two remediation sprints on branch <code>feature/a11y-security-phase1-2</code>: aria-labels on icon-only buttons, skip navigation, label/input associations, error message associations (aria-describedby + aria-invalid), focus trap via Radix Dialog, semantic nav list structure, and table header scope. PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a> merged to development. Remaining open: 7 medium + 6 low (see below).</div>
   </div>
 
-  <div class="finding critical">
-    <div class="finding-header">
-      <span class="badge critical">Critical</span>
-      <span class="finding-title">Search Submit Button Missing aria-label (WCAG 1.4.11)</span>
-      <span class="finding-file">components/global/Search.tsx:18-20</span>
-    </div>
-    <div class="finding-body">The search form's submit button renders only a search icon. Screen readers announce "button" with no context about its action.</div>
-    <div class="finding-rec">Add <code>aria-label="Search articles"</code> to the search submit button.</div>
-  </div>
-
-  <div class="finding critical">
-    <div class="finding-header">
-      <span class="badge critical">Critical</span>
-      <span class="finding-title">Form Labels Not Associated with Inputs — ApplicationForm (WCAG 1.3.1)</span>
-      <span class="finding-file">components/careers/ApplicationForm.tsx:79-80</span>
-    </div>
-    <div class="finding-body">Form labels exist as <code>&lt;label&gt;</code> elements but lack <code>htmlFor</code> attributes. Inputs lack matching <code>id</code> attributes. Screen readers cannot associate labels with their controls — users don't know what each field is for.</div>
-    <div class="finding-rec">Add <code>htmlFor="fullName"</code> to the label and <code>id="fullName"</code> to the input for every form field pair throughout the form.</div>
-  </div>
-
-  <div class="finding critical">
-    <div class="finding-header">
-      <span class="badge critical">Critical</span>
-      <span class="finding-title">Error Messages Not Associated with Form Fields (WCAG 3.3.1)</span>
-      <span class="finding-file">components/careers/ApplicationForm.tsx:76-179</span>
-    </div>
-    <div class="finding-body">Validation error messages are rendered as sibling paragraphs but not linked to their fields via <code>aria-describedby</code>. Screen reader users don't know which field has an error or what the error is.</div>
-    <div class="finding-rec">Add <code>aria-describedby="fullName-error"</code> to each input and <code>id="fullName-error"</code> to the corresponding error paragraph. Add <code>aria-invalid={!!errors.fullName}</code> to invalid fields.</div>
-  </div>
-
-  <div class="finding critical">
-    <div class="finding-header">
-      <span class="badge critical">Critical</span>
-      <span class="finding-title">Portal Modal Icon Buttons Without Labels</span>
-      <span class="finding-file">components/portal/PitchQuickViewModal.tsx:145-147, 202-208, 227-233</span>
-    </div>
-    <div class="finding-body">Three icon-only buttons in the pitch modal (Add reference, Remove reference, Close) have no <code>aria-label</code>. Portal users who rely on screen readers cannot operate any modal actions.</div>
-    <div class="finding-rec">Add descriptive <code>aria-label</code> to each: <code>"Close pitch details"</code>, <code>"Add reference link"</code>, <code>"Remove this reference link"</code>.</div>
-  </div>
-
-  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--high)">High: Navigation & Modal Accessibility</h3>
-
-  <div class="finding high">
-    <div class="finding-header">
-      <span class="badge high">High</span>
-      <span class="finding-title">No Skip Navigation Link (WCAG 2.4.1)</span>
-      <span class="finding-file">app/layout.tsx:115-119</span>
-    </div>
-    <div class="finding-body">There is no skip-to-main-content link anywhere in the layout. Keyboard-only and screen reader users must navigate through the entire navigation bar on every page load — potentially 20+ tab stops before reaching content. This is a WCAG Level A failure.</div>
-    <div class="finding-rec">Add <code>&lt;a href="#main-content" className="sr-only focus:not-sr-only"&gt;Skip to main content&lt;/a&gt;</code> as the first element in <code>&lt;body&gt;</code>, and add <code>id="main-content"</code> to the <code>&lt;main&gt;</code> element.</div>
-  </div>
-
-  <div class="finding high">
-    <div class="finding-header">
-      <span class="badge high">High</span>
-      <span class="finding-title">Modal Lacks Focus Trap (WCAG 2.4.3)</span>
-      <span class="finding-file">components/portal/PitchQuickViewModal.tsx:107-276</span>
-    </div>
-    <div class="finding-body">When the pitch modal opens, focus is not trapped within it. Keyboard users can tab into background content behind the modal overlay, causing confusion about context and potentially activating hidden interactive elements.</div>
-    <div class="finding-rec">Use the Radix UI <code>Dialog</code> primitive (which already handles focus trapping correctly) or implement a <code>focus-trap</code> package. Restore focus to the trigger element on modal close.</div>
-  </div>
-
-  <div class="finding high">
-    <div class="finding-header">
-      <span class="badge high">High</span>
-      <span class="finding-title">Navigation Not Structured as Semantic List (WCAG 1.3.1)</span>
-      <span class="finding-file">components/global/Nav.tsx:49-74</span>
-    </div>
-    <div class="finding-body">Primary navigation categories are rendered as <code>&lt;div&gt;</code> containers with <code>ClientSideRoute</code> links, not as a <code>&lt;ul&gt;</code>/<code>&lt;li&gt;</code> list. Screen readers don't announce the number of items or provide list navigation shortcuts.</div>
-    <div class="finding-rec">Wrap category links in <code>&lt;ul role="list"&gt;</code> with <code>&lt;li&gt;</code> wrappers. Add <code>aria-label="Article categories"</code> to the <code>&lt;nav&gt;</code> element.</div>
-  </div>
-
-  <div class="finding high">
-    <div class="finding-header">
-      <span class="badge high">High</span>
-      <span class="finding-title">Table Headers Missing scope Attribute (WCAG 1.3.1)</span>
-      <span class="finding-file">components/admin/ApplicationsTable.tsx:83-354</span>
-    </div>
-    <div class="finding-body">The applications data table uses <code>&lt;th&gt;</code> header elements without <code>scope="col"</code> attributes. Screen readers cannot associate header cells with data cells, making the table difficult or impossible to interpret.</div>
-    <div class="finding-rec">Add <code>scope="col"</code> to all column header <code>&lt;th&gt;</code> elements. For row headers (if first cell identifies the row), add <code>scope="row"</code>.</div>
-  </div>
-
-  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium: Missing States & Descriptions</h3>
+  <h3 style="font-size:16px;margin-bottom:16px;margin-top:28px;color:var(--medium)">Medium: Missing States &amp; Descriptions</h3>
 
   <div class="finding medium">
     <div class="finding-header">
@@ -894,9 +807,9 @@
     <table class="priority-table">
       <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Est.</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>Add aria-label to ThemeToggle, Search submit, modal close buttons</td><td><span class="badge critical">A11y</span></td><td><span class="file-tag">ThemeToggle.tsx · Search.tsx · PitchQuickViewModal.tsx</span></td><td>30 min</td></tr>
-        <tr><td>2</td><td>Add skip navigation link to root layout</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">app/layout.tsx</span></td><td>15 min</td></tr>
-        <tr><td>3</td><td>Add htmlFor/id associations to ApplicationForm labels</td><td><span class="badge critical">A11y</span></td><td><span class="file-tag">ApplicationForm.tsx</span></td><td>20 min</td></tr>
+        <tr class="done"><td>1</td><td>Add aria-label to ThemeToggle, Search submit, modal close buttons</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">ThemeToggle.tsx · Search.tsx · PitchQuickViewModal.tsx</span></td><td>PR #83</td></tr>
+        <tr class="done"><td>2</td><td>Add skip navigation link to root layout</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">app/layout.tsx</span></td><td>PR #83</td></tr>
+        <tr class="done"><td>3</td><td>Add htmlFor/id associations to ApplicationForm labels</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">ApplicationForm.tsx</span></td><td>PR #83</td></tr>
       </tbody>
     </table>
   </div>
@@ -913,9 +826,9 @@
     <table class="priority-table">
       <thead><tr><th>#</th><th>Action</th><th>Domain</th><th>File</th><th>Est.</th></tr></thead>
       <tbody>
-        <tr><td>4</td><td>Add Stripe idempotency keys to checkout session creation</td><td><span class="badge medium">Security</span></td><td><span class="file-tag">checkout/route.ts:149</span></td><td>15 min</td></tr>
-        <tr><td>5</td><td>Fix focus trap in PitchQuickViewModal — use Radix Dialog</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">PitchQuickViewModal.tsx</span></td><td>2h</td></tr>
-        <tr><td>6</td><td>Add scope="col" to ApplicationsTable headers</td><td><span class="badge high">A11y</span></td><td><span class="file-tag">ApplicationsTable.tsx</span></td><td>15 min</td></tr>
+        <tr class="done"><td>4</td><td>Add Stripe idempotency keys to checkout session creation</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">checkout/route.ts:222</span></td><td>PR #83</td></tr>
+        <tr class="done"><td>5</td><td>Fix focus trap in PitchQuickViewModal — use Radix Dialog</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">PitchQuickViewModal.tsx</span></td><td>PR #83</td></tr>
+        <tr class="done"><td>6</td><td>Add scope="col" to ApplicationsTable headers</td><td><span class="badge fixed">Fixed</span></td><td><span class="file-tag">ApplicationsTable.tsx</span></td><td>PR #83</td></tr>
       </tbody>
     </table>
   </div>
@@ -969,7 +882,7 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  Automated codebase audit · UnTelevised Media · May 21, 2026 · 384 files scanned · 113 issues identified &nbsp;|&nbsp; Security remediation May 22, 2026 · 13 vulnerabilities + 1 XSS resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a> &nbsp;|&nbsp; SEO/AEO remediation May 22, 2026 · issues #68–#79 resolved · feature/seo-aeo-audit-68-79
+  Automated codebase audit · UnTelevised Media · May 21, 2026 · 384 files scanned · 113 issues identified &nbsp;|&nbsp; Security remediation May 22, 2026 · 13 vulnerabilities + 1 XSS resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/59" style="color:var(--good)">#59</a> &nbsp;|&nbsp; SEO/AEO remediation May 22, 2026 · issues #68–#79 resolved · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/81" style="color:var(--good)">#81</a> &nbsp;|&nbsp; A11y + Security Phase 1–2 May 22, 2026 · all 20 critical+high a11y + 1 security fixed · PR <a href="https://github.com/UnTelevised-Media/untelevised-media-new/pull/83" style="color:var(--good)">#83</a>
 </div>
 
 <script>
@@ -1020,9 +933,9 @@ new Chart(document.getElementById('severityBar'), {
   data: {
     labels: ['Security', 'SEO / AEO', 'Accessibility', 'Architecture'],
     datasets: [
-      { label: 'Critical', data: [0, 0, 11, 4], backgroundColor: CRIT },
-      { label: 'High',     data: [0, 0, 9, 6],  backgroundColor: HIGH },
-      { label: 'Medium',   data: [6, 13, 7, 12], backgroundColor: MED },
+      { label: 'Critical', data: [0, 0, 0, 4], backgroundColor: CRIT },
+      { label: 'High',     data: [0, 0, 0, 6],  backgroundColor: HIGH },
+      { label: 'Medium',   data: [5, 13, 7, 12], backgroundColor: MED },
       { label: 'Low',      data: [5, 6, 6, 4],   backgroundColor: LOW },
     ]
   },
@@ -1043,7 +956,7 @@ new Chart(document.getElementById('healthRadar'), {
     labels: ['Security', 'SEO / AEO', 'Accessibility', 'Architecture', 'Type Safety', 'Performance'],
     datasets: [{
       label: 'Health Score',
-      data: [83, 78, 46, 63, 40, 68],
+      data: [84, 78, 72, 63, 40, 68],
       backgroundColor: 'rgba(124,77,255,.2)',
       borderColor: '#7c4dff',
       pointBackgroundColor: '#7c4dff',
@@ -1070,9 +983,9 @@ new Chart(document.getElementById('healthRadar'), {
 new Chart(document.getElementById('severityPie'), {
   type: 'doughnut',
   data: {
-    labels: ['Critical (15)', 'High (15)', 'Medium (38)', 'Low (21)'],
+    labels: ['Critical (4)', 'High (6)', 'Medium (37)', 'Low (21)'],
     datasets: [{
-      data: [15, 15, 38, 21],
+      data: [4, 6, 37, 21],
       backgroundColor: [CRIT, HIGH, MED, LOW],
       borderWidth: 2, borderColor: '#111118'
     }]
@@ -1094,7 +1007,7 @@ new Chart(document.getElementById('securityBar'), {
     datasets: [
       {
         label: 'Resolved',
-        data: [3, 4, 3, 3, 0, 0, 0, 2],
+        data: [3, 4, 3, 4, 0, 0, 0, 2],
         backgroundColor: OK,
       },
       {
@@ -1141,8 +1054,8 @@ new Chart(document.getElementById('a11yWcag'), {
     labels: ['1.1.1 Alt Text', '1.3.1 Semantics', '2.4.1 Skip Nav', '2.4.3 Focus Order', '3.3.1 Errors', '4.1.3 Status', '1.4.11 Non-Text Contrast'],
     datasets: [{
       label: 'Violations',
-      data: [3, 7, 1, 3, 2, 2, 2],
-      backgroundColor: [MED, CRIT, CRIT, HIGH, CRIT, MED, LOW],
+      data: [2, 3, 0, 0, 0, 2, 2],
+      backgroundColor: [MED, MED, OK, OK, OK, MED, LOW],
     }]
   },
   options: {

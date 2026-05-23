@@ -3,7 +3,8 @@
 // Floating modal showing pitch details from within the article editor.
 // Headline, angle, sources, links, and notes are editable. Urgency and beat are read-only.
 
-import { useState, useTransition, useEffect } from 'react';
+import { useState, useTransition } from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { toast } from 'sonner';
 import { X, Plus, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
@@ -58,15 +59,6 @@ export function PitchQuickViewModal({ pitch, onClose }: Props) {
   const [links, setLinks] = useState<LinkItem[]>(pitch.links ?? []);
   const [notesText, setNotesText] = useState(() => blocksToText(pitch.notes));
 
-  // Close on Escape
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose();
-    }
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
-
   function addLink() {
     setLinks((prev) => [...prev, { _key: makeKey(), label: '', url: '' }]);
   }
@@ -105,174 +97,181 @@ export function PitchQuickViewModal({ pitch, onClose }: Props) {
   }
 
   return (
-    <>
-      {/* Backdrop */}
-      <div
-        className='fixed inset-0 z-50 bg-black/50'
-        onClick={onClose}
-        aria-hidden='true'
-      />
+    <DialogPrimitive.Root open onOpenChange={(open) => { if (!open) onClose(); }}>
+      <DialogPrimitive.Portal>
+        {/* Backdrop */}
+        <DialogPrimitive.Overlay className='fixed inset-0 z-50 bg-black/50' />
 
-      {/* Panel */}
-      <div className='fixed inset-y-0 right-0 z-50 flex w-full max-w-lg flex-col border-l border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900'>
-        {/* Header */}
-        <div className='flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-700'>
-          <div className='flex flex-wrap items-center gap-2'>
-            <span className='text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white'>
-              Pitch Notes
-            </span>
-            {pitch.urgency && (
-              <span
-                className={`px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest ${URGENCY_COLORS[pitch.urgency] ?? ''}`}
+        {/* Panel */}
+        <DialogPrimitive.Content
+          aria-describedby={undefined}
+          className='fixed inset-y-0 right-0 z-50 flex w-full max-w-lg flex-col border-l border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900'
+        >
+          {/* Visually hidden title required by Radix for aria-labelledby */}
+          <DialogPrimitive.Title className='sr-only'>Pitch Notes</DialogPrimitive.Title>
+
+          {/* Header */}
+          <div className='flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-700'>
+            <div className='flex flex-wrap items-center gap-2' aria-hidden='true'>
+              <span className='text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white'>
+                Pitch Notes
+              </span>
+              {pitch.urgency && (
+                <span
+                  className={`px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest ${URGENCY_COLORS[pitch.urgency] ?? ''}`}
+                >
+                  {pitch.urgency}
+                </span>
+              )}
+              {pitch.beat && (
+                <span className='bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:bg-slate-800 dark:text-slate-400'>
+                  {pitch.beat}
+                </span>
+              )}
+            </div>
+            <div className='flex items-center gap-3'>
+              <Link
+                href={`/portal/pitch/${pitch._id}`}
+                target='_blank'
+                className='flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-untele'
               >
-                {pitch.urgency}
-              </span>
-            )}
-            {pitch.beat && (
-              <span className='bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:bg-slate-800 dark:text-slate-400'>
-                {pitch.beat}
-              </span>
-            )}
+                <ExternalLink className='h-3 w-3' aria-hidden='true' /> Full Page
+              </Link>
+              <DialogPrimitive.Close
+                aria-label='Close'
+                className='text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+              >
+                <X className='h-5 w-5' aria-hidden='true' />
+              </DialogPrimitive.Close>
+            </div>
           </div>
-          <div className='flex items-center gap-3'>
-            <Link
-              href={`/portal/pitch/${pitch._id}`}
-              target='_blank'
-              className='flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-untele'
+
+          {/* Scrollable body */}
+          <div className='flex-1 overflow-y-auto px-5 py-4'>
+            <div className='space-y-4'>
+              {/* Headline */}
+              <div>
+                <label className='mb-1 block text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+                  Headline
+                </label>
+                <input
+                  type='text'
+                  value={headline}
+                  onChange={(e) => setHeadline(e.target.value)}
+                  placeholder='Story headline…'
+                  className='w-full border border-slate-300 bg-white px-2.5 py-2 text-sm font-bold text-slate-900 placeholder:font-normal placeholder:text-slate-400 focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
+                />
+              </div>
+
+              {/* Angle */}
+              <div>
+                <label className='mb-1 block text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+                  Angle / Hook
+                </label>
+                <textarea
+                  value={angle}
+                  onChange={(e) => setAngle(e.target.value)}
+                  rows={3}
+                  placeholder='The unique angle or editorial hook…'
+                  className='w-full border border-slate-300 bg-white p-2.5 text-xs leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
+                />
+              </div>
+
+              {/* Suggested Sources */}
+              <div>
+                <label className='mb-1 block text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+                  Suggested Sources
+                </label>
+                <textarea
+                  value={sourceSuggestions}
+                  onChange={(e) => setSourceSuggestions(e.target.value)}
+                  rows={2}
+                  placeholder='People, agencies, or documents…'
+                  className='w-full border border-slate-300 bg-white p-2.5 text-xs leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
+                />
+              </div>
+
+              {/* Reference Links */}
+              <div>
+                <div className='mb-1.5 flex items-center justify-between'>
+                  <label className='text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+                    Reference Links
+                  </label>
+                  <button
+                    type='button'
+                    onClick={addLink}
+                    className='flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-untele hover:opacity-80'
+                  >
+                    <Plus className='h-3 w-3' aria-hidden='true' /> Add
+                  </button>
+                </div>
+                <div className='space-y-1.5'>
+                  {links.map((link) => (
+                    <div key={link._key} className='flex gap-1.5'>
+                      <input
+                        type='text'
+                        value={link.label ?? ''}
+                        onChange={(e) => updateLink(link._key, 'label', e.target.value)}
+                        placeholder='Label'
+                        className='w-1/3 border border-slate-300 bg-white px-2 py-1.5 text-xs focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
+                      />
+                      <input
+                        type='url'
+                        value={link.url ?? ''}
+                        onChange={(e) => updateLink(link._key, 'url', e.target.value)}
+                        placeholder='https://…'
+                        className='min-w-0 flex-1 border border-slate-300 bg-white px-2 py-1.5 text-xs focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
+                      />
+                      <button
+                        type='button'
+                        onClick={() => removeLink(link._key)}
+                        aria-label='Remove link'
+                        className='shrink-0 border border-slate-300 px-2 text-slate-400 hover:border-red-400 hover:text-red-500 dark:border-slate-600'
+                      >
+                        <X className='h-3 w-3' aria-hidden='true' />
+                      </button>
+                    </div>
+                  ))}
+                  {links.length === 0 && (
+                    <p className='text-[11px] italic text-slate-400'>No links yet.</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Working Notes */}
+              <div>
+                <label className='mb-1 block text-[10px] font-bold uppercase tracking-widest text-slate-400'>
+                  Working Notes
+                </label>
+                <textarea
+                  value={notesText}
+                  onChange={(e) => setNotesText(e.target.value)}
+                  rows={8}
+                  placeholder='Notes, interview questions, source contacts…'
+                  className='w-full resize-y border border-slate-300 bg-white p-2.5 font-mono text-xs leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className='flex items-center justify-end gap-3 border-t border-slate-200 px-5 py-4 dark:border-slate-700'>
+            <DialogPrimitive.Close
+              disabled={isPending}
+              className='border border-slate-300 px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-600 hover:border-slate-400 disabled:opacity-50 dark:border-slate-600 dark:text-slate-400'
             >
-              <ExternalLink className='h-3 w-3' /> Full Page
-            </Link>
-            <button onClick={onClose} className='text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'>
-              <X className='h-5 w-5' />
+              Close
+            </DialogPrimitive.Close>
+            <button
+              disabled={isPending}
+              onClick={handleSave}
+              className='bg-untele px-6 py-2 text-xs font-black uppercase tracking-widest text-white hover:opacity-90 disabled:opacity-50'
+            >
+              {isPending ? 'Saving…' : 'Save Pitch'}
             </button>
           </div>
-        </div>
-
-        {/* Scrollable body */}
-        <div className='flex-1 overflow-y-auto px-5 py-4'>
-          <div className='space-y-4'>
-            {/* Headline */}
-            <div>
-              <label className='mb-1 block text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-                Headline
-              </label>
-              <input
-                type='text'
-                value={headline}
-                onChange={(e) => setHeadline(e.target.value)}
-                placeholder='Story headline…'
-                className='w-full border border-slate-300 bg-white px-2.5 py-2 text-sm font-bold text-slate-900 placeholder:font-normal placeholder:text-slate-400 focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
-              />
-            </div>
-
-            {/* Angle */}
-            <div>
-              <label className='mb-1 block text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-                Angle / Hook
-              </label>
-              <textarea
-                value={angle}
-                onChange={(e) => setAngle(e.target.value)}
-                rows={3}
-                placeholder='The unique angle or editorial hook…'
-                className='w-full border border-slate-300 bg-white p-2.5 text-xs leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
-              />
-            </div>
-
-            {/* Suggested Sources */}
-            <div>
-              <label className='mb-1 block text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-                Suggested Sources
-              </label>
-              <textarea
-                value={sourceSuggestions}
-                onChange={(e) => setSourceSuggestions(e.target.value)}
-                rows={2}
-                placeholder='People, agencies, or documents…'
-                className='w-full border border-slate-300 bg-white p-2.5 text-xs leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
-              />
-            </div>
-
-            {/* Reference Links */}
-            <div>
-              <div className='mb-1.5 flex items-center justify-between'>
-                <label className='text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-                  Reference Links
-                </label>
-                <button
-                  type='button'
-                  onClick={addLink}
-                  className='flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-untele hover:opacity-80'
-                >
-                  <Plus className='h-3 w-3' /> Add
-                </button>
-              </div>
-              <div className='space-y-1.5'>
-                {links.map((link) => (
-                  <div key={link._key} className='flex gap-1.5'>
-                    <input
-                      type='text'
-                      value={link.label ?? ''}
-                      onChange={(e) => updateLink(link._key, 'label', e.target.value)}
-                      placeholder='Label'
-                      className='w-1/3 border border-slate-300 bg-white px-2 py-1.5 text-xs focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
-                    />
-                    <input
-                      type='url'
-                      value={link.url ?? ''}
-                      onChange={(e) => updateLink(link._key, 'url', e.target.value)}
-                      placeholder='https://…'
-                      className='min-w-0 flex-1 border border-slate-300 bg-white px-2 py-1.5 text-xs focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
-                    />
-                    <button
-                      type='button'
-                      onClick={() => removeLink(link._key)}
-                      className='shrink-0 border border-slate-300 px-2 text-slate-400 hover:border-red-400 hover:text-red-500 dark:border-slate-600'
-                    >
-                      <X className='h-3 w-3' />
-                    </button>
-                  </div>
-                ))}
-                {links.length === 0 && (
-                  <p className='text-[11px] italic text-slate-400'>No links yet.</p>
-                )}
-              </div>
-            </div>
-
-            {/* Working Notes */}
-            <div>
-              <label className='mb-1 block text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-                Working Notes
-              </label>
-              <textarea
-                value={notesText}
-                onChange={(e) => setNotesText(e.target.value)}
-                rows={8}
-                placeholder='Notes, interview questions, source contacts…'
-                className='w-full resize-y border border-slate-300 bg-white p-2.5 font-mono text-xs leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800 dark:text-white'
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className='flex items-center justify-end gap-3 border-t border-slate-200 px-5 py-4 dark:border-slate-700'>
-          <button
-            onClick={onClose}
-            disabled={isPending}
-            className='border border-slate-300 px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-600 hover:border-slate-400 disabled:opacity-50 dark:border-slate-600 dark:text-slate-400'
-          >
-            Close
-          </button>
-          <button
-            disabled={isPending}
-            onClick={handleSave}
-            className='bg-untele px-6 py-2 text-xs font-black uppercase tracking-widest text-white hover:opacity-90 disabled:opacity-50'
-          >
-            {isPending ? 'Saving…' : 'Save Pitch'}
-          </button>
-        </div>
-      </div>
-    </>
+        </DialogPrimitive.Content>
+      </DialogPrimitive.Portal>
+    </DialogPrimitive.Root>
   );
 }
