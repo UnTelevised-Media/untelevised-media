@@ -4,6 +4,27 @@ All notable changes to this project are documented here.
 
 ---
 
+## [Unreleased] — Newsletter / Email List Integration (Issue #27)
+
+Full Resend double opt-in integration for both the UnTelevised Media news newsletter and the Hurriya Publications bookstore newsletter. Both lists now have working confirmation emails, welcome emails, unsubscribe flows, and GDPR-compliant consent collection.
+
+### Added
+
+- **Shared newsletter service** (`src/lib/newsletter/service.ts`) — encapsulates subscribe / confirm / unsubscribe logic parameterized by list config; both API route families delegate here to maximize code reuse.
+- **Email templates** (`emails/ConfirmSubscriptionEmail.tsx`, `emails/WelcomeEmail.tsx`) — React Email components accepting per-list branding (name, color, logo copy); rendered server-side and sent via Resend.
+- **News newsletter API routes**: `POST /api/newsletter-subscribe`, `GET /api/newsletter-confirm?token=`, `GET /api/newsletter-unsubscribe?token=`.
+- **Bookstore newsletter API routes**: upgraded `POST /api/bookstore/newsletter`, new `GET /api/bookstore/newsletter/confirm?token=`, `GET /api/bookstore/newsletter/unsubscribe?token=`.
+- **`NewsletterSignup` component** (`src/components/newsletter/NewsletterSignup.tsx`) — reusable; accepts `list: 'news' | 'bookstore'`, `variant: 'full' | 'compact'`, `source`; handles loading / success / error states with GDPR checkbox.
+- **`SubscribedBanner` component** — shows `?subscribed=1` / `?unsubscribed=1` confirmation banners.
+- **Unsubscribe pages** — `/unsubscribe` (news) and `/bookstore/unsubscribe` (bookstore).
+- **Schema upgrades** — `newsletterSubscribe` and `bookstoreSubscriber` now carry full double opt-in fields: `firstName`, `status`, `confirmToken`, `unsubscribeToken`, `gdprConsent`, `confirmedAt`, `unsubscribedAt`, `resendContactId`.
+- **Portal subscribers list** — updated to show status badges.
+- **Component placements** — news signup on homepage, article pages, footer (compact), and support page; bookstore signup updated to use shared component.
+- **`@react-email/components`** installed.
+- **`.env.example`** updated with Resend environment variables.
+
+---
+
 ## [2026-05-23] — Phase 4 Audit Remediation (feature/phase4-audit-remediation → development)
 
 All 17 Phase 4 audit items closed across security, accessibility, architecture, and observability. Issue [#86](https://github.com/UnTelevised-Media/untelevised-media-new/issues/86) · PR [#87](https://github.com/UnTelevised-Media/untelevised-media-new/pull/87).

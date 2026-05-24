@@ -1,13 +1,12 @@
-// src/app/api/bookstore/newsletter/route.ts
-// Bookstore newsletter subscribe endpoint — double opt-in via Resend.
-// Upgraded from bare Sanity write to full double opt-in flow.
+// src/app/api/newsletter-subscribe/route.ts
+// News newsletter subscribe endpoint — double opt-in via Resend.
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { subscribeToList } from '@/lib/newsletter/service';
-import { BOOKSTORE_NEWSLETTER } from '@/lib/newsletter/types';
+import { NEWS_NEWSLETTER } from '@/lib/newsletter/types';
 import { makeRatelimiter } from '@/lib/bookstore/ratelimit';
 
-const newsletterLimiter = makeRatelimiter(5, 60);
+const newsletterLimiter = makeRatelimiter(5, 300);
 
 function getIp(req: NextRequest) {
   return (
@@ -23,12 +22,12 @@ const schema = z.object({
   gdprConsent: z.boolean().refine((v) => v === true, {
     message: 'You must consent to receive emails',
   }),
-  source: z.enum(['bookstore-home', 'bookstore-about', 'book-detail']).optional(),
+  source: z.enum(['homepage', 'article', 'footer', 'support']).optional(),
 });
 
 export async function POST(req: NextRequest) {
   if (newsletterLimiter) {
-    const result = await newsletterLimiter.limit(`bookstore-newsletter:${getIp(req)}`);
+    const result = await newsletterLimiter.limit(`newsletter:${getIp(req)}`);
     if (!result.success) {
       return NextResponse.json(
         { error: 'Too many requests — please try again later' },
@@ -53,13 +52,14 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const result = await subscribeToList(BOOKSTORE_NEWSLETTER, {
-      ...parsed.data,
-      source: parsed.data.source ?? 'bookstore-home',
-    });
-    return NextResponse.json({ ok: result.success, message: result.message });
+    const result = await subscribeToList(NEWS_NEWSLETTER, parsed.data);
+    return NextResponse.json(result, { status: 200 });
   } catch (err) {
-    console.error('[bookstore/newsletter]', err);
+    console.error('[newsletter-subscribe]', err);
     return NextResponse.json({ error: 'Failed to subscribe. Please try again.' }, { status: 500 });
   }
+}
+
+export async function GET() {
+  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
 }
