@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 
 export const metadata: Metadata = {
   title: 'Support Options — UnTelevised Media',
@@ -237,6 +238,13 @@ export default function SupportPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* NEWSLETTER SIGNUP */}
+      <section className='border-b border-slate-800 bg-black py-12'>
+        <div className='mx-auto max-w-3xl px-4'>
+          <NewsletterSignup list='news' source='support' />
         </div>
       </section>
 

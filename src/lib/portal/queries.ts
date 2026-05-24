@@ -255,7 +255,11 @@ export const queryPortalNewsletterSubscribers = groq`
   *[_type == "newsletterSubscribe"] | order(submittedAt desc) {
     _id,
     email,
-    submittedAt
+    firstName,
+    status,
+    source,
+    submittedAt,
+    confirmedAt
   }
 `;
 
@@ -263,8 +267,11 @@ export const queryPortalBookstoreSubscribers = groq`
   *[_type == "bookstoreSubscriber"] | order(submittedAt desc) {
     _id,
     email,
+    firstName,
+    status,
+    source,
     submittedAt,
-    source
+    confirmedAt
   }
 `;
 

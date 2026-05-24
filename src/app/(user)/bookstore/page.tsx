@@ -19,6 +19,7 @@ import BookCardActions from '@/components/bookstore/BookCardActions';
 import BookstoreNewsletter from '@/components/bookstore/BookstoreNewsletter';
 import WishlistButton from '@/components/bookstore/WishlistButton';
 import PageViewTracker from '@/components/analytics/PageViewTracker';
+import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
 
 export const metadata: Metadata = {
   title: 'Bookstore — Hurriya Publications',
@@ -229,6 +230,9 @@ export default async function ShopPage({
 
   return (
     <main className='mx-auto max-w-7xl px-4 py-8 sm:px-6'>
+      <Suspense>
+        <SubscribedBanner brandColor='#009736' />
+      </Suspense>
       <PageViewTracker
         event='view_bookstore_home'
         params={{ featured_book_count: featured.length, total_book_count: allBooks.length }}

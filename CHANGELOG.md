@@ -4,6 +4,27 @@ All notable changes to this project are documented here.
 
 ---
 
+## [Unreleased] — Newsletter / Email List Integration (Issue #27)
+
+Full double opt-in flow for both the UnTelevised Media news newsletter and the Hurriya Publications bookstore newsletter. Both lists share one service layer with per-list branding. Emails sent via Nodemailer (same SMTP transporter as bookstore order emails — no extra service required).
+
+### Added
+
+- **Shared newsletter service** (`src/lib/newsletter/service.ts`) — subscribe / confirm / unsubscribe logic parameterized by `NewsletterConfig`; both API route families share this code.
+- **Newsletter email module** (`src/lib/newsletter/email.ts`) — Nodemailer transporter + inline-HTML `sendConfirmEmail` / `sendWelcomeEmail`; brand bar, tagline, CTA text, and CTA URL all driven by per-list config so each email is correctly branded for its list.
+- **`NewsletterConfig`** (`src/lib/newsletter/types.ts`) — `fromName`, `tagline`, `ctaUrl`, `ctaText`, `brandColor`, `missionCopy` ensure every email touchpoint is fully dynamic with no hardcoded copy.
+- **News newsletter API routes**: `POST /api/newsletter-subscribe`, `GET /api/newsletter-confirm?token=`, `GET /api/newsletter-unsubscribe?token=`.
+- **Bookstore newsletter API routes**: upgraded `POST /api/bookstore/newsletter`, new `GET /api/bookstore/newsletter/confirm?token=`, `GET /api/bookstore/newsletter/unsubscribe?token=`.
+- **`NewsletterSignup` component** (`src/components/newsletter/NewsletterSignup.tsx`) — reusable; accepts `list: 'news' | 'bookstore'`, `variant: 'full' | 'compact'`, `source`; handles loading / success / error states with GDPR checkbox.
+- **`SubscribedBanner` component** — shows `?subscribed=1` / `?subscribed=error` / `?unsubscribed=1` banners.
+- **Unsubscribe pages** — `/unsubscribe` (news) and `/bookstore/unsubscribe` (bookstore).
+- **Schema upgrades** — `newsletterSubscribe` and `bookstoreSubscriber` carry full double opt-in fields: `firstName`, `status`, `confirmToken`, `unsubscribeToken`, `gdprConsent`, `confirmedAt`, `unsubscribedAt`.
+- **Portal subscribers list** — status badges (✅/⏳/🚫), name column, confirmed-at column, active count, name/email search.
+- **Component placements** — news signup on homepage, article pages, footer (compact), and support page; bookstore signup updated to use shared component.
+- **`.env.example`** updated — Resend vars removed; `NEXT_PUBLIC_SITE_URL` added (used for confirm/unsubscribe link generation).
+
+---
+
 ## [2026-05-23] — Phase 4 Audit Remediation (feature/phase4-audit-remediation → development)
 
 All 17 Phase 4 audit items closed across security, accessibility, architecture, and observability. Issue [#86](https://github.com/UnTelevised-Media/untelevised-media-new/issues/86) · PR [#87](https://github.com/UnTelevised-Media/untelevised-media-new/pull/87).

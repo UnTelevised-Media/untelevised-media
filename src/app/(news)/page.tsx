@@ -9,6 +9,8 @@ import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 import RawFeed from '@/components/homepage/RawFeed';
 import { SidebarAd, AD_CONFIG } from '@/components/ads';
+import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
+import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
 
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryAllArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
@@ -207,6 +209,18 @@ export default async function HomePage() {
               ))}
             </div>
           </Suspense>
+        </div>
+      </section>
+
+      {/* NEWSLETTER SIGNUP */}
+      <section className='border-b border-slate-300 bg-white px-4 py-10 dark:border-slate-800 dark:bg-black'>
+        <div className='mx-auto max-w-[1400px]'>
+          <Suspense>
+            <SubscribedBanner brandColor='#D70606' />
+          </Suspense>
+          <div className='mt-6'>
+            <NewsletterSignup list='news' source='homepage' />
+          </div>
         </div>
       </section>
 
