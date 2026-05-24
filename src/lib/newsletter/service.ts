@@ -3,17 +3,10 @@
 // API routes import this and pass a NewsletterConfig; no list-specific logic lives here.
 import 'server-only';
 
-import { Resend } from 'resend';
 import { writeClient } from '@/lib/sanity/lib/write-client';
 import { client } from '@/lib/sanity/lib/client';
-import { render } from '@react-email/components';
-import ConfirmSubscriptionEmail from '@/emails/ConfirmSubscriptionEmail';
-import WelcomeEmail from '@/emails/WelcomeEmail';
+import { sendConfirmEmail, sendWelcomeEmail, isConfigured } from './email';
 import type { NewsletterConfig } from './types';
-
-function getResend() {
-  return new Resend(process.env.RESEND_API_KEY);
-}
 
 function siteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://untelevised.media').replace(/\/$/, '');
@@ -57,7 +50,7 @@ export async function subscribeToList(
   const docId = `${config.schemaType}_${email.replace(/[^a-z0-9]/g, '_')}`;
 
   if (existing) {
-    // Re-subscribe (pending or unsubscribed) — reset tokens and status
+    // Re-subscribe (pending or unsubscribed) — reset token and status.
     await writeClient
       .patch(existing._id)
       .set({
@@ -68,7 +61,7 @@ export async function subscribeToList(
         ...(firstName ? { firstName } : {}),
         ...(source ? { source } : {}),
       })
-      .unset(['confirmedAt', 'unsubscribedAt', 'resendContactId', 'unsubscribeToken'])
+      .unset(['confirmedAt', 'unsubscribedAt', 'unsubscribeToken'])
       .commit();
   } else {
     await writeClient.createIfNotExists({
@@ -84,27 +77,21 @@ export async function subscribeToList(
     });
   }
 
-  const fromEmail = process.env[config.fromEmailEnvKey] ?? 'newsletter@untelevised.media';
-
-  try {
-    const resend = getResend();
-    const html = await render(
-      ConfirmSubscriptionEmail({
+  if (isConfigured()) {
+    try {
+      await sendConfirmEmail({
+        to: email,
         firstName,
         confirmUrl,
         listName: config.listName,
+        fromName: config.fromName,
+        tagline: config.tagline,
         brandColor: config.brandColor,
-      })
-    );
-    await resend.emails.send({
-      from: fromEmail,
-      to: email,
-      subject: `Confirm your ${config.listName} subscription`,
-      html,
-    });
-  } catch (err) {
-    console.error(`[newsletter/subscribe][${config.schemaType}] Email send failed:`, err);
-    // Don't block the user — Sanity doc is created; they can try again.
+      });
+    } catch (err) {
+      console.error(`[newsletter/subscribe][${config.schemaType}] Confirm email failed:`, err);
+      // Don't block the user — Sanity doc is created; they can try again.
+    }
   }
 
   return { success: true, message: 'Check your inbox to confirm your subscription.' };
@@ -148,49 +135,25 @@ export async function confirmSubscription(
     .unset(['confirmToken'])
     .commit();
 
-  // Add to Resend audience (non-fatal)
-  const audienceId = process.env[config.audienceIdEnvKey];
-  let resendContactId: string | undefined;
-  if (audienceId) {
-    try {
-      const resend = getResend();
-      const contact = await resend.contacts.create({
-        audienceId,
-        email: subscriber.email,
-        firstName: subscriber.firstName ?? undefined,
-        unsubscribed: false,
-      });
-      resendContactId = contact.data?.id;
-      if (resendContactId) {
-        await writeClient.patch(subscriber._id).set({ resendContactId }).commit();
-      }
-    } catch (err) {
-      console.error(`[newsletter/confirm][${config.schemaType}] Resend contact failed:`, err);
-    }
-  }
-
   // Send welcome email (non-fatal)
-  const fromEmail = process.env[config.fromEmailEnvKey] ?? 'newsletter@untelevised.media';
-  const unsubscribeUrl = `${siteUrl()}${config.unsubscribeRoute}?token=${unsubscribeToken}`;
-  try {
-    const resend = getResend();
-    const html = await render(
-      WelcomeEmail({
+  if (isConfigured()) {
+    const unsubscribeUrl = `${siteUrl()}${config.unsubscribeRoute}?token=${unsubscribeToken}`;
+    try {
+      await sendWelcomeEmail({
+        to: subscriber.email,
         firstName: subscriber.firstName,
         listName: config.listName,
+        fromName: config.fromName,
+        tagline: config.tagline,
         brandColor: config.brandColor,
         missionCopy: config.missionCopy,
+        ctaUrl: config.ctaUrl,
+        ctaText: config.ctaText,
         unsubscribeUrl,
-      })
-    );
-    await resend.emails.send({
-      from: fromEmail,
-      to: subscriber.email,
-      subject: `Welcome to ${config.listName}`,
-      html,
-    });
-  } catch (err) {
-    console.error(`[newsletter/confirm][${config.schemaType}] Welcome email failed:`, err);
+      });
+    } catch (err) {
+      console.error(`[newsletter/confirm][${config.schemaType}] Welcome email failed:`, err);
+    }
   }
 
   return { redirectUrl: `${siteUrl()}${config.confirmRedirectUrl}` };
@@ -208,11 +171,8 @@ export async function unsubscribeFromList(
   config: NewsletterConfig,
   token: string
 ): Promise<UnsubscribeResult> {
-  const subscriber = await client.fetch<{
-    _id: string;
-    resendContactId?: string;
-  } | null>(
-    `*[_type == $schemaType && unsubscribeToken == $tok && status == "active"][0]{ _id, resendContactId }`,
+  const subscriber = await client.fetch<{ _id: string } | null>(
+    `*[_type == $schemaType && unsubscribeToken == $tok && status == "active"][0]{ _id }`,
     { schemaType: config.schemaType, tok: token }
   );
 
@@ -229,21 +189,6 @@ export async function unsubscribeFromList(
     })
     .unset(['unsubscribeToken'])
     .commit();
-
-  // Remove from Resend audience (non-fatal)
-  const audienceId = process.env[config.audienceIdEnvKey];
-  if (audienceId && subscriber.resendContactId) {
-    try {
-      const resend = getResend();
-      await resend.contacts.update({
-        audienceId,
-        id: subscriber.resendContactId,
-        unsubscribed: true,
-      });
-    } catch (err) {
-      console.error(`[newsletter/unsubscribe][${config.schemaType}] Resend update failed:`, err);
-    }
-  }
 
   return { redirectUrl: `${siteUrl()}${config.unsubscribeRedirectUrl}` };
 }

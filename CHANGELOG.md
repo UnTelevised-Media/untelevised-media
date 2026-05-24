@@ -6,22 +6,22 @@ All notable changes to this project are documented here.
 
 ## [Unreleased] — Newsletter / Email List Integration (Issue #27)
 
-Full Resend double opt-in integration for both the UnTelevised Media news newsletter and the Hurriya Publications bookstore newsletter. Both lists now have working confirmation emails, welcome emails, unsubscribe flows, and GDPR-compliant consent collection.
+Full double opt-in flow for both the UnTelevised Media news newsletter and the Hurriya Publications bookstore newsletter. Both lists share one service layer with per-list branding. Emails sent via Nodemailer (same SMTP transporter as bookstore order emails — no extra service required).
 
 ### Added
 
-- **Shared newsletter service** (`src/lib/newsletter/service.ts`) — encapsulates subscribe / confirm / unsubscribe logic parameterized by list config; both API route families delegate here to maximize code reuse.
-- **Email templates** (`emails/ConfirmSubscriptionEmail.tsx`, `emails/WelcomeEmail.tsx`) — React Email components accepting per-list branding (name, color, logo copy); rendered server-side and sent via Resend.
+- **Shared newsletter service** (`src/lib/newsletter/service.ts`) — subscribe / confirm / unsubscribe logic parameterized by `NewsletterConfig`; both API route families share this code.
+- **Newsletter email module** (`src/lib/newsletter/email.ts`) — Nodemailer transporter + inline-HTML `sendConfirmEmail` / `sendWelcomeEmail`; brand bar, tagline, CTA text, and CTA URL all driven by per-list config so each email is correctly branded for its list.
+- **`NewsletterConfig`** (`src/lib/newsletter/types.ts`) — `fromName`, `tagline`, `ctaUrl`, `ctaText`, `brandColor`, `missionCopy` ensure every email touchpoint is fully dynamic with no hardcoded copy.
 - **News newsletter API routes**: `POST /api/newsletter-subscribe`, `GET /api/newsletter-confirm?token=`, `GET /api/newsletter-unsubscribe?token=`.
 - **Bookstore newsletter API routes**: upgraded `POST /api/bookstore/newsletter`, new `GET /api/bookstore/newsletter/confirm?token=`, `GET /api/bookstore/newsletter/unsubscribe?token=`.
 - **`NewsletterSignup` component** (`src/components/newsletter/NewsletterSignup.tsx`) — reusable; accepts `list: 'news' | 'bookstore'`, `variant: 'full' | 'compact'`, `source`; handles loading / success / error states with GDPR checkbox.
-- **`SubscribedBanner` component** — shows `?subscribed=1` / `?unsubscribed=1` confirmation banners.
+- **`SubscribedBanner` component** — shows `?subscribed=1` / `?subscribed=error` / `?unsubscribed=1` banners.
 - **Unsubscribe pages** — `/unsubscribe` (news) and `/bookstore/unsubscribe` (bookstore).
-- **Schema upgrades** — `newsletterSubscribe` and `bookstoreSubscriber` now carry full double opt-in fields: `firstName`, `status`, `confirmToken`, `unsubscribeToken`, `gdprConsent`, `confirmedAt`, `unsubscribedAt`, `resendContactId`.
-- **Portal subscribers list** — updated to show status badges.
+- **Schema upgrades** — `newsletterSubscribe` and `bookstoreSubscriber` carry full double opt-in fields: `firstName`, `status`, `confirmToken`, `unsubscribeToken`, `gdprConsent`, `confirmedAt`, `unsubscribedAt`.
+- **Portal subscribers list** — status badges (✅/⏳/🚫), name column, confirmed-at column, active count, name/email search.
 - **Component placements** — news signup on homepage, article pages, footer (compact), and support page; bookstore signup updated to use shared component.
-- **`@react-email/components`** installed.
-- **`.env.example`** updated with Resend environment variables.
+- **`.env.example`** updated — Resend vars removed; `NEXT_PUBLIC_SITE_URL` added (used for confirm/unsubscribe link generation).
 
 ---
 
