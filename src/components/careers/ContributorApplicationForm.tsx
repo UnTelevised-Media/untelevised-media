@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 
 interface FormData {
   firstName: string;
@@ -79,6 +80,7 @@ interface Props {
 }
 
 export function ContributorApplicationForm({ prefilledPosition }: Props) {
+  const { trackEvent } = useConsentAwareTracking();
   const matchedPosition = prefilledPosition
     ? positions.find(
         (p) =>
@@ -168,6 +170,11 @@ export function ContributorApplicationForm({ prefilledPosition }: Props) {
         body: JSON.stringify(cleaned),
       });
       if (!res.ok) throw new Error('submission failed');
+      trackEvent('contributor_application_submitted', {
+        positions: formData.positionsOfInterest.join(','),
+        experience_level: formData.experienceLevel,
+        availability: formData.availability,
+      });
       setStatus('success');
     } catch {
       setStatus('error');

@@ -5,6 +5,7 @@
 import React, { useState } from 'react';
 import { Shield, Lock, Eye, AlertTriangle } from 'lucide-react';
 import { TurnstileWidget } from '@/components/global/TurnstileWidget';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 
 export default function SecureContactPage() {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ export default function SecureContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const { trackEvent } = useConsentAwareTracking();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -49,6 +51,11 @@ export default function SecureContactPage() {
       });
 
       if (response.ok) {
+        trackEvent('secure_contact_submitted', {
+          urgency: formData.urgency,
+          contact_method: formData.contactMethod,
+          is_anonymous: formData.isAnonymous,
+        });
         setSubmitStatus('success');
         setFormData({
           name: '',

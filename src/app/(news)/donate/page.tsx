@@ -1,8 +1,10 @@
 /* eslint-disable react/function-component-definition */
-// src/app/(user)/donate/page.tsx
+// src/app/(news)/donate/page.tsx
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import PageViewTracker from '@/components/analytics/PageViewTracker';
+import DonateLink from '@/components/donate/DonateLink';
 
 export const metadata: Metadata = {
   title: 'Support Independent Journalism',
@@ -13,6 +15,8 @@ export const metadata: Metadata = {
 export default function DonatePage() {
   return (
     <div className='min-h-screen bg-black text-slate-100'>
+      <PageViewTracker event='donate_intent' />
+
       {/* HERO SECTION */}
       <section className='border-b border-slate-800 bg-gradient-to-b from-slate-950 to-black py-16'>
         <div className='mx-auto max-w-7xl px-4'>
@@ -99,14 +103,13 @@ export default function DonatePage() {
               <p className='mb-4 flex-1 text-sm text-slate-300'>
                 Quick and secure mobile payments
               </p>
-              <a
+              <DonateLink
                 href='https://cash.app/$UnTelevisedMedia'
+                platform='cashapp'
                 className='bg-untele px-4 py-3 text-center text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 $UnTelevisedMedia
-              </a>
+              </DonateLink>
             </div>
 
             {/* Venmo */}
@@ -116,14 +119,13 @@ export default function DonatePage() {
               </div>
               <h4 className='mb-3 text-lg font-bold uppercase tracking-wide text-white'>VENMO</h4>
               <p className='mb-4 flex-1 text-sm text-slate-300'>Social payment platform</p>
-              <a
+              <DonateLink
                 href='https://venmo.com/UnTelevised'
+                platform='venmo'
                 className='bg-untele px-4 py-3 text-center text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 @UnTelevised
-              </a>
+              </DonateLink>
             </div>
 
             {/* Email Contact */}
@@ -211,14 +213,13 @@ export default function DonatePage() {
             bonuses, no shareholder profits—just fearless journalism.
           </p>
           <div className='flex flex-col gap-4 sm:flex-row sm:justify-center'>
-            <a
+            <DonateLink
               href='https://cash.app/$UnTelevisedMedia'
+              platform='cashapp'
               className='bg-untele px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
-              target='_blank'
-              rel='noopener noreferrer'
             >
               DONATE NOW
-            </a>
+            </DonateLink>
             <Link
               href='/secure-contact'
               className='border-2 border-white bg-transparent px-8 py-4 text-center text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black'

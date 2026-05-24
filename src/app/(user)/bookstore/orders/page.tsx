@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { shopServiceClient } from '@/lib/bookstore/supabase';
 import type { Order, OrderItem } from '@/lib/bookstore/types';
+import PageViewTracker from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'My Orders — Hurriya Publications',
@@ -87,6 +88,7 @@ export default async function OrdersPage() {
 
   return (
     <main className='mx-auto max-w-4xl px-4 py-8 sm:px-6'>
+      <PageViewTracker event='view_orders' params={{ order_count: (orders ?? []).length }} />
       <div className='mb-6 flex items-center gap-3'>
         <div className='bg-untele px-3 py-1'>
           <span className='text-sm font-black uppercase tracking-widest text-white'>

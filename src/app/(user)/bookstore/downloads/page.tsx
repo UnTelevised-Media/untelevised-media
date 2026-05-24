@@ -4,6 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 
 interface DownloadRecord {
   id: string;
@@ -19,9 +20,18 @@ interface DownloadRecord {
   } | null;
 }
 
-function DownloadButton({ orderItemId }: { orderItemId: string }) {
+function DownloadButton({
+  orderItemId,
+  bookTitle,
+  formatLabel,
+}: {
+  orderItemId: string;
+  bookTitle: string;
+  formatLabel: string;
+}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { trackEvent } = useConsentAwareTracking();
 
   const handleDownload = async () => {
     setLoading(true);
@@ -33,6 +43,7 @@ function DownloadButton({ orderItemId }: { orderItemId: string }) {
         setError(data.error ?? 'Download failed');
         return;
       }
+      trackEvent('download_file', { book_title: bookTitle, format: formatLabel });
       window.location.href = data.url;
     } catch {
       setError('Network error — please try again');
@@ -59,19 +70,20 @@ export default function DownloadsPage() {
   const [downloads, setDownloads] = useState<DownloadRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { trackEvent } = useConsentAwareTracking();
 
   useEffect(() => {
-    // Fetch downloads from a lightweight internal API (or directly if using server actions)
-    // For now, we fetch from a simple endpoint that returns the user's download records
     fetch('/api/bookstore/my-downloads')
       .then(async (res) => {
         if (!res.ok) throw new Error('Failed to load downloads');
         const data = (await res.json()) as { downloads: DownloadRecord[] };
-        setDownloads(data.downloads ?? []);
+        const items = data.downloads ?? [];
+        setDownloads(items);
+        trackEvent('view_downloads', { download_count: items.length });
       })
       .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, [trackEvent]);
 
   return (
     <main className='mx-auto max-w-4xl px-4 py-8 sm:px-6'>
@@ -149,7 +161,13 @@ export default function DownloadsPage() {
                     <p className='text-[10px] text-amber-500'>File being prepared — check back soon</p>
                   )}
                 </div>
-                {available && <DownloadButton orderItemId={dl.order_item_id} />}
+                {available && (
+                  <DownloadButton
+                    orderItemId={dl.order_item_id}
+                    bookTitle={dl.order_items?.book_title ?? 'Unknown'}
+                    formatLabel={dl.order_items?.format_label ?? 'digital'}
+                  />
+                )}
               </div>
             );
           })}
