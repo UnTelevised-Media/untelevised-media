@@ -33,7 +33,6 @@ export interface SubscribeInput {
 export interface SubscribeResult {
   success: boolean;
   message: string;
-  error?: string;
 }
 
 export async function subscribeToList(
@@ -55,37 +54,33 @@ export async function subscribeToList(
 
   const confirmToken = crypto.randomUUID();
   const confirmUrl = `${siteUrl()}${config.confirmRoute}?token=${confirmToken}`;
-
   const docId = `${config.schemaType}_${email.replace(/[^a-z0-9]/g, '_')}`;
 
   if (existing) {
-    // Re-subscribe (pending or unsubscribed) — reset token and status
+    // Re-subscribe (pending or unsubscribed) — reset tokens and status
     await writeClient
       .patch(existing._id)
       .set({
-        firstName: firstName ?? null,
         status: 'pending',
         confirmToken,
         gdprConsent,
-        source: source ?? null,
         submittedAt: new Date().toISOString(),
-        confirmedAt: null,
-        unsubscribedAt: null,
-        resendContactId: null,
-        unsubscribeToken: null,
+        ...(firstName ? { firstName } : {}),
+        ...(source ? { source } : {}),
       })
+      .unset(['confirmedAt', 'unsubscribedAt', 'resendContactId', 'unsubscribeToken'])
       .commit();
   } else {
     await writeClient.createIfNotExists({
       _id: docId,
       _type: config.schemaType,
       email,
-      firstName: firstName ?? null,
       status: 'pending',
       confirmToken,
       gdprConsent,
-      source: source ?? null,
       submittedAt: new Date().toISOString(),
+      ...(firstName ? { firstName } : {}),
+      ...(source ? { source } : {}),
     });
   }
 
@@ -121,7 +116,6 @@ export async function subscribeToList(
 
 export interface ConfirmResult {
   redirectUrl: string;
-  error?: string;
 }
 
 export async function confirmSubscription(
@@ -133,16 +127,13 @@ export async function confirmSubscription(
     email: string;
     firstName?: string;
   } | null>(
-    `*[_type == $schemaType && confirmToken == $token && status == "pending"][0]{ _id, email, firstName }`,
-    { schemaType: config.schemaType, token },
-    { cache: 'no-store', next: { revalidate: 0 } }
+    `*[_type == $schemaType && confirmToken == $tok && status == "pending"][0]{ _id, email, firstName }`,
+    { schemaType: config.schemaType, tok: token }
   );
 
   if (!subscriber) {
-    return {
-      redirectUrl: `${config.confirmRedirectUrl.replace(/subscribed=1/, 'subscribed=error')}`,
-      error: 'Invalid or expired token',
-    };
+    const errorUrl = config.confirmRedirectUrl.replace('subscribed=1', 'subscribed=error');
+    return { redirectUrl: `${siteUrl()}${errorUrl}` };
   }
 
   const unsubscribeToken = crypto.randomUUID();
@@ -152,9 +143,9 @@ export async function confirmSubscription(
     .set({
       status: 'active',
       confirmedAt: new Date().toISOString(),
-      confirmToken: null,
       unsubscribeToken,
     })
+    .unset(['confirmToken'])
     .commit();
 
   // Add to Resend audience (non-fatal)
@@ -211,7 +202,6 @@ export async function confirmSubscription(
 
 export interface UnsubscribeResult {
   redirectUrl: string;
-  error?: string;
 }
 
 export async function unsubscribeFromList(
@@ -222,13 +212,12 @@ export async function unsubscribeFromList(
     _id: string;
     resendContactId?: string;
   } | null>(
-    `*[_type == $schemaType && unsubscribeToken == $token && status == "active"][0]{ _id, resendContactId }`,
-    { schemaType: config.schemaType, token },
-    { cache: 'no-store', next: { revalidate: 0 } }
+    `*[_type == $schemaType && unsubscribeToken == $tok && status == "active"][0]{ _id, resendContactId }`,
+    { schemaType: config.schemaType, tok: token }
   );
 
+  // Token not found or already unsubscribed — silently succeed to avoid enumeration.
   if (!subscriber) {
-    // Token not found or already unsubscribed — redirect as success to avoid enumeration.
     return { redirectUrl: `${siteUrl()}${config.unsubscribeRedirectUrl}` };
   }
 
@@ -237,8 +226,8 @@ export async function unsubscribeFromList(
     .set({
       status: 'unsubscribed',
       unsubscribedAt: new Date().toISOString(),
-      unsubscribeToken: null,
     })
+    .unset(['unsubscribeToken'])
     .commit();
 
   // Remove from Resend audience (non-fatal)

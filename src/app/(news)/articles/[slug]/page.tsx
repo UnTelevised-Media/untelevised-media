@@ -29,6 +29,7 @@ import { CorrectionNotice } from '@/components/post/CorrectionNotice';
 import { SourcesPanel } from '@/components/post/SourcesPanel';
 import { BookmarkButton } from '@/components/bookmarks/BookmarkButton';
 import CommentsSection from '@/components/post/CommentsSection';
+import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 
 /**
  * Guard against Sanity fields that may be stored as a block object instead of a plain
@@ -425,6 +426,11 @@ export default async function Article({ params }: Props) {
             </div>
           </section>
         )}
+
+        {/* Newsletter Signup */}
+        <div className='mt-12'>
+          <NewsletterSignup list='news' source='article' />
+        </div>
 
         {/* Comments Section */}
         <div className='mt-12'>
