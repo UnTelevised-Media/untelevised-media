@@ -325,6 +325,42 @@ export async function passOnStory(briefId: string, storyKey: string): Promise<Re
 }
 
 // ---------------------------------------------------------------------------
+// Auto-repair null _key values on brief stories and their links.
+// The beat-patrol agent sometimes omits _key fields, which prevents claiming.
+// Safe to call multiple times — skips stories that already have valid keys.
+// ---------------------------------------------------------------------------
+
+export async function autoRepairBrief(briefId: string): Promise<Result> {
+  try {
+    await requireAuthor();
+
+    const patchTarget = await getBriefPatchTarget(briefId);
+    const doc = await writeClient.getDocument<{
+      stories?: Array<{ _key?: string | null; links?: Array<{ _key?: string | null }> }>;
+    }>(patchTarget);
+
+    if (!doc?.stories?.length) return { success: true };
+
+    const needsRepair = doc.stories.some((s) => !s._key || (s.links ?? []).some((l) => !l._key));
+    if (!needsRepair) return { success: true };
+
+    const repairedStories = doc.stories.map((s) => ({
+      ...s,
+      _key: s._key || makeKey(),
+      links: (s.links ?? []).map((l) => ({ ...l, _key: l._key || makeKey() })),
+    }));
+
+    await writeClient.patch(patchTarget).set({ stories: repairedStories }).commit();
+    return { success: true };
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Failed to repair brief.',
+    };
+  }
+}
+
+// ---------------------------------------------------------------------------
 // 2nd Thought — undo a pass, story reappears in this author's view
 // ---------------------------------------------------------------------------
 
