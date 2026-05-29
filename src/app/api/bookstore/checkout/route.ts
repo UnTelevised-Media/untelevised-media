@@ -123,18 +123,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Validate NYOP minimum amounts before the Sanity round-trip
-    for (const item of body.items) {
-      if (item.isNyop) {
-        if (!item.unitAmountCents || item.unitAmountCents < 50) {
-          return NextResponse.json(
-            { error: `"${item.title}": minimum payment is $0.50` },
-            { status: 400 }
-          );
-        }
-      }
-    }
-
     // Filter out tips with no amount or zero amount before resolving prices
     const chargeableItems = body.items.filter(
       (i) => i.formatType !== 'tip' || (i.unitAmountCents != null && i.unitAmountCents > 0)
@@ -166,6 +154,28 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Build server-verified NYOP flags from Sanity — never trust item.isNyop from
+    // the client, which would allow submitting an arbitrary unitAmountCents for any item.
+    const serverIsNyopFlags: boolean[] = chargeableItems.map((item) => {
+      if (item.formatType === 'tip') return false;
+      const book = bookMap.get(item.sanityBookId);
+      const format = book?.formats?.find((f) => f._key === item.formatKey);
+      return format?.nameYourPrice === true;
+    });
+
+    // Validate NYOP minimum amounts using server-verified flags.
+    for (let i = 0; i < chargeableItems.length; i++) {
+      if (serverIsNyopFlags[i]) {
+        const item = chargeableItems[i];
+        if (!item.unitAmountCents || item.unitAmountCents < 50) {
+          return NextResponse.json(
+            { error: `"${item.title}": minimum payment is $0.50` },
+            { status: 400 }
+          );
+        }
+      }
+    }
+
     const hasPhysical = chargeableItems.some(
       (i) => i.formatType === 'physical' || i.formatType === 'bundle'
     );
@@ -176,8 +186,9 @@ export async function POST(req: NextRequest) {
         // Use the server-resolved canonical ID, not item.stripePriceId from the client.
         const canonicalId = canonicalIds[idx];
 
-        // Tips and NYOP both use price_data: a Stripe product + user-entered amount
-        if ((item.formatType === 'tip' || item.isNyop) && item.unitAmountCents) {
+        // Tips and NYOP both use price_data: a Stripe product + user-entered amount.
+        // serverIsNyopFlags[idx] is authoritative — item.isNyop from the client is ignored.
+        if ((item.formatType === 'tip' || serverIsNyopFlags[idx]) && item.unitAmountCents) {
           // canonicalId may be a price_xxx (format slot) or prod_xxx (tip product).
           // Resolve down to a product ID for price_data.
           let productId = canonicalId;
@@ -213,10 +224,10 @@ export async function POST(req: NextRequest) {
       title: item.title,
       // Store the server-resolved canonical ID in metadata, not the client value.
       priceId: canonicalIds[idx],
-      ...((item.formatType === 'tip' || item.isNyop) && item.unitAmountCents
+      ...((item.formatType === 'tip' || serverIsNyopFlags[idx]) && item.unitAmountCents
         ? { unitAmountCents: item.unitAmountCents }
         : {}),
-      ...(item.isNyop ? { isNyop: true } : {}),
+      ...(serverIsNyopFlags[idx] ? { isNyop: true } : {}),
     }));
 
     const idempotencyKey = createHash('sha256')

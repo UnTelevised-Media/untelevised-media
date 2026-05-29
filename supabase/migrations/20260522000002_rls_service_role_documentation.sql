@@ -52,6 +52,12 @@
 --   webhooks/supabase-order-update (POST): reads customers, sends email
 --     Justified: server-to-server webhook with no user session.
 --
+--   download/guest-resend (POST): reads orders, customers, guest_download_tokens; inserts tokens
+--     Justified: guest purchasers have no Supabase Auth session and no Clerk userId.
+--     Application-level security: rate limiting + email cross-check against orders.customer_id
+--     (customers.email) before querying tokens, then token lookup filtered by order_id AND
+--     guest_email. Three layers must all pass before a resend token is issued.
+--
 --   writeAuditLog: inserts into audit_logs
 --     Justified: audit_logs has RLS disabled (admin-only table, no user policies).
 --
@@ -84,3 +90,10 @@ comment on table public.customers is
 comment on table public.digital_downloads is
   'Service-role reads: see supabase/migrations/20260522000002_rls_service_role_documentation.sql. '
   'RLS policies enforce owner-only access when using a Clerk-issued Supabase JWT.';
+
+comment on table public.guest_download_tokens is
+  'RLS disabled by design — guest purchasers have no auth session. '
+  'Access exclusively via service role in API routes. '
+  'Application-level isolation: email cross-checked against orders.customer_id before token lookup; '
+  'all queries filtered by both order_id AND guest_email. '
+  'See supabase/migrations/20260522000002_rls_service_role_documentation.sql.';

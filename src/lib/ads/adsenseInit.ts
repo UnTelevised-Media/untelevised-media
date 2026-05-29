@@ -114,7 +114,19 @@ export class AdSenseManager {
     }
 
     try {
-      // Mark ad as processing
+      // Prevent double-push — Google throws "All ins elements already have ads" if pushed twice
+      if (adElement.hasAttribute('data-adsbygoogle-pushed')) {
+        if (this.isDevelopment) console.log('AdSense: Skipping already-pushed element');
+        return true;
+      }
+
+      // Skip if element has no computed width — Google throws "No slot size for availableWidth=0"
+      if (adElement.offsetWidth === 0) {
+        if (this.isDevelopment) console.warn('AdSense: Skipping ad push — element has zero width');
+        return false;
+      }
+
+      adElement.setAttribute('data-adsbygoogle-pushed', 'true');
       adElement.setAttribute('data-ad-status', 'processing');
 
       // Push to AdSense

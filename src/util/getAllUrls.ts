@@ -1,79 +1,105 @@
 // src/util/getAllUrls.ts
+// Fetches the minimal fields needed for sitemap.ts — slug, _updatedAt, _type.
+// Each query filters by defined(slug.current) to skip draft/incomplete docs
+// that have no slug, preventing "Cannot read properties of null" errors.
 import sanityClient from '@/lib/sanity/lib/client';
 import { groq } from 'next-sanity';
 
-export default async function getAllURLs() {
-  const queryAllArticleUrls = groq`
-    *[_type == "article"] {
-      ...,
-      title,
-      slug,
-    }`;
-  const queryAllLiveEventUrls = groq`
-    *[_type == "liveEvent"] {
-      ...,
-      title,
-      slug,
-    }`;
+// Re-usable minimal type returned by every query
+type SlugDoc = {
+  _type: string;
+  _updatedAt: string;
+  slug: { current: string };
+};
 
-  const queryAuthors = groq`
-    *[_type == "author"] {
-      ...,
-      slug,
-    }`;
+const queryAllArticleUrls = groq`
+  *[_type == "article" && defined(slug.current)] {
+    _type,
+    _updatedAt,
+    slug,
+  }`;
 
-  const queryAllCategoryUrls = groq`
-    *[_type == "category"] {
-      ...,
-      slug,
-    }`;
+const queryAllLiveEventUrls = groq`
+  *[_type == "liveEvent" && defined(slug.current)] {
+    _type,
+    _updatedAt,
+    slug,
+  }`;
 
-  const queryPolicies = groq`
-    *[_type == "policies"] {
-      ...,
-      slug,
-    }`;
+const queryAuthors = groq`
+  *[_type == "author" && defined(slug.current)] {
+    _type,
+    _updatedAt,
+    slug,
+  }`;
 
-  const querySongs = groq`
-    *[_type == "song"] {
-      ...,
-      title,
-      slug,
-    }`;
+const queryAllCategoryUrls = groq`
+  *[_type == "category" && defined(slug.current)] {
+    _type,
+    _updatedAt,
+    slug,
+  }`;
 
-  const queryMusicArtists = groq`
-    *[_type == "musicArtist"] {
-      ...,
-      name,
-      slug,
-    }`;
+const queryPolicies = groq`
+  *[_type == "policies" && defined(slug.current)] {
+    _type,
+    _updatedAt,
+    slug,
+  }`;
 
-  const queryAlbums = groq`
-    *[_type == "album"] {
-      ...,
-      title,
-      slug,
-    }`;
+const querySongs = groq`
+  *[_type == "song" && defined(slug.current)] {
+    _type,
+    _updatedAt,
+    slug,
+  }`;
 
-  const queryTimelines = groq`
-    *[_type == "timeline"] {
-      ...,
-      title,
-      slug,
-    }`;
+const queryMusicArtists = groq`
+  *[_type == "musicArtist" && defined(slug.current)] {
+    _type,
+    _updatedAt,
+    slug,
+  }`;
 
+const queryAlbums = groq`
+  *[_type == "album" && defined(slug.current)] {
+    _type,
+    _updatedAt,
+    slug,
+  }`;
+
+const queryTimelines = groq`
+  *[_type == "timeline" && defined(slug.current)] {
+    _type,
+    _updatedAt,
+    slug,
+  }`;
+
+export default async function getAllURLs(): Promise<SlugDoc[]> {
   try {
-    const articles = await sanityClient.fetch(queryAllArticleUrls);
-    const liveEvents = await sanityClient.fetch(queryAllLiveEventUrls);
-    const authors = await sanityClient.fetch(queryAuthors);
-    const categories = await sanityClient.fetch(queryAllCategoryUrls);
-    const policies = await sanityClient.fetch(queryPolicies);
-    const songs = await sanityClient.fetch(querySongs);
-    const musicArtists = await sanityClient.fetch(queryMusicArtists);
-    const albums = await sanityClient.fetch(queryAlbums);
-    const timelines = await sanityClient.fetch(queryTimelines);
+    const [
+      articles,
+      liveEvents,
+      authors,
+      categories,
+      policies,
+      songs,
+      musicArtists,
+      albums,
+      timelines,
+    ] = await Promise.all([
+      sanityClient.fetch<SlugDoc[]>(queryAllArticleUrls),
+      sanityClient.fetch<SlugDoc[]>(queryAllLiveEventUrls),
+      sanityClient.fetch<SlugDoc[]>(queryAuthors),
+      sanityClient.fetch<SlugDoc[]>(queryAllCategoryUrls),
+      sanityClient.fetch<SlugDoc[]>(queryPolicies),
+      sanityClient.fetch<SlugDoc[]>(querySongs),
+      sanityClient.fetch<SlugDoc[]>(queryMusicArtists),
+      sanityClient.fetch<SlugDoc[]>(queryAlbums),
+      sanityClient.fetch<SlugDoc[]>(queryTimelines),
+    ]);
 
-    const allNews = [
+    return [
       ...articles,
       ...liveEvents,
       ...authors,
@@ -84,10 +110,8 @@ export default async function getAllURLs() {
       ...albums,
       ...timelines,
     ];
-
-    return allNews;
   } catch (error) {
-    console.error('Error fetching news:', error);
-    throw error; // You can handle the error according to your needs
+    console.error('Error fetching URLs for sitemap:', error);
+    throw error;
   }
 }

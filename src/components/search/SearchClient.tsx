@@ -15,10 +15,35 @@ import {
 } from 'react-instantsearch';
 import { Search } from 'lucide-react';
 
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY!,
-);
+const _algoliaAppId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID;
+const _algoliaApiKey = process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY;
+
+// Wrap search to catch network failures (ad blockers, firewalls) and return empty
+// results instead of an unhandled rejection that bubbles to Sentry as noise.
+const searchClient = _algoliaAppId && _algoliaApiKey
+  ? (() => {
+      const client = algoliasearch(_algoliaAppId, _algoliaApiKey);
+      return {
+        ...client,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        search: async (requests: any) => {
+          try {
+            return await client.search(requests);
+          } catch {
+            const count = Array.isArray(requests) ? requests.length : 1;
+            return {
+              results: Array.from({ length: count }, () => ({
+                hits: [], nbHits: 0, page: 0, nbPages: 0,
+                hitsPerPage: 20, processingTimeMS: 0, query: '', params: '',
+                exhaustiveNbHits: true,
+              })),
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } as any;
+          }
+        },
+      };
+    })()
+  : null;
 
 interface ArticleHitFields {
   title: string;
@@ -120,6 +145,14 @@ function RefinementSection({ attribute, label }: { attribute: string; label: str
 
 export default function SearchClient({ initialQuery = '' }: { initialQuery?: string }) {
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  if (!searchClient) {
+    return (
+      <div className='border border-border px-6 py-12 text-center'>
+        <p className='text-muted-foreground text-sm uppercase tracking-widest'>Search unavailable</p>
+      </div>
+    );
+  }
 
   return (
     <InstantSearch

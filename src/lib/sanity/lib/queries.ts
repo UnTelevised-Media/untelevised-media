@@ -147,6 +147,35 @@ export const queryAllArticles = groq`
   [0..99]
 `;
 
+// Lightweight homepage query — omits body (Portable Text) to keep the
+// response well under Next.js's 2 MB cache limit. reading time is
+// estimated server-side from character count via pt::text().
+// Use this instead of queryAllArticles on the homepage.
+export const queryHomepageArticles = groq`
+  *[_type=='article' && defined(slug.current)] {
+    _id,
+    _type,
+    _createdAt,
+    _updatedAt,
+    title,
+    slug,
+    description,
+    publishedAt,
+    mainImage,
+    tags,
+    "correction": correction { type, summary },
+    "author": author->{ name, slug },
+    "categories": categories[]->{ _id, title, order },
+    "readingTimeMinutes": select(
+      defined(body) && length(pt::text(body)) > 0
+        => round(length(pt::text(body)) / 1000) + 1,
+      1
+    ),
+  }
+  | order(_createdAt desc)
+  [0..59]
+`;
+
 // Music/Lyrics Queries
 export const queryAllSongs = groq`
   *[_type=='song'] {

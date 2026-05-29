@@ -2,6 +2,16 @@
 // POST /api/bookstore/download/guest-resend
 // Allows a guest to request a fresh download link by providing their order number and email.
 // Rate limited to 3 resends per original token to prevent abuse.
+//
+// SERVICE ROLE JUSTIFICATION:
+// This route uses shopServiceClient (service role) because guest purchasers have no
+// Supabase Auth session. There is no Clerk userId to verify, so we cannot use the
+// anon client (which would deny all reads via RLS). Application-level security is
+// enforced by:
+//   1. Rate limiting via checkGuestResendRate
+//   2. Email cross-check against the order's stored customer email (Step A below)
+//   3. Token lookup filtered by both order_id AND guest_email (Step B below)
+// All three layers must pass before any token is issued or email is sent.
 
 import { NextRequest, NextResponse } from 'next/server';
 import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
@@ -36,10 +46,10 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Look up the order
+  // Look up the order (Step A: fetch customer_id for email cross-check below)
   const { data: order } = await shopServiceClient
     .from('orders')
-    .select('id')
+    .select('id, customer_id')
     .eq('order_number', orderNumber.trim().toUpperCase())
     .maybeSingle();
 
@@ -50,7 +60,24 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  // Find all guest download tokens for this order + email
+  // Step A: Compare requested email against the stored purchaser email before
+  // querying tokens. This prevents an attacker who knows an order number from
+  // probing whether different emails have tokens attached to that order.
+  if (order.customer_id) {
+    const { data: customer } = await shopServiceClient
+      .from('customers')
+      .select('email')
+      .eq('id', order.customer_id)
+      .maybeSingle();
+
+    if (!customer || customer.email.toLowerCase() !== guestEmail.trim().toLowerCase()) {
+      return NextResponse.json({
+        message: 'If a matching order was found, a new download link has been sent.',
+      });
+    }
+  }
+
+  // Step B: Find all guest download tokens for this order + email
   const { data: tokens } = await shopServiceClient
     .from('guest_download_tokens')
     .select('*')

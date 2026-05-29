@@ -12,7 +12,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 // Code-split heavy embed libraries — loaded only when content contains these block types
-const Tweet = dynamic(() => import('react-tweet').then((m) => m.Tweet));
+// Tweet embeds go through SafeTweet (RSC existence check) → SafeTweetWrapper
+// (client-only, ssr:false + error boundary) to prevent SSG build crashes.
+import SafeTweet from '@/components/embeds/SafeTweet';
 const SyntaxHighlighter = dynamic(() =>
   import('react-syntax-highlighter').then((m) => m.Prism),
 );
@@ -207,13 +209,12 @@ export const RichTextComponents = {
     },
 
     // ── Twitter/X Embeds ─────────────────────────────────────────────────────
+    // SafeTweet is an async RSC that catches deleted/protected tweet errors so
+    // a single bad tweet can't crash the entire article static generation.
     twitterEmbed: ({ value }: any) => {
       const tweetId = value.tweetId;
-      return (
-        <div className='mx-auto my-8 flex max-w-full justify-center'>
-          <Tweet id={tweetId} />
-        </div>
-      );
+      if (!tweetId) return null;
+      return <SafeTweet id={tweetId} />;
     },
 
     // ── Inline Fact-Check Cards ───────────────────────────────────────────────

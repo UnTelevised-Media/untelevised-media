@@ -7,7 +7,6 @@ import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/ads';
-import { getReadingTime } from '@/lib/readingTime';
 
 interface RawFeedProps {
   articles: Article[];
@@ -59,7 +58,7 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
                     <span>{formatDate(getArticleDate(article))}</span>
                     <>
                       <span>•</span>
-                      <span>{getReadingTime(article.body)}</span>
+                      <span>{(article as any).readingTimeMinutes ?? 1} min read</span>
                     </>
                     {article.categories?.[0] && (
                       <>

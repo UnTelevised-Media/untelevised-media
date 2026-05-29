@@ -375,6 +375,7 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({
             aria-valuemin={1}
             aria-valuemax={sortedEvents.length}
             aria-label='Timeline progress'
+            aria-valuetext={`Event ${currentEventIndex + 1} of ${sortedEvents.length} — ${Math.round(((currentEventIndex + 1) / sortedEvents.length) * 100)}%`}
           >
             <motion.div
               className='h-2 rounded-full bg-untele'

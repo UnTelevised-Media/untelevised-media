@@ -60,26 +60,19 @@ const ConsentAwareAnalytics = ({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) => 
         NEXT_PUBLIC_GA4_ID to avoid double-counting page views.
       */}
       {isProduction && ga4Id && (
-        <>
-          <Script
-            id='gtag-ga4'
-            strategy='afterInteractive'
-            src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}
-          />
-          <Script
-            id='gtag-ga4-config'
-            strategy='afterInteractive'
-            dangerouslySetInnerHTML={{
-              __html: `
-                gtag('js', new Date());
-                gtag('config', '${ga4Id}', {
-                  page_title: document.title,
-                  page_location: window.location.href,
-                });
-              `,
-            }}
-          />
-        </>
+        <Script
+          id='gtag-ga4'
+          strategy='afterInteractive'
+          src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}
+          onLoad={() => {
+            // Run config only after gtag.js is fully loaded — avoids "gtag is not defined"
+            window.gtag?.('js', new Date());
+            window.gtag?.('config', ga4Id, {
+              page_title: document.title,
+              page_location: window.location.href,
+            });
+          }}
+        />
       )}
 
       {/* Vercel Analytics — only when analytics consent is granted */}

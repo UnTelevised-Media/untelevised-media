@@ -22,10 +22,11 @@ const { sanityFetch: _sanityFetch, SanityLive } = defineLive({
 
 export { SanityLive };
 
-// Hard timeout so a slow/unresponsive Sanity Live API never hangs the
-// Vercel serverless function long enough to 502. 8 s is well within the
-// 30 s function limit and gives callers time to render a graceful fallback.
-const FETCH_TIMEOUT_MS = 8_000;
+// Hard timeout so a slow/unresponsive Sanity Live API never hangs a
+// Vercel serverless function past its limit. 15 s gives the origin time
+// to respond on cold CDN misses while leaving headroom in Vercel's 30 s
+// default. Structural layout data (Nav, Footer) should use fetch.ts instead.
+const FETCH_TIMEOUT_MS = 15_000;
 
 export const sanityFetch: typeof _sanityFetch = (options) =>
   Promise.race([

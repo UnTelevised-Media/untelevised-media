@@ -23,8 +23,8 @@ export default async function sitemap(): Promise<
     priority?: number;
   }[]
 > {
-  const allNews = await getAllURLs();
-  const [factCheckDocs, allTags] = await Promise.all([
+  const [allNews, factCheckDocs, allTags] = await Promise.all([
+    getAllURLs(),
     sanityClient.fetch<{ slug: { current: string }; _updatedAt: string }[]>(queryFactCheckSlugs),
     sanityClient.fetch<string[]>(queryAllTags),
   ]);
@@ -33,90 +33,75 @@ export default async function sitemap(): Promise<
   const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
   const ninetyDaysAgo = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
 
-  const articleURLs = allNews
-    .filter((item) => item._type === 'article')
-    .map((article) => {
-      const updatedAt = new Date(article._updatedAt);
-      const priority = updatedAt >= thirtyDaysAgo ? 0.8 : updatedAt >= ninetyDaysAgo ? 0.6 : 0.4;
-      return {
-        url: `https://www.untelevised.media/articles/${article.slug.current}/`,
-        lastModified: article._updatedAt,
-        changeFrequency: 'daily' as const,
-        priority,
-      };
-    });
+  // Helper: narrow allNews to a specific _type and guard against null slugs
+  const ofType = (t: string) => allNews.filter((item) => item._type === t && item.slug?.current);
 
-  const liveEventURLs = allNews
-    .filter((item) => item._type === 'liveEvent')
-    .map((liveEvent) => ({
-      url: `https://www.untelevised.media/live-event/${liveEvent.slug.current}/`,
-      lastModified: liveEvent._updatedAt,
-      changeFrequency: 'hourly' as const,
-      priority: 0.9,
-    }));
-
-  const authorURLs = allNews
-    .filter((item) => item._type === 'author')
-    .map((author) => ({
-      url: `https://www.untelevised.media/author/${author.slug.current}/`,
-      lastModified: author._updatedAt,
-      changeFrequency: 'weekly' as const,
-      priority: 0.6,
-    }));
-
-  const categoryURLs = allNews
-    .filter((item) => item._type === 'category')
-    .map((category) => ({
-      url: `https://www.untelevised.media/category/${category.slug.current}/`,
-      lastModified: category._updatedAt,
+  const articleURLs = ofType('article').map((article) => {
+    const updatedAt = new Date(article._updatedAt);
+    const priority = updatedAt >= thirtyDaysAgo ? 0.8 : updatedAt >= ninetyDaysAgo ? 0.6 : 0.4;
+    return {
+      url: `https://www.untelevised.media/articles/${article.slug.current}/`,
+      lastModified: article._updatedAt,
       changeFrequency: 'daily' as const,
-      priority: 0.7,
-    }));
+      priority,
+    };
+  });
 
-  const policyURLs = allNews
-    .filter((item) => item._type === 'policies')
-    .map((policy) => ({
-      url: `https://www.untelevised.media/policies/${policy.slug.current}/`,
-      lastModified: policy._updatedAt,
-      changeFrequency: 'monthly' as const,
-      priority: 0.3,
-    }));
+  const liveEventURLs = ofType('liveEvent').map((liveEvent) => ({
+    url: `https://www.untelevised.media/live-event/${liveEvent.slug.current}/`,
+    lastModified: liveEvent._updatedAt,
+    changeFrequency: 'hourly' as const,
+    priority: 0.9,
+  }));
 
-  const songURLs = allNews
-    .filter((item) => item._type === 'song')
-    .map((song) => ({
-      url: `https://www.untelevised.media/lyrics/${song.slug.current}/`,
-      lastModified: song._updatedAt,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    }));
+  const authorURLs = ofType('author').map((author) => ({
+    url: `https://www.untelevised.media/author/${author.slug.current}/`,
+    lastModified: author._updatedAt,
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }));
 
-  const musicArtistURLs = allNews
-    .filter((item) => item._type === 'musicArtist')
-    .map((artist) => ({
-      url: `https://www.untelevised.media/music-artists/${artist.slug.current}/`,
-      lastModified: artist._updatedAt,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }));
+  const categoryURLs = ofType('category').map((category) => ({
+    url: `https://www.untelevised.media/category/${category.slug.current}/`,
+    lastModified: category._updatedAt,
+    changeFrequency: 'daily' as const,
+    priority: 0.7,
+  }));
 
-  const albumURLs = allNews
-    .filter((item) => item._type === 'album')
-    .map((album) => ({
-      url: `https://www.untelevised.media/albums/${album.slug.current}/`,
-      lastModified: album._updatedAt,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }));
+  const policyURLs = ofType('policies').map((policy) => ({
+    url: `https://www.untelevised.media/policies/${policy.slug.current}/`,
+    lastModified: policy._updatedAt,
+    changeFrequency: 'monthly' as const,
+    priority: 0.3,
+  }));
 
-  const timelineURLs = allNews
-    .filter((item) => item._type === 'timeline')
-    .map((timeline) => ({
-      url: `https://www.untelevised.media/timeline/${timeline.slug.current}/`,
-      lastModified: timeline._updatedAt,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }));
+  const songURLs = ofType('song').map((song) => ({
+    url: `https://www.untelevised.media/lyrics/${song.slug.current}/`,
+    lastModified: song._updatedAt,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  const musicArtistURLs = ofType('musicArtist').map((artist) => ({
+    url: `https://www.untelevised.media/music-artists/${artist.slug.current}/`,
+    lastModified: artist._updatedAt,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
+  const albumURLs = ofType('album').map((album) => ({
+    url: `https://www.untelevised.media/albums/${album.slug.current}/`,
+    lastModified: album._updatedAt,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
+  const timelineURLs = ofType('timeline').map((timeline) => ({
+    url: `https://www.untelevised.media/timeline/${timeline.slug.current}/`,
+    lastModified: timeline._updatedAt,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
 
   const factCheckURLs = (factCheckDocs ?? []).map((fc) => ({
     url: `https://www.untelevised.media/fact-check/${fc.slug.current}/`,

@@ -13,8 +13,7 @@ import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
 
 import { sanityFetch } from '@/lib/sanity/lib/live';
-import { queryAllArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
-import { getReadingTime } from '@/lib/readingTime';
+import { queryHomepageArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
@@ -201,7 +200,7 @@ export default async function HomePage() {
                       <span className='font-bold uppercase'>{article.author?.name}</span>
                       <div className='flex items-center gap-1'>
                         <span>{formatDate(getArticleDate(article))}</span>
-                        <span>· {getReadingTime(article.body)}</span>
+                        <span>· {(article as any).readingTimeMinutes ?? 1} min read</span>
                       </div>
                     </div>
                   </div>
@@ -269,7 +268,7 @@ async function getFrontPageData(): Promise<{
         tags: ['liveEvent'],
       }),
       sanityFetch({
-        query: queryAllArticles,
+        query: queryHomepageArticles,
         tags: ['article'],
       }),
     ]);
