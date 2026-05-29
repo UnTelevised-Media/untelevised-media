@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 /* eslint-disable react/function-component-definition */
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { adsenseManager } from '@/lib/ads/adsenseInit';
 import { AD_CONFIG } from '@/lib/ads/adConfig';
+import { adsenseManager } from '@/lib/ads/adsenseInit';
 import { useConsentCheck } from '@/lib/consent/context';
 
 interface RectangleAdProps {
@@ -25,66 +26,52 @@ export default function RectangleAd({
 }: RectangleAdProps) {
   const adRef = useRef<HTMLModElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const pushed = useRef(false);
+  const [adStatus, setAdStatus] = useState<'idle' | 'pushed' | 'filled' | 'unfilled' | 'error'>('idle');
   const [isClient, setIsClient] = useState(false);
   const { canUseMarketing, hasConsent } = useConsentCheck();
   const isDev = adsenseManager.isDevelopmentMode();
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  useEffect(() => { setIsClient(true); }, []);
 
   useEffect(() => {
     if (!isClient || !containerRef.current) return;
-    if (!isDev && (!hasConsent || !canUseMarketing)) return;
+    if (!isDev && (!hasConsent || !canUseMarketing)) {
+      console.debug('[AdSense] RectangleAd slot=%s: awaiting consent', slot);
+      return;
+    }
+    if (pushed.current) return;
 
-    const loadAd = async () => {
-      try {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        if (!adRef.current) return;
-        const success = await adsenseManager.pushAd(adRef.current);
-        if (success) {
-          setIsLoaded(true);
-        } else {
-          setHasError(true);
-        }
-      } catch (error) {
-        console.error('AdSense error:', error);
-        setHasError(true);
-      }
-    };
+    const container = containerRef.current;
+    const obs = new IntersectionObserver(
+      async (entries) => {
+        if (!entries[0]?.isIntersecting || pushed.current) return;
+        obs.disconnect();
+        pushed.current = true;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          observer.disconnect();
-          loadAd();
-        }
+        const ins = adRef.current;
+        if (!ins) { setAdStatus('error'); return; }
+
+        const success = await adsenseManager.pushAd(ins);
+        if (!success) { setAdStatus('error'); return; }
+        setAdStatus('pushed');
+
+        const mo = new MutationObserver(() => {
+          const s = ins.getAttribute('data-ad-status');
+          if (s === 'filled') { setAdStatus('filled'); mo.disconnect(); console.debug('[AdSense] RectangleAd slot=%s: filled ✓', slot); }
+          else if (s === 'unfilled') { setAdStatus('unfilled'); mo.disconnect(); console.warn('[AdSense] RectangleAd slot=%s: unfilled', slot); }
+        });
+        mo.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
+        setTimeout(() => mo.disconnect(), 15_000);
       },
       { rootMargin: AD_CONFIG.PERFORMANCE.LAZY_LOAD_MARGIN }
     );
+    obs.observe(container);
+    return () => obs.disconnect();
+  }, [isClient, isDev, hasConsent, canUseMarketing, slot]);
 
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, [isClient, isDev, hasConsent, canUseMarketing]);
-
-  if (!isClient) {
-    return (
-      <div ref={containerRef} className={`ad-container ${className}`} style={style}>
-        <div
-          className='flex items-center justify-center rounded bg-slate-50 dark:bg-slate-900'
-          style={{ height: `${height}px` }}
-        >
-          <div className='text-sm text-slate-400'>Loading advertisement...</div>
-        </div>
-      </div>
-    );
-  }
-
-  if (hasError && !isDev) {
-    return null;
-  }
+  if (!isClient) return null;
+  if ((adStatus === 'error' || adStatus === 'unfilled') && !isDev) return null;
 
   return (
     <div ref={containerRef} className={`ad-container ${className}`} style={style}>
@@ -92,22 +79,19 @@ export default function RectangleAd({
         ref={adRef}
         className='adsbygoogle'
         style={{
-          display: 'inline-block',
+          display: responsive ? 'block' : 'inline-block',
           width: responsive ? '100%' : `${width}px`,
-          height: responsive ? 'auto' : `${height}px`,
-          minHeight: isLoaded ? 'auto' : `${height}px`,
-          backgroundColor: isLoaded ? 'transparent' : '#f8f9fa',
-          ...style,
+          minHeight: `${height}px`,
         }}
         data-ad-client={AD_CONFIG.PUBLISHER_ID}
         data-ad-slot={slot}
         data-ad-format={responsive ? 'auto' : 'rectangle'}
         data-full-width-responsive={responsive.toString()}
       />
-      {!isLoaded && !hasError && (
+      {adStatus === 'idle' && (
         <div
           className='flex items-center justify-center rounded bg-slate-50 dark:bg-slate-900'
-          style={{ height: `${height}px` }}
+          style={{ minHeight: `${height}px` }}
         >
           <div className='text-sm text-slate-400'>Loading advertisement...</div>
         </div>

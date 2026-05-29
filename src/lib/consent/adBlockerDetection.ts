@@ -6,14 +6,6 @@
 import { AdBlockerStatus } from './types';
 import { adBlockerStorage } from './storage';
 
-declare global {
-  interface Window {
-    adsbygoogle: any[];
-    adsenseLoaded?: boolean;
-    adsenseScriptError?: boolean;
-  }
-}
-
 export class AdBlockerDetector {
   private static instance: AdBlockerDetector;
   private detectionPromise: Promise<boolean> | null = null;

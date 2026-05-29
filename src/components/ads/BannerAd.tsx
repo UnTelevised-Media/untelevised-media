@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/function-component-definition */
 'use client';
 
@@ -25,93 +26,83 @@ export default function BannerAd({
 }: BannerAdProps) {
   const adRef = useRef<HTMLModElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const pushed = useRef(false);
+  const [adStatus, setAdStatus] = useState<'idle' | 'pushed' | 'filled' | 'unfilled' | 'error'>('idle');
   const [isClient, setIsClient] = useState(false);
   const { canUseMarketing, hasConsent } = useConsentCheck();
   const isDev = adsenseManager.isDevelopmentMode();
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  useEffect(() => { setIsClient(true); }, []);
 
   useEffect(() => {
     if (!isClient || !containerRef.current) return;
-    // In dev mode always show placeholders; in production require marketing consent
-    if (!isDev && (!hasConsent || !canUseMarketing)) return;
+    if (!isDev && (!hasConsent || !canUseMarketing)) {
+      console.debug('[AdSense] BannerAd slot=%s: waiting for consent (hasConsent=%s canUseMarketing=%s)', slot, hasConsent, canUseMarketing);
+      return;
+    }
+    if (pushed.current) return; // already attempted
 
-    const loadAd = async () => {
-      try {
-        await new Promise((resolve) => setTimeout(resolve, AD_CONFIG.PERFORMANCE.LOAD_DELAY));
-        if (!adRef.current) return;
-        const success = await adsenseManager.pushAd(adRef.current);
-        if (success) {
-          setIsLoaded(true);
-        } else {
-          setHasError(true);
-        }
-      } catch (error) {
-        console.error('AdSense error:', error);
-        setHasError(true);
-      }
-    };
+    const container = containerRef.current;
+    const obs = new IntersectionObserver(
+      async (entries) => {
+        if (!entries[0]?.isIntersecting || pushed.current) return;
+        obs.disconnect();
+        pushed.current = true;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          observer.disconnect();
-          loadAd();
+        const ins = adRef.current;
+        if (!ins) {
+          console.warn('[AdSense] BannerAd slot=%s: <ins> ref is null at push time', slot);
+          setAdStatus('error');
+          return;
         }
+
+        const success = await adsenseManager.pushAd(ins);
+        if (!success) {
+          setAdStatus('error');
+          return;
+        }
+        setAdStatus('pushed');
+
+        // Watch for Google to set data-ad-status
+        const mo = new MutationObserver(() => {
+          const status = ins.getAttribute('data-ad-status');
+          if (status === 'filled') {
+            console.debug('[AdSense] BannerAd slot=%s: filled ✓', slot);
+            setAdStatus('filled');
+            mo.disconnect();
+          } else if (status === 'unfilled') {
+            console.warn('[AdSense] BannerAd slot=%s: unfilled — no ad available for this slot/context', slot);
+            setAdStatus('unfilled');
+            mo.disconnect();
+          }
+        });
+        mo.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
+        setTimeout(() => { mo.disconnect(); }, 15_000);
       },
       { rootMargin: AD_CONFIG.PERFORMANCE.LAZY_LOAD_MARGIN }
     );
+    obs.observe(container);
+    return () => obs.disconnect();
+  }, [isClient, isDev, hasConsent, canUseMarketing, slot]);
 
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, [isClient, isDev, hasConsent, canUseMarketing]);
-
-  if (!isClient) {
-    return (
-      <div ref={containerRef} className={`ad-container ${className}`} style={style}>
-        {showLabel && AD_CONFIG.INTEGRATION.showAdLabel && (
-          <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
-            Advertisement
-          </div>
-        )}
-        <div className='flex h-24 items-center justify-center rounded bg-slate-50 dark:bg-slate-900'>
-          <div className='text-sm text-slate-400'>Loading advertisement...</div>
-        </div>
-      </div>
-    );
-  }
-
-  if (hasError && !isDev) {
-    return null;
-  }
+  if (!isClient) return null;
+  if ((adStatus === 'error' || adStatus === 'unfilled') && !isDev) return null;
 
   return (
     <div ref={containerRef} className={`ad-container ${className}`} style={style}>
       {showLabel && AD_CONFIG.INTEGRATION.showAdLabel && (
-        <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
-          Advertisement
-        </div>
+        <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>Advertisement</div>
       )}
       <ins
         ref={adRef}
         className='adsbygoogle'
-        style={{
-          display: 'block',
-          textAlign: 'center',
-          minHeight: isLoaded ? 'auto' : '90px',
-          backgroundColor: isLoaded ? 'transparent' : '#f8f9fa',
-          ...style,
-        }}
+        style={{ display: 'block', minHeight: '90px', width: '100%' }}
         data-ad-client={AD_CONFIG.PUBLISHER_ID}
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive={responsive.toString()}
       />
-      {!isLoaded && !hasError && (
+      {adStatus === 'idle' && (
         <div className='flex h-24 items-center justify-center rounded bg-slate-50 dark:bg-slate-900'>
           <div className='text-sm text-slate-400'>Loading advertisement...</div>
         </div>
