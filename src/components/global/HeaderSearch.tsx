@@ -8,10 +8,34 @@ import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import { InstantSearch, useSearchBox, useHits } from 'react-instantsearch';
 import type { Hit } from 'instantsearch.js';
 
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY!,
-);
+const _appId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID;
+const _apiKey = process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY;
+
+// Wrap search() so that CSP blocks, ad-blockers, and network failures degrade
+// to an empty dropdown instead of an unhandled RetryError surfacing in Sentry.
+const searchClient = _appId && _apiKey
+  ? (() => {
+      const client = algoliasearch(_appId, _apiKey);
+      return {
+        ...client,
+        search: async (requests: Parameters<typeof client.search>[0]) => {
+          try {
+            return await client.search(requests);
+          } catch {
+            const count = Array.isArray(requests) ? requests.length : 1;
+            return {
+              results: Array.from({ length: count }, () => ({
+                hits: [], nbHits: 0, page: 0, nbPages: 0,
+                hitsPerPage: 6, processingTimeMS: 0, query: '', params: '',
+                exhaustiveNbHits: true,
+              })),
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } as any;
+          }
+        },
+      };
+    })()
+  : null;
 
 interface HitFields {
   title: string;
@@ -19,9 +43,19 @@ interface HitFields {
   author: string;
 }
 
+const DEBOUNCE_MS = 300;
+
 function SearchInner({ onClose }: { onClose: () => void }) {
   const router = useRouter();
-  const { query, refine } = useSearchBox();
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { query, refine } = useSearchBox({
+    queryHook(newQuery, search) {
+      // Skip the automatic empty query fired on mount — no visible result anyway.
+      if (!newQuery) return;
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => search(newQuery), DEBOUNCE_MS);
+    },
+  });
   const { hits } = useHits<HitFields>();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -121,6 +155,7 @@ function SearchInner({ onClose }: { onClose: () => void }) {
 }
 
 export default function HeaderSearch({ onClose }: { onClose: () => void }) {
+  if (!searchClient) return null;
   return (
     <InstantSearch searchClient={searchClient} indexName="untele_articles">
       <SearchInner onClose={onClose} />
