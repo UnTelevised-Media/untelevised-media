@@ -46,3 +46,6 @@ next-env.d.ts
 
 # MCP server config (contains local credential paths)
 .mcp.json
+
+# Vercel log exports
+*-log-export-*.json
