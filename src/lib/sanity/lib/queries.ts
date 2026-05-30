@@ -186,6 +186,8 @@ export const queryMostReadArticles = groq`
     description,
     publishedAt,
     viewCount,
+    location,
+    tags,
     mainImage,
     "author": author->{ name, slug },
     "categories": categories[]->{ title, slug },

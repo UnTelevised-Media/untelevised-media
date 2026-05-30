@@ -14,8 +14,11 @@ interface TrendingArticle {
   publishedAt: string;
   viewCount: number;
   description?: string;
+  location?: string;
+  tags?: string[];
   mainImage?: { asset: { _ref: string }; alt?: string };
   author: { name: string; slug: { current: string } } | null;
+  categories?: { title: string; slug: { current: string } }[];
 }
 
 // Deduplicated within a single request — both 'card' and 'list' variants share one fetch
@@ -67,6 +70,19 @@ export default async function TrendingSection({ variant }: Props = {}) {
           {/* Text — grows to fill remaining column height */}
           <div className='flex flex-1 flex-col justify-between border border-t-0 border-slate-200 p-4 dark:border-slate-700'>
             <div>
+              {/* Categories */}
+              {top.categories && top.categories.length > 0 && (
+                <div className='mb-2 flex flex-wrap gap-1'>
+                  {top.categories.map((cat) => (
+                    <span
+                      key={cat.slug.current}
+                      className='bg-untele px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'
+                    >
+                      {cat.title}
+                    </span>
+                  ))}
+                </div>
+              )}
               <p className='text-sm font-black uppercase leading-snug tracking-wide transition-colors group-hover:text-untele'>
                 {top.title}
               </p>
@@ -75,13 +91,33 @@ export default async function TrendingSection({ variant }: Props = {}) {
                   {top.description}
                 </p>
               )}
+              {/* Tags / Topics */}
+              {top.tags && top.tags.length > 0 && (
+                <div className='mt-3 flex flex-wrap gap-1'>
+                  {top.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className='border border-slate-300 px-2 py-0.5 text-[10px] uppercase tracking-wide text-slate-500 dark:border-slate-600 dark:text-slate-400'
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
+            {/* Meta row */}
             <div className='mt-4 flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground'>
               {top.author?.name && <span>{top.author.name}</span>}
               {top.publishedAt && (
                 <>
                   {top.author?.name && <span aria-hidden='true'>·</span>}
                   <time dateTime={top.publishedAt}>{formatDate(top.publishedAt)}</time>
+                </>
+              )}
+              {top.location && (
+                <>
+                  <span aria-hidden='true'>·</span>
+                  <span>📍 {top.location}</span>
                 </>
               )}
               {top.viewCount > 0 && (
@@ -114,8 +150,13 @@ export default async function TrendingSection({ variant }: Props = {}) {
                 <span className='w-7 shrink-0 text-2xl font-black leading-none tabular-nums text-muted-foreground/30'>
                   {index + 2}
                 </span>
-                <div className='min-w-0 flex-1 space-y-0.5'>
-                  <p className='line-clamp-3 text-sm font-black uppercase leading-tight tracking-wide transition-colors group-hover:text-untele'>
+                <div className='min-w-0 flex-1 space-y-1'>
+                  {article.categories?.[0] && (
+                    <span className='inline-block bg-untele px-1.5 py-0.5 text-[9px] font-black uppercase tracking-widest text-white'>
+                      {article.categories[0].title}
+                    </span>
+                  )}
+                  <p className='line-clamp-2 text-sm font-black uppercase leading-tight tracking-wide transition-colors group-hover:text-untele'>
                     {article.title}
                   </p>
                   <div className='flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground'>
