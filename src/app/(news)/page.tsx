@@ -176,7 +176,7 @@ export default async function HomePage() {
             </div>
 
             {/* Column 2 — #1 Most Read featured card */}
-            <div className='lg:px-8'>
+            <div className='flex flex-col lg:px-8'>
               <TrendingSection variant='card' />
             </div>
 

@@ -42,14 +42,14 @@ export default async function TrendingSection({ variant }: Props = {}) {
     const imageUrl = urlForImage(top.mainImage as any)?.width(600).height(340).url();
 
     return (
-      <section aria-label='Most Read'>
-        <div className='flex items-center gap-2 bg-untele px-4 py-2'>
+      <section aria-label='Most Read' className='flex h-full flex-col'>
+        <div className='flex shrink-0 items-center gap-2 bg-untele px-4 py-2'>
           <TrendingUp className='h-4 w-4 text-white' aria-hidden='true' />
           <h2 className='text-xs font-black uppercase tracking-widest text-white'>Most Read</h2>
         </div>
-        <Link href={`/articles/${top.slug.current}`} className='group block'>
+        <Link href={`/articles/${top.slug.current}`} className='group flex flex-1 flex-col'>
           {/* Image */}
-          <div className='relative aspect-video w-full overflow-hidden bg-slate-200 dark:bg-slate-800'>
+          <div className='relative aspect-video w-full shrink-0 overflow-hidden bg-slate-200 dark:bg-slate-800'>
             {imageUrl ? (
               <Image
                 src={imageUrl}
@@ -64,17 +64,19 @@ export default async function TrendingSection({ variant }: Props = {}) {
               #1
             </span>
           </div>
-          {/* Text */}
-          <div className='border border-t-0 border-slate-200 p-4 dark:border-slate-700'>
-            <p className='line-clamp-3 text-sm font-black uppercase leading-snug tracking-wide transition-colors group-hover:text-untele'>
-              {top.title}
-            </p>
-            {top.description && (
-              <p className='mt-2 line-clamp-2 text-xs leading-relaxed text-slate-600 dark:text-slate-400'>
-                {top.description}
+          {/* Text — grows to fill remaining column height */}
+          <div className='flex flex-1 flex-col justify-between border border-t-0 border-slate-200 p-4 dark:border-slate-700'>
+            <div>
+              <p className='text-sm font-black uppercase leading-snug tracking-wide transition-colors group-hover:text-untele'>
+                {top.title}
               </p>
-            )}
-            <div className='mt-2 flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground'>
+              {top.description && (
+                <p className='mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400'>
+                  {top.description}
+                </p>
+              )}
+            </div>
+            <div className='mt-4 flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground'>
               {top.author?.name && <span>{top.author.name}</span>}
               {top.publishedAt && (
                 <>
