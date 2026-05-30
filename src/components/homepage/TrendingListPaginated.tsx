@@ -14,7 +14,7 @@ export interface TrendingListArticle {
   categories?: { title: string; slug: { current: string } }[];
 }
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 6;
 
 export default function TrendingListPaginated({ articles }: { articles: TrendingListArticle[] }) {
   const [page, setPage] = useState(0);
