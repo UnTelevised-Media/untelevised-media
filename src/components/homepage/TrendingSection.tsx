@@ -13,6 +13,7 @@ interface TrendingArticle {
   slug: { current: string };
   publishedAt: string;
   viewCount: number;
+  description?: string;
   mainImage?: { asset: { _ref: string }; alt?: string };
   author: { name: string; slug: { current: string } } | null;
 }
@@ -68,6 +69,11 @@ export default async function TrendingSection({ variant }: Props = {}) {
             <p className='line-clamp-3 text-sm font-black uppercase leading-snug tracking-wide transition-colors group-hover:text-untele'>
               {top.title}
             </p>
+            {top.description && (
+              <p className='mt-2 line-clamp-2 text-xs leading-relaxed text-slate-600 dark:text-slate-400'>
+                {top.description}
+              </p>
+            )}
             <div className='mt-2 flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground'>
               {top.author?.name && <span>{top.author.name}</span>}
               {top.publishedAt && (
