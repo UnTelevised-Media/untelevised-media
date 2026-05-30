@@ -19,6 +19,10 @@ Sentry.init({
     /Unreachable hosts/,
     // Transient network failures inside Sanity Studio (not user-facing)
     /^TypeError: network error$/,
+    // Google AdSense fetch failure — originates from adsbygoogle.js loaded as
+    // app:///pagead/js/adsbygoogle.js, so denyUrls (which matches https:// hostnames)
+    // never catches it. Not actionable — third-party ad script only.
+    /Failed to fetch \(pagead2\.googlesyndication\.com\)/,
   ],
 
   // Suppress errors whose stack traces originate inside third-party ad scripts

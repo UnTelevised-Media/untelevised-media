@@ -1,4 +1,4 @@
-// src/util/consentAwareGoogleAdSense.tsx
+/* eslint-disable no-console */
 'use client';
 
 import { useConsentCheck } from '@/lib/consent/context';
@@ -12,64 +12,35 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
   const { canUseMarketing, hasConsent } = useConsentCheck();
   const isDevelopment = process.env.NODE_ENV === 'development';
 
-  // In development mode, always load the script regardless of consent
-  // In production, only load when we have proper consent
   const shouldLoadScript = isDevelopment || (hasConsent && canUseMarketing);
 
   const handleScriptLoad = () => {
-    if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.log('ConsentAwareGoogleAdSense: AdSense script loaded successfully');
-    }
-
-    // Initialize Google consent mode only if we have real consent
+    console.debug('[AdSense] Script ready — consent granted, ads can serve');
     if (typeof window !== 'undefined' && window.gtag && hasConsent && canUseMarketing) {
-      // Small delay to ensure gtag is ready
       setTimeout(() => {
-        if (window.gtag) {
-          window.gtag('consent', 'update', {
-            ad_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
-          });
-          if (process.env.NODE_ENV === 'development') {
-            // eslint-disable-next-line no-console
-            console.log('ConsentAwareGoogleAdSense: Consent mode updated for ads');
-          }
-        }
+        window.gtag?.('consent', 'update', {
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
+        });
+        console.debug('[AdSense] Consent mode updated: ad_storage=granted');
       }, 100);
     }
   };
 
   const handleScriptError = (error: Error) => {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('ConsentAwareGoogleAdSense: AdSense script failed to load', error);
-      // eslint-disable-next-line no-console
-      console.info(
-        'ConsentAwareGoogleAdSense: This is normal in development if you have an ad blocker'
-      );
-    }
+    console.warn('[AdSense] Script load error (ad blocker or network):', error.message);
   };
 
-  // In production, don't load script if consent is explicitly denied
+  // Marketing consent explicitly denied — don't load
   if (!isDevelopment && hasConsent && !canUseMarketing) {
-    if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.log('ConsentAwareGoogleAdSense: Marketing consent denied, not loading AdSense');
-    }
+    console.debug('[AdSense] Marketing consent denied — not loading AdSense script');
     return null;
   }
 
-  // In production, wait for consent to be determined before loading
+  // Consent still pending (new visitor, banner not yet interacted with)
   if (!isDevelopment && !shouldLoadScript) {
-    if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.log('ConsentAwareGoogleAdSense: Waiting for consent...', {
-        hasConsent,
-        canUseMarketing,
-        isDevelopment,
-      });
-    }
+    console.debug('[AdSense] Consent pending — waiting before loading script. hasConsent=%s canUseMarketing=%s', hasConsent, canUseMarketing);
     return null;
   }
 

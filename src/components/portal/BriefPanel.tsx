@@ -17,6 +17,7 @@ import {
   markStoryInProgress,
   assignStory,
   fetchBriefById,
+  autoRepairBrief,
 } from '@/lib/portal/brief-actions';
 
 // ---------------------------------------------------------------------------
@@ -325,11 +326,6 @@ function StoryCard({
           {/* UNCLAIMED: Claim + Pass + Assign */}
           {!isPassed && status === 'unclaimed' && (
             <>
-              {hasNullKey && (
-                <span className='text-[10px] font-bold text-amber-600 dark:text-amber-400'>
-                  Brief needs repair — editor must re-save
-                </span>
-              )}
               <button
                 disabled={isPending || hasNullKey}
                 onClick={() => {
@@ -446,6 +442,7 @@ export function BriefPanel({
   authors = [],
   isEditorPlus = false,
 }: Props) {
+  const router = useRouter();
   const [showHidden, setShowHidden] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(() =>
     Math.max(0, briefList.findIndex((b) => b._id === brief._id)),
@@ -466,6 +463,18 @@ export function BriefPanel({
   // brief and initialPitchMap are new object refs every RSC render — that's the signal
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brief, initialPitchMap]);
+
+  // Silently repair any brief that has stories with missing _key values.
+  // The beat-patrol agent sometimes omits _key, which blocks claiming.
+  useEffect(() => {
+    const hasNullKeys = (loadedBrief.stories ?? []).some((s) => !s._key);
+    if (!hasNullKeys) return;
+    autoRepairBrief(loadedBrief._id).then((result) => {
+      if (result.success) router.refresh();
+    });
+  // Run once per loaded brief ID — repair is idempotent
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadedBrief._id]);
 
   async function navigateTo(index: number) {
     const target = briefList[index];

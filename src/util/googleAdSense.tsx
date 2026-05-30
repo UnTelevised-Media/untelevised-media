@@ -1,7 +1,7 @@
-/* eslint-disable react/function-component-definition */
+/* eslint-disable no-console */
 'use client';
 
-import { useEffect, useState } from 'react';
+import Script from 'next/script';
 
 interface GoogleAdSenseProps {
   publisherId: string;
@@ -11,115 +11,36 @@ interface GoogleAdSenseProps {
 
 declare global {
   interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    adsbygoogle: any[];
+    adsbygoogle: Record<string, unknown>[];
     adsenseLoaded?: boolean;
     adsenseScriptError?: boolean;
   }
 }
 
 export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAdSenseProps) {
-  const [, setScriptLoaded] = useState(false);
-  const [, setScriptError] = useState<Error | null>(null);
-  const [, setIsClient] = useState(false);
+  if (!publisherId) {
+    console.error('[AdSense] GoogleAdSense: publisherId is empty — set NEXT_PUBLIC_GAS_ID env var');
+    return null;
+  }
 
-  useEffect(() => {
-    setIsClient(true);
-
-    // Initialize adsbygoogle array immediately on client
-    if (typeof window !== 'undefined') {
-      // Force initialize the array
-      if (!window.adsbygoogle || !Array.isArray(window.adsbygoogle)) {
-        window.adsbygoogle = [];
-        if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.log('AdSense: Initialized adsbygoogle array');
-        }
-      }
-
-      // Check if script is already loaded
-      if (window.adsenseLoaded) {
-        setScriptLoaded(true);
+  return (
+    <Script
+      id="google-adsense"
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`}
+      strategy="afterInteractive"
+      crossOrigin="anonymous"
+      onLoad={() => {
+        window.adsenseLoaded = true;
+        window.adsenseScriptError = false;
+        console.debug('[AdSense] Script loaded OK — publisher:', publisherId);
         onLoad?.();
-        return;
-      }
-
-      // Check if script already exists in DOM
-      const existingScript = document.querySelector('script[src*="adsbygoogle.js"]');
-      if (existingScript) {
-        if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.log('AdSense: Script already exists in DOM');
-        }
-        // Still ensure array is available
-        window.adsbygoogle = window.adsbygoogle || [];
-        return;
-      }
-
-      // Load script manually to avoid data-nscript attribute issue
-      const script = document.createElement('script');
-      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`;
-      script.async = true;
-      script.crossOrigin = 'anonymous';
-      script.id = 'google-adsense';
-
-      script.onload = () => {
-        if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.log('AdSense: Script loaded successfully');
-        }
-        setScriptLoaded(true);
-
-        if (typeof window !== 'undefined') {
-          window.adsenseLoaded = true;
-          window.adsenseScriptError = false;
-
-          // Initialize adsbygoogle array immediately
-          if (!window.adsbygoogle || !Array.isArray(window.adsbygoogle)) {
-            window.adsbygoogle = [];
-            if (process.env.NODE_ENV === 'development') {
-              // eslint-disable-next-line no-console
-              console.log('AdSense: Initialized adsbygoogle array');
-            }
-          }
-
-          // Give Google's script a moment to take over the array
-          setTimeout(() => {
-            if (window.adsbygoogle && !Array.isArray(window.adsbygoogle)) {
-              window.adsbygoogle = [];
-            }
-            if (process.env.NODE_ENV === 'development') {
-              // eslint-disable-next-line no-console
-              console.log('AdSense: Final array check completed');
-            }
-          }, 100);
-        }
-
-        onLoad?.();
-      };
-
-      script.onerror = () => {
-        const error = new Error('Failed to load Google AdSense script');
-        if (process.env.NODE_ENV === 'development') {
-          console.error('AdSense: Script loading failed', error);
-        }
-        setScriptError(error);
-
-        if (typeof window !== 'undefined') {
-          window.adsenseScriptError = true;
-        }
-
+      }}
+      onError={(e) => {
+        window.adsenseScriptError = true;
+        const error = new Error('AdSense script failed to load');
+        console.warn('[AdSense] Script failed to load — likely an ad blocker, CSP block, or network error:', e);
         onError?.(error);
-      };
-
-      // Add script to document head.
-      // No cleanup return — the AdSense script is a persistent global resource
-      // that must survive route changes. Removing it on unmount would tear down
-      // the adsbygoogle array and break all ads until the script reloaded.
-      document.head.appendChild(script);
-    }
-  }, [publisherId, onLoad, onError]);
-
-  // Don't render anything - script is loaded programmatically
-  return null;
+      }}
+    />
+  );
 }

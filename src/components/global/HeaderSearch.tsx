@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -8,10 +8,34 @@ import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import { InstantSearch, useSearchBox, useHits } from 'react-instantsearch';
 import type { Hit } from 'instantsearch.js';
 
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY!,
-);
+const _appId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID;
+const _apiKey = process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY;
+
+// Wrap search() so that CSP blocks, ad-blockers, and network failures degrade
+// to an empty dropdown instead of an unhandled RetryError surfacing in Sentry.
+const searchClient = _appId && _apiKey
+  ? (() => {
+      const client = algoliasearch(_appId, _apiKey);
+      return {
+        ...client,
+        search: async (requests: Parameters<typeof client.search>[0]) => {
+          try {
+            return await client.search(requests);
+          } catch {
+            const count = Array.isArray(requests) ? requests.length : 1;
+            return {
+              results: Array.from({ length: count }, () => ({
+                hits: [], nbHits: 0, page: 0, nbPages: 0,
+                hitsPerPage: 6, processingTimeMS: 0, query: '', params: '',
+                exhaustiveNbHits: true,
+              })),
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } as any;
+          }
+        },
+      };
+    })()
+  : null;
 
 interface HitFields {
   title: string;
@@ -19,9 +43,16 @@ interface HitFields {
   author: string;
 }
 
+const DEBOUNCE_MS = 300;
+
 function SearchInner({ onClose }: { onClose: () => void }) {
   const router = useRouter();
-  const { query, refine } = useSearchBox();
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Local state drives the input immediately; refine() is debounced separately.
+  // Using queryHook caused a render loop: react-instantsearch re-renders when
+  // queryHook doesn't call search(), creating an infinite retry cycle.
+  const [inputValue, setInputValue] = useState('');
+  const { refine } = useSearchBox();
   const { hits } = useHits<HitFields>();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,12 +60,26 @@ function SearchInner({ onClose }: { onClose: () => void }) {
     inputRef.current?.focus();
   }, []);
 
-  const showDropdown = query.length > 1 && hits.length > 0;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (value) {
+      timerRef.current = setTimeout(() => refine(value), DEBOUNCE_MS);
+    }
+  };
+
+  const handleClear = () => {
+    setInputValue('');
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
+
+  const showDropdown = inputValue.length > 1 && hits.length > 0;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim()) {
-      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+    if (inputValue.trim()) {
+      router.push(`/search?q=${encodeURIComponent(inputValue.trim())}`);
       onClose();
     }
   };
@@ -48,15 +93,15 @@ function SearchInner({ onClose }: { onClose: () => void }) {
           <input
             ref={inputRef}
             type="text"
-            value={query}
-            onChange={(e) => refine(e.target.value)}
+            value={inputValue}
+            onChange={handleChange}
             placeholder="Search breaking news, investigations, live coverage..."
             className="w-full rounded-lg border border-slate-400 bg-slate-200/90 py-4 pl-12 pr-28 text-slate-900 placeholder-slate-600 backdrop-blur-sm focus:border-untele focus:outline-none focus:ring-2 focus:ring-untele/50 dark:border-slate-600 dark:bg-slate-800/90 dark:text-slate-100 dark:placeholder-slate-400"
           />
-          {query && (
+          {inputValue && (
             <button
               type="button"
-              onClick={() => refine('')}
+              onClick={handleClear}
               className="absolute right-24 p-1.5 text-slate-500 hover:text-slate-900 dark:hover:text-white"
               aria-label="Clear"
             >
@@ -75,7 +120,7 @@ function SearchInner({ onClose }: { onClose: () => void }) {
       {/* Browse search page link — always visible when input is open */}
       <div className="mt-2 flex justify-end">
         <Link
-          href={query.trim() ? `/search?q=${encodeURIComponent(query.trim())}` : '/search'}
+          href={inputValue.trim() ? `/search?q=${encodeURIComponent(inputValue.trim())}` : '/search'}
           onClick={onClose}
           className="text-xs font-bold uppercase tracking-widest text-untele hover:underline"
         >
@@ -107,12 +152,12 @@ function SearchInner({ onClose }: { onClose: () => void }) {
             </Link>
           ))}
           <Link
-            href={`/search?q=${encodeURIComponent(query)}`}
+            href={`/search?q=${encodeURIComponent(inputValue)}`}
             onClick={onClose}
             className="flex items-center gap-2 bg-slate-50 px-4 py-3 text-xs font-black uppercase tracking-widest text-untele hover:bg-slate-100 dark:bg-slate-800/50 dark:hover:bg-slate-800"
           >
             <MagnifyingGlassIcon className="h-3.5 w-3.5" />
-            See all results for &ldquo;{query}&rdquo;
+            See all results for &ldquo;{inputValue}&rdquo;
           </Link>
         </div>
       )}
@@ -121,6 +166,7 @@ function SearchInner({ onClose }: { onClose: () => void }) {
 }
 
 export default function HeaderSearch({ onClose }: { onClose: () => void }) {
+  if (!searchClient) return null;
   return (
     <InstantSearch searchClient={searchClient} indexName="untele_articles">
       <SearchInner onClose={onClose} />

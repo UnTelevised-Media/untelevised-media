@@ -20,10 +20,12 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const cutoff = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString();
+  const cutoff = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString();
 
+  // Match briefs where publishedAt is before the cutoff, or where publishedAt is
+  // absent (agent-created without the field) and _createdAt is before the cutoff.
   const ids: string[] = await writeClient.fetch(
-    `*[_type == "brief" && publishedAt < $cutoff]._id`,
+    `*[_type == "brief" && (publishedAt < $cutoff || (!defined(publishedAt) && _createdAt < $cutoff))]._id`,
     { cutoff }
   );
 

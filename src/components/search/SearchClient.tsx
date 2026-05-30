@@ -159,16 +159,39 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
       searchClient={searchClient}
       indexName='untele_articles'
       initialUiState={{ untele_articles: { query: initialQuery } }}
-      onStateChange={({ uiState, setUiState }) => {
-        setUiState(uiState);
-        const query = uiState['untele_articles']?.query ?? '';
-        const url = new URL(window.location.href);
-        if (query) {
-          url.searchParams.set('q', query);
-        } else {
-          url.searchParams.delete('q');
-        }
-        window.history.replaceState(null, '', url.toString());
+      routing={{
+        router: {
+          read() {
+            if (typeof window === 'undefined') return { q: '' };
+            return { q: new URLSearchParams(window.location.search).get('q') ?? '' };
+          },
+          write(routeState) {
+            const url = new URL(window.location.href);
+            if (routeState.q) {
+              url.searchParams.set('q', String(routeState.q));
+            } else {
+              url.searchParams.delete('q');
+            }
+            window.history.replaceState({}, '', url.toString());
+          },
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          createURL(options: any) {
+            const url = new URL(window.location.href);
+            const q = options?.routeState?.q ?? options?.q;
+            if (q) url.searchParams.set('q', String(q));
+            return url.toString();
+          },
+          onUpdate() {},
+          dispose() {},
+        },
+        stateMapping: {
+          stateToRoute(uiState) {
+            return { q: uiState['untele_articles']?.query ?? '' };
+          },
+          routeToState(routeState) {
+            return { untele_articles: { query: (routeState as { q?: string }).q ?? '' } };
+          },
+        },
       }}
       future={{ preserveSharedStateOnUnmount: true }}
     >

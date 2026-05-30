@@ -320,7 +320,7 @@ export const queryPortalBriefById = groq`
 
 /** Latest brief for the dashboard panel. */
 export const queryPortalLatestBrief = groq`
-  *[_type == "brief"] | order(publishedAt desc, _createdAt desc)[0] {
+  *[_type == "brief"] | order(_createdAt desc)[0] {
     _id,
     title,
     publishedAt,
@@ -350,7 +350,7 @@ export const queryPortalLatestBrief = groq`
 
 /** All briefs for a full archive view. */
 export const queryPortalAllBriefs = groq`
-  *[_type == "brief"] | order(publishedAt desc, _createdAt desc) {
+  *[_type == "brief"] | order(_createdAt desc) {
     _id,
     title,
     publishedAt,

@@ -10,14 +10,32 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      // Next.js runtime, Clerk, Stripe, AdSense all require unsafe-eval/unsafe-inline;
-      // use a nonce-based CSP in a future iteration once AdSense compatibility is verified
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://js.clerk.com https://clerk.untelevised.media https://*.clerk.accounts.dev https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://va.vercel-scripts.com",
+      // Next.js runtime, Clerk, Stripe, AdSense all require unsafe-eval/unsafe-inline.
+      // fundingchoicesmessages.google.com: Google's GDPR/Funding Choices consent messaging —
+      //   without this, AdSense cannot show its EU consent dialog and will withhold ads
+      //   from all EU/EEA visitors (major fill-rate impact).
+      // *.adtrafficquality.google: Google SODAR viewability scripts (sodar2.js) — loaded
+      //   dynamically by the AdSense ad renderer after each ad fills. Blocking these
+      //   scripts causes AdSense to log a CSP error and reduces viewability signals,
+      //   which lowers eCPM and fill rates.
+      // static.cloudflareinsights.com: Cloudflare Web Analytics beacon.
+      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://js.clerk.com https://clerk.untelevised.media https://*.clerk.accounts.dev https://pagead2.googlesyndication.com https://partner.googleadservices.com https://adservice.google.com https://fundingchoicesmessages.google.com https://*.adtrafficquality.google https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://va.vercel-scripts.com https://static.cloudflareinsights.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
-      "img-src 'self' data: blob: https://cdn.sanity.io https://images.pexels.com https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com",
-      "connect-src 'self' https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://vitals.vercel-insights.com https://*.sentry.io",
-      "frame-src 'self' https://js.stripe.com https://hooks.stripe.com",
+      // img.clerk.com: Clerk user avatar proxied images (shown in the header UserButton).
+      // *.googlesyndication.com, *.doubleclick.net, *.google.com, *.googleadservices.com:
+      //   ad creatives, tracking pixels, and conversion images from AdSense / DoubleClick.
+      "img-src 'self' data: blob: https://cdn.sanity.io https://images.pexels.com https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://img.clerk.com",
+      // *.adtrafficquality.google: Google SODAR (viewability + ad fraud monitoring).
+      //   Without this, Google cannot measure ad quality on this site, which reduces
+      //   fill rates and eCPM — AdSense actively penalises sites that block SODAR.
+      "connect-src 'self' https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://vitals.vercel-insights.com https://*.sentry.io https://*.algolia.net https://*.algolianet.com https://*.googlesyndication.com https://adservice.google.com https://*.doubleclick.net https://cm.g.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google",
+      // AdSense renders ads inside iframes; fundingchoicesmessages.google.com hosts
+      // Google's GDPR consent dialog iframe shown before serving ads to EU visitors.
+      "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://fundingchoicesmessages.google.com",
+      // blob: required by Sentry session-replay worker and Clerk auth polling worker.
+      // Without this, both features silently fail (CSP blocks the blob: URL worker).
+      'worker-src blob:',
       "frame-ancestors 'self'",
       "object-src 'none'",
       "base-uri 'self'",
