@@ -105,26 +105,26 @@ export default async function TrendingSection({ variant }: Props = {}) {
                 </div>
               )}
             </div>
-            {/* Meta row */}
-            <div className='mt-4 flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground'>
-              {top.author?.name && <span>{top.author.name}</span>}
-              {top.publishedAt && (
-                <>
-                  {top.author?.name && <span aria-hidden='true'>·</span>}
-                  <time dateTime={top.publishedAt}>{formatDate(top.publishedAt)}</time>
-                </>
-              )}
+            {/* Meta */}
+            <div className='mt-4 space-y-1.5'>
               {top.location && (
-                <>
-                  <span aria-hidden='true'>·</span>
-                  <span>📍 {top.location}</span>
-                </>
+                <p className='text-xs uppercase tracking-widest text-muted-foreground'>
+                  📍 {top.location}
+                </p>
               )}
+              <div className='flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground'>
+                {top.author?.name && <span>{top.author.name}</span>}
+                {top.publishedAt && (
+                  <>
+                    {top.author?.name && <span aria-hidden='true'>·</span>}
+                    <time dateTime={top.publishedAt}>{formatDate(top.publishedAt)}</time>
+                  </>
+                )}
+              </div>
               {top.viewCount > 0 && (
-                <>
-                  <span aria-hidden='true'>·</span>
-                  <span>{top.viewCount.toLocaleString()} views</span>
-                </>
+                <p className='text-sm font-black uppercase tracking-widest text-untele'>
+                  {top.viewCount.toLocaleString()} views
+                </p>
               )}
             </div>
           </div>
