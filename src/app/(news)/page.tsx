@@ -14,20 +14,19 @@ import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
 
 import { sanityFetch } from '@/lib/sanity/lib/live';
-import { queryHomepageArticles, queryLiveEvents } from '@/lib/sanity/lib/queries';
+import { queryHomepageArticles, queryLiveEvents, queryBreakingArticles } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
-  const { articles, liveEvents } = frontPageData;
+  const { articles, liveEvents, breakingArticles } = frontPageData;
 
-  // Split articles for different sections
+  // Breaking articles come from their own query (breakingNews flag, publishedAt desc)
   const heroArticle = articles[0];
-  const breakingNews = articles.slice(1, 8);
-  const featuredStories = articles.slice(8, 14);
-  const moreNews = articles.slice(14);
+  const featuredStories = articles.slice(1, 7);
+  const moreNews = articles.slice(7);
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
@@ -52,7 +51,7 @@ export default async function HomePage() {
             </div>
             <div className='bg-white p-4 dark:bg-black'>
               <div className='flex animate-pulse space-x-8 text-untele'>
-                {breakingNews.map((article, index) => (
+                {breakingArticles.slice(0, 5).map((article, index) => (
                   <Link
                     key={index}
                     href={`/articles/${article.slug?.current}`}
@@ -81,22 +80,25 @@ export default async function HomePage() {
                 </Suspense>
               </div>
 
-              {/* Breaking News Sidebar — height locked to hero image */}
-              <div className='flex h-full flex-col space-y-4'>
-                <div className='flex h-[578px] flex-col border border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-950'>
-                  <div className='shrink-0 border-b border-slate-300 bg-slate-100 px-4 py-3 dark:border-slate-700 dark:bg-slate-900'>
-                    <h3 className='text-sm font-black uppercase tracking-widest text-untele'>
-                      🔥 BREAKING NOW
-                    </h3>
+              {/* Breaking Now — height locked to hero image, flagged articles only */}
+              <div className='flex h-[578px] flex-col border border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-950'>
+                <div className='shrink-0 border-b border-slate-300 bg-slate-100 px-4 py-3 dark:border-slate-700 dark:bg-slate-900'>
+                  <h3 className='text-sm font-black uppercase tracking-widest text-untele'>
+                    🔥 BREAKING NOW
+                  </h3>
+                </div>
+                {breakingArticles.length === 0 ? (
+                  <div className='flex flex-1 items-center justify-center text-xs text-slate-400 dark:text-slate-600'>
+                    No breaking news at this time
                   </div>
+                ) : (
                   <div className='flex-1 divide-y divide-slate-200 overflow-y-auto dark:divide-slate-800'>
-                    {breakingNews.map((article) => (
+                    {breakingArticles.slice(0, 10).map((article) => (
                       <Link
                         key={article._id}
                         href={`/articles/${article.slug?.current}`}
                         className='group flex items-start gap-3 p-3 transition-colors hover:bg-slate-100 dark:hover:bg-slate-900'
                       >
-                        {/* Thumbnail */}
                         <div className='relative h-[60px] w-[80px] shrink-0 overflow-hidden bg-slate-200 dark:bg-slate-800'>
                           {article.mainImage && (
                             <Image
@@ -108,7 +110,6 @@ export default async function HomePage() {
                             />
                           )}
                         </div>
-                        {/* Text */}
                         <div className='min-w-0 flex-1'>
                           <h4 className='line-clamp-2 text-xs font-bold leading-snug text-slate-800 transition-colors group-hover:text-untele dark:text-slate-200'>
                             {article.title}
@@ -120,39 +121,64 @@ export default async function HomePage() {
                       </Link>
                     ))}
                   </div>
-                </div>
-
-                {/* Emergency Support Box */}
-                <div className='mt-auto border-2 border-untele bg-gradient-to-b from-untele/20 to-slate-100 p-6 dark:to-black'>
-                  <h3 className='mb-3 text-sm font-black uppercase tracking-widest text-untele'>
-                    SUPPORT INDEPENDENT MEDIA
-                  </h3>
-                  <p className='mb-4 text-xs text-slate-700 dark:text-slate-300'>
-                    We&rsquo;re ON THE GROUND where others won&rsquo;t go. Help us keep reporting
-                    the truth.
-                  </p>
-                  <Link href='/donate'>
-                    <button className='w-full bg-untele py-3 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'>
-                      DONATE NOW
-                    </button>
-                  </Link>
-                </div>
-
-                {/* Sidebar Ad */}
-                <div className='mt-4'>
-                  <SidebarAd
-                    slot={AD_CONFIG.AD_SLOTS.HOMEPAGE_SIDEBAR}
-                    className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
-                  />
-                </div>
-
-                {/* Most Read */}
-                <div className='mt-4'>
-                  <TrendingSection />
-                </div>
+                )}
               </div>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* AD · SUPPORT · MOST READ — three-column strip below hero */}
+      <section className='border-b border-slate-300 bg-white dark:border-slate-800 dark:bg-black'>
+        <div className='mx-auto max-w-[1400px]'>
+          <div className='grid grid-cols-1 divide-y divide-slate-200 dark:divide-slate-800 lg:grid-cols-3 lg:divide-x lg:divide-y-0'>
+
+            {/* Column 1 — Advertisement (far left) */}
+            <div className='flex items-center justify-center p-6'>
+              <SidebarAd
+                slot={AD_CONFIG.AD_SLOTS.HOMEPAGE_SIDEBAR}
+                className='w-full'
+              />
+            </div>
+
+            {/* Column 2 — Support Independent Media */}
+            <div className='flex flex-col justify-between gap-4 bg-gradient-to-br from-untele/10 to-transparent p-8'>
+              <div>
+                <div className='mb-4 inline-block bg-untele px-3 py-1'>
+                  <span className='text-xs font-black uppercase tracking-widest text-white'>
+                    Independent Media
+                  </span>
+                </div>
+                <h3 className='mb-3 text-xl font-black uppercase leading-tight tracking-wide text-slate-900 dark:text-white'>
+                  We go where others won&rsquo;t.
+                </h3>
+                <p className='text-sm text-slate-600 dark:text-slate-400'>
+                  On-the-ground reporting that mainstream outlets ignore. Every dollar keeps us in
+                  the field — uncensored, unsponsored, uncompromised.
+                </p>
+              </div>
+              <div className='flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row'>
+                <Link
+                  href='/donate'
+                  className='flex-1 bg-untele py-3 text-center text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
+                >
+                  Donate Now
+                </Link>
+                <Link
+                  href='/join'
+                  className='flex-1 border-2 border-slate-900 py-3 text-center text-xs font-black uppercase tracking-widest text-slate-900 transition-colors hover:bg-slate-900 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black'
+                >
+                  Join the Mission
+                </Link>
+              </div>
+            </div>
+
+            {/* Column 3 — Most Read */}
+            <div className='p-0'>
+              <TrendingSection />
+            </div>
+
+          </div>
         </div>
       </section>
 
@@ -242,13 +268,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* MOST READ — full-width ranked list (visible on mobile where sidebar is hidden) */}
-      <section className='border-b border-slate-300 bg-white py-12 dark:border-slate-800 dark:bg-black lg:hidden'>
-        <div className='mx-auto max-w-[1400px] px-4'>
-          <TrendingSection />
-        </div>
-      </section>
-
       {/* MORE NEWS - RAW FEED STYLE */}
       <RawFeed articles={moreNews} />
 
@@ -282,26 +301,21 @@ export default async function HomePage() {
   );
 }
 
-// Enhanced data fetching function
 async function getFrontPageData(): Promise<{
   articles: Article[];
   liveEvents: LiveEvent[];
+  breakingArticles: Article[];
 }> {
   try {
-    const [{ data: liveEvents }, { data: articles }] = await Promise.all([
-      sanityFetch({
-        query: queryLiveEvents,
-        tags: ['liveEvent'],
-      }),
-      sanityFetch({
-        query: queryHomepageArticles,
-        tags: ['article'],
-      }),
+    const [{ data: liveEvents }, { data: articles }, { data: breakingArticles }] = await Promise.all([
+      sanityFetch({ query: queryLiveEvents, tags: ['liveEvent'] }),
+      sanityFetch({ query: queryHomepageArticles, tags: ['article'] }),
+      sanityFetch({ query: queryBreakingArticles, tags: ['article'] }),
     ]);
 
-    return { liveEvents, articles };
+    return { liveEvents, articles, breakingArticles };
   } catch (error) {
     console.error('Failed to fetch front page data:', error);
-    return { articles: [], liveEvents: [] };
+    return { articles: [], liveEvents: [], breakingArticles: [] };
   }
 }
