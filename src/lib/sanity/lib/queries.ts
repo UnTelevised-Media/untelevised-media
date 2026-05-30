@@ -161,6 +161,7 @@ export const queryHomepageArticles = groq`
     slug,
     description,
     publishedAt,
+    eventDate,
     mainImage,
     tags,
     "correction": correction { type, summary },
@@ -173,7 +174,29 @@ export const queryHomepageArticles = groq`
     ),
   }
   | order(_createdAt desc)
-  [0..59]
+  [0...150]
+`;
+
+// Lightweight — just IDs of the top trending articles for dedup filtering
+export const queryTrendingIds = groq`
+  *[_type == "article" && defined(slug.current) && defined(viewCount)]
+  | order(viewCount desc) [0...31] { _id }
+`;
+
+// Archive — all published articles, lightweight fields for listing
+export const queryArchiveArticles = groq`
+  *[_type == "article" && defined(slug.current) && defined(publishedAt)]
+  | order(coalesce(eventDate, publishedAt, _createdAt) asc) {
+    _id,
+    _createdAt,
+    title,
+    slug,
+    publishedAt,
+    eventDate,
+    description,
+    "author": author->{ name },
+    "categories": categories[]->{ title, slug },
+  }
 `;
 
 // Field Reports — articles flagged as on-the-ground reporting
@@ -202,7 +225,7 @@ export const queryFieldReportArticles = groq`
 // Trending / Most-Read queries — ordered by viewCount desc
 export const queryMostReadArticles = groq`
   *[_type == "article" && defined(slug.current) && defined(viewCount)]
-  | order(viewCount desc) [0...21] {
+  | order(viewCount desc) [0...31] {
     _id,
     title,
     slug,

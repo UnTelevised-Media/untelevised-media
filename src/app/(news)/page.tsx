@@ -14,18 +14,34 @@ import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
 
 import { sanityFetch } from '@/lib/sanity/lib/live';
-import { queryHomepageArticles, queryLiveEvents, queryBreakingArticles, queryFieldReportArticles } from '@/lib/sanity/lib/queries';
+import { queryHomepageArticles, queryLiveEvents, queryBreakingArticles, queryFieldReportArticles, queryTrendingIds } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
-  const { articles, liveEvents, breakingArticles, fieldReports } = frontPageData;
+  const { articles, liveEvents, breakingArticles, fieldReports, trendingIds } = frontPageData;
 
   // Breaking articles come from their own query (breakingNews flag, publishedAt desc)
   const heroArticle = articles[0];
-  const moreNews = articles.slice(1);
+
+  // Build exclusion set from all sections that already display articles above the feed
+  const excludedIds = new Set<string>([
+    heroArticle?._id,
+    ...breakingArticles.map((a) => a._id),
+    ...fieldReports.map((a) => a._id),
+    ...trendingIds.map((a: { _id: string }) => a._id),
+  ].filter(Boolean) as string[]);
+
+  // Filter out already-shown articles, then sort chronologically by eventDate → publishedAt → _createdAt
+  const moreNews = articles
+    .filter((a) => !excludedIds.has(a._id))
+    .sort((a, b) => {
+      const dateA = (a as any).eventDate ?? a.publishedAt ?? a._createdAt;
+      const dateB = (b as any).eventDate ?? b.publishedAt ?? b._createdAt;
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
@@ -133,7 +149,7 @@ export default async function HomePage() {
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-0 lg:divide-x lg:divide-slate-200 lg:dark:divide-slate-800'>
 
             {/* Column 1 — CTA on top, Ad below */}
-            <div className='flex flex-col gap-6 lg:pr-8'>
+            <div className='flex flex-col justify-between lg:pr-8'>
               {/* Support Independent Media */}
               <div className='flex flex-col gap-5 bg-gradient-to-br from-untele/10 to-transparent p-6'>
                 <div>
@@ -269,18 +285,6 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* NEWSLETTER SIGNUP */}
-      <section className='border-b border-slate-300 bg-white px-4 py-10 dark:border-slate-800 dark:bg-black'>
-        <div className='mx-auto max-w-[1400px]'>
-          <Suspense>
-            <SubscribedBanner brandColor='#D70606' />
-          </Suspense>
-          <div className='mt-6'>
-            <NewsletterSignup list='news' source='homepage' />
-          </div>
-        </div>
-      </section>
-
       {/* MORE NEWS - RAW FEED STYLE */}
       <RawFeed articles={moreNews} />
 
@@ -302,12 +306,22 @@ export default async function HomePage() {
               FUND THE TRUTH
             </Link>
             <Link
-              href='/join'
+              href='/careers'
               className='border-2 border-slate-900 bg-transparent px-8 py-4 text-sm font-black uppercase tracking-widest text-slate-900 transition-colors hover:bg-slate-900 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black'
             >
               JOIN THE MISSION
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* NEWSLETTER — very bottom of page */}
+      <section className='border-t border-slate-300 bg-white px-4 py-12 dark:border-slate-800 dark:bg-black'>
+        <div className='mx-auto max-w-[1400px]'>
+          <Suspense>
+            <SubscribedBanner brandColor='#D70606' />
+          </Suspense>
+          <NewsletterSignup list='news' source='homepage' />
         </div>
       </section>
     </div>
@@ -319,6 +333,7 @@ async function getFrontPageData(): Promise<{
   liveEvents: LiveEvent[];
   breakingArticles: Article[];
   fieldReports: Article[];
+  trendingIds: { _id: string }[];
 }> {
   try {
     const [
@@ -326,11 +341,13 @@ async function getFrontPageData(): Promise<{
       { data: articles },
       { data: breakingArticles },
       { data: fieldReports },
+      { data: trendingIds },
     ] = await Promise.all([
       sanityFetch({ query: queryLiveEvents, tags: ['liveEvent'] }),
       sanityFetch({ query: queryHomepageArticles, tags: ['article'] }),
       sanityFetch({ query: queryBreakingArticles, tags: ['article'] }),
       sanityFetch({ query: queryFieldReportArticles, tags: ['article'] }),
+      sanityFetch({ query: queryTrendingIds, tags: ['article'] }),
     ]);
 
     return {
@@ -338,9 +355,10 @@ async function getFrontPageData(): Promise<{
       articles: articles ?? [],
       breakingArticles: breakingArticles ?? [],
       fieldReports: fieldReports ?? [],
+      trendingIds: trendingIds ?? [],
     };
   } catch (error) {
     console.error('Failed to fetch front page data:', error);
-    return { articles: [], liveEvents: [], breakingArticles: [], fieldReports: [] };
+    return { articles: [], liveEvents: [], breakingArticles: [], fieldReports: [], trendingIds: [] };
   }
 }

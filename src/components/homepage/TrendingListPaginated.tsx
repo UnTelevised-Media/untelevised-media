@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react';
 import formatDate from '@/util/formatDate';
 
 export interface TrendingListArticle {
@@ -19,8 +19,8 @@ const PAGE_SIZE = 6;
 export default function TrendingListPaginated({ articles }: { articles: TrendingListArticle[] }) {
   const [page, setPage] = useState(0);
 
-  // Cap at 19 items so total depth = 20 (card is #1, list covers #2–#20)
-  const capped = articles.slice(0, 19);
+  // Cap at 30 items so total depth = 31 (card is #1, list covers #2–#31)
+  const capped = articles.slice(0, 30);
   const totalPages = Math.ceil(capped.length / PAGE_SIZE);
   const visible = capped.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
@@ -33,9 +33,10 @@ export default function TrendingListPaginated({ articles }: { articles: Trending
     <section aria-label='More most-read articles'>
       {/* Pagination controls — pinned at top */}
       <div className='flex items-center justify-between border border-b-0 border-border px-3 py-2'>
-        <span className='text-xs font-black uppercase tracking-widest text-muted-foreground'>
-          #{startRank} – #{endRank}
-        </span>
+        <div className='flex items-center gap-1.5 bg-untele px-2 py-0.5'>
+          <TrendingUp className='h-3 w-3 text-white' aria-hidden='true' />
+          <span className='text-[10px] font-black uppercase tracking-widest text-white'>Trending</span>
+        </div>
         <div className='flex items-center gap-1'>
           <button
             onClick={() => setPage((p) => p - 1)}

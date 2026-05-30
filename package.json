@@ -24,6 +24,7 @@
     "deploy:prod": "npx vercel --prod",
     "algolia:index": "npx tsx scripts/algolia-initial-index.ts",
     "flag:field-reports": "npx tsx scripts/flag-field-reports.ts",
+    "import:view-counts": "npx tsx scripts/import-ga-view-counts.ts",
     "convert:webp": "node scripts/convert-to-webp.mjs"
   },
   "dependencies": {

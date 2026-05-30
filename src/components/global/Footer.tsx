@@ -16,7 +16,6 @@ import { FaThreads } from 'react-icons/fa6';
 import { MdLiveTv } from 'react-icons/md';
 import { RiKickLine } from 'react-icons/ri';
 import ClientSideRoute from '../providers/ClientSideRoute';
-import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import formatTitleForURL from '@/util/formatTitleForURL';
@@ -49,14 +48,6 @@ async function Footer() {
 
   return (
     <div className='flex flex-col space-y-10 border-t border-border bg-background px-2 py-3'>
-      {/* Newsletter signup — compact */}
-      <div className='border-b border-border px-12 pb-6 pt-4'>
-        <h4 className='mb-3 text-sm font-black uppercase tracking-widest text-foreground'>
-          Stay in the Loop
-        </h4>
-        <NewsletterSignup list='news' variant='compact' source='footer' />
-      </div>
-
       <div className='flex flex-col justify-between space-y-2 px-12 md:flex-row md:space-x-6 md:space-y-0'>
         {/* News Sections & About  */}
         <h4 className='pb-2 text-lg font-semibold text-foreground underline md:hidden'>
