@@ -179,7 +179,7 @@ export const queryHomepageArticles = groq`
 // Trending / Most-Read queries — ordered by viewCount desc
 export const queryMostReadArticles = groq`
   *[_type == "article" && defined(slug.current) && defined(viewCount)]
-  | order(viewCount desc) [0...10] {
+  | order(viewCount desc) [0...21] {
     _id,
     title,
     slug,

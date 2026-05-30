@@ -6,6 +6,7 @@ import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryMostReadArticles } from '@/lib/sanity/lib/queries';
 import formatDate from '@/util/formatDate';
 import urlForImage from '@/util/urlForImage';
+import TrendingListPaginated from './TrendingListPaginated';
 
 interface TrendingArticle {
   _id: string;
@@ -133,48 +134,11 @@ export default async function TrendingSection({ variant }: Props = {}) {
     );
   }
 
-  // --- #2–10 Compact List ---
+  // --- #2–20 Paginated list (5 per page, client-side) ---
   if (variant === 'list') {
-    const rest = articles.slice(1);
+    const rest = articles.slice(1); // card holds #1; pass #2 onward
     if (rest.length === 0) return null;
-
-    return (
-      <section aria-label='More most-read articles'>
-        <ol className='divide-y divide-border border border-border'>
-          {rest.map((article, index) => (
-            <li key={article._id} className='group'>
-              <Link
-                href={`/articles/${article.slug.current}`}
-                className='flex items-start gap-3 p-3 transition-colors hover:bg-muted/50'
-              >
-                <span className='w-7 shrink-0 text-2xl font-black leading-none tabular-nums text-muted-foreground/30'>
-                  {index + 2}
-                </span>
-                <div className='min-w-0 flex-1 space-y-1'>
-                  {article.categories?.[0] && (
-                    <span className='inline-block bg-untele px-1.5 py-0.5 text-[9px] font-black uppercase tracking-widest text-white'>
-                      {article.categories[0].title}
-                    </span>
-                  )}
-                  <p className='line-clamp-2 text-sm font-black uppercase leading-tight tracking-wide transition-colors group-hover:text-untele'>
-                    {article.title}
-                  </p>
-                  <div className='flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground'>
-                    {article.author?.name && <span>{article.author.name}</span>}
-                    {article.publishedAt && (
-                      <>
-                        {article.author?.name && <span aria-hidden='true'>·</span>}
-                        <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </section>
-    );
+    return <TrendingListPaginated articles={rest} />;
   }
 
   // --- Default: full numbered list (used in article page sidebar) ---
