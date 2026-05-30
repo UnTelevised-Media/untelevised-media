@@ -133,49 +133,56 @@ export default async function HomePage() {
         <div className='mx-auto max-w-[1400px] px-4'>
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-0 lg:divide-x lg:divide-slate-200 lg:dark:divide-slate-800'>
 
-            {/* Column 1 — Advertisement (far left) */}
-            <div className='flex items-center justify-center lg:pr-8'>
-              <SidebarAd
-                slot={AD_CONFIG.AD_SLOTS.HOMEPAGE_SIDEBAR}
-                className='w-full'
-              />
-            </div>
-
-            {/* Column 2 — Support Independent Media */}
-            <div className='flex flex-col justify-between gap-6 bg-gradient-to-br from-untele/10 to-transparent p-8 lg:mx-8'>
-              <div>
-                <div className='mb-5 inline-block bg-untele px-3 py-1'>
-                  <span className='text-xs font-black uppercase tracking-widest text-white'>
-                    Independent Media
-                  </span>
+            {/* Column 1 — CTA on top, Ad below */}
+            <div className='flex flex-col gap-6 lg:pr-8'>
+              {/* Support Independent Media */}
+              <div className='flex flex-col gap-5 bg-gradient-to-br from-untele/10 to-transparent p-6'>
+                <div>
+                  <div className='mb-4 inline-block bg-untele px-3 py-1'>
+                    <span className='text-xs font-black uppercase tracking-widest text-white'>
+                      Independent Media
+                    </span>
+                  </div>
+                  <h3 className='mb-3 text-xl font-black uppercase leading-tight tracking-wide text-slate-900 dark:text-white'>
+                    We go where others won&rsquo;t.
+                  </h3>
+                  <p className='text-sm leading-relaxed text-slate-600 dark:text-slate-400'>
+                    On-the-ground reporting that mainstream outlets ignore. Every dollar keeps us in
+                    the field — uncensored, unsponsored, uncompromised.
+                  </p>
                 </div>
-                <h3 className='mb-4 text-xl font-black uppercase leading-tight tracking-wide text-slate-900 dark:text-white'>
-                  We go where others won&rsquo;t.
-                </h3>
-                <p className='text-sm leading-relaxed text-slate-600 dark:text-slate-400'>
-                  On-the-ground reporting that mainstream outlets ignore. Every dollar keeps us in
-                  the field — uncensored, unsponsored, uncompromised.
-                </p>
+                <div className='flex flex-col gap-3 sm:flex-row'>
+                  <Link
+                    href='/donate'
+                    className='flex-1 bg-untele py-3 text-center text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
+                  >
+                    Donate Now
+                  </Link>
+                  <Link
+                    href='/join'
+                    className='flex-1 border-2 border-slate-900 py-3 text-center text-xs font-black uppercase tracking-widest text-slate-900 transition-colors hover:bg-slate-900 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black'
+                  >
+                    Join the Mission
+                  </Link>
+                </div>
               </div>
-              <div className='flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row'>
-                <Link
-                  href='/donate'
-                  className='flex-1 bg-untele py-3 text-center text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
-                >
-                  Donate Now
-                </Link>
-                <Link
-                  href='/join'
-                  className='flex-1 border-2 border-slate-900 py-3 text-center text-xs font-black uppercase tracking-widest text-slate-900 transition-colors hover:bg-slate-900 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black'
-                >
-                  Join the Mission
-                </Link>
+              {/* Advertisement */}
+              <div className='flex items-center justify-center'>
+                <SidebarAd
+                  slot={AD_CONFIG.AD_SLOTS.HOMEPAGE_SIDEBAR}
+                  className='w-full'
+                />
               </div>
             </div>
 
-            {/* Column 3 — Most Read */}
+            {/* Column 2 — #1 Most Read featured card */}
+            <div className='lg:px-8'>
+              <TrendingSection variant='card' />
+            </div>
+
+            {/* Column 3 — #2–10 compact list */}
             <div className='lg:pl-8'>
-              <TrendingSection />
+              <TrendingSection variant='list' />
             </div>
 
           </div>
