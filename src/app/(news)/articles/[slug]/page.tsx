@@ -30,6 +30,8 @@ import { SourcesPanel } from '@/components/post/SourcesPanel';
 import { BookmarkButton } from '@/components/bookmarks/BookmarkButton';
 import CommentsSection from '@/components/post/CommentsSection';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
+import ViewPing from '@/components/post/ViewPing';
+import TrendingSection from '@/components/homepage/TrendingSection';
 
 /**
  * Guard against Sanity fields that may be stored as a block object instead of a plain
@@ -217,8 +219,15 @@ export default async function Article({ params }: Props) {
         </div>
       </section>
 
-      {/* Main Content */}
-      <main className='mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8'>
+      {/* View ping — fires once per session, renders nothing */}
+      <ViewPing slug={article.slug.current} />
+
+      {/* Main Content + Sidebar */}
+      <div className='mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-8'>
+        <div className='flex gap-10 lg:items-start'>
+
+      {/* Article content column */}
+      <main className='min-w-0 max-w-4xl flex-1'>
         {/* Breadcrumb */}
         <nav
           aria-label='Breadcrumb'
@@ -441,6 +450,20 @@ export default async function Article({ params }: Props) {
           />
         </div>
       </main>
+
+          {/* Desktop sidebar */}
+          <aside className='hidden w-80 shrink-0 self-start lg:sticky lg:top-8 lg:block'>
+            <TrendingSection />
+          </aside>
+
+        </div>{/* end flex */}
+
+        {/* Mobile: Most Read below content */}
+        <div className='mt-10 lg:hidden'>
+          <TrendingSection />
+        </div>
+
+      </div>{/* end outer container */}
     </div>
   );
 }

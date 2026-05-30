@@ -8,6 +8,7 @@ import LiveWidget from '@/components/cards/LiveWidget';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 import RawFeed from '@/components/homepage/RawFeed';
+import TrendingSection from '@/components/homepage/TrendingSection';
 import { SidebarAd, AD_CONFIG } from '@/components/ads';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
@@ -131,6 +132,11 @@ export default async function HomePage() {
                     className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
                   />
                 </div>
+
+                {/* Most Read */}
+                <div className='mt-4'>
+                  <TrendingSection />
+                </div>
               </div>
             </div>
           )}
@@ -220,6 +226,13 @@ export default async function HomePage() {
           <div className='mt-6'>
             <NewsletterSignup list='news' source='homepage' />
           </div>
+        </div>
+      </section>
+
+      {/* MOST READ — full-width ranked list (visible on mobile where sidebar is hidden) */}
+      <section className='border-b border-slate-300 bg-white py-12 dark:border-slate-800 dark:bg-black lg:hidden'>
+        <div className='mx-auto max-w-[1400px] px-4'>
+          <TrendingSection />
         </div>
       </section>
 

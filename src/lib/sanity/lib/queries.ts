@@ -176,6 +176,38 @@ export const queryHomepageArticles = groq`
   [0..59]
 `;
 
+// Trending / Most-Read queries — ordered by viewCount desc
+export const queryMostReadArticles = groq`
+  *[_type == "article" && defined(slug.current) && defined(viewCount)]
+  | order(viewCount desc) [0...10] {
+    _id,
+    title,
+    slug,
+    description,
+    publishedAt,
+    viewCount,
+    mainImage,
+    "author": author->{ name, slug },
+    "categories": categories[]->{ title, slug },
+  }
+`;
+
+export const queryMostReadByCategory = groq`
+  *[
+    _type == "article" &&
+    defined(slug.current) &&
+    defined(viewCount) &&
+    $categorySlug in categories[]->slug.current
+  ] | order(viewCount desc) [0...5] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    viewCount,
+    "author": author->{ name },
+  }
+`;
+
 // Music/Lyrics Queries
 export const queryAllSongs = groq`
   *[_type=='song'] {

@@ -244,6 +244,17 @@ export default defineType({
       title: 'SEO Settings',
       type: 'seoObject',
     }),
+    // View counter — managed by /api/view, never edited manually
+    defineField({
+      name: 'viewCount',
+      title: 'View Count',
+      type: 'number',
+      description: 'Managed automatically by the view tracking API. Do not edit manually.',
+      hidden: true,
+      readOnly: true,
+      initialValue: 0,
+      validation: (Rule) => Rule.min(0).integer(),
+    }),
   ],
 
   preview: {
