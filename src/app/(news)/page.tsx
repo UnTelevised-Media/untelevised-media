@@ -25,9 +25,9 @@ export default async function HomePage() {
 
   // Split articles for different sections
   const heroArticle = articles[0];
-  const breakingNews = articles.slice(1, 5);
-  const featuredStories = articles.slice(5, 11);
-  const moreNews = articles.slice(11);
+  const breakingNews = articles.slice(1, 8);
+  const featuredStories = articles.slice(8, 14);
+  const moreNews = articles.slice(14);
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
@@ -81,26 +81,39 @@ export default async function HomePage() {
                 </Suspense>
               </div>
 
-              {/* Breaking News Sidebar */}
+              {/* Breaking News Sidebar — height locked to hero image */}
               <div className='flex h-full flex-col space-y-4'>
-                <div className='border border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-950'>
-                  <div className='border-b border-slate-300 bg-slate-100 px-4 py-3 dark:border-slate-700 dark:bg-slate-900'>
+                <div className='flex h-[578px] flex-col border border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-950'>
+                  <div className='shrink-0 border-b border-slate-300 bg-slate-100 px-4 py-3 dark:border-slate-700 dark:bg-slate-900'>
                     <h3 className='text-sm font-black uppercase tracking-widest text-untele'>
                       🔥 BREAKING NOW
                     </h3>
                   </div>
-                  <div className='space-y-3 p-3'>
+                  <div className='flex-1 divide-y divide-slate-200 overflow-y-auto dark:divide-slate-800'>
                     {breakingNews.map((article) => (
                       <Link
                         key={article._id}
                         href={`/articles/${article.slug?.current}`}
-                        className='block border-b border-slate-300 pb-3 last:border-b-0 dark:border-slate-800'
+                        className='group flex items-start gap-3 p-3 transition-colors hover:bg-slate-100 dark:hover:bg-slate-900'
                       >
-                        <div>
-                          <h4 className='line-clamp-2 cursor-pointer text-xs font-bold text-slate-800 hover:text-untele dark:text-slate-200'>
+                        {/* Thumbnail */}
+                        <div className='relative h-[60px] w-[80px] shrink-0 overflow-hidden bg-slate-200 dark:bg-slate-800'>
+                          {article.mainImage && (
+                            <Image
+                              src={urlForImage(article.mainImage)?.width(160).height(120).url() ?? ''}
+                              alt={article.title}
+                              fill
+                              sizes='80px'
+                              className='object-cover'
+                            />
+                          )}
+                        </div>
+                        {/* Text */}
+                        <div className='min-w-0 flex-1'>
+                          <h4 className='line-clamp-2 text-xs font-bold leading-snug text-slate-800 transition-colors group-hover:text-untele dark:text-slate-200'>
                             {article.title}
                           </h4>
-                          <p className='mt-1 text-xs text-slate-600 dark:text-slate-400'>
+                          <p className='mt-1 text-xs text-slate-500 dark:text-slate-400'>
                             {article.author?.name} • {formatDate(getArticleDate(article))}
                           </p>
                         </div>
