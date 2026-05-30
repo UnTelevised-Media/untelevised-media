@@ -104,6 +104,7 @@ interface Article extends Base {
   comments: Comment[];
   tags?: string[];
   breakingNews?: boolean;
+  isFieldReport?: boolean;
   viewCount?: number;
 }
 

@@ -176,6 +176,29 @@ export const queryHomepageArticles = groq`
   [0..59]
 `;
 
+// Field Reports — articles flagged as on-the-ground reporting
+export const queryFieldReportArticles = groq`
+  *[_type == "article" && isFieldReport == true && defined(slug.current)]
+  | order(publishedAt desc) [0...6] {
+    _id,
+    _type,
+    _createdAt,
+    title,
+    slug,
+    description,
+    publishedAt,
+    location,
+    mainImage,
+    "author": author->{ name, slug },
+    "categories": categories[]->{ _id, title, order },
+    "readingTimeMinutes": select(
+      defined(body) && length(pt::text(body)) > 0
+        => round(length(pt::text(body)) / 1000) + 1,
+      1
+    ),
+  }
+`;
+
 // Trending / Most-Read queries — ordered by viewCount desc
 export const queryMostReadArticles = groq`
   *[_type == "article" && defined(slug.current) && defined(viewCount)]

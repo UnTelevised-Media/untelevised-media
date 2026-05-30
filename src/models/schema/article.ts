@@ -197,6 +197,14 @@ export default defineType({
       description: 'Flag for breaking news ticker. Editors and Admins only.',
     }),
     defineField({
+      name: 'isFieldReport',
+      title: 'Field Report',
+      type: 'boolean',
+      initialValue: false,
+      description:
+        'Marks this article as a field report. Field reports appear in the dedicated Field Reports section on the homepage.',
+    }),
+    defineField({
       name: 'needsReview',
       title: 'Needs Editorial Review',
       type: 'boolean',

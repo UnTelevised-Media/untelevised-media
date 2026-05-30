@@ -14,19 +14,18 @@ import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
 
 import { sanityFetch } from '@/lib/sanity/lib/live';
-import { queryHomepageArticles, queryLiveEvents, queryBreakingArticles } from '@/lib/sanity/lib/queries';
+import { queryHomepageArticles, queryLiveEvents, queryBreakingArticles, queryFieldReportArticles } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
-  const { articles, liveEvents, breakingArticles } = frontPageData;
+  const { articles, liveEvents, breakingArticles, fieldReports } = frontPageData;
 
   // Breaking articles come from their own query (breakingNews flag, publishedAt desc)
   const heroArticle = articles[0];
-  const featuredStories = articles.slice(1, 7);
-  const moreNews = articles.slice(7);
+  const moreNews = articles.slice(1);
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
@@ -189,79 +188,86 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED STORIES GRID */}
-      <section className='border-b border-slate-300 bg-slate-50 py-12 dark:border-slate-800 dark:bg-slate-950'>
-        <div className='mx-auto max-w-[1400px] px-4'>
-          <div className='mb-8 flex items-center space-x-4'>
-            <div className='bg-untele px-4 py-2'>
-              <h2 className='text-lg font-black uppercase tracking-widest text-white'>
-                FIELD REPORTS
-              </h2>
-            </div>
-            <div className='h-px flex-1 bg-slate-400 dark:bg-slate-700' />
-          </div>
-
-          <Suspense
-            fallback={
-              <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className='h-64 animate-pulse rounded-lg bg-slate-100 dark:bg-slate-800'
-                  />
-                ))}
+      {/* FIELD REPORTS GRID */}
+      {fieldReports.length > 0 && (
+        <section className='border-b border-slate-300 bg-slate-50 py-12 dark:border-slate-800 dark:bg-slate-950'>
+          <div className='mx-auto max-w-[1400px] px-4'>
+            <div className='mb-8 flex items-center space-x-4'>
+              <div className='bg-untele px-4 py-2'>
+                <h2 className='text-lg font-black uppercase tracking-widest text-white'>
+                  FIELD REPORTS
+                </h2>
               </div>
-            }
-          >
-            <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-              {featuredStories.map((article) => (
-                <Link
-                  key={article._id}
-                  href={`/articles/${article.slug?.current}`}
-                  className='group flex h-full flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
-                >
-                  <div className='aspect-video overflow-hidden'>
-                    <Image
-                      src={urlForImage(article.mainImage)?.url() ?? ''}
-                      alt={article.title}
-                      width={800}
-                      height={450}
-                      sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
-                      className='object-cover transition-transform group-hover:scale-105'
-                      {...(urlForImage(article.mainImage)
-                        ? {
-                            placeholder: 'blur' as const,
-                            blurDataURL: urlForImage(article.mainImage)!.width(20).blur(10).url(),
-                          }
-                        : {})}
+              <div className='h-px flex-1 bg-slate-400 dark:bg-slate-700' />
+            </div>
+
+            <Suspense
+              fallback={
+                <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className='h-64 animate-pulse bg-slate-100 dark:bg-slate-800'
                     />
-                  </div>
-                  <div className='flex flex-1 flex-col p-4'>
-                    {article.categories?.[0] && (
-                      <span className='mb-2 inline-block bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
-                        {article.categories[0].title}
-                      </span>
-                    )}
-                    <h3 className='mb-2 line-clamp-2 font-bold text-slate-800 group-hover:text-untele dark:text-slate-200'>
-                      {article.title}
-                    </h3>
-                    <p className='mb-3 line-clamp-2 flex-1 text-xs text-slate-600 dark:text-slate-400'>
-                      {article.description}
-                    </p>
-                    <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
-                      <span className='font-bold uppercase'>{article.author?.name}</span>
-                      <div className='flex items-center gap-1'>
-                        <span>{formatDate(getArticleDate(article))}</span>
-                        <span>· {(article as any).readingTimeMinutes ?? 1} min read</span>
+                  ))}
+                </div>
+              }
+            >
+              <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+                {fieldReports.map((article) => (
+                  <Link
+                    key={article._id}
+                    href={`/articles/${article.slug?.current}`}
+                    className='group flex h-full flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
+                  >
+                    <div className='aspect-video overflow-hidden'>
+                      <Image
+                        src={urlForImage(article.mainImage)?.url() ?? ''}
+                        alt={article.title}
+                        width={800}
+                        height={450}
+                        sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
+                        className='object-cover transition-transform group-hover:scale-105'
+                        {...(urlForImage(article.mainImage)
+                          ? {
+                              placeholder: 'blur' as const,
+                              blurDataURL: urlForImage(article.mainImage)!.width(20).blur(10).url(),
+                            }
+                          : {})}
+                      />
+                    </div>
+                    <div className='flex flex-1 flex-col p-4'>
+                      {article.categories?.[0] && (
+                        <span className='mb-2 inline-block bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
+                          {article.categories[0].title}
+                        </span>
+                      )}
+                      <h3 className='mb-2 line-clamp-2 font-bold text-slate-800 group-hover:text-untele dark:text-slate-200'>
+                        {article.title}
+                      </h3>
+                      <p className='mb-3 line-clamp-2 flex-1 text-xs text-slate-600 dark:text-slate-400'>
+                        {article.description}
+                      </p>
+                      {(article as any).location && (
+                        <p className='mb-3 text-xs font-medium text-slate-500 dark:text-slate-400'>
+                          📍 {(article as any).location}
+                        </p>
+                      )}
+                      <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
+                        <span className='font-bold uppercase'>{article.author?.name}</span>
+                        <div className='flex items-center gap-1'>
+                          <span>{formatDate(getArticleDate(article))}</span>
+                          <span>· {(article as any).readingTimeMinutes ?? 1} min read</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </Suspense>
-        </div>
-      </section>
+                  </Link>
+                ))}
+              </div>
+            </Suspense>
+          </div>
+        </section>
+      )}
 
       {/* NEWSLETTER SIGNUP */}
       <section className='border-b border-slate-300 bg-white px-4 py-10 dark:border-slate-800 dark:bg-black'>
@@ -312,17 +318,24 @@ async function getFrontPageData(): Promise<{
   articles: Article[];
   liveEvents: LiveEvent[];
   breakingArticles: Article[];
+  fieldReports: Article[];
 }> {
   try {
-    const [{ data: liveEvents }, { data: articles }, { data: breakingArticles }] = await Promise.all([
+    const [
+      { data: liveEvents },
+      { data: articles },
+      { data: breakingArticles },
+      { data: fieldReports },
+    ] = await Promise.all([
       sanityFetch({ query: queryLiveEvents, tags: ['liveEvent'] }),
       sanityFetch({ query: queryHomepageArticles, tags: ['article'] }),
       sanityFetch({ query: queryBreakingArticles, tags: ['article'] }),
+      sanityFetch({ query: queryFieldReportArticles, tags: ['article'] }),
     ]);
 
-    return { liveEvents, articles, breakingArticles };
+    return { liveEvents, articles, breakingArticles, fieldReports };
   } catch (error) {
     console.error('Failed to fetch front page data:', error);
-    return { articles: [], liveEvents: [], breakingArticles: [] };
+    return { articles: [], liveEvents: [], breakingArticles: [], fieldReports: [] };
   }
 }
