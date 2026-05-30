@@ -67,6 +67,11 @@ export default async function TrendingSection({ variant }: Props = {}) {
             <span className='absolute left-0 top-0 bg-untele px-3 py-1 text-xs font-black text-white'>
               #1
             </span>
+            {top.viewCount > 0 && (
+              <span className='absolute right-0 top-0 bg-black/70 px-3 py-1 text-xs font-black uppercase tracking-widest text-white backdrop-blur-sm'>
+                {top.viewCount.toLocaleString()} views
+              </span>
+            )}
           </div>
           {/* Text — grows to fill remaining column height */}
           <div className='flex flex-1 flex-col justify-between border border-t-0 border-slate-200 p-4 dark:border-slate-700'>
@@ -108,11 +113,6 @@ export default async function TrendingSection({ variant }: Props = {}) {
             </div>
             {/* Meta */}
             <div className='mt-4 space-y-1.5'>
-              {top.viewCount > 0 && (
-                <p className='text-sm font-black uppercase tracking-widest text-untele'>
-                  {top.viewCount.toLocaleString()} views
-                </p>
-              )}
               {top.location && (
                 <p className='text-xs uppercase tracking-widest text-muted-foreground'>
                   📍 {top.location}
