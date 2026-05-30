@@ -108,6 +108,11 @@ export default async function TrendingSection({ variant }: Props = {}) {
             </div>
             {/* Meta */}
             <div className='mt-4 space-y-1.5'>
+              {top.viewCount > 0 && (
+                <p className='text-sm font-black uppercase tracking-widest text-untele'>
+                  {top.viewCount.toLocaleString()} views
+                </p>
+              )}
               {top.location && (
                 <p className='text-xs uppercase tracking-widest text-muted-foreground'>
                   📍 {top.location}
@@ -122,11 +127,6 @@ export default async function TrendingSection({ variant }: Props = {}) {
                   </>
                 )}
               </div>
-              {top.viewCount > 0 && (
-                <p className='text-sm font-black uppercase tracking-widest text-untele'>
-                  {top.viewCount.toLocaleString()} views
-                </p>
-              )}
             </div>
           </div>
         </Link>
