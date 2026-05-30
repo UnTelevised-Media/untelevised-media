@@ -333,7 +333,12 @@ async function getFrontPageData(): Promise<{
       sanityFetch({ query: queryFieldReportArticles, tags: ['article'] }),
     ]);
 
-    return { liveEvents, articles, breakingArticles, fieldReports };
+    return {
+      liveEvents: liveEvents ?? [],
+      articles: articles ?? [],
+      breakingArticles: breakingArticles ?? [],
+      fieldReports: fieldReports ?? [],
+    };
   } catch (error) {
     console.error('Failed to fetch front page data:', error);
     return { articles: [], liveEvents: [], breakingArticles: [], fieldReports: [] };
