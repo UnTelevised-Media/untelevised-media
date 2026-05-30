@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -48,14 +48,11 @@ const DEBOUNCE_MS = 300;
 function SearchInner({ onClose }: { onClose: () => void }) {
   const router = useRouter();
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { query, refine } = useSearchBox({
-    queryHook(newQuery, search) {
-      // Skip the automatic empty query fired on mount — no visible result anyway.
-      if (!newQuery) return;
-      if (timerRef.current) clearTimeout(timerRef.current);
-      timerRef.current = setTimeout(() => search(newQuery), DEBOUNCE_MS);
-    },
-  });
+  // Local state drives the input immediately; refine() is debounced separately.
+  // Using queryHook caused a render loop: react-instantsearch re-renders when
+  // queryHook doesn't call search(), creating an infinite retry cycle.
+  const [inputValue, setInputValue] = useState('');
+  const { refine } = useSearchBox();
   const { hits } = useHits<HitFields>();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -63,12 +60,26 @@ function SearchInner({ onClose }: { onClose: () => void }) {
     inputRef.current?.focus();
   }, []);
 
-  const showDropdown = query.length > 1 && hits.length > 0;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (value) {
+      timerRef.current = setTimeout(() => refine(value), DEBOUNCE_MS);
+    }
+  };
+
+  const handleClear = () => {
+    setInputValue('');
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
+
+  const showDropdown = inputValue.length > 1 && hits.length > 0;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim()) {
-      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+    if (inputValue.trim()) {
+      router.push(`/search?q=${encodeURIComponent(inputValue.trim())}`);
       onClose();
     }
   };
@@ -82,15 +93,15 @@ function SearchInner({ onClose }: { onClose: () => void }) {
           <input
             ref={inputRef}
             type="text"
-            value={query}
-            onChange={(e) => refine(e.target.value)}
+            value={inputValue}
+            onChange={handleChange}
             placeholder="Search breaking news, investigations, live coverage..."
             className="w-full rounded-lg border border-slate-400 bg-slate-200/90 py-4 pl-12 pr-28 text-slate-900 placeholder-slate-600 backdrop-blur-sm focus:border-untele focus:outline-none focus:ring-2 focus:ring-untele/50 dark:border-slate-600 dark:bg-slate-800/90 dark:text-slate-100 dark:placeholder-slate-400"
           />
-          {query && (
+          {inputValue && (
             <button
               type="button"
-              onClick={() => refine('')}
+              onClick={handleClear}
               className="absolute right-24 p-1.5 text-slate-500 hover:text-slate-900 dark:hover:text-white"
               aria-label="Clear"
             >
@@ -109,7 +120,7 @@ function SearchInner({ onClose }: { onClose: () => void }) {
       {/* Browse search page link — always visible when input is open */}
       <div className="mt-2 flex justify-end">
         <Link
-          href={query.trim() ? `/search?q=${encodeURIComponent(query.trim())}` : '/search'}
+          href={inputValue.trim() ? `/search?q=${encodeURIComponent(inputValue.trim())}` : '/search'}
           onClick={onClose}
           className="text-xs font-bold uppercase tracking-widest text-untele hover:underline"
         >
@@ -141,12 +152,12 @@ function SearchInner({ onClose }: { onClose: () => void }) {
             </Link>
           ))}
           <Link
-            href={`/search?q=${encodeURIComponent(query)}`}
+            href={`/search?q=${encodeURIComponent(inputValue)}`}
             onClick={onClose}
             className="flex items-center gap-2 bg-slate-50 px-4 py-3 text-xs font-black uppercase tracking-widest text-untele hover:bg-slate-100 dark:bg-slate-800/50 dark:hover:bg-slate-800"
           >
             <MagnifyingGlassIcon className="h-3.5 w-3.5" />
-            See all results for &ldquo;{query}&rdquo;
+            See all results for &ldquo;{inputValue}&rdquo;
           </Link>
         </div>
       )}
