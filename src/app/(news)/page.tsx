@@ -95,8 +95,8 @@ export default async function HomePage() {
                 </Suspense>
               </div>
 
-              {/* Breaking Now — height locked to hero image, flagged articles only */}
-              <div className='flex h-[578px] flex-col border border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-950'>
+              {/* Breaking Now — fixed height only when beside the hero (lg+) */}
+              <div className='flex flex-col border border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-950 lg:h-[578px]'>
                 <div className='shrink-0 border-b border-slate-300 bg-slate-100 px-4 py-3 dark:border-slate-700 dark:bg-slate-900'>
                   <h3 className='text-sm font-black uppercase tracking-widest text-untele'>
                     🔥 BREAKING NOW
@@ -107,7 +107,7 @@ export default async function HomePage() {
                     No breaking news at this time
                   </div>
                 ) : (
-                  <div className='flex-1 divide-y divide-slate-200 overflow-y-auto dark:divide-slate-800'>
+                  <div className='breaking-scroll flex-1 divide-y divide-slate-200 overflow-y-auto dark:divide-slate-800'>
                     {breakingArticles.slice(0, 10).map((article) => (
                       <Link
                         key={article._id}

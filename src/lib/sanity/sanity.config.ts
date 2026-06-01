@@ -4,6 +4,7 @@
  * This configuration is used to for the Sanity Studio that's mounted on the `\src\app\studio\[[...tool]]\page.tsx` route
  */
 
+import { colorInput } from '@sanity/color-input';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
@@ -25,6 +26,7 @@ export default defineConfig({
     types: schemaTypes, // Use schemaTypes array
   },
   plugins: [
+    colorInput(),
     structureTool({ structure }),
     // Presentation tool for live preview
     presentationTool({

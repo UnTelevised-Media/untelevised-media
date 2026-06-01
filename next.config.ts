@@ -19,7 +19,7 @@ const securityHeaders = [
       //   scripts causes AdSense to log a CSP error and reduces viewability signals,
       //   which lowers eCPM and fill rates.
       // static.cloudflareinsights.com: Cloudflare Web Analytics beacon.
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://js.clerk.com https://clerk.untelevised.media https://*.clerk.accounts.dev https://pagead2.googlesyndication.com https://partner.googleadservices.com https://adservice.google.com https://fundingchoicesmessages.google.com https://*.adtrafficquality.google https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://va.vercel-scripts.com https://static.cloudflareinsights.com",
+      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://js.clerk.com https://clerk.untelevised.media https://*.clerk.accounts.dev https://pagead2.googlesyndication.com https://partner.googleadservices.com https://adservice.google.com https://fundingchoicesmessages.google.com https://*.adtrafficquality.google https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://va.vercel-scripts.com https://static.cloudflareinsights.com https://connect.facebook.net",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
       // img.clerk.com: Clerk user avatar proxied images (shown in the header UserButton).
@@ -32,7 +32,7 @@ const securityHeaders = [
       "connect-src 'self' https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://vitals.vercel-insights.com https://*.sentry.io https://*.algolia.net https://*.algolianet.com https://*.googlesyndication.com https://adservice.google.com https://*.doubleclick.net https://cm.g.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google",
       // AdSense renders ads inside iframes; fundingchoicesmessages.google.com hosts
       // Google's GDPR consent dialog iframe shown before serving ads to EU visitors.
-      "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://fundingchoicesmessages.google.com",
+      "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://fundingchoicesmessages.google.com https://www.youtube.com https://www.youtube-nocookie.com https://www.facebook.com https://web.facebook.com",
       // blob: required by Sentry session-replay worker and Clerk auth polling worker.
       // Without this, both features silently fail (CSP blocks the blob: URL worker).
       'worker-src blob:',

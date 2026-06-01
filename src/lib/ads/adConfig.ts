@@ -22,6 +22,11 @@ const AD_CONFIG = {
 
     // Category page ads
     CATEGORY_BANNER: '8209510850',
+    CATEGORY_SIDEBAR: '8209510850', // tall sidebar — replace with dedicated slot in AdSense
+    CATEGORY_IN_FEED: '3403906737', // rectangle in-grid — replace with dedicated slot in AdSense
+
+    // Archive page ads
+    ARCHIVE_IN_FEED: '3403906737', // rectangle in-grid — replace with dedicated slot in AdSense
   },
 
   // Performance optimization settings

@@ -43,6 +43,14 @@ export default defineType({
       to: [{ type: 'author' }],
       group: 'meta',
     }),
+    defineField({
+      name: 'mainImage',
+      title: 'Cover Image',
+      type: 'image',
+      group: 'meta',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+    }),
     // Claim fields
     defineField({
       name: 'claim',

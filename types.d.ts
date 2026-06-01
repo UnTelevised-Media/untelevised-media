@@ -167,6 +167,8 @@ interface Category extends Base {
   title: string;
   order?: string;
   seo?: SeoOverride;
+  color?: { hex: string; alpha?: number };
+  image?: { asset: { _ref: string }; alt?: string };
 }
 
 interface EventTag extends Base {

@@ -194,6 +194,7 @@ export const queryArchiveArticles = groq`
     publishedAt,
     eventDate,
     description,
+    mainImage,
     "author": author->{ name },
     "categories": categories[]->{ title, slug },
   }
@@ -460,18 +461,32 @@ export const queryCategoryBySlug = groq`
     title,
     description,
     "slug": slug.current,
+    color,
+    image,
     seo,
   }
 `;
 
 export const queryArticleByCategory = groq`
-  *[_type == 'article' && references(categories, *[_type == 'category' && slug.current == $slug]._id)] {
-    ...,
-    author->,
-    categories[]->,
+  *[_type == 'article' && $slug in categories[]->slug.current] {
+    _id,
+    _type,
+    _createdAt,
+    title,
+    slug,
     description,
     publishedAt,
-  } | order(_createdAt desc)
+    eventDate,
+    location,
+    mainImage,
+    "author": author->{ name, slug },
+    "categories": categories[]->{ _id, title, order },
+    "readingTimeMinutes": select(
+      defined(body) && length(pt::text(body)) > 0
+        => round(length(pt::text(body)) / 1000) + 1,
+      1
+    ),
+  } | order(coalesce(eventDate, publishedAt, _createdAt) desc)
 `;
 
 export const queryCategories = groq`
@@ -827,6 +842,7 @@ export const queryAllFactChecks = groq`
     claimSource,
     rating,
     ratingExplanation,
+    mainImage,
     author-> { name, slug }
   }
 `;

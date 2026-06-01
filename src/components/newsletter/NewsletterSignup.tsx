@@ -56,6 +56,7 @@ const LIST_CONFIG: Record<
 type NewsletterSource =
   | 'homepage'
   | 'article'
+  | 'category'
   | 'footer'
   | 'support'
   | 'bookstore-home'

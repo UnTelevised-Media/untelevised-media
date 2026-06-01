@@ -30,6 +30,17 @@ export default defineType({
       type: 'text',
     }),
     defineField({
+      name: 'color',
+      title: 'Color',
+      type: 'color',
+    }),
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: { hotspot: true },
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seoObject',
