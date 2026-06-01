@@ -32,7 +32,7 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title }) => {
   };
 
   return (
-    <div className='mx-auto w-fit py-3'>
+    <div className='w-full py-3'>
       {/* Header */}
       <div className='mb-2 flex items-center justify-center space-x-3'>
         <div className='h-0.5 w-8 bg-gradient-to-r from-transparent to-untele' />

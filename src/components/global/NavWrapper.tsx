@@ -7,14 +7,15 @@ import sanityFetch from '@/lib/sanity/lib/fetch';
 import Nav from './Nav';
 
 const queryCategory = groq`
-  *[_type=='category'] {
-    ...,
+  *[_type=='category'] | order(order asc) {
+    _id,
     title,
+    slug,
     order,
   }
 `;
 
-type Category = { _id: string; title: string; order: number };
+type Category = { _id: string; title: string; order: number; slug?: { current: string } };
 
 const NavWrapper = async () => {
   let categories: Category[] = [];

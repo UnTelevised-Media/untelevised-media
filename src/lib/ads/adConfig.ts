@@ -22,6 +22,26 @@ const AD_CONFIG = {
 
     // Category page ads
     CATEGORY_BANNER: '8209510850',
+    CATEGORY_SIDEBAR: '3380975563', // shares HOMEPAGE_SIDEBAR — swap for a dedicated slot when created in AdSense
+    CATEGORY_IN_FEED: '3403906737', // rectangle in-grid — replace with dedicated slot in AdSense
+
+    // Archive page ads
+    ARCHIVE_IN_FEED: '3403906737', // rectangle in-grid — replace with dedicated slot in AdSense
+
+    // Breaking news page ads
+    BREAKING_IN_FEED: '3403906737', // in-list/grid — replace with dedicated slot in AdSense
+
+    // Fact checks listing page ads
+    FACT_CHECKS_BANNER: '2475351335', // top banner — replace with dedicated slot in AdSense
+    FACT_CHECKS_IN_FEED: '3403906737', // in-list/grid — replace with dedicated slot in AdSense
+
+    // Individual fact-check article page ads
+    FACT_CHECK_IN_FEED: '2438309423', // between verdict and body — replace with dedicated slot in AdSense
+    FACT_CHECK_BANNER: '7939310826', // after body — replace with dedicated slot in AdSense
+
+    // Article page sidebar ads
+    ARTICLE_LEFT_SIDEBAR: '3380975563', // left sidebar vertical — replace with dedicated slot in AdSense
+    ARTICLE_RIGHT_SIDEBAR_BOTTOM: '8437036676', // right sidebar below Most Read — replace with dedicated slot in AdSense
   },
 
   // Performance optimization settings

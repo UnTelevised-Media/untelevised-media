@@ -13,6 +13,7 @@ import type { FactCheckRating } from '@/lib/factCheck/verdictConfig';
 import formatDate from '@/util/formatDate';
 import Link from 'next/link';
 import { buildFactCheckMetadata } from '@/util/metadata';
+import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/ads';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -153,12 +154,24 @@ export default async function FactCheckPage({ params }: Props) {
           </p>
         </div>
 
+        {/* In-feed ad between verdict and body */}
+        <InFeedAd
+          slot={AD_CONFIG.AD_SLOTS.FACT_CHECK_IN_FEED}
+          className='border border-neutral-200 bg-neutral-50/50 p-4 dark:border-neutral-700 dark:bg-neutral-900/50'
+        />
+
         {/* Full analysis body */}
         {fc.body && Array.isArray(fc.body) && fc.body.length > 0 && (
           <div className='mt-6'>
             <PortableText value={fc.body} components={RichTextComponents} />
           </div>
         )}
+
+        {/* Banner ad after body */}
+        <BannerAd
+          slot={AD_CONFIG.AD_SLOTS.FACT_CHECK_BANNER}
+          className='border border-neutral-200 bg-neutral-50/50 p-4 dark:border-neutral-700 dark:bg-neutral-900/50'
+        />
 
         {/* Sources */}
         {fc.sources && fc.sources.length > 0 && (

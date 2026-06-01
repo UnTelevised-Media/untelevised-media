@@ -104,6 +104,8 @@ interface Article extends Base {
   comments: Comment[];
   tags?: string[];
   breakingNews?: boolean;
+  isFieldReport?: boolean;
+  viewCount?: number;
 }
 
 interface Author extends Base {
@@ -165,6 +167,8 @@ interface Category extends Base {
   title: string;
   order?: string;
   seo?: SeoOverride;
+  color?: { hex: string; alpha?: number };
+  image?: { asset: { _ref: string }; alt?: string };
 }
 
 interface EventTag extends Base {

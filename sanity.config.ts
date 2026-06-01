@@ -6,6 +6,7 @@
  * is mounted in Next.js via src/app/studio/[[...tool]]/page.tsx.
  * This file is a minimal duplicate to satisfy the CLI's project-root lookup.
  */
+import { colorInput } from '@sanity/color-input';
 import { defineConfig } from 'sanity';
 import { schemaTypes } from './src/models/schema/index';
 
@@ -15,4 +16,5 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  plugins: [colorInput()],
 });

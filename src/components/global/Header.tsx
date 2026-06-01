@@ -72,6 +72,8 @@ const NAV: NavItem[] = [
     hover: 'hover:bg-blue-50 dark:hover:bg-blue-950/40',
     external: true,
   },
+  { kind: 'plain', href: '/', label: 'Home' },
+  { kind: 'plain', href: '/archive', label: 'News Archive' },
   { kind: 'plain', href: '/fact-checks', label: 'Fact Check' },
   { kind: 'plain', href: '/lyrics', label: 'Music' },
   { kind: 'plain', href: '/about', label: 'Mission' },

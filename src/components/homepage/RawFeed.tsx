@@ -12,7 +12,7 @@ interface RawFeedProps {
   articles: Article[];
 }
 
-const ARTICLES_PER_PAGE = 6;
+const ARTICLES_PER_PAGE = 12;
 
 const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
   const [visibleCount, setVisibleCount] = useState(ARTICLES_PER_PAGE);
@@ -78,8 +78,8 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
                 </div>
               </Link>
 
-              {/* Add in-feed ad after every 6 articles */}
-              {(index + 1) % 6 === 0 && index < visibleArticles.length - 1 && (
+              {/* Add in-feed ad after every 12 articles */}
+              {(index + 1) % 12 === 0 && index < visibleArticles.length - 1 && (
                 <div className='lg:col-span-2'>
                   <InFeedAd
                     slot={AD_CONFIG.AD_SLOTS.IN_FEED}
@@ -92,7 +92,7 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
         </div>
 
         {/* Banner ad before load more button */}
-        {visibleCount >= 12 && (
+        {visibleCount >= 24 && (
           <div className='mt-8'>
             <BannerAd
               slot={AD_CONFIG.AD_SLOTS.FEED_PAGINATION}

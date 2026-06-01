@@ -161,6 +161,7 @@ export const queryHomepageArticles = groq`
     slug,
     description,
     publishedAt,
+    eventDate,
     mainImage,
     tags,
     "correction": correction { type, summary },
@@ -173,7 +174,87 @@ export const queryHomepageArticles = groq`
     ),
   }
   | order(_createdAt desc)
-  [0..59]
+  [0...150]
+`;
+
+// Lightweight — just IDs of the top trending articles for dedup filtering
+export const queryTrendingIds = groq`
+  *[_type == "article" && defined(slug.current) && defined(viewCount)]
+  | order(viewCount desc) [0...31] { _id }
+`;
+
+// Archive — all published articles, lightweight fields for listing
+export const queryArchiveArticles = groq`
+  *[_type == "article" && defined(slug.current) && defined(publishedAt)]
+  | order(coalesce(eventDate, publishedAt, _createdAt) asc) {
+    _id,
+    _createdAt,
+    title,
+    slug,
+    publishedAt,
+    eventDate,
+    description,
+    mainImage,
+    "author": author->{ name },
+    "categories": categories[]->{ title, slug },
+  }
+`;
+
+// Field Reports — articles flagged as on-the-ground reporting
+export const queryFieldReportArticles = groq`
+  *[_type == "article" && isFieldReport == true && defined(slug.current)]
+  | order(publishedAt desc) [0...6] {
+    _id,
+    _type,
+    _createdAt,
+    title,
+    slug,
+    description,
+    publishedAt,
+    location,
+    mainImage,
+    "author": author->{ name, slug },
+    "categories": categories[]->{ _id, title, order },
+    "readingTimeMinutes": select(
+      defined(body) && length(pt::text(body)) > 0
+        => round(length(pt::text(body)) / 1000) + 1,
+      1
+    ),
+  }
+`;
+
+// Trending / Most-Read queries — ordered by viewCount desc
+export const queryMostReadArticles = groq`
+  *[_type == "article" && defined(slug.current) && defined(viewCount)]
+  | order(viewCount desc) [0...31] {
+    _id,
+    title,
+    slug,
+    description,
+    publishedAt,
+    viewCount,
+    location,
+    tags,
+    mainImage,
+    "author": author->{ name, slug },
+    "categories": categories[]->{ title, slug },
+  }
+`;
+
+export const queryMostReadByCategory = groq`
+  *[
+    _type == "article" &&
+    defined(slug.current) &&
+    defined(viewCount) &&
+    $categorySlug in categories[]->slug.current
+  ] | order(viewCount desc) [0...5] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    viewCount,
+    "author": author->{ name },
+  }
 `;
 
 // Music/Lyrics Queries
@@ -380,18 +461,32 @@ export const queryCategoryBySlug = groq`
     title,
     description,
     "slug": slug.current,
+    color,
+    image,
     seo,
   }
 `;
 
 export const queryArticleByCategory = groq`
-  *[_type == 'article' && references(categories, *[_type == 'category' && slug.current == $slug]._id)] {
-    ...,
-    author->,
-    categories[]->,
+  *[_type == 'article' && $slug in categories[]->slug.current] {
+    _id,
+    _type,
+    _createdAt,
+    title,
+    slug,
     description,
     publishedAt,
-  } | order(_createdAt desc)
+    eventDate,
+    location,
+    mainImage,
+    "author": author->{ name, slug },
+    "categories": categories[]->{ _id, title, order },
+    "readingTimeMinutes": select(
+      defined(body) && length(pt::text(body)) > 0
+        => round(length(pt::text(body)) / 1000) + 1,
+      1
+    ),
+  } | order(coalesce(eventDate, publishedAt, _createdAt) desc)
 `;
 
 export const queryCategories = groq`
@@ -747,6 +842,7 @@ export const queryAllFactChecks = groq`
     claimSource,
     rating,
     ratingExplanation,
+    mainImage,
     author-> { name, slug }
   }
 `;
