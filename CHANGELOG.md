@@ -25,6 +25,36 @@ Full double opt-in flow for both the UnTelevised Media news newsletter and the H
 
 ---
 
+## [2026-06-01] — View Counter, Trending Section, Ad Integration & Article Layout (feature/22-view-counter-trending → development)
+
+View tracking and trending surfacing for all articles, plus ad placements on fact-check and breaking news pages, a 3-column article layout with a live breaking news sidebar, and a round of article page UX polish. Issue [#22](https://github.com/UnTelevised-Media/untelevised-media/issues/22) · PR [#99](https://github.com/UnTelevised-Media/untelevised-media/pull/99).
+
+### Added
+
+- **`viewCount` field** (`src/models/schema/article.ts`) — hidden, readOnly number field on the article schema; initialValue 0; managed by the API only.
+- **`/api/view` route** (`src/app/api/view/route.ts`) — POST endpoint; validates slug; in-memory IP+slug rate limiting (24 h); atomic Sanity `.setIfMissing({ viewCount: 0 }).inc({ viewCount: 1 })` patch with async commit; returns `{ skipped: true }` for rate-limited requests.
+- **`ViewPing` component** (`src/components/post/ViewPing.tsx`) — client component; fires once per browser session per article via `sessionStorage` key `viewed_[slug]`; renders nothing; fails silently.
+- **`TrendingSection` component** (`src/components/homepage/TrendingSection.tsx`) — async server component; `'card'`, `'list'`, and default numbered-list variants; integrated on homepage and article page (desktop sidebar + mobile fallback).
+- **`TrendingListPaginated` component** (`src/components/homepage/TrendingListPaginated.tsx`) — client component; 5-per-page paginated list for the homepage trending widget.
+- **`RecentBreakingNews` component** (`src/components/article/RecentBreakingNews.tsx`) — async server component; fetches 10 most recent `breakingNews == true` articles ordered by `publishedAt desc`; styled to match TrendingSection with a pulsing Flame icon header.
+- **`queryMostReadArticles`** and **`queryMostReadByCategory`** GROQ queries (`src/lib/sanity/lib/queries.ts`) — order by `viewCount desc`; return top 10 / top 5 respectively with full article metadata.
+- **GA view count import script** (`scripts/import-ga-view-counts.ts`) — one-time backfill of historical GA4 page-view data into `viewCount` fields.
+- **Ad slots** (`src/lib/ads/adConfig.ts`) — 7 new named slots: `BREAKING_IN_FEED`, `FACT_CHECKS_BANNER`, `FACT_CHECKS_IN_FEED`, `FACT_CHECK_IN_FEED`, `FACT_CHECK_BANNER`, `ARTICLE_LEFT_SIDEBAR`, `ARTICLE_RIGHT_SIDEBAR_BOTTOM`; all annotated for future dedicated AdSense slot replacement.
+- **Ad placements — `/breaking`** (`src/app/(news)/breaking/BreakingNewsClient.tsx`) — `InFeedAd` injected every 6 items in both bar-list and card-grid view modes.
+- **Ad placements — `/fact-checks`** (`src/app/(news)/fact-checks/page.tsx`, `src/components/fact-check/FactCheckList.tsx`) — `BannerAd` between intro text and listing; `InFeedAd` every 6 items in both list and cards views (full-row span in grid).
+- **Ad placements — `/fact-check/[slug]`** (`src/app/(news)/fact-check/[slug]/page.tsx`) — `InFeedAd` between verdict explanation and full analysis body; `BannerAd` after body, before sources.
+
+### Changed
+
+- **Article page — 3-column layout** (`src/app/(news)/articles/[slug]/page.tsx`) — left sidebar (`w-72`, desktop sticky): `SidebarAd` + `RecentBreakingNews`; right sidebar (`w-72`, desktop sticky): `TrendingSection` + `SidebarAd`; content column centered via `flex-1` (~728 px at `max-w-[1400px]`).
+- **Article page — sticky offset** — `lg:top-8` (32 px) → `lg:top-[120px]` (74 px header + 40 px category nav + 6 px gap) so sidebar tops are never obscured by the sticky header or category nav bar.
+- **Article page — bookmark button** — moved from its own row to inline with breadcrumb nav (`justify-between`, right-aligned); `min-w-0` on nav prevents overflow.
+- **Article page — social share** — `SocialShare` root changed from `w-fit` to `w-full` so the icon strip matches the width of the image and ad below it.
+- **Article page — ad position** — `InFeedAd` relocated from before the article image to directly below it (both in `not-prose` wrappers); image margin set to `mb-0`, ad carries `mb-8`.
+- **`NewsletterSignup`** (`src/components/newsletter/NewsletterSignup.tsx`) — `fieldsLayout?: 'row' | 'column'` prop added (default `'row'`; no regression on existing usages); category sidebar now passes `fieldsLayout='column'` so inputs stack vertically in the narrow sidebar.
+
+---
+
 ## [2026-05-23] — Phase 4 Audit Remediation (feature/phase4-audit-remediation → development)
 
 All 17 Phase 4 audit items closed across security, accessibility, architecture, and observability. Issue [#86](https://github.com/UnTelevised-Media/untelevised-media-new/issues/86) · PR [#87](https://github.com/UnTelevised-Media/untelevised-media-new/pull/87).
