@@ -68,6 +68,7 @@ interface NewsletterSignupProps {
   variant?: 'full' | 'compact';
   source?: NewsletterSource;
   className?: string;
+  fieldsLayout?: 'row' | 'column';
 }
 
 export function NewsletterSignup({
@@ -75,6 +76,7 @@ export function NewsletterSignup({
   variant = 'full',
   source,
   className = '',
+  fieldsLayout = 'row',
 }: NewsletterSignupProps) {
   const [submitState, setSubmitState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -196,7 +198,7 @@ export function NewsletterSignup({
       <p className='mb-6 text-sm text-neutral-600 dark:text-neutral-400'>{cfg.subheading}</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-        <div className='flex flex-col gap-3 sm:flex-row'>
+        <div className={`flex flex-col gap-3${fieldsLayout === 'row' ? ' sm:flex-row' : ''}`}>
           <input
             {...register('firstName')}
             type='text'

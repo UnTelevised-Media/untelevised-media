@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { List, LayoutGrid } from 'lucide-react';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import urlForImage from '@/util/urlForImage';
-import { RectangleAd, AD_CONFIG } from '@/components/ads';
+import { InFeedAd, AD_CONFIG } from '@/components/ads';
 
 export interface ArchiveArticle {
   _id: string;
@@ -164,83 +164,73 @@ export default function ArchiveTabs({ articles, currentYear }: Props) {
       ) : (
         /* ── CARDS VIEW ── */
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          {visible.flatMap((article, index) => {
+          {visible.map((article, index) => {
             const date = getArticleDate(article);
             const imageUrl = urlForImage(article.mainImage)?.width(600).height(338).url();
-
-            const card = (
-              <Link
-                key={article._id}
-                href={`/articles/${article.slug.current}`}
-                className='group flex flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
-              >
-                {/* Thumbnail */}
-                <div className='aspect-video overflow-hidden bg-slate-100 dark:bg-slate-900'>
-                  {imageUrl ? (
-                    <Image
-                      src={imageUrl}
-                      alt={article.mainImage?.alt ?? article.title}
-                      width={600}
-                      height={338}
-                      sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw'
-                      className='h-full w-full object-cover transition-transform group-hover:scale-105'
-                      placeholder='blur'
-                      blurDataURL={urlForImage(article.mainImage)!.width(20).blur(10).url()}
-                    />
-                  ) : (
-                    <div className='flex h-full items-center justify-center'>
-                      <span className='text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-600'>
-                        No image
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Card body */}
-                <div className='flex flex-1 flex-col p-4'>
-                  {article.categories?.[0] && (
-                    <span className='mb-2 inline-block self-start bg-untele px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white'>
-                      {article.categories[0].title}
-                    </span>
-                  )}
-                  <h3 className='mb-2 line-clamp-2 font-bold leading-snug text-slate-800 transition-colors group-hover:text-untele dark:text-slate-200'>
-                    {article.title}
-                  </h3>
-                  {article.description && (
-                    <p className='mb-3 line-clamp-2 flex-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400'>
-                      {article.description}
-                    </p>
-                  )}
-                  <div className='mt-auto flex items-center justify-between text-xs text-slate-500 dark:text-slate-500'>
-                    {article.author?.name && (
-                      <span className='font-bold uppercase'>{article.author.name}</span>
-                    )}
-                    <time dateTime={date ?? ''} className='font-mono'>
-                      {date ? formatDate(date) : '—'}
-                    </time>
-                  </div>
-                </div>
-              </Link>
-            );
-
-            const items: React.ReactNode[] = [card];
-
-            // Inject a rectangle ad after every 9th article (not after the last)
-            if ((index + 1) % 9 === 0 && index < visible.length - 1) {
-              items.push(
-                <div
-                  key={`ad-${index}`}
-                  className='flex flex-col items-center justify-center border border-dashed border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950'
+            return (
+              <Fragment key={article._id}>
+                <Link
+                  href={`/articles/${article.slug.current}`}
+                  className='group flex flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
                 >
-                  <p className='mb-3 text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-                    Advertisement
-                  </p>
-                  <RectangleAd slot={AD_CONFIG.AD_SLOTS.ARCHIVE_IN_FEED} responsive />
-                </div>
-              );
-            }
+                  {/* Thumbnail */}
+                  <div className='aspect-video overflow-hidden bg-slate-100 dark:bg-slate-900'>
+                    {imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={article.mainImage?.alt ?? article.title}
+                        width={600}
+                        height={338}
+                        sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw'
+                        className='h-full w-full object-cover transition-transform group-hover:scale-105'
+                        placeholder='blur'
+                        blurDataURL={urlForImage(article.mainImage)!.width(20).blur(10).url()}
+                      />
+                    ) : (
+                      <div className='flex h-full items-center justify-center'>
+                        <span className='text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-600'>
+                          No image
+                        </span>
+                      </div>
+                    )}
+                  </div>
 
-            return items;
+                  {/* Card body */}
+                  <div className='flex flex-1 flex-col p-4'>
+                    {article.categories?.[0] && (
+                      <span className='mb-2 inline-block self-start bg-untele px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-white'>
+                        {article.categories[0].title}
+                      </span>
+                    )}
+                    <h3 className='mb-2 line-clamp-2 font-bold leading-snug text-slate-800 transition-colors group-hover:text-untele dark:text-slate-200'>
+                      {article.title}
+                    </h3>
+                    {article.description && (
+                      <p className='mb-3 line-clamp-2 flex-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400'>
+                        {article.description}
+                      </p>
+                    )}
+                    <div className='mt-auto flex items-center justify-between text-xs text-slate-500 dark:text-slate-500'>
+                      {article.author?.name && (
+                        <span className='font-bold uppercase'>{article.author.name}</span>
+                      )}
+                      <time dateTime={date ?? ''} className='font-mono'>
+                        {date ? formatDate(date) : '—'}
+                      </time>
+                    </div>
+                  </div>
+                </Link>
+
+                {(index + 1) % 12 === 0 && index < visible.length - 1 && (
+                  <div className='sm:col-span-2 lg:col-span-3 xl:col-span-4'>
+                    <InFeedAd
+                      slot={AD_CONFIG.AD_SLOTS.ARCHIVE_IN_FEED}
+                      className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                    />
+                  </div>
+                )}
+              </Fragment>
+            );
           })}
         </div>
       )}

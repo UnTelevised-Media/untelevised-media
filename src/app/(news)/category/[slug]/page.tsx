@@ -1,4 +1,5 @@
 /* eslint-disable react/function-component-definition */
+import { Fragment } from 'react';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,7 +15,7 @@ import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
-import { RectangleAd, SidebarAd, AD_CONFIG } from '@/components/ads';
+import { InFeedAd, RectangleAd, AD_CONFIG } from '@/components/ads';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -152,10 +153,9 @@ export default async function CategoryPage({ params }: Props) {
               </p>
             ) : (
               <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
-                {articles.flatMap((article, index) => {
-                  const card = (
+                {articles.map((article, index) => (
+                  <Fragment key={article._id}>
                     <Link
-                      key={article._id}
                       href={`/articles/${article.slug?.current}`}
                       className='group flex h-full flex-col border border-slate-300 bg-white transition-all hover:border-untele dark:border-slate-700 dark:bg-black'
                     >
@@ -208,27 +208,17 @@ export default async function CategoryPage({ params }: Props) {
                         </div>
                       </div>
                     </Link>
-                  );
 
-                  const items: React.ReactNode[] = [card];
-
-                  // Inject a rectangle ad after every 9th article (not after the last one)
-                  if ((index + 1) % 9 === 0 && index < articles.length - 1) {
-                    items.push(
-                      <div
-                        key={`ad-${index}`}
-                        className='flex flex-col items-center justify-center border border-dashed border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950'
-                      >
-                        <p className='mb-3 text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-                          Advertisement
-                        </p>
-                        <RectangleAd slot={AD_CONFIG.AD_SLOTS.CATEGORY_IN_FEED} responsive />
+                    {(index + 1) % 9 === 0 && index < articles.length - 1 && (
+                      <div className='md:col-span-2 xl:col-span-3'>
+                        <InFeedAd
+                          slot={AD_CONFIG.AD_SLOTS.CATEGORY_IN_FEED}
+                          className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                        />
                       </div>
-                    );
-                  }
-
-                  return items;
-                })}
+                    )}
+                  </Fragment>
+                ))}
               </div>
             )}
           </div>
@@ -281,21 +271,17 @@ export default async function CategoryPage({ params }: Props) {
               </div>
             )}
 
-            {/* Tall sidebar ad */}
-            <div className='w-full'>
-              <p className='mb-2 text-center text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-                Advertisement
-              </p>
-              <SidebarAd
-                slot={AD_CONFIG.AD_SLOTS.CATEGORY_SIDEBAR}
-                style={{ minHeight: '600px' }}
-                className='w-full'
+            {/* Sidebar ad — same setup as article page rectangle */}
+            <div className='flex justify-center'>
+              <RectangleAd
+                slot={AD_CONFIG.AD_SLOTS.ARTICLE_RECTANGLE}
+                className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
               />
             </div>
 
             {/* Newsletter */}
             <div className='border border-slate-200 p-6 dark:border-slate-800'>
-              <NewsletterSignup list='news' source='category' />
+              <NewsletterSignup list='news' source='category' fieldsLayout='column' />
             </div>
 
           </div>

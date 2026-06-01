@@ -7,8 +7,9 @@ import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
-import { RectangleAd, BannerAd } from '@/components/ads';
+import { InFeedAd, BannerAd, SidebarAd } from '@/components/ads';
 import { AD_CONFIG } from '@/lib/ads/adConfig';
+import RecentBreakingNews from '@/components/article/RecentBreakingNews';
 
 import urlForImage from '@/u/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
@@ -222,49 +223,57 @@ export default async function Article({ params }: Props) {
       {/* View ping — fires once per session, renders nothing */}
       <ViewPing slug={article.slug.current} />
 
-      {/* Main Content + Sidebar */}
+      {/* Main Content + Sidebars */}
       <div className='mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-8'>
-        <div className='flex gap-10 lg:items-start'>
+        <div className='flex gap-8 lg:items-start'>
+
+          {/* LEFT SIDEBAR — desktop only */}
+          <aside className='hidden w-72 shrink-0 self-start lg:sticky lg:top-[120px] lg:block'>
+            <div className='space-y-6'>
+              <SidebarAd
+                slot={AD_CONFIG.AD_SLOTS.ARTICLE_LEFT_SIDEBAR}
+                className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+              />
+              <RecentBreakingNews />
+            </div>
+          </aside>
 
       {/* Article content column */}
       <main className='min-w-0 max-w-4xl flex-1'>
-        {/* Breadcrumb */}
-        <nav
-          aria-label='Breadcrumb'
-          className='mb-8 text-xs font-medium uppercase tracking-widest text-slate-500 dark:text-slate-400'
-        >
-          <ol className='flex flex-wrap items-center gap-2'>
-            <li>
-              <Link href='/' className='transition-colors hover:text-untele'>
-                Home
-              </Link>
-            </li>
-            {article.categories && article.categories.length > 0 && (
-              <>
-                <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
-                <li>
-                  <Link
-                    href={`/category/${formatTitleForURL(article.categories[0].title)}`}
-                    className='transition-colors hover:text-untele'
-                  >
-                    {article.categories[0].title}
-                  </Link>
-                </li>
-              </>
-            )}
-            <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
-            <li
-              className='max-w-xs truncate text-slate-900 dark:text-white'
-              aria-current='page'
-            >
-              {article.title}
-            </li>
-          </ol>
-        </nav>
-
-        {/* Social Share + Bookmark */}
-        <div className='mb-8 flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:justify-between'>
-          <SocialShare url={`https://untelevised.media/articles/${slug}`} title={article.title} />
+        {/* Breadcrumb + Bookmark */}
+        <div className='mb-6 flex items-start justify-between gap-4'>
+          <nav
+            aria-label='Breadcrumb'
+            className='min-w-0 text-xs font-medium uppercase tracking-widest text-slate-500 dark:text-slate-400'
+          >
+            <ol className='flex flex-wrap items-center gap-2'>
+              <li>
+                <Link href='/' className='transition-colors hover:text-untele'>
+                  Home
+                </Link>
+              </li>
+              {article.categories && article.categories.length > 0 && (
+                <>
+                  <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
+                  <li>
+                    <Link
+                      href={`/category/${formatTitleForURL(article.categories[0].title)}`}
+                      className='transition-colors hover:text-untele'
+                    >
+                      {article.categories[0].title}
+                    </Link>
+                  </li>
+                </>
+              )}
+              <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
+              <li
+                className='max-w-xs truncate text-slate-900 dark:text-white'
+                aria-current='page'
+              >
+                {article.title}
+              </li>
+            </ol>
+          </nav>
           <BookmarkButton
             slug={slug}
             title={article.title}
@@ -277,18 +286,15 @@ export default async function Article({ params }: Props) {
           />
         </div>
 
-        {/* Rectangle Ad after social share */}
-        <div className='mb-8 flex justify-center'>
-          <RectangleAd
-            slot={AD_CONFIG.AD_SLOTS.ARTICLE_RECTANGLE}
-            className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
-          />
+        {/* Social Share — full width */}
+        <div className='mb-8'>
+          <SocialShare url={`https://untelevised.media/articles/${slug}`} title={article.title} />
         </div>
 
         {/* Article Content */}
         <article className='prose prose-lg prose-slate dark:prose-invert max-w-none'>
-          {/* Featured Image (if different from hero) */}
-          <div className='not-prose mb-8'>
+          {/* Featured Image */}
+          <div className='not-prose mb-0'>
             <div className='overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
               {(() => {
                 const ref: string = article.mainImage?.asset?._ref ?? '';
@@ -307,6 +313,14 @@ export default async function Article({ params }: Props) {
                 );
               })()}
             </div>
+          </div>
+
+          {/* In-feed ad directly below the image */}
+          <div className='not-prose mb-8'>
+            <InFeedAd
+              slot={AD_CONFIG.AD_SLOTS.IN_FEED}
+              className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+            />
           </div>
 
           {/* Embedded Video */}
@@ -451,14 +465,20 @@ export default async function Article({ params }: Props) {
         </div>
       </main>
 
-          {/* Desktop sidebar */}
-          <aside className='hidden w-80 shrink-0 self-start lg:sticky lg:top-8 lg:block'>
-            <TrendingSection />
+          {/* RIGHT SIDEBAR — desktop only */}
+          <aside className='hidden w-72 shrink-0 self-start lg:sticky lg:top-[120px] lg:block'>
+            <div className='space-y-6'>
+              <TrendingSection />
+              <SidebarAd
+                slot={AD_CONFIG.AD_SLOTS.ARTICLE_RIGHT_SIDEBAR_BOTTOM}
+                className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+              />
+            </div>
           </aside>
 
         </div>{/* end flex */}
 
-        {/* Mobile: Most Read below content */}
+        {/* Mobile: Most Read + Breaking below content */}
         <div className='mt-10 lg:hidden'>
           <TrendingSection />
         </div>

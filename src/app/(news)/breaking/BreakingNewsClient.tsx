@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Image from 'next/image';
 
 import urlForImage from '@/util/urlForImage';
@@ -10,6 +10,7 @@ import formatDate from '@/util/formatDate';
 import resolveHref from '@/util/resolveHref';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryLiveEvents, queryBreakingArticles } from '@/lib/sanity/lib/queries';
+import { InFeedAd, AD_CONFIG } from '@/components/ads';
 
 interface LiveEvent {
   _id: string;
@@ -107,14 +108,34 @@ export default function BreakingNewsClient() {
         {allItems.length > 0 ? (
           viewMode === 'cards' ? (
             <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
-              {allItems.map((item) => (
-                <BreakingCard key={item._id} item={item} />
+              {allItems.map((item, index) => (
+                <Fragment key={item._id}>
+                  <BreakingCard item={item} />
+                  {(index + 1) % 6 === 0 && index < allItems.length - 1 && (
+                    <div className='md:col-span-2 xl:col-span-3'>
+                      <InFeedAd
+                        slot={AD_CONFIG.AD_SLOTS.BREAKING_IN_FEED}
+                        className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                      />
+                    </div>
+                  )}
+                </Fragment>
               ))}
             </div>
           ) : (
             <ul className='space-y-6'>
-              {allItems.map((item) => (
-                <BreakingBar key={item._id} item={item} />
+              {allItems.map((item, index) => (
+                <Fragment key={item._id}>
+                  <BreakingBar item={item} />
+                  {(index + 1) % 6 === 0 && index < allItems.length - 1 && (
+                    <li>
+                      <InFeedAd
+                        slot={AD_CONFIG.AD_SLOTS.BREAKING_IN_FEED}
+                        className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                      />
+                    </li>
+                  )}
+                </Fragment>
               ))}
             </ul>
           )

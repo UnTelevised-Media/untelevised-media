@@ -4,6 +4,7 @@ import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAllFactChecks } from '@/lib/sanity/lib/queries';
 import FactCheckList from '@/components/fact-check/FactCheckList';
 import type { FactCheckSummary } from '@/components/fact-check/FactCheckList';
+import { BannerAd, AD_CONFIG } from '@/components/ads';
 
 export const metadata: Metadata = {
   title: 'Fact Checks | UnTelevised Media',
@@ -37,11 +38,16 @@ export default async function FactChecksPage() {
         ) : null}
       </div>
 
-      <p className='mb-8 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400'>
+      <p className='mb-6 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400'>
         UnTelevised Media independently verifies viral claims, political statements, and
         misinformation. Each fact-check includes our verdict, a plain-language explanation, and
         all primary sources used in the review.
       </p>
+
+      <BannerAd
+        slot={AD_CONFIG.AD_SLOTS.FACT_CHECKS_BANNER}
+        className='mb-8 border border-neutral-200 bg-neutral-50/50 p-4 dark:border-neutral-700 dark:bg-neutral-900/50'
+      />
 
       <FactCheckList factChecks={factChecks ?? []} />
     </main>
