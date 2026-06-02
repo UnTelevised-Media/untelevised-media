@@ -2,9 +2,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Join the Mission — UnTelevised Media',
+  title: 'Join UnTelevised Media — Membership & Supporter Tiers',
   description:
-    'Apply to join the UnTelevised Media team as a journalist, editor, videographer, or contributor.',
+    'Become a member and support independent journalism from $5/month. Recurring memberships fund reporters, investigations, and editorial independence.',
 };
 
 export default function JoinLayout({ children }: { children: React.ReactNode }) {

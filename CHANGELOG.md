@@ -8,17 +8,27 @@ All notable changes to this project are documented here.
 
 Recurring reader memberships via Stripe Checkout. Three tiers (Supporter $5, Contributor $15, Patron $50). Stripe is a **separate project** within the same org to isolate membership billing from the bookstore. Member records are stored in a dedicated **Supabase project** (not Sanity). Stripe webhook events are handled by a **Supabase Edge Function** (`stripe-membership-webhook`). Clerk user IDs are captured at checkout and linked to membership rows in Supabase for access gating.
 
-### In Progress
+### Added
 
-- [ ] `src/lib/membership/database.types.ts` — type stubs for membership Supabase schema
-- [ ] `src/lib/membership/supabase.ts` — typed Supabase client (mirrors bookstore pattern, uses `SUPABASE_MEMBERSHIP_*` vars)
-- [ ] `src/lib/membership/access.ts` — server-only Clerk+Supabase membership gating helper
-- [ ] `src/app/api/membership/create-checkout/route.ts` — Stripe Checkout session creator (uses `STRIPE_MEMBERSHIP_SECRET_KEY`)
-- [ ] `supabase/functions/stripe-membership-webhook/index.ts` — Edge Function: verifies Stripe signature, upserts/updates member rows
-- [ ] `src/app/(news)/join/page.tsx` — /join page rewrite with live member count + tier cards
-- [ ] `src/app/(news)/join/success/page.tsx` — post-checkout confirmation
-- [ ] `src/components/membership/MembershipTiers.tsx` — tier card UI component
-- [ ] `.env.example` — add `STRIPE_MEMBERSHIP_*` and `SUPABASE_MEMBERSHIP_*` vars
+- `src/lib/membership/database.types.ts` — type stubs for membership Supabase schema (`members` table with `clerk_user_id`, `stripe_customer_id`, `tier`, `status`)
+- `src/lib/membership/supabase.ts` — typed Supabase client pair (anon + service-role) using `SUPABASE_MEMBERSHIP_*` env vars; lazy singleton pattern mirrors bookstore client
+- `src/lib/membership/access.ts` — server-only helpers: `getMembershipTier()`, `isMember()`, `hasFullAccess()` — reads from Supabase via Clerk `userId`
+- `src/app/api/membership/create-checkout/route.ts` — `POST /api/membership/create-checkout` creates a Stripe Subscription Checkout Session using `STRIPE_MEMBERSHIP_SECRET_KEY`; embeds `clerk_user_id` in session metadata
+- `supabase/functions/stripe-membership-webhook/index.ts` — Supabase Edge Function (Deno); verifies Stripe signature with `STRIPE_MEMBERSHIP_WEBHOOK_SECRET`; handles `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`
+- `src/app/(news)/join/page.tsx` — full /join page: live active member count from Supabase, three tier cards, mission copy, one-time donation CTA
+- `src/app/(news)/join/success/page.tsx` — post-checkout confirmation; retrieves tier from Stripe session; newsletter CTA; `noindex`
+- `src/components/membership/MembershipTiers.tsx` — tier card UI (Supporter $5, Contributor $15, Patron $50); POSTs to `/api/membership/create-checkout`; loading + error states
+- `.env.example` — added `STRIPE_MEMBERSHIP_*` (6 vars) and `SUPABASE_MEMBERSHIP_*` (3 vars) placeholder entries
+
+### Pending (awaiting credentials)
+
+- [ ] Create membership Supabase project and run SQL migration (members table + RLS policy + index)
+- [ ] Create membership Stripe project, three Products + recurring Prices ($5/$15/$50/mo)
+- [ ] Fill `STRIPE_MEMBERSHIP_*` and `SUPABASE_MEMBERSHIP_*` vars in `.env.local` and Vercel
+- [ ] Deploy Edge Function: `supabase functions deploy stripe-membership-webhook --project-ref <membership-ref>`
+- [ ] Register Edge Function URL as webhook endpoint in membership Stripe Dashboard
+- [ ] Set `STRIPE_MEMBERSHIP_WEBHOOK_SECRET` as Supabase Edge Function secret
+- [ ] End-to-end test with Stripe test card `4242 4242 4242 4242`
 
 ---
 
