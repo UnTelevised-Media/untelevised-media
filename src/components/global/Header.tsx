@@ -259,7 +259,7 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
 
           {/* Support */}
           <Link
-            href='/donate'
+            href='/support'
             className='hidden items-center gap-1.5 bg-gradient-to-r from-untele to-red-500 px-3 py-1.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg md:flex md:px-4 md:py-2'
           >
             <span>Support</span>
@@ -332,7 +332,7 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
               </div>
 
               <Link
-                href='/donate'
+                href='/support'
                 onClick={closeMenu}
                 className='mb-4 flex items-center justify-center gap-2 bg-gradient-to-r from-untele to-red-500 px-6 py-3 text-sm font-bold text-white shadow-md'
               >

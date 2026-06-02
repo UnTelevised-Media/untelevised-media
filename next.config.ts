@@ -86,6 +86,16 @@ const nextConfig: NextConfig = {
         destination: '/breaking',
         permanent: false,
       },
+      {
+        source: '/donate',
+        destination: '/support',
+        permanent: true,
+      },
+      {
+        source: '/join',
+        destination: '/support',
+        permanent: true,
+      },
     ];
   },
   logging: {

@@ -4,6 +4,41 @@ All notable changes to this project are documented here.
 
 ---
 
+## [Unreleased] — Membership & Supporter Tiers — Stripe Subscriptions (Issue #13)
+
+Recurring reader memberships via Stripe Checkout. Three tiers (Supporter $5, Contributor $15, Patron $50). Stripe is a **separate project** within the same org to isolate membership billing from the bookstore. Member records are stored in a dedicated **Supabase project** (not Sanity). Stripe webhook events are handled by a **Supabase Edge Function** (`stripe-membership-webhook`). Clerk user IDs are captured at checkout and linked to membership rows in Supabase for access gating.
+
+### Added
+
+- `src/lib/membership/database.types.ts` — type stubs for membership Supabase schema (`members` table with `clerk_user_id`, `stripe_customer_id`, `tier`, `status`)
+- `src/lib/membership/supabase.ts` — typed Supabase client pair (anon + service-role) using `SUPABASE_MEMBERSHIP_*` env vars; lazy singleton pattern mirrors bookstore client
+- `src/lib/membership/access.ts` — server-only helpers: `getMembershipTier()`, `isMember()`, `hasFullAccess()` — reads from Supabase via Clerk `userId`
+- `src/app/api/membership/create-checkout/route.ts` — `POST /api/membership/create-checkout` creates a Stripe Subscription Checkout Session using `STRIPE_MEMBERSHIP_SECRET_KEY`; embeds `clerk_user_id` in session metadata
+- `supabase/functions/stripe-membership-webhook/index.ts` — Supabase Edge Function (Deno); verifies Stripe signature with `STRIPE_MEMBERSHIP_WEBHOOK_SECRET`; handles `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`
+- `src/app/(news)/join/page.tsx` — full /join page: live active member count from Supabase, three tier cards, mission copy, one-time donation CTA
+- `src/app/(news)/join/success/page.tsx` — post-checkout confirmation; retrieves tier from Stripe session; newsletter CTA; `noindex`
+- `src/components/membership/MembershipTiers.tsx` — tier card UI (Supporter $5, Contributor $15, Patron $50); POSTs to `/api/membership/create-checkout`; loading + error states
+- `.env.example` — added `STRIPE_MEMBERSHIP_*` (6 vars) and `SUPABASE_MEMBERSHIP_*` (3 vars) placeholder entries
+
+### Updated
+
+- `src/lib/membership/supabase.ts` — corrected env var names to match actual project setup: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (membership Supabase project already live at `tewnvjowrdfzvqcsfwgx`)
+- `src/app/(news)/join/success/page.tsx` — added next billing date: retrieves subscription via `expand: ['subscription']` and displays `current_period_end` as a formatted date
+- `.env.local` — added empty `STRIPE_MEMBERSHIP_*` placeholder vars (6) ready to be filled once Stripe project is set up
+- `.env.example` — updated Supabase membership var names to match actual setup
+
+### Pending (awaiting Stripe membership project)
+
+- [ ] Create membership Stripe project and three Products + recurring Prices ($5/$15/$50/mo)
+- [ ] Fill `STRIPE_MEMBERSHIP_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_MEMBERSHIP_PUBLISHABLE_KEY`, `STRIPE_MEMBERSHIP_PRICE_*` in `.env.local` and Vercel
+- [ ] Deploy Edge Function: `supabase functions deploy stripe-membership-webhook --project-ref tewnvjowrdfzvqcsfwgx`
+- [ ] Register Edge Function URL as webhook endpoint in membership Stripe Dashboard
+- [ ] Set `STRIPE_MEMBERSHIP_WEBHOOK_SECRET` as Supabase Edge Function secret and in `.env.local`
+- [ ] Run SQL migration on membership Supabase project (members table + RLS + index)
+- [ ] End-to-end test with Stripe test card `4242 4242 4242 4242`
+
+---
+
 ## [Unreleased] — Newsletter / Email List Integration (Issue #27)
 
 Full double opt-in flow for both the UnTelevised Media news newsletter and the Hurriya Publications bookstore newsletter. Both lists share one service layer with per-list branding. Emails sent via Nodemailer (same SMTP transporter as bookstore order emails — no extra service required).
