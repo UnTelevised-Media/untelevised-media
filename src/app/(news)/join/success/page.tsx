@@ -13,6 +13,35 @@ const TIER_LABELS: Record<string, string> = {
   patron: 'Patron',
 };
 
+interface SessionData {
+  tier: string | null;
+  nextBillingDate: string | null;
+}
+
+async function getSessionData(sessionId: string): Promise<SessionData> {
+  if (!process.env.STRIPE_MEMBERSHIP_SECRET_KEY) return { tier: null, nextBillingDate: null };
+  try {
+    const Stripe = (await import('stripe')).default;
+    const stripe = new Stripe(process.env.STRIPE_MEMBERSHIP_SECRET_KEY, {
+      apiVersion: '2026-04-22.dahlia',
+    });
+    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+      expand: ['subscription'],
+    });
+    const tier = session.metadata?.tier ?? null;
+    let nextBillingDate: string | null = null;
+    const sub = session.subscription;
+    if (sub && typeof sub === 'object' && 'current_period_end' in sub) {
+      nextBillingDate = new Date(
+        (sub as { current_period_end: number }).current_period_end * 1000
+      ).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    return { tier, nextBillingDate };
+  } catch {
+    return { tier: null, nextBillingDate: null };
+  }
+}
+
 export default async function JoinSuccessPage({
   searchParams,
 }: {
@@ -20,20 +49,9 @@ export default async function JoinSuccessPage({
 }) {
   const { session_id } = await searchParams;
 
-  let tier: string | null = null;
-
-  if (session_id && process.env.STRIPE_MEMBERSHIP_SECRET_KEY) {
-    try {
-      const Stripe = (await import('stripe')).default;
-      const stripe = new Stripe(process.env.STRIPE_MEMBERSHIP_SECRET_KEY, {
-        apiVersion: '2026-04-22.dahlia',
-      });
-      const session = await stripe.checkout.sessions.retrieve(session_id);
-      tier = session.metadata?.tier ?? null;
-    } catch {
-      // Non-fatal — page renders without tier-specific copy
-    }
-  }
+  const { tier, nextBillingDate } = session_id
+    ? await getSessionData(session_id)
+    : { tier: null, nextBillingDate: null };
 
   const tierLabel = tier ? TIER_LABELS[tier] : null;
 
@@ -56,9 +74,14 @@ export default async function JoinSuccessPage({
             independent journalism free from corporate influence.
           </p>
 
+          <p className="mb-2 text-sm text-zinc-400">
+            A receipt has been sent to your email.
+            {nextBillingDate && (
+              <> Your next billing date is <span className="text-white font-bold">{nextBillingDate}</span>.</>
+            )}
+          </p>
           <p className="mb-12 text-sm text-zinc-400">
-            A receipt has been sent to your email. You can manage or cancel your subscription
-            at any time via the Stripe customer portal.
+            You can manage or cancel your subscription at any time via the Stripe customer portal.
           </p>
 
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
@@ -80,7 +103,7 @@ export default async function JoinSuccessPage({
 
       <section className="bg-slate-950 py-16">
         <div className="mx-auto max-w-3xl px-4 text-center">
-          <p className="mb-6 text-sm text-zinc-400 uppercase tracking-widest font-black">
+          <p className="mb-6 text-sm font-black uppercase tracking-widest text-zinc-400">
             What happens next
           </p>
           <div className="grid gap-6 text-left sm:grid-cols-3">
@@ -93,7 +116,9 @@ export default async function JoinSuccessPage({
             <div className="border border-slate-700 p-5">
               <div className="mb-3 text-2xl font-black text-untele">02</div>
               <p className="text-sm text-slate-300">
-                You&rsquo;ll be billed monthly on today&rsquo;s date. Cancel anytime — no questions asked.
+                {nextBillingDate
+                  ? `Next billed on ${nextBillingDate}. Cancel anytime — no questions asked.`
+                  : "You'll be billed monthly on today's date. Cancel anytime — no questions asked."}
               </p>
             </div>
             <div className="border border-slate-700 p-5">

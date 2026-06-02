@@ -20,14 +20,21 @@ Recurring reader memberships via Stripe Checkout. Three tiers (Supporter $5, Con
 - `src/components/membership/MembershipTiers.tsx` — tier card UI (Supporter $5, Contributor $15, Patron $50); POSTs to `/api/membership/create-checkout`; loading + error states
 - `.env.example` — added `STRIPE_MEMBERSHIP_*` (6 vars) and `SUPABASE_MEMBERSHIP_*` (3 vars) placeholder entries
 
-### Pending (awaiting credentials)
+### Updated
 
-- [ ] Create membership Supabase project and run SQL migration (members table + RLS policy + index)
-- [ ] Create membership Stripe project, three Products + recurring Prices ($5/$15/$50/mo)
-- [ ] Fill `STRIPE_MEMBERSHIP_*` and `SUPABASE_MEMBERSHIP_*` vars in `.env.local` and Vercel
-- [ ] Deploy Edge Function: `supabase functions deploy stripe-membership-webhook --project-ref <membership-ref>`
+- `src/lib/membership/supabase.ts` — corrected env var names to match actual project setup: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (membership Supabase project already live at `tewnvjowrdfzvqcsfwgx`)
+- `src/app/(news)/join/success/page.tsx` — added next billing date: retrieves subscription via `expand: ['subscription']` and displays `current_period_end` as a formatted date
+- `.env.local` — added empty `STRIPE_MEMBERSHIP_*` placeholder vars (6) ready to be filled once Stripe project is set up
+- `.env.example` — updated Supabase membership var names to match actual setup
+
+### Pending (awaiting Stripe membership project)
+
+- [ ] Create membership Stripe project and three Products + recurring Prices ($5/$15/$50/mo)
+- [ ] Fill `STRIPE_MEMBERSHIP_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_MEMBERSHIP_PUBLISHABLE_KEY`, `STRIPE_MEMBERSHIP_PRICE_*` in `.env.local` and Vercel
+- [ ] Deploy Edge Function: `supabase functions deploy stripe-membership-webhook --project-ref tewnvjowrdfzvqcsfwgx`
 - [ ] Register Edge Function URL as webhook endpoint in membership Stripe Dashboard
-- [ ] Set `STRIPE_MEMBERSHIP_WEBHOOK_SECRET` as Supabase Edge Function secret
+- [ ] Set `STRIPE_MEMBERSHIP_WEBHOOK_SECRET` as Supabase Edge Function secret and in `.env.local`
+- [ ] Run SQL migration on membership Supabase project (members table + RLS + index)
 - [ ] End-to-end test with Stripe test card `4242 4242 4242 4242`
 
 ---
