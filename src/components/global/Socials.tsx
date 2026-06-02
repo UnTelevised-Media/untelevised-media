@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { BsDiscord, BsTwitch, BsTwitter, BsYoutube } from 'react-icons/bs';
 import { FaFacebookF, FaRedditAlien, FaTelegram, FaTiktok } from 'react-icons/fa';
+import { FaThreads } from 'react-icons/fa6';
 import { GrInstagram } from 'react-icons/gr';
 
 const Socials = () => {
@@ -35,6 +36,14 @@ const Socials = () => {
         className='group rounded-lg border border-slate-300/50 bg-slate-200/30 p-1 backdrop-blur-sm transition-all duration-200 hover:border-[#C13584]/50 hover:bg-[#C13584]/10 hover:shadow-lg dark:border-slate-600/50 dark:bg-slate-800/30 dark:hover:bg-[#C13584]/20 sm:p-1.5 md:p-2'
       >
         <GrInstagram className='h-4 w-4 text-slate-600 transition-colors duration-200 group-hover:text-[#C13584] dark:text-slate-400 sm:h-3 sm:w-3 md:h-3 md:w-3 lg:h-4 lg:w-4 xl:w-5 xl:h-5' />
+      </Link>
+      <Link
+        href='https://www.threads.com/@untelevised.media'
+        target='_blank'
+        rel='noopener noreferrer'
+        className='group rounded-lg border border-slate-300/50 bg-slate-200/30 p-1 backdrop-blur-sm transition-all duration-200 hover:border-black/50 hover:bg-black/10 hover:shadow-lg dark:border-slate-600/50 dark:bg-slate-800/30 dark:hover:bg-white/10 sm:p-1.5 md:p-2'
+      >
+        <FaThreads className='h-4 w-4 text-slate-600 transition-colors duration-200 group-hover:text-black dark:text-slate-400 dark:group-hover:text-white sm:h-3 sm:w-3 md:h-3 md:w-3 lg:h-4 lg:w-4 xl:h-5 xl:w-5' />
       </Link>
       <Link
         href='https://www.facebook.com/UnTelevisedLive'
