@@ -128,10 +128,16 @@ export default function AboutPage() {
               <h4 className='mb-3 text-lg font-bold uppercase tracking-wide text-slate-900 dark:text-white'>
                 TRANSPARENCY
               </h4>
-              <p className='flex-1 text-sm text-slate-700 dark:text-slate-300'>
+              <p className='mb-4 flex-1 text-sm text-slate-700 dark:text-slate-300'>
                 We practice what we preach. Our funding sources, editorial decisions, and
                 methodologies are open for scrutiny. Transparency builds trust.
               </p>
+              <Link
+                href='/editorial-standards'
+                className='text-xs font-black uppercase tracking-widest text-untele transition-colors hover:text-red-600'
+              >
+                Read our Editorial Standards &rarr;
+              </Link>
             </div>
           </div>
         </div>
@@ -251,11 +257,11 @@ export default function AboutPage() {
           <div className='grid gap-12 lg:grid-cols-2'>
             <div>
               <div className='mb-6 flex items-center space-x-4'>
-                <div className='bg-untele px-3 py-1'>
+                <Link href='/support' className='bg-untele px-3 py-1 transition-opacity hover:opacity-80'>
                   <h3 className='text-sm font-black uppercase tracking-widest text-white'>
                     SUPPORT INDEPENDENT MEDIA
                   </h3>
-                </div>
+                </Link>
                 <div className='h-px flex-1 bg-slate-400 dark:bg-slate-700' />
               </div>
               <h4 className='mb-4 text-2xl font-bold text-slate-900 dark:text-white'>
