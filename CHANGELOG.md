@@ -4,6 +4,24 @@ All notable changes to this project are documented here.
 
 ---
 
+## [Unreleased] — Membership & Supporter Tiers — Stripe Subscriptions (Issue #13)
+
+Recurring reader memberships via Stripe Checkout. Three tiers (Supporter $5, Contributor $15, Patron $50). Stripe is a **separate project** within the same org to isolate membership billing from the bookstore. Member records are stored in a dedicated **Supabase project** (not Sanity). Stripe webhook events are handled by a **Supabase Edge Function** (`stripe-membership-webhook`). Clerk user IDs are captured at checkout and linked to membership rows in Supabase for access gating.
+
+### In Progress
+
+- [ ] `src/lib/membership/database.types.ts` — type stubs for membership Supabase schema
+- [ ] `src/lib/membership/supabase.ts` — typed Supabase client (mirrors bookstore pattern, uses `SUPABASE_MEMBERSHIP_*` vars)
+- [ ] `src/lib/membership/access.ts` — server-only Clerk+Supabase membership gating helper
+- [ ] `src/app/api/membership/create-checkout/route.ts` — Stripe Checkout session creator (uses `STRIPE_MEMBERSHIP_SECRET_KEY`)
+- [ ] `supabase/functions/stripe-membership-webhook/index.ts` — Edge Function: verifies Stripe signature, upserts/updates member rows
+- [ ] `src/app/(news)/join/page.tsx` — /join page rewrite with live member count + tier cards
+- [ ] `src/app/(news)/join/success/page.tsx` — post-checkout confirmation
+- [ ] `src/components/membership/MembershipTiers.tsx` — tier card UI component
+- [ ] `.env.example` — add `STRIPE_MEMBERSHIP_*` and `SUPABASE_MEMBERSHIP_*` vars
+
+---
+
 ## [Unreleased] — Newsletter / Email List Integration (Issue #27)
 
 Full double opt-in flow for both the UnTelevised Media news newsletter and the Hurriya Publications bookstore newsletter. Both lists share one service layer with per-list branding. Emails sent via Nodemailer (same SMTP transporter as bookstore order emails — no extra service required).
