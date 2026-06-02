@@ -309,7 +309,7 @@ export default function AboutPage() {
               </p>
               <div className='space-y-4'>
                 <Link
-                  href='/donate'
+                  href='/support#membership'
                   className='block w-full bg-untele py-4 text-center text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
                 >
                   BECOME A SUPPORTER

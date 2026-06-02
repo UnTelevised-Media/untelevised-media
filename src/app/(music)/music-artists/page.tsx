@@ -242,7 +242,7 @@ export default async function MusicArtistsPage() {
               with music lovers worldwide.
             </p>
             <div className='flex flex-wrap justify-center gap-4'>
-              <ClientSideRoute route='/join'>
+              <ClientSideRoute route='/support'>
                 <button className='rounded-lg bg-white px-6 py-3 font-medium text-untele transition-colors hover:bg-white/90'>
                   Apply to Join
                 </button>

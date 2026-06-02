@@ -168,13 +168,13 @@ export default async function HomePage() {
                 </div>
                 <div className='flex flex-col gap-3 sm:flex-row'>
                   <Link
-                    href='/donate'
+                    href='/support#donate'
                     className='flex-1 bg-untele py-3 text-center text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
                   >
                     Donate Now
                   </Link>
                   <Link
-                    href='/join'
+                    href='/support#membership'
                     className='flex-1 border-2 border-slate-900 py-3 text-center text-xs font-black uppercase tracking-widest text-slate-900 transition-colors hover:bg-slate-900 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black'
                   >
                     Join the Mission

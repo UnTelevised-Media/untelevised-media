@@ -306,7 +306,7 @@ export default async function LyricsIndexPage() {
             <p className='mb-6 text-white/90'>
               Share your music and lyrics with our community. Get featured and reach new audiences.
             </p>
-            <ClientSideRoute route='/join'>
+            <ClientSideRoute route='/support'>
               <button className='rounded-lg bg-white px-6 py-3 font-medium text-untele transition-colors hover:bg-white/90'>
                 Submit Your Music
               </button>
