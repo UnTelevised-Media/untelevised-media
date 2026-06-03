@@ -1,12 +1,12 @@
 // src/models/schemas/twitterX.ts
 import { defineType, defineField } from 'sanity';
-import { Twitter } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 
 export default defineType({
   name: 'twitterEmbed',
   type: 'object',
   title: 'Twitter Embed',
-  icon: Twitter,
+  icon: MessageSquare,
   fields: [
     defineField({
       name: 'tweetId',

@@ -1,12 +1,12 @@
 // src/models/schemas/youtube.ts
 import { defineType, defineField } from 'sanity';
-import { Youtube } from 'lucide-react';
+import { Video } from 'lucide-react';
 
 export default defineType({
   name: 'youtubeEmbed',
   type: 'object',
   title: 'YouTube Embed',
-  icon: Youtube,
+  icon: Video,
   fields: [
     defineField({
       name: 'videoId',

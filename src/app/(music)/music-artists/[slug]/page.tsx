@@ -16,7 +16,7 @@ import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
 import { sanityFetch } from '@/lib/sanity/lib/live';
 import { queryMusicArtistBySlug } from '@/lib/sanity/lib/queries';
-import { Music, Calendar, MapPin, ExternalLink, Instagram, Twitter, Youtube } from 'lucide-react';
+import { Music, Calendar, MapPin, ExternalLink, Camera, MessageSquare, Video } from 'lucide-react';
 import { ArtistStructuredData } from '@/components/seo/StructuredData';
 import { getCanonicalUrl, getSanityOgImageUrl, truncate, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
 
@@ -174,7 +174,7 @@ export default async function MusicArtistPage({ params }: Props) {
                             rel='noopener noreferrer'
                             className='flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-transform hover:scale-110'
                           >
-                            <Instagram className='h-5 w-5' />
+                            <Camera className='h-5 w-5' />
                           </a>
                         )}
                         {artist.socialMedia.twitter && (
@@ -184,7 +184,7 @@ export default async function MusicArtistPage({ params }: Props) {
                             rel='noopener noreferrer'
                             className='flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 text-white transition-transform hover:scale-110'
                           >
-                            <Twitter className='h-5 w-5' />
+                            <MessageSquare className='h-5 w-5' />
                           </a>
                         )}
                         {artist.socialMedia.youtube && (
@@ -194,7 +194,7 @@ export default async function MusicArtistPage({ params }: Props) {
                             rel='noopener noreferrer'
                             className='flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-transform hover:scale-110'
                           >
-                            <Youtube className='h-5 w-5' />
+                            <Video className='h-5 w-5' />
                           </a>
                         )}
                         {artist.website && (
@@ -402,7 +402,7 @@ export default async function MusicArtistPage({ params }: Props) {
                         rel='noopener noreferrer'
                         className='flex items-center gap-3 text-slate-600 transition-colors hover:text-pink-600 dark:text-slate-400'
                       >
-                        <Instagram className='h-5 w-5' />
+                        <Camera className='h-5 w-5' />
                         <span>@{artist.socialMedia.instagram}</span>
                       </a>
                     )}
@@ -413,7 +413,7 @@ export default async function MusicArtistPage({ params }: Props) {
                         rel='noopener noreferrer'
                         className='flex items-center gap-3 text-slate-600 transition-colors hover:text-blue-600 dark:text-slate-400'
                       >
-                        <Twitter className='h-5 w-5' />
+                        <MessageSquare className='h-5 w-5' />
                         <span>@{artist.socialMedia.twitter}</span>
                       </a>
                     )}
@@ -424,7 +424,7 @@ export default async function MusicArtistPage({ params }: Props) {
                         rel='noopener noreferrer'
                         className='flex items-center gap-3 text-slate-600 transition-colors hover:text-red-600 dark:text-slate-400'
                       >
-                        <Youtube className='h-5 w-5' />
+                        <Video className='h-5 w-5' />
                         <span>YouTube</span>
                       </a>
                     )}

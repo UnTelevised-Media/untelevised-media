@@ -16,7 +16,7 @@ import {
 import { BlockNoteView } from '@blocknote/mantine';
 import { useState, useCallback } from 'react';
 import { useTheme } from 'next-themes';
-import { Youtube, Twitter, Instagram } from 'lucide-react';
+import { Video, MessageSquare, Camera } from 'lucide-react';
 
 // ─── Utility: extract YouTube video ID from URL or bare ID ───────────────────
 
@@ -309,7 +309,7 @@ export default function RichTextEditor({
                     );
                   },
                   group: 'Embeds',
-                  icon: <Youtube size={18} />,
+                  icon: <Video size={18} />,
                   aliases: ['youtube', 'video', 'yt'],
                 },
                 {
@@ -324,7 +324,7 @@ export default function RichTextEditor({
                     );
                   },
                   group: 'Embeds',
-                  icon: <Twitter size={18} />,
+                  icon: <MessageSquare size={18} />,
                   aliases: ['twitter', 'tweet', 'x'],
                 },
                 {
@@ -339,7 +339,7 @@ export default function RichTextEditor({
                     );
                   },
                   group: 'Embeds',
-                  icon: <Instagram size={18} />,
+                  icon: <Camera size={18} />,
                   aliases: ['instagram', 'ig', 'insta'],
                 },
               ],

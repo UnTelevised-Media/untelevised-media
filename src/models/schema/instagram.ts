@@ -1,12 +1,12 @@
 // src/models/schemas/instagram.ts
 import { defineType, defineField } from 'sanity';
-import { Instagram } from 'lucide-react';
+import { Camera } from 'lucide-react';
 
 export default defineType({
   name: 'instagramEmbed',
   type: 'object',
   title: 'Instagram Embed',
-  icon: Instagram,
+  icon: Camera,
   fields: [
     defineField({
       name: 'postId',
