@@ -447,7 +447,7 @@ export default async function AlbumPage({ params }: Props) {
 async function getAlbumBySlug(slug: string): Promise<AlbumWithSongs | null> {
   try {
     const { data } = await sanityFetch({ query: queryAlbumBySlug, params: { slug }, tags: ['album'] });
-    return data;
+    return data as AlbumWithSongs | null;
   } catch (error) {
     console.error('Failed to fetch album:', error);
     return null;

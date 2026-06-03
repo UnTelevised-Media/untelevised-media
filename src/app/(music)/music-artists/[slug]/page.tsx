@@ -473,7 +473,7 @@ export default async function MusicArtistPage({ params }: Props) {
 async function getMusicArtistBySlug(slug: string): Promise<ArtistWithContent | null> {
   try {
     const { data } = await sanityFetch({ query: queryMusicArtistBySlug, params: { slug }, tags: ['musicArtist'] });
-    return data;
+    return data as ArtistWithContent | null;
   } catch (error) {
     console.error('Failed to fetch artist:', error);
     return null;

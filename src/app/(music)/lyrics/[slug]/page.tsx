@@ -432,7 +432,7 @@ export default async function LyricsPage({ params }: Props) {
 async function getSongBySlug(slug: string): Promise<Song | null> {
   try {
     const { data } = await sanityFetch({ query: querySongBySlug, params: { slug }, tags: ['song'] });
-    return data;
+    return data as Song | null;
   } catch (error) {
     console.error('Failed to fetch song:', error);
     return null;

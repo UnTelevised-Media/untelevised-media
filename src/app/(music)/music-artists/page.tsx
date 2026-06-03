@@ -267,7 +267,7 @@ async function getFeaturedArtists(): Promise<(MusicArtist & { songCount?: number
       query: queryFeaturedMusicArtists,
       tags: ['musicArtist'],
     });
-    return data;
+    return data as (MusicArtist & { songCount?: number })[];
   } catch (error) {
     console.error('Failed to fetch featured artists:', error);
     return [];
@@ -280,7 +280,7 @@ async function getAllArtists(): Promise<MusicArtist[]> {
       query: queryAllMusicArtists,
       tags: ['musicArtist'],
     });
-    return data;
+    return data as MusicArtist[];
   } catch (error) {
     console.error('Failed to fetch all artists:', error);
     return [];
