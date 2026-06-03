@@ -26,7 +26,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { RectangleAd, BannerAd } from '@/components/ads';
 
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryTimelineEventBySlug } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';

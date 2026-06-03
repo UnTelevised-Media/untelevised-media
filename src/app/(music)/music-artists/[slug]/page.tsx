@@ -14,7 +14,7 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryMusicArtistBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Calendar, MapPin, ExternalLink, Camera, MessageSquare, Video } from 'lucide-react';
 import { ArtistStructuredData } from '@/components/seo/StructuredData';

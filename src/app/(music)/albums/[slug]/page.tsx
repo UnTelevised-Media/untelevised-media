@@ -13,7 +13,7 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryAlbumBySlug } from '@/lib/sanity/lib/queries';
 import { Disc, Calendar, Clock, ExternalLink, Music } from 'lucide-react';
 

@@ -15,7 +15,7 @@ const DEFAULT_TAGS = [] as string[];
 // the webhook misses a publish (network hiccup, misconfiguration, etc.).
 const REVALIDATE_CEILING_SECONDS = 3600;
 
-export default async function sanityFetch<QueryResponse>({
+async function fetchISR<QueryResponse>({
   query,
   params = DEFAULT_PARAMS,
   tags = DEFAULT_TAGS,
@@ -43,4 +43,19 @@ export default async function sanityFetch<QueryResponse>({
     useCdn: true,
     next: { tags, revalidate: REVALIDATE_CEILING_SECONDS },
   });
+}
+
+export default fetchISR;
+
+// Named export matching the next-sanity/live sanityFetch API ({ data: T } shape).
+// Drop-in replacement for sanityFetch from lib/sanity/lib/live — pages get
+// ISR + CDN edge caching instead of SSE connections held open for every visitor.
+export async function sanityFetch<QueryResponse>(options: {
+  query: string;
+  params?: QueryParams;
+  tags?: string[];
+  perspective?: ClientPerspective;
+}): Promise<{ data: QueryResponse }> {
+  const data = await fetchISR<QueryResponse>(options);
+  return { data };
 }

@@ -16,7 +16,7 @@ import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 import resolveHref from '@/util/resolveHref';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
 import { buildLiveEventMetadata, getSanityOgImageUrl, getCanonicalUrl } from '@/util/metadata';

@@ -13,7 +13,7 @@ import { SidebarAd, AD_CONFIG } from '@/components/ads';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
 
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryHomepageArticles, queryLiveEvents, queryBreakingArticles, queryFieldReportArticles, queryTrendingIds } from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';

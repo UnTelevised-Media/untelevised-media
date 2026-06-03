@@ -8,7 +8,6 @@ import Header from '@/components/global/Header';
 import HeaderLogo from '@/components/global/HeaderLogo';
 import Footer from '@/components/global/Footer';
 import BookstoreNav from '@/components/bookstore/BookstoreNav';
-import { SanityLive } from '@/lib/sanity/lib/live';
 import { HURRIYA_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
 
 export const metadata: Metadata = {
@@ -114,7 +113,6 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
       {children}
 
       <Footer />
-      <SanityLive />
     </div>
   );
 }
