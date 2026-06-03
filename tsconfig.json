@@ -58,9 +58,8 @@
         "./*"
       ]
     },
-    "ignoreDeprecations": "5.0",
+    "ignoreDeprecations": "6.0",
     "rootDir": "./",
-    "baseUrl": ".",
     "outDir": "./out",
     "typeRoots": [
       "./node_modules/@types",
