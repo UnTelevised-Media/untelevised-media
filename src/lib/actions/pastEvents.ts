@@ -23,8 +23,8 @@ export async function loadMorePastEvents(
     });
 
     return {
-      events: events || [],
-      hasMore: (nextBatch?.length || 0) > 0,
+      events: (events as LiveEvent[]) || [],
+      hasMore: ((nextBatch as LiveEvent[])?.length || 0) > 0,
     };
   } catch (error) {
     console.error('Error loading more past events:', error);
@@ -127,9 +127,9 @@ export async function searchPastEvents(
     ]);
 
     return {
-      events: events || [],
-      hasMore: end < (total || 0),
-      total: total || 0,
+      events: (events as LiveEvent[]) || [],
+      hasMore: end < ((total as number) || 0),
+      total: (total as number) || 0,
     };
   } catch (error) {
     console.error('Error searching past events:', error);

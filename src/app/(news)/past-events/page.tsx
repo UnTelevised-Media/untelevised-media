@@ -31,7 +31,7 @@ async function getPastEvents(): Promise<LiveEvent[]> {
       query: queryPastEvents,
       tags: ['liveEvent'],
     });
-    return pastEvents || [];
+    return (pastEvents as LiveEvent[]) || [];
   } catch (error) {
     console.error('Error fetching past events:', error);
     return [];

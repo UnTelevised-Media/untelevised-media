@@ -275,7 +275,7 @@ async function getPoliciesList(): Promise<PolicyQueryResult[]> {
       query: queryPoliciesList,
       tags: ['policies'],
     });
-    return policies;
+    return policies as PolicyQueryResult[];
   } catch (error) {
     console.error('Failed to fetch policies:', error);
     return [];
@@ -290,7 +290,7 @@ async function getNewsCategories(): Promise<CategoryQueryResult[]> {
       query: queryCategories,
       tags: ['category'],
     });
-    return categories;
+    return categories as CategoryQueryResult[];
   } catch (error) {
     console.error('Failed to fetch categories:', error);
     return [];

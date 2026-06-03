@@ -3,7 +3,7 @@ import urlForImage from '@/util/urlForImage';
 
 const BASE_URL = 'https://www.untelevised.media';
 
-interface RSSArticle {
+export interface RSSArticle {
   _id: string;
   title: string;
   slug: string;
@@ -21,7 +21,7 @@ interface RSSArticle {
 // !   - URL path: '/live-event/' → '/breaking/'
 // !   - Category label: 'Live Coverage' → 'Breaking News'
 // !   - Sanity _type filter: 'liveEvent' → 'breaking'
-interface RSSLiveEvent {
+export interface RSSLiveEvent {
   _id: string;
   title: string;
   slug: string;

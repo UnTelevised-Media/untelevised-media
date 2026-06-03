@@ -127,6 +127,12 @@ interface Author extends Base {
   sameAs?: string[];
   expertise?: string[];
   credentials?: string[];
+  isLiteraryAuthor?: boolean;
+  isActive?: boolean;
+  location?: string;
+  tipStripeProductId?: string;
+  tipAmount?: number;
+  books?: any[];
 }
 
 interface Image {

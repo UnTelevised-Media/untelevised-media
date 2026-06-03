@@ -315,7 +315,7 @@ async function getCategoryData(slug: string): Promise<{
       query: categoryQuery,
       params: { slug },
       tags: ['timelineCategory'],
-    });
+    }) as { data: TimelineCategory | null };
 
     if (!category) {
       return { category: null, events: [], timelines: [] };
@@ -327,12 +327,12 @@ async function getCategoryData(slug: string): Promise<{
         query: queryTimelineEventsByCategory,
         params: { categoryId: category._id },
         tags: ['timelineEvent'],
-      }),
+      }) as Promise<{ data: TimelineEvent[] }>,
       sanityFetch({
         query: queryTimelinesByCategory,
         params: { categoryId: category._id },
         tags: ['timeline'],
-      }),
+      }) as Promise<{ data: Timeline[] }>,
     ]);
 
     return { category, events, timelines };

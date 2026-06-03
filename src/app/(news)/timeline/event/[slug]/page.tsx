@@ -400,7 +400,7 @@ async function getTimelineEventBySlug(slug: string): Promise<TimelineEvent | nul
       params: { slug },
       tags: ['timelineEvent'],
     });
-    return event;
+    return event as TimelineEvent | null;
   } catch (error) {
     console.error('Failed to fetch timeline event:', error);
     return null;

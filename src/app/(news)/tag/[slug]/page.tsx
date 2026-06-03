@@ -46,20 +46,22 @@ export default async function TagPage({ params }: Props) {
   const { slug } = await params;
 
   // Fetch all known tags to find the canonical raw tag string
-  const { data: allTags } = await sanityFetch({
+  const { data: _allTags } = await sanityFetch({
     query: queryAllTags,
     tags: ['article'],
   });
+  const allTags = (_allTags as string[]) ?? [];
 
-  const matchedTag = (allTags ?? []).find((tag: string) => tagToSlug(tag) === slug);
+  const matchedTag = allTags.find((tag: string) => tagToSlug(tag) === slug);
 
   if (!matchedTag) notFound();
 
-  const { data: articles } = await sanityFetch({
+  const { data: _articles } = await sanityFetch({
     query: queryArticlesByTag,
-    params: { tag: matchedTag },
+    params: { tag: matchedTag } as unknown as Record<string, string>,
     tags: ['article'],
   });
+  const articles = _articles as Article[];
 
   const label = slugToTagLabel(slug);
   const articleCount = articles?.length ?? 0;

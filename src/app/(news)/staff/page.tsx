@@ -127,7 +127,7 @@ async function getAllStaff(): Promise<Author[]> {
       query: queryAllAuthors,
       tags: ['author'],
     });
-    return staff;
+    return staff as Author[];
   } catch (error) {
     console.error('Failed to fetch author:', error);
     return [];

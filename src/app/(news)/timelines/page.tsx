@@ -81,26 +81,11 @@ async function getTimelineData(): Promise<{
       { data: categories },
       { data: allTimelines },
     ] = await Promise.all([
-      sanityFetch({
-        query: queryFeaturedTimelines,
-        tags: ['timeline'],
-      }),
-      sanityFetch({
-        query: queryRecentTimelineEvents,
-        tags: ['timelineEvent'],
-      }),
-      sanityFetch({
-        query: queryMilestoneEvents,
-        tags: ['timelineEvent'],
-      }),
-      sanityFetch({
-        query: queryTimelineCategories,
-        tags: ['timelineCategory'],
-      }),
-      sanityFetch({
-        query: queryAllTimelines,
-        tags: ['timeline'],
-      }),
+      sanityFetch({ query: queryFeaturedTimelines, tags: ['timeline'] }) as Promise<{ data: Timeline[] }>,
+      sanityFetch({ query: queryRecentTimelineEvents, tags: ['timelineEvent'] }) as Promise<{ data: TimelineEvent[] }>,
+      sanityFetch({ query: queryMilestoneEvents, tags: ['timelineEvent'] }) as Promise<{ data: TimelineEvent[] }>,
+      sanityFetch({ query: queryTimelineCategories, tags: ['timelineCategory'] }) as Promise<{ data: TimelineCategory[] }>,
+      sanityFetch({ query: queryAllTimelines, tags: ['timeline'] }) as Promise<{ data: Timeline[] }>,
     ]);
 
     // Calculate statistics

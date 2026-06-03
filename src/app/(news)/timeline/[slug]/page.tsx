@@ -348,7 +348,7 @@ async function getTimelineBySlug(slug: string): Promise<Timeline | null> {
       params: { slug },
       tags: ['timeline'],
     });
-    return timeline;
+    return timeline as Timeline | null;
   } catch (error) {
     console.error('Failed to fetch timeline:', error);
     return null;

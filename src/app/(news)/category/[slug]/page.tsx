@@ -46,7 +46,7 @@ interface MostReadArticle {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { data: category } = await sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] });
+  const { data: category } = await sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }) as { data: Category | null };
   if (!category) return { title: 'Category Not Found' };
   return buildCategoryMetadata(category, slug);
 }
@@ -54,8 +54,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
   const [{ data: category }, { data: mostRead }, articles] = await Promise.all([
-    sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }),
-    sanityFetch({ query: queryMostReadByCategory, params: { categorySlug: slug }, tags: ['article'] }),
+    sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }) as Promise<{ data: Category | null }>,
+    sanityFetch({ query: queryMostReadByCategory, params: { categorySlug: slug }, tags: ['article'] }) as Promise<{ data: MostReadArticle[] }>,
     getArticlesByCategory(slug),
   ]);
 

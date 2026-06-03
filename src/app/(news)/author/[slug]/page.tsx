@@ -209,7 +209,7 @@ export default async function Author({ params }: Props) {
                 {hasBooks && (
                   <div className='text-center'>
                     <div className='text-2xl font-bold text-untele'>
-                      {author.books.length}
+                      {author.books?.length ?? 0}
                     </div>
                     <div className='text-sm text-slate-600 dark:text-slate-400'>Books</div>
                   </div>
@@ -223,8 +223,8 @@ export default async function Author({ params }: Props) {
                     _id: author._id,
                     name: author.name,
                     slug: author.slug,
-                    tipStripeProductId: author.tipStripeProductId,
-                    tipAmount: author.tipAmount,
+                    tipStripeProductId: author.tipStripeProductId as string,
+                    tipAmount: author.tipAmount as number,
                   }}
                   bookId={author._id}
                 />
@@ -417,14 +417,14 @@ export default async function Author({ params }: Props) {
   );
 }
 
-const getAuthorBySlug = cache(async (slug: string) => {
+const getAuthorBySlug = cache(async (slug: string): Promise<Author | null> => {
   try {
     const { data: author } = await sanityFetch({
       query: queryAuthorBySlug,
       params: { slug },
       tags: ['author'],
     });
-    return author ?? null;
+    return author as Author | null;
   } catch (error) {
     console.error('Failed to fetch author:', error);
     return null;

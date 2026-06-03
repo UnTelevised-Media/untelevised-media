@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const { data: liveEvent } = await sanityFetch({ query: queryEventBySlug, params: { slug }, tags: ['liveEvent'] });
   if (!liveEvent) return { title: 'Breaking News Not Found' };
-  const base = buildLiveEventMetadata(liveEvent, slug);
+  const base = buildLiveEventMetadata(liveEvent as LiveEvent, slug);
   const canonicalUrl = getCanonicalUrl('breaking', slug);
   return {
     ...base,
@@ -270,7 +270,7 @@ async function getEventBySlug(slug: string): Promise<LiveEvent | null> {
       params: { slug },
       tags: ['liveEvent'],
     });
-    return post;
+    return post as LiveEvent | null;
   } catch (error) {
     console.error('Failed to fetch article:', error);
     return null;

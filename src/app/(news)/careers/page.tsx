@@ -62,7 +62,7 @@ export default async function CareersPage() {
       params: { today },
       tags: ['jobListing'],
     });
-    listings = data ?? [];
+    listings = (data as JobListing[]) ?? [];
   } catch {
     // Silently fall back to general application if fetch fails
   }

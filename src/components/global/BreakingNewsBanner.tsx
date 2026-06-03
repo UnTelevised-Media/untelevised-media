@@ -13,14 +13,18 @@ interface BannerData {
   expiresAt?: string;
 }
 
+interface SiteSettings {
+  breakingBanner?: BannerData;
+}
+
 export async function BreakingNewsBanner() {
-  let settings = null;
+  let settings: SiteSettings | null = null;
   try {
     const { data } = await sanityFetch({
       query: querySiteSettings,
       tags: ['siteSettings'],
     });
-    settings = data;
+    settings = data as SiteSettings;
   } catch (err) {
     console.error('[BreakingNewsBanner] sanityFetch failed:', err);
     return null;

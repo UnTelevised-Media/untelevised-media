@@ -118,7 +118,7 @@ async function getPolicyBySlug(slug: string): Promise<Policy | null> {
       params: { slug },
       tags: ['policies'],
     });
-    return policy;
+    return policy as Policy | null;
   } catch (error) {
     console.error('Failed to fetch policy:', error);
     return null;

@@ -496,7 +496,7 @@ const getArticleBySlug = cache(async (slug: string): Promise<Article | null> => 
       params: { slug },
       tags: ['article'],
     });
-    return article;
+    return article as Article | null;
   } catch (error) {
     console.error('Failed to fetch article:', error);
     return null;

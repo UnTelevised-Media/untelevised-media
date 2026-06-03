@@ -351,11 +351,11 @@ async function getFrontPageData(): Promise<{
     ]);
 
     return {
-      liveEvents: liveEvents ?? [],
-      articles: articles ?? [],
-      breakingArticles: breakingArticles ?? [],
-      fieldReports: fieldReports ?? [],
-      trendingIds: trendingIds ?? [],
+      liveEvents: (liveEvents as LiveEvent[]) ?? [],
+      articles: (articles as Article[]) ?? [],
+      breakingArticles: (breakingArticles as Article[]) ?? [],
+      fieldReports: (fieldReports as Article[]) ?? [],
+      trendingIds: (trendingIds as { _id: string }[]) ?? [],
     };
   } catch (error) {
     console.error('Failed to fetch front page data:', error);
