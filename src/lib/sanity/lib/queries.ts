@@ -148,9 +148,10 @@ export const queryAllArticles = groq`
 `;
 
 // Lightweight homepage query — omits body (Portable Text) to keep the
-// response well under Next.js's 2 MB cache limit. reading time is
-// estimated server-side from character count via pt::text().
-// Use this instead of queryAllArticles on the homepage.
+// response well under Next.js's 2 MB cache limit.
+// readingTimeMinutes is stored on the document by /api/compute-reading-time
+// (fires on every article publish). pt::text() fallback covers articles that
+// predate the field and have not been backfilled yet.
 export const queryHomepageArticles = groq`
   *[_type=='article' && defined(slug.current)] {
     _id,
@@ -167,14 +168,17 @@ export const queryHomepageArticles = groq`
     "correction": correction { type, summary },
     "author": author->{ name, slug },
     "categories": categories[]->{ _id, title, order },
-    "readingTimeMinutes": select(
-      defined(body) && length(pt::text(body)) > 0
-        => round(length(pt::text(body)) / 1000) + 1,
-      1
+    "readingTimeMinutes": coalesce(
+      readingTimeMinutes,
+      select(
+        defined(body) && length(pt::text(body)) > 0
+          => round(length(pt::text(body)) / 1000) + 1,
+        1
+      )
     ),
   }
   | order(_createdAt desc)
-  [0...150]
+  [0...30]
 `;
 
 // Lightweight — just IDs of the top trending articles for dedup filtering

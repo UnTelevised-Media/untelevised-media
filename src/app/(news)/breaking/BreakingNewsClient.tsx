@@ -8,8 +8,6 @@ import urlForImage from '@/util/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
 import resolveHref from '@/util/resolveHref';
-import sanityClient from '@/lib/sanity/lib/client';
-import { queryLiveEvents, queryBreakingArticles } from '@/lib/sanity/lib/queries';
 import { InFeedAd, AD_CONFIG } from '@/components/ads';
 
 interface LiveEvent {
@@ -37,38 +35,20 @@ interface Article {
   publishedAt?: string;
 }
 
-export default function BreakingNewsClient() {
-  const [liveEvents, setLiveEvents] = useState<LiveEvent[]>([]);
-  const [breakingArticles, setBreakingArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
+interface Props {
+  initialEvents: LiveEvent[];
+  initialArticles: Article[];
+}
+
+export default function BreakingNewsClient({ initialEvents, initialArticles }: Props) {
   const [viewMode, setViewMode] = useState<'bars' | 'cards'>('bars');
-
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [eventsData, articlesData] = await Promise.all([
-          getLiveEvents(),
-          getBreakingArticles(),
-        ]);
-        setLiveEvents(eventsData);
-        setBreakingArticles(articlesData);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const allItems = React.useMemo(() => {
     const items = [
-      ...liveEvents.map((event) => ({ ...event, type: 'liveEvent' as const })),
-      ...breakingArticles.map((article) => ({ ...article, type: 'article' as const })),
+      ...initialEvents.map((event) => ({ ...event, type: 'liveEvent' as const })),
+      ...initialArticles.map((article) => ({ ...article, type: 'article' as const })),
     ];
 
-    // Sort by date: for live events use eventDate, for articles use publishedAt
     items.sort((a, b) => {
       const dateA =
         a.type === 'liveEvent'
@@ -78,24 +58,11 @@ export default function BreakingNewsClient() {
         b.type === 'liveEvent'
           ? new Date(b.eventDate || b._createdAt)
           : new Date(b.publishedAt || b._createdAt);
-      return dateB.getTime() - dateA.getTime(); // Most recent first
+      return dateB.getTime() - dateA.getTime();
     });
 
     return items;
-  }, [liveEvents, breakingArticles]);
-
-  if (loading) {
-    return (
-      <div className='mx-auto max-w-6xl px-4 pb-28 pt-8'>
-        <div className='mb-8 h-8 w-48 animate-pulse rounded bg-slate-700/50'></div>
-        <div className='space-y-4'>
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className='h-32 animate-pulse rounded-lg bg-slate-700/30'></div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  }, [initialEvents, initialArticles]);
 
   return (
     <>
@@ -147,28 +114,6 @@ export default function BreakingNewsClient() {
       </article>
     </>
   );
-}
-
-// Call the Sanity Fetch Function for Live Events
-async function getLiveEvents(): Promise<LiveEvent[]> {
-  try {
-    const events = await sanityClient.fetch(queryLiveEvents);
-    return events || [];
-  } catch (error) {
-    console.error('Failed to fetch live events:', error);
-    return [];
-  }
-}
-
-// Call the Sanity Fetch Function for Breaking Articles
-async function getBreakingArticles(): Promise<Article[]> {
-  try {
-    const articles = await sanityClient.fetch(queryBreakingArticles);
-    return articles || [];
-  } catch (error) {
-    console.error('Failed to fetch breaking articles:', error);
-    return [];
-  }
 }
 
 // View Toggle Component

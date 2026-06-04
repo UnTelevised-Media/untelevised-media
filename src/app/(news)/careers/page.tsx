@@ -3,7 +3,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryActiveJobListings } from '@/lib/sanity/lib/queries';
 import { ContributorApplicationForm } from '@/components/careers/ContributorApplicationForm';
 import formatDate from '@/util/formatDate';

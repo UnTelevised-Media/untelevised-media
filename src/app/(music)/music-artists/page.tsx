@@ -6,7 +6,7 @@ import { BannerAd } from '@/components/ads';
 
 import urlForImage from '@/util/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryAllMusicArtists, queryFeaturedMusicArtists } from '@/lib/sanity/lib/queries';
 import { Users, Music, Star, MapPin } from 'lucide-react';
 import { DEFAULT_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata';

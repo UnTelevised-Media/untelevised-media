@@ -1,5 +1,5 @@
 // src/app/feed.xml/route.ts
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryRSSFeed, queryRSSLiveEvents } from '@/lib/sanity/lib/queries';
 import { generateRSSXML, type RSSArticle, type RSSLiveEvent } from '@/lib/rssUtils';
 

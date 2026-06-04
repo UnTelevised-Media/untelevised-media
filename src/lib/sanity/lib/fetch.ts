@@ -10,12 +10,14 @@ import { readToken } from './tokens';
 const DEFAULT_PARAMS = {} as QueryParams;
 const DEFAULT_TAGS = [] as string[];
 
-// ISR ceiling: Sanity webhook revalidateTag fires on publish events, but this
-// acts as a safety net so stale content never persists longer than 1 hour if
-// the webhook misses a publish (network hiccup, misconfiguration, etc.).
-const REVALIDATE_CEILING_SECONDS = 3600;
+// ISR ceiling: revalidateTag() via the Sanity webhook handles all content changes
+// instantly. This ceiling is purely a failsafe for missed webhooks — a page would
+// be caught and rebuilt within 24 hours even if a webhook failed completely.
+// Previously 3600 (1 h); raised to 86400 (24 h) to reduce time-based ISR writes
+// by 24× now that the webhook GROQ filter eliminates viewCount-only mutations.
+const REVALIDATE_CEILING_SECONDS = 86400;
 
-export default async function sanityFetch<QueryResponse>({
+async function fetchISR<QueryResponse>({
   query,
   params = DEFAULT_PARAMS,
   tags = DEFAULT_TAGS,
@@ -43,4 +45,19 @@ export default async function sanityFetch<QueryResponse>({
     useCdn: true,
     next: { tags, revalidate: REVALIDATE_CEILING_SECONDS },
   });
+}
+
+export default fetchISR;
+
+// Named export matching the next-sanity/live sanityFetch API ({ data: T } shape).
+// Drop-in replacement for sanityFetch from lib/sanity/lib/live — pages get
+// ISR + CDN edge caching instead of SSE connections held open for every visitor.
+export async function sanityFetch<QueryResponse>(options: {
+  query: string;
+  params?: QueryParams;
+  tags?: string[];
+  perspective?: ClientPerspective;
+}): Promise<{ data: QueryResponse }> {
+  const data = await fetchISR<QueryResponse>(options);
+  return { data };
 }

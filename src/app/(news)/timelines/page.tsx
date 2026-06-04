@@ -7,7 +7,7 @@ import TimelineOverview from '@/components/timeline/TimelineOverview';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { BannerAd } from '@/components/ads';
 
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import {
   queryFeaturedTimelines,
   queryRecentTimelineEvents,

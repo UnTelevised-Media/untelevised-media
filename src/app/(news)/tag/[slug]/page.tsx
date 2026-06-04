@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import ArticleCardLg from '@/components/cards/ArticleCardLg';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import resolveHref from '@/util/resolveHref';
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAllTags, queryArticlesByTag } from '@/lib/sanity/lib/queries';
 import { tagToSlug, slugToTagLabel } from '@/lib/tagUtils';
@@ -59,7 +59,7 @@ export default async function TagPage({ params }: Props) {
   const { data: _articles } = await sanityFetch({
     query: queryArticlesByTag,
     params: { tag: matchedTag } as unknown as Record<string, string>,
-    tags: ['article'],
+    tags: ['article', `tag:${slug}`],
   });
   const articles = _articles as Article[];
 

@@ -1,7 +1,7 @@
 // src/components/global/BreakingNewsBanner.tsx
 // Server component — fetches siteSettings and guards rendering
 
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { querySiteSettings } from '@/lib/sanity/lib/queries';
 import { BreakingNewsBannerClient } from './BreakingNewsBannerClient';
 

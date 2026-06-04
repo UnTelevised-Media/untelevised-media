@@ -1,7 +1,7 @@
 // src/components/global/ArticleCategories.tsx
 /* eslint-disable react/function-component-definition */
 
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryCategories } from '@/lib/sanity/lib/queries';
 import Link from 'next/link';
 import formatTitleForURL from '@/util/formatTitleForURL';

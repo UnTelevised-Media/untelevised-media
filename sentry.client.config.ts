@@ -2,6 +2,9 @@ import * as Sentry from '@sentry/nextjs';
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  // Route Sentry events through our Edge Function to bypass ad-blockers.
+  // The Edge Function at /monitoring proxies to sentry.io with near-zero latency.
+  tunnel: '/monitoring',
 
   sendDefaultPii: true,
   tracesSampleRate: process.env.NODE_ENV === 'development' ? 1.0 : 0.1,

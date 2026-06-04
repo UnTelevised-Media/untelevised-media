@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import AuthorLinks from '@/components/global/AuthorLinks';
 import resolveHref from '@/util/resolveHref';
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryAllAuthors } from '@/lib/sanity/lib/queries';
 
 export default async function StaffPage() {

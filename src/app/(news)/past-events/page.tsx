@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import PastEventsPage from '@/components/pages/PastEventsPage';
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryPastEvents } from '@/lib/sanity/lib/queries';
 
 export const metadata: Metadata = {

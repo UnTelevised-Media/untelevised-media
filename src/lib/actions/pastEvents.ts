@@ -1,6 +1,6 @@
 'use server';
 
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryPastEventsWithPagination } from '@/lib/sanity/lib/queries';
 
 export async function loadMorePastEvents(

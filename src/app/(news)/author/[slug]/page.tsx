@@ -16,7 +16,7 @@ import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
 import { buildAuthorMetadata } from '@/util/metadata';

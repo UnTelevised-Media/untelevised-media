@@ -20,7 +20,7 @@ import { tagToSlug } from '@/lib/tagUtils';
 import formatTitleForURL from '@/util/formatTitleForURL';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { sanityFetch } from '@/lib/sanity/lib/live';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata';
@@ -110,6 +110,7 @@ export default async function Article({ params }: Props) {
             src={urlForImage(article.mainImage)?.url() ?? ''}
             alt={article.mainImage?.alt ?? 'Article image'}
             fill
+            sizes='(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 100vw'
             className='object-cover'
             priority
             {...(urlForImage(article.mainImage)
@@ -494,7 +495,7 @@ const getArticleBySlug = cache(async (slug: string): Promise<Article | null> => 
     const { data: article } = await sanityFetch({
       query: queryArticleBySlug,
       params: { slug },
-      tags: ['article'],
+      tags: [`article:${slug}`],
     });
     return article as Article | null;
   } catch (error) {

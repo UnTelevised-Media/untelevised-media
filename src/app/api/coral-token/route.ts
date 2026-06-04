@@ -60,5 +60,12 @@ export async function GET() {
     .setExpirationTime('24h')
     .sign(encodedSecret);
 
-  return NextResponse.json({ token });
+  // Token is valid for 24 h; cache privately for 5 min so repeated article
+  // page loads in the same session don't each hit Clerk's API.
+  return NextResponse.json(
+    { token },
+    {
+      headers: { 'Cache-Control': 'private, max-age=300, stale-while-revalidate=600' },
+    }
+  );
 }
