@@ -59,7 +59,7 @@ export default async function TagPage({ params }: Props) {
   const { data: _articles } = await sanityFetch({
     query: queryArticlesByTag,
     params: { tag: matchedTag } as unknown as Record<string, string>,
-    tags: ['article'],
+    tags: ['article', `tag:${slug}`],
   });
   const articles = _articles as Article[];
 

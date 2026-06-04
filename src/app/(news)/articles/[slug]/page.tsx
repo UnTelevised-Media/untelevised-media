@@ -110,6 +110,7 @@ export default async function Article({ params }: Props) {
             src={urlForImage(article.mainImage)?.url() ?? ''}
             alt={article.mainImage?.alt ?? 'Article image'}
             fill
+            sizes='(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 100vw'
             className='object-cover'
             priority
             {...(urlForImage(article.mainImage)

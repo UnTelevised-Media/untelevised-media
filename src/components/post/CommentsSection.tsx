@@ -33,13 +33,19 @@ export default function CommentsSection({
   const [token, setToken] = useState<string | null>(null);
   const embedRef = useRef<{ remove: () => void } | null>(null);
 
-  // Fetch SSO token for signed-in users; abort on unmount or sign-out
+  // Fetch SSO token for signed-in users; cache in sessionStorage so navigating
+  // between articles in the same tab reuses the token without hitting Clerk again.
   useEffect(() => {
     if (!isSignedIn) return;
+    const cached = sessionStorage.getItem('coral_sso_token');
+    if (cached) { setToken(cached); return; }
     const controller = new AbortController();
     fetch('/api/coral-token', { signal: controller.signal })
       .then((r) => r.json())
-      .then((d: { token: string | null }) => setToken(d.token))
+      .then((d: { token: string | null }) => {
+        if (d.token) sessionStorage.setItem('coral_sso_token', d.token);
+        setToken(d.token);
+      })
       .catch((e: unknown) => {
         if (e instanceof Error && e.name !== 'AbortError') {
           // Token fetch failed — fall through to guest embed view

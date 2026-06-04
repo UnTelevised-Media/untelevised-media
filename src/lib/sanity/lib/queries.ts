@@ -174,7 +174,7 @@ export const queryHomepageArticles = groq`
     ),
   }
   | order(_createdAt desc)
-  [0...150]
+  [0...30]
 `;
 
 // Lightweight — just IDs of the top trending articles for dedup filtering

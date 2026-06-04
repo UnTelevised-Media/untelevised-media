@@ -55,7 +55,7 @@ export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
   const [{ data: category }, { data: mostRead }, articles] = await Promise.all([
     sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }) as Promise<{ data: Category | null }>,
-    sanityFetch({ query: queryMostReadByCategory, params: { categorySlug: slug }, tags: ['article'] }) as Promise<{ data: MostReadArticle[] }>,
+    sanityFetch({ query: queryMostReadByCategory, params: { categorySlug: slug }, tags: ['article', `category:${slug}`] }) as Promise<{ data: MostReadArticle[] }>,
     getArticlesByCategory(slug),
   ]);
 
@@ -296,7 +296,7 @@ async function getArticlesByCategory(slug: string): Promise<CategoryArticle[]> {
     const { data: articles } = await sanityFetch({
       query: queryArticleByCategory,
       params: { slug },
-      tags: ['article'],
+      tags: ['article', `category:${slug}`],
     });
     return (articles as CategoryArticle[]) ?? [];
   } catch (error) {

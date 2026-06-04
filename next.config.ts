@@ -49,6 +49,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   images: {
+    // Explicit breakpoints eliminate unused transform sizes.
+    // Defaults (8 device + 8 image = 16 sizes) generate far more variants than
+    // the site actually needs; these 9 cover all real use cases.
+    deviceSizes: [640, 828, 1080, 1200, 1920],
+    imageSizes: [64, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',
@@ -125,8 +130,9 @@ export default withSentryConfig(nextConfig, {
   // Upload a wider set of client files for better stack trace resolution
   widenClientFileUpload: true,
 
-  // Proxy Sentry requests through /monitoring to bypass ad-blockers
-  tunnelRoute: '/monitoring',
+  // Sentry tunnel is handled by a manual Edge Function at src/app/monitoring/route.ts
+  // (tunnelRoute auto-generates a serverless function; the Edge Function has a much
+  // higher free-tier invocation limit and near-zero cold-start latency)
 
   // Suppress non-CI build output
   silent: !process.env.CI,
