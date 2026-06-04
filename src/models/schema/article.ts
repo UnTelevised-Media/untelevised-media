@@ -302,6 +302,16 @@ export default defineType({
       validation: (Rule) => Rule.min(0).integer(),
       group: ['analytics', 'all'],
     }),
+    defineField({
+      name: 'readingTimeMinutes',
+      title: 'Reading Time (minutes)',
+      type: 'number',
+      readOnly: true,
+      description: 'Auto-computed from body length on publish. Do not edit manually.',
+      initialValue: 1,
+      validation: (Rule) => Rule.min(1).integer(),
+      group: ['analytics', 'all'],
+    }),
   ],
 
   preview: {
