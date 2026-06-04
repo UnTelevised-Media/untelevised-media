@@ -311,11 +311,11 @@ async function getCategoryData(slug: string): Promise<{
       }
     }`;
 
-    const { data: category } = await sanityFetch({
+    const { data: category } = (await sanityFetch({
       query: categoryQuery,
       params: { slug },
       tags: ['timelineCategory'],
-    }) as { data: TimelineCategory | null };
+    })) as { data: TimelineCategory | null };
 
     if (!category) {
       return { category: null, events: [], timelines: [] };
@@ -347,7 +347,9 @@ export async function generateStaticParams() {
   const queryTimelineCategoryStaticParams = groq`*[_type=='timelineCategory' && isActive == true] { slug }`;
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: TimelineCategory[] = await sanityClient.fetch(queryTimelineCategoryStaticParams);
-  const slugRoutes = slugs ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current) : [];
+  const slugRoutes = slugs
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    : [];
   return slugRoutes.map((slug) => ({
     slug,
   }));

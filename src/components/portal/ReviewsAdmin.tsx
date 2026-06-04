@@ -22,16 +22,29 @@ export interface PortalReview {
 }
 
 const STATUS_LABELS: Record<string, { label: string; className: string }> = {
-  pending:        { label: 'Pending',        className: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400' },
-  approved:       { label: 'Approved',       className: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' },
-  declined:       { label: 'Declined',       className: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' },
-  needs_revision: { label: 'Needs Revision', className: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400' },
+  pending: {
+    label: 'Pending',
+    className: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400',
+  },
+  approved: {
+    label: 'Approved',
+    className: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+  },
+  declined: {
+    label: 'Declined',
+    className: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
+  },
+  needs_revision: {
+    label: 'Needs Revision',
+    className: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+  },
 };
 
 function Stars({ rating }: { rating: number }) {
   return (
-    <span className='text-amber-400 text-sm'>
-      {'★'.repeat(rating)}{'☆'.repeat(5 - rating)}
+    <span className='text-sm text-amber-400'>
+      {'★'.repeat(rating)}
+      {'☆'.repeat(5 - rating)}
     </span>
   );
 }
@@ -39,7 +52,9 @@ function Stars({ rating }: { rating: number }) {
 function StatusBadge({ status }: { status: string | null }) {
   const s = STATUS_LABELS[status ?? 'pending'] ?? STATUS_LABELS.pending;
   return (
-    <span className={`inline-block px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${s.className}`}>
+    <span
+      className={`inline-block px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${s.className}`}
+    >
       {s.label}
     </span>
   );
@@ -116,21 +131,27 @@ function ReviewRow({ review }: { review: PortalReview }) {
   function handleApprove() {
     startTransition(async () => {
       const result = await approveReview(review._id);
-      if (result.ok) { toast.success('Review approved.'); router.refresh(); }
-      else toast.error(result.error ?? 'Failed');
+      if (result.ok) {
+        toast.success('Review approved.');
+        router.refresh();
+      } else toast.error(result.error ?? 'Failed');
     });
   }
 
   function handleDecline() {
     startTransition(async () => {
       const result = await declineReview(review._id);
-      if (result.ok) { toast.success('Review declined.'); router.refresh(); }
-      else toast.error(result.error ?? 'Failed');
+      if (result.ok) {
+        toast.success('Review declined.');
+        router.refresh();
+      } else toast.error(result.error ?? 'Failed');
     });
   }
 
   const date = new Date(review.submittedAt).toLocaleDateString('en-US', {
-    year: 'numeric', month: 'short', day: 'numeric',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
   });
 
   return (
@@ -156,7 +177,9 @@ function ReviewRow({ review }: { review: PortalReview }) {
         </td>
         {/* Reviewer */}
         <td className='px-4 py-3'>
-          <p className='text-xs font-bold text-slate-900 dark:text-slate-100'>{review.reviewerName}</p>
+          <p className='text-xs font-bold text-slate-900 dark:text-slate-100'>
+            {review.reviewerName}
+          </p>
           {review.reviewerLocation && (
             <p className='text-[10px] text-slate-500'>{review.reviewerLocation}</p>
           )}
@@ -172,7 +195,9 @@ function ReviewRow({ review }: { review: PortalReview }) {
         </td>
         {/* Body */}
         <td className='max-w-xs px-4 py-3'>
-          <p className={`text-xs text-slate-700 dark:text-slate-300 ${!expanded ? 'line-clamp-3' : ''}`}>
+          <p
+            className={`text-xs text-slate-700 dark:text-slate-300 ${!expanded ? 'line-clamp-3' : ''}`}
+          >
             {review.body}
           </p>
           {review.body.length > 120 && (
@@ -239,9 +264,14 @@ const STATUS_ORDER = ['pending', 'needs_revision', 'approved', 'declined'];
 export default function ReviewsAdmin({ reviews }: { reviews: PortalReview[] }) {
   const [filter, setFilter] = useState<string>('all');
 
-  const filtered = filter === 'all'
-    ? [...reviews].sort((a, b) => STATUS_ORDER.indexOf(a.status ?? 'pending') - STATUS_ORDER.indexOf(b.status ?? 'pending'))
-    : reviews.filter((r) => (r.status ?? 'pending') === filter);
+  const filtered =
+    filter === 'all'
+      ? [...reviews].sort(
+          (a, b) =>
+            STATUS_ORDER.indexOf(a.status ?? 'pending') -
+            STATUS_ORDER.indexOf(b.status ?? 'pending')
+        )
+      : reviews.filter((r) => (r.status ?? 'pending') === filter);
 
   const counts = {
     all: reviews.length,
@@ -255,13 +285,15 @@ export default function ReviewsAdmin({ reviews }: { reviews: PortalReview[] }) {
     <div>
       {/* Filter tabs */}
       <div className='mb-6 flex flex-wrap gap-2'>
-        {([
-          ['all', 'All'],
-          ['pending', 'Pending'],
-          ['needs_revision', 'Needs Revision'],
-          ['approved', 'Approved'],
-          ['declined', 'Declined'],
-        ] as [string, string][]).map(([value, label]) => (
+        {(
+          [
+            ['all', 'All'],
+            ['pending', 'Pending'],
+            ['needs_revision', 'Needs Revision'],
+            ['approved', 'Approved'],
+            ['declined', 'Declined'],
+          ] as [string, string][]
+        ).map(([value, label]) => (
           <button
             key={value}
             onClick={() => setFilter(value)}
@@ -285,11 +317,16 @@ export default function ReviewsAdmin({ reviews }: { reviews: PortalReview[] }) {
           <table className='w-full border-collapse text-sm'>
             <thead>
               <tr className='border-b-2 border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-900'>
-                {['Book', 'Reviewer', 'Rating', 'Review', 'Status', 'Submitted', 'Actions'].map((h) => (
-                  <th key={h} className='px-4 py-3 text-left text-[10px] font-black uppercase tracking-widest text-slate-500'>
-                    {h}
-                  </th>
-                ))}
+                {['Book', 'Reviewer', 'Rating', 'Review', 'Status', 'Submitted', 'Actions'].map(
+                  (h) => (
+                    <th
+                      key={h}
+                      className='px-4 py-3 text-left text-[10px] font-black uppercase tracking-widest text-slate-500'
+                    >
+                      {h}
+                    </th>
+                  )
+                )}
               </tr>
             </thead>
             <tbody>

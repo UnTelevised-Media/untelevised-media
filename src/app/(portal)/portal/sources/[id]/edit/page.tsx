@@ -20,18 +20,14 @@ interface SourceDoc {
   isAnonymous?: boolean;
 }
 
-export default async function EditSourcePage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function EditSourcePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
 
   const source = await portalFetch<SourceDoc | null>(
     `*[_type == "source" && _id == $id][0]{ _id, label, type, url, description, isAnonymous }`,
-    { id },
+    { id }
   );
 
   if (!source) notFound();
@@ -43,7 +39,10 @@ export default async function EditSourcePage({
         <h1 className='mb-6 text-xl font-black uppercase tracking-widest text-slate-900 dark:text-slate-100'>
           Edit Source
         </h1>
-        <SourceForm sourceId={id} initialData={source as Parameters<typeof SourceForm>[0]['initialData']} />
+        <SourceForm
+          sourceId={id}
+          initialData={source as Parameters<typeof SourceForm>[0]['initialData']}
+        />
       </main>
     </div>
   );

@@ -18,7 +18,8 @@ import {
 
 export const metadata: Metadata = {
   title: 'Interactive Timelines - UnTelevised Media',
-  description: 'Explore comprehensive timelines of breaking news, investigations, and major events. Navigate through time to understand how stories unfold and connect.',
+  description:
+    'Explore comprehensive timelines of breaking news, investigations, and major events. Navigate through time to understand how stories unfold and connect.',
   keywords: 'timeline, breaking news, investigations, events, chronology, news timeline',
 };
 
@@ -26,13 +27,13 @@ export default async function TimelinesPage() {
   const timelineData = await getTimelineData();
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <div className="container mx-auto px-4 py-8">
+    <div className='min-h-screen bg-white dark:bg-black'>
+      <div className='container mx-auto px-4 py-8'>
         {/* Banner Ad */}
-        <div className="mb-8">
+        <div className='mb-8'>
           <BannerAd
-            slot="timeline-header"
-            className="rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50"
+            slot='timeline-header'
+            className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
           />
         </div>
 
@@ -48,10 +49,10 @@ export default async function TimelinesPage() {
         </Suspense>
 
         {/* Bottom Banner Ad */}
-        <div className="mt-12">
+        <div className='mt-12'>
           <BannerAd
-            slot="timeline-footer"
-            className="rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50"
+            slot='timeline-footer'
+            className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
           />
         </div>
       </div>
@@ -81,11 +82,21 @@ async function getTimelineData(): Promise<{
       { data: categories },
       { data: allTimelines },
     ] = await Promise.all([
-      sanityFetch({ query: queryFeaturedTimelines, tags: ['timeline'] }) as Promise<{ data: Timeline[] }>,
-      sanityFetch({ query: queryRecentTimelineEvents, tags: ['timelineEvent'] }) as Promise<{ data: TimelineEvent[] }>,
-      sanityFetch({ query: queryMilestoneEvents, tags: ['timelineEvent'] }) as Promise<{ data: TimelineEvent[] }>,
-      sanityFetch({ query: queryTimelineCategories, tags: ['timelineCategory'] }) as Promise<{ data: TimelineCategory[] }>,
-      sanityFetch({ query: queryAllTimelines, tags: ['timeline'] }) as Promise<{ data: Timeline[] }>,
+      sanityFetch({ query: queryFeaturedTimelines, tags: ['timeline'] }) as Promise<{
+        data: Timeline[];
+      }>,
+      sanityFetch({ query: queryRecentTimelineEvents, tags: ['timelineEvent'] }) as Promise<{
+        data: TimelineEvent[];
+      }>,
+      sanityFetch({ query: queryMilestoneEvents, tags: ['timelineEvent'] }) as Promise<{
+        data: TimelineEvent[];
+      }>,
+      sanityFetch({ query: queryTimelineCategories, tags: ['timelineCategory'] }) as Promise<{
+        data: TimelineCategory[];
+      }>,
+      sanityFetch({ query: queryAllTimelines, tags: ['timeline'] }) as Promise<{
+        data: Timeline[];
+      }>,
     ]);
 
     // Calculate statistics
@@ -93,8 +104,9 @@ async function getTimelineData(): Promise<{
       totalTimelines: allTimelines.length,
       totalEvents: recentEvents.length, // This would need a separate query for accurate count
       totalMilestones: milestoneEvents.length,
-      activeTimelines: allTimelines.filter((timeline: Timeline) =>
-        !timeline.timeRange?.endDate || new Date(timeline.timeRange.endDate) > new Date()
+      activeTimelines: allTimelines.filter(
+        (timeline: Timeline) =>
+          !timeline.timeRange?.endDate || new Date(timeline.timeRange.endDate) > new Date()
       ).length,
     };
 

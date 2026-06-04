@@ -21,13 +21,25 @@ export interface OrderWithItems extends Order {
   shipping_address?: ShippingAddress | null;
   items: Pick<
     OrderItem,
-    'book_title' | 'format_label' | 'sanity_format_type' | 'quantity' | 'is_digital' | 'unit_price_cents'
+    | 'book_title'
+    | 'format_label'
+    | 'sanity_format_type'
+    | 'quantity'
+    | 'is_digital'
+    | 'unit_price_cents'
   >[];
 }
 
 const STATUS_FLOW_PHYSICAL = ['paid', 'processing', 'shipped', 'delivered'] as const;
 const ALL_STATUSES: OrderStatus[] = [
-  'pending', 'paid', 'processing', 'fulfilled', 'shipped', 'delivered', 'refunded', 'cancelled',
+  'pending',
+  'paid',
+  'processing',
+  'fulfilled',
+  'shipped',
+  'delivered',
+  'refunded',
+  'cancelled',
 ];
 
 function statusColor(s: string) {
@@ -53,11 +65,14 @@ interface Props {
   orders: OrderWithItems[];
   role: PortalRole;
   /** Per-order author earnings map — passed for author role to show "Your Cut" in expanded panel */
-  earningsByOrderId?: Record<string, {
-    author_cents: number;
-    stripe_fee_cents: number;
-    net_after_stripe_cents: number;
-  }>;
+  earningsByOrderId?: Record<
+    string,
+    {
+      author_cents: number;
+      stripe_fee_cents: number;
+      net_after_stripe_cents: number;
+    }
+  >;
 }
 
 export default function OrdersTable({ orders, role, earningsByOrderId }: Props) {
@@ -72,7 +87,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
   const [statusFilter, setStatusFilter] = useState<string>('all');
   // Sales default: start on needs-shipping — their primary workflow
   const [quickFilter, setQuickFilter] = useState<QuickFilter>(
-    role === 'sales' ? 'needs_shipping' : 'all',
+    role === 'sales' ? 'needs_shipping' : 'all'
   );
   const [sortKey, setSortKey] = useState<SortKey>('date_desc');
   const [page, setPage] = useState(0);
@@ -90,13 +105,11 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
     (o) =>
       ['paid', 'processing'].includes(o.status) &&
       !o.fulfilled_at &&
-      o.items.some((i) => !i.is_digital && i.sanity_format_type !== 'tip'),
+      o.items.some((i) => !i.is_digital && i.sanity_format_type !== 'tip')
   ).length;
-  const digitalCount = localOrders.filter((o) =>
-    o.items.some((i) => i.is_digital),
-  ).length;
+  const digitalCount = localOrders.filter((o) => o.items.some((i) => i.is_digital)).length;
   const tipsCount = localOrders.filter((o) =>
-    o.items.some((i) => i.sanity_format_type === 'tip'),
+    o.items.some((i) => i.sanity_format_type === 'tip')
   ).length;
   const refundedCount = localOrders.filter((o) => o.status === 'refunded').length;
 
@@ -145,7 +158,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
     orderId: string,
     newStatus: OrderStatus,
     trackingNumber?: string,
-    trackingUrl?: string,
+    trackingUrl?: string
   ) {
     setUpdating(orderId);
     setShowTrackingFor(null);
@@ -172,7 +185,9 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                   ...o,
                   status: newStatus,
                   fulfilled_at:
-                    newStatus === 'fulfilled' || newStatus === 'delivered' || newStatus === 'shipped'
+                    newStatus === 'fulfilled' ||
+                    newStatus === 'delivered' ||
+                    newStatus === 'shipped'
                       ? new Date().toISOString()
                       : o.fulfilled_at,
                   ...(newStatus === 'shipped'
@@ -183,8 +198,8 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                       }
                     : {}),
                 }
-              : o,
-          ),
+              : o
+          )
         );
         setTrackingInputs((prev) => {
           const n = { ...prev };
@@ -228,27 +243,39 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
           label='All Orders'
           count={localOrders.length}
           active={quickFilter === 'all'}
-          onClick={() => { setQuickFilter('all'); resetPage(); }}
+          onClick={() => {
+            setQuickFilter('all');
+            resetPage();
+          }}
         />
         <QuickPill
           label='Needs Shipping'
           count={needsShippingCount}
           active={quickFilter === 'needs_shipping'}
           urgent={needsShippingCount > 0}
-          onClick={() => { setQuickFilter('needs_shipping'); resetPage(); }}
+          onClick={() => {
+            setQuickFilter('needs_shipping');
+            resetPage();
+          }}
         />
         <QuickPill
           label='Digital'
           count={digitalCount}
           active={quickFilter === 'digital'}
-          onClick={() => { setQuickFilter('digital'); resetPage(); }}
+          onClick={() => {
+            setQuickFilter('digital');
+            resetPage();
+          }}
         />
         {tipsCount > 0 && (
           <QuickPill
             label='Tips'
             count={tipsCount}
             active={quickFilter === 'tips'}
-            onClick={() => { setQuickFilter('tips'); resetPage(); }}
+            onClick={() => {
+              setQuickFilter('tips');
+              resetPage();
+            }}
           />
         )}
         {refundedCount > 0 && (
@@ -256,7 +283,10 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
             label='Refunded'
             count={refundedCount}
             active={quickFilter === 'refunded'}
-            onClick={() => { setQuickFilter('refunded'); resetPage(); }}
+            onClick={() => {
+              setQuickFilter('refunded');
+              resetPage();
+            }}
           />
         )}
       </div>
@@ -267,24 +297,35 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
           type='search'
           placeholder='Search by order #, name, email, or book title…'
           value={search}
-          onChange={(e) => { setSearch(e.target.value); resetPage(); }}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            resetPage();
+          }}
           className='flex-1 border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-untele focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100'
         />
         {quickFilter === 'all' && (
           <select
             value={statusFilter}
-            onChange={(e) => { setStatusFilter(e.target.value); resetPage(); }}
+            onChange={(e) => {
+              setStatusFilter(e.target.value);
+              resetPage();
+            }}
             className='border border-slate-200 bg-white px-3 py-2 text-xs font-bold uppercase tracking-widest text-slate-700 focus:border-untele focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
           >
             <option value='all'>All Statuses</option>
             {ALL_STATUSES.map((s) => (
-              <option key={s} value={s}>{s}</option>
+              <option key={s} value={s}>
+                {s}
+              </option>
             ))}
           </select>
         )}
         <select
           value={sortKey}
-          onChange={(e) => { setSortKey(e.target.value as SortKey); resetPage(); }}
+          onChange={(e) => {
+            setSortKey(e.target.value as SortKey);
+            resetPage();
+          }}
           className='border border-slate-200 bg-white px-3 py-2 text-xs font-bold uppercase tracking-widest text-slate-700 focus:border-untele focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
         >
           <option value='date_desc'>Newest First</option>
@@ -320,52 +361,44 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
               <tbody>
                 {paginated.map((order) => {
                   const physicalItems = order.items.filter(
-                    (i) => !i.is_digital && i.sanity_format_type !== 'tip',
+                    (i) => !i.is_digital && i.sanity_format_type !== 'tip'
                   );
                   const digitalItems = order.items.filter((i) => i.is_digital);
                   const tipItems = order.items.filter((i) => i.sanity_format_type === 'tip');
                   const hasPhysical = physicalItems.length > 0;
                   const hasDigital = digitalItems.length > 0;
                   const hasTip = tipItems.length > 0;
-                  const isTipOnly =
-                    hasTip && !hasPhysical && !hasDigital;
+                  const isTipOnly = hasTip && !hasPhysical && !hasDigital;
 
                   const typeLabel = isTipOnly
                     ? 'Tip Only'
-                    : [
-                        hasPhysical && 'Physical',
-                        hasDigital && 'Digital',
-                        hasTip && '+ Tip',
-                      ]
+                    : [hasPhysical && 'Physical', hasDigital && 'Digital', hasTip && '+ Tip']
                         .filter(Boolean)
                         .join(' ');
 
                   const isAllNonPhysical = !hasPhysical;
                   const isUpdating = updating === order.id;
                   const isTerminal = ['refunded', 'cancelled', 'delivered', 'fulfilled'].includes(
-                    order.status,
+                    order.status
                   );
                   // Digital/tip-only orders stuck in paid/processing can be manually fulfilled by admin
                   const canMarkFulfilled =
-                    canRefund &&
-                    isAllNonPhysical &&
-                    ['paid', 'processing'].includes(order.status);
+                    canRefund && isAllNonPhysical && ['paid', 'processing'].includes(order.status);
 
                   const physIdx = STATUS_FLOW_PHYSICAL.indexOf(
-                    order.status as (typeof STATUS_FLOW_PHYSICAL)[number],
+                    order.status as (typeof STATUS_FLOW_PHYSICAL)[number]
                   );
                   const nextPhysStatus =
                     physIdx !== -1 && physIdx < STATUS_FLOW_PHYSICAL.length - 1
                       ? STATUS_FLOW_PHYSICAL[physIdx + 1]
                       : null;
 
-                  const canCancelThis =
-                    canCancel && ['paid', 'processing'].includes(order.status);
+                  const canCancelThis = canCancel && ['paid', 'processing'].includes(order.status);
 
                   // Relative date for recent orders
                   const orderDate = new Date(order.created_at);
                   const daysDiff = Math.floor(
-                    (Date.now() - orderDate.getTime()) / (1000 * 60 * 60 * 24),
+                    (Date.now() - orderDate.getTime()) / (1000 * 60 * 60 * 24)
                   );
                   const dateLabel =
                     daysDiff === 0
@@ -379,12 +412,10 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                   return (
                     <React.Fragment key={order.id}>
                       <tr className='border-b border-slate-100 dark:border-slate-800'>
-                        <td className='pl-3 pr-1 py-3'>
+                        <td className='py-3 pl-3 pr-1'>
                           <button
                             onClick={() =>
-                              setExpandedOrderId(
-                                expandedOrderId === order.id ? null : order.id,
-                              )
+                              setExpandedOrderId(expandedOrderId === order.id ? null : order.id)
                             }
                             className='text-[10px] font-black text-slate-400 hover:text-untele'
                             aria-label='Toggle details'
@@ -406,8 +437,13 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                         <td className='px-4 py-3'>
                           <ul className='space-y-0.5'>
                             {order.items.map((item, idx) => (
-                              <li key={idx} className='flex items-baseline gap-1 text-[10px] text-slate-600 dark:text-slate-400'>
-                                <span>{item.book_title} ×{item.quantity}</span>
+                              <li
+                                key={idx}
+                                className='flex items-baseline gap-1 text-[10px] text-slate-600 dark:text-slate-400'
+                              >
+                                <span>
+                                  {item.book_title} ×{item.quantity}
+                                </span>
                                 {item.sanity_format_type === 'tip' && (
                                   <span className='inline-block bg-green-100 px-1 text-[9px] font-black uppercase text-green-700 dark:bg-green-900 dark:text-green-300'>
                                     Tip
@@ -431,11 +467,13 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                 ? order.total_cents
                                 : order.items.reduce(
                                     (s, i) => s + i.unit_price_cents * i.quantity,
-                                    0,
+                                    0
                                   );
-                            return displayCents > 0
-                              ? `$${(displayCents / 100).toFixed(2)}`
-                              : <span className='text-slate-300 dark:text-slate-600'>$0.00</span>;
+                            return displayCents > 0 ? (
+                              `$${(displayCents / 100).toFixed(2)}`
+                            ) : (
+                              <span className='text-slate-300 dark:text-slate-600'>$0.00</span>
+                            );
                           })()}
                         </td>
                         <td className='px-4 py-3 text-[10px] text-slate-500'>{typeLabel}</td>
@@ -457,9 +495,9 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                         <td className='px-4 py-3'>
                           <div className='flex flex-col gap-1.5'>
                             {/* Advance physical status */}
-                            {hasPhysical && nextPhysStatus && (
-                              nextPhysStatus === 'shipped' &&
-                              showTrackingFor === order.id ? (
+                            {hasPhysical &&
+                              nextPhysStatus &&
+                              (nextPhysStatus === 'shipped' && showTrackingFor === order.id ? (
                                 <div className='flex flex-col gap-1.5'>
                                   <input
                                     type='text'
@@ -492,7 +530,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                           order.id,
                                           'shipped',
                                           trackingInputs[order.id],
-                                          trackingUrlInputs[order.id],
+                                          trackingUrlInputs[order.id]
                                         )
                                       }
                                       disabled={isUpdating}
@@ -520,8 +558,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                 >
                                   {isUpdating ? '…' : `Mark ${nextPhysStatus} →`}
                                 </button>
-                              )
-                            )}
+                              ))}
                             {/* Mark Fulfilled — admin only, digital/tip-only stuck in paid/processing */}
                             {canMarkFulfilled && (
                               <button
@@ -538,7 +575,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                 onClick={() => {
                                   if (
                                     confirm(
-                                      `Cancel order ${order.order_number}? This cannot be undone.`,
+                                      `Cancel order ${order.order_number}? This cannot be undone.`
                                     )
                                   ) {
                                     updateStatus(order.id, 'cancelled');
@@ -566,7 +603,9 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                             )}
                             {/* No actions available */}
                             {!hasPhysical && !canCancelThis && !canRefund && isTerminal && (
-                              <span className='text-[10px] text-slate-300 dark:text-slate-600'>—</span>
+                              <span className='text-[10px] text-slate-300 dark:text-slate-600'>
+                                —
+                              </span>
                             )}
                           </div>
                         </td>
@@ -587,7 +626,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                     // When order-level totals are 0, derive from item prices
                                     const itemSum = order.items.reduce(
                                       (s, i) => s + i.unit_price_cents * i.quantity,
-                                      0,
+                                      0
                                     );
                                     const subtotal =
                                       order.subtotal_cents > 0 ? order.subtotal_cents : itemSum;
@@ -597,12 +636,21 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                         : subtotal + order.tax_cents + order.shipping_cents;
                                     return (
                                       <>
-                                        <Row label='Subtotal' value={`$${(subtotal / 100).toFixed(2)}`} />
+                                        <Row
+                                          label='Subtotal'
+                                          value={`$${(subtotal / 100).toFixed(2)}`}
+                                        />
                                         {order.tax_cents > 0 && (
-                                          <Row label='Tax' value={`$${(order.tax_cents / 100).toFixed(2)}`} />
+                                          <Row
+                                            label='Tax'
+                                            value={`$${(order.tax_cents / 100).toFixed(2)}`}
+                                          />
                                         )}
                                         {order.shipping_cents > 0 && (
-                                          <Row label='Shipping' value={`$${(order.shipping_cents / 100).toFixed(2)}`} />
+                                          <Row
+                                            label='Shipping'
+                                            value={`$${(order.shipping_cents / 100).toFixed(2)}`}
+                                          />
                                         )}
                                         <div className='flex justify-between border-t border-slate-200 pt-1 font-bold dark:border-slate-700'>
                                           <span>Total</span>
@@ -644,7 +692,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                           ? order.total_cents
                                           : order.items.reduce(
                                               (s, i) => s + i.unit_price_cents * i.quantity,
-                                              0,
+                                              0
                                             );
                                       const net = total - order.stripe_fee_cents;
                                       return (
@@ -672,47 +720,48 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                               )}
 
                               {/* Your Earnings — author role */}
-                              {showAuthorCut && (() => {
-                                const earning = earningsByOrderId?.[order.id];
-                                if (!earning) return null;
-                                return (
-                                  <div>
-                                    <p className='mb-2 text-[10px] font-black uppercase tracking-widest text-slate-400'>
-                                      Your Earnings
-                                    </p>
-                                    <div className='space-y-1 text-xs text-slate-700 dark:text-slate-300'>
-                                      {(() => {
-                                        const gross =
-                                          order.total_cents > 0
-                                            ? order.total_cents
-                                            : order.items.reduce(
-                                                (s, i) => s + i.unit_price_cents * i.quantity,
-                                                0,
-                                              );
-                                        return (
-                                          <>
-                                            <Row
-                                              label='Customer Paid'
-                                              value={`$${(gross / 100).toFixed(2)}`}
-                                            />
-                                            <Row
-                                              label='Stripe Fee'
-                                              value={`− $${(earning.stripe_fee_cents / 100).toFixed(2)}`}
-                                              valueClass='text-red-500'
-                                            />
-                                            <div className='flex justify-between border-t border-slate-200 pt-1 font-bold dark:border-slate-700'>
-                                              <span>Your Cut</span>
-                                              <span className='text-green-600 dark:text-green-400'>
-                                                ${(earning.author_cents / 100).toFixed(2)}
-                                              </span>
-                                            </div>
-                                          </>
-                                        );
-                                      })()}
+                              {showAuthorCut &&
+                                (() => {
+                                  const earning = earningsByOrderId?.[order.id];
+                                  if (!earning) return null;
+                                  return (
+                                    <div>
+                                      <p className='mb-2 text-[10px] font-black uppercase tracking-widest text-slate-400'>
+                                        Your Earnings
+                                      </p>
+                                      <div className='space-y-1 text-xs text-slate-700 dark:text-slate-300'>
+                                        {(() => {
+                                          const gross =
+                                            order.total_cents > 0
+                                              ? order.total_cents
+                                              : order.items.reduce(
+                                                  (s, i) => s + i.unit_price_cents * i.quantity,
+                                                  0
+                                                );
+                                          return (
+                                            <>
+                                              <Row
+                                                label='Customer Paid'
+                                                value={`$${(gross / 100).toFixed(2)}`}
+                                              />
+                                              <Row
+                                                label='Stripe Fee'
+                                                value={`− $${(earning.stripe_fee_cents / 100).toFixed(2)}`}
+                                                valueClass='text-red-500'
+                                              />
+                                              <div className='flex justify-between border-t border-slate-200 pt-1 font-bold dark:border-slate-700'>
+                                                <span>Your Cut</span>
+                                                <span className='text-green-600 dark:text-green-400'>
+                                                  ${(earning.author_cents / 100).toFixed(2)}
+                                                </span>
+                                              </div>
+                                            </>
+                                          );
+                                        })()}
+                                      </div>
                                     </div>
-                                  </div>
-                                );
-                              })()}
+                                  );
+                                })()}
 
                               {/* Item breakdown */}
                               <div>
@@ -721,7 +770,10 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                 </p>
                                 <ul className='space-y-1.5'>
                                   {order.items.map((item, idx) => (
-                                    <li key={idx} className='text-xs text-slate-700 dark:text-slate-300'>
+                                    <li
+                                      key={idx}
+                                      className='text-xs text-slate-700 dark:text-slate-300'
+                                    >
                                       <span className='font-bold'>{item.book_title}</span>
                                       <span className='ml-1 text-slate-400'>
                                         — {item.format_label || item.sanity_format_type} ×{' '}
@@ -764,8 +816,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                       <p>{order.shipping_address.line2}</p>
                                     )}
                                     <p>
-                                      {order.shipping_address.city},{' '}
-                                      {order.shipping_address.state}{' '}
+                                      {order.shipping_address.city}, {order.shipping_address.state}{' '}
                                       {order.shipping_address.postal_code}
                                     </p>
                                     <p>{order.shipping_address.country}</p>
@@ -778,7 +829,9 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                   </div>
                                 ) : (
                                   <p className='text-[10px] text-slate-400'>
-                                    {order.items.every((i) => i.is_digital || i.sanity_format_type === 'tip')
+                                    {order.items.every(
+                                      (i) => i.is_digital || i.sanity_format_type === 'tip'
+                                    )
                                       ? 'Digital / tip — no address'
                                       : 'No address on file'}
                                   </p>

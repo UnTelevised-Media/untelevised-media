@@ -86,7 +86,7 @@ export function ClaimedPitchCard({
 
       {/* Brief */}
       {pitch.briefTitle && (
-        <p className='mb-3 text-[10px] text-slate-400 truncate'>{pitch.briefTitle}</p>
+        <p className='mb-3 truncate text-[10px] text-slate-400'>{pitch.briefTitle}</p>
       )}
 
       {/* Actions */}

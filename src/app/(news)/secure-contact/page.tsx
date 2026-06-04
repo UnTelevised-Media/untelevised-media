@@ -24,9 +24,11 @@ export default function SecureContactPage() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const { trackEvent } = useConsentAwareTracking();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value, type } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
     }));
@@ -91,14 +93,14 @@ export default function SecureContactPage() {
             </div>
             <div className='h-px flex-1 bg-slate-700' />
           </div>
-          
+
           <div className='max-w-4xl'>
             <h2 className='mb-6 text-4xl font-black uppercase tracking-wide text-white md:text-5xl'>
               PROTECTED COMMUNICATION
             </h2>
-            <p className='text-xl text-slate-300 leading-relaxed'>
-              Need to share sensitive information? Use our secure contact form for protected communication 
-              with our editorial team.
+            <p className='text-xl leading-relaxed text-slate-300'>
+              Need to share sensitive information? Use our secure contact form for protected
+              communication with our editorial team.
             </p>
           </div>
         </div>
@@ -156,7 +158,9 @@ export default function SecureContactPage() {
           {submitStatus === 'success' && (
             <div className='mb-8 border border-green-500 bg-green-500/10 p-4 text-green-400'>
               <p className='font-bold'>Message sent securely!</p>
-              <p className='text-sm'>We&rsquo;ll review your submission and respond if appropriate.</p>
+              <p className='text-sm'>
+                We&rsquo;ll review your submission and respond if appropriate.
+              </p>
             </div>
           )}
 
@@ -176,9 +180,9 @@ export default function SecureContactPage() {
                   name='isAnonymous'
                   checked={formData.isAnonymous}
                   onChange={handleInputChange}
-                  className='h-4 w-4 bg-slate-800 border-slate-600'
+                  className='h-4 w-4 border-slate-600 bg-slate-800'
                 />
-                <span className='text-white font-bold'>Submit Anonymously</span>
+                <span className='font-bold text-white'>Submit Anonymously</span>
               </label>
               <p className='mt-2 text-sm text-slate-400'>
                 Check this box to submit without providing contact information
@@ -187,7 +191,10 @@ export default function SecureContactPage() {
 
             {/* Name */}
             <div>
-              <label htmlFor='name' className='block text-sm font-bold uppercase tracking-wide text-white mb-2'>
+              <label
+                htmlFor='name'
+                className='mb-2 block text-sm font-bold uppercase tracking-wide text-white'
+              >
                 Name {formData.isAnonymous && '(Optional)'}
               </label>
               <input
@@ -197,14 +204,17 @@ export default function SecureContactPage() {
                 value={formData.name}
                 onChange={handleInputChange}
                 required={!formData.isAnonymous}
-                className='w-full bg-slate-900 border border-slate-700 px-4 py-3 text-white focus:border-untele focus:outline-none'
+                className='w-full border border-slate-700 bg-slate-900 px-4 py-3 text-white focus:border-untele focus:outline-none'
                 placeholder={formData.isAnonymous ? 'Leave blank for anonymous' : 'Your name'}
               />
             </div>
 
             {/* Email */}
             <div>
-              <label htmlFor='email' className='block text-sm font-bold uppercase tracking-wide text-white mb-2'>
+              <label
+                htmlFor='email'
+                className='mb-2 block text-sm font-bold uppercase tracking-wide text-white'
+              >
                 Email {formData.isAnonymous && '(Optional)'}
               </label>
               <input
@@ -214,14 +224,19 @@ export default function SecureContactPage() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required={!formData.isAnonymous}
-                className='w-full bg-slate-900 border border-slate-700 px-4 py-3 text-white focus:border-untele focus:outline-none'
-                placeholder={formData.isAnonymous ? 'Leave blank for anonymous' : 'your.email@example.com'}
+                className='w-full border border-slate-700 bg-slate-900 px-4 py-3 text-white focus:border-untele focus:outline-none'
+                placeholder={
+                  formData.isAnonymous ? 'Leave blank for anonymous' : 'your.email@example.com'
+                }
               />
             </div>
 
             {/* Phone */}
             <div>
-              <label htmlFor='phone' className='block text-sm font-bold uppercase tracking-wide text-white mb-2'>
+              <label
+                htmlFor='phone'
+                className='mb-2 block text-sm font-bold uppercase tracking-wide text-white'
+              >
                 Phone (Optional)
               </label>
               <input
@@ -230,14 +245,17 @@ export default function SecureContactPage() {
                 name='phone'
                 value={formData.phone}
                 onChange={handleInputChange}
-                className='w-full bg-slate-900 border border-slate-700 px-4 py-3 text-white focus:border-untele focus:outline-none'
+                className='w-full border border-slate-700 bg-slate-900 px-4 py-3 text-white focus:border-untele focus:outline-none'
                 placeholder='Your phone number'
               />
             </div>
 
             {/* Subject */}
             <div>
-              <label htmlFor='subject' className='block text-sm font-bold uppercase tracking-wide text-white mb-2'>
+              <label
+                htmlFor='subject'
+                className='mb-2 block text-sm font-bold uppercase tracking-wide text-white'
+              >
                 Subject *
               </label>
               <input
@@ -247,14 +265,17 @@ export default function SecureContactPage() {
                 value={formData.subject}
                 onChange={handleInputChange}
                 required
-                className='w-full bg-slate-900 border border-slate-700 px-4 py-3 text-white focus:border-untele focus:outline-none'
+                className='w-full border border-slate-700 bg-slate-900 px-4 py-3 text-white focus:border-untele focus:outline-none'
                 placeholder='Brief subject line'
               />
             </div>
 
             {/* Urgency */}
             <div>
-              <label htmlFor='urgency' className='block text-sm font-bold uppercase tracking-wide text-white mb-2'>
+              <label
+                htmlFor='urgency'
+                className='mb-2 block text-sm font-bold uppercase tracking-wide text-white'
+              >
                 Urgency Level *
               </label>
               <select
@@ -263,7 +284,7 @@ export default function SecureContactPage() {
                 value={formData.urgency}
                 onChange={handleInputChange}
                 required
-                className='w-full bg-slate-900 border border-slate-700 px-4 py-3 text-white focus:border-untele focus:outline-none'
+                className='w-full border border-slate-700 bg-slate-900 px-4 py-3 text-white focus:border-untele focus:outline-none'
               >
                 <option value='low'>Low - General inquiry</option>
                 <option value='medium'>Medium - Important matter</option>
@@ -274,7 +295,10 @@ export default function SecureContactPage() {
 
             {/* Contact Method */}
             <div>
-              <label htmlFor='contactMethod' className='block text-sm font-bold uppercase tracking-wide text-white mb-2'>
+              <label
+                htmlFor='contactMethod'
+                className='mb-2 block text-sm font-bold uppercase tracking-wide text-white'
+              >
                 Preferred Contact Method
               </label>
               <select
@@ -282,7 +306,7 @@ export default function SecureContactPage() {
                 name='contactMethod'
                 value={formData.contactMethod}
                 onChange={handleInputChange}
-                className='w-full bg-slate-900 border border-slate-700 px-4 py-3 text-white focus:border-untele focus:outline-none'
+                className='w-full border border-slate-700 bg-slate-900 px-4 py-3 text-white focus:border-untele focus:outline-none'
               >
                 <option value='email'>Email</option>
                 <option value='phone'>Phone</option>
@@ -293,7 +317,10 @@ export default function SecureContactPage() {
 
             {/* Message */}
             <div>
-              <label htmlFor='message' className='block text-sm font-bold uppercase tracking-wide text-white mb-2'>
+              <label
+                htmlFor='message'
+                className='mb-2 block text-sm font-bold uppercase tracking-wide text-white'
+              >
                 Message *
               </label>
               <textarea
@@ -303,7 +330,7 @@ export default function SecureContactPage() {
                 onChange={handleInputChange}
                 required
                 rows={8}
-                className='w-full bg-slate-900 border border-slate-700 px-4 py-3 text-white focus:border-untele focus:outline-none'
+                className='w-full border border-slate-700 bg-slate-900 px-4 py-3 text-white focus:border-untele focus:outline-none'
                 placeholder='Your secure message...'
               />
             </div>
@@ -311,11 +338,11 @@ export default function SecureContactPage() {
             {/* Warning */}
             <div className='border border-yellow-500 bg-yellow-500/10 p-4'>
               <div className='flex items-start space-x-3'>
-                <AlertTriangle className='h-5 w-5 text-yellow-500 mt-0.5' />
+                <AlertTriangle className='mt-0.5 h-5 w-5 text-yellow-500' />
                 <div>
-                  <p className='text-yellow-400 font-bold'>Security Notice</p>
+                  <p className='font-bold text-yellow-400'>Security Notice</p>
                   <p className='text-sm text-yellow-300'>
-                    While this form is secure, for maximum protection of sensitive information, 
+                    While this form is secure, for maximum protection of sensitive information,
                     consider using our whistleblower portal or encrypted communication methods.
                   </p>
                 </div>
@@ -332,7 +359,7 @@ export default function SecureContactPage() {
             <button
               type='submit'
               disabled={isSubmitting}
-              className='w-full bg-untele px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed'
+              className='w-full bg-untele px-8 py-4 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-50'
             >
               {isSubmitting ? 'SENDING SECURELY...' : 'SEND SECURE MESSAGE'}
             </button>

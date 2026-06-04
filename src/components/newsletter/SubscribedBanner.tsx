@@ -28,11 +28,11 @@ export function SubscribedBanner({ brandColor = '#D70606' }: Props) {
   const messages = {
     subscribed: {
       heading: "You're confirmed!",
-      body: 'Welcome to the list. You\'ll hear from us when there\'s something worth reading.',
+      body: "Welcome to the list. You'll hear from us when there's something worth reading.",
     },
     unsubscribed: {
       heading: "You've been unsubscribed.",
-      body: 'You won\'t receive any further emails from this list.',
+      body: "You won't receive any further emails from this list.",
     },
     error: {
       heading: 'Confirmation link invalid.',
@@ -46,10 +46,16 @@ export function SubscribedBanner({ brandColor = '#D70606' }: Props) {
   return (
     <div
       className='relative border px-4 py-3 text-sm'
-      style={{ borderColor: isError ? '#f59e0b' : brandColor, backgroundColor: isError ? '#fffbeb' : undefined }}
+      style={{
+        borderColor: isError ? '#f59e0b' : brandColor,
+        backgroundColor: isError ? '#fffbeb' : undefined,
+      }}
       role='alert'
     >
-      <p className='font-black uppercase tracking-widest text-xs mb-1' style={{ color: isError ? '#b45309' : brandColor }}>
+      <p
+        className='mb-1 text-xs font-black uppercase tracking-widest'
+        style={{ color: isError ? '#b45309' : brandColor }}
+      >
         {msg.heading}
       </p>
       <p className='text-slate-700 dark:text-slate-300'>{msg.body}</p>

@@ -1,2 +1,4 @@
 import { redirect } from 'next/navigation';
-export default function Page() { redirect('/portal/sales'); }
+export default function Page() {
+  redirect('/portal/sales');
+}

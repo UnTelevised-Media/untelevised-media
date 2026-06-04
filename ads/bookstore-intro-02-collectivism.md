@@ -1,6 +1,9 @@
 # Ad: Bookstore Intro — Collectivism / Structural Politics
+
 # Platform: Twitter/X threads, Bluesky, Instagram caption, Telegram channels
+
 # Tone: Political, sharp, collectivist economics focus
+
 # Length: Short-to-medium, punchy
 
 ---
@@ -19,10 +22,8 @@ We launched with one book. We are building this to hold many more — particular
 
 **This is a collective publishing infrastructure. Come use it.**
 
-Store: https://www.untelevised.media/bookstore/
-Our story: https://www.untelevised.media/bookstore/about/
+Store: https://www.untelevised.media/bookstore/ Our story: https://www.untelevised.media/bookstore/about/
 
 ---
 
-*Hurriya (حرية) = Freedom in Arabic.*
-*No gatekeepers. No corporate sponsors. No compromise.*
+_Hurriya (حرية) = Freedom in Arabic._ _No gatekeepers. No corporate sponsors. No compromise._

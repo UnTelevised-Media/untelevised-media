@@ -28,7 +28,7 @@ Stripe → Supabase Edge Function (stripe-webhook)
 ## 2. Gaps — What's Missing
 
 | # | Gap | Impact |
-|---|-----|--------|
+| --- | --- | --- |
 | 1 | `sendShipmentEmail()` exists but is **never triggered** — no mechanism to call it | Customers never get shipping notifications |
 | 2 | `sendRefundEmail()` exists but is **never called** from `handleRefund()` in the webhook | Customers don't know when refunds are processed |
 | 3 | `order-confirmation` email has **no per-item prices**, no shipping address | Receipt is incomplete — just shows titles + total |
@@ -50,6 +50,7 @@ Stripe → Supabase Edge Function (stripe-webhook)
 **Approach:** Inline HTML (no new dependencies — React Email is overkill for 5 templates and adds build complexity). Use a shared layout wrapper function in `email.ts`.
 
 **Shared layout wrapper:**
+
 ```ts
 // src/lib/bookstore/email.ts
 function emailLayout(content: string, title: string): string {
@@ -89,6 +90,7 @@ function emailLayout(content: string, title: string): string {
 **Templates to update:**
 
 #### 1a. Order Receipt (`order-confirmation`)
+
 Add: itemized table with unit price per line, shipping address, subtotal/shipping/tax/total breakdown, link to order history.
 
 ```
@@ -96,6 +98,7 @@ Subject: Order Receipt — UM-00042 | Hurriya Publications
 ```
 
 New `OrderConfirmationParams` additions:
+
 ```ts
 interface OrderConfirmationParams {
   to: string;
@@ -104,13 +107,14 @@ interface OrderConfirmationParams {
     title: string;
     formatType: FormatType;
     qty: number;
-    unitPriceCents: number;   // ADD
+    unitPriceCents: number; // ADD
   }[];
-  subtotalCents: number;      // ADD (split out from totalCents)
-  shippingCents: number;      // ADD
-  taxCents: number;           // ADD
+  subtotalCents: number; // ADD (split out from totalCents)
+  shippingCents: number; // ADD
+  taxCents: number; // ADD
   totalCents: number;
-  shippingAddress?: {         // ADD — only present for physical orders
+  shippingAddress?: {
+    // ADD — only present for physical orders
     line1: string;
     line2?: string;
     city: string;
@@ -118,41 +122,48 @@ interface OrderConfirmationParams {
     postalCode: string;
     country: string;
   };
-  hasDigital: boolean;        // ADD — show download vault CTA if true
+  hasDigital: boolean; // ADD — show download vault CTA if true
 }
 ```
 
 The Stripe webhook already has all this data (`subtotal_cents`, `shipping_cents`, `tax_cents`, expanded line items). The `sendEmail()` call in the Edge Function needs to pass these fields.
 
 #### 1b. Digital Download Delivery (`digital-download`)
+
 For **auth users**: include one download button per digital item (signed link to `/api/bookstore/download?order_item_id=<id>`) rather than just linking to the vault.
 
 New `DigitalDownloadEmailParams` additions:
+
 ```ts
 interface DigitalDownloadEmailParams {
   to: string;
   orderNumber: string;
-  items: {                        // ADD — one per digital item
+  items: {
+    // ADD — one per digital item
     title: string;
     formatLabel: string;
     orderItemId: string;
-    downloadUrl: string;          // pre-signed or app route URL
+    downloadUrl: string; // pre-signed or app route URL
   }[];
-  vaultUrl: string;               // ADD — always show vault link too
+  vaultUrl: string; // ADD — always show vault link too
   attachments?: EmailAttachment[]; // ADD — see Phase 2
 }
 ```
 
 #### 1c. Guest Download (`guest-download`)
+
 Already good. Minor polish: add layout wrapper, clarify 14-day expiry, add account creation CTA.
 
 #### 1d. Shipment Notification (`shipment`)
+
 Already written (`sendShipmentEmail`). Add layout wrapper + estimated delivery note.
 
 #### 1e. Refund Confirmation (`refund`)
+
 Already written (`sendRefundEmail`). Add layout wrapper.
 
 **Files to change:**
+
 - `src/lib/bookstore/email.ts` — add `emailLayout()`, update all 5 functions, add `items[]` params
 - `src/app/api/bookstore/internal/send-email/route.ts` — update payload types for `order-confirmation` and `digital-download` + add `shipment` and `refund` types
 - `supabase/functions/stripe-webhook/index.ts` — pass enriched fields to `sendEmail()` calls
@@ -164,6 +175,7 @@ Already written (`sendRefundEmail`). Add layout wrapper.
 **Goal:** Attach the purchased digital file to the download delivery email when the file is small enough.
 
 **Constraints:**
+
 - Gmail SMTP limit: 25 MB per message (encoded, ~18 MB raw file max)
 - Practical limit: 10 MB raw (base64 encoding adds ~33% overhead)
 - Supabase Storage `createSignedUrl` returns a pre-signed URL valid for N seconds
@@ -180,6 +192,7 @@ file size ≤ 10 MB?
 **Implementation:**
 
 Add a helper to `email.ts`:
+
 ```ts
 // src/lib/bookstore/email.ts
 import { createClient } from '@supabase/supabase-js';
@@ -223,13 +236,14 @@ async function fetchAttachmentIfSmall(
 ```
 
 **Nodemailer attachment format:**
+
 ```ts
 await transporter.sendMail({
   from,
   to,
   subject,
   html,
-  attachments: attachments.map(a => ({
+  attachments: attachments.map((a) => ({
     filename: a.filename,
     content: a.content,
     contentType: a.contentType,
@@ -242,6 +256,7 @@ await transporter.sendMail({
 **Note:** The `supabase_storage_path` for each item is stored in `digital_downloads` (auth users) and `guest_download_tokens` (guests). The internal send-email route must query Supabase to retrieve it. Add a service-role Supabase client to the Next.js API route for this lookup.
 
 **Files to change:**
+
 - `src/lib/bookstore/email.ts` — add `fetchAttachmentIfSmall()`, call from download emails
 - `src/app/api/bookstore/internal/send-email/route.ts` — pass `storagePath` in payload so the route can do the lookup, or fetch it directly in the route
 
@@ -252,9 +267,11 @@ await transporter.sendMail({
 **Goal:** `sendShipmentEmail` and `sendRefundEmail` are already implemented but never called.
 
 #### 3a. Refund Email
+
 **Where to fix:** `supabase/functions/stripe-webhook/index.ts`, `handleRefund()` function.
 
 After updating the order status to `refunded`, fetch the customer email and order number, then call `sendEmail()`:
+
 ```ts
 // in handleRefund(), after db.from('orders').update({ status: 'refunded' })
 const { data: fullOrder } = await db
@@ -275,9 +292,11 @@ if (fullOrder) {
 Add `refund` to the `EmailPayload` union type in the Edge Function and to the internal route.
 
 #### 3b. Shipment Email
+
 The shipment email is triggered manually when staff enter a tracking number (see Phase 4 / Phase 5). It is NOT triggered from the Stripe webhook — it's triggered from the admin interface or the DB webhook.
 
 **Files to change:**
+
 - `supabase/functions/stripe-webhook/index.ts` — add refund email call in `handleRefund()`
 - `src/app/api/bookstore/internal/send-email/route.ts` — add `refund` and `shipment` types
 
@@ -295,7 +314,7 @@ A DB webhook fires on any change to the `orders` row regardless of which surface
 In the Supabase Dashboard → **Database → Webhooks → Create Webhook:**
 
 | Field | Value |
-|-------|-------|
+| --- | --- |
 | Name | `order-shipping-update` |
 | Table | `public.orders` |
 | Events | `UPDATE` |
@@ -370,6 +389,7 @@ export async function POST(req: NextRequest) {
 **New env var required:** `SUPABASE_WEBHOOK_SECRET` (generate a random 32+ char string, set in both Vercel and as the Supabase webhook header value)
 
 **Files to create:**
+
 - `src/app/api/webhooks/supabase-order-update/route.ts`
 
 **Supabase schema to verify:** The `orders` table needs `shipping_tracking_number` and `shipping_tracking_url` columns (confirm in migration files — likely already there based on `sendShipmentEmail` having these params).
@@ -383,11 +403,13 @@ export async function POST(req: NextRequest) {
 **Where:** Add a "Mark as Shipped" action in the portal orders view.
 
 **Portal order detail** (`/portal/sales` or a new `/portal/orders/[id]`):
+
 - Show unfulfilled physical orders
 - Input: tracking number (text), carrier (select: USPS / UPS / FedEx / DHL / Other), tracking URL (auto-generated or manual)
 - Button: "Mark as Shipped" → `PATCH /api/portal/orders/[id]/ship`
 
 **New API route:** `src/app/api/portal/orders/[id]/ship/route.ts`
+
 ```ts
 // PATCH — sets tracking number on order, triggers DB webhook automatically
 // Protected by Clerk auth + role check (admin/publisher role)
@@ -406,6 +428,7 @@ await supabase
 The DB webhook fires automatically on this UPDATE — no manual email call needed in this route.
 
 **Schema additions needed** (new migration):
+
 ```sql
 ALTER TABLE orders
   ADD COLUMN IF NOT EXISTS shipping_tracking_url text,
@@ -415,6 +438,7 @@ ALTER TABLE orders
 Check if `shipping_tracking_number` already exists in the migration files before adding it.
 
 **Files to create/change:**
+
 - `src/app/api/portal/orders/[id]/ship/route.ts` — new
 - Portal orders UI component — add ship button + form (scope TBD)
 - New Supabase migration for `shipping_tracking_url` / `shipped_at` if columns don't exist
@@ -425,15 +449,16 @@ Check if `shipping_tracking_number` already exists in the migration files before
 
 **Transport:** Nodemailer + Gmail SMTP — already configured and working. This is the sole email transport for the project.
 
-| Concern | Detail |
-|---------|--------|
-| Transport | `smtp.gmail.com:587` (STARTTLS) via App Password |
-| From address | Configured via `ORDERS_SMTP_FROM` env var |
-| Attachments | Native Nodemailer `attachments` array — no extra libraries needed |
-| Sending limit | 500 emails/day (Gmail free account) — sufficient for early-stage volume |
-| Deliverability | Good when DKIM/SPF are properly configured for the sending domain |
+| Concern        | Detail                                                                  |
+| -------------- | ----------------------------------------------------------------------- |
+| Transport      | `smtp.gmail.com:587` (STARTTLS) via App Password                        |
+| From address   | Configured via `ORDERS_SMTP_FROM` env var                               |
+| Attachments    | Native Nodemailer `attachments` array — no extra libraries needed       |
+| Sending limit  | 500 emails/day (Gmail free account) — sufficient for early-stage volume |
+| Deliverability | Good when DKIM/SPF are properly configured for the sending domain       |
 
 **Nodemailer attachment format (reference):**
+
 ```ts
 await transporter.sendMail({
   from,
@@ -443,7 +468,7 @@ await transporter.sendMail({
   attachments: [
     {
       filename: 'my-book.epub',
-      content: fileBuffer,        // Buffer
+      content: fileBuffer, // Buffer
       contentType: 'application/epub+zip',
     },
   ],
@@ -459,11 +484,12 @@ No migration to any other service is planned.
 Variables needed beyond what already exists:
 
 | Variable | Where to set | Purpose |
-|----------|-------------|---------|
+| --- | --- | --- |
 | `SUPABASE_WEBHOOK_SECRET` | Vercel + Supabase Dashboard webhook header | Authenticate DB webhook calls to Next.js |
 | `SUPABASE_SERVICE_ROLE_KEY` | Vercel (already set for portal?) | Needed in Next.js for file attachment fetch + customer lookup in webhook route |
 
 Existing required (must be confirmed set in Vercel):
+
 - `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `ORDERS_SMTP_FROM`
 - `INTERNAL_EMAIL_SECRET`
 - `NEXT_PUBLIC_SUPABASE_URL`

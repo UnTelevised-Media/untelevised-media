@@ -1,5 +1,6 @@
 # Hurriya Publications — Bookstore Recommendations
-*May 2026 — Full codebase audit: storefront, portal, Supabase edge functions, API routes*
+
+_May 2026 — Full codebase audit: storefront, portal, Supabase edge functions, API routes_
 
 ---
 
@@ -8,6 +9,7 @@
 The bookstore is substantially complete and production-ready.
 
 **Storefront**
+
 - Shopping cart (Zustand + localStorage persistence)
 - Stripe Checkout — physical + digital + tip line items in a single session, `allow_promotion_codes: true`
 - Genre filtering (URL-based, shareable)
@@ -16,12 +18,14 @@ The bookstore is substantially complete and production-ready.
 - Breadcrumb navigation on book detail page
 
 **Fulfillment**
+
 - Digital download vault — authenticated (Clerk) with signed URL generation and download limits
 - Guest download — one-time token-based links delivered by email, renewable up to 3 times
 - Stripe webhook (`supabase/functions/stripe-webhook`) — handles `checkout.session.completed` and `charge.refunded`; creates orders, order_items, author_earnings, digital_downloads, guest tokens; sends all transactional emails
 - Shipment tracking — `OrdersTable` displays tracking number/URL; `/api/webhooks/supabase-order-update` fires shipment email when tracking is added; `/api/portal/orders/[id]/status` captures tracking on status update
 
 **Author & Admin Portal** (`/portal`)
+
 - Earnings dashboard — real-time stats, payout history, tips breakdown, per-book sales split (`/portal/earnings`)
 - Sales & order management — role-aware (admin/sales/author), full order lifecycle, expandable detail rows, inline status + tracking updates (`/portal/sales`)
 - Book library — CRUD, inventory alerts, sales stats per title (`/portal/library`)
@@ -29,6 +33,7 @@ The bookstore is substantially complete and production-ready.
 - Book management actions — create, upload cover, upload digital asset, update, genre management (`src/lib/portal/book-actions.ts`)
 
 **Infrastructure**
+
 - Transactional email — 5 templates (order confirmation, digital download, guest download, shipment, refund) via Nodemailer + Google SMTP
 - Rate limiting (Upstash Redis) on checkout, download, and guest-resend endpoints
 - Audit logging (fire-and-forget on all payment events)
@@ -58,10 +63,12 @@ Tier 1 blocks revenue or creates bad user experiences. Tier 2 improves discovery
 The webhook currently creates `order_items`, `author_earnings`, and `digital_downloads` — but does NOT call `writeClient.patch(bookId).dec(...)` on Sanity.
 
 **Fix:** In `supabase/functions/stripe-webhook/index.ts`, after inserting order_items, call the Sanity Mutations API for each physical item:
+
 ```
 PATCH https://<project>.api.sanity.io/v2021-06-07/data/mutate/<dataset>
 { mutations: [{ patch: { id: bookId, dec: { "formats[_key == \"...\"].inventory.quantity": qty } } }] }
 ```
+
 If quantity hits zero and `allowBackorder` is false, follow with a second mutation setting `status` to `"out-of-stock"`.
 
 ---
@@ -71,6 +78,7 @@ If quantity hits zero and `allowBackorder` is false, follow with a second mutati
 **What's missing:** The bookstore homepage has genre filtering but no text search. With one book this is a non-issue; at ten it becomes a real problem.
 
 **Implementation:** Add a search input querying Sanity directly:
+
 ```groq
 *[_type == "book" && status in ["published", "out-of-stock"] && (
   title match $q + "*" ||
@@ -78,6 +86,7 @@ If quantity hits zero and `allowBackorder` is false, follow with a second mutati
   pt::text(description) match $q + "*"
 )] | order(publishedAt desc) { ...bookFragment }
 ```
+
 Use a `?q=` URL param so results are shareable and server-rendered. Follow the `GenreFilter` component pattern.
 
 ---
@@ -87,6 +96,7 @@ Use a `?q=` URL param so results are shareable and server-rendered. Follow the `
 **What's missing:** Out-of-stock books show a blocking overlay but give the reader nowhere to go. No mechanism to capture intent or notify when stock returns.
 
 **Implementation:**
+
 - Supabase table: `waitlist (id, sanity_book_id, format_type, email, created_at, notified_at)`
 - Email capture form on out-of-stock book pages (server action, no Clerk required)
 - Supabase database trigger fires when inventory is restored — queries waitlist and sends notification emails
@@ -103,6 +113,7 @@ Use a `?q=` URL param so results are shareable and server-rendered. Follow the `
 **What's missing:** The book detail page ends at the author bio with no onward journey. A reader who finishes the page has nowhere to go except away.
 
 **Add two sections after the author bio:**
+
 - **More by [Author Name]** — `*[_type == "book" && author._ref == $authorId && slug.current != $slug && status == "published"]` — 2–3 card row
 - **In the Same Genre** — books sharing any genre with the current one, excluding the current book — 2–3 card row
 
@@ -115,6 +126,7 @@ Both are lightweight parallel fetches. They render nothing until there are 3+ bo
 **What's partially done:** The `payouts` Supabase table has `status` (pending / paid / cancelled), `paid_at`, and `notes` columns. The portal earnings page and pending payouts widget show payout data. But there is no UI to act on it.
 
 **What's missing:**
+
 - An admin-only action to transition `pending → paid` or `pending → cancelled`, capturing `paid_at` and optional notes
 - A PATCH endpoint at `/api/portal/payouts/[id]/status` — same pattern as the existing order status API
 - Authors currently have no confirmation that a payout has been processed other than checking their bank account
@@ -130,6 +142,7 @@ Both are lightweight parallel fetches. They render nothing until there are 3+ bo
 Each book supports one `author` reference. Co-authored books, forewords, or edited collections are not representable in the current schema.
 
 **Non-breaking schema addition:**
+
 ```typescript
 {
   name: 'contributors',
@@ -140,6 +153,7 @@ Each book supports one `author` reference. Co-authored books, forewords, or edit
   ]}]
 }
 ```
+
 Revenue model is unaffected — `revenueTerms` handles splits independently of this field.
 
 ---
@@ -164,17 +178,17 @@ Advocates who post about books in solidarity communities could earn a small comm
 
 ## Summary
 
-| # | Recommendation | Tier | Effort |
-|---|---|---|---|
-| 1 | Inventory decrement on purchase | 1 | Medium |
-| 2 | Book search | 1 | Low |
-| 3 | Out-of-stock waitlist | 1 | Medium |
-| 4 | Related books on detail page | 2 | Low |
-| 5 | Payout approval workflow UI | 2 | Low |
-| 6 | Multi-author / contributor field | 3 | Low |
-| 7 | Localization | 3 | High |
-| 8 | Physical pre-orders | 3 | Medium |
-| 9 | Affiliate / referral links | 3 | High |
+| #   | Recommendation                   | Tier | Effort |
+| --- | -------------------------------- | ---- | ------ |
+| 1   | Inventory decrement on purchase  | 1    | Medium |
+| 2   | Book search                      | 1    | Low    |
+| 3   | Out-of-stock waitlist            | 1    | Medium |
+| 4   | Related books on detail page     | 2    | Low    |
+| 5   | Payout approval workflow UI      | 2    | Low    |
+| 6   | Multi-author / contributor field | 3    | Low    |
+| 7   | Localization                     | 3    | High   |
+| 8   | Physical pre-orders              | 3    | Medium |
+| 9   | Affiliate / referral links       | 3    | High   |
 
 ---
 
@@ -188,4 +202,4 @@ Advocates who post about books in solidarity communities could earn a small comm
 
 ---
 
-*Audit covers: `src/app/(user)/bookstore/`, `src/app/(portal)/portal/`, `src/components/bookstore/`, `src/components/portal/`, `src/lib/bookstore/`, `src/lib/portal/`, `src/app/api/bookstore/`, `src/app/api/portal/`, `src/app/api/webhooks/`, `supabase/functions/stripe-webhook/`, `src/models/schema/`, `src/lib/sanity/lib/queries.ts`*
+_Audit covers: `src/app/(user)/bookstore/`, `src/app/(portal)/portal/`, `src/components/bookstore/`, `src/components/portal/`, `src/lib/bookstore/`, `src/lib/portal/`, `src/app/api/bookstore/`, `src/app/api/portal/`, `src/app/api/webhooks/`, `supabase/functions/stripe-webhook/`, `src/models/schema/`, `src/lib/sanity/lib/queries.ts`_

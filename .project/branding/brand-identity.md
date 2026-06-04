@@ -10,12 +10,12 @@ UnTelevised Media is an **independent, reader-funded journalism platform** that 
 
 ## Brand Pillars
 
-| Pillar | Description |
-|--------|-------------|
+| Pillar           | Description                                                         |
+| ---------------- | ------------------------------------------------------------------- |
 | **Independence** | No corporate sponsors or government funding. Reader-supported only. |
-| **Courage** | Goes to dangerous places, asks difficult questions. |
-| **Transparency** | Funding sources, editorial decisions, and methods are open. |
-| **Urgency** | Content is framed as live, breaking, and critical. |
+| **Courage**      | Goes to dangerous places, asks difficult questions.                 |
+| **Transparency** | Funding sources, editorial decisions, and methods are open.         |
+| **Urgency**      | Content is framed as live, breaking, and critical.                  |
 
 ---
 
@@ -28,6 +28,7 @@ UnTelevised Media is an **independent, reader-funded journalism platform** that 
 - **Militaristic vocabulary** — "Field Reports", "On the Ground", "Mission", "Resistance"
 
 ### Headline Examples
+
 - "THE TRUTH WON'T REPORT ITSELF"
 - "UNFILTERED. UNCENSORED. UNCOMPROMISING."
 - "EXPOSING TRUTH IN A WORLD OF LIES"
@@ -54,6 +55,7 @@ untele: #D70606  (strong red)
 ```
 
 This is defined as a custom Tailwind token and used for:
+
 - Section label bars (`bg-untele`)
 - CTA buttons (`bg-untele` → `hover:bg-red-600`)
 - Accent borders (`border-untele`)
@@ -65,11 +67,11 @@ This is defined as a custom Tailwind token and used for:
 
 ## Web Properties
 
-| Property | URL | Purpose |
-|----------|-----|---------|
-| Main site | `untelevised.media` | News, articles, events |
-| Live coverage | `untelevised.live` | Real-time event streaming |
-| Radio | `radio.untelevised.live` | Music/Radio stream |
+| Property      | URL                      | Purpose                   |
+| ------------- | ------------------------ | ------------------------- |
+| Main site     | `untelevised.media`      | News, articles, events    |
+| Live coverage | `untelevised.live`       | Real-time event streaming |
+| Radio         | `radio.untelevised.live` | Music/Radio stream        |
 
 ---
 
@@ -108,6 +110,7 @@ CTAs:
 ## Social Presence
 
 Platforms actively linked in header/footer:
+
 - Twitter/X
 - Instagram
 - Facebook

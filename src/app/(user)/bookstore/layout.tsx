@@ -58,7 +58,7 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
                 src='/hurriya-pub/Logo.png'
                 alt='Hurriya Publications'
                 fill
-                className='object-contain hidden dark:block'
+                className='hidden object-contain dark:block'
                 priority
                 sizes='108px'
               />
@@ -97,7 +97,7 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
               src='/hurriya-pub/Banner-invert.png'
               alt=''
               fill
-              className='object-contain object-right hidden dark:block'
+              className='hidden object-contain object-right dark:block'
               priority
               sizes='(max-width: 640px) 0px, 50vw'
               aria-hidden='true'

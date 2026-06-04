@@ -65,20 +65,25 @@ export default function PreCheckoutDialog({ onGuest, onClose }: Props) {
 
           <div className='my-4 flex items-center gap-3'>
             <div className='h-px flex-1 bg-slate-200 dark:bg-slate-700' />
-            <span className='text-[10px] font-bold uppercase tracking-widest text-hp-muted'>or</span>
+            <span className='text-[10px] font-bold uppercase tracking-widest text-hp-muted'>
+              or
+            </span>
             <div className='h-px flex-1 bg-slate-200 dark:bg-slate-700' />
           </div>
 
           <button
-            onClick={() => { onClose(); onGuest(); }}
+            onClick={() => {
+              onClose();
+              onGuest();
+            }}
             className='w-full border border-hp-sand-border py-3 text-xs font-black uppercase tracking-widest text-slate-600 hover:border-slate-400 dark:border-hp-dark-border dark:text-hp-cream'
           >
             Continue as Guest
           </button>
 
           <p className='mt-3 text-[10px] leading-relaxed text-hp-muted'>
-            Guest orders: digital purchases are emailed to you as a one-time download link.
-            Without an account your books won't be saved to an onsite library for later access.
+            Guest orders: digital purchases are emailed to you as a one-time download link. Without
+            an account your books won't be saved to an onsite library for later access.
           </p>
         </div>
       </div>

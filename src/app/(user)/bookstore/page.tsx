@@ -42,7 +42,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Hurriya Publications Bookstore',
-    description: 'Independent books by literary authors — author-first revenue. An UnTelevised Media imprint.',
+    description:
+      'Independent books by literary authors — author-first revenue. An UnTelevised Media imprint.',
     images: ['/hurriya-pub/Logo-alt.png'],
   },
 };
@@ -96,7 +97,9 @@ function BookCard({ book }: { book: SanityBook }) {
             {price != null && (
               <div className='mt-1'>
                 {compareAtPrice != null && (
-                  <p className='text-[10px] text-hp-muted line-through'>${compareAtPrice.toFixed(2)}</p>
+                  <p className='text-[10px] text-hp-muted line-through'>
+                    ${compareAtPrice.toFixed(2)}
+                  </p>
                 )}
                 <p className='text-xs font-bold text-untele'>${price.toFixed(2)}</p>
               </div>
@@ -175,7 +178,9 @@ function FeaturedHero({ book }: { book: SanityBook }) {
         {price != null && (
           <div className='mb-4'>
             {compareAtPrice != null && (
-              <p className='text-sm text-hp-muted line-through'>From ${compareAtPrice.toFixed(2)}</p>
+              <p className='text-sm text-hp-muted line-through'>
+                From ${compareAtPrice.toFixed(2)}
+              </p>
             )}
             <p className='text-lg font-black text-untele'>From ${price.toFixed(2)}</p>
           </div>
@@ -240,7 +245,9 @@ export default async function ShopPage({
       {/* Page header */}
       <div className='mb-6 flex items-center gap-3'>
         <div className='bg-untele px-3 py-1'>
-          <span className='text-sm font-black uppercase tracking-widest text-white'>Bookstore</span>
+          <span className='text-sm font-black uppercase tracking-widest text-white'>
+            Bookstore
+          </span>
         </div>
         <div className='h-px flex-1 bg-hp-sand-border dark:bg-hp-dark-border' />
       </div>

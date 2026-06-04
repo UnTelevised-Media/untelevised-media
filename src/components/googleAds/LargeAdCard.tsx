@@ -13,15 +13,24 @@ declare global {
   }
 }
 
-export default function LargeAdCard({ slot = AD_CONFIG.AD_SLOTS.HOMEPAGE_BANNER }: { slot?: string; googleAdsenseId?: string }) {
+export default function LargeAdCard({
+  slot = AD_CONFIG.AD_SLOTS.HOMEPAGE_BANNER,
+}: {
+  slot?: string;
+  googleAdsenseId?: string;
+}) {
   const adRef = useRef<HTMLModElement>(null);
   const pushed = useRef(false);
-  const [adStatus, setAdStatus] = useState<'idle' | 'pushed' | 'filled' | 'unfilled' | 'error'>('idle');
+  const [adStatus, setAdStatus] = useState<'idle' | 'pushed' | 'filled' | 'unfilled' | 'error'>(
+    'idle'
+  );
   const [isClient, setIsClient] = useState(false);
   const { canUseMarketing, hasConsent } = useConsentCheck();
   const isDev = adsenseManager.isDevelopmentMode();
 
-  useEffect(() => { setIsClient(true); }, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (!isClient || !adRef.current) return;
@@ -34,12 +43,20 @@ export default function LargeAdCard({ slot = AD_CONFIG.AD_SLOTS.HOMEPAGE_BANNER 
 
     const ins = adRef.current;
     adsenseManager.pushAd(ins).then((success) => {
-      if (!success) { setAdStatus('error'); return; }
+      if (!success) {
+        setAdStatus('error');
+        return;
+      }
       setAdStatus('pushed');
       const mo = new MutationObserver(() => {
         const s = ins.getAttribute('data-ad-status');
-        if (s === 'filled') { setAdStatus('filled'); mo.disconnect(); }
-        else if (s === 'unfilled') { setAdStatus('unfilled'); mo.disconnect(); }
+        if (s === 'filled') {
+          setAdStatus('filled');
+          mo.disconnect();
+        } else if (s === 'unfilled') {
+          setAdStatus('unfilled');
+          mo.disconnect();
+        }
       });
       mo.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
       setTimeout(() => mo.disconnect(), 15_000);

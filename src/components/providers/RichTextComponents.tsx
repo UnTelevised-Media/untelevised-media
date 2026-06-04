@@ -7,7 +7,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import urlForImage from '@/u/urlForImage';
 import { InlineFactCheckCard } from '@/components/fact-check/InlineFactCheckCard';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
@@ -15,9 +22,7 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 // Tweet embeds go through SafeTweet (RSC existence check) → SafeTweetWrapper
 // (client-only, ssr:false + error boundary) to prevent SSG build crashes.
 import SafeTweet from '@/components/embeds/SafeTweet';
-const SyntaxHighlighter = dynamic(() =>
-  import('react-syntax-highlighter').then((m) => m.Prism),
-);
+const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter').then((m) => m.Prism));
 import InstagramEmbed from './InstagramEmbed';
 import FacebookEmbed from './FacebookEmbed';
 import TikTokEmbed from './TikTokEmbed';
@@ -94,7 +99,7 @@ export const RichTextComponents = {
             .flatMap((block: any) =>
               (block.children ?? [])
                 .filter((s: any) => s._type === 'span')
-                .map((s: any) => s.text ?? ''),
+                .map((s: any) => s.text ?? '')
             )
             .join('');
         }
@@ -182,7 +187,7 @@ export const RichTextComponents = {
         .flatMap((block: any) =>
           (block.children ?? [])
             .filter((s: any) => s._type === 'span')
-            .map((s: any) => s.text ?? ''),
+            .map((s: any) => s.text ?? '')
         )
         .join('');
       return (

@@ -11,16 +11,10 @@ export const metadata: Metadata = {
   description: 'The Revolution will be UnTelevised',
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body className={`bg-slate-400/70 scrollbar-hide ${inter.className}`}>
-        {children}
-      </body>
+      <body className={`scrollbar-hide bg-slate-400/70 ${inter.className}`}>{children}</body>
     </html>
   );
 }

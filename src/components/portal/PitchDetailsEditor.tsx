@@ -96,8 +96,7 @@ export function PitchDetailsEditor({
       if (result.success) {
         // Resolve title from articles list for the read view
         const linkedTitle =
-          articles.find((a) => a._id === draft.linkedArticleId)?.title ??
-          draft.linkedArticleTitle;
+          articles.find((a) => a._id === draft.linkedArticleId)?.title ?? draft.linkedArticleTitle;
         setSaved({ ...draft, linkedArticleTitle: linkedTitle });
         setIsEditing(false);
         toast.success('Pitch updated.');
@@ -134,7 +133,10 @@ export function PitchDetailsEditor({
                 {saved.headline}
               </p>
             ) : (
-              <button onClick={openEdit} className='text-[11px] italic text-slate-400 hover:text-untele'>
+              <button
+                onClick={openEdit}
+                className='text-[11px] italic text-slate-400 hover:text-untele'
+              >
                 None — click Edit to add
               </button>
             )}
@@ -150,7 +152,10 @@ export function PitchDetailsEditor({
                 {saved.angle}
               </p>
             ) : (
-              <button onClick={openEdit} className='text-[11px] italic text-slate-400 hover:text-untele'>
+              <button
+                onClick={openEdit}
+                className='text-[11px] italic text-slate-400 hover:text-untele'
+              >
                 None — click Edit to add
               </button>
             )}
@@ -166,7 +171,10 @@ export function PitchDetailsEditor({
                 {saved.sourceSuggestions}
               </p>
             ) : (
-              <button onClick={openEdit} className='text-[11px] italic text-slate-400 hover:text-untele'>
+              <button
+                onClick={openEdit}
+                className='text-[11px] italic text-slate-400 hover:text-untele'
+              >
                 None — click Edit to add
               </button>
             )}

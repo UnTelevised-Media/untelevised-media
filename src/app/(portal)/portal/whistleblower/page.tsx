@@ -5,7 +5,10 @@ import { hasRole } from '@/lib/auth/roles-utils';
 import { portalFetch } from '@/lib/portal/live';
 import { queryPortalWhistleblowers } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
-import { WhistleblowerTable, type WhistleblowerSubmission } from '@/components/portal/WhistleblowerTable';
+import {
+  WhistleblowerTable,
+  type WhistleblowerSubmission,
+} from '@/components/portal/WhistleblowerTable';
 import { redirect } from 'next/navigation';
 
 export const metadata = {
@@ -18,7 +21,8 @@ export default async function WhistleblowerPage() {
   const isEditorPlus = hasRole(role, 'editor');
   if (!isEditorPlus) redirect('/portal/articles');
 
-  const submissions = await portalFetch<WhistleblowerSubmission[]>(queryPortalWhistleblowers) ?? [];
+  const submissions =
+    (await portalFetch<WhistleblowerSubmission[]>(queryPortalWhistleblowers)) ?? [];
 
   const newCount = submissions.filter((s) => (s.status ?? 'new') === 'new').length;
   const criticalCount = submissions.filter((s) => s.severity === 'critical').length;
@@ -33,7 +37,9 @@ export default async function WhistleblowerPage() {
           </h1>
           <p className='mt-1 text-sm text-slate-500 dark:text-slate-400'>
             {submissions.length} total &nbsp;·&nbsp; {newCount} new
-            {criticalCount > 0 && <span className='ml-2 font-bold text-red-500'>{criticalCount} critical</span>}
+            {criticalCount > 0 && (
+              <span className='ml-2 font-bold text-red-500'>{criticalCount} critical</span>
+            )}
           </p>
         </div>
         <WhistleblowerTable submissions={submissions} />

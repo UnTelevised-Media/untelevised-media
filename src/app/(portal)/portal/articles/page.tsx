@@ -5,10 +5,7 @@ import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
 import { portalFetch } from '@/lib/portal/live';
-import {
-  queryPortalArticlesByAuthor,
-  queryPortalAllArticles,
-} from '@/lib/portal/queries';
+import { queryPortalArticlesByAuthor, queryPortalAllArticles } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import ArticleDashboard from '@/components/portal/ArticleDashboard';
 import Link from 'next/link';
@@ -31,7 +28,9 @@ export default async function PortalArticlesPage() {
     articles = await portalFetch<PortalArticle[]>(queryPortalAllArticles);
   } else {
     if (sanityAuthorId) {
-      articles = await portalFetch<PortalArticle[]>(queryPortalArticlesByAuthor, { sanityAuthorId });
+      articles = await portalFetch<PortalArticle[]>(queryPortalArticlesByAuthor, {
+        sanityAuthorId,
+      });
     }
   }
 
@@ -39,10 +38,16 @@ export default async function PortalArticlesPage() {
   // _originalId is the actual Sanity document ID and preserves the "drafts." prefix.
   const isDraftDoc = (a: PortalArticle) => (a._originalId ?? a._id).startsWith('drafts.');
   const publishedCount = articles.filter((a) => !isDraftDoc(a)).length;
-  const reviewCount = articles.filter((a) => isDraftDoc(a) && (a.needsReview || !!a.deletionRequest)).length;
+  const reviewCount = articles.filter(
+    (a) => isDraftDoc(a) && (a.needsReview || !!a.deletionRequest)
+  ).length;
   // Unpublished = draft _originalId + publishedAt set (was previously live, now taken down in Studio)
-  const unpublishedCount = articles.filter((a) => isDraftDoc(a) && !a.needsReview && !a.deletionRequest && !!a.publishedAt).length;
-  const draftCount = articles.filter((a) => isDraftDoc(a) && !a.needsReview && !a.deletionRequest).length;
+  const unpublishedCount = articles.filter(
+    (a) => isDraftDoc(a) && !a.needsReview && !a.deletionRequest && !!a.publishedAt
+  ).length;
+  const draftCount = articles.filter(
+    (a) => isDraftDoc(a) && !a.needsReview && !a.deletionRequest
+  ).length;
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
@@ -56,9 +61,15 @@ export default async function PortalArticlesPage() {
               {isEditorPlus ? 'All Articles' : 'My Articles'}
             </h1>
             <p className='mt-1 text-sm text-slate-500 dark:text-slate-400'>
-              {publishedCount} published &nbsp;·&nbsp; {reviewCount} in review &nbsp;·&nbsp; {draftCount} draft
+              {publishedCount} published &nbsp;·&nbsp; {reviewCount} in review &nbsp;·&nbsp;{' '}
+              {draftCount} draft
               {unpublishedCount > 0 && (
-                <>&nbsp;·&nbsp; <span className='text-amber-600 dark:text-amber-400'>{unpublishedCount} unpublished</span></>
+                <>
+                  &nbsp;·&nbsp;{' '}
+                  <span className='text-amber-600 dark:text-amber-400'>
+                    {unpublishedCount} unpublished
+                  </span>
+                </>
               )}
             </p>
           </div>

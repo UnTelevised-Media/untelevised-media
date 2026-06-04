@@ -68,9 +68,7 @@ export default function SourceForm({ sourceId, initialData }: Props) {
     };
 
     startTransition(async () => {
-      const result = sourceId
-        ? await updateSource(sourceId, input)
-        : await createSource(input);
+      const result = sourceId ? await updateSource(sourceId, input) : await createSource(input);
 
       if (result.success) {
         toast.success(sourceId ? 'Source updated.' : 'Source created.');
@@ -93,9 +91,7 @@ export default function SourceForm({ sourceId, initialData }: Props) {
           {...register('label')}
           placeholder='e.g. Court Filing — Fulton County Superior Court'
         />
-        {errors.label && (
-          <p className='mt-1 text-xs text-red-500'>{errors.label.message}</p>
-        )}
+        {errors.label && <p className='mt-1 text-xs text-red-500'>{errors.label.message}</p>}
       </div>
 
       {/* Type */}
@@ -131,20 +127,16 @@ export default function SourceForm({ sourceId, initialData }: Props) {
         <Label htmlFor='url' className='mb-1 block text-xs font-bold uppercase tracking-widest'>
           URL (optional)
         </Label>
-        <Input
-          id='url'
-          type='url'
-          {...register('url')}
-          placeholder='https://…'
-        />
-        {errors.url && (
-          <p className='mt-1 text-xs text-red-500'>{errors.url.message}</p>
-        )}
+        <Input id='url' type='url' {...register('url')} placeholder='https://…' />
+        {errors.url && <p className='mt-1 text-xs text-red-500'>{errors.url.message}</p>}
       </div>
 
       {/* Description / Notes */}
       <div>
-        <Label htmlFor='description' className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+        <Label
+          htmlFor='description'
+          className='mb-1 block text-xs font-bold uppercase tracking-widest'
+        >
           Notes
         </Label>
         <Textarea
@@ -168,9 +160,7 @@ export default function SourceForm({ sourceId, initialData }: Props) {
             />
           )}
         />
-        <Label htmlFor='isAnonymous'>
-          Anonymous source — hide label and notes from readers
-        </Label>
+        <Label htmlFor='isAnonymous'>Anonymous source — hide label and notes from readers</Label>
       </div>
 
       <div className='flex gap-3'>
@@ -181,11 +171,7 @@ export default function SourceForm({ sourceId, initialData }: Props) {
         >
           {isPending ? 'Saving…' : sourceId ? 'Update Source' : 'Create Source'}
         </Button>
-        <Button
-          type='button'
-          variant='outline'
-          onClick={() => router.push('/portal/sources')}
-        >
+        <Button type='button' variant='outline' onClick={() => router.push('/portal/sources')}>
           Cancel
         </Button>
       </div>

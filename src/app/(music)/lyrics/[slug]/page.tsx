@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = truncate(
     song.seo?.metaDescription ??
       `Read the lyrics to "${song.title}" by ${artistNames} on UnTelevised Media.`,
-    160,
+    160
   );
 
   return {
@@ -431,7 +431,11 @@ export default async function LyricsPage({ params }: Props) {
 // Fetch song data by slug
 async function getSongBySlug(slug: string): Promise<Song | null> {
   try {
-    const { data } = await sanityFetch({ query: querySongBySlug, params: { slug }, tags: ['song'] });
+    const { data } = await sanityFetch({
+      query: querySongBySlug,
+      params: { slug },
+      tags: ['song'],
+    });
     return data as Song | null;
   } catch (error) {
     console.error('Failed to fetch song:', error);
@@ -443,5 +447,7 @@ export async function generateStaticParams() {
   const querySongStaticParams = groq`*[_type=='song'] { slug }`;
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: { slug: { current: string } }[] = await sanityClient.fetch(querySongStaticParams);
-  return (slugs ?? []).filter((item) => item?.slug?.current).map((item) => ({ slug: item.slug.current }));
+  return (slugs ?? [])
+    .filter((item) => item?.slug?.current)
+    .map((item) => ({ slug: item.slug.current }));
 }

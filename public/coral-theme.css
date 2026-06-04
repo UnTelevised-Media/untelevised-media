@@ -16,5 +16,9 @@
   --palette-primary-900: #5a0202;
 }
 
-a { color: #d70606 !important; }
-a:hover { color: #b80505 !important; }
+a {
+  color: #d70606 !important;
+}
+a:hover {
+  color: #b80505 !important;
+}

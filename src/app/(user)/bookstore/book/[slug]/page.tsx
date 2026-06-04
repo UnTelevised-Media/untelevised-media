@@ -9,7 +9,11 @@ import type { Metadata } from 'next';
 import { PortableText } from '@portabletext/react';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
-import { queryBookBySlug, queryAllBooks, queryApprovedReviewsByBookSlug } from '@/lib/sanity/lib/queries';
+import {
+  queryBookBySlug,
+  queryAllBooks,
+  queryApprovedReviewsByBookSlug,
+} from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/lib/bookstore/types';
 import urlForImage from '@/util/urlForImage';
 import { HURRIYA_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata';
@@ -21,24 +25,18 @@ import ReviewForm from '@/components/bookstore/ReviewForm';
 import BookBuySection from '@/components/bookstore/BookBuySection';
 
 // JSON-LD structured data
-function buildProductJsonLd(
-  book: SanityBook,
-  reviews: BookReview[],
-): string {
+function buildProductJsonLd(book: SanityBook, reviews: BookReview[]): string {
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(600).url()
     : book.coverImageUrl;
 
   const reviewCount = reviews.length;
   const averageRating =
-    reviewCount > 0
-      ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
-      : null;
+    reviewCount > 0 ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount : null;
 
-  const authorUrl =
-    book.author?.slug?.current
-      ? `https://www.untelevised.media/author/${book.author.slug.current}/`
-      : undefined;
+  const authorUrl = book.author?.slug?.current
+    ? `https://www.untelevised.media/author/${book.author.slug.current}/`
+    : undefined;
 
   return JSON.stringify({
     '@context': 'https://schema.org',
@@ -169,7 +167,8 @@ function RevenueTermsCard({
   terms: NonNullable<import('@/lib/bookstore/types').SanityBook['revenueTerms']>;
 }) {
   const { authorPercentage, publisherPercentage, platformPercentage, description } = terms;
-  const hasData = authorPercentage != null || publisherPercentage != null || platformPercentage != null;
+  const hasData =
+    authorPercentage != null || publisherPercentage != null || platformPercentage != null;
   if (!hasData) return null;
 
   const slices = [
@@ -215,9 +214,7 @@ function RevenueTermsCard({
             </div>
           ))}
         </div>
-        {description && (
-          <p className='text-xs text-hp-muted'>{description}</p>
-        )}
+        {description && <p className='text-xs text-hp-muted'>{description}</p>}
       </div>
     </details>
   );
@@ -246,11 +243,7 @@ async function ReviewsSection({ slug }: { slug: string }) {
   );
 }
 
-export default async function BookDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function BookDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const book = await sanityFetch<SanityBook | null>({
     query: queryBookBySlug,
@@ -271,7 +264,8 @@ export default async function BookDetailPage({
   const isOutOfStock =
     book.status === 'out-of-stock' ||
     book.formats?.every(
-      (f) => f.inventory?.trackInventory && f.inventory.quantity === 0 && !f.inventory.allowBackorder,
+      (f) =>
+        f.inventory?.trackInventory && f.inventory.quantity === 0 && !f.inventory.allowBackorder
     );
 
   return (
@@ -358,8 +352,10 @@ export default async function BookDetailPage({
 
             {/* Description */}
             {book.description && (
-              <div className='prose prose-sm mb-6 max-w-none text-slate-700 dark:prose-invert dark:text-hp-cream'>
-                <PortableText value={book.description as Parameters<typeof PortableText>[0]['value']} />
+              <div className='prose prose-sm dark:prose-invert mb-6 max-w-none text-slate-700 dark:text-hp-cream'>
+                <PortableText
+                  value={book.description as Parameters<typeof PortableText>[0]['value']}
+                />
               </div>
             )}
 
@@ -398,9 +394,7 @@ export default async function BookDetailPage({
             </div>
 
             {/* Revenue sharing */}
-            {book.revenueTerms && (
-              <RevenueTermsCard terms={book.revenueTerms} />
-            )}
+            {book.revenueTerms && <RevenueTermsCard terms={book.revenueTerms} />}
 
             {/* Social sharing */}
             <div className='mb-6'>
@@ -416,7 +410,13 @@ export default async function BookDetailPage({
                 <div className='mb-2 flex items-center gap-3'>
                   {authorCover && (
                     <div className='relative h-10 w-10 shrink-0 overflow-hidden'>
-                      <Image src={authorCover} alt={book.author.name ?? ''} fill className='object-cover' sizes='40px' />
+                      <Image
+                        src={authorCover}
+                        alt={book.author.name ?? ''}
+                        fill
+                        className='object-cover'
+                        sizes='40px'
+                      />
                     </div>
                   )}
                   <div>
@@ -429,8 +429,10 @@ export default async function BookDetailPage({
                   </div>
                 </div>
                 {book.author.bio && (
-                  <div className='prose prose-sm max-w-none text-slate-600 dark:prose-invert dark:text-hp-muted'>
-                    <PortableText value={book.author.bio as Parameters<typeof PortableText>[0]['value']} />
+                  <div className='prose prose-sm dark:prose-invert max-w-none text-slate-600 dark:text-hp-muted'>
+                    <PortableText
+                      value={book.author.bio as Parameters<typeof PortableText>[0]['value']}
+                    />
                   </div>
                 )}
                 {book.author.slug && (

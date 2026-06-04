@@ -1,15 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "types": [
-      "jest",
-      "node"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["jest", "node"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -30,41 +23,20 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/c/*": [
-        "./src/components/*"
-      ],
-      "@/l/*": [
-        "./src/lib/*"
-      ],
-      "@/h/*": [
-        "./src/hooks/*"
-      ],
-      "@/u/*": [
-        "./src/util/*"
-      ],
-      "@/t/*": [
-        "./src/models/types/*"
-      ],
-      "@/app/*": [
-        "./src/app/*"
-      ],
-      "@/s/*": [
-        "./src/server/*"
-      ],
-      "#/*": [
-        "./*"
-      ]
+      "@/*": ["./src/*"],
+      "@/c/*": ["./src/components/*"],
+      "@/l/*": ["./src/lib/*"],
+      "@/h/*": ["./src/hooks/*"],
+      "@/u/*": ["./src/util/*"],
+      "@/t/*": ["./src/models/types/*"],
+      "@/app/*": ["./src/app/*"],
+      "@/s/*": ["./src/server/*"],
+      "#/*": ["./*"]
     },
     "ignoreDeprecations": "6.0",
     "rootDir": "./",
     "outDir": "./out",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/models/types"
-    ]
+    "typeRoots": ["./node_modules/@types", "./src/models/types"]
   },
   "include": [
     "next-env.d.ts",
@@ -76,8 +48,5 @@
     "build-utilities/generateRobots.mjs",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "supabase/functions"
-  ]
+  "exclude": ["node_modules", "supabase/functions"]
 }

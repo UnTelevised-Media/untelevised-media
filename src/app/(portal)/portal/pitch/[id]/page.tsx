@@ -67,11 +67,7 @@ const STATUS_COLORS: Record<string, string> = {
 // Page
 // ---------------------------------------------------------------------------
 
-export default async function PitchPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function PitchPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { id: clerkUserId, role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
@@ -79,7 +75,9 @@ export default async function PitchPage({
 
   const [pitch, allArticles] = await Promise.all([
     portalFetch<ClaimedPitch | null>(queryPortalClaimedPitchById, { id }),
-    portalFetch<Array<{ _id: string; title: string; authorId: string }>>(queryPortalArticlesTitles),
+    portalFetch<Array<{ _id: string; title: string; authorId: string }>>(
+      queryPortalArticlesTitles
+    ),
   ]);
 
   if (!pitch) notFound();

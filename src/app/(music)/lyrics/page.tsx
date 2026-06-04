@@ -28,7 +28,9 @@ export const metadata: Metadata = {
     title: 'Lyrics | Music & Songs',
     description: 'Discover song lyrics from our featured artists on UnTelevised Media.',
     url: getCanonicalUrl('lyrics'),
-    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'UnTelevised Media — Lyrics' }],
+    images: [
+      { url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'UnTelevised Media — Lyrics' },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

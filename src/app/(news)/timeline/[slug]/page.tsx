@@ -14,7 +14,7 @@ import LoadingSpinner from '@/components/global/LoadingSpinner';
 // Defer framer-motion heavy timeline visualization — only needed after page load
 const TimelineJSVisualization = dynamic(
   () => import('@/components/timeline/TimelineJSVisualization'),
-  { loading: () => <LoadingSpinner /> },
+  { loading: () => <LoadingSpinner /> }
 );
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
@@ -56,7 +56,9 @@ export default async function TimelinePage({ params }: Props) {
       '@type': 'ListItem',
       position: index + 1,
       name: event.title,
-      ...(event.eventDate ? { url: `https://www.untelevised.media/timeline/${slug}/#event-${index + 1}` } : {}),
+      ...(event.eventDate
+        ? { url: `https://www.untelevised.media/timeline/${slug}/#event-${index + 1}` }
+        : {}),
     })),
   };
 
@@ -360,7 +362,9 @@ export async function generateStaticParams() {
   const queryTimelineStaticParams = groq`*[_type=='timeline' && isPublished == true] { slug }`;
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: Timeline[] = await sanityClient.fetch(queryTimelineStaticParams);
-  const slugRoutes = slugs ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current) : [];
+  const slugRoutes = slugs
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    : [];
   return slugRoutes.map((slug) => ({
     slug,
   }));

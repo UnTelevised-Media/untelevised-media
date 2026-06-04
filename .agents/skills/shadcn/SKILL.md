@@ -119,21 +119,21 @@ These are the most common patterns that differentiate correct shadcn/ui code. Fo
 
 ## Component Selection
 
-| Need                       | Use                                                                                                 |
-| -------------------------- | --------------------------------------------------------------------------------------------------- |
-| Button/action              | `Button` with appropriate variant                                                                   |
-| Form inputs                | `Input`, `Select`, `Combobox`, `Switch`, `Checkbox`, `RadioGroup`, `Textarea`, `InputOTP`, `Slider` |
-| Toggle between 2–5 options | `ToggleGroup` + `ToggleGroupItem`                                                                   |
-| Data display               | `Table`, `Card`, `Badge`, `Avatar`                                                                  |
-| Navigation                 | `Sidebar`, `NavigationMenu`, `Breadcrumb`, `Tabs`, `Pagination`                                     |
-| Overlays                   | `Dialog` (modal), `Sheet` (side panel), `Drawer` (bottom sheet), `AlertDialog` (confirmation)       |
-| Feedback                   | `sonner` (toast), `Alert`, `Progress`, `Skeleton`, `Spinner`                                        |
-| Command palette            | `Command` inside `Dialog`                                                                           |
-| Charts                     | `Chart` (wraps Recharts)                                                                            |
-| Layout                     | `Card`, `Separator`, `Resizable`, `ScrollArea`, `Accordion`, `Collapsible`                          |
-| Empty states               | `Empty`                                                                                             |
-| Menus                      | `DropdownMenu`, `ContextMenu`, `Menubar`                                                            |
-| Tooltips/info              | `Tooltip`, `HoverCard`, `Popover`                                                                   |
+| Need | Use |
+| --- | --- |
+| Button/action | `Button` with appropriate variant |
+| Form inputs | `Input`, `Select`, `Combobox`, `Switch`, `Checkbox`, `RadioGroup`, `Textarea`, `InputOTP`, `Slider` |
+| Toggle between 2–5 options | `ToggleGroup` + `ToggleGroupItem` |
+| Data display | `Table`, `Card`, `Badge`, `Avatar` |
+| Navigation | `Sidebar`, `NavigationMenu`, `Breadcrumb`, `Tabs`, `Pagination` |
+| Overlays | `Dialog` (modal), `Sheet` (side panel), `Drawer` (bottom sheet), `AlertDialog` (confirmation) |
+| Feedback | `sonner` (toast), `Alert`, `Progress`, `Skeleton`, `Spinner` |
+| Command palette | `Command` inside `Dialog` |
+| Charts | `Chart` (wraps Recharts) |
+| Layout | `Card`, `Separator`, `Resizable`, `ScrollArea`, `Accordion`, `Collapsible` |
+| Empty states | `Empty` |
+| Menus | `DropdownMenu`, `ContextMenu`, `Menubar` |
+| Tooltips/info | `Tooltip`, `HoverCard`, `Popover` |
 
 ## Key Fields
 
@@ -225,9 +225,7 @@ npx shadcn@latest docs button dialog select
 npx shadcn@latest view @shadcn/button
 ```
 
-**Named presets:** `base-nova`, `radix-nova`
-**Templates:** `next`, `vite`, `start`, `react-router`, `astro` (all support `--monorepo`) and `laravel` (not supported for monorepo)
-**Preset codes:** Base62 strings starting with `a` (e.g. `a2r6bw`), from [ui.shadcn.com](https://ui.shadcn.com).
+**Named presets:** `base-nova`, `radix-nova` **Templates:** `next`, `vite`, `start`, `react-router`, `astro` (all support `--monorepo`) and `laravel` (not supported for monorepo) **Preset codes:** Base62 strings starting with `a` (e.g. `a2r6bw`), from [ui.shadcn.com](https://ui.shadcn.com).
 
 ## Detailed References
 

@@ -21,7 +21,12 @@ import {
   queryPortalMyAuthorFlags,
 } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
-import { BriefPanel, type Brief, type PortalAuthor, type BriefSummary } from '@/components/portal/BriefPanel';
+import {
+  BriefPanel,
+  type Brief,
+  type PortalAuthor,
+  type BriefSummary,
+} from '@/components/portal/BriefPanel';
 import { type ClaimedPitchSummary } from '@/components/portal/ClaimedPitchCard';
 import { ClaimedPitchesPanel } from '@/components/portal/ClaimedPitchesPanel';
 import BookstoreOrdersWidget, {
@@ -48,7 +53,15 @@ export const metadata = {
 
 type StatEntry = { label: string; value: number | string; accent?: boolean };
 
-function StatBoardRow({ section, stats, href }: { section: string; stats: StatEntry[]; href: string }) {
+function StatBoardRow({
+  section,
+  stats,
+  href,
+}: {
+  section: string;
+  stats: StatEntry[];
+  href: string;
+}) {
   return (
     <Link
       href={href}
@@ -60,10 +73,14 @@ function StatBoardRow({ section, stats, href }: { section: string; stats: StatEn
       <div className='flex flex-wrap items-baseline gap-x-5 gap-y-0.5'>
         {stats.map(({ label, value, accent }) => (
           <span key={label} className='flex items-baseline gap-1'>
-            <b className={`text-sm font-black leading-none tabular-nums ${accent ? 'text-untele' : 'text-slate-900 dark:text-white'}`}>
+            <b
+              className={`text-sm font-black tabular-nums leading-none ${accent ? 'text-untele' : 'text-slate-900 dark:text-white'}`}
+            >
               {value}
             </b>
-            <span className='text-[9px] font-bold uppercase tracking-widest text-slate-400'>{label}</span>
+            <span className='text-[9px] font-bold uppercase tracking-widest text-slate-400'>
+              {label}
+            </span>
           </span>
         ))}
       </div>
@@ -71,7 +88,11 @@ function StatBoardRow({ section, stats, href }: { section: string; stats: StatEn
   );
 }
 
-function StatBoardInboxRow({ items }: { items: { label: string; value: number; href: string; accent?: boolean }[] }) {
+function StatBoardInboxRow({
+  items,
+}: {
+  items: { label: string; value: number; href: string; accent?: boolean }[];
+}) {
   return (
     <div className='flex min-h-[34px] flex-wrap items-center gap-x-5 gap-y-1 px-3 py-1.5'>
       <span className='w-[88px] shrink-0 text-[9px] font-black uppercase tracking-widest text-slate-400'>
@@ -79,11 +100,19 @@ function StatBoardInboxRow({ items }: { items: { label: string; value: number; h
       </span>
       <div className='flex flex-wrap items-baseline gap-x-5 gap-y-0.5'>
         {items.map(({ label, value, href, accent }) => (
-          <Link key={label} href={href} className='group flex items-baseline gap-1 hover:opacity-80'>
-            <b className={`text-sm font-black leading-none tabular-nums ${accent ? 'text-untele' : 'text-slate-900 dark:text-white'}`}>
+          <Link
+            key={label}
+            href={href}
+            className='group flex items-baseline gap-1 hover:opacity-80'
+          >
+            <b
+              className={`text-sm font-black tabular-nums leading-none ${accent ? 'text-untele' : 'text-slate-900 dark:text-white'}`}
+            >
               {value}
             </b>
-            <span className={`text-[9px] font-bold uppercase tracking-widest ${accent ? 'text-untele' : 'text-slate-400'} group-hover:text-untele`}>
+            <span
+              className={`text-[9px] font-bold uppercase tracking-widest ${accent ? 'text-untele' : 'text-slate-400'} group-hover:text-untele`}
+            >
               {label}
             </span>
           </Link>
@@ -101,7 +130,9 @@ function SectionHeader({ label }: { label: string }) {
   return (
     <div className='mb-2 flex items-center gap-3'>
       <div className='bg-untele px-2 py-0.5'>
-        <span className='text-[10px] font-black uppercase tracking-widest text-white'>{label}</span>
+        <span className='text-[10px] font-black uppercase tracking-widest text-white'>
+          {label}
+        </span>
       </div>
       <div className='h-px flex-1 bg-slate-200 dark:bg-slate-800' />
     </div>
@@ -129,12 +160,13 @@ export default async function PortalDashboardPage() {
   const allBriefs = (allBriefsRes.data ?? []) as BriefSummary[];
 
   // Fetch author's claimed pitches for this brief (storyKey → pitchId map)
-  const myPitchesRes = sanityAuthorId && latestBrief
-    ? await portalSanityFetch({
-        query: queryPortalMyPitchesForBrief,
-        params: { authorId: sanityAuthorId, briefId: latestBrief._id },
-      })
-    : null;
+  const myPitchesRes =
+    sanityAuthorId && latestBrief
+      ? await portalSanityFetch({
+          query: queryPortalMyPitchesForBrief,
+          params: { authorId: sanityAuthorId, briefId: latestBrief._id },
+        })
+      : null;
   const myPitchesRaw = (myPitchesRes?.data ?? []) as Array<{ _id: string; storyKey: string }>;
   // Sorted _createdAt desc → first-seen per storyKey is the newest pitch
   const myPitchMap: Record<string, string> = {};
@@ -151,23 +183,34 @@ export default async function PortalDashboardPage() {
     isEditorPlus
       ? portalSanityFetch({ query: queryPortalAllClaimedPitches })
       : sanityAuthorId
-        ? portalSanityFetch({ query: queryPortalMyClaimedPitches, params: { authorId: sanityAuthorId } })
+        ? portalSanityFetch({
+            query: queryPortalMyClaimedPitches,
+            params: { authorId: sanityAuthorId },
+          })
         : null,
   ]);
-  const myArticles = ((myArticlesRes?.data ?? []) as ArticleRow[]);
-  const allArticles = ((allArticlesRes?.data ?? []) as ArticleRow[]);
-  const authors = ((authorsRes?.data ?? []) as PortalAuthor[]);
-  const claimedPitches = ((claimedPitchesRes?.data ?? []) as ClaimedPitchSummary[]);
+  const myArticles = (myArticlesRes?.data ?? []) as ArticleRow[];
+  const allArticles = (allArticlesRes?.data ?? []) as ArticleRow[];
+  const authors = (authorsRes?.data ?? []) as PortalAuthor[];
+  const claimedPitches = (claimedPitchesRes?.data ?? []) as ClaimedPitchSummary[];
 
   // My article stats — "drafts." prefix is the authoritative published/draft signal
   const myPublished = myArticles.filter((a) => !a._id.startsWith('drafts.')).length;
-  const myInReview = myArticles.filter((a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)).length;
-  const myDrafts = myArticles.filter((a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest).length;
+  const myInReview = myArticles.filter(
+    (a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)
+  ).length;
+  const myDrafts = myArticles.filter(
+    (a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest
+  ).length;
 
   // Editor-wide article stats
   const allPublished = allArticles.filter((a) => !a._id.startsWith('drafts.')).length;
-  const allInReview = allArticles.filter((a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)).length;
-  const allDrafts = allArticles.filter((a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest).length;
+  const allInReview = allArticles.filter(
+    (a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)
+  ).length;
+  const allDrafts = allArticles.filter(
+    (a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest
+  ).length;
 
   // ── Bookstore visibility — based on role + Sanity literary author flag ───────
   const isAdmin = role === 'admin';
@@ -208,9 +251,8 @@ export default async function PortalDashboardPage() {
     _d <= 15
       ? `${_y}-${String(_mo + 1).padStart(2, '0')}-15`
       : `${_y}-${String(_mo + 1).padStart(2, '0')}-${_lastDay}`;
-  const nextPayoutDate = (_d <= 15
-    ? new Date(Date.UTC(_y, _mo, 16))
-    : new Date(Date.UTC(_y, _mo + 1, 1))
+  const nextPayoutDate = (
+    _d <= 15 ? new Date(Date.UTC(_y, _mo, 16)) : new Date(Date.UTC(_y, _mo + 1, 1))
   ).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
   // ── Bookstore data ──────────────────────────────────────────────────────────
@@ -255,7 +297,7 @@ export default async function PortalDashboardPage() {
         let orderQuery = shopServiceClient
           .from('order_items')
           .select(
-            'book_title, sanity_format_type, unit_price_cents, quantity, is_digital, order:orders(id, order_number, status, created_at, fulfilled_at, customer:customers(email, full_name))',
+            'book_title, sanity_format_type, unit_price_cents, quantity, is_digital, order:orders(id, order_number, status, created_at, fulfilled_at, customer:customers(email, full_name))'
           )
           .order('created_at', { ascending: false })
           .limit(200);
@@ -266,26 +308,29 @@ export default async function PortalDashboardPage() {
         }
 
         // author_sales scoped by clerk ID for accurate unit count
-        const unitsSoldQuery = (isAdmin || isSalesRole)
-          ? shopServiceClient.from('author_sales').select('order_item:order_items(quantity)')
-          : shopServiceClient
-              .from('author_sales')
-              .select('order_item:order_items(quantity)')
-              .eq('author_clerk_id', clerkUserId)
-              .eq('is_tip', false);
+        const unitsSoldQuery =
+          isAdmin || isSalesRole
+            ? shopServiceClient.from('author_sales').select('order_item:order_items(quantity)')
+            : shopServiceClient
+                .from('author_sales')
+                .select('order_item:order_items(quantity)')
+                .eq('author_clerk_id', clerkUserId)
+                .eq('is_tip', false);
 
         const [{ data: rawItems, error: itemsError }, { data: unitRows }] = await Promise.all([
           orderQuery,
           unitsSoldQuery,
         ]);
-        if (itemsError) console.error('[portal/dashboard] order_items query failed:', itemsError.message);
+        if (itemsError)
+          console.error('[portal/dashboard] order_items query failed:', itemsError.message);
 
         const items = ((rawItems ?? []) as ItemRow[]).filter(
-          (i) => i.order && !['cancelled', 'refunded'].includes(i.order.status),
+          (i) => i.order && !['cancelled', 'refunded'].includes(i.order.status)
         );
 
-        bookUnitsSold = ((unitRows ?? []) as Array<{ order_item: { quantity: number } | null }>)
-          .reduce((s, r) => s + (r.order_item?.quantity ?? 0), 0);
+        bookUnitsSold = (
+          (unitRows ?? []) as Array<{ order_item: { quantity: number } | null }>
+        ).reduce((s, r) => s + (r.order_item?.quantity ?? 0), 0);
 
         if (showBookstoreOrders) {
           digitalSales = items
@@ -306,7 +351,7 @@ export default async function PortalDashboardPage() {
                 i.sanity_format_type !== 'tip' &&
                 !i.is_digital &&
                 ['paid', 'processing'].includes(i.order!.status) &&
-                !i.order!.fulfilled_at,
+                !i.order!.fulfilled_at
             )
             .slice(0, 50)
             .map((i, idx) => ({
@@ -344,21 +389,26 @@ export default async function PortalDashboardPage() {
           .select('gross_cents, stripe_fee_cents')
           .eq('author_clerk_id', clerkUserId)
           .eq('payout_period_start', currentPayoutPeriodStart);
-        currentPeriodAuthorCents = ((periodRows ?? []) as Array<{ gross_cents: number; stripe_fee_cents: number }>)
-          .reduce((s, e) => s + (e.gross_cents - e.stripe_fee_cents), 0);
+        currentPeriodAuthorCents = (
+          (periodRows ?? []) as Array<{ gross_cents: number; stripe_fee_cents: number }>
+        ).reduce((s, e) => s + (e.gross_cents - e.stripe_fee_cents), 0);
       }
 
       // Pending payouts — everyone sees their own; admins see all
       const payoutsQuery = isAdmin
         ? shopServiceClient
             .from('payouts')
-            .select('id, author_clerk_id, period_start, period_end, gross_cents, net_cents, notes, created_at')
+            .select(
+              'id, author_clerk_id, period_start, period_end, gross_cents, net_cents, notes, created_at'
+            )
             .eq('status', 'pending')
             .order('period_end', { ascending: false })
             .limit(50)
         : shopServiceClient
             .from('payouts')
-            .select('id, author_clerk_id, period_start, period_end, gross_cents, net_cents, notes, created_at')
+            .select(
+              'id, author_clerk_id, period_start, period_end, gross_cents, net_cents, notes, created_at'
+            )
             .eq('status', 'pending')
             .eq('author_clerk_id', clerkUserId)
             .order('period_end', { ascending: false });

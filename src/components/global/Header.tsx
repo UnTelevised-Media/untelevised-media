@@ -2,11 +2,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import {
-  MagnifyingGlassIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Bookmark } from 'lucide-react';
 import { Show, UserButton } from '@clerk/nextjs';
 import dynamic from 'next/dynamic';
@@ -24,8 +20,8 @@ type SpecialLink = {
   href: string;
   label: string;
   icon: React.ReactNode;
-  color: string;       // text color class
-  hover: string;       // hover bg class
+  color: string; // text color class
+  hover: string; // hover bg class
   external?: boolean;
 };
 
@@ -108,13 +104,7 @@ function DesktopPlainLink({ item }: { item: PlainLink }) {
   );
 }
 
-function MobileSpecialLink({
-  item,
-  onClose,
-}: {
-  item: SpecialLink;
-  onClose: () => void;
-}) {
+function MobileSpecialLink({ item, onClose }: { item: SpecialLink; onClose: () => void }) {
   return (
     <Link
       href={item.href}
@@ -134,13 +124,7 @@ function MobileSpecialLink({
   );
 }
 
-function MobilePlainLink({
-  item,
-  onClose,
-}: {
-  item: PlainLink;
-  onClose: () => void;
-}) {
+function MobilePlainLink({ item, onClose }: { item: PlainLink; onClose: () => void }) {
   return (
     <Link
       href={item.href}
@@ -181,13 +165,12 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? 'border-b border-untele/20 bg-slate-100/98 shadow-2xl backdrop-blur-md dark:bg-slate-900/98'
+          ? 'bg-slate-100/98 dark:bg-slate-900/98 border-b border-untele/20 shadow-2xl backdrop-blur-md'
           : 'border-b-2 border-untele/30 bg-slate-100/95 shadow-lg backdrop-blur-md dark:bg-slate-900/95'
       }`}
     >
       {/* ── Main bar ── */}
       <div className='flex w-full items-center justify-between px-4 py-2 md:py-3 lg:px-8'>
-
         {/* Logo */}
         {logoSlot}
 
@@ -242,8 +225,7 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
               appearance={{
                 elements: {
                   avatarBox: 'h-8 w-8',
-                  userButtonPopoverCard:
-                    'shadow-xl border border-slate-200 dark:border-slate-700',
+                  userButtonPopoverCard: 'shadow-xl border border-slate-200 dark:border-slate-700',
                 },
               }}
             />
@@ -297,7 +279,6 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
       {isMenuOpen && (
         <div className='border-t border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900 lg:hidden'>
           <div className='flex flex-col p-4'>
-
             {/* Featured links */}
             <p className='mb-2 px-3 text-[10px] font-black uppercase tracking-widest text-slate-400'>
               Coverage

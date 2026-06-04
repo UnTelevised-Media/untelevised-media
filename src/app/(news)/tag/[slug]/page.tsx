@@ -32,7 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${label} | UnTelevised Media`,
       description: `Browse all UnTelevised Media articles filed under the tag "${label}".`,
       url: canonicalUrl,
-      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: `${label} — UnTelevised Media` }],
+      images: [
+        { url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: `${label} — UnTelevised Media` },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
@@ -95,7 +97,7 @@ export default async function TagPage({ params }: Props) {
       >
         <ol className='flex items-center gap-2'>
           <li>
-            <Link href='/' className='hover:text-untele transition-colors'>
+            <Link href='/' className='transition-colors hover:text-untele'>
               Home
             </Link>
           </li>
@@ -141,9 +143,7 @@ export default async function TagPage({ params }: Props) {
         </div>
       ) : (
         <div className='px-10 pb-24'>
-          <p className='text-slate-500 dark:text-slate-400'>
-            No articles found for this tag yet.
-          </p>
+          <p className='text-slate-500 dark:text-slate-400'>No articles found for this tag yet.</p>
         </div>
       )}
     </div>

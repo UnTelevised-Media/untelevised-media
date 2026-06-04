@@ -22,19 +22,17 @@ export function InlineFactCheckCard({ factCheck }: InlineFactCheckCardProps) {
   const { title, slug, claim, rating, ratingExplanation, claimSource } = factCheck;
 
   return (
-    <aside className='my-6 border border-neutral-200 dark:border-neutral-700 hover:border-[#D70606] transition-colors'>
+    <aside className='my-6 border border-neutral-200 transition-colors hover:border-[#D70606] dark:border-neutral-700'>
       {/* Header bar */}
-      <div className='bg-[#D70606] px-4 py-2 flex items-center gap-3'>
-        <span className='text-xs font-black uppercase tracking-widest text-white'>
-          Fact Check
-        </span>
+      <div className='flex items-center gap-3 bg-[#D70606] px-4 py-2'>
+        <span className='text-xs font-black uppercase tracking-widest text-white'>Fact Check</span>
         <VerdictBadge rating={rating} size='sm' />
       </div>
 
       <div className='p-4'>
         {/* The claim */}
-        <blockquote className='border-l-4 border-neutral-300 dark:border-neutral-600 pl-3 italic text-sm text-neutral-600 dark:text-neutral-300 mb-3'>
-          <p className='text-xs font-black uppercase tracking-widest not-italic text-neutral-400 mb-1'>
+        <blockquote className='mb-3 border-l-4 border-neutral-300 pl-3 text-sm italic text-neutral-600 dark:border-neutral-600 dark:text-neutral-300'>
+          <p className='mb-1 text-xs font-black uppercase not-italic tracking-widest text-neutral-400'>
             The Claim
           </p>
           {claim}
@@ -44,7 +42,7 @@ export function InlineFactCheckCard({ factCheck }: InlineFactCheckCardProps) {
         </blockquote>
 
         {/* Verdict explanation */}
-        <p className='text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed mb-3'>
+        <p className='mb-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300'>
           {ratingExplanation}
         </p>
 
@@ -58,8 +56,8 @@ export function InlineFactCheckCard({ factCheck }: InlineFactCheckCardProps) {
       </div>
 
       {/* Footer with title */}
-      <div className='border-t border-neutral-200 dark:border-neutral-700 px-4 py-2'>
-        <p className='text-xs text-neutral-500 dark:text-neutral-400 font-medium'>{title}</p>
+      <div className='border-t border-neutral-200 px-4 py-2 dark:border-neutral-700'>
+        <p className='text-xs font-medium text-neutral-500 dark:text-neutral-400'>{title}</p>
       </div>
     </aside>
   );

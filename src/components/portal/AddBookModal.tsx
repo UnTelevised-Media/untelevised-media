@@ -119,8 +119,14 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
 
   async function handleCreateGenre() {
     setGenreError('');
-    if (!genreTitle.trim()) { setGenreError('Title is required.'); return; }
-    if (!genreSlug.trim()) { setGenreError('Slug is required.'); return; }
+    if (!genreTitle.trim()) {
+      setGenreError('Title is required.');
+      return;
+    }
+    if (!genreSlug.trim()) {
+      setGenreError('Slug is required.');
+      return;
+    }
     setGenreCreating(true);
     try {
       const created = await createBookGenre(genreTitle, genreSlug);
@@ -192,11 +198,13 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
       .filter((f) => f.nameYourPrice || f.price !== '')
       .map((f) => ({
         formatType: f.formatType,
-        price: f.nameYourPrice ? (parseFloat(f.suggestedPrice) || 0) : parseFloat(f.price),
+        price: f.nameYourPrice ? parseFloat(f.suggestedPrice) || 0 : parseFloat(f.price),
         ...(f.compareAtPrice ? { compareAtPrice: parseFloat(f.compareAtPrice) } : {}),
         ...(f.nameYourPrice ? { nameYourPrice: true } : {}),
         ...(f.nameYourPrice && f.minimumPrice ? { minimumPrice: parseFloat(f.minimumPrice) } : {}),
-        ...(f.nameYourPrice && f.suggestedPrice ? { suggestedPrice: parseFloat(f.suggestedPrice) } : {}),
+        ...(f.nameYourPrice && f.suggestedPrice
+          ? { suggestedPrice: parseFloat(f.suggestedPrice) }
+          : {}),
       }));
 
     if (parsedFormats.some((f) => isNaN(f.price) || f.price < 0)) {
@@ -206,7 +214,12 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
 
     startTransition(async () => {
       try {
-        console.log('[AddBookModal] submitting, coverFile:', coverFile?.name ?? 'none', 'digitalFiles:', digitalFiles.map(f => f?.name ?? 'none'));
+        console.log(
+          '[AddBookModal] submitting, coverFile:',
+          coverFile?.name ?? 'none',
+          'digitalFiles:',
+          digitalFiles.map((f) => f?.name ?? 'none')
+        );
         const result = await createBook({
           title: title.trim(),
           description: description.trim() || undefined,
@@ -219,7 +232,12 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
           formats: parsedFormats,
           genreIds: selectedGenreIds.length ? selectedGenreIds : undefined,
         });
-        console.log('[AddBookModal] createBook ok, id:', result.id, 'formatKeys:', result.formatKeys);
+        console.log(
+          '[AddBookModal] createBook ok, id:',
+          result.id,
+          'formatKeys:',
+          result.formatKeys
+        );
 
         // Upload cover if one was selected
         if (coverFile) {
@@ -240,7 +258,9 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
           if (!fmtKey) continue;
           if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') continue;
           const file = digitalFiles[i];
-          console.log(`[AddBookModal] format[${i}] type=${fmt.formatType} fmtKey=${fmtKey?.key} file=${file?.name ?? 'none'}`);
+          console.log(
+            `[AddBookModal] format[${i}] type=${fmt.formatType} fmtKey=${fmtKey?.key} file=${file?.name ?? 'none'}`
+          );
           if (!file) continue;
           const fd = new FormData();
           fd.append('bookId', result.id);
@@ -272,7 +292,12 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
       </button>
 
       {open && (
-        <div className='fixed inset-0 z-50 flex' role='dialog' aria-modal='true' aria-label='Add Book'>
+        <div
+          className='fixed inset-0 z-50 flex'
+          role='dialog'
+          aria-modal='true'
+          aria-label='Add Book'
+        >
           {/* Backdrop */}
           <div className='absolute inset-0 bg-black/50' onClick={close} aria-hidden='true' />
 
@@ -306,7 +331,8 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                   {title}
                 </p>
                 <p className='text-xs text-slate-400'>
-                  Status: <strong>{status}</strong>. Use the Edit button to add cover art, genres, and pricing before publishing.
+                  Status: <strong>{status}</strong>. Use the Edit button to add cover art, genres,
+                  and pricing before publishing.
                 </p>
                 <div className='flex flex-wrap justify-center gap-3'>
                   <a
@@ -370,9 +396,39 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           onChange={handleCoverChange}
                         />
                         {/* Digital file inputs — always mounted, same pattern as cover. One per slot (max 3). */}
-                        <input ref={digitalRef0} type='file' accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip' className='fixed left-[-9999px] top-0 opacity-0' onChange={(e) => { const f = e.target.files?.[0]; if (f) setDigitalFiles((p) => p.map((x, idx) => idx === 0 ? f : x)); e.target.value = ''; }} />
-                        <input ref={digitalRef1} type='file' accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip' className='fixed left-[-9999px] top-0 opacity-0' onChange={(e) => { const f = e.target.files?.[0]; if (f) setDigitalFiles((p) => p.map((x, idx) => idx === 1 ? f : x)); e.target.value = ''; }} />
-                        <input ref={digitalRef2} type='file' accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip' className='fixed left-[-9999px] top-0 opacity-0' onChange={(e) => { const f = e.target.files?.[0]; if (f) setDigitalFiles((p) => p.map((x, idx) => idx === 2 ? f : x)); e.target.value = ''; }} />
+                        <input
+                          ref={digitalRef0}
+                          type='file'
+                          accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip'
+                          className='fixed left-[-9999px] top-0 opacity-0'
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 0 ? f : x)));
+                            e.target.value = '';
+                          }}
+                        />
+                        <input
+                          ref={digitalRef1}
+                          type='file'
+                          accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip'
+                          className='fixed left-[-9999px] top-0 opacity-0'
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 1 ? f : x)));
+                            e.target.value = '';
+                          }}
+                        />
+                        <input
+                          ref={digitalRef2}
+                          type='file'
+                          accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip'
+                          className='fixed left-[-9999px] top-0 opacity-0'
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 2 ? f : x)));
+                            e.target.value = '';
+                          }}
+                        />
                         <button
                           type='button'
                           onClick={() => coverInputRef.current?.click()}
@@ -387,16 +443,17 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                             <p className='truncate text-[10px] text-slate-400'>{coverFile.name}</p>
                             <button
                               type='button'
-                              onClick={() => { setCoverFile(null); setCoverPreview(null); }}
+                              onClick={() => {
+                                setCoverFile(null);
+                                setCoverPreview(null);
+                              }}
                               className='ml-2 shrink-0 text-[10px] font-bold text-slate-400 hover:text-untele'
                             >
                               Remove
                             </button>
                           </div>
                         )}
-                        <p className='text-[10px] text-slate-400'>
-                          JPG, PNG, WebP — max 5 MB
-                        </p>
+                        <p className='text-[10px] text-slate-400'>JPG, PNG, WebP — max 5 MB</p>
                       </div>
                     </div>
                   </div>
@@ -451,7 +508,10 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                       <span className={labelCls}>Genres</span>
                       <button
                         type='button'
-                        onClick={() => { setShowGenreForm((v) => !v); setGenreError(''); }}
+                        onClick={() => {
+                          setShowGenreForm((v) => !v);
+                          setGenreError('');
+                        }}
                         className='flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-untele hover:underline'
                       >
                         <Plus className='h-3 w-3' />
@@ -535,7 +595,9 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                                       type='button'
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        setSelectedGenreIds((prev) => prev.filter((gid) => gid !== id));
+                                        setSelectedGenreIds((prev) =>
+                                          prev.filter((gid) => gid !== id)
+                                        );
                                       }}
                                       className='leading-none text-untele/60 hover:text-untele'
                                     >
@@ -569,7 +631,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                                       setSelectedGenreIds((prev) =>
                                         e.target.checked
                                           ? [...prev, g._id]
-                                          : prev.filter((id) => id !== g._id),
+                                          : prev.filter((id) => id !== g._id)
                                       )
                                     }
                                     className='accent-untele'
@@ -629,10 +691,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                     </div>
                     <div className='space-y-3'>
                       {formats.map((fmt, i) => (
-                        <div
-                          key={i}
-                          className='border border-slate-200 p-3 dark:border-slate-700'
-                        >
+                        <div key={i} className='border border-slate-200 p-3 dark:border-slate-700'>
                           <div className='mb-2 flex items-center justify-between'>
                             <span className='text-[10px] font-black uppercase tracking-widest text-slate-400'>
                               Format {i + 1}
@@ -674,7 +733,9 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           <div className='mb-2 flex items-center gap-2'>
                             <button
                               type='button'
-                              onClick={() => updateFormat(i, { nameYourPrice: !fmt.nameYourPrice })}
+                              onClick={() =>
+                                updateFormat(i, { nameYourPrice: !fmt.nameYourPrice })
+                              }
                               className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full transition-colors ${fmt.nameYourPrice ? 'bg-untele' : 'bg-slate-200 dark:bg-slate-700'}`}
                             >
                               <span
@@ -696,11 +757,15 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                                   step='0.01'
                                   min='0'
                                   value={fmt.minimumPrice}
-                                  onChange={(e) => updateFormat(i, { minimumPrice: e.target.value })}
+                                  onChange={(e) =>
+                                    updateFormat(i, { minimumPrice: e.target.value })
+                                  }
                                   placeholder='0.00'
                                   className={inputCls}
                                 />
-                                <p className='mt-0.5 text-[9px] text-slate-400'>0 = free / any amount</p>
+                                <p className='mt-0.5 text-[9px] text-slate-400'>
+                                  0 = free / any amount
+                                </p>
                               </div>
                               <div>
                                 <label className={`mb-1 block ${labelCls}`}>Suggested (USD)</label>
@@ -709,7 +774,9 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                                   step='0.01'
                                   min='0'
                                   value={fmt.suggestedPrice}
-                                  onChange={(e) => updateFormat(i, { suggestedPrice: e.target.value })}
+                                  onChange={(e) =>
+                                    updateFormat(i, { suggestedPrice: e.target.value })
+                                  }
                                   placeholder='9.99'
                                   className={inputCls}
                                 />
@@ -736,7 +803,9 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                                   step='0.01'
                                   min='0'
                                   value={fmt.compareAtPrice}
-                                  onChange={(e) => updateFormat(i, { compareAtPrice: e.target.value })}
+                                  onChange={(e) =>
+                                    updateFormat(i, { compareAtPrice: e.target.value })
+                                  }
                                   placeholder='24.99'
                                   className={inputCls}
                                 />
@@ -747,7 +816,9 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           {/* Digital file upload — only for digital/bundle formats */}
                           {(fmt.formatType === 'digital' || fmt.formatType === 'bundle') && (
                             <div className='mt-3 border-t border-slate-100 pt-3 dark:border-slate-700'>
-                              <p className={`mb-1.5 ${labelCls}`}>Digital File (PDF / EPUB / MOBI)</p>
+                              <p className={`mb-1.5 ${labelCls}`}>
+                                Digital File (PDF / EPUB / MOBI)
+                              </p>
                               {digitalFiles[i] ? (
                                 <div className='flex items-center justify-between gap-2 border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800'>
                                   <div className='min-w-0'>
@@ -760,7 +831,11 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                                   </div>
                                   <button
                                     type='button'
-                                    onClick={() => setDigitalFiles((f) => f.map((file, idx) => (idx === i ? null : file)))}
+                                    onClick={() =>
+                                      setDigitalFiles((f) =>
+                                        f.map((file, idx) => (idx === i ? null : file))
+                                      )
+                                    }
                                     className='shrink-0 text-[10px] font-bold text-slate-400 hover:text-untele'
                                   >
                                     Remove
@@ -823,8 +898,6 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                       />
                     </FormField>
                   </div>
-
-
                 </div>
 
                 {/* Footer actions */}

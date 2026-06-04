@@ -29,7 +29,9 @@ export default function CommentsSection({
   const { isSignedIn, isLoaded } = useUser();
   const { resolvedTheme } = useTheme();
   // preferences.preferences is the "functional cookies" consent flag
-  const { preferences: { preferences: functionalConsent } } = useConsent();
+  const {
+    preferences: { preferences: functionalConsent },
+  } = useConsent();
   const [token, setToken] = useState<string | null>(null);
   const embedRef = useRef<{ remove: () => void } | null>(null);
 
@@ -38,7 +40,10 @@ export default function CommentsSection({
   useEffect(() => {
     if (!isSignedIn) return;
     const cached = sessionStorage.getItem('coral_sso_token');
-    if (cached) { setToken(cached); return; }
+    if (cached) {
+      setToken(cached);
+      return;
+    }
     const controller = new AbortController();
     fetch('/api/coral-token', { signal: controller.signal })
       .then((r) => r.json())
@@ -98,7 +103,7 @@ export default function CommentsSection({
     } else {
       // Avoid injecting the script twice if it is already in the DOM
       const existingScript = document.querySelector<HTMLScriptElement>(
-        `script[src="${coralUrl}/assets/js/embed.js"]`,
+        `script[src="${coralUrl}/assets/js/embed.js"]`
       );
       if (existingScript) {
         existingScript.addEventListener('load', initEmbed, { once: true });
@@ -144,13 +149,11 @@ export default function CommentsSection({
       <div className='space-y-3 border border-border px-6 py-8'>
         <div className='flex items-center gap-2'>
           <MessageSquare className='h-4 w-4 shrink-0 text-untele' />
-          <span className='text-xs font-black uppercase tracking-widest'>
-            Join the Discussion
-          </span>
+          <span className='text-xs font-black uppercase tracking-widest'>Join the Discussion</span>
         </div>
         <p className='text-sm text-muted-foreground'>
-          Comments require functional cookies to load. Update your cookie
-          preferences to participate in the discussion.
+          Comments require functional cookies to load. Update your cookie preferences to
+          participate in the discussion.
         </p>
         <a
           href='/privacy-settings'

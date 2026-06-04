@@ -25,20 +25,20 @@ npx shadcn@latest init [components...] [options]
 
 Initializes shadcn/ui in an existing project or creates a new project (when `--name` is provided). Optionally installs components in the same step.
 
-| Flag                    | Short | Description                                               | Default |
-| ----------------------- | ----- | --------------------------------------------------------- | ------- |
-| `--template <template>` | `-t`  | Template (next, start, vite, next-monorepo, react-router) | —       |
-| `--preset [name]`       | `-p`  | Preset configuration (named, code, or URL)                | —       |
-| `--yes`                 | `-y`  | Skip confirmation prompt                                  | `true`  |
-| `--defaults`            | `-d`  | Use defaults (`--template=next --preset=base-nova`)       | `false` |
-| `--force`               | `-f`  | Force overwrite existing configuration                    | `false` |
-| `--cwd <cwd>`           | `-c`  | Working directory                                         | current |
-| `--name <name>`         | `-n`  | Name for new project                                      | —       |
-| `--silent`              | `-s`  | Mute output                                               | `false` |
-| `--rtl`                 |       | Enable RTL support                                        | —       |
-| `--reinstall`           |       | Re-install existing UI components                         | `false` |
-| `--monorepo`            |       | Scaffold a monorepo project                               | —       |
-| `--no-monorepo`         |       | Skip the monorepo prompt                                  | —       |
+| Flag | Short | Description | Default |
+| --- | --- | --- | --- |
+| `--template <template>` | `-t` | Template (next, start, vite, next-monorepo, react-router) | — |
+| `--preset [name]` | `-p` | Preset configuration (named, code, or URL) | — |
+| `--yes` | `-y` | Skip confirmation prompt | `true` |
+| `--defaults` | `-d` | Use defaults (`--template=next --preset=base-nova`) | `false` |
+| `--force` | `-f` | Force overwrite existing configuration | `false` |
+| `--cwd <cwd>` | `-c` | Working directory | current |
+| `--name <name>` | `-n` | Name for new project | — |
+| `--silent` | `-s` | Mute output | `false` |
+| `--rtl` |  | Enable RTL support | — |
+| `--reinstall` |  | Re-install existing UI components | `false` |
+| `--monorepo` |  | Scaffold a monorepo project | — |
+| `--no-monorepo` |  | Skip the monorepo prompt | — |
 
 `npx shadcn@latest create` is an alias for `npx shadcn@latest init`.
 
@@ -52,17 +52,17 @@ npx shadcn@latest add [components...] [options]
 
 Accepts component names, registry-prefixed names (`@magicui/shimmer-button`), URLs, or local paths.
 
-| Flag            | Short | Description                                                                                                          | Default |
-| --------------- | ----- | -------------------------------------------------------------------------------------------------------------------- | ------- |
-| `--yes`         | `-y`  | Skip confirmation prompt                                                                                             | `false` |
-| `--overwrite`   | `-o`  | Overwrite existing files                                                                                             | `false` |
-| `--cwd <cwd>`   | `-c`  | Working directory                                                                                                    | current |
-| `--all`         | `-a`  | Add all available components                                                                                         | `false` |
-| `--path <path>` | `-p`  | Target path for the component                                                                                        | —       |
-| `--silent`      | `-s`  | Mute output                                                                                                          | `false` |
-| `--dry-run`     |       | Preview all changes without writing files                                                                            | `false` |
-| `--diff [path]` |       | Show diffs. Without a path, shows the first 5 files. With a path, shows that file only (implies `--dry-run`)         | —       |
-| `--view [path]` |       | Show file contents. Without a path, shows the first 5 files. With a path, shows that file only (implies `--dry-run`) | —       |
+| Flag | Short | Description | Default |
+| --- | --- | --- | --- |
+| `--yes` | `-y` | Skip confirmation prompt | `false` |
+| `--overwrite` | `-o` | Overwrite existing files | `false` |
+| `--cwd <cwd>` | `-c` | Working directory | current |
+| `--all` | `-a` | Add all available components | `false` |
+| `--path <path>` | `-p` | Target path for the component | — |
+| `--silent` | `-s` | Mute output | `false` |
+| `--dry-run` |  | Preview all changes without writing files | `false` |
+| `--diff [path]` |  | Show diffs. Without a path, shows the first 5 files. With a path, shows that file only (implies `--dry-run`) | — |
+| `--view [path]` |  | Show file contents. Without a path, shows the first 5 files. With a path, shows that file only (implies `--dry-run`) | — |
 
 #### Dry-Run Mode
 
@@ -170,37 +170,37 @@ Displays project info and `components.json` configuration. Run this first to dis
 
 **Project Info fields:**
 
-| Field                | Type      | Meaning                                                            |
-| -------------------- | --------- | ------------------------------------------------------------------ |
-| `framework`          | `string`  | Detected framework (`next`, `vite`, `react-router`, `start`, etc.) |
-| `frameworkVersion`   | `string`  | Framework version (e.g. `15.2.4`)                                  |
-| `isSrcDir`           | `boolean` | Whether the project uses a `src/` directory                        |
-| `isRSC`              | `boolean` | Whether React Server Components are enabled                        |
-| `isTsx`              | `boolean` | Whether the project uses TypeScript                                |
-| `tailwindVersion`    | `string`  | `"v3"` or `"v4"`                                                   |
-| `tailwindConfigFile` | `string`  | Path to the Tailwind config file                                   |
-| `tailwindCssFile`    | `string`  | Path to the global CSS file                                        |
-| `aliasPrefix`        | `string`  | Import alias prefix (e.g. `@`, `~`, `@/`)                          |
-| `packageManager`     | `string`  | Detected package manager (`npm`, `pnpm`, `yarn`, `bun`)            |
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `framework` | `string` | Detected framework (`next`, `vite`, `react-router`, `start`, etc.) |
+| `frameworkVersion` | `string` | Framework version (e.g. `15.2.4`) |
+| `isSrcDir` | `boolean` | Whether the project uses a `src/` directory |
+| `isRSC` | `boolean` | Whether React Server Components are enabled |
+| `isTsx` | `boolean` | Whether the project uses TypeScript |
+| `tailwindVersion` | `string` | `"v3"` or `"v4"` |
+| `tailwindConfigFile` | `string` | Path to the Tailwind config file |
+| `tailwindCssFile` | `string` | Path to the global CSS file |
+| `aliasPrefix` | `string` | Import alias prefix (e.g. `@`, `~`, `@/`) |
+| `packageManager` | `string` | Detected package manager (`npm`, `pnpm`, `yarn`, `bun`) |
 
 **Components.json fields:**
 
-| Field                | Type      | Meaning                                                                                    |
-| -------------------- | --------- | ------------------------------------------------------------------------------------------ |
-| `base`               | `string`  | Primitive library (`radix` or `base`) — determines component APIs and available props      |
-| `style`              | `string`  | Visual style (e.g. `nova`, `vega`)                                                         |
-| `rsc`                | `boolean` | RSC flag from config                                                                       |
-| `tsx`                | `boolean` | TypeScript flag                                                                            |
-| `tailwind.config`    | `string`  | Tailwind config path                                                                       |
-| `tailwind.css`       | `string`  | Global CSS path — this is where custom CSS variables go                                    |
-| `iconLibrary`        | `string`  | Icon library — determines icon import package (e.g. `lucide-react`, `@tabler/icons-react`) |
-| `aliases.components` | `string`  | Component import alias (e.g. `@/components`)                                               |
-| `aliases.utils`      | `string`  | Utils import alias (e.g. `@/lib/utils`)                                                    |
-| `aliases.ui`         | `string`  | UI component alias (e.g. `@/components/ui`)                                                |
-| `aliases.lib`        | `string`  | Lib alias (e.g. `@/lib`)                                                                   |
-| `aliases.hooks`      | `string`  | Hooks alias (e.g. `@/hooks`)                                                               |
-| `resolvedPaths`      | `object`  | Absolute file-system paths for each alias                                                  |
-| `registries`         | `object`  | Configured custom registries                                                               |
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `base` | `string` | Primitive library (`radix` or `base`) — determines component APIs and available props |
+| `style` | `string` | Visual style (e.g. `nova`, `vega`) |
+| `rsc` | `boolean` | RSC flag from config |
+| `tsx` | `boolean` | TypeScript flag |
+| `tailwind.config` | `string` | Tailwind config path |
+| `tailwind.css` | `string` | Global CSS path — this is where custom CSS variables go |
+| `iconLibrary` | `string` | Icon library — determines icon import package (e.g. `lucide-react`, `@tabler/icons-react`) |
+| `aliases.components` | `string` | Component import alias (e.g. `@/components`) |
+| `aliases.utils` | `string` | Utils import alias (e.g. `@/lib/utils`) |
+| `aliases.ui` | `string` | UI component alias (e.g. `@/components/ui`) |
+| `aliases.lib` | `string` | Lib alias (e.g. `@/lib`) |
+| `aliases.hooks` | `string` | Hooks alias (e.g. `@/hooks`) |
+| `resolvedPaths` | `object` | Absolute file-system paths for each alias |
+| `registries` | `object` | Configured custom registries |
 
 **Links fields:**
 

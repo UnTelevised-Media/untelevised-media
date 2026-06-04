@@ -89,15 +89,20 @@ export function PitchQuickViewModal({ pitch, onClose }: Props) {
       } else {
         toast.error(
           (!detailsResult.success ? detailsResult.error : null) ??
-          (!notesResult.success ? notesResult.error : null) ??
-          'Save failed.',
+            (!notesResult.success ? notesResult.error : null) ??
+            'Save failed.'
         );
       }
     });
   }
 
   return (
-    <DialogPrimitive.Root open onOpenChange={(open) => { if (!open) onClose(); }}>
+    <DialogPrimitive.Root
+      open
+      onOpenChange={(open) => {
+        if (!open) onClose();
+      }}
+    >
       <DialogPrimitive.Portal>
         {/* Backdrop */}
         <DialogPrimitive.Overlay className='fixed inset-0 z-50 bg-black/50' />

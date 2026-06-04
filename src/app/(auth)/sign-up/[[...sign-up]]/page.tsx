@@ -20,7 +20,6 @@ export default function SignUpPage() {
 
       {/* Card */}
       <div className='relative z-10 flex w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 shadow-2xl backdrop-blur-sm'>
-
         {/* LEFT — branding */}
         <div className='relative hidden flex-col items-center justify-center gap-8 bg-slate-950/60 px-12 py-16 md:flex md:w-1/2'>
           <div className='absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-untele/20 blur-[80px]' />

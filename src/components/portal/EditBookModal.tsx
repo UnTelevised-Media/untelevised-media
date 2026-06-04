@@ -73,7 +73,9 @@ export default function EditBookModal({ book }: Props) {
   // having book in its dependency array — prevents a new book object reference
   // (e.g. from a router.refresh()) wiping an in-progress file selection.
   const bookRef = useRef(book);
-  useEffect(() => { bookRef.current = book; });
+  useEffect(() => {
+    bookRef.current = book;
+  });
 
   // Fiction / Non-Fiction
   const [fictionType, setFictionType] = useState<'fiction' | 'non-fiction' | undefined>(undefined);
@@ -90,7 +92,9 @@ export default function EditBookModal({ book }: Props) {
   // Form state — initialised from book on open
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState<'draft' | 'published' | 'out-of-stock' | 'discontinued'>('draft');
+  const [status, setStatus] = useState<'draft' | 'published' | 'out-of-stock' | 'discontinued'>(
+    'draft'
+  );
   const [isbn, setIsbn] = useState('');
   const [pages, setPages] = useState('');
   const [language, setLanguage] = useState('en');
@@ -146,7 +150,7 @@ export default function EditBookModal({ book }: Props) {
         suggestedPrice: f.suggestedPrice != null ? String(f.suggestedPrice) : '',
         stripePriceId: f.stripePriceId ?? '',
         stripeProductId: f.stripeProductId ?? '',
-      })),
+      }))
     );
     setDigitalFiles((b.formats ?? []).map(() => null));
     setSelectedGenreIds((b.genre ?? []).map((g) => g._id));
@@ -191,8 +195,14 @@ export default function EditBookModal({ book }: Props) {
 
   async function handleCreateGenre() {
     setGenreError('');
-    if (!genreTitle.trim()) { setGenreError('Title is required.'); return; }
-    if (!genreSlug.trim()) { setGenreError('Slug is required.'); return; }
+    if (!genreTitle.trim()) {
+      setGenreError('Title is required.');
+      return;
+    }
+    if (!genreSlug.trim()) {
+      setGenreError('Slug is required.');
+      return;
+    }
     setGenreCreating(true);
     try {
       const created = await createBookGenre(genreTitle, genreSlug);
@@ -227,7 +237,10 @@ export default function EditBookModal({ book }: Props) {
     e.preventDefault();
     setError('');
 
-    if (!title.trim()) { setError('Title is required.'); return; }
+    if (!title.trim()) {
+      setError('Title is required.');
+      return;
+    }
 
     // Capture file values synchronously before the async transition starts
     const pendingCoverFile = coverFile;
@@ -238,7 +251,7 @@ export default function EditBookModal({ book }: Props) {
       .filter((f) => !f.isNew)
       .map((f) => ({
         key: f.key,
-        price: f.nameYourPrice ? (parseFloat(f.suggestedPrice) || 0) : parseFloat(f.price),
+        price: f.nameYourPrice ? parseFloat(f.suggestedPrice) || 0 : parseFloat(f.price),
         compareAtPrice: !f.nameYourPrice && f.compareAtPrice ? parseFloat(f.compareAtPrice) : null,
         nameYourPrice: f.nameYourPrice,
         minimumPrice: f.nameYourPrice && f.minimumPrice ? parseFloat(f.minimumPrice) : null,
@@ -254,11 +267,15 @@ export default function EditBookModal({ book }: Props) {
       .map((f) => ({
         key: f.key,
         formatType: f.formatType as 'physical' | 'digital' | 'bundle',
-        price: f.nameYourPrice ? (parseFloat(f.suggestedPrice) || 0) : (parseFloat(f.price) || 0),
-        ...(f.compareAtPrice && !f.nameYourPrice ? { compareAtPrice: parseFloat(f.compareAtPrice) } : {}),
+        price: f.nameYourPrice ? parseFloat(f.suggestedPrice) || 0 : parseFloat(f.price) || 0,
+        ...(f.compareAtPrice && !f.nameYourPrice
+          ? { compareAtPrice: parseFloat(f.compareAtPrice) }
+          : {}),
         ...(f.nameYourPrice ? { nameYourPrice: true } : {}),
         ...(f.nameYourPrice && f.minimumPrice ? { minimumPrice: parseFloat(f.minimumPrice) } : {}),
-        ...(f.nameYourPrice && f.suggestedPrice ? { suggestedPrice: parseFloat(f.suggestedPrice) } : {}),
+        ...(f.nameYourPrice && f.suggestedPrice
+          ? { suggestedPrice: parseFloat(f.suggestedPrice) }
+          : {}),
         ...(f.stripePriceId ? { stripePriceId: f.stripePriceId } : {}),
         ...(f.stripeProductId ? { stripeProductId: f.stripeProductId } : {}),
       }));
@@ -325,19 +342,34 @@ export default function EditBookModal({ book }: Props) {
       </button>
 
       {open && (
-        <div className='fixed inset-0 z-50 flex' role='dialog' aria-modal='true' aria-label={`Edit ${book.title}`}>
-          <div className='absolute inset-0 bg-black/50' onClick={() => setOpen(false)} aria-hidden='true' />
+        <div
+          className='fixed inset-0 z-50 flex'
+          role='dialog'
+          aria-modal='true'
+          aria-label={`Edit ${book.title}`}
+        >
+          <div
+            className='absolute inset-0 bg-black/50'
+            onClick={() => setOpen(false)}
+            aria-hidden='true'
+          />
 
           <div className='relative ml-auto flex h-full w-full max-w-lg flex-col overflow-hidden bg-white shadow-2xl dark:bg-slate-900'>
             {/* Header */}
             <div className='flex shrink-0 items-center justify-between border-b border-slate-200 px-6 py-4 dark:border-slate-700'>
               <div>
                 <div className='mb-0.5 inline-block bg-untele px-2 py-0.5'>
-                  <span className='text-[10px] font-black uppercase tracking-widest text-white'>Edit Book</span>
+                  <span className='text-[10px] font-black uppercase tracking-widest text-white'>
+                    Edit Book
+                  </span>
                 </div>
                 <p className='max-w-[280px] truncate text-xs text-slate-400'>{book.title}</p>
               </div>
-              <button type='button' onClick={() => setOpen(false)} className='text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'>
+              <button
+                type='button'
+                onClick={() => setOpen(false)}
+                className='text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+              >
                 <X className='h-5 w-5' />
               </button>
             </div>
@@ -346,7 +378,9 @@ export default function EditBookModal({ book }: Props) {
             {saved ? (
               <div className='flex flex-1 flex-col items-center justify-center gap-5 p-8 text-center'>
                 <div className='bg-untele px-3 py-1'>
-                  <span className='text-xs font-black uppercase tracking-widest text-white'>Saved</span>
+                  <span className='text-xs font-black uppercase tracking-widest text-white'>
+                    Saved
+                  </span>
                 </div>
                 <p className='text-sm font-bold text-slate-700 dark:text-slate-300'>
                   Changes saved successfully.
@@ -372,7 +406,6 @@ export default function EditBookModal({ book }: Props) {
             ) : (
               <form onSubmit={handleSubmit} className='flex flex-1 flex-col overflow-hidden'>
                 <div className='flex-1 space-y-5 overflow-y-auto p-6'>
-
                   {/* Cover photo */}
                   <div>
                     <span className={`mb-2 block ${labelCls}`}>Cover Photo</span>
@@ -380,10 +413,16 @@ export default function EditBookModal({ book }: Props) {
                       <div className='relative h-32 w-24 shrink-0 overflow-hidden border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800'>
                         {currentCover ? (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={currentCover} alt='Cover' className='h-full w-full object-cover' />
+                          <img
+                            src={currentCover}
+                            alt='Cover'
+                            className='h-full w-full object-cover'
+                          />
                         ) : (
                           <div className='flex h-full items-center justify-center'>
-                            <span className='text-center text-[9px] font-bold uppercase tracking-widest text-slate-300'>No cover</span>
+                            <span className='text-center text-[9px] font-bold uppercase tracking-widest text-slate-300'>
+                              No cover
+                            </span>
                           </div>
                         )}
                       </div>
@@ -404,22 +443,63 @@ export default function EditBookModal({ book }: Props) {
                           }}
                         />
                         {/* Digital file inputs — always mounted, same pattern as cover. One per slot (max 3). */}
-                        <input ref={digitalRef0} type='file' accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip' className='fixed left-[-9999px] top-0 opacity-0' onChange={(e) => { const f = e.target.files?.[0]; if (f) setDigitalFiles((p) => p.map((x, idx) => idx === 0 ? f : x)); e.target.value = ''; }} />
-                        <input ref={digitalRef1} type='file' accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip' className='fixed left-[-9999px] top-0 opacity-0' onChange={(e) => { const f = e.target.files?.[0]; if (f) setDigitalFiles((p) => p.map((x, idx) => idx === 1 ? f : x)); e.target.value = ''; }} />
-                        <input ref={digitalRef2} type='file' accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip' className='fixed left-[-9999px] top-0 opacity-0' onChange={(e) => { const f = e.target.files?.[0]; if (f) setDigitalFiles((p) => p.map((x, idx) => idx === 2 ? f : x)); e.target.value = ''; }} />
+                        <input
+                          ref={digitalRef0}
+                          type='file'
+                          accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip'
+                          className='fixed left-[-9999px] top-0 opacity-0'
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 0 ? f : x)));
+                            e.target.value = '';
+                          }}
+                        />
+                        <input
+                          ref={digitalRef1}
+                          type='file'
+                          accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip'
+                          className='fixed left-[-9999px] top-0 opacity-0'
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 1 ? f : x)));
+                            e.target.value = '';
+                          }}
+                        />
+                        <input
+                          ref={digitalRef2}
+                          type='file'
+                          accept='.pdf,.epub,.mobi,.azw3,.zip,application/pdf,application/epub+zip'
+                          className='fixed left-[-9999px] top-0 opacity-0'
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 2 ? f : x)));
+                            e.target.value = '';
+                          }}
+                        />
                         <button
                           type='button'
                           onClick={() => coverInputRef.current?.click()}
                           className='border border-dashed border-slate-300 px-4 py-3 text-center hover:border-untele dark:border-slate-600'
                         >
                           <span className='text-xs font-bold uppercase tracking-widest text-slate-500'>
-                            {coverFile ? 'Change Photo' : currentCover ? 'Replace Photo' : 'Choose Photo'}
+                            {coverFile
+                              ? 'Change Photo'
+                              : currentCover
+                                ? 'Replace Photo'
+                                : 'Choose Photo'}
                           </span>
                         </button>
                         {coverFile && (
                           <div className='flex items-center justify-between'>
                             <p className='truncate text-[10px] text-slate-400'>{coverFile.name}</p>
-                            <button type='button' onClick={() => { setCoverFile(null); setCoverPreview(null); }} className='ml-2 shrink-0 text-[10px] font-bold text-slate-400 hover:text-untele'>
+                            <button
+                              type='button'
+                              onClick={() => {
+                                setCoverFile(null);
+                                setCoverPreview(null);
+                              }}
+                              className='ml-2 shrink-0 text-[10px] font-bold text-slate-400 hover:text-untele'
+                            >
                               Remove
                             </button>
                           </div>
@@ -431,12 +511,24 @@ export default function EditBookModal({ book }: Props) {
 
                   {/* Title */}
                   <FormField label='Title *'>
-                    <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} required className={inputCls} />
+                    <input
+                      type='text'
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      required
+                      className={inputCls}
+                    />
                   </FormField>
 
                   {/* Description */}
                   <FormField label='Description'>
-                    <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} placeholder='Brief synopsis...' className={inputCls} />
+                    <textarea
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      rows={4}
+                      placeholder='Brief synopsis...'
+                      className={inputCls}
+                    />
                   </FormField>
 
                   {/* Fiction / Non-Fiction */}
@@ -466,7 +558,10 @@ export default function EditBookModal({ book }: Props) {
                       <span className={labelCls}>Genres</span>
                       <button
                         type='button'
-                        onClick={() => { setShowGenreForm((v) => !v); setGenreError(''); }}
+                        onClick={() => {
+                          setShowGenreForm((v) => !v);
+                          setGenreError('');
+                        }}
                         className='flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-untele hover:underline'
                       >
                         <Plus className='h-3 w-3' />
@@ -476,15 +571,29 @@ export default function EditBookModal({ book }: Props) {
 
                     {showGenreForm && (
                       <div className='mb-3 border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800'>
-                        <p className='mb-2 text-[10px] font-black uppercase tracking-widest text-untele'>Create Genre</p>
+                        <p className='mb-2 text-[10px] font-black uppercase tracking-widest text-untele'>
+                          Create Genre
+                        </p>
                         <div className='mb-2'>
                           <label className={`mb-1 block ${labelCls}`}>Title *</label>
-                          <input type='text' value={genreTitle} onChange={(e) => setGenreTitle(e.target.value)} placeholder='e.g. Historical Fiction' className={inputCls} />
+                          <input
+                            type='text'
+                            value={genreTitle}
+                            onChange={(e) => setGenreTitle(e.target.value)}
+                            placeholder='e.g. Historical Fiction'
+                            className={inputCls}
+                          />
                         </div>
                         <div className='mb-3'>
                           <label className={`mb-1 block ${labelCls}`}>Slug *</label>
                           <div className='flex gap-2'>
-                            <input type='text' value={genreSlug} onChange={(e) => setGenreSlug(e.target.value)} placeholder='historical-fiction' className={`${inputCls} flex-1`} />
+                            <input
+                              type='text'
+                              value={genreSlug}
+                              onChange={(e) => setGenreSlug(e.target.value)}
+                              placeholder='historical-fiction'
+                              className={`${inputCls} flex-1`}
+                            />
                             <button
                               type='button'
                               onClick={() => setGenreSlug(slugifyLocal(genreTitle))}
@@ -495,7 +604,9 @@ export default function EditBookModal({ book }: Props) {
                             </button>
                           </div>
                         </div>
-                        {genreError && <p className='mb-2 text-[10px] font-bold text-red-500'>{genreError}</p>}
+                        {genreError && (
+                          <p className='mb-2 text-[10px] font-bold text-red-500'>{genreError}</p>
+                        )}
                         <button
                           type='button'
                           onClick={handleCreateGenre}
@@ -522,11 +633,19 @@ export default function EditBookModal({ book }: Props) {
                               {selectedGenreIds.map((id) => {
                                 const g = localGenres.find((x) => x._id === id);
                                 return g ? (
-                                  <span key={id} className='flex items-center gap-1 border border-untele/30 bg-untele/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-untele'>
+                                  <span
+                                    key={id}
+                                    className='flex items-center gap-1 border border-untele/30 bg-untele/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-untele'
+                                  >
                                     {g.title}
                                     <button
                                       type='button'
-                                      onClick={(e) => { e.stopPropagation(); setSelectedGenreIds((prev) => prev.filter((gid) => gid !== id)); }}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedGenreIds((prev) =>
+                                          prev.filter((gid) => gid !== id)
+                                        );
+                                      }}
                                       className='leading-none text-untele/60 hover:text-untele'
                                     >
                                       ×
@@ -536,26 +655,37 @@ export default function EditBookModal({ book }: Props) {
                               })}
                             </div>
                           )}
-                          <ChevronDown className={`ml-2 h-3.5 w-3.5 shrink-0 text-slate-400 transition-transform duration-150 ${genreDropdownOpen ? 'rotate-180' : ''}`} />
+                          <ChevronDown
+                            className={`ml-2 h-3.5 w-3.5 shrink-0 text-slate-400 transition-transform duration-150 ${genreDropdownOpen ? 'rotate-180' : ''}`}
+                          />
                         </button>
                         {genreDropdownOpen && (
                           <div className='mt-px max-h-44 overflow-y-auto border border-t-0 border-slate-200 dark:border-slate-700'>
                             {localGenres.length === 0 ? (
-                              <p className='px-3 py-2 text-[10px] text-slate-400'>No genres — add via the Add Book widget.</p>
+                              <p className='px-3 py-2 text-[10px] text-slate-400'>
+                                No genres — add via the Add Book widget.
+                              </p>
                             ) : (
                               localGenres.map((g) => (
-                                <label key={g._id} className='flex cursor-pointer items-center gap-2.5 px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800'>
+                                <label
+                                  key={g._id}
+                                  className='flex cursor-pointer items-center gap-2.5 px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800'
+                                >
                                   <input
                                     type='checkbox'
                                     checked={selectedGenreIds.includes(g._id)}
                                     onChange={(e) =>
                                       setSelectedGenreIds((prev) =>
-                                        e.target.checked ? [...prev, g._id] : prev.filter((id) => id !== g._id),
+                                        e.target.checked
+                                          ? [...prev, g._id]
+                                          : prev.filter((id) => id !== g._id)
                                       )
                                     }
                                     className='accent-untele'
                                   />
-                                  <span className='text-xs text-slate-700 dark:text-slate-300'>{g.title}</span>
+                                  <span className='text-xs text-slate-700 dark:text-slate-300'>
+                                    {g.title}
+                                  </span>
                                 </label>
                               ))
                             )}
@@ -569,12 +699,23 @@ export default function EditBookModal({ book }: Props) {
                   <div>
                     <span className={`mb-2 block ${labelCls}`}>Status</span>
                     <div className='flex flex-wrap gap-4'>
-                      {(['draft', 'published', 'out-of-stock', 'discontinued'] as const).map((s) => (
-                        <label key={s} className='flex cursor-pointer items-center gap-2'>
-                          <input type='radio' name='edit-status' value={s} checked={status === s} onChange={() => setStatus(s)} className='accent-untele' />
-                          <span className='text-xs font-bold uppercase tracking-widest text-slate-700 dark:text-slate-300'>{s}</span>
-                        </label>
-                      ))}
+                      {(['draft', 'published', 'out-of-stock', 'discontinued'] as const).map(
+                        (s) => (
+                          <label key={s} className='flex cursor-pointer items-center gap-2'>
+                            <input
+                              type='radio'
+                              name='edit-status'
+                              value={s}
+                              checked={status === s}
+                              onChange={() => setStatus(s)}
+                              className='accent-untele'
+                            />
+                            <span className='text-xs font-bold uppercase tracking-widest text-slate-700 dark:text-slate-300'>
+                              {s}
+                            </span>
+                          </label>
+                        )
+                      )}
                     </div>
                   </div>
 
@@ -593,17 +734,22 @@ export default function EditBookModal({ book }: Props) {
                       )}
                     </div>
 
-
                     <div className='space-y-3'>
                       {editFormats.map((fmt, i) => (
-                        <div key={fmt.key} className='border border-slate-200 p-3 dark:border-slate-700'>
+                        <div
+                          key={fmt.key}
+                          className='border border-slate-200 p-3 dark:border-slate-700'
+                        >
                           {/* Format header */}
                           <div className='mb-2 flex items-center justify-between'>
                             {fmt.isNew ? (
                               /* New format — type is selectable */
                               <div className='flex gap-3'>
                                 {(['physical', 'digital', 'bundle'] as const).map((ft) => (
-                                  <label key={ft} className='flex cursor-pointer items-center gap-1.5'>
+                                  <label
+                                    key={ft}
+                                    className='flex cursor-pointer items-center gap-1.5'
+                                  >
                                     <input
                                       type='radio'
                                       name={`fmt-${fmt.key}-type`}
@@ -612,7 +758,9 @@ export default function EditBookModal({ book }: Props) {
                                       onChange={() => updateFormat(i, { formatType: ft })}
                                       className='accent-untele'
                                     />
-                                    <span className='text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400'>{ft}</span>
+                                    <span className='text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400'>
+                                      {ft}
+                                    </span>
                                   </label>
                                 ))}
                               </div>
@@ -640,12 +788,18 @@ export default function EditBookModal({ book }: Props) {
                             <div className='mb-2 flex items-center gap-2'>
                               <button
                                 type='button'
-                                onClick={() => updateFormat(i, { nameYourPrice: !fmt.nameYourPrice })}
+                                onClick={() =>
+                                  updateFormat(i, { nameYourPrice: !fmt.nameYourPrice })
+                                }
                                 className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full transition-colors ${fmt.nameYourPrice ? 'bg-untele' : 'bg-slate-200 dark:bg-slate-700'}`}
                               >
-                                <span className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform ${fmt.nameYourPrice ? 'translate-x-4' : 'translate-x-1'}`} />
+                                <span
+                                  className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform ${fmt.nameYourPrice ? 'translate-x-4' : 'translate-x-1'}`}
+                                />
                               </button>
-                              <span className='text-[10px] font-black uppercase tracking-widest text-slate-500'>Name Your Own Price</span>
+                              <span className='text-[10px] font-black uppercase tracking-widest text-slate-500'>
+                                Name Your Own Price
+                              </span>
                             </div>
                           )}
 
@@ -655,20 +809,32 @@ export default function EditBookModal({ book }: Props) {
                               <div>
                                 <label className={`mb-1 block ${labelCls}`}>Min Price (USD)</label>
                                 <input
-                                  type='number' step='0.01' min='0'
+                                  type='number'
+                                  step='0.01'
+                                  min='0'
                                   value={fmt.minimumPrice}
-                                  onChange={(e) => updateFormat(i, { minimumPrice: e.target.value })}
-                                  placeholder='0.00' className={inputCls}
+                                  onChange={(e) =>
+                                    updateFormat(i, { minimumPrice: e.target.value })
+                                  }
+                                  placeholder='0.00'
+                                  className={inputCls}
                                 />
-                                <p className='mt-0.5 text-[9px] text-slate-400'>0 = free / any amount</p>
+                                <p className='mt-0.5 text-[9px] text-slate-400'>
+                                  0 = free / any amount
+                                </p>
                               </div>
                               <div>
                                 <label className={`mb-1 block ${labelCls}`}>Suggested (USD)</label>
                                 <input
-                                  type='number' step='0.01' min='0'
+                                  type='number'
+                                  step='0.01'
+                                  min='0'
                                   value={fmt.suggestedPrice}
-                                  onChange={(e) => updateFormat(i, { suggestedPrice: e.target.value })}
-                                  placeholder='9.99' className={inputCls}
+                                  onChange={(e) =>
+                                    updateFormat(i, { suggestedPrice: e.target.value })
+                                  }
+                                  placeholder='9.99'
+                                  className={inputCls}
                                 />
                               </div>
                             </div>
@@ -677,7 +843,9 @@ export default function EditBookModal({ book }: Props) {
                               <div>
                                 <label className={`mb-1 block ${labelCls}`}>Price (USD)</label>
                                 <input
-                                  type='number' step='0.01' min='0'
+                                  type='number'
+                                  step='0.01'
+                                  min='0'
                                   value={fmt.price}
                                   onChange={(e) => updateFormat(i, { price: e.target.value })}
                                   className={inputCls}
@@ -686,10 +854,15 @@ export default function EditBookModal({ book }: Props) {
                               <div>
                                 <label className={`mb-1 block ${labelCls}`}>Compare-at</label>
                                 <input
-                                  type='number' step='0.01' min='0'
+                                  type='number'
+                                  step='0.01'
+                                  min='0'
                                   value={fmt.compareAtPrice}
-                                  onChange={(e) => updateFormat(i, { compareAtPrice: e.target.value })}
-                                  placeholder='—' className={inputCls}
+                                  onChange={(e) =>
+                                    updateFormat(i, { compareAtPrice: e.target.value })
+                                  }
+                                  placeholder='—'
+                                  className={inputCls}
                                 />
                               </div>
                             </div>
@@ -702,7 +875,9 @@ export default function EditBookModal({ book }: Props) {
                               <input
                                 type='text'
                                 value={fmt.stripePriceId}
-                                onChange={(e) => updateFormat(i, { stripePriceId: e.target.value.trim() })}
+                                onChange={(e) =>
+                                  updateFormat(i, { stripePriceId: e.target.value.trim() })
+                                }
                                 placeholder='price_1ABC...'
                                 className={inputCls}
                               />
@@ -712,7 +887,9 @@ export default function EditBookModal({ book }: Props) {
                               <input
                                 type='text'
                                 value={fmt.stripeProductId}
-                                onChange={(e) => updateFormat(i, { stripeProductId: e.target.value.trim() })}
+                                onChange={(e) =>
+                                  updateFormat(i, { stripeProductId: e.target.value.trim() })
+                                }
                                 placeholder='prod_1ABC...'
                                 className={inputCls}
                               />
@@ -731,12 +908,20 @@ export default function EditBookModal({ book }: Props) {
                               {digitalFiles[i] ? (
                                 <div className='flex items-center justify-between gap-2 border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800'>
                                   <div className='min-w-0'>
-                                    <p className='truncate text-[10px] font-bold text-slate-700 dark:text-slate-300'>{digitalFiles[i]!.name}</p>
-                                    <p className='text-[10px] text-slate-400'>{(digitalFiles[i]!.size / (1024 * 1024)).toFixed(1)} MB</p>
+                                    <p className='truncate text-[10px] font-bold text-slate-700 dark:text-slate-300'>
+                                      {digitalFiles[i]!.name}
+                                    </p>
+                                    <p className='text-[10px] text-slate-400'>
+                                      {(digitalFiles[i]!.size / (1024 * 1024)).toFixed(1)} MB
+                                    </p>
                                   </div>
                                   <button
                                     type='button'
-                                    onClick={() => setDigitalFiles((f) => f.map((file, idx) => (idx === i ? null : file)))}
+                                    onClick={() =>
+                                      setDigitalFiles((f) =>
+                                        f.map((file, idx) => (idx === i ? null : file))
+                                      )
+                                    }
                                     className='shrink-0 text-[10px] font-bold text-slate-400 hover:text-untele'
                                   >
                                     Remove
@@ -763,19 +948,42 @@ export default function EditBookModal({ book }: Props) {
                   {/* Metadata */}
                   <div className='grid grid-cols-2 gap-3'>
                     <FormField label='ISBN'>
-                      <input type='text' value={isbn} onChange={(e) => setIsbn(e.target.value)} placeholder='978-...' className={inputCls} />
+                      <input
+                        type='text'
+                        value={isbn}
+                        onChange={(e) => setIsbn(e.target.value)}
+                        placeholder='978-...'
+                        className={inputCls}
+                      />
                     </FormField>
                     <FormField label='Pages'>
-                      <input type='number' min='1' value={pages} onChange={(e) => setPages(e.target.value)} placeholder='250' className={inputCls} />
+                      <input
+                        type='number'
+                        min='1'
+                        value={pages}
+                        onChange={(e) => setPages(e.target.value)}
+                        placeholder='250'
+                        className={inputCls}
+                      />
                     </FormField>
                     <FormField label='Language'>
-                      <input type='text' value={language} onChange={(e) => setLanguage(e.target.value)} placeholder='en' className={inputCls} />
+                      <input
+                        type='text'
+                        value={language}
+                        onChange={(e) => setLanguage(e.target.value)}
+                        placeholder='en'
+                        className={inputCls}
+                      />
                     </FormField>
                     <FormField label='Publish Date'>
-                      <input type='date' value={publishedAt} onChange={(e) => setPublishedAt(e.target.value)} className={inputCls} />
+                      <input
+                        type='date'
+                        value={publishedAt}
+                        onChange={(e) => setPublishedAt(e.target.value)}
+                        className={inputCls}
+                      />
                     </FormField>
                   </div>
-
                 </div>
 
                 {/* Footer */}
@@ -786,7 +994,11 @@ export default function EditBookModal({ book }: Props) {
                     </p>
                   )}
                   <div className='flex items-center justify-between px-6 py-4'>
-                    <button type='button' onClick={() => setOpen(false)} className='text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-700'>
+                    <button
+                      type='button'
+                      onClick={() => setOpen(false)}
+                      className='text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-700'
+                    >
                       Cancel
                     </button>
                     <button

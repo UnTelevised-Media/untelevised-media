@@ -46,9 +46,7 @@ function getNextPayoutDate(): string {
   const y = now.getUTCFullYear();
   const m = now.getUTCMonth();
   const d = now.getUTCDate();
-  const next = d <= 15
-    ? new Date(Date.UTC(y, m, 16))
-    : new Date(Date.UTC(y, m + 1, 1));
+  const next = d <= 15 ? new Date(Date.UTC(y, m, 16)) : new Date(Date.UTC(y, m + 1, 1));
   return next.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
@@ -86,7 +84,7 @@ export default async function PortalEarningsPage() {
       shopServiceClient
         .from('author_earnings')
         .select(
-          'sanity_book_id, gross_cents, stripe_fee_cents, net_after_stripe_cents, author_cents, is_tip, payout_period_start, order_item:order_items(quantity, is_digital), order:orders(status, created_at)',
+          'sanity_book_id, gross_cents, stripe_fee_cents, net_after_stripe_cents, author_cents, is_tip, payout_period_start, order_item:order_items(quantity, is_digital), order:orders(status, created_at)'
         )
         .eq('author_clerk_id', clerkUserId),
       shopServiceClient
@@ -96,11 +94,16 @@ export default async function PortalEarningsPage() {
         .order('period_end', { ascending: false }),
     ]);
 
-    if (earningsResult.error) console.error('[portal/earnings] author_earnings query failed:', earningsResult.error.message);
-    if (payoutsResult.error) console.error('[portal/earnings] payouts query failed:', payoutsResult.error.message);
+    if (earningsResult.error)
+      console.error(
+        '[portal/earnings] author_earnings query failed:',
+        earningsResult.error.message
+      );
+    if (payoutsResult.error)
+      console.error('[portal/earnings] payouts query failed:', payoutsResult.error.message);
 
     authorEarnings = ((earningsResult.data as AuthorEarningRow[]) ?? []).filter(
-      (s) => !['cancelled', 'refunded'].includes(s.order?.status ?? ''),
+      (s) => !['cancelled', 'refunded'].includes(s.order?.status ?? '')
     );
     payouts = (payoutsResult.data as Payout[]) ?? [];
   } catch {
@@ -108,7 +111,7 @@ export default async function PortalEarningsPage() {
   }
 
   const bookEarnings = authorEarnings.filter((s) => !s.is_tip);
-  const tipEarnings  = authorEarnings.filter((s) => s.is_tip);
+  const tipEarnings = authorEarnings.filter((s) => s.is_tip);
 
   const netCents = (i: AuthorEarningRow) => i.gross_cents - i.stripe_fee_cents;
 
@@ -116,49 +119,53 @@ export default async function PortalEarningsPage() {
   const totalUnits = bookEarnings.reduce((s, i) => s + (i.order_item?.quantity ?? 1), 0);
 
   // Monthly earnings — all (books + tips), net of Stripe
-  const thisMonthItems  = authorEarnings.filter((i) => isThisMonth(i.order?.created_at ?? ''));
-  const lastMonthItems  = authorEarnings.filter((i) => isLastMonth(i.order?.created_at ?? ''));
+  const thisMonthItems = authorEarnings.filter((i) => isThisMonth(i.order?.created_at ?? ''));
+  const lastMonthItems = authorEarnings.filter((i) => isLastMonth(i.order?.created_at ?? ''));
   const thisMonthAuthor = thisMonthItems.reduce((s, i) => s + netCents(i), 0);
   const lastMonthAuthor = lastMonthItems.reduce((s, i) => s + netCents(i), 0);
 
   // Accruing this payout period
-  const currentPeriodStart    = getCurrentPayoutPeriodStart();
-  const currentPeriodEarnings = authorEarnings.filter((e) => e.payout_period_start === currentPeriodStart);
+  const currentPeriodStart = getCurrentPayoutPeriodStart();
+  const currentPeriodEarnings = authorEarnings.filter(
+    (e) => e.payout_period_start === currentPeriodStart
+  );
   const currentPeriodAuthorCents = currentPeriodEarnings.reduce((s, e) => s + netCents(e), 0);
 
   // Tips
-  const tipGrossCents     = tipEarnings.reduce((s, i) => s + i.gross_cents, 0);
+  const tipGrossCents = tipEarnings.reduce((s, i) => s + i.gross_cents, 0);
   const tipStripeFeeCents = tipEarnings.reduce((s, i) => s + i.stripe_fee_cents, 0);
-  const tipAuthorCents    = tipEarnings.reduce((s, i) => s + netCents(i), 0);
+  const tipAuthorCents = tipEarnings.reduce((s, i) => s + netCents(i), 0);
   const tipsByBook = bookList
     .map((book) => {
       const items = tipEarnings.filter((s) => s.sanity_book_id === book._id);
       return {
         book,
         count: items.length,
-        grossCents:  items.reduce((s, i) => s + i.gross_cents, 0),
-        feeCents:    items.reduce((s, i) => s + i.stripe_fee_cents, 0),
+        grossCents: items.reduce((s, i) => s + i.gross_cents, 0),
+        feeCents: items.reduce((s, i) => s + i.stripe_fee_cents, 0),
         authorCents: items.reduce((s, i) => s + netCents(i), 0),
       };
     })
     .filter((b) => b.count > 0);
 
   // Combined totals (books + tips)
-  const totalGrossCents     = authorEarnings.reduce((s, i) => s + i.gross_cents, 0);
+  const totalGrossCents = authorEarnings.reduce((s, i) => s + i.gross_cents, 0);
   const totalStripeFeeCents = authorEarnings.reduce((s, i) => s + i.stripe_fee_cents, 0);
-  const totalAuthorCents    = totalGrossCents - totalStripeFeeCents;
+  const totalAuthorCents = totalGrossCents - totalStripeFeeCents;
 
   // Per-book revenue for chart
   const bookStats = bookList.map((book) => {
-    const items   = bookEarnings.filter((s) => s.sanity_book_id === book._id);
-    const units   = items.reduce((s, i) => s + (i.order_item?.quantity ?? 1), 0);
+    const items = bookEarnings.filter((s) => s.sanity_book_id === book._id);
+    const units = items.reduce((s, i) => s + (i.order_item?.quantity ?? 1), 0);
     const revenue = items.reduce((s, i) => s + netCents(i), 0);
-    const digital = items.filter((i) => i.order_item?.is_digital).reduce((s, i) => s + (i.order_item?.quantity ?? 1), 0);
+    const digital = items
+      .filter((i) => i.order_item?.is_digital)
+      .reduce((s, i) => s + (i.order_item?.quantity ?? 1), 0);
     const physical = units - digital;
     return { book, units, revenue, digital, physical };
   });
 
-  const pendingPayouts  = payouts.filter((p) => p.status === 'pending');
+  const pendingPayouts = payouts.filter((p) => p.status === 'pending');
   const nextPayoutTotal = pendingPayouts.reduce((s, p) => s + p.net_cents, 0);
 
   return (
@@ -214,7 +221,11 @@ export default async function PortalEarningsPage() {
                 <StatCard
                   label='This Month'
                   value={centsToUsd(thisMonthAuthor)}
-                  sub={lastMonthAuthor > 0 ? `Last month: ${centsToUsd(lastMonthAuthor)}` : 'No sales last month'}
+                  sub={
+                    lastMonthAuthor > 0
+                      ? `Last month: ${centsToUsd(lastMonthAuthor)}`
+                      : 'No sales last month'
+                  }
                 />
                 <StatCard
                   label='Accruing This Period'
@@ -230,8 +241,14 @@ export default async function PortalEarningsPage() {
                         ? centsToUsd(currentPeriodAuthorCents)
                         : '—'
                   }
-                  sub={pendingPayouts.length > 0 ? 'Pending approval' : `Scheduled ${getNextPayoutDate()}`}
-                  accent={currentPeriodAuthorCents > 0 && nextPayoutTotal === 0 ? 'green' : undefined}
+                  sub={
+                    pendingPayouts.length > 0
+                      ? 'Pending approval'
+                      : `Scheduled ${getNextPayoutDate()}`
+                  }
+                  accent={
+                    currentPeriodAuthorCents > 0 && nextPayoutTotal === 0 ? 'green' : undefined
+                  }
                 />
               </div>
 
@@ -289,17 +306,30 @@ export default async function PortalEarningsPage() {
                             </span>
                           </div>
                           <div className='mb-1 h-3 w-full bg-slate-100 dark:bg-slate-800'>
-                            <div className='h-full bg-untele transition-all' style={{ width: `${pct}%` }} />
+                            <div
+                              className='h-full bg-untele transition-all'
+                              style={{ width: `${pct}%` }}
+                            />
                           </div>
                           {units > 0 && (
                             <div className='flex h-2 w-full overflow-hidden'>
-                              <div className='bg-slate-400 dark:bg-slate-600' style={{ width: `${physPct}%` }} />
-                              <div className='bg-blue-400 dark:bg-blue-600' style={{ width: `${digPct}%` }} />
+                              <div
+                                className='bg-slate-400 dark:bg-slate-600'
+                                style={{ width: `${physPct}%` }}
+                              />
+                              <div
+                                className='bg-blue-400 dark:bg-blue-600'
+                                style={{ width: `${digPct}%` }}
+                              />
                             </div>
                           )}
                           <div className='mt-1 flex gap-4 text-[10px] font-bold uppercase tracking-widest text-slate-400'>
-                            {physical > 0 && <span className='text-slate-500'>{physical} Physical</span>}
-                            {digital > 0 && <span className='text-blue-500'>{digital} Digital</span>}
+                            {physical > 0 && (
+                              <span className='text-slate-500'>{physical} Physical</span>
+                            )}
+                            {digital > 0 && (
+                              <span className='text-blue-500'>{digital} Digital</span>
+                            )}
                           </div>
                         </div>
                       );
@@ -347,16 +377,28 @@ export default async function PortalEarningsPage() {
                   ))}
                   <div className='grid grid-cols-3 gap-3 border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-800'>
                     <div>
-                      <p className='text-[10px] font-black uppercase tracking-widest text-slate-500'>Gross Tips</p>
-                      <p className='text-sm font-black text-slate-700 dark:text-slate-300'>{centsToUsd(tipGrossCents)}</p>
+                      <p className='text-[10px] font-black uppercase tracking-widest text-slate-500'>
+                        Gross Tips
+                      </p>
+                      <p className='text-sm font-black text-slate-700 dark:text-slate-300'>
+                        {centsToUsd(tipGrossCents)}
+                      </p>
                     </div>
                     <div>
-                      <p className='text-[10px] font-black uppercase tracking-widest text-slate-500'>Stripe Fees</p>
-                      <p className='text-sm font-black text-red-500'>− {centsToUsd(tipStripeFeeCents)}</p>
+                      <p className='text-[10px] font-black uppercase tracking-widest text-slate-500'>
+                        Stripe Fees
+                      </p>
+                      <p className='text-sm font-black text-red-500'>
+                        − {centsToUsd(tipStripeFeeCents)}
+                      </p>
                     </div>
                     <div>
-                      <p className='text-[10px] font-black uppercase tracking-widest text-slate-500'>Your Tips</p>
-                      <p className='text-sm font-black text-green-600 dark:text-green-400'>{centsToUsd(tipAuthorCents)}</p>
+                      <p className='text-[10px] font-black uppercase tracking-widest text-slate-500'>
+                        Your Tips
+                      </p>
+                      <p className='text-sm font-black text-green-600 dark:text-green-400'>
+                        {centsToUsd(tipAuthorCents)}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -441,17 +483,27 @@ function Th({ children }: { children: React.ReactNode }) {
 }
 
 function StatCard({
-  label, value, sub, accent,
+  label,
+  value,
+  sub,
+  accent,
 }: {
-  label: string; value: string; sub?: string; accent?: 'green' | 'red';
+  label: string;
+  value: string;
+  sub?: string;
+  accent?: 'green' | 'red';
 }) {
   const valueColor =
-    accent === 'green' ? 'text-green-600 dark:text-green-400' :
-    accent === 'red'   ? 'text-red-500 dark:text-red-400' :
-                         'text-slate-900 dark:text-slate-100';
+    accent === 'green'
+      ? 'text-green-600 dark:text-green-400'
+      : accent === 'red'
+        ? 'text-red-500 dark:text-red-400'
+        : 'text-slate-900 dark:text-slate-100';
   return (
     <div className='border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900'>
-      <p className='mb-1 text-[10px] font-black uppercase tracking-widest text-slate-400'>{label}</p>
+      <p className='mb-1 text-[10px] font-black uppercase tracking-widest text-slate-400'>
+        {label}
+      </p>
       <p className={`text-2xl font-black ${valueColor}`}>{value}</p>
       {sub && <p className='mt-1 text-[10px] text-slate-400'>{sub}</p>}
     </div>
@@ -465,7 +517,9 @@ function PayoutStatusBadge({ status }: { status: string }) {
     cancelled: 'bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-400',
   };
   return (
-    <span className={`inline-block px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${map[status] ?? 'bg-slate-100 text-slate-500'}`}>
+    <span
+      className={`inline-block px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${map[status] ?? 'bg-slate-100 text-slate-500'}`}
+    >
       {status}
     </span>
   );

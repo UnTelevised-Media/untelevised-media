@@ -76,9 +76,7 @@ export default async function CareersPage() {
         <div className='mx-auto max-w-5xl px-4'>
           <div className='mb-8 flex items-center space-x-4'>
             <div className='bg-untele px-4 py-2'>
-              <h1 className='text-3xl font-black uppercase tracking-widest text-white'>
-                CAREERS
-              </h1>
+              <h1 className='text-3xl font-black uppercase tracking-widest text-white'>CAREERS</h1>
             </div>
             <div className='h-px flex-1 bg-slate-400 dark:bg-slate-700' />
           </div>
@@ -162,8 +160,7 @@ export default async function CareersPage() {
                   {role}
                 </h3>
                 <p className='text-xs text-slate-500 dark:text-slate-400'>
-                  Join our team and help expose the truth through{' '}
-                  {role.toLowerCase()} work.
+                  Join our team and help expose the truth through {role.toLowerCase()} work.
                 </p>
               </div>
             ))}
@@ -237,12 +234,17 @@ export default async function CareersPage() {
                   </summary>
 
                   <div className='border-t border-slate-200 px-6 py-8 dark:border-slate-800'>
-                    {job.description && Array.isArray(job.description) && job.description.length > 0 && (
-                      <div className='prose prose-slate dark:prose-invert mb-6 max-w-none text-sm'>
-                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        <PortableText value={job.description as any} components={RichTextComponents} />
-                      </div>
-                    )}
+                    {job.description &&
+                      Array.isArray(job.description) &&
+                      job.description.length > 0 && (
+                        <div className='prose prose-slate dark:prose-invert mb-6 max-w-none text-sm'>
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                          <PortableText
+                            value={job.description as any}
+                            components={RichTextComponents}
+                          />
+                        </div>
+                      )}
 
                     {job.requirements && job.requirements.length > 0 && (
                       <div className='mb-8'>
@@ -251,7 +253,10 @@ export default async function CareersPage() {
                         </h4>
                         <ul className='space-y-2'>
                           {job.requirements.map((req, i) => (
-                            <li key={i} className='flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300'>
+                            <li
+                              key={i}
+                              className='flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300'
+                            >
                               <span className='mt-0.5 h-2 w-2 flex-shrink-0 bg-untele' />
                               {req}
                             </li>
@@ -298,7 +303,6 @@ export default async function CareersPage() {
             <ContributorApplicationForm />
           </div>
         </section>
-
       </div>
     </div>
   );

@@ -19,16 +19,18 @@ declare global {
 
 export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAdSenseProps) {
   if (!publisherId) {
-    console.error('[AdSense] GoogleAdSense: publisherId is empty — set NEXT_PUBLIC_GAS_ID env var');
+    console.error(
+      '[AdSense] GoogleAdSense: publisherId is empty — set NEXT_PUBLIC_GAS_ID env var'
+    );
     return null;
   }
 
   return (
     <Script
-      id="google-adsense"
+      id='google-adsense'
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`}
-      strategy="afterInteractive"
-      crossOrigin="anonymous"
+      strategy='afterInteractive'
+      crossOrigin='anonymous'
       onLoad={() => {
         window.adsenseLoaded = true;
         window.adsenseScriptError = false;
@@ -38,7 +40,10 @@ export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAd
       onError={(e) => {
         window.adsenseScriptError = true;
         const error = new Error('AdSense script failed to load');
-        console.warn('[AdSense] Script failed to load — likely an ad blocker, CSP block, or network error:', e);
+        console.warn(
+          '[AdSense] Script failed to load — likely an ad blocker, CSP block, or network error:',
+          e
+        );
         onError?.(error);
       }}
     />

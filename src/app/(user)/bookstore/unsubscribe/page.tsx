@@ -28,12 +28,16 @@ export default function BookstoreUnsubscribePage() {
             You&rsquo;re Unsubscribed
           </h1>
           <p className='mb-8 text-slate-600 dark:text-slate-400'>
-            You&rsquo;ve been removed from the Hurriya Publications newsletter. No further emails will
-            be sent to you from this list.
+            You&rsquo;ve been removed from the Hurriya Publications newsletter. No further emails
+            will be sent to you from this list.
           </p>
           <p className='mb-8 text-sm text-slate-500 dark:text-slate-500'>
             Changed your mind?{' '}
-            <Link href='/bookstore' className='underline hover:no-underline' style={{ color: '#009736' }}>
+            <Link
+              href='/bookstore'
+              className='underline hover:no-underline'
+              style={{ color: '#009736' }}
+            >
               Subscribe again from the bookstore.
             </Link>
           </p>

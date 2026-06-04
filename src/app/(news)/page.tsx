@@ -14,7 +14,13 @@ import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
-import { queryHomepageArticles, queryLiveEvents, queryBreakingArticles, queryFieldReportArticles, queryTrendingIds } from '@/lib/sanity/lib/queries';
+import {
+  queryHomepageArticles,
+  queryLiveEvents,
+  queryBreakingArticles,
+  queryFieldReportArticles,
+  queryTrendingIds,
+} from '@/lib/sanity/lib/queries';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
@@ -27,12 +33,14 @@ export default async function HomePage() {
   const heroArticle = articles[0];
 
   // Build exclusion set from all sections that already display articles above the feed
-  const excludedIds = new Set<string>([
-    heroArticle?._id,
-    ...breakingArticles.map((a) => a._id),
-    ...fieldReports.map((a) => a._id),
-    ...trendingIds.map((a: { _id: string }) => a._id),
-  ].filter(Boolean) as string[]);
+  const excludedIds = new Set<string>(
+    [
+      heroArticle?._id,
+      ...breakingArticles.map((a) => a._id),
+      ...fieldReports.map((a) => a._id),
+      ...trendingIds.map((a: { _id: string }) => a._id),
+    ].filter(Boolean) as string[]
+  );
 
   // Filter out already-shown articles, then sort chronologically by eventDate → publishedAt → _createdAt
   const moreNews = articles
@@ -117,7 +125,9 @@ export default async function HomePage() {
                         <div className='relative h-[60px] w-[80px] shrink-0 overflow-hidden bg-slate-200 dark:bg-slate-800'>
                           {article.mainImage && (
                             <Image
-                              src={urlForImage(article.mainImage)?.width(160).height(120).url() ?? ''}
+                              src={
+                                urlForImage(article.mainImage)?.width(160).height(120).url() ?? ''
+                              }
                               alt={article.title}
                               fill
                               sizes='80px'
@@ -147,7 +157,6 @@ export default async function HomePage() {
       <section className='border-b border-slate-300 bg-white py-12 dark:border-slate-800 dark:bg-black'>
         <div className='mx-auto max-w-[1400px] px-4'>
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-0 lg:divide-x lg:divide-slate-200 lg:dark:divide-slate-800'>
-
             {/* Column 1 — CTA on top, Ad below */}
             <div className='flex flex-col justify-between lg:pr-8'>
               {/* Support Independent Media */}
@@ -162,8 +171,8 @@ export default async function HomePage() {
                     We go where others won&rsquo;t.
                   </h3>
                   <p className='text-sm leading-relaxed text-slate-600 dark:text-slate-400'>
-                    On-the-ground reporting that mainstream outlets ignore. Every dollar keeps us in
-                    the field — uncensored, unsponsored, uncompromised.
+                    On-the-ground reporting that mainstream outlets ignore. Every dollar keeps us
+                    in the field — uncensored, unsponsored, uncompromised.
                   </p>
                 </div>
                 <div className='flex flex-col gap-3 sm:flex-row'>
@@ -183,10 +192,7 @@ export default async function HomePage() {
               </div>
               {/* Advertisement */}
               <div className='flex items-center justify-center'>
-                <SidebarAd
-                  slot={AD_CONFIG.AD_SLOTS.HOMEPAGE_SIDEBAR}
-                  className='w-full'
-                />
+                <SidebarAd slot={AD_CONFIG.AD_SLOTS.HOMEPAGE_SIDEBAR} className='w-full' />
               </div>
             </div>
 
@@ -199,7 +205,6 @@ export default async function HomePage() {
             <div className='lg:pl-8'>
               <TrendingSection variant='list' />
             </div>
-
           </div>
         </div>
       </section>
@@ -221,10 +226,7 @@ export default async function HomePage() {
               fallback={
                 <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
                   {Array.from({ length: 6 }).map((_, i) => (
-                    <div
-                      key={i}
-                      className='h-64 animate-pulse bg-slate-100 dark:bg-slate-800'
-                    />
+                    <div key={i} className='h-64 animate-pulse bg-slate-100 dark:bg-slate-800' />
                   ))}
                 </div>
               }
@@ -247,7 +249,10 @@ export default async function HomePage() {
                         {...(urlForImage(article.mainImage)
                           ? {
                               placeholder: 'blur' as const,
-                              blurDataURL: urlForImage(article.mainImage)!.width(20).blur(10).url(),
+                              blurDataURL: urlForImage(article.mainImage)!
+                                .width(20)
+                                .blur(10)
+                                .url(),
                             }
                           : {})}
                       />
@@ -359,6 +364,12 @@ async function getFrontPageData(): Promise<{
     };
   } catch (error) {
     console.error('Failed to fetch front page data:', error);
-    return { articles: [], liveEvents: [], breakingArticles: [], fieldReports: [], trendingIds: [] };
+    return {
+      articles: [],
+      liveEvents: [],
+      breakingArticles: [],
+      fieldReports: [],
+      trendingIds: [],
+    };
   }
 }

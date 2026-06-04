@@ -129,7 +129,7 @@ export default async function Article({ params }: Props) {
             <div className='space-y-6'>
               {/* Title */}
               <h1
-                className={`text-4xl font-bold text-white sm:text-5xl lg:text-6xl${article.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
+                className={`text-4xl font-bold text-white sm:text-5xl lg:text-6xl${article.correction?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
               >
                 {article.title}
               </h1>
@@ -193,7 +193,8 @@ export default async function Article({ params }: Props) {
                   </div>
                   {/* Categories + Tags */}
                   <div className='flex flex-wrap justify-end gap-2'>
-                    {article.categories && article.categories.length > 0 &&
+                    {article.categories &&
+                      article.categories.length > 0 &&
                       article.categories.map((category) => (
                         <Link
                           key={category._id}
@@ -203,7 +204,8 @@ export default async function Article({ params }: Props) {
                           {category.title}
                         </Link>
                       ))}
-                    {article.tags && article.tags.length > 0 &&
+                    {article.tags &&
+                      article.tags.length > 0 &&
                       article.tags.map((tag) => (
                         <Link
                           key={tag}
@@ -227,7 +229,6 @@ export default async function Article({ params }: Props) {
       {/* Main Content + Sidebars */}
       <div className='mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-8'>
         <div className='flex gap-8 lg:items-start'>
-
           {/* LEFT SIDEBAR — desktop only */}
           <aside className='hidden w-72 shrink-0 self-start lg:sticky lg:top-[120px] lg:block'>
             <div className='space-y-6'>
@@ -239,232 +240,244 @@ export default async function Article({ params }: Props) {
             </div>
           </aside>
 
-      {/* Article content column */}
-      <main className='min-w-0 max-w-4xl flex-1'>
-        {/* Breadcrumb + Bookmark */}
-        <div className='mb-6 flex items-start justify-between gap-4'>
-          <nav
-            aria-label='Breadcrumb'
-            className='min-w-0 text-xs font-medium uppercase tracking-widest text-slate-500 dark:text-slate-400'
-          >
-            <ol className='flex flex-wrap items-center gap-2'>
-              <li>
-                <Link href='/' className='transition-colors hover:text-untele'>
-                  Home
-                </Link>
-              </li>
-              {article.categories && article.categories.length > 0 && (
-                <>
-                  <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
+          {/* Article content column */}
+          <main className='min-w-0 max-w-4xl flex-1'>
+            {/* Breadcrumb + Bookmark */}
+            <div className='mb-6 flex items-start justify-between gap-4'>
+              <nav
+                aria-label='Breadcrumb'
+                className='min-w-0 text-xs font-medium uppercase tracking-widest text-slate-500 dark:text-slate-400'
+              >
+                <ol className='flex flex-wrap items-center gap-2'>
                   <li>
-                    <Link
-                      href={`/category/${formatTitleForURL(article.categories[0].title)}`}
-                      className='transition-colors hover:text-untele'
-                    >
-                      {article.categories[0].title}
+                    <Link href='/' className='transition-colors hover:text-untele'>
+                      Home
                     </Link>
                   </li>
-                </>
-              )}
-              <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>/</li>
-              <li
-                className='max-w-xs truncate text-slate-900 dark:text-white'
-                aria-current='page'
-              >
-                {article.title}
-              </li>
-            </ol>
-          </nav>
-          <BookmarkButton
-            slug={slug}
-            title={article.title}
-            description={typeof article.description === 'string' ? article.description : undefined}
-            imageUrl={urlForImage(article.mainImage)?.width(400).url() ?? undefined}
-            authorName={article.author?.name}
-            publishedAt={article.publishedAt}
-            readingTime={getReadingTime(article.body)}
-            variant='full'
-          />
-        </div>
-
-        {/* Social Share — full width */}
-        <div className='mb-8'>
-          <SocialShare url={`https://untelevised.media/articles/${slug}`} title={article.title} />
-        </div>
-
-        {/* Article Content */}
-        <article className='prose prose-lg prose-slate dark:prose-invert max-w-none'>
-          {/* Featured Image */}
-          <div className='not-prose mb-0'>
-            <div className='overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
-              {(() => {
-                const ref: string = article.mainImage?.asset?._ref ?? '';
-                const m = ref.match(/-(\d+)x(\d+)-/);
-                const imgW = m ? parseInt(m[1]) : 1200;
-                const imgH = m ? parseInt(m[2]) : 630;
-                return (
-                  <Image
-                    src={urlForImage(article.mainImage)?.url() ?? ''}
-                    alt={article.mainImage?.alt ?? 'Article image'}
-                    width={imgW}
-                    height={imgH}
-                    style={{ width: '100%', height: 'auto' }}
-                    className='block'
-                  />
-                );
-              })()}
+                  {article.categories && article.categories.length > 0 && (
+                    <>
+                      <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>
+                        /
+                      </li>
+                      <li>
+                        <Link
+                          href={`/category/${formatTitleForURL(article.categories[0].title)}`}
+                          className='transition-colors hover:text-untele'
+                        >
+                          {article.categories[0].title}
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                  <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>
+                    /
+                  </li>
+                  <li
+                    className='max-w-xs truncate text-slate-900 dark:text-white'
+                    aria-current='page'
+                  >
+                    {article.title}
+                  </li>
+                </ol>
+              </nav>
+              <BookmarkButton
+                slug={slug}
+                title={article.title}
+                description={
+                  typeof article.description === 'string' ? article.description : undefined
+                }
+                imageUrl={urlForImage(article.mainImage)?.width(400).url() ?? undefined}
+                authorName={article.author?.name}
+                publishedAt={article.publishedAt}
+                readingTime={getReadingTime(article.body)}
+                variant='full'
+              />
             </div>
-          </div>
 
-          {/* In-feed ad directly below the image */}
-          <div className='not-prose mb-8'>
-            <InFeedAd
-              slot={AD_CONFIG.AD_SLOTS.IN_FEED}
-              className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
-            />
-          </div>
+            {/* Social Share — full width */}
+            <div className='mb-8'>
+              <SocialShare
+                url={`https://untelevised.media/articles/${slug}`}
+                title={article.title}
+              />
+            </div>
 
-          {/* Embedded Video */}
-          {article.hasEmbeddedVideo && (
-            <div className='not-prose mb-8'>
-              <div className='aspect-video overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
-                <iframe
-                  src={article.videoLink}
-                  title='Article video'
-                  className='h-full w-full'
-                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
+            {/* Article Content */}
+            <article className='prose prose-lg prose-slate dark:prose-invert max-w-none'>
+              {/* Featured Image */}
+              <div className='not-prose mb-0'>
+                <div className='overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
+                  {(() => {
+                    const ref: string = article.mainImage?.asset?._ref ?? '';
+                    const m = ref.match(/-(\d+)x(\d+)-/);
+                    const imgW = m ? parseInt(m[1]) : 1200;
+                    const imgH = m ? parseInt(m[2]) : 630;
+                    return (
+                      <Image
+                        src={urlForImage(article.mainImage)?.url() ?? ''}
+                        alt={article.mainImage?.alt ?? 'Article image'}
+                        width={imgW}
+                        height={imgH}
+                        style={{ width: '100%', height: 'auto' }}
+                        className='block'
+                      />
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* In-feed ad directly below the image */}
+              <div className='not-prose mb-8'>
+                <InFeedAd
+                  slot={AD_CONFIG.AD_SLOTS.IN_FEED}
+                  className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
                 />
               </div>
-            </div>
-          )}
 
-          {/* Correction / Retraction Notice */}
-          {article.correction?.detail && (
-            <div className='not-prose'>
-              <CorrectionNotice correction={article.correction} />
-            </div>
-          )}
+              {/* Embedded Video */}
+              {article.hasEmbeddedVideo && (
+                <div className='not-prose mb-8'>
+                  <div className='aspect-video overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
+                    <iframe
+                      src={article.videoLink}
+                      title='Article video'
+                      className='h-full w-full'
+                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
+                    />
+                  </div>
+                </div>
+              )}
 
-          {/* Article Body */}
-          <div className='rounded-xl border border-slate-200 bg-white/50 p-8 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/50'>
-            <PortableText value={article.body} components={RichTextComponents} />
-          </div>
+              {/* Correction / Retraction Notice */}
+              {article.correction?.detail && (
+                <div className='not-prose'>
+                  <CorrectionNotice correction={article.correction} />
+                </div>
+              )}
 
-          {/* Sources & Methodology */}
-          <div className='not-prose'>
-            <SourcesPanel sources={article.sources} methodology={article.methodology} />
-          </div>
-
-          {/* Tags */}
-          {article.tags && article.tags.length > 0 && (
-            <div className='not-prose mt-8'>
-              <p className='mb-3 text-xs font-black uppercase tracking-widest text-muted-foreground'>
-                Filed Under
-              </p>
-              <div className='flex flex-wrap gap-2'>
-                {article.tags.map((tag: string) => (
-                  <Link
-                    key={tag}
-                    href={`/tag/${tagToSlug(tag)}`}
-                    className='border border-zinc-600 px-3 py-1 text-xs uppercase tracking-wide text-zinc-400 transition-colors hover:border-untele hover:text-white'
-                  >
-                    {tag}
-                  </Link>
-                ))}
+              {/* Article Body */}
+              <div className='rounded-xl border border-slate-200 bg-white/50 p-8 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/50'>
+                <PortableText value={article.body} components={RichTextComponents} />
               </div>
-            </div>
-          )}
 
-          {/* FAQs */}
-          {article.faqs && article.faqs.length > 0 && (
-            <div className='not-prose mt-8 rounded-xl border border-slate-200 bg-white/50 p-6 dark:border-slate-700 dark:bg-slate-900/50'>
-              <h3 className='mb-4 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400'>
-                Frequently Asked Questions
-              </h3>
-              <dl className='space-y-4'>
-                {article.faqs.map((faq, i) => (
-                  <div key={i} className='border-b border-slate-200 pb-4 last:border-0 last:pb-0 dark:border-slate-700'>
-                    <dt className='mb-1 font-semibold text-slate-900 dark:text-white'>
-                      {safeText(faq.question)}
-                    </dt>
-                    <dd className='text-sm text-slate-600 dark:text-slate-400'>{safeText(faq.answer)}</dd>
+              {/* Sources & Methodology */}
+              <div className='not-prose'>
+                <SourcesPanel sources={article.sources} methodology={article.methodology} />
+              </div>
+
+              {/* Tags */}
+              {article.tags && article.tags.length > 0 && (
+                <div className='not-prose mt-8'>
+                  <p className='mb-3 text-xs font-black uppercase tracking-widest text-muted-foreground'>
+                    Filed Under
+                  </p>
+                  <div className='flex flex-wrap gap-2'>
+                    {article.tags.map((tag: string) => (
+                      <Link
+                        key={tag}
+                        href={`/tag/${tagToSlug(tag)}`}
+                        className='border border-zinc-600 px-3 py-1 text-xs uppercase tracking-wide text-zinc-400 transition-colors hover:border-untele hover:text-white'
+                      >
+                        {tag}
+                      </Link>
+                    ))}
                   </div>
-                ))}
-              </dl>
+                </div>
+              )}
+
+              {/* FAQs */}
+              {article.faqs && article.faqs.length > 0 && (
+                <div className='not-prose mt-8 rounded-xl border border-slate-200 bg-white/50 p-6 dark:border-slate-700 dark:bg-slate-900/50'>
+                  <h3 className='mb-4 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400'>
+                    Frequently Asked Questions
+                  </h3>
+                  <dl className='space-y-4'>
+                    {article.faqs.map((faq, i) => (
+                      <div
+                        key={i}
+                        className='border-b border-slate-200 pb-4 last:border-0 last:pb-0 dark:border-slate-700'
+                      >
+                        <dt className='mb-1 font-semibold text-slate-900 dark:text-white'>
+                          {safeText(faq.question)}
+                        </dt>
+                        <dd className='text-sm text-slate-600 dark:text-slate-400'>
+                          {safeText(faq.answer)}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              )}
+            </article>
+
+            {/* Banner Ad after article content */}
+            <div className='mb-8 mt-12'>
+              <BannerAd
+                slot={AD_CONFIG.AD_SLOTS.ARTICLE_BANNER_BOTTOM}
+                className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+              />
             </div>
-          )}
-        </article>
 
-        {/* Banner Ad after article content */}
-        <div className='mb-8 mt-12'>
-          <BannerAd
-            slot={AD_CONFIG.AD_SLOTS.ARTICLE_BANNER_BOTTOM}
-            className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
-          />
-        </div>
+            {/* Related Articles */}
+            {article.relatedArticles && article.relatedArticles.length > 0 && (
+              <section className='mt-12'>
+                <h2 className='mb-6 text-2xl font-bold text-slate-900 dark:text-white'>
+                  Related Articles
+                </h2>
+                <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+                  {article.relatedArticles.map((related) => (
+                    <Link
+                      key={related._id}
+                      href={`/articles/${related.slug}`}
+                      className='group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow transition-all hover:border-untele dark:border-slate-700 dark:bg-slate-800'
+                    >
+                      {related.mainImage && (
+                        <div className='aspect-video overflow-hidden'>
+                          <Image
+                            src={urlForImage(related.mainImage)?.url() ?? ''}
+                            alt={related.mainImage.alt ?? related.title}
+                            width={400}
+                            height={225}
+                            className='h-full w-full object-cover transition-transform group-hover:scale-105'
+                          />
+                        </div>
+                      )}
+                      <div className='flex flex-1 flex-col p-4'>
+                        <h3 className='mb-2 line-clamp-2 font-semibold text-slate-900 group-hover:text-untele dark:text-white'>
+                          {related.title}
+                        </h3>
+                        {safeText(related.description) && (
+                          <p className='mb-3 line-clamp-2 flex-1 text-sm text-slate-600 dark:text-slate-400'>
+                            {safeText(related.description)}
+                          </p>
+                        )}
+                        <div className='mt-auto flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>
+                          {related.author?.name && (
+                            <span className='font-medium'>{related.author.name}</span>
+                          )}
+                          {related.publishedAt && <time>{formatDate(related.publishedAt)}</time>}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
 
-        {/* Related Articles */}
-        {article.relatedArticles && article.relatedArticles.length > 0 && (
-          <section className='mt-12'>
-            <h2 className='mb-6 text-2xl font-bold text-slate-900 dark:text-white'>
-              Related Articles
-            </h2>
-            <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-              {article.relatedArticles.map((related) => (
-                <Link
-                  key={related._id}
-                  href={`/articles/${related.slug}`}
-                  className='group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow transition-all hover:border-untele dark:border-slate-700 dark:bg-slate-800'
-                >
-                  {related.mainImage && (
-                    <div className='aspect-video overflow-hidden'>
-                      <Image
-                        src={urlForImage(related.mainImage)?.url() ?? ''}
-                        alt={related.mainImage.alt ?? related.title}
-                        width={400}
-                        height={225}
-                        className='h-full w-full object-cover transition-transform group-hover:scale-105'
-                      />
-                    </div>
-                  )}
-                  <div className='flex flex-1 flex-col p-4'>
-                    <h3 className='mb-2 line-clamp-2 font-semibold text-slate-900 group-hover:text-untele dark:text-white'>
-                      {related.title}
-                    </h3>
-                    {safeText(related.description) && (
-                      <p className='mb-3 line-clamp-2 flex-1 text-sm text-slate-600 dark:text-slate-400'>
-                        {safeText(related.description)}
-                      </p>
-                    )}
-                    <div className='mt-auto flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>
-                      {related.author?.name && (
-                        <span className='font-medium'>{related.author.name}</span>
-                      )}
-                      {related.publishedAt && (
-                        <time>{formatDate(related.publishedAt)}</time>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              ))}
+            {/* Newsletter Signup */}
+            <div className='mt-12'>
+              <NewsletterSignup list='news' source='article' />
             </div>
-          </section>
-        )}
 
-        {/* Newsletter Signup */}
-        <div className='mt-12'>
-          <NewsletterSignup list='news' source='article' />
-        </div>
-
-        {/* Comments Section */}
-        <div className='mt-12'>
-          <CommentsSection
-            articleId={article._id}
-            articleUrl={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/articles/${article.slug?.current ?? slug}`}
-            allowComments={article.allowComments}
-          />
-        </div>
-      </main>
+            {/* Comments Section */}
+            <div className='mt-12'>
+              <CommentsSection
+                articleId={article._id}
+                articleUrl={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/articles/${article.slug?.current ?? slug}`}
+                allowComments={article.allowComments}
+              />
+            </div>
+          </main>
 
           {/* RIGHT SIDEBAR — desktop only */}
           <aside className='hidden w-72 shrink-0 self-start lg:sticky lg:top-[120px] lg:block'>
@@ -476,15 +489,15 @@ export default async function Article({ params }: Props) {
               />
             </div>
           </aside>
-
-        </div>{/* end flex */}
+        </div>
+        {/* end flex */}
 
         {/* Mobile: Most Read + Breaking below content */}
         <div className='mt-10 lg:hidden'>
           <TrendingSection />
         </div>
-
-      </div>{/* end outer container */}
+      </div>
+      {/* end outer container */}
     </div>
   );
 }
@@ -509,7 +522,9 @@ export async function generateStaticParams() {
   const query = groq`*[_type=='article'] { slug }`;
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: Article[] = await sanityClient.fetch(query);
-  const slugRoutes = slugs ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current) : [];
+  const slugRoutes = slugs
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    : [];
   return slugRoutes.map((slug) => ({
     slug,
   }));

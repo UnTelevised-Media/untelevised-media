@@ -95,7 +95,9 @@ export default function ReviewForm({ bookSlug }: Props) {
                   onMouseLeave={() => setHovered(0)}
                   aria-label={`${n} star${n !== 1 ? 's' : ''}`}
                   className={`text-2xl transition-colors ${
-                    n <= (hovered || rating) ? 'text-amber-400' : 'text-slate-300 dark:text-slate-600'
+                    n <= (hovered || rating)
+                      ? 'text-amber-400'
+                      : 'text-slate-300 dark:text-slate-600'
                   }`}
                 >
                   ★
@@ -130,7 +132,7 @@ export default function ReviewForm({ bookSlug }: Props) {
               htmlFor='review-location'
               className='mb-1 block text-[10px] font-black uppercase tracking-widest text-hp-muted'
             >
-              Location <span className='text-hp-muted font-normal normal-case'>(optional)</span>
+              Location <span className='font-normal normal-case text-hp-muted'>(optional)</span>
             </label>
             <input
               id='review-location'
@@ -165,12 +167,14 @@ export default function ReviewForm({ bookSlug }: Props) {
             <p className='mt-0.5 text-[10px] text-hp-muted'>{body.length} / 20 chars min</p>
           </div>
 
-          {state === 'error' && (
-            <p className='text-[11px] text-red-500'>{errorMsg}</p>
-          )}
+          {state === 'error' && <p className='text-[11px] text-red-500'>{errorMsg}</p>}
 
           {(() => {
-            const canSubmit = state !== 'submitting' && name.trim().length > 0 && rating > 0 && body.trim().length >= 20;
+            const canSubmit =
+              state !== 'submitting' &&
+              name.trim().length > 0 &&
+              rating > 0 &&
+              body.trim().length >= 20;
             return (
               <button
                 type='submit'

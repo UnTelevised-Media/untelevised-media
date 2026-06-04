@@ -35,7 +35,9 @@ export default function TrendingListPaginated({ articles }: { articles: Trending
       <div className='flex items-center justify-between border border-b-0 border-border px-3 py-2'>
         <div className='flex items-center gap-1.5 bg-untele px-2 py-0.5'>
           <TrendingUp className='h-3 w-3 text-white' aria-hidden='true' />
-          <span className='text-[10px] font-black uppercase tracking-widest text-white'>Trending</span>
+          <span className='text-[10px] font-black uppercase tracking-widest text-white'>
+            Trending
+          </span>
         </div>
         <div className='flex items-center gap-1'>
           <button
@@ -67,7 +69,7 @@ export default function TrendingListPaginated({ articles }: { articles: Trending
               href={`/articles/${article.slug.current}`}
               className='flex items-start gap-3 p-3 transition-colors hover:bg-muted/50'
             >
-              <span className='w-7 shrink-0 text-2xl font-black leading-none tabular-nums text-muted-foreground/30'>
+              <span className='w-7 shrink-0 text-2xl font-black tabular-nums leading-none text-muted-foreground/30'>
                 {rankOffset + index}
               </span>
               <div className='min-w-0 flex-1 space-y-1'>

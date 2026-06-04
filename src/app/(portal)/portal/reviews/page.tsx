@@ -36,7 +36,13 @@ export default async function ReviewsPage() {
             {reviews.length} total &nbsp;·&nbsp;
             <span className='text-amber-600 dark:text-amber-400'>{pending} pending</span>
             {needsRevision > 0 && (
-              <> &nbsp;·&nbsp; <span className='text-blue-600 dark:text-blue-400'>{needsRevision} needs revision</span></>
+              <>
+                {' '}
+                &nbsp;·&nbsp;{' '}
+                <span className='text-blue-600 dark:text-blue-400'>
+                  {needsRevision} needs revision
+                </span>
+              </>
             )}
           </p>
         </div>

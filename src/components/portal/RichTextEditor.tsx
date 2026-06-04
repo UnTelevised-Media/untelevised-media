@@ -91,7 +91,10 @@ const YouTubeBlock = createReactBlockSpec(
           </div>
           <button
             type='button'
-            onClick={() => { setDraft(block.props.videoId); setEditing(true); }}
+            onClick={() => {
+              setDraft(block.props.videoId);
+              setEditing(true);
+            }}
             className='mt-1 text-xs text-slate-400 underline hover:text-untele'
           >
             Change video
@@ -99,7 +102,7 @@ const YouTubeBlock = createReactBlockSpec(
         </div>
       );
     },
-  },
+  }
 );
 
 // ─── Custom block: Twitter / X embed ─────────────────────────────────────────
@@ -161,7 +164,10 @@ const TwitterBlock = createReactBlockSpec(
           />
           <button
             type='button'
-            onClick={() => { setDraft(block.props.tweetId); setEditing(true); }}
+            onClick={() => {
+              setDraft(block.props.tweetId);
+              setEditing(true);
+            }}
             className='mt-1 text-xs text-slate-400 underline hover:text-untele'
           >
             Change tweet
@@ -169,7 +175,7 @@ const TwitterBlock = createReactBlockSpec(
         </div>
       );
     },
-  },
+  }
 );
 
 // ─── Custom block: Instagram embed ───────────────────────────────────────────
@@ -231,7 +237,10 @@ const InstagramBlock = createReactBlockSpec(
           />
           <button
             type='button'
-            onClick={() => { setDraft(block.props.postId); setEditing(true); }}
+            onClick={() => {
+              setDraft(block.props.postId);
+              setEditing(true);
+            }}
             className='mt-1 text-xs text-slate-400 underline hover:text-untele'
           >
             Change post
@@ -239,7 +248,7 @@ const InstagramBlock = createReactBlockSpec(
         </div>
       );
     },
-  },
+  }
 );
 
 // ─── BlockNote schema with custom blocks ─────────────────────────────────────
@@ -305,7 +314,7 @@ export default function RichTextEditor({
                     editor.insertBlocks(
                       [{ type: 'youtubeEmbed' as const, props: { videoId: '' } }],
                       cur,
-                      'after',
+                      'after'
                     );
                   },
                   group: 'Embeds',
@@ -320,7 +329,7 @@ export default function RichTextEditor({
                     editor.insertBlocks(
                       [{ type: 'twitterEmbed' as const, props: { tweetId: '' } }],
                       cur,
-                      'after',
+                      'after'
                     );
                   },
                   group: 'Embeds',
@@ -335,7 +344,7 @@ export default function RichTextEditor({
                     editor.insertBlocks(
                       [{ type: 'instagramEmbed' as const, props: { postId: '' } }],
                       cur,
-                      'after',
+                      'after'
                     );
                   },
                   group: 'Embeds',
@@ -343,7 +352,7 @@ export default function RichTextEditor({
                   aliases: ['instagram', 'ig', 'insta'],
                 },
               ],
-              query,
+              query
             )
           }
         />

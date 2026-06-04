@@ -113,10 +113,7 @@ export function NewsletterSignup({
 
   if (submitState === 'success') {
     return (
-      <div
-        className={`border p-4 text-sm ${className}`}
-        style={{ borderColor: cfg.color }}
-      >
+      <div className={`border p-4 text-sm ${className}`} style={{ borderColor: cfg.color }}>
         <p
           className='mb-1 text-xs font-black uppercase tracking-widest'
           style={{ color: cfg.color }}
@@ -146,7 +143,7 @@ export function NewsletterSignup({
           <button
             type='submit'
             disabled={submitState === 'loading'}
-            className='px-4 py-2 text-xs font-black uppercase tracking-widest text-white transition-opacity disabled:opacity-60 hover:opacity-90'
+            className='px-4 py-2 text-xs font-black uppercase tracking-widest text-white transition-opacity hover:opacity-90 disabled:opacity-60'
             style={{ backgroundColor: cfg.color }}
           >
             {submitState === 'loading' ? (
@@ -185,11 +182,10 @@ export function NewsletterSignup({
   }
 
   return (
-    <section className={`my-10 border border-neutral-200 p-6 dark:border-neutral-700 ${className}`}>
-      <div
-        className='mb-4 inline-block px-3 py-2'
-        style={{ backgroundColor: cfg.color }}
-      >
+    <section
+      className={`my-10 border border-neutral-200 p-6 dark:border-neutral-700 ${className}`}
+    >
+      <div className='mb-4 inline-block px-3 py-2' style={{ backgroundColor: cfg.color }}>
         <p className='text-xs font-black uppercase tracking-widest text-white'>{cfg.label}</p>
       </div>
       <h2 className='mb-2 text-xl font-black uppercase tracking-tight text-slate-900 dark:text-white'>
@@ -198,7 +194,7 @@ export function NewsletterSignup({
       <p className='mb-6 text-sm text-neutral-600 dark:text-neutral-400'>{cfg.subheading}</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-        <div className={`flex flex-col gap-3${fieldsLayout === 'row' ? ' sm:flex-row' : ''}`}>
+        <div className={`flex flex-col gap-3${fieldsLayout === 'row' ? 'sm:flex-row' : ''}`}>
           <input
             {...register('firstName')}
             type='text'
@@ -239,7 +235,7 @@ export function NewsletterSignup({
         <button
           type='submit'
           disabled={submitState === 'loading'}
-          className='inline-flex items-center gap-2 px-6 py-3 text-xs font-black uppercase tracking-widest text-white transition-opacity disabled:opacity-60 hover:opacity-90'
+          className='inline-flex items-center gap-2 px-6 py-3 text-xs font-black uppercase tracking-widest text-white transition-opacity hover:opacity-90 disabled:opacity-60'
           style={{ backgroundColor: cfg.color }}
         >
           {submitState === 'loading' && <Loader2 className='h-3 w-3 animate-spin' />}

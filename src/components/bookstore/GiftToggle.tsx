@@ -26,11 +26,7 @@ export default function GiftToggle({ onChange }: Props) {
     }
   };
 
-  const handleFieldChange = (
-    newEmail: string,
-    newFromName: string,
-    newAnonymous: boolean
-  ) => {
+  const handleFieldChange = (newEmail: string, newFromName: string, newAnonymous: boolean) => {
     if (enabled) {
       onChange({
         recipientEmail: newEmail,
@@ -89,8 +85,7 @@ export default function GiftToggle({ onChange }: Props) {
               htmlFor='gift-from-name'
               className='mb-1 block text-[10px] font-black uppercase tracking-widest text-hp-muted'
             >
-              Your Name{' '}
-              <span className='font-normal normal-case text-hp-muted'>(optional)</span>
+              Your Name <span className='font-normal normal-case text-hp-muted'>(optional)</span>
             </label>
             <input
               id='gift-from-name'
@@ -123,8 +118,8 @@ export default function GiftToggle({ onChange }: Props) {
           </label>
 
           <p className='text-[10px] text-hp-muted'>
-            The recipient receives a gift email with the download link. No pricing is shown.
-            You receive the standard order receipt.
+            The recipient receives a gift email with the download link. No pricing is shown. You
+            receive the standard order receipt.
           </p>
         </div>
       )}

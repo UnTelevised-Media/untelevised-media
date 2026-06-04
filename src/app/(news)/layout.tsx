@@ -18,9 +18,7 @@ export default async function UserLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      <ConsentAwareGoogleAdSense
-        googleAdsenseId={process.env.NEXT_PUBLIC_GAS_ID ?? ''}
-      />
+      <ConsentAwareGoogleAdSense googleAdsenseId={process.env.NEXT_PUBLIC_GAS_ID ?? ''} />
 
       <GlobalStructuredData />
 
@@ -40,7 +38,6 @@ export default async function UserLayout({ children }: { children: React.ReactNo
 
         {draftModeEnabled && <SanityVisualEditing />}
       </div>
-
     </>
   );
 }

@@ -84,22 +84,40 @@ export function ApplicationsTable({
         <table className='w-full border-collapse text-sm'>
           <thead>
             <tr className='border-b-2 border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-900'>
-              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th
+                scope='col'
+                className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'
+              >
                 Applicant
               </th>
-              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th
+                scope='col'
+                className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'
+              >
                 Position(s)
               </th>
-              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th
+                scope='col'
+                className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'
+              >
                 Experience
               </th>
-              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th
+                scope='col'
+                className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'
+              >
                 Availability
               </th>
-              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th
+                scope='col'
+                className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'
+              >
                 Submitted
               </th>
-              <th scope='col' className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+              <th
+                scope='col'
+                className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'
+              >
                 Status
               </th>
               <th scope='col' className='px-4 py-3' />
@@ -131,9 +149,7 @@ export function ApplicationsTable({
                       >
                         {app.email}
                       </a>
-                      {app.location && (
-                        <p className='text-xs text-slate-400'>{app.location}</p>
-                      )}
+                      {app.location && <p className='text-xs text-slate-400'>{app.location}</p>}
                     </td>
                     <td className='px-4 py-4'>
                       <div className='flex flex-wrap gap-1'>

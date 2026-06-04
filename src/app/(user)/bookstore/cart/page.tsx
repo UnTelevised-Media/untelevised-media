@@ -100,7 +100,10 @@ export default function CartPage() {
           title: item.title,
           isDigital: item.formatType === 'digital',
           ...(item.formatType === 'tip' && { unitAmountCents: Math.round(item.price * 100) }),
-          ...(item.nameYourPrice && { unitAmountCents: Math.round(item.price * 100), isNyop: true }),
+          ...(item.nameYourPrice && {
+            unitAmountCents: Math.round(item.price * 100),
+            isNyop: true,
+          }),
         })),
       ...(customerEmail && { customerEmail }),
     };
@@ -120,7 +123,10 @@ export default function CartPage() {
       const data = (await res.json()) as { url?: string; error?: string };
       if (!res.ok || !data.url) {
         const msg = data.error ?? 'Failed to start checkout';
-        Sentry.captureMessage(msg, { level: 'error', extra: { itemCount: payload.items.length, total } });
+        Sentry.captureMessage(msg, {
+          level: 'error',
+          extra: { itemCount: payload.items.length, total },
+        });
         setError(msg);
         return;
       }
@@ -180,7 +186,11 @@ export default function CartPage() {
                             type='checkbox'
                             checked={checked}
                             onChange={(e) =>
-                              updateTipIncluded(item.sanityBookId, item.formatKey, e.target.checked)
+                              updateTipIncluded(
+                                item.sanityBookId,
+                                item.formatKey,
+                                e.target.checked
+                              )
                             }
                             className='h-3.5 w-3.5 accent-amber-500'
                           />
@@ -212,7 +222,7 @@ export default function CartPage() {
                               updatePrice(
                                 item.sanityBookId,
                                 item.formatKey,
-                                Math.max(0, parseFloat(e.target.value) || 0),
+                                Math.max(0, parseFloat(e.target.value) || 0)
                               )
                             }
                             disabled={!checked}
@@ -230,10 +240,7 @@ export default function CartPage() {
                 }
 
                 return (
-                  <div
-                    key={`${item.sanityBookId}-${item.formatKey}`}
-                    className='flex gap-4 p-4'
-                  >
+                  <div key={`${item.sanityBookId}-${item.formatKey}`} className='flex gap-4 p-4'>
                     <div className='flex-1'>
                       <p className='text-sm font-black text-slate-900 dark:text-white'>
                         {item.title}

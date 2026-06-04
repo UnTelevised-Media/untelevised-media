@@ -26,7 +26,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Our Story — Hurriya Publications',
-    description: 'Born in solidarity. Built to endure. An independent publisher under UnTelevised Media, built to put authors first.',
+    description:
+      'Born in solidarity. Built to endure. An independent publisher under UnTelevised Media, built to put authors first.',
     images: ['/hurriya-pub/Logo-alt.png'],
   },
 };
@@ -58,13 +59,13 @@ function Stat({ value, label }: { value: string; label: string }) {
 export default function AboutPage() {
   return (
     <main className='mx-auto max-w-4xl px-4 py-12 sm:px-6'>
-
       {/* ── Origin ── */}
       <section className='mb-16'>
         <SectionLabel>Our Story</SectionLabel>
 
         <h1 className='mb-4 text-4xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-white sm:text-5xl'>
-          Born in Solidarity.<br />
+          Born in Solidarity.
+          <br />
           <span className='text-[#009736]'>Built to Endure.</span>
         </h1>
 
@@ -75,14 +76,22 @@ export default function AboutPage() {
             Hurriya Publications did not begin as a business plan. It began as an act of witness.
           </p>
           <p>
-            When <strong className='text-slate-900 dark:text-white'>Salah Akram</strong> — a Palestinian survivor of the ongoing genocide in Gaza — completed his memoir,{' '}
-            <em>Between Life and Death in Gaza</em>, he needed more than a publisher. He needed a platform that understood what was at stake: that the economic rights to the story of survival should never be surrendered to the institutions that failed to prevent the catastrophe in the first place.
+            When <strong className='text-slate-900 dark:text-white'>Salah Akram</strong> — a
+            Palestinian survivor of the ongoing genocide in Gaza — completed his memoir,{' '}
+            <em>Between Life and Death in Gaza</em>, he needed more than a publisher. He needed a
+            platform that understood what was at stake: that the economic rights to the story of
+            survival should never be surrendered to the institutions that failed to prevent the
+            catastrophe in the first place.
           </p>
           <p>
-            <strong className='text-slate-900 dark:text-white'>Edward Tivrusky</strong>, founder and Editor-in-Chief of UnTelevised Media — an independent journalist and activist who has covered Palestine and fought for the cause for over eighteen years — answered that call. Together, they built something different.
+            <strong className='text-slate-900 dark:text-white'>Edward Tivrusky</strong>, founder
+            and Editor-in-Chief of UnTelevised Media — an independent journalist and activist who
+            has covered Palestine and fought for the cause for over eighteen years — answered that
+            call. Together, they built something different.
           </p>
           <p className='border-l-4 border-[#009736] pl-5 italic text-slate-600 dark:text-slate-400'>
-            Half of this company has its roots in Gaza. That is not background information — it is the foundation.
+            Half of this company has its roots in Gaza. That is not background information — it is
+            the foundation.
           </p>
         </div>
       </section>
@@ -113,7 +122,10 @@ export default function AboutPage() {
             <div className='mb-3 h-px bg-slate-100 dark:bg-slate-800' />
             <p className='text-sm leading-relaxed text-slate-600 dark:text-slate-400'>
               Palestinian author and survivor of the genocide in Gaza. His debut memoir,{' '}
-              <em>Between Life and Death in Gaza</em>, is a first-hand account of living through one of the most documented atrocities of the twenty-first century — written from inside it. Salah&apos;s book is the reason Hurriya exists, and the standard against which we measure everything we do.
+              <em>Between Life and Death in Gaza</em>, is a first-hand account of living through
+              one of the most documented atrocities of the twenty-first century — written from
+              inside it. Salah&apos;s book is the reason Hurriya exists, and the standard against
+              which we measure everything we do.
             </p>
             <div className='mt-4 flex items-center gap-2'>
               <div className='h-2 w-2 bg-[#009736]' />
@@ -133,11 +145,12 @@ export default function AboutPage() {
             </h2>
             <div className='mb-3 h-px bg-slate-100 dark:bg-slate-800' />
             <p className='text-sm leading-relaxed text-slate-600 dark:text-slate-400'>
-              Founder and Editor-in-Chief of UnTelevised Media. Independent journalist, activist, and
-              the architect of this platform. Edward has spent eighteen years covering Palestine — not
-              as a career move, but as a commitment. Hurriya Publications is his answer to the question
-              every journalist eventually faces: reporting is not enough. Sometimes you have to build
-              the infrastructure that gives the story somewhere to live.
+              Founder and Editor-in-Chief of UnTelevised Media. Independent journalist, activist,
+              and the architect of this platform. Edward has spent eighteen years covering
+              Palestine — not as a career move, but as a commitment. Hurriya Publications is his
+              answer to the question every journalist eventually faces: reporting is not enough.
+              Sometimes you have to build the infrastructure that gives the story somewhere to
+              live.
             </p>
             <div className='mt-4 flex items-center gap-2'>
               <div className='h-2 w-2 bg-[#D70606]' />
@@ -155,8 +168,8 @@ export default function AboutPage() {
 
         <div className='mb-8 border-l-4 border-[#009736] bg-white p-6 dark:bg-slate-900'>
           <p className='text-lg font-black uppercase leading-tight tracking-tight text-slate-900 dark:text-white sm:text-xl'>
-            To collectivize the publishing structure — shifting power from gatekeepers to the writers
-            who actually have something to say.
+            To collectivize the publishing structure — shifting power from gatekeepers to the
+            writers who actually have something to say.
           </p>
         </div>
 
@@ -168,14 +181,15 @@ export default function AboutPage() {
           </p>
           <p>
             We return significantly more revenue to our authors than any traditional publishing
-            house — and we use sliding-scale revenue adjustments based on socio-economic
-            context, because we understand that not all authors start from the same place.
-            A writer surviving genocide should not be negotiating from a position of
-            desperation. We remove that leverage from the table entirely.
+            house — and we use sliding-scale revenue adjustments based on socio-economic context,
+            because we understand that not all authors start from the same place. A writer
+            surviving genocide should not be negotiating from a position of desperation. We remove
+            that leverage from the table entirely.
           </p>
           <p>
-            We run grassroots campaigns to grow the reach and discovery of our authors&apos; works —
-            because a great book that no one can find is not a published book, it is a buried one.
+            We run grassroots campaigns to grow the reach and discovery of our authors&apos; works
+            — because a great book that no one can find is not a published book, it is a buried
+            one.
           </p>
         </div>
       </section>
@@ -226,8 +240,8 @@ export default function AboutPage() {
           <p>
             Hurriya Publications launched with one book and one mission. We are building it to hold
             many more. We are actively seeking independent authors — particularly those whose
-            stories are underrepresented, whose economics are precarious, and whose voices deserve a
-            global audience without compromise or condition.
+            stories are underrepresented, whose economics are precarious, and whose voices deserve
+            a global audience without compromise or condition.
           </p>
           <p>
             We are not interested in authors who fit the market. We are interested in authors who
@@ -276,7 +290,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
     </main>
   );
 }

@@ -44,13 +44,22 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
 
   // Build GA4 items array from the server-side metadata written at checkout time.
   // items_json mirrors the chargeableItems array so index-aligns with line_items.
-  interface ItemMeta { bookId: string; title: string; formatType: string; qty: number }
+  interface ItemMeta {
+    bookId: string;
+    title: string;
+    formatType: string;
+    qty: number;
+  }
   let itemsMeta: ItemMeta[] = [];
-  try { itemsMeta = JSON.parse(session.metadata?.items_json ?? '[]') as ItemMeta[]; } catch {}
+  try {
+    itemsMeta = JSON.parse(session.metadata?.items_json ?? '[]') as ItemMeta[];
+  } catch {}
 
   const ga4Items: GA4Item[] = itemsMeta.map((meta, idx) => {
     const lineItem = items[idx];
-    const lineTotal = lineItem ? ((lineItem.amount_total || lineItem.amount_subtotal) ?? 0) / 100 : undefined;
+    const lineTotal = lineItem
+      ? ((lineItem.amount_total || lineItem.amount_subtotal) ?? 0) / 100
+      : undefined;
     return {
       item_id: meta.bookId,
       item_name: meta.title,
@@ -62,7 +71,11 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
 
   return (
     <div>
-      <PurchaseTracker sessionId={sessionId} total={totalCents ? totalCents / 100 : null} items={ga4Items} />
+      <PurchaseTracker
+        sessionId={sessionId}
+        total={totalCents ? totalCents / 100 : null}
+        items={ga4Items}
+      />
       <p className='mb-4 text-sm text-slate-600 dark:text-slate-400'>
         Thank you, {session.customer_details?.name ?? 'valued customer'}! Your payment was
         successful.
@@ -71,7 +84,10 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
       {items.length > 0 && (
         <div className='mb-4 border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900'>
           {items.map((item) => (
-            <div key={item.id} className='flex justify-between gap-4 border-b border-slate-100 p-4 last:border-0 dark:border-slate-800'>
+            <div
+              key={item.id}
+              className='flex justify-between gap-4 border-b border-slate-100 p-4 last:border-0 dark:border-slate-800'
+            >
               <span className='text-sm text-slate-700 dark:text-slate-300'>
                 {item.description} × {item.quantity}
               </span>
@@ -94,7 +110,8 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
       {hasDigital && (
         <div className='mb-4 border border-untele bg-red-50 px-4 py-3 dark:bg-slate-900'>
           <p className='text-xs font-bold text-slate-700 dark:text-slate-300'>
-            Your digital files are ready — check your email for download instructions, or visit your{' '}
+            Your digital files are ready — check your email for download instructions, or visit
+            your{' '}
             <Link href='/bookstore/downloads' className='font-black text-untele hover:underline'>
               Download Vault
             </Link>

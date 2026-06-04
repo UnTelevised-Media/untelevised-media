@@ -20,7 +20,6 @@ export default function SignInPage() {
 
       {/* Card container */}
       <div className='relative z-10 flex w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 shadow-2xl backdrop-blur-sm'>
-
         {/* LEFT — branding panel */}
         <div className='relative hidden flex-col items-center justify-center gap-8 bg-slate-950/60 px-12 py-16 md:flex md:w-1/2'>
           {/* Red glow behind logo */}
@@ -84,16 +83,14 @@ export default function SignInPage() {
                 rootBox: 'w-full',
                 card: 'shadow-none bg-transparent w-full',
                 cardBox: 'w-full',
-                headerTitle:
-                  'text-white font-black text-xl',
+                headerTitle: 'text-white font-black text-xl',
                 headerSubtitle: 'text-slate-400 text-sm',
                 logoBox: 'hidden',
                 formButtonPrimary:
                   'bg-untele hover:bg-red-700 text-white font-black uppercase tracking-widest text-xs rounded transition-colors',
                 formFieldInput:
                   'bg-slate-800 border border-slate-700 text-white focus:border-untele focus:ring-0 rounded',
-                formFieldLabel:
-                  'text-slate-300 text-xs font-bold',
+                formFieldLabel: 'text-slate-300 text-xs font-bold',
                 footerActionLink: 'text-untele hover:text-red-400 font-semibold',
                 footerActionText: 'text-slate-400 text-xs',
                 identityPreviewEditButton: 'text-untele',

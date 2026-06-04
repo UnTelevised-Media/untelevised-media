@@ -69,7 +69,7 @@ const ArticleCardLg = ({ post }: Props) => {
         {/* Title */}
         <h2
           id={`article-title-${post._id}`}
-          className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele dark:text-white${post.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
+          className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele dark:text-white${post.correction?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
         >
           {post.title}
         </h2>

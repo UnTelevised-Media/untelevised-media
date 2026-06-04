@@ -84,10 +84,7 @@ export function SourcesPanel({ sources, methodology }: SourcesPanelProps) {
 
                 return (
                   <li key={idx} className='flex items-start gap-3'>
-                    <Icon
-                      className='mt-0.5 h-4 w-4 shrink-0 text-slate-400'
-                      aria-hidden='true'
-                    />
+                    <Icon className='mt-0.5 h-4 w-4 shrink-0 text-slate-400' aria-hidden='true' />
                     <div className='min-w-0 flex-1'>
                       <div className='flex flex-wrap items-center gap-2'>
                         {source.url ? (

@@ -7,7 +7,14 @@
 import { useState, useTransition, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { ExternalLink, ChevronDown, ChevronUp, EyeOff, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  ExternalLink,
+  ChevronDown,
+  ChevronUp,
+  EyeOff,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react';
 import Link from 'next/link';
 import {
   claimStory,
@@ -106,17 +113,41 @@ const PERIOD_META: Record<string, { icon: string; label: string; color: string }
 
 const URGENCY_META: Record<string, { label: string; color: string }> = {
   breaking: { label: 'Breaking', color: 'bg-red-600 text-white' },
-  high: { label: 'High', color: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200' },
-  medium: { label: 'Medium', color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' },
-  low: { label: 'Low', color: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400' },
+  high: {
+    label: 'High',
+    color: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
+  },
+  medium: {
+    label: 'Medium',
+    color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+  },
+  low: {
+    label: 'Low',
+    color: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
+  },
 };
 
 const STATUS_META: Record<string, { label: string; color: string }> = {
-  unclaimed: { label: 'Unclaimed', color: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400' },
-  claimed: { label: 'Claimed', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' },
-  in_progress: { label: 'In Progress', color: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' },
-  published: { label: 'Published', color: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' },
-  passed: { label: 'Passed', color: 'bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-600' },
+  unclaimed: {
+    label: 'Unclaimed',
+    color: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
+  },
+  claimed: {
+    label: 'Claimed',
+    color: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+  },
+  in_progress: {
+    label: 'In Progress',
+    color: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
+  },
+  published: {
+    label: 'Published',
+    color: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+  },
+  passed: {
+    label: 'Passed',
+    color: 'bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-600',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -220,7 +251,9 @@ function StoryCard({
     >
       {/* Badges row */}
       <div className='mb-2 flex flex-wrap items-center gap-1.5'>
-        <span className={`px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest ${urgencyMeta.color}`}>
+        <span
+          className={`px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest ${urgencyMeta.color}`}
+        >
           {urgencyMeta.label}
         </span>
         {story.beat && (
@@ -228,7 +261,9 @@ function StoryCard({
             {story.beat}
           </span>
         )}
-        <span className={`ml-auto px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest ${statusMeta.color}`}>
+        <span
+          className={`ml-auto px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest ${statusMeta.color}`}
+        >
           {statusMeta.label}
         </span>
       </div>
@@ -390,7 +425,9 @@ function StoryCard({
                 </Link>
               )}
               <Link
-                href={myPitchId ? `/portal/articles/new?pitchId=${myPitchId}` : '/portal/articles/new'}
+                href={
+                  myPitchId ? `/portal/articles/new?pitchId=${myPitchId}` : '/portal/articles/new'
+                }
                 className='bg-untele px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white hover:opacity-90'
               >
                 Start Article
@@ -415,15 +452,18 @@ function StoryCard({
           )}
 
           {/* CLAIMED BY OTHERS: editor can release to reassign */}
-          {!isPassed && !isMyStory && (status === 'claimed' || status === 'in_progress') && isEditorPlus && (
-            <button
-              disabled={isPending}
-              onClick={() => act(() => unclaimStory(briefId, story._key))}
-              className='border border-slate-300 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:border-untele hover:text-untele disabled:opacity-50 dark:border-slate-700'
-            >
-              {isPending ? 'Releasing…' : 'Release / Reassign'}
-            </button>
-          )}
+          {!isPassed &&
+            !isMyStory &&
+            (status === 'claimed' || status === 'in_progress') &&
+            isEditorPlus && (
+              <button
+                disabled={isPending}
+                onClick={() => act(() => unclaimStory(briefId, story._key))}
+                className='border border-slate-300 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:border-untele hover:text-untele disabled:opacity-50 dark:border-slate-700'
+              >
+                {isPending ? 'Releasing…' : 'Release / Reassign'}
+              </button>
+            )}
         </div>
       )}
     </div>
@@ -445,7 +485,10 @@ export function BriefPanel({
   const router = useRouter();
   const [showHidden, setShowHidden] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(() =>
-    Math.max(0, briefList.findIndex((b) => b._id === brief._id)),
+    Math.max(
+      0,
+      briefList.findIndex((b) => b._id === brief._id)
+    )
   );
   const [loadedBrief, setLoadedBrief] = useState<Brief>(brief);
   const [loadedPitchMap, setLoadedPitchMap] = useState<Record<string, string>>(initialPitchMap);
@@ -460,8 +503,8 @@ export function BriefPanel({
       setLoadedBrief(brief);
       setLoadedPitchMap(initialPitchMap);
     }
-  // brief and initialPitchMap are new object refs every RSC render — that's the signal
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // brief and initialPitchMap are new object refs every RSC render — that's the signal
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brief, initialPitchMap]);
 
   // Silently repair any brief that has stories with missing _key values.
@@ -472,8 +515,8 @@ export function BriefPanel({
     autoRepairBrief(loadedBrief._id).then((result) => {
       if (result.success) router.refresh();
     });
-  // Run once per loaded brief ID — repair is idempotent
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Run once per loaded brief ID — repair is idempotent
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadedBrief._id]);
 
   async function navigateTo(index: number) {
@@ -504,7 +547,12 @@ export function BriefPanel({
       ...prev,
       storyPasses: [
         ...(prev.storyPasses ?? []),
-        { _key: `opt_${storyKey}_${Date.now()}`, authorId: currentSanityAuthorId, storyKey, passedAt: new Date().toISOString() },
+        {
+          _key: `opt_${storyKey}_${Date.now()}`,
+          authorId: currentSanityAuthorId,
+          storyKey,
+          passedAt: new Date().toISOString(),
+        },
       ],
     }));
   }
@@ -513,7 +561,7 @@ export function BriefPanel({
     setLoadedBrief((prev) => ({
       ...prev,
       storyPasses: (prev.storyPasses ?? []).filter(
-        (p) => !(p.storyKey === storyKey && p.authorId === currentSanityAuthorId),
+        (p) => !(p.storyKey === storyKey && p.authorId === currentSanityAuthorId)
       ),
     }));
   }
@@ -531,12 +579,17 @@ export function BriefPanel({
   const myPassedKeys = new Set(
     (activeBrief.storyPasses ?? [])
       .filter((p) => p.authorId === currentSanityAuthorId)
-      .map((p) => p.storyKey),
+      .map((p) => p.storyKey)
   );
 
   // Order: breaking unclaimed → unclaimed → claimed/in_progress → published
   // Passed stories go to their own hidden section.
-  const STATUS_ORDER: Record<string, number> = { unclaimed: 0, claimed: 1, in_progress: 1, published: 2 };
+  const STATUS_ORDER: Record<string, number> = {
+    unclaimed: 0,
+    claimed: 1,
+    in_progress: 1,
+    published: 2,
+  };
   const URGENCY_ORDER: Record<string, number> = { breaking: 0, high: 1, medium: 2, low: 3 };
 
   const visibleStories = stories
@@ -547,26 +600,32 @@ export function BriefPanel({
         (STATUS_ORDER[b.status ?? 'unclaimed'] ?? 0);
       if (statusDiff !== 0) return statusDiff;
       // Within the same status bucket, breaking stories come first
-      return (URGENCY_ORDER[a.urgency ?? 'medium'] ?? 2) - (URGENCY_ORDER[b.urgency ?? 'medium'] ?? 2);
+      return (
+        (URGENCY_ORDER[a.urgency ?? 'medium'] ?? 2) - (URGENCY_ORDER[b.urgency ?? 'medium'] ?? 2)
+      );
     });
   const hiddenStories = stories.filter((s) => myPassedKeys.has(s._key));
 
   const totalCount = stories.length;
   const unclaimedCount = visibleStories.filter(
-    (s) => (s.status ?? 'unclaimed') === 'unclaimed',
+    (s) => (s.status ?? 'unclaimed') === 'unclaimed'
   ).length;
   const passedCount = myPassedKeys.size;
 
   const canGoPrev = currentIndex < briefList.length - 1; // older
-  const canGoNext = currentIndex > 0;                     // newer
+  const canGoNext = currentIndex > 0; // newer
 
   return (
-    <div className={`border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900 ${isNavigating ? 'opacity-60 pointer-events-none' : ''}`}>
+    <div
+      className={`border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900 ${isNavigating ? 'pointer-events-none opacity-60' : ''}`}
+    >
       {/* Brief header */}
       <div className='flex flex-wrap items-start justify-between gap-3 border-b border-slate-200 px-4 py-3 dark:border-slate-700'>
         <div className='min-w-0 flex-1'>
           <div className='mb-1 flex flex-wrap items-center gap-2'>
-            <span className={`px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${periodMeta.color}`}>
+            <span
+              className={`px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${periodMeta.color}`}
+            >
               {periodMeta.icon} {periodMeta.label}
             </span>
             {activeBrief.publishedAt && (
@@ -590,12 +649,8 @@ export function BriefPanel({
         <div className='flex items-center gap-4'>
           <div className='flex flex-wrap items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-slate-500'>
             <span>{totalCount} pitches</span>
-            {unclaimedCount > 0 && (
-              <span className='text-untele'>{unclaimedCount} unclaimed</span>
-            )}
-            {passedCount > 0 && (
-              <span>{passedCount} passed (mine)</span>
-            )}
+            {unclaimedCount > 0 && <span className='text-untele'>{unclaimedCount} unclaimed</span>}
+            {passedCount > 0 && <span>{passedCount} passed (mine)</span>}
           </div>
 
           {/* Brief navigation arrows */}

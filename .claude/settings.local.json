@@ -28,8 +28,6 @@
       "Read(//r/Development/untelevised-media/src/app/\\(user\\)/**)",
       "Bash(dir \"r:\\\\Development\\\\untelevised-media\")"
     ],
-    "additionalDirectories": [
-      "C:\\Windows\\Temp"
-    ]
+    "additionalDirectories": ["C:\\Windows\\Temp"]
   }
 }

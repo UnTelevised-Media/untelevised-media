@@ -73,11 +73,14 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
     rafRef.current = requestAnimationFrame(tick);
   }, []);
 
-  const startScroll = useCallback((dir: -1 | 1) => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    directionRef.current = dir;
-    rafRef.current = requestAnimationFrame(tick);
-  }, [tick]);
+  const startScroll = useCallback(
+    (dir: -1 | 1) => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      directionRef.current = dir;
+      rafRef.current = requestAnimationFrame(tick);
+    },
+    [tick]
+  );
 
   const stopScroll = useCallback(() => {
     directionRef.current = 0;
@@ -93,7 +96,6 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
       className='sticky top-[56px] z-30 border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-black md:top-[74px]'
     >
       <div className='relative mx-auto max-w-[1400px]'>
-
         {/* Left scroll button */}
         <button
           aria-label='Scroll categories left'
@@ -124,7 +126,7 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
           <ChevronRight className='h-4 w-4 text-slate-500 dark:text-slate-400' />
         </button>
 
-        <div ref={scrollRef} className='flex items-center overflow-x-auto scrollbar-hide'>
+        <div ref={scrollRef} className='scrollbar-hide flex items-center overflow-x-auto'>
           {sorted.map((category) => {
             const slug = category.slug?.current ?? toSlug(category.title);
             const active = pathname === `/category/${slug}`;

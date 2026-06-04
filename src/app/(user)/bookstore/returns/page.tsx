@@ -66,13 +66,13 @@ function PolicyBlock({
 export default function ReturnsPage() {
   return (
     <main className='mx-auto max-w-4xl px-4 py-12 sm:px-6'>
-
       {/* ── Header ── */}
       <section className='mb-16'>
         <SectionLabel>Returns & Refunds</SectionLabel>
 
         <h1 className='mb-4 text-4xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-white sm:text-5xl'>
-          Fair Returns.<br />
+          Fair Returns.
+          <br />
           <span className='text-[#009736]'>No Runaround.</span>
         </h1>
 
@@ -85,9 +85,10 @@ export default function ReturnsPage() {
             purchase, here is exactly what we will do about it.
           </p>
           <p className='border-l-4 border-[#009736] pl-5 italic text-slate-600 dark:text-slate-400'>
-            Every refund we issue is a deduction from an author&apos;s earnings. We take that seriously.
-            We will always try to resolve issues before processing a refund — but we will never trap
-            a reader in a purchase that genuinely did not deliver what was promised.
+            Every refund we issue is a deduction from an author&apos;s earnings. We take that
+            seriously. We will always try to resolve issues before processing a refund — but we
+            will never trap a reader in a purchase that genuinely did not deliver what was
+            promised.
           </p>
         </div>
       </section>
@@ -99,33 +100,50 @@ export default function ReturnsPage() {
         <div className='grid gap-6 sm:grid-cols-2'>
           <PolicyBlock icon='📄' title='Digital Downloads (PDF)'>
             <p>
-              Digital files are generally <strong className='text-slate-800 dark:text-slate-200'>non-refundable once downloaded</strong> — the file cannot be returned in any meaningful sense.
+              Digital files are generally{' '}
+              <strong className='text-slate-800 dark:text-slate-200'>
+                non-refundable once downloaded
+              </strong>{' '}
+              — the file cannot be returned in any meaningful sense.
             </p>
-            <p>
-              We will issue a full refund without question if:
-            </p>
+            <p>We will issue a full refund without question if:</p>
             <ul className='mt-1 space-y-1 pl-4'>
-              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>The file is corrupt or fails to open</li>
-              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>The wrong file was delivered</li>
-              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>The file is materially different from what was described</li>
-              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>You were charged but never received download access</li>
+              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>
+                The file is corrupt or fails to open
+              </li>
+              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>
+                The wrong file was delivered
+              </li>
+              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>
+                The file is materially different from what was described
+              </li>
+              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>
+                You were charged but never received download access
+              </li>
             </ul>
             <p className='mt-2'>
-              Requests must be made within <strong className='text-slate-800 dark:text-slate-200'>14 days</strong> of purchase.
+              Requests must be made within{' '}
+              <strong className='text-slate-800 dark:text-slate-200'>14 days</strong> of purchase.
             </p>
           </PolicyBlock>
 
           <PolicyBlock icon='📦' title='Physical Books'>
             <p>
-              Physical books may be returned within <strong className='text-slate-800 dark:text-slate-200'>30 days</strong> of the delivery date, provided the book is in its original, unread condition.
+              Physical books may be returned within{' '}
+              <strong className='text-slate-800 dark:text-slate-200'>30 days</strong> of the
+              delivery date, provided the book is in its original, unread condition.
             </p>
-            <p>
-              We cover return shipping costs if the return is due to:
-            </p>
+            <p>We cover return shipping costs if the return is due to:</p>
             <ul className='mt-1 space-y-1 pl-4'>
-              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>A damaged or defective copy</li>
-              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>An incorrect item sent</li>
-              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>Significant delay beyond the estimated shipping window</li>
+              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>
+                A damaged or defective copy
+              </li>
+              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>
+                An incorrect item sent
+              </li>
+              <li className='before:mr-2 before:text-[#009736] before:content-["▸"]'>
+                Significant delay beyond the estimated shipping window
+              </li>
             </ul>
             <p className='mt-2'>
               For change-of-mind returns, the buyer is responsible for return shipping. Refunds are
@@ -135,23 +153,27 @@ export default function ReturnsPage() {
 
           <PolicyBlock icon='♥' title='Tips'>
             <p>
-              Tip payments go <strong className='text-slate-800 dark:text-slate-200'>directly to the author</strong> and are non-refundable.
+              Tip payments go{' '}
+              <strong className='text-slate-800 dark:text-slate-200'>
+                directly to the author
+              </strong>{' '}
+              and are non-refundable.
             </p>
             <p>
-              Tips are voluntary contributions — not a purchase of goods or services. Once processed,
-              they cannot be reversed. Please tip only what you intend to give.
+              Tips are voluntary contributions — not a purchase of goods or services. Once
+              processed, they cannot be reversed. Please tip only what you intend to give.
             </p>
             <p>
-              If you were charged a tip amount you did not authorize (e.g. due to a technical error),
-              contact us immediately and we will investigate.
+              If you were charged a tip amount you did not authorize (e.g. due to a technical
+              error), contact us immediately and we will investigate.
             </p>
           </PolicyBlock>
 
           <PolicyBlock icon='🎁' title='Bundles'>
             <p>
               Bundle purchases (physical + digital) are treated according to the individual
-              components: the digital portion follows the digital policy, the physical portion follows
-              the physical returns policy.
+              components: the digital portion follows the digital policy, the physical portion
+              follows the physical returns policy.
             </p>
             <p>
               If the digital component of a bundle has been downloaded, a partial refund for the
@@ -184,7 +206,10 @@ export default function ReturnsPage() {
               body: 'For approved refunds, the amount is returned to your original payment method within 5–10 business days depending on your bank. Stripe processing fees (2.9% + $0.30) are non-recoverable and will be deducted from refunds where applicable.',
             },
           ].map((item) => (
-            <div key={item.step} className='flex gap-5 border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900'>
+            <div
+              key={item.step}
+              className='flex gap-5 border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900'
+            >
               <span className='shrink-0 text-2xl font-black text-[#009736]'>{item.step}</span>
               <div>
                 <p className='mb-1 text-[11px] font-black uppercase tracking-widest text-slate-900 dark:text-white'>
@@ -205,9 +230,10 @@ export default function ReturnsPage() {
 
         <div className='space-y-4 text-base leading-relaxed text-slate-700 dark:text-slate-300'>
           <p>
-            If you are considering filing a chargeback with your bank or card issuer, please contact
-            us first. We resolve legitimate disputes quickly and without friction. Chargebacks that
-            are filed without prior contact are treated as fraud and will be contested.
+            If you are considering filing a chargeback with your bank or card issuer, please
+            contact us first. We resolve legitimate disputes quickly and without friction.
+            Chargebacks that are filed without prior contact are treated as fraud and will be
+            contested.
           </p>
           <p>
             We log download activity, delivery confirmations, and session data for all purchases.
@@ -245,7 +271,6 @@ export default function ReturnsPage() {
       <p className='mt-10 text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-600'>
         Last updated: May 2026 · Hurriya Publications, an imprint of UnTelevised Media
       </p>
-
     </main>
   );
 }

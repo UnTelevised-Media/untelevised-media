@@ -37,7 +37,10 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
         <div className='grid gap-4 lg:grid-cols-2'>
           {visibleArticles.map((article, index) => (
             <React.Fragment key={article._id}>
-              <Link href={`/articles/${article.slug?.current}`} className='group flex border-l-4 border-slate-300 bg-slate-50 p-4 transition-all hover:border-untele hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:hover:bg-slate-900'>
+              <Link
+                href={`/articles/${article.slug?.current}`}
+                className='group flex border-l-4 border-slate-300 bg-slate-50 p-4 transition-all hover:border-untele hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:hover:bg-slate-900'
+              >
                 <div className='flex-shrink-0'>
                   <div className='relative h-16 w-16 overflow-hidden rounded'>
                     <Image

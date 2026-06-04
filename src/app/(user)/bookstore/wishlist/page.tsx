@@ -43,7 +43,9 @@ export default function WishlistPage() {
           <p className='mb-4 text-base font-black uppercase tracking-widest text-slate-900 dark:text-hp-cream'>
             Your wishlist is empty
           </p>
-          <p className='mb-6 text-sm text-hp-muted'>Star books while browsing to save them here.</p>
+          <p className='mb-6 text-sm text-hp-muted'>
+            Star books while browsing to save them here.
+          </p>
           <Link
             href='/bookstore'
             className='inline-block bg-untele px-6 py-3 text-xs font-black uppercase tracking-widest text-white hover:opacity-90'

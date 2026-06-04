@@ -17,11 +17,7 @@ const TIERS: Tier[] = [
     name: 'Supporter',
     price: 5,
     description: 'Back independent journalism with a monthly contribution.',
-    perks: [
-      'Supporter badge in comments',
-      'Monthly member newsletter',
-      'Our sincere gratitude',
-    ],
+    perks: ['Supporter badge in comments', 'Monthly member newsletter', 'Our sincere gratitude'],
   },
   {
     id: 'contributor',
@@ -73,34 +69,32 @@ export function MembershipTiers() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+    <div className='space-y-6'>
+      <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
         {TIERS.map((tier) => (
           <div
             key={tier.id}
             className={`flex flex-col border p-6 transition-colors ${
-              tier.featured
-                ? 'border-untele'
-                : 'border-zinc-700 hover:border-zinc-500'
+              tier.featured ? 'border-untele' : 'border-zinc-700 hover:border-zinc-500'
             }`}
           >
             {tier.featured && (
-              <div className="mb-4 inline-block self-start bg-untele px-2 py-0.5 text-xs font-black uppercase tracking-widest text-white">
+              <div className='mb-4 inline-block self-start bg-untele px-2 py-0.5 text-xs font-black uppercase tracking-widest text-white'>
                 Most Popular
               </div>
             )}
-            <h2 className="mb-1 text-xl font-black uppercase tracking-wide text-white">
+            <h2 className='mb-1 text-xl font-black uppercase tracking-wide text-white'>
               {tier.name}
             </h2>
-            <div className="mb-4">
-              <span className="text-3xl font-black text-white">${tier.price}</span>
-              <span className="text-sm text-zinc-400">/month</span>
+            <div className='mb-4'>
+              <span className='text-3xl font-black text-white'>${tier.price}</span>
+              <span className='text-sm text-zinc-400'>/month</span>
             </div>
-            <p className="mb-6 text-sm text-zinc-400">{tier.description}</p>
-            <ul className="mb-8 flex-1 space-y-2">
+            <p className='mb-6 text-sm text-zinc-400'>{tier.description}</p>
+            <ul className='mb-8 flex-1 space-y-2'>
               {tier.perks.map((perk) => (
-                <li key={perk} className="flex items-start gap-2 text-sm text-zinc-300">
-                  <span className="mt-0.5 shrink-0 text-untele">&#10003;</span>
+                <li key={perk} className='flex items-start gap-2 text-sm text-zinc-300'>
+                  <span className='mt-0.5 shrink-0 text-untele'>&#10003;</span>
                   <span>{perk}</span>
                 </li>
               ))}
@@ -108,16 +102,14 @@ export function MembershipTiers() {
             <button
               onClick={() => handleJoin(tier.id)}
               disabled={loading !== null}
-              className="bg-untele py-3 text-xs font-black uppercase tracking-widest text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+              className='bg-untele py-3 text-xs font-black uppercase tracking-widest text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-60'
             >
               {loading === tier.id ? 'Redirecting...' : `Join as ${tier.name}`}
             </button>
           </div>
         ))}
       </div>
-      {error && (
-        <p className="text-center text-sm text-red-400">{error}</p>
-      )}
+      {error && <p className='text-center text-sm text-red-400'>{error}</p>}
     </div>
   );
 }

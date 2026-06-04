@@ -24,14 +24,31 @@ interface MyReview {
 }
 
 const STATUS_CONFIG = {
-  approved:       { label: 'Published',      className: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' },
-  pending:        { label: 'Under Review',   className: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400' },
-  needs_revision: { label: 'Needs Revision', className: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400' },
-  declined:       { label: 'Not Published',  className: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' },
+  approved: {
+    label: 'Published',
+    className: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+  },
+  pending: {
+    label: 'Under Review',
+    className: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400',
+  },
+  needs_revision: {
+    label: 'Needs Revision',
+    className: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+  },
+  declined: {
+    label: 'Not Published',
+    className: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+  },
 };
 
 function Stars({ rating }: { rating: number }) {
-  return <span className='text-amber-400'>{'★'.repeat(rating)}{'☆'.repeat(5 - rating)}</span>;
+  return (
+    <span className='text-amber-400'>
+      {'★'.repeat(rating)}
+      {'☆'.repeat(5 - rating)}
+    </span>
+  );
 }
 
 export default async function MyReviewsPage() {
@@ -82,7 +99,9 @@ export default async function MyReviewsPage() {
             const status = review.status ?? 'pending';
             const config = STATUS_CONFIG[status] ?? STATUS_CONFIG.pending;
             const date = new Date(review.submittedAt).toLocaleDateString('en-US', {
-              year: 'numeric', month: 'long', day: 'numeric',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
             });
 
             return (
@@ -103,7 +122,9 @@ export default async function MyReviewsPage() {
                       <span className='text-[10px] text-slate-400'>{date}</span>
                     </div>
                   </div>
-                  <span className={`inline-block px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${config.className}`}>
+                  <span
+                    className={`inline-block px-2 py-0.5 text-[10px] font-black uppercase tracking-widest ${config.className}`}
+                  >
                     {config.label}
                   </span>
                 </div>
@@ -111,11 +132,13 @@ export default async function MyReviewsPage() {
                 <p className='text-sm text-slate-700 dark:text-hp-muted'>{review.body}</p>
 
                 {status === 'needs_revision' && review.adminFeedback && (
-                  <div className='mt-3 border-l-4 border-blue-400 bg-blue-50 pl-4 pr-3 py-3 dark:bg-blue-900/20'>
+                  <div className='mt-3 border-l-4 border-blue-400 bg-blue-50 py-3 pl-4 pr-3 dark:bg-blue-900/20'>
                     <p className='mb-1 text-[10px] font-black uppercase tracking-widest text-blue-700 dark:text-blue-400'>
                       Feedback from our team
                     </p>
-                    <p className='text-xs text-blue-900 dark:text-blue-200'>{review.adminFeedback}</p>
+                    <p className='text-xs text-blue-900 dark:text-blue-200'>
+                      {review.adminFeedback}
+                    </p>
                     <Link
                       href={`/bookstore/book/${review.bookSlug}`}
                       className='mt-2 inline-block text-[10px] font-black uppercase tracking-widest text-blue-700 hover:underline dark:text-blue-400'
@@ -129,7 +152,10 @@ export default async function MyReviewsPage() {
                   <p className='mt-3 text-[11px] text-slate-400'>
                     This review was not approved for publication.
                     {review.adminFeedback && (
-                      <> <span className='text-slate-500'>{review.adminFeedback}</span></>
+                      <>
+                        {' '}
+                        <span className='text-slate-500'>{review.adminFeedback}</span>
+                      </>
                     )}
                   </p>
                 )}

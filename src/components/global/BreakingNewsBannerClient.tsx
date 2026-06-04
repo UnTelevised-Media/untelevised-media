@@ -37,7 +37,7 @@ export function BreakingNewsBannerClient({ headline, linkUrl, linkLabel, expires
     <div
       role='alert'
       aria-label='Breaking news alert'
-      className='w-full border-b-2 border-red-800 bg-untele mt-5'
+      className='mt-5 w-full border-b-2 border-red-800 bg-untele'
     >
       <div className='mx-auto flex max-w-[1400px] items-center px-4'>
         {/* BREAKING label — left block with right border */}

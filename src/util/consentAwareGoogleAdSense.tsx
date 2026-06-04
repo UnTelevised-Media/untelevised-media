@@ -40,7 +40,11 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
 
   // Consent still pending (new visitor, banner not yet interacted with)
   if (!isDevelopment && !shouldLoadScript) {
-    console.debug('[AdSense] Consent pending — waiting before loading script. hasConsent=%s canUseMarketing=%s', hasConsent, canUseMarketing);
+    console.debug(
+      '[AdSense] Consent pending — waiting before loading script. hasConsent=%s canUseMarketing=%s',
+      hasConsent,
+      canUseMarketing
+    );
     return null;
   }
 

@@ -15,7 +15,11 @@ export interface Subscriber {
 
 function formatDate(iso?: string) {
   if (!iso) return '—';
-  return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  return new Date(iso).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
 }
 
 function StatusBadge({ status }: { status?: string }) {
@@ -64,19 +68,33 @@ export function SubscribersList({ subscribers }: { subscribers: Subscriber[] }) 
 
       {subscribers.length === 0 ? (
         <div className='border border-slate-200 bg-white p-12 text-center dark:border-slate-700 dark:bg-black'>
-          <p className='text-sm font-bold uppercase tracking-widest text-slate-400'>No subscribers yet</p>
+          <p className='text-sm font-bold uppercase tracking-widest text-slate-400'>
+            No subscribers yet
+          </p>
         </div>
       ) : (
         <div className='overflow-x-auto'>
           <table className='w-full border-collapse text-sm'>
             <thead>
               <tr className='border-b-2 border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-900'>
-                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>Email</th>
-                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>Name</th>
-                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>Status</th>
-                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>Source</th>
-                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>Signed Up</th>
-                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>Confirmed</th>
+                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+                  Email
+                </th>
+                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+                  Name
+                </th>
+                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+                  Status
+                </th>
+                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+                  Source
+                </th>
+                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+                  Signed Up
+                </th>
+                <th className='px-4 py-3 text-left text-xs font-black uppercase tracking-widest text-slate-500'>
+                  Confirmed
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -97,8 +115,12 @@ export function SubscribersList({ subscribers }: { subscribers: Subscriber[] }) 
                     <StatusBadge status={sub.status} />
                   </td>
                   <td className='px-4 py-3 text-xs text-slate-500'>{sub.source ?? '—'}</td>
-                  <td className='px-4 py-3 text-slate-600 dark:text-slate-400'>{formatDate(sub.submittedAt)}</td>
-                  <td className='px-4 py-3 text-slate-600 dark:text-slate-400'>{formatDate(sub.confirmedAt)}</td>
+                  <td className='px-4 py-3 text-slate-600 dark:text-slate-400'>
+                    {formatDate(sub.submittedAt)}
+                  </td>
+                  <td className='px-4 py-3 text-slate-600 dark:text-slate-400'>
+                    {formatDate(sub.confirmedAt)}
+                  </td>
                 </tr>
               ))}
             </tbody>

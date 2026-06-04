@@ -18,7 +18,7 @@ Blueprint (code) → Stack (deployed state) → Resources (real infrastructure)
 ```
 
 | Concept | What it is |
-|---------|------------|
+| --- | --- |
 | **Blueprint** | A declarative configuration file (`sanity.blueprint.ts`) that describes your desired infrastructure |
 | **Stack** | The deployed, real-world collection of resources managed by Blueprints |
 | **Resources** | Individual Sanity components: CORS origins, webhooks, datasets, functions, roles, robots |
@@ -31,7 +31,7 @@ Blueprint (code) → Stack (deployed state) → Resources (real infrastructure)
 3. Blueprints creates/updates a Stack with your resources
 4. The Stack persists — future deploys update it based on Blueprint changes
 
-**Key insight:** The Blueprint is your *intent*. The Stack is *reality*. Blueprints reconciles the two.
+**Key insight:** The Blueprint is your _intent_. The Stack is _reality_. Blueprints reconciles the two.
 
 ## Why use Blueprints?
 

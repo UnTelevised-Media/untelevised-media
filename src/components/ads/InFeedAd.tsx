@@ -29,12 +29,16 @@ export default function InFeedAd({
   const adRef = useRef<HTMLModElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
-  const [adStatus, setAdStatus] = useState<'idle' | 'pushed' | 'filled' | 'unfilled' | 'error'>('idle');
+  const [adStatus, setAdStatus] = useState<'idle' | 'pushed' | 'filled' | 'unfilled' | 'error'>(
+    'idle'
+  );
   const [isClient, setIsClient] = useState(false);
   const { canUseMarketing, hasConsent } = useConsentCheck();
   const isDev = adsenseManager.isDevelopmentMode();
 
-  useEffect(() => { setIsClient(true); }, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (!isClient || !containerRef.current) return;
@@ -52,16 +56,29 @@ export default function InFeedAd({
         pushed.current = true;
 
         const ins = adRef.current;
-        if (!ins) { setAdStatus('error'); return; }
+        if (!ins) {
+          setAdStatus('error');
+          return;
+        }
 
         const success = await adsenseManager.pushAd(ins);
-        if (!success) { setAdStatus('error'); return; }
+        if (!success) {
+          setAdStatus('error');
+          return;
+        }
         setAdStatus('pushed');
 
         const mo = new MutationObserver(() => {
           const s = ins.getAttribute('data-ad-status');
-          if (s === 'filled') { setAdStatus('filled'); mo.disconnect(); console.debug('[AdSense] InFeedAd slot=%s: filled ✓', slot); }
-          else if (s === 'unfilled') { setAdStatus('unfilled'); mo.disconnect(); console.warn('[AdSense] InFeedAd slot=%s: unfilled', slot); }
+          if (s === 'filled') {
+            setAdStatus('filled');
+            mo.disconnect();
+            console.debug('[AdSense] InFeedAd slot=%s: filled ✓', slot);
+          } else if (s === 'unfilled') {
+            setAdStatus('unfilled');
+            mo.disconnect();
+            console.warn('[AdSense] InFeedAd slot=%s: unfilled', slot);
+          }
         });
         mo.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
         setTimeout(() => mo.disconnect(), 15_000);
@@ -77,7 +94,9 @@ export default function InFeedAd({
 
   return (
     <div ref={containerRef} className={`ad-container my-6 ${className}`} style={style}>
-      <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>Advertisement</div>
+      <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
+        Advertisement
+      </div>
       <ins
         ref={adRef}
         className='adsbygoogle'

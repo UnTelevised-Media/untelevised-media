@@ -82,7 +82,9 @@ function AuthorBookCard({ book }: { book: SanityBook }) {
           {price != null && (
             <div className='mt-1'>
               {compareAtPrice != null && (
-                <p className='text-[10px] text-hp-muted line-through'>${compareAtPrice.toFixed(2)}</p>
+                <p className='text-[10px] text-hp-muted line-through'>
+                  ${compareAtPrice.toFixed(2)}
+                </p>
               )}
               <p className='text-xs font-bold text-untele'>${price.toFixed(2)}</p>
             </div>
@@ -150,9 +152,7 @@ export default async function Author({ params }: Props) {
               <div className='absolute -inset-4 rounded-full bg-gradient-to-r from-untele/50 to-red-400/50 opacity-75 blur transition-opacity hover:opacity-100' />
               <div className='relative overflow-hidden rounded-full border-4 border-white/20 shadow-2xl'>
                 <Image
-                  src={
-                    author.image ? urlForImage(author.image).url() : '/placeholder-avatar.png'
-                  }
+                  src={author.image ? urlForImage(author.image).url() : '/placeholder-avatar.png'}
                   width={240}
                   height={240}
                   alt={author.name}
@@ -360,56 +360,58 @@ export default async function Author({ params }: Props) {
           </div>
 
           <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-            {author.relatedArticles.map((article: {
-              _id: string;
-              title: string;
-              slug: { current: string };
-              description?: string;
-              publishedAt?: string;
-              mainImage?: { asset?: { _ref?: string }; alt?: string; _type?: string };
-              categories?: { _id: string; title: string; slug: { current: string } }[];
-            }) => (
-              <ClientSideRoute
-                key={article._id}
-                route={resolveHref('article', article.slug?.current) ?? ''}
-              >
-                <article className='group overflow-hidden border border-slate-200 bg-white shadow-lg transition-all duration-300 hover:border-untele/50 hover:shadow-xl dark:border-slate-700 dark:bg-slate-800'>
-                  {/* Article Image */}
-                  <div className='relative aspect-video overflow-hidden'>
-                    <Image
-                      src={urlForImage(article.mainImage)?.url() ?? '/placeholder-image.jpg'}
-                      alt={article.mainImage?.alt ?? article.title ?? ''}
-                      fill
-                      className='object-cover transition-transform duration-300 group-hover:scale-105'
-                      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                    />
-                    <div className='absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent' />
-                  </div>
-
-                  {/* Article Content */}
-                  <div className='p-6'>
-                    <h3 className='mb-2 line-clamp-2 text-lg font-semibold text-slate-900 dark:text-white'>
-                      {article.title}
-                    </h3>
-
-                    {article.description && (
-                      <p className='mb-4 line-clamp-3 text-sm text-slate-600 dark:text-slate-400'>
-                        {article.description}
-                      </p>
-                    )}
-
-                    <div className='flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>
-                      <time>{formatDate(getArticleDate(article))}</time>
-                      {article.categories?.[0] && (
-                        <span className='bg-untele/10 px-2 py-1 text-untele'>
-                          {article.categories[0].title}
-                        </span>
-                      )}
+            {author.relatedArticles.map(
+              (article: {
+                _id: string;
+                title: string;
+                slug: { current: string };
+                description?: string;
+                publishedAt?: string;
+                mainImage?: { asset?: { _ref?: string }; alt?: string; _type?: string };
+                categories?: { _id: string; title: string; slug: { current: string } }[];
+              }) => (
+                <ClientSideRoute
+                  key={article._id}
+                  route={resolveHref('article', article.slug?.current) ?? ''}
+                >
+                  <article className='group overflow-hidden border border-slate-200 bg-white shadow-lg transition-all duration-300 hover:border-untele/50 hover:shadow-xl dark:border-slate-700 dark:bg-slate-800'>
+                    {/* Article Image */}
+                    <div className='relative aspect-video overflow-hidden'>
+                      <Image
+                        src={urlForImage(article.mainImage)?.url() ?? '/placeholder-image.jpg'}
+                        alt={article.mainImage?.alt ?? article.title ?? ''}
+                        fill
+                        className='object-cover transition-transform duration-300 group-hover:scale-105'
+                        sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                      />
+                      <div className='absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent' />
                     </div>
-                  </div>
-                </article>
-              </ClientSideRoute>
-            ))}
+
+                    {/* Article Content */}
+                    <div className='p-6'>
+                      <h3 className='mb-2 line-clamp-2 text-lg font-semibold text-slate-900 dark:text-white'>
+                        {article.title}
+                      </h3>
+
+                      {article.description && (
+                        <p className='mb-4 line-clamp-3 text-sm text-slate-600 dark:text-slate-400'>
+                          {article.description}
+                        </p>
+                      )}
+
+                      <div className='flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>
+                        <time>{formatDate(getArticleDate(article))}</time>
+                        {article.categories?.[0] && (
+                          <span className='bg-untele/10 px-2 py-1 text-untele'>
+                            {article.categories[0].title}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                </ClientSideRoute>
+              )
+            )}
           </div>
         </section>
       )}
@@ -434,7 +436,9 @@ const getAuthorBySlug = cache(async (slug: string): Promise<Author | null> => {
 export async function generateStaticParams() {
   const queryAuthorStaticParams = groq`*[_type=='author'] { slug }`;
   const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryAuthorStaticParams);
-  const slugRoutes = slugs ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current) : [];
+  const slugRoutes = slugs
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    : [];
   return slugRoutes.map((slug) => ({
     slug,
   }));

@@ -29,7 +29,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { data: liveEvent } = await sanityFetch({ query: queryEventBySlug, params: { slug }, tags: ['liveEvent'] });
+  const { data: liveEvent } = await sanityFetch({
+    query: queryEventBySlug,
+    params: { slug },
+    tags: ['liveEvent'],
+  });
   if (!liveEvent) return { title: 'Breaking News Not Found' };
   const base = buildLiveEventMetadata(liveEvent as LiveEvent, slug);
   const canonicalUrl = getCanonicalUrl('breaking', slug);
@@ -150,13 +154,15 @@ export default async function LiveEvent({ params }: Props) {
                   </span>
                 )}
                 {liveEvent.eventStatus && liveEvent.eventStatus !== 'EventScheduled' && (
-                  <span className={`rounded px-3 py-1 text-xs font-black uppercase tracking-widest text-white ${
-                    liveEvent.eventStatus === 'EventCancelled'
-                      ? 'bg-red-700'
-                      : liveEvent.eventStatus === 'EventPostponed'
-                        ? 'bg-amber-600'
-                        : 'bg-blue-600'
-                  }`}>
+                  <span
+                    className={`rounded px-3 py-1 text-xs font-black uppercase tracking-widest text-white ${
+                      liveEvent.eventStatus === 'EventCancelled'
+                        ? 'bg-red-700'
+                        : liveEvent.eventStatus === 'EventPostponed'
+                          ? 'bg-amber-600'
+                          : 'bg-blue-600'
+                    }`}
+                  >
                     {liveEvent.eventStatus === 'EventCancelled'
                       ? 'Cancelled'
                       : liveEvent.eventStatus === 'EventPostponed'
@@ -174,9 +180,7 @@ export default async function LiveEvent({ params }: Props) {
               <div className='flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400'>
                 {liveEvent.location && <span>ðŸ“ {liveEvent.location}</span>}
                 <span>{formatDate(liveEvent.eventDate || liveEvent._createdAt)}</span>
-                {liveEvent.endDate && (
-                  <span>â€“ {formatDate(liveEvent.endDate)}</span>
-                )}
+                {liveEvent.endDate && <span>â€“ {formatDate(liveEvent.endDate)}</span>}
               </div>
             </div>
             {/* Description  */}
@@ -282,9 +286,10 @@ export async function generateStaticParams() {
   const queryLiveEventStaticParams = groq`*[_type=='liveEvent'] { slug }`;
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: LiveEvent[] = await sanityClient.fetch(queryLiveEventStaticParams);
-  const slugRoutes = slugs ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current) : [];
+  const slugRoutes = slugs
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    : [];
   return slugRoutes.map((slug) => ({
     slug,
   }));
 }
-

@@ -142,7 +142,7 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
       <div className='relative'>
         <div
           ref={timelineRef}
-          className='cursor-grab overflow-x-auto scrollbar-hide active:cursor-grabbing'
+          className='scrollbar-hide cursor-grab overflow-x-auto active:cursor-grabbing'
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}

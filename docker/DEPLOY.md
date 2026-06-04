@@ -99,16 +99,13 @@ docker compose version
 
 In your DNS provider (Cloudflare, Namecheap, etc.) add an **A record**:
 
-| Name  | Type | Value            | Proxy |
-|-------|------|------------------|-------|
-| coral | A    | YOUR_SERVER_IP   | DNS only (grey cloud if Cloudflare) |
+| Name  | Type | Value          | Proxy                               |
+| ----- | ---- | -------------- | ----------------------------------- |
+| coral | A    | YOUR_SERVER_IP | DNS only (grey cloud if Cloudflare) |
 
-> **Cloudflare note:** Set to "DNS only" (grey cloud). Caddy needs to reach Let's Encrypt
-> directly on port 80 to issue the TLS certificate. You can enable the proxy after the
-> first certificate is issued if you want.
+> **Cloudflare note:** Set to "DNS only" (grey cloud). Caddy needs to reach Let's Encrypt directly on port 80 to issue the TLS certificate. You can enable the proxy after the first certificate is issued if you want.
 
-Wait 2–5 minutes for DNS to propagate before continuing.
-Test with: `dig coral.untelevised.media +short`
+Wait 2–5 minutes for DNS to propagate before continuing. Test with: `dig coral.untelevised.media +short`
 
 ---
 
@@ -240,16 +237,15 @@ This connects Coral to your Clerk-authenticated readers.
 2. Enable **Single Sign-On**
 3. In the **SSO Key** field paste your `CORAL_SSO_SECRET` value
 
-> `CORAL_SSO_SECRET` is the secret you set in your **Vercel environment variables** and
-> in your local `.env.local`. It is **different** from `CORAL_SIGNING_SECRET` in this
-> docker `.env` file.
+> `CORAL_SSO_SECRET` is the secret you set in your **Vercel environment variables** and in your local `.env.local`. It is **different** from `CORAL_SIGNING_SECRET` in this docker `.env` file.
 >
 > If you haven't generated it yet:
+>
 > ```bash
 > openssl rand -base64 32
 > ```
-> Add this value to Vercel → Settings → Environment Variables as `CORAL_SSO_SECRET`,
-> and paste the same value into the Coral Admin SSO Key field.
+>
+> Add this value to Vercel → Settings → Environment Variables as `CORAL_SSO_SECRET`, and paste the same value into the Coral Admin SSO Key field.
 
 ---
 
@@ -339,14 +335,17 @@ Caddy renews certificates automatically. No action needed.
 ## Troubleshooting
 
 **Caddy fails to get a certificate**
+
 - Make sure port 80 is open in the firewall: `sudo ufw status`
 - Make sure DNS is pointing at this server: `dig coral.untelevised.media +short`
 - Check Caddy logs: `docker compose logs caddy`
 
 **Coral container keeps restarting**
+
 - MongoDB may still be starting. Wait 30 seconds and check: `docker compose ps`
 - Check logs: `docker compose logs talk`
 
 **SSO not working — users not logged into Coral**
+
 - Confirm `CORAL_SSO_SECRET` in Vercel and in Coral Admin → Configure → Authentication → SSO Key are **identical**
 - Check `/api/coral-token` returns a token in the browser network tab when logged in

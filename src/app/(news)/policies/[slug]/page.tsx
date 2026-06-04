@@ -130,7 +130,9 @@ export async function generateStaticParams() {
   const queryPolicyStaticParams = groq`*[_type=='policies'] { slug }`;
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryPolicyStaticParams);
-  const slugRoutes = slugs ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current) : [];
+  const slugRoutes = slugs
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    : [];
   return slugRoutes.map((slug) => ({
     slug,
   }));

@@ -22,7 +22,14 @@ export const metadata: Metadata = {
     title: 'Music Artists | Discover Talented Musicians',
     description: 'Explore our roster of talented music artists on UnTelevised Media.',
     url: getCanonicalUrl('music-artists'),
-    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'UnTelevised Media — Music Artists' }],
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: 'UnTelevised Media — Music Artists',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

@@ -27,17 +27,26 @@ export default function BannerAd({
   const adRef = useRef<HTMLModElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
-  const [adStatus, setAdStatus] = useState<'idle' | 'pushed' | 'filled' | 'unfilled' | 'error'>('idle');
+  const [adStatus, setAdStatus] = useState<'idle' | 'pushed' | 'filled' | 'unfilled' | 'error'>(
+    'idle'
+  );
   const [isClient, setIsClient] = useState(false);
   const { canUseMarketing, hasConsent } = useConsentCheck();
   const isDev = adsenseManager.isDevelopmentMode();
 
-  useEffect(() => { setIsClient(true); }, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (!isClient || !containerRef.current) return;
     if (!isDev && (!hasConsent || !canUseMarketing)) {
-      console.debug('[AdSense] BannerAd slot=%s: waiting for consent (hasConsent=%s canUseMarketing=%s)', slot, hasConsent, canUseMarketing);
+      console.debug(
+        '[AdSense] BannerAd slot=%s: waiting for consent (hasConsent=%s canUseMarketing=%s)',
+        slot,
+        hasConsent,
+        canUseMarketing
+      );
       return;
     }
     if (pushed.current) return; // already attempted
@@ -71,13 +80,18 @@ export default function BannerAd({
             setAdStatus('filled');
             mo.disconnect();
           } else if (status === 'unfilled') {
-            console.warn('[AdSense] BannerAd slot=%s: unfilled — no ad available for this slot/context', slot);
+            console.warn(
+              '[AdSense] BannerAd slot=%s: unfilled — no ad available for this slot/context',
+              slot
+            );
             setAdStatus('unfilled');
             mo.disconnect();
           }
         });
         mo.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
-        setTimeout(() => { mo.disconnect(); }, 15_000);
+        setTimeout(() => {
+          mo.disconnect();
+        }, 15_000);
       },
       { rootMargin: AD_CONFIG.PERFORMANCE.LAZY_LOAD_MARGIN }
     );
@@ -91,7 +105,9 @@ export default function BannerAd({
   return (
     <div ref={containerRef} className={`ad-container ${className}`} style={style}>
       {showLabel && AD_CONFIG.INTEGRATION.showAdLabel && (
-        <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>Advertisement</div>
+        <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
+          Advertisement
+        </div>
       )}
       <ins
         ref={adRef}

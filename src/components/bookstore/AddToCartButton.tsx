@@ -33,12 +33,21 @@ export default function AddToCartButton({ book, format, customPrice, disabled }:
         // NYOP items use the product ID so the checkout route can build price_data
         stripePriceId: isNyop ? (format.stripeProductId ?? '') : (format.stripePriceId ?? ''),
         nameYourPrice: isNyop || undefined,
-      }),
+      })
     );
     trackEvent('add_to_cart', {
       currency: 'USD',
       value: price,
-      items: [{ item_id: book._id, item_name: book.title, item_variant: format.formatType, item_category: 'Book', price, quantity: 1 }],
+      items: [
+        {
+          item_id: book._id,
+          item_name: book.title,
+          item_variant: format.formatType,
+          item_category: 'Book',
+          price,
+          quantity: 1,
+        },
+      ],
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);

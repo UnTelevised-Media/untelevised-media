@@ -32,9 +32,17 @@ export const metadata: Metadata = {
     template: '%s | UnTelevised Media',
   },
   description:
-    'Independent journalism covering breaking news, live events, and investigative reporting that mainstream media won\'t cover.',
-  keywords: ['independent media', 'investigative journalism', 'breaking news', 'live events', 'untelevised'],
-  authors: [{ name: 'UnTelevised Media Editorial Team', url: 'https://www.untelevised.media/staff/' }],
+    "Independent journalism covering breaking news, live events, and investigative reporting that mainstream media won't cover.",
+  keywords: [
+    'independent media',
+    'investigative journalism',
+    'breaking news',
+    'live events',
+    'untelevised',
+  ],
+  authors: [
+    { name: 'UnTelevised Media Editorial Team', url: 'https://www.untelevised.media/staff/' },
+  ],
   creator: 'UnTelevised Media',
   publisher: 'UnTelevised Media',
   openGraph: {
@@ -44,12 +52,14 @@ export const metadata: Metadata = {
     title: 'UnTelevised Media — Independent Journalism',
     description: 'Independent journalism covering breaking news and investigative reporting.',
     siteName: 'UnTelevised Media',
-    images: [{
-      url: '/og-default.png',
-      width: 1200,
-      height: 630,
-      alt: 'UnTelevised Media',
-    }],
+    images: [
+      {
+        url: '/og-default.png',
+        width: 1200,
+        height: 630,
+        alt: 'UnTelevised Media',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -64,9 +74,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     types: {
-      'application/rss+xml': [
-        { url: '/feed.xml', title: 'UnTelevised Media RSS Feed' },
-      ],
+      'application/rss+xml': [{ url: '/feed.xml', title: 'UnTelevised Media RSS Feed' }],
     },
   },
 };

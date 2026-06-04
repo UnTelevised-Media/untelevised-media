@@ -18,7 +18,13 @@ import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryMusicArtistBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Calendar, MapPin, ExternalLink, Camera, MessageSquare, Video } from 'lucide-react';
 import { ArtistStructuredData } from '@/components/seo/StructuredData';
-import { getCanonicalUrl, getSanityOgImageUrl, truncate, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
+import {
+  getCanonicalUrl,
+  getSanityOgImageUrl,
+  truncate,
+  DEFAULT_OG_IMAGE,
+  TWITTER_HANDLE,
+} from '@/util/metadata';
 
 type Props = {
   params: Promise<{
@@ -46,13 +52,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = truncate(
     artist.seo?.metaDescription ??
       `Discover songs and albums by ${displayName} on UnTelevised Media.`,
-    160,
+    160
   );
 
   return {
     title,
     description,
-    keywords: [displayName, artist.name, 'music', 'artist', 'songs', 'albums', ...(artist.genres ?? [])].join(', '),
+    keywords: [
+      displayName,
+      artist.name,
+      'music',
+      'artist',
+      'songs',
+      'albums',
+      ...(artist.genres ?? []),
+    ].join(', '),
     publisher: 'UnTelevised Media',
     openGraph: {
       type: 'profile',
@@ -472,7 +486,11 @@ export default async function MusicArtistPage({ params }: Props) {
 // Fetch artist data by slug
 async function getMusicArtistBySlug(slug: string): Promise<ArtistWithContent | null> {
   try {
-    const { data } = await sanityFetch({ query: queryMusicArtistBySlug, params: { slug }, tags: ['musicArtist'] });
+    const { data } = await sanityFetch({
+      query: queryMusicArtistBySlug,
+      params: { slug },
+      tags: ['musicArtist'],
+    });
     return data as ArtistWithContent | null;
   } catch (error) {
     console.error('Failed to fetch artist:', error);
@@ -483,6 +501,10 @@ async function getMusicArtistBySlug(slug: string): Promise<ArtistWithContent | n
 export async function generateStaticParams() {
   const queryMusicArtistStaticParams = groq`*[_type=='musicArtist'] { slug }`;
   // Use sanityClient directly to avoid draftMode() call during static generation
-  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryMusicArtistStaticParams);
-  return (slugs ?? []).filter((item) => item?.slug?.current).map((item) => ({ slug: item.slug.current }));
+  const slugs: { slug: { current: string } }[] = await sanityClient.fetch(
+    queryMusicArtistStaticParams
+  );
+  return (slugs ?? [])
+    .filter((item) => item?.slug?.current)
+    .map((item) => ({ slug: item.slug.current }));
 }

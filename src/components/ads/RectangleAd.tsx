@@ -27,12 +27,16 @@ export default function RectangleAd({
   const adRef = useRef<HTMLModElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
-  const [adStatus, setAdStatus] = useState<'idle' | 'pushed' | 'filled' | 'unfilled' | 'error'>('idle');
+  const [adStatus, setAdStatus] = useState<'idle' | 'pushed' | 'filled' | 'unfilled' | 'error'>(
+    'idle'
+  );
   const [isClient, setIsClient] = useState(false);
   const { canUseMarketing, hasConsent } = useConsentCheck();
   const isDev = adsenseManager.isDevelopmentMode();
 
-  useEffect(() => { setIsClient(true); }, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (!isClient || !containerRef.current) return;
@@ -50,16 +54,29 @@ export default function RectangleAd({
         pushed.current = true;
 
         const ins = adRef.current;
-        if (!ins) { setAdStatus('error'); return; }
+        if (!ins) {
+          setAdStatus('error');
+          return;
+        }
 
         const success = await adsenseManager.pushAd(ins);
-        if (!success) { setAdStatus('error'); return; }
+        if (!success) {
+          setAdStatus('error');
+          return;
+        }
         setAdStatus('pushed');
 
         const mo = new MutationObserver(() => {
           const s = ins.getAttribute('data-ad-status');
-          if (s === 'filled') { setAdStatus('filled'); mo.disconnect(); console.debug('[AdSense] RectangleAd slot=%s: filled ✓', slot); }
-          else if (s === 'unfilled') { setAdStatus('unfilled'); mo.disconnect(); console.warn('[AdSense] RectangleAd slot=%s: unfilled', slot); }
+          if (s === 'filled') {
+            setAdStatus('filled');
+            mo.disconnect();
+            console.debug('[AdSense] RectangleAd slot=%s: filled ✓', slot);
+          } else if (s === 'unfilled') {
+            setAdStatus('unfilled');
+            mo.disconnect();
+            console.warn('[AdSense] RectangleAd slot=%s: unfilled', slot);
+          }
         });
         mo.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
         setTimeout(() => mo.disconnect(), 15_000);

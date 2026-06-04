@@ -55,7 +55,11 @@ function buildSections(isEditorPlus: boolean, role: PortalRole | null): Section[
         label: 'Profile',
         icon: <User className='h-3.5 w-3.5' />,
         links: [
-          { href: '/portal/profile', label: 'My Profile', icon: <UserCircle className='h-3.5 w-3.5' /> },
+          {
+            href: '/portal/profile',
+            label: 'My Profile',
+            icon: <UserCircle className='h-3.5 w-3.5' />,
+          },
         ],
       },
     ];
@@ -74,20 +78,42 @@ function buildSections(isEditorPlus: boolean, role: PortalRole | null): Section[
     { href: '/portal/sales', label: 'Sales', icon: <ShoppingBag className='h-3.5 w-3.5' /> },
   ];
   if (isEditorPlus) {
-    booksLinks.push(
-      { href: '/portal/reviews', label: 'Reviews', icon: <Star className='h-3.5 w-3.5' /> },
-    );
+    booksLinks.push({
+      href: '/portal/reviews',
+      label: 'Reviews',
+      icon: <Star className='h-3.5 w-3.5' />,
+    });
   }
 
   // Contacts: Applications (editor+) + all contact inboxes (editor+)
   const contactsLinks: NavLink[] = [];
   if (isEditorPlus) {
     contactsLinks.push(
-      { href: '/portal/applications', label: 'Applications', icon: <ClipboardList className='h-3.5 w-3.5' /> },
-      { href: '/portal/contact', label: 'Contact', icon: <MessageSquare className='h-3.5 w-3.5' /> },
-      { href: '/portal/secure-contact', label: 'Secure Contact', icon: <ShieldAlert className='h-3.5 w-3.5' /> },
-      { href: '/portal/whistleblower', label: 'Whistleblower', icon: <ShieldAlert className='h-3.5 w-3.5' /> },
-      { href: '/portal/subscribers', label: 'Subscribers', icon: <Users className='h-3.5 w-3.5' /> },
+      {
+        href: '/portal/applications',
+        label: 'Applications',
+        icon: <ClipboardList className='h-3.5 w-3.5' />,
+      },
+      {
+        href: '/portal/contact',
+        label: 'Contact',
+        icon: <MessageSquare className='h-3.5 w-3.5' />,
+      },
+      {
+        href: '/portal/secure-contact',
+        label: 'Secure Contact',
+        icon: <ShieldAlert className='h-3.5 w-3.5' />,
+      },
+      {
+        href: '/portal/whistleblower',
+        label: 'Whistleblower',
+        icon: <ShieldAlert className='h-3.5 w-3.5' />,
+      },
+      {
+        href: '/portal/subscribers',
+        label: 'Subscribers',
+        icon: <Users className='h-3.5 w-3.5' />,
+      }
     );
   }
 
@@ -121,7 +147,11 @@ function buildSections(isEditorPlus: boolean, role: PortalRole | null): Section[
     label: 'Profile',
     icon: <User className='h-3.5 w-3.5' />,
     links: [
-      { href: '/portal/profile', label: 'My Profile', icon: <UserCircle className='h-3.5 w-3.5' /> },
+      {
+        href: '/portal/profile',
+        label: 'My Profile',
+        icon: <UserCircle className='h-3.5 w-3.5' />,
+      },
     ],
   });
 
@@ -176,7 +206,6 @@ export default function PortalNav({ isEditorPlus = false, role = null }: Props) 
       className='relative z-40 border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950'
     >
       <div className='mx-auto flex max-w-7xl items-center gap-2 px-4 sm:px-6'>
-
         {/* ── Brand / Dashboard link (always visible, all sizes) ─── */}
         <Link
           href={dashboardHref}

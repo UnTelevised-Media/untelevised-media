@@ -26,17 +26,15 @@ defineType({
     defineField({ name: 'quote', type: 'text' }),
     defineField({ name: 'author', type: 'string' }),
     defineField({ name: 'company', type: 'string' }),
-  ]
-})
+  ],
+});
 
 // Reference in page builders
 defineField({
   name: 'pageBuilder',
   type: 'array',
-  of: [
-    { type: 'reference', to: [{ type: 'testimonial' }] }
-  ]
-})
+  of: [{ type: 'reference', to: [{ type: 'testimonial' }] }],
+});
 ```
 
 ## Pattern 2: Shared Field Sets
@@ -51,24 +49,18 @@ export const seoFields = [
   defineField({ name: 'seoTitle', type: 'string' }),
   defineField({ name: 'seoDescription', type: 'text' }),
   defineField({ name: 'ogImage', type: 'image' }),
-]
+];
 
 // Spread into multiple types
 defineType({
   name: 'page',
-  fields: [
-    defineField({ name: 'title', type: 'string' }),
-    ...seoFields
-  ]
-})
+  fields: [defineField({ name: 'title', type: 'string' }), ...seoFields],
+});
 
 defineType({
   name: 'post',
-  fields: [
-    defineField({ name: 'title', type: 'string' }),
-    ...seoFields
-  ]
-})
+  fields: [defineField({ name: 'title', type: 'string' }), ...seoFields],
+});
 ```
 
 ## Pattern 3: Taxonomy References
@@ -85,15 +77,15 @@ defineType({
   fields: [
     defineField({ name: 'title', type: 'string' }),
     defineField({ name: 'slug', type: 'slug' }),
-  ]
-})
+  ],
+});
 
 // Used across content types
 defineField({
   name: 'categories',
   type: 'array',
-  of: [{ type: 'reference', to: [{ type: 'category' }] }]
-})
+  of: [{ type: 'reference', to: [{ type: 'category' }] }],
+});
 ```
 
 ## Pattern 4: Content Fragments
@@ -111,8 +103,8 @@ defineType({
     defineField({ name: 'email', type: 'email' }),
     defineField({ name: 'phone', type: 'string' }),
     defineField({ name: 'address', type: 'text' }),
-  ]
-})
+  ],
+});
 
 // Reused across types
 defineType({
@@ -120,8 +112,8 @@ defineType({
   fields: [
     defineField({ name: 'name', type: 'string' }),
     defineField({ name: 'contact', type: 'contactInfo' }),
-  ]
-})
+  ],
+});
 ```
 
 ## Anti-Pattern: Over-Abstraction
@@ -129,6 +121,7 @@ defineType({
 Not everything needs to be reusable. If content is only used in one place, embedding is simpler.
 
 **Signs of over-abstraction:**
+
 - References that are only used once
 - Editors navigating multiple documents for one page
 - Complex queries joining rarely-shared content

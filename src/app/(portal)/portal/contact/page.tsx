@@ -18,7 +18,8 @@ export default async function ContactPage() {
   const isEditorPlus = hasRole(role, 'editor');
   if (!isEditorPlus) redirect('/portal/articles');
 
-  const submissions = await portalFetch<ContactSubmission[]>(queryPortalContactSubmissions) ?? [];
+  const submissions =
+    (await portalFetch<ContactSubmission[]>(queryPortalContactSubmissions)) ?? [];
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
@@ -28,7 +29,9 @@ export default async function ContactPage() {
           <h1 className='text-2xl font-black uppercase tracking-widest text-slate-900 dark:text-slate-100'>
             Contact Submissions
           </h1>
-          <p className='mt-1 text-sm text-slate-500 dark:text-slate-400'>{submissions.length} submissions</p>
+          <p className='mt-1 text-sm text-slate-500 dark:text-slate-400'>
+            {submissions.length} submissions
+          </p>
         </div>
         <ContactTable submissions={submissions} />
       </main>

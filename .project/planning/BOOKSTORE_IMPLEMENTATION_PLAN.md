@@ -1,6 +1,7 @@
 # Bookstore E-Commerce Implementation Plan
 
 ## Overview
+
 Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users to purchase books, receive downloads, and view their library. Implement secure payment processing, transaction logging, and a guest checkout option with time-limited downloads.
 
 ---
@@ -8,6 +9,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 ## Phase 1: Shopping Cart & Checkout
 
 ### 1.1 Add to Cart Functionality
+
 - **Requirement**: Replace non-functional "Buy" buttons with working "Add to Cart" buttons on book detail pages and storefront
 - **Implementation**:
   - Create a client-side cart state management hook (`useShoppingCart.ts`) using React Context or Zustand
@@ -17,6 +19,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - Add visual feedback (toast notifications) on item added
 
 ### 1.2 Shopping Cart Page
+
 - **Requirement**: Create a dedicated shopping cart page (`/bookstore/cart`) showing all cart items
 - **Implementation**:
   - Display book thumbnail, title, price, and quantity
@@ -28,6 +31,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - Show empty cart state with link to browse books
 
 ### 1.3 Pre-Checkout Summary
+
 - **Requirement**: Display order summary before payment
 - **Implementation**:
   - Show all items with final prices
@@ -41,6 +45,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 ## Phase 2: Revenue Sharing & Transparency
 
 ### 2.1 Revenue Sharing Section
+
 - **Requirement**: Add a collapsible section on each book detail page showing revenue breakdown
 - **Implementation**:
   - Create Sanity schema field `revenueTerms` on book document with:
@@ -53,6 +58,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - Display in human-readable format (e.g., "65% to author, 25% to publisher, 10% to platform")
 
 ### 2.2 Tip Mechanism
+
 - **Requirement**: Allow buyers to add a tip for the creator at checkout
 - **Implementation**:
   - Add tip input field on checkout page
@@ -66,6 +72,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 ## Phase 3: Authentication & Checkout
 
 ### 3.1 Checkout Page (`/bookstore/checkout`)
+
 - **Requirement**: Create checkout flow with auth gate
 - **Implementation**:
   - Check if user is authenticated via Clerk
@@ -78,6 +85,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - Proceed to shipping/payment based on selection
 
 ### 3.2 Guest Checkout Flow
+
 - **Requirement**: Allow anonymous purchases with one-time download links
 - **Implementation**:
   - Collect: email, full name, shipping address
@@ -88,6 +96,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - Email download link with expiration notice
 
 ### 3.3 Authenticated Checkout Flow
+
 - **Requirement**: Streamlined checkout for logged-in users
 - **Implementation**:
   - Use Clerk user email and name
@@ -101,6 +110,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 ## Phase 4: Payment Processing & Transaction Logging
 
 ### 4.1 Payment Integration
+
 - **Requirement**: Process payments securely (using Stripe or similar)
 - **Implementation**:
   - Integrate Stripe (or configured payment provider)
@@ -114,8 +124,10 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - Return confirmation with order ID
 
 ### 4.2 Supabase Transaction Schema
+
 - **Requirement**: Log all transactions with complete audit trail
 - **Database Table**: `book_purchases`
+
   ```sql
   CREATE TABLE book_purchases (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -162,6 +174,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   ```
 
 ### 4.3 Author Payment Tracking
+
 - **Database Table**: `author_revenue`
   ```sql
   CREATE TABLE author_revenue (
@@ -180,6 +193,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   ```
 
 ### 4.4 Transaction Processing Flow
+
 - **Requirement**: Handle payment confirmation and database updates
 - **Implementation**:
   - Create `/api/webhooks/stripe` endpoint for payment confirmation
@@ -197,6 +211,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 ## Phase 5: Download Pipeline & Email Integration
 
 ### 5.1 One-Time Download Token System
+
 - **Requirement**: Generate secure, time-limited download links that expire after first use
 - **Implementation**:
   - Create download token generation function:
@@ -211,6 +226,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
     - Prevent same token from being used twice
 
 ### 5.2 Email Integration
+
 - **Requirement**: Send purchase confirmation and download links via email
 - **Implementation**:
   - Use SendGrid, Resend, or configured email provider
@@ -227,6 +243,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - Send confirmation email immediately after payment success
 
 ### 5.3 Failed Download Handling
+
 - **Requirement**: Handle edge cases for downloads
 - **Implementation**:
   - Provide user-friendly error messages:
@@ -242,6 +259,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 ## Phase 6: User Library & Download Dashboard
 
 ### 6.1 User Library Page (`/user/library`)
+
 - **Requirement**: Authenticated users view purchased books and download history
 - **Implementation**:
   - **Route Guard**: Verify Clerk authentication; redirect to sign-in if not authenticated
@@ -254,6 +272,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - **Pagination**: Load 10 purchases per page if collection grows
 
 ### 6.2 Purchase Receipt / Order Details
+
 - **Requirement**: Users view detailed receipt and revenue breakdown
 - **Implementation**:
   - Show:
@@ -266,6 +285,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
     - Download history (which downloads were used, timestamps)
 
 ### 6.3 Download Links in Dashboard
+
 - **Requirement**: Users can download their books multiple times via dashboard
 - **Implementation**:
   - Each book in library has "Download Now" button
@@ -278,6 +298,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 ## Phase 7: Guest Purchase Experience
 
 ### 7.1 Guest Download Limitations
+
 - **Requirement**: Guests cannot re-download; only have email link
 - **Implementation**:
   - Create `guest_downloads` tracking table (separate from `purchase_downloads`)
@@ -288,6 +309,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - Offer "resend download link" option in email footer (generates new token, sends new email)
 
 ### 7.2 Guest Resend Logic
+
 - **Requirement**: Guests can request link resend via email
 - **Implementation**:
   - Create `/api/downloads/guest-resend` endpoint
@@ -302,6 +324,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 ## Phase 8: Security & Compliance
 
 ### 8.1 Security Measures
+
 - **Requirement**: Protect sensitive data and payment information
 - **Implementation**:
   - Use HTTPS for all checkout pages
@@ -313,6 +336,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - Implement IP-based fraud detection (optional)
 
 ### 8.2 Audit Logging
+
 - **Requirement**: Log all payment and download events
 - **Implementation**:
   - Create `audit_logs` table:
@@ -332,6 +356,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
   - Log all download attempts (success, token expired, already used)
 
 ### 8.3 PCI Compliance
+
 - **Requirement**: Maintain PCI DSS compliance
 - **Implementation**:
   - Use Stripe (handles PCI compliance)
@@ -344,6 +369,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 ## Phase 9: Implementation Sequence
 
 ### Sprint 1: Cart & Basic Checkout
+
 1. Create `useShoppingCart` hook with localStorage persistence
 2. Replace "Buy" buttons with "Add to Cart" buttons
 3. Create shopping cart page (`/bookstore/cart`)
@@ -351,6 +377,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 5. Implement guest vs. authenticated checkout flow
 
 ### Sprint 2: Payment & Transactions
+
 1. Integrate Stripe payment
 2. Create Supabase tables: `book_purchases`, `purchase_items`, `purchase_downloads`, `author_revenue`
 3. Implement `/api/checkout/create-session` and `/api/checkout/confirm`
@@ -358,6 +385,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 5. Create transaction logging in database
 
 ### Sprint 3: Downloads & Email
+
 1. Implement one-time download token system
 2. Create `/api/downloads/[token]` endpoint
 3. Integrate email service (SendGrid/Resend)
@@ -365,6 +393,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 5. Implement email sending on payment success
 
 ### Sprint 4: User Library
+
 1. Create `/user/library` authenticated page
 2. Fetch user purchases from Supabase
 3. Implement download button (generates fresh token)
@@ -372,6 +401,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 5. Implement download history tracking
 
 ### Sprint 5: Guest Features & Polish
+
 1. Implement guest resend logic (`/api/downloads/guest-resend`)
 2. Create audit logging table and logging
 3. Add error handling and user feedback
@@ -383,6 +413,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 ## Technical Requirements
 
 ### Dependencies to Add
+
 - `stripe` — Payment processing
 - `sendgrid` or `resend` — Email service
 - `zustand` or Context API — State management for cart
@@ -390,6 +421,7 @@ Complete the bookstore e-commerce pipeline for UnTelevised Media, enabling users
 - `uuid` — Token generation (Node.js built-in)
 
 ### Environment Variables Needed
+
 ```
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_...
 STRIPE_SECRET_KEY=sk_...
@@ -405,6 +437,7 @@ NEXT_PUBLIC_APP_URL=https://untelevised.media
 ```
 
 ### Database Setup
+
 - Run migrations in `supabase/migrations/` to create all tables
 - Set up RLS policies:
   - `book_purchases`: Users can read only their own orders
@@ -418,10 +451,13 @@ NEXT_PUBLIC_APP_URL=https://untelevised.media
 Before implementation, create/update GitHub issue with:
 
 ### Title
+
 "[TASK] Complete Bookstore E-Commerce Pipeline: Cart, Checkout, Payment, Downloads"
 
 ### Description
+
 Include:
+
 1. **Overview**: Brief summary of bookstore feature scope
 2. **Requirements Checklist**:
    - [ ] Shopping cart with add/remove/quantity adjustment
@@ -490,6 +526,7 @@ Include:
 ## Questions for Clarification
 
 If implementing, confirm with user:
+
 1. **Payment Provider**: Use Stripe, or different provider?
 2. **Email Provider**: Resend or SendGrid?
 3. **PDF Attachment**: Always attach to email, or only if under file size limit?

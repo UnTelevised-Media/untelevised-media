@@ -33,7 +33,7 @@ export default function BookCardActions({ book, format }: Props) {
         formatType: format.formatType,
         price: format.price,
         stripePriceId: format.stripePriceId ?? '',
-      }),
+      })
     );
     if (tipProductId && tipAmount > 0) {
       addItem({

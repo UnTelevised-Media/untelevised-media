@@ -18,7 +18,7 @@ export default async function SecureContactPage() {
   const isEditorPlus = hasRole(role, 'editor');
   if (!isEditorPlus) redirect('/portal/articles');
 
-  const contacts = await portalFetch<SecureContact[]>(queryPortalSecureContacts) ?? [];
+  const contacts = (await portalFetch<SecureContact[]>(queryPortalSecureContacts)) ?? [];
 
   const newCount = contacts.filter((c) => (c.status ?? 'new') === 'new').length;
 

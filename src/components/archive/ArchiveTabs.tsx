@@ -30,10 +30,7 @@ interface Props {
 type View = 'list' | 'cards';
 
 export default function ArchiveTabs({ articles, currentYear }: Props) {
-  const YEARS = Array.from(
-    { length: currentYear - 2015 + 1 },
-    (_, i) => currentYear - i
-  );
+  const YEARS = Array.from({ length: currentYear - 2015 + 1 }, (_, i) => currentYear - i);
 
   const [activeYear, setActiveYear] = useState(currentYear);
   const [view, setView] = useState<View>('list');
@@ -133,7 +130,7 @@ export default function ArchiveTabs({ articles, currentYear }: Props) {
                   {/* Date column */}
                   <time
                     dateTime={date ?? ''}
-                    className='w-28 shrink-0 pt-0.5 text-xs font-mono text-slate-400 dark:text-slate-500'
+                    className='w-28 shrink-0 pt-0.5 font-mono text-xs text-slate-400 dark:text-slate-500'
                   >
                     {date ? formatDate(date) : '—'}
                   </time>

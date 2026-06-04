@@ -20,33 +20,33 @@ Create a reusable SEO object type for consistent metadata across document types.
 
 ```typescript
 // schemaTypes/seoType.ts
-import { defineField, defineType } from "sanity";
+import { defineField, defineType } from 'sanity';
 
 export const seoType = defineType({
-  name: "seo",
-  title: "SEO",
-  type: "object",
+  name: 'seo',
+  title: 'SEO',
+  type: 'object',
   fields: [
     defineField({
-      name: "title",
-      description: "Overrides the page title if provided",
-      type: "string",
+      name: 'title',
+      description: 'Overrides the page title if provided',
+      type: 'string',
     }),
     defineField({
-      name: "description",
-      type: "text",
+      name: 'description',
+      type: 'text',
       rows: 3,
     }),
     defineField({
-      name: "image",
-      description: "Image for social sharing (1200x630 recommended)",
-      type: "image",
+      name: 'image',
+      description: 'Image for social sharing (1200x630 recommended)',
+      type: 'image',
       options: { hotspot: true },
     }),
     defineField({
-      name: "noIndex",
-      description: "Hide this page from search engines",
-      type: "boolean",
+      name: 'noIndex',
+      description: 'Hide this page from search engines',
+      type: 'boolean',
       initialValue: false,
     }),
   ],
@@ -54,11 +54,12 @@ export const seoType = defineType({
 ```
 
 **Usage in document types:**
+
 ```typescript
 defineField({
-  name: "seo",
-  type: "seo",
-})
+  name: 'seo',
+  type: 'seo',
+});
 ```
 
 ## 3. GROQ Queries with Fallbacks
@@ -86,15 +87,15 @@ Use `generateMetadata` — never render `<title>` or `<meta>` tags directly in c
 
 ```typescript
 // app/(frontend)/[slug]/page.tsx
-import type { Metadata } from "next";
-import { urlFor } from "@/sanity/lib/image";
+import type { Metadata } from 'next';
+import { urlFor } from '@/sanity/lib/image';
 
 type RouteProps = {
   params: Promise<{ slug: string }>;
 };
 
 // Extract fetch to reuse in both functions
-const getPage = async (params: RouteProps["params"]) =>
+const getPage = async (params: RouteProps['params']) =>
   sanityFetch({
     query: PAGE_QUERY,
     params: await params,
@@ -124,7 +125,7 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
 
   // noIndex robots directive
   if (page.seo.noIndex) {
-    metadata.robots = "noindex";
+    metadata.robots = 'noindex';
   }
 
   return metadata;
@@ -143,6 +144,7 @@ export default async function Page({ params }: RouteProps) {
 Use Next.js `sitemap.ts` convention to auto-generate from Sanity content.
 
 ### GROQ Query
+
 ```groq
 *[_type in ["page", "post"] && defined(slug.current) && seo.noIndex != true] {
   "href": select(
@@ -155,16 +157,17 @@ Use Next.js `sitemap.ts` convention to auto-generate from Sanity content.
 ```
 
 ### Route Implementation
+
 ```typescript
 // app/sitemap.ts
-import { MetadataRoute } from "next";
-import { client } from "@/sanity/lib/client";
-import { SITEMAP_QUERY } from "@/sanity/lib/queries";
+import { MetadataRoute } from 'next';
+import { client } from '@/sanity/lib/client';
+import { SITEMAP_QUERY } from '@/sanity/lib/queries';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
+    : 'http://localhost:3000';
 
   try {
     const paths = await client.fetch(SITEMAP_QUERY);
@@ -173,11 +176,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return paths.map((path) => ({
       url: new URL(path.href!, baseUrl).toString(),
       lastModified: new Date(path._updatedAt),
-      changeFrequency: "weekly",
+      changeFrequency: 'weekly',
       priority: 1,
     }));
   } catch (error) {
-    console.error("Sitemap generation failed:", error);
+    console.error('Sitemap generation failed:', error);
     return [];
   }
 }
@@ -190,50 +193,51 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 Create a redirect document type for content team management.
 
 ### Schema
+
 ```typescript
 // schemaTypes/redirectType.ts
-import { defineField, defineType, SanityDocumentLike } from "sanity";
-import { LinkIcon } from "@sanity/icons";
+import { defineField, defineType, SanityDocumentLike } from 'sanity';
+import { LinkIcon } from '@sanity/icons';
 
 function isValidPath(value: string | undefined) {
-  if (!value) return "Required";
-  if (!value.startsWith("/")) return "Must start with /";
-  if (/[^a-zA-Z0-9\-_/:]/.test(value)) return "Invalid characters";
+  if (!value) return 'Required';
+  if (!value.startsWith('/')) return 'Must start with /';
+  if (/[^a-zA-Z0-9\-_/:]/.test(value)) return 'Invalid characters';
   return true;
 }
 
 export const redirectType = defineType({
-  name: "redirect",
-  title: "Redirect",
-  type: "document",
+  name: 'redirect',
+  title: 'Redirect',
+  type: 'document',
   icon: LinkIcon,
   validation: (Rule) =>
     Rule.custom((doc: SanityDocumentLike | undefined) => {
       if (doc?.source === doc?.destination) {
-        return "Source and destination cannot be the same";
+        return 'Source and destination cannot be the same';
       }
       return true;
     }),
   fields: [
     defineField({
-      name: "source",
-      type: "string",
+      name: 'source',
+      type: 'string',
       validation: (Rule) => Rule.required().custom(isValidPath),
     }),
     defineField({
-      name: "destination",
-      type: "string",
+      name: 'destination',
+      type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "permanent",
-      description: "301 (permanent) or 302 (temporary)",
-      type: "boolean",
+      name: 'permanent',
+      description: '301 (permanent) or 302 (temporary)',
+      type: 'boolean',
       initialValue: true,
     }),
     defineField({
-      name: "isEnabled",
-      type: "boolean",
+      name: 'isEnabled',
+      type: 'boolean',
       initialValue: true,
     }),
   ],
@@ -241,9 +245,10 @@ export const redirectType = defineType({
 ```
 
 ### Next.js Config
+
 ```typescript
 // next.config.ts
-import { fetchRedirects } from "@/sanity/lib/fetchRedirects";
+import { fetchRedirects } from '@/sanity/lib/fetchRedirects';
 
 const nextConfig: NextConfig = {
   async redirects() {
@@ -278,7 +283,7 @@ export async function GET(request: Request) {
 }
 ```
 
-Use as fallback in metadata: `url: page.seo.image ? urlFor(page.seo.image).url() : \`/api/og?id=\${page._id}\``
+Use as fallback in metadata: `url: page.seo.image ? urlFor(page.seo.image).url() : \`/api/og?id=\${page.\_id}\``
 
 ## 8. JSON-LD Structured Data
 
@@ -289,6 +294,7 @@ npm install schema-dts
 ```
 
 ### FAQ Example
+
 ```typescript
 import { FAQPage, WithContext } from "schema-dts";
 
@@ -313,6 +319,7 @@ const generateFaqData = (faqs: FAQ[]): WithContext<FAQPage> => ({
 ```
 
 ### GROQ for Plain Text
+
 ```groq
 faqs[]->{
   _id,

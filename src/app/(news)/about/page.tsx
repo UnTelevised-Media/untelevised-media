@@ -257,7 +257,10 @@ export default function AboutPage() {
           <div className='grid gap-12 lg:grid-cols-2'>
             <div>
               <div className='mb-6 flex items-center space-x-4'>
-                <Link href='/support' className='bg-untele px-3 py-1 transition-opacity hover:opacity-80'>
+                <Link
+                  href='/support'
+                  className='bg-untele px-3 py-1 transition-opacity hover:opacity-80'
+                >
                   <h3 className='text-sm font-black uppercase tracking-widest text-white'>
                     SUPPORT INDEPENDENT MEDIA
                   </h3>
@@ -322,7 +325,7 @@ export default function AboutPage() {
                 </Link>
                 <Link
                   href='/support'
-                  className='block w-full border-2 border-black dark:border-white bg-transparent py-4 text-center text-sm font-black uppercase tracking-widest text-black dark:text-white transition-colors hover:bg-white hover:text-black'
+                  className='block w-full border-2 border-black bg-transparent py-4 text-center text-sm font-black uppercase tracking-widest text-black transition-colors hover:bg-white hover:text-black dark:border-white dark:text-white'
                 >
                   LEARN MORE
                 </Link>
@@ -351,7 +354,7 @@ export default function AboutPage() {
             </Link>
             <Link
               href='/whistleblower'
-              className='border-2 border-black dark:border-white bg-transparent px-8 py-4 text-center text-sm font-black uppercase tracking-widest dark:text-white transition-colors hover:bg-white hover:text-black'
+              className='border-2 border-black bg-transparent px-8 py-4 text-center text-sm font-black uppercase tracking-widest transition-colors hover:bg-white hover:text-black dark:border-white dark:text-white'
             >
               WHISTLEBLOWER PORTAL
             </Link>

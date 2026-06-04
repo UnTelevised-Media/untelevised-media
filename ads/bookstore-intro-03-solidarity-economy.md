@@ -1,6 +1,9 @@
 # Ad: Bookstore Intro — Solidarity Economy / Community Ownership
+
 # Platform: Facebook leftist groups, union pages, DSA chapters, community orgs, newsletters
+
 # Tone: Warm, movement-building, practical solidarity
+
 # Length: Longer, community-organizer voice
 
 ---
@@ -27,14 +30,10 @@ This is a solidarity economy in the specific sense: resources flow toward the pe
 
 We are actively looking for more authors — especially those with stories the mainstream industry has no commercial interest in publishing. If that is you, or someone you know, reach out.
 
-**Browse the store:**
-https://www.untelevised.media/bookstore/
+**Browse the store:** https://www.untelevised.media/bookstore/
 
-**Read our full story:**
-https://www.untelevised.media/bookstore/about/
+**Read our full story:** https://www.untelevised.media/bookstore/about/
 
 ---
 
-*Hurriya Publications — حرية — Freedom.*
-*Born in solidarity. Built to endure.*
-*An imprint of UnTelevised Media.*
+_Hurriya Publications — حرية — Freedom._ _Born in solidarity. Built to endure._ _An imprint of UnTelevised Media._

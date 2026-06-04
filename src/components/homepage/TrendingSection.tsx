@@ -43,7 +43,10 @@ export default async function TrendingSection({ variant }: Props = {}) {
   // --- #1 Featured Card ---
   if (variant === 'card') {
     const top = articles[0];
-    const imageUrl = urlForImage(top.mainImage as any)?.width(600).height(340).url();
+    const imageUrl = urlForImage(top.mainImage as any)
+      ?.width(600)
+      .height(340)
+      .url();
 
     return (
       <section aria-label='Most Read' className='flex h-full flex-col'>
@@ -155,7 +158,7 @@ export default async function TrendingSection({ variant }: Props = {}) {
               href={`/articles/${article.slug.current}`}
               className='flex items-start gap-3 p-3 transition-colors hover:bg-muted/50'
             >
-              <span className='w-7 shrink-0 text-2xl font-black leading-none tabular-nums text-muted-foreground/30'>
+              <span className='w-7 shrink-0 text-2xl font-black tabular-nums leading-none text-muted-foreground/30'>
                 {index + 1}
               </span>
               <div className='min-w-0 flex-1 space-y-0.5'>

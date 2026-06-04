@@ -57,9 +57,7 @@ export default function BookBuyFormats({ book }: Props) {
 
   return (
     <>
-      {book.formats?.some((f) => f.stripePriceId) && (
-        <GiftToggle onChange={setGiftOptions} />
-      )}
+      {book.formats?.some((f) => f.stripePriceId) && <GiftToggle onChange={setGiftOptions} />}
 
       <div className='flex flex-col gap-3'>
         {book.formats?.map((format) => {
@@ -77,8 +75,7 @@ export default function BookBuyFormats({ book }: Props) {
           const nyopAmount = nyopRaw !== '' ? parseFloat(nyopRaw) : NaN;
           const minimum = format.minimumPrice ?? 0;
           const nyopValid =
-            !isNyop ||
-            (!isNaN(nyopAmount) && nyopAmount >= minimum && nyopAmount >= 0.5);
+            !isNyop || (!isNaN(nyopAmount) && nyopAmount >= minimum && nyopAmount >= 0.5);
           const nyopError =
             isNyop && nyopRaw !== '' && !isNaN(nyopAmount) && nyopAmount < minimum
               ? minimum === 0
@@ -134,9 +131,7 @@ export default function BookBuyFormats({ book }: Props) {
                         Pay What You Want
                       </p>
                       {minimum > 0 && (
-                        <p className='text-[10px] text-slate-400'>
-                          from ${minimum.toFixed(2)}
-                        </p>
+                        <p className='text-[10px] text-slate-400'>from ${minimum.toFixed(2)}</p>
                       )}
                     </div>
                   )}

@@ -54,7 +54,7 @@ export default function ArticleShowcase({
       {/* Featured Article */}
       {featuredArticle && (
         <section className='mb-12'>
-          <h2 className='border-untele/30 mb-6 border-b pb-2 text-3xl font-bold text-slate-200'>
+          <h2 className='mb-6 border-b border-untele/30 pb-2 text-3xl font-bold text-slate-200'>
             Featured Story
           </h2>
           <FeaturedArticleCard article={featuredArticle} />
@@ -73,11 +73,11 @@ export default function ArticleShowcase({
           <div className='mt-4 flex items-center gap-4 px-4'>
             <span className='text-slate-300'>
               Showing articles in:{' '}
-              <span className='text-untele font-bold'>{selectedCategory.title}</span>
+              <span className='font-bold text-untele'>{selectedCategory.title}</span>
             </span>
             <button
               onClick={clearFilters}
-              className='hover:text-untele text-sm text-slate-400 underline transition-colors'
+              className='text-sm text-slate-400 underline transition-colors hover:text-untele'
             >
               Clear filters
             </button>
@@ -133,7 +133,7 @@ export default function ArticleShowcase({
             {selectedCategory && (
               <button
                 onClick={clearFilters}
-                className='bg-untele hover:bg-untele/80 mt-4 rounded-lg px-6 py-2 text-white transition-colors'
+                className='mt-4 rounded-lg bg-untele px-6 py-2 text-white transition-colors hover:bg-untele/80'
               >
                 View All Articles
               </button>

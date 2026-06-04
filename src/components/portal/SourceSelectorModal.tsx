@@ -82,7 +82,10 @@ export default function SourceSelectorModal({ selectedIds, onSelect }: Props) {
         setSources((prev) => [newSource, ...prev]);
         toast.success('Source created and linked.');
         setOpen(false);
-        setNewLabel(''); setNewType(''); setNewUrl(''); setNewDescription('');
+        setNewLabel('');
+        setNewType('');
+        setNewUrl('');
+        setNewDescription('');
       } else {
         toast.error(result.error);
       }
@@ -150,9 +153,7 @@ export default function SourceSelectorModal({ selectedIds, onSelect }: Props) {
                         }`}
                       >
                         <span className='font-medium'>{s.label}</span>
-                        {s.type && (
-                          <span className='ml-2 text-xs text-slate-400'>{s.type}</span>
-                        )}
+                        {s.type && <span className='ml-2 text-xs text-slate-400'>{s.type}</span>}
                         {alreadySelected && (
                           <span className='ml-2 text-xs text-green-600'>✓ linked</span>
                         )}

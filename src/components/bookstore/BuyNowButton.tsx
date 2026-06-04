@@ -3,7 +3,12 @@
 import { useState } from 'react';
 import * as Sentry from '@sentry/nextjs';
 import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
-import type { SanityBook, SanityBookFormat, CheckoutPayload, GiftOptions } from '@/lib/bookstore/types';
+import type {
+  SanityBook,
+  SanityBookFormat,
+  CheckoutPayload,
+  GiftOptions,
+} from '@/lib/bookstore/types';
 import { getStripeIdForFormat } from '@/lib/bookstore/stripeUtils';
 
 interface Props {
@@ -53,7 +58,9 @@ export default function BuyNowButton({
           formatKey: format._key,
           title: book.title,
           isDigital: format.formatType === 'digital',
-          ...(isNyop && customPrice ? { unitAmountCents: Math.round(customPrice * 100), isNyop: true } : {}),
+          ...(isNyop && customPrice
+            ? { unitAmountCents: Math.round(customPrice * 100), isNyop: true }
+            : {}),
         },
       ],
       ...(giftOptions ? { giftOptions } : {}),
@@ -62,14 +69,16 @@ export default function BuyNowButton({
     trackEvent('begin_checkout', {
       currency: 'USD',
       value: customPrice ?? format.price,
-      items: [{
-        item_id: book._id,
-        item_name: book.title,
-        item_variant: format.formatType,
-        item_category: 'Book',
-        price: customPrice ?? format.price,
-        quantity: 1,
-      }],
+      items: [
+        {
+          item_id: book._id,
+          item_name: book.title,
+          item_variant: format.formatType,
+          item_category: 'Book',
+          price: customPrice ?? format.price,
+          quantity: 1,
+        },
+      ],
     });
 
     try {
@@ -81,7 +90,10 @@ export default function BuyNowButton({
       const data = (await res.json()) as { url?: string; error?: string };
       if (!res.ok || !data.url) {
         const msg = data.error ?? 'Checkout failed';
-        Sentry.captureMessage(msg, { level: 'error', extra: { bookId: book._id, formatType: format.formatType } });
+        Sentry.captureMessage(msg, {
+          level: 'error',
+          extra: { bookId: book._id, formatType: format.formatType },
+        });
         setError(msg);
         return;
       }

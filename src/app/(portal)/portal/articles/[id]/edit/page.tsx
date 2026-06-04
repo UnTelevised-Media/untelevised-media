@@ -38,11 +38,7 @@ type PortalArticleFull = ArticleWriteInput & {
   linkedPitch?: PitchForModal | null;
 };
 
-export default async function EditArticlePage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function EditArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const { id: rawId } = await params;
   // Dashboard links always use the non-prefixed _id (previewDrafts normalises it),
   // but a newly-created draft redirect may carry "drafts." in the URL — strip it so

@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import * as Sentry from '@sentry/nextjs';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { jobApplicationSchema, type JobApplicationFormData } from '@/lib/validations/jobApplicationSchema';
+import {
+  jobApplicationSchema,
+  type JobApplicationFormData,
+} from '@/lib/validations/jobApplicationSchema';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 import { TurnstileWidget } from '@/components/global/TurnstileWidget';
 import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
@@ -14,7 +17,9 @@ interface ApplicationFormProps {
 }
 
 export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
-  const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>(
+    'idle'
+  );
   const [serverError, setServerError] = useState('');
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const { trackEvent } = useConsentAwareTracking();
@@ -68,8 +73,8 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
           Application Received
         </h4>
         <p className='text-sm text-slate-400'>
-          Thank you for applying. We review every submission and will be in touch if
-          there&rsquo;s a match.
+          Thank you for applying. We review every submission and will be in touch if there&rsquo;s
+          a match.
         </p>
       </div>
     );
@@ -84,7 +89,9 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className='space-y-5' noValidate>
       {/* Full Name */}
       <div>
-        <label htmlFor='fullName' className={labelCls}>Full Name *</label>
+        <label htmlFor='fullName' className={labelCls}>
+          Full Name *
+        </label>
         <input
           id='fullName'
           {...register('fullName')}
@@ -94,13 +101,17 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
           aria-describedby={errors.fullName ? 'fullName-error' : undefined}
         />
         {errors.fullName && (
-          <p id='fullName-error' className={errCls} role='alert'>{errors.fullName.message}</p>
+          <p id='fullName-error' className={errCls} role='alert'>
+            {errors.fullName.message}
+          </p>
         )}
       </div>
 
       {/* Email */}
       <div>
-        <label htmlFor='email' className={labelCls}>Email Address *</label>
+        <label htmlFor='email' className={labelCls}>
+          Email Address *
+        </label>
         <input
           id='email'
           {...register('email')}
@@ -111,13 +122,17 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
           aria-describedby={errors.email ? 'email-error' : undefined}
         />
         {errors.email && (
-          <p id='email-error' className={errCls} role='alert'>{errors.email.message}</p>
+          <p id='email-error' className={errCls} role='alert'>
+            {errors.email.message}
+          </p>
         )}
       </div>
 
       {/* Position */}
       <div>
-        <label htmlFor='position' className={labelCls}>Position *</label>
+        <label htmlFor='position' className={labelCls}>
+          Position *
+        </label>
         <input
           id='position'
           {...register('position')}
@@ -127,13 +142,17 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
           aria-describedby={errors.position ? 'position-error' : undefined}
         />
         {errors.position && (
-          <p id='position-error' className={errCls} role='alert'>{errors.position.message}</p>
+          <p id='position-error' className={errCls} role='alert'>
+            {errors.position.message}
+          </p>
         )}
       </div>
 
       {/* Portfolio URL */}
       <div>
-        <label htmlFor='portfolioUrl' className={labelCls}>Portfolio / Website URL</label>
+        <label htmlFor='portfolioUrl' className={labelCls}>
+          Portfolio / Website URL
+        </label>
         <input
           id='portfolioUrl'
           {...register('portfolioUrl')}
@@ -144,13 +163,17 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
           aria-describedby={errors.portfolioUrl ? 'portfolioUrl-error' : undefined}
         />
         {errors.portfolioUrl && (
-          <p id='portfolioUrl-error' className={errCls} role='alert'>{errors.portfolioUrl.message}</p>
+          <p id='portfolioUrl-error' className={errCls} role='alert'>
+            {errors.portfolioUrl.message}
+          </p>
         )}
       </div>
 
       {/* LinkedIn URL */}
       <div>
-        <label htmlFor='linkedinUrl' className={labelCls}>LinkedIn Profile URL</label>
+        <label htmlFor='linkedinUrl' className={labelCls}>
+          LinkedIn Profile URL
+        </label>
         <input
           id='linkedinUrl'
           {...register('linkedinUrl')}
@@ -161,30 +184,38 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
           aria-describedby={errors.linkedinUrl ? 'linkedinUrl-error' : undefined}
         />
         {errors.linkedinUrl && (
-          <p id='linkedinUrl-error' className={errCls} role='alert'>{errors.linkedinUrl.message}</p>
+          <p id='linkedinUrl-error' className={errCls} role='alert'>
+            {errors.linkedinUrl.message}
+          </p>
         )}
       </div>
 
       {/* Cover Letter */}
       <div>
-        <label htmlFor='coverLetter' className={labelCls}>Cover Letter * (100–3000 characters)</label>
+        <label htmlFor='coverLetter' className={labelCls}>
+          Cover Letter * (100–3000 characters)
+        </label>
         <textarea
           id='coverLetter'
           {...register('coverLetter')}
           rows={7}
-          placeholder="Tell us about yourself, your journalism experience, why you want to contribute to UnTelevised Media, and what stories you want to tell..."
+          placeholder='Tell us about yourself, your journalism experience, why you want to contribute to UnTelevised Media, and what stories you want to tell...'
           className={`${input} resize-y`}
           aria-invalid={!!errors.coverLetter}
           aria-describedby={errors.coverLetter ? 'coverLetter-error' : undefined}
         />
         {errors.coverLetter && (
-          <p id='coverLetter-error' className={errCls} role='alert'>{errors.coverLetter.message}</p>
+          <p id='coverLetter-error' className={errCls} role='alert'>
+            {errors.coverLetter.message}
+          </p>
         )}
       </div>
 
       {/* Resume Upload */}
       <div>
-        <label htmlFor='resume' className={labelCls}>Resume / CV — PDF or Word, max 5 MB (optional)</label>
+        <label htmlFor='resume' className={labelCls}>
+          Resume / CV — PDF or Word, max 5 MB (optional)
+        </label>
         <input
           id='resume'
           {...register('resume')}
@@ -195,13 +226,17 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
           aria-describedby={errors.resume ? 'resume-error' : undefined}
         />
         {errors.resume && (
-          <p id='resume-error' className={errCls} role='alert'>{errors.resume.message as string}</p>
+          <p id='resume-error' className={errCls} role='alert'>
+            {errors.resume.message as string}
+          </p>
         )}
       </div>
 
       {/* How did you find us */}
       <div>
-        <label htmlFor='howDidYouFindUs' className={labelCls}>How did you find us? *</label>
+        <label htmlFor='howDidYouFindUs' className={labelCls}>
+          How did you find us? *
+        </label>
         <select
           id='howDidYouFindUs'
           {...register('howDidYouFindUs')}
@@ -217,13 +252,18 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
           <option value='other'>Other</option>
         </select>
         {errors.howDidYouFindUs && (
-          <p id='howDidYouFindUs-error' className={errCls} role='alert'>{errors.howDidYouFindUs.message}</p>
+          <p id='howDidYouFindUs-error' className={errCls} role='alert'>
+            {errors.howDidYouFindUs.message}
+          </p>
         )}
       </div>
 
       {/* Server error */}
       {submitState === 'error' && (
-        <div className='flex items-start gap-2 border border-red-700 bg-red-950/20 p-4' role='alert'>
+        <div
+          className='flex items-start gap-2 border border-red-700 bg-red-950/20 p-4'
+          role='alert'
+        >
           <AlertCircle className='mt-0.5 h-4 w-4 flex-shrink-0 text-red-400' aria-hidden='true' />
           <p className='text-sm text-red-400'>{serverError}</p>
         </div>

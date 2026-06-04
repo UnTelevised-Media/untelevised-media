@@ -3,7 +3,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Reading List',
-  description: 'Your saved articles on UnTelevised Media — available on any device when signed in.',
+  description:
+    'Your saved articles on UnTelevised Media — available on any device when signed in.',
   robots: { index: false, follow: false },
 };
 

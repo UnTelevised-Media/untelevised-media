@@ -21,16 +21,16 @@
   --palette-primary-700: #9a0404;
   --palette-primary-800: #7a0303;
   --palette-primary-900: #5a0202;
-  --palette-background-body:           #ffffff;
-  --palette-background-popover:        #ffffff;
-  --palette-background-input:          #ffffff;
+  --palette-background-body: #ffffff;
+  --palette-background-popover: #ffffff;
+  --palette-background-input: #ffffff;
   --palette-background-input-disabled: #f1f5f9;
-  --palette-text-000:         #ffffff;
-  --palette-text-100:         #64748b;
-  --palette-text-500:         #334155;
-  --palette-text-900:         #020817;
+  --palette-text-000: #ffffff;
+  --palette-text-100: #64748b;
+  --palette-text-500: #334155;
+  --palette-text-900: #020817;
   --palette-text-placeholder: #94a3b8;
-  --palette-divider:          rgba(0, 0, 0, 0.1);
+  --palette-divider: rgba(0, 0, 0, 0.1);
 }
 
 /* ─── RTE iframe body ────────────────────────────────────────────────────── */
@@ -41,8 +41,12 @@ body {
 }
 
 /* ─── Links ──────────────────────────────────────────────────────────────── */
-a { color: #d70606 !important; }
-a:hover { color: #b80505 !important; }
+a {
+  color: #d70606 !important;
+}
+a:hover {
+  color: #b80505 !important;
+}
 
 /* ─── Tab bar ────────────────────────────────────────────────────────────── */
 .coral-tabBar {

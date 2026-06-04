@@ -50,13 +50,15 @@ export default async function PortalLibraryPage() {
 
     const { data, error } = await shopServiceClient
       .from('author_earnings')
-      .select('sanity_book_id, gross_cents, stripe_fee_cents, is_tip, order_item:order_items(quantity, is_digital), order:orders(status)')
+      .select(
+        'sanity_book_id, gross_cents, stripe_fee_cents, is_tip, order_item:order_items(quantity, is_digital), order:orders(status)'
+      )
       .eq('author_clerk_id', clerkUserId);
 
     if (error) console.error('[portal/library] author_earnings query failed:', error.message);
 
     authorEarnings = ((data as EarningRow[]) ?? []).filter(
-      (s) => !['cancelled', 'refunded'].includes(s.order?.status ?? ''),
+      (s) => !['cancelled', 'refunded'].includes(s.order?.status ?? '')
     );
   } catch {
     supabaseAvailable = false;
@@ -65,8 +67,8 @@ export default async function PortalLibraryPage() {
   const bookEarnings = authorEarnings.filter((s) => !s.is_tip);
 
   const bookStats = bookList.map((book) => {
-    const items   = bookEarnings.filter((s) => s.sanity_book_id === book._id);
-    const units   = items.reduce((s, i) => s + (i.order_item?.quantity ?? 1), 0);
+    const items = bookEarnings.filter((s) => s.sanity_book_id === book._id);
+    const units = items.reduce((s, i) => s + (i.order_item?.quantity ?? 1), 0);
     const revenue = items.reduce((s, i) => s + (i.gross_cents - i.stripe_fee_cents), 0);
     const digital = items
       .filter((i) => i.order_item?.is_digital)
@@ -80,9 +82,9 @@ export default async function PortalLibraryPage() {
       .filter(
         (f) =>
           f.inventory?.trackInventory &&
-          f.inventory.quantity <= (f.inventory.lowStockThreshold ?? 5),
+          f.inventory.quantity <= (f.inventory.lowStockThreshold ?? 5)
       )
-      .map((f) => ({ book, format: f })),
+      .map((f) => ({ book, format: f }))
   );
 
   return (

@@ -7,7 +7,7 @@ Independent digital media platform covering news, music, and culture. Built on N
 ## Platform Sections
 
 | Section | Path | Description |
-|---|---|---|
+| --- | --- | --- |
 | News | `/` | Articles, breaking news, fact-checks, timelines |
 | Music | `/albums`, `/lyrics`, `/music-artists` | Album reviews, lyrics, artist profiles |
 | Bookstore | `/bookstore` | E-commerce with downloads, orders, wishlist |
@@ -138,5 +138,4 @@ src/
 
 ## Commit Convention
 
-Follows [Conventional Commits](https://www.conventionalcommits.org/):
-`feat:` `fix:` `docs:` `style:` `refactor:` `test:` `chore:`
+Follows [Conventional Commits](https://www.conventionalcommits.org/): `feat:` `fix:` `docs:` `style:` `refactor:` `test:` `chore:`

@@ -96,9 +96,7 @@ export default function DownloadsPage() {
         <div className='h-px flex-1 bg-slate-200 dark:bg-slate-800' />
       </div>
 
-      {loading && (
-        <p className='text-sm text-slate-500'>Loading your downloads...</p>
-      )}
+      {loading && <p className='text-sm text-slate-500'>Loading your downloads...</p>}
 
       {error && (
         <div className='border border-red-200 bg-red-50 px-4 py-3'>
@@ -158,7 +156,9 @@ export default function DownloadsPage() {
                     <p className='text-[10px] font-bold text-slate-400'>Download limit reached</p>
                   )}
                   {!dl.supabase_storage_path && !expired && !exhausted && (
-                    <p className='text-[10px] text-amber-500'>File being prepared — check back soon</p>
+                    <p className='text-[10px] text-amber-500'>
+                      File being prepared — check back soon
+                    </p>
                   )}
                 </div>
                 {available && (

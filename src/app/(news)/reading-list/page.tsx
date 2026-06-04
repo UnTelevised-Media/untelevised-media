@@ -140,9 +140,7 @@ export default function ReadingListPage() {
                         {/* Meta */}
                         <div className='flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-500'>
                           {bookmark.authorName && <span>{bookmark.authorName}</span>}
-                          {bookmark.publishedAt && (
-                            <time>{formatDate(bookmark.publishedAt)}</time>
-                          )}
+                          {bookmark.publishedAt && <time>{formatDate(bookmark.publishedAt)}</time>}
                           {bookmark.readingTime && (
                             <span className='flex items-center gap-1'>
                               <Clock className='h-3 w-3' />

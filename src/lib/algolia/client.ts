@@ -8,10 +8,7 @@ let _adminClient: ReturnType<typeof algoliasearch> | undefined;
 
 export function getAdminClient() {
   if (!_adminClient) {
-    _adminClient = algoliasearch(
-      process.env.ALGOLIA_APP_ID!,
-      process.env.ALGOLIA_ADMIN_API_KEY!,
-    );
+    _adminClient = algoliasearch(process.env.ALGOLIA_APP_ID!, process.env.ALGOLIA_ADMIN_API_KEY!);
   }
   return _adminClient;
 }

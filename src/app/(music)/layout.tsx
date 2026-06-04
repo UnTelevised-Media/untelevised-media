@@ -18,9 +18,7 @@ export default async function UserLayout({ children }: { children: React.ReactNo
     <>
       <GlobalStructuredData />
 
-      <ConsentAwareGoogleAdSense
-        googleAdsenseId={process.env.NEXT_PUBLIC_GAS_ID ?? ''}
-      />
+      <ConsentAwareGoogleAdSense googleAdsenseId={process.env.NEXT_PUBLIC_GAS_ID ?? ''} />
 
       <div className='min-h-screen bg-white text-slate-900 transition-colors dark:bg-black dark:text-slate-100'>
         {/* Draft Mode Banner */}
@@ -36,7 +34,6 @@ export default async function UserLayout({ children }: { children: React.ReactNo
 
         {draftModeEnabled && <SanityVisualEditing />}
       </div>
-
     </>
   );
 }

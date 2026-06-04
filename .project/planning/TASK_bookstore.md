@@ -5,6 +5,7 @@
 We had a branch conflict situation that has since been fully resolved and the branches have been reset. You are good to start coding again.
 
 **Current state:**
+
 - You are on branch `feat/issue-46-bookstore` — this is the correct branch, stay on it
 - Some work was already done in a prior session. Before writing any new code, audit what has already been completed by reading:
   1. `git log --oneline` — see all commits on this branch
@@ -17,8 +18,7 @@ We had a branch conflict situation that has since been fully resolved and the br
 
 ## Full Spec
 
-The complete feature spec and step-by-step plan is in GitHub issue #46:
-https://github.com/UnTelevised-Media/untelevised-media-new/issues/46
+The complete feature spec and step-by-step plan is in GitHub issue #46: https://github.com/UnTelevised-Media/untelevised-media-new/issues/46
 
 Read the full issue before writing any code. It contains all schemas, database tables, API routes, pages, dashboard sections, and the 6-phase implementation plan.
 
@@ -42,9 +42,11 @@ Read the full issue before writing any code. It contains all schemas, database t
 ## Environment Variables
 
 Any new env vars (Supabase shop keys, Stripe webhook secret, Resend key) that don't yet exist should be added as placeholder comments in `.env.local`:
+
 ```
 # SUPABASE_SHOP_URL=        # TODO: add value — Supabase shop project URL
 ```
+
 Do not leave broken imports that crash the app if a var is missing.
 
 ---

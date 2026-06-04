@@ -66,7 +66,7 @@ export default function SourceLibrary({ sources, isEditorPlus }: Props) {
       (s) =>
         s.label?.toLowerCase().includes(q) ||
         s.url?.toLowerCase().includes(q) ||
-        s.type?.toLowerCase().includes(q),
+        s.type?.toLowerCase().includes(q)
     );
   }, [sources, search]);
 
@@ -88,9 +88,7 @@ export default function SourceLibrary({ sources, isEditorPlus }: Props) {
   if (sources.length === 0) {
     return (
       <div className='flex flex-col items-center justify-center py-24 text-center'>
-        <p className='mb-2 text-lg font-bold text-slate-700 dark:text-slate-300'>
-          No sources yet
-        </p>
+        <p className='mb-2 text-lg font-bold text-slate-700 dark:text-slate-300'>No sources yet</p>
         <p className='mb-6 text-sm text-slate-500'>
           Build your source library to keep your reporting organized and transparent.
         </p>
@@ -117,9 +115,7 @@ export default function SourceLibrary({ sources, isEditorPlus }: Props) {
       </div>
 
       {filtered.length === 0 && (
-        <p className='py-10 text-center text-sm text-slate-500'>
-          No sources match your search.
-        </p>
+        <p className='py-10 text-center text-sm text-slate-500'>No sources match your search.</p>
       )}
 
       {/* Source cards */}

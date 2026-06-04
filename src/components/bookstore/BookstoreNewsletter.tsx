@@ -12,6 +12,9 @@ interface Props {
   variant?: 'full' | 'compact';
 }
 
-export default function BookstoreNewsletter({ source = 'bookstore-home', variant = 'full' }: Props) {
+export default function BookstoreNewsletter({
+  source = 'bookstore-home',
+  variant = 'full',
+}: Props) {
   return <NewsletterSignup list='bookstore' variant={variant} source={source} />;
 }

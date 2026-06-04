@@ -2,17 +2,17 @@
 
 ## Tech Stack
 
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| Framework | Next.js (App Router) | 15.4.5 |
-| Language | TypeScript | 5.8.3 |
-| Runtime | React | 19.1.0 |
-| CMS | Sanity | v3.92 |
-| Styling | Tailwind CSS | 3.4.17 |
-| UI Components | Shadcn UI | 2.1.2 |
-| Package Manager | pnpm | (pnpm-lock.yaml) |
-| Deployment | Vercel | — |
-| Analytics | Vercel Analytics + GTM | — |
+| Layer           | Technology             | Version          |
+| --------------- | ---------------------- | ---------------- |
+| Framework       | Next.js (App Router)   | 15.4.5           |
+| Language        | TypeScript             | 5.8.3            |
+| Runtime         | React                  | 19.1.0           |
+| CMS             | Sanity                 | v3.92            |
+| Styling         | Tailwind CSS           | 3.4.17           |
+| UI Components   | Shadcn UI              | 2.1.2            |
+| Package Manager | pnpm                   | (pnpm-lock.yaml) |
+| Deployment      | Vercel                 | —                |
+| Analytics       | Vercel Analytics + GTM | —                |
 
 ---
 
@@ -117,16 +117,19 @@ untelevised-media/
 ## Route Groups
 
 ### `(user)/` — Public Site
+
 - Has its own `layout.tsx` with Header, Nav, Footer, AdSense, SanityLive
 - All public-facing pages
 - Homepage fetches articles, live events, categories in parallel via `Promise.all`
 
 ### `(music)/` — Music Section
+
 - Separate layout for music content
 - Pages: albums, lyrics (songs), music-artists
 - Structured data already implemented for MusicRecording, MusicGroup, MusicAlbum
 
 ### `(admin)/` — Sanity Studio
+
 - Embeds Sanity Studio at `/studio`
 - Presentation Tool enabled for visual editing / live preview
 - Vision Tool for GROQ queries in-studio
@@ -156,6 +159,7 @@ Sanity CMS (hosted)
 ## Key Configuration
 
 ### next.config.ts
+
 - `trailingSlash: true` — all URLs end with `/`
 - `reactStrictMode: true`
 - Remote image patterns: `cdn.sanity.io`, `images.pexels.com`
@@ -163,12 +167,14 @@ Sanity CMS (hosted)
 - `experimental.taint: true` — prevents Sanity read token leaking to client
 
 ### robots.ts
+
 - Allows all crawlers (`*`)
 - Disallows `/studio/`
 - References sitemap at `${BASEURL}sitemap.xml`
 - **Note:** No API route disallow, no AI crawler rules
 
 ### Sitemap (sitemap.ts in `(user)/`)
+
 - Dynamic — fetches all slugs from Sanity
 - Covers: articles, liveEvents, authors, categories, policies, songs, musicArtists, albums
 - **Note:** Missing static pages (about, donate, join, staff, support, etc.)

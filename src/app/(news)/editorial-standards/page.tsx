@@ -34,9 +34,9 @@ export default function EditorialStandardsPage() {
               THE STANDARDS THAT GOVERN OUR JOURNALISM
             </h2>
             <p className='text-xl leading-relaxed text-slate-700 dark:text-slate-300'>
-              Independent journalism carries a responsibility that corporate media has long abandoned.
-              These are the standards we hold ourselves to — in every story, every source, every
-              correction.
+              Independent journalism carries a responsibility that corporate media has long
+              abandoned. These are the standards we hold ourselves to — in every story, every
+              source, every correction.
             </p>
           </div>
         </div>
@@ -74,8 +74,8 @@ export default function EditorialStandardsPage() {
             <div className='border-l-4 border-untele bg-slate-100 p-6 dark:bg-black'>
               <blockquote className='text-lg italic text-slate-800 dark:text-slate-200'>
                 &ldquo;A free press can be good or bad, but, most certainly, without freedom it
-                will never be anything but bad. Independence is not a privilege — it is the
-                minimum condition for honest journalism.&rdquo;
+                will never be anything but bad. Independence is not a privilege — it is the minimum
+                condition for honest journalism.&rdquo;
               </blockquote>
               <cite className='mt-4 block text-sm font-bold uppercase tracking-wide text-untele'>
                 — UnTelevised Editorial Board
@@ -372,11 +372,11 @@ export default function EditorialStandardsPage() {
               },
               {
                 title: 'STAFF DISCLOSURES',
-                body: "Journalists disclose any personal, financial, or political connection to the subjects they cover. Staff cannot report on entities in which they hold financial interests or with which they have personal relationships.",
+                body: 'Journalists disclose any personal, financial, or political connection to the subjects they cover. Staff cannot report on entities in which they hold financial interests or with which they have personal relationships.',
               },
               {
                 title: 'NO POLITICAL ALIGNMENT',
-                body: "We do not endorse political candidates or parties. Staff opinions expressed outside their UnTelevised work are their own and are not editorial positions. We cover all governments and movements with equal critical scrutiny.",
+                body: 'We do not endorse political candidates or parties. Staff opinions expressed outside their UnTelevised work are their own and are not editorial positions. We cover all governments and movements with equal critical scrutiny.',
               },
               {
                 title: 'FUNDING TRANSPARENCY',
@@ -457,8 +457,8 @@ export default function EditorialStandardsPage() {
             QUESTIONS ABOUT OUR STANDARDS?
           </h3>
           <p className='mb-8 text-lg text-slate-700 dark:text-slate-300'>
-            We are accountable to our readers. If you have a concern about our reporting,
-            our methods, or a potential violation of these standards — contact us.
+            We are accountable to our readers. If you have a concern about our reporting, our
+            methods, or a potential violation of these standards — contact us.
           </p>
           <div className='flex flex-col gap-4 sm:flex-row sm:justify-center'>
             <a

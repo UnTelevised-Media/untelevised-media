@@ -23,7 +23,7 @@ export async function generateStaticParams() {
   // Use sanityClient directly — sanityFetch calls draftMode() which requires
   // a request context that does not exist during static param generation.
   const slugs = await sanityClient.fetch<{ slug: { current: string } }[]>(
-    groq`*[_type == 'factCheck'] { slug }`,
+    groq`*[_type == 'factCheck'] { slug }`
   );
   return (slugs ?? []).filter((fc) => fc?.slug?.current).map((fc) => ({ slug: fc.slug.current }));
 }
@@ -89,7 +89,7 @@ export default async function FactCheckPage({ params }: Props) {
 
       <main className='mx-auto max-w-3xl px-4 py-8'>
         {/* Breadcrumb */}
-        <nav className='mb-6 text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-widest font-bold'>
+        <nav className='mb-6 text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400'>
           <Link href='/fact-checks' className='hover:text-[#D70606]'>
             Fact Checks
           </Link>
@@ -107,11 +107,11 @@ export default async function FactCheckPage({ params }: Props) {
 
         {/* Meta — author + date */}
         {(fc.author || fc.publishedAt) && (
-          <div className='mt-3 flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-widest'>
+          <div className='mt-3 flex items-center gap-3 text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400'>
             {fc.author && (
               <Link
                 href={`/author/${fc.author.slug.current}`}
-                className='hover:text-[#D70606] font-bold'
+                className='font-bold hover:text-[#D70606]'
               >
                 {fc.author.name}
               </Link>
@@ -122,8 +122,8 @@ export default async function FactCheckPage({ params }: Props) {
         )}
 
         {/* The Claim blockquote */}
-        <blockquote className='my-6 border-l-4 border-neutral-300 dark:border-neutral-600 pl-4 italic text-neutral-600 dark:text-neutral-300'>
-          <p className='text-xs font-black uppercase tracking-widest not-italic text-neutral-400 mb-1'>
+        <blockquote className='my-6 border-l-4 border-neutral-300 pl-4 italic text-neutral-600 dark:border-neutral-600 dark:text-neutral-300'>
+          <p className='mb-1 text-xs font-black uppercase not-italic tracking-widest text-neutral-400'>
             The Claim
           </p>
           {fc.claim}
@@ -145,8 +145,8 @@ export default async function FactCheckPage({ params }: Props) {
         </blockquote>
 
         {/* Verdict explanation box */}
-        <div className='my-4 border border-neutral-200 dark:border-neutral-700 p-4'>
-          <p className='text-xs font-black uppercase tracking-widest text-neutral-500 mb-1'>
+        <div className='my-4 border border-neutral-200 p-4 dark:border-neutral-700'>
+          <p className='mb-1 text-xs font-black uppercase tracking-widest text-neutral-500'>
             Verdict
           </p>
           <p className='text-sm leading-relaxed text-slate-800 dark:text-slate-200'>
@@ -175,8 +175,8 @@ export default async function FactCheckPage({ params }: Props) {
 
         {/* Sources */}
         {fc.sources && fc.sources.length > 0 && (
-          <section className='mt-8 border-t border-neutral-200 dark:border-neutral-700 pt-4'>
-            <h2 className='text-xs font-black uppercase tracking-widest mb-3'>Sources</h2>
+          <section className='mt-8 border-t border-neutral-200 pt-4 dark:border-neutral-700'>
+            <h2 className='mb-3 text-xs font-black uppercase tracking-widest'>Sources</h2>
             <ul className='space-y-1'>
               {fc.sources.map((s, i) => (
                 <li key={i} className='text-sm'>
@@ -200,19 +200,19 @@ export default async function FactCheckPage({ params }: Props) {
 
         {/* Related articles */}
         {fc.relatedArticles && fc.relatedArticles.length > 0 && (
-          <section className='mt-8 border-t border-neutral-200 dark:border-neutral-700 pt-4'>
-            <h2 className='text-xs font-black uppercase tracking-widest mb-3'>Related Articles</h2>
+          <section className='mt-8 border-t border-neutral-200 pt-4 dark:border-neutral-700'>
+            <h2 className='mb-3 text-xs font-black uppercase tracking-widest'>Related Articles</h2>
             <ul className='space-y-2'>
               {fc.relatedArticles.map((a) => (
                 <li key={a._id}>
                   <Link
                     href={`/articles/${a.slug.current}`}
-                    className='text-sm font-bold hover:text-[#D70606] transition-colors'
+                    className='text-sm font-bold transition-colors hover:text-[#D70606]'
                   >
                     {a.title}
                   </Link>
                   {a.description && (
-                    <p className='text-xs text-neutral-500 mt-0.5'>{a.description}</p>
+                    <p className='mt-0.5 text-xs text-neutral-500'>{a.description}</p>
                   )}
                 </li>
               ))}

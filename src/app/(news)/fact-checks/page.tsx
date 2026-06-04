@@ -40,8 +40,8 @@ export default async function FactChecksPage() {
 
       <p className='mb-6 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400'>
         UnTelevised Media independently verifies viral claims, political statements, and
-        misinformation. Each fact-check includes our verdict, a plain-language explanation, and
-        all primary sources used in the review.
+        misinformation. Each fact-check includes our verdict, a plain-language explanation, and all
+        primary sources used in the review.
       </p>
 
       <BannerAd

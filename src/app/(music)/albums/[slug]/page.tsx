@@ -98,7 +98,9 @@ export default async function AlbumPage({ params }: Props) {
     numTracks: album.totalTracks ?? undefined,
     datePublished: album.releaseDate ?? undefined,
     genre: album.genres ?? [],
-    image: urlForImage(album.albumArt)?.width(1200).height(630).url() ?? 'https://www.untelevised.media/og-default.png',
+    image:
+      urlForImage(album.albumArt)?.width(1200).height(630).url() ??
+      'https://www.untelevised.media/og-default.png',
     url: `https://www.untelevised.media/albums/${slug}/`,
   };
 
@@ -446,7 +448,11 @@ export default async function AlbumPage({ params }: Props) {
 // Fetch album data by slug
 async function getAlbumBySlug(slug: string): Promise<AlbumWithSongs | null> {
   try {
-    const { data } = await sanityFetch({ query: queryAlbumBySlug, params: { slug }, tags: ['album'] });
+    const { data } = await sanityFetch({
+      query: queryAlbumBySlug,
+      params: { slug },
+      tags: ['album'],
+    });
     return data as AlbumWithSongs | null;
   } catch (error) {
     console.error('Failed to fetch album:', error);
@@ -458,5 +464,7 @@ export async function generateStaticParams() {
   const queryAlbumStaticParams = groq`*[_type=='album'] { slug }`;
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: { slug: { current: string } }[] = await sanityClient.fetch(queryAlbumStaticParams);
-  return (slugs ?? []).filter((item) => item?.slug?.current).map((item) => ({ slug: item.slug.current }));
+  return (slugs ?? [])
+    .filter((item) => item?.slug?.current)
+    .map((item) => ({ slug: item.slug.current }));
 }

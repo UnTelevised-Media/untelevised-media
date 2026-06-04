@@ -10,6 +10,7 @@ Principles for designing structured content that's flexible, reusable, and maint
 ## When to Apply
 
 Reference these guidelines when:
+
 - Starting a new project and designing the content model
 - Evaluating whether content should be structured or free-form
 - Deciding between references and embedded content
@@ -26,6 +27,7 @@ Reference these guidelines when:
 ## Resources
 
 Start with the resource that matches the modeling decision in front of you, instead of loading every topic at once. See `resources/` for detailed guidance on specific topics:
+
 - `resources/separation-of-concerns.md` — Separating content from presentation
 - `resources/reference-vs-embedding.md` — When to use references vs embedded objects
 - `resources/content-reuse.md` — Content reuse patterns and the reuse spectrum

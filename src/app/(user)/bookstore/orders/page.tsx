@@ -61,7 +61,10 @@ export default async function OrdersPage() {
           <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
             No orders yet
           </p>
-          <Link href='/bookstore' className='mt-4 inline-block text-xs text-untele hover:underline'>
+          <Link
+            href='/bookstore'
+            className='mt-4 inline-block text-xs text-untele hover:underline'
+          >
             Browse the Bookstore
           </Link>
         </div>

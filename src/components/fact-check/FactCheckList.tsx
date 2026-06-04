@@ -149,8 +149,12 @@ export default function FactCheckList({ factChecks }: Props) {
                         blurDataURL={urlForImage(fc.mainImage)!.width(20).blur(10).url()}
                       />
                     ) : (
-                      <div className={`flex h-full items-center justify-center ${verdictCfg?.bgClass ?? 'bg-neutral-200'}`}>
-                        <span className={`text-lg font-black uppercase tracking-widest ${verdictCfg?.textClass ?? 'text-white'}`}>
+                      <div
+                        className={`flex h-full items-center justify-center ${verdictCfg?.bgClass ?? 'bg-neutral-200'}`}
+                      >
+                        <span
+                          className={`text-lg font-black uppercase tracking-widest ${verdictCfg?.textClass ?? 'text-white'}`}
+                        >
                           {verdictCfg?.label ?? fc.rating}
                         </span>
                       </div>

@@ -61,7 +61,7 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
 
               <h2
                 id={`article-title-${article._id}`}
-                className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele${article.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
+                className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele${article.correction?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
               >
                 {article.title}
               </h2>
@@ -190,7 +190,7 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
 
           <h2
             id='featured-article-title'
-            className={`mb-2 text-wrap px-4 text-2xl font-bold leading-6 text-white drop-shadow-lg${article.correction?.type === 'retraction' ? ' line-through opacity-60' : ''}`}
+            className={`mb-2 text-wrap px-4 text-2xl font-bold leading-6 text-white drop-shadow-lg${article.correction?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
           >
             {article.title}
           </h2>
@@ -205,7 +205,9 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
             </div>
             <div className='flex items-center gap-2 text-sm text-slate-400'>
               <span>
-                {getArticleDate(article) ? formatDate(getArticleDate(article)) : 'Date not available'}
+                {getArticleDate(article)
+                  ? formatDate(getArticleDate(article))
+                  : 'Date not available'}
               </span>
               <span className='text-xs uppercase tracking-widest'>
                 · {getReadingTime(article.body)}

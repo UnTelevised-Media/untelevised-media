@@ -52,7 +52,7 @@ export default async function PortalProfilePage() {
 async function ProfileLoader({ sanityAuthorId }: { sanityAuthorId: string }) {
   const profile = await portalFetch<Parameters<typeof AuthorProfileForm>[0]['profile'] | null>(
     queryPortalMyProfile,
-    { id: sanityAuthorId },
+    { id: sanityAuthorId }
   );
 
   if (!profile) {

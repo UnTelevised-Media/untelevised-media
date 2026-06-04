@@ -20,30 +20,37 @@ const _algoliaApiKey = process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY;
 
 // Wrap search to catch network failures (ad blockers, firewalls) and return empty
 // results instead of an unhandled rejection that bubbles to Sentry as noise.
-const searchClient = _algoliaAppId && _algoliaApiKey
-  ? (() => {
-      const client = algoliasearch(_algoliaAppId, _algoliaApiKey);
-      return {
-        ...client,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        search: async (requests: any) => {
-          try {
-            return await client.search(requests);
-          } catch {
-            const count = Array.isArray(requests) ? requests.length : 1;
-            return {
-              results: Array.from({ length: count }, () => ({
-                hits: [], nbHits: 0, page: 0, nbPages: 0,
-                hitsPerPage: 20, processingTimeMS: 0, query: '', params: '',
-                exhaustiveNbHits: true,
-              })),
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any;
-          }
-        },
-      };
-    })()
-  : null;
+const searchClient =
+  _algoliaAppId && _algoliaApiKey
+    ? (() => {
+        const client = algoliasearch(_algoliaAppId, _algoliaApiKey);
+        return {
+          ...client,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          search: async (requests: any) => {
+            try {
+              return await client.search(requests);
+            } catch {
+              const count = Array.isArray(requests) ? requests.length : 1;
+              return {
+                results: Array.from({ length: count }, () => ({
+                  hits: [],
+                  nbHits: 0,
+                  page: 0,
+                  nbPages: 0,
+                  hitsPerPage: 20,
+                  processingTimeMS: 0,
+                  query: '',
+                  params: '',
+                  exhaustiveNbHits: true,
+                })),
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              } as any;
+            }
+          },
+        };
+      })()
+    : null;
 
 interface ArticleHitFields {
   title: string;
@@ -67,7 +74,7 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
     : null;
 
   return (
-    <article className='border border-border hover:border-untele flex gap-4 p-4 transition-colors duration-200'>
+    <article className='flex gap-4 border border-border p-4 transition-colors duration-200 hover:border-untele'>
       {hit.imageUrl && (
         <Link
           href={'/articles/' + hit.objectID}
@@ -76,12 +83,17 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
           tabIndex={-1}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={hit.imageUrl} alt={hit.title} className='h-20 w-28 object-cover' loading='lazy' />
+          <img
+            src={hit.imageUrl}
+            alt={hit.title}
+            className='h-20 w-28 object-cover'
+            loading='lazy'
+          />
         </Link>
       )}
       <div className='min-w-0 flex-1'>
         <Link href={'/articles/' + hit.objectID} className='group block'>
-          <h3 className='group-hover:text-untele text-sm font-bold leading-snug tracking-wide transition-colors duration-150 sm:text-base'>
+          <h3 className='text-sm font-bold leading-snug tracking-wide transition-colors duration-150 group-hover:text-untele sm:text-base'>
             <Highlight
               attribute='title'
               hit={hit}
@@ -90,7 +102,7 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
           </h3>
         </Link>
         {hit.description && (
-          <p className='text-muted-foreground mt-1 line-clamp-2 text-xs leading-relaxed'>
+          <p className='mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground'>
             <Highlight
               attribute='description'
               hit={hit}
@@ -98,10 +110,10 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
             />
           </p>
         )}
-        <div className='text-muted-foreground mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-widest'>
+        <div className='mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-widest text-muted-foreground'>
           {hit.author && <span>{hit.author}</span>}
           {hit.categories?.[0] && (
-            <span className='text-untele font-bold'>{hit.categories[0]}</span>
+            <span className='font-bold text-untele'>{hit.categories[0]}</span>
           )}
           {date && <span>{date}</span>}
         </div>
@@ -115,9 +127,9 @@ function NoResults() {
   if (!indexUiState.query) return null;
   return (
     <div className='border border-border px-6 py-12 text-center'>
-      <p className='text-muted-foreground text-sm uppercase tracking-widest'>
+      <p className='text-sm uppercase tracking-widest text-muted-foreground'>
         No results for{' '}
-        <span className='text-foreground font-bold'>&ldquo;{indexUiState.query}&rdquo;</span>
+        <span className='font-bold text-foreground'>&ldquo;{indexUiState.query}&rdquo;</span>
       </p>
     </div>
   );
@@ -135,7 +147,8 @@ function RefinementSection({ attribute, label }: { attribute: string; label: str
           item: 'flex items-center gap-2 cursor-pointer group',
           selectedItem: 'font-bold',
           checkbox: 'accent-untele h-3 w-3 cursor-pointer rounded-none border border-border',
-          label: 'cursor-pointer group-hover:text-untele transition-colors tracking-wide uppercase',
+          label:
+            'cursor-pointer group-hover:text-untele transition-colors tracking-wide uppercase',
           count: 'ml-auto text-[10px] text-muted-foreground',
         }}
       />
@@ -149,7 +162,9 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
   if (!searchClient) {
     return (
       <div className='border border-border px-6 py-12 text-center'>
-        <p className='text-muted-foreground text-sm uppercase tracking-widest'>Search unavailable</p>
+        <p className='text-sm uppercase tracking-widest text-muted-foreground'>
+          Search unavailable
+        </p>
       </div>
     );
   }
@@ -195,7 +210,7 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
       }}
       future={{ preserveSharedStateOnUnmount: true }}
     >
-      <div className='bg-untele mb-6 flex items-center gap-3 px-4 py-3'>
+      <div className='mb-6 flex items-center gap-3 bg-untele px-4 py-3'>
         <Search className='h-4 w-4 text-white' aria-hidden='true' />
         <h1 className='text-xs font-black uppercase tracking-widest text-white'>Search</h1>
       </div>
@@ -226,9 +241,11 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
         </button>
       </div>
       <div className='flex flex-col gap-8 sm:flex-row sm:items-start'>
-        <aside className={'w-full shrink-0 sm:block sm:w-52 ' + (filtersOpen ? 'block' : 'hidden')}>
+        <aside
+          className={'w-full shrink-0 sm:block sm:w-52 ' + (filtersOpen ? 'block' : 'hidden')}
+        >
           <div className='border border-border p-4'>
-            <div className='bg-untele mb-4 px-2 py-1'>
+            <div className='mb-4 bg-untele px-2 py-1'>
               <p className='text-xs font-black uppercase tracking-widest text-white'>Filters</p>
             </div>
             <div className='space-y-6'>
@@ -240,7 +257,7 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
         </aside>
         <main className='min-w-0 flex-1'>
           <NoResults />
-          <div className='divide-border divide-y'>
+          <div className='divide-y divide-border'>
             <Hits<ArticleHitFields>
               hitComponent={ArticleHitCard}
               classNames={{ root: '', list: 'space-y-0', item: '' }}

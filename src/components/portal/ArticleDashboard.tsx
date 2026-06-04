@@ -182,7 +182,11 @@ function StatusBadge({ article }: { article: PortalArticle }) {
 // Main component
 // ---------------------------------------------------------------------------
 
-export default function ArticleDashboard({ articles, isEditorPlus, currentSanityAuthorId }: Props) {
+export default function ArticleDashboard({
+  articles,
+  isEditorPlus,
+  currentSanityAuthorId,
+}: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -213,8 +217,10 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
   // ---------------------------------------------------------------------------
   const authorScoped = useMemo(() => {
     if (!isEditorPlus || authorFilter === 'all') return articles;
-    if (authorFilter === 'mine') return articles.filter((a) => a.authorId === currentSanityAuthorId);
-    if (authorFilter === 'reviewed') return articles.filter((a) => a.reviewedById === currentSanityAuthorId);
+    if (authorFilter === 'mine')
+      return articles.filter((a) => a.authorId === currentSanityAuthorId);
+    if (authorFilter === 'reviewed')
+      return articles.filter((a) => a.reviewedById === currentSanityAuthorId);
     return articles.filter((a) => a.authorId !== currentSanityAuthorId);
   }, [articles, isEditorPlus, authorFilter, currentSanityAuthorId]);
 
@@ -227,7 +233,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
       review: authorScoped.filter(isInReview).length,
       published: authorScoped.filter(isPublished).length,
     }),
-    [authorScoped],
+    [authorScoped]
   );
 
   // ---------------------------------------------------------------------------
@@ -235,7 +241,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
   // ---------------------------------------------------------------------------
   const filtered = useMemo(() => {
     let list = authorScoped.filter(
-      activeTab === 'drafts' ? isDraft : activeTab === 'review' ? isInReview : isPublished,
+      activeTab === 'drafts' ? isDraft : activeTab === 'review' ? isInReview : isPublished
     );
 
     if (search.trim()) {
@@ -244,7 +250,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
         (a) =>
           a.title?.toLowerCase().includes(q) ||
           a.tags?.some((t) => t.toLowerCase().includes(q)) ||
-          a.categories?.some((c) => c.title?.toLowerCase().includes(q)),
+          a.categories?.some((c) => c.title?.toLowerCase().includes(q))
       );
     }
 
@@ -265,11 +271,11 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
     const approvingRequest = !!deleteTarget.deletionRequest;
     setDeleteTarget(null);
     startTransition(async () => {
-      const result = approvingRequest
-        ? await approveArticleDeletion(id)
-        : await deleteArticle(id);
+      const result = approvingRequest ? await approveArticleDeletion(id) : await deleteArticle(id);
       if (result.success) {
-        toast.success(approvingRequest ? 'Removal approved — article deleted.' : 'Article deleted.');
+        toast.success(
+          approvingRequest ? 'Removal approved — article deleted.' : 'Article deleted.'
+        );
         router.refresh();
       } else {
         toast.error(result.error);
@@ -311,7 +317,11 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
     const id = originalId(retractionTarget);
     const data = { ...retractionData };
     setRetractionTarget(null);
-    setRetractionData({ issuedAt: new Date().toISOString().slice(0, 16), summary: '', detail: '' });
+    setRetractionData({
+      issuedAt: new Date().toISOString().slice(0, 16),
+      summary: '',
+      detail: '',
+    });
     startTransition(async () => {
       const result = await retractArticle(id, data);
       if (result.success) {
@@ -329,7 +339,9 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
   if (articles.length === 0) {
     return (
       <div className='flex flex-col items-center justify-center py-24 text-center'>
-        <p className='mb-2 text-lg font-bold text-slate-700 dark:text-slate-300'>No articles yet</p>
+        <p className='mb-2 text-lg font-bold text-slate-700 dark:text-slate-300'>
+          No articles yet
+        </p>
         <p className='mb-6 text-sm text-slate-500'>Ready to write your first story?</p>
         <Link
           href='/portal/articles/new'
@@ -350,13 +362,15 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
   return (
     <div>
       {/* ── Warning: editor has no linked author profile ─────────────────── */}
-      {isEditorPlus && (authorFilter === 'mine' || authorFilter === 'reviewed') && !currentSanityAuthorId && (
-        <div className='mb-4 border border-yellow-300 bg-yellow-50 px-4 py-3 text-sm text-yellow-800 dark:border-yellow-700/50 dark:bg-yellow-900/20 dark:text-yellow-300'>
-          <strong>Author profile not linked.</strong> Your Clerk account isn&apos;t connected to a
-          Sanity author document, so this filter can&apos;t resolve your identity. Ask an admin to
-          link your account via the Author management panel.
-        </div>
-      )}
+      {isEditorPlus &&
+        (authorFilter === 'mine' || authorFilter === 'reviewed') &&
+        !currentSanityAuthorId && (
+          <div className='mb-4 border border-yellow-300 bg-yellow-50 px-4 py-3 text-sm text-yellow-800 dark:border-yellow-700/50 dark:bg-yellow-900/20 dark:text-yellow-300'>
+            <strong>Author profile not linked.</strong> Your Clerk account isn&apos;t connected to
+            a Sanity author document, so this filter can&apos;t resolve your identity. Ask an admin
+            to link your account via the Author management panel.
+          </div>
+        )}
 
       {/* ── Tabs ─────────────────────────────────────────────────────────── */}
       <div className='mb-6 flex border-b border-slate-200 dark:border-slate-800'>
@@ -366,7 +380,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
             type='button'
             onClick={() => setActiveTab(tab.key)}
             className={[
-              'flex items-center gap-1.5 border-b-2 px-5 py-2.5 text-sm font-semibold -mb-px transition-colors',
+              '-mb-px flex items-center gap-1.5 border-b-2 px-5 py-2.5 text-sm font-semibold transition-colors',
               activeTab === tab.key
                 ? 'border-untele text-untele'
                 : 'border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300',
@@ -400,13 +414,13 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
         {isEditorPlus && (
           <div className='flex items-center gap-1 rounded border border-slate-200 p-0.5 dark:border-slate-700'>
             {(
-            [
-              { key: 'all', label: 'All' },
-              { key: 'mine', label: 'Mine' },
-              { key: 'reviewed', label: 'Reviewed' },
-              { key: 'others', label: 'Others' },
-            ] as { key: AuthorFilter; label: string }[]
-          ).map(({ key, label }) => (
+              [
+                { key: 'all', label: 'All' },
+                { key: 'mine', label: 'Mine' },
+                { key: 'reviewed', label: 'Reviewed' },
+                { key: 'others', label: 'Others' },
+              ] as { key: AuthorFilter; label: string }[]
+            ).map(({ key, label }) => (
               <button
                 key={key}
                 type='button'
@@ -651,9 +665,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
               <Input
                 type='datetime-local'
                 value={retractionData.issuedAt}
-                onChange={(e) =>
-                  setRetractionData((d) => ({ ...d, issuedAt: e.target.value }))
-                }
+                onChange={(e) => setRetractionData((d) => ({ ...d, issuedAt: e.target.value }))}
               />
             </div>
             <div>
@@ -665,9 +677,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
               </Label>
               <Input
                 value={retractionData.summary}
-                onChange={(e) =>
-                  setRetractionData((d) => ({ ...d, summary: e.target.value }))
-                }
+                onChange={(e) => setRetractionData((d) => ({ ...d, summary: e.target.value }))}
                 maxLength={120}
                 placeholder='e.g. "Retracted due to inaccurate sourcing"'
               />
@@ -679,9 +689,7 @@ export default function ArticleDashboard({ articles, isEditorPlus, currentSanity
               <Textarea
                 rows={4}
                 value={retractionData.detail}
-                onChange={(e) =>
-                  setRetractionData((d) => ({ ...d, detail: e.target.value }))
-                }
+                onChange={(e) => setRetractionData((d) => ({ ...d, detail: e.target.value }))}
                 placeholder='Explain what was inaccurate or misleading and why the article is being retracted…'
               />
             </div>
@@ -736,7 +744,11 @@ function ArticleTableRow({
   isEditorPlus,
   currentSanityAuthorId,
   ...handlers
-}: { article: PortalArticle; isEditorPlus: boolean; currentSanityAuthorId?: string } & ActionHandlers) {
+}: {
+  article: PortalArticle;
+  isEditorPlus: boolean;
+  currentSanityAuthorId?: string;
+} & ActionHandlers) {
   return (
     <TableRow>
       <TableCell className='max-w-xs'>
@@ -786,7 +798,11 @@ function ArticleCard({
   isEditorPlus,
   currentSanityAuthorId,
   ...handlers
-}: { article: PortalArticle; isEditorPlus: boolean; currentSanityAuthorId?: string } & ActionHandlers) {
+}: {
+  article: PortalArticle;
+  isEditorPlus: boolean;
+  currentSanityAuthorId?: string;
+} & ActionHandlers) {
   const imageUrl = article.mainImage?.asset?.url;
 
   return (
@@ -871,7 +887,11 @@ function ArticleActions({
   onDenyRemoval,
   onRetract,
   isPending,
-}: { article: PortalArticle; isEditorPlus: boolean; currentSanityAuthorId?: string } & ActionHandlers) {
+}: {
+  article: PortalArticle;
+  isEditorPlus: boolean;
+  currentSanityAuthorId?: string;
+} & ActionHandlers) {
   const isOwn = article.authorId === currentSanityAuthorId;
   const canRequestRemoval = !isEditorPlus && isOwn && !article.deletionRequest;
 
@@ -924,10 +944,7 @@ function ArticleActions({
                 {isPublished(article) && article.correctionType !== 'retraction' && (
                   <DropdownMenuItem onClick={onRetract}>Retract article</DropdownMenuItem>
                 )}
-                <DropdownMenuItem
-                  className='text-red-600 focus:text-red-600'
-                  onClick={onDelete}
-                >
+                <DropdownMenuItem className='text-red-600 focus:text-red-600' onClick={onDelete}>
                   Delete
                 </DropdownMenuItem>
               </>

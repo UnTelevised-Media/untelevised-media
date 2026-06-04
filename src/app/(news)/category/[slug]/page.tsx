@@ -7,7 +7,11 @@ import { TrendingUp } from 'lucide-react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { queryArticleByCategory, queryCategoryBySlug, queryMostReadByCategory } from '@/lib/sanity/lib/queries';
+import {
+  queryArticleByCategory,
+  queryCategoryBySlug,
+  queryMostReadByCategory,
+} from '@/lib/sanity/lib/queries';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildCategoryMetadata } from '@/util/metadata';
@@ -46,7 +50,11 @@ interface MostReadArticle {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { data: category } = await sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }) as { data: Category | null };
+  const { data: category } = (await sanityFetch({
+    query: queryCategoryBySlug,
+    params: { slug },
+    tags: ['category'],
+  })) as { data: Category | null };
   if (!category) return { title: 'Category Not Found' };
   return buildCategoryMetadata(category, slug);
 }
@@ -54,8 +62,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
   const [{ data: category }, { data: mostRead }, articles] = await Promise.all([
-    sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }) as Promise<{ data: Category | null }>,
-    sanityFetch({ query: queryMostReadByCategory, params: { categorySlug: slug }, tags: ['article', `category:${slug}`] }) as Promise<{ data: MostReadArticle[] }>,
+    sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }) as Promise<{
+      data: Category | null;
+    }>,
+    sanityFetch({
+      query: queryMostReadByCategory,
+      params: { categorySlug: slug },
+      tags: ['article', `category:${slug}`],
+    }) as Promise<{ data: MostReadArticle[] }>,
     getArticlesByCategory(slug),
   ]);
 
@@ -106,11 +120,10 @@ export default async function CategoryPage({ params }: Props) {
           style={{ background: `linear-gradient(135deg, ${accentColor}25 0%, transparent 65%)` }}
         />
         <div className='relative mx-auto max-w-[1400px] px-4 py-16 md:py-20'>
-          <div
-            className='mb-4 inline-block px-3 py-1'
-            style={{ backgroundColor: accentColor }}
-          >
-            <span className='text-xs font-black uppercase tracking-widest text-white'>Coverage</span>
+          <div className='mb-4 inline-block px-3 py-1' style={{ backgroundColor: accentColor }}>
+            <span className='text-xs font-black uppercase tracking-widest text-white'>
+              Coverage
+            </span>
           </div>
           <h1
             className='mb-4 border-l-4 pl-4 text-4xl font-black uppercase tracking-widest text-slate-900 dark:text-white md:text-6xl'
@@ -135,7 +148,6 @@ export default async function CategoryPage({ params }: Props) {
       {/* MAIN CONTENT */}
       <div className='mx-auto max-w-[1400px] px-4 py-12'>
         <div className='grid grid-cols-1 gap-12 lg:grid-cols-4'>
-
           {/* ARTICLE GRID — 3/4 width */}
           <div className='lg:col-span-3'>
             <div className='mb-8 flex items-center space-x-4'>
@@ -171,7 +183,10 @@ export default async function CategoryPage({ params }: Props) {
                             {...(urlForImage(article.mainImage)
                               ? {
                                   placeholder: 'blur' as const,
-                                  blurDataURL: urlForImage(article.mainImage)!.width(20).blur(10).url(),
+                                  blurDataURL: urlForImage(article.mainImage)!
+                                    .width(20)
+                                    .blur(10)
+                                    .url(),
                                 }
                               : {})}
                           />
@@ -225,7 +240,6 @@ export default async function CategoryPage({ params }: Props) {
 
           {/* SIDEBAR — 1/4 width */}
           <div className='space-y-8 lg:pt-[68px]'>
-
             {/* Most Read in this Category */}
             {mostRead && mostRead.length > 0 && (
               <div>
@@ -245,7 +259,7 @@ export default async function CategoryPage({ params }: Props) {
                         href={`/articles/${article.slug?.current}`}
                         className='group flex items-start gap-3 p-3 transition-colors hover:bg-slate-50 dark:hover:bg-slate-900'
                       >
-                        <span className='w-7 shrink-0 text-2xl font-black leading-none tabular-nums text-slate-200 dark:text-slate-700'>
+                        <span className='w-7 shrink-0 text-2xl font-black tabular-nums leading-none text-slate-200 dark:text-slate-700'>
                           {index + 1}
                         </span>
                         <div className='min-w-0 flex-1'>
@@ -283,7 +297,6 @@ export default async function CategoryPage({ params }: Props) {
             <div className='border border-slate-200 p-6 dark:border-slate-800'>
               <NewsletterSignup list='news' source='category' fieldsLayout='column' />
             </div>
-
           </div>
         </div>
       </div>
@@ -308,6 +321,8 @@ async function getArticlesByCategory(slug: string): Promise<CategoryArticle[]> {
 export async function generateStaticParams() {
   const queryCategoryStaticParams = groq`*[_type=='category'] { slug }`;
   const slugs: Category[] = await sanityClient.fetch(queryCategoryStaticParams);
-  const slugRoutes = slugs ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current) : [];
+  const slugRoutes = slugs
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    : [];
   return slugRoutes.map((slug) => ({ slug }));
 }

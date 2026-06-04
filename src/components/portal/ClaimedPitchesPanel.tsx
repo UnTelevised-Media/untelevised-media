@@ -30,10 +30,11 @@ export function ClaimedPitchesPanel({ pitches, currentSanityAuthorId, isEditorPl
 
     return [...base].sort((a, b) => {
       const statusDiff =
-        (STATUS_ORDER[a.status ?? 'claimed'] ?? 1) -
-        (STATUS_ORDER[b.status ?? 'claimed'] ?? 1);
+        (STATUS_ORDER[a.status ?? 'claimed'] ?? 1) - (STATUS_ORDER[b.status ?? 'claimed'] ?? 1);
       if (statusDiff !== 0) return statusDiff;
-      return (URGENCY_ORDER[a.urgency ?? 'medium'] ?? 2) - (URGENCY_ORDER[b.urgency ?? 'medium'] ?? 2);
+      return (
+        (URGENCY_ORDER[a.urgency ?? 'medium'] ?? 2) - (URGENCY_ORDER[b.urgency ?? 'medium'] ?? 2)
+      );
     });
   }, [pitches, isEditorPlus, authorFilter, currentSanityAuthorId]);
 

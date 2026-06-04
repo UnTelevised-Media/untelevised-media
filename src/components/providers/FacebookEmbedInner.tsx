@@ -6,12 +6,7 @@ export default function FacebookEmbedInner({ postUrl }: { postUrl: string }) {
     <div className='mx-auto my-8 flex max-w-full justify-center'>
       <div>
         <div id='fb-root'></div>
-        <div
-          className='fb-post'
-          data-href={postUrl}
-          data-width='500'
-          data-show-text='true'
-        >
+        <div className='fb-post' data-href={postUrl} data-width='500' data-show-text='true'>
           <blockquote cite={postUrl} className='fb-xfbml-parse-ignore'>
             <Link
               href={postUrl}

@@ -18,10 +18,10 @@ export interface PayoutRow {
 interface Props {
   payouts: PayoutRow[];
   isAdmin: boolean;
-  accruing?: number;       // cents accruing this period (net after Stripe)
+  accruing?: number; // cents accruing this period (net after Stripe)
   nextPayoutDate?: string; // formatted date string, e.g. "May 16, 2026"
-  periodStart?: string;    // e.g. "2026-05-01"
-  periodEnd?: string;      // e.g. "2026-05-15"
+  periodStart?: string; // e.g. "2026-05-01"
+  periodEnd?: string; // e.g. "2026-05-15"
 }
 
 function centsToUsd(cents: number) {
@@ -84,11 +84,11 @@ export default function PendingPayoutsWidget({
               </div>
             </div>
           ) : (
-          <div className='flex items-center justify-center px-4 py-8'>
-            <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
-              No pending payouts
-            </p>
-          </div>
+            <div className='flex items-center justify-center px-4 py-8'>
+              <p className='text-xs font-bold uppercase tracking-widest text-slate-400'>
+                No pending payouts
+              </p>
+            </div>
           )
         ) : (
           <ul className='divide-y divide-slate-100 dark:divide-slate-800'>
@@ -103,15 +103,11 @@ export default function PendingPayoutsWidget({
                       {p.author_clerk_id.slice(-8)}
                     </p>
                   )}
-                  {p.notes && (
-                    <p className='truncate text-[10px] text-slate-400'>{p.notes}</p>
-                  )}
+                  {p.notes && <p className='truncate text-[10px] text-slate-400'>{p.notes}</p>}
                 </div>
                 <div className='shrink-0 text-right'>
                   <p className='text-xs font-black text-untele'>{centsToUsd(p.net_cents)}</p>
-                  <p className='text-[10px] text-slate-400'>
-                    gross {centsToUsd(p.gross_cents)}
-                  </p>
+                  <p className='text-[10px] text-slate-400'>gross {centsToUsd(p.gross_cents)}</p>
                 </div>
               </li>
             ))}

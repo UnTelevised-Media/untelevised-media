@@ -214,7 +214,7 @@ export default function AuthorProfileForm({ profile }: Props) {
 
   // Avatar state
   const [avatarPreview, setAvatarPreview] = useState<string | undefined>(
-    profile.image?.asset?.url,
+    profile.image?.asset?.url
   );
   const [newImageRef, setNewImageRef] = useState<string | undefined>();
   const [imageAlt, setImageAlt] = useState(profile.image?.alt ?? '');
@@ -340,7 +340,10 @@ export default function AuthorProfileForm({ profile }: Props) {
         </h2>
         <div className='grid gap-4 sm:grid-cols-2'>
           <div>
-            <Label htmlFor='name' className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+            <Label
+              htmlFor='name'
+              className='mb-1 block text-xs font-bold uppercase tracking-widest'
+            >
               Display name <span className='text-untele'>*</span>
             </Label>
             <Input id='name' value={name} onChange={(e) => setName(e.target.value)} />
@@ -454,13 +457,55 @@ export default function AuthorProfileForm({ profile }: Props) {
         </h2>
         <div className='grid gap-4 sm:grid-cols-2'>
           {[
-            { id: 'twitter', label: 'X / Twitter', value: twitter, set: setTwitter, placeholder: '@handle' },
-            { id: 'instagram', label: 'Instagram', value: instagram, set: setInstagram, placeholder: '@handle' },
-            { id: 'tiktok', label: 'TikTok', value: tiktok, set: setTiktok, placeholder: '@handle' },
-            { id: 'facebook', label: 'Facebook', value: facebook, set: setFacebook, placeholder: 'Profile URL or username' },
-            { id: 'youtube', label: 'YouTube', value: youtube, set: setYoutube, placeholder: 'Channel URL' },
-            { id: 'linkedin', label: 'LinkedIn', value: linkedin, set: setLinkedin, placeholder: 'Profile URL' },
-            { id: 'website', label: 'Website', value: website, set: setWebsite, placeholder: 'https://yoursite.com' },
+            {
+              id: 'twitter',
+              label: 'X / Twitter',
+              value: twitter,
+              set: setTwitter,
+              placeholder: '@handle',
+            },
+            {
+              id: 'instagram',
+              label: 'Instagram',
+              value: instagram,
+              set: setInstagram,
+              placeholder: '@handle',
+            },
+            {
+              id: 'tiktok',
+              label: 'TikTok',
+              value: tiktok,
+              set: setTiktok,
+              placeholder: '@handle',
+            },
+            {
+              id: 'facebook',
+              label: 'Facebook',
+              value: facebook,
+              set: setFacebook,
+              placeholder: 'Profile URL or username',
+            },
+            {
+              id: 'youtube',
+              label: 'YouTube',
+              value: youtube,
+              set: setYoutube,
+              placeholder: 'Channel URL',
+            },
+            {
+              id: 'linkedin',
+              label: 'LinkedIn',
+              value: linkedin,
+              set: setLinkedin,
+              placeholder: 'Profile URL',
+            },
+            {
+              id: 'website',
+              label: 'Website',
+              value: website,
+              set: setWebsite,
+              placeholder: 'https://yoursite.com',
+            },
           ].map(({ id, label, value, set, placeholder }) => (
             <div key={id}>
               <Label

@@ -5,7 +5,10 @@
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { portalFetch } from '@/lib/portal/live';
-import { queryPortalNewsletterSubscribers, queryPortalBookstoreSubscribers } from '@/lib/portal/queries';
+import {
+  queryPortalNewsletterSubscribers,
+  queryPortalBookstoreSubscribers,
+} from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { SubscribersList, type Subscriber } from '@/components/portal/SubscribersList';
 import { redirect } from 'next/navigation';
@@ -29,7 +32,6 @@ export default async function SubscribersPage() {
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
       <PortalNav isEditorPlus={isEditorPlus} />
       <main className='mx-auto max-w-7xl px-4 py-8 sm:px-6'>
-
         <div className='mb-10'>
           <h1 className='text-2xl font-black uppercase tracking-widest text-slate-900 dark:text-slate-100'>
             Subscribers
@@ -62,12 +64,12 @@ export default async function SubscribersPage() {
               Bookstore Newsletter
             </h2>
             <p className='mt-0.5 text-sm text-slate-500 dark:text-slate-400'>
-              {bookstoreSubscribers.length} subscriber{bookstoreSubscribers.length !== 1 ? 's' : ''}
+              {bookstoreSubscribers.length} subscriber
+              {bookstoreSubscribers.length !== 1 ? 's' : ''}
             </p>
           </div>
           <SubscribersList subscribers={bookstoreSubscribers} />
         </section>
-
       </main>
     </div>
   );

@@ -17,7 +17,7 @@ All data fetching goes through `sanityFetch()` — a wrapper around `next-sanity
 // Pattern used throughout the app
 const articles = await sanityFetch({
   query: queryAllArticles,
-  tags: ['article'],        // ISR revalidation tag
+  tags: ['article'], // ISR revalidation tag
 });
 ```
 
@@ -27,14 +27,14 @@ Revalidation is triggered via Sanity webhooks → `revalidateTag()` on the Next.
 
 ## GROQ Queries (src/lib/sanity/lib/queries.ts)
 
-| Export | Type | Description |
-|--------|------|-------------|
-| `queryLiveEvents` | `liveEvent[]` | Active events (`isCurrentEvent == true`) |
-| `queryPastEvents` | `liveEvent[]` | Historical events |
-| `queryPastEventsWithPagination` | `liveEvent[]` | Paginated past events |
-| `queryAllArticles` | `article[]` | All articles, ordered by date |
-| `queryArticleBySlug` | `article` | Single article by slug |
-| `queryCategories` | `category[]` | All categories |
+| Export                          | Type          | Description                              |
+| ------------------------------- | ------------- | ---------------------------------------- |
+| `queryLiveEvents`               | `liveEvent[]` | Active events (`isCurrentEvent == true`) |
+| `queryPastEvents`               | `liveEvent[]` | Historical events                        |
+| `queryPastEventsWithPagination` | `liveEvent[]` | Paginated past events                    |
+| `queryAllArticles`              | `article[]`   | All articles, ordered by date            |
+| `queryArticleBySlug`            | `article`     | Single article by slug                   |
+| `queryCategories`               | `category[]`  | All categories                           |
 
 All queries use `->` to dereference references inline (no client-side joins needed).
 
@@ -43,6 +43,7 @@ All queries use `->` to dereference references inline (no client-side joins need
 ## Static Generation
 
 **`generateStaticParams()`** is implemented on:
+
 - `/articles/[slug]` — generates all article slugs at build time
 - (Should be on) `/live-event/[slug]`, `/author/[slug]`, `/category/[slug]`, etc.
 
@@ -68,7 +69,7 @@ All queries use `->` to dereference references inline (no client-side joins need
 ## Content Schema Inventory
 
 | Schema | Route | Key Fields |
-|--------|-------|-----------|
+| --- | --- | --- |
 | `article` | `/articles/[slug]` | title, slug, description, author→, categories[], body, publishedAt, mainImage, keywords |
 | `author` | `/author/[slug]` | name, slug, bio, image, title (job), social handles |
 | `liveEvent` | `/live-event/[slug]` | title, slug, eventDate, isCurrentEvent, keyEvent[], relatedArticles[] |
