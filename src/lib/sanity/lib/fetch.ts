@@ -33,7 +33,7 @@ async function fetchISR<QueryResponse>({
   // Use draft perspective and token in draft mode — no ISR caching in preview
   if (isDraftMode) {
     return sanityClient.withConfig({ token: readToken }).fetch<QueryResponse>(query, params, {
-      perspective: 'previewDrafts',
+      perspective: 'drafts',
       useCdn: false,
       next: { tags },
     });
