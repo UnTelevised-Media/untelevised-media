@@ -49,3 +49,6 @@ next-env.d.ts
 
 # Vercel log exports
 *-log-export-*.json
+
+.vercel
+/.env.prod
