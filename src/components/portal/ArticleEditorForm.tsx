@@ -170,13 +170,18 @@ export default function ArticleEditorForm({
   // the editor's internal replaceBlocks effect.
   const [initialEditorContent] = useState<object[]>(() => {
     if (initialData?.body && Array.isArray(initialData.body) && initialData.body.length > 0) {
-      return portableTextToBlockNote(
-        initialData.body as Parameters<typeof portableTextToBlockNote>[0],
-        (ref) =>
-          urlFor({ asset: { _ref: ref } })
-            .width(800)
-            .url()
-      );
+      try {
+        return portableTextToBlockNote(
+          initialData.body as Parameters<typeof portableTextToBlockNote>[0],
+          (ref) =>
+            urlFor({ asset: { _ref: ref } })
+              .width(800)
+              .url()
+        );
+      } catch (error) {
+        console.error('Failed to convert Portable Text to BlockNote:', error);
+        return [];
+      }
     }
     return [];
   });
