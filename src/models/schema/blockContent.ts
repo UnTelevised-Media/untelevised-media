@@ -2,7 +2,7 @@
 
 // src/models/schemas/blockContent.ts
 import { defineType, defineArrayMember, defineField } from 'sanity';
-import { CodeIcon, ImageIcon } from '@sanity/icons';
+import { CodeIcon, ImageIcon, LinkIcon } from '@sanity/icons';
 
 /**
  * This is the schema type for block content used in the blog document type
@@ -208,6 +208,68 @@ export default defineType({
     }),
     defineArrayMember({
       type: 'vimeoEmbed',
+    }),
+    defineArrayMember({
+      name: 'iframeEmbed',
+      title: 'Iframe Embed',
+      type: 'object',
+      icon: LinkIcon,
+      description: 'Embed external content via iframe (video players, maps, etc)',
+      fields: [
+        defineField({
+          name: 'src',
+          title: 'Iframe Source URL',
+          type: 'url',
+          description:
+            'The full URL of the iframe source (e.g., https://abc7chicago.com/video/embed?pid=...)',
+          validation: (Rule: any) => Rule.required().uri({ scheme: ['http', 'https'] }),
+        }),
+        defineField({
+          name: 'width',
+          title: 'Width',
+          type: 'number',
+          description: 'Width in pixels (default: 640)',
+          initialValue: 640,
+        }),
+        defineField({
+          name: 'height',
+          title: 'Height',
+          type: 'number',
+          description: 'Height in pixels (default: 360)',
+          initialValue: 360,
+        }),
+        defineField({
+          name: 'title',
+          title: 'Title/Description',
+          type: 'string',
+          description: 'Accessibility title for the embedded content',
+        }),
+      ],
+      preview: {
+        select: {
+          src: 'src',
+          title: 'title',
+          width: 'width',
+          height: 'height',
+        },
+        prepare({
+          src,
+          title,
+          width,
+          height,
+        }: {
+          src?: string;
+          title?: string;
+          width?: number;
+          height?: number;
+        }) {
+          const displayTitle = title || new URL(src || '').hostname || 'Iframe Embed';
+          return {
+            title: displayTitle,
+            subtitle: `${width ?? 640}x${height ?? 360} - ${src?.substring(0, 40) ?? ''}...`,
+          };
+        },
+      },
     }),
     defineArrayMember({
       name: 'factCheckEmbed',

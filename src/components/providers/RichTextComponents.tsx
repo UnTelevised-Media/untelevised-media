@@ -263,6 +263,30 @@ export const RichTextComponents = {
         </div>
       );
     },
+
+    // ── Custom Iframe Embeds ──────────────────────────────────────────────────
+    iframeEmbed: ({ value }: any) => {
+      const { src, width = 640, height = 360, title } = value;
+      if (!src) return null;
+      const aspectRatio = height / width;
+      return (
+        <div
+          className='my-8 w-full border border-slate-300 dark:border-slate-700'
+          style={{
+            aspectRatio: `${width} / ${height}`,
+          }}
+        >
+          <iframe
+            className='h-full w-full'
+            src={src}
+            title={title || 'Embedded content'}
+            frameBorder='0'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+            allowFullScreen
+          ></iframe>
+        </div>
+      );
+    },
   },
 
   // ── List Renderers ──────────────────────────────────────────────────────────
