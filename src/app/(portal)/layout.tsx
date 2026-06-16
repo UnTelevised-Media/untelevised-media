@@ -4,7 +4,7 @@
 import type { Metadata } from 'next';
 import { requireAnyPortalRole } from '@/lib/auth/roles';
 import { Toaster } from '@/components/ui/sonner';
-import { PortalSanityLive } from '@/lib/portal/fetch';
+import { PortalSanityLive } from '@/lib/portal/live';
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },

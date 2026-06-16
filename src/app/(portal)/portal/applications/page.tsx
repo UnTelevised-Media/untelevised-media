@@ -2,7 +2,7 @@
 // Job applications inbox — editor+ only.
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalClient.fetch } from '@/lib/portal/fetch';
+import { portalFetch } from '@/lib/portal/live';
 import { queryPortalJobApplications } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { ApplicationsTable, type JobApplication } from '@/components/admin/ApplicationsTable';
@@ -48,7 +48,7 @@ export default async function ApplicationsPage() {
   const isEditorPlus = hasRole(role, 'editor');
   if (!isEditorPlus) redirect('/portal/articles');
 
-  const applications = (await portalClient.fetch<JobApplication[]>(queryPortalJobApplications)) ?? [];
+  const applications = (await portalFetch<JobApplication[]>(queryPortalJobApplications)) ?? [];
 
   const counts = applications.reduce(
     (acc: Record<string, number>, app) => {

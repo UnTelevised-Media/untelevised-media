@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalClient.fetch } from '@/lib/portal/fetch';
+import { portalFetch } from '@/lib/portal/live';
 import { queryPortalClaimedPitchById, queryPortalArticlesTitles } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { PitchNotesEditor } from '@/components/portal/PitchNotesEditor';
@@ -74,8 +74,8 @@ export default async function PitchPage({ params }: { params: Promise<{ id: stri
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
   const [pitch, allArticles] = await Promise.all([
-    portalClient.fetch<ClaimedPitch | null>(queryPortalClaimedPitchById, { id }),
-    portalClient.fetch<Array<{ _id: string; title: string; authorId: string }>>(
+    portalFetch<ClaimedPitch | null>(queryPortalClaimedPitchById, { id }),
+    portalFetch<Array<{ _id: string; title: string; authorId: string }>>(
       queryPortalArticlesTitles
     ),
   ]);
