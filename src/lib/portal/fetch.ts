@@ -3,6 +3,7 @@
 // to support draft content preview in the portal.
 import 'server-only';
 
+import type { QueryParams } from '@sanity/client';
 import { createClient } from 'next-sanity';
 import { apiVersion, dataset, projectId } from '@/lib/sanity/env';
 import { readToken } from '@/lib/sanity/lib/tokens';
@@ -23,6 +24,6 @@ export const portalClient = createClient({
  * code that previously used the Live Content API. Uses the regular Sanity
  * API with the drafts perspective instead of expensive vX subscriptions.
  */
-export async function portalFetch<T>(query: string, params?: Record<string, unknown>): Promise<T> {
+export async function portalFetch<T>(query: string, params?: QueryParams): Promise<T> {
   return portalClient.fetch<T>(query, params);
 }
