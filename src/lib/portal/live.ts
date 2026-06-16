@@ -1,6 +1,6 @@
 // src/lib/portal/live.ts
 // Portal-specific Sanity Live setup.
-// Uses previewDrafts perspective + read token so draft articles/pitches are
+// Uses drafts perspective + read token so draft articles/pitches are
 // visible, and defineLive so mutations in Sanity trigger instant RSC re-renders
 // on the dashboard without any polling or manual refresh.
 import { defineLive } from 'next-sanity/live';
@@ -16,7 +16,7 @@ const _portalLiveClient = createClient({
   apiVersion: 'vX',
   useCdn: false,
   token: serverToken ?? undefined,
-  perspective: 'previewDrafts',
+  perspective: 'drafts',
   stega: false,
 });
 
@@ -38,7 +38,7 @@ export async function portalFetch<T>(query: string, params?: Record<string, unkn
   const result = await portalSanityFetch({
     query,
     ...(params ? { params } : {}),
-    perspective: 'previewDrafts',
+    perspective: 'drafts',
   });
   return result.data as T;
 }

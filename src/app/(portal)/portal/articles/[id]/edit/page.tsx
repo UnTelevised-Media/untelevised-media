@@ -40,9 +40,8 @@ type PortalArticleFull = ArticleWriteInput & {
 
 export default async function EditArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const { id: rawId } = await params;
-  // Dashboard links always use the non-prefixed _id (previewDrafts normalises it),
-  // but a newly-created draft redirect may carry "drafts." in the URL — strip it so
-  // the GROQ query works correctly under the previewDrafts perspective.
+  // Newly-created drafts may redirect with "drafts." prefix — strip it so
+  // the GROQ query works correctly under the drafts perspective.
   const id = rawId.replace(/^drafts\./, '');
 
   const { id: clerkUserId, role } = await requireAuthor();
