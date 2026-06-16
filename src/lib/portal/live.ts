@@ -16,7 +16,7 @@ const _portalLiveClient = createClient({
   apiVersion: 'vX',
   useCdn: false,
   token: serverToken ?? undefined,
-  perspective: 'previewDrafts',
+  perspective: 'drafts',
   stega: false,
 });
 

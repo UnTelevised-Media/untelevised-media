@@ -24,7 +24,6 @@ type Category = { _id: string; title: string; slug?: { current: string } };
 type Author = { _id: string; name: string };
 type PortalArticleFull = ArticleWriteInput & {
   _id: string;
-  _originalId?: string;
   authorId: string;
   author?: { _id: string; name: string };
   categories?: Array<{ _id: string; title: string }>;
@@ -75,7 +74,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
           Edit Article
         </h1>
         <ArticleEditorForm
-          articleId={article._originalId ?? id}
+          articleId={id}
           initialData={article}
           categories={categories}
           authors={authors}

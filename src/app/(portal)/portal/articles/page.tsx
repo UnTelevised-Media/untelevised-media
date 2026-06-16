@@ -34,14 +34,14 @@ export default async function PortalArticlesPage() {
     }
   }
 
-  // Under previewDrafts perspective, _id is always the non-prefixed form.
-  // _originalId is the actual Sanity document ID and preserves the "drafts." prefix.
-  const isDraftDoc = (a: PortalArticle) => (a._originalId ?? a._id).startsWith('drafts.');
+  // Under 'drafts' perspective, _id directly contains the draft prefix.
+  // Published: "articles.xyz" | Draft: "drafts.articles.xyz"
+  const isDraftDoc = (a: PortalArticle) => a._id.startsWith('drafts.');
   const publishedCount = articles.filter((a) => !isDraftDoc(a)).length;
   const reviewCount = articles.filter(
     (a) => isDraftDoc(a) && (a.needsReview || !!a.deletionRequest)
   ).length;
-  // Unpublished = draft _originalId + publishedAt set (was previously live, now taken down in Studio)
+  // Unpublished = draft with publishedAt set (was previously live, now taken down in Studio)
   const unpublishedCount = articles.filter(
     (a) => isDraftDoc(a) && !a.needsReview && !a.deletionRequest && !!a.publishedAt
   ).length;

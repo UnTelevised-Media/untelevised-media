@@ -18,5 +18,5 @@ export const writeClient = createClient({
   apiVersion,
   useCdn: false, // mutations always go to the live API
   token: writeToken,
-  perspective: 'previewDrafts', // Show drafts when querying (needed for searchArticles, etc)
+  perspective: 'drafts', // Show drafts when querying (needed for searchArticles, etc)
 });
