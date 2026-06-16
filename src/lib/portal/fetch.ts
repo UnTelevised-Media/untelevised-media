@@ -25,5 +25,8 @@ export const portalClient = createClient({
  * API with the drafts perspective instead of expensive vX subscriptions.
  */
 export async function portalFetch<T>(query: string, params?: QueryParams): Promise<T> {
-  return portalClient.fetch<T>(query, params);
+  if (params) {
+    return portalClient.fetch<T>(query, params);
+  }
+  return portalClient.fetch<T>(query);
 }
