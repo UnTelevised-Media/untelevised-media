@@ -23,6 +23,8 @@ interface TrendingArticle {
 }
 
 // Deduplicated within a single request — both 'card' and 'list' variants share one fetch
+// Cached by Next.js ISR (revalidate: 24h ceiling, or sooner via webhook invalidation)
+// The batched viewCount system prevents viewCount-only mutations from invalidating cache
 const getTrendingArticles = cache(async (): Promise<TrendingArticle[]> => {
   const articles = await sanityFetch<TrendingArticle[]>({
     query: queryMostReadArticles,
