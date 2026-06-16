@@ -1,6 +1,7 @@
+import 'server-only';
+
 import crypto from 'crypto';
 import { getServerClient } from './client';
-import type { Database } from './client';
 
 function hashIP(ip: string): string {
   return crypto.createHash('sha256').update(ip).digest('hex');
