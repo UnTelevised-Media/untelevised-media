@@ -4,7 +4,7 @@
 
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalFetch } from '@/lib/portal/live';
+import { portalClient.fetch } from '@/lib/portal/fetch';
 import {
   queryPortalNewsletterSubscribers,
   queryPortalBookstoreSubscribers,
@@ -24,8 +24,8 @@ export default async function SubscribersPage() {
   if (!isEditorPlus) redirect('/portal/articles');
 
   const [newsSubscribers, bookstoreSubscribers] = await Promise.all([
-    portalFetch<Subscriber[]>(queryPortalNewsletterSubscribers).then((r) => r ?? []),
-    portalFetch<Subscriber[]>(queryPortalBookstoreSubscribers).then((r) => r ?? []),
+    portalClient.fetch<Subscriber[]>(queryPortalNewsletterSubscribers).then((r) => r ?? []),
+    portalClient.fetch<Subscriber[]>(queryPortalBookstoreSubscribers).then((r) => r ?? []),
   ]);
 
   return (

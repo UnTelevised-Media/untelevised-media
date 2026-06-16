@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalFetch } from '@/lib/portal/live';
+import { portalClient } from '@/lib/portal/fetch';
 import {
   queryPortalArticleById,
   queryPortalCategories,
@@ -50,9 +50,9 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
   const [article, categories, authorList] = await Promise.all([
-    portalFetch<PortalArticleFull | null>(queryPortalArticleById, { id }),
-    portalFetch<Category[]>(queryPortalCategories),
-    isEditorPlus ? portalFetch<Author[]>(queryPortalAuthors) : Promise.resolve([]),
+    portalClient.fetch<PortalArticleFull | null>(queryPortalArticleById, { id }),
+    portalClient.fetch<Category[]>(queryPortalCategories),
+    isEditorPlus ? portalClient.fetch<Author[]>(queryPortalAuthors) : Promise.resolve([]),
   ]);
 
   if (!article) notFound();

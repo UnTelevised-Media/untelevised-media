@@ -3,7 +3,7 @@
 
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalFetch } from '@/lib/portal/live';
+import { portalClient.fetch } from '@/lib/portal/fetch';
 import { queryPortalAllReviews } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import ReviewsAdmin, { type PortalReview } from '@/components/portal/ReviewsAdmin';
@@ -19,7 +19,7 @@ export default async function ReviewsPage() {
   const isEditorPlus = hasRole(role, 'editor');
   if (!isEditorPlus) redirect('/portal/articles');
 
-  const reviews = (await portalFetch<PortalReview[]>(queryPortalAllReviews)) ?? [];
+  const reviews = (await portalClient.fetch<PortalReview[]>(queryPortalAllReviews)) ?? [];
 
   const pending = reviews.filter((r) => (r.status ?? 'pending') === 'pending').length;
   const needsRevision = reviews.filter((r) => r.status === 'needs_revision').length;

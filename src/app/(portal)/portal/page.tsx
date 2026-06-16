@@ -3,7 +3,7 @@
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalSanityFetch } from '@/lib/portal/live';
+import { portalSanityFetch } from '@/lib/portal/fetch';
 import {
   queryPortalArticlesByAuthor,
   queryPortalAllArticles,
