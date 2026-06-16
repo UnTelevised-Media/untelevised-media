@@ -297,7 +297,7 @@ export default defineType({
       title: 'View Count',
       type: 'number',
       description:
-        'Populated by the /api/view endpoint and GA import script. Can be edited manually to correct imported values.',
+        'Populated by daily cron sync from Supabase view tracking (/api/cron/sync-view-counts) and GA import script. Can be edited manually to correct imported values.',
       initialValue: 0,
       validation: (Rule) => Rule.min(0).integer(),
       group: ['analytics', 'all'],
