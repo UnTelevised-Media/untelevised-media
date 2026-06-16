@@ -1,6 +1,6 @@
 // src/lib/portal/live.ts
 // Portal-specific Sanity Live setup.
-// Uses drafts perspective + read token so draft articles/pitches are
+// Uses previewDrafts perspective + read token so draft articles/pitches are
 // visible, and defineLive so mutations in Sanity trigger instant RSC re-renders
 // on the dashboard without any polling or manual refresh.
 import { defineLive } from 'next-sanity/live';
@@ -9,14 +9,14 @@ import { apiVersion, dataset, projectId } from '@/lib/sanity/env';
 
 const serverToken = process.env.SANITY_API_READ_TOKEN;
 
-// Live Content API requires a stable API version that supports the drafts perspective.
+// Live Content API requires the experimental vX API version.
 const _portalLiveClient = createClient({
   projectId,
   dataset,
-  apiVersion: '2025-06-04',
+  apiVersion: 'vX',
   useCdn: false,
   token: serverToken ?? undefined,
-  perspective: 'drafts',
+  perspective: 'previewDrafts',
   stega: false,
 });
 
