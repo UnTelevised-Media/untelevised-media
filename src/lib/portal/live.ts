@@ -38,7 +38,6 @@ export async function portalFetch<T>(query: string, params?: Record<string, unkn
   const result = await portalSanityFetch({
     query,
     ...(params ? { params } : {}),
-    perspective: 'drafts',
   });
   return result.data as T;
 }
