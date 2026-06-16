@@ -16,10 +16,11 @@ export default function ViewPing({ slug }: ViewPingProps) {
 
     sessionStorage.setItem(storageKey, '1');
 
-    fetch('/api/view', {
+    fetch('/api/view-queue', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ slug }),
+      keepalive: true,
     }).catch(() => {
       // Silently fail — view tracking is non-critical
     });
