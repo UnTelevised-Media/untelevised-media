@@ -20,12 +20,14 @@ export const portalClient = createClient({
 });
 
 /**
- * Convenience wrapper for portalClient.fetch() for compatibility with
- * code that previously used the Live Content API. Uses the regular Sanity
- * API with the drafts perspective instead of expensive vX subscriptions.
+ * Convenience wrapper for portalClient.fetch() that uses previewDrafts perspective
+ * to show both published and draft articles. Uses the regular Sanity API (stable version)
+ * instead of the experimental Live Content API for better performance.
  */
 export async function portalFetch<T>(query: string, params?: QueryParams): Promise<T> {
-  if (params) {
+  // Only pass params if they exist and contain at least one key
+  // Passing undefined or empty params object can cause issues with Sanity client
+  if (params && Object.keys(params).length > 0) {
     return portalClient.fetch<T>(query, params);
   }
   return portalClient.fetch<T>(query);
