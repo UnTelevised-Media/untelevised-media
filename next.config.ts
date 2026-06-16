@@ -32,7 +32,8 @@ const securityHeaders = [
       "connect-src 'self' https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://vitals.vercel-insights.com https://*.sentry.io https://*.algolia.net https://*.algolianet.com https://*.googlesyndication.com https://adservice.google.com https://*.doubleclick.net https://cm.g.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google",
       // AdSense renders ads inside iframes; fundingchoicesmessages.google.com hosts
       // Google's GDPR consent dialog iframe shown before serving ads to EU visitors.
-      "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://fundingchoicesmessages.google.com https://www.youtube.com https://www.youtube-nocookie.com https://www.facebook.com https://web.facebook.com https://abc7chicago.com",
+      // Facebook embeds (posts, reels, videos) may use various subdomains (www, m, etc)
+      "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://fundingchoicesmessages.google.com https://www.youtube.com https://www.youtube-nocookie.com https://*.facebook.com https://abc7chicago.com",
       // blob: required by Sentry session-replay worker and Clerk auth polling worker.
       // Without this, both features silently fail (CSP blocks the blob: URL worker).
       'worker-src blob:',
