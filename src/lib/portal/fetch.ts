@@ -20,12 +20,20 @@ export const portalClient = createClient({
 });
 
 /**
- * Convenience wrapper for portalClient.fetch() for compatibility with
- * code that previously used the Live Content API. Uses the regular Sanity
- * API with the drafts perspective instead of expensive vX subscriptions.
+ * Non-reactive portal fetch for read-only dashboard lists (articles, sources, etc).
+ * Uses stable API version instead of experimental vX for better performance.
+ *
+ * For editor pages (edit/create articles), use portalFetch from @/lib/portal/live instead,
+ * which provides reactive updates via defineLive when Sanity data changes.
+ *
+ * When params is undefined, calls fetch with query only to match the correct
+ * Sanity client overload and avoid undefined parameter serialization errors.
  */
 export async function portalFetch<T>(query: string, params?: QueryParams): Promise<T> {
-  if (params) {
+  // Only pass params if they exist — calling with undefined params would
+  // trigger Sanity client's internal parameter binding code unnecessarily
+  // and could cause "Cannot read properties of undefined (reading 'localsInner')" errors
+  if (params && Object.keys(params).length > 0) {
     return portalClient.fetch<T>(query, params);
   }
   return portalClient.fetch<T>(query);
