@@ -265,10 +265,12 @@ export const RichTextComponents = {
     },
 
     // ── Custom Iframe Embeds ──────────────────────────────────────────────────
+    // Note: Some sites (e.g., ABC7 Chicago) block embedding with X-Frame-Options.
+    // If embed fails, the iframe will show a blocked message. Sites may need to be
+    // contacted to allow cross-origin embedding, or use their specific embed code.
     iframeEmbed: ({ value }: any) => {
       const { src, width = 640, height = 360, title } = value;
       if (!src) return null;
-      const aspectRatio = height / width;
       return (
         <div
           className='my-8 w-full border border-slate-300 dark:border-slate-700'
@@ -281,8 +283,10 @@ export const RichTextComponents = {
             src={src}
             title={title || 'Embedded content'}
             frameBorder='0'
-            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen'
             allowFullScreen
+            sandbox='allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation-by-user-activation'
+            style={{ backgroundColor: '#f3f4f6' }}
           ></iframe>
         </div>
       );
