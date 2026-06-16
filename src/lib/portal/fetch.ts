@@ -17,3 +17,12 @@ export const portalClient = createClient({
   perspective: 'drafts', // Show drafts without duplicate published versions
   stega: false, // Prevent stega encoding in portal data
 });
+
+/**
+ * Convenience wrapper for portalClient.fetch() for compatibility with
+ * code that previously used the Live Content API. Uses the regular Sanity
+ * API with the drafts perspective instead of expensive vX subscriptions.
+ */
+export async function portalFetch<T>(query: string, params?: Record<string, unknown>): Promise<T> {
+  return portalClient.fetch<T>(query, params);
+}

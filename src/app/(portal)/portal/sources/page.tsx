@@ -3,7 +3,7 @@
 // (editors/admins see all sources).
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalFetch } from '@/lib/portal/live';
+import { portalFetch } from '@/lib/portal/fetch';
 import { queryPortalAllSources } from '@/lib/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import SourceLibrary from '@/components/portal/SourceLibrary';

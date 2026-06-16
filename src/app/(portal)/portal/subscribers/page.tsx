@@ -4,7 +4,7 @@
 
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalFetch } from '@/lib/portal/live';
+import { portalFetch } from '@/lib/portal/fetch';
 import {
   queryPortalNewsletterSubscribers,
   queryPortalBookstoreSubscribers,
