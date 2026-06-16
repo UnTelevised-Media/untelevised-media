@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { queueViewEvent } from '@/lib/viewCount/batchQueue';
+import { recordViewEvent } from '@/lib/supabase/viewEvents';
 
 function getIP(request: NextRequest): string {
   return (
@@ -32,11 +32,14 @@ export async function POST(request: NextRequest) {
 
   try {
     const ip = getIP(request);
-    queueViewEvent(slug, ip);
 
-    return NextResponse.json({ queued: true });
+    // Write to Supabase (no batching needed — Supabase handles high write throughput)
+    await recordViewEvent(slug, ip);
+
+    return NextResponse.json({ recorded: true });
   } catch (err) {
     console.error('[/api/view-queue] Error:', err);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    // Don't fail the request — view tracking is non-critical
+    return NextResponse.json({ recorded: false, error: 'Could not record view' });
   }
 }
