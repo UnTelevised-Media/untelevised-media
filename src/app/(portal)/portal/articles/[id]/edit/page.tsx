@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalFetch } from '@/lib/portal/live';
+import { portalFetch } from '@/lib/portal/fetch';
 import {
   queryPortalArticleById,
   queryPortalCategories,
