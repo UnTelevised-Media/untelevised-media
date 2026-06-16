@@ -18,7 +18,7 @@ export function getServerClient() {
     throw new Error('SUPABASE_SERVICE_ROLE_KEY not set');
   }
 
-  return createClient(supabaseUrl, serviceRoleKey);
+  return createClient(supabaseUrl || '', serviceRoleKey);
 }
 
 export type Database = {
