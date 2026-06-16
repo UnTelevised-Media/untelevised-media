@@ -15,7 +15,7 @@ export const portalClient = createClient({
   apiVersion,
   useCdn: false,
   token: readToken ?? undefined,
-  perspective: 'drafts', // Show drafts without duplicate published versions
+  perspective: 'previewDrafts', // Show drafts without duplicate published versions
   stega: false, // Prevent stega encoding in portal data
 });
 
