@@ -3,6 +3,14 @@ import 'server-only';
 import crypto from 'crypto';
 import { getServerClient } from './client';
 
+interface ViewEvent {
+  id: number;
+  slug: string;
+  ip_hash: string;
+  viewed_at: string;
+  created_date: string;
+}
+
 function hashIP(ip: string): string {
   return crypto.createHash('sha256').update(ip).digest('hex');
 }
@@ -11,7 +19,9 @@ export async function recordViewEvent(slug: string, ip: string): Promise<void> {
   const client = getServerClient();
   const ipHash = hashIP(ip);
 
-  const { error } = await client.from('view_events').insert({
+  // Type assertion needed for Supabase strict typing
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { error } = await (client.from('view_events') as any).insert({
     slug,
     ip_hash: ipHash,
   });
@@ -33,10 +43,12 @@ export interface ViewCountBySlug {
 export async function getViewCountsByDate(dateString: string): Promise<ViewCountBySlug[]> {
   const client = getServerClient();
 
-  const { data, error } = await client
+  // Type assertion needed for Supabase strict typing
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data, error } = await (client
     .from('view_events')
     .select('slug')
-    .eq('created_date', dateString);
+    .eq('created_date', dateString) as any);
 
   if (error) {
     console.error('[viewEvents] Failed to get view counts:', error);
@@ -45,7 +57,8 @@ export async function getViewCountsByDate(dateString: string): Promise<ViewCount
 
   // Count occurrences of each slug
   const counts = new Map<string, number>();
-  for (const row of data || []) {
+  const rows = (data || []) as Pick<ViewEvent, 'slug'>[];
+  for (const row of rows) {
     counts.set(row.slug, (counts.get(row.slug) ?? 0) + 1);
   }
 

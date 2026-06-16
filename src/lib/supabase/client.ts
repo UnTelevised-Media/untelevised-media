@@ -1,5 +1,6 @@
 import 'server-only';
 
+import type { SupabaseClient } from '@supabase/supabase-js';
 import { createClient } from '@supabase/supabase-js';
 
 export type Database = {
@@ -31,11 +32,11 @@ export type Database = {
   };
 };
 
-let anonClient: ReturnType<typeof createClient> | null = null;
-let serverClient: ReturnType<typeof createClient> | null = null;
+let anonClient: SupabaseClient<Database> | null = null;
+let serverClient: SupabaseClient<Database> | null = null;
 
 // Lazy-load public client for anonymous operations
-export function getAnonClient() {
+export function getAnonClient(): SupabaseClient<Database> {
   if (anonClient) return anonClient;
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -47,12 +48,12 @@ export function getAnonClient() {
     );
   }
 
-  anonClient = createClient(supabaseUrl, supabaseAnonKey);
+  anonClient = createClient<Database>(supabaseUrl, supabaseAnonKey);
   return anonClient;
 }
 
 // Lazy-load server-only client with service role key for privileged operations
-export function getServerClient() {
+export function getServerClient(): SupabaseClient<Database> {
   if (serverClient) return serverClient;
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -64,6 +65,6 @@ export function getServerClient() {
     );
   }
 
-  serverClient = createClient(supabaseUrl, serviceRoleKey);
+  serverClient = createClient<Database>(supabaseUrl, serviceRoleKey);
   return serverClient;
 }
