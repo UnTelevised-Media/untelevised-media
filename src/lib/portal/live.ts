@@ -9,11 +9,11 @@ import { apiVersion, dataset, projectId } from '@/lib/sanity/env';
 
 const serverToken = process.env.SANITY_API_READ_TOKEN;
 
-// Live Content API requires the experimental vX API version.
+// Live Content API requires a stable API version that supports the drafts perspective.
 const _portalLiveClient = createClient({
   projectId,
   dataset,
-  apiVersion: 'vX',
+  apiVersion: '2025-06-04',
   useCdn: false,
   token: serverToken ?? undefined,
   perspective: 'drafts',
