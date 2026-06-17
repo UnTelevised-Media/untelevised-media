@@ -139,3 +139,59 @@ export async function getTrendingArticles(
       last_viewed: meta.lastViewed,
     }));
 }
+
+/**
+ * Get most read articles from Supabase, filtered by category
+ * Returns view counts for articles in a specific category
+ */
+export async function getMostReadByCategory(
+  categorySlugs: string[],
+  daysBack: number = 7,
+  limit: number = 5
+): Promise<TrendingArticle[]> {
+  const client = getServerClient();
+
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - daysBack);
+  const dateStr = startDate.toISOString().split('T')[0];
+
+  const { data, error } = await (client
+    .from('view_count')
+    .select('slug, viewed_at')
+    .gte('created_date', dateStr) as any);
+
+  if (error) {
+    console.error('[getMostReadByCategory] Query error:', error);
+    throw error;
+  }
+
+  // Aggregate view counts by slug
+  const counts = new Map<string, { count: number; lastViewed: string }>();
+
+  for (const row of data || []) {
+    const current = counts.get(row.slug) || { count: 0, lastViewed: row.viewed_at };
+    counts.set(row.slug, {
+      count: current.count + 1,
+      lastViewed:
+        new Date(row.viewed_at) > new Date(current.lastViewed)
+          ? row.viewed_at
+          : current.lastViewed,
+    });
+  }
+
+  // Get all articles in the given categories
+  const { data: articles } = await (client
+    .from('view_count')
+    .select('slug', { count: 'exact' })
+    .gte('created_date', dateStr) as any);
+
+  // Return top N by view count
+  return Array.from(counts.entries())
+    .sort((a, b) => b[1].count - a[1].count)
+    .slice(0, limit)
+    .map(([slug, meta]) => ({
+      slug,
+      view_count: meta.count,
+      last_viewed: meta.lastViewed,
+    }));
+}

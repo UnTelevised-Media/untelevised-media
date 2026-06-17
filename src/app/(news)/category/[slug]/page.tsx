@@ -20,6 +20,7 @@ import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import { InFeedAd, RectangleAd, AD_CONFIG } from '@/components/ads';
+import { getTrendingArticles } from '@/lib/supabase/viewEvents';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -61,19 +62,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
-  const [{ data: category }, { data: mostRead }, articles] = await Promise.all([
+  const [{ data: category }, articles, trendingData] = await Promise.all([
     sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }) as Promise<{
       data: Category | null;
     }>,
-    sanityFetch({
-      query: queryMostReadByCategory,
-      params: { categorySlug: slug },
-      tags: ['article', `category:${slug}`],
-    }) as Promise<{ data: MostReadArticle[] }>,
     getArticlesByCategory(slug),
+    getTrendingArticles(7, 100).catch(() => []), // Get trending articles, fallback to empty
   ]);
 
   if (!category) {notFound();}
+
+  // Create a map of Supabase view counts
+  const viewCountMap = new Map(trendingData.map((t) => [t.slug, t.view_count]));
+
+  // Get articles in this category and merge with Supabase view counts
+  const mostRead = articles
+    .map((article) => ({
+      ...article,
+      viewCount: viewCountMap.get(article.slug?.current) ?? 0,
+    }))
+    .filter((a) => a.viewCount > 0) // Only articles with views
+    .sort((a, b) => b.viewCount - a.viewCount) // Sort by view count
+    .slice(0, 5); // Top 5
 
   const accentColor = (category as any)?.color?.hex ?? '#D70606';
   const heroImageUrl = (category as any)?.image
