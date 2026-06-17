@@ -90,6 +90,7 @@
     "dotenv": "^17.4.2",
     "file-type": "^22.0.1",
     "framer-motion": "^12.40.0",
+    "geoip-lite": "^1.4.7",
     "google-map-react": "^2.2.5",
     "import-in-the-middle": "^3.0.1",
     "instantsearch.js": "^4.101.0",
