@@ -8,7 +8,7 @@ import { useState } from 'react';
 import type { GiftOptions } from '@/lib/bookstore/types';
 
 interface Props {
-  onChange: (options: GiftOptions | null) => void;
+  onChange: (_options: GiftOptions | null) => void;
 }
 
 export default function GiftToggle({ onChange }: Props) {

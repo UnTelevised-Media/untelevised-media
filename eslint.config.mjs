@@ -48,6 +48,12 @@ export default [
     },
     rules: {
       ...js.configs.recommended.rules,
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+        },
+      ],
       'no-duplicate-imports': 'warn',
       'no-empty-function': 'off',
       'no-explicit-any': 'off',

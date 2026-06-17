@@ -173,9 +173,9 @@ function StoryCard({
   isPassed: boolean;
   isEditorPlus: boolean;
   authors: PortalAuthor[];
-  onPass?: (storyKey: string) => void;
-  onUnpass?: (storyKey: string) => void;
-  onClaim?: (storyKey: string, pitchId: string) => void;
+  onPass?: (_storyKey: string) => void;
+  onUnpass?: (_storyKey: string) => void;
+  onClaim?: (_storyKey: string, _pitchId: string) => void;
 }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();

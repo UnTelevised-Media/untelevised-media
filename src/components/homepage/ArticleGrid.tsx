@@ -214,7 +214,7 @@ const ArticleListItem: React.FC<{ article: Article }> = ({ article }) => {
 // View Toggle Component
 const ViewToggle: React.FC<{
   viewMode: 'grid' | 'list';
-  setViewMode: (mode: 'grid' | 'list') => void;
+  setViewMode: (_mode: 'grid' | 'list') => void;
 }> = ({ viewMode, setViewMode }) => {
   return (
     <div className='flex rounded-lg border border-slate-600 bg-slate-800/50 p-1'>

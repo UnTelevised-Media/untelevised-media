@@ -26,8 +26,6 @@ export default function TrendingListPaginated({ articles }: { articles: Trending
 
   // Article rank numbers — list starts at #2 since card holds #1
   const rankOffset = page * PAGE_SIZE + 2;
-  const startRank = rankOffset;
-  const endRank = rankOffset + visible.length - 1;
 
   return (
     <section aria-label='More most-read articles'>

@@ -25,7 +25,6 @@ import {
   sendGiftEmail,
   type OrderConfirmationParams,
   type DigitalDownloadEmailParams,
-  type GuestDownloadEmailParams,
 } from '@/lib/bookstore/email';
 import type { FormatType } from '@/lib/bookstore/types';
 

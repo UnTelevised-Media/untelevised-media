@@ -119,7 +119,7 @@ export default function BreakingNewsClient({ initialEvents, initialArticles }: P
 // View Toggle Component
 const ViewToggle: React.FC<{
   viewMode: 'bars' | 'cards';
-  setViewMode: (_mode: 'bars' | 'cards') => void;
+  setViewMode: (_value: 'bars' | 'cards') => void;
 }> = ({ viewMode: _viewMode, setViewMode }) => {
   return (
     <div className='flex rounded-lg border border-slate-600 bg-slate-800/50 p-1'>

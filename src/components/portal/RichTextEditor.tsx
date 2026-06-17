@@ -266,7 +266,7 @@ const schema = BlockNoteSchema.create({
 
 interface Props {
   initialContent?: object[]; // PartialBlock[] from portableTextToBlockNote
-  onChange?: (blocks: object[]) => void;
+  onChange?: (_blocks: object[]) => void;
   placeholder?: string;
   editable?: boolean;
 }

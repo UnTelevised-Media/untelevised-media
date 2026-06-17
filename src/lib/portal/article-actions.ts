@@ -561,8 +561,11 @@ export async function publishArticle(
       return { success: false, error: 'Draft not found — it may have been deleted.' };
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { _id: _draftId, _rev: _draftRev, ...draftFields } = draft as Record<string, unknown>;
+    // Extract all fields except _id and _rev to create the published version
+    const draftData = draft as Record<string, unknown>;
+    const draftFields = Object.fromEntries(
+      Object.entries(draftData).filter(([key]) => key !== '_id' && key !== '_rev')
+    );
 
     await writeClient.createOrReplace({
       ...draftFields,

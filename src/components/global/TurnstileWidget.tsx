@@ -6,7 +6,7 @@
 import { Turnstile } from '@marsidev/react-turnstile';
 
 interface TurnstileWidgetProps {
-  onSuccess: (token: string) => void;
+  onSuccess: (_token: string) => void;
   onError?: () => void;
   onExpire?: () => void;
 }

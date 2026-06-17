@@ -57,19 +57,19 @@ declare global {
   interface Window {
     TL?: {
       Timeline: new (
-        containerId: string,
-        data: TimelineJSData,
-        options?: Record<string, unknown>
+        _containerId: string,
+        _data: TimelineJSData,
+        _options?: Record<string, unknown>
       ) => {
         updateDisplay: () => void;
-        goTo: (slideIndex: number) => void;
-        goToId: (slideId: string) => void;
-        add: (data: Record<string, unknown>) => void;
-        remove: (slideId: string) => void;
+        goTo: (_slideIndex: number) => void;
+        goToId: (_slideId: string) => void;
+        add: (_data: Record<string, unknown>) => void;
+        remove: (_slideId: string) => void;
         getData: () => TimelineJSData;
-        getSlide: (slideIndex: number) => Record<string, unknown>;
+        getSlide: (_slideIndex: number) => Record<string, unknown>;
         getCurrentSlide: () => Record<string, unknown>;
-        updateConfig: (options: Record<string, unknown>) => void;
+        updateConfig: (_options: Record<string, unknown>) => void;
       };
     };
   }

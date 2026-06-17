@@ -16,7 +16,7 @@ interface CommentsSectionProps {
 declare global {
   interface Window {
     Coral?: {
-      createStreamEmbed: (config: Record<string, unknown>) => { remove: () => void };
+      createStreamEmbed: (_config: Record<string, unknown>) => { remove: () => void };
     };
   }
 }

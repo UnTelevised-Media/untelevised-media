@@ -9,7 +9,7 @@ import { adBlockerStorage } from './storage';
 export class AdBlockerDetector {
   private static instance: AdBlockerDetector;
   private detectionPromise: Promise<boolean> | null = null;
-  private callbacks: ((detected: boolean) => void)[] = [];
+  private callbacks: ((_detected: boolean) => void)[] = [];
 
   static getInstance(): AdBlockerDetector {
     if (!AdBlockerDetector.instance) {
@@ -225,9 +225,9 @@ export class AdBlockerDetector {
 
   // Method 4: Fetch blocking detection (improved)
   private detectByFetchBlocking(): Promise<boolean> {
-    return new Promise((resolve) => {
+    return new Promise((_resolve) => {
       if (!window.fetch) {
-        resolve(false);
+        _resolve(false);
         return;
       }
 
@@ -317,7 +317,7 @@ export class AdBlockerDetector {
   }
 
   // Subscribe to detection results
-  onDetection(callback: (detected: boolean) => void): () => void {
+  onDetection(callback: (_detected: boolean) => void): () => void {
     this.callbacks.push(callback);
 
     // Return unsubscribe function

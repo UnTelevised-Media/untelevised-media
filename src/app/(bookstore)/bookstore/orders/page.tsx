@@ -4,7 +4,7 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
 import { shopServiceClient } from '@/lib/bookstore/supabase';
 import type { Order, OrderItem } from '@/lib/bookstore/types';
 import PageViewTracker from '@/components/analytics/PageViewTracker';

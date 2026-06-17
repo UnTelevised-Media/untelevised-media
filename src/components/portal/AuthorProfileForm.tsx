@@ -68,7 +68,7 @@ function TagInput({
   label: string;
   description?: string;
   tags: string[];
-  onChange: (tags: string[]) => void;
+  onChange: (_tags: string[]) => void;
 }) {
   const [input, setInput] = useState('');
 
@@ -133,7 +133,7 @@ function UrlListInput({
   label: string;
   description?: string;
   urls: string[];
-  onChange: (urls: string[]) => void;
+  onChange: (_urls: string[]) => void;
 }) {
   const [input, setInput] = useState('');
 

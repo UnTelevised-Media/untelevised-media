@@ -30,7 +30,7 @@ export async function recordViewEvent(slug: string, ip: string): Promise<void> {
   );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { error, data } = await (client.from('view_count') as any).insert({
+  const { error } = await (client.from('view_count') as any).insert({
     slug,
     ip_hash: ipHash,
     viewed_at: viewedAt,
@@ -198,12 +198,6 @@ export async function getMostReadByCategory(
           : current.lastViewed,
     });
   }
-
-  // Get all articles in the given categories
-  const { data: articles } = await (client
-    .from('view_count')
-    .select('slug', { count: 'exact' })
-    .gte('created_date', dateStr) as any);
 
   // Return top N by view count
   return Array.from(counts.entries())

@@ -26,9 +26,9 @@ export interface UseWishlistReturn {
   wishlist: WishlistEntry[];
   loading: boolean;
   ready: boolean;
-  isWishlisted: (slug: string) => boolean;
-  toggle: (entry: Omit<WishlistEntry, 'addedAt'>) => Promise<void>;
-  remove: (slug: string) => Promise<void>;
+  isWishlisted: (_slug: string) => boolean;
+  toggle: (_entry: Omit<WishlistEntry, 'addedAt'>) => Promise<void>;
+  remove: (_slug: string) => Promise<void>;
   clearAll: () => Promise<void>;
 }
 

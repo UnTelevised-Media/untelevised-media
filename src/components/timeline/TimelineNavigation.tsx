@@ -24,9 +24,9 @@ import { Badge } from '@/components/ui/badge';
 interface TimelineNavigationProps {
   events: TimelineEvent[];
   currentZoomLevel: 'year' | 'month' | 'week' | 'day' | 'hour';
-  onZoomChange: (level: 'year' | 'month' | 'week' | 'day' | 'hour') => void;
-  onEventSelect?: (event: TimelineEvent) => void;
-  onTimeRangeChange?: (startDate: Date, endDate: Date) => void;
+  onZoomChange: (_level: 'year' | 'month' | 'week' | 'day' | 'hour') => void;
+  onEventSelect?: (_event: TimelineEvent) => void;
+  onTimeRangeChange?: (_startDate: Date, _endDate: Date) => void;
   className?: string;
 }
 

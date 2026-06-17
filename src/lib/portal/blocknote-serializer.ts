@@ -331,7 +331,7 @@ function bnStylesToPTMarks(styles: BNStyles): string[] {
 // CDN URL. When omitted image blocks fall back to the raw _ref string.
 export function portableTextToBlockNote(
   blocks: SanityBlockAny[],
-  resolveImageUrl?: (ref: string) => string
+  resolveImageUrl?: (_ref: string) => string
 ): object[] {
   if (!blocks?.length) {
     return [emptyParagraph()];
@@ -370,7 +370,7 @@ export function portableTextToBlockNote(
   return result;
 }
 
-function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (ref: string) => string): object {
+function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (_ref: string) => string): object {
   const b = block as unknown as Record<string, unknown>;
 
   if (b._type !== 'block') {

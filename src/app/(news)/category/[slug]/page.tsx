@@ -10,7 +10,6 @@ import { notFound } from 'next/navigation';
 import {
   queryArticleByCategory,
   queryCategoryBySlug,
-  queryMostReadByCategory,
 } from '@/lib/sanity/lib/queries';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';

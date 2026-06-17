@@ -33,7 +33,7 @@ interface SourceItem {
 
 interface Props {
   selectedIds: string[];
-  onSelect: (source: SourceItem) => void;
+  onSelect: (_source: SourceItem) => void;
 }
 
 export default function SourceSelectorModal({ selectedIds, onSelect }: Props) {

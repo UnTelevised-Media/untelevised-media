@@ -12,7 +12,6 @@ import {
   addBookmark as addLocalBookmark,
   removeBookmark as removeLocalBookmark,
   clearBookmarks as clearLocalBookmarks,
-  isBookmarked as isLocalBookmarked,
   type BookmarkEntry,
 } from '@/lib/bookmarks/storage';
 import {
@@ -20,7 +19,6 @@ import {
   addServerBookmark,
   removeServerBookmark,
   clearServerBookmarks,
-  checkServerBookmarked,
   syncLocalBookmarksToServer,
 } from '@/lib/bookmarks/actions';
 
@@ -32,11 +30,11 @@ export interface UseBookmarksReturn {
   /** True once state is ready (post-hydration for local, post-fetch for server). */
   ready: boolean;
   /** Check if a specific slug is bookmarked. */
-  isBookmarked: (slug: string) => boolean;
+  isBookmarked: (_slug: string) => boolean;
   /** Toggle bookmark on/off. Optimistic update included. */
-  toggle: (entry: Omit<BookmarkEntry, 'bookmarkedAt'>) => Promise<void>;
+  toggle: (_entry: Omit<BookmarkEntry, 'bookmarkedAt'>) => Promise<void>;
   /** Remove a single bookmark by slug. */
-  remove: (slug: string) => Promise<void>;
+  remove: (_slug: string) => Promise<void>;
   /** Clear all bookmarks. */
   clearAll: () => Promise<void>;
 }

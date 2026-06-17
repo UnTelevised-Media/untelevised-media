@@ -85,7 +85,6 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
   // UI state
   const [error, setError] = useState('');
   const [createdSlug, setCreatedSlug] = useState('');
-  const [createdId, setCreatedId] = useState('');
 
   // Load genres when modal opens
   useEffect(() => {

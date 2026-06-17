@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 interface ArticleCategoryNavProps {
   categories: Category[];
   selectedCategory: Category | null;
-  onCategoryChange: (category: Category) => void;
+  onCategoryChange: (_category: Category) => void;
 }
 
 const ArticleCategoryNav: React.FC<ArticleCategoryNavProps> = ({

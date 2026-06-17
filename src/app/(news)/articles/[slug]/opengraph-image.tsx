@@ -29,7 +29,6 @@ async function fetchArticle(slug: string) {
       "imageRef": mainImage.asset._ref
     }`
   );
-  const params = encodeURIComponent(JSON.stringify({ slug }));
   const url = `https://${PROJECT_ID}.api.sanity.io/v${API_VERSION}/data/query/${DATASET}?query=${query}&$slug=${encodeURIComponent(JSON.stringify(slug))}`;
 
   const res = await fetch(url, { next: { revalidate: 3600 } });

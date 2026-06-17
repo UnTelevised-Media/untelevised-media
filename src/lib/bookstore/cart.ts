@@ -39,11 +39,11 @@ const debouncedStorage: Storage = {
 
 interface CartState {
   items: CartItem[];
-  addItem: (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => void;
-  removeItem: (sanityBookId: string, formatKey: string) => void;
-  updateQuantity: (sanityBookId: string, formatKey: string, quantity: number) => void;
-  updatePrice: (sanityBookId: string, formatKey: string, price: number) => void;
-  updateTipIncluded: (sanityBookId: string, formatKey: string, included: boolean) => void;
+  addItem: (_item: Omit<CartItem, 'quantity'> & { quantity?: number }) => void;
+  removeItem: (_sanityBookId: string, _formatKey: string) => void;
+  updateQuantity: (_sanityBookId: string, _formatKey: string, _quantity: number) => void;
+  updatePrice: (_sanityBookId: string, _formatKey: string, _price: number) => void;
+  updateTipIncluded: (_sanityBookId: string, _formatKey: string, _included: boolean) => void;
   clearCart: () => void;
   getItemCount: () => number;
   getTotal: () => number;

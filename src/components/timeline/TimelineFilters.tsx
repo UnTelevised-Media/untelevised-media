@@ -22,7 +22,7 @@ import { Badge } from '@/components/ui/badge';
 interface TimelineFiltersProps {
   events: TimelineEvent[];
   categories?: TimelineCategory[];
-  onFilterChange: (filteredEvents: TimelineEvent[]) => void;
+  onFilterChange: (_filteredEvents: TimelineEvent[]) => void;
   className?: string;
 }
 
