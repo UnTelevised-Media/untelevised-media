@@ -6,6 +6,7 @@ import Script from 'next/script';
 interface GoogleAdSenseProps {
   publisherId: string;
   onLoad?: () => void;
+  // eslint-disable-next-line no-unused-vars
   onError?: (error: Error) => void;
 }
 
