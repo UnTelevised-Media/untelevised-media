@@ -399,7 +399,7 @@ export default async function AlbumPage({ params }: Props) {
                         route={`/music-artists/${(artist as any).slug.current}`}
                       >
                         <div className='group flex cursor-pointer items-center gap-3'>
-                          {artist.image && (
+                          {(artist as any)?.image && (
                             <div className='h-12 w-12 overflow-hidden rounded-full'>
                               <Image
                                 src={urlForImage((artist as any)?.image)?.url() ?? ''}

@@ -255,7 +255,7 @@ export default async function MusicArtistPage({ params }: Props) {
                     Songs
                   </h2>
                   <div className='space-y-4'>
-                    {artist.songs.slice(0, 10).map((song) => {
+                    {(artist as any)?.songs?.slice(0, 10).map((song: any) => {
                       const artworkUrl = getSongArtwork(song);
                       const artworkAlt = getSongArtworkAlt(song);
 
@@ -324,7 +324,7 @@ export default async function MusicArtistPage({ params }: Props) {
                     Albums
                   </h2>
                   <div className='grid gap-6 sm:grid-cols-2'>
-                    {artist.albums.map((album) => (
+                    {(artist as any)?.albums?.map((album: any) => (
                       album?.slug?.current && (
                         <ClientSideRoute key={album._id} route={`/albums/${album.slug.current}`}>
                           <div className='group cursor-pointer rounded-lg border border-slate-200 p-4 transition-colors hover:border-untele dark:border-slate-700 dark:hover:border-untele'>

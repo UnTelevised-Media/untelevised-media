@@ -3,7 +3,8 @@
 // TimelineJS Data Adapter
 // Transforms Sanity CMS timeline data into TimelineJS-compatible format
 
-import type { Block, Timeline, TimelineEvent } from '#/sanity.types';
+import type { Timeline, TimelineEvent } from '#/sanity.types';
+type Block = any;
 import urlForImage from './urlForImage';
 import formatDate from './formatDate';
 
@@ -83,7 +84,7 @@ function convertMedia(event: TimelineEvent): TimelineJSSlide['media'] {
       url: urlForImage(event.mainImage).width(1200).height(675).url(),
       caption: event.mainImage.alt ?? event.title,
       thumbnail: urlForImage(event.mainImage).width(300).height(200).url(),
-      credit: event.mainImage.credit ?? undefined,
+      credit: (event.mainImage as any)?.credit ?? undefined,
     };
   }
 
@@ -120,7 +121,7 @@ function convertMedia(event: TimelineEvent): TimelineJSSlide['media'] {
         url: urlForImage(firstMedia).width(1200).height(675).url(),
         caption: firstMedia.alt ?? firstMedia.caption ?? event.title,
         thumbnail: urlForImage(firstMedia).width(300).height(200).url(),
-        credit: firstMedia.credit ?? undefined,
+        credit: (firstMedia as any)?.credit ?? undefined,
       };
     }
   }
@@ -161,7 +162,7 @@ function convertBlockContentToHTML(blocks: Block[]): string {
       if (block._type === 'block') {
         const children = block.children ?? [];
         const text = children
-          .map((child) => {
+          .map((child: any) => {
             let content = child.text ?? '';
             if (child.marks?.includes('strong')) {
               content = `<strong>${content}</strong>`;

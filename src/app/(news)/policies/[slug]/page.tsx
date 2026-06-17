@@ -1,4 +1,4 @@
-import type { Policy } from '#/sanity.types';
+// type Policy is not exported from sanity.types from '#/sanity.types';
 // src/app/(user)/policies/[slug]/page.tsx
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';

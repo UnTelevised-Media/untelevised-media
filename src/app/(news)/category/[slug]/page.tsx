@@ -75,9 +75,9 @@ export default async function CategoryPage({ params }: Props) {
 
   if (!category) {notFound();}
 
-  const accentColor = category.color?.hex ?? '#D70606';
-  const heroImageUrl = category.image
-    ? urlForImage(category.image)?.width(1400).height(500).url()
+  const accentColor = (category as any)?.color?.hex ?? '#D70606';
+  const heroImageUrl = (category as any)?.image
+    ? urlForImage((category as any)?.image)?.width(1400).height(500).url()
     : null;
 
   const collectionPageSchema = {

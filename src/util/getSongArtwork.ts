@@ -15,8 +15,8 @@ export function getSongArtwork(song: Song): string | null {
   }
 
   // Fallback to album artwork
-  if (song.album?.albumArt) {
-    return urlForImage(song.album.albumArt)?.url() ?? null;
+  if ((song.album as any)?.albumArt) {
+    return urlForImage((song.album as any)?.albumArt)?.url() ?? null;
   }
 
   // No artwork available
@@ -33,8 +33,8 @@ export function getSongArtworkAlt(song: Song): string {
   }
 
   // Fallback to album art alt text
-  if (song.album?.albumArt?.alt) {
-    return song.album.albumArt.alt;
+  if ((song.album as any)?.albumArt?.alt) {
+    return (song.album as any)?.albumArt?.alt ?? '';
   }
 
   // Default alt text

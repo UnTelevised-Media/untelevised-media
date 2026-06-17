@@ -75,7 +75,7 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
     title,
     description,
     keywords,
-    authors: article.author ? [{ name: article.author.name }] : undefined,
+    authors: article.author ? [{ name: (article.author as any)?.name ?? 'Author' }] : undefined,
     publisher: SITE_NAME,
     openGraph: {
       type: 'article',
@@ -85,7 +85,7 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
       siteName: SITE_NAME,
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt ?? article.publishedAt,
-      authors: article.author?.name ? [article.author.name] : undefined,
+      authors: article.author?.name ? [(article.author as any)?.name ?? 'Author'] : undefined,
       section: article.categories?.[0]?.title,
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
     },
@@ -152,7 +152,7 @@ export function buildCategoryMetadata(category: Category, slug: string): Metadat
       `Browse all ${category.title} coverage from UnTelevised Media.`,
     160
   );
-  const ogImageUrl = getSanityOgImageUrl(category.image) ?? DEFAULT_OG_IMAGE;
+  const ogImageUrl = getSanityOgImageUrl((category as any)?.image) ?? DEFAULT_OG_IMAGE;
 
   return {
     title,
@@ -189,7 +189,7 @@ export function buildBreakingNewsMetadata(article: BreakingArticle, slug: string
   return {
     title,
     description,
-    authors: article.author ? [{ name: article.author.name }] : undefined,
+    authors: article.author ? [{ name: (article.author as any)?.name ?? 'Author' }] : undefined,
     publisher: SITE_NAME,
     openGraph: {
       type: 'article',
@@ -253,9 +253,12 @@ export function buildFactCheckMetadata(factCheck: FactCheck, slug: string): Meta
 export function buildAuthorMetadata(author: Author, slug: string): Metadata {
   const ogImageUrl = getSanityOgImageUrl(author.image) ?? DEFAULT_OG_IMAGE;
   const canonicalUrl = getCanonicalUrl('author', slug);
-  const title = truncate(`${author.name}${author.title ? ` — ${author.title}` : ''}`, 60);
+  const title = truncate(
+    `${(author as any)?.name}${author.title ? ` — ${author.title}` : ''}`,
+    60
+  );
   const description = truncate(
-    `Independent journalist at UnTelevised Media. Read all coverage by ${author.name}.`,
+    `Independent journalist at UnTelevised Media. Read all coverage by ${(author as any)?.name}.`,
     160
   );
 
@@ -269,7 +272,7 @@ export function buildAuthorMetadata(author: Author, slug: string): Metadata {
       description,
       url: canonicalUrl,
       siteName: SITE_NAME,
-      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: author.name }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: (author as any)?.name }],
     },
     twitter: {
       card: 'summary_large_image',

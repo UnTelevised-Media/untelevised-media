@@ -321,8 +321,9 @@ export const queryFeaturedSongs = groq`
     primaryArtist->,
     featuredArtists[]->,
     album->{
-      title,
-      albumArt
+      ...,
+      artist->,
+      featuredArtists[]->
     },
     trackArt
   }
@@ -362,6 +363,10 @@ export const queryMusicArtistBySlug = groq`
 export const queryFeaturedMusicArtists = groq`
   *[_type=='musicArtist' && isFeatured == true] {
     ...,
+    image,
+    stageName,
+    name,
+    slug,
     "songCount": count(*[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)])
   }
   | order(name asc)
@@ -422,8 +427,9 @@ export const queryRecentSongs = groq`
     primaryArtist->,
     featuredArtists[]->,
     album->{
-      title,
-      albumArt
+      ...,
+      artist->,
+      featuredArtists[]->
     },
     trackArt
   }

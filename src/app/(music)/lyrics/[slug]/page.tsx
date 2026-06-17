@@ -122,7 +122,7 @@ export default async function LyricsPage({ params }: Props) {
                 <div className='flex flex-wrap gap-4 text-sm text-white/80'>
                   {song.album && (
                     <div className='flex items-center gap-1'>
-                      <span>Album: {song.album.title}</span>
+                      <span>Album: {(song as any)?.album?.title}</span>
                     </div>
                   )}
                   {song.releaseDate && (

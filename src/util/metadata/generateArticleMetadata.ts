@@ -31,7 +31,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
     title: `${article.title} | UnTelevised Media`,
     description: article.description,
     keywords: article.keywords?.length ? article.keywords : undefined,
-    authors: article.author ? [{ name: article.author.name }] : undefined,
+    authors: article.author ? [{ name: (article.author as any)?.name ?? 'Author' }] : undefined,
     publisher: 'UnTelevised Media',
 
     openGraph: {

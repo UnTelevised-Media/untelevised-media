@@ -128,7 +128,7 @@ export default async function LyricsIndexPage() {
                                 <span>
                                   {' '}
                                   feat.{' '}
-                                  {song.featuredArtists.map((a) => (a as any)?.stageName ?? (a as any)?.name).join(', ')}
+                                  {((song as any)?.featuredArtists ?? []).map((a: any) => (a as any)?.stageName ?? (a as any)?.name).join(', ')}
                                 </span>
                               )}
                             </p>
@@ -265,7 +265,7 @@ export default async function LyricsIndexPage() {
                                     {' '}
                                     feat.{' '}
                                     {song.featuredArtists
-                                      .map((a) => a?.stageName ?? a?.name)
+                                      .map((a: any) => a?.stageName ?? a?.name)
                                       .join(', ')}
                                   </span>
                                 )}
