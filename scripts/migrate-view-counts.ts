@@ -139,11 +139,34 @@ async function migrateViewCounts(): Promise<void> {
       // Insert in batches of 100
       for (let i = 0; i < events.length; i += 100) {
         const batch = events.slice(i, i + 100);
-        const { error } = await supabase.from('view_events').insert(batch);
 
-        if (error) {
+        // Use raw SQL to bypass schema cache issues
+        const values = batch
+          .map((e) => `('${e.slug.replace(/'/g, "''")}', '${e.ip_hash}', '${e.viewed_at}')`)
+          .join(',');
+
+        const sql = `
+          INSERT INTO view_events (slug, ip_hash, viewed_at)
+          VALUES ${values}
+          ON CONFLICT DO NOTHING;
+        `;
+
+        const { error } = await (supabase.rpc('exec', {
+          sql_query: sql,
+        }) as any);
+
+        if (error && !error.message.includes('exec')) {
           console.error(`❌ Error inserting views for "${slug}":`, error.message);
           totalSkipped += batch.length;
+        } else if (error) {
+          // Try with regular insert if RPC doesn't work
+          const { error: insertError } = await supabase.from('view_events').insert(batch);
+          if (insertError) {
+            console.error(`❌ Error inserting views for "${slug}":`, insertError.message);
+            totalSkipped += batch.length;
+          } else {
+            totalInserted += batch.length;
+          }
         } else {
           totalInserted += batch.length;
         }
