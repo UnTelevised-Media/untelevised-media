@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/staff/page.tsx
 import type { Metadata } from 'next';
 import Image from 'next/image';

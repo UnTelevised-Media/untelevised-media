@@ -161,7 +161,7 @@ const bookFormat = {
         title: labels[title ?? ''] ?? title ?? 'Format',
         subtitle: nyop
           ? 'Pay What You Want'
-          : subtitle != null
+          : subtitle !== null && subtitle !== undefined
             ? `$${subtitle.toFixed(2)}`
             : undefined,
       };
@@ -311,13 +311,13 @@ export default defineType({
               return 'Revenue sharing is required before publishing';
             }
             const { authorPercentage, publisherPercentage, platformPercentage } = terms;
-            if (authorPercentage == null) {
+            if (authorPercentage === null || authorPercentage === undefined) {
               return 'Author % is required';
             }
-            if (publisherPercentage == null) {
+            if (publisherPercentage === null || publisherPercentage === undefined) {
               return 'Publisher % is required';
             }
-            if (platformPercentage == null) {
+            if (platformPercentage === null || platformPercentage === undefined) {
               return 'Platform % is required';
             }
             const total = authorPercentage + publisherPercentage + platformPercentage;

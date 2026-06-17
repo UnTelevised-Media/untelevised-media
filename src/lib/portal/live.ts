@@ -5,7 +5,7 @@
 // on the dashboard without any polling or manual refresh.
 import { defineLive } from 'next-sanity/live';
 import { createClient } from 'next-sanity';
-import { apiVersion, dataset, projectId } from '@/lib/sanity/env';
+import { dataset, projectId } from '@/lib/sanity/env';
 
 const serverToken = process.env.SANITY_API_READ_TOKEN;
 

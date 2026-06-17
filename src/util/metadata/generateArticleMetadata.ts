@@ -1,6 +1,6 @@
-/* eslint-disable import/prefer-default-export */
 // src/util/metadata/generateArticleMetadata.ts
 import type { Metadata } from 'next';
+import type { Article } from '#/sanity.types';
 import sanityClient from '@/lib/sanity/lib/client';
 import urlForImage from '@/util/urlForImage';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';

@@ -2,7 +2,6 @@
 // src/lib/portal/review-actions.ts
 // Server Actions for admin moderation of book reviews.
 
-import { auth } from '@clerk/nextjs/server';
 import { writeClient } from '@/lib/sanity/lib/write-client';
 import { hasRole } from '@/lib/auth/roles-utils';
 import { requireAuthor } from '@/lib/auth/roles';

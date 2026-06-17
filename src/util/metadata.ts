@@ -2,6 +2,7 @@
 // Shared metadata helpers for generateMetadata() across all page routes
 
 import type { Metadata } from 'next';
+import type { Article, Author, Category, LiveEvent } from '#/sanity.types';
 import urlForImage from './urlForImage';
 
 // Local type aliases for Sanity document shapes not yet covered by TypeGen.

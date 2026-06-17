@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+import type { Album, Song } from '#/sanity.types';
 // src/app/(user)/albums/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';

@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/timelines/page.tsx
 import { Metadata } from 'next';
 import { Suspense } from 'react';

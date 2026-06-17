@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/tag/[slug]/page.tsx
 import type { Metadata } from 'next';
 import Link from 'next/link';

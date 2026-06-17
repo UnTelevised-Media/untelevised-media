@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/timeline/event/[slug]/page.tsx
 import { Metadata } from 'next';
 import { groq } from 'next-sanity';

@@ -1,5 +1,5 @@
-/* eslint-disable import/prefer-default-export */
 import type { Metadata } from 'next';
+import type { Article } from '#/sanity.types';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
 import urlForImage from '@/util/urlForImage';

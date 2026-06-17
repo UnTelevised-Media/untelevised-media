@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+import type { MusicArtist, Song, Album } from '#/sanity.types';
 // src/app/(user)/music-artists/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';

@@ -1,4 +1,4 @@
-﻿/* eslint-disable react/function-component-definition */
+import type { LiveEvent, Block } from '#/sanity.types';
 // src/app/(user)/live-event/[slug]/page.tsx
 import Image from 'next/image';
 import { groq } from 'next-sanity';

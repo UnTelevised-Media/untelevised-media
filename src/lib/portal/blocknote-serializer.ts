@@ -331,7 +331,7 @@ function bnStylesToPTMarks(styles: BNStyles): string[] {
 // CDN URL. When omitted image blocks fall back to the raw _ref string.
 export function portableTextToBlockNote(
   blocks: SanityBlockAny[],
-  resolveImageUrl?: (assetRef: string) => string
+  resolveImageUrl?: (ref: string) => string
 ): object[] {
   if (!blocks?.length) {
     return [emptyParagraph()];
@@ -406,17 +406,13 @@ function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (ref: string) => stri
       }
 
       case 'image': {
-        const assetRef = (b.asset as Record<string, unknown> | undefined)?._ref as
-          | string
-          | undefined;
         // Prefer a pre-resolved URL (e.g. asset->{ url }) then fall back to
         // building via the injected resolver, then bare ref.
+        const ref = (b.asset as Record<string, unknown> | undefined)?._ref as string | undefined;
         const preResolved = (b.asset as Record<string, unknown> | undefined)?.url as
           | string
           | undefined;
-        const url =
-          preResolved ??
-          (assetRef && resolveImageUrl ? resolveImageUrl(assetRef) : (assetRef ?? ''));
+        const url = preResolved ?? (ref && resolveImageUrl ? resolveImageUrl(ref) : (ref ?? ''));
         return {
           type: 'image',
           props: { url, caption: (b.alt as string) ?? '' },

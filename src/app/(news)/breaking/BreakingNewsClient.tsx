@@ -119,14 +119,14 @@ export default function BreakingNewsClient({ initialEvents, initialArticles }: P
 // View Toggle Component
 const ViewToggle: React.FC<{
   viewMode: 'bars' | 'cards';
-  setViewMode: (mode: 'bars' | 'cards') => void;
-}> = ({ viewMode, setViewMode }) => {
+  setViewMode: (_mode: 'bars' | 'cards') => void;
+}> = ({ viewMode: _viewMode, setViewMode }) => {
   return (
     <div className='flex rounded-lg border border-slate-600 bg-slate-800/50 p-1'>
       <button
         onClick={() => setViewMode('bars')}
         className={`rounded px-3 py-1 text-sm font-medium transition-colors ${
-          viewMode === 'bars' ? 'bg-untele text-white' : 'text-slate-400 hover:text-white'
+          _viewMode === 'bars' ? 'bg-untele text-white' : 'text-slate-400 hover:text-white'
         }`}
       >
         Bars
@@ -134,7 +134,7 @@ const ViewToggle: React.FC<{
       <button
         onClick={() => setViewMode('cards')}
         className={`rounded px-3 py-1 text-sm font-medium transition-colors ${
-          viewMode === 'cards' ? 'bg-untele text-white' : 'text-slate-400 hover:text-white'
+          _viewMode === 'cards' ? 'bg-untele text-white' : 'text-slate-400 hover:text-white'
         }`}
       >
         Cards

@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+import type { Article } from '#/sanity.types';
 // src/app/(user)/articles/[slug]/page.tsx
 import { cache } from 'react';
 import Image from 'next/image';

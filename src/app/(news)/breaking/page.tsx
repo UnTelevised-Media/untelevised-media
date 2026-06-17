@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(news)/breaking/page.tsx
 import type { Metadata } from 'next';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';

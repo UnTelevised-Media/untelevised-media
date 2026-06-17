@@ -1,6 +1,5 @@
 import 'server-only';
 
-import crypto from 'crypto';
 import { getServerClient } from './client';
 
 interface ViewEvent {
@@ -13,10 +12,6 @@ interface ViewEvent {
   country: string | null;
   viewed_at: string;
   created_date: string;
-}
-
-function hashIP(ip: string): string {
-  return crypto.createHash('sha256').update(ip).digest('hex');
 }
 
 export async function recordViewEvent(slug: string, ip: string): Promise<void> {

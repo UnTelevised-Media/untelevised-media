@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(music)/layout.tsx
 import Header from '@/components/global/Header';
 import HeaderLogo from '@/components/global/HeaderLogo';

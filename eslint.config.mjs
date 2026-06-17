@@ -22,6 +22,7 @@ export default [
       'src/models/types/react-syntax-highlighter.d.ts',
       'supabase/**',
       '.supabase/**',
+      '.claude/**',
     ],
   },
   // Main configuration
@@ -60,8 +61,10 @@ export default [
         },
       ],
       'no-unused-expressions': 'error',
-      'eqeqeq': ['error', 'always'],
-      'curly': ['error', 'all'],
+      eqeqeq: ['error', 'always'],
+      curly: ['error', 'all'],
+      'import/no-named-as-default': 'off',
+      'import/prefer-default-export': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'warn',

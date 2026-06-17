@@ -20,7 +20,6 @@
 
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
-import * as path from 'path';
 import { resolve } from 'path';
 import { createClient } from '@sanity/client';
 

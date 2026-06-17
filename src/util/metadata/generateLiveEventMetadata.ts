@@ -1,5 +1,5 @@
-/* eslint-disable import/prefer-default-export */
 import type { Metadata } from 'next';
+import type { LiveEvent } from '#/sanity.types';
 import sanityClient from '@/lib/sanity/lib/client';
 import urlForImage from '@/util/urlForImage';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';

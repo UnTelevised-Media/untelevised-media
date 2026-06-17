@@ -3,6 +3,7 @@
 // TimelineJS Data Adapter
 // Transforms Sanity CMS timeline data into TimelineJS-compatible format
 
+import type { Block, Timeline, TimelineEvent } from '#/sanity.types';
 import urlForImage from './urlForImage';
 import formatDate from './formatDate';
 

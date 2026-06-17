@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+import type { Policy } from '#/sanity.types';
 // src/app/(user)/policies/[slug]/page.tsx
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';

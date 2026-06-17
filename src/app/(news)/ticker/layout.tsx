@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import '@/app/globals.css';
 
 import type { Metadata } from 'next';

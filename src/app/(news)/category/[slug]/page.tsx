@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+import type { Category } from '#/sanity.types';
 import { Fragment } from 'react';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
@@ -10,10 +10,10 @@ import { notFound } from 'next/navigation';
 import {
   queryArticleByCategory,
   queryCategoryBySlug,
+  queryMostReadByCategory,
 } from '@/lib/sanity/lib/queries';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
-import { getTrendingArticles as getTrendingFromSupabase } from '@/lib/supabase/viewEvents';
 import { buildCategoryMetadata } from '@/util/metadata';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
@@ -61,29 +61,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
-  const [{ data: category }, trendingArticles, articles] = await Promise.all([
+  const [{ data: category }, { data: mostRead }, articles] = await Promise.all([
     sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }) as Promise<{
       data: Category | null;
     }>,
-    getTrendingFromSupabase(7, 31),
+    sanityFetch({
+      query: queryMostReadByCategory,
+      params: { categorySlug: slug },
+      tags: ['article', `category:${slug}`],
+    }) as Promise<{ data: MostReadArticle[] }>,
     getArticlesByCategory(slug),
   ]);
 
   if (!category) {notFound();}
-
-  // Filter trending articles to this category
-  const mostRead: MostReadArticle[] = articles
-    .filter((a) => trendingArticles.some((t) => t.slug === a.slug.current))
-    .map((a) => ({
-      _id: a._id,
-      title: a.title,
-      slug: a.slug,
-      publishedAt: a.publishedAt,
-      viewCount: trendingArticles.find((t) => t.slug === a.slug.current)?.view_count ?? 0,
-      author: a.author,
-    }))
-    .sort((a, b) => (b.viewCount ?? 0) - (a.viewCount ?? 0))
-    .slice(0, 5);
 
   const accentColor = category.color?.hex ?? '#D70606';
   const heroImageUrl = category.image

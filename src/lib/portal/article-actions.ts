@@ -307,17 +307,17 @@ export async function updateArticle(
   } else {
     fieldsToUnset.push('publishedAt');
   }
-  if (sanitized.mainImage != null) {
+  if (sanitized.mainImage !== null) {
     setFields.mainImage = sanitized.mainImage;
   } else {
     fieldsToUnset.push('mainImage');
   }
-  if (sanitized.eventDate != null) {
+  if (sanitized.eventDate !== null) {
     setFields.eventDate = sanitized.eventDate;
   } else {
     fieldsToUnset.push('eventDate');
   }
-  if (sanitized.correction != null) {
+  if (sanitized.correction !== null) {
     setFields.correction = sanitized.correction;
   } else {
     fieldsToUnset.push('correction');
@@ -542,7 +542,7 @@ export async function publishArticle(
   articleId: string,
   scheduledAt?: string
 ): Promise<ActionResult> {
-  const { id: clerkUserId, role } = await requireAuthor();
+  const { role } = await requireAuthor();
 
   if (!hasRole(role, 'editor')) {
     return { success: false, error: 'Only editors and admins can publish articles.' };

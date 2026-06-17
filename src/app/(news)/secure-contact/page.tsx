@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/secure-contact/page.tsx
 'use client';
 

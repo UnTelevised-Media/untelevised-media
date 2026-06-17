@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+import type { Author } from '#/sanity.types';
 // src/app/(news)/author/[slug]/page.tsx
 import { cache } from 'react';
 import Image from 'next/image';
@@ -286,7 +286,9 @@ export default async function Author({ params }: Props) {
                     let label = url;
                     try {
                       label = new URL(url).hostname.replace('www.', '');
-                    } catch {}
+                    } catch {
+                      // ignore invalid URLs
+                    }
                     return (
                       <a
                         key={i}

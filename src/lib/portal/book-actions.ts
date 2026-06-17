@@ -121,7 +121,7 @@ export async function createBook(
     language: input.language?.trim() || 'en',
     ...(sanityAuthorId ? { author: { _type: 'reference', _ref: sanityAuthorId } } : {}),
     ...(input.isbn?.trim() ? { isbn: input.isbn.trim() } : {}),
-    ...(input.pages != null ? { pages: input.pages } : {}),
+    ...(input.pages !== null ? { pages: input.pages } : {}),
     ...(input.publishedAt ? { publishedAt: input.publishedAt } : {}),
     ...(descriptionBlocks ? { description: descriptionBlocks } : {}),
     ...(input.fictionType ? { fictionType: input.fictionType } : {}),
@@ -133,10 +133,10 @@ export async function createBook(
       _key: key,
       formatType: f.formatType,
       price: f.price,
-      ...(f.compareAtPrice != null ? { compareAtPrice: f.compareAtPrice } : {}),
+      ...(f.compareAtPrice !== null ? { compareAtPrice: f.compareAtPrice } : {}),
       ...(f.nameYourPrice ? { nameYourPrice: true } : {}),
-      ...(f.minimumPrice != null ? { minimumPrice: f.minimumPrice } : {}),
-      ...(f.suggestedPrice != null ? { suggestedPrice: f.suggestedPrice } : {}),
+      ...(f.minimumPrice !== null ? { minimumPrice: f.minimumPrice } : {}),
+      ...(f.suggestedPrice !== null ? { suggestedPrice: f.suggestedPrice } : {}),
     })),
   });
 
@@ -314,7 +314,7 @@ export async function updateBook(bookId: string, input: UpdateBookInput): Promis
     unset.push('isbn');
   }
 
-  if (input.pages != null) {
+  if (input.pages !== null) {
     patch.pages = input.pages;
   } else if (input.pages === null) {
     unset.push('pages');
@@ -373,7 +373,7 @@ export async function updateBook(bookId: string, input: UpdateBookInput): Promis
       stripeProductId,
     } of input.formatPrices) {
       patch[`formats[_key=="${key}"].price`] = price;
-      if (compareAtPrice != null) {
+      if (compareAtPrice !== null) {
         patch[`formats[_key=="${key}"].compareAtPrice`] = compareAtPrice;
       } else {
         unset.push(`formats[_key=="${key}"].compareAtPrice`);
@@ -381,12 +381,12 @@ export async function updateBook(bookId: string, input: UpdateBookInput): Promis
       if (nameYourPrice !== undefined) {
         patch[`formats[_key=="${key}"].nameYourPrice`] = nameYourPrice;
       }
-      if (minimumPrice != null) {
+      if (minimumPrice !== null) {
         patch[`formats[_key=="${key}"].minimumPrice`] = minimumPrice;
       } else if (minimumPrice === null) {
         unset.push(`formats[_key=="${key}"].minimumPrice`);
       }
-      if (suggestedPrice != null) {
+      if (suggestedPrice !== null) {
         patch[`formats[_key=="${key}"].suggestedPrice`] = suggestedPrice;
       } else if (suggestedPrice === null) {
         unset.push(`formats[_key=="${key}"].suggestedPrice`);
@@ -421,10 +421,10 @@ export async function updateBook(bookId: string, input: UpdateBookInput): Promis
       _key: f.key,
       formatType: f.formatType,
       price: f.price,
-      ...(f.compareAtPrice != null ? { compareAtPrice: f.compareAtPrice } : {}),
+      ...(f.compareAtPrice !== null ? { compareAtPrice: f.compareAtPrice } : {}),
       ...(f.nameYourPrice ? { nameYourPrice: true } : {}),
-      ...(f.minimumPrice != null ? { minimumPrice: f.minimumPrice } : {}),
-      ...(f.suggestedPrice != null ? { suggestedPrice: f.suggestedPrice } : {}),
+      ...(f.minimumPrice !== null ? { minimumPrice: f.minimumPrice } : {}),
+      ...(f.suggestedPrice !== null ? { suggestedPrice: f.suggestedPrice } : {}),
       ...(f.stripePriceId ? { stripePriceId: f.stripePriceId } : {}),
       ...(f.stripeProductId ? { stripeProductId: f.stripeProductId } : {}),
     }));
