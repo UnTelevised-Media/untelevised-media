@@ -108,12 +108,12 @@ function AuthorBookCard({ book }: { book: SanityBook }) {
 
 export default async function Author({ params }: Props) {
   const { slug } = await params;
-  const author = await getAuthorBySlug(slug);
+  const author: any = await getAuthorBySlug(slug);
 
   if (!author) {notFound();}
 
-  const hasBooks = author.isLiteraryAuthor && author.books && author.books.length > 0;
-  const hasTip = !!(author.tipStripeProductId && author.tipAmount);
+  const hasBooks = (author as any)?.isLiteraryAuthor && (author as any)?.books && (author as any)?.books?.length > 0;
+  const hasTip = !!((author as any)?.tipStripeProductId && (author as any)?.tipAmount);
 
   const personSchema = {
     '@context': 'https://schema.org',
@@ -171,7 +171,7 @@ export default async function Author({ params }: Props) {
             {/* Author Info */}
             <div className='flex-1 text-center lg:text-left'>
               <div className='mb-1 flex flex-wrap items-center justify-center gap-2 lg:justify-start'>
-                {author.isLiteraryAuthor && (
+                {(author as any)?.isLiteraryAuthor && (
                   <span className='bg-untele px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
                     Literary Author
                   </span>

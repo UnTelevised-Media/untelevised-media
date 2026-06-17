@@ -398,7 +398,7 @@ export default async function Article({ params }: Props) {
                     Frequently Asked Questions
                   </h3>
                   <dl className='space-y-4'>
-                    {article.faqs.map((faq, i) => (
+                    {article.faqs?.map((faq: any, i: number) => (
                       <div
                         key={i}
                         className='border-b border-slate-200 pb-4 last:border-0 last:pb-0 dark:border-slate-700'
@@ -431,7 +431,7 @@ export default async function Article({ params }: Props) {
                   Related Articles
                 </h2>
                 <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-                  {article.relatedArticles.map((related) => (
+                  {article.relatedArticles?.map((related: any) => (
                     <Link
                       key={related._id}
                       href={`/articles/${related.slug}`}
@@ -529,7 +529,7 @@ export async function generateStaticParams() {
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: Article[] = await sanityClient.fetch(query);
   const slugRoutes = slugs
-    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug?.current ?? '')
     : [];
   return slugRoutes.map((slug) => ({
     slug,
