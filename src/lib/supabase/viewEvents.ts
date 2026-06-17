@@ -23,19 +23,30 @@ export async function recordViewEvent(slug: string, ip: string): Promise<void> {
   const client = getServerClient();
 
   const ipHash = hashIP(ip);
+  const viewedAt = new Date().toISOString();
+
+  console.log(
+    `[recordViewEvent] Inserting view: slug=${slug}, ip_hash=${ipHash.substring(0, 16)}..., viewed_at=${viewedAt}`
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { error } = await (client.from('view_count') as any).insert({
+  const { error, data } = await (client.from('view_count') as any).insert({
     slug,
     ip_hash: ipHash,
-    viewed_at: new Date().toISOString(),
+    viewed_at: viewedAt,
     // created_date: should be auto-set by the DB or have a default
   });
 
   if (error) {
-    console.error('[viewEvents] Failed to record view:', error);
+    console.error('[recordViewEvent] Insert failed:', {
+      code: error.code,
+      message: error.message,
+      details: error.details,
+    });
     throw error;
   }
+
+  console.log(`[recordViewEvent] Insert successful`);
 }
 
 export interface ViewCountBySlug {
