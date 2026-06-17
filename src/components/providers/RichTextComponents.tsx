@@ -1,5 +1,5 @@
 /* eslint-disable react/self-closing-comp */
-/* eslint-disable import/prefer-default-export */
+ 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import dynamic from 'next/dynamic';

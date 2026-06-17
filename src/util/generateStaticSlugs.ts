@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 // src/util/generateStaticSlugs.ts
 import 'server-only';
 

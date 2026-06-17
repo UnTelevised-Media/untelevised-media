@@ -3,6 +3,7 @@ import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import globals from 'globals';
 import js from '@eslint/js';
+import importPlugin from 'eslint-plugin-import';
 
 export default [
   // Global ignores
@@ -43,6 +44,7 @@ export default [
     },
     plugins: {
       '@typescript-eslint': typescriptEslint,
+      import: importPlugin,
     },
     rules: {
       ...js.configs.recommended.rules,

@@ -68,7 +68,6 @@ const JobApplicationSchema = z.object({
   additionalInfo: z.string().max(2000).trim().optional(),
 });
 
-// eslint-disable-next-line import/prefer-default-export
 export async function POST(request: NextRequest) {
   const rl = await checkSubmissionRate(request);
   if (rl.limited) {
