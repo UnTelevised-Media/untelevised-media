@@ -93,25 +93,25 @@ function convertMedia(event: TimelineEvent): TimelineJSSlide['media'] {
 
     if (firstMedia._type === 'video') {
       // Support for various video platforms
-      let videoUrl = firstMedia.url;
+      let videoUrl = firstMedia.url ?? '';
 
       // Convert YouTube URLs to embed format
-      if (videoUrl.includes('youtube.com/watch?v=')) {
+      if (videoUrl?.includes('youtube.com/watch?v=')) {
         const videoId = videoUrl.split('v=')[1]?.split('&')[0];
-        videoUrl = `https://www.youtube.com/embed/${videoId}`;
-      } else if (videoUrl.includes('youtu.be/')) {
+        videoUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : videoUrl;
+      } else if (videoUrl?.includes('youtu.be/')) {
         const videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
-        videoUrl = `https://www.youtube.com/embed/${videoId}`;
+        videoUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : videoUrl;
       }
 
       // Convert Vimeo URLs to embed format
-      if (videoUrl.includes('vimeo.com/')) {
+      if (videoUrl?.includes('vimeo.com/')) {
         const videoId = videoUrl.split('vimeo.com/')[1]?.split('?')[0];
-        videoUrl = `https://player.vimeo.com/video/${videoId}`;
+        videoUrl = videoId ? `https://player.vimeo.com/video/${videoId}` : videoUrl;
       }
 
       return {
-        url: videoUrl,
+        url: videoUrl || '',
         caption: firstMedia.title ?? event.title,
         credit: ((firstMedia as Record<string, unknown>).credit as string) ?? undefined,
       };
@@ -129,16 +129,16 @@ function convertMedia(event: TimelineEvent): TimelineJSSlide['media'] {
   if (event.externalLinks && event.externalLinks.length > 0) {
     const mediaLink = event.externalLinks.find(
       (link) =>
-        link.url.includes('youtube.com') ||
-        link.url.includes('youtu.be') ||
-        link.url.includes('vimeo.com') ||
-        link.url.includes('twitter.com') ||
-        link.url.includes('instagram.com')
+        (link.url ?? '').includes('youtube.com') ||
+        (link.url ?? '').includes('youtu.be') ||
+        (link.url ?? '').includes('vimeo.com') ||
+        (link.url ?? '').includes('twitter.com') ||
+        (link.url ?? '').includes('instagram.com')
     );
 
     if (mediaLink) {
       return {
-        url: mediaLink.url,
+        url: mediaLink.url ?? '',
         caption: mediaLink.title ?? event.title,
         credit: mediaLink.description ?? undefined,
       };
@@ -204,14 +204,14 @@ function convertBlockContentToHTML(blocks: Block[]): string {
  */
 export function convertEventToSlide(event: TimelineEvent): TimelineJSSlide {
   const slide: TimelineJSSlide = {
-    start_date: convertToTimelineJSDate(event.eventDate),
+    start_date: convertToTimelineJSDate(event.eventDate ?? new Date().toISOString()),
     text: {
-      headline: event.title,
+      headline: event.title ?? '',
       text: event.detailedDescription
         ? convertBlockContentToHTML(event.detailedDescription)
-        : event.description || '',
+        : (event.description ?? ''),
     },
-    unique_id: event._id,
+    unique_id: event._id ?? '',
     autolink: true,
   };
 
@@ -245,17 +245,19 @@ export function convertEventToSlide(event: TimelineEvent): TimelineJSSlide {
   };
 
   slide.background = {
-    color: importanceColors[event.importanceLevel] || importanceColors.medium,
+    color:
+      importanceColors[event.importanceLevel as keyof typeof importanceColors] ||
+      importanceColors.medium,
   };
 
   // Add custom attributes for CSS styling
   if (typeof window !== 'undefined') {
     // These will be added as data attributes to the timeline markers
     (slide as Record<string, unknown>).customAttributes = {
-      'data-importance': event.importanceLevel,
-      'data-milestone': event.isMilestone.toString(),
-      'data-event-type': event.eventType,
-      'data-event-id': event._id,
+      'data-importance': event.importanceLevel ?? 'medium',
+      'data-milestone': (event.isMilestone ?? false).toString(),
+      'data-event-type': event.eventType ?? '',
+      'data-event-id': event._id ?? '',
     };
   }
 
@@ -275,7 +277,7 @@ export function convertTimelineToTimelineJS(
 
   // Sort events by date
   const sortedEvents = [...(events || [])].sort(
-    (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+    (a, b) => new Date(a.eventDate ?? 0).getTime() - new Date(b.eventDate ?? 0).getTime()
   );
 
   const timelineJSData: TimelineJSData = {
@@ -294,18 +296,20 @@ export function convertTimelineToTimelineJS(
 
     timelineJSData.title = {
       text: {
-        headline: timeline.title,
+        headline: timeline.title ?? '',
         text: titleText,
       },
     };
 
     // Add title media if available
     const timelineWithImage = timeline as any;
-    if (timelineWithImage.featuredImage) {
-      timelineJSData.title.media = {
-        url: urlForImage(timelineWithImage.featuredImage).width(1200).height(600).url(),
-        caption: timelineWithImage.featuredImage.alt ?? timeline.title,
-      };
+    if (timelineWithImage?.featuredImage) {
+      if (timelineJSData.title) {
+        timelineJSData.title.media = {
+          url: urlForImage(timelineWithImage.featuredImage).width(1200).height(600).url(),
+          caption: timelineWithImage.featuredImage.alt ?? timeline.title ?? '',
+        };
+      }
     }
   }
 
