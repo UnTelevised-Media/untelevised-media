@@ -97,17 +97,19 @@ export default async function MusicArtistsPage() {
               </div>
 
               <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-                {featuredArtists.map((artist) => (
-                  <ClientSideRoute
-                    key={artist._id}
-                    route={`/music-artists/${artist.slug.current}`}
-                  >
+                {featuredArtists.map((artist) => {
+                  if (!artist?.slug?.current) return null;
+                  return (
+                    <ClientSideRoute
+                      key={artist._id}
+                      route={`/music-artists/${artist.slug.current}`}
+                    >
                     <div className='group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
                       <div className='aspect-square overflow-hidden'>
                         {artist.image ? (
                           <Image
                             src={urlForImage(artist.image)?.url() ?? ''}
-                            alt={artist.name}
+                            alt={artist.name ?? 'Artist'}
                             width={300}
                             height={300}
                             className='h-full w-full object-cover transition-transform group-hover:scale-105'
@@ -158,8 +160,9 @@ export default async function MusicArtistsPage() {
                         </div>
                       </div>
                     </div>
-                  </ClientSideRoute>
-                ))}
+                    </ClientSideRoute>
+                  );
+                })}
               </div>
             </section>
           )}
@@ -177,17 +180,19 @@ export default async function MusicArtistsPage() {
               </div>
 
               <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-                {otherArtists.map((artist) => (
-                  <ClientSideRoute
-                    key={artist._id}
-                    route={`/music-artists/${artist.slug.current}`}
-                  >
+                {otherArtists.map((artist) => {
+                  if (!artist?.slug?.current) return null;
+                  return (
+                    <ClientSideRoute
+                      key={artist._id}
+                      route={`/music-artists/${artist.slug.current}`}
+                    >
                     <div className='group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
                       <div className='aspect-square overflow-hidden'>
                         {artist.image ? (
                           <Image
                             src={urlForImage(artist.image)?.url() ?? ''}
-                            alt={artist.name}
+                            alt={artist.name ?? 'Artist'}
                             width={250}
                             height={250}
                             className='h-full w-full object-cover transition-transform group-hover:scale-105'
@@ -228,8 +233,9 @@ export default async function MusicArtistsPage() {
                         </div>
                       </div>
                     </div>
-                  </ClientSideRoute>
-                ))}
+                    </ClientSideRoute>
+                  );
+                })}
               </div>
             </section>
           )}

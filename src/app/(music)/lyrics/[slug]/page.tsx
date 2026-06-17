@@ -34,10 +34,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Song Not Found', description: 'The requested song could not be found.' };
   }
 
-  const primaryName = song.primaryArtist.stageName ?? song.primaryArtist.name;
+  const primaryName = (song.primaryArtist as any)?.stageName ?? (song.primaryArtist as any)?.name ?? 'Unknown Artist';
   const artistNames = [
     primaryName,
-    ...(song.featuredArtists?.map((a) => a.stageName ?? a.name) ?? []),
+    ...(song.featuredArtists?.map((a) => (a as any)?.stageName ?? (a as any)?.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -83,8 +83,8 @@ export default async function LyricsPage({ params }: Props) {
   if (!song) {notFound();}
 
   const artistNames = [
-    song.primaryArtist.name,
-    ...(song.featuredArtists?.map((artist) => artist.name) ?? []),
+    (song.primaryArtist as any)?.name ?? 'Unknown Artist',
+    ...(song.featuredArtists?.map((artist) => (artist as any)?.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -236,7 +236,7 @@ export default async function LyricsPage({ params }: Props) {
                 {song.lyricsStructure && song.lyricsStructure.length > 0 ? (
                   <div className='space-y-8'>
                     {song.lyricsStructure
-                      .sort((a, b) => a.order - b.order)
+                      .sort((a, b) => (a?.order ?? 0) - (b?.order ?? 0))
                       .map((section, index) => (
                         <div key={index} className='space-y-3'>
                           <h3 className='text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400'>
@@ -302,20 +302,20 @@ export default async function LyricsPage({ params }: Props) {
                     <p className='text-sm text-slate-600 dark:text-slate-400'>
                       Individual track artwork
                     </p>
-                    {song.album && (
+                    {(song.album as any)?.title && (
                       <p className='mt-2 text-xs text-slate-500 dark:text-slate-400'>
-                        From album: {song.album.title}
+                        From album: {(song.album as any)?.title}
                       </p>
                     )}
                   </div>
-                ) : song.album ? (
-                  <ClientSideRoute route={`/albums/${song.album.slug.current}`}>
+                ) : (song.album as any)?.slug?.current ? (
+                  <ClientSideRoute route={`/albums/${(song.album as any).slug.current}`}>
                     <div className='group cursor-pointer'>
                       <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                        {song.album.title}
+                        {(song.album as any)?.title}
                       </h4>
                       <p className='text-sm text-slate-600 dark:text-slate-400'>
-                        {formatDate(song.album.releaseDate)}
+                        {formatDate((song.album as any)?.releaseDate)}
                       </p>
                     </div>
                   </ClientSideRoute>
@@ -328,41 +328,14 @@ export default async function LyricsPage({ params }: Props) {
                   Artist{song.featuredArtists && song.featuredArtists.length > 0 ? 's' : ''}
                 </h3>
                 <div className='space-y-4'>
-                  <ClientSideRoute route={`/music-artists/${song.primaryArtist.slug.current}`}>
-                    <div className='group flex cursor-pointer items-center gap-3'>
-                      {song.primaryArtist.image && (
-                        <div className='h-12 w-12 overflow-hidden rounded-full'>
-                          <Image
-                            src={urlForImage(song.primaryArtist.image)?.url() ?? ''}
-                            alt={song.primaryArtist.name}
-                            width={48}
-                            height={48}
-                            className='h-full w-full object-cover'
-                          />
-                        </div>
-                      )}
-                      <div>
-                        <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                          {song.primaryArtist.stageName ?? song.primaryArtist.name}
-                        </h4>
-                        <p className='text-sm text-slate-600 dark:text-slate-400'>
-                          Primary Artist
-                        </p>
-                      </div>
-                    </div>
-                  </ClientSideRoute>
-
-                  {song.featuredArtists?.map((artist) => (
-                    <ClientSideRoute
-                      key={artist._id}
-                      route={`/music-artists/${artist.slug.current}`}
-                    >
+                  {(song.primaryArtist as any)?.slug?.current && (
+                    <ClientSideRoute route={`/music-artists/${(song.primaryArtist as any).slug.current}`}>
                       <div className='group flex cursor-pointer items-center gap-3'>
-                        {artist.image && (
+                        {(song.primaryArtist as any)?.image && (
                           <div className='h-12 w-12 overflow-hidden rounded-full'>
                             <Image
-                              src={urlForImage(artist.image)?.url() ?? ''}
-                              alt={artist.name}
+                              src={urlForImage((song.primaryArtist as any)?.image)?.url() ?? ''}
+                              alt={(song.primaryArtist as any)?.name ?? 'Artist'}
                               width={48}
                               height={48}
                               className='h-full w-full object-cover'
@@ -371,12 +344,43 @@ export default async function LyricsPage({ params }: Props) {
                         )}
                         <div>
                           <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                            {artist.stageName ?? artist.name}
+                            {(song.primaryArtist as any)?.stageName ?? (song.primaryArtist as any)?.name}
                           </h4>
-                          <p className='text-sm text-slate-600 dark:text-slate-400'>Featured</p>
+                          <p className='text-sm text-slate-600 dark:text-slate-400'>
+                            Primary Artist
+                          </p>
                         </div>
                       </div>
                     </ClientSideRoute>
+                  )}
+
+                  {song.featuredArtists?.map((artist) => (
+                    (artist as any)?.slug?.current && (
+                      <ClientSideRoute
+                        key={(artist as any)._id}
+                        route={`/music-artists/${(artist as any).slug.current}`}
+                      >
+                        <div className='group flex cursor-pointer items-center gap-3'>
+                          {(artist as any)?.image && (
+                            <div className='h-12 w-12 overflow-hidden rounded-full'>
+                              <Image
+                                src={urlForImage((artist as any)?.image)?.url() ?? ''}
+                                alt={(artist as any)?.name ?? 'Artist'}
+                                width={48}
+                                height={48}
+                                className='h-full w-full object-cover'
+                              />
+                            </div>
+                          )}
+                          <div>
+                            <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                              {(artist as any)?.stageName ?? (artist as any)?.name}
+                            </h4>
+                            <p className='text-sm text-slate-600 dark:text-slate-400'>Featured</p>
+                          </div>
+                        </div>
+                      </ClientSideRoute>
+                    )
                   ))}
                 </div>
               </div>
@@ -391,10 +395,10 @@ export default async function LyricsPage({ params }: Props) {
                     {song.contributingArtists.map((contributor, index) => (
                       <div key={index} className='flex items-center justify-between'>
                         <span className='text-sm text-slate-900 dark:text-slate-100'>
-                          {contributor.artist.stageName ?? contributor.artist.name}
+                          {(contributor.artist as any)?.stageName ?? (contributor.artist as any)?.name ?? 'Unknown'}
                         </span>
                         <span className='text-sm text-slate-600 dark:text-slate-400'>
-                          {contributor.role.replace('-', ' ')}
+                          {contributor.role?.replace('-', ' ') ?? 'Contributor'}
                         </span>
                       </div>
                     ))}
@@ -409,7 +413,7 @@ export default async function LyricsPage({ params }: Props) {
 
               {/* Social Share */}
               <SocialShare
-                url={`/lyrics/${song.slug.current}`}
+                url={`/lyrics/${song.slug?.current ?? ''}`}
                 title={`${song.title} - ${artistNames} | Lyrics`}
               />
             </div>

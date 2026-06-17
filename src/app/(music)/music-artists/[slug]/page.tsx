@@ -260,47 +260,49 @@ export default async function MusicArtistPage({ params }: Props) {
                       const artworkAlt = getSongArtworkAlt(song);
 
                       return (
-                        <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
-                          <div className='group flex cursor-pointer items-center gap-4 rounded-lg p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700'>
-                            {artworkUrl && (
-                              <div className='h-16 w-16 overflow-hidden rounded-lg'>
-                                <Image
-                                  src={artworkUrl}
-                                  alt={artworkAlt}
-                                  width={64}
-                                  height={64}
-                                  className='h-full w-full object-cover'
-                                />
+                        song.slug?.current && (
+                          <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
+                            <div className='group flex cursor-pointer items-center gap-4 rounded-lg p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700'>
+                              {artworkUrl && (
+                                <div className='h-16 w-16 overflow-hidden rounded-lg'>
+                                  <Image
+                                    src={artworkUrl}
+                                    alt={artworkAlt}
+                                    width={64}
+                                    height={64}
+                                    className='h-full w-full object-cover'
+                                  />
+                                </div>
+                              )}
+                              <div className='flex-1'>
+                                <h3 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                                  {song.title}
+                                </h3>
+                                <div className='flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400'>
+                                  {(song.album as any)?.title && <span>{(song.album as any).title}</span>}
+                                  {song.releaseDate && (
+                                    <>
+                                      <span>•</span>
+                                      <span>{formatDate(song.releaseDate)}</span>
+                                    </>
+                                  )}
+                                  {song.duration && (
+                                    <>
+                                      <span>•</span>
+                                      <span>{song.duration}</span>
+                                    </>
+                                  )}
+                                </div>
                               </div>
-                            )}
-                            <div className='flex-1'>
-                              <h3 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                                {song.title}
-                              </h3>
-                              <div className='flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400'>
-                                {song.album && <span>{song.album.title}</span>}
-                                {song.releaseDate && (
-                                  <>
-                                    <span>•</span>
-                                    <span>{formatDate(song.releaseDate)}</span>
-                                  </>
-                                )}
-                                {song.duration && (
-                                  <>
-                                    <span>•</span>
-                                    <span>{song.duration}</span>
-                                  </>
-                                )}
-                              </div>
+                              {song.featuredArtists && song.featuredArtists.length > 0 && (
+                                <div className='text-sm text-slate-600 dark:text-slate-400'>
+                                  feat.{' '}
+                                  {song.featuredArtists.map((a) => (a as any)?.stageName ?? (a as any)?.name).join(', ')}
+                                </div>
+                              )}
                             </div>
-                            {song.featuredArtists && song.featuredArtists.length > 0 && (
-                              <div className='text-sm text-slate-600 dark:text-slate-400'>
-                                feat.{' '}
-                                {song.featuredArtists.map((a) => a.stageName ?? a.name).join(', ')}
-                              </div>
-                            )}
-                          </div>
-                        </ClientSideRoute>
+                          </ClientSideRoute>
+                        )
                       );
                     })}
                   </div>
@@ -323,28 +325,30 @@ export default async function MusicArtistPage({ params }: Props) {
                   </h2>
                   <div className='grid gap-6 sm:grid-cols-2'>
                     {artist.albums.map((album) => (
-                      <ClientSideRoute key={album._id} route={`/albums/${album.slug.current}`}>
-                        <div className='group cursor-pointer rounded-lg border border-slate-200 p-4 transition-colors hover:border-untele dark:border-slate-700 dark:hover:border-untele'>
-                          {album.albumArt && (
-                            <div className='mb-4 aspect-square overflow-hidden rounded-lg'>
-                              <Image
-                                src={urlForImage(album.albumArt)?.url() ?? ''}
-                                alt={`${album.title} album artwork`}
-                                width={200}
-                                height={200}
-                                className='h-full w-full object-cover transition-transform group-hover:scale-105'
-                              />
+                      album?.slug?.current && (
+                        <ClientSideRoute key={album._id} route={`/albums/${album.slug.current}`}>
+                          <div className='group cursor-pointer rounded-lg border border-slate-200 p-4 transition-colors hover:border-untele dark:border-slate-700 dark:hover:border-untele'>
+                            {album.albumArt && (
+                              <div className='mb-4 aspect-square overflow-hidden rounded-lg'>
+                                <Image
+                                  src={urlForImage(album.albumArt)?.url() ?? ''}
+                                  alt={`${album.title} album artwork`}
+                                  width={200}
+                                  height={200}
+                                  className='h-full w-full object-cover transition-transform group-hover:scale-105'
+                                />
+                              </div>
+                            )}
+                            <h3 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                              {album.title}
+                            </h3>
+                            <div className='mt-1 text-sm text-slate-600 dark:text-slate-400'>
+                              <div>{album.albumType ?? 'Album'}</div>
+                              <div>{formatDate(album.releaseDate)}</div>
                             </div>
-                          )}
-                          <h3 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                            {album.title}
-                          </h3>
-                          <div className='mt-1 text-sm text-slate-600 dark:text-slate-400'>
-                            <div>{album.albumType}</div>
-                            <div>{formatDate(album.releaseDate)}</div>
                           </div>
-                        </div>
-                      </ClientSideRoute>
+                        </ClientSideRoute>
+                      )
                     ))}
                   </div>
                 </div>
@@ -464,7 +468,7 @@ export default async function MusicArtistPage({ params }: Props) {
 
               {/* Social Share */}
               <SocialShare
-                url={`/music-artists/${artist.slug.current}`}
+                url={`/music-artists/${artist.slug?.current ?? ''}`}
                 title={`${displayName} | Music Artist`}
               />
             </div>
