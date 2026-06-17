@@ -108,7 +108,9 @@ async function verifyArticleAccess(
 
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
-  if (isEditorPlus) return { canEdit: true, isEditorPlus: true, sanityAuthorId };
+  if (isEditorPlus) {
+    return { canEdit: true, isEditorPlus: true, sanityAuthorId };
+  }
 
   // Authors can only edit their own articles.
   // Query both the draft ID and the published ID so this works regardless of
@@ -150,8 +152,9 @@ export async function createArticle(
   const { id: clerkUserId } = await requireAuthor();
 
   const rl = await checkRateLimit(clerkUserId);
-  if (!rl.allowed)
+  if (!rl.allowed) {
     return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
+  }
 
   const parsed = articleWriteSchema.safeParse(input);
   if (!parsed.success) {
@@ -250,8 +253,9 @@ export async function updateArticle(
   const { id: clerkUserId } = await requireAuthor();
 
   const rl = await checkRateLimit(clerkUserId);
-  if (!rl.allowed)
+  if (!rl.allowed) {
     return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
+  }
 
   const parsed = articleWriteSchema.safeParse(input);
   if (!parsed.success) {
@@ -303,17 +307,17 @@ export async function updateArticle(
   } else {
     fieldsToUnset.push('publishedAt');
   }
-  if (sanitized.mainImage != null) {
+  if (sanitized.mainImage !== null) {
     setFields.mainImage = sanitized.mainImage;
   } else {
     fieldsToUnset.push('mainImage');
   }
-  if (sanitized.eventDate != null) {
+  if (sanitized.eventDate !== null) {
     setFields.eventDate = sanitized.eventDate;
   } else {
     fieldsToUnset.push('eventDate');
   }
-  if (sanitized.correction != null) {
+  if (sanitized.correction !== null) {
     setFields.correction = sanitized.correction;
   } else {
     fieldsToUnset.push('correction');
@@ -533,7 +537,7 @@ export async function publishArticle(
   articleId: string,
   scheduledAt?: string
 ): Promise<ActionResult> {
-  const { id: clerkUserId, role } = await requireAuthor();
+  const { role } = await requireAuthor();
 
   if (!hasRole(role, 'editor')) {
     return { success: false, error: 'Only editors and admins can publish articles.' };

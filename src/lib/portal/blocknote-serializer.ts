@@ -101,7 +101,9 @@ export function genKey(): string {
 // Sanity is the document ID, not the URL.
 export function cdnUrlToAssetRef(url: string): string {
   const m = url.match(/cdn\.sanity\.io\/images\/[^/]+\/[^/]+\/([a-f0-9]+-\d+x\d+)\.([a-z0-9]+)/i);
-  if (m) return `image-${m[1]}-${m[2]}`;
+  if (m) {
+    return `image-${m[1]}-${m[2]}`;
+  }
   // Already an asset ID (image-…) or an external URL — return as-is
   return url;
 }
@@ -114,8 +116,11 @@ export function blockNoteToPortableText(blocks: BNBlock[]): SanityBlockAny[] {
   const result: SanityBlockAny[] = [];
   for (const block of blocks) {
     const converted = bnBlockToPT(block);
-    if (Array.isArray(converted)) result.push(...converted);
-    else if (converted) result.push(converted);
+    if (Array.isArray(converted)) {
+      result.push(...converted);
+    } else if (converted) {
+      result.push(converted);
+    }
 
     // Recurse into nested children (nested list items)
     if (block.children?.length) {
@@ -312,7 +317,7 @@ function bnStylesToPTMarks(styles: BNStyles): string[] {
 // CDN URL. When omitted image blocks fall back to the raw _ref string.
 export function portableTextToBlockNote(
   blocks: SanityBlockAny[],
-  resolveImageUrl?: (assetRef: string) => string
+  resolveImageUrl?: (ref: string) => string
 ): object[] {
   if (!blocks?.length) return [emptyParagraph()];
 
@@ -385,17 +390,17 @@ function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (ref: string) => stri
       }
 
       case 'image': {
-        const assetRef = (b.asset as Record<string, unknown> | undefined)?._ref as
-          | string
-          | undefined;
         // Prefer a pre-resolved URL (e.g. asset->{ url }) then fall back to
         // building via the injected resolver, then bare ref.
+        const ref = (b.asset as Record<string, unknown> | undefined)?._ref as
+          | string
+          | undefined;
         const preResolved = (b.asset as Record<string, unknown> | undefined)?.url as
           | string
           | undefined;
         const url =
           preResolved ??
-          (assetRef && resolveImageUrl ? resolveImageUrl(assetRef) : (assetRef ?? ''));
+          (ref && resolveImageUrl ? resolveImageUrl(ref) : (ref ?? ''));
         return {
           type: 'image',
           props: { url, caption: (b.alt as string) ?? '' },

@@ -113,7 +113,7 @@ export async function generateMetadata({
   const description = [
     book.author?.name ? `By ${book.author.name}.` : null,
     genres,
-    lowestPrice != null ? `From $${lowestPrice.toFixed(2)}.` : null,
+    lowestPrice !== null ? `From $${lowestPrice.toFixed(2)}.` : null,
     'Available now in the Hurriya Publications bookstore.',
   ]
     .filter(Boolean)
@@ -168,7 +168,7 @@ function RevenueTermsCard({
 }) {
   const { authorPercentage, publisherPercentage, platformPercentage, description } = terms;
   const hasData =
-    authorPercentage != null || publisherPercentage != null || platformPercentage != null;
+    authorPercentage !== null || publisherPercentage !== null || platformPercentage !== null;
   if (!hasData) return null;
 
   const slices = [

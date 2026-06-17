@@ -286,7 +286,9 @@ export default async function Author({ params }: Props) {
                     let label = url;
                     try {
                       label = new URL(url).hostname.replace('www.', '');
-                    } catch {}
+                    } catch {
+                      // ignore invalid URLs
+                    }
                     return (
                       <a
                         key={i}
