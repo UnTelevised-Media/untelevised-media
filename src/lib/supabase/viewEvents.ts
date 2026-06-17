@@ -111,19 +111,33 @@ export async function getTrendingArticles(
   daysBack: number = 7,
   limit: number = 31
 ): Promise<TrendingArticle[]> {
-  const client = getServerClient();
+  try {
+    const client = getServerClient();
 
-  const startDate = new Date();
-  startDate.setDate(startDate.getDate() - daysBack);
-  const dateStr = startDate.toISOString().split('T')[0];
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - daysBack);
+    const dateStr = startDate.toISOString().split('T')[0];
 
-  const { data, error } = await (client
-    .from('view_count')
-    .select('slug, viewed_at')
-    .gte('created_date', dateStr) as any);
+    console.log(`[getTrendingArticles] Querying from ${dateStr}`);
 
-  if (error) {
-    console.error('[getTrendingArticles] Query error:', error);
+    const { data, error } = await (client
+      .from('view_count')
+      .select('slug, viewed_at')
+      .gte('created_date', dateStr) as any);
+
+    if (error) {
+      console.error('[getTrendingArticles] Supabase query error:', {
+        code: error.code,
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+      });
+      throw error;
+    }
+
+    console.log(`[getTrendingArticles] Found ${data?.length ?? 0} view events`);
+  } catch (error) {
+    console.error('[getTrendingArticles] Exception:', error);
     throw error;
   }
 

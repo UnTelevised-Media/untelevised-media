@@ -32,7 +32,18 @@ const getTrendingArticles = cache(async (): Promise<TrendingArticle[]> => {
   } catch (error) {
     // If Supabase is not available (e.g., during static build without env vars),
     // return empty trending list — this is non-critical for page rendering
-    console.warn('[TrendingSection] Could not fetch trending articles from Supabase:', error);
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.warn(
+      '[TrendingSection] Could not fetch trending articles from Supabase:',
+      errorMsg,
+      error
+    );
+    console.error('[TrendingSection] Full error details:', {
+      message: errorMsg,
+      code: (error as any)?.code,
+      details: (error as any)?.details,
+      hint: (error as any)?.hint,
+    });
     return [];
   }
 
