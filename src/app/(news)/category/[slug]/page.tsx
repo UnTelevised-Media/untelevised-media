@@ -108,7 +108,7 @@ export default async function CategoryPage({ params }: Props) {
         {heroImageUrl && (
           <Image
             src={heroImageUrl}
-            alt={category.title}
+            alt={category.title ?? 'Category cover image'}
             fill
             priority
             className='object-cover opacity-15 dark:opacity-10'
@@ -322,7 +322,7 @@ export async function generateStaticParams() {
   const queryCategoryStaticParams = groq`*[_type=='category'] { slug }`;
   const slugs: Category[] = await sanityClient.fetch(queryCategoryStaticParams);
   const slugRoutes = slugs
-    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    ? slugs.filter((item) => item?.slug?.current).map((item) => (item.slug?.current ?? ''))
     : [];
   return slugRoutes.map((slug) => ({ slug }));
 }

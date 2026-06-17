@@ -1,31 +1,33 @@
 import 'server-only';
 
+import { createHash } from 'crypto';
 import { getServerClient } from './client';
 
 interface ViewEvent {
   id: number;
   slug: string;
-  ip: string | null;
-  ip_hash: string | null;
-  city: string | null;
-  state_province: string | null;
-  country: string | null;
+  ip_hash: string;
   viewed_at: string;
   created_date: string;
+}
+
+function hashIP(ip: string): string {
+  return createHash('sha256').update(ip).digest('hex');
 }
 
 export async function recordViewEvent(slug: string, ip: string): Promise<void> {
   const client = getServerClient();
 
-  // Store raw IP (encrypted at rest) and NULL fields for batch job geolocation
+  const ipHash = hashIP(ip);
+  const now = new Date();
+  const today = now.toISOString().split('T')[0];
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { error } = await (client.from('view_count') as any).insert({
+  const { error } = await (client.from('view_events') as any).insert({
     slug,
-    ip: ip, // Raw IP, will be used by batch job for geolocation
-    ip_hash: null, // Will be set by batch job after geolocation
-    city: null,
-    state_province: null,
-    country: null,
+    ip_hash: ipHash,
+    viewed_at: now.toISOString(),
+    created_date: today,
   });
 
   if (error) {
@@ -48,7 +50,7 @@ export async function getViewCountsByDate(dateString: string): Promise<ViewCount
   // Type assertion needed for Supabase strict typing
 
   const { data, error } = await (client
-    .from('view_count')
+    .from('view_events')
     .select('slug')
     .eq('created_date', dateString) as any);
 
@@ -73,7 +75,10 @@ export async function getViewCountsByDate(dateString: string): Promise<ViewCount
 export async function deleteViewEventsForDate(dateString: string): Promise<number> {
   const client = getServerClient();
 
-  const { count, error } = await client.from('view_count').delete().eq('created_date', dateString);
+  const { count, error } = await client
+    .from('view_events')
+    .delete()
+    .eq('created_date', dateString);
 
   if (error) {
     console.error('[viewEvents] Failed to delete view events:', error);
@@ -90,7 +95,7 @@ export interface TrendingArticle {
 }
 
 /**
- * Get trending articles from view_count table, aggregated by slug
+ * Get trending articles from view_events table, aggregated by slug
  */
 export async function getTrendingArticles(
   daysBack: number = 7,
@@ -103,7 +108,7 @@ export async function getTrendingArticles(
   const dateStr = startDate.toISOString().split('T')[0];
 
   const { data, error } = await (client
-    .from('view_count')
+    .from('view_events')
     .select('slug, viewed_at')
     .gte('created_date', dateStr) as any);
 

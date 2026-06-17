@@ -1,5 +1,6 @@
 // src/components/seo/StructuredData.tsx
 // Note: plain <script> tags are correct for inline JSON-LD in RSC. next/script is for third-party loading strategies.
+import type { Song, MusicArtist, Album } from '#/sanity.types';
 import { getSongArtwork } from '@/util/getSongArtwork';
 
 interface SongStructuredDataProps {
@@ -18,9 +19,9 @@ interface AlbumStructuredDataProps {
 
 export const SongStructuredData = ({ song }: SongStructuredDataProps) => {
   const artistNames = [
-    song.primaryArtist.stageName ?? song.primaryArtist.name,
-    ...(song.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
-  ];
+    (song.primaryArtist as any)?.stageName ?? (song.primaryArtist as any)?.name,
+    ...(song.featuredArtists?.map((artist: any) => artist?.stageName ?? artist?.name) ?? []),
+  ].filter(Boolean);
 
   const artworkUrl = getSongArtwork(song);
 
@@ -35,9 +36,9 @@ export const SongStructuredData = ({ song }: SongStructuredDataProps) => {
     inAlbum: song.album
       ? {
           '@type': 'MusicAlbum',
-          name: song.album.title,
-          albumReleaseType: song.album.albumType,
-          datePublished: song.album.releaseDate,
+          name: (song.album as any)?.title,
+          albumReleaseType: (song.album as any)?.albumType,
+          datePublished: (song.album as any)?.releaseDate,
         }
       : undefined,
     datePublished: song.releaseDate,
@@ -50,7 +51,7 @@ export const SongStructuredData = ({ song }: SongStructuredDataProps) => {
       '@type': 'CreativeWork',
       text: song.lyrics,
     },
-    url: `https://www.untelevised.media/lyrics/${song.slug.current}`,
+    url: `https://www.untelevised.media/lyrics/${song.slug?.current ?? ''}`,
   };
 
   return (
@@ -80,7 +81,7 @@ export const ArtistStructuredData = ({ artist, songs }: ArtistStructuredDataProp
         }
       : undefined,
     recordLabel: artist.recordLabel,
-    url: `https://www.untelevised.media/music-artists/${artist.slug.current}`,
+    url: `https://www.untelevised.media/music-artists/${artist.slug?.current ?? ''}`,
     sameAs: [
       artist.website,
       artist.socialMedia?.spotify,
@@ -93,10 +94,10 @@ export const ArtistStructuredData = ({ artist, songs }: ArtistStructuredDataProp
         : undefined,
       artist.socialMedia?.facebook,
     ].filter(Boolean),
-    track: songs?.map((song) => ({
+    track: songs?.map((song: any) => ({
       '@type': 'MusicRecording',
       name: song.title,
-      url: `https://www.untelevised.media/lyrics/${song.slug.current}`,
+      url: `https://www.untelevised.media/lyrics/${song.slug?.current ?? ''}`,
     })),
   };
 
@@ -113,9 +114,9 @@ export const ArtistStructuredData = ({ artist, songs }: ArtistStructuredDataProp
 
 export const AlbumStructuredData = ({ album, songs }: AlbumStructuredDataProps) => {
   const artistNames = [
-    album.artist.stageName ?? album.artist.name,
-    ...(album.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
-  ];
+    (album.artist as any)?.stageName ?? (album.artist as any)?.name,
+    ...(album.featuredArtists?.map((artist: any) => artist?.stageName ?? artist?.name) ?? []),
+  ].filter(Boolean);
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -135,14 +136,14 @@ export const AlbumStructuredData = ({ album, songs }: AlbumStructuredDataProps) 
       '@type': 'Person',
       name: producer,
     })),
-    track: songs?.map((song, index) => ({
+    track: songs?.map((song: any, index) => ({
       '@type': 'MusicRecording',
       name: song.title,
       position: song.trackNumber ?? index + 1,
-      url: `https://www.untelevised.media/lyrics/${song.slug.current}`,
+      url: `https://www.untelevised.media/lyrics/${song.slug?.current ?? ''}`,
       duration: song.duration ? `PT${song.duration.replace(':', 'M')}S` : undefined,
     })),
-    url: `https://www.untelevised.media/albums/${album.slug.current}`,
+    url: `https://www.untelevised.media/albums/${album.slug?.current ?? ''}`,
   };
 
   return (

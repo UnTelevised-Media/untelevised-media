@@ -25,7 +25,16 @@ interface TrendingArticle {
 // Fetch trending slugs from Supabase, then enrich with Sanity article data
 const getTrendingArticles = cache(async (): Promise<TrendingArticle[]> => {
   // Get trending slugs from Supabase (view_count table)
-  const trendingSlugs = await getTrendingFromSupabase(7, 31);
+  let trendingSlugs: Awaited<ReturnType<typeof getTrendingFromSupabase>> = [];
+
+  try {
+    trendingSlugs = await getTrendingFromSupabase(7, 31);
+  } catch (error) {
+    // If Supabase is not available (e.g., during static build without env vars),
+    // return empty trending list — this is non-critical for page rendering
+    console.warn('[TrendingSection] Could not fetch trending articles from Supabase:', error);
+    return [];
+  }
 
   if (trendingSlugs.length === 0) {
     return [];

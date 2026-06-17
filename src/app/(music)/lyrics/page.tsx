@@ -103,7 +103,7 @@ export default async function LyricsIndexPage() {
                   const artworkUrl = getSongArtwork(song);
                   const artworkAlt = getSongArtworkAlt(song);
 
-                  if (!song.slug?.current) return null;
+                  if (!song.slug?.current) {return null;}
                   return (
                       <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
                         <div className='group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
@@ -133,7 +133,7 @@ export default async function LyricsIndexPage() {
                               )}
                             </p>
                           <div className='flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400'>
-                            {song.album && <span>{song.album.title}</span>}
+                            {song.album && <span>{(song.album as any)?.title}</span>}
                             {song.releaseDate && (
                               <>
                                 <span>•</span>
@@ -173,7 +173,7 @@ export default async function LyricsIndexPage() {
 
               <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
                 {featuredArtists.map((artist) => {
-                  if (!artist?.slug?.current) return null;
+                  if (!artist?.slug?.current) {return null;}
                   return (
                     <ClientSideRoute
                       key={artist._id}
@@ -184,7 +184,7 @@ export default async function LyricsIndexPage() {
                         {artist.image ? (
                           <Image
                             src={urlForImage(artist.image)?.url() ?? ''}
-                            alt={artist.name}
+                            alt={artist.name ?? 'Artist'}
                             width={200}
                             height={200}
                             className='h-48 w-48 object-cover transition-transform group-hover:scale-105'
@@ -234,7 +234,7 @@ export default async function LyricsIndexPage() {
                     const artworkUrl = getSongArtwork(song);
                     const artworkAlt = getSongArtworkAlt(song);
 
-                    if (!song.slug?.current) return null;
+                    if (!song.slug?.current) {return null;}
                     return (
                         <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
                           <div className='group flex cursor-pointer items-center gap-4 p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700'>
@@ -259,20 +259,20 @@ export default async function LyricsIndexPage() {
                                 {song.title}
                               </h3>
                               <p className='text-sm text-slate-600 dark:text-slate-400'>
-                                {song.primaryArtist?.stageName ?? song.primaryArtist?.name ?? 'Unknown Artist'}
+                                {(song.primaryArtist as any)?.stageName ?? (song.primaryArtist as any)?.name ?? 'Unknown Artist'}
                                 {song.featuredArtists && song.featuredArtists.length > 0 && (
                                   <span>
                                     {' '}
                                     feat.{' '}
                                     {song.featuredArtists
-                                      .map((a: any) => a?.stageName ?? a?.name)
+                                      .map((a: any) => (a as any)?.stageName ?? (a as any)?.name)
                                       .join(', ')}
                                   </span>
                                 )}
                               </p>
                               {song.album && (
                                 <p className='text-xs text-slate-500 dark:text-slate-400'>
-                                  {song.album.title}
+                                  {(song.album as any)?.title}
                                 </p>
                               )}
                             </div>

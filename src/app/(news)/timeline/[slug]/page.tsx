@@ -237,8 +237,8 @@ export default async function TimelinePage({ params }: Props) {
         {/* TimelineJS Visualization */}
         <div className='mb-8'>
           <TimelineJSVisualization
-            timeline={timeline}
-            events={events}
+            timeline={timeline as any}
+            events={events as any}
             height='700px'
             options={{
               hash_bookmark: true,

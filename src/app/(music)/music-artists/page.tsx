@@ -98,7 +98,7 @@ export default async function MusicArtistsPage() {
 
               <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                 {featuredArtists.map((artist) => {
-                  if (!artist?.slug?.current) return null;
+                  if (!artist?.slug?.current) {return null;}
                   return (
                     <ClientSideRoute
                       key={artist._id}
@@ -181,7 +181,7 @@ export default async function MusicArtistsPage() {
 
               <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                 {otherArtists.map((artist) => {
-                  if (!artist?.slug?.current) return null;
+                  if (!artist?.slug?.current) {return null;}
                   return (
                     <ClientSideRoute
                       key={artist._id}

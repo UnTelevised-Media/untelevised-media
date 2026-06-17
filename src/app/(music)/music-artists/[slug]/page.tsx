@@ -99,7 +99,7 @@ export default async function MusicArtistPage({ params }: Props) {
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
-      <ArtistStructuredData artist={artist} songs={artist.songs} />
+      <ArtistStructuredData artist={artist as any} songs={artist.songs} />
       {/* Hero Section */}
       <section className='bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900'>
         <div className='container mx-auto px-4 py-16'>
@@ -297,7 +297,7 @@ export default async function MusicArtistPage({ params }: Props) {
                               {song.featuredArtists && song.featuredArtists.length > 0 && (
                                 <div className='text-sm text-slate-600 dark:text-slate-400'>
                                   feat.{' '}
-                                  {song.featuredArtists.map((a) => (a as any)?.stageName ?? (a as any)?.name).join(', ')}
+                                  {song.featuredArtists.map((a: any) => (a as any)?.stageName ?? (a as any)?.name).join(', ')}
                                 </div>
                               )}
                             </div>

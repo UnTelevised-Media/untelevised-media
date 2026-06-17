@@ -85,8 +85,10 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
       siteName: SITE_NAME,
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt ?? article.publishedAt,
-      authors: article.author?.name ? [(article.author as any)?.name ?? 'Author'] : undefined,
-      section: article.categories?.[0]?.title,
+      authors: (article.author as any)?.name
+        ? [(article.author as any)?.name ?? 'Author']
+        : undefined,
+      section: (article.categories?.[0] as any)?.title,
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
     },
     twitter: {

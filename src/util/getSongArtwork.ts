@@ -64,7 +64,7 @@ export function getSongArtworkInfo(song: Song): {
   let source: 'track' | 'album' | 'none' = 'none';
   if (song.trackArt) {
     source = 'track';
-  } else if (song.album?.albumArt) {
+  } else if ((song.album as any)?.albumArt) {
     source = 'album';
   }
 
