@@ -1,4 +1,4 @@
-import type { LiveEvent, Block } from '#/sanity.types';
+import type { LiveEvent } from '#/sanity.types';
 // src/app/(user)/live-event/[slug]/page.tsx
 import Image from 'next/image';
 import { groq } from 'next-sanity';
@@ -51,20 +51,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function LiveEvent({ params }: Props) {
   const { slug } = await params;
-  const liveEvent = await getEventBySlug(slug);
+  const liveEvent: any = await getEventBySlug(slug);
   if (!liveEvent) {notFound();}
 
   const allEvents = [
     // Check if liveEvent.relatedArticles is an array. If Truthy map over it and return an array of objects with the source property set to the source of the related article.
-    ...(Array.isArray(liveEvent.relatedArticles)
-      ? liveEvent.relatedArticles.map((article) => ({
+    ...(Array.isArray((liveEvent as any)?.relatedArticles)
+      ? (liveEvent as any)?.relatedArticles?.map((article: any) => ({
           ...article,
           source: 'relatedArticles',
         }))
       : []),
     // Check if liveEvent.keyEvent is an array. If Truthy map over it and return an array of objects with the source property set to the source of the key event.
-    ...(Array.isArray(liveEvent.keyEvent)
-      ? liveEvent.keyEvent.map((event) => ({
+    ...(Array.isArray((liveEvent as any)?.keyEvent)
+      ? (liveEvent as any)?.keyEvent?.map((event: any) => ({
           ...event,
           source: 'keyEvent',
         }))
@@ -72,14 +72,14 @@ export default async function LiveEvent({ params }: Props) {
   ];
 
   // Sort the allEvents array based on the eventDate property
-  allEvents.sort((a, b) => {
+  allEvents.sort((a: any, b: any) => {
     // Check if either eventDate is not a valid date
-    if (isNaN(Date.parse(a.eventDate)) || isNaN(Date.parse(b.eventDate))) {
+    if (isNaN(Date.parse(a?.eventDate || '')) || isNaN(Date.parse(b?.eventDate || ''))) {
       // If both dates are invalid, return 0 to indicate no change in order. This prevents sorting based on invalid dates
       return 0;
     }
     // Compare the eventDate strings directly to determine the order
-    return a.eventDate > b.eventDate ? -1 : a.eventDate < b.eventDate ? 1 : 0;
+    return (a?.eventDate || '') > (b?.eventDate || '') ? -1 : (a?.eventDate || '') < (b?.eventDate || '') ? 1 : 0;
   });
 
   const schemaEventStatusMap: Record<string, string> = {
@@ -92,18 +92,18 @@ export default async function LiveEvent({ params }: Props) {
   const eventSchema = {
     '@context': 'https://schema.org',
     '@type': 'Event',
-    name: liveEvent.title,
-    description: liveEvent.description,
-    startDate: liveEvent.eventDate,
-    endDate: liveEvent.endDate ?? undefined,
+    name: (liveEvent as any)?.title,
+    description: (liveEvent as any)?.description,
+    startDate: (liveEvent as any)?.eventDate,
+    endDate: (liveEvent as any)?.endDate ?? undefined,
     eventStatus: liveEvent.eventStatus
       ? (schemaEventStatusMap[liveEvent.eventStatus] ?? 'https://schema.org/EventScheduled')
       : liveEvent.isCurrentEvent
         ? 'https://schema.org/EventScheduled'
         : 'https://schema.org/EventCompleted',
     eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
-    location: liveEvent.location
-      ? { '@type': 'Place', name: liveEvent.location }
+    location: (liveEvent as any)?.location
+      ? { '@type': 'Place', name: (liveEvent as any)?.location }
       : { '@type': 'VirtualLocation', url: `https://www.untelevised.media/live-event/${slug}/` },
     image: getSanityOgImageUrl(liveEvent.mainImage),
     organizer: {
@@ -171,28 +171,28 @@ export default async function LiveEvent({ params }: Props) {
                   </span>
                 )}
               </div>
-              <h1 className='w-full text-3xl font-bold'>{liveEvent.title}</h1>
+              <h1 className='w-full text-3xl font-bold'>{(liveEvent as any)?.title}</h1>
               {liveEvent.subtitle && (
                 <p className='text-lg text-slate-500 dark:text-slate-400'>{liveEvent.subtitle}</p>
               )}
 
               {/* Location & Dates */}
               <div className='flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400'>
-                {liveEvent.location && <span>ðŸ“ {liveEvent.location}</span>}
-                <span>{formatDate(liveEvent.eventDate || liveEvent._createdAt)}</span>
-                {liveEvent.endDate && <span>â€“ {formatDate(liveEvent.endDate)}</span>}
+                {(liveEvent as any)?.location && <span>ðŸ“ {(liveEvent as any)?.location}</span>}
+                <span>{formatDate((liveEvent as any)?.eventDate || (liveEvent as any)?._createdAt)}</span>
+                {(liveEvent as any)?.endDate && <span>â€“ {formatDate((liveEvent as any)?.endDate)}</span>}
               </div>
             </div>
             {/* Description  */}
             <div className='w-full'>
-              <p className='w-full italic lg:text-xs xl:text-base'>{liveEvent.description}</p>
+              <p className='w-full italic lg:text-xs xl:text-base'>{(liveEvent as any)?.description}</p>
             </div>
           </div>
         </section>
 
         <SocialShare
           url={`https://untelevised.media/live-event/${slug}`}
-          title={liveEvent.title}
+          title={(liveEvent as any)?.title}
         />
 
         <div className='flex flex-col items-center justify-center space-x-4'>
@@ -202,7 +202,7 @@ export default async function LiveEvent({ params }: Props) {
               width='720'
               height='420'
               className='rounded-lg border border-untele bg-slate-700/30'
-              src={`${liveEvent.videoLink}`}
+              src={`${(liveEvent as any)?.videoLink}`}
               title='YouTube video player'
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
             />
@@ -287,7 +287,7 @@ export async function generateStaticParams() {
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: LiveEvent[] = await sanityClient.fetch(queryLiveEventStaticParams);
   const slugRoutes = slugs
-    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug?.current ?? '')
     : [];
   return slugRoutes.map((slug) => ({
     slug,
