@@ -67,20 +67,28 @@ function parseCSV(filePath: string): Map<string, number> {
 
   for (let i = headerIdx + 1; i < lines.length; i++) {
     const line = lines[i].trim();
-    if (!line) continue;
+    if (!line) {
+      continue;
+    }
 
     // Split on first comma only — path may contain commas in query strings
     const commaIdx = line.indexOf(',');
-    if (commaIdx === -1) continue;
+    if (commaIdx === -1) {
+      continue;
+    }
 
     const rawPath = line.slice(0, commaIdx).replace(/^"|"$/g, '').trim();
     const rest = line.slice(commaIdx + 1);
     const viewCount = parseInt(rest.split(',')[0], 10);
 
-    if (isNaN(viewCount) || viewCount <= 0) continue;
+    if (isNaN(viewCount) || viewCount <= 0) {
+      continue;
+    }
 
     const match = ARTICLE_PATH_RE.exec(rawPath);
-    if (!match) continue;
+    if (!match) {
+      continue;
+    }
 
     const slug = match[2];
     // Accumulate — same slug may appear with and without trailing slash

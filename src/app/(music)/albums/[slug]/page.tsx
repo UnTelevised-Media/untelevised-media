@@ -79,7 +79,7 @@ export default async function AlbumPage({ params }: Props) {
   const { slug } = await params;
   const album: AlbumWithSongs = (await getAlbumBySlug(slug)) as AlbumWithSongs;
 
-  if (!album) notFound();
+  if (!album) {notFound();}
 
   const artistNames = [
     album.artist.stageName ?? album.artist.name,

@@ -32,7 +32,7 @@ interface SourcesPanelProps {
 
 export function SourcesPanel({ sources, methodology }: SourcesPanelProps) {
   const hasSources = sources && sources.length > 0;
-  if (!hasSources && !methodology) return null;
+  if (!hasSources && !methodology) {return null;}
 
   const count = sources?.length ?? 0;
 

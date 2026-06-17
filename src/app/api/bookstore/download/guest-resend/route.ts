@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
       .eq('id', order.customer_id)
       .maybeSingle();
 
-    if (!customer || customer.email.toLowerCase() !== guestEmail.trim().toLowerCase()) {
+    if (customer?.email.toLowerCase() !== guestEmail.trim().toLowerCase()) {
       return NextResponse.json({
         message: 'If a matching order was found, a new download link has been sent.',
       });

@@ -19,7 +19,9 @@ function bookmarkDocId(userId: string, slug: string): string {
 /** Fetch all bookmarks for the currently authenticated user, newest first. */
 export async function getServerBookmarks(): Promise<BookmarkEntry[]> {
   const { userId } = await auth();
-  if (!userId) return [];
+  if (!userId) {
+    return [];
+  }
 
   const docs = await client.fetch<
     Array<{
@@ -46,7 +48,9 @@ export async function getServerBookmarks(): Promise<BookmarkEntry[]> {
 /** Check if a slug is bookmarked for the current user. */
 export async function checkServerBookmarked(slug: string): Promise<boolean> {
   const { userId } = await auth();
-  if (!userId) return false;
+  if (!userId) {
+    return false;
+  }
 
   const count = await client.fetch<number>(
     `count(*[_type == "userBookmark" && clerkUserId == $userId && slug == $slug])`,
@@ -61,7 +65,9 @@ export async function addServerBookmark(
   entry: Omit<BookmarkEntry, 'bookmarkedAt'>
 ): Promise<void> {
   const { userId } = await auth();
-  if (!userId) return;
+  if (!userId) {
+    return;
+  }
 
   const docId = bookmarkDocId(userId, entry.slug);
   await writeClient.createOrReplace({
@@ -82,7 +88,9 @@ export async function addServerBookmark(
 /** Remove a bookmark for the current user. */
 export async function removeServerBookmark(slug: string): Promise<void> {
   const { userId } = await auth();
-  if (!userId) return;
+  if (!userId) {
+    return;
+  }
 
   const docId = bookmarkDocId(userId, slug);
   await writeClient.delete(docId);
@@ -91,7 +99,9 @@ export async function removeServerBookmark(slug: string): Promise<void> {
 /** Remove all bookmarks for the current user. */
 export async function clearServerBookmarks(): Promise<void> {
   const { userId } = await auth();
-  if (!userId) return;
+  if (!userId) {
+    return;
+  }
 
   await writeClient.delete({
     query: `*[_type == "userBookmark" && clerkUserId == $userId]`,
@@ -106,7 +116,9 @@ export async function clearServerBookmarks(): Promise<void> {
  */
 export async function syncLocalBookmarksToServer(entries: BookmarkEntry[]): Promise<void> {
   const { userId } = await auth();
-  if (!userId || entries.length === 0) return;
+  if (!userId || entries.length === 0) {
+    return;
+  }
 
   const transaction = writeClient.transaction();
 

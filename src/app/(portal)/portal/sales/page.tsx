@@ -37,7 +37,7 @@ export default async function PortalSalesPage() {
   let supabaseAvailable = true;
   let supabaseError: string | null = null;
 
-  let earningsBreakdown = {
+  const earningsBreakdown = {
     gross: 0,
     stripeFees: 0,
     netAfterStripe: 0,
@@ -45,13 +45,13 @@ export default async function PortalSalesPage() {
     platformCents: 0,
     publisherCents: 0,
   };
-  let earningsByOrderId: Record<
+  const earningsByOrderId: Record<
     string,
     { author_cents: number; stripe_fee_cents: number; net_after_stripe_cents: number }
   > = {};
 
   try {
-    if (!process.env.SUPABASE_SHOP_URL) throw new Error('SUPABASE_SHOP_URL is not set');
+    if (!process.env.SUPABASE_SHOP_URL) {throw new Error('SUPABASE_SHOP_URL is not set');}
 
     let bookIds: string[] = [];
     if (role === 'author') {
@@ -90,7 +90,7 @@ export default async function PortalSalesPage() {
       earningsQueryBuilder,
     ]);
 
-    if (error) throw new Error(error.message);
+    if (error) {throw new Error(error.message);}
 
     const allEarnings = (rawEarnings as EarningRow[]) ?? [];
     for (const e of allEarnings) {

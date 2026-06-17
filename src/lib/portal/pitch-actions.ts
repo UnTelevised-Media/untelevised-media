@@ -49,7 +49,7 @@ export async function updatePitchDetails(
       `*[_type == "claimedPitch" && _id == $id][0]{ "authorRef": author._ref }`,
       { id: pitchId }
     );
-    if (!pitch || pitch.authorRef !== sanityAuthorId) {
+    if (pitch?.authorRef !== sanityAuthorId) {
       return { success: false, error: 'You can only edit your own pitches.' };
     }
   }
@@ -60,7 +60,9 @@ export async function updatePitchDetails(
       sourceSuggestions: data.sourceSuggestions,
       links: data.links,
     };
-    if (data.headline !== undefined) setFields.headline = data.headline;
+    if (data.headline !== undefined) {
+      setFields.headline = data.headline;
+    }
 
     let patch = writeClient.patch(pitchId).set(setFields);
 
@@ -96,7 +98,7 @@ export async function savePitchNotes(pitchId: string, notesText: string): Promis
       `*[_type == "claimedPitch" && _id == $id][0]{ "authorRef": author._ref }`,
       { id: pitchId }
     );
-    if (!pitch || pitch.authorRef !== sanityAuthorId) {
+    if (pitch?.authorRef !== sanityAuthorId) {
       return { success: false, error: 'You can only edit your own pitch notes.' };
     }
   }

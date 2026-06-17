@@ -40,8 +40,8 @@ export default function ArchiveTabs({ articles, currentYear }: Props) {
     for (const article of articles) {
       const date = getArticleDate(article);
       const year = date ? new Date(date).getFullYear() : null;
-      if (!year) continue;
-      if (!map.has(year)) map.set(year, []);
+      if (!year) {continue;}
+      if (!map.has(year)) {map.set(year, []);}
       map.get(year)!.push(article);
     }
     return map;

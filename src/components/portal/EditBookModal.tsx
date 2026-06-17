@@ -19,7 +19,7 @@ import type { SanityBook, SanityBookGenre } from '@/lib/bookstore/types';
 // ---------------------------------------------------------------------------
 
 function blocksToText(blocks: unknown): string {
-  if (!Array.isArray(blocks)) return '';
+  if (!Array.isArray(blocks)) {return '';}
   return (blocks as Array<{ children?: Array<{ text?: string }> }>)
     .map((b) => (b.children ?? []).map((c) => c.text ?? '').join(''))
     .join('\n\n');
@@ -127,7 +127,7 @@ export default function EditBookModal({ book }: Props) {
   // Uses bookRef.current (not book) so a new book object reference from router.refresh()
   // does NOT re-fire this effect and wipe an in-progress file selection.
   useEffect(() => {
-    if (!open) return;
+    if (!open) {return;}
     const b = bookRef.current;
 
     setTitle(b.title);
@@ -174,7 +174,7 @@ export default function EditBookModal({ book }: Props) {
 
   // Close genre dropdown on outside click
   useEffect(() => {
-    if (!genreDropdownOpen) return;
+    if (!genreDropdownOpen) {return;}
     function handler(e: MouseEvent) {
       if (genreDropdownRef.current && !genreDropdownRef.current.contains(e.target as Node)) {
         setGenreDropdownOpen(false);
@@ -223,7 +223,7 @@ export default function EditBookModal({ book }: Props) {
   }
 
   function addFormat() {
-    if (editFormats.length >= 3) return;
+    if (editFormats.length >= 3) {return;}
     setEditFormats((prev) => [...prev, blankNewFormat()]);
     setDigitalFiles((prev) => [...prev, null]);
   }
@@ -310,9 +310,9 @@ export default function EditBookModal({ book }: Props) {
 
         for (let i = 0; i < editFormats.length; i++) {
           const fmt = editFormats[i];
-          if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') continue;
+          if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') {continue;}
           const file = pendingDigitalFiles[i];
-          if (!file) continue;
+          if (!file) {continue;}
           const fd = new FormData();
           fd.append('bookId', book._id);
           fd.append('formatKey', fmt.key);
@@ -435,9 +435,9 @@ export default function EditBookModal({ book }: Props) {
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const file = e.target.files?.[0] ?? null;
-                            if (!file) return;
+                            if (!file) {return;}
                             setCoverFile(file);
-                            if (coverPreview) URL.revokeObjectURL(coverPreview);
+                            if (coverPreview) {URL.revokeObjectURL(coverPreview);}
                             setCoverPreview(URL.createObjectURL(file));
                             e.target.value = '';
                           }}
@@ -450,7 +450,7 @@ export default function EditBookModal({ book }: Props) {
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 0 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 0 ? f : x)));}
                             e.target.value = '';
                           }}
                         />
@@ -461,7 +461,7 @@ export default function EditBookModal({ book }: Props) {
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 1 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 1 ? f : x)));}
                             e.target.value = '';
                           }}
                         />
@@ -472,7 +472,7 @@ export default function EditBookModal({ book }: Props) {
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 2 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 2 ? f : x)));}
                             e.target.value = '';
                           }}
                         />

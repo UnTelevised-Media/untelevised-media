@@ -20,12 +20,16 @@ interface PortableTextBlock {
  * @returns number of minutes, minimum 1
  */
 export function estimateReadingTime(body: PortableTextBlock[] | null | undefined): number {
-  if (!body || !Array.isArray(body) || body.length === 0) return 1;
+  if (!body || !Array.isArray(body) || body.length === 0) {
+    return 1;
+  }
 
   const text = body
     .filter((block) => block._type === 'block')
     .map((block) => {
-      if (!block.children) return '';
+      if (!block.children) {
+        return '';
+      }
       return block.children
         .filter((child) => child._type === 'span' && typeof child.text === 'string')
         .map((child) => child.text ?? '')
@@ -34,7 +38,9 @@ export function estimateReadingTime(body: PortableTextBlock[] | null | undefined
     .join(' ')
     .trim();
 
-  if (!text) return 1;
+  if (!text) {
+    return 1;
+  }
 
   const wordCount = text.split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));

@@ -6,7 +6,9 @@ import { timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
 function verifyBearerToken(header: string, secret: string): boolean {
-  if (!secret || !header) return false;
+  if (!secret || !header) {
+    return false;
+  }
   const expected = `Bearer ${secret}`;
   // Pad both to the same length before the constant-time comparison so a length
   // mismatch cannot cause an early exit that leaks timing information.

@@ -19,7 +19,7 @@ export const metadata = {
 export default async function WhistleblowerPage() {
   const { role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
-  if (!isEditorPlus) redirect('/portal/articles');
+  if (!isEditorPlus) {redirect('/portal/articles');}
 
   const submissions =
     (await portalFetch<WhistleblowerSubmission[]>(queryPortalWhistleblowers)) ?? [];

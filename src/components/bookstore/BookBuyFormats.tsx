@@ -11,9 +11,9 @@ import BuyNowButton from './BuyNowButton';
 import GiftToggle from './GiftToggle';
 
 function formatLabel(format: SanityBookFormat): string {
-  if (format.formatType === 'physical') return 'Physical Book';
-  if (format.formatType === 'digital') return 'Digital Edition';
-  if (format.formatType === 'bundle') return 'Physical + Digital Bundle';
+  if (format.formatType === 'physical') {return 'Physical Book';}
+  if (format.formatType === 'digital') {return 'Digital Edition';}
+  if (format.formatType === 'bundle') {return 'Physical + Digital Bundle';}
   return format.formatType;
 }
 
@@ -39,7 +39,7 @@ export default function BookBuyFormats({ book }: Props) {
   }, [book.formats]);
 
   useEffect(() => {
-    if (viewFired.current || !book.formats?.length) return;
+    if (viewFired.current || !book.formats?.length) {return;}
     viewFired.current = true;
     const lowestPrice = Math.min(...book.formats.map((f) => f.price ?? 0));
     trackEvent('view_item', {

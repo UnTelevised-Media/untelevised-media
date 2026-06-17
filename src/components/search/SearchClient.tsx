@@ -77,7 +77,7 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
     <article className='flex gap-4 border border-border p-4 transition-colors duration-200 hover:border-untele'>
       {hit.imageUrl && (
         <Link
-          href={'/articles/' + hit.objectID}
+          href={`/articles/${  hit.objectID}`}
           className='hidden shrink-0 sm:block'
           aria-hidden='true'
           tabIndex={-1}
@@ -92,7 +92,7 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
         </Link>
       )}
       <div className='min-w-0 flex-1'>
-        <Link href={'/articles/' + hit.objectID} className='group block'>
+        <Link href={`/articles/${  hit.objectID}`} className='group block'>
           <h3 className='text-sm font-bold leading-snug tracking-wide transition-colors duration-150 group-hover:text-untele sm:text-base'>
             <Highlight
               attribute='title'
@@ -124,7 +124,7 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
 
 function NoResults() {
   const { indexUiState } = useInstantSearch();
-  if (!indexUiState.query) return null;
+  if (!indexUiState.query) {return null;}
   return (
     <div className='border border-border px-6 py-12 text-center'>
       <p className='text-sm uppercase tracking-widest text-muted-foreground'>
@@ -177,7 +177,7 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
       routing={{
         router: {
           read() {
-            if (typeof window === 'undefined') return { q: '' };
+            if (typeof window === 'undefined') {return { q: '' };}
             return { q: new URLSearchParams(window.location.search).get('q') ?? '' };
           },
           write(routeState) {
@@ -193,7 +193,7 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
           createURL(options: any) {
             const url = new URL(window.location.href);
             const q = options?.routeState?.q ?? options?.q;
-            if (q) url.searchParams.set('q', String(q));
+            if (q) {url.searchParams.set('q', String(q));}
             return url.toString();
           },
           onUpdate() {},
@@ -242,7 +242,7 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
       </div>
       <div className='flex flex-col gap-8 sm:flex-row sm:items-start'>
         <aside
-          className={'w-full shrink-0 sm:block sm:w-52 ' + (filtersOpen ? 'block' : 'hidden')}
+          className={`w-full shrink-0 sm:block sm:w-52 ${  filtersOpen ? 'block' : 'hidden'}`}
         >
           <div className='border border-border p-4'>
             <div className='mb-4 bg-untele px-2 py-1'>

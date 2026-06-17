@@ -100,7 +100,7 @@ export function NewsletterSignup({
         body: JSON.stringify({ ...values, source }),
       });
       const data = (await res.json()) as { success?: boolean; ok?: boolean; error?: string };
-      if (!res.ok) throw new Error(data.error ?? 'Failed to subscribe');
+      if (!res.ok) {throw new Error(data.error ?? 'Failed to subscribe');}
       setSubmitState('success');
       reset();
     } catch (err) {

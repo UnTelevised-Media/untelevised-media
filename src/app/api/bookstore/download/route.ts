@@ -32,7 +32,9 @@ export async function GET(req: NextRequest) {
 
   // Look up the customer row by clerk_user_id
   const user = await currentUser();
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   const { data: customer } = await shopServiceClient
     .from('customers')

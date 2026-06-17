@@ -32,7 +32,7 @@ export async function BreakingNewsBanner() {
 
   const banner: BannerData | null = settings?.breakingBanner ?? null;
 
-  if (!banner?.isActive || !banner.headline) return null;
+  if (!banner?.isActive || !banner.headline) {return null;}
 
   // Server-side expiry check — avoids rendering stale banner HTML
   if (banner.expiresAt && new Date(banner.expiresAt) < new Date()) {

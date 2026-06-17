@@ -51,7 +51,9 @@ export function useBookmarks(): UseBookmarksReturn {
 
   // Load bookmarks whenever auth state settles
   useEffect(() => {
-    if (!clerkLoaded) return;
+    if (!clerkLoaded) {
+      return;
+    }
 
     async function load() {
       setLoading(true);

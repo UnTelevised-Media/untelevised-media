@@ -54,7 +54,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
     isEditorPlus ? portalFetch<Author[]>(queryPortalAuthors) : Promise.resolve([]),
   ]);
 
-  if (!article) notFound();
+  if (!article) {notFound();}
 
   // Ensure the article's current author always appears in the dropdown, even if
   // they were excluded by the isActive filter (e.g. field not set on older records).
@@ -64,7 +64,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
       : authorList;
 
   // Authors can only access their own articles
-  if (!isEditorPlus && article.authorId !== sanityAuthorId) notFound();
+  if (!isEditorPlus && article.authorId !== sanityAuthorId) {notFound();}
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>

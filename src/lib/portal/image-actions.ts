@@ -12,7 +12,9 @@ export async function uploadImageToSanity(
   await requireAuthor();
 
   const file = formData.get('file') as File | null;
-  if (!file) return { success: false, error: 'No file provided' };
+  if (!file) {
+    return { success: false, error: 'No file provided' };
+  }
 
   const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
   if (!allowedTypes.includes(file.type)) {

@@ -60,7 +60,7 @@ export default function SourceLibrary({ sources, isEditorPlus }: Props) {
   const [deleteTarget, setDeleteTarget] = useState<PortalSource | null>(null);
 
   const filtered = useMemo(() => {
-    if (!search.trim()) return sources;
+    if (!search.trim()) {return sources;}
     const q = search.toLowerCase();
     return sources.filter(
       (s) =>
@@ -71,7 +71,7 @@ export default function SourceLibrary({ sources, isEditorPlus }: Props) {
   }, [sources, search]);
 
   function confirmDelete() {
-    if (!deleteTarget) return;
+    if (!deleteTarget) {return;}
     const id = deleteTarget._id;
     setDeleteTarget(null);
     startTransition(async () => {

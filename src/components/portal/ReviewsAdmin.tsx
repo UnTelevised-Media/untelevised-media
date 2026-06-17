@@ -134,7 +134,7 @@ function ReviewRow({ review }: { review: PortalReview }) {
       if (result.ok) {
         toast.success('Review approved.');
         router.refresh();
-      } else toast.error(result.error ?? 'Failed');
+      } else {toast.error(result.error ?? 'Failed');}
     });
   }
 
@@ -144,7 +144,7 @@ function ReviewRow({ review }: { review: PortalReview }) {
       if (result.ok) {
         toast.success('Review declined.');
         router.refresh();
-      } else toast.error(result.error ?? 'Failed');
+      } else {toast.error(result.error ?? 'Failed');}
     });
   }
 

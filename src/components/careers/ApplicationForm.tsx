@@ -46,7 +46,7 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
         formData.append(key, String(value));
       }
     });
-    if (captchaToken) formData.append('turnstileToken', captchaToken);
+    if (captchaToken) {formData.append('turnstileToken', captchaToken);}
 
     try {
       const res = await fetch('/api/careers-application', {
@@ -54,7 +54,7 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
         body: formData,
       });
       const result = await res.json();
-      if (!res.ok) throw new Error(result.error ?? 'Submission failed');
+      if (!res.ok) {throw new Error(result.error ?? 'Submission failed');}
       trackEvent('job_application_submitted', { position: data.position });
       setSubmitState('success');
       reset();

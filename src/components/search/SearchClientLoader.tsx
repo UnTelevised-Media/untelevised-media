@@ -41,6 +41,6 @@ export default function SearchClientLoader({ initialQuery }: { initialQuery: str
     });
   }, []);
 
-  if (!SearchClient) return <SearchSkeleton />;
+  if (!SearchClient) {return <SearchSkeleton />;}
   return <SearchClient initialQuery={initialQuery} />;
 }

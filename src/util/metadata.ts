@@ -42,8 +42,10 @@ export function getCanonicalUrl(...segments: string[]): string {
 // Build OG image URL from Sanity image reference (1200x630)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getSanityOgImageUrl(image: any): string | undefined {
-  if (!image) return undefined;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if (!image) {
+    return undefined;
+  }
+
   return (
     urlForImage(image as any)
       ?.width(1200)
@@ -54,8 +56,10 @@ export function getSanityOgImageUrl(image: any): string | undefined {
 
 // Truncate strings for meta title/description limits
 export function truncate(str: string | undefined, maxLength: number): string {
-  if (!str) return '';
-  return str.length > maxLength ? str.slice(0, maxLength - 3) + '...' : str;
+  if (!str) {
+    return '';
+  }
+  return str.length > maxLength ? `${str.slice(0, maxLength - 3)}...` : str;
 }
 
 // Build full article Metadata object

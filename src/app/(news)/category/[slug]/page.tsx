@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
     tags: ['category'],
   })) as { data: Category | null };
-  if (!category) return { title: 'Category Not Found' };
+  if (!category) {return { title: 'Category Not Found' };}
   return buildCategoryMetadata(category, slug);
 }
 
@@ -69,7 +69,7 @@ export default async function CategoryPage({ params }: Props) {
     getArticlesByCategory(slug),
   ]);
 
-  if (!category) notFound();
+  if (!category) {notFound();}
 
   // Filter trending articles to this category
   const mostRead: MostReadArticle[] = articles

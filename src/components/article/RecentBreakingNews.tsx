@@ -36,7 +36,7 @@ export default async function RecentBreakingNews() {
     return null;
   }
 
-  if (articles.length === 0) return null;
+  if (articles.length === 0) {return null;}
 
   return (
     <section aria-label='Recent breaking news'>

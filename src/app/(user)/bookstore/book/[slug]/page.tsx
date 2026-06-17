@@ -98,14 +98,14 @@ export async function generateMetadata({
     params: { slug },
     tags: ['book'],
   });
-  if (!book) return { title: 'Book Not Found' };
+  if (!book) {return { title: 'Book Not Found' };}
 
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(1200).height(630).url()
     : (book.coverImageUrl ?? null);
 
   const lowestPrice = book.formats?.reduce<number | null>((min, f) => {
-    if (min === null) return f.price;
+    if (min === null) {return f.price;}
     return f.price < min ? f.price : min;
   }, null);
 
@@ -149,7 +149,7 @@ export async function generateMetadata({
 
 // Book details accordion row
 function DetailRow({ label, value }: { label: string; value: string | number | undefined }) {
-  if (!value && value !== 0) return null;
+  if (!value && value !== 0) {return null;}
   return (
     <div className='flex gap-3 border-b border-hp-sand-border py-2 dark:border-hp-dark-border'>
       <span className='w-24 shrink-0 text-[10px] font-black uppercase tracking-widest text-hp-muted'>
@@ -169,7 +169,7 @@ function RevenueTermsCard({
   const { authorPercentage, publisherPercentage, platformPercentage, description } = terms;
   const hasData =
     authorPercentage != null || publisherPercentage != null || platformPercentage != null;
-  if (!hasData) return null;
+  if (!hasData) {return null;}
 
   const slices = [
     { label: 'Author', pct: authorPercentage ?? 0, color: 'bg-untele' },
@@ -251,7 +251,7 @@ export default async function BookDetailPage({ params }: { params: Promise<{ slu
     tags: ['book'],
   });
 
-  if (!book || book.status === 'discontinued') notFound();
+  if (!book || book.status === 'discontinued') {notFound();}
 
   const cover = book.coverImage?.asset
     ? urlForImage(book.coverImage).width(600).height(840).url()

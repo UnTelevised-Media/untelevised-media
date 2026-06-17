@@ -40,7 +40,9 @@ export function useWishlist(): UseWishlistReturn {
   const hasSynced = useRef(false);
 
   useEffect(() => {
-    if (!clerkLoaded) return;
+    if (!clerkLoaded) {
+      return;
+    }
 
     async function load() {
       setLoading(true);

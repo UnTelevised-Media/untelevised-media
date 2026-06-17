@@ -40,11 +40,11 @@ import TrendingSection from '@/components/homepage/TrendingSection';
  * value if it is a string, or extracts the `content` field if present, otherwise null.
  */
 function safeText(value: unknown): string | null {
-  if (typeof value === 'string') return value || null;
+  if (typeof value === 'string') {return value || null;}
   if (value && typeof value === 'object' && !Array.isArray(value)) {
     const v = value as Record<string, unknown>;
-    if (typeof v.content === 'string') return v.content || null;
-    if (typeof v.text === 'string') return v.text || null;
+    if (typeof v.content === 'string') {return v.content || null;}
+    if (typeof v.text === 'string') {return v.text || null;}
   }
   return null;
 }
@@ -58,7 +58,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
-  if (!article) return { title: 'Article Not Found' };
+  if (!article) {return { title: 'Article Not Found' };}
   return buildArticleMetadata(article, slug);
 }
 
@@ -66,7 +66,7 @@ export default async function Article({ params }: Props) {
   const { slug } = await params;
   const article: Article = (await getArticleBySlug(slug)) as Article;
 
-  if (!article) notFound();
+  if (!article) {notFound();}
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>

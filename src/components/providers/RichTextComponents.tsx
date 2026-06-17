@@ -88,12 +88,12 @@ export const RichTextComponents = {
     // ── Tables ────────────────────────────────────────────────────────────────
     table: ({ value }: any) => {
       const { rows } = value;
-      if (!rows) return null;
+      if (!rows) {return null;}
 
       // Handles both new string cells and legacy tableCell objects
       // {_key, _type, content: [{type:'block', children:[{_type:'span', text}]}]}
       function cellText(cell: any): string {
-        if (typeof cell === 'string') return cell;
+        if (typeof cell === 'string') {return cell;}
         if (cell && Array.isArray(cell.content)) {
           return cell.content
             .flatMap((block: any) =>
@@ -163,7 +163,7 @@ export const RichTextComponents = {
       const isOrdered = value.listItem === 'number' || value.style === 'number';
       const Tag = isOrdered ? 'ol' : 'ul';
       const blocks: any[] = value.children ?? [];
-      if (!blocks.length) return null;
+      if (!blocks.length) {return null;}
       return (
         <Tag
           className={`my-4 ml-6 ${isOrdered ? 'list-decimal' : 'list-disc'} space-y-2 text-slate-800 dark:text-slate-200`}
@@ -218,14 +218,14 @@ export const RichTextComponents = {
     // a single bad tweet can't crash the entire article static generation.
     twitterEmbed: ({ value }: any) => {
       const tweetId = value.tweetId;
-      if (!tweetId) return null;
+      if (!tweetId) {return null;}
       return <SafeTweet id={tweetId} />;
     },
 
     // ── Inline Fact-Check Cards ───────────────────────────────────────────────
     factCheckEmbed: ({ value }: any) => {
       const fc = value?.factCheck;
-      if (!fc) return null;
+      if (!fc) {return null;}
       return <InlineFactCheckCard factCheck={fc} />;
     },
 
@@ -250,7 +250,7 @@ export const RichTextComponents = {
     // ── Vimeo Embeds ─────────────────────────────────────────────────────────
     vimeoEmbed: ({ value }: any) => {
       const { videoId } = value;
-      if (!videoId) return null;
+      if (!videoId) {return null;}
       return (
         <div className='my-8 aspect-video w-full border border-slate-300 dark:border-slate-700'>
           <iframe
@@ -270,7 +270,7 @@ export const RichTextComponents = {
     // contacted to allow cross-origin embedding, or use their specific embed code.
     iframeEmbed: ({ value }: any) => {
       const { src, width = 640, height = 360, title } = value;
-      if (!src) return null;
+      if (!src) {return null;}
       return (
         <div
           className='my-8 w-full border border-slate-300 dark:border-slate-700'

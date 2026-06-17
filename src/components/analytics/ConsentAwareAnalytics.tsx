@@ -23,7 +23,7 @@ const ConsentAwareAnalytics = ({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) => 
   // The default 'denied' state was already established by the beforeInteractive
   // script in layout.tsx — this only needs to fire the 'update' call.
   useEffect(() => {
-    if (!hasConsent || typeof window === 'undefined' || !window.gtag) return;
+    if (!hasConsent || typeof window === 'undefined' || !window.gtag) {return;}
 
     window.gtag('consent', 'update', {
       analytics_storage: canUseAnalytics ? 'granted' : 'denied',
@@ -99,7 +99,7 @@ export function useConsentAwareTracking() {
       level: 'info',
     });
 
-    if (!canUseAnalytics || typeof window === 'undefined' || !window.gtag) return;
+    if (!canUseAnalytics || typeof window === 'undefined' || !window.gtag) {return;}
 
     window.gtag('event', eventName, {
       ...parameters,

@@ -53,7 +53,7 @@ export default function BookCardActions({ book, format }: Props) {
 
   const handleBuyNow = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!format.stripePriceId) return;
+    if (!format.stripePriceId) {return;}
 
     setBuying(true);
     setError(null);

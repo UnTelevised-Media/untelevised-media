@@ -18,7 +18,7 @@ async function getActiveMemberCount(): Promise<number> {
       .from('members')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'active');
-    if (error) return 0;
+    if (error) {return 0;}
     return count ?? 0;
   } catch {
     return 0;

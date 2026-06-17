@@ -6,7 +6,9 @@ import 'server-only';
 let _ratelimit: import('@upstash/ratelimit').Ratelimit | null = null;
 
 async function getRatelimit() {
-  if (_ratelimit) return _ratelimit;
+  if (_ratelimit) {
+    return _ratelimit;
+  }
 
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -38,10 +40,14 @@ export async function checkRateLimit(
   identifier: string
 ): Promise<{ allowed: true } | { allowed: false; retryAfter: number }> {
   const limiter = await getRatelimit();
-  if (!limiter) return { allowed: true };
+  if (!limiter) {
+    return { allowed: true };
+  }
 
   const { success, reset } = await limiter.limit(`portal_write:${identifier}`);
-  if (success) return { allowed: true };
+  if (success) {
+    return { allowed: true };
+  }
 
   const retryAfter = Math.ceil((reset - Date.now()) / 1000);
   return { allowed: false, retryAfter };

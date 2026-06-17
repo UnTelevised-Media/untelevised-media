@@ -45,7 +45,7 @@ interface ClaimedPitch {
 // ---------------------------------------------------------------------------
 
 function blocksToText(blocks?: Array<{ children?: Array<{ text?: string }> }>): string {
-  if (!blocks || blocks.length === 0) return '';
+  if (!blocks || blocks.length === 0) {return '';}
   return blocks.map((b) => b.children?.map((c) => c.text ?? '').join('') ?? '').join('\n');
 }
 
@@ -80,10 +80,10 @@ export default async function PitchPage({ params }: { params: Promise<{ id: stri
     ),
   ]);
 
-  if (!pitch) notFound();
+  if (!pitch) {notFound();}
 
   const isOwner = pitch.author?._id === sanityAuthorId;
-  if (!isEditorPlus && !isOwner) notFound();
+  if (!isEditorPlus && !isOwner) {notFound();}
 
   // Editors see all articles; authors see only their own
   const articleOptions = isEditorPlus

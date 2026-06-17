@@ -511,9 +511,9 @@ export function BriefPanel({
   // The beat-patrol agent sometimes omits _key, which blocks claiming.
   useEffect(() => {
     const hasNullKeys = (loadedBrief.stories ?? []).some((s) => !s._key);
-    if (!hasNullKeys) return;
+    if (!hasNullKeys) {return;}
     autoRepairBrief(loadedBrief._id).then((result) => {
-      if (result.success) router.refresh();
+      if (result.success) {router.refresh();}
     });
     // Run once per loaded brief ID — repair is idempotent
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -521,7 +521,7 @@ export function BriefPanel({
 
   async function navigateTo(index: number) {
     const target = briefList[index];
-    if (!target) return;
+    if (!target) {return;}
     setIsNavigating(true);
     try {
       const result = await fetchBriefById(target._id);
@@ -542,7 +542,7 @@ export function BriefPanel({
   }
 
   function handleOptimisticPass(storyKey: string) {
-    if (!currentSanityAuthorId) return;
+    if (!currentSanityAuthorId) {return;}
     setLoadedBrief((prev) => ({
       ...prev,
       storyPasses: [
@@ -598,7 +598,7 @@ export function BriefPanel({
       const statusDiff =
         (STATUS_ORDER[a.status ?? 'unclaimed'] ?? 0) -
         (STATUS_ORDER[b.status ?? 'unclaimed'] ?? 0);
-      if (statusDiff !== 0) return statusDiff;
+      if (statusDiff !== 0) {return statusDiff;}
       // Within the same status bucket, breaking stories come first
       return (
         (URGENCY_ORDER[a.urgency ?? 'medium'] ?? 2) - (URGENCY_ORDER[b.urgency ?? 'medium'] ?? 2)

@@ -169,7 +169,7 @@ export function ContributorApplicationForm({ prefilledPosition }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cleaned),
       });
-      if (!res.ok) throw new Error('submission failed');
+      if (!res.ok) {throw new Error('submission failed');}
       trackEvent('contributor_application_submitted', {
         positions: formData.positionsOfInterest.join(','),
         experience_level: formData.experienceLevel,

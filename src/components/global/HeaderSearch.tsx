@@ -70,7 +70,7 @@ function SearchInner({ onClose }: { onClose: () => void }) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
-    if (timerRef.current) clearTimeout(timerRef.current);
+    if (timerRef.current) {clearTimeout(timerRef.current);}
     if (value) {
       timerRef.current = setTimeout(() => refine(value), DEBOUNCE_MS);
     }
@@ -78,7 +78,7 @@ function SearchInner({ onClose }: { onClose: () => void }) {
 
   const handleClear = () => {
     setInputValue('');
-    if (timerRef.current) clearTimeout(timerRef.current);
+    if (timerRef.current) {clearTimeout(timerRef.current);}
   };
 
   const showDropdown = inputValue.length > 1 && hits.length > 0;
@@ -175,7 +175,7 @@ function SearchInner({ onClose }: { onClose: () => void }) {
 }
 
 export default function HeaderSearch({ onClose }: { onClose: () => void }) {
-  if (!searchClient) return null;
+  if (!searchClient) {return null;}
   return (
     <InstantSearch searchClient={searchClient} indexName='untele_articles'>
       <SearchInner onClose={onClose} />

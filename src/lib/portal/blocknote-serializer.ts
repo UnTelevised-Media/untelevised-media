@@ -101,7 +101,9 @@ export function genKey(): string {
 // Sanity is the document ID, not the URL.
 export function cdnUrlToAssetRef(url: string): string {
   const m = url.match(/cdn\.sanity\.io\/images\/[^/]+\/[^/]+\/([a-f0-9]+-\d+x\d+)\.([a-z0-9]+)/i);
-  if (m) return `image-${m[1]}-${m[2]}`;
+  if (m) {
+    return `image-${m[1]}-${m[2]}`;
+  }
   // Already an asset ID (image-…) or an external URL — return as-is
   return url;
 }
@@ -114,14 +116,19 @@ export function blockNoteToPortableText(blocks: BNBlock[]): SanityBlockAny[] {
   const result: SanityBlockAny[] = [];
   for (const block of blocks) {
     const converted = bnBlockToPT(block);
-    if (Array.isArray(converted)) result.push(...converted);
-    else if (converted) result.push(converted);
+    if (Array.isArray(converted)) {
+      result.push(...converted);
+    } else if (converted) {
+      result.push(converted);
+    }
 
     // Recurse into nested children (nested list items)
     if (block.children?.length) {
       for (const child of blockNoteToPortableText(block.children)) {
         const cb = child as SanityBlock;
-        if (cb.listItem) cb.level = (cb.level ?? 1) + 1;
+        if (cb.listItem) {
+          cb.level = (cb.level ?? 1) + 1;
+        }
         result.push(cb);
       }
     }
@@ -171,7 +178,9 @@ function bnBlockToPT(block: BNBlock): SanityBlockAny | null {
 
     case 'table': {
       const tc = block.content as BNTableContent | undefined;
-      if (!tc?.rows) return null;
+      if (!tc?.rows) {
+        return null;
+      }
       return {
         _type: 'table',
         _key: genKey(),
@@ -292,11 +301,21 @@ function inlineToSpans(inline: BNInline[], markDefs: SanityMarkDef[]): SanitySpa
 
 function bnStylesToPTMarks(styles: BNStyles): string[] {
   const marks: string[] = [];
-  if (styles.bold) marks.push('strong');
-  if (styles.italic) marks.push('em');
-  if (styles.underline) marks.push('underline');
-  if (styles.strike) marks.push('s');
-  if (styles.code) marks.push('code');
+  if (styles.bold) {
+    marks.push('strong');
+  }
+  if (styles.italic) {
+    marks.push('em');
+  }
+  if (styles.underline) {
+    marks.push('underline');
+  }
+  if (styles.strike) {
+    marks.push('s');
+  }
+  if (styles.code) {
+    marks.push('code');
+  }
   return marks;
 }
 
@@ -314,7 +333,9 @@ export function portableTextToBlockNote(
   blocks: SanityBlockAny[],
   resolveImageUrl?: (assetRef: string) => string
 ): object[] {
-  if (!blocks?.length) return [emptyParagraph()];
+  if (!blocks?.length) {
+    return [emptyParagraph()];
+  }
 
   const result: object[] = [];
   let i = 0;
@@ -489,7 +510,9 @@ function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (ref: string) => stri
 
 function spansToInline(spans: SanitySpan[], markDefs: SanityMarkDef[]): BNInline[] {
   const defMap: Record<string, SanityMarkDef> = {};
-  for (const def of markDefs) defMap[def._key] = def;
+  for (const def of markDefs) {
+    defMap[def._key] = def;
+  }
 
   const result: BNInline[] = [];
 
@@ -523,11 +546,17 @@ function spansToInline(spans: SanitySpan[], markDefs: SanityMarkDef[]): BNInline
 function ptMarksToStyles(marks: string[]): BNStyles {
   const styles: BNStyles = {};
   for (const m of marks) {
-    if (m === 'strong') styles.bold = true;
-    else if (m === 'em') styles.italic = true;
-    else if (m === 'underline') styles.underline = true;
-    else if (m === 's') styles.strike = true;
-    else if (m === 'code') styles.code = true;
+    if (m === 'strong') {
+      styles.bold = true;
+    } else if (m === 'em') {
+      styles.italic = true;
+    } else if (m === 'underline') {
+      styles.underline = true;
+    } else if (m === 's') {
+      styles.strike = true;
+    } else if (m === 'code') {
+      styles.code = true;
+    }
   }
   return styles;
 }

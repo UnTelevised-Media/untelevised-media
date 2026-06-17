@@ -49,7 +49,9 @@ export async function GET() {
     email,
     username,
   };
-  if (coralRole) coralUser.role = coralRole;
+  if (coralRole) {
+    coralUser.role = coralRole;
+  }
 
   const encodedSecret = new TextEncoder().encode(secret);
 

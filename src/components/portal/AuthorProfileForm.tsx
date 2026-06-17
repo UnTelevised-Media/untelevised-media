@@ -48,7 +48,7 @@ interface Props {
 // ---------------------------------------------------------------------------
 
 function bioToText(bio?: AuthorProfile['bio']): string {
-  if (!bio?.length) return '';
+  if (!bio?.length) {return '';}
   return bio
     .filter((b) => b._type === 'block')
     .map((b) => b.children?.map((c) => c.text).join('') ?? '')
@@ -77,7 +77,7 @@ function TagInput({
       .split(',')
       .map((v) => v.trim())
       .filter((v) => v && !tags.includes(v));
-    if (vals.length) onChange([...tags, ...vals]);
+    if (vals.length) {onChange([...tags, ...vals]);}
     setInput('');
   }
 
@@ -139,7 +139,7 @@ function UrlListInput({
 
   function add() {
     const val = input.trim();
-    if (val && !urls.includes(val)) onChange([...urls, val]);
+    if (val && !urls.includes(val)) {onChange([...urls, val]);}
     setInput('');
   }
 
@@ -221,7 +221,7 @@ export default function AuthorProfileForm({ profile }: Props) {
 
   async function handleAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (!file) {return;}
     setUploadingAvatar(true);
     try {
       const fd = new FormData();

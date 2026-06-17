@@ -23,7 +23,9 @@ export function getRoleFromUser(user: User): import('./roles-utils').PortalRole 
 /** Returns the current user's resolved portal role, or null if not authenticated / no role. */
 export async function getCurrentRole(): Promise<import('./roles-utils').PortalRole | null> {
   const user = await currentUser();
-  if (!user) return null;
+  if (!user) {
+    return null;
+  }
   return getRoleFromUser(user);
 }
 
@@ -32,7 +34,9 @@ export async function getCurrentUserWithRole(): Promise<
   import('./roles-utils').UserWithRole | null
 > {
   const user = await currentUser();
-  if (!user) return null;
+  if (!user) {
+    return null;
+  }
   return { id: user.id, role: getRoleFromUser(user) };
 }
 
@@ -50,7 +54,9 @@ export async function requireRole(
   }
 
   const user = await currentUser();
-  if (!user) redirect('/sign-in?redirect_url=/portal');
+  if (!user) {
+    redirect('/sign-in?redirect_url=/portal');
+  }
 
   const userRole = getRoleFromUser(user);
   if (!hasRole(userRole, role)) {
@@ -78,13 +84,19 @@ export async function requireAuthor(): Promise<import('./roles-utils').UserWithR
 /** Require at least portal access (any role including sales). */
 export async function requireAnyPortalRole(): Promise<import('./roles-utils').UserWithRole> {
   const { userId } = await auth();
-  if (!userId) redirect('/sign-in?redirect_url=/portal');
+  if (!userId) {
+    redirect('/sign-in?redirect_url=/portal');
+  }
 
   const user = await currentUser();
-  if (!user) redirect('/sign-in?redirect_url=/portal');
+  if (!user) {
+    redirect('/sign-in?redirect_url=/portal');
+  }
 
   const userRole = getRoleFromUser(user);
-  if (!userRole) redirect('/');
+  if (!userRole) {
+    redirect('/');
+  }
 
   return { id: user.id, role: userRole };
 }

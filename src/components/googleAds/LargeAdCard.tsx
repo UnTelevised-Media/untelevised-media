@@ -33,12 +33,12 @@ export default function LargeAdCard({
   }, []);
 
   useEffect(() => {
-    if (!isClient || !adRef.current) return;
+    if (!isClient || !adRef.current) {return;}
     if (!isDev && (!hasConsent || !canUseMarketing)) {
       console.debug('[AdSense] LargeAdCard slot=%s: awaiting consent', slot);
       return;
     }
-    if (pushed.current) return;
+    if (pushed.current) {return;}
     pushed.current = true;
 
     const ins = adRef.current;
@@ -63,8 +63,8 @@ export default function LargeAdCard({
     });
   }, [isClient, isDev, hasConsent, canUseMarketing, slot]);
 
-  if (!isClient) return null;
-  if ((adStatus === 'error' || adStatus === 'unfilled') && !isDev) return null;
+  if (!isClient) {return null;}
+  if ((adStatus === 'error' || adStatus === 'unfilled') && !isDev) {return null;}
 
   return (
     <div className='flex h-full w-full'>

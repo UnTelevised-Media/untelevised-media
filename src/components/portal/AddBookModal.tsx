@@ -89,7 +89,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
 
   // Load genres when modal opens
   useEffect(() => {
-    if (!open) return;
+    if (!open) {return;}
     setGenresLoading(true);
     fetchBookGenres()
       .then(setLocalGenres)
@@ -98,7 +98,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
 
   // Close genre dropdown on outside click
   useEffect(() => {
-    if (!genreDropdownOpen) return;
+    if (!genreDropdownOpen) {return;}
     function handler(e: MouseEvent) {
       if (genreDropdownRef.current && !genreDropdownRef.current.contains(e.target as Node)) {
         setGenreDropdownOpen(false);
@@ -169,9 +169,9 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
   function handleCoverChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0] ?? null;
     console.log('[AddBookModal] cover file selected:', file?.name, file?.size);
-    if (!file) return;
+    if (!file) {return;}
     setCoverFile(file);
-    if (coverPreview) URL.revokeObjectURL(coverPreview);
+    if (coverPreview) {URL.revokeObjectURL(coverPreview);}
     setCoverPreview(URL.createObjectURL(file));
     e.target.value = '';
   }
@@ -253,15 +253,15 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
         let fmtKeyIdx = 0;
         for (let i = 0; i < formats.length; i++) {
           const fmt = formats[i];
-          if (!fmt.nameYourPrice && fmt.price === '') continue; // filtered out of parsedFormats
+          if (!fmt.nameYourPrice && fmt.price === '') {continue;} // filtered out of parsedFormats
           const fmtKey = result.formatKeys[fmtKeyIdx++];
-          if (!fmtKey) continue;
-          if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') continue;
+          if (!fmtKey) {continue;}
+          if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') {continue;}
           const file = digitalFiles[i];
           console.log(
             `[AddBookModal] format[${i}] type=${fmt.formatType} fmtKey=${fmtKey?.key} file=${file?.name ?? 'none'}`
           );
-          if (!file) continue;
+          if (!file) {continue;}
           const fd = new FormData();
           fd.append('bookId', result.id);
           fd.append('formatKey', fmtKey.key);
@@ -403,7 +403,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 0 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 0 ? f : x)));}
                             e.target.value = '';
                           }}
                         />
@@ -414,7 +414,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 1 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 1 ? f : x)));}
                             e.target.value = '';
                           }}
                         />
@@ -425,7 +425,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 2 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 2 ? f : x)));}
                             e.target.value = '';
                           }}
                         />

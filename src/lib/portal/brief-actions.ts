@@ -37,7 +37,9 @@ export async function fetchBriefById(briefId: string) {
   // Sorted _createdAt desc → first-seen per storyKey is the newest pitch
   const myPitchMap: Record<string, string> = {};
   for (const p of myPitches ?? []) {
-    if (!myPitchMap[p.storyKey]) myPitchMap[p.storyKey] = p._id;
+    if (!myPitchMap[p.storyKey]) {
+      myPitchMap[p.storyKey] = p._id;
+    }
   }
 
   return { brief, myPitchMap };
@@ -339,10 +341,14 @@ export async function autoRepairBrief(briefId: string): Promise<Result> {
       stories?: Array<{ _key?: string | null; links?: Array<{ _key?: string | null }> }>;
     }>(patchTarget);
 
-    if (!doc?.stories?.length) return { success: true };
+    if (!doc?.stories?.length) {
+      return { success: true };
+    }
 
     const needsRepair = doc.stories.some((s) => !s._key || (s.links ?? []).some((l) => !l._key));
-    if (!needsRepair) return { success: true };
+    if (!needsRepair) {
+      return { success: true };
+    }
 
     const repairedStories = doc.stories.map((s) => ({
       ...s,

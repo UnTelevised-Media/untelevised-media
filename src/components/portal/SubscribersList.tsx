@@ -14,7 +14,7 @@ export interface Subscriber {
 }
 
 function formatDate(iso?: string) {
-  if (!iso) return '—';
+  if (!iso) {return '—';}
   return new Date(iso).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -23,7 +23,7 @@ function formatDate(iso?: string) {
 }
 
 function StatusBadge({ status }: { status?: string }) {
-  if (!status) return <span className='text-slate-400'>—</span>;
+  if (!status) {return <span className='text-slate-400'>—</span>;}
   const map: Record<string, { emoji: string; label: string; className: string }> = {
     active: { emoji: '✅', label: 'Active', className: 'text-green-700 dark:text-green-400' },
     pending: { emoji: '⏳', label: 'Pending', className: 'text-amber-600 dark:text-amber-400' },

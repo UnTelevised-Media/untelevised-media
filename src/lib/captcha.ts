@@ -10,9 +10,13 @@ interface TurnstileResponse {
 
 export async function verifyCaptcha(token: string | null | undefined): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) return true; // fail open in dev / misconfigured envs
+  if (!secret) {
+    return true;
+  } // fail open in dev / misconfigured envs
 
-  if (!token) return false;
+  if (!token) {
+    return false;
+  }
 
   try {
     const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {

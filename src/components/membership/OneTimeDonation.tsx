@@ -27,7 +27,7 @@ export function OneTimeDonation() {
         body: JSON.stringify({ amountCents }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
-      if (!res.ok || data.error) throw new Error(data.error ?? 'Checkout failed');
+      if (!res.ok || data.error) {throw new Error(data.error ?? 'Checkout failed');}
       window.location.href = data.url!;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');

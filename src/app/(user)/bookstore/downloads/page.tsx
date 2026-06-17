@@ -75,7 +75,7 @@ export default function DownloadsPage() {
   useEffect(() => {
     fetch('/api/bookstore/my-downloads')
       .then(async (res) => {
-        if (!res.ok) throw new Error('Failed to load downloads');
+        if (!res.ok) {throw new Error('Failed to load downloads');}
         const data = (await res.json()) as { downloads: DownloadRecord[] };
         const items = data.downloads ?? [];
         setDownloads(items);

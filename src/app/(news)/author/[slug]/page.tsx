@@ -33,7 +33,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const author = await getAuthorBySlug(slug);
-  if (!author) return { title: 'Author Not Found' };
+  if (!author) {return { title: 'Author Not Found' };}
   return buildAuthorMetadata(author, slug);
 }
 
@@ -110,7 +110,7 @@ export default async function Author({ params }: Props) {
   const { slug } = await params;
   const author = await getAuthorBySlug(slug);
 
-  if (!author) notFound();
+  if (!author) {notFound();}
 
   const hasBooks = author.isLiteraryAuthor && author.books && author.books.length > 0;
   const hasTip = !!(author.tipStripeProductId && author.tipAmount);

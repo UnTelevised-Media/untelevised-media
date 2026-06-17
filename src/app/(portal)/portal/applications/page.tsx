@@ -46,7 +46,7 @@ const AVAIL_LABELS: Record<string, string> = {
 export default async function ApplicationsPage() {
   const { role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
-  if (!isEditorPlus) redirect('/portal/articles');
+  if (!isEditorPlus) {redirect('/portal/articles');}
 
   const applications = (await portalFetch<JobApplication[]>(queryPortalJobApplications)) ?? [];
 

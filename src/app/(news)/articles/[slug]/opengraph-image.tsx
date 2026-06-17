@@ -33,7 +33,7 @@ async function fetchArticle(slug: string) {
   const url = `https://${PROJECT_ID}.api.sanity.io/v${API_VERSION}/data/query/${DATASET}?query=${query}&$slug=${encodeURIComponent(JSON.stringify(slug))}`;
 
   const res = await fetch(url, { next: { revalidate: 3600 } });
-  if (!res.ok) return null;
+  if (!res.ok) {return null;}
   const data = await res.json();
   return data.result ?? null;
 }

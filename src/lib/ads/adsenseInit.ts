@@ -69,7 +69,9 @@ export class AdSenseManager {
   }
 
   isScriptReady(): boolean {
-    if (typeof window === 'undefined') return false;
+    if (typeof window === 'undefined') {
+      return false;
+    }
     return !!window.adsenseLoaded && !window.adsenseScriptError;
   }
 
@@ -151,7 +153,9 @@ export class AdSenseManager {
 
   private renderDevPlaceholder(element: HTMLElement, slot: string): void {
     const already = element.getAttribute('data-ad-status');
-    if (already === 'dev-placeholder') return;
+    if (already === 'dev-placeholder') {
+      return;
+    }
     element.style.cssText = [
       'background:repeating-linear-gradient(135deg,#f3f4f6,#f3f4f6 8px,#e5e7eb 8px,#e5e7eb 16px)',
       'border:2px dashed #9ca3af',

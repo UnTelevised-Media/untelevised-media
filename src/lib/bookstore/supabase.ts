@@ -19,7 +19,9 @@ let _shopServiceClient: SupabaseClient<Database> | null = null;
 export function getShopClient(): SupabaseClient<Database> {
   if (!_shopClient) {
     const url = getShopUrl();
-    if (!url) throw new Error('[shop/supabase] SUPABASE_SHOP_URL is not set');
+    if (!url) {
+      throw new Error('[shop/supabase] SUPABASE_SHOP_URL is not set');
+    }
     _shopClient = createClient<Database>(url, process.env.SUPABASE_SHOP_ANON_KEY ?? '', {
       auth: { persistSession: false },
     });
@@ -31,7 +33,9 @@ export function getShopClient(): SupabaseClient<Database> {
 export function getShopServiceClient(): SupabaseClient<Database> {
   if (!_shopServiceClient) {
     const url = getShopUrl();
-    if (!url) throw new Error('[shop/supabase] SUPABASE_SHOP_URL is not set');
+    if (!url) {
+      throw new Error('[shop/supabase] SUPABASE_SHOP_URL is not set');
+    }
     _shopServiceClient = createClient<Database>(
       url,
       process.env.SUPABASE_SHOP_SERVICE_ROLE_KEY ?? '',

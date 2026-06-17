@@ -27,10 +27,10 @@ function parseYouTubeId(input: string): string {
   ];
   for (const p of patterns) {
     const m = url.match(p);
-    if (m) return m[1];
+    if (m) {return m[1];}
   }
   // Assume bare ID if it looks like one
-  if (/^[A-Za-z0-9_-]{11}$/.test(url)) return url;
+  if (/^[A-Za-z0-9_-]{11}$/.test(url)) {return url;}
   return url;
 }
 
@@ -109,8 +109,8 @@ const YouTubeBlock = createReactBlockSpec(
 
 function parseTweetId(input: string): string {
   const m = input.match(/(?:twitter\.com|x\.com)\/\w+\/status\/(\d+)/);
-  if (m) return m[1];
-  if (/^\d+$/.test(input.trim())) return input.trim();
+  if (m) {return m[1];}
+  if (/^\d+$/.test(input.trim())) {return input.trim();}
   return input.trim();
 }
 
@@ -182,7 +182,7 @@ const TwitterBlock = createReactBlockSpec(
 
 function parseInstagramId(input: string): string {
   const m = input.match(/instagram\.com\/p\/([A-Za-z0-9_-]+)/);
-  if (m) return m[1];
+  if (m) {return m[1];}
   return input.trim();
 }
 

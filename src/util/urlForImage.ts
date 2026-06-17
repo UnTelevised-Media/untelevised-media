@@ -12,7 +12,7 @@ const imageUrlCache = new Map();
 const openGraphImageUrlCache = new Map();
 
 // Accepts both the strict Sanity Image type and any object with an asset._ref field
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 type ImageLike = Image | { asset?: { _ref?: string } } | null | undefined;
 
 // Helper to build URL

@@ -12,7 +12,7 @@ export interface ContactSubmission {
 }
 
 function formatDate(iso?: string) {
-  if (!iso) return '—';
+  if (!iso) {return '—';}
   return new Date(iso).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',

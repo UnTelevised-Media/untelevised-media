@@ -53,7 +53,7 @@ function Stars({ rating }: { rating: number }) {
 
 export default async function MyReviewsPage() {
   const { userId } = await auth();
-  if (!userId) redirect('/bookstore');
+  if (!userId) {redirect('/bookstore');}
 
   const reviews = await writeClient.fetch<MyReview[]>(
     `*[_type == "bookReview" && clerkUserId == $userId] | order(submittedAt desc) {

@@ -635,7 +635,9 @@ function extractMeta(html: string, name: string): string {
   ];
   for (const pat of patterns) {
     const m = html.match(pat);
-    if (m) return decodeHtmlEntities(m[1]);
+    if (m) {
+      return decodeHtmlEntities(m[1]);
+    }
   }
   return '';
 }
@@ -709,12 +711,15 @@ function extractBodyBlocks(html: string): ContentBlock[] {
 
   // Find all block markers in position order
   const allMarkers: Array<{ pos: number; kind: string }> = [];
-  for (const m of bodyHtml.matchAll(/<!-- content -->/g))
+  for (const m of bodyHtml.matchAll(/<!-- content -->/g)) {
     allMarkers.push({ pos: m.index!, kind: 'content' });
-  for (const m of bodyHtml.matchAll(/<!-- image -->/g))
+  }
+  for (const m of bodyHtml.matchAll(/<!-- image -->/g)) {
     allMarkers.push({ pos: m.index!, kind: 'image' });
-  for (const m of bodyHtml.matchAll(/<!-- custom html -->/g))
+  }
+  for (const m of bodyHtml.matchAll(/<!-- custom html -->/g)) {
     allMarkers.push({ pos: m.index!, kind: 'custom' });
+  }
   allMarkers.sort((a, b) => a.pos - b.pos);
 
   for (let i = 0; i < allMarkers.length; i++) {
@@ -726,42 +731,58 @@ function extractBodyBlocks(html: string): ContentBlock[] {
       // Collect all h2 headings
       for (const m of section.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)) {
         const text = stripTags(m[1]);
-        if (text) blocks.push({ kind: 'h2', text });
+        if (text) {
+          blocks.push({ kind: 'h2', text });
+        }
       }
 
       // Collect paragraphs, skipping nav-only or empty ones
       const paragraphs: string[] = [];
       for (const m of section.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)) {
         const text = stripTags(m[1]);
-        if (!text || text === ' ') continue;
+        if (!text || text === ' ') {
+          continue;
+        }
         paragraphs.push(text);
       }
 
-      if (paragraphs.length === 0) continue;
+      if (paragraphs.length === 0) {
+        continue;
+      }
 
       const joined = paragraphs.join(' ');
 
       // Skip: article title (matches og:title)
       const ogTitle = extractMeta(html, 'og:title');
-      if (ogTitle && joined.trim() === ogTitle.trim()) continue;
+      if (joined.trim() === ogTitle?.trim()) {
+        continue;
+      }
 
       // Skip: hashtag-only blocks
       const allHashtags = paragraphs.every((p) => /^#\w/.test(p.trim()));
-      if (allHashtags) continue;
+      if (allHashtags) {
+        continue;
+      }
 
       // Skip: byline block (starts with "By:")
-      if (paragraphs[0].trim().startsWith('By:') || paragraphs[0].trim().startsWith('By '))
+      if (paragraphs[0].trim().startsWith('By:') || paragraphs[0].trim().startsWith('By ')) {
         continue;
+      }
 
       // Skip: ShareThis widget text
-      if (joined.includes('ShareThis') || joined.includes('displayText=')) continue;
+      if (joined.includes('ShareThis') || joined.includes('displayText=')) {
+        continue;
+      }
 
       // Skip: ARM donation widget text only
-      if (joined.includes('14WDzkNAFfJ1XwzAnuUfUDwTTHNvWAfAuV') && paragraphs.length === 1)
+      if (joined.includes('14WDzkNAFfJ1XwzAnuUfUDwTTHNvWAfAuV') && paragraphs.length === 1) {
         continue;
+      }
 
       // Skip: Sabo Lulzy / inquiry bar text
-      if (joined.includes('Sabo Lulzy')) continue;
+      if (joined.includes('Sabo Lulzy')) {
+        continue;
+      }
 
       for (const p of paragraphs) {
         blocks.push({ kind: 'text', text: p });
@@ -777,12 +798,16 @@ function extractBodyBlocks(html: string): ContentBlock[] {
       }
     } else if (kind === 'custom') {
       const iframeMatch = section.match(/<iframe[^>]+src="([^"]+)"/i);
-      if (!iframeMatch) continue;
+      if (!iframeMatch) {
+        continue;
+      }
       const src = iframeMatch[1];
 
       if (src.includes('youtube.com/embed/')) {
         const videoId = src.replace('https://www.youtube.com/embed/', '').split(/[?/]/)[0];
-        if (videoId) blocks.push({ kind: 'youtube', videoId });
+        if (videoId) {
+          blocks.push({ kind: 'youtube', videoId });
+        }
       } else if (src.includes('facebook.com/plugins/')) {
         const hrefMatch = src.match(/href=(https?%3A%2F%2F[^&"]+)/i);
         if (hrefMatch) {
@@ -810,7 +835,9 @@ function extractSourceUrls(html: string): Array<{ label: string; url: string }> 
     html.indexOf('id="u6909">Sources:'),
     html.indexOf('"Sources:"')
   );
-  if (sourceStart === -1) return [];
+  if (sourceStart === -1) {
+    return [];
+  }
 
   const sourceHtml = html.substring(sourceStart, sourceStart + 6000);
   const sources: Array<{ label: string; url: string }> = [];
@@ -901,7 +928,9 @@ function injectSectionHeadings(
   blocks: ContentBlock[],
   insertions: Array<{ matchText: string; heading: string }>
 ): ContentBlock[] {
-  if (!insertions || insertions.length === 0) return blocks;
+  if (!insertions || insertions.length === 0) {
+    return blocks;
+  }
 
   const result: ContentBlock[] = [];
   const injected = new Set<string>();
@@ -940,7 +969,9 @@ function buildPortableText(blocks: ContentBlock[], imageRefs: Map<string, string
         children: [{ _type: 'span', _key: makeKey(), text: block.text, marks: [] }],
       });
     } else if (block.kind === 'text') {
-      if (!block.text.trim()) continue;
+      if (!block.text.trim()) {
+        continue;
+      }
       pts.push({
         _type: 'block',
         _key: makeKey(),
@@ -996,8 +1027,9 @@ async function uploadImages(filenames: string[]): Promise<Map<string, string>> {
     if (!fs.existsSync(imagePath)) {
       const all = fs.readdirSync(IMAGES_DIR);
       const found = all.find((f) => f.toLowerCase() === filename.toLowerCase());
-      if (found) imagePath = path.join(IMAGES_DIR, found);
-      else {
+      if (found) {
+        imagePath = path.join(IMAGES_DIR, found);
+      } else {
         console.warn(`  ⚠  Image not found: ${filename}`);
         continue;
       }
@@ -1030,7 +1062,9 @@ const authorCache = new Map<string, string>();
 
 async function getOrCreateAuthor(name: string): Promise<string | null> {
   const cleanName = name.replace(/^-+/, '').trim();
-  if (authorCache.has(cleanName)) return authorCache.get(cleanName)!;
+  if (authorCache.has(cleanName)) {
+    return authorCache.get(cleanName)!;
+  }
 
   if (DRY_RUN) {
     authorCache.set(cleanName, `dry-run-author-${cleanName}`);
@@ -1174,7 +1208,7 @@ async function migrateArticle(config: ArticleConfig): Promise<void> {
     (b) => b.kind === 'text' && (b as { kind: 'text'; text: string }).text.length > 80
   );
   const leadParagraph =
-    firstText && firstText.kind === 'text'
+    firstText?.kind === 'text'
       ? (firstText as { kind: 'text'; text: string }).text.substring(0, 400)
       : description.substring(0, 400);
 
@@ -1261,7 +1295,9 @@ async function main(): Promise<void> {
       console.error(`Failed: ${config.htmlFile}`, err);
     }
     // Small delay between articles to avoid rate limiting
-    if (!DRY_RUN) await new Promise((r) => setTimeout(r, 500));
+    if (!DRY_RUN) {
+      await new Promise((r) => setTimeout(r, 500));
+    }
   }
 
   console.log(`\n${'═'.repeat(60)}`);

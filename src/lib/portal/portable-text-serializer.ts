@@ -70,13 +70,18 @@ function genKey(): string {
 // ---------------------------------------------------------------------------
 
 export function tiptapToPortableText(doc: TiptapNode): SanityBlock_Any[] {
-  if (!doc || doc.type !== 'doc' || !doc.content) return [];
+  if (doc?.type !== 'doc' || !doc.content) {
+    return [];
+  }
   const blocks: SanityBlock_Any[] = [];
 
   for (const node of doc.content) {
     const block = nodeToBlock(node);
-    if (Array.isArray(block)) blocks.push(...block);
-    else if (block) blocks.push(block);
+    if (Array.isArray(block)) {
+      blocks.push(...block);
+    } else if (block) {
+      blocks.push(block);
+    }
   }
   return blocks;
 }
@@ -92,7 +97,9 @@ function nodeToBlock(node: TiptapNode): SanityBlock_Any | SanityBlock_Any[] | nu
     case 'blockquote': {
       // blockquote wraps paragraph — unwrap and set style
       const inner = node.content?.[0];
-      if (inner) return blockFromInline(inner, 'blockquote');
+      if (inner) {
+        return blockFromInline(inner, 'blockquote');
+      }
       return blockFromInline(node, 'blockquote');
     }
     case 'bulletList': {
@@ -166,7 +173,9 @@ function inlineToSpans(nodes: TiptapNode[], markDefs: SanityMarkDef[]): SanitySp
       const marks: string[] = [];
       for (const mark of node.marks ?? []) {
         const m = markToPortableText(mark, markDefs);
-        if (m) marks.push(m);
+        if (m) {
+          marks.push(m);
+        }
       }
       spans.push({ _type: 'span', _key: genKey(), text: node.text ?? '', marks });
     } else if (node.type === 'hardBreak') {
@@ -210,8 +219,11 @@ export function portableTextToTiptap(blocks: SanityBlock_Any[]): TiptapNode {
   const raw: TiptapNode[] = [];
   for (const block of blocks) {
     const node = blockToTiptap(block as SanityBlock);
-    if (Array.isArray(node)) raw.push(...node);
-    else if (node) raw.push(node);
+    if (Array.isArray(node)) {
+      raw.push(...node);
+    } else if (node) {
+      raw.push(node);
+    }
   }
   // Sanity stores one block per list item; Tiptap expects all items inside
   // a single bulletList / orderedList wrapper — merge consecutive same-type lists.
@@ -325,7 +337,9 @@ function spansToTiptap(
       }
     });
 
-    if (span.text === '\n') return { type: 'hardBreak' };
+    if (span.text === '\n') {
+      return { type: 'hardBreak' };
+    }
     return { type: 'text', text: span.text, marks };
   });
 }

@@ -15,7 +15,9 @@ function wishlistDocId(userId: string, slug: string): string {
 
 export async function getServerWishlist(): Promise<WishlistEntry[]> {
   const { userId } = await auth();
-  if (!userId) return [];
+  if (!userId) {
+    return [];
+  }
 
   // writeClient has the API token — required for reads on non-public datasets
   // and to bypass CDN staleness after a recent createOrReplace.
@@ -31,7 +33,9 @@ export async function addServerWishlistEntry(
   entry: Omit<WishlistEntry, 'addedAt'>
 ): Promise<void> {
   const { userId } = await auth();
-  if (!userId) return;
+  if (!userId) {
+    return;
+  }
 
   const docId = wishlistDocId(userId, entry.slug);
   await writeClient.createOrReplace({
@@ -49,7 +53,9 @@ export async function addServerWishlistEntry(
 
 export async function removeServerWishlistEntry(slug: string): Promise<void> {
   const { userId } = await auth();
-  if (!userId) return;
+  if (!userId) {
+    return;
+  }
 
   const docId = wishlistDocId(userId, slug);
   await writeClient.delete(docId);
@@ -57,7 +63,9 @@ export async function removeServerWishlistEntry(slug: string): Promise<void> {
 
 export async function clearServerWishlist(): Promise<void> {
   const { userId } = await auth();
-  if (!userId) return;
+  if (!userId) {
+    return;
+  }
 
   await writeClient.delete({
     query: `*[_type == "userWishlist" && clerkUserId == $userId]`,
@@ -67,7 +75,9 @@ export async function clearServerWishlist(): Promise<void> {
 
 export async function syncLocalWishlistToServer(entries: WishlistEntry[]): Promise<void> {
   const { userId } = await auth();
-  if (!userId || entries.length === 0) return;
+  if (!userId || entries.length === 0) {
+    return;
+  }
 
   const transaction = writeClient.transaction();
 

@@ -80,7 +80,7 @@ export default async function LyricsPage({ params }: Props) {
   const { slug } = await params;
   const song: Song = (await getSongBySlug(slug)) as Song;
 
-  if (!song) notFound();
+  if (!song) {notFound();}
 
   const artistNames = [
     song.primaryArtist.name,

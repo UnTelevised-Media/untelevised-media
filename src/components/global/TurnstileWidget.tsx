@@ -13,7 +13,7 @@ interface TurnstileWidgetProps {
 
 export function TurnstileWidget({ onSuccess, onError, onExpire }: TurnstileWidgetProps) {
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
-  if (!siteKey) return null;
+  if (!siteKey) {return null;}
 
   return (
     <Turnstile

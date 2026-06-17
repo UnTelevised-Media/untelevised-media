@@ -18,12 +18,12 @@ export function SubscribedBanner({ brandColor = '#D70606' }: Props) {
   useEffect(() => {
     const subscribed = searchParams.get('subscribed');
     const unsubscribed = searchParams.get('unsubscribed');
-    if (subscribed === '1') setBanner('subscribed');
-    else if (subscribed === 'error') setBanner('error');
-    else if (unsubscribed === '1') setBanner('unsubscribed');
+    if (subscribed === '1') {setBanner('subscribed');}
+    else if (subscribed === 'error') {setBanner('error');}
+    else if (unsubscribed === '1') {setBanner('unsubscribed');}
   }, [searchParams]);
 
-  if (!banner) return null;
+  if (!banner) {return null;}
 
   const messages = {
     subscribed: {

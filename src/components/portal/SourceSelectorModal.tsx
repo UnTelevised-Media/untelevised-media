@@ -54,12 +54,12 @@ export default function SourceSelectorModal({ selectedIds, onSelect }: Props) {
     // Load sources on open
     startTransition(async () => {
       const result = await fetchAllSources();
-      if (result.success) setSources(result.data);
+      if (result.success) {setSources(result.data);}
     });
   }
 
   const filtered = sources.filter((s) => {
-    if (!search.trim()) return true;
+    if (!search.trim()) {return true;}
     const q = search.toLowerCase();
     return s.label?.toLowerCase().includes(q) || s.url?.toLowerCase().includes(q);
   });

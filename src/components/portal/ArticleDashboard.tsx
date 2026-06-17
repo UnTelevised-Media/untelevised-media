@@ -216,11 +216,11 @@ export default function ArticleDashboard({
   // Author-scoped base list (editors only)
   // ---------------------------------------------------------------------------
   const authorScoped = useMemo(() => {
-    if (!isEditorPlus || authorFilter === 'all') return articles;
+    if (!isEditorPlus || authorFilter === 'all') {return articles;}
     if (authorFilter === 'mine')
-      return articles.filter((a) => a.authorId === currentSanityAuthorId);
+      {return articles.filter((a) => a.authorId === currentSanityAuthorId);}
     if (authorFilter === 'reviewed')
-      return articles.filter((a) => a.reviewedById === currentSanityAuthorId);
+      {return articles.filter((a) => a.reviewedById === currentSanityAuthorId);}
     return articles.filter((a) => a.authorId !== currentSanityAuthorId);
   }, [articles, isEditorPlus, authorFilter, currentSanityAuthorId]);
 
@@ -255,8 +255,8 @@ export default function ArticleDashboard({
     }
 
     return [...list].sort((a, b) => {
-      if (sortBy === 'title') return (a.title ?? '').localeCompare(b.title ?? '');
-      if (sortBy === 'createdAt') return b._createdAt.localeCompare(a._createdAt);
+      if (sortBy === 'title') {return (a.title ?? '').localeCompare(b.title ?? '');}
+      if (sortBy === 'createdAt') {return b._createdAt.localeCompare(a._createdAt);}
       return b._updatedAt.localeCompare(a._updatedAt);
     });
   }, [authorScoped, activeTab, search, sortBy]);
@@ -266,7 +266,7 @@ export default function ArticleDashboard({
   // ---------------------------------------------------------------------------
 
   function confirmDelete() {
-    if (!deleteTarget) return;
+    if (!deleteTarget) {return;}
     const id = originalId(deleteTarget);
     const approvingRequest = !!deleteTarget.deletionRequest;
     setDeleteTarget(null);
@@ -284,7 +284,7 @@ export default function ArticleDashboard({
   }
 
   function confirmRemovalRequest() {
-    if (!removalTarget || removalReason.trim().length < 10) return;
+    if (!removalTarget || removalReason.trim().length < 10) {return;}
     const id = originalId(removalTarget);
     const reason = removalReason.trim();
     setRemovalTarget(null);
@@ -313,7 +313,7 @@ export default function ArticleDashboard({
   }
 
   function confirmRetraction() {
-    if (!retractionTarget || !retractionData.issuedAt || !retractionData.detail.trim()) return;
+    if (!retractionTarget || !retractionData.issuedAt || !retractionData.detail.trim()) {return;}
     const id = originalId(retractionTarget);
     const data = { ...retractionData };
     setRetractionTarget(null);
@@ -846,7 +846,7 @@ function ArticleCard({
           <p className='mb-2 text-xs italic text-orange-600 dark:text-orange-400'>
             &ldquo;
             {article.deletionRequest.reason.length > 90
-              ? article.deletionRequest.reason.slice(0, 90) + '…'
+              ? `${article.deletionRequest.reason.slice(0, 90)  }…`
               : article.deletionRequest.reason}
             &rdquo;
           </p>

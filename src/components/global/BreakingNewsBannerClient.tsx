@@ -18,7 +18,7 @@ export function BreakingNewsBannerClient({ headline, linkUrl, linkLabel, expires
 
   useEffect(() => {
     // Belt-and-suspenders client-side expiry check
-    if (expiresAt && new Date(expiresAt) < new Date()) return;
+    if (expiresAt && new Date(expiresAt) < new Date()) {return;}
     if (!sessionStorage.getItem(sessionKey)) {
       setDismissed(false);
     }
@@ -29,7 +29,7 @@ export function BreakingNewsBannerClient({ headline, linkUrl, linkLabel, expires
     setDismissed(true);
   }
 
-  if (dismissed) return null;
+  if (dismissed) {return null;}
 
   const isExternal = linkUrl?.startsWith('http');
 

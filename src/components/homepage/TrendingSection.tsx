@@ -73,7 +73,7 @@ interface Props {
 export default async function TrendingSection({ variant }: Props = {}) {
   const articles = await getTrendingArticles();
 
-  if (articles.length === 0) return null;
+  if (articles.length === 0) {return null;}
 
   // --- #1 Featured Card ---
   if (variant === 'card') {
@@ -175,7 +175,7 @@ export default async function TrendingSection({ variant }: Props = {}) {
   // --- #2–20 Paginated list (5 per page, client-side) ---
   if (variant === 'list') {
     const rest = articles.slice(1); // card holds #1; pass #2 onward
-    if (rest.length === 0) return null;
+    if (rest.length === 0) {return null;}
     return <TrendingListPaginated articles={rest} />;
   }
 

@@ -31,8 +31,9 @@ export async function createSource(
   const { id: clerkUserId } = await requireAuthor();
 
   const rl = await checkRateLimit(clerkUserId);
-  if (!rl.allowed)
+  if (!rl.allowed) {
     return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
+  }
 
   const parsed = sourceWriteSchema.safeParse(input);
   if (!parsed.success) {
@@ -59,8 +60,9 @@ export async function updateSource(
   const { id: clerkUserId } = await requireAuthor();
 
   const rl = await checkRateLimit(clerkUserId);
-  if (!rl.allowed)
+  if (!rl.allowed) {
     return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
+  }
 
   const parsed = sourceWriteSchema.safeParse(input);
   if (!parsed.success) {

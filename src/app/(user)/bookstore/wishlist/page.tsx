@@ -14,7 +14,7 @@ export default function WishlistPage() {
   const { trackEvent } = useConsentAwareTracking();
 
   useEffect(() => {
-    if (!ready || loading) return;
+    if (!ready || loading) {return;}
     trackEvent('view_wishlist', { wishlist_item_count: wishlist.length });
   }, [ready, loading, wishlist.length, trackEvent]);
 

@@ -17,7 +17,9 @@ function getRoleFromMeta(meta: Record<string, unknown>): PortalRole | null {
   if (role === 'admin' || role === 'editor' || role === 'author' || role === 'sales') {
     return role as PortalRole;
   }
-  if (meta?.admin === true || meta?.admin === 'true') return 'admin';
+  if (meta?.admin === true || meta?.admin === 'true') {
+    return 'admin';
+  }
   return null;
 }
 

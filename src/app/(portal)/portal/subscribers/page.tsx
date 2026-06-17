@@ -21,7 +21,7 @@ export const metadata = {
 export default async function SubscribersPage() {
   const { role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
-  if (!isEditorPlus) redirect('/portal/articles');
+  if (!isEditorPlus) {redirect('/portal/articles');}
 
   const [newsSubscribers, bookstoreSubscribers] = await Promise.all([
     portalFetch<Subscriber[]>(queryPortalNewsletterSubscribers).then((r) => r ?? []),

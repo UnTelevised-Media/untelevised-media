@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-console */
+
 // TimelineJS Data Adapter
 // Transforms Sanity CMS timeline data into TimelineJS-compatible format
 
@@ -315,12 +315,20 @@ export function convertTimelineToTimelineJS(
  * Validates TimelineJS data format
  */
 export function validateTimelineJSData(data: TimelineJSData): boolean {
-  if (!data.events || !Array.isArray(data.events)) return false;
-  if (data.events.length === 0) return false;
+  if (!data.events || !Array.isArray(data.events)) {
+    return false;
+  }
+  if (data.events.length === 0) {
+    return false;
+  }
 
   for (const event of data.events) {
-    if (!event.start_date?.year) return false;
-    if (!event.text?.headline) return false;
+    if (!event.start_date?.year) {
+      return false;
+    }
+    if (!event.text?.headline) {
+      return false;
+    }
   }
 
   return true;

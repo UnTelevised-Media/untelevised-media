@@ -93,7 +93,7 @@ export default async function MusicArtistPage({ params }: Props) {
   const { slug } = await params;
   const artist: ArtistWithContent = (await getMusicArtistBySlug(slug)) as ArtistWithContent;
 
-  if (!artist) notFound();
+  if (!artist) {notFound();}
 
   const displayName = artist.stageName ?? artist.name;
 

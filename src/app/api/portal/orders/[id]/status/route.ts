@@ -92,7 +92,9 @@ async function authorOwnsOrderItem(
   clerkUserId: string,
   orderItemBookIds: string[]
 ): Promise<boolean> {
-  if (orderItemBookIds.length === 0) return false;
+  if (orderItemBookIds.length === 0) {
+    return false;
+  }
 
   // Resolve the Sanity author document for this Clerk user, then check whether
   // any of the order's books reference that author.
@@ -111,13 +113,19 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const { id: orderId } = await params;
 
   const { userId } = await auth();
-  if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!userId) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   const user = await currentUser();
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   const role = getRoleFromUser(user);
-  if (!role) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  if (!role) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
 
   // Explicit allowlist — only admin, sales, and authors may update order status.
   // Editor role is intentionally excluded: editors manage content, not fulfillment.

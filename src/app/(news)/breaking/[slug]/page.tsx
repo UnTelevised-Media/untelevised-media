@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
     tags: ['liveEvent'],
   });
-  if (!liveEvent) return { title: 'Breaking News Not Found' };
+  if (!liveEvent) {return { title: 'Breaking News Not Found' };}
   const base = buildLiveEventMetadata(liveEvent as LiveEvent, slug);
   const canonicalUrl = getCanonicalUrl('breaking', slug);
   return {
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LiveEvent({ params }: Props) {
   const { slug } = await params;
   const liveEvent = await getEventBySlug(slug);
-  if (!liveEvent) notFound();
+  if (!liveEvent) {notFound();}
 
   const allEvents = [
     // Check if liveEvent.relatedArticles is an array. If Truthy map over it and return an array of objects with the source property set to the source of the related article.

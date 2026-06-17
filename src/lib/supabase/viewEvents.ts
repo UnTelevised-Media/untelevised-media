@@ -51,7 +51,7 @@ export async function getViewCountsByDate(dateString: string): Promise<ViewCount
   const client = getServerClient();
 
   // Type assertion needed for Supabase strict typing
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const { data, error } = await (client
     .from('view_count')
     .select('slug')
@@ -107,7 +107,6 @@ export async function getTrendingArticles(
   startDate.setDate(startDate.getDate() - daysBack);
   const dateStr = startDate.toISOString().split('T')[0];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error } = await (client
     .from('view_count')
     .select('slug, viewed_at')

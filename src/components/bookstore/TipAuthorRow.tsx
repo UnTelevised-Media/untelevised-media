@@ -28,7 +28,7 @@ export default function TipAuthorRow({ author, bookId }: Props) {
   const disabled = !included || amount <= 0;
 
   const handleAddToCart = () => {
-    if (disabled) return;
+    if (disabled) {return;}
     addItem({
       sanityBookId: bookId,
       slug: author.slug?.current ?? author._id,
@@ -44,7 +44,7 @@ export default function TipAuthorRow({ author, bookId }: Props) {
   };
 
   const handleBuyNow = async () => {
-    if (disabled) return;
+    if (disabled) {return;}
     setBuying(true);
     setError(null);
 

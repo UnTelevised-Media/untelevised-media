@@ -108,7 +108,9 @@ async function verifyArticleAccess(
 
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
-  if (isEditorPlus) return { canEdit: true, isEditorPlus: true, sanityAuthorId };
+  if (isEditorPlus) {
+    return { canEdit: true, isEditorPlus: true, sanityAuthorId };
+  }
 
   // Authors can only edit their own articles.
   // Query both the draft ID and the published ID so this works regardless of
@@ -150,8 +152,9 @@ export async function createArticle(
   const { id: clerkUserId } = await requireAuthor();
 
   const rl = await checkRateLimit(clerkUserId);
-  if (!rl.allowed)
+  if (!rl.allowed) {
     return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
+  }
 
   const parsed = articleWriteSchema.safeParse(input);
   if (!parsed.success) {
@@ -250,8 +253,9 @@ export async function updateArticle(
   const { id: clerkUserId } = await requireAuthor();
 
   const rl = await checkRateLimit(clerkUserId);
-  if (!rl.allowed)
+  if (!rl.allowed) {
     return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
+  }
 
   const parsed = articleWriteSchema.safeParse(input);
   if (!parsed.success) {
@@ -321,7 +325,9 @@ export async function updateArticle(
 
   try {
     let patchBuilder = writeClient.patch(articleId).set(setFields);
-    if (fieldsToUnset.length > 0) patchBuilder = patchBuilder.unset(fieldsToUnset);
+    if (fieldsToUnset.length > 0) {
+      patchBuilder = patchBuilder.unset(fieldsToUnset);
+    }
     await patchBuilder.commit();
     return { success: true, data: { _id: articleId } };
   } catch (err) {
@@ -347,8 +353,9 @@ export async function deleteArticle(articleId: string): Promise<ActionResult> {
   }
 
   const rl = await checkRateLimit(clerkUserId);
-  if (!rl.allowed)
+  if (!rl.allowed) {
     return { success: false, error: `Rate limit exceeded. Retry in ${rl.retryAfter}s.` };
+  }
 
   const { canEdit } = await verifyArticleAccess(clerkUserId, articleId);
   if (!canEdit) {
@@ -514,7 +521,9 @@ export async function searchArticles(
 ): Promise<ActionResult<Array<{ _id: string; title: string; slug: { current: string } }>>> {
   await requireAuthor();
 
-  if (!query.trim()) return { success: true, data: [] };
+  if (!query.trim()) {
+    return { success: true, data: [] };
+  }
 
   const results = await writeClient.fetch<
     Array<{ _id: string; title: string; slug: { current: string } }>

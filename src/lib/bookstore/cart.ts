@@ -19,7 +19,9 @@ const debouncedStorage: Storage = {
   key: (index: number) => localStorage.key(index),
   getItem: (name: string): string | null => localStorage.getItem(name),
   setItem: (name: string, value: string): void => {
-    if (_debounceTimer !== null) clearTimeout(_debounceTimer);
+    if (_debounceTimer !== null) {
+      clearTimeout(_debounceTimer);
+    }
     _debounceTimer = setTimeout(() => {
       localStorage.setItem(name, value);
       _debounceTimer = null;
@@ -57,7 +59,9 @@ export const useCart = create<CartState>()(
           const existing = state.items.find(
             (i) => i.sanityBookId === incoming.sanityBookId && i.formatKey === incoming.formatKey
           );
-          if (!existing && state.items.length >= MAX_CART_SIZE) return state;
+          if (!existing && state.items.length >= MAX_CART_SIZE) {
+            return state;
+          }
           if (existing) {
             // Tips don't stack quantity — update price and re-check instead
             if (incoming.formatType === 'tip') {

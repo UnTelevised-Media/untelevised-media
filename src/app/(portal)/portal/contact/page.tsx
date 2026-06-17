@@ -16,7 +16,7 @@ export const metadata = {
 export default async function ContactPage() {
   const { role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
-  if (!isEditorPlus) redirect('/portal/articles');
+  if (!isEditorPlus) {redirect('/portal/articles');}
 
   const submissions =
     (await portalFetch<ContactSubmission[]>(queryPortalContactSubmissions)) ?? [];

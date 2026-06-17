@@ -41,7 +41,7 @@ const STATUS_LABELS: Record<string, string> = {
 };
 
 function formatDate(iso?: string) {
-  if (!iso) return '—';
+  if (!iso) {return '—';}
   return new Date(iso).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',

@@ -158,7 +158,9 @@ export interface OrderConfirmationParams {
 }
 
 export async function sendOrderConfirmationEmail(params: OrderConfirmationParams) {
-  if (!isConfigured()) return;
+  if (!isConfigured()) {
+    return;
+  }
 
   const itemRows = params.items
     .map(
@@ -281,7 +283,9 @@ export interface DigitalDownloadEmailParams {
 }
 
 export async function sendDigitalDownloadEmail(params: DigitalDownloadEmailParams) {
-  if (!isConfigured()) return;
+  if (!isConfigured()) {
+    return;
+  }
 
   const vaultUrl = `${baseUrl}/bookstore/downloads`;
 
@@ -341,7 +345,9 @@ export interface GuestDownloadEmailParams {
 }
 
 export async function sendGuestDownloadEmail(params: GuestDownloadEmailParams) {
-  if (!isConfigured()) return;
+  if (!isConfigured()) {
+    return;
+  }
 
   const expires = params.expiresAt.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -389,7 +395,9 @@ export interface ShipmentEmailParams {
 }
 
 export async function sendShipmentEmail(params: ShipmentEmailParams) {
-  if (!isConfigured()) return;
+  if (!isConfigured()) {
+    return;
+  }
 
   const trackingBlock = params.trackingNumber
     ? `<table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;background-color:#0d0d0d;border:1px solid #2a2a2a;padding:20px;">
@@ -428,7 +436,9 @@ export async function sendShipmentEmail(params: ShipmentEmailParams) {
 // ---------------------------------------------------------------------------
 
 export async function sendRefundEmail(params: { to: string; orderNumber: string }) {
-  if (!isConfigured()) return;
+  if (!isConfigured()) {
+    return;
+  }
 
   const content = `
     <p style="margin:0 0 4px;font-size:26px;font-weight:900;color:#ffffff;">Refund Processed</p>
@@ -463,7 +473,9 @@ export interface GiftEmailParams {
 }
 
 export async function sendGiftEmail(params: GiftEmailParams) {
-  if (!isConfigured()) return;
+  if (!isConfigured()) {
+    return;
+  }
 
   const expires = params.expiresAt.toLocaleDateString('en-US', {
     year: 'numeric',

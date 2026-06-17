@@ -15,10 +15,14 @@ export interface BookmarkEntry {
 const STORAGE_KEY = 'untele_bookmarks';
 
 function read(): BookmarkEntry[] {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === 'undefined') {
+    return [];
+  }
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
+    if (!raw) {
+      return [];
+    }
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? (parsed as BookmarkEntry[]) : [];
   } catch {

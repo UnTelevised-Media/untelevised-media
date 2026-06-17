@@ -32,7 +32,9 @@ export async function POST(req: NextRequest) {
   for (const brief of briefs ?? []) {
     const stories = brief.stories ?? [];
     const needsRepair = stories.some((s) => !s._key || s.links?.some((l) => !l._key));
-    if (!needsRepair) continue;
+    if (!needsRepair) {
+      continue;
+    }
 
     // We must fetch the full stories array to patch it (can't patch individual
     // null-keyed items by path — that's exactly the bug we're fixing).
@@ -62,7 +64,9 @@ export async function POST(req: NextRequest) {
 
   for (const pitch of pitches ?? []) {
     const links = pitch.links ?? [];
-    if (!links.some((l) => !l._key)) continue;
+    if (!links.some((l) => !l._key)) {
+      continue;
+    }
 
     const full = await writeClient.fetch<{
       links?: Array<Record<string, unknown> & { _key: string | null }>;

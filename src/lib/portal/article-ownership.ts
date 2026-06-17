@@ -16,10 +16,14 @@ export async function verifyArticleAccessForClerkUser(
   const meta = (user.publicMetadata ?? {}) as Record<string, unknown>;
   const role = getRoleFromMeta(meta);
   const isEditorPlus = hasRole(role, 'editor');
-  if (isEditorPlus) return { canEdit: true, isEditorPlus: true };
+  if (isEditorPlus) {
+    return { canEdit: true, isEditorPlus: true };
+  }
 
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
-  if (!sanityAuthorId) return { canEdit: false, isEditorPlus: false };
+  if (!sanityAuthorId) {
+    return { canEdit: false, isEditorPlus: false };
+  }
 
   // For source deletion: allow if author has any article referencing this source
   const linked = await writeClient.fetch<{ _id: string } | null>(

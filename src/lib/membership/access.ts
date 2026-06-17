@@ -12,7 +12,9 @@ import type { MembershipTier } from './database.types';
  */
 export async function getMembershipTier(): Promise<MembershipTier | null> {
   const { userId } = await auth();
-  if (!userId) return null;
+  if (!userId) {
+    return null;
+  }
 
   const { data, error } = await getMembershipAnonClient()
     .from('members')

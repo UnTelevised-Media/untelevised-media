@@ -9,7 +9,9 @@ import { requireAuthor } from '@/lib/auth/roles';
 
 async function requireEditor() {
   const { role } = await requireAuthor();
-  if (!hasRole(role, 'editor')) throw new Error('Unauthorized');
+  if (!hasRole(role, 'editor')) {
+    throw new Error('Unauthorized');
+  }
 }
 
 export async function approveReview(reviewId: string): Promise<{ ok: boolean; error?: string }> {
@@ -41,7 +43,9 @@ export async function sendReviewFeedback(
 ): Promise<{ ok: boolean; error?: string }> {
   try {
     await requireEditor();
-    if (!feedback.trim()) return { ok: false, error: 'Feedback message is required' };
+    if (!feedback.trim()) {
+      return { ok: false, error: 'Feedback message is required' };
+    }
     await writeClient
       .patch(reviewId)
       .set({ status: 'needs_revision', approved: false, adminFeedback: feedback.trim() })

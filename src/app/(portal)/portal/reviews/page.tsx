@@ -17,7 +17,7 @@ export const metadata = {
 export default async function ReviewsPage() {
   const { role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
-  if (!isEditorPlus) redirect('/portal/articles');
+  if (!isEditorPlus) {redirect('/portal/articles');}
 
   const reviews = (await portalFetch<PortalReview[]>(queryPortalAllReviews)) ?? [];
 

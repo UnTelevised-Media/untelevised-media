@@ -38,7 +38,7 @@ function makeKey() {
 }
 
 function blocksToText(blocks?: Array<{ children?: Array<{ text?: string }> }>): string {
-  if (!blocks || blocks.length === 0) return '';
+  if (!blocks || blocks.length === 0) {return '';}
   return blocks.map((b) => b.children?.map((c) => c.text ?? '').join('') ?? '').join('\n');
 }
 
@@ -100,7 +100,7 @@ export function PitchQuickViewModal({ pitch, onClose }: Props) {
     <DialogPrimitive.Root
       open
       onOpenChange={(open) => {
-        if (!open) onClose();
+        if (!open) {onClose();}
       }}
     >
       <DialogPrimitive.Portal>

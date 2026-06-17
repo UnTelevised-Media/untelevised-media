@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
     tags: ['factCheck'],
   });
-  if (!fc) return {};
+  if (!fc) {return {};}
   return buildFactCheckMetadata(fc, slug);
 }
 
@@ -76,7 +76,7 @@ export default async function FactCheckPage({ params }: Props) {
     tags: ['factCheck'],
   });
 
-  if (!fc) notFound();
+  if (!fc) {notFound();}
 
   const jsonLd = buildClaimReviewJsonLd(fc);
 

@@ -78,7 +78,7 @@ export default async function PortalEarningsPage() {
   let supabaseAvailable = true;
 
   try {
-    if (!process.env.SUPABASE_SHOP_URL) throw new Error('Supabase shop not configured');
+    if (!process.env.SUPABASE_SHOP_URL) {throw new Error('Supabase shop not configured');}
 
     const [earningsResult, payoutsResult] = await Promise.all([
       shopServiceClient
@@ -95,12 +95,12 @@ export default async function PortalEarningsPage() {
     ]);
 
     if (earningsResult.error)
-      console.error(
+      {console.error(
         '[portal/earnings] author_earnings query failed:',
         earningsResult.error.message
-      );
+      );}
     if (payoutsResult.error)
-      console.error('[portal/earnings] payouts query failed:', payoutsResult.error.message);
+      {console.error('[portal/earnings] payouts query failed:', payoutsResult.error.message);}
 
     authorEarnings = ((earningsResult.data as AuthorEarningRow[]) ?? []).filter(
       (s) => !['cancelled', 'refunded'].includes(s.order?.status ?? '')

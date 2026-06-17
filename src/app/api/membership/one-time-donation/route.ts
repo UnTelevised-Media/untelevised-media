@@ -23,8 +23,12 @@ const MIN_CENTS = 500;
 
 async function resolveDonationProductId(): Promise<string | null> {
   const id = process.env.STRIPE_MEMBERSHIP_PRICE_DONATION;
-  if (!id) return null;
-  if (id.startsWith('prod_')) return id;
+  if (!id) {
+    return null;
+  }
+  if (id.startsWith('prod_')) {
+    return id;
+  }
   if (id.startsWith('price_')) {
     const price = await stripe.prices.retrieve(id);
     return typeof price.product === 'string' ? price.product : null;

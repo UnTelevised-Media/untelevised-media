@@ -157,7 +157,9 @@ export async function POST(req: NextRequest) {
     // Build server-verified NYOP flags from Sanity — never trust item.isNyop from
     // the client, which would allow submitting an arbitrary unitAmountCents for any item.
     const serverIsNyopFlags: boolean[] = chargeableItems.map((item) => {
-      if (item.formatType === 'tip') return false;
+      if (item.formatType === 'tip') {
+        return false;
+      }
       const book = bookMap.get(item.sanityBookId);
       const format = book?.formats?.find((f) => f._key === item.formatKey);
       return format?.nameYourPrice === true;

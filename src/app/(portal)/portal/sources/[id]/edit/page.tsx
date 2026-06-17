@@ -30,7 +30,7 @@ export default async function EditSourcePage({ params }: { params: Promise<{ id:
     { id }
   );
 
-  if (!source) notFound();
+  if (!source) {notFound();}
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>

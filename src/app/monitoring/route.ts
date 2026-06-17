@@ -11,16 +11,22 @@ export async function POST(request: Request) {
   try {
     const body = await request.text();
     const firstLine = body.split('\n')[0];
-    if (!firstLine) return new Response('Empty envelope', { status: 400 });
+    if (!firstLine) {
+      return new Response('Empty envelope', { status: 400 });
+    }
 
     const header = JSON.parse(firstLine) as { dsn?: string };
-    if (!header.dsn) return new Response('Missing DSN in envelope header', { status: 400 });
+    if (!header.dsn) {
+      return new Response('Missing DSN in envelope header', { status: 400 });
+    }
 
     const dsn = new URL(header.dsn);
     const isValidHost = VALID_SENTRY_HOSTS.some(
       (h) => dsn.hostname === h || dsn.hostname.endsWith(`.${h}`)
     );
-    if (!isValidHost) return new Response('Invalid DSN host', { status: 400 });
+    if (!isValidHost) {
+      return new Response('Invalid DSN host', { status: 400 });
+    }
 
     const projectId = dsn.pathname.replace(/^\//, '');
     const upstream = `https://${dsn.hostname}/api/${projectId}/envelope/`;

@@ -8,11 +8,11 @@ interface ViewPingProps {
 
 export default function ViewPing({ slug }: ViewPingProps) {
   useEffect(() => {
-    if (!slug) return;
+    if (!slug) {return;}
 
     const storageKey = `viewed_${slug}`;
 
-    if (sessionStorage.getItem(storageKey)) return;
+    if (sessionStorage.getItem(storageKey)) {return;}
 
     sessionStorage.setItem(storageKey, '1');
 

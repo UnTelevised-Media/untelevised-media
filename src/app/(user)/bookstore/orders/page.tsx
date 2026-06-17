@@ -38,7 +38,7 @@ const STATUS_COLORS: Record<string, string> = {
 
 export default async function OrdersPage() {
   const { userId } = await auth();
-  if (!userId) redirect('/sign-in?redirect_url=/bookstore/orders');
+  if (!userId) {redirect('/sign-in?redirect_url=/bookstore/orders');}
 
   // Look up customer by clerk user id
   const { data: customer } = await shopServiceClient
@@ -85,7 +85,7 @@ export default async function OrdersPage() {
 
   const itemsByOrder: Record<string, OrderItem[]> = {};
   for (const item of allItems ?? []) {
-    if (!itemsByOrder[item.order_id]) itemsByOrder[item.order_id] = [];
+    if (!itemsByOrder[item.order_id]) {itemsByOrder[item.order_id] = [];}
     itemsByOrder[item.order_id].push(item as OrderItem);
   }
 

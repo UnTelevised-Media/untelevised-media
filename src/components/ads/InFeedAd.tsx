@@ -41,17 +41,17 @@ export default function InFeedAd({
   }, []);
 
   useEffect(() => {
-    if (!isClient || !containerRef.current) return;
+    if (!isClient || !containerRef.current) {return;}
     if (!isDev && (!hasConsent || !canUseMarketing)) {
       console.debug('[AdSense] InFeedAd slot=%s: awaiting consent', slot);
       return;
     }
-    if (pushed.current) return;
+    if (pushed.current) {return;}
 
     const container = containerRef.current;
     const obs = new IntersectionObserver(
       async (entries) => {
-        if (!entries[0]?.isIntersecting || pushed.current) return;
+        if (!entries[0]?.isIntersecting || pushed.current) {return;}
         obs.disconnect();
         pushed.current = true;
 
@@ -89,8 +89,8 @@ export default function InFeedAd({
     return () => obs.disconnect();
   }, [isClient, isDev, hasConsent, canUseMarketing, slot]);
 
-  if (!isClient) return null;
-  if ((adStatus === 'error' || adStatus === 'unfilled') && !isDev) return null;
+  if (!isClient) {return null;}
+  if ((adStatus === 'error' || adStatus === 'unfilled') && !isDev) {return null;}
 
   return (
     <div ref={containerRef} className={`ad-container my-6 ${className}`} style={style}>

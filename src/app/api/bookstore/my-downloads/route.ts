@@ -32,7 +32,9 @@ export async function GET(req: NextRequest) {
 
   // Step 1: Verify Clerk auth — this MUST happen before any service-role call.
   const { userId } = await auth();
-  if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!userId) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   // Steps 2 & 3: Resolve the Supabase customer ID for the verified Clerk user,
   // then fetch only that customer's downloads. Both queries are scoped by
@@ -45,7 +47,9 @@ export async function GET(req: NextRequest) {
     .eq('clerk_user_id', userId) // application-level scope: only this user's row
     .maybeSingle();
 
-  if (!customer) return NextResponse.json({ downloads: [] });
+  if (!customer) {
+    return NextResponse.json({ downloads: [] });
+  }
 
   const { data: downloads, error } = await db
     .from('digital_downloads')

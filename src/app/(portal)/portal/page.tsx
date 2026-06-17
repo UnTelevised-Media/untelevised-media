@@ -171,7 +171,7 @@ export default async function PortalDashboardPage() {
   // Sorted _createdAt desc → first-seen per storyKey is the newest pitch
   const myPitchMap: Record<string, string> = {};
   for (const p of myPitchesRaw) {
-    if (!myPitchMap[p.storyKey]) myPitchMap[p.storyKey] = p._id;
+    if (!myPitchMap[p.storyKey]) {myPitchMap[p.storyKey] = p._id;}
   }
 
   const [myArticlesRes, allArticlesRes, authorsRes, claimedPitchesRes] = await Promise.all([
@@ -322,7 +322,7 @@ export default async function PortalDashboardPage() {
           unitsSoldQuery,
         ]);
         if (itemsError)
-          console.error('[portal/dashboard] order_items query failed:', itemsError.message);
+          {console.error('[portal/dashboard] order_items query failed:', itemsError.message);}
 
         const items = ((rawItems ?? []) as ItemRow[]).filter(
           (i) => i.order && !['cancelled', 'refunded'].includes(i.order.status)

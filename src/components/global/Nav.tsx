@@ -34,14 +34,14 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
 
   const updateArrows = useCallback(() => {
     const el = scrollRef.current;
-    if (!el) return;
+    if (!el) {return;}
     setCanScrollLeft(el.scrollLeft > 0);
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
   }, []);
 
   useEffect(() => {
     const el = scrollRef.current;
-    if (!el) return;
+    if (!el) {return;}
     updateArrows();
     el.addEventListener('scroll', updateArrows, { passive: true });
     const ro = new ResizeObserver(updateArrows);
@@ -55,10 +55,10 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
   // Vertical wheel → horizontal scroll
   useEffect(() => {
     const el = scrollRef.current;
-    if (!el) return;
+    if (!el) {return;}
     const onWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-      if (e.deltaY === 0) return;
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {return;}
+      if (e.deltaY === 0) {return;}
       e.preventDefault();
       el.scrollLeft += e.deltaY;
     };
@@ -68,14 +68,14 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
 
   const tick = useCallback(() => {
     const el = scrollRef.current;
-    if (!el || directionRef.current === 0) return;
+    if (!el || directionRef.current === 0) {return;}
     el.scrollLeft += directionRef.current * SCROLL_SPEED;
     rafRef.current = requestAnimationFrame(tick);
   }, []);
 
   const startScroll = useCallback(
     (dir: -1 | 1) => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (rafRef.current) {cancelAnimationFrame(rafRef.current);}
       directionRef.current = dir;
       rafRef.current = requestAnimationFrame(tick);
     },

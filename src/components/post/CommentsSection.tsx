@@ -38,7 +38,7 @@ export default function CommentsSection({
   // Fetch SSO token for signed-in users; cache in sessionStorage so navigating
   // between articles in the same tab reuses the token without hitting Clerk again.
   useEffect(() => {
-    if (!isSignedIn) return;
+    if (!isSignedIn) {return;}
     const cached = sessionStorage.getItem('coral_sso_token');
     if (cached) {
       setToken(cached);
@@ -48,7 +48,7 @@ export default function CommentsSection({
     fetch('/api/coral-token', { signal: controller.signal })
       .then((r) => r.json())
       .then((d: { token: string | null }) => {
-        if (d.token) sessionStorage.setItem('coral_sso_token', d.token);
+        if (d.token) {sessionStorage.setItem('coral_sso_token', d.token);}
         setToken(d.token);
       })
       .catch((e: unknown) => {
@@ -62,10 +62,10 @@ export default function CommentsSection({
 
   // Load and initialise Coral embed — re-runs when theme or auth state changes
   useEffect(() => {
-    if (!functionalConsent || !allowComments) return;
-    if (!isLoaded) return;
+    if (!functionalConsent || !allowComments) {return;}
+    if (!isLoaded) {return;}
     // Wait for token fetch to resolve before initialising as authenticated user
-    if (isSignedIn && token === null) return;
+    if (isSignedIn && token === null) {return;}
 
     const coralUrl = process.env.NEXT_PUBLIC_CORAL_URL;
     if (!coralUrl) {
@@ -82,7 +82,7 @@ export default function CommentsSection({
     let cancelled = false;
 
     const initEmbed = () => {
-      if (cancelled) return;
+      if (cancelled) {return;}
       embedRef.current?.remove();
       embedRef.current =
         window.Coral?.createStreamEmbed({

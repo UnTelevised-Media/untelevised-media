@@ -22,7 +22,9 @@ let _serviceClient: SupabaseClient<MembershipDatabase> | null = null;
 export function getMembershipAnonClient(): SupabaseClient<MembershipDatabase> {
   if (!_anonClient) {
     const url = getMembershipUrl();
-    if (!url) throw new Error('[membership/supabase] SUPABASE_MEMBERSHIP_URL is not set');
+    if (!url) {
+      throw new Error('[membership/supabase] SUPABASE_MEMBERSHIP_URL is not set');
+    }
     _anonClient = createClient<MembershipDatabase>(
       url,
       process.env.SUPABASE_MEMBERSHIP_ANON_KEY ?? '',
@@ -36,7 +38,9 @@ export function getMembershipAnonClient(): SupabaseClient<MembershipDatabase> {
 export function getMembershipServiceClient(): SupabaseClient<MembershipDatabase> {
   if (!_serviceClient) {
     const url = getMembershipUrl();
-    if (!url) throw new Error('[membership/supabase] SUPABASE_MEMBERSHIP_URL is not set');
+    if (!url) {
+      throw new Error('[membership/supabase] SUPABASE_MEMBERSHIP_URL is not set');
+    }
     _serviceClient = createClient<MembershipDatabase>(
       url,
       process.env.SUPABASE_MEMBERSHIP_SERVICE_ROLE_KEY ?? '',

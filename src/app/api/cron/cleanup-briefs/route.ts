@@ -3,7 +3,9 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { writeClient } from '@/lib/sanity/lib/write-client';
 
 function verifyBearerToken(authHeader: string | null, secret: string | undefined): boolean {
-  if (!secret || !authHeader) return false;
+  if (!secret || !authHeader) {
+    return false;
+  }
   const expected = `Bearer ${secret}`;
   // timingSafeEqual requires equal-length buffers; compare as fixed-width to avoid
   // leaking the expected token length via the length-mismatch fast path.
