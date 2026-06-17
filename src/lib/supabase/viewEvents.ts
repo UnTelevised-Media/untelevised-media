@@ -87,3 +87,58 @@ export async function deleteViewEventsForDate(dateString: string): Promise<numbe
 
   return count ?? 0;
 }
+
+export interface TrendingArticle {
+  slug: string;
+  view_count: number;
+  last_viewed: string;
+}
+
+/**
+ * Get trending articles from view_count table, aggregated by slug
+ */
+export async function getTrendingArticles(
+  daysBack: number = 7,
+  limit: number = 31
+): Promise<TrendingArticle[]> {
+  const client = getServerClient();
+
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - daysBack);
+  const dateStr = startDate.toISOString().split('T')[0];
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data, error } = await (client
+    .from('view_count')
+    .select('slug, viewed_at')
+    .gte('created_date', dateStr) as any);
+
+  if (error) {
+    console.error('[getTrendingArticles] Query error:', error);
+    throw error;
+  }
+
+  // Aggregate view counts by slug
+  const counts = new Map<string, { count: number; lastViewed: string }>();
+
+  for (const row of data || []) {
+    const current = counts.get(row.slug) || { count: 0, lastViewed: row.viewed_at };
+    counts.set(row.slug, {
+      count: current.count + 1,
+      lastViewed:
+        new Date(row.viewed_at) > new Date(current.lastViewed)
+          ? row.viewed_at
+          : current.lastViewed,
+    });
+  }
+
+  // Sort by view count descending, return top N
+  return Array.from(counts.entries())
+    .sort((a, b) => b[1].count - a[1].count)
+    .slice(0, limit)
+    .map(([slug, meta]) => ({
+      slug,
+      view_count: meta.count,
+      last_viewed: meta.lastViewed,
+    }));
+}

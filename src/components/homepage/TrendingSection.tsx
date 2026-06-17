@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { TrendingUp } from 'lucide-react';
 import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryMostReadArticles } from '@/lib/sanity/lib/queries';
+import { getTrendingArticles as getTrendingFromSupabase } from '@/lib/supabase/viewEvents';
 import formatDate from '@/util/formatDate';
 import urlForImage from '@/util/urlForImage';
 import TrendingListPaginated from './TrendingListPaginated';
@@ -22,15 +22,48 @@ interface TrendingArticle {
   categories?: { title: string; slug: { current: string } }[];
 }
 
-// Deduplicated within a single request — both 'card' and 'list' variants share one fetch
-// Cached by Next.js ISR (revalidate: 24h ceiling, or sooner via webhook invalidation)
-// The batched viewCount system prevents viewCount-only mutations from invalidating cache
+// Fetch trending slugs from Supabase, then enrich with Sanity article data
 const getTrendingArticles = cache(async (): Promise<TrendingArticle[]> => {
+  // Get trending slugs from Supabase (view_count table)
+  const trendingSlugs = await getTrendingFromSupabase(7, 31);
+
+  if (trendingSlugs.length === 0) {
+    return [];
+  }
+
+  // Fetch article details from Sanity for trending slugs
   const articles = await sanityFetch<TrendingArticle[]>({
-    query: queryMostReadArticles,
+    query: `*[_type == "article" && slug.current in $slugs] {
+      _id,
+      title,
+      slug,
+      publishedAt,
+      description,
+      location,
+      tags,
+      mainImage,
+      author->{name, slug},
+      categories[]->{title, slug},
+    } | order(publishedAt desc)`,
+    params: {
+      slugs: trendingSlugs.map((t) => t.slug),
+    },
     tags: ['article'],
   });
-  return articles ?? [];
+
+  if (!articles) {
+    return [];
+  }
+
+  // Merge Supabase view counts with Sanity article data, maintaining Supabase sort order
+  const supabaseMap = new Map(trendingSlugs.map((t) => [t.slug, t.view_count]));
+  return articles
+    .map((article) => ({
+      ...article,
+      viewCount: supabaseMap.get(article.slug.current) ?? 0,
+    }))
+    .filter((a) => a.viewCount > 0) // Only include articles with views
+    .sort((a, b) => b.viewCount - a.viewCount); // Sort by view count
 });
 
 interface Props {

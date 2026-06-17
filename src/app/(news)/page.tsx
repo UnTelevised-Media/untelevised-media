@@ -19,15 +19,15 @@ import {
   queryLiveEvents,
   queryBreakingArticles,
   queryFieldReportArticles,
-  queryTrendingIds,
 } from '@/lib/sanity/lib/queries';
+import { getTrendingArticles as getTrendingFromSupabase } from '@/lib/supabase/viewEvents';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
-  const { articles, liveEvents, breakingArticles, fieldReports, trendingIds } = frontPageData;
+  const { articles, liveEvents, breakingArticles, fieldReports, trendingSlugs } = frontPageData;
 
   // Breaking articles come from their own query (breakingNews flag, publishedAt desc)
   const heroArticle = articles[0];
@@ -38,7 +38,10 @@ export default async function HomePage() {
       heroArticle?._id,
       ...breakingArticles.map((a) => a._id),
       ...fieldReports.map((a) => a._id),
-      ...trendingIds.map((a: { _id: string }) => a._id),
+      // Exclude trending articles by matching slug to article
+      ...articles
+        .filter((a) => trendingSlugs.includes(a.slug.current))
+        .map((a) => a._id),
     ].filter(Boolean) as string[]
   );
 
@@ -338,7 +341,7 @@ async function getFrontPageData(): Promise<{
   liveEvents: LiveEvent[];
   breakingArticles: Article[];
   fieldReports: Article[];
-  trendingIds: { _id: string }[];
+  trendingSlugs: string[];
 }> {
   try {
     const [
@@ -346,13 +349,13 @@ async function getFrontPageData(): Promise<{
       { data: articles },
       { data: breakingArticles },
       { data: fieldReports },
-      { data: trendingIds },
+      trendingArticles,
     ] = await Promise.all([
       sanityFetch({ query: queryLiveEvents, tags: ['liveEvent'] }),
       sanityFetch({ query: queryHomepageArticles, tags: ['article'] }),
       sanityFetch({ query: queryBreakingArticles, tags: ['article'] }),
       sanityFetch({ query: queryFieldReportArticles, tags: ['article'] }),
-      sanityFetch({ query: queryTrendingIds, tags: ['article'] }),
+      getTrendingFromSupabase(7, 31),
     ]);
 
     return {
@@ -360,7 +363,7 @@ async function getFrontPageData(): Promise<{
       articles: (articles as Article[]) ?? [],
       breakingArticles: (breakingArticles as Article[]) ?? [],
       fieldReports: (fieldReports as Article[]) ?? [],
-      trendingIds: (trendingIds as { _id: string }[]) ?? [],
+      trendingSlugs: trendingArticles?.map((a) => a.slug) ?? [],
     };
   } catch (error) {
     console.error('Failed to fetch front page data:', error);
@@ -369,7 +372,7 @@ async function getFrontPageData(): Promise<{
       liveEvents: [],
       breakingArticles: [],
       fieldReports: [],
-      trendingIds: [],
+      trendingSlugs: [],
     };
   }
 }

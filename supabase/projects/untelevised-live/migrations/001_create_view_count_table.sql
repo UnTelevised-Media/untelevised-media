@@ -26,7 +26,8 @@ ALTER TABLE public.view_count ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Allow anonymous users to INSERT view events (from ViewPing component)
 -- This is safe because: (1) inserts only, no reads/deletes, (2) limited by RLS, (3) no sensitive data exposed
-CREATE POLICY IF NOT EXISTS "allow_anonymous_inserts"
+DROP POLICY IF EXISTS "allow_anonymous_inserts" ON public.view_count;
+CREATE POLICY "allow_anonymous_inserts"
 ON public.view_count
 FOR INSERT
 TO anon
@@ -34,7 +35,8 @@ WITH CHECK (true);
 
 -- Policy: Deny anonymous users from reading view data
 -- Prevents exposure of raw IP, geolocation, or view patterns to unauthorized users
-CREATE POLICY IF NOT EXISTS "disallow_anonymous_selects"
+DROP POLICY IF EXISTS "disallow_anonymous_selects" ON public.view_count;
+CREATE POLICY "disallow_anonymous_selects"
 ON public.view_count
 FOR SELECT
 TO anon
@@ -42,7 +44,8 @@ USING (false);
 
 -- Policy: Allow service_role full access for batch jobs and analytics
 -- Used by: batch geolocation cron, view aggregation, trending calculations
-CREATE POLICY IF NOT EXISTS "service_role_full_access"
+DROP POLICY IF EXISTS "service_role_full_access" ON public.view_count;
+CREATE POLICY "service_role_full_access"
 ON public.view_count
 FOR ALL
 TO service_role

@@ -294,12 +294,13 @@ export default defineType({
     // ── Analytics ─────────────────────────────────────────────────────────────
     defineField({
       name: 'viewCount',
-      title: 'View Count',
+      title: 'View Count (DEPRECATED)',
       type: 'number',
       description:
-        'Populated by daily cron sync from Supabase view tracking (/api/cron/sync-view-counts) and GA import script. Can be edited manually to correct imported values.',
+        'DEPRECATED: View counts are now tracked in Supabase (view_count table) and queried directly. This field is kept for historical reference only. Do not edit.',
       initialValue: 0,
       validation: (Rule) => Rule.min(0).integer(),
+      readOnly: true,
       group: ['analytics', 'all'],
     }),
     defineField({
