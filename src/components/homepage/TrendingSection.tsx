@@ -28,7 +28,7 @@ const getTrendingArticles = cache(async (): Promise<TrendingArticle[]> => {
   let trendingSlugs: Awaited<ReturnType<typeof getTrendingFromSupabase>> = [];
 
   try {
-    trendingSlugs = await getTrendingFromSupabase(7, 31);
+    trendingSlugs = await getTrendingFromSupabase(45, 31);
   } catch (error) {
     // If Supabase is not available (e.g., during static build without env vars),
     // return empty trending list — this is non-critical for page rendering

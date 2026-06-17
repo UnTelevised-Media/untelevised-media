@@ -67,7 +67,7 @@ export default async function CategoryPage({ params }: Props) {
       data: Category | null;
     }>,
     getArticlesByCategory(slug),
-    getTrendingArticles(7, 100).catch(() => []), // Get trending articles, fallback to empty
+    getTrendingArticles(45, 100).catch(() => []), // Get trending articles, fallback to empty
   ]);
 
   if (!category) {notFound();}

@@ -37,17 +37,17 @@ The data population script has created three sample timeline events that showcas
 ### Quick Start
 
 1. **Start the development server**: `npm run dev`
-2. **Visit the timeline overview**: http://localhost:3000/timelines
-3. **Explore individual timelines**: http://localhost:3000/timeline/historical-milestones
+2. **Visit the timeline overview**: https://untelevised.media//timelines
+3. **Explore individual timelines**: https://untelevised.media//timeline/historical-milestones
 
 ### Test URLs
 
-- **Timeline Overview**: http://localhost:3000/timelines
-- **Historical Milestones Timeline**: http://localhost:3000/timeline/historical-milestones
-- **Boston Marathon Event Detail**: http://localhost:3000/timeline/event/boston-marathon-bombing-2013
-- **Historical Events Category**: http://localhost:3000/timeline/category/historical-events
-- **Political Events Category**: http://localhost:3000/timeline/category/political-events
-- **Breaking News Category**: http://localhost:3000/timeline/category/breaking-news
+- **Timeline Overview**: https://untelevised.media//timelines
+- **Historical Milestones Timeline**: https://untelevised.media//timeline/historical-milestones
+- **Boston Marathon Event Detail**: https://untelevised.media//timeline/event/boston-marathon-bombing-2013
+- **Historical Events Category**: https://untelevised.media//timeline/category/historical-events
+- **Political Events Category**: https://untelevised.media//timeline/category/political-events
+- **Breaking News Category**: https://untelevised.media//timeline/category/breaking-news
 
 ## 🎮 Interactive Features to Test
 
