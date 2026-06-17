@@ -225,9 +225,9 @@ export class AdBlockerDetector {
 
   // Method 4: Fetch blocking detection (improved)
   private detectByFetchBlocking(): Promise<boolean> {
-    return new Promise((_resolve) => {
+    return new Promise((resolve) => {
       if (!window.fetch) {
-        _resolve(false);
+        resolve(false);
         return;
       }
 

@@ -53,7 +53,7 @@ const TYPE_LABELS: Record<string, string> = {
   other: 'Other',
 };
 
-export default function SourceLibrary({ sources, _isEditorPlus }: Props) {
+export default function SourceLibrary({ sources, isEditorPlus: _isEditorPlus }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [search, setSearch] = useState('');

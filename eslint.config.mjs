@@ -52,6 +52,7 @@ export default [
         'error',
         {
           argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
         },
       ],
       'no-duplicate-imports': 'warn',

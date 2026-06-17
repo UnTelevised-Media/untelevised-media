@@ -162,7 +162,6 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
     setGenreError('');
     setError('');
     setCreatedSlug('');
-    setCreatedId('');
   }
 
   function handleCoverChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -270,7 +269,6 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
         }
 
         setCreatedSlug(result.slug);
-        setCreatedId(result.id);
         router.refresh();
       } catch (err) {
         console.error('[AddBookModal] error:', err);
