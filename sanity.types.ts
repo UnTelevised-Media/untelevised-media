@@ -247,7 +247,6 @@ export type Song = {
   isFeatured?: boolean;
   keywords?: string;
   seo?: SeoObject;
-  tags?: Array<string>;
 };
 
 export type SeoObject = {
@@ -896,9 +895,7 @@ export type Article = {
       _key: string;
     } & ArticleReference
   >;
-  allowComments?: boolean;
   seo?: SeoObject;
-  tags?: Array<string>;
 };
 
 export type Author = {
@@ -1101,49 +1098,75 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
-// Source: src/app/(user)/articles/[slug]/page.tsx
+// Source: src/app/(music)/albums/[slug]/page.tsx
+// Variable: queryAlbumStaticParams
+// Query: *[_type=='album'] { slug }
+export type QueryAlbumStaticParamsResult = Array<{
+  slug: Slug | null;
+}>;
+
+// Source: src/app/(music)/lyrics/[slug]/page.tsx
+// Variable: querySongStaticParams
+// Query: *[_type=='song'] { slug }
+export type QuerySongStaticParamsResult = Array<{
+  slug: Slug | null;
+}>;
+
+// Source: src/app/(music)/music-artists/[slug]/page.tsx
+// Variable: queryMusicArtistStaticParams
+// Query: *[_type=='musicArtist'] { slug }
+export type QueryMusicArtistStaticParamsResult = Array<{
+  slug: Slug | null;
+}>;
+
+// Source: src/app/(news)/articles/[slug]/page.tsx
 // Variable: query
 // Query: *[_type=='article'] { slug }
 export type QueryResult = Array<{
   slug: Slug | null;
 }>;
 
-// Source: src/app/(user)/author/[slug]/page.tsx
+// Source: src/app/(news)/author/[slug]/page.tsx
 // Variable: queryAuthorStaticParams
 // Query: *[_type=='author'] { slug }
 export type QueryAuthorStaticParamsResult = Array<{
   slug: Slug | null;
 }>;
 
-// Source: src/app/(user)/category/[slug]/page.tsx
-// Variable: queryCategoryStaticParams
-// Query: *[_type=='category'] { slug }
-export type QueryCategoryStaticParamsResult = Array<{
-  slug: Slug | null;
-}>;
-
-// Source: src/app/(user)/live-event/[slug]/page.tsx
+// Source: src/app/(news)/breaking/[slug]/page.tsx
 // Variable: queryLiveEventStaticParams
 // Query: *[_type=='liveEvent'] { slug }
 export type QueryLiveEventStaticParamsResult = Array<{
   slug: Slug | null;
 }>;
 
-// Source: src/app/(user)/policies/[slug]/page.tsx
+// Source: src/app/(news)/category/[slug]/page.tsx
+// Variable: queryCategoryStaticParams
+// Query: *[_type=='category'] { slug }
+export type QueryCategoryStaticParamsResult = Array<{
+  slug: Slug | null;
+}>;
+
+// Source: src/app/(news)/policies/[slug]/page.tsx
 // Variable: queryPolicyStaticParams
 // Query: *[_type=='policies'] { slug }
 export type QueryPolicyStaticParamsResult = Array<{
   slug: Slug | null;
 }>;
 
-// Source: src/app/(user)/timeline/[slug]/page.tsx
+// Source: src/app/(news)/sitemap.ts
+// Variable: queryFactCheckSlugs
+// Query: *[_type == 'factCheck'] {    _type,    slug,    _updatedAt,    publishedAt  }
+export type QueryFactCheckSlugsResult = Array<never>;
+
+// Source: src/app/(news)/timeline/[slug]/page.tsx
 // Variable: queryTimelineStaticParams
 // Query: *[_type=='timeline' && isPublished == true] { slug }
 export type QueryTimelineStaticParamsResult = Array<{
   slug: Slug | null;
 }>;
 
-// Source: src/app/(user)/timeline/category/[slug]/page.tsx
+// Source: src/app/(news)/timeline/category/[slug]/page.tsx
 // Variable: categoryQuery
 // Query: *[_type=='timelineCategory' && slug.current == $slug][0] {      ...,      parentCategory->{        _id,        title,        slug,        color      }    }
 export type CategoryQueryResult = {
@@ -1177,14 +1200,14 @@ export type CategoryQueryResult = {
   } | null;
 } | null;
 
-// Source: src/app/(user)/timeline/category/[slug]/page.tsx
+// Source: src/app/(news)/timeline/category/[slug]/page.tsx
 // Variable: queryTimelineCategoryStaticParams
 // Query: *[_type=='timelineCategory' && isActive == true] { slug }
 export type QueryTimelineCategoryStaticParamsResult = Array<{
   slug: Slug | null;
 }>;
 
-// Source: src/app/(user)/timeline/event/[slug]/page.tsx
+// Source: src/app/(news)/timeline/event/[slug]/page.tsx
 // Variable: queryTimelineEventStaticParams
 // Query: *[_type=='timelineEvent' && isPublished == true] { slug }
 export type QueryTimelineEventStaticParamsResult = Array<{
@@ -1193,18 +1216,12 @@ export type QueryTimelineEventStaticParamsResult = Array<{
 
 // Source: src/components/global/NavWrapper.tsx
 // Variable: queryCategory
-// Query: *[_type=='category'] {    ...,    title,    order,  }
+// Query: *[_type=='category'] | order(order asc) {    _id,    title,    slug,    order,  }
 export type QueryCategoryResult = Array<{
   _id: string;
-  _type: 'category';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  slug?: Slug;
-  order: string | null;
   title: string | null;
-  description?: string;
-  seo?: SeoObject;
+  slug: Slug | null;
+  order: string | null;
 }>;
 
 // Source: src/components/global/Ticker.tsx
@@ -1225,9 +1242,436 @@ export type QueryKeyEventResult = Array<{
   _createdAt: string;
 }>;
 
+// Source: src/lib/portal/queries.ts
+// Variable: ARTICLE_LIST_PROJECTION
+// Query: {  _id,  // Under 'drafts' perspective, _id contains the draft prefix for unpublished docs:  // Published: "articles.xyz"  // Draft: "drafts.articles.xyz"  _createdAt,  _updatedAt,  title,  slug,  featured,  breakingNews,  needsReview,  publishedAt,  updatedAt,  description,  mainImage{ asset->{ url }, alt },  "authorId": author._ref,  author->{ _id, name, slug },  categories[]->{ _id, title, slug },  tags,  keywords,  deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },  "correctionType": correction.type,  "reviewedById": reviewedBy._ref}
+export type ARTICLE_LIST_PROJECTION_RESULT = {
+  _id: never;
+  _createdAt: never;
+  _updatedAt: never;
+  title: never;
+  slug: never;
+  featured: never;
+  breakingNews: never;
+  needsReview: never;
+  publishedAt: never;
+  updatedAt: never;
+  description: never;
+  mainImage: never;
+  authorId: never;
+  author: never;
+  categories: never;
+  tags: never;
+  keywords: never;
+  deletionRequest: never;
+  correctionType: never;
+  reviewedById: never;
+};
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalArticlesByAuthor
+// Query: *[_type == "article" && author._ref == $sanityAuthorId]  {  _id,  // Under 'drafts' perspective, _id contains the draft prefix for unpublished docs:  // Published: "articles.xyz"  // Draft: "drafts.articles.xyz"  _createdAt,  _updatedAt,  title,  slug,  featured,  breakingNews,  needsReview,  publishedAt,  updatedAt,  description,  mainImage{ asset->{ url }, alt },  "authorId": author._ref,  author->{ _id, name, slug },  categories[]->{ _id, title, slug },  tags,  keywords,  deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },  "correctionType": correction.type,  "reviewedById": reviewedBy._ref}  | order(_updatedAt desc)
+export type QueryPortalArticlesByAuthorResult = Array<{
+  _id: string;
+  _createdAt: string;
+  _updatedAt: string;
+  title: string | null;
+  slug: Slug | null;
+  featured: null;
+  breakingNews: null;
+  needsReview: null;
+  publishedAt: string | null;
+  updatedAt: string | null;
+  description: string | null;
+  mainImage: {
+    asset: {
+      url: string | null;
+    } | null;
+    alt: string | null;
+  } | null;
+  authorId: string | null;
+  author: {
+    _id: string;
+    name: string | null;
+    slug: Slug | null;
+  } | null;
+  categories: Array<{
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  tags: null;
+  keywords: Array<string> | null;
+  deletionRequest: null;
+  correctionType: null;
+  reviewedById: string | null;
+}>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalAllArticles
+// Query: *[_type == "article"]  {  _id,  // Under 'drafts' perspective, _id contains the draft prefix for unpublished docs:  // Published: "articles.xyz"  // Draft: "drafts.articles.xyz"  _createdAt,  _updatedAt,  title,  slug,  featured,  breakingNews,  needsReview,  publishedAt,  updatedAt,  description,  mainImage{ asset->{ url }, alt },  "authorId": author._ref,  author->{ _id, name, slug },  categories[]->{ _id, title, slug },  tags,  keywords,  deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },  "correctionType": correction.type,  "reviewedById": reviewedBy._ref}  | order(_updatedAt desc)
+export type QueryPortalAllArticlesResult = Array<{
+  _id: string;
+  _createdAt: string;
+  _updatedAt: string;
+  title: string | null;
+  slug: Slug | null;
+  featured: null;
+  breakingNews: null;
+  needsReview: null;
+  publishedAt: string | null;
+  updatedAt: string | null;
+  description: string | null;
+  mainImage: {
+    asset: {
+      url: string | null;
+    } | null;
+    alt: string | null;
+  } | null;
+  authorId: string | null;
+  author: {
+    _id: string;
+    name: string | null;
+    slug: Slug | null;
+  } | null;
+  categories: Array<{
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  tags: null;
+  keywords: Array<string> | null;
+  deletionRequest: null;
+  correctionType: null;
+  reviewedById: string | null;
+}>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalArticleById
+// Query: *[_type == "article" && _id == $id][0]{    _id,    _createdAt,    _updatedAt,    title,    slug,    featured,    breakingNews,    needsReview,    publishedAt,    updatedAt,    description,    leadParagraph,    body,    mainImage{ asset->{ _id, url }, alt },    "authorId": author._ref,    author->{ _id, name, slug },    categories[]->{ _id, title, slug },    tags,    keywords,    sources[]->{ _id, label, type, url, description, isAnonymous },    relatedArticles[]->{ _id, title, slug },    allowComments,    methodology,    location,    hasEmbeddedVideo,    videoLink,    eventDate,    faqs[]{ _key, question, answer },    correction{ type, issuedAt, summary, detail },    reviewedBy->{ _id, name },    deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },    linkedPitch->{      _id, headline, urgency, beat, angle, sourceSuggestions,      links[]{ _key, label, url },      notes    }  }
+export type QueryPortalArticleByIdResult = {
+  _id: string;
+  _createdAt: string;
+  _updatedAt: string;
+  title: string | null;
+  slug: Slug | null;
+  featured: null;
+  breakingNews: null;
+  needsReview: null;
+  publishedAt: string | null;
+  updatedAt: string | null;
+  description: string | null;
+  leadParagraph: string | null;
+  body: BlockContent | null;
+  mainImage: {
+    asset: {
+      _id: string;
+      url: string | null;
+    } | null;
+    alt: string | null;
+  } | null;
+  authorId: string | null;
+  author: {
+    _id: string;
+    name: string | null;
+    slug: Slug | null;
+  } | null;
+  categories: Array<{
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  tags: null;
+  keywords: Array<string> | null;
+  sources: Array<null> | null;
+  relatedArticles: Array<{
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  allowComments: null;
+  methodology: null;
+  location: string | null;
+  hasEmbeddedVideo: boolean | null;
+  videoLink: string | null;
+  eventDate: string | null;
+  faqs: Array<{
+    _key: string;
+    question: string | null;
+    answer: string | null;
+  }> | null;
+  correction: null;
+  reviewedBy: {
+    _id: string;
+    name: string | null;
+  } | null;
+  deletionRequest: null;
+  linkedPitch: null;
+} | null;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalCategories
+// Query: *[_type == "category"] | order(title asc) {    _id,    title,    slug  }
+export type QueryPortalCategoriesResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+}>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalAuthors
+// Query: *[_type == "author" && isActive != false] | order(name asc) {    _id,    name,    slug,    image{ asset->{ url }, alt }  }
+export type QueryPortalAuthorsResult = Array<{
+  _id: string;
+  name: string | null;
+  slug: Slug | null;
+  image: {
+    asset: {
+      url: string | null;
+    } | null;
+    alt: string | null;
+  } | null;
+}>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalSourcesByAuthor
+// Query: *[_type == "source" && $authorId in linkedAuthors] | order(_updatedAt desc) {    _id,    _createdAt,    _updatedAt,    label,    type,    url,    description,    isAnonymous,    "linkedArticles": *[_type == "article" && references(^._id)]{ _id, title, slug }  }
+export type QueryPortalSourcesByAuthorResult = Array<never>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalMyProfile
+// Query: *[_type == "author" && _id == $id][0]{    _id,    name,    "slug": slug.current,    title,    bio,    location,    email,    twitter,    instagram,    facebook,    tiktok,    youtube,    linkedin,    website,    credentials,    expertise,    sameAs,    image{ asset->{ _id, url }, alt }  }
+export type QueryPortalMyProfileResult = {
+  _id: string;
+  name: string | null;
+  slug: string | null;
+  title: string | null;
+  bio: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal';
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }> | null;
+  location: string | null;
+  email: string | null;
+  twitter: string | null;
+  instagram: string | null;
+  facebook: string | null;
+  tiktok: string | null;
+  youtube: string | null;
+  linkedin: string | null;
+  website: string | null;
+  credentials: Array<string> | null;
+  expertise: Array<string> | null;
+  sameAs: Array<string> | null;
+  image: {
+    asset: {
+      _id: string;
+      url: string | null;
+    } | null;
+    alt: string | null;
+  } | null;
+} | null;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalAllSources
+// Query: *[_type == "source"] | order(_updatedAt desc) {    _id,    _createdAt,    _updatedAt,    label,    type,    url,    description,    isAnonymous,    "linkedArticles": *[_type == "article" && references(^._id)]{ _id, title, slug }  }
+export type QueryPortalAllSourcesResult = Array<never>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalJobApplications
+// Query: *[_type == "jobApplication"] | order(submittedAt desc) {    _id,    firstName,    lastName,    email,    phone,    location,    positionsOfInterest,    otherPosition,    experienceLevel,    experienceDescription,    availability,    applicationStatus,    submittedAt,    notes,    portfolioWebsite,    youtubeChannel,    socialMediaPlatforms,    socialMediaLinks,    workSamples,    additionalInfo  }
+export type QueryPortalJobApplicationsResult = Array<{
+  _id: string;
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  phone: string | null;
+  location: string | null;
+  positionsOfInterest: Array<string> | null;
+  otherPosition: string | null;
+  experienceLevel: 'beginner' | 'experienced' | 'expert' | 'some' | null;
+  experienceDescription: string | null;
+  availability: 'flexible' | 'freelance' | 'full-time' | 'part-time' | 'volunteer' | null;
+  applicationStatus: 'accepted' | 'declined' | 'hold' | 'interview' | 'new' | 'review' | null;
+  submittedAt: string | null;
+  notes: string | null;
+  portfolioWebsite: string | null;
+  youtubeChannel: string | null;
+  socialMediaPlatforms: Array<string> | null;
+  socialMediaLinks: Array<{
+    platform?: string;
+    url?: string;
+    _key: string;
+  }> | null;
+  workSamples: Array<{
+    title?: string;
+    url?: string;
+    _key: string;
+  }> | null;
+  additionalInfo: string | null;
+}>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalContactSubmissions
+// Query: *[_type == "contactSubmission"] | order(submittedAt desc) {    _id,    name,    email,    message,    submittedAt  }
+export type QueryPortalContactSubmissionsResult = Array<{
+  _id: string;
+  name: string | null;
+  email: string | null;
+  message: string | null;
+  submittedAt: string | null;
+}>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalSecureContacts
+// Query: *[_type == "secureContact"] | order(submittedAt desc) {    _id,    name,    email,    phone,    subject,    message,    urgency,    contactMethod,    isAnonymous,    submittedAt,    status  }
+export type QueryPortalSecureContactsResult = Array<{
+  _id: string;
+  name: string | null;
+  email: string | null;
+  phone: string | null;
+  subject: string | null;
+  message: string | null;
+  urgency: 'critical' | 'high' | 'low' | 'medium' | null;
+  contactMethod: 'email' | 'none' | 'phone' | 'secure' | null;
+  isAnonymous: boolean | null;
+  submittedAt: string | null;
+  status: 'archived' | 'new' | 'progress' | 'resolved' | 'reviewing' | null;
+}>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalWhistleblowers
+// Query: *[_type == "whistleblower"] | order(submittedAt desc) {    _id,    submissionId,    title,    description,    organization,    location,    timeframe,    category,    severity,    evidence,    witnessInfo,    contactInfo,    isAnonymous,    protectionNeeded,    submittedAt,    status,    priority,    notes  }
+export type QueryPortalWhistleblowersResult = Array<{
+  _id: string;
+  submissionId: string | null;
+  title: string | null;
+  description: string | null;
+  organization: string | null;
+  location: string | null;
+  timeframe: string | null;
+  category:
+    | 'corporate'
+    | 'environmental'
+    | 'financial'
+    | 'government'
+    | 'healthcare'
+    | 'human_rights'
+    | 'law_enforcement'
+    | 'military'
+    | 'other'
+    | null;
+  severity: 'critical' | 'high' | 'low' | 'medium' | null;
+  evidence: string | null;
+  witnessInfo: string | null;
+  contactInfo: string | null;
+  isAnonymous: boolean | null;
+  protectionNeeded: boolean | null;
+  submittedAt: string | null;
+  status:
+    | 'archived'
+    | 'closed'
+    | 'investigating'
+    | 'new'
+    | 'published'
+    | 'review'
+    | 'story_progress'
+    | 'verification'
+    | null;
+  priority: 'breaking' | 'high' | 'low' | 'medium' | null;
+  notes: string | null;
+}>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalNewsletterSubscribers
+// Query: *[_type == "newsletterSubscribe"] | order(submittedAt desc) {    _id,    email,    firstName,    status,    source,    submittedAt,    confirmedAt  }
+export type QueryPortalNewsletterSubscribersResult = Array<{
+  _id: string;
+  email: string | null;
+  firstName: null;
+  status: null;
+  source: null;
+  submittedAt: string | null;
+  confirmedAt: null;
+}>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalBookstoreSubscribers
+// Query: *[_type == "bookstoreSubscriber"] | order(submittedAt desc) {    _id,    email,    firstName,    status,    source,    submittedAt,    confirmedAt  }
+export type QueryPortalBookstoreSubscribersResult = Array<never>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalArticlesTitles
+// Query: *[_type == "article"] | order(_updatedAt desc) {    _id,    title,    "authorId": author._ref  }
+export type QueryPortalArticlesTitlesResult = Array<{
+  _id: string;
+  title: string | null;
+  authorId: string | null;
+}>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalBriefById
+// Query: *[_type == "brief" && _id == $briefId][0] {    _id,    title,    publishedAt,    period,    summary,    "storyPasses": storyPasses[] {      _key,      storyKey,      "authorId": author._ref,      passedAt    },    stories[] {      _key,      headline,      angle,      beat,      urgency,      sourceSuggestions,      links[] { _key, label, url },      status,      claimedBy->{ _id, name, "slug": slug.current },      claimedAt,      linkedArticle->{ _id, title, "slug": slug.current }    }  }
+export type QueryPortalBriefByIdResult = null;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalLatestBrief
+// Query: *[_type == "brief"] | order(_createdAt desc)[0] {    _id,    title,    publishedAt,    period,    summary,    "storyPasses": storyPasses[] {      _key,      storyKey,      "authorId": author._ref,      passedAt    },    stories[] {      _key,      headline,      angle,      beat,      urgency,      sourceSuggestions,      links[] { _key, label, url },      status,      claimedBy->{ _id, name, "slug": slug.current },      claimedAt,      linkedArticle->{ _id, title, "slug": slug.current }    }  }
+export type QueryPortalLatestBriefResult = null;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalAllBriefs
+// Query: *[_type == "brief"] | order(_createdAt desc) {    _id,    title,    publishedAt,    period,    "storyCount": count(stories),    "unclaimedCount": count(stories[status == "unclaimed"])  }
+export type QueryPortalAllBriefsResult = Array<never>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalMyClaimedPitches
+// Query: *[_type == "claimedPitch" && author._ref == $authorId] | order(claimedAt desc) {    _id,    headline,    beat,    urgency,    status,    briefId,    briefTitle,    storyKey,    claimedAt,    linkedArticle->{ _id, title, "slug": slug.current }  }
+export type QueryPortalMyClaimedPitchesResult = Array<never>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalMyPitchesForBrief
+// Query: *[_type == "claimedPitch" && author._ref == $authorId && briefId == $briefId]    | order(_createdAt desc) {    _id,    storyKey  }
+export type QueryPortalMyPitchesForBriefResult = Array<never>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalAllClaimedPitches
+// Query: *[_type == "claimedPitch"] | order(claimedAt desc) {    _id,    headline,    beat,    urgency,    status,    briefId,    briefTitle,    storyKey,    claimedAt,    author->{ _id, name },    linkedArticle->{ _id, title, "slug": slug.current }  }
+export type QueryPortalAllClaimedPitchesResult = Array<never>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalClaimedPitchById
+// Query: *[_type == "claimedPitch" && _id == $id][0] {    _id,    headline,    angle,    beat,    urgency,    sourceSuggestions,    links[] { _key, label, url },    briefId,    briefTitle,    storyKey,    claimedAt,    status,    notes,    author->{ _id, name },    assignedBy->{ _id, name },    linkedArticle->{ _id, title, "slug": slug.current }  }
+export type QueryPortalClaimedPitchByIdResult = null;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalAllReviews
+// Query: *[_type == "bookReview"] | order(submittedAt desc) {    _id,    reviewerName,    reviewerLocation,    rating,    body,    status,    clerkUserId,    adminFeedback,    submittedAt,    "bookTitle": book->title,    "bookSlug": book->slug.current  }
+export type QueryPortalAllReviewsResult = Array<never>;
+
+// Source: src/lib/portal/queries.ts
+// Variable: queryPortalMyAuthorFlags
+// Query: *[_type == "author" && clerkId == $clerkId][0] {    isLiteraryAuthor  }
+export type QueryPortalMyAuthorFlagsResult = {
+  isLiteraryAuthor: null;
+} | null;
+
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryLiveEvents
-// Query: *[_type=='liveEvent' && isCurrentEvent == true] {   ...,    description,    title,    slug,    eventDate,    keyEvent[]->,      relatedArticles[]-> {        slug,        _id,        title,        _createdAt,        description,        eventDate,        publishedAt,    }  }  | order(_createdAt desc)
+// Query: *[_type=='liveEvent' && isCurrentEvent == true] {    ...,    description,    title,    slug,    eventDate,    endDate,    eventStatus,    mainImage,    subtitle,    videoLink,    keyEvent[]->,    relatedArticles[]-> {      slug,      _id,      title,      _createdAt,      description,      eventDate,      publishedAt,    }  }  | order(_createdAt desc)
 export type QueryLiveEventsResult = Array<{
   _id: string;
   _type: 'liveEvent';
@@ -1237,16 +1681,16 @@ export type QueryLiveEventsResult = Array<{
   slug: Slug | null;
   title: string | null;
   isCurrentEvent: true;
-  subtitle?: string;
-  mainImage?: {
+  subtitle: string | null;
+  mainImage: {
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
     _type: 'image';
-  };
-  videoLink?: string;
+  } | null;
+  videoLink: string | null;
   description: string | null;
   eventDate: string | null;
   body?: BlockContent;
@@ -1276,10 +1720,15 @@ export type QueryLiveEventsResult = Array<{
       _key: string;
     } & EventTagReference
   >;
-  endDate?: string;
-  eventStatus?: 'EventCancelled' | 'EventMovedOnline' | 'EventPostponed' | 'EventScheduled';
+  endDate: string | null;
+  eventStatus: 'EventCancelled' | 'EventMovedOnline' | 'EventPostponed' | 'EventScheduled' | null;
   seo?: SeoObject;
 }>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryBreakingArticles
+// Query: *[_type=='article' && breakingNews == true] {    ...,    author->,    categories[]->,    description,    publishedAt,    mainImage,    slug,    title,    videoLink,    hasEmbeddedVideo  }  | order(publishedAt desc)  [0..19]
+export type QueryBreakingArticlesResult = Array<never>;
 
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryPastEvents
@@ -1411,7 +1860,7 @@ export type QueryPastEventsWithPaginationResult = Array<{
 
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryEventBySlug
-// Query: *[_type == "liveEvent" && slug.current == $slug][0] {      ...,      tag[]->,      keyEvent[]->,      relatedArticles[]-> {        slug,        _id,        title,        _createdAt,        description,        eventDate,        publishedAt,      }    }
+// Query: *[_type == "liveEvent" && slug.current == $slug][0] {      ...,      eventTag[]->,      keyEvent[]-> {        ...,        sources[]-> { label, type, url, description, isAnonymous },      },      sources[]-> { label, type, url, description, isAnonymous },      methodology,      "correction": correction { type, issuedAt, summary, detail },      relatedArticles[]-> {        slug,        _id,        title,        _createdAt,        description,        eventDate,        publishedAt,      }    }
 export type QueryEventBySlugResult = {
   _id: string;
   _type: 'liveEvent';
@@ -1453,22 +1902,29 @@ export type QueryEventBySlugResult = {
     title?: string;
     eventDate?: string;
     description?: BlockContent;
+    sources: null;
   }> | null;
   keywords?: string;
-  eventTag?: Array<
-    {
-      _key: string;
-    } & EventTagReference
-  >;
+  eventTag: Array<{
+    _id: string;
+    _type: 'eventTag';
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    description?: string;
+  }> | null;
   endDate?: string;
   eventStatus?: 'EventCancelled' | 'EventMovedOnline' | 'EventPostponed' | 'EventScheduled';
   seo?: SeoObject;
-  tag: null;
+  sources: null;
+  methodology: null;
+  correction: null;
 } | null;
 
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryAllArticles
-// Query: *[_type=='article'] {    ...,    author->,    categories[]->,    description,    publishedAt,  }  | order(_createdAt desc)
+// Query: *[_type=='article'] {    ...,    author->,    categories[]->,    description,    publishedAt,    tags,    "correction": correction { type, summary },  }  | order(_createdAt desc)  [0..99]
 export type QueryAllArticlesResult = Array<{
   _id: string;
   _type: 'article';
@@ -1576,7 +2032,97 @@ export type QueryAllArticlesResult = Array<{
     } & ArticleReference
   >;
   seo?: SeoObject;
+  tags: null;
+  correction: null;
 }>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryHomepageArticles
+// Query: *[_type=='article' && defined(slug.current)] {    _id,    _type,    _createdAt,    _updatedAt,    title,    slug,    description,    publishedAt,    eventDate,    mainImage,    tags,    "correction": correction { type, summary },    "author": author->{ name, slug },    "categories": categories[]->{ _id, title, order },    "readingTimeMinutes": coalesce(      readingTimeMinutes,      select(        defined(body) && length(pt::text(body)) > 0          => round(length(pt::text(body)) / 1000) + 1,        1      )    ),  }  | order(_createdAt desc)  [0...30]
+export type QueryHomepageArticlesResult = Array<{
+  _id: string;
+  _type: 'article';
+  _createdAt: string;
+  _updatedAt: string;
+  title: string | null;
+  slug: Slug | null;
+  description: string | null;
+  publishedAt: string | null;
+  eventDate: string | null;
+  mainImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  } | null;
+  tags: null;
+  correction: null;
+  author: {
+    name: string | null;
+    slug: Slug | null;
+  } | null;
+  categories: Array<{
+    _id: string;
+    title: string | null;
+    order: string | null;
+  }> | null;
+  readingTimeMinutes: number | 1;
+}>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryTrendingIds
+// Query: *[_type == "article" && defined(slug.current) && defined(viewCount)]  | order(viewCount desc) [0...31] { _id }
+export type QueryTrendingIdsResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryArchiveArticles
+// Query: *[_type == "article" && defined(slug.current) && defined(publishedAt)]  | order(coalesce(eventDate, publishedAt, _createdAt) asc) {    _id,    _createdAt,    title,    slug,    publishedAt,    eventDate,    description,    mainImage,    "author": author->{ name },    "categories": categories[]->{ title, slug },  }
+export type QueryArchiveArticlesResult = Array<{
+  _id: string;
+  _createdAt: string;
+  title: string | null;
+  slug: Slug | null;
+  publishedAt: string | null;
+  eventDate: string | null;
+  description: string | null;
+  mainImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  } | null;
+  author: {
+    name: string | null;
+  } | null;
+  categories: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+}>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryFieldReportArticles
+// Query: *[_type == "article" && isFieldReport == true && defined(slug.current)]  | order(publishedAt desc) [0...6] {    _id,    _type,    _createdAt,    title,    slug,    description,    publishedAt,    location,    mainImage,    "author": author->{ name, slug },    "categories": categories[]->{ _id, title, order },    "readingTimeMinutes": select(      defined(body) && length(pt::text(body)) > 0        => round(length(pt::text(body)) / 1000) + 1,      1    ),  }
+export type QueryFieldReportArticlesResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryMostReadArticles
+// Query: *[_type == "article" && defined(slug.current) && defined(viewCount)]  | order(viewCount desc) [0...10] {    _id,    title,    slug,    description,    publishedAt,    viewCount,    mainImage,    "author": author->{ name, slug },    "categories": categories[]->{ title, slug },  }
+export type QueryMostReadArticlesResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryMostReadArticlesFull
+// Query: *[_type == "article" && defined(slug.current) && defined(viewCount)]  | order(viewCount desc) [0...31] {    _id,    title,    slug,    description,    publishedAt,    viewCount,    location,    tags,    mainImage,    "author": author->{ name, slug },    "categories": categories[]->{ title, slug },  }
+export type QueryMostReadArticlesFullResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryMostReadByCategory
+// Query: *[    _type == "article" &&    defined(slug.current) &&    defined(viewCount) &&    $categorySlug in categories[]->slug.current  ] | order(viewCount desc) [0...5] {    _id,    title,    slug,    publishedAt,    viewCount,    "author": author->{ name },  }
+export type QueryMostReadByCategoryResult = Array<never>;
 
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryAllSongs
@@ -2315,7 +2861,7 @@ export type QueryAllMusicArtistsResult = Array<{
 
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryMusicArtistBySlug
-// Query: *[_type == "musicArtist" && slug.current == $slug][0] {    ...,    "songs": *[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)] {      ...,      primaryArtist->,      featuredArtists[]->,      album->{        title,        albumArt,        releaseDate      },      trackArt    } | order(releaseDate desc),    "albums": *[_type == "album" && (artist._ref == ^._id || ^._id in featuredArtists[]._ref)] {      ...,      artist->,      featuredArtists[]->    } | order(releaseDate desc)  }
+// Query: *[_type == "musicArtist" && slug.current == $slug][0] {    ...,    "songs": *[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)] {      ...,      primaryArtist->,      featuredArtists[]->,      album->{        title,        albumArt,        releaseDate      },      trackArt    } | order(releaseDate desc) [0..99],    "albums": *[_type == "album" && (artist._ref == ^._id || ^._id in featuredArtists[]._ref)] {      ...,      artist->,      featuredArtists[]->    } | order(releaseDate desc) [0..49]  }
 export type QueryMusicArtistBySlugResult = {
   _id: string;
   _type: 'musicArtist';
@@ -3442,7 +3988,7 @@ export type QueryRecentSongsResult = Array<{
 
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryArticleBySlug
-// Query: *[_type == 'article' && slug.current == $slug][0] {      ...,      author->,      categories[]->,      seo,      faqs,      sources,      updatedAt,      leadParagraph,      relatedArticles[]-> {        _id,        title,        "slug": slug.current,        mainImage,        description,        publishedAt,        author-> { name }      },      'comments': *[        _type == 'comment' &&        article._ref == ^._id &&        approved == true      ],    }
+// Query: *[_type == 'article' && slug.current == $slug][0] {      ...,      author->,      categories[]->,      reviewedBy->{ name, slug, title, image },      seo,      faqs,      sources[]-> { label, type, url, description, isAnonymous },      methodology,      "correction": correction { type, issuedAt, summary, detail },      updatedAt,      leadParagraph,      body[]{        ...,        _type == "factCheckEmbed" => {          ...,          factCheck-> {            _id,            title,            slug,            claim,            rating,            ratingExplanation,            claimSource          }        }      },      relatedArticles[0..3]-> {        _id,        title,        "slug": slug.current,        mainImage,        description,        publishedAt,        author-> { name }      },      "allowComments": coalesce(allowComments, true),      'comments': *[        _type == 'comment' &&        article._ref == ^._id &&        approved == true      ],    }
 export type QueryArticleBySlugResult = {
   _id: string;
   _type: 'article';
@@ -3527,15 +4073,85 @@ export type QueryArticleBySlugResult = {
   }> | null;
   publishedAt?: string;
   eventDate?: string;
-  body?: BlockContent;
+  body: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        code?: string;
+        language?:
+          | 'cpp'
+          | 'css'
+          | 'html'
+          | 'java'
+          | 'javascript'
+          | 'php'
+          | 'python'
+          | 'ruby'
+          | 'shell'
+          | 'sql'
+          | 'typescript';
+        _type: 'code';
+        _key: string;
+      }
+    | {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: 'image';
+        _key: string;
+      }
+    | {
+        _key: string;
+        _type: 'instagramEmbed';
+        postId?: string;
+      }
+    | {
+        code?: string;
+        _type: 'mermaidDiagram';
+        _key: string;
+      }
+    | {
+        rows?: Array<{
+          cells?: Array<string>;
+          _type: 'row';
+          _key: string;
+        }>;
+        _type: 'table';
+        _key: string;
+      }
+    | {
+        _key: string;
+        _type: 'twitterEmbed';
+        tweetId?: string;
+      }
+    | {
+        _key: string;
+        _type: 'youtubeEmbed';
+        videoId?: string;
+      }
+  > | null;
   location?: string;
   updatedAt: string | null;
   corrections?: string;
-  sources: Array<{
-    label?: string;
-    url?: string;
-    _key: string;
-  }> | null;
+  sources: Array<null> | null;
   leadParagraph: string | null;
   faqs: Array<{
     question?: string;
@@ -3543,7 +4159,19 @@ export type QueryArticleBySlugResult = {
     _type: 'faqItem';
     _key: string;
   }> | null;
-  reviewedBy?: AuthorReference;
+  reviewedBy: {
+    name: string | null;
+    slug: Slug | null;
+    title: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: 'image';
+    } | null;
+  } | null;
   relatedArticles: Array<{
     _id: string;
     title: string | null;
@@ -3563,129 +4191,56 @@ export type QueryArticleBySlugResult = {
     } | null;
   }> | null;
   seo: SeoObject | null;
+  methodology: null;
+  correction: null;
+  allowComments: true;
   comments: Array<never>;
 } | null;
 
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryCategoryBySlug
-// Query: *[_type == "category" && slug.current == $slug][0] {    _id,    title,    description,    "slug": slug.current,  }
+// Query: *[_type == "category" && slug.current == $slug][0] {    _id,    title,    description,    "slug": slug.current,    color,    image,    seo,  }
 export type QueryCategoryBySlugResult = {
   _id: string;
   title: string | null;
   description: string | null;
   slug: string | null;
+  color: null;
+  image: null;
+  seo: SeoObject | null;
 } | null;
 
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryArticleByCategory
-// Query: *[_type == 'article' && references(categories, *[_type == 'category' && slug.current == $slug]._id)] {    ...,    author->,    categories[]->,    description,    publishedAt,  } | order(_createdAt desc)
+// Query: *[_type == 'article' && $slug in categories[]->slug.current] {    _id,    _type,    _createdAt,    title,    slug,    description,    publishedAt,    eventDate,    location,    mainImage,    "author": author->{ name, slug },    "categories": categories[]->{ _id, title, order },    "readingTimeMinutes": select(      defined(body) && length(pt::text(body)) > 0        => round(length(pt::text(body)) / 1000) + 1,      1    ),  } | order(coalesce(eventDate, publishedAt, _createdAt) desc)
 export type QueryArticleByCategoryResult = Array<{
   _id: string;
   _type: 'article';
   _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  slug?: Slug;
-  title?: string;
-  hasEmbeddedVideo?: boolean;
-  videoLink?: string;
-  keywords?: Array<string>;
+  title: string | null;
+  slug: Slug | null;
   description: string | null;
-  author: {
-    _id: string;
-    _type: 'author';
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    slug?: Slug;
-    order?: string;
-    name?: string;
-    image?: {
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: 'image';
-    };
-    title?: string;
-    bio?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: 'span';
-        _key: string;
-      }>;
-      style?: 'normal';
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: 'link';
-        _key: string;
-      }>;
-      level?: number;
-      _type: 'block';
-      _key: string;
-    }>;
-    twitter?: string;
-    instagram?: string;
-    facebook?: string;
-    tiktok?: string;
-    youtube?: string;
-    linkedin?: string;
-    website?: string;
-    email?: string;
-    credentials?: Array<string>;
-    expertise?: Array<string>;
-    sameAs?: Array<string>;
-    location?: string;
-    isActive?: boolean;
-  } | null;
-  mainImage?: {
+  publishedAt: string | null;
+  eventDate: string | null;
+  location: string | null;
+  mainImage: {
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
     _type: 'image';
-  };
+  } | null;
+  author: {
+    name: string | null;
+    slug: Slug | null;
+  } | null;
   categories: Array<{
     _id: string;
-    _type: 'category';
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    slug?: Slug;
-    order?: string;
-    title?: string;
-    description?: string;
-    seo?: SeoObject;
+    title: string | null;
+    order: string | null;
   }> | null;
-  publishedAt: string | null;
-  eventDate?: string;
-  body?: BlockContent;
-  location?: string;
-  updatedAt?: string;
-  corrections?: string;
-  sources?: Array<{
-    label?: string;
-    url?: string;
-    _key: string;
-  }>;
-  leadParagraph?: string;
-  faqs?: Array<{
-    question?: string;
-    answer?: string;
-    _type: 'faqItem';
-    _key: string;
-  }>;
-  reviewedBy?: AuthorReference;
-  relatedArticles?: Array<
-    {
-      _key: string;
-    } & ArticleReference
-  >;
-  seo?: SeoObject;
+  readingTimeMinutes: number | 1;
 }>;
 
 // Source: src/lib/sanity/lib/queries.ts
@@ -3699,7 +4254,7 @@ export type QueryCategoriesResult = Array<{
 
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryAllAuthors
-// Query: *[_type == "author" ] {    ...,    author-> {      name,      image,      title,    },  }   | order(author.order desc)
+// Query: *[_type == "author"] {    ...,  }  | order(order desc)
 export type QueryAllAuthorsResult = Array<{
   _id: string;
   _type: 'author';
@@ -3749,31 +4304,17 @@ export type QueryAllAuthorsResult = Array<{
   sameAs?: Array<string>;
   location?: string;
   isActive?: boolean;
-  author: null;
 }>;
 
 // Source: src/lib/sanity/lib/queries.ts
 // Variable: queryAuthorBySlug
-// Query: *[_type == 'author' && slug.current == $slug][0] {    ...,    'relatedArticles': *[_type == 'article' && references(^._id)]| order(_createdAt desc) {      ...,      author->,      categories[]->,      publishedAt,    }  }
+// Query: *[_type == 'author' && slug.current == $slug][0] {    _id, name, slug, title, bio, image,    twitter, instagram, facebook, tiktok, youtube, linkedin, website, email,    credentials, expertise, sameAs, location, isActive, isLiteraryAuthor,    tipStripeProductId, tipAmount,    'relatedArticles': *[_type == 'article' && author._ref == ^._id] | order(_createdAt desc) [0..49] {      _id, title, slug, description, publishedAt, mainImage,      'categories': categories[]->{ _id, title, slug },    },    'books': *[_type == 'book' && author._ref == ^._id && status in ["published", "out-of-stock"]] | order(publishedAt desc) [0..49] {      _id, title, slug, status, featured, publishedAt,      coverImage { asset, alt }, coverImageUrl,      "genre": genre[]->{ _id, title, slug },      "author": author->{ _id, name, slug, tipStripeProductId, tipAmount, image { asset, alt } },      formats[] {        _key, formatType, price, compareAtPrice,        nameYourPrice, minimumPrice, suggestedPrice,        stripePriceId, stripeProductId,        inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },        digitalAsset { supabaseStoragePath, fileSize, fileFormat, version }      }    }  }
 export type QueryAuthorBySlugResult = {
   _id: string;
-  _type: 'author';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  slug?: Slug;
-  order?: string;
-  name?: string;
-  image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: 'image';
-  };
-  title?: string;
-  bio?: Array<{
+  name: string | null;
+  slug: Slug | null;
+  title: string | null;
+  bio: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -3790,128 +4331,52 @@ export type QueryAuthorBySlugResult = {
     level?: number;
     _type: 'block';
     _key: string;
-  }>;
-  twitter?: string;
-  instagram?: string;
-  facebook?: string;
-  tiktok?: string;
-  youtube?: string;
-  linkedin?: string;
-  website?: string;
-  email?: string;
-  credentials?: Array<string>;
-  expertise?: Array<string>;
-  sameAs?: Array<string>;
-  location?: string;
-  isActive?: boolean;
+  }> | null;
+  image: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  } | null;
+  twitter: string | null;
+  instagram: string | null;
+  facebook: string | null;
+  tiktok: string | null;
+  youtube: string | null;
+  linkedin: string | null;
+  website: string | null;
+  email: string | null;
+  credentials: Array<string> | null;
+  expertise: Array<string> | null;
+  sameAs: Array<string> | null;
+  location: string | null;
+  isActive: boolean | null;
+  isLiteraryAuthor: null;
+  tipStripeProductId: null;
+  tipAmount: null;
   relatedArticles: Array<{
     _id: string;
-    _type: 'article';
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    slug?: Slug;
-    title?: string;
-    hasEmbeddedVideo?: boolean;
-    videoLink?: string;
-    keywords?: Array<string>;
-    description?: string;
-    author: {
-      _id: string;
-      _type: 'author';
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      slug?: Slug;
-      order?: string;
-      name?: string;
-      image?: {
-        asset?: SanityImageAssetReference;
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        _type: 'image';
-      };
-      title?: string;
-      bio?: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: 'span';
-          _key: string;
-        }>;
-        style?: 'normal';
-        listItem?: never;
-        markDefs?: Array<{
-          href?: string;
-          _type: 'link';
-          _key: string;
-        }>;
-        level?: number;
-        _type: 'block';
-        _key: string;
-      }>;
-      twitter?: string;
-      instagram?: string;
-      facebook?: string;
-      tiktok?: string;
-      youtube?: string;
-      linkedin?: string;
-      website?: string;
-      email?: string;
-      credentials?: Array<string>;
-      expertise?: Array<string>;
-      sameAs?: Array<string>;
-      location?: string;
-      isActive?: boolean;
-    } | null;
-    mainImage?: {
+    title: string | null;
+    slug: Slug | null;
+    description: string | null;
+    publishedAt: string | null;
+    mainImage: {
       asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
       _type: 'image';
-    };
+    } | null;
     categories: Array<{
       _id: string;
-      _type: 'category';
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      slug?: Slug;
-      order?: string;
-      title?: string;
-      description?: string;
-      seo?: SeoObject;
+      title: string | null;
+      slug: Slug | null;
     }> | null;
-    publishedAt: string | null;
-    eventDate?: string;
-    body?: BlockContent;
-    location?: string;
-    updatedAt?: string;
-    corrections?: string;
-    sources?: Array<{
-      label?: string;
-      url?: string;
-      _key: string;
-    }>;
-    leadParagraph?: string;
-    faqs?: Array<{
-      question?: string;
-      answer?: string;
-      _type: 'faqItem';
-      _key: string;
-    }>;
-    reviewedBy?: AuthorReference;
-    relatedArticles?: Array<
-      {
-        _key: string;
-      } & ArticleReference
-    >;
-    seo?: SeoObject;
   }>;
+  books: Array<never>;
 } | null;
 
 // Source: src/lib/sanity/lib/queries.ts
@@ -5979,6 +6444,88 @@ export type QueryTimelineSearchResult = Array<{
 }>;
 
 // Source: src/lib/sanity/lib/queries.ts
+// Variable: queryRSSFeed
+// Query: *[_type == "article"] | order(publishedAt desc) [0...50] {    _id,    title,    "slug": slug.current,    description,    publishedAt,    _updatedAt,    mainImage {      asset->,      alt    },    "author": author-> {      name    },    "category": categories[0]-> {      title    }  }
+export type QueryRSSFeedResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  description: string | null;
+  publishedAt: string | null;
+  _updatedAt: string;
+  mainImage: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
+    alt: string | null;
+  } | null;
+  author: {
+    name: string | null;
+  } | null;
+  category: {
+    title: string | null;
+  } | null;
+}>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryRSSLiveEvents
+// Query: *[_type == "liveEvent"] | order(eventDate desc) [0...20] {    _id,    title,    "slug": slug.current,    description,    subtitle,    eventDate,    _updatedAt,    eventStatus,    mainImage {      asset->,      alt    }  }
+export type QueryRSSLiveEventsResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  description: string | null;
+  subtitle: string | null;
+  eventDate: string | null;
+  _updatedAt: string;
+  eventStatus: 'EventCancelled' | 'EventMovedOnline' | 'EventPostponed' | 'EventScheduled' | null;
+  mainImage: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
+    alt: string | null;
+  } | null;
+}>;
+
+// Source: src/lib/sanity/lib/queries.ts
 // Variable: queryPoliciesList
 // Query: *[_type == "policies"] {    _id,    title,    order  }
 export type QueryPoliciesListResult = Array<{
@@ -6004,353 +6551,212 @@ export type QueryPolicyBySlugResult = {
   policies: null;
 } | null;
 
-// Source: src/util/getAllUrls.ts
-// Variable: queryAllArticleUrls
-// Query: *[_type == "article"] {      ...,      title,      slug,    }
-export type QueryAllArticleUrlsResult = Array<{
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: querySiteSettings
+// Query: *[_type == "siteSettings"][0] {    name,    description,    logo { asset-> },    "breakingBanner": breakingNewsBanner {      isActive,      headline,      linkUrl,      linkLabel,      expiresAt    }  }
+export type QuerySiteSettingsResult = {
+  name: string | null;
+  description: string | null;
+  logo: {
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
+  } | null;
+  breakingBanner: null;
+} | null;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryActiveJobListings
+// Query: *[    _type == "jobListing"    && isActive == true    && (      !defined(closingDate)      || closingDate >= $today    )  ] | order(department asc) {    _id,    title,    slug,    department,    type,    location,    compensation,    description,    requirements,    closingDate  }
+export type QueryActiveJobListingsResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryJobApplications
+// Query: *[_type == "jobApplication"] | order(submittedAt desc) {    _id,    firstName,    lastName,    email,    phone,    location,    positionsOfInterest,    otherPosition,    experienceLevel,    experienceDescription,    availability,    applicationStatus,    submittedAt,    notes,    portfolioWebsite,    youtubeChannel,    socialMediaPlatforms,    socialMediaLinks,    workSamples,    additionalInfo  }
+export type QueryJobApplicationsResult = Array<{
   _id: string;
-  _type: 'article';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  slug: Slug | null;
-  title: string | null;
-  hasEmbeddedVideo?: boolean;
-  videoLink?: string;
-  keywords?: Array<string>;
-  description?: string;
-  author?: AuthorReference;
-  mainImage?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: 'image';
-  };
-  categories?: Array<
-    {
-      _key: string;
-    } & CategoryReference
-  >;
-  publishedAt?: string;
-  eventDate?: string;
-  body?: BlockContent;
-  location?: string;
-  updatedAt?: string;
-  corrections?: string;
-  sources?: Array<{
-    label?: string;
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  phone: string | null;
+  location: string | null;
+  positionsOfInterest: Array<string> | null;
+  otherPosition: string | null;
+  experienceLevel: 'beginner' | 'experienced' | 'expert' | 'some' | null;
+  experienceDescription: string | null;
+  availability: 'flexible' | 'freelance' | 'full-time' | 'part-time' | 'volunteer' | null;
+  applicationStatus: 'accepted' | 'declined' | 'hold' | 'interview' | 'new' | 'review' | null;
+  submittedAt: string | null;
+  notes: string | null;
+  portfolioWebsite: string | null;
+  youtubeChannel: string | null;
+  socialMediaPlatforms: Array<string> | null;
+  socialMediaLinks: Array<{
+    platform?: string;
     url?: string;
     _key: string;
-  }>;
-  leadParagraph?: string;
-  faqs?: Array<{
-    question?: string;
-    answer?: string;
-    _type: 'faqItem';
+  }> | null;
+  workSamples: Array<{
+    title?: string;
+    url?: string;
     _key: string;
-  }>;
-  reviewedBy?: AuthorReference;
-  relatedArticles?: Array<
-    {
-      _key: string;
-    } & ArticleReference
-  >;
-  seo?: SeoObject;
+  }> | null;
+  additionalInfo: string | null;
+}>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryAllFactChecks
+// Query: *[_type == 'factCheck'] | order(publishedAt desc) {    _id,    title,    slug,    publishedAt,    claim,    claimSource,    rating,    ratingExplanation,    mainImage,    author-> { name, slug }  }
+export type QueryAllFactChecksResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryFactCheckBySlug
+// Query: *[_type == 'factCheck' && slug.current == $slug][0] {    _id,    title,    slug,    publishedAt,    claim,    claimSource,    claimUrl,    claimDate,    rating,    ratingExplanation,    body[]{      ...,      _type == "factCheckEmbed" => {        ...,        factCheck-> {          _id,          title,          slug,          claim,          rating,          ratingExplanation,          claimSource        }      }    },    sources[] { label, url },    author-> { name, slug, image },    relatedArticles[0..3]-> {      _id, title, slug, mainImage, publishedAt, description    }  }
+export type QueryFactCheckBySlugResult = null;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryAllTags
+// Query: array::unique(*[_type == "article" && defined(tags) && count(tags) > 0].tags[])
+export type QueryAllTagsResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryArticlesByTag
+// Query: *[_type == "article" && defined(tags) && $tag in tags[]] | order(publishedAt desc) {    _id,    title,    slug,    description,    publishedAt,    mainImage { asset, alt },    "author": author->{ name, slug, image { asset } },    "categories": categories[]->{ _id, title, slug },    "correction": correction { type, summary },    tags  }
+export type QueryArticlesByTagResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryAllBookGenres
+// Query: *[_type == "bookGenre"] | order(title asc) { _id, title, slug }
+export type QueryAllBookGenresResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryFeaturedBooks
+// Query: *[_type == "book" && featured == true && status == "published"] | order(publishedAt desc) [0..3] {      _id,  title,  slug,  status,  featured,  publishedAt,  isbn,  pages,  language,  fictionType,  samplePdfUrl,  coverImage { asset, alt },  coverImageUrl,  "author": author-> {    _id, name, slug, clerkId, payoutEmail,    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,    image { asset, alt },    bio  },  "genre": genre[]-> { _id, title, slug },  formats[] {    _key, formatType, price, compareAtPrice,    nameYourPrice, minimumPrice, suggestedPrice,    stripePriceId, stripeProductId,    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },    weight, dimensions  },  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },  description  }
+export type QueryFeaturedBooksResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryAllBooks
+// Query: *[_type == "book" && status in ["published", "out-of-stock"]] | order(publishedAt desc) {      _id,  title,  slug,  status,  featured,  publishedAt,  isbn,  pages,  language,  fictionType,  samplePdfUrl,  coverImage { asset, alt },  coverImageUrl,  "author": author-> {    _id, name, slug, clerkId, payoutEmail,    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,    image { asset, alt },    bio  },  "genre": genre[]-> { _id, title, slug },  formats[] {    _key, formatType, price, compareAtPrice,    nameYourPrice, minimumPrice, suggestedPrice,    stripePriceId, stripeProductId,    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },    weight, dimensions  },  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },  description  }
+export type QueryAllBooksResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryBookBySlug
+// Query: *[_type == "book" && slug.current == $slug][0] {      _id,  title,  slug,  status,  featured,  publishedAt,  isbn,  pages,  language,  fictionType,  samplePdfUrl,  coverImage { asset, alt },  coverImageUrl,  "author": author-> {    _id, name, slug, clerkId, payoutEmail,    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,    image { asset, alt },    bio  },  "genre": genre[]-> { _id, title, slug },  formats[] {    _key, formatType, price, compareAtPrice,    nameYourPrice, minimumPrice, suggestedPrice,    stripePriceId, stripeProductId,    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },    weight, dimensions  },  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },  description  }
+export type QueryBookBySlugResult = null;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryBooksByAuthorClerkId
+// Query: *[_type == "book" && author->clerkId == $clerkId] | order(publishedAt desc) {      _id,  title,  slug,  status,  featured,  publishedAt,  isbn,  pages,  language,  fictionType,  samplePdfUrl,  coverImage { asset, alt },  coverImageUrl,  "author": author-> {    _id, name, slug, clerkId, payoutEmail,    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,    image { asset, alt },    bio  },  "genre": genre[]-> { _id, title, slug },  formats[] {    _key, formatType, price, compareAtPrice,    nameYourPrice, minimumPrice, suggestedPrice,    stripePriceId, stripeProductId,    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },    weight, dimensions  },  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },  description  }
+export type QueryBooksByAuthorClerkIdResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryBooksByGenreSlug
+// Query: *[_type == "book" && status in ["published", "out-of-stock"] && $genreSlug in genre[]->slug.current] | order(publishedAt desc) {      _id,  title,  slug,  status,  featured,  publishedAt,  isbn,  pages,  language,  fictionType,  samplePdfUrl,  coverImage { asset, alt },  coverImageUrl,  "author": author-> {    _id, name, slug, clerkId, payoutEmail,    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,    image { asset, alt },    bio  },  "genre": genre[]-> { _id, title, slug },  formats[] {    _key, formatType, price, compareAtPrice,    nameYourPrice, minimumPrice, suggestedPrice,    stripePriceId, stripeProductId,    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },    weight, dimensions  },  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },  description  }
+export type QueryBooksByGenreSlugResult = Array<never>;
+
+// Source: src/lib/sanity/lib/queries.ts
+// Variable: queryApprovedReviewsByBookSlug
+// Query: *[_type == "bookReview" && book->slug.current == $slug && (status == "approved" || (approved == true && !defined(status)))]  | order(submittedAt desc) {    _id, reviewerName, reviewerLocation, rating, body, submittedAt  }
+export type QueryApprovedReviewsByBookSlugResult = Array<never>;
+
+// Source: src/util/getAllUrls.ts
+// Variable: queryAllArticleUrls
+// Query: *[_type == "article" && defined(slug.current)] {    _type,    _updatedAt,    slug,  }
+export type QueryAllArticleUrlsResult = Array<{
+  _type: 'article';
+  _updatedAt: string;
+  slug: Slug | null;
 }>;
 
 // Source: src/util/getAllUrls.ts
 // Variable: queryAllLiveEventUrls
-// Query: *[_type == "liveEvent"] {      ...,      title,      slug,    }
+// Query: *[_type == "liveEvent" && defined(slug.current)] {    _type,    _updatedAt,    slug,  }
 export type QueryAllLiveEventUrlsResult = Array<{
-  _id: string;
   _type: 'liveEvent';
-  _createdAt: string;
   _updatedAt: string;
-  _rev: string;
   slug: Slug | null;
-  title: string | null;
-  isCurrentEvent?: boolean;
-  subtitle?: string;
-  mainImage?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: 'image';
-  };
-  videoLink?: string;
-  description?: string;
-  eventDate?: string;
-  body?: BlockContent;
-  relatedArticles?: Array<
-    {
-      _key: string;
-    } & ArticleReference
-  >;
-  keyEvent?: Array<
-    {
-      _key: string;
-    } & KeyEventReference
-  >;
-  keywords?: string;
-  eventTag?: Array<
-    {
-      _key: string;
-    } & EventTagReference
-  >;
-  endDate?: string;
-  eventStatus?: 'EventCancelled' | 'EventMovedOnline' | 'EventPostponed' | 'EventScheduled';
-  seo?: SeoObject;
 }>;
 
 // Source: src/util/getAllUrls.ts
 // Variable: queryAuthors
-// Query: *[_type == "author"] {      ...,      slug,    }
+// Query: *[_type == "author" && defined(slug.current)] {    _type,    _updatedAt,    slug,  }
 export type QueryAuthorsResult = Array<{
-  _id: string;
   _type: 'author';
-  _createdAt: string;
   _updatedAt: string;
-  _rev: string;
   slug: Slug | null;
-  order?: string;
-  name?: string;
-  image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: 'image';
-  };
-  title?: string;
-  bio?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: 'span';
-      _key: string;
-    }>;
-    style?: 'normal';
-    listItem?: never;
-    markDefs?: Array<{
-      href?: string;
-      _type: 'link';
-      _key: string;
-    }>;
-    level?: number;
-    _type: 'block';
-    _key: string;
-  }>;
-  twitter?: string;
-  instagram?: string;
-  facebook?: string;
-  tiktok?: string;
-  youtube?: string;
-  linkedin?: string;
-  website?: string;
-  email?: string;
-  credentials?: Array<string>;
-  expertise?: Array<string>;
-  sameAs?: Array<string>;
-  location?: string;
-  isActive?: boolean;
 }>;
 
 // Source: src/util/getAllUrls.ts
 // Variable: queryAllCategoryUrls
-// Query: *[_type == "category"] {      ...,      slug,    }
+// Query: *[_type == "category" && defined(slug.current)] {    _type,    _updatedAt,    slug,  }
 export type QueryAllCategoryUrlsResult = Array<{
-  _id: string;
   _type: 'category';
-  _createdAt: string;
   _updatedAt: string;
-  _rev: string;
   slug: Slug | null;
-  order?: string;
-  title?: string;
-  description?: string;
-  seo?: SeoObject;
 }>;
 
 // Source: src/util/getAllUrls.ts
 // Variable: queryPolicies
-// Query: *[_type == "policies"] {      ...,      slug,    }
+// Query: *[_type == "policies" && defined(slug.current)] {    _type,    _updatedAt,    slug,  }
 export type QueryPoliciesResult = Array<{
-  _id: string;
   _type: 'policies';
-  _createdAt: string;
   _updatedAt: string;
-  _rev: string;
   slug: Slug | null;
-  title?: string;
-  lastUpdate?: string;
-  order?: string;
-  description?: BlockContent;
 }>;
 
 // Source: src/util/getAllUrls.ts
 // Variable: querySongs
-// Query: *[_type == "song"] {      ...,      title,      slug,    }
+// Query: *[_type == "song" && defined(slug.current)] {    _type,    _updatedAt,    slug,  }
 export type QuerySongsResult = Array<{
-  _id: string;
   _type: 'song';
-  _createdAt: string;
   _updatedAt: string;
-  _rev: string;
   slug: Slug | null;
-  title: string | null;
-  primaryArtist?: MusicArtistReference;
-  featuredArtists?: Array<
-    {
-      _key: string;
-    } & MusicArtistReference
-  >;
-  contributingArtists?: Array<{
-    artist?: MusicArtistReference;
-    role?:
-      | 'additional-vocals'
-      | 'backing-vocals'
-      | 'composer'
-      | 'engineer'
-      | 'instrumentalist'
-      | 'mixer'
-      | 'producer'
-      | 'songwriter';
-    _key: string;
-  }>;
-  album?: AlbumReference;
-  trackArt?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: 'image';
-  };
-  trackNumber?: number;
-  lyrics?: string;
-  lyricsStructure?: Array<{
-    sectionType?:
-      | 'bridge'
-      | 'chorus'
-      | 'hook'
-      | 'intro'
-      | 'outro'
-      | 'pre-chorus'
-      | 'refrain'
-      | 'verse';
-    content?: string;
-    order?: number;
-    _key: string;
-  }>;
-  releaseDate?: string;
-  duration?: string;
-  genres?: Array<string>;
-  recordLabel?: string;
-  description?: BlockContent;
-  streamingLinks?: {
-    spotify?: string;
-    appleMusic?: string;
-    youtube?: string;
-    soundcloud?: string;
-    bandcamp?: string;
-    amazonMusic?: string;
-  };
-  isExplicit?: boolean;
-  isFeatured?: boolean;
-  keywords?: string;
-  seo?: SeoObject;
 }>;
 
 // Source: src/util/getAllUrls.ts
 // Variable: queryMusicArtists
-// Query: *[_type == "musicArtist"] {      ...,      name,      slug,    }
+// Query: *[_type == "musicArtist" && defined(slug.current)] {    _type,    _updatedAt,    slug,  }
 export type QueryMusicArtistsResult = Array<{
-  _id: string;
   _type: 'musicArtist';
-  _createdAt: string;
   _updatedAt: string;
-  _rev: string;
   slug: Slug | null;
-  name: string | null;
-  stageName?: string;
-  bio?: BlockContent;
-  image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: 'image';
-  };
-  genres?: Array<string>;
-  debutYear?: number;
-  hometown?: string;
-  recordLabel?: string;
-  website?: string;
-  socialMedia?: {
-    instagram?: string;
-    twitter?: string;
-    facebook?: string;
-    youtube?: string;
-    spotify?: string;
-    appleMusic?: string;
-    soundcloud?: string;
-    tiktok?: string;
-  };
-  isActive?: boolean;
-  isFeatured?: boolean;
-  seo?: SeoObject;
 }>;
 
 // Source: src/util/getAllUrls.ts
 // Variable: queryAlbums
-// Query: *[_type == "album"] {      ...,      title,      slug,    }
+// Query: *[_type == "album" && defined(slug.current)] {    _type,    _updatedAt,    slug,  }
 export type QueryAlbumsResult = Array<{
-  _id: string;
   _type: 'album';
-  _createdAt: string;
   _updatedAt: string;
-  _rev: string;
   slug: Slug | null;
-  title: string | null;
-  artist?: MusicArtistReference;
-  featuredArtists?: Array<
-    {
-      _key: string;
-    } & MusicArtistReference
-  >;
-  albumArt?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: 'image';
-  };
-  releaseDate?: string;
-  albumType?: 'compilation' | 'ep' | 'live' | 'mixtape' | 'remix' | 'single' | 'studio';
-  genres?: Array<string>;
-  recordLabel?: string;
-  producer?: Array<string>;
-  description?: BlockContent;
-  totalTracks?: number;
-  duration?: string;
-  streamingLinks?: {
-    spotify?: string;
-    appleMusic?: string;
-    youtube?: string;
-    soundcloud?: string;
-    bandcamp?: string;
-    amazonMusic?: string;
-  };
-  isExplicit?: boolean;
-  isFeatured?: boolean;
-  seo?: SeoObject;
+}>;
+
+// Source: src/util/getAllUrls.ts
+// Variable: queryTimelines
+// Query: *[_type == "timeline" && defined(slug.current)] {    _type,    _updatedAt,    slug,  }
+export type QueryTimelinesResult = Array<{
+  _type: 'timeline';
+  _updatedAt: string;
+  slug: Slug | null;
 }>;
 
 // Source: src/util/metadata/generateBlogCatMetadata.ts
@@ -6432,40 +6838,79 @@ export type QueryPostMetadataResult = {
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
+    "*[_type=='album'] { slug }": QueryAlbumStaticParamsResult;
+    "*[_type=='song'] { slug }": QuerySongStaticParamsResult;
+    "*[_type=='musicArtist'] { slug }": QueryMusicArtistStaticParamsResult;
     "*[_type=='article'] { slug }": QueryResult;
     "*[_type=='author'] { slug }": QueryAuthorStaticParamsResult;
-    "*[_type=='category'] { slug }": QueryCategoryStaticParamsResult;
     "*[_type=='liveEvent'] { slug }": QueryLiveEventStaticParamsResult;
+    "*[_type=='category'] { slug }": QueryCategoryStaticParamsResult;
     "*[_type=='policies'] { slug }": QueryPolicyStaticParamsResult;
+    "\n  *[_type == 'factCheck'] {\n    _type,\n    slug,\n    _updatedAt,\n    publishedAt\n  }\n": QueryFactCheckSlugsResult;
     "*[_type=='timeline' && isPublished == true] { slug }": QueryTimelineStaticParamsResult;
     "*[_type=='timelineCategory' && slug.current == $slug][0] {\n      ...,\n      parentCategory->{\n        _id,\n        title,\n        slug,\n        color\n      }\n    }": CategoryQueryResult;
     "*[_type=='timelineCategory' && isActive == true] { slug }": QueryTimelineCategoryStaticParamsResult;
     "*[_type=='timelineEvent' && isPublished == true] { slug }": QueryTimelineEventStaticParamsResult;
-    "\n  *[_type=='category'] {\n    ...,\n    title,\n    order,\n  } \n": QueryCategoryResult;
+    "\n  *[_type=='category'] | order(order asc) {\n    _id,\n    title,\n    slug,\n    order,\n  }\n": QueryCategoryResult;
     "\n  *[_type=='article'] {\n    _id,\n    title,\n    _createdAt\n  }\n  | order(_createdAt desc)\n": QueryArticlesResult;
     "\n  *[_type=='keyEvent'] {\n    _id,\n    title,\n    _createdAt\n  }\n  | order(_createdAt desc)\n": QueryKeyEventResult;
-    "\n  *[_type=='liveEvent' && isCurrentEvent == true] {\n   ...,\n    description,\n    title,\n    slug,\n    eventDate,\n    keyEvent[]->,\n      relatedArticles[]-> {\n        slug,\n        _id,\n        title,\n        _createdAt,\n        description,\n        eventDate,\n        publishedAt,\n    }\n  }\n  | order(_createdAt desc)\n": QueryLiveEventsResult;
+    '{\n  _id,\n  // Under \'drafts\' perspective, _id contains the draft prefix for unpublished docs:\n  // Published: "articles.xyz"\n  // Draft: "drafts.articles.xyz"\n  _createdAt,\n  _updatedAt,\n  title,\n  slug,\n  featured,\n  breakingNews,\n  needsReview,\n  publishedAt,\n  updatedAt,\n  description,\n  mainImage{ asset->{ url }, alt },\n  "authorId": author._ref,\n  author->{ _id, name, slug },\n  categories[]->{ _id, title, slug },\n  tags,\n  keywords,\n  deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },\n  "correctionType": correction.type,\n  "reviewedById": reviewedBy._ref\n}': ARTICLE_LIST_PROJECTION_RESULT;
+    '\n  *[_type == "article" && author._ref == $sanityAuthorId]\n  {\n  _id,\n  // Under \'drafts\' perspective, _id contains the draft prefix for unpublished docs:\n  // Published: "articles.xyz"\n  // Draft: "drafts.articles.xyz"\n  _createdAt,\n  _updatedAt,\n  title,\n  slug,\n  featured,\n  breakingNews,\n  needsReview,\n  publishedAt,\n  updatedAt,\n  description,\n  mainImage{ asset->{ url }, alt },\n  "authorId": author._ref,\n  author->{ _id, name, slug },\n  categories[]->{ _id, title, slug },\n  tags,\n  keywords,\n  deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },\n  "correctionType": correction.type,\n  "reviewedById": reviewedBy._ref\n}\n  | order(_updatedAt desc)\n': QueryPortalArticlesByAuthorResult;
+    '\n  *[_type == "article"]\n  {\n  _id,\n  // Under \'drafts\' perspective, _id contains the draft prefix for unpublished docs:\n  // Published: "articles.xyz"\n  // Draft: "drafts.articles.xyz"\n  _createdAt,\n  _updatedAt,\n  title,\n  slug,\n  featured,\n  breakingNews,\n  needsReview,\n  publishedAt,\n  updatedAt,\n  description,\n  mainImage{ asset->{ url }, alt },\n  "authorId": author._ref,\n  author->{ _id, name, slug },\n  categories[]->{ _id, title, slug },\n  tags,\n  keywords,\n  deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },\n  "correctionType": correction.type,\n  "reviewedById": reviewedBy._ref\n}\n  | order(_updatedAt desc)\n': QueryPortalAllArticlesResult;
+    '\n  *[_type == "article" && _id == $id][0]{\n    _id,\n    _createdAt,\n    _updatedAt,\n    title,\n    slug,\n    featured,\n    breakingNews,\n    needsReview,\n    publishedAt,\n    updatedAt,\n    description,\n    leadParagraph,\n    body,\n    mainImage{ asset->{ _id, url }, alt },\n    "authorId": author._ref,\n    author->{ _id, name, slug },\n    categories[]->{ _id, title, slug },\n    tags,\n    keywords,\n    sources[]->{ _id, label, type, url, description, isAnonymous },\n    relatedArticles[]->{ _id, title, slug },\n    allowComments,\n    methodology,\n    location,\n    hasEmbeddedVideo,\n    videoLink,\n    eventDate,\n    faqs[]{ _key, question, answer },\n    correction{ type, issuedAt, summary, detail },\n    reviewedBy->{ _id, name },\n    deletionRequest{ reason, requestedAt, requestedByName, originalPublishedAt },\n    linkedPitch->{\n      _id, headline, urgency, beat, angle, sourceSuggestions,\n      links[]{ _key, label, url },\n      notes\n    }\n  }\n': QueryPortalArticleByIdResult;
+    '\n  *[_type == "category"] | order(title asc) {\n    _id,\n    title,\n    slug\n  }\n': QueryPortalCategoriesResult;
+    '\n  *[_type == "author" && isActive != false] | order(name asc) {\n    _id,\n    name,\n    slug,\n    image{ asset->{ url }, alt }\n  }\n': QueryPortalAuthorsResult;
+    '\n  *[_type == "source" && $authorId in linkedAuthors] | order(_updatedAt desc) {\n    _id,\n    _createdAt,\n    _updatedAt,\n    label,\n    type,\n    url,\n    description,\n    isAnonymous,\n    "linkedArticles": *[_type == "article" && references(^._id)]{ _id, title, slug }\n  }\n': QueryPortalSourcesByAuthorResult;
+    '\n  *[_type == "author" && _id == $id][0]{\n    _id,\n    name,\n    "slug": slug.current,\n    title,\n    bio,\n    location,\n    email,\n    twitter,\n    instagram,\n    facebook,\n    tiktok,\n    youtube,\n    linkedin,\n    website,\n    credentials,\n    expertise,\n    sameAs,\n    image{ asset->{ _id, url }, alt }\n  }\n': QueryPortalMyProfileResult;
+    '\n  *[_type == "source"] | order(_updatedAt desc) {\n    _id,\n    _createdAt,\n    _updatedAt,\n    label,\n    type,\n    url,\n    description,\n    isAnonymous,\n    "linkedArticles": *[_type == "article" && references(^._id)]{ _id, title, slug }\n  }\n': QueryPortalAllSourcesResult;
+    '\n  *[_type == "jobApplication"] | order(submittedAt desc) {\n    _id,\n    firstName,\n    lastName,\n    email,\n    phone,\n    location,\n    positionsOfInterest,\n    otherPosition,\n    experienceLevel,\n    experienceDescription,\n    availability,\n    applicationStatus,\n    submittedAt,\n    notes,\n    portfolioWebsite,\n    youtubeChannel,\n    socialMediaPlatforms,\n    socialMediaLinks,\n    workSamples,\n    additionalInfo\n  }\n':
+      | QueryPortalJobApplicationsResult
+      | QueryJobApplicationsResult;
+    '\n  *[_type == "contactSubmission"] | order(submittedAt desc) {\n    _id,\n    name,\n    email,\n    message,\n    submittedAt\n  }\n': QueryPortalContactSubmissionsResult;
+    '\n  *[_type == "secureContact"] | order(submittedAt desc) {\n    _id,\n    name,\n    email,\n    phone,\n    subject,\n    message,\n    urgency,\n    contactMethod,\n    isAnonymous,\n    submittedAt,\n    status\n  }\n': QueryPortalSecureContactsResult;
+    '\n  *[_type == "whistleblower"] | order(submittedAt desc) {\n    _id,\n    submissionId,\n    title,\n    description,\n    organization,\n    location,\n    timeframe,\n    category,\n    severity,\n    evidence,\n    witnessInfo,\n    contactInfo,\n    isAnonymous,\n    protectionNeeded,\n    submittedAt,\n    status,\n    priority,\n    notes\n  }\n': QueryPortalWhistleblowersResult;
+    '\n  *[_type == "newsletterSubscribe"] | order(submittedAt desc) {\n    _id,\n    email,\n    firstName,\n    status,\n    source,\n    submittedAt,\n    confirmedAt\n  }\n': QueryPortalNewsletterSubscribersResult;
+    '\n  *[_type == "bookstoreSubscriber"] | order(submittedAt desc) {\n    _id,\n    email,\n    firstName,\n    status,\n    source,\n    submittedAt,\n    confirmedAt\n  }\n': QueryPortalBookstoreSubscribersResult;
+    '\n  *[_type == "article"] | order(_updatedAt desc) {\n    _id,\n    title,\n    "authorId": author._ref\n  }\n': QueryPortalArticlesTitlesResult;
+    '\n  *[_type == "brief" && _id == $briefId][0] {\n    _id,\n    title,\n    publishedAt,\n    period,\n    summary,\n    "storyPasses": storyPasses[] {\n      _key,\n      storyKey,\n      "authorId": author._ref,\n      passedAt\n    },\n    stories[] {\n      _key,\n      headline,\n      angle,\n      beat,\n      urgency,\n      sourceSuggestions,\n      links[] { _key, label, url },\n      status,\n      claimedBy->{ _id, name, "slug": slug.current },\n      claimedAt,\n      linkedArticle->{ _id, title, "slug": slug.current }\n    }\n  }\n': QueryPortalBriefByIdResult;
+    '\n  *[_type == "brief"] | order(_createdAt desc)[0] {\n    _id,\n    title,\n    publishedAt,\n    period,\n    summary,\n    "storyPasses": storyPasses[] {\n      _key,\n      storyKey,\n      "authorId": author._ref,\n      passedAt\n    },\n    stories[] {\n      _key,\n      headline,\n      angle,\n      beat,\n      urgency,\n      sourceSuggestions,\n      links[] { _key, label, url },\n      status,\n      claimedBy->{ _id, name, "slug": slug.current },\n      claimedAt,\n      linkedArticle->{ _id, title, "slug": slug.current }\n    }\n  }\n': QueryPortalLatestBriefResult;
+    '\n  *[_type == "brief"] | order(_createdAt desc) {\n    _id,\n    title,\n    publishedAt,\n    period,\n    "storyCount": count(stories),\n    "unclaimedCount": count(stories[status == "unclaimed"])\n  }\n': QueryPortalAllBriefsResult;
+    '\n  *[_type == "claimedPitch" && author._ref == $authorId] | order(claimedAt desc) {\n    _id,\n    headline,\n    beat,\n    urgency,\n    status,\n    briefId,\n    briefTitle,\n    storyKey,\n    claimedAt,\n    linkedArticle->{ _id, title, "slug": slug.current }\n  }\n': QueryPortalMyClaimedPitchesResult;
+    '\n  *[_type == "claimedPitch" && author._ref == $authorId && briefId == $briefId]\n    | order(_createdAt desc) {\n    _id,\n    storyKey\n  }\n': QueryPortalMyPitchesForBriefResult;
+    '\n  *[_type == "claimedPitch"] | order(claimedAt desc) {\n    _id,\n    headline,\n    beat,\n    urgency,\n    status,\n    briefId,\n    briefTitle,\n    storyKey,\n    claimedAt,\n    author->{ _id, name },\n    linkedArticle->{ _id, title, "slug": slug.current }\n  }\n': QueryPortalAllClaimedPitchesResult;
+    '\n  *[_type == "claimedPitch" && _id == $id][0] {\n    _id,\n    headline,\n    angle,\n    beat,\n    urgency,\n    sourceSuggestions,\n    links[] { _key, label, url },\n    briefId,\n    briefTitle,\n    storyKey,\n    claimedAt,\n    status,\n    notes,\n    author->{ _id, name },\n    assignedBy->{ _id, name },\n    linkedArticle->{ _id, title, "slug": slug.current }\n  }\n': QueryPortalClaimedPitchByIdResult;
+    '\n  *[_type == "bookReview"] | order(submittedAt desc) {\n    _id,\n    reviewerName,\n    reviewerLocation,\n    rating,\n    body,\n    status,\n    clerkUserId,\n    adminFeedback,\n    submittedAt,\n    "bookTitle": book->title,\n    "bookSlug": book->slug.current\n  }\n': QueryPortalAllReviewsResult;
+    '\n  *[_type == "author" && clerkId == $clerkId][0] {\n    isLiteraryAuthor\n  }\n': QueryPortalMyAuthorFlagsResult;
+    "\n  *[_type=='liveEvent' && isCurrentEvent == true] {\n    ...,\n    description,\n    title,\n    slug,\n    eventDate,\n    endDate,\n    eventStatus,\n    mainImage,\n    subtitle,\n    videoLink,\n    keyEvent[]->,\n    relatedArticles[]-> {\n      slug,\n      _id,\n      title,\n      _createdAt,\n      description,\n      eventDate,\n      publishedAt,\n    }\n  }\n  | order(_createdAt desc)\n": QueryLiveEventsResult;
+    "\n  *[_type=='article' && breakingNews == true] {\n    ...,\n    author->,\n    categories[]->,\n    description,\n    publishedAt,\n    mainImage,\n    slug,\n    title,\n    videoLink,\n    hasEmbeddedVideo\n  }\n  | order(publishedAt desc)\n  [0..19]\n": QueryBreakingArticlesResult;
     "\n  *[_type=='liveEvent' && isCurrentEvent == false] {\n    ...,\n    description,\n    title,\n    slug,\n    eventDate,\n    mainImage,\n    subtitle,\n    location,\n    videoLink,\n    keywords,\n    eventTag[]->,\n    keyEvent[]->{\n      title,\n      slug,\n      eventDate,\n      description\n    },\n    relatedArticles[]-> {\n      slug,\n      _id,\n      title,\n      _createdAt,\n      description,\n      eventDate,\n      publishedAt,\n      mainImage\n    }\n  }\n  | order(eventDate desc)\n": QueryPastEventsResult;
     "\n  *[_type=='liveEvent' && isCurrentEvent == false] {\n    ...,\n    description,\n    title,\n    slug,\n    eventDate,\n    mainImage,\n    subtitle,\n    location,\n    videoLink,\n    keywords,\n    eventTag[]->,\n    keyEvent[]->{\n      title,\n      slug,\n      eventDate,\n      description\n    },\n    relatedArticles[]-> {\n      slug,\n      _id,\n      title,\n      _createdAt,\n      description,\n      eventDate,\n      publishedAt,\n      mainImage\n    }\n  }\n  | order(eventDate desc)\n  [$start...$end]\n": QueryPastEventsWithPaginationResult;
-    '\n    *[_type == "liveEvent" && slug.current == $slug][0] {\n      ...,\n      tag[]->,\n      keyEvent[]->,\n      relatedArticles[]-> {\n        slug,\n        _id,\n        title,\n        _createdAt,\n        description,\n        eventDate,\n        publishedAt,\n      }\n    }': QueryEventBySlugResult;
-    "\n  *[_type=='article'] {\n    ...,\n    author->,\n    categories[]->,\n    description,\n    publishedAt,\n  }\n  | order(_createdAt desc)\n": QueryAllArticlesResult;
+    '\n    *[_type == "liveEvent" && slug.current == $slug][0] {\n      ...,\n      eventTag[]->,\n      keyEvent[]-> {\n        ...,\n        sources[]-> { label, type, url, description, isAnonymous },\n      },\n      sources[]-> { label, type, url, description, isAnonymous },\n      methodology,\n      "correction": correction { type, issuedAt, summary, detail },\n      relatedArticles[]-> {\n        slug,\n        _id,\n        title,\n        _createdAt,\n        description,\n        eventDate,\n        publishedAt,\n      }\n    }': QueryEventBySlugResult;
+    '\n  *[_type==\'article\'] {\n    ...,\n    author->,\n    categories[]->,\n    description,\n    publishedAt,\n    tags,\n    "correction": correction { type, summary },\n  }\n  | order(_createdAt desc)\n  [0..99]\n': QueryAllArticlesResult;
+    '\n  *[_type==\'article\' && defined(slug.current)] {\n    _id,\n    _type,\n    _createdAt,\n    _updatedAt,\n    title,\n    slug,\n    description,\n    publishedAt,\n    eventDate,\n    mainImage,\n    tags,\n    "correction": correction { type, summary },\n    "author": author->{ name, slug },\n    "categories": categories[]->{ _id, title, order },\n    "readingTimeMinutes": coalesce(\n      readingTimeMinutes,\n      select(\n        defined(body) && length(pt::text(body)) > 0\n          => round(length(pt::text(body)) / 1000) + 1,\n        1\n      )\n    ),\n  }\n  | order(_createdAt desc)\n  [0...30]\n': QueryHomepageArticlesResult;
+    '\n  *[_type == "article" && defined(slug.current) && defined(viewCount)]\n  | order(viewCount desc) [0...31] { _id }\n': QueryTrendingIdsResult;
+    '\n  *[_type == "article" && defined(slug.current) && defined(publishedAt)]\n  | order(coalesce(eventDate, publishedAt, _createdAt) asc) {\n    _id,\n    _createdAt,\n    title,\n    slug,\n    publishedAt,\n    eventDate,\n    description,\n    mainImage,\n    "author": author->{ name },\n    "categories": categories[]->{ title, slug },\n  }\n': QueryArchiveArticlesResult;
+    '\n  *[_type == "article" && isFieldReport == true && defined(slug.current)]\n  | order(publishedAt desc) [0...6] {\n    _id,\n    _type,\n    _createdAt,\n    title,\n    slug,\n    description,\n    publishedAt,\n    location,\n    mainImage,\n    "author": author->{ name, slug },\n    "categories": categories[]->{ _id, title, order },\n    "readingTimeMinutes": select(\n      defined(body) && length(pt::text(body)) > 0\n        => round(length(pt::text(body)) / 1000) + 1,\n      1\n    ),\n  }\n': QueryFieldReportArticlesResult;
+    '\n  *[_type == "article" && defined(slug.current) && defined(viewCount)]\n  | order(viewCount desc) [0...10] {\n    _id,\n    title,\n    slug,\n    description,\n    publishedAt,\n    viewCount,\n    mainImage,\n    "author": author->{ name, slug },\n    "categories": categories[]->{ title, slug },\n  }\n': QueryMostReadArticlesResult;
+    '\n  *[_type == "article" && defined(slug.current) && defined(viewCount)]\n  | order(viewCount desc) [0...31] {\n    _id,\n    title,\n    slug,\n    description,\n    publishedAt,\n    viewCount,\n    location,\n    tags,\n    mainImage,\n    "author": author->{ name, slug },\n    "categories": categories[]->{ title, slug },\n  }\n': QueryMostReadArticlesFullResult;
+    '\n  *[\n    _type == "article" &&\n    defined(slug.current) &&\n    defined(viewCount) &&\n    $categorySlug in categories[]->slug.current\n  ] | order(viewCount desc) [0...5] {\n    _id,\n    title,\n    slug,\n    publishedAt,\n    viewCount,\n    "author": author->{ name },\n  }\n': QueryMostReadByCategoryResult;
     "\n  *[_type=='song'] {\n    ...,\n    primaryArtist->,\n    featuredArtists[]->,\n    contributingArtists[]{\n      artist->,\n      role\n    },\n    album->{\n      ...,\n      artist->\n    },\n    trackArt\n  }\n  | order(_createdAt desc)\n": QueryAllSongsResult;
     '\n  *[_type == "song" && slug.current == $slug][0] {\n    ...,\n    primaryArtist->,\n    featuredArtists[]->,\n    contributingArtists[]{\n      artist->,\n      role\n    },\n    album->{\n      ...,\n      artist->,\n      featuredArtists[]->\n    },\n    trackArt\n  }\n': QuerySongBySlugResult;
     "\n  *[_type=='song' && isFeatured == true] {\n    ...,\n    primaryArtist->,\n    featuredArtists[]->,\n    album->{\n      title,\n      albumArt\n    },\n    trackArt\n  }\n  | order(_createdAt desc)\n  [0...6]\n": QueryFeaturedSongsResult;
     "\n  *[_type=='musicArtist'] {\n    ...,\n  }\n  | order(name asc)\n": QueryAllMusicArtistsResult;
-    '\n  *[_type == "musicArtist" && slug.current == $slug][0] {\n    ...,\n    "songs": *[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)] {\n      ...,\n      primaryArtist->,\n      featuredArtists[]->,\n      album->{\n        title,\n        albumArt,\n        releaseDate\n      },\n      trackArt\n    } | order(releaseDate desc),\n    "albums": *[_type == "album" && (artist._ref == ^._id || ^._id in featuredArtists[]._ref)] {\n      ...,\n      artist->,\n      featuredArtists[]->\n    } | order(releaseDate desc)\n  }\n': QueryMusicArtistBySlugResult;
+    '\n  *[_type == "musicArtist" && slug.current == $slug][0] {\n    ...,\n    "songs": *[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)] {\n      ...,\n      primaryArtist->,\n      featuredArtists[]->,\n      album->{\n        title,\n        albumArt,\n        releaseDate\n      },\n      trackArt\n    } | order(releaseDate desc) [0..99],\n    "albums": *[_type == "album" && (artist._ref == ^._id || ^._id in featuredArtists[]._ref)] {\n      ...,\n      artist->,\n      featuredArtists[]->\n    } | order(releaseDate desc) [0..49]\n  }\n': QueryMusicArtistBySlugResult;
     '\n  *[_type==\'musicArtist\' && isFeatured == true] {\n    ...,\n    "songCount": count(*[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)])\n  }\n  | order(name asc)\n  [0...8]\n': QueryFeaturedMusicArtistsResult;
     "\n  *[_type=='album'] {\n    ...,\n    artist->,\n    featuredArtists[]->,\n  }\n  | order(releaseDate desc)\n": QueryAllAlbumsResult;
     '\n  *[_type == "album" && slug.current == $slug][0] {\n    ...,\n    artist->,\n    featuredArtists[]->,\n    "songs": *[_type == "song" && album._ref == ^._id] {\n      ...,\n      primaryArtist->,\n      featuredArtists[]->,\n      trackArt\n    } | order(trackNumber asc)\n  }\n': QueryAlbumBySlugResult;
     "\n  *[_type=='album' && isFeatured == true] {\n    ...,\n    artist->,\n    featuredArtists[]->\n  }\n  | order(releaseDate desc)\n  [0...6]\n": QueryFeaturedAlbumsResult;
     '\n  *[_type == "song" && (primaryArtist._ref == $artistId || $artistId in featuredArtists[]._ref)] {\n    ...,\n    primaryArtist->,\n    featuredArtists[]->,\n    album->{\n      title,\n      albumArt,\n      releaseDate\n    },\n    trackArt\n  }\n  | order(releaseDate desc)\n': QuerySongsByArtistResult;
     "\n  *[_type=='song'] {\n    ...,\n    primaryArtist->,\n    featuredArtists[]->,\n    album->{\n      title,\n      albumArt\n    },\n    trackArt\n  }\n  | order(releaseDate desc)\n  [0...10]\n": QueryRecentSongsResult;
-    "\n    *[_type == 'article' && slug.current == $slug][0] {\n      ...,\n      author->,\n      categories[]->,\n      seo,\n      faqs,\n      sources,\n      updatedAt,\n      leadParagraph,\n      relatedArticles[]-> {\n        _id,\n        title,\n        \"slug\": slug.current,\n        mainImage,\n        description,\n        publishedAt,\n        author-> { name }\n      },\n      'comments': *[\n        _type == 'comment' &&\n        article._ref == ^._id &&\n        approved == true\n      ],\n    }": QueryArticleBySlugResult;
-    '\n  *[_type == "category" && slug.current == $slug][0] {\n    _id,\n    title,\n    description,\n    "slug": slug.current,\n  }\n': QueryCategoryBySlugResult;
-    "\n  *[_type == 'article' && references(categories, *[_type == 'category' && slug.current == $slug]._id)] {\n    ...,\n    author->,\n    categories[]->,\n    description,\n    publishedAt,\n  } | order(_createdAt desc)\n": QueryArticleByCategoryResult;
+    '\n    *[_type == \'article\' && slug.current == $slug][0] {\n      ...,\n      author->,\n      categories[]->,\n      reviewedBy->{ name, slug, title, image },\n      seo,\n      faqs,\n      sources[]-> { label, type, url, description, isAnonymous },\n      methodology,\n      "correction": correction { type, issuedAt, summary, detail },\n      updatedAt,\n      leadParagraph,\n      body[]{\n        ...,\n        _type == "factCheckEmbed" => {\n          ...,\n          factCheck-> {\n            _id,\n            title,\n            slug,\n            claim,\n            rating,\n            ratingExplanation,\n            claimSource\n          }\n        }\n      },\n      relatedArticles[0..3]-> {\n        _id,\n        title,\n        "slug": slug.current,\n        mainImage,\n        description,\n        publishedAt,\n        author-> { name }\n      },\n      "allowComments": coalesce(allowComments, true),\n      \'comments\': *[\n        _type == \'comment\' &&\n        article._ref == ^._id &&\n        approved == true\n      ],\n    }': QueryArticleBySlugResult;
+    '\n  *[_type == "category" && slug.current == $slug][0] {\n    _id,\n    title,\n    description,\n    "slug": slug.current,\n    color,\n    image,\n    seo,\n  }\n': QueryCategoryBySlugResult;
+    '\n  *[_type == \'article\' && $slug in categories[]->slug.current] {\n    _id,\n    _type,\n    _createdAt,\n    title,\n    slug,\n    description,\n    publishedAt,\n    eventDate,\n    location,\n    mainImage,\n    "author": author->{ name, slug },\n    "categories": categories[]->{ _id, title, order },\n    "readingTimeMinutes": select(\n      defined(body) && length(pt::text(body)) > 0\n        => round(length(pt::text(body)) / 1000) + 1,\n      1\n    ),\n  } | order(coalesce(eventDate, publishedAt, _createdAt) desc)\n': QueryArticleByCategoryResult;
     '\n  *[_type == "category"] {\n    _id,\n    title,\n    order\n  }  \n': QueryCategoriesResult;
-    '\n  *[_type == "author" ] {\n    ...,\n    author-> {\n      name,\n      image,\n      title,\n    },\n  } \n  | order(author.order desc)\n  ': QueryAllAuthorsResult;
-    "\n  *[_type == 'author' && slug.current == $slug][0] {\n    ...,\n    'relatedArticles': *[_type == 'article' && references(^._id)]| order(_createdAt desc) {\n      ...,\n      author->,\n      categories[]->,\n      publishedAt,\n    }\n  }\n": QueryAuthorBySlugResult;
+    '\n  *[_type == "author"] {\n    ...,\n  }\n  | order(order desc)\n': QueryAllAuthorsResult;
+    "\n  *[_type == 'author' && slug.current == $slug][0] {\n    _id, name, slug, title, bio, image,\n    twitter, instagram, facebook, tiktok, youtube, linkedin, website, email,\n    credentials, expertise, sameAs, location, isActive, isLiteraryAuthor,\n    tipStripeProductId, tipAmount,\n    'relatedArticles': *[_type == 'article' && author._ref == ^._id] | order(_createdAt desc) [0..49] {\n      _id, title, slug, description, publishedAt, mainImage,\n      'categories': categories[]->{ _id, title, slug },\n    },\n    'books': *[_type == 'book' && author._ref == ^._id && status in [\"published\", \"out-of-stock\"]] | order(publishedAt desc) [0..49] {\n      _id, title, slug, status, featured, publishedAt,\n      coverImage { asset, alt }, coverImageUrl,\n      \"genre\": genre[]->{ _id, title, slug },\n      \"author\": author->{ _id, name, slug, tipStripeProductId, tipAmount, image { asset, alt } },\n      formats[] {\n        _key, formatType, price, compareAtPrice,\n        nameYourPrice, minimumPrice, suggestedPrice,\n        stripePriceId, stripeProductId,\n        inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },\n        digitalAsset { supabaseStoragePath, fileSize, fileFormat, version }\n      }\n    }\n  }\n": QueryAuthorBySlugResult;
     "\n  *[_type=='timeline' && isPublished == true] {\n    ...,\n    author->,\n    collaborators[]->,\n    categories[]->,\n    'eventCount': count(events),\n  }\n  | order(publishedAt desc)\n": QueryAllTimelinesResult;
     "\n  *[_type=='timeline' && isPublished == true && isFeatured == true] {\n    ...,\n    author->,\n    categories[]->,\n    'eventCount': count(events),\n  }\n  | order(publishedAt desc)\n  [0...6]\n": QueryFeaturedTimelinesResult;
     '\n  *[_type == "timeline" && slug.current == $slug][0] {\n    ...,\n    author->,\n    collaborators[]->,\n    categories[]->,\n    events[]->{\n      ...,\n      author->,\n      timelineCategories[]->,\n      relatedArticles[]->{\n        slug,\n        title,\n        _id,\n        publishedAt,\n        mainImage\n      },\n      relatedLiveEvents[]->{\n        slug,\n        title,\n        _id,\n        eventDate,\n        mainImage\n      }\n    }\n  }\n': QueryTimelineBySlugResult;
@@ -6479,16 +6924,32 @@ declare module '@sanity/client' {
     "\n  *[_type=='timelineEvent' && isPublished == true] {\n    ...,\n    author->,\n    timelineCategories[]->,\n  }\n  | order(eventDate desc)\n  [0...10]\n": QueryRecentTimelineEventsResult;
     "\n  *[_type=='timelineEvent' && isPublished == true && importanceLevel == $importance] {\n    ...,\n    author->,\n    timelineCategories[]->,\n  }\n  | order(eventDate desc)\n": QueryTimelineEventsByImportanceResult;
     '\n  *[_type==\'timelineEvent\' && isPublished == true && (\n    title match $searchTerm + "*" ||\n    description match $searchTerm + "*" ||\n    location match $searchTerm + "*" ||\n    tags[] match $searchTerm + "*"\n  )] {\n    ...,\n    author->,\n    timelineCategories[]->,\n  }\n  | order(eventDate desc)\n': QueryTimelineSearchResult;
+    '\n  *[_type == "article"] | order(publishedAt desc) [0...50] {\n    _id,\n    title,\n    "slug": slug.current,\n    description,\n    publishedAt,\n    _updatedAt,\n    mainImage {\n      asset->,\n      alt\n    },\n    "author": author-> {\n      name\n    },\n    "category": categories[0]-> {\n      title\n    }\n  }\n': QueryRSSFeedResult;
+    '\n  *[_type == "liveEvent"] | order(eventDate desc) [0...20] {\n    _id,\n    title,\n    "slug": slug.current,\n    description,\n    subtitle,\n    eventDate,\n    _updatedAt,\n    eventStatus,\n    mainImage {\n      asset->,\n      alt\n    }\n  }\n': QueryRSSLiveEventsResult;
     '\n  *[_type == "policies"] {\n    _id,\n    title,\n    order\n  }  \n': QueryPoliciesListResult;
     '\n    *[_type == "policies" && slug.current == $slug][0] {\n      ...,\n      policies-> {\n        title,\n        lastUpdated,\n        description,\n      },\n    }': QueryPolicyBySlugResult;
-    '\n    *[_type == "article"] {\n      ...,\n      title,\n      slug,\n    }': QueryAllArticleUrlsResult;
-    '\n    *[_type == "liveEvent"] {\n      ...,\n      title,\n      slug,\n    }': QueryAllLiveEventUrlsResult;
-    '\n    *[_type == "author"] {\n      ...,\n      slug,\n    }': QueryAuthorsResult;
-    '\n    *[_type == "category"] {\n      ...,\n      slug,\n    }': QueryAllCategoryUrlsResult;
-    '\n    *[_type == "policies"] {\n      ...,\n      slug,\n    }': QueryPoliciesResult;
-    '\n    *[_type == "song"] {\n      ...,\n      title,\n      slug,\n    }': QuerySongsResult;
-    '\n    *[_type == "musicArtist"] {\n      ...,\n      name,\n      slug,\n    }': QueryMusicArtistsResult;
-    '\n    *[_type == "album"] {\n      ...,\n      title,\n      slug,\n    }': QueryAlbumsResult;
+    '\n  *[_type == "siteSettings"][0] {\n    name,\n    description,\n    logo { asset-> },\n    "breakingBanner": breakingNewsBanner {\n      isActive,\n      headline,\n      linkUrl,\n      linkLabel,\n      expiresAt\n    }\n  }\n': QuerySiteSettingsResult;
+    '\n  *[\n    _type == "jobListing"\n    && isActive == true\n    && (\n      !defined(closingDate)\n      || closingDate >= $today\n    )\n  ] | order(department asc) {\n    _id,\n    title,\n    slug,\n    department,\n    type,\n    location,\n    compensation,\n    description,\n    requirements,\n    closingDate\n  }\n': QueryActiveJobListingsResult;
+    "\n  *[_type == 'factCheck'] | order(publishedAt desc) {\n    _id,\n    title,\n    slug,\n    publishedAt,\n    claim,\n    claimSource,\n    rating,\n    ratingExplanation,\n    mainImage,\n    author-> { name, slug }\n  }\n": QueryAllFactChecksResult;
+    '\n  *[_type == \'factCheck\' && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    publishedAt,\n    claim,\n    claimSource,\n    claimUrl,\n    claimDate,\n    rating,\n    ratingExplanation,\n    body[]{\n      ...,\n      _type == "factCheckEmbed" => {\n        ...,\n        factCheck-> {\n          _id,\n          title,\n          slug,\n          claim,\n          rating,\n          ratingExplanation,\n          claimSource\n        }\n      }\n    },\n    sources[] { label, url },\n    author-> { name, slug, image },\n    relatedArticles[0..3]-> {\n      _id, title, slug, mainImage, publishedAt, description\n    }\n  }\n': QueryFactCheckBySlugResult;
+    '\n  array::unique(*[_type == "article" && defined(tags) && count(tags) > 0].tags[])\n': QueryAllTagsResult;
+    '\n  *[_type == "article" && defined(tags) && $tag in tags[]] | order(publishedAt desc) {\n    _id,\n    title,\n    slug,\n    description,\n    publishedAt,\n    mainImage { asset, alt },\n    "author": author->{ name, slug, image { asset } },\n    "categories": categories[]->{ _id, title, slug },\n    "correction": correction { type, summary },\n    tags\n  }\n': QueryArticlesByTagResult;
+    '\n  *[_type == "bookGenre"] | order(title asc) { _id, title, slug }\n': QueryAllBookGenresResult;
+    '\n  *[_type == "book" && featured == true && status == "published"] | order(publishedAt desc) [0..3] {\n    \n  _id,\n  title,\n  slug,\n  status,\n  featured,\n  publishedAt,\n  isbn,\n  pages,\n  language,\n  fictionType,\n  samplePdfUrl,\n  coverImage { asset, alt },\n  coverImageUrl,\n  "author": author-> {\n    _id, name, slug, clerkId, payoutEmail,\n    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,\n    image { asset, alt },\n    bio\n  },\n  "genre": genre[]-> { _id, title, slug },\n  formats[] {\n    _key, formatType, price, compareAtPrice,\n    nameYourPrice, minimumPrice, suggestedPrice,\n    stripePriceId, stripeProductId,\n    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },\n    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },\n    weight, dimensions\n  },\n  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },\n  description\n\n  }\n': QueryFeaturedBooksResult;
+    '\n  *[_type == "book" && status in ["published", "out-of-stock"]] | order(publishedAt desc) {\n    \n  _id,\n  title,\n  slug,\n  status,\n  featured,\n  publishedAt,\n  isbn,\n  pages,\n  language,\n  fictionType,\n  samplePdfUrl,\n  coverImage { asset, alt },\n  coverImageUrl,\n  "author": author-> {\n    _id, name, slug, clerkId, payoutEmail,\n    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,\n    image { asset, alt },\n    bio\n  },\n  "genre": genre[]-> { _id, title, slug },\n  formats[] {\n    _key, formatType, price, compareAtPrice,\n    nameYourPrice, minimumPrice, suggestedPrice,\n    stripePriceId, stripeProductId,\n    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },\n    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },\n    weight, dimensions\n  },\n  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },\n  description\n\n  }\n': QueryAllBooksResult;
+    '\n  *[_type == "book" && slug.current == $slug][0] {\n    \n  _id,\n  title,\n  slug,\n  status,\n  featured,\n  publishedAt,\n  isbn,\n  pages,\n  language,\n  fictionType,\n  samplePdfUrl,\n  coverImage { asset, alt },\n  coverImageUrl,\n  "author": author-> {\n    _id, name, slug, clerkId, payoutEmail,\n    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,\n    image { asset, alt },\n    bio\n  },\n  "genre": genre[]-> { _id, title, slug },\n  formats[] {\n    _key, formatType, price, compareAtPrice,\n    nameYourPrice, minimumPrice, suggestedPrice,\n    stripePriceId, stripeProductId,\n    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },\n    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },\n    weight, dimensions\n  },\n  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },\n  description\n\n  }\n': QueryBookBySlugResult;
+    '\n  *[_type == "book" && author->clerkId == $clerkId] | order(publishedAt desc) {\n    \n  _id,\n  title,\n  slug,\n  status,\n  featured,\n  publishedAt,\n  isbn,\n  pages,\n  language,\n  fictionType,\n  samplePdfUrl,\n  coverImage { asset, alt },\n  coverImageUrl,\n  "author": author-> {\n    _id, name, slug, clerkId, payoutEmail,\n    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,\n    image { asset, alt },\n    bio\n  },\n  "genre": genre[]-> { _id, title, slug },\n  formats[] {\n    _key, formatType, price, compareAtPrice,\n    nameYourPrice, minimumPrice, suggestedPrice,\n    stripePriceId, stripeProductId,\n    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },\n    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },\n    weight, dimensions\n  },\n  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },\n  description\n\n  }\n': QueryBooksByAuthorClerkIdResult;
+    '\n  *[_type == "book" && status in ["published", "out-of-stock"] && $genreSlug in genre[]->slug.current] | order(publishedAt desc) {\n    \n  _id,\n  title,\n  slug,\n  status,\n  featured,\n  publishedAt,\n  isbn,\n  pages,\n  language,\n  fictionType,\n  samplePdfUrl,\n  coverImage { asset, alt },\n  coverImageUrl,\n  "author": author-> {\n    _id, name, slug, clerkId, payoutEmail,\n    "tipStripeProductId": coalesce(tipStripeProductId, tipStripePriceId), tipAmount,\n    image { asset, alt },\n    bio\n  },\n  "genre": genre[]-> { _id, title, slug },\n  formats[] {\n    _key, formatType, price, compareAtPrice,\n    nameYourPrice, minimumPrice, suggestedPrice,\n    stripePriceId, stripeProductId,\n    inventory { trackInventory, quantity, lowStockThreshold, allowBackorder },\n    digitalAsset { supabaseStoragePath, fileSize, fileFormat, version },\n    weight, dimensions\n  },\n  revenueTerms { authorPercentage, publisherPercentage, platformPercentage, description },\n  description\n\n  }\n': QueryBooksByGenreSlugResult;
+    '\n  *[_type == "bookReview" && book->slug.current == $slug && (status == "approved" || (approved == true && !defined(status)))]\n  | order(submittedAt desc) {\n    _id, reviewerName, reviewerLocation, rating, body, submittedAt\n  }\n': QueryApprovedReviewsByBookSlugResult;
+    '\n  *[_type == "article" && defined(slug.current)] {\n    _type,\n    _updatedAt,\n    slug,\n  }': QueryAllArticleUrlsResult;
+    '\n  *[_type == "liveEvent" && defined(slug.current)] {\n    _type,\n    _updatedAt,\n    slug,\n  }': QueryAllLiveEventUrlsResult;
+    '\n  *[_type == "author" && defined(slug.current)] {\n    _type,\n    _updatedAt,\n    slug,\n  }': QueryAuthorsResult;
+    '\n  *[_type == "category" && defined(slug.current)] {\n    _type,\n    _updatedAt,\n    slug,\n  }': QueryAllCategoryUrlsResult;
+    '\n  *[_type == "policies" && defined(slug.current)] {\n    _type,\n    _updatedAt,\n    slug,\n  }': QueryPoliciesResult;
+    '\n  *[_type == "song" && defined(slug.current)] {\n    _type,\n    _updatedAt,\n    slug,\n  }': QuerySongsResult;
+    '\n  *[_type == "musicArtist" && defined(slug.current)] {\n    _type,\n    _updatedAt,\n    slug,\n  }': QueryMusicArtistsResult;
+    '\n  *[_type == "album" && defined(slug.current)] {\n    _type,\n    _updatedAt,\n    slug,\n  }': QueryAlbumsResult;
+    '\n  *[_type == "timeline" && defined(slug.current)] {\n    _type,\n    _updatedAt,\n    slug,\n  }': QueryTimelinesResult;
     '\n    *[_type == "category" && slug.current == $slug][0] {\n      title,\n      description,\n      // Add more fields as needed for metadata\n    }': QueryCategoryMetadataResult;
     '\n    *[_type == "post" && slug.current == $slug][0] {\n      title,\n      mainImage,\n      keywords,\n      description,\n      author->,\n      // Add more fields as needed for metadata\n    }': QueryPostMetadataResult;
   }
