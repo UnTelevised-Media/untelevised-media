@@ -6,24 +6,36 @@ import { createClient } from '@supabase/supabase-js';
 export type Database = {
   public: {
     Tables: {
-      view_events: {
+      view_count: {
         Row: {
           id: number;
           slug: string;
-          ip_hash: string;
+          ip: string | null;
+          ip_hash: string | null;
+          city: string | null;
+          state_province: string | null;
+          country: string | null;
           viewed_at: string;
           created_date: string;
         };
         Insert: {
           slug: string;
-          ip_hash: string;
+          ip?: string | null;
+          ip_hash?: string | null;
+          city?: string | null;
+          state_province?: string | null;
+          country?: string | null;
           viewed_at?: string;
           created_date?: string;
         };
         Update: {
           id?: number;
           slug?: string;
-          ip_hash?: string;
+          ip?: string | null;
+          ip_hash?: string | null;
+          city?: string | null;
+          state_province?: string | null;
+          country?: string | null;
           viewed_at?: string;
           created_date?: string;
         };
