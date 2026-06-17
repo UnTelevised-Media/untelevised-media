@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 'use client';
 
 import { VisualEditing } from 'next-sanity/visual-editing';
