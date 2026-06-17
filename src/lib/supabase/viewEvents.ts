@@ -111,35 +111,30 @@ export async function getTrendingArticles(
   daysBack: number = 7,
   limit: number = 31
 ): Promise<TrendingArticle[]> {
-  try {
-    const client = getServerClient();
+  const client = getServerClient();
 
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - daysBack);
-    const dateStr = startDate.toISOString().split('T')[0];
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - daysBack);
+  const dateStr = startDate.toISOString().split('T')[0];
 
-    console.log(`[getTrendingArticles] Querying from ${dateStr}`);
+  console.log(`[getTrendingArticles] Querying from ${dateStr}`);
 
-    const { data, error } = await (client
-      .from('view_count')
-      .select('slug, viewed_at')
-      .gte('created_date', dateStr) as any);
+  const { data, error } = await (client
+    .from('view_count')
+    .select('slug, viewed_at')
+    .gte('created_date', dateStr) as any);
 
-    if (error) {
-      console.error('[getTrendingArticles] Supabase query error:', {
-        code: error.code,
-        message: error.message,
-        details: error.details,
-        hint: error.hint,
-      });
-      throw error;
-    }
-
-    console.log(`[getTrendingArticles] Found ${data?.length ?? 0} view events`);
-  } catch (error) {
-    console.error('[getTrendingArticles] Exception:', error);
+  if (error) {
+    console.error('[getTrendingArticles] Supabase query error:', {
+      code: error.code,
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+    });
     throw error;
   }
+
+  console.log(`[getTrendingArticles] Found ${data?.length ?? 0} view events`);
 
   // Aggregate view counts by slug
   const counts = new Map<string, { count: number; lastViewed: string }>();
