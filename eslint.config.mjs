@@ -4,6 +4,7 @@ import tsParser from '@typescript-eslint/parser';
 import globals from 'globals';
 import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
+import reactPlugin from 'eslint-plugin-react';
 
 export default [
   // Global ignores
@@ -46,6 +47,12 @@ export default [
     plugins: {
       '@typescript-eslint': typescriptEslint,
       import: importPlugin,
+      react: reactPlugin,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -88,6 +95,13 @@ export default [
       '@typescript-eslint/prefer-optional-chain': 'warn',
       '@typescript-eslint/no-floating-promises': 'off',
       '@typescript-eslint/await-thenable': 'off',
+      'react/function-component-definition': [
+        'error',
+        {
+          namedComponents: 'function-declaration',
+          unnamedComponents: 'arrow-function',
+        },
+      ],
     },
   },
   // Test files configuration
