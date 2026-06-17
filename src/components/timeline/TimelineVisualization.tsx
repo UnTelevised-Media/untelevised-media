@@ -13,6 +13,7 @@ import TimelineFilters from './TimelineFilters';
 import TimelineNavigation from './TimelineNavigation';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
+import type { TimelineEvent, TimelineCategory } from '#/sanity.types';
 
 interface TimelineVisualizationProps {
   events: TimelineEvent[];

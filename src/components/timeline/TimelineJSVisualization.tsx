@@ -54,7 +54,7 @@ interface TimelineJSVisualizationProps {
 }
 
 declare global {
-  interface Window {
+  interface _Window {
     TL?: {
       Timeline: new (
         _containerId: string,

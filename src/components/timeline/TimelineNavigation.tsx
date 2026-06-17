@@ -20,6 +20,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import type { TimelineEvent } from '#/sanity.types';
 
 interface TimelineNavigationProps {
   events: TimelineEvent[];

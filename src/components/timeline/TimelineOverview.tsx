@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 
 import TimelineCard from './TimelineCard';
 import TimelineEventCard from './TimelineEventCard';
+import type { Timeline, TimelineEvent, TimelineCategory } from '#/sanity.types';
 
 interface TimelineOverviewProps {
   featuredTimelines?: Timeline[];

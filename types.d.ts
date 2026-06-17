@@ -232,7 +232,7 @@ interface TimelineCategory extends Base {
   parentCategory?: TimelineCategory;
 }
 
-interface Timeline extends Base {
+interface _Timeline extends Base {
   slug: Slug;
   title: string;
   description: Block[];
@@ -263,17 +263,17 @@ interface Timeline extends Base {
   };
 }
 
-interface MainImage {
+interface _MainImage {
   _type: 'string';
   asset: Reference;
 }
 
-interface Title {
+interface _Title {
   _type: 'string';
   current: string;
 }
 
-interface Comment {
+interface _Comment {
   approved: boolean;
   comment: string;
   email: string;
@@ -289,7 +289,7 @@ interface Comment {
   _updatedAt: string;
 }
 
-interface Policy {
+interface _Policy {
   title: string;
   slug: Slug;
   order: string;
@@ -350,7 +350,7 @@ interface Album extends Base {
   seo?: SeoOverride;
 }
 
-interface Song extends Base {
+interface _Song extends Base {
   slug: Slug;
   title: string;
   primaryArtist: MusicArtist;

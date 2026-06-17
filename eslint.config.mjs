@@ -39,6 +39,7 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        NodeJS: 'readonly',
         React: 'readonly',
       },
     },
@@ -91,7 +92,7 @@ export default [
   },
   // Test files configuration
   {
-    files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
+    files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx', '**/jest.setup.ts'],
     languageOptions: {
       globals: {
         ...globals.jest,

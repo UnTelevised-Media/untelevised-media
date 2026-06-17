@@ -1,5 +1,4 @@
 // src/components/showcase/ArticleShowcase.tsx
-/* eslint-disable react/function-component-definition */
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -10,6 +9,7 @@ import {
 } from '@/components/cards/ArticleCards';
 import ArticleCategoryNav from '@/components/global/ArticleCategoryNav';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import type { Article, Category } from '#/sanity.types';
 
 interface ArticleShowcaseProps {
   articles: Article[];

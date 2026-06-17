@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 // src/util/LiveVisualEditing.tsx
 'use client';
 

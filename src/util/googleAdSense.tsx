@@ -11,7 +11,7 @@ interface GoogleAdSenseProps {
 }
 
 declare global {
-  interface Window {
+  interface _Window {
     adsbygoogle: Record<string, unknown>[];
     adsenseLoaded?: boolean;
     adsenseScriptError?: boolean;

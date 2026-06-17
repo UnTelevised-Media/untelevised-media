@@ -9,6 +9,7 @@ let _transporter: nodemailer.Transporter | null = null;
 
 // Strip leading BOM and surrounding whitespace that PowerShell/Vercel CLI can inject.
 function cleanEnv(key: string): string {
+  // eslint-disable-next-line no-irregular-whitespace
   return (process.env[key] ?? '').replace(/﻿/g, '').trim();
 }
 

@@ -41,12 +41,8 @@ const hashIP = async (ip: string): Promise<string> => {
 
 // Get user's IP (simplified - in production you'd use a service)
 const getUserIP = async (): Promise<string> => {
-  try {
-    // In production, you'd call your backend or a service like ipapi.co
-    return 'client-side-unknown';
-  } catch {
-    return 'unknown';
-  }
+  // In production, you'd call your backend or a service like ipapi.co
+  return 'client-side-unknown';
 };
 
 export const consentStorage = {
@@ -263,7 +259,7 @@ export const privacyStorage = {
 
 // Global gtag type declaration
 declare global {
-  interface Window {
+  interface _Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     gtag?: (..._args: any[]) => void;
   }

@@ -18,9 +18,10 @@ import type { FormatType } from './types';
 
 let _transporter: nodemailer.Transporter | null = null;
 
-// PowerShell echo pipes values with a leading BOM (﻿) and trailing \r\n into the
+// PowerShell echo pipes values with a leading BOM and trailing \r\n into the
 // Vercel CLI, which stores them verbatim. Strip both before use.
 function cleanEnv(key: string): string {
+  // eslint-disable-next-line no-irregular-whitespace
   return (process.env[key] ?? '').replace(/﻿/g, '').trim();
 }
 
