@@ -1,6 +1,6 @@
 // src/components/global/ArticleCategories.tsx
-/* eslint-disable react/function-component-definition */
 
+import type { Category } from '#/sanity.types';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryCategories } from '@/lib/sanity/lib/queries';
 import Link from 'next/link';
