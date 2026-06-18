@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
+import type { TimelineEvent } from '@/lib/sanity/sanity.types';
 import {
   Calendar,
   Clock,
@@ -101,13 +102,13 @@ export default async function TimelineEventPage({ params }: Props) {
                 )}
                 <Badge
                   variant={event.importanceLevel === 'critical' ? 'destructive' : 'secondary'}
-                  className={`capitalize ${getImportanceColor(event.importanceLevel)}`}
+                  className={`capitalize ${getImportanceColor(event.importanceLevel ?? 'medium')}`}
                 >
-                  {event.importanceLevel} Importance
+                  {event.importanceLevel ?? 'Medium'} Importance
                 </Badge>
                 <Badge variant='outline' className='flex items-center gap-1 capitalize'>
-                  {getEventTypeIcon(event.eventType)}
-                  {event.eventType}
+                  {getEventTypeIcon(event.eventType ?? 'other')}
+                  {event.eventType ?? 'Other'}
                 </Badge>
               </div>
 
@@ -120,8 +121,8 @@ export default async function TimelineEventPage({ params }: Props) {
               <div className='flex flex-wrap items-center gap-4 text-slate-600 dark:text-slate-400'>
                 <div className='flex items-center gap-2'>
                   <Calendar className='h-4 w-4' />
-                  <span>{formatDate(event.eventDate)}</span>
-                  {event.endDate && <span> - {formatDate(event.endDate)}</span>}
+                  <span>{event.eventDate ? formatDate(event.eventDate) : 'Date TBD'}</span>
+                  {event.endDate && <span> - {formatDate(event.endDate ?? '')}</span>}
                 </div>
 
                 {event.location && (
@@ -134,7 +135,7 @@ export default async function TimelineEventPage({ params }: Props) {
                 {event.author && (
                   <div className='flex items-center gap-2'>
                     <Users className='h-4 w-4' />
-                    <span>By {event.author.name}</span>
+                    <span>By Author</span>
                   </div>
                 )}
               </div>
@@ -142,21 +143,23 @@ export default async function TimelineEventPage({ params }: Props) {
               {/* Categories */}
               {event.timelineCategories && event.timelineCategories.length > 0 && (
                 <div className='flex flex-wrap gap-2'>
-                  {event.timelineCategories.map((category) => (
-                    <Link key={category._id} href={`/timeline/category/${category.slug.current}`}>
-                      <Badge
-                        variant='outline'
-                        className='hover:bg-slate-100 dark:hover:bg-slate-800'
-                      >
-                        {category.title}
-                      </Badge>
-                    </Link>
+                  {event.timelineCategories.map((category, index) => (
+                    <Badge
+                      key={category._key ?? index}
+                      variant='outline'
+                      className='hover:bg-slate-100 dark:hover:bg-slate-800'
+                    >
+                      Category
+                    </Badge>
                   ))}
                 </div>
               )}
 
               {/* Social Share */}
-              <SocialShare url={`/timeline/event/${event.slug.current}`} title={event.title} />
+              <SocialShare
+                url={`/timeline/event/${event.slug?.current ?? 'timeline'}`}
+                title={event.title ?? 'Event'}
+              />
             </div>
 
             {/* Main Image */}
@@ -164,7 +167,7 @@ export default async function TimelineEventPage({ params }: Props) {
               <div className='relative aspect-video overflow-hidden rounded-lg'>
                 <Image
                   src={urlForImage(event.mainImage)?.url() ?? ''}
-                  alt={event.mainImage.alt ?? event.title}
+                  alt={event.mainImage.alt ?? event.title ?? 'Event'}
                   fill
                   className='object-cover'
                   priority
@@ -265,7 +268,7 @@ export default async function TimelineEventPage({ params }: Props) {
                             </p>
                           )}
                           <p className='mt-1 text-xs text-slate-500 dark:text-slate-500'>
-                            {new URL(link.url).hostname}
+                            {link.url ? new URL(link.url).hostname : 'External Link'}
                           </p>
                         </div>
                       </a>
@@ -354,8 +357,8 @@ export default async function TimelineEventPage({ params }: Props) {
               Related Articles
             </h2>
             <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-              {event.relatedArticles.slice(0, 6).map((article) => (
-                <FeaturedArticleCard key={article._id} article={article} />
+              {event.relatedArticles.slice(0, 6).map((article, index) => (
+                <FeaturedArticleCard key={article._key ?? index} article={article as any} />
               ))}
             </div>
           </div>
@@ -412,7 +415,7 @@ export async function generateStaticParams() {
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: TimelineEvent[] = await sanityClient.fetch(queryTimelineEventStaticParams);
   const slugRoutes = slugs
-    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug?.current ?? '')
     : [];
   return slugRoutes.map((slug) => ({
     slug,

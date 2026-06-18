@@ -1,4 +1,4 @@
-import type { Article, LiveEvent } from '#/sanity.types';
+import type { Article, LiveEvent } from '@/lib/sanity/sanity.types';
 // src/app/(user)/page.tsx - Alternative Version
 import { Suspense } from 'react';
 import Link from 'next/link';
@@ -260,7 +260,7 @@ export default async function HomePage() {
                     <div className='flex flex-1 flex-col p-4'>
                       {article.categories?.[0] && (
                         <span className='mb-2 inline-block bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
-                          {((article.categories[0]) as any)?.title}
+                          {(article.categories[0] as any)?.title}
                         </span>
                       )}
                       <h3 className='mb-2 line-clamp-2 font-bold text-slate-800 group-hover:text-untele dark:text-slate-200'>
@@ -275,7 +275,9 @@ export default async function HomePage() {
                         </p>
                       )}
                       <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
-                        <span className='font-bold uppercase'>{(article.author as any)?.name}</span>
+                        <span className='font-bold uppercase'>
+                          {(article.author as any)?.name}
+                        </span>
                         <div className='flex items-center gap-1'>
                           <span>{formatDate(getArticleDate(article))}</span>
                           <span>· {(article as any).readingTimeMinutes ?? 1} min read</span>
@@ -356,10 +358,10 @@ async function getFrontPageData(): Promise<{
     ]);
 
     return {
-      liveEvents: (liveEvents as any[]) as LiveEvent[] ?? [],
-      articles: (articles as any[]) as Article[] ?? [],
-      breakingArticles: (breakingArticles as any[]) as Article[] ?? [],
-      fieldReports: (fieldReports as any[]) as Article[] ?? [],
+      liveEvents: (liveEvents as any[] as LiveEvent[]) ?? [],
+      articles: (articles as any[] as Article[]) ?? [],
+      breakingArticles: (breakingArticles as any[] as Article[]) ?? [],
+      fieldReports: (fieldReports as any[] as Article[]) ?? [],
       trendingIds: (trendingIds as { _id: string }[]) ?? [],
     };
   } catch (error) {

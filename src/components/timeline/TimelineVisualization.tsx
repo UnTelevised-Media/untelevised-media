@@ -13,7 +13,7 @@ import TimelineFilters from './TimelineFilters';
 import TimelineNavigation from './TimelineNavigation';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
-import type { TimelineEvent, TimelineCategory } from '#/sanity.types';
+import type { TimelineEvent, TimelineCategory } from '@/lib/sanity/sanity.types';
 
 interface TimelineVisualizationProps {
   events: TimelineEvent[];
@@ -180,7 +180,7 @@ function TimelineVisualization({
                       <div className='relative mb-3 h-32 w-full overflow-hidden rounded'>
                         <Image
                           src={urlForImage(event.mainImage)?.url() ?? ''}
-                          alt={event.mainImage.alt ?? (event.title ?? 'Event')}
+                          alt={event.mainImage.alt ?? event.title ?? 'Event'}
                           fill
                           className='object-cover'
                         />
@@ -262,7 +262,7 @@ function TimelineVisualization({
                   <div className='relative h-48 w-full overflow-hidden rounded'>
                     <Image
                       src={urlForImage(selectedEvent.mainImage)?.url() ?? ''}
-                      alt={selectedEvent.mainImage.alt ?? (selectedEvent.title ?? 'Event')}
+                      alt={selectedEvent.mainImage.alt ?? selectedEvent.title ?? 'Event'}
                       fill
                       className='object-cover'
                     />

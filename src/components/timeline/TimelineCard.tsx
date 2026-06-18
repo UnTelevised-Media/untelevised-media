@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
-import type { Timeline } from '#/sanity.types';
+import type { Timeline } from '@/lib/sanity/sanity.types';
 
 interface TimelineCardProps {
   timeline: Timeline;
@@ -74,7 +74,7 @@ function TimelineCard({
           <div className='relative aspect-video overflow-hidden'>
             <Image
               src={urlForImage(timeline.coverImage)?.url() ?? ''}
-              alt={timeline.coverImage.alt ?? (timeline.title ?? 'Timeline')}
+              alt={timeline.coverImage.alt ?? timeline.title ?? 'Timeline'}
               fill
               className='object-cover transition-transform duration-300 group-hover:scale-105'
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'

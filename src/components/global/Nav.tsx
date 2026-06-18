@@ -23,7 +23,7 @@ function toSlug(title: string) {
 
 const SCROLL_SPEED = 6;
 
-const Nav: React.FC<NavProps> = ({ categories }) => {
+function Nav({ categories }: NavProps) {
   const pathname = usePathname();
   const sorted = [...categories].sort((a, b) => Number(a.order ?? 999) - Number(b.order ?? 999));
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -149,6 +149,6 @@ const Nav: React.FC<NavProps> = ({ categories }) => {
       </div>
     </nav>
   );
-};
+}
 
 export default Nav;

@@ -1,5 +1,5 @@
 // src/util/getSongArtwork.ts
-import type { Song } from '#/sanity.types';
+import type { Song } from '@/lib/sanity/sanity.types';
 import urlForImage from './urlForImage';
 
 /**

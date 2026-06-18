@@ -1,4 +1,4 @@
-import type { LiveEvent } from '#/sanity.types';
+import type { LiveEvent } from '@/lib/sanity/sanity.types';
 // src/app/(user)/live-event/[slug]/page.tsx
 import Image from 'next/image';
 import { groq } from 'next-sanity';
@@ -8,7 +8,7 @@ import SocialShare from '@/components/global/SocialShare';
 
 import urlForImage from '@/u/urlForImage';
 import EventMap from '@/components/post/EventMap';
-import { SourcesPanel } from '@/components/post/SourcesPanel';
+import SourcesPanel from '@/components/post/SourcesPanel';
 
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
@@ -34,7 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
     tags: ['liveEvent'],
   });
-  if (!liveEvent) {return { title: 'Breaking News Not Found' };}
+  if (!liveEvent) {
+    return { title: 'Breaking News Not Found' };
+  }
   const base = buildLiveEventMetadata(liveEvent as LiveEvent, slug);
   const canonicalUrl = getCanonicalUrl('breaking', slug);
   return {
@@ -52,7 +54,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LiveEvent({ params }: Props) {
   const { slug } = await params;
   const liveEvent: any = await getEventBySlug(slug);
-  if (!liveEvent) {notFound();}
+  if (!liveEvent) {
+    notFound();
+  }
 
   const allEvents = [
     // Check if liveEvent.relatedArticles is an array. If Truthy map over it and return an array of objects with the source property set to the source of the related article.
@@ -79,7 +83,11 @@ export default async function LiveEvent({ params }: Props) {
       return 0;
     }
     // Compare the eventDate strings directly to determine the order
-    return (a?.eventDate || '') > (b?.eventDate || '') ? -1 : (a?.eventDate || '') < (b?.eventDate || '') ? 1 : 0;
+    return (a?.eventDate || '') > (b?.eventDate || '')
+      ? -1
+      : (a?.eventDate || '') < (b?.eventDate || '')
+        ? 1
+        : 0;
   });
 
   const schemaEventStatusMap: Record<string, string> = {
@@ -179,13 +187,19 @@ export default async function LiveEvent({ params }: Props) {
               {/* Location & Dates */}
               <div className='flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400'>
                 {(liveEvent as any)?.location && <span>ðŸ“ {(liveEvent as any)?.location}</span>}
-                <span>{formatDate((liveEvent as any)?.eventDate || (liveEvent as any)?._createdAt)}</span>
-                {(liveEvent as any)?.endDate && <span>â€“ {formatDate((liveEvent as any)?.endDate)}</span>}
+                <span>
+                  {formatDate((liveEvent as any)?.eventDate || (liveEvent as any)?._createdAt)}
+                </span>
+                {(liveEvent as any)?.endDate && (
+                  <span>â€“ {formatDate((liveEvent as any)?.endDate)}</span>
+                )}
               </div>
             </div>
             {/* Description  */}
             <div className='w-full'>
-              <p className='w-full italic lg:text-xs xl:text-base'>{(liveEvent as any)?.description}</p>
+              <p className='w-full italic lg:text-xs xl:text-base'>
+                {(liveEvent as any)?.description}
+              </p>
             </div>
           </div>
         </section>

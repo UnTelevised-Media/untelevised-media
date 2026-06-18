@@ -9,7 +9,6 @@ import {
 } from '@/components/cards/ArticleCards';
 import ArticleCategoryNav from '@/components/global/ArticleCategoryNav';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import type { Article, Category } from '#/sanity.types';
 
 interface ArticleShowcaseProps {
   articles: any[];

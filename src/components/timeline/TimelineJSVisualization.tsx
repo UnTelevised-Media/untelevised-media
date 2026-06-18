@@ -4,7 +4,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, AlertCircle, ExternalLink } from 'lucide-react';
-import type { Timeline, TimelineEvent } from '#/sanity.types';
+import type { Timeline, TimelineEvent } from '@/lib/sanity/sanity.types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -294,7 +294,7 @@ function TimelineJSVisualization({
         console.log('⚙️ Timeline options:', timelineOptions);
 
         // Convert Sanity data to TimelineJS format
-        const timelineData = convertTimelineToTimelineJS((timeline as any), (events as any));
+        const timelineData = convertTimelineToTimelineJS(timeline as any, events as any);
         console.log('✅ Timeline data converted:', timelineData);
 
         // Test with minimal data if conversion fails

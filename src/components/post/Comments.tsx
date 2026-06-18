@@ -1,7 +1,8 @@
 // src/components/post/Comments.tsx
 'use client';
- 
+
 import { useForm, SubmitHandler } from 'react-hook-form';
+import type { Article } from '@/lib/sanity/sanity.types';
 import sanityClient from '@/lib/sanity/lib/client';
 
 type Props = {

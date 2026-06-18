@@ -1,4 +1,4 @@
-import type { Song, MusicArtist } from '#/sanity.types';
+import type { Song, MusicArtist } from '@/lib/sanity/sanity.types';
 // src/app/(user)/lyrics/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -103,35 +103,42 @@ export default async function LyricsIndexPage() {
                   const artworkUrl = getSongArtwork(song);
                   const artworkAlt = getSongArtworkAlt(song);
 
-                  if (!song.slug?.current) {return null;}
+                  if (!song.slug?.current) {
+                    return null;
+                  }
                   return (
-                      <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
-                        <div className='group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
-                          {artworkUrl && (
-                            <div className='aspect-square overflow-hidden'>
-                              <Image
-                                src={artworkUrl}
-                                alt={artworkAlt}
-                                width={300}
-                                height={300}
-                                className='h-full w-full object-cover transition-transform group-hover:scale-105'
-                              />
-                            </div>
-                          )}
-                          <div className='p-6'>
-                            <h3 className='mb-2 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                              {song.title}
-                            </h3>
-                            <p className='mb-3 text-slate-600 dark:text-slate-400'>
-                              by {(song.primaryArtist as any)?.stageName ?? (song.primaryArtist as any)?.name ?? 'Unknown Artist'}
-                              {song.featuredArtists && song.featuredArtists.length > 0 && (
-                                <span>
-                                  {' '}
-                                  feat.{' '}
-                                  {((song as any)?.featuredArtists ?? []).map((a: any) => (a as any)?.stageName ?? (a as any)?.name).join(', ')}
-                                </span>
-                              )}
-                            </p>
+                    <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
+                      <div className='group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
+                        {artworkUrl && (
+                          <div className='aspect-square overflow-hidden'>
+                            <Image
+                              src={artworkUrl}
+                              alt={artworkAlt}
+                              width={300}
+                              height={300}
+                              className='h-full w-full object-cover transition-transform group-hover:scale-105'
+                            />
+                          </div>
+                        )}
+                        <div className='p-6'>
+                          <h3 className='mb-2 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                            {song.title}
+                          </h3>
+                          <p className='mb-3 text-slate-600 dark:text-slate-400'>
+                            by{' '}
+                            {(song.primaryArtist as any)?.stageName ??
+                              (song.primaryArtist as any)?.name ??
+                              'Unknown Artist'}
+                            {song.featuredArtists && song.featuredArtists.length > 0 && (
+                              <span>
+                                {' '}
+                                feat.{' '}
+                                {((song as any)?.featuredArtists ?? [])
+                                  .map((a: any) => (a as any)?.stageName ?? (a as any)?.name)
+                                  .join(', ')}
+                              </span>
+                            )}
+                          </p>
                           <div className='flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400'>
                             {song.album && <span>{(song.album as any)?.title}</span>}
                             {song.releaseDate && (
@@ -141,17 +148,17 @@ export default async function LyricsIndexPage() {
                               </>
                             )}
                           </div>
-                            {song.isExplicit && (
-                              <div className='mt-3'>
-                                <span className='rounded bg-slate-200 px-2 py-1 text-xs font-medium text-slate-700 dark:bg-slate-700 dark:text-slate-300'>
-                                  Explicit
-                                </span>
-                              </div>
-                            )}
-                          </div>
+                          {song.isExplicit && (
+                            <div className='mt-3'>
+                              <span className='rounded bg-slate-200 px-2 py-1 text-xs font-medium text-slate-700 dark:bg-slate-700 dark:text-slate-300'>
+                                Explicit
+                              </span>
+                            </div>
+                          )}
                         </div>
-                      </ClientSideRoute>
-                    );
+                      </div>
+                    </ClientSideRoute>
+                  );
                 })}
               </div>
             </section>
@@ -173,40 +180,42 @@ export default async function LyricsIndexPage() {
 
               <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
                 {featuredArtists.map((artist) => {
-                  if (!artist?.slug?.current) {return null;}
+                  if (!artist?.slug?.current) {
+                    return null;
+                  }
                   return (
                     <ClientSideRoute
                       key={artist._id}
                       route={`/music-artists/${artist.slug.current}`}
                     >
-                    <div className='group cursor-pointer text-center'>
-                      <div className='mb-4 overflow-hidden rounded-full'>
-                        {artist.image ? (
-                          <Image
-                            src={urlForImage(artist.image)?.url() ?? ''}
-                            alt={artist.name ?? 'Artist'}
-                            width={200}
-                            height={200}
-                            className='h-48 w-48 object-cover transition-transform group-hover:scale-105'
-                          />
-                        ) : (
-                          <div className='flex h-48 w-48 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700'>
-                            <Users className='h-16 w-16 text-slate-400' />
-                          </div>
+                      <div className='group cursor-pointer text-center'>
+                        <div className='mb-4 overflow-hidden rounded-full'>
+                          {artist.image ? (
+                            <Image
+                              src={urlForImage(artist.image)?.url() ?? ''}
+                              alt={artist.name ?? 'Artist'}
+                              width={200}
+                              height={200}
+                              className='h-48 w-48 object-cover transition-transform group-hover:scale-105'
+                            />
+                          ) : (
+                            <div className='flex h-48 w-48 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700'>
+                              <Users className='h-16 w-16 text-slate-400' />
+                            </div>
+                          )}
+                        </div>
+                        <h3 className='mb-2 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                          {artist.stageName ?? artist.name}
+                        </h3>
+                        <p className='mb-2 text-sm text-slate-600 dark:text-slate-400'>
+                          {artist.genres?.slice(0, 2).join(', ')}
+                        </p>
+                        {artist.songCount !== undefined && (
+                          <p className='text-xs text-slate-500 dark:text-slate-400'>
+                            {artist.songCount} song{artist.songCount !== 1 ? 's' : ''}
+                          </p>
                         )}
                       </div>
-                      <h3 className='mb-2 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                        {artist.stageName ?? artist.name}
-                      </h3>
-                      <p className='mb-2 text-sm text-slate-600 dark:text-slate-400'>
-                        {artist.genres?.slice(0, 2).join(', ')}
-                      </p>
-                      {artist.songCount !== undefined && (
-                        <p className='text-xs text-slate-500 dark:text-slate-400'>
-                          {artist.songCount} song{artist.songCount !== 1 ? 's' : ''}
-                        </p>
-                      )}
-                    </div>
                     </ClientSideRoute>
                   );
                 })}
@@ -234,67 +243,71 @@ export default async function LyricsIndexPage() {
                     const artworkUrl = getSongArtwork(song);
                     const artworkAlt = getSongArtworkAlt(song);
 
-                    if (!song.slug?.current) {return null;}
+                    if (!song.slug?.current) {
+                      return null;
+                    }
                     return (
-                        <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
-                          <div className='group flex cursor-pointer items-center gap-4 p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700'>
-                            <div className='flex h-8 w-8 items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400'>
-                              {index + 1}
+                      <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
+                        <div className='group flex cursor-pointer items-center gap-4 p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700'>
+                          <div className='flex h-8 w-8 items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400'>
+                            {index + 1}
+                          </div>
+
+                          {artworkUrl && (
+                            <div className='h-16 w-16 overflow-hidden rounded-lg'>
+                              <Image
+                                src={artworkUrl}
+                                alt={artworkAlt}
+                                width={64}
+                                height={64}
+                                className='h-full w-full object-cover'
+                              />
                             </div>
+                          )}
 
-                            {artworkUrl && (
-                              <div className='h-16 w-16 overflow-hidden rounded-lg'>
-                                <Image
-                                  src={artworkUrl}
-                                  alt={artworkAlt}
-                                  width={64}
-                                  height={64}
-                                  className='h-full w-full object-cover'
-                                />
-                              </div>
-                            )}
-
-                            <div className='flex-1'>
-                              <h3 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                                {song.title}
-                              </h3>
-                              <p className='text-sm text-slate-600 dark:text-slate-400'>
-                                {(song.primaryArtist as any)?.stageName ?? (song.primaryArtist as any)?.name ?? 'Unknown Artist'}
-                                {song.featuredArtists && song.featuredArtists.length > 0 && (
-                                  <span>
-                                    {' '}
-                                    feat.{' '}
-                                    {song.featuredArtists
-                                      .map((a: any) => (a as any)?.stageName ?? (a as any)?.name)
-                                      .join(', ')}
-                                  </span>
-                                )}
+                          <div className='flex-1'>
+                            <h3 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                              {song.title}
+                            </h3>
+                            <p className='text-sm text-slate-600 dark:text-slate-400'>
+                              {(song.primaryArtist as any)?.stageName ??
+                                (song.primaryArtist as any)?.name ??
+                                'Unknown Artist'}
+                              {song.featuredArtists && song.featuredArtists.length > 0 && (
+                                <span>
+                                  {' '}
+                                  feat.{' '}
+                                  {song.featuredArtists
+                                    .map((a: any) => (a as any)?.stageName ?? (a as any)?.name)
+                                    .join(', ')}
+                                </span>
+                              )}
+                            </p>
+                            {song.album && (
+                              <p className='text-xs text-slate-500 dark:text-slate-400'>
+                                {(song.album as any)?.title}
                               </p>
-                              {song.album && (
-                                <p className='text-xs text-slate-500 dark:text-slate-400'>
-                                  {(song.album as any)?.title}
-                                </p>
-                              )}
-                            </div>
+                            )}
+                          </div>
 
-                            <div className='text-right text-sm text-slate-500 dark:text-slate-400'>
-                              {song.releaseDate && (
-                                <div className='flex items-center gap-1'>
-                                  <Clock className='h-4 w-4' />
-                                  <span>{formatDate(song.releaseDate)}</span>
-                                </div>
-                              )}
-                            </div>
-
-                            {song.isExplicit && (
-                              <div className='rounded bg-slate-200 px-2 py-1 text-xs font-medium text-slate-700 dark:bg-slate-700 dark:text-slate-300'>
-                                E
+                          <div className='text-right text-sm text-slate-500 dark:text-slate-400'>
+                            {song.releaseDate && (
+                              <div className='flex items-center gap-1'>
+                                <Clock className='h-4 w-4' />
+                                <span>{formatDate(song.releaseDate)}</span>
                               </div>
                             )}
                           </div>
-                        </ClientSideRoute>
-                      );
-                    })}
+
+                          {song.isExplicit && (
+                            <div className='rounded bg-slate-200 px-2 py-1 text-xs font-medium text-slate-700 dark:bg-slate-700 dark:text-slate-300'>
+                              E
+                            </div>
+                          )}
+                        </div>
+                      </ClientSideRoute>
+                    );
+                  })}
                 </div>
               </div>
             </section>

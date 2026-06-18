@@ -14,6 +14,16 @@ import {
   Newspaper,
 } from 'lucide-react';
 
+interface ArticleSource {
+  _key?: string;
+  _id?: string;
+  type?: string;
+  label?: string;
+  url?: string;
+  description?: string;
+  isAnonymous?: boolean;
+}
+
 const SOURCE_CONFIG: Record<string, { label: string; Icon: React.ElementType }> = {
   document: { label: 'Document', Icon: FileText },
   interview: { label: 'Interview', Icon: Mic },
@@ -30,7 +40,7 @@ interface SourcesPanelProps {
   methodology?: string;
 }
 
-export function SourcesPanel({ sources, methodology }: SourcesPanelProps) {
+export default function SourcesPanel({ sources, methodology }: SourcesPanelProps) {
   const hasSources = sources && sources.length > 0;
   if (!hasSources && !methodology) {return null;}
 

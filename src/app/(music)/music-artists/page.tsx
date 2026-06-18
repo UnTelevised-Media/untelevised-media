@@ -1,4 +1,4 @@
-import type { MusicArtist } from '#/sanity.types';
+import type { MusicArtist } from '@/lib/sanity/sanity.types';
 // src/app/(user)/music-artists/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -98,68 +98,70 @@ export default async function MusicArtistsPage() {
 
               <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                 {featuredArtists.map((artist) => {
-                  if (!artist?.slug?.current) {return null;}
+                  if (!artist?.slug?.current) {
+                    return null;
+                  }
                   return (
                     <ClientSideRoute
                       key={artist._id}
                       route={`/music-artists/${artist.slug.current}`}
                     >
-                    <div className='group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
-                      <div className='aspect-square overflow-hidden'>
-                        {artist.image ? (
-                          <Image
-                            src={urlForImage(artist.image)?.url() ?? ''}
-                            alt={artist.name ?? 'Artist'}
-                            width={300}
-                            height={300}
-                            className='h-full w-full object-cover transition-transform group-hover:scale-105'
-                          />
-                        ) : (
-                          <div className='flex h-full w-full items-center justify-center bg-slate-200 dark:bg-slate-700'>
-                            <Users className='h-16 w-16 text-slate-400' />
-                          </div>
-                        )}
-                      </div>
-                      <div className='p-6'>
-                        <div className='mb-2 flex items-center gap-2'>
-                          <Star className='h-4 w-4 text-yellow-500' />
-                          <span className='text-xs font-medium text-yellow-600 dark:text-yellow-400'>
-                            FEATURED
-                          </span>
-                        </div>
-                        <h3 className='mb-2 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                          {artist.stageName ?? artist.name}
-                        </h3>
-                        {artist.stageName && artist.name !== artist.stageName && (
-                          <p className='mb-2 text-sm text-slate-500 dark:text-slate-400'>
-                            {artist.name}
-                          </p>
-                        )}
-                        <div className='mb-3 flex flex-wrap gap-1'>
-                          {artist.genres?.slice(0, 2).map((genre) => (
-                            <span
-                              key={genre}
-                              className='rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600 dark:bg-slate-700 dark:text-slate-300'
-                            >
-                              {genre}
-                            </span>
-                          ))}
-                        </div>
-                        <div className='flex items-center justify-between text-sm text-slate-500 dark:text-slate-400'>
-                          {artist.hometown && (
-                            <div className='flex items-center gap-1'>
-                              <MapPin className='h-3 w-3' />
-                              <span>{artist.hometown}</span>
+                      <div className='group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
+                        <div className='aspect-square overflow-hidden'>
+                          {artist.image ? (
+                            <Image
+                              src={urlForImage(artist.image)?.url() ?? ''}
+                              alt={artist.name ?? 'Artist'}
+                              width={300}
+                              height={300}
+                              className='h-full w-full object-cover transition-transform group-hover:scale-105'
+                            />
+                          ) : (
+                            <div className='flex h-full w-full items-center justify-center bg-slate-200 dark:bg-slate-700'>
+                              <Users className='h-16 w-16 text-slate-400' />
                             </div>
                           )}
-                          {artist.songCount !== undefined && (
-                            <span>
-                              {artist.songCount} song{artist.songCount !== 1 ? 's' : ''}
+                        </div>
+                        <div className='p-6'>
+                          <div className='mb-2 flex items-center gap-2'>
+                            <Star className='h-4 w-4 text-yellow-500' />
+                            <span className='text-xs font-medium text-yellow-600 dark:text-yellow-400'>
+                              FEATURED
                             </span>
+                          </div>
+                          <h3 className='mb-2 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                            {artist.stageName ?? artist.name}
+                          </h3>
+                          {artist.stageName && artist.name !== artist.stageName && (
+                            <p className='mb-2 text-sm text-slate-500 dark:text-slate-400'>
+                              {artist.name}
+                            </p>
                           )}
+                          <div className='mb-3 flex flex-wrap gap-1'>
+                            {artist.genres?.slice(0, 2).map((genre) => (
+                              <span
+                                key={genre}
+                                className='rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600 dark:bg-slate-700 dark:text-slate-300'
+                              >
+                                {genre}
+                              </span>
+                            ))}
+                          </div>
+                          <div className='flex items-center justify-between text-sm text-slate-500 dark:text-slate-400'>
+                            {artist.hometown && (
+                              <div className='flex items-center gap-1'>
+                                <MapPin className='h-3 w-3' />
+                                <span>{artist.hometown}</span>
+                              </div>
+                            )}
+                            {artist.songCount !== undefined && (
+                              <span>
+                                {artist.songCount} song{artist.songCount !== 1 ? 's' : ''}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
                     </ClientSideRoute>
                   );
                 })}
@@ -181,58 +183,60 @@ export default async function MusicArtistsPage() {
 
               <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                 {otherArtists.map((artist) => {
-                  if (!artist?.slug?.current) {return null;}
+                  if (!artist?.slug?.current) {
+                    return null;
+                  }
                   return (
                     <ClientSideRoute
                       key={artist._id}
                       route={`/music-artists/${artist.slug.current}`}
                     >
-                    <div className='group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
-                      <div className='aspect-square overflow-hidden'>
-                        {artist.image ? (
-                          <Image
-                            src={urlForImage(artist.image)?.url() ?? ''}
-                            alt={artist.name ?? 'Artist'}
-                            width={250}
-                            height={250}
-                            className='h-full w-full object-cover transition-transform group-hover:scale-105'
-                          />
-                        ) : (
-                          <div className='flex h-full w-full items-center justify-center bg-slate-200 dark:bg-slate-700'>
-                            <Users className='h-12 w-12 text-slate-400' />
-                          </div>
-                        )}
-                      </div>
-                      <div className='p-4'>
-                        <h3 className='mb-1 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                          {artist.stageName ?? artist.name}
-                        </h3>
-                        {artist.stageName && artist.name !== artist.stageName && (
-                          <p className='mb-2 text-sm text-slate-500 dark:text-slate-400'>
-                            {artist.name}
-                          </p>
-                        )}
-                        <div className='mb-2 flex flex-wrap gap-1'>
-                          {artist.genres?.slice(0, 2).map((genre) => (
-                            <span
-                              key={genre}
-                              className='rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600 dark:bg-slate-700 dark:text-slate-300'
-                            >
-                              {genre}
-                            </span>
-                          ))}
-                        </div>
-                        <div className='flex items-center justify-between text-sm text-slate-500 dark:text-slate-400'>
-                          {artist.hometown && (
-                            <div className='flex items-center gap-1'>
-                              <MapPin className='h-3 w-3' />
-                              <span className='truncate'>{artist.hometown}</span>
+                      <div className='group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
+                        <div className='aspect-square overflow-hidden'>
+                          {artist.image ? (
+                            <Image
+                              src={urlForImage(artist.image)?.url() ?? ''}
+                              alt={artist.name ?? 'Artist'}
+                              width={250}
+                              height={250}
+                              className='h-full w-full object-cover transition-transform group-hover:scale-105'
+                            />
+                          ) : (
+                            <div className='flex h-full w-full items-center justify-center bg-slate-200 dark:bg-slate-700'>
+                              <Users className='h-12 w-12 text-slate-400' />
                             </div>
                           )}
-                          {artist.debutYear && <span>Since {artist.debutYear}</span>}
+                        </div>
+                        <div className='p-4'>
+                          <h3 className='mb-1 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                            {artist.stageName ?? artist.name}
+                          </h3>
+                          {artist.stageName && artist.name !== artist.stageName && (
+                            <p className='mb-2 text-sm text-slate-500 dark:text-slate-400'>
+                              {artist.name}
+                            </p>
+                          )}
+                          <div className='mb-2 flex flex-wrap gap-1'>
+                            {artist.genres?.slice(0, 2).map((genre) => (
+                              <span
+                                key={genre}
+                                className='rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600 dark:bg-slate-700 dark:text-slate-300'
+                              >
+                                {genre}
+                              </span>
+                            ))}
+                          </div>
+                          <div className='flex items-center justify-between text-sm text-slate-500 dark:text-slate-400'>
+                            {artist.hometown && (
+                              <div className='flex items-center gap-1'>
+                                <MapPin className='h-3 w-3' />
+                                <span className='truncate'>{artist.hometown}</span>
+                              </div>
+                            )}
+                            {artist.debutYear && <span>Since {artist.debutYear}</span>}
+                          </div>
                         </div>
                       </div>
-                    </div>
                     </ClientSideRoute>
                   );
                 })}

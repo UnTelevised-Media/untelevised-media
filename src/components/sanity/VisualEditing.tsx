@@ -3,8 +3,8 @@
 
 import { VisualEditing } from 'next-sanity/visual-editing';
 
-const SanityVisualEditing: React.FC = () => {
+function SanityVisualEditing() {
   return <VisualEditing />;
-};
+}
 
 export default SanityVisualEditing;

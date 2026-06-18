@@ -2,7 +2,7 @@
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryPastEventsWithPagination } from '@/lib/sanity/lib/queries';
-import type { LiveEvent } from '#/sanity.types';
+import type { LiveEvent } from '@/lib/sanity/sanity.types';
 
 export async function loadMorePastEvents(
   start: number = 0,

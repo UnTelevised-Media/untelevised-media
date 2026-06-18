@@ -8,7 +8,7 @@ interface DraftModeBannerProps {
   isEnabled: boolean;
 }
 
-const DraftModeBanner: React.FC<DraftModeBannerProps> = ({ isEnabled }) => {
+function DraftModeBanner({ isEnabled }: DraftModeBannerProps) {
   if (!isEnabled) {
     return null;
   }
@@ -45,6 +45,6 @@ const DraftModeBanner: React.FC<DraftModeBannerProps> = ({ isEnabled }) => {
       </div>
     </div>
   );
-};
+}
 
 export default DraftModeBanner;

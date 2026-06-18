@@ -5,11 +5,11 @@
 declare global {
   interface Window {
     // Google Analytics
-    gtag?: (command: string, ...args: any[]) => void;
+    gtag?: (_command: string, ..._args: any[]) => void;
 
     // TimelineJS
     TL?: {
-      Timeline: new (id: string, data: any, options?: any) => any;
+      Timeline: new (_id: string, _data: any, _options?: any) => any;
     };
 
     // Google AdSense
@@ -19,6 +19,6 @@ declare global {
 }
 
 // Google AdSense global variable
-declare let adsbygoogle: Record<string, unknown>[];
+declare let _adsbygoogle: Record<string, unknown>[];
 
 export {};

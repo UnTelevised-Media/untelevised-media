@@ -1,7 +1,7 @@
 // src/app/(user)/staff/page.tsx
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import type { Author } from '#/sanity.types';
+import type { Author } from '@/lib/sanity/sanity.types';
 import urlForImage from '@/util/urlForImage';
 
 export const metadata: Metadata = {
@@ -127,7 +127,7 @@ async function getAllStaff(): Promise<Author[]> {
       query: queryAllAuthors,
       tags: ['author'],
     });
-    return (staff as any[]) as Author[];
+    return staff as any[] as Author[];
   } catch (error) {
     console.error('Failed to fetch author:', error);
     return [];

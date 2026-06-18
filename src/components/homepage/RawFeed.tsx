@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Article } from '@/lib/sanity/sanity.types';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
@@ -14,7 +15,7 @@ interface RawFeedProps {
 
 const ARTICLES_PER_PAGE = 12;
 
-const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
+function RawFeed({ articles }: RawFeedProps) {
   const [visibleCount, setVisibleCount] = useState(ARTICLES_PER_PAGE);
 
   const visibleArticles = articles.slice(0, visibleCount);
@@ -38,7 +39,7 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
           {visibleArticles.map((article, index) => (
             <React.Fragment key={article._id}>
               <Link
-                href={`/articles/${article.slug?.current}`}
+                href={`/articles/${article.slug?.current ?? '#'}`}
                 className='group flex border-l-4 border-slate-300 bg-slate-50 p-4 transition-all hover:border-untele hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:hover:bg-slate-900'
               >
                 <div className='flex-shrink-0'>
@@ -48,7 +49,7 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         urlForImage(article.mainImage as any)?.url() ?? ''
                       }
-                      alt={article.title}
+                      alt={article.title ?? 'Article'}
                       fill
                       className='object-cover transition-transform group-hover:scale-105'
                     />
@@ -56,7 +57,7 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
                 </div>
                 <div className='ml-4 flex-1'>
                   <div className='flex items-center space-x-2 text-xs text-slate-600 dark:text-slate-500'>
-                    <span className='font-black uppercase'>{article.author?.name}</span>
+                    <span className='font-black uppercase'>Author</span>
                     <span>•</span>
                     <span>{formatDate(getArticleDate(article))}</span>
                     <>
@@ -66,9 +67,7 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
                     {article.categories?.[0] && (
                       <>
                         <span>•</span>
-                        <span className='font-black uppercase text-untele'>
-                          {article.categories[0].title}
-                        </span>
+                        <span className='font-black uppercase text-untele'>Category</span>
                       </>
                     )}
                   </div>
@@ -117,6 +116,6 @@ const RawFeed: React.FC<RawFeedProps> = ({ articles }) => {
       </div>
     </section>
   );
-};
+}
 
 export default RawFeed;

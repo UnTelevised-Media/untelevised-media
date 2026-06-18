@@ -1,42 +1,20 @@
-'use client';
-
 /**
- * This configuration is used to for the Sanity Studio that's mounted on the `\src\app\studio\[[...tool]]\page.tsx` route
+ * Root-level Sanity config used exclusively by the Sanity CLI for
+ * schema extraction and TypeGen (`pnpm sanity typegen generate`).
+ *
+ * The live studio config lives at src/lib/sanity/sanity.config.ts and
+ * is mounted in Next.js via src/app/studio/[[...tool]]/page.tsx.
+ * This file is a minimal duplicate to satisfy the CLI's project-root lookup.
  */
-
 import { colorInput } from '@sanity/color-input';
-import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
-import { structureTool } from 'sanity/structure';
-import { presentationTool } from 'sanity/presentation';
-
-// Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import { apiVersion, dataset, projectId } from './env';
-import { schemaTypes } from '@/models/schema/index'; // Changed from schemaTypes.d.ts to schemas/index.ts
-
-import structure from './structure';
-import { generatePreviewUrl } from '@/components/sanity/PreviewLink';
+import { schemaTypes } from '../../models/schema/index';
 
 export default defineConfig({
-  basePath: '/studio',
-  projectId,
-  dataset,
-  // Add and edit the content schema in the './sanity/schemaTypes' folder
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? '',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
   schema: {
-    types: schemaTypes, // Use schemaTypes array
+    types: schemaTypes,
   },
-  plugins: [
-    colorInput(),
-    structureTool({ structure }),
-    // Presentation tool for live preview
-    presentationTool({
-      previewUrl: generatePreviewUrl,
-      name: 'preview',
-      title: 'Preview',
-      icon: () => '👁️',
-    }),
-    // Vision is for querying with GROQ from inside the Studio
-    // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({ defaultApiVersion: apiVersion }),
-  ],
+  plugins: [colorInput()],
 });

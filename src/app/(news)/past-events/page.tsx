@@ -1,5 +1,5 @@
 import React from 'react';
-import type { LiveEvent } from '#/sanity.types';
+import type { LiveEvent } from '@/lib/sanity/sanity.types';
 import { Metadata } from 'next';
 import PastEventsPage from '@/components/pages/PastEventsPage';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';

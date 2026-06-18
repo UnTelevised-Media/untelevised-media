@@ -1,4 +1,4 @@
-import type { Album, Song } from '#/sanity.types';
+import type { Album, Song } from '@/lib/sanity/sanity.types';
 // src/app/(user)/albums/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -40,7 +40,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const artistNames = [
     (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
-    ...(album.featuredArtists?.map((artist) => (artist as any)?.stageName ?? (artist as any)?.name) ?? []),
+    ...(album.featuredArtists?.map(
+      (artist) => (artist as any)?.stageName ?? (artist as any)?.name
+    ) ?? []),
   ].join(', ');
 
   const canonicalUrl = album.seo?.canonicalUrl ?? `https://www.untelevised.media/albums/${slug}/`;
@@ -79,22 +81,30 @@ export default async function AlbumPage({ params }: Props) {
   const { slug } = await params;
   const album: AlbumWithSongs = (await getAlbumBySlug(slug)) as AlbumWithSongs;
 
-  if (!album) {notFound();}
+  if (!album) {
+    notFound();
+  }
 
   const artistNames = [
     (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
-    ...(album.featuredArtists?.map((artist) => (artist as any)?.stageName ?? (artist as any)?.name) ?? []),
+    ...(album.featuredArtists?.map(
+      (artist) => (artist as any)?.stageName ?? (artist as any)?.name
+    ) ?? []),
   ].join(', ');
 
   const musicAlbumSchema = {
     '@context': 'https://schema.org',
     '@type': 'MusicAlbum',
     name: album.title,
-    byArtist: album.artist ? {
-      '@type': 'MusicGroup',
-      name: (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown',
-      url: (album.artist as any)?.slug?.current ? `https://www.untelevised.media/music-artists/${(album.artist as any).slug.current}/` : undefined,
-    } : undefined,
+    byArtist: album.artist
+      ? {
+          '@type': 'MusicGroup',
+          name: (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown',
+          url: (album.artist as any)?.slug?.current
+            ? `https://www.untelevised.media/music-artists/${(album.artist as any).slug.current}/`
+            : undefined,
+        }
+      : undefined,
     numTracks: album.totalTracks ?? undefined,
     datePublished: album.releaseDate ?? undefined,
     genre: album.genres ?? [],
@@ -131,7 +141,9 @@ export default async function AlbumPage({ params }: Props) {
               <div className='max-w-4xl'>
                 <div className='mb-4 flex items-center gap-2 text-white/80'>
                   <Disc className='h-5 w-5' />
-                  <span className='text-sm font-medium'>{album.albumType?.toUpperCase() ?? 'ALBUM'}</span>
+                  <span className='text-sm font-medium'>
+                    {album.albumType?.toUpperCase() ?? 'ALBUM'}
+                  </span>
                 </div>
                 <h1 className='mb-4 text-4xl font-bold text-white md:text-6xl'>{album.title}</h1>
                 <p className='mb-6 text-xl text-white/90 md:text-2xl'>by {artistNames}</p>
@@ -220,7 +232,10 @@ export default async function AlbumPage({ params }: Props) {
                   </h2>
                   <div className='space-y-2'>
                     {album.songs.map((song, index) => (
-                      <ClientSideRoute key={song._id} route={`/lyrics/${song.slug?.current ?? ''}`}>
+                      <ClientSideRoute
+                        key={song._id}
+                        route={`/lyrics/${song.slug?.current ?? ''}`}
+                      >
                         <div className='group flex cursor-pointer items-center gap-4 rounded-lg p-3 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700'>
                           <div className='flex h-8 w-8 items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400'>
                             {song.trackNumber ?? index + 1}
@@ -232,7 +247,9 @@ export default async function AlbumPage({ params }: Props) {
                             {song.featuredArtists && song.featuredArtists.length > 0 && (
                               <p className='text-sm text-slate-600 dark:text-slate-400'>
                                 feat.{' '}
-                                {song.featuredArtists?.map((a) => (a as any)?.stageName ?? (a as any)?.name).join(', ') ?? ''}
+                                {song.featuredArtists
+                                  ?.map((a) => (a as any)?.stageName ?? (a as any)?.name)
+                                  .join(', ') ?? ''}
                               </p>
                             )}
                           </div>
@@ -367,7 +384,9 @@ export default async function AlbumPage({ params }: Props) {
                 </h3>
                 <div className='space-y-4'>
                   {(album.artist as any)?.slug?.current && (
-                    <ClientSideRoute route={`/music-artists/${(album.artist as any).slug.current}`}>
+                    <ClientSideRoute
+                      route={`/music-artists/${(album.artist as any).slug.current}`}
+                    >
                       <div className='group flex cursor-pointer items-center gap-3'>
                         {(album.artist as any)?.image && (
                           <div className='h-12 w-12 overflow-hidden rounded-full'>
@@ -392,34 +411,37 @@ export default async function AlbumPage({ params }: Props) {
                     </ClientSideRoute>
                   )}
 
-                  {album.featuredArtists?.map((artist) => (
-                    (artist as any)?.slug?.current && (
-                      <ClientSideRoute
-                        key={(artist as any)._id}
-                        route={`/music-artists/${(artist as any).slug.current}`}
-                      >
-                        <div className='group flex cursor-pointer items-center gap-3'>
-                          {(artist as any)?.image && (
-                            <div className='h-12 w-12 overflow-hidden rounded-full'>
-                              <Image
-                                src={urlForImage((artist as any)?.image)?.url() ?? ''}
-                                alt={(artist as any)?.name ?? 'Artist'}
-                                width={48}
-                                height={48}
-                                className='h-full w-full object-cover'
-                              />
+                  {album.featuredArtists?.map(
+                    (artist) =>
+                      (artist as any)?.slug?.current && (
+                        <ClientSideRoute
+                          key={(artist as any)._id}
+                          route={`/music-artists/${(artist as any).slug.current}`}
+                        >
+                          <div className='group flex cursor-pointer items-center gap-3'>
+                            {(artist as any)?.image && (
+                              <div className='h-12 w-12 overflow-hidden rounded-full'>
+                                <Image
+                                  src={urlForImage((artist as any)?.image)?.url() ?? ''}
+                                  alt={(artist as any)?.name ?? 'Artist'}
+                                  width={48}
+                                  height={48}
+                                  className='h-full w-full object-cover'
+                                />
+                              </div>
+                            )}
+                            <div>
+                              <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                                {(artist as any)?.stageName ?? (artist as any)?.name}
+                              </h4>
+                              <p className='text-sm text-slate-600 dark:text-slate-400'>
+                                Featured
+                              </p>
                             </div>
-                          )}
-                          <div>
-                            <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                              {(artist as any)?.stageName ?? (artist as any)?.name}
-                            </h4>
-                            <p className='text-sm text-slate-600 dark:text-slate-400'>Featured</p>
                           </div>
-                        </div>
-                      </ClientSideRoute>
-                    )
-                  ))}
+                        </ClientSideRoute>
+                      )
+                  )}
                 </div>
               </div>
 

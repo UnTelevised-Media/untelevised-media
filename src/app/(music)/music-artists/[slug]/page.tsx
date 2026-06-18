@@ -1,4 +1,4 @@
-import type { MusicArtist, Song, Album } from '#/sanity.types';
+import type { MusicArtist, Song, Album } from '@/lib/sanity/sanity.types';
 // src/app/(user)/music-artists/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -93,7 +93,9 @@ export default async function MusicArtistPage({ params }: Props) {
   const { slug } = await params;
   const artist: ArtistWithContent = (await getMusicArtistBySlug(slug)) as ArtistWithContent;
 
-  if (!artist) {notFound();}
+  if (!artist) {
+    notFound();
+  }
 
   const displayName = artist.stageName ?? artist.name;
 
@@ -279,7 +281,9 @@ export default async function MusicArtistPage({ params }: Props) {
                                   {song.title}
                                 </h3>
                                 <div className='flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400'>
-                                  {(song.album as any)?.title && <span>{(song.album as any).title}</span>}
+                                  {(song.album as any)?.title && (
+                                    <span>{(song.album as any).title}</span>
+                                  )}
                                   {song.releaseDate && (
                                     <>
                                       <span>•</span>
@@ -297,7 +301,9 @@ export default async function MusicArtistPage({ params }: Props) {
                               {song.featuredArtists && song.featuredArtists.length > 0 && (
                                 <div className='text-sm text-slate-600 dark:text-slate-400'>
                                   feat.{' '}
-                                  {song.featuredArtists.map((a: any) => (a as any)?.stageName ?? (a as any)?.name).join(', ')}
+                                  {song.featuredArtists
+                                    .map((a: any) => (a as any)?.stageName ?? (a as any)?.name)
+                                    .join(', ')}
                                 </div>
                               )}
                             </div>
@@ -324,32 +330,33 @@ export default async function MusicArtistPage({ params }: Props) {
                     Albums
                   </h2>
                   <div className='grid gap-6 sm:grid-cols-2'>
-                    {(artist as any)?.albums?.map((album: any) => (
-                      album?.slug?.current && (
-                        <ClientSideRoute key={album._id} route={`/albums/${album.slug.current}`}>
-                          <div className='group cursor-pointer rounded-lg border border-slate-200 p-4 transition-colors hover:border-untele dark:border-slate-700 dark:hover:border-untele'>
-                            {album.albumArt && (
-                              <div className='mb-4 aspect-square overflow-hidden rounded-lg'>
-                                <Image
-                                  src={urlForImage(album.albumArt)?.url() ?? ''}
-                                  alt={`${album.title} album artwork`}
-                                  width={200}
-                                  height={200}
-                                  className='h-full w-full object-cover transition-transform group-hover:scale-105'
-                                />
+                    {(artist as any)?.albums?.map(
+                      (album: any) =>
+                        album?.slug?.current && (
+                          <ClientSideRoute key={album._id} route={`/albums/${album.slug.current}`}>
+                            <div className='group cursor-pointer rounded-lg border border-slate-200 p-4 transition-colors hover:border-untele dark:border-slate-700 dark:hover:border-untele'>
+                              {album.albumArt && (
+                                <div className='mb-4 aspect-square overflow-hidden rounded-lg'>
+                                  <Image
+                                    src={urlForImage(album.albumArt)?.url() ?? ''}
+                                    alt={`${album.title} album artwork`}
+                                    width={200}
+                                    height={200}
+                                    className='h-full w-full object-cover transition-transform group-hover:scale-105'
+                                  />
+                                </div>
+                              )}
+                              <h3 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                                {album.title}
+                              </h3>
+                              <div className='mt-1 text-sm text-slate-600 dark:text-slate-400'>
+                                <div>{album.albumType ?? 'Album'}</div>
+                                <div>{formatDate(album.releaseDate)}</div>
                               </div>
-                            )}
-                            <h3 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                              {album.title}
-                            </h3>
-                            <div className='mt-1 text-sm text-slate-600 dark:text-slate-400'>
-                              <div>{album.albumType ?? 'Album'}</div>
-                              <div>{formatDate(album.releaseDate)}</div>
                             </div>
-                          </div>
-                        </ClientSideRoute>
-                      )
-                    ))}
+                          </ClientSideRoute>
+                        )
+                    )}
                   </div>
                 </div>
               )}

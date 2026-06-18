@@ -2,6 +2,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import type { Category } from '@/lib/sanity/sanity.types';
 
 interface ArticleCategoryNavProps {
   categories: Category[];
@@ -9,11 +10,11 @@ interface ArticleCategoryNavProps {
   onCategoryChange: (_category: Category) => void;
 }
 
-const ArticleCategoryNav: React.FC<ArticleCategoryNavProps> = ({
+function ArticleCategoryNav({
   categories,
   selectedCategory,
   onCategoryChange,
-}) => {
+}: ArticleCategoryNavProps) {
   const [rows, setRows] = useState<Category[][]>([]);
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const ArticleCategoryNav: React.FC<ArticleCategoryNavProps> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, [categories]);
 
-  const CategoryButton: React.FC<{ category: Category }> = ({ category }) => {
+  function CategoryButton({ category }: { category: Category }) {
     const isSelected = selectedCategory?.slug?.current === category.slug?.current;
 
     return (
@@ -86,7 +87,7 @@ const ArticleCategoryNav: React.FC<ArticleCategoryNavProps> = ({
         <span className='absolute -bottom-[1px] left-[1.125rem] h-[2px] w-[calc(100%-2.25rem)] bg-gradient-to-r from-untele/0 via-untele/90 to-untele/0 transition-opacity duration-500 group-hover:opacity-60' />
       </button>
     );
-  };
+  }
 
   return (
     <nav className='space-y-3 rounded-lg border border-slate-500 bg-slate-600/30 px-4 py-4'>
@@ -108,6 +109,6 @@ const ArticleCategoryNav: React.FC<ArticleCategoryNavProps> = ({
       ))}
     </nav>
   );
-};
+}
 
 export default ArticleCategoryNav;

@@ -1,6 +1,6 @@
 // src/components/seo/StructuredData.tsx
 // Note: plain <script> tags are correct for inline JSON-LD in RSC. next/script is for third-party loading strategies.
-import type { Song, MusicArtist, Album } from '#/sanity.types';
+import type { Song, MusicArtist, Album } from '@/lib/sanity/sanity.types';
 import { getSongArtwork } from '@/util/getSongArtwork';
 
 interface SongStructuredDataProps {
@@ -193,11 +193,7 @@ function MusicWebsiteStructuredData() {
   );
 }
 
-function BreadcrumbStructuredData({
-  items,
-}: {
-  items: Array<{ name: string; url: string }>;
-}) {
+function BreadcrumbStructuredData({ items }: { items: Array<{ name: string; url: string }> }) {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -221,4 +217,9 @@ function BreadcrumbStructuredData({
 }
 
 export default SongStructuredData;
-export { ArtistStructuredData, AlbumStructuredData, MusicWebsiteStructuredData, BreadcrumbStructuredData };
+export {
+  ArtistStructuredData,
+  AlbumStructuredData,
+  MusicWebsiteStructuredData,
+  BreadcrumbStructuredData,
+};

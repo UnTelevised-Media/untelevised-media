@@ -3,6 +3,7 @@
 // Wrapped externally by ClientSideRoute (Link) — no internal Link element.
 import Image from 'next/image';
 import { ArrowUpRight, AlertTriangle, XCircle } from 'lucide-react';
+import type { Article } from '@/lib/sanity/sanity.types';
 
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
@@ -26,7 +27,7 @@ function ArticleCardLg({ post }: Props) {
         {imageUrl ? (
           <Image
             src={imageUrl}
-            alt={post.mainImage?.alt ?? post.title}
+            alt={post.mainImage?.alt ?? post.title ?? 'Article'}
             fill
             className='object-cover transition-transform duration-300 group-hover:scale-105'
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
@@ -42,24 +43,19 @@ function ArticleCardLg({ post }: Props) {
         {/* Category pills */}
         {post.categories && post.categories.length > 0 && (
           <div className='mb-4 flex flex-wrap gap-2'>
-            {post.categories.map((category) => (
+            {post.categories.map((category, index) => (
               <span
-                key={category._id ?? category.title}
+                key={category._key ?? index}
                 className='inline-block w-fit rounded-full border border-untele/30 bg-untele/10 px-3 py-1 text-xs font-medium text-untele'
               >
-                {category.title}
+                Category
               </span>
             ))}
           </div>
         )}
 
         {/* Correction badges */}
-        {post.correction?.type === 'retraction' ? (
-          <span className='mb-2 inline-flex items-center gap-1 bg-untele px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
-            <XCircle className='h-2.5 w-2.5' aria-hidden='true' />
-            Retracted
-          </span>
-        ) : post.correction?.summary ? (
+        {post.corrections ? (
           <span className='mb-2 inline-flex items-center gap-1 bg-amber-400 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-black'>
             <AlertTriangle className='h-2.5 w-2.5' aria-hidden='true' />
             Corrected
@@ -69,7 +65,7 @@ function ArticleCardLg({ post }: Props) {
         {/* Title */}
         <h2
           id={`article-title-${post._id}`}
-          className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele dark:text-white${post.correction?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
+          className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele dark:text-white`}
         >
           {post.title}
         </h2>
@@ -81,7 +77,7 @@ function ArticleCardLg({ post }: Props) {
 
         {/* Meta row */}
         <div className='mt-auto flex items-center justify-between'>
-          <span className='text-sm text-slate-500 dark:text-slate-400'>{post.author?.name}</span>
+          <span className='text-sm text-slate-500 dark:text-slate-400'>Author</span>
           <div className='flex items-center gap-2'>
             <span className='text-sm text-slate-500 dark:text-slate-400'>
               {formatDate(getArticleDate(post))}

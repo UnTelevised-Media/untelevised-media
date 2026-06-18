@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Clock, MapPin, ExternalLink, ArrowRight, Users, Tag } from 'lucide-react';
+import type { LiveEvent } from '@/lib/sanity/sanity.types';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -18,12 +19,12 @@ interface PastEventCardProps {
   showRelated?: boolean;
 }
 
-const PastEventCard: React.FC<PastEventCardProps> = ({
+function PastEventCard({
   event,
   className = '',
   variant = 'default',
   showRelated = true,
-}) => {
+}: PastEventCardProps) {
   const imageUrl = event.mainImage ? urlForImage(event.mainImage)?.url() : null;
   const eventUrl = `/live-event/${event.slug?.current}`;
 
@@ -42,7 +43,7 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
               <div className='relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg'>
                 <Image
                   src={imageUrl}
-                  alt={event.mainImage?.alt ?? event.title}
+                  alt={event.mainImage?.alt ?? event.title ?? 'Event'}
                   fill
                   className='object-cover'
                 />
@@ -58,14 +59,8 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
               <div className='flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400'>
                 <span className='flex items-center gap-1'>
                   <Calendar className='h-3 w-3' />
-                  {formatDate(event.eventDate)}
+                  {event.eventDate ? formatDate(event.eventDate) : 'TBD'}
                 </span>
-                {event.location && (
-                  <span className='flex items-center gap-1'>
-                    <MapPin className='h-3 w-3' />
-                    {event.location}
-                  </span>
-                )}
                 {totalContent > 0 && (
                   <span className='flex items-center gap-1'>
                     <Users className='h-3 w-3' />
@@ -90,7 +85,7 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
           <div className='relative aspect-video overflow-hidden'>
             <Image
               src={imageUrl}
-              alt={event.mainImage?.alt ?? event.title}
+              alt={event.mainImage?.alt ?? event.title ?? 'Event'}
               fill
               className='object-cover transition-transform duration-300 group-hover:scale-105'
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
@@ -110,7 +105,7 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
               <div className='absolute right-3 top-3'>
                 <Badge className='border-untele bg-untele/90 text-white'>
                   <Tag className='mr-1 h-3 w-3' />
-                  {event.eventTag[0].title}
+                  Tag
                 </Badge>
               </div>
             )}
@@ -145,17 +140,11 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
               <div className='flex items-center gap-1'>
                 <Calendar className='h-3 w-3' />
                 <ClientTimeDisplay
-                  eventDate={event.eventDate}
+                  eventDate={event.eventDate ?? ''}
                   showRelativeTime={false}
                   className='text-sm'
                 />
               </div>
-              {event.location && (
-                <div className='flex items-center gap-1'>
-                  <MapPin className='h-3 w-3' />
-                  <span>{event.location}</span>
-                </div>
-              )}
             </div>
           </div>
 
@@ -188,6 +177,6 @@ const PastEventCard: React.FC<PastEventCardProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default PastEventCard;

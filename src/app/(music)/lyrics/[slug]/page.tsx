@@ -1,4 +1,4 @@
-import type { Song } from '#/sanity.types';
+import type { Song } from '@/lib/sanity/sanity.types';
 // src/app/(user)/lyrics/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -34,7 +34,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Song Not Found', description: 'The requested song could not be found.' };
   }
 
-  const primaryName = (song.primaryArtist as any)?.stageName ?? (song.primaryArtist as any)?.name ?? 'Unknown Artist';
+  const primaryName =
+    (song.primaryArtist as any)?.stageName ??
+    (song.primaryArtist as any)?.name ??
+    'Unknown Artist';
   const artistNames = [
     primaryName,
     ...(song.featuredArtists?.map((a) => (a as any)?.stageName ?? (a as any)?.name) ?? []),
@@ -80,7 +83,9 @@ export default async function LyricsPage({ params }: Props) {
   const { slug } = await params;
   const song: Song = (await getSongBySlug(slug)) as Song;
 
-  if (!song) {notFound();}
+  if (!song) {
+    notFound();
+  }
 
   const artistNames = [
     (song.primaryArtist as any)?.name ?? 'Unknown Artist',
@@ -329,7 +334,9 @@ export default async function LyricsPage({ params }: Props) {
                 </h3>
                 <div className='space-y-4'>
                   {(song.primaryArtist as any)?.slug?.current && (
-                    <ClientSideRoute route={`/music-artists/${(song.primaryArtist as any).slug.current}`}>
+                    <ClientSideRoute
+                      route={`/music-artists/${(song.primaryArtist as any).slug.current}`}
+                    >
                       <div className='group flex cursor-pointer items-center gap-3'>
                         {(song.primaryArtist as any)?.image && (
                           <div className='h-12 w-12 overflow-hidden rounded-full'>
@@ -344,7 +351,8 @@ export default async function LyricsPage({ params }: Props) {
                         )}
                         <div>
                           <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                            {(song.primaryArtist as any)?.stageName ?? (song.primaryArtist as any)?.name}
+                            {(song.primaryArtist as any)?.stageName ??
+                              (song.primaryArtist as any)?.name}
                           </h4>
                           <p className='text-sm text-slate-600 dark:text-slate-400'>
                             Primary Artist
@@ -354,34 +362,37 @@ export default async function LyricsPage({ params }: Props) {
                     </ClientSideRoute>
                   )}
 
-                  {song.featuredArtists?.map((artist) => (
-                    (artist as any)?.slug?.current && (
-                      <ClientSideRoute
-                        key={(artist as any)._id}
-                        route={`/music-artists/${(artist as any).slug.current}`}
-                      >
-                        <div className='group flex cursor-pointer items-center gap-3'>
-                          {(artist as any)?.image && (
-                            <div className='h-12 w-12 overflow-hidden rounded-full'>
-                              <Image
-                                src={urlForImage((artist as any)?.image)?.url() ?? ''}
-                                alt={(artist as any)?.name ?? 'Artist'}
-                                width={48}
-                                height={48}
-                                className='h-full w-full object-cover'
-                              />
+                  {song.featuredArtists?.map(
+                    (artist) =>
+                      (artist as any)?.slug?.current && (
+                        <ClientSideRoute
+                          key={(artist as any)._id}
+                          route={`/music-artists/${(artist as any).slug.current}`}
+                        >
+                          <div className='group flex cursor-pointer items-center gap-3'>
+                            {(artist as any)?.image && (
+                              <div className='h-12 w-12 overflow-hidden rounded-full'>
+                                <Image
+                                  src={urlForImage((artist as any)?.image)?.url() ?? ''}
+                                  alt={(artist as any)?.name ?? 'Artist'}
+                                  width={48}
+                                  height={48}
+                                  className='h-full w-full object-cover'
+                                />
+                              </div>
+                            )}
+                            <div>
+                              <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                                {(artist as any)?.stageName ?? (artist as any)?.name}
+                              </h4>
+                              <p className='text-sm text-slate-600 dark:text-slate-400'>
+                                Featured
+                              </p>
                             </div>
-                          )}
-                          <div>
-                            <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                              {(artist as any)?.stageName ?? (artist as any)?.name}
-                            </h4>
-                            <p className='text-sm text-slate-600 dark:text-slate-400'>Featured</p>
                           </div>
-                        </div>
-                      </ClientSideRoute>
-                    )
-                  ))}
+                        </ClientSideRoute>
+                      )
+                  )}
                 </div>
               </div>
 
@@ -395,7 +406,9 @@ export default async function LyricsPage({ params }: Props) {
                     {song.contributingArtists.map((contributor, index) => (
                       <div key={index} className='flex items-center justify-between'>
                         <span className='text-sm text-slate-900 dark:text-slate-100'>
-                          {(contributor.artist as any)?.stageName ?? (contributor.artist as any)?.name ?? 'Unknown'}
+                          {(contributor.artist as any)?.stageName ??
+                            (contributor.artist as any)?.name ??
+                            'Unknown'}
                         </span>
                         <span className='text-sm text-slate-600 dark:text-slate-400'>
                           {contributor.role?.replace('-', ' ') ?? 'Contributor'}

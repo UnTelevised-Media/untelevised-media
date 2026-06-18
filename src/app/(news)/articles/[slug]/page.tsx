@@ -1,4 +1,4 @@
-import type { Article } from '#/sanity.types';
+import type { Article } from '@/lib/sanity/sanity.types';
 // src/app/(user)/articles/[slug]/page.tsx
 import { cache } from 'react';
 import Image from 'next/image';
@@ -27,7 +27,7 @@ import { buildArticleMetadata } from '@/util/metadata';
 import NewsArticleStructuredData from '@/components/seo/NewsArticleStructuredData';
 import { getReadingTime } from '@/lib/readingTime';
 import { CorrectionNotice } from '@/components/post/CorrectionNotice';
-import { SourcesPanel } from '@/components/post/SourcesPanel';
+import SourcesPanel from '@/components/post/SourcesPanel';
 import { BookmarkButton } from '@/components/bookmarks/BookmarkButton';
 import CommentsSection from '@/components/post/CommentsSection';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
@@ -40,11 +40,17 @@ import TrendingSection from '@/components/homepage/TrendingSection';
  * value if it is a string, or extracts the `content` field if present, otherwise null.
  */
 function safeText(value: unknown): string | null {
-  if (typeof value === 'string') {return value || null;}
+  if (typeof value === 'string') {
+    return value || null;
+  }
   if (value && typeof value === 'object' && !Array.isArray(value)) {
     const v = value as Record<string, unknown>;
-    if (typeof v.content === 'string') {return v.content || null;}
-    if (typeof v.text === 'string') {return v.text || null;}
+    if (typeof v.content === 'string') {
+      return v.content || null;
+    }
+    if (typeof v.text === 'string') {
+      return v.text || null;
+    }
   }
   return null;
 }
@@ -58,7 +64,9 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
-  if (!article) {return { title: 'Article Not Found' };}
+  if (!article) {
+    return { title: 'Article Not Found' };
+  }
   return buildArticleMetadata(article, slug);
 }
 
@@ -66,7 +74,9 @@ export default async function Article({ params }: Props) {
   const { slug } = await params;
   const article: any = (await getArticleBySlug(slug)) as any;
 
-  if (!article) {notFound();}
+  if (!article) {
+    notFound();
+  }
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
@@ -158,7 +168,9 @@ export default async function Article({ params }: Props) {
                           className='rounded-full border-2 border-white/20 object-cover'
                         />
                         <div>
-                          <p className='font-semibold text-white'>{(article.author as any)?.name ?? 'Unknown Author'}</p>
+                          <p className='font-semibold text-white'>
+                            {(article.author as any)?.name ?? 'Unknown Author'}
+                          </p>
                           <p className='text-sm text-slate-300'>Author</p>
                         </div>
                       </div>
@@ -197,17 +209,18 @@ export default async function Article({ params }: Props) {
                   <div className='flex flex-wrap justify-end gap-2'>
                     {article.categories &&
                       article.categories.length > 0 &&
-                      article.categories.map((category: any) => (
-                        (category as any)?.title && (
-                          <Link
-                            key={(category as any)?._id ?? Math.random()}
-                            href={`/category/${formatTitleForURL((category as any).title)}`}
-                            className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-untele'
-                          >
-                            {(category as any).title}
-                          </Link>
-                        )
-                      ))}
+                      article.categories.map(
+                        (category: any) =>
+                          (category as any)?.title && (
+                            <Link
+                              key={(category as any)?._id ?? Math.random()}
+                              href={`/category/${formatTitleForURL((category as any).title)}`}
+                              className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-untele'
+                            >
+                              {(category as any).title}
+                            </Link>
+                          )
+                      )}
                     {(article as any)?.tags &&
                       (article as any)?.tags?.length > 0 &&
                       (article as any)?.tags?.map((tag: string) => (

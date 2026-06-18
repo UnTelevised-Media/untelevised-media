@@ -22,7 +22,7 @@ interface SocialShareProps {
   title: string;
 }
 
-const SocialShare: React.FC<SocialShareProps> = ({ url, title }) => {
+function SocialShare({ url, title }: SocialShareProps) {
   const handleCopyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(url);
@@ -170,6 +170,6 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title }) => {
       </div>
     </div>
   );
-};
+}
 
 export default SocialShare;

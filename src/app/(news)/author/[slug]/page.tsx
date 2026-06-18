@@ -1,4 +1,4 @@
-import type { Author } from '#/sanity.types';
+import type { Author } from '@/lib/sanity/sanity.types';
 // src/app/(news)/author/[slug]/page.tsx
 import { cache } from 'react';
 import Image from 'next/image';
@@ -33,7 +33,9 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const author = await getAuthorBySlug(slug);
-  if (!author) {return { title: 'Author Not Found' };}
+  if (!author) {
+    return { title: 'Author Not Found' };
+  }
   return buildAuthorMetadata(author, slug);
 }
 
@@ -110,9 +112,14 @@ export default async function Author({ params }: Props) {
   const { slug } = await params;
   const author: any = await getAuthorBySlug(slug);
 
-  if (!author) {notFound();}
+  if (!author) {
+    notFound();
+  }
 
-  const hasBooks = (author as any)?.isLiteraryAuthor && (author as any)?.books && (author as any)?.books?.length > 0;
+  const hasBooks =
+    (author as any)?.isLiteraryAuthor &&
+    (author as any)?.books &&
+    (author as any)?.books?.length > 0;
   const hasTip = !!((author as any)?.tipStripeProductId && (author as any)?.tipAmount);
 
   const personSchema = {

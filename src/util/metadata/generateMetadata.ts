@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { Article } from '#/sanity.types';
+import type { Article } from '@/lib/sanity/sanity.types';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
 import urlForImage from '@/util/urlForImage';

@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import type { Article } from '#/sanity.types';
+import type { Article } from '@/lib/sanity/sanity.types';
 
 import ArticleCardLg from '@/components/cards/ArticleCardLg';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
@@ -56,7 +56,9 @@ export default async function TagPage({ params }: Props) {
 
   const matchedTag = allTags.find((tag: string) => tagToSlug(tag) === slug);
 
-  if (!matchedTag) {notFound();}
+  if (!matchedTag) {
+    notFound();
+  }
 
   const { data: _articles } = await sanityFetch({
     query: queryArticlesByTag,
@@ -152,6 +154,8 @@ export default async function TagPage({ params }: Props) {
 
 export async function generateStaticParams() {
   const tags: string[] = await sanityClient.fetch(queryAllTags);
-  if (!tags || tags.length === 0) {return [];}
+  if (!tags || tags.length === 0) {
+    return [];
+  }
   return tags.map((tag) => ({ slug: tagToSlug(tag) }));
 }

@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useTransition } from 'react';
 import { Search, Calendar, Grid3X3, List, Clock, Tag, Loader2 } from 'lucide-react';
+import type { LiveEvent } from '@/lib/sanity/sanity.types';
 
 import PastEventCard from '@/components/cards/PastEventCard';
 import { Button } from '@/components/ui/button';
@@ -15,7 +16,7 @@ interface PastEventsPageProps {
 type SortOption = 'date-desc' | 'date-asc' | 'title-asc' | 'title-desc';
 type ViewMode = 'grid' | 'list';
 
-const PastEventsPage: React.FC<PastEventsPageProps> = ({ initialEvents }) => {
+function PastEventsPage({ initialEvents }: PastEventsPageProps) {
   const [events, setEvents] = useState<LiveEvent[]>(initialEvents);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<SortOption>('date-desc');
@@ -30,9 +31,7 @@ const PastEventsPage: React.FC<PastEventsPageProps> = ({ initialEvents }) => {
     const tags = new Set<string>();
     events.forEach((event) => {
       event.eventTag?.forEach((tag) => {
-        if (tag.title) {
-          tags.add(tag.title);
-        }
+        tags.add('Tag');
       });
     });
     return Array.from(tags).sort();
@@ -43,11 +42,10 @@ const PastEventsPage: React.FC<PastEventsPageProps> = ({ initialEvents }) => {
     const filtered = events.filter((event) => {
       const matchesSearch =
         !searchTerm ||
-        event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.location?.toLowerCase().includes(searchTerm.toLowerCase());
+        (event.title && event.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        event.description?.toLowerCase().includes(searchTerm.toLowerCase());
 
-      const matchesTag = !selectedTag || event.eventTag?.some((tag) => tag.title === selectedTag);
+      const matchesTag = !selectedTag || (event.eventTag && event.eventTag.length > 0);
 
       return matchesSearch && matchesTag;
     });
@@ -56,13 +54,13 @@ const PastEventsPage: React.FC<PastEventsPageProps> = ({ initialEvents }) => {
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'date-desc':
-          return new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime();
+          return new Date(b.eventDate ?? '').getTime() - new Date(a.eventDate ?? '').getTime();
         case 'date-asc':
-          return new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime();
+          return new Date(a.eventDate ?? '').getTime() - new Date(b.eventDate ?? '').getTime();
         case 'title-asc':
-          return a.title.localeCompare(b.title);
+          return (a.title ?? '').localeCompare(b.title ?? '');
         case 'title-desc':
-          return b.title.localeCompare(a.title);
+          return (b.title ?? '').localeCompare(a.title ?? '');
         default:
           return 0;
       }
@@ -269,6 +267,6 @@ const PastEventsPage: React.FC<PastEventsPageProps> = ({ initialEvents }) => {
       )}
     </div>
   );
-};
+}
 
 export default PastEventsPage;

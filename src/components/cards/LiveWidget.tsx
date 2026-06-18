@@ -1,7 +1,7 @@
- 
 import React from 'react';
 import ClientSideRoute from '../providers/ClientSideRoute';
 import Image from 'next/image';
+import type { LiveEvent } from '@/lib/sanity/sanity.types';
 import urlForImage from '@/u/urlForImage';
 import resolveHref from '@/util/resolveHref';
 import formatDate from '@/util/formatDate';
@@ -71,9 +71,6 @@ export default function LiveWidget({ liveEvents }: Props) {
                 </h1>
 
                 <div>
-                  {liveEvent.location && (
-                    <h3 className='text-slate-800 dark:text-slate-200'>{liveEvent.location}</h3>
-                  )}
                   <p className='text-slate-700 dark:text-slate-300'>
                     {formatDate(liveEvent.eventDate || liveEvent._createdAt)}
                   </p>
@@ -94,24 +91,19 @@ export default function LiveWidget({ liveEvents }: Props) {
               (liveEvent.relatedArticles && liveEvent.relatedArticles.length > 0) ? (
                 <ul className='custom-list'>
                   {/* Sort events inside the map function */}
-                  {[...(liveEvent.keyEvent || []), ...(liveEvent.relatedArticles || [])]
-                    .sort(
-                      (a, b) => new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime()
-                    )
-                    .slice(0, 9)
-                    .map((event) => (
-                      <li
-                        key={event._id}
-                        className='li li::before deco custom-list mb-2 rounded-lg border border-untele bg-slate-300/30 px-1 py-0.5 text-sm text-slate-800 dark:bg-slate-700/30 dark:text-slate-200'
-                      >
-                        {event.title} -{' '}
-                        <ClientTimeDisplay
-                          eventDate={event.eventDate}
-                          showRelativeTime={true}
-                          className='relative -top-[1px] transform text-sm font-light text-untele'
-                        />
-                      </li>
-                    ))}
+                  {[...(liveEvent.keyEvent || [])].slice(0, 9).map((event, index) => (
+                    <li
+                      key={event._key ?? index}
+                      className='li li::before deco custom-list mb-2 rounded-lg border border-untele bg-slate-300/30 px-1 py-0.5 text-sm text-slate-800 dark:bg-slate-700/30 dark:text-slate-200'
+                    >
+                      Event -{' '}
+                      <ClientTimeDisplay
+                        eventDate={''}
+                        showRelativeTime={true}
+                        className='relative -top-[1px] transform text-sm font-light text-untele'
+                      />
+                    </li>
+                  ))}
                 </ul>
               ) : (
                 // Handle the case when both keyEvent and relatedArticles are missing or empty

@@ -4,7 +4,7 @@ import { groq } from 'next-sanity';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, Star } from 'lucide-react';
-import type { Timeline, TimelineCategory, TimelineEvent } from '#/sanity.types';
+import type { Timeline, TimelineCategory, TimelineEvent } from '@/lib/sanity/sanity.types';
 
 import TimelineEventCard from '@/components/timeline/TimelineEventCard';
 import TimelineCard from '@/components/timeline/TimelineCard';
@@ -63,7 +63,9 @@ export default async function TimelineCategoryPage({ params }: Props) {
         {/* Category Header */}
         <div className='mb-8'>
           <div className='mb-4 flex items-center gap-4'>
-            <div className={`h-6 w-6 rounded-full ${getCategoryColor(category.color ?? 'gray')}`} />
+            <div
+              className={`h-6 w-6 rounded-full ${getCategoryColor(category.color ?? 'gray')}`}
+            />
             <h1 className='text-3xl font-bold text-slate-900 dark:text-slate-100 lg:text-4xl'>
               {category.title ?? 'Category'}
             </h1>
@@ -219,7 +221,9 @@ export default async function TimelineCategoryPage({ params }: Props) {
                 <div className='flex justify-between'>
                   <span className='text-slate-600 dark:text-slate-400'>Category Color</span>
                   <div className='flex items-center gap-2'>
-                    <div className={`h-3 w-3 rounded-full ${getCategoryColor(category.color ?? 'gray')}`} />
+                    <div
+                      className={`h-3 w-3 rounded-full ${getCategoryColor(category.color ?? 'gray')}`}
+                    />
                     <span className='font-medium capitalize'>{category.color ?? 'gray'}</span>
                   </div>
                 </div>
@@ -232,12 +236,16 @@ export default async function TimelineCategoryPage({ params }: Props) {
                 <h3 className='mb-3 font-semibold text-slate-900 dark:text-slate-100'>
                   Parent Category
                 </h3>
-                <Link href={`/timeline/category/${(category.parentCategory as any).slug?.current ?? ''}`}>
+                <Link
+                  href={`/timeline/category/${(category.parentCategory as any).slug?.current ?? ''}`}
+                >
                   <div className='flex items-center gap-3 rounded p-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800'>
                     <div
                       className={`h-3 w-3 rounded-full ${getCategoryColor((category.parentCategory as any).color ?? 'gray')}`}
                     />
-                    <span className='text-sm font-medium'>{(category.parentCategory as any).title ?? 'Category'}</span>
+                    <span className='text-sm font-medium'>
+                      {(category.parentCategory as any).title ?? 'Category'}
+                    </span>
                   </div>
                 </Link>
               </div>

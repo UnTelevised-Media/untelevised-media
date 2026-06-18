@@ -19,7 +19,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
-import type { TimelineEvent } from '#/sanity.types';
+import type { TimelineEvent } from '@/lib/sanity/sanity.types';
 
 interface TimelineEventCardProps {
   event: TimelineEvent;
@@ -99,7 +99,7 @@ function TimelineEventCard({
               <div className='relative h-12 w-12 flex-shrink-0 overflow-hidden rounded'>
                 <Image
                   src={urlForImage(event.mainImage)?.url() ?? ''}
-                  alt={event.mainImage.alt ?? (event.title ?? 'Event')}
+                  alt={event.mainImage.alt ?? event.title ?? 'Event'}
                   fill
                   className='object-cover'
                 />
@@ -158,7 +158,7 @@ function TimelineEventCard({
           <div className='relative aspect-video overflow-hidden'>
             <Image
               src={urlForImage(event.mainImage)?.url() ?? ''}
-              alt={event.mainImage.alt ?? (event.title ?? 'Event')}
+              alt={event.mainImage.alt ?? event.title ?? 'Event'}
               fill
               className='object-cover transition-transform duration-300 group-hover:scale-105'
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
@@ -167,7 +167,9 @@ function TimelineEventCard({
 
             {/* Event Type Badge */}
             <div className='absolute bottom-3 left-3'>
-              <Badge className={`${getEventTypeColor(event.eventType ?? 'update')} flex items-center gap-1`}>
+              <Badge
+                className={`${getEventTypeColor(event.eventType ?? 'update')} flex items-center gap-1`}
+              >
                 {getEventTypeIcon(event.eventType ?? 'update')}
                 <span className='capitalize'>{event.eventType ?? 'update'}</span>
               </Badge>
@@ -176,7 +178,9 @@ function TimelineEventCard({
             {/* Importance Level */}
             <div className='absolute left-3 top-3'>
               <Badge
-                variant={(event.importanceLevel ?? 'medium') === 'critical' ? 'destructive' : 'secondary'}
+                variant={
+                  (event.importanceLevel ?? 'medium') === 'critical' ? 'destructive' : 'secondary'
+                }
                 className='text-xs'
               >
                 {(event.importanceLevel ?? 'medium').toUpperCase()}

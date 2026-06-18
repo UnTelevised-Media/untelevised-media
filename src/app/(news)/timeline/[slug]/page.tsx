@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { Calendar, Clock, Users, Star, ArrowLeft, Bookmark } from 'lucide-react';
-import type { Timeline, TimelineEvent } from '#/sanity.types';
+import type { Timeline } from '@/lib/sanity/sanity.types';
 
 import dynamic from 'next/dynamic';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
@@ -161,7 +161,10 @@ export default async function TimelinePage({ params }: Props) {
 
                 {/* Actions */}
                 <div className='flex items-center gap-4'>
-                  <SocialShare url={`/timeline/${timeline.slug?.current ?? ''}`} title={timeline.title ?? ''} />
+                  <SocialShare
+                    url={`/timeline/${timeline.slug?.current ?? ''}`}
+                    title={timeline.title ?? ''}
+                  />
                   <Button variant='outline' size='sm' className='flex items-center gap-2'>
                     <Bookmark className='h-4 w-4' />
                     Save Timeline
@@ -184,7 +187,7 @@ export default async function TimelinePage({ params }: Props) {
                 <div className='relative aspect-video overflow-hidden rounded-lg'>
                   <Image
                     src={urlForImage(timeline.coverImage)?.url() ?? ''}
-                    alt={timeline.coverImage.alt ?? (timeline.title ?? '')}
+                    alt={timeline.coverImage.alt ?? timeline.title ?? ''}
                     fill
                     className='object-cover'
                   />
@@ -327,7 +330,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description =
     timeline.seoSettings?.metaDescription ??
     timeline.shortDescription ??
-    ((timeline.description as any)?.[0]?.children?.[0]?.text) ??
+    (timeline.description as any)?.[0]?.children?.[0]?.text ??
     '';
 
   return {

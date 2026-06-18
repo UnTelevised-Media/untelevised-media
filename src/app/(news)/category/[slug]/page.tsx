@@ -1,4 +1,4 @@
-import type { Category } from '#/sanity.types';
+import type { Category } from '@/lib/sanity/sanity.types';
 import { Fragment } from 'react';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
@@ -7,10 +7,7 @@ import { TrendingUp } from 'lucide-react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import {
-  queryArticleByCategory,
-  queryCategoryBySlug,
-} from '@/lib/sanity/lib/queries';
+import { queryArticleByCategory, queryCategoryBySlug } from '@/lib/sanity/lib/queries';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildCategoryMetadata } from '@/util/metadata';
@@ -55,7 +52,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
     tags: ['category'],
   })) as { data: Category | null };
-  if (!category) {return { title: 'Category Not Found' };}
+  if (!category) {
+    return { title: 'Category Not Found' };
+  }
   return buildCategoryMetadata(category, slug);
 }
 
@@ -69,7 +68,9 @@ export default async function CategoryPage({ params }: Props) {
     getTrendingArticles(45, 100).catch(() => []), // Get trending articles, fallback to empty
   ]);
 
-  if (!category) {notFound();}
+  if (!category) {
+    notFound();
+  }
 
   // Create a map of Supabase view counts
   const viewCountMap = new Map(trendingData.map((t) => [t.slug, t.view_count]));
@@ -86,7 +87,10 @@ export default async function CategoryPage({ params }: Props) {
 
   const accentColor = (category as any)?.color?.hex ?? '#D70606';
   const heroImageUrl = (category as any)?.image
-    ? urlForImage((category as any)?.image)?.width(1400).height(500).url()
+    ? urlForImage((category as any)?.image)
+        ?.width(1400)
+        .height(500)
+        .url()
     : null;
 
   const collectionPageSchema = {
@@ -331,7 +335,7 @@ export async function generateStaticParams() {
   const queryCategoryStaticParams = groq`*[_type=='category'] { slug }`;
   const slugs: Category[] = await sanityClient.fetch(queryCategoryStaticParams);
   const slugRoutes = slugs
-    ? slugs.filter((item) => item?.slug?.current).map((item) => (item.slug?.current ?? ''))
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug?.current ?? '')
     : [];
   return slugRoutes.map((slug) => ({ slug }));
 }

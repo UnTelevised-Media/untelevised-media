@@ -117,10 +117,13 @@ export default function BreakingNewsClient({ initialEvents, initialArticles }: P
 }
 
 // View Toggle Component
-const ViewToggle: React.FC<{
+function ViewToggle({
+  viewMode: _viewMode,
+  setViewMode,
+}: {
   viewMode: 'bars' | 'cards';
   setViewMode: (_mode: 'bars' | 'cards') => void;
-}> = ({ viewMode: _viewMode, setViewMode }) => {
+}) {
   return (
     <div className='flex rounded-lg border border-slate-600 bg-slate-800/50 p-1'>
       <button
@@ -141,10 +144,11 @@ const ViewToggle: React.FC<{
       </button>
     </div>
   );
-};
+}
 
 // Breaking Bar Component (List View)
-const BreakingBar: React.FC<{ item: any }> = ({ item }) => (
+function BreakingBar({ item }: { item: any }) {
+  return (
   <li className='rounded-lg border border-untele bg-slate-700/30 p-6'>
     <div className='flex flex-col space-y-4 lg:flex-row lg:space-x-6 lg:space-y-0'>
       {/* Image */}
@@ -218,10 +222,12 @@ const BreakingBar: React.FC<{ item: any }> = ({ item }) => (
       </div>
     </div>
   </li>
-);
+  );
+}
 
 // Breaking Card Component (Grid View)
-const BreakingCard: React.FC<{ item: any }> = ({ item }) => (
+function BreakingCard({ item }: { item: any }) {
+  return (
   <ClientSideRoute
     route={
       item.type === 'liveEvent'
@@ -296,4 +302,5 @@ const BreakingCard: React.FC<{ item: any }> = ({ item }) => (
       </div>
     </article>
   </ClientSideRoute>
-);
+  );
+}
