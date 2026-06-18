@@ -3,11 +3,11 @@
 import 'server-only';
 
 import { hasRole, getRoleFromMeta } from '@/lib/auth/roles-utils';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 import { getSanityAuthorIdForCurrentUser } from './author-actions';
 import { clerkClient } from '@clerk/nextjs/server';
 
-export async function verifyArticleAccessForClerkUser(
+async function verifyArticleAccessForClerkUser(
   clerkUserId: string,
   _resourceId: string
 ): Promise<{ canEdit: boolean; isEditorPlus: boolean }> {
@@ -33,3 +33,6 @@ export async function verifyArticleAccessForClerkUser(
 
   return { canEdit: !!linked, isEditorPlus: false };
 }
+
+export default verifyArticleAccessForClerkUser;
+export { verifyArticleAccessForClerkUser };

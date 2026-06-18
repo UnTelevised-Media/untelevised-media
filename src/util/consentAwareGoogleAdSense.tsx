@@ -8,7 +8,7 @@ interface ConsentAwareGoogleAdSenseProps {
   googleAdsenseId: string;
 }
 
-const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSenseProps) => {
+function ConsentAwareGoogleAdSense({ googleAdsenseId }: ConsentAwareGoogleAdSenseProps) {
   const { canUseMarketing, hasConsent } = useConsentCheck();
   const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -55,6 +55,6 @@ const ConsentAwareGoogleAdSense = ({ googleAdsenseId }: ConsentAwareGoogleAdSens
       onError={handleScriptError}
     />
   );
-};
+}
 
 export default ConsentAwareGoogleAdSense;

@@ -18,7 +18,7 @@ interface ConsentProviderProps {
   children: React.ReactNode;
 }
 
-const ConsentProvider = ({ children }: ConsentProviderProps) => {
+function ConsentProvider({ children }: ConsentProviderProps) {
   const [preferences, setPreferences] = useState<ConsentPreferences>(defaultPreferences);
   const [status, setStatus] = useState<ConsentStatus>('pending');
   const [showBanner, setShowBanner] = useState(false);
@@ -151,8 +151,9 @@ const ConsentProvider = ({ children }: ConsentProviderProps) => {
   };
 
   return <ConsentContext.Provider value={contextValue}>{children}</ConsentContext.Provider>;
-};
+}
 
+export default ConsentProvider;
 export { ConsentProvider };
 
 export function useConsent(): ConsentContextType {

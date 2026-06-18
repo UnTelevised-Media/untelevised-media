@@ -17,7 +17,7 @@ interface AlbumStructuredDataProps {
   songs?: Song[];
 }
 
-export const SongStructuredData = ({ song }: SongStructuredDataProps) => {
+function SongStructuredData({ song }: SongStructuredDataProps) {
   const artistNames = [
     (song.primaryArtist as any)?.stageName ?? (song.primaryArtist as any)?.name,
     ...(song.featuredArtists?.map((artist: any) => artist?.stageName ?? artist?.name) ?? []),
@@ -63,9 +63,9 @@ export const SongStructuredData = ({ song }: SongStructuredDataProps) => {
       }}
     ></script>
   );
-};
+}
 
-export const ArtistStructuredData = ({ artist, songs }: ArtistStructuredDataProps) => {
+function ArtistStructuredData({ artist, songs }: ArtistStructuredDataProps) {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'MusicGroup',
@@ -110,9 +110,9 @@ export const ArtistStructuredData = ({ artist, songs }: ArtistStructuredDataProp
       }}
     ></script>
   );
-};
+}
 
-export const AlbumStructuredData = ({ album, songs }: AlbumStructuredDataProps) => {
+function AlbumStructuredData({ album, songs }: AlbumStructuredDataProps) {
   const artistNames = [
     (album.artist as any)?.stageName ?? (album.artist as any)?.name,
     ...(album.featuredArtists?.map((artist: any) => artist?.stageName ?? artist?.name) ?? []),
@@ -155,9 +155,9 @@ export const AlbumStructuredData = ({ album, songs }: AlbumStructuredDataProps) 
       }}
     ></script>
   );
-};
+}
 
-export const MusicWebsiteStructuredData = () => {
+function MusicWebsiteStructuredData() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -191,13 +191,13 @@ export const MusicWebsiteStructuredData = () => {
       }}
     ></script>
   );
-};
+}
 
-export const BreadcrumbStructuredData = ({
+function BreadcrumbStructuredData({
   items,
 }: {
   items: Array<{ name: string; url: string }>;
-}) => {
+}) {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -218,4 +218,7 @@ export const BreadcrumbStructuredData = ({
       }}
     ></script>
   );
-};
+}
+
+export default SongStructuredData;
+export { ArtistStructuredData, AlbumStructuredData, MusicWebsiteStructuredData, BreadcrumbStructuredData };

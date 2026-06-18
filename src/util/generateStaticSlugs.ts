@@ -9,7 +9,7 @@ import { readToken as token } from '@/lib/sanity/lib/tokens';
 
 // Used in `generateStaticParams`
 // This may end up unused
-export async function generateStaticSlugs(type: string) {
+async function generateStaticSlugs(type: string) {
   // Not using loadQuery as it's optimized for fetching in the RSC lifecycle
   return client
     .withConfig({
@@ -28,3 +28,6 @@ export async function generateStaticSlugs(type: string) {
       }
     );
 }
+
+export default generateStaticSlugs;
+export { generateStaticSlugs };

@@ -43,14 +43,14 @@ const ZOOM_LEVEL_INFO = {
   hour: { label: 'Hour View', icon: Clock, step: 60 * 60 * 1000 },
 };
 
-const TimelineNavigation: React.FC<TimelineNavigationProps> = ({
+function TimelineNavigation({
   events,
   currentZoomLevel,
   onZoomChange,
   onEventSelect,
   onTimeRangeChange,
   className = '',
-}) => {
+}: TimelineNavigationProps) {
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(2000); // milliseconds
@@ -389,6 +389,6 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({
       )}
     </div>
   );
-};
+}
 
 export default TimelineNavigation;

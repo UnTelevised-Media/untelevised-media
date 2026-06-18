@@ -5,6 +5,9 @@ import type { SanityBookFormat } from './types';
  * NYOP formats send a product ID (prod_xxx) so the checkout route can build
  * price_data with the buyer-entered amount. Fixed-price formats send a price ID.
  */
-export function getStripeIdForFormat(format: SanityBookFormat): string | undefined {
+function getStripeIdForFormat(format: SanityBookFormat): string | undefined {
   return format.nameYourPrice ? format.stripeProductId : format.stripePriceId;
 }
+
+export default getStripeIdForFormat;
+export { getStripeIdForFormat };

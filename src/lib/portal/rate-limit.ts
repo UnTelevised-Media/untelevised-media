@@ -36,7 +36,7 @@ async function getRatelimit() {
  * Returns { allowed: true } when under limit, or { allowed: false, retryAfter } when exceeded.
  * If Upstash is not configured, always returns { allowed: true } (graceful degradation).
  */
-export async function checkRateLimit(
+async function checkRateLimit(
   identifier: string
 ): Promise<{ allowed: true } | { allowed: false; retryAfter: number }> {
   const limiter = await getRatelimit();
@@ -52,3 +52,6 @@ export async function checkRateLimit(
   const retryAfter = Math.ceil((reset - Date.now()) / 1000);
   return { allowed: false, retryAfter };
 }
+
+export default checkRateLimit;
+export { checkRateLimit };

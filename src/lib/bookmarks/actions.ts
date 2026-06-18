@@ -4,7 +4,7 @@
 // All functions validate Clerk session before touching Sanity.
 
 import { auth } from '@clerk/nextjs/server';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 import { client } from '@/lib/sanity/lib/client';
 import type { BookmarkEntry } from './storage';
 

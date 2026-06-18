@@ -24,12 +24,12 @@ interface TimelineVisualizationProps {
 
 type ZoomLevel = 'year' | 'month' | 'week' | 'day' | 'hour';
 
-const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
+function TimelineVisualization({
   events,
   categories = [],
   initialZoomLevel = 'month',
   className = '',
-}) => {
+}: TimelineVisualizationProps) {
   const [zoomLevel, setZoomLevel] = useState<ZoomLevel>(initialZoomLevel);
   const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
   const [filteredEvents, setFilteredEvents] = useState<TimelineEvent[]>(events);
@@ -295,6 +295,6 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
       </AnimatePresence>
     </div>
   );
-};
+}
 
 export default TimelineVisualization;

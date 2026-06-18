@@ -24,14 +24,14 @@ interface TimelineOverviewProps {
   className?: string;
 }
 
-const TimelineOverview: React.FC<TimelineOverviewProps> = ({
+function TimelineOverview({
   featuredTimelines = [],
   recentEvents = [],
   milestoneEvents = [],
   categories = [],
   stats,
   className = '',
-}) => {
+}: TimelineOverviewProps) {
   const StatCard: React.FC<{
     icon: React.ReactNode;
     title: string;
@@ -261,6 +261,6 @@ const TimelineOverview: React.FC<TimelineOverviewProps> = ({
       </section>
     </div>
   );
-};
+}
 
 export default TimelineOverview;

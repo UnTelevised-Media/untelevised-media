@@ -3,7 +3,7 @@
 // API routes import this and pass a NewsletterConfig; no list-specific logic lives here.
 import 'server-only';
 
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 import { client } from '@/lib/sanity/lib/client';
 import { sendConfirmEmail, sendWelcomeEmail, isConfigured } from './email';
 import type { NewsletterConfig } from './types';

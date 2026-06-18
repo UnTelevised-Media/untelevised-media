@@ -4,7 +4,7 @@
 
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 import { portalClient } from '@/lib/portal/fetch';
 import { queryPortalBriefById, queryPortalMyPitchesForBrief } from '@/lib/portal/queries';
 import { getSanityAuthorIdForCurrentUser } from './author-actions';

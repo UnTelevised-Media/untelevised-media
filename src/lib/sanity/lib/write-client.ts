@@ -12,7 +12,7 @@ if (!writeToken) {
   throw new Error('Missing environment variable: SANITY_API_WRITE_TOKEN');
 }
 
-export const writeClient = createClient({
+const writeClient = createClient({
   projectId,
   dataset,
   apiVersion,
@@ -20,3 +20,6 @@ export const writeClient = createClient({
   token: writeToken,
   perspective: 'drafts', // Show drafts when querying (needed for searchArticles, etc)
 });
+
+export default writeClient;
+export { writeClient };

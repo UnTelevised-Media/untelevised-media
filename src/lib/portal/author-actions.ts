@@ -4,7 +4,7 @@
 'use server';
 
 import { requireAdmin, requireAuthor } from '@/lib/auth/roles';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 import { sanitizeText } from './sanitize';
 import { z } from 'zod';
 

@@ -6,7 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 import { client } from '@/lib/sanity/lib/client';
 import { queryApprovedReviewsByBookSlug } from '@/lib/sanity/lib/queries';
 import { makeRatelimiter } from '@/lib/bookstore/ratelimit';

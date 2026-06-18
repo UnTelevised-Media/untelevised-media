@@ -60,12 +60,12 @@ const IMPORTANCE_LEVELS = [
   { value: 'low', label: 'Low', color: 'bg-gray-500' },
 ];
 
-const TimelineFilters: React.FC<TimelineFiltersProps> = ({
+function TimelineFilters({
   events,
   categories = [],
   onFilterChange,
   className = '',
-}) => {
+}: TimelineFiltersProps) {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     searchTerm: '',
@@ -439,6 +439,6 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
       )}
     </div>
   );
-};
+}
 
 export default TimelineFilters;

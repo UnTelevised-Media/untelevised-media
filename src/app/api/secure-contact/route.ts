@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sanityClient from '@/lib/sanity/lib/client';
 import { checkSubmissionRate } from '@/lib/bookstore/ratelimit';
-import { verifyCaptcha } from '@/lib/captcha';
+import verifyCaptcha from '@/lib/captcha';
 
 const SecureContactSchema = z.object({
   name: z.string().max(200).trim().optional(),

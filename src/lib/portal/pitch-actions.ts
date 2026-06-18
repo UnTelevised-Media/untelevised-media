@@ -4,7 +4,7 @@
 
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 import { getSanityAuthorIdForCurrentUser } from './author-actions';
 
 type Result = { success: true } | { success: false; error: string };

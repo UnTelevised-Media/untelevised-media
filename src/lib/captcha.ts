@@ -8,7 +8,7 @@ interface TurnstileResponse {
   'error-codes'?: string[];
 }
 
-export async function verifyCaptcha(token: string | null | undefined): Promise<boolean> {
+async function verifyCaptcha(token: string | null | undefined): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) {
     return true;
@@ -31,3 +31,6 @@ export async function verifyCaptcha(token: string | null | undefined): Promise<b
     return true; // fail open on network error — don't block legit users
   }
 }
+
+export default verifyCaptcha;
+export { verifyCaptcha };

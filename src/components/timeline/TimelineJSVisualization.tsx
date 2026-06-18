@@ -75,13 +75,13 @@ declare global {
   }
 }
 
-const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
+function TimelineJSVisualization({
   timeline,
   events,
   className = '',
   height = '600px',
   options = {},
-}) => {
+}: TimelineJSVisualizationProps) {
   const timelineRef = useRef<HTMLDivElement>(null);
   const timelineInstanceRef = useRef<Record<string, unknown> | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -468,6 +468,6 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
       </div>
     </motion.div>
   );
-};
+}
 
 export default TimelineJSVisualization;

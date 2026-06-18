@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { fileTypeFromBuffer } from 'file-type';
 import { getRoleFromUser } from '@/lib/auth/roles';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
 const MAX_SIZE_BYTES = 10 * 1024 * 1024;

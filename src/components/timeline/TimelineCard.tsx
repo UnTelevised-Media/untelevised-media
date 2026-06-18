@@ -18,12 +18,12 @@ interface TimelineCardProps {
   showEventCount?: boolean;
 }
 
-const TimelineCard: React.FC<TimelineCardProps> = ({
+function TimelineCard({
   timeline,
   className = '',
   showAuthor = true,
   showEventCount = true,
-}) => {
+}: TimelineCardProps) {
   const eventCount = timeline.events?.length ?? 0;
   const startDate = timeline.timeRange?.startDate;
   const endDate = timeline.timeRange?.endDate;
@@ -171,6 +171,6 @@ const TimelineCard: React.FC<TimelineCardProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default TimelineCard;

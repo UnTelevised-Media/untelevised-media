@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 
-const StudioNavbar = (props: { renderDefault: () => React.ReactNode }) => {
+function StudioNavbar(props: { renderDefault: () => React.ReactNode }) {
   return (
     <div className=''>
       {/* <Image src='/fuzzbar.png' width={2000} height={300} alt='' className='z-0'/> */}
@@ -15,6 +15,6 @@ const StudioNavbar = (props: { renderDefault: () => React.ReactNode }) => {
       <>{props.renderDefault()}</>
     </div>
   );
-};
+}
 
 export default StudioNavbar;

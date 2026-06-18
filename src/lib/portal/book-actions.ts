@@ -3,7 +3,7 @@
 // Server actions for author book management.
 
 import { requireAuthor } from '@/lib/auth/roles';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 import { getShopServiceClient } from '@/lib/bookstore/supabase';
 import { getSanityAuthorIdForCurrentUser } from './author-actions';
 import sanityClient from '@/lib/sanity/lib/client';

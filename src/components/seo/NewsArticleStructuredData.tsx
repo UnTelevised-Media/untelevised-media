@@ -2,13 +2,14 @@
 // JSON-LD structured data for news article pages — NewsArticle + BreadcrumbList schema
 
 import { getSanityOgImageUrl } from '@/util/metadata';
+import type { Article } from '#/sanity.types';
 
 interface Props {
   article: Article;
   slug: string;
 }
 
-export function NewsArticleStructuredData({ article, slug }: Props) {
+function NewsArticleStructuredData({ article, slug }: Props) {
   const canonicalUrl = `https://www.untelevised.media/articles/${slug}/`;
   const ogImageUrl = getSanityOgImageUrl(article.mainImage);
 
@@ -93,3 +94,5 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
     />
   );
 }
+
+export default NewsArticleStructuredData;

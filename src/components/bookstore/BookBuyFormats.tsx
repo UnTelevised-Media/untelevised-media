@@ -4,7 +4,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import type { SanityBook, SanityBookFormat, GiftOptions } from '@/lib/bookstore/types';
-import { getStripeIdForFormat } from '@/lib/bookstore/stripeUtils';
+import getStripeIdForFormat from '@/lib/bookstore/stripeUtils';
 import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 import AddToCartButton from './AddToCartButton';
 import BuyNowButton from './BuyNowButton';

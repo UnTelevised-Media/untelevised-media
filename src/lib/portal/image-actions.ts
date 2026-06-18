@@ -4,9 +4,9 @@
 'use server';
 
 import { requireAuthor } from '@/lib/auth/roles';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 
-export async function uploadImageToSanity(
+async function uploadImageToSanity(
   formData: FormData
 ): Promise<{ success: true; assetId: string; url: string } | { success: false; error: string }> {
   await requireAuthor();
@@ -34,3 +34,6 @@ export async function uploadImageToSanity(
 
   return { success: true, assetId: asset._id, url: asset.url };
 }
+
+export default uploadImageToSanity;
+export { uploadImageToSanity };

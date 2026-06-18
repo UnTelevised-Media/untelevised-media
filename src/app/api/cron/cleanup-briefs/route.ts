@@ -1,6 +1,6 @@
 import { timingSafeEqual } from 'crypto';
 import { type NextRequest, NextResponse } from 'next/server';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 
 function verifyBearerToken(authHeader: string | null, secret: string | undefined): boolean {
   if (!secret || !authHeader) {

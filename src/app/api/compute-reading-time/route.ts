@@ -13,7 +13,7 @@
 //   Secret:     SANITY_REVALIDATE_SECRET (same as the revalidate webhook)
 import { type NextRequest, NextResponse } from 'next/server';
 import { parseBody } from 'next-sanity/webhook';
-import { writeClient } from '@/lib/sanity/lib/write-client';
+import writeClient from '@/lib/sanity/lib/write-client';
 import { revalidateSecret } from '@/lib/sanity/env';
 
 export async function POST(req: NextRequest) {

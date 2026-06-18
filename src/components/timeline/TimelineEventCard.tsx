@@ -29,13 +29,13 @@ interface TimelineEventCardProps {
   variant?: 'default' | 'compact' | 'detailed';
 }
 
-const TimelineEventCard: React.FC<TimelineEventCardProps> = ({
+function TimelineEventCard({
   event,
   className = '',
   showAuthor = true,
   showRelated = true,
   variant = 'default',
-}) => {
+}: TimelineEventCardProps) {
   const getImportanceStyle = (level: string) => {
     switch (level) {
       case 'critical':
@@ -272,6 +272,6 @@ const TimelineEventCard: React.FC<TimelineEventCardProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default TimelineEventCard;

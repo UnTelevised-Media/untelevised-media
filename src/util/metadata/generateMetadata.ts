@@ -13,7 +13,7 @@ type Props = {
 const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 
 // Define the generateMetadata function
-export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
+async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
   // Fetch the post data based on the slug
   const queryPostMetadata = groq`
     *[_type == "post" && slug.current == $slug][0] {
@@ -85,3 +85,6 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
 
   return metadata;
 }
+
+export default generateMetadata;
+export { generateMetadata };

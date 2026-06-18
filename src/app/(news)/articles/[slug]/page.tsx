@@ -24,7 +24,7 @@ import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata';
-import { NewsArticleStructuredData } from '@/components/seo/NewsArticleStructuredData';
+import NewsArticleStructuredData from '@/components/seo/NewsArticleStructuredData';
 import { getReadingTime } from '@/lib/readingTime';
 import { CorrectionNotice } from '@/components/post/CorrectionNotice';
 import { SourcesPanel } from '@/components/post/SourcesPanel';
