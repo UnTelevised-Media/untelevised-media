@@ -4,7 +4,7 @@ import { MembershipTiers } from '@/components/membership/MembershipTiers';
 import { OneTimeDonation } from '@/components/membership/OneTimeDonation';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import DonateLink from '@/components/donate/DonateLink';
-import { membershipAnonClient } from '@/lib/membership/supabase';
+import { membershipAnonClient } from '@/services/membership/supabase';
 
 export const metadata: Metadata = {
   title: 'Support UnTelevised Media — Memberships, Donations & More',
