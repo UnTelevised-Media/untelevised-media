@@ -12,7 +12,7 @@ import {
   uploadDigitalAsset,
   fetchBookGenres,
   createBookGenre,
-} from '@/lib/portal/book-actions';
+} from '@/server/actions/portal/book';
 import type { SanityBookGenre } from '@/services/bookstore/types';
 
 interface Format {

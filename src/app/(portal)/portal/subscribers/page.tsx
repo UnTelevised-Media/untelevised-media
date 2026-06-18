@@ -4,11 +4,11 @@
 
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalFetch } from '@/lib/portal/fetch';
+import { portalFetch } from '@/services/portal/fetch';
 import {
   queryPortalNewsletterSubscribers,
   queryPortalBookstoreSubscribers,
-} from '@/lib/portal/queries';
+} from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { SubscribersList, type Subscriber } from '@/components/portal/SubscribersList';
 import { redirect } from 'next/navigation';

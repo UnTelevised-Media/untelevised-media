@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { createSource, updateSource, type SourceWriteInput } from '@/lib/portal/source-actions';
+import { createSource, updateSource, type SourceWriteInput } from '@/server/actions/portal/source';
 
 const formSchema = z.object({
   label: z.string().min(1, 'Source title is required').max(300),

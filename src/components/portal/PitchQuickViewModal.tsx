@@ -8,8 +8,8 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { toast } from 'sonner';
 import { X, Plus, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import { updatePitchDetails } from '@/lib/portal/pitch-actions';
-import { savePitchNotes } from '@/lib/portal/pitch-actions';
+import { updatePitchDetails } from '@/server/actions/portal/pitch';
+import { savePitchNotes } from '@/server/actions/portal/pitch';
 
 interface LinkItem {
   _key: string;

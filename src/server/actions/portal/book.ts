@@ -5,7 +5,7 @@
 import { requireAuthor } from '@/lib/auth/roles';
 import writeClient from '@/lib/sanity/lib/write-client';
 import { getShopServiceClient } from '@/services/bookstore/supabase';
-import { getSanityAuthorIdForCurrentUser } from './author-actions';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
 import sanityClient from '@/lib/sanity/lib/client';
 import type { SanityBookGenre } from '@/services/bookstore/types';
 

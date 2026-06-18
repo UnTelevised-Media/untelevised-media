@@ -32,7 +32,7 @@ import {
   submitArticleForReview,
   searchArticles,
   type ArticleWriteInput,
-} from '@/lib/portal/article-actions';
+} from '@/server/actions/portal/article';
 import { PitchQuickViewModal, type PitchForModal } from './PitchQuickViewModal';
 import {
   blockNoteToPortableText,

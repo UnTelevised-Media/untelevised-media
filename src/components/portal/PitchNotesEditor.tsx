@@ -5,7 +5,7 @@
 
 import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
-import { savePitchNotes } from '@/lib/portal/pitch-actions';
+import { savePitchNotes } from '@/server/actions/portal/pitch';
 
 interface Props {
   pitchId: string;

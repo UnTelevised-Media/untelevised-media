@@ -11,8 +11,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { updateMyProfile, type AuthorProfileInput } from '@/lib/portal/author-actions';
-import { uploadImageToSanity } from '@/lib/portal/image-actions';
+import { updateMyProfile, type AuthorProfileInput } from '@/server/actions/portal/author';
+import { uploadImageToSanity } from '@/server/actions/portal/image';
 
 // ---------------------------------------------------------------------------
 // Types

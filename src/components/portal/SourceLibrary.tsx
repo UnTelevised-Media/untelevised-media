@@ -16,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { deleteSource } from '@/lib/portal/source-actions';
+import { deleteSource } from '@/server/actions/portal/source';
 import { toast } from 'sonner';
 
 interface LinkedArticle {

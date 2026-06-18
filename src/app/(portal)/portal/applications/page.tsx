@@ -2,8 +2,8 @@
 // Job applications inbox — editor+ only.
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalFetch } from '@/lib/portal/fetch';
-import { queryPortalJobApplications } from '@/lib/portal/queries';
+import { portalFetch } from '@/services/portal/fetch';
+import { queryPortalJobApplications } from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { ApplicationsTable, type JobApplication } from '@/components/admin/ApplicationsTable';
 import { redirect } from 'next/navigation';

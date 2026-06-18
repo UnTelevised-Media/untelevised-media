@@ -3,16 +3,16 @@
 import { notFound } from 'next/navigation';
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalFetch } from '@/lib/portal/fetch';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
+import { portalFetch } from '@/services/portal/fetch';
 import {
   queryPortalArticleById,
   queryPortalCategories,
   queryPortalAuthors,
-} from '@/lib/portal/queries';
+} from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import ArticleEditorForm from '@/components/portal/ArticleEditorForm';
-import type { ArticleWriteInput } from '@/lib/portal/article-actions';
+import type { ArticleWriteInput } from '@/server/actions/portal/article';
 import type { PitchForModal } from '@/components/portal/PitchQuickViewModal';
 
 export const metadata = {

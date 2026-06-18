@@ -46,7 +46,7 @@ import {
   approveArticleDeletion,
   denyArticleDeletion,
   retractArticle,
-} from '@/lib/portal/article-actions';
+} from '@/server/actions/portal/article';
 import { toast } from 'sonner';
 
 // ---------------------------------------------------------------------------

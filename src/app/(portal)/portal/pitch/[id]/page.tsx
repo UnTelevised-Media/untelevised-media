@@ -3,9 +3,9 @@
 import { notFound } from 'next/navigation';
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalFetch } from '@/lib/portal/fetch';
-import { queryPortalClaimedPitchById, queryPortalArticlesTitles } from '@/lib/portal/queries';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
+import { portalFetch } from '@/services/portal/fetch';
+import { queryPortalClaimedPitchById, queryPortalArticlesTitles } from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { PitchNotesEditor } from '@/components/portal/PitchNotesEditor';
 import { PitchDetailsEditor } from '@/components/portal/PitchDetailsEditor';

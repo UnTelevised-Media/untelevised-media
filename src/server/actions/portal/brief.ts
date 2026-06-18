@@ -5,9 +5,9 @@
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import writeClient from '@/lib/sanity/lib/write-client';
-import { portalClient } from '@/lib/portal/fetch';
-import { queryPortalBriefById, queryPortalMyPitchesForBrief } from '@/lib/portal/queries';
-import { getSanityAuthorIdForCurrentUser } from './author-actions';
+import { portalClient } from '@/services/portal/fetch';
+import { queryPortalBriefById, queryPortalMyPitchesForBrief } from '@/services/portal/queries';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
 
 type Result = { success: true } | { success: false; error: string };
 type ClaimResult = { success: true; pitchId: string } | { success: false; error: string };

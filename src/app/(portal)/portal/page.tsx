@@ -2,8 +2,8 @@
 // Staff dashboard — overview of content and inbox stats, scoped by role.
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalSanityFetch } from '@/lib/portal/live';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
+import { portalSanityFetch } from '@/services/portal/live';
 import {
   queryPortalArticlesByAuthor,
   queryPortalAllArticles,
@@ -19,7 +19,7 @@ import {
   queryPortalAllClaimedPitches,
   queryPortalAllBriefs,
   queryPortalMyAuthorFlags,
-} from '@/lib/portal/queries';
+} from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import {
   BriefPanel,

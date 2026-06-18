@@ -3,9 +3,9 @@
 // Server component: fetches articles scoped by role (author = own, editor/admin = all).
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalFetch } from '@/lib/portal/fetch';
-import { queryPortalArticlesByAuthor, queryPortalAllArticles } from '@/lib/portal/queries';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
+import { portalFetch } from '@/services/portal/fetch';
+import { queryPortalArticlesByAuthor, queryPortalAllArticles } from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import ArticleDashboard from '@/components/portal/ArticleDashboard';
 import Link from 'next/link';

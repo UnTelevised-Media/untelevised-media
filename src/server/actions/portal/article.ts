@@ -7,11 +7,11 @@
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole, getRoleFromMeta } from '@/lib/auth/roles-utils';
 import writeClient from '@/lib/sanity/lib/write-client';
-import { getSanityAuthorIdForCurrentUser } from './author-actions';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
 import { clerkClient } from '@clerk/nextjs/server';
 import { z } from 'zod';
 import { sanitizeText } from '@/util/sanitize';
-import { checkRateLimit } from './rate-limit';
+import { checkRateLimit } from '@/services/portal/rate-limit';
 
 // Portable Text block — matches Sanity's block content structure
 type PortableTextBlock = Record<string, unknown>;

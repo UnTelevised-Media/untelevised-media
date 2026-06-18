@@ -4,11 +4,11 @@
 
 import { requireAuthor } from '@/lib/auth/roles';
 import writeClient from '@/lib/sanity/lib/write-client';
-import { verifyArticleAccessForClerkUser } from './article-ownership';
+import { verifyArticleAccessForClerkUser } from '@/services/portal/article-ownership';
 import { sanitizeText } from '@/util/sanitize';
-import { checkRateLimit } from './rate-limit';
-import { portalClient } from './fetch';
-import { queryPortalAllSources } from './queries';
+import { checkRateLimit } from '@/services/portal/rate-limit';
+import { portalClient } from '@/services/portal/fetch';
+import { queryPortalAllSources } from '@/services/portal/queries';
 import { z } from 'zod';
 
 const sourceWriteSchema = z.object({

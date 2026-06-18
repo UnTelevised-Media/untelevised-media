@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { createSource, fetchAllSources } from '@/lib/portal/source-actions';
+import { createSource, fetchAllSources } from '@/server/actions/portal/source';
 import { toast } from 'sonner';
 
 interface SourceItem {

@@ -20,7 +20,7 @@ import {
   removeServerWishlistEntry,
   clearServerWishlist,
   syncLocalWishlistToServer,
-} from '@/lib/wishlist/actions';
+} from '@/server/actions/wishlist';
 
 export interface UseWishlistReturn {
   wishlist: WishlistEntry[];

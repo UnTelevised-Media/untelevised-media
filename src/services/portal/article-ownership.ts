@@ -4,7 +4,7 @@ import 'server-only';
 
 import { hasRole, getRoleFromMeta } from '@/lib/auth/roles-utils';
 import writeClient from '@/lib/sanity/lib/write-client';
-import { getSanityAuthorIdForCurrentUser } from './author-actions';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
 import { clerkClient } from '@clerk/nextjs/server';
 
 async function verifyArticleAccessForClerkUser(

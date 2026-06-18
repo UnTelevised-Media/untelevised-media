@@ -20,7 +20,7 @@ import {
   removeServerBookmark,
   clearServerBookmarks,
   syncLocalBookmarksToServer,
-} from '@/lib/bookmarks/actions';
+} from '@/server/actions/bookmarks';
 
 export interface UseBookmarksReturn {
   /** All bookmarks for the current session (local or server). */

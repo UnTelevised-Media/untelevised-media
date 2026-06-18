@@ -26,7 +26,7 @@ import {
   assignStory,
   fetchBriefById,
   autoRepairBrief,
-} from '@/lib/portal/brief-actions';
+} from '@/server/actions/portal/brief';
 
 // ---------------------------------------------------------------------------
 // Types

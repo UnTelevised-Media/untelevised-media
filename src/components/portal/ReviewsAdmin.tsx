@@ -5,7 +5,7 @@
 import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { approveReview, declineReview, sendReviewFeedback } from '@/lib/portal/review-actions';
+import { approveReview, declineReview, sendReviewFeedback } from '@/server/actions/portal/review';
 
 export interface PortalReview {
   _id: string;

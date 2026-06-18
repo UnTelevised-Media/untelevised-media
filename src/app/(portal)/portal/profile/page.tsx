@@ -2,9 +2,9 @@
 // Author profile edit page — lets signed-in authors update their own Sanity author document.
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalFetch } from '@/lib/portal/fetch';
-import { queryPortalMyProfile } from '@/lib/portal/queries';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
+import { portalFetch } from '@/services/portal/fetch';
+import { queryPortalMyProfile } from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import AuthorProfileForm from '@/components/portal/AuthorProfileForm';
 
