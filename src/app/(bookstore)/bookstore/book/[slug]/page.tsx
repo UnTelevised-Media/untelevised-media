@@ -169,7 +169,7 @@ function RevenueTermsCard({
   const { authorPercentage, publisherPercentage, platformPercentage, description } = terms;
   const hasData =
     authorPercentage !== null || publisherPercentage !== null || platformPercentage !== null;
-  if (!hasData) {return null;}
+  if (!hasData) return null;
 
   const slices = [
     { label: 'Author', pct: authorPercentage ?? 0, color: 'bg-untele' },

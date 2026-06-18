@@ -314,11 +314,8 @@ export async function updateBook(bookId: string, input: UpdateBookInput): Promis
     unset.push('isbn');
   }
 
-  if (input.pages !== null) {
-    patch.pages = input.pages;
-  } else if (input.pages === null) {
-    unset.push('pages');
-  }
+  if (input.pages !== null) patch.pages = input.pages;
+  else if (input.pages === null) unset.push('pages');
 
   if (input.publishedAt) {
     patch.publishedAt = input.publishedAt;
