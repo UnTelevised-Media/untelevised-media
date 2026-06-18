@@ -5,7 +5,7 @@
 
 import { auth } from '@clerk/nextjs/server';
 import writeClient from '@/lib/sanity/lib/write-client';
-import type { WishlistEntry } from './storage';
+import type { WishlistEntry } from '@/services/storage/wishlist';
 
 function wishlistDocId(userId: string, slug: string): string {
   const safeUserId = userId.replace(/[^a-zA-Z0-9]/g, '_');

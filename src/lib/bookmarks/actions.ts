@@ -6,7 +6,7 @@
 import { auth } from '@clerk/nextjs/server';
 import writeClient from '@/lib/sanity/lib/write-client';
 import { client } from '@/lib/sanity/lib/client';
-import type { BookmarkEntry } from './storage';
+import type { BookmarkEntry } from '@/services/storage/bookmarks';
 
 // Unique Sanity document _id per user+slug combination
 function bookmarkDocId(userId: string, slug: string): string {

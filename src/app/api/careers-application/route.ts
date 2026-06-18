@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sanityClient from '@/lib/sanity/lib/client';
-import verifyCaptcha from '@/lib/captcha';
+import verifyCaptcha from '@/services/captcha';
 
 // Server-side schema â€” mirrors jobApplicationSchema without File refinements
 const serverSchema = z.object({
