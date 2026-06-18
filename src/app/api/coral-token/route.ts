@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/coral-token/route.ts
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { SignJWT } from 'jose';
@@ -10,7 +11,7 @@ import { randomUUID } from 'crypto';
  * Verifies the active Clerk session and mints a short-lived HS256 JWT that
  * Coral uses for SSO.
  *
- * Payload structure follows https://docs.coralproject.net/sso — all user
+ * Payload structure follows https://docs.coralproject.net/sso â€” all user
  * fields must be nested under a `user` object, NOT at the top level.
  *
  * Unauthenticated requests receive { token: null } so CommentsSection
@@ -38,11 +39,11 @@ export async function GET() {
   const email = user.emailAddresses[0]?.emailAddress ?? '';
   const username = user.username ?? user.firstName ?? user.lastName ?? 'Reader';
 
-  // Clerk publicMetadata.role === 'admin' | 'staff' → Coral MODERATOR
+  // Clerk publicMetadata.role === 'admin' | 'staff' â†’ Coral MODERATOR
   const clerkRole = (user.publicMetadata as { role?: string })?.role;
   const coralRole = clerkRole === 'admin' || clerkRole === 'staff' ? 'MODERATOR' : undefined;
 
-  // Coral requires all user fields nested under `user` — NOT top-level claims.
+  // Coral requires all user fields nested under `user` â€” NOT top-level claims.
   // See: https://docs.coralproject.net/sso
   const coralUser: Record<string, unknown> = {
     id: userId,

@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/draft/route.ts
 import { NextRequest } from 'next/server';
 import { draftMode } from 'next/headers';

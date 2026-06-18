@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 'use client';
 
 import { useState } from 'react';
@@ -93,7 +94,7 @@ export function OneTimeDonation() {
           : `Donate ${effectiveAmount >= 5 ? `$${effectiveAmount % 1 === 0 ? effectiveAmount : effectiveAmount.toFixed(2)}` : ''} via Stripe`}
       </button>
       <p className='mt-2 text-center text-xs text-zinc-600'>
-        Powered by Stripe · Secure · No account required
+        Powered by Stripe Â· Secure Â· No account required
       </p>
     </div>
   );

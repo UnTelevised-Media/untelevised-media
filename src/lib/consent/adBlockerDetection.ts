@@ -50,7 +50,7 @@ export class AdBlockerDetector {
 
     // Quick check: if AdSense manager already detected blocking, use that
     try {
-      const { adsenseManager } = await import('@/lib/ads/adsenseInit');
+      const { adsenseManager } = await import('@/lib/googleAdSense/adsenseInit');
       if (adsenseManager.isLikelyBlocked()) {
         console.log('AdBlockerDetector: AdSense manager already detected blocking');
         return true;

@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 'use client';
 // src/components/bookmarks/BookmarkButton.tsx
 import React from 'react';
@@ -8,7 +9,7 @@ import type { BookmarkEntry } from '@/lib/bookmarks/storage';
 type BookmarkButtonProps = Omit<BookmarkEntry, 'bookmarkedAt'> & {
   /** Optional extra class names on the button wrapper */
   className?: string;
-  /** Render mode — 'icon' shows icon only; 'full' shows icon + label */
+  /** Render mode â€” 'icon' shows icon only; 'full' shows icon + label */
   variant?: 'icon' | 'full';
 };
 

@@ -1,5 +1,6 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/newsletter-unsubscribe/route.ts
-// News newsletter unsubscribe — validates token, marks subscriber inactive.
+// News newsletter unsubscribe â€” validates token, marks subscriber inactive.
 import { NextRequest, NextResponse } from 'next/server';
 import { unsubscribeFromList } from '@/lib/newsletter/service';
 import { NEWS_NEWSLETTER } from '@/lib/newsletter/types';

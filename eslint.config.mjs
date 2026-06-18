@@ -5,6 +5,8 @@ import globals from 'globals';
 import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import nextPlugin from '@next/eslint-plugin-next';
 
 export default [
   // Global ignores
@@ -29,7 +31,7 @@ export default [
   },
   // Main configuration
   {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    files: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.js', 'src/**/*.jsx'],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2023,
@@ -48,6 +50,8 @@ export default [
       '@typescript-eslint': typescriptEslint,
       import: importPlugin,
       react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      '@next/next': nextPlugin,
     },
     settings: {
       react: {
@@ -56,13 +60,8 @@ export default [
     },
     rules: {
       ...js.configs.recommended.rules,
-      'no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-        },
-      ],
+      'no-unused-vars': 'off', // Disabled in favor of @typescript-eslint/no-unused-vars
+
       'no-duplicate-imports': 'warn',
       'no-empty-function': 'off',
       'no-explicit-any': 'off',
@@ -87,6 +86,7 @@ export default [
         'warn',
         {
           argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
         },
       ],
       '@typescript-eslint/explicit-function-return-type': 'off',
@@ -102,11 +102,22 @@ export default [
           unnamedComponents: 'arrow-function',
         },
       ],
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      '@next/next/no-img-element': 'warn',
+      '@next/next/no-sync-scripts': 'warn',
+    },
+  },
+  // Type declaration files configuration
+  {
+    files: ['src/**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off', // Type augmentations are intentionally unused in their declaring file
     },
   },
   // Test files configuration
   {
-    files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx', '**/jest.setup.ts'],
+    files: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'src/**/*.spec.ts', 'src/**/*.spec.tsx', 'src/**/jest.setup.ts'],
     languageOptions: {
       globals: {
         ...globals.jest,

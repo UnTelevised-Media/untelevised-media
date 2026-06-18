@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/download/guest-resend/route.ts
 // POST /api/bookstore/download/guest-resend
 // Allows a guest to request a fresh download link by providing their order number and email.

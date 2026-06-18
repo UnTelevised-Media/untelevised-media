@@ -51,6 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// eslint-disable-next-line no-redeclare
 export default async function LiveEvent({ params }: Props) {
   const { slug } = await params;
   const liveEvent: any = await getEventBySlug(slug);
@@ -61,14 +62,14 @@ export default async function LiveEvent({ params }: Props) {
   const allEvents = [
     // Check if liveEvent.relatedArticles is an array. If Truthy map over it and return an array of objects with the source property set to the source of the related article.
     ...(Array.isArray((liveEvent as any)?.relatedArticles)
-      ? (liveEvent as any)?.relatedArticles?.map((article: any) => ({
+      ? (liveEvent as any).relatedArticles.map((article: any) => ({
           ...article,
           source: 'relatedArticles',
         }))
       : []),
     // Check if liveEvent.keyEvent is an array. If Truthy map over it and return an array of objects with the source property set to the source of the key event.
     ...(Array.isArray((liveEvent as any)?.keyEvent)
-      ? (liveEvent as any)?.keyEvent?.map((event: any) => ({
+      ? (liveEvent as any).keyEvent.map((event: any) => ({
           ...event,
           source: 'keyEvent',
         }))
@@ -254,7 +255,7 @@ export default async function LiveEvent({ params }: Props) {
                         </>
                       ) : (
                         <PortableText
-                          value={event.description as Block[]}
+                          value={event.description as any}
                           components={RichTextComponents}
                         />
                       )}

@@ -7,7 +7,7 @@ import type { LiveEvent } from '@/lib/sanity/sanity.types';
 import PastEventCard from '@/components/cards/PastEventCard';
 import { Button } from '@/components/ui/button';
 
-import { loadMorePastEvents } from '@/lib/actions/pastEvents';
+import { loadMorePastEvents } from '@/server/actions/pastEvents';
 
 interface PastEventsPageProps {
   initialEvents: LiveEvent[];
@@ -30,7 +30,7 @@ function PastEventsPage({ initialEvents }: PastEventsPageProps) {
   const availableTags = useMemo(() => {
     const tags = new Set<string>();
     events.forEach((event) => {
-      event.eventTag?.forEach((tag) => {
+      event.eventTag?.forEach((_tag) => {
         tags.add('Tag');
       });
     });
@@ -42,7 +42,7 @@ function PastEventsPage({ initialEvents }: PastEventsPageProps) {
     const filtered = events.filter((event) => {
       const matchesSearch =
         !searchTerm ||
-        (event.title && event.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (event.title?.toLowerCase().includes(searchTerm.toLowerCase())) ||
         event.description?.toLowerCase().includes(searchTerm.toLowerCase());
 
       const matchesTag = !selectedTag || (event.eventTag && event.eventTag.length > 0);

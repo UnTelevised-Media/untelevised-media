@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/download/guest/route.ts
 // GET /api/bookstore/download/guest?token=...
 // Single-use download endpoint for guest (unauthenticated) purchasers.
@@ -13,7 +14,7 @@ export async function GET(req: NextRequest) {
   const rl = await checkDownloadRate(req);
   if (rl.limited) {
     return new NextResponse(
-      buildErrorPage('Too many requests — please wait a moment and try again.', 'error'),
+      buildErrorPage('Too many requests â€” please wait a moment and try again.', 'error'),
       { status: 429, headers: { 'Content-Type': 'text/html' } }
     );
   }
@@ -147,7 +148,7 @@ function buildErrorPage(message: string, reason: 'expired' | 'used' | 'invalid' 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Download Unavailable — UnTelevised Media</title>
+  <title>Download Unavailable â€” UnTelevised Media</title>
   <style>
     body { font-family: sans-serif; background: #f8f8f8; color: #111; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
     .card { background: #fff; border: 1px solid #e5e5e5; max-width: 480px; width: 100%; padding: 2rem; box-sizing: border-box; }

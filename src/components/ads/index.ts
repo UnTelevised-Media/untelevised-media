@@ -10,4 +10,4 @@ export { default as AdManager, useAdContext } from './AdManager';
 export { default as LargeAdCard } from '../googleAds/LargeAdCard';
 
 // Export ad configuration
-export { default as AD_CONFIG } from '@/lib/ads/adConfig';
+export { default as AD_CONFIG } from '@/lib/googleAdSense/adConfig';

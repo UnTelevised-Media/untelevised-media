@@ -4,7 +4,7 @@ import getAllURLs from '@/util/getAllUrls';
 import sanityClient from '@/lib/sanity/lib/client';
 import { groq } from 'next-sanity';
 import { queryAllTags } from '@/lib/sanity/lib/queries';
-import { tagToSlug } from '@/lib/tagUtils';
+import { tagToSlug } from '@/util/tagUtils';
 
 const queryFactCheckSlugs = groq`
   *[_type == 'factCheck'] {

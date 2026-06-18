@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
  
  
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -18,8 +19,8 @@ import {
 
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-// Code-split heavy embed libraries — loaded only when content contains these block types
-// Tweet embeds go through SafeTweet (RSC existence check) → SafeTweetWrapper
+// Code-split heavy embed libraries â€” loaded only when content contains these block types
+// Tweet embeds go through SafeTweet (RSC existence check) â†’ SafeTweetWrapper
 // (client-only, ssr:false + error boundary) to prevent SSG build crashes.
 import SafeTweet from '@/components/embeds/SafeTweet';
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter').then((m) => m.Prism));
@@ -29,7 +30,7 @@ import TikTokEmbed from './TikTokEmbed';
 
 export const RichTextComponents = {
   types: {
-    // ── Images ───────────────────────────────────────────────────────────────
+    // â”€â”€ Images â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     image: ({ value }: any) => {
       const alt = value.alt || 'Image';
       // Sanity asset refs encode dimensions: image-{id}-{WIDTH}x{HEIGHT}-{ext}
@@ -61,7 +62,7 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Code Blocks ───────────────────────────────────────────────────────────
+    // â”€â”€ Code Blocks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     code: ({ value }: any) => {
       const { code, language } = value;
       return (
@@ -85,7 +86,7 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Tables ────────────────────────────────────────────────────────────────
+    // â”€â”€ Tables â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     table: ({ value }: any) => {
       const { rows } = value;
       if (!rows) {return null;}
@@ -137,7 +138,7 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Mermaid Diagrams ─────────────────────────────────────────────────────
+    // â”€â”€ Mermaid Diagrams â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // Falls back to a styled code block until the mermaid package is installed
     mermaidDiagram: ({ value }: any) => {
       const { code } = value;
@@ -155,7 +156,7 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Non-standard "list" container blocks ─────────────────────────────────
+    // â”€â”€ Non-standard "list" container blocks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // Blocks where _type="list" were inserted programmatically with inner block
     // children. PortableText treats them as blocks, causing "Objects are not
     // valid as a React child" errors. Render them as proper lists here.
@@ -179,7 +180,7 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Non-standard "blockquote" container blocks ────────────────────────────
+    // â”€â”€ Non-standard "blockquote" container blocks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // Blocks where _type="blockquote" have inner block children instead of the
     // standard style="blockquote" pattern. Extract and render as blockquote.
     blockquote: ({ value }: any) => {
@@ -197,7 +198,7 @@ export const RichTextComponents = {
       );
     },
 
-    // ── YouTube Embeds ────────────────────────────────────────────────────────
+    // â”€â”€ YouTube Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     youtubeEmbed: ({ value }: any) => {
       const videoId = value.videoId;
       return (
@@ -213,7 +214,7 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Twitter/X Embeds ─────────────────────────────────────────────────────
+    // â”€â”€ Twitter/X Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // SafeTweet is an async RSC that catches deleted/protected tweet errors so
     // a single bad tweet can't crash the entire article static generation.
     twitterEmbed: ({ value }: any) => {
@@ -222,32 +223,32 @@ export const RichTextComponents = {
       return <SafeTweet id={tweetId} />;
     },
 
-    // ── Inline Fact-Check Cards ───────────────────────────────────────────────
+    // â”€â”€ Inline Fact-Check Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     factCheckEmbed: ({ value }: any) => {
       const fc = value?.factCheck;
       if (!fc) {return null;}
       return <InlineFactCheckCard factCheck={fc} />;
     },
 
-    // ── Instagram Embeds ─────────────────────────────────────────────────────
+    // â”€â”€ Instagram Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     instagramEmbed: ({ value }: any) => {
       const postId = value.postId;
       return <InstagramEmbed postId={postId} />;
     },
 
-    // ── Facebook Embeds ──────────────────────────────────────────────────────
+    // â”€â”€ Facebook Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     facebookEmbed: ({ value }: any) => {
       const postUrl = value.postUrl;
       return <FacebookEmbed postUrl={postUrl} />;
     },
 
-    // ── TikTok Embeds ────────────────────────────────────────────────────────
+    // â”€â”€ TikTok Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     tiktokEmbed: ({ value }: any) => {
       const videoUrl = value.videoUrl;
       return <TikTokEmbed videoUrl={videoUrl} />;
     },
 
-    // ── Vimeo Embeds ─────────────────────────────────────────────────────────
+    // â”€â”€ Vimeo Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     vimeoEmbed: ({ value }: any) => {
       const { videoId } = value;
       if (!videoId) {return null;}
@@ -264,7 +265,7 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Custom Iframe Embeds ──────────────────────────────────────────────────
+    // â”€â”€ Custom Iframe Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // Note: Some sites (e.g., ABC7 Chicago) block embedding with X-Frame-Options.
     // If embed fails, the iframe will show a blocked message. Sites may need to be
     // contacted to allow cross-origin embedding, or use their specific embed code.
@@ -293,7 +294,7 @@ export const RichTextComponents = {
     },
   },
 
-  // ── List Renderers ──────────────────────────────────────────────────────────
+  // â”€â”€ List Renderers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   list: {
     bullet: ({ children }: any) => (
       <ul className='my-4 ml-6 list-disc space-y-2 text-slate-800 dark:text-slate-200'>
@@ -307,7 +308,7 @@ export const RichTextComponents = {
     ),
   },
 
-  // ── Block Styles ────────────────────────────────────────────────────────────
+  // â”€â”€ Block Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   block: {
     normal: ({ children }: any) => (
       <p className='my-4 leading-relaxed text-slate-800 dark:text-slate-200'>{children}</p>
@@ -351,7 +352,7 @@ export const RichTextComponents = {
     break: () => <br />,
   },
 
-  // ── Inline Marks ────────────────────────────────────────────────────────────
+  // â”€â”€ Inline Marks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   marks: {
     link: ({ children, value }: any) => {
       const rel = !value.href?.startsWith('/') ? 'noreferrer noopener' : undefined;

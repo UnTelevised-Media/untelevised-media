@@ -81,9 +81,9 @@ function AuthorBookCard({ book }: { book: SanityBook }) {
           <h3 className='text-sm font-black leading-tight text-slate-900 group-hover:text-untele dark:text-hp-cream'>
             {book.title}
           </h3>
-          {price != null && (
+          {price !== null && price !== undefined && (
             <div className='mt-1'>
-              {compareAtPrice != null && (
+              {compareAtPrice !== null && compareAtPrice !== undefined && (
                 <p className='text-[10px] text-hp-muted line-through'>
                   ${compareAtPrice.toFixed(2)}
                 </p>
@@ -108,6 +108,7 @@ function AuthorBookCard({ book }: { book: SanityBook }) {
   );
 }
 
+// eslint-disable-next-line no-redeclare
 export default async function Author({ params }: Props) {
   const { slug } = await params;
   const author: any = await getAuthorBySlug(slug);

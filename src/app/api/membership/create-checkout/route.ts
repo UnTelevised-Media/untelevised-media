@@ -1,6 +1,7 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/membership/create-checkout/route.ts
 // Creates a Stripe Checkout Session for a membership subscription.
-// Uses the membership Stripe project (STRIPE_MEMBERSHIP_SECRET_KEY) —
+// Uses the membership Stripe project (STRIPE_MEMBERSHIP_SECRET_KEY) â€”
 // entirely separate from the bookstore Stripe project (STRIPE_SECRET_KEY).
 
 import { NextRequest, NextResponse } from 'next/server';

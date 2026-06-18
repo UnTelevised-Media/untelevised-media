@@ -1,6 +1,7 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/internal/send-email/route.ts
 // Internal-only transactional email endpoint called by the Supabase stripe-webhook edge function.
-// Protected by INTERNAL_EMAIL_SECRET bearer token — never expose this route to clients.
+// Protected by INTERNAL_EMAIL_SECRET bearer token â€” never expose this route to clients.
 
 import { timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';

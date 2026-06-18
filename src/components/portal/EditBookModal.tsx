@@ -1,3 +1,4 @@
+ 
 'use client';
 // src/components/portal/EditBookModal.tsx
 // In-portal book editor. Slide-over form pre-populated from existing book data.
@@ -134,7 +135,7 @@ export default function EditBookModal({ book }: Props) {
     setDescription(blocksToText(b.description));
     setStatus(b.status);
     setIsbn(b.isbn ?? '');
-    setPages(b.pages != null ? String(b.pages) : '');
+    setPages(b.pages !== null ? String(b.pages) : '');
     setLanguage(b.language ?? 'en');
     setPublishedAt(b.publishedAt ?? '');
     setEditFormats(
@@ -143,11 +144,11 @@ export default function EditBookModal({ book }: Props) {
         isNew: false,
         formatType: f.formatType,
         price: String(f.price ?? ''),
-        compareAtPrice: f.compareAtPrice != null ? String(f.compareAtPrice) : '',
+        compareAtPrice: f.compareAtPrice !== null ? String(f.compareAtPrice) : '',
         existingAssetPath: f.digitalAsset?.supabaseStoragePath,
         nameYourPrice: f.nameYourPrice ?? false,
-        minimumPrice: f.minimumPrice != null ? String(f.minimumPrice) : '',
-        suggestedPrice: f.suggestedPrice != null ? String(f.suggestedPrice) : '',
+        minimumPrice: f.minimumPrice !== null ? String(f.minimumPrice) : '',
+        suggestedPrice: f.suggestedPrice !== null ? String(f.suggestedPrice) : '',
         stripePriceId: f.stripePriceId ?? '',
         stripeProductId: f.stripeProductId ?? '',
       }))
@@ -170,7 +171,7 @@ export default function EditBookModal({ book }: Props) {
     fetchBookGenres()
       .then(setLocalGenres)
       .finally(() => setGenresLoading(false));
-  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [open]);  
 
   // Close genre dropdown on outside click
   useEffect(() => {

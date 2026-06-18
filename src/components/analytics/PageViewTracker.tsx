@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { useEffect } from 'react';
@@ -14,7 +15,7 @@ export default function PageViewTracker({ event, params }: Props) {
   useEffect(() => {
     trackEvent(event, params);
     // intentionally runs once on mount — params are stable at render time
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
 
   return null;

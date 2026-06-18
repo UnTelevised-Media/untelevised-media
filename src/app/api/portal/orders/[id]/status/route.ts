@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 // src/app/api/portal/orders/[id]/status/route.ts
 // PATCH — update order status. Accessible to admin, sales, and authors (own book orders only).
 

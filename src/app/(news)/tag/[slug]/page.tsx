@@ -10,7 +10,7 @@ import resolveHref from '@/util/resolveHref';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAllTags, queryArticlesByTag } from '@/lib/sanity/lib/queries';
-import { tagToSlug, slugToTagLabel } from '@/lib/tagUtils';
+import { tagToSlug, slugToTagLabel } from '@/util/tagUtils';
 import { getCanonicalUrl, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
 
 type Props = {

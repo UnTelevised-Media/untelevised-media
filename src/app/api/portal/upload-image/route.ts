@@ -1,5 +1,6 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/portal/upload-image/route.ts
-// POST — upload an image to Sanity's asset pipeline.
+// POST â€” upload an image to Sanity's asset pipeline.
 // Uses a route handler instead of a server action to avoid Next.js CSRF
 // failures that occur with multipart/form-data server actions when
 // trailingSlash: true is set in next.config.ts.
@@ -54,7 +55,7 @@ export async function POST(req: NextRequest) {
   try {
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Validate actual file content via magic bytes — Content-Type header is
+    // Validate actual file content via magic bytes â€” Content-Type header is
     // attacker-controlled and cannot be trusted on its own.
     const detected = await fileTypeFromBuffer(buffer);
     if (!detected || !ALLOWED_TYPES.includes(detected.mime)) {

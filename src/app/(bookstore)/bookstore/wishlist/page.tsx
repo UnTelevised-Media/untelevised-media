@@ -93,7 +93,7 @@ export default function WishlistPage() {
                   >
                     {entry.title}
                   </Link>
-                  {entry.price != null && (
+                  {entry.price !== null && entry.price !== undefined && (
                     <p className='mt-1 text-xs font-bold text-untele'>${entry.price.toFixed(2)}</p>
                   )}
                 </div>

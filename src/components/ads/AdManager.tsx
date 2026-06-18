@@ -1,8 +1,7 @@
- 
 'use client';
 
 import { useEffect, useState, useRef, createContext, useContext } from 'react';
-import { AD_CONFIG } from '@/lib/ads/adConfig';
+import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
 import { useConsentCheck } from '@/lib/consent/context';
 
 interface AdManagerProps {

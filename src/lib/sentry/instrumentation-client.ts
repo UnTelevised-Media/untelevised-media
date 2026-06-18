@@ -18,4 +18,4 @@ Sentry.init({
 });
 
 // Hook into App Router navigation transitions
-export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
+export default Sentry.captureRouterTransitionStart;

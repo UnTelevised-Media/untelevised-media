@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/components/post/CorrectionNotice.tsx
 import { AlertTriangle, Info, RefreshCw, XCircle } from 'lucide-react';
 import formatDate from '@/util/formatDate';

@@ -1,5 +1,6 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/newsletter/unsubscribe/route.ts
-// Bookstore newsletter unsubscribe — validates token, marks subscriber inactive.
+// Bookstore newsletter unsubscribe â€” validates token, marks subscriber inactive.
 import { NextRequest, NextResponse } from 'next/server';
 import { unsubscribeFromList } from '@/lib/newsletter/service';
 import { BOOKSTORE_NEWSLETTER } from '@/lib/newsletter/types';

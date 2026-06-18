@@ -1,5 +1,6 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/newsletter/confirm/route.ts
-// Bookstore newsletter confirmation — validates token, activates subscriber, sends welcome email.
+// Bookstore newsletter confirmation â€” validates token, activates subscriber, sends welcome email.
 import { NextRequest, NextResponse } from 'next/server';
 import { confirmSubscription } from '@/lib/newsletter/service';
 import { BOOKSTORE_NEWSLETTER } from '@/lib/newsletter/types';

@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 'use client';
 // src/components/global/TurnstileWidget.tsx
 // Cloudflare Turnstile CAPTCHA widget. Renders nothing when

@@ -38,7 +38,7 @@ export default function FacebookEmbedInner({ postUrl }: { postUrl: string }) {
             </Link>
           </blockquote>
         </div>
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        { }
         <script
           async
           defer

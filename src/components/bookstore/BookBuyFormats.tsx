@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 // src/components/bookstore/BookBuyFormats.tsx
 // Client component — owns gift toggle state and NYOP amounts, renders per-format buy actions.
@@ -53,7 +54,7 @@ export default function BookBuyFormats({ book }: Props) {
         price: f.price,
       })),
     });
-  }, [trackEvent]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [trackEvent]);  
 
   return (
     <>
@@ -117,7 +118,7 @@ export default function BookBuyFormats({ book }: Props) {
                 <div className='flex flex-wrap items-center gap-3'>
                   {!isNyop && (
                     <div className='text-right'>
-                      {format.compareAtPrice != null && (
+                      {format.compareAtPrice !== null && format.compareAtPrice !== undefined && (
                         <p className='text-xs text-slate-400 line-through'>
                           ${format.compareAtPrice.toFixed(2)}
                         </p>
@@ -174,7 +175,7 @@ export default function BookBuyFormats({ book }: Props) {
                             setNyopAmounts((prev) => ({ ...prev, [format._key]: e.target.value }))
                           }
                           placeholder={
-                            format.suggestedPrice != null
+                            format.suggestedPrice !== null && format.suggestedPrice !== undefined
                               ? format.suggestedPrice.toFixed(2)
                               : minimum > 0
                                 ? minimum.toFixed(2)

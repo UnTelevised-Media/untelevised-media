@@ -2,13 +2,13 @@
 // Single-article card used in category and tag grid pages.
 // Wrapped externally by ClientSideRoute (Link) — no internal Link element.
 import Image from 'next/image';
-import { ArrowUpRight, AlertTriangle, XCircle } from 'lucide-react';
+import { ArrowUpRight, AlertTriangle } from 'lucide-react';
 import type { Article } from '@/lib/sanity/sanity.types';
 
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import urlForImage from '@/util/urlForImage';
-import { getReadingTime } from '@/lib/readingTime';
+import { getReadingTime } from '@/util/readingTime';
 
 type Props = {
   post: Article;

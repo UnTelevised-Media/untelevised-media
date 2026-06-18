@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 import { timingSafeEqual } from 'crypto';
 import { type NextRequest, NextResponse } from 'next/server';
 import writeClient from '@/lib/sanity/lib/write-client';

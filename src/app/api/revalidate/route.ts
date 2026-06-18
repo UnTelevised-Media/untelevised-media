@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 /**
  * This code is responsible for revalidating queries as the dataset is updated.
  *
@@ -46,7 +47,7 @@ export async function POST(req: NextRequest) {
       return new Response(JSON.stringify({ message, body }), { status: 400 });
     }
 
-    // Revalidate by document type — all fetches tagged with this type are busted.
+    // Revalidate by document type â€” all fetches tagged with this type are busted.
     // For book and article types we also revalidate the canonical collection tags
     // so that list pages (bookstore index, news index) pick up changes immediately.
     // Next.js 16 revalidateTag requires a second 'default' argument for the

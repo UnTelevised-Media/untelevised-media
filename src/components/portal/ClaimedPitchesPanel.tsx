@@ -1,6 +1,7 @@
+﻿/* eslint-disable import/prefer-default-export */
 'use client';
 // src/components/portal/ClaimedPitchesPanel.tsx
-// Client component — claimed pitches grid with Mine / All / Others filter pills.
+// Client component â€” claimed pitches grid with Mine / All / Others filter pills.
 // Editors see all pitches + the filter toggle. Authors see only their own (no toggle).
 
 import { useState, useMemo } from 'react';
@@ -42,7 +43,7 @@ export function ClaimedPitchesPanel({ pitches, currentSanityAuthorId, isEditorPl
 
   return (
     <div>
-      {/* Filter pills — editor only */}
+      {/* Filter pills â€” editor only */}
       {isEditorPlus && (
         <div className='mb-3 flex items-center gap-2'>
           <div className='flex items-center gap-1 rounded border border-slate-200 p-0.5 dark:border-slate-700'>

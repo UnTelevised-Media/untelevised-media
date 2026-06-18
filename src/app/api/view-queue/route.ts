@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 import { NextRequest, NextResponse } from 'next/server';
 import { recordViewEvent } from '@/lib/supabase/viewEvents';
 
@@ -37,14 +38,14 @@ export async function POST(request: NextRequest) {
     const ip = getIP(request);
     console.log(`[/api/view-queue] Recording view: slug=${slug}, ip=${ip}`);
 
-    // Write to Supabase (no batching needed — Supabase handles high write throughput)
+    // Write to Supabase (no batching needed â€” Supabase handles high write throughput)
     await recordViewEvent(slug, ip);
 
     console.log(`[/api/view-queue] View recorded successfully: ${slug}`);
     return NextResponse.json({ recorded: true });
   } catch (err) {
     console.error('[/api/view-queue] Failed to record view:', err);
-    // Don't fail the request — view tracking is non-critical
+    // Don't fail the request â€” view tracking is non-critical
     return NextResponse.json({ recorded: false, error: 'Could not record view' });
   }
 }

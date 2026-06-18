@@ -25,7 +25,9 @@ export default function PurchaseTracker({ sessionId, total, currency = 'USD', it
   const fired = useRef(false);
 
   useEffect(() => {
-    if (fired.current || total == null) {return;}
+    if (fired.current || total === null) {
+      return;
+    }
     fired.current = true;
     trackEvent('purchase', {
       transaction_id: sessionId,

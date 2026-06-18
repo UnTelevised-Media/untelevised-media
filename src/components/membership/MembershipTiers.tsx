@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 'use client';
 
 import { useState } from 'react';

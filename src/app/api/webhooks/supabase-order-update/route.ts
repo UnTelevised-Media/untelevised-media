@@ -1,15 +1,16 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/webhooks/supabase-order-update/route.ts
 // Receives Supabase Database Webhook on orders UPDATE.
 // Fires a shipment notification email when shipping_tracking_number is first set.
 //
 // Supabase Dashboard setup:
-//   Database → Webhooks → Create Webhook
+//   Database â†’ Webhooks â†’ Create Webhook
 //   Table: public.orders | Events: UPDATE
 //   URL: https://www.untelevised.media/api/webhooks/supabase-order-update
 //   Header: x-supabase-webhook-secret: <SUPABASE_WEBHOOK_SECRET>
 //
 // Required env var:
-//   SUPABASE_WEBHOOK_SECRET — must match the header value configured in Supabase Dashboard
+//   SUPABASE_WEBHOOK_SECRET â€” must match the header value configured in Supabase Dashboard
 
 import { timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
@@ -61,7 +62,7 @@ export async function POST(req: NextRequest) {
   const order = body.record;
   const oldOrder = body.old_record;
 
-  // 3. Guard: only act when tracking number is newly added (NULL → value)
+  // 3. Guard: only act when tracking number is newly added (NULL â†’ value)
   if (!order?.shipping_tracking_number || oldOrder?.shipping_tracking_number) {
     return NextResponse.json({ skipped: true });
   }

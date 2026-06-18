@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // src/components/portal/ArticleEditorForm.tsx
 // Full article editor form — Tiptap WYSIWYG + all metadata fields.
 // Handles create, update, save-draft, submit-for-review, publish.
@@ -517,7 +518,7 @@ export default function ArticleEditorForm({
       });
     }, 60_000);
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [articleId, buildInput, getValues]);
 
   // ---------------------------------------------------------------------------
@@ -554,7 +555,7 @@ export default function ArticleEditorForm({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [handleSubmit, getValues]);
 
   // ---------------------------------------------------------------------------

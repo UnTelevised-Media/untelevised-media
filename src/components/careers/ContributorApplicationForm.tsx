@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 'use client';
 // src/components/careers/ContributorApplicationForm.tsx
 
@@ -370,7 +371,7 @@ export function ContributorApplicationForm({ prefilledPosition }: Props) {
                     onClick={() => removeItem('socialMediaLinks', i)}
                     className='bg-red-700 px-3 text-white hover:bg-red-600'
                   >
-                    ×
+                    Ã—
                   </button>
                 )}
               </div>
@@ -459,7 +460,7 @@ export function ContributorApplicationForm({ prefilledPosition }: Props) {
                 onClick={() => removeItem('workSamples', i)}
                 className='bg-red-700 px-3 text-white hover:bg-red-600'
               >
-                ×
+                Ã—
               </button>
             )}
           </div>

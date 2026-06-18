@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Calendar, Clock, MapPin, ExternalLink, ArrowRight, Users, Tag } from 'lucide-react';
+import { Calendar, Clock, ExternalLink, ArrowRight, Users, Tag } from 'lucide-react';
 import type { LiveEvent } from '@/lib/sanity/sanity.types';
 
 import { Badge } from '@/components/ui/badge';

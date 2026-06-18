@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 // src/app/api/admin/set-role/route.ts
 // Admin-only API route to assign a portal role to a Clerk user.
 // Role is written to publicMetadata.role — never writable from the client.

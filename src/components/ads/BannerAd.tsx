@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
- 
+
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { AD_CONFIG } from '@/lib/ads/adConfig';
-import { adsenseManager } from '@/lib/ads/adsenseInit';
+import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
+import { adsenseManager } from '@/lib/googleAdSense/adsenseInit';
 import { useConsentCheck } from '@/lib/consent/context';
 
 interface BannerAdProps {
@@ -39,7 +39,9 @@ export default function BannerAd({
   }, []);
 
   useEffect(() => {
-    if (!isClient || !containerRef.current) {return;}
+    if (!isClient || !containerRef.current) {
+      return;
+    }
     if (!isDev && (!hasConsent || !canUseMarketing)) {
       console.debug(
         '[AdSense] BannerAd slot=%s: waiting for consent (hasConsent=%s canUseMarketing=%s)',
@@ -49,12 +51,16 @@ export default function BannerAd({
       );
       return;
     }
-    if (pushed.current) {return;} // already attempted
+    if (pushed.current) {
+      return;
+    } // already attempted
 
     const container = containerRef.current;
     const obs = new IntersectionObserver(
       async (entries) => {
-        if (!entries[0]?.isIntersecting || pushed.current) {return;}
+        if (!entries[0]?.isIntersecting || pushed.current) {
+          return;
+        }
         obs.disconnect();
         pushed.current = true;
 
@@ -99,8 +105,12 @@ export default function BannerAd({
     return () => obs.disconnect();
   }, [isClient, isDev, hasConsent, canUseMarketing, slot]);
 
-  if (!isClient) {return null;}
-  if ((adStatus === 'error' || adStatus === 'unfilled') && !isDev) {return null;}
+  if (!isClient) {
+    return null;
+  }
+  if ((adStatus === 'error' || adStatus === 'unfilled') && !isDev) {
+    return null;
+  }
 
   return (
     <div ref={containerRef} className={`ad-container ${className}`} style={style}>

@@ -53,7 +53,9 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
   let itemsMeta: ItemMeta[] = [];
   try {
     itemsMeta = JSON.parse(session.metadata?.items_json ?? '[]') as ItemMeta[];
-  } catch {}
+  } catch {
+    // Silently ignore parsing errors — fall back to empty array
+  }
 
   const ga4Items: GA4Item[] = itemsMeta.map((meta, idx) => {
     const lineItem = items[idx];
@@ -64,7 +66,7 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
       item_id: meta.bookId,
       item_name: meta.title,
       item_variant: meta.formatType,
-      price: lineTotal != null && meta.qty > 0 ? lineTotal / meta.qty : lineTotal,
+      price: lineTotal !== null && lineTotal !== undefined && meta.qty > 0 ? lineTotal / meta.qty : lineTotal,
       quantity: meta.qty,
     };
   });

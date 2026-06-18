@@ -6836,6 +6836,7 @@ export type QueryPostMetadataResult = {
 
 // Query TypeMap
 import '@sanity/client';
+/* eslint-disable-next-line no-unused-vars */
 declare module '@sanity/client' {
   interface SanityQueries {
     "*[_type=='album'] { slug }": QueryAlbumStaticParamsResult;

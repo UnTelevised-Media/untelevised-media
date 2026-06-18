@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 // src/components/portal/BriefPanel.tsx
 // Renders the latest AI-generated news brief on the portal dashboard.
@@ -504,7 +505,7 @@ export function BriefPanel({
       setLoadedPitchMap(initialPitchMap);
     }
     // brief and initialPitchMap are new object refs every RSC render — that's the signal
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [brief, initialPitchMap]);
 
   // Silently repair any brief that has stories with missing _key values.
@@ -516,7 +517,7 @@ export function BriefPanel({
       if (result.success) {router.refresh();}
     });
     // Run once per loaded brief ID — repair is idempotent
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [loadedBrief._id]);
 
   async function navigateTo(index: number) {

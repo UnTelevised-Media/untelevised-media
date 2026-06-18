@@ -94,9 +94,9 @@ function BookCard({ book }: { book: SanityBook }) {
             <h3 className='text-sm font-black leading-tight text-slate-900 group-hover:text-untele dark:text-hp-cream'>
               {book.title}
             </h3>
-            {price != null && (
+            {price !== null && (
               <div className='mt-1'>
-                {compareAtPrice != null && (
+                {compareAtPrice !== null && compareAtPrice !== undefined && (
                   <p className='text-[10px] text-hp-muted line-through'>
                     ${compareAtPrice.toFixed(2)}
                   </p>
@@ -175,9 +175,9 @@ function FeaturedHero({ book }: { book: SanityBook }) {
         <h2 className='mb-3 text-2xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-hp-cream lg:text-4xl'>
           {book.title}
         </h2>
-        {price != null && (
+        {price !== null && (
           <div className='mb-4'>
-            {compareAtPrice != null && (
+            {compareAtPrice !== null && compareAtPrice !== undefined && (
               <p className='text-sm text-hp-muted line-through'>
                 From ${compareAtPrice.toFixed(2)}
               </p>

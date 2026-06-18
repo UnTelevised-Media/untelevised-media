@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 'use client';
 // src/components/global/BreakingNewsBannerClient.tsx
 
@@ -40,7 +41,7 @@ export function BreakingNewsBannerClient({ headline, linkUrl, linkLabel, expires
       className='mt-5 w-full border-b-2 border-red-800 bg-untele'
     >
       <div className='mx-auto flex max-w-[1400px] items-center px-4'>
-        {/* BREAKING label — left block with right border */}
+        {/* BREAKING label â€” left block with right border */}
         <div className='flex shrink-0 items-center gap-2 border-r border-white/25 py-2.5 pr-4'>
           <span className='h-2 w-2 animate-pulse rounded-full bg-white' aria-hidden='true' />
           <span className='text-[11px] font-black uppercase tracking-[0.2em] text-white'>
@@ -48,12 +49,12 @@ export function BreakingNewsBannerClient({ headline, linkUrl, linkLabel, expires
           </span>
         </div>
 
-        {/* Headline — flexible middle */}
+        {/* Headline â€” flexible middle */}
         <p className='mx-4 flex-1 truncate text-sm font-bold leading-snug text-white'>
           {headline}
         </p>
 
-        {/* CTA + Dismiss — right side */}
+        {/* CTA + Dismiss â€” right side */}
         <div className='flex shrink-0 items-center gap-3'>
           {linkUrl &&
             (isExternal ? (
@@ -63,14 +64,14 @@ export function BreakingNewsBannerClient({ headline, linkUrl, linkLabel, expires
                 rel='noopener noreferrer'
                 className='border border-white/50 bg-white/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-untele'
               >
-                {linkLabel} →
+                {linkLabel} â†’
               </a>
             ) : (
               <Link
                 href={linkUrl}
                 className='border border-white/50 bg-white/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-untele'
               >
-                {linkLabel} →
+                {linkLabel} â†’
               </Link>
             ))}
 

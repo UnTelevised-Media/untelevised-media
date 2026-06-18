@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 'use client';
 // src/components/careers/ApplicationForm.tsx
 import React, { useState } from 'react';
@@ -193,7 +194,7 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
       {/* Cover Letter */}
       <div>
         <label htmlFor='coverLetter' className={labelCls}>
-          Cover Letter * (100–3000 characters)
+          Cover Letter * (100â€“3000 characters)
         </label>
         <textarea
           id='coverLetter'
@@ -214,7 +215,7 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
       {/* Resume Upload */}
       <div>
         <label htmlFor='resume' className={labelCls}>
-          Resume / CV — PDF or Word, max 5 MB (optional)
+          Resume / CV â€” PDF or Word, max 5 MB (optional)
         </label>
         <input
           id='resume'

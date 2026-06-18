@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/components/fact-check/InlineFactCheckCard.tsx
 // Rendered inside blockContent when a factCheckEmbed block is encountered.
 import Link from 'next/link';
@@ -37,7 +38,7 @@ export function InlineFactCheckCard({ factCheck }: InlineFactCheckCardProps) {
           </p>
           {claim}
           {claimSource && (
-            <footer className='mt-1 text-xs not-italic text-neutral-500'>— {claimSource}</footer>
+            <footer className='mt-1 text-xs not-italic text-neutral-500'>â€” {claimSource}</footer>
           )}
         </blockquote>
 
@@ -51,7 +52,7 @@ export function InlineFactCheckCard({ factCheck }: InlineFactCheckCardProps) {
           href={`/fact-check/${slug.current}`}
           className='inline-block text-xs font-black uppercase tracking-widest text-[#D70606] hover:underline'
         >
-          Read Full Fact Check →
+          Read Full Fact Check â†’
         </Link>
       </div>
 

@@ -8,7 +8,7 @@ import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 import { InFeedAd, BannerAd, SidebarAd } from '@/components/ads';
-import { AD_CONFIG } from '@/lib/ads/adConfig';
+import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
 import RecentBreakingNews from '@/components/article/RecentBreakingNews';
 
 import urlForImage from '@/u/urlForImage';
@@ -16,7 +16,7 @@ import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import resolveHref from '@/util/resolveHref';
-import { tagToSlug } from '@/lib/tagUtils';
+import { tagToSlug } from '@/util/tagUtils';
 import formatTitleForURL from '@/util/formatTitleForURL';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -25,7 +25,7 @@ import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata';
 import NewsArticleStructuredData from '@/components/seo/NewsArticleStructuredData';
-import { getReadingTime } from '@/lib/readingTime';
+import { getReadingTime } from '@/util/readingTime';
 import { CorrectionNotice } from '@/components/post/CorrectionNotice';
 import SourcesPanel from '@/components/post/SourcesPanel';
 import { BookmarkButton } from '@/components/bookmarks/BookmarkButton';
@@ -70,6 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildArticleMetadata(article, slug);
 }
 
+// eslint-disable-next-line no-redeclare
 export default async function Article({ params }: Props) {
   const { slug } = await params;
   const article: any = (await getArticleBySlug(slug)) as any;

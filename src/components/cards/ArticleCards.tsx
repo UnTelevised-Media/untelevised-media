@@ -2,14 +2,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import Image from 'next/image';
-import { ArrowUpRight, ShareIcon, AlertTriangle, XCircle } from 'lucide-react';
+import { ArrowUpRight, ShareIcon, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
 import type { Article } from '@/lib/sanity/sanity.types';
 
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import urlForImage from '@/util/urlForImage';
-import { getReadingTime } from '@/lib/readingTime';
+import { getReadingTime } from '@/util/readingTime';
 
 // Enhanced Article Card - matches your existing design but with the blog card layout
 function ArticleCard({ articles }: { articles: Article[] }) {
