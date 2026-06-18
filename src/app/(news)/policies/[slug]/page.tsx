@@ -1,7 +1,7 @@
-// type Policy is not exported from sanity.types from '#/sanity.types';
 // src/app/(user)/policies/[slug]/page.tsx
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
+import type { QueryPolicyBySlugResult } from '#/sanity.types';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
@@ -110,7 +110,7 @@ export default async function Policies({ params }: Props) {
 }
 
 // Call the Sanity Fetch Function for the Author Information
-async function getPolicyBySlug(slug: string): Promise<Policy | null> {
+async function getPolicyBySlug(slug: string): Promise<QueryPolicyBySlugResult> {
   try {
     // Fetch author data from Sanity
     const { data: policy } = await sanityFetch({
@@ -118,7 +118,7 @@ async function getPolicyBySlug(slug: string): Promise<Policy | null> {
       params: { slug },
       tags: ['policies'],
     });
-    return policy as Policy | null;
+    return policy as QueryPolicyBySlugResult;
   } catch (error) {
     console.error('Failed to fetch policy:', error);
     return null;

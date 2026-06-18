@@ -59,7 +59,7 @@ function TimelineNavigation({
 
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const sortedEvents = [...events].sort(
-    (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+    (a, b) => new Date(a.eventDate ?? '').getTime() - new Date(b.eventDate ?? '').getTime()
   );
 
   // Auto-play functionality
@@ -342,7 +342,7 @@ function TimelineNavigation({
                 {currentEvent.title}
               </h4>
               <p className='text-sm text-slate-600 dark:text-slate-400'>
-                {new Date(currentEvent.eventDate).toLocaleDateString()}
+                {new Date(currentEvent.eventDate ?? '').toLocaleDateString()}
                 {currentEvent.location && ` • ${currentEvent.location}`}
               </p>
             </div>

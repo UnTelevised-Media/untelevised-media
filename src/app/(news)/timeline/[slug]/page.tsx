@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { Calendar, Clock, Users, Star, ArrowLeft, Bookmark } from 'lucide-react';
+import type { Timeline, TimelineEvent } from '#/sanity.types';
 
 import dynamic from 'next/dynamic';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
@@ -51,7 +52,7 @@ export default async function TimelinePage({ params }: Props) {
     description: timeline.shortDescription ?? undefined,
     url: `https://www.untelevised.media/timeline/${slug}/`,
     numberOfItems: events.length,
-    itemListElement: events.map((event, index) => ({
+    itemListElement: events.map((event: any, index: number) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: event.title,
@@ -131,7 +132,7 @@ export default async function TimelinePage({ params }: Props) {
                   {timeline.author && (
                     <div className='flex items-center gap-1'>
                       <Users className='h-4 w-4' />
-                      <span>By {timeline.author.name}</span>
+                      <span>By {(timeline.author as any).name ?? 'Author'}</span>
                       {timeline.collaborators && timeline.collaborators.length > 0 && (
                         <span>+{timeline.collaborators.length} more</span>
                       )}
@@ -142,16 +143,16 @@ export default async function TimelinePage({ params }: Props) {
                 {/* Categories */}
                 {categories.length > 0 && (
                   <div className='flex flex-wrap gap-2'>
-                    {categories.map((category) => (
+                    {categories.map((category: any) => (
                       <Link
                         key={category._id}
-                        href={`/timeline/category/${category.slug.current}`}
+                        href={`/timeline/category/${category.slug?.current ?? ''}`}
                       >
                         <Badge
                           variant='outline'
                           className='hover:bg-slate-100 dark:hover:bg-slate-800'
                         >
-                          {category.title}
+                          {category.title ?? 'Category'}
                         </Badge>
                       </Link>
                     ))}
@@ -160,7 +161,7 @@ export default async function TimelinePage({ params }: Props) {
 
                 {/* Actions */}
                 <div className='flex items-center gap-4'>
-                  <SocialShare url={`/timeline/${timeline.slug.current}`} title={timeline.title} />
+                  <SocialShare url={`/timeline/${timeline.slug?.current ?? ''}`} title={timeline.title ?? ''} />
                   <Button variant='outline' size='sm' className='flex items-center gap-2'>
                     <Bookmark className='h-4 w-4' />
                     Save Timeline
@@ -183,7 +184,7 @@ export default async function TimelinePage({ params }: Props) {
                 <div className='relative aspect-video overflow-hidden rounded-lg'>
                   <Image
                     src={urlForImage(timeline.coverImage)?.url() ?? ''}
-                    alt={timeline.coverImage.alt ?? timeline.title}
+                    alt={timeline.coverImage.alt ?? (timeline.title ?? '')}
                     fill
                     className='object-cover'
                   />
@@ -209,7 +210,7 @@ export default async function TimelinePage({ params }: Props) {
                   <div className='flex justify-between'>
                     <span className='text-slate-600 dark:text-slate-400'>Milestones</span>
                     <span className='font-medium'>
-                      {events.filter((event) => event.isMilestone).length}
+                      {events.filter((event: any) => event.isMilestone).length}
                     </span>
                   </div>
                   <div className='flex justify-between'>
@@ -262,11 +263,11 @@ export default async function TimelinePage({ params }: Props) {
             <div className='space-y-4'>
               {timeline.author && (
                 <div className='flex items-center gap-3'>
-                  {timeline.author.image && (
+                  {(timeline.author as any).image && (
                     <div className='relative h-12 w-12 overflow-hidden rounded-full'>
                       <Image
-                        src={urlForImage(timeline.author.image)?.url() ?? ''}
-                        alt={timeline.author.name}
+                        src={urlForImage((timeline.author as any).image)?.url() ?? ''}
+                        alt={(timeline.author as any).name ?? 'Author'}
                         fill
                         className='object-cover'
                       />
@@ -274,16 +275,16 @@ export default async function TimelinePage({ params }: Props) {
                   )}
                   <div>
                     <h4 className='font-medium text-slate-900 dark:text-slate-100'>
-                      {timeline.author.name}
+                      {(timeline.author as any).name ?? 'Author'}
                     </h4>
                     <p className='text-sm text-slate-600 dark:text-slate-400'>
-                      {timeline.author.title ?? 'Timeline Author'}
+                      {(timeline.author as any).title ?? 'Timeline Author'}
                     </p>
                   </div>
                 </div>
               )}
 
-              {timeline.collaborators?.map((collaborator) => (
+              {timeline.collaborators?.map((collaborator: any) => (
                 <div key={collaborator._id} className='flex items-center gap-3'>
                   {collaborator.image && (
                     <div className='relative h-10 w-10 overflow-hidden rounded-full'>
@@ -326,7 +327,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description =
     timeline.seoSettings?.metaDescription ??
     timeline.shortDescription ??
-    timeline.description?.[0]?.children?.[0]?.text ??
+    ((timeline.description as any)?.[0]?.children?.[0]?.text) ??
     '';
 
   return {
@@ -362,7 +363,7 @@ export async function generateStaticParams() {
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: Timeline[] = await sanityClient.fetch(queryTimelineStaticParams);
   const slugRoutes = slugs
-    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug?.current ?? '')
     : [];
   return slugRoutes.map((slug) => ({
     slug,

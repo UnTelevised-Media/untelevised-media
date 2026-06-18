@@ -139,7 +139,7 @@ function MobilePlainLink({ item, onClose }: { item: PlainLink; onClose: () => vo
 
 // ── Main component ─────────────────────────────────────────────────────────────
 
-const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
+function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -330,6 +330,6 @@ const Header = ({ logoSlot }: { logoSlot: React.ReactNode }) => {
       )}
     </header>
   );
-};
+}
 
 export default Header;

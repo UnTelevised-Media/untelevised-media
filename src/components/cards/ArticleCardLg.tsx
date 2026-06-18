@@ -13,7 +13,7 @@ type Props = {
   post: Article;
 };
 
-const ArticleCardLg = ({ post }: Props) => {
+function ArticleCardLg({ post }: Props) {
   const imageUrl = urlForImage(post.mainImage as any)?.url();
 
   return (
@@ -97,6 +97,6 @@ const ArticleCardLg = ({ post }: Props) => {
       </div>
     </article>
   );
-};
+}
 
 export default ArticleCardLg;

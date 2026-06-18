@@ -30,9 +30,9 @@ function NewsArticleStructuredData({ article, slug }: Props) {
         author: article.author
           ? {
               '@type': 'Person',
-              '@id': `https://www.untelevised.media/author/${article.author.slug?.current}/#person`,
-              name: article.author.name,
-              url: `https://www.untelevised.media/author/${article.author.slug?.current}/`,
+              '@id': `https://www.untelevised.media/author/${(article.author as any).slug?.current}/#person`,
+              name: (article.author as any).name,
+              url: `https://www.untelevised.media/author/${(article.author as any).slug?.current}/`,
             }
           : undefined,
         publisher: {
@@ -45,7 +45,7 @@ function NewsArticleStructuredData({ article, slug }: Props) {
             url: 'https://www.untelevised.media/Logo.png',
           },
         },
-        articleSection: article.categories?.[0]?.title,
+        articleSection: (article.categories as any)?.[0]?.title,
         keywords: Array.isArray(article.keywords) ? article.keywords.join(', ') : article.keywords,
         url: canonicalUrl,
       },
@@ -53,10 +53,10 @@ function NewsArticleStructuredData({ article, slug }: Props) {
         ? [
             {
               '@type': 'FAQPage',
-              mainEntity: article.faqs.map((faq: { question: string; answer: string }) => ({
+              mainEntity: article.faqs.map((faq: any) => ({
                 '@type': 'Question',
-                name: faq.question,
-                acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+                name: faq.question ?? '',
+                acceptedAnswer: { '@type': 'Answer', text: faq.answer ?? '' },
               })),
             },
           ]
@@ -70,11 +70,11 @@ function NewsArticleStructuredData({ article, slug }: Props) {
             name: 'Home',
             item: 'https://www.untelevised.media/',
           },
-          article.categories?.[0] && {
+          (article.categories as any)?.[0] && {
             '@type': 'ListItem',
             position: 2,
-            name: article.categories[0].title,
-            item: `https://www.untelevised.media/category/${article.categories[0].slug?.current}/`,
+            name: (article.categories as any)[0]?.title,
+            item: `https://www.untelevised.media/category/${(article.categories as any)[0]?.slug?.current}/`,
           },
           {
             '@type': 'ListItem',

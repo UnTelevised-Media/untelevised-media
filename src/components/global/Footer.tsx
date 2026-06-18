@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+ 
 // src/components/global/Footer.tsx
 import Link from 'next/link';
 import {

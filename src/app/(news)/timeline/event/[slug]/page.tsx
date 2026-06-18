@@ -332,7 +332,7 @@ export default async function TimelineEventPage({ params }: Props) {
                   Related Events
                 </h3>
                 <div className='space-y-3'>
-                  {event.relatedTimelineEvents.slice(0, 3).map((relatedEvent) => (
+                  {event.relatedTimelineEvents.slice(0, 3).map((relatedEvent: any) => (
                     <TimelineEventCard
                       key={relatedEvent._id}
                       event={relatedEvent}

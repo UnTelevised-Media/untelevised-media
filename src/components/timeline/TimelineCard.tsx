@@ -74,7 +74,7 @@ function TimelineCard({
           <div className='relative aspect-video overflow-hidden'>
             <Image
               src={urlForImage(timeline.coverImage)?.url() ?? ''}
-              alt={timeline.coverImage.alt ?? timeline.title}
+              alt={timeline.coverImage.alt ?? (timeline.title ?? 'Timeline')}
               fill
               className='object-cover transition-transform duration-300 group-hover:scale-105'
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
@@ -84,10 +84,10 @@ function TimelineCard({
             {/* Timeline Type Badge */}
             <div className='absolute bottom-3 left-3'>
               <Badge
-                className={`${getTimelineTypeColor(timeline.timelineType)} flex items-center gap-1`}
+                className={`${getTimelineTypeColor(timeline.timelineType ?? 'history')} flex items-center gap-1`}
               >
-                {getTimelineTypeIcon(timeline.timelineType)}
-                <span className='capitalize'>{timeline.timelineType}</span>
+                {getTimelineTypeIcon(timeline.timelineType ?? 'history')}
+                <span className='capitalize'>{timeline.timelineType ?? 'history'}</span>
               </Badge>
             </div>
           </div>
@@ -135,7 +135,7 @@ function TimelineCard({
             {showAuthor && timeline.author && (
               <div className='flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400'>
                 <Users className='h-3 w-3' />
-                <span>By {timeline.author.name}</span>
+                <span>By {(timeline.author as any).name ?? 'Author'}</span>
                 {timeline.collaborators && timeline.collaborators.length > 0 && (
                   <span>+{timeline.collaborators.length} more</span>
                 )}
@@ -146,9 +146,9 @@ function TimelineCard({
           {/* Categories */}
           {timeline.categories && timeline.categories.length > 0 && (
             <div className='flex flex-wrap gap-1'>
-              {timeline.categories.slice(0, 3).map((category) => (
+              {timeline.categories.slice(0, 3).map((category: any) => (
                 <Badge key={category._id} variant='secondary' className='text-xs'>
-                  {category.title}
+                  {category.title ?? 'Category'}
                 </Badge>
               ))}
               {timeline.categories.length > 3 && (
@@ -161,7 +161,7 @@ function TimelineCard({
 
           {/* Action Button */}
           <div className='pt-2'>
-            <Link href={`/timeline/${timeline.slug.current}`}>
+            <Link href={`/timeline/${timeline.slug?.current ?? ''}`}>
               <Button className='w-full' size='sm'>
                 View Timeline
               </Button>

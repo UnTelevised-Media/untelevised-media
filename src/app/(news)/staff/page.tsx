@@ -1,6 +1,7 @@
 // src/app/(user)/staff/page.tsx
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import type { Author } from '#/sanity.types';
 import urlForImage from '@/util/urlForImage';
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ import { queryAllAuthors } from '@/lib/sanity/lib/queries';
 
 export default async function StaffPage() {
   const staff = await getAllStaff();
-  const sortedStaff = staff.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  const sortedStaff = staff.sort((a, b) => ((a.order as any) ?? 0) - ((b.order as any) ?? 0));
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
@@ -126,7 +127,7 @@ async function getAllStaff(): Promise<Author[]> {
       query: queryAllAuthors,
       tags: ['author'],
     });
-    return staff as Author[];
+    return (staff as any[]) as Author[];
   } catch (error) {
     console.error('Failed to fetch author:', error);
     return [];

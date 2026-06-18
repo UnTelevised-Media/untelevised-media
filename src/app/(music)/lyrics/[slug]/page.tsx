@@ -17,7 +17,7 @@ import sanityClient from '@/lib/sanity/lib/client';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { querySongBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Clock, Calendar, ExternalLink } from 'lucide-react';
-import { SongStructuredData } from '@/components/seo/StructuredData';
+import SongStructuredData from '@/components/seo/StructuredData';
 import { getCanonicalUrl, truncate, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
 
 type Props = {

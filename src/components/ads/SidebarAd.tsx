@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-/* eslint-disable react/function-component-definition */
+ 
 'use client';
 
 import { useEffect, useRef, useState } from 'react';

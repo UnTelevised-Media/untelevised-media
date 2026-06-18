@@ -1,4 +1,4 @@
-/* eslint-disable react/self-closing-comp */
+ 
  
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

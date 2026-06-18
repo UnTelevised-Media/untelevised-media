@@ -5,7 +5,7 @@ import { CalendarIcon, ClockIcon, GlobeAltIcon, UsersIcon } from '@heroicons/rea
 import '@/components/global/ticker.css';
 import Ticker from './Ticker';
 
-const Banner = () => {
+function Banner() {
   const [currentDate, setCurrentDate] = useState('');
   const [currentTime, setCurrentTime] = useState('');
 
@@ -168,6 +168,6 @@ const Banner = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Banner;

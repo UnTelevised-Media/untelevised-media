@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+ 
 'use client';
 
 import { useEffect, useState, useRef, createContext, useContext } from 'react';

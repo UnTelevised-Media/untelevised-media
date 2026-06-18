@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+ 
 import React from 'react';
 import ClientSideRoute from '../providers/ClientSideRoute';
 import Image from 'next/image';

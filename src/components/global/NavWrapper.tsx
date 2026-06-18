@@ -17,7 +17,7 @@ const queryCategory = groq`
 
 type Category = { _id: string; title: string; order: number; slug?: { current: string } };
 
-const NavWrapper = async () => {
+async function NavWrapper() {
   let categories: Category[] = [];
   try {
     const data = await sanityFetch<Category[]>({ query: queryCategory, tags: ['category'] });
@@ -27,6 +27,6 @@ const NavWrapper = async () => {
   }
 
   return <Nav categories={categories} />;
-};
+}
 
 export default NavWrapper;

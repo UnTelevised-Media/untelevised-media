@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Article } from '#/sanity.types';
 
 import ArticleCardLg from '@/components/cards/ArticleCardLg';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
@@ -131,7 +132,7 @@ export default async function TagPage({ params }: Props) {
       {/* Articles grid */}
       {articleCount > 0 ? (
         <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
-          {articles.map((article: Article) => (
+          {articles.map((article: any) => (
             <ClientSideRoute
               route={resolveHref('article', article.slug?.current) ?? ''}
               key={article._id}

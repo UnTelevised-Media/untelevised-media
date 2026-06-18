@@ -39,7 +39,7 @@ async function getPastEvents(): Promise<LiveEvent[]> {
   }
 }
 
-const PastEvents = async () => {
+async function PastEvents() {
   const pastEvents = (await getPastEvents()) as any;
 
   return (
@@ -61,7 +61,7 @@ const PastEvents = async () => {
       </div>
     </div>
   );
-};
+}
 
 // Generate static params for better SEO
 export async function generateStaticParams() {

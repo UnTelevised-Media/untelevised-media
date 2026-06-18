@@ -5,7 +5,7 @@ import { Label } from '../ui/label';
 import { SearchIcon } from 'lucide-react';
 import { Button } from '../ui/button';
 
-const Search = () => {
+function Search() {
   return (
     <div>
       <Form
@@ -22,6 +22,6 @@ const Search = () => {
       </Form>
     </div>
   );
-};
+}
 
 export default Search;

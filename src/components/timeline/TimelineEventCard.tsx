@@ -92,14 +92,14 @@ function TimelineEventCard({
   if (variant === 'compact') {
     return (
       <div className={`timeline-event-card-compact ${className}`}>
-        <Link href={`/timeline/event/${event.slug.current}`}>
+        <Link href={`/timeline/event/${event.slug?.current ?? ''}`}>
           <div className='group flex items-center gap-3 rounded-lg border border-slate-200 bg-white p-3 transition-all hover:border-untele/50 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700'>
             {/* Event Image */}
             {event.mainImage && (
               <div className='relative h-12 w-12 flex-shrink-0 overflow-hidden rounded'>
                 <Image
                   src={urlForImage(event.mainImage)?.url() ?? ''}
-                  alt={event.mainImage.alt ?? event.title}
+                  alt={event.mainImage.alt ?? (event.title ?? 'Event')}
                   fill
                   className='object-cover'
                 />
@@ -109,9 +109,9 @@ function TimelineEventCard({
             {/* Content */}
             <div className='min-w-0 flex-1'>
               <div className='mb-1 flex items-center gap-2'>
-                <Badge className={`${getEventTypeColor(event.eventType)} text-xs`}>
-                  {getEventTypeIcon(event.eventType)}
-                  <span className='ml-1 capitalize'>{event.eventType}</span>
+                <Badge className={`${getEventTypeColor(event.eventType ?? 'update')} text-xs`}>
+                  {getEventTypeIcon(event.eventType ?? 'update')}
+                  <span className='ml-1 capitalize'>{event.eventType ?? 'update'}</span>
                 </Badge>
                 {event.isMilestone && <Star className='h-3 w-3 fill-current text-yellow-500' />}
               </div>
@@ -144,7 +144,7 @@ function TimelineEventCard({
   return (
     <div className={`timeline-event-card ${className}`}>
       <div
-        className={`group relative overflow-hidden rounded-lg border-2 bg-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-lg dark:bg-slate-800 ${getImportanceStyle(event.importanceLevel)} ${event.isMilestone ? 'ring-2 ring-yellow-400' : ''} `}
+        className={`group relative overflow-hidden rounded-lg border-2 bg-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-lg dark:bg-slate-800 ${getImportanceStyle(event.importanceLevel ?? 'medium')} ${event.isMilestone ? 'ring-2 ring-yellow-400' : ''} `}
       >
         {/* Milestone Star */}
         {event.isMilestone && (
@@ -158,7 +158,7 @@ function TimelineEventCard({
           <div className='relative aspect-video overflow-hidden'>
             <Image
               src={urlForImage(event.mainImage)?.url() ?? ''}
-              alt={event.mainImage.alt ?? event.title}
+              alt={event.mainImage.alt ?? (event.title ?? 'Event')}
               fill
               className='object-cover transition-transform duration-300 group-hover:scale-105'
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
@@ -167,19 +167,19 @@ function TimelineEventCard({
 
             {/* Event Type Badge */}
             <div className='absolute bottom-3 left-3'>
-              <Badge className={`${getEventTypeColor(event.eventType)} flex items-center gap-1`}>
-                {getEventTypeIcon(event.eventType)}
-                <span className='capitalize'>{event.eventType}</span>
+              <Badge className={`${getEventTypeColor(event.eventType ?? 'update')} flex items-center gap-1`}>
+                {getEventTypeIcon(event.eventType ?? 'update')}
+                <span className='capitalize'>{event.eventType ?? 'update'}</span>
               </Badge>
             </div>
 
             {/* Importance Level */}
             <div className='absolute left-3 top-3'>
               <Badge
-                variant={event.importanceLevel === 'critical' ? 'destructive' : 'secondary'}
+                variant={(event.importanceLevel ?? 'medium') === 'critical' ? 'destructive' : 'secondary'}
                 className='text-xs'
               >
-                {event.importanceLevel.toUpperCase()}
+                {(event.importanceLevel ?? 'medium').toUpperCase()}
               </Badge>
             </div>
           </div>
@@ -219,7 +219,7 @@ function TimelineEventCard({
             {showAuthor && event.author && (
               <div className='flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400'>
                 <Users className='h-3 w-3' />
-                <span>By {event.author.name}</span>
+                <span>By {(event.author as any).name ?? 'Author'}</span>
               </div>
             )}
           </div>
@@ -228,8 +228,8 @@ function TimelineEventCard({
           {event.timelineCategories && event.timelineCategories.length > 0 && (
             <div className='flex flex-wrap gap-1'>
               {event.timelineCategories.slice(0, 3).map((category) => (
-                <Badge key={category._id} variant='secondary' className='text-xs'>
-                  {category.title}
+                <Badge key={(category as any)._id} variant='secondary' className='text-xs'>
+                  {(category as any).title ?? 'Category'}
                 </Badge>
               ))}
               {event.timelineCategories.length > 3 && (
@@ -262,7 +262,7 @@ function TimelineEventCard({
 
           {/* Action Button */}
           <div className='pt-2'>
-            <Link href={`/timeline/event/${event.slug.current}`}>
+            <Link href={`/timeline/event/${event.slug?.current ?? ''}`}>
               <Button className='w-full' size='sm'>
                 View Details
               </Button>

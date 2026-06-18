@@ -42,7 +42,7 @@ function TimelineVisualization({
   // Sort events by date
   const sortedEvents = useMemo(() => {
     return [...filteredEvents].sort(
-      (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+      (a, b) => new Date(a.eventDate ?? '').getTime() - new Date(b.eventDate ?? '').getTime()
     );
   }, [filteredEvents]);
 
@@ -165,7 +165,7 @@ function TimelineVisualization({
                 >
                   {/* Event Card */}
                   <div
-                    className={`relative cursor-pointer rounded-lg border-2 p-4 transition-all duration-200 hover:scale-105 hover:shadow-lg ${getImportanceStyle(event.importanceLevel)} ${event.isMilestone ? 'ring-2 ring-yellow-400' : ''} `}
+                    className={`relative cursor-pointer rounded-lg border-2 p-4 transition-all duration-200 hover:scale-105 hover:shadow-lg ${getImportanceStyle(event.importanceLevel ?? 'medium')} ${event.isMilestone ? 'ring-2 ring-yellow-400' : ''} `}
                     onClick={() => setSelectedEvent(event)}
                   >
                     {/* Milestone Star */}
@@ -180,7 +180,7 @@ function TimelineVisualization({
                       <div className='relative mb-3 h-32 w-full overflow-hidden rounded'>
                         <Image
                           src={urlForImage(event.mainImage)?.url() ?? ''}
-                          alt={event.mainImage.alt ?? event.title}
+                          alt={event.mainImage.alt ?? (event.title ?? 'Event')}
                           fill
                           className='object-cover'
                         />
@@ -190,8 +190,8 @@ function TimelineVisualization({
                     {/* Event Content */}
                     <div className='space-y-2'>
                       <div className='flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400'>
-                        {getEventTypeIcon(event.eventType)}
-                        <span className='capitalize'>{event.eventType}</span>
+                        {getEventTypeIcon(event.eventType ?? 'update')}
+                        <span className='capitalize'>{event.eventType ?? 'update'}</span>
                         {event.location && (
                           <>
                             <MapPin className='h-3 w-3' />
@@ -213,9 +213,9 @@ function TimelineVisualization({
                       {/* Categories */}
                       {event.timelineCategories && event.timelineCategories.length > 0 && (
                         <div className='flex flex-wrap gap-1'>
-                          {event.timelineCategories.slice(0, 2).map((category) => (
+                          {event.timelineCategories.slice(0, 2).map((category: any) => (
                             <Badge key={category._id} variant='secondary' className='text-xs'>
-                              {category.title}
+                              {category.title ?? 'Category'}
                             </Badge>
                           ))}
                         </div>
@@ -262,7 +262,7 @@ function TimelineVisualization({
                   <div className='relative h-48 w-full overflow-hidden rounded'>
                     <Image
                       src={urlForImage(selectedEvent.mainImage)?.url() ?? ''}
-                      alt={selectedEvent.mainImage.alt ?? selectedEvent.title}
+                      alt={selectedEvent.mainImage.alt ?? (selectedEvent.title ?? 'Event')}
                       fill
                       className='object-cover'
                     />
@@ -284,7 +284,7 @@ function TimelineVisualization({
                 </div>
 
                 <div className='flex justify-end'>
-                  <Link href={`/timeline/event/${selectedEvent.slug.current}`}>
+                  <Link href={`/timeline/event/${selectedEvent.slug?.current ?? ''}`}>
                     <Button>View Full Details</Button>
                   </Link>
                 </div>

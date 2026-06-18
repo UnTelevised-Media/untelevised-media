@@ -19,7 +19,7 @@ import { COOKIE_CATEGORIES } from '@/lib/consent/types';
 import { privacyStorage } from '@/lib/consent/storage';
 import { useAdBlockerDetection } from '@/components/consent/AdBlockerMessage';
 
-const PrivacySettingsPage = () => {
+function PrivacySettingsPage() {
   const { preferences, status, updatePreferences } = useConsent();
 
   const { detected: adBlockerDetected } = useAdBlockerDetection();
@@ -341,6 +341,6 @@ const PrivacySettingsPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default PrivacySettingsPage;

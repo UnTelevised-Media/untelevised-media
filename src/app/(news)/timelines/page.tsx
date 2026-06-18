@@ -1,6 +1,7 @@
 // src/app/(user)/timelines/page.tsx
 import { Metadata } from 'next';
 import { Suspense } from 'react';
+import type { Timeline, TimelineEvent, TimelineCategory } from '#/sanity.types';
 
 import TimelineOverview from '@/components/timeline/TimelineOverview';
 import LoadingSpinner from '@/components/global/LoadingSpinner';

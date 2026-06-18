@@ -11,7 +11,7 @@ interface CookieConsentBannerProps {
   className?: string;
 }
 
-const CookieConsentBanner = ({ className = '' }: CookieConsentBannerProps) => {
+function CookieConsentBanner({ className = '' }: CookieConsentBannerProps) {
   const {
     showBanner,
     preferences,
@@ -256,6 +256,6 @@ const CookieConsentBanner = ({ className = '' }: CookieConsentBannerProps) => {
       </motion.div>
     </AnimatePresence>
   );
-};
+}
 
 export default CookieConsentBanner;

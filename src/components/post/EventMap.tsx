@@ -1,4 +1,4 @@
-const EventMap = () => {
+function EventMap() {
   const sizes = {
     xxl: { width: '1550px', height: '900px' },
     xl: { width: '1150px', height: '800px' },
@@ -93,6 +93,6 @@ const EventMap = () => {
       /> */}
     </>
   );
-};
+}
 
 export default EventMap;

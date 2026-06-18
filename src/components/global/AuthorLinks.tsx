@@ -1,5 +1,6 @@
 // SocialLinks.tsx
 import Link from 'next/link';
+import type { Author } from '#/sanity.types';
 import {
   FaEnvelope,
   FaFacebook,

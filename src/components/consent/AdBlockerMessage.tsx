@@ -10,7 +10,7 @@ interface AdBlockerMessageProps {
   className?: string;
 }
 
-const AdBlockerMessage = ({ className = '' }: AdBlockerMessageProps) => {
+function AdBlockerMessage({ className = '' }: AdBlockerMessageProps) {
   const [showMessage, setShowMessage] = useState(false);
   const [isDetecting, setIsDetecting] = useState(true);
 
@@ -177,7 +177,7 @@ const AdBlockerMessage = ({ className = '' }: AdBlockerMessageProps) => {
       </motion.div>
     </AnimatePresence>
   );
-};
+}
 
 export default AdBlockerMessage;
 

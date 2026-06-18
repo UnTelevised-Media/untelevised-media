@@ -2,8 +2,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const HeaderLogo = () => (
-  <Link
+function HeaderLogo() {
+  return <Link
     href='/'
     className='group flex items-center space-x-2 transition-transform hover:scale-105 md:space-x-3'
   >
@@ -28,6 +28,6 @@ const HeaderLogo = () => (
       <p className='text-xs font-medium text-untele'>Independent Media</p>
     </div>
   </Link>
-);
+}
 
 export default HeaderLogo;

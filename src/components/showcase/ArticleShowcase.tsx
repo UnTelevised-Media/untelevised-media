@@ -12,9 +12,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import type { Article, Category } from '#/sanity.types';
 
 interface ArticleShowcaseProps {
-  articles: Article[];
-  categories: Category[];
-  featuredArticle?: Article;
+  articles: any[];
+  categories: any[];
+  featuredArticle?: any;
 }
 
 export default function ArticleShowcase({
@@ -22,14 +22,14 @@ export default function ArticleShowcase({
   categories,
   featuredArticle,
 }: ArticleShowcaseProps) {
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
-  const [filteredArticles, setFilteredArticles] = useState<Article[]>(articles);
+  const [selectedCategory, setSelectedCategory] = useState<any | null>(null);
+  const [filteredArticles, setFilteredArticles] = useState<any[]>(articles);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
     if (selectedCategory) {
       const filtered = articles.filter((article) =>
-        article.categories?.some((cat) => cat._id === selectedCategory._id)
+        article.categories?.some((cat: any) => cat._id === selectedCategory._id)
       );
       setFilteredArticles(filtered);
     } else {
@@ -37,7 +37,7 @@ export default function ArticleShowcase({
     }
   }, [selectedCategory, articles]);
 
-  const handleCategoryChange = (category: Category) => {
+  const handleCategoryChange = (category: any) => {
     if (selectedCategory?._id === category._id) {
       setSelectedCategory(null); // Deselect if same category
     } else {

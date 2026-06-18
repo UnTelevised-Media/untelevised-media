@@ -218,8 +218,8 @@ function TimelineOverview({
             Browse by Category
           </h2>
           <div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'>
-            {categories.map((category) => (
-              <Link key={category._id} href={`/timeline/category/${category.slug.current}`}>
+            {categories.map((category: any) => (
+              <Link key={category._id} href={`/timeline/category/${category.slug?.current ?? ''}`}>
                 <div className='group rounded-lg border border-slate-200 bg-white p-4 transition-all hover:border-untele/50 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700'>
                   <div className='flex items-center gap-3'>
                     <div

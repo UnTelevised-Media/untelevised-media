@@ -84,7 +84,7 @@ const PastEventsPage: React.FC<PastEventsPageProps> = ({ initialEvents }) => {
         try {
           const result = await loadMorePastEvents(events.length, events.length + 12);
           if (result.events.length > 0) {
-            setEvents((prev) => [...prev, ...result.events]);
+            setEvents((prev) => [...prev, ...(result.events as any[] as LiveEvent[])]);
             setHasMoreEvents(result.hasMore);
           } else {
             setHasMoreEvents(false);

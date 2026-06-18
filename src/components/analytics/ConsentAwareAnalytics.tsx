@@ -16,7 +16,7 @@ interface ConsentAwareAnalyticsProps {
   ga4Id?: string;
 }
 
-const ConsentAwareAnalytics = ({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) => {
+function ConsentAwareAnalytics({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) {
   const { canUseAnalytics, canUseMarketing, hasConsent } = useConsentCheck();
 
   // Reactively push consent updates to Google whenever preferences change.
@@ -82,7 +82,7 @@ const ConsentAwareAnalytics = ({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) => 
       {canUseAnalytics && <SpeedInsights />}
     </>
   );
-};
+}
 
 export default ConsentAwareAnalytics;
 

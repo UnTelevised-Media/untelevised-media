@@ -41,7 +41,7 @@ const queryKeyEvent = groq`
   | order(_createdAt desc)
 `;
 
-const Ticker = () => {
+function Ticker() {
   const [allItems, setAllItems] = useState<TickerItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -255,6 +255,6 @@ const Ticker = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Ticker;

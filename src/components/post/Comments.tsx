@@ -1,6 +1,6 @@
 // src/components/post/Comments.tsx
 'use client';
-/* eslint-disable react/function-component-definition */
+ 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import sanityClient from '@/lib/sanity/lib/client';
 
