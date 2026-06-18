@@ -2,8 +2,8 @@
 // src/app/api/newsletter-unsubscribe/route.ts
 // News newsletter unsubscribe â€” validates token, marks subscriber inactive.
 import { NextRequest, NextResponse } from 'next/server';
-import { unsubscribeFromList } from '@/lib/newsletter/service';
-import { NEWS_NEWSLETTER } from '@/lib/newsletter/types';
+import { unsubscribeFromList } from '@/services/newsletter/service';
+import { NEWS_NEWSLETTER } from '@/services/newsletter/types';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);

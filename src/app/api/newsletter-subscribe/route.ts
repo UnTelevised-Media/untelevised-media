@@ -2,8 +2,8 @@
 // News newsletter subscribe endpoint — double opt-in via Resend.
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { subscribeToList } from '@/lib/newsletter/service';
-import { NEWS_NEWSLETTER } from '@/lib/newsletter/types';
+import { subscribeToList } from '@/services/newsletter/service';
+import { NEWS_NEWSLETTER } from '@/services/newsletter/types';
 import { makeRatelimiter } from '@/lib/bookstore/ratelimit';
 
 const newsletterLimiter = makeRatelimiter(5, 300);

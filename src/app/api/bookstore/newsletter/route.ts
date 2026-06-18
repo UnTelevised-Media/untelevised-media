@@ -4,8 +4,8 @@
 // Upgraded from bare Sanity write to full double opt-in flow.
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { subscribeToList } from '@/lib/newsletter/service';
-import { BOOKSTORE_NEWSLETTER } from '@/lib/newsletter/types';
+import { subscribeToList } from '@/services/newsletter/service';
+import { BOOKSTORE_NEWSLETTER } from '@/services/newsletter/types';
 import { makeRatelimiter } from '@/lib/bookstore/ratelimit';
 
 const newsletterLimiter = makeRatelimiter(5, 60);
