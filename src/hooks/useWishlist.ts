@@ -13,7 +13,7 @@ import {
   removeFromWishlist as removeLocalWishlist,
   clearWishlist as clearLocalWishlist,
   type WishlistEntry,
-} from '@/lib/wishlist/storage';
+} from '@/services/storage/wishlist';
 import {
   getServerWishlist,
   addServerWishlistEntry,

@@ -6,7 +6,7 @@
 import { Star } from 'lucide-react';
 import { useWishlist } from '@/hooks/useWishlist';
 import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
-import type { WishlistEntry } from '@/lib/wishlist/storage';
+import type { WishlistEntry } from '@/services/storage/wishlist';
 
 type WishlistButtonProps = Omit<WishlistEntry, 'addedAt'> & {
   className?: string;

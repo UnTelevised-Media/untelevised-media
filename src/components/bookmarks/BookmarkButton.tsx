@@ -4,7 +4,7 @@
 import React from 'react';
 import { Bookmark, BookmarkCheck } from 'lucide-react';
 import { useBookmarks } from '@/hooks/useBookmarks';
-import type { BookmarkEntry } from '@/lib/bookmarks/storage';
+import type { BookmarkEntry } from '@/services/storage/bookmarks';
 
 type BookmarkButtonProps = Omit<BookmarkEntry, 'bookmarkedAt'> & {
   /** Optional extra class names on the button wrapper */

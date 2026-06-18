@@ -10,7 +10,7 @@ import writeClient from '@/lib/sanity/lib/write-client';
 import { getSanityAuthorIdForCurrentUser } from './author-actions';
 import { clerkClient } from '@clerk/nextjs/server';
 import { z } from 'zod';
-import { sanitizeText } from './sanitize';
+import { sanitizeText } from '@/util/sanitize';
 import { checkRateLimit } from './rate-limit';
 
 // Portable Text block — matches Sanity's block content structure

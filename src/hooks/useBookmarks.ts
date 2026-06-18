@@ -13,7 +13,7 @@ import {
   removeBookmark as removeLocalBookmark,
   clearBookmarks as clearLocalBookmarks,
   type BookmarkEntry,
-} from '@/lib/bookmarks/storage';
+} from '@/services/storage/bookmarks';
 import {
   getServerBookmarks,
   addServerBookmark,
