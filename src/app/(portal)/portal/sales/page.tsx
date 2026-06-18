@@ -3,13 +3,13 @@
 
 import { requireAnyPortalRole } from '@/lib/auth/roles';
 import { hasRole, isSalesOnly } from '@/lib/auth/roles-utils';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
+import { shopServiceClient } from '@/services/bookstore/supabase';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryBooksByAuthorClerkId } from '@/lib/sanity/lib/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import OrdersTable from '@/components/portal/OrdersTable';
 import type { OrderWithItems } from '@/components/portal/OrdersTable';
-import type { SanityBook } from '@/lib/bookstore/types';
+import type { SanityBook } from '@/services/bookstore/types';
 
 export const metadata = {
   title: 'Sales — Author Portal',

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useCart } from '@/lib/bookstore/cart';
+import { useCart } from '@/services/bookstore/cart';
 
 // Clears the cart once the user lands on the order-success page.
 // Runs client-side so the Zustand/localStorage store is accessible.

@@ -15,9 +15,9 @@
 // All three layers must pass before any token is issued or email is sent.
 
 import { NextRequest, NextResponse } from 'next/server';
-import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
-import { sendGuestDownloadEmail } from '@/lib/bookstore/email';
-import { checkGuestResendRate } from '@/lib/bookstore/ratelimit';
+import { shopServiceClient, writeAuditLog } from '@/services/bookstore/supabase';
+import { sendGuestDownloadEmail } from '@/services/bookstore/email';
+import { checkGuestResendRate } from '@/services/bookstore/ratelimit';
 
 const MAX_RESENDS = 3;
 

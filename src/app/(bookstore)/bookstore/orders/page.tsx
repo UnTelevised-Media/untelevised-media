@@ -5,8 +5,8 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { auth } from '@clerk/nextjs/server';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
-import type { Order, OrderItem } from '@/lib/bookstore/types';
+import { shopServiceClient } from '@/services/bookstore/supabase';
+import type { Order, OrderItem } from '@/services/bookstore/types';
 import PageViewTracker from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useCart } from '@/lib/bookstore/cart';
-import type { CheckoutPayload } from '@/lib/bookstore/types';
+import { useCart } from '@/services/bookstore/cart';
+import type { CheckoutPayload } from '@/services/bookstore/types';
 
 interface Author {
   _id: string;

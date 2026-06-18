@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sanityClient from '@/lib/sanity/lib/client';
-import { checkSubmissionRate } from '@/lib/bookstore/ratelimit';
+import { checkSubmissionRate } from '@/services/bookstore/ratelimit';
 
 const VALID_POSITIONS = [
   'article-writer',

@@ -4,10 +4,10 @@
 
 import { requireAuthor } from '@/lib/auth/roles';
 import writeClient from '@/lib/sanity/lib/write-client';
-import { getShopServiceClient } from '@/lib/bookstore/supabase';
+import { getShopServiceClient } from '@/services/bookstore/supabase';
 import { getSanityAuthorIdForCurrentUser } from './author-actions';
 import sanityClient from '@/lib/sanity/lib/client';
-import type { SanityBookGenre } from '@/lib/bookstore/types';
+import type { SanityBookGenre } from '@/services/bookstore/types';
 
 function slugify(str: string): string {
   return str

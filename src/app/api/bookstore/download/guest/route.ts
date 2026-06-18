@@ -5,8 +5,8 @@
 // Validates the one-time token, generates a short-lived signed URL, marks token used.
 
 import { NextRequest, NextResponse } from 'next/server';
-import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
-import { checkDownloadRate } from '@/lib/bookstore/ratelimit';
+import { shopServiceClient, writeAuditLog } from '@/services/bookstore/supabase';
+import { checkDownloadRate } from '@/services/bookstore/ratelimit';
 
 const SIGNED_URL_TTL_SECONDS = 15 * 60; // 15 minutes
 

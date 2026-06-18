@@ -18,8 +18,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
-import { getShopServiceClient } from '@/lib/bookstore/supabase';
-import { checkDownloadRate } from '@/lib/bookstore/ratelimit';
+import { getShopServiceClient } from '@/services/bookstore/supabase';
+import { checkDownloadRate } from '@/services/bookstore/ratelimit';
 
 export async function GET(req: NextRequest) {
   // Rate limit â€” same budget as the download endpoint (30 req/60 s per IP)

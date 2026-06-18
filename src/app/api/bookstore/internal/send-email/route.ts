@@ -26,8 +26,8 @@ import {
   sendGiftEmail,
   type OrderConfirmationParams,
   type DigitalDownloadEmailParams,
-} from '@/lib/bookstore/email';
-import type { FormatType } from '@/lib/bookstore/types';
+} from '@/services/bookstore/email';
+import type { FormatType } from '@/services/bookstore/types';
 
 type Payload =
   | {

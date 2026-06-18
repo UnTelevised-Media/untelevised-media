@@ -7,9 +7,9 @@ import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryBooksByAuthorClerkId } from '@/lib/sanity/lib/queries';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
+import { shopServiceClient } from '@/services/bookstore/supabase';
 import PortalNav from '@/components/portal/PortalNav';
-import type { SanityBook, Payout } from '@/lib/bookstore/types';
+import type { SanityBook, Payout } from '@/services/bookstore/types';
 
 export const metadata = {
   title: 'Earnings — Author Portal',

@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { subscribeToList } from '@/services/newsletter/service';
 import { BOOKSTORE_NEWSLETTER } from '@/services/newsletter/types';
-import { makeRatelimiter } from '@/lib/bookstore/ratelimit';
+import { makeRatelimiter } from '@/services/bookstore/ratelimit';
 
 const newsletterLimiter = makeRatelimiter(5, 60);
 

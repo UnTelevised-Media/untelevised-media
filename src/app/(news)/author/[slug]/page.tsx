@@ -20,7 +20,7 @@ import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
 import { buildAuthorMetadata } from '@/util/metadata';
-import type { SanityBook, SanityBookFormat } from '@/lib/bookstore/types';
+import type { SanityBook, SanityBookFormat } from '@/services/bookstore/types';
 import BookCardActions from '@/components/bookstore/BookCardActions';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
 

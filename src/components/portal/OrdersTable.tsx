@@ -3,7 +3,7 @@
 // Role-aware order table: admin / sales / author each get appropriate actions and data visibility.
 
 import React, { useState, useTransition } from 'react';
-import type { Order, OrderItem, OrderStatus } from '@/lib/bookstore/types';
+import type { Order, OrderItem, OrderStatus } from '@/services/bookstore/types';
 import type { PortalRole } from '@/lib/auth/roles-utils';
 
 export interface ShippingAddress {

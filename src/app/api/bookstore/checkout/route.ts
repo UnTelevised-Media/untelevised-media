@@ -15,8 +15,8 @@ import type {
   CheckoutLineItem,
   FormatType,
   GiftOptions,
-} from '@/lib/bookstore/types';
-import { checkCheckoutRate } from '@/lib/bookstore/ratelimit';
+} from '@/services/bookstore/types';
+import { checkCheckoutRate } from '@/services/bookstore/ratelimit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
   apiVersion: '2026-05-27.dahlia',

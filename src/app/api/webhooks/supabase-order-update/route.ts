@@ -14,8 +14,8 @@
 
 import { timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
-import { sendShipmentEmail } from '@/lib/bookstore/email';
+import { shopServiceClient } from '@/services/bookstore/supabase';
+import { sendShipmentEmail } from '@/services/bookstore/email';
 
 function timingSafeStringEqual(a: string, b: string): boolean {
   // Pad both to the same length before comparing so a length mismatch doesn't

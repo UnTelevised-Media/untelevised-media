@@ -8,7 +8,7 @@ import type {
   SanityBookFormat,
   CheckoutPayload,
   GiftOptions,
-} from '@/lib/bookstore/types';
+} from '@/services/bookstore/types';
 import getStripeIdForFormat from '@/util/stripeUtils';
 
 interface Props {

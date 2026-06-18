@@ -13,7 +13,7 @@ import {
   fetchBookGenres,
   createBookGenre,
 } from '@/lib/portal/book-actions';
-import type { SanityBook, SanityBookGenre } from '@/lib/bookstore/types';
+import type { SanityBook, SanityBookGenre } from '@/services/bookstore/types';
 
 // ---------------------------------------------------------------------------
 // Helpers

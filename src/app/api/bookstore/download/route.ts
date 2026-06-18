@@ -7,8 +7,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
-import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
-import { checkDownloadRate } from '@/lib/bookstore/ratelimit';
+import { shopServiceClient, writeAuditLog } from '@/services/bookstore/supabase';
+import { checkDownloadRate } from '@/services/bookstore/ratelimit';
 
 const SIGNED_URL_TTL_SECONDS = 15 * 60; // 15 minutes
 

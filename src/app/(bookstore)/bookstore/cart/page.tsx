@@ -6,9 +6,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import * as Sentry from '@sentry/nextjs';
 import { useUser } from '@clerk/nextjs';
-import { useCart } from '@/lib/bookstore/cart';
+import { useCart } from '@/services/bookstore/cart';
 import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
-import type { CheckoutPayload } from '@/lib/bookstore/types';
+import type { CheckoutPayload } from '@/services/bookstore/types';
 import PreCheckoutDialog from '@/components/bookstore/PreCheckoutDialog';
 
 function CartQuantityControl({

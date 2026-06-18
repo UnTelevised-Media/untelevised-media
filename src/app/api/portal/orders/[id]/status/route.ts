@@ -6,10 +6,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { getRoleFromUser } from '@/lib/auth/roles';
 import { isSalesOnly } from '@/lib/auth/roles-utils';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
-import { sendRefundEmail } from '@/lib/bookstore/email';
+import { shopServiceClient } from '@/services/bookstore/supabase';
+import { sendRefundEmail } from '@/services/bookstore/email';
 import { client as sanityReadClient } from '@/lib/sanity/lib/client';
-import type { OrderStatus } from '@/lib/bookstore/types';
+import type { OrderStatus } from '@/services/bookstore/types';
 import { z } from 'zod';
 
 const ALLOWED_TRANSITIONS: Record<string, OrderStatus[]> = {

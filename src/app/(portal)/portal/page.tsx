@@ -38,8 +38,8 @@ import AddBookModal from '@/components/portal/AddBookModal';
 import PendingPayoutsWidget, { type PayoutRow } from '@/components/portal/PendingPayoutsWidget';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryBooksByAuthorClerkId } from '@/lib/sanity/lib/queries';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
-import type { SanityBook } from '@/lib/bookstore/types';
+import { shopServiceClient } from '@/services/bookstore/supabase';
+import type { SanityBook } from '@/services/bookstore/types';
 import Link from 'next/link';
 
 export const metadata = {
