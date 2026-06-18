@@ -1,20 +1,38 @@
+'use client';
+
 /**
- * Root-level Sanity config used exclusively by the Sanity CLI for
- * schema extraction and TypeGen (`pnpm sanity typegen generate`).
- *
- * The live studio config lives at src/lib/sanity/sanity.config.ts and
- * is mounted in Next.js via src/app/studio/[[...tool]]/page.tsx.
- * This file is a minimal duplicate to satisfy the CLI's project-root lookup.
+ * This configuration is used to for the Sanity Studio that's mounted on the `\src\app\studio\[[...tool]]\page.tsx` route
  */
+
 import { colorInput } from '@sanity/color-input';
+import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
-import { schemaTypes } from '../../models/schema/index';
+import { structureTool } from 'sanity/structure';
+import { presentationTool } from 'sanity/presentation';
+
+// Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
+import { apiVersion, dataset, projectId } from './env';
+import { schemaTypes } from '@/models/schema/index';
+
+import structure from './structure';
+import { generatePreviewUrl } from '@/components/sanity/PreviewLink';
 
 export default defineConfig({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? '',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
+  basePath: '/studio',
+  projectId,
+  dataset,
   schema: {
     types: schemaTypes,
   },
-  plugins: [colorInput()],
+  plugins: [
+    colorInput(),
+    structureTool({ structure }),
+    presentationTool({
+      previewUrl: generatePreviewUrl,
+      name: 'preview',
+      title: 'Preview',
+      icon: () => '👁️',
+    }),
+    visionTool({ defaultApiVersion: apiVersion }),
+  ],
 });

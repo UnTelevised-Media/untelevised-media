@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { updateMyProfile, type AuthorProfileInput } from '@/lib/portal/author-actions';
-import uploadImageToSanity from '@/lib/portal/image-actions';
+import { uploadImageToSanity } from '@/lib/portal/image-actions';
 
 // ---------------------------------------------------------------------------
 // Types
