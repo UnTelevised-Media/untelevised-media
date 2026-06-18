@@ -37,7 +37,7 @@ import { PitchQuickViewModal, type PitchForModal } from './PitchQuickViewModal';
 import {
   blockNoteToPortableText,
   portableTextToBlockNote,
-} from '@/lib/portal/blocknote-serializer';
+} from '@/util/blocknote-serializer';
 import urlFor from '@/lib/sanity/utils/image';
 import SourceSelectorModal from './SourceSelectorModal';
 

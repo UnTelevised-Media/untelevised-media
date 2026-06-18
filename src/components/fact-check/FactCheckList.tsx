@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { List, LayoutGrid } from 'lucide-react';
 import { VerdictBadge } from './VerdictBadge';
-import { VERDICT_CONFIG, type FactCheckRating } from '@/lib/factCheck/verdictConfig';
+import { VERDICT_CONFIG, type FactCheckRating } from '@/util/verdictConfig';
 import formatDate from '@/util/formatDate';
 import urlForImage from '@/util/urlForImage';
 import { InFeedAd, AD_CONFIG } from '@/components/ads';

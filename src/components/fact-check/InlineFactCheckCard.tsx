@@ -3,7 +3,7 @@
 // Rendered inside blockContent when a factCheckEmbed block is encountered.
 import Link from 'next/link';
 import { VerdictBadge } from './VerdictBadge';
-import type { FactCheckRating } from '@/lib/factCheck/verdictConfig';
+import type { FactCheckRating } from '@/util/verdictConfig';
 
 interface InlineFactCheckData {
   _id: string;

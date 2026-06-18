@@ -1,6 +1,6 @@
 ﻿/* eslint-disable import/prefer-default-export */
 // src/components/fact-check/VerdictBadge.tsx
-import { VERDICT_CONFIG, type FactCheckRating } from '@/lib/factCheck/verdictConfig';
+import { VERDICT_CONFIG, type FactCheckRating } from '@/util/verdictConfig';
 
 interface VerdictBadgeProps {
   rating: FactCheckRating;
