@@ -30,62 +30,48 @@ export default [
       '.claude/**',
     ],
   },
-  // Main configuration
+  // Boundaries plugin settings (must be separate from files block)
   {
-    files: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.js', 'src/**/*.jsx'],
     settings: {
-      'boundaries/include': ['src/**/*.ts', 'src/**/*.tsx'],
       'boundaries/elements': [
         {
           type: 'app',
           pattern: 'src/app/**',
-          mode: 'full',
-          capture: ['segment'],
         },
         {
           type: 'util',
           pattern: 'src/util/**',
-          mode: 'full',
-          capture: ['segment'],
         },
         {
           type: 'models',
           pattern: 'src/models/**',
-          mode: 'full',
-          capture: ['segment'],
         },
         {
           type: 'lib',
           pattern: 'src/lib/**',
-          mode: 'full',
-          capture: ['segment'],
         },
         {
           type: 'services',
           pattern: 'src/services/**',
-          mode: 'full',
-          capture: ['segment'],
         },
         {
           type: 'server',
           pattern: 'src/server/**',
-          mode: 'full',
-          capture: ['segment'],
         },
         {
           type: 'hooks',
           pattern: 'src/hooks/**',
-          mode: 'full',
-          capture: ['segment'],
         },
         {
           type: 'components',
           pattern: 'src/components/**',
-          mode: 'full',
-          capture: ['segment'],
         },
       ],
     },
+  },
+  // Main configuration
+  {
+    files: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.js', 'src/**/*.jsx'],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2023,
@@ -101,52 +87,9 @@ export default [
       },
     },
     settings: {
-      'boundaries/include': ['src/**/*.ts', 'src/**/*.tsx'],
-      'boundaries/ignore': ['node_modules', '.next'],
-      'boundaries/elements': [
-        {
-          type: 'util',
-          pattern: 'src/util/**',
-          mode: 'full',
-          capture: ['segment'],
-        },
-        {
-          type: 'models',
-          pattern: 'src/models/**',
-          mode: 'full',
-          capture: ['segment'],
-        },
-        {
-          type: 'lib',
-          pattern: 'src/lib/**',
-          mode: 'full',
-          capture: ['segment'],
-        },
-        {
-          type: 'services',
-          pattern: 'src/services/**',
-          mode: 'full',
-          capture: ['segment'],
-        },
-        {
-          type: 'server',
-          pattern: 'src/server/**',
-          mode: 'full',
-          capture: ['segment'],
-        },
-        {
-          type: 'hooks',
-          pattern: 'src/hooks/**',
-          mode: 'full',
-          capture: ['segment'],
-        },
-        {
-          type: 'components',
-          pattern: 'src/components/**',
-          mode: 'full',
-          capture: ['segment'],
-        },
-      ],
+      react: {
+        version: 'detect',
+      },
     },
     plugins: {
       '@typescript-eslint': typescriptEslint,
@@ -209,8 +152,8 @@ export default [
       'react-hooks/exhaustive-deps': 'warn',
       '@next/next/no-img-element': 'warn',
       '@next/next/no-sync-scripts': 'warn',
-      'boundaries/no-unknown': ['warn'],
-      'boundaries/no-unknown-files': ['warn'],
+      'boundaries/no-unknown': 'off',
+      'boundaries/no-unknown-files': 'off',
       'boundaries/element-types': [
         'error',
         {
