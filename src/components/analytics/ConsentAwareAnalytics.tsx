@@ -3,7 +3,6 @@
 
 import { useEffect } from 'react';
 import Script from 'next/script';
-import * as Sentry from '@sentry/nextjs';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { useConsentCheck } from '@/hooks/googleAdSense/useConsent';

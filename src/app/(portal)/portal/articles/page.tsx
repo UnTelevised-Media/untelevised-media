@@ -7,9 +7,8 @@ import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author'
 import { portalFetch } from '@/services/portal/fetch';
 import { queryPortalArticlesByAuthor, queryPortalAllArticles } from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
-import ArticleDashboard from '@/components/portal/ArticleDashboard';
+import ArticleDashboard, { type PortalArticle } from '@/components/portal/ArticleDashboard';
 import Link from 'next/link';
-import type { PortalArticle } from '@/components/portal/ArticleDashboard';
 
 export const metadata = {
   title: 'My Articles — Author Portal',

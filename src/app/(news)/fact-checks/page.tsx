@@ -2,8 +2,7 @@
 import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryAllFactChecks } from '@/lib/sanity/lib/queries';
-import FactCheckList from '@/components/fact-check/FactCheckList';
-import type { FactCheckSummary } from '@/components/fact-check/FactCheckList';
+import FactCheckList, { type FactCheckSummary } from '@/components/fact-check/FactCheckList';
 import { BannerAd, AD_CONFIG } from '@/components/googleAdSense';
 
 export const metadata: Metadata = {

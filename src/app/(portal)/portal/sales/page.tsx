@@ -7,8 +7,7 @@ import { shopServiceClient } from '@/services/bookstore/supabase';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryBooksByAuthorClerkId } from '@/lib/sanity/lib/queries';
 import PortalNav from '@/components/portal/PortalNav';
-import OrdersTable from '@/components/portal/OrdersTable';
-import type { OrderWithItems } from '@/components/portal/OrdersTable';
+import OrdersTable, { type OrderWithItems } from '@/components/portal/OrdersTable';
 import type { SanityBook } from '@/models/types/bookstore';
 
 export const metadata = {

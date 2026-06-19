@@ -82,7 +82,6 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
           aria-hidden='true'
           tabIndex={-1}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={hit.imageUrl}
             alt={hit.title}

@@ -413,7 +413,6 @@ export default function EditBookModal({ book }: Props) {
                     <div className='flex gap-4'>
                       <div className='relative h-32 w-24 shrink-0 overflow-hidden border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800'>
                         {currentCover ? (
-                          // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={currentCover}
                             alt='Cover'

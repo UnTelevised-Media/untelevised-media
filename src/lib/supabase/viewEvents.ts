@@ -25,10 +25,6 @@ export async function recordViewEvent(slug: string, ip: string): Promise<void> {
   const ipHash = hashIP(ip);
   const viewedAt = new Date().toISOString();
 
-  console.log(
-    `[recordViewEvent] Inserting view: slug=${slug}, ip_hash=${ipHash.substring(0, 16)}..., viewed_at=${viewedAt}`
-  );
-
   const { error } = await (client.from('view_count') as any).insert({
     slug,
     ip_hash: ipHash,
@@ -44,8 +40,6 @@ export async function recordViewEvent(slug: string, ip: string): Promise<void> {
     });
     throw error;
   }
-
-  console.log(`[recordViewEvent] Insert successful`);
 }
 
 export interface ViewCountBySlug {
@@ -117,8 +111,6 @@ export async function getTrendingArticles(
   startDate.setDate(startDate.getDate() - daysBack);
   const dateStr = startDate.toISOString().split('T')[0];
 
-  console.log(`[getTrendingArticles] Querying from ${dateStr}`);
-
   const { data, error } = await (client
     .from('view_count')
     .select('slug, viewed_at')
@@ -133,8 +125,6 @@ export async function getTrendingArticles(
     });
     throw error;
   }
-
-  console.log(`[getTrendingArticles] Found ${data?.length ?? 0} view events`);
 
   // Aggregate view counts by slug
   const counts = new Map<string, { count: number; lastViewed: string }>();

@@ -726,7 +726,7 @@ export default function ArticleEditorForm({
           <div className='space-y-3'>
             {mainImage?.url && (
               <div className='relative'>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+
                 <img
                   src={mainImage.url}
                   alt={mainImage.alt || 'Article main image'}

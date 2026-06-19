@@ -166,7 +166,6 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
 
   function handleCoverChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0] ?? null;
-    console.log('[AddBookModal] cover file selected:', file?.name, file?.size);
     if (!file) {return;}
     setCoverFile(file);
     if (coverPreview) {URL.revokeObjectURL(coverPreview);}
@@ -212,12 +211,6 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
 
     startTransition(async () => {
       try {
-        console.log(
-          '[AddBookModal] submitting, coverFile:',
-          coverFile?.name ?? 'none',
-          'digitalFiles:',
-          digitalFiles.map((f) => f?.name ?? 'none')
-        );
         const result = await createBook({
           title: title.trim(),
           description: description.trim() || undefined,
@@ -230,21 +223,13 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
           formats: parsedFormats,
           genreIds: selectedGenreIds.length ? selectedGenreIds : undefined,
         });
-        console.log(
-          '[AddBookModal] createBook ok, id:',
-          result.id,
-          'formatKeys:',
-          result.formatKeys
-        );
 
         // Upload cover if one was selected
         if (coverFile) {
-          console.log('[AddBookModal] uploading cover…');
           const fd = new FormData();
           fd.append('bookId', result.id);
           fd.append('file', coverFile);
           await uploadBookCover(fd);
-          console.log('[AddBookModal] cover upload done');
         }
 
         // Upload digital assets — iterate formats, match to returned format keys
@@ -256,16 +241,12 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
           if (!fmtKey) {continue;}
           if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') {continue;}
           const file = digitalFiles[i];
-          console.log(
-            `[AddBookModal] format[${i}] type=${fmt.formatType} fmtKey=${fmtKey?.key} file=${file?.name ?? 'none'}`
-          );
           if (!file) {continue;}
           const fd = new FormData();
           fd.append('bookId', result.id);
           fd.append('formatKey', fmtKey.key);
           fd.append('file', file);
           await uploadDigitalAsset(fd);
-          console.log(`[AddBookModal] digital upload done for fmtKey=${fmtKey.key}`);
         }
 
         setCreatedSlug(result.slug);
@@ -369,7 +350,6 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                       {/* Preview */}
                       <div className='relative h-32 w-24 shrink-0 overflow-hidden border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800'>
                         {coverPreview ? (
-                          // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={coverPreview}
                             alt='Cover preview'

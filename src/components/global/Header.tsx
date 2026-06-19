@@ -3,12 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Bookmark } from 'lucide-react';
+import { Bookmark, Flame, Radio, Music, BookOpen } from 'lucide-react';
 import { Show, UserButton } from '@clerk/nextjs';
 import dynamic from 'next/dynamic';
 import Socials from './Socials';
 import ThemeToggle from './ThemeToggle';
-import { Flame, Radio, Music, BookOpen } from 'lucide-react';
 
 const HeaderSearch = dynamic(() => import('./HeaderSearch'), { ssr: false });
 const MiniCart = dynamic(() => import('@/components/bookstore/MiniCart'), { ssr: false });
