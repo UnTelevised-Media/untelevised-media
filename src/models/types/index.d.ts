@@ -80,7 +80,15 @@ interface Image {
   _type: 'image';
   asset: Reference;
   alt?: string;
-  [key: string]: any; // Allow additional properties for Sanity compatibility
+  /**
+   * Additional properties for Sanity compatibility
+   * Sanity allows custom metadata fields on images (crop, hotspot, dimensions, etc.)
+   * that are not defined in the schema. These fields are set by Sanity's image handler.
+   * @see https://www.sanity.io/docs/image-type
+   * @typescript-eslint/no-explicit-any — Intentional: Schema extensibility for CMS flexibility
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 interface Reference {
@@ -97,6 +105,14 @@ interface Block extends React.ReactNode {
   _key: string;
   _type: 'block';
   children: Span[];
+  /**
+   * Portable Text mark definitions (emphasis, links, color, custom marks, etc.)
+   * Array contains arbitrary Sanity mark objects that can be extended via custom schema.
+   * Structure is defined by individual mark definitions in the Sanity schema.
+   * @see https://www.sanity.io/docs/portable-text
+   * @typescript-eslint/no-explicit-any — Intentional: Mark types are extensible via schema customization
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   markDefs: any[];
   style: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote';
 }
@@ -132,6 +148,14 @@ interface Author extends Base {
   location?: string;
   tipStripeProductId?: string;
   tipAmount?: number;
+  /**
+   * Books by this author
+   * Structure is intentionally flexible for future schema evolution.
+   * May be expanded to include { title: string; isbn?: string; releaseDate?: string; publisher?: string }[]
+   * depending on content requirements.
+   * @typescript-eslint/no-explicit-any — Intentional: Future-proofing for content expansion
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   books?: any[];
 }
 
