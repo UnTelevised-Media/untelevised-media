@@ -97,11 +97,11 @@ export default async function ArticlePage({ params }: Props) {
                 name: 'Home',
                 item: 'https://www.untelevised.media',
               },
-              ...(article.categories?.slice(0, 1).map((cat) => ({
+              ...((article.categories as any)?.slice(0, 1).map((cat) => ({
                 '@type': 'ListItem',
                 position: 2,
-                name: cat?.title ?? 'Category',
-                item: `https://www.untelevised.media/category/${formatTitleForURL(cat?.title ?? '')}`,
+                name: (cat as any)?.title ?? 'Category',
+                item: `https://www.untelevised.media/category/${formatTitleForURL((cat as any)?.title ?? '')}`,
               })) ?? []),
               {
                 '@type': 'ListItem',
@@ -156,21 +156,21 @@ export default async function ArticlePage({ params }: Props) {
               <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
                 {/* Author + Reviewed By */}
                 <div className='flex flex-wrap items-center gap-3'>
-                  {article.author?.slug?.current && (
+                  {(article.author as any)?.slug?.current && (
                     <ClientSideRoute
-                      route={resolveHref('author', article.author?.slug?.current) ?? ''}
+                      route={resolveHref('author', (article.author as any)?.slug?.current) ?? ''}
                     >
                       <div className='flex items-center space-x-3 rounded-lg bg-slate-900/50 p-3 backdrop-blur-sm transition-colors hover:bg-slate-900/70'>
                         <Image
-                          src={urlForImage(article.author?.image)?.url() ?? ''}
-                          alt={article.author?.image?.alt ?? 'Author image'}
+                          src={urlForImage((article.author as any)?.image)?.url() ?? ''}
+                          alt={(article.author as any)?.image?.alt ?? 'Author image'}
                           width={48}
                           height={48}
                           className='rounded-full border-2 border-white/20 object-cover'
                         />
                         <div>
                           <p className='font-semibold text-white'>
-                            {article.author?.name ?? 'Unknown Author'}
+                            {(article.author as any)?.name ?? 'Unknown Author'}
                           </p>
                           <p className='text-sm text-slate-300'>Author</p>
                         </div>
@@ -178,14 +178,14 @@ export default async function ArticlePage({ params }: Props) {
                     </ClientSideRoute>
                   )}
 
-                  {article.reviewedBy?.slug?.current && (
+                  {(article.reviewedBy as any)?.slug?.current && (
                     <span className='text-sm text-slate-400'>
                       Reviewed by{' '}
                       <Link
-                        href={`/author/${article.reviewedBy?.slug?.current}`}
+                        href={`/author/${(article.reviewedBy as any)?.slug?.current}`}
                         className='font-medium text-slate-300 underline hover:text-white'
                       >
-                        {article.reviewedBy?.name ?? 'Unknown'}
+                        {(article.reviewedBy as any)?.name ?? 'Unknown'}
                       </Link>
                     </span>
                   )}
@@ -208,23 +208,23 @@ export default async function ArticlePage({ params }: Props) {
                   </div>
                   {/* Categories + Tags */}
                   <div className='flex flex-wrap justify-end gap-2'>
-                    {article.categories &&
-                      article.categories.length > 0 &&
-                      article.categories.map(
+                    {(article.categories as any) &&
+                      (article.categories as any).length > 0 &&
+                      (article.categories as any).map(
                         (category: any) =>
-                          category?.title && (
+                          (category as any)?.title && (
                             <Link
-                              key={category?._id ?? Math.random()}
-                              href={`/category/${formatTitleForURL(category.title)}`}
+                              key={(category as any)?._id ?? Math.random()}
+                              href={`/category/${formatTitleForURL((category as any).title)}`}
                               className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-untele'
                             >
-                              {category.title}
+                              {(category as any).title}
                             </Link>
                           )
                       )}
-                    {article?.tags &&
-                      article?.tags?.length > 0 &&
-                      article?.tags?.map((tag: string) => (
+                    {(article?.tags as any) &&
+                      (article?.tags as any)?.length > 0 &&
+                      (article?.tags as any)?.map((tag: string) => (
                         <Link
                           key={tag}
                           href={`/tag/${tagToSlug(tag)}`}
@@ -272,18 +272,18 @@ export default async function ArticlePage({ params }: Props) {
                       Home
                     </Link>
                   </li>
-                  {article.categories && article.categories.length > 0 && (
+                  {(article.categories as any) && (article.categories as any).length > 0 && (
                     <>
                       <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>
                         /
                       </li>
                       <li>
-                        {article.categories?.[0]?.title && (
+                        {(article.categories as any)?.[0]?.title && (
                           <Link
-                            href={`/category/${formatTitleForURL(article.categories[0].title)}`}
+                            href={`/category/${formatTitleForURL((article.categories as any)[0].title)}`}
                             className='transition-colors hover:text-untele'
                           >
-                            {article.categories[0].title}
+                            {(article.categories as any)[0].title}
                           </Link>
                         )}
                       </li>
@@ -307,7 +307,7 @@ export default async function ArticlePage({ params }: Props) {
                   typeof article.description === 'string' ? article.description : undefined
                 }
                 imageUrl={urlForImage(article.mainImage)?.width(400).url() ?? undefined}
-                authorName={article.author?.name ?? undefined}
+                authorName={(article.author as any)?.name ?? undefined}
                 publishedAt={article.publishedAt}
                 readingTime={getReadingTime(article.body)}
                 variant='full'
@@ -386,13 +386,13 @@ export default async function ArticlePage({ params }: Props) {
               </div>
 
               {/* Tags */}
-              {article.tags && article.tags.length > 0 && (
+              {(article.tags as any) && (article.tags as any).length > 0 && (
                 <div className='not-prose mt-8'>
                   <p className='mb-3 text-xs font-black uppercase tracking-widest text-muted-foreground'>
                     Filed Under
                   </p>
                   <div className='flex flex-wrap gap-2'>
-                    {article.tags.map((tag: string) => (
+                    {(article.tags as any).map((tag: string) => (
                       <Link
                         key={tag}
                         href={`/tag/${tagToSlug(tag)}`}
@@ -472,8 +472,8 @@ export default async function ArticlePage({ params }: Props) {
                           </p>
                         )}
                         <div className='mt-auto flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>
-                          {related.author?.name && (
-                            <span className='font-medium'>{related.author?.name}</span>
+                          {(related.author as any)?.name && (
+                            <span className='font-medium'>{(related.author as any)?.name}</span>
                           )}
                           {related.publishedAt && <time>{formatDate(related.publishedAt)}</time>}
                         </div>
