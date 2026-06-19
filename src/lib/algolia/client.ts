@@ -7,6 +7,7 @@ import { algoliasearch } from 'algoliasearch';
 let _adminClient: ReturnType<typeof algoliasearch> | undefined;
 
 export function getAdminClient() {
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   if (!_adminClient) {
     _adminClient = algoliasearch(process.env.ALGOLIA_APP_ID!, process.env.ALGOLIA_ADMIN_API_KEY!);
   }

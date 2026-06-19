@@ -65,6 +65,7 @@ export default function SourceLibrary({ sources, isEditorPlus: _isEditorPlus }: 
     return sources.filter(
       (s) =>
         s.label?.toLowerCase().includes(q) ||
+// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         s.url?.toLowerCase().includes(q) ||
         s.type?.toLowerCase().includes(q)
     );

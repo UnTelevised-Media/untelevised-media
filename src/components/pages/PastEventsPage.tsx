@@ -42,6 +42,7 @@ function PastEventsPage({ initialEvents }: PastEventsPageProps) {
     const filtered = events.filter((event) => {
       const matchesSearch =
         !searchTerm ||
+// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         (event.title?.toLowerCase().includes(searchTerm.toLowerCase())) ||
         event.description?.toLowerCase().includes(searchTerm.toLowerCase());
 

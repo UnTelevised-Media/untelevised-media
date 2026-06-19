@@ -43,6 +43,7 @@ export function SubscribersList({ subscribers }: { subscribers: Subscriber[] }) 
   const filtered = search.trim()
     ? subscribers.filter(
         (s) =>
+// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
           s.email?.toLowerCase().includes(search.toLowerCase()) ||
           s.firstName?.toLowerCase().includes(search.toLowerCase())
       )

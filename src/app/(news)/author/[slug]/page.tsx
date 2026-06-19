@@ -243,6 +243,7 @@ export default async function Author({ params }: Props) {
       </section>
 
       {/* Credentials & Expertise */}
+      {/* eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing */}
       {((author.credentials && author.credentials.length > 0) ||
         (author.expertise && author.expertise.length > 0) ||
         (author.sameAs && author.sameAs.length > 0)) && (

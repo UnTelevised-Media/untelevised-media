@@ -73,6 +73,7 @@ export async function getViewCountsByDate(dateString: string): Promise<ViewCount
 
   // Count occurrences of each slug
   const counts = new Map<string, number>();
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const rows = (data || []) as Pick<ViewEvent, 'slug'>[];
   for (const row of rows) {
     counts.set(row.slug, (counts.get(row.slug) ?? 0) + 1);
@@ -138,7 +139,9 @@ export async function getTrendingArticles(
   // Aggregate view counts by slug
   const counts = new Map<string, { count: number; lastViewed: string }>();
 
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   for (const row of data || []) {
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     const current = counts.get(row.slug) || { count: 0, lastViewed: row.viewed_at };
     counts.set(row.slug, {
       count: current.count + 1,
@@ -187,7 +190,9 @@ export async function getMostReadByCategory(
   // Aggregate view counts by slug
   const counts = new Map<string, { count: number; lastViewed: string }>();
 
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   for (const row of data || []) {
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     const current = counts.get(row.slug) || { count: 0, lastViewed: row.viewed_at };
     counts.set(row.slug, {
       count: current.count + 1,

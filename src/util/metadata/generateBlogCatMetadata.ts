@@ -33,12 +33,12 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
   // Create metadata object with dynamic values
   const metadata: Metadata = {
     title: `${category.title} | UnTelevised Media`,
-    description: category.description || `Latest articles in ${category.title}`,
+    description: category.description ?? `Latest articles in ${category.title}`,
     publisher: 'UnTelevised Media',
 
     openGraph: {
       title: `${category.title} | UnTelevised Media`,
-      description: category.description || `Latest articles in ${category.title}`,
+      description: category.description ?? `Latest articles in ${category.title}`,
       url: `${baseURL}/category/${slug}`,
       locale: 'en_US',
       siteName: 'UnTelevised Media',
@@ -48,7 +48,7 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
     twitter: {
       card: 'summary_large_image',
       title: `${category.title} | UnTelevised Media`,
-      description: category.description || `Latest articles in ${category.title}`,
+      description: category.description ?? `Latest articles in ${category.title}`,
       site: '@UnTelevisedLive',
       creator: '@UnTelevisedLive',
     },
