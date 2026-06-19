@@ -7,6 +7,7 @@ import importPlugin from 'eslint-plugin-import';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import nextPlugin from '@next/eslint-plugin-next';
+import boundariesPlugin from 'eslint-plugin-boundaries';
 
 export default [
   // Global ignores
@@ -29,6 +30,62 @@ export default [
       '.claude/**',
     ],
   },
+  // Global settings for boundaries plugin
+  {
+    settings: {
+      'boundaries/include': ['src/**/*.ts', 'src/**/*.tsx'],
+      'boundaries/elements': [
+        {
+          type: 'app',
+          pattern: 'src/app/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'util',
+          pattern: 'src/util/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'models',
+          pattern: 'src/models/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'lib',
+          pattern: 'src/lib/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'services',
+          pattern: 'src/services/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'server',
+          pattern: 'src/server/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'hooks',
+          pattern: 'src/hooks/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'components',
+          pattern: 'src/components/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+      ],
+    },
+  },
   // Main configuration
   {
     files: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.js', 'src/**/*.jsx'],
@@ -46,12 +103,61 @@ export default [
         React: 'readonly',
       },
     },
+    settings: {
+      'boundaries/include': ['src/**/*.ts', 'src/**/*.tsx'],
+      'boundaries/ignore': ['node_modules', '.next'],
+      'boundaries/elements': [
+        {
+          type: 'util',
+          pattern: 'src/util/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'models',
+          pattern: 'src/models/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'lib',
+          pattern: 'src/lib/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'services',
+          pattern: 'src/services/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'server',
+          pattern: 'src/server/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'hooks',
+          pattern: 'src/hooks/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+        {
+          type: 'components',
+          pattern: 'src/components/**',
+          mode: 'full',
+          capture: ['segment'],
+        },
+      ],
+    },
     plugins: {
       '@typescript-eslint': typescriptEslint,
       import: importPlugin,
       react: reactPlugin,
       'react-hooks': reactHooksPlugin,
       '@next/next': nextPlugin,
+      boundaries: boundariesPlugin,
     },
     settings: {
       react: {
@@ -106,6 +212,51 @@ export default [
       'react-hooks/exhaustive-deps': 'warn',
       '@next/next/no-img-element': 'warn',
       '@next/next/no-sync-scripts': 'warn',
+      'boundaries/no-unknown': ['warn'],
+      'boundaries/no-unknown-files': ['warn'],
+      'boundaries/element-types': [
+        'error',
+        {
+          default: 'disallow',
+          rules: [
+            // util can only import models
+            {
+              from: ['util'],
+              allow: ['models'],
+            },
+            // models is self-contained
+            {
+              from: ['models'],
+              allow: [],
+            },
+            // lib can import util and models
+            {
+              from: ['lib'],
+              allow: ['util', 'models'],
+            },
+            // services can import util, lib, models
+            {
+              from: ['services'],
+              allow: ['util', 'lib', 'models'],
+            },
+            // server can import util, lib, services, models
+            {
+              from: ['server'],
+              allow: ['util', 'lib', 'services', 'models'],
+            },
+            // hooks can import util, lib, services, models
+            {
+              from: ['hooks'],
+              allow: ['util', 'lib', 'services', 'models'],
+            },
+            // components can import everything (top layer)
+            {
+              from: ['components'],
+              allow: ['util', 'lib', 'services', 'server', 'hooks', 'models', 'components'],
+            },
+          ],
+        },
+      ],
     },
   },
   // Type declaration files configuration
