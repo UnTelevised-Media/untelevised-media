@@ -1,4 +1,3 @@
-// src/lib/validations/jobApplicationSchema.ts
 import { z } from 'zod';
 
 export const jobApplicationSchema = z.object({

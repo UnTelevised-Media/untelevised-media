@@ -9,7 +9,7 @@ import ThemeProvider from '@/components/providers/ThemeProvider';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { Toaster } from '@/components/ui/toaster';
 import dynamic from 'next/dynamic';
-import { ConsentProvider } from '@/lib/consent';
+import { ConsentProvider } from '@/hooks/useConsent';
 import ConsentAwareAnalytics from '@/components/analytics/ConsentAwareAnalytics';
 import SentryUserSync from '@/components/providers/SentryUserSync';
 
