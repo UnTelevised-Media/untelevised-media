@@ -227,7 +227,8 @@ export async function createArticle(
         .patch(linkedPitchId)
         .set({ linkedArticle: { _type: 'reference', _ref: created._id } })
         .commit()
-        .catch(() => {});
+        // eslint-disable-next-line no-empty-function
+        .catch(() => {}); // Non-fatal; article creation succeeds even if this fails
     }
 
     // Return the actual stored _id ("drafts.xxx") so callers like handlePublish can

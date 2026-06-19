@@ -197,8 +197,10 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
             if (q) {url.searchParams.set('q', String(q));}
             return url.toString();
           },
-          onUpdate() {},
-          dispose() {},
+          // eslint-disable-next-line no-empty-function
+          onUpdate() {}, // Required by router interface but not needed; routing handled by read/write
+          // eslint-disable-next-line no-empty-function
+          dispose() {}, // Required by router interface but not needed
         },
         stateMapping: {
           stateToRoute(uiState) {
