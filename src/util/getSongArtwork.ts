@@ -15,7 +15,9 @@ export function getSongArtwork(song: Song): string | null {
   }
 
   // Fallback to album artwork
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Album can be a reference or populated object from Sanity GROQ query results
   if ((song.album as any)?.albumArt) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any — Runtime album structure varies by query expansion
     return urlForImage((song.album as any)?.albumArt)?.url() ?? null;
   }
 
@@ -33,7 +35,9 @@ export function getSongArtworkAlt(song: Song): string {
   }
 
   // Fallback to album art alt text
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Album structure varies: reference vs. populated object
   if ((song.album as any)?.albumArt?.alt) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any — Dynamic album nesting based on GROQ expansion
     return (song.album as any)?.albumArt?.alt ?? '';
   }
 
@@ -64,7 +68,10 @@ export function getSongArtworkInfo(song: Song): {
   let source: 'track' | 'album' | 'none' = 'none';
   if (song.trackArt) {
     source = 'track';
-  } else if ((song.album as any)?.albumArt) {
+  } else if (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any — Album reference vs. populated object based on query context
+    (song.album as any)?.albumArt
+  ) {
     source = 'album';
   }
 

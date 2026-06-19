@@ -10,6 +10,11 @@ export interface RSSArticle {
   description?: string;
   publishedAt: string;
 
+  /**
+   * Image object from Sanity CMS
+   * @typescript-eslint/no-explicit-any — RSS feed accepts any Sanity image structure; shape varies by GROQ query expansion
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mainImage?: any;
   author?: { name: string };
   category?: { title: string };
@@ -32,6 +37,11 @@ export interface RSSLiveEvent {
   eventDate: string;
   _updatedAt?: string;
 
+  /**
+   * Image object from Sanity CMS
+   * @typescript-eslint/no-explicit-any — Live event images vary in structure; shape depends on GROQ query context
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mainImage?: any;
   // Live events have no author field — coverage is by the newsroom
   eventStatus?: string;
