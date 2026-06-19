@@ -248,7 +248,8 @@ export class AdBlockerDetector {
   private detectByWindowProperties(): Promise<boolean> {
     return new Promise((resolve) => {
       // Check for common ad blocker properties
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any — google_ad_* are set dynamically by ad networks, not declared on Window interface
+      // google_ad_* are set dynamically by ad networks, not declared on Window interface
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const adBlockerIndicators = [
         'webkitRequestFileSystem' in window && !window.webkitRequestFileSystem,
         typeof (window as any).google_ad_modifications !== 'undefined',

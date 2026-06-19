@@ -25,7 +25,8 @@ export async function recordViewEvent(slug: string, ip: string): Promise<void> {
   const ipHash = hashIP(ip);
   const viewedAt = new Date().toISOString();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Supabase client type inference is incomplete for dynamic table names
+  // Supabase client type inference is incomplete for dynamic table names
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { error } = await (client.from('view_count') as any).insert({
     slug,
     ip_hash: ipHash,
@@ -56,7 +57,8 @@ export async function getViewCountsByDate(dateString: string): Promise<ViewCount
 
   // Type assertion needed for Supabase strict typing
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Supabase client type inference is incomplete for chained query methods
+  // Supabase client type inference is incomplete for chained query methods
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error } = await (client
     .from('view_count')
     .select('slug')
@@ -113,7 +115,8 @@ export async function getTrendingArticles(
   startDate.setDate(startDate.getDate() - daysBack);
   const dateStr = startDate.toISOString().split('T')[0];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Supabase client type inference is incomplete for query filters
+  // Supabase client type inference is incomplete for query filters
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error } = await (client
     .from('view_count')
     .select('slug, viewed_at')
@@ -170,7 +173,8 @@ export async function getMostReadByCategory(
   startDate.setDate(startDate.getDate() - daysBack);
   const dateStr = startDate.toISOString().split('T')[0];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Supabase client type inference is incomplete for query filters
+  // Supabase client type inference is incomplete for query filters
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error } = await (client
     .from('view_count')
     .select('slug, viewed_at')
