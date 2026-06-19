@@ -11,7 +11,7 @@ import {
 } from '@/lib/validations';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 import { TurnstileWidget } from '@/components/global/TurnstileWidget';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
 
 interface ApplicationFormProps {
   prefilledPosition?: string;

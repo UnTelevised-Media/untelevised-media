@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useCart, buildCartItem } from '@/services/bookstore/cart';
+import { useCart, buildCartItem } from '@/hooks/useCart';
 import type { SanityBook, SanityBookFormat, CheckoutPayload } from '@/models/types/bookstore';
 
 interface Props {

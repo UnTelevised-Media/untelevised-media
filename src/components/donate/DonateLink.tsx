@@ -1,6 +1,6 @@
 'use client';
 
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
 
 interface Props {
   href: string;

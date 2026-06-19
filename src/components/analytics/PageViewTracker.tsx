@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useConsentAwareTracking } from './ConsentAwareAnalytics';
+import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
 
 interface Props {
   event: string;

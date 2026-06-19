@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
 
 interface DownloadRecord {
   id: string;

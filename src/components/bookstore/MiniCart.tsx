@@ -3,7 +3,7 @@
 // Renders a shopping bag icon with the current cart item count.
 
 import Link from 'next/link';
-import { useCart } from '@/services/bookstore/cart';
+import { useCart } from '@/hooks/useCart';
 
 export default function MiniCart() {
   const count = useCart((s) => s.getItemCount());

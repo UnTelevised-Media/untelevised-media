@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { Eye, Shield, Lock, AlertTriangle, FileText } from 'lucide-react';
 import { TurnstileWidget } from '@/components/global/TurnstileWidget';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
 
 export default function WhistleblowerPage() {
   const [formData, setFormData] = useState({

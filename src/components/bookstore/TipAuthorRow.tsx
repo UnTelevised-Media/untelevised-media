@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useCart } from '@/services/bookstore/cart';
+import { useCart } from '@/hooks/useCart';
 import type { CheckoutPayload } from '@/models/types/bookstore';
 
 interface Author {

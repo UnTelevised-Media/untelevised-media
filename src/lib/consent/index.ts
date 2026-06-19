@@ -7,7 +7,12 @@ export * from '@/models/types/consent';
 export * from './storage';
 
 // Context and hooks
-export { ConsentProvider, useConsent, useConsentCheck, useConditionalScript } from './context';
+export {
+  ConsentProvider,
+  useConsent,
+  useConsentCheck,
+  useConditionalScript,
+} from '@/hooks/useConsent';
 
 // Ad blocker detection
 export {

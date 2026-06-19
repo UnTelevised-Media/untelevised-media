@@ -85,6 +85,3 @@ function ConsentAwareAnalytics({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) {
 }
 
 export default ConsentAwareAnalytics;
-
-// Re-export hook for backward compatibility
-export { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';

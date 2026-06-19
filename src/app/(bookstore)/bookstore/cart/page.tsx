@@ -6,8 +6,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import * as Sentry from '@sentry/nextjs';
 import { useUser } from '@clerk/nextjs';
-import { useCart } from '@/services/bookstore/cart';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import { useCart } from '@/hooks/useCart';
+import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
 import type { CheckoutPayload } from '@/models/types/bookstore';
 import PreCheckoutDialog from '@/components/bookstore/PreCheckoutDialog';
 

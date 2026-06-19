@@ -180,6 +180,3 @@ function AdBlockerMessage({ className = '' }: AdBlockerMessageProps) {
 }
 
 export default AdBlockerMessage;
-
-// Re-export hook for backward compatibility
-export { useAdBlockerDetection } from '@/hooks/useAdBlockerDetection';

@@ -4,7 +4,7 @@ export { default as RectangleAd } from './RectangleAd';
 export { default as InFeedAd } from './InFeedAd';
 export { default as SidebarAd } from './SidebarAd';
 export { default as ResponsiveAdWrapper } from './ResponsiveAdWrapper';
-export { default as AdManager, useAdContext } from './AdManager';
+export { default as AdManager } from './AdManager';
 
 // Re-export the existing LargeAdCard for backward compatibility
 export { default as LargeAdCard } from '../googleAds/LargeAdCard';

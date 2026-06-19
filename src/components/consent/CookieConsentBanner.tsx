@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Settings, Shield, Eye, Target, Sliders } from 'lucide-react';
-import { useConsent } from '@/lib/consent/context';
+import { useConsent } from '@/hooks/useConsent';
 import { COOKIE_CATEGORIES } from '@/models/types/consent';
 
 interface CookieConsentBannerProps {

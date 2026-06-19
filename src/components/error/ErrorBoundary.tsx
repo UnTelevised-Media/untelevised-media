@@ -92,6 +92,3 @@ export function DefaultErrorFallback({ error, retry }: { error: Error; retry: ()
     </div>
   );
 }
-
-// Re-export hook for backward compatibility
-export { useAsyncError } from '@/hooks/useAsyncError';

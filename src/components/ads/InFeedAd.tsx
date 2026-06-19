@@ -5,7 +5,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
 import { adsenseManager } from '@/lib/googleAdSense/adsenseInit';
-import { useConsentCheck } from '@/lib/consent/context';
+import { useConsentCheck } from '@/hooks/useConsent';
 
 interface InFeedAdProps {
   slot: string;

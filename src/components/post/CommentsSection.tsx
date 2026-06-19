@@ -4,7 +4,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { useTheme } from 'next-themes';
-import { useConsent } from '@/lib/consent/context';
+import { useConsent } from '@/hooks/useConsent';
 import { Lock, MessageSquare } from 'lucide-react';
 
 interface CommentsSectionProps {
