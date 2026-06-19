@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
@@ -14,7 +12,6 @@ interface InFeedAdProps {
   layoutKey?: string;
 }
 
- 
 declare global {
   interface Window {
     adsbygoogle: Record<string, unknown>[];

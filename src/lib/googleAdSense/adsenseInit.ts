@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 'use client';
 
 declare global {
@@ -12,11 +11,8 @@ declare global {
 const PREFIX = '[AdSense]';
 
 // Always-on debug: visible in Chrome DevTools Console (Verbose level) in production.
-// In development also goes to console.log for visibility.
 function dbg(msg: string, ...args: unknown[]) {
-  if (process.env.NODE_ENV === 'development') {
-    console.log(PREFIX, msg, ...args);
-  } else {
+  if (process.env.NODE_ENV !== 'development') {
     console.debug(PREFIX, msg, ...args);
   }
 }

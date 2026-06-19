@@ -1,5 +1,4 @@
-﻿/* eslint-disable import/prefer-default-export */
-'use client';
+﻿'use client';
 // src/components/global/TurnstileWidget.tsx
 // Cloudflare Turnstile CAPTCHA widget. Renders nothing when
 // NEXT_PUBLIC_TURNSTILE_SITE_KEY is not set (local dev).
@@ -12,9 +11,11 @@ interface TurnstileWidgetProps {
   onExpire?: () => void;
 }
 
-export function TurnstileWidget({ onSuccess, onError, onExpire }: TurnstileWidgetProps) {
+export default function TurnstileWidget({ onSuccess, onError, onExpire }: TurnstileWidgetProps) {
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
-  if (!siteKey) {return null;}
+  if (!siteKey) {
+    return null;
+  }
 
   return (
     <Turnstile

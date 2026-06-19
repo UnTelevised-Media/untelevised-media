@@ -1,5 +1,4 @@
-﻿/* eslint-disable import/prefer-default-export */
-// src/components/post/CorrectionNotice.tsx
+﻿// src/components/post/CorrectionNotice.tsx
 import { AlertTriangle, Info, RefreshCw, XCircle } from 'lucide-react';
 import formatDate from '@/util/formatDate';
 
@@ -57,7 +56,7 @@ const CONFIG: Record<
   },
 };
 
-export function CorrectionNotice({ correction }: { correction: CorrectionData }) {
+export default function CorrectionNotice({ correction }: { correction: CorrectionData }) {
   const config = CONFIG[correction.type] ?? CONFIG.correction;
   const { label, Icon, borderClass, bgClass, labelClass, iconClass } = config;
 

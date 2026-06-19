@@ -1,5 +1,4 @@
-﻿/* eslint-disable import/prefer-default-export */
-'use client';
+﻿'use client';
 // src/components/portal/PitchNotesEditor.tsx
 // Simple plain-text working notes editor for a claimedPitch.
 
@@ -12,7 +11,7 @@ interface Props {
   initialText?: string;
 }
 
-export function PitchNotesEditor({ pitchId, initialText = '' }: Props) {
+export default function PitchNotesEditor({ pitchId, initialText = '' }: Props) {
   const [text, setText] = useState(initialText);
   const [isPending, startTransition] = useTransition();
 

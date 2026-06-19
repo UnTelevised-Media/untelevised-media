@@ -37,7 +37,6 @@ function Comments({ article }: Props) {
       })
       .then(() => {
         // eslint-disable-next-line no-console
-        console.log('Submitted: ', data);
       })
       .catch((err: unknown) => {
         console.error('Not submitted: ', err);

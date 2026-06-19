@@ -1,5 +1,4 @@
-﻿/* eslint-disable import/prefer-default-export */
-'use client';
+﻿'use client';
 // src/components/global/BreakingNewsBannerClient.tsx
 
 import { useState, useEffect } from 'react';
@@ -12,14 +11,16 @@ interface Props {
   expiresAt?: string;
 }
 
-export function BreakingNewsBannerClient({ headline, linkUrl, linkLabel, expiresAt }: Props) {
+export default function BreakingNewsBannerClient({ headline, linkUrl, linkLabel, expiresAt }: Props) {
   // Start hidden to prevent flash before sessionStorage check
   const [dismissed, setDismissed] = useState(true);
   const sessionKey = `untele_banner_${btoa(encodeURIComponent(headline)).slice(0, 16)}`;
 
   useEffect(() => {
     // Belt-and-suspenders client-side expiry check
-    if (expiresAt && new Date(expiresAt) < new Date()) {return;}
+    if (expiresAt && new Date(expiresAt) < new Date()) {
+      return;
+    }
     if (!sessionStorage.getItem(sessionKey)) {
       setDismissed(false);
     }
@@ -30,7 +31,9 @@ export function BreakingNewsBannerClient({ headline, linkUrl, linkLabel, expires
     setDismissed(true);
   }
 
-  if (dismissed) {return null;}
+  if (dismissed) {
+    return null;
+  }
 
   const isExternal = linkUrl?.startsWith('http');
 

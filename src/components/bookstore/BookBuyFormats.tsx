@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 // src/components/bookstore/BookBuyFormats.tsx
 // Client component — owns gift toggle state and NYOP amounts, renders per-format buy actions.

@@ -10,7 +10,7 @@ import ConsentAwareGoogleAdSense from '@/components/googleAdSense/ConsentAwareGo
 import DraftModeBanner from '@/lib/sanity/components/DraftModeBanner';
 import SanityVisualEditing from '@/lib/sanity/components/VisualEditing';
 import GlobalStructuredData from '@/components/seo/GlobalStructuredData';
-import { BreakingNewsBanner } from '@/components/global/BreakingNewsBanner';
+import BreakingNewsBanner from '@/components/global/BreakingNewsBanner';
 
 export default async function UserLayout({ children }: { children: React.ReactNode }) {
   const draftModeEnabled = (await draftMode()).isEnabled;

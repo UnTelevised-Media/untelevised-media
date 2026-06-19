@@ -1,5 +1,4 @@
-﻿/* eslint-disable import/prefer-default-export */
-'use client';
+﻿'use client';
 // src/components/careers/ContributorApplicationForm.tsx
 
 import React, { useState } from 'react';
@@ -80,7 +79,7 @@ interface Props {
   prefilledPosition?: string;
 }
 
-export function ContributorApplicationForm({ prefilledPosition }: Props) {
+export default function ContributorApplicationForm({ prefilledPosition }: Props) {
   const { trackEvent } = useConsentAwareTracking();
   const matchedPosition = prefilledPosition
     ? positions.find(

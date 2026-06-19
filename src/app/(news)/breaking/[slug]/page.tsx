@@ -51,8 +51,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// eslint-disable-next-line no-redeclare
-export default async function LiveEvent({ params }: Props) {
+
+export default async function LiveEventPage({ params }: Props) {
   const { slug } = await params;
   const liveEvent: any = await getEventBySlug(slug);
   if (!liveEvent) {

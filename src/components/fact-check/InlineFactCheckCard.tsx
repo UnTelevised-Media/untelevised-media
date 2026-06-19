@@ -1,5 +1,4 @@
-﻿/* eslint-disable import/prefer-default-export */
-// src/components/fact-check/InlineFactCheckCard.tsx
+﻿// src/components/fact-check/InlineFactCheckCard.tsx
 // Rendered inside blockContent when a factCheckEmbed block is encountered.
 import Link from 'next/link';
 import { VerdictBadge } from './VerdictBadge';
@@ -19,7 +18,7 @@ interface InlineFactCheckCardProps {
   factCheck: InlineFactCheckData;
 }
 
-export function InlineFactCheckCard({ factCheck }: InlineFactCheckCardProps) {
+export default function InlineFactCheckCard({ factCheck }: InlineFactCheckCardProps) {
   const { title, slug, claim, rating, ratingExplanation, claimSource } = factCheck;
 
   return (

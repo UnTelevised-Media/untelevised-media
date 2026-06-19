@@ -1,5 +1,4 @@
-﻿/* eslint-disable import/prefer-default-export */
-// src/components/global/BreakingNewsBanner.tsx
+﻿// src/components/global/BreakingNewsBanner.tsx
 // Server component â€” fetches siteSettings and guards rendering
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
@@ -18,7 +17,7 @@ interface SiteSettings {
   breakingBanner?: BannerData;
 }
 
-export async function BreakingNewsBanner() {
+export default async function BreakingNewsBanner() {
   let settings: SiteSettings | null = null;
   try {
     const { data } = await sanityFetch({
@@ -33,7 +32,9 @@ export async function BreakingNewsBanner() {
 
   const banner: BannerData | null = settings?.breakingBanner ?? null;
 
-  if (!banner?.isActive || !banner.headline) {return null;}
+  if (!banner?.isActive || !banner.headline) {
+    return null;
+  }
 
   // Server-side expiry check â€” avoids rendering stale banner HTML
   if (banner.expiresAt && new Date(banner.expiresAt) < new Date()) {

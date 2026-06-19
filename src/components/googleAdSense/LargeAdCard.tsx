@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
@@ -7,7 +5,6 @@ import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
 import { adsenseManager } from '@/lib/googleAdSense/adsenseInit';
 import { useConsentCheck } from '@/hooks/googleAdSense/useConsent';
 
- 
 declare global {
   interface Window {
     adsbygoogle: Record<string, unknown>[];

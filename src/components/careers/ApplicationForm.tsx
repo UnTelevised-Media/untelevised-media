@@ -1,5 +1,4 @@
-﻿/* eslint-disable import/prefer-default-export */
-'use client';
+﻿'use client';
 // src/components/careers/ApplicationForm.tsx
 import React, { useState } from 'react';
 import * as Sentry from '@sentry/nextjs';
@@ -17,7 +16,7 @@ interface ApplicationFormProps {
   prefilledPosition?: string;
 }
 
-export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
+export default function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>(
     'idle'
   );

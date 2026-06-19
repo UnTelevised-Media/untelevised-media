@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 // src/lib/consent/adBlockerDetection.ts
 'use client';
 
@@ -40,18 +39,12 @@ export class AdBlockerDetector {
       return false;
     }
 
-    // In development mode, be more conservative with detection
     const isDevelopment = process.env.NODE_ENV === 'development';
-
-    if (isDevelopment) {
-      console.log('AdBlockerDetector: Running in development mode');
-    }
 
     // Quick check: if AdSense manager already detected blocking, use that
     try {
       const { adsenseManager } = await import('@/lib/googleAdSense/adsenseInit');
       if (adsenseManager.isLikelyBlocked()) {
-        console.log('AdBlockerDetector: AdSense manager already detected blocking');
         return true;
       }
     } catch {
@@ -76,7 +69,6 @@ export class AdBlockerDetector {
 
       // If we have strong evidence from quick methods, don't do network tests
       if (quickDetectedCount >= 2) {
-        console.log('AdBlockerDetector: Quick detection found ad blocker, skipping network tests');
         return true;
       }
 

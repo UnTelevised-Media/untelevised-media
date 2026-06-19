@@ -28,7 +28,7 @@ import NewsArticleStructuredData from '@/components/seo/NewsArticleStructuredDat
 import { getReadingTime } from '@/util/readingTime';
 import { CorrectionNotice } from '@/components/post/CorrectionNotice';
 import SourcesPanel from '@/components/post/SourcesPanel';
-import { BookmarkButton } from '@/components/bookmarks/BookmarkButton';
+import BookmarkButton from '@/components/bookmarks/BookmarkButton';
 import CommentsSection from '@/components/post/CommentsSection';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import ViewPing from '@/components/post/ViewPing';
@@ -70,8 +70,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildArticleMetadata(article, slug);
 }
 
-// eslint-disable-next-line no-redeclare
-export default async function Article({ params }: Props) {
+
+export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
   const article: any = (await getArticleBySlug(slug)) as any;
 

@@ -108,8 +108,8 @@ function AuthorBookCard({ book }: { book: SanityBook }) {
   );
 }
 
-// eslint-disable-next-line no-redeclare
-export default async function Author({ params }: Props) {
+
+export default async function AuthorPage({ params }: Props) {
   const { slug } = await params;
   const author: any = await getAuthorBySlug(slug);
 

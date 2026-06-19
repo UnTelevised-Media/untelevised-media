@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -129,25 +128,20 @@ function TimelineJSVisualization({
   useEffect(() => {
     const loadTimelineJS = async () => {
       try {
-        console.log('🔄 Starting TimelineJS loading process...');
 
         // Check if TimelineJS is already loaded
         if (window.TL) {
-          console.log('✅ TimelineJS already loaded');
           setIsScriptLoaded(true);
           return;
         }
 
-        console.log('📦 Loading TimelineJS CSS...');
         // Load CSS
         const cssLink = document.createElement('link');
         cssLink.rel = 'stylesheet';
         cssLink.href = 'https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css';
-        cssLink.onload = () => console.log('✅ TimelineJS CSS loaded');
         cssLink.onerror = () => console.error('❌ Failed to load TimelineJS CSS');
         document.head.appendChild(cssLink);
 
-        console.log('📦 Loading TimelineJS JavaScript...');
         // Load JavaScript
         const script = document.createElement('script');
         script.src = 'https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js';
@@ -162,13 +156,10 @@ function TimelineJSVisualization({
 
         script.onload = () => {
           clearTimeout(loadTimeout);
-          console.log('✅ TimelineJS script loaded successfully');
-          console.log('🔍 Checking window.TL:', !!window.TL);
 
           // Give a small delay for the library to initialize
           setTimeout(() => {
             if (window.TL) {
-              console.log('✅ window.TL is available');
               setIsScriptLoaded(true);
             } else {
               console.error('❌ window.TL not available after script load');
@@ -181,7 +172,6 @@ function TimelineJSVisualization({
         script.onerror = (error) => {
           clearTimeout(loadTimeout);
           console.error('❌ Failed to load TimelineJS script from latest:', error);
-          console.log('🔄 Trying fallback version...');
 
           // Try fallback version
           const fallbackScript = document.createElement('script');
@@ -196,10 +186,8 @@ function TimelineJSVisualization({
 
           fallbackScript.onload = () => {
             clearTimeout(fallbackTimeout);
-            console.log('✅ Fallback TimelineJS script loaded successfully');
             setTimeout(() => {
               if (window.TL) {
-                console.log('✅ window.TL is available from fallback');
                 setIsScriptLoaded(true);
               } else {
                 console.error('❌ window.TL not available after fallback script load');
@@ -232,22 +220,11 @@ function TimelineJSVisualization({
 
   // Initialize timeline when script is loaded
   useEffect(() => {
-    console.log('🔄 Timeline initialization effect triggered');
-    console.log('📊 State check:', {
-      isScriptLoaded,
-      hasTimelineRef: !!timelineRef.current,
-      hasWindowTL: !!window.TL,
-      timelineId: timeline?._id,
-      eventsCount: events?.length,
-    });
-
     if (!isScriptLoaded) {
-      console.log('⏳ Script not loaded yet, waiting...');
       return;
     }
 
     if (!window.TL) {
-      console.log('❌ window.TL not available even though script is loaded');
       setError('TimelineJS library not properly loaded');
       setIsLoading(false);
       return;
@@ -266,36 +243,27 @@ function TimelineJSVisualization({
           setIsLoading(false);
           return;
         }
-        console.log(
-          `⏳ Timeline ref not ready yet, retrying in 100ms... (${retryCount}/${maxRetries})`
-        );
         setTimeout(initializeTimeline, 100);
         return;
       }
 
-      console.log('✅ Timeline ref is ready, proceeding with initialization');
       createTimelineInstance();
     };
 
     const createTimelineInstance = () => {
       try {
-        console.log('🔄 Converting timeline data...');
-        console.log('📊 Input data:', { timeline: !!timeline, events: events?.length });
 
         // Create timeline ID
         const timelineId = `timeline-${timeline?._id || Date.now()}`;
         if (timelineRef.current) {
           timelineRef.current.id = timelineId;
         }
-        console.log('🏗️ Creating timeline with ID:', timelineId);
 
         // Get responsive options
         const timelineOptions = getResponsiveOptions();
-        console.log('⚙️ Timeline options:', timelineOptions);
 
         // Convert Sanity data to TimelineJS format
         const timelineData = convertTimelineToTimelineJS(timeline as any, events as any);
-        console.log('✅ Timeline data converted:', timelineData);
 
         // Test with minimal data if conversion fails
         if (!timelineData?.events || timelineData.events.length === 0) {
@@ -311,7 +279,6 @@ function TimelineJSVisualization({
               },
             ],
           };
-          console.log('🧪 Using test data:', testData);
 
           if (window.TL) {
             timelineInstanceRef.current = new window.TL.Timeline(
@@ -320,25 +287,21 @@ function TimelineJSVisualization({
               timelineOptions
             );
           }
-          console.log('✅ Test timeline instance created successfully');
           setIsLoading(false);
           setError(null);
           return;
         }
 
         // Validate the data
-        console.log('🔍 Validating timeline data...');
         if (!validateTimelineJSData(timelineData)) {
           console.error('❌ Timeline data validation failed');
           setError('Invalid timeline data format');
           setIsLoading(false);
           return;
         }
-        console.log('✅ Timeline data validation passed');
 
         // Clear any existing timeline
         if (timelineInstanceRef.current && timelineRef.current) {
-          console.log('🧹 Clearing existing timeline');
           timelineRef.current.innerHTML = '';
         }
 
@@ -351,7 +314,6 @@ function TimelineJSVisualization({
           );
         }
 
-        console.log('✅ Timeline instance created successfully');
         setIsLoading(false);
         setError(null);
       } catch (err) {

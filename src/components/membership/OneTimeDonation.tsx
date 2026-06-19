@@ -1,11 +1,10 @@
-﻿/* eslint-disable import/prefer-default-export */
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 
 const PRESETS = [5, 10, 25, 50, 100];
 
-export function OneTimeDonation() {
+export default function OneTimeDonation() {
   const [selected, setSelected] = useState<number | null>(25);
   const [custom, setCustom] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,7 +27,9 @@ export function OneTimeDonation() {
         body: JSON.stringify({ amountCents }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
-      if (!res.ok || data.error) {throw new Error(data.error ?? 'Checkout failed');}
+      if (!res.ok || data.error) {
+        throw new Error(data.error ?? 'Checkout failed');
+      }
       window.location.href = data.url!;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');

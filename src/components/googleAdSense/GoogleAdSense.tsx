@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 'use client';
 
 import Script from 'next/script';
@@ -6,7 +5,7 @@ import Script from 'next/script';
 interface GoogleAdSenseProps {
   publisherId: string;
   onLoad?: () => void;
-   
+
   onError?: (error: Error) => void;
 }
 

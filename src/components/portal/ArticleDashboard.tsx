@@ -810,7 +810,7 @@ function ArticleCard({
       {/* Thumbnail */}
       {imageUrl ? (
         <div className='relative h-32 w-full overflow-hidden bg-slate-100 dark:bg-slate-800'>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+
           <img
             src={`${imageUrl}?w=480&h=128&fit=crop&auto=format`}
             alt={article.mainImage?.alt ?? ''}

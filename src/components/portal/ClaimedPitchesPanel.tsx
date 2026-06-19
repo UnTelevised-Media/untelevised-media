@@ -1,5 +1,4 @@
-﻿/* eslint-disable import/prefer-default-export */
-'use client';
+﻿'use client';
 // src/components/portal/ClaimedPitchesPanel.tsx
 // Client component â€” claimed pitches grid with Mine / All / Others filter pills.
 // Editors see all pitches + the filter toggle. Authors see only their own (no toggle).
@@ -15,7 +14,7 @@ interface Props {
   isEditorPlus: boolean;
 }
 
-export function ClaimedPitchesPanel({ pitches, currentSanityAuthorId, isEditorPlus }: Props) {
+export default function ClaimedPitchesPanel({ pitches, currentSanityAuthorId, isEditorPlus }: Props) {
   const [authorFilter, setAuthorFilter] = useState<AuthorFilter>('all');
 
   const URGENCY_ORDER: Record<string, number> = { breaking: 0, high: 1, medium: 2, low: 3 };
@@ -32,14 +31,18 @@ export function ClaimedPitchesPanel({ pitches, currentSanityAuthorId, isEditorPl
     return [...base].sort((a, b) => {
       const statusDiff =
         (STATUS_ORDER[a.status ?? 'claimed'] ?? 1) - (STATUS_ORDER[b.status ?? 'claimed'] ?? 1);
-      if (statusDiff !== 0) {return statusDiff;}
+      if (statusDiff !== 0) {
+        return statusDiff;
+      }
       return (
         (URGENCY_ORDER[a.urgency ?? 'medium'] ?? 2) - (URGENCY_ORDER[b.urgency ?? 'medium'] ?? 2)
       );
     });
   }, [pitches, isEditorPlus, authorFilter, currentSanityAuthorId]);
 
-  if (pitches.length === 0) {return null;}
+  if (pitches.length === 0) {
+    return null;
+  }
 
   return (
     <div>

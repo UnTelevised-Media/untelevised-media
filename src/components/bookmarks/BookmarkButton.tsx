@@ -1,5 +1,4 @@
-﻿/* eslint-disable import/prefer-default-export */
-'use client';
+﻿'use client';
 // src/components/bookmarks/BookmarkButton.tsx
 import React from 'react';
 import { Bookmark, BookmarkCheck } from 'lucide-react';
@@ -13,7 +12,7 @@ type BookmarkButtonProps = Omit<BookmarkEntry, 'bookmarkedAt'> & {
   variant?: 'icon' | 'full';
 };
 
-export function BookmarkButton({
+export default function BookmarkButton({
   slug,
   title,
   description,

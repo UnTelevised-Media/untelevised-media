@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // src/components/portal/ArticleEditorForm.tsx
 // Full article editor form — Tiptap WYSIWYG + all metadata fields.
 // Handles create, update, save-draft, submit-for-review, publish.
@@ -34,10 +33,7 @@ import {
   type ArticleWriteInput,
 } from '@/server/actions/portal/article';
 import { PitchQuickViewModal, type PitchForModal } from './PitchQuickViewModal';
-import {
-  blockNoteToPortableText,
-  portableTextToBlockNote,
-} from '@/util/blocknote-serializer';
+import { blockNoteToPortableText, portableTextToBlockNote } from '@/util/blocknote-serializer';
 import urlFor from '@/lib/sanity/utils/image';
 import SourceSelectorModal from './SourceSelectorModal';
 
@@ -271,7 +267,6 @@ export default function ArticleEditorForm({
     getValues,
     formState: { errors, isDirty },
   } = useForm<FormValues>({
-     
     resolver: zodResolver(formSchema) as any,
     defaultValues: {
       title: (initialData?.title as string) ?? '',
@@ -496,7 +491,9 @@ export default function ArticleEditorForm({
   // Autosave every 60 seconds when there are unsaved changes (no redirect on success)
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!isDirtyRef.current) {return;}
+      if (!isDirtyRef.current) {
+        return;
+      }
       const values = getValues();
       setSaveStatus('saving');
       const input = buildInput(values as FormValues);
@@ -518,7 +515,6 @@ export default function ArticleEditorForm({
       });
     }, 60_000);
     return () => clearInterval(interval);
-     
   }, [articleId, buildInput, getValues]);
 
   // ---------------------------------------------------------------------------
@@ -544,18 +540,19 @@ export default function ArticleEditorForm({
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key === 's') {
         e.preventDefault();
-         
+
         handleSubmit(handleSaveDraft as any)();
       }
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'P') {
         e.preventDefault();
         const slug = getValues('slug');
-        if (slug) {window.open(`/articles/${slug}`, '_blank');}
+        if (slug) {
+          window.open(`/articles/${slug}`, '_blank');
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-     
   }, [handleSubmit, getValues]);
 
   // ---------------------------------------------------------------------------
@@ -580,7 +577,6 @@ export default function ArticleEditorForm({
               variant='outline'
               size='sm'
               disabled={isPending}
-               
               onClick={handleSubmit(handleSaveDraft as any)}
               title='Save Draft (Ctrl+S)'
             >
@@ -619,7 +615,9 @@ export default function ArticleEditorForm({
               size='sm'
               onClick={() => {
                 const slug = watch('slug');
-                if (slug) {window.open(`/articles/${slug}`, '_blank');}
+                if (slug) {
+                  window.open(`/articles/${slug}`, '_blank');
+                }
               }}
               title='Preview (Ctrl+Shift+P)'
             >
@@ -670,7 +668,9 @@ export default function ArticleEditorForm({
               className='shrink-0'
               onClick={() => {
                 const t = watch('title');
-                if (t) {setValue('slug', titleToSlug(t), { shouldValidate: true });}
+                if (t) {
+                  setValue('slug', titleToSlug(t), { shouldValidate: true });
+                }
               }}
             >
               Generate
@@ -726,7 +726,6 @@ export default function ArticleEditorForm({
           <div className='space-y-3'>
             {mainImage?.url && (
               <div className='relative'>
-
                 <img
                   src={mainImage.url}
                   alt={mainImage.alt || 'Article main image'}
@@ -750,7 +749,9 @@ export default function ArticleEditorForm({
                 disabled={imageUploading}
                 onChange={async (e) => {
                   const file = e.target.files?.[0];
-                  if (!file) {return;}
+                  if (!file) {
+                    return;
+                  }
                   setImageUploading(true);
                   try {
                     const fd = new FormData();
@@ -1066,7 +1067,9 @@ export default function ArticleEditorForm({
                     if (q.trim().length > 1) {
                       startArticleSearch(async () => {
                         const res = await searchArticles(q);
-                        if (res.success) {setArticleResults(res.data);}
+                        if (res.success) {
+                          setArticleResults(res.data);
+                        }
                       });
                     } else {
                       setArticleResults([]);
@@ -1172,7 +1175,9 @@ export default function ArticleEditorForm({
               control={control}
               render={({ field }) => {
                 const hasVideo = !!watch('videoLink');
-                if (field.value !== hasVideo) {field.onChange(hasVideo);}
+                if (field.value !== hasVideo) {
+                  field.onChange(hasVideo);
+                }
                 return <input type='hidden' value={String(hasVideo)} />;
               }}
             />
