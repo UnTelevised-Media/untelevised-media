@@ -55,7 +55,7 @@ export interface PortableImageBlock {
 export interface PortableCodeBlock {
   _type: 'code';
   _key: string;
-  code: string;
+  code?: string;
   language?: string;
 }
 

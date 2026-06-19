@@ -81,6 +81,7 @@ export default {
     // â”€â”€ Code Blocks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     code: ({ value }: { value: PortableCodeBlock }) => {
       const { code, language } = value;
+      if (!code) return null;
       return (
         <div className='my-6'>
           {language && (
@@ -253,7 +254,8 @@ export default {
       if (!fc) {
         return null;
       }
-      return <InlineFactCheckCard factCheck={fc} />;
+      // fc is a populated FactCheck object from GROQ query
+      return <InlineFactCheckCard factCheck={fc as any} />;
     },
 
     // â”€â”€ Instagram Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
