@@ -4,6 +4,7 @@
 
 import { useState, useMemo, useTransition } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -810,11 +811,11 @@ function ArticleCard({
       {/* Thumbnail */}
       {imageUrl ? (
         <div className='relative h-32 w-full overflow-hidden bg-slate-100 dark:bg-slate-800'>
-
-          <img
+          <Image
             src={`${imageUrl}?w=480&h=128&fit=crop&auto=format`}
             alt={article.mainImage?.alt ?? ''}
-            className='h-full w-full object-cover'
+            fill
+            className='object-cover'
           />
         </div>
       ) : (

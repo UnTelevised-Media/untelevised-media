@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import type { Hit } from 'instantsearch.js';
 import {
@@ -82,11 +83,12 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
           aria-hidden='true'
           tabIndex={-1}
         >
-          <img
+          <Image
             src={hit.imageUrl}
             alt={hit.title}
-            className='h-20 w-28 object-cover'
-            loading='lazy'
+            width={112}
+            height={80}
+            className='object-cover'
           />
         </Link>
       )}

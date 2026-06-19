@@ -5,6 +5,7 @@
 
 import { useState, useCallback, useTransition, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -728,11 +729,12 @@ export default function ArticleEditorForm({
           </Label>
           <div className='space-y-3'>
             {mainImage?.url && (
-              <div className='relative'>
-                <img
+              <div className='relative max-h-48 w-full'>
+                <Image
                   src={mainImage.url}
                   alt={mainImage.alt || 'Article main image'}
-                  className='max-h-48 w-full object-cover'
+                  fill
+                  className='object-cover'
                 />
                 <button
                   type='button'

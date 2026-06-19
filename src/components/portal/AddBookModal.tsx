@@ -4,6 +4,7 @@
 // Submits via server action → creates Sanity book document.
 
 import { useState, useEffect, useRef, useTransition } from 'react';
+import Image from 'next/image';
 import { X, Plus, Trash2, ChevronDown } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import {
@@ -350,10 +351,11 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                       {/* Preview */}
                       <div className='relative h-32 w-24 shrink-0 overflow-hidden border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800'>
                         {coverPreview ? (
-                          <img
+                          <Image
                             src={coverPreview}
                             alt='Cover preview'
-                            className='h-full w-full object-cover'
+                            fill
+                            className='object-cover'
                           />
                         ) : (
                           <div className='flex h-full items-center justify-center'>

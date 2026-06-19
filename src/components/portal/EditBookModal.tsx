@@ -4,6 +4,7 @@
 // In-portal book editor. Slide-over form pre-populated from existing book data.
 
 import { useState, useEffect, useRef, useTransition } from 'react';
+import Image from 'next/image';
 import { X, Pencil, Plus, ChevronDown, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import {
@@ -413,10 +414,11 @@ export default function EditBookModal({ book }: Props) {
                     <div className='flex gap-4'>
                       <div className='relative h-32 w-24 shrink-0 overflow-hidden border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800'>
                         {currentCover ? (
-                          <img
+                          <Image
                             src={currentCover}
                             alt='Cover'
-                            className='h-full w-full object-cover'
+                            fill
+                            className='object-cover'
                           />
                         ) : (
                           <div className='flex h-full items-center justify-center'>

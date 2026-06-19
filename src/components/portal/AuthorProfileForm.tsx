@@ -3,6 +3,7 @@
 'use client';
 
 import { useState, useRef, useTransition } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -290,7 +291,7 @@ export default function AuthorProfileForm({ profile }: Props) {
         <div className='flex items-center gap-6'>
           <div className='relative h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800'>
             {avatarUrl ? (
-              <img src={avatarUrl} alt={name} className='h-full w-full object-cover' />
+              <Image src={avatarUrl} alt={name} fill className='object-cover' />
             ) : (
               <span className='flex h-full w-full items-center justify-center text-3xl font-black text-slate-400'>
                 {name.charAt(0).toUpperCase()}
