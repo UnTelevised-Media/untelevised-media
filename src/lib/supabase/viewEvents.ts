@@ -25,6 +25,7 @@ export async function recordViewEvent(slug: string, ip: string): Promise<void> {
   const ipHash = hashIP(ip);
   const viewedAt = new Date().toISOString();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Supabase client type inference is incomplete for dynamic table names
   const { error } = await (client.from('view_count') as any).insert({
     slug,
     ip_hash: ipHash,
@@ -55,6 +56,7 @@ export async function getViewCountsByDate(dateString: string): Promise<ViewCount
 
   // Type assertion needed for Supabase strict typing
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Supabase client type inference is incomplete for chained query methods
   const { data, error } = await (client
     .from('view_count')
     .select('slug')
@@ -111,6 +113,7 @@ export async function getTrendingArticles(
   startDate.setDate(startDate.getDate() - daysBack);
   const dateStr = startDate.toISOString().split('T')[0];
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Supabase client type inference is incomplete for query filters
   const { data, error } = await (client
     .from('view_count')
     .select('slug, viewed_at')
@@ -167,6 +170,7 @@ export async function getMostReadByCategory(
   startDate.setDate(startDate.getDate() - daysBack);
   const dateStr = startDate.toISOString().split('T')[0];
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Supabase client type inference is incomplete for query filters
   const { data, error } = await (client
     .from('view_count')
     .select('slug, viewed_at')

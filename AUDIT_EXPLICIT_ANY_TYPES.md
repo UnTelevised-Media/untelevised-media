@@ -206,7 +206,7 @@ preview: {
 
 **Problem:** External APIs don't provide full TypeScript types.
 
-**Recommendation:** ✅ **DOCUMENT** — Add comments explaining why `any` is necessary and link to upstream issue if applicable.
+**Recommendation:** ✅ **DOCUMENT** — Add comments explaining why `any` is necessary and link to upstream issue if applicable. Use eslint disable comment prefer line over file
 
 #### Subtype 2a: Sanity CMS Client (4 warnings)
 

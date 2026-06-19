@@ -258,8 +258,14 @@ export const privacyStorage = {
 };
 
 // Global gtag type declaration
+/**
+ * Google Analytics gtag function augmentation
+ * @typescript-eslint/no-explicit-any — gtag accepts variable arguments based on command type
+ * External library without comprehensive TypeScript definitions
+ */
 declare global {
   interface _Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     gtag?: (..._args: any[]) => void;
   }
 }

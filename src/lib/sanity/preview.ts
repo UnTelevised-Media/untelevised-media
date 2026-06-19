@@ -1,5 +1,12 @@
 // Pure preview URL generation logic - no React dependencies
 
+/**
+ * Generate preview URL for Sanity document
+ * @param context — Sanity preview context (either document or context wrapper)
+ * @remarks Context shape varies between Sanity versions and preview modes.
+ * @typescript-eslint/no-explicit-any — Unavoidable: Sanity preview API lacks strict type exports
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function generatePreviewUrl(context: any): Promise<string> {
   const doc = context.document ?? context;
   const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL

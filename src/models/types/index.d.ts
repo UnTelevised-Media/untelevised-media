@@ -8,11 +8,25 @@
 
 declare global {
   interface Window {
-    // Google Analytics
+    /**
+     * Google Analytics gtag function
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs
+     * External library (loaded via script tag) without TypeScript definitions.
+     * Variable args depend on the gtag command being invoked.
+     * @typescript-eslint/no-explicit-any — Unavoidable: external API constraint
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     gtag?: (_command: string, ..._args: any[]) => void;
 
-    // TimelineJS
+    /**
+     * TimelineJS library instance
+     * @see https://timeline.knightlab.com/
+     * External library (loaded via script tag) without TypeScript definitions.
+     * Timeline constructor accepts flexible data structures for various timeline formats.
+     * @typescript-eslint/no-explicit-any — Unavoidable: upstream library lacks types
+     */
     TL?: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Timeline: new (_id: string, _data: any, _options?: any) => any;
     };
 
