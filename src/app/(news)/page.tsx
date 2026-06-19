@@ -280,7 +280,7 @@ export default async function HomePage() {
                         </span>
                         <div className='flex items-center gap-1'>
                           <span>{formatDate(getArticleDate(article))}</span>
-                          <span>· {article.readingTimeMinutes ?? 1} min read</span>
+                          <span>· {(article as any)?.readingTimeMinutes ?? 1} min read</span>
                         </div>
                       </div>
                     </div>

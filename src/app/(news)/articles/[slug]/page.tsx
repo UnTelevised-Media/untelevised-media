@@ -222,9 +222,9 @@ export default async function ArticlePage({ params }: Props) {
                             </Link>
                           )
                       )}
-                    {(article?.tags as any) &&
-                      (article?.tags as any)?.length > 0 &&
-                      (article?.tags as any)?.map((tag: string) => (
+                    {((article as any)?.tags) &&
+                      ((article as any)?.tags)?.length > 0 &&
+                      ((article as any)?.tags)?.map((tag: string) => (
                         <Link
                           key={tag}
                           href={`/tag/${tagToSlug(tag)}`}
@@ -382,7 +382,7 @@ export default async function ArticlePage({ params }: Props) {
 
               {/* Sources & Methodology */}
               <div className='not-prose'>
-                <SourcesPanel sources={article.sources} methodology={article.methodology} />
+                <SourcesPanel sources={article.sources} methodology={(article as any)?.methodology} />
               </div>
 
               {/* Tags */}
@@ -494,7 +494,7 @@ export default async function ArticlePage({ params }: Props) {
               <CommentsSection
                 articleId={article._id}
                 articleUrl={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/articles/${article.slug?.current ?? slug}`}
-                allowComments={article.allowComments ?? true}
+                allowComments={(article as any)?.allowComments ?? true}
               />
             </div>
           </main>

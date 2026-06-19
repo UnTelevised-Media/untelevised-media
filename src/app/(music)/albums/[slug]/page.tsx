@@ -412,7 +412,7 @@ export default async function AlbumPage({ params }: Props) {
                   )}
 
                   {(album.featuredArtists as any)?.map(
-                    (artist) =>
+                    (artist: any) =>
                       (artist as any)?.slug?.current && (
                         <ClientSideRoute
                           key={(artist as any)._id}
