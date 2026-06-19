@@ -1,5 +1,23 @@
 import type { Album, Song } from '@/models/types/sanity';
 // src/app/(user)/albums/[slug]/page.tsx
+
+/**
+ * Album page with artist and related songs.
+ *
+ * NOTE: This file contains multiple `as any` casts for Sanity reference properties.
+ * These are NECESSARY due to a fundamental limitation in Sanity's TypeGen:
+ * - GROQ queries with `->` dereference relationships and return fully populated objects at runtime
+ * - TypeScript types generated from the schema only know the reference signature { _ref, _type }
+ * - TypeGen cannot track GROQ query transformations, so it sees references, not populated objects
+ *
+ * Examples:
+ * - GROQ returns: { artist: { _id, name, stageName, slug, image, ... } }
+ * - TypeScript sees: { artist: { _ref, _type } }
+ *
+ * The `as any` casts allow accessing dereferenced properties that definitely exist at runtime.
+ * See: src/models/types/sanityReferenceNote.ts for detailed explanation.
+ */
+
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -39,8 +57,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const artistNames = [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...((album.featuredArtists as any)?.map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (artist: any) => (artist as any)?.stageName ?? (artist as any)?.name
     ) ?? []),
   ].join(', ');

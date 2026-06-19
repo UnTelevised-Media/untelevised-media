@@ -193,4 +193,30 @@ export default [
       '@typescript-eslint/no-explicit-any': 'off',
     },
   },
+  // Sanity reference files - suppress no-explicit-any for GROQ dereferencing casts
+  // These files have many `as any` casts because Sanity TypeGen generates types from
+  // the schema (references only), but GROQ queries with `->` return fully populated objects.
+  // See: src/models/types/sanityReferenceNote.ts
+  {
+    files: [
+      // Page files with Sanity references
+      'src/app/*/[slug]/page.tsx',
+      'src/app/*/*/[slug]/page.tsx',
+      'src/app/*/*/*/[slug]/page.tsx',
+      'src/app/*page.tsx',
+      // Component files that display Sanity content
+      'src/components/cards/ArticleCard*.tsx',
+      'src/components/cards/LiveWidget.tsx',
+      'src/components/homepage/ArticleGrid.tsx',
+      'src/components/homepage/RawFeed.tsx',
+      'src/components/homepage/TrendingSection.tsx',
+      'src/components/pages/PastEventsPage.tsx',
+      'src/components/seo/NewsArticleStructuredData.tsx',
+      'src/components/showcase/ArticleShowcase.tsx',
+      'src/components/timeline/Timeline*.tsx',
+    ],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
 ];
