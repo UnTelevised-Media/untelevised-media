@@ -5,7 +5,7 @@
 
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import type { CartItem, FormatType } from './types';
+import type { CartItem, FormatType } from '@/models/types/bookstore';
 
 const MAX_CART_SIZE = 50;
 

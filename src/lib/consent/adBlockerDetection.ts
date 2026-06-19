@@ -3,7 +3,7 @@
 // src/lib/consent/adBlockerDetection.ts
 'use client';
 
-import { AdBlockerStatus } from './types';
+import { AdBlockerStatus } from '@/models/types/consent';
 import { adBlockerStorage } from './storage';
 
 export class AdBlockerDetector {

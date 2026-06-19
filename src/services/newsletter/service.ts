@@ -6,7 +6,7 @@ import 'server-only';
 import writeClient from '@/lib/sanity/lib/write-client';
 import { client } from '@/lib/sanity/lib/client';
 import { sendConfirmEmail, sendWelcomeEmail, isConfigured } from './email';
-import type { NewsletterConfig } from './types';
+import type { NewsletterConfig } from '@/models/types/newsletter';
 
 function siteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://untelevised.media').replace(/\/$/, '');

@@ -9,7 +9,7 @@ import {
   CONSENT_STORAGE_KEY,
   ADBLOCKER_STORAGE_KEY,
   CONSENT_VERSION,
-} from './types';
+} from '@/models/types/consent';
 
 // Utility to safely access localStorage
 const getStorage = () => {

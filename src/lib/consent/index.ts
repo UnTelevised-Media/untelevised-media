@@ -1,7 +1,7 @@
 // src/lib/consent/index.ts
 
 // Types
-export * from './types';
+export * from '@/models/types/consent';
 
 // Storage utilities
 export * from './storage';

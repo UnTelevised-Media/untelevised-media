@@ -2,7 +2,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import { ConsentContextType, ConsentPreferences, ConsentStatus } from './types';
+import { ConsentContextType, ConsentPreferences, ConsentStatus } from '@/models/types/consent';
 import { consentStorage } from './storage';
 
 const defaultPreferences: ConsentPreferences = {

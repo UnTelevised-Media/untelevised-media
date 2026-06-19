@@ -5,7 +5,7 @@
 // TODO: fill SUPABASE_SHOP_URL, SUPABASE_SHOP_ANON_KEY, SUPABASE_SHOP_SERVICE_ROLE_KEY in .env.local
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from './database.types';
+import type { Database } from '@/models/types/bookstore/database';
 
 function getShopUrl() {
   return process.env.SUPABASE_SHOP_URL ?? '';

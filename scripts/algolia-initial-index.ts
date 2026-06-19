@@ -23,7 +23,7 @@ import { createClient } from '@sanity/client';
 import { algoliasearch } from 'algoliasearch';
 import { toPlainText } from '@portabletext/toolkit';
 
-import type { AlgoliaArticleRecord } from '../src/lib/algolia/types';
+import type { AlgoliaArticleRecord } from '../src/models/types/algolia';
 
 // ── Sanity client ────────────────────────────────────────────────────────────
 const sanityClient = createClient({

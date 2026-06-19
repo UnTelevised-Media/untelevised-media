@@ -10,7 +10,7 @@
 //   ORDERS_SMTP_FROM   Display from address
 
 import nodemailer from 'nodemailer';
-import type { FormatType } from './types';
+import type { FormatType } from '@/models/types/bookstore';
 
 // ---------------------------------------------------------------------------
 // Transport

@@ -4,7 +4,7 @@
 
 import { auth } from '@clerk/nextjs/server';
 import { getMembershipAnonClient } from './supabase';
-import type { MembershipTier } from './database.types';
+import type { MembershipTier } from '@/models/types/membership/database';
 
 /**
  * Returns the membership tier for the currently authenticated Clerk user,

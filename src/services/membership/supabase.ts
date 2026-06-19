@@ -9,7 +9,7 @@
 //   SUPABASE_MEMBERSHIP_SERVICE_ROLE_KEY  — service role (server-only, bypasses RLS)
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import type { MembershipDatabase } from './database.types';
+import type { MembershipDatabase } from '@/models/types/membership/database';
 
 function getMembershipUrl(): string {
   return process.env.SUPABASE_MEMBERSHIP_URL ?? '';
