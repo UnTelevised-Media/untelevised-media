@@ -25,7 +25,7 @@ export default function useAdBlockerDetection() {
       }
     };
 
-    detect();
+    void detect();
 
     return () => {
       mounted = false;

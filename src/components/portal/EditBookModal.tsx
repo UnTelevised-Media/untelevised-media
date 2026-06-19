@@ -169,7 +169,7 @@ export default function EditBookModal({ book }: Props) {
     setGenreError('');
 
     setGenresLoading(true);
-    fetchBookGenres()
+    void fetchBookGenres()
       .then(setLocalGenres)
       .finally(() => setGenresLoading(false));
   }, [open]);  

@@ -545,7 +545,7 @@ export default function ArticleEditorForm({
       if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key === 's') {
         e.preventDefault();
 
-        handleSubmit(handleSaveDraft as any)();
+        void handleSubmit(handleSaveDraft as any)();
       }
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'P') {
         e.preventDefault();

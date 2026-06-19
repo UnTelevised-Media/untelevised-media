@@ -27,7 +27,7 @@ export default function WishlistButton({
   const saved = isWishlisted(slug);
 
   const handleToggle = () => {
-    toggle({ slug, title, coverImageUrl, authorName, price });
+    void toggle({ slug, title, coverImageUrl, authorName, price });
     trackEvent(saved ? 'remove_from_wishlist' : 'add_to_wishlist', {
       item_id: slug,
       item_name: title,

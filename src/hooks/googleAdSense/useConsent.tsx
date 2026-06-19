@@ -47,7 +47,7 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
       }
     };
 
-    initializeConsent();
+    void initializeConsent();
   }, []);
 
   // Determine consent status based on preferences

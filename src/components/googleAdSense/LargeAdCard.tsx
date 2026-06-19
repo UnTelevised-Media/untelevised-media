@@ -44,7 +44,7 @@ export default function LargeAdCard({
     pushed.current = true;
 
     const ins = adRef.current;
-    adsenseManager.pushAd(ins).then((success) => {
+    void adsenseManager.pushAd(ins).then((success) => {
       if (!success) {
         setAdStatus('error');
         return;

@@ -66,7 +66,7 @@ export function useWishlist(): UseWishlistReturn {
       setReady(true);
     }
 
-    load();
+    void load();
   }, [isSignedIn, clerkLoaded]);
 
   const isWishlisted = useCallback(

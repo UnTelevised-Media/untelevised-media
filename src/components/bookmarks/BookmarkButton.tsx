@@ -27,7 +27,7 @@ export default function BookmarkButton({
   const saved = isBookmarked(slug);
 
   const handleToggle = () => {
-    toggle({ slug, title, description, imageUrl, authorName, publishedAt, readingTime });
+    void toggle({ slug, title, description, imageUrl, authorName, publishedAt, readingTime });
   };
 
   // Render stable placeholder before hook is ready (prevents hydration mismatch / layout shift)

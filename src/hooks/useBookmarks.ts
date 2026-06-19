@@ -76,7 +76,7 @@ export function useBookmarks(): UseBookmarksReturn {
       setReady(true);
     }
 
-    load();
+    void load();
   }, [isSignedIn, clerkLoaded]);
 
   const isBookmarked = useCallback(

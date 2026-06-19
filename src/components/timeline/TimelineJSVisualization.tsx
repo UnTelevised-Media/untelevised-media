@@ -215,7 +215,7 @@ function TimelineJSVisualization({
       }
     };
 
-    loadTimelineJS();
+    void loadTimelineJS();
   }, []);
 
   // Initialize timeline when script is loaded

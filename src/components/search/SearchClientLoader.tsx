@@ -36,7 +36,7 @@ export default function SearchClientLoader({ initialQuery }: { initialQuery: str
   const [SearchClient, setSearchClient] = useState<typeof SearchClientType | null>(null);
 
   useEffect(() => {
-    import('./SearchClient').then((mod) => {
+    void import('./SearchClient').then((mod) => {
       setSearchClient(() => mod.default);
     });
   }, []);

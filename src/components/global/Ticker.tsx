@@ -144,7 +144,7 @@ function Ticker() {
       }
     };
 
-    fetchTickerData();
+    void fetchTickerData();
 
     // Refresh data every 5 minutes to get new content
     const interval = setInterval(fetchTickerData, 5 * 60 * 1000);

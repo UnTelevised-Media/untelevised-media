@@ -513,7 +513,7 @@ export function BriefPanel({
     if (!hasNullKeys) {
       return;
     }
-    autoRepairBrief(loadedBrief._id).then((result) => {
+    void autoRepairBrief(loadedBrief._id).then((result) => {
       if (result.success) {
         router.refresh();
       }
