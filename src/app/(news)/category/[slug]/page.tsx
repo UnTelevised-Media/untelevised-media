@@ -85,9 +85,9 @@ export default async function CategoryPage({ params }: Props) {
     .sort((a, b) => b.viewCount - a.viewCount) // Sort by view count
     .slice(0, 5); // Top 5
 
-  const accentColor = category?.color?.hex ?? '#D70606';
-  const heroImageUrl = category?.image
-    ? urlForImage(category?.image)
+  const accentColor = (category as any)?.color?.hex ?? '#D70606';
+  const heroImageUrl = (category as any)?.image
+    ? urlForImage((category as any)?.image)
         ?.width(1400)
         .height(500)
         .url()

@@ -175,7 +175,7 @@ export default async function TimelinePage({ params }: Props) {
               {/* Description */}
               {timeline.description && (
                 <div className='prose prose-slate dark:prose-invert max-w-none'>
-                  <PortableText value={timeline.description} components={RichTextComponents} />
+                  <PortableText value={timeline.description} components={RichTextComponents as any} />
                 </div>
               )}
             </div>

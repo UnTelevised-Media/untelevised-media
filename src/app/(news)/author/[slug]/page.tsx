@@ -326,7 +326,7 @@ export default async function AuthorPage({ params }: Props) {
               About {author.name}
             </h2>
             <div className='prose prose-lg prose-slate dark:prose-invert max-w-none'>
-              <PortableText value={author.bio} components={RichTextComponents} />
+              <PortableText value={author.bio} components={RichTextComponents as any} />
             </div>
           </div>
         </section>

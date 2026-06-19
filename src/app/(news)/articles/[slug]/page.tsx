@@ -377,7 +377,7 @@ export default async function ArticlePage({ params }: Props) {
 
               {/* Article Body */}
               <div className='rounded-xl border border-slate-200 bg-white/50 p-8 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/50'>
-                <PortableText value={article.body} components={RichTextComponents} />
+                <PortableText value={article.body} components={RichTextComponents as any} />
               </div>
 
               {/* Sources & Methodology */}

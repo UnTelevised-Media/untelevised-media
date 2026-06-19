@@ -275,7 +275,7 @@ export default async function LyricsPage({ params }: Props) {
                     About This Song
                   </h2>
                   <div className='prose prose-slate dark:prose-invert max-w-none'>
-                    <PortableText value={song.description} components={RichTextComponents} />
+                    <PortableText value={song.description} components={RichTextComponents as any} />
                   </div>
                 </div>
               )}

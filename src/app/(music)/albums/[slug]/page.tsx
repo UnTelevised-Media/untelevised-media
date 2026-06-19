@@ -277,7 +277,7 @@ export default async function AlbumPage({ params }: Props) {
                     About This Album
                   </h2>
                   <div className='prose prose-slate dark:prose-invert max-w-none'>
-                    <PortableText value={album.description} components={RichTextComponents} />
+                    <PortableText value={album.description} components={RichTextComponents as any} />
                   </div>
                 </div>
               )}

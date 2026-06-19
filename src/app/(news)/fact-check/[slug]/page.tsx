@@ -163,7 +163,7 @@ export default async function FactCheckPage({ params }: Props) {
         {/* Full analysis body */}
         {fc.body && Array.isArray(fc.body) && fc.body.length > 0 && (
           <div className='mt-6'>
-            <PortableText value={fc.body} components={RichTextComponents} />
+            <PortableText value={fc.body} components={RichTextComponents as any} />
           </div>
         )}
 

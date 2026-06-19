@@ -245,7 +245,7 @@ export default async function MusicArtistPage({ params }: Props) {
                     Biography
                   </h2>
                   <div className='prose prose-slate dark:prose-invert max-w-none'>
-                    <PortableText value={artist.bio} components={RichTextComponents} />
+                    <PortableText value={artist.bio} components={RichTextComponents as any} />
                   </div>
                 </div>
               )}

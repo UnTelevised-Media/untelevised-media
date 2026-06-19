@@ -256,7 +256,7 @@ export default async function LiveEventPage({ params }: Props) {
                       ) : (
                         <PortableText
                           value={event.description as any}
-                          components={RichTextComponents}
+                          components={RichTextComponents as any}
                         />
                       )}
                     </div>
@@ -271,7 +271,7 @@ export default async function LiveEventPage({ params }: Props) {
           </div>
           {/* Developments / Story */}
           <div className='mx-auto h-min rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw] lg:w-2/5'>
-            <PortableText value={liveEvent.body} components={RichTextComponents} />
+            <PortableText value={liveEvent.body} components={RichTextComponents as any} />
             <SourcesPanel sources={liveEvent.sources} methodology={liveEvent.methodology} />
           </div>
         </section>

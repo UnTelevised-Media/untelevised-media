@@ -241,7 +241,7 @@ export default async function CareersPage() {
                           { }
                           <PortableText
                             value={job.description as any}
-                            components={RichTextComponents}
+                            components={RichTextComponents as any}
                           />
                         </div>
                       )}

@@ -191,7 +191,7 @@ export default async function TimelineEventPage({ params }: Props) {
             {/* Detailed Description */}
             {event.detailedDescription && (
               <div className='prose prose-slate dark:prose-invert max-w-none'>
-                <PortableText value={event.detailedDescription} components={RichTextComponents} />
+                <PortableText value={event.detailedDescription} components={RichTextComponents as any} />
               </div>
             )}
 
