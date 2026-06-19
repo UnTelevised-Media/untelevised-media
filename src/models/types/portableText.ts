@@ -213,3 +213,23 @@ export interface PortableTextMarkRenderer {
 
 // Generic block type for arrays of portable text content
 export type Block = PortableTextBlock | any;
+
+/**
+ * Sanity References Type Helper
+ *
+ * Sanity GROQ queries can return relationships as either:
+ * 1. Unpopulated references: { _ref: string, _type: string }
+ * 2. Populated objects: { _ref?: string, _type?: string, ...properties }
+ *
+ * When a property accesses a field on a reference (e.g., artist.name),
+ * it's safe to use `any` casting because:
+ * - The GROQ query determines whether the reference is populated
+ * - We trust the query implementation to return the expected shape
+ * - Adding full type unions would duplicate Sanity schema definitions
+ */
+export type SanityPopulatedReference<T = any> = T & {
+  _ref?: string;
+  _type?: string;
+  _id?: string;
+  _key?: string;
+};
