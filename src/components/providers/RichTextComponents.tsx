@@ -81,7 +81,9 @@ export default {
     // â”€â”€ Code Blocks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     code: ({ value }: { value: PortableCodeBlock }) => {
       const { code, language } = value;
-      if (!code) return null;
+      if (!code) {
+        return null;
+      }
       return (
         <div className='my-6'>
           {language && (
