@@ -408,30 +408,7 @@ interface Author extends Base {
 
 ---
 
-### Category 4: UTILITY & HELPER FUNCTIONS (5 warnings, <1%)
-
-**Files:**
-- `src/util/getSongArtwork.ts:18,19,36,37,67`
-- `src/util/rssUtils.ts:13,35`
-- `src/util/timelineJSAdapter.ts:5,85,122,163,190,193,304`
-
-**Issue:** Helper functions that transform data from various sources use `any` for flexibility.
-
-**Fix Example:**
-```typescript
-// Before (getSongArtwork.ts:18)
-function getSongArtwork(song: any, size: 'small' | 'medium' | 'large'): string {
-
-// After
-type SongInput = Pick<Song, 'trackArt' | 'album'>;
-
-function getSongArtwork(song: SongInput, size: 'small' | 'medium' | 'large'): string {
-```
-
----
-
----
-
+P
 ## Remediation Priority
 
 ### 🔴 CRITICAL (Do First)

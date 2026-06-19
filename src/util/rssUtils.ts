@@ -1,4 +1,5 @@
 // src/lib/rssUtils.ts
+import type { Image } from '@/models/types/sanity';
 import urlForImage from '@/util/urlForImage';
 
 const BASE_URL = 'https://www.untelevised.media';
@@ -10,12 +11,7 @@ export interface RSSArticle {
   description?: string;
   publishedAt: string;
 
-  /**
-   * Image object from Sanity CMS
-   * @typescript-eslint/no-explicit-any — RSS feed accepts any Sanity image structure; shape varies by GROQ query expansion
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  mainImage?: any;
+  mainImage?: Image;
   author?: { name: string };
   category?: { title: string };
 }
@@ -37,12 +33,7 @@ export interface RSSLiveEvent {
   eventDate: string;
   _updatedAt?: string;
 
-  /**
-   * Image object from Sanity CMS
-   * @typescript-eslint/no-explicit-any — Live event images vary in structure; shape depends on GROQ query context
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  mainImage?: any;
+  mainImage?: Image;
   // Live events have no author field — coverage is by the newsroom
   eventStatus?: string;
 }

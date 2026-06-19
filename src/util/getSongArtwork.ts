@@ -1,6 +1,8 @@
 // src/util/getSongArtwork.ts
-import type { Song } from '@/models/types/sanity';
+import type { Song, Album } from '@/models/types/sanity';
 import urlForImage from './urlForImage';
+
+type SongWithArtwork = Pick<Song, 'trackArt' | 'album'>;
 
 /**
  * Gets the appropriate artwork for a song, with fallback logic:
@@ -8,17 +10,15 @@ import urlForImage from './urlForImage';
  * 2. Fallback to album artwork if track artwork is not available
  * 3. Return null if neither is available
  */
-export function getSongArtwork(song: Song): string | null {
+export function getSongArtwork(song: SongWithArtwork): string | null {
   // First try to use track artwork
   if (song.trackArt) {
     return urlForImage(song.trackArt)?.url() ?? null;
   }
 
   // Fallback to album artwork
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Album can be a reference or populated object from Sanity GROQ query results
-  if ((song.album as any)?.albumArt) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any — Runtime album structure varies by query expansion
-    return urlForImage((song.album as any)?.albumArt)?.url() ?? null;
+  if (song.album && 'albumArt' in song.album && song.album.albumArt) {
+    return urlForImage(song.album.albumArt)?.url() ?? null;
   }
 
   // No artwork available
@@ -35,10 +35,8 @@ export function getSongArtworkAlt(song: Song): string {
   }
 
   // Fallback to album art alt text
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any — Album structure varies: reference vs. populated object
-  if ((song.album as any)?.albumArt?.alt) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any — Dynamic album nesting based on GROQ expansion
-    return (song.album as any)?.albumArt?.alt ?? '';
+  if (song.album && 'albumArt' in song.album && song.album.albumArt?.alt) {
+    return song.album.albumArt.alt;
   }
 
   // Default alt text
@@ -68,10 +66,7 @@ export function getSongArtworkInfo(song: Song): {
   let source: 'track' | 'album' | 'none' = 'none';
   if (song.trackArt) {
     source = 'track';
-  } else if (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any — Album reference vs. populated object based on query context
-    (song.album as any)?.albumArt
-  ) {
+  } else if (song.album && 'albumArt' in song.album && song.album.albumArt) {
     source = 'album';
   }
 

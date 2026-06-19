@@ -1,14 +1,7 @@
 // TimelineJS Data Adapter
 // Transforms Sanity CMS timeline data into TimelineJS-compatible format
 
-import type { Timeline, TimelineEvent } from '@/models/types/sanity';
-/**
- * TimelineJS library expects flexible block structures that don't map to Sanity's Block type.
- * TimelineJS blocks can contain arbitrary media, dates, and markup that differ from CMS blocks.
- * @typescript-eslint/no-explicit-any — External library data transformation requires flexible typing
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Block = any;
+import type { Timeline, TimelineEvent, Block } from '@/models/types/sanity';
 import urlForImage from './urlForImage';
 import formatDate from './formatDate';
 
