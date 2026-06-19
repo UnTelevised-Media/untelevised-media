@@ -15,7 +15,7 @@ import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
-import { InFeedAd, RectangleAd, AD_CONFIG } from '@/components/ads';
+import { InFeedAd, RectangleAd, AD_CONFIG } from '@/components/googleAdSense';
 import { getTrendingArticles } from '@/lib/supabase/viewEvents';
 
 type Props = { params: Promise<{ slug: string }> };

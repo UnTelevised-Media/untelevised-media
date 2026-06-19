@@ -1,7 +1,4 @@
-// src/components/sanity/PreviewLink.tsx
-'use client';
-
-// Function to generate preview URLs for different content types
+// Pure preview URL generation logic - no React dependencies
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function generatePreviewUrl(context: any): Promise<string> {
   const doc = context.document ?? context;

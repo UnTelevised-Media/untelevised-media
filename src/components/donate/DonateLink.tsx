@@ -1,6 +1,6 @@
 'use client';
 
-import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
+import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface Props {
   href: string;

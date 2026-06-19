@@ -2,8 +2,8 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
-import { useConsentCheck } from '@/hooks/useConsent';
-import { AdContext } from '@/hooks/useAdContext';
+import { useConsentCheck } from '@/hooks/googleAdSense/useConsent';
+import { AdContext } from '@/hooks/googleAdSense/useAdContext';
 
 interface AdManagerProps {
   children: React.ReactNode;

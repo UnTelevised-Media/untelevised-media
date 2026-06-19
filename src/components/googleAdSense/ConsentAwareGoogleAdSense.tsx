@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 'use client';
 
-import { useConsentCheck } from '@/hooks/useConsent';
-import GoogleAdSense from './googleAdSense';
+import { useConsentCheck } from '@/hooks/googleAdSense/useConsent';
+import GoogleAdSense from './GoogleAdSense';
 
 interface ConsentAwareGoogleAdSenseProps {
   googleAdsenseId: string;

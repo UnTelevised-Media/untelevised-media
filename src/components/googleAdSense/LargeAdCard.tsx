@@ -5,7 +5,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
 import { adsenseManager } from '@/lib/googleAdSense/adsenseInit';
-import { useConsentCheck } from '@/hooks/useConsent';
+import { useConsentCheck } from '@/hooks/googleAdSense/useConsent';
 
 /* eslint-disable-next-line no-unused-vars */
 declare global {

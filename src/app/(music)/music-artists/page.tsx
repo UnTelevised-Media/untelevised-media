@@ -2,7 +2,7 @@ import type { MusicArtist } from '@/models/types/sanity';
 // src/app/(user)/music-artists/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { BannerAd } from '@/components/ads';
+import { BannerAd } from '@/components/googleAdSense';
 
 import urlForImage from '@/util/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';

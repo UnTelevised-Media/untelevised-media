@@ -10,7 +10,7 @@ import TimelineEventCard from '@/components/timeline/TimelineEventCard';
 import TimelineCard from '@/components/timeline/TimelineCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { BannerAd, RectangleAd } from '@/components/ads';
+import { BannerAd, RectangleAd } from '@/components/googleAdSense';
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';

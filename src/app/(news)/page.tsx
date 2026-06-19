@@ -9,7 +9,7 @@ import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 import RawFeed from '@/components/homepage/RawFeed';
 import TrendingSection from '@/components/homepage/TrendingSection';
-import { SidebarAd, AD_CONFIG } from '@/components/ads';
+import { SidebarAd, AD_CONFIG } from '@/components/googleAdSense';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
 

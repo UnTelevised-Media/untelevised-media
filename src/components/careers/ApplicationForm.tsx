@@ -8,10 +8,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   jobApplicationSchema,
   type JobApplicationFormData,
-} from '@/lib/validations/jobApplication';
+} from '@/models/validations/jobApplication';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 import { TurnstileWidget } from '@/components/global/TurnstileWidget';
-import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
+import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface ApplicationFormProps {
   prefilledPosition?: string;
@@ -47,7 +47,9 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
         formData.append(key, String(value));
       }
     });
-    if (captchaToken) {formData.append('turnstileToken', captchaToken);}
+    if (captchaToken) {
+      formData.append('turnstileToken', captchaToken);
+    }
 
     try {
       const res = await fetch('/api/careers-application', {
@@ -55,7 +57,9 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
         body: formData,
       });
       const result = await res.json();
-      if (!res.ok) {throw new Error(result.error ?? 'Submission failed');}
+      if (!res.ok) {
+        throw new Error(result.error ?? 'Submission failed');
+      }
       trackEvent('job_application_submitted', { position: data.position });
       setSubmitState('success');
       reset();

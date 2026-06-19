@@ -8,7 +8,7 @@ import urlForImage from '@/util/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/formatDate';
 import resolveHref from '@/util/resolveHref';
-import { InFeedAd, AD_CONFIG } from '@/components/ads';
+import { InFeedAd, AD_CONFIG } from '@/components/googleAdSense';
 
 interface LiveEvent {
   _id: string;

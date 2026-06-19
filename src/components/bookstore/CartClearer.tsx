@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useCart } from '@/hooks/useCart';
+import { useCart } from '@/hooks/bookstore/useCart';
 
 // Clears the cart once the user lands on the order-success page.
 // Runs client-side so the Zustand/localStorage store is accessible.

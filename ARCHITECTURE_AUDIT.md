@@ -30,7 +30,7 @@
                             ↑
 ┌─────────────────────────────────────────────────────────────┐
 │ TYPES LAYER (54 files)                                      │
-│ src/models - TypeScript types, Zod schemas                  │
+│ src/models - TypeScript types, Zod schemas, Content Models  │
 └─────────────────────────────────────────────────────────────┘
                             ↑
 ┌─────────────────────────────────────────────────────────────┐
@@ -47,10 +47,10 @@
 **Severity: HIGH | Impact: Violated Layer Boundary**
 
 Files misplaced in `src/util/`:
-- `consentAwareGoogleAdSense.tsx` - React component with hooks
+- `consentAwareGoogleAdSense.tsx` - @Digitl-Alchemyst React component with hooks, this seems to be left over from extracting to /hooks double check
 - `googleAdSense.tsx` - React component
 - `LiveVisualEditing.tsx` - React component
-
+Move visual components @Digitl-Alchemyst
 **Problem**: 
 - util/ layer should contain ONLY pure functions
 - These files have React dependencies
@@ -98,7 +98,7 @@ import { generatePreviewUrl } from '@/components/sanity/PreviewLink';
 lib/ imports from components/  ❌ WRONG (goes UP)
 components/ should import from lib/  ✓ CORRECT (goes DOWN)
 ```
-
+@Digitl-Alchemyst inside /lib/sanity make a components folder move any components like this that are usual for visual customization in sanity to this location
 ---
 
 ### Issue #3: Utility Importing Hooks
@@ -137,7 +137,7 @@ src/components/ads/
   ├── RectangleAd.tsx
   ├── SidebarAd.tsx
 
-src/components/googleAds/
+src/components/googleAds/ @Digitl-Alchemyst move everything here
   └── LargeAdCard.tsx
 ```
 
@@ -145,11 +145,11 @@ src/components/googleAds/
 - Possible duplication
 - Confusing to developers
 
-**Recommendation**: Consolidate into single `components/ads/` directory
+**Recommendation**: Consolidate into single `components/googleAdsSense/` directory @Digitl-Alchemyst rename this to match lib
 
 ---
 
-### Issue #5: Component Mixing Concerns
+### Issue #5: Component Mixing Concerns @Digitl-Alchemyst skip this issue
 Multiple components import from server/actions (14 files)
 
 **Acceptable uses**:

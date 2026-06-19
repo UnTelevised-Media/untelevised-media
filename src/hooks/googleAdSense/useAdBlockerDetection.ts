@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { adBlockerDetector } from '@/lib/consent/adBlockerDetection';
+import { adBlockerDetector } from '@/lib/googleAdSense/consent/adBlockerDetection';
 
 export function useAdBlockerDetection() {
   const [detected, setDetected] = useState(false);

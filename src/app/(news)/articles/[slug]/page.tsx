@@ -7,7 +7,7 @@ import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
-import { InFeedAd, BannerAd, SidebarAd } from '@/components/ads';
+import { InFeedAd, BannerAd, SidebarAd } from '@/components/googleAdSense';
 import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
 import RecentBreakingNews from '@/components/article/RecentBreakingNews';
 

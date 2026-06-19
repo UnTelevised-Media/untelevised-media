@@ -5,7 +5,7 @@ import type { Timeline, TimelineEvent, TimelineCategory } from '@/models/types/s
 
 import TimelineOverview from '@/components/timeline/TimelineOverview';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
-import { BannerAd } from '@/components/ads';
+import { BannerAd } from '@/components/googleAdSense';
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import {

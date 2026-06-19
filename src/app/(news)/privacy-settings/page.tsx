@@ -14,10 +14,10 @@ import {
   AlertTriangle,
   CheckCircle,
 } from 'lucide-react';
-import { useConsent } from '@/hooks/useConsent';
+import { useConsent } from '@/hooks/googleAdSense/useConsent';
 import { COOKIE_CATEGORIES } from '@/models/types/consent';
-import { privacyStorage } from '@/lib/consent/storage';
-import { useAdBlockerDetection } from '@/hooks/useAdBlockerDetection';
+import { privacyStorage } from '@/lib/googleAdSense/consent/storage';
+import { useAdBlockerDetection } from '@/hooks/googleAdSense/useAdBlockerDetection';
 
 function PrivacySettingsPage() {
   const { preferences, status, updatePreferences } = useConsent();

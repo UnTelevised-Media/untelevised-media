@@ -8,7 +8,7 @@ import { VerdictBadge } from './VerdictBadge';
 import { VERDICT_CONFIG, type FactCheckRating } from '@/util/verdictConfig';
 import formatDate from '@/util/formatDate';
 import urlForImage from '@/util/urlForImage';
-import { InFeedAd, AD_CONFIG } from '@/components/ads';
+import { InFeedAd, AD_CONFIG } from '@/components/googleAdSense';
 
 export interface FactCheckSummary {
   _id: string;

@@ -24,7 +24,7 @@ import TimelineEventCard from '@/components/timeline/TimelineEventCard';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { RectangleAd, BannerAd } from '@/components/ads';
+import { RectangleAd, BannerAd } from '@/components/googleAdSense';
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';

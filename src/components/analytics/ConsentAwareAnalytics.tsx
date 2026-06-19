@@ -6,7 +6,7 @@ import Script from 'next/script';
 import * as Sentry from '@sentry/nextjs';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { useConsentCheck } from '@/hooks/useConsent';
+import { useConsentCheck } from '@/hooks/googleAdSense/useConsent';
 
 interface ConsentAwareAnalyticsProps {
   /** GTM container ID, e.g. "GTM-XXXXXX". Loads the GTM snippet. */
@@ -23,7 +23,9 @@ function ConsentAwareAnalytics({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) {
   // The default 'denied' state was already established by the beforeInteractive
   // script in layout.tsx — this only needs to fire the 'update' call.
   useEffect(() => {
-    if (!hasConsent || typeof window === 'undefined' || !window.gtag) {return;}
+    if (!hasConsent || typeof window === 'undefined' || !window.gtag) {
+      return;
+    }
 
     window.gtag('consent', 'update', {
       analytics_storage: canUseAnalytics ? 'granted' : 'denied',

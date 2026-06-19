@@ -2,7 +2,7 @@ import type { Song, MusicArtist } from '@/models/types/sanity';
 // src/app/(user)/lyrics/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { BannerAd } from '@/components/ads';
+import { BannerAd } from '@/components/googleAdSense';
 
 import urlForImage from '@/util/urlForImage';
 import { getSongArtwork, getSongArtworkAlt } from '@/util/getSongArtwork';

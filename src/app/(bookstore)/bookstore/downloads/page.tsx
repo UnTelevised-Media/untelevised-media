@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
+import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface DownloadRecord {
   id: string;
@@ -75,7 +75,9 @@ export default function DownloadsPage() {
   useEffect(() => {
     fetch('/api/bookstore/my-downloads')
       .then(async (res) => {
-        if (!res.ok) {throw new Error('Failed to load downloads');}
+        if (!res.ok) {
+          throw new Error('Failed to load downloads');
+        }
         const data = (await res.json()) as { downloads: DownloadRecord[] };
         const items = data.downloads ?? [];
         setDownloads(items);

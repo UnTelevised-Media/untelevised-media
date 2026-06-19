@@ -4,8 +4,8 @@
 // Mirrors BookmarkButton.tsx using the useWishlist hook.
 
 import { Star } from 'lucide-react';
-import { useWishlist } from '@/hooks/useWishlist';
-import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
+import { useWishlist } from '@/hooks/bookstore/useWishlist';
+import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
 import type { WishlistEntry } from '@/services/storage/wishlist';
 
 type WishlistButtonProps = Omit<WishlistEntry, 'addedAt'> & {

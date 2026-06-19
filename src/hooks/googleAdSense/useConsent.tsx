@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { ConsentContextType, ConsentPreferences, ConsentStatus } from '@/models/types/consent';
-import { consentStorage } from '@/lib/consent/storage';
+import { consentStorage } from '@/lib/googleAdSense/consent/storage';
 
 const defaultPreferences: ConsentPreferences = {
   essential: true,

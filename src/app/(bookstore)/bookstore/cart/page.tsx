@@ -6,8 +6,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import * as Sentry from '@sentry/nextjs';
 import { useUser } from '@clerk/nextjs';
-import { useCart } from '@/hooks/useCart';
-import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
+import { useCart } from '@/hooks/bookstore/useCart';
+import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
 import type { CheckoutPayload } from '@/models/types/bookstore';
 import PreCheckoutDialog from '@/components/bookstore/PreCheckoutDialog';
 
@@ -56,13 +56,19 @@ export default function CartPage() {
   const { trackEvent } = useConsentAwareTracking();
 
   const total = items.reduce((sum, i) => {
-    if (i.formatType === 'tip') {return i.tipIncluded !== false ? sum + i.price : sum;}
+    if (i.formatType === 'tip') {
+      return i.tipIncluded !== false ? sum + i.price : sum;
+    }
     return sum + i.price * i.quantity;
   }, 0);
 
   const handleCheckoutClick = () => {
-    if (items.length === 0) {return;}
-    if (!isLoaded) {return;}
+    if (items.length === 0) {
+      return;
+    }
+    if (!isLoaded) {
+      return;
+    }
     if (!user) {
       setShowAuthDialog(true);
       return;
@@ -71,7 +77,9 @@ export default function CartPage() {
   };
 
   const handleCheckout = async (customerEmail?: string) => {
-    if (items.length === 0) {return;}
+    if (items.length === 0) {
+      return;
+    }
 
     setLoading(true);
     setError(null);

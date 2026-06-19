@@ -13,7 +13,7 @@ import type { FactCheckRating } from '@/util/verdictConfig';
 import formatDate from '@/util/formatDate';
 import Link from 'next/link';
 import { buildFactCheckMetadata } from '@/util/metadata';
-import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/ads';
+import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/googleAdSense';
 
 interface Props {
   params: Promise<{ slug: string }>;

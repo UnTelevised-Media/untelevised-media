@@ -5,16 +5,18 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useWishlist } from '@/hooks/useWishlist';
+import { useWishlist } from '@/hooks/bookstore/useWishlist';
 import WishlistButton from '@/components/bookstore/WishlistButton';
-import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
+import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 export default function WishlistPage() {
   const { wishlist, loading, ready } = useWishlist();
   const { trackEvent } = useConsentAwareTracking();
 
   useEffect(() => {
-    if (!ready || loading) {return;}
+    if (!ready || loading) {
+      return;
+    }
     trackEvent('view_wishlist', { wishlist_item_count: wishlist.length });
   }, [ready, loading, wishlist.length, trackEvent]);
 

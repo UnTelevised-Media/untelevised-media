@@ -2,8 +2,8 @@
 // Add-to-cart button — calls Zustand store from a client component.
 
 import { useState } from 'react';
-import { useCart, buildCartItem } from '@/hooks/useCart';
-import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
+import { useCart, buildCartItem } from '@/hooks/bookstore/useCart';
+import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
 import type { SanityBook, SanityBookFormat } from '@/models/types/bookstore';
 
 interface Props {

@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
-import { RectangleAd, BannerAd } from '@/components/ads';
+import { RectangleAd, BannerAd } from '@/components/googleAdSense';
 
 import urlForImage from '@/util/urlForImage';
 import { getSongArtworkInfo } from '@/util/getSongArtwork';

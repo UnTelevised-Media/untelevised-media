@@ -7,7 +7,7 @@ import type { Article } from '@/models/types/sanity';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
-import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/ads';
+import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/googleAdSense';
 
 interface RawFeedProps {
   articles: Article[];

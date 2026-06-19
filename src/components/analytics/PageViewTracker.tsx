@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';
+import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface Props {
   event: string;
@@ -15,7 +15,6 @@ export default function PageViewTracker({ event, params }: Props) {
   useEffect(() => {
     trackEvent(event, params);
     // intentionally runs once on mount — params are stable at render time
-     
   }, []);
 
   return null;

@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Heart, Shield, Coffee } from 'lucide-react';
-import { adBlockerDetector } from '@/lib/consent/adBlockerDetection';
+import { adBlockerDetector } from '@/lib/googleAdSense/consent/adBlockerDetection';
 
 interface AdBlockerMessageProps {
   className?: string;

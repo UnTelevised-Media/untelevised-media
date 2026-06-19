@@ -15,7 +15,7 @@ import { apiVersion, dataset, projectId } from './env';
 import { schemaTypes } from '@/models/schema/index';
 
 import structure from './structure';
-import { generatePreviewUrl } from '@/components/sanity/PreviewLink';
+import { generatePreviewUrl } from './components/PreviewLink';
 
 export default defineConfig({
   basePath: '/studio',

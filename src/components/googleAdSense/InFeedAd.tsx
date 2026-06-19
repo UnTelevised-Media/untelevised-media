@@ -5,21 +5,28 @@
 import { useEffect, useRef, useState } from 'react';
 import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
 import { adsenseManager } from '@/lib/googleAdSense/adsenseInit';
-import { useConsentCheck } from '@/hooks/useConsent';
+import { useConsentCheck } from '@/hooks/googleAdSense/useConsent';
 
-interface SidebarAdProps {
+interface InFeedAdProps {
   slot: string;
   className?: string;
   style?: React.CSSProperties;
-  sticky?: boolean;
+  layoutKey?: string;
 }
 
-export default function SidebarAd({
+/* eslint-disable-next-line no-unused-vars */
+declare global {
+  interface Window {
+    adsbygoogle: Record<string, unknown>[];
+  }
+}
+
+export default function InFeedAd({
   slot,
   className = '',
   style = {},
-  sticky = false,
-}: SidebarAdProps) {
+  layoutKey = '-6t+ed+2i-1n-4w',
+}: InFeedAdProps) {
   const adRef = useRef<HTMLModElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
@@ -39,7 +46,7 @@ export default function SidebarAd({
       return;
     }
     if (!isDev && (!hasConsent || !canUseMarketing)) {
-      console.debug('[AdSense] SidebarAd slot=%s: awaiting consent', slot);
+      console.debug('[AdSense] InFeedAd slot=%s: awaiting consent', slot);
       return;
     }
     if (pushed.current) {
@@ -73,11 +80,11 @@ export default function SidebarAd({
           if (s === 'filled') {
             setAdStatus('filled');
             mo.disconnect();
-            console.debug('[AdSense] SidebarAd slot=%s: filled ✓', slot);
+            console.debug('[AdSense] InFeedAd slot=%s: filled ✓', slot);
           } else if (s === 'unfilled') {
             setAdStatus('unfilled');
             mo.disconnect();
-            console.warn('[AdSense] SidebarAd slot=%s: unfilled', slot);
+            console.warn('[AdSense] InFeedAd slot=%s: unfilled', slot);
           }
         });
         mo.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
@@ -97,22 +104,18 @@ export default function SidebarAd({
   }
 
   return (
-    <div
-      ref={containerRef}
-      className={`ad-container ${sticky ? 'sticky top-24' : ''} ${className}`.trim()}
-      style={style}
-    >
+    <div ref={containerRef} className={`ad-container my-6 ${className}`} style={style}>
       <div className='mb-2 text-center text-xs text-slate-500 dark:text-slate-400'>
         Advertisement
       </div>
       <ins
         ref={adRef}
         className='adsbygoogle'
-        style={{ display: 'block', width: '100%', minHeight: '250px' }}
+        style={{ display: 'block', minHeight: '250px' }}
+        data-ad-format='fluid'
+        data-ad-layout-key={layoutKey}
         data-ad-client={AD_CONFIG.PUBLISHER_ID}
         data-ad-slot={slot}
-        data-ad-format='auto'
-        data-full-width-responsive='true'
       />
       {adStatus === 'idle' && (
         <div className='flex h-64 items-center justify-center rounded bg-slate-50 dark:bg-slate-900'>
