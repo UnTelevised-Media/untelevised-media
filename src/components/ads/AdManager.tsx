@@ -1,8 +1,12 @@
 'use client';
 
-import { useEffect, useState, useRef, createContext, useContext } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
 import { useConsentCheck } from '@/lib/consent/context';
+import { AdContext, useAdContext } from '@/hooks/useAdContext';
+
+// Re-export for backward compatibility
+export { useAdContext };
 
 interface AdManagerProps {
   children: React.ReactNode;
@@ -108,27 +112,3 @@ export default function AdManager({
     </div>
   );
 }
-
-// Create React Context for ad management
-
-interface AdContextType {
-  canLoadMoreAds: () => boolean;
-  registerAdLoad: () => boolean;
-  screenSize: 'mobile' | 'tablet' | 'desktop';
-  userPreferences: {
-    doNotTrack: boolean;
-    reducedMotion: boolean;
-  };
-  adsLoaded: number;
-  maxAds: number;
-}
-
-const AdContext = createContext<AdContextType | null>(null);
-
-export const useAdContext = () => {
-  const context = useContext(AdContext);
-  if (!context) {
-    throw new Error('useAdContext must be used within an AdManager');
-  }
-  return context;
-};
