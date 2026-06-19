@@ -39,9 +39,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const artistNames = [
-    album.artist?.stageName ?? album.artist?.name ?? 'Unknown Artist',
-    ...(album.featuredArtists?.map(
-      (artist) => artist?.stageName ?? artist?.name
+    (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
+    ...((album.featuredArtists as any)?.map(
+      (artist) => (artist as any)?.stageName ?? (artist as any)?.name
     ) ?? []),
   ].join(', ');
 
@@ -86,9 +86,9 @@ export default async function AlbumPage({ params }: Props) {
   }
 
   const artistNames = [
-    album.artist?.stageName ?? album.artist?.name ?? 'Unknown Artist',
-    ...(album.featuredArtists?.map(
-      (artist) => artist?.stageName ?? artist?.name
+    (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
+    ...((album.featuredArtists as any)?.map(
+      (artist) => (artist as any)?.stageName ?? (artist as any)?.name
     ) ?? []),
   ].join(', ');
 
@@ -99,9 +99,9 @@ export default async function AlbumPage({ params }: Props) {
     byArtist: album.artist
       ? {
           '@type': 'MusicGroup',
-          name: album.artist?.stageName ?? album.artist?.name ?? 'Unknown',
-          url: album.artist?.slug?.current
-            ? `https://www.untelevised.media/music-artists/${album.artist.slug.current}/`
+          name: (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown',
+          url: (album.artist as any)?.slug?.current
+            ? `https://www.untelevised.media/music-artists/${(album.artist as any).slug.current}/`
             : undefined,
         }
       : undefined,
@@ -411,19 +411,19 @@ export default async function AlbumPage({ params }: Props) {
                     </ClientSideRoute>
                   )}
 
-                  {album.featuredArtists?.map(
+                  {(album.featuredArtists as any)?.map(
                     (artist) =>
-                      artist?.slug?.current && (
+                      (artist as any)?.slug?.current && (
                         <ClientSideRoute
-                          key={artist._id}
-                          route={`/music-artists/${artist.slug.current}`}
+                          key={(artist as any)._id}
+                          route={`/music-artists/${(artist as any).slug.current}`}
                         >
                           <div className='group flex cursor-pointer items-center gap-3'>
-                            {artist?.image && (
+                            {(artist as any)?.image && (
                               <div className='h-12 w-12 overflow-hidden rounded-full'>
                                 <Image
-                                  src={urlForImage(artist?.image)?.url() ?? ''}
-                                  alt={artist?.name ?? 'Artist'}
+                                  src={urlForImage((artist as any)?.image)?.url() ?? ''}
+                                  alt={(artist as any)?.name ?? 'Artist'}
                                   width={48}
                                   height={48}
                                   className='h-full w-full object-cover'
@@ -432,7 +432,7 @@ export default async function AlbumPage({ params }: Props) {
                             )}
                             <div>
                               <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                                {artist?.stageName ?? artist?.name}
+                                {(artist as any)?.stageName ?? (artist as any)?.name}
                               </h4>
                               <p className='text-sm text-slate-600 dark:text-slate-400'>
                                 Featured
