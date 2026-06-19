@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const artistNames = [
     (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
     ...((album.featuredArtists as any)?.map(
-      (artist) => (artist as any)?.stageName ?? (artist as any)?.name
+      (artist: any) => (artist as any)?.stageName ?? (artist as any)?.name
     ) ?? []),
   ].join(', ');
 
@@ -88,7 +88,7 @@ export default async function AlbumPage({ params }: Props) {
   const artistNames = [
     (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
     ...((album.featuredArtists as any)?.map(
-      (artist) => (artist as any)?.stageName ?? (artist as any)?.name
+      (artist: any) => (artist as any)?.stageName ?? (artist as any)?.name
     ) ?? []),
   ].join(', ');
 

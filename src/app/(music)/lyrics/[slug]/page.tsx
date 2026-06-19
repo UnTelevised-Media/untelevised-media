@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     'Unknown Artist';
   const artistNames = [
     primaryName,
-    ...((song.featuredArtists as any)?.map((a) => (a as any)?.stageName ?? (a as any)?.name) ?? []),
+    ...((song.featuredArtists as any)?.map((a: any) => (a as any)?.stageName ?? (a as any)?.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -89,7 +89,7 @@ export default async function LyricsPage({ params }: Props) {
 
   const artistNames = [
     (song.primaryArtist as any)?.name ?? 'Unknown Artist',
-    ...((song.featuredArtists as any)?.map((artist) => (artist as any)?.name) ?? []),
+    ...((song.featuredArtists as any)?.map((artist: any) => (artist as any)?.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -363,7 +363,7 @@ export default async function LyricsPage({ params }: Props) {
                   )}
 
                   {(song.featuredArtists as any)?.map(
-                    (artist) =>
+                    (artist: any) =>
                       (artist as any)?.slug?.current && (
                         <ClientSideRoute
                           key={(artist as any)._id}

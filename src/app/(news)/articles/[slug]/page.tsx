@@ -97,7 +97,7 @@ export default async function ArticlePage({ params }: Props) {
                 name: 'Home',
                 item: 'https://www.untelevised.media',
               },
-              ...((article.categories as any)?.slice(0, 1).map((cat) => ({
+              ...((article.categories as any)?.slice(0, 1).map((cat: any) => ({
                 '@type': 'ListItem',
                 position: 2,
                 name: (cat as any)?.title ?? 'Category',
@@ -140,7 +140,7 @@ export default async function ArticlePage({ params }: Props) {
             <div className='space-y-6'>
               {/* Title */}
               <h1
-                className={`text-4xl font-bold text-white sm:text-5xl lg:text-6xl${article?.correction?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
+                className={`text-4xl font-bold text-white sm:text-5xl lg:text-6xl${(article?.corrections as any)?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
               >
                 {article.title}
               </h1>
@@ -302,7 +302,7 @@ export default async function ArticlePage({ params }: Props) {
               </nav>
               <BookmarkButton
                 slug={slug}
-                title={article.title}
+                title={article.title ?? 'Untitled Article'}
                 description={
                   typeof article.description === 'string' ? article.description : undefined
                 }
@@ -318,7 +318,7 @@ export default async function ArticlePage({ params }: Props) {
             <div className='mb-8'>
               <SocialShare
                 url={`https://untelevised.media/articles/${article.slug?.current ?? slug}`}
-                title={article.title}
+                title={article.title ?? 'Untitled Article'}
               />
             </div>
 
@@ -369,9 +369,9 @@ export default async function ArticlePage({ params }: Props) {
               )}
 
               {/* Correction / Retraction Notice */}
-              {article.correction?.detail && (
+              {(article.corrections as any)?.detail && (
                 <div className='not-prose'>
-                  <CorrectionNotice correction={article.correction} />
+                  <CorrectionNotice correction={article.corrections as any} />
                 </div>
               )}
 
@@ -386,13 +386,13 @@ export default async function ArticlePage({ params }: Props) {
               </div>
 
               {/* Tags */}
-              {(article.tags as any) && (article.tags as any).length > 0 && (
+              {((article as any)?.tags as any) && ((article as any)?.tags as any).length > 0 && (
                 <div className='not-prose mt-8'>
                   <p className='mb-3 text-xs font-black uppercase tracking-widest text-muted-foreground'>
                     Filed Under
                   </p>
                   <div className='flex flex-wrap gap-2'>
-                    {(article.tags as any).map((tag: string) => (
+                    {((article as any)?.tags as any).map((tag: string) => (
                       <Link
                         key={tag}
                         href={`/tag/${tagToSlug(tag)}`}
