@@ -3,15 +3,20 @@
  * These types define the structure of all custom block types rendered by RichTextComponents
  */
 
+// Generic Sanity types exported for use across the app
 export interface SanityAsset {
   _ref: string;
   _type: 'reference';
 }
 
-export interface PortableImageBlock {
+export interface SanityImageAssetReference {
+  _ref: string;
+  _type: 'reference';
+}
+
+export interface Image {
   _type: 'image';
-  _key: string;
-  asset: SanityAsset;
+  asset?: SanityImageAssetReference;
   alt?: string;
   crop?: {
     top?: number;
@@ -20,10 +25,30 @@ export interface PortableImageBlock {
     right?: number;
   };
   hotspot?: {
-    x: number;
-    y: number;
-    height: number;
-    width: number;
+    x?: number;
+    y?: number;
+    height?: number;
+    width?: number;
+  };
+  [key: string]: any;
+}
+
+export interface PortableImageBlock {
+  _type: 'image';
+  _key: string;
+  asset?: SanityImageAssetReference;
+  alt?: string;
+  crop?: {
+    top?: number;
+    bottom?: number;
+    left?: number;
+    right?: number;
+  };
+  hotspot?: {
+    x?: number;
+    y?: number;
+    height?: number;
+    width?: number;
   };
 }
 
@@ -185,3 +210,6 @@ export interface PortableTextMarkRenderer {
     [key: string]: unknown;
   };
 }
+
+// Generic block type for arrays of portable text content
+export type Block = PortableTextBlock | any;

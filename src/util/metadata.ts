@@ -66,11 +66,25 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
   const description = truncate(article.description, 160);
   const keywords = article.keywords?.length ? article.keywords : undefined;
 
+  // Extract author name - handle both reference and populated author objects
+  const authorName =
+    article.author && typeof article.author === 'object' && 'name' in article.author
+      ? ((article.author as any).name ?? 'Author')
+      : 'Author';
+
+  // Extract category title - handle both reference and populated category objects
+  const categoryTitle =
+    article.categories?.[0] &&
+    typeof article.categories[0] === 'object' &&
+    'title' in article.categories[0]
+      ? (article.categories[0] as any).title
+      : undefined;
+
   return {
     title,
     description,
     keywords,
-    authors: article.author ? [{ name: article.author?.name ?? 'Author' }] : undefined,
+    authors: article.author ? [{ name: authorName }] : undefined,
     publisher: SITE_NAME,
     openGraph: {
       type: 'article',
@@ -80,8 +94,8 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
       siteName: SITE_NAME,
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt ?? article.publishedAt,
-      authors: article.author?.name ? [article.author?.name ?? 'Author'] : undefined,
-      section: article.categories?.[0]?.title,
+      authors: authorName && authorName !== 'Author' ? [authorName] : undefined,
+      section: categoryTitle,
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
     },
     twitter: {
@@ -147,7 +161,9 @@ export function buildCategoryMetadata(category: Category, slug: string): Metadat
       `Browse all ${category.title} coverage from UnTelevised Media.`,
     160
   );
-  const ogImageUrl = getSanityOgImageUrl(category.image) ?? DEFAULT_OG_IMAGE;
+  // Category image is optional in Sanity schema
+  const categoryImage = (category as any)?.image;
+  const ogImageUrl = getSanityOgImageUrl(categoryImage) ?? DEFAULT_OG_IMAGE;
 
   return {
     title,

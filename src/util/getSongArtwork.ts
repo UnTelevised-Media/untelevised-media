@@ -35,8 +35,15 @@ export function getSongArtworkAlt(song: Song): string {
   }
 
   // Fallback to album art alt text
-  if (song.album && 'albumArt' in song.album && song.album.albumArt?.alt) {
-    return song.album.albumArt.alt;
+  if (
+    song.album &&
+    typeof song.album === 'object' &&
+    'albumArt' in song.album &&
+    song.album.albumArt &&
+    typeof song.album.albumArt === 'object' &&
+    'alt' in song.album.albumArt
+  ) {
+    return (song.album.albumArt as any).alt;
   }
 
   // Default alt text

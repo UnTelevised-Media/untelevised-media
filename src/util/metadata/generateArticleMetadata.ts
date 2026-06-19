@@ -27,11 +27,17 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
   }
 
   // Create metadata object with dynamic values
+  // Extract author name - handle both reference and populated author objects
+  const authorName =
+    article.author && typeof article.author === 'object' && 'name' in article.author
+      ? ((article.author as any).name ?? 'Author')
+      : 'Author';
+
   const metadata: Metadata = {
     title: `${article.title} | UnTelevised Media`,
     description: article.description,
     keywords: article.keywords?.length ? article.keywords : undefined,
-    authors: article.author ? [{ name: article.author?.name ?? 'Author' }] : undefined,
+    authors: article.author ? [{ name: authorName }] : undefined,
     publisher: 'UnTelevised Media',
 
     openGraph: {
