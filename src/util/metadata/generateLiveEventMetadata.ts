@@ -40,7 +40,7 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
       type: 'article',
       images: liveEvent.mainImage
         ? {
-            url: urlForImage(liveEvent.mainImage as any)?.url() ?? '',
+            url: urlForImage(liveEvent.mainImage)?.url() ?? '',
             width: 1200,
             height: 630,
             alt: liveEvent.mainImage.alt ?? liveEvent.title,
@@ -56,7 +56,7 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
       creator: '@UnTelevisedLive',
       images: liveEvent.mainImage
         ? {
-            url: urlForImage(liveEvent.mainImage as any)?.url() ?? '',
+            url: urlForImage(liveEvent.mainImage)?.url() ?? '',
             alt: liveEvent.mainImage.alt ?? liveEvent.title,
           }
         : undefined,

@@ -31,7 +31,7 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
     title: `${article.title} | UnTelevised Media`,
     description: article.description,
     keywords: article.keywords?.length ? article.keywords : undefined,
-    authors: article.author ? [{ name: (article.author as any)?.name ?? 'Author' }] : undefined,
+    authors: article.author ? [{ name: article.author?.name ?? 'Author' }] : undefined,
     publisher: 'UnTelevised Media',
 
     openGraph: {
@@ -43,7 +43,7 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
       type: 'article',
       images: article.mainImage
         ? {
-            url: urlForImage(article.mainImage as any)?.url() ?? '',
+            url: urlForImage(article.mainImage)?.url() ?? '',
             width: 1200,
             height: 630,
             alt: article.mainImage.alt ?? article.title,
@@ -59,7 +59,7 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
       creator: TWITTER_HANDLE,
       images: article.mainImage
         ? {
-            url: urlForImage(article.mainImage as any)?.url() ?? '',
+            url: urlForImage(article.mainImage)?.url() ?? '',
             alt: article.mainImage.alt ?? article.title,
           }
         : undefined,
