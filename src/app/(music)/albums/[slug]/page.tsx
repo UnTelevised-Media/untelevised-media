@@ -39,9 +39,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const artistNames = [
-    (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
+    album.artist?.stageName ?? album.artist?.name ?? 'Unknown Artist',
     ...(album.featuredArtists?.map(
-      (artist) => (artist as any)?.stageName ?? (artist as any)?.name
+      (artist) => artist?.stageName ?? artist?.name
     ) ?? []),
   ].join(', ');
 
@@ -86,9 +86,9 @@ export default async function AlbumPage({ params }: Props) {
   }
 
   const artistNames = [
-    (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
+    album.artist?.stageName ?? album.artist?.name ?? 'Unknown Artist',
     ...(album.featuredArtists?.map(
-      (artist) => (artist as any)?.stageName ?? (artist as any)?.name
+      (artist) => artist?.stageName ?? artist?.name
     ) ?? []),
   ].join(', ');
 
@@ -99,9 +99,9 @@ export default async function AlbumPage({ params }: Props) {
     byArtist: album.artist
       ? {
           '@type': 'MusicGroup',
-          name: (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown',
-          url: (album.artist as any)?.slug?.current
-            ? `https://www.untelevised.media/music-artists/${(album.artist as any).slug.current}/`
+          name: album.artist?.stageName ?? album.artist?.name ?? 'Unknown',
+          url: album.artist?.slug?.current
+            ? `https://www.untelevised.media/music-artists/${album.artist.slug.current}/`
             : undefined,
         }
       : undefined,

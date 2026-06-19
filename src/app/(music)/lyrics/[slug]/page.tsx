@@ -35,12 +35,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const primaryName =
-    (song.primaryArtist as any)?.stageName ??
-    (song.primaryArtist as any)?.name ??
+    song.primaryArtist?.stageName ??
+    song.primaryArtist?.name ??
     'Unknown Artist';
   const artistNames = [
     primaryName,
-    ...(song.featuredArtists?.map((a) => (a as any)?.stageName ?? (a as any)?.name) ?? []),
+    ...(song.featuredArtists?.map((a) => a?.stageName ?? a?.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -88,15 +88,15 @@ export default async function LyricsPage({ params }: Props) {
   }
 
   const artistNames = [
-    (song.primaryArtist as any)?.name ?? 'Unknown Artist',
-    ...(song.featuredArtists?.map((artist) => (artist as any)?.name) ?? []),
+    song.primaryArtist?.name ?? 'Unknown Artist',
+    ...(song.featuredArtists?.map((artist) => artist?.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
-      <SongStructuredData song={song as any} />
+      <SongStructuredData song={song} />
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}
@@ -127,7 +127,7 @@ export default async function LyricsPage({ params }: Props) {
                 <div className='flex flex-wrap gap-4 text-sm text-white/80'>
                   {song.album && (
                     <div className='flex items-center gap-1'>
-                      <span>Album: {(song as any)?.album?.title}</span>
+                      <span>Album: {song.album?.title}</span>
                     </div>
                   )}
                   {song.releaseDate && (
@@ -307,17 +307,17 @@ export default async function LyricsPage({ params }: Props) {
                     <p className='text-sm text-slate-600 dark:text-slate-400'>
                       Individual track artwork
                     </p>
-                    {(song.album as any)?.title && (
+                    {song.album?.title && (
                       <p className='mt-2 text-xs text-slate-500 dark:text-slate-400'>
-                        From album: {(song.album as any)?.title}
+                        From album: {song.album?.title}
                       </p>
                     )}
                   </div>
-                ) : (song.album as any)?.slug?.current ? (
+                ) : song.album?.slug?.current ? (
                   <ClientSideRoute route={`/albums/${(song.album as any).slug.current}`}>
                     <div className='group cursor-pointer'>
                       <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                        {(song.album as any)?.title}
+                        {song.album?.title}
                       </h4>
                       <p className='text-sm text-slate-600 dark:text-slate-400'>
                         {formatDate((song.album as any)?.releaseDate)}
@@ -333,16 +333,16 @@ export default async function LyricsPage({ params }: Props) {
                   Artist{song.featuredArtists && song.featuredArtists.length > 0 ? 's' : ''}
                 </h3>
                 <div className='space-y-4'>
-                  {(song.primaryArtist as any)?.slug?.current && (
+                  {song.primaryArtist?.slug?.current && (
                     <ClientSideRoute
-                      route={`/music-artists/${(song.primaryArtist as any).slug.current}`}
+                      route={`/music-artists/${song.primaryArtist.slug.current}`}
                     >
                       <div className='group flex cursor-pointer items-center gap-3'>
-                        {(song.primaryArtist as any)?.image && (
+                        {song.primaryArtist?.image && (
                           <div className='h-12 w-12 overflow-hidden rounded-full'>
                             <Image
-                              src={urlForImage((song.primaryArtist as any)?.image)?.url() ?? ''}
-                              alt={(song.primaryArtist as any)?.name ?? 'Artist'}
+                              src={urlForImage(song.primaryArtist?.image)?.url() ?? ''}
+                              alt={song.primaryArtist?.name ?? 'Artist'}
                               width={48}
                               height={48}
                               className='h-full w-full object-cover'
@@ -351,8 +351,8 @@ export default async function LyricsPage({ params }: Props) {
                         )}
                         <div>
                           <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                            {(song.primaryArtist as any)?.stageName ??
-                              (song.primaryArtist as any)?.name}
+                            {song.primaryArtist?.stageName ??
+                              song.primaryArtist?.name}
                           </h4>
                           <p className='text-sm text-slate-600 dark:text-slate-400'>
                             Primary Artist
@@ -364,17 +364,17 @@ export default async function LyricsPage({ params }: Props) {
 
                   {song.featuredArtists?.map(
                     (artist) =>
-                      (artist as any)?.slug?.current && (
+                      artist?.slug?.current && (
                         <ClientSideRoute
-                          key={(artist as any)._id}
-                          route={`/music-artists/${(artist as any).slug.current}`}
+                          key={artist._id}
+                          route={`/music-artists/${artist.slug.current}`}
                         >
                           <div className='group flex cursor-pointer items-center gap-3'>
-                            {(artist as any)?.image && (
+                            {artist?.image && (
                               <div className='h-12 w-12 overflow-hidden rounded-full'>
                                 <Image
-                                  src={urlForImage((artist as any)?.image)?.url() ?? ''}
-                                  alt={(artist as any)?.name ?? 'Artist'}
+                                  src={urlForImage(artist?.image)?.url() ?? ''}
+                                  alt={artist?.name ?? 'Artist'}
                                   width={48}
                                   height={48}
                                   className='h-full w-full object-cover'
@@ -383,7 +383,7 @@ export default async function LyricsPage({ params }: Props) {
                             )}
                             <div>
                               <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                                {(artist as any)?.stageName ?? (artist as any)?.name}
+                                {artist?.stageName ?? artist?.name}
                               </h4>
                               <p className='text-sm text-slate-600 dark:text-slate-400'>
                                 Featured
@@ -406,8 +406,8 @@ export default async function LyricsPage({ params }: Props) {
                     {song.contributingArtists.map((contributor, index) => (
                       <div key={index} className='flex items-center justify-between'>
                         <span className='text-sm text-slate-900 dark:text-slate-100'>
-                          {(contributor.artist as any)?.stageName ??
-                            (contributor.artist as any)?.name ??
+                          {contributor.artist?.stageName ??
+                            contributor.artist?.name ??
                             'Unknown'}
                         </span>
                         <span className='text-sm text-slate-600 dark:text-slate-400'>
