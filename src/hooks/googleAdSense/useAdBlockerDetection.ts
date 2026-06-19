@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { adBlockerDetector } from '@/lib/googleAdSense/consent/adBlockerDetection';
 
-export function useAdBlockerDetection() {
+export default function useAdBlockerDetection() {
   const [detected, setDetected] = useState(false);
   const [loading, setLoading] = useState(true);
 

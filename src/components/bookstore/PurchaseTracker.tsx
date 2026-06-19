@@ -2,7 +2,7 @@
 // Fires a GA4 'purchase' event once when a confirmed order loads.
 
 import { useEffect, useRef } from 'react';
-import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 export interface GA4Item {
   item_id: string;

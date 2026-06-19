@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-export function useAsyncError() {
+export default function useAsyncError() {
   const [, setError] = React.useState();
 
   return React.useCallback((error: Error) => {

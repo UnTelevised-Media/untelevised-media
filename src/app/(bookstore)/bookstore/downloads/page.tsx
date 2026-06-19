@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface DownloadRecord {
   id: string;

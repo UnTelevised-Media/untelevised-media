@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface Props {
   event: string;

@@ -4,7 +4,7 @@
 
 import React, { useState } from 'react';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
-import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface FormData {
   firstName: string;

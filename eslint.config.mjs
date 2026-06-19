@@ -30,8 +30,9 @@ export default [
       '.claude/**',
     ],
   },
-  // Global settings for boundaries plugin
+  // Main configuration
   {
+    files: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.js', 'src/**/*.jsx'],
     settings: {
       'boundaries/include': ['src/**/*.ts', 'src/**/*.tsx'],
       'boundaries/elements': [
@@ -85,10 +86,6 @@ export default [
         },
       ],
     },
-  },
-  // Main configuration
-  {
-    files: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.js', 'src/**/*.jsx'],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2023,

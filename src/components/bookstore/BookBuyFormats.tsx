@@ -6,7 +6,7 @@
 import { useState, useEffect, useRef } from 'react';
 import type { SanityBook, SanityBookFormat, GiftOptions } from '@/models/types/bookstore';
 import getStripeIdForFormat from '@/util/stripeUtils';
-import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 import AddToCartButton from './AddToCartButton';
 import BuyNowButton from './BuyNowButton';
 import GiftToggle from './GiftToggle';

@@ -5,7 +5,7 @@
 
 import { Star } from 'lucide-react';
 import { useWishlist } from '@/hooks/bookstore/useWishlist';
-import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 import type { WishlistEntry } from '@/services/storage/wishlist';
 
 type WishlistButtonProps = Omit<WishlistEntry, 'addedAt'> & {

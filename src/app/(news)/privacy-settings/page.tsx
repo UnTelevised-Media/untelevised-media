@@ -17,7 +17,7 @@ import {
 import { useConsent } from '@/hooks/googleAdSense/useConsent';
 import { COOKIE_CATEGORIES } from '@/models/types/consent';
 import { privacyStorage } from '@/lib/googleAdSense/consent/storage';
-import { useAdBlockerDetection } from '@/hooks/googleAdSense/useAdBlockerDetection';
+import useAdBlockerDetection from '@/hooks/googleAdSense/useAdBlockerDetection';
 
 function PrivacySettingsPage() {
   const { preferences, status, updatePreferences } = useConsent();

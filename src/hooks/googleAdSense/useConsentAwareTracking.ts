@@ -3,7 +3,7 @@
 import * as Sentry from '@sentry/nextjs';
 import { useConsentCheck } from './useConsent';
 
-export function useConsentAwareTracking() {
+export default function useConsentAwareTracking() {
   const { canUseAnalytics, canUseMarketing } = useConsentCheck();
 
   const trackEvent = (eventName: string, parameters?: Record<string, unknown>) => {

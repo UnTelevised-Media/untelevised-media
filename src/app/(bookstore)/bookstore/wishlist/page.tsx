@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useWishlist } from '@/hooks/bookstore/useWishlist';
 import WishlistButton from '@/components/bookstore/WishlistButton';
-import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 export default function WishlistPage() {
   const { wishlist, loading, ready } = useWishlist();

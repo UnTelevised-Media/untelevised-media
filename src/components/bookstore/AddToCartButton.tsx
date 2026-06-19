@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import { useCart, buildCartItem } from '@/hooks/bookstore/useCart';
-import { useConsentAwareTracking } from '@/hooks/googleAdSense/useConsentAwareTracking';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 import type { SanityBook, SanityBookFormat } from '@/models/types/bookstore';
 
 interface Props {
