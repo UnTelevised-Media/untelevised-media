@@ -89,7 +89,7 @@ export default defineType({
           title: 'Code',
           type: 'text',
           description: 'The actual code content to display',
-          validation: (Rule: any) => Rule.required(),
+          validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'language',
@@ -137,7 +137,7 @@ export default defineType({
           title: 'Diagram Code',
           type: 'text',
           description: 'Mermaid diagram code for creating flowcharts, sequences, etc.',
-          validation: (Rule: any) => Rule.required(),
+          validation: (Rule) => Rule.required(),
         }),
       ],
       preview: {
@@ -220,7 +220,7 @@ export default defineType({
           type: 'url',
           description:
             'The full URL of the iframe source (e.g., https://abc7chicago.com/video/embed?pid=...)',
-          validation: (Rule: any) => Rule.required().uri({ scheme: ['http', 'https'] }),
+          validation: (Rule) => Rule.required().uri({ scheme: ['http', 'https'] }),
         }),
         defineField({
           name: 'width',
@@ -280,7 +280,7 @@ export default defineType({
           type: 'reference',
           to: [{ type: 'factCheck' }],
           description: 'Select a published fact-check to embed inline.',
-          validation: (Rule: any) => Rule.required(),
+          validation: (Rule) => Rule.required(),
         }),
       ],
       preview: {
