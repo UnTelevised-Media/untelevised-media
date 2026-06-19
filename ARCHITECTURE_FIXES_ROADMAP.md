@@ -1,5 +1,29 @@
 # Architecture Fixes - Implementation Roadmap
 
+## 🎯 User Priorities (@Digital-Alchemyst)
+
+This roadmap has been updated to reflect your specific notes from ARCHITECTURE_AUDIT.md:
+
+1. **Move visual components from util/** to appropriate layers
+   - Double check consentAwareGoogleAdSense (may be leftover from hooks extraction)
+   - Move googleAdSense.tsx to components layer
+   - Move LiveVisualEditing.tsx to lib/sanity/components/ (custom for Sanity)
+
+2. **Create lib/sanity/components/ folder** for visual customization components
+   - Move PreviewLink.tsx from components/sanity/ to lib/sanity/components/
+   - Keep Sanity-specific visual components in infrastructure layer
+   - Cleaner separation: lib handles Sanity setup + visual customization
+
+3. **Consolidate ads to components/googleAdSense/**
+   - Rename ads/ → googleAdSense/ (matches lib naming structure)
+   - Move googleAds/LargeAdCard.tsx here
+   - Single source of truth for all Google AdSense visual components
+
+4. **Skip Issue #5** (component imports from server actions)
+   - This is acceptable pattern for smart components - no changes needed
+
+---
+
 ## Quick Start
 
 Current State: **6/10 - Needs Critical Fixes**
@@ -15,24 +39,36 @@ These must be fixed before the codebase grows further. They create architectural
 ### Fix #1.1: Move consentAwareGoogleAdSense.tsx
 
 **Current**: `src/util/consentAwareGoogleAdSense.tsx`
-**Problem**: React component with hooks in utility layer
+**Problem**: React component with hooks in utility layer (leftover from hooks extraction)
+**User Note**: "Double check - seems to be left over from extracting to /hooks"
 
 **Steps**:
-1. Create: `src/components/ads/ConsentAwareGoogleAdSense.tsx`
-2. Copy content from `src/util/consentAwareGoogleAdSense.tsx`
-3. Update imports in new location:
+1. **VERIFY**: Check if this was accidentally left in util/ after extracting to hooks
+   ```bash
+   grep -r "consentAwareGoogleAdSense" src/hooks/
+   ```
+   
+2. Create: `src/components/googleAdSense/ConsentAwareGoogleAdSense.tsx`
+   (Note: Using `googleAdSense/` directory per user preference)
+
+3. Copy content from `src/util/consentAwareGoogleAdSense.tsx`
+
+4. Update imports in new location:
    ```typescript
    // ✓ Correct imports
    import { useConsentCheck } from '@/hooks/useConsent';
    import GoogleAdSense from './GoogleAdSense';
    ```
-4. Update files importing the old location:
+
+5. Update files importing the old location:
    - `src/app/(music)/layout.tsx`
    - `src/app/(news)/layout.tsx`
    - Change: `from '@/util/consentAwareGoogleAdSense'`
-   - To: `from '@/components/ads/ConsentAwareGoogleAdSense'`
-5. Delete: `src/util/consentAwareGoogleAdSense.tsx`
-6. Verify TypeScript passes: `pnpm tsc --noEmit`
+   - To: `from '@/components/googleAdSense/ConsentAwareGoogleAdSense'`
+
+6. Delete: `src/util/consentAwareGoogleAdSense.tsx`
+
+7. Verify TypeScript passes: `pnpm tsc --noEmit`
 
 **Impact**: Eliminates upward dependency (util → hooks)
 
@@ -42,79 +78,111 @@ These must be fixed before the codebase grows further. They create architectural
 
 **Current**: `src/util/googleAdSense.tsx`
 **Problem**: React component in utility layer
+**User Note**: "Move visual components"
 
 **Steps**:
-1. Create: `src/components/ads/GoogleAdSense.tsx`
+1. Create: `src/components/googleAdSense/GoogleAdSense.tsx`
+   (Note: Using `googleAdSense/` directory per user preference)
+
 2. Copy content from `src/util/googleAdSense.tsx`
+
 3. Check and update any internal imports (should only use @/lib, @/models)
+
 4. Find all imports of old location:
    ```bash
    grep -r "from '@/util/googleAdSense'" src/
    ```
-5. Update imports to: `from '@/components/ads/GoogleAdSense'`
+
+5. Update imports to: `from '@/components/googleAdSense/GoogleAdSense'`
+
 6. Delete: `src/util/googleAdSense.tsx`
+
 7. Test: `pnpm tsc --noEmit && pnpm build`
+
+**Result**: All Google AdSense visual components centralized in `components/googleAdSense/`
 
 ---
 
-### Fix #1.3: Move LiveVisualEditing.tsx
+### Fix #1.3: Move LiveVisualEditing.tsx to lib/sanity/components/
 
 **Current**: `src/util/LiveVisualEditing.tsx`
 **Problem**: React component in utility layer
+**User Note**: "inside /lib/sanity make a components folder move any components like this that are usual for visual customization in sanity to this location"
 
 **Steps**:
-1. Create: `src/components/sanity/LiveVisualEditing.tsx`
-2. Copy content from `src/util/LiveVisualEditing.tsx`
-3. Update imports (likely from @/lib/sanity)
-4. Find all imports:
+1. Create directory: `src/lib/sanity/components/`
+
+2. Create: `src/lib/sanity/components/LiveVisualEditing.tsx`
+
+3. Copy content from `src/util/LiveVisualEditing.tsx`
+
+4. Update imports (likely from @/lib/sanity)
+
+5. Move `PreviewLink.tsx` to `src/lib/sanity/components/` as well
+   ```bash
+   # Move existing component
+   mv src/components/sanity/PreviewLink.tsx src/lib/sanity/components/PreviewLink.tsx
+   ```
+
+6. Find all imports:
    ```bash
    grep -r "from '@/util/LiveVisualEditing'" src/
+   grep -r "from '@/components/sanity/PreviewLink'" src/
    ```
-5. Update to: `from '@/components/sanity/LiveVisualEditing'`
-6. Delete: `src/util/LiveVisualEditing.tsx`
-7. Verify: `pnpm tsc --noEmit`
+
+7. Update to:
+   - `from '@/lib/sanity/components/LiveVisualEditing'`
+   - `from '@/lib/sanity/components/PreviewLink'`
+
+8. Delete: `src/util/LiveVisualEditing.tsx`
+
+9. Verify: `pnpm tsc --noEmit`
+
+**Result**: Sanity-specific visual components centralized in `lib/sanity/components/`
 
 ---
 
-### Fix #1.4: Remove lib → components dependency
+### Fix #1.4: Remove lib → components dependency (Updated)
 
 **Current**: `src/lib/sanity/sanity.config.ts`
 **Problem**: Library layer depends on presentation layer
+**User Note**: "Create components folder in lib/sanity for visual customization components"
 
-**Step A: Extract preview logic to lib layer**
+**Step A: Update PreviewLink location**
 
-1. Create: `src/lib/sanity/preview.ts`
-   ```typescript
-   // Extract from @/components/sanity/PreviewLink
-   export function generatePreviewUrl(doc: any, documentType: string) {
-     // ... implementation
-   }
-   ```
+1. PreviewLink should now be at: `src/lib/sanity/components/PreviewLink.tsx`
+   (Moved in Fix #1.3)
 
-2. Copy the `generatePreviewUrl` function body from `PreviewLink.tsx`
-
-3. Update: `src/lib/sanity/sanity.config.ts`
+2. Update: `src/lib/sanity/sanity.config.ts`
    ```typescript
    // Change from:
    import { generatePreviewUrl } from '@/components/sanity/PreviewLink';
    
    // To:
-   import { generatePreviewUrl } from './preview';
+   import { generatePreviewUrl } from './components/PreviewLink';
    ```
 
-**Step B: Update component to use lib version**
+3. Verify: `pnpm tsc --noEmit && pnpm build`
 
-4. Update: `src/components/sanity/PreviewLink.tsx`
+**Step B: Create lib/sanity/preview.ts for pure logic**
+
+4. Optional: If you want pure logic separate from component:
+   ```bash
+   Create: src/lib/sanity/preview.ts
+   export function generatePreviewUrl(doc: any, documentType: string) {
+     // ... logic
+   }
+   ```
+
+5. Update `src/lib/sanity/components/PreviewLink.tsx`:
    ```typescript
-   // Add import from lib:
-   import { generatePreviewUrl } from '@/lib/sanity/preview';
-   
-   // Use it in component
+   import { generatePreviewUrl } from '../preview';
    ```
 
-5. Verify: `pnpm tsc --noEmit && pnpm build`
-
-**Result**: Library layer no longer imports from components
+**Result**: 
+- Library layer no longer imports from presentation layer
+- Sanity visual components organized in lib/sanity/components/
+- Pure preview logic available at lib/sanity/preview.ts
 
 ---
 
@@ -122,7 +190,7 @@ These must be fixed before the codebase grows further. They create architectural
 
 These improve code quality and reduce confusion.
 
-### Fix #2.1: Consolidate Ad Components
+### Fix #2.1: Consolidate Ad Components to googleAdSense/
 
 **Current State**:
 ```
@@ -137,18 +205,41 @@ src/components/googleAds/     (1 file)
   └── LargeAdCard.tsx
 ```
 
-**Steps**:
-1. Move `LargeAdCard.tsx` to `src/components/ads/`
-2. Update all imports:
-   ```bash
-   grep -r "from '@/components/googleAds" src/
-   ```
-   Change to: `from '@/components/ads/LargeAdCard'`
-3. Delete empty directory: `src/components/googleAds/`
-4. Update index exports if any exist
-5. Test: `pnpm tsc --noEmit`
+**User Note**: "rename this to match lib" - consolidate everything into `components/googleAdSense/`
 
-**Result**: Single source of truth for ad components
+**Steps**:
+1. Rename: `src/components/ads/` → `src/components/googleAdSense/`
+   (Matches the lib/googleAdSense structure)
+
+2. Move `LargeAdCard.tsx` to `src/components/googleAdSense/`
+
+3. Update all imports:
+   ```bash
+   grep -r "from '@/components/ads/" src/
+   grep -r "from '@/components/googleAds/" src/
+   ```
+   Change to: `from '@/components/googleAdSense/[filename]'`
+
+4. Delete empty directory: `src/components/googleAds/`
+
+5. Update any index exports if they exist
+
+6. Test: `pnpm tsc --noEmit`
+
+**Final Structure**:
+```
+src/components/googleAdSense/  ← Single source of truth
+  ├── AdManager.tsx
+  ├── BannerAd.tsx
+  ├── ConsentAwareGoogleAdSense.tsx
+  ├── GoogleAdSense.tsx
+  ├── InFeedAd.tsx
+  ├── LargeAdCard.tsx
+  ├── RectangleAd.tsx
+  └── SidebarAd.tsx
+```
+
+**Result**: Single source of truth for ad components, consistent with lib structure
 
 ---
 
@@ -297,16 +388,44 @@ After completing all fixes, verify:
 - [ ] `pnpm build` - Production build succeeds
 - [ ] `pnpm test` - All tests pass
 
-### Architecture
+### Architecture (Per User Priorities)
+- [ ] No React components remain in src/util/
 - [ ] No imports from util/ importing hooks/
-- [ ] No lib/ importing from components/
-- [ ] No util/ with React dependencies
+- [ ] No lib/ importing from components/ (except lib/sanity has its own components/)
+- [ ] lib/sanity/components/ contains all Sanity visual customization
+- [ ] components/googleAdSense/ is single source for ad components
 - [ ] Util functions are pure (no side effects)
 - [ ] All services in services/ directory
 - [ ] All server actions in server/actions/
 
+### Directory Structure Verification
+```
+✓ src/util/
+  - No .tsx files (all pure .ts)
+  - No imports from hooks/, services/, or components/
+
+✓ src/lib/sanity/components/
+  - LiveVisualEditing.tsx
+  - PreviewLink.tsx
+
+✓ src/components/googleAdSense/
+  - AdManager.tsx
+  - BannerAd.tsx
+  - ConsentAwareGoogleAdSense.tsx
+  - GoogleAdSense.tsx
+  - InFeedAd.tsx
+  - LargeAdCard.tsx
+  - RectangleAd.tsx
+  - SidebarAd.tsx
+
+✓ Deleted directories:
+  - src/components/ads/ (merged into googleAdSense/)
+  - src/components/googleAds/ (merged into googleAdSense/)
+```
+
 ### Documentation
-- [ ] ARCHITECTURE.md created and updated
+- [ ] ARCHITECTURE_AUDIT.md updated with user priorities
+- [ ] ARCHITECTURE_FIXES_ROADMAP.md implemented
 - [ ] Component README.md exists
 - [ ] ESLint rules configured
 - [ ] Team educated on patterns
@@ -315,40 +434,47 @@ After completing all fixes, verify:
 
 ## Commit Strategy
 
-Recommended commits:
+Recommended commits (reflecting user priorities):
 
 ```bash
-# Commit 1: Move ad components
-git commit -m "refactor: move React components from util/ to components/
+# Commit 1: Move React components from util/ to correct locations
+git commit -m "refactor: move React components from util/ to lib and components layers
 
-- Move consentAwareGoogleAdSense.tsx to components/ads/
-- Move googleAdSense.tsx to components/ads/
-- Move LiveVisualEditing.tsx to components/sanity/
-- Update imports across 6 files
-- Delete old util files"
+- Move consentAwareGoogleAdSense.tsx to components/googleAdSense/
+- Move googleAdSense.tsx to components/googleAdSense/
+- Move LiveVisualEditing.tsx to lib/sanity/components/
+- Move PreviewLink.tsx to lib/sanity/components/
+- Update imports across 6+ files
+- Delete old util files
+- Eliminates util → hooks upward dependency"
 
-# Commit 2: Fix lib/component dependency
-git commit -m "refactor: eliminate lib → components dependency
+# Commit 2: Extract preview logic and consolidate Sanity components
+git commit -m "refactor: centralize Sanity-specific components and logic
 
 - Extract generatePreviewUrl to lib/sanity/preview.ts
-- Update sanity.config.ts to import from lib
-- Update PreviewLink.tsx to import from lib
-- Remove circular dependency risk"
+- Organize visual customization components in lib/sanity/components/
+- Update sanity.config.ts to import from lib (not components)
+- Remove lib → components circular dependency
+- Consolidate Sanity visual components per user structure"
 
-# Commit 3: Consolidate ad components
-git commit -m "refactor: consolidate ad components into single directory
+# Commit 3: Consolidate ad components to match lib structure
+git commit -m "refactor: consolidate ad components into single googleAdSense directory
 
-- Move LargeAdCard.tsx to components/ads/
-- Delete empty components/googleAds/ directory
-- Update imports across 3 files"
+- Rename components/ads/ → components/googleAdSense/
+- Move LargeAdCard.tsx to components/googleAdSense/
+- Consolidate all Google AdSense components in one location
+- Delete empty components/googleAds/ and components/ads/ directories
+- Update imports across all files
+- Matches lib/googleAdSense/ naming structure"
 
 # Commit 4: Documentation and tooling
 git commit -m "docs: add architecture guidelines and eslint boundaries
 
-- Add ARCHITECTURE.md with layer guidelines
+- Update ARCHITECTURE_AUDIT.md with user priorities
 - Add src/components/README.md with patterns
 - Configure eslint-plugin-boundaries to prevent future violations
-- Document smart vs dumb component patterns"
+- Document smart vs dumb component patterns
+- Document lib/sanity/components/ usage guidelines"
 ```
 
 ---
