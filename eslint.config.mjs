@@ -106,7 +106,7 @@ export default [
       'prefer-template': 'error',
       'no-unused-vars': 'off', // Disabled in favor of @typescript-eslint/no-unused-vars
       'no-duplicate-imports': 'warn',
-      'no-empty-function': 'off',
+      'no-empty-function': 'error',
       'no-explicit-any': 'off', // Disabled in favor of @typescript-eslint/no-explicit-any
       'no-extra-parens': 'off',
       'no-lone-blocks': 'warn',
@@ -129,7 +129,7 @@ export default [
       '@typescript-eslint/prefer-optional-chain': 'warn',
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/await-thenable': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {

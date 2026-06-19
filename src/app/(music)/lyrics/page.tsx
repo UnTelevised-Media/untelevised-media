@@ -133,7 +133,7 @@ export default async function LyricsIndexPage() {
                               <span>
                                 {' '}
                                 feat.{' '}
-                                {((song as any)?.featuredArtists ?? [])
+                                {(song?.featuredArtists ?? [])
                                   .map((a: any) => (a as any)?.stageName ?? (a as any)?.name)
                                   .join(', ')}
                               </span>

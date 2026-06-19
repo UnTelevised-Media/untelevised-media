@@ -61,15 +61,15 @@ export default async function LiveEventPage({ params }: Props) {
 
   const allEvents = [
     // Check if liveEvent.relatedArticles is an array. If Truthy map over it and return an array of objects with the source property set to the source of the related article.
-    ...(Array.isArray((liveEvent as any)?.relatedArticles)
-      ? (liveEvent as any).relatedArticles.map((article: any) => ({
+    ...(Array.isArray(liveEvent?.relatedArticles)
+      ? liveEvent.relatedArticles.map((article: any) => ({
           ...article,
           source: 'relatedArticles',
         }))
       : []),
     // Check if liveEvent.keyEvent is an array. If Truthy map over it and return an array of objects with the source property set to the source of the key event.
-    ...(Array.isArray((liveEvent as any)?.keyEvent)
-      ? (liveEvent as any).keyEvent.map((event: any) => ({
+    ...(Array.isArray(liveEvent?.keyEvent)
+      ? liveEvent.keyEvent.map((event: any) => ({
           ...event,
           source: 'keyEvent',
         }))
@@ -101,18 +101,18 @@ export default async function LiveEventPage({ params }: Props) {
   const eventSchema = {
     '@context': 'https://schema.org',
     '@type': 'Event',
-    name: (liveEvent as any)?.title,
-    description: (liveEvent as any)?.description,
-    startDate: (liveEvent as any)?.eventDate,
-    endDate: (liveEvent as any)?.endDate ?? undefined,
+    name: liveEvent?.title,
+    description: liveEvent?.description,
+    startDate: liveEvent?.eventDate,
+    endDate: liveEvent?.endDate ?? undefined,
     eventStatus: liveEvent.eventStatus
       ? (schemaEventStatusMap[liveEvent.eventStatus] ?? 'https://schema.org/EventScheduled')
       : liveEvent.isCurrentEvent
         ? 'https://schema.org/EventScheduled'
         : 'https://schema.org/EventCompleted',
     eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
-    location: (liveEvent as any)?.location
-      ? { '@type': 'Place', name: (liveEvent as any)?.location }
+    location: liveEvent?.location
+      ? { '@type': 'Place', name: liveEvent?.location }
       : { '@type': 'VirtualLocation', url: `https://www.untelevised.media/live-event/${slug}/` },
     image: getSanityOgImageUrl(liveEvent.mainImage),
     organizer: {
@@ -180,26 +180,26 @@ export default async function LiveEventPage({ params }: Props) {
                   </span>
                 )}
               </div>
-              <h1 className='w-full text-3xl font-bold'>{(liveEvent as any)?.title}</h1>
+              <h1 className='w-full text-3xl font-bold'>{liveEvent?.title}</h1>
               {liveEvent.subtitle && (
                 <p className='text-lg text-slate-500 dark:text-slate-400'>{liveEvent.subtitle}</p>
               )}
 
               {/* Location & Dates */}
               <div className='flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400'>
-                {(liveEvent as any)?.location && <span>ðŸ“ {(liveEvent as any)?.location}</span>}
+                {liveEvent?.location && <span>ðŸ“ {liveEvent?.location}</span>}
                 <span>
-                  {formatDate((liveEvent as any)?.eventDate ?? (liveEvent as any)?._createdAt)}
+                  {formatDate(liveEvent?.eventDate ?? liveEvent?._createdAt)}
                 </span>
-                {(liveEvent as any)?.endDate && (
-                  <span>â€“ {formatDate((liveEvent as any)?.endDate)}</span>
+                {liveEvent?.endDate && (
+                  <span>â€“ {formatDate(liveEvent?.endDate)}</span>
                 )}
               </div>
             </div>
             {/* Description  */}
             <div className='w-full'>
               <p className='w-full italic lg:text-xs xl:text-base'>
-                {(liveEvent as any)?.description}
+                {liveEvent?.description}
               </p>
             </div>
           </div>
@@ -207,7 +207,7 @@ export default async function LiveEventPage({ params }: Props) {
 
         <SocialShare
           url={`https://untelevised.media/live-event/${slug}`}
-          title={(liveEvent as any)?.title}
+          title={liveEvent?.title}
         />
 
         <div className='flex flex-col items-center justify-center space-x-4'>
@@ -217,7 +217,7 @@ export default async function LiveEventPage({ params }: Props) {
               width='720'
               height='420'
               className='rounded-lg border border-untele bg-slate-700/30'
-              src={`${(liveEvent as any)?.videoLink}`}
+              src={`${liveEvent?.videoLink}`}
               title='YouTube video player'
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
             />

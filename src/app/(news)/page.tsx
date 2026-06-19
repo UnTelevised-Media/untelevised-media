@@ -269,9 +269,9 @@ export default async function HomePage() {
                       <p className='mb-3 line-clamp-2 flex-1 text-xs text-slate-600 dark:text-slate-400'>
                         {article.description}
                       </p>
-                      {(article as any).location && (
+                      {article.location && (
                         <p className='mb-3 text-xs font-medium text-slate-500 dark:text-slate-400'>
-                          📍 {(article as any).location}
+                          📍 {article.location}
                         </p>
                       )}
                       <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
@@ -280,7 +280,7 @@ export default async function HomePage() {
                         </span>
                         <div className='flex items-center gap-1'>
                           <span>{formatDate(getArticleDate(article))}</span>
-                          <span>· {(article as any).readingTimeMinutes ?? 1} min read</span>
+                          <span>· {article.readingTimeMinutes ?? 1} min read</span>
                         </div>
                       </div>
                     </div>

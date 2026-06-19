@@ -413,17 +413,17 @@ export default async function AlbumPage({ params }: Props) {
 
                   {album.featuredArtists?.map(
                     (artist) =>
-                      (artist as any)?.slug?.current && (
+                      artist?.slug?.current && (
                         <ClientSideRoute
-                          key={(artist as any)._id}
-                          route={`/music-artists/${(artist as any).slug.current}`}
+                          key={artist._id}
+                          route={`/music-artists/${artist.slug.current}`}
                         >
                           <div className='group flex cursor-pointer items-center gap-3'>
-                            {(artist as any)?.image && (
+                            {artist?.image && (
                               <div className='h-12 w-12 overflow-hidden rounded-full'>
                                 <Image
-                                  src={urlForImage((artist as any)?.image)?.url() ?? ''}
-                                  alt={(artist as any)?.name ?? 'Artist'}
+                                  src={urlForImage(artist?.image)?.url() ?? ''}
+                                  alt={artist?.name ?? 'Artist'}
                                   width={48}
                                   height={48}
                                   className='h-full w-full object-cover'
@@ -432,7 +432,7 @@ export default async function AlbumPage({ params }: Props) {
                             )}
                             <div>
                               <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                                {(artist as any)?.stageName ?? (artist as any)?.name}
+                                {artist?.stageName ?? artist?.name}
                               </h4>
                               <p className='text-sm text-slate-600 dark:text-slate-400'>
                                 Featured
