@@ -66,7 +66,11 @@ export function useWishlist(): UseWishlistReturn {
       setReady(true);
     }
 
-    void load();
+    load().catch((error) => {
+      console.error('Failed to load wishlist:', error);
+      setLoading(false);
+      setReady(true);
+    });
   }, [isSignedIn, clerkLoaded]);
 
   const isWishlisted = useCallback(

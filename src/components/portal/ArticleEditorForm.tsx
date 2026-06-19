@@ -545,7 +545,9 @@ export default function ArticleEditorForm({
       if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key === 's') {
         e.preventDefault();
 
-        void handleSubmit(handleSaveDraft as any)();
+        handleSubmit(handleSaveDraft as any)().catch((error) => {
+          console.error('Failed to save draft via keyboard shortcut:', error);
+        });
       }
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'P') {
         e.preventDefault();

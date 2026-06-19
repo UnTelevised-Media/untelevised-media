@@ -26,8 +26,12 @@ export default function BookmarkButton({
   const { isBookmarked, toggle, ready } = useBookmarks();
   const saved = isBookmarked(slug);
 
-  const handleToggle = () => {
-    void toggle({ slug, title, description, imageUrl, authorName, publishedAt, readingTime });
+  const handleToggle = async () => {
+    try {
+      await toggle({ slug, title, description, imageUrl, authorName, publishedAt, readingTime });
+    } catch (error) {
+      console.error('Failed to toggle bookmark:', error);
+    }
   };
 
   // Render stable placeholder before hook is ready (prevents hydration mismatch / layout shift)

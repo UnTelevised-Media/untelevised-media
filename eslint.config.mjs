@@ -101,27 +101,34 @@ export default [
     },
     rules: {
       ...js.configs.recommended.rules,
+      'prefer-arrow-callback': 'error',
+      'prefer-const': 'warn',
+      'prefer-template': 'error',
       'no-unused-vars': 'off', // Disabled in favor of @typescript-eslint/no-unused-vars
-
       'no-duplicate-imports': 'warn',
       'no-empty-function': 'off',
       'no-explicit-any': 'off', // Disabled in favor of @typescript-eslint/no-explicit-any
       'no-extra-parens': 'off',
       'no-lone-blocks': 'warn',
-      'prefer-arrow-callback': 'error',
-      'prefer-const': 'warn',
-      'prefer-template': 'error',
+      'no-unused-expressions': 'error',
       'no-console': [
         'warn',
         {
           allow: ['warn', 'error'],
         },
       ],
-      'no-unused-expressions': 'error',
       eqeqeq: ['error', 'always'],
       curly: ['error', 'all'],
       'import/no-named-as-default': 'off',
       'import/prefer-default-export': 'error',
+      '@next/next/no-img-element': 'warn',
+      '@next/next/no-sync-scripts': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+      '@typescript-eslint/prefer-optional-chain': 'warn',
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/await-thenable': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
@@ -130,12 +137,8 @@ export default [
           varsIgnorePattern: '^_',
         },
       ],
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
-      '@typescript-eslint/prefer-optional-chain': 'warn',
-      '@typescript-eslint/no-floating-promises': 'error',
-      '@typescript-eslint/await-thenable': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'error',
       'react/function-component-definition': [
         'error',
         {
@@ -143,10 +146,6 @@ export default [
           unnamedComponents: 'arrow-function',
         },
       ],
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-      '@next/next/no-img-element': 'warn',
-      '@next/next/no-sync-scripts': 'warn',
       'boundaries/no-unknown': 'off',
       'boundaries/no-unknown-files': 'off',
       'boundaries/element-types': [

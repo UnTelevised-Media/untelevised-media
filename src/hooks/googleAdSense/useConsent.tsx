@@ -47,7 +47,12 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
       }
     };
 
-    void initializeConsent();
+    initializeConsent().catch((error) => {
+      console.error('Unexpected error initializing consent:', error);
+      setShowBanner(true);
+      setStatus('pending');
+      setIsLoading(false);
+    });
   }, []);
 
   // Determine consent status based on preferences

@@ -44,16 +44,18 @@ export default function LargeAdCard({
     pushed.current = true;
 
     const ins = adRef.current;
-    void adsenseManager.pushAd(ins).then((success) => {
-      if (!success) {
-        setAdStatus('error');
-        return;
-      }
-      setAdStatus('pushed');
-      const mo = new MutationObserver(() => {
-        const s = ins.getAttribute('data-ad-status');
-        if (s === 'filled') {
-          setAdStatus('filled');
+    adsenseManager
+      .pushAd(ins)
+      .then((success) => {
+        if (!success) {
+          setAdStatus('error');
+          return;
+        }
+        setAdStatus('pushed');
+        const mo = new MutationObserver(() => {
+          const s = ins.getAttribute('data-ad-status');
+          if (s === 'filled') {
+            setAdStatus('filled');
           mo.disconnect();
         } else if (s === 'unfilled') {
           setAdStatus('unfilled');
@@ -62,7 +64,11 @@ export default function LargeAdCard({
       });
       mo.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
       setTimeout(() => mo.disconnect(), 15_000);
-    });
+    })
+      .catch((error) => {
+        console.error('Failed to push ad:', error);
+        setAdStatus('error');
+      });
   }, [isClient, isDev, hasConsent, canUseMarketing, slot]);
 
   if (!isClient) {

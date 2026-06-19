@@ -215,7 +215,11 @@ function TimelineJSVisualization({
       }
     };
 
-    void loadTimelineJS();
+    loadTimelineJS().catch((error) => {
+      console.error('Failed to load TimelineJS library:', error);
+      setError('Failed to initialize TimelineJS');
+      setIsLoading(false);
+    });
   }, []);
 
   // Initialize timeline when script is loaded

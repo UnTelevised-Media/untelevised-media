@@ -25,7 +25,12 @@ export default function useAdBlockerDetection() {
       }
     };
 
-    void detect();
+    detect().catch((error) => {
+      console.error('Unexpected error in ad blocker detection:', error);
+      if (mounted) {
+        setLoading(false);
+      }
+    });
 
     return () => {
       mounted = false;

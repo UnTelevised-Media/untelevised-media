@@ -513,11 +513,15 @@ export function BriefPanel({
     if (!hasNullKeys) {
       return;
     }
-    void autoRepairBrief(loadedBrief._id).then((result) => {
-      if (result.success) {
-        router.refresh();
-      }
-    });
+    autoRepairBrief(loadedBrief._id)
+      .then((result) => {
+        if (result.success) {
+          router.refresh();
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to auto-repair brief:', error);
+      });
     // Run once per loaded brief ID — repair is idempotent
   }, [loadedBrief._id, loadedBrief.stories, router]);
 

@@ -26,13 +26,17 @@ export default function WishlistButton({
   const { trackEvent } = useConsentAwareTracking();
   const saved = isWishlisted(slug);
 
-  const handleToggle = () => {
-    void toggle({ slug, title, coverImageUrl, authorName, price });
-    trackEvent(saved ? 'remove_from_wishlist' : 'add_to_wishlist', {
-      item_id: slug,
-      item_name: title,
-      price,
-    });
+  const handleToggle = async () => {
+    try {
+      await toggle({ slug, title, coverImageUrl, authorName, price });
+      trackEvent(saved ? 'remove_from_wishlist' : 'add_to_wishlist', {
+        item_id: slug,
+        item_name: title,
+        price,
+      });
+    } catch (error) {
+      console.error('Failed to toggle wishlist:', error);
+    }
   };
 
   if (!ready) {

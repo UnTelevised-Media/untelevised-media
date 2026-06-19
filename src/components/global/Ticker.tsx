@@ -144,10 +144,18 @@ function Ticker() {
       }
     };
 
-    void fetchTickerData();
+    fetchTickerData().catch((error) => {
+      console.error('Initial ticker data fetch failed:', error);
+      setError('Failed to load ticker data');
+      setIsLoading(false);
+    });
 
     // Refresh data every 5 minutes to get new content
-    const interval = setInterval(fetchTickerData, 5 * 60 * 1000);
+    const interval = setInterval(() => {
+      fetchTickerData().catch((error) => {
+        console.error('Ticker data refresh failed:', error);
+      });
+    }, 5 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, []);

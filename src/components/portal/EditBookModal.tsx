@@ -169,8 +169,11 @@ export default function EditBookModal({ book }: Props) {
     setGenreError('');
 
     setGenresLoading(true);
-    void fetchBookGenres()
+    fetchBookGenres()
       .then(setLocalGenres)
+      .catch((error) => {
+        console.error('Failed to fetch book genres:', error);
+      })
       .finally(() => setGenresLoading(false));
   }, [open]);  
 

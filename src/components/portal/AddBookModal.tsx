@@ -91,8 +91,11 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
   useEffect(() => {
     if (!open) {return;}
     setGenresLoading(true);
-    void fetchBookGenres()
+    fetchBookGenres()
       .then(setLocalGenres)
+      .catch((error) => {
+        console.error('Failed to fetch book genres:', error);
+      })
       .finally(() => setGenresLoading(false));
   }, [open]);
 

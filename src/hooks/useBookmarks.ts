@@ -76,7 +76,11 @@ export function useBookmarks(): UseBookmarksReturn {
       setReady(true);
     }
 
-    void load();
+    load().catch((error) => {
+      console.error('Failed to load bookmarks:', error);
+      setLoading(false);
+      setReady(true);
+    });
   }, [isSignedIn, clerkLoaded]);
 
   const isBookmarked = useCallback(

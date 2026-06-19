@@ -229,10 +229,15 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
     ]
       .filter(Boolean)
       .join('\n');
-    void navigator.clipboard.writeText(lines).then(() => {
-      setCopiedAddress(order.id);
-      setTimeout(() => setCopiedAddress(null), 2000);
-    });
+    navigator.clipboard
+      .writeText(lines)
+      .then(() => {
+        setCopiedAddress(order.id);
+        setTimeout(() => setCopiedAddress(null), 2000);
+      })
+      .catch((error) => {
+        console.error('Failed to copy address to clipboard:', error);
+      });
   }
 
   return (
@@ -578,7 +583,9 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                       `Cancel order ${order.order_number}? This cannot be undone.`
                                     )
                                   ) {
-                                    void updateStatus(order.id, 'cancelled');
+                                    updateStatus(order.id, 'cancelled').catch((error) => {
+                                      console.error('Failed to cancel order:', error);
+                                    });
                                   }
                                 }}
                                 disabled={isUpdating}
@@ -592,7 +599,9 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                               <button
                                 onClick={() => {
                                   if (confirm(`Refund order ${order.order_number}?`)) {
-                                    void updateStatus(order.id, 'refunded');
+                                    updateStatus(order.id, 'refunded').catch((error) => {
+                                      console.error('Failed to refund order:', error);
+                                    });
                                   }
                                 }}
                                 disabled={isUpdating}
