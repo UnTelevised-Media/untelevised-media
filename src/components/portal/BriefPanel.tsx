@@ -519,7 +519,7 @@ export function BriefPanel({
       }
     });
     // Run once per loaded brief ID — repair is idempotent
-  }, [loadedBrief._id]);
+  }, [loadedBrief._id, loadedBrief.stories, router]);
 
   async function navigateTo(index: number) {
     const target = briefList[index];

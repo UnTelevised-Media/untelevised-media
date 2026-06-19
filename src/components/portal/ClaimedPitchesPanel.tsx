@@ -8,6 +8,9 @@ import { ClaimedPitchCard, type ClaimedPitchSummary } from './ClaimedPitchCard';
 
 type AuthorFilter = 'all' | 'mine' | 'others';
 
+const URGENCY_ORDER: Record<string, number> = { breaking: 0, high: 1, medium: 2, low: 3 };
+const STATUS_ORDER: Record<string, number> = { in_progress: 0, claimed: 1, published: 2 };
+
 interface Props {
   pitches: ClaimedPitchSummary[];
   currentSanityAuthorId?: string;
@@ -16,9 +19,6 @@ interface Props {
 
 export default function ClaimedPitchesPanel({ pitches, currentSanityAuthorId, isEditorPlus }: Props) {
   const [authorFilter, setAuthorFilter] = useState<AuthorFilter>('all');
-
-  const URGENCY_ORDER: Record<string, number> = { breaking: 0, high: 1, medium: 2, low: 3 };
-  const STATUS_ORDER: Record<string, number> = { in_progress: 0, claimed: 1, published: 2 };
 
   const filtered = useMemo(() => {
     const base =

@@ -553,7 +553,7 @@ export default function ArticleEditorForm({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleSubmit, getValues]);
+  }, [handleSubmit, getValues, handleSaveDraft]);
 
   // ---------------------------------------------------------------------------
   // Render

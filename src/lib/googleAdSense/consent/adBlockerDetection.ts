@@ -91,13 +91,6 @@ export class AdBlockerDetector {
       const threshold = isDevelopment ? 4 : 3;
       const isBlocked = detectedCount >= threshold;
 
-      if (isDevelopment && isBlocked) {
-        console.info('AdBlockerDetector: Ad blocker detected in development mode');
-        console.info(
-          'AdBlockerDetector: This is normal if you have browser extensions or ad blockers enabled'
-        );
-      }
-
       return isBlocked;
     } catch (error) {
       console.warn('Ad blocker detection failed:', error);

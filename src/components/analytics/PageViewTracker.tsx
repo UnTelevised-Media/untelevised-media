@@ -13,8 +13,7 @@ export default function PageViewTracker({ event, params }: Props) {
 
   useEffect(() => {
     trackEvent(event, params);
-    // intentionally runs once on mount — params are stable at render time
-  }, []);
+  }, [event, params, trackEvent]);
 
   return null;
 }

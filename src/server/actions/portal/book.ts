@@ -118,7 +118,7 @@ export async function createBook(
     title: input.title.trim(),
     slug: { _type: 'slug', current: slug },
     status: input.status,
-    language: input.language?.trim() || 'en',
+    language: input.language?.trim() ?? 'en',
     ...(sanityAuthorId ? { author: { _type: 'reference', _ref: sanityAuthorId } } : {}),
     ...(input.isbn?.trim() ? { isbn: input.isbn.trim() } : {}),
     ...(input.pages !== null ? { pages: input.pages } : {}),

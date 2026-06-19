@@ -61,7 +61,7 @@ export default function BookBuyFormats({ book }: Props) {
         price: f.price,
       })),
     });
-  }, [trackEvent]);
+  }, [trackEvent, book._id, book.formats, book.title]);
 
   return (
     <>

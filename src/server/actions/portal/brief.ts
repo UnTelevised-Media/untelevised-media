@@ -352,8 +352,8 @@ export async function autoRepairBrief(briefId: string): Promise<Result> {
 
     const repairedStories = doc.stories.map((s) => ({
       ...s,
-      _key: s._key || makeKey(),
-      links: (s.links ?? []).map((l) => ({ ...l, _key: l._key || makeKey() })),
+      _key: s._key ?? makeKey(),
+      links: (s.links ?? []).map((l) => ({ ...l, _key: l._key ?? makeKey() })),
     }));
 
     await writeClient.patch(patchTarget).set({ stories: repairedStories }).commit();
