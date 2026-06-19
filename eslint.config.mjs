@@ -159,41 +159,13 @@ export default [
         {
           default: 'disallow',
           rules: [
-            // util can only import models
-            {
-              from: ['util'],
-              allow: ['models'],
-            },
-            // models is self-contained
-            {
-              from: ['models'],
-              allow: [],
-            },
-            // lib can import util and models
-            {
-              from: ['lib'],
-              allow: ['util', 'models'],
-            },
-            // services can import util, lib, models
-            {
-              from: ['services'],
-              allow: ['util', 'lib', 'models'],
-            },
-            // server can import util, lib, services, models
-            {
-              from: ['server'],
-              allow: ['util', 'lib', 'services', 'models'],
-            },
-            // hooks can import util, lib, services, models
-            {
-              from: ['hooks'],
-              allow: ['util', 'lib', 'services', 'models'],
-            },
-            // components can import everything (top layer)
-            {
-              from: ['components'],
-              allow: ['util', 'lib', 'services', 'server', 'hooks', 'models', 'components'],
-            },
+            { from: ['util'], allow: ['models'] },
+            { from: ['models'], allow: [] },
+            { from: ['lib'], allow: ['util', 'models'] },
+            { from: ['services'], allow: ['util', 'lib', 'models'] },
+            { from: ['server'], allow: ['util', 'lib', 'services', 'models'] },
+            { from: ['hooks'], allow: ['util', 'lib', 'services', 'models'] },
+            { from: ['components'], allow: ['util', 'lib', 'services', 'server', 'hooks', 'models', 'components'] },
           ],
         },
       ],
