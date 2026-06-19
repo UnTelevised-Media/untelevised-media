@@ -181,35 +181,5 @@ function AdBlockerMessage({ className = '' }: AdBlockerMessageProps) {
 
 export default AdBlockerMessage;
 
-// Hook for using ad blocker detection in other components
-export function useAdBlockerDetection() {
-  const [detected, setDetected] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const detect = async () => {
-      try {
-        const result = await adBlockerDetector.detect();
-        if (mounted) {
-          setDetected(result);
-        }
-      } catch (error) {
-        console.warn('Ad blocker detection failed:', error);
-      } finally {
-        if (mounted) {
-          setLoading(false);
-        }
-      }
-    };
-
-    detect();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  return { detected, loading };
-}
+// Re-export hook for backward compatibility
+export { useAdBlockerDetection } from '@/hooks/useAdBlockerDetection';

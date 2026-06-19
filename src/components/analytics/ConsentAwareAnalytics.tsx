@@ -6,7 +6,7 @@ import Script from 'next/script';
 import * as Sentry from '@sentry/nextjs';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { useConsentCheck } from '@/lib/consent/context';
+import { useConsentCheck } from '@/hooks/useConsent';
 
 interface ConsentAwareAnalyticsProps {
   /** GTM container ID, e.g. "GTM-XXXXXX". Loads the GTM snippet. */
@@ -86,31 +86,5 @@ function ConsentAwareAnalytics({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) {
 
 export default ConsentAwareAnalytics;
 
-// Hook for firing custom GA4/GTM events with consent awareness
-export function useConsentAwareTracking() {
-  const { canUseAnalytics, canUseMarketing } = useConsentCheck();
-
-  const trackEvent = (eventName: string, parameters?: Record<string, unknown>) => {
-    // Sentry breadcrumb — no consent required, this is error-monitoring context
-    Sentry.addBreadcrumb({
-      category: 'user.action',
-      message: eventName,
-      data: parameters,
-      level: 'info',
-    });
-
-    if (!canUseAnalytics || typeof window === 'undefined' || !window.gtag) {return;}
-
-    window.gtag('event', eventName, {
-      ...parameters,
-      consent_analytics: canUseAnalytics,
-      consent_marketing: canUseMarketing,
-    });
-  };
-
-  return {
-    trackEvent,
-    canTrack: canUseAnalytics,
-    canUseMarketing,
-  };
-}
+// Re-export hook for backward compatibility
+export { useConsentAwareTracking } from '@/hooks/useConsentAwareTracking';

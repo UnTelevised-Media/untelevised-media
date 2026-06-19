@@ -93,13 +93,5 @@ export function DefaultErrorFallback({ error, retry }: { error: Error; retry: ()
   );
 }
 
-// Async Error Boundary Hook
-export function useAsyncError() {
-  const [, setError] = React.useState();
-
-  return React.useCallback((error: Error) => {
-    setError(() => {
-      throw error;
-    });
-  }, []);
-}
+// Re-export hook for backward compatibility
+export { useAsyncError } from '@/hooks/useAsyncError';
