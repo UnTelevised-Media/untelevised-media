@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import { Shield, Lock, Eye, AlertTriangle } from 'lucide-react';
-import { TurnstileWidget } from '@/components/global/TurnstileWidget';
+import TurnstileWidget from '@/components/global/TurnstileWidget';
 import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 export default function SecureContactPage() {

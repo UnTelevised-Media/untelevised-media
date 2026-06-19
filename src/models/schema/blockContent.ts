@@ -261,7 +261,7 @@ export default defineType({
           width?: number;
           height?: number;
         }) {
-          const displayTitle = title || new URL(src || '').hostname || 'Iframe Embed';
+          const displayTitle = title ?? new URL(src ?? '').hostname ?? 'Iframe Embed';
           return {
             title: displayTitle,
             subtitle: `${width ?? 640}x${height ?? 360} - ${src?.substring(0, 40) ?? ''}...`,

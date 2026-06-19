@@ -329,7 +329,7 @@ export default function ArticleEditorForm({
         featured: values.featured,
         breakingNews: values.breakingNews,
         needsReview: false,
-        publishedAt: values.publishedAt || undefined,
+        publishedAt: values.publishedAt ?? undefined,
         categories: selectedCategories.map((c) => ({
           _type: 'reference' as const,
           _ref: c._id,
@@ -362,8 +362,8 @@ export default function ArticleEditorForm({
         })),
         methodology: values.methodology,
         hasEmbeddedVideo: values.hasEmbeddedVideo,
-        videoLink: values.videoLink || undefined,
-        eventDate: values.eventDate || undefined,
+        videoLink: values.videoLink ?? undefined,
+        eventDate: values.eventDate ?? undefined,
         faqs: faqs
           .filter((f) => f.question.trim() || f.answer.trim())
           .map((f) => ({ _key: f._key, question: f.question, answer: f.answer })),
@@ -386,33 +386,36 @@ export default function ArticleEditorForm({
   // Save handlers
   // ---------------------------------------------------------------------------
 
-  function handleSaveDraft(values: FormValues) {
-    setSaveStatus('saving');
-    const input = buildInput(values);
-    startTransition(async () => {
-      try {
-        const result = articleId
-          ? await updateArticle(articleId, input)
-          : await createArticle(input, linkedPitchId);
-        if (result.success) {
-          setSaveStatus('saved');
-          toast.success('Draft saved.');
-          if (!articleId && 'data' in result) {
-            // createArticle returns the full "drafts.xxx" _id — strip the prefix so the
-            // URL stays clean (/portal/articles/<id>/edit). The edit page normalises either form.
-            const urlId = result.data._id.replace(/^drafts\./, '');
-            router.replace(`/portal/articles/${urlId}/edit`);
+  const handleSaveDraft = useCallback(
+    (values: FormValues) => {
+      setSaveStatus('saving');
+      const input = buildInput(values);
+      startTransition(async () => {
+        try {
+          const result = articleId
+            ? await updateArticle(articleId, input)
+            : await createArticle(input, linkedPitchId);
+          if (result.success) {
+            setSaveStatus('saved');
+            toast.success('Draft saved.');
+            if (!articleId && 'data' in result) {
+              // createArticle returns the full "drafts.xxx" _id — strip the prefix so the
+              // URL stays clean (/portal/articles/<id>/edit). The edit page normalises either form.
+              const urlId = result.data._id.replace(/^drafts\./, '');
+              router.replace(`/portal/articles/${urlId}/edit`);
+            }
+          } else {
+            setSaveStatus('unsaved');
+            toast.error(result.error);
           }
-        } else {
+        } catch (err) {
           setSaveStatus('unsaved');
-          toast.error(result.error);
+          toast.error(err instanceof Error ? err.message : 'Save failed. Please try again.');
         }
-      } catch (err) {
-        setSaveStatus('unsaved');
-        toast.error(err instanceof Error ? err.message : 'Save failed. Please try again.');
-      }
-    });
-  }
+      });
+    },
+    [buildInput, articleId, linkedPitchId, router]
+  );
 
   function handleSubmitForReview(values: FormValues) {
     startTransition(async () => {
@@ -470,7 +473,7 @@ export default function ArticleEditorForm({
         // Authors can only publish updates to already-published articles (isAlreadyPublished = true
         // means articleId had no "drafts." prefix). Editors/admins publish everything.
         if (isEditorPlus) {
-          const pubResult = await publishArticle(id, values.publishedAt || undefined);
+          const pubResult = await publishArticle(id, values.publishedAt ?? undefined);
           if (!pubResult.success) {
             toast.error(pubResult.error);
             return;

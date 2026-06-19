@@ -52,12 +52,12 @@ export default function BreakingNewsClient({ initialEvents, initialArticles }: P
     items.sort((a, b) => {
       const dateA =
         a.type === 'liveEvent'
-          ? new Date(a.eventDate || a._createdAt)
-          : new Date(a.publishedAt || a._createdAt);
+          ? new Date(a.eventDate ?? a._createdAt)
+          : new Date(a.publishedAt ?? a._createdAt);
       const dateB =
         b.type === 'liveEvent'
-          ? new Date(b.eventDate || b._createdAt)
-          : new Date(b.publishedAt || b._createdAt);
+          ? new Date(b.eventDate ?? b._createdAt)
+          : new Date(b.publishedAt ?? b._createdAt);
       return dateB.getTime() - dateA.getTime();
     });
 
@@ -203,8 +203,8 @@ function BreakingBar({ item }: { item: any }) {
           {item.type === 'liveEvent' && item.location && <span>📍 {item.location}</span>}
           <span>
             {item.type === 'liveEvent'
-              ? formatDate(item.eventDate || item._createdAt)
-              : formatDate(item.publishedAt || item._createdAt)}
+              ? formatDate(item.eventDate ?? item._createdAt)
+              : formatDate(item.publishedAt ?? item._createdAt)}
           </span>
           {item.type === 'liveEvent' && item.endDate && <span>– {formatDate(item.endDate)}</span>}
         </div>
@@ -294,8 +294,8 @@ function BreakingCard({ item }: { item: any }) {
           {item.type === 'liveEvent' && item.location && <span>📍 {item.location}</span>}
           <span>
             {item.type === 'liveEvent'
-              ? formatDate(item.eventDate || item._createdAt)
-              : formatDate(item.publishedAt || item._createdAt)}
+              ? formatDate(item.eventDate ?? item._createdAt)
+              : formatDate(item.publishedAt ?? item._createdAt)}
           </span>
           {item.type === 'liveEvent' && item.endDate && <span>– {formatDate(item.endDate)}</span>}
         </div>

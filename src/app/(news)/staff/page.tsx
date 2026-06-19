@@ -59,7 +59,7 @@ export default async function StaffPage() {
                         }
                         width={400}
                         height={400}
-                        alt={author.name || 'Staff member'}
+                        alt={author.name ?? 'Staff member'}
                         className='h-full w-full object-cover transition-transform group-hover:scale-105'
                       />
                     </div>

@@ -41,12 +41,7 @@ export default function BannerAd({
       return;
     }
     if (!isDev && (!hasConsent || !canUseMarketing)) {
-      console.debug(
-        '[AdSense] BannerAd slot=%s: waiting for consent (hasConsent=%s canUseMarketing=%s)',
-        slot,
-        hasConsent,
-        canUseMarketing
-      );
+      
       return;
     }
     if (pushed.current) {
@@ -80,7 +75,7 @@ export default function BannerAd({
         const mo = new MutationObserver(() => {
           const status = ins.getAttribute('data-ad-status');
           if (status === 'filled') {
-            console.debug('[AdSense] BannerAd slot=%s: filled ✓', slot);
+            
             setAdStatus('filled');
             mo.disconnect();
           } else if (status === 'unfilled') {

@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     const doc = {
       _type: 'secureContact',
       name: data.name ?? null,
-      email: data.email || null,
+      email: data.email ?? null,
       phone: data.phone ?? null,
       subject: data.subject,
       message: data.message,

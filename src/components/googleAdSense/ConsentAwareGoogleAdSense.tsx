@@ -14,7 +14,7 @@ function ConsentAwareGoogleAdSense({ googleAdsenseId }: ConsentAwareGoogleAdSens
   const shouldLoadScript = isDevelopment || (hasConsent && canUseMarketing);
 
   const handleScriptLoad = () => {
-    console.debug('[AdSense] Script ready — consent granted, ads can serve');
+    
     if (typeof window !== 'undefined' && window.gtag && hasConsent && canUseMarketing) {
       setTimeout(() => {
         window.gtag?.('consent', 'update', {
@@ -22,7 +22,7 @@ function ConsentAwareGoogleAdSense({ googleAdsenseId }: ConsentAwareGoogleAdSens
           ad_user_data: 'granted',
           ad_personalization: 'granted',
         });
-        console.debug('[AdSense] Consent mode updated: ad_storage=granted');
+        
       }, 100);
     }
   };
@@ -33,17 +33,13 @@ function ConsentAwareGoogleAdSense({ googleAdsenseId }: ConsentAwareGoogleAdSens
 
   // Marketing consent explicitly denied — don't load
   if (!isDevelopment && hasConsent && !canUseMarketing) {
-    console.debug('[AdSense] Marketing consent denied — not loading AdSense script');
+    
     return null;
   }
 
   // Consent still pending (new visitor, banner not yet interacted with)
   if (!isDevelopment && !shouldLoadScript) {
-    console.debug(
-      '[AdSense] Consent pending — waiting before loading script. hasConsent=%s canUseMarketing=%s',
-      hasConsent,
-      canUseMarketing
-    );
+    
     return null;
   }
 

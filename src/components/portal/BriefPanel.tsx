@@ -337,7 +337,7 @@ function StoryCard({
                 className='flex items-center gap-1 text-[11px] text-untele hover:underline'
               >
                 <ExternalLink className='h-3 w-3' />
-                {link.label || 'Source'}
+                {link.label ?? 'Source'}
               </a>
             ) : null
           )}

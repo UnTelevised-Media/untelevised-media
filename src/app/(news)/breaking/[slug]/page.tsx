@@ -3,7 +3,7 @@ import type { LiveEvent } from '@/models/types/sanity';
 import Image from 'next/image';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 
 import urlForImage from '@/u/urlForImage';
@@ -79,14 +79,14 @@ export default async function LiveEventPage({ params }: Props) {
   // Sort the allEvents array based on the eventDate property
   allEvents.sort((a: any, b: any) => {
     // Check if either eventDate is not a valid date
-    if (isNaN(Date.parse(a?.eventDate || '')) || isNaN(Date.parse(b?.eventDate || ''))) {
+    if (isNaN(Date.parse(a?.eventDate ?? '')) ?? isNaN(Date.parse(b?.eventDate ?? ''))) {
       // If both dates are invalid, return 0 to indicate no change in order. This prevents sorting based on invalid dates
       return 0;
     }
     // Compare the eventDate strings directly to determine the order
-    return (a?.eventDate || '') > (b?.eventDate || '')
+    return (a?.eventDate ?? '') > (b?.eventDate ?? '')
       ? -1
-      : (a?.eventDate || '') < (b?.eventDate || '')
+      : (a?.eventDate ?? '') < (b?.eventDate ?? '')
         ? 1
         : 0;
   });
@@ -189,7 +189,7 @@ export default async function LiveEventPage({ params }: Props) {
               <div className='flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400'>
                 {(liveEvent as any)?.location && <span>ðŸ“ {(liveEvent as any)?.location}</span>}
                 <span>
-                  {formatDate((liveEvent as any)?.eventDate || (liveEvent as any)?._createdAt)}
+                  {formatDate((liveEvent as any)?.eventDate ?? (liveEvent as any)?._createdAt)}
                 </span>
                 {(liveEvent as any)?.endDate && (
                   <span>â€“ {formatDate((liveEvent as any)?.endDate)}</span>

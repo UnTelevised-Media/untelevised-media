@@ -3,7 +3,7 @@
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { querySiteSettings } from '@/lib/sanity/lib/queries';
-import { BreakingNewsBannerClient } from './BreakingNewsBannerClient';
+import BreakingNewsBannerClient from './BreakingNewsBannerClient';
 
 interface BannerData {
   isActive: boolean;

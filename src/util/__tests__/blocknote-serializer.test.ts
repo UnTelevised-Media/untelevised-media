@@ -758,6 +758,7 @@ describe('portableTextToBlockNote', () => {
     });
 
     it('round-trips a code block', () => {
+      const original = [bnCode('const x = 1;', 'javascript')];
       const pt = blockNoteToPortableText(original);
       const restored = portableTextToBlockNote(pt) as Array<{
         type: string;

@@ -41,7 +41,7 @@ export default function RectangleAd({
       return;
     }
     if (!isDev && (!hasConsent || !canUseMarketing)) {
-      console.debug('[AdSense] RectangleAd slot=%s: awaiting consent', slot);
+      
       return;
     }
     if (pushed.current) {
@@ -75,7 +75,7 @@ export default function RectangleAd({
           if (s === 'filled') {
             setAdStatus('filled');
             mo.disconnect();
-            console.debug('[AdSense] RectangleAd slot=%s: filled ✓', slot);
+            
           } else if (s === 'unfilled') {
             setAdStatus('unfilled');
             mo.disconnect();

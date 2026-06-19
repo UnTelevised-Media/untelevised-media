@@ -7,7 +7,7 @@ import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author'
 import { portalFetch } from '@/services/portal/fetch';
 import { queryPortalClaimedPitchById, queryPortalArticlesTitles } from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
-import { PitchNotesEditor } from '@/components/portal/PitchNotesEditor';
+import PitchNotesEditor from '@/components/portal/PitchNotesEditor';
 import { PitchDetailsEditor } from '@/components/portal/PitchDetailsEditor';
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';

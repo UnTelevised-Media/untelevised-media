@@ -248,8 +248,8 @@ export default function ArticleDashboard({
       const q = search.toLowerCase();
       list = list.filter(
         (a) =>
-          a.title?.toLowerCase().includes(q) ||
-          a.tags?.some((t) => t.toLowerCase().includes(q)) ||
+          a.title?.toLowerCase().includes(q) ??
+          a.tags?.some((t) => t.toLowerCase().includes(q)) ??
           a.categories?.some((c) => c.title?.toLowerCase().includes(q))
       );
     }
@@ -772,7 +772,7 @@ function ArticleTableRow({
         <StatusBadge article={article} />
       </TableCell>
       <TableCell className='text-sm text-slate-500'>
-        {article.categories?.map((c) => c.title).join(', ') || '—'}
+        {article.categories?.map((c) => c.title).join(', ') ?? '—'}
       </TableCell>
       <TableCell className='whitespace-nowrap text-sm text-slate-500'>
         {new Date(article._updatedAt).toLocaleDateString()}

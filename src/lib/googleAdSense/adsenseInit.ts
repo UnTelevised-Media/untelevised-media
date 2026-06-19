@@ -13,7 +13,7 @@ const PREFIX = '[AdSense]';
 // Always-on debug: visible in Chrome DevTools Console (Verbose level) in production.
 function dbg(msg: string, ...args: unknown[]) {
   if (process.env.NODE_ENV !== 'development') {
-    console.debug(PREFIX, msg, ...args);
+    console.warn(PREFIX, msg, ...args);
   }
 }
 function warn(msg: string, ...args: unknown[]) {

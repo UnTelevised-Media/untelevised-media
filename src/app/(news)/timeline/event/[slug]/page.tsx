@@ -18,7 +18,7 @@ import {
   Search,
 } from 'lucide-react';
 
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 import TimelineEventCard from '@/components/timeline/TimelineEventCard';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';

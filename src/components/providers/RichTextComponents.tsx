@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import urlForImage from '@/u/urlForImage';
-import { InlineFactCheckCard } from '@/components/fact-check/InlineFactCheckCard';
+import InlineFactCheckCard from '@/components/fact-check/InlineFactCheckCard';
 import {
   Table,
   TableBody,
@@ -27,7 +27,7 @@ export default {
   types: {
     // â”€â”€ Images â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     image: ({ value }: any) => {
-      const alt = value.alt || 'Image';
+      const alt = value.alt ?? 'Image';
       // Sanity asset refs encode dimensions: image-{id}-{WIDTH}x{HEIGHT}-{ext}
       const ref: string = value?.asset?._ref ?? '';
       const dimMatch = ref.match(/-(\d+)x(\d+)-/);
@@ -71,7 +71,7 @@ export default {
           )}
           <SyntaxHighlighter
             style={vscDarkPlus}
-            language={language || 'text'}
+            language={language ?? 'text'}
             PreTag='div'
             customStyle={{ margin: 0, borderRadius: 0 }}
           >
@@ -291,7 +291,7 @@ export default {
           <iframe
             className='h-full w-full'
             src={src}
-            title={title || 'Embedded content'}
+            title={title ?? 'Embedded content'}
             frameBorder='0'
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen'
             allowFullScreen

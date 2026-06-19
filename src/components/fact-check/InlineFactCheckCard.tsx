@@ -1,7 +1,7 @@
 ﻿// src/components/fact-check/InlineFactCheckCard.tsx
 // Rendered inside blockContent when a factCheckEmbed block is encountered.
 import Link from 'next/link';
-import { VerdictBadge } from './VerdictBadge';
+import VerdictBadge from './VerdictBadge';
 import type { FactCheckRating } from '@/util/verdictConfig';
 
 interface InlineFactCheckData {

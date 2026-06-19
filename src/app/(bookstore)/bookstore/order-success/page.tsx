@@ -36,7 +36,7 @@ async function OrderSummary({ sessionId }: { sessionId: string }) {
   }
 
   // amount_total is 0 when a 100% promo is applied — fall back to amount_subtotal (list price)
-  const displayTotal = session.amount_total || session.amount_subtotal;
+  const displayTotal = session.amount_total ?? session.amount_subtotal;
   const totalCents = displayTotal ?? null;
   const total = totalCents ? (totalCents / 100).toFixed(2) : null;
   const items = session.line_items?.data ?? [];

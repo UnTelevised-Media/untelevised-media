@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { MembershipTiers } from '@/components/membership/MembershipTiers';
-import { OneTimeDonation } from '@/components/membership/OneTimeDonation';
+import MembershipTiers from '@/components/membership/MembershipTiers';
+import OneTimeDonation from '@/components/membership/OneTimeDonation';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import DonateLink from '@/components/donate/DonateLink';
 import { membershipAnonClient } from '@/services/membership/supabase';

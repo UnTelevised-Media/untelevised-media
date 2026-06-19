@@ -16,7 +16,7 @@ const TimelineJSVisualization = dynamic(
   () => import('@/components/timeline/TimelineJSVisualization'),
   { loading: () => <LoadingSpinner /> }
 );
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';

@@ -35,7 +35,7 @@ export default function LargeAdCard({
       return;
     }
     if (!isDev && (!hasConsent || !canUseMarketing)) {
-      console.debug('[AdSense] LargeAdCard slot=%s: awaiting consent', slot);
+      
       return;
     }
     if (pushed.current) {

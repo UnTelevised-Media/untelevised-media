@@ -205,7 +205,7 @@ export function PitchDetailsEditor({
                       className='flex items-center gap-1 text-xs text-untele hover:underline'
                     >
                       <ExternalLink className='h-3 w-3 shrink-0' />
-                      {link.label || 'Source'}
+                      {link.label ?? 'Source'}
                     </a>
                   ) : null
                 )}

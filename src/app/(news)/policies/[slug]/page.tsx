@@ -2,7 +2,7 @@
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import type { QueryPolicyBySlugResult } from '@/models/types/sanity';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryPolicyBySlug } from '@/lib/sanity/lib/queries';
@@ -59,7 +59,7 @@ export default async function Policies({ params }: Props) {
 
             {/* Title */}
             <h1 className='text-4xl font-bold text-slate-900 dark:text-white sm:text-5xl lg:text-6xl'>
-              {policies.title || 'Policy'}
+              {policies.title ?? 'Policy'}
             </h1>
 
             {/* Subtitle */}

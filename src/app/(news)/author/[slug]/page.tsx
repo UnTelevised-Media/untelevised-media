@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 
 import urlForImage from '@/u/urlForImage';
 
@@ -210,7 +210,7 @@ export default async function AuthorPage({ params }: Props) {
               <div className='mb-6 flex justify-center gap-8 lg:justify-start'>
                 <div className='text-center'>
                   <div className='text-2xl font-bold text-untele'>
-                    {author.relatedArticles?.length || 0}
+                    {author.relatedArticles?.length ?? 0}
                   </div>
                   <div className='text-sm text-slate-600 dark:text-slate-400'>Articles</div>
                 </div>
@@ -245,6 +245,7 @@ export default async function AuthorPage({ params }: Props) {
       {/* Credentials & Expertise */}
       {/* eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing */}
       {((author.credentials && author.credentials.length > 0) ||
+        // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         (author.expertise && author.expertise.length > 0) ||
         (author.sameAs && author.sameAs.length > 0)) && (
         <section className='border-b border-slate-200 bg-white/70 px-4 py-6 dark:border-slate-700 dark:bg-slate-900/40'>

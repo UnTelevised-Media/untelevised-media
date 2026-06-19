@@ -9,7 +9,7 @@ import {
   type JobApplicationFormData,
 } from '@/models/validations/jobApplication';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
-import { TurnstileWidget } from '@/components/global/TurnstileWidget';
+import TurnstileWidget from '@/components/global/TurnstileWidget';
 import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface ApplicationFormProps {

@@ -6,8 +6,8 @@ import sanityFetch from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryFactCheckBySlug } from '@/lib/sanity/lib/queries';
 import { groq } from 'next-sanity';
-import { VerdictBadge } from '@/components/fact-check/VerdictBadge';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import VerdictBadge from '@/components/fact-check/VerdictBadge';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 import { buildClaimReviewJsonLd } from '@/util/claimReviewJsonLd';
 import type { FactCheckRating } from '@/util/verdictConfig';
 import formatDate from '@/util/formatDate';
@@ -106,7 +106,7 @@ export default async function FactCheckPage({ params }: Props) {
         </h1>
 
         {/* Meta — author + date */}
-        {(fc.author || fc.publishedAt) && (
+        {(fc.author ?? fc.publishedAt) && (
           <div className='mt-3 flex items-center gap-3 text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400'>
             {fc.author && (
               <Link

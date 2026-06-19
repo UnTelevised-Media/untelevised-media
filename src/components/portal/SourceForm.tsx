@@ -62,8 +62,8 @@ export default function SourceForm({ sourceId, initialData }: Props) {
     const input: SourceWriteInput = {
       label: values.label,
       type: values.type as SourceWriteInput['type'],
-      url: values.url || undefined,
-      description: values.description || undefined,
+      url: values.url ?? undefined,
+      description: values.description ?? undefined,
       isAnonymous: values.isAnonymous,
     };
 

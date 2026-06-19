@@ -34,7 +34,7 @@ export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAd
       onLoad={() => {
         window.adsenseLoaded = true;
         window.adsenseScriptError = false;
-        console.debug('[AdSense] Script loaded OK — publisher:', publisherId);
+        
         onLoad?.();
       }}
       onError={(e) => {

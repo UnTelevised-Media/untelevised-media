@@ -28,7 +28,7 @@ import {
   type BriefSummary,
 } from '@/components/portal/BriefPanel';
 import { type ClaimedPitchSummary } from '@/components/portal/ClaimedPitchCard';
-import { ClaimedPitchesPanel } from '@/components/portal/ClaimedPitchesPanel';
+import ClaimedPitchesPanel from '@/components/portal/ClaimedPitchesPanel';
 import BookstoreOrdersWidget, {
   type DigitalSaleRow,
   type ShipmentPendingRow,
@@ -197,7 +197,7 @@ export default async function PortalDashboardPage() {
   // My article stats — "drafts." prefix is the authoritative published/draft signal
   const myPublished = myArticles.filter((a) => !a._id.startsWith('drafts.')).length;
   const myInReview = myArticles.filter(
-    (a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)
+    (a) => a._id.startsWith('drafts.') && (a.needsReview ?? !!a.deletionRequest)
   ).length;
   const myDrafts = myArticles.filter(
     (a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest
@@ -206,7 +206,7 @@ export default async function PortalDashboardPage() {
   // Editor-wide article stats
   const allPublished = allArticles.filter((a) => !a._id.startsWith('drafts.')).length;
   const allInReview = allArticles.filter(
-    (a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)
+    (a) => a._id.startsWith('drafts.') && (a.needsReview ?? !!a.deletionRequest)
   ).length;
   const allDrafts = allArticles.filter(
     (a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest

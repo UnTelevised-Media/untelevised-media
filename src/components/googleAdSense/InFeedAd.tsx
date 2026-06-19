@@ -43,7 +43,7 @@ export default function InFeedAd({
       return;
     }
     if (!isDev && (!hasConsent || !canUseMarketing)) {
-      console.debug('[AdSense] InFeedAd slot=%s: awaiting consent', slot);
+      
       return;
     }
     if (pushed.current) {
@@ -77,7 +77,7 @@ export default function InFeedAd({
           if (s === 'filled') {
             setAdStatus('filled');
             mo.disconnect();
-            console.debug('[AdSense] InFeedAd slot=%s: filled ✓', slot);
+            
           } else if (s === 'unfilled') {
             setAdStatus('unfilled');
             mo.disconnect();

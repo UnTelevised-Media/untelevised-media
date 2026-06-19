@@ -484,11 +484,7 @@ export async function sendGiftEmail(params: GiftEmailParams) {
     day: 'numeric',
   });
 
-  const sender = params.anonymous
-    ? 'A friend'
-    : params.fromName
-      ? params.fromName
-      : 'Someone special';
+  const sender = params.anonymous ? 'A friend' : (params.fromName ?? 'Someone special');
 
   const coverBlock = params.bookCoverUrl
     ? `<div style="text-align:center;margin-bottom:20px;">

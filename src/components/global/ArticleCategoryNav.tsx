@@ -103,7 +103,7 @@ function ArticleCategoryNav({
           }}
         >
           {row.map((category) => (
-            <CategoryButton key={category.slug?.current || category._id} category={category} />
+            <CategoryButton key={category.slug?.current ?? category._id} category={category} />
           ))}
         </div>
       ))}

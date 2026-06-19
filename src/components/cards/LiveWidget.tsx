@@ -72,7 +72,7 @@ export default function LiveWidget({ liveEvents }: Props) {
 
                 <div>
                   <p className='text-slate-700 dark:text-slate-300'>
-                    {formatDate(liveEvent.eventDate || liveEvent._createdAt)}
+                    {formatDate(liveEvent.eventDate ?? liveEvent._createdAt)}
                   </p>
                 </div>
               </div>
@@ -91,7 +91,7 @@ export default function LiveWidget({ liveEvents }: Props) {
               (liveEvent.relatedArticles && liveEvent.relatedArticles.length > 0) ? (
                 <ul className='custom-list'>
                   {/* Sort events inside the map function */}
-                  {[...(liveEvent.keyEvent || [])].slice(0, 9).map((event, index) => (
+                  {[...(liveEvent.keyEvent ?? [])].slice(0, 9).map((event, index) => (
                     <li
                       key={event._key ?? index}
                       className='li li::before deco custom-list mb-2 rounded-lg border border-untele bg-slate-300/30 px-1 py-0.5 text-sm text-slate-800 dark:bg-slate-700/30 dark:text-slate-200'
