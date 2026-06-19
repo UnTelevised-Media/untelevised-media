@@ -40,7 +40,6 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
       type: 'article',
       images: liveEvent.mainImage
         ? {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(liveEvent.mainImage as any)?.url() ?? '',
             width: 1200,
             height: 630,
@@ -57,7 +56,6 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
       creator: '@UnTelevisedLive',
       images: liveEvent.mainImage
         ? {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(liveEvent.mainImage as any)?.url() ?? '',
             alt: liveEvent.mainImage.alt ?? liveEvent.title,
           }

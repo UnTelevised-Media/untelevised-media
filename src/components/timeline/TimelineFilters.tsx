@@ -146,7 +146,7 @@ function TimelineFilters({
     onFilterChange(filteredEvents);
   }, [filters, events, onFilterChange]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const updateFilter = (key: keyof FilterState, value: any) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };

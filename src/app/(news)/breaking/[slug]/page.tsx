@@ -138,7 +138,7 @@ export default async function LiveEvent({ params }: Props) {
           <div className='h-auto min-w-max xl:w-full'>
             <Image
               src={
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                 
                 urlForImage(liveEvent.mainImage as any)?.url() ?? ''
               }
               alt='Image Description'

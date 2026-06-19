@@ -82,7 +82,7 @@ function ArticleCard({ article, priority = false }: { article: Article; priority
         <div className='relative aspect-video overflow-hidden'>
           <Image
             src={
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+               
               urlForImage(article.mainImage as any)?.url() ?? ''
             }
             alt={article.mainImage?.alt ?? article.title ?? 'Article'}
@@ -164,7 +164,7 @@ function ArticleListItem({ article }: { article: Article }) {
         <div className='relative h-24 w-32 flex-shrink-0'>
           <Image
             src={
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+               
               urlForImage(article.mainImage as any)?.url() ?? ''
             }
             alt={article.mainImage?.alt ?? article.title ?? 'Article'}

@@ -9,7 +9,7 @@ export interface RSSArticle {
   slug: string;
   description?: string;
   publishedAt: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   mainImage?: any;
   author?: { name: string };
   category?: { title: string };
@@ -31,7 +31,7 @@ export interface RSSLiveEvent {
   // Live events use eventDate, not publishedAt
   eventDate: string;
   _updatedAt?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   mainImage?: any;
   // Live events have no author field — coverage is by the newsroom
   eventStatus?: string;

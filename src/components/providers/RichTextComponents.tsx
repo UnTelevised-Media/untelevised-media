@@ -1,7 +1,7 @@
 ﻿/* eslint-disable import/prefer-default-export */
  
  
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 
 import dynamic from 'next/dynamic';
 import Image from 'next/image';

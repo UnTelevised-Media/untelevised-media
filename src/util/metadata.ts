@@ -41,7 +41,7 @@ export function getCanonicalUrl(...segments: string[]): string {
 }
 
 // Build OG image URL from Sanity image reference (1200x630)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export function getSanityOgImageUrl(image: any): string | undefined {
   if (!image) {
     return undefined;

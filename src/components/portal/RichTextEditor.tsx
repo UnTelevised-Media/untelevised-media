@@ -288,7 +288,7 @@ export default function RichTextEditor({
   const { resolvedTheme } = useTheme();
   const editor = useCreateBlockNote({
     schema,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     initialContent: initialContent?.length ? (initialContent as any) : undefined,
     placeholderText: placeholder,
   });

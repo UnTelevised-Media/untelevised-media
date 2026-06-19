@@ -26,7 +26,7 @@ const searchClient =
         const client = algoliasearch(_algoliaAppId, _algoliaApiKey);
         return {
           ...client,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+           
           search: async (requests: any) => {
             try {
               return await client.search(requests);
@@ -44,7 +44,7 @@ const searchClient =
                   params: '',
                   exhaustiveNbHits: true,
                 })),
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                 
               } as any;
             }
           },
@@ -189,7 +189,7 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
             }
             window.history.replaceState({}, '', url.toString());
           },
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+           
           createURL(options: any) {
             const url = new URL(window.location.href);
             const q = options?.routeState?.q ?? options?.q;

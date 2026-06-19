@@ -51,7 +51,6 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
       type: 'article',
       images: post.mainImage
         ? {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(post.mainImage as any)?.url() ?? '',
             width: 1200,
             height: 630,
@@ -68,7 +67,6 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
       creator: '@UnTelevisedLive',
       images: post.mainImage
         ? {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(post.mainImage as any)?.url() ?? '',
             alt: post.mainImage.alt ?? post.title,
           }

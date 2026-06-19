@@ -59,7 +59,7 @@ export default async function FactCheckPage({ params }: Props) {
     claimDate?: string;
     rating: FactCheckRating;
     ratingExplanation: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     body?: any[];
     sources?: { label: string; url?: string }[];
     author?: { name: string; slug: { current: string } };

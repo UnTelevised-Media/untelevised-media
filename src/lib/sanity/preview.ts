@@ -1,5 +1,5 @@
 // Pure preview URL generation logic - no React dependencies
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export function generatePreviewUrl(context: any): Promise<string> {
   const doc = context.document ?? context;
   const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL

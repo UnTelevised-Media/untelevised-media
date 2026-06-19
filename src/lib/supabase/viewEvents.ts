@@ -29,7 +29,6 @@ export async function recordViewEvent(slug: string, ip: string): Promise<void> {
     `[recordViewEvent] Inserting view: slug=${slug}, ip_hash=${ipHash.substring(0, 16)}..., viewed_at=${viewedAt}`
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { error } = await (client.from('view_count') as any).insert({
     slug,
     ip_hash: ipHash,

@@ -43,7 +43,6 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
       type: 'article',
       images: article.mainImage
         ? {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(article.mainImage as any)?.url() ?? '',
             width: 1200,
             height: 630,
@@ -60,7 +59,6 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
       creator: TWITTER_HANDLE,
       images: article.mainImage
         ? {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             url: urlForImage(article.mainImage as any)?.url() ?? '',
             alt: article.mainImage.alt ?? article.title,
           }

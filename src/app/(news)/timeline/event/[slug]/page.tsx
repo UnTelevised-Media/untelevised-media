@@ -226,10 +226,10 @@ export default async function TimelineEventPage({ params }: Props) {
                           </a>
                         </div>
                       ) : null}
-                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      { }
                       {(media as any).caption && (
                         <p className='text-sm text-slate-600 dark:text-slate-400'>
-                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                          { }
                           {(media as any).caption}
                         </p>
                       )}

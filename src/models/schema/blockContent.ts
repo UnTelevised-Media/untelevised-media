@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 // src/models/schemas/blockContent.ts
 import { defineType, defineArrayMember, defineField } from 'sanity';
 import { CodeIcon, ImageIcon, LinkIcon } from '@sanity/icons';

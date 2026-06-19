@@ -46,7 +46,7 @@ function RawFeed({ articles }: RawFeedProps) {
                   <div className='relative h-16 w-16 overflow-hidden rounded'>
                     <Image
                       src={
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                         
                         urlForImage(article.mainImage as any)?.url() ?? ''
                       }
                       alt={article.title ?? 'Article'}
