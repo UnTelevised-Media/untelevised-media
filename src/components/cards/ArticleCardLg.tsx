@@ -4,6 +4,7 @@
 import Image from 'next/image';
 import { ArrowUpRight, AlertTriangle } from 'lucide-react';
 import type { Article } from '@/models/types/sanity';
+import type { ArticleCardProps } from '@/models/types/componentProps';
 
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';
@@ -15,6 +16,7 @@ type Props = {
 };
 
 function ArticleCardLg({ post }: Props) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const imageUrl = urlForImage(post.mainImage as any)?.url();
 
   return (
