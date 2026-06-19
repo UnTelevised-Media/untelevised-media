@@ -86,11 +86,6 @@ export default [
         React: 'readonly',
       },
     },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
     plugins: {
       '@typescript-eslint': typescriptEslint,
       import: importPlugin,
@@ -110,7 +105,7 @@ export default [
 
       'no-duplicate-imports': 'warn',
       'no-empty-function': 'off',
-      'no-explicit-any': 'off',
+      'no-explicit-any': 'off', // Disabled in favor of @typescript-eslint/no-explicit-any
       'no-extra-parens': 'off',
       'no-lone-blocks': 'warn',
       'prefer-arrow-callback': 'error',
@@ -165,7 +160,10 @@ export default [
             { from: ['services'], allow: ['util', 'lib', 'models'] },
             { from: ['server'], allow: ['util', 'lib', 'services', 'models'] },
             { from: ['hooks'], allow: ['util', 'lib', 'services', 'models'] },
-            { from: ['components'], allow: ['util', 'lib', 'services', 'server', 'hooks', 'models', 'components'] },
+            {
+              from: ['components'],
+              allow: ['util', 'lib', 'services', 'server', 'hooks', 'models', 'components'],
+            },
           ],
         },
       ],
@@ -180,7 +178,13 @@ export default [
   },
   // Test files configuration
   {
-    files: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'src/**/*.spec.ts', 'src/**/*.spec.tsx', 'src/**/jest.setup.ts'],
+    files: [
+      'src/**/*.test.ts',
+      'src/**/*.test.tsx',
+      'src/**/*.spec.ts',
+      'src/**/*.spec.tsx',
+      'src/**/jest.setup.ts',
+    ],
     languageOptions: {
       globals: {
         ...globals.jest,
