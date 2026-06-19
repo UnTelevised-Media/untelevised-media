@@ -267,6 +267,7 @@ function TimelineJSVisualization({
         const timelineOptions = getResponsiveOptions();
 
         // Convert Sanity data to TimelineJS format
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const timelineData = convertTimelineToTimelineJS(timeline as any, events as any);
 
         // Test with minimal data if conversion fails

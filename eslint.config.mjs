@@ -119,7 +119,7 @@ export default [
       ],
       eqeqeq: ['error', 'always'],
       curly: ['error', 'all'],
-      'import/no-named-as-default': 'off',
+      'import/no-named-as-default': 'warn',
       'import/prefer-default-export': 'error',
       '@next/next/no-img-element': 'warn',
       '@next/next/no-sync-scripts': 'warn',
@@ -128,8 +128,8 @@ export default [
       '@typescript-eslint/prefer-nullish-coalescing': 'warn',
       '@typescript-eslint/prefer-optional-chain': 'warn',
       '@typescript-eslint/no-floating-promises': 'error',
-      '@typescript-eslint/await-thenable': 'off',
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/await-thenable': 'warn',
+      '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -189,32 +189,6 @@ export default [
         ...globals.jest,
       },
     },
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-    },
-  },
-  // Sanity reference files - suppress no-explicit-any for GROQ dereferencing casts
-  // These files have many `as any` casts because Sanity TypeGen generates types from
-  // the schema (references only), but GROQ queries with `->` return fully populated objects.
-  // See: src/models/types/sanityReferenceNote.ts
-  {
-    files: [
-      // Page files with Sanity references
-      'src/app/*/[slug]/page.tsx',
-      'src/app/*/*/[slug]/page.tsx',
-      'src/app/*/*/*/[slug]/page.tsx',
-      'src/app/*page.tsx',
-      // Component files that display Sanity content
-      'src/components/cards/ArticleCard*.tsx',
-      'src/components/cards/LiveWidget.tsx',
-      'src/components/homepage/ArticleGrid.tsx',
-      'src/components/homepage/RawFeed.tsx',
-      'src/components/homepage/TrendingSection.tsx',
-      'src/components/pages/PastEventsPage.tsx',
-      'src/components/seo/NewsArticleStructuredData.tsx',
-      'src/components/showcase/ArticleShowcase.tsx',
-      'src/components/timeline/Timeline*.tsx',
-    ],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
     },

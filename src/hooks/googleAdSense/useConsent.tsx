@@ -70,7 +70,7 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
   };
 
   // Update preferences
-  const updatePreferences = useCallback(
+  const updatePreferences = useCallback<(newPreferences: Partial<ConsentPreferences>) => Promise<void>>(
     async (newPreferences: Partial<ConsentPreferences>) => {
       const updatedPreferences = {
         ...preferences,

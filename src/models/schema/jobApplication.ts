@@ -64,6 +64,7 @@ export default defineType({
       title: 'Other Position (if selected above)',
       type: 'string',
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       hidden: ({ document }: any) => !document?.positionsOfInterest?.includes('other'),
     }),
     defineField({

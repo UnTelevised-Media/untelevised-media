@@ -43,9 +43,9 @@ export interface ConsentContextType {
   preferences: ConsentPreferences;
   status: ConsentStatus;
   showBanner: boolean;
-  updatePreferences: (_preferences: Partial<ConsentPreferences>) => void;
-  acceptAll: () => void;
-  rejectAll: () => void;
+  updatePreferences: (_preferences: Partial<ConsentPreferences>) => Promise<void>;
+  acceptAll: () => Promise<void>;
+  rejectAll: () => Promise<void>;
   showSettings: () => void;
   hideBanner: () => void;
   isLoading: boolean;

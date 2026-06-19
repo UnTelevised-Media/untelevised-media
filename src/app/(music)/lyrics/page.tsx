@@ -126,6 +126,8 @@ export default async function LyricsIndexPage() {
                           </h3>
                           <p className='mb-3 text-slate-600 dark:text-slate-400'>
                             by{' '}
+                            {/* GROQ dereferences primaryArtist->, featuredArtists[]-> and album-> */}
+                            {/* eslint-disable @typescript-eslint/no-explicit-any */}
                             {(song.primaryArtist as any)?.stageName ??
                               (song.primaryArtist as any)?.name ??
                               'Unknown Artist'}
@@ -138,9 +140,12 @@ export default async function LyricsIndexPage() {
                                   .join(', ')}
                               </span>
                             )}
+                            {/* eslint-enable @typescript-eslint/no-explicit-any */}
                           </p>
                           <div className='flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400'>
+                            {/* eslint-disable @typescript-eslint/no-explicit-any */}
                             {song.album && <span>{(song.album as any)?.title}</span>}
+                            {/* eslint-enable @typescript-eslint/no-explicit-any */}
                             {song.releaseDate && (
                               <>
                                 <span>•</span>
@@ -270,6 +275,8 @@ export default async function LyricsIndexPage() {
                               {song.title}
                             </h3>
                             <p className='text-sm text-slate-600 dark:text-slate-400'>
+                              {/* GROQ dereferences primaryArtist->, featuredArtists[]-> and album-> */}
+                              {/* eslint-disable @typescript-eslint/no-explicit-any */}
                               {(song.primaryArtist as any)?.stageName ??
                                 (song.primaryArtist as any)?.name ??
                                 'Unknown Artist'}
@@ -282,12 +289,15 @@ export default async function LyricsIndexPage() {
                                     .join(', ')}
                                 </span>
                               )}
+                              {/* eslint-enable @typescript-eslint/no-explicit-any */}
                             </p>
+                            {/* eslint-disable @typescript-eslint/no-explicit-any */}
                             {song.album && (
                               <p className='text-xs text-slate-500 dark:text-slate-400'>
                                 {(song.album as any)?.title}
                               </p>
                             )}
+                            {/* eslint-enable @typescript-eslint/no-explicit-any */}
                           </div>
 
                           <div className='text-right text-sm text-slate-500 dark:text-slate-400'>

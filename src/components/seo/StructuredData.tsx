@@ -18,10 +18,17 @@ interface AlbumStructuredDataProps {
 }
 
 function SongStructuredData({ song }: SongStructuredDataProps) {
-  const artistNames = [
-    (song.primaryArtist as any)?.stageName ?? (song.primaryArtist as any)?.name,
-    ...(song.featuredArtists?.map((artist: any) => artist?.stageName ?? artist?.name) ?? []),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const primaryArtist = song.primaryArtist as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const featuredArtists = song.featuredArtists as any;
+  const songArtistNames = [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    primaryArtist?.stageName ?? (primaryArtist as any)?.name,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...(featuredArtists?.map((artist: any) => artist?.stageName ?? artist?.name) ?? []),
   ].filter(Boolean);
+  const artistNames = songArtistNames;
 
   const artworkUrl = getSongArtwork(song);
 
@@ -36,8 +43,11 @@ function SongStructuredData({ song }: SongStructuredDataProps) {
     inAlbum: song.album
       ? {
           '@type': 'MusicAlbum',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           name: (song.album as any)?.title,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           albumReleaseType: (song.album as any)?.albumType,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           datePublished: (song.album as any)?.releaseDate,
         }
       : undefined,
@@ -94,7 +104,8 @@ function ArtistStructuredData({ artist, songs }: ArtistStructuredDataProps) {
         : undefined,
       artist.socialMedia?.facebook,
     ].filter(Boolean),
-    track: songs?.map((song: any) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    track: (songs as any)?.map((song: any) => ({
       '@type': 'MusicRecording',
       name: song.title,
       url: `https://www.untelevised.media/lyrics/${song.slug?.current ?? ''}`,
@@ -113,10 +124,17 @@ function ArtistStructuredData({ artist, songs }: ArtistStructuredDataProps) {
 }
 
 function AlbumStructuredData({ album, songs }: AlbumStructuredDataProps) {
-  const artistNames = [
-    (album.artist as any)?.stageName ?? (album.artist as any)?.name,
-    ...(album.featuredArtists?.map((artist: any) => artist?.stageName ?? artist?.name) ?? []),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const albumArtist = album.artist as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const albumFeaturedArtists = album.featuredArtists as any;
+  const albumArtistNames = [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    albumArtist?.stageName ?? (albumArtist as any)?.name,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...(albumFeaturedArtists?.map((artist: any) => artist?.stageName ?? artist?.name) ?? []),
   ].filter(Boolean);
+  const artistNames = albumArtistNames;
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -136,6 +154,7 @@ function AlbumStructuredData({ album, songs }: AlbumStructuredDataProps) {
       '@type': 'Person',
       name: producer,
     })),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     track: songs?.map((song: any, index) => ({
       '@type': 'MusicRecording',
       name: song.title,

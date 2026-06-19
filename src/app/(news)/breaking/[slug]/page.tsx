@@ -54,6 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function LiveEventPage({ params }: Props) {
   const { slug } = await params;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const liveEvent: any = await getEventBySlug(slug);
   if (!liveEvent) {
     notFound();
@@ -62,6 +63,7 @@ export default async function LiveEventPage({ params }: Props) {
   const allEvents = [
     // Check if liveEvent.relatedArticles is an array. If Truthy map over it and return an array of objects with the source property set to the source of the related article.
     ...(Array.isArray(liveEvent?.relatedArticles)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ? liveEvent.relatedArticles.map((article: any) => ({
           ...article,
           source: 'relatedArticles',
@@ -69,6 +71,7 @@ export default async function LiveEventPage({ params }: Props) {
       : []),
     // Check if liveEvent.keyEvent is an array. If Truthy map over it and return an array of objects with the source property set to the source of the key event.
     ...(Array.isArray(liveEvent?.keyEvent)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ? liveEvent.keyEvent.map((event: any) => ({
           ...event,
           source: 'keyEvent',
@@ -77,6 +80,7 @@ export default async function LiveEventPage({ params }: Props) {
   ];
 
   // Sort the allEvents array based on the eventDate property
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   allEvents.sort((a: any, b: any) => {
     // Check if either eventDate is not a valid date
     if (isNaN(Date.parse(a?.eventDate ?? '')) ?? isNaN(Date.parse(b?.eventDate ?? ''))) {
@@ -136,11 +140,10 @@ export default async function LiveEventPage({ params }: Props) {
         <section className='flex flex-col space-x-4 text-slate-700 lg:flex-row'>
           {/* Image  */}
           <div className='h-auto min-w-max xl:w-full'>
+            {/* Sanity image reference flexibility */}
             <Image
-              src={
-                 
-                urlForImage(liveEvent.mainImage as any)?.url() ?? ''
-              }
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              src={urlForImage(liveEvent.mainImage as any)?.url() ?? ''}
               alt='Image Description'
               style={{
                 width: '100%',
@@ -254,10 +257,15 @@ export default async function LiveEventPage({ params }: Props) {
                           </ClientSideRoute>
                         </>
                       ) : (
-                        <PortableText
-                          value={event.description as any}
-                          components={RichTextComponents as any}
-                        />
+                        <>
+                          {/* PortableText type compatibility */}
+                          <PortableText
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            value={event.description as any}
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            components={RichTextComponents as any}
+                          />
+                        </>
                       )}
                     </div>
                   </li>
@@ -271,6 +279,8 @@ export default async function LiveEventPage({ params }: Props) {
           </div>
           {/* Developments / Story */}
           <div className='mx-auto h-min rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw] lg:w-2/5'>
+            {/* @portabletext/react expects optional children; our custom components have required children */}
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <PortableText value={liveEvent.body} components={RichTextComponents as any} />
             <SourcesPanel sources={liveEvent.sources} methodology={liveEvent.methodology} />
           </div>

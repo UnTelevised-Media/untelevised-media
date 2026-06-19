@@ -30,6 +30,7 @@ export interface Image {
     height?: number;
     width?: number;
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -212,6 +213,7 @@ export interface PortableTextMarkRenderer {
 }
 
 // Generic block type for arrays of portable text content
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Block = PortableTextBlock | any;
 
 /**
@@ -227,6 +229,7 @@ export type Block = PortableTextBlock | any;
  * - We trust the query implementation to return the expected shape
  * - Adding full type unions would duplicate Sanity schema definitions
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type SanityPopulatedReference<T = any> = T & {
   _ref?: string;
   _type?: string;

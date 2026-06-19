@@ -96,6 +96,7 @@ function TimelineFilters({
 
       // Category filter
       if (filters.selectedCategories.length > 0) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const eventCategoryIds = event.timelineCategories?.map((cat) => (cat as any)._id) ?? [];
         if (!filters.selectedCategories.some((catId) => eventCategoryIds.includes(catId))) {
           return false;
@@ -146,7 +147,7 @@ function TimelineFilters({
     onFilterChange(filteredEvents);
   }, [filters, events, onFilterChange]);
 
-   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateFilter = (key: keyof FilterState, value: any) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };

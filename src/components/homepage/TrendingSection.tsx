@@ -40,8 +40,11 @@ const getTrendingArticles = cache(async (): Promise<TrendingArticle[]> => {
     );
     console.error('[TrendingSection] Full error details:', {
       message: errorMsg,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       code: (error as any)?.code,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       details: (error as any)?.details,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       hint: (error as any)?.hint,
     });
     return [];
@@ -98,6 +101,8 @@ export default async function TrendingSection({ variant }: Props = {}) {
   // --- #1 Featured Card ---
   if (variant === 'card') {
     const top = articles[0];
+    // Sanity image reference flexibility
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const imageUrl = urlForImage(top.mainImage as any)
       ?.width(600)
       .height(340)

@@ -47,7 +47,7 @@ export default function SourceForm({ sourceId, initialData }: Props) {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({
-     
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(formSchema) as any,
     defaultValues: {
       label: initialData?.label ?? '',

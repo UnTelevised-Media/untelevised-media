@@ -56,6 +56,7 @@ export default defineType({
       summary: 'summary',
       issuedAt: 'issuedAt',
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     prepare({ type, summary, issuedAt }: Record<string, any>) {
       const label = type ? type.toUpperCase() : 'CORRECTION';
       const date = issuedAt ? new Date(issuedAt).toLocaleDateString() : '';

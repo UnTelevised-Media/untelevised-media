@@ -52,6 +52,7 @@ export default async function TimelinePage({ params }: Props) {
     description: timeline.shortDescription ?? undefined,
     url: `https://www.untelevised.media/timeline/${slug}/`,
     numberOfItems: events.length,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     itemListElement: events.map((event: any, index: number) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -132,6 +133,8 @@ export default async function TimelinePage({ params }: Props) {
                   {timeline.author && (
                     <div className='flex items-center gap-1'>
                       <Users className='h-4 w-4' />
+                      {/* GROQ dereferences author->, TypeScript sees only reference */}
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       <span>By {(timeline.author as any).name ?? 'Author'}</span>
                       {timeline.collaborators && timeline.collaborators.length > 0 && (
                         <span>+{timeline.collaborators.length} more</span>
@@ -143,6 +146,7 @@ export default async function TimelinePage({ params }: Props) {
                 {/* Categories */}
                 {categories.length > 0 && (
                   <div className='flex flex-wrap gap-2'>
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     {categories.map((category: any) => (
                       <Link
                         key={category._id}
@@ -175,7 +179,12 @@ export default async function TimelinePage({ params }: Props) {
               {/* Description */}
               {timeline.description && (
                 <div className='prose prose-slate dark:prose-invert max-w-none'>
-                  <PortableText value={timeline.description} components={RichTextComponents as any} />
+                  {/* @portabletext/react expects optional children; our custom components have required children */}
+                  <PortableText
+                    value={timeline.description}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    components={RichTextComponents as any}
+                  />
                 </div>
               )}
             </div>
@@ -213,6 +222,7 @@ export default async function TimelinePage({ params }: Props) {
                   <div className='flex justify-between'>
                     <span className='text-slate-600 dark:text-slate-400'>Milestones</span>
                     <span className='font-medium'>
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {events.filter((event: any) => event.isMilestone).length}
                     </span>
                   </div>
@@ -239,6 +249,8 @@ export default async function TimelinePage({ params }: Props) {
         </div>
 
         {/* TimelineJS Visualization */}
+        {/* TimelineJSVisualization expects flexible data structures */}
+        {/* eslint-disable @typescript-eslint/no-explicit-any */}
         <div className='mb-8'>
           <TimelineJSVisualization
             timeline={timeline as any}
@@ -255,6 +267,7 @@ export default async function TimelinePage({ params }: Props) {
             }}
           />
         </div>
+        {/* eslint-enable @typescript-eslint/no-explicit-any */}
 
         {/* Related Content */}
         {/* eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing */}
@@ -264,6 +277,8 @@ export default async function TimelinePage({ params }: Props) {
               Timeline Contributors
             </h3>
             <div className='space-y-4'>
+              {/* GROQ dereferences author->, TypeScript sees only reference */}
+              {/* eslint-disable @typescript-eslint/no-explicit-any */}
               {timeline.author && (
                 <div className='flex items-center gap-3'>
                   {(timeline.author as any).image && (
@@ -307,6 +322,7 @@ export default async function TimelinePage({ params }: Props) {
                   </div>
                 </div>
               ))}
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
             </div>
           </div>
         )}
@@ -327,9 +343,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const title = timeline.seoSettings?.metaTitle ?? timeline.title;
+  // timeline.description is PortableText, accessing nested structure requires type assertion
   const description =
     timeline.seoSettings?.metaDescription ??
     timeline.shortDescription ??
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (timeline.description as any)?.[0]?.children?.[0]?.text ??
     '';
 

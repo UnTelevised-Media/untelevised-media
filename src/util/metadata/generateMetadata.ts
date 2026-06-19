@@ -38,7 +38,8 @@ async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> 
   // Extract author name - handle both reference and populated author objects
   const authorName =
     post.author && typeof post.author === 'object' && 'name' in post.author
-      ? ((post.author as any).name ?? 'Author')
+      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ((post.author as any).name ?? 'Author')
       : 'Author';
 
   const metadata: Metadata = {

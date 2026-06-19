@@ -101,6 +101,8 @@ export default async function MusicArtistPage({ params }: Props) {
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
+      {/* ArtistStructuredData expects flexible artist data structure */}
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       <ArtistStructuredData artist={artist as any} songs={artist.songs} />
       {/* Hero Section */}
       <section className='bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900'>
@@ -245,7 +247,10 @@ export default async function MusicArtistPage({ params }: Props) {
                     Biography
                   </h2>
                   <div className='prose prose-slate dark:prose-invert max-w-none'>
+                    {/* @portabletext/react expects optional children; our custom components have required children */}
+                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
                     <PortableText value={artist.bio} components={RichTextComponents as any} />
+                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
                   </div>
                 </div>
               )}
@@ -257,6 +262,7 @@ export default async function MusicArtistPage({ params }: Props) {
                     Songs
                   </h2>
                   <div className='space-y-4'>
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     {artist?.songs?.slice(0, 10).map((song: any) => {
                       const artworkUrl = getSongArtwork(song);
                       const artworkAlt = getSongArtworkAlt(song);
@@ -281,9 +287,12 @@ export default async function MusicArtistPage({ params }: Props) {
                                   {song.title}
                                 </h3>
                                 <div className='flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400'>
+                                  {/* GROQ dereferences album-> and featuredArtists[]-> */}
+                                  {/* eslint-disable @typescript-eslint/no-explicit-any */}
                                   {(song.album as any)?.title && (
                                     <span>{(song.album as any).title}</span>
                                   )}
+                                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
                                   {song.releaseDate && (
                                     <>
                                       <span>•</span>
@@ -301,9 +310,11 @@ export default async function MusicArtistPage({ params }: Props) {
                               {song.featuredArtists && song.featuredArtists.length > 0 && (
                                 <div className='text-sm text-slate-600 dark:text-slate-400'>
                                   feat.{' '}
+                                  {/* eslint-disable @typescript-eslint/no-explicit-any */}
                                   {song.featuredArtists
                                     .map((a: any) => (a as any)?.stageName ?? (a as any)?.name)
                                     .join(', ')}
+                                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
                                 </div>
                               )}
                             </div>
@@ -331,6 +342,7 @@ export default async function MusicArtistPage({ params }: Props) {
                   </h2>
                   <div className='grid gap-6 sm:grid-cols-2'>
                     {artist?.albums?.map(
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
                       (album: any) =>
                         album?.slug?.current && (
                           <ClientSideRoute key={album._id} route={`/albums/${album.slug.current}`}>

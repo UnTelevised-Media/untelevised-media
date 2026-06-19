@@ -40,6 +40,8 @@ async function getPastEvents(): Promise<LiveEvent[]> {
 }
 
 async function PastEvents() {
+  // getPastEvents returns flexible event data structure
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pastEvents = (await getPastEvents()) as any;
 
   return (

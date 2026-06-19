@@ -213,6 +213,7 @@ function TimelineVisualization({
                       {/* Categories */}
                       {event.timelineCategories && event.timelineCategories.length > 0 && (
                         <div className='flex flex-wrap gap-1'>
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                           {event.timelineCategories.slice(0, 2).map((category: any) => (
                             <Badge key={category._id} variant='secondary' className='text-xs'>
                               {category.title ?? 'Category'}

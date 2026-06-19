@@ -77,6 +77,8 @@ export default async function Policies({ params }: Props) {
       <main className='mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8'>
         <article className='rounded-xl border border-slate-200 bg-white/50 p-8 shadow-lg backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/50 lg:p-12'>
           <div className='prose prose-lg prose-slate dark:prose-invert max-w-none'>
+            {/* @portabletext/react expects optional children; our custom components have required children */}
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <PortableText value={policies.description} components={RichTextComponents as any} />
           </div>
         </article>

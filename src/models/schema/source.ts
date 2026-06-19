@@ -67,6 +67,7 @@ export default defineType({
       isAnonymous: 'isAnonymous',
     },
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     prepare(selection: any) {
       const { title, subtitle, isAnonymous } = selection;
       return {

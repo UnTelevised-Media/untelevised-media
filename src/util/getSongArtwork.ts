@@ -43,6 +43,7 @@ export function getSongArtworkAlt(song: Song): string {
     typeof song.album.albumArt === 'object' &&
     'alt' in song.album.albumArt
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (song.album.albumArt as any).alt;
   }
 

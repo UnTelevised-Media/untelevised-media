@@ -268,6 +268,7 @@ export default function ArticleEditorForm({
     getValues,
     formState: { errors, isDirty },
   } = useForm<FormValues>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(formSchema) as any,
     defaultValues: {
       title: (initialData?.title as string) ?? '',
@@ -545,6 +546,7 @@ export default function ArticleEditorForm({
       if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key === 's') {
         e.preventDefault();
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         handleSubmit(handleSaveDraft as any)().catch((error) => {
           console.error('Failed to save draft via keyboard shortcut:', error);
         });
@@ -583,6 +585,7 @@ export default function ArticleEditorForm({
               variant='outline'
               size='sm'
               disabled={isPending}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               onClick={handleSubmit(handleSaveDraft as any)}
               title='Save Draft (Ctrl+S)'
             >

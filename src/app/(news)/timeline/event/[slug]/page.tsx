@@ -191,7 +191,12 @@ export default async function TimelineEventPage({ params }: Props) {
             {/* Detailed Description */}
             {event.detailedDescription && (
               <div className='prose prose-slate dark:prose-invert max-w-none'>
-                <PortableText value={event.detailedDescription} components={RichTextComponents as any} />
+                {/* @portabletext/react expects optional children; our custom components have required children */}
+                <PortableText
+                  value={event.detailedDescription}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  components={RichTextComponents as any}
+                />
               </div>
             )}
 
@@ -226,10 +231,11 @@ export default async function TimelineEventPage({ params }: Props) {
                           </a>
                         </div>
                       ) : null}
-                      { }
+                      {/* Media object may have caption field */}
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {(media as any).caption && (
                         <p className='text-sm text-slate-600 dark:text-slate-400'>
-                          { }
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                           {(media as any).caption}
                         </p>
                       )}
@@ -335,6 +341,7 @@ export default async function TimelineEventPage({ params }: Props) {
                   Related Events
                 </h3>
                 <div className='space-y-3'>
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   {event.relatedTimelineEvents.slice(0, 3).map((relatedEvent: any) => (
                     <TimelineEventCard
                       key={relatedEvent._id}
@@ -357,8 +364,12 @@ export default async function TimelineEventPage({ params }: Props) {
               Related Articles
             </h2>
             <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-              {event.relatedArticles.slice(0, 6).map((article, index) => (
-                <FeaturedArticleCard key={article._key ?? index} article={article as any} />
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              {event.relatedArticles.slice(0, 6).map((article: any, index) => (
+                <FeaturedArticleCard
+                  key={article._key ?? index}
+                  article={article}
+                />
               ))}
             </div>
           </div>

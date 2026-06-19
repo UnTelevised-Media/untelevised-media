@@ -43,10 +43,13 @@ export default async function HomePage() {
   );
 
   // Filter out already-shown articles, then sort chronologically by eventDate → publishedAt → _createdAt
+  // eventDate may not be in type definition for some article types
   const moreNews = articles
     .filter((a) => !excludedIds.has(a._id))
     .sort((a, b) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const dateA = (a as any).eventDate ?? a.publishedAt ?? a._createdAt;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const dateB = (b as any).eventDate ?? b.publishedAt ?? b._createdAt;
       return new Date(dateB).getTime() - new Date(dateA).getTime();
     });
@@ -57,6 +60,8 @@ export default async function HomePage() {
       {liveEvents.length > 0 && (
         <section className='border-b border-slate-300 bg-slate-50 dark:border-slate-800 dark:bg-slate-950'>
           <Suspense fallback={<LoadingSpinner />}>
+            {/* LiveWidget expects flexible liveEvent data structure */}
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <LiveWidget liveEvents={liveEvents as any} />
           </Suspense>
         </section>
@@ -98,6 +103,8 @@ export default async function HomePage() {
                         HEADLINE
                       </span>
                     </div>
+                    {/* FeaturedArticleCard expects flexible article data */}
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     <FeaturedArticleCard article={heroArticle as any} />
                   </div>
                 </Suspense>
@@ -140,6 +147,8 @@ export default async function HomePage() {
                             {article.title ?? 'Untitled'}
                           </h4>
                           <p className='mt-1 text-xs text-slate-500 dark:text-slate-400'>
+                            {/* GROQ dereferences author->, TypeScript sees only reference */}
+                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                             {(article.author as any)?.name} • {formatDate(getArticleDate(article))}
                           </p>
                         </div>
@@ -260,6 +269,8 @@ export default async function HomePage() {
                     <div className='flex flex-1 flex-col p-4'>
                       {article.categories?.[0] && (
                         <span className='mb-2 inline-block bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
+                          {/* GROQ dereferences categories[]-> */}
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                           {(article.categories[0] as any)?.title}
                         </span>
                       )}
@@ -276,10 +287,14 @@ export default async function HomePage() {
                       )}
                       <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
                         <span className='font-bold uppercase'>
+                          {/* GROQ dereferences author->, TypeScript sees only reference */}
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                           {(article.author as any)?.name}
                         </span>
                         <div className='flex items-center gap-1'>
                           <span>{formatDate(getArticleDate(article))}</span>
+                          {/* readingTimeMinutes may not exist in type definition */}
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                           <span>· {(article as any)?.readingTimeMinutes ?? 1} min read</span>
                         </div>
                       </div>
@@ -293,6 +308,8 @@ export default async function HomePage() {
       )}
 
       {/* MORE NEWS - RAW FEED STYLE */}
+      {/* RawFeed expects flexible article array */}
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       <RawFeed articles={moreNews as any} />
 
       {/* BOTTOM CTA */}
@@ -358,9 +375,13 @@ async function getFrontPageData(): Promise<{
     ]);
 
     return {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       liveEvents: (liveEvents as any[] as LiveEvent[]) ?? [],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       articles: (articles as any[] as Article[]) ?? [],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       breakingArticles: (breakingArticles as any[] as Article[]) ?? [],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       fieldReports: (fieldReports as any[] as Article[]) ?? [],
       trendingIds: (trendingIds as { _id: string }[]) ?? [],
     };

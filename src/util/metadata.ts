@@ -69,7 +69,8 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
   // Extract author name - handle both reference and populated author objects
   const authorName =
     article.author && typeof article.author === 'object' && 'name' in article.author
-      ? ((article.author as any).name ?? 'Author')
+      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ((article.author as any).name ?? 'Author')
       : 'Author';
 
   // Extract category title - handle both reference and populated category objects
@@ -77,7 +78,8 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
     article.categories?.[0] &&
     typeof article.categories[0] === 'object' &&
     'title' in article.categories[0]
-      ? (article.categories[0] as any).title
+      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (article.categories[0] as any).title
       : undefined;
 
   return {
@@ -162,6 +164,7 @@ export function buildCategoryMetadata(category: Category, slug: string): Metadat
     160
   );
   // Category image is optional in Sanity schema
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const categoryImage = (category as any)?.image;
   const ogImageUrl = getSanityOgImageUrl(categoryImage) ?? DEFAULT_OG_IMAGE;
 

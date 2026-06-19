@@ -34,13 +34,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Song Not Found', description: 'The requested song could not be found.' };
   }
 
+  // GROQ query dereferences primaryArtist-> and featuredArtists[]->
+  // TypeScript sees these as references only, not populated objects
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const primaryArtist = song.primaryArtist as any;
   const primaryName =
-    (song.primaryArtist as any)?.stageName ??
-    (song.primaryArtist as any)?.name ??
+    primaryArtist?.stageName ??
+    primaryArtist?.name ??
     'Unknown Artist';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const featuredArtists = song.featuredArtists as any;
   const artistNames = [
     primaryName,
-    ...((song.featuredArtists as any)?.map((a: any) => (a as any)?.stageName ?? (a as any)?.name) ?? []),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...((featuredArtists as any)?.map((a: any) =>
+      a?.stageName ?? a?.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -87,9 +95,14 @@ export default async function LyricsPage({ params }: Props) {
     notFound();
   }
 
+  // GROQ query dereferences primaryArtist-> and featuredArtists[]->
   const artistNames = [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (song.primaryArtist as any)?.name ?? 'Unknown Artist',
-    ...((song.featuredArtists as any)?.map((artist: any) => (artist as any)?.name) ?? []),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...((song.featuredArtists as any)?.map((artist: any) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (artist as any)?.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -124,12 +137,15 @@ export default async function LyricsPage({ params }: Props) {
                 <p className='mb-6 text-xl text-white/90 md:text-2xl'>by {artistNames}</p>
 
                 {/* Song Metadata */}
+                {/* GROQ dereferences album->, TypeScript sees only reference */}
+                {/* eslint-disable @typescript-eslint/no-explicit-any */}
                 <div className='flex flex-wrap gap-4 text-sm text-white/80'>
                   {song.album && (
                     <div className='flex items-center gap-1'>
                       <span>Album: {(song.album as any)?.title}</span>
                     </div>
                   )}
+                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
                   {song.releaseDate && (
                     <div className='flex items-center gap-1'>
                       <Calendar className='h-4 w-4' />
@@ -275,7 +291,10 @@ export default async function LyricsPage({ params }: Props) {
                     About This Song
                   </h2>
                   <div className='prose prose-slate dark:prose-invert max-w-none'>
+                    {/* @portabletext/react expects optional children; our custom components have required children */}
+                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
                     <PortableText value={song.description} components={RichTextComponents as any} />
+                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
                   </div>
                 </div>
               )}
@@ -299,6 +318,8 @@ export default async function LyricsPage({ params }: Props) {
                     />
                   </div>
                 )}
+                {/* GROQ dereferences album->, TypeScript sees only reference */}
+                {/* eslint-disable @typescript-eslint/no-explicit-any */}
                 {artworkInfo.isTrackArt ? (
                   <div>
                     <h4 className='font-medium text-slate-900 dark:text-slate-100'>
@@ -325,6 +346,7 @@ export default async function LyricsPage({ params }: Props) {
                     </div>
                   </ClientSideRoute>
                 ) : null}
+                {/* eslint-enable @typescript-eslint/no-explicit-any */}
               </div>
 
               {/* Artist Info */}
@@ -332,6 +354,8 @@ export default async function LyricsPage({ params }: Props) {
                 <h3 className='mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100'>
                   Artist{song.featuredArtists && song.featuredArtists.length > 0 ? 's' : ''}
                 </h3>
+                {/* GROQ dereferences primaryArtist-> and featuredArtists[]-> */}
+                {/* eslint-disable @typescript-eslint/no-explicit-any */}
                 <div className='space-y-4'>
                   {(song.primaryArtist as any)?.slug?.current && (
                     <ClientSideRoute
@@ -395,8 +419,11 @@ export default async function LyricsPage({ params }: Props) {
                   )}
                 </div>
               </div>
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
 
               {/* Credits */}
+              {/* GROQ dereferences contributingArtists[].artist-> */}
+              {/* eslint-disable @typescript-eslint/no-explicit-any */}
               {song.contributingArtists && song.contributingArtists.length > 0 && (
                 <div className='rounded-lg border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800'>
                   <h3 className='mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100'>
@@ -418,6 +445,7 @@ export default async function LyricsPage({ params }: Props) {
                   </div>
                 </div>
               )}
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
 
               {/* Ad Space */}
               <div className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'>

@@ -4,7 +4,6 @@
 import Image from 'next/image';
 import { ArrowUpRight, AlertTriangle } from 'lucide-react';
 import type { Article } from '@/models/types/sanity';
-import type { ArticleCardProps } from '@/models/types/componentProps';
 
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';

@@ -80,11 +80,10 @@ function ArticleCard({ article, priority = false }: { article: Article; priority
       <article className='group relative h-full overflow-hidden rounded-xl border border-slate-600/50 bg-gradient-to-br from-slate-800/50 to-slate-900/50 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-untele/50 hover:shadow-2xl'>
         {/* Image Section */}
         <div className='relative aspect-video overflow-hidden'>
+          {/* Sanity image reference flexibility */}
           <Image
-            src={
-               
-              urlForImage(article.mainImage as any)?.url() ?? ''
-            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            src={urlForImage(article.mainImage as any)?.url() ?? ''}
             alt={article.mainImage?.alt ?? article.title ?? 'Article'}
             fill
             className='object-cover transition-transform duration-500 group-hover:scale-110'
@@ -162,11 +161,10 @@ function ArticleListItem({ article }: { article: Article }) {
       <article className='group flex overflow-hidden rounded-lg border border-slate-600/50 bg-slate-800/30 backdrop-blur-sm transition-all duration-300 hover:border-untele/50 hover:bg-slate-700/30'>
         {/* Thumbnail */}
         <div className='relative h-24 w-32 flex-shrink-0'>
+          {/* Sanity image reference flexibility */}
           <Image
-            src={
-               
-              urlForImage(article.mainImage as any)?.url() ?? ''
-            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            src={urlForImage(article.mainImage as any)?.url() ?? ''}
             alt={article.mainImage?.alt ?? article.title ?? 'Article'}
             fill
             className='object-cover transition-transform duration-300 group-hover:scale-105'

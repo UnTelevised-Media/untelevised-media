@@ -223,6 +223,7 @@ function TimelineEventCard({
             {showAuthor && event.author && (
               <div className='flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400'>
                 <Users className='h-3 w-3' />
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 <span>By {(event.author as any).name ?? 'Author'}</span>
               </div>
             )}
@@ -231,8 +232,14 @@ function TimelineEventCard({
           {/* Categories */}
           {event.timelineCategories && event.timelineCategories.length > 0 && (
             <div className='flex flex-wrap gap-1'>
-              {event.timelineCategories.slice(0, 3).map((category) => (
-                <Badge key={(category as any)._id} variant='secondary' className='text-xs'>
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              {(event.timelineCategories as any).slice(0, 3).map((category: any) => (
+                <Badge
+                  key={category._id}
+                  variant='secondary'
+                  className='text-xs'
+                >
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   {(category as any).title ?? 'Category'}
                 </Badge>
               ))}

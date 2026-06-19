@@ -44,11 +44,10 @@ function RawFeed({ articles }: RawFeedProps) {
               >
                 <div className='flex-shrink-0'>
                   <div className='relative h-16 w-16 overflow-hidden rounded'>
+                    {/* Sanity image reference flexibility */}
                     <Image
-                      src={
-                         
-                        urlForImage(article.mainImage as any)?.url() ?? ''
-                      }
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      src={urlForImage(article.mainImage as any)?.url() ?? ''}
                       alt={article.title ?? 'Article'}
                       fill
                       className='object-cover transition-transform group-hover:scale-105'
@@ -62,6 +61,8 @@ function RawFeed({ articles }: RawFeedProps) {
                     <span>{formatDate(getArticleDate(article))}</span>
                     <>
                       <span>•</span>
+                      {/* readingTimeMinutes may not be in Article type definition */}
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       <span>{(article as any).readingTimeMinutes ?? 1} min read</span>
                     </>
                     {article.categories?.[0] && (

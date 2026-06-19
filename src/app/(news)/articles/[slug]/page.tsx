@@ -97,10 +97,14 @@ export default async function ArticlePage({ params }: Props) {
                 name: 'Home',
                 item: 'https://www.untelevised.media',
               },
+              // GROQ query dereferences categories[]->, but TypeScript only sees CategoryReference[]
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               ...((article.categories as any)?.slice(0, 1).map((cat: any) => ({
                 '@type': 'ListItem',
                 position: 2,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 name: (cat as any)?.title ?? 'Category',
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 item: `https://www.untelevised.media/category/${formatTitleForURL((cat as any)?.title ?? '')}`,
               })) ?? []),
               {
@@ -140,6 +144,8 @@ export default async function ArticlePage({ params }: Props) {
             <div className='space-y-6'>
               {/* Title */}
               <h1
+                // GROQ query dereferences corrections->, TypeScript sees it as reference only
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 className={`text-4xl font-bold text-white sm:text-5xl lg:text-6xl${(article?.corrections as any)?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
               >
                 {article.title}
@@ -156,6 +162,8 @@ export default async function ArticlePage({ params }: Props) {
               <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
                 {/* Author + Reviewed By */}
                 <div className='flex flex-wrap items-center gap-3'>
+                  {/* GROQ query dereferences author-> and reviewedBy->, TypeScript sees only references */}
+                  {/* eslint-disable @typescript-eslint/no-explicit-any */}
                   {(article.author as any)?.slug?.current && (
                     <ClientSideRoute
                       route={resolveHref('author', (article.author as any)?.slug?.current) ?? ''}
@@ -189,6 +197,7 @@ export default async function ArticlePage({ params }: Props) {
                       </Link>
                     </span>
                   )}
+                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
                 </div>
 
                 <div className='flex flex-col items-end gap-2'>
@@ -207,6 +216,8 @@ export default async function ArticlePage({ params }: Props) {
                     )}
                   </div>
                   {/* Categories + Tags */}
+                  {/* GROQ dereferences categories[]-> and tags, TypeScript sees limited types */}
+                  {/* eslint-disable @typescript-eslint/no-explicit-any */}
                   <div className='flex flex-wrap justify-end gap-2'>
                     {(article.categories as any) &&
                       (article.categories as any).length > 0 &&
@@ -234,6 +245,7 @@ export default async function ArticlePage({ params }: Props) {
                         </Link>
                       ))}
                   </div>
+                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
                 </div>
               </div>
             </div>
@@ -272,6 +284,8 @@ export default async function ArticlePage({ params }: Props) {
                       Home
                     </Link>
                   </li>
+                  {/* GROQ dereferences categories[]-, TypeScript sees limited types */}
+                  {/* eslint-disable @typescript-eslint/no-explicit-any */}
                   {(article.categories as any) && (article.categories as any).length > 0 && (
                     <>
                       <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>
@@ -289,6 +303,7 @@ export default async function ArticlePage({ params }: Props) {
                       </li>
                     </>
                   )}
+                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
                   <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>
                     /
                   </li>
@@ -300,6 +315,8 @@ export default async function ArticlePage({ params }: Props) {
                   </li>
                 </ol>
               </nav>
+              {/* GROQ dereferences author->, TypeScript sees only reference */}
+              {/* eslint-disable @typescript-eslint/no-explicit-any */}
               <BookmarkButton
                 slug={slug}
                 title={article.title ?? 'Untitled Article'}
@@ -312,6 +329,7 @@ export default async function ArticlePage({ params }: Props) {
                 readingTime={getReadingTime(article.body)}
                 variant='full'
               />
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
             </div>
 
             {/* Social Share — full width */}
@@ -369,6 +387,8 @@ export default async function ArticlePage({ params }: Props) {
               )}
 
               {/* Correction / Retraction Notice */}
+              {/* GROQ dereferences corrections->, TypeScript sees only reference */}
+              {/* eslint-disable @typescript-eslint/no-explicit-any */}
               {(article.corrections as any)?.detail && (
                 <div className='not-prose'>
                   <CorrectionNotice correction={article.corrections as any} />
@@ -377,6 +397,7 @@ export default async function ArticlePage({ params }: Props) {
 
               {/* Article Body */}
               <div className='rounded-xl border border-slate-200 bg-white/50 p-8 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/50'>
+                {/* @portabletext/react expects optional children; our RichTextComponents have required children */}
                 <PortableText value={article.body} components={RichTextComponents as any} />
               </div>
 
@@ -384,8 +405,11 @@ export default async function ArticlePage({ params }: Props) {
               <div className='not-prose'>
                 <SourcesPanel sources={article.sources} methodology={(article as any)?.methodology} />
               </div>
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
 
               {/* Tags */}
+              {/* TypeScript doesn't see tags property without as any cast */}
+              {/* eslint-disable @typescript-eslint/no-explicit-any */}
               {((article as any)?.tags as any) && ((article as any)?.tags as any).length > 0 && (
                 <div className='not-prose mt-8'>
                   <p className='mb-3 text-xs font-black uppercase tracking-widest text-muted-foreground'>
@@ -404,6 +428,7 @@ export default async function ArticlePage({ params }: Props) {
                   </div>
                 </div>
               )}
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
 
               {/* FAQs */}
               {article.faqs && article.faqs.length > 0 && (
@@ -412,6 +437,7 @@ export default async function ArticlePage({ params }: Props) {
                     Frequently Asked Questions
                   </h3>
                   <dl className='space-y-4'>
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     {article.faqs?.map((faq: any, i: number) => (
                       <div
                         key={i}
@@ -445,6 +471,7 @@ export default async function ArticlePage({ params }: Props) {
                   Related Articles
                 </h2>
                 <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   {article.relatedArticles?.map((related: any) => (
                     <Link
                       key={related._id}
@@ -472,9 +499,12 @@ export default async function ArticlePage({ params }: Props) {
                           </p>
                         )}
                         <div className='mt-auto flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>
+                          {/* GROQ dereferences author->, TypeScript sees only reference */}
+                          {/* eslint-disable @typescript-eslint/no-explicit-any */}
                           {(related.author as any)?.name && (
                             <span className='font-medium'>{(related.author as any)?.name}</span>
                           )}
+                          {/* eslint-enable @typescript-eslint/no-explicit-any */}
                           {related.publishedAt && <time>{formatDate(related.publishedAt)}</time>}
                         </div>
                       </div>
@@ -490,6 +520,8 @@ export default async function ArticlePage({ params }: Props) {
             </div>
 
             {/* Comments Section */}
+            {/* TypeScript doesn't recognize allowComments property */}
+            {/* eslint-disable @typescript-eslint/no-explicit-any */}
             <div className='mt-12'>
               <CommentsSection
                 articleId={article._id}
@@ -497,6 +529,7 @@ export default async function ArticlePage({ params }: Props) {
                 allowComments={(article as any)?.allowComments ?? true}
               />
             </div>
+            {/* eslint-enable @typescript-eslint/no-explicit-any */}
           </main>
 
           {/* RIGHT SIDEBAR — desktop only */}

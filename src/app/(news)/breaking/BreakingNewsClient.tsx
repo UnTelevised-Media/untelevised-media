@@ -147,6 +147,7 @@ function ViewToggle({
 }
 
 // Breaking Bar Component (List View)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function BreakingBar({ item }: { item: any }) {
   return (
   <li className='rounded-lg border border-untele bg-slate-700/30 p-6'>
@@ -226,6 +227,7 @@ function BreakingBar({ item }: { item: any }) {
 }
 
 // Breaking Card Component (Grid View)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function BreakingCard({ item }: { item: any }) {
   return (
   <ClientSideRoute

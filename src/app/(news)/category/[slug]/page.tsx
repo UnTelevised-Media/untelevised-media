@@ -85,9 +85,13 @@ export default async function CategoryPage({ params }: Props) {
     .sort((a, b) => b.viewCount - a.viewCount) // Sort by view count
     .slice(0, 5); // Top 5
 
+  // Category may have additional fields for color and image
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const accentColor = (category as any)?.color?.hex ?? '#D70606';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const heroImageUrl = (category as any)?.image
-    ? urlForImage((category as any)?.image)
+    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      urlForImage((category as any)?.image)
         ?.width(1400)
         .height(500)
         .url()

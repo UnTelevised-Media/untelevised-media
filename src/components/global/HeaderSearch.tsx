@@ -36,7 +36,7 @@ const searchClient =
                   params: '',
                   exhaustiveNbHits: true,
                 })),
-                 
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
               } as any;
             }
           },

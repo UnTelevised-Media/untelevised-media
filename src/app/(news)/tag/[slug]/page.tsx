@@ -134,6 +134,7 @@ export default async function TagPage({ params }: Props) {
       {/* Articles grid */}
       {articleCount > 0 ? (
         <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {articles.map((article: any) => (
             <ClientSideRoute
               route={resolveHref('article', article.slug?.current) ?? ''}

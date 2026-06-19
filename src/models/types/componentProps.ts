@@ -14,7 +14,7 @@
  * - Timeline Components (TimelineCard, TimelineFilters, etc.)
  */
 
-import type { Article, Song, Album, TimelineEvent, LiveEvent } from './sanity';
+import type { Article, TimelineEvent, LiveEvent } from './sanity';
 import type { PortableTextBlock } from './portableText';
 
 // ============================================================================
@@ -25,15 +25,13 @@ export interface ArticleCardProps {
   article: Pick<
     Article,
     'title' | 'description' | 'mainImage' | 'slug' | 'publishedAt' | 'author'
-  > & {
-    author?: Pick<Article['author'], 'name' | 'image'>;
-  };
+  >;
 }
 
 export interface LiveWidgetProps {
   liveEvent: Pick<
     LiveEvent,
-    '_id' | 'title' | 'description' | 'startTime' | 'endTime' | 'featured'
+    '_id' | 'title' | 'description' | 'eventDate' | 'endDate' | 'isCurrentEvent'
   >;
 }
 
@@ -43,8 +41,8 @@ export interface LiveWidgetProps {
 
 export type FeedItem =
   | Pick<Article, 'title' | 'description' | 'mainImage' | 'slug' | 'publishedAt'>
-  | Pick<TimelineEvent, 'title' | 'description' | 'date' | 'slug'>
-  | Pick<LiveEvent, 'title' | 'description' | 'startTime' | 'featured'>;
+  | Pick<TimelineEvent, 'title' | 'description' | 'eventDate' | 'slug'>
+  | Pick<LiveEvent, 'title' | 'description' | 'eventDate' | 'isCurrentEvent'>;
 
 export interface ArticleGridProps {
   articles: ArticleCardProps['article'][];

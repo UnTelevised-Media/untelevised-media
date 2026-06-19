@@ -257,6 +257,7 @@ export default {
         return null;
       }
       // fc is a populated FactCheck object from GROQ query
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return <InlineFactCheckCard factCheck={fc as any} />;
     },
 

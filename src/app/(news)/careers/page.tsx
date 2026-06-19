@@ -238,11 +238,13 @@ export default async function CareersPage() {
                       Array.isArray(job.description) &&
                       job.description.length > 0 && (
                         <div className='prose prose-slate dark:prose-invert mb-6 max-w-none text-sm'>
-                          { }
+                          {/* PortableText type compatibility */}
+                          {/* eslint-disable @typescript-eslint/no-explicit-any */}
                           <PortableText
                             value={job.description as any}
                             components={RichTextComponents as any}
                           />
+                          {/* eslint-enable @typescript-eslint/no-explicit-any */}
                         </div>
                       )}
 

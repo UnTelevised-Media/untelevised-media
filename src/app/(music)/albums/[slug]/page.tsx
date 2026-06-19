@@ -106,9 +106,13 @@ export default async function AlbumPage({ params }: Props) {
     notFound();
   }
 
+  // GROQ dereferences artist-> and featuredArtists[]->
   const artistNames = [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...((album.featuredArtists as any)?.map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (artist: any) => (artist as any)?.stageName ?? (artist as any)?.name
     ) ?? []),
   ].join(', ');
@@ -120,8 +124,11 @@ export default async function AlbumPage({ params }: Props) {
     byArtist: album.artist
       ? {
           '@type': 'MusicGroup',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           name: (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           url: (album.artist as any)?.slug?.current
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ? `https://www.untelevised.media/music-artists/${(album.artist as any).slug.current}/`
             : undefined,
         }
@@ -268,9 +275,12 @@ export default async function AlbumPage({ params }: Props) {
                             {song.featuredArtists && song.featuredArtists.length > 0 && (
                               <p className='text-sm text-slate-600 dark:text-slate-400'>
                                 feat.{' '}
+                                {/* GROQ dereferences featuredArtists[]-> */}
+                                {/* eslint-disable @typescript-eslint/no-explicit-any */}
                                 {song.featuredArtists
                                   ?.map((a) => (a as any)?.stageName ?? (a as any)?.name)
                                   .join(', ') ?? ''}
+                                {/* eslint-enable @typescript-eslint/no-explicit-any */}
                               </p>
                             )}
                           </div>
@@ -298,7 +308,10 @@ export default async function AlbumPage({ params }: Props) {
                     About This Album
                   </h2>
                   <div className='prose prose-slate dark:prose-invert max-w-none'>
+                    {/* @portabletext/react expects optional children; our custom components have required children */}
+                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
                     <PortableText value={album.description} components={RichTextComponents as any} />
+                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
                   </div>
                 </div>
               )}
@@ -403,6 +416,8 @@ export default async function AlbumPage({ params }: Props) {
                 <h3 className='mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100'>
                   Artist{album.featuredArtists && album.featuredArtists.length > 0 ? 's' : ''}
                 </h3>
+                {/* GROQ dereferences artist-> and featuredArtists[]-> */}
+                {/* eslint-disable @typescript-eslint/no-explicit-any */}
                 <div className='space-y-4'>
                   {(album.artist as any)?.slug?.current && (
                     <ClientSideRoute
@@ -464,6 +479,7 @@ export default async function AlbumPage({ params }: Props) {
                       )
                   )}
                 </div>
+                {/* eslint-enable @typescript-eslint/no-explicit-any */}
               </div>
 
               {/* Ad Space */}

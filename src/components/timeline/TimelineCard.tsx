@@ -135,6 +135,7 @@ function TimelineCard({
             {showAuthor && timeline.author && (
               <div className='flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400'>
                 <Users className='h-3 w-3' />
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 <span>By {(timeline.author as any).name ?? 'Author'}</span>
                 {timeline.collaborators && timeline.collaborators.length > 0 && (
                   <span>+{timeline.collaborators.length} more</span>
@@ -146,6 +147,7 @@ function TimelineCard({
           {/* Categories */}
           {timeline.categories && timeline.categories.length > 0 && (
             <div className='flex flex-wrap gap-1'>
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               {timeline.categories.slice(0, 3).map((category: any) => (
                 <Badge key={category._id} variant='secondary' className='text-xs'>
                   {category.title ?? 'Category'}

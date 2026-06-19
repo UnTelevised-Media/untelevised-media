@@ -59,7 +59,8 @@ export default async function FactCheckPage({ params }: Props) {
     claimDate?: string;
     rating: FactCheckRating;
     ratingExplanation: string;
-     
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     body?: any[];
     sources?: { label: string; url?: string }[];
     author?: { name: string; slug: { current: string } };
@@ -163,6 +164,8 @@ export default async function FactCheckPage({ params }: Props) {
         {/* Full analysis body */}
         {fc.body && Array.isArray(fc.body) && fc.body.length > 0 && (
           <div className='mt-6'>
+            {/* @portabletext/react expects optional children; our custom components have required children */}
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <PortableText value={fc.body} components={RichTextComponents as any} />
           </div>
         )}

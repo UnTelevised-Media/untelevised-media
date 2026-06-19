@@ -78,11 +78,13 @@ function convertToTimelineJSDate(dateString: string) {
 function convertMedia(event: TimelineEvent): TimelineJSSlide['media'] {
   // Priority 1: Main image
   if (event.mainImage) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mainImg = event.mainImage as any;
     return {
       url: urlForImage(event.mainImage).width(1200).height(675).url(),
       caption: event.mainImage.alt ?? event.title,
       thumbnail: urlForImage(event.mainImage).width(300).height(200).url(),
-      credit: (event.mainImage as any)?.credit ?? undefined,
+      credit: mainImg?.credit ?? undefined,
     };
   }
 
@@ -115,11 +117,13 @@ function convertMedia(event: TimelineEvent): TimelineJSSlide['media'] {
         credit: ((firstMedia as Record<string, unknown>).credit as string) ?? undefined,
       };
     } else if (firstMedia._type === 'image') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const imageAsAny = firstMedia as any;
       return {
         url: urlForImage(firstMedia).width(1200).height(675).url(),
         caption: firstMedia.alt ?? firstMedia.caption ?? event.title,
         thumbnail: urlForImage(firstMedia).width(300).height(200).url(),
-        credit: (firstMedia as any)?.credit ?? undefined,
+        credit: imageAsAny?.credit ?? undefined,
       };
     }
   }
@@ -160,6 +164,7 @@ function convertBlockContentToHTML(blocks: Block[]): string {
       if (block._type === 'block') {
         const children = block.children ?? [];
         const text = children
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           .map((child: any) => {
             let content = child.text ?? '';
             if (child.marks?.includes('strong')) {
@@ -187,9 +192,11 @@ function convertBlockContentToHTML(blocks: Block[]): string {
             return `<p>${text}</p>`;
         }
       } else if (block._type === 'image') {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const imageUrl = urlForImage(block as any)
           .width(600)
           .url();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const alt = (block as any).alt ?? '';
         return `<img src="${imageUrl}" alt="${alt}" style="max-width: 100%; height: auto;" />`;
       }
@@ -301,6 +308,7 @@ export function convertTimelineToTimelineJS(
     };
 
     // Add title media if available
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const timelineWithImage = timeline as any;
     if (timelineWithImage?.featuredImage) {
       if (timelineJSData.title) {

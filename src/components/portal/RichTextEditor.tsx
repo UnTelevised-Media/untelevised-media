@@ -36,6 +36,7 @@ function parseYouTubeId(input: string): string {
 
 // ─── Custom block: YouTube embed ─────────────────────────────────────────────
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function YouTubeEmbedRenderer({ block, editor }: any) {
   const [editing, setEditing] = useState(!block.props.videoId);
   const [draft, setDraft] = useState(block.props.videoId);
@@ -116,6 +117,7 @@ function parseTweetId(input: string): string {
   return input.trim();
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function TwitterEmbedRenderer({ block, editor }: any) {
   const [editing, setEditing] = useState(!block.props.tweetId);
   const [draft, setDraft] = useState(block.props.tweetId);
@@ -190,6 +192,7 @@ function parseInstagramId(input: string): string {
   return input.trim();
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function InstagramEmbedRenderer({ block, editor }: any) {
   const [editing, setEditing] = useState(!block.props.postId);
   const [draft, setDraft] = useState(block.props.postId);
@@ -286,10 +289,11 @@ export default function RichTextEditor({
   editable = true,
 }: Props) {
   const { resolvedTheme } = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const initialContentValue = initialContent?.length ? (initialContent as any) : undefined;
   const editor = useCreateBlockNote({
     schema,
-     
-    initialContent: initialContent?.length ? (initialContent as any) : undefined,
+    initialContent: initialContentValue,
     placeholderText: placeholder,
   });
 

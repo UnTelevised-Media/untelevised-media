@@ -236,14 +236,18 @@ export default async function TimelineCategoryPage({ params }: Props) {
                 <h3 className='mb-3 font-semibold text-slate-900 dark:text-slate-100'>
                   Parent Category
                 </h3>
+                {/* GROQ dereferences parentCategory->, TypeScript sees only reference */}
                 <Link
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   href={`/timeline/category/${(category.parentCategory as any).slug?.current ?? ''}`}
                 >
                   <div className='flex items-center gap-3 rounded p-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800'>
                     <div
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
                       className={`h-3 w-3 rounded-full ${getCategoryColor((category.parentCategory as any).color ?? 'gray')}`}
                     />
                     <span className='text-sm font-medium'>
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {(category.parentCategory as any).title ?? 'Category'}
                     </span>
                   </div>
@@ -330,18 +334,22 @@ async function getCategoryData(slug: string): Promise<{
     }
 
     // Get events and timelines in parallel
-    const [{ data: events }, { data: timelines }] = await Promise.all([
+    const [eventsResult, timelinesResult] = await Promise.all([
       sanityFetch({
         query: queryTimelineEventsByCategory,
         params: { categoryId: category._id },
         tags: ['timelineEvent'],
-      }) as Promise<{ data: any[] }>,
+      }),
       sanityFetch({
         query: queryTimelinesByCategory,
         params: { categoryId: category._id },
         tags: ['timeline'],
-      }) as Promise<{ data: any[] }>,
+      }),
     ]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data: events } = eventsResult as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data: timelines } = timelinesResult as any;
 
     return { category, events: events as TimelineEvent[], timelines: timelines as Timeline[] };
   } catch (error) {

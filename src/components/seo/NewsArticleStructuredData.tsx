@@ -13,6 +13,8 @@ function NewsArticleStructuredData({ article, slug }: Props) {
   const canonicalUrl = `https://www.untelevised.media/articles/${slug}/`;
   const ogImageUrl = getSanityOgImageUrl(article.mainImage);
 
+  // GROQ dereferences author-> and categories[]-> in article data
+  // TypeScript sees these as references only, not populated objects
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -30,8 +32,11 @@ function NewsArticleStructuredData({ article, slug }: Props) {
         author: article.author
           ? {
               '@type': 'Person',
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               '@id': `https://www.untelevised.media/author/${(article.author as any).slug?.current}/#person`,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               name: (article.author as any).name,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               url: `https://www.untelevised.media/author/${(article.author as any).slug?.current}/`,
             }
           : undefined,
@@ -45,6 +50,7 @@ function NewsArticleStructuredData({ article, slug }: Props) {
             url: 'https://www.untelevised.media/Logo.png',
           },
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         articleSection: (article.categories as any)?.[0]?.title,
         keywords: Array.isArray(article.keywords) ? article.keywords.join(', ') : article.keywords,
         url: canonicalUrl,
@@ -53,6 +59,7 @@ function NewsArticleStructuredData({ article, slug }: Props) {
         ? [
             {
               '@type': 'FAQPage',
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               mainEntity: article.faqs.map((faq: any) => ({
                 '@type': 'Question',
                 name: faq.question ?? '',
@@ -70,10 +77,13 @@ function NewsArticleStructuredData({ article, slug }: Props) {
             name: 'Home',
             item: 'https://www.untelevised.media/',
           },
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (article.categories as any)?.[0] && {
             '@type': 'ListItem',
             position: 2,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             name: (article.categories as any)[0]?.title,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             item: `https://www.untelevised.media/category/${(article.categories as any)[0]?.slug?.current}/`,
           },
           {

@@ -11,8 +11,11 @@ import ArticleCategoryNav from '@/components/global/ArticleCategoryNav';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface ArticleShowcaseProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   articles: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   categories: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   featuredArticle?: any;
 }
 
@@ -21,13 +24,16 @@ export default function ArticleShowcase({
   categories,
   featuredArticle,
 }: ArticleShowcaseProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedCategory, setSelectedCategory] = useState<any | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [filteredArticles, setFilteredArticles] = useState<any[]>(articles);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
     if (selectedCategory) {
       const filtered = articles.filter((article) =>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         article.categories?.some((cat: any) => cat._id === selectedCategory._id)
       );
       setFilteredArticles(filtered);
@@ -36,6 +42,7 @@ export default function ArticleShowcase({
     }
   }, [selectedCategory, articles]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleCategoryChange = (category: any) => {
     if (selectedCategory?._id === category._id) {
       setSelectedCategory(null); // Deselect if same category

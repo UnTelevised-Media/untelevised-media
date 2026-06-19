@@ -26,7 +26,9 @@ function ArticleCard({ articles }: { articles: Article[] }) {
             aria-labelledby={`article-title-${article._id}`}
           >
             <div className='relative aspect-video overflow-hidden'>
+              {/* Sanity image reference flexibility */}
               <Image
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 src={urlForImage(article.mainImage as any)?.url() ?? ''}
                 alt={article.mainImage?.alt ?? article.title ?? 'Article'}
                 fill
@@ -99,7 +101,9 @@ function ArticleListCard({ articles }: { articles: Article[] }) {
           <article className='flex h-24 overflow-hidden rounded-lg border border-slate-400 bg-slate-400/80 shadow-sm transition-all duration-300 hover:border-untele/50 hover:bg-slate-300'>
             {/* Thumbnail */}
             <div className='relative h-full w-24 flex-shrink-0'>
+              {/* Sanity image reference flexibility */}
               <Image
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 src={urlForImage(article.mainImage as any)?.url() ?? ''}
                 alt={article.mainImage?.alt ?? article.title ?? 'Article'}
                 fill
@@ -155,6 +159,7 @@ function FeaturedArticleCard({ article }: { article: Article }) {
       >
         <div className='relative h-[578px] w-full overflow-hidden'>
           <Image
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             src={urlForImage(article.mainImage as any)?.url() ?? ''}
             alt={article.mainImage?.alt ?? article.title ?? 'Article'}
             fill

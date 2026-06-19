@@ -83,6 +83,7 @@ function PastEventsPage({ initialEvents }: PastEventsPageProps) {
         try {
           const result = await loadMorePastEvents(events.length, events.length + 12);
           if (result.events.length > 0) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             setEvents((prev) => [...prev, ...(result.events as any[] as LiveEvent[])]);
             setHasMoreEvents(result.hasMore);
           } else {

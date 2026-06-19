@@ -111,6 +111,7 @@ function AuthorBookCard({ book }: { book: SanityBook }) {
 
 export default async function AuthorPage({ params }: Props) {
   const { slug } = await params;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const author: any = await getAuthorBySlug(slug);
 
   if (!author) {
@@ -326,6 +327,8 @@ export default async function AuthorPage({ params }: Props) {
               About {author.name}
             </h2>
             <div className='prose prose-lg prose-slate dark:prose-invert max-w-none'>
+              {/* @portabletext/react expects optional children; our custom components have required children */}
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               <PortableText value={author.bio} components={RichTextComponents as any} />
             </div>
           </div>

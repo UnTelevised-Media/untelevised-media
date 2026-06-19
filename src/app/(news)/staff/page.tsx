@@ -16,6 +16,8 @@ import { queryAllAuthors } from '@/lib/sanity/lib/queries';
 
 export default async function StaffPage() {
   const staff = await getAllStaff();
+  // Staff objects may have order field for custom sorting
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sortedStaff = staff.sort((a, b) => ((a.order as any) ?? 0) - ((b.order as any) ?? 0));
 
   return (
@@ -52,11 +54,10 @@ export default async function StaffPage() {
                   {/* Author Image - Clickable */}
                   <ClientSideRoute route={resolveHref('author', author.slug?.current) ?? ''}>
                     <div className='aspect-square cursor-pointer overflow-hidden'>
+                      {/* Sanity image reference flexibility */}
                       <Image
-                        src={
-                           
-                          urlForImage(author.image as any)?.url() ?? '/placeholder-avatar.png'
-                        }
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        src={urlForImage(author.image as any)?.url() ?? '/placeholder-avatar.png'}
                         width={400}
                         height={400}
                         alt={author.name ?? 'Staff member'}
@@ -127,6 +128,8 @@ async function getAllStaff(): Promise<Author[]> {
       query: queryAllAuthors,
       tags: ['author'],
     });
+    // Safe cast: staff data structure matches Author shape at runtime
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return staff as any[] as Author[];
   } catch (error) {
     console.error('Failed to fetch author:', error);

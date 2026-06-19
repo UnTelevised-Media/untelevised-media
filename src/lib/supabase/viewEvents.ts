@@ -35,10 +35,12 @@ export async function recordViewEvent(slug: string, ip: string): Promise<void> {
   });
 
   if (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const err = error as any;
     console.error('[recordViewEvent] Insert failed:', {
-      code: error.code,
-      message: error.message,
-      details: error.details,
+      code: err.code,
+      message: err.message,
+      details: err.details,
     });
     throw error;
   }
@@ -55,17 +57,19 @@ export interface ViewCountBySlug {
 export async function getViewCountsByDate(dateString: string): Promise<ViewCountBySlug[]> {
   const client = getServerClient();
 
-  // Type assertion needed for Supabase strict typing
-
   // Supabase client type inference is incomplete for chained query methods
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data, error } = await (client
+  const result = await (client
     .from('view_count')
     .select('slug')
     .eq('created_date', dateString) as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data, error } = result as any;
 
   if (error) {
-    console.error('[viewEvents] Failed to get view counts:', error);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const err = error as any;
+    console.error('[viewEvents] Failed to get view counts:', err);
     throw error;
   }
 
@@ -117,17 +121,21 @@ export async function getTrendingArticles(
 
   // Supabase client type inference is incomplete for query filters
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data, error } = await (client
+  const result = await (client
     .from('view_count')
     .select('slug, viewed_at')
     .gte('created_date', dateStr) as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data, error } = result as any;
 
   if (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const err = error as any;
     console.error('[getTrendingArticles] Supabase query error:', {
-      code: error.code,
-      message: error.message,
-      details: error.details,
-      hint: error.hint,
+      code: err.code,
+      message: err.message,
+      details: err.details,
+      hint: err.hint,
     });
     throw error;
   }
@@ -175,13 +183,17 @@ export async function getMostReadByCategory(
 
   // Supabase client type inference is incomplete for query filters
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data, error } = await (client
+  const result = await (client
     .from('view_count')
     .select('slug, viewed_at')
     .gte('created_date', dateStr) as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data, error } = result as any;
 
   if (error) {
-    console.error('[getMostReadByCategory] Query error:', error);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const err = error as any;
+    console.error('[getMostReadByCategory] Query error:', err);
     throw error;
   }
 

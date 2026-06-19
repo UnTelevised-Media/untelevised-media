@@ -37,4 +37,5 @@ export type SanityReference = {
 };
 
 // Marker type for documented casts
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PopulatedSanityReference<T = any> = T & SanityReference;
