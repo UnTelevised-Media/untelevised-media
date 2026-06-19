@@ -14,7 +14,7 @@ interface InFeedAdProps {
   layoutKey?: string;
 }
 
-/* eslint-disable-next-line no-unused-vars */
+ 
 declare global {
   interface Window {
     adsbygoogle: Record<string, unknown>[];

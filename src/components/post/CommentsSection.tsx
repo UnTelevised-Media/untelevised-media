@@ -13,7 +13,7 @@ interface CommentsSectionProps {
   allowComments?: boolean;
 }
 
-/* eslint-disable-next-line no-unused-vars */
+ 
 declare global {
   interface Window {
     Coral?: {

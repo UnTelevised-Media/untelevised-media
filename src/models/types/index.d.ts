@@ -6,7 +6,6 @@
 // Global type augmentations for third-party libraries and custom window properties
 // ============================================================================
 
-/* eslint-disable-next-line no-unused-vars */
 declare global {
   interface Window {
     // Google Analytics
