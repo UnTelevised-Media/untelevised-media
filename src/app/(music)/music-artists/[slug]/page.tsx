@@ -1,4 +1,4 @@
-import type { MusicArtist, Song, Album } from '@/lib/sanity/sanity.types';
+import type { MusicArtist, Song, Album } from '@/models/types/sanity';
 // src/app/(user)/music-artists/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';

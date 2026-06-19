@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import type { Article } from '@/lib/sanity/sanity.types';
+import type { Article } from '@/models/types/sanity';
 
 import ArticleCardLg from '@/components/cards/ArticleCardLg';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';

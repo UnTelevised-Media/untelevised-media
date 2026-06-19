@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import type { Category } from '@/lib/sanity/sanity.types';
+import type { Category } from '@/models/types/sanity';
 
 interface ArticleCategoryNavProps {
   categories: Category[];

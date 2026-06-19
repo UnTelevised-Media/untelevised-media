@@ -1,4 +1,4 @@
-import type { SanityBookFormat } from '@/services/bookstore/types';
+import type { SanityBookFormat } from '@/models/types/bookstore';
 
 /**
  * Returns the Stripe identifier for a format used when building checkout payloads.

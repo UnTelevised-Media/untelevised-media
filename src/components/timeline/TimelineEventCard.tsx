@@ -19,7 +19,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
-import type { TimelineEvent } from '@/lib/sanity/sanity.types';
+import type { TimelineEvent } from '@/models/types/sanity';
 
 interface TimelineEventCardProps {
   event: TimelineEvent;

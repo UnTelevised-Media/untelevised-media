@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   jobApplicationSchema,
   type JobApplicationFormData,
-} from '@/lib/validations/jobApplicationSchema';
+} from '@/models/types/validations';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 import { TurnstileWidget } from '@/components/global/TurnstileWidget';
 import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';

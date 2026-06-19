@@ -8,7 +8,7 @@ import * as Sentry from '@sentry/nextjs';
 import { useUser } from '@clerk/nextjs';
 import { useCart } from '@/services/bookstore/cart';
 import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
-import type { CheckoutPayload } from '@/services/bookstore/types';
+import type { CheckoutPayload } from '@/models/types/bookstore';
 import PreCheckoutDialog from '@/components/bookstore/PreCheckoutDialog';
 
 function CartQuantityControl({

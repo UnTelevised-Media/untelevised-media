@@ -6,7 +6,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { auth } from '@clerk/nextjs/server';
 import { shopServiceClient } from '@/services/bookstore/supabase';
-import type { Order, OrderItem } from '@/services/bookstore/types';
+import type { Order, OrderItem } from '@/models/types/bookstore';
 import PageViewTracker from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {

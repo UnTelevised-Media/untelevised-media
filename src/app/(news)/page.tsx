@@ -1,4 +1,4 @@
-import type { Article, LiveEvent } from '@/lib/sanity/sanity.types';
+import type { Article, LiveEvent } from '@/models/types/sanity';
 // src/app/(user)/page.tsx - Alternative Version
 import { Suspense } from 'react';
 import Link from 'next/link';

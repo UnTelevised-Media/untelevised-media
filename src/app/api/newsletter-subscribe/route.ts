@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { subscribeToList } from '@/services/newsletter/service';
-import { NEWS_NEWSLETTER } from '@/services/newsletter/types';
+import { NEWS_NEWSLETTER } from '@/models/types/newsletter';
 import { makeRatelimiter } from '@/services/bookstore/ratelimit';
 
 const newsletterLimiter = makeRatelimiter(5, 300);

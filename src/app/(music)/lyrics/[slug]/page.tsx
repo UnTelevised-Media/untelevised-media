@@ -1,4 +1,4 @@
-import type { Song } from '@/lib/sanity/sanity.types';
+import type { Song } from '@/models/types/sanity';
 // src/app/(user)/lyrics/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';

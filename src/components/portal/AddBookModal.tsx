@@ -13,7 +13,7 @@ import {
   fetchBookGenres,
   createBookGenre,
 } from '@/server/actions/portal/book';
-import type { SanityBookGenre } from '@/services/bookstore/types';
+import type { SanityBookGenre } from '@/models/types/bookstore';
 
 interface Format {
   formatType: 'physical' | 'digital' | 'bundle';

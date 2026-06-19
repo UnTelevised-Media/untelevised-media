@@ -4,7 +4,7 @@
 // Client component — owns gift toggle state and NYOP amounts, renders per-format buy actions.
 
 import { useState, useEffect, useRef } from 'react';
-import type { SanityBook, SanityBookFormat, GiftOptions } from '@/services/bookstore/types';
+import type { SanityBook, SanityBookFormat, GiftOptions } from '@/models/types/bookstore';
 import getStripeIdForFormat from '@/util/stripeUtils';
 import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
 import AddToCartButton from './AddToCartButton';

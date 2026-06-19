@@ -15,7 +15,7 @@ import type {
   CheckoutLineItem,
   FormatType,
   GiftOptions,
-} from '@/services/bookstore/types';
+} from '@/models/types/bookstore';
 import { checkCheckoutRate } from '@/services/bookstore/ratelimit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {

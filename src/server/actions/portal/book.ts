@@ -7,7 +7,7 @@ import writeClient from '@/lib/sanity/lib/write-client';
 import { getShopServiceClient } from '@/services/bookstore/supabase';
 import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
 import sanityClient from '@/lib/sanity/lib/client';
-import type { SanityBookGenre } from '@/services/bookstore/types';
+import type { SanityBookGenre } from '@/models/types/bookstore';
 
 function slugify(str: string): string {
   return str

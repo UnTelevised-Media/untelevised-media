@@ -3,7 +3,7 @@
 // News newsletter unsubscribe â€” validates token, marks subscriber inactive.
 import { NextRequest, NextResponse } from 'next/server';
 import { unsubscribeFromList } from '@/services/newsletter/service';
-import { NEWS_NEWSLETTER } from '@/services/newsletter/types';
+import { NEWS_NEWSLETTER } from '@/models/types/newsletter';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);

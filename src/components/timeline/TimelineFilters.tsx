@@ -18,7 +18,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import type { TimelineEvent, TimelineCategory } from '@/lib/sanity/sanity.types';
+import type { TimelineEvent, TimelineCategory } from '@/models/types/sanity';
 
 interface TimelineFiltersProps {
   events: TimelineEvent[];

@@ -1,7 +1,7 @@
 // src/app/(user)/staff/page.tsx
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import type { Author } from '@/lib/sanity/sanity.types';
+import type { Author } from '@/models/types/sanity';
 import urlForImage from '@/util/urlForImage';
 
 export const metadata: Metadata = {

@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { useCart, buildCartItem } from '@/services/bookstore/cart';
 import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
-import type { SanityBook, SanityBookFormat } from '@/services/bookstore/types';
+import type { SanityBook, SanityBookFormat } from '@/models/types/bookstore';
 
 interface Props {
   book: SanityBook;

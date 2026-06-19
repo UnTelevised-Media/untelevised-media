@@ -1,6 +1,6 @@
 // src/components/seo/StructuredData.tsx
 // Note: plain <script> tags are correct for inline JSON-LD in RSC. next/script is for third-party loading strategies.
-import type { Song, MusicArtist, Album } from '@/lib/sanity/sanity.types';
+import type { Song, MusicArtist, Album } from '@/models/types/sanity';
 import { getSongArtwork } from '@/util/getSongArtwork';
 
 interface SongStructuredDataProps {

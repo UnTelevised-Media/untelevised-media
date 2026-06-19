@@ -3,7 +3,7 @@
 // Wrapped externally by ClientSideRoute (Link) — no internal Link element.
 import Image from 'next/image';
 import { ArrowUpRight, AlertTriangle } from 'lucide-react';
-import type { Article } from '@/lib/sanity/sanity.types';
+import type { Article } from '@/models/types/sanity';
 
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { LiveEvent } from '@/lib/sanity/sanity.types';
+import type { LiveEvent } from '@/models/types/sanity';
 import sanityClient from '@/lib/sanity/lib/client';
 import urlForImage from '@/util/urlForImage';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';

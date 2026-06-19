@@ -2,7 +2,7 @@
 // Server component — renders the Buy header and out-of-stock banner; delegates
 // the interactive format selector to BookBuyFormats (client boundary).
 
-import type { SanityBook } from '@/services/bookstore/types';
+import type { SanityBook } from '@/models/types/bookstore';
 import BookBuyFormats from './BookBuyFormats';
 
 interface Props {

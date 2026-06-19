@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useCart, buildCartItem } from '@/services/bookstore/cart';
-import type { SanityBook, SanityBookFormat, CheckoutPayload } from '@/services/bookstore/types';
+import type { SanityBook, SanityBookFormat, CheckoutPayload } from '@/models/types/bookstore';
 
 interface Props {
   book: SanityBook;

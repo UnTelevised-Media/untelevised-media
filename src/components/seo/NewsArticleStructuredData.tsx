@@ -2,7 +2,7 @@
 // JSON-LD structured data for news article pages — NewsArticle + BreadcrumbList schema
 
 import { getSanityOgImageUrl } from '@/util/metadata';
-import type { Article } from '@/lib/sanity/sanity.types';
+import type { Article } from '@/models/types/sanity';
 
 interface Props {
   article: Article;

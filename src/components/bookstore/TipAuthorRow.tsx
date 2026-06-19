@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useCart } from '@/services/bookstore/cart';
-import type { CheckoutPayload } from '@/services/bookstore/types';
+import type { CheckoutPayload } from '@/models/types/bookstore';
 
 interface Author {
   _id: string;

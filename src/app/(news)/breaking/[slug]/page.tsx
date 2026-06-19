@@ -1,4 +1,4 @@
-import type { LiveEvent } from '@/lib/sanity/sanity.types';
+import type { LiveEvent } from '@/models/types/sanity';
 // src/app/(user)/live-event/[slug]/page.tsx
 import Image from 'next/image';
 import { groq } from 'next-sanity';

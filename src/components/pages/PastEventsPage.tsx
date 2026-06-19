@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useTransition } from 'react';
 import { Search, Calendar, Grid3X3, List, Clock, Tag, Loader2 } from 'lucide-react';
-import type { LiveEvent } from '@/lib/sanity/sanity.types';
+import type { LiveEvent } from '@/models/types/sanity';
 
 import PastEventCard from '@/components/cards/PastEventCard';
 import { Button } from '@/components/ui/button';

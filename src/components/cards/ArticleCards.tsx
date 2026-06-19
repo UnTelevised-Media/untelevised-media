@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { ArrowUpRight, ShareIcon, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
-import type { Article } from '@/lib/sanity/sanity.types';
+import type { Article } from '@/models/types/sanity';
 
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';

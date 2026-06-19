@@ -4,7 +4,7 @@ import { groq } from 'next-sanity';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, Star } from 'lucide-react';
-import type { Timeline, TimelineCategory, TimelineEvent } from '@/lib/sanity/sanity.types';
+import type { Timeline, TimelineCategory, TimelineEvent } from '@/models/types/sanity';
 
 import TimelineEventCard from '@/components/timeline/TimelineEventCard';
 import TimelineCard from '@/components/timeline/TimelineCard';

@@ -1,6 +1,6 @@
 // src/components/global/ArticleCategories.tsx
 
-import type { Category } from '@/lib/sanity/sanity.types';
+import type { Category } from '@/models/types/sanity';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryCategories } from '@/lib/sanity/lib/queries';
 import Link from 'next/link';

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { Calendar, Clock, Users, Star, ArrowLeft, Bookmark } from 'lucide-react';
-import type { Timeline } from '@/lib/sanity/sanity.types';
+import type { Timeline } from '@/models/types/sanity';
 
 import dynamic from 'next/dynamic';
 import LoadingSpinner from '@/components/global/LoadingSpinner';

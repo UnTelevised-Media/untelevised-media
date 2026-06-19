@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { Article } from '@/lib/sanity/sanity.types';
+import type { Article } from '@/models/types/sanity';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
 import getArticleDate from '@/util/getArticleDate';

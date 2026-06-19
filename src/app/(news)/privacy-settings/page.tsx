@@ -15,7 +15,7 @@ import {
   CheckCircle,
 } from 'lucide-react';
 import { useConsent } from '@/lib/consent/context';
-import { COOKIE_CATEGORIES } from '@/lib/consent/types';
+import { COOKIE_CATEGORIES } from '@/models/types/consent';
 import { privacyStorage } from '@/lib/consent/storage';
 import { useAdBlockerDetection } from '@/components/consent/AdBlockerMessage';
 

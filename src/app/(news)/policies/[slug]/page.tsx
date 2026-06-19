@@ -1,7 +1,7 @@
 // src/app/(user)/policies/[slug]/page.tsx
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
-import type { QueryPolicyBySlugResult } from '@/lib/sanity/sanity.types';
+import type { QueryPolicyBySlugResult } from '@/models/types/sanity';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';

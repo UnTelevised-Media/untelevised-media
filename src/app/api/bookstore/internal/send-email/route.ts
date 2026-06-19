@@ -27,7 +27,7 @@ import {
   type OrderConfirmationParams,
   type DigitalDownloadEmailParams,
 } from '@/services/bookstore/email';
-import type { FormatType } from '@/services/bookstore/types';
+import type { FormatType } from '@/models/types/bookstore';
 
 type Payload =
   | {

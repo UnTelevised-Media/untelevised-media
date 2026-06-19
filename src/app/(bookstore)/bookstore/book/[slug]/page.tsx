@@ -14,7 +14,7 @@ import {
   queryAllBooks,
   queryApprovedReviewsByBookSlug,
 } from '@/lib/sanity/lib/queries';
-import type { SanityBook } from '@/services/bookstore/types';
+import type { SanityBook } from '@/models/types/bookstore';
 import urlForImage from '@/util/urlForImage';
 import { HURRIYA_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
@@ -164,7 +164,7 @@ function DetailRow({ label, value }: { label: string; value: string | number | u
 function RevenueTermsCard({
   terms,
 }: {
-  terms: NonNullable<import('@/services/bookstore/types').SanityBook['revenueTerms']>;
+  terms: NonNullable<import('@/models/types/bookstore').SanityBook['revenueTerms']>;
 }) {
   const { authorPercentage, publisherPercentage, platformPercentage, description } = terms;
   const hasData =

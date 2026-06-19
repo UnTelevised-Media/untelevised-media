@@ -1,7 +1,7 @@
 import React from 'react';
 import ClientSideRoute from '../providers/ClientSideRoute';
 import Image from 'next/image';
-import type { LiveEvent } from '@/lib/sanity/sanity.types';
+import type { LiveEvent } from '@/models/types/sanity';
 import urlForImage from '@/u/urlForImage';
 import resolveHref from '@/util/resolveHref';
 import formatDate from '@/util/formatDate';

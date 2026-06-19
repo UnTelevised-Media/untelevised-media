@@ -1,4 +1,4 @@
-import type { Author } from '@/lib/sanity/sanity.types';
+import type { Author } from '@/models/types/sanity';
 // src/app/(news)/author/[slug]/page.tsx
 import { cache } from 'react';
 import Image from 'next/image';
@@ -20,7 +20,7 @@ import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
 import { buildAuthorMetadata } from '@/util/metadata';
-import type { SanityBook, SanityBookFormat } from '@/services/bookstore/types';
+import type { SanityBook, SanityBookFormat } from '@/models/types/bookstore';
 import BookCardActions from '@/components/bookstore/BookCardActions';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
 

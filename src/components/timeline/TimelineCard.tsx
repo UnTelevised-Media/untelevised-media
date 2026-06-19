@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import urlForImage from '@/util/urlForImage';
 import formatDate from '@/util/formatDate';
-import type { Timeline } from '@/lib/sanity/sanity.types';
+import type { Timeline } from '@/models/types/sanity';
 
 interface TimelineCardProps {
   timeline: Timeline;

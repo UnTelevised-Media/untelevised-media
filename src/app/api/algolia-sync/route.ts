@@ -6,7 +6,7 @@ import { createClient } from '@sanity/client';
 import { toPlainText } from '@portabletext/toolkit';
 
 import { adminClient, ARTICLES_INDEX, LIVE_EVENTS_INDEX } from '@/lib/algolia/client';
-import type { AlgoliaArticleRecord } from '@/lib/algolia/types';
+import type { AlgoliaArticleRecord } from '@/models/types/algolia';
 
 const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,

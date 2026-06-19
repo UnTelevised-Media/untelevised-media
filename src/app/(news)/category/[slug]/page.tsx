@@ -1,4 +1,4 @@
-import type { Category } from '@/lib/sanity/sanity.types';
+import type { Category } from '@/models/types/sanity';
 import { Fragment } from 'react';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
