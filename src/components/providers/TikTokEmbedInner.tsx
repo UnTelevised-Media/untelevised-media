@@ -1,11 +1,34 @@
 'use client';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
+interface TikTokWindow extends Window {
+  tiktok?: {
+    embed: {
+      lib?: {
+        render: (element: HTMLElement) => void;
+      };
+    };
+  };
+}
+
 export default function TikTokEmbedInner({ videoUrl }: { videoUrl: string }) {
-  // TikTok embed requires the numeric video ID extracted from the URL
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const tiktokWindow = window as TikTokWindow;
+    if (tiktokWindow.tiktok?.embed?.lib?.render && containerRef.current) {
+      tiktokWindow.tiktok.embed.lib.render(containerRef.current);
+    }
+  }, [videoUrl]);
+
+  // Extract video ID from URL: https://www.tiktok.com/@username/video/VIDEO_ID
   const videoId = videoUrl.match(/\/video\/(\d+)/)?.[1] ?? '';
+  // Extract username from URL
+  const username = videoUrl.match(/@([^/]+)/)?.[1] ?? '';
+
   return (
-    <div className='mx-auto my-8 flex max-w-full justify-center'>
+    <div className='mx-auto my-8 flex max-w-full justify-center' ref={containerRef}>
       <blockquote
         className='tiktok-embed'
         cite={videoUrl}
@@ -14,16 +37,15 @@ export default function TikTokEmbedInner({ videoUrl }: { videoUrl: string }) {
       >
         <section>
           <Link
-            href={videoUrl}
-            className='text-untele hover:text-red-700'
+            href={videoUrl.replace(/\/$/, '')}
             target='_blank'
             rel='noopener noreferrer'
+            className='text-untele hover:text-red-700'
           >
-            View this video on TikTok
+            {username ? `@${username}` : 'View this video on TikTok'}
           </Link>
         </section>
       </blockquote>
-      <script async src='https://www.tiktok.com/embed.js'></script>
     </div>
   );
 }

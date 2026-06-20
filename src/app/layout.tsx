@@ -110,6 +110,9 @@ function RootLayout({
             `,
           }}
         />
+        {/* Social media embed SDKs — loaded once globally for TikTok and Instagram embeds */}
+        <Script async src='https://www.tiktok.com/embed.js' strategy='lazyOnload' />
+        <Script async src='https://www.instagram.com/embed.js' strategy='lazyOnload' />
       </head>
       <body className={`${inter.className} font-sans antialiased`} suppressHydrationWarning>
         <a
