@@ -3,25 +3,13 @@
 // Client component — owns gift toggle state and NYOP amounts, renders per-format buy actions.
 
 import { useState, useEffect, useRef } from 'react';
-import type { SanityBook, SanityBookFormat, GiftOptions } from '@/models/types/bookstore';
+import type { SanityBook, GiftOptions } from '@/models/types/bookstore';
 import getStripeIdForFormat from '@/util/stripe/stripeUtils';
+import formatBookFormatLabel from '@/util/bookstore/formatBookFormatLabel';
 import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 import AddToCartButton from './AddToCartButton';
 import BuyNowButton from './BuyNowButton';
 import GiftToggle from './GiftToggle';
-
-function formatLabel(format: SanityBookFormat): string {
-  if (format.formatType === 'physical') {
-    return 'Physical Book';
-  }
-  if (format.formatType === 'digital') {
-    return 'Digital Edition';
-  }
-  if (format.formatType === 'bundle') {
-    return 'Physical + Digital Bundle';
-  }
-  return format.formatType;
-}
 
 interface Props {
   book: SanityBook;
@@ -101,7 +89,7 @@ export default function BookBuyFormats({ book }: Props) {
               <div className='flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between'>
                 <div>
                   <p className='text-sm font-black uppercase tracking-wide text-slate-900 dark:text-hp-cream'>
-                    {formatLabel(format)}
+                    {formatBookFormatLabel(format)}
                   </p>
                   {format.formatType === 'digital' && format.digitalAsset && (
                     <p className='text-[10px] text-slate-400'>
