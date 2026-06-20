@@ -2,8 +2,6 @@
 // Bookstore homepage — featured book hero, all-books grid, genre filter.
 
 import { Suspense } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
 import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import {

@@ -1,5 +1,4 @@
 import {
-  ChevronDown,
   Newspaper,
   BookOpen,
   Mail,

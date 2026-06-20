@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import titleToSlug from '@/util/text/titleToSlug';
 import {
   articleEditorFormSchema,
-  type ArticleEditorArticleEditorFormValues,
+  type ArticleEditorFormValues,
 } from '@/models/validations/articleEditor';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -295,13 +295,13 @@ export default function ArticleEditorForm({
         tags: values.tags
           ? values.tags
               .split(',')
-              .map((t) => t.trim())
+              .map((t: string) => t.trim())
               .filter(Boolean)
           : [],
         keywords: values.keywords
           ? values.keywords
               .split(',')
-              .map((k) => k.trim())
+              .map((k: string) => k.trim())
               .filter(Boolean)
           : [],
         location: values.location,

@@ -17,18 +17,17 @@ import { RiKickLine } from 'react-icons/ri';
 import ClientSideRoute from '../providers/ClientSideRoute';
 import formatTitleForURL from '@/util/url/formatTitleForURL';
 import resolveHref from '@/util/url/resolveHref';
-import { getNewsCategories, getPoliciesList } from '@/server/queries/content';
-import type { CategoryQueryResult, PolicyQueryResult } from '@/server/queries/content';
+import { getNewsCategories, getPoliciesList, type CategoryQueryResult, type PolicyQueryResult } from '@/server/queries/content';
 
 async function Footer() {
   const categories: CategoryQueryResult[] = await getNewsCategories();
   const sortedCategories = categories.sort(
-    (a: CategoryQueryResult, b: CategoryQueryResult) => a.order - b.order
+    (a: CategoryQueryResult, b: CategoryQueryResult) => (a.order ?? 0) - (b.order ?? 0)
   );
 
   const policies: PolicyQueryResult[] = await getPoliciesList();
   const sortedPolicies = policies.sort(
-    (a: PolicyQueryResult, b: PolicyQueryResult) => a.order - b.order
+    (a: PolicyQueryResult, b: PolicyQueryResult) => (a.order ?? 0) - (b.order ?? 0)
   );
 
   return (
