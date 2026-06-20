@@ -2,6 +2,7 @@
 // src/components/portal/WhistleblowerTable.tsx
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import formatDate from '@/util/date/formatDate';
 
 export interface WhistleblowerSubmission {
   _id: string;
@@ -60,15 +61,6 @@ const CATEGORY_LABELS: Record<string, string> = {
   law_enforcement: 'Law Enforcement',
   other: 'Other',
 };
-
-function formatDate(iso?: string) {
-  if (!iso) {return '—';}
-  return new Date(iso).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-}
 
 export function WhistleblowerTable({ submissions }: { submissions: WhistleblowerSubmission[] }) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -163,7 +155,7 @@ export function WhistleblowerTable({ submissions }: { submissions: Whistleblower
                       {STATUS_LABELS[sub.status ?? 'new'] ?? sub.status ?? 'New'}
                     </td>
                     <td className='px-4 py-4 text-slate-600 dark:text-slate-400'>
-                      {formatDate(sub.submittedAt)}
+                      {formatDate(sub.submittedAt, 'short', '—')}
                     </td>
                     <td className='px-4 py-4'>
                       <button

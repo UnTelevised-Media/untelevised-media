@@ -2,6 +2,7 @@
 // src/components/portal/SecureContactTable.tsx
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import formatDate from '@/util/date/formatDate';
 
 export interface SecureContact {
   _id: string;
@@ -39,15 +40,6 @@ const STATUS_LABELS: Record<string, string> = {
   resolved: 'Resolved',
   archived: 'Archived',
 };
-
-function formatDate(iso?: string) {
-  if (!iso) {return '—';}
-  return new Date(iso).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-}
 
 export function SecureContactTable({ contacts }: { contacts: SecureContact[] }) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -139,7 +131,7 @@ export function SecureContactTable({ contacts }: { contacts: SecureContact[] }) 
                       </span>
                     </td>
                     <td className='px-4 py-4 text-slate-600 dark:text-slate-400'>
-                      {formatDate(contact.submittedAt)}
+                      {formatDate(contact.submittedAt, 'short', '—')}
                     </td>
                     <td className='px-4 py-4'>
                       <button

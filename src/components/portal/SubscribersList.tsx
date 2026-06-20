@@ -2,6 +2,7 @@
 // src/components/portal/SubscribersList.tsx
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
+import formatDate from '@/util/date/formatDate';
 
 export interface Subscriber {
   _id: string;
@@ -11,15 +12,6 @@ export interface Subscriber {
   source?: string;
   submittedAt?: string;
   confirmedAt?: string;
-}
-
-function formatDate(iso?: string) {
-  if (!iso) {return '—';}
-  return new Date(iso).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
 }
 
 function StatusBadge({ status }: { status?: string }) {
@@ -117,10 +109,10 @@ export function SubscribersList({ subscribers }: { subscribers: Subscriber[] }) 
                   </td>
                   <td className='px-4 py-3 text-xs text-slate-500'>{sub.source ?? '—'}</td>
                   <td className='px-4 py-3 text-slate-600 dark:text-slate-400'>
-                    {formatDate(sub.submittedAt)}
+                    {formatDate(sub.submittedAt, 'short', '—')}
                   </td>
                   <td className='px-4 py-3 text-slate-600 dark:text-slate-400'>
-                    {formatDate(sub.confirmedAt)}
+                    {formatDate(sub.confirmedAt, 'short', '—')}
                   </td>
                 </tr>
               ))}

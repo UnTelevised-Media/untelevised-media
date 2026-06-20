@@ -2,6 +2,7 @@
 // src/components/portal/ContactTable.tsx
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import formatDate from '@/util/date/formatDate';
 
 export interface ContactSubmission {
   _id: string;
@@ -9,15 +10,6 @@ export interface ContactSubmission {
   email?: string;
   message?: string;
   submittedAt?: string;
-}
-
-function formatDate(iso?: string) {
-  if (!iso) {return '—';}
-  return new Date(iso).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
 }
 
 export function ContactTable({ submissions }: { submissions: ContactSubmission[] }) {
@@ -70,7 +62,7 @@ export function ContactTable({ submissions }: { submissions: ContactSubmission[]
                     )}
                   </td>
                   <td className='px-4 py-4 text-slate-600 dark:text-slate-400'>
-                    {formatDate(sub.submittedAt)}
+                    {formatDate(sub.submittedAt, 'short', '—')}
                   </td>
                   <td className='px-4 py-4'>
                     <button
