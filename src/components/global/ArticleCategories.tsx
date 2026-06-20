@@ -1,10 +1,9 @@
 // src/components/global/ArticleCategories.tsx
 
 import type { Category } from '@/models/types/sanity';
-import { sanityFetch } from '@/lib/sanity/lib/fetch';
-import { queryCategories } from '@/lib/sanity/lib/queries';
 import Link from 'next/link';
 import formatTitleForURL from '@/util/url/formatTitleForURL';
+import { getArticleCategories } from '@/server/queries/content';
 
 interface ArticleCategoriesProps {
   activeSlug?: string;
@@ -70,21 +69,4 @@ export default async function ArticleCategories({ activeSlug }: ArticleCategorie
       ))}
     </nav>
   );
-}
-
-async function getArticleCategories() {
-  try {
-    const { data: categories } = await sanityFetch({
-      query: queryCategories,
-      tags: ['category'],
-    });
-    return (categories as Category[]).sort((a: Category, b: Category) => {
-      const orderA = parseInt(a.order ?? '0', 10);
-      const orderB = parseInt(b.order ?? '0', 10);
-      return orderA - orderB;
-    });
-  } catch (error) {
-    console.error('Failed to fetch categories:', error);
-    return [];
-  }
 }

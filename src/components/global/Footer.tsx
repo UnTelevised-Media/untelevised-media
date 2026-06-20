@@ -1,4 +1,3 @@
- 
 // src/components/global/Footer.tsx
 import Link from 'next/link';
 import {
@@ -16,24 +15,10 @@ import { FaThreads } from 'react-icons/fa6';
 import { MdLiveTv } from 'react-icons/md';
 import { RiKickLine } from 'react-icons/ri';
 import ClientSideRoute from '../providers/ClientSideRoute';
-
-import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import formatTitleForURL from '@/util/url/formatTitleForURL';
 import resolveHref from '@/util/url/resolveHref';
-import { queryCategories, queryPoliciesList } from '@/lib/sanity/lib/queries';
-
-// Types for the specific query results
-interface CategoryQueryResult {
-  _id: string;
-  title: string;
-  order: number;
-}
-
-interface PolicyQueryResult {
-  _id: string;
-  title: string;
-  order: number;
-}
+import { getNewsCategories, getPoliciesList } from '@/server/queries/content';
+import type { CategoryQueryResult, PolicyQueryResult } from '@/server/queries/content';
 
 async function Footer() {
   const categories: CategoryQueryResult[] = await getNewsCategories();
@@ -266,33 +251,3 @@ async function Footer() {
 }
 
 export default Footer;
-
-// Call the Sanity Fetch Function for a list of All Policies
-async function getPoliciesList(): Promise<PolicyQueryResult[]> {
-  try {
-    // Fetch policy data from Sanity
-    const { data: policies } = await sanityFetch({
-      query: queryPoliciesList,
-      tags: ['policies'],
-    });
-    return policies as PolicyQueryResult[];
-  } catch (error) {
-    console.error('Failed to fetch policies:', error);
-    return [];
-  }
-}
-
-// Call the Sanity Fetch Function for a list of All Categories
-async function getNewsCategories(): Promise<CategoryQueryResult[]> {
-  try {
-    // Fetch category data from Sanity
-    const { data: categories } = await sanityFetch({
-      query: queryCategories,
-      tags: ['category'],
-    });
-    return categories as CategoryQueryResult[];
-  } catch (error) {
-    console.error('Failed to fetch categories:', error);
-    return [];
-  }
-}
