@@ -18,6 +18,7 @@ import getArticleDate from '@/util/date/getArticleDate';
 import resolveHref from '@/util/url/resolveHref';
 import { tagToSlug } from '@/util/content/tagUtils';
 import formatTitleForURL from '@/util/url/formatTitleForURL';
+import safeText from '@/util/text/safeText';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
@@ -33,27 +34,6 @@ import CommentsSection from '@/components/post/CommentsSection';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import ViewPing from '@/components/post/ViewPing';
 import TrendingSection from '@/components/homepage/TrendingSection';
-
-/**
- * Guard against Sanity fields that may be stored as a block object instead of a plain
- * string (e.g. from old schema versions or programmatic inserts). Returns the string
- * value if it is a string, or extracts the `content` field if present, otherwise null.
- */
-function safeText(value: unknown): string | null {
-  if (typeof value === 'string') {
-    return value || null;
-  }
-  if (value && typeof value === 'object' && !Array.isArray(value)) {
-    const v = value as Record<string, unknown>;
-    if (typeof v.content === 'string') {
-      return v.content || null;
-    }
-    if (typeof v.text === 'string') {
-      return v.text || null;
-    }
-  }
-  return null;
-}
 
 type Props = {
   params: Promise<{
