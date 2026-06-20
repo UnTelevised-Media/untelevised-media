@@ -9,8 +9,12 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { toast } from 'sonner';
+import titleToSlug from '@/util/text/titleToSlug';
+import {
+  articleEditorFormSchema,
+  type ArticleEditorArticleEditorFormValues,
+} from '@/models/validations/articleEditor';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -43,45 +47,6 @@ import SourceSelectorModal from './SourceSelectorModal';
 
 // Lazy-load the WYSIWYG editor to avoid SSR
 const RichTextEditor = dynamic(() => import('./RichTextEditor'), { ssr: false });
-
-// ---------------------------------------------------------------------------
-// Form schema
-// ---------------------------------------------------------------------------
-
-const formSchema = z.object({
-  title: z.string().min(1, 'Title is required'),
-  slug: z
-    .string()
-    .min(1, 'Slug is required')
-    .max(200)
-    .regex(/^[a-z0-9-]+$/, 'Slug: lowercase letters, numbers, hyphens only'),
-  description: z.string().max(1000).optional(),
-  leadParagraph: z.string().max(1000).optional(),
-  featured: z.boolean().default(false),
-  breakingNews: z.boolean().default(false),
-  location: z.string().max(200).optional(),
-  allowComments: z.boolean().default(true),
-  publishedAt: z.string().optional(),
-  tags: z.string().optional(), // comma-separated; parsed to array on submit
-  keywords: z.string().optional(),
-  authorRef: z.string().optional(),
-  hasEmbeddedVideo: z.boolean().default(false),
-  // Allow empty string (= no video) or a full URL. An empty value is coerced to
-  // undefined in buildInput, so the server-side z.string().url() schema never sees it.
-  // A non-empty value that isn't a valid URL would silently block ALL field saves on
-  // the server (the whole safeParse fails), so we validate it here too.
-  videoLink: z
-    .union([
-      z.string().url('Video link must be a full URL (https://…)'),
-      z.literal(''),
-      z.undefined(),
-    ])
-    .optional(),
-  eventDate: z.string().optional(),
-  methodology: z.string().max(2000).optional(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
 
 // ---------------------------------------------------------------------------
 // Props
@@ -131,19 +96,6 @@ interface Props {
   linkedPitch?: PitchForModal | null;
   /** Only needed on new articles — passed to createArticle to link both ways */
   linkedPitchId?: string;
-}
-
-// ---------------------------------------------------------------------------
-// Slug generator
-// ---------------------------------------------------------------------------
-
-function titleToSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .slice(0, 100);
 }
 
 // ---------------------------------------------------------------------------
@@ -270,9 +222,9 @@ export default function ArticleEditorForm({
     watch,
     getValues,
     formState: { errors, isDirty },
-  } = useForm<FormValues>({
+  } = useForm<ArticleEditorFormValues>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    resolver: zodResolver(formSchema) as any,
+    resolver: zodResolver(articleEditorFormSchema) as any,
     defaultValues: {
       title: (initialData?.title as string) ?? '',
       slug: (initialData?.slug as { current: string } | undefined)?.current ?? '',
@@ -321,7 +273,7 @@ export default function ArticleEditorForm({
   // ---------------------------------------------------------------------------
 
   const buildInput = useCallback(
-    (values: FormValues): ArticleWriteInput => {
+    (values: ArticleEditorFormValues): ArticleWriteInput => {
       const portableBody = blockNoteToPortableText(
         editorContentRef.current as Parameters<typeof blockNoteToPortableText>[0]
       );
@@ -392,7 +344,7 @@ export default function ArticleEditorForm({
   // ---------------------------------------------------------------------------
 
   const handleSaveDraft = useCallback(
-    (values: FormValues) => {
+    (values: ArticleEditorFormValues) => {
       setSaveStatus('saving');
       const input = buildInput(values);
       startTransition(async () => {
@@ -422,7 +374,7 @@ export default function ArticleEditorForm({
     [buildInput, articleId, linkedPitchId, router]
   );
 
-  function handleSubmitForReview(values: FormValues) {
+  function handleSubmitForReview(values: ArticleEditorFormValues) {
     startTransition(async () => {
       try {
         // createArticle now returns "drafts.xxx" — use that directly for the review
@@ -455,7 +407,7 @@ export default function ArticleEditorForm({
     });
   }
 
-  function handlePublish(values: FormValues) {
+  function handlePublish(values: ArticleEditorFormValues) {
     startTransition(async () => {
       try {
         let id = articleId;
@@ -504,7 +456,7 @@ export default function ArticleEditorForm({
       }
       const values = getValues();
       setSaveStatus('saving');
-      const input = buildInput(values as FormValues);
+      const input = buildInput(values as ArticleEditorFormValues);
       const articleIdSnapshot = articleId;
       startTransition(async () => {
         try {
