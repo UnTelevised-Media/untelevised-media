@@ -2,9 +2,9 @@ import React from 'react';
 import ClientSideRoute from '../providers/ClientSideRoute';
 import Image from 'next/image';
 import type { LiveEvent } from '@/models/types/sanity';
-import urlForImage from '@/u/urlForImage';
-import resolveHref from '@/util/resolveHref';
-import formatDate from '@/util/formatDate';
+import urlForImage from '@/util/url/urlForImage';
+import resolveHref from '@/util/url/resolveHref';
+import formatDate from '@/util/date/formatDate';
 import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 
 type Props = {

@@ -1,4 +1,4 @@
-// src/lib/factCheck/claimReviewJsonLd.ts
+// src/util/schema/claimReviewJsonLd.ts
 import { VERDICT_CONFIG, type FactCheckRating } from './verdictConfig';
 
 export interface FactCheckDoc {

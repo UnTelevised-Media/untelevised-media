@@ -6,20 +6,20 @@ import { PortableText } from '@portabletext/react';
 import RichTextComponents from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 
-import urlForImage from '@/u/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 import EventMap from '@/components/post/EventMap';
 import SourcesPanel from '@/components/post/SourcesPanel';
 
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
-import resolveHref from '@/util/resolveHref';
+import resolveHref from '@/util/url/resolveHref';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
-import { buildLiveEventMetadata, getSanityOgImageUrl, getCanonicalUrl } from '@/util/metadata';
+import { buildLiveEventMetadata, getSanityOgImageUrl, getCanonicalUrl } from '@/util/metadata/metadata';
 
 type Props = {
   params: Promise<{

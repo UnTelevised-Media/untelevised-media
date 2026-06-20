@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import { BannerAd } from '@/components/googleAdSense';
 
-import urlForImage from '@/util/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryAllMusicArtists, queryFeaturedMusicArtists } from '@/lib/sanity/lib/queries';
 import { Users, Music, Star, MapPin } from 'lucide-react';
-import { DEFAULT_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata';
+import { DEFAULT_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata/metadata';
 
 export const metadata: Metadata = {
   title: 'Music Artists | Discover Talented Musicians',

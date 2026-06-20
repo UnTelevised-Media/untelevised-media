@@ -1,4 +1,4 @@
-// src/util/generateStaticSlugs.ts
+// src/util/url/generateStaticSlugs.ts
 import 'server-only';
 
 import { groq } from 'next-sanity';

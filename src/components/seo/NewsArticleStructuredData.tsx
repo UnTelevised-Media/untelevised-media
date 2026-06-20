@@ -1,7 +1,7 @@
 // src/components/seo/NewsArticleStructuredData.tsx
 // JSON-LD structured data for news article pages — NewsArticle + BreadcrumbList schema
 
-import { getSanityOgImageUrl } from '@/util/metadata';
+import { getSanityOgImageUrl } from '@/util/metadata/metadata';
 import type { Article } from '@/models/types/sanity';
 
 interface Props {

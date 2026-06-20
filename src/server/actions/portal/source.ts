@@ -5,7 +5,7 @@
 import { requireAuthor } from '@/lib/auth/roles';
 import writeClient from '@/lib/sanity/lib/write-client';
 import { verifyArticleAccessForClerkUser } from '@/services/portal/article-ownership';
-import { sanitizeText } from '@/util/sanitize';
+import { sanitizeText } from '@/util/text/sanitize';
 import { checkRateLimit } from '@/services/portal/rate-limit';
 import { portalClient } from '@/services/portal/fetch';
 import { queryPortalAllSources } from '@/services/portal/queries';

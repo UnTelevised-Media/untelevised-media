@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Article } from '@/models/types/sanity';
-import urlForImage from '@/util/urlForImage';
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
+import urlForImage from '@/util/url/urlForImage';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
 import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/googleAdSense';
 
 interface RawFeedProps {

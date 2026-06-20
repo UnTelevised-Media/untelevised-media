@@ -1,6 +1,6 @@
-// src/util/getSongArtwork.ts
+// src/util/content/getSongArtwork.ts
 import type { Song } from '@/models/types/sanity';
-import urlForImage from './urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 
 type SongWithArtwork = Pick<Song, 'trackArt' | 'album'>;
 

@@ -7,7 +7,7 @@ import {
   portableTextToBlockNote,
   cdnUrlToAssetRef,
   type SanityBlockAny,
-} from '../blocknote-serializer';
+} from '@/lib/blocknote/util/blocknote-serializer';
 
 // ---------------------------------------------------------------------------
 // Local type aliases (mirror the private types in the serializer)

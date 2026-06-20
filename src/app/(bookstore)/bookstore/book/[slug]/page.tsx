@@ -15,8 +15,8 @@ import {
   queryApprovedReviewsByBookSlug,
 } from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/models/types/bookstore';
-import urlForImage from '@/util/urlForImage';
-import { HURRIYA_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata';
+import urlForImage from '@/util/url/urlForImage';
+import { HURRIYA_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata/metadata';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
 import SocialShare from '@/components/global/SocialShare';
 import WishlistButton from '@/components/bookstore/WishlistButton';

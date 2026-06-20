@@ -5,7 +5,7 @@
 
 import { requireAdmin, requireAuthor } from '@/lib/auth/roles';
 import writeClient from '@/lib/sanity/lib/write-client';
-import { sanitizeText } from '@/util/sanitize';
+import { sanitizeText } from '@/util/text/sanitize';
 import { z } from 'zod';
 
 const linkSchema = z.object({

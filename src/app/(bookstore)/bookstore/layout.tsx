@@ -8,7 +8,7 @@ import Header from '@/components/global/Header';
 import HeaderLogo from '@/components/global/HeaderLogo';
 import Footer from '@/components/global/Footer';
 import BookstoreNav from '@/components/bookstore/BookstoreNav';
-import { HURRIYA_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
+import { HURRIYA_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata/metadata';
 
 export const metadata: Metadata = {
   openGraph: {

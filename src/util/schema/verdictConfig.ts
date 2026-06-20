@@ -1,4 +1,4 @@
-// src/lib/factCheck/verdictConfig.ts
+// src/util/schema/verdictConfig.ts
 
 export type FactCheckRating =
   | 'true'

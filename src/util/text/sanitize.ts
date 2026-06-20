@@ -1,4 +1,4 @@
-// src/lib/portal/sanitize.ts
+// src/util/text/sanitize.ts
 // Input sanitization for portal form submissions.
 // All user text is sanitized before writing to Sanity.
 

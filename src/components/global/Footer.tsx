@@ -18,8 +18,8 @@ import { RiKickLine } from 'react-icons/ri';
 import ClientSideRoute from '../providers/ClientSideRoute';
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
-import formatTitleForURL from '@/util/formatTitleForURL';
-import resolveHref from '@/util/resolveHref';
+import formatTitleForURL from '@/util/url/formatTitleForURL';
+import resolveHref from '@/util/url/resolveHref';
 import { queryCategories, queryPoliciesList } from '@/lib/sanity/lib/queries';
 
 // Types for the specific query results

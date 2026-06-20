@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import getTimeSinceEvent from '@/util/getTimeSinceEvent';
-import formatDate from '@/util/formatDate';
+import getTimeSinceEvent from '@/util/date/getTimeSinceEvent';
+import formatDate from '@/util/date/formatDate';
 
 interface ClientTimeDisplayProps {
   eventDate: string | Date;

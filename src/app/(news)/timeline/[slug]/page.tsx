@@ -25,8 +25,8 @@ import { RectangleAd, BannerAd } from '@/components/googleAdSense';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryTimelineBySlug } from '@/lib/sanity/lib/queries';
-import urlForImage from '@/util/urlForImage';
-import formatDate from '@/util/formatDate';
+import urlForImage from '@/util/url/urlForImage';
+import formatDate from '@/util/date/formatDate';
 
 type Props = {
   params: Promise<{

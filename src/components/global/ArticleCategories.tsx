@@ -4,7 +4,7 @@ import type { Category } from '@/models/types/sanity';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryCategories } from '@/lib/sanity/lib/queries';
 import Link from 'next/link';
-import formatTitleForURL from '@/util/formatTitleForURL';
+import formatTitleForURL from '@/util/url/formatTitleForURL';
 
 interface ArticleCategoriesProps {
   activeSlug?: string;

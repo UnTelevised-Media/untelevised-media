@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import type { Author } from '@/models/types/sanity';
-import urlForImage from '@/util/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 
 export const metadata: Metadata = {
   title: 'Our Team — UnTelevised Media',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import AuthorLinks from '@/components/global/AuthorLinks';
-import resolveHref from '@/util/resolveHref';
+import resolveHref from '@/util/url/resolveHref';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryAllAuthors } from '@/lib/sanity/lib/queries';
 

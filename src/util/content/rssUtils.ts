@@ -1,6 +1,6 @@
-// src/lib/rssUtils.ts
+// src/util/content/rssUtils.ts
 import type { Image } from '@/models/types/portableText';
-import urlForImage from '@/util/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 
 const BASE_URL = 'https://www.untelevised.media';
 

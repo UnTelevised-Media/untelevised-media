@@ -8,10 +8,10 @@ import RichTextComponents from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 import { RectangleAd, BannerAd } from '@/components/googleAdSense';
 
-import urlForImage from '@/util/urlForImage';
-import { getSongArtwork, getSongArtworkAlt } from '@/util/getSongArtwork';
+import urlForImage from '@/util/url/urlForImage';
+import { getSongArtwork, getSongArtworkAlt } from '@/util/content/getSongArtwork';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
@@ -24,7 +24,7 @@ import {
   truncate,
   DEFAULT_OG_IMAGE,
   TWITTER_HANDLE,
-} from '@/util/metadata';
+} from '@/util/metadata/metadata';
 
 type Props = {
   params: Promise<{

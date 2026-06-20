@@ -1,6 +1,6 @@
 ﻿// src/components/post/CorrectionNotice.tsx
 import { AlertTriangle, Info, RefreshCw, XCircle } from 'lucide-react';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 
 type CorrectionType = 'correction' | 'clarification' | 'update' | 'retraction';
 

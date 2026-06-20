@@ -17,8 +17,8 @@ import {
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import urlForImage from '@/util/urlForImage';
-import formatDate from '@/util/formatDate';
+import urlForImage from '@/util/url/urlForImage';
+import formatDate from '@/util/date/formatDate';
 import type { TimelineEvent } from '@/models/types/sanity';
 
 interface TimelineEventCardProps {

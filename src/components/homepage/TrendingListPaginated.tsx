@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 
 export interface TrendingListArticle {
   _id: string;

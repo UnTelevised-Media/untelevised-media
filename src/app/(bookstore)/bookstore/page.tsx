@@ -13,7 +13,7 @@ import {
   queryBooksByGenreSlug,
 } from '@/lib/sanity/lib/queries';
 import type { SanityBook, SanityBookGenre } from '@/models/types/bookstore';
-import urlForImage from '@/util/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 import GenreFilter from '@/components/bookstore/GenreFilter';
 import BookCardActions from '@/components/bookstore/BookCardActions';
 import BookstoreNewsletter from '@/components/bookstore/BookstoreNewsletter';

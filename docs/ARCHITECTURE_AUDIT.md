@@ -212,7 +212,7 @@ const moreNews = filterAndSortArticles(articles, excludedIds);
 
 **Issue:**  
 This single component handles multiple concerns:
-- Form validation (schema management)
+- Form validation (schema management) @Digitl-Alchemyst move all of these to /models/validations
 - Rich text editing (TipTap integration)
 - Sanity integration (document updates)
 - API calls (draft/publish actions)
@@ -310,7 +310,7 @@ export function ArticleEditorForm({ article }: Props) {
 
 ---
 
-### Violation 10: Server Data Fetching in Components
+### Violation 10: Server Data Fetching in Components @Digitl-Alchemyst all data fetching queries live in /lib/sanity/lib/queries
 
 **Files:**
 - `/src/components/global/ArticleCategories.tsx:75+`
@@ -414,42 +414,6 @@ import { extractPortableText } from '@/util/text/extractPortableText';
 const description = extractPortableText(article.content);
 ```
 
----
-
-### Violation 12: Type Import from Component (Architecture Gray Area)
-
-**File:** `/src/hooks/use-toast.ts:6`
-
-**Issue:**  
-```typescript
-import type { ToastActionElement, ToastProps } from '@/components/ui/toast';
-```
-
-**Architectural Clarification:**  
-- Architecture states: "hooks/ Cannot import from components/"
-- This is a **type-only import** (runtime-safe)
-- Type imports are typically exceptions to import rules
-- However, the spirit of the rule is to keep layers separate
-
-**Impact:** LOW (type-only import, no runtime dependency)  
-**Effort to fix:** LOW (move types to `/src/models/types/`)
-
-**Suggested Fix - Recommended:**
-```typescript
-// Create: src/models/types/ui/toast.ts
-export type ToastActionElement = React.ReactNode;
-export type ToastProps = {/* ... */};
-
-// In hook:
-import type { ToastActionElement, ToastProps } from '@/models/types/ui/toast';
-```
-
-**Benefits:**
-- Cleaner separation of concerns
-- Types in dedicated layer
-- Components and hooks don't form circular dependency risk
-
----
 
 ## 🟢 Opportunities for Refactoring (Non-Violations)
 

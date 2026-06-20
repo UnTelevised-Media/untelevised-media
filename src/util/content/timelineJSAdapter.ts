@@ -1,10 +1,11 @@
+// src/util/content/timelineJSAdapter.ts
 // TimelineJS Data Adapter
 // Transforms Sanity CMS timeline data into TimelineJS-compatible format
 
 import type { Timeline, TimelineEvent } from '@/models/types/sanity';
 import type { Block } from '@/models/types/portableText';
-import urlForImage from './urlForImage';
-import formatDate from './formatDate';
+import urlForImage from '@/util/url/urlForImage';
+import formatDate from '@/util/date/formatDate';
 
 export interface TimelineJSSlide {
   start_date: {

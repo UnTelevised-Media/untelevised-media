@@ -11,8 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import TimelineFilters from './TimelineFilters';
 import TimelineNavigation from './TimelineNavigation';
-import urlForImage from '@/util/urlForImage';
-import formatDate from '@/util/formatDate';
+import urlForImage from '@/util/url/urlForImage';
+import formatDate from '@/util/date/formatDate';
 import type { TimelineEvent, TimelineCategory } from '@/models/types/sanity';
 
 interface TimelineVisualizationProps {

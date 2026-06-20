@@ -2,8 +2,8 @@
 // Tests for Tiptap ↔ Portable Text bidirectional serialization.
 // Pure functions — no mocks needed.
 
-import { tiptapToPortableText, portableTextToTiptap } from '../portable-text-serializer';
-import type { TiptapNode, SanityBlock } from '../portable-text-serializer';
+import { tiptapToPortableText, portableTextToTiptap } from '../text/portable-text-serializer';
+import type { TiptapNode, SanityBlock } from '../text/portable-text-serializer';
 
 // ---------------------------------------------------------------------------
 // Helpers

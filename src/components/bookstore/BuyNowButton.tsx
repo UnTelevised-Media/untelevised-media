@@ -9,7 +9,7 @@ import type {
   CheckoutPayload,
   GiftOptions,
 } from '@/models/types/bookstore';
-import getStripeIdForFormat from '@/util/stripeUtils';
+import getStripeIdForFormat from '@/util/stripe/stripeUtils';
 
 interface Props {
   book: SanityBook;

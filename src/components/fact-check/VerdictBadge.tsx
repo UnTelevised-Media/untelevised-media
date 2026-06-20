@@ -1,5 +1,5 @@
 ﻿// src/components/fact-check/VerdictBadge.tsx
-import { VERDICT_CONFIG, type FactCheckRating } from '@/util/verdictConfig';
+import { VERDICT_CONFIG, type FactCheckRating } from '@/util/schema/verdictConfig';
 
 interface VerdictBadgeProps {
   rating: FactCheckRating;

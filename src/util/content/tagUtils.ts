@@ -1,4 +1,4 @@
-// src/lib/tagUtils.ts
+// src/util/content/tagUtils.ts
 
 export function tagToSlug(tag: string): string {
   return tag

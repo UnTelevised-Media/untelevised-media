@@ -7,19 +7,19 @@ import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import RichTextComponents from '@/components/providers/RichTextComponents';
 
-import urlForImage from '@/u/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 
 import AuthorLinks from '@/components/global/AuthorLinks';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import resolveHref from '@/util/resolveHref';
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
+import resolveHref from '@/util/url/resolveHref';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
-import { buildAuthorMetadata } from '@/util/metadata';
+import { buildAuthorMetadata } from '@/util/metadata/metadata';
 import type { SanityBook, SanityBookFormat } from '@/models/types/bookstore';
 import BookCardActions from '@/components/bookstore/BookCardActions';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';

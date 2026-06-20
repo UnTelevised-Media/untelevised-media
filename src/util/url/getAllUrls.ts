@@ -1,4 +1,4 @@
-// src/util/getAllUrls.ts
+// src/util/url/getAllUrls.ts
 // Fetches the minimal fields needed for sitemap.ts — slug, _updatedAt, _type.
 // Each query filters by defined(slug.current) to skip draft/incomplete docs
 // that have no slug, preventing "Cannot read properties of null" errors.

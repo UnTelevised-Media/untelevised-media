@@ -3,11 +3,11 @@
 import React, { Fragment, useState } from 'react';
 import Image from 'next/image';
 
-import urlForImage from '@/util/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import formatDate from '@/util/formatDate';
-import resolveHref from '@/util/resolveHref';
+import formatDate from '@/util/date/formatDate';
+import resolveHref from '@/util/url/resolveHref';
 import { InFeedAd, AD_CONFIG } from '@/components/googleAdSense';
 
 interface LiveEvent {

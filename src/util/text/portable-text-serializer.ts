@@ -1,4 +1,4 @@
-// src/lib/portal/portable-text-serializer.ts
+// src/util/text/portable-text-serializer.ts
 // Bidirectional serializer between Tiptap JSON (ProseMirror) and
 // Sanity Portable Text (blockContent). This is a custom implementation
 // that covers the exact marks/nodes defined in blockContent.ts.

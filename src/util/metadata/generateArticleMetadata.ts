@@ -2,9 +2,9 @@
 import type { Metadata } from 'next';
 import type { Article } from '@/models/types/sanity';
 import sanityClient from '@/lib/sanity/lib/client';
-import urlForImage from '@/util/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
-import { TWITTER_HANDLE } from '@/util/metadata';
+import { TWITTER_HANDLE } from '@/util/metadata/metadata';
 
 type Props = {
   params: {

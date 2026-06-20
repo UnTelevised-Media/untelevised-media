@@ -10,7 +10,7 @@ import {
   convertTimelineToTimelineJS,
   validateTimelineJSData,
   type TimelineJSData,
-} from '@/util/timelineJSAdapter';
+} from '@/util/content/timelineJSAdapter';
 import '@/styles/timelinejs-custom.css';
 
 interface TimelineJSVisualizationProps {

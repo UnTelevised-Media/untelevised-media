@@ -4,10 +4,10 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import { BannerAd } from '@/components/googleAdSense';
 
-import urlForImage from '@/util/urlForImage';
-import { getSongArtwork, getSongArtworkAlt } from '@/util/getSongArtwork';
+import urlForImage from '@/util/url/urlForImage';
+import { getSongArtwork, getSongArtworkAlt } from '@/util/content/getSongArtwork';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import {
   queryFeaturedSongs,
@@ -15,7 +15,7 @@ import {
   queryFeaturedMusicArtists,
 } from '@/lib/sanity/lib/queries';
 import { Music, TrendingUp, Users, Clock } from 'lucide-react';
-import { DEFAULT_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata';
+import { DEFAULT_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata/metadata';
 
 export const metadata: Metadata = {
   title: 'Lyrics | Music & Songs',

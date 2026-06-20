@@ -3,7 +3,7 @@
 
 import type { Metadata } from 'next';
 import type { Article, Author, Category, LiveEvent } from '@/models/types/sanity';
-import urlForImage from './urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 
 // Local type aliases for Sanity document shapes not yet covered by TypeGen.
 // Update these when running `sanity typegen generate` adds the matching schemas.

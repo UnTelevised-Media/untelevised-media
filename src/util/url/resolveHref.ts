@@ -1,4 +1,4 @@
-// src/util/resolveHref.ts
+// src/util/url/resolveHref.ts
 
 // Define a type for the PageInfo object
 type PageInfo = {

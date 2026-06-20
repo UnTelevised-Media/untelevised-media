@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Bookmark, BookmarkX, Trash2, ArrowUpRight, Clock, Cloud, Monitor } from 'lucide-react';
 import { useBookmarks } from '@/hooks/useBookmarks';
 import { useUser } from '@clerk/nextjs';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 
 export default function ReadingListPage() {
   const { bookmarks, loading, ready, remove, clearAll } = useBookmarks();

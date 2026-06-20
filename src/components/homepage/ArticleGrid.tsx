@@ -14,9 +14,9 @@ import {
 } from '@heroicons/react/24/outline';
 import type { Article } from '@/models/types/sanity';
 
-import urlForImage from '@/util/urlForImage';
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
+import urlForImage from '@/util/url/urlForImage';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
 import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 
 interface ArticleGridProps {

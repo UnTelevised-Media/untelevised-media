@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { TrendingUp } from 'lucide-react';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { getTrendingArticles as getTrendingFromSupabase } from '@/lib/supabase/viewEvents';
-import formatDate from '@/util/formatDate';
-import urlForImage from '@/util/urlForImage';
+import formatDate from '@/util/date/formatDate';
+import urlForImage from '@/util/url/urlForImage';
 import TrendingListPaginated from './TrendingListPaginated';
 
 interface TrendingArticle {

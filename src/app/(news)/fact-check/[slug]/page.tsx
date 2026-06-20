@@ -8,11 +8,11 @@ import { queryFactCheckBySlug } from '@/lib/sanity/lib/queries';
 import { groq } from 'next-sanity';
 import VerdictBadge from '@/components/fact-check/VerdictBadge';
 import RichTextComponents from '@/components/providers/RichTextComponents';
-import { buildClaimReviewJsonLd } from '@/util/claimReviewJsonLd';
-import type { FactCheckRating } from '@/util/verdictConfig';
-import formatDate from '@/util/formatDate';
+import { buildClaimReviewJsonLd } from '@/util/schema/claimReviewJsonLd';
+import type { FactCheckRating } from '@/util/schema/verdictConfig';
+import formatDate from '@/util/date/formatDate';
 import Link from 'next/link';
-import { buildFactCheckMetadata } from '@/util/metadata';
+import { buildFactCheckMetadata } from '@/util/metadata/metadata';
 import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/googleAdSense';
 
 interface Props {

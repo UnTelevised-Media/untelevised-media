@@ -1,7 +1,7 @@
 ﻿import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import urlForImage from '@/u/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 import InlineFactCheckCard from '@/components/fact-check/InlineFactCheckCard';
 import {
   Table,

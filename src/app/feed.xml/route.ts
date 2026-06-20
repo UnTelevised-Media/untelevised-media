@@ -1,7 +1,7 @@
 // src/app/feed.xml/route.ts
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryRSSFeed, queryRSSLiveEvents } from '@/lib/sanity/lib/queries';
-import { generateRSSXML, type RSSArticle, type RSSLiveEvent } from '@/util/rssUtils';
+import { generateRSSXML, type RSSArticle, type RSSLiveEvent } from '@/util/content/rssUtils';
 
 export const revalidate = 3600;
 

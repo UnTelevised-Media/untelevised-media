@@ -34,7 +34,10 @@ import {
   type ArticleWriteInput,
 } from '@/server/actions/portal/article';
 import { PitchQuickViewModal, type PitchForModal } from './PitchQuickViewModal';
-import { blockNoteToPortableText, portableTextToBlockNote } from '@/util/blocknote-serializer';
+import {
+  blockNoteToPortableText,
+  portableTextToBlockNote,
+} from '@/lib/blocknote/util/blocknote-serializer';
 import urlFor from '@/lib/sanity/utils/image';
 import SourceSelectorModal from './SourceSelectorModal';
 

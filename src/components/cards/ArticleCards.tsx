@@ -6,10 +6,10 @@ import { ArrowUpRight, ShareIcon, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
 import type { Article } from '@/models/types/sanity';
 
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
-import urlForImage from '@/util/urlForImage';
-import { getReadingTime } from '@/util/readingTime';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
+import urlForImage from '@/util/url/urlForImage';
+import { getReadingTime } from '@/util/date/readingTime';
 
 // Enhanced Article Card - matches your existing design but with the blog card layout
 function ArticleCard({ articles }: { articles: Article[] }) {

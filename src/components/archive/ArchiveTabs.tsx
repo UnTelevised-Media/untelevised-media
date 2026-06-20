@@ -4,9 +4,9 @@ import { useState, useMemo, Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { List, LayoutGrid } from 'lucide-react';
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
-import urlForImage from '@/util/urlForImage';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
+import urlForImage from '@/util/url/urlForImage';
 import { InFeedAd, AD_CONFIG } from '@/components/googleAdSense';
 
 export interface ArchiveArticle {

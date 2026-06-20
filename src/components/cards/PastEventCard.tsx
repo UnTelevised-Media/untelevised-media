@@ -8,8 +8,8 @@ import type { LiveEvent } from '@/models/types/sanity';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import urlForImage from '@/util/urlForImage';
-import formatDate from '@/util/formatDate';
+import urlForImage from '@/util/url/urlForImage';
+import formatDate from '@/util/date/formatDate';
 import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
 
 interface PastEventCardProps {

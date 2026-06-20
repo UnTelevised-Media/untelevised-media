@@ -1,7 +1,7 @@
 // src/lib/portal/__tests__/sanitize.test.ts
 // Unit tests for input sanitization — pure functions, no mocks.
 
-import { sanitizeText, sanitizeHtml } from '../sanitize';
+import { sanitizeText, sanitizeHtml } from '../text/sanitize';
 
 describe('sanitizeText', () => {
   it('strips HTML tags from input', () => {

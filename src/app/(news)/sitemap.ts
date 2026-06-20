@@ -1,10 +1,10 @@
 // src/app/(user)/sitemap.ts
 
-import getAllURLs from '@/util/getAllUrls';
+import getAllURLs from '@/util/url/getAllUrls';
 import sanityClient from '@/lib/sanity/lib/client';
 import { groq } from 'next-sanity';
 import { queryAllTags } from '@/lib/sanity/lib/queries';
-import { tagToSlug } from '@/util/tagUtils';
+import { tagToSlug } from '@/util/content/tagUtils';
 
 const queryFactCheckSlugs = groq`
   *[_type == 'factCheck'] {

@@ -6,7 +6,7 @@ import RichTextComponents from '@/components/providers/RichTextComponents';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryActiveJobListings } from '@/lib/sanity/lib/queries';
 import ContributorApplicationForm from '@/components/careers/ContributorApplicationForm';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 import { Briefcase, MapPin, Clock, DollarSign } from 'lucide-react';
 
 export const metadata: Metadata = {
