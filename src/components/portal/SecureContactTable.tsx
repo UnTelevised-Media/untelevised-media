@@ -3,6 +3,11 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import formatDate from '@/util/date/formatDate';
+import {
+  URGENCY_COLORS,
+  SECURE_CONTACT_STATUS_COLORS as STATUS_COLORS,
+  SECURE_CONTACT_STATUS_LABELS as STATUS_LABELS,
+} from '@/util/portal/statusConfig';
 
 export interface SecureContact {
   _id: string;
@@ -17,29 +22,6 @@ export interface SecureContact {
   submittedAt?: string;
   status?: string;
 }
-
-const URGENCY_COLORS: Record<string, string> = {
-  critical: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-  high: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
-  medium: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-  low: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
-};
-
-const STATUS_COLORS: Record<string, string> = {
-  new: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-  reviewing: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-  progress: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
-  resolved: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-  archived: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
-};
-
-const STATUS_LABELS: Record<string, string> = {
-  new: 'New',
-  reviewing: 'In Review',
-  progress: 'In Progress',
-  resolved: 'Resolved',
-  archived: 'Archived',
-};
 
 export function SecureContactTable({ contacts }: { contacts: SecureContact[] }) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
