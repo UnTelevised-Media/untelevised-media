@@ -24,6 +24,7 @@ import {
 import urlForImage from '@/util/url/urlForImage';
 import formatDate from '@/util/date/formatDate';
 import getArticleDate from '@/util/date/getArticleDate';
+import filterAndSortArticles from '@/util/content/filterAndSortArticles';
 
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
@@ -42,17 +43,7 @@ export default async function HomePage() {
     ].filter(Boolean) as string[]
   );
 
-  // Filter out already-shown articles, then sort chronologically by eventDate → publishedAt → _createdAt
-  // eventDate may not be in type definition for some article types
-  const moreNews = articles
-    .filter((a) => !excludedIds.has(a._id))
-    .sort((a, b) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const dateA = (a as any).eventDate ?? a.publishedAt ?? a._createdAt;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const dateB = (b as any).eventDate ?? b.publishedAt ?? b._createdAt;
-      return new Date(dateB).getTime() - new Date(dateA).getTime();
-    });
+  const moreNews = filterAndSortArticles(articles, excludedIds);
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
