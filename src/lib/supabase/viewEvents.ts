@@ -58,10 +58,10 @@ export async function getViewCountsByDate(dateString: string): Promise<ViewCount
   const client = getServerClient();
 
   // Supabase client type inference is incomplete for chained query methods
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result = await (client
     .from('view_count')
     .select('slug')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .eq('created_date', dateString) as any);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error } = result as any;
@@ -120,10 +120,10 @@ export async function getTrendingArticles(
   const dateStr = startDate.toISOString().split('T')[0];
 
   // Supabase client type inference is incomplete for query filters
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result = await (client
     .from('view_count')
     .select('slug, viewed_at')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .gte('created_date', dateStr) as any);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error } = result as any;
@@ -182,10 +182,10 @@ export async function getMostReadByCategory(
   const dateStr = startDate.toISOString().split('T')[0];
 
   // Supabase client type inference is incomplete for query filters
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result = await (client
     .from('view_count')
     .select('slug, viewed_at')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .gte('created_date', dateStr) as any);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error } = result as any;
