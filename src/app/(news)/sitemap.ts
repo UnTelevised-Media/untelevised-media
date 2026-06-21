@@ -1,5 +1,8 @@
 // src/app/(user)/sitemap.ts
 
+// Cache sitemap for 1 hour; crawlers hit this frequently
+export const revalidate = 3600;
+
 import getAllURLs from '@/util/url/getAllUrls';
 import sanityClient from '@/lib/sanity/lib/client';
 import { groq } from 'next-sanity';
