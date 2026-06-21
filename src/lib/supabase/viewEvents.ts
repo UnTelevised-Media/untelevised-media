@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { unstable_cache } from 'next/cache';
 import { createHash } from 'crypto';
 import { getServerClient } from './client';
 
@@ -108,118 +109,79 @@ export interface TrendingArticle {
 
 /**
  * Get trending articles from view_count table, aggregated by slug
+ * Uses Supabase RPC for server-side aggregation and caches results for 5 minutes
+ * NOTE: Requires SQL function created in Supabase dashboard:
+ * CREATE OR REPLACE FUNCTION get_trending_articles(days_back integer, result_limit integer)
+ * RETURNS TABLE(slug text, view_count bigint, last_viewed timestamptz)
+ * LANGUAGE sql STABLE SECURITY DEFINER
+ * AS $$ SELECT slug, COUNT(*)::bigint AS view_count, MAX(viewed_at)::timestamptz AS last_viewed
+ *     FROM view_count WHERE created_date >= (CURRENT_DATE - days_back)
+ *     GROUP BY slug ORDER BY view_count DESC LIMIT result_limit; $$;
  */
-export async function getTrendingArticles(
-  daysBack: number = 7,
-  limit: number = 31
-): Promise<TrendingArticle[]> {
-  const client = getServerClient();
+export const getTrendingArticles = unstable_cache(
+  async (daysBack: number = 7, limit: number = 31): Promise<TrendingArticle[]> => {
+    const client = getServerClient();
 
-  const startDate = new Date();
-  startDate.setDate(startDate.getDate() - daysBack);
-  const dateStr = startDate.toISOString().split('T')[0];
-
-  // Supabase client type inference is incomplete for query filters
-  const result = await (client
-    .from('view_count')
-    .select('slug, viewed_at')
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .gte('created_date', dateStr) as any);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data, error } = result as any;
+    const { data, error } = await (client.rpc('get_trending_articles', {
+      days_back: daysBack,
+      result_limit: limit,
+    }) as any);
 
-  if (error) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const err = error as any;
-    console.error('[getTrendingArticles] Supabase query error:', {
-      code: err.code,
-      message: err.message,
-      details: err.details,
-      hint: err.hint,
-    });
-    throw error;
-  }
+    if (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const err = error as any;
+      console.error('[getTrendingArticles] Supabase RPC error:', {
+        code: err.code,
+        message: err.message,
+        details: err.details,
+      });
+      throw error;
+    }
 
-  // Aggregate view counts by slug
-  const counts = new Map<string, { count: number; lastViewed: string }>();
-
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  for (const row of data || []) {
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-    const current = counts.get(row.slug) || { count: 0, lastViewed: row.viewed_at };
-    counts.set(row.slug, {
-      count: current.count + 1,
-      lastViewed:
-        new Date(row.viewed_at) > new Date(current.lastViewed)
-          ? row.viewed_at
-          : current.lastViewed,
-    });
-  }
-
-  return Array.from(counts.entries())
-    .sort((a, b) => b[1].count - a[1].count)
-    .slice(0, limit)
-    .map(([slug, meta]) => ({
-      slug,
-      view_count: meta.count,
-      last_viewed: meta.lastViewed,
+    return (data ?? []).map((row: { slug: string; view_count: string; last_viewed: string }) => ({
+      slug: row.slug,
+      view_count: Number(row.view_count),
+      last_viewed: row.last_viewed,
     }));
-}
+  },
+  ['supabase-trending'],
+  { revalidate: 300, tags: ['trending'] }
+);
 
 /**
  * Get most read articles from Supabase, filtered by category
- * Returns view counts for articles in a specific category
+ * NOTE: The categorySlugs parameter is not used in the current implementation.
+ * This function returns the same aggregated view counts as getTrendingArticles.
+ * Uses Supabase RPC for server-side aggregation and caches results for 5 minutes.
  */
-export async function getMostReadByCategory(
-  categorySlugs: string[],
-  daysBack: number = 7,
-  limit: number = 5
-): Promise<TrendingArticle[]> {
-  const client = getServerClient();
+export const getMostReadByCategory = unstable_cache(
+  async (
+    categorySlugs: string[],
+    daysBack: number = 7,
+    limit: number = 5
+  ): Promise<TrendingArticle[]> => {
+    const client = getServerClient();
 
-  const startDate = new Date();
-  startDate.setDate(startDate.getDate() - daysBack);
-  const dateStr = startDate.toISOString().split('T')[0];
-
-  // Supabase client type inference is incomplete for query filters
-  const result = await (client
-    .from('view_count')
-    .select('slug, viewed_at')
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .gte('created_date', dateStr) as any);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data, error } = result as any;
+    const { data, error } = await (client.rpc('get_trending_articles', {
+      days_back: daysBack,
+      result_limit: limit,
+    }) as any);
 
-  if (error) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const err = error as any;
-    console.error('[getMostReadByCategory] Query error:', err);
-    throw error;
-  }
+    if (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const err = error as any;
+      console.error('[getMostReadByCategory] Query error:', err);
+      throw error;
+    }
 
-  // Aggregate view counts by slug
-  const counts = new Map<string, { count: number; lastViewed: string }>();
-
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  for (const row of data || []) {
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-    const current = counts.get(row.slug) || { count: 0, lastViewed: row.viewed_at };
-    counts.set(row.slug, {
-      count: current.count + 1,
-      lastViewed:
-        new Date(row.viewed_at) > new Date(current.lastViewed)
-          ? row.viewed_at
-          : current.lastViewed,
-    });
-  }
-
-  // Return top N by view count
-  return Array.from(counts.entries())
-    .sort((a, b) => b[1].count - a[1].count)
-    .slice(0, limit)
-    .map(([slug, meta]) => ({
-      slug,
-      view_count: meta.count,
-      last_viewed: meta.lastViewed,
+    return (data ?? []).map((row: { slug: string; view_count: string; last_viewed: string }) => ({
+      slug: row.slug,
+      view_count: Number(row.view_count),
+      last_viewed: row.last_viewed,
     }));
-}
+  },
+  ['supabase-trending-category'],
+  { revalidate: 300, tags: ['trending'] }
+);
