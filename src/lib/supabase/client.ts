@@ -40,6 +40,19 @@ export type Database = {
         };
       };
     };
+    Functions: {
+      get_trending_articles: {
+        Args: {
+          days_back: number;
+          result_limit: number;
+        };
+        Returns: Array<{
+          slug: string;
+          view_count: string;
+          last_viewed: string;
+        }>;
+      };
+    };
   };
 };
 
