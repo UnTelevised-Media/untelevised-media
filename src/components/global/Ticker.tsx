@@ -30,6 +30,7 @@ const queryArticles = groq`
     _createdAt
   }
   | order(_createdAt desc)
+  [0..49]
 `;
 
 const queryKeyEvent = groq`
@@ -39,6 +40,7 @@ const queryKeyEvent = groq`
     _createdAt
   }
   | order(_createdAt desc)
+  [0..49]
 `;
 
 function Ticker() {
