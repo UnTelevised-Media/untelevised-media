@@ -107,6 +107,12 @@ export interface TrendingArticle {
   last_viewed: string;
 }
 
+interface GetTrendingArticlesResponse {
+  slug: string;
+  view_count: string;
+  last_viewed: string;
+}
+
 /**
  * Get trending articles from view_count table, aggregated by slug
  * Uses Supabase RPC for server-side aggregation and caches results for 5 minutes
@@ -122,24 +128,24 @@ export const getTrendingArticles = unstable_cache(
   async (daysBack: number = 7, limit: number = 31): Promise<TrendingArticle[]> => {
     const client = getServerClient();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data, error } = await (client.rpc('get_trending_articles', {
-      days_back: daysBack,
-      result_limit: limit,
-    }) as any);
+    const { data, error } = await client.rpc<GetTrendingArticlesResponse>(
+      'get_trending_articles',
+      {
+        days_back: daysBack,
+        result_limit: limit,
+      }
+    );
 
     if (error) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const err = error as any;
       console.error('[getTrendingArticles] Supabase RPC error:', {
-        code: err.code,
-        message: err.message,
-        details: err.details,
+        code: error.code,
+        message: error.message,
+        details: error.details,
       });
       throw error;
     }
 
-    return (data ?? []).map((row: { slug: string; view_count: string; last_viewed: string }) => ({
+    return (data ?? []).map((row) => ({
       slug: row.slug,
       view_count: Number(row.view_count),
       last_viewed: row.last_viewed,
@@ -163,20 +169,24 @@ export const getMostReadByCategory = unstable_cache(
   ): Promise<TrendingArticle[]> => {
     const client = getServerClient();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data, error } = await (client.rpc('get_trending_articles', {
-      days_back: daysBack,
-      result_limit: limit,
-    }) as any);
+    const { data, error } = await client.rpc<GetTrendingArticlesResponse>(
+      'get_trending_articles',
+      {
+        days_back: daysBack,
+        result_limit: limit,
+      }
+    );
 
     if (error) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const err = error as any;
-      console.error('[getMostReadByCategory] Query error:', err);
+      console.error('[getMostReadByCategory] Query error:', {
+        code: error.code,
+        message: error.message,
+        details: error.details,
+      });
       throw error;
     }
 
-    return (data ?? []).map((row: { slug: string; view_count: string; last_viewed: string }) => ({
+    return (data ?? []).map((row) => ({
       slug: row.slug,
       view_count: Number(row.view_count),
       last_viewed: row.last_viewed,
