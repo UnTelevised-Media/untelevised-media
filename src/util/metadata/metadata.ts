@@ -28,7 +28,7 @@ type FactCheck = {
   updatedAt?: string;
 };
 
-const BASE_URL = 'https://www.untelevised.media';
+const BASE_URL = 'https://untelevised.media';
 const SITE_NAME = 'UnTelevised Media';
 export const TWITTER_HANDLE = '@untelevised';
 export const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.png`;

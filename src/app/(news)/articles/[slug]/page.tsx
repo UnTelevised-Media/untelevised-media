@@ -75,7 +75,7 @@ export default async function ArticlePage({ params }: Props) {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://www.untelevised.media',
+                item: 'https://untelevised.media',
               },
               // GROQ query dereferences categories[]->, but TypeScript only sees CategoryReference[]
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -85,13 +85,13 @@ export default async function ArticlePage({ params }: Props) {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 name: (cat as any)?.title ?? 'Category',
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                item: `https://www.untelevised.media/category/${formatTitleForURL((cat as any)?.title ?? '')}`,
+                item: `https://untelevised.media/category/${formatTitleForURL((cat as any)?.title ?? '')}`,
               })) ?? []),
               {
                 '@type': 'ListItem',
                 position: article.categories?.length ? 3 : 2,
                 name: article.title,
-                item: `https://www.untelevised.media/articles/${slug}`,
+                item: `https://untelevised.media/articles/${slug}`,
               },
             ],
           }),

@@ -10,7 +10,7 @@ interface Props {
 }
 
 function NewsArticleStructuredData({ article, slug }: Props) {
-  const canonicalUrl = `https://www.untelevised.media/articles/${slug}/`;
+  const canonicalUrl = `https://untelevised.media/articles/${slug}/`;
   const ogImageUrl = getSanityOgImageUrl(article.mainImage);
 
   // GROQ dereferences author-> and categories[]-> in article data
@@ -33,21 +33,21 @@ function NewsArticleStructuredData({ article, slug }: Props) {
           ? {
               '@type': 'Person',
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              '@id': `https://www.untelevised.media/author/${(article.author as any).slug?.current}/#person`,
+              '@id': `https://untelevised.media/author/${(article.author as any).slug?.current}/#person`,
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               name: (article.author as any).name,
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              url: `https://www.untelevised.media/author/${(article.author as any).slug?.current}/`,
+              url: `https://untelevised.media/author/${(article.author as any).slug?.current}/`,
             }
           : undefined,
         publisher: {
           '@type': 'NewsMediaOrganization',
-          '@id': 'https://www.untelevised.media/#organization',
+          '@id': 'https://untelevised.media/#organization',
           name: 'UnTelevised Media',
-          url: 'https://www.untelevised.media/',
+          url: 'https://untelevised.media/',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://www.untelevised.media/Logo.png',
+            url: 'https://untelevised.media/Logo.png',
           },
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,7 +75,7 @@ function NewsArticleStructuredData({ article, slug }: Props) {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://www.untelevised.media/',
+            item: 'https://untelevised.media/',
           },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (article.categories as any)?.[0] && {
@@ -84,7 +84,7 @@ function NewsArticleStructuredData({ article, slug }: Props) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             name: (article.categories as any)[0]?.title,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            item: `https://www.untelevised.media/category/${(article.categories as any)[0]?.slug?.current}/`,
+            item: `https://untelevised.media/category/${(article.categories as any)[0]?.slug?.current}/`,
           },
           {
             '@type': 'ListItem',
