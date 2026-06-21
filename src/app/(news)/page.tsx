@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+import type { Article, LiveEvent } from '@/models/types/sanity';
 // src/app/(user)/page.tsx - Alternative Version
 import { Suspense } from 'react';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ import LoadingSpinner from '@/components/global/LoadingSpinner';
 import { FeaturedArticleCard } from '@/components/cards/ArticleCards';
 import RawFeed from '@/components/homepage/RawFeed';
 import TrendingSection from '@/components/homepage/TrendingSection';
-import { SidebarAd, AD_CONFIG } from '@/components/ads';
+import { SidebarAd, AD_CONFIG } from '@/components/googleAdSense';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import { SubscribedBanner } from '@/components/newsletter/SubscribedBanner';
 
@@ -21,9 +21,10 @@ import {
   queryFieldReportArticles,
   queryTrendingIds,
 } from '@/lib/sanity/lib/queries';
-import urlForImage from '@/util/urlForImage';
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
+import urlForImage from '@/util/url/urlForImage';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
+import filterAndSortArticles from '@/util/content/filterAndSortArticles';
 
 export default async function HomePage() {
   const frontPageData = await getFrontPageData();
@@ -42,14 +43,7 @@ export default async function HomePage() {
     ].filter(Boolean) as string[]
   );
 
-  // Filter out already-shown articles, then sort chronologically by eventDate → publishedAt → _createdAt
-  const moreNews = articles
-    .filter((a) => !excludedIds.has(a._id))
-    .sort((a, b) => {
-      const dateA = (a as any).eventDate ?? a.publishedAt ?? a._createdAt;
-      const dateB = (b as any).eventDate ?? b.publishedAt ?? b._createdAt;
-      return new Date(dateB).getTime() - new Date(dateA).getTime();
-    });
+  const moreNews = filterAndSortArticles(articles, excludedIds);
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
@@ -57,7 +51,9 @@ export default async function HomePage() {
       {liveEvents.length > 0 && (
         <section className='border-b border-slate-300 bg-slate-50 dark:border-slate-800 dark:bg-slate-950'>
           <Suspense fallback={<LoadingSpinner />}>
-            <LiveWidget liveEvents={liveEvents} />
+            {/* LiveWidget expects flexible liveEvent data structure */}
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            <LiveWidget liveEvents={liveEvents as any} />
           </Suspense>
         </section>
       )}
@@ -98,7 +94,9 @@ export default async function HomePage() {
                         HEADLINE
                       </span>
                     </div>
-                    <FeaturedArticleCard article={heroArticle} />
+                    {/* FeaturedArticleCard expects flexible article data */}
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                    <FeaturedArticleCard article={heroArticle as any} />
                   </div>
                 </Suspense>
               </div>
@@ -128,7 +126,7 @@ export default async function HomePage() {
                               src={
                                 urlForImage(article.mainImage)?.width(160).height(120).url() ?? ''
                               }
-                              alt={article.title}
+                              alt={article.title ?? 'Article'}
                               fill
                               sizes='80px'
                               className='object-cover'
@@ -137,10 +135,12 @@ export default async function HomePage() {
                         </div>
                         <div className='min-w-0 flex-1'>
                           <h4 className='line-clamp-2 text-xs font-bold leading-snug text-slate-800 transition-colors group-hover:text-untele dark:text-slate-200'>
-                            {article.title}
+                            {article.title ?? 'Untitled'}
                           </h4>
                           <p className='mt-1 text-xs text-slate-500 dark:text-slate-400'>
-                            {article.author?.name} • {formatDate(getArticleDate(article))}
+                            {/* GROQ dereferences author->, TypeScript sees only reference */}
+                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                            {(article.author as any)?.name} • {formatDate(getArticleDate(article))}
                           </p>
                         </div>
                       </Link>
@@ -241,7 +241,7 @@ export default async function HomePage() {
                     <div className='aspect-video overflow-hidden'>
                       <Image
                         src={urlForImage(article.mainImage)?.url() ?? ''}
-                        alt={article.title}
+                        alt={article.title ?? 'Article'}
                         width={800}
                         height={450}
                         sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
@@ -260,25 +260,33 @@ export default async function HomePage() {
                     <div className='flex flex-1 flex-col p-4'>
                       {article.categories?.[0] && (
                         <span className='mb-2 inline-block bg-untele px-2 py-1 text-xs font-black uppercase tracking-widest text-white'>
-                          {article.categories[0].title}
+                          {/* GROQ dereferences categories[]-> */}
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                          {(article.categories[0] as any)?.title}
                         </span>
                       )}
                       <h3 className='mb-2 line-clamp-2 font-bold text-slate-800 group-hover:text-untele dark:text-slate-200'>
-                        {article.title}
+                        {article.title ?? 'Untitled'}
                       </h3>
                       <p className='mb-3 line-clamp-2 flex-1 text-xs text-slate-600 dark:text-slate-400'>
                         {article.description}
                       </p>
-                      {(article as any).location && (
+                      {article.location && (
                         <p className='mb-3 text-xs font-medium text-slate-500 dark:text-slate-400'>
-                          📍 {(article as any).location}
+                          📍 {article.location}
                         </p>
                       )}
                       <div className='mt-auto flex items-center justify-between text-xs text-slate-600 dark:text-slate-500'>
-                        <span className='font-bold uppercase'>{article.author?.name}</span>
+                        <span className='font-bold uppercase'>
+                          {/* GROQ dereferences author->, TypeScript sees only reference */}
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                          {(article.author as any)?.name}
+                        </span>
                         <div className='flex items-center gap-1'>
                           <span>{formatDate(getArticleDate(article))}</span>
-                          <span>· {(article as any).readingTimeMinutes ?? 1} min read</span>
+                          {/* readingTimeMinutes may not exist in type definition */}
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                          <span>· {(article as any)?.readingTimeMinutes ?? 1} min read</span>
                         </div>
                       </div>
                     </div>
@@ -291,7 +299,9 @@ export default async function HomePage() {
       )}
 
       {/* MORE NEWS - RAW FEED STYLE */}
-      <RawFeed articles={moreNews} />
+      {/* RawFeed expects flexible article array */}
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      <RawFeed articles={moreNews as any} />
 
       {/* BOTTOM CTA */}
       <section className='border-t-4 border-untele bg-gradient-to-b from-untele/20 to-white py-12 dark:to-black'>
@@ -356,10 +366,14 @@ async function getFrontPageData(): Promise<{
     ]);
 
     return {
-      liveEvents: (liveEvents as LiveEvent[]) ?? [],
-      articles: (articles as Article[]) ?? [],
-      breakingArticles: (breakingArticles as Article[]) ?? [],
-      fieldReports: (fieldReports as Article[]) ?? [],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      liveEvents: (liveEvents as any[] as LiveEvent[]) ?? [],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      articles: (articles as any[] as Article[]) ?? [],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      breakingArticles: (breakingArticles as any[] as Article[]) ?? [],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      fieldReports: (fieldReports as any[] as Article[]) ?? [],
       trendingIds: (trendingIds as { _id: string }[]) ?? [],
     };
   } catch (error) {

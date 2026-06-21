@@ -1,53 +1,39 @@
-/* eslint-disable react/function-component-definition */
+import type { Article } from '@/models/types/sanity';
 // src/app/(user)/articles/[slug]/page.tsx
 import { cache } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
-import { InFeedAd, BannerAd, SidebarAd } from '@/components/ads';
-import { AD_CONFIG } from '@/lib/ads/adConfig';
+import { InFeedAd, BannerAd, SidebarAd } from '@/components/googleAdSense';
+import { AD_CONFIG } from '@/lib/googleAdSense/adConfig';
 import RecentBreakingNews from '@/components/article/RecentBreakingNews';
 
-import urlForImage from '@/u/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
-import resolveHref from '@/util/resolveHref';
-import { tagToSlug } from '@/lib/tagUtils';
-import formatTitleForURL from '@/util/formatTitleForURL';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
+import resolveHref from '@/util/url/resolveHref';
+import { tagToSlug } from '@/util/content/tagUtils';
+import formatTitleForURL from '@/util/url/formatTitleForURL';
+import safeText from '@/util/text/safeText';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
-import { buildArticleMetadata } from '@/util/metadata';
-import { NewsArticleStructuredData } from '@/components/seo/NewsArticleStructuredData';
-import { getReadingTime } from '@/lib/readingTime';
-import { CorrectionNotice } from '@/components/post/CorrectionNotice';
-import { SourcesPanel } from '@/components/post/SourcesPanel';
-import { BookmarkButton } from '@/components/bookmarks/BookmarkButton';
+import { buildArticleMetadata } from '@/util/metadata/metadata';
+import NewsArticleStructuredData from '@/components/seo/NewsArticleStructuredData';
+import { getReadingTime } from '@/util/date/readingTime';
+import CorrectionNotice from '@/components/post/CorrectionNotice';
+import SourcesPanel from '@/components/post/SourcesPanel';
+import BookmarkButton from '@/components/bookmarks/BookmarkButton';
 import CommentsSection from '@/components/post/CommentsSection';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import ViewPing from '@/components/post/ViewPing';
 import TrendingSection from '@/components/homepage/TrendingSection';
-
-/**
- * Guard against Sanity fields that may be stored as a block object instead of a plain
- * string (e.g. from old schema versions or programmatic inserts). Returns the string
- * value if it is a string, or extracts the `content` field if present, otherwise null.
- */
-function safeText(value: unknown): string | null {
-  if (typeof value === 'string') return value || null;
-  if (value && typeof value === 'object' && !Array.isArray(value)) {
-    const v = value as Record<string, unknown>;
-    if (typeof v.content === 'string') return v.content || null;
-    if (typeof v.text === 'string') return v.text || null;
-  }
-  return null;
-}
 
 type Props = {
   params: Promise<{
@@ -58,15 +44,20 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
-  if (!article) return { title: 'Article Not Found' };
+  if (!article) {
+    return { title: 'Article Not Found' };
+  }
   return buildArticleMetadata(article, slug);
 }
 
-export default async function Article({ params }: Props) {
-  const { slug } = await params;
-  const article: Article = (await getArticleBySlug(slug)) as Article;
 
-  if (!article) notFound();
+export default async function ArticlePage({ params }: Props) {
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
+
+  if (!article) {
+    notFound();
+  }
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
@@ -84,19 +75,23 @@ export default async function Article({ params }: Props) {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://www.untelevised.media',
+                item: 'https://untelevised.media',
               },
-              ...(article.categories?.slice(0, 1).map((cat) => ({
+              // GROQ query dereferences categories[]->, but TypeScript only sees CategoryReference[]
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              ...((article.categories as any)?.slice(0, 1).map((cat: any) => ({
                 '@type': 'ListItem',
                 position: 2,
-                name: cat.title,
-                item: `https://www.untelevised.media/category/${formatTitleForURL(cat.title)}`,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                name: (cat as any)?.title ?? 'Category',
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                item: `https://untelevised.media/category/${formatTitleForURL((cat as any)?.title ?? '')}`,
               })) ?? []),
               {
                 '@type': 'ListItem',
                 position: article.categories?.length ? 3 : 2,
                 name: article.title,
-                item: `https://www.untelevised.media/articles/${slug}`,
+                item: `https://untelevised.media/articles/${slug}`,
               },
             ],
           }),
@@ -129,7 +124,9 @@ export default async function Article({ params }: Props) {
             <div className='space-y-6'>
               {/* Title */}
               <h1
-                className={`text-4xl font-bold text-white sm:text-5xl lg:text-6xl${article.correction?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
+                // GROQ query dereferences corrections->, TypeScript sees it as reference only
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                className={`text-4xl font-bold text-white sm:text-5xl lg:text-6xl${(article?.corrections as any)?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
               >
                 {article.title}
               </h1>
@@ -145,35 +142,42 @@ export default async function Article({ params }: Props) {
               <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
                 {/* Author + Reviewed By */}
                 <div className='flex flex-wrap items-center gap-3'>
-                  <ClientSideRoute
-                    route={resolveHref('author', article.author.slug?.current) ?? ''}
-                  >
-                    <div className='flex items-center space-x-3 rounded-lg bg-slate-900/50 p-3 backdrop-blur-sm transition-colors hover:bg-slate-900/70'>
-                      <Image
-                        src={urlForImage(article.author.image)?.url() ?? ''}
-                        alt={article.author.image?.alt ?? 'Author image'}
-                        width={48}
-                        height={48}
-                        className='rounded-full border-2 border-white/20 object-cover'
-                      />
-                      <div>
-                        <p className='font-semibold text-white'>{article.author.name}</p>
-                        <p className='text-sm text-slate-300'>Author</p>
+                  {/* GROQ query dereferences author-> and reviewedBy->, TypeScript sees only references */}
+                  {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                  {(article.author as any)?.slug?.current && (
+                    <ClientSideRoute
+                      route={resolveHref('author', (article.author as any)?.slug?.current) ?? ''}
+                    >
+                      <div className='flex items-center space-x-3 rounded-lg bg-slate-900/50 p-3 backdrop-blur-sm transition-colors hover:bg-slate-900/70'>
+                        <Image
+                          src={urlForImage((article.author as any)?.image)?.url() ?? ''}
+                          alt={(article.author as any)?.image?.alt ?? 'Author image'}
+                          width={48}
+                          height={48}
+                          className='rounded-full border-2 border-white/20 object-cover'
+                        />
+                        <div>
+                          <p className='font-semibold text-white'>
+                            {(article.author as any)?.name ?? 'Unknown Author'}
+                          </p>
+                          <p className='text-sm text-slate-300'>Author</p>
+                        </div>
                       </div>
-                    </div>
-                  </ClientSideRoute>
+                    </ClientSideRoute>
+                  )}
 
-                  {article.reviewedBy && (
+                  {(article.reviewedBy as any)?.slug?.current && (
                     <span className='text-sm text-slate-400'>
                       Reviewed by{' '}
                       <Link
-                        href={`/author/${article.reviewedBy.slug?.current}`}
+                        href={`/author/${(article.reviewedBy as any)?.slug?.current}`}
                         className='font-medium text-slate-300 underline hover:text-white'
                       >
-                        {article.reviewedBy.name}
+                        {(article.reviewedBy as any)?.name ?? 'Unknown'}
                       </Link>
                     </span>
                   )}
+                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
                 </div>
 
                 <div className='flex flex-col items-end gap-2'>
@@ -192,21 +196,26 @@ export default async function Article({ params }: Props) {
                     )}
                   </div>
                   {/* Categories + Tags */}
+                  {/* GROQ dereferences categories[]-> and tags, TypeScript sees limited types */}
+                  {/* eslint-disable @typescript-eslint/no-explicit-any */}
                   <div className='flex flex-wrap justify-end gap-2'>
-                    {article.categories &&
-                      article.categories.length > 0 &&
-                      article.categories.map((category) => (
-                        <Link
-                          key={category._id}
-                          href={`/category/${formatTitleForURL(category.title)}`}
-                          className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-untele'
-                        >
-                          {category.title}
-                        </Link>
-                      ))}
-                    {article.tags &&
-                      article.tags.length > 0 &&
-                      article.tags.map((tag) => (
+                    {(article.categories as any) &&
+                      (article.categories as any).length > 0 &&
+                      (article.categories as any).map(
+                        (category: any) =>
+                          (category as any)?.title && (
+                            <Link
+                              key={(category as any)?._id ?? Math.random()}
+                              href={`/category/${formatTitleForURL((category as any).title)}`}
+                              className='inline-flex items-center rounded-full bg-untele/90 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-untele'
+                            >
+                              {(category as any).title}
+                            </Link>
+                          )
+                      )}
+                    {((article as any)?.tags) &&
+                      ((article as any)?.tags)?.length > 0 &&
+                      ((article as any)?.tags)?.map((tag: string) => (
                         <Link
                           key={tag}
                           href={`/tag/${tagToSlug(tag)}`}
@@ -216,6 +225,7 @@ export default async function Article({ params }: Props) {
                         </Link>
                       ))}
                   </div>
+                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
                 </div>
               </div>
             </div>
@@ -224,7 +234,7 @@ export default async function Article({ params }: Props) {
       </section>
 
       {/* View ping — fires once per session, renders nothing */}
-      <ViewPing slug={article.slug.current} />
+      {article.slug?.current && <ViewPing slug={article.slug.current} />}
 
       {/* Main Content + Sidebars */}
       <div className='mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-8'>
@@ -254,21 +264,26 @@ export default async function Article({ params }: Props) {
                       Home
                     </Link>
                   </li>
-                  {article.categories && article.categories.length > 0 && (
+                  {/* GROQ dereferences categories[]-, TypeScript sees limited types */}
+                  {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                  {(article.categories as any) && (article.categories as any).length > 0 && (
                     <>
                       <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>
                         /
                       </li>
                       <li>
-                        <Link
-                          href={`/category/${formatTitleForURL(article.categories[0].title)}`}
-                          className='transition-colors hover:text-untele'
-                        >
-                          {article.categories[0].title}
-                        </Link>
+                        {(article.categories as any)?.[0]?.title && (
+                          <Link
+                            href={`/category/${formatTitleForURL((article.categories as any)[0].title)}`}
+                            className='transition-colors hover:text-untele'
+                          >
+                            {(article.categories as any)[0].title}
+                          </Link>
+                        )}
                       </li>
                     </>
                   )}
+                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
                   <li aria-hidden='true' className='text-slate-400 dark:text-slate-600'>
                     /
                   </li>
@@ -280,25 +295,28 @@ export default async function Article({ params }: Props) {
                   </li>
                 </ol>
               </nav>
+              {/* GROQ dereferences author->, TypeScript sees only reference */}
+              {/* eslint-disable @typescript-eslint/no-explicit-any */}
               <BookmarkButton
                 slug={slug}
-                title={article.title}
+                title={article.title ?? 'Untitled Article'}
                 description={
                   typeof article.description === 'string' ? article.description : undefined
                 }
                 imageUrl={urlForImage(article.mainImage)?.width(400).url() ?? undefined}
-                authorName={article.author?.name}
+                authorName={(article.author as any)?.name ?? undefined}
                 publishedAt={article.publishedAt}
                 readingTime={getReadingTime(article.body)}
                 variant='full'
               />
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
             </div>
 
             {/* Social Share — full width */}
             <div className='mb-8'>
               <SocialShare
-                url={`https://untelevised.media/articles/${slug}`}
-                title={article.title}
+                url={`https://untelevised.media/articles/${article.slug?.current ?? slug}`}
+                title={article.title ?? 'Untitled Article'}
               />
             </div>
 
@@ -349,30 +367,36 @@ export default async function Article({ params }: Props) {
               )}
 
               {/* Correction / Retraction Notice */}
-              {article.correction?.detail && (
+              {/* GROQ dereferences corrections->, TypeScript sees only reference */}
+              {/* eslint-disable @typescript-eslint/no-explicit-any */}
+              {(article.corrections as any)?.detail && (
                 <div className='not-prose'>
-                  <CorrectionNotice correction={article.correction} />
+                  <CorrectionNotice correction={article.corrections as any} />
                 </div>
               )}
 
               {/* Article Body */}
               <div className='rounded-xl border border-slate-200 bg-white/50 p-8 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/50'>
-                <PortableText value={article.body} components={RichTextComponents} />
+                {/* @portabletext/react expects optional children; our RichTextComponents have required children */}
+                <PortableText value={article.body} components={RichTextComponents as any} />
               </div>
 
               {/* Sources & Methodology */}
               <div className='not-prose'>
-                <SourcesPanel sources={article.sources} methodology={article.methodology} />
+                <SourcesPanel sources={article.sources} methodology={(article as any)?.methodology} />
               </div>
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
 
               {/* Tags */}
-              {article.tags && article.tags.length > 0 && (
+              {/* TypeScript doesn't see tags property without as any cast */}
+              {/* eslint-disable @typescript-eslint/no-explicit-any */}
+              {((article as any)?.tags as any) && ((article as any)?.tags as any).length > 0 && (
                 <div className='not-prose mt-8'>
                   <p className='mb-3 text-xs font-black uppercase tracking-widest text-muted-foreground'>
                     Filed Under
                   </p>
                   <div className='flex flex-wrap gap-2'>
-                    {article.tags.map((tag: string) => (
+                    {((article as any)?.tags as any).map((tag: string) => (
                       <Link
                         key={tag}
                         href={`/tag/${tagToSlug(tag)}`}
@@ -384,6 +408,7 @@ export default async function Article({ params }: Props) {
                   </div>
                 </div>
               )}
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
 
               {/* FAQs */}
               {article.faqs && article.faqs.length > 0 && (
@@ -392,7 +417,8 @@ export default async function Article({ params }: Props) {
                     Frequently Asked Questions
                   </h3>
                   <dl className='space-y-4'>
-                    {article.faqs.map((faq, i) => (
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                    {article.faqs?.map((faq: any, i: number) => (
                       <div
                         key={i}
                         className='border-b border-slate-200 pb-4 last:border-0 last:pb-0 dark:border-slate-700'
@@ -425,7 +451,8 @@ export default async function Article({ params }: Props) {
                   Related Articles
                 </h2>
                 <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-                  {article.relatedArticles.map((related) => (
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  {article.relatedArticles?.map((related: any) => (
                     <Link
                       key={related._id}
                       href={`/articles/${related.slug}`}
@@ -452,9 +479,12 @@ export default async function Article({ params }: Props) {
                           </p>
                         )}
                         <div className='mt-auto flex items-center justify-between text-xs text-slate-500 dark:text-slate-400'>
-                          {related.author?.name && (
-                            <span className='font-medium'>{related.author.name}</span>
+                          {/* GROQ dereferences author->, TypeScript sees only reference */}
+                          {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                          {(related.author as any)?.name && (
+                            <span className='font-medium'>{(related.author as any)?.name}</span>
                           )}
+                          {/* eslint-enable @typescript-eslint/no-explicit-any */}
                           {related.publishedAt && <time>{formatDate(related.publishedAt)}</time>}
                         </div>
                       </div>
@@ -470,13 +500,16 @@ export default async function Article({ params }: Props) {
             </div>
 
             {/* Comments Section */}
+            {/* TypeScript doesn't recognize allowComments property */}
+            {/* eslint-disable @typescript-eslint/no-explicit-any */}
             <div className='mt-12'>
               <CommentsSection
                 articleId={article._id}
                 articleUrl={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/articles/${article.slug?.current ?? slug}`}
-                allowComments={article.allowComments}
+                allowComments={(article as any)?.allowComments ?? true}
               />
             </div>
+            {/* eslint-enable @typescript-eslint/no-explicit-any */}
           </main>
 
           {/* RIGHT SIDEBAR — desktop only */}
@@ -523,7 +556,7 @@ export async function generateStaticParams() {
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: Article[] = await sanityClient.fetch(query);
   const slugRoutes = slugs
-    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug?.current ?? '')
     : [];
   return slugRoutes.map((slug) => ({
     slug,

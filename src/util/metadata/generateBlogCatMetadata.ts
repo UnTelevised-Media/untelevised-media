@@ -1,5 +1,5 @@
-/* eslint-disable import/prefer-default-export */
 import type { Metadata } from 'next';
+import type { Category } from '@/models/types/sanity';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
 
@@ -12,7 +12,7 @@ type Props = {
 const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 
 // Define the generateMetadata function
-export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
+async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
   // Fetch the category data based on the slug
   const queryCategoryMetadata = groq`
     *[_type == "category" && slug.current == $slug][0] {
@@ -33,12 +33,12 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
   // Create metadata object with dynamic values
   const metadata: Metadata = {
     title: `${category.title} | UnTelevised Media`,
-    description: category.description || `Latest articles in ${category.title}`,
+    description: category.description ?? `Latest articles in ${category.title}`,
     publisher: 'UnTelevised Media',
 
     openGraph: {
       title: `${category.title} | UnTelevised Media`,
-      description: category.description || `Latest articles in ${category.title}`,
+      description: category.description ?? `Latest articles in ${category.title}`,
       url: `${baseURL}/category/${slug}`,
       locale: 'en_US',
       siteName: 'UnTelevised Media',
@@ -48,7 +48,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
     twitter: {
       card: 'summary_large_image',
       title: `${category.title} | UnTelevised Media`,
-      description: category.description || `Latest articles in ${category.title}`,
+      description: category.description ?? `Latest articles in ${category.title}`,
       site: '@UnTelevisedLive',
       creator: '@UnTelevisedLive',
     },
@@ -63,3 +63,6 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
 
   return metadata;
 }
+
+export default generateMetadata;
+export { generateMetadata };

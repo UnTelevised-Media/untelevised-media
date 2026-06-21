@@ -2,13 +2,13 @@
 // New article editor — optionally pre-seeded from a claimed pitch via ?pitchId=
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalFetch } from '@/lib/portal/fetch';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
+import { portalFetch } from '@/services/portal/fetch';
 import {
   queryPortalCategories,
   queryPortalAuthors,
   queryPortalClaimedPitchById,
-} from '@/lib/portal/queries';
+} from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import ArticleEditorForm from '@/components/portal/ArticleEditorForm';
 import type { PitchForModal } from '@/components/portal/PitchQuickViewModal';

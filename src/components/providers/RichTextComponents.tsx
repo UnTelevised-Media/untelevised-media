@@ -1,12 +1,8 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import dynamic from 'next/dynamic';
+﻿import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import urlForImage from '@/u/urlForImage';
-import { InlineFactCheckCard } from '@/components/fact-check/InlineFactCheckCard';
+import urlForImage from '@/util/url/urlForImage';
+import InlineFactCheckCard from '@/components/fact-check/InlineFactCheckCard';
 import {
   Table,
   TableBody,
@@ -18,8 +14,8 @@ import {
 
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-// Code-split heavy embed libraries — loaded only when content contains these block types
-// Tweet embeds go through SafeTweet (RSC existence check) → SafeTweetWrapper
+// Code-split heavy embed libraries â€” loaded only when content contains these block types
+// Tweet embeds go through SafeTweet (RSC existence check) â†’ SafeTweetWrapper
 // (client-only, ssr:false + error boundary) to prevent SSG build crashes.
 import SafeTweet from '@/components/embeds/SafeTweet';
 const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter').then((m) => m.Prism));
@@ -27,11 +23,32 @@ import InstagramEmbed from './InstagramEmbed';
 import FacebookEmbed from './FacebookEmbed';
 import TikTokEmbed from './TikTokEmbed';
 
-export const RichTextComponents = {
+import type {
+  PortableImageBlock,
+  PortableCodeBlock,
+  PortableMermaidDiagramBlock,
+  PortableTableBlock,
+  PortableTableCell,
+  PortableListBlock,
+  PortableBlockquoteBlock,
+  PortableYoutubeEmbedBlock,
+  PortableTwitterEmbedBlock,
+  PortableInstagramEmbedBlock,
+  PortableFacebookEmbedBlock,
+  PortableTiktokEmbedBlock,
+  PortableVimeoEmbedBlock,
+  PortableIframeEmbedBlock,
+  PortableFactCheckEmbedBlock,
+  PortableTextListRenderer,
+  PortableTextBlockStyleRenderer,
+  PortableTextMarkRenderer,
+} from '@/models/types/portableText';
+
+export default {
   types: {
-    // ── Images ───────────────────────────────────────────────────────────────
-    image: ({ value }: any) => {
-      const alt = value.alt || 'Image';
+    // â”€â”€ Images â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    image: ({ value }: { value: PortableImageBlock }) => {
+      const alt = value.alt ?? 'Image';
       // Sanity asset refs encode dimensions: image-{id}-{WIDTH}x{HEIGHT}-{ext}
       const ref: string = value?.asset?._ref ?? '';
       const dimMatch = ref.match(/-(\d+)x(\d+)-/);
@@ -61,9 +78,12 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Code Blocks ───────────────────────────────────────────────────────────
-    code: ({ value }: any) => {
+    // â”€â”€ Code Blocks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    code: ({ value }: { value: PortableCodeBlock }) => {
       const { code, language } = value;
+      if (!code) {
+        return null;
+      }
       return (
         <div className='my-6'>
           {language && (
@@ -75,7 +95,7 @@ export const RichTextComponents = {
           )}
           <SyntaxHighlighter
             style={vscDarkPlus}
-            language={language || 'text'}
+            language={language ?? 'text'}
             PreTag='div'
             customStyle={{ margin: 0, borderRadius: 0 }}
           >
@@ -85,21 +105,25 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Tables ────────────────────────────────────────────────────────────────
-    table: ({ value }: any) => {
+    // â”€â”€ Tables â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    table: ({ value }: { value: PortableTableBlock }) => {
       const { rows } = value;
-      if (!rows) return null;
+      if (!rows) {
+        return null;
+      }
 
       // Handles both new string cells and legacy tableCell objects
       // {_key, _type, content: [{type:'block', children:[{_type:'span', text}]}]}
-      function cellText(cell: any): string {
-        if (typeof cell === 'string') return cell;
+      function cellText(cell: string | PortableTableCell): string {
+        if (typeof cell === 'string') {
+          return cell;
+        }
         if (cell && Array.isArray(cell.content)) {
           return cell.content
-            .flatMap((block: any) =>
+            .flatMap((block) =>
               (block.children ?? [])
-                .filter((s: any) => s._type === 'span')
-                .map((s: any) => s.text ?? '')
+                .filter((s) => s._type === 'span')
+                .map((s) => s.text ?? '')
             )
             .join('');
         }
@@ -111,7 +135,7 @@ export const RichTextComponents = {
           <Table className='w-full'>
             <TableHeader>
               <TableRow>
-                {rows[0]?.cells.map((cell: any, i: number) => (
+                {rows[0]?.cells.map((cell, i: number) => (
                   <TableHead
                     key={i}
                     className='whitespace-nowrap bg-untele p-2 text-sm font-semibold text-white md:px-4 md:py-2'
@@ -122,9 +146,9 @@ export const RichTextComponents = {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {rows.slice(1).map((row: any, i: number) => (
+              {rows.slice(1).map((row, i: number) => (
                 <TableRow key={i}>
-                  {row.cells.map((cell: any, j: number) => (
+                  {row.cells.map((cell, j: number) => (
                     <TableCell key={j} className='p-2 text-sm md:px-4 md:py-2'>
                       {cellText(cell)}
                     </TableCell>
@@ -137,9 +161,9 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Mermaid Diagrams ─────────────────────────────────────────────────────
+    // â”€â”€ Mermaid Diagrams â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // Falls back to a styled code block until the mermaid package is installed
-    mermaidDiagram: ({ value }: any) => {
+    mermaidDiagram: ({ value }: { value: PortableMermaidDiagramBlock }) => {
       const { code } = value;
       return (
         <div className='my-6 border border-slate-300 dark:border-slate-700'>
@@ -155,23 +179,25 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Non-standard "list" container blocks ─────────────────────────────────
+    // â”€â”€ Non-standard "list" container blocks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // Blocks where _type="list" were inserted programmatically with inner block
     // children. PortableText treats them as blocks, causing "Objects are not
     // valid as a React child" errors. Render them as proper lists here.
-    list: ({ value }: any) => {
+    list: ({ value }: { value: PortableListBlock }) => {
       const isOrdered = value.listItem === 'number' || value.style === 'number';
       const Tag = isOrdered ? 'ol' : 'ul';
-      const blocks: any[] = value.children ?? [];
-      if (!blocks.length) return null;
+      const blocks = value.children ?? [];
+      if (!blocks.length) {
+        return null;
+      }
       return (
         <Tag
           className={`my-4 ml-6 ${isOrdered ? 'list-decimal' : 'list-disc'} space-y-2 text-slate-800 dark:text-slate-200`}
         >
-          {blocks.map((block: any, i: number) => {
+          {blocks.map((block, i: number) => {
             const text = (block.children ?? [])
-              .filter((s: any) => s._type === 'span')
-              .map((s: any) => s.text ?? '')
+              .filter((s) => s._type === 'span')
+              .map((s) => s.text ?? '')
               .join('');
             return <li key={block._key ?? i}>{text}</li>;
           })}
@@ -179,15 +205,15 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Non-standard "blockquote" container blocks ────────────────────────────
+    // â”€â”€ Non-standard "blockquote" container blocks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // Blocks where _type="blockquote" have inner block children instead of the
     // standard style="blockquote" pattern. Extract and render as blockquote.
-    blockquote: ({ value }: any) => {
+    blockquote: ({ value }: { value: PortableBlockquoteBlock }) => {
       const text = (value.children ?? [])
-        .flatMap((block: any) =>
+        .flatMap((block) =>
           (block.children ?? [])
-            .filter((s: any) => s._type === 'span')
-            .map((s: any) => s.text ?? '')
+            .filter((s) => s._type === 'span')
+            .map((s) => s.text ?? '')
         )
         .join('');
       return (
@@ -197,8 +223,8 @@ export const RichTextComponents = {
       );
     },
 
-    // ── YouTube Embeds ────────────────────────────────────────────────────────
-    youtubeEmbed: ({ value }: any) => {
+    // â”€â”€ YouTube Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    youtubeEmbed: ({ value }: { value: PortableYoutubeEmbedBlock }) => {
       const videoId = value.videoId;
       return (
         <div className='my-8 aspect-video w-full border border-slate-300 dark:border-slate-700'>
@@ -213,44 +239,52 @@ export const RichTextComponents = {
       );
     },
 
-    // ── Twitter/X Embeds ─────────────────────────────────────────────────────
+    // â”€â”€ Twitter/X Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // SafeTweet is an async RSC that catches deleted/protected tweet errors so
     // a single bad tweet can't crash the entire article static generation.
-    twitterEmbed: ({ value }: any) => {
+    twitterEmbed: ({ value }: { value: PortableTwitterEmbedBlock }) => {
       const tweetId = value.tweetId;
-      if (!tweetId) return null;
+      if (!tweetId) {
+        return null;
+      }
       return <SafeTweet id={tweetId} />;
     },
 
-    // ── Inline Fact-Check Cards ───────────────────────────────────────────────
-    factCheckEmbed: ({ value }: any) => {
+    // â”€â”€ Inline Fact-Check Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    factCheckEmbed: ({ value }: { value: PortableFactCheckEmbedBlock }) => {
       const fc = value?.factCheck;
-      if (!fc) return null;
-      return <InlineFactCheckCard factCheck={fc} />;
+      if (!fc) {
+        return null;
+      }
+      // fc is a populated FactCheck object from GROQ query
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return <InlineFactCheckCard factCheck={fc as any} />;
     },
 
-    // ── Instagram Embeds ─────────────────────────────────────────────────────
-    instagramEmbed: ({ value }: any) => {
+    // â”€â”€ Instagram Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    instagramEmbed: ({ value }: { value: PortableInstagramEmbedBlock }) => {
       const postId = value.postId;
       return <InstagramEmbed postId={postId} />;
     },
 
-    // ── Facebook Embeds ──────────────────────────────────────────────────────
-    facebookEmbed: ({ value }: any) => {
+    // â”€â”€ Facebook Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    facebookEmbed: ({ value }: { value: PortableFacebookEmbedBlock }) => {
       const postUrl = value.postUrl;
       return <FacebookEmbed postUrl={postUrl} />;
     },
 
-    // ── TikTok Embeds ────────────────────────────────────────────────────────
-    tiktokEmbed: ({ value }: any) => {
+    // â”€â”€ TikTok Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    tiktokEmbed: ({ value }: { value: PortableTiktokEmbedBlock }) => {
       const videoUrl = value.videoUrl;
       return <TikTokEmbed videoUrl={videoUrl} />;
     },
 
-    // ── Vimeo Embeds ─────────────────────────────────────────────────────────
-    vimeoEmbed: ({ value }: any) => {
+    // â”€â”€ Vimeo Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    vimeoEmbed: ({ value }: { value: PortableVimeoEmbedBlock }) => {
       const { videoId } = value;
-      if (!videoId) return null;
+      if (!videoId) {
+        return null;
+      }
       return (
         <div className='my-8 aspect-video w-full border border-slate-300 dark:border-slate-700'>
           <iframe
@@ -263,59 +297,89 @@ export const RichTextComponents = {
         </div>
       );
     },
+
+    // â”€â”€ Custom Iframe Embeds â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // Note: Some sites (e.g., ABC7 Chicago) block embedding with X-Frame-Options.
+    // If embed fails, the iframe will show a blocked message. Sites may need to be
+    // contacted to allow cross-origin embedding, or use their specific embed code.
+    iframeEmbed: ({ value }: { value: PortableIframeEmbedBlock }) => {
+      const { src, width = 640, height = 360, title } = value;
+      if (!src) {
+        return null;
+      }
+      return (
+        <div
+          className='my-8 w-full border border-slate-300 dark:border-slate-700'
+          style={{
+            aspectRatio: `${width} / ${height}`,
+          }}
+        >
+          <iframe
+            className='h-full w-full'
+            src={src}
+            title={title ?? 'Embedded content'}
+            frameBorder='0'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen'
+            allowFullScreen
+            sandbox='allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation-by-user-activation'
+            style={{ backgroundColor: '#f3f4f6' }}
+          ></iframe>
+        </div>
+      );
+    },
   },
 
-  // ── List Renderers ──────────────────────────────────────────────────────────
+  // â”€â”€ List Renderers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   list: {
-    bullet: ({ children }: any) => (
+    bullet: ({ children }: PortableTextListRenderer) => (
       <ul className='my-4 ml-6 list-disc space-y-2 text-slate-800 dark:text-slate-200'>
         {children}
       </ul>
     ),
-    number: ({ children }: any) => (
+    number: ({ children }: PortableTextListRenderer) => (
       <ol className='my-4 ml-6 list-decimal space-y-2 text-slate-800 dark:text-slate-200'>
         {children}
       </ol>
     ),
   },
 
-  // ── Block Styles ────────────────────────────────────────────────────────────
+  // â”€â”€ Block Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   block: {
-    normal: ({ children }: any) => (
+    normal: ({ children }: PortableTextBlockStyleRenderer) => (
       <p className='my-4 leading-relaxed text-slate-800 dark:text-slate-200'>{children}</p>
     ),
-    h1: ({ children }: any) => (
+    h1: ({ children }: PortableTextBlockStyleRenderer) => (
       <h1 className='mb-4 mt-8 text-4xl font-black uppercase tracking-wide text-slate-900 dark:text-white md:text-5xl'>
         {children}
       </h1>
     ),
-    h2: ({ children }: any) => (
+    h2: ({ children }: PortableTextBlockStyleRenderer) => (
       <h2 className='mb-3 mt-8 border-b-2 border-untele pb-2 text-3xl font-black uppercase tracking-wide text-slate-900 dark:text-white md:text-4xl'>
         {children}
       </h2>
     ),
-    h3: ({ children }: any) => (
+    h3: ({ children }: PortableTextBlockStyleRenderer) => (
       <h3 className='mb-3 mt-6 text-2xl font-bold text-slate-900 dark:text-white md:text-3xl'>
         {children}
       </h3>
     ),
-    h4: ({ children }: any) => (
+    h4: ({ children }: PortableTextBlockStyleRenderer) => (
       <h4 className='mb-2 mt-6 text-xl font-bold text-slate-900 dark:text-white md:text-2xl'>
         {children}
       </h4>
     ),
-    blockquote: ({ children }: any) => (
+    blockquote: ({ children }: PortableTextBlockStyleRenderer) => (
       <blockquote className='my-6 border-l-4 border-untele bg-slate-50 py-4 pl-6 pr-4 italic text-slate-700 dark:bg-slate-900 dark:text-slate-300'>
         {children}
       </blockquote>
     ),
     // Fallback styles for list items authored as styled blocks (non-standard content)
-    bullet: ({ children }: any) => (
+    bullet: ({ children }: PortableTextBlockStyleRenderer) => (
       <ul className='my-4 ml-6 list-disc space-y-2 text-slate-800 dark:text-slate-200'>
         <li>{children}</li>
       </ul>
     ),
-    number: ({ children }: any) => (
+    number: ({ children }: PortableTextBlockStyleRenderer) => (
       <ol className='my-4 ml-6 list-decimal space-y-2 text-slate-800 dark:text-slate-200'>
         <li>{children}</li>
       </ol>
@@ -323,13 +387,13 @@ export const RichTextComponents = {
     break: () => <br />,
   },
 
-  // ── Inline Marks ────────────────────────────────────────────────────────────
+  // â”€â”€ Inline Marks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   marks: {
-    link: ({ children, value }: any) => {
-      const rel = !value.href?.startsWith('/') ? 'noreferrer noopener' : undefined;
+    link: ({ children, value }: PortableTextMarkRenderer) => {
+      const rel = !value?.href?.startsWith('/') ? 'noreferrer noopener' : undefined;
       return (
         <Link
-          href={value.href}
+          href={value?.href ?? '#'}
           rel={rel}
           className='text-untele underline decoration-untele underline-offset-2 hover:text-red-700 hover:decoration-red-700'
         >
@@ -337,21 +401,21 @@ export const RichTextComponents = {
         </Link>
       );
     },
-    blockquote: ({ children }: any) => (
+    blockquote: ({ children }: PortableTextMarkRenderer) => (
       <blockquote className='my-5 border-l-4 border-untele py-5 pl-5 italic'>
         {children}
       </blockquote>
     ),
-    code: ({ children }: any) => (
+    code: ({ children }: PortableTextMarkRenderer) => (
       <code className='rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-untele dark:bg-slate-800 dark:text-red-400'>
         {children}
       </code>
     ),
-    em: ({ children }: any) => <em className='italic'>{children}</em>,
-    strong: ({ children }: any) => <strong className='font-bold'>{children}</strong>,
-    underline: ({ children }: any) => <u className='underline'>{children}</u>,
-    strikethrough: ({ children }: any) => <s className='line-through'>{children}</s>,
-    superscript: ({ children }: any) => <sup>{children}</sup>,
-    subscript: ({ children }: any) => <sub>{children}</sub>,
+    em: ({ children }: PortableTextMarkRenderer) => <em className='italic'>{children}</em>,
+    strong: ({ children }: PortableTextMarkRenderer) => <strong className='font-bold'>{children}</strong>,
+    underline: ({ children }: PortableTextMarkRenderer) => <u className='underline'>{children}</u>,
+    strikethrough: ({ children }: PortableTextMarkRenderer) => <s className='line-through'>{children}</s>,
+    superscript: ({ children }: PortableTextMarkRenderer) => <sup>{children}</sup>,
+    subscript: ({ children }: PortableTextMarkRenderer) => <sub>{children}</sub>,
   },
 };

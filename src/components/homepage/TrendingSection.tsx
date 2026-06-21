@@ -3,9 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { TrendingUp } from 'lucide-react';
 import sanityFetch from '@/lib/sanity/lib/fetch';
-import { queryMostReadArticles } from '@/lib/sanity/lib/queries';
-import formatDate from '@/util/formatDate';
-import urlForImage from '@/util/urlForImage';
+import { getTrendingArticles as getTrendingFromSupabase } from '@/lib/supabase/viewEvents';
+import formatDate from '@/util/date/formatDate';
+import urlForImage from '@/util/url/urlForImage';
 import TrendingListPaginated from './TrendingListPaginated';
 
 interface TrendingArticle {
@@ -22,13 +22,71 @@ interface TrendingArticle {
   categories?: { title: string; slug: { current: string } }[];
 }
 
-// Deduplicated within a single request — both 'card' and 'list' variants share one fetch
+// Fetch trending slugs from Supabase, then enrich with Sanity article data
 const getTrendingArticles = cache(async (): Promise<TrendingArticle[]> => {
+  // Get trending slugs from Supabase (view_count table)
+  let trendingSlugs: Awaited<ReturnType<typeof getTrendingFromSupabase>> = [];
+
+  try {
+    trendingSlugs = await getTrendingFromSupabase(45, 31);
+  } catch (error) {
+    // If Supabase is not available (e.g., during static build without env vars),
+    // return empty trending list — this is non-critical for page rendering
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.warn(
+      '[TrendingSection] Could not fetch trending articles from Supabase:',
+      errorMsg,
+      error
+    );
+    console.error('[TrendingSection] Full error details:', {
+      message: errorMsg,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      code: (error as any)?.code,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      details: (error as any)?.details,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      hint: (error as any)?.hint,
+    });
+    return [];
+  }
+
+  if (trendingSlugs.length === 0) {
+    return [];
+  }
+
+  // Fetch article details from Sanity for trending slugs
   const articles = await sanityFetch<TrendingArticle[]>({
-    query: queryMostReadArticles,
+    query: `*[_type == "article" && slug.current in $slugs] {
+      _id,
+      title,
+      slug,
+      publishedAt,
+      description,
+      location,
+      tags,
+      mainImage,
+      author->{name, slug},
+      categories[]->{title, slug},
+    } | order(publishedAt desc)`,
+    params: {
+      slugs: trendingSlugs.map((t) => t.slug),
+    },
     tags: ['article'],
   });
-  return articles ?? [];
+
+  if (!articles) {
+    return [];
+  }
+
+  // Merge Supabase view counts with Sanity article data, maintaining Supabase sort order
+  const supabaseMap = new Map(trendingSlugs.map((t) => [t.slug, t.view_count]));
+  return articles
+    .map((article) => ({
+      ...article,
+      viewCount: supabaseMap.get(article.slug.current) ?? 0,
+    }))
+    .filter((a) => a.viewCount > 0) // Only include articles with views
+    .sort((a, b) => b.viewCount - a.viewCount); // Sort by view count
 });
 
 interface Props {
@@ -38,11 +96,13 @@ interface Props {
 export default async function TrendingSection({ variant }: Props = {}) {
   const articles = await getTrendingArticles();
 
-  if (articles.length === 0) return null;
+  if (articles.length === 0) {return null;}
 
   // --- #1 Featured Card ---
   if (variant === 'card') {
     const top = articles[0];
+    // Sanity image reference flexibility
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const imageUrl = urlForImage(top.mainImage as any)
       ?.width(600)
       .height(340)
@@ -140,7 +200,7 @@ export default async function TrendingSection({ variant }: Props = {}) {
   // --- #2–20 Paginated list (5 per page, client-side) ---
   if (variant === 'list') {
     const rest = articles.slice(1); // card holds #1; pass #2 onward
-    if (rest.length === 0) return null;
+    if (rest.length === 0) {return null;}
     return <TrendingListPaginated articles={rest} />;
   }
 

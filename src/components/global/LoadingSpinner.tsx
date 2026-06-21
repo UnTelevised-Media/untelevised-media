@@ -5,11 +5,11 @@ interface LoadingSpinnerProps {
   className?: string;
 }
 
-const LoadingSpinner = ({
+function LoadingSpinner({
   size = 'md',
   text = 'Loading...',
   className = '',
-}: LoadingSpinnerProps) => {
+}: LoadingSpinnerProps) {
   const sizeClasses = {
     sm: 'h-4 w-4',
     md: 'h-6 w-6',
@@ -73,6 +73,6 @@ const LoadingSpinner = ({
       <span className='sr-only'>{text}</span>
     </div>
   );
-};
+}
 
 export default LoadingSpinner;

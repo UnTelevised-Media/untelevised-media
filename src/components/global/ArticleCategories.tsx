@@ -1,10 +1,9 @@
 // src/components/global/ArticleCategories.tsx
-/* eslint-disable react/function-component-definition */
 
-import { sanityFetch } from '@/lib/sanity/lib/fetch';
-import { queryCategories } from '@/lib/sanity/lib/queries';
+import type { Category } from '@/models/types/sanity';
 import Link from 'next/link';
-import formatTitleForURL from '@/util/formatTitleForURL';
+import formatTitleForURL from '@/util/url/formatTitleForURL';
+import { getArticleCategories } from '@/server/queries/content';
 
 interface ArticleCategoriesProps {
   activeSlug?: string;
@@ -23,11 +22,11 @@ export default async function ArticleCategories({ activeSlug }: ArticleCategorie
 
   const rows = distributeCategories(categories);
 
-  const ButtonComponent = ({ category }: { category: Category }) => {
-    const isSelected = activeSlug && formatTitleForURL(category.title) === activeSlug;
+  function ButtonComponent({ category }: { category: Category }) {
+    const isSelected = activeSlug && formatTitleForURL(category.title ?? '') === activeSlug;
 
     return (
-      <Link href={`/category/${formatTitleForURL(category.title)}`} key={category._id}>
+      <Link href={`/category/${formatTitleForURL(category.title ?? '')}`} key={category._id}>
         <button className='group relative inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-slate-500 bg-slate-600/50 p-[2px] text-xs font-semibold leading-6 text-slate-200 no-underline shadow-lg transition-all duration-300 hover:border-untele/50'>
           <span className='absolute inset-0 overflow-hidden rounded-lg'>
             <span
@@ -48,7 +47,7 @@ export default async function ArticleCategories({ activeSlug }: ArticleCategorie
         </button>
       </Link>
     );
-  };
+  }
 
   return (
     <nav className='space-y-3 px-4 py-4'>
@@ -70,21 +69,4 @@ export default async function ArticleCategories({ activeSlug }: ArticleCategorie
       ))}
     </nav>
   );
-}
-
-async function getArticleCategories() {
-  try {
-    const { data: categories } = await sanityFetch({
-      query: queryCategories,
-      tags: ['category'],
-    });
-    return (categories as Category[]).sort((a: Category, b: Category) => {
-      const orderA = parseInt(a.order ?? '0', 10);
-      const orderB = parseInt(b.order ?? '0', 10);
-      return orderA - orderB;
-    });
-  } catch (error) {
-    console.error('Failed to fetch categories:', error);
-    return [];
-  }
 }

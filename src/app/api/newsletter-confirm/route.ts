@@ -1,8 +1,9 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/newsletter-confirm/route.ts
-// News newsletter confirmation — validates token, activates subscriber, sends welcome email.
+// News newsletter confirmation â€” validates token, activates subscriber, sends welcome email.
 import { NextRequest, NextResponse } from 'next/server';
-import { confirmSubscription } from '@/lib/newsletter/service';
-import { NEWS_NEWSLETTER } from '@/lib/newsletter/types';
+import { confirmSubscription } from '@/services/newsletter/service';
+import { NEWS_NEWSLETTER } from '@/models/types/newsletter';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);

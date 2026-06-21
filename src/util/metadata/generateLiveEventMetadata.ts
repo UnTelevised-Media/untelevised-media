@@ -1,7 +1,7 @@
-/* eslint-disable import/prefer-default-export */
 import type { Metadata } from 'next';
+import type { LiveEvent } from '@/models/types/sanity';
 import sanityClient from '@/lib/sanity/lib/client';
-import urlForImage from '@/util/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 
 // Define the generateMetadata function
-export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
+async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
   // Fetch the live event data based on the slug
   const liveEvent: LiveEvent = await sanityClient.fetch(queryEventBySlug, { slug });
 
@@ -40,8 +40,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       type: 'article',
       images: liveEvent.mainImage
         ? {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            url: urlForImage(liveEvent.mainImage as any)?.url() ?? '',
+            url: urlForImage(liveEvent.mainImage)?.url() ?? '',
             width: 1200,
             height: 630,
             alt: liveEvent.mainImage.alt ?? liveEvent.title,
@@ -57,8 +56,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       creator: '@UnTelevisedLive',
       images: liveEvent.mainImage
         ? {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            url: urlForImage(liveEvent.mainImage as any)?.url() ?? '',
+            url: urlForImage(liveEvent.mainImage)?.url() ?? '',
             alt: liveEvent.mainImage.alt ?? liveEvent.title,
           }
         : undefined,
@@ -74,3 +72,6 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
 
   return metadata;
 }
+
+export default generateMetadata;
+export { generateMetadata };

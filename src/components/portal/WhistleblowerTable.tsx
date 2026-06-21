@@ -2,6 +2,13 @@
 // src/components/portal/WhistleblowerTable.tsx
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import formatDate from '@/util/date/formatDate';
+import {
+  SEVERITY_COLORS,
+  PRIORITY_COLORS,
+  WHISTLEBLOWER_STATUS_LABELS as STATUS_LABELS,
+  WHISTLEBLOWER_CATEGORY_LABELS as CATEGORY_LABELS,
+} from '@/util/portal/statusConfig';
 
 export interface WhistleblowerSubmission {
   _id: string;
@@ -22,52 +29,6 @@ export interface WhistleblowerSubmission {
   status?: string;
   priority?: string;
   notes?: string;
-}
-
-const SEVERITY_COLORS: Record<string, string> = {
-  critical: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-  high: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
-  medium: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-  low: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
-};
-
-const PRIORITY_COLORS: Record<string, string> = {
-  breaking: 'bg-red-600 text-white',
-  high: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
-  medium: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-  low: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
-};
-
-const STATUS_LABELS: Record<string, string> = {
-  new: 'New',
-  review: 'Under Review',
-  investigating: 'Investigating',
-  verification: 'Verification',
-  story_progress: 'Story in Progress',
-  published: 'Published',
-  closed: 'Closed',
-  archived: 'Archived',
-};
-
-const CATEGORY_LABELS: Record<string, string> = {
-  government: 'Government',
-  corporate: 'Corporate',
-  environmental: 'Environmental',
-  human_rights: 'Human Rights',
-  financial: 'Financial',
-  healthcare: 'Healthcare',
-  military: 'Military',
-  law_enforcement: 'Law Enforcement',
-  other: 'Other',
-};
-
-function formatDate(iso?: string) {
-  if (!iso) return '—';
-  return new Date(iso).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
 }
 
 export function WhistleblowerTable({ submissions }: { submissions: WhistleblowerSubmission[] }) {
@@ -163,7 +124,7 @@ export function WhistleblowerTable({ submissions }: { submissions: Whistleblower
                       {STATUS_LABELS[sub.status ?? 'new'] ?? sub.status ?? 'New'}
                     </td>
                     <td className='px-4 py-4 text-slate-600 dark:text-slate-400'>
-                      {formatDate(sub.submittedAt)}
+                      {formatDate(sub.submittedAt, 'short', '—')}
                     </td>
                     <td className='px-4 py-4'>
                       <button

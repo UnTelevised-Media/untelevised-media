@@ -3,6 +3,7 @@
 'use client';
 
 import { useState, useRef, useTransition } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -11,8 +12,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { updateMyProfile, type AuthorProfileInput } from '@/lib/portal/author-actions';
-import { uploadImageToSanity } from '@/lib/portal/image-actions';
+import { updateMyProfile, type AuthorProfileInput } from '@/server/actions/portal/author';
+import { uploadImageToSanity } from '@/server/actions/portal/image';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -48,7 +49,7 @@ interface Props {
 // ---------------------------------------------------------------------------
 
 function bioToText(bio?: AuthorProfile['bio']): string {
-  if (!bio?.length) return '';
+  if (!bio?.length) {return '';}
   return bio
     .filter((b) => b._type === 'block')
     .map((b) => b.children?.map((c) => c.text).join('') ?? '')
@@ -68,7 +69,7 @@ function TagInput({
   label: string;
   description?: string;
   tags: string[];
-  onChange: (tags: string[]) => void;
+  onChange: (_tags: string[]) => void;
 }) {
   const [input, setInput] = useState('');
 
@@ -77,7 +78,7 @@ function TagInput({
       .split(',')
       .map((v) => v.trim())
       .filter((v) => v && !tags.includes(v));
-    if (vals.length) onChange([...tags, ...vals]);
+    if (vals.length) {onChange([...tags, ...vals]);}
     setInput('');
   }
 
@@ -133,13 +134,13 @@ function UrlListInput({
   label: string;
   description?: string;
   urls: string[];
-  onChange: (urls: string[]) => void;
+  onChange: (_urls: string[]) => void;
 }) {
   const [input, setInput] = useState('');
 
   function add() {
     const val = input.trim();
-    if (val && !urls.includes(val)) onChange([...urls, val]);
+    if (val && !urls.includes(val)) {onChange([...urls, val]);}
     setInput('');
   }
 
@@ -221,7 +222,7 @@ export default function AuthorProfileForm({ profile }: Props) {
 
   async function handleAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (!file) {return;}
     setUploadingAvatar(true);
     try {
       const fd = new FormData();
@@ -290,7 +291,7 @@ export default function AuthorProfileForm({ profile }: Props) {
         <div className='flex items-center gap-6'>
           <div className='relative h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800'>
             {avatarUrl ? (
-              <img src={avatarUrl} alt={name} className='h-full w-full object-cover' />
+              <Image src={avatarUrl} alt={name} fill className='object-cover' />
             ) : (
               <span className='flex h-full w-full items-center justify-center text-3xl font-black text-slate-400'>
                 {name.charAt(0).toUpperCase()}

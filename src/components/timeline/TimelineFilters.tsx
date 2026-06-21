@@ -18,11 +18,12 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import type { TimelineEvent, TimelineCategory } from '@/models/types/sanity';
 
 interface TimelineFiltersProps {
   events: TimelineEvent[];
   categories?: TimelineCategory[];
-  onFilterChange: (filteredEvents: TimelineEvent[]) => void;
+  onFilterChange: (_filteredEvents: TimelineEvent[]) => void;
   className?: string;
 }
 
@@ -59,12 +60,12 @@ const IMPORTANCE_LEVELS = [
   { value: 'low', label: 'Low', color: 'bg-gray-500' },
 ];
 
-const TimelineFilters: React.FC<TimelineFiltersProps> = ({
+function TimelineFilters({
   events,
   categories = [],
   onFilterChange,
   className = '',
-}) => {
+}: TimelineFiltersProps) {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     searchTerm: '',
@@ -83,10 +84,9 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
       if (filters.searchTerm) {
         const searchLower = filters.searchTerm.toLowerCase();
         const matchesSearch =
-          event.title.toLowerCase().includes(searchLower) ||
-          event.description?.toLowerCase().includes(searchLower) ||
-          // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-          event.location?.toLowerCase().includes(searchLower) ||
+          (event.title ?? '').toLowerCase().includes(searchLower) ||
+          (event.description ?? '').toLowerCase().includes(searchLower) ||
+          (event.location ?? '').toLowerCase().includes(searchLower) ||
           event.tags?.some((tag) => tag.toLowerCase().includes(searchLower));
 
         if (!matchesSearch) {
@@ -96,7 +96,8 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
 
       // Category filter
       if (filters.selectedCategories.length > 0) {
-        const eventCategoryIds = event.timelineCategories?.map((cat) => cat._id) ?? [];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const eventCategoryIds = event.timelineCategories?.map((cat) => (cat as any)._id) ?? [];
         if (!filters.selectedCategories.some((catId) => eventCategoryIds.includes(catId))) {
           return false;
         }
@@ -104,21 +105,21 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
 
       // Event type filter
       if (filters.selectedEventTypes.length > 0) {
-        if (!filters.selectedEventTypes.includes(event.eventType)) {
+        if (!filters.selectedEventTypes.includes(event.eventType ?? 'update')) {
           return false;
         }
       }
 
       // Importance level filter
       if (filters.selectedImportanceLevels.length > 0) {
-        if (!filters.selectedImportanceLevels.includes(event.importanceLevel)) {
+        if (!filters.selectedImportanceLevels.includes(event.importanceLevel ?? 'medium')) {
           return false;
         }
       }
 
       // Date range filter
       if (filters.dateRange.start || filters.dateRange.end) {
-        const eventDate = new Date(event.eventDate);
+        const eventDate = new Date(event.eventDate ?? '');
         if (filters.dateRange.start && eventDate < new Date(filters.dateRange.start)) {
           return false;
         }
@@ -438,6 +439,6 @@ const TimelineFilters: React.FC<TimelineFiltersProps> = ({
       )}
     </div>
   );
-};
+}
 
 export default TimelineFilters;

@@ -1,11 +1,12 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/newsletter/route.ts
-// Bookstore newsletter subscribe endpoint — double opt-in via Resend.
+// Bookstore newsletter subscribe endpoint â€” double opt-in via Resend.
 // Upgraded from bare Sanity write to full double opt-in flow.
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { subscribeToList } from '@/lib/newsletter/service';
-import { BOOKSTORE_NEWSLETTER } from '@/lib/newsletter/types';
-import { makeRatelimiter } from '@/lib/bookstore/ratelimit';
+import { subscribeToList } from '@/services/newsletter/service';
+import { BOOKSTORE_NEWSLETTER } from '@/models/types/newsletter';
+import { makeRatelimiter } from '@/services/bookstore/ratelimit';
 
 const newsletterLimiter = makeRatelimiter(5, 60);
 
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
     const result = await newsletterLimiter.limit(`bookstore-newsletter:${getIp(req)}`);
     if (!result.success) {
       return NextResponse.json(
-        { error: 'Too many requests — please try again later' },
+        { error: 'Too many requests â€” please try again later' },
         { status: 429 }
       );
     }

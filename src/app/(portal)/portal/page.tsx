@@ -2,8 +2,8 @@
 // Staff dashboard — overview of content and inbox stats, scoped by role.
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalSanityFetch } from '@/lib/portal/live';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
+import { portalSanityFetch } from '@/services/portal/live';
 import {
   queryPortalArticlesByAuthor,
   queryPortalAllArticles,
@@ -19,7 +19,7 @@ import {
   queryPortalAllClaimedPitches,
   queryPortalAllBriefs,
   queryPortalMyAuthorFlags,
-} from '@/lib/portal/queries';
+} from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import {
   BriefPanel,
@@ -28,7 +28,7 @@ import {
   type BriefSummary,
 } from '@/components/portal/BriefPanel';
 import { type ClaimedPitchSummary } from '@/components/portal/ClaimedPitchCard';
-import { ClaimedPitchesPanel } from '@/components/portal/ClaimedPitchesPanel';
+import ClaimedPitchesPanel from '@/components/portal/ClaimedPitchesPanel';
 import BookstoreOrdersWidget, {
   type DigitalSaleRow,
   type ShipmentPendingRow,
@@ -38,8 +38,8 @@ import AddBookModal from '@/components/portal/AddBookModal';
 import PendingPayoutsWidget, { type PayoutRow } from '@/components/portal/PendingPayoutsWidget';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryBooksByAuthorClerkId } from '@/lib/sanity/lib/queries';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
-import type { SanityBook } from '@/lib/bookstore/types';
+import { shopServiceClient } from '@/services/bookstore/supabase';
+import type { SanityBook } from '@/models/types/bookstore';
 import Link from 'next/link';
 
 export const metadata = {
@@ -171,7 +171,7 @@ export default async function PortalDashboardPage() {
   // Sorted _createdAt desc → first-seen per storyKey is the newest pitch
   const myPitchMap: Record<string, string> = {};
   for (const p of myPitchesRaw) {
-    if (!myPitchMap[p.storyKey]) myPitchMap[p.storyKey] = p._id;
+    if (!myPitchMap[p.storyKey]) {myPitchMap[p.storyKey] = p._id;}
   }
 
   const [myArticlesRes, allArticlesRes, authorsRes, claimedPitchesRes] = await Promise.all([
@@ -197,7 +197,7 @@ export default async function PortalDashboardPage() {
   // My article stats — "drafts." prefix is the authoritative published/draft signal
   const myPublished = myArticles.filter((a) => !a._id.startsWith('drafts.')).length;
   const myInReview = myArticles.filter(
-    (a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)
+    (a) => a._id.startsWith('drafts.') && (a.needsReview ?? !!a.deletionRequest)
   ).length;
   const myDrafts = myArticles.filter(
     (a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest
@@ -206,7 +206,7 @@ export default async function PortalDashboardPage() {
   // Editor-wide article stats
   const allPublished = allArticles.filter((a) => !a._id.startsWith('drafts.')).length;
   const allInReview = allArticles.filter(
-    (a) => a._id.startsWith('drafts.') && (a.needsReview || !!a.deletionRequest)
+    (a) => a._id.startsWith('drafts.') && (a.needsReview ?? !!a.deletionRequest)
   ).length;
   const allDrafts = allArticles.filter(
     (a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest
@@ -322,7 +322,7 @@ export default async function PortalDashboardPage() {
           unitsSoldQuery,
         ]);
         if (itemsError)
-          console.error('[portal/dashboard] order_items query failed:', itemsError.message);
+          {console.error('[portal/dashboard] order_items query failed:', itemsError.message);}
 
         const items = ((rawItems ?? []) as ItemRow[]).filter(
           (i) => i.order && !['cancelled', 'refunded'].includes(i.order.status)

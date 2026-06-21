@@ -14,12 +14,12 @@ import {
   AlertTriangle,
   CheckCircle,
 } from 'lucide-react';
-import { useConsent } from '@/lib/consent/context';
-import { COOKIE_CATEGORIES } from '@/lib/consent/types';
-import { privacyStorage } from '@/lib/consent/storage';
-import { useAdBlockerDetection } from '@/components/consent/AdBlockerMessage';
+import { useConsent } from '@/hooks/googleAdSense/useConsent';
+import { COOKIE_CATEGORIES } from '@/models/types/consent';
+import { privacyStorage } from '@/lib/googleAdSense/consent/storage';
+import useAdBlockerDetection from '@/hooks/googleAdSense/useAdBlockerDetection';
 
-const PrivacySettingsPage = () => {
+function PrivacySettingsPage() {
   const { preferences, status, updatePreferences } = useConsent();
 
   const { detected: adBlockerDetected } = useAdBlockerDetection();
@@ -341,6 +341,6 @@ const PrivacySettingsPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default PrivacySettingsPage;

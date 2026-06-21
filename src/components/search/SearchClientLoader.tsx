@@ -36,11 +36,15 @@ export default function SearchClientLoader({ initialQuery }: { initialQuery: str
   const [SearchClient, setSearchClient] = useState<typeof SearchClientType | null>(null);
 
   useEffect(() => {
-    import('./SearchClient').then((mod) => {
-      setSearchClient(() => mod.default);
-    });
+    import('./SearchClient')
+      .then((mod) => {
+        setSearchClient(() => mod.default);
+      })
+      .catch((error) => {
+        console.error('Failed to load SearchClient:', error);
+      });
   }, []);
 
-  if (!SearchClient) return <SearchSkeleton />;
+  if (!SearchClient) {return <SearchSkeleton />;}
   return <SearchClient initialQuery={initialQuery} />;
 }

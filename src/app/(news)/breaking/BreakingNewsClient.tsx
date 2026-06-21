@@ -3,12 +3,12 @@
 import React, { Fragment, useState } from 'react';
 import Image from 'next/image';
 
-import urlForImage from '@/util/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import formatDate from '@/util/formatDate';
-import resolveHref from '@/util/resolveHref';
-import { InFeedAd, AD_CONFIG } from '@/components/ads';
+import formatDate from '@/util/date/formatDate';
+import resolveHref from '@/util/url/resolveHref';
+import { InFeedAd, AD_CONFIG } from '@/components/googleAdSense';
 
 interface LiveEvent {
   _id: string;
@@ -52,12 +52,12 @@ export default function BreakingNewsClient({ initialEvents, initialArticles }: P
     items.sort((a, b) => {
       const dateA =
         a.type === 'liveEvent'
-          ? new Date(a.eventDate || a._createdAt)
-          : new Date(a.publishedAt || a._createdAt);
+          ? new Date(a.eventDate ?? a._createdAt)
+          : new Date(a.publishedAt ?? a._createdAt);
       const dateB =
         b.type === 'liveEvent'
-          ? new Date(b.eventDate || b._createdAt)
-          : new Date(b.publishedAt || b._createdAt);
+          ? new Date(b.eventDate ?? b._createdAt)
+          : new Date(b.publishedAt ?? b._createdAt);
       return dateB.getTime() - dateA.getTime();
     });
 
@@ -117,16 +117,19 @@ export default function BreakingNewsClient({ initialEvents, initialArticles }: P
 }
 
 // View Toggle Component
-const ViewToggle: React.FC<{
+function ViewToggle({
+  viewMode: _viewMode,
+  setViewMode,
+}: {
   viewMode: 'bars' | 'cards';
-  setViewMode: (mode: 'bars' | 'cards') => void;
-}> = ({ viewMode, setViewMode }) => {
+  setViewMode: (_mode: 'bars' | 'cards') => void;
+}) {
   return (
     <div className='flex rounded-lg border border-slate-600 bg-slate-800/50 p-1'>
       <button
         onClick={() => setViewMode('bars')}
         className={`rounded px-3 py-1 text-sm font-medium transition-colors ${
-          viewMode === 'bars' ? 'bg-untele text-white' : 'text-slate-400 hover:text-white'
+          _viewMode === 'bars' ? 'bg-untele text-white' : 'text-slate-400 hover:text-white'
         }`}
       >
         Bars
@@ -134,17 +137,19 @@ const ViewToggle: React.FC<{
       <button
         onClick={() => setViewMode('cards')}
         className={`rounded px-3 py-1 text-sm font-medium transition-colors ${
-          viewMode === 'cards' ? 'bg-untele text-white' : 'text-slate-400 hover:text-white'
+          _viewMode === 'cards' ? 'bg-untele text-white' : 'text-slate-400 hover:text-white'
         }`}
       >
         Cards
       </button>
     </div>
   );
-};
+}
 
 // Breaking Bar Component (List View)
-const BreakingBar: React.FC<{ item: any }> = ({ item }) => (
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function BreakingBar({ item }: { item: any }) {
+  return (
   <li className='rounded-lg border border-untele bg-slate-700/30 p-6'>
     <div className='flex flex-col space-y-4 lg:flex-row lg:space-x-6 lg:space-y-0'>
       {/* Image */}
@@ -199,8 +204,8 @@ const BreakingBar: React.FC<{ item: any }> = ({ item }) => (
           {item.type === 'liveEvent' && item.location && <span>📍 {item.location}</span>}
           <span>
             {item.type === 'liveEvent'
-              ? formatDate(item.eventDate || item._createdAt)
-              : formatDate(item.publishedAt || item._createdAt)}
+              ? formatDate(item.eventDate ?? item._createdAt)
+              : formatDate(item.publishedAt ?? item._createdAt)}
           </span>
           {item.type === 'liveEvent' && item.endDate && <span>– {formatDate(item.endDate)}</span>}
         </div>
@@ -218,10 +223,13 @@ const BreakingBar: React.FC<{ item: any }> = ({ item }) => (
       </div>
     </div>
   </li>
-);
+  );
+}
 
 // Breaking Card Component (Grid View)
-const BreakingCard: React.FC<{ item: any }> = ({ item }) => (
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function BreakingCard({ item }: { item: any }) {
+  return (
   <ClientSideRoute
     route={
       item.type === 'liveEvent'
@@ -288,12 +296,13 @@ const BreakingCard: React.FC<{ item: any }> = ({ item }) => (
           {item.type === 'liveEvent' && item.location && <span>📍 {item.location}</span>}
           <span>
             {item.type === 'liveEvent'
-              ? formatDate(item.eventDate || item._createdAt)
-              : formatDate(item.publishedAt || item._createdAt)}
+              ? formatDate(item.eventDate ?? item._createdAt)
+              : formatDate(item.publishedAt ?? item._createdAt)}
           </span>
           {item.type === 'liveEvent' && item.endDate && <span>– {formatDate(item.endDate)}</span>}
         </div>
       </div>
     </article>
   </ClientSideRoute>
-);
+  );
+}

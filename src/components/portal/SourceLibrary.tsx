@@ -16,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { deleteSource } from '@/lib/portal/source-actions';
+import { deleteSource } from '@/server/actions/portal/source';
 import { toast } from 'sonner';
 
 interface LinkedArticle {
@@ -53,25 +53,26 @@ const TYPE_LABELS: Record<string, string> = {
   other: 'Other',
 };
 
-export default function SourceLibrary({ sources, isEditorPlus }: Props) {
+export default function SourceLibrary({ sources, isEditorPlus: _isEditorPlus }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [search, setSearch] = useState('');
   const [deleteTarget, setDeleteTarget] = useState<PortalSource | null>(null);
 
   const filtered = useMemo(() => {
-    if (!search.trim()) return sources;
+    if (!search.trim()) {return sources;}
     const q = search.toLowerCase();
     return sources.filter(
       (s) =>
         s.label?.toLowerCase().includes(q) ||
+// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         s.url?.toLowerCase().includes(q) ||
         s.type?.toLowerCase().includes(q)
     );
   }, [sources, search]);
 
   function confirmDelete() {
-    if (!deleteTarget) return;
+    if (!deleteTarget) {return;}
     const id = deleteTarget._id;
     setDeleteTarget(null);
     startTransition(async () => {

@@ -4,13 +4,13 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Heart, Shield, Coffee } from 'lucide-react';
-import { adBlockerDetector } from '@/lib/consent/adBlockerDetection';
+import { adBlockerDetector } from '@/lib/googleAdSense/consent/adBlockerDetection';
 
 interface AdBlockerMessageProps {
   className?: string;
 }
 
-const AdBlockerMessage = ({ className = '' }: AdBlockerMessageProps) => {
+function AdBlockerMessage({ className = '' }: AdBlockerMessageProps) {
   const [showMessage, setShowMessage] = useState(false);
   const [isDetecting, setIsDetecting] = useState(true);
 
@@ -177,39 +177,6 @@ const AdBlockerMessage = ({ className = '' }: AdBlockerMessageProps) => {
       </motion.div>
     </AnimatePresence>
   );
-};
+}
 
 export default AdBlockerMessage;
-
-// Hook for using ad blocker detection in other components
-export function useAdBlockerDetection() {
-  const [detected, setDetected] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const detect = async () => {
-      try {
-        const result = await adBlockerDetector.detect();
-        if (mounted) {
-          setDetected(result);
-        }
-      } catch (error) {
-        console.warn('Ad blocker detection failed:', error);
-      } finally {
-        if (mounted) {
-          setLoading(false);
-        }
-      }
-    };
-
-    detect();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  return { detected, loading };
-}

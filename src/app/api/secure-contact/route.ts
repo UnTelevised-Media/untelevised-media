@@ -2,8 +2,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sanityClient from '@/lib/sanity/lib/client';
-import { checkSubmissionRate } from '@/lib/bookstore/ratelimit';
-import { verifyCaptcha } from '@/lib/captcha';
+import { checkSubmissionRate } from '@/services/bookstore/ratelimit';
+import verifyCaptcha from '@/services/captcha';
 
 const SecureContactSchema = z.object({
   name: z.string().max(200).trim().optional(),
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     const doc = {
       _type: 'secureContact',
       name: data.name ?? null,
-      email: data.email || null,
+      email: data.email ?? null,
       phone: data.phone ?? null,
       subject: data.subject,
       message: data.message,

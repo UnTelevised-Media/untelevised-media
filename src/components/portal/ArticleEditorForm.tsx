@@ -5,18 +5,22 @@
 
 import { useState, useCallback, useTransition, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { toast } from 'sonner';
+import titleToSlug from '@/util/text/titleToSlug';
+import {
+  articleEditorFormSchema,
+  type ArticleEditorFormValues,
+} from '@/models/validations/articleEditor';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
-import { Badge } from '@/components/ui/badge';
 import {
   Select,
   SelectContent,
@@ -32,56 +36,17 @@ import {
   submitArticleForReview,
   searchArticles,
   type ArticleWriteInput,
-} from '@/lib/portal/article-actions';
+} from '@/server/actions/portal/article';
 import { PitchQuickViewModal, type PitchForModal } from './PitchQuickViewModal';
 import {
   blockNoteToPortableText,
   portableTextToBlockNote,
-} from '@/lib/portal/blocknote-serializer';
+} from '@/lib/blocknote/util/blocknote-serializer';
 import urlFor from '@/lib/sanity/utils/image';
 import SourceSelectorModal from './SourceSelectorModal';
 
 // Lazy-load the WYSIWYG editor to avoid SSR
 const RichTextEditor = dynamic(() => import('./RichTextEditor'), { ssr: false });
-
-// ---------------------------------------------------------------------------
-// Form schema
-// ---------------------------------------------------------------------------
-
-const formSchema = z.object({
-  title: z.string().min(1, 'Title is required'),
-  slug: z
-    .string()
-    .min(1, 'Slug is required')
-    .max(200)
-    .regex(/^[a-z0-9-]+$/, 'Slug: lowercase letters, numbers, hyphens only'),
-  description: z.string().max(1000).optional(),
-  leadParagraph: z.string().max(1000).optional(),
-  featured: z.boolean().default(false),
-  breakingNews: z.boolean().default(false),
-  location: z.string().max(200).optional(),
-  allowComments: z.boolean().default(true),
-  publishedAt: z.string().optional(),
-  tags: z.string().optional(), // comma-separated; parsed to array on submit
-  keywords: z.string().optional(),
-  authorRef: z.string().optional(),
-  hasEmbeddedVideo: z.boolean().default(false),
-  // Allow empty string (= no video) or a full URL. An empty value is coerced to
-  // undefined in buildInput, so the server-side z.string().url() schema never sees it.
-  // A non-empty value that isn't a valid URL would silently block ALL field saves on
-  // the server (the whole safeParse fails), so we validate it here too.
-  videoLink: z
-    .union([
-      z.string().url('Video link must be a full URL (https://…)'),
-      z.literal(''),
-      z.undefined(),
-    ])
-    .optional(),
-  eventDate: z.string().optional(),
-  methodology: z.string().max(2000).optional(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
 
 // ---------------------------------------------------------------------------
 // Props
@@ -131,19 +96,6 @@ interface Props {
   linkedPitch?: PitchForModal | null;
   /** Only needed on new articles — passed to createArticle to link both ways */
   linkedPitchId?: string;
-}
-
-// ---------------------------------------------------------------------------
-// Slug generator
-// ---------------------------------------------------------------------------
-
-function titleToSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .slice(0, 100);
 }
 
 // ---------------------------------------------------------------------------
@@ -270,9 +222,9 @@ export default function ArticleEditorForm({
     watch,
     getValues,
     formState: { errors, isDirty },
-  } = useForm<FormValues>({
+  } = useForm<ArticleEditorFormValues>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    resolver: zodResolver(formSchema) as any,
+    resolver: zodResolver(articleEditorFormSchema) as any,
     defaultValues: {
       title: (initialData?.title as string) ?? '',
       slug: (initialData?.slug as { current: string } | undefined)?.current ?? '',
@@ -321,7 +273,7 @@ export default function ArticleEditorForm({
   // ---------------------------------------------------------------------------
 
   const buildInput = useCallback(
-    (values: FormValues): ArticleWriteInput => {
+    (values: ArticleEditorFormValues): ArticleWriteInput => {
       const portableBody = blockNoteToPortableText(
         editorContentRef.current as Parameters<typeof blockNoteToPortableText>[0]
       );
@@ -334,7 +286,7 @@ export default function ArticleEditorForm({
         featured: values.featured,
         breakingNews: values.breakingNews,
         needsReview: false,
-        publishedAt: values.publishedAt || undefined,
+        publishedAt: values.publishedAt ?? undefined,
         categories: selectedCategories.map((c) => ({
           _type: 'reference' as const,
           _ref: c._id,
@@ -343,13 +295,13 @@ export default function ArticleEditorForm({
         tags: values.tags
           ? values.tags
               .split(',')
-              .map((t) => t.trim())
+              .map((t: string) => t.trim())
               .filter(Boolean)
           : [],
         keywords: values.keywords
           ? values.keywords
               .split(',')
-              .map((k) => k.trim())
+              .map((k: string) => k.trim())
               .filter(Boolean)
           : [],
         location: values.location,
@@ -367,8 +319,8 @@ export default function ArticleEditorForm({
         })),
         methodology: values.methodology,
         hasEmbeddedVideo: values.hasEmbeddedVideo,
-        videoLink: values.videoLink || undefined,
-        eventDate: values.eventDate || undefined,
+        videoLink: values.videoLink ?? undefined,
+        eventDate: values.eventDate ?? undefined,
         faqs: faqs
           .filter((f) => f.question.trim() || f.answer.trim())
           .map((f) => ({ _key: f._key, question: f.question, answer: f.answer })),
@@ -391,35 +343,38 @@ export default function ArticleEditorForm({
   // Save handlers
   // ---------------------------------------------------------------------------
 
-  function handleSaveDraft(values: FormValues) {
-    setSaveStatus('saving');
-    const input = buildInput(values);
-    startTransition(async () => {
-      try {
-        const result = articleId
-          ? await updateArticle(articleId, input)
-          : await createArticle(input, linkedPitchId);
-        if (result.success) {
-          setSaveStatus('saved');
-          toast.success('Draft saved.');
-          if (!articleId && 'data' in result) {
-            // createArticle returns the full "drafts.xxx" _id — strip the prefix so the
-            // URL stays clean (/portal/articles/<id>/edit). The edit page normalises either form.
-            const urlId = result.data._id.replace(/^drafts\./, '');
-            router.replace(`/portal/articles/${urlId}/edit`);
+  const handleSaveDraft = useCallback(
+    (values: ArticleEditorFormValues) => {
+      setSaveStatus('saving');
+      const input = buildInput(values);
+      startTransition(async () => {
+        try {
+          const result = articleId
+            ? await updateArticle(articleId, input)
+            : await createArticle(input, linkedPitchId);
+          if (result.success) {
+            setSaveStatus('saved');
+            toast.success('Draft saved.');
+            if (!articleId && 'data' in result) {
+              // createArticle returns the full "drafts.xxx" _id — strip the prefix so the
+              // URL stays clean (/portal/articles/<id>/edit). The edit page normalises either form.
+              const urlId = result.data._id.replace(/^drafts\./, '');
+              router.replace(`/portal/articles/${urlId}/edit`);
+            }
+          } else {
+            setSaveStatus('unsaved');
+            toast.error(result.error);
           }
-        } else {
+        } catch (err) {
           setSaveStatus('unsaved');
-          toast.error(result.error);
+          toast.error(err instanceof Error ? err.message : 'Save failed. Please try again.');
         }
-      } catch (err) {
-        setSaveStatus('unsaved');
-        toast.error(err instanceof Error ? err.message : 'Save failed. Please try again.');
-      }
-    });
-  }
+      });
+    },
+    [buildInput, articleId, linkedPitchId, router]
+  );
 
-  function handleSubmitForReview(values: FormValues) {
+  function handleSubmitForReview(values: ArticleEditorFormValues) {
     startTransition(async () => {
       try {
         // createArticle now returns "drafts.xxx" — use that directly for the review
@@ -452,7 +407,7 @@ export default function ArticleEditorForm({
     });
   }
 
-  function handlePublish(values: FormValues) {
+  function handlePublish(values: ArticleEditorFormValues) {
     startTransition(async () => {
       try {
         let id = articleId;
@@ -475,7 +430,7 @@ export default function ArticleEditorForm({
         // Authors can only publish updates to already-published articles (isAlreadyPublished = true
         // means articleId had no "drafts." prefix). Editors/admins publish everything.
         if (isEditorPlus) {
-          const pubResult = await publishArticle(id, values.publishedAt || undefined);
+          const pubResult = await publishArticle(id, values.publishedAt ?? undefined);
           if (!pubResult.success) {
             toast.error(pubResult.error);
             return;
@@ -496,10 +451,12 @@ export default function ArticleEditorForm({
   // Autosave every 60 seconds when there are unsaved changes (no redirect on success)
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!isDirtyRef.current) return;
+      if (!isDirtyRef.current) {
+        return;
+      }
       const values = getValues();
       setSaveStatus('saving');
-      const input = buildInput(values as FormValues);
+      const input = buildInput(values as ArticleEditorFormValues);
       const articleIdSnapshot = articleId;
       startTransition(async () => {
         try {
@@ -518,7 +475,6 @@ export default function ArticleEditorForm({
       });
     }, 60_000);
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articleId, buildInput, getValues]);
 
   // ---------------------------------------------------------------------------
@@ -544,19 +500,23 @@ export default function ArticleEditorForm({
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key === 's') {
         e.preventDefault();
+
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        handleSubmit(handleSaveDraft as any)();
+        handleSubmit(handleSaveDraft as any)().catch((error) => {
+          console.error('Failed to save draft via keyboard shortcut:', error);
+        });
       }
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'P') {
         e.preventDefault();
         const slug = getValues('slug');
-        if (slug) window.open(`/articles/${slug}`, '_blank');
+        if (slug) {
+          window.open(`/articles/${slug}`, '_blank');
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleSubmit, getValues]);
+  }, [handleSubmit, getValues, handleSaveDraft]);
 
   // ---------------------------------------------------------------------------
   // Render
@@ -619,7 +579,9 @@ export default function ArticleEditorForm({
               size='sm'
               onClick={() => {
                 const slug = watch('slug');
-                if (slug) window.open(`/articles/${slug}`, '_blank');
+                if (slug) {
+                  window.open(`/articles/${slug}`, '_blank');
+                }
               }}
               title='Preview (Ctrl+Shift+P)'
             >
@@ -670,7 +632,9 @@ export default function ArticleEditorForm({
               className='shrink-0'
               onClick={() => {
                 const t = watch('title');
-                if (t) setValue('slug', titleToSlug(t), { shouldValidate: true });
+                if (t) {
+                  setValue('slug', titleToSlug(t), { shouldValidate: true });
+                }
               }}
             >
               Generate
@@ -725,12 +689,12 @@ export default function ArticleEditorForm({
           </Label>
           <div className='space-y-3'>
             {mainImage?.url && (
-              <div className='relative'>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className='relative max-h-48 w-full'>
+                <Image
                   src={mainImage.url}
                   alt={mainImage.alt || 'Article main image'}
-                  className='max-h-48 w-full object-cover'
+                  fill
+                  className='object-cover'
                 />
                 <button
                   type='button'
@@ -750,7 +714,9 @@ export default function ArticleEditorForm({
                 disabled={imageUploading}
                 onChange={async (e) => {
                   const file = e.target.files?.[0];
-                  if (!file) return;
+                  if (!file) {
+                    return;
+                  }
                   setImageUploading(true);
                   try {
                     const fd = new FormData();
@@ -1066,7 +1032,9 @@ export default function ArticleEditorForm({
                     if (q.trim().length > 1) {
                       startArticleSearch(async () => {
                         const res = await searchArticles(q);
-                        if (res.success) setArticleResults(res.data);
+                        if (res.success) {
+                          setArticleResults(res.data);
+                        }
                       });
                     } else {
                       setArticleResults([]);
@@ -1172,7 +1140,9 @@ export default function ArticleEditorForm({
               control={control}
               render={({ field }) => {
                 const hasVideo = !!watch('videoLink');
-                if (field.value !== hasVideo) field.onChange(hasVideo);
+                if (field.value !== hasVideo) {
+                  field.onChange(hasVideo);
+                }
                 return <input type='hidden' value={String(hasVideo)} />;
               }}
             />

@@ -3,8 +3,8 @@
 
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalFetch } from '@/lib/portal/fetch';
-import { queryPortalAllReviews } from '@/lib/portal/queries';
+import { portalFetch } from '@/services/portal/fetch';
+import { queryPortalAllReviews } from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import ReviewsAdmin, { type PortalReview } from '@/components/portal/ReviewsAdmin';
 import { redirect } from 'next/navigation';
@@ -17,7 +17,7 @@ export const metadata = {
 export default async function ReviewsPage() {
   const { role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
-  if (!isEditorPlus) redirect('/portal/articles');
+  if (!isEditorPlus) {redirect('/portal/articles');}
 
   const reviews = (await portalFetch<PortalReview[]>(queryPortalAllReviews)) ?? [];
 

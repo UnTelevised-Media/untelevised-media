@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 // src/components/careers/ApplicationForm.tsx
 import React, { useState } from 'react';
 import * as Sentry from '@sentry/nextjs';
@@ -7,16 +7,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   jobApplicationSchema,
   type JobApplicationFormData,
-} from '@/lib/validations/jobApplicationSchema';
+} from '@/models/validations/jobApplication';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
-import { TurnstileWidget } from '@/components/global/TurnstileWidget';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import TurnstileWidget from '@/components/global/TurnstileWidget';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface ApplicationFormProps {
   prefilledPosition?: string;
 }
 
-export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
+export default function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>(
     'idle'
   );
@@ -46,7 +46,9 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
         formData.append(key, String(value));
       }
     });
-    if (captchaToken) formData.append('turnstileToken', captchaToken);
+    if (captchaToken) {
+      formData.append('turnstileToken', captchaToken);
+    }
 
     try {
       const res = await fetch('/api/careers-application', {
@@ -54,7 +56,9 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
         body: formData,
       });
       const result = await res.json();
-      if (!res.ok) throw new Error(result.error ?? 'Submission failed');
+      if (!res.ok) {
+        throw new Error(result.error ?? 'Submission failed');
+      }
       trackEvent('job_application_submitted', { position: data.position });
       setSubmitState('success');
       reset();
@@ -193,7 +197,7 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
       {/* Cover Letter */}
       <div>
         <label htmlFor='coverLetter' className={labelCls}>
-          Cover Letter * (100–3000 characters)
+          Cover Letter * (100â€“3000 characters)
         </label>
         <textarea
           id='coverLetter'
@@ -214,7 +218,7 @@ export function ApplicationForm({ prefilledPosition }: ApplicationFormProps) {
       {/* Resume Upload */}
       <div>
         <label htmlFor='resume' className={labelCls}>
-          Resume / CV — PDF or Word, max 5 MB (optional)
+          Resume / CV â€” PDF or Word, max 5 MB (optional)
         </label>
         <input
           id='resume'

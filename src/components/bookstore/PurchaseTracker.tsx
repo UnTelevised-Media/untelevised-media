@@ -2,7 +2,7 @@
 // Fires a GA4 'purchase' event once when a confirmed order loads.
 
 import { useEffect, useRef } from 'react';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 export interface GA4Item {
   item_id: string;
@@ -25,7 +25,9 @@ export default function PurchaseTracker({ sessionId, total, currency = 'USD', it
   const fired = useRef(false);
 
   useEffect(() => {
-    if (fired.current || total == null) return;
+    if (fired.current || total === null) {
+      return;
+    }
     fired.current = true;
     trackEvent('purchase', {
       transaction_id: sessionId,

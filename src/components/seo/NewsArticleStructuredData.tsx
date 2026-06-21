@@ -1,17 +1,20 @@
 // src/components/seo/NewsArticleStructuredData.tsx
 // JSON-LD structured data for news article pages — NewsArticle + BreadcrumbList schema
 
-import { getSanityOgImageUrl } from '@/util/metadata';
+import { getSanityOgImageUrl } from '@/util/metadata/metadata';
+import type { Article } from '@/models/types/sanity';
 
 interface Props {
   article: Article;
   slug: string;
 }
 
-export function NewsArticleStructuredData({ article, slug }: Props) {
-  const canonicalUrl = `https://www.untelevised.media/articles/${slug}/`;
+function NewsArticleStructuredData({ article, slug }: Props) {
+  const canonicalUrl = `https://untelevised.media/articles/${slug}/`;
   const ogImageUrl = getSanityOgImageUrl(article.mainImage);
 
+  // GROQ dereferences author-> and categories[]-> in article data
+  // TypeScript sees these as references only, not populated objects
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -29,22 +32,26 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
         author: article.author
           ? {
               '@type': 'Person',
-              '@id': `https://www.untelevised.media/author/${article.author.slug?.current}/#person`,
-              name: article.author.name,
-              url: `https://www.untelevised.media/author/${article.author.slug?.current}/`,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              '@id': `https://untelevised.media/author/${(article.author as any).slug?.current}/#person`,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              name: (article.author as any).name,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              url: `https://untelevised.media/author/${(article.author as any).slug?.current}/`,
             }
           : undefined,
         publisher: {
           '@type': 'NewsMediaOrganization',
-          '@id': 'https://www.untelevised.media/#organization',
+          '@id': 'https://untelevised.media/#organization',
           name: 'UnTelevised Media',
-          url: 'https://www.untelevised.media/',
+          url: 'https://untelevised.media/',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://www.untelevised.media/Logo.png',
+            url: 'https://untelevised.media/Logo.png',
           },
         },
-        articleSection: article.categories?.[0]?.title,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        articleSection: (article.categories as any)?.[0]?.title,
         keywords: Array.isArray(article.keywords) ? article.keywords.join(', ') : article.keywords,
         url: canonicalUrl,
       },
@@ -52,10 +59,11 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
         ? [
             {
               '@type': 'FAQPage',
-              mainEntity: article.faqs.map((faq: { question: string; answer: string }) => ({
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              mainEntity: article.faqs.map((faq: any) => ({
                 '@type': 'Question',
-                name: faq.question,
-                acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+                name: faq.question ?? '',
+                acceptedAnswer: { '@type': 'Answer', text: faq.answer ?? '' },
               })),
             },
           ]
@@ -67,13 +75,16 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://www.untelevised.media/',
+            item: 'https://untelevised.media/',
           },
-          article.categories?.[0] && {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (article.categories as any)?.[0] && {
             '@type': 'ListItem',
             position: 2,
-            name: article.categories[0].title,
-            item: `https://www.untelevised.media/category/${article.categories[0].slug?.current}/`,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            name: (article.categories as any)[0]?.title,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            item: `https://untelevised.media/category/${(article.categories as any)[0]?.slug?.current}/`,
           },
           {
             '@type': 'ListItem',
@@ -93,3 +104,5 @@ export function NewsArticleStructuredData({ article, slug }: Props) {
     />
   );
 }
+
+export default NewsArticleStructuredData;

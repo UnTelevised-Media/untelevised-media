@@ -1,6 +1,7 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/checkout/route.ts
 // Creates a Stripe Checkout Session from submitted cart items.
-// Returns { url } — client redirects to Stripe-hosted checkout.
+// Returns { url } â€” client redirects to Stripe-hosted checkout.
 // TODO: fill STRIPE_SECRET_KEY and ensure SUPABASE_SHOP_* vars are set
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -14,8 +15,8 @@ import type {
   CheckoutLineItem,
   FormatType,
   GiftOptions,
-} from '@/lib/bookstore/types';
-import { checkCheckoutRate } from '@/lib/bookstore/ratelimit';
+} from '@/models/types/bookstore';
+import { checkCheckoutRate } from '@/services/bookstore/ratelimit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
   apiVersion: '2026-05-27.dahlia',
@@ -27,7 +28,7 @@ const baseUrl =
   'http://localhost:3000';
 
 // ---------------------------------------------------------------------------
-// Server-side price ID resolution — never trust the client's stripePriceId.
+// Server-side price ID resolution â€” never trust the client's stripePriceId.
 // We batch-fetch all referenced books from Sanity in one query, then validate
 // each cart item against the authoritative data stored there.
 // ---------------------------------------------------------------------------
@@ -56,7 +57,7 @@ async function fetchCanonicalPricing(
       "author": author->{tipStripeProductId}
     }`,
     { ids: bookIds },
-    // Bypass CDN so we always get the live price — not a cached value.
+    // Bypass CDN so we always get the live price â€” not a cached value.
     { cache: 'no-store' }
   );
 
@@ -99,7 +100,7 @@ export async function POST(req: NextRequest) {
   const rl = await checkCheckoutRate(req);
   if (rl.limited) {
     return NextResponse.json(
-      { error: 'Too many requests — please wait a moment' },
+      { error: 'Too many requests â€” please wait a moment' },
       { status: 429 }
     );
   }
@@ -125,14 +126,16 @@ export async function POST(req: NextRequest) {
 
     // Filter out tips with no amount or zero amount before resolving prices
     const chargeableItems = body.items.filter(
-      (i) => i.formatType !== 'tip' || (i.unitAmountCents != null && i.unitAmountCents > 0)
+      (i) =>
+        i.formatType !== 'tip' ||
+        (i.unitAmountCents !== null && i.unitAmountCents !== undefined && i.unitAmountCents > 0)
     );
 
     if (chargeableItems.length === 0) {
       return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
     }
 
-    // Resolve authoritative price IDs from Sanity — one batched query for all books.
+    // Resolve authoritative price IDs from Sanity â€” one batched query for all books.
     // This replaces the client-supplied stripePriceId with the server-authoritative value,
     // preventing price substitution attacks.
     let bookMap: Map<string, SanityBookPricing>;
@@ -154,10 +157,12 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Build server-verified NYOP flags from Sanity — never trust item.isNyop from
+    // Build server-verified NYOP flags from Sanity â€” never trust item.isNyop from
     // the client, which would allow submitting an arbitrary unitAmountCents for any item.
     const serverIsNyopFlags: boolean[] = chargeableItems.map((item) => {
-      if (item.formatType === 'tip') return false;
+      if (item.formatType === 'tip') {
+        return false;
+      }
       const book = bookMap.get(item.sanityBookId);
       const format = book?.formats?.find((f) => f._key === item.formatKey);
       return format?.nameYourPrice === true;
@@ -187,7 +192,7 @@ export async function POST(req: NextRequest) {
         const canonicalId = canonicalIds[idx];
 
         // Tips and NYOP both use price_data: a Stripe product + user-entered amount.
-        // serverIsNyopFlags[idx] is authoritative — item.isNyop from the client is ignored.
+        // serverIsNyopFlags[idx] is authoritative â€” item.isNyop from the client is ignored.
         if ((item.formatType === 'tip' || serverIsNyopFlags[idx]) && item.unitAmountCents) {
           // canonicalId may be a price_xxx (format slot) or prod_xxx (tip product).
           // Resolve down to a product ID for price_data.

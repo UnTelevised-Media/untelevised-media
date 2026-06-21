@@ -21,7 +21,9 @@ export function getRoleFromMeta(meta: Record<string, unknown>): PortalRole | nul
     return role as PortalRole;
   }
   // Backwards-compat: legacy `admin: true` flag is treated as admin role
-  if (meta?.admin === true || meta?.admin === 'true') return 'admin';
+  if (meta?.admin === true || meta?.admin === 'true') {
+    return 'admin';
+  }
   return null;
 }
 
@@ -30,13 +32,25 @@ export function getRoleFromMeta(meta: Record<string, unknown>): PortalRole | nul
  * Hierarchy: admin > editor > author; sales is a peer of author (neither contains the other).
  */
 export function hasRole(role: PortalRole | null, required: PortalRole): boolean {
-  if (role === null) return false;
-  if (role === 'admin') return true;
-  if (required === 'admin') return false;
-  if (required === 'editor') return role === 'editor';
-  if (required === 'author') return role === 'editor' || role === 'author';
+  if (role === null) {
+    return false;
+  }
+  if (role === 'admin') {
+    return true;
+  }
+  if (required === 'admin') {
+    return false;
+  }
+  if (required === 'editor') {
+    return role === 'editor';
+  }
+  if (required === 'author') {
+    return role === 'editor' || role === 'author';
+  }
   // required === 'sales' — admin already handled above; sales role satisfies 'sales' check
-  if (required === 'sales') return role === 'sales';
+  if (required === 'sales') {
+    return role === 'sales';
+  }
   return false;
 }
 

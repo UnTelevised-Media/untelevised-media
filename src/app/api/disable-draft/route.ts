@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/disable-draft/route.ts
 
 import { draftMode } from 'next/headers';

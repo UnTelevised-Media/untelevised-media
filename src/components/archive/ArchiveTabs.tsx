@@ -4,10 +4,10 @@ import { useState, useMemo, Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { List, LayoutGrid } from 'lucide-react';
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
-import urlForImage from '@/util/urlForImage';
-import { InFeedAd, AD_CONFIG } from '@/components/ads';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
+import urlForImage from '@/util/url/urlForImage';
+import { InFeedAd, AD_CONFIG } from '@/components/googleAdSense';
 
 export interface ArchiveArticle {
   _id: string;
@@ -40,8 +40,8 @@ export default function ArchiveTabs({ articles, currentYear }: Props) {
     for (const article of articles) {
       const date = getArticleDate(article);
       const year = date ? new Date(date).getFullYear() : null;
-      if (!year) continue;
-      if (!map.has(year)) map.set(year, []);
+      if (!year) {continue;}
+      if (!map.has(year)) {map.set(year, []);}
       map.get(year)!.push(article);
     }
     return map;

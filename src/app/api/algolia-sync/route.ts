@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 import { createHmac } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -5,7 +6,7 @@ import { createClient } from '@sanity/client';
 import { toPlainText } from '@portabletext/toolkit';
 
 import { adminClient, ARTICLES_INDEX, LIVE_EVENTS_INDEX } from '@/lib/algolia/client';
-import type { AlgoliaArticleRecord } from '@/lib/algolia/types';
+import type { AlgoliaArticleRecord } from '@/models/types/algolia';
 
 const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -38,12 +39,12 @@ function verifySignature(body: string, signature: string, secret: string): boole
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const rawBody = await req.text();
 
-  // Always require SANITY_WEBHOOK_SECRET — fail closed rather than open.
+  // Always require SANITY_WEBHOOK_SECRET â€” fail closed rather than open.
   // An unconfigured secret would allow any caller to delete or poison Algolia
   // index records without authentication.
   const webhookSecret = process.env.SANITY_WEBHOOK_SECRET;
   if (!webhookSecret) {
-    console.error('[algolia-sync] SANITY_WEBHOOK_SECRET is not configured — rejecting request');
+    console.error('[algolia-sync] SANITY_WEBHOOK_SECRET is not configured â€” rejecting request');
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -67,7 +68,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // Handle article sync
   if (_type === 'article') {
     if (operation === 'delete') {
-      // We need the slug to delete — use _id as a fallback objectID pattern
+      // We need the slug to delete â€” use _id as a fallback objectID pattern
       // Sanity webhook may include the slug in the payload
       const slugPayload = (payload as Record<string, unknown>).slug as
         | { current?: string }

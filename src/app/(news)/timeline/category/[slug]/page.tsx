@@ -1,16 +1,16 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/timeline/category/[slug]/page.tsx
 import { Metadata } from 'next';
 import { groq } from 'next-sanity';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, Star } from 'lucide-react';
+import type { Timeline, TimelineCategory, TimelineEvent } from '@/models/types/sanity';
 
 import TimelineEventCard from '@/components/timeline/TimelineEventCard';
 import TimelineCard from '@/components/timeline/TimelineCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { BannerAd, RectangleAd } from '@/components/ads';
+import { BannerAd, RectangleAd } from '@/components/googleAdSense';
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
@@ -63,9 +63,11 @@ export default async function TimelineCategoryPage({ params }: Props) {
         {/* Category Header */}
         <div className='mb-8'>
           <div className='mb-4 flex items-center gap-4'>
-            <div className={`h-6 w-6 rounded-full ${getCategoryColor(category.color)}`} />
+            <div
+              className={`h-6 w-6 rounded-full ${getCategoryColor(category.color ?? 'gray')}`}
+            />
             <h1 className='text-3xl font-bold text-slate-900 dark:text-slate-100 lg:text-4xl'>
-              {category.title}
+              {category.title ?? 'Category'}
             </h1>
           </div>
 
@@ -219,8 +221,10 @@ export default async function TimelineCategoryPage({ params }: Props) {
                 <div className='flex justify-between'>
                   <span className='text-slate-600 dark:text-slate-400'>Category Color</span>
                   <div className='flex items-center gap-2'>
-                    <div className={`h-3 w-3 rounded-full ${getCategoryColor(category.color)}`} />
-                    <span className='font-medium capitalize'>{category.color}</span>
+                    <div
+                      className={`h-3 w-3 rounded-full ${getCategoryColor(category.color ?? 'gray')}`}
+                    />
+                    <span className='font-medium capitalize'>{category.color ?? 'gray'}</span>
                   </div>
                 </div>
               </div>
@@ -232,12 +236,20 @@ export default async function TimelineCategoryPage({ params }: Props) {
                 <h3 className='mb-3 font-semibold text-slate-900 dark:text-slate-100'>
                   Parent Category
                 </h3>
-                <Link href={`/timeline/category/${category.parentCategory.slug.current}`}>
+                {/* GROQ dereferences parentCategory->, TypeScript sees only reference */}
+                <Link
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  href={`/timeline/category/${(category.parentCategory as any).slug?.current ?? ''}`}
+                >
                   <div className='flex items-center gap-3 rounded p-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800'>
                     <div
-                      className={`h-3 w-3 rounded-full ${getCategoryColor(category.parentCategory.color)}`}
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      className={`h-3 w-3 rounded-full ${getCategoryColor((category.parentCategory as any).color ?? 'gray')}`}
                     />
-                    <span className='text-sm font-medium'>{category.parentCategory.title}</span>
+                    <span className='text-sm font-medium'>
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {(category.parentCategory as any).title ?? 'Category'}
+                    </span>
                   </div>
                 </Link>
               </div>
@@ -247,14 +259,14 @@ export default async function TimelineCategoryPage({ params }: Props) {
             <div className='space-y-3 rounded-lg bg-slate-50 p-4 dark:bg-slate-900'>
               <h3 className='font-semibold text-slate-900 dark:text-slate-100'>Quick Actions</h3>
               <div className='space-y-2'>
-                <Link href={`/timeline/create?category=${category.slug.current}`}>
+                <Link href={`/timeline/create?category=${category.slug?.current ?? ''}`}>
                   <Button variant='outline' size='sm' className='w-full justify-start'>
-                    Create Timeline in {category.title}
+                    Create Timeline in {category.title ?? 'Category'}
                   </Button>
                 </Link>
-                <Link href={`/timeline/event/create?category=${category.slug.current}`}>
+                <Link href={`/timeline/event/create?category=${category.slug?.current ?? ''}`}>
                   <Button variant='outline' size='sm' className='w-full justify-start'>
-                    Add Event to {category.title}
+                    Add Event to {category.title ?? 'Category'}
                   </Button>
                 </Link>
                 <Button variant='outline' size='sm' className='w-full justify-start'>
@@ -322,20 +334,24 @@ async function getCategoryData(slug: string): Promise<{
     }
 
     // Get events and timelines in parallel
-    const [{ data: events }, { data: timelines }] = await Promise.all([
+    const [eventsResult, timelinesResult] = await Promise.all([
       sanityFetch({
         query: queryTimelineEventsByCategory,
         params: { categoryId: category._id },
         tags: ['timelineEvent'],
-      }) as Promise<{ data: TimelineEvent[] }>,
+      }),
       sanityFetch({
         query: queryTimelinesByCategory,
         params: { categoryId: category._id },
         tags: ['timeline'],
-      }) as Promise<{ data: Timeline[] }>,
+      }),
     ]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data: events } = eventsResult as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data: timelines } = timelinesResult as any;
 
-    return { category, events, timelines };
+    return { category, events: events as TimelineEvent[], timelines: timelines as Timeline[] };
   } catch (error) {
     console.error('Failed to fetch category data:', error);
     return { category: null, events: [], timelines: [] };
@@ -348,7 +364,7 @@ export async function generateStaticParams() {
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: TimelineCategory[] = await sanityClient.fetch(queryTimelineCategoryStaticParams);
   const slugRoutes = slugs
-    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug?.current ?? '')
     : [];
   return slugRoutes.map((slug) => ({
     slug,

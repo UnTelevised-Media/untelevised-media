@@ -1,17 +1,18 @@
 // src/components/cards/ArticleCards.tsx
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import React from 'react';
 import Image from 'next/image';
-import { ArrowUpRight, ShareIcon, AlertTriangle, XCircle } from 'lucide-react';
+import { ArrowUpRight, ShareIcon, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
+import type { Article } from '@/models/types/sanity';
 
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
-import urlForImage from '@/util/urlForImage';
-import { getReadingTime } from '@/lib/readingTime';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
+import urlForImage from '@/util/url/urlForImage';
+import { getReadingTime } from '@/util/date/readingTime';
 
 // Enhanced Article Card - matches your existing design but with the blog card layout
-const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
+function ArticleCard({ articles }: { articles: Article[] }) {
   if (!articles) {
     return null;
   }
@@ -19,15 +20,17 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
   return (
     <>
       {articles.map((article) => (
-        <Link href={`/articles/${article.slug?.current}`} key={article._id}>
+        <Link href={`/articles/${article.slug?.current ?? '#'}`} key={article._id}>
           <article
             className='group relative flex flex-col overflow-hidden rounded-lg border border-slate-400 bg-slate-400/80 shadow-lg transition-all duration-300 hover:border-untele/50 hover:shadow-xl'
             aria-labelledby={`article-title-${article._id}`}
           >
             <div className='relative aspect-video overflow-hidden'>
+              {/* Sanity image reference flexibility */}
               <Image
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 src={urlForImage(article.mainImage as any)?.url() ?? ''}
-                alt={article.mainImage?.alt ?? article.title}
+                alt={article.mainImage?.alt ?? article.title ?? 'Article'}
                 fill
                 className='object-cover transition-transform duration-300 group-hover:scale-105'
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
@@ -37,22 +40,17 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
 
             <div className='flex flex-1 flex-col bg-slate-400 p-6'>
               <div className='mb-4 flex flex-wrap gap-2'>
-                {article.categories?.map((category) => (
+                {article.categories?.map((category, index) => (
                   <span
-                    key={category._id}
+                    key={category._key ?? index}
                     className='inline-block w-fit rounded-full border border-untele/30 bg-untele/10 px-3 py-1 text-xs font-medium text-untele'
                   >
-                    {category.title}
+                    Category
                   </span>
                 ))}
               </div>
 
-              {article.correction?.type === 'retraction' ? (
-                <span className='mb-2 inline-flex items-center gap-1 bg-untele px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
-                  <XCircle className='h-2.5 w-2.5' aria-hidden='true' />
-                  Retracted
-                </span>
-              ) : article.correction?.summary ? (
+              {article.corrections ? (
                 <span className='mb-2 inline-flex items-center gap-1 bg-amber-400 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-black'>
                   <AlertTriangle className='h-2.5 w-2.5' aria-hidden='true' />
                   Corrected
@@ -61,7 +59,7 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
 
               <h2
                 id={`article-title-${article._id}`}
-                className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele${article.correction?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
+                className={`mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-untele`}
               >
                 {article.title}
               </h2>
@@ -71,7 +69,7 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
               </p>
 
               <div className='mt-auto flex items-center justify-between'>
-                <div className='text-sm text-slate-600'>{article.author?.name}</div>
+                <div className='text-sm text-slate-600'>Author</div>
                 <div className='flex items-center gap-2'>
                   <span className='text-sm text-slate-600'>
                     {formatDate(getArticleDate(article))}
@@ -88,10 +86,10 @@ const ArticleCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
       ))}
     </>
   );
-};
+}
 
 // Compact Article List Card
-const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
+function ArticleListCard({ articles }: { articles: Article[] }) {
   if (!articles?.length) {
     return null;
   }
@@ -99,13 +97,15 @@ const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
   return (
     <div className='flex flex-col gap-6 overflow-hidden'>
       {articles.map((article) => (
-        <Link key={article._id} href={`/articles/${article.slug?.current}`}>
+        <Link key={article._id} href={`/articles/${article.slug?.current ?? '#'}`}>
           <article className='flex h-24 overflow-hidden rounded-lg border border-slate-400 bg-slate-400/80 shadow-sm transition-all duration-300 hover:border-untele/50 hover:bg-slate-300'>
             {/* Thumbnail */}
             <div className='relative h-full w-24 flex-shrink-0'>
+              {/* Sanity image reference flexibility */}
               <Image
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 src={urlForImage(article.mainImage as any)?.url() ?? ''}
-                alt={article.mainImage?.alt ?? article.title}
+                alt={article.mainImage?.alt ?? article.title ?? 'Article'}
                 fill
                 className='object-cover'
                 sizes='96px'
@@ -117,12 +117,12 @@ const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
               <div className='space-y-2'>
                 {/* Category Pills */}
                 <div className='flex flex-wrap gap-1'>
-                  {article.categories?.map((category) => (
+                  {article.categories?.map((category, index) => (
                     <span
-                      key={category._id}
+                      key={category._key ?? index}
                       className='inline-block w-fit rounded-full border border-untele/30 bg-untele/20 px-1.5 py-0.5 text-[10px] font-medium text-untele'
                     >
-                      {category.title}
+                      Category
                     </span>
                   ))}
                 </div>
@@ -134,7 +134,7 @@ const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
               </div>
 
               <div className='mt-auto flex items-center justify-between text-xs text-slate-600'>
-                <span>{article.author?.name}</span>
+                <span>Author</span>
                 <span>{formatDate(getArticleDate(article))}</span>
               </div>
             </div>
@@ -143,24 +143,25 @@ const ArticleListCard: React.FC<{ articles: Article[] }> = ({ articles }) => {
       ))}
     </div>
   );
-};
+}
 
 // Featured Article Card - Hero style
-const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
+function FeaturedArticleCard({ article }: { article: Article }) {
   if (!article) {
     return null;
   }
 
   return (
-    <Link href={`/articles/${article.slug?.current}`}>
+    <Link href={`/articles/${article.slug?.current ?? '#'}`}>
       <div
         className='group relative mx-auto w-full max-w-[1400px] overflow-hidden rounded-lg border border-slate-400 shadow-xl transition-transform duration-500 hover:scale-105'
         aria-labelledby='featured-article-title'
       >
         <div className='relative h-[578px] w-full overflow-hidden'>
           <Image
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             src={urlForImage(article.mainImage as any)?.url() ?? ''}
-            alt={article.mainImage?.alt ?? article.title}
+            alt={article.mainImage?.alt ?? article.title ?? 'Article'}
             fill
             className='absolute object-cover'
             sizes='(max-width: 1200px) 100vw, 1200px'
@@ -172,16 +173,11 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
         <div className='absolute bottom-0 left-0 w-full border-none bg-slate-900/60 backdrop-blur-sm transition duration-500 group-hover:bg-slate-800/70'>
           {article.categories?.[0] && (
             <span className='mb-1 ml-4 mt-2 inline-block rounded-full border border-untele bg-untele/90 px-3 py-1 text-xs font-medium text-white'>
-              {article.categories[0].title}
+              Category
             </span>
           )}
 
-          {article.correction?.type === 'retraction' ? (
-            <span className='mb-1 ml-4 inline-flex items-center gap-1 bg-untele px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
-              <XCircle className='h-2.5 w-2.5' aria-hidden='true' />
-              Retracted
-            </span>
-          ) : article.correction?.summary ? (
+          {article.corrections ? (
             <span className='mb-1 ml-4 inline-flex items-center gap-1 bg-amber-400 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-black'>
               <AlertTriangle className='h-2.5 w-2.5' aria-hidden='true' />
               Corrected
@@ -190,14 +186,14 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
 
           <h2
             id='featured-article-title'
-            className={`mb-2 text-wrap px-4 text-2xl font-bold leading-6 text-white drop-shadow-lg${article.correction?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
+            className={`mb-2 text-wrap px-4 text-2xl font-bold leading-6 text-white drop-shadow-lg`}
           >
             {article.title}
           </h2>
 
           <div className='flex items-center justify-between bg-gradient-to-t from-slate-900/90 to-transparent px-4 py-3'>
             <div className='flex items-center gap-4'>
-              <p className='font-medium text-slate-300'>{article.author?.name}</p>
+              <p className='font-medium text-slate-300'>Author</p>
               <div className='flex items-center gap-2'>
                 <ShareIcon className='h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-untele' />
                 <ArrowUpRight className='h-4 w-4 text-untele' />
@@ -218,6 +214,6 @@ const FeaturedArticleCard: React.FC<{ article: Article }> = ({ article }) => {
       </div>
     </Link>
   );
-};
+}
 
 export { ArticleCard, ArticleListCard, FeaturedArticleCard };

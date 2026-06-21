@@ -1,7 +1,7 @@
 // src/components/seo/GlobalStructuredData.tsx
 // Rendered once in (user)/layout.tsx — NewsMediaOrganization + WebSite with SearchAction
 
-export function GlobalStructuredData() {
+function GlobalStructuredData() {
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -52,3 +52,5 @@ export function GlobalStructuredData() {
     />
   );
 }
+
+export default GlobalStructuredData;

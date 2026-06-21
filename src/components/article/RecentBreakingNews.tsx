@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Flame } from 'lucide-react';
 import { groq } from 'next-sanity';
 import sanityFetch from '@/lib/sanity/lib/fetch';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 
 interface BreakingArticle {
   _id: string;
@@ -36,7 +36,7 @@ export default async function RecentBreakingNews() {
     return null;
   }
 
-  if (articles.length === 0) return null;
+  if (articles.length === 0) {return null;}
 
   return (
     <section aria-label='Recent breaking news'>

@@ -3,7 +3,7 @@
 // Uses searchParams to filter (handled server-side via URL; this is just the UI).
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import type { SanityBookGenre } from '@/lib/bookstore/types';
+import type { SanityBookGenre } from '@/models/types/bookstore';
 
 export default function GenreFilter({ genres }: { genres: SanityBookGenre[] }) {
   const router = useRouter();

@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { createSource, fetchAllSources } from '@/lib/portal/source-actions';
+import { createSource, fetchAllSources } from '@/server/actions/portal/source';
 import { toast } from 'sonner';
 
 interface SourceItem {
@@ -33,7 +33,7 @@ interface SourceItem {
 
 interface Props {
   selectedIds: string[];
-  onSelect: (source: SourceItem) => void;
+  onSelect: (_source: SourceItem) => void;
 }
 
 export default function SourceSelectorModal({ selectedIds, onSelect }: Props) {
@@ -54,12 +54,12 @@ export default function SourceSelectorModal({ selectedIds, onSelect }: Props) {
     // Load sources on open
     startTransition(async () => {
       const result = await fetchAllSources();
-      if (result.success) setSources(result.data);
+      if (result.success) {setSources(result.data);}
     });
   }
 
   const filtered = sources.filter((s) => {
-    if (!search.trim()) return true;
+    if (!search.trim()) {return true;}
     const q = search.toLowerCase();
     return s.label?.toLowerCase().includes(q) || s.url?.toLowerCase().includes(q);
   });

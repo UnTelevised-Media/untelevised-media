@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(news)/breaking/page.tsx
 import type { Metadata } from 'next';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
@@ -23,9 +22,12 @@ export default async function BreakingNews() {
     sanityFetch({ query: queryBreakingArticles, tags: ['article', 'breaking'] }),
   ]);
 
+  // BreakingNewsClient expects flexible data structures
   return (
     <BreakingNewsClient
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       initialEvents={(liveEvents as any[]) ?? []}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       initialArticles={(breakingArticles as any[]) ?? []}
     />
   );

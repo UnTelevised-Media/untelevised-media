@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/download/guest-resend/route.ts
 // POST /api/bookstore/download/guest-resend
 // Allows a guest to request a fresh download link by providing their order number and email.
@@ -14,9 +15,9 @@
 // All three layers must pass before any token is issued or email is sent.
 
 import { NextRequest, NextResponse } from 'next/server';
-import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
-import { sendGuestDownloadEmail } from '@/lib/bookstore/email';
-import { checkGuestResendRate } from '@/lib/bookstore/ratelimit';
+import { shopServiceClient, writeAuditLog } from '@/services/bookstore/supabase';
+import { sendGuestDownloadEmail } from '@/services/bookstore/email';
+import { checkGuestResendRate } from '@/services/bookstore/ratelimit';
 
 const MAX_RESENDS = 3;
 
@@ -70,7 +71,7 @@ export async function POST(req: NextRequest) {
       .eq('id', order.customer_id)
       .maybeSingle();
 
-    if (!customer || customer.email.toLowerCase() !== guestEmail.trim().toLowerCase()) {
+    if (customer?.email.toLowerCase() !== guestEmail.trim().toLowerCase()) {
       return NextResponse.json({
         message: 'If a matching order was found, a new download link has been sent.',
       });

@@ -1,13 +1,13 @@
-/* eslint-disable react/function-component-definition */
+import type { Song, MusicArtist } from '@/models/types/sanity';
 // src/app/(user)/lyrics/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { BannerAd } from '@/components/ads';
+import { BannerAd } from '@/components/googleAdSense';
 
-import urlForImage from '@/util/urlForImage';
-import { getSongArtwork, getSongArtworkAlt } from '@/util/getSongArtwork';
+import urlForImage from '@/util/url/urlForImage';
+import { getSongArtwork, getSongArtworkAlt } from '@/util/content/getSongArtwork';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import {
   queryFeaturedSongs,
@@ -15,7 +15,7 @@ import {
   queryFeaturedMusicArtists,
 } from '@/lib/sanity/lib/queries';
 import { Music, TrendingUp, Users, Clock } from 'lucide-react';
-import { DEFAULT_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata';
+import { DEFAULT_OG_IMAGE, getCanonicalUrl, TWITTER_HANDLE } from '@/util/metadata/metadata';
 
 export const metadata: Metadata = {
   title: 'Lyrics | Music & Songs',
@@ -103,6 +103,9 @@ export default async function LyricsIndexPage() {
                   const artworkUrl = getSongArtwork(song);
                   const artworkAlt = getSongArtworkAlt(song);
 
+                  if (!song.slug?.current) {
+                    return null;
+                  }
                   return (
                     <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
                       <div className='group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-700 dark:bg-slate-800'>
@@ -122,17 +125,27 @@ export default async function LyricsIndexPage() {
                             {song.title}
                           </h3>
                           <p className='mb-3 text-slate-600 dark:text-slate-400'>
-                            by {song.primaryArtist.stageName ?? song.primaryArtist.name}
+                            by{' '}
+                            {/* GROQ dereferences primaryArtist->, featuredArtists[]-> and album-> */}
+                            {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                            {(song.primaryArtist as any)?.stageName ??
+                              (song.primaryArtist as any)?.name ??
+                              'Unknown Artist'}
                             {song.featuredArtists && song.featuredArtists.length > 0 && (
                               <span>
                                 {' '}
                                 feat.{' '}
-                                {song.featuredArtists.map((a) => a.stageName ?? a.name).join(', ')}
+                                {(song?.featuredArtists ?? [])
+                                  .map((a: any) => (a as any)?.stageName ?? (a as any)?.name)
+                                  .join(', ')}
                               </span>
                             )}
+                            {/* eslint-enable @typescript-eslint/no-explicit-any */}
                           </p>
                           <div className='flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400'>
-                            {song.album && <span>{song.album.title}</span>}
+                            {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                            {song.album && <span>{(song.album as any)?.title}</span>}
+                            {/* eslint-enable @typescript-eslint/no-explicit-any */}
                             {song.releaseDate && (
                               <>
                                 <span>•</span>
@@ -171,41 +184,46 @@ export default async function LyricsIndexPage() {
               </div>
 
               <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
-                {featuredArtists.map((artist) => (
-                  <ClientSideRoute
-                    key={artist._id}
-                    route={`/music-artists/${artist.slug.current}`}
-                  >
-                    <div className='group cursor-pointer text-center'>
-                      <div className='mb-4 overflow-hidden rounded-full'>
-                        {artist.image ? (
-                          <Image
-                            src={urlForImage(artist.image)?.url() ?? ''}
-                            alt={artist.name}
-                            width={200}
-                            height={200}
-                            className='h-48 w-48 object-cover transition-transform group-hover:scale-105'
-                          />
-                        ) : (
-                          <div className='flex h-48 w-48 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700'>
-                            <Users className='h-16 w-16 text-slate-400' />
-                          </div>
+                {featuredArtists.map((artist) => {
+                  if (!artist?.slug?.current) {
+                    return null;
+                  }
+                  return (
+                    <ClientSideRoute
+                      key={artist._id}
+                      route={`/music-artists/${artist.slug.current}`}
+                    >
+                      <div className='group cursor-pointer text-center'>
+                        <div className='mb-4 overflow-hidden rounded-full'>
+                          {artist.image ? (
+                            <Image
+                              src={urlForImage(artist.image)?.url() ?? ''}
+                              alt={artist.name ?? 'Artist'}
+                              width={200}
+                              height={200}
+                              className='h-48 w-48 object-cover transition-transform group-hover:scale-105'
+                            />
+                          ) : (
+                            <div className='flex h-48 w-48 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700'>
+                              <Users className='h-16 w-16 text-slate-400' />
+                            </div>
+                          )}
+                        </div>
+                        <h3 className='mb-2 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                          {artist.stageName ?? artist.name}
+                        </h3>
+                        <p className='mb-2 text-sm text-slate-600 dark:text-slate-400'>
+                          {artist.genres?.slice(0, 2).join(', ')}
+                        </p>
+                        {artist.songCount !== undefined && (
+                          <p className='text-xs text-slate-500 dark:text-slate-400'>
+                            {artist.songCount} song{artist.songCount !== 1 ? 's' : ''}
+                          </p>
                         )}
                       </div>
-                      <h3 className='mb-2 text-lg font-semibold text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                        {artist.stageName ?? artist.name}
-                      </h3>
-                      <p className='mb-2 text-sm text-slate-600 dark:text-slate-400'>
-                        {artist.genres?.slice(0, 2).join(', ')}
-                      </p>
-                      {artist.songCount !== undefined && (
-                        <p className='text-xs text-slate-500 dark:text-slate-400'>
-                          {artist.songCount} song{artist.songCount !== 1 ? 's' : ''}
-                        </p>
-                      )}
-                    </div>
-                  </ClientSideRoute>
-                ))}
+                    </ClientSideRoute>
+                  );
+                })}
               </div>
             </section>
           )}
@@ -230,6 +248,9 @@ export default async function LyricsIndexPage() {
                     const artworkUrl = getSongArtwork(song);
                     const artworkAlt = getSongArtworkAlt(song);
 
+                    if (!song.slug?.current) {
+                      return null;
+                    }
                     return (
                       <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
                         <div className='group flex cursor-pointer items-center gap-4 p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700'>
@@ -254,22 +275,29 @@ export default async function LyricsIndexPage() {
                               {song.title}
                             </h3>
                             <p className='text-sm text-slate-600 dark:text-slate-400'>
-                              {song.primaryArtist.stageName ?? song.primaryArtist.name}
+                              {/* GROQ dereferences primaryArtist->, featuredArtists[]-> and album-> */}
+                              {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                              {(song.primaryArtist as any)?.stageName ??
+                                (song.primaryArtist as any)?.name ??
+                                'Unknown Artist'}
                               {song.featuredArtists && song.featuredArtists.length > 0 && (
                                 <span>
                                   {' '}
                                   feat.{' '}
                                   {song.featuredArtists
-                                    .map((a) => a.stageName ?? a.name)
+                                    .map((a: any) => (a as any)?.stageName ?? (a as any)?.name)
                                     .join(', ')}
                                 </span>
                               )}
+                              {/* eslint-enable @typescript-eslint/no-explicit-any */}
                             </p>
+                            {/* eslint-disable @typescript-eslint/no-explicit-any */}
                             {song.album && (
                               <p className='text-xs text-slate-500 dark:text-slate-400'>
-                                {song.album.title}
+                                {(song.album as any)?.title}
                               </p>
                             )}
+                            {/* eslint-enable @typescript-eslint/no-explicit-any */}
                           </div>
 
                           <div className='text-right text-sm text-slate-500 dark:text-slate-400'>

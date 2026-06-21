@@ -4,6 +4,7 @@
 
 import { useState, useMemo, useTransition } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -46,7 +47,7 @@ import {
   approveArticleDeletion,
   denyArticleDeletion,
   retractArticle,
-} from '@/lib/portal/article-actions';
+} from '@/server/actions/portal/article';
 import { toast } from 'sonner';
 
 // ---------------------------------------------------------------------------
@@ -216,11 +217,11 @@ export default function ArticleDashboard({
   // Author-scoped base list (editors only)
   // ---------------------------------------------------------------------------
   const authorScoped = useMemo(() => {
-    if (!isEditorPlus || authorFilter === 'all') return articles;
+    if (!isEditorPlus || authorFilter === 'all') {return articles;}
     if (authorFilter === 'mine')
-      return articles.filter((a) => a.authorId === currentSanityAuthorId);
+      {return articles.filter((a) => a.authorId === currentSanityAuthorId);}
     if (authorFilter === 'reviewed')
-      return articles.filter((a) => a.reviewedById === currentSanityAuthorId);
+      {return articles.filter((a) => a.reviewedById === currentSanityAuthorId);}
     return articles.filter((a) => a.authorId !== currentSanityAuthorId);
   }, [articles, isEditorPlus, authorFilter, currentSanityAuthorId]);
 
@@ -248,15 +249,15 @@ export default function ArticleDashboard({
       const q = search.toLowerCase();
       list = list.filter(
         (a) =>
-          a.title?.toLowerCase().includes(q) ||
-          a.tags?.some((t) => t.toLowerCase().includes(q)) ||
+          a.title?.toLowerCase().includes(q) ??
+          a.tags?.some((t) => t.toLowerCase().includes(q)) ??
           a.categories?.some((c) => c.title?.toLowerCase().includes(q))
       );
     }
 
     return [...list].sort((a, b) => {
-      if (sortBy === 'title') return (a.title ?? '').localeCompare(b.title ?? '');
-      if (sortBy === 'createdAt') return b._createdAt.localeCompare(a._createdAt);
+      if (sortBy === 'title') {return (a.title ?? '').localeCompare(b.title ?? '');}
+      if (sortBy === 'createdAt') {return b._createdAt.localeCompare(a._createdAt);}
       return b._updatedAt.localeCompare(a._updatedAt);
     });
   }, [authorScoped, activeTab, search, sortBy]);
@@ -266,7 +267,7 @@ export default function ArticleDashboard({
   // ---------------------------------------------------------------------------
 
   function confirmDelete() {
-    if (!deleteTarget) return;
+    if (!deleteTarget) {return;}
     const id = originalId(deleteTarget);
     const approvingRequest = !!deleteTarget.deletionRequest;
     setDeleteTarget(null);
@@ -284,7 +285,7 @@ export default function ArticleDashboard({
   }
 
   function confirmRemovalRequest() {
-    if (!removalTarget || removalReason.trim().length < 10) return;
+    if (!removalTarget || removalReason.trim().length < 10) {return;}
     const id = originalId(removalTarget);
     const reason = removalReason.trim();
     setRemovalTarget(null);
@@ -313,7 +314,7 @@ export default function ArticleDashboard({
   }
 
   function confirmRetraction() {
-    if (!retractionTarget || !retractionData.issuedAt || !retractionData.detail.trim()) return;
+    if (!retractionTarget || !retractionData.issuedAt || !retractionData.detail.trim()) {return;}
     const id = originalId(retractionTarget);
     const data = { ...retractionData };
     setRetractionTarget(null);
@@ -772,7 +773,7 @@ function ArticleTableRow({
         <StatusBadge article={article} />
       </TableCell>
       <TableCell className='text-sm text-slate-500'>
-        {article.categories?.map((c) => c.title).join(', ') || '—'}
+        {article.categories?.map((c) => c.title).join(', ') ?? '—'}
       </TableCell>
       <TableCell className='whitespace-nowrap text-sm text-slate-500'>
         {new Date(article._updatedAt).toLocaleDateString()}
@@ -810,10 +811,11 @@ function ArticleCard({
       {/* Thumbnail */}
       {imageUrl ? (
         <div className='relative h-32 w-full overflow-hidden bg-slate-100 dark:bg-slate-800'>
-          <img
+          <Image
             src={`${imageUrl}?w=480&h=128&fit=crop&auto=format`}
             alt={article.mainImage?.alt ?? ''}
-            className='h-full w-full object-cover'
+            fill
+            className='object-cover'
           />
         </div>
       ) : (
@@ -846,7 +848,7 @@ function ArticleCard({
           <p className='mb-2 text-xs italic text-orange-600 dark:text-orange-400'>
             &ldquo;
             {article.deletionRequest.reason.length > 90
-              ? article.deletionRequest.reason.slice(0, 90) + '…'
+              ? `${article.deletionRequest.reason.slice(0, 90)  }…`
               : article.deletionRequest.reason}
             &rdquo;
           </p>

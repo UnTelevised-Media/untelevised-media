@@ -27,14 +27,75 @@ function parseYouTubeId(input: string): string {
   ];
   for (const p of patterns) {
     const m = url.match(p);
-    if (m) return m[1];
+    if (m) {return m[1];}
   }
   // Assume bare ID if it looks like one
-  if (/^[A-Za-z0-9_-]{11}$/.test(url)) return url;
+  if (/^[A-Za-z0-9_-]{11}$/.test(url)) {return url;}
   return url;
 }
 
 // ─── Custom block: YouTube embed ─────────────────────────────────────────────
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function YouTubeEmbedRenderer({ block, editor }: any) {
+  const [editing, setEditing] = useState(!block.props.videoId);
+  const [draft, setDraft] = useState(block.props.videoId);
+
+  function handleSave() {
+    const id = parseYouTubeId(draft);
+    editor.updateBlock(block, { props: { videoId: id } });
+    setEditing(false);
+  }
+
+  if (editing || !block.props.videoId) {
+    return (
+      <div className='my-2 rounded border border-dashed border-slate-300 bg-slate-50 p-3 dark:border-slate-600 dark:bg-slate-900'>
+        <p className='mb-2 text-xs font-bold uppercase tracking-widest text-slate-500'>
+          YouTube Embed
+        </p>
+        <div className='flex gap-2'>
+          <input
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSave()}
+            placeholder='YouTube URL or video ID…'
+            className='flex-1 border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
+          />
+          <button
+            type='button'
+            onClick={handleSave}
+            className='bg-untele px-3 py-1 text-xs font-black uppercase tracking-widest text-white'
+          >
+            Embed
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className='my-2'>
+      <div className='aspect-video'>
+        <iframe
+          src={`https://www.youtube.com/embed/${block.props.videoId}`}
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          allowFullScreen
+          className='h-full w-full'
+        />
+      </div>
+      <button
+        type='button'
+        onClick={() => {
+          setDraft(block.props.videoId);
+          setEditing(true);
+        }}
+        className='mt-1 text-xs text-slate-400 underline hover:text-untele'
+      >
+        Change video
+      </button>
+    </div>
+  );
+}
 
 const YouTubeBlock = createReactBlockSpec(
   {
@@ -43,65 +104,7 @@ const YouTubeBlock = createReactBlockSpec(
     content: 'none',
   },
   {
-    render: ({ block, editor }) => {
-      const [editing, setEditing] = useState(!block.props.videoId);
-      const [draft, setDraft] = useState(block.props.videoId);
-
-      function handleSave() {
-        const id = parseYouTubeId(draft);
-        editor.updateBlock(block, { props: { videoId: id } });
-        setEditing(false);
-      }
-
-      if (editing || !block.props.videoId) {
-        return (
-          <div className='my-2 rounded border border-dashed border-slate-300 bg-slate-50 p-3 dark:border-slate-600 dark:bg-slate-900'>
-            <p className='mb-2 text-xs font-bold uppercase tracking-widest text-slate-500'>
-              YouTube Embed
-            </p>
-            <div className='flex gap-2'>
-              <input
-                value={draft}
-                onChange={(e) => setDraft(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSave()}
-                placeholder='YouTube URL or video ID…'
-                className='flex-1 border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
-              />
-              <button
-                type='button'
-                onClick={handleSave}
-                className='bg-untele px-3 py-1 text-xs font-black uppercase tracking-widest text-white'
-              >
-                Embed
-              </button>
-            </div>
-          </div>
-        );
-      }
-
-      return (
-        <div className='my-2'>
-          <div className='aspect-video'>
-            <iframe
-              src={`https://www.youtube.com/embed/${block.props.videoId}`}
-              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-              allowFullScreen
-              className='h-full w-full'
-            />
-          </div>
-          <button
-            type='button'
-            onClick={() => {
-              setDraft(block.props.videoId);
-              setEditing(true);
-            }}
-            className='mt-1 text-xs text-slate-400 underline hover:text-untele'
-          >
-            Change video
-          </button>
-        </div>
-      );
-    },
+    render: (props) => <YouTubeEmbedRenderer {...props} />,
   }
 );
 
@@ -109,9 +112,65 @@ const YouTubeBlock = createReactBlockSpec(
 
 function parseTweetId(input: string): string {
   const m = input.match(/(?:twitter\.com|x\.com)\/\w+\/status\/(\d+)/);
-  if (m) return m[1];
-  if (/^\d+$/.test(input.trim())) return input.trim();
+  if (m) {return m[1];}
+  if (/^\d+$/.test(input.trim())) {return input.trim();}
   return input.trim();
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function TwitterEmbedRenderer({ block, editor }: any) {
+  const [editing, setEditing] = useState(!block.props.tweetId);
+  const [draft, setDraft] = useState(block.props.tweetId);
+
+  function handleSave() {
+    editor.updateBlock(block, { props: { tweetId: parseTweetId(draft) } });
+    setEditing(false);
+  }
+
+  if (editing || !block.props.tweetId) {
+    return (
+      <div className='my-2 rounded border border-dashed border-slate-300 bg-slate-50 p-3 dark:border-slate-600 dark:bg-slate-900'>
+        <p className='mb-2 text-xs font-bold uppercase tracking-widest text-slate-500'>
+          Twitter / X Embed
+        </p>
+        <div className='flex gap-2'>
+          <input
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSave()}
+            placeholder='Tweet URL or ID…'
+            className='flex-1 border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
+          />
+          <button
+            type='button'
+            onClick={handleSave}
+            className='bg-untele px-3 py-1 text-xs font-black uppercase tracking-widest text-white'
+          >
+            Embed
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className='my-2 flex flex-col items-center'>
+      <iframe
+        src={`https://platform.twitter.com/embed/Tweet.html?id=${block.props.tweetId}`}
+        className='min-h-[200px] w-full max-w-lg border-0'
+      />
+      <button
+        type='button'
+        onClick={() => {
+          setDraft(block.props.tweetId);
+          setEditing(true);
+        }}
+        className='mt-1 text-xs text-slate-400 underline hover:text-untele'
+      >
+        Change tweet
+      </button>
+    </div>
+  );
 }
 
 const TwitterBlock = createReactBlockSpec(
@@ -121,60 +180,7 @@ const TwitterBlock = createReactBlockSpec(
     content: 'none',
   },
   {
-    render: ({ block, editor }) => {
-      const [editing, setEditing] = useState(!block.props.tweetId);
-      const [draft, setDraft] = useState(block.props.tweetId);
-
-      function handleSave() {
-        editor.updateBlock(block, { props: { tweetId: parseTweetId(draft) } });
-        setEditing(false);
-      }
-
-      if (editing || !block.props.tweetId) {
-        return (
-          <div className='my-2 rounded border border-dashed border-slate-300 bg-slate-50 p-3 dark:border-slate-600 dark:bg-slate-900'>
-            <p className='mb-2 text-xs font-bold uppercase tracking-widest text-slate-500'>
-              Twitter / X Embed
-            </p>
-            <div className='flex gap-2'>
-              <input
-                value={draft}
-                onChange={(e) => setDraft(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSave()}
-                placeholder='Tweet URL or ID…'
-                className='flex-1 border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
-              />
-              <button
-                type='button'
-                onClick={handleSave}
-                className='bg-untele px-3 py-1 text-xs font-black uppercase tracking-widest text-white'
-              >
-                Embed
-              </button>
-            </div>
-          </div>
-        );
-      }
-
-      return (
-        <div className='my-2 flex flex-col items-center'>
-          <iframe
-            src={`https://platform.twitter.com/embed/Tweet.html?id=${block.props.tweetId}`}
-            className='min-h-[200px] w-full max-w-lg border-0'
-          />
-          <button
-            type='button'
-            onClick={() => {
-              setDraft(block.props.tweetId);
-              setEditing(true);
-            }}
-            className='mt-1 text-xs text-slate-400 underline hover:text-untele'
-          >
-            Change tweet
-          </button>
-        </div>
-      );
-    },
+    render: (props) => <TwitterEmbedRenderer {...props} />,
   }
 );
 
@@ -182,8 +188,65 @@ const TwitterBlock = createReactBlockSpec(
 
 function parseInstagramId(input: string): string {
   const m = input.match(/instagram\.com\/p\/([A-Za-z0-9_-]+)/);
-  if (m) return m[1];
+  if (m) {return m[1];}
   return input.trim();
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function InstagramEmbedRenderer({ block, editor }: any) {
+  const [editing, setEditing] = useState(!block.props.postId);
+  const [draft, setDraft] = useState(block.props.postId);
+
+  function handleSave() {
+    editor.updateBlock(block, { props: { postId: parseInstagramId(draft) } });
+    setEditing(false);
+  }
+
+  if (editing || !block.props.postId) {
+    return (
+      <div className='my-2 rounded border border-dashed border-slate-300 bg-slate-50 p-3 dark:border-slate-600 dark:bg-slate-900'>
+        <p className='mb-2 text-xs font-bold uppercase tracking-widest text-slate-500'>
+          Instagram Embed
+        </p>
+        <div className='flex gap-2'>
+          <input
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSave()}
+            placeholder='Instagram post URL or ID…'
+            className='flex-1 border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
+          />
+          <button
+            type='button'
+            onClick={handleSave}
+            className='bg-untele px-3 py-1 text-xs font-black uppercase tracking-widest text-white'
+          >
+            Embed
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className='my-2 flex flex-col items-center'>
+      <iframe
+        src={`https://www.instagram.com/p/${block.props.postId}/embed`}
+        className='min-h-[400px] w-full max-w-md border-0'
+        scrolling='no'
+      />
+      <button
+        type='button'
+        onClick={() => {
+          setDraft(block.props.postId);
+          setEditing(true);
+        }}
+        className='mt-1 text-xs text-slate-400 underline hover:text-untele'
+      >
+        Change post
+      </button>
+    </div>
+  );
 }
 
 const InstagramBlock = createReactBlockSpec(
@@ -193,61 +256,7 @@ const InstagramBlock = createReactBlockSpec(
     content: 'none',
   },
   {
-    render: ({ block, editor }) => {
-      const [editing, setEditing] = useState(!block.props.postId);
-      const [draft, setDraft] = useState(block.props.postId);
-
-      function handleSave() {
-        editor.updateBlock(block, { props: { postId: parseInstagramId(draft) } });
-        setEditing(false);
-      }
-
-      if (editing || !block.props.postId) {
-        return (
-          <div className='my-2 rounded border border-dashed border-slate-300 bg-slate-50 p-3 dark:border-slate-600 dark:bg-slate-900'>
-            <p className='mb-2 text-xs font-bold uppercase tracking-widest text-slate-500'>
-              Instagram Embed
-            </p>
-            <div className='flex gap-2'>
-              <input
-                value={draft}
-                onChange={(e) => setDraft(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSave()}
-                placeholder='Instagram post URL or ID…'
-                className='flex-1 border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
-              />
-              <button
-                type='button'
-                onClick={handleSave}
-                className='bg-untele px-3 py-1 text-xs font-black uppercase tracking-widest text-white'
-              >
-                Embed
-              </button>
-            </div>
-          </div>
-        );
-      }
-
-      return (
-        <div className='my-2 flex flex-col items-center'>
-          <iframe
-            src={`https://www.instagram.com/p/${block.props.postId}/embed`}
-            className='min-h-[400px] w-full max-w-md border-0'
-            scrolling='no'
-          />
-          <button
-            type='button'
-            onClick={() => {
-              setDraft(block.props.postId);
-              setEditing(true);
-            }}
-            className='mt-1 text-xs text-slate-400 underline hover:text-untele'
-          >
-            Change post
-          </button>
-        </div>
-      );
-    },
+    render: (props) => <InstagramEmbedRenderer {...props} />,
   }
 );
 
@@ -266,7 +275,7 @@ const schema = BlockNoteSchema.create({
 
 interface Props {
   initialContent?: object[]; // PartialBlock[] from portableTextToBlockNote
-  onChange?: (blocks: object[]) => void;
+  onChange?: (_blocks: object[]) => void;
   placeholder?: string;
   editable?: boolean;
 }
@@ -280,10 +289,11 @@ export default function RichTextEditor({
   editable = true,
 }: Props) {
   const { resolvedTheme } = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const initialContentValue = initialContent?.length ? (initialContent as any) : undefined;
   const editor = useCreateBlockNote({
     schema,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    initialContent: initialContent?.length ? (initialContent as any) : undefined,
+    initialContent: initialContentValue,
     placeholderText: placeholder,
   });
 

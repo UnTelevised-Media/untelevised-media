@@ -4,7 +4,7 @@
 
 import { useState } from 'react';
 import * as Sentry from '@sentry/nextjs';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface Props {
   bookSlug: string;

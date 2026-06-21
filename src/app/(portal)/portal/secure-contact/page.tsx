@@ -2,8 +2,8 @@
 // Secure contact submissions — editor+ only.
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalFetch } from '@/lib/portal/fetch';
-import { queryPortalSecureContacts } from '@/lib/portal/queries';
+import { portalFetch } from '@/services/portal/fetch';
+import { queryPortalSecureContacts } from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import { SecureContactTable, type SecureContact } from '@/components/portal/SecureContactTable';
 import { redirect } from 'next/navigation';
@@ -16,7 +16,7 @@ export const metadata = {
 export default async function SecureContactPage() {
   const { role } = await requireAuthor();
   const isEditorPlus = hasRole(role, 'editor');
-  if (!isEditorPlus) redirect('/portal/articles');
+  if (!isEditorPlus) {redirect('/portal/articles');}
 
   const contacts = (await portalFetch<SecureContact[]>(queryPortalSecureContacts)) ?? [];
 

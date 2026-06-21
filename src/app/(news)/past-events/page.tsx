@@ -1,4 +1,5 @@
 import React from 'react';
+import type { LiveEvent } from '@/models/types/sanity';
 import { Metadata } from 'next';
 import PastEventsPage from '@/components/pages/PastEventsPage';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
@@ -38,8 +39,10 @@ async function getPastEvents(): Promise<LiveEvent[]> {
   }
 }
 
-const PastEvents = async () => {
-  const pastEvents = await getPastEvents();
+async function PastEvents() {
+  // getPastEvents returns flexible event data structure
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pastEvents = (await getPastEvents()) as any;
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800'>
@@ -60,7 +63,7 @@ const PastEvents = async () => {
       </div>
     </div>
   );
-};
+}
 
 // Generate static params for better SEO
 export async function generateStaticParams() {

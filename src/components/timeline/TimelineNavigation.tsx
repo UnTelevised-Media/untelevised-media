@@ -20,13 +20,14 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import type { TimelineEvent } from '@/models/types/sanity';
 
 interface TimelineNavigationProps {
   events: TimelineEvent[];
   currentZoomLevel: 'year' | 'month' | 'week' | 'day' | 'hour';
-  onZoomChange: (level: 'year' | 'month' | 'week' | 'day' | 'hour') => void;
-  onEventSelect?: (event: TimelineEvent) => void;
-  onTimeRangeChange?: (startDate: Date, endDate: Date) => void;
+  onZoomChange: (_level: 'year' | 'month' | 'week' | 'day' | 'hour') => void;
+  onEventSelect?: (_event: TimelineEvent) => void;
+  onTimeRangeChange?: (_startDate: Date, _endDate: Date) => void;
   className?: string;
 }
 
@@ -42,14 +43,14 @@ const ZOOM_LEVEL_INFO = {
   hour: { label: 'Hour View', icon: Clock, step: 60 * 60 * 1000 },
 };
 
-const TimelineNavigation: React.FC<TimelineNavigationProps> = ({
+function TimelineNavigation({
   events,
   currentZoomLevel,
   onZoomChange,
   onEventSelect,
   onTimeRangeChange,
   className = '',
-}) => {
+}: TimelineNavigationProps) {
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(2000); // milliseconds
@@ -58,7 +59,7 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({
 
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const sortedEvents = [...events].sort(
-    (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+    (a, b) => new Date(a.eventDate ?? '').getTime() - new Date(b.eventDate ?? '').getTime()
   );
 
   // Auto-play functionality
@@ -341,7 +342,7 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({
                 {currentEvent.title}
               </h4>
               <p className='text-sm text-slate-600 dark:text-slate-400'>
-                {new Date(currentEvent.eventDate).toLocaleDateString()}
+                {new Date(currentEvent.eventDate ?? '').toLocaleDateString()}
                 {currentEvent.location && ` • ${currentEvent.location}`}
               </p>
             </div>
@@ -388,6 +389,6 @@ const TimelineNavigation: React.FC<TimelineNavigationProps> = ({
       )}
     </div>
   );
-};
+}
 
 export default TimelineNavigation;

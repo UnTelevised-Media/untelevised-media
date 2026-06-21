@@ -1,5 +1,6 @@
 // SocialLinks.tsx
 import Link from 'next/link';
+import type { Author } from '@/models/types/sanity';
 import {
   FaEnvelope,
   FaFacebook,
@@ -15,7 +16,7 @@ interface AuthorLinksProps {
   author: Author;
 }
 
-const AuthorLinks: React.FC<AuthorLinksProps> = ({ author }) => {
+function AuthorLinks({ author }: AuthorLinksProps) {
   return (
     <div className='flex flex-row space-x-4 text-untele/70'>
       {author.website && (
@@ -60,6 +61,6 @@ const AuthorLinks: React.FC<AuthorLinksProps> = ({ author }) => {
       )}
     </div>
   );
-};
+}
 
 export default AuthorLinks;

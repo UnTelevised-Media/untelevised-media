@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryArchiveArticles } from '@/lib/sanity/lib/queries';
-import ArchiveTabs from '@/components/archive/ArchiveTabs';
-import type { ArchiveArticle } from '@/components/archive/ArchiveTabs';
+import ArchiveTabs, { type ArchiveArticle } from '@/components/archive/ArchiveTabs';
 
 export const metadata: Metadata = {
   title: 'News Archive | UnTelevised Media',

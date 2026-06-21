@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { createSource, updateSource, type SourceWriteInput } from '@/lib/portal/source-actions';
+import { createSource, updateSource, type SourceWriteInput } from '@/server/actions/portal/source';
 
 const formSchema = z.object({
   label: z.string().min(1, 'Source title is required').max(300),
@@ -62,8 +62,8 @@ export default function SourceForm({ sourceId, initialData }: Props) {
     const input: SourceWriteInput = {
       label: values.label,
       type: values.type as SourceWriteInput['type'],
-      url: values.url || undefined,
-      description: values.description || undefined,
+      url: values.url ?? undefined,
+      description: values.description ?? undefined,
       isAnonymous: values.isAnonymous,
     };
 

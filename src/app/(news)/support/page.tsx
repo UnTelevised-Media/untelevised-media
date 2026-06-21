@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { MembershipTiers } from '@/components/membership/MembershipTiers';
-import { OneTimeDonation } from '@/components/membership/OneTimeDonation';
+import MembershipTiers from '@/components/membership/MembershipTiers';
+import OneTimeDonation from '@/components/membership/OneTimeDonation';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import DonateLink from '@/components/donate/DonateLink';
-import { membershipAnonClient } from '@/lib/membership/supabase';
+import { membershipAnonClient } from '@/services/membership/supabase';
 
 export const metadata: Metadata = {
   title: 'Support UnTelevised Media — Memberships, Donations & More',
@@ -18,7 +18,7 @@ async function getActiveMemberCount(): Promise<number> {
       .from('members')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'active');
-    if (error) return 0;
+    if (error) {return 0;}
     return count ?? 0;
   } catch {
     return 0;

@@ -1,3 +1,4 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/download/route.ts
 // GET /api/bookstore/download?order_item_id=...
 // Validates the requesting user owns the download, checks limits and expiry,
@@ -6,8 +7,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
-import { shopServiceClient, writeAuditLog } from '@/lib/bookstore/supabase';
-import { checkDownloadRate } from '@/lib/bookstore/ratelimit';
+import { shopServiceClient, writeAuditLog } from '@/services/bookstore/supabase';
+import { checkDownloadRate } from '@/services/bookstore/ratelimit';
 
 const SIGNED_URL_TTL_SECONDS = 15 * 60; // 15 minutes
 
@@ -15,7 +16,7 @@ export async function GET(req: NextRequest) {
   const rl = await checkDownloadRate(req);
   if (rl.limited) {
     return NextResponse.json(
-      { error: 'Too many requests — please wait a moment' },
+      { error: 'Too many requests â€” please wait a moment' },
       { status: 429 }
     );
   }
@@ -32,7 +33,9 @@ export async function GET(req: NextRequest) {
 
   // Look up the customer row by clerk_user_id
   const user = await currentUser();
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   const { data: customer } = await shopServiceClient
     .from('customers')
@@ -44,7 +47,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Customer record not found' }, { status: 404 });
   }
 
-  // Fetch the download record — must belong to this customer
+  // Fetch the download record â€” must belong to this customer
   const { data: download, error: dlError } = await shopServiceClient
     .from('digital_downloads')
     .select('*')
@@ -75,7 +78,7 @@ export async function GET(req: NextRequest) {
 
   // Atomically claim a download slot via a stored procedure that uses FOR UPDATE.
   // This prevents the TOCTOU race where concurrent requests both read the same
-  // count, both see it below the limit, and both succeed — exceeding the cap.
+  // count, both see it below the limit, and both succeed â€” exceeding the cap.
   const { data: allowed, error: rpcError } = await shopServiceClient.rpc(
     'increment_download_if_allowed',
     { p_download_id: download.id }
@@ -91,7 +94,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Maximum downloads reached' }, { status: 403 });
   }
 
-  // Generate signed URL — { download: filename } adds Content-Disposition: attachment
+  // Generate signed URL â€” { download: filename } adds Content-Disposition: attachment
   // so the browser saves the file instead of opening it in a tab.
   const filename = download.supabase_storage_path.split('/').pop() ?? 'download';
   const { data: signedData, error: signError } = await shopServiceClient.storage
@@ -103,7 +106,7 @@ export async function GET(req: NextRequest) {
   if (signError || !signedData?.signedUrl) {
     console.error('[shop/download] Signed URL error:', signError?.message);
     // The slot was already claimed; the user can retry and it will count against their limit.
-    // This is intentional — storage errors are operational issues, not user errors.
+    // This is intentional â€” storage errors are operational issues, not user errors.
     return NextResponse.json({ error: 'Could not generate download link' }, { status: 500 });
   }
 

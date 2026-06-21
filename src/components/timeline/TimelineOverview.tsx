@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 
 import TimelineCard from './TimelineCard';
 import TimelineEventCard from './TimelineEventCard';
+import type { Timeline, TimelineEvent, TimelineCategory } from '@/models/types/sanity';
 
 interface TimelineOverviewProps {
   featuredTimelines?: Timeline[];
@@ -23,34 +24,42 @@ interface TimelineOverviewProps {
   className?: string;
 }
 
-const TimelineOverview: React.FC<TimelineOverviewProps> = ({
+function TimelineOverview({
   featuredTimelines = [],
   recentEvents = [],
   milestoneEvents = [],
   categories = [],
   stats,
   className = '',
-}) => {
-  const StatCard: React.FC<{
+}: TimelineOverviewProps) {
+  function StatCard({
+    icon,
+    title,
+    value,
+    description,
+    color = 'text-blue-600',
+  }: {
     icon: React.ReactNode;
     title: string;
     value: number;
     description: string;
     color?: string;
-  }> = ({ icon, title, value, description, color = 'text-blue-600' }) => (
-    <div className='rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:border-slate-700 dark:bg-slate-800'>
-      <div className='flex items-center gap-3'>
-        <div className={`rounded-lg bg-slate-100 p-2 dark:bg-slate-700 ${color}`}>{icon}</div>
-        <div>
-          <h3 className='text-2xl font-bold text-slate-900 dark:text-slate-100'>
-            {value.toLocaleString()}
-          </h3>
-          <p className='text-sm font-medium text-slate-700 dark:text-slate-300'>{title}</p>
-          <p className='text-xs text-slate-500 dark:text-slate-400'>{description}</p>
+  }) {
+    return (
+      <div className='rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:border-slate-700 dark:bg-slate-800'>
+        <div className='flex items-center gap-3'>
+          <div className={`rounded-lg bg-slate-100 p-2 dark:bg-slate-700 ${color}`}>{icon}</div>
+          <div>
+            <h3 className='text-2xl font-bold text-slate-900 dark:text-slate-100'>
+              {value.toLocaleString()}
+            </h3>
+            <p className='text-sm font-medium text-slate-700 dark:text-slate-300'>{title}</p>
+            <p className='text-xs text-slate-500 dark:text-slate-400'>{description}</p>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 
   return (
     <div className={`timeline-overview space-y-8 ${className}`}>
@@ -209,8 +218,9 @@ const TimelineOverview: React.FC<TimelineOverviewProps> = ({
             Browse by Category
           </h2>
           <div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'>
-            {categories.map((category) => (
-              <Link key={category._id} href={`/timeline/category/${category.slug.current}`}>
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            {categories.map((category: any) => (
+              <Link key={category._id} href={`/timeline/category/${category.slug?.current ?? ''}`}>
                 <div className='group rounded-lg border border-slate-200 bg-white p-4 transition-all hover:border-untele/50 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700'>
                   <div className='flex items-center gap-3'>
                     <div
@@ -260,6 +270,6 @@ const TimelineOverview: React.FC<TimelineOverviewProps> = ({
       </section>
     </div>
   );
-};
+}
 
 export default TimelineOverview;

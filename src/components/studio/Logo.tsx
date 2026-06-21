@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import Image from 'next/image';
 
 function Logo(props: { renderDefault: () => React.ReactNode }) {

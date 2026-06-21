@@ -1,4 +1,4 @@
-/* eslint-disable react/function-component-definition */
+import type { Category } from '@/models/types/sanity';
 import { Fragment } from 'react';
 import { groq } from 'next-sanity';
 import Image from 'next/image';
@@ -7,19 +7,16 @@ import { TrendingUp } from 'lucide-react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import {
-  queryArticleByCategory,
-  queryCategoryBySlug,
-  queryMostReadByCategory,
-} from '@/lib/sanity/lib/queries';
+import { queryArticleByCategory, queryCategoryBySlug } from '@/lib/sanity/lib/queries';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
-import { buildCategoryMetadata } from '@/util/metadata';
-import urlForImage from '@/util/urlForImage';
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
+import { buildCategoryMetadata } from '@/util/metadata/metadata';
+import urlForImage from '@/util/url/urlForImage';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
-import { InFeedAd, RectangleAd, AD_CONFIG } from '@/components/ads';
+import { InFeedAd, RectangleAd, AD_CONFIG } from '@/components/googleAdSense';
+import { getTrendingArticles } from '@/lib/supabase/viewEvents';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -55,29 +52,49 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
     tags: ['category'],
   })) as { data: Category | null };
-  if (!category) return { title: 'Category Not Found' };
+  if (!category) {
+    return { title: 'Category Not Found' };
+  }
   return buildCategoryMetadata(category, slug);
 }
 
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
-  const [{ data: category }, { data: mostRead }, articles] = await Promise.all([
+  const [{ data: category }, articles, trendingData] = await Promise.all([
     sanityFetch({ query: queryCategoryBySlug, params: { slug }, tags: ['category'] }) as Promise<{
       data: Category | null;
     }>,
-    sanityFetch({
-      query: queryMostReadByCategory,
-      params: { categorySlug: slug },
-      tags: ['article', `category:${slug}`],
-    }) as Promise<{ data: MostReadArticle[] }>,
     getArticlesByCategory(slug),
+    getTrendingArticles(45, 100).catch(() => []), // Get trending articles, fallback to empty
   ]);
 
-  if (!category) notFound();
+  if (!category) {
+    notFound();
+  }
 
-  const accentColor = category.color?.hex ?? '#D70606';
-  const heroImageUrl = category.image
-    ? urlForImage(category.image)?.width(1400).height(500).url()
+  // Create a map of Supabase view counts
+  const viewCountMap = new Map(trendingData.map((t) => [t.slug, t.view_count]));
+
+  // Get articles in this category and merge with Supabase view counts
+  const mostRead = articles
+    .map((article) => ({
+      ...article,
+      viewCount: viewCountMap.get(article.slug?.current) ?? 0,
+    }))
+    .filter((a) => a.viewCount > 0) // Only articles with views
+    .sort((a, b) => b.viewCount - a.viewCount) // Sort by view count
+    .slice(0, 5); // Top 5
+
+  // Category may have additional fields for color and image
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const accentColor = (category as any)?.color?.hex ?? '#D70606';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const heroImageUrl = (category as any)?.image
+    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      urlForImage((category as any)?.image)
+        ?.width(1400)
+        .height(500)
+        .url()
     : null;
 
   const collectionPageSchema = {
@@ -108,7 +125,7 @@ export default async function CategoryPage({ params }: Props) {
         {heroImageUrl && (
           <Image
             src={heroImageUrl}
-            alt={category.title}
+            alt={category.title ?? 'Category cover image'}
             fill
             priority
             className='object-cover opacity-15 dark:opacity-10'
@@ -322,7 +339,7 @@ export async function generateStaticParams() {
   const queryCategoryStaticParams = groq`*[_type=='category'] { slug }`;
   const slugs: Category[] = await sanityClient.fetch(queryCategoryStaticParams);
   const slugRoutes = slugs
-    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug?.current ?? '')
     : [];
   return slugRoutes.map((slug) => ({ slug }));
 }

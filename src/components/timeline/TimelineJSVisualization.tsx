@@ -1,16 +1,16 @@
-/* eslint-disable no-console */
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, AlertCircle, ExternalLink } from 'lucide-react';
+import type { Timeline, TimelineEvent } from '@/models/types/sanity';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
   convertTimelineToTimelineJS,
   validateTimelineJSData,
   type TimelineJSData,
-} from '@/util/timelineJSAdapter';
+} from '@/util/content/timelineJSAdapter';
 import '@/styles/timelinejs-custom.css';
 
 interface TimelineJSVisualizationProps {
@@ -53,34 +53,34 @@ interface TimelineJSVisualizationProps {
 }
 
 declare global {
-  interface Window {
+  interface _Window {
     TL?: {
       Timeline: new (
-        containerId: string,
-        data: TimelineJSData,
-        options?: Record<string, unknown>
+        _containerId: string,
+        _data: TimelineJSData,
+        _options?: Record<string, unknown>
       ) => {
         updateDisplay: () => void;
-        goTo: (slideIndex: number) => void;
-        goToId: (slideId: string) => void;
-        add: (data: Record<string, unknown>) => void;
-        remove: (slideId: string) => void;
+        goTo: (_slideIndex: number) => void;
+        goToId: (_slideId: string) => void;
+        add: (_data: Record<string, unknown>) => void;
+        remove: (_slideId: string) => void;
         getData: () => TimelineJSData;
-        getSlide: (slideIndex: number) => Record<string, unknown>;
+        getSlide: (_slideIndex: number) => Record<string, unknown>;
         getCurrentSlide: () => Record<string, unknown>;
-        updateConfig: (options: Record<string, unknown>) => void;
+        updateConfig: (_options: Record<string, unknown>) => void;
       };
     };
   }
 }
 
-const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
+function TimelineJSVisualization({
   timeline,
   events,
   className = '',
   height = '600px',
   options = {},
-}) => {
+}: TimelineJSVisualizationProps) {
   const timelineRef = useRef<HTMLDivElement>(null);
   const timelineInstanceRef = useRef<Record<string, unknown> | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -128,25 +128,20 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
   useEffect(() => {
     const loadTimelineJS = async () => {
       try {
-        console.log('🔄 Starting TimelineJS loading process...');
 
         // Check if TimelineJS is already loaded
         if (window.TL) {
-          console.log('✅ TimelineJS already loaded');
           setIsScriptLoaded(true);
           return;
         }
 
-        console.log('📦 Loading TimelineJS CSS...');
         // Load CSS
         const cssLink = document.createElement('link');
         cssLink.rel = 'stylesheet';
         cssLink.href = 'https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css';
-        cssLink.onload = () => console.log('✅ TimelineJS CSS loaded');
         cssLink.onerror = () => console.error('❌ Failed to load TimelineJS CSS');
         document.head.appendChild(cssLink);
 
-        console.log('📦 Loading TimelineJS JavaScript...');
         // Load JavaScript
         const script = document.createElement('script');
         script.src = 'https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js';
@@ -161,13 +156,10 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
 
         script.onload = () => {
           clearTimeout(loadTimeout);
-          console.log('✅ TimelineJS script loaded successfully');
-          console.log('🔍 Checking window.TL:', !!window.TL);
 
           // Give a small delay for the library to initialize
           setTimeout(() => {
             if (window.TL) {
-              console.log('✅ window.TL is available');
               setIsScriptLoaded(true);
             } else {
               console.error('❌ window.TL not available after script load');
@@ -180,7 +172,6 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
         script.onerror = (error) => {
           clearTimeout(loadTimeout);
           console.error('❌ Failed to load TimelineJS script from latest:', error);
-          console.log('🔄 Trying fallback version...');
 
           // Try fallback version
           const fallbackScript = document.createElement('script');
@@ -195,10 +186,8 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
 
           fallbackScript.onload = () => {
             clearTimeout(fallbackTimeout);
-            console.log('✅ Fallback TimelineJS script loaded successfully');
             setTimeout(() => {
               if (window.TL) {
-                console.log('✅ window.TL is available from fallback');
                 setIsScriptLoaded(true);
               } else {
                 console.error('❌ window.TL not available after fallback script load');
@@ -226,27 +215,20 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
       }
     };
 
-    loadTimelineJS();
+    loadTimelineJS().catch((error) => {
+      console.error('Failed to load TimelineJS library:', error);
+      setError('Failed to initialize TimelineJS');
+      setIsLoading(false);
+    });
   }, []);
 
   // Initialize timeline when script is loaded
   useEffect(() => {
-    console.log('🔄 Timeline initialization effect triggered');
-    console.log('📊 State check:', {
-      isScriptLoaded,
-      hasTimelineRef: !!timelineRef.current,
-      hasWindowTL: !!window.TL,
-      timelineId: timeline?._id,
-      eventsCount: events?.length,
-    });
-
     if (!isScriptLoaded) {
-      console.log('⏳ Script not loaded yet, waiting...');
       return;
     }
 
     if (!window.TL) {
-      console.log('❌ window.TL not available even though script is loaded');
       setError('TimelineJS library not properly loaded');
       setIsLoading(false);
       return;
@@ -265,36 +247,28 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
           setIsLoading(false);
           return;
         }
-        console.log(
-          `⏳ Timeline ref not ready yet, retrying in 100ms... (${retryCount}/${maxRetries})`
-        );
         setTimeout(initializeTimeline, 100);
         return;
       }
 
-      console.log('✅ Timeline ref is ready, proceeding with initialization');
       createTimelineInstance();
     };
 
     const createTimelineInstance = () => {
       try {
-        console.log('🔄 Converting timeline data...');
-        console.log('📊 Input data:', { timeline: !!timeline, events: events?.length });
 
         // Create timeline ID
         const timelineId = `timeline-${timeline?._id || Date.now()}`;
         if (timelineRef.current) {
           timelineRef.current.id = timelineId;
         }
-        console.log('🏗️ Creating timeline with ID:', timelineId);
 
         // Get responsive options
         const timelineOptions = getResponsiveOptions();
-        console.log('⚙️ Timeline options:', timelineOptions);
 
         // Convert Sanity data to TimelineJS format
-        const timelineData = convertTimelineToTimelineJS(timeline, events);
-        console.log('✅ Timeline data converted:', timelineData);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const timelineData = convertTimelineToTimelineJS(timeline as any, events as any);
 
         // Test with minimal data if conversion fails
         if (!timelineData?.events || timelineData.events.length === 0) {
@@ -310,7 +284,6 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
               },
             ],
           };
-          console.log('🧪 Using test data:', testData);
 
           if (window.TL) {
             timelineInstanceRef.current = new window.TL.Timeline(
@@ -319,25 +292,21 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
               timelineOptions
             );
           }
-          console.log('✅ Test timeline instance created successfully');
           setIsLoading(false);
           setError(null);
           return;
         }
 
         // Validate the data
-        console.log('🔍 Validating timeline data...');
         if (!validateTimelineJSData(timelineData)) {
           console.error('❌ Timeline data validation failed');
           setError('Invalid timeline data format');
           setIsLoading(false);
           return;
         }
-        console.log('✅ Timeline data validation passed');
 
         // Clear any existing timeline
         if (timelineInstanceRef.current && timelineRef.current) {
-          console.log('🧹 Clearing existing timeline');
           timelineRef.current.innerHTML = '';
         }
 
@@ -350,7 +319,6 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
           );
         }
 
-        console.log('✅ Timeline instance created successfully');
         setIsLoading(false);
         setError(null);
       } catch (err) {
@@ -467,6 +435,6 @@ const TimelineJSVisualization: React.FC<TimelineJSVisualizationProps> = ({
       </div>
     </motion.div>
   );
-};
+}
 
 export default TimelineJSVisualization;

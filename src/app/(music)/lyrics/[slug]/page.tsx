@@ -1,24 +1,24 @@
-/* eslint-disable react/function-component-definition */
+import type { Song } from '@/models/types/sanity';
 // src/app/(user)/lyrics/[slug]/page.tsx
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
-import { RectangleAd, BannerAd } from '@/components/ads';
+import { RectangleAd, BannerAd } from '@/components/googleAdSense';
 
-import urlForImage from '@/util/urlForImage';
-import { getSongArtworkInfo } from '@/util/getSongArtwork';
+import urlForImage from '@/util/url/urlForImage';
+import { getSongArtworkInfo } from '@/util/content/getSongArtwork';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { querySongBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Clock, Calendar, ExternalLink } from 'lucide-react';
-import { SongStructuredData } from '@/components/seo/StructuredData';
-import { getCanonicalUrl, truncate, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
+import SongStructuredData from '@/components/seo/StructuredData';
+import { getCanonicalUrl, truncate, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata/metadata';
 
 type Props = {
   params: Promise<{
@@ -34,10 +34,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Song Not Found', description: 'The requested song could not be found.' };
   }
 
-  const primaryName = song.primaryArtist.stageName ?? song.primaryArtist.name;
+  // GROQ query dereferences primaryArtist-> and featuredArtists[]->
+  // TypeScript sees these as references only, not populated objects
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const primaryArtist = song.primaryArtist as any;
+  const primaryName =
+    primaryArtist?.stageName ??
+    primaryArtist?.name ??
+    'Unknown Artist';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const featuredArtists = song.featuredArtists as any;
   const artistNames = [
     primaryName,
-    ...(song.featuredArtists?.map((a) => a.stageName ?? a.name) ?? []),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...((featuredArtists as any)?.map((a: any) =>
+      a?.stageName ?? a?.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -80,11 +91,18 @@ export default async function LyricsPage({ params }: Props) {
   const { slug } = await params;
   const song: Song = (await getSongBySlug(slug)) as Song;
 
-  if (!song) notFound();
+  if (!song) {
+    notFound();
+  }
 
+  // GROQ query dereferences primaryArtist-> and featuredArtists[]->
   const artistNames = [
-    song.primaryArtist.name,
-    ...(song.featuredArtists?.map((artist) => artist.name) ?? []),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (song.primaryArtist as any)?.name ?? 'Unknown Artist',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...((song.featuredArtists as any)?.map((artist: any) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (artist as any)?.name) ?? []),
   ].join(', ');
 
   const artworkInfo = getSongArtworkInfo(song);
@@ -119,12 +137,15 @@ export default async function LyricsPage({ params }: Props) {
                 <p className='mb-6 text-xl text-white/90 md:text-2xl'>by {artistNames}</p>
 
                 {/* Song Metadata */}
+                {/* GROQ dereferences album->, TypeScript sees only reference */}
+                {/* eslint-disable @typescript-eslint/no-explicit-any */}
                 <div className='flex flex-wrap gap-4 text-sm text-white/80'>
                   {song.album && (
                     <div className='flex items-center gap-1'>
-                      <span>Album: {song.album.title}</span>
+                      <span>Album: {(song.album as any)?.title}</span>
                     </div>
                   )}
+                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
                   {song.releaseDate && (
                     <div className='flex items-center gap-1'>
                       <Calendar className='h-4 w-4' />
@@ -236,7 +257,7 @@ export default async function LyricsPage({ params }: Props) {
                 {song.lyricsStructure && song.lyricsStructure.length > 0 ? (
                   <div className='space-y-8'>
                     {song.lyricsStructure
-                      .sort((a, b) => a.order - b.order)
+                      .sort((a, b) => (a?.order ?? 0) - (b?.order ?? 0))
                       .map((section, index) => (
                         <div key={index} className='space-y-3'>
                           <h3 className='text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400'>
@@ -270,7 +291,10 @@ export default async function LyricsPage({ params }: Props) {
                     About This Song
                   </h2>
                   <div className='prose prose-slate dark:prose-invert max-w-none'>
-                    <PortableText value={song.description} components={RichTextComponents} />
+                    {/* @portabletext/react expects optional children; our custom components have required children */}
+                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                    <PortableText value={song.description} components={RichTextComponents as any} />
+                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
                   </div>
                 </div>
               )}
@@ -294,6 +318,8 @@ export default async function LyricsPage({ params }: Props) {
                     />
                   </div>
                 )}
+                {/* GROQ dereferences album->, TypeScript sees only reference */}
+                {/* eslint-disable @typescript-eslint/no-explicit-any */}
                 {artworkInfo.isTrackArt ? (
                   <div>
                     <h4 className='font-medium text-slate-900 dark:text-slate-100'>
@@ -302,24 +328,25 @@ export default async function LyricsPage({ params }: Props) {
                     <p className='text-sm text-slate-600 dark:text-slate-400'>
                       Individual track artwork
                     </p>
-                    {song.album && (
+                    {(song.album as any)?.title && (
                       <p className='mt-2 text-xs text-slate-500 dark:text-slate-400'>
-                        From album: {song.album.title}
+                        From album: {(song.album as any)?.title}
                       </p>
                     )}
                   </div>
-                ) : song.album ? (
-                  <ClientSideRoute route={`/albums/${song.album.slug.current}`}>
+                ) : (song.album as any)?.slug?.current ? (
+                  <ClientSideRoute route={`/albums/${(song.album as any).slug.current}`}>
                     <div className='group cursor-pointer'>
                       <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                        {song.album.title}
+                        {(song.album as any)?.title}
                       </h4>
                       <p className='text-sm text-slate-600 dark:text-slate-400'>
-                        {formatDate(song.album.releaseDate)}
+                        {formatDate((song.album as any)?.releaseDate)}
                       </p>
                     </div>
                   </ClientSideRoute>
                 ) : null}
+                {/* eslint-enable @typescript-eslint/no-explicit-any */}
               </div>
 
               {/* Artist Info */}
@@ -327,42 +354,19 @@ export default async function LyricsPage({ params }: Props) {
                 <h3 className='mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100'>
                   Artist{song.featuredArtists && song.featuredArtists.length > 0 ? 's' : ''}
                 </h3>
+                {/* GROQ dereferences primaryArtist-> and featuredArtists[]-> */}
+                {/* eslint-disable @typescript-eslint/no-explicit-any */}
                 <div className='space-y-4'>
-                  <ClientSideRoute route={`/music-artists/${song.primaryArtist.slug.current}`}>
-                    <div className='group flex cursor-pointer items-center gap-3'>
-                      {song.primaryArtist.image && (
-                        <div className='h-12 w-12 overflow-hidden rounded-full'>
-                          <Image
-                            src={urlForImage(song.primaryArtist.image)?.url() ?? ''}
-                            alt={song.primaryArtist.name}
-                            width={48}
-                            height={48}
-                            className='h-full w-full object-cover'
-                          />
-                        </div>
-                      )}
-                      <div>
-                        <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                          {song.primaryArtist.stageName ?? song.primaryArtist.name}
-                        </h4>
-                        <p className='text-sm text-slate-600 dark:text-slate-400'>
-                          Primary Artist
-                        </p>
-                      </div>
-                    </div>
-                  </ClientSideRoute>
-
-                  {song.featuredArtists?.map((artist) => (
+                  {(song.primaryArtist as any)?.slug?.current && (
                     <ClientSideRoute
-                      key={artist._id}
-                      route={`/music-artists/${artist.slug.current}`}
+                      route={`/music-artists/${(song.primaryArtist as any).slug.current}`}
                     >
                       <div className='group flex cursor-pointer items-center gap-3'>
-                        {artist.image && (
+                        {(song.primaryArtist as any)?.image && (
                           <div className='h-12 w-12 overflow-hidden rounded-full'>
                             <Image
-                              src={urlForImage(artist.image)?.url() ?? ''}
-                              alt={artist.name}
+                              src={urlForImage((song.primaryArtist as any)?.image)?.url() ?? ''}
+                              alt={(song.primaryArtist as any)?.name ?? 'Artist'}
                               width={48}
                               height={48}
                               className='h-full w-full object-cover'
@@ -371,17 +375,55 @@ export default async function LyricsPage({ params }: Props) {
                         )}
                         <div>
                           <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                            {artist.stageName ?? artist.name}
+                            {(song.primaryArtist as any)?.stageName ??
+                              (song.primaryArtist as any)?.name}
                           </h4>
-                          <p className='text-sm text-slate-600 dark:text-slate-400'>Featured</p>
+                          <p className='text-sm text-slate-600 dark:text-slate-400'>
+                            Primary Artist
+                          </p>
                         </div>
                       </div>
                     </ClientSideRoute>
-                  ))}
+                  )}
+
+                  {(song.featuredArtists as any)?.map(
+                    (artist: any) =>
+                      (artist as any)?.slug?.current && (
+                        <ClientSideRoute
+                          key={(artist as any)._id}
+                          route={`/music-artists/${(artist as any).slug.current}`}
+                        >
+                          <div className='group flex cursor-pointer items-center gap-3'>
+                            {(artist as any)?.image && (
+                              <div className='h-12 w-12 overflow-hidden rounded-full'>
+                                <Image
+                                  src={urlForImage((artist as any)?.image)?.url() ?? ''}
+                                  alt={(artist as any)?.name ?? 'Artist'}
+                                  width={48}
+                                  height={48}
+                                  className='h-full w-full object-cover'
+                                />
+                              </div>
+                            )}
+                            <div>
+                              <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                                {(artist as any)?.stageName ?? (artist as any)?.name}
+                              </h4>
+                              <p className='text-sm text-slate-600 dark:text-slate-400'>
+                                Featured
+                              </p>
+                            </div>
+                          </div>
+                        </ClientSideRoute>
+                      )
+                  )}
                 </div>
               </div>
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
 
               {/* Credits */}
+              {/* GROQ dereferences contributingArtists[].artist-> */}
+              {/* eslint-disable @typescript-eslint/no-explicit-any */}
               {song.contributingArtists && song.contributingArtists.length > 0 && (
                 <div className='rounded-lg border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800'>
                   <h3 className='mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100'>
@@ -391,16 +433,19 @@ export default async function LyricsPage({ params }: Props) {
                     {song.contributingArtists.map((contributor, index) => (
                       <div key={index} className='flex items-center justify-between'>
                         <span className='text-sm text-slate-900 dark:text-slate-100'>
-                          {contributor.artist.stageName ?? contributor.artist.name}
+                          {(contributor.artist as any)?.stageName ??
+                            (contributor.artist as any)?.name ??
+                            'Unknown'}
                         </span>
                         <span className='text-sm text-slate-600 dark:text-slate-400'>
-                          {contributor.role.replace('-', ' ')}
+                          {contributor.role?.replace('-', ' ') ?? 'Contributor'}
                         </span>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
+              {/* eslint-enable @typescript-eslint/no-explicit-any */}
 
               {/* Ad Space */}
               <div className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'>
@@ -409,7 +454,7 @@ export default async function LyricsPage({ params }: Props) {
 
               {/* Social Share */}
               <SocialShare
-                url={`/lyrics/${song.slug.current}`}
+                url={`/lyrics/${song.slug?.current ?? ''}`}
                 title={`${song.title} - ${artistNames} | Lyrics`}
               />
             </div>

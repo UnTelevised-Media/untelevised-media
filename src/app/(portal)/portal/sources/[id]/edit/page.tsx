@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation';
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { portalFetch } from '@/lib/portal/fetch';
+import { portalFetch } from '@/services/portal/fetch';
 import PortalNav from '@/components/portal/PortalNav';
 import SourceForm from '@/components/portal/SourceForm';
 
@@ -30,7 +30,7 @@ export default async function EditSourcePage({ params }: { params: Promise<{ id:
     { id }
   );
 
-  if (!source) notFound();
+  if (!source) {notFound();}
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>

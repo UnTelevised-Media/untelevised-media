@@ -3,13 +3,12 @@
 // Server component: fetches articles scoped by role (author = own, editor/admin = all).
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalFetch } from '@/lib/portal/fetch';
-import { queryPortalArticlesByAuthor, queryPortalAllArticles } from '@/lib/portal/queries';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
+import { portalFetch } from '@/services/portal/fetch';
+import { queryPortalArticlesByAuthor, queryPortalAllArticles } from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
-import ArticleDashboard from '@/components/portal/ArticleDashboard';
+import ArticleDashboard, { type PortalArticle } from '@/components/portal/ArticleDashboard';
 import Link from 'next/link';
-import type { PortalArticle } from '@/components/portal/ArticleDashboard';
 
 export const metadata = {
   title: 'My Articles — Author Portal',
@@ -34,14 +33,14 @@ export default async function PortalArticlesPage() {
     }
   }
 
-  // Under previewDrafts perspective, _id is always the non-prefixed form.
-  // _originalId is the actual Sanity document ID and preserves the "drafts." prefix.
-  const isDraftDoc = (a: PortalArticle) => (a._originalId ?? a._id).startsWith('drafts.');
+  // Under 'drafts' perspective, _id directly contains the draft prefix.
+  // Published: "articles.xyz" | Draft: "drafts.articles.xyz"
+  const isDraftDoc = (a: PortalArticle) => a._id.startsWith('drafts.');
   const publishedCount = articles.filter((a) => !isDraftDoc(a)).length;
   const reviewCount = articles.filter(
     (a) => isDraftDoc(a) && (a.needsReview || !!a.deletionRequest)
   ).length;
-  // Unpublished = draft _originalId + publishedAt set (was previously live, now taken down in Studio)
+  // Unpublished = draft with publishedAt set (was previously live, now taken down in Studio)
   const unpublishedCount = articles.filter(
     (a) => isDraftDoc(a) && !a.needsReview && !a.deletionRequest && !!a.publishedAt
   ).length;

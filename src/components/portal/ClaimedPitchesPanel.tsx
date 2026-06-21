@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 // src/components/portal/ClaimedPitchesPanel.tsx
-// Client component — claimed pitches grid with Mine / All / Others filter pills.
+// Client component â€” claimed pitches grid with Mine / All / Others filter pills.
 // Editors see all pitches + the filter toggle. Authors see only their own (no toggle).
 
 import { useState, useMemo } from 'react';
@@ -8,17 +8,17 @@ import { ClaimedPitchCard, type ClaimedPitchSummary } from './ClaimedPitchCard';
 
 type AuthorFilter = 'all' | 'mine' | 'others';
 
+const URGENCY_ORDER: Record<string, number> = { breaking: 0, high: 1, medium: 2, low: 3 };
+const STATUS_ORDER: Record<string, number> = { in_progress: 0, claimed: 1, published: 2 };
+
 interface Props {
   pitches: ClaimedPitchSummary[];
   currentSanityAuthorId?: string;
   isEditorPlus: boolean;
 }
 
-export function ClaimedPitchesPanel({ pitches, currentSanityAuthorId, isEditorPlus }: Props) {
+export default function ClaimedPitchesPanel({ pitches, currentSanityAuthorId, isEditorPlus }: Props) {
   const [authorFilter, setAuthorFilter] = useState<AuthorFilter>('all');
-
-  const URGENCY_ORDER: Record<string, number> = { breaking: 0, high: 1, medium: 2, low: 3 };
-  const STATUS_ORDER: Record<string, number> = { in_progress: 0, claimed: 1, published: 2 };
 
   const filtered = useMemo(() => {
     const base =
@@ -31,18 +31,22 @@ export function ClaimedPitchesPanel({ pitches, currentSanityAuthorId, isEditorPl
     return [...base].sort((a, b) => {
       const statusDiff =
         (STATUS_ORDER[a.status ?? 'claimed'] ?? 1) - (STATUS_ORDER[b.status ?? 'claimed'] ?? 1);
-      if (statusDiff !== 0) return statusDiff;
+      if (statusDiff !== 0) {
+        return statusDiff;
+      }
       return (
         (URGENCY_ORDER[a.urgency ?? 'medium'] ?? 2) - (URGENCY_ORDER[b.urgency ?? 'medium'] ?? 2)
       );
     });
   }, [pitches, isEditorPlus, authorFilter, currentSanityAuthorId]);
 
-  if (pitches.length === 0) return null;
+  if (pitches.length === 0) {
+    return null;
+  }
 
   return (
     <div>
-      {/* Filter pills — editor only */}
+      {/* Filter pills â€” editor only */}
       {isEditorPlus && (
         <div className='mb-3 flex items-center gap-2'>
           <div className='flex items-center gap-1 rounded border border-slate-200 p-0.5 dark:border-slate-700'>

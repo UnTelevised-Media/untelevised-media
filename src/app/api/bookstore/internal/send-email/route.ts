@@ -1,12 +1,15 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/internal/send-email/route.ts
 // Internal-only transactional email endpoint called by the Supabase stripe-webhook edge function.
-// Protected by INTERNAL_EMAIL_SECRET bearer token — never expose this route to clients.
+// Protected by INTERNAL_EMAIL_SECRET bearer token â€” never expose this route to clients.
 
 import { timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
 function verifyBearerToken(header: string, secret: string): boolean {
-  if (!secret || !header) return false;
+  if (!secret || !header) {
+    return false;
+  }
   const expected = `Bearer ${secret}`;
   // Pad both to the same length before the constant-time comparison so a length
   // mismatch cannot cause an early exit that leaks timing information.
@@ -23,9 +26,8 @@ import {
   sendGiftEmail,
   type OrderConfirmationParams,
   type DigitalDownloadEmailParams,
-  type GuestDownloadEmailParams,
-} from '@/lib/bookstore/email';
-import type { FormatType } from '@/lib/bookstore/types';
+} from '@/services/bookstore/email';
+import type { FormatType } from '@/models/types/bookstore';
 
 type Payload =
   | {

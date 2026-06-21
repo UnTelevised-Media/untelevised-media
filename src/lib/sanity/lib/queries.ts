@@ -228,7 +228,24 @@ export const queryFieldReportArticles = groq`
 `;
 
 // Trending / Most-Read queries — ordered by viewCount desc
+// Reduced from 31 to 10 articles for homepage display (full version below for article sidebars)
 export const queryMostReadArticles = groq`
+  *[_type == "article" && defined(slug.current) && defined(viewCount)]
+  | order(viewCount desc) [0...10] {
+    _id,
+    title,
+    slug,
+    description,
+    publishedAt,
+    viewCount,
+    mainImage,
+    "author": author->{ name, slug },
+    "categories": categories[]->{ title, slug },
+  }
+`;
+
+// Full version for article page sidebars — all 31 results with full fields
+export const queryMostReadArticlesFull = groq`
   *[_type == "article" && defined(slug.current) && defined(viewCount)]
   | order(viewCount desc) [0...31] {
     _id,
@@ -304,8 +321,9 @@ export const queryFeaturedSongs = groq`
     primaryArtist->,
     featuredArtists[]->,
     album->{
-      title,
-      albumArt
+      ...,
+      artist->,
+      featuredArtists[]->
     },
     trackArt
   }
@@ -345,6 +363,10 @@ export const queryMusicArtistBySlug = groq`
 export const queryFeaturedMusicArtists = groq`
   *[_type=='musicArtist' && isFeatured == true] {
     ...,
+    image,
+    stageName,
+    name,
+    slug,
     "songCount": count(*[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)])
   }
   | order(name asc)
@@ -405,8 +427,9 @@ export const queryRecentSongs = groq`
     primaryArtist->,
     featuredArtists[]->,
     album->{
-      title,
-      albumArt
+      ...,
+      artist->,
+      featuredArtists[]->
     },
     trackArt
   }

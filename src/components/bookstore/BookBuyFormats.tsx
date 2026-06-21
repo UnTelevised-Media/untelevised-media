@@ -3,19 +3,13 @@
 // Client component — owns gift toggle state and NYOP amounts, renders per-format buy actions.
 
 import { useState, useEffect, useRef } from 'react';
-import type { SanityBook, SanityBookFormat, GiftOptions } from '@/lib/bookstore/types';
-import { getStripeIdForFormat } from '@/lib/bookstore/stripeUtils';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import type { SanityBook, GiftOptions } from '@/models/types/bookstore';
+import getStripeIdForFormat from '@/util/stripe/stripeUtils';
+import formatBookFormatLabel from '@/util/bookstore/formatBookFormatLabel';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 import AddToCartButton from './AddToCartButton';
 import BuyNowButton from './BuyNowButton';
 import GiftToggle from './GiftToggle';
-
-function formatLabel(format: SanityBookFormat): string {
-  if (format.formatType === 'physical') return 'Physical Book';
-  if (format.formatType === 'digital') return 'Digital Edition';
-  if (format.formatType === 'bundle') return 'Physical + Digital Bundle';
-  return format.formatType;
-}
 
 interface Props {
   book: SanityBook;
@@ -39,7 +33,9 @@ export default function BookBuyFormats({ book }: Props) {
   }, [book.formats]);
 
   useEffect(() => {
-    if (viewFired.current || !book.formats?.length) return;
+    if (viewFired.current || !book.formats?.length) {
+      return;
+    }
     viewFired.current = true;
     const lowestPrice = Math.min(...book.formats.map((f) => f.price ?? 0));
     trackEvent('view_item', {
@@ -53,7 +49,7 @@ export default function BookBuyFormats({ book }: Props) {
         price: f.price,
       })),
     });
-  }, [trackEvent]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [trackEvent, book._id, book.formats, book.title]);
 
   return (
     <>
@@ -93,7 +89,7 @@ export default function BookBuyFormats({ book }: Props) {
               <div className='flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between'>
                 <div>
                   <p className='text-sm font-black uppercase tracking-wide text-slate-900 dark:text-hp-cream'>
-                    {formatLabel(format)}
+                    {formatBookFormatLabel(format)}
                   </p>
                   {format.formatType === 'digital' && format.digitalAsset && (
                     <p className='text-[10px] text-slate-400'>
@@ -117,7 +113,7 @@ export default function BookBuyFormats({ book }: Props) {
                 <div className='flex flex-wrap items-center gap-3'>
                   {!isNyop && (
                     <div className='text-right'>
-                      {format.compareAtPrice != null && (
+                      {format.compareAtPrice !== null && format.compareAtPrice !== undefined && (
                         <p className='text-xs text-slate-400 line-through'>
                           ${format.compareAtPrice.toFixed(2)}
                         </p>
@@ -174,7 +170,7 @@ export default function BookBuyFormats({ book }: Props) {
                             setNyopAmounts((prev) => ({ ...prev, [format._key]: e.target.value }))
                           }
                           placeholder={
-                            format.suggestedPrice != null
+                            format.suggestedPrice !== null && format.suggestedPrice !== undefined
                               ? format.suggestedPrice.toFixed(2)
                               : minimum > 0
                                 ? minimum.toFixed(2)

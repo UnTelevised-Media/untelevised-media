@@ -1,11 +1,11 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/timelines/page.tsx
 import { Metadata } from 'next';
 import { Suspense } from 'react';
+import type { Timeline, TimelineEvent, TimelineCategory } from '@/models/types/sanity';
 
 import TimelineOverview from '@/components/timeline/TimelineOverview';
 import LoadingSpinner from '@/components/global/LoadingSpinner';
-import { BannerAd } from '@/components/ads';
+import { BannerAd } from '@/components/googleAdSense';
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import {

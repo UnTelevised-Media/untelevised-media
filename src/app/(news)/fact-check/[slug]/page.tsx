@@ -6,14 +6,14 @@ import sanityFetch from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryFactCheckBySlug } from '@/lib/sanity/lib/queries';
 import { groq } from 'next-sanity';
-import { VerdictBadge } from '@/components/fact-check/VerdictBadge';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
-import { buildClaimReviewJsonLd } from '@/lib/factCheck/claimReviewJsonLd';
-import type { FactCheckRating } from '@/lib/factCheck/verdictConfig';
-import formatDate from '@/util/formatDate';
+import VerdictBadge from '@/components/fact-check/VerdictBadge';
+import RichTextComponents from '@/components/providers/RichTextComponents';
+import { buildClaimReviewJsonLd } from '@/util/schema/claimReviewJsonLd';
+import type { FactCheckRating } from '@/util/schema/verdictConfig';
+import formatDate from '@/util/date/formatDate';
 import Link from 'next/link';
-import { buildFactCheckMetadata } from '@/util/metadata';
-import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/ads';
+import { buildFactCheckMetadata } from '@/util/metadata/metadata';
+import { InFeedAd, BannerAd, AD_CONFIG } from '@/components/googleAdSense';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
     tags: ['factCheck'],
   });
-  if (!fc) return {};
+  if (!fc) {return {};}
   return buildFactCheckMetadata(fc, slug);
 }
 
@@ -59,6 +59,7 @@ export default async function FactCheckPage({ params }: Props) {
     claimDate?: string;
     rating: FactCheckRating;
     ratingExplanation: string;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     body?: any[];
     sources?: { label: string; url?: string }[];
@@ -76,7 +77,7 @@ export default async function FactCheckPage({ params }: Props) {
     tags: ['factCheck'],
   });
 
-  if (!fc) notFound();
+  if (!fc) {notFound();}
 
   const jsonLd = buildClaimReviewJsonLd(fc);
 
@@ -106,7 +107,7 @@ export default async function FactCheckPage({ params }: Props) {
         </h1>
 
         {/* Meta — author + date */}
-        {(fc.author || fc.publishedAt) && (
+        {(fc.author ?? fc.publishedAt) && (
           <div className='mt-3 flex items-center gap-3 text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400'>
             {fc.author && (
               <Link
@@ -163,7 +164,9 @@ export default async function FactCheckPage({ params }: Props) {
         {/* Full analysis body */}
         {fc.body && Array.isArray(fc.body) && fc.body.length > 0 && (
           <div className='mt-6'>
-            <PortableText value={fc.body} components={RichTextComponents} />
+            {/* @portabletext/react expects optional children; our custom components have required children */}
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            <PortableText value={fc.body} components={RichTextComponents as any} />
           </div>
         )}
 

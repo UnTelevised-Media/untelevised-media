@@ -4,6 +4,7 @@
 // Submits via server action → creates Sanity book document.
 
 import { useState, useEffect, useRef, useTransition } from 'react';
+import Image from 'next/image';
 import { X, Plus, Trash2, ChevronDown } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import {
@@ -12,8 +13,8 @@ import {
   uploadDigitalAsset,
   fetchBookGenres,
   createBookGenre,
-} from '@/lib/portal/book-actions';
-import type { SanityBookGenre } from '@/lib/bookstore/types';
+} from '@/server/actions/portal/book';
+import type { SanityBookGenre } from '@/models/types/bookstore';
 
 interface Format {
   formatType: 'physical' | 'digital' | 'bundle';
@@ -85,20 +86,22 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
   // UI state
   const [error, setError] = useState('');
   const [createdSlug, setCreatedSlug] = useState('');
-  const [createdId, setCreatedId] = useState('');
 
   // Load genres when modal opens
   useEffect(() => {
-    if (!open) return;
+    if (!open) {return;}
     setGenresLoading(true);
     fetchBookGenres()
       .then(setLocalGenres)
+      .catch((error) => {
+        console.error('Failed to fetch book genres:', error);
+      })
       .finally(() => setGenresLoading(false));
   }, [open]);
 
   // Close genre dropdown on outside click
   useEffect(() => {
-    if (!genreDropdownOpen) return;
+    if (!genreDropdownOpen) {return;}
     function handler(e: MouseEvent) {
       if (genreDropdownRef.current && !genreDropdownRef.current.contains(e.target as Node)) {
         setGenreDropdownOpen(false);
@@ -163,15 +166,13 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
     setGenreError('');
     setError('');
     setCreatedSlug('');
-    setCreatedId('');
   }
 
   function handleCoverChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0] ?? null;
-    console.log('[AddBookModal] cover file selected:', file?.name, file?.size);
-    if (!file) return;
+    if (!file) {return;}
     setCoverFile(file);
-    if (coverPreview) URL.revokeObjectURL(coverPreview);
+    if (coverPreview) {URL.revokeObjectURL(coverPreview);}
     setCoverPreview(URL.createObjectURL(file));
     e.target.value = '';
   }
@@ -214,12 +215,6 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
 
     startTransition(async () => {
       try {
-        console.log(
-          '[AddBookModal] submitting, coverFile:',
-          coverFile?.name ?? 'none',
-          'digitalFiles:',
-          digitalFiles.map((f) => f?.name ?? 'none')
-        );
         const result = await createBook({
           title: title.trim(),
           description: description.trim() || undefined,
@@ -232,46 +227,33 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
           formats: parsedFormats,
           genreIds: selectedGenreIds.length ? selectedGenreIds : undefined,
         });
-        console.log(
-          '[AddBookModal] createBook ok, id:',
-          result.id,
-          'formatKeys:',
-          result.formatKeys
-        );
 
         // Upload cover if one was selected
         if (coverFile) {
-          console.log('[AddBookModal] uploading cover…');
           const fd = new FormData();
           fd.append('bookId', result.id);
           fd.append('file', coverFile);
           await uploadBookCover(fd);
-          console.log('[AddBookModal] cover upload done');
         }
 
         // Upload digital assets — iterate formats, match to returned format keys
         let fmtKeyIdx = 0;
         for (let i = 0; i < formats.length; i++) {
           const fmt = formats[i];
-          if (!fmt.nameYourPrice && fmt.price === '') continue; // filtered out of parsedFormats
+          if (!fmt.nameYourPrice && fmt.price === '') {continue;} // filtered out of parsedFormats
           const fmtKey = result.formatKeys[fmtKeyIdx++];
-          if (!fmtKey) continue;
-          if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') continue;
+          if (!fmtKey) {continue;}
+          if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') {continue;}
           const file = digitalFiles[i];
-          console.log(
-            `[AddBookModal] format[${i}] type=${fmt.formatType} fmtKey=${fmtKey?.key} file=${file?.name ?? 'none'}`
-          );
-          if (!file) continue;
+          if (!file) {continue;}
           const fd = new FormData();
           fd.append('bookId', result.id);
           fd.append('formatKey', fmtKey.key);
           fd.append('file', file);
           await uploadDigitalAsset(fd);
-          console.log(`[AddBookModal] digital upload done for fmtKey=${fmtKey.key}`);
         }
 
         setCreatedSlug(result.slug);
-        setCreatedId(result.id);
         router.refresh();
       } catch (err) {
         console.error('[AddBookModal] error:', err);
@@ -372,11 +354,11 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                       {/* Preview */}
                       <div className='relative h-32 w-24 shrink-0 overflow-hidden border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800'>
                         {coverPreview ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
+                          <Image
                             src={coverPreview}
                             alt='Cover preview'
-                            className='h-full w-full object-cover'
+                            fill
+                            className='object-cover'
                           />
                         ) : (
                           <div className='flex h-full items-center justify-center'>
@@ -403,7 +385,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 0 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 0 ? f : x)));}
                             e.target.value = '';
                           }}
                         />
@@ -414,7 +396,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 1 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 1 ? f : x)));}
                             e.target.value = '';
                           }}
                         />
@@ -425,7 +407,7 @@ export default function AddBookModal({ label = '+ Add Book', variant = 'primary'
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 2 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 2 ? f : x)));}
                             e.target.value = '';
                           }}
                         />

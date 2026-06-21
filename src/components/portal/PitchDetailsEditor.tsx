@@ -6,7 +6,7 @@
 import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
 import { Plus, X, ExternalLink, Pencil } from 'lucide-react';
-import { updatePitchDetails } from '@/lib/portal/pitch-actions';
+import { updatePitchDetails } from '@/server/actions/portal/pitch';
 
 interface LinkItem {
   _key: string;
@@ -205,7 +205,7 @@ export function PitchDetailsEditor({
                       className='flex items-center gap-1 text-xs text-untele hover:underline'
                     >
                       <ExternalLink className='h-3 w-3 shrink-0' />
-                      {link.label || 'Source'}
+                      {link.label ?? 'Source'}
                     </a>
                   ) : null
                 )}

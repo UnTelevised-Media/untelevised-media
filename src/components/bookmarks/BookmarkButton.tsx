@@ -1,18 +1,18 @@
-'use client';
+﻿'use client';
 // src/components/bookmarks/BookmarkButton.tsx
 import React from 'react';
 import { Bookmark, BookmarkCheck } from 'lucide-react';
 import { useBookmarks } from '@/hooks/useBookmarks';
-import type { BookmarkEntry } from '@/lib/bookmarks/storage';
+import type { BookmarkEntry } from '@/services/storage/bookmarks';
 
 type BookmarkButtonProps = Omit<BookmarkEntry, 'bookmarkedAt'> & {
   /** Optional extra class names on the button wrapper */
   className?: string;
-  /** Render mode — 'icon' shows icon only; 'full' shows icon + label */
+  /** Render mode â€” 'icon' shows icon only; 'full' shows icon + label */
   variant?: 'icon' | 'full';
 };
 
-export function BookmarkButton({
+export default function BookmarkButton({
   slug,
   title,
   description,
@@ -26,8 +26,12 @@ export function BookmarkButton({
   const { isBookmarked, toggle, ready } = useBookmarks();
   const saved = isBookmarked(slug);
 
-  const handleToggle = () => {
-    toggle({ slug, title, description, imageUrl, authorName, publishedAt, readingTime });
+  const handleToggle = async () => {
+    try {
+      await toggle({ slug, title, description, imageUrl, authorName, publishedAt, readingTime });
+    } catch (error) {
+      console.error('Failed to toggle bookmark:', error);
+    }
   };
 
   // Render stable placeholder before hook is ready (prevents hydration mismatch / layout shift)

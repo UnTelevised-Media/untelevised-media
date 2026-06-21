@@ -1,5 +1,6 @@
 // src/components/bookstore/BookReviews.tsx
 // Server component — displays approved reviews for a book.
+import formatDate from '@/util/date/formatDate';
 
 interface Review {
   _id: string;
@@ -23,14 +24,6 @@ function StarRating({ rating }: { rating: number }) {
       ))}
     </div>
   );
-}
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 }
 
 interface Props {
@@ -80,7 +73,7 @@ export default function BookReviews({ reviews }: Props) {
                   )}
                 </div>
                 <span className='ml-auto text-[10px] text-hp-muted'>
-                  {formatDate(review.submittedAt)}
+                  {formatDate(review.submittedAt, 'long')}
                 </span>
               </div>
               <p className='text-sm leading-relaxed text-slate-700 dark:text-hp-cream'>

@@ -1,26 +1,26 @@
-/* eslint-disable react/function-component-definition */
+import type { Author } from '@/models/types/sanity';
 // src/app/(news)/author/[slug]/page.tsx
 import { cache } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 
-import urlForImage from '@/u/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 
 import AuthorLinks from '@/components/global/AuthorLinks';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import resolveHref from '@/util/resolveHref';
-import formatDate from '@/util/formatDate';
-import getArticleDate from '@/util/getArticleDate';
+import resolveHref from '@/util/url/resolveHref';
+import formatDate from '@/util/date/formatDate';
+import getArticleDate from '@/util/date/getArticleDate';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAuthorBySlug } from '@/lib/sanity/lib/queries';
-import { buildAuthorMetadata } from '@/util/metadata';
-import type { SanityBook, SanityBookFormat } from '@/lib/bookstore/types';
+import { buildAuthorMetadata } from '@/util/metadata/metadata';
+import type { SanityBook, SanityBookFormat } from '@/models/types/bookstore';
 import BookCardActions from '@/components/bookstore/BookCardActions';
 import TipAuthorRow from '@/components/bookstore/TipAuthorRow';
 
@@ -33,7 +33,9 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const author = await getAuthorBySlug(slug);
-  if (!author) return { title: 'Author Not Found' };
+  if (!author) {
+    return { title: 'Author Not Found' };
+  }
   return buildAuthorMetadata(author, slug);
 }
 
@@ -79,9 +81,9 @@ function AuthorBookCard({ book }: { book: SanityBook }) {
           <h3 className='text-sm font-black leading-tight text-slate-900 group-hover:text-untele dark:text-hp-cream'>
             {book.title}
           </h3>
-          {price != null && (
+          {price !== null && price !== undefined && (
             <div className='mt-1'>
-              {compareAtPrice != null && (
+              {compareAtPrice !== null && compareAtPrice !== undefined && (
                 <p className='text-[10px] text-hp-muted line-through'>
                   ${compareAtPrice.toFixed(2)}
                 </p>
@@ -106,14 +108,21 @@ function AuthorBookCard({ book }: { book: SanityBook }) {
   );
 }
 
-export default async function Author({ params }: Props) {
+
+export default async function AuthorPage({ params }: Props) {
   const { slug } = await params;
-  const author = await getAuthorBySlug(slug);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const author: any = await getAuthorBySlug(slug);
 
-  if (!author) notFound();
+  if (!author) {
+    notFound();
+  }
 
-  const hasBooks = author.isLiteraryAuthor && author.books && author.books.length > 0;
-  const hasTip = !!(author.tipStripeProductId && author.tipAmount);
+  const hasBooks =
+    author?.isLiteraryAuthor &&
+    author?.books &&
+    author?.books?.length > 0;
+  const hasTip = !!(author?.tipStripeProductId && author?.tipAmount);
 
   const personSchema = {
     '@context': 'https://schema.org',
@@ -171,7 +180,7 @@ export default async function Author({ params }: Props) {
             {/* Author Info */}
             <div className='flex-1 text-center lg:text-left'>
               <div className='mb-1 flex flex-wrap items-center justify-center gap-2 lg:justify-start'>
-                {author.isLiteraryAuthor && (
+                {author?.isLiteraryAuthor && (
                   <span className='bg-untele px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
                     Literary Author
                   </span>
@@ -202,7 +211,7 @@ export default async function Author({ params }: Props) {
               <div className='mb-6 flex justify-center gap-8 lg:justify-start'>
                 <div className='text-center'>
                   <div className='text-2xl font-bold text-untele'>
-                    {author.relatedArticles?.length || 0}
+                    {author.relatedArticles?.length ?? 0}
                   </div>
                   <div className='text-sm text-slate-600 dark:text-slate-400'>Articles</div>
                 </div>
@@ -235,7 +244,9 @@ export default async function Author({ params }: Props) {
       </section>
 
       {/* Credentials & Expertise */}
+      {/* eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing */}
       {((author.credentials && author.credentials.length > 0) ||
+        // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         (author.expertise && author.expertise.length > 0) ||
         (author.sameAs && author.sameAs.length > 0)) && (
         <section className='border-b border-slate-200 bg-white/70 px-4 py-6 dark:border-slate-700 dark:bg-slate-900/40'>
@@ -286,7 +297,9 @@ export default async function Author({ params }: Props) {
                     let label = url;
                     try {
                       label = new URL(url).hostname.replace('www.', '');
-                    } catch {}
+                    } catch {
+                      // ignore invalid URLs
+                    }
                     return (
                       <a
                         key={i}
@@ -314,7 +327,9 @@ export default async function Author({ params }: Props) {
               About {author.name}
             </h2>
             <div className='prose prose-lg prose-slate dark:prose-invert max-w-none'>
-              <PortableText value={author.bio} components={RichTextComponents} />
+              {/* @portabletext/react expects optional children; our custom components have required children */}
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              <PortableText value={author.bio} components={RichTextComponents as any} />
             </div>
           </div>
         </section>

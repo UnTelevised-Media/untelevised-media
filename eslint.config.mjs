@@ -2,18 +2,12 @@
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import globals from 'globals';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
+import importPlugin from 'eslint-plugin-import';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import nextPlugin from '@next/eslint-plugin-next';
+import boundariesPlugin from 'eslint-plugin-boundaries';
 
 export default [
   // Global ignores
@@ -31,151 +25,172 @@ export default [
       'src/components/ui/**',
       'src/hooks/use-toast.ts',
       'src/models/types/react-syntax-highlighter.d.ts',
+      'supabase/**',
+      '.supabase/**',
+      '.claude/**',
     ],
   },
-  // Main configuration
-  ...compat.extends(
-    'next',
-    'next/core-web-vitals',
-    'prettier',
-    'plugin:@typescript-eslint/recommended'
-  ),
+  // Boundaries plugin settings (must be separate from files block)
   {
-    plugins: {
-      '@typescript-eslint': typescriptEslint,
+    settings: {
+      'boundaries/elements': [
+        {
+          type: 'app',
+          pattern: 'src/app/**',
+        },
+        {
+          type: 'util',
+          pattern: 'src/util/**',
+        },
+        {
+          type: 'models',
+          pattern: 'src/models/**',
+        },
+        {
+          type: 'lib',
+          pattern: 'src/lib/**',
+        },
+        {
+          type: 'services',
+          pattern: 'src/services/**',
+        },
+        {
+          type: 'server',
+          pattern: 'src/server/**',
+        },
+        {
+          type: 'hooks',
+          pattern: 'src/hooks/**',
+        },
+        {
+          type: 'components',
+          pattern: 'src/components/**',
+        },
+      ],
     },
-
+  },
+  // Main configuration
+  {
+    files: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.js', 'src/**/*.jsx'],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2023,
       sourceType: 'module',
-
       parserOptions: {
         project: './tsconfig.json',
       },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        NodeJS: 'readonly',
+        React: 'readonly',
+      },
     },
-
+    plugins: {
+      '@typescript-eslint': typescriptEslint,
+      import: importPlugin,
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      '@next/next': nextPlugin,
+      boundaries: boundariesPlugin,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     rules: {
-      'import/extensions': 'off',
-      'import/no-cycle': 'warn',
-
-      'import/no-extraneous-dependencies': [
-        'error',
-        {
-          devDependencies: true,
-          optionalDependencies: false,
-          peerDependencies: false,
-        },
-      ],
-
-      'import/no-named-as-default': 'warn',
-      'import/no-named-as-default-member': 'warn',
-      'import/no-unresolved': 'off',
-      'import/no-useless-path-segments': 'warn',
-      'import/order': 'off',
-      'import/prefer-default-export': 'warn',
-      'import/no-duplicates': 'error',
-      'no-duplicate-imports': 'warn',
-      'no-empty-function': 'off',
-      'no-explicit-any': 'off',
-      'no-extra-parens': 'off',
-      'no-lone-blocks': 'warn',
+      ...js.configs.recommended.rules,
       'prefer-arrow-callback': 'error',
       'prefer-const': 'warn',
       'prefer-template': 'error',
-      'react/destructuring-assignment': 'warn',
-
-      'react/function-component-definition': [
-        2,
-        {
-          namedComponents: 'arrow-function',
-        },
-      ],
-
-      'react/jsx-curly-brace-presence': 'warn',
-      'react/jsx-filename-extension': 'off',
-      'react/jsx-indent': 'off',
-      'react/jsx-indent-props': 'off',
-      'react/jsx-one-expression-per-line': 'off',
-      'react/jsx-props-no-spreading': 'off',
-
-      'react/jsx-sort-props': [
-        'warn',
-        {
-          ignoreCase: true,
-          reservedFirst: false,
-          noSortAlphabetically: true,
-        },
-      ],
-
-      'react/no-access-state-in-setstate': 'warn',
-      'react/no-array-index-key': 'off',
-      'react/no-did-update-set-state': 'off',
-      'react/no-find-dom-node': 'warn',
-      'react/no-unused-state': 'off',
-
-      'react/prefer-stateless-function': [
-        'warn',
-        {
-          ignorePureComponents: true,
-        },
-      ],
-
-      'react/prop-types': 'off',
-      'react/require-default-prop': 'off',
-      'react/require-default-props': 'off',
-      'react/self-closing-comp': 'warn',
-      'react/sort-comp': 'warn',
-      'react/static-property-placement': ['warn', 'static public field'],
-      '@typescript-eslint/no-explicit-any': 'warn',
-
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        {
-          argsIgnorePattern: '^_',
-        },
-      ],
-
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
-      '@typescript-eslint/prefer-optional-chain': 'warn',
-      '@typescript-eslint/no-floating-promises': 'off',
-      '@typescript-eslint/await-thenable': 'off',
-
+      'no-unused-vars': 'off', // Disabled in favor of @typescript-eslint/no-unused-vars
+      'no-duplicate-imports': 'warn',
+      'no-empty-function': 'error',
+      'no-explicit-any': 'off', // Disabled in favor of @typescript-eslint/no-explicit-any
+      'no-extra-parens': 'off',
+      'no-lone-blocks': 'warn',
+      'no-unused-expressions': 'error',
       'no-console': [
         'warn',
         {
           allow: ['warn', 'error'],
         },
       ],
-
-      'no-unused-expressions': 'error',
       eqeqeq: ['error', 'always'],
       curly: ['error', 'all'],
+      'import/no-named-as-default': 'warn',
+      'import/prefer-default-export': 'error',
+      '@next/next/no-img-element': 'warn',
+      '@next/next/no-sync-scripts': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+      '@typescript-eslint/prefer-optional-chain': 'warn',
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/await-thenable': 'warn',
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'error',
+      'react/function-component-definition': [
+        'error',
+        {
+          namedComponents: 'function-declaration',
+          unnamedComponents: 'arrow-function',
+        },
+      ],
+      'boundaries/no-unknown': 'off',
+      'boundaries/no-unknown-files': 'off',
+      'boundaries/element-types': [
+        'error',
+        {
+          default: 'disallow',
+          rules: [
+            { from: ['util'], allow: ['models'] },
+            { from: ['models'], allow: [] },
+            { from: ['lib'], allow: ['util', 'models'] },
+            { from: ['services'], allow: ['util', 'lib', 'models'] },
+            { from: ['server'], allow: ['util', 'lib', 'services', 'models'] },
+            { from: ['hooks'], allow: ['util', 'lib', 'services', 'models'] },
+            {
+              from: ['components'],
+              allow: ['util', 'lib', 'services', 'server', 'hooks', 'models', 'components'],
+            },
+          ],
+        },
+      ],
+    },
+  },
+  // Type declaration files configuration
+  {
+    files: ['src/**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off', // Type augmentations are intentionally unused in their declaring file
     },
   },
   // Test files configuration
   {
-    files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
-
+    files: [
+      'src/**/*.test.ts',
+      'src/**/*.test.tsx',
+      'src/**/*.spec.ts',
+      'src/**/*.spec.tsx',
+      'src/**/jest.setup.ts',
+    ],
     languageOptions: {
       globals: {
         ...globals.jest,
       },
     },
-
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
-    },
-  },
-  // Config files configuration
-  {
-    files: ['**/next.config.ts', '**/tailwind.config.ts', '**/jest.config.ts'],
-
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-var-requires': 'off',
     },
   },
 ];

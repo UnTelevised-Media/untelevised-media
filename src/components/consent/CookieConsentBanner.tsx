@@ -4,14 +4,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Settings, Shield, Eye, Target, Sliders } from 'lucide-react';
-import { useConsent } from '@/lib/consent/context';
-import { COOKIE_CATEGORIES } from '@/lib/consent/types';
+import { useConsent } from '@/hooks/googleAdSense/useConsent';
+import { COOKIE_CATEGORIES } from '@/models/types/consent';
 
 interface CookieConsentBannerProps {
   className?: string;
 }
 
-const CookieConsentBanner = ({ className = '' }: CookieConsentBannerProps) => {
+function CookieConsentBanner({ className = '' }: CookieConsentBannerProps) {
   const {
     showBanner,
     preferences,
@@ -256,6 +256,6 @@ const CookieConsentBanner = ({ className = '' }: CookieConsentBannerProps) => {
       </motion.div>
     </AnimatePresence>
   );
-};
+}
 
 export default CookieConsentBanner;

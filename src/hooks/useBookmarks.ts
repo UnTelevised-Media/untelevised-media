@@ -12,17 +12,15 @@ import {
   addBookmark as addLocalBookmark,
   removeBookmark as removeLocalBookmark,
   clearBookmarks as clearLocalBookmarks,
-  isBookmarked as isLocalBookmarked,
   type BookmarkEntry,
-} from '@/lib/bookmarks/storage';
+} from '@/services/storage/bookmarks';
 import {
   getServerBookmarks,
   addServerBookmark,
   removeServerBookmark,
   clearServerBookmarks,
-  checkServerBookmarked,
   syncLocalBookmarksToServer,
-} from '@/lib/bookmarks/actions';
+} from '@/server/actions/bookmarks';
 
 export interface UseBookmarksReturn {
   /** All bookmarks for the current session (local or server). */
@@ -32,11 +30,11 @@ export interface UseBookmarksReturn {
   /** True once state is ready (post-hydration for local, post-fetch for server). */
   ready: boolean;
   /** Check if a specific slug is bookmarked. */
-  isBookmarked: (slug: string) => boolean;
+  isBookmarked: (_slug: string) => boolean;
   /** Toggle bookmark on/off. Optimistic update included. */
-  toggle: (entry: Omit<BookmarkEntry, 'bookmarkedAt'>) => Promise<void>;
+  toggle: (_entry: Omit<BookmarkEntry, 'bookmarkedAt'>) => Promise<void>;
   /** Remove a single bookmark by slug. */
-  remove: (slug: string) => Promise<void>;
+  remove: (_slug: string) => Promise<void>;
   /** Clear all bookmarks. */
   clearAll: () => Promise<void>;
 }
@@ -51,7 +49,9 @@ export function useBookmarks(): UseBookmarksReturn {
 
   // Load bookmarks whenever auth state settles
   useEffect(() => {
-    if (!clerkLoaded) return;
+    if (!clerkLoaded) {
+      return;
+    }
 
     async function load() {
       setLoading(true);
@@ -76,7 +76,11 @@ export function useBookmarks(): UseBookmarksReturn {
       setReady(true);
     }
 
-    load();
+    load().catch((error) => {
+      console.error('Failed to load bookmarks:', error);
+      setLoading(false);
+      setReady(true);
+    });
   }, [isSignedIn, clerkLoaded]);
 
   const isBookmarked = useCallback(

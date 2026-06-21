@@ -1,10 +1,10 @@
-/* eslint-disable import/prefer-default-export */
 // src/util/metadata/generateArticleMetadata.ts
 import type { Metadata } from 'next';
+import type { Article } from '@/models/types/sanity';
 import sanityClient from '@/lib/sanity/lib/client';
-import urlForImage from '@/util/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
-import { TWITTER_HANDLE } from '@/util/metadata';
+import { TWITTER_HANDLE } from '@/util/metadata/metadata';
 
 type Props = {
   params: {
@@ -15,7 +15,7 @@ type Props = {
 const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 
 // Define the generateMetadata function
-export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
+async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
   // Fetch the article data based on the slug
   const article: Article = await sanityClient.fetch(queryArticleBySlug, { slug });
 
@@ -27,11 +27,18 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
   }
 
   // Create metadata object with dynamic values
+  // Extract author name - handle both reference and populated author objects
+  const authorName =
+    article.author && typeof article.author === 'object' && 'name' in article.author
+      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ((article.author as any).name ?? 'Author')
+      : 'Author';
+
   const metadata: Metadata = {
     title: `${article.title} | UnTelevised Media`,
     description: article.description,
     keywords: article.keywords?.length ? article.keywords : undefined,
-    authors: article.author ? [{ name: article.author.name }] : undefined,
+    authors: article.author ? [{ name: authorName }] : undefined,
     publisher: 'UnTelevised Media',
 
     openGraph: {
@@ -43,8 +50,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       type: 'article',
       images: article.mainImage
         ? {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            url: urlForImage(article.mainImage as any)?.url() ?? '',
+            url: urlForImage(article.mainImage)?.url() ?? '',
             width: 1200,
             height: 630,
             alt: article.mainImage.alt ?? article.title,
@@ -60,8 +66,7 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
       creator: TWITTER_HANDLE,
       images: article.mainImage
         ? {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            url: urlForImage(article.mainImage as any)?.url() ?? '',
+            url: urlForImage(article.mainImage)?.url() ?? '',
             alt: article.mainImage.alt ?? article.title,
           }
         : undefined,
@@ -77,3 +82,6 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
 
   return metadata;
 }
+
+export default generateMetadata;
+export { generateMetadata };

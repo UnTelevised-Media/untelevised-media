@@ -3,16 +3,16 @@
 import { notFound } from 'next/navigation';
 import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
-import { getSanityAuthorIdForCurrentUser } from '@/lib/portal/author-actions';
-import { portalFetch } from '@/lib/portal/fetch';
+import { getSanityAuthorIdForCurrentUser } from '@/server/actions/portal/author';
+import { portalFetch } from '@/services/portal/fetch';
 import {
   queryPortalArticleById,
   queryPortalCategories,
   queryPortalAuthors,
-} from '@/lib/portal/queries';
+} from '@/services/portal/queries';
 import PortalNav from '@/components/portal/PortalNav';
 import ArticleEditorForm from '@/components/portal/ArticleEditorForm';
-import type { ArticleWriteInput } from '@/lib/portal/article-actions';
+import type { ArticleWriteInput } from '@/server/actions/portal/article';
 import type { PitchForModal } from '@/components/portal/PitchQuickViewModal';
 
 export const metadata = {
@@ -24,7 +24,6 @@ type Category = { _id: string; title: string; slug?: { current: string } };
 type Author = { _id: string; name: string };
 type PortalArticleFull = ArticleWriteInput & {
   _id: string;
-  _originalId?: string;
   authorId: string;
   author?: { _id: string; name: string };
   categories?: Array<{ _id: string; title: string }>;
@@ -40,8 +39,8 @@ type PortalArticleFull = ArticleWriteInput & {
 
 export default async function EditArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const { id: rawId } = await params;
-  // Newly-created drafts may redirect with "drafts." prefix — strip it so
-  // the GROQ query works correctly under the drafts perspective.
+  // Under previewDrafts perspective, _id is normalized to non-prefixed form.
+  // However, URLs might contain the draft prefix, so we strip it for query consistency.
   const id = rawId.replace(/^drafts\./, '');
 
   const { id: clerkUserId, role } = await requireAuthor();
@@ -55,7 +54,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
     isEditorPlus ? portalFetch<Author[]>(queryPortalAuthors) : Promise.resolve([]),
   ]);
 
-  if (!article) notFound();
+  if (!article) {notFound();}
 
   // Ensure the article's current author always appears in the dropdown, even if
   // they were excluded by the isActive filter (e.g. field not set on older records).
@@ -65,7 +64,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
       : authorList;
 
   // Authors can only access their own articles
-  if (!isEditorPlus && article.authorId !== sanityAuthorId) notFound();
+  if (!isEditorPlus && article.authorId !== sanityAuthorId) {notFound();}
 
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-950'>
@@ -75,7 +74,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
           Edit Article
         </h1>
         <ArticleEditorForm
-          articleId={article._originalId ?? id}
+          articleId={id}
           initialData={article}
           categories={categories}
           authors={authors}

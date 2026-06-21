@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 
@@ -46,7 +46,7 @@ const TIERS: Tier[] = [
   },
 ];
 
-export function MembershipTiers() {
+export default function MembershipTiers() {
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -60,7 +60,9 @@ export function MembershipTiers() {
         body: JSON.stringify({ tier: tierId }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
-      if (!res.ok || data.error) throw new Error(data.error ?? 'Checkout failed');
+      if (!res.ok || data.error) {
+        throw new Error(data.error ?? 'Checkout failed');
+      }
       window.location.href = data.url!;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');

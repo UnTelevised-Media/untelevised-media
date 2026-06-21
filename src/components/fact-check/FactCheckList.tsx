@@ -4,11 +4,11 @@ import { Fragment, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { List, LayoutGrid } from 'lucide-react';
-import { VerdictBadge } from './VerdictBadge';
-import { VERDICT_CONFIG, type FactCheckRating } from '@/lib/factCheck/verdictConfig';
-import formatDate from '@/util/formatDate';
-import urlForImage from '@/util/urlForImage';
-import { InFeedAd, AD_CONFIG } from '@/components/ads';
+import VerdictBadge from './VerdictBadge';
+import { VERDICT_CONFIG, type FactCheckRating } from '@/util/schema/verdictConfig';
+import formatDate from '@/util/date/formatDate';
+import urlForImage from '@/util/url/urlForImage';
+import { InFeedAd, AD_CONFIG } from '@/components/googleAdSense';
 
 export interface FactCheckSummary {
   _id: string;

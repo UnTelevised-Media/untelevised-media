@@ -29,11 +29,10 @@ async function fetchArticle(slug: string) {
       "imageRef": mainImage.asset._ref
     }`
   );
-  const params = encodeURIComponent(JSON.stringify({ slug }));
   const url = `https://${PROJECT_ID}.api.sanity.io/v${API_VERSION}/data/query/${DATASET}?query=${query}&$slug=${encodeURIComponent(JSON.stringify(slug))}`;
 
   const res = await fetch(url, { next: { revalidate: 3600 } });
-  if (!res.ok) return null;
+  if (!res.ok) {return null;}
   const data = await res.json();
   return data.result ?? null;
 }
@@ -71,6 +70,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     >
       {/* Background article image */}
       {bgImageUrl && (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={bgImageUrl}
           alt=''

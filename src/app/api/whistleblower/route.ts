@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { randomUUID } from 'crypto';
 import sanityClient from '@/lib/sanity/lib/client';
-import { checkWhistleblowerRate } from '@/lib/bookstore/ratelimit';
-import { verifyCaptcha } from '@/lib/captcha';
+import { checkWhistleblowerRate } from '@/services/bookstore/ratelimit';
+import verifyCaptcha from '@/services/captcha';
 
 const VALID_CATEGORIES = [
   'corruption',

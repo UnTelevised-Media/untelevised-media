@@ -5,7 +5,7 @@
 import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { approveReview, declineReview, sendReviewFeedback } from '@/lib/portal/review-actions';
+import { approveReview, declineReview, sendReviewFeedback } from '@/server/actions/portal/review';
 
 export interface PortalReview {
   _id: string;
@@ -134,7 +134,7 @@ function ReviewRow({ review }: { review: PortalReview }) {
       if (result.ok) {
         toast.success('Review approved.');
         router.refresh();
-      } else toast.error(result.error ?? 'Failed');
+      } else {toast.error(result.error ?? 'Failed');}
     });
   }
 
@@ -144,7 +144,7 @@ function ReviewRow({ review }: { review: PortalReview }) {
       if (result.ok) {
         toast.success('Review declined.');
         router.refresh();
-      } else toast.error(result.error ?? 'Failed');
+      } else {toast.error(result.error ?? 'Failed');}
     });
   }
 

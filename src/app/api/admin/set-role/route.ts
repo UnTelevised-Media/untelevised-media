@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 // src/app/api/admin/set-role/route.ts
 // Admin-only API route to assign a portal role to a Clerk user.
 // Role is written to publicMetadata.role — never writable from the client.
@@ -16,9 +17,13 @@ export async function POST(req: NextRequest) {
   // Verify the requester is an admin — use auth() directly to avoid catching
   // Next.js redirect exceptions that requireAdmin() would throw.
   const { userId } = await auth();
-  if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!userId) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   const user = await currentUser();
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   if (!hasRole(getRoleFromUser(user), 'admin')) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }

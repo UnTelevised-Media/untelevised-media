@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import type { Hit } from 'instantsearch.js';
 import {
@@ -26,6 +27,7 @@ const searchClient =
         const client = algoliasearch(_algoliaAppId, _algoliaApiKey);
         return {
           ...client,
+           
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           search: async (requests: any) => {
             try {
@@ -77,22 +79,22 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
     <article className='flex gap-4 border border-border p-4 transition-colors duration-200 hover:border-untele'>
       {hit.imageUrl && (
         <Link
-          href={'/articles/' + hit.objectID}
+          href={`/articles/${  hit.objectID}`}
           className='hidden shrink-0 sm:block'
           aria-hidden='true'
           tabIndex={-1}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={hit.imageUrl}
             alt={hit.title}
-            className='h-20 w-28 object-cover'
-            loading='lazy'
+            width={112}
+            height={80}
+            className='object-cover'
           />
         </Link>
       )}
       <div className='min-w-0 flex-1'>
-        <Link href={'/articles/' + hit.objectID} className='group block'>
+        <Link href={`/articles/${  hit.objectID}`} className='group block'>
           <h3 className='text-sm font-bold leading-snug tracking-wide transition-colors duration-150 group-hover:text-untele sm:text-base'>
             <Highlight
               attribute='title'
@@ -124,7 +126,7 @@ function ArticleHitCard({ hit }: { hit: ArticleHit }) {
 
 function NoResults() {
   const { indexUiState } = useInstantSearch();
-  if (!indexUiState.query) return null;
+  if (!indexUiState.query) {return null;}
   return (
     <div className='border border-border px-6 py-12 text-center'>
       <p className='text-sm uppercase tracking-widest text-muted-foreground'>
@@ -177,7 +179,7 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
       routing={{
         router: {
           read() {
-            if (typeof window === 'undefined') return { q: '' };
+            if (typeof window === 'undefined') {return { q: '' };}
             return { q: new URLSearchParams(window.location.search).get('q') ?? '' };
           },
           write(routeState) {
@@ -189,15 +191,18 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
             }
             window.history.replaceState({}, '', url.toString());
           },
+           
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           createURL(options: any) {
             const url = new URL(window.location.href);
             const q = options?.routeState?.q ?? options?.q;
-            if (q) url.searchParams.set('q', String(q));
+            if (q) {url.searchParams.set('q', String(q));}
             return url.toString();
           },
-          onUpdate() {},
-          dispose() {},
+          // eslint-disable-next-line no-empty-function
+          onUpdate() {}, // Required by router interface but not needed; routing handled by read/write
+          // eslint-disable-next-line no-empty-function
+          dispose() {}, // Required by router interface but not needed
         },
         stateMapping: {
           stateToRoute(uiState) {
@@ -242,7 +247,7 @@ export default function SearchClient({ initialQuery = '' }: { initialQuery?: str
       </div>
       <div className='flex flex-col gap-8 sm:flex-row sm:items-start'>
         <aside
-          className={'w-full shrink-0 sm:block sm:w-52 ' + (filtersOpen ? 'block' : 'hidden')}
+          className={`w-full shrink-0 sm:block sm:w-52 ${  filtersOpen ? 'block' : 'hidden'}`}
         >
           <div className='border border-border p-4'>
             <div className='mb-4 bg-untele px-2 py-1'>

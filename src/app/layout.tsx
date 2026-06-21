@@ -9,7 +9,7 @@ import ThemeProvider from '@/components/providers/ThemeProvider';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { Toaster } from '@/components/ui/toaster';
 import dynamic from 'next/dynamic';
-import { ConsentProvider } from '@/lib/consent';
+import { ConsentProvider } from '@/hooks/googleAdSense/useConsent';
 import ConsentAwareAnalytics from '@/components/analytics/ConsentAwareAnalytics';
 import SentryUserSync from '@/components/providers/SentryUserSync';
 
@@ -79,11 +79,11 @@ export const metadata: Metadata = {
   },
 };
 
-const RootLayout = ({
+function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) => {
+}>) {
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
@@ -110,6 +110,9 @@ const RootLayout = ({
             `,
           }}
         />
+        {/* Social media embed SDKs — loaded once globally for TikTok and Instagram embeds */}
+        <Script async src='https://www.tiktok.com/embed.js' strategy='lazyOnload' />
+        <Script async src='https://www.instagram.com/embed.js' strategy='lazyOnload' />
       </head>
       <body className={`${inter.className} font-sans antialiased`} suppressHydrationWarning>
         <a
@@ -151,6 +154,6 @@ const RootLayout = ({
       </body>
     </html>
   );
-};
+}
 
 export default RootLayout;

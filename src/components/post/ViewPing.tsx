@@ -8,18 +8,19 @@ interface ViewPingProps {
 
 export default function ViewPing({ slug }: ViewPingProps) {
   useEffect(() => {
-    if (!slug) return;
+    if (!slug) {return;}
 
     const storageKey = `viewed_${slug}`;
 
-    if (sessionStorage.getItem(storageKey)) return;
+    if (sessionStorage.getItem(storageKey)) {return;}
 
     sessionStorage.setItem(storageKey, '1');
 
-    fetch('/api/view', {
+    fetch('/api/view-queue', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ slug }),
+      keepalive: true,
     }).catch(() => {
       // Silently fail — view tracking is non-critical
     });

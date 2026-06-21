@@ -1,9 +1,9 @@
-'use client';
+﻿'use client';
 // src/components/careers/ContributorApplicationForm.tsx
 
 import React, { useState } from 'react';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface FormData {
   firstName: string;
@@ -79,7 +79,7 @@ interface Props {
   prefilledPosition?: string;
 }
 
-export function ContributorApplicationForm({ prefilledPosition }: Props) {
+export default function ContributorApplicationForm({ prefilledPosition }: Props) {
   const { trackEvent } = useConsentAwareTracking();
   const matchedPosition = prefilledPosition
     ? positions.find(
@@ -169,7 +169,9 @@ export function ContributorApplicationForm({ prefilledPosition }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cleaned),
       });
-      if (!res.ok) throw new Error('submission failed');
+      if (!res.ok) {
+        throw new Error('submission failed');
+      }
       trackEvent('contributor_application_submitted', {
         positions: formData.positionsOfInterest.join(','),
         experience_level: formData.experienceLevel,
@@ -370,7 +372,7 @@ export function ContributorApplicationForm({ prefilledPosition }: Props) {
                     onClick={() => removeItem('socialMediaLinks', i)}
                     className='bg-red-700 px-3 text-white hover:bg-red-600'
                   >
-                    ×
+                    Ã—
                   </button>
                 )}
               </div>
@@ -459,7 +461,7 @@ export function ContributorApplicationForm({ prefilledPosition }: Props) {
                 onClick={() => removeItem('workSamples', i)}
                 className='bg-red-700 px-3 text-white hover:bg-red-600'
               >
-                ×
+                Ã—
               </button>
             )}
           </div>

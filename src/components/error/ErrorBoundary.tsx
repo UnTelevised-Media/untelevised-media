@@ -15,7 +15,7 @@ interface ErrorBoundaryState {
 interface ErrorBoundaryProps {
   children: React.ReactNode;
   fallback?: React.ComponentType<{ error: Error; retry: () => void }>;
-  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+  onError?: (_error: Error, _errorInfo: React.ErrorInfo) => void;
 }
 
 export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
@@ -67,7 +67,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 }
 
 // Default Error Fallback Component
-export const DefaultErrorFallback = ({ error, retry }: { error: Error; retry: () => void }) => {
+export function DefaultErrorFallback({ error, retry }: { error: Error; retry: () => void }) {
   return (
     <div className='flex min-h-[400px] flex-col items-center justify-center space-y-4 p-8'>
       <div className='rounded-full bg-red-100 p-3 dark:bg-red-900/20'>
@@ -91,15 +91,4 @@ export const DefaultErrorFallback = ({ error, retry }: { error: Error; retry: ()
       </Button>
     </div>
   );
-};
-
-// Async Error Boundary Hook
-export function useAsyncError() {
-  const [, setError] = React.useState();
-
-  return React.useCallback((error: Error) => {
-    setError(() => {
-      throw error;
-    });
-  }, []);
 }

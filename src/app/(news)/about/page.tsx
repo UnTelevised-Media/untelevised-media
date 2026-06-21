@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/about/page.tsx
 import React from 'react';
 import Link from 'next/link';

@@ -9,9 +9,9 @@ import { requireAuthor } from '@/lib/auth/roles';
 import { hasRole } from '@/lib/auth/roles-utils';
 import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryBooksByAuthorClerkId } from '@/lib/sanity/lib/queries';
-import { shopServiceClient } from '@/lib/bookstore/supabase';
+import { shopServiceClient } from '@/services/bookstore/supabase';
 import PortalNav from '@/components/portal/PortalNav';
-import type { SanityBook } from '@/lib/bookstore/types';
+import type { SanityBook } from '@/models/types/bookstore';
 
 export const metadata = {
   title: 'Book Library — Author Portal',
@@ -46,7 +46,7 @@ export default async function PortalLibraryPage() {
   let supabaseAvailable = true;
 
   try {
-    if (!process.env.SUPABASE_SHOP_URL) throw new Error('Supabase shop not configured');
+    if (!process.env.SUPABASE_SHOP_URL) {throw new Error('Supabase shop not configured');}
 
     const { data, error } = await shopServiceClient
       .from('author_earnings')
@@ -55,7 +55,7 @@ export default async function PortalLibraryPage() {
       )
       .eq('author_clerk_id', clerkUserId);
 
-    if (error) console.error('[portal/library] author_earnings query failed:', error.message);
+    if (error) {console.error('[portal/library] author_earnings query failed:', error.message);}
 
     authorEarnings = ((data as EarningRow[]) ?? []).filter(
       (s) => !['cancelled', 'refunded'].includes(s.order?.status ?? '')

@@ -3,10 +3,9 @@
 
 import { useEffect } from 'react';
 import Script from 'next/script';
-import * as Sentry from '@sentry/nextjs';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { useConsentCheck } from '@/lib/consent/context';
+import { useConsentCheck } from '@/hooks/googleAdSense/useConsent';
 
 interface ConsentAwareAnalyticsProps {
   /** GTM container ID, e.g. "GTM-XXXXXX". Loads the GTM snippet. */
@@ -16,14 +15,16 @@ interface ConsentAwareAnalyticsProps {
   ga4Id?: string;
 }
 
-const ConsentAwareAnalytics = ({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) => {
+function ConsentAwareAnalytics({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) {
   const { canUseAnalytics, canUseMarketing, hasConsent } = useConsentCheck();
 
   // Reactively push consent updates to Google whenever preferences change.
   // The default 'denied' state was already established by the beforeInteractive
   // script in layout.tsx — this only needs to fire the 'update' call.
   useEffect(() => {
-    if (!hasConsent || typeof window === 'undefined' || !window.gtag) return;
+    if (!hasConsent || typeof window === 'undefined' || !window.gtag) {
+      return;
+    }
 
     window.gtag('consent', 'update', {
       analytics_storage: canUseAnalytics ? 'granted' : 'denied',
@@ -82,35 +83,6 @@ const ConsentAwareAnalytics = ({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) => 
       {canUseAnalytics && <SpeedInsights />}
     </>
   );
-};
+}
 
 export default ConsentAwareAnalytics;
-
-// Hook for firing custom GA4/GTM events with consent awareness
-export function useConsentAwareTracking() {
-  const { canUseAnalytics, canUseMarketing } = useConsentCheck();
-
-  const trackEvent = (eventName: string, parameters?: Record<string, unknown>) => {
-    // Sentry breadcrumb — no consent required, this is error-monitoring context
-    Sentry.addBreadcrumb({
-      category: 'user.action',
-      message: eventName,
-      data: parameters,
-      level: 'info',
-    });
-
-    if (!canUseAnalytics || typeof window === 'undefined' || !window.gtag) return;
-
-    window.gtag('event', eventName, {
-      ...parameters,
-      consent_analytics: canUseAnalytics,
-      consent_marketing: canUseMarketing,
-    });
-  };
-
-  return {
-    trackEvent,
-    canTrack: canUseAnalytics,
-    canUseMarketing,
-  };
-}

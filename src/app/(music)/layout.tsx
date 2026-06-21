@@ -1,15 +1,14 @@
-/* eslint-disable react/function-component-definition */
-// src/app/(music)/layout.tsx
+﻿// src/app/(music)/layout.tsx
 import Header from '@/components/global/Header';
 import HeaderLogo from '@/components/global/HeaderLogo';
 import { draftMode } from 'next/headers';
 
 import Footer from '@/components/global/Footer';
 
-import ConsentAwareGoogleAdSense from '@/util/consentAwareGoogleAdSense';
-import DraftModeBanner from '@/components/sanity/DraftModeBanner';
-import SanityVisualEditing from '@/components/sanity/VisualEditing';
-import { GlobalStructuredData } from '@/components/seo/GlobalStructuredData';
+import ConsentAwareGoogleAdSense from '@/components/googleAdSense/ConsentAwareGoogleAdSense';
+import DraftModeBanner from '@/lib/sanity/components/DraftModeBanner';
+import SanityVisualEditing from '@/lib/sanity/components/VisualEditing';
+import GlobalStructuredData from '@/components/seo/GlobalStructuredData';
 
 export default async function UserLayout({ children }: { children: React.ReactNode }) {
   const draftModeEnabled = (await draftMode()).isEnabled;

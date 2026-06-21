@@ -5,158 +5,9 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
-import {
-  ChevronDown,
-  Menu,
-  X,
-  Newspaper,
-  BookOpen,
-  Mail,
-  User,
-  LayoutDashboard,
-  FileText,
-  Library,
-  DollarSign,
-  ShoppingBag,
-  ClipboardList,
-  Star,
-  MessageSquare,
-  ShieldAlert,
-  Users,
-  UserCircle,
-  Database,
-} from 'lucide-react';
+import { ChevronDown, Menu, X, LayoutDashboard } from 'lucide-react';
+import buildPortalNavSections, { type NavSection } from '@/util/portal/buildPortalNavSections';
 import type { PortalRole } from '@/lib/auth/roles-utils';
-
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
-type NavLink = { href: string; label: string; icon: React.ReactNode };
-type Section = { id: string; label: string; icon: React.ReactNode; links: NavLink[] };
-
-// ---------------------------------------------------------------------------
-// Section builder — role-aware
-// ---------------------------------------------------------------------------
-
-function buildSections(isEditorPlus: boolean, role: PortalRole | null): Section[] {
-  if (role === 'sales') {
-    return [
-      {
-        id: 'books',
-        label: 'Books',
-        icon: <BookOpen className='h-3.5 w-3.5' />,
-        links: [
-          { href: '/portal/sales', label: 'Sales', icon: <ShoppingBag className='h-3.5 w-3.5' /> },
-        ],
-      },
-      {
-        id: 'profile',
-        label: 'Profile',
-        icon: <User className='h-3.5 w-3.5' />,
-        links: [
-          {
-            href: '/portal/profile',
-            label: 'My Profile',
-            icon: <UserCircle className='h-3.5 w-3.5' />,
-          },
-        ],
-      },
-    ];
-  }
-
-  // News: Articles + Sources only
-  const newsLinks: NavLink[] = [
-    { href: '/portal/articles', label: 'Articles', icon: <FileText className='h-3.5 w-3.5' /> },
-    { href: '/portal/sources', label: 'Sources', icon: <Database className='h-3.5 w-3.5' /> },
-  ];
-
-  // Books: Library + Earnings + Sales + Reviews (editor+)
-  const booksLinks: NavLink[] = [
-    { href: '/portal/library', label: 'Library', icon: <Library className='h-3.5 w-3.5' /> },
-    { href: '/portal/earnings', label: 'Earnings', icon: <DollarSign className='h-3.5 w-3.5' /> },
-    { href: '/portal/sales', label: 'Sales', icon: <ShoppingBag className='h-3.5 w-3.5' /> },
-  ];
-  if (isEditorPlus) {
-    booksLinks.push({
-      href: '/portal/reviews',
-      label: 'Reviews',
-      icon: <Star className='h-3.5 w-3.5' />,
-    });
-  }
-
-  // Contacts: Applications (editor+) + all contact inboxes (editor+)
-  const contactsLinks: NavLink[] = [];
-  if (isEditorPlus) {
-    contactsLinks.push(
-      {
-        href: '/portal/applications',
-        label: 'Applications',
-        icon: <ClipboardList className='h-3.5 w-3.5' />,
-      },
-      {
-        href: '/portal/contact',
-        label: 'Contact',
-        icon: <MessageSquare className='h-3.5 w-3.5' />,
-      },
-      {
-        href: '/portal/secure-contact',
-        label: 'Secure Contact',
-        icon: <ShieldAlert className='h-3.5 w-3.5' />,
-      },
-      {
-        href: '/portal/whistleblower',
-        label: 'Whistleblower',
-        icon: <ShieldAlert className='h-3.5 w-3.5' />,
-      },
-      {
-        href: '/portal/subscribers',
-        label: 'Subscribers',
-        icon: <Users className='h-3.5 w-3.5' />,
-      }
-    );
-  }
-
-  const sections: Section[] = [
-    {
-      id: 'news',
-      label: 'News',
-      icon: <Newspaper className='h-3.5 w-3.5' />,
-      links: newsLinks,
-    },
-    {
-      id: 'books',
-      label: 'Books',
-      icon: <BookOpen className='h-3.5 w-3.5' />,
-      links: booksLinks,
-    },
-  ];
-
-  if (isEditorPlus) {
-    sections.push({
-      id: 'contacts',
-      label: 'Contacts',
-      icon: <Mail className='h-3.5 w-3.5' />,
-      links: contactsLinks,
-    });
-  }
-
-  // Profile: My Profile only — Dashboard is a standalone nav link
-  sections.push({
-    id: 'profile',
-    label: 'Profile',
-    icon: <User className='h-3.5 w-3.5' />,
-    links: [
-      {
-        href: '/portal/profile',
-        label: 'My Profile',
-        icon: <UserCircle className='h-3.5 w-3.5' />,
-      },
-    ],
-  });
-
-  return sections;
-}
 
 // ---------------------------------------------------------------------------
 // Main component
@@ -169,7 +20,7 @@ interface Props {
 
 export default function PortalNav({ isEditorPlus = false, role = null }: Props) {
   const pathname = usePathname();
-  const sections = buildSections(isEditorPlus, role);
+  const sections = buildPortalNavSections(isEditorPlus, role);
   const isSales = role === 'sales';
   const dashboardHref = isSales ? '/portal/sales' : '/portal';
   const isDashboard = pathname === '/portal' || (isSales && pathname === '/portal/sales');
@@ -196,7 +47,7 @@ export default function PortalNav({ isEditorPlus = false, role = null }: Props) 
     setMobileOpen(false);
   }, [pathname]);
 
-  function isSectionActive(section: Section) {
+  function isSectionActive(section: NavSection) {
     return section.links.some((l) => pathname.startsWith(l.href));
   }
 

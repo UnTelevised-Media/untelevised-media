@@ -1,16 +1,34 @@
-/* eslint-disable react/function-component-definition */
+import type { Album, Song } from '@/models/types/sanity';
 // src/app/(user)/albums/[slug]/page.tsx
+
+/**
+ * Album page with artist and related songs.
+ *
+ * NOTE: This file contains multiple `as any` casts for Sanity reference properties.
+ * These are NECESSARY due to a fundamental limitation in Sanity's TypeGen:
+ * - GROQ queries with `->` dereference relationships and return fully populated objects at runtime
+ * - TypeScript types generated from the schema only know the reference signature { _ref, _type }
+ * - TypeGen cannot track GROQ query transformations, so it sees references, not populated objects
+ *
+ * Examples:
+ * - GROQ returns: { artist: { _id, name, stageName, slug, image, ... } }
+ * - TypeScript sees: { artist: { _ref, _type } }
+ *
+ * The `as any` casts allow accessing dereferenced properties that definitely exist at runtime.
+ * See: src/models/types/sanityReferenceNote.ts for detailed explanation.
+ */
+
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
-import { RectangleAd, BannerAd } from '@/components/ads';
+import { RectangleAd, BannerAd } from '@/components/googleAdSense';
 
-import urlForImage from '@/util/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 import { groq } from 'next-sanity';
 import sanityClient from '@/lib/sanity/lib/client';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
@@ -39,8 +57,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const artistNames = [
-    album.artist.stageName ?? album.artist.name,
-    ...(album.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...((album.featuredArtists as any)?.map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (artist: any) => (artist as any)?.stageName ?? (artist as any)?.name
+    ) ?? []),
   ].join(', ');
 
   const canonicalUrl = album.seo?.canonicalUrl ?? `https://www.untelevised.media/albums/${slug}/`;
@@ -55,7 +78,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    keywords: [album.title, artistNames, 'album', ...(album.genres ?? [])],
+    keywords: [album.title, artistNames, 'album', ...(album.genres ?? [])] as string[],
     openGraph: {
       type: 'music.album',
       title: `${album.title} - ${artistNames}`,
@@ -79,22 +102,37 @@ export default async function AlbumPage({ params }: Props) {
   const { slug } = await params;
   const album: AlbumWithSongs = (await getAlbumBySlug(slug)) as AlbumWithSongs;
 
-  if (!album) notFound();
+  if (!album) {
+    notFound();
+  }
 
+  // GROQ dereferences artist-> and featuredArtists[]->
   const artistNames = [
-    album.artist.stageName ?? album.artist.name,
-    ...(album.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown Artist',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...((album.featuredArtists as any)?.map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (artist: any) => (artist as any)?.stageName ?? (artist as any)?.name
+    ) ?? []),
   ].join(', ');
 
   const musicAlbumSchema = {
     '@context': 'https://schema.org',
     '@type': 'MusicAlbum',
     name: album.title,
-    byArtist: {
-      '@type': 'MusicGroup',
-      name: album.artist.stageName ?? album.artist.name,
-      url: `https://www.untelevised.media/music-artists/${album.artist.slug.current}/`,
-    },
+    byArtist: album.artist
+      ? {
+          '@type': 'MusicGroup',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          name: (album.artist as any)?.stageName ?? (album.artist as any)?.name ?? 'Unknown',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          url: (album.artist as any)?.slug?.current
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ? `https://www.untelevised.media/music-artists/${(album.artist as any).slug.current}/`
+            : undefined,
+        }
+      : undefined,
     numTracks: album.totalTracks ?? undefined,
     datePublished: album.releaseDate ?? undefined,
     genre: album.genres ?? [],
@@ -131,7 +169,9 @@ export default async function AlbumPage({ params }: Props) {
               <div className='max-w-4xl'>
                 <div className='mb-4 flex items-center gap-2 text-white/80'>
                   <Disc className='h-5 w-5' />
-                  <span className='text-sm font-medium'>{album.albumType.toUpperCase()}</span>
+                  <span className='text-sm font-medium'>
+                    {album.albumType?.toUpperCase() ?? 'ALBUM'}
+                  </span>
                 </div>
                 <h1 className='mb-4 text-4xl font-bold text-white md:text-6xl'>{album.title}</h1>
                 <p className='mb-6 text-xl text-white/90 md:text-2xl'>by {artistNames}</p>
@@ -220,7 +260,10 @@ export default async function AlbumPage({ params }: Props) {
                   </h2>
                   <div className='space-y-2'>
                     {album.songs.map((song, index) => (
-                      <ClientSideRoute key={song._id} route={`/lyrics/${song.slug.current}`}>
+                      <ClientSideRoute
+                        key={song._id}
+                        route={`/lyrics/${song.slug?.current ?? ''}`}
+                      >
                         <div className='group flex cursor-pointer items-center gap-4 rounded-lg p-3 transition-colors hover:bg-slate-50 dark:hover:bg-slate-700'>
                           <div className='flex h-8 w-8 items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400'>
                             {song.trackNumber ?? index + 1}
@@ -232,7 +275,12 @@ export default async function AlbumPage({ params }: Props) {
                             {song.featuredArtists && song.featuredArtists.length > 0 && (
                               <p className='text-sm text-slate-600 dark:text-slate-400'>
                                 feat.{' '}
-                                {song.featuredArtists.map((a) => a.stageName ?? a.name).join(', ')}
+                                {/* GROQ dereferences featuredArtists[]-> */}
+                                {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                                {song.featuredArtists
+                                  ?.map((a) => (a as any)?.stageName ?? (a as any)?.name)
+                                  .join(', ') ?? ''}
+                                {/* eslint-enable @typescript-eslint/no-explicit-any */}
                               </p>
                             )}
                           </div>
@@ -260,7 +308,10 @@ export default async function AlbumPage({ params }: Props) {
                     About This Album
                   </h2>
                   <div className='prose prose-slate dark:prose-invert max-w-none'>
-                    <PortableText value={album.description} components={RichTextComponents} />
+                    {/* @portabletext/react expects optional children; our custom components have required children */}
+                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                    <PortableText value={album.description} components={RichTextComponents as any} />
+                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
                   </div>
                 </div>
               )}
@@ -365,42 +416,19 @@ export default async function AlbumPage({ params }: Props) {
                 <h3 className='mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100'>
                   Artist{album.featuredArtists && album.featuredArtists.length > 0 ? 's' : ''}
                 </h3>
+                {/* GROQ dereferences artist-> and featuredArtists[]-> */}
+                {/* eslint-disable @typescript-eslint/no-explicit-any */}
                 <div className='space-y-4'>
-                  <ClientSideRoute route={`/music-artists/${album.artist.slug.current}`}>
-                    <div className='group flex cursor-pointer items-center gap-3'>
-                      {album.artist.image && (
-                        <div className='h-12 w-12 overflow-hidden rounded-full'>
-                          <Image
-                            src={urlForImage(album.artist.image)?.url() ?? ''}
-                            alt={album.artist.name}
-                            width={48}
-                            height={48}
-                            className='h-full w-full object-cover'
-                          />
-                        </div>
-                      )}
-                      <div>
-                        <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                          {album.artist.stageName ?? album.artist.name}
-                        </h4>
-                        <p className='text-sm text-slate-600 dark:text-slate-400'>
-                          Primary Artist
-                        </p>
-                      </div>
-                    </div>
-                  </ClientSideRoute>
-
-                  {album.featuredArtists?.map((artist) => (
+                  {(album.artist as any)?.slug?.current && (
                     <ClientSideRoute
-                      key={artist._id}
-                      route={`/music-artists/${artist.slug.current}`}
+                      route={`/music-artists/${(album.artist as any).slug.current}`}
                     >
                       <div className='group flex cursor-pointer items-center gap-3'>
-                        {artist.image && (
+                        {(album.artist as any)?.image && (
                           <div className='h-12 w-12 overflow-hidden rounded-full'>
                             <Image
-                              src={urlForImage(artist.image)?.url() ?? ''}
-                              alt={artist.name}
+                              src={urlForImage((album.artist as any)?.image)?.url() ?? ''}
+                              alt={(album.artist as any)?.name ?? 'Artist'}
                               width={48}
                               height={48}
                               className='h-full w-full object-cover'
@@ -409,14 +437,49 @@ export default async function AlbumPage({ params }: Props) {
                         )}
                         <div>
                           <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
-                            {artist.stageName ?? artist.name}
+                            {(album.artist as any)?.stageName ?? (album.artist as any)?.name}
                           </h4>
-                          <p className='text-sm text-slate-600 dark:text-slate-400'>Featured</p>
+                          <p className='text-sm text-slate-600 dark:text-slate-400'>
+                            Primary Artist
+                          </p>
                         </div>
                       </div>
                     </ClientSideRoute>
-                  ))}
+                  )}
+
+                  {(album.featuredArtists as any)?.map(
+                    (artist: any) =>
+                      (artist as any)?.slug?.current && (
+                        <ClientSideRoute
+                          key={(artist as any)._id}
+                          route={`/music-artists/${(artist as any).slug.current}`}
+                        >
+                          <div className='group flex cursor-pointer items-center gap-3'>
+                            {(artist as any)?.image && (
+                              <div className='h-12 w-12 overflow-hidden rounded-full'>
+                                <Image
+                                  src={urlForImage((artist as any)?.image)?.url() ?? ''}
+                                  alt={(artist as any)?.name ?? 'Artist'}
+                                  width={48}
+                                  height={48}
+                                  className='h-full w-full object-cover'
+                                />
+                              </div>
+                            )}
+                            <div>
+                              <h4 className='font-medium text-slate-900 group-hover:text-untele dark:text-slate-100'>
+                                {(artist as any)?.stageName ?? (artist as any)?.name}
+                              </h4>
+                              <p className='text-sm text-slate-600 dark:text-slate-400'>
+                                Featured
+                              </p>
+                            </div>
+                          </div>
+                        </ClientSideRoute>
+                      )
+                  )}
                 </div>
+                {/* eslint-enable @typescript-eslint/no-explicit-any */}
               </div>
 
               {/* Ad Space */}
@@ -426,7 +489,7 @@ export default async function AlbumPage({ params }: Props) {
 
               {/* Social Share */}
               <SocialShare
-                url={`/albums/${album.slug.current}`}
+                url={`/albums/${album.slug?.current ?? ''}`}
                 title={`${album.title} - ${artistNames} | Album`}
               />
             </div>

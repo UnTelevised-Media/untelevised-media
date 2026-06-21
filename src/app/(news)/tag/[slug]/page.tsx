@@ -1,17 +1,17 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/tag/[slug]/page.tsx
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Article } from '@/models/types/sanity';
 
 import ArticleCardLg from '@/components/cards/ArticleCardLg';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import resolveHref from '@/util/resolveHref';
+import resolveHref from '@/util/url/resolveHref';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryAllTags, queryArticlesByTag } from '@/lib/sanity/lib/queries';
-import { tagToSlug, slugToTagLabel } from '@/lib/tagUtils';
-import { getCanonicalUrl, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata';
+import { tagToSlug, slugToTagLabel } from '@/util/content/tagUtils';
+import { getCanonicalUrl, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata/metadata';
 
 type Props = {
   params: Promise<{
@@ -56,7 +56,9 @@ export default async function TagPage({ params }: Props) {
 
   const matchedTag = allTags.find((tag: string) => tagToSlug(tag) === slug);
 
-  if (!matchedTag) notFound();
+  if (!matchedTag) {
+    notFound();
+  }
 
   const { data: _articles } = await sanityFetch({
     query: queryArticlesByTag,
@@ -132,7 +134,8 @@ export default async function TagPage({ params }: Props) {
       {/* Articles grid */}
       {articleCount > 0 ? (
         <div className='grid grid-cols-1 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 xl:grid-cols-3'>
-          {articles.map((article: Article) => (
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+          {articles.map((article: any) => (
             <ClientSideRoute
               route={resolveHref('article', article.slug?.current) ?? ''}
               key={article._id}
@@ -152,6 +155,8 @@ export default async function TagPage({ params }: Props) {
 
 export async function generateStaticParams() {
   const tags: string[] = await sanityClient.fetch(queryAllTags);
-  if (!tags || tags.length === 0) return [];
+  if (!tags || tags.length === 0) {
+    return [];
+  }
   return tags.map((tag) => ({ slug: tagToSlug(tag) }));
 }

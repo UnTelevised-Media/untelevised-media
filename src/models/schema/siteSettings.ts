@@ -70,6 +70,7 @@ export default defineType({
           isActive: 'isActive',
           headline: 'headline',
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         prepare({ isActive, headline }: Record<string, any>) {
           return {
             title: isActive ? '🔴 ACTIVE' : '⚫ Inactive',

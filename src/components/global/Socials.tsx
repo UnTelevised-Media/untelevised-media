@@ -4,7 +4,7 @@ import { FaFacebookF, FaRedditAlien, FaTelegram, FaTiktok } from 'react-icons/fa
 import { FaThreads } from 'react-icons/fa6';
 import { GrInstagram } from 'react-icons/gr';
 
-const Socials = () => {
+function Socials() {
   return (
     <div className='flex items-center gap-1 sm:gap-1.5'>
       <Link
@@ -73,6 +73,6 @@ const Socials = () => {
       </Link>
     </div>
   );
-};
+}
 
 export default Socials;

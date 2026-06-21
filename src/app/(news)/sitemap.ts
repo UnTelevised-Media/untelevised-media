@@ -1,10 +1,13 @@
 // src/app/(user)/sitemap.ts
 
-import getAllURLs from '@/util/getAllUrls';
+// Cache sitemap for 1 hour; crawlers hit this frequently
+export const revalidate = 3600;
+
+import getAllURLs from '@/util/url/getAllUrls';
 import sanityClient from '@/lib/sanity/lib/client';
 import { groq } from 'next-sanity';
 import { queryAllTags } from '@/lib/sanity/lib/queries';
-import { tagToSlug } from '@/lib/tagUtils';
+import { tagToSlug } from '@/util/content/tagUtils';
 
 const queryFactCheckSlugs = groq`
   *[_type == 'factCheck'] {

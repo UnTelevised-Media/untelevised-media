@@ -1,8 +1,9 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/membership/one-time-donation/route.ts
 // Creates a Stripe Checkout Session for a one-time NYOP donation (min $5).
 // Uses the membership Stripe project (STRIPE_MEMBERSHIP_SECRET_KEY).
 //
-// STRIPE_MEMBERSHIP_PRICE_DONATION — set to the prod_xxx or price_xxx ID of the
+// STRIPE_MEMBERSHIP_PRICE_DONATION â€” set to the prod_xxx or price_xxx ID of the
 // "One-Time Donation" product in the membership Stripe dashboard.
 // If a price_xxx is provided, the product is resolved from it automatically.
 // If unset, falls back to an inline product_data definition.
@@ -23,8 +24,12 @@ const MIN_CENTS = 500;
 
 async function resolveDonationProductId(): Promise<string | null> {
   const id = process.env.STRIPE_MEMBERSHIP_PRICE_DONATION;
-  if (!id) return null;
-  if (id.startsWith('prod_')) return id;
+  if (!id) {
+    return null;
+  }
+  if (id.startsWith('prod_')) {
+    return id;
+  }
   if (id.startsWith('price_')) {
     const price = await stripe.prices.retrieve(id);
     return typeof price.product === 'string' ? price.product : null;
@@ -47,7 +52,7 @@ export async function POST(request: NextRequest) {
       : {
           currency: 'usd',
           product_data: {
-            name: 'One-Time Donation — UnTelevised Media',
+            name: 'One-Time Donation â€” UnTelevised Media',
             description: 'Supporting independent, uncensored journalism.',
           },
           unit_amount: amountCents,

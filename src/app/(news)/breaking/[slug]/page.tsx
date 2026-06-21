@@ -1,25 +1,25 @@
-﻿/* eslint-disable react/function-component-definition */
+import type { LiveEvent } from '@/models/types/sanity';
 // src/app/(user)/live-event/[slug]/page.tsx
 import Image from 'next/image';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 
-import urlForImage from '@/u/urlForImage';
+import urlForImage from '@/util/url/urlForImage';
 import EventMap from '@/components/post/EventMap';
-import { SourcesPanel } from '@/components/post/SourcesPanel';
+import SourcesPanel from '@/components/post/SourcesPanel';
 
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
-import formatDate from '@/util/formatDate';
+import formatDate from '@/util/date/formatDate';
 import ClientTimeDisplay from '@/components/ui/ClientTimeDisplay';
-import resolveHref from '@/util/resolveHref';
+import resolveHref from '@/util/url/resolveHref';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryEventBySlug } from '@/lib/sanity/lib/queries';
-import { buildLiveEventMetadata, getSanityOgImageUrl, getCanonicalUrl } from '@/util/metadata';
+import { buildLiveEventMetadata, getSanityOgImageUrl, getCanonicalUrl } from '@/util/metadata/metadata';
 
 type Props = {
   params: Promise<{
@@ -34,7 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     params: { slug },
     tags: ['liveEvent'],
   });
-  if (!liveEvent) return { title: 'Breaking News Not Found' };
+  if (!liveEvent) {
+    return { title: 'Breaking News Not Found' };
+  }
   const base = buildLiveEventMetadata(liveEvent as LiveEvent, slug);
   const canonicalUrl = getCanonicalUrl('breaking', slug);
   return {
@@ -49,22 +51,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function LiveEvent({ params }: Props) {
+
+export default async function LiveEventPage({ params }: Props) {
   const { slug } = await params;
-  const liveEvent = await getEventBySlug(slug);
-  if (!liveEvent) notFound();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const liveEvent: any = await getEventBySlug(slug);
+  if (!liveEvent) {
+    notFound();
+  }
 
   const allEvents = [
     // Check if liveEvent.relatedArticles is an array. If Truthy map over it and return an array of objects with the source property set to the source of the related article.
-    ...(Array.isArray(liveEvent.relatedArticles)
-      ? liveEvent.relatedArticles.map((article) => ({
+    ...(Array.isArray(liveEvent?.relatedArticles)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ? liveEvent.relatedArticles.map((article: any) => ({
           ...article,
           source: 'relatedArticles',
         }))
       : []),
     // Check if liveEvent.keyEvent is an array. If Truthy map over it and return an array of objects with the source property set to the source of the key event.
-    ...(Array.isArray(liveEvent.keyEvent)
-      ? liveEvent.keyEvent.map((event) => ({
+    ...(Array.isArray(liveEvent?.keyEvent)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ? liveEvent.keyEvent.map((event: any) => ({
           ...event,
           source: 'keyEvent',
         }))
@@ -72,14 +80,19 @@ export default async function LiveEvent({ params }: Props) {
   ];
 
   // Sort the allEvents array based on the eventDate property
-  allEvents.sort((a, b) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  allEvents.sort((a: any, b: any) => {
     // Check if either eventDate is not a valid date
-    if (isNaN(Date.parse(a.eventDate)) || isNaN(Date.parse(b.eventDate))) {
+    if (isNaN(Date.parse(a?.eventDate ?? '')) ?? isNaN(Date.parse(b?.eventDate ?? ''))) {
       // If both dates are invalid, return 0 to indicate no change in order. This prevents sorting based on invalid dates
       return 0;
     }
     // Compare the eventDate strings directly to determine the order
-    return a.eventDate > b.eventDate ? -1 : a.eventDate < b.eventDate ? 1 : 0;
+    return (a?.eventDate ?? '') > (b?.eventDate ?? '')
+      ? -1
+      : (a?.eventDate ?? '') < (b?.eventDate ?? '')
+        ? 1
+        : 0;
   });
 
   const schemaEventStatusMap: Record<string, string> = {
@@ -92,18 +105,18 @@ export default async function LiveEvent({ params }: Props) {
   const eventSchema = {
     '@context': 'https://schema.org',
     '@type': 'Event',
-    name: liveEvent.title,
-    description: liveEvent.description,
-    startDate: liveEvent.eventDate,
-    endDate: liveEvent.endDate ?? undefined,
+    name: liveEvent?.title,
+    description: liveEvent?.description,
+    startDate: liveEvent?.eventDate,
+    endDate: liveEvent?.endDate ?? undefined,
     eventStatus: liveEvent.eventStatus
       ? (schemaEventStatusMap[liveEvent.eventStatus] ?? 'https://schema.org/EventScheduled')
       : liveEvent.isCurrentEvent
         ? 'https://schema.org/EventScheduled'
         : 'https://schema.org/EventCompleted',
     eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
-    location: liveEvent.location
-      ? { '@type': 'Place', name: liveEvent.location }
+    location: liveEvent?.location
+      ? { '@type': 'Place', name: liveEvent?.location }
       : { '@type': 'VirtualLocation', url: `https://www.untelevised.media/live-event/${slug}/` },
     image: getSanityOgImageUrl(liveEvent.mainImage),
     organizer: {
@@ -127,11 +140,10 @@ export default async function LiveEvent({ params }: Props) {
         <section className='flex flex-col space-x-4 text-slate-700 lg:flex-row'>
           {/* Image  */}
           <div className='h-auto min-w-max xl:w-full'>
+            {/* Sanity image reference flexibility */}
             <Image
-              src={
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                urlForImage(liveEvent.mainImage as any)?.url() ?? ''
-              }
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              src={urlForImage(liveEvent.mainImage as any)?.url() ?? ''}
               alt='Image Description'
               style={{
                 width: '100%',
@@ -171,28 +183,34 @@ export default async function LiveEvent({ params }: Props) {
                   </span>
                 )}
               </div>
-              <h1 className='w-full text-3xl font-bold'>{liveEvent.title}</h1>
+              <h1 className='w-full text-3xl font-bold'>{liveEvent?.title}</h1>
               {liveEvent.subtitle && (
                 <p className='text-lg text-slate-500 dark:text-slate-400'>{liveEvent.subtitle}</p>
               )}
 
               {/* Location & Dates */}
               <div className='flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400'>
-                {liveEvent.location && <span>ðŸ“ {liveEvent.location}</span>}
-                <span>{formatDate(liveEvent.eventDate || liveEvent._createdAt)}</span>
-                {liveEvent.endDate && <span>â€“ {formatDate(liveEvent.endDate)}</span>}
+                {liveEvent?.location && <span>ðŸ“ {liveEvent?.location}</span>}
+                <span>
+                  {formatDate(liveEvent?.eventDate ?? liveEvent?._createdAt)}
+                </span>
+                {liveEvent?.endDate && (
+                  <span>â€“ {formatDate(liveEvent?.endDate)}</span>
+                )}
               </div>
             </div>
             {/* Description  */}
             <div className='w-full'>
-              <p className='w-full italic lg:text-xs xl:text-base'>{liveEvent.description}</p>
+              <p className='w-full italic lg:text-xs xl:text-base'>
+                {liveEvent?.description}
+              </p>
             </div>
           </div>
         </section>
 
         <SocialShare
           url={`https://untelevised.media/live-event/${slug}`}
-          title={liveEvent.title}
+          title={liveEvent?.title}
         />
 
         <div className='flex flex-col items-center justify-center space-x-4'>
@@ -202,7 +220,7 @@ export default async function LiveEvent({ params }: Props) {
               width='720'
               height='420'
               className='rounded-lg border border-untele bg-slate-700/30'
-              src={`${liveEvent.videoLink}`}
+              src={`${liveEvent?.videoLink}`}
               title='YouTube video player'
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
             />
@@ -239,10 +257,15 @@ export default async function LiveEvent({ params }: Props) {
                           </ClientSideRoute>
                         </>
                       ) : (
-                        <PortableText
-                          value={event.description as Block[]}
-                          components={RichTextComponents}
-                        />
+                        <>
+                          {/* PortableText type compatibility */}
+                          <PortableText
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            value={event.description as any}
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            components={RichTextComponents as any}
+                          />
+                        </>
                       )}
                     </div>
                   </li>
@@ -256,7 +279,9 @@ export default async function LiveEvent({ params }: Props) {
           </div>
           {/* Developments / Story */}
           <div className='mx-auto h-min rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw] lg:w-2/5'>
-            <PortableText value={liveEvent.body} components={RichTextComponents} />
+            {/* @portabletext/react expects optional children; our custom components have required children */}
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            <PortableText value={liveEvent.body} components={RichTextComponents as any} />
             <SourcesPanel sources={liveEvent.sources} methodology={liveEvent.methodology} />
           </div>
         </section>
@@ -287,7 +312,7 @@ export async function generateStaticParams() {
   // Use sanityClient directly to avoid draftMode() call during static generation
   const slugs: LiveEvent[] = await sanityClient.fetch(queryLiveEventStaticParams);
   const slugRoutes = slugs
-    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug.current)
+    ? slugs.filter((item) => item?.slug?.current).map((item) => item.slug?.current ?? '')
     : [];
   return slugRoutes.map((slug) => ({
     slug,

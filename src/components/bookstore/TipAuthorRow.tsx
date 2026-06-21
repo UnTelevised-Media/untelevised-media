@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useCart } from '@/lib/bookstore/cart';
-import type { CheckoutPayload } from '@/lib/bookstore/types';
+import { useCart } from '@/hooks/bookstore/useCart';
+import type { CheckoutPayload } from '@/models/types/bookstore';
 
 interface Author {
   _id: string;
@@ -28,7 +28,9 @@ export default function TipAuthorRow({ author, bookId }: Props) {
   const disabled = !included || amount <= 0;
 
   const handleAddToCart = () => {
-    if (disabled) return;
+    if (disabled) {
+      return;
+    }
     addItem({
       sanityBookId: bookId,
       slug: author.slug?.current ?? author._id,
@@ -44,7 +46,9 @@ export default function TipAuthorRow({ author, bookId }: Props) {
   };
 
   const handleBuyNow = async () => {
-    if (disabled) return;
+    if (disabled) {
+      return;
+    }
     setBuying(true);
     setError(null);
 

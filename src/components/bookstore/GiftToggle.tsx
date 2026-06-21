@@ -5,10 +5,10 @@
 // Only works with Buy Now (not Add to Cart — gifts must be immediate checkout).
 
 import { useState } from 'react';
-import type { GiftOptions } from '@/lib/bookstore/types';
+import type { GiftOptions } from '@/models/types/bookstore';
 
 interface Props {
-  onChange: (options: GiftOptions | null) => void;
+  onChange: (_options: GiftOptions | null) => void;
 }
 
 export default function GiftToggle({ onChange }: Props) {

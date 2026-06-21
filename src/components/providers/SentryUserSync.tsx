@@ -8,7 +8,7 @@ export default function SentryUserSync() {
   const { user, isLoaded } = useUser();
 
   useEffect(() => {
-    if (!isLoaded) return;
+    if (!isLoaded) {return;}
     if (user) {
       Sentry.setUser({
         id: user.id,

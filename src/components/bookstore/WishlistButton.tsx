@@ -4,9 +4,9 @@
 // Mirrors BookmarkButton.tsx using the useWishlist hook.
 
 import { Star } from 'lucide-react';
-import { useWishlist } from '@/hooks/useWishlist';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
-import type { WishlistEntry } from '@/lib/wishlist/storage';
+import { useWishlist } from '@/hooks/bookstore/useWishlist';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
+import type { WishlistEntry } from '@/services/storage/wishlist';
 
 type WishlistButtonProps = Omit<WishlistEntry, 'addedAt'> & {
   className?: string;
@@ -26,13 +26,17 @@ export default function WishlistButton({
   const { trackEvent } = useConsentAwareTracking();
   const saved = isWishlisted(slug);
 
-  const handleToggle = () => {
-    toggle({ slug, title, coverImageUrl, authorName, price });
-    trackEvent(saved ? 'remove_from_wishlist' : 'add_to_wishlist', {
-      item_id: slug,
-      item_name: title,
-      price,
-    });
+  const handleToggle = async () => {
+    try {
+      await toggle({ slug, title, coverImageUrl, authorName, price });
+      trackEvent(saved ? 'remove_from_wishlist' : 'add_to_wishlist', {
+        item_id: slug,
+        item_name: title,
+        price,
+      });
+    } catch (error) {
+      console.error('Failed to toggle wishlist:', error);
+    }
   };
 
   if (!ready) {

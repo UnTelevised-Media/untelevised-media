@@ -1,8 +1,8 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/staff/page.tsx
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import urlForImage from '@/util/urlForImage';
+import type { Author } from '@/models/types/sanity';
+import urlForImage from '@/util/url/urlForImage';
 
 export const metadata: Metadata = {
   title: 'Our Team — UnTelevised Media',
@@ -10,13 +10,15 @@ export const metadata: Metadata = {
 };
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import AuthorLinks from '@/components/global/AuthorLinks';
-import resolveHref from '@/util/resolveHref';
+import resolveHref from '@/util/url/resolveHref';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { queryAllAuthors } from '@/lib/sanity/lib/queries';
 
 export default async function StaffPage() {
   const staff = await getAllStaff();
-  const sortedStaff = staff.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  // Staff objects may have order field for custom sorting
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sortedStaff = staff.sort((a, b) => ((a.order as any) ?? 0) - ((b.order as any) ?? 0));
 
   return (
     <div className='min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100'>
@@ -52,14 +54,13 @@ export default async function StaffPage() {
                   {/* Author Image - Clickable */}
                   <ClientSideRoute route={resolveHref('author', author.slug?.current) ?? ''}>
                     <div className='aspect-square cursor-pointer overflow-hidden'>
+                      {/* Sanity image reference flexibility */}
                       <Image
-                        src={
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          urlForImage(author.image as any)?.url() ?? '/placeholder-avatar.png'
-                        }
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        src={urlForImage(author.image as any)?.url() ?? '/placeholder-avatar.png'}
                         width={400}
                         height={400}
-                        alt={author.name || 'Staff member'}
+                        alt={author.name ?? 'Staff member'}
                         className='h-full w-full object-cover transition-transform group-hover:scale-105'
                       />
                     </div>
@@ -127,7 +128,9 @@ async function getAllStaff(): Promise<Author[]> {
       query: queryAllAuthors,
       tags: ['author'],
     });
-    return staff as Author[];
+    // Safe cast: staff data structure matches Author shape at runtime
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return staff as any[] as Author[];
   } catch (error) {
     console.error('Failed to fetch author:', error);
     return [];

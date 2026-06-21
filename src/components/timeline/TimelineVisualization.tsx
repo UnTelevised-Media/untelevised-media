@@ -11,8 +11,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import TimelineFilters from './TimelineFilters';
 import TimelineNavigation from './TimelineNavigation';
-import urlForImage from '@/util/urlForImage';
-import formatDate from '@/util/formatDate';
+import urlForImage from '@/util/url/urlForImage';
+import formatDate from '@/util/date/formatDate';
+import type { TimelineEvent, TimelineCategory } from '@/models/types/sanity';
 
 interface TimelineVisualizationProps {
   events: TimelineEvent[];
@@ -23,12 +24,12 @@ interface TimelineVisualizationProps {
 
 type ZoomLevel = 'year' | 'month' | 'week' | 'day' | 'hour';
 
-const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
+function TimelineVisualization({
   events,
   categories = [],
   initialZoomLevel = 'month',
   className = '',
-}) => {
+}: TimelineVisualizationProps) {
   const [zoomLevel, setZoomLevel] = useState<ZoomLevel>(initialZoomLevel);
   const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
   const [filteredEvents, setFilteredEvents] = useState<TimelineEvent[]>(events);
@@ -41,7 +42,7 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
   // Sort events by date
   const sortedEvents = useMemo(() => {
     return [...filteredEvents].sort(
-      (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+      (a, b) => new Date(a.eventDate ?? '').getTime() - new Date(b.eventDate ?? '').getTime()
     );
   }, [filteredEvents]);
 
@@ -164,7 +165,7 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
                 >
                   {/* Event Card */}
                   <div
-                    className={`relative cursor-pointer rounded-lg border-2 p-4 transition-all duration-200 hover:scale-105 hover:shadow-lg ${getImportanceStyle(event.importanceLevel)} ${event.isMilestone ? 'ring-2 ring-yellow-400' : ''} `}
+                    className={`relative cursor-pointer rounded-lg border-2 p-4 transition-all duration-200 hover:scale-105 hover:shadow-lg ${getImportanceStyle(event.importanceLevel ?? 'medium')} ${event.isMilestone ? 'ring-2 ring-yellow-400' : ''} `}
                     onClick={() => setSelectedEvent(event)}
                   >
                     {/* Milestone Star */}
@@ -179,7 +180,7 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
                       <div className='relative mb-3 h-32 w-full overflow-hidden rounded'>
                         <Image
                           src={urlForImage(event.mainImage)?.url() ?? ''}
-                          alt={event.mainImage.alt ?? event.title}
+                          alt={event.mainImage.alt ?? event.title ?? 'Event'}
                           fill
                           className='object-cover'
                         />
@@ -189,8 +190,8 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
                     {/* Event Content */}
                     <div className='space-y-2'>
                       <div className='flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400'>
-                        {getEventTypeIcon(event.eventType)}
-                        <span className='capitalize'>{event.eventType}</span>
+                        {getEventTypeIcon(event.eventType ?? 'update')}
+                        <span className='capitalize'>{event.eventType ?? 'update'}</span>
                         {event.location && (
                           <>
                             <MapPin className='h-3 w-3' />
@@ -212,9 +213,10 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
                       {/* Categories */}
                       {event.timelineCategories && event.timelineCategories.length > 0 && (
                         <div className='flex flex-wrap gap-1'>
-                          {event.timelineCategories.slice(0, 2).map((category) => (
+                          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                          {event.timelineCategories.slice(0, 2).map((category: any) => (
                             <Badge key={category._id} variant='secondary' className='text-xs'>
-                              {category.title}
+                              {category.title ?? 'Category'}
                             </Badge>
                           ))}
                         </div>
@@ -261,7 +263,7 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
                   <div className='relative h-48 w-full overflow-hidden rounded'>
                     <Image
                       src={urlForImage(selectedEvent.mainImage)?.url() ?? ''}
-                      alt={selectedEvent.mainImage.alt ?? selectedEvent.title}
+                      alt={selectedEvent.mainImage.alt ?? selectedEvent.title ?? 'Event'}
                       fill
                       className='object-cover'
                     />
@@ -283,7 +285,7 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
                 </div>
 
                 <div className='flex justify-end'>
-                  <Link href={`/timeline/event/${selectedEvent.slug.current}`}>
+                  <Link href={`/timeline/event/${selectedEvent.slug?.current ?? ''}`}>
                     <Button>View Full Details</Button>
                   </Link>
                 </div>
@@ -294,6 +296,6 @@ const TimelineVisualization: React.FC<TimelineVisualizationProps> = ({
       </AnimatePresence>
     </div>
   );
-};
+}
 
 export default TimelineVisualization;

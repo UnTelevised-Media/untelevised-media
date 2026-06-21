@@ -1,8 +1,10 @@
+ 
 'use client';
 // src/components/portal/EditBookModal.tsx
 // In-portal book editor. Slide-over form pre-populated from existing book data.
 
 import { useState, useEffect, useRef, useTransition } from 'react';
+import Image from 'next/image';
 import { X, Pencil, Plus, ChevronDown, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import {
@@ -11,15 +13,15 @@ import {
   uploadDigitalAsset,
   fetchBookGenres,
   createBookGenre,
-} from '@/lib/portal/book-actions';
-import type { SanityBook, SanityBookGenre } from '@/lib/bookstore/types';
+} from '@/server/actions/portal/book';
+import type { SanityBook, SanityBookGenre } from '@/models/types/bookstore';
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
 function blocksToText(blocks: unknown): string {
-  if (!Array.isArray(blocks)) return '';
+  if (!Array.isArray(blocks)) {return '';}
   return (blocks as Array<{ children?: Array<{ text?: string }> }>)
     .map((b) => (b.children ?? []).map((c) => c.text ?? '').join(''))
     .join('\n\n');
@@ -127,14 +129,14 @@ export default function EditBookModal({ book }: Props) {
   // Uses bookRef.current (not book) so a new book object reference from router.refresh()
   // does NOT re-fire this effect and wipe an in-progress file selection.
   useEffect(() => {
-    if (!open) return;
+    if (!open) {return;}
     const b = bookRef.current;
 
     setTitle(b.title);
     setDescription(blocksToText(b.description));
     setStatus(b.status);
     setIsbn(b.isbn ?? '');
-    setPages(b.pages != null ? String(b.pages) : '');
+    setPages(b.pages !== null ? String(b.pages) : '');
     setLanguage(b.language ?? 'en');
     setPublishedAt(b.publishedAt ?? '');
     setEditFormats(
@@ -143,11 +145,11 @@ export default function EditBookModal({ book }: Props) {
         isNew: false,
         formatType: f.formatType,
         price: String(f.price ?? ''),
-        compareAtPrice: f.compareAtPrice != null ? String(f.compareAtPrice) : '',
+        compareAtPrice: f.compareAtPrice !== null ? String(f.compareAtPrice) : '',
         existingAssetPath: f.digitalAsset?.supabaseStoragePath,
         nameYourPrice: f.nameYourPrice ?? false,
-        minimumPrice: f.minimumPrice != null ? String(f.minimumPrice) : '',
-        suggestedPrice: f.suggestedPrice != null ? String(f.suggestedPrice) : '',
+        minimumPrice: f.minimumPrice !== null ? String(f.minimumPrice) : '',
+        suggestedPrice: f.suggestedPrice !== null ? String(f.suggestedPrice) : '',
         stripePriceId: f.stripePriceId ?? '',
         stripeProductId: f.stripeProductId ?? '',
       }))
@@ -169,12 +171,15 @@ export default function EditBookModal({ book }: Props) {
     setGenresLoading(true);
     fetchBookGenres()
       .then(setLocalGenres)
+      .catch((error) => {
+        console.error('Failed to fetch book genres:', error);
+      })
       .finally(() => setGenresLoading(false));
-  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [open]);  
 
   // Close genre dropdown on outside click
   useEffect(() => {
-    if (!genreDropdownOpen) return;
+    if (!genreDropdownOpen) {return;}
     function handler(e: MouseEvent) {
       if (genreDropdownRef.current && !genreDropdownRef.current.contains(e.target as Node)) {
         setGenreDropdownOpen(false);
@@ -223,7 +228,7 @@ export default function EditBookModal({ book }: Props) {
   }
 
   function addFormat() {
-    if (editFormats.length >= 3) return;
+    if (editFormats.length >= 3) {return;}
     setEditFormats((prev) => [...prev, blankNewFormat()]);
     setDigitalFiles((prev) => [...prev, null]);
   }
@@ -310,9 +315,9 @@ export default function EditBookModal({ book }: Props) {
 
         for (let i = 0; i < editFormats.length; i++) {
           const fmt = editFormats[i];
-          if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') continue;
+          if (fmt.formatType !== 'digital' && fmt.formatType !== 'bundle') {continue;}
           const file = pendingDigitalFiles[i];
-          if (!file) continue;
+          if (!file) {continue;}
           const fd = new FormData();
           fd.append('bookId', book._id);
           fd.append('formatKey', fmt.key);
@@ -412,11 +417,11 @@ export default function EditBookModal({ book }: Props) {
                     <div className='flex gap-4'>
                       <div className='relative h-32 w-24 shrink-0 overflow-hidden border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800'>
                         {currentCover ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
+                          <Image
                             src={currentCover}
                             alt='Cover'
-                            className='h-full w-full object-cover'
+                            fill
+                            className='object-cover'
                           />
                         ) : (
                           <div className='flex h-full items-center justify-center'>
@@ -435,9 +440,9 @@ export default function EditBookModal({ book }: Props) {
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const file = e.target.files?.[0] ?? null;
-                            if (!file) return;
+                            if (!file) {return;}
                             setCoverFile(file);
-                            if (coverPreview) URL.revokeObjectURL(coverPreview);
+                            if (coverPreview) {URL.revokeObjectURL(coverPreview);}
                             setCoverPreview(URL.createObjectURL(file));
                             e.target.value = '';
                           }}
@@ -450,7 +455,7 @@ export default function EditBookModal({ book }: Props) {
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 0 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 0 ? f : x)));}
                             e.target.value = '';
                           }}
                         />
@@ -461,7 +466,7 @@ export default function EditBookModal({ book }: Props) {
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 1 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 1 ? f : x)));}
                             e.target.value = '';
                           }}
                         />
@@ -472,7 +477,7 @@ export default function EditBookModal({ book }: Props) {
                           className='fixed left-[-9999px] top-0 opacity-0'
                           onChange={(e) => {
                             const f = e.target.files?.[0];
-                            if (f) setDigitalFiles((p) => p.map((x, idx) => (idx === 2 ? f : x)));
+                            if (f) {setDigitalFiles((p) => p.map((x, idx) => (idx === 2 ? f : x)));}
                             e.target.value = '';
                           }}
                         />

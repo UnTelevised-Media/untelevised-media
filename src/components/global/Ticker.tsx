@@ -30,6 +30,7 @@ const queryArticles = groq`
     _createdAt
   }
   | order(_createdAt desc)
+  [0..49]
 `;
 
 const queryKeyEvent = groq`
@@ -39,9 +40,10 @@ const queryKeyEvent = groq`
     _createdAt
   }
   | order(_createdAt desc)
+  [0..49]
 `;
 
-const Ticker = () => {
+function Ticker() {
   const [allItems, setAllItems] = useState<TickerItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -144,10 +146,18 @@ const Ticker = () => {
       }
     };
 
-    fetchTickerData();
+    fetchTickerData().catch((error) => {
+      console.error('Initial ticker data fetch failed:', error);
+      setError('Failed to load ticker data');
+      setIsLoading(false);
+    });
 
     // Refresh data every 5 minutes to get new content
-    const interval = setInterval(fetchTickerData, 5 * 60 * 1000);
+    const interval = setInterval(() => {
+      fetchTickerData().catch((error) => {
+        console.error('Ticker data refresh failed:', error);
+      });
+    }, 5 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -255,6 +265,6 @@ const Ticker = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Ticker;

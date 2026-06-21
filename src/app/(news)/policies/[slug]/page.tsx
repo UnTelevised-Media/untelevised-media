@@ -1,8 +1,8 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/policies/[slug]/page.tsx
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
+import type { QueryPolicyBySlugResult } from '@/models/types/sanity';
+import RichTextComponents from '@/components/providers/RichTextComponents';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
 import { queryPolicyBySlug } from '@/lib/sanity/lib/queries';
@@ -59,7 +59,7 @@ export default async function Policies({ params }: Props) {
 
             {/* Title */}
             <h1 className='text-4xl font-bold text-slate-900 dark:text-white sm:text-5xl lg:text-6xl'>
-              {policies.title || 'Policy'}
+              {policies.title ?? 'Policy'}
             </h1>
 
             {/* Subtitle */}
@@ -77,7 +77,9 @@ export default async function Policies({ params }: Props) {
       <main className='mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8'>
         <article className='rounded-xl border border-slate-200 bg-white/50 p-8 shadow-lg backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/50 lg:p-12'>
           <div className='prose prose-lg prose-slate dark:prose-invert max-w-none'>
-            <PortableText value={policies.description} components={RichTextComponents} />
+            {/* @portabletext/react expects optional children; our custom components have required children */}
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            <PortableText value={policies.description} components={RichTextComponents as any} />
           </div>
         </article>
 
@@ -110,7 +112,7 @@ export default async function Policies({ params }: Props) {
 }
 
 // Call the Sanity Fetch Function for the Author Information
-async function getPolicyBySlug(slug: string): Promise<Policy | null> {
+async function getPolicyBySlug(slug: string): Promise<QueryPolicyBySlugResult> {
   try {
     // Fetch author data from Sanity
     const { data: policy } = await sanityFetch({
@@ -118,7 +120,7 @@ async function getPolicyBySlug(slug: string): Promise<Policy | null> {
       params: { slug },
       tags: ['policies'],
     });
-    return policy as Policy | null;
+    return policy as QueryPolicyBySlugResult;
   } catch (error) {
     console.error('Failed to fetch policy:', error);
     return null;

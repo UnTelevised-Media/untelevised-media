@@ -1,6 +1,7 @@
 // src/components/seo/StructuredData.tsx
 // Note: plain <script> tags are correct for inline JSON-LD in RSC. next/script is for third-party loading strategies.
-import { getSongArtwork } from '@/util/getSongArtwork';
+import type { Song, MusicArtist, Album } from '@/models/types/sanity';
+import { getSongArtwork } from '@/util/content/getSongArtwork';
 
 interface SongStructuredDataProps {
   song: Song;
@@ -16,11 +17,18 @@ interface AlbumStructuredDataProps {
   songs?: Song[];
 }
 
-export const SongStructuredData = ({ song }: SongStructuredDataProps) => {
-  const artistNames = [
-    song.primaryArtist.stageName ?? song.primaryArtist.name,
-    ...(song.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
-  ];
+function SongStructuredData({ song }: SongStructuredDataProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const primaryArtist = song.primaryArtist as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const featuredArtists = song.featuredArtists as any;
+  const songArtistNames = [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    primaryArtist?.stageName ?? (primaryArtist as any)?.name,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...(featuredArtists?.map((artist: any) => artist?.stageName ?? artist?.name) ?? []),
+  ].filter(Boolean);
+  const artistNames = songArtistNames;
 
   const artworkUrl = getSongArtwork(song);
 
@@ -35,9 +43,12 @@ export const SongStructuredData = ({ song }: SongStructuredDataProps) => {
     inAlbum: song.album
       ? {
           '@type': 'MusicAlbum',
-          name: song.album.title,
-          albumReleaseType: song.album.albumType,
-          datePublished: song.album.releaseDate,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          name: (song.album as any)?.title,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          albumReleaseType: (song.album as any)?.albumType,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          datePublished: (song.album as any)?.releaseDate,
         }
       : undefined,
     datePublished: song.releaseDate,
@@ -50,7 +61,7 @@ export const SongStructuredData = ({ song }: SongStructuredDataProps) => {
       '@type': 'CreativeWork',
       text: song.lyrics,
     },
-    url: `https://www.untelevised.media/lyrics/${song.slug.current}`,
+    url: `https://www.untelevised.media/lyrics/${song.slug?.current ?? ''}`,
   };
 
   return (
@@ -62,9 +73,9 @@ export const SongStructuredData = ({ song }: SongStructuredDataProps) => {
       }}
     ></script>
   );
-};
+}
 
-export const ArtistStructuredData = ({ artist, songs }: ArtistStructuredDataProps) => {
+function ArtistStructuredData({ artist, songs }: ArtistStructuredDataProps) {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'MusicGroup',
@@ -80,7 +91,7 @@ export const ArtistStructuredData = ({ artist, songs }: ArtistStructuredDataProp
         }
       : undefined,
     recordLabel: artist.recordLabel,
-    url: `https://www.untelevised.media/music-artists/${artist.slug.current}`,
+    url: `https://www.untelevised.media/music-artists/${artist.slug?.current ?? ''}`,
     sameAs: [
       artist.website,
       artist.socialMedia?.spotify,
@@ -93,10 +104,11 @@ export const ArtistStructuredData = ({ artist, songs }: ArtistStructuredDataProp
         : undefined,
       artist.socialMedia?.facebook,
     ].filter(Boolean),
-    track: songs?.map((song) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    track: (songs as any)?.map((song: any) => ({
       '@type': 'MusicRecording',
       name: song.title,
-      url: `https://www.untelevised.media/lyrics/${song.slug.current}`,
+      url: `https://www.untelevised.media/lyrics/${song.slug?.current ?? ''}`,
     })),
   };
 
@@ -109,13 +121,20 @@ export const ArtistStructuredData = ({ artist, songs }: ArtistStructuredDataProp
       }}
     ></script>
   );
-};
+}
 
-export const AlbumStructuredData = ({ album, songs }: AlbumStructuredDataProps) => {
-  const artistNames = [
-    album.artist.stageName ?? album.artist.name,
-    ...(album.featuredArtists?.map((artist) => artist.stageName ?? artist.name) ?? []),
-  ];
+function AlbumStructuredData({ album, songs }: AlbumStructuredDataProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const albumArtist = album.artist as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const albumFeaturedArtists = album.featuredArtists as any;
+  const albumArtistNames = [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    albumArtist?.stageName ?? (albumArtist as any)?.name,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...(albumFeaturedArtists?.map((artist: any) => artist?.stageName ?? artist?.name) ?? []),
+  ].filter(Boolean);
+  const artistNames = albumArtistNames;
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -135,14 +154,15 @@ export const AlbumStructuredData = ({ album, songs }: AlbumStructuredDataProps) 
       '@type': 'Person',
       name: producer,
     })),
-    track: songs?.map((song, index) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    track: songs?.map((song: any, index) => ({
       '@type': 'MusicRecording',
       name: song.title,
       position: song.trackNumber ?? index + 1,
-      url: `https://www.untelevised.media/lyrics/${song.slug.current}`,
+      url: `https://www.untelevised.media/lyrics/${song.slug?.current ?? ''}`,
       duration: song.duration ? `PT${song.duration.replace(':', 'M')}S` : undefined,
     })),
-    url: `https://www.untelevised.media/albums/${album.slug.current}`,
+    url: `https://www.untelevised.media/albums/${album.slug?.current ?? ''}`,
   };
 
   return (
@@ -154,9 +174,9 @@ export const AlbumStructuredData = ({ album, songs }: AlbumStructuredDataProps) 
       }}
     ></script>
   );
-};
+}
 
-export const MusicWebsiteStructuredData = () => {
+function MusicWebsiteStructuredData() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -190,13 +210,9 @@ export const MusicWebsiteStructuredData = () => {
       }}
     ></script>
   );
-};
+}
 
-export const BreadcrumbStructuredData = ({
-  items,
-}: {
-  items: Array<{ name: string; url: string }>;
-}) => {
+function BreadcrumbStructuredData({ items }: { items: Array<{ name: string; url: string }> }) {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -217,4 +233,12 @@ export const BreadcrumbStructuredData = ({
       }}
     ></script>
   );
+}
+
+export default SongStructuredData;
+export {
+  ArtistStructuredData,
+  AlbumStructuredData,
+  MusicWebsiteStructuredData,
+  BreadcrumbStructuredData,
 };

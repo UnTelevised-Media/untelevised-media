@@ -3,7 +3,7 @@
 // Role-aware order table: admin / sales / author each get appropriate actions and data visibility.
 
 import React, { useState, useTransition } from 'react';
-import type { Order, OrderItem, OrderStatus } from '@/lib/bookstore/types';
+import type { Order, OrderItem, OrderStatus } from '@/models/types/bookstore';
 import type { PortalRole } from '@/lib/auth/roles-utils';
 
 export interface ShippingAddress {
@@ -115,8 +115,8 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
 
   // Sort
   const sorted = [...localOrders].sort((a, b) => {
-    if (sortKey === 'date_asc') return a.created_at.localeCompare(b.created_at);
-    if (sortKey === 'total_desc') return b.total_cents - a.total_cents;
+    if (sortKey === 'date_asc') {return a.created_at.localeCompare(b.created_at);}
+    if (sortKey === 'total_desc') {return b.total_cents - a.total_cents;}
     return b.created_at.localeCompare(a.created_at); // date_desc default
   });
 
@@ -124,21 +124,21 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
   const filtered = sorted.filter((o) => {
     // Quick filter takes precedence over status dropdown
     if (quickFilter === 'needs_shipping') {
-      if (!['paid', 'processing'].includes(o.status)) return false;
-      if (!o.items.some((i) => !i.is_digital && i.sanity_format_type !== 'tip')) return false;
+      if (!['paid', 'processing'].includes(o.status)) {return false;}
+      if (!o.items.some((i) => !i.is_digital && i.sanity_format_type !== 'tip')) {return false;}
     } else if (quickFilter === 'digital') {
-      if (!o.items.some((i) => i.is_digital)) return false;
+      if (!o.items.some((i) => i.is_digital)) {return false;}
     } else if (quickFilter === 'tips') {
-      if (!o.items.some((i) => i.sanity_format_type === 'tip')) return false;
+      if (!o.items.some((i) => i.sanity_format_type === 'tip')) {return false;}
     } else if (quickFilter === 'refunded') {
-      if (o.status !== 'refunded') return false;
+      if (o.status !== 'refunded') {return false;}
     } else {
       // 'all' — apply status dropdown
-      if (statusFilter !== 'all' && o.status !== statusFilter) return false;
+      if (statusFilter !== 'all' && o.status !== statusFilter) {return false;}
     }
 
     const q = search.toLowerCase();
-    if (!q) return true;
+    if (!q) {return true;}
     return (
       o.order_number.toLowerCase().includes(q) ||
       (o.customer_email ?? '').toLowerCase().includes(q) ||
@@ -219,7 +219,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
 
   function copyAddress(order: OrderWithItems) {
     const a = order.shipping_address;
-    if (!a) return;
+    if (!a) {return;}
     const lines = [
       order.customer_name ?? order.customer_email ?? '',
       a.line1,
@@ -229,10 +229,15 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
     ]
       .filter(Boolean)
       .join('\n');
-    navigator.clipboard.writeText(lines).then(() => {
-      setCopiedAddress(order.id);
-      setTimeout(() => setCopiedAddress(null), 2000);
-    });
+    navigator.clipboard
+      .writeText(lines)
+      .then(() => {
+        setCopiedAddress(order.id);
+        setTimeout(() => setCopiedAddress(null), 2000);
+      })
+      .catch((error) => {
+        console.error('Failed to copy address to clipboard:', error);
+      });
   }
 
   return (
@@ -578,7 +583,9 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                                       `Cancel order ${order.order_number}? This cannot be undone.`
                                     )
                                   ) {
-                                    updateStatus(order.id, 'cancelled');
+                                    updateStatus(order.id, 'cancelled').catch((error) => {
+                                      console.error('Failed to cancel order:', error);
+                                    });
                                   }
                                 }}
                                 disabled={isUpdating}
@@ -592,7 +599,9 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                               <button
                                 onClick={() => {
                                   if (confirm(`Refund order ${order.order_number}?`)) {
-                                    updateStatus(order.id, 'refunded');
+                                    updateStatus(order.id, 'refunded').catch((error) => {
+                                      console.error('Failed to refund order:', error);
+                                    });
                                   }
                                 }}
                                 disabled={isUpdating}
@@ -723,7 +732,7 @@ export default function OrdersTable({ orders, role, earningsByOrderId }: Props) 
                               {showAuthorCut &&
                                 (() => {
                                   const earning = earningsByOrderId?.[order.id];
-                                  if (!earning) return null;
+                                  if (!earning) {return null;}
                                   return (
                                     <div>
                                       <p className='mb-2 text-[10px] font-black uppercase tracking-widest text-slate-400'>

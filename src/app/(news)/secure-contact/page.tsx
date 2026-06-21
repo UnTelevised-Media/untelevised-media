@@ -1,11 +1,10 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/secure-contact/page.tsx
 'use client';
 
 import React, { useState } from 'react';
 import { Shield, Lock, Eye, AlertTriangle } from 'lucide-react';
-import { TurnstileWidget } from '@/components/global/TurnstileWidget';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import TurnstileWidget from '@/components/global/TurnstileWidget';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 export default function SecureContactPage() {
   const [formData, setFormData] = useState({

@@ -1,11 +1,10 @@
-/* eslint-disable react/function-component-definition */
 // src/app/(user)/whistleblower/page.tsx
 'use client';
 
 import React, { useState } from 'react';
 import { Eye, Shield, Lock, AlertTriangle, FileText } from 'lucide-react';
-import { TurnstileWidget } from '@/components/global/TurnstileWidget';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import TurnstileWidget from '@/components/global/TurnstileWidget';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 export default function WhistleblowerPage() {
   const [formData, setFormData] = useState({

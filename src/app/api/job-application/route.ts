@@ -1,7 +1,8 @@
+﻿/* eslint-disable import/prefer-default-export */
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sanityClient from '@/lib/sanity/lib/client';
-import { checkSubmissionRate } from '@/lib/bookstore/ratelimit';
+import { checkSubmissionRate } from '@/services/bookstore/ratelimit';
 
 const VALID_POSITIONS = [
   'article-writer',
@@ -68,12 +69,11 @@ const JobApplicationSchema = z.object({
   additionalInfo: z.string().max(2000).trim().optional(),
 });
 
-// eslint-disable-next-line import/prefer-default-export
 export async function POST(request: NextRequest) {
   const rl = await checkSubmissionRate(request);
   if (rl.limited) {
     return NextResponse.json(
-      { error: 'Too many requests — please wait a moment before submitting again' },
+      { error: 'Too many requests â€” please wait a moment before submitting again' },
       { status: 429 }
     );
   }

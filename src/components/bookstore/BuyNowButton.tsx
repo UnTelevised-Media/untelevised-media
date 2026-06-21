@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import * as Sentry from '@sentry/nextjs';
-import { useConsentAwareTracking } from '@/components/analytics/ConsentAwareAnalytics';
+import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 import type {
   SanityBook,
   SanityBookFormat,
   CheckoutPayload,
   GiftOptions,
-} from '@/lib/bookstore/types';
-import { getStripeIdForFormat } from '@/lib/bookstore/stripeUtils';
+} from '@/models/types/bookstore';
+import getStripeIdForFormat from '@/util/stripe/stripeUtils';
 
 interface Props {
   book: SanityBook;

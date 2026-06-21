@@ -1,10 +1,11 @@
+﻿/* eslint-disable import/prefer-default-export */
 // src/app/api/careers-application/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sanityClient from '@/lib/sanity/lib/client';
-import { verifyCaptcha } from '@/lib/captcha';
+import verifyCaptcha from '@/services/captcha';
 
-// Server-side schema — mirrors jobApplicationSchema without File refinements
+// Server-side schema â€” mirrors jobApplicationSchema without File refinements
 const serverSchema = z.object({
   fullName: z.string().min(2).max(100),
   email: z.string().email(),
@@ -70,7 +71,7 @@ export async function POST(request: NextRequest) {
         };
       } catch (uploadErr) {
         console.error('[careers-application] Resume upload failed:', uploadErr);
-        // Non-fatal — continue without resume
+        // Non-fatal â€” continue without resume
       }
     }
 
@@ -80,9 +81,9 @@ export async function POST(request: NextRequest) {
       lastName,
       email: parsed.data.email,
       positionsOfInterest: [parsed.data.position],
-      portfolioWebsite: parsed.data.portfolioUrl || undefined,
+      portfolioWebsite: parsed.data.portfolioUrl ?? undefined,
       experienceDescription: parsed.data.coverLetter,
-      additionalInfo: `LinkedIn: ${parsed.data.linkedinUrl || 'N/A'} | Source: ${parsed.data.howDidYouFindUs}`,
+      additionalInfo: `LinkedIn: ${parsed.data.linkedinUrl ?? 'N/A'} | Source: ${parsed.data.howDidYouFindUs}`,
       availability: 'flexible',
       ...(resumeAsset ? { resume: resumeAsset } : {}),
       submittedAt: new Date().toISOString(),
