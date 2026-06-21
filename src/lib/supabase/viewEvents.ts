@@ -128,13 +128,14 @@ export const getTrendingArticles = unstable_cache(
   async (daysBack: number = 7, limit: number = 31): Promise<TrendingArticle[]> => {
     const client = getServerClient();
 
-    const { data, error } = await client.rpc<GetTrendingArticlesResponse>(
-      'get_trending_articles',
-      {
-        days_back: daysBack,
-        result_limit: limit,
-      }
-    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data, error } = (await (client as any).rpc('get_trending_articles', {
+      days_back: daysBack,
+      result_limit: limit,
+    })) as {
+      data: GetTrendingArticlesResponse[] | null;
+      error: { code: string; message: string; details: string } | null;
+    };
 
     if (error) {
       console.error('[getTrendingArticles] Supabase RPC error:', {
@@ -169,13 +170,14 @@ export const getMostReadByCategory = unstable_cache(
   ): Promise<TrendingArticle[]> => {
     const client = getServerClient();
 
-    const { data, error } = await client.rpc<GetTrendingArticlesResponse>(
-      'get_trending_articles',
-      {
-        days_back: daysBack,
-        result_limit: limit,
-      }
-    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data, error } = (await (client as any).rpc('get_trending_articles', {
+      days_back: daysBack,
+      result_limit: limit,
+    })) as {
+      data: GetTrendingArticlesResponse[] | null;
+      error: { code: string; message: string; details: string } | null;
+    };
 
     if (error) {
       console.error('[getMostReadByCategory] Query error:', {
