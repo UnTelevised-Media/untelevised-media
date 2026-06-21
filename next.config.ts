@@ -57,6 +57,7 @@ const nextConfig: NextConfig = {
     // Explicit breakpoints eliminate unused transform sizes.
     // Defaults (8 device + 8 image = 16 sizes) generate far more variants than
     // the site actually needs; these 9 cover all real use cases.
+    loaderFile: './src/lib/sanity/imageLoader.ts',
     deviceSizes: [640, 828, 1080, 1200, 1920],
     imageSizes: [64, 128, 256, 384],
     remotePatterns: [
