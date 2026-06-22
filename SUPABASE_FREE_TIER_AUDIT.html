@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnTelevised Media - Supabase Free Tier Audit Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); overflow: hidden; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 40px; text-align: center; }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        header p { font-size: 1.1em; opacity: 0.9; }
+        main { padding: 40px; }
+        .toc { background: #f8f9fa; padding: 30px; border-radius: 8px; margin-bottom: 40px; border-left: 4px solid #667eea; }
+        .toc h2 { margin-bottom: 20px; color: #667eea; }
+        .toc ul { list-style: none; columns: 2; }
+        .toc li { margin-bottom: 10px; }
+        .toc a { color: #667eea; text-decoration: none; }
+        section { margin-bottom: 60px; scroll-margin-top: 80px; }
+        section h2 { color: #667eea; font-size: 2em; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 3px solid #667eea; }
+        section h3 { color: #764ba2; font-size: 1.4em; margin-top: 30px; margin-bottom: 15px; }
+        .metric-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 8px; display: inline-block; margin: 15px 15px 15px 0; min-width: 240px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3); }
+        .metric-card .value { font-size: 2.2em; font-weight: bold; margin-bottom: 5px; }
+        .metric-card .label { font-size: 0.95em; opacity: 0.95; }
+        .metric-card .details { font-size: 0.85em; margin-top: 10px; opacity: 0.85; }
+        .progress-bar { width: 100%; height: 25px; background: #e0e0e0; border-radius: 4px; overflow: hidden; margin: 15px 0; }
+        .progress-fill { height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em; }
+        .fill-safe { background: linear-gradient(90deg, #28a745 0%, #20c997 100%); }
+        .fill-warning { background: linear-gradient(90deg, #ffc107 0%, #ff9800 100%); }
+        .fill-danger { background: linear-gradient(90deg, #dc3545 0%, #ff6b6b 100%); }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden; }
+        th { background: #667eea; color: white; padding: 15px; text-align: left; font-weight: 600; }
+        td { padding: 12px 15px; border-bottom: 1px solid #eee; }
+        tr:hover { background: #f9f9f9; }
+        .alert { padding: 15px; border-radius: 4px; margin: 15px 0; border-left: 4px solid; }
+        .alert-success { background: #d4edda; border-left-color: #28a745; color: #155724; }
+        .alert-warning { background: #fff3cd; border-left-color: #ffc107; color: #664d03; }
+        .alert-danger { background: #f8d7da; border-left-color: #dc3545; color: #842029; }
+        .grid-card { background: #f8f9fa; border: 1px solid #ddd; padding: 20px; border-radius: 8px; border-left: 4px solid #667eea; }
+        ul, ol { margin-left: 20px; margin-top: 10px; margin-bottom: 15px; }
+        li { margin-bottom: 8px; }
+        footer { background: #f8f9fa; padding: 30px 40px; text-align: center; color: #666; border-top: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🗄️ Supabase Free Tier Audit</h1>
+            <p>Multi-Project Database Usage Analysis</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Generated: June 21, 2026 | 2 Active Projects</p>
+        </header>
+
+        <main>
+            <div class="toc">
+                <h2>📋 Table of Contents</h2>
+                <ul>
+                    <li><a href="#executive">Executive Summary</a></li>
+                    <li><a href="#database">Database Operations</a></li>
+                    <li><a href="#edge-functions">Edge Functions</a></li>
+                    <li><a href="#storage">Storage & Bandwidth</a></li>
+                    <li><a href="#scaling">Scaling Analysis</a></li>
+                    <li><a href="#upgrade-path">Upgrade Path</a></li>
+                </ul>
+            </div>
+
+            <!-- EXECUTIVE SUMMARY -->
+            <section id="executive">
+                <h2>🎯 Executive Summary</h2>
+
+                <div class="alert alert-success">
+                    <strong>✅ Excellent Free Tier Utilization</strong> — Using <0.5% of database operation limits with massive headroom for growth.
+                </div>
+
+                <h3>Current Usage Dashboard</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div class="metric-card">
+                        <div class="value">3,700</div>
+                        <div class="label">Monthly DB Operations</div>
+                        <div class="details">of 500K free (0.74%)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">75</div>
+                        <div class="label">Monthly Edge Function Calls</div>
+                        <div class="details">of 500K free (0.015%)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">381 MB</div>
+                        <div class="label">Storage Usage</div>
+                        <div class="details">of 1 GB free (38.1%)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">1-2</div>
+                        <div class="label">Team Seats</div>
+                        <div class="details">3 free (safe)</div>
+                    </div>
+                </div>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li><strong>Database Operations:</strong> 3,700/month (0.74% of 500K) — Safe until 500K visitors</li>
+                    <li><strong>Edge Functions:</strong> 75/month (0.015% of 500K) — Negligible usage</li>
+                    <li><strong>Storage:</strong> 381 MB (38% of 1 GB) — Safe for 13+ months at current growth</li>
+                    <li><strong>Realtime:</strong> 0 concurrent users (0% of 250) — Not used</li>
+                    <li><strong>Team Seats:</strong> 2 users (1 free seat available) — No cost</li>
+                </ul>
+
+                <h3>Primary Bottleneck at Scale</h3>
+                <div class="alert alert-warning">
+                    <strong>⚠️ View Tracking Dominates Database Operations</strong> — Will exceed free tier at approximately <strong>250K monthly visitors</strong>.
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Current: 1,349 views = ~2,900 ops/month (1,349 INSERTs + 1,349 UPDATEs)</li>
+                        <li>At 250K visitors: 250,000 INSERTs + 250,000 UPDATEs = 500,001 ops (exceeds 500K limit)</li>
+                        <li>Recommendation: Upgrade to Pro ($25/month) at 100K visitors for headroom</li>
+                    </ul>
+                </div>
+
+                <h3>Two Active Projects</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Purpose</th>
+                            <th>Primary Table</th>
+                            <th>Current Ops/Month</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>untelevised-shop</strong></td>
+                            <td>Bookstore e-commerce</td>
+                            <td>orders, customers, digital_downloads</td>
+                            <td>~800 ops</td>
+                        </tr>
+                        <tr>
+                            <td><strong>untelevised-live</strong></td>
+                            <td>View tracking & membership</td>
+                            <td>view_count, members</td>
+                            <td>~2,900 ops</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- DATABASE OPERATIONS -->
+            <section id="database">
+                <h2>⚡ Database Operations (500K/month free)</h2>
+
+                <h3>Current Usage: 3,700/month (0.74%)</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill fill-safe" style="width: 0.74%;">0.74%</div>
+                </div>
+
+                <h3>Operation Breakdown</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operation</th>
+                            <th>Table</th>
+                            <th>Frequency</th>
+                            <th>Monthly Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>View Tracking (INSERT)</strong></td>
+                            <td>view_count</td>
+                            <td>1 per unique visitor per session</td>
+                            <td>1,349</td>
+                        </tr>
+                        <tr>
+                            <td><strong>View Tracking (UPDATE)</strong></td>
+                            <td>view_count</td>
+                            <td>Daily batch IP hashing</td>
+                            <td>1,349</td>
+                        </tr>
+                        <tr>
+                            <td>Trending Articles (SELECT)</td>
+                            <td>view_count (RPC)</td>
+                            <td>Cached 5 minutes</td>
+                            <td>~200</td>
+                        </tr>
+                        <tr>
+                            <td>Bookstore Orders (mixed)</td>
+                            <td>orders, order_items</td>
+                            <td>~5-15 checkouts/month</td>
+                            <td>~300</td>
+                        </tr>
+                        <tr>
+                            <td>Membership Updates</td>
+                            <td>members</td>
+                            <td>Stripe webhook</td>
+                            <td>~50-100</td>
+                        </tr>
+                        <tr>
+                            <td>Bookstore Customers</td>
+                            <td>customers, addresses</td>
+                            <td>New customer registration</td>
+                            <td>~20-50</td>
+                        </tr>
+                        <tr>
+                            <td>Downloads & Audits</td>
+                            <td>digital_downloads, audit_logs</td>
+                            <td>Download tracking</td>
+                            <td>~150-200</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Scaling Projection</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Monthly Visitors</th>
+                            <th>DB Operations</th>
+                            <th>% of 500K</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.3K (current)</td>
+                            <td>3,700</td>
+                            <td>0.74%</td>
+                            <td><span style="background: #d4edda; padding: 4px 8px; border-radius: 3px; color: #155724; font-weight: 600;">Safe</span></td>
+                            <td>Continue free</td>
+                        </tr>
+                        <tr>
+                            <td>10K</td>
+                            <td>23,800</td>
+                            <td>4.8%</td>
+                            <td><span style="background: #d4edda; padding: 4px 8px; border-radius: 3px; color: #155724; font-weight: 600;">Safe</span></td>
+                            <td>Continue free</td>
+                        </tr>
+                        <tr>
+                            <td>50K</td>
+                            <td>115,800</td>
+                            <td>23.2%</td>
+                            <td><span style="background: #d4edda; padding: 4px 8px; border-radius: 3px; color: #155724; font-weight: 600;">Safe</span></td>
+                            <td>Monitor</td>
+                        </tr>
+                        <tr>
+                            <td>100K</td>
+                            <td>230,800</td>
+                            <td>46.2%</td>
+                            <td><span style="background: #d4edda; padding: 4px 8px; border-radius: 3px; color: #155724; font-weight: 600;">Safe</span></td>
+                            <td>Prepare upgrade</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>250K</strong></td>
+                            <td><strong>576,000</strong></td>
+                            <td><strong>115.2%</strong></td>
+                            <td><span style="background: #f8d7da; padding: 4px 8px; border-radius: 3px; color: #842029; font-weight: 600;">EXCEEDS</span></td>
+                            <td><strong>MUST UPGRADE</strong></td>
+                        </tr>
+                        <tr>
+                            <td>500K</td>
+                            <td>1,151,000</td>
+                            <td>230.2%</td>
+                            <td><span style="background: #f8d7da; padding: 4px 8px; border-radius: 3px; color: #842029; font-weight: 600;">FAR EXCEEDS</span></td>
+                            <td>Enterprise plan</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Risk Assessment</h3>
+                <div class="alert alert-warning">
+                    <strong>⚠️ Risk Level: LOW (Current) → MEDIUM (At 100K visitors)</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Safe until 100K visitors (46% of limit)</li>
+                        <li>Begin upgrade planning at 100K visitors</li>
+                        <li>Must upgrade to Pro at 250K visitors</li>
+                        <li>Pro plan ($25/month) provides 4x headroom (2M operations/month)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- EDGE FUNCTIONS -->
+            <section id="edge-functions">
+                <h2>🌍 Edge Functions (500K invocations/month)</h2>
+
+                <h3>Current Usage: 75/month (0.015%)</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill fill-safe" style="width: 0.015%;"></div>
+                </div>
+
+                <h3>Active Edge Functions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Function</th>
+                            <th>Trigger</th>
+                            <th>Frequency</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>stripe-membership-webhook</strong></td>
+                            <td>Stripe webhook</td>
+                            <td>~15-45/month (subscription events)</td>
+                            <td>1 UPSERT per call</td>
+                        </tr>
+                        <tr>
+                            <td><strong>batch-geolocate-views</strong></td>
+                            <td>Daily cron (midnight CST)</td>
+                            <td>30/month (1/day)</td>
+                            <td>~1,349 UPDATEs per call</td>
+                        </tr>
+                        <tr>
+                            <td>get-trending-articles</td>
+                            <td>HTTP GET (cached 5 min)</td>
+                            <td>~30-150/month</td>
+                            <td>1 SELECT per call</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Function Efficiency</h3>
+                <div class="alert alert-success">
+                    <strong>✅ Excellent Edge Function Strategy</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li><strong>Batch geolocation:</strong> Efficient processing of up to 5,000 rows/run</li>
+                        <li><strong>Stripe webhook:</strong> Lightweight verification + upsert operation</li>
+                        <li><strong>Trending query:</strong> Cached heavily (5-min Next.js cache reduces repeats)</li>
+                        <li><strong>Combined cost:</strong> Negligible (0.015% of 500K free tier limit)</li>
+                    </ul>
+                </div>
+
+                <h3>Risk Assessment</h3>
+                <div class="alert alert-success">
+                    <strong>✅ Risk Level: NEGLIGIBLE</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Edge function invocations driven by events, not visitor count</li>
+                        <li>Would need 1M+ errors/month or 1M+ subscription events to hit limit</li>
+                        <li>Current architecture is optimal and unlikely to change</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- STORAGE -->
+            <section id="storage">
+                <h2>💾 Storage & Bandwidth (1 GB free)</h2>
+
+                <h3>Current Usage: 381 MB (38.1%)</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill fill-safe" style="width: 38.1%;">38.1%</div>
+                </div>
+
+                <h3>Storage Breakdown</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bucket</th>
+                            <th>Purpose</th>
+                            <th>Current</th>
+                            <th>Growth/Month</th>
+                            <th>At Limit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>digital-books</strong></td>
+                            <td>Ebook files (PDF, EPUB, MOBI)</td>
+                            <td>375 MB</td>
+                            <td>~50 MB (2 books × 25 MB)</td>
+                            <td>Month 13</td>
+                        </tr>
+                        <tr>
+                            <td><strong>book-covers</strong></td>
+                            <td>Cover images</td>
+                            <td>6 MB</td>
+                            <td>~4 MB (2 books × 2 formats)</td>
+                            <td>Year 2+</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Storage Growth Timeline</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Books</th>
+                            <th>Storage Used</th>
+                            <th>% of 1GB</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Month 0</td>
+                            <td>15</td>
+                            <td>381 MB</td>
+                            <td>38.1%</td>
+                            <td>✅ Safe</td>
+                        </tr>
+                        <tr>
+                            <td>Month 6</td>
+                            <td>27</td>
+                            <td>675 MB</td>
+                            <td>67.5%</td>
+                            <td>✅ Safe</td>
+                        </tr>
+                        <tr>
+                            <td>Month 12</td>
+                            <td>39</td>
+                            <td>975 MB</td>
+                            <td>97.5%</td>
+                            <td>⚠️ Approaching</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>Month 13</strong></td>
+                            <td><strong>41</strong></td>
+                            <td><strong>1,025 MB</strong></td>
+                            <td><strong>102.5%</strong></td>
+                            <td><strong>❌ EXCEEDS</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Download Bandwidth</h3>
+                <div class="alert alert-success">
+                    <strong>✅ Bandwidth Usage: Minimal</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Free tier includes 2 GB/month bandwidth</li>
+                        <li>Current usage: ~100 MB/month (5 book downloads × 20 MB)</li>
+                        <li>Utilization: 5% of free tier limit</li>
+                        <li>Safe projection: 400x current growth before hitting limit</li>
+                    </ul>
+                </div>
+
+                <h3>Risk Assessment</h3>
+                <div class="alert alert-warning">
+                    <strong>⚠️ Risk Level: LOW (now) → MEDIUM (Month 12-13)</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Safe for next 13 months at current 2 books/month growth</li>
+                        <li>Plan storage upgrade at Month 6 (before hitting limit)</li>
+                        <li>Pro plan ($25/month) includes 100 GB storage (125x increase)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SCALING -->
+            <section id="scaling">
+                <h2>📈 Scaling Analysis</h2>
+
+                <h3>The View Tracking Formula</h3>
+                <div class="alert alert-success">
+                    <strong>View tracking generates 2 database operations per visitor:</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li><strong>INSERT:</strong> Record view in view_count table (from browser)</li>
+                        <li><strong>UPDATE:</strong> Hash IP during daily batch job</li>
+                        <li><strong>Formula:</strong> Monthly visitors × 2 = database operations from view tracking</li>
+                    </ul>
+                </div>
+
+                <h3>Complete Scaling Table</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>Monthly Visitors</th>
+                            <th>DB Ops</th>
+                            <th>% of Limit</th>
+                            <th>Status</th>
+                            <th>Recommended Plan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Current</td>
+                            <td>1,349</td>
+                            <td>3,700</td>
+                            <td>0.74%</td>
+                            <td>✅ Excellent</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td>Early Growth</td>
+                            <td>50,000</td>
+                            <td>115,800</td>
+                            <td>23.2%</td>
+                            <td>✅ Safe</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td>Rapid Growth</td>
+                            <td>100,000</td>
+                            <td>230,800</td>
+                            <td>46.2%</td>
+                            <td>✅ Safe</td>
+                            <td>Pro ($25/mo)</td>
+                        </tr>
+                        <tr style="background: #fff3cd;">
+                            <td><strong>Scale Limit</strong></td>
+                            <td><strong>250,000</strong></td>
+                            <td><strong>576,000</strong></td>
+                            <td><strong>115.2%</strong></td>
+                            <td><strong>⚠️ Exceeds</strong></td>
+                            <td><strong>Pro ($25/mo)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Enterprise</td>
+                            <td>500,000+</td>
+                            <td>1,151,000+</td>
+                            <td>230%+</td>
+                            <td>❌ Far exceeds</td>
+                            <td>Business (Custom)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- UPGRADE PATH -->
+            <section id="upgrade-path">
+                <h2>💳 Upgrade Path & Costs</h2>
+
+                <h3>Free vs Pro vs Business Comparison</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Free</th>
+                            <th>Pro</th>
+                            <th>Business</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Database Operations</strong></td>
+                            <td>500K/mo</td>
+                            <td>2M/mo</td>
+                            <td>Custom</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Edge Functions</strong></td>
+                            <td>500K/mo</td>
+                            <td>2M/mo</td>
+                            <td>Custom</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Storage</strong></td>
+                            <td>1 GB</td>
+                            <td>100 GB</td>
+                            <td>Custom</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Team Seats</strong></td>
+                            <td>1 free</td>
+                            <td>Unlimited</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cost/Project/Month</strong></td>
+                            <td>$0</td>
+                            <td>$25</td>
+                            <td>$100+</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cost for 2 Projects</strong></td>
+                            <td>$0</td>
+                            <td>$50</td>
+                            <td>$200+</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Recommended Upgrade Timeline</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+                    <div class="grid-card">
+                        <h4>Phase 1: Continue Free (Now)</h4>
+                        <div style="margin: 15px 0;">Up to <strong>100K visitors/month</strong></div>
+                        <div style="color: #666; font-size: 0.95em;">Both projects remain on free tier. 46% database headroom.</div>
+                    </div>
+                    <div class="grid-card">
+                        <h4>Phase 2: Upgrade to Pro</h4>
+                        <div style="margin: 15px 0;">At <strong>100K-250K visitors</strong></div>
+                        <div style="color: #666; font-size: 0.95em;"><strong>Cost:</strong> $50/month (both projects). <strong>Gives:</strong> 4x database headroom.</div>
+                    </div>
+                    <div class="grid-card">
+                        <h4>Phase 3: Enterprise</h4>
+                        <div style="margin: 15px 0;">At <strong>500K+ visitors</strong></div>
+                        <div style="color: #666; font-size: 0.95em;">Custom business plan (typically $100+/month). Contact sales.</div>
+                    </div>
+                </div>
+
+                <h3>Cost Projection</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Visitor Growth</th>
+                            <th>Plan</th>
+                            <th>Monthly Cost</th>
+                            <th>Annual Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2026 (Current)</td>
+                            <td>~1.3K-10K/month</td>
+                            <td>Free</td>
+                            <td>$0</td>
+                            <td>$0</td>
+                        </tr>
+                        <tr>
+                            <td>2027</td>
+                            <td>~50K-100K/month</td>
+                            <td>Free → Pro (Q3)</td>
+                            <td>$0-50</td>
+                            <td>$0-300</td>
+                        </tr>
+                        <tr>
+                            <td>2028+</td>
+                            <td>~100K-250K/month</td>
+                            <td>Pro</td>
+                            <td>$50</td>
+                            <td>$600</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Multi-Project Consideration</h3>
+                <div class="alert alert-warning">
+                    <strong>⚠️ Two Projects = Doubled Costs</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Free tier: $0 × 2 projects = $0/month</li>
+                        <li>Pro tier: $25 × 2 projects = $50/month</li>
+                        <li><strong>Alternative:</strong> Consolidate into single project (saves $25/month)</li>
+                        <li><strong>Tradeoff:</strong> Mixed concerns (bookstore + analytics in same DB)</li>
+                    </ul>
+                </div>
+
+                <h3>Pre-Upgrade Recommendations</h3>
+                <ul>
+                    <li><strong>Immediately:</strong> Monitor view_count table row growth (indicator of visitor growth)</li>
+                    <li><strong>At 50K visitors:</strong> Optimize batch-geolocate-views function (batch UPDATE instead of 5K individual UPDATEs)</li>
+                    <li><strong>At 100K visitors:</strong> Prepare to upgrade Pro plan ($50/month for both projects)</li>
+                    <li><strong>At 250K visitors:</strong> Evaluate consolidation or Business plan options</li>
+                </ul>
+            </section>
+
+            <!-- SUMMARY -->
+            <section style="background: #f8f9fa; padding: 30px; border-radius: 8px; margin-top: 40px;">
+                <h2 style="border: none; color: #667eea; margin-top: 0;">✅ Final Summary</h2>
+
+                <div class="alert alert-success">
+                    <strong>Overall Assessment: EXCELLENT</strong> — Supabase free tier provides exceptional headroom for current and near-term growth.
+                </div>
+
+                <h3>Key Statistics</h3>
+                <ul>
+                    <li><strong>Database utilization:</strong> 0.74% (133x headroom)</li>
+                    <li><strong>Edge functions:</strong> 0.015% (6,666x headroom)</li>
+                    <li><strong>Storage:</strong> 38.1% (13 months before limit)</li>
+                    <li><strong>Team seats:</strong> 2 of 3 (1 free seat available)</li>
+                </ul>
+
+                <h3>Safe Growth Levels</h3>
+                <ul>
+                    <li><strong>Free tier safe until:</strong> 100K monthly visitors</li>
+                    <li><strong>Pro tier safe until:</strong> 400K monthly visitors</li>
+                    <li><strong>Years of runway:</strong> 18-24 months before upgrade needed</li>
+                </ul>
+
+                <h3>No Immediate Action Required</h3>
+                <div class="alert alert-success">
+                    Continue on free tier. No upgrades needed until reaching 100K+ monthly visitors. When that happens, Pro plan ($50/month for both projects) extends runway to 400K visitors.
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p><strong>UnTelevised Media - Supabase Free Tier Audit</strong></p>
+            <p>Generated: June 21, 2026 | Multi-project analysis complete</p>
+        </footer>
+    </div>
+</body>
+</html>
