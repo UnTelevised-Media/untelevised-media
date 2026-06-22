@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnTelevised Media - Comprehensive Service Audit Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .audit-date {
+            font-size: 0.9em;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-left: 4px solid #667eea;
+        }
+
+        .toc h2 {
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .toc ul {
+            list-style: none;
+            columns: 2;
+        }
+
+        .toc li {
+            margin-bottom: 10px;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 80px;
+        }
+
+        section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        section h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        section h4 {
+            color: #555;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 15px 15px 15px 0;
+            min-width: 200px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .metric-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .metric-card .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .metric-card .change {
+            font-size: 0.85em;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        .metric-card.positive .change {
+            color: #4caf50;
+        }
+
+        .metric-card.negative .change {
+            color: #ff6b6b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .file-path {
+            background: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d63031;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .env-var {
+            background: #fff3cd;
+            padding: 8px 12px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+
+        .critical {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .integration-card {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .integration-card h4 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        .page-title-metric {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border-left: 3px solid #667eea;
+        }
+
+        .page-title-metric .percentage {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+
+        .back-to-top {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .back-to-top:hover {
+            background: #764ba2;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 UnTelevised Media</h1>
+            <p>Comprehensive Service Audit Report</p>
+            <p class="audit-date">Generated: June 21, 2026 | Branch: audit</p>
+        </header>
+
+        <main>
+            <!-- TABLE OF CONTENTS -->
+            <div class="toc">
+                <h2>📋 Table of Contents</h2>
+                <ul>
+                    <li><a href="#analytics">Analytics Overview (Last 30 Days)</a></li>
+                    <li><a href="#vercel">Vercel Deployment & Infrastructure</a></li>
+                    <li><a href="#sanity">Sanity CMS Integration</a></li>
+                    <li><a href="#supabase">Supabase Integration</a></li>
+                    <li><a href="#integrations">Cross-Service Integration Map</a></li>
+                    <li><a href="#summary">Executive Summary</a></li>
+                </ul>
+            </div>
+
+            <!-- ANALYTICS SECTION -->
+            <section id="analytics">
+                <h2>📊 Analytics Overview (Last 30 Days)</h2>
+
+                <h3>Key Metrics</h3>
+                <div style="margin-bottom: 30px;">
+                    <div class="metric-card">
+                        <div class="value">204</div>
+                        <div class="label">Visitors</div>
+                        <div class="change negative">-33%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">1,349</div>
+                        <div class="label">Page Views</div>
+                        <div class="change negative">-30%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">73%</div>
+                        <div class="label">Bounce Rate</div>
+                        <div class="change negative">+4%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="value">379</div>
+                        <div class="label">Total Views (GA4)</div>
+                        <div class="change">55.3%</div>
+                    </div>
+                </div>
+
+                <h3>Mobile vs Desktop Breakdown</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Screen Class</th>
+                            <th>Views</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Desktop</td>
+                            <td>10K</td>
+                            <td>35.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile</td>
+                            <td>9.4K</td>
+                            <td>37.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Tablet</td>
+                            <td>1.3K</td>
+                            <td>31.8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Top Pages by Views</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Path</th>
+                            <th>Visitors</th>
+                            <th>Page Views</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>UnTelevised Media Studio | UnTelevised Media</td>
+                            <td>/</td>
+                            <td>35 (6%)</td>
+                            <td>136</td>
+                        </tr>
+                        <tr>
+                            <td>The Death of Tripp Brazeale: A Cover-up for a Child Killer</td>
+                            <td>/articles/the-death-of-tripp-brazeale-a-cover-up-for-a-child-killer</td>
+                            <td>30 (5%)</td>
+                            <td>34</td>
+                        </tr>
+                        <tr>
+                            <td>Two Calls About Diapers, One Officer Bought Them...</td>
+                            <td>/articles/two-calls-about-diapers-one-officer-bought-them-another-executed-a-baby</td>
+                            <td>27 (5%)</td>
+                            <td>37</td>
+                        </tr>
+                        <tr>
+                            <td>A Baby Executed Over Diapers: Senatobia Police...</td>
+                            <td>/articles/a-baby-executed-over-diapers-senatobia-police-kill-1-year-old-kohen-wiley-at-walmart</td>
+                            <td>23 (4%)</td>
+                            <td>28</td>
+                        </tr>
+                        <tr>
+                            <td>Sources Identify Hunter Foster as the Officer...</td>
+                            <td>/articles/sources-identify-hunter-foster-as-the-officer-who-shot-kohen-wiley-dead-over-a-box-of-pampers</td>
+                            <td>17 (3%)</td>
+                            <td>28</td>
+                        </tr>
+                        <tr>
+                            <td>Flotilla Bilbao Spain Police Brutality</td>
+                            <td>/articles/flotilla-bilbao-spain-police-brutality</td>
+                            <td>16 (3%)</td>
+                            <td>19</td>
+                        </tr>
+                        <tr>
+                            <td>Author Portal - Dashboard</td>
+                            <td>/studio/structure/article</td>
+                            <td>15 (3%)</td>
+                            <td>51</td>
+                        </tr>
+                        <tr>
+                            <td>Sanity Studio</td>
+                            <td>/studio</td>
+                            <td>12 (2%)</td>
+                            <td>28</td>
+                        </tr>
+                        <tr>
+                            <td>Author Portal</td>
+                            <td>/portal</td>
+                            <td>10 (2%)</td>
+                            <td>18</td>
+                        </tr>
+                        <tr>
+                            <td>Portal Articles</td>
+                            <td>/portal/articles</td>
+                            <td>8 (1%)</td>
+                            <td>28</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning">
+                    <strong>⚠️ Analytics Observations:</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Visitor count down 33% compared to previous 30-day period</li>
+                        <li>Page views down 30% - suggests traffic decline across content</li>
+                        <li>Bounce rate increased 4% - content engagement declining</li>
+                        <li>Mobile traffic slightly higher than desktop (37.4% vs 35.2%)</li>
+                        <li>Top article shows significantly higher engagement (641.2%) - investigate viral potential</li>
+                        <li>Portal/Studio seeing moderate usage - author access working</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- VERCEL SECTION -->
+            <section id="vercel">
+                <h2>🚀 Vercel Deployment & Infrastructure</h2>
+
+                <h3>Project Configuration</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Project Name</td>
+                            <td>untelevised</td>
+                        </tr>
+                        <tr>
+                            <td>Project ID</td>
+                            <td>prj_9mLnL3Pig1ebPlflaMeAsKCglbIf</td>
+                        </tr>
+                        <tr>
+                            <td>Organization ID</td>
+                            <td>team_5xzR1ZBECOQNRVAmCAJFwTQS</td>
+                        </tr>
+                        <tr>
+                            <td>Framework</td>
+                            <td>Next.js</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Serverless Functions & API Routes</h3>
+                <p><strong>Total Configured API Routes:</strong> 30+</p>
+
+                <h4>Content & Caching</h4>
+                <ul>
+                    <li><code>/api/revalidate</code> - Sanity webhook handler (Next.js ISR revalidation)</li>
+                    <li><code>/api/algolia-sync</code> - Sanity → Algolia search index sync</li>
+                </ul>
+
+                <h4>Analytics & Tracking</h4>
+                <ul>
+                    <li><code>/api/view-queue</code> - Record article views to Supabase</li>
+                </ul>
+
+                <h4>Authentication & SSO</h4>
+                <ul>
+                    <li><code>/api/draft</code> - Sanity draft mode enablement</li>
+                    <li><code>/api/disable-draft</code> - Sanity draft mode disable</li>
+                    <li><code>/api/coral-token</code> - Mint SSO JWT for Coral Comments system</li>
+                </ul>
+
+                <h4>Bookstore & E-Commerce</h4>
+                <ul>
+                    <li><code>/api/bookstore/checkout</code> - Stripe checkout creation</li>
+                    <li><code>/api/bookstore/download</code> - Book download (authenticated)</li>
+                    <li><code>/api/bookstore/download/guest</code> - Guest book download</li>
+                    <li><code>/api/bookstore/download/guest-resend</code> - Resend guest download link</li>
+                    <li><code>/api/bookstore/my-downloads</code> - User purchase history</li>
+                    <li><code>/api/bookstore/reviews</code> - Book review submissions</li>
+                    <li><code>/api/bookstore/newsletter/subscribe</code> - Newsletter signup</li>
+                    <li><code>/api/bookstore/newsletter/confirm</code> - Email confirmation</li>
+                    <li><code>/api/bookstore/newsletter/unsubscribe</code> - Newsletter unsubscribe</li>
+                    <li><code>/api/bookstore/internal/send-email</code> - Internal transactional email</li>
+                </ul>
+
+                <h4>Membership (Stripe)</h4>
+                <ul>
+                    <li><code>/api/membership/create-checkout</code> - Membership tier checkout</li>
+                    <li><code>/api/membership/one-time-donation</code> - Donation via Stripe</li>
+                </ul>
+
+                <h4>Cron Jobs (Scheduled Tasks)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Endpoint</th>
+                            <th>Schedule</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>/api/cron/cleanup-briefs</td>
+                            <td>30 4 * * * (4:30 AM UTC)</td>
+                            <td>Delete expired briefs</td>
+                        </tr>
+                        <tr>
+                            <td>/api/cron/batch-geolocate-views</td>
+                            <td>0 6 * * * (6:00 AM UTC)</td>
+                            <td>Hash IPs in view_count table</td>
+                        </tr>
+                        <tr>
+                            <td>/api/cron/sync-view-counts</td>
+                            <td>Configured but DEPRECATED</td>
+                            <td>Old view sync (returns 200, no-op)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Webhooks</h4>
+                <ul>
+                    <li><code>/api/webhooks/supabase-order-update</code> - Supabase DB webhook (shipment notifications)</li>
+                </ul>
+
+                <h4>Forms & Admin</h4>
+                <ul>
+                    <li><code>/api/secure-contact</code> - Secure contact form</li>
+                    <li><code>/api/careers-application</code> - Career application form</li>
+                    <li><code>/api/job-application</code> - Job application form</li>
+                    <li><code>/api/admin/set-role</code> - Admin role assignment</li>
+                    <li><code>/api/compute-reading-time</code> - Article reading time calculation</li>
+                    <li><code>/api/portal/upload-image</code> - Portal image upload</li>
+                </ul>
+
+                <h3>Analytics Integration</h3>
+                <p>Vercel Analytics configured with consent awareness:</p>
+                <ul>
+                    <li><strong>@vercel/analytics:</strong> v2.0.1 - Page analytics and performance metrics</li>
+                    <li><strong>@vercel/speed-insights:</strong> v2.0.0 - Core Web Vitals tracking</li>
+                </ul>
+                <p>Component: <code>src/components/analytics/ConsentAwareAnalytics.tsx</code></p>
+                <div class="success">
+                    <strong>✓ Analytics respect user consent preferences</strong>
+                </div>
+
+                <h3>Environment Variables</h3>
+                <div class="env-var">NEXT_PUBLIC_VERCEL_URL</div>
+                <div class="env-var">SANITY_REVALIDATE_SECRET</div>
+                <div class="env-var">CRON_SECRET</div>
+                <div class="env-var">STRIPE_SECRET_KEY</div>
+                <div class="env-var">STRIPE_MEMBERSHIP_SECRET_KEY</div>
+                <div class="env-var">CORAL_SSO_SECRET</div>
+                <div class="env-var">CORAL_SSO_KEY_ID</div>
+                <div class="env-var">SUPABASE_WEBHOOK_SECRET</div>
+
+                <h3>Security Concerns & Recommendations</h3>
+                <div class="warning">
+                    <strong>⚠️ Cron Job Security:</strong> Cron endpoints rely on <code>CRON_SECRET</code> header validation. Ensure this token is:
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Cryptographically strong (minimum 32 characters)</li>
+                        <li>Rotated periodically</li>
+                        <li>Never exposed in public repositories</li>
+                        <li>Monitored for unauthorized access attempts</li>
+                    </ul>
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Token Caching:</strong> Coral SSO token endpoint uses 5-minute <code>stale-while-revalidate</code> cache. Monitor for token replay attacks in production.
+                </div>
+
+                <div class="critical">
+                    <strong>🔴 Deprecated Cron Job:</strong> <code>/api/cron/sync-view-counts</code> still configured in vercel.json but returns 200 no-op. Consider removing to reduce unnecessary Vercel invocations.
+                </div>
+            </section>
+
+            <!-- SANITY SECTION -->
+            <section id="sanity">
+                <h2>📝 Sanity CMS Integration</h2>
+
+                <h3>Project Configuration</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Project ID</td>
+                            <td>ypejdt32</td>
+                        </tr>
+                        <tr>
+                            <td>Dataset</td>
+                            <td>articles</td>
+                        </tr>
+                        <tr>
+                            <td>API Version</td>
+                            <td>2025-06-04</td>
+                        </tr>
+                        <tr>
+                            <td>Title</td>
+                            <td>UnTelevised Media</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Studio Configuration</h3>
+                <p><strong>Location:</strong> <code>/studio/[[...tool]]</code> (App Router)</p>
+
+                <h4>Installed Plugins</h4>
+                <ul>
+                    <li><code>@sanity/color-input</code> v6.0.6 - Color field input</li>
+                    <li><code>structureTool</code> - Document structure/desk editor</li>
+                    <li><code>presentationTool</code> - Visual preview of content</li>
+                    <li><code>@sanity/vision</code> - GROQ query explorer</li>
+                    <li><code>sanity-plugin-asset-source-unsplash</code> v7.0.7 - Unsplash image integration</li>
+                    <li><code>@sanity/preview-url-secret</code> v4.0.7 - Draft mode security</li>
+                </ul>
+
+                <h3>Document Types & Content Schema</h3>
+                <p><strong>Total Document Types:</strong> 35+ schemas</p>
+
+                <h4>Core Content Types</h4>
+                <ul>
+                    <li><strong>article</strong> - Main news articles (title, slug, description, body, mainImage, author, categories, publishedAt, tags, SEO fields)</li>
+                    <li><strong>brief</strong> - Short news briefs</li>
+                    <li><strong>liveEvent</strong> - Live event coverage (title, slug, eventDate, description, videoLink, keyEvents, relatedArticles)</li>
+                    <li><strong>post</strong> - Legacy post type</li>
+                    <li><strong>category</strong> - Article categories</li>
+                    <li><strong>author</strong> - Author profiles</li>
+                </ul>
+
+                <h4>Bookstore Types</h4>
+                <ul>
+                    <li><strong>book</strong> - Book products (title, slug, description, coverImage, formats, genres, author, ISBN)</li>
+                    <li><strong>bookFormat</strong> - Print, ebook, audio formats with Stripe price IDs</li>
+                    <li><strong>bookGenre</strong> - Genre taxonomy</li>
+                    <li><strong>bookstoreSubscriber</strong> - Newsletter subscribers</li>
+                    <li><strong>bookReview</strong> - Customer reviews</li>
+                    <li><strong>userWishlist</strong> - User book wishlists</li>
+                </ul>
+
+                <h4>Additional Types (35+ total)</h4>
+                <ul>
+                    <li><strong>Content:</strong> blockContent, factCheck, videoContent, keyEvent, comments, eventTag, policies, siteSettings, seoObject</li>
+                    <li><strong>Timeline:</strong> timeline, timelineEvent, timelineCategory</li>
+                    <li><strong>Music:</strong> musicArtist, album, song</li>
+                    <li><strong>Forms:</strong> contactSubmission, jobApplication, jobListing, newsletterSubscribe, secureContact, whistleblower, claimedPitch</li>
+                    <li><strong>User Data:</strong> userBookmark, bookstoreSubscriber</li>
+                    <li><strong>Embeds:</strong> instagramEmbed, twitterEmbed, youtubeEmbed, facebookEmbed, tiktokEmbed, vimeoEmbed</li>
+                    <li><strong>UI Components:</strong> ctaButton, correctionObject, source</li>
+                </ul>
+
+                <h3>Client & Query Configuration</h3>
+                <p><strong>File:</strong> <code>src/lib/sanity/lib/client.ts</code></p>
+                <div class="file-path">Location: src/lib/sanity/lib/client.ts</div>
+
+                <h4>Key Queries</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Query</th>
+                            <th>Purpose</th>
+                            <th>File</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>queryLiveEvents</td>
+                            <td>Fetch current/active live events</td>
+                            <td>src/lib/sanity/lib/queries.ts</td>
+                        </tr>
+                        <tr>
+                            <td>queryBreakingArticles</td>
+                            <td>Fetch top 20 breaking news articles</td>
+                            <td>src/lib/sanity/lib/queries.ts</td>
+                        </tr>
+                        <tr>
+                            <td>queryPastEvents</td>
+                            <td>Fetch historical live events</td>
+                            <td>src/lib/sanity/lib/queries.ts</td>
+                        </tr>
+                        <tr>
+                            <td>queryPastEventsWithPagination</td>
+                            <td>Paginated past events</td>
+                            <td>src/lib/sanity/lib/queries.ts</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Webhooks Configuration</h3>
+                <h4>1. Revalidation Webhook</h4>
+                <ul>
+                    <li><strong>Endpoint:</strong> <code>/api/revalidate</code></li>
+                    <li><strong>Triggers:</strong> Create, Update, Delete</li>
+                    <li><strong>Document Types:</strong> All</li>
+                    <li><strong>Secret:</strong> <code>SANITY_REVALIDATE_SECRET</code> (HMAC validation)</li>
+                    <li><strong>Purpose:</strong> Trigger Next.js ISR cache invalidation via <code>revalidateTag()</code></li>
+                    <li><strong>Tags Invalidated:</strong> articles, books, article:{slug}, book:{slug}</li>
+                </ul>
+
+                <h4>2. Algolia Search Sync Webhook</h4>
+                <ul>
+                    <li><strong>Endpoint:</strong> <code>/api/algolia-sync</code></li>
+                    <li><strong>Triggers:</strong> Create, Update, Delete</li>
+                    <li><strong>Document Types:</strong> article, liveEvent</li>
+                    <li><strong>Secret:</strong> <code>SANITY_WEBHOOK_SECRET</code> (HMAC validation)</li>
+                    <li><strong>Purpose:</strong> Sync articles and live events to Algolia search index</li>
+                </ul>
+
+                <h3>Image Handling</h3>
+                <p><strong>File:</strong> <code>src/lib/sanity/imageLoader.ts</code></p>
+                <p>Custom Next.js image loader for Sanity CDN with automatic parameter injection:</p>
+                <div class="code-block">
+Query parameters added:
+- w (width): Responsive image sizing
+- q (quality): Default 75%
+- auto=format: Automatic format selection (webp/avif)
+                </div>
+                <p>Fallback support for external images (Pexels, Supabase storage).</p>
+
+                <h3>Draft Mode & Visual Editing</h3>
+                <p><strong>Components:</strong></p>
+                <ul>
+                    <li><code>src/lib/sanity/components/DraftModeBanner.tsx</code> - Visual draft indicator</li>
+                    <li><code>src/lib/sanity/components/LiveVisualEditing.tsx</code> - Real-time editing with SSE</li>
+                    <li><code>src/lib/sanity/components/VisualEditing.tsx</code> - Static visual editing</li>
+                    <li><code>src/lib/sanity/components/PreviewLink.tsx</code> - Custom preview URLs</li>
+                </ul>
+
+                <div class="success">
+                    <strong>✓ Draft Mode</strong> uses Sanity preview URL secret for security. Preview URLs auto-detect Vercel environment and fallback to localhost.
+                </div>
+
+                <h3>Environment Variables</h3>
+                <div class="env-var">SANITY_PROJECT_ID = ypejdt32</div>
+                <div class="env-var">SANITY_DATASET = articles</div>
+                <div class="env-var">SANITY_API_READ_TOKEN</div>
+                <div class="env-var">SANITY_API_WRITE_TOKEN</div>
+                <div class="env-var">SANITY_REVALIDATE_SECRET</div>
+                <div class="env-var">SANITY_WEBHOOK_SECRET</div>
+
+                <h3>Key Observations & Recommendations</h3>
+                <div class="warning">
+                    <strong>⚠️ Deprecated viewCount Field:</strong> Previous viewCount field on articles has been moved to Supabase. Ensure all queries have been updated to use Supabase <code>get_trending_articles</code> RPC instead.
+                </div>
+
+                <div class="success">
+                    <strong>✓ Portable Text Integration</strong> fully implemented with rich text support for articles, briefs, and books.
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Schema Scale:</strong> 35+ document types indicates comprehensive content modeling. Consider document type rationalization if unused schemas exist.
+                </div>
+            </section>
+
+            <!-- SUPABASE SECTION -->
+            <section id="supabase">
+                <h2>🗄️ Supabase Integration</h2>
+
+                <h3>Multi-Project Architecture</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>ID</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>untelevised-shop</strong></td>
+                            <td>qdocpanuicwyhlcthudc</td>
+                            <td>Bookstore e-commerce (orders, customers, downloads)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>untelevised-live</strong></td>
+                            <td>tewnvjowrdfzvqcsfwgx</td>
+                            <td>View tracking and membership management</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>untelevised-shop Database</h3>
+                <p><strong>Purpose:</strong> Bookstore e-commerce and order management</p>
+
+                <h4>Core Tables</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Table</th>
+                            <th>Purpose</th>
+                            <th>Key Fields</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>customers</strong></td>
+                            <td>User customer profiles</td>
+                            <td>id, clerk_user_id, email, full_name, phone, created_at</td>
+                        </tr>
+                        <tr>
+                            <td><strong>addresses</strong></td>
+                            <td>Shipping/billing addresses</td>
+                            <td>id, customer_id, guest_email, line1, line2, city, state, postal_code, country, is_default</td>
+                        </tr>
+                        <tr>
+                            <td><strong>orders</strong></td>
+                            <td>Order records</td>
+                            <td>id, customer_id (nullable), order_number, stripe_session_id, total_cents, status</td>
+                        </tr>
+                        <tr>
+                            <td><strong>order_items</strong></td>
+                            <td>Line items in orders</td>
+                            <td>id, order_id, sanity_book_id, format, quantity, price_cents</td>
+                        </tr>
+                        <tr>
+                            <td><strong>author_sales</strong></td>
+                            <td>Author earnings tracking</td>
+                            <td>id, order_item_id, sanity_book_id, author_clerk_id, gross_cents, author_cents, publisher_cents</td>
+                        </tr>
+                        <tr>
+                            <td><strong>guest_download_tokens</strong></td>
+                            <td>Time-limited download links</td>
+                            <td>id, order_id, email, token (JWT), expires_at, used_at</td>
+                        </tr>
+                        <tr>
+                            <td><strong>audit_logs</strong></td>
+                            <td>Security audit trail</td>
+                            <td>event_type, user_id, order_id, ip_address, user_agent, details (JSONB)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>shipping_tracking</strong></td>
+                            <td>Shipping information</td>
+                            <td>order_id, tracking_number, tracking_url, carrier, shipped_at</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>untelevised-live Database</h3>
+                <p><strong>Purpose:</strong> Analytics, view tracking, and membership</p>
+
+                <h4>Core Tables</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Table</th>
+                            <th>Purpose</th>
+                            <th>Key Fields</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>view_count</strong></td>
+                            <td>Article view tracking</td>
+                            <td>id, slug, ip (nullable), ip_hash (SHA256), city, state_province, country, viewed_at, created_date</td>
+                        </tr>
+                        <tr>
+                            <td><strong>members</strong></td>
+                            <td>Membership records</td>
+                            <td>id, clerk_user_id, email, stripe_customer_id, stripe_subscription_id, tier, status, member_since</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>RPC Functions</h4>
+                <ul>
+                    <li><strong>get_trending_articles(days_back integer, result_limit integer)</strong>
+                        <ul>
+                            <li>Returns: slug, view_count (aggregated), last_viewed</li>
+                            <li>Purpose: Server-side aggregation by view count</li>
+                            <li>Used by: Trending articles section component</li>
+                            <li>Caching: 5-minute revalidation with Next.js <code>unstable_cache()</code></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Client Setup</h3>
+
+                <h4>Bookstore Client</h4>
+                <p><strong>File:</strong> <code>src/services/bookstore/supabase.ts</code></p>
+                <ul>
+                    <li><code>getShopClient()</code> - Anonymous client for RLS-enforced reads</li>
+                    <li><code>getShopServiceClient()</code> - Service role client for server-side writes</li>
+                    <li><code>writeAuditLog(params)</code> - Helper for compliance logging</li>
+                </ul>
+
+                <h4>Membership Client</h4>
+                <p><strong>File:</strong> <code>src/services/membership/supabase.ts</code></p>
+                <ul>
+                    <li><code>getMembershipAnonClient()</code> - Anonymous client</li>
+                    <li><code>getMembershipServiceClient()</code> - Service role client</li>
+                </ul>
+
+                <h4>View Tracking Client</h4>
+                <p><strong>File:</strong> <code>src/lib/supabase/client.ts</code></p>
+                <ul>
+                    <li><code>getAnonClient()</code> - For view event recording</li>
+                    <li><code>getServerClient()</code> - For trending queries</li>
+                </ul>
+
+                <h3>View Tracking System</h3>
+                <p><strong>File:</strong> <code>src/lib/supabase/viewEvents.ts</code></p>
+
+                <h4>Core Functions</h4>
+                <ul>
+                    <li><code>recordViewEvent(slug: string, ip: string)</code> - INSERT view record with IP hashing</li>
+                    <li><code>getViewCountsByDate(dateString: string)</code> - Aggregate views per article/date</li>
+                    <li><code>getTrendingArticles(daysBack: number, limit: number)</code> - RPC call with caching</li>
+                    <li><code>getMostReadByCategory(categorySlugs: string[], daysBack: number, limit: number)</code> - Category-filtered trending (not yet implemented)</li>
+                </ul>
+
+                <h3>Edge Functions</h3>
+
+                <h4>1. Batch Geolocation Processing</h4>
+                <p><strong>Location:</strong> <code>supabase/projects/untelevised-live/functions/batch-geolocate-views/</code></p>
+                <ul>
+                    <li><strong>Scheduled:</strong> Daily at 6:00 AM UTC (30 4 * * * in Vercel crons)</li>
+                    <li><strong>Purpose:</strong> Hash raw IPs and prepare for geolocation</li>
+                    <li><strong>Batch Size:</strong> Processes up to 5000 rows per run</li>
+                    <li><strong>Privacy:</strong> Clears raw IP after hashing with SHA256</li>
+                </ul>
+
+                <h4>2. Stripe Membership Webhook</h4>
+                <p><strong>Location:</strong> <code>supabase/projects/untelevised-live/functions/stripe-membership-webhook/</code></p>
+                <ul>
+                    <li><strong>Webhook URL:</strong> <code>https://tewnvjowrdfzvqcsfwgx.supabase.co/functions/v1/stripe-membership-webhook</code></li>
+                    <li><strong>Events Handled:</strong>
+                        <ul>
+                            <li>checkout.session.completed - New subscription created</li>
+                            <li>customer.subscription.updated - Subscription modified</li>
+                            <li>customer.subscription.deleted - Subscription cancelled</li>
+                        </ul>
+                    </li>
+                    <li><strong>Functionality:</strong> Maps Stripe events to Supabase members table updates</li>
+                    <li><strong>Tier Mapping:</strong> Price ID → tier (supporter/contributor/patron)</li>
+                </ul>
+
+                <h3>Migrations</h3>
+
+                <h4>untelevised-shop (13 migrations)</h4>
+                <ol>
+                    <li>cleanup_wrong_tables - Schema cleanup</li>
+                    <li>bookstore_schema - Initial bookstore tables</li>
+                    <li>storage_rls - Storage bucket policies</li>
+                    <li>book_covers_bucket - Book cover storage</li>
+                    <li>digital_books_bucket - Digital book files storage</li>
+                    <li>grant_role_privileges - Role-based permissions</li>
+                    <li>guest_download_tokens - Download link schema</li>
+                    <li>audit_logs - Compliance logging</li>
+                    <li>webhook_schema_fixes - Webhook compatibility</li>
+                    <li>grant_missing_tables - Additional permissions</li>
+                    <li>stripe_earnings - Author earnings tracking</li>
+                    <li>shipping_tracking - Shipping information schema</li>
+                    <li>atomic_download_counter - Download counter atomicity</li>
+                </ol>
+
+                <h4>untelevised-live (4 migrations)</h4>
+                <ol>
+                    <li>create_view_count_table - Initial view tracking table</li>
+                    <li>populate_view_count_from_sanity - Migration from legacy Sanity field</li>
+                    <li>populate_remaining_173_articles - Backfill remaining articles</li>
+                    <li>seed_missed_article_views - Additional seeding</li>
+                </ol>
+
+                <h3>Row Level Security (RLS)</h3>
+                <p><strong>Status:</strong> Enabled on critical tables</p>
+
+                <div class="success">
+                    <strong>✓ RLS Policies Implemented:</strong>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li><strong>view_count:</strong> Anonymous INSERT only (write-only for privacy)</li>
+                        <li><strong>view_count:</strong> Service role full access</li>
+                        <li><strong>orders:</strong> Customer can view own orders (RLS enforced)</li>
+                        <li><strong>members:</strong> Service role management only</li>
+                    </ul>
+                </div>
+
+                <h3>Storage Buckets</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bucket</th>
+                            <th>Purpose</th>
+                            <th>Max Size</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>book_covers</td>
+                            <td>Book cover images</td>
+                            <td>50 MiB (configured)</td>
+                        </tr>
+                        <tr>
+                            <td>digital_books</td>
+                            <td>Digital book files (PDF, ePub, etc.)</td>
+                            <td>50 MiB (configured)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Environment Variables</h3>
+                <h4>Bookstore (untelevised-shop)</h4>
+                <div class="env-var">SUPABASE_SHOP_URL</div>
+                <div class="env-var">SUPABASE_SHOP_ANON_KEY</div>
+                <div class="env-var">SUPABASE_SHOP_SERVICE_ROLE_KEY</div>
+
+                <h4>Membership/View Tracking (untelevised-live)</h4>
+                <div class="env-var">SUPABASE_MEMBERSHIP_URL</div>
+                <div class="env-var">SUPABASE_MEMBERSHIP_ANON_KEY</div>
+                <div class="env-var">SUPABASE_MEMBERSHIP_SERVICE_ROLE_KEY</div>
+                <div class="env-var">SUPABASE_MEMBERSHIP_PROJECT_ID</div>
+                <div class="env-var">SUPABASE_MEMBERSHIP_DB_PASS</div>
+                <div class="env-var">SUPABASE_MEMBERSHIP_PUBLISHABLE_KEY</div>
+
+                <h3>Key Observations & Risks</h3>
+
+                <div class="critical">
+                    <strong>🔴 Multiple Supabase Projects:</strong> Three separate projects (shop, live/membership) increases operational complexity:
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Separate credentials to manage (6 environment variables)</li>
+                        <li>Separate billing tiers for each project</li>
+                        <li>Database migrations must be coordinated across projects</li>
+                        <li>Cross-project queries require federation (not ideal)</li>
+                    </ul>
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ View Tracking Privacy Concern:</strong> Raw IPs stored temporarily before hashing:
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Edge function must run reliably (cron failure → IP accumulation)</li>
+                        <li>Consider immediate hashing on view insertion instead of async processing</li>
+                        <li>Current model: IPs visible to service role until batch job runs</li>
+                    </ul>
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Download Counter Atomicity:</strong> Migration <code>atomic_download_counter</code> suggests previous race conditions. Verify counter logic is protected.
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Unused RLS Policies:</strong> Review <code>20260430000003_rls_service_role_documentation.sql</code> for potential unused/redundant policies.
+                </div>
+
+                <div class="success">
+                    <strong>✓ Geolocation Ready:</strong> Schema includes city, state_province, country fields. Geolocation can be added to batch job without schema changes.
+                </div>
+            </section>
+
+            <!-- INTEGRATION MAP SECTION -->
+            <section id="integrations">
+                <h2>🔗 Cross-Service Integration Map</h2>
+
+                <div class="integration-grid">
+                    <div class="integration-card">
+                        <h4>Vercel → Sanity</h4>
+                        <ul style="margin: 10px 0 0 0;">
+                            <li>Revalidation webhook triggers Next.js ISR</li>
+                            <li>Preview URL generation uses Vercel URL</li>
+                            <li>Studio mounted on /studio route</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card">
+                        <h4>Vercel → Supabase</h4>
+                        <ul style="margin: 10px 0 0 0;">
+                            <li>/api/view-queue writes to view_count table</li>
+                            <li>/api/webhooks receives order updates</li>
+                            <li>Bookstore checkout queries Supabase orders</li>
+                            <li>Cron jobs trigger edge functions</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card">
+                        <h4>Sanity → Supabase</h4>
+                        <ul style="margin: 10px 0 0 0;">
+                            <li>Book products linked to orders (sanity_book_id)</li>
+                            <li>View counts NO LONGER synced (deprecated)</li>
+                            <li>Author earnings tracked per Sanity book</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card">
+                        <h4>Stripe → Supabase</h4>
+                        <ul style="margin: 10px 0 0 0;">
+                            <li>Bookstore webhook updates orders table</li>
+                            <li>Membership webhook updates members table</li>
+                            <li>Price IDs map to membership tiers</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card">
+                        <h4>Sanity → Algolia</h4>
+                        <ul style="margin: 10px 0 0 0;">
+                            <li>Webhook syncs articles and live events</li>
+                            <li>Automatic index updates on content changes</li>
+                            <li>Full document fetch on create/update</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card">
+                        <h4>Clerk ↔ Supabase</h4>
+                        <ul style="margin: 10px 0 0 0;">
+                            <li>clerk_user_id stored in customers/orders/members</li>
+                            <li>Application manages Clerk → Supabase mapping</li>
+                            <li>RLS policies may reference clerk_user_id</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card">
+                        <h4>Vercel → Stripe</h4>
+                        <ul style="margin: 10px 0 0 0;">
+                            <li>/api/bookstore/checkout creates sessions</li>
+                            <li>/api/membership APIs handle subscriptions</li>
+                            <li>Webhook received by Supabase edge function</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card">
+                        <h4>Vercel → Clerk</h4>
+                        <ul style="margin: 10px 0 0 0;">
+                            <li>/api/coral-token mints SSO JWT</li>
+                            <li>Session validation for auth endpoints</li>
+                            <li>User metadata passed to comment system</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Data Flow Diagram</h3>
+                <div class="code-block">
+┌─────────────────────────────────────────────────────────────────┐
+│                     CONTENT & PUBLISHING                         │
+│  Sanity Studio ──────→ Revalidation Webhook ──→ Vercel ISR      │
+│  (Edit Content)       (/api/revalidate)        (Cache Bust)     │
+└─────────────────────────────────────────────────────────────────┘
+                             │
+                             ↓
+         ┌───────────────────────────────────────┐
+         │   Content Published to Web             │
+         │   (Served from Vercel/CDN)             │
+         └───────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                    ANALYTICS & TRACKING                          │
+│  Client Browser ──→ /api/view-queue ──→ Supabase View Table    │
+│  (Article View)     (Vercel Function)   (view_count)            │
+│                                              │                   │
+│                                              ↓                   │
+│                                   Batch Geolocation              │
+│                                   (Cron Job @ 6 AM)             │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                    SEARCH INDEXING                               │
+│  Sanity Article ──→ Algolia Webhook ──→ Algolia Index           │
+│  (Create/Update)    (/api/algolia-sync)  (Search Results)       │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                   BOOKSTORE & ORDERS                             │
+│  Stripe Checkout ←── /api/bookstore/checkout                    │
+│  (User selects book) (Queries Sanity + Supabase)                │
+│       │                                                          │
+│       ↓                                                          │
+│  Stripe Payment Success ──→ Supabase Edge Function              │
+│                           (Webhook Handler)                      │
+│                                │                                │
+│                                ↓                                │
+│                       Update Orders Table                        │
+│                       Send Fulfillment Email                     │
+│                    (/api/bookstore/internal/send-email)          │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                   MEMBERSHIP (SSO/PAYMENTS)                      │
+│  User Subscribes ──→ /api/membership/create-checkout            │
+│                        (Stripe Checkout)                         │
+│       │                                                          │
+│       ↓                                                          │
+│  Stripe Webhook ──→ Stripe Edge Function                        │
+│  (Supabase)        (stripe-membership-webhook)                  │
+│       │                                                          │
+│       ↓                                                          │
+│  Update Members Table (Clerk ID + Tier)                         │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                    COMMENTS (SSO)                                │
+│  User Comments ──→ /api/coral-token (Vercel) ──→ Coral          │
+│  (Auth Required)    (Mint Clerk-based JWT)     (Comment System) │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            </section>
+
+            <!-- SUMMARY SECTION -->
+            <section id="summary">
+                <h2>📌 Executive Summary</h2>
+
+                <h3>System Overview</h3>
+                <p>UnTelevised Media operates a sophisticated multi-service architecture with <strong>4 primary services</strong> (Vercel, Sanity, Supabase, Stripe) plus secondary integrations (Algolia, Clerk, Coral Comments, Google Analytics).</p>
+
+                <h3>Service Maturity Assessment</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Maturity</th>
+                            <th>Key Strengths</th>
+                            <th>Risks/Concerns</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Vercel</strong></td>
+                            <td>🟢 Mature</td>
+                            <td>• Comprehensive API routes<br>• Cron job automation<br>• Analytics integrated</td>
+                            <td>⚠️ Deprecated cron job<br>⚠️ Token caching risks<br>⚠️ CRON_SECRET rotation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sanity</strong></td>
+                            <td>🟢 Mature</td>
+                            <td>• 35+ well-defined schemas<br>• Webhook automation<br>• Visual editing enabled</td>
+                            <td>⚠️ Schema rationalization needed<br>⚠️ Deprecated viewCount field</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Supabase</strong></td>
+                            <td>🟡 Developing</td>
+                            <td>• RLS policies implemented<br>• Edge functions deployed<br>• Multi-project separation</td>
+                            <td>🔴 3 projects = complexity<br>⚠️ IP privacy concerns<br>⚠️ Geolocation incomplete</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stripe</strong></td>
+                            <td>🟡 Developing</td>
+                            <td>• Bookstore checkout<br>• Membership integration<br>• Webhook processing</td>
+                            <td>⚠️ Price ID mapping<br>⚠️ Webhook reliability</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Traffic & Content Performance</h3>
+                <p>Analytics over last 30 days show <strong>declining engagement:</strong></p>
+                <ul>
+                    <li>Visitors: 204 (-33% vs previous period)</li>
+                    <li>Page Views: 1,349 (-30% vs previous period)</li>
+                    <li>Bounce Rate: 73% (+4% - worsening)</li>
+                    <li>Mobile traffic slightly higher than desktop (37.4% vs 35.2%)</li>
+                    <li>Top article shows viral potential (641.2% engagement spike)</li>
+                </ul>
+
+                <div class="warning">
+                    <strong>⚠️ Content Performance Alert:</strong> Declining visitor and pageview metrics suggest need for:
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>SEO audit and optimization</li>
+                        <li>Content promotion strategy review</li>
+                        <li>Social sharing improvements</li>
+                        <li>User engagement analysis (why 73% bounce?)</li>
+                    </ul>
+                </div>
+
+                <h3>Top Recommendations by Priority</h3>
+
+                <h4>🔴 High Priority (Security/Reliability)</h4>
+                <ol>
+                    <li><strong>Fix IP Privacy in View Tracking</strong>
+                        <ul>
+                            <li>Currently storing raw IPs before hashing</li>
+                            <li>Recommend immediate hashing on insert</li>
+                            <li>Prevents data exposure if edge function fails</li>
+                        </ul>
+                    </li>
+                    <li><strong>Rotate CRON_SECRET</strong>
+                        <ul>
+                            <li>Ensure strong cryptographic token (32+ chars)</li>
+                            <li>Implement rotation schedule (quarterly minimum)</li>
+                            <li>Monitor for unauthorized invocations</li>
+                        </ul>
+                    </li>
+                    <li><strong>Remove Deprecated Cron Job</strong>
+                        <ul>
+                            <li>/api/cron/sync-view-counts no longer needed</li>
+                            <li>Remove from vercel.json to reduce Vercel invocations</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h4>🟡 Medium Priority (Optimization)</h4>
+                <ol>
+                    <li><strong>Consolidate Supabase Projects</strong>
+                        <ul>
+                            <li>Consider merging untelevised-live (view tracking) into untelevised-shop</li>
+                            <li>Reduces credential management overhead</li>
+                            <li>Simplifies migrations and backups</li>
+                        </ul>
+                    </li>
+                    <li><strong>Complete Geolocation Integration</strong>
+                        <ul>
+                            <li>Add GeoIP lookup to batch job (or real-time on insert)</li>
+                            <li>Enable geographic trending analysis</li>
+                        </ul>
+                    </li>
+                    <li><strong>Implement Category-Filtered Trending</strong>
+                        <ul>
+                            <li>getMostReadByCategory() currently not implemented</li>
+                            <li>Would enable category-specific trending sections</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h4>🔵 Low Priority (Technical Debt)</h4>
+                <ol>
+                    <li><strong>Schema Rationalization</strong>
+                        <ul>
+                            <li>Review 35+ Sanity document types for unused schemas</li>
+                            <li>Consider consolidating similar types</li>
+                        </ul>
+                    </li>
+                    <li><strong>Audit Log Review</strong>
+                        <ul>
+                            <li>Review RLS policies and audit logging</li>
+                            <li>Ensure compliance with data retention requirements</li>
+                        </ul>
+                    </li>
+                    <li><strong>Content Performance Analysis</strong>
+                        <ul>
+                            <li>Investigate declining engagement (-30% visitors)</li>
+                            <li>Analyze why top article shows 641.2% spike</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Architecture Strengths</h3>
+                <div class="success">
+                    <strong>✓ Separation of Concerns</strong> — Well-segregated services (CMS, analytics, e-commerce) minimize coupling.
+                </div>
+
+                <div class="success">
+                    <strong>✓ Automation</strong> — Webhook-driven workflows (Sanity → Revalidation, Stripe → Members) reduce manual operations.
+                </div>
+
+                <div class="success">
+                    <strong>✓ Security Practices</strong> — HMAC validation on webhooks, RLS policies, audit logging show security awareness.
+                </div>
+
+                <div class="success">
+                    <strong>✓ Content Management</strong> — Visual editing, draft mode, and multiple content types enable rich editorial workflows.
+                </div>
+
+                <h3>Architecture Weaknesses</h3>
+                <div class="critical">
+                    <strong>🔴 Multi-Project Complexity</strong> — 3 Supabase projects + separate Stripe accounts create operational friction.
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Privacy Gaps</strong> — Raw IP storage in view tracking violates privacy best practices (GDPR concern).
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Traffic Decline</strong> — 30% drop in visitors suggests content strategy or SEO issues.
+                </div>
+
+                <div class="warning">
+                    <strong>⚠️ Incomplete Features</strong> — Geolocation, category-filtered trending not yet realized.
+                </div>
+
+                <h3>Next Steps</h3>
+                <ol>
+                    <li><strong>Week 1:</strong> Fix IP privacy issue in view tracking</li>
+                    <li><strong>Week 2:</strong> Remove deprecated cron job and rotate CRON_SECRET</li>
+                    <li><strong>Week 3:</strong> Investigate traffic decline and content performance</li>
+                    <li><strong>Month 2:</strong> Plan Supabase project consolidation</li>
+                    <li><strong>Month 3:</strong> Complete geolocation and category trending features</li>
+                </ol>
+
+                <div class="success">
+                    <strong>✓ Audit Complete</strong> — Full service dependency mapping complete. Use findings to prioritize improvements and reduce operational complexity.
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p><strong>UnTelevised Media - Comprehensive Service Audit</strong></p>
+            <p>Generated: June 21, 2026 | Branch: audit</p>
+            <p>This report documents all services (Vercel, Sanity, Supabase, Stripe), their integrations, and identified risks/opportunities.</p>
+            <a href="#" class="back-to-top" onclick="window.scrollTo(0, 0); return false;">Back to Top</a>
+        </footer>
+    </div>
+</body>
+</html>

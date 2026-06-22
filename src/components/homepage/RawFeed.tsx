@@ -51,6 +51,7 @@ function RawFeed({ articles }: RawFeedProps) {
                       alt={article.title ?? 'Article'}
                       fill
                       className='object-cover transition-transform group-hover:scale-105'
+                      loading='lazy'
                     />
                   </div>
                 </div>

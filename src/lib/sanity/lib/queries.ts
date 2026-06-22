@@ -351,12 +351,14 @@ export const queryMusicArtistBySlug = groq`
         releaseDate
       },
       trackArt
-    } | order(releaseDate desc) [0..99],
+    } | order(releaseDate desc) [0..20],
     "albums": *[_type == "album" && (artist._ref == ^._id || ^._id in featuredArtists[]._ref)] {
       ...,
       artist->,
       featuredArtists[]->
-    } | order(releaseDate desc) [0..49]
+    } | order(releaseDate desc) [0..10],
+    "songCount": count(*[_type == "song" && (primaryArtist._ref == ^._id || ^._id in featuredArtists[]._ref)]),
+    "albumCount": count(*[_type == "album" && (artist._ref == ^._id || ^._id in featuredArtists[]._ref)])
   }
 `;
 
@@ -371,6 +373,32 @@ export const queryFeaturedMusicArtists = groq`
   }
   | order(name asc)
   [0...8]
+`;
+
+// Lazy-load songs for a music artist (paginated)
+export const querySongsByArtistPaginated = groq`
+  *[_type == "song" && (primaryArtist._ref == $artistId || $artistId in featuredArtists[]._ref)] {
+    ...,
+    primaryArtist->,
+    featuredArtists[]->,
+    album->{
+      title,
+      albumArt,
+      releaseDate
+    },
+    trackArt
+  }
+  | order(releaseDate desc) [$offset...$offset + 19]
+`;
+
+// Lazy-load albums for a music artist (paginated)
+export const queryAlbumsByArtistPaginated = groq`
+  *[_type == "album" && (artist._ref == $artistId || $artistId in featuredArtists[]._ref)] {
+    ...,
+    artist->,
+    featuredArtists[]->
+  }
+  | order(releaseDate desc) [$offset...$offset + 9]
 `;
 
 export const queryAllAlbums = groq`
@@ -513,7 +541,30 @@ export const queryArticleByCategory = groq`
         => round(length(pt::text(body)) / 1000) + 1,
       1
     ),
-  } | order(coalesce(eventDate, publishedAt, _createdAt) desc)
+  } | order(coalesce(eventDate, publishedAt, _createdAt) desc) [0..50]
+`;
+
+// Paginated variant of queryArticleByCategory for infinite scroll/pagination
+export const queryArticleByCategoryPaginated = groq`
+  *[_type == 'article' && $slug in categories[]->slug.current] {
+    _id,
+    _type,
+    _createdAt,
+    title,
+    slug,
+    description,
+    publishedAt,
+    eventDate,
+    location,
+    mainImage,
+    "author": author->{ name, slug },
+    "categories": categories[]->{ _id, title, order },
+    "readingTimeMinutes": select(
+      defined(body) && length(pt::text(body)) > 0
+        => round(length(pt::text(body)) / 1000) + 1,
+      1
+    ),
+  } | order(coalesce(eventDate, publishedAt, _createdAt) desc) [$offset...$offset + 49]
 `;
 
 export const queryCategories = groq`
@@ -521,7 +572,7 @@ export const queryCategories = groq`
     _id,
     title,
     order
-  }  
+  }
 `;
 
 export const queryAllAuthors = groq`
@@ -659,32 +710,24 @@ export const queryTimelineEventBySlug = groq`
     ...,
     author->,
     timelineCategories[]->,
-    relatedArticles[]->{
-      slug,
-      title,
-      _id,
-      publishedAt,
-      mainImage,
-      description,
-      author->
-    },
-    relatedLiveEvents[]->{
-      slug,
-      title,
-      _id,
-      eventDate,
-      mainImage,
-      description
-    },
-    relatedTimelineEvents[]->{
-      slug,
-      title,
-      _id,
-      eventDate,
-      eventType,
-      importanceLevel,
-      mainImage
-    }
+    "relatedArticles": relatedArticles[] {
+      "_id": _ref,
+      "slug": @->slug.current,
+      "title": @->title,
+      "publishedAt": @->publishedAt,
+      "mainImage": @->mainImage,
+      "description": @->description,
+      "author": @->author->{ name }
+    } | select(defined(_id)),
+    "relatedLiveEvents": relatedLiveEvents[] {
+      "_id": _ref,
+      "slug": @->slug.current,
+      "title": @->title,
+      "eventDate": @->eventDate,
+      "mainImage": @->mainImage,
+      "description": @->description
+    } | select(defined(_id)),
+    "relatedTimelineEventIds": relatedTimelineEvents[]._ref
   }
 `;
 
@@ -705,6 +748,32 @@ export const queryRecentTimelineEvents = groq`
   }
   | order(eventDate desc)
   [0...10]
+`;
+
+// Lazy-load related timeline events (fetches full details)
+export const queryTimelineEventsByIds = groq`
+  *[_type == "timelineEvent" && _id in $ids] {
+    ...,
+    author->,
+    timelineCategories[]->,
+    "relatedArticles": relatedArticles[] {
+      "_id": _ref,
+      "slug": @->slug.current,
+      "title": @->title,
+      "publishedAt": @->publishedAt,
+      "mainImage": @->mainImage,
+      "description": @->description,
+      "author": @->author->{ name }
+    } | select(defined(_id)),
+    "relatedLiveEvents": relatedLiveEvents[] {
+      "_id": _ref,
+      "slug": @->slug.current,
+      "title": @->title,
+      "eventDate": @->eventDate,
+      "mainImage": @->mainImage,
+      "description": @->description
+    } | select(defined(_id))
+  }
 `;
 
 export const queryTimelineEventsByImportance = groq`
