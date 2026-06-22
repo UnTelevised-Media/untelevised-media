@@ -34,6 +34,7 @@ function ArticleCard({ articles }: { articles: Article[] }) {
                 fill
                 className='object-cover transition-transform duration-300 group-hover:scale-105'
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                loading='lazy'
               />
               <div className='absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent' />
             </div>
@@ -109,6 +110,7 @@ function ArticleListCard({ articles }: { articles: Article[] }) {
                 fill
                 className='object-cover'
                 sizes='96px'
+                loading='lazy'
               />
             </div>
 
