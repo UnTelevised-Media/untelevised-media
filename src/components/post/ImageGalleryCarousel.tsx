@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import urlForImage from '@/util/url/urlForImage';
@@ -17,11 +17,15 @@ interface ImageGalleryCarouselProps {
   };
 }
 
+const AUTO_ROTATE_INTERVAL = 5000; // 5 seconds
+
 export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [thumbnailScroll, setThumbnailScroll] = useState(0);
+  const [isAutoRotating, setIsAutoRotating] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const touchStartRef = useRef<number | null>(null);
+  const autoRotateTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const images = gallery?.images || [];
   if (images.length === 0) return null;
@@ -31,15 +35,60 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
   const thumbWidth = 100; // 100px + gap
   const thumbGapWidth = thumbWidth + 8; // 100px + 8px gap
 
+  // Preload adjacent images for faster responsiveness
+  useEffect(() => {
+    if (images.length <= 1) return;
+
+    const preloadImage = (index: number) => {
+      const img = new window.Image();
+      const imageUrl = urlForImage(images[index])?.url();
+      if (imageUrl) {
+        img.src = imageUrl;
+      }
+    };
+
+    // Preload next and previous images
+    const nextIndex = (selectedIndex + 1) % images.length;
+    const prevIndex = selectedIndex === 0 ? images.length - 1 : selectedIndex - 1;
+    preloadImage(nextIndex);
+    preloadImage(prevIndex);
+  }, [selectedIndex, images]);
+
+  // Auto-rotate timer setup
+  useEffect(() => {
+    if (!isAutoRotating || images.length <= 1) return;
+
+    autoRotateTimerRef.current = setInterval(() => {
+      setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    }, AUTO_ROTATE_INTERVAL);
+
+    return () => {
+      if (autoRotateTimerRef.current) {
+        clearInterval(autoRotateTimerRef.current);
+      }
+    };
+  }, [isAutoRotating, images.length]);
+
+  // Reset auto-rotate timer on user interaction
+  const resetAutoRotateTimer = useCallback(() => {
+    if (autoRotateTimerRef.current) {
+      clearInterval(autoRotateTimerRef.current);
+    }
+    setIsAutoRotating(true);
+  }, []);
+
   const handlePrevious = () => {
+    resetAutoRotateTimer();
     setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
+    resetAutoRotateTimer();
     setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
   const handleThumbnailClick = (index: number) => {
+    resetAutoRotateTimer();
     setSelectedIndex(index);
     // Snap the thumbnail row to show the selected thumbnail
     snapThumbnailToView(index);
@@ -121,6 +170,7 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
                 fill
                 className='object-cover'
                 sizes='(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 100vw'
+                priority
               />
             )}
           </div>
