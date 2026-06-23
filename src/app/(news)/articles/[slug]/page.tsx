@@ -31,6 +31,7 @@ import CorrectionNotice from '@/components/post/CorrectionNotice';
 import SourcesPanel from '@/components/post/SourcesPanel';
 import BookmarkButton from '@/components/bookmarks/BookmarkButton';
 import CommentsSection from '@/components/post/CommentsSection';
+import ImageGalleryCarousel from '@/components/post/ImageGalleryCarousel';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import ViewPing from '@/components/post/ViewPing';
 import TrendingSection from '@/components/homepage/TrendingSection';
@@ -364,6 +365,12 @@ export default async function ArticlePage({ params }: Props) {
                     />
                   </div>
                 </div>
+              )}
+
+              {/* Image Gallery */}
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              {(article as any)?.imageGallery && (
+                <ImageGalleryCarousel gallery={(article as any).imageGallery} />
               )}
 
               {/* Correction / Retraction Notice */}

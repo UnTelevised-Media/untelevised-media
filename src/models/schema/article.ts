@@ -84,6 +84,13 @@ export default defineType({
       type: 'string',
       group: ['media', 'all'],
     }),
+    defineField({
+      name: 'imageGallery',
+      title: 'Image Gallery',
+      type: 'imageGallery',
+      description: 'Photo slideshow carousel displayed below the video and above the article body',
+      group: ['media', 'all'],
+    }),
     // ── Metadata ──────────────────────────────────────────────────────────────
     defineField({
       name: 'author',
