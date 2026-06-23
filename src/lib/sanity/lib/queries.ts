@@ -14,13 +14,13 @@ export const queryLiveEvents = groq`
 `;
 
 export const queryBreakingArticles = groq`
-  *[_type=='article' && breakingNews == true && publishedAt >= $cutoffDate] {
+  *[_type=='article' && breakingNews == true] {
     _id,
     title,
     slug,
     publishedAt,
     mainImage,
-    "author": author->{ name }
+    "author": author->{ name, slug }
   }
   | order(publishedAt desc)
 `;

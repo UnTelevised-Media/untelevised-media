@@ -18,8 +18,8 @@ interface TrendingArticle {
   tags?: string[];
   viewCount: number;
   mainImage?: { asset: { _ref: string }; alt?: string };
-  author: { name: string } | null;
-  categories?: { title: string }[];
+  author: { name: string; slug: { current: string } } | null;
+  categories?: { title: string; slug: { current: string } }[];
 }
 
 // Fetch trending slugs from Supabase, then enrich with Sanity article data
@@ -66,8 +66,8 @@ const getTrendingArticles = cache(async (): Promise<TrendingArticle[]> => {
       tags,
       mainImage,
       viewCount,
-      "author": author->{name},
-      "categories": categories[]->{title},
+      "author": author->{name, slug},
+      "categories": categories[]->{title, slug},
     } | order(publishedAt desc)`,
     params: {
       slugs: trendingSlugs.map((t) => t.slug),
