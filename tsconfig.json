@@ -33,7 +33,6 @@
       "@/s/*": ["./src/server/*"],
       "#/*": ["./*"]
     },
-    "ignoreDeprecations": "6.0",
     "rootDir": "./",
     "outDir": "./out",
     "typeRoots": ["./node_modules/@types", "src/models/types"]

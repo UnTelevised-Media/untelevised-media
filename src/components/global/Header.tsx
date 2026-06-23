@@ -11,6 +11,7 @@ import ThemeToggle from './ThemeToggle';
 
 const HeaderSearch = dynamic(() => import('./HeaderSearch'), { ssr: false });
 const MiniCart = dynamic(() => import('@/components/bookstore/MiniCart'), { ssr: false });
+const SocialsDropdown = dynamic(() => import('./Socials'), { ssr: false });
 
 // ── Typed nav items ────────────────────────────────────────────────────────────
 
@@ -156,6 +157,17 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.documentElement.style.overflow = '';
+    }
+    return () => {
+      document.documentElement.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   const closeMenu = () => setIsMenuOpen(false);
   const specialItems = NAV.filter((n): n is SpecialLink => n.kind === 'special');
   const plainItems = NAV.filter((n): n is PlainLink => n.kind === 'plain');
@@ -169,12 +181,12 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
       }`}
     >
       {/* ── Main bar ── */}
-      <div className='flex w-full items-center justify-between px-4 py-2 md:py-3 lg:px-8'>
+      <div className='flex w-full items-center justify-between px-4 py-2 md:py-3 lg:px-8 2xl:px-6'>
         {/* Logo */}
         {logoSlot}
 
         {/* Desktop nav */}
-        <nav className='hidden items-center gap-1 lg:flex' aria-label='Main navigation'>
+        <nav className='hidden items-center gap-1 hlg:flex 2xl:gap-0.5' aria-label='Main navigation'>
           {NAV.map((item) =>
             item.kind === 'special' ? (
               <DesktopSpecialLink key={item.href} item={item} />
@@ -191,7 +203,7 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
         </nav>
 
         {/* Right section */}
-        <div className='flex items-center gap-1 md:gap-2'>
+        <div className='flex items-center gap-1 md:gap-2 2xl:gap-1.5'>
           {/* Search */}
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
@@ -232,7 +244,7 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
           <Show when='signed-out'>
             <Link
               href='/sign-in'
-              className='hidden text-xs font-bold uppercase tracking-widest text-slate-500 transition-colors hover:text-untele dark:text-slate-400 md:block'
+              className='hidden border border-slate-400 px-3 py-1.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-200/50 hover:border-slate-600 dark:border-slate-500 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:border-slate-400 hlg:block hlg:px-4 hlg:py-2'
             >
               Sign In
             </Link>
@@ -241,7 +253,7 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
           {/* Support */}
           <Link
             href='/support'
-            className='hidden items-center gap-1.5 bg-gradient-to-r from-untele to-red-500 px-3 py-1.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg md:flex md:px-4 md:py-2'
+            className='hidden items-center gap-1.5 bg-gradient-to-r from-untele to-red-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg hlg:flex hlg:px-3 hlg:py-2'
           >
             <span>Support</span>
             <span className='h-1.5 w-1.5 animate-pulse rounded-full bg-white/80' />
@@ -250,7 +262,7 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className='rounded-lg p-1.5 text-slate-700 transition-colors hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2 lg:hidden'
+            className='rounded-lg p-1.5 text-slate-700 transition-colors hover:bg-slate-200/50 hover:text-untele dark:text-slate-200 dark:hover:bg-slate-800/50 md:p-2 hlg:hidden'
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMenuOpen ? (
@@ -261,8 +273,8 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
           </button>
 
           {/* Socials — desktop only */}
-          <div className='hidden lg:flex'>
-            <Socials />
+          <div className='hidden hlg:flex'>
+            <SocialsDropdown dropdown />
           </div>
         </div>
       </div>
@@ -277,10 +289,10 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
       {/* ── Mobile menu ── */}
       {isMenuOpen && (
         <div className='border-t border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900 lg:hidden'>
-          <div className='flex flex-col p-4'>
+          <div className='flex max-h-[calc(100vh-120px)] flex-col overflow-y-auto p-4'>
             {/* Featured links */}
             <p className='mb-2 px-3 text-[10px] font-black uppercase tracking-widest text-slate-400'>
-              Coverage
+              Featured
             </p>
             <div className='mb-4 flex flex-col gap-1'>
               {specialItems.map((item) => (
@@ -290,13 +302,9 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
 
             {/* Standard links */}
             <p className='mb-2 px-3 text-[10px] font-black uppercase tracking-widest text-slate-400'>
-              More
+              Explore
             </p>
             <div className='mb-4 flex flex-col gap-1'>
-              <MobilePlainLink
-                item={{ kind: 'plain', href: '/', label: 'Home' }}
-                onClose={closeMenu}
-              />
               {plainItems.map((item) => (
                 <MobilePlainLink key={item.href} item={item} onClose={closeMenu} />
               ))}
@@ -311,6 +319,16 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
                 <ThemeToggle />
               </div>
 
+              <Show when='signed-out'>
+                <Link
+                  href='/sign-in'
+                  onClick={closeMenu}
+                  className='mb-4 flex items-center justify-center border border-slate-400 px-6 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-200/50 hover:border-slate-600 dark:border-slate-500 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:border-slate-400'
+                >
+                  Sign In
+                </Link>
+              </Show>
+
               <Link
                 href='/support'
                 onClick={closeMenu}
@@ -320,9 +338,7 @@ function Header({ logoSlot }: { logoSlot: React.ReactNode }) {
                 <span className='h-2 w-2 animate-pulse rounded-full bg-white/80' />
               </Link>
 
-              <div className='flex justify-center'>
-                <Socials />
-              </div>
+              <Socials mobile />
             </div>
           </div>
         </div>

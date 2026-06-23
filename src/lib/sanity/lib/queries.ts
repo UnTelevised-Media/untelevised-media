@@ -3,45 +3,26 @@ import { groq } from 'next-sanity';
 
 export const queryLiveEvents = groq`
   *[_type=='liveEvent' && isCurrentEvent == true] {
-    ...,
-    description,
     title,
     slug,
     eventDate,
-    endDate,
-    eventStatus,
     mainImage,
     subtitle,
-    videoLink,
-    keyEvent[]->,
-    relatedArticles[]-> {
-      slug,
-      _id,
-      title,
-      _createdAt,
-      description,
-      eventDate,
-      publishedAt,
-    }
+    eventStatus
   }
   | order(_createdAt desc)
 `;
 
 export const queryBreakingArticles = groq`
-  *[_type=='article' && breakingNews == true] {
-    ...,
-    author->,
-    categories[]->,
-    description,
+  *[_type=='article' && breakingNews == true && publishedAt >= $cutoffDate] {
+    _id,
+    title,
+    slug,
     publishedAt,
     mainImage,
-    slug,
-    title,
-    videoLink,
-    hasEmbeddedVideo
+    "author": author->{ name }
   }
   | order(publishedAt desc)
-  [0..19]
 `;
 
 export const queryPastEvents = groq`
@@ -153,32 +134,21 @@ export const queryAllArticles = groq`
 // (fires on every article publish). pt::text() fallback covers articles that
 // predate the field and have not been backfilled yet.
 export const queryHomepageArticles = groq`
-  *[_type=='article' && defined(slug.current)] {
+  *[_type=='article' && featured == true && defined(slug.current)] {
     _id,
-    _type,
-    _createdAt,
-    _updatedAt,
     title,
     slug,
     description,
     publishedAt,
-    eventDate,
+    location,
+    keywords,
     mainImage,
-    tags,
-    "correction": correction { type, summary },
-    "author": author->{ name, slug },
-    "categories": categories[]->{ _id, title, order },
-    "readingTimeMinutes": coalesce(
-      readingTimeMinutes,
-      select(
-        defined(body) && length(pt::text(body)) > 0
-          => round(length(pt::text(body)) / 1000) + 1,
-        1
-      )
-    ),
+    viewCount,
+    "author": author->{ name },
+    "categories": categories[]->{ title }
   }
   | order(_createdAt desc)
-  [0...30]
+  [0...1]
 `;
 
 // Lightweight — just IDs of the top trending articles for dedup filtering
@@ -207,23 +177,17 @@ export const queryArchiveArticles = groq`
 // Field Reports — articles flagged as on-the-ground reporting
 export const queryFieldReportArticles = groq`
   *[_type == "article" && isFieldReport == true && defined(slug.current)]
-  | order(publishedAt desc) [0...6] {
+  | order(eventDate desc) [0...6] {
     _id,
-    _type,
-    _createdAt,
     title,
     slug,
     description,
     publishedAt,
+    eventDate,
     location,
     mainImage,
-    "author": author->{ name, slug },
-    "categories": categories[]->{ _id, title, order },
-    "readingTimeMinutes": select(
-      defined(body) && length(pt::text(body)) > 0
-        => round(length(pt::text(body)) / 1000) + 1,
-      1
-    ),
+    "author": author->{ name },
+    "categories": categories[]->{ title }
   }
 `;
 

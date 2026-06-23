@@ -156,7 +156,7 @@ function FeaturedArticleCard({ article }: { article: Article }) {
   return (
     <Link href={`/articles/${article.slug?.current ?? '#'}`}>
       <div
-        className='group relative mx-auto w-full max-w-[1400px] overflow-hidden rounded-lg border border-slate-400 shadow-xl transition-transform duration-500 hover:scale-105'
+        className='group relative mx-auto w-full max-w-[1400px] overflow-hidden shadow-xl transition-transform duration-500 hover:scale-105'
         aria-labelledby='featured-article-title'
       >
         <div className='relative h-[578px] w-full overflow-hidden'>
@@ -195,7 +195,10 @@ function FeaturedArticleCard({ article }: { article: Article }) {
 
           <div className='flex items-center justify-between bg-gradient-to-t from-slate-900/90 to-transparent px-4 py-3'>
             <div className='flex items-center gap-4'>
-              <p className='font-medium text-slate-300'>Author</p>
+              <p className='font-medium text-slate-300'>
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                {(article.author as any)?.name || 'Author'}
+              </p>
               <div className='flex items-center gap-2'>
                 <ShareIcon className='h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-untele' />
                 <ArrowUpRight className='h-4 w-4 text-untele' />
@@ -207,9 +210,12 @@ function FeaturedArticleCard({ article }: { article: Article }) {
                   ? formatDate(getArticleDate(article))
                   : 'Date not available'}
               </span>
-              <span className='text-xs uppercase tracking-widest'>
-                · {getReadingTime(article.body)}
-              </span>
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              {(article as any)?.body && (
+                <span className='text-xs uppercase tracking-widest'>
+                  · {getReadingTime((article as any).body)}
+                </span>
+              )}
             </div>
           </div>
         </div>
