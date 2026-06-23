@@ -1,25 +1,14 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronRight } from 'lucide-react';
 import urlForImage from '@/util/url/urlForImage';
 import formatDate from '@/util/date/formatDate';
 import getArticleDate from '@/util/date/getArticleDate';
-
-export interface FieldReportArticle {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  description?: string;
-  publishedAt: string;
-  eventDate?: string;
-  location?: string;
-  mainImage?: { asset: { _ref: string }; alt?: string };
-  author: { name: string } | null;
-  categories?: { title: string }[];
-}
+import type { FieldReportArticle } from '@/models/types/feeds';
+import { getFieldReports } from '@/server/actions/feeds';
 
 interface Props {
   initialArticles: FieldReportArticle[];
@@ -39,8 +28,7 @@ export default function FieldReportsPaginated({
   const handleLoadMore = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/field-reports?page=${page}`);
-      const { data: newArticles, hasMore: moreAvailable } = await response.json();
+      const { data: newArticles, hasMore: moreAvailable } = await getFieldReports(page + 1);
       setArticles((prev) => [...prev, ...newArticles]);
       setHasMore(moreAvailable);
       setPage((prev) => prev + 1);

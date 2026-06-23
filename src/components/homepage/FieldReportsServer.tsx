@@ -1,11 +1,12 @@
-import sanityFetch from '@/lib/sanity/lib/fetch';
-import FieldReportsPaginated, { type FieldReportArticle } from './FieldReportsPaginated';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
+import type { FieldReportArticle } from '@/models/types/feeds';
+import FieldReportsPaginated from './FieldReportsPaginated';
 
 const REPORTS_PER_PAGE = 6;
 
 export default async function FieldReportsServer() {
   // Fetch initial set of field reports
-  const initialArticles = await sanityFetch<FieldReportArticle[]>({
+  const { data: initialArticles } = await sanityFetch<FieldReportArticle[]>({
     query: `*[_type == "article" && isFieldReport == true && defined(slug.current)]
       | order(publishedAt desc)
       [0...${REPORTS_PER_PAGE}] {

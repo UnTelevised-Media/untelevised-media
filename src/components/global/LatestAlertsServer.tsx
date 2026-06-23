@@ -1,28 +1,25 @@
-import { client } from '@/lib/sanity/lib/client';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import LatestAlerts from './LatestAlerts';
 
 async function getLatestAlerts() {
-  const fourtyFiveDaysAgo = new Date();
-  fourtyFiveDaysAgo.setDate(fourtyFiveDaysAgo.getDate() - 45);
-  const cutoffDate = fourtyFiveDaysAgo.toISOString().split('T')[0];
+  const fourteenDaysAgo = new Date();
+  fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
+  const cutoffDate = fourteenDaysAgo.toISOString().split('T')[0];
 
-  const query = `
-    *[_type == "article" && featured == true && publishedAt >= "${cutoffDate}"]
-    | order(publishedAt desc)
-    [0...20]
-    {
-      title,
-      slug
-    }
-  `;
+  const { data: articles } = await sanityFetch<Array<{ title: string; slug: { current: string } }>>({
+    query: `
+      *[_type == "article" && featured == true && publishedAt >= "${cutoffDate}"]
+      | order(publishedAt desc)
+      [0...8]
+      {
+        title,
+        slug
+      }
+    `,
+    tags: ['article'],
+  });
 
-  try {
-    const articles = await client.fetch(query);
-    return articles || [];
-  } catch (error) {
-    console.error('Failed to fetch latest alerts:', error);
-    return [];
-  }
+  return articles || [];
 }
 
 export default async function LatestAlertsServer() {

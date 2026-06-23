@@ -1,5 +1,6 @@
-import sanityFetch from '@/lib/sanity/lib/fetch';
-import RawFeedPaginated, { type RawFeedArticle } from './RawFeedPaginated';
+import { sanityFetch } from '@/lib/sanity/lib/fetch';
+import type { RawFeedArticle } from '@/models/types/feeds';
+import RawFeedPaginated from './RawFeedPaginated';
 
 const ARTICLES_PER_PAGE = 12;
 
@@ -15,7 +16,7 @@ export default async function RawFeedServer({ excludedIds }: Props) {
       : '';
 
   // Fetch all non-excluded articles for client-side pagination
-  const articles = await sanityFetch<RawFeedArticle[]>({
+  const { data: articles } = await sanityFetch<RawFeedArticle[]>({
     query: `*[_type == "article" && defined(slug.current) ${excludeFilter}]
       | order(publishedAt desc) {
       _id,

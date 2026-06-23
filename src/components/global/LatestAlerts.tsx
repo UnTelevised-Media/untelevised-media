@@ -16,7 +16,7 @@ export default function LatestAlerts({ articles }: LatestAlertsProps) {
   const [isHovering, setIsHovering] = useState(false);
   const [offset, setOffset] = useState(0);
   const tickerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
 
   // Desktop ticker - repeats articles for continuous scroll
   const repeatedArticles = [...articles, ...articles];

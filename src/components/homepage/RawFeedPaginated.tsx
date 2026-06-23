@@ -7,17 +7,8 @@ import urlForImage from '@/util/url/urlForImage';
 import formatDate from '@/util/date/formatDate';
 import getArticleDate from '@/util/date/getArticleDate';
 import { InFeedAd, AD_CONFIG } from '@/components/googleAdSense';
-
-export interface RawFeedArticle {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  description?: string;
-  publishedAt: string;
-  mainImage?: { asset: { _ref: string }; alt?: string };
-  author: { name: string } | null;
-  categories?: { title: string }[];
-}
+import type { RawFeedArticle } from '@/models/types/feeds';
+import { getRawFeedArticles } from '@/server/actions/feeds';
 
 const ARTICLES_PER_PAGE = 12;
 
@@ -25,21 +16,30 @@ interface Props {
   articles: RawFeedArticle[];
 }
 
-export default function RawFeedPaginated({ articles }: Props) {
+export default function RawFeedPaginated({ articles: initialArticles }: Props) {
+  const [articles, setArticles] = useState(initialArticles);
   const [page, setPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(initialArticles.length === ARTICLES_PER_PAGE);
 
-  const totalPages = Math.ceil(articles.length / ARTICLES_PER_PAGE);
-  const visibleArticles = articles.slice(0, (page + 1) * ARTICLES_PER_PAGE);
-  const hasMore = page < totalPages - 1;
-
-  const handleLoadMore = () => {
-    setPage((prev) => prev + 1);
+  const handleLoadMore = async () => {
+    setIsLoading(true);
+    try {
+      const { data: newArticles, hasMore: moreAvailable } = await getRawFeedArticles(page + 1, []);
+      setArticles((prev) => [...prev, ...newArticles]);
+      setHasMore(moreAvailable);
+      setPage((prev) => prev + 1);
+    } catch (error) {
+      console.error('Failed to load more articles:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // Group visible articles in chunks of 12 for ad placement
+  // Group articles in chunks of 12 for ad placement
   const chunks: RawFeedArticle[][] = [];
-  for (let i = 0; i < visibleArticles.length; i += ARTICLES_PER_PAGE) {
-    chunks.push(visibleArticles.slice(i, i + ARTICLES_PER_PAGE));
+  for (let i = 0; i < articles.length; i += ARTICLES_PER_PAGE) {
+    chunks.push(articles.slice(i, i + ARTICLES_PER_PAGE));
   }
 
   return (
@@ -109,9 +109,10 @@ export default function RawFeedPaginated({ articles }: Props) {
         <div className='flex justify-center py-8'>
           <button
             onClick={handleLoadMore}
-            className='bg-untele px-8 py-3 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
+            disabled={isLoading}
+            className='bg-untele px-8 py-3 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600 disabled:opacity-50'
           >
-            LOAD MORE
+            {isLoading ? 'Loading...' : 'LOAD MORE'}
           </button>
         </div>
       )}
