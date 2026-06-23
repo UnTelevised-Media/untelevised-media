@@ -15,7 +15,7 @@ export default async function RawFeedServer({ excludedIds }: Props) {
       ? `&& !(_id in [${excludedIds.map((id) => `"${id}"`).join(', ')}]) && !(slug.current in [${excludedIds.map((id) => `"${id}"`).join(', ')}])`
       : '';
 
-  // Fetch all non-excluded articles for client-side pagination
+  // Fetch all articles at once for client-side pagination (single API call, instant UX)
   const { data: articles } = await sanityFetch<RawFeedArticle[]>({
     query: `*[_type == "article" && defined(slug.current) ${excludeFilter}]
       | order(publishedAt desc) {
@@ -30,6 +30,10 @@ export default async function RawFeedServer({ excludedIds }: Props) {
     }`,
     tags: ['article'],
   });
+
+  // Client-side pagination: all articles loaded once, sliced as user interacts
+  // Benefits: 1 API call, instant pagination, lower API quota usage
+  // Trade-off: ~100-200KB in browser memory (acceptable for this scale)
 
   return (
     <>

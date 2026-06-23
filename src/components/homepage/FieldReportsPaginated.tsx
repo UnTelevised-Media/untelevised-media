@@ -8,45 +8,33 @@ import urlForImage from '@/util/url/urlForImage';
 import formatDate from '@/util/date/formatDate';
 import getArticleDate from '@/util/date/getArticleDate';
 import type { FieldReportArticle } from '@/models/types/feeds';
-import { getFieldReports } from '@/server/actions/feeds';
+
+const REPORTS_PER_PAGE = 6;
 
 interface Props {
-  initialArticles: FieldReportArticle[];
-  hasMore: boolean;
+  articles: FieldReportArticle[];
 }
 
-export default function FieldReportsPaginated({
-  initialArticles,
-  hasMore: initialHasMore,
-}: Props) {
-  const [articles, setArticles] = useState(initialArticles);
-  const [hasMore, setHasMore] = useState(initialHasMore);
-  const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = useState(1);
+export default function FieldReportsPaginated({ articles }: Props) {
+  const [page, setPage] = useState(0);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const handleLoadMore = async () => {
-    setIsLoading(true);
-    try {
-      const { data: newArticles, hasMore: moreAvailable } = await getFieldReports(page + 1);
-      setArticles((prev) => [...prev, ...newArticles]);
-      setHasMore(moreAvailable);
-      setPage((prev) => prev + 1);
+  const totalPages = Math.ceil(articles.length / REPORTS_PER_PAGE);
+  const visibleArticles = articles.slice(0, (page + 1) * REPORTS_PER_PAGE);
+  const hasMore = page < totalPages - 1;
 
-      // Scroll to the new articles smoothly
-      setTimeout(() => {
-        if (gridRef.current) {
-          const lastChild = gridRef.current.lastElementChild;
-          if (lastChild) {
-            lastChild.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+  const handleLoadMore = () => {
+    setPage((prev) => prev + 1);
+
+    // Scroll to the new articles smoothly
+    setTimeout(() => {
+      if (gridRef.current) {
+        const lastChild = gridRef.current.lastElementChild;
+        if (lastChild) {
+          lastChild.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 100);
-    } catch (error) {
-      console.error('Failed to load more field reports:', error);
-    } finally {
-      setIsLoading(false);
-    }
+      }
+    }, 100);
   };
 
   return (
@@ -55,7 +43,7 @@ export default function FieldReportsPaginated({
         ref={gridRef}
         className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'
       >
-        {articles.map((article) => (
+        {visibleArticles.map((article) => (
           <Link
             key={article._id}
             href={`/articles/${article.slug?.current}`}
@@ -110,10 +98,9 @@ export default function FieldReportsPaginated({
         <div className='mt-12 flex justify-center'>
           <button
             onClick={handleLoadMore}
-            disabled={isLoading}
-            className='flex items-center gap-2 bg-untele px-6 py-3 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600 disabled:opacity-50'
+            className='flex items-center gap-2 bg-untele px-6 py-3 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
           >
-            {isLoading ? 'Loading...' : 'Load More'}
+            Load More
             <ChevronRight className='h-4 w-4' />
           </button>
         </div>

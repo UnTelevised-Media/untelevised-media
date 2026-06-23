@@ -8,7 +8,6 @@ import formatDate from '@/util/date/formatDate';
 import getArticleDate from '@/util/date/getArticleDate';
 import { InFeedAd, AD_CONFIG } from '@/components/googleAdSense';
 import type { RawFeedArticle } from '@/models/types/feeds';
-import { getRawFeedArticles } from '@/server/actions/feeds';
 
 const ARTICLES_PER_PAGE = 12;
 
@@ -16,30 +15,21 @@ interface Props {
   articles: RawFeedArticle[];
 }
 
-export default function RawFeedPaginated({ articles: initialArticles }: Props) {
-  const [articles, setArticles] = useState(initialArticles);
+export default function RawFeedPaginated({ articles }: Props) {
   const [page, setPage] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(initialArticles.length === ARTICLES_PER_PAGE);
 
-  const handleLoadMore = async () => {
-    setIsLoading(true);
-    try {
-      const { data: newArticles, hasMore: moreAvailable } = await getRawFeedArticles(page + 1, []);
-      setArticles((prev) => [...prev, ...newArticles]);
-      setHasMore(moreAvailable);
-      setPage((prev) => prev + 1);
-    } catch (error) {
-      console.error('Failed to load more articles:', error);
-    } finally {
-      setIsLoading(false);
-    }
+  const totalPages = Math.ceil(articles.length / ARTICLES_PER_PAGE);
+  const visibleArticles = articles.slice(0, (page + 1) * ARTICLES_PER_PAGE);
+  const hasMore = page < totalPages - 1;
+
+  const handleLoadMore = () => {
+    setPage((prev) => prev + 1);
   };
 
-  // Group articles in chunks of 12 for ad placement
+  // Group visible articles in chunks of 12 for ad placement
   const chunks: RawFeedArticle[][] = [];
-  for (let i = 0; i < articles.length; i += ARTICLES_PER_PAGE) {
-    chunks.push(articles.slice(i, i + ARTICLES_PER_PAGE));
+  for (let i = 0; i < visibleArticles.length; i += ARTICLES_PER_PAGE) {
+    chunks.push(visibleArticles.slice(i, i + ARTICLES_PER_PAGE));
   }
 
   return (
@@ -109,10 +99,9 @@ export default function RawFeedPaginated({ articles: initialArticles }: Props) {
         <div className='flex justify-center py-8'>
           <button
             onClick={handleLoadMore}
-            disabled={isLoading}
-            className='bg-untele px-8 py-3 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600 disabled:opacity-50'
+            className='bg-untele px-8 py-3 text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-red-600'
           >
-            {isLoading ? 'Loading...' : 'LOAD MORE'}
+            LOAD MORE
           </button>
         </div>
       )}
