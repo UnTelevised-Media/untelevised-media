@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { getYoutubeVideoId } from '@/util/url/youtubeUtils';
@@ -11,12 +11,30 @@ interface YouTubeEmbedProps {
   title?: string;
 }
 
+const IFRAME_TIMEOUT = 8000; // 8 seconds
+
 export default function YouTubeEmbed({ videoUrl, title = 'Article video' }: YouTubeEmbedProps) {
   const [showFallback, setShowFallback] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const videoId = getYoutubeVideoId(videoUrl);
+
+  // Timeout fallback: if iframe doesn't load within IFRAME_TIMEOUT, show thumbnail
+  useEffect(() => {
+    timeoutRef.current = setTimeout(() => {
+      if (!iframeLoaded) {
+        setShowFallback(true);
+      }
+    }, IFRAME_TIMEOUT);
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [iframeLoaded]);
 
   if (!videoId) {
     return (
