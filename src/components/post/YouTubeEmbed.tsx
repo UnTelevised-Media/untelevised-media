@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import Image from 'next/image';
+import { Play } from 'lucide-react';
 import { getYoutubeVideoId } from '@/util/url/youtubeUtils';
 import { AlertCircle } from 'lucide-react';
 
@@ -11,6 +13,8 @@ interface YouTubeEmbedProps {
 
 export default function YouTubeEmbed({ videoUrl, title = 'Article video' }: YouTubeEmbedProps) {
   const [showFallback, setShowFallback] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const videoId = getYoutubeVideoId(videoUrl);
 
@@ -28,39 +32,61 @@ export default function YouTubeEmbed({ videoUrl, title = 'Article video' }: YouT
     );
   }
 
-  // If user explicitly wants fallback, show it
+  // Fallback: Show thumbnail with play button
   if (showFallback) {
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
     return (
-      <div className='flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-amber-200 bg-amber-50 p-6 dark:border-amber-900 dark:bg-amber-950'>
-        <AlertCircle className='h-8 w-8 text-amber-600 dark:text-amber-400' />
-        <div className='text-center'>
-          <p className='font-semibold text-amber-900 dark:text-amber-100'>
-            Video cannot be embedded
-          </p>
-          <p className='mt-1 text-sm text-amber-700 dark:text-amber-200'>
-            This may be due to age restrictions or embedding limitations.
-          </p>
+      <a
+        href={`https://www.youtube.com/watch?v=${videoId}`}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='group relative block aspect-video w-full overflow-hidden rounded-lg bg-black'
+      >
+        <Image
+          src={thumbnailUrl}
+          alt={title}
+          fill
+          className='object-cover'
+          sizes='(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 100vw'
+        />
+        {/* Dark overlay on hover */}
+        <div className='absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/30' />
+
+        {/* Play button */}
+        <div className='absolute inset-0 flex items-center justify-center'>
+          <div className='flex h-20 w-20 items-center justify-center rounded-full bg-red-600 shadow-lg transition-transform group-hover:scale-110'>
+            <Play className='h-8 w-8 fill-white text-white' />
+          </div>
         </div>
-        <a
-          href={`https://www.youtube.com/watch?v=${videoId}`}
-          target='_blank'
-          rel='noopener noreferrer'
-          className='mt-2 inline-flex rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-800'
-        >
-          Watch on YouTube →
-        </a>
-      </div>
+
+        {/* Badge */}
+        <div className='absolute bottom-4 left-4 flex items-center gap-2 rounded-lg bg-black/70 px-3 py-1.5 text-xs font-semibold text-white'>
+          <span>Watch on YouTube</span>
+        </div>
+      </a>
     );
   }
 
+  // Hybrid: Try embedding, fallback to thumbnail if it fails
   return (
-    <div className='aspect-video w-full overflow-hidden bg-black'>
+    <div className='relative aspect-video w-full overflow-hidden bg-black'>
+      {!iframeLoaded && (
+        <div className='absolute inset-0 flex items-center justify-center bg-black/80'>
+          <div className='h-12 w-12 animate-spin rounded-full border-4 border-slate-600 border-t-white' />
+        </div>
+      )}
+
       <iframe
+        ref={iframeRef}
         src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&fs=1`}
         title={title}
-        className='h-full w-full'
+        className={`h-full w-full transition-opacity duration-300 ${
+          iframeLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
         sandbox='allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox'
+        onLoad={() => setIframeLoaded(true)}
         onError={() => setShowFallback(true)}
       />
     </div>
