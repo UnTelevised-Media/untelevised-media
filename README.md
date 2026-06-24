@@ -135,7 +135,7 @@ Have a story? Expertise? Submit to our contributor network. Apply at [untelevise
 ### Build With Us
 We're building the infrastructure for independent media. If you're a developer, designer, or technologist interested in media freedom and decentralization, we're hiring. Check [untelevised.media/jobs](https://untelevised.media/jobs) or reach out directly.
 
----
+
 
 ## In the Media Landscape
 
