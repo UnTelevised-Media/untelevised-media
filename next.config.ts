@@ -53,6 +53,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
+  output: 'standalone',
   images: {
     // Explicit breakpoints eliminate unused transform sizes.
     // Defaults (8 device + 8 image = 16 sizes) generate far more variants than
