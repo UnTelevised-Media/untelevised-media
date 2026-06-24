@@ -29,7 +29,7 @@ const securityHeaders = [
       // img.clerk.com: Clerk user avatar proxied images (shown in the header UserButton).
       // *.googlesyndication.com, *.doubleclick.net, *.google.com, *.googleadservices.com:
       //   ad creatives, tracking pixels, and conversion images from AdSense / DoubleClick.
-      "img-src 'self' data: blob: https://cdn.sanity.io https://images.pexels.com https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://img.clerk.com https://*.adtrafficquality.google",
+      "img-src 'self' data: blob: https://cdn.sanity.io https://images.pexels.com https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://img.clerk.com https://img.youtube.com https://*.adtrafficquality.google",
       // *.adtrafficquality.google: Google SODAR (viewability + ad fraud monitoring).
       //   Without this, Google cannot measure ad quality on this site, which reduces
       //   fill rates and eCPM — AdSense actively penalises sites that block SODAR.
