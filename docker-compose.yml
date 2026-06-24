@@ -1,0 +1,90 @@
+version: '3.9'
+
+services:
+  untelevised-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Public environment variables (build-time)
+        NEXT_PUBLIC_PRODUCTION_URL: ${NEXT_PUBLIC_PRODUCTION_URL:-https://www.untelevised.media}
+        NEXT_PUBLIC_DEVELOPMENT_URL: ${NEXT_PUBLIC_DEVELOPMENT_URL:-https://www.untelevised.media}
+        NEXT_PUBLIC_METADATA_BASE_URL: ${NEXT_PUBLIC_METADATA_BASE_URL:-https://www.untelevised.media}
+        BASEURL: ${BASEURL:-https://www.untelevised.media/}
+        NEXT_PUBLIC_SANITY_PROJECT_ID: ${NEXT_PUBLIC_SANITY_PROJECT_ID:?}
+        NEXT_PUBLIC_SANITY_DATASET: ${NEXT_PUBLIC_SANITY_DATASET:-articles}
+        NEXT_PUBLIC_SANITY_API_VERSION: ${NEXT_PUBLIC_SANITY_API_VERSION:-2025-06-04}
+        NEXT_PUBLIC_SANITY_PROJECT_TITLE: ${NEXT_PUBLIC_SANITY_PROJECT_TITLE:-UnTelevised Media}
+        NEXT_PUBLIC_GA4_ID: ${NEXT_PUBLIC_GA4_ID:-}
+        NEXT_PUBLIC_GTM_ID: ${NEXT_PUBLIC_GTM_ID:-}
+        NEXT_PUBLIC_GAS_ID: ${NEXT_PUBLIC_GAS_ID:-}
+        NEXT_PUBLIC_CLERK_SIGN_IN_URL: ${NEXT_PUBLIC_CLERK_SIGN_IN_URL:-/sign-in}
+        NEXT_PUBLIC_CLERK_SIGN_UP_URL: ${NEXT_PUBLIC_CLERK_SIGN_UP_URL:-/sign-up}
+        NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: ${NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL:-/}
+        NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: ${NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:-/}
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:?}
+        NEXT_PUBLIC_ALGOLIA_APP_ID: ${NEXT_PUBLIC_ALGOLIA_APP_ID:-}
+        NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: ${NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY:-}
+        NEXT_PUBLIC_CORAL_URL: ${NEXT_PUBLIC_CORAL_URL:-}
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY:-}
+        NEXT_PUBLIC_STRIPE_MEMBERSHIP_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_MEMBERSHIP_PUBLISHABLE_KEY:-}
+        NEXT_PUBLIC_SENTRY_DSN: ${NEXT_PUBLIC_SENTRY_DSN:-}
+        SENTRY_ORG: ${SENTRY_ORG:-}
+        SENTRY_PROJECT: ${SENTRY_PROJECT:-}
+        SENTRY_AUTH_TOKEN: ${SENTRY_AUTH_TOKEN:-}
+
+    restart: unless-stopped
+
+    # Runtime environment variables
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+      # Private runtime variables (secrets)
+      SANITY_API_READ_TOKEN: ${SANITY_API_READ_TOKEN}
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      STRIPE_MEMBERSHIP_SECRET_KEY: ${STRIPE_MEMBERSHIP_SECRET_KEY}
+      STRIPE_MEMBERSHIP_WEBHOOK_SECRET: ${STRIPE_MEMBERSHIP_WEBHOOK_SECRET}
+      STRIPE_MEMBERSHIP_PRODUCT_IDS: ${STRIPE_MEMBERSHIP_PRODUCT_IDS}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SECRET_KEY: ${SUPABASE_SECRET_KEY}
+      UPSTASH_REDIS_URL: ${UPSTASH_REDIS_URL}
+      UPSTASH_REDIS_TOKEN: ${UPSTASH_REDIS_TOKEN}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      SENTRY_AUTH_TOKEN: ${SENTRY_AUTH_TOKEN}
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY}
+
+    ports:
+      - '${PORT:-3000}:3000'
+
+    # Health check
+    healthcheck:
+      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost:3000/']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+    # Resource limits (adjust based on your deployment needs)
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+    # Logging
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+# Optional: named volume for caching (speeds up rebuilds)
+# volumes:
+#   node_modules:
