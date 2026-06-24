@@ -30,28 +30,52 @@ export default function YouTubeEmbed({ videoUrl, title = 'Article video' }: YouT
       return;
     }
 
+    let isMounted = true;
+    let apiReadyHandler: (() => void) | null = null;
+
     // Load YouTube IFrame API
     const loadYouTubeAPI = () => {
       if (window.YT && window.YT.Player) {
-        initializePlayer(videoId);
-      } else {
-        const script = document.createElement('script');
-        script.src = 'https://www.youtube.com/iframe_api';
-        script.async = true;
-        script.defer = true;
-        document.body.appendChild(script);
-
-        // Set callback
-        window.onYouTubeIframeAPIReady = () => {
+        if (isMounted) {
           initializePlayer(videoId);
+        }
+      } else {
+        // Check if script already exists
+        if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+          const script = document.createElement('script');
+          script.src = 'https://www.youtube.com/iframe_api';
+          script.async = true;
+          script.defer = true;
+          document.body.appendChild(script);
+        }
+
+        // Set callback - use a more robust approach
+        apiReadyHandler = () => {
+          if (isMounted) {
+            initializePlayer(videoId);
+          }
         };
+
+        if (window.onYouTubeIframeAPIReady) {
+          // Preserve existing handler
+          const existingHandler = window.onYouTubeIframeAPIReady;
+          window.onYouTubeIframeAPIReady = () => {
+            existingHandler();
+            apiReadyHandler?.();
+          };
+        } else {
+          window.onYouTubeIframeAPIReady = apiReadyHandler;
+        }
       }
     };
 
     const initializePlayer = (id: string) => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !window.YT) return;
 
       try {
+        // Clear any existing content
+        containerRef.current.innerHTML = '';
+
         playerRef.current = new window.YT.Player(containerRef.current, {
           height: '100%',
           width: '100%',
@@ -67,41 +91,53 @@ export default function YouTubeEmbed({ videoUrl, title = 'Article video' }: YouT
           },
           events: {
             onReady: () => {
-              setIsLoading(false);
+              if (isMounted) {
+                setIsLoading(false);
+              }
             },
             onError: (event: any) => {
-              // Error codes:
-              // 2 = Invalid param
-              // 5 = HTML5 player error
-              // 100 = Video not found
-              // 101 = Video owner does not allow embedding
-              // 150 = Same as 101
-              const errorCodes: Record<number, string> = {
-                2: 'Invalid video parameter',
-                5: 'HTML5 player error',
-                100: 'Video not found',
-                101: 'Video owner does not allow embedding',
-                150: 'This video cannot be embedded',
-              };
-              const errorMsg =
-                errorCodes[event.data] || `Error loading video (code: ${event.data})`;
-              setError(errorMsg);
-              setIsLoading(false);
+              if (isMounted) {
+                // Error codes:
+                // 2 = Invalid param
+                // 5 = HTML5 player error
+                // 100 = Video not found
+                // 101 = Video owner does not allow embedding
+                // 150 = Same as 101
+                const errorCodes: Record<number, string> = {
+                  2: 'Invalid video parameter',
+                  5: 'HTML5 player error',
+                  100: 'Video not found',
+                  101: 'Video owner does not allow embedding',
+                  150: 'This video cannot be embedded',
+                };
+                const errorMsg =
+                  errorCodes[event.data] || `Error loading video (code: ${event.data})`;
+                setError(errorMsg);
+                setIsLoading(false);
+              }
             },
           },
         });
       } catch (e) {
-        setError('Failed to initialize video player');
-        setIsLoading(false);
+        if (isMounted) {
+          setError('Failed to initialize video player');
+          setIsLoading(false);
+        }
       }
     };
 
     loadYouTubeAPI();
 
     return () => {
+      isMounted = false;
       if (playerRef.current && typeof playerRef.current.destroy === 'function') {
-        playerRef.current.destroy();
+        try {
+          playerRef.current.destroy();
+        } catch (e) {
+          // Silently ignore destroy errors
+        }
       }
+      playerRef.current = null;
     };
   }, [videoUrl]);
 
