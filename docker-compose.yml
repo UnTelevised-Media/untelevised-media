@@ -2,37 +2,10 @@ version: '3.9'
 
 services:
   untelevised-frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        # Public environment variables (build-time)
-        NEXT_PUBLIC_PRODUCTION_URL: ${NEXT_PUBLIC_PRODUCTION_URL:-https://www.untelevised.media}
-        NEXT_PUBLIC_DEVELOPMENT_URL: ${NEXT_PUBLIC_DEVELOPMENT_URL:-https://www.untelevised.media}
-        NEXT_PUBLIC_METADATA_BASE_URL: ${NEXT_PUBLIC_METADATA_BASE_URL:-https://www.untelevised.media}
-        BASEURL: ${BASEURL:-https://www.untelevised.media/}
-        NEXT_PUBLIC_SANITY_PROJECT_ID: ${NEXT_PUBLIC_SANITY_PROJECT_ID:?}
-        NEXT_PUBLIC_SANITY_DATASET: ${NEXT_PUBLIC_SANITY_DATASET:-articles}
-        NEXT_PUBLIC_SANITY_API_VERSION: ${NEXT_PUBLIC_SANITY_API_VERSION:-2025-06-04}
-        NEXT_PUBLIC_SANITY_PROJECT_TITLE: ${NEXT_PUBLIC_SANITY_PROJECT_TITLE:-UnTelevised Media}
-        NEXT_PUBLIC_GA4_ID: ${NEXT_PUBLIC_GA4_ID:-}
-        NEXT_PUBLIC_GTM_ID: ${NEXT_PUBLIC_GTM_ID:-}
-        NEXT_PUBLIC_GAS_ID: ${NEXT_PUBLIC_GAS_ID:-}
-        NEXT_PUBLIC_CLERK_SIGN_IN_URL: ${NEXT_PUBLIC_CLERK_SIGN_IN_URL:-/sign-in}
-        NEXT_PUBLIC_CLERK_SIGN_UP_URL: ${NEXT_PUBLIC_CLERK_SIGN_UP_URL:-/sign-up}
-        NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: ${NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL:-/}
-        NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: ${NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:-/}
-        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:?}
-        NEXT_PUBLIC_ALGOLIA_APP_ID: ${NEXT_PUBLIC_ALGOLIA_APP_ID:-}
-        NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: ${NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY:-}
-        NEXT_PUBLIC_CORAL_URL: ${NEXT_PUBLIC_CORAL_URL:-}
-        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-}
-        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY:-}
-        NEXT_PUBLIC_STRIPE_MEMBERSHIP_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_MEMBERSHIP_PUBLISHABLE_KEY:-}
-        NEXT_PUBLIC_SENTRY_DSN: ${NEXT_PUBLIC_SENTRY_DSN:-}
-        SENTRY_ORG: ${SENTRY_ORG:-}
-        SENTRY_PROJECT: ${SENTRY_PROJECT:-}
-        SENTRY_AUTH_TOKEN: ${SENTRY_AUTH_TOKEN:-}
+    # Pre-built image on Docker Hub — no build required
+    # To rebuild locally: docker build -t untelevisedmedia/untelevised-media:latest .
+    image: untelevisedmedia/untelevised-media:latest
+    pull_policy: always
 
     restart: unless-stopped
 
