@@ -27,7 +27,7 @@ import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata/metadata';
 import NewsArticleStructuredData from '@/components/seo/NewsArticleStructuredData';
 import { getReadingTime } from '@/util/date/readingTime';
-import { getYoutubeEmbedUrl } from '@/util/url/youtubeUtils';
+import YouTubeEmbed from '@/components/post/YouTubeEmbed';
 import CorrectionNotice from '@/components/post/CorrectionNotice';
 import SourcesPanel from '@/components/post/SourcesPanel';
 import BookmarkButton from '@/components/bookmarks/BookmarkButton';
@@ -356,25 +356,8 @@ export default async function ArticlePage({ params }: Props) {
 
               {/* Embedded Video */}
               {article.hasEmbeddedVideo && article.videoLink && (
-                <div className='not-prose mb-8'>
-                  <div className='aspect-video overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
-                    {(() => {
-                      const embedUrl = getYoutubeEmbedUrl(article.videoLink);
-                      return embedUrl ? (
-                        <iframe
-                          src={embedUrl}
-                          title='Article video'
-                          className='h-full w-full'
-                          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
-                          sandbox='allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox'
-                        />
-                      ) : (
-                        <div className='flex h-full items-center justify-center bg-slate-900 text-slate-400'>
-                          <p>Unable to load video</p>
-                        </div>
-                      );
-                    })()}
-                  </div>
+                <div className='not-prose mb-8 overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
+                  <YouTubeEmbed videoUrl={article.videoLink} title='Article video' />
                 </div>
               )}
 
