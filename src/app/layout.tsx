@@ -91,6 +91,7 @@ function RootLayout({
         {/* Preconnect to critical third-party origins for faster resource loading */}
         <link rel='preconnect' href='https://cdn.sanity.io' />
         <link rel='preconnect' href='https://js.clerk.com' />
+        <link rel='preconnect' href='https://clerk.untelevised.media' />
         <link rel='dns-prefetch' href='https://www.googletagmanager.com' />
         <link rel='dns-prefetch' href='https://www.google-analytics.com' />
         {/*
