@@ -88,6 +88,11 @@ function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
+        {/* Preconnect to critical third-party origins for faster resource loading */}
+        <link rel='preconnect' href='https://cdn.sanity.io' />
+        <link rel='preconnect' href='https://js.clerk.com' />
+        <link rel='dns-prefetch' href='https://www.googletagmanager.com' />
+        <link rel='dns-prefetch' href='https://www.google-analytics.com' />
         {/*
           Google Consent Mode v2 — MUST run before any GTM/GA4 scripts load.
           Sets all storage to 'denied' by default; ConsentAwareAnalytics will

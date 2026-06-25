@@ -1,5 +1,7 @@
 'use client';
 
+const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_PRODUCTION_URL || 'http://localhost:3000';
+
 export default function sanityImageLoader({
   src,
   width,
@@ -16,7 +18,10 @@ export default function sanityImageLoader({
     url.searchParams.set('auto', 'format');
     return url.toString();
   }
-  // Non-Sanity images (Pexels, Supabase storage) — return original URL
-  // These are rare; their own CDNs handle caching
+  if (src.startsWith('/')) {
+    return `${NEXT_PUBLIC_URL}/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=${quality ?? 75}`;
+  }
+  // Third-party images (Pexels, Supabase storage) — return original URL
+  // Their own CDNs handle caching and optimization
   return src;
 }

@@ -110,6 +110,7 @@ export default async function ArticlePage({ params }: Props) {
             sizes='(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 100vw'
             className='object-cover'
             priority
+            fetchPriority='high'
             {...(urlForImage(article.mainImage)
               ? {
                   placeholder: 'blur' as const,
