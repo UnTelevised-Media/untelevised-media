@@ -6,10 +6,11 @@ function Logo(props: { renderDefault: () => React.ReactNode }) {
   return (
     <div className='flex items-center space-x-2'>
       <Image
-        src='/Logo.png'
+        src='/Logo.webp'
         width={75}
         height={75}
         alt='Logo'
+        unoptimized
         // className='object-cover'
       />
       {renderDefault && <>{renderDefault()}</>}

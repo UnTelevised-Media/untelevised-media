@@ -126,7 +126,7 @@ export function generateRSSXML(articles: RSSArticle[], liveEvents: RSSLiveEvent[
     <ttl>60</ttl>
     <atom:link href="${BASE_URL}/feed.xml" rel="self" type="application/rss+xml" />
     <image>
-      <url>${BASE_URL}/og-default.png</url>
+      <url>${BASE_URL}/og-default.webp</url>
       <title>UnTelevised Media</title>
       <link>${BASE_URL}</link>
     </image>

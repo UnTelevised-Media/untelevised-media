@@ -16,7 +16,11 @@ export default function sanityImageLoader({
     url.searchParams.set('auto', 'format');
     return url.toString();
   }
-  // Non-Sanity images (Pexels, Supabase storage) — return original URL
-  // These are rare; their own CDNs handle caching
+  // Public static images — return as-is, let Next.js Image component handle optimization
+  if (src.startsWith('/')) {
+    return src;
+  }
+  // Third-party images (Pexels, Supabase storage) — return original URL
+  // Their own CDNs handle caching and optimization
   return src;
 }

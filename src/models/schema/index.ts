@@ -49,6 +49,7 @@ import whistleblower from './whistleblower';
 // UI/component schemas
 import ctaButton from './buttons';
 import correctionObject from './correction';
+import imageGallery from './imageGallery';
 import source from './source';
 
 // Embed schemas
@@ -105,6 +106,7 @@ export const schemaTypes = [
 
   // UI/component schemas
   ctaButton,
+  imageGallery,
 
   // Embed schemas
   instagramEmbed,
@@ -172,6 +174,7 @@ export {
 
   // UI/component schemas
   ctaButton,
+  imageGallery,
 
   // Embed schemas
   instagramEmbed,

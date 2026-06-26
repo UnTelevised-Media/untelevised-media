@@ -439,6 +439,12 @@ export const queryArticleBySlug = groq`
       faqs,
       sources[]-> { label, type, url, description, isAnonymous },
       methodology,
+      imageGallery {
+        images[] {
+          asset,
+          alt
+        }
+      },
       "correction": correction { type, issuedAt, summary, detail },
       updatedAt,
       leadParagraph,

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/hurriya-pub/Logo-alt.png',
+        url: '/hurriya-pub/Logo-alt.webp',
         width: 1200,
         height: 630,
         alt: 'Hurriya Publications — Born in Solidarity. Built to Endure.',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: 'Our Story — Hurriya Publications',
     description:
       'Born in solidarity. Built to endure. An independent publisher under UnTelevised Media, built to put authors first.',
-    images: ['/hurriya-pub/Logo-alt.png'],
+    images: ['/hurriya-pub/Logo-alt.webp'],
   },
 };
 

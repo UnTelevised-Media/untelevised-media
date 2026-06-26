@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalUrl = album.seo?.canonicalUrl ?? `https://www.untelevised.media/albums/${slug}/`;
   const ogImageUrl = album.albumArt
     ? (urlForImage(album.albumArt)?.width(1200).height(630).url() ?? '')
-    : 'https://www.untelevised.media/og-default.png';
+    : 'https://www.untelevised.media/og-default.webp';
   const computedTitle = `${album.title} - ${artistNames} | Album`;
   const title = album.seo?.metaTitle ?? computedTitle;
   const computedDescription = `Listen to ${album.title} by ${artistNames}. ${album.description ? 'Learn more about this album.' : ''}`;
@@ -138,7 +138,7 @@ export default async function AlbumPage({ params }: Props) {
     genre: album.genres ?? [],
     image:
       urlForImage(album.albumArt)?.width(1200).height(630).url() ??
-      'https://www.untelevised.media/og-default.png',
+      'https://www.untelevised.media/og-default.webp',
     url: `https://www.untelevised.media/albums/${slug}/`,
   };
 

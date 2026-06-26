@@ -123,7 +123,7 @@ American mainstream media is American-centric by default. We cover international
 
 ### Read & Share
 Subscribe, read, share articles with your community. The more people who read independent journalism, the more sustainable it becomes.
-
+ 
 ### Contribute Your Work
 Have a story? Expertise? Submit to our contributor network. Apply at [untelevised.media/portal](https://untelevised.media/portal).
 
@@ -135,7 +135,7 @@ Have a story? Expertise? Submit to our contributor network. Apply at [untelevise
 ### Build With Us
 We're building the infrastructure for independent media. If you're a developer, designer, or technologist interested in media freedom and decentralization, we're hiring. Check [untelevised.media/jobs](https://untelevised.media/jobs) or reach out directly.
 
----
+
 
 ## In the Media Landscape
 

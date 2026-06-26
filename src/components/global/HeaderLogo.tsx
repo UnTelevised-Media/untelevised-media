@@ -11,12 +11,13 @@ function HeaderLogo() {
       <div className='absolute -inset-1 rounded-full bg-gradient-to-r from-untele/50 to-red-400/50 opacity-75 blur transition-opacity group-hover:opacity-100' />
       <div className='relative'>
         <Image
-          src='/Logo.png'
+          src='/Logo.webp'
           alt='UnTelevised Media Logo'
           width={40}
           height={40}
           className='rounded-full border-2 border-untele/50 shadow-lg md:h-[50px] md:w-[50px]'
           priority
+          unoptimized
         />
         <div className='absolute -right-1 -top-1 h-2.5 w-2.5 animate-pulse rounded-full bg-untele shadow-sm md:h-3 md:w-3' />
       </div>

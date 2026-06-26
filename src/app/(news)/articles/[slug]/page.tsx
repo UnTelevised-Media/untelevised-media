@@ -3,6 +3,7 @@ import type { Article } from '@/models/types/sanity';
 import { cache } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Script from 'next/script';
 import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import RichTextComponents from '@/components/providers/RichTextComponents';
@@ -27,10 +28,12 @@ import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata/metadata';
 import NewsArticleStructuredData from '@/components/seo/NewsArticleStructuredData';
 import { getReadingTime } from '@/util/date/readingTime';
+import YouTubeEmbed from '@/components/post/YouTubeEmbed';
 import CorrectionNotice from '@/components/post/CorrectionNotice';
 import SourcesPanel from '@/components/post/SourcesPanel';
 import BookmarkButton from '@/components/bookmarks/BookmarkButton';
 import CommentsSection from '@/components/post/CommentsSection';
+import ImageGalleryCarousel from '@/components/post/ImageGalleryCarousel';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import ViewPing from '@/components/post/ViewPing';
 import TrendingSection from '@/components/homepage/TrendingSection';
@@ -61,6 +64,10 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
+      {/* Social media embed SDKs — loaded only on article pages */}
+      <Script async src='https://www.tiktok.com/embed.js' strategy='lazyOnload' />
+      <Script async src='https://www.instagram.com/embed.js' strategy='lazyOnload' />
+
       <NewsArticleStructuredData article={article} slug={slug} />
 
       {/* BreadcrumbList JSON-LD */}
@@ -108,6 +115,7 @@ export default async function ArticlePage({ params }: Props) {
             sizes='(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 100vw'
             className='object-cover'
             priority
+            fetchPriority='high'
             {...(urlForImage(article.mainImage)
               ? {
                   placeholder: 'blur' as const,
@@ -353,17 +361,16 @@ export default async function ArticlePage({ params }: Props) {
               </div>
 
               {/* Embedded Video */}
-              {article.hasEmbeddedVideo && (
-                <div className='not-prose mb-8'>
-                  <div className='aspect-video overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
-                    <iframe
-                      src={article.videoLink}
-                      title='Article video'
-                      className='h-full w-full'
-                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
-                    />
-                  </div>
+              {article.hasEmbeddedVideo && article.videoLink && (
+                <div className='not-prose mb-8 overflow-hidden rounded-xl border border-slate-200 shadow-lg dark:border-slate-700'>
+                  <YouTubeEmbed videoUrl={article.videoLink} title='Article video' />
                 </div>
+              )}
+
+              {/* Image Gallery */}
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              {(article as any)?.imageGallery && (
+                <ImageGalleryCarousel gallery={(article as any).imageGallery} />
               )}
 
               {/* Correction / Retraction Notice */}
