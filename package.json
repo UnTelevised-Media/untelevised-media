@@ -23,7 +23,10 @@
     "rm-nm": "rm -rf node_modules",
     "algolia:index": "npx tsx scripts/algolia-initial-index.ts",
     "convert:webp": "node scripts/convert-to-webp.mjs",
-    "claude-code": "claude --dangerously-skip-permissions"
+    "claude-code": "claude --dangerously-skip-permissions",
+    "docker:clean": "node scripts/docker-clean.js",
+    "docker:build": "node scripts/docker-build.js",
+    "docker:build:push": "node scripts/docker-clean.js && node scripts/docker-build.js"
   },
   "dependencies": {
     "@blocknote/core": "^0.51.4",
