@@ -123,7 +123,7 @@ American mainstream media is American-centric by default. We cover international
 
 ### Read & Share
 Subscribe, read, share articles with your community. The more people who read independent journalism, the more sustainable it becomes.
-
+ 
 ### Contribute Your Work
 Have a story? Expertise? Submit to our contributor network. Apply at [untelevised.media/portal](https://untelevised.media/portal).
 
