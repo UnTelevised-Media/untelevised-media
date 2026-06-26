@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     siteName: 'UnTelevised Media',
     images: [
       {
-        url: '/og-default.png',
+        url: '/og-default.webp',
         width: 1200,
         height: 630,
         alt: 'UnTelevised Media',

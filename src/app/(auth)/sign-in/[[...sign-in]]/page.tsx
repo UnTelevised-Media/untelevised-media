@@ -30,7 +30,7 @@ export default function SignInPage() {
             <div className='relative'>
               <div className='absolute inset-0 rounded-full bg-untele/30 blur-2xl' />
               <Image
-                src='/Logo.png'
+                src='/Logo.webp'
                 alt='UnTelevised Media'
                 width={140}
                 height={140}

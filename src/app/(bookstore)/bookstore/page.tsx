@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/hurriya-pub/Logo-alt.png',
+        url: '/hurriya-pub/Logo-alt.webp',
         width: 1200,
         height: 630,
         alt: 'Hurriya Publications — An UnTelevised Media Imprint',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: 'Hurriya Publications Bookstore',
     description:
       'Independent books by literary authors — author-first revenue. An UnTelevised Media imprint.',
-    images: ['/hurriya-pub/Logo-alt.png'],
+    images: ['/hurriya-pub/Logo-alt.webp'],
   },
 };
 

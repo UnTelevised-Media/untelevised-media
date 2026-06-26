@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/hurriya-pub/Logo-alt.png',
+        url: '/hurriya-pub/Logo-alt.webp',
         width: 1200,
         height: 630,
         alt: 'Hurriya Publications — Returns & Refunds',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Returns & Refunds — Hurriya Publications',
-    images: ['/hurriya-pub/Logo-alt.png'],
+    images: ['/hurriya-pub/Logo-alt.webp'],
   },
 };
 

@@ -12,7 +12,7 @@ function GlobalStructuredData() {
         url: 'https://www.untelevised.media/',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://www.untelevised.media/Logo.png',
+          url: 'https://www.untelevised.media/Logo.webp',
         },
         sameAs: [
           'https://twitter.com/untelevised',
