@@ -34,7 +34,8 @@
       "PowerShell(tail *)",
       "Bash(docker login *)",
       "Bash(docker push *)",
-      "PowerShell(ffmpeg *)"
+      "PowerShell(ffmpeg *)",
+      "PowerShell(docker push *)"
     ],
     "additionalDirectories": [
       "C:\\Windows\\Temp"

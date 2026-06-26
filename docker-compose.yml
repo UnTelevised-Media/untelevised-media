@@ -37,27 +37,7 @@ services:
     healthcheck:
       test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost:3000/']
       interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-    # Resource limits (adjust based on your deployment needs)
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 1G
-        reservations:
-          cpus: '0.5'
-          memory: 512M
-
-    # Logging
-    logging:
-      driver: json-file
-      options:
-        max-size: '10m'
-        max-file: '3'
-
+      timeout: 10s/resume
 # Optional: named volume for caching (speeds up rebuilds)
 # volumes:
 #   node_modules:
