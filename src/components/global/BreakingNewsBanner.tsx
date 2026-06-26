@@ -3,7 +3,7 @@
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { querySiteSettings } from '@/lib/sanity/lib/queries';
-import BreakingNewsBannerClient from './BreakingNewsBannerClient';
+import LatestAlertsTicker from './BreakingNewsBannerClient';
 
 interface BannerData {
   isActive: boolean;
@@ -42,11 +42,10 @@ export default async function BreakingNewsBanner() {
   }
 
   return (
-    <BreakingNewsBannerClient
+    <LatestAlertsTicker
       headline={banner.headline}
       linkUrl={banner.linkUrl}
       linkLabel={banner.linkLabel ?? 'Read More'}
-      expiresAt={banner.expiresAt}
     />
   );
 }
