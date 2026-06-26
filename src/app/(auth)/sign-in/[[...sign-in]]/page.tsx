@@ -35,6 +35,7 @@ export default function SignInPage() {
                 width={140}
                 height={140}
                 className='relative drop-shadow-2xl'
+                unoptimized
               />
             </div>
 

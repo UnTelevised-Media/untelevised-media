@@ -10,6 +10,7 @@ function Logo(props: { renderDefault: () => React.ReactNode }) {
         width={75}
         height={75}
         alt='Logo'
+        unoptimized
         // className='object-cover'
       />
       {renderDefault && <>{renderDefault()}</>}
