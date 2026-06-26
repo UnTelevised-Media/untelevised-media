@@ -13,8 +13,10 @@ const path = require('path');
 
 console.log('🐳 BUILDING FRESH DOCKER IMAGE...\n');
 
-// Load .env.local if it exists
+// Load .env.local if it exists (local development)
 const envPath = path.join(process.cwd(), '.env.local');
+const isCI = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
+
 if (fs.existsSync(envPath)) {
   console.log('📝 Loading environment from .env.local...');
   const envContent = fs.readFileSync(envPath, 'utf-8');
@@ -30,6 +32,8 @@ if (fs.existsSync(envPath)) {
     }
   });
   console.log('✓ Environment loaded\n');
+} else if (isCI) {
+  console.log('🔑 GitHub Actions environment detected, using repository secrets\n');
 } else {
   console.log('⚠️  No .env.local found, using process.env variables\n');
 }
@@ -87,7 +91,11 @@ const missingVars = criticalVars.filter((v) => !process.env[v]);
 if (missingVars.length > 0) {
   console.error('❌ Missing critical environment variables:');
   missingVars.forEach((v) => console.error(`   - ${v}`));
-  console.error('\nAdd these to .env.local and try again.\n');
+  if (isCI) {
+    console.error('\nEnsure these are configured in GitHub Repository Secrets.\n');
+  } else {
+    console.error('\nAdd these to .env.local and try again.\n');
+  }
   process.exit(1);
 }
 
