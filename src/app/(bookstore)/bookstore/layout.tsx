@@ -46,7 +46,7 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
             <div className='relative h-[108px] w-[108px] shrink-0'>
               {/* Light mode logo */}
               <Image
-                src='/hurriya-pub/Logo-invert.png'
+                src='/hurriya-pub/Logo-invert.webp'
                 alt='Hurriya Publications'
                 fill
                 className='object-contain dark:hidden'
@@ -55,7 +55,7 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
               />
               {/* Dark mode logo */}
               <Image
-                src='/hurriya-pub/Logo.png'
+                src='/hurriya-pub/Logo.webp'
                 alt='Hurriya Publications'
                 fill
                 className='hidden object-contain dark:block'
@@ -84,7 +84,7 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
           <div className='relative hidden flex-1 overflow-hidden sm:block'>
             {/* Light mode banner */}
             <Image
-              src='/hurriya-pub/Banner.png'
+              src='/hurriya-pub/Banner.webp'
               alt=''
               fill
               className='object-contain object-right dark:hidden'
@@ -94,7 +94,7 @@ export default function BookstoreLayout({ children }: { children: React.ReactNod
             />
             {/* Dark mode banner */}
             <Image
-              src='/hurriya-pub/Banner-invert.png'
+              src='/hurriya-pub/Banner-invert.webp'
               alt=''
               fill
               className='hidden object-contain object-right dark:block'

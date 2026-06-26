@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  untelevised-frontend:
+    # Pre-built image on Docker Hub — no build required
+    # To rebuild locally: docker build -t untelevisedmedia/untelevised-media:latest .
+    image: untelevisedmedia/untelevised-media:latest
+    pull_policy: always
+
+    restart: unless-stopped
+
+    # Runtime environment variables
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+      # Private runtime variables (secrets)
+      SANITY_API_READ_TOKEN: ${SANITY_API_READ_TOKEN}
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      STRIPE_MEMBERSHIP_SECRET_KEY: ${STRIPE_MEMBERSHIP_SECRET_KEY}
+      STRIPE_MEMBERSHIP_WEBHOOK_SECRET: ${STRIPE_MEMBERSHIP_WEBHOOK_SECRET}
+      STRIPE_MEMBERSHIP_PRODUCT_IDS: ${STRIPE_MEMBERSHIP_PRODUCT_IDS}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SECRET_KEY: ${SUPABASE_SECRET_KEY}
+      UPSTASH_REDIS_URL: ${UPSTASH_REDIS_URL}
+      UPSTASH_REDIS_TOKEN: ${UPSTASH_REDIS_TOKEN}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      SENTRY_AUTH_TOKEN: ${SENTRY_AUTH_TOKEN}
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY}
+
+    ports:
+      - '${PORT:-3000}:3000'
+
+    # Health check
+    healthcheck:
+      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost:3000/']
+      interval: 30s
+      timeout: 10s/resume
+# Optional: named volume for caching (speeds up rebuilds)
+# volumes:
+#   node_modules:

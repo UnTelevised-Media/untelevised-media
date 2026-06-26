@@ -12,11 +12,11 @@ interface TrendingArticle {
   _id: string;
   title: string;
   slug: { current: string };
-  publishedAt: string;
-  viewCount: number;
   description?: string;
+  publishedAt: string;
   location?: string;
   tags?: string[];
+  viewCount: number;
   mainImage?: { asset: { _ref: string }; alt?: string };
   author: { name: string; slug: { current: string } } | null;
   categories?: { title: string; slug: { current: string } }[];
@@ -60,13 +60,14 @@ const getTrendingArticles = cache(async (): Promise<TrendingArticle[]> => {
       _id,
       title,
       slug,
-      publishedAt,
       description,
+      publishedAt,
       location,
       tags,
       mainImage,
-      author->{name, slug},
-      categories[]->{title, slug},
+      viewCount,
+      "author": author->{name, slug},
+      "categories": categories[]->{title, slug},
     } | order(publishedAt desc)`,
     params: {
       slugs: trendingSlugs.map((t) => t.slug),
@@ -144,7 +145,7 @@ export default async function TrendingSection({ variant }: Props = {}) {
                 <div className='mb-2 flex flex-wrap gap-1'>
                   {top.categories.map((cat) => (
                     <span
-                      key={cat.slug.current}
+                      key={cat.title}
                       className='bg-untele px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'
                     >
                       {cat.title}

@@ -26,8 +26,19 @@
       "Bash(printf:*)",
       "Bash(npm run build:*)",
       "Read(//r/Development/untelevised-media/src/app/\\(user\\)/**)",
-      "Bash(dir \"r:\\\\Development\\\\untelevised-media\")"
+      "Bash(dir \"r:\\\\Development\\\\untelevised-media\")",
+      "Bash(git push *)",
+      "Bash(docker --version)",
+      "Bash(docker info *)",
+      "Bash(docker build *)",
+      "PowerShell(tail *)",
+      "Bash(docker login *)",
+      "Bash(docker push *)",
+      "PowerShell(ffmpeg *)",
+      "PowerShell(docker push *)"
     ],
-    "additionalDirectories": ["C:\\Windows\\Temp"]
+    "additionalDirectories": [
+      "C:\\Windows\\Temp"
+    ]
   }
 }

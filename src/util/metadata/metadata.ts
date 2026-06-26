@@ -31,8 +31,8 @@ type FactCheck = {
 const BASE_URL = 'https://untelevised.media';
 const SITE_NAME = 'UnTelevised Media';
 export const TWITTER_HANDLE = '@untelevised';
-export const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.png`;
-export const HURRIYA_OG_IMAGE = `${BASE_URL}/hurriya-pub/Logo-alt.png`;
+export const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.webp`;
+export const HURRIYA_OG_IMAGE = `${BASE_URL}/hurriya-pub/Logo-alt.webp`;
 
 // Canonical URL builder — always uses trailing slash (matches trailingSlash: true in next.config)
 export function getCanonicalUrl(...segments: string[]): string {

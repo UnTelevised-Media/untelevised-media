@@ -10,11 +10,9 @@ declare global {
 
 const PREFIX = '[AdSense]';
 
-// Always-on debug: visible in Chrome DevTools Console (Verbose level) in production.
+// Debug logs suppressed in production
 function dbg(msg: string, ...args: unknown[]) {
-  if (process.env.NODE_ENV !== 'development') {
-    console.warn(PREFIX, msg, ...args);
-  }
+  // Suppress debug logs entirely
 }
 function warn(msg: string, ...args: unknown[]) {
   console.warn(PREFIX, msg, ...args);

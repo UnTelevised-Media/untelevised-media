@@ -23,18 +23,18 @@ const securityHeaders = [
       //   scripts causes AdSense to log a CSP error and reduces viewability signals,
       //   which lowers eCPM and fill rates.
       // static.cloudflareinsights.com: Cloudflare Web Analytics beacon.
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://js.clerk.com https://clerk.untelevised.media https://*.clerk.accounts.dev https://pagead2.googlesyndication.com https://partner.googleadservices.com https://adservice.google.com https://fundingchoicesmessages.google.com https://*.adtrafficquality.google https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://va.vercel-scripts.com https://static.cloudflareinsights.com https://connect.facebook.net https://www.tiktok.com https://www.instagram.com https://coral.untelevised.media https://*.tiktokcdn.com https://*.tiktokcdn-us.com",
+      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://js.clerk.com https://clerk.untelevised.media https://*.clerk.accounts.dev https://pagead2.googlesyndication.com https://partner.googleadservices.com https://adservice.google.com https://fundingchoicesmessages.google.com https://*.adtrafficquality.google https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://connect.facebook.net https://www.tiktok.com https://www.instagram.com https://www.youtube.com https://coral.untelevised.media https://*.tiktokcdn.com https://*.tiktokcdn-us.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.tiktokcdn.com https://*.tiktokcdn-us.com",
       "font-src 'self' https://fonts.gstatic.com data:",
       // img.clerk.com: Clerk user avatar proxied images (shown in the header UserButton).
       // *.googlesyndication.com, *.doubleclick.net, *.google.com, *.googleadservices.com:
       //   ad creatives, tracking pixels, and conversion images from AdSense / DoubleClick.
-      "img-src 'self' data: blob: https://cdn.sanity.io https://images.pexels.com https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://img.clerk.com https://*.adtrafficquality.google",
+      "img-src 'self' data: blob: https://untelevised.media https://*.untelevised.media https://cdn.sanity.io https://images.pexels.com https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://img.clerk.com https://img.youtube.com https://*.adtrafficquality.google",
       // *.adtrafficquality.google: Google SODAR (viewability + ad fraud monitoring).
       //   Without this, Google cannot measure ad quality on this site, which reduces
       //   fill rates and eCPM — AdSense actively penalises sites that block SODAR.
       // Note: http: is for localhost development (http://localhost:3000); production uses https
-      "connect-src 'self' http: https: ws: wss: https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://vitals.vercel-insights.com https://*.sentry.io https://*.algolia.net https://*.algolianet.com https://*.googlesyndication.com https://adservice.google.com https://*.doubleclick.net https://cm.g.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google",
+      "connect-src 'self' http: https: ws: wss: https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://*.sentry.io https://*.algolia.net https://*.algolianet.com https://*.googlesyndication.com https://adservice.google.com https://*.doubleclick.net https://cm.g.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google",
       // AdSense renders ads inside iframes; fundingchoicesmessages.google.com hosts
       // Google's GDPR consent dialog iframe shown before serving ads to EU visitors.
       // Facebook embeds (posts, reels, videos) may use various subdomains (www, m, etc)
@@ -53,6 +53,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
+  output: 'standalone',
   images: {
     // Explicit breakpoints eliminate unused transform sizes.
     // Defaults (8 device + 8 image = 16 sizes) generate far more variants than

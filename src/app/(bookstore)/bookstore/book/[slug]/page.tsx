@@ -51,7 +51,7 @@ function buildProductJsonLd(book: SanityBook, reviews: BookReview[]): string {
       url: 'https://www.untelevised.media/bookstore/',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.untelevised.media/hurriya-pub/Logo-alt.png',
+        url: 'https://www.untelevised.media/hurriya-pub/Logo-alt.webp',
       },
     },
     isbn: book.isbn,

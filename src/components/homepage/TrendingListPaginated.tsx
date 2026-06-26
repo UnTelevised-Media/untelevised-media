@@ -14,7 +14,7 @@ export interface TrendingListArticle {
   categories?: { title: string; slug: { current: string } }[];
 }
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 7;
 
 export default function TrendingListPaginated({ articles }: { articles: TrendingListArticle[] }) {
   const [page, setPage] = useState(0);
@@ -65,27 +65,29 @@ export default function TrendingListPaginated({ articles }: { articles: Trending
           <li key={article._id} className='group'>
             <Link
               href={`/articles/${article.slug.current}`}
-              className='flex items-start gap-3 p-3 transition-colors hover:bg-muted/50'
+              className='flex items-start gap-3.5 p-3.5 transition-colors hover:bg-muted/50'
             >
               <span className='w-7 shrink-0 text-2xl font-black tabular-nums leading-none text-muted-foreground/30'>
                 {rankOffset + index}
               </span>
-              <div className='min-w-0 flex-1 space-y-1'>
-                {article.categories?.[0] && (
-                  <span className='inline-block bg-untele px-1.5 py-0.5 text-[9px] font-black uppercase tracking-widest text-white'>
-                    {article.categories[0].title}
-                  </span>
-                )}
+              <div className='min-w-0 flex-1 space-y-1.5'>
                 <p className='line-clamp-2 text-sm font-black uppercase leading-tight tracking-wide transition-colors group-hover:text-untele'>
                   {article.title}
                 </p>
-                <div className='flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground'>
-                  {article.author?.name && <span>{article.author.name}</span>}
-                  {article.publishedAt && (
-                    <>
-                      {article.author?.name && <span aria-hidden='true'>·</span>}
-                      <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
-                    </>
+                <div className='flex items-center justify-between text-xs uppercase tracking-widest text-muted-foreground'>
+                  <div className='flex items-center gap-2'>
+                    {article.author?.name && <span>{article.author.name}</span>}
+                    {article.publishedAt && (
+                      <>
+                        {article.author?.name && <span aria-hidden='true'>·</span>}
+                        <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
+                      </>
+                    )}
+                  </div>
+                  {article.categories?.[0] && (
+                    <span className='bg-untele px-1.5 py-0.5 text-[9px] font-black text-white'>
+                      {article.categories[0].title}
+                    </span>
                   )}
                 </div>
               </div>

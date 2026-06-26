@@ -47,7 +47,7 @@ function NewsArticleStructuredData({ article, slug }: Props) {
           url: 'https://untelevised.media/',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://untelevised.media/Logo.png',
+            url: 'https://untelevised.media/Logo.webp',
           },
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

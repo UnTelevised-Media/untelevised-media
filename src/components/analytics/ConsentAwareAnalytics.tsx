@@ -3,8 +3,6 @@
 
 import { useEffect } from 'react';
 import Script from 'next/script';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { useConsentCheck } from '@/hooks/googleAdSense/useConsent';
 
 interface ConsentAwareAnalyticsProps {
@@ -76,11 +74,7 @@ function ConsentAwareAnalytics({ gtmId, ga4Id }: ConsentAwareAnalyticsProps) {
         />
       )}
 
-      {/* Vercel Analytics — only when analytics consent is granted */}
-      {canUseAnalytics && <Analytics />}
-
-      {/* Vercel Speed Insights — only when analytics consent is granted */}
-      {canUseAnalytics && <SpeedInsights />}
+      {/* Analytics managed via GTM and GA4 */}
     </>
   );
 }

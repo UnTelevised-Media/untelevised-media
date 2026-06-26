@@ -354,6 +354,65 @@ export function formatDate(date: Date, format: DateFormat): string {
 }
 ```
 
+### ✓ CORRECT - Client-Side Pagination (Homepage Feeds)
+
+**Pattern: Server fetches all articles once, client handles pagination via slicing**
+
+For homepage feeds (RawFeed, FieldReports, TrendingList), use client-side pagination:
+- ✅ Single API call on page load
+- ✅ Instant pagination (no network delay)
+- ✅ Lowest API quota usage
+- ⚠️ Trade-off: ~100-200KB in browser memory (acceptable at current traffic levels)
+
+```typescript
+// In components/homepage/RawFeedServer.tsx (server component)
+export default async function RawFeedServer({ excludedIds }: Props) {
+  // Fetch ALL articles once - single API call
+  const { data: articles } = await sanityFetch<RawFeedArticle[]>({
+    query: `*[_type == "article" && defined(slug.current) ${excludeFilter}]
+      | order(publishedAt desc) { ... }`,
+    tags: ['article'],
+  });
+
+  // Pass all articles to client component for pagination
+  return <RawFeedPaginated articles={articles ?? []} />;
+}
+```
+
+```typescript
+// In components/homepage/RawFeedPaginated.tsx (client component)
+'use client';
+
+export default function RawFeedPaginated({ articles }: Props) {
+  const [page, setPage] = useState(0);
+
+  // Client-side pagination: slice articles as user clicks "Load More"
+  const visibleArticles = articles.slice(0, (page + 1) * ARTICLES_PER_PAGE);
+  const hasMore = page < Math.ceil(articles.length / ARTICLES_PER_PAGE) - 1;
+
+  const handleLoadMore = () => {
+    setPage((prev) => prev + 1); // Instant update, no network call
+  };
+
+  return (
+    <>
+      {visibleArticles.map(/* render articles */)}
+      {hasMore && <button onClick={handleLoadMore}>Load More</button>}
+    </>
+  );
+}
+```
+
+**When to use:**
+- ✓ Homepage feeds with ~100-500 items
+- ✓ Site traffic < 10K visitors/month
+- ✓ Priority: minimize API quota usage
+
+**When NOT to use:**
+- ❌ Large datasets (10K+ items)
+- ❌ High-traffic sites with memory constraints
+- ❌ SEO pagination (use URL-based server-side pagination instead)
+
 ### ❌ INCORRECT
 
 ```typescript

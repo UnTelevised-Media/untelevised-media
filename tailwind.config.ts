@@ -55,6 +55,8 @@ const config: Config = {
         //   xl: '1165px',
         xl: '1280px',
         dxl: '1300px',
+        hlg: '1490px',
+        lxl: '1630px',
         xxl: '1750px',
         mxl: '2055px',
       },
