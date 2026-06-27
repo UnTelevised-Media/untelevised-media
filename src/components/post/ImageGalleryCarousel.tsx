@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import urlForImage from '@/util/url/urlForImage';
@@ -21,14 +21,12 @@ const AUTO_ROTATE_INTERVAL = 5000; // 5 seconds
 
 export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [thumbnailScroll, setThumbnailScroll] = useState(0);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const touchStartRef = useRef<number | null>(null);
   const autoRotateTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const images = gallery?.images || [];
-  if (images.length === 0) return null;
+  const images = useMemo(() => gallery?.images ?? [], [gallery?.images]);
 
   const selectedImage = images[selectedIndex];
   const imageUrl = urlForImage(selectedImage)?.url();
@@ -37,13 +35,15 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
 
   // Preload adjacent images for faster responsiveness
   useEffect(() => {
-    if (images.length <= 1) return;
+    if (images.length <= 1) {
+      return;
+    }
 
     const preloadImage = (index: number) => {
       const img = new window.Image();
-      const imageUrl = urlForImage(images[index])?.url();
-      if (imageUrl) {
-        img.src = imageUrl;
+      const url = urlForImage(images[index])?.url();
+      if (url) {
+        img.src = url;
       }
     };
 
@@ -56,7 +56,9 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
 
   // Auto-rotate timer setup
   useEffect(() => {
-    if (!isAutoRotating || images.length <= 1) return;
+    if (!isAutoRotating || images.length <= 1) {
+      return;
+    }
 
     autoRotateTimerRef.current = setInterval(() => {
       setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
@@ -95,7 +97,7 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
   };
 
   const snapThumbnailToView = (index: number) => {
-    if (!scrollContainerRef.current) return;
+    if (!scrollContainerRef.current) {return;}
     const container = scrollContainerRef.current;
     const itemPos = index * thumbGapWidth;
     const containerWidth = container.clientWidth;
@@ -111,7 +113,7 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
   };
 
   const handleThumbnailScroll = (direction: 'left' | 'right') => {
-    if (!scrollContainerRef.current) return;
+    if (!scrollContainerRef.current) {return;}
     const container = scrollContainerRef.current;
     const scrollAmount = thumbGapWidth * 3; // Scroll by 3 items
     const newScroll =
@@ -129,7 +131,7 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartRef.current === null) return;
+    if (touchStartRef.current === null) {return;}
     const touchEnd = e.changedTouches[0].clientX;
     const diff = touchStartRef.current - touchEnd;
 
@@ -153,6 +155,10 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
       scrollContainerRef.current.scrollWidth - scrollContainerRef.current.clientWidth - 10
     : false;
 
+  if (images.length === 0) {
+    return null;
+  }
+
   return (
     <section className='not-prose mb-8'>
       <div className='rounded-xl border border-slate-200 bg-white/50 shadow-lg dark:border-slate-700 dark:bg-slate-900/50'>
@@ -166,7 +172,7 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
             {imageUrl && (
               <Image
                 src={imageUrl}
-                alt={selectedImage.alt || 'Gallery image'}
+                alt={selectedImage.alt ?? 'Gallery image'}
                 fill
                 className='object-cover'
                 sizes='(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 100vw'
@@ -236,7 +242,7 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
                 >
                   {images.map((image, index) => (
                     <button
-                      key={image._key || index}
+                      key={image._key ?? index}
                       onClick={() => handleThumbnailClick(index)}
                       className={`relative h-24 w-24 shrink-0 overflow-hidden rounded-lg border-2 transition-all duration-200 ${
                         selectedIndex === index
@@ -247,8 +253,8 @@ export default function ImageGalleryCarousel({ gallery }: ImageGalleryCarouselPr
                       aria-current={selectedIndex === index ? 'true' : 'false'}
                     >
                       <Image
-                        src={urlForImage(image)?.url() || ''}
-                        alt={image.alt || `Gallery thumbnail ${index + 1}`}
+                        src={urlForImage(image)?.url() ?? ''}
+                        alt={image.alt ?? `Gallery thumbnail ${index + 1}`}
                         fill
                         className='object-cover'
                         sizes='100px'

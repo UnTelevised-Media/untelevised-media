@@ -4,6 +4,79 @@ All notable changes to this project are documented here.
 
 ---
 
+## [Unreleased] — Article Page Improvements & Security Hardening
+
+### Fixed
+
+- **Content Security Policy (CSP) environment-aware configuration** — Split CSP into environment-specific policies: production enforces strict HTTPS/WSS connections with `upgrade-insecure-requests`, development allows `ws://` and `http:` for Next.js HMR.
+- **Permissions-Policy browser feature restrictions** — Added restrictive Permissions-Policy header limiting camera, microphone, geolocation, accelerometer, gyroscope, and magnetometer; unload event only allowed for embedded social platforms (TikTok, Facebook, Instagram, YouTube).
+- **React hooks conditional call violations** — Fixed ImageGalleryCarousel component to use `useMemo` for computed image values, eliminating conditional hook call errors.
+- **Nullish coalescing consistency** — Replaced all logical OR (`||`) operators with nullish coalescing (`??`) throughout ArticleCards and ImageGalleryCarousel components.
+- **TypeScript explicit any errors** — Added proper `eslint-disable-next-line @typescript-eslint/no-explicit-any` comments with context for unavoidable type assertions.
+- **Unused code cleanup** — Removed unused `ARTICLES_PER_PAGE` constant, unused function parameters prefixed with underscore (`_msg`, `_args`, `_options`).
+- **Duplicate imports** — Consolidated multiple lucide-react imports into single import statements.
+- **Coral comments CSP allowlist** — Added `https://coral.untelevised.media` to `style-src` and `font-src` directives to allow Coral comment system stylesheets and fonts; added `https://s3.amazonaws.com` to `font-src` for Giphy fonts used in Coral embeds.
+
+### Performance
+
+- **LCP optimization** — Added `priority` prop to featured article image for faster Largest Contentful Paint rendering.
+
+---
+
+## [3.0.0] — 2026-06-26 — Major Release: Docker Deployment, Image Optimization, YouTube Embeds & Media Enhancements
+
+Substantial infrastructure, performance, and media handling improvements. Docker containerization with CoolaFly deployment docs, complete PNG-to-WebP image conversion, hybrid YouTube embed system with age-restricted video support, image gallery carousels for articles, social media embed optimization, and multiple performance enhancements.
+
+### Added
+
+- **Docker containerization** (`Dockerfile`, `docker-compose.yml`, `.dockerignore`) — Multi-stage Dockerfile with pnpm caching, Node.js 22 alpine, optimized build and runtime images; docker-compose.yml for local development with configurable port mapping and volume mounts.
+- **Docker deployment documentation** (`DEPLOYMENT_COOLAFLY.md`) — Step-by-step CoolaFly Ubuntu server deployment guide covering SSH setup, Docker installation, environment configuration, Caddyfile reverse proxy, systemd service, and health monitoring.
+- **Docker build scripts** (`scripts/docker-build.js`, `scripts/docker-clean.js`) — Automated Docker image building with GitHub Actions detection and repository secrets sourcing; image cleanup utility.
+- **GitHub Actions Docker workflow** (`.github/workflows/docker-build-push.yml`) — CI/CD pipeline for building and pushing Docker images to Docker Hub on releases.
+- **PNG-to-WebP conversion** (`scripts/convert-all-png-to-webp.mjs`) — Batch image conversion script for all public PNG assets with quality settings and progress reporting.
+- **Image optimization scripts** (`scripts/optimize-logo.mjs`) — Dedicated logo optimization with format-specific quality tiers.
+- **YouTube hybrid embed system** (`src/components/post/YouTubeEmbed.tsx`) — Smart fallback system: attempts IFrame API for age-restricted videos, falls back to basic iframe with timeout detection, handles SSR safely with lazy initialization.
+- **YouTube URL utilities** (`src/util/url/youtubeUtils.ts`) — URL parsing and embed format conversion helpers for YouTube URLs.
+- **Image gallery carousel** (`src/components/post/ImageGalleryCarousel.tsx`) — Full-featured carousel with auto-rotation, keyboard navigation, image preloading, slide indicators, and responsive design.
+- **Image gallery schema** (`src/models/schema/imageGallery.ts`) — Sanity schema for gallery objects with alt text, captions, and image arrays.
+- **WebP favicon assets** — 16x16, 28x28, 32x32, 112x112, 192x192, 512x512 PNG→WebP conversions plus WebP site manifest logo.
+- **Hurriya Publications WebP branding** — Logo and banner assets in WebP format.
+
+### Changed
+
+- **All public PNG images → WebP** — Complete codebase migration of favicon, logo, and branded image references to WebP format.
+- **Social media embed SDK optimization** — Removed duplicative SDK script loads; consolidated Facebook, Twitter, TikTok, Instagram embed initialization.
+- **AdSense debug logs suppressed** — Disabled verbose debug output in production.
+- **React component optimization** — Added `unoptimized` flag to static Image components; Docker CI workflow updated for optimal caching.
+- **React hydration fix** — Resolved #418 LatestAlertsTicker hydration error with proper client-side state management.
+- **Image CSP improvements** — Fixed CSP directives for public static image loading and Sanity CDN URLs.
+- **Docker build secret sourcing** — Improved GitHub Actions detection to use repository secrets for environment variables during Docker build.
+- **Environment variables** — Added Supabase membership env var references to Docker build process.
+
+### Fixed
+
+- **AdSense script attributes** — Removed unsupported `data-nscript` attribute from AdSense script tag.
+- **Vercel analytics removal** — Removed deprecated Vercel analytics integration; maintained Speed Insights.
+- **Image loader compatibility** — Fixed custom image loader for proper public static image handling.
+- **YouTube iframe CSP** — Allowed YouTube IFrame API script in Content-Security-Policy.
+- **YouTube iframe sandbox** — Added proper sandbox attributes for iframe security.
+- **YouTube URL conversion** — Fixed URL format conversion for embed compatibility.
+- **YouTube cleanup errors** — Prevented `removeChild` errors in YouTubeEmbed cleanup.
+
+### Performance
+
+- **Clerk preconnect** — Added preconnect hint for clerk.untelevised.media (310ms LCP improvement).
+- **Page load optimization** — Reduced bundle size and optimized critical rendering path.
+- **Image preloading in gallery** — Automatic preloading of next/previous images in carousel.
+- **Gallery auto-rotation** — Smooth auto-cycling of images in gallery components.
+
+### Documentation
+
+- **CoolaFly troubleshooting guide** (`COOLAFLY_TROUBLESHOOTING.md`) — Common issues and solutions for Coral deployment on CoolaFly infrastructure.
+- **Docker build skill** (`.claude/skills/verifier-docker-build.md`) — Claude Code skill documentation for Docker build verification.
+
+---
+
 ## [Unreleased] — Membership & Supporter Tiers — Stripe Subscriptions (Issue #13)
 
 Recurring reader memberships via Stripe Checkout. Three tiers (Supporter $5, Contributor $15, Patron $50). Stripe is a **separate project** within the same org to isolate membership billing from the bookstore. Member records are stored in a dedicated **Supabase project** (not Sanity). Stripe webhook events are handled by a **Supabase Edge Function** (`stripe-membership-webhook`). Clerk user IDs are captured at checkout and linked to membership rows in Supabase for access gating.

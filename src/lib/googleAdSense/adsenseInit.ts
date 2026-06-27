@@ -11,7 +11,7 @@ declare global {
 const PREFIX = '[AdSense]';
 
 // Debug logs suppressed in production
-function dbg(msg: string, ...args: unknown[]) {
+function dbg(_msg: string, ..._args: unknown[]) {
   // Suppress debug logs entirely
 }
 function warn(msg: string, ...args: unknown[]) {
