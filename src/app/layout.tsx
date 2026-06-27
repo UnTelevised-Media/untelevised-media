@@ -95,41 +95,6 @@ function RootLayout({
         <link rel='dns-prefetch' href='https://www.googletagmanager.com' />
         <link rel='dns-prefetch' href='https://www.google-analytics.com' />
         {/*
-          Suppress third-party embed script errors that cannot be fixed on our end.
-          TikTok's embed.js tries to attach unload listeners (blocked by Permissions-Policy).
-          Suppress console warnings from third-party scripts trying to access restricted sensors.
-        */}
-        <Script
-          id='suppress-third-party-errors'
-          strategy='beforeInteractive'
-          dangerouslySetInnerHTML={{
-            __html: `
-              const originalWarn = console.warn;
-              const originalError = console.error;
-              const errorPatterns = [
-                /Permissions policy violation/i,
-                /accelerometer/i,
-                /devicemotion/i,
-                /Cannot listen to an undefined element/i,
-              ];
-              const shouldSuppress = (msg) => {
-                const str = String(msg);
-                return errorPatterns.some(pattern => pattern.test(str));
-              };
-              console.warn = function(...args) {
-                if (!shouldSuppress(args[0])) {
-                  originalWarn.apply(console, args);
-                }
-              };
-              console.error = function(...args) {
-                if (!shouldSuppress(args[0])) {
-                  originalError.apply(console, args);
-                }
-              };
-            `,
-          }}
-        />
-        {/*
           Google Consent Mode v2 — MUST run before any GTM/GA4 scripts load.
           Sets all storage to 'denied' by default; ConsentAwareAnalytics will
           call gtag('consent', 'update', ...) reactively once the user decides.
