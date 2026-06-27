@@ -17,7 +17,7 @@ export default function TikTokEmbedInner({ videoUrl }: { videoUrl: string }) {
   const [renderError, setRenderError] = useState(false);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) {return;}
 
     const tiktokWindow = window as TikTokWindow;
     if (tiktokWindow.tiktok?.embed?.lib?.render) {

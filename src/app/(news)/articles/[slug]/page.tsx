@@ -359,6 +359,7 @@ export default async function ArticlePage({ params }: Props) {
                         height={imgH}
                         style={{ width: '100%', height: 'auto' }}
                         className='block'
+                        priority
                       />
                     );
                   })()}
@@ -382,9 +383,7 @@ export default async function ArticlePage({ params }: Props) {
 
               {/* Image Gallery */}
               {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-              {(article as any)?.imageGallery && (
-                <ImageGalleryCarousel gallery={(article as any).imageGallery} />
-              )}
+              {(article as any)?.imageGallery && <ImageGalleryCarousel gallery={(article as any).imageGallery} />}
 
               {/* Correction / Retraction Notice */}
               {/* GROQ dereferences corrections->, TypeScript sees only reference */}

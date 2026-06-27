@@ -2,9 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Play } from 'lucide-react';
+import { Play, AlertCircle } from 'lucide-react';
 import { getYoutubeVideoId } from '@/util/url/youtubeUtils';
-import { AlertCircle } from 'lucide-react';
 
 interface YouTubeEmbedProps {
   videoUrl: string;

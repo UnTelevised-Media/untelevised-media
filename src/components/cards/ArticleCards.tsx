@@ -46,7 +46,7 @@ function ArticleCard({ articles }: { articles: Article[] }) {
                     key={category._key ?? index}
                     className='inline-block w-fit rounded-full border border-untele/30 bg-untele/10 px-3 py-1 text-xs font-medium text-untele'
                   >
-                    {(category as { title?: string }).title || 'Uncategorized'}
+                    {(category as { title?: string }).title ?? 'Uncategorized'}
                   </span>
                 ))}
               </div>
@@ -124,7 +124,7 @@ function ArticleListCard({ articles }: { articles: Article[] }) {
                       key={category._key ?? index}
                       className='inline-block w-fit rounded-full border border-untele/30 bg-untele/20 px-1.5 py-0.5 text-[10px] font-medium text-untele'
                     >
-                      {(category as { title?: string }).title || 'Uncategorized'}
+                      {(category as { title?: string }).title ?? 'Uncategorized'}
                     </span>
                   ))}
                 </div>
@@ -175,7 +175,7 @@ function FeaturedArticleCard({ article }: { article: Article }) {
         <div className='absolute bottom-0 left-0 w-full border-none bg-slate-900/60 backdrop-blur-sm transition duration-500 group-hover:bg-slate-800/70'>
           {article.categories?.[0] && (
             <span className='mb-1 ml-4 mt-2 inline-block rounded-full border border-untele bg-untele/90 px-3 py-1 text-xs font-medium text-white'>
-              {(article.categories[0] as { title?: string }).title || 'Uncategorized'}
+              {(article.categories[0] as { title?: string }).title ?? 'Uncategorized'}
             </span>
           )}
 
@@ -197,7 +197,7 @@ function FeaturedArticleCard({ article }: { article: Article }) {
             <div className='flex items-center gap-4'>
               <p className='font-medium text-slate-300'>
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                {(article.author as any)?.name || 'Author'}
+                {(article.author as any)?.name ?? 'Author'}
               </p>
               <div className='flex items-center gap-2'>
                 <ShareIcon className='h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-untele' />
@@ -213,7 +213,8 @@ function FeaturedArticleCard({ article }: { article: Article }) {
               {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               {(article as any)?.body && (
                 <span className='text-xs uppercase tracking-widest'>
-                  · {getReadingTime((article as any).body)}
+                  ·{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  {getReadingTime((article as any).body)}
                 </span>
               )}
             </div>

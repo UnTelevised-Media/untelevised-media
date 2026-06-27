@@ -2,8 +2,6 @@ import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import type { RawFeedArticle } from '@/models/types/feeds';
 import RawFeedPaginated from './RawFeedPaginated';
 
-const ARTICLES_PER_PAGE = 12;
-
 interface Props {
   excludedIds: string[];
 }
