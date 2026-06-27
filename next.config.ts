@@ -13,6 +13,7 @@ const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value: [
+      'upgrade-insecure-requests',
       "default-src 'self'",
       // Next.js runtime, Clerk, Stripe, AdSense all require unsafe-eval/unsafe-inline.
       // fundingchoicesmessages.google.com: Google's GDPR/Funding Choices consent messaging —
@@ -34,7 +35,7 @@ const securityHeaders = [
       //   Without this, Google cannot measure ad quality on this site, which reduces
       //   fill rates and eCPM — AdSense actively penalises sites that block SODAR.
       // Note: http: is for localhost development (http://localhost:3000); production uses https
-      "connect-src 'self' http: https: ws: wss: https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://*.sentry.io https://*.algolia.net https://*.algolianet.com https://*.googlesyndication.com https://adservice.google.com https://*.doubleclick.net https://cm.g.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google",
+      "connect-src 'self' https: wss: https://*.sanity.io wss://*.sanity.io https://api.stripe.com https://*.clerk.com https://clerk.untelevised.media https://*.supabase.co https://www.google-analytics.com https://*.sentry.io https://*.algolia.net https://*.algolianet.com https://*.googlesyndication.com https://adservice.google.com https://*.doubleclick.net https://cm.g.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google",
       // AdSense renders ads inside iframes; fundingchoicesmessages.google.com hosts
       // Google's GDPR consent dialog iframe shown before serving ads to EU visitors.
       // Facebook embeds (posts, reels, videos) may use various subdomains (www, m, etc)
