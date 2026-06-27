@@ -8,7 +8,7 @@ const securityHeaders = [
   {
     key: 'Permissions-Policy',
     value:
-      'camera=(), microphone=(), geolocation=(), accelerometer=(self), gyroscope=(self), magnetometer=(), unload=(self "https://www.tiktok.com" "https://*.tiktokcdn.com")',
+      'camera=(), microphone=(), geolocation=(), accelerometer=(self), gyroscope=(self), magnetometer=(), unload=*',
   },
   {
     key: 'Content-Security-Policy',
