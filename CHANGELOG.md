@@ -4,945 +4,565 @@ All notable changes to this project are documented here.
 
 ---
 
-## [Unreleased] — Article Page Improvements & Security Hardening
 
-### Fixed
+# [3.0.1] — 2026-06-26 — Article Page Improvements & Security Hardening
+
+## New
+
+### Security & Content Policies
 
 - **Content Security Policy (CSP) environment-aware configuration** — Split CSP into environment-specific policies: production enforces strict HTTPS/WSS connections with `upgrade-insecure-requests`, development allows `ws://` and `http:` for Next.js HMR.
 - **Permissions-Policy browser feature restrictions** — Added restrictive Permissions-Policy header limiting camera, microphone, geolocation, accelerometer, gyroscope, and magnetometer; unload event only allowed for embedded social platforms (TikTok, Facebook, Instagram, YouTube).
-- **React hooks conditional call violations** — Fixed ImageGalleryCarousel component to use `useMemo` for computed image values, eliminating conditional hook call errors.
-- **Nullish coalescing consistency** — Replaced all logical OR (`||`) operators with nullish coalescing (`??`) throughout ArticleCards and ImageGalleryCarousel components.
-- **TypeScript explicit any errors** — Added proper `eslint-disable-next-line @typescript-eslint/no-explicit-any` comments with context for unavoidable type assertions.
-- **Unused code cleanup** — Removed unused `ARTICLES_PER_PAGE` constant, unused function parameters prefixed with underscore (`_msg`, `_args`, `_options`).
-- **Duplicate imports** — Consolidated multiple lucide-react imports into single import statements.
-- **Coral comments CSP allowlist** — Added `https://coral.untelevised.media` to `style-src` and `font-src` directives to allow Coral comment system stylesheets and fonts; added `https://s3.amazonaws.com` to `font-src` for Giphy fonts used in Coral embeds.
+- **Coral comments CSP allowlist** — Added `coral.untelevised.media` and `s3.amazonaws.com` to `style-src` and `font-src` directives.
 
 ### Performance
 
 - **LCP optimization** — Added `priority` prop to featured article image for faster Largest Contentful Paint rendering.
 
+## Fixed
+
+### React & Component Issues
+
+- **React hooks conditional call violations** — Fixed ImageGalleryCarousel to use `useMemo` for computed image values, eliminating conditional hook call errors.
+
+### Code Quality
+
+- **Unused code cleanup** — Removed unused `ARTICLES_PER_PAGE` constant and prefixed unused parameters with underscore.
+- **Duplicate imports** — Consolidated multiple lucide-react imports.
+
 ---
 
-## [3.0.0] — 2026-06-26 — Major Release: Docker Deployment, Image Optimization, YouTube Embeds & Media Enhancements
+# [3.0.0] — 2026-06-26 — Major Release: Docker Deployment, Complete Bookstore, Author Portal, and Media Enhancements
 
-Substantial infrastructure, performance, and media handling improvements. Docker containerization with CoolaFly deployment docs, complete PNG-to-WebP image conversion, hybrid YouTube embed system with age-restricted video support, image gallery carousels for articles, social media embed optimization, and multiple performance enhancements.
 
-### Added
+Comprehensive release spanning infrastructure, editorial workflow, monetization, and media handling. Docker containerization with CoolaFly deployment, full-featured Bookstore with Stripe & Supabase, complete Author Portal with BlockNote WYSIWYG and pitch workflow, Coral Comments with Clerk SSO, Algolia search, and enhanced media system with WebP conversion and YouTube embed improvements.
 
-- **Docker containerization** (`Dockerfile`, `docker-compose.yml`, `.dockerignore`) — Multi-stage Dockerfile with pnpm caching, Node.js 22 alpine, optimized build and runtime images; docker-compose.yml for local development with configurable port mapping and volume mounts.
-- **Docker deployment documentation** (`DEPLOYMENT_COOLAFLY.md`) — Step-by-step CoolaFly Ubuntu server deployment guide covering SSH setup, Docker installation, environment configuration, Caddyfile reverse proxy, systemd service, and health monitoring.
-- **Docker build scripts** (`scripts/docker-build.js`, `scripts/docker-clean.js`) — Automated Docker image building with GitHub Actions detection and repository secrets sourcing; image cleanup utility.
-- **GitHub Actions Docker workflow** (`.github/workflows/docker-build-push.yml`) — CI/CD pipeline for building and pushing Docker images to Docker Hub on releases.
-- **PNG-to-WebP conversion** (`scripts/convert-all-png-to-webp.mjs`) — Batch image conversion script for all public PNG assets with quality settings and progress reporting.
-- **Image optimization scripts** (`scripts/optimize-logo.mjs`) — Dedicated logo optimization with format-specific quality tiers.
-- **YouTube hybrid embed system** (`src/components/post/YouTubeEmbed.tsx`) — Smart fallback system: attempts IFrame API for age-restricted videos, falls back to basic iframe with timeout detection, handles SSR safely with lazy initialization.
-- **YouTube URL utilities** (`src/util/url/youtubeUtils.ts`) — URL parsing and embed format conversion helpers for YouTube URLs.
-- **Image gallery carousel** (`src/components/post/ImageGalleryCarousel.tsx`) — Full-featured carousel with auto-rotation, keyboard navigation, image preloading, slide indicators, and responsive design.
-- **Image gallery schema** (`src/models/schema/imageGallery.ts`) — Sanity schema for gallery objects with alt text, captions, and image arrays.
-- **WebP favicon assets** — 16x16, 28x28, 32x32, 112x112, 192x192, 512x512 PNG→WebP conversions plus WebP site manifest logo.
-- **Hurriya Publications WebP branding** — Logo and banner assets in WebP format.
+## New
 
-### Changed
+### Infrastructure & Deployment
 
-- **All public PNG images → WebP** — Complete codebase migration of favicon, logo, and branded image references to WebP format.
-- **Social media embed SDK optimization** — Removed duplicative SDK script loads; consolidated Facebook, Twitter, TikTok, Instagram embed initialization.
-- **AdSense debug logs suppressed** — Disabled verbose debug output in production.
-- **React component optimization** — Added `unoptimized` flag to static Image components; Docker CI workflow updated for optimal caching.
-- **React hydration fix** — Resolved #418 LatestAlertsTicker hydration error with proper client-side state management.
-- **Image CSP improvements** — Fixed CSP directives for public static image loading and Sanity CDN URLs.
-- **Docker build secret sourcing** — Improved GitHub Actions detection to use repository secrets for environment variables during Docker build.
-- **Environment variables** — Added Supabase membership env var references to Docker build process.
+- **Docker containerization** — Multi-stage Dockerfile with pnpm caching, Node.js 22 alpine; docker-compose.yml for local development; GitHub Actions workflow for Docker Hub publishing
+- **CoolaFly deployment guide** — Step-by-step guide covering SSH setup, Docker, environment configuration, Caddyfile reverse proxy, systemd service, health monitoring
+- **Docker build automation** — Automated image building with GitHub Actions detection and repository secrets sourcing
 
-### Fixed
+### Media & Images
 
-- **AdSense script attributes** — Removed unsupported `data-nscript` attribute from AdSense script tag.
-- **Vercel analytics removal** — Removed deprecated Vercel analytics integration; maintained Speed Insights.
-- **Image loader compatibility** — Fixed custom image loader for proper public static image handling.
-- **YouTube iframe CSP** — Allowed YouTube IFrame API script in Content-Security-Policy.
-- **YouTube iframe sandbox** — Added proper sandbox attributes for iframe security.
-- **YouTube URL conversion** — Fixed URL format conversion for embed compatibility.
-- **YouTube cleanup errors** — Prevented `removeChild` errors in YouTubeEmbed cleanup.
+- **Complete PNG-to-WebP migration** — All favicon, logo, and branded image assets converted to WebP format; batch conversion script with quality settings
+- **YouTube hybrid embed system** — Smart fallback for age-restricted videos using IFrame API with timeout detection; SSR-safe lazy initialization
+- **Image gallery carousel** — Full-featured carousel component with auto-rotation, keyboard navigation, image preloading, responsive design
+- **Image gallery schema** — Sanity schema for gallery objects with alt text, captions, image arrays
+- **Hurriya Publications WebP branding** — Logo and banner assets in WebP format
+
+### Article Features & Content Surfacing
+
+- **View counter & tracking** — Hidden readOnly `viewCount` field; `/api/view` endpoint with IP-based rate limiting; `ViewPing` component for session-based tracking
+- **Trending section** — Async `TrendingSection` component with multiple variants; queries ordered by `viewCount` desc; integrated on homepage and article pages
+- **Tag pages** — Full tag system with string-array field on articles; dedicated `/tag/[slug]` pages with metadata and JSON-LD; sitemap integration
+- **Ad integration** — 7 named ad slots across breaking news, fact-checks, and article pages; `InFeedAd` and `BannerAd` components with strategic placement
+
+### Search & Discovery
+
+- **Algolia full-text search** — Sanity webhook handler with HMAC-SHA256 signature validation; syncs articles on create/update/delete; initial backfill script
+- **Search UI** — InstantSearch with SearchBox, Hits with thumbnails, RefinementList facets (category, tag, author), Pagination; header typeahead with live dropdown
+
+### Author Portal & Editorial Workflow
+
+- **Role-based access control** — Three-tier hierarchy (admin > editor > author); Clerk `publicMetadata` driven; fresh API validation on every request
+- **BlockNote WYSIWYG editor** — Full bidirectional serialization to Sanity Portable Text; first-class embed blocks (YouTube, Twitter, Instagram, Facebook, TikTok, Vimeo); autosave every 60s
+- **Article editor** — Metadata form with title, slug, excerpt, categories, tags, keywords, location, publish scheduling, featured/breaking flags, sources, related articles, FAQs, corrections workflow
+- **Source library** — Create/manage sources with type, URL, notes, anonymous flag; linked article count per source
+- **Pitch workflow** — Claimed pitches with urgency/beat/status badges; Brief panel with per-user pass/unpass decisions; linked article creation from pitch
+- **Sanity Live integration** — Real-time dashboard, article list, and inbox updates; zero manual refresh required
+- **Rate limiting** — Upstash Redis sliding-window (30 writes/min per user); graceful degradation when env vars absent
+
+### Comments & Reader Engagement
+
+- **Coral Comments with Clerk SSO** — Self-hosted Coral Talk + MongoDB 8 + Redis 7-alpine + Caddy 2 with auto TLS and nightly backups
+- **Coral JWT minting** — 24-hour HS256 tokens from Clerk session; auto-grants MODERATOR role to admin/staff; supports guest commenting
+- **Theme integration** — Coral-themed CSS custom properties; separate light/dark theme files
+- **Comments UX** — Gated behind functional cookie consent; `allowComments` boolean field on articles with `initialValue: true`
+
+### Bookstore — Complete Implementation
+
+**Infrastructure & Setup**
+- **Environment configuration** — Placeholder env vars for `SUPABASE_SHOP_*`, `STRIPE_WEBHOOK_SECRET`, `RESEND_*`; Supabase shop project setup guide
+- **Supabase infrastructure** — 6 tables (customers, addresses, orders, order_items, digital_downloads, payouts) with RLS; private `digital-books` bucket; 8 indexes + `set_updated_at()` trigger
+- **Database clients** — `shopClient` (anon, RLS-enforced) and `shopServiceClient` (service role, server-only) for separate `untelevised-shop` project
+- **TypeScript types** — Full interface set: `Customer`, `Address`, `Order`, `OrderItem`, `DigitalDownload`, `Payout`; `SanityBook`, `SanityBookFormat`, `SanityBookGenre`; `CartItem`, `CheckoutLineItem`, `CheckoutPayload`
+- **GROQ queries** — `queryAllBooks`, `queryFeaturedBooks`, `queryBookBySlug`, `queryBooksByAuthor`, `queryAllBookGenres`, `queryBooksByGenre`
+
+**Authentication & Roles**
+- **Role system** — Sales role added to Clerk role hierarchy (admin > editor > author; sales is orders-only); role extraction from `publicMetadata`; server helpers for role validation; portal route protection with role-based redirects
+
+**API & Webhooks**
+- **Stripe checkout API** — `POST /api/bookstore/checkout` accepts `CheckoutPayload`; creates Checkout Session with shipping address collection; stores items + user ID in session metadata
+- **Stripe webhook** — `POST /api/bookstore/webhook` handles `checkout.session.completed` (customer upsert, order + item creation, digital download provisioning), `payment_intent.*`, `charge.refunded` (download revocation), `charge.dispute.created`
+- **Download API** — `GET /api/bookstore/download` validates auth, verifies ownership, checks expiry/count, generates Supabase signed URL (15-min), increments download counter; `GET /api/bookstore/my-downloads` returns user's digital downloads
+
+**Email & Notifications**
+- **Email delivery** — Nodemailer + Google SMTP; helpers for order confirmation, digital delivery (auth + guest), shipment, refund; graceful no-op when `RESEND_API_KEY` absent; BOM/CRLF env var cleanup
+
+**Storefront & UI**
+- **Storefront layout** — `src/app/(user)/shop/layout.tsx` shop route group within (user) group hierarchy
+- **Homepage** — Featured books hero + all books grid; genre filter tabs; parallel data fetching
+- **Book detail page** — Full detail with `generateStaticParams`, `generateMetadata`, Book + Offer JSON-LD; cover image, description, format selector (inventory badges, compare-at pricing), author bio
+- **Genre filter** — Client-side tab bar with URL searchParams
+- **Add to cart** — Client component with cart button; 2-second "Added ✓" feedback
+
+**Cart & Checkout**
+- **Cart store** — Zustand with localStorage persistence (`untele-cart` key); `addItem` (merges duplicates), `removeItem`, `updateQuantity`, `clearCart`, `getItemCount`, `getTotal`; `buildCartItem` helper
+- **Cart UI** — Mini-cart icon in header with item-count badge; full cart page with quantity controls, remove, order summary sidebar with subtotal; checkout button redirects to Stripe
+
+**Orders & Downloads**
+- **Order success** — Retrieves Stripe session server-side via `session_id` searchParam; itemized order summary; digital download CTA
+- **Order history** — Clerk-authed component; grouped order cards with status badge, total, item list, download link
+- **Download vault** — Client component with per-file download button; shows download count, expiry, exhausted/expired states
+
+**Author Tools & Earnings**
+- **Author earnings** — `author_earnings` table with gross/Stripe fees/net breakdown; real Stripe Balance Transaction API; bi-monthly payout periods; GA4 conversion tracking
+- **Portal dashboards**:
+  - `/portal/library` — Product table with units sold and net earnings; low-stock alerts; Add/Edit book modals
+  - `/portal/earnings` — Financial dashboard with sales summary, earnings breakdown, per-title chart, tips breakdown, payout history
+  - `/portal/sales` — Order management with status tracking, shipment workflows, refund actions, author earnings per order
+
+**Additional Features**
+- **Gift purchasing** — Gift toggle component; gift metadata through checkout; separate email workflow
+- **Name-your-price tips** — Per-author tip Product ID; variable amount at checkout; edit/toggle in cart
+- **Digital downloads** — Supabase signed URLs (30-day expiry); vault with re-download limit (5, 1-year expiry); preserved filenames
+
+### Security & Hardening
+
+- **Input validation** — Zod schemas on all submission endpoints (bookstore, whistleblower, job application); email validation via `z.string().email()`
+- **CAPTCHA integration** — Cloudflare Turnstile on careers, whistleblower, secure-contact endpoints; graceful degradation when key absent
+- **Rate limiting** — Upstash sliding-window on public endpoints: 5 req/300s (submission), 3 req/300s (whistleblower)
+- **Timing attack prevention** — `crypto.timingSafeEqual` on all secret comparisons; fixed-length buffer padding
+- **Stripe hardening** — Client-supplied price IDs ignored; canonical pricing fetched server-side via Sanity GROQ; generic error messages; sensitive data never logged
+- **Authorization fixes** — Algolia webhook fails closed (401 when secret unset); Author role ownership verification via GROQ; role allowlist (`{admin, sales, author}`) enforced; tracking URL validation against known carrier domains
+- **Atomic operations** — Download counter protected by PL/pgSQL `FOR UPDATE` row lock; TOCTOU race eliminated
+- **Database safety** — RLS enabled on all tables; service role justifications documented; Clerk+Supabase JWT upgrade path included
+- **Sentry monitoring** — Error tracking for client, server, and edge runtime; source maps uploaded to CI only; graceful no-op without DSN
+
+### Accessibility
+
+- **WCAG compliance** — ThemeToggle, Search, and ApplicationForm aria-labels and label associations; skip navigation link in root layout; PitchQuickViewModal rewritten with Radix Dialog (focus trap, aria-modal)
+- **Table semantics** — `scope="col"` on all table headers
+- **Timeline progress** — role=progressbar with aria-valuenow/min/max/label; decorative icons marked aria-hidden=true
+- **Image alt text** — Meaningful alt text on search results and content
+
+### SEO & Analytics
+
+- **Structured data** — MusicGroup JSON-LD for music artists; MusicRecording for lyrics; ClaimReview for fact-checks; Book + AggregateRating for bookstore; NewsArticle with dateModified
+- **OG metadata** — Full Open Graph + Twitter cards on all collection pages; og:image, og:type, modifiedTime
+- **Canonical URLs** — Fixed across fact-checks, breaking news, tag pages, and music pages; `getCanonicalUrl` helper
+- **Portal noindex** — All portal routes marked `robots: { index: false, follow: false }`
+- **GA4 tracking** — Consent-gated `add_to_cart` and `purchase` events via `useConsentAwareTracking` hook
+- **Clerk preconnect** — Added preconnect hint for clerk.untelevised.media (310ms LCP improvement)
+
+### Social Media Embed Support
+
+- **Facebook embeds** — `facebookEmbed` Sanity object type; SSR-safe dynamic import; full BlockNote serialization
+- **TikTok embeds** — `tiktokEmbed` Sanity object type; SSR-safe dynamic import; consolidated SDK loading
+- **Instagram embeds** — Hydration fix via `InstagramEmbedInner` + `dynamic({ ssr: false })`
+- **Vimeo embeds** — `vimeoEmbed` Sanity object type with Studio preview; BlockNote serialization
+
+### Developer Experience & Tooling
+
+- **Jest configuration** — Root-level config using `next/jest`; fixes ESM import errors in tests
+- **Content migration scripts** — One-time Sanity seed scripts for article backfill; AR archive helper; image patching utilities
+- **Portal image upload API** — FormData endpoint that pipes to Sanity asset pipeline
+- **GROQ query optimization** — Slice bounds added to unbounded queries; parallel data fetching hardened
+- **Server/client boundaries** — Strict enforcement; no imports of `server-only` modules into client components
+- **Code organization** — Removed all direct Sanity Studio links from portal UI; self-contained portal workflows
 
 ### Performance
 
-- **Clerk preconnect** — Added preconnect hint for clerk.untelevised.media (310ms LCP improvement).
-- **Page load optimization** — Reduced bundle size and optimized critical rendering path.
-- **Image preloading in gallery** — Automatic preloading of next/previous images in carousel.
-- **Gallery auto-rotation** — Smooth auto-cycling of images in gallery components.
+- **Bundle optimization** — Reduced bundle size via tree-shaking and code splitting
+- **Image preloading** — Next/previous images in gallery carousel preloaded
+- **Critical rendering path** — Optimized LCP with priority image hints
+- **Gallery auto-rotation** — Smooth auto-cycling with configurable intervals
 
-### Documentation
+### Membership & Supporter Tiers (Issue #13)
 
-- **CoolaFly troubleshooting guide** (`COOLAFLY_TROUBLESHOOTING.md`) — Common issues and solutions for Coral deployment on CoolaFly infrastructure.
-- **Docker build skill** (`.claude/skills/verifier-docker-build.md`) — Claude Code skill documentation for Docker build verification.
+Recurring memberships via Stripe Checkout with three tiers ($5, $15, $50/mo). Separate Stripe project, dedicated Supabase project for member records, Supabase Edge Function webhook handling, Clerk user linking.
 
----
+- **Database & Infrastructure** — Type stubs for membership Supabase schema; typed Supabase clients (`membership` project tewnvjowrdfzvqcsfwgx); RLS policies
+- **API & Webhooks** — Checkout API (`/api/membership/create-checkout`); Supabase Edge Function webhook handler; Stripe signature verification
+- **Authentication & Access** — Server-only access helpers (`getMembershipTier`, `isMember`, `hasFullAccess`); Clerk user linking
+- **UI & User Experience** — `/join` page with tier cards and live member count; `MembershipTiers` component; post-checkout confirmation page with billing info
+- **Environment Configuration** — `STRIPE_MEMBERSHIP_*` (6 vars) and `SUPABASE_MEMBERSHIP_*` (3 vars) in `.env.example`
 
-## [Unreleased] — Membership & Supporter Tiers — Stripe Subscriptions (Issue #13)
+### Newsletter & Email Integration (Issue #27)
 
-Recurring reader memberships via Stripe Checkout. Three tiers (Supporter $5, Contributor $15, Patron $50). Stripe is a **separate project** within the same org to isolate membership billing from the bookstore. Member records are stored in a dedicated **Supabase project** (not Sanity). Stripe webhook events are handled by a **Supabase Edge Function** (`stripe-membership-webhook`). Clerk user IDs are captured at checkout and linked to membership rows in Supabase for access gating.
+Double opt-in for UnTelevised Media + Hurriya Publications newsletters. Shared service layer with per-list branding via Nodemailer.
 
-### Added
+- **Services & Infrastructure** — Newsletter service with `subscribe`, `confirm`, `unsubscribe` logic; parameterized `NewsletterConfig` types for per-list branding
+- **Email Delivery** — Nodemailer transporter setup; templated confirmation and welcome emails with brand-specific copy
+- **API Routes** — News newsletter routes (`POST /api/newsletter-subscribe`, `GET /api/newsletter-confirm?token=`, `GET /api/newsletter-unsubscribe?token=`); upgraded bookstore newsletter API
+- **UI Components** — Reusable `NewsletterSignup` component (full/compact variants, source tracking); `SubscribedBanner` for status feedback; unsubscribe pages
+- **Data Schema** — `newsletterSubscribe` and `bookstoreSubscriber` documents with full double opt-in fields (`firstName`, `status`, `confirmToken`, `unsubscribeToken`, `gdprConsent`, `confirmedAt`, `unsubscribedAt`); portal subscribers list with status badges
 
-- `src/lib/membership/database.types.ts` — type stubs for membership Supabase schema (`members` table with `clerk_user_id`, `stripe_customer_id`, `tier`, `status`)
-- `src/lib/membership/supabase.ts` — typed Supabase client pair (anon + service-role) using `SUPABASE_MEMBERSHIP_*` env vars; lazy singleton pattern mirrors bookstore client
-- `src/lib/membership/access.ts` — server-only helpers: `getMembershipTier()`, `isMember()`, `hasFullAccess()` — reads from Supabase via Clerk `userId`
-- `src/app/api/membership/create-checkout/route.ts` — `POST /api/membership/create-checkout` creates a Stripe Subscription Checkout Session using `STRIPE_MEMBERSHIP_SECRET_KEY`; embeds `clerk_user_id` in session metadata
-- `supabase/functions/stripe-membership-webhook/index.ts` — Supabase Edge Function (Deno); verifies Stripe signature with `STRIPE_MEMBERSHIP_WEBHOOK_SECRET`; handles `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`
-- `src/app/(news)/join/page.tsx` — full /join page: live active member count from Supabase, three tier cards, mission copy, one-time donation CTA
-- `src/app/(news)/join/success/page.tsx` — post-checkout confirmation; retrieves tier from Stripe session; newsletter CTA; `noindex`
-- `src/components/membership/MembershipTiers.tsx` — tier card UI (Supporter $5, Contributor $15, Patron $50); POSTs to `/api/membership/create-checkout`; loading + error states
-- `.env.example` — added `STRIPE_MEMBERSHIP_*` (6 vars) and `SUPABASE_MEMBERSHIP_*` (3 vars) placeholder entries
+## Fixed
 
-### Updated
+### Images & Content Display
 
-- `src/lib/membership/supabase.ts` — corrected env var names to match actual project setup: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (membership Supabase project already live at `tewnvjowrdfzvqcsfwgx`)
-- `src/app/(news)/join/success/page.tsx` — added next billing date: retrieves subscription via `expand: ['subscription']` and displays `current_period_end` as a formatted date
-- `.env.local` — added empty `STRIPE_MEMBERSHIP_*` placeholder vars (6) ready to be filled once Stripe project is set up
-- `.env.example` — updated Supabase membership var names to match actual setup
+- **Article body images** — Full aspect ratio preserved; dimensions parsed from Sanity asset refs instead of hardcoded 800×450
+- **Raw Feed navigation** — Cards now clickable with proper Link wrapper
 
-### Pending (awaiting Stripe membership project)
+### Code Quality
 
-- [ ] Create membership Stripe project and three Products + recurring Prices ($5/$15/$50/mo)
-- [ ] Fill `STRIPE_MEMBERSHIP_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_MEMBERSHIP_PUBLISHABLE_KEY`, `STRIPE_MEMBERSHIP_PRICE_*` in `.env.local` and Vercel
-- [ ] Deploy Edge Function: `supabase functions deploy stripe-membership-webhook --project-ref tewnvjowrdfzvqcsfwgx`
-- [ ] Register Edge Function URL as webhook endpoint in membership Stripe Dashboard
-- [ ] Set `STRIPE_MEMBERSHIP_WEBHOOK_SECRET` as Supabase Edge Function secret and in `.env.local`
-- [ ] Run SQL migration on membership Supabase project (members table + RLS + index)
-- [ ] End-to-end test with Stripe test card `4242 4242 4242 4242`
+- **Duplicate imports** — Consolidated lucide-react imports throughout
+
 
 ---
 
-## [Unreleased] — Newsletter / Email List Integration (Issue #27)
+# [2.3.0] — 2026-03-20
 
-Full double opt-in flow for both the UnTelevised Media news newsletter and the Hurriya Publications bookstore newsletter. Both lists share one service layer with per-list branding. Emails sent via Nodemailer (same SMTP transporter as bookstore order emails — no extra service required).
-
-### Added
-
-- **Shared newsletter service** (`src/lib/newsletter/service.ts`) — subscribe / confirm / unsubscribe logic parameterized by `NewsletterConfig`; both API route families share this code.
-- **Newsletter email module** (`src/lib/newsletter/email.ts`) — Nodemailer transporter + inline-HTML `sendConfirmEmail` / `sendWelcomeEmail`; brand bar, tagline, CTA text, and CTA URL all driven by per-list config so each email is correctly branded for its list.
-- **`NewsletterConfig`** (`src/lib/newsletter/types.ts`) — `fromName`, `tagline`, `ctaUrl`, `ctaText`, `brandColor`, `missionCopy` ensure every email touchpoint is fully dynamic with no hardcoded copy.
-- **News newsletter API routes**: `POST /api/newsletter-subscribe`, `GET /api/newsletter-confirm?token=`, `GET /api/newsletter-unsubscribe?token=`.
-- **Bookstore newsletter API routes**: upgraded `POST /api/bookstore/newsletter`, new `GET /api/bookstore/newsletter/confirm?token=`, `GET /api/bookstore/newsletter/unsubscribe?token=`.
-- **`NewsletterSignup` component** (`src/components/newsletter/NewsletterSignup.tsx`) — reusable; accepts `list: 'news' | 'bookstore'`, `variant: 'full' | 'compact'`, `source`; handles loading / success / error states with GDPR checkbox.
-- **`SubscribedBanner` component** — shows `?subscribed=1` / `?subscribed=error` / `?unsubscribed=1` banners.
-- **Unsubscribe pages** — `/unsubscribe` (news) and `/bookstore/unsubscribe` (bookstore).
-- **Schema upgrades** — `newsletterSubscribe` and `bookstoreSubscriber` carry full double opt-in fields: `firstName`, `status`, `confirmToken`, `unsubscribeToken`, `gdprConsent`, `confirmedAt`, `unsubscribedAt`.
-- **Portal subscribers list** — status badges (✅/⏳/🚫), name column, confirmed-at column, active count, name/email search.
-- **Component placements** — news signup on homepage, article pages, footer (compact), and support page; bookstore signup updated to use shared component.
-- **`.env.example`** updated — Resend vars removed; `NEXT_PUBLIC_SITE_URL` added (used for confirm/unsubscribe link generation).
-
----
-
-## [2026-06-01] — View Counter, Trending Section, Ad Integration & Article Layout (feature/22-view-counter-trending → development)
-
-View tracking and trending surfacing for all articles, plus ad placements on fact-check and breaking news pages, a 3-column article layout with a live breaking news sidebar, and a round of article page UX polish. Issue [#22](https://github.com/UnTelevised-Media/untelevised-media/issues/22) · PR [#99](https://github.com/UnTelevised-Media/untelevised-media/pull/99).
-
-### Added
-
-- **`viewCount` field** (`src/models/schema/article.ts`) — hidden, readOnly number field on the article schema; initialValue 0; managed by the API only.
-- **`/api/view` route** (`src/app/api/view/route.ts`) — POST endpoint; validates slug; in-memory IP+slug rate limiting (24 h); atomic Sanity `.setIfMissing({ viewCount: 0 }).inc({ viewCount: 1 })` patch with async commit; returns `{ skipped: true }` for rate-limited requests.
-- **`ViewPing` component** (`src/components/post/ViewPing.tsx`) — client component; fires once per browser session per article via `sessionStorage` key `viewed_[slug]`; renders nothing; fails silently.
-- **`TrendingSection` component** (`src/components/homepage/TrendingSection.tsx`) — async server component; `'card'`, `'list'`, and default numbered-list variants; integrated on homepage and article page (desktop sidebar + mobile fallback).
-- **`TrendingListPaginated` component** (`src/components/homepage/TrendingListPaginated.tsx`) — client component; 5-per-page paginated list for the homepage trending widget.
-- **`RecentBreakingNews` component** (`src/components/article/RecentBreakingNews.tsx`) — async server component; fetches 10 most recent `breakingNews == true` articles ordered by `publishedAt desc`; styled to match TrendingSection with a pulsing Flame icon header.
-- **`queryMostReadArticles`** and **`queryMostReadByCategory`** GROQ queries (`src/lib/sanity/lib/queries.ts`) — order by `viewCount desc`; return top 10 / top 5 respectively with full article metadata.
-- **GA view count import script** (`scripts/import-ga-view-counts.ts`) — one-time backfill of historical GA4 page-view data into `viewCount` fields.
-- **Ad slots** (`src/lib/ads/adConfig.ts`) — 7 new named slots: `BREAKING_IN_FEED`, `FACT_CHECKS_BANNER`, `FACT_CHECKS_IN_FEED`, `FACT_CHECK_IN_FEED`, `FACT_CHECK_BANNER`, `ARTICLE_LEFT_SIDEBAR`, `ARTICLE_RIGHT_SIDEBAR_BOTTOM`; all annotated for future dedicated AdSense slot replacement.
-- **Ad placements — `/breaking`** (`src/app/(news)/breaking/BreakingNewsClient.tsx`) — `InFeedAd` injected every 6 items in both bar-list and card-grid view modes.
-- **Ad placements — `/fact-checks`** (`src/app/(news)/fact-checks/page.tsx`, `src/components/fact-check/FactCheckList.tsx`) — `BannerAd` between intro text and listing; `InFeedAd` every 6 items in both list and cards views (full-row span in grid).
-- **Ad placements — `/fact-check/[slug]`** (`src/app/(news)/fact-check/[slug]/page.tsx`) — `InFeedAd` between verdict explanation and full analysis body; `BannerAd` after body, before sources.
-
-### Changed
-
-- **Article page — 3-column layout** (`src/app/(news)/articles/[slug]/page.tsx`) — left sidebar (`w-72`, desktop sticky): `SidebarAd` + `RecentBreakingNews`; right sidebar (`w-72`, desktop sticky): `TrendingSection` + `SidebarAd`; content column centered via `flex-1` (~728 px at `max-w-[1400px]`).
-- **Article page — sticky offset** — `lg:top-8` (32 px) → `lg:top-[120px]` (74 px header + 40 px category nav + 6 px gap) so sidebar tops are never obscured by the sticky header or category nav bar.
-- **Article page — bookmark button** — moved from its own row to inline with breadcrumb nav (`justify-between`, right-aligned); `min-w-0` on nav prevents overflow.
-- **Article page — social share** — `SocialShare` root changed from `w-fit` to `w-full` so the icon strip matches the width of the image and ad below it.
-- **Article page — ad position** — `InFeedAd` relocated from before the article image to directly below it (both in `not-prose` wrappers); image margin set to `mb-0`, ad carries `mb-8`.
-- **`NewsletterSignup`** (`src/components/newsletter/NewsletterSignup.tsx`) — `fieldsLayout?: 'row' | 'column'` prop added (default `'row'`; no regression on existing usages); category sidebar now passes `fieldsLayout='column'` so inputs stack vertically in the narrow sidebar.
-
----
-
-## [2026-05-23] — Phase 4 Audit Remediation (feature/phase4-audit-remediation → development)
-
-All 17 Phase 4 audit items closed across security, accessibility, architecture, and observability. Issue [#86](https://github.com/UnTelevised-Media/untelevised-media-new/issues/86) · PR [#87](https://github.com/UnTelevised-Media/untelevised-media-new/pull/87).
-
-### Security — Fixed
-
-- **Permissive email regex → Zod** (`api/bookstore/newsletter/route.ts`, `api/bookstore/checkout/route.ts`) — Replaced hand-rolled `EMAIL_RE` regex with `z.string().email().safeParse()` in both routes. Closes Phase 4 #1.
-- **Cloudflare Turnstile CAPTCHA** (`lib/captcha.ts`, `components/global/TurnstileWidget.tsx`) — Server-side `verifyCaptcha()` helper added; integrated into careers application, whistleblower, and secure-contact endpoints. Widget hidden when `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is absent; endpoint fails open on network error. Closes Phase 4 #2.
-- **Stripe 500 leak hardened** (`api/bookstore/checkout/route.ts`) — Generic "Unable to create checkout session" message returned on all 500 errors; raw error logged server-side only. Closes Phase 4 #3.
-
-### Accessibility — Fixed
-
-- **Timeline progress bar ARIA** (`components/timeline/TimelineNavigation.tsx`) — `role="progressbar"`, `aria-valuenow`, `aria-valuemin`, `aria-valuemax`, and `aria-label` added to the track element. Closes Phase 4 #4.
-- **Search result alt text** (`components/search/SearchClient.tsx`) — `alt=""` replaced with `alt={hit.title}` on article preview images. Closes Phase 4 #5.
-- **Decorative icon aria-hidden** (`components/global/Banner.tsx`, `components/global/Nav.tsx`) — `aria-hidden="true"` added to animated background, icon decorations (Calendar, Clock, Globe, Users in Banner), and category pulse dot in Nav. Closes Phase 4 #6.
-
-### Architecture / TypeScript — Fixed
-
-- **`as any` elimination** (`app/(news)/articles/[slug]/page.tsx`, `app/(news)/author/[slug]/page.tsx`, `app/(news)/page.tsx`) — All `as any` casts and `// eslint-disable` suppressions around `urlForImage()` removed; TypeGen-compatible types used directly. Closes Phase 4 #7.
-- **Cart size limit + localStorage debounce** (`lib/bookstore/cart.ts`) — `MAX_CART_SIZE = 50` guard in `addItem`; `debouncedStorage` wrapper batches writes at 300 ms; full `Storage` interface via `createJSONStorage()`. Closes Phase 4 #9.
-- **Remove unused `useCache` flag** (`next.config.ts`) — `experimental.useCache: true` removed; `'use cache'` directive is unused in the codebase. Closes Phase 4 #11.
-- **`BookBuySection` server/client split** (`components/bookstore/BookBuySection.tsx`, `components/bookstore/BookBuyFormats.tsx`) — Static "Buy" header and out-of-stock banner rendered as a server component; interactive format selector (gift toggle, NYOP inputs, buy buttons) extracted to `BookBuyFormats` client component. Closes Phase 4 #12.
-- **`getStripeIdForFormat()` utility** (`lib/bookstore/stripeUtils.ts`) — Centralizes NYOP vs fixed-price Stripe ID selection (product ID for NYOP, price ID for fixed); used in `BuyNowButton` and `BookBuyFormats`. Closes Phase 4 #13.
-- **GROQ slice bounds** (`lib/sanity/lib/queries.ts`) — Slice bounds added to six unbounded queries: `queryAllArticles` `[0..99]`, `queryBreakingArticles` `[0..19]`, `queryAuthorBySlug` relatedArticles/books `[0..49]`, `queryMusicArtistBySlug` songs/albums `[0..99]`/`[0..49]`, `relatedArticles[]->` in article and fact-check queries `[0..3]`. Closes Phase 4 #14.
-
-### Observability — Added
-
-- **Sentry error monitoring** (`sentry.client.config.ts`, `sentry.server.config.ts`, `sentry.edge.config.ts`, `src/instrumentation.ts`, `next.config.ts`) — `@sentry/nextjs` installed and wired via Next.js instrumentation hook + `withSentryConfig` wrapper. All configs are no-ops without `SENTRY_DSN` / `NEXT_PUBLIC_SENTRY_DSN` env vars; source map upload restricted to CI. Closes Phase 4 #15.
-- **Book detail error boundary + deferred reviews** (`app/(user)/bookstore/book/[slug]/error.tsx`, `app/(user)/bookstore/book/[slug]/page.tsx`) — `error.tsx` added as route-level error boundary with retry button; `ReviewsSection` async component fetches and renders reviews independently, wrapped in `<Suspense>` — a reviews failure can no longer crash the buy section. Closes Phase 4 #16.
-- **GA4 conversion tracking** (`components/bookstore/AddToCartButton.tsx`, `components/bookstore/PurchaseTracker.tsx`, `app/(user)/bookstore/order-success/page.tsx`) — Consent-gated `add_to_cart` event fired on `AddToCartButton`; `purchase` event fired on order-success page via `PurchaseTracker` client component. Uses existing `useConsentAwareTracking` hook. Closes Phase 4 #17.
-
----
-
-## [2026-05-22] — A11y + Security Phase 1–2 (feature/a11y-security-phase1-2 → development)
-
-Accessibility hardening pass (Phase 1 critical + Phase 2 high) and one security medium finding closed. All six items from the audit roadmap rows #1–#6 resolved in a single PR. Audit report updated. Issue [#82](https://github.com/UnTelevised-Media/untelevised-media-new/issues/82) · PR [#83](https://github.com/UnTelevised-Media/untelevised-media-new/pull/83).
-
-### Accessibility — Fixed (Critical, Phase 1)
-
-- **ThemeToggle — aria-label** (`components/global/ThemeToggle.tsx`) — Added `aria-label="Toggle theme"` to the Button; Sun and Moon icons marked `aria-hidden="true"`. Resolves WCAG 1.1.1 / 4.1.2 violation.
-- **Search — label association + submit aria-label** (`components/global/Search.tsx`) — `id="search"` added to Input; Label given `className="sr-only"` text content; submit Button gets `aria-label="Submit search"`. Resolves WCAG 1.3.1 + 4.1.2 violations.
-- **Root layout — skip navigation link** (`app/layout.tsx`) — Visually-hidden `<a href="#main-content">Skip to main content</a>` added as the first element in `<body>`; `id="main-content"` added to `<main>`. Resolves WCAG 2.4.1 (Level A) violation.
-- **ApplicationForm — htmlFor/id associations** (`components/careers/ApplicationForm.tsx`) — All 8 form fields (`fullName`, `email`, `position`, `portfolioUrl`, `linkedinUrl`, `coverLetter`, `resume`, `howDidYouFindUs`) now have matching `htmlFor` on labels and `id` on their controls. Resolves WCAG 1.3.1 violation.
-
-### Accessibility — Fixed (High, Phase 2)
-
-- **PitchQuickViewModal — Radix Dialog focus trap** (`components/portal/PitchQuickViewModal.tsx`) — Full rewrite using `@radix-ui/react-dialog` primitives (`Root`, `Portal`, `Overlay`, `Content`, `Title`, `Close`). Provides automatic focus trap, `aria-modal="true"`, built-in Escape-key handling, and focus restoration on close. Removed manual `useEffect` Escape listener. Side-panel layout and all editable fields preserved. Resolves WCAG 2.4.3 violation.
-- **ApplicationsTable — scope="col" on headers** (`components/admin/ApplicationsTable.tsx`) — `scope="col"` added to all 7 `<th>` elements in `<thead>`. Resolves WCAG 1.3.1 table association violation.
-
-### Security — Fixed (Medium, Phase 2)
-
-- **Stripe idempotency key on checkout** (`app/api/bookstore/checkout/route.ts`) — SHA-256 hash of `userId + sorted cart items` (bookId, formatKey, quantity, NYOP amount) derived via `node:crypto` and passed as `{ idempotencyKey }` second argument to `stripe.checkout.sessions.create()`. Prevents duplicate sessions on network retries.
-
-### Changed
-
-- **Audit report updated** (`audit-report/index.html`) — Phase 1–2 remediation date and PR #83 added to header; 7 a11y findings and 1 security finding marked Fixed; critical open count 15 → 11; high open count 15 → 12; medium open count 38 → 37; accessibility health score 46 → 62; overall score 70 → 73; roadmap rows #1–#6 marked done.
-
----
-
-## [2026-05-22] — SEO/AEO Audit Remediation (feature/seo-aeo-audit-68-79 → main)
-
-Full SEO/AEO audit remediation pass covering 11 issues (#68–#79). All high and medium priority findings resolved; one issue (#78) found pre-resolved in existing code.
-
-### SEO/AEO — Added
-
-- **Music artist pages — MusicGroup JSON-LD** (`(music)/music-artists/[slug]/page.tsx`) — Replaced inline schema with `<ArtistStructuredData>` component (MusicGroup with sameAs social links, foundingLocation, track listing). Closes #68.
-- **Lyrics pages — MusicRecording JSON-LD** (`(music)/lyrics/[slug]/page.tsx`) — Replaced inline MusicComposition schema with `<SongStructuredData>` component (MusicRecording with byArtist, inAlbum, duration, datePublished). Closes #68.
-- **ClaimReview JSON-LD canonical URL fix** (`lib/factCheck/claimReviewJsonLd.ts`) — Fixed SITE_URL: `https://untelevised.media` → `https://www.untelevised.media`. Closes #69.
-- **Fact-check pages — full OG metadata** (`(news)/fact-check/[slug]/page.tsx`) — Replaced minimal metadata with `buildFactCheckMetadata()`: og:type article, og:image, modifiedTime, canonical URL, Twitter card. Closes #69.
-- **GlobalStructuredData in music layout** (`(music)/layout.tsx`) — NewsMediaOrganization + WebSite schema now present on all music pages; essential for E-E-A-T signals. Closes #70.
-- **Music collection pages — OG images** (`(music)/music-artists/page.tsx`, `(music)/lyrics/page.tsx`) — Added openGraph.images, canonical URL, Twitter card to both index pages. Closes #71.
-- **Breaking news canonical URL** (`(news)/breaking/[slug]/page.tsx`) — Overrides live-event canonical to `getCanonicalUrl('breaking', slug)`; adds og:section Breaking News. Closes #72.
-- **Portal layout noindex** (`(portal)/layout.tsx`) — `robots: { index: false, follow: false }` cascades to all portal routes. Auth pages already had noindex. Closes #73.
-- **Book JSON-LD — publisher, author URL, aggregateRating** (`(user)/bookstore/book/[slug]/page.tsx`) — Added Hurriya Publications publisher, `author.url`, conditional `aggregateRating` computed from approved reviews (included only when reviewCount > 0). Closes #77.
-
-### SEO/AEO — Fixed
-
-- **Article OG modifiedTime** (`util/metadata.ts` `buildArticleMetadata`) — Added `modifiedTime: article.updatedAt ?? article.publishedAt`. Closes #74.
-- **Bookstore OG image absolute URL** (`(user)/bookstore/layout.tsx`, `(user)/bookstore/book/[slug]/page.tsx`) — Relative `/hurriya-pub/Logo-alt.png` paths replaced with `HURRIYA_OG_IMAGE` constant (absolute HTTPS URL). Closes #75.
-- **Twitter handle standardized** (`util/metadata/generateArticleMetadata.ts`) — `@UnTelevisedLive` replaced with imported `TWITTER_HANDLE` constant (`@untelevised`). Closes #76.
-- **Tag page canonical URL** (`(news)/tag/[slug]/page.tsx`) — Hardcoded URL replaced with `getCanonicalUrl('tag', slug)`; full OG/Twitter metadata added. Closes #79.
-
-### SEO/AEO — No Change Required
-
-- **NewsArticle dateModified null case** (`components/seo/NewsArticleStructuredData.tsx`) — Audit finding pre-resolved: `article.updatedAt ?? article._updatedAt ?? article.publishedAt` triple-fallback already in place. Closes #78.
-
-### Changed
-
-- **`util/metadata.ts`** — Exports `TWITTER_HANDLE`, `DEFAULT_OG_IMAGE`, `HURRIYA_OG_IMAGE` constants; adds `buildBreakingNewsMetadata()` and `buildFactCheckMetadata()` helper functions.
-
----
-
-## [2026-05-22] — Security Remediation (security-issues → main)
-
-Full security audit and remediation pass. 13 vulnerabilities resolved across two audit rounds; all critical and high severity findings closed. Audit report at `audit-report/index.html`.
-
-### Security — Fixed (Critical)
-
-- **Stripe secret key fragment logged to console** (`api/bookstore/checkout/route.ts`) — All debug `console.log` statements removed. Closes #49, #51.
-- **Mass assignment on job-application route** (`api/job-application/route.ts`) — Strict Zod schema added; all fields explicitly typed and allowlisted; `_type` injection no longer possible. Closes #50.
-
-### Security — Fixed (High)
-
-- **No rate limiting on 3 public submission endpoints** — Upstash sliding-window limiters added: `checkSubmissionRate` (5 req/300 s) on job-application and secure-contact; `checkWhistleblowerRate` (3 req/300 s) on whistleblower. `src/lib/bookstore/ratelimit.ts`. Closes #60.
-- **Timing attack on secret comparison** (`api/cron/cleanup-briefs`, `api/webhooks/supabase-order-update`, `api/bookstore/internal/send-email`) — Plain `!==` string equality replaced with `crypto.timingSafeEqual` + fixed-length buffer padding on all three routes. Closes #61.
-- **Client-controlled Stripe price IDs** (`api/bookstore/checkout/route.ts`) — `fetchCanonicalPricing()` makes a batched `cache:'no-store'` Sanity GROQ query; `resolveCanonicalPriceId()` returns the authoritative `stripePriceId` — client-supplied IDs are completely ignored. Closes #62, #53.
-- **Insufficient input validation on whistleblower endpoint** (`api/whistleblower/route.ts`) — Full rewrite: Zod schema with enumerated `category`/`severity` values, all fields length-bounded, `submissionId` and `submittedAt` server-generated. Closes #63.
-- **TOCTOU race on download counter** (`api/bookstore/download/route.ts`) — Non-atomic check+increment replaced with `increment_download_if_allowed()` PL/pgSQL stored procedure using `FOR UPDATE` row lock. Migration `20260522000001_atomic_download_counter.sql`. Closes #64.
-- **Service role client bypasses RLS — undocumented** — Migration `20260522000002_rls_service_role_documentation.sql` added: documents per-route service-role justifications, confirms RLS enabled on all user-facing tables, details Clerk+Supabase JWT upgrade path. Closes #65.
-
-### Security — Fixed (High, found in PR audit)
-
-- **Algolia sync webhook fails open** (`api/algolia-sync/route.ts`) — When `SANITY_WEBHOOK_SECRET` is unset the route previously skipped HMAC validation entirely. Now fails closed: missing secret returns 401 immediately.
-- **Author role authorization bypass** (`api/portal/orders/[id]/status/route.ts`) — `authorOwnsOrderItem()` GROQ function replaces the broken `items.length > 0` check; verifies the Clerk user's Sanity author ID matches at least one book in the order. `cache:'no-store'` ensures freshness.
-- **Unvalidated tracking URL injected into customer emails** (`api/portal/orders/[id]/status/route.ts`) — `tracking_url` now validated with `z.string().url()` + `isAllowedTrackingUrl()` refine against `ALLOWED_TRACKING_HOSTS` — 18 known HTTPS carrier/aggregator domains; arbitrary URLs rejected.
-- **Editor role bypasses all order authorization guards** (`api/portal/orders/[id]/status/route.ts`) — Explicit `{admin, sales, author}` allowlist added immediately after role resolution; editor and any other unlisted role returns 403 before reaching business logic.
-
-### Changed
-
-- **Audit report updated** (`audit-report/index.html`) — All resolved findings marked Fixed; security health score updated 49 → 83; severity counts reflect current open state.
-
----
-
-## [2026-05-21] — Portal & Content Tooling (feat/bookstore-upgrades-may2026)
-
-### Added
-
-- **Vimeo embed support** — `src/models/schema/vimeo.ts`: `vimeoEmbed` Sanity object type with required `videoUrl` field and Studio preview; registered in `blockContent` array and `schema/index.ts`; `RichTextComponents.tsx` renderer added; full BlockNote ↔ Portable Text round-trip in `blocknote-serializer.ts`
-
-- **Content migration scripts** — one-time Sanity seed/migration scripts for article content:
-  - `scripts/create-anarchist-article.ts` — seeds "11 Things Every Anarchist Should Be Doing"
-  - `scripts/create-israel-palestine-article.ts` — seeds "ISRAEL AND PALESTINE – a Personal Reflection"
-  - `scripts/create-waterboarding-article.ts` — seeds "So, I was waterboarded…"
-  - `scripts/migrate-ar-articles.ts` — bulk migration helper for AR article archive
-  - `scripts/create-insurgency-military-article.ts` — seeds "Full Spectrum Operations: How the US Military Would Respond to a Domestic Insurgency"
-  - `scripts/create-ira-article.ts` — seeds "Profiles in Insurgency: The Irish Republican Army"
-  - `scripts/find-protest-image.ts` — Sanity image search utility
-  - `scripts/patch-anarchist-image.ts` — patches cover image on the anarchist article
-  - `scripts/patch-waterboarding-image.ts` — patches cover image on the waterboarding article
-  - `scripts/repair-brief-keys.ts` — repairs missing `_key` fields on brief `storyPasses` arrays
-
-- **Portal — image upload API** — `src/app/api/portal/upload-image/route.ts`: authenticated POST endpoint that accepts FormData and pipes the image to the Sanity asset pipeline; returns the asset `_id` for use in editor forms
-
-- **Portal — brief key repair API** — `src/app/api/portal/repair-brief-keys/route.ts`: one-shot admin endpoint that patches malformed `storyPasses` arrays missing `_key` values; prevents Sanity array mutation errors
-
-### Fixed
-
-- **TypeScript `_type` field on script document objects** — `Record<string, unknown>` type widened to `Record<string, unknown> & { _type: string }` in `create-anarchist-article.ts`, `create-israel-palestine-article.ts`, `create-waterboarding-article.ts`, and `migrate-ar-articles.ts`; eliminates TS compiler error when `_type` is required by the Sanity client's `createOrReplace` call
-
-- **`migrate-ar-articles.ts` author fetch** — `client.fetch<Array<...>>(...)[0]` pattern replaced with `client.fetch<{ _id: string } | null>(query[0])` — avoids redundant array allocation and correctly types the single-document GROQ `[0]` projection
-
-### Changed
-
-- **`PortalNav`** — major navigation overhaul: grouped link sections with collapsible mobile drawer, role-aware link visibility (admin / editor / author / sales), active-link highlighting, Bookstore section links (Library, Earnings, Sales)
-- **`BriefPanel`** — improved pass/unpass UX with optimistic UI; editor Assign/Release/Reassign controls hardened; sort order: breaking unclaimed → unclaimed → claimed → published
-- **`ArticleEditorForm`** — autosave interval tuning; `beforeunload` guard reliability improvements
-- **`portal/page.tsx`** — dashboard widgets reordered; `BookstoreOrdersWidget` and `PendingPayoutsWidget` placement refined; Supabase data fetched with graceful degradation on missing env vars
-- **`brief-actions.ts`** — `fetchBriefById` parallel data fetching hardened; `myPitchMap` build logic corrected for multi-brief scenarios
-- **Bookstore layout** — minor structural/metadata adjustment to `src/app/(user)/bookstore/layout.tsx`
-
----
-
-## [2026-05-05] — Bookstore Feature Upgrades (feat/bookstore-upgrades-may2026)
-
-### Added
-
-- **Feature 6** — Email transactional disclosure footer added to all Hurriya Publications emails (`emailLayout()`)
-- **Feature 2** — Social sharing (`SocialShare`) added to book detail pages
-- **Feature 3** — Bookstore newsletter signup: `bookstoreSubscriber` Sanity schema, `POST /api/bookstore/newsletter` endpoint, `BookstoreNewsletter` component, placements on bookstore home and about pages, portal subscriber view
-- **Feature 4** — Book wishlist: `userWishlist` Sanity schema, localStorage + Sanity sync (mirrors bookmark system), `WishlistButton` component (star icon), wishlist page, footer nav link
-- **Feature 5** — Book reviews & reader testimonials: `bookReview` Sanity schema, `GET/POST /api/bookstore/reviews` endpoint, `BookReviews` display component, `ReviewForm` submission component, placement on book detail pages
-- **Feature 1** — Gift purchasing: `GiftToggle` component, gift metadata passed through checkout to Stripe, `sendGiftEmail()` email template, webhook routing for gift vs. buyer emails
-- Returns & Refunds policy page (`/bookstore/returns`) — covers digital, physical, bundles, tips, dispute process
-- `noindex` metadata layouts for `/bookstore/cart` and `/bookstore/downloads` (transactional pages)
-- OpenGraph + Twitter card metadata on bookstore section layout
-- Author profile page now displays the author's Hurriya Publications books in a buy-ready grid
-
-### Fixed
-
-- Page titles for Order Confirmed and My Orders now use "Hurriya Publications" branding instead of "UnTelevised Media"
-
----
-
-## [Unreleased] — Prior Bookstore Work (feat/issue-46-bookstore)
-
-### Added — Email Delivery, Direct Downloads & Digital Asset Fixes (Issue #46, 2026-05-04)
-
-- **Transactional email delivery** (`src/lib/bookstore/email.ts`): full Nodemailer + Google SMTP stack. Order confirmation, digital download ready, guest one-time download, shipment, and refund emails all live. SMTP env vars (`SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`) added to Vercel production.
-- **BOM / CRLF env var corruption fix** (`cleanEnv()` helper): PowerShell `echo` pipes prepend a UTF-16 BOM (`﻿`) and append `\r\n` to values stored by the Vercel CLI. `cleanEnv()` strips both before use — prevents `getaddrinfo EBUSY` DNS failure on SMTP host.
-- **From-address fix**: `ORDERS_SMTP_FROM` (a non-verified alias) caused Gmail 550 rejection. `from` now always resolves to `Hurriya Publications <SMTP_USER>` — the authenticated sender.
-- **Stripe webhook signature fix**: `STRIPE_WEBHOOK_SECRET` corrected in Supabase secrets; `constructEventAsync` + `SubtleCryptoProvider` used for Deno-compatible HMAC — prevents 400 signature errors.
-- **Direct download links in emails**: the Stripe webhook edge function now calls `db.storage.from('digital-books').createSignedUrl(storagePath, 30 * 24 * 3600, { download: filename })` at purchase time and embeds the URL directly in the email. One click saves the file — no login required, no intermediate API route.
-  - Auth users: "⬇ Download Now" button in the digital download email (30-day signed URL).
-  - Guest users: "Download Your Book →" button in the guest download email (30-day signed URL).
-- **Force-save on all download surfaces**: `createSignedUrl` called with `{ download: filename }` option on both `/api/bookstore/download/route.ts` (vault) and `/api/bookstore/download/guest/route.ts` — browser saves the file instead of opening it in a new tab.
-- **Vault page force-save**: `window.location.href = data.url` replaces `window.open` in `downloads/page.tsx` to avoid a blank tab that customers might close before the file saves.
-- **Order confirmation email**: shows "Digital Download" notice pointing customers to the separate download email instead of a vault link guests can't access. Vault CTA remains for logged-in customers.
-- **Download email vault footer**: vault link restored in auth-user download email footer for re-downloads (up to 5, 1-year expiry).
-- **`DigitalDownloadItem` interface** (`src/lib/bookstore/email.ts`): `downloadUrl?: string` added — optional direct download URL embedded per item.
-- **Preserved filename on upload** (`src/lib/portal/book-actions.ts`): `uploadDigitalAsset` now stores `books/{bookId}/{formatKey}/{file.name}` instead of `books/{bookId}/{formatKey}/asset.{ext}` — original filename preserved in Supabase Storage and surfaced to customers on download.
-
-### Fixed — Email & Download Edge Cases (Issue #46, 2026-05-04)
-
-- **Missing file → honest fallback**: when `createSignedUrl` returns 400 (file not in Supabase Storage), the download email now shows a vault link + "contact us with your order number" note instead of the misleading "your file is being prepared — follow-up email coming" copy (no such retry mechanism exists).
-- **Guest download 30-day expiry**: guest download token TTL corrected from 14 → 30 days to match auth-user email tokens.
-- **`EmailPayload` type** in stripe-webhook edge function updated to include `downloadUrl?` on `digital-download` items — fixes TypeScript type mismatch after interface update.
-
----
-
-### Added — Stripe Earnings & Author Payout System (Issue #46)
-
-- **`author_earnings` table** (`supabase/migrations/20260503000002_stripe_earnings.sql`): authoritative post-Stripe record per order item — `gross_cents`, `stripe_fee_cents`, `net_after_stripe_cents`, `author_cents`, `platform_cents`, `publisher_cents`, `is_tip`, `payout_period_start`, `payout_period_end`; RLS + service_role grants included.
-- **`stripe_fee_cents` column** added to `orders` and `payouts` tables.
-- **Real Stripe Balance Transaction API**: webhook fetches `paymentIntents.retrieve` with `expand: ['latest_charge.balance_transaction']` — captures the actual Stripe fee for all card types (domestic 2.9%+30¢, international higher). No formula guessing.
-- **Proportional Stripe fee distribution** across order items with exact-remainder assignment to the largest item, ensuring per-item fees always sum exactly to the order-level total.
-- **`getPayoutPeriod()`** helper: bi-monthly periods (1st–15th payout on 16th; 16th–last day payout on 1st of next month). Returns `{start, end}` ISO date strings stored on each `author_earnings` row.
-- **`insertAuthorEarning()`** in stripe-webhook edge function: calculates `net = gross - itemStripeFee`, applies revenue split percentages, writes to `author_earnings` after each `insertAuthorSale`. Tips always credited at 100% author.
-- **Test promo edge case**: `isTestPromo` bypasses `fetchStripeFee` (returns 0) — correct because $0 test-promo transactions incur no Stripe fee; original prices still recorded.
-- **`AuthorEarning` interface** added to `src/lib/bookstore/types.ts`; `stripe_fee_cents` field added to `Order` and `Payout` interfaces.
-- **Stripe webhook JWT bypass fix**: edge function redeployed with `--no-verify-jwt` so Stripe webhook requests (no Supabase JWT) no longer return `UNAUTHORIZED_NO_AUTH_HEADER`.
-
-### Added — Author Portal: Earnings Dashboard (Issue #46)
-
-- **`/portal/earnings`** (new page `src/app/(portal)/portal/earnings/page.tsx`): dedicated financial dashboard — Sales Summary stat cards (Total Units Sold, This Month, Accruing This Period, Next Payout), all-time Gross / Stripe Fees / Your Earnings row, Sales by Title bar chart with physical/digital split, Tips Received per-book breakdown with gross/fees/net, full Payout History table.
-- **`/portal/library`** (new page `src/app/(portal)/portal/library/page.tsx`): focused book management — product table with units sold and net earnings per book, inventory low-stock alerts, Add Book / Edit Book modals. All financial data moved to `/portal/earnings`.
-- **`/portal/sales`** (new page `src/app/(portal)/portal/sales/page.tsx`): order management (renamed from `/portal/orders`) — all order stats, earnings breakdown panel for admin/sales, per-order author cut in OrdersTable expanded view, order status management.
-- **Old-route redirects**: `/portal/books` → `/portal/library`; `/portal/orders` → `/portal/sales` (both server-side `redirect()`).
-
-### Added — Payout Date UI (Issue #46)
-
-- **`getNextPayoutDate()`** helper in both `portal/library` and `portal/earnings` pages: computes the next scheduled payout (16th of current month if day ≤ 15, else 1st of next month). Advances automatically — no manual maintenance.
-- **Next Payout card** on `/portal/earnings`: shows accruing amount when no formal pending payout record exists yet, with "Scheduled May 16, 2026" sub-label in green.
-- **`PendingPayoutsWidget`** updated: when no pending payout rows exist but the author has accruing earnings, renders a projected "Upcoming · Scheduled" entry with the next payout date and period range instead of "No pending payouts". `accruing`, `nextPayoutDate`, `periodStart`, `periodEnd` props added.
-- **Main portal dashboard My Books strip**: shows accruing period amount in green alongside "Accruing · Payout [date]" — queries `author_earnings` for the current period via a dedicated Supabase call.
-
-### Fixed — Earnings Math (Issue #46)
-
-- **Tips `Your Tips` display**: was reading `author_cents` from DB (stale values from early orders). All calculations now derive `net = gross_cents - stripe_fee_cents` dynamically — always mathematically correct regardless of DB data quality. A `netCents()` helper function centralises this.
-- **"Your Earnings" bottom row** now includes both books and tips (was books only).
-- **Monthly earnings** (`This Month`, `Last Month`, `Accruing This Period`) now covers all earnings (books + tips), net of Stripe.
-
-### Changed — Navigation & Routing (Issue #46)
-
-- **`PortalNav`**: bookstore author links updated to `Library` (`/portal/library`) + `Earnings` (`/portal/earnings`); shared link updated to `Sales` (`/portal/sales`); sales-role brand link updated to `/portal/sales`.
-- **`proxy.ts`**: sales-role access guard redirects to `/portal/sales`; matcher updated to `isPortalSalesRoute` (includes legacy `/portal/orders` to preserve redirect chain during transition).
-- **`BookstoreOrdersWidget`**: "View All Orders" + order number links → `/portal/sales`.
-- **`TipsWidget`**: order number links → `/portal/sales`.
-- **`PendingPayoutsWidget`**: "Payout History" footer link → `/portal/earnings`.
-- **Main portal dashboard**: "My Books" strip link → `/portal/library`.
-- **`CHANGELOG.md`**: created at project root; back-filled with all work from the project's inception.
-
----
-
-### Added — Bookstore Foundation (Issue #46, earlier work)
-
-- **Bookstore — Supabase Infrastructure (Issue #46, Steps 1.1–1.2)**
-  - `supabase/migrations/20260428000001_bookstore_schema.sql` — DDL for all 6 bookstore tables (customers, addresses, orders, order_items, digital_downloads, payouts), 8 indexes, `set_updated_at()` trigger, RLS enabled on all tables with customer-scoped policies; pushed to project qdocpanuicwyhlcthudc
-  - `supabase/migrations/20260429000001_storage_rls.sql` — service-role-only RLS on `storage.objects` for `digital-books` bucket
-  - `digital-books` private Supabase Storage bucket created; no public access; downloads served via signed URLs only
-
-- **Bookstore — Foundation (Issue #46, Phase 1)**
-  - Supabase shop project env vars documented in `.env.local` (steps 1.1–1.2)
-  - Sanity schemas: `book`, `bookGenre`, embedded `bookFormat` object type; `author` schema updated with `isLiteraryAuthor`, `payoutEmail` fields (step 1.3)
-  - `src/lib/bookstore/supabase.ts` — typed Supabase clients (`shopClient` anon, `shopServiceClient` service-role) (step 1.4)
-  - `src/lib/bookstore/types.ts` — TypeScript interfaces: `Customer`, `Address`, `Order`, `OrderItem`, `DigitalDownload`, `Payout`, `SanityBook`, `SanityBookFormat`, `SanityBookGenre`, `CartItem`, `CheckoutPayload` (step 1.5)
-  - `src/lib/sanity/lib/queries.ts` — `queryAllBookGenres`, `queryFeaturedBooks`, `queryAllBooks`, `queryBookBySlug`, `queryBooksByAuthorClerkId` GROQ queries (step 1.6)
-  - `sales` portal role added to `src/lib/auth/roles-utils.ts` and `src/lib/auth/roles.ts`; `src/proxy.ts` enforces sales → `/portal/orders` only; `src/lib/auth/roles.ts` exports `requireAnyPortalRole`, `isSales`, `isSalesOnlyUser` (step 1.7)
-
-- **Bookstore — Stripe & Webhook (Issue #46, Phase 2)**
-  - `src/app/api/bookstore/checkout/route.ts` — POST creates Stripe Checkout Session from cart; collects shipping for physical items; metadata encodes items for webhook (step 2.1)
-  - `src/app/api/bookstore/webhook/route.ts` — verifies Stripe signature; handles `checkout.session.completed` (upsert customer, create order + order_items, digital fulfillment), `payment_intent.succeeded/failed`, `charge.refunded` (revoke downloads), `charge.dispute.created` (steps 2.2–2.5)
-  - `src/lib/bookstore/email.ts` — Resend email helpers: order confirmation, digital download delivery, shipment confirmation, refund confirmation (step 5 baseline)
-
-- **Bookstore — Public Storefront (Issue #46, Phase 3)**
-  - `src/app/(user)/bookstore/layout.tsx` — bookstore layout wrapper
-  - `src/app/(user)/bookstore/page.tsx` — featured hero + all-books grid + genre filter; full metadata
-  - `src/app/(user)/bookstore/book/[slug]/page.tsx` — full detail page; format selector; inventory badges; CTA buttons; author bio; Book + Offer JSON-LD; `generateMetadata`; `generateStaticParams`
-  - `src/app/(user)/bookstore/cart/page.tsx` — full cart page
-  - `src/app/(user)/bookstore/order-success/page.tsx` — post-checkout confirmation
-  - `src/app/(user)/bookstore/orders/page.tsx` — authenticated order history
-  - `src/app/(user)/bookstore/downloads/page.tsx` — digital download vault
-  - `src/app/api/bookstore/download/route.ts` — validates ownership, generates Supabase signed URL, increments counter
-  - `src/app/api/bookstore/my-downloads/route.ts` — returns customer's digital downloads
-  - `src/lib/bookstore/cart.ts` — Zustand cart store with localStorage persistence
-  - `src/components/bookstore/AddToCartButton.tsx` — client add-to-cart CTA
-  - `src/components/bookstore/GenreFilter.tsx` — client-side genre filter tabs
-  - `src/components/bookstore/MiniCart.tsx` — header mini-cart with item count badge
-  - Bookstore nav link added to main site navigation
-
-- **Bookstore — Internal Dashboard (Issue #46, Phase 4)**
-  - `src/app/(portal)/portal/books/page.tsx` — My Books dashboard (author-gated): product list table with Studio links, sales summary cards (units/revenue/month-over-month), inventory alerts section, payout history table; gracefully degrades when Supabase is not connected
-  - `src/app/(portal)/portal/orders/page.tsx` — Order Management (admin/sales/author-scoped): order stats, paginated + searchable table, status badges; authors see only orders containing their books
-  - `src/components/portal/OrdersTable.tsx` — client component: searchable + filterable order table; expandable per-row detail panel (payment breakdown, item list with unit prices, Stripe payment intent ID, timestamps); "Mark as shipped" with inline tracking number input; "Mark as [next status]" workflow; admin refund action with confirmation; pagination
-  - Per-book CSS bar chart added to My Books dashboard showing relative units sold and physical/digital split per title
-  - Supabase env vars added to Vercel project settings (production + preview) via CLI
-  - `src/app/api/portal/orders/[id]/status/route.ts` — PATCH: Zod-validated; validates status transition graph; sales cannot refund; fires shipment/refund emails on status change; revokes digital downloads on refund
-  - `src/components/portal/PortalNav.tsx` — My Books + Orders nav links already wired; `sales` role shows Sales Portal label and limits to orders link
-
-- **Bookstore — Author Book Management (Issue #46, Phase 5)**
-  - `src/components/portal/AddBookModal.tsx` — slide-over book creation widget: title, description, multi-select genres with inline "New Genre" sub-form (title + slug + Slugify button), cover photo upload with preview, status radio (draft/published), per-format pricing (physical / digital / bundle, up to 3), digital file upload (PDF/EPUB/MOBI/ZIP) per digital/bundle format; genre dropdown with clickable pills; Fiction/Non-Fiction type toggle (either-or, deselectable)
-  - `src/components/portal/EditBookModal.tsx` — slide-over book editor: all fields pre-populated from existing Sanity document via `blocksToText()` PortableText helper; cover photo replacement; digital file replacement per format slot; all 4 status values (draft/published/out-of-stock/discontinued); genre multi-select dropdown with pills; Fiction/Non-Fiction type toggle; inline New Genre sub-form (no modal redirect); price editing by `_key`
-  - `src/lib/portal/book-actions.ts` — server actions: `createBook` (Sanity write + pre-generate format `_key`s), `updateBook` (patch/unset diff), `uploadBookCover` (FormData → Supabase `book-covers` public bucket → Sanity patch), `uploadDigitalAsset` (FormData → Supabase `digital-books` private bucket → Sanity format patch), `fetchBookGenres`, `createBookGenre`; genre references include `_key` to satisfy Sanity array requirements; `fictionType` field supported in create and update
-  - `supabase/migrations/20260429000002_book_covers_bucket.sql` — `book-covers` public bucket: 5 MB limit, image MIME types, service-role write policy
-  - `supabase/migrations/20260429000003_digital_books_bucket.sql` — `digital-books` private bucket: 500 MB limit, no MIME restriction, service-role write policy
-  - `supabase/migrations/20260430000001_grant_role_privileges.sql` — grants `SELECT/INSERT/UPDATE/DELETE` on all bookstore tables to `service_role`, `anon`, `authenticated`; fixes `permission denied for table` errors that blocked portal order management and all Supabase queries despite correct env vars
-  - `next.config.ts` — `serverActions.bodySizeLimit: '50mb'` to support large cover and digital file uploads (default 1 MB silently dropped payloads)
-  - `src/app/(portal)/portal/books/page.tsx` — `EditBookModal` integrated inline; all Studio links removed from portal UI
-
-- **Portal — Studio Links Removed**
-  - Removed all direct Sanity Studio links from the author portal and component UI; portal is now self-contained
-  - `src/app/(portal)/portal/page.tsx` — removed "Open Studio ↗" button (editor+ only)
-  - `src/app/(portal)/portal/books/page.tsx` — removed "Manage in Studio →" header button and "Studio ↗" per-row action link; updated empty-state text
-  - `src/components/portal/AddBookModal.tsx` — updated post-create success state to reference the Edit button instead of Studio; removed "Stripe Price IDs can be added in Studio" note
-  - `src/components/portal/EditBookModal.tsx` — removed "To add or remove formats, use Studio" note
-  - `src/components/portal/SecureContactTable.tsx` — removed "Manage in Studio ↗" action link
-  - `src/components/portal/WhistleblowerTable.tsx` — removed "Manage in Studio ↗" action link
-
-- **Portal Dashboard — Bookstore Widgets (Issue #46, Phase 4 cont.)**
-  - `src/components/portal/BookstoreOrdersWidget.tsx` — 2-panel switchable widget: Digital Sales tab (fulfilled digital orders) and Pending Shipments tab (physical orders awaiting dispatch); links to full Orders page
-  - `src/components/portal/PendingPayoutsWidget.tsx` — server-renderable payout display widget: totals, per-payout rows with period/gross/net; admin sees all authors' payouts
-  - `src/app/(portal)/portal/page.tsx` — portal dashboard wired with `BookstoreOrdersWidget` + `PendingPayoutsWidget`; Supabase data fetched server-side with graceful degradation
-
-- **Bookstore — Buy Now & Add to Cart on Listing Cards (Issue #46)**
-  - `src/components/bookstore/BookCardActions.tsx` — client component rendered below each book card on the storefront grid; shows "+ Cart" and "Buy Now" buttons for the lowest-price format; compact amber tip row below (checkbox + inline amount input) when the book's author has a `tipStripeProductId`; tip included in Buy Now payload when checked and amount > 0; resolves inaccessible buy button on listing cards
-  - `src/components/bookstore/BuyNowButton.tsx` — standalone "Buy Now" client button used on the book detail page format rows; direct Stripe checkout redirect without cart
-  - `src/app/(user)/bookstore/page.tsx` — listing cards restructured from single `<Link>` wrapper to `<div>` with link on image/title and `BookCardActions` as a sibling; fixes buttons-inside-anchor nesting violation
-  - `src/app/(user)/bookstore/book/[slug]/page.tsx` — Add to Cart button no longer gated behind `format.stripePriceId &&` guard; compare-at strikethrough price shown on detail hero as well as listing card
-
-- **Bookstore — Name-Your-Price Tip System (Issue #46, §2.2)**
-  - `src/models/schema/author.ts` — `tipStripeProductId` (Stripe Product ID `prod_xxx`) and `tipAmount` (recommended default, USD) fields; tips are name-your-own-price so a Product ID is stored rather than a Price ID
-  - `src/lib/bookstore/types.ts` — `SanityBook.author.tipStripeProductId` (renamed from `tipStripePriceId`); `CartItem.tipIncluded?: boolean` for per-item opt-in toggle persisted in localStorage; `CheckoutLineItem.unitAmountCents?: number` for variable tip amount to checkout API
-  - `src/lib/bookstore/cart.ts` — `updatePrice(bookId, formatKey, price)` and `updateTipIncluded(bookId, formatKey, included)` actions; `addItem` no longer stacks quantity for tip items — re-adding updates price and `tipIncluded` instead
-  - `src/lib/sanity/lib/queries.ts` — author projection uses `coalesce(tipStripeProductId, tipStripePriceId)` for backward compatibility with documents saved before the field rename
-  - `src/app/api/bookstore/checkout/route.ts` — tip items built with `price_data: { product, unit_amount }` (Stripe name-your-price); tips with zero/missing `unitAmountCents` are filtered before session creation; non-tip price IDs trimmed to remove accidental whitespace; diagnostic `[shop/checkout]` log line emits key prefix and price IDs to aid Stripe env debugging
-  - `src/components/bookstore/TipAuthorRow.tsx` — full rewrite: "Include tip" checkbox (default checked), editable dollar input (default = `author.tipAmount`), buttons disabled when unchecked or amount = 0; uses `tipStripeProductId`; "+ Cart" passes `tipIncluded: true`; "Tip Now" passes `unitAmountCents` to checkout
-  - `src/components/bookstore/BookCardActions.tsx` — compact tip row below format buttons: include checkbox + inline amount input; tip added to cart or Buy Now payload only when checked and amount > 0
-  - `src/app/(user)/bookstore/cart/page.tsx` — tip items rendered with amber left-border styling, editable amount input (calls `updatePrice`), include checkbox (calls `updateTipIncluded`), no quantity controls; checkout payload filters unchecked/zero tips and passes `unitAmountCents` for included tips; subtotal respects `tipIncluded` flag
-
-- **Bookstore — Guest Download Token API (Issue #46, §7)**
-  - `src/app/api/bookstore/download/guest/` — one-time token download endpoint for guest purchases; validates token, marks used, returns Supabase signed URL
-  - `src/app/api/bookstore/download/guest-resend/` — accepts `order_number` + `guest_email`; verifies match; generates fresh token with new expiration; sends new delivery email via Resend; rate-limited to 3 resends per order
-  - `supabase/migrations/20260430000002_guest_download_tokens.sql` — `guest_download_tokens` table: token, order_item_id, guest_email, used_at, expires_at, resend_count
-  - `supabase/migrations/20260430000003_audit_logs.sql` — `audit_logs` table: event_type, user_id, purchase_id, ip_address, user_agent, details JSONB; indexed on event_type + created_at
-
-- **Breaking News Page**
-  - `src/app/(news)/breaking/page.tsx` + `BreakingNewsClient.tsx` — dedicated `/breaking` route with `generateMetadata`; replaces old redirect target with a full rendered page
-  - Removed `src/app/(news)/live-event/[slug]/page.tsx` (superseded by breaking news + events architecture)
-
-- **Hurriya Publications — Brand Assets**
-  - `public/hurriya-pub/` — full brand asset set: Logo, Logo-alt, Logo-invert, Banner, Banner-invert (PNG + PSD source files)
-
-### Fixed
-
-- **Supabase `permission denied for table` on all bookstore tables** — schema migration created tables with RLS enabled but never granted base Postgres table privileges to `service_role`, `anon`, or `authenticated`; service role bypasses RLS row policies but still requires explicit `GRANT`; new migration `20260430000001_grant_role_privileges.sql` grants full DML to `service_role` and `authenticated`, read-only `payouts` to `authenticated`; applied to production Supabase project via `supabase db push`
-
-- **Portal Order Management showing "database not connected"** — catch block swallowed error silently; improved to capture and display the actual Supabase error message with a hint to run `supabase db push` if the error is a missing relation
-
-- **`BreakingNewsClient` "Cannot find module" TS error** — `LiveEvent` and `Article` types were used as implicit globals in `BreakingNewsClient.tsx` with no import or local declaration; TypeScript failed to compile the file, causing the parent `page.tsx` import to report "Cannot find module"; fixed by adding `interface LiveEvent` and `interface Article` at the top of the file
-
-- **`checkbox.tsx` duplicate border Tailwind classes** — shadcn codegen emitted `border-slate-200 border-slate-900` (and `dark:border-slate-800 dark:border-slate-50`) on the same element; only the last value wins; removed the duplicate dark-state values, keeping `border-slate-200 dark:border-slate-800` as the unchecked border (checked colors already handled by `data-[state=checked]` classes)
-
-- **`tsconfig.json` `ignoreDeprecations` invalid value** — `"6.0"` is not an accepted value by the TypeScript compiler; changed to `"5.0"` (the only valid value as of TS 5.x); was causing `Type error: Invalid value for '--ignoreDeprecations'` and failing the Next.js production build
-
-- **File input clicks broken inside `overflow-hidden` containers** — `sr-only` applies `clip: rect(0,0,0,0)` which kills programmatic click targets; fixed across `AddBookModal`, `EditBookModal`, and `ArticleEditorForm` by switching to `useRef` + `className='hidden'` / `fixed left-[-9999px]` inputs with `ref.current?.click()`
-- **Digital file "first pick doesn't stick"** — shared `digitalInputRef` + `useState` index tracking has stale closure / batched-state race on first pick; fixed in both `AddBookModal` and `EditBookModal` by giving each format card its own dedicated `<input ref={(el) => { digitalInputRefs.current[i] = el; }}>` with an inline `onChange` that captures `i` directly from the `map()` closure — eliminates index tracking entirely
-- **Supabase upload failures (400 / type error)** — server actions must receive `FormData` (not serialized `Uint8Array`) across the wire; upload functions refactored to accept `FormData` and call `file.arrayBuffer()` server-side; `Buffer.from(bytes)` required by Supabase JS client (raw `Uint8Array` rejected)
-
-### Removed
-
-- `ADSENSE-SETUP.md` — one-time setup doc no longer needed
-
-- **Bookstore — Build Fixes**
-  - `src/lib/bookstore/supabase.ts` — lazy proxy clients (throw at call time, not import time) to prevent build crash when env vars missing
-  - `src/lib/bookstore/email.ts` — lazy Resend initialization for same reason
-  - `src/lib/bookstore/database.types.ts` — added `Relationships` arrays (required by @supabase/supabase-js 2.105+)
-  - `src/lib/bookstore/types.ts` — `SanityImageRef` typed as `{ _type: 'image'; asset: { _type: 'reference'; _ref: string } }` to satisfy `urlForImage` parameter
-  - `src/util/urlForImage.ts` — broadened parameter type to accept `ImageLike` (Image | asset-ref-compatible object) for cross-schema compatibility
-  - Stripe API version updated: `2025-04-30.basil` → `2026-04-22.dahlia`
-  - `generateStaticParams` in book detail page uses raw Sanity client (not `sanityFetch`) to avoid `draftMode()` outside request scope error
-  - Removed `export const runtime = 'nodejs'` from webhook route (incompatible with `useCache` experimental flag)
-
----
-
-## [3.0.0] — 2026-04-28
-
-### Summary
-
-Major release. Full Author Portal with BlockNote WYSIWYG editor, role-based access control, pitch workflow, and Sanity Live real-time updates (#44). Coral Comments with Clerk SSO (#42). Algolia full-text search with faceted filters (#21). Tag pages (#8). Expanded embed support: Facebook, TikTok, and Instagram hydration fix. Rendering, analytics, and image fixes throughout.
-
-### Added
-
-- **Author Portal — Clerk Role-Based Access Control (#44, Phase 1)**
-  - `src/lib/auth/roles-utils.ts` — pure, framework-agnostic utilities: `getRoleFromMeta(meta)` extracts a `PortalRole` (`'admin' | 'editor' | 'author'`) from Clerk `publicMetadata`; `hasRole(role, required)` enforces the hierarchy `admin > editor > author`; backwards-compatible with legacy `publicMetadata.admin === true` flag
-  - `src/lib/auth/roles.ts` — server-only helpers: `getRoleFromUser(user)`, `getCurrentRole()`, `getCurrentUserWithRole()`, `requireRole(role)` (redirects to sign-in or home on failure), `requireAdmin()`, `requireEditor()`, `requireAuthor()`, `isAdmin()`, `isEditor()`, `isAuthor()`; roles are read from fresh Clerk API data, never from the JWT alone
-  - `src/middleware.ts` — updated to protect `/portal/**` and `/api/portal/**` routes; unauthenticated → `/sign-in`; no-role authenticated → `/`; admin check uses fresh `publicMetadata` from Clerk API on every request
-  - `src/app/api/admin/set-role/route.ts` — admin-only POST endpoint that writes `publicMetadata.role` to any target Clerk user; Zod-validated; re-verifies requester is admin on every call; role can only be set server-side
-  - `jest.config.ts` — root-level Jest config using `next/jest` (SWC transform); fixes missing config that caused Sanity ESM import errors in tests
-  - `src/lib/auth/__tests__/roles.test.ts` — 20 unit tests covering all `getRoleFromMeta` and `hasRole` scenarios
-
-- **Author Portal — Dashboard (#44, Phase 2)**
-  - `src/models/schema/article.ts` — added `featured`, `breakingNews`, `needsReview` fields
-  - `src/lib/portal/queries.ts` — `queryPortalArticlesByAuthor` (author-scoped), `queryPortalAllArticles` (editor/admin), `queryPortalArticleById`, `queryPortalCategories`, `queryPortalAuthors`, `queryPortalAllSources`; `clerkId` excluded from all projections
-  - `src/lib/portal/fetch.ts` — authenticated Sanity client for portal queries (read token, CDN off)
-  - `src/lib/portal/sanitize.ts` — `sanitizeText()` / `sanitizeHtml()` strip injection vectors from all inputs before Sanity writes; 10 unit tests
-  - `src/app/(portal)/layout.tsx` — portal route group with server-side `requireAuthor()` gate and Toaster
-  - `src/app/(portal)/portal/page.tsx` — dashboard root; redirects to `/portal/articles`
-  - `src/components/portal/PortalNav.tsx` — top nav with Articles/Sources links, back-to-site link, Clerk UserButton; active link uses `bg-untele`
-  - `src/components/portal/ArticleDashboard.tsx` — live search by title/tag/category; status filter (published/draft/in-review); sort by modified/created/title/status; table/card toggle; per-article action menu with delete confirmation; role-aware (editors see all articles + author column); empty state CTA; Sonner toasts
-  - Editor author filter toggle: All / Mine / Others / Reviewed
-
-- **Author Portal — Article Editor (#44, Phases 3–4)**
-  - **BlockNote** WYSIWYG editor (replaced Tiptap — better out-of-box UX; custom embed blocks are first-class BlockNote concepts)
-  - `src/lib/portal/blocknote-serializer.ts` — full bidirectional BlockNote JSON ↔ Sanity Portable Text: paragraphs, headings, blockquote, bullet/ordered lists, code blocks, table, image, divider, youtubeEmbed, twitterEmbed, instagramEmbed, facebookEmbed, tiktokEmbed; test suite for all round-trips
-  - `src/lib/portal/image-actions.ts` — server action to upload images to Sanity asset pipeline; validates JPEG/PNG/WebP/GIF/AVIF and 10 MB limit; requires author role
-  - `src/lib/portal/article-ownership.ts` — shared ownership verification helper; `import 'server-only'` guard
-  - `src/lib/portal/source-actions.ts` — `createSource`, `updateSource`, `deleteSource`, `fetchAllSources` server actions; sanitized, Zod-validated
-  - `src/lib/portal/article-actions.ts` — `createArticle`, `updateArticle`, `deleteArticle`, `submitArticleForReview`, `publishArticle`; all re-verify session and role; ownership enforced server-side; authors cannot publish or set featured/breaking; Zod-validated
-  - `src/components/portal/SourceSelectorModal.tsx` — search existing sources or inline-create without leaving the editor
-  - `src/components/portal/ArticleEditorForm.tsx` — full metadata form: title, slug (auto-generate + manual), excerpt, lead paragraph, BlockNote body, categories, author (editor+), tags, keywords, location, publish date/time, sources selector, featured/breaking (editor+), comments toggle, video embed (featured section with live preview), methodology note, related articles search, FAQs section, corrections system (correction/clarification/update/retraction), main image upload; sticky action bar with Save Draft / Submit for Review / Publish / Preview; autosave every 60s with Saving / Saved / Unsaved indicator; `beforeunload` leave-warning; `Ctrl+S` = Save Draft, `Ctrl+Shift+P` = Preview
-  - `src/app/(portal)/portal/articles/new/page.tsx` — fetches categories + authors in parallel; accepts `?pitchId=` to pre-fill from a claimed pitch
-  - `src/app/(portal)/portal/articles/[id]/edit/page.tsx` — verifies author ownership; `notFound()` for unauthorized or missing articles
-  - `src/lib/portal/__tests__/slug.test.ts` — 7 unit tests for slug generation
-
-- **Author Portal — Source Library (#44, Phase 5)**
-  - `src/app/(portal)/portal/sources/page.tsx` — source library with `SourceLibrary` client component
-  - `src/app/(portal)/portal/sources/new/page.tsx` and `[id]/edit/page.tsx` — create/edit source forms
-  - `src/components/portal/SourceLibrary.tsx` — searchable list filtered by title/URL/type; linked article count per source; delete confirmation; empty state CTA
-  - `src/components/portal/SourceForm.tsx` — label, type (dropdown), URL, notes, anonymous flag; Zod-validated; Sonner toasts; redirects to `/portal/sources` on success
-
-- **Author Portal — Security Hardening (#44, Phase 6)**
-  - `src/lib/portal/rate-limit.ts` — Upstash Redis sliding-window rate limiter (30 writes/min per user); degrades gracefully when env vars absent; lazy-loaded to avoid client bundling
-  - Rate limiting applied to `createArticle`, `updateArticle`, `deleteArticle`, `createSource`, `updateSource`
-  - Security model: session + role re-verified on every server action; ownership enforced (`author._ref === sanityAuthorId`); all text inputs sanitized; server-only write token; `clerkId` excluded from all GROQ projections; CSRF via Next.js Server Actions
-  - `src/lib/portal/__tests__/rate-limit.test.ts` — 2 unit tests for graceful degradation
-
-- **Author Portal — Pitch Workflow (#44)**
-
-  _Schemas_
-  - `src/models/schema/claimedPitch.ts` — headline, urgency, beat, angle, sourceSuggestions, reference links, notes (Portable Text), status (`claimed` | `in_progress` | `published` | `abandoned`), author reference, assignedBy, brief provenance, claimedAt, weak `linkedArticle` reference
-  - `src/models/schema/brief.ts` — top-level `storyPasses[]` array (`{ _key, storyKey, authorId, passedAt }`) — pass decisions are per-user; doesn't affect the story for other authors
-  - `src/models/schema/article.ts` — `linkedPitch` weak reference field
-
-  _Server actions_
-  - `src/lib/portal/pitch-actions.ts` — `updatePitchDetails` (ownership-checked patch), `savePitchNotes` (plain text → Portable Text blocks)
-  - `src/lib/portal/brief-actions.ts` — `fetchBriefById`: fetches brief + user's claimed pitches in parallel, builds `myPitchMap`
-  - `src/lib/portal/article-actions.ts` — `createArticle` accepts optional `linkedPitchId`; bidirectional pitch ↔ article linking on create
-
-  _Components_
-  - `src/components/portal/PitchNotesEditor.tsx` — textarea with char count; saves via `savePitchNotes`
-  - `src/components/portal/PitchDetailsEditor.tsx` — read-only-first sidebar; Edit mode for headline, angle, source suggestions, reference links, linked article dropdown
-  - `src/components/portal/PitchQuickViewModal.tsx` — fixed right-side slide-in from article editor; ESC + backdrop dismiss; saves via `Promise.all([updatePitchDetails, savePitchNotes])`
-  - `src/components/portal/ClaimedPitchCard.tsx` — urgency/beat/status badges; Open Pitch and Start/Edit Article actions
-  - `src/components/portal/ClaimedPitchesPanel.tsx` — Mine/All/Others filter; sorts by status then urgency; count label
-  - `src/components/portal/BriefPanel.tsx` — `< >` navigation between briefs; per-user pass/unpass with optimistic UI; card sort: breaking unclaimed → unclaimed → claimed → published; editor Assign/Release/Reassign controls
-
-  _Pages_
-  - `src/app/(portal)/portal/pitch/[id]/page.tsx` — headline + badges + `PitchNotesEditor` left column; Quick Actions + `PitchDetailsEditor` + Provenance right sidebar; `notFound()` for non-owners
-  - `src/app/(portal)/portal/page.tsx` — dashboard now fetches briefs, pitchMap, claimedPitches; renders `ClaimedPitchesPanel` and `BriefPanel`
-
-- **Author Portal — Sanity Live Integration (#44)**
-  - All portal pages migrated to Sanity Live Content API — dashboard, inbox, and article list update in real time; zero manual refresh required
-  - `_originalId` used for draft detection; `_id` prefix as authoritative draft/published signal under `previewDrafts`
-
-- **Coral Comments with Clerk SSO (#42)**
-  - `docker/docker-compose.yml` — self-hosted Coral Talk + MongoDB 8 + Redis 7-alpine + Caddy 2 (auto TLS) + nightly backup container; MongoDB and Redis on internal-only network
-  - `docker/Caddyfile` — reverse proxy for `coral.untelevised.media` with security headers, gzip, access logging
-  - `docker/.env.example` — all required env vars documented; `CORAL_SIGNING_SECRET` vs `CORAL_SSO_SECRET` distinction noted
-  - `docker/scripts/backup.sh` — nightly `mongodump` with gzip + auto-prune after `BACKUP_RETAIN_DAYS` (default 14)
-  - `src/app/api/coral-token/route.ts` — mints 24-hour HS256 JWT for Coral SSO from active Clerk session; `{ token: null }` for guests; auto-grants `MODERATOR` to `admin`/`staff` Clerk roles
-  - `src/components/post/CommentsSection.tsx` — gates embed behind functional cookie consent; fetches SSO token for signed-in users; consent CTA for declined functional cookies; locked state when `allowComments === false`; brand-themed via CSS variables
-  - `src/models/schema/article.ts` — `allowComments` boolean with `initialValue: true`
-  - `public/coral-theme-dark.css` / `coral-theme-light.css` — served as `customCSSURL` to Coral's RTE iframe; two files for reliable theme matching
-
-- **Algolia Full-Text Search (#21)**
-  - `algoliasearch` v5, `react-instantsearch` v7, `@portabletext/toolkit` installed
-  - `src/lib/algolia/client.ts` — server-only admin client with lazy initialisation
-  - `src/app/api/algolia-sync/route.ts` — Sanity webhook handler with HMAC-SHA256 signature validation; syncs articles and live events on create/update/delete
-  - `scripts/algolia-initial-index.ts` — one-time backfill via `pnpm algolia:index`; `bodyText` capped at 5,000 chars
-  - `src/app/(user)/search/page.tsx` — reads `?q=` and passes as `initialQuery` to `SearchClientLoader`
-  - `src/components/search/SearchClient.tsx` — `InstantSearch` UI: `SearchBox`, `Hits` with `ArticleHitCard` (thumbnail, highlighted title/description, author, category, date), `RefinementList` facets (category, tag, author), `Pagination`, `NoResults`; `onStateChange` syncs `?q=` URL
-  - `src/components/global/HeaderSearch.tsx` — Algolia typeahead in header: live dropdown (top 6 hits); `dynamic({ ssr: false })`
-  - `.env.example` updated with Algolia env vars
-
-- **Tag Pages (#8, PR #40)**
-  - `tags` string-array field on `article` (max 10, tag-input layout in Studio)
-  - `src/lib/tagUtils.ts` — `tagToSlug`, `slugToTagLabel`, `tagPageUrl` helpers
-  - `queryAllTags` / `queryArticlesByTag` GROQ queries; `queryAllArticles` updated to include `tags`
-  - `src/app/(user)/tag/[slug]/page.tsx` — `generateStaticParams`, `generateMetadata`, canonical URL, CollectionPage JSON-LD, breadcrumb, article grid, empty state
-  - Article detail page: categories as red pills, tags as ghost `#pill` links in hero header
-  - Sitemap: all `/tag/[slug]` URLs added (`changeFrequency: daily`, `priority: 0.5`)
-
-- **Facebook embed support**
-  - `src/models/schema/facebook.ts` — `facebookEmbed` Sanity object type with required `postUrl` field and Studio preview
-  - `src/components/providers/FacebookEmbed.tsx` / `FacebookEmbedInner.tsx` — SSR-safe dynamic import pattern (eliminates hydration mismatch)
-  - `RichTextComponents.tsx` — `facebookEmbed` type renderer
-  - `src/lib/portal/blocknote-serializer.ts` — full BlockNote ↔ Portable Text round-trip for `facebookEmbed` blocks
-  - Registered in `blockContent` array members and exported from `schema/index.ts`
-
-- **TikTok embed support**
-  - `src/models/schema/tiktok.ts` — `tiktokEmbed` Sanity object type with required `videoUrl` field and Studio preview
-  - `src/components/providers/TikTokEmbed.tsx` / `TikTokEmbedInner.tsx` — SSR-safe dynamic import pattern
-  - `RichTextComponents.tsx` — `tiktokEmbed` type renderer
-  - `src/lib/portal/blocknote-serializer.ts` — full BlockNote ↔ Portable Text round-trip for `tiktokEmbed` blocks
-  - Registered in `blockContent` array members and exported from `schema/index.ts`
-
-- **Instagram embed hydration fix**
-  - Extracted into `InstagramEmbedInner.tsx` + `dynamic(..., { ssr: false })` wrapper — eliminates React hydration mismatch from `embed.js` DOM mutation
-
-### Fixed
-
-- **Article body images no longer cropped (`RichTextComponents.tsx`)**
-  - Removed fixed `h-96` + `overflow-hidden`; dimensions parsed from Sanity asset ref (`image-{id}-{W}x{H}-{ext}`); `style={{ width: '100%', height: 'auto' }}` preserves full aspect ratio
-
-- **Article featured image no longer cropped (`articles/[slug]/page.tsx`)**
-  - Removed hardcoded `800×450` / `object-cover`; same asset-ref dimension extraction applied
-
-- **Raw Feed cards now clickable (`RawFeed.tsx`)**
-  - Replaced plain `<div>` wrapper with `<Link href="/articles/{slug}">` so cards navigate to the article
-
-- **Author Portal — post-audit fixes (#44)**
-  - `SourceSelectorModal.tsx` — replaced direct `portalClient.fetch()` (which imported `server-only`) with `fetchAllSources` server action; fixes build-breaking server/client boundary violation
-  - `src/app/api/admin/set-role/route.ts` — replaced `requireAdmin()` in try/catch (which silently swallowed Next.js redirect exceptions) with direct `auth()` + `currentUser()` + `hasRole()` check; 401 vs 403 now correct
-  - `src/lib/portal/blocknote-serializer.ts` — list nodes return `SanityBlock[]` arrays directly; `tiptapToPortableText` spreads arrays so every list item becomes a top-level Portable Text block
-  - Portal `_id` / `_originalId` handling hardened: `_originalId` used for draft detection and mutations under `previewDrafts`; `status === 'published'` replaces `publishedAt` as the authoritative published signal
-
----
-
-## [2.3.0] — 2026-03-20
-
-### Summary
+## Summary
 
 Bookmarks full-stack release — completes Phase 2 of issue #19. localStorage bookmarking (Phase 1, v2.2.x) is preserved as the default for all unauthenticated users. Signed-in users now get server-backed bookmarks stored in Sanity, synced across all devices. Guest bookmarks are automatically migrated to the server on first sign-in with no data loss.
 
-### Added
+## New
 
-- **Bookmarks Phase 2: Clerk + Sanity sync (#19, PR #39)**
+### Bookmarks Phase 2: Clerk + Sanity Sync (Issue #19, PR #39)
 
-  **Sanity**
-  - New `userBookmark` document type — fields: `clerkUserId`, `slug`, `title`, `description`, `imageUrl`, `authorName`, `publishedAt`, `readingTime`, `bookmarkedAt`
-  - Deterministic `_id` (`userBookmark_{userId}_{slug}`) enforces one document per user+slug — natural upsert deduplication
-  - `src/lib/sanity/lib/write-client.ts` — server-only Sanity client with write permissions via `SANITY_API_WRITE_TOKEN`
+**Sanity Schema & Data**
+- `userBookmark` document type with fields: `clerkUserId`, `slug`, `title`, `description`, `imageUrl`, `authorName`, `publishedAt`, `readingTime`, `bookmarkedAt`
+- Deterministic `_id` format (`userBookmark_{userId}_{slug}`) enforces one document per user+slug for natural upsert deduplication
+- Server-only Sanity write client (`src/lib/sanity/lib/write-client.ts`) with `SANITY_API_WRITE_TOKEN` permissions
 
-  **Server Actions (`src/lib/bookmarks/actions.ts`)**
-  - `getServerBookmarks()` — fetch all bookmarks for the current Clerk user, newest first
-  - `checkServerBookmarked(slug)` — boolean check against Sanity
-  - `addServerBookmark(entry)` — upsert via `createOrReplace`
-  - `removeServerBookmark(slug)` — delete by deterministic doc ID
-  - `clearServerBookmarks()` — bulk delete all docs for user
-  - `syncLocalBookmarksToServer(entries[])` — transactional `createIfNotExists` migration; preserves original `bookmarkedAt` timestamps
+**Server Actions**
+- `getServerBookmarks()` — fetch all bookmarks for current Clerk user, newest first
+- `checkServerBookmarked(slug)` — boolean check against Sanity
+- `addServerBookmark(entry)` — upsert via `createOrReplace`
+- `removeServerBookmark(slug)` — delete by deterministic doc ID
+- `clearServerBookmarks()` — bulk delete all docs for user
+- `syncLocalBookmarksToServer(entries[])` — transactional `createIfNotExists` migration preserving original `bookmarkedAt` timestamps
 
-  **Hook (`src/hooks/useBookmarks.ts`)**
-  - `useBookmarks()` — unified hook abstracting both storage backends
-  - Anonymous: reads/writes `localStorage` only (unchanged behaviour)
-  - Authenticated: reads/writes Sanity; migration from localStorage runs once on first sign-in then local storage is cleared
-  - Optimistic UI throughout — state updates instantly before server confirms
-  - Exposes: `bookmarks`, `loading`, `ready`, `isBookmarked`, `toggle`, `remove`, `clearAll`
+**Hooks & UI**
+- `useBookmarks()` hook abstracting both storage backends
+  - Anonymous users: read/write `localStorage` only (unchanged behavior)
+  - Authenticated users: read/write Sanity with automatic localStorage → Sanity migration on first sign-in
+  - Optimistic UI with instant state updates before server confirmation
+  - Exports: `bookmarks`, `loading`, `ready`, `isBookmarked`, `toggle`, `remove`, `clearAll`
+- `BookmarkButton` refactored to consume `useBookmarks()` hook; direct localStorage calls removed; `ready` flag replaces `mounted`
+- Reading list page with Cloud icon + "synced to your account" for signed-in users; Monitor icon + "stored in this browser" for guests
+- Reading list layout with `robots: noindex, nofollow` metadata
 
-  **Reading List UX**
-  - `src/app/(user)/reading-list/layout.tsx` — `robots: noindex, nofollow` metadata
-  - `/reading-list` page shows Cloud icon + "synced to your account" copy when signed in; Monitor icon + "stored in this browser" copy for guests
 
-### Changed
+# [2.2.2] — 2026-03-20
 
-- **`BookmarkButton`** — now consumes `useBookmarks()` hook; direct localStorage calls removed; `ready` flag replaces `mounted`; visual design and API unchanged for unauthenticated users
-
-### Added
-
-- **Bookstore — Infrastructure Setup (#46, Phase 1 Steps 1.1–1.2)**
-  - Added placeholder env var comments to `.env.local` (gitignored) for `SUPABASE_SHOP_URL`, `SUPABASE_SHOP_ANON_KEY`, `SUPABASE_SHOP_SERVICE_ROLE_KEY`, `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL` — values must be filled after Supabase shop project creation and Stripe webhook registration
-  - Supabase shop project (`untelevised-shop`) requires manual creation: run DDL from issue #46 §2.2, configure RLS per §2.3, create private `digital-books` storage bucket
-- **Bookstore — Supabase Shop Client (#46, Phase 1 Step 1.3)**
-  - `src/lib/shop/supabase.ts` — `shopClient` (anon key, RLS-enforced client reads) and `shopServiceClient` (service role, server-only writes) for the separate `untelevised-shop` Supabase project
-  - `src/lib/shop/database.types.ts` — TypeScript type stubs for all shop tables (customers, addresses, orders, order_items, digital_downloads, payouts); replace with `supabase gen types typescript` output after project creation
-  - Packages added: `@supabase/supabase-js`, `stripe`, `zustand`, `resend`
-- **Bookstore — TypeScript Interfaces (#46, Phase 1 Step 1.4)**
-  - `src/lib/shop/types.ts` — full interface set: `Customer`, `Address`, `Order` (with `OrderStatus` enum), `OrderItem`, `DigitalDownload`, `Payout` (Supabase rows); `SanityBook`, `SanityBookFormat`, `SanityBookGenre` (GROQ projection shapes); `CartItem` (client-side cart); `CheckoutLineItem` + `CheckoutPayload` (API contract)
-- **Bookstore — Sanity GROQ Queries (#46, Phase 1 Step 1.5)**
-  - Added to `src/lib/sanity/lib/queries.ts`: `queryAllBooks`, `queryFeaturedBooks`, `queryBookBySlug`, `queryBooksByAuthor`, `queryAllBookGenres`, `queryBooksByGenre`; all project the full `bookFields` fragment including resolved author, genre references, and format inventory/digital-asset data
-- **Bookstore — Cart State (#46, Phase 1 Step 1.6)**
-  - `src/lib/shop/cart.ts` — Zustand cart store with localStorage persistence (`untele-cart` key); `addItem` (merges duplicate format+book combos), `removeItem`, `updateQuantity`, `clearCart`, `getItemCount`, `getTotal`; `buildCartItem` helper for building cart items from Sanity book format data
-- **Bookstore — Role System with 'sales' Role (#46, Phase 1 Step 1.7)**
-  - `src/lib/auth/roles-utils.ts` — `PortalRole` type (`admin | editor | author | sales`); `getRoleFromMeta` extracts role from Clerk `publicMetadata`; `hasRole` enforces hierarchy (admin > editor > author; sales is orders-only peer); `isSalesOnly` predicate; backwards-compatible with legacy `admin: true` flag
-  - `src/lib/auth/roles.ts` — server helpers: `requireRole`, `requireAdmin`, `requireEditor`, `requireAuthor`, `requireAnyPortalRole`, `isAdmin`, `isEditor`, `isAuthor`, `isSales`; all re-verify fresh Clerk data on every call
-  - `src/middleware.ts` — portal route protection: unauthenticated → `/sign-in`; no-role → `/`; `sales` role redirected to `/portal/orders` if accessing any other portal path
-- **Bookstore — Stripe Checkout API (#46, Phase 2 Step 2.1)**
-  - `src/app/api/bookstore/checkout/route.ts` — `POST /api/bookstore/checkout`; accepts `CheckoutPayload` (items with `stripePriceId`, `quantity`, `sanityBookId`, `formatType`); creates Stripe Checkout Session with collected shipping address for physical items; stores `items_json` + `clerk_user_id` in session metadata; returns `{ url }` for client redirect
-- **Bookstore — Stripe Webhook + Download API (#46, Phase 2 Steps 2.2–2.5 + Phase 3 Step 3.9)**
-  - `src/app/api/bookstore/webhook/route.ts` — `POST /api/bookstore/webhook`; Stripe signature verification via `STRIPE_WEBHOOK_SECRET`; handles `checkout.session.completed` (upserts customer, creates order + order_items, provisions `digital_downloads` records with 1-year expiry and 5-download limit, sends confirmation emails), `payment_intent.succeeded`, `payment_intent.payment_failed`, `charge.refunded` (updates status + sets `max_downloads = 0` to revoke access), `charge.dispute.created`
-  - `src/app/api/bookstore/download/route.ts` — `GET /api/bookstore/download?order_item_id=...`; validates Clerk auth, verifies customer ownership, checks expiry and download count, generates 15-minute Supabase Storage signed URL, increments `download_count` and updates timestamps
-  - `src/lib/shop/email.ts` — Resend email helpers: `sendOrderConfirmationEmail`, `sendDigitalDownloadEmail`, `sendShipmentEmail`, `sendRefundEmail`; all gracefully no-op when `RESEND_API_KEY` is absent
-- **Bookstore — Public Storefront: Layout, Homepage, Book Detail (#46, Phase 3 Steps 3.1–3.3)**
-  - `src/app/(user)/shop/layout.tsx` — shop route group layout within the (user) group (inherits Header/Nav/Footer)
-  - `src/app/(user)/shop/page.tsx` — bookstore homepage; fetches featured books, all books, genres in parallel; renders `FeaturedHero` for the top featured book and a `BookCard` grid for all books; includes `GenreFilter` for genre-based navigation
-  - `src/app/(user)/shop/book/[slug]/page.tsx` — full book detail page with `generateStaticParams`, `generateMetadata`, and JSON-LD `Book` + `Offer` structured data; cover image, Portable Text description, format selector rows (with inventory/low-stock badges, compare-at price), `AddToCartButton`, book details section, author bio card
-  - `src/components/shop/GenreFilter.tsx` — client-side genre filter tab bar using URL searchParams
-  - `src/components/shop/AddToCartButton.tsx` — client component; adds to Zustand cart with 2-second "Added ✓" feedback
-- **Bookstore — Cart UI (#46, Phase 3 Steps 3.4–3.5)**
-  - `src/components/bookstore/MiniCart.tsx` — header mini-cart icon with item-count badge (bag SVG icon, badge hidden when empty)
-  - `src/app/(user)/bookstore/cart/page.tsx` — full cart page; quantity increment/decrement controls; remove; order summary sidebar with subtotal; checkout button POSTs to `/api/bookstore/checkout` and redirects to Stripe-hosted checkout on success
-- **Bookstore — Order Success, Order History, Download Vault (#46, Phase 3 Steps 3.6–3.8)**
-  - `src/app/(user)/shop/order-success/page.tsx` — retrieves Stripe session server-side via `session_id` searchParam; displays itemized order summary; shows digital download CTA when any item is digital; graceful fallback if session lookup fails
-  - `src/app/(user)/shop/orders/page.tsx` — Clerk-authed server component; fetches customer + orders + order_items from Supabase; grouped order cards with status badge, total, item list, and "Download Files" link for digital orders
-  - `src/app/(user)/shop/downloads/page.tsx` — client component download vault; fetches from `GET /api/bookstore/my-downloads`; per-file download button calling `GET /api/bookstore/download`; shows download count, expiry, expired/exhausted states
-  - `src/app/api/bookstore/my-downloads/route.ts` — `GET /api/bookstore/my-downloads`; returns authenticated user's `digital_downloads` rows joined with `order_items` for display metadata
-
----
-
-## [2.2.2] — 2026-03-20
-
-### Summary
+## Summary
 
 Credibility release — adds a complete Fact Check content type with `ClaimReview` JSON-LD for Google's fact-check rich results, inline fact-check cards embeddable in any blockContent rich text field, a full `/fact-checks` index and `/fact-check/[slug]` detail route, and five pre-seeded fact-checks covering all six verdict types.
 
-### Added
+## New
 
-- **Fact Check Content Type (#25, PR #38)** — Full fact-checking infrastructure from Sanity schema to front-end render with ClaimReview JSON-LD and inline blockContent embedding:
+### Fact Check Content Type (Issue #25, PR #38)
 
-  **Sanity schema**
-  - New `factCheck` document type with 4 grouped Studio tabs — Claim, Verdict, Analysis, Meta
-  - Fields: `title`, `slug`, `publishedAt`, `author` (reference), `claim` (text), `claimSource`, `claimUrl`, `claimDate`, `rating` (radio enum — 6 verdicts with emoji labels), `ratingExplanation` (max 300 chars), `body` (blockContent), `sources[]` (label + url objects), `relatedArticles[]` (max 5 references)
-  - Studio preview shows verdict emoji + title + date
-  - `factCheckEmbed` object type added to `blockContent` — any rich text field on the site (articles, live events, etc.) can now embed an inline fact-check card via a Sanity reference; Studio preview shows verdict emoji + title
-  - `queryArticleBySlug` updated to resolve `factCheckEmbed` references within body arrays
+**Sanity Schema & Data**
+- `factCheck` document type with 4 grouped Studio tabs (Claim, Verdict, Analysis, Meta)
+- Fields: `title`, `slug`, `publishedAt`, `author` (reference), `claim` (text), `claimSource`, `claimUrl`, `claimDate`, `rating` (radio enum — 6 verdicts with emoji labels), `ratingExplanation` (max 300 chars), `body` (blockContent), `sources[]` (label + url objects), `relatedArticles[]` (max 5 references)
+- Studio preview shows verdict emoji + title + date
+- `factCheckEmbed` object type added to `blockContent` for inline fact-check cards via Sanity reference; Studio preview shows verdict emoji + title
+- `queryArticleBySlug` updated to resolve `factCheckEmbed` references within body arrays
 
-  **Verdict system**
-  - `src/lib/factCheck/verdictConfig.ts` — central config for all 6 verdicts with Tailwind colour classes and schema.org `ratingValue` mapping (TRUE=5, MOSTLY TRUE=4, MISLEADING=3, MOSTLY FALSE=2, FALSE=1, UNVERIFIABLE=0)
-  - `src/lib/factCheck/claimReviewJsonLd.ts` — `buildClaimReviewJsonLd()` generates valid `ClaimReview` structured data for Google's fact-check rich result badge
+**Verdict System & Structured Data**
+- `src/lib/factCheck/verdictConfig.ts` — central config for all 6 verdicts with Tailwind color classes and schema.org `ratingValue` mapping (TRUE=5, MOSTLY TRUE=4, MISLEADING=3, MOSTLY FALSE=2, FALSE=1, UNVERIFIABLE=0)
+- `src/lib/factCheck/claimReviewJsonLd.ts` — `buildClaimReviewJsonLd()` generates valid `ClaimReview` structured data for Google's fact-check rich result badge
 
-  **GROQ queries**
-  - `queryAllFactChecks` — all fact-checks ordered by `publishedAt desc`, fields for index cards
-  - `queryFactCheckBySlug` — full detail including body (with `factCheckEmbed` reference resolution), sources, author, and related articles
+**GROQ Queries**
+- `queryAllFactChecks` — all fact-checks ordered by `publishedAt desc`, fields for index cards
+- `queryFactCheckBySlug` — full detail including body (with `factCheckEmbed` reference resolution), sources, author, and related articles
 
-  **Components**
-  - `VerdictBadge` — `sm` and `lg` size variants; per-verdict colour coding; FALSE uses brand `#D70606`
-  - `InlineFactCheckCard` — compact card rendered inside `PortableText` when a `factCheckEmbed` block is encountered; shows verdict badge, the claim in a blockquote, verdict explanation, and link to full fact-check
-  - `RichTextComponents` extended with `factCheckEmbed` type renderer
+**Components & Routes**
+- `VerdictBadge` component — `sm` and `lg` size variants; per-verdict color coding; FALSE uses brand `#D70606`
+- `InlineFactCheckCard` — compact card rendered inside `PortableText` when a `factCheckEmbed` block is encountered; shows verdict badge, claim in blockquote, verdict explanation, and link to full fact-check
+- `RichTextComponents` extended with `factCheckEmbed` type renderer
+- `/fact-checks` index page listing all fact-checks with verdict badges, claim previews, claim source, and author/date meta
+- `/fact-check/[slug]` detail page with `generateMetadata`, `generateStaticParams`, `notFound()`, breadcrumb nav, claim blockquote with linked source, verdict explanation, full body, sources list, related articles, and `ClaimReview` JSON-LD
 
-  **Routes**
-  - `/fact-checks` — index page listing all fact-checks with verdict badges, claim previews, claim source, and author/date meta; follows site card/section conventions
-  - `/fact-check/[slug]` — detail page with `generateMetadata`, `generateStaticParams` (uses raw `sanityClient` to avoid `draftMode()` outside request scope), `notFound()`, breadcrumb nav, claim blockquote with linked source, verdict explanation box, full `PortableText` analysis body, sources list, related articles, and `ClaimReview` JSON-LD injected via `<script type="application/ld+json">` in `<head>`
+**SEO & Discovery**
+- `/fact-checks/` static route added to sitemap (priority 0.8, daily)
+- Dynamic `/fact-check/[slug]/` URLs fetched from Sanity (priority 0.7, weekly)
+- Seed script (`scripts/seed-fact-checks.mjs`) with 5 fact-checks covering all verdict types
 
-  **Sitemap**
-  - `/fact-checks/` static route added (priority 0.8, daily)
-  - Dynamic `/fact-check/[slug]/` URLs fetched directly from Sanity and included (priority 0.7, weekly)
+### Careers & Hiring System (Issue #17)
 
-  **Seed data**
-  - `scripts/seed-fact-checks.mjs` — idempotent seed script using `createOrReplace`
-  - 5 fact-checks pre-populated in Sanity covering all verdict types: | Verdict | Claim | |---|---| | MISLEADING | "The national debt doubled under Biden" | | TRUE | "U.S. inflation peaked at 9.1% in June 2022" | | MOSTLY FALSE | "EVs produce more carbon than gas cars" | | UNVERIFIABLE | "AI will eliminate 40% of jobs by 2030" | | FALSE | "The southern border is wide open with no enforcement" |
+**Sanity Schema & Queries**
+- `jobListing` document type with fields: title, slug, department (6 options), type (full-time/part-time/freelance/volunteer), location, description (blockContent), requirements (string[]), compensation, isActive (default true), closingDate
+- `queryActiveJobListings` GROQ query with `isActive == true` and `closingDate >= $today` filters
+- `queryJobApplications` GROQ query fetches all `jobApplication` docs ordered by `submittedAt desc`
+- 7 pre-seeded `jobApplication` documents covering all 6 statuses (new, review, interview, accepted, declined, hold)
 
-- **Careers Page & Auth System (#17)** — Full careers system with Sanity-managed listings, unified application form, Clerk authentication, and a protected admin dashboard:
+**Careers Pages & Workflows**
+- `/careers` server component with sections: Hero, 3 value-prop cards (Editorial Freedom, Portfolio Building, Global Reach), 12-role "We're Looking For" grid, collapsible accordions per active Sanity listing, and full form
+- `ContributorApplicationForm` component with all fields: firstName, lastName, email, phone, location, positionsOfInterest, socialMediaPlatforms, portfolioWebsite, youtubeChannel, socialMediaLinks, experienceLevel, experienceDescription, workSamples, availability, additionalInfo
+- Form submits to `/api/job-application`; success shows CheckCircle2 confirmation; error shows AlertCircle message
+- `/join/page.tsx` deleted entirely (no redirect, no orphan route)
+- Sitemap: `/join/` removed; `/careers/` added (priority 0.6, monthly)
+- Footer: "Careers" and "Join Our Team" merged into single link pointing to `/careers`
 
-  **Sanity schema & queries**
-  - `jobListing` Sanity document type — fields: title, slug, department (6 options: field-reporter, photojournalist, video-editor, writer, social-media, other), type (full-time/part-time/freelance/volunteer), location, description (blockContent), requirements (string[]), compensation, isActive (default true), closingDate; registered in schema index and auto-appears in Studio
-  - `queryActiveJobListings` GROQ query — filters by `isActive == true` and `closingDate >= $today`; accepts `{ today: "YYYY-MM-DD" }` param
-  - `queryJobApplications` GROQ query — fetches all `jobApplication` docs ordered by `submittedAt desc` for the admin dashboard
-  - 7 realistic seed `jobApplication` documents created directly in Sanity covering all 6 statuses (new, review, interview, accepted, declined, hold) and all schema fields
+**Clerk Authentication Setup**
+- `@clerk/nextjs` ^7 installed
+- `ClerkProvider` added to root `layout.tsx` with `afterSignOutUrl='/'`
+- `src/middleware.ts` — `clerkMiddleware` + route matcher for `/admin(/.*)?`; uses `clerkClient().users.getUser(userId)` for live `publicMetadata`; accepts `admin: true` (boolean or string); unauthenticated → `/sign-in`; non-admin → homepage
+- `Header.tsx` — `Show when='signed-in'` renders `UserButton`; `Show when='signed-out'` renders Sign In link
 
-  **Careers page (`/careers`)**
-  - Server component; sections: Hero ("WRITE FOR THE RESISTANCE"), 3 value-prop cards (Editorial Freedom, Portfolio Building, Global Reach), 12-role "We're Looking For" grid (Field Reporter, Documentary Filmmaker, Photojournalist, Video Editor, Social Media Strategist, Graphic Designer, Data Journalist, Podcast Producer, Live-Stream Operator, Copy Editor, Researcher, Web Developer), collapsible `<details>` accordion per active Sanity listing with dept/type/location/compensation meta, rich text description, requirements list, and embedded `ContributorApplicationForm`; "We're Always Hiring" section with full form; graceful try/catch fallback if Sanity fetch fails
+**Auth Pages & Admin Dashboard**
+- `/sign-in/[[...sign-in]]/page.tsx` — two-column layout with brand panel (logo + halo, tagline, CTA) + Clerk form (dark `slate-950` background, `untele` red accent, no rounded corners)
+- `/sign-up/[[...sign-up]]/page.tsx` — identical layout using `<SignUp>`; both pages set `robots: { index: false, follow: false }`
+- `/admin` server component with `robots: noindex`; six status summary cards (new, review, interview, accepted, declined, hold) with per-status colors
+- `ApplicationsTable` client component: status filter tabs, sortable rows (name/email/location/positions/experience/availability/submitted/status), expandable rows (description/links/samples/platforms/phone/notes), "Edit in Studio" CTA
 
-  **ContributorApplicationForm** (`src/components/careers/ContributorApplicationForm.tsx`, `'use client'`)
-  - All fields from former `/join` form: firstName, lastName, email, phone, location, positionsOfInterest (multi-checkbox), socialMediaPlatforms (checkbox), portfolioWebsite, youtubeChannel, socialMediaLinks (dynamic platform+url pairs), experienceLevel, experienceDescription, workSamples (dynamic title+url pairs), availability, additionalInfo
-  - Optional `prefilledPosition` prop to pre-check a position from the listing accordion
-  - Submits to `/api/job-application` (same `jobApplication` Sanity schema); success renders CheckCircle2 confirmation; error renders AlertCircle with message
+### Editorial Standards (Issue #26)
 
-  **Route consolidation**
-  - `/join/page.tsx` deleted entirely — no redirect, no orphan route
-  - Sitemap: `/join/` entry removed; `/careers/` added at priority 0.6, monthly changeFrequency
-  - Footer: "Careers" and "Join Our Team" merged into single "Careers / Join Our Team" link pointing to `/careers`
+- `/editorial-standards` static page with: Six core principles (Accuracy, Independence, Fairness, Verification, Transparency, Accountability), verification process (primary sourcing, multi-source, document verification, right of reply), source standards (named vs. anonymous sourcing, Source Transparency Panel), corrections policy (all 4 types explained), Independence & Conflicts of Interest section, sensitive reporting guidelines
+- Added to sitemap (priority 0.6, monthly)
+- "Editorial Standards" link added to Footer About column
 
-  **Clerk authentication setup**
-  - `@clerk/nextjs` ^7 installed
-  - `ClerkProvider` added to root `layout.tsx` wrapping the entire app (`afterSignOutUrl='/'`)
-  - `src/middleware.ts` — `clerkMiddleware` + `createRouteMatcher(['/admin(/.*)?'])`; uses `clerkClient().users.getUser(userId)` to read live `publicMetadata` (bypasses JWT claim limitation); accepts `admin: true` (boolean) or `admin: "true"` (string); unauthenticated → `/sign-in`; non-admin authenticated → homepage
-  - `Header.tsx` — `Show when='signed-in'` renders `UserButton`; `Show when='signed-out'` renders Sign In link (uses `Show` not `SignedIn`/`SignedOut` which don't exist in this Clerk version)
+### Bookmarks & Reading List (Issue #19)
 
-  **Sign-in / Sign-up pages**
-  - `/sign-in/[[...sign-in]]/page.tsx` — two-column layout: left brand panel (logo with red glow halo, UnTelevised name, tagline, pill CTA) + right Clerk `<SignIn>` form; dark `slate-950` background; `untele` red accent; no rounded corners on form elements; `card: 'shadow-none bg-transparent w-full'`; `spacingUnit: '18px'`
-  - `/sign-up/[[...sign-up]]/page.tsx` — identical two-column layout using `<SignUp>`; both pages set `robots: { index: false, follow: false }`
+**Phase 1: Zero-Backend localStorage**
+- `src/lib/bookmarks/storage.ts` — CRUD utilities: `getBookmarks`, `isBookmarked`, `addBookmark`, `removeBookmark`, `clearBookmarks`; SSR-safe with `typeof window` guard; fails silently on quota exceeded; storage key `untele_bookmarks`
+- `BookmarkEntry` interface: slug, title, description, imageUrl, authorName, publishedAt, readingTime, bookmarkedAt
+- `BookmarkButton` component — icon-only or full variant; SSR-safe hydration (disabled placeholder → real state after mount); brand-color active state (untele red)
+- `/reading-list` page — animated loading skeleton, empty state with CTA, article list with thumbnail/meta/actions, per-item Remove button, Clear All button, article count, browser storage disclaimer
+- `BookmarkButton` integrated into article page next to social share; Bookmark icon in header linking to `/reading-list`
+- `/reading-list` added to sitemap (priority 0.1, changeFrequency: never)
 
-  **Admin dashboard (`/admin`)**
-  - Server component; `robots: noindex`; fetches all `jobApplication` docs via `queryJobApplications`
-  - Six status summary cards (new, review, interview, accepted, declined, hold) with per-status color coding
-  - `ApplicationsTable` client component: status filter tab bar, sortable rows (applicant name/email/location, positions, experience level, availability, submitted date, status badge), expandable detail rows showing experience description, portfolio/YouTube/social links, work samples, active social platforms, phone, internal notes, and "Edit in Studio" CTA linking to `/studio/structure/jobApplication;{id}`
-  - Protected by `clerkMiddleware`; requires Clerk user with `publicMetadata: { "admin": true }`
+### Source Transparency Panel (Issue #24)
 
-- **Editorial Standards Page (#26)** — New static `/editorial-standards` page:
-  - Six core principles: Accuracy, Independence, Fairness, Verification, Transparency, Accountability
-  - Verification process section (primary sourcing, multi-source requirement, document verification, right of reply)
-  - Source standards explaining named vs. anonymous sourcing and how the Source Transparency Panel works
-  - Corrections policy with all four correction types (correction/clarification/update/retraction) explained with their visual color codes
-  - Independence & Conflicts of Interest section (editorial firewall, staff disclosures, no political alignment, funding transparency, native advertising, outside employment)
-  - Sensitive reporting guidelines (trauma & graphic content, suicide & self-harm, minors, national security)
-  - Contact CTAs to corrections desk (`corrections@untelevised.media`) and editorial board (`editorial@untelevised.media`)
-  - Added to sitemap at `/editorial-standards/` (priority 0.6, monthly)
-  - "Editorial Standards" link added to Footer About column
-- **Bookmarks & Reading List (#19)** — Zero-backend, pure localStorage article saving:
-  - `src/lib/bookmarks/storage.ts` — CRUD utilities: `getBookmarks`, `isBookmarked`, `addBookmark`, `removeBookmark`, `clearBookmarks`. SSR-safe (`typeof window` guard), fails silently on quota exceeded. Storage key: `untele_bookmarks`
-  - `BookmarkEntry` interface: slug, title, description, imageUrl, authorName, publishedAt, readingTime, bookmarkedAt
-  - `BookmarkButton` component (`'use client'`) — icon-only or full (icon + label) variant; SSR-safe hydration (disabled placeholder → real state after mount); brand-color active state (untele red)
-  - `/reading-list` page (`'use client'`) — animated loading skeleton, empty state with CTA, article list with thumbnail/meta/actions, per-item Remove button, Clear All button, article count, browser storage disclaimer
-  - `BookmarkButton` integrated into article page next to social share row; passes slug, title, description, 400px image URL, author, publishedAt, and reading time
-  - Bookmark icon added to header right section, linking to `/reading-list`
-  - `/reading-list` added to sitemap (priority 0.1, changeFrequency: never)
+**Source Schema & Queries**
+- Standalone `source` Sanity document type (reusable across articles, live events, key events) with fields: label, type (7 options: document, interview, statement, data, media, on-scene, other), url, description, `isAnonymous` flag
+- `article`: `sources[]` upgraded from inline objects to references; `methodology` text field added
+- `liveEvent`: `sources[]` references + `methodology` added
+- `keyEvent`: `sources[]` references added
+- GROQ queries updated to dereference `sources[]->` and project `methodology`
 
-- **Source Transparency Panel (#24)** — Collapsible sources & methodology section for articles and live events:
-  - New standalone `source` Sanity document type (reusable across articles, live events, and key events) — fields: label, type (7 options: document, interview, statement, data, media, on-scene, other), url, description, `isAnonymous` flag
-  - `article`: `sources[]` upgraded from minimal inline objects to references; `methodology` text field added
-  - `liveEvent`: `sources[]` references + `methodology` added
-  - `keyEvent`: `sources[]` references added
-  - GROQ queries updated — `queryArticleBySlug` and `queryEventBySlug` dereference `sources[]->` with all fields + project `methodology`
-  - `SourcesPanel` component — SSR-safe `<details>`/`<summary>` (no JS required); per-type icons (FileText, Mic, MessageSquare, Database, Video, Eye); anonymous sources show Shield icon and hide label/description; linked sources open in new tab; methodology rendered as a distinct blockquote
-  - `articles/[slug]`: replaces old minimal sources list with `SourcesPanel`
-  - `live-event/[slug]`: `SourcesPanel` added after body content
-  - `ArticleSource` interface and `SourceType` union added to `types.d.ts`; `Article`, `LiveEvent`, `KeyEvent` types updated
-  - Migration script `scripts/migrate-sources.mjs` — converted 22 inline `{ label, url }` objects across 4 articles to standalone `source` documents and patched references; supports `--dry-run`
+**Components & UI**
+- `SourcesPanel` component — SSR-safe `<details>`/`<summary>` (no JS required); per-type icons (FileText, Mic, MessageSquare, Database, Video, Eye); anonymous sources show Shield icon and hide label/description; linked sources open in new tab; methodology rendered as blockquote
+- `articles/[slug]`: replaces minimal sources list with `SourcesPanel`
+- `live-event/[slug]`: `SourcesPanel` added after body content
+- `ArticleSource` interface and `SourceType` union added to `types.d.ts`; `Article`, `LiveEvent`, `KeyEvent` types updated
 
-### Added
+**Data Migration**
+- `scripts/migrate-sources.mjs` — converted 22 inline `{ label, url }` objects across 4 articles to standalone `source` documents and patched references; supports `--dry-run`
 
-- **Corrections & Retractions Workflow (#23)** — Full editorial correction pipeline:
-  - New reusable `correctionObject` Sanity schema supporting four correction types: `correction` (amber), `clarification` (blue), `update` (green), `retraction` (red)
-  - `Article` and `LiveEvent` Sanity schemas updated to use shared `correctionObject` field (live events support corrections/clarifications/updates only — not retractions)
-  - `CorrectionNotice` component renders inline above article body with per-type color, icon, label, issued date, and detail text
-  - Distinct retraction badge (red `bg-untele` + XCircle icon) vs correction badge (amber + AlertTriangle) on all card surfaces (`ArticleCard`, `FeaturedArticleCard`, `ArticleCardLg`)
-  - Retracted article titles display with `line-through opacity-60` on article page and all card surfaces
-  - GROQ queries updated to project `correction { type, issuedAt, summary, detail }` on all article and event fetch paths
-  - `ArticleCorrection` TypeScript interface added; `correction?` field on `Article` and `LiveEvent` global types
+### Corrections & Retractions Workflow (Issue #23)
 
-### Fixed
+**Editorial Correction System**
+- New reusable `correctionObject` Sanity schema supporting four correction types: `correction` (amber), `clarification` (blue), `update` (green), `retraction` (red)
+- `Article` and `LiveEvent` schemas updated to use shared `correctionObject` field (live events support corrections/clarifications/updates only — not retractions)
+- `CorrectionNotice` component renders inline above article body with per-type color, icon, label, issued date, and detail text
+- Distinct retraction badge (red `bg-untele` + XCircle icon) vs correction badge (amber + AlertTriangle) on all card surfaces (`ArticleCard`, `FeaturedArticleCard`, `ArticleCardLg`)
+- Retracted article titles display with `line-through opacity-60` on article and card surfaces
+- GROQ queries updated to project `correction { type, issuedAt, summary, detail }` on all article and event fetch paths
+- `ArticleCorrection` TypeScript interface added; `correction?` field on `Article` and `LiveEvent` global types
 
-- **GTM never loaded in production** — `GTM_ID` was a server-side env var passed to a `'use client'` component where it evaluated to `undefined`; renamed to `NEXT_PUBLIC_GTM_ID` so the client bundle can read it
-- **Dual GTM + GA4 script conflict** — `ConsentAwareAnalytics` was loading both `gtag/js?id=GTM-…` (GA4 endpoint) and `gtm.js?id=GTM-…` (GTM endpoint) for the same container ID; now loads only the GTM snippet via `gtm.js`, with a separate optional `gtag/js?id=G-…` for direct GA4 (`NEXT_PUBLIC_GA4_ID`)
-- **Google Consent Mode v2 compliance** — consent defaults were set inside the GTM `onLoad` callback (after GTM fired); moved to a `beforeInteractive` inline script in `layout.tsx` so defaults are established before any tags execute
-- **Broken `trackPageView`** — called `gtag('config', '')` with an empty string because `NEXT_PUBLIC_GA_ID` was never defined; removed the broken export; `useConsentAwareTracking` now exposes only `trackEvent`
-- **Reactive consent updates** — `gtag('consent', 'update', …)` is now fired from a `useEffect` in `ConsentAwareAnalytics` whenever consent preferences change, replacing the previous one-time `onLoad` callback
-- Renamed `GA4_ID` → `NEXT_PUBLIC_GA4_ID` and `GTM_ID` → `NEXT_PUBLIC_GTM_ID` in `.env.local`
-- **Ad components bypass consent gate** — `BannerAd`, `SidebarAd`, `RectangleAd`, and `InFeedAd` now each call `useConsentCheck()` and skip `pushAd` until `hasConsent && canUseMarketing` — prevents ad loads before user decides
-- **Article page ad slots not in config** — `ARTICLE_RECTANGLE` and `ARTICLE_BANNER_BOTTOM` slot IDs added to `AD_CONFIG.AD_SLOTS`; article page now references named constants instead of raw string literals
-- **Hardcoded AdSense publisher ID** — removed `'ca-pub-…'` fallback from `adConfig.ts`, `adsenseInit.ts`, and both layout files; all now use `NEXT_PUBLIC_GAS_ID` only (fails loudly if env var is missing)
-- **`acceptAll` forced full page reload** — `window.location.reload()` removed from consent context; Consent Mode v2's `gtag('consent', 'update')` (already called in `consentStorage.saveConsent`) handles dynamic updates without reload
-- **AdSense script torn down on route change** — removed `useEffect` cleanup that removed the `<script>` tag on unmount; the script is a persistent global resource that must survive route changes
+### Analytics & Advertising (Part 1)
 
-### Added
+**Google Tag Manager & Analytics**
+- Consent defaults moved to `beforeInteractive` inline script in `layout.tsx` (before any tags execute)
+- `NEXT_PUBLIC_GTM_ID` and `NEXT_PUBLIC_GA4_ID` env vars (renamed from `GTM_ID` and `GA4_ID`)
+- `.env.example` created with all required env vars documented with descriptions and source information
 
-- **Ad lazy loading** — `BannerAd`, `SidebarAd`, `RectangleAd`, and `InFeedAd` now use `IntersectionObserver` with `AD_CONFIG.PERFORMANCE.LAZY_LOAD_MARGIN` (`200px`) to defer `pushAd` until the container approaches the viewport, reducing initial page load impact for below-fold ad placements
-- **`.env.example`** — created with all required env vars documented, including `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_GA4_ID`, and `NEXT_PUBLIC_GAS_ID` with descriptions and where to find each value
+**Ad Lazy Loading**
+- `BannerAd`, `SidebarAd`, `RectangleAd`, and `InFeedAd` now use `IntersectionObserver` with `AD_CONFIG.PERFORMANCE.LAZY_LOAD_MARGIN` (`200px`) to defer `pushAd` until container approaches viewport
+
+## Fixed
+
+### Analytics & Consent Management
+
+- **GTM never loaded in production** — `GTM_ID` was server-side env var in `'use client'` component (evaluates to `undefined`); renamed to `NEXT_PUBLIC_GTM_ID`
+- **Dual GTM + GA4 script conflict** — `ConsentAwareAnalytics` was loading both `gtag/js?id=GTM-…` (GA4) and `gtm.js?id=GTM-…` (GTM) for same ID; now loads only GTM via `gtm.js` with optional separate `gtag/js?id=G-…` for direct GA4
+- **Google Consent Mode v2 compliance** — consent defaults moved from GTM `onLoad` callback to `beforeInteractive` script in `layout.tsx` so defaults established before any tags execute
+- **Broken `trackPageView`** — called `gtag('config', '')` with empty string; removed broken export; `useConsentAwareTracking` now exposes only `trackEvent`
+- **Reactive consent updates** — `gtag('consent', 'update', …)` now fired from `useEffect` in `ConsentAwareAnalytics` when consent preferences change
+- **Ad components bypass consent gate** — `BannerAd`, `SidebarAd`, `RectangleAd`, `InFeedAd` now call `useConsentCheck()` and skip `pushAd` until `hasConsent && canUseMarketing`
+- **AdSense script torn down on route change** — removed `useEffect` cleanup that removed script tag on unmount; script is persistent global resource
+- **`acceptAll` forced full page reload** — `window.location.reload()` removed from consent context; `gtag('consent', 'update')` handles dynamic updates without reload
+
+### Advertising Configuration
+
+- **Hardcoded AdSense publisher ID** — removed `'ca-pub-…'` fallback from `adConfig.ts`, `adsenseInit.ts`, and layout files; all now use `NEXT_PUBLIC_GAS_ID` only (fails loudly if missing)
+- **Article page ad slots not in config** — `ARTICLE_RECTANGLE` and `ARTICLE_BANNER_BOTTOM` slot IDs added to `AD_CONFIG.AD_SLOTS`; article page now references named constants instead of raw strings
+- **Environment variable naming** — Renamed `GA4_ID` → `NEXT_PUBLIC_GA4_ID` and `GTM_ID` → `NEXT_PUBLIC_GTM_ID` in `.env.local`
 
 ---
 
-## [2.2.0] — 2026-03-14 — Best Practices Refactor & Performance Upgrade
+# [2.2.0] — 2026-03-14 — Best Practices Refactor & Performance Upgrade
 
-### Summary
+## Summary
 
-Full migration to Sanity Live Content API for real-time UI updates, a complete rich text renderer overhaul, and a series of best-practice fixes across data fetching, caching, and article presentation.
+Full migration to Sanity Live Content API for real-time UI updates, a complete rich text renderer overhaul, SEO/AEO hardening, and best-practice fixes across data fetching, caching, and article presentation. Schema updates for article metadata, live events, and keywords.
 
-### Added
+## New
 
-- **Sanity Live Content API** — all 21 server pages and components now use `sanityFetch` from `next-sanity/live`. Content published in Sanity Studio appears on the site immediately with no rebuild or manual revalidation.
-- **Rich text renderer** — full `RichTextComponents` coverage:
-  - `table` block type with branded header row and striped body rows
-  - `code` block type with `vscDarkPlus` syntax highlighting and language label
-  - `mermaidDiagram` block type (code-block fallback until mermaid pkg added)
-  - `blockquote` block style with untele red left border
-  - `normal` paragraph block, `break` block
-  - Inline marks: `em`, `strong`, `underline`, `strikethrough`, `superscript`, `subscript`, `code` (styled `<code>` tag)
-- **NavWrapper** — migrated from raw `sanityClient.fetch()` to live `sanityFetch`
+### Sanity Live Content API (Issue #6)
 
-### Fixed
+- Migration of all 21 server pages and components to `sanityFetch` from `next-sanity/live` for real-time UI updates
+- `<SanityLive />` component wired throughout for EventSource-based live updates with no manual revalidation required
+- `NavWrapper` migrated from raw `sanityClient.fetch()` to live `sanityFetch` for real-time category updates
+- Music detail pages updated: `albums/[slug]`, `lyrics/[slug]`, `music-artists/[slug]` now use live `sanityFetch`
+- `generateStaticParams` continues using direct `sanityClient.fetch()` to avoid `draftMode()` conflicts
 
-- **`defineLive` misconfiguration** — token was inside `client.withConfig()` instead of `serverToken`/`browserToken` options; `<SanityLive />` had no credentials to open the browser-side EventSource subscription
-- **`perspective: 'previewDrafts'` hardcoded** — was serving draft content to all production users; removed so `defineLive` manages perspective internally
-- **`experimental_taintUniqueValue` conflict** — was silently blocking `browserToken` from reaching the client; sourced directly from `process.env` in `live.ts` to bypass the taint check
-- **Inline `code` mark** — was incorrectly using `SyntaxHighlighter`; now uses a styled `<code>` tag as intended
-- **Article byline** — Reviewed By repositioned from the date/location row to sit directly next to the author card
+### Rich Text Renderer
 
-### Changed
+- Complete `RichTextComponents` coverage:
+  - Block types: `table` (branded header + striped body), `code` (`vscDarkPlus` syntax highlighting + language label), `mermaidDiagram` (code-block fallback), `blockquote` (untele red left border), `normal` paragraph, `break`
+  - Inline marks: `em`, `strong`, `underline`, `strikethrough`, `superscript`, `subscript`, `code` (styled tag)
+- Deferred components: `Tweet`, `Prism`, `TimelineJSVisualization` via `next/dynamic` for code-splitting
 
-- Music detail pages (`albums/`, `lyrics/`, `music-artists/`) — removed `'use cache'` / `cacheTag` / `cacheLife` wrappers; live API handles cache invalidation via EventSource, making per-function caching redundant
+### Sanity Schema Enhancements
+
+**Article Schema**
+- `leadParagraph` field (text, 3 rows) — plain-text summary for AI extraction and featured snippets
+- `faqs[]` field — array of `{ question, answer }` objects for FAQPage structured data
+- `relatedArticles[]` reference array (max 5) — related article links
+- `reviewedBy` reference field — editorial reviewer/fact-checker
+- `keywords` migration from `string` → `string[]` with tags layout
+- `seoObject` field — metaTitle, metaDescription, ogImage, noIndex, canonicalUrl overrides
+- EEAT fields: `location`, `updatedAt`, `corrections`, `sources[]`
+
+**Live Event & Other Schemas**
+- `endDate` (datetime) field for complete schema.org Event data
+- `eventStatus` enum field (EventScheduled, EventCancelled, EventPostponed, EventMovedOnline); default EventScheduled
+- `keywords` migration `string` → `string[]` for live events
+- `seoObject` field added to `liveEvent`, `category`, `musicArtist`, `album`, `song`
+- Add `siteSettings` singleton to Studio desk structure for global brand config management
+
+### GROQ Queries & Data Fetching
+
+- New/updated queries: `queryEventBySlug` (fixed tag references), `queryAllAuthors` (correct sort), `queryLiveEvents` (with `endDate`, `eventStatus`, `mainImage`, `subtitle`, `videoLink`)
+- `queryArticleBySlug` expanded: add `reviewedBy`, `corrections`, `faqs`, `sources`, `updatedAt`, `leadParagraph`, `relatedArticles[]`
+- New `queryCategoryBySlug` for category metadata fetches
+- 9 files renamed with unique GROQ variable names (descriptive naming instead of generic `query`)
+- Auto-generate `sanity.types.ts` from TypeGen: 59 typed queries, 50 schema types
+
+### Metadata & SEO Infrastructure
+
+**Structured Data & OG Tags**
+- `GlobalStructuredData` component — NewsMediaOrganization + WebSite + SearchAction schema.org
+- `NewsArticleStructuredData` — NewsArticle + BreadcrumbList with FAQPage inclusion when `article.faqs` present
+- `Person` structured data on `/author/[slug]` pages
+- Event schema.org on `/live-event/[slug]` (eventStatus, location, organizer, image)
+- `dateModified` wired from `article.updatedAt` in NewsArticleStructuredData
+- Trailing slashes enforced on all `@id` and URL fields (matches `trailingSlash: true`)
+- `/public/og-default.png` (1200×630) as branded OG fallback image
+
+**Metadata Helpers**
+- `generateMetadata()` to `/articles/[slug]`, `/live-event/[slug]`, `/category/[slug]`, `/author/[slug]`
+- `src/util/metadata.ts` — shared helpers: `getCanonicalUrl`, `getSanityOgImageUrl`, `truncate`, `buildArticleMetadata`, `buildLiveEventMetadata`, `buildCategoryMetadata`, `buildAuthorMetadata`
+- `seoObject` override wiring into all `buildMetadata` functions (metaTitle, metaDescription, canonicalUrl, ogImage)
+
+**Static Page Metadata**
+- `export const metadata` to `/about`, `/staff`, `/donate`, `/lyrics`, `/music-artists` (index)
+- Layout-based metadata for client component pages (`/support`, `/secure-contact`, `/whistleblower`, `/join`)
+
+### Article Detail & Content Enhancements
+
+- Render **Reviewed By** link in byline when `reviewedBy` is set
+- Render **Corrections** notice block (red left-border) above body when field present
+- Render **Sources** list with external links after body
+- Render **FAQs** definition list after sources
+- Render **Related Articles** section at bottom when `relatedArticles` populated
+- Display "Updated: {date}" near byline when `article.updatedAt` differs from `article.publishedAt`
+
+### Live Event & Category Pages
+
+**Live Event Page**
+- Render `subtitle` below event title
+- Render `eventStatus` badge: red (Cancelled), amber (Postponed), blue (Moved Online), no badge (Scheduled)
+- Render `endDate` alongside start date in header
+- Fix JSON-LD `eventStatus` mapping from CMS field to correct schema.org URL
+
+**Category Page**
+- Fetch category object in parallel with articles (single extra query, no waterfall)
+- Render category `title` as `<h1>` and `description` above article grid
+- Fix container class typo: `95wv` → `95vw`
+
+### Sitemap & Robots
+
+- Sitemap: homepage priority `0.3` → `1.0`; articles now recency-based (0.8/0.6/0.4); live events 0.9; missing static pages added (`/about/`, `/staff/`, `/donate/`, `/past-events/`)
+- `robots.ts` — add `Disallow: /api/`, fix `BASEURL` with fallback chain, explicitly allow all major AI crawlers
+
+### Performance & Rendering
+
+**Server Component Architecture**
+- Extract `<Image>`, `<Link>`, gradients from client `Header` into new `HeaderLogo` server component — logo no longer re-renders on client interactions
+- Pass `HeaderLogo` as `logoSlot` prop to client `Header`
+- Remove unused `localFont` declarations for Geist Sans/Mono (Inter was already active)
+
+**Suspense & Streaming**
+- Wrap `FeaturedStoriesGrid` in `<Suspense>` on homepage to avoid blocking on slow Sanity fetches
+
+**Image Optimization**
+- Add `placeholder="blur"` + `blurDataURL` (20px Sanity thumbnail) to hero images on: homepage featured stories, article hero, author hero
+- Add `priority` to author hero photo on `/author/[slug]` (LCP image preload)
+- Add `sizes` prop to homepage featured stories grid for responsive sizing
+
+**Caching & Static Generation**
+- Add `generateStaticParams` to all music dynamic routes (`lyrics/[slug]`, `music-artists/[slug]`, `albums/[slug]`)
+- Migrate music routes to `'use cache'` directive with `cacheTag` (per-document + type-level) and `cacheLife('hours')`
+- Enable `experimental.useCache: true` in `next.config.ts`
+- Wrap `getArticleBySlug` and `getAuthorBySlug` in `React.cache()` for request-level deduplication
+
+**Bundle & Waterfalls**
+- Remove unused `categories` fetch from homepage `Promise.all`
+- Defer `CookieConsentBanner`, `AdBlockerMessage` (framer-motion) via `next/dynamic`
+- Defer `TimelineJSVisualization` (framer-motion) via `next/dynamic` on timeline pages only
+- Remove unused `styled-components` and `@types/styled-components` from `package.json`
+- Fix `Header.tsx` scroll handler: `requestAnimationFrame` throttle + `{ passive: true }` listener
+
+**Tooling**
+- Enable `typedRoutes: true` in `next.config.ts` experimental (catches broken `<Link href>` at build time)
+- Wire up `@next/bundle-analyzer` via `withBundleAnalyzer()` wrapper
+- Add `analyze` npm script (`npm run analyze` for interactive bundle treemap)
+
+## Fixed
+
+### Sanity Live API Configuration
+
+- **`defineLive` misconfiguration** — token was inside `client.withConfig()` instead of `serverToken`/`browserToken` options; `<SanityLive />` had no credentials for EventSource subscription
+- **`perspective: 'previewDrafts'` hardcoded** — serving draft content to production users; removed so `defineLive` manages perspective internally
+- **`experimental_taintUniqueValue` conflict** — blocking `browserToken` from reaching client; sourced directly from `process.env` in `live.ts` to bypass taint check
+
+### Rich Text & Article
+
+- **Inline `code` mark** — was incorrectly using `SyntaxHighlighter`; now uses styled `<code>` tag as intended
+- **Article byline** — Reviewed By repositioned from date/location row to sit directly next to author card
+
+### next-sanity Import Paths
+
+- Update `next-sanity` v12 imports: `VisualEditing` now from `next-sanity/visual-editing`, `defineLive` from `next-sanity/live`
+
+### Structured Data & Metadata
+
+- Replace inline `notFound()` div fallback with proper `notFound()` from `next/navigation` in `/articles/[slug]`
+- Fix `StructuredData.tsx` — replace `next/script` with plain `<script>` tags for inline JSON-LD (correct RSC pattern)
+- Replace boilerplate "Next.js 15 Boilerplate" root layout metadata with UnTelevised Media branding
+- Fix `article.keywords` type from `string` → `string[]` in `types.d.ts`
+- Fix `liveEvent.keywords` type from `string` → `string[]` in `types.d.ts`
+- Add `SeoOverride` interface to `types.d.ts` with overridable SEO fields
+- Add `seo?: SeoOverride` to `LiveEvent`, `Category`, `MusicArtist`, `Album`, `Song` interfaces
+- Add `endDate?: string` and `eventStatus?` fields to `LiveEvent` interface
+
+### Data Migrations
+
+- `migrations/keywords-string-to-array/` — splits existing comma-separated keyword strings into arrays; 41 articles scanned, 25 patched
+- `migrations/liveEvent-keywords-string-to-array/` — same for live events; 5 documents scanned and patched
+
+## Updated
+
+### Music Detail Pages
+
+- Removed `'use cache'` / `cacheTag` / `cacheLife` wrappers from `albums/[slug]`, `lyrics/[slug]`, `music-artists/[slug]`
+- Live API now handles cache invalidation via EventSource; per-function caching was redundant
+- All `sanityFetch` call sites updated to destructure `{ data }` from live API return value (live API returns `{ data, sourceMap, tags }`)
+
+### Theme & Styling
+
 - `SyntaxHighlighter` theme updated from `dark` to `vscDarkPlus`
-- All `sanityFetch` call sites updated to destructure `{ data }` from the live API return value
 
 ---
 
@@ -1244,72 +864,89 @@ Full second-pass audit against Next.js, Sanity, SEO/AEO, and Vercel/React best-p
 
 ---
 
-## 2026-03-16 — Production Incident: Sanity Live API Hang → 502
+# [2.2.1] — 2026-03-16 — Production Hotfix & Accessibility/SEO Sprint
 
-### Fixed
+## Summary
 
-- Production site intermittently returning blank page + HTTP 502 (no logs, no HTML)
-  - **Root cause:** `sanityFetch` from `next-sanity`'s `defineLive` (`vX` API) would hang indefinitely when the Sanity Live Content API was slow or unresponsive. With no timeout, Vercel's 30-second serverless function ceiling would kill the request → 502. Local dev was unaffected because there is no timeout in `next dev`.
-  - **Diagnosis path:** Vercel logs showed 200 OK at 99ms (ISR PRERENDER cache hits), but fresh renders triggered by ISR revalidation would hang. Confirmed not a Sanity quota issue, not a missing env var issue. Pattern: works when cache is warm, 502s when cache expires and a fresh server render is needed.
-  - `src/lib/sanity/lib/live.ts` — wrapped `sanityFetch` in `Promise.race` with an 8-second timeout; throws a descriptive error logged to Vercel function logs instead of silently hanging
-  - `src/components/global/NavWrapper.tsx` — added try/catch; falls back to empty category list so the nav renders rather than crashing the layout on fetch failure
-  - `src/components/global/BreakingNewsBanner.tsx` — added try/catch; returns null (no banner) on fetch failure rather than propagating an error through the layout
+Critical hotfix for Sanity Live API timeout issue causing 502 errors, plus addition of RSS feed, breaking news banner, and reading time estimates. Includes security hardening (debug component removal), SEO improvements, and accessibility enhancements.
 
----
+## New
 
-## 2026-03-16 — Sprint 1: Security, SEO & Editorial Tools
+### RSS Feed (Issue #9, PR #30)
 
-### Removed
+- `/feed.xml` RFC-compliant RSS 2.0 route handler with merged articles + live events
+- Latest 50 articles + latest 20 live events, merged and date-sorted by publish date
+- Live events include `🔴 LIVE:` title prefix, newsroom attribution, `'Live Coverage'` category  
+- `media:content` image elements via `urlForImage`; RFC 2822 pubDate format
+- Cache strategy: `s-maxage=3600` CDN cache + hourly ISR revalidation
+- RSS auto-discovery `<link>` added to root layout metadata for feed discovery
+- TODO markers for future `liveEvent → breaking` schema migration
 
-- All debug routes, components and API endpoint (Issue #15, PR #28)
-  - Deleted `src/components/debug/` — 6 components: AdDebugger, TestAd, TestAdComponent, AdSenseTestComponent, AdSenseTroubleshooter, ConsentDebugger
-  - Deleted `/timeline-debug` and `/timeline-simple-test` public routes
-  - Deleted `src/app/api/debug-log/route.ts` — unauthenticated POST endpoint
-  - Removed unconditional `<AdDebugger />` render from music layout
-- Removed decorative `Banner` component from homepage (consolidated in #12 work)
+### Breaking News Banner (Issue #12, PR #31)
 
-### Added
+**Sanity Integration**
+- Editor-controlled site-wide alert via `siteSettings.breakingNewsBanner` singleton in Sanity
+- Fields: `isActive`, `headline`, `linkUrl`, `linkLabel`, `expiresAt` (auto-expire)
+- Instant live updates via `sanityFetch` from `lib/live` + `SanityLive` (no page refresh required)
 
-- RSS Feed `/feed.xml` — RFC-compliant RSS 2.0 route handler (Issue #9, PR #30)
-  - Latest 50 articles + latest 20 live events, merged and date-sorted
-  - Live events include `🔴 LIVE:` title prefix, newsroom attribution, `'Live Coverage'` category
-  - `media:content` image elements via `urlForImage`; RFC 2822 pubDate
-  - `s-maxage=3600` CDN cache + hourly ISR revalidation
-  - RSS auto-discovery `<link>` added to root layout metadata
-  - Better Comments `// !` TODO markers at all rename touchpoints for future `liveEvent → breaking` migration
-- Breaking News Banner (Issue #12, PR #31)
-  - Editor-controlled site-wide alert via Sanity `siteSettings.breakingNewsBanner` singleton
-  - Fields: `isActive`, `headline`, `linkUrl`, `linkLabel`, `expiresAt` (auto-expire)
-  - Instant live updates via `sanityFetch` from `lib/live` + `SanityLive` — no page refresh needed
-  - Per-session dismiss via `sessionStorage`; key derived from headline (resets on new headline)
-  - Positioned below `<NavWrapper />` (under category nav)
-  - Server-side `expiresAt` guard + client-side secondary guard
-  - Accessible: `role="alert"`, `aria-label`, keyboard-navigable dismiss with focus ring
-  - Fixed: More dropdown `pointer-events-none` when hidden to prevent hover bleed into banner area
-- Reading Time Estimate (Issue #20, PR #32)
-  - `src/lib/readingTime.ts` — `estimateReadingTime(body, extras?)` at 200 wpm (standard average adult pace), minimum 1 min
-  - Article detail page counts body + FAQ questions/answers + source labels via `extras` param
-  - `readingTimeFromWordCount()` for GROQ-projected `wordCount` on card components
-  - `"wordCount": length(string::split(pt::text(body), " "))` — actual word count (not char count)
-  - `wordCount?: number` added to global `Article` type in `types.d.ts`
-  - Displayed on: article detail page, `FeaturedArticleCard`, featured stories grid, `ArticleCard`, `RawFeed`
+**User Experience**
+- Positioned below `<NavWrapper />` (under category nav)
+- Per-session dismiss via `sessionStorage`; key derived from headline (resets on new headline)
+- Server-side `expiresAt` guard + client-side secondary guard for safety
+- Accessible: `role="alert"`, `aria-label`, keyboard-navigable dismiss with focus ring
+- Fixed: More dropdown `pointer-events-none` when hidden to prevent hover bleed
 
-### Changed
+### Reading Time Estimate (Issue #20, PR #32)
 
-- Sitemap completion (Issue #16, PR #29)
-  - Added static pages: `/timelines`, `/join`, `/support`, `/secure-contact`, `/whistleblower`
-  - Added dynamic timeline individual pages via new `queryTimelines` in `getAllURLs.ts`
-  - `robots.ts`: added `Disallow` for `/privacy-settings`, `/reading-list`, `/unlock`; `Allow: /feed.xml`
-  - `privacy-settings/layout.tsx`: added `noindex` metadata (page is `'use client'`, metadata via layout)
+**Core Implementation**
+- `src/lib/readingTime.ts` — `estimateReadingTime(body, extras?)` utility at 200 wpm (standard adult pace), minimum 1 minute
+- `readingTimeFromWordCount()` helper for GROQ-projected `wordCount` on card components
+- `wordCount` calculated via GROQ: `length(string::split(pt::text(body), " "))` (actual words, not chars)
+- `wordCount?: number` added to global `Article` type in `types.d.ts`
 
----
+**Displays**
+- Article detail page counts body + FAQ questions/answers + source labels via `extras` param
+- Shown on: `ArticleCard`, `FeaturedArticleCard`, featured stories grid, `RawFeed`, article detail page
 
-## [2.2.1] — 2026-03-16
+### Sitemap Completion (Issue #16, PR #29)
 
-### Fixed
+- Added static pages: `/timelines`, `/join`, `/support`, `/secure-contact`, `/whistleblower`
+- Added dynamic timeline individual pages via new `queryTimelines` in `getAllURLs.ts`
+- `robots.ts` — added `Disallow` for `/privacy-settings`, `/reading-list`, `/unlock`; explicit `Allow: /feed.xml`
+
+## Fixed
+
+### Production Incident: Sanity Live API Hang → 502
+
+**Root Cause & Diagnosis**
+- `sanityFetch` from `next-sanity`'s `defineLive` would hang indefinitely when Sanity Live API was slow/unresponsive
+- No timeout caused Vercel's 30-second serverless function limit to kill request → 502 error (no logs, blank page)
+- Local dev unaffected (no timeout in `next dev`)
+- Pattern: works when cache warm, 502s when cache expires and fresh server render needed
+- Vercel logs showed 200 OK at 99ms (ISR PRERENDER cache hits), but ISR revalidation-triggered fresh renders would hang
+
+**Fixes**
+- `src/lib/sanity/lib/live.ts` — wrapped `sanityFetch` in `Promise.race` with 8-second timeout; throws descriptive error to Vercel logs instead of silent hang
+- `src/components/global/NavWrapper.tsx` — added try/catch; falls back to empty category list to render nav instead of crashing layout
+- `src/components/global/BreakingNewsBanner.tsx` — added try/catch; returns null (no banner) on fetch failure instead of propagating error
+
+### Security Hardening
+
+- Deleted `src/components/debug/` — all 6 components removed: AdDebugger, TestAd, TestAdComponent, AdSenseTestComponent, AdSenseTroubleshooter, ConsentDebugger (Issue #15, PR #28)
+- Deleted `/timeline-debug` and `/timeline-simple-test` public routes (debug exposure eliminated)
+- Deleted `src/app/api/debug-log/route.ts` — unauthenticated POST endpoint removed
+- Removed unconditional `<AdDebugger />` render from music layout
+
+### Content & Navigation
+
+- Removed decorative `Banner` component from homepage (consolidated from earlier work)
+- `privacy-settings/layout.tsx` — added `noindex` metadata (page is `'use client'`, metadata via layout)
+
+## Updated
+
+### Metadata & Configuration
 
 - AdSense article page slot IDs updated to verified ad units
-- `notFound()` fixes on article/category/timeline pages
-- Music/category/timeline JSON-LD structured data improvements
+- `robots.ts` — added `Disallow` entries for private pages and explicit `Allow` for `/feed.xml`
 
 ---
