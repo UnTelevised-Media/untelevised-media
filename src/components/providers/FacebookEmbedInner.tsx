@@ -15,29 +15,47 @@ export default function FacebookEmbedInner({ postUrl }: { postUrl: string }) {
   const [renderError, setRenderError] = useState(false);
 
   useEffect(() => {
-    const fbWindow = window as FacebookWindow;
-    if (fbWindow.FB?.XFBML?.parse) {
-      try {
-        fbWindow.FB.XFBML.parse();
-      } catch (error) {
-        console.error('Facebook embed error:', error);
-        setRenderError(true);
-      }
-    } else {
-      // SDK not loaded yet, retry after a delay
-      const timeout = setTimeout(() => {
+    // Wait for next tick to ensure DOM elements are mounted
+    const timeoutId = setTimeout(() => {
+      const fbWindow = window as FacebookWindow;
+      if (fbWindow.FB?.XFBML?.parse) {
         try {
-          const fb = (window as FacebookWindow).FB;
-          if (fb?.XFBML?.parse) {
-            fb.XFBML.parse();
-          }
+          fbWindow.FB.XFBML.parse();
         } catch (error) {
-          console.error('Facebook embed deferred error:', error);
+          console.error('Facebook embed parse error:', error);
           setRenderError(true);
         }
-      }, 200);
-      return () => clearTimeout(timeout);
-    }
+      } else {
+        // SDK not loaded yet, retry with exponential backoff
+        let retries = 0;
+        const maxRetries = 5;
+        const retryWithBackoff = () => {
+          if (retries >= maxRetries) {
+            setRenderError(true);
+            return;
+          }
+          const delay = Math.pow(2, retries) * 100; // 100, 200, 400, 800, 1600ms
+          const retryId = setTimeout(() => {
+            try {
+              const fb = (window as FacebookWindow).FB;
+              if (fb?.XFBML?.parse) {
+                fb.XFBML.parse();
+              } else {
+                retries++;
+                retryWithBackoff();
+              }
+            } catch (error) {
+              console.error('Facebook embed retry error:', error);
+              setRenderError(true);
+            }
+          }, delay);
+          return retryId;
+        };
+        retryWithBackoff();
+      }
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
   }, [postUrl]);
 
   if (renderError) {
