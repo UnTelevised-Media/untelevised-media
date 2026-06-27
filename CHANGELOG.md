@@ -4,6 +4,24 @@ All notable changes to this project are documented here.
 
 ---
 
+## [Unreleased] — Article Page Improvements & Security Hardening
+
+### Fixed
+
+- **Content Security Policy (CSP) environment-aware configuration** — Split CSP into environment-specific policies: production enforces strict HTTPS/WSS connections with `upgrade-insecure-requests`, development allows `ws://` and `http:` for Next.js HMR.
+- **Permissions-Policy browser feature restrictions** — Added restrictive Permissions-Policy header limiting camera, microphone, geolocation, accelerometer, gyroscope, and magnetometer; unload event only allowed for embedded social platforms (TikTok, Facebook, Instagram, YouTube).
+- **React hooks conditional call violations** — Fixed ImageGalleryCarousel component to use `useMemo` for computed image values, eliminating conditional hook call errors.
+- **Nullish coalescing consistency** — Replaced all logical OR (`||`) operators with nullish coalescing (`??`) throughout ArticleCards and ImageGalleryCarousel components.
+- **TypeScript explicit any errors** — Added proper `eslint-disable-next-line @typescript-eslint/no-explicit-any` comments with context for unavoidable type assertions.
+- **Unused code cleanup** — Removed unused `ARTICLES_PER_PAGE` constant, unused function parameters prefixed with underscore (`_msg`, `_args`, `_options`).
+- **Duplicate imports** — Consolidated multiple lucide-react imports into single import statements.
+
+### Performance
+
+- **LCP optimization** — Added `priority` prop to featured article image for faster Largest Contentful Paint rendering.
+
+---
+
 ## [3.0.0] — 2026-06-26 — Major Release: Docker Deployment, Image Optimization, YouTube Embeds & Media Enhancements
 
 Substantial infrastructure, performance, and media handling improvements. Docker containerization with CoolaFly deployment docs, complete PNG-to-WebP image conversion, hybrid YouTube embed system with age-restricted video support, image gallery carousels for articles, social media embed optimization, and multiple performance enhancements.
