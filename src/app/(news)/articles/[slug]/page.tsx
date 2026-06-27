@@ -65,8 +65,21 @@ export default async function ArticlePage({ params }: Props) {
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
       {/* Social media embed SDKs — loaded only on article pages */}
-      <Script async src='https://www.tiktok.com/embed.js' strategy='lazyOnload' />
-      <Script async src='https://www.instagram.com/embed.js' strategy='lazyOnload' />
+      <Script
+        src='https://www.tiktok.com/embed.js'
+        strategy='lazyOnload'
+      />
+      <Script
+        src='https://www.instagram.com/embed.js'
+        strategy='lazyOnload'
+      />
+      <Script
+        src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0'
+        async
+        defer
+        crossOrigin='anonymous'
+        strategy='lazyOnload'
+      />
 
       <NewsArticleStructuredData article={article} slug={slug} />
 
