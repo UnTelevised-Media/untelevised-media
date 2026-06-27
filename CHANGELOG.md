@@ -15,6 +15,7 @@ All notable changes to this project are documented here.
 - **TypeScript explicit any errors** — Added proper `eslint-disable-next-line @typescript-eslint/no-explicit-any` comments with context for unavoidable type assertions.
 - **Unused code cleanup** — Removed unused `ARTICLES_PER_PAGE` constant, unused function parameters prefixed with underscore (`_msg`, `_args`, `_options`).
 - **Duplicate imports** — Consolidated multiple lucide-react imports into single import statements.
+- **Coral comments CSP allowlist** — Added `https://coral.untelevised.media` to `style-src` and `font-src` directives to allow Coral comment system stylesheets and fonts; added `https://s3.amazonaws.com` to `font-src` for Giphy fonts used in Coral embeds.
 
 ### Performance
 
