@@ -474,7 +474,7 @@ async function Footer() {
                 href='/syndication/buy-our-media'
                 className='text-xs text-muted-foreground transition-colors hover:text-foreground'
               >
-                Buy Our Media
+                Content Licensing
               </Link>
               <Link
                 href='/syndication/licensing'
@@ -486,7 +486,7 @@ async function Footer() {
                 href='/syndication/buy-from-journalists'
                 className='text-xs text-muted-foreground transition-colors hover:text-foreground'
               >
-                Buy From Journalists
+                Independent Creators Marketplace
               </Link>
               <Link
                 href='/syndication/submit-media'
