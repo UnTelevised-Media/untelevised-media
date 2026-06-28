@@ -10,11 +10,8 @@ interface FeaturedBookCTAProps {
     author?: { name?: string };
     price?: number;
     compareAtPrice?: number;
-    cover?: { asset?: { _ref: string }; alt?: string };
     coverImage?: { asset?: { _ref: string }; alt?: string };
-    albumArt?: { asset?: { _ref: string }; alt?: string };
-    image?: { asset?: { _ref: string }; alt?: string };
-    [key: string]: unknown;
+    coverImageUrl?: string;
   };
 }
 
@@ -28,25 +25,18 @@ export default function FeaturedBookCTA({ book }: FeaturedBookCTAProps) {
     return null;
   }
 
-  const coverImage = book.cover || book.coverImage || (book.albumArt as any) || (book.image as any);
-  let coverUrl: string | null = null;
-
-  if (coverImage) {
-    try {
-      coverUrl = urlForImage(coverImage)?.width(300).height(450).url() ?? null;
-    } catch {
-      coverUrl = null;
-    }
-  }
+  const cover = book.coverImage?.asset
+    ? urlForImage(book.coverImage).width(300).height(450).url()
+    : (book.coverImageUrl ?? null);
 
   return (
     <div className='flex flex-col border border-slate-300 bg-white dark:border-slate-700 dark:bg-black'>
       {/* Book Cover */}
       <div className='relative aspect-[3/4] w-full overflow-hidden bg-slate-200 dark:bg-slate-800'>
-        {coverUrl ? (
+        {cover ? (
           <Image
-            src={coverUrl}
-            alt={coverImage?.alt ?? book.title ?? 'Book cover'}
+            src={cover}
+            alt={book.coverImage?.alt ?? book.title ?? 'Book cover'}
             fill
             className='object-cover'
             sizes='(max-width: 1024px) 100vw, 22vw'
