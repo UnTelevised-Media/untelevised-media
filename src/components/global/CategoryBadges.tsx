@@ -24,7 +24,7 @@ export default function CategoryBadges({ categories }: CategoryBadgesProps) {
   return (
     <div className='flex flex-wrap gap-2 border-t border-border pt-4'>
       {categories.map((category) => {
-        const categoryColor = category.color?.hex || '#dc2626';
+        const categoryColor = category.color?.hex ?? '#dc2626';
         const isHovered = hoveredId === category._id;
         const fadedColor = hexToRgba(categoryColor, 0.4);
 
