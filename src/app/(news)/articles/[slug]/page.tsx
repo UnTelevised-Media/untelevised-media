@@ -545,6 +545,14 @@ export default async function ArticlePage({ params }: Props) {
                 </div>
                 {/* eslint-enable @typescript-eslint/no-explicit-any */}
 
+                {/* Ad between comments and newsletter */}
+                <div className='mb-8 mt-12'>
+                  <BannerAd
+                    slot={AD_CONFIG.AD_SLOTS.ARTICLE_BANNER_BOTTOM}
+                    className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                  />
+                </div>
+
                 {/* Newsletter Signup */}
                 <div className='mt-12'>
                   <NewsletterSignup list='news' source='article' />
