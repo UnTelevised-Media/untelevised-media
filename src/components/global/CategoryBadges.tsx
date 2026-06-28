@@ -18,13 +18,15 @@ function hexToRgba(hex: string, alpha: number): string {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+const UNTELEVISED_COLOR = '#dc2626';
+
 export default function CategoryBadges({ categories }: CategoryBadgesProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
     <div className='flex flex-wrap gap-2 border-t border-border pt-4'>
       {categories.map((category) => {
-        const categoryColor = category.color?.hex ?? '#dc2626';
+        const categoryColor = category.color?.hex ?? UNTELEVISED_COLOR;
         const isHovered = hoveredId === category._id;
         const fadedColor = hexToRgba(categoryColor, 0.4);
 
@@ -36,8 +38,8 @@ export default function CategoryBadges({ categories }: CategoryBadgesProps) {
             <div
               className='rounded border text-xs font-medium transition-all px-2 py-1'
               style={{
-                borderColor: isHovered ? categoryColor : categoryColor,
-                color: isHovered ? categoryColor : categoryColor,
+                borderColor: isHovered ? categoryColor : UNTELEVISED_COLOR,
+                color: isHovered ? categoryColor : UNTELEVISED_COLOR,
                 backgroundColor: isHovered ? fadedColor : 'transparent',
               }}
               onMouseEnter={() => setHoveredId(category._id)}
