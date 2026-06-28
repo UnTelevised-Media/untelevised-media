@@ -223,7 +223,7 @@ export default async function TrendingSection({ variant }: Props = {}) {
                 {index + 1}
               </span>
               <div className='w-full space-y-2'>
-                <p className='text-sm font-black uppercase leading-snug tracking-wide transition-colors group-hover:text-untele'>
+                <p className='text-sm font-semibold uppercase leading-snug tracking-wide transition-colors group-hover:text-untele'>
                   {article.title}
                 </p>
                 <div className='flex flex-col gap-1 text-xs uppercase tracking-widest text-muted-foreground'>
