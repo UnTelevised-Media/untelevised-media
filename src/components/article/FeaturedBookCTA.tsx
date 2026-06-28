@@ -12,6 +12,9 @@ interface FeaturedBookCTAProps {
     compareAtPrice?: number;
     cover?: { asset?: { _ref: string }; alt?: string };
     coverImage?: { asset?: { _ref: string }; alt?: string };
+    albumArt?: { asset?: { _ref: string }; alt?: string };
+    image?: { asset?: { _ref: string }; alt?: string };
+    [key: string]: unknown;
   };
 }
 
@@ -25,14 +28,22 @@ export default function FeaturedBookCTA({ book }: FeaturedBookCTAProps) {
     return null;
   }
 
-  const coverImage = book.cover || book.coverImage;
-  const coverUrl = coverImage ? urlForImage(coverImage)?.width(300).height(450).url() : null;
+  const coverImage = book.cover || book.coverImage || (book.albumArt as any) || (book.image as any);
+  let coverUrl: string | null = null;
+
+  if (coverImage) {
+    try {
+      coverUrl = urlForImage(coverImage)?.width(300).height(450).url() ?? null;
+    } catch {
+      coverUrl = null;
+    }
+  }
 
   return (
     <div className='flex flex-col border border-slate-300 bg-white dark:border-slate-700 dark:bg-black'>
       {/* Book Cover */}
-      {coverUrl && (
-        <div className='relative aspect-[3/4] w-full overflow-hidden bg-slate-200 dark:bg-slate-800'>
+      <div className='relative aspect-[3/4] w-full overflow-hidden bg-slate-200 dark:bg-slate-800'>
+        {coverUrl ? (
           <Image
             src={coverUrl}
             alt={coverImage?.alt ?? book.title ?? 'Book cover'}
@@ -40,8 +51,14 @@ export default function FeaturedBookCTA({ book }: FeaturedBookCTAProps) {
             className='object-cover'
             sizes='(max-width: 1024px) 100vw, 22vw'
           />
-        </div>
-      )}
+        ) : (
+          <div className='flex h-full w-full items-center justify-center bg-slate-300 dark:bg-slate-700'>
+            <span className='text-center text-xs font-semibold text-slate-600 dark:text-slate-400'>
+              {book.title}
+            </span>
+          </div>
+        )}
+      </div>
 
       {/* Book Info */}
       <div className='flex flex-1 flex-col p-4'>
