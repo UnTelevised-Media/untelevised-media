@@ -477,12 +477,6 @@ async function Footer() {
                 Content Licensing
               </Link>
               <Link
-                href='/syndication/licensing'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Licensing &amp; Rights
-              </Link>
-              <Link
                 href='/syndication/buy-from-journalists'
                 className='text-xs text-muted-foreground transition-colors hover:text-foreground'
               >
@@ -493,6 +487,12 @@ async function Footer() {
                 className='text-xs text-muted-foreground transition-colors hover:text-foreground'
               >
                 Send Us Media
+              </Link>
+              <Link
+                href='/syndication/licensing'
+                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+              >
+                Licensing &amp; Rights
               </Link>
             </div>
 
