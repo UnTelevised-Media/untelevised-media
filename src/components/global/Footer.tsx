@@ -91,10 +91,16 @@ async function Footer() {
                     key={category._id}
                   >
                     <div
-                      className='rounded border text-xs font-medium transition-all px-2 py-1'
+                      className='rounded border text-xs font-medium transition-all px-2 py-1 hover:text-white'
                       style={{
                         borderColor: categoryColor,
                         color: categoryColor,
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLDivElement).style.backgroundColor = categoryColor;
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLDivElement).style.backgroundColor = '';
                       }}
                     >
                       {category.title}
@@ -109,17 +115,9 @@ async function Footer() {
           <div className='flex flex-col space-y-3'>
             <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Platform</h4>
             <div className='flex flex-col space-y-2'>
-              <h5 className='text-xs font-semibold text-muted-foreground'>News</h5>
-              {sortedCategories.slice(0, 3).map((category: CategoryQueryResult) => (
-                <ClientSideRoute
-                  route={resolveHref('category', formatTitleForURL(category.title)) ?? ''}
-                  key={category._id}
-                >
-                  <span className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
-                    {category.title}
-                  </span>
-                </ClientSideRoute>
-              ))}
+              <Link href='/' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Home
+              </Link>
               <Link href='/search' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
                 Search Articles
               </Link>
@@ -152,12 +150,12 @@ async function Footer() {
 
             <div className='flex flex-col space-y-2 border-t border-border pt-3'>
               <h5 className='text-xs font-semibold text-muted-foreground'>Music</h5>
-              <ClientSideRoute route='/lyrics' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+              <Link href='/lyrics' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
                 Music &amp; Lyrics
-              </ClientSideRoute>
-              <ClientSideRoute route='/music-artists' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+              </Link>
+              <Link href='/music-artists' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
                 Featured Artists
-              </ClientSideRoute>
+              </Link>
             </div>
           </div>
 
@@ -208,7 +206,7 @@ async function Footer() {
           <div className='flex flex-col space-y-3'>
             <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Legal</h4>
             <div className='flex flex-col space-y-2'>
-              {sortedPolicies.map((policy: PolicyQueryResult) => (
+              {sortedPolicies.slice(0, 3).map((policy: PolicyQueryResult) => (
                 <ClientSideRoute
                   route={resolveHref('policies', formatTitleForURL(policy.title)) ?? ''}
                   key={policy._id}
@@ -243,7 +241,7 @@ async function Footer() {
       <div className='border-t border-border bg-slate-50/50 px-4 py-6 text-xs text-muted-foreground dark:bg-slate-950/50'>
         <div className='flex flex-col justify-between gap-4 text-xs sm:flex-row'>
           <p>© Copyright 2026 UnTelevised Media™ All Rights Reserved.</p>
-          <p className='flex items-center gap-1'>Made with <span>✊</span> by the UnTelevised team</p>
+          <p className='flex items-center gap-2'>Made with <span className='text-lg'>✊</span> by the UnTelevised team</p>
         </div>
       </div>
     </div>
