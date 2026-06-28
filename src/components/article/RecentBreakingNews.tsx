@@ -10,6 +10,7 @@ interface BreakingArticle {
   slug: { current: string };
   publishedAt?: string;
   _createdAt: string;
+  location?: string;
 }
 
 const query = groq`
@@ -21,6 +22,7 @@ const query = groq`
     slug,
     publishedAt,
     _createdAt,
+    location,
   }
 `;
 
@@ -49,18 +51,20 @@ export default async function RecentBreakingNews() {
           <li key={article._id} className='group'>
             <Link
               href={`/articles/${article.slug.current}`}
-              className='flex items-start gap-3 p-3 transition-colors hover:bg-muted/50'
+              className='flex gap-3 p-4 transition-colors hover:bg-muted/50'
             >
-              <div className='min-w-0 flex-1 space-y-1'>
-                <p className='line-clamp-3 text-sm font-black uppercase leading-tight tracking-wide transition-colors group-hover:text-untele'>
+              <div className='w-full space-y-2'>
+                <p className='text-sm font-semibold uppercase leading-snug tracking-wide transition-colors group-hover:text-untele'>
                   {article.title}
                 </p>
-                <time
-                  dateTime={article.publishedAt ?? article._createdAt}
-                  className='block text-xs uppercase tracking-widest text-muted-foreground'
-                >
-                  {formatDate(article.publishedAt ?? article._createdAt)}
-                </time>
+                <div className='flex flex-col gap-1 text-xs uppercase tracking-widest text-muted-foreground'>
+                  <time dateTime={article.publishedAt ?? article._createdAt}>
+                    {formatDate(article.publishedAt ?? article._createdAt)}
+                  </time>
+                  {article.location && (
+                    <span>📍 {article.location}</span>
+                  )}
+                </div>
               </div>
             </Link>
           </li>
