@@ -1,23 +1,35 @@
 // src/components/global/Footer.tsx
 import Link from 'next/link';
 import {
-  FaYoutube,
-  FaTwitch,
-  FaTiktok,
-  FaTwitter,
-  FaFacebook,
-  FaInstagram,
-  FaReddit,
-  FaDiscord,
-  FaTelegram,
-} from 'react-icons/fa';
+  BsDiscord,
+  BsTwitch,
+  BsTwitter,
+  BsYoutube,
+} from 'react-icons/bs';
+import { FaFacebookF, FaRedditAlien, FaTelegram, FaTiktok } from 'react-icons/fa';
 import { FaThreads } from 'react-icons/fa6';
+import { GrInstagram } from 'react-icons/gr';
 import { MdLiveTv } from 'react-icons/md';
 import { RiKickLine } from 'react-icons/ri';
 import ClientSideRoute from '../providers/ClientSideRoute';
 import formatTitleForURL from '@/util/url/formatTitleForURL';
 import resolveHref from '@/util/url/resolveHref';
 import { getNewsCategories, getPoliciesList, type CategoryQueryResult, type PolicyQueryResult } from '@/server/queries/content';
+
+const SOCIAL_LINKS = [
+  { name: 'YouTube', href: 'https://www.youtube.com/@AntiWarTV', icon: BsYoutube, color: '#FF0000', hoverBorder: 'hover:border-[#FF0000]/50', hoverBg: 'hover:bg-[#FF0000]/10', hoverText: 'group-hover:text-[#FF0000]' },
+  { name: 'Twitter', href: 'https://twitter.com/UnTelevisedLive', icon: BsTwitter, color: '#1DA1F2', hoverBorder: 'hover:border-[#1DA1F2]/50', hoverBg: 'hover:bg-[#1DA1F2]/10', hoverText: 'group-hover:text-[#1DA1F2]' },
+  { name: 'Twitch', href: 'https://www.twitch.tv/untelevised', icon: BsTwitch, color: '#9146FF', hoverBorder: 'hover:border-[#9146FF]/50', hoverBg: 'hover:bg-[#9146FF]/10', hoverText: 'group-hover:text-[#9146FF]' },
+  { name: 'TikTok', href: 'https://www.tiktok.com/@radical.edward', icon: FaTiktok, color: '#ff0050', hoverBorder: 'hover:border-[#ff0050]/50', hoverBg: 'hover:bg-[#ff0050]/10', hoverText: 'group-hover:text-[#ff0050]' },
+  { name: 'Instagram', href: 'https://www.instagram.com/untelevised.media/', icon: GrInstagram, color: '#C13584', hoverBorder: 'hover:border-[#C13584]/50', hoverBg: 'hover:bg-[#C13584]/10', hoverText: 'group-hover:text-[#C13584]' },
+  { name: 'Threads', href: 'https://www.threads.net/@untelevised.media', icon: FaThreads, color: '#000000', hoverBorder: 'hover:border-black/50', hoverBg: 'hover:bg-black/10', hoverText: 'group-hover:text-black dark:group-hover:text-white' },
+  { name: 'Facebook', href: 'https://www.facebook.com/UnTelevisedLive', icon: FaFacebookF, color: '#1877f2', hoverBorder: 'hover:border-[#1877f2]/50', hoverBg: 'hover:bg-[#1877f2]/10', hoverText: 'group-hover:text-[#1877f2]' },
+  { name: 'Reddit', href: 'https://www.reddit.com/r/UnTelevisedMedia/', icon: FaRedditAlien, color: '#FF5700', hoverBorder: 'hover:border-[#FF5700]/50', hoverBg: 'hover:bg-[#FF5700]/10', hoverText: 'group-hover:text-[#FF5700]' },
+  { name: 'Discord', href: 'https://discord.gg/w9vMH5zr6j', icon: BsDiscord, color: '#738ADB', hoverBorder: 'hover:border-[#738ADB]/50', hoverBg: 'hover:bg-[#738ADB]/10', hoverText: 'group-hover:text-[#738ADB]' },
+  { name: 'Telegram', href: 'https://t.me/UnTelevised_Media', icon: FaTelegram, color: '#2CA5E0', hoverBorder: 'hover:border-[#2CA5E0]/50', hoverBg: 'hover:bg-[#2CA5E0]/10', hoverText: 'group-hover:text-[#2CA5E0]' },
+  { name: 'D-Live', href: 'https://dlive.tv/UnTelevised', icon: MdLiveTv, color: '#4CAF50', hoverBorder: 'hover:border-[#4CAF50]/50', hoverBg: 'hover:bg-[#4CAF50]/10', hoverText: 'group-hover:text-[#4CAF50]' },
+  { name: 'Kick', href: 'https://kick.com/untelevised', icon: RiKickLine, color: '#10B981', hoverBorder: 'hover:border-[#10B981]/50', hoverBg: 'hover:bg-[#10B981]/10', hoverText: 'group-hover:text-[#10B981]' },
+];
 
 async function Footer() {
   const categories: CategoryQueryResult[] = await getNewsCategories();
@@ -31,219 +43,186 @@ async function Footer() {
   );
 
   return (
-    <div className='flex flex-col space-y-10 border-t border-border bg-background px-2 py-3'>
-      <div className='flex flex-col justify-between space-y-2 px-12 md:flex-row md:space-x-6 md:space-y-0'>
-        {/* News Sections & About  */}
-        <h4 className='pb-2 text-lg font-semibold text-foreground underline md:hidden'>
-          News Categories
-        </h4>
-        <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
-          <h4 className='hidden pb-2 text-xl font-semibold text-foreground underline md:flex'>
-            News Categories
-          </h4>
-          {sortedCategories
-            // .sort((a, b) => a.order - b.order)
-            .map((category: CategoryQueryResult) => (
-              <ClientSideRoute
-                route={resolveHref('category', formatTitleForURL(category.title)) ?? ''}
-                key={category._id}
-              >
-                {category.title}
+    <div className='border-t border-border bg-background'>
+      {/* Main Footer Content */}
+      <div className='space-y-8 px-4 py-12 sm:px-6 lg:px-8'>
+        <div className='grid gap-12 lg:grid-cols-4'>
+          {/* Left Sidebar - Logo & Mission */}
+          <div className='flex flex-col space-y-4 lg:pr-6'>
+            <div className='flex items-center gap-3'>
+              <div className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded border border-slate-300 bg-slate-100 text-lg font-black text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white'>
+                U
+              </div>
+              <div>
+                <h3 className='text-sm font-bold text-foreground'>UnTelevised Media</h3>
+                <p className='text-xs text-muted-foreground'>Independent Journalism</p>
+              </div>
+            </div>
+
+            <p className='text-xs leading-relaxed text-muted-foreground'>
+              Unfiltered, uncensored, and uncompromising coverage of the stories that matter.
+            </p>
+
+            {/* Social Icons - Match header styling exactly */}
+            <div className='flex flex-wrap gap-2'>
+              {SOCIAL_LINKS.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className={`group border border-slate-300/50 bg-slate-200/30 p-2 backdrop-blur-sm transition-all duration-200 ${link.hoverBorder} ${link.hoverBg} hover:shadow-lg dark:border-slate-600/50 dark:bg-slate-800/30`}
+                    aria-label={link.name}
+                  >
+                    <Icon className={`h-4 w-4 text-slate-600 transition-colors duration-200 ${link.hoverText} dark:text-slate-400`} />
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Platform Column */}
+          <div className='flex flex-col space-y-4'>
+            <h4 className='text-sm font-semibold text-foreground'>Platform</h4>
+            <div className='flex flex-col space-y-2'>
+              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>News</h5>
+              {sortedCategories.slice(0, 3).map((category: CategoryQueryResult) => (
+                <ClientSideRoute
+                  route={resolveHref('category', formatTitleForURL(category.title)) ?? ''}
+                  key={category._id}
+                >
+                  <span className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                    {category.title}
+                  </span>
+                </ClientSideRoute>
+              ))}
+              <Link href='/search' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Search Articles
+              </Link>
+            </div>
+
+            <div className='flex flex-col space-y-2 border-t border-border pt-4'>
+              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>Bookstore</h5>
+              <Link href='/bookstore' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Hurriya Publications
+              </Link>
+              <Link href='/bookstore/about' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Our Story
+              </Link>
+              <Link href='/bookstore/wishlist' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Wishlist
+              </Link>
+              <Link href='/bookstore/orders' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                My Orders
+              </Link>
+              <Link href='/bookstore/downloads' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Download Vault
+              </Link>
+              <Link href='/bookstore/returns' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Returns &amp; Refunds
+              </Link>
+              <Link href='/secure-contact' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Publish With Us
+              </Link>
+            </div>
+
+            <div className='flex flex-col space-y-2 border-t border-border pt-4'>
+              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>Music</h5>
+              <ClientSideRoute route='/lyrics' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Music &amp; Lyrics
               </ClientSideRoute>
-            ))}
-        </div>
-
-        {/* Bookstore + Music — shared column on desktop */}
-        <div className='flex flex-col gap-6'>
-          {/* Bookstore */}
-          <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
-            <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
-              Bookstore
-            </h4>
-            <Link href='/bookstore'>Hurriya Publications</Link>
-            <Link href='/bookstore/about'>Our Story</Link>
-            <Link href='/bookstore/wishlist'>Wishlist</Link>
-            <Link href='/bookstore/orders'>My Orders</Link>
-            <Link href='/bookstore/downloads'>Download Vault</Link>
-            <Link href='/bookstore/returns'>Returns &amp; Refunds</Link>
-            <Link href='/secure-contact'>Publish With Us</Link>
+              <ClientSideRoute route='/music-artists' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Featured Artists
+              </ClientSideRoute>
+            </div>
           </div>
 
-          {/* Music Section */}
-          <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
-            <h4 className='pb-2 text-lg font-semibold text-foreground underline md:text-xl'>
-              Music & Artists
-            </h4>
-            <ClientSideRoute route='/lyrics'>Music & Lyrics</ClientSideRoute>
-            <ClientSideRoute route='/music-artists'>Featured Artists</ClientSideRoute>
+          {/* Community Column */}
+          <div className='flex flex-col space-y-4'>
+            <h4 className='text-sm font-semibold text-foreground'>Community</h4>
+            <div className='flex flex-col space-y-2'>
+              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>About</h5>
+              <Link href='/about' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                About UnTelevised
+              </Link>
+              <Link href='/editorial-standards' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Editorial Standards
+              </Link>
+              <Link href='/staff' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Meet Our Staff
+              </Link>
+            </div>
+
+            <div className='flex flex-col space-y-2 border-t border-border pt-4'>
+              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>Support</h5>
+              <Link href='/support' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Support Our Outlet
+              </Link>
+              <Link href='/careers' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Careers / Join Our Team
+              </Link>
+            </div>
+
+            <div className='flex flex-col space-y-2 border-t border-border pt-4'>
+              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>Contact</h5>
+              <Link href='mailto:newsroom@untelevised.media' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Contact Newsroom
+              </Link>
+              <Link href='mailto:newsroom@untelevised.media' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Send a News Tip
+              </Link>
+              <Link href='mailto:newsroom@untelevised.media' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Advertise
+              </Link>
+              <Link href='mailto:newsroom@untelevised.media' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Request a Correction
+              </Link>
+            </div>
           </div>
-        </div>
 
-        {/* Media */}
-        <h4 className='pb-2 text-lg font-semibold text-foreground underline md:hidden'>Media</h4>
-        <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
-          <h4 className='hidden pb-2 text-xl font-semibold text-foreground underline md:flex'>
-            Media
-          </h4>
-          <Link href='/search'>Search Articles</Link>
-          <Link href='/'>Photo</Link>
-          <Link href='/'>Video</Link>
-          <Link href='/'>Investigations</Link>
-          <Link href='/'>RSS</Link>
-        </div>
+          {/* Legal Column */}
+          <div className='flex flex-col space-y-4'>
+            <h4 className='text-sm font-semibold text-foreground'>Legal</h4>
+            <div className='flex flex-col space-y-2'>
+              {sortedPolicies.map((policy: PolicyQueryResult) => (
+                <ClientSideRoute
+                  route={resolveHref('policies', formatTitleForURL(policy.title)) ?? ''}
+                  key={policy._id}
+                >
+                  <span className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                    {policy.title}
+                  </span>
+                </ClientSideRoute>
+              ))}
+            </div>
 
-        {/* Social Links */}
-        <h4 className='pb-2 text-lg font-semibold text-foreground underline md:hidden'>
-          Social Media Platforms
-        </h4>
-        <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
-          <h4 className='hidden pb-2 text-xl font-semibold text-foreground underline md:flex'>
-            Social Media Platforms
-          </h4>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://www.youtube.com/@AntiWarTV'
-            target='_blank'
-          >
-            <FaYoutube className='h-4 w-4' />
-            Youtube
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://www.twitch.tv/untelevised'
-            target='_blank'
-          >
-            <FaTwitch className='h-4 w-4' />
-            Twitch
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://www.tiktok.com/@radical.edward'
-            target='_blank'
-          >
-            <FaTiktok className='h-4 w-4' />
-            TikTok
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://twitter.com/UnTelevisedLive'
-            target='_blank'
-          >
-            <FaTwitter className='h-4 w-4' />
-            Twitter/X
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://www.threads.net/@untelevised.media'
-            target='_blank'
-          >
-            <FaThreads className='h-4 w-4' />
-            Threads
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://www.facebook.com/UnTelevisedLive'
-            target='_blank'
-          >
-            <FaFacebook className='h-4 w-4' />
-            Facebook
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://www.instagram.com/untelevised.media/'
-            target='_blank'
-          >
-            <FaInstagram className='h-4 w-4' />
-            Instagram
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://www.reddit.com/r/UnTelevisedMedia/'
-            target='_blank'
-          >
-            <FaReddit className='h-4 w-4' />
-            Reddit
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://discord.gg/w9vMH5zr6j'
-            target='_blank'
-          >
-            <FaDiscord className='h-4 w-4' />
-            Discord
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://t.me/UnTelevised_Media'
-            target='_blank'
-          >
-            <FaTelegram className='h-4 w-4' />
-            Telegram
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://dlive.tv/UnTelevised'
-            target='_blank'
-          >
-            <MdLiveTv className='h-4 w-4' />
-            D-Live
-          </Link>
-          <Link
-            className='flex items-center gap-x-2'
-            href='https://kick.com/untelevised'
-            target='_blank'
-          >
-            <RiKickLine className='h-4 w-4' />
-            Kick
-          </Link>
-        </div>
-
-        {/* Principles & Policies  */}
-        <h4 className='pb-2 text-lg font-semibold text-foreground underline md:hidden'>
-          Policies
-        </h4>
-        <div className='flex flex-row flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
-          <h4 className='hidden pb-2 text-xl font-semibold text-foreground underline md:flex'>
-            Policies
-          </h4>
-          {sortedPolicies.map((policy: PolicyQueryResult) => (
-            <ClientSideRoute
-              route={resolveHref('policies', formatTitleForURL(policy.title)) ?? ''}
-              key={policy._id}
-            >
-              {policy.title}
-            </ClientSideRoute>
-          ))}
-        </div>
-
-        {/* About */}
-        <h4 className='pb-2 text-lg font-semibold text-foreground underline md:hidden'>About</h4>
-        <div className='flex flex-wrap space-x-3 text-muted-foreground md:flex-col md:space-x-0'>
-          <h4 className='hidden pb-2 text-xl font-semibold text-foreground underline md:flex'>
-            About
-          </h4>
-          <Link href='/about'>About UnTelevised</Link>
-          <Link href='/editorial-standards'>Editorial Standards</Link>
-          <Link href='/staff'>Meet Our Staff</Link>
-          <Link href='/careers'>Careers / Join Our Team</Link>
-          <Link href='/support'>Support Our Outlet</Link>
-          <Link href='mailto:newsroom@untelevised.media'>Contact the Newsroom</Link>
-          <Link href='mailto:newsroom@untelevised.media'>Licensing & Syndication</Link>
-          <Link href='mailto:newsroom@untelevised.media'>Advertise</Link>
-          <Link href='mailto:newsroom@untelevised.media'>Send a News Tip</Link>
-          <Link href='mailto:newsroom@untelevised.media'>Request a Correction</Link>
+            <div className='flex flex-col space-y-2 border-t border-border pt-4'>
+              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>Media</h5>
+              <Link href='/' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Photo
+              </Link>
+              <Link href='/' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Video
+              </Link>
+              <Link href='/' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                Investigations
+              </Link>
+              <Link href='/feed.xml' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                RSS
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Copywrite Notice */}
-      <div className='flex justify-between'>
-        {/* Copywrite  */}
-        <p className='text-sm font-light text-foreground'>
-          © Copyright 2023 UnTelevised Media™ All Rights Reserved.
-        </p>
-        <p className='text-sm font-extralight text-muted-foreground'>
-          1156 Humboldt St, Denver, CO 80218
-        </p>
+      {/* Footer Bottom */}
+      <div className='border-t border-border bg-slate-50/50 px-4 py-6 text-xs text-muted-foreground dark:bg-slate-950/50'>
+        <div className='flex flex-col justify-between gap-4 sm:flex-row'>
+          <p>© Copyright 2026 UnTelevised Media™ All Rights Reserved.</p>
+          <p className='flex items-center gap-1'>Made with <span className='text-untele'>❤️</span> by the UnTelevised team</p>
+        </div>
       </div>
     </div>
   );
