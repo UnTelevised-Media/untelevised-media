@@ -49,10 +49,10 @@ export default async function RecentBreakingNews() {
           <li key={article._id} className='group'>
             <Link
               href={`/articles/${article.slug.current}`}
-              className='flex items-start gap-3 p-3 transition-colors hover:bg-muted/50'
+              className='flex gap-3 p-4 transition-colors hover:bg-muted/50'
             >
-              <div className='min-w-0 flex-1 space-y-1'>
-                <p className='line-clamp-3 text-sm font-black uppercase leading-tight tracking-wide transition-colors group-hover:text-untele'>
+              <div className='w-full space-y-2'>
+                <p className='text-sm font-semibold uppercase leading-snug tracking-wide transition-colors group-hover:text-untele'>
                   {article.title}
                 </p>
                 <time
