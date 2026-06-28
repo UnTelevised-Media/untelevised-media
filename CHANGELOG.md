@@ -4,6 +4,19 @@ All notable changes to this project are documented here.
 
 ---
 
+# [3.0.2] — 2026-06-27 — Article Page Layout & Responsive Design Improvements
+
+## Updated
+
+### Layout & Responsiveness
+
+- **Article page layout restructuring** — Reorganized main content flow to center article content with sidebars positioned outside the flex container for improved visual hierarchy
+- **Responsive max-widths** — Added breakpoint-specific max-widths for header and article containers (md:max-w-2xl, lg:max-w-4xl, xl:max-w-5xl, wide:max-w-6xl, 4k:max-w-7xl)
+- **Mobile sidebar repositioning** — Moved sidebar content below article on mobile/tablet devices (breakpoint: xl); desktop users retain three-column layout
+- **Article container styling** — Added gradient background (slate-50 to slate-100 light / slate-950 to slate-900 dark) to article container for enhanced visual separation
+- **Tailwind breakpoint extensions** — Added `wide` (1921px) and `4k` (3840px) breakpoints for ultra-wide display support
+
+---
 
 # [3.0.1] — 2026-06-26 — Article Page Improvements & Security Hardening
 
