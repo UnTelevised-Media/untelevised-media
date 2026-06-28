@@ -7,6 +7,7 @@ import { FaThreads } from 'react-icons/fa6';
 import { GrInstagram } from 'react-icons/gr';
 import { MdLiveTv } from 'react-icons/md';
 import { RiKickLine } from 'react-icons/ri';
+import { LuMap, LuRss } from 'react-icons/lu';
 import ClientSideRoute from '../providers/ClientSideRoute';
 import CategoryBadges from './CategoryBadges';
 import formatTitleForURL from '@/util/url/formatTitleForURL';
@@ -241,6 +242,22 @@ async function Footer() {
               >
                 Radio
               </Link>
+              <div className='flex gap-3 pt-2'>
+                <Link
+                  href='/sitemap.xml'
+                  className='flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  <LuMap className='h-3.5 w-3.5' />
+                  Sitemap
+                </Link>
+                <Link
+                  href='/feed.xml'
+                  className='flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  <LuRss className='h-3.5 w-3.5' />
+                  RSS
+                </Link>
+              </div>
             </div>
 
             <div className='flex flex-col space-y-2 border-t border-border pt-3'>
@@ -483,22 +500,22 @@ async function Footer() {
                   Copyright Claim
                 </Link>
                 <Link
-                  href='/legal/abuse-report'
-                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-                >
-                  Report Abuse
-                </Link>
-                <Link
                   href='/legal/defamation-claim'
                   className='text-xs text-muted-foreground transition-colors hover:text-foreground'
                 >
                   Defamation or Legal Notice
                 </Link>
+                <Link
+                  href='/legal/abuse-report'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Report Abuse
+                </Link>
               </div>
 
               <div className='flex flex-col space-y-2 border-t border-border pt-3'>
                 <h5 className='text-xs font-bold text-muted-foreground underline'>Policies</h5>
-                <div className='flex flex-col space-y-1'>
+                <div className='flex flex-col'>
                   {sortedPolicies.map((policy: PolicyQueryResult) => (
                     <ClientSideRoute
                       route={resolveHref('policies', formatTitleForURL(policy.title)) ?? ''}
