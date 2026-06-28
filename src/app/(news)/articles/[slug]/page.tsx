@@ -22,7 +22,7 @@ import formatTitleForURL from '@/util/url/formatTitleForURL';
 import safeText from '@/util/text/safeText';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { sanityFetch } from '@/lib/sanity/lib/fetch';
+import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata/metadata';
@@ -615,11 +615,12 @@ export default async function ArticlePage({ params }: Props) {
 
 async function LeftSidebarFeaturedBook() {
   try {
-    const featuredBooks = await sanityFetch<SanityBook[]>({
+    const result = await sanityFetch<SanityBook[]>({
       query: queryFeaturedBooks,
       tags: ['book'],
     });
 
+    const featuredBooks = result?.data ?? [];
     const book = featuredBooks?.[0];
     if (!book) {return null;}
 
