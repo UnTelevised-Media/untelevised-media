@@ -26,7 +26,7 @@
     "claude-code": "claude --dangerously-skip-permissions",
     "docker:clean": "node scripts/docker-clean.js",
     "docker:build": "node scripts/docker-build.js",
-    "docker:build:push": "node scripts/docker-clean.js && node scripts/docker-build.js"
+    "docker:build:push": "node scripts/docker-clean.js && node scripts/docker-build-local.js"
   },
   "dependencies": {
     "@blocknote/core": "^0.51.4",
