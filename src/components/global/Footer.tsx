@@ -488,6 +488,12 @@ async function Footer() {
                 >
                   Report Abuse
                 </Link>
+                <Link
+                  href='/legal/defamation-claim'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Defamation or Legal Notice
+                </Link>
               </div>
 
               <div className='flex flex-col space-y-2 border-t border-border pt-3'>
