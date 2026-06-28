@@ -22,9 +22,12 @@ import formatTitleForURL from '@/util/url/formatTitleForURL';
 import safeText from '@/util/text/safeText';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { sanityFetch } from '@/lib/sanity/lib/fetch';
-import sanityFetchDefault from '@/lib/sanity/lib/fetch';
-import { queryArticleBySlug, queryFeaturedBooks, queryFeaturedSongs } from '@/lib/sanity/lib/queries';
+import sanityFetchDefault, { sanityFetch } from '@/lib/sanity/lib/fetch';
+import {
+  queryArticleBySlug,
+  queryFeaturedBooks,
+  queryFeaturedSongs,
+} from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata/metadata';
 import NewsArticleStructuredData from '@/components/seo/NewsArticleStructuredData';
@@ -648,6 +651,7 @@ async function LeftSidebarFeaturedBook() {
 
 async function RightSidebarFeaturedSong() {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const featuredSongs = await sanityFetchDefault<any[]>({
       query: queryFeaturedSongs,
       tags: ['song'],
