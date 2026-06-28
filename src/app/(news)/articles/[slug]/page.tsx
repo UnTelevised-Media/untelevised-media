@@ -273,7 +273,7 @@ export default async function ArticlePage({ params }: Props) {
         {/* Flex container — handles sizing and spacing */}
         <div className='flex gap-8 px-4 sm:px-6 lg:px-8'>
           {/* Article container — centered with responsive max-width */}
-          <div className='mx-auto w-full py-12 md:max-w-2xl xxl:max-w-2xl wide:max-w-3xl mxl:max-w-5xl 4k:max-w-6xl'>
+          <div className='mx-auto w-full py-12 md:max-w-2xl xxl:max-w-3xl wide:max-w-4xl mxl:max-w-5xl 4k:max-w-6xl'>
           <div className='w-full bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 rounded-lg p-4 sm:p-6 lg:p-8'>
             {/* Article content column */}
             <main className='w-full'>
