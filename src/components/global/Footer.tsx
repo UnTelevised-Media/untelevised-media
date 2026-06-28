@@ -465,22 +465,25 @@ async function Footer() {
                 Buy From Journalists
               </Link>
             </div>
-          </div>
 
-          {/* Legal + Policies Column */}
-          <div className='flex flex-col space-y-3'>
-            <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Legal</h4>
-            <div className='flex flex-col space-y-1'>
-              {sortedPolicies.map((policy: PolicyQueryResult) => (
-                <ClientSideRoute
-                  route={resolveHref('policies', formatTitleForURL(policy.title)) ?? ''}
-                  key={policy._id}
-                >
-                  <span className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
-                    {policy.title}
-                  </span>
-                </ClientSideRoute>
-              ))}
+            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+              <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Legal</h4>
+              <div>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>Policies</h5>
+
+                <div className='flex flex-col space-y-1'>
+                  {sortedPolicies.map((policy: PolicyQueryResult) => (
+                    <ClientSideRoute
+                      route={resolveHref('policies', formatTitleForURL(policy.title)) ?? ''}
+                      key={policy._id}
+                    >
+                      <span className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                        {policy.title}
+                      </span>
+                    </ClientSideRoute>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
