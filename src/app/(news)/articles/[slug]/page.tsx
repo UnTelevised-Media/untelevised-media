@@ -15,7 +15,7 @@ import RecentBreakingNews from '@/components/article/RecentBreakingNews';
 import urlForImage from '@/util/url/urlForImage';
 import ClientSideRoute from '@/components/providers/ClientSideRoute';
 import formatDate from '@/util/date/formatDate';
-import getArticleDate from '@/util/date/getArticleDate';
+
 import resolveHref from '@/util/url/resolveHref';
 import { tagToSlug } from '@/util/content/tagUtils';
 import formatTitleForURL from '@/util/url/formatTitleForURL';
@@ -24,7 +24,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityFetchDefault from '@/lib/sanity/lib/fetch';
-import { queryArticleBySlug } from '@/lib/sanity/lib/queries';
+import { queryArticleBySlug, queryFeaturedBooks, queryFeaturedSongs } from '@/lib/sanity/lib/queries';
 import sanityClient from '@/lib/sanity/lib/client';
 import { buildArticleMetadata } from '@/util/metadata/metadata';
 import NewsArticleStructuredData from '@/components/seo/NewsArticleStructuredData';
@@ -43,7 +43,6 @@ import CareersCTA from '@/components/article/CareersCTA';
 import NewsletterCTA from '@/components/article/NewsletterCTA';
 import FeaturedBookCTA from '@/components/article/FeaturedBookCTA';
 import FeaturedSongCTA from '@/components/article/FeaturedSongCTA';
-import { queryFeaturedBooks, queryFeaturedSongs } from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/models/types/bookstore';
 
 type Props = {
@@ -414,6 +413,7 @@ export default async function ArticlePage({ params }: Props) {
                   {/* Image Gallery */}
                   {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   {(article as any)?.imageGallery && (
+                                      //  eslint-disable-next-line @typescript-eslint/no-explicit-any 
                     <ImageGalleryCarousel gallery={(article as any).imageGallery} />
                   )}
 
