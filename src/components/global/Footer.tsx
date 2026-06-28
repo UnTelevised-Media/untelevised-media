@@ -145,7 +145,7 @@ async function Footer() {
     <div className='border-t border-border bg-background'>
       {/* Main Footer Content */}
       <div className='px-4 py-12 sm:px-6 lg:px-8'>
-        <div className='flex gap-12'>
+        <div className='flex flex-col lg:flex-row gap-12'>
           {/* Left Sidebar - Logo & Mission - Outside Grid */}
           <div className='flex flex-col space-y-4 min-w-4xl max-w-5xl flex-shrink-0'>
             <div className='flex items-center gap-3'>
@@ -193,7 +193,7 @@ async function Footer() {
           </div>
 
           {/* Right Content - 3 Column Grid */}
-          <div className='grid gap-12 lg:grid-cols-3 flex-1'>
+          <div className='grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 flex-1'>
             {/* Platform Column */}
             <div className='flex flex-col space-y-3'>
             <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>
