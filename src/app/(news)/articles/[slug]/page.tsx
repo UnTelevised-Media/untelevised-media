@@ -485,9 +485,9 @@ export default async function ArticlePage({ params }: Props) {
                     <h2 className='mb-6 text-2xl font-bold text-slate-900 dark:text-white'>
                       Related Articles
                     </h2>
-                    <div className='grid gap-6 md:grid-cols-3 lg:grid-cols-3'>
+                    <div className='grid gap-6 grid-cols-2 md:grid-cols-3'>
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                      {article.relatedArticles?.map((related: any) => (
+                      {article.relatedArticles?.slice(0, 6).map((related: any) => (
                         <Link
                           key={related._id}
                           href={`/articles/${related.slug}`}
