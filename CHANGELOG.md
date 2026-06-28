@@ -11,15 +11,17 @@ All notable changes to this project are documented here.
 ### Sidebar Call-to-Action Components
 
 - **Support The Mission CTA** — Left sidebar component linking to `/support` with messaging about funding fearless journalism
-- **Featured Book CTA** — Dynamic book card in left sidebar fetching from Hurriya Publications featured books; displays cover image, title, author, price, "View Book" and "Buy Now" buttons
-- **Featured Song CTA** — Right sidebar component displaying featured songs with square track art, artist info, and "View Lyrics" / "Artist" buttons
-- **Newsletter Signup CTA** — Right sidebar component with name field option, stacked inputs, terms/privacy checkbox, and subscribe button; includes success/error states
+- **Featured Book CTA** — Dynamic book card in left sidebar fetching from Hurriya Publications featured books; displays cover image, title, author, price, "View Book" and "Buy Now" buttons with proper Supabase image URL fallback support
+- **Featured Song CTA** — Right sidebar component displaying featured songs with square track art, artist info, and "View Lyrics" / "Artist" buttons; fetches from featured songs query
+- **Newsletter Signup CTA** — Right sidebar component with name field option, stacked inputs, terms/privacy checkbox, and subscribe button; includes success/error states; positioned below comments thread
 - **Careers CTA** — Right sidebar component linking to `/careers` with team recruitment messaging
 
 ### Content & Engagement
 
-- **Ad placement below newsletter** — Added banner ad after newsletter signup in article footer for enhanced monetization
+- **CTA component redesign** — Unified styling across all sidebar CTAs with bordered cards, gradient backgrounds, and hover effects matching site branding
+- **Multiple ad placements** — Added banner ads: between comments and newsletter, below newsletter signup, and closing ad at bottom of each sidebar for enhanced monetization strategy
 - **Sidebar divider sections** — Visual separators between sidebar sections (border-top with padding) for improved hierarchy and visual flow
+- **Sticky sidebar ads** — Final ads in sidebars remain visible as users scroll (attempted implementation with responsive constraints)
 
 ### Footer Complete Redesign
 
@@ -53,7 +55,11 @@ All notable changes to this project are documented here.
 
 ## Fixed
 
-- **Featured book card robustness** — Made all component props optional; support both `cover` and `coverImage` field names; added null checks and error handling to prevent rendering issues
+- **sanityFetch import issue** — Restored correct named import pattern for article fetch; separated featured book fetch to use default export to prevent 404 errors across all article pages
+- **Featured book/song card images** — Implemented proper fallback pattern supporting both Sanity image assets and Supabase direct URLs (coverImageUrl field); prevents type errors and image rendering failures
+- **CTA component styling** — Ensured all sidebar CTAs match established design system with consistent borders, gradients, hover effects, and dark mode support
+- **Related articles limit** — Fixed query and rendering to display exactly 6 related articles regardless of screen size (changed from 4-item limit)
+- **Newsletter CTA positioning** — Moved below comments section for better content flow and engagement hierarchy
 
 ---
 
