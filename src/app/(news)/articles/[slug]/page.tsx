@@ -533,11 +533,6 @@ export default async function ArticlePage({ params }: Props) {
                   </section>
                 )}
 
-                {/* Newsletter Signup */}
-                <div className='mt-12'>
-                  <NewsletterSignup list='news' source='article' />
-                </div>
-
                 {/* Comments Section */}
                 {/* TypeScript doesn't recognize allowComments property */}
                 {/* eslint-disable @typescript-eslint/no-explicit-any */}
@@ -549,6 +544,11 @@ export default async function ArticlePage({ params }: Props) {
                   />
                 </div>
                 {/* eslint-enable @typescript-eslint/no-explicit-any */}
+
+                {/* Newsletter Signup */}
+                <div className='mt-12'>
+                  <NewsletterSignup list='news' source='article' />
+                </div>
               </main>
 
               {/* Mobile/Tablet: Sidebars below content */}
