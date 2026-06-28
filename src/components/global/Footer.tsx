@@ -1,5 +1,6 @@
 // src/components/global/Footer.tsx
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   BsDiscord,
   BsTwitch,
@@ -50,11 +51,9 @@ async function Footer() {
           {/* Left Sidebar - Logo & Mission */}
           <div className='flex flex-col space-y-4 lg:pr-6'>
             <div className='flex items-center gap-3'>
-              <div className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded border border-slate-300 bg-slate-100 text-lg font-black text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white'>
-                U
-              </div>
+              <Image src='/Logo.webp' alt='UnTelevised Media' width={48} height={48} className='flex-shrink-0' unoptimized />
               <div>
-                <h3 className='text-sm font-bold text-foreground'>UnTelevised Media</h3>
+                <h3 className='text-sm font-semibold text-foreground'>UnTelevised Media</h3>
                 <p className='text-xs text-muted-foreground'>Independent Journalism</p>
               </div>
             </div>
@@ -81,13 +80,36 @@ async function Footer() {
                 );
               })}
             </div>
+
+            {/* Categories as Badges */}
+            <div className='flex flex-wrap gap-2 border-t border-border pt-4'>
+              {sortedCategories.map((category: CategoryQueryResult) => {
+                const categoryColor = category.color?.hex || '#dc2626';
+                return (
+                  <ClientSideRoute
+                    route={resolveHref('category', formatTitleForURL(category.title)) ?? ''}
+                    key={category._id}
+                  >
+                    <div
+                      className='rounded border text-xs font-medium transition-all px-2 py-1'
+                      style={{
+                        borderColor: categoryColor,
+                        color: categoryColor,
+                      }}
+                    >
+                      {category.title}
+                    </div>
+                  </ClientSideRoute>
+                );
+              })}
+            </div>
           </div>
 
           {/* Platform Column */}
-          <div className='flex flex-col space-y-4'>
-            <h4 className='text-sm font-semibold text-foreground'>Platform</h4>
+          <div className='flex flex-col space-y-3'>
+            <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Platform</h4>
             <div className='flex flex-col space-y-2'>
-              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>News</h5>
+              <h5 className='text-xs font-semibold text-muted-foreground'>News</h5>
               {sortedCategories.slice(0, 3).map((category: CategoryQueryResult) => (
                 <ClientSideRoute
                   route={resolveHref('category', formatTitleForURL(category.title)) ?? ''}
@@ -103,8 +125,8 @@ async function Footer() {
               </Link>
             </div>
 
-            <div className='flex flex-col space-y-2 border-t border-border pt-4'>
-              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>Bookstore</h5>
+            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+              <h5 className='text-xs font-semibold text-muted-foreground'>Bookstore</h5>
               <Link href='/bookstore' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
                 Hurriya Publications
               </Link>
@@ -128,8 +150,8 @@ async function Footer() {
               </Link>
             </div>
 
-            <div className='flex flex-col space-y-2 border-t border-border pt-4'>
-              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>Music</h5>
+            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+              <h5 className='text-xs font-semibold text-muted-foreground'>Music</h5>
               <ClientSideRoute route='/lyrics' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
                 Music &amp; Lyrics
               </ClientSideRoute>
@@ -140,10 +162,10 @@ async function Footer() {
           </div>
 
           {/* Community Column */}
-          <div className='flex flex-col space-y-4'>
-            <h4 className='text-sm font-semibold text-foreground'>Community</h4>
+          <div className='flex flex-col space-y-3'>
+            <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Community</h4>
             <div className='flex flex-col space-y-2'>
-              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>About</h5>
+              <h5 className='text-xs font-semibold text-muted-foreground'>About</h5>
               <Link href='/about' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
                 About UnTelevised
               </Link>
@@ -155,8 +177,8 @@ async function Footer() {
               </Link>
             </div>
 
-            <div className='flex flex-col space-y-2 border-t border-border pt-4'>
-              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>Support</h5>
+            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+              <h5 className='text-xs font-semibold text-muted-foreground'>Support</h5>
               <Link href='/support' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
                 Support Our Outlet
               </Link>
@@ -165,8 +187,8 @@ async function Footer() {
               </Link>
             </div>
 
-            <div className='flex flex-col space-y-2 border-t border-border pt-4'>
-              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>Contact</h5>
+            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+              <h5 className='text-xs font-semibold text-muted-foreground'>Contact</h5>
               <Link href='mailto:newsroom@untelevised.media' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
                 Contact Newsroom
               </Link>
@@ -183,8 +205,8 @@ async function Footer() {
           </div>
 
           {/* Legal Column */}
-          <div className='flex flex-col space-y-4'>
-            <h4 className='text-sm font-semibold text-foreground'>Legal</h4>
+          <div className='flex flex-col space-y-3'>
+            <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Legal</h4>
             <div className='flex flex-col space-y-2'>
               {sortedPolicies.map((policy: PolicyQueryResult) => (
                 <ClientSideRoute
@@ -198,8 +220,8 @@ async function Footer() {
               ))}
             </div>
 
-            <div className='flex flex-col space-y-2 border-t border-border pt-4'>
-              <h5 className='text-xs font-semibold uppercase text-muted-foreground'>Media</h5>
+            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+              <h5 className='text-xs font-semibold text-muted-foreground'>Media</h5>
               <Link href='/' className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
                 Photo
               </Link>
@@ -219,9 +241,9 @@ async function Footer() {
 
       {/* Footer Bottom */}
       <div className='border-t border-border bg-slate-50/50 px-4 py-6 text-xs text-muted-foreground dark:bg-slate-950/50'>
-        <div className='flex flex-col justify-between gap-4 sm:flex-row'>
+        <div className='flex flex-col justify-between gap-4 text-xs sm:flex-row'>
           <p>© Copyright 2026 UnTelevised Media™ All Rights Reserved.</p>
-          <p className='flex items-center gap-1'>Made with <span className='text-untele'>❤️</span> by the UnTelevised team</p>
+          <p className='flex items-center gap-1'>Made with <span>✊</span> by the UnTelevised team</p>
         </div>
       </div>
     </div>
