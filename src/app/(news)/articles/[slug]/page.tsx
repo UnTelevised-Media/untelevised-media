@@ -37,6 +37,13 @@ import ImageGalleryCarousel from '@/components/post/ImageGalleryCarousel';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
 import ViewPing from '@/components/post/ViewPing';
 import TrendingSection from '@/components/homepage/TrendingSection';
+import SupportCTA from '@/components/article/SupportCTA';
+import CareersCTA from '@/components/article/CareersCTA';
+import NewsletterCTA from '@/components/article/NewsletterCTA';
+import FeaturedBookCTA from '@/components/article/FeaturedBookCTA';
+import sanityFetch from '@/lib/sanity/lib/fetch';
+import { queryFeaturedBooks } from '@/lib/sanity/lib/queries';
+import type { SanityBook } from '@/models/types/bookstore';
 
 type Props = {
   params: Promise<{
@@ -273,18 +280,8 @@ export default async function ArticlePage({ params }: Props) {
               className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
             />
             <RecentBreakingNews />
-            <Link
-              href='/support'
-              className='block rounded-lg border border-slate-200 bg-white p-4 text-center text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700'
-            >
-              Need Help? Visit Support
-            </Link>
-            <Link
-              href='/shop'
-              className='block rounded-lg border border-untele bg-untele/10 p-4 text-center text-sm font-semibold text-untele transition-colors hover:bg-untele/20 dark:bg-untele/5 dark:hover:bg-untele/10'
-            >
-              Featured Books
-            </Link>
+            <SupportCTA />
+            <LeftSidebarFeaturedBook />
           </div>
         </aside>
 
@@ -589,24 +586,30 @@ export default async function ArticlePage({ params }: Props) {
               slot={AD_CONFIG.AD_SLOTS.ARTICLE_RIGHT_SIDEBAR_BOTTOM}
               className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
             />
-            <div className='rounded-lg border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-800'>
-              <h3 className='mb-3 text-sm font-semibold text-slate-900 dark:text-white'>
-                Stay Updated
-              </h3>
-              <NewsletterSignup list='news' source='article_sidebar' variant='compact' />
-            </div>
-            <Link
-              href='/careers'
-              className='block rounded-lg border border-slate-200 bg-slate-50 p-4 text-center text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700'
-            >
-              Join Our Team
-            </Link>
+            <NewsletterCTA />
+            <CareersCTA />
           </div>
         </aside>
       </div>
       {/* end main wrapper */}
     </div>
   );
+}
+
+async function LeftSidebarFeaturedBook() {
+  try {
+    const featuredBooks = await sanityFetch<SanityBook[]>({
+      query: queryFeaturedBooks,
+      tags: ['book'],
+    });
+
+    const book = featuredBooks?.[0];
+    if (!book) {return null;}
+
+    return <FeaturedBookCTA book={book} />;
+  } catch {
+    return null;
+  }
 }
 
 // React.cache deduplicates this fetch when called from both generateMetadata and the page component
