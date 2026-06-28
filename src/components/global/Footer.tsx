@@ -144,10 +144,10 @@ async function Footer() {
   return (
     <div className='border-t border-border bg-background'>
       {/* Main Footer Content */}
-      <div className='space-y-8 px-4 py-12 sm:px-6 lg:px-8'>
-        <div className='grid gap-12 lg:grid-cols-4'>
-          {/* Left Sidebar - Logo & Mission */}
-          <div className='flex flex-col space-y-4 lg:pr-6'>
+      <div className='px-4 py-12 sm:px-6 lg:px-8'>
+        <div className='flex gap-12'>
+          {/* Left Sidebar - Logo & Mission - Outside Grid */}
+          <div className='flex flex-col space-y-4 min-w-4xl flex-shrink-0'>
             <div className='flex items-center gap-3'>
               <Image
                 src='/Logo.webp'
@@ -192,8 +192,10 @@ async function Footer() {
             <CategoryBadges categories={sortedCategories} />
           </div>
 
-          {/* Platform Column */}
-          <div className='flex flex-col space-y-3'>
+          {/* Right Content - 3 Column Grid */}
+          <div className='grid gap-12 lg:grid-cols-3 flex-1'>
+            {/* Platform Column */}
+            <div className='flex flex-col space-y-3'>
             <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>
               Platform
             </h4>
@@ -543,6 +545,7 @@ async function Footer() {
               </div>
             </div>
           </div>
+            </div>
         </div>
       </div>
 
