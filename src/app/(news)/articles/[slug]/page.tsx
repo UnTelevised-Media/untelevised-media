@@ -198,8 +198,8 @@ export default async function ArticlePage({ params }: Props) {
                   {/* Categories + Tags */}
                   {/* GROQ dereferences categories[]-> and tags, TypeScript sees limited types */}
                   {/* eslint-disable @typescript-eslint/no-explicit-any */}
-                  <div className='flex flex-col justify-end gap-4'>
-                    <div className='flex flex-wrap justify-end gap-2'>
+                  <div className='flex flex-col justify-end gap-3'>
+                    <div className='flex flex-wrap justify-end gap-2 '>
                       {(article.categories as any) &&
                         (article.categories as any).length > 0 &&
                         (article.categories as any).map(
@@ -229,7 +229,7 @@ export default async function ArticlePage({ params }: Props) {
                         ))}
                     </div>
                     {/* Location + Event Date */}
-                    <div className='flex justify-end gap-3 text-slate-300'>
+                    <div className='flex justify-end gap-3 text-slate-300 -mb-1'>
                       {article.location && (
                         <span className='flex items-center text-sm'>📍 {article.location}</span>
                       )}
