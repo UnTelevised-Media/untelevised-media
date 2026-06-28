@@ -4,18 +4,24 @@ import urlForImage from '@/util/url/urlForImage';
 
 interface FeaturedBookCTAProps {
   book: {
-    _id: string;
-    title: string;
-    slug: string;
-    author?: { name: string };
+    _id?: string;
+    title?: string;
+    slug?: string;
+    author?: { name?: string };
     price?: number;
     compareAtPrice?: number;
-    cover?: { asset: { _ref: string }; alt?: string };
+    cover?: { asset?: { _ref: string }; alt?: string };
+    coverImage?: { asset?: { _ref: string }; alt?: string };
   };
 }
 
 export default function FeaturedBookCTA({ book }: FeaturedBookCTAProps) {
-  const coverUrl = book.cover ? urlForImage(book.cover)?.width(300).height(450).url() : null;
+  if (!book?.title || !book?.slug) {
+    return null;
+  }
+
+  const coverImage = book.cover || book.coverImage;
+  const coverUrl = coverImage ? urlForImage(coverImage as any)?.width(300).height(450).url() : null;
 
   return (
     <div className='flex flex-col border border-slate-300 bg-white dark:border-slate-700 dark:bg-black'>
@@ -24,7 +30,7 @@ export default function FeaturedBookCTA({ book }: FeaturedBookCTAProps) {
         <div className='relative aspect-[3/4] w-full overflow-hidden bg-slate-200 dark:bg-slate-800'>
           <Image
             src={coverUrl}
-            alt={book.cover?.alt ?? book.title}
+            alt={coverImage?.alt ?? book.title ?? 'Book cover'}
             fill
             className='object-cover'
             sizes='(max-width: 1024px) 100vw, 22vw'

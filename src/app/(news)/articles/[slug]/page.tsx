@@ -41,7 +41,6 @@ import SupportCTA from '@/components/article/SupportCTA';
 import CareersCTA from '@/components/article/CareersCTA';
 import NewsletterCTA from '@/components/article/NewsletterCTA';
 import FeaturedBookCTA from '@/components/article/FeaturedBookCTA';
-import sanityFetch from '@/lib/sanity/lib/fetch';
 import { queryFeaturedBooks } from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/models/types/bookstore';
 
@@ -274,13 +273,17 @@ export default async function ArticlePage({ params }: Props) {
       <div className='mx-auto mt-6 flex w-full flex-auto justify-center'>
         {/* LEFT SIDEBAR — outside flex container */}
         <aside className='hidden w-72 shrink-0 xl:sticky xl:top-[120px] xl:block'>
-          <div className='space-y-6'>
+          <div className='space-y-8'>
             <SidebarAd
               slot={AD_CONFIG.AD_SLOTS.ARTICLE_LEFT_SIDEBAR}
               className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
             />
-            <RecentBreakingNews />
-            <SupportCTA />
+            <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
+              <RecentBreakingNews />
+            </div>
+            <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
+              <SupportCTA />
+            </div>
             <LeftSidebarFeaturedBook />
           </div>
         </aside>
@@ -580,14 +583,18 @@ export default async function ArticlePage({ params }: Props) {
 
         {/* RIGHT SIDEBAR — outside flex container */}
         <aside className='hidden w-72 shrink-0 xl:sticky xl:top-[120px] xl:block'>
-          <div className='space-y-6'>
+          <div className='space-y-8'>
             <TrendingSection />
             <SidebarAd
               slot={AD_CONFIG.AD_SLOTS.ARTICLE_RIGHT_SIDEBAR_BOTTOM}
               className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
             />
-            <NewsletterCTA />
-            <CareersCTA />
+            <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
+              <NewsletterCTA />
+            </div>
+            <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
+              <CareersCTA />
+            </div>
           </div>
         </aside>
       </div>
