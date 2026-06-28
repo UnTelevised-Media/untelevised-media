@@ -585,10 +585,12 @@ export default async function ArticlePage({ params }: Props) {
         <aside className='hidden w-72 shrink-0 xl:sticky xl:top-[120px] xl:block'>
           <div className='space-y-8'>
             <TrendingSection />
-            <SidebarAd
-              slot={AD_CONFIG.AD_SLOTS.ARTICLE_RIGHT_SIDEBAR_BOTTOM}
-              className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
-            />
+            <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
+              <SidebarAd
+                slot={AD_CONFIG.AD_SLOTS.ARTICLE_RIGHT_SIDEBAR_BOTTOM}
+                className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+              />
+            </div>
             <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
               <NewsletterCTA />
             </div>
