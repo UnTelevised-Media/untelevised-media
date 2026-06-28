@@ -358,6 +358,7 @@ async function Footer() {
             </div>
 
             <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+              <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Newsroom</h4>
               <h5 className='text-xs font-bold text-muted-foreground underline'>Newsroom</h5>
               <Link
                 href='mailto:newsroom@untelevised.media'
@@ -424,11 +425,11 @@ async function Footer() {
             </div>
           </div>
 
-          {/* Media Column */}
+          {/* Media + Syndication Column */}
           <div className='flex flex-col space-y-3'>
             <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Media</h4>
             <div className='flex flex-col space-y-2'>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>Media</h5>
+              <h5 className='text-xs font-bold text-muted-foreground underline'>Media Types</h5>
               <Link
                 href='/'
                 className='text-xs text-muted-foreground transition-colors hover:text-foreground'
@@ -466,7 +467,7 @@ async function Footer() {
             </div>
           </div>
 
-          {/* Legal Column */}
+          {/* Legal + Policies Column */}
           <div className='flex flex-col space-y-3'>
             <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Legal</h4>
             <div className='flex flex-col space-y-1'>
