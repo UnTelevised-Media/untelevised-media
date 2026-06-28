@@ -287,6 +287,12 @@ export default async function ArticlePage({ params }: Props) {
               <SupportCTA />
             </div>
             <LeftSidebarFeaturedBook />
+            <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
+              <SidebarAd
+                slot={AD_CONFIG.AD_SLOTS.ARTICLE_LEFT_SIDEBAR}
+                className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+              />
+            </div>
           </div>
         </aside>
 
@@ -609,6 +615,12 @@ export default async function ArticlePage({ params }: Props) {
             </div>
             <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
               <RightSidebarFeaturedSong />
+            </div>
+            <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
+              <SidebarAd
+                slot={AD_CONFIG.AD_SLOTS.ARTICLE_RIGHT_SIDEBAR_BOTTOM}
+                className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+              />
             </div>
           </div>
         </aside>
