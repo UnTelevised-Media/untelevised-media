@@ -10,6 +10,7 @@ interface BreakingArticle {
   slug: { current: string };
   publishedAt?: string;
   _createdAt: string;
+  location?: string;
 }
 
 const query = groq`
@@ -21,6 +22,7 @@ const query = groq`
     slug,
     publishedAt,
     _createdAt,
+    location,
   }
 `;
 
@@ -55,12 +57,14 @@ export default async function RecentBreakingNews() {
                 <p className='text-sm font-semibold uppercase leading-snug tracking-wide transition-colors group-hover:text-untele'>
                   {article.title}
                 </p>
-                <time
-                  dateTime={article.publishedAt ?? article._createdAt}
-                  className='block text-xs uppercase tracking-widest text-muted-foreground'
-                >
-                  {formatDate(article.publishedAt ?? article._createdAt)}
-                </time>
+                <div className='flex flex-col gap-1 text-xs uppercase tracking-widest text-muted-foreground'>
+                  <time dateTime={article.publishedAt ?? article._createdAt}>
+                    {formatDate(article.publishedAt ?? article._createdAt)}
+                  </time>
+                  {article.location && (
+                    <span>📍 {article.location}</span>
+                  )}
+                </div>
               </div>
             </Link>
           </li>
