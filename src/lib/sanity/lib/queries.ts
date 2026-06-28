@@ -463,7 +463,7 @@ export const queryArticleBySlug = groq`
           }
         }
       },
-      relatedArticles[0..3]-> {
+      relatedArticles[0..5]-> {
         _id,
         title,
         "slug": slug.current,
