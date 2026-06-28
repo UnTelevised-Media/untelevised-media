@@ -569,6 +569,14 @@ export default async function ArticlePage({ params }: Props) {
                 <div className='mt-12'>
                   <NewsletterSignup list='news' source='article' />
                 </div>
+
+                {/* Ad below newsletter */}
+                <div className='mb-8 mt-12'>
+                  <BannerAd
+                    slot={AD_CONFIG.AD_SLOTS.ARTICLE_BANNER_BOTTOM}
+                    className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                  />
+                </div>
               </main>
 
               {/* Mobile/Tablet: Sidebars below content */}
