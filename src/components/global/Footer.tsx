@@ -13,6 +13,7 @@ import { GrInstagram } from 'react-icons/gr';
 import { MdLiveTv } from 'react-icons/md';
 import { RiKickLine } from 'react-icons/ri';
 import ClientSideRoute from '../providers/ClientSideRoute';
+import CategoryBadges from './CategoryBadges';
 import formatTitleForURL from '@/util/url/formatTitleForURL';
 import resolveHref from '@/util/url/resolveHref';
 import { getNewsCategories, getPoliciesList, type CategoryQueryResult, type PolicyQueryResult } from '@/server/queries/content';
@@ -82,33 +83,7 @@ async function Footer() {
             </div>
 
             {/* Categories as Badges */}
-            <div className='flex flex-wrap gap-2 border-t border-border pt-4'>
-              {sortedCategories.map((category: CategoryQueryResult) => {
-                const categoryColor = category.color?.hex || '#dc2626';
-                return (
-                  <ClientSideRoute
-                    route={resolveHref('category', formatTitleForURL(category.title)) ?? ''}
-                    key={category._id}
-                  >
-                    <div
-                      className='rounded border text-xs font-medium transition-all px-2 py-1 hover:text-white'
-                      style={{
-                        borderColor: categoryColor,
-                        color: categoryColor,
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLDivElement).style.backgroundColor = categoryColor;
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLDivElement).style.backgroundColor = '';
-                      }}
-                    >
-                      {category.title}
-                    </div>
-                  </ClientSideRoute>
-                );
-              })}
-            </div>
+            <CategoryBadges categories={sortedCategories} />
           </div>
 
           {/* Platform Column */}
