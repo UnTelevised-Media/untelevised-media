@@ -180,7 +180,7 @@ async function Footer() {
           {/* Legal Column */}
           <div className='flex flex-col space-y-3'>
             <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Legal</h4>
-            <div className='flex flex-col space-y-2'>
+            <div className='flex flex-col space-y-1'>
               {sortedPolicies.map((policy: PolicyQueryResult) => (
                 <ClientSideRoute
                   route={resolveHref('policies', formatTitleForURL(policy.title)) ?? ''}
