@@ -242,20 +242,27 @@ async function Footer() {
               >
                 Radio
               </Link>
-              <div className='flex gap-3 pt-2'>
+              <div className='flex gap-3 '>
                 <Link
                   href='/sitemap.xml'
                   className='flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground'
                 >
                   <LuMap className='h-3.5 w-3.5' />
+                  <p className='font-thin'>
+
                   Sitemap
+                  </p>
                 </Link>
                 <Link
                   href='/feed.xml'
                   className='flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground'
                 >
                   <LuRss className='h-3.5 w-3.5' />
+                                    <p className='font-thin'>
+
                   RSS
+                                    </p>
+
                 </Link>
               </div>
             </div>
@@ -480,6 +487,12 @@ async function Footer() {
                 className='text-xs text-muted-foreground transition-colors hover:text-foreground'
               >
                 Buy From Journalists
+              </Link>
+              <Link
+                href='/syndication/submit-media'
+                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+              >
+                Send Us Media
               </Link>
             </div>
 
