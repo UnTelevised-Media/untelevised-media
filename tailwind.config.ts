@@ -58,7 +58,9 @@ const config: Config = {
         hlg: '1490px',
         lxl: '1630px',
         xxl: '1750px',
+        wide: '1921px',
         mxl: '2055px',
+        '4k': '3840px',
       },
       lineClamp: {
         '8': '8',
