@@ -4,7 +4,7 @@ All notable changes to this project are documented here.
 
 ---
 
-# [3.0.3] — 2026-06-27 — Article Page UI/UX Enhancements & Engagement CTAs
+# [3.0.3] — 2026-06-27 — Article Page UI/UX Enhancements & Engagement CTAs & Complete Footer Redesign
 
 ## New
 
@@ -12,6 +12,7 @@ All notable changes to this project are documented here.
 
 - **Support The Mission CTA** — Left sidebar component linking to `/support` with messaging about funding fearless journalism
 - **Featured Book CTA** — Dynamic book card in left sidebar fetching from Hurriya Publications featured books; displays cover image, title, author, price, "View Book" and "Buy Now" buttons
+- **Featured Song CTA** — Right sidebar component displaying featured songs with square track art, artist info, and "View Lyrics" / "Artist" buttons
 - **Newsletter Signup CTA** — Right sidebar component with name field option, stacked inputs, terms/privacy checkbox, and subscribe button; includes success/error states
 - **Careers CTA** — Right sidebar component linking to `/careers` with team recruitment messaging
 
@@ -19,6 +20,18 @@ All notable changes to this project are documented here.
 
 - **Ad placement below newsletter** — Added banner ad after newsletter signup in article footer for enhanced monetization
 - **Sidebar divider sections** — Visual separators between sidebar sections (border-top with padding) for improved hierarchy and visual flow
+
+### Footer Complete Redesign
+
+- **Footer layout restructuring** — Changed from 4-column grid to flex layout with prominent left sidebar (min-w-4xl, max-w-5xl) and 3-column navigation grid on right
+- **Left sidebar expansion** — Now displays: logo, branding tagline, mission statement, social icons with platform-specific hover colors, and dynamic category badges with color fills from Sanity
+- **Responsive footer** — Mobile: sidebar and navigation stack vertically; Tablet: 2-column grid; Desktop: sidebar + 3-column grid layout
+- **Category badges** — Dynamic badges below social icons with category colors from Sanity schema; ghost style (border + text) with full color + faded background on hover
+- **Social icons** — Exact match to header Follow dropdown with platform-specific hover effects (YouTube red, Twitter blue, Twitch purple, etc.)
+- **Navigation organization** — Platform column (News, Bookstore, Music); Community column (About, Support, Newsroom); Media column (Media Types, Syndication, Legal); Sitemap & RSS links in News section
+- **Syndication section** — New subsection with professional links: Content Licensing, Independent Creators Marketplace, Send Us Media, Licensing & Rights
+- **Legal/Compliance section** — Comprehensive legal offerings: Compliance (DMCA, Copyright, Abuse, Defamation), Policies (all dynamic from Sanity)
+- **Footer branding** — Logo with company name, mission statement, raised fist emoji (✊) in footer bottom, copyright & attribution
 
 ## Updated
 
