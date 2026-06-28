@@ -4,6 +4,46 @@ All notable changes to this project are documented here.
 
 ---
 
+# [3.0.3] — 2026-06-27 — Article Page UI/UX Enhancements & Engagement CTAs
+
+## New
+
+### Sidebar Call-to-Action Components
+
+- **Support The Mission CTA** — Left sidebar component linking to `/support` with messaging about funding fearless journalism
+- **Featured Book CTA** — Dynamic book card in left sidebar fetching from Hurriya Publications featured books; displays cover image, title, author, price, "View Book" and "Buy Now" buttons
+- **Newsletter Signup CTA** — Right sidebar component with name field option, stacked inputs, terms/privacy checkbox, and subscribe button; includes success/error states
+- **Careers CTA** — Right sidebar component linking to `/careers` with team recruitment messaging
+
+### Content & Engagement
+
+- **Ad placement below newsletter** — Added banner ad after newsletter signup in article footer for enhanced monetization
+- **Sidebar divider sections** — Visual separators between sidebar sections (border-top with padding) for improved hierarchy and visual flow
+
+## Updated
+
+### Article Layout & Flow
+
+- **Related articles grid expansion** — Increased grid from 4 to 6 displayed articles (2 rows × 3 columns on desktop, 3 rows × 2 columns on tablet)
+- **Section reordering** — Moved comments section before newsletter signup for better content flow
+- **Metadata display** — Changed article header footer to bottom-aligned (author/reviewer block sits level with location/date/read time)
+- **Article metadata formatting** — Reorganized header metadata: Line 1 shows location + event date; Line 2 shows "Published: [date] · [read time]"
+- **Most Read list redesign** — Removed author from trending articles; display date and location stacked below title; removed title truncation for full-width display; reduced font weight from black to semibold
+- **Breaking News section styling** — Applied same redesign as Most Read list; added location field from Sanity query
+
+### Sidebar Spacing & Visual Hierarchy
+
+- **Increased sidebar gaps** — Changed `space-y-6` to `space-y-8` for better breathing room
+- **Divider borders** — Added `border-top` with `pt-8` padding between left sidebar sections (Ad → Breaking News → Support → Featured Book)
+- **Right sidebar dividers** — Added separators between Trending → Ad → Newsletter → Careers
+- **Section visual separation** — Border lines create clear delineation between content blocks
+
+## Fixed
+
+- **Featured book card robustness** — Made all component props optional; support both `cover` and `coverImage` field names; added null checks and error handling to prevent rendering issues
+
+---
+
 # [3.0.2] — 2026-06-27 — Article Page Layout & Responsive Design Improvements
 
 ## Updated
