@@ -147,7 +147,7 @@ async function Footer() {
       <div className='px-4 py-12 sm:px-6 lg:px-8'>
         <div className='flex gap-12'>
           {/* Left Sidebar - Logo & Mission - Outside Grid */}
-          <div className='flex flex-col space-y-4 min-w-4xl flex-shrink-0'>
+          <div className='flex flex-col space-y-4 min-w-4xl max-w-5xl flex-shrink-0'>
             <div className='flex items-center gap-3'>
               <Image
                 src='/Logo.webp'
