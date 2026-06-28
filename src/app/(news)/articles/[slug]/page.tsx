@@ -141,7 +141,7 @@ export default async function ArticlePage({ params }: Props) {
 
         {/* Article Header Content */}
         <div className='absolute inset-0 flex items-end'>
-          <div className='mx-auto w-full max-w-4xl px-4 pb-12 sm:px-6 lg:px-8'>
+          <div className='mx-auto w-full px-4 pb-12 sm:px-6 lg:px-8 md:max-w-2xl lg:max-w-4xl xl:max-w-5xl dxl:max-w-5xl hlg:max-w-5xl lxl:max-w-5xl xxl:max-w-5xl wide:max-w-6xl mxl:max-w-6xl 4k:max-w-7xl'>
             <div className='space-y-6'>
               {/* Title */}
               <h1
@@ -257,22 +257,26 @@ export default async function ArticlePage({ params }: Props) {
       {/* View ping — fires once per session, renders nothing */}
       {article.slug?.current && <ViewPing slug={article.slug.current} />}
 
-      {/* Main Content + Sidebars */}
-      <div className='mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-8'>
-        <div className='flex gap-8 lg:items-start'>
-          {/* LEFT SIDEBAR — desktop only */}
-          <aside className='hidden w-72 shrink-0 self-start lg:sticky lg:top-[120px] lg:block'>
-            <div className='space-y-6'>
-              <SidebarAd
-                slot={AD_CONFIG.AD_SLOTS.ARTICLE_LEFT_SIDEBAR}
-                className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
-              />
-              <RecentBreakingNews />
-            </div>
-          </aside>
+      {/* Main wrapper — centers everything */}
+      <div className='mx-auto w-full flex flex-auto justify-center mt-6'>
+        {/* LEFT SIDEBAR — outside flex container */}
+        <aside className='hidden w-72 shrink-0 xl:block xl:sticky xl:top-[120px]'>
+          <div className='space-y-6'>
+            <SidebarAd
+              slot={AD_CONFIG.AD_SLOTS.ARTICLE_LEFT_SIDEBAR}
+              className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+            />
+            <RecentBreakingNews />
+          </div>
+        </aside>
 
-          {/* Article content column */}
-          <main className='min-w-0 max-w-4xl flex-1'>
+        {/* Flex container — handles sizing and spacing */}
+        <div className='flex gap-8 px-4 sm:px-6 lg:px-8'>
+          {/* Article container — centered with responsive max-width */}
+          <div className='mx-auto w-full py-12 md:max-w-2xl xxl:max-w-2xl wide:max-w-3xl mxl:max-w-5xl 4k:max-w-6xl'>
+          <div className='w-full bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 rounded-lg p-4 sm:p-6 lg:p-8'>
+            {/* Article content column */}
+            <main className='w-full'>
             {/* Breadcrumb + Bookmark */}
             <div className='mb-6 flex items-start justify-between gap-4'>
               <nav
@@ -529,27 +533,30 @@ export default async function ArticlePage({ params }: Props) {
               />
             </div>
             {/* eslint-enable @typescript-eslint/no-explicit-any */}
-          </main>
+            </main>
 
-          {/* RIGHT SIDEBAR — desktop only */}
-          <aside className='hidden w-72 shrink-0 self-start lg:sticky lg:top-[120px] lg:block'>
-            <div className='space-y-6'>
+            {/* Mobile/Tablet: Sidebars below content */}
+            <div className='mt-10 space-y-6 xl:hidden'>
+              <RecentBreakingNews />
               <TrendingSection />
-              <SidebarAd
-                slot={AD_CONFIG.AD_SLOTS.ARTICLE_RIGHT_SIDEBAR_BOTTOM}
-                className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
-              />
             </div>
-          </aside>
+          </div>
+          </div>
         </div>
-        {/* end flex */}
+        {/* end flex container */}
 
-        {/* Mobile: Most Read + Breaking below content */}
-        <div className='mt-10 lg:hidden'>
-          <TrendingSection />
-        </div>
+        {/* RIGHT SIDEBAR — outside flex container */}
+        <aside className='hidden w-72 shrink-0 xl:block xl:sticky xl:top-[120px]'>
+          <div className='space-y-6'>
+            <TrendingSection />
+            <SidebarAd
+              slot={AD_CONFIG.AD_SLOTS.ARTICLE_RIGHT_SIDEBAR_BOTTOM}
+              className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+            />
+          </div>
+        </aside>
       </div>
-      {/* end outer container */}
+      {/* end main wrapper */}
     </div>
   );
 }
