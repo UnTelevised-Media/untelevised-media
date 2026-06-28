@@ -30,9 +30,9 @@ export default function FeaturedBookCTA({ book }: FeaturedBookCTAProps) {
     : (book.coverImageUrl ?? null);
 
   return (
-    <div className='flex flex-col border border-slate-300 bg-white dark:border-slate-700 dark:bg-black'>
+    <div className='flex flex-col border border-slate-300 bg-gradient-to-br from-slate-50 to-white p-4 dark:border-slate-700 dark:from-slate-950 dark:to-black'>
       {/* Book Cover */}
-      <div className='relative aspect-[3/4] w-full overflow-hidden bg-slate-200 dark:bg-slate-800'>
+      <div className='relative aspect-[3/4] w-full overflow-hidden border border-slate-300 bg-slate-200 dark:border-slate-700 dark:bg-slate-800'>
         {cover ? (
           <Image
             src={cover}
@@ -51,7 +51,7 @@ export default function FeaturedBookCTA({ book }: FeaturedBookCTAProps) {
       </div>
 
       {/* Book Info */}
-      <div className='flex flex-1 flex-col p-4'>
+      <div className='flex flex-1 flex-col'>
         <h3 className='mb-1 line-clamp-2 text-sm font-black uppercase leading-tight tracking-wide text-slate-900 dark:text-white'>
           {book.title}
         </h3>
