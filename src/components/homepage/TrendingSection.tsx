@@ -217,22 +217,21 @@ export default async function TrendingSection({ variant }: Props = {}) {
           <li key={article._id} className='group'>
             <Link
               href={`/articles/${article.slug.current}`}
-              className='flex items-start gap-3 p-3 transition-colors hover:bg-muted/50'
+              className='flex gap-3 p-4 transition-colors hover:bg-muted/50'
             >
-              <span className='w-7 shrink-0 text-2xl font-black tabular-nums leading-none text-muted-foreground/30'>
+              <span className='shrink-0 text-xl font-black tabular-nums leading-tight text-muted-foreground/30'>
                 {index + 1}
               </span>
-              <div className='min-w-0 flex-1 space-y-0.5'>
-                <p className='line-clamp-3 text-sm font-black uppercase leading-tight tracking-wide transition-colors group-hover:text-untele'>
+              <div className='w-full space-y-2'>
+                <p className='text-sm font-black uppercase leading-snug tracking-wide transition-colors group-hover:text-untele'>
                   {article.title}
                 </p>
-                <div className='flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground'>
-                  {article.author?.name && <span>{article.author.name}</span>}
+                <div className='flex flex-col gap-1 text-xs uppercase tracking-widest text-muted-foreground'>
                   {article.publishedAt && (
-                    <>
-                      {article.author?.name && <span aria-hidden='true'>·</span>}
-                      <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
-                    </>
+                    <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
+                  )}
+                  {article.location && (
+                    <span>📍 {article.location}</span>
                   )}
                 </div>
               </div>
