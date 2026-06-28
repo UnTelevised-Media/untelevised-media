@@ -154,7 +154,7 @@ export default async function ArticlePage({ params }: Props) {
               )}
 
               {/* Meta Information */}
-              <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
+              <div className='flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between'>
                 {/* Author + Reviewed By */}
                 <div className='flex flex-wrap gap-3'>
                   {/* GROQ query dereferences author-> and reviewedBy->, TypeScript sees only references */}
