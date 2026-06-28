@@ -8,6 +8,9 @@ export interface CategoryQueryResult {
   _id: string;
   title: string;
   order?: number;
+  color?: {
+    hex?: string;
+  };
 }
 
 export interface PolicyQueryResult {
