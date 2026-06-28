@@ -42,7 +42,8 @@ import SupportCTA from '@/components/article/SupportCTA';
 import CareersCTA from '@/components/article/CareersCTA';
 import NewsletterCTA from '@/components/article/NewsletterCTA';
 import FeaturedBookCTA from '@/components/article/FeaturedBookCTA';
-import { queryFeaturedBooks } from '@/lib/sanity/lib/queries';
+import FeaturedSongCTA from '@/components/article/FeaturedSongCTA';
+import { queryFeaturedBooks, queryFeaturedSongs } from '@/lib/sanity/lib/queries';
 import type { SanityBook } from '@/models/types/bookstore';
 
 type Props = {
@@ -606,6 +607,9 @@ export default async function ArticlePage({ params }: Props) {
             <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
               <CareersCTA />
             </div>
+            <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
+              <RightSidebarFeaturedSong />
+            </div>
           </div>
         </aside>
       </div>
@@ -625,6 +629,22 @@ async function LeftSidebarFeaturedBook() {
     if (!book) {return null;}
 
     return <FeaturedBookCTA book={book} />;
+  } catch {
+    return null;
+  }
+}
+
+async function RightSidebarFeaturedSong() {
+  try {
+    const featuredSongs = await sanityFetchDefault<any[]>({
+      query: queryFeaturedSongs,
+      tags: ['song'],
+    });
+
+    const song = featuredSongs?.[0];
+    if (!song) {return null;}
+
+    return <FeaturedSongCTA song={song} />;
   } catch {
     return null;
   }
