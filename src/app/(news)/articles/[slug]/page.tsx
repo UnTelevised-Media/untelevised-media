@@ -228,11 +228,20 @@ export default async function ArticlePage({ params }: Props) {
                           </Link>
                         ))}
                     </div>
-                    <div className='flex flex-wrap justify-end gap-3 text-slate-300'>
+                    {/* Location + Event Date */}
+                    <div className='flex justify-end gap-3 text-slate-300'>
                       {article.location && (
                         <span className='flex items-center text-sm'>📍 {article.location}</span>
                       )}
-                      <time className='text-sm'>{formatDate(getArticleDate(article))}</time>
+                      {article.eventDate && (
+                        <time className='text-sm'>{formatDate(article.eventDate)}</time>
+                      )}
+                    </div>
+                    {/* Published Date + Read Time */}
+                    <div className='flex flex-wrap justify-end gap-2 text-slate-300'>
+                      <span className='text-sm'>
+                        Published: <time>{formatDate(article.publishedAt)}</time>
+                      </span>
                       <span className='text-sm' aria-label='Estimated reading time'>
                         · {getReadingTime(article.body)}
                       </span>
