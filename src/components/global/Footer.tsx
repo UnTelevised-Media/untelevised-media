@@ -468,9 +468,30 @@ async function Footer() {
 
             <div className='flex flex-col space-y-2 border-t border-border pt-3'>
               <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Legal</h4>
-              <div>
-                <h5 className='text-xs font-bold text-muted-foreground underline'>Policies</h5>
+              <div className='flex flex-col space-y-2'>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>Compliance</h5>
+                <Link
+                  href='/legal/dmca-takedown'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  DMCA Takedown Request
+                </Link>
+                <Link
+                  href='/legal/copyright-claim'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Copyright Claim
+                </Link>
+                <Link
+                  href='/legal/abuse-report'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Report Abuse
+                </Link>
+              </div>
 
+              <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>Policies</h5>
                 <div className='flex flex-col space-y-1'>
                   {sortedPolicies.map((policy: PolicyQueryResult) => (
                     <ClientSideRoute
