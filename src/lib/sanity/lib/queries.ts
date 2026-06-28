@@ -541,7 +541,8 @@ export const queryCategories = groq`
   *[_type == "category"] {
     _id,
     title,
-    order
+    order,
+    color
   }
 `;
 

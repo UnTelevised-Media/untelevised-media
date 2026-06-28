@@ -28,7 +28,7 @@ All notable changes to this project are documented here.
 - **Footer layout restructuring** — Changed from 4-column grid to flex layout with prominent left sidebar (min-w-4xl, max-w-5xl) and 3-column navigation grid on right
 - **Left sidebar expansion** — Now displays: logo, branding tagline, mission statement, social icons with platform-specific hover colors, and dynamic category badges with color fills from Sanity
 - **Responsive footer** — Mobile: sidebar and navigation stack vertically; Tablet: 2-column grid; Desktop: sidebar + 3-column grid layout
-- **Category badges** — Dynamic badges below social icons with category colors from Sanity schema; ghost style (border + text) with full color + faded background on hover
+- **Category badges** — Dynamic badges below social icons with category colors from Sanity schema; default UnTelevised brand color with ghost style (border + text); on hover: switches to category-specific color with faded 40% opacity background for visual differentiation
 - **Social icons** — Exact match to header Follow dropdown with platform-specific hover effects (YouTube red, Twitter blue, Twitch purple, etc.)
 - **Navigation organization** — Platform column (News, Bookstore, Music); Community column (About, Support, Newsroom); Media column (Media Types, Syndication, Legal); Sitemap & RSS links in News section
 - **Syndication section** — New subsection with professional links: Content Licensing, Independent Creators Marketplace, Send Us Media, Licensing & Rights
