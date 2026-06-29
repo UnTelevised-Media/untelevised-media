@@ -124,7 +124,7 @@ export default async function ArticlePage({ params }: Props) {
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}
-        <div className='relative h-[60vh] min-h-[400px]'>
+        <div className='relative flex flex-col min-h-[60vh]'>
           <Image
             src={urlForImage(article.mainImage)?.url() ?? ''}
             alt={article.mainImage?.alt ?? 'Article image'}
@@ -141,17 +141,16 @@ export default async function ArticlePage({ params }: Props) {
               : {})}
           />
           <div className='absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-slate-900/20' />
-        </div>
 
-        {/* Article Header Content */}
-        <div className='absolute inset-0 flex items-end'>
-          <div className='mx-auto w-full px-4 pb-12 sm:px-6 md:max-w-2xl lg:max-w-4xl lg:px-8 xl:max-w-5xl dxl:max-w-5xl hlg:max-w-5xl lxl:max-w-5xl xxl:max-w-5xl wide:max-w-6xl mxl:max-w-6xl 4k:max-w-7xl'>
+          {/* Article Header Content */}
+          <div className='relative flex items-end'>
+          <div className='mx-auto w-full px-4 pb-12 pt-18 sm:px-6 md:max-w-2xl lg:max-w-4xl lg:px-8 xl:max-w-5xl dxl:max-w-5xl hlg:max-w-5xl lxl:max-w-5xl xxl:max-w-5xl wide:max-w-6xl mxl:max-w-6xl 4k:max-w-7xl'>
             <div className='space-y-6'>
               {/* Title */}
               <h1
                 // GROQ query dereferences corrections->, TypeScript sees it as reference only
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                className={`text-4xl font-bold text-white sm:text-5xl lg:text-6xl${(article?.corrections as any)?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
+                className={`text-4xl font-semibold text-white sm:text-5xl lg:text-6xl${(article?.corrections as any)?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
               >
                 {article.title}
               </h1>
@@ -267,6 +266,7 @@ export default async function ArticlePage({ params }: Props) {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </section>
 
