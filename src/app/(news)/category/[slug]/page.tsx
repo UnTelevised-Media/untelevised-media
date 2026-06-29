@@ -15,7 +15,7 @@ import urlForImage from '@/util/url/urlForImage';
 import formatDate from '@/util/date/formatDate';
 import getArticleDate from '@/util/date/getArticleDate';
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup';
-import { InFeedAd, RectangleAd, AD_CONFIG } from '@/components/googleAdSense';
+import { InFeedAd, SidebarAd, AD_CONFIG } from '@/components/googleAdSense';
 import { getTrendingArticles } from '@/lib/supabase/viewEvents';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -302,13 +302,11 @@ export default async function CategoryPage({ params }: Props) {
               </div>
             )}
 
-            {/* Sidebar ad — same setup as article page rectangle */}
-            <div className='flex justify-center'>
-              <RectangleAd
-                slot={AD_CONFIG.AD_SLOTS.ARTICLE_RECTANGLE}
-                className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
-              />
-            </div>
+            {/* Sidebar ad */}
+            <SidebarAd
+              slot={AD_CONFIG.AD_SLOTS.ARTICLE_LEFT_SIDEBAR}
+              className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+            />
 
             {/* Newsletter */}
             <div className='border border-slate-200 p-6 dark:border-slate-800'>

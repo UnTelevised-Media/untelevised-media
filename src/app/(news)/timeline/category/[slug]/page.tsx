@@ -10,7 +10,7 @@ import TimelineEventCard from '@/components/timeline/TimelineEventCard';
 import TimelineCard from '@/components/timeline/TimelineCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { BannerAd, RectangleAd } from '@/components/googleAdSense';
+import { BannerAd, SidebarAd, AD_CONFIG } from '@/components/googleAdSense';
 
 import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import sanityClient from '@/lib/sanity/lib/client';
@@ -104,7 +104,7 @@ export default async function TimelineCategoryPage({ params }: Props) {
         {/* Banner Ad */}
         <div className='mb-8'>
           <BannerAd
-            slot='timeline-category-header'
+            slot={AD_CONFIG.AD_SLOTS.ARTICLE_BANNER_BOTTOM}
             className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
           />
         </div>
@@ -192,9 +192,9 @@ export default async function TimelineCategoryPage({ params }: Props) {
 
           {/* Sidebar */}
           <div className='space-y-6'>
-            {/* Rectangle Ad */}
-            <RectangleAd
-              slot='timeline-category-sidebar'
+            {/* Sidebar Ad */}
+            <SidebarAd
+              slot={AD_CONFIG.AD_SLOTS.ARTICLE_LEFT_SIDEBAR}
               className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
             />
 

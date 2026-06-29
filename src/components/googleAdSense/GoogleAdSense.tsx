@@ -29,7 +29,7 @@ export default function GoogleAdSense({ publisherId, onLoad, onError }: GoogleAd
     <Script
       id='google-adsense'
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`}
-      strategy='afterInteractive'
+      strategy='lazyOnload'
       crossOrigin='anonymous'
       onLoad={() => {
         window.adsenseLoaded = true;

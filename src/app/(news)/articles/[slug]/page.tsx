@@ -124,7 +124,7 @@ export default async function ArticlePage({ params }: Props) {
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}
-        <div className='relative flex flex-col min-h-[60vh]'>
+        <div className='relative flex min-h-[60vh] flex-col'>
           <Image
             src={urlForImage(article.mainImage)?.url() ?? ''}
             alt={article.mainImage?.alt ?? 'Article image'}
@@ -144,129 +144,129 @@ export default async function ArticlePage({ params }: Props) {
 
           {/* Article Header Content */}
           <div className='relative flex items-end'>
-          <div className='mx-auto w-full px-4 pb-12 pt-18 sm:px-6 md:max-w-2xl lg:max-w-4xl lg:px-8 xl:max-w-5xl dxl:max-w-5xl hlg:max-w-5xl lxl:max-w-5xl xxl:max-w-5xl wide:max-w-6xl mxl:max-w-6xl 4k:max-w-7xl'>
-            <div className='space-y-6'>
-              {/* Title */}
-              <h1
-                // GROQ query dereferences corrections->, TypeScript sees it as reference only
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                className={`text-4xl font-semibold text-white sm:text-5xl lg:text-6xl${(article?.corrections as any)?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
-              >
-                {article.title}
-              </h1>
+            <div className='mx-auto w-full px-4 pb-12 pt-18 sm:px-6 md:max-w-2xl lg:max-w-4xl lg:px-8 xl:max-w-5xl dxl:max-w-5xl hlg:max-w-5xl lxl:max-w-5xl xxl:max-w-5xl wide:max-w-6xl mxl:max-w-6xl 4k:max-w-7xl'>
+              <div className='space-y-6'>
+                {/* Title */}
+                <h1
+                  // GROQ query dereferences corrections->, TypeScript sees it as reference only
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  className={`text-4xl font-semibold text-white sm:text-5xl lg:text-6xl${(article?.corrections as any)?.type === 'retraction' ? 'line-through opacity-60' : ''}`}
+                >
+                  {article.title}
+                </h1>
 
-              {/* Description */}
-              {safeText(article.description) && (
-                <p className='max-w-3xl text-lg text-slate-200 sm:text-xl'>
-                  {safeText(article.description)}
-                </p>
-              )}
+                {/* Description */}
+                {safeText(article.description) && (
+                  <p className='max-w-3xl text-lg text-slate-200 sm:text-xl'>
+                    {safeText(article.description)}
+                  </p>
+                )}
 
-              {/* Meta Information */}
-              <div className='flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between'>
-                {/* Author + Reviewed By */}
-                <div className='flex flex-wrap gap-3'>
-                  {/* GROQ query dereferences author-> and reviewedBy->, TypeScript sees only references */}
-                  {/* eslint-disable @typescript-eslint/no-explicit-any */}
-                  {(article.author as any)?.slug?.current && (
-                    <ClientSideRoute
-                      route={resolveHref('author', (article.author as any)?.slug?.current) ?? ''}
-                    >
-                      <div className='flex items-end space-x-3'>
-                        <Image
-                          src={urlForImage((article.author as any)?.image)?.url() ?? ''}
-                          alt={(article.author as any)?.image?.alt ?? 'Author image'}
-                          width={48}
-                          height={48}
-                          className='object-fit h-16 w-16 rounded-full border-2 border-white/20'
-                        />
-                        <div>
-                          {(article.author as any)?.name ?? (
-                            <p className='font-semibold text-white'>Unknown Author</p>
-                          )}
-                        </div>
-                      </div>
-                    </ClientSideRoute>
-                  )}
-                  {(article.reviewedBy as any)?.slug?.current && (
-                    <span className='text-sm text-slate-400'>
-                      Reviewed by{' '}
-                      <Link
-                        href={`/author/${(article.reviewedBy as any)?.slug?.current}`}
-                        className='font-medium text-slate-300 underline hover:text-white'
+                {/* Meta Information */}
+                <div className='flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between'>
+                  {/* Author + Reviewed By */}
+                  <div className='flex flex-wrap gap-3'>
+                    {/* GROQ query dereferences author-> and reviewedBy->, TypeScript sees only references */}
+                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                    {(article.author as any)?.slug?.current && (
+                      <ClientSideRoute
+                        route={resolveHref('author', (article.author as any)?.slug?.current) ?? ''}
                       >
-                        {(article.reviewedBy as any)?.name ?? 'Unknown'}
-                      </Link>
-                    </span>
-                  )}
-
-                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
-                </div>
-
-                <div className='flex flex-col items-end gap-2'>
-                  {/* Categories + Tags */}
-                  {/* GROQ dereferences categories[]-> and tags, TypeScript sees limited types */}
-                  {/* eslint-disable @typescript-eslint/no-explicit-any */}
-                  <div className='flex flex-col justify-end gap-3'>
-                    <div className='flex flex-wrap justify-end gap-2 '>
-                      {(article.categories as any) &&
-                        (article.categories as any).length > 0 &&
-                        (article.categories as any).map(
-                          (category: any) =>
-                            (category as any)?.title && (
-                              <Link
-                                key={(category as any)?._id ?? Math.random()}
-                                href={`/category/${formatTitleForURL((category as any).title)}`}
-                                className='inline-flex items-center rounded-sm border border-untele bg-untele/60 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-untele'
-                              >
-                                {(category as any).title}
-                              </Link>
-                            )
-                        )}
-                    </div>
-                    <div className='flex flex-wrap justify-end gap-2'>
-                      {(article as any)?.tags &&
-                        (article as any)?.tags?.length > 0 &&
-                        (article as any)?.tags?.map((tag: string) => (
-                          <Link
-                            key={tag}
-                            href={`/tag/${tagToSlug(tag)}`}
-                            className='inline-flex items-center rounded-sm border border-white/40 bg-white/10 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur-sm transition-colors hover:border-white/70 hover:text-white'
-                          >
-                            #{tag}
-                          </Link>
-                        ))}
-                    </div>
-                    {/* Location + Event Date */}
-                    <div className='flex justify-end gap-3 text-slate-300 -mb-1'>
-                      {article.location && (
-                        <span className='flex items-center text-sm'>📍 {article.location}</span>
-                      )}
-                      {article.eventDate && (
-                        <time className='text-sm'>{formatDate(article.eventDate)}</time>
-                      )}
-                    </div>
-                    {/* Published Date + Read Time */}
-                    <div className='flex flex-wrap justify-end gap-2 text-slate-300'>
-                      <span className='text-sm'>
-                        Published: <time>{formatDate(article.publishedAt)}</time>
+                        <div className='flex items-end space-x-3'>
+                          <Image
+                            src={urlForImage((article.author as any)?.image)?.url() ?? ''}
+                            alt={(article.author as any)?.image?.alt ?? 'Author image'}
+                            width={48}
+                            height={48}
+                            className='object-fit h-16 w-16 rounded-full border-2 border-white/20'
+                          />
+                          <div>
+                            {(article.author as any)?.name ?? (
+                              <p className='font-semibold text-white'>Unknown Author</p>
+                            )}
+                          </div>
+                        </div>
+                      </ClientSideRoute>
+                    )}
+                    {(article.reviewedBy as any)?.slug?.current && (
+                      <span className='text-sm text-slate-400'>
+                        Reviewed by{' '}
+                        <Link
+                          href={`/author/${(article.reviewedBy as any)?.slug?.current}`}
+                          className='font-medium text-slate-300 underline hover:text-white'
+                        >
+                          {(article.reviewedBy as any)?.name ?? 'Unknown'}
+                        </Link>
                       </span>
-                      <span className='text-sm' aria-label='Estimated reading time'>
-                        · {getReadingTime(article.body)}
-                      </span>
-                      {article.updatedAt && article.updatedAt !== article.publishedAt && (
-                        <span className='text-sm text-slate-400'>
-                          Updated: {formatDate(article.updatedAt)}
-                        </span>
-                      )}
-                    </div>
+                    )}
+
+                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
                   </div>
-                  {/* eslint-enable @typescript-eslint/no-explicit-any */}
+
+                  <div className='flex flex-col items-end gap-2'>
+                    {/* Categories + Tags */}
+                    {/* GROQ dereferences categories[]-> and tags, TypeScript sees limited types */}
+                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                    <div className='flex flex-col justify-end gap-3'>
+                      <div className='flex flex-wrap justify-end gap-2'>
+                        {(article.categories as any) &&
+                          (article.categories as any).length > 0 &&
+                          (article.categories as any).map(
+                            (category: any) =>
+                              (category as any)?.title && (
+                                <Link
+                                  key={(category as any)?._id ?? Math.random()}
+                                  href={`/category/${formatTitleForURL((category as any).title)}`}
+                                  className='inline-flex items-center rounded-sm border border-untele bg-untele/60 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-untele'
+                                >
+                                  {(category as any).title}
+                                </Link>
+                              )
+                          )}
+                      </div>
+                      <div className='flex flex-wrap justify-end gap-2'>
+                        {(article as any)?.tags &&
+                          (article as any)?.tags?.length > 0 &&
+                          (article as any)?.tags?.map((tag: string) => (
+                            <Link
+                              key={tag}
+                              href={`/tag/${tagToSlug(tag)}`}
+                              className='inline-flex items-center rounded-sm border border-white/40 bg-white/10 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur-sm transition-colors hover:border-white/70 hover:text-white'
+                            >
+                              #{tag}
+                            </Link>
+                          ))}
+                      </div>
+                      {/* Location + Event Date */}
+                      <div className='-mb-1 flex justify-end gap-3 text-slate-300'>
+                        {article.location && (
+                          <span className='flex items-center text-sm'>📍 {article.location}</span>
+                        )}
+                        {article.eventDate && (
+                          <time className='text-sm'>{formatDate(article.eventDate)}</time>
+                        )}
+                      </div>
+                      {/* Published Date + Read Time */}
+                      <div className='flex flex-wrap justify-end gap-2 text-slate-300'>
+                        <span className='text-sm'>
+                          Published: <time>{formatDate(article.publishedAt)}</time>
+                        </span>
+                        <span className='text-sm' aria-label='Estimated reading time'>
+                          · {getReadingTime(article.body)}
+                        </span>
+                        {article.updatedAt && article.updatedAt !== article.publishedAt && (
+                          <span className='text-sm text-slate-400'>
+                            Updated: {formatDate(article.updatedAt)}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
 
@@ -302,7 +302,7 @@ export default async function ArticlePage({ params }: Props) {
         <div className='flex gap-8 px-4 sm:px-6 lg:px-8'>
           {/* Article container — centered with responsive max-width */}
           <div className='mx-auto w-full py-12 md:max-w-2xl xxl:max-w-3xl wide:max-w-4xl mxl:max-w-5xl 4k:max-w-6xl'>
-            <div className='w-full rounded-lg bg-gradient-to-br from-slate-/50 via-slate-100/50 to-slate-/50 p-4 dark:from-slate-/50 dark:via-slate-900/50 dark:to-slate-/50 sm:p-6 lg:p-8'>
+            <div className='from-slate-/50 to-slate-/50 dark:from-slate-/50 dark:to-slate-/50 w-full rounded-lg bg-gradient-to-br via-slate-100/50 p-4 dark:via-slate-900/50 sm:p-6 lg:p-8'>
               {/* Article content column */}
               <main className='w-full'>
                 {/* Breadcrumb + Bookmark */}
@@ -416,7 +416,7 @@ export default async function ArticlePage({ params }: Props) {
                   {/* Image Gallery */}
                   {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   {(article as any)?.imageGallery && (
-                                      //  eslint-disable-next-line @typescript-eslint/no-explicit-any 
+                    //  eslint-disable-next-line @typescript-eslint/no-explicit-any
                     <ImageGalleryCarousel gallery={(article as any).imageGallery} />
                   )}
 
@@ -508,7 +508,7 @@ export default async function ArticlePage({ params }: Props) {
                     <h2 className='mb-6 text-2xl font-bold text-slate-900 dark:text-white'>
                       Related Articles
                     </h2>
-                    <div className='grid gap-6 grid-cols-2 md:grid-cols-3'>
+                    <div className='grid grid-cols-2 gap-6 md:grid-cols-3'>
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {article.relatedArticles?.slice(0, 6).map((related: any) => (
                         <Link
@@ -606,7 +606,7 @@ export default async function ArticlePage({ params }: Props) {
             <TrendingSection />
             <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
               <SidebarAd
-                slot={AD_CONFIG.AD_SLOTS.ARTICLE_RIGHT_SIDEBAR_BOTTOM}
+                slot={AD_CONFIG.AD_SLOTS.ARTICLE_LEFT_SIDEBAR}
                 className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
               />
             </div>
@@ -621,7 +621,7 @@ export default async function ArticlePage({ params }: Props) {
             </div>
             <div className='border-t border-slate-200 pt-8 dark:border-slate-700'>
               <SidebarAd
-                slot={AD_CONFIG.AD_SLOTS.ARTICLE_RIGHT_SIDEBAR_BOTTOM}
+                slot={AD_CONFIG.AD_SLOTS.ARTICLE_LEFT_SIDEBAR}
                 className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
               />
             </div>

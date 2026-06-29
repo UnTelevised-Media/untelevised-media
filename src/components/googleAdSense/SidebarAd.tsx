@@ -37,7 +37,7 @@ export default function SidebarAd({
       return;
     }
     if (!isDev && (!hasConsent || !canUseMarketing)) {
-      
+
       return;
     }
     if (pushed.current) {
@@ -71,7 +71,7 @@ export default function SidebarAd({
           if (s === 'filled') {
             setAdStatus('filled');
             mo.disconnect();
-            
+
           } else if (s === 'unfilled') {
             setAdStatus('unfilled');
             mo.disconnect();

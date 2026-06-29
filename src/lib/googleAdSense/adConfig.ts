@@ -40,8 +40,8 @@ const AD_CONFIG = {
     FACT_CHECK_BANNER: '7939310826', // after body — replace with dedicated slot in AdSense
 
     // Article page sidebar ads
-    ARTICLE_LEFT_SIDEBAR: '3380975563', // left sidebar vertical — replace with dedicated slot in AdSense
-    ARTICLE_RIGHT_SIDEBAR_BOTTOM: '8437036676', // right sidebar below Most Read — replace with dedicated slot in AdSense
+    ARTICLE_LEFT_SIDEBAR: '3380975563', // sidebar vertical placements
+    ARTICLE_RIGHT_SIDEBAR_BOTTOM: '3380975563', // right sidebar — shares left sidebar slot
   },
 
   // Performance optimization settings
