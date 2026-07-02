@@ -46,6 +46,16 @@ import newsletterSubscribe from './newsletterSubscribe';
 import secureContact from './secureContact';
 import whistleblower from './whistleblower';
 
+// Legal submission schemas
+import abuseReport from './abuseReport';
+import copyrightClaim from './copyrightClaim';
+import defamationClaim from './defamationClaim';
+import dmcaTakedown from './dmcaTakedown';
+
+// Syndication submission schemas
+import mediaSubmission from './mediaSubmission';
+import mediaListing from './mediaListing';
+
 // UI/component schemas
 import ctaButton from './buttons';
 import correctionObject from './correction';
@@ -103,6 +113,16 @@ export const schemaTypes = [
   newsletterSubscribe,
   secureContact,
   whistleblower,
+
+  // Legal submission schemas
+  abuseReport,
+  copyrightClaim,
+  defamationClaim,
+  dmcaTakedown,
+
+  // Syndication submission schemas
+  mediaSubmission,
+  mediaListing,
 
   // UI/component schemas
   ctaButton,
@@ -171,6 +191,16 @@ export {
   newsletterSubscribe,
   secureContact,
   whistleblower,
+
+  // Legal submission schemas
+  abuseReport,
+  copyrightClaim,
+  defamationClaim,
+  dmcaTakedown,
+
+  // Syndication submission schemas
+  mediaSubmission,
+  mediaListing,
 
   // UI/component schemas
   ctaButton,

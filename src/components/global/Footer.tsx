@@ -145,9 +145,9 @@ async function Footer() {
     <div className='border-t border-border bg-background'>
       {/* Main Footer Content */}
       <div className='px-4 py-12 sm:px-6 lg:px-8'>
-        <div className='flex flex-col lg:flex-row gap-12'>
+        <div className='flex flex-col gap-12 lg:flex-row'>
           {/* Left Sidebar - Logo & Mission - Outside Grid */}
-          <div className='flex flex-col space-y-4 min-w-md max-w-md xl:max-w-lg flex-shrink-0'>
+          <div className='min-w-md flex max-w-md flex-shrink-0 flex-col space-y-4 xl:max-w-lg'>
             <div className='flex items-center gap-3'>
               <Image
                 src='/Logo.webp'
@@ -193,364 +193,369 @@ async function Footer() {
           </div>
 
           {/* Right Content - 3 Column Grid */}
-          <div className='grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 flex-1'>
+          <div className='grid flex-1 grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3'>
             {/* Platform Column */}
             <div className='flex flex-col space-y-3'>
-            <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>
-              Platform
-            </h4>
-            <div className='flex flex-col space-y-2'>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>News</h5>
-
-              <Link
-                href='/'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                News Articles
-              </Link>
-              <Link
-                href='/breaking'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Breaking
-              </Link>
-              <Link
-                href='/archive'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Archive
-              </Link>
-              <Link
-                href='/fact-check'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Fact Check
-              </Link>
-              <Link
-                href='/search'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Search Articles
-              </Link>
-              <Link
-                href='https://untelevised.live/'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Live TV
-              </Link>
-              <Link
-                href='https://radio.untelevised.live/'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Radio
-              </Link>
-              <div className='flex gap-3 '>
-                <Link
-                  href='/sitemap.xml'
-                  className='flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground'
-                >
-                  <LuMap className='h-3.5 w-3.5' />
-                  <p className='font-thin'>
-
-                  Sitemap
-                  </p>
-                </Link>
-                <Link
-                  href='/feed.xml'
-                  className='flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground'
-                >
-                  <LuRss className='h-3.5 w-3.5' />
-                                    <p className='font-thin'>
-
-                  RSS
-                                    </p>
-
-                </Link>
-              </div>
-            </div>
-
-            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>Bookstore</h5>
-              <Link
-                href='/bookstore'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Hurriya Publications
-              </Link>
-              <Link
-                href='/bookstore/about'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Our Story
-              </Link>
-              <Link
-                href='/bookstore/wishlist'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Wishlist
-              </Link>
-              <Link
-                href='/bookstore/orders'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                My Orders
-              </Link>
-              <Link
-                href='/bookstore/downloads'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Download Vault
-              </Link>
-              <Link
-                href='/bookstore/returns'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Returns &amp; Refunds
-              </Link>
-              <Link
-                href='/secure-contact'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Publish With Us
-              </Link>
-            </div>
-
-            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>Music</h5>
-              <Link
-                href='/lyrics'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Music &amp; Lyrics
-              </Link>
-              <Link
-                href='/music-artists'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Featured Artists
-              </Link>
-            </div>
-          </div>
-
-          {/* Community Column */}
-          <div className='flex flex-col space-y-3'>
-            <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>
-              Community
-            </h4>
-            <div className='flex flex-col space-y-2'>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>About</h5>
-              <Link
-                href='/about'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                About UnTelevised
-              </Link>
-              <Link
-                href='/editorial-standards'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Editorial Standards
-              </Link>
-              <Link
-                href='/staff'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Meet Our Staff
-              </Link>
-            </div>
-
-            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>
-                Support UnTelevised Media
-              </h5>
-              <Link
-                href='/support'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Support Our Outlet
-              </Link>
-              <Link
-                href='/support/#member'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Become a Member
-              </Link>
-              <Link
-                href='/careers'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Careers / Join Our Team
-              </Link>
-            </div>
-
-            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
-              <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Newsroom</h4>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>Newsroom</h5>
-              <Link
-                href='mailto:newsroom@untelevised.media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Contact Newsroom
-              </Link>
-              <Link
-                href='mailto:newsroom@untelevised.media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Send a News Tip
-              </Link>
-              <Link
-                href='mailto:newsroom@untelevised.media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Request a Correction
-              </Link>
-            </div>
-
-            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>Secure Portals</h5>
-              <Link
-                href='mailto:newsroom@untelevised.media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Secure Contact
-              </Link>
-              <Link
-                href='mailto:newsroom@untelevised.media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Whistleblower Portal
-              </Link>
-            </div>
-
-            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>Contact</h5>
-              <Link
-                href='mailto:newsroom@untelevised.media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Get Help
-              </Link>
-              <Link
-                href='mailto:newsroom@untelevised.media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Report a Vulnerability
-              </Link>
-              <Link
-                href='mailto:newsroom@untelevised.media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Partnerships
-              </Link>
-              <Link
-                href='mailto:newsroom@untelevised.media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Advertise With Us
-              </Link>
-            </div>
-          </div>
-
-          {/* Media + Syndication Column */}
-          <div className='flex flex-col space-y-3'>
-            <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Media</h4>
-            <div className='flex flex-col space-y-2'>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>Media Types</h5>
-              <Link
-                href='/'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Photo
-              </Link>
-              <Link
-                href='/'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Video
-              </Link>
-            </div>
-
-            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
-              <h5 className='text-xs font-bold text-muted-foreground underline'>Syndication</h5>
-              <Link
-                href='/syndication/buy-our-media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Content Licensing
-              </Link>
-              <Link
-                href='/syndication/buy-from-journalists'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Independent Creators Marketplace
-              </Link>
-              <Link
-                href='/syndication/submit-media'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Send Us Media
-              </Link>
-              <Link
-                href='/syndication/licensing'
-                className='text-xs text-muted-foreground transition-colors hover:text-foreground'
-              >
-                Licensing &amp; Rights
-              </Link>
-            </div>
-
-            <div className='flex flex-col space-y-2 border-t border-border pt-3'>
-              <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Legal</h4>
+              <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>
+                Platform
+              </h4>
               <div className='flex flex-col space-y-2'>
-                <h5 className='text-xs font-bold text-muted-foreground underline'>Compliance</h5>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>News</h5>
+
                 <Link
-                  href='/legal/dmca-takedown'
+                  href='/'
                   className='text-xs text-muted-foreground transition-colors hover:text-foreground'
                 >
-                  DMCA Takedown Request
+                  News Articles
                 </Link>
                 <Link
-                  href='/legal/copyright-claim'
+                  href='/breaking'
                   className='text-xs text-muted-foreground transition-colors hover:text-foreground'
                 >
-                  Copyright Claim
+                  Breaking
                 </Link>
                 <Link
-                  href='/legal/defamation-claim'
+                  href='/archive'
                   className='text-xs text-muted-foreground transition-colors hover:text-foreground'
                 >
-                  Defamation or Legal Notice
+                  Archive
                 </Link>
                 <Link
-                  href='/legal/abuse-report'
+                  href='/fact-checks'
                   className='text-xs text-muted-foreground transition-colors hover:text-foreground'
                 >
-                  Report Abuse
+                  Fact Check
+                </Link>
+                <Link
+                  href='/search'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Search Articles
+                </Link>
+                <Link
+                  href='https://untelevised.live/'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Live TV
+                </Link>
+                <Link
+                  href='https://radio.untelevised.live/'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Radio
+                </Link>
+                <div className='flex gap-3'>
+                  <Link
+                    href='/sitemap.xml'
+                    className='flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground'
+                  >
+                    <LuMap className='h-3.5 w-3.5' />
+                    <p className='font-thin'>Sitemap</p>
+                  </Link>
+                  <Link
+                    href='/feed.xml'
+                    className='flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground'
+                  >
+                    <LuRss className='h-3.5 w-3.5' />
+                    <p className='font-thin'>RSS</p>
+                  </Link>
+                </div>
+              </div>
+
+              <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>Bookstore</h5>
+                <Link
+                  href='/bookstore'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Hurriya Publications
+                </Link>
+                <Link
+                  href='/bookstore/about'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Our Story
+                </Link>
+                <Link
+                  href='/bookstore/wishlist'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Wishlist
+                </Link>
+                <Link
+                  href='/bookstore/orders'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  My Orders
+                </Link>
+                <Link
+                  href='/bookstore/downloads'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Download Vault
+                </Link>
+                <Link
+                  href='/bookstore/returns'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Returns &amp; Refunds
+                </Link>
+                <Link
+                  href='/secure-contact'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Publish With Us
                 </Link>
               </div>
 
               <div className='flex flex-col space-y-2 border-t border-border pt-3'>
-                <h5 className='text-xs font-bold text-muted-foreground underline'>Policies</h5>
-                <div className='flex flex-col'>
-                  {sortedPolicies.map((policy: PolicyQueryResult) => (
-                    <ClientSideRoute
-                      route={resolveHref('policies', formatTitleForURL(policy.title)) ?? ''}
-                      key={policy._id}
-                    >
-                      <span className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
-                        {policy.title}
-                      </span>
-                    </ClientSideRoute>
-                  ))}
+                <h5 className='text-xs font-bold text-muted-foreground underline'>Music</h5>
+                <Link
+                  href='/lyrics'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Music &amp; Lyrics
+                </Link>
+                <Link
+                  href='/music-artists'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Featured Artists
+                </Link>
+              </div>
+            </div>
+
+            {/* Community Column */}
+            <div className='flex flex-col space-y-3'>
+              <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>
+                Community
+              </h4>
+              <div className='flex flex-col space-y-2'>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>About</h5>
+                <Link
+                  href='/about'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  About UnTelevised
+                </Link>
+                <Link
+                  href='/editorial-standards'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Editorial Standards
+                </Link>
+                <Link
+                  href='/staff'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Meet Our Staff
+                </Link>
+              </div>
+
+              <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>
+                  Support UnTelevised Media
+                </h5>
+                <Link
+                  href='/support'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Support Our Outlet
+                </Link>
+                <Link
+                  href='/support/#member'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Become a Member
+                </Link>
+                <Link
+                  href='/careers'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Careers / Join Our Team
+                </Link>
+              </div>
+
+              <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+                <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>
+                  Newsroom
+                </h4>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>Newsroom</h5>
+                <Link
+                  href='mailto:newsroom@untelevised.media'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Contact Newsroom
+                </Link>
+                <Link
+                  href='mailto:tips@untelevised.media'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Send a News Tip
+                </Link>
+                <Link
+                  href='mailto:corrections@untelevised.media'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Request a Correction
+                </Link>
+              </div>
+
+              <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>
+                  Secure Portals
+                </h5>
+                <Link
+                  href='/secure-contact'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Secure Contact
+                </Link>
+                <Link
+                  href='/whistleblower'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Whistleblower Portal
+                </Link>
+              </div>
+
+              <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>Contact</h5>
+                <Link
+                  href='mailto:help@untelevised.media'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Get Help
+                </Link>
+                <Link
+                  href='mailto:vuln@untelevised.media'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Report a Vulnerability
+                </Link>
+                <Link
+                  href='mailto:partnerships@untelevised.media'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Partnerships
+                </Link>
+                <Link
+                  href='mailto:advertising@untelevised.media'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Advertise With Us
+                </Link>
+              </div>
+            </div>
+
+            {/* Media + Syndication Column */}
+            <div className='flex flex-col space-y-3'>
+              <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>Media</h4>
+              <div className='flex flex-col space-y-2'>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>Media Types</h5>
+                <Link
+                  href='/photography'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Photo
+                </Link>
+                <Link
+                  href='/videography'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Video
+                </Link>
+              </div>
+
+              <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+                <h5 className='text-xs font-bold text-muted-foreground underline'>Syndication</h5>
+                <Link
+                  href='/syndication/content-licensing'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Content Licensing
+                </Link>
+                <Link
+                  href='/syndication/marketplace'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Independent Creators Marketplace
+                </Link>
+                <Link
+                  href='/syndication/submit-media'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Send Us Media
+                </Link>
+                <Link
+                  href='/syndication/solicitation'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Sell Your Media
+                </Link>
+                <Link
+                  href='/syndication/rights'
+                  className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                >
+                  Licensing &amp; Rights
+                </Link>
+              </div>
+
+              <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+                <h4 className='text-xs font-bold uppercase tracking-wider text-foreground'>
+                  Legal
+                </h4>
+                <div className='flex flex-col space-y-2'>
+                  <h5 className='text-xs font-bold text-muted-foreground underline'>Compliance</h5>
+                  <Link
+                    href='/legal/dmca-takedown'
+                    className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                  >
+                    DMCA Takedown Request
+                  </Link>
+                  <Link
+                    href='/legal/copyright-claim'
+                    className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                  >
+                    Copyright Claim
+                  </Link>
+                  <Link
+                    href='/legal/defamation-claim'
+                    className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                  >
+                    Defamation or Legal Notice
+                  </Link>
+                  <Link
+                    href='/legal/abuse-report'
+                    className='text-xs text-muted-foreground transition-colors hover:text-foreground'
+                  >
+                    Report Abuse
+                  </Link>
+                </div>
+
+                <div className='flex flex-col space-y-2 border-t border-border pt-3'>
+                  <h5 className='text-xs font-bold text-muted-foreground underline'>Policies</h5>
+                  <div className='flex flex-col'>
+                    {sortedPolicies.map((policy: PolicyQueryResult) => (
+                      <ClientSideRoute
+                        route={resolveHref('policies', formatTitleForURL(policy.title)) ?? ''}
+                        key={policy._id}
+                      >
+                        <span className='text-xs text-muted-foreground transition-colors hover:text-foreground'>
+                          {policy.title}
+                        </span>
+                      </ClientSideRoute>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-            </div>
         </div>
       </div>
 
       {/* Footer Bottom */}
-      <div className='border-t border-border bg-slate-50/50 px-4 py-6 text-xs text-muted-foreground dark:bg-slate-950/50'>
+      <div className='border-t border-border bg-slate-50/50 px-4 py-2 text-xs text-muted-foreground dark:bg-slate-950/50'>
         <div className='flex flex-col justify-between gap-4 text-xs sm:flex-row'>
           <p>© Copyright 2026 UnTelevised Media™ All Rights Reserved.</p>
           <p className='flex items-center gap-2'>

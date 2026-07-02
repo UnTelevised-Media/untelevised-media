@@ -4,18 +4,47 @@ All notable changes to this project are documented here.
 
 ---
 
-# [3.0.4] — 2026-07-02 — Homepage Revalidation & Featured Article Query
+# [3.0.4] — 2026-07-02 — Legal Compliance, Creator Marketplace, & Homepage Revalidation
 
 ## New
 
-### Cache Revalidation Webhook
-- **API revalidation endpoint** — Added `/api/revalidate` webhook route that triggers Next.js ISR cache invalidation when articles are published in Sanity
+### Legal Compliance & DMCA System
+- **DMCA Takedown Notice page** (`/legal/dmca-takedown`) — Full-featured form for DMCA copyright claims with required fields: notice details, copyright owner info, work description, infringing URLs, good faith belief statement, perjury declaration, and copyright registration numbers
+- **Copyright Claim page** (`/legal/copyright-claim`) — Dedicated form for copyright infringement claims with contact info, work details, and claim specifics
+- **Abuse Report page** (`/legal/abuse-report`) — Form for reporting platform abuse, harassment, or policy violations with detailed description fields
+- **Defamation Claim page** (`/legal/defamation-claim`) — Legal form for defamation/libel claims against published content
+- **Legal Rights Info page** (`/legal/rights`) — Educational page explaining legal protections, submission process, and UnTelevised Media's legal policies
+- **Legal submission service** (`src/services/legal/submission.ts`) — Backend service handling legal submission validation, sanitization, and Sanity document creation with audit trails
+- **Sanity schemas** for all legal documents:
+  - `dmcaTakedown` — Structured fields for DMCA notices with copyright registration tracking
+  - `copyrightClaim` — Copyright infringement claims with work ownership documentation
+  - `abuseReport` — Platform abuse and policy violation reports
+  - `defamationClaim` — Defamation/libel claim documentation
+
+### Independent Creator Marketplace & Syndication
+- **Content Licensing page** (`/syndication/content-licensing`) — Information on licensing UnTelevised Media content for third-party use and reprinting
+- **Independent Creators Marketplace page** (`/syndication/marketplace`) — Platform for independent creators to submit, sell, and license media (photos, videos, investigations) to UnTelevised Media
+- **Creator Solicitation page** (`/syndication/solicitation`) — Direct outreach and recruitment for on-the-ground reporters, photographers, and filmmakers
+- **Media Submission page** (`/syndication/submit-media`) — Full submission form for independent creators with portfolio links, media types, content categories, exclusivity options, and pricing negotiation
+- **Rights & Licensing Info page** (`/syndication/rights`) — Educational resources on media rights, exclusive vs. non-exclusive licensing, and creator compensation models
+- **Media Listing schema** — Documents submitted media with creator profiles, portfolio links, media type (photo/video/documentary/investigation), content categories, exclusivity preferences, and pricing expectations
+- **Media Submission schema** — Tracks incoming submissions from creators with metadata, contact info, and submission details
+- **Syndication submission service** (`src/services/syndication/submission.ts`) — Backend service for validating, processing, and archiving creator submissions in Sanity
+
+### Cache Revalidation System
+- **API revalidation endpoint** (`/api/revalidate`) — Webhook route that triggers Next.js ISR cache invalidation when articles are published in Sanity
 - **Automatic homepage updates** — Publishing/updating any article now instantly revalidates:
   - Featured article section (most recent published featured article)
   - Breaking news list (homepage & article sidebar)
   - Field reports grid
   - Trending/raw feed sections
   - Individual article slug pages (breaking list sidebar updates)
+
+## Updated
+
+### Component Refactoring
+- **SafeTweet component** — Refactored embed handling with improved error boundaries and loading states
+- **Schema index** — Registered all new legal and marketplace document types in Sanity studio
 
 ## Fixed
 
