@@ -10,6 +10,7 @@ const isPortalSalesRoute = createRouteMatcher([
   '/portal/orders(/.*)?', // keep old path accessible during redirect
   '/api/portal/orders(/.*)?',
 ]);
+const isBookstoreDownloadsApi = createRouteMatcher(['/api/bookstore/my-downloads(/.*)?']);
 
 /** Extract the portal role from raw Clerk publicMetadata (no User type import needed in edge). */
 function getRoleFromMeta(meta: Record<string, unknown>): PortalRole | null {
@@ -32,6 +33,12 @@ export const proxy = clerkMiddleware(async (auth, req) => {
   // Pass social crawlers straight through — no auth processing needed.
   const ua = req.headers.get('user-agent') ?? '';
   if (SOCIAL_CRAWLERS.test(ua)) {
+    return NextResponse.next();
+  }
+
+  // Skip Clerk auth for bookstore downloads API — the route handler manages auth manually
+  // to support both session cookies and Bearer tokens
+  if (isBookstoreDownloadsApi(req)) {
     return NextResponse.next();
   }
 

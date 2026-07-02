@@ -1,6 +1,6 @@
-﻿/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/prefer-default-export */
 // src/app/api/bookstore/my-downloads/route.ts
-// GET /api/bookstore/my-downloads â€” returns the authenticated user's digital download records.
+// GET /api/bookstore/my-downloads — returns the authenticated user's digital download records.
 //
 // SERVICE ROLE JUSTIFICATION:
 // This route uses shopServiceClient (service role) because the app authenticates
@@ -8,7 +8,7 @@
 // sees auth.jwt() = null and Supabase RLS policies deny all reads.
 //
 // Application-level scoping replaces database-level RLS:
-//   1. Clerk auth() verifies the request â€” fails fast with 401 if unauthenticated
+//   1. Clerk auth() verifies the request — fails fast with 401 if unauthenticated
 //   2. Customer lookup is filtered by the Clerk-verified userId (clerk_user_id = userId)
 //   3. Download lookup is filtered by the resolved customer.id
 //
@@ -17,48 +17,29 @@
 // JWT integration is documented in 20260522000002_rls_service_role_documentation.sql.
 
 import { NextRequest, NextResponse } from 'next/server';
-import { auth, verifyToken } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
 import { getShopServiceClient } from '@/services/bookstore/supabase';
 import { checkDownloadRate } from '@/services/bookstore/ratelimit';
 
 export async function GET(req: NextRequest) {
-  // Rate limit â€” same budget as the download endpoint (30 req/60 s per IP)
+  // Rate limit — same budget as the download endpoint (30 req/60 s per IP)
   const rl = await checkDownloadRate(req);
   if (rl.limited) {
     return NextResponse.json(
-      { error: 'Too many requests â€” please wait a moment' },
+      { error: 'Too many requests — please wait a moment' },
       { status: 429 }
     );
   }
 
-  // Step 1: Verify Clerk auth â€” try session first, then Bearer token for client-side requests
-  let userId: string | null = null;
-
-  // First, try to get session from cookies (traditional server-side auth)
-  const session = await auth();
-  userId = session.userId || null;
-
-  // If no session cookie, try Bearer token from Authorization header (client-side fetch)
-  if (!userId) {
-    const authHeader = req.headers.get('Authorization');
-    if (authHeader?.startsWith('Bearer ')) {
-      const token = authHeader.slice(7);
-      try {
-        const decoded = await verifyToken(token);
-        userId = decoded.sub || null;
-      } catch {
-        // Token verification failed, fall through to 401
-      }
-    }
-  }
-
+  // Step 1: Verify Clerk auth
+  const { userId } = await auth();
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   // Steps 2 & 3: Resolve the Supabase customer ID for the verified Clerk user,
   // then fetch only that customer's downloads. Both queries are scoped by
-  // the Clerk-verified identity â€” service role is never used with open WHERE clauses.
+  // the Clerk-verified identity — service role is never used with open WHERE clauses.
   const db = getShopServiceClient();
 
   const { data: customer } = await db

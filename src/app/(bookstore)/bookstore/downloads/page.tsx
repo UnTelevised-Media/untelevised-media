@@ -4,7 +4,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useAuth } from '@clerk/nextjs';
 import useConsentAwareTracking from '@/hooks/googleAdSense/useConsentAwareTracking';
 
 interface DownloadRecord {
@@ -71,16 +70,11 @@ export default function DownloadsPage() {
   const [downloads, setDownloads] = useState<DownloadRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { getToken } = useAuth();
   const { trackEvent } = useConsentAwareTracking();
 
   useEffect(() => {
-    const fetchDownloads = async () => {
-      try {
-        const token = await getToken();
-        const res = await fetch('/api/bookstore/my-downloads', {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        });
+    fetch('/api/bookstore/my-downloads')
+      .then(async (res) => {
         if (!res.ok) {
           throw new Error('Failed to load downloads');
         }
@@ -88,15 +82,10 @@ export default function DownloadsPage() {
         const items = data.downloads ?? [];
         setDownloads(items);
         trackEvent('view_downloads', { download_count: items.length });
-      } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDownloads();
-  }, [getToken, trackEvent]);
+      })
+      .catch((err: Error) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [trackEvent]);
 
   return (
     <main className='mx-auto max-w-4xl px-4 py-8 sm:px-6'>
