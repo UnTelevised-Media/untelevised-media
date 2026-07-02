@@ -73,8 +73,11 @@ export default function DownloadsPage() {
   const { trackEvent } = useConsentAwareTracking();
 
   useEffect(() => {
+    let isMounted = true;
+
     fetch('/api/bookstore/my-downloads')
       .then(async (res) => {
+        if (!isMounted) return;
         if (!res.ok) {
           throw new Error('Failed to load downloads');
         }
@@ -83,9 +86,21 @@ export default function DownloadsPage() {
         setDownloads(items);
         trackEvent('view_downloads', { download_count: items.length });
       })
-      .catch((err: Error) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [trackEvent]);
+      .catch((err: Error) => {
+        if (isMounted) {
+          setError(err.message);
+        }
+      })
+      .finally(() => {
+        if (isMounted) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <main className='mx-auto max-w-4xl px-4 py-8 sm:px-6'>
