@@ -17,7 +17,7 @@
 // JWT integration is documented in 20260522000002_rls_service_role_documentation.sql.
 
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { auth, verifyToken } from '@clerk/nextjs/server';
 import { getShopServiceClient } from '@/services/bookstore/supabase';
 import { checkDownloadRate } from '@/services/bookstore/ratelimit';
 
@@ -31,8 +31,27 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  // Step 1: Verify Clerk auth â€” this MUST happen before any service-role call.
-  const { userId } = await auth();
+  // Step 1: Verify Clerk auth â€” try session first, then Bearer token for client-side requests
+  let userId: string | null = null;
+
+  // First, try to get session from cookies (traditional server-side auth)
+  const session = await auth();
+  userId = session.userId || null;
+
+  // If no session cookie, try Bearer token from Authorization header (client-side fetch)
+  if (!userId) {
+    const authHeader = req.headers.get('Authorization');
+    if (authHeader?.startsWith('Bearer ')) {
+      const token = authHeader.slice(7);
+      try {
+        const decoded = await verifyToken(token);
+        userId = decoded.sub || null;
+      } catch {
+        // Token verification failed, fall through to 401
+      }
+    }
+  }
+
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
