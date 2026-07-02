@@ -1,82 +1,44 @@
-﻿/* eslint-disable import/prefer-default-export */
-/**
- * This code is responsible for revalidating queries as the dataset is updated.
- *
- * It is set up to receive a validated GROQ-powered Webhook from Sanity.io:
- * https://www.sanity.io/docs/webhooks
- *
- * 1. Go to the API section of your Sanity project on sanity.io/manage or run `npx sanity hook create`
- * 2. Click "Create webhook"
- * 3. Set the URL to https://YOUR_NEXTJS_SITE_URL/api/revalidate
- * 4. Dataset: Choose desired dataset or leave at default "all datasets"
- * 5. Trigger on: "Create", "Update", and "Delete"
- * 6. Filter: Leave empty
- * 7. Projection: {_type, "slug": slug.current}
- * 8. Status: Enable webhook
- * 9. HTTP method: POST
- * 10. HTTP Headers: Leave empty
- * 11. API version: v2021-03-25
- * 12. Include drafts: No
- * 13. Secret: Set to the same value as SANITY_REVALIDATE_SECRET (create a random secret if you haven't yet, for example by running `Math.random().toString(36).slice(2)` in your console)
- * 14. Save the cofiguration
- * 15. Add the secret to Vercel: `npx vercel env add SANITY_REVALIDATE_SECRET`
- * 16. Redeploy with `npx vercel --prod` to apply the new environment variable
- */
-
-import { revalidateTag } from 'next/cache';
+import { revalidateTag, revalidatePath } from 'next/cache';
 import { type NextRequest, NextResponse } from 'next/server';
-import { parseBody } from 'next-sanity/webhook';
-import { revalidateSecret } from '@/lib/sanity/env';
 
-type WebhookPayload = {
-  _type: string;
-  slug?: string | undefined;
-};
+const REVALIDATE_SECRET = process.env.SANITY_REVALIDATE_SECRET;
 
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
+  // Verify secret to prevent unauthorized revalidation
+  const secret = request.headers.get('x-sanity-revalidate-secret');
+  if (!secret || secret !== REVALIDATE_SECRET) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
-    const { body, isValidSignature } = await parseBody<WebhookPayload>(req, revalidateSecret);
+    const body = await request.json();
+    const { _type, slug } = body;
 
-    if (!isValidSignature) {
-      const message = 'Invalid signature';
-      return new Response(JSON.stringify({ message, isValidSignature, body }), { status: 401 });
+    // Revalidate paths and tags based on document type
+    // This handles: featured articles, breaking news, field reports, trending, and raw feed
+    if (_type === 'article') {
+      // Revalidate homepage and all article-related sections
+      revalidatePath('/', 'layout');
+
+      // Also revalidate the individual article slug page so breaking list updates there too
+      if (slug?.current) {
+        revalidatePath(`/articles/${slug.current}`, 'page');
+      }
     }
 
-    if (!body?._type) {
-      const message = 'Bad Request';
-      return new Response(JSON.stringify({ message, body }), { status: 400 });
-    }
-
-    // Revalidate by document type â€” all fetches tagged with this type are busted.
-    // For book and article types we also revalidate the canonical collection tags
-    // so that list pages (bookstore index, news index) pick up changes immediately.
-    // Next.js 16 revalidateTag requires a second 'default' argument for the
-    // standard fetch cache store (distinct from the 'use cache' store).
-    revalidateTag(body._type, 'default');
-
-    if (body.slug) {
-      revalidateTag(`${body._type}:${body.slug}`, 'default');
-    }
-
-    // Bust canonical collection tags for the two most cache-sensitive types
-    // so that list pages (bookstore index, news index) invalidate alongside
-    // individual content pages.
-    if (body._type === 'book') {
-      revalidateTag('books', 'default');
-    }
-    if (body._type === 'post' || body._type === 'article') {
-      revalidateTag('articles', 'default');
+    if (_type === 'liveEvent') {
+      revalidatePath('/', 'layout');
     }
 
     return NextResponse.json({
-      status: 200,
       revalidated: true,
       now: Date.now(),
-      body,
+      message: `Revalidated: ${_type}${slug?.current ? ` (${slug.current})` : ''}`,
     });
-  } catch (err: unknown) {
-    console.error(err);
-    const message = err instanceof Error ? err.message : 'An unknown error occurred';
-    return new Response(message, { status: 500 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Failed to revalidate', details: String(error) },
+      { status: 500 }
+    );
   }
 }

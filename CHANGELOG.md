@@ -4,6 +4,28 @@ All notable changes to this project are documented here.
 
 ---
 
+# [3.0.4] — 2026-07-02 — Homepage Revalidation & Featured Article Query
+
+## New
+
+### Cache Revalidation Webhook
+- **API revalidation endpoint** — Added `/api/revalidate` webhook route that triggers Next.js ISR cache invalidation when articles are published in Sanity
+- **Automatic homepage updates** — Publishing/updating any article now instantly revalidates:
+  - Featured article section (most recent published featured article)
+  - Breaking news list (homepage & article sidebar)
+  - Field reports grid
+  - Trending/raw feed sections
+  - Individual article slug pages (breaking list sidebar updates)
+
+## Fixed
+
+### Featured Article Query
+- **queryHomepageArticles sorting** — Changed from `_createdAt desc` (creation date) to `publishedAt desc` (publication date)
+- **Published articles filter** — Added `defined(publishedAt)` requirement to ensure only published articles appear in featured slots
+- **Webhook GROQ filter** — Configured to trigger on article create/update/publish events, excluding viewCount-only mutations
+
+---
+
 # [3.0.3] — 2026-06-27 — Article Page UI/UX Enhancements & Engagement CTAs & Complete Footer Redesign
 
 ## New

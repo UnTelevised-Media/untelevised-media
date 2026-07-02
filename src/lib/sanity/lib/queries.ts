@@ -130,11 +130,12 @@ export const queryAllArticles = groq`
 
 // Lightweight homepage query — omits body (Portable Text) to keep the
 // response well under Next.js's 2 MB cache limit.
+// Fetches the most recent published article with featured == true.
 // readingTimeMinutes is stored on the document by /api/compute-reading-time
 // (fires on every article publish). pt::text() fallback covers articles that
 // predate the field and have not been backfilled yet.
 export const queryHomepageArticles = groq`
-  *[_type=='article' && featured == true && defined(slug.current)] {
+  *[_type=='article' && featured == true && defined(slug.current) && defined(publishedAt)] {
     _id,
     title,
     slug,
@@ -147,7 +148,7 @@ export const queryHomepageArticles = groq`
     "author": author->{ name },
     "categories": categories[]->{ title }
   }
-  | order(_createdAt desc)
+  | order(publishedAt desc)
   [0...1]
 `;
 
