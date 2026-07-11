@@ -1,0 +1,143 @@
+{
+  "_id": "4fsnkgml63i",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "7ufcbjw6",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Amid a manufactured famine in northern Gaza, 21-year-old Abdullah al-Zemili has built a makeshift shelter for stray and injured cats — providing food and basic medical care to animals wounded by the same genocide that has killed tens of thousands of Palestinians.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "ztb900rm",
+      "_type": "faqItem",
+      "answer": "The exact number has not been reported, but photos show multiple cats and kittens gathered at his shelter in Al-Karame. Abdullah provides food and basic medical attention to all the animals he rescues.",
+      "question": "How many cats is Abdullah caring for?"
+    },
+    {
+      "_key": "ljodec8j",
+      "_type": "faqItem",
+      "answer": "Many of the cats at Abdullah's shelter suffer from severe injuries including amputated limbs, jaw damage, severe burns, and facial injuries — all wounds resulting from Israeli attacks on northern Gaza.",
+      "question": "What kind of injuries do the cats have?"
+    },
+    {
+      "_key": "94w8l4c6",
+      "_type": "faqItem",
+      "answer": "The situation is described as operating with 'scarce supplies.' In northern Gaza, where humanitarian aid has been blocked for months, resources of any kind are extremely limited. Abdullah is working with virtually no support infrastructure.",
+      "question": "How is Abdullah obtaining food and medical supplies for the cats?"
+    },
+    {
+      "_key": "e09gn2kz",
+      "_type": "faqItem",
+      "answer": "Yes. Sulala Animal Rescue, founded in 2006, operates out of a tent in Deir al-Balah and is described as Gaza's only formal animal shelter. They care for approximately 70 dogs and 50 cats, many with severe injuries from the war. Their veterinarian was killed by Israeli forces in October 2025.",
+      "question": "Are there other animal shelters in Gaza?"
+    },
+    {
+      "_key": "3en4pshd",
+      "_type": "faqItem",
+      "answer": "Cats hold deep cultural and religious significance in Islamic tradition. They are believed to possess barakah (blessing power) and the prophet Muhammad specifically taught mercy toward animals. In Gaza, cats also serve an ecological role controlling rodent populations, and by 2009 had become integrated into daily life and family structures throughout the strip.",
+      "question": "Why is there a focus on cats in Gaza?"
+    },
+    {
+      "_key": "mdov2uxq",
+      "_type": "faqItem",
+      "answer": "According to the Euro-Med Human Rights Monitor, approximately 97% of Gaza's livestock has been destroyed through bombing, starvation, and looting. Large animals like donkeys and horses have declined to about 30% of their pre-war numbers. Stray cats and dogs face mass death from starvation, injury, and disease after being abandoned by families fleeing bombardment.",
+      "question": "How has the genocide affected Gaza's animal population?"
+    },
+    {
+      "_key": "usvfcck1",
+      "_type": "faqItem",
+      "answer": "No. The suffering of Gaza's animals is explicitly framed as inseparable from the suffering of Gaza's people. The same Israeli policies — bombing, blockade, forced starvation, forced displacement — that have killed more than 27,000 Palestinians and pushed half a million into hunger have also devastated Gaza's animal population. This story documents one small act of care that emerges from, rather than distracts from, that broader context.",
+      "question": "Is this story ignoring the human suffering in Gaza?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Gaza",
+    "genocide",
+    "animal rescue",
+    "northern Gaza",
+    "Al-Karame",
+    "Abdullah al-Zemili",
+    "Palestine",
+    "cats",
+    "Israel",
+    "forced starvation"
+  ],
+  "leadParagraph": "Al-Karame, northern Gaza — Abdullah al-Zemili is 21 years old. In another life, in another world, that age would mean college, late nights, choices that haven't calcified yet into fates.",
+  "linkedPitch": null,
+  "location": "Al-Karame, northern Gaza",
+  "mainImage": {
+    "_type": "image",
+    "alt": "A tiny orange and white tabby kitten is gently cradled in a Abdullah's hands.",
+    "asset": {
+      "_ref": "image-45004c0baad216cbff00bac8434c7c3a1ac8854c-1080x1350-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-03-30T14:21:00Z",
+  "readingTimeMinutes": 8,
+  "relatedArticles": [
+    {
+      "_key": "e45f9945ccef",
+      "_ref": "article-9992ca74-df44-40bf-9caf-45e5e56269c7",
+      "_type": "reference"
+    },
+    {
+      "_key": "b5b7371ecc88",
+      "_ref": "article-1343286e-dbf6-4d85-9fca-0fca3a494c76",
+      "_type": "reference"
+    },
+    {
+      "_key": "3fe7aa21da9f",
+      "_ref": "c9yzsqzw5ic",
+      "_type": "reference"
+    },
+    {
+      "_key": "3a6c4cb9983a",
+      "_ref": "article-82d5510e-acf9-4ca2-bd86-6cadc1592d74",
+      "_type": "reference"
+    },
+    {
+      "_key": "5105d6d1d042",
+      "_ref": "article-d6a99359-2ce7-4fb1-a801-839bdd8956cd",
+      "_type": "reference"
+    },
+    {
+      "_key": "72f84fce5eb8",
+      "_ref": "article-90360b7c-5dfb-4f24-bf05-b31289425b88",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": null,
+  "seo": {
+    "metaDescription": "21-year-old Abdullah al-Zemili has built a makeshift shelter for stray and injured cats in northern Gaza's Al-Karame area, providing food and basic medical care to animals wounded by Israel's genocide.",
+    "metaTitle": "In Northern Gaza, One Man Refuses to Let the Cats Starve | UnTelevised Media"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "in-northern-gaza-one-man-refuses-to-let-the-cats-starve"
+  },
+  "tags": [
+    "Gaza Genocide"
+  ],
+  "title": "In Northern Gaza, One Man Refuses to Let the Cats Starve",
+  "updatedAt": null,
+  "videoLink": null
+}

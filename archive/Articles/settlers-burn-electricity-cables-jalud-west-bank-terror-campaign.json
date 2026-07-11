@@ -1,0 +1,118 @@
+{
+  "_id": "jalud-settlers-burn-electricity-cables-west-bank-terror-campaign",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israeli settlers attacked Jalud village, burning electricity cables and blocking roads to delay security forces. This is the latest in a coordinated campaign of terror backed by the Israeli state, protected by its military, and enabled by 34 new settlements approved in April 2026.",
+  "eventDate": "2026-05-01T19:56:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "object",
+      "answer": "Israeli settlers attacked the West Bank village of Jalud, setting fire to electricity cables and putting down road spikes to delay the arrival of security forces. This is the third attack on Jalud in recent weeks, following a April 28 attack that injured dozens and a March attack that burned homes and vehicles.",
+      "question": "What happened in Jalud on May 2, 2026?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "object",
+      "answer": "On April 1, 2026, Israel's cabinet secretly approved 34 new settlements in the occupied West Bank — the largest-ever recognition of unauthorized outposts in a single step. The approval was reported by the Peace Now watchdog group and represents a major escalation of Israel's settlement expansion push.",
+      "question": "How many new settlements has Israel approved?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "object",
+      "answer": "UN experts have condemned Israel's accelerating campaign of ethnic cleansing and annexation in the occupied West Bank, identifying state-backed terror squads at the forefront of this policy. They report that arms and vehicles have been provided to settler groups, and that Israeli authorities rely on settlers to do the groundwork of ethnic cleansing.",
+      "question": "What are UN experts saying about settler violence?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "object",
+      "answer": "Settlers have killed at least six Palestinians in the West Bank since the start of 2026. At least 700 Palestinians have been displaced by settler violence from the start of 2025 through February 2026, with the number continuing to climb as attacks escalate.",
+      "question": "How many Palestinians have been killed or displaced?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "object",
+      "answer": "The Israeli military actively participates in and protects settler violence. UN experts report that soldiers stand guard during settler attacks, preventing Palestinian self-defense. The Guardian revealed that Israel has not prosecuted its citizens for killing Palestinian civilians in the occupied West Bank since the start of this decade, creating absolute impunity for the violence.",
+      "question": "What role does the Israeli military play in settler violence?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "west bank",
+    "settler violence",
+    "pogroms",
+    "ethnic cleansing",
+    "israeli occupation",
+    "settlements",
+    "jalud",
+    "electricity cables",
+    "road spikes",
+    "ben gvir",
+    "state-backed terror squads",
+    "military protection",
+    "impunity",
+    "un experts",
+    "displacement",
+    "arson"
+  ],
+  "leadParagraph": "In the predawn hours of Saturday morning, Israeli settlers attacked the Palestinian village of Jalud, setting fire to electricity cables and scattering road spikes across village roads to delay security forces. This is not an isolated incident — it is the latest in a coordinated campaign of terror against Palestinian communities in the occupied West Bank, backed by the Israeli state, protected by its military, and enabled by the international community.",
+  "linkedPitch": null,
+  "location": "Jalud, West Bank, Occupied Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": " Palestinians stand near a vehicle destroyed in an Israeli settler attack in the West Bank",
+    "asset": {
+      "_ref": "image-0f879436161cf829f2a410965ac8627ad24eb4a5-2040x1530-webp",
+      "_type": "reference"
+    },
+    "caption": "Aftermath of an Israeli settler attack on a Palestinian village in the West Bank, showing destroyed buildings and debris"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-02T18:00:00Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "settlers-burn-electricity-cables-jalud-west-bank-terror-campaign"
+  },
+  "tags": [
+    "west-bank",
+    "settler-violence",
+    "pogroms",
+    "ethnic-cleansing",
+    "israeli-occupation",
+    "settlements",
+    "jalud"
+  ],
+  "title": "Settlers Burn Electricity Cables in Jalud: The Ongoing Pogrom Campaign Against the West Bank",
+  "updatedAt": null,
+  "videoLink": null
+}

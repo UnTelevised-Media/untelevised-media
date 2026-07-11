@@ -1,0 +1,153 @@
+{
+  "_id": "israels-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-gaza",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-tech",
+      "_ref": "63a5d961-e918-4dd2-877e-a08366bf106f",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-mena",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israel is preparing AI-screened concentration camps inside Gaza — merging its Lavender, Where's Daddy, and Gospel targeting systems with a new death penalty law to create an automated machinery of ethnic cleansing.",
+  "eventDate": "2026-07-05T01:26:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Israeli Defence Minister Israel Katz announced a plan to concentrate all of Gaza's remaining population into a fenced, militarized camp zone in Rafah. The plan includes AI-powered biometric screening, barred exits without military authorization, and a framework where those who don't enter 'voluntarily' are classified as enemy combatants.",
+      "question": "What is Israel's Rafah camp plan?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Lavender is an AI-powered targeting database used by the Israeli military to identify tens of thousands of Palestinians as suspected militants. It has an acknowledged error rate of approximately 10%, meaning thousands of innocent civilians were flagged for death. Human analysts were given as little as 20 seconds to verify each AI-generated target.",
+      "question": "What is Israel's Lavender AI system?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Where's Daddy? is an Israeli AI tracking system that follows individuals flagged by Lavender via their mobile phone signals and alerts operators when targets enter their family homes. Strikes were deliberately timed to hit people at home with their families, using their presence as 'confirmation of identity.'",
+      "question": "What is the 'Where's Daddy?' system?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Passed on March 30, 2026, the law makes death by hanging the mandatory sentence for Palestinians convicted in military courts of deadly attacks. It removes judicial discretion, eliminates the right to appeal, and applies exclusively to Palestinians — not to Israeli settlers convicted of killing Palestinians.",
+      "question": "What is Israel's new death penalty law?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "The AI systems used to generate kill lists during the bombing campaign (Lavender for identification, Where's Daddy? for tracking, The Gospel for infrastructure targeting) would be repurposed inside the camps for 'security screening' and classification. The death penalty law provides the legal mechanism to execute those classified as threats — closing the loop between AI identification and state-sanctioned killing.",
+      "question": "How do the camps connect to the AI systems?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Israel AI concentration camps Gaza",
+    "Lavender AI targeting system Palestinians",
+    "Where's Daddy tracking system Gaza",
+    "Israel death penalty law Palestinians 2026",
+    "Gaza Humanitarian Foundation camps",
+    "Israel Katz Rafah camp plan",
+    "AI ethnic cleansing Gaza",
+    "facial recognition screening Gaza",
+    "Gospel Habsora AI targeting",
+    "Gaza genocide 2026"
+  ],
+  "leadParagraph": "Israel is preparing to establish AI-screened concentration camps inside Gaza where the entire remaining Palestinian population would be concentrated, classified by algorithm, and held indefinitely. This is not a humanitarian measure — it is the final stage of ethnic cleansing, automated and industrialized, built on the same AI targeting systems that have already generated tens of thousands of kill lists and the new death penalty law that makes execution without appeal the default sentence for Palestinians.",
+  "linkedPitch": null,
+  "location": "Gaza Strip, Occupied Palestine",
+  "mainImage": {
+    "_key": "img-0",
+    "_type": "image",
+    "alt": "Displaced Palestinians in tent camp in Gaza with destroyed buildings visible in background",
+    "asset": {
+      "_ref": "image-82d991c2f1e3be8bb16bff922bf8a8b1ef293d9d-5000x3332-webp",
+      "_type": "reference"
+    },
+    "caption": "Displaced Palestinians shelter in tent camps amid the ruins of destroyed buildings in the Gaza Strip",
+    "credit": "Middle East Images/AFP via Getty Images"
+  },
+  "methodology": "This analysis draws on investigative reporting from +972 Magazine, Euro-Med Human Rights Monitor, Al Jazeera, The Guardian, Middle East Monitor, Middle East Eye, and Time Magazine. AI targeting systems were corroborated by Israeli intelligence officers speaking on condition of anonymity to +972 Magazine (April 2024). Legal analysis draws on the Knesset's March 30, 2026 death penalty legislation and UN Special Rapporteur reports. Gaza casualty figures come from the Gaza Ministry of Health (April 2026). Military and institutional analysis draws on the Lieber Institute at West Point (October 2025), the International Institute for Strategic Studies (April 2026), and the UN domicide report (February 2026).",
+  "needsReview": null,
+  "publishedAt": "2026-07-06T00:30:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-5",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "salah-akram-gaza-is-shrinking",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "israel-yellow-line-gaza-expanding-de-facto-reoccupation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "salah-akram-the-streets-that-swallow-us",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "bddcld7vr4o",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "smotrich-icc-khan-al-ahmar-ethnic-cleansing",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "israel-s-final-solution-ai-concentration-camps-and-the-machinery-of-erasure"
+  },
+  "tags": [
+    "Israel",
+    "Gaza",
+    "AI Warfare",
+    "Lavender",
+    "Concentration Camps",
+    "Ethnic Cleansing",
+    "Death Penalty",
+    "Palestine",
+    "Genocide",
+    "Biometric Surveillance"
+  ],
+  "title": "Israel's Final Solution: AI Concentration Camps and the Machinery of Erasure",
+  "updatedAt": null,
+  "videoLink": null
+}

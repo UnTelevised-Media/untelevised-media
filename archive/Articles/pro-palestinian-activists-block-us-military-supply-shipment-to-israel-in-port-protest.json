@@ -1,0 +1,71 @@
+{
+  "_id": "article-69cc5710-4344-4684-9401-7bc1b2e1a841",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "80c4fd069b82",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Hundreds of pro-Palestinian demonstrators gathered at the Port of Tacoma, Washington, to block a US military supply ship, MV Cape Orlando, suspected to be carrying weapons and military equipment bound for Israel. The activists, organized by the Arab Resource & Organizing Center (AROC), aimed to prevent the cargo from being loaded, demanding an immediate cease-fire and an end to US military aid to Israel amid the ongoing Israel-Hamas conflict.\n\n",
+  "eventDate": "2023-11-06T17:15:00.000Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Pro-Palestinian activists",
+    "Port of Tacoma",
+    "MV Cape Orlando",
+    "Israel-Hamas conflict",
+    "Israel",
+    "IDF",
+    "Gaza",
+    "Palestine",
+    "Hamas",
+    "cease fire now",
+    "cease fireArab Resource & Organizing Center",
+    "US military supply ship",
+    "cease-fire",
+    "US aid to Israel",
+    "Gaza",
+    "Palestinian protest",
+    "Tacoma demonstration"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Pro-Palestinian demonstrators swarm the Port of Tacoma, to protest a Middle East-bound ship full of what they believe to be military equipment and weapons. Nov. 6, 2023",
+    "asset": {
+      "_ref": "image-9a824ee417e52c4c9d93a0ae63c18ce36f2537bb-1280x720-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-11-06T23:15:18.201Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "pro-palestinian-activists-block-us-military-supply-shipment-to-israel-in-port-protest"
+  },
+  "tags": null,
+  "title": "Pro-Palestinian Activists Block US Military Supply Shipment to Israel in Port Protest",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,116 @@
+{
+  "_id": "brian-poindexter-iron-worker-challenges-max-miller-ohio-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Brian Poindexter, a 25-year union ironworker and apprentice instructor, is challenging Republican Rep. Max Miller — grandson of a $6.8 billion real estate fortune — in Ohio's 7th Congressional District, framing the race as a choice between working-class representation and inherited wealth.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "Brian Poindexter is a 53-year-old union ironworker with 25 years of experience, an apprentice instructor at Ironworkers Local 17, and a five-term Brook Park City Councilman. He's running as a champion of working-class voters, endorsed by Bernie Sanders, the Ohio AFL-CIO, UAW, and Ironworkers International.",
+      "question": "Who is Brian Poindexter and what are his qualifications?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Max Miller is the grandson of Samuel H. Miller, former co-chair emeritus of Forest City Realty Trust, which was acquired in 2018 for $6.8 billion. He loaned over $1 million to his own campaign. He's criticized for voting against the PRO Act, supporting Trump's tax cuts that benefited the wealthy, and refusing to hold in-person town halls.",
+      "question": "What is Max Miller's background and why is he being criticized?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Ohio's 7th District is Republican-leaning, having backed Trump by 11 points in the last election. The Cook Political Report gives Republicans a 5 percentage point edge. Miller won his last re-election by 51%. However, the district has deep working-class roots, and the DCCC has included it on its \"in play\" list.",
+      "question": "How does the 7th Congressional District lean politically?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Poindexter supports raising the federal minimum wage, strengthening unions, and opposes tariffs and war in Iran. Miller voted against the PRO Act, supported Trump's tax cuts that cut ACA coverage, stripped collective bargaining rights from federal workers, and backed military action in Iran.",
+      "question": "What are the key differences between Poindexter and Miller on policy?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Eight Democrats are challenging Miller: Brian Poindexter, former Cuyahoga County Executive Ed Fitzgerald, former Olmsted Falls Mayor Ann Marie Donegan, former Bay Village School Board President Scott Schulz, attorney Michael Eisner, pastor John Butchko, Laura Rodriguez-Carbone, and Keith Mundy. The Democratic primary is May 5, 2026.",
+      "question": "Who else is running in the Democratic primary?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "brian-poindexter",
+    "max-miller",
+    "ohio-7th-congressional-district",
+    "union-ironworker",
+    "ironworkers-local-17",
+    "working-class-candidate",
+    "trump-loyalist",
+    "forest-city-realty-trust",
+    "congressional-election-2026",
+    "workers-rights",
+    "pro-act",
+    "minimum-wage",
+    "democratic-primary",
+    "labor-unions",
+    "ohio-politics"
+  ],
+  "leadParagraph": "Brian Poindexter stands at a construction site in steel-toed boots, a hard hat on his head, and 25 years of ironworking experience in his bones. He's an apprentice instructor at Ironworkers Local 17, a five-term Brook Park City Councilman, and one of eight Democrats challenging Republican Rep. Max Miller in Ohio's 7th Congressional District. The contrast isn't subtle. It's the point.",
+  "linkedPitch": null,
+  "location": "Ohio's 7th Congressional District",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Brian Poindexter, a union ironworker and Brook Park City Councilman, standing for a campaign photo as a candidate for Ohio's 7th Congressional District in 2026",
+    "asset": {
+      "_ref": "image-0cbabd3c2fc0109a2fec6842aec1d7233a19cf8a-3273x1962-webp",
+      "_type": "reference"
+    },
+    "caption": "Brook Park City Councilman Brian Poindexter, a union ironworker and apprentice instructor at Ironworkers Local 17, is one of eight Democrats challenging Republican Rep. Max Miller in Ohio's 7th Congressional District.",
+    "credit": "cleveland.com"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-19T18:00:00.000Z",
+  "readingTimeMinutes": 13,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Brian Poindexter, a 25-year union ironworker, is challenging Max Miller — grandson of a $6.8 billion real estate fortune — in Ohio's 7th Congressional District.",
+    "title": "Union Iron Worker Challenges Trump Loyalist in Ohio"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "union-iron-worker-challenges-trump-loyalist-in-ohio-s-2026-congressional-race"
+  },
+  "tags": [
+    "brian-poindexter",
+    "max-miller",
+    "ohio-election-2026",
+    "union-ironworker",
+    "working-class",
+    "trump-loyalist",
+    "congressional-race"
+  ],
+  "title": "Union Iron Worker Challenges Trump Loyalist in Ohio's 2026 Congressional Race",
+  "updatedAt": null,
+  "videoLink": null
+}

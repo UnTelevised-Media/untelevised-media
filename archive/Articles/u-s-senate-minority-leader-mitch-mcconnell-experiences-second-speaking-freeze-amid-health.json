@@ -1,0 +1,59 @@
+{
+  "_id": "article-61e19579-1c7f-4c60-8b09-062687b7d42e",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "32d3fd66fb84",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": {
+    "_type": "correctionObject",
+    "detail": "Initial article states the episode occured in Washington DC, this was where a previous episode occured. This episode occured in Covington, KY",
+    "issuedAt": "2026-03-16T19:43:06.251Z",
+    "summary": "Location of episiode misstated.",
+    "type": "correction"
+  },
+  "deletionRequest": null,
+  "description": "The health of U.S. Senate Minority Leader Mitch McConnell takes center stage once more as he experiences a second incident of freezing while addressing the press. Amid discussions about his well-being, a recent announcement about Republican House Majority Leader Steve Scalise's diagnosis of multiple myeloma raises broader questions about age and leadership in the political sphere.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": "Covington, KY",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Mitch McConnell frozen mid speech",
+    "asset": {
+      "_ref": "image-fed5040d0e4006643f89b06af129b14b1e042ac5-1500x844-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-08-29T16:08:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "u-s-senate-minority-leader-mitch-mcconnell-experiences-second-speaking-freeze-amid-health"
+  },
+  "tags": null,
+  "title": "U.S. Senate Minority Leader Mitch McConnell Experiences Second Speaking Freeze Amid Health Concerns",
+  "updatedAt": null,
+  "videoLink": null
+}

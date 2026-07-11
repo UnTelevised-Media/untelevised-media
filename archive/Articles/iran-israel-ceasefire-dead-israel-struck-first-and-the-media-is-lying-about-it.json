@@ -1,0 +1,148 @@
+{
+  "_id": "iran-israel-ceasefire-dead-israel-struck-first-and-the-media-is-lying-about-it",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-me",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-pol",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-ww",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israel struck southern Beirut on June 7, violating the April 8 ceasefire. Iran responded. Israel escalated. The media calls it 'Iranian aggression.' Here is what actually happened.",
+  "eventDate": "2026-06-07T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Israel struck first — hitting Beirut's Dahieh district without warning, despite a US request not to strike Lebanon's capital and under an April 8 ceasefire. Iran responded with ballistic missiles. Israel then struck western and central Iran.",
+      "question": "Who struck first in the June 7 escalation?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Functionally, no. Israel struck Beirut first on June 7, Iran fired missiles in response, Israel struck Iran. The ceasefire is dead.",
+      "question": "Is the April 8 ceasefire still in effect?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Trump had multiple calls with Netanyahu urging restraint. Iran approached the US for a new ceasefire after the exchange.",
+      "question": "How did the US respond?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Striking Hezbollah targets in Beirut directly rather than Iran, to avoid diplomatic costs while applying pressure.",
+      "question": "What is Smotrich's 'Beirut model'?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "As 'Israeli retaliation' to 'Iranian aggression' — erasing that Israel struck first, consistent with their Gaza coverage.",
+      "question": "How is the media framing this?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Iran Israel strikes",
+    "Beirut Dahieh",
+    "ceasefire violation",
+    "June 7 2026",
+    "ballistic missiles",
+    "IRGC"
+  ],
+  "leadParagraph": "Israel struck Beirut first. Iran responded. Israel escalated. The ceasefire is dead.",
+  "linkedPitch": null,
+  "location": "Beirut / Tehran / Tel Aviv",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Projectile streaks through the sky over central Israel during Iranian missile attack, June 7, 2026",
+    "asset": {
+      "_ref": "image-0cc3014b7cec510ac7e32f97e99b8df8161ecee0-6000x4000-webp",
+      "_type": "reference"
+    },
+    "caption": "A projectile streaks through the sky over central Israel during an Iranian missile attack on Sunday, June 7, 2026.",
+    "credit": "AP Photo/Ohad Zwigenberg"
+  },
+  "methodology": "Reported using AP News, USA Today, Times of Israel, The War Zone, Iran Focus, Wikipedia, UK House of Commons Library.",
+  "needsReview": null,
+  "publishedAt": "2026-06-09T06:00:00.000Z",
+  "readingTimeMinutes": 12,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "four-apartments-nine-martyrs-one-girl-left-alive-israel-ceasefire-gaza-june-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "salah-akram-gaza-is-shrinking",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "salah-akram-the-streets-that-swallow-us",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "hezbollah-lebanon-israel-talks-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "veterans-arrested-protesting-iran-war",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "iran-israel-ceasefire-dead-israel-struck-first-and-the-media-is-lying-about-it"
+  },
+  "tags": [
+    "Iran",
+    "Israel",
+    "ceasefire",
+    "Beirut",
+    "Dahieh",
+    "ballistic missiles",
+    "Middle East",
+    "Netanyahu",
+    "Trump",
+    "escalation"
+  ],
+  "title": "The Ceasefire Is Dead: Israel Struck First — Again — and the Media Is Lying About It",
+  "updatedAt": null,
+  "videoLink": null
+}

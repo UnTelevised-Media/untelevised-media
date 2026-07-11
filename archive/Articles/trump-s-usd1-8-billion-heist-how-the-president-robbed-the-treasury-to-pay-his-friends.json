@@ -1,0 +1,125 @@
+{
+  "_id": "trump-anti-weaponization-fund-heist",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-politics",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-hr",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Trump settled his own $10B IRS lawsuit by creating a $1.776 billion DOJ slush fund controlled by his former defense attorney. Jan 6 rioters are already lining up for payouts.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "A $1.776 billion fund created by the DOJ as part of a settlement in Trump's $10 billion lawsuit against the IRS. It is controlled by a five-person commission appointed by Acting AG Todd Blanche, Trump's former personal attorney. The money comes from the federal Judgment Fund — taxpayer dollars.",
+      "question": "What is the Anti-Weaponization Fund?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Anyone who claims they were wrongly targeted by federal law enforcement. Trump allies, former officials, and January 6 defendants are already filing claims. Michael Caputo, a former Trump adviser, is seeking $2.7 million. Jenny Cudd, convicted for the Capitol riot, says all Jan 6ers will apply. There are no partisan restrictions — on paper.",
+      "question": "Who gets the money?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Trump is simultaneously the plaintiff and the president overseeing the defendant. The DOJ that settled the suit reports to him. The commission controlling the fund is appointed by his former defense attorney. The IRS is now permanently barred from auditing his taxes. There is no congressional appropriation, no judicial oversight, and no public disclosure of recipients.",
+      "question": "Why is this corrupt?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Yes. Neither Blanche nor Vice President JD Vance would rule it out. Blanche told the Senate that Proud Boys and Oath Keepers members can apply. Jenny Cudd, a convicted Jan 6 rioter, confirmed plans for mass applications. Two Capitol Police officers have filed a lawsuit to block the fund.",
+      "question": "Can January 6 rioters get paid?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Yes. Two Capitol Police officers filed suit on May 20, 2026, calling it presidential corruption. 93 House Democrats filed an amicus brief calling it illegal and corrupt. Senator Chris Van Hollen called it pure theft of public funds. The judge in the original case was already considering dismissing it for conflict of interest.",
+      "question": "Is anyone challenging this?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "trump",
+    "doj",
+    "anti-weaponization fund",
+    "irs settlement",
+    "slush fund",
+    "january 6",
+    "capitol riot",
+    "todd blanche",
+    "michael caputo",
+    "corruption",
+    "tax returns",
+    "judgment fund",
+    "self-dealing",
+    "federal government",
+    "treasury"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Exterior of the US Department of Justice building in Washington DC",
+    "asset": {
+      "_ref": "image-8eff6945325ec8a6574e717e7e7750cd4b7917d0-3840x2560-webp",
+      "_type": "reference"
+    },
+    "caption": "The Department of Justice building in Washington, D.C. The DOJ announced the creation of the Anti-Weaponization Fund on May 18, 2026.",
+    "credit": "Time Magazine"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-21T03:00:00Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "description": "Trump settled his own IRS lawsuit and created a $1.776B DOJ slush fund for his allies. Jan 6 rioters are already lining up. This is armed robbery.",
+    "title": "Trump's $1.8B Treasury Heist"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "trump-s-usd1-8-billion-heist-how-the-president-robbed-the-treasury-to-pay-his-friends"
+  },
+  "tags": [
+    "trump",
+    "doj",
+    "anti-weaponization-fund",
+    "irs",
+    "slush-fund",
+    "jan-6",
+    "corruption",
+    "todd-blanche",
+    "self-dealing"
+  ],
+  "title": "Trump's $1.8 Billion Heist: How the President Robbed the Treasury to Pay His Friends",
+  "updatedAt": null,
+  "videoLink": null
+}

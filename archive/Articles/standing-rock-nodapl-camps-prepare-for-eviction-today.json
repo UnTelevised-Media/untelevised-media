@@ -1,0 +1,104 @@
+{
+  "_id": "ar2017-standing-rock-nodapl-eviction",
+  "allowComments": false,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "f46eb3f7-0006-4919-b64b-0ad526ebd1ee",
+      "_ref": "f46eb3f7-0006-4919-b64b-0ad526ebd1ee",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Cannonball, ND - After over a year of struggling against the Dakota Access Pipeline's construction underneath the Missouri River, water protectors are now scheduled to be evicted from their main encampment. The encampment lies on unceded Fort Laramie Treaty land maintained by the Army Corps of Engineers. A few hundred water protectors are still holding steady as the eviction deadline approaches.",
+  "eventDate": "2017-02-22T10:46",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "The Army Corps of Engineers set a 2 p.m. deadline on February 22, 2017 for the main Oceti Sakowin encampment at Standing Rock to be evacuated. The official reason was that snowmelt would wash tons of trash from the campsites into the Missouri River. The encampment lies on unceded Fort Laramie Treaty land. North Dakota Governor Doug Burgum issued an executive order for the evacuation.",
+      "question": "Why were water protectors being evicted from Standing Rock?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "The Dakota Access Pipeline (DAPL) is an oil pipeline that crosses under the Missouri River near the Standing Rock Sioux Tribe's reservation. Water protectors, led by the Standing Rock Sioux and supported by Indigenous peoples and activists from over 300 nations worldwide, spent over a year opposing its construction, citing threats to the tribe's water supply and the desecration of sacred lands and burial grounds.",
+      "question": "What is the Dakota Access Pipeline (DAPL) controversy?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "As the eviction deadline approached on February 22, 2017, activists set ceremonial fires to wooden structures as part of the ceremony of leaving the camp. LaDonna Brave Bull Allard, founder of the Sacred Stone Camp, refused to leave her own land. Military and law enforcement presence grew around the Oceti Sakowin Camp, with state Attorney General Wayne Stenehjem warning the evacuation would 'become a law enforcement matter' if protesters refused to comply.",
+      "question": "What happened on the day of the eviction?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The Standing Rock #NoDAPL movement became one of the largest Native American-led protests in U.S. history, drawing thousands of water protectors from over 300 Indigenous nations and allies worldwide. The movement temporarily succeeded when the Obama administration denied a key easement in December 2016, though the Trump administration reversed this decision in January 2017, leading to the final eviction.",
+      "question": "What was the significance of the Standing Rock protest?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "StandingRock",
+    "NoDAPL",
+    "DAPL",
+    "DakotaAccessPipeline",
+    "WaterProtectors",
+    "NativeAmerican",
+    "OcetiSakowin",
+    "SacredStone",
+    "WaterIsLife",
+    "NorthDakota"
+  ],
+  "leadParagraph": "Cannonball, ND - After over a year of struggling against the Dakota Access Pipeline's construction underneath the Missouri River, water protectors are now scheduled to be evicted from their main encampment. The encampment lies on unceded Fort Laramie Treaty land and is maintained by the Army Corps of Engineers. At this time a few hundred water protectors are still holding steady as the eviction deadline approaches. Protectors have lit Ceremonial Fires that have been raging throughout the snow-filled morning.",
+  "linkedPitch": null,
+  "location": "Cannonball, North Dakota, USA",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Leaders burn Standing Rock camp ahead of eviction",
+    "asset": {
+      "_ref": "image-860f4ff4110615c37b6a7baccf9406b959a7dbf7-600x400-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Live on-the-ground coverage from an embedded activist correspondent at the Standing Rock encampment, supplemented by Standing Rock live streams and independent media reporting.",
+  "needsReview": false,
+  "publishedAt": "2017-02-22T00:00",
+  "readingTimeMinutes": 4,
+  "relatedArticles": [],
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "standing-rock-nodapl-camps-prepare-for-eviction-today"
+  },
+  "tags": [
+    "#NoDAPL",
+    "#StandingRock",
+    "#WaterIsLife",
+    "#WaterProtectors",
+    "#OpBlackSnake",
+    "#OpNoDAPL",
+    "#SacredStone",
+    "#OcetiSakowin"
+  ],
+  "title": "Standing Rock #NoDAPL Camps Prepare for Eviction Today",
+  "updatedAt": "2026-05-12T15:51:52.622Z",
+  "videoLink": ""
+}

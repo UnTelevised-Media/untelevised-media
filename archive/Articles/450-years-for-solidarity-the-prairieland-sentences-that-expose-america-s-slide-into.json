@@ -1,0 +1,147 @@
+{
+  "_id": "prairieland-sentencing-450-years-antifa-crackdown-authoritarianism",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-civil",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-humanrights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Eight people who attended a July 4 protest at the Prairieland ICE detention center have been sentenced to a combined 450 years in federal prison — the first successful use of terrorism charges against alleged antifa members in U.S. history.",
+  "eventDate": "2026-06-23T10:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "On July 4, 2025, a group of activists held a noise demonstration outside the Prairieland ICE Detention Center in Alvarado, Texas. Some vandalized vehicles and a guard shack. When police arrived, Benjamin Song opened fire with an AR-15, striking an officer in the neck. The officer survived and has fully recovered.",
+      "question": "What happened at the Prairieland Detention Center?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Eight defendants were sentenced to a combined 450 years. Benjamin Song received 100 years, Maricela Rueda 70 years, five defendants received 50 years each, and Daniel Sanchez Estrada received 30 years — for moving a box of zines despite not being at the protest.",
+      "question": "How long were the sentences?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "The Proud Boys leader Enrique Tarrio received 22 years for seditious conspiracy, and Oath Keepers founder Stewart Rhodes received 18 years. The Prairieland defendants — who attended a protest with fireworks — received significantly longer sentences.",
+      "question": "How do these sentences compare to January 6 cases?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "No. Antifa is an ideology (short for anti-fascist), not an organization with membership rolls or leadership. The Trump administration designated it a 'domestic terrorist organization' via executive order in September 2025, but that designation created no new criminal charges.",
+      "question": "Is antifa actually an organization?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Donate through the DFW Support Committee at givesendgo.com/supportDFWprotestors, write letters to the defendants (addresses at prairielanddefendants.com/meet-the-defendants/), or organize fundraisers and noise demonstrations at local detention centers.",
+      "question": "How can I support the defendants?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Prairieland sentencing",
+    "Benjamin Song 100 years",
+    "antifa terrorism charges",
+    "ICE detention center protest",
+    "Trump war on antifa",
+    "political prisoners Texas",
+    "material support terrorists",
+    "Fort Worth federal court",
+    "civil liberties",
+    "First Amendment"
+  ],
+  "leadParagraph": "Eight people who attended a July 4, 2025 protest outside a Texas immigration detention center have been sentenced to a combined 450 years in federal prison. Benjamin Song, a former Marine reservist, received 100 years for opening fire during the demonstration. Seven others received 30 to 70 years. The sentences — longer than any January 6 defendant received — mark the first successful application of terrorism charges against alleged antifa members in U.S. history and set a devastating precedent for the criminalization of political dissent.",
+  "linkedPitch": null,
+  "location": "Fort Worth, Texas",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Group of people holding hand-lettered signs supporting the Prairieland defendants outside a federal courthouse building in Fort Worth, Texas",
+    "asset": {
+      "_ref": "image-797e439b1dedc43f85758f0c9bd8603117b09e6d-1024x683-webp",
+      "_type": "reference"
+    },
+    "caption": "Supporters of protesters convicted over a shooting outside a Texas immigration detention center display signs in support of the defendants outside a federal courthouse in Fort Worth, Texas, Tuesday, June 23, 2026.",
+    "credit": "AP Photo/Kendria LaFleur"
+  },
+  "methodology": "Reporting based on DOJ press releases, trial testimony reported by KERA News, AP, The Guardian, The Intercept, Al Jazeera, and BBC. Court documents and sentencing records reviewed. Defendant statements from KERA News and The Guardian reporting. Support committee information verified via official website.",
+  "needsReview": null,
+  "publishedAt": "2026-07-02T05:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "article-22bd04af-abdf-4250-a879-bbb96efa66d9",
+      "_type": "reference"
+    },
+    {
+      "_key": "55ecb9ee5c53",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "e5f831be3b48",
+      "_ref": "trinidad-texas-water-crisis-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "86bd6eb456cd",
+      "_ref": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_type": "reference"
+    },
+    {
+      "_key": "d06f7f709372",
+      "_ref": "two-calls-diapers-officer-buys-baby-executed-senatobia",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "450-years-for-solidarity-the-prairieland-sentences-that-expose-america-s-slide-into"
+  },
+  "tags": [
+    "Prairieland",
+    "antifa",
+    "terrorism charges",
+    "ICE",
+    "Trump administration",
+    "political prisoners",
+    "sentencing",
+    "dissent",
+    "authoritarianism",
+    "Texas"
+  ],
+  "title": "450 Years for Solidarity: The Prairieland Sentences That Expose America's Slide Into Authoritarianism",
+  "updatedAt": null,
+  "videoLink": null
+}

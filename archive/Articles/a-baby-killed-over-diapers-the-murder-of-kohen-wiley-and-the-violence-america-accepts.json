@@ -1,0 +1,157 @@
+{
+  "_id": "eb0d8576-6918-428b-b526-bfdd1b45876a",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "009237051a8e",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-0",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A one-year-old Black child was shot dead by police in Senatobia, Mississippi over an alleged shoplifting call. The officer had a racial slur complaint filed against him days before. This is the full story of Kohen Wiley's killing, the protests, the tear gassing of grieving families, and the broader pattern of violence against Black people in America.",
+  "eventDate": "2026-06-14T14:05:00-05:00",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Kohen Kartier Wiley was a one-year-old Black boy who was shot and killed by a Senatobia, Mississippi police officer on June 14, 2026, in a Walmart parking lot. The officer was responding to a shoplifting call over a box of diapers.",
+      "question": "Who was Kohen Wiley?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Hunter Foster is the Senatobia police sergeant identified through public records as the officer who shot and killed Kohen Wiley. He was hired in March 2025 and promoted to sergeant in September 2025. A fellow officer filed a racial slur complaint against him days before the shooting.",
+      "question": "Who is Hunter Foster?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Hundreds of protesters gathered outside Senatobia City Hall on June 16, 2026. They then marched to the Walmart where the shooting occurred. Law enforcement deployed tear gas on the peaceful crowd, including media crews and children. It was only after this that the officer was placed on administrative leave.",
+      "question": "What happened during the protests?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Vellesiya Wiley said she raised her baby up in her arms to show officers that a child was in the car before they fired. She disputed police claims that the car was driving toward officers, saying the car was moving away. She was never charged with any crime.",
+      "question": "What did the mother of Kohen Wiley say?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Cyrus Carmack-Belton was a 14-year-old Black boy shot in the back and killed by a South Carolina store owner who wrongly accused him of stealing four bottles of water in 2023. On June 1, 2026, a jury acquitted the store owner. Both cases illustrate the devaluation of Black life in America.",
+      "question": "How does the Cyrus Carmack-Belton case connect?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "kohen wiley",
+    "senatobia mississippi",
+    "police shooting toddler",
+    "hunter foster senatobia",
+    "police brutality walmart",
+    "tear gas protests mississippi",
+    "black lives matter",
+    "walmart shooting baby",
+    "cyrus carmack-belton",
+    "rick chow south carolina"
+  ],
+  "leadParagraph": "On June 14, 2026, Senatobia police officer Hunter Foster shot and killed one-year-old Kohen Kartier Wiley in a Walmart parking lot while responding to a shoplifting call over a box of diapers. The officer stayed on active duty for 48 hours before being placed on administrative leave — only after the community erupted in protests that were met with tear gas. The killing is part of a pattern of violence against Black people in Senatobia and across America, where property is valued more than Black life.",
+  "linkedPitch": null,
+  "location": "Senatobia, Mississippi",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Over 200 protesters gather outside Senatobia City Hall on June 16, 2026, demanding accountability for the police killing of one-year-old Kohen Wiley.",
+    "asset": {
+      "_ref": "image-815a3aa73c15f44eaab9c36a7fcfc2eaeefe4a13-2000x1333-webp",
+      "_type": "reference"
+    },
+    "caption": "Protesters hold signs demanding justice for Kohen Wiley outside Senatobia City Hall, June 16, 2026.",
+    "credit": "Andrew Bell/Mississippi Free Press"
+  },
+  "methodology": "Reported using primary source documents from the Mississippi Bureau of Investigation, Vellesiya Wiley's video testimony shared by Ben Crump Law, public records obtained by Action News 5 Memphis, and on-the-ground reporting from Mississippi Free Press, NBC News, FOX13 Memphis, WAPT, The Guardian, and local outlets. The Cyrus Carmack-Belton case was reported using coverage from CBS News, AP News, and The New York Times. All claims are cross-referenced across multiple independent sources.",
+  "needsReview": null,
+  "publishedAt": "2026-06-20T02:00:00-05:00",
+  "readingTimeMinutes": 26,
+  "relatedArticles": [
+    {
+      "_key": "ra-2",
+      "_ref": "two-calls-diapers-officer-buys-baby-executed-senatobia",
+      "_type": "reference"
+    },
+    {
+      "_key": "ra-0",
+      "_ref": "baby-kohen-wiley-senatobia-police-shooting",
+      "_type": "reference"
+    },
+    {
+      "_key": "ra-1",
+      "_ref": "hunter-foster-identified-kohen-wiley-shooter",
+      "_type": "reference"
+    },
+    {
+      "_key": "2c5a3ed05874",
+      "_ref": "tripp-brazeale-arkansas-investigation-2026-05-12",
+      "_type": "reference"
+    },
+    {
+      "_key": "ra-4",
+      "_ref": "katelyn-hall-deserved-help-louisville-gave-her-bullets",
+      "_type": "reference"
+    },
+    {
+      "_key": "ra-3",
+      "_ref": "article-22bd04af-abdf-4250-a879-bbb96efa66d9",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "a-baby-killed-over-diapers-the-murder-of-kohen-wiley-and-the-violence-america-accepts"
+  },
+  "tags": [
+    "kohen-wiley",
+    "senatobia",
+    "mississippi",
+    "police-brutality",
+    "hunter-foster",
+    "black-lives-matter",
+    "tear-gas",
+    "ben-crump",
+    "racism",
+    "police-violence"
+  ],
+  "title": "A Baby Killed Over Diapers: The Murder of Kohen Wiley and the Violence America Accepts",
+  "updatedAt": null,
+  "videoLink": null
+}

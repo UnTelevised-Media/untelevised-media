@@ -1,0 +1,143 @@
+{
+  "_id": "another-molotov-cocktail-new-orleans-tesla-economic-desperation-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "civil-unrest",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The third Molotov attack in a week — a Tesla service center in New Orleans — signals a growing wave of economic desperation in America. Workers who can't afford to live on their wages are finding new ways to make themselves heard.",
+  "eventDate": "2026-04-15T07:52:00-05:00",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "Early Tuesday morning, April 15, 2026, a suspected Molotov cocktail was thrown at the Tesla service and leasing center on Tchoupitoulas Street in the Irish Channel neighborhood. The front door was scorched and debris surrounded the entrance. The Bureau of Alcohol, Tobacco, Firearms and Explosives (ATF) confirmed the incident and is investigating. No arrests have been made.",
+      "question": "What happened at the Tesla center in New Orleans?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "No. This was the third Molotov attack in a week in April 2026. First, a Molotov was thrown at OpenAI CEO Sam Altman's home in San Francisco. Then, a warehouse worker set fire to a Kimberly-Clark distribution center in California, causing $600 million in damage. Now Tesla in New Orleans. This follows at least 10 major warehouse fires, nine of which remain under investigation.",
+      "question": "Is this an isolated incident?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Chamel Abdulkarim, the 29-year-old warehouse worker accused of setting the Kimberly-Clark distribution center fire, posted a video to social media stating: 'You should have just paid us enough to live.' He also texted a co-worker comparing himself to Luigi Mangione, the man accused of killing United Healthcare CEO Brian Thompson. The warehouse supplied toilet paper to approximately 50 million people.",
+      "question": "What did the warehouse fire suspect say?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "These attacks appear to be expressions of economic desperation. The targets are specific: corporate leadership, tech executives, and symbols of an economic system that millions of Americans feel has abandoned them. When people believe that voting, protests, and organizing don't work, they look for other ways to be heard. These incidents are symptoms of a broken social contract where work no longer guarantees a living wage.",
+      "question": "What are the broader implications of these attacks?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "The ATF is investigating the Tesla center attack in New Orleans. No arrests have been made yet, and Tesla staffers have been advised not to comment. The warehouse fire suspect, Chamel Abdulkarim, has been arrested and faces federal charges. The 20-year-old who attacked Sam Altman's home was arrested at OpenAI's headquarters after also threatening the building. All investigations are ongoing.",
+      "question": "What's happening with the investigations?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "economic-desperation",
+    "class-warfare",
+    "social-unrest",
+    "tesla",
+    "molotov",
+    "working-class",
+    "new-orleans",
+    "labor-rights",
+    "capitalism",
+    "protest",
+    "arson",
+    "inequality",
+    "wages",
+    "cost-of-living"
+  ],
+  "leadParagraph": "The third Molotov attack in a week — this one targeting a Tesla service center in New Orleans — is part of a growing pattern of economic desperation in America. Workers who can't afford to live on their wages are finding new ways to make themselves heard.",
+  "linkedPitch": null,
+  "location": "New Orleans. LA",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Scorched door of Tesla service center in New Orleans after Molotov cocktail attack on April 15, 2026. The door shows visible fire damage with soot and charring around the entryway.",
+    "asset": {
+      "_ref": "image-3b832fec84fe2d004a3a98fc1bddf6f945c6e165-1000x600-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-16T00:00:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "9a97eefdd61f",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "e0364f9a5f3d",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "74f400d3a32b",
+      "_ref": "amazon-solar-panels-fire-ohio",
+      "_type": "reference"
+    },
+    {
+      "_key": "179a2e508844",
+      "_ref": "the-fourth-fire-queens",
+      "_type": "reference"
+    },
+    {
+      "_key": "f4df71dc0b1f",
+      "_ref": "brockton-tractor-trailer-fire-massachusetts",
+      "_type": "reference"
+    },
+    {
+      "_key": "23a50956d9b4",
+      "_ref": "nine-fires-seven-days-working-class-verdict",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seo",
+    "description": "The third Molotov attack in a week signals growing economic desperation. Workers who can't afford to live are finding new ways to be heard.",
+    "title": "New Orleans Tesla Attack: Economic Desperation in America"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "another-molotov-cocktail-what-the-new-orleans-tesla-attack-reveals-about-economic-desperation-in"
+  },
+  "tags": [
+    "economic-desperation",
+    "class-warfare",
+    "social-unrest",
+    "tesla",
+    "molotov"
+  ],
+  "title": "Another Molotov Cocktail: What the New Orleans Tesla Attack Reveals About Economic Desperation in America",
+  "updatedAt": null,
+  "videoLink": null
+}

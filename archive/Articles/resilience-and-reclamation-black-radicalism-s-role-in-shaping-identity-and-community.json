@@ -1,0 +1,53 @@
+{
+  "_id": "article-9b8bfc80-529a-49b1-8c88-bba5fe623919",
+  "allowComments": null,
+  "author": {
+    "_ref": "853fcc99-ba9b-45d2-829f-b351cd182779",
+    "_type": "reference",
+    "name": "Dutch Caxton"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "9dec428c4538",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Explore the profound impact of Black radicalism on shaping identity and community through resilience and reclamation. Discover how historical movements and contemporary efforts empower and redefine marginalized communities.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Members of the NFAC march in formation along highway",
+    "asset": {
+      "_ref": "image-97706bf2db92546897b5a9bc54105a2e958bbf2e-980x551-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2022-05-09T16:33:00.000Z",
+  "readingTimeMinutes": 14,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "resilience-and-reclamation-black-radicalism-s-role-in-shaping-identity-and-community"
+  },
+  "tags": null,
+  "title": "Resilience and Reclamation: Black Radicalism's Role in Shaping Identity and Community",
+  "updatedAt": null,
+  "videoLink": null
+}

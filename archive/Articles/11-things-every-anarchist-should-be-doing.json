@@ -1,0 +1,100 @@
+{
+  "_id": "sJjMAutWs1xbX3qBIlUGRL",
+  "allowComments": true,
+  "author": {
+    "_ref": "RYZn4iYE9ChjVaOaU8i41k",
+    "_type": "reference",
+    "name": "Justin King"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "BOAIKFRWNleR9aRm6RBxU2",
+      "_ref": "d21a73f5-a2fc-46fd-8801-f1f32e1f0b1f",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A practical guide for anarchists of every variety on the concrete steps needed to build a more self-reliant, organized movement — from force multiplication and counter-economics to forming alliances and ending factional infighting.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "ve3cwpe6",
+      "_type": "faqItem",
+      "answer": "Force multiplication is a military concept adapted for anarchist organizing. One person teaches ten others a skill, who each teach ten more, creating exponential growth. By the fifth generation, one person's knowledge has reached 100,000 people — building a stronger, more self-reliant movement regardless of the skill involved.",
+      "question": "What does \"force multiplication\" mean in the context of anarchism?"
+    },
+    {
+      "_key": "seciwqzb",
+      "_type": "faqItem",
+      "answer": "Counter-economics means redirecting spending away from large corporations and state-connected entities. Buying locally, using alternative markets, reducing consumption, and choosing thrift stores over multinational chains all deprive the state of tax revenue and weaken corporate-government ties.",
+      "question": "How does counter-economics support anarchist goals?"
+    },
+    {
+      "_key": "14km4orc",
+      "_type": "faqItem",
+      "answer": "Internal fighting between factions — Ancom vs Ancap, Anprim vs Ansoc — creates exploitable divisions. The article points out that this infighting has led anarchists to be coopted by state entities and political parties, who harvest the energy of these battles for their own benefit while anarchists are painted as street criminals.",
+      "question": "Why does the author argue anarchists should stop fighting with each other?"
+    },
+    {
+      "_key": "ocng402e",
+      "_type": "faqItem",
+      "answer": "Balkanization means the fragmentation of larger nations into smaller political units. The author argues this is a stepping stone toward stateless societies, since smaller nations have less centralized control. Supporting movements like Basque independence, Irish unification, or Kurdish self-determination advances the anarchist vision of small, self-governing communities.",
+      "question": "What does \"supporting balkanization\" mean, and why would anarchists support nationalism?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "anarchism",
+    "anarchist",
+    "counter-economics",
+    "force multiplication",
+    "stateless society",
+    "self-reliance",
+    "balkanization",
+    "ancap",
+    "ancom",
+    "anprim",
+    "op-ed",
+    "Justin King",
+    "TFC"
+  ],
+  "leadParagraph": "Bringing about an idea as revolutionary as self-government will take work. For many of us, we are probably planting the seeds of a shade tree we will never have the pleasure of sitting under. The process must begin and it must continue.",
+  "linkedPitch": null,
+  "location": "United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Anarchist circle-A symbol",
+    "asset": {
+      "_ref": "image-1886a9367976343b9e136b600da21e37d00b4b21-1024x768-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Originally published May 5, 2017 via The Fifth Column (TFC). Republished with attribution.",
+  "needsReview": false,
+  "publishedAt": "2017-05-05T12:00:00Z",
+  "readingTimeMinutes": 13,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "11-things-every-anarchist-should-be-doing"
+  },
+  "tags": [
+    "anarchism",
+    "politics",
+    "opinion",
+    "self-reliance",
+    "counter-economics",
+    "philosophy",
+    "civil-liberties"
+  ],
+  "title": "11 Things Every Anarchist Should Be Doing",
+  "updatedAt": null,
+  "videoLink": null
+}

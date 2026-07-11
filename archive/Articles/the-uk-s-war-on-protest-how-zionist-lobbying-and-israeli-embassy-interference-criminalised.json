@@ -1,0 +1,105 @@
+{
+  "_id": "palestine-action-uk-zionist-lobby-israeli-embassy-interference",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    },
+    {
+      "_key": "b2874c14907b",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "How pro-Israel lobbying, Labour Party connections, and documented Israeli Embassy interference led to the criminalisation of dissent in Britain. The High Court ruled the ban unlawful.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Palestine Action is a British direct action network founded in 2020 by Huda Ammori and Richard Barnard. The group uses direct action — occupations, property damage, and disruptions — to target UK arms companies it says are complicit in Israeli war crimes, particularly Elbit Systems, Israel's largest arms manufacturer.",
+      "question": "What is Palestine Action?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The government cited Palestine Action's break-in at RAF Brize Norton in June 2025, where activists spray-painted red paint into the engines of two RAF refuelling planes. However, a declassified intelligence assessment later revealed that the majority of Palestine Action's actions would not meet the legal standard of terrorism, consisting primarily of property damage.",
+      "question": "Why was Palestine Action proscribed as a terrorist organisation?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Luke Akehurst is a Labour MP and former director of We Believe in Israel, a pro-Israel lobbying group that is a side-project of BICOM — Britain's most active pro-Israel lobbying organisation. Akehurst describes himself as a 'Zionist shitlord.' We Believe in Israel published a report calling for Palestine Action to be proscribed weeks before the government announced the ban.",
+      "question": "Who is Luke Akehurst and what is We Believe in Israel?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Freedom of Information documents reveal that Israeli embassy officials in London pressured the UK Attorney General's Office to intervene in ongoing legal cases involving Palestine Action activists. The UK government shared contact details of counter-terrorism police and prosecutors with the Israeli embassy during investigations, with redactions made because disclosure would 'prejudice UK's relations with Israel.'",
+      "question": "What role did the Israeli Embassy play in the proscription?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "In February 2026, the High Court ruled that the proscription of Palestine Action was unlawful — a disproportionate interference with rights to free expression, freedom of association, and freedom of assembly under the Human Rights Act 1998. The Court found that Home Secretary Yvette Cooper failed to follow her own policy and that only a 'very small number' of Palestine Action's actions could constitute terrorist action. The government has spent approximately £700,000 defending the ban in court.",
+      "question": "What did the High Court rule on the proscription?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": "In June 2025, the British government proscribed Palestine Action — a direct action protest group targeting arms companies supplying Israel — as a terrorist organisation. The ban was pushed by a network of Zionist lobbyists with documented connections to Labour Party cabinet ministers and with documented coordination from the Israeli Embassy in London. This is the story of how foreign interference, political lobbying, and the weaponisation of counter-terrorism legislation combined to criminalise dissent in Britain.",
+  "linkedPitch": null,
+  "location": "United Kingdom",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Two Palestine Action protesters on the roof of a weapons factory.",
+    "asset": {
+      "_ref": "image-86bd23179071a577d7e95985edc86b8b958f45bd-1000x654-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-03T01:13:34.044080",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "How pro-Israel lobbying, Labour Party connections, and documented Israeli Embassy interference led to the criminalisation of dissent in Britain. The High Court ruled the ban unlawful.",
+    "metaDescription": "How pro-Israel lobbying, Labour Party connections, and documented Israeli Embassy interference led to the criminalization of dissent in Britain. The High Court ruled the ban unlawful."
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-uk-s-war-on-protest-how-zionist-lobbying-and-israeli-embassy-interference-criminalised"
+  },
+  "tags": [
+    "palestine-action",
+    "uk",
+    "zionist-lobby",
+    "israeli-embassy",
+    "yvette-cooper",
+    "labour",
+    "civil-liberties",
+    "proscription",
+    "elbit-systems"
+  ],
+  "title": "The UK's War on Protest: How Zionist Lobbying and Israeli Embassy Interference Criminalised Dissent",
+  "updatedAt": null,
+  "videoLink": null
+}

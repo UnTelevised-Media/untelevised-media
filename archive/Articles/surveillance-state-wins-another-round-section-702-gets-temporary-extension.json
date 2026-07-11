@@ -1,0 +1,141 @@
+{
+  "_id": "section-702-surveillance-law-extension",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Congress voted to extend Section 702 of FISA for 10 days until April 30, after GOP leaders failed to secure a five-year or 18-month renewal. The warrantless surveillance program faces growing opposition from civil libertarians warning of a 'secret law' that would 'stun' the American public.",
+  "eventDate": "2026-04-17T12:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "Section 702 of the Foreign Intelligence Surveillance Act, enacted in 2008, authorizes the NSA and other intelligence agencies to intercept electronic communications of foreign nationals located outside the United States. The program inevitably scoops up communications involving Americans, which critics describe as a 'backdoor search' that circumvents existing privacy laws.",
+      "question": "What is Section 702 of FISA?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "Congress voted to extend Section 702 for 10 days until April 30. The extension passed after Republican leaders failed to secure both a five-year renewal and an 18-month renewal that President Trump had demanded. Both proposals were rejected by libertarian-leaning Republicans and privacy advocates in the early hours of Friday morning.",
+      "question": "What happened on April 17, 2026?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Section 702 allows the government to collect Americans' communications without a warrant, stored in massive databases that the FBI can query without judicial oversight. The FBI's searches of Americans' communications tripled last year with no explanation. Sen. Ron Wyden warns of a 'secret law' aspect that would 'stun' the American public if declassified.",
+      "question": "Why is Section 702 controversial?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Civil libertarians from both parties, including Reps. Ro Khanna (D-Calif.) and Thomas Massie (R-Ky.), are demanding a warrant requirement for U.S. citizens' communications. They argue that the Fourth Amendment should apply to Americans whose data is collected under this program, regardless of whether they were the nominal target.",
+      "question": "What are the reform proposals?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "If Congress fails to reauthorize Section 702 by April 30, intelligence collection could continue but would likely be subject to lawsuits from technology and telecommunications companies compelled to provide communications to the government. The intelligence community argues this would endanger national security, while privacy advocates say it's necessary to restore oversight.",
+      "question": "What happens if Section 702 is not reauthorized by April 30?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "section-702",
+    "fisa",
+    "surveillance",
+    "warrantless-surveillance",
+    "civil-liberties",
+    "privacy",
+    "ron-wyden",
+    "rand-paul",
+    "thomas-massie",
+    "ro-khanna",
+    "donald-trump",
+    "nsa",
+    "fbi",
+    "congress"
+  ],
+  "leadParagraph": "On April 17, 2026, Congress voted to extend Section 702 of the Foreign Intelligence Surveillance Act for 10 days until April 30. The extension passed only after Republican leaders failed to secure both a five-year renewal and an 18-month renewal that President Trump had demanded, as civil libertarians and surveillance-state supporters continue to battle over the warrantless surveillance program.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "The U.S. Capitol building dome rising against a blue sky in Washington D.C., the seat of Congress where the Section 702 surveillance law extension was debated and voted on",
+    "asset": {
+      "_ref": "image-e32f126df900f73cada3f5300f98772c278ee31c-2400x1600-webp",
+      "_type": "reference"
+    },
+    "caption": "The U.S. Capitol building in Washington D.C. on March 26, 2026. Congress voted on April 17, 2026 to extend Section 702 of the Foreign Intelligence Surveillance Act for 10 days until April 30, as civil libertarians and surveillance-state supporters continue to battle over the warrantless surveillance program.",
+    "credit": "CNN"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-25T00:00:00.000Z",
+  "readingTimeMinutes": 11,
+  "relatedArticles": [
+    {
+      "_key": "94a8c3e25562",
+      "_ref": "8cgpd47e3kq",
+      "_type": "reference"
+    },
+    {
+      "_key": "249f336fecf0",
+      "_ref": "0bzv6vDb5M9RssFkIn3Egp",
+      "_type": "reference"
+    },
+    {
+      "_key": "d56463fc9925",
+      "_ref": "when-silicon-valleys-castles-come-under-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "33de81113248",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "03de8cbe53ad",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "2db9d6bbadc4",
+      "_ref": "amazon-solar-panels-fire-ohio",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "surveillance-state-wins-another-round-section-702-gets-temporary-extension"
+  },
+  "tags": [
+    "surveillance",
+    "section-702",
+    "fisa",
+    "civil-liberties",
+    "privacy"
+  ],
+  "title": "Surveillance State Wins Another Round: Section 702 Gets Temporary Extension",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,136 @@
+{
+  "_id": "un-echoes-what-palestinians-have-said-for-decades-settler-violence-is-ethnic-cleansing",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-gaza",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-world",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Fourteen UN human rights experts have declared Israeli settler violence in the occupied West Bank has reached unprecedented levels and constitutes ethnic cleansing. Here is what that looks like on the ground.",
+  "eventDate": "2026-06-01",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Fourteen UN Special Rapporteurs stated that settler violence in the occupied West Bank has reached \"unprecedented\" levels in 2026 and that the violence, carried out with full impunity, \"serves as an instrument of coercion in the hands of the occupying power, facilitating ethnic cleansing.\"",
+      "question": "What did the UN experts actually say about settler violence?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "According to the UN experts citing OCHA data, at least 13 Palestinians have been killed and nearly 500 injured in settler attacks in just the first five months of 2026. Both figures outpace previous years.",
+      "question": "How many Palestinians have been killed by settlers in 2026?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Out of approximately 1,500 Palestinians killed by settlers and Israeli forces between 2017 and September 2025, Israeli authorities opened only 112 investigations resulting in a single conviction — a near-total impunity rate of 99.9%.",
+      "question": "What is the conviction rate for settler violence?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Umm al-Kheir, a Palestinian village in the South Hebron Hills, has been encircled by the Carmel settlement and a new outpost. Residents have faced water and electricity cuts, home demolitions, violent attacks, arbitrary detention, and torture. A human rights defender was killed in July 2025, allegedly by a sanctioned settler. Demolition orders now threaten the village with total erasure.",
+      "question": "What is happening in Umm al-Kheir?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "When the ICC reportedly requested a warrant for Finance Minister Smotrich in May 2026, he responded by ordering the demolition of Khan al-Ahmar — using international accountability as pretext to accelerate ethnic cleansing. The UN OHCHR called on Israel to halt the forcible displacement immediately.",
+      "question": "How does the Khan al-Ahmar case relate to this?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "settler violence West Bank",
+    "ethnic cleansing Palestine",
+    "UN experts Israel",
+    "West Bank displacement",
+    "Khan al-Ahmar demolition",
+    "Smotrich ICC warrant",
+    "Masafer Yatta",
+    "Umm al-Kheir",
+    "Palestinian villages destruction",
+    "Israeli occupation war crimes"
+  ],
+  "leadParagraph": "In the strongest warning to date, 14 UN experts declared settler violence an instrument of ethnic cleansing — as thirteen Palestinians are killed and nearly five hundred injured in five months.",
+  "linkedPitch": null,
+  "location": "West Bank, Occupied Palestinian Territory",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Palestinian residents stand among destroyed structures and debris after a settler attack on their village in the occupied West Bank",
+    "asset": {
+      "_ref": "image-3f6cd9518a7a988f1da3e66419c0fe3d132385a4-5000x3333-webp",
+      "_type": "reference"
+    },
+    "caption": "Palestinians assess damage after Israeli settlers attacked their village in the occupied West Bank",
+    "credit": "Reuters"
+  },
+  "methodology": "Analysis based on UN Special Rapporteurs joint statement (June 1, 2026), UN OCHA data, ICC filings, Reuters investigative reporting, and UN OHCHR statements. All claims cross-referenced with official UN documentation.",
+  "needsReview": null,
+  "publishedAt": "2026-06-05T09:30:00.000Z",
+  "readingTimeMinutes": 11,
+  "relatedArticles": [
+    {
+      "_key": "rel-smotrich-khan-ahmar",
+      "_ref": "smotrich-icc-khan-al-ahmar-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-gaza-shrinking",
+      "_ref": "salah-akram-gaza-is-shrinking",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-900-dead-ceasefire",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "un-echoes-what-palestinians-have-said-for-decades-settler-violence-is-ethnic-cleansing"
+  },
+  "tags": [
+    "settler-violence",
+    "west-bank",
+    "ethnic-cleansing",
+    "un-experts",
+    "occupied-palestinian-territory",
+    "khan-al-ahmar",
+    "masafer-yatta",
+    "smotrich",
+    "icc"
+  ],
+  "title": "UN Experts Say What Palestinians Have Said for Decades: Settler Violence Is Ethnic Cleansing",
+  "updatedAt": null,
+  "videoLink": null
+}

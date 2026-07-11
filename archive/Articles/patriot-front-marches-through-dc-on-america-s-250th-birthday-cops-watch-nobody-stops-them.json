@@ -1,0 +1,161 @@
+{
+  "_id": "patriot-front-july-4-dc-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-civil-unrest",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-politics",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Hundreds of masked Patriot Front members marched through Washington DC on July 4th carrying Confederate flags, calling for immigrant removal, and facing zero arrests as MPD called it 'first amendment activity.'",
+  "eventDate": "2026-07-04T09:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Patriot Front is a white supremacist and neo-fascist group founded in 2017 by Thomas Rousseau after splitting from Vanguard America following the deadly 'Unite the Right' rally in Charlottesville, Virginia. The group promotes the creation of a white ethnostate in the United States and has more than 540 members across 49 states as of early 2026, according to internal documents obtained by USA Today.",
+      "question": "What is Patriot Front?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Hundreds of masked Patriot Front members gathered at Union Station and marched toward Capitol Hill carrying Confederate flags, inverted American flags, and metal shields. They chanted 'Reclaim America!' and called for the removal of immigrants. The Metropolitan Police Department made zero arrests and described the event as 'first amendment activities.' The White House declined to comment on whether President Trump condemns the march.",
+      "question": "What happened at the July 4th Patriot Front march in Washington DC?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The White House declined to comment when asked by the Guardian whether President Trump condemns the march. Trump had earlier delivered a deeply partisan speech on July 4th condemning a 'communist menace.' The Guardian noted that Patriot Front has 'gained visibility over the years as those connected to white supremacy organizations have been widely embraced by the Trump administration.'",
+      "question": "Has the Trump administration responded to the Patriot Front march?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Metropolitan Police Department stated it was 'tracking first amendment activities' and said no arrests were reported, no complaints were filed, and no calls for assistance were logged. Critics have pointed out the stark contrast between law enforcement's permissive response to Patriot Front and its aggressive crackdowns on pro-Palestinian and anti-racist protests.",
+      "question": "Why were no arrests made during the Patriot Front march?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Right-wing figures including Senator Mike Lee and Elon Musk have pushed the conspiracy theory that Patriot Front is a federal government false flag operation designed to frame conservatives. Musk amplified the theory in 2024, claiming the group was a 'psyop.' Forbes reported that the theory was debunked when arrested members were photographed without masks, and Musk's own platform fact-checked his post. The conspiracy persists as a way for the right-wing ecosystem to deny the existence of organized white supremacist movements.",
+      "question": "What is the 'fed' conspiracy theory about Patriot Front?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Patriot Front march DC July 4 2026",
+    "white supremacist march Washington DC",
+    "Patriot Front neo-fascist",
+    "Thomas Rousseau Patriot Front",
+    "far-right extremism United States",
+    "Metropolitan Police DC Patriot Front",
+    "Trump white supremacy",
+    "Patriot Front 540 members",
+    "semiquincentennial white nationalism",
+    "Confederate flag Capitol Hill"
+  ],
+  "leadParagraph": "On July 4th, 2026 — the 250th anniversary of American independence — hundreds of masked men from the neo-fascist white supremacist group Patriot Front marched through Washington DC carrying Confederate flags, chanting 'Reclaim America,' and calling for the removal of immigrants. The Metropolitan Police Department made zero arrests, calling the demonstration 'first amendment activity,' while the White House declined to comment on whether President Trump condemns the march. The demonstration highlights the growing emboldenment of far-right extremist groups under the current administration.",
+  "linkedPitch": null,
+  "location": "Washington, DC, United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "A column of masked men in matching navy shirts and khaki pants march in formation on a city street, carrying multiple flags including a Confederate flag",
+    "asset": {
+      "_ref": "image-9abf06638ad6efab96ed30a9ec21640639be1285-5999x3999-webp",
+      "_type": "reference"
+    },
+    "caption": "Masked members of the white supremacist group Patriot Front march in formation through Washington DC carrying flags including the Confederate flag, on July 4, 2026, during the 250th anniversary of US independence.",
+    "credit": "Reuters/Cheney Orr"
+  },
+  "methodology": "Reported using verified on-scene video and photography from Reuters, WTOP, and social media correspondents. Official statements from the Metropolitan Police Department and the White House were sourced via Politico and the Guardian. Background on Patriot Front was cross-referenced through the Anti-Defamation League, Southern Poverty Law Center, George Washington University Program on Extremism, and internal documents obtained by USA Today.",
+  "needsReview": null,
+  "publishedAt": "2026-07-05T00:49:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "prineville-militia-police-racism",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "trump-hollowing-out-guardrails-op-ed",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "far-right-pressure-on-crook-county-schools",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "0c16c198-32c8-40ca-a5f3-4b0591cf3921",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "prairieland-sentencing-450-years-antifa-crackdown-authoritarianism",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "the-paramilitary-behind-the-pogroms-settler-paramilitaries-state-backed-ethnic-cleansing-west-bank",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Hundreds of masked Patriot Front members marched through Washington DC on July 4th with Confederate flags. Zero arrests. The White House declined to condemn it.",
+    "metaTitle": "Patriot Front Marches DC July 4: Zero Arrests, White House Silent",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "patriot-front-marches-through-dc-on-america-s-250th-birthday-cops-watch-nobody-stops-them"
+  },
+  "tags": [
+    "patriot-front",
+    "white-supremacy",
+    "fascism",
+    "far-right",
+    "washington-dc",
+    "july-4th",
+    "police-brutality",
+    "trump-administration",
+    "neo-fascism",
+    "confederate-flag"
+  ],
+  "title": "Patriot Front Marches Through DC on America's 250th Birthday — Cops Watch, Nobody Stops Them",
+  "updatedAt": null,
+  "videoLink": null
+}

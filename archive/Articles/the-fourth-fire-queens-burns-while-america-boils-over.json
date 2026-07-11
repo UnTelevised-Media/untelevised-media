@@ -1,0 +1,135 @@
+{
+  "_id": "the-fourth-fire-queens",
+  "allowComments": true,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "26ebdec099a8f884481c30b83fbc87db",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A five-alam lumberyard fire in Queens, New York — the fourth massive blaze in four days. While investigations continue, the pattern is clear: America is boiling over.",
+  "eventDate": "2026-04-10T05:00",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "The official cause is still under investigation by FDNY fire marshals. No suspects have been named and no motive has been established.",
+      "question": "What caused the Queens lumberyard fire?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "No. The FDNY reported no injuries to firefighters, EMS personnel, or civilians. The building was closed when the fire started.",
+      "question": "Was anyone injured in the College Point fire?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "The fire took over 12 hours to bring under control. It started at 7:30 PM on Friday, April 10, and was declared under control at approximately 8:00 AM on Saturday, April 11.",
+      "question": "How long did it take to control the fire?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Approximately 300 firefighters and EMS personnel responded, with 84-90 units deployed. At the height of the operation, eight tower ladders surrounded the building.",
+      "question": "How many firefighters responded to the Queens fire?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "A two-story, 64,000-square-foot warehouse at 130-17 23rd Ave containing a lumberyard and cabinetry business. The building was completely destroyed.",
+      "question": "What building was on fire in College Point?"
+    },
+    {
+      "_key": "faq-6",
+      "answer": "Yes. The smoke was visible from the Whitestone Bridge and the Throgs Neck Bridge. The smell of smoke was reported as far north as Westchester County, and the Mount Vernon Police Department issued a notice about it.",
+      "question": "Could the smoke be seen from far away?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "queens fire",
+    "lumberyard fire",
+    "college point",
+    "five-alarm fire",
+    "fdny",
+    "warehouse fire",
+    "new york fire",
+    "civil unrest",
+    "america boiling over",
+    "april 2026"
+  ],
+  "leadParagraph": "# The Fourth Fire: Queens Burns While America Boils Over",
+  "linkedPitch": null,
+  "location": "Queens, New York",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Firefighters in turnout gear and helmets work at night near a large industrial building with emergency lights flashing. Thick smoke is visible in the background as they battle the massive lumberyard fire.",
+    "asset": {
+      "_ref": "image-139d80329489a7388801b69b2566a920c4f6bf7c-3076x2048-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2026-04-12T13:56:36.644624",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "b52420c9b769",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "fc8a96c33767",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "75ce06be0ff1",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "eb7f9a721970",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "252fea940da7",
+      "_ref": "amazon-solar-panels-fire-ohio",
+      "_type": "reference"
+    },
+    {
+      "_key": "c984a045e310",
+      "_ref": "brockton-tractor-trailer-fire-massachusetts",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-fourth-fire-queens-burns-while-america-boils-over"
+  },
+  "tags": [
+    "queens-fire",
+    "civil-unrest",
+    "five-alarm",
+    "new-york",
+    "america-boiling-over"
+  ],
+  "title": "The Fourth Fire: Queens Burns While America Boils Over",
+  "updatedAt": "2026-04-12T20:26:00.998Z",
+  "videoLink": ""
+}

@@ -1,0 +1,145 @@
+{
+  "_id": "strike-wave-workers-withdrawing-labor",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "278a950b649be65005e3f36defff6911",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "d9a50128cd4a",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Nurses, utility workers, and warehouse workers across America are striking — and the strike wave is growing. From PECO's first-ever walkout to New Orleans nurses on their sixth strike, labor is weaponizing its only real power: the withdrawal of work.",
+  "eventDate": "2026-07-04T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "By mid-July 2026, there were at least 15 confirmed nurse strikes with four more scheduled, plus strikes by utility workers (PECO/IBEW Local 614), meatpacking workers (JBS Denver), and others. Nurse strikes have nearly quadrupled since 2017.",
+      "question": "How many strikes are happening right now in the US?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Demands vary by workplace but cluster around: safe staffing ratios, protection against outsourcing and AI replacement, fair wage increases, retirement security, first contract recognition, and an end to retaliatory firing of union leaders.",
+      "question": "What are the strikers' main demands?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Montefiore Medical Center in the Bronx laid off 12 nurses in July 2026 and replaced them with AI systems. The New York State Nurses Association says this directly violates the contract won through a near-month-long strike in February 2026.",
+      "question": "What is happening with AI replacing nurses?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "IBEW Local 614, representing 1,600 PECO workers, struck on July 4, 2026 — the first strike in the utility's 145-year history. Workers demanded better wages, retirement benefits, and protection against outsourcing. The strike ended July 6 with a tentative agreement.",
+      "question": "What was the PECO strike about?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Nurses at University Medical Center in New Orleans launched their sixth strike on May 1, 2026, after more than 765 days of stalled negotiations. It is the only unionized hospital in Louisiana. Hospital operator LCMC Health has cancelled six bargaining sessions, switched law firms repeatedly, and retaliated against union leaders.",
+      "question": "What is 'Strike Six' in New Orleans?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "strike wave 2026",
+    "PECO strike July 4 Philadelphia",
+    "New Orleans nurses Strike Six UMC",
+    "nurse strikes quadrupled since 2017",
+    "Montefiore AI replace nurses",
+    "Brigham and Women's strike July 8",
+    "Allina hospice strike Minneapolis",
+    "general strike labor movement"
+  ],
+  "leadParagraph": "Across the United States this week, workers at PECO (Philadelphia), University Medical Center (New Orleans), Allina Health (Minneapolis), Ascension Via Christi (Wichita), Ascension Saint Agnes (Baltimore), and Brigham and Women's Hospital (Boston) either struck or prepared to strike. Nurse strikes have nearly quadrupled since 2017. Meanwhile, Montefiore Medical Center in the Bronx laid off 12 nurses and replaced them with AI — a direct violation of the contract won through striking. The moment demands solidarity across movements and a general strike orientation.",
+  "linkedPitch": null,
+  "location": "United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Striking PECO workers carrying signs on a picket line outside company headquarters in Philadelphia on July 4, 2026",
+    "asset": {
+      "_ref": "image-51c7215e57ec64d4cdbdcdb3a222928e9a0ff26c-1920x1080-webp",
+      "_type": "reference"
+    },
+    "caption": "PECO workers form picket lines outside company headquarters in Philadelphia on July 4, 2026, during the first strike in the utility's 145-year history.",
+    "credit": "6abc.com"
+  },
+  "methodology": "Reported using cross-referenced coverage from WHYY, Labor Notes, Nurse.org, CBS Minnesota, MPR News, WBUR, GBH, Gothamist, Crain's New York, AJMC, PhillyVoice, and the National Nurses Organizing Committee. Strike data verified against Nurse.org's Strike Intelligence tracker and union press releases.",
+  "needsReview": null,
+  "publishedAt": "2026-07-07T21:00:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "denver-jbs-strike-authorization",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "ny-prison-strike-forgotten-by-design-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "may-day-2026-history-anarchist-origins-international-workers-day",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-8",
+      "_ref": "the-fire-in-miami-gardens-when-underpaid-workers-meet-cost-cutting-logistics",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-strike-wave-is-here-workers-across-america-are-withdrawing-their-labor-and-the-system-is"
+  },
+  "tags": [
+    "Labor",
+    "Nurses",
+    "PECO",
+    "IBEW",
+    "New Orleans",
+    "Allina",
+    "Brigham and Women's",
+    "General Strike",
+    "AI Replacement",
+    "Montefiore"
+  ],
+  "title": "The Strike Wave Is Here: Workers Across America Are Withdrawing Their Labor — and the System Is Starting to Shake",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,114 @@
+{
+  "_id": "7ONx74QMiI10eazwub4tIh",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "8e7408d1e821",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "87aadf2f3956",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "MCSD deletes their facebook page. After a long battle with activist occupying the comments sections, and blasting evidence of their war crimes and lies everywhere, MCSD has pulled the facebook page. This is most likely done in an attempt to scrub the evidence and silence the resistance.",
+  "eventDate": "2016-11-27T05:12:00.000Z",
+  "faqs": [
+    {
+      "_key": "kr1nijq",
+      "_type": "faqItem",
+      "answer": "The MCSD Facebook page was removed on or around November 26, 2016, likely to scrub evidence of their actions against Water Protectors and prevent activists from documenting contradictions between MCSD's statements and livestream footage of events.",
+      "question": "Why did the Morton County Sheriff's Department remove their Facebook page?"
+    },
+    {
+      "_key": "kr2l4si",
+      "_type": "faqItem",
+      "answer": "Gary Schwartzenberger was suspended as Morton County Sheriff in connection with events surrounding the Standing Rock protests. His department's handling of Water Protectors drew national and international criticism for excessive force.",
+      "question": "Who is Sheriff Gary Schwartzenberger?"
+    },
+    {
+      "_key": "kr3t7pf",
+      "_type": "faqItem",
+      "answer": "Activists had been using the MCSD Facebook page comments to document contradictions between the department's public statements and footage from livestreams, as well as sharing evidence of alleged excessive force, lies, and propaganda about events at Standing Rock.",
+      "question": "What was being documented on the MCSD Facebook page?"
+    },
+    {
+      "_key": "kr40m03",
+      "_type": "faqItem",
+      "answer": "You can donate to the Standing Rock Sioux Tribe at standingrock.org, or via mail to: Standing Rock Sioux Tribe, Attention: Donations, PO Box D, Building #1, North Standing Rock Avenue, Fort Yates, ND 58538.",
+      "question": "How to donate to Standing Rock Sioux Tribe?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Anon Resistance",
+    "ARM",
+    "Anon",
+    "Resistance",
+    "Movement",
+    "Anonymous",
+    "Anonymous 2017",
+    "the anon message",
+    "anonmessage",
+    "official anonymous website",
+    "official anonymous",
+    "anonymous channel",
+    "anonymous today",
+    "anonymous this week",
+    "anonymous 2017",
+    "today anonymous 2017 this week",
+    "anonymous 2017 latest",
+    "anonymous hackers",
+    "Anarchy",
+    "Anarchism"
+  ],
+  "leadParagraph": "A lot of our activist have been frequenting the Morton County Sheriff's Department facebook page for months now. This being the case it wasn't long before one of us noticed the page was missing.",
+  "linkedPitch": null,
+  "location": "Morton County, North Dakota",
+  "mainImage": {
+    "_type": "image",
+    "asset": {
+      "_ref": "image-2a7e106078c170c1cee8f7749995255e67ed31c8-600x400-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website (news.anonresistance.dx.am) and has been migrated to UnTelevised Media.",
+  "needsReview": false,
+  "publishedAt": "2016-11-26T12:00:00Z",
+  "readingTimeMinutes": 8,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "morton-county-sheriffs-remove-facebook-page-in-effort-to-scrub-evidence-and-silence-resistance"
+  },
+  "tags": [
+    "morton-county",
+    "standing-rock",
+    "facebook",
+    "censorship",
+    "nodapl",
+    "police-brutality",
+    "nodalp",
+    "standwithstandingrock",
+    "istandwithstandingrock",
+    "standingrock"
+  ],
+  "title": "Morton County Sheriff's Remove Facebook Page in Effort to Scrub Evidence and Silence Resistance",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,156 @@
+{
+  "_id": "killdozer-22-years-granby-colorado-man-built-his-own-justice",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "Bk0r54OHktyZ3WUqIVJ5EM",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "Bk0r54OHktyZ3WUqIVJ5J9",
+      "_ref": "d21a73f5-a2fc-46fd-8801-f1f32e1f0b1f",
+      "_type": "reference"
+    },
+    {
+      "_key": "Bk0r54OHktyZ3WUqIVJ5Nw",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Twenty-two years after Marvin Heemeyer drove an armored bulldozer through Granby, Colorado, the story isn't about whether he was a hero — it's about the system that made him.",
+  "eventDate": "2004-06-04T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Marvin Heemeyer was a welder and muffler shop owner in Granby, Colorado, who on June 4, 2004, drove an armored Komatsu D355A bulldozer through the town, demolishing 13 buildings before taking his own life. The incident became known as the 'Killdozer rampage.'",
+      "question": "Who was Marvin Heemeyer?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "No. Marvin Heemeyer was the only fatality. He died by self-inflicted gunshot wound after the bulldozer became stuck in debris. Despite firing a .50 BMG rifle, no one else was injured or killed.",
+      "question": "Did anyone die in the Killdozer rampage?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Heemeyer spent 12 years in disputes with town officials over zoning decisions that approved a concrete plant next to his muffler shop. He lost lawsuits, was fined for code violations, and believed the system had been rigged against him in favor of wealthier interests.",
+      "question": "Why did Heemeyer attack Granby?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Heemeyer spent 18 months modifying a Komatsu D355A bulldozer with layers of steel and concrete, bulletproof camera shields, gun ports with three rifles including a .50 BMG, and living quarters. Over 200 rounds and three explosive detonations failed to penetrate the armor.",
+      "question": "How was the bulldozer armored?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "Colorado Governor Bill Owens ordered the bulldozer disassembled and its parts scattered across multiple scrapyards to prevent it from becoming a memorial or inspiration.",
+      "question": "What happened to the Killdozer after the rampage?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Marvin Heemeyer",
+    "Killdozer",
+    "Granby Colorado",
+    "armored bulldozer",
+    "Komatsu D355A",
+    "class struggle",
+    "zoning abuse",
+    "capitalism",
+    "working class",
+    "civil unrest"
+  ],
+  "leadParagraph": "On June 4, 2004, Marvin Heemeyer sealed himself inside an armored Komatsu D355A bulldozer and demolished 13 buildings in Granby, Colorado, after 12 years of zoning battles, code enforcement, and institutional abandonment. No one was killed except Heemeyer himself. Twenty-two years later, the question isn't whether he was right — it's whether the system that produced him has changed.",
+  "linkedPitch": null,
+  "location": "Granby, Colorado",
+  "mainImage": {
+    "_type": "image",
+    "alt": "The armored Komatsu D355A bulldozer driven by Marvin Heemeyer stuck inside the destroyed Gambles hardware store in Granby, Colorado after the June 4, 2004 rampage",
+    "asset": {
+      "_ref": "image-8865f414deb8791e1458b43ab1fa945303534ee5-650x475-webp",
+      "_type": "reference"
+    },
+    "caption": "Law enforcement officials examine the fortified Komatsu D355A bulldozer driven by Marvin Heemeyer after it came to rest inside the Gambles hardware store in Granby, Colorado, June 5, 2004.",
+    "credit": "Craig F. Walker / The Denver Post / Getty Images"
+  },
+  "methodology": "Reported using Wikipedia, Denver7, CBS News Colorado, Sky-Hi News archives, and the documentary 'Tread' (2020). Cross-referenced with local news coverage and investigative reporting from 2004-2024.",
+  "needsReview": null,
+  "publishedAt": "2026-06-05T04:00:00Z",
+  "readingTimeMinutes": 12,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "nine-fires-seven-days-working-class-verdict",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "raytheon-building-fire-warner-robins-georgia-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "oxfam-billionaire-wealth-exploitation-deep-dive",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "On June 4, 2004, Marvin Heemeyer drove an armored bulldozer through Granby, Colorado, after 12 years of institutional abandonment. The system that made him hasn't changed.",
+    "metaTitle": "Killdozer: 22 Years After Marvin Heemeyer's Rampage",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "killdozer-when-a-man-built-his-own-justice-system-and-the-system-that-made-him"
+  },
+  "tags": [
+    "Marvin Heemeyer",
+    "Killdozer",
+    "Granby Colorado",
+    "Class War",
+    "Capitalism",
+    "Zoning",
+    "Workers Rights",
+    "Civil Unrest",
+    "Small Business",
+    "Police State"
+  ],
+  "title": "Killdozer: When a Man Built His Own Justice System — And the System That Made Him",
+  "updatedAt": null,
+  "videoLink": null
+}

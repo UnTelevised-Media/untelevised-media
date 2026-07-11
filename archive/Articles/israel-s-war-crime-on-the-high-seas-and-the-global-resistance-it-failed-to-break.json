@@ -1,0 +1,126 @@
+{
+  "_id": "israel-flotilla-war-crime",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-gaza",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-hr",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-world",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israel seized all 60 vessels of the Global Sumud Flotilla in international waters, kidnapping 426 humanitarian activists from 44 countries. Among them: the sister of the President of Ireland.",
+  "eventDate": "2026-05-19T03:44:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "The Global Sumud Flotilla is a civilian-led humanitarian aid mission carrying supplies to Gaza and demanding an end to Israel's eighteen-year naval blockade. The May 2026 convoy consisted of sixty vessels carrying 426 people from forty-four countries.",
+      "question": "What is the Global Sumud Flotilla?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Legal experts say it likely is not. The San Remo Manual requires blockades to meet five conditions including impartial application and not preventing humanitarian aid delivery. Israel's Gaza blockade has been found to fail these conditions, and three ICJ orders (January, March, May 2024) require unimpeded humanitarian access to Gaza.",
+      "question": "Is Israel's interception of the flotilla legal under international law?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Dr. Margaret Connolly is a sixty-seven-year-old GP from Sligo, Ireland, and the sister of Irish President Catherine Connolly. She was among eight Irish citizens detained by Israel after its forces boarded the flotilla in international waters.",
+      "question": "Who is Dr. Margaret Connolly?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Israel's National Security Minister Itamar Ben Gvir posted video footage of himself at the Ashdod detention facility waving an Israeli flag and taunting dozens of bound, kneeling activists. The footage drew diplomatic outrage from Spain, Britain, Portugal, Italy, and other nations.",
+      "question": "What did Ben Gvir do?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Ten nations issued a joint statement condemning Israel's \"blatant violations of international law.\" The Irish government demanded immediate release of its citizens. Individual foreign ministers from Spain, Britain, Portugal, and Italy condemned the activists' treatment. No Western sanctions have been announced.",
+      "question": "What has been the international response?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "gaza blockade",
+    "flotilla",
+    "global sumud",
+    "international waters",
+    "war crime",
+    "piracy",
+    "ben gvir",
+    "margaret connolly",
+    "irish president",
+    "ashdod",
+    "san remo manual",
+    "icj order",
+    "humanitarian aid",
+    "khan al-ahmar"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": "Mediterranean Sea",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Israeli naval vessel escorting a captured civilian boat into Ashdod port",
+    "asset": {
+      "_ref": "image-c21fa72c7526f5e9b4743c822c477cb394e1c923-1200x800-webp",
+      "_type": "reference"
+    },
+    "caption": "Israeli naval forces sail a confiscated Gaza-bound flotilla boat into Israel's Ashdod port after intercepting the vessel on the Mediterranean Sea, Tuesday, May 19, 2026.",
+    "credit": "Reuters/Abir Sultan"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-20T20:00:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Israel seized 60 vessels and 426 activists in international waters. Among the kidnapped: the sister of the President of Ireland.",
+    "title": "Israel's War Crime on the High Seas"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "israel-s-war-crime-on-the-high-seas-and-the-global-resistance-it-failed-to-break"
+  },
+  "tags": [
+    "gaza-blockade",
+    "global-sumud-flotilla",
+    "international-law",
+    "war-crimes",
+    "ben-gvir",
+    "ireland",
+    "palestine",
+    "humanitarian-aid"
+  ],
+  "title": "Israel's War Crime on the High Seas — and the Global Resistance It Failed to Break",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,101 @@
+{
+  "_id": "y5ruqrpa",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "7qfcvy4f",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "xm2h9nr1",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "From ICE raids pushing cities to brink of martial law, to facial recognition jailing innocent grandmothers, to homeless encampments being sealed underground — here are five underreported crises unfolding across America while national media obsesses over war.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "p3h8hdc7",
+      "_type": "faqItem",
+      "answer": "Five domestic crises unfolding across America while national media obsesses over war: (1) ICE raids pushing cities like L.A. to the brink of martial law, (2) homeless encampments being sealed underground, (3) facial recognition technology falsely arresting innocent people like a Tennessee grandmother, (4) Indianapolis normalizing 25,000 evictions per year, and (5) a $50 billion federal fund meant to save rural hospitals actually driving closures.",
+      "question": "What are these five underreported stories?"
+    },
+    {
+      "_key": "cwi1on3b",
+      "_type": "faqItem",
+      "answer": "Corporate media prioritizes conflict abroad over domestic repression that requires sustained attention to tell. These stories are about systems crushing ordinary Americans.",
+      "question": "Why aren't these stories getting national coverage?"
+    },
+    {
+      "_key": "w1mraz9s",
+      "_type": "faqItem",
+      "answer": "The evidence suggests otherwise. Clearview AI has been sued by the ACLU, but departments continue using it. Documented cases include false arrests of innocent people.",
+      "question": "Is facial recognition actually making us safer?"
+    },
+    {
+      "_key": "0pxrgmou",
+      "_type": "faqItem",
+      "answer": "Document what you're seeing, organize locally, support mutual aid networks, demand accountability from elected officials, and share these stories.",
+      "question": "What can people do about these issues?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "underreported",
+    "ICE",
+    "surveillance",
+    "homelessness",
+    "evictions",
+    "rural-healthcare"
+  ],
+  "leadParagraph": "Systems designed to crush — ICE raids as repression, sweeps as erasure, surveillance as control, evictions as displacement, and collapsed healthcare as abandonment. The powerful aren't failing at their jobs. They're succeeding at something else.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "National Guard deployed to LA federal building durring ICE protest summer 2025",
+    "asset": {
+      "_ref": "image-1a27abb9398afbfb4b4da5355bc6cb64248f77a3-1280x720-heif",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-03-31T15:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seoObject",
+    "metaDescription": "From ICE raids pushing cities to martial law, to AI false arrests, homeless encampments sealed underground, 25,000 evictions, and rural hospital collapses — five crises corporate media ignores.",
+    "metaTitle": "5 Underreported U.S. Stories Corporate Press Won't Touch"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "underreported-us-stories-march-2026"
+  },
+  "tags": [
+    "police-state",
+    "surveillance",
+    "housing-crisis"
+  ],
+  "title": "5 Underreported U.S. Stories: Corporate Press Won't Touch",
+  "updatedAt": "2026-03-31T16:19:22.165Z",
+  "videoLink": null
+}

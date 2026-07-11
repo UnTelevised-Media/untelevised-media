@@ -1,0 +1,141 @@
+{
+  "_id": "bolivia-oil-field-seizure-santa-cruz-neoliberalism-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Rural workers in Bolivia have seized an oil field in the Santa Cruz region and halted all production, as part of the general strike against neoliberalism. The site, in the Santa Rosa del Sara municipality, is now fully offline.",
+  "eventDate": "2026-06-04T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Rural workers and labor unions have launched a general strike now entering its sixth week, demanding President Rodrigo Paz's resignation, the repeal of neoliberal austerity measures, and the reversal of land privatization laws. Protesters have seized the Humberto Suárez Roca oil field in Santa Cruz, blockaded highways nationwide, and shut down major cities including La Paz, El Alto, Santa Cruz, and Cochabamba.",
+      "question": "What is happening in Bolivia right now?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "President Paz issued Supreme Decree 5503 in December 2025, which removed fuel subsidies and opened Bolivia's resources to foreign extraction without legislative approval. In April 2026, his government passed Law 1720, privatizing Indigenous and peasant land holdings. Combined with severe fuel shortages, rising inflation, and austerity measures, these policies triggered mass mobilization from Bolivia's labor unions, miners, farmers, and Indigenous organizations.",
+      "question": "Why are Bolivians protesting against President Paz?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The Central Obrera Boliviana (COB) and ten umbrella labor organizations have demanded: Paz's resignation, a 20% wage increase, repeal of Law 1720, an end to austerity and privatization, 50% pay cuts for high government officials, increased pensions, and access to diesel and essential resources.",
+      "question": "What are the protesters' core demands?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Humberto Suárez Roca is a British Petroleum (BP) oil production facility in the Santa Rosa del Sara municipality of Bolivia's Santa Cruz department. Rural workers seized the facility and shut down production as part of the general strike, cutting off a major source of revenue for the region.",
+      "question": "What is the Humberto Suárez Roca oil field?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "The United States, through Secretary of War Pete Hegseth and Senator Marco Rubio, has signaled support for the Paz government, warning it will \"not tolerate a coup\" while labeling protesters as \"criminals and drug traffickers.\" Defense and Education Ministers resigned on June 3 as the crisis escalated. Evo Morales is reportedly organizing from undisclosed locations abroad.",
+      "question": "How has the international community responded?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "bolivia",
+    "oil-field-seizure",
+    "neoliberalism",
+    "general-strike",
+    "rural-workers",
+    "santa-cruz",
+    "indigenous-protest",
+    "land-privatization",
+    "austerity",
+    "climate-crisis"
+  ],
+  "leadParagraph": "Rural workers in Bolivia's Santa Cruz department have seized the Humberto Suárez Roca oil field, halting production as part of a six-week general strike demanding President Rodrigo Paz's resignation and an end to neoliberal austerity measures.",
+  "linkedPitch": null,
+  "location": "Santa Cruz, Bolivia",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Bolivian rural workers at the seized Humberto Suárez Roca oil field in Santa Rosa del Sara, Santa Cruz department",
+    "asset": {
+      "_ref": "image-018d6f3a705ac3003e23e98a0ed0d4bb65265e79-960x540-webp",
+      "_type": "reference"
+    },
+    "caption": "Bolivian rural workers at the seized Humberto Suárez Roca oil field in Santa Rosa del Sara",
+    "credit": "Democracy Now!"
+  },
+  "methodology": "Reported using open-source intelligence including Democracy Now, Reuters, People's Dispatch, Jacobin, Common Dreams, and UPI. Cross-referenced multiple sources for verification of events, dates, and claims. Article incorporates historical context from academic sources and prior UTM reporting on Latin American social movements.",
+  "needsReview": null,
+  "publishedAt": "2026-06-07T03:00:00.000Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "bolivia-militant-resistance",
+      "_type": "reference"
+    },
+    {
+      "_key": "6eda12c908ad",
+      "_ref": "siege-of-delaney-hall-protests-clashes-families",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "nine-fires-seven-days-working-class-verdict",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "article-7da4c05d-c947-4ada-bc5d-c82202975ff0",
+      "_type": "reference"
+    },
+    {
+      "_key": "17bd0112f3e5",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "3a2a3ac8b919",
+      "_ref": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seoObject",
+    "metaDescription": "Rural communities have seized an oil field and halted production as part of a general strike against neoliberal austerity, and the Paz government.",
+    "metaTitle": "Bolivia Oil Field Seized by Rural Workers in General Strike",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "rural-communities-seize-bolivias-oil-field-halt-production-in-santa-cruz"
+  },
+  "tags": [
+    "latin-america",
+    "social-movement",
+    "working-class",
+    "climate-justice"
+  ],
+  "title": "Rural Communities Seize Bolivia's Oil Field, Halt Production in Santa Cruz",
+  "updatedAt": null,
+  "videoLink": null
+}

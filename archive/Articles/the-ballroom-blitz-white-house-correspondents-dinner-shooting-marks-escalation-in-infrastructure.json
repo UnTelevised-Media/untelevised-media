@@ -1,0 +1,141 @@
+{
+  "_id": "white-house-correspondents-dinner-shooting",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "On April 25, 2026, shots rang out at the White House Correspondents' Dinner, with President Trump rushed off stage by Secret Service. The attack was the latest in a wave of 25+ infrastructure fires and sabotage targeting symbols of capitalism and militarism across the US and Europe, marking a dangerous escalation from economic to political targets.",
+  "eventDate": "2026-04-25T20:30:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "At approximately 8:30 PM, shots rang out at the Washington Hilton where the White House Correspondents' Association dinner was being held. Five to eight rounds were fired outside the ballroom near a back stairwell. President Trump, Vice President JD Vance, First Lady Melania Trump, and multiple Cabinet members were evacuated safely. One Secret Service agent was struck by a round but was wearing a bulletproof vest and is expected to be OK. The shooter, armed with a shotgun and handgun, was neutralized by law enforcement.",
+      "question": "What happened at the White House Correspondents' Dinner on April 25, 2026?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "President Donald Trump, who was making his first appearance at the event as president, was on stage when shots were fired. Vice President JD Vance, First Lady Melania Trump, and multiple Cabinet members were in attendance, including Secretary of State Marco Rubio, Defense Secretary Pete Hegseth, and Health and Human Services Secretary Robert F. Kennedy Jr. CNN's Wolf Blitzer was also present and reported being 'a few feet away from a gunman as he was shooting.'",
+      "question": "Who was at the White House Correspondents' Dinner during the shooting?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "The White House Correspondents' Dinner shooting is the latest and most alarming escalation in a wave of 25+ major fires and infrastructure attacks across the United States and Europe in 2026 alone. Previous attacks targeted economic infrastructure like the $600 million Kimberly-Clark warehouse in California, Elbit Systems facilities in Czech Republic and the UK, Tesla's Berlin Gigafactory, and Barclays bank branches across the UK. The shooting marks a shift from economic to political targets.",
+      "question": "How does this fit into the broader pattern of attacks in 2026?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "These attacks are not random acts. They are deliberate, political, and increasingly coordinated. They target symbols of capitalism, militarism, and ecological destruction. The common theme is rage at a system where wages are stagnant while CEO pay soars, housing is unaffordable while luxury real estate booms, and the military-industrial complex profits from war while schools and hospitals crumble. The attackers argue that peaceful protest has failed, voting changes nothing, and petitions are ignored.",
+      "question": "What is the connection between these attacks?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Previous attacks focused on economic infrastructure: warehouses, factories, power lines, rail networks, and bank branches. The message was: if you won't stop the war, we'll stop the machines that make it possible. If you won't pay us enough to live, we'll burn the warehouses that profit from our labor. The White House Correspondents' Dinner shooting marked a shift to political targets — the shooter targeted the sitting president of the United States, surrounded by the political and media elite, rather than economic infrastructure.",
+      "question": "How was the White House Correspondents' Dinner shooting different from previous attacks?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": true,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "white-house-correspondents-dinner",
+    "trump",
+    "shooting",
+    "infrastructure-attacks",
+    "arson",
+    "civil-unrest",
+    "elbit-systems",
+    "kimberly-clark",
+    "tesla",
+    "warehouse-fires",
+    "economic-sabotage",
+    "washington-hilton",
+    "ronald-reagan"
+  ],
+  "leadParagraph": "On April 25, 2026, at approximately 8:30 PM, shots rang out at the Washington Hilton where the White House Correspondents' Association dinner was underway. President Donald Trump was rushed off stage by Secret Service agents within seconds of the first shot, as five to eight rounds were fired outside the ballroom. The incident marked the latest and most alarming escalation in a wave of arson, sabotage, and attacks on political and economic infrastructure that has swept across the United States and Europe in 2026 alone.",
+  "linkedPitch": null,
+  "location": "Washington D.C., United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Secret Service agents with guns drawn rushing to protect and evacuate President Donald Trump at the White House Correspondents' Dinner as guests look on in the background",
+    "asset": {
+      "_ref": "image-2c526b7493dffaf71a00a8915b059cca1609ff72-1904x1269-webp",
+      "_type": "reference"
+    },
+    "caption": "Secret Service agents rush President Donald Trump off stage after shots were fired outside the ballroom at the White House Correspondents' Association dinner at the Washington Hilton on April 25, 2026. Trump was escorted to safety within seconds of the first shot, with Vice President JD Vance and multiple Cabinet members also evacuated.",
+    "credit": "Daily Mail"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-26T03:00:00.000Z",
+  "readingTimeMinutes": 16,
+  "relatedArticles": [
+    {
+      "_key": "91b7d9ea91dc",
+      "_ref": "kash-patel-fbi-director-corruption",
+      "_type": "reference"
+    },
+    {
+      "_key": "9b39f16a3496",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "62ced9310a4d",
+      "_ref": "pam-bondi-corruption-chronicle-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "48f1aeae090c",
+      "_ref": "todd-blanche-corrupt-ascent-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "8ef055a0c5fc",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "35532a2e7cb7",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-ballroom-blitz-white-house-correspondents-dinner-shooting-marks-escalation-in-infrastructure"
+  },
+  "tags": [
+    "white-house-correspondents-dinner",
+    "trump",
+    "shooting",
+    "infrastructure-attacks",
+    "arson",
+    "civil-unrest"
+  ],
+  "title": "The Ballroom Blitz: White House Correspondents' Dinner Shooting Marks Escalation in Infrastructure Attacks",
+  "updatedAt": "2026-04-26T05:08:07.592Z",
+  "videoLink": null
+}

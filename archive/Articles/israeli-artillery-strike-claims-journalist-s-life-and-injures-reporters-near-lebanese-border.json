@@ -1,0 +1,53 @@
+{
+  "_id": "article-61b13f50-5860-47f7-a3f1-cf622b1db135",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "2dd9a0176a7c",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "In a devastating incident near the Lebanese border, an Israeli artillery strike resulted in the tragic death of a journalist and injuries to several others, including Al Jazeera reporters. This sobering event underscores the pressing need for enhanced safety measures for journalists in conflict zones. Explore the details of this incident and the urgent global demands for accountability and journalist protection.",
+  "eventDate": "2023-10-14T08:12:00.000Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "A journalist's car burns at the site where an explosion killed Reuters visual journalist ",
+    "asset": {
+      "_ref": "image-dca225cf697739052b6e334a04a3873b537e1475-1137x710-png",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-10-14T13:11:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "israeli-artillery-strike-claims-journalist-s-life-and-injures-reporters-near-lebanese-border"
+  },
+  "tags": null,
+  "title": "Israeli Artillery Strike Claims Journalist's Life and Injures Reporters Near Lebanese Border",
+  "updatedAt": null,
+  "videoLink": null
+}

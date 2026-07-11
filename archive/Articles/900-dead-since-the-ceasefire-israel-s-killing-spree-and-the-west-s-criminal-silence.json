@@ -1,0 +1,155 @@
+{
+  "_id": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-gaza",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-world-news",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Since the October 2025 ceasefire, Israel has killed over 900 Palestinians in Gaza, expanded territorial control to 70%, legalized the death penalty for Palestinians, and kidnapped 426 flotilla activists — all while the UN issues words and western media stays silent.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "According to Gaza Health Ministry figures, nearly 900 Palestinians have been killed since the ceasefire was declared on 11 October 2025. The death toll continues to rise as Israeli strikes persist almost daily.",
+      "question": "How many Palestinians have been killed since the October 2025 ceasefire?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "The yellow line is a demarcation boundary established under the US-brokered ceasefire agreement, splitting Gaza into Israeli- and Hamas-controlled halves. Israel was supposed to respect this boundary but has steadily expanded its zone of control past it from 53% to over 60% of the territory.",
+      "question": "What is the 'yellow line' in Gaza?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "On 28 May 2026, Netanyahu stated at a West Bank settlement conference that he ordered the Israeli military to seize control of 70% of the Gaza Strip — a direct violation of the ceasefire agreement and UN Security Council Resolution 2803.",
+      "question": "What did Netanyahu announce about seizing 70% of Gaza?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "On 20 May 2026, Israeli forces seized all 60 vessels of the Global Sumud Flotilla in international waters, kidnapping 426 humanitarian activists from 44 countries. Activists reported being beaten and tortured in Israeli custody, and Brazil's Thiago Ávila's mother died while he was held in detention.",
+      "question": "What happened with the Global Sumud Flotilla?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The Trump-appointed Board of Peace's first report to the UN Security Council blamed Hamas for the ceasefire's failures, accusing it of refusing to disarm, while offering no meaningful accountability for Israel's territorial expansion, aid blockades, or civilian killings. Aid agencies including Oxfam challenged the report's framing.",
+      "question": "What did the Board of Peace report say?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Under the ceasefire agreement, Israel is obligated to allow 600 aid trucks per day. The actual average has been only 120 per day — a fraction of what was agreed. Israel continues to block medicines, medical equipment, and thousands of essential items.",
+      "question": "How much aid is Israel allowing into Gaza under the ceasefire?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Gaza ceasefire violations",
+    "900 Palestinians killed since ceasefire",
+    "Netanyahu 70 percent Gaza",
+    "Israel death penalty Palestinians",
+    "Global Sumud Flotilla",
+    "Board of Peace Mladenov",
+    "UN Security Council Resolution 2803",
+    "west bank settler violence 2026",
+    "Israel ethnic cleansing Gaza",
+    "Gaza humanitarian crisis"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": "Occupied Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Two Palestinian girls walking past towering piles of concrete rubble from destroyed multi-story buildings in Gaza during the ceasefire period",
+    "asset": {
+      "_ref": "image-9fe3cf1b578a637b0c3eb2064d47a6a0bbb8e4ba-5115x3347-webp",
+      "_type": "reference"
+    },
+    "caption": "Palestinian girls walk past the rubble of residential buildings destroyed during Israeli bombardment in Gaza, January 2026, during the so-called ceasefire.",
+    "credit": "Reuters"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-28T21:00:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "b3ab1efcd940",
+      "_ref": "salah-akram-the-streets-that-swallow-us",
+      "_type": "reference"
+    },
+    {
+      "_key": "fb1eb6dbf5a6",
+      "_ref": "gaza-nakba-day-2026-05-15",
+      "_type": "reference"
+    },
+    {
+      "_key": "eb30e280f9ff",
+      "_ref": "smotrich-icc-khan-al-ahmar-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "3bca19ca1d01",
+      "_ref": "nE3O1lobPG69YhI3z4zQbi",
+      "_type": "reference"
+    },
+    {
+      "_key": "c4b04f24e153",
+      "_ref": "c9yzsqzw5ic",
+      "_type": "reference"
+    },
+    {
+      "_key": "38f4cfb8a405",
+      "_ref": "yinon-plan-greater-israel-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Since the October 2025 ceasefire, Israel has killed over 900 Palestinians, expanded control to 70% of Gaza, and the UN and western media have done nothing.",
+    "title": "900 Dead Since the Ceasefire: Israel's Killing Spree"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "900-dead-since-the-ceasefire-israel-s-killing-spree-and-the-west-s-criminal-silence"
+  },
+  "tags": [
+    "Gaza",
+    "Israel",
+    "ceasefire",
+    "genocide",
+    "Netanyahu",
+    "Board of Peace",
+    "West Bank",
+    "settler violence",
+    "flotilla",
+    "ethnic cleansing"
+  ],
+  "title": "900 Dead Since the \"Ceasefire\": Israel's Killing Spree and the West's Criminal Silence",
+  "updatedAt": null,
+  "videoLink": null
+}

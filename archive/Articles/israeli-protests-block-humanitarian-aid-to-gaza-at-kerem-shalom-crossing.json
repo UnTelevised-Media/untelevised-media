@@ -1,0 +1,68 @@
+{
+  "_id": "article-1343286e-dbf6-4d85-9fca-0fca3a494c76",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "ab54dbab1628",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Ongoing protests in Israel are impeding the flow of humanitarian aid to Gaza, as demonstrators demand the release of hostages held by Hamas. Despite international calls for aid access, Israeli protesters at the Kerem Shalom crossing have obstructed the delivery for several days. The Israeli government faces pressure both domestically and globally to address the situation and allow essential relief into Gaza.",
+  "eventDate": "2024-01-30T23:12:23.153Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Israel",
+    "IDF",
+    "Gaza",
+    "Palestine",
+    "Hamas",
+    "Humanitarian Aid",
+    "Protests",
+    "Kerem Shalom",
+    "Hostages",
+    "International Pressure",
+    "Ongoing Conflict",
+    "Israel blocks aid to gaza",
+    "aid to Gaza",
+    "aid to Gaza blocked"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Israeli protesters continue to block humanitarian aid from entering the besieged Gaza Strip on January 30, 2024.",
+    "asset": {
+      "_ref": "image-0921f314c55389752e6a94ef6224cca5b33fb111-1024x682-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2024-01-30T23:12:28.784Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "israeli-protests-block-humanitarian-aid-to-gaza-at-kerem-shalom-crossing"
+  },
+  "tags": null,
+  "title": "Israeli Protests Block Humanitarian Aid to Gaza at Kerem Shalom Crossing",
+  "updatedAt": null,
+  "videoLink": null
+}

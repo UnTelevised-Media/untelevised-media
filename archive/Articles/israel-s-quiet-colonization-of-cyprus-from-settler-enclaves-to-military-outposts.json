@@ -1,0 +1,120 @@
+{
+  "_id": "israel-colonization-cyprus-settler-enclaves-military-outposts",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "5vcheZYr4uqdgSr8fegkCa",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israeli nationals have acquired nearly 4,000 properties in Cyprus since 2021, building synagogues, gated communities, and military infrastructure on an EU member state's territory — replicating the settler colonial template of occupied Palestine on European soil.",
+  "eventDate": "2026-05-28T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Between 2021 and 2025, Israelis purchased nearly 4,000 properties across southern Cyprus — over 1,400 in Larnaca, 1,100 in Limassol, and 1,200 in Paphos.",
+      "question": "How many properties have Israelis purchased in Cyprus?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The Israeli population in Cyprus grew from approximately 6,500 in 2018 to roughly 15,000 by mid-2025 — more than doubling in seven years.",
+      "question": "How has the Israeli population in Cyprus changed?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Israeli intelligence and military aircraft use Cypriot facilities. Israel's Defense Ministry called on Cyprus for military support in 2024. The Barak MX air defense system extends Israeli radar coverage across the Eastern Mediterranean.",
+      "question": "What military involvement does Israel have in Cyprus?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Yes. In June 2024, Hezbollah Secretary-General Hassan Nasrallah warned that Cyprus would become a target if it allowed Israel to use its airports and bases for military operations.",
+      "question": "Has Hezbollah threatened Cyprus?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "The May 2026 arrest of an Israeli national carrying four human embryos at a Cypriot airport reflects the broader pattern of Israeli nationals exploiting Cyprus's weak regulatory environment across multiple industries.",
+      "question": "How does the embryo trafficking case connect to Israel's presence in Cyprus?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Israel Cyprus colonization",
+    "Israeli settlers Cyprus",
+    "Cyprus real estate Israeli",
+    "RAF Akrotiri Israel Gaza",
+    "Hezbollah threatens Cyprus",
+    "Cyprus Golden Visa Israelis"
+  ],
+  "leadParagraph": "Israeli nationals have acquired nearly 4,000 properties in Cyprus since 2021, building gated communities, synagogues, and military infrastructure on EU soil. AKEL calls it 'a backyard.' The same settler colonial template deployed in Palestine is replicating itself in Cyprus.",
+  "linkedPitch": null,
+  "location": "Cyprus / Eastern Mediterranean",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Rows of suitcases lined up outside a synagogue in Larnaca, Cyprus, belonging to Israelis who fled the October 2023 war",
+    "asset": {
+      "_ref": "image-f92133e160b24396a458380bb3821fd7aaa2e7a2-1320x906-webp",
+      "_type": "reference"
+    },
+    "caption": "Suitcases of fleeing Israelis lined up outside the Chabad synagogue in Larnaca, Cyprus, October 2023, as thousands sought refuge after the outbreak of war.",
+    "credit": "Cyprus Mail/Andria Kades"
+  },
+  "methodology": "This investigation draws on reports from KEDISA, the Lemkin Institute for the Prevention of Genocide, SETA Foundation, Greatreporter, Cyprus Mail, Reuters, Middle East Monitor, AP News, and The New Arab. Property data sourced from Cypriot land registry records cited in investigative reporting. Military and intelligence claims verified against Turkish Foreign Ministry statements and confirmed by European security officials.",
+  "needsReview": null,
+  "publishedAt": "2026-05-29T04:27:14.700Z",
+  "readingTimeMinutes": 11,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "israeli-embryo-trafficking-cyprus-airport",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-turkey-cyprus-occupation",
+      "_ref": "turkey-forgotten-occupation-cyprus-ethnic-cleansing-erdogan-hypocrisy",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Israelis acquired 4,000 properties in Cyprus since 2021. Gated communities, military bases, and intelligence infrastructure now dot the EU member state — settlements in all but name.",
+    "metaTitle": "Israel's Quiet Colonization of Cyprus: Settler Enclaves & Military Outposts",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "israel-s-quiet-colonization-of-cyprus-from-settler-enclaves-to-military-outposts"
+  },
+  "tags": [
+    "Israel",
+    "Cyprus",
+    "Settler Colonialism",
+    "Military Bases",
+    "Real Estate",
+    "European Union",
+    "Hezbollah",
+    "Genocide"
+  ],
+  "title": "Israel's Quiet Colonization of Cyprus: From Settler Enclaves to Military Outposts",
+  "updatedAt": null,
+  "videoLink": null
+}

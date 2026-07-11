@@ -1,0 +1,140 @@
+{
+  "_id": "brockton-tractor-trailer-fire-massachusetts",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Six tractor-trailers destroyed behind a Brockton, Massachusetts bowling alley. Flames spread to 2 acres of woodland. The sixth massive fire in five days. ",
+  "eventDate": "2026-04-11",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "The official cause is under investigation by the State Fire Marshal's office. Chief Brian Nardelli stated it is unknown if the fire was accidental or nefarious, and accelerant-sniffing dogs have been deployed to sniff for any accelerants.",
+      "question": "What caused the Brockton tractor-trailer fire?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Six tractor-trailers were destroyed by the flames. There were approximately 10 tractor-trailers parked on the property behind Westgate Lanes at the time of the fire.",
+      "question": "How many tractor-trailers were destroyed in the fire?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Yes. The flames spread from the tractor-trailers into DW Fields Park, causing a brush fire that burned approximately 2 acres of woodland before firefighters were able to contain it.",
+      "question": "Did the fire spread beyond the tractor-trailers?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "No. Brockton Fire Chief Brian Nardelli confirmed there were no injuries, and no nearby buildings were damaged by the fire.",
+      "question": "Was anyone injured in the Brockton fire?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "The fire took approximately 90 minutes (1.5 hours) to extinguish. Firefighters from multiple communities responded to the scene behind Westgate Lanes.",
+      "question": "How long did it take to extinguish the fire?"
+    },
+    {
+      "_key": "faq-6",
+      "answer": "Witnesses working at Westgate Lanes reported hearing three to five loud explosions or bangs as the fire intensified. One witness, Adam Johndrow, described big bangs and the fire spreading halfway through the woods. Smoke was reported visible from Route 24 miles away.",
+      "question": "What did witnesses report hearing and seeing?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "brockton fire",
+    "tractor trailer fire",
+    "massachusetts fire",
+    "dw fields park",
+    "brush fire",
+    "westgate lanes",
+    "civil unrest",
+    "america boiling over",
+    "april 2026"
+  ],
+  "leadParagraph": "# The Sixth Fire: Six Trailers, Two Acres, and America Still Boiling",
+  "linkedPitch": null,
+  "location": "Brockton, Massachusetts",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Inside totally destroyed tractor trailers.",
+    "asset": {
+      "_ref": "image-c1676b5d347d9e261c61ee41579850e4424f2287-1412x790-webp",
+      "_type": "reference"
+    },
+    "caption": "Black smoke billows from six tractor-trailers burning behind Westgate Lanes bowling alley in Brockton, Massachusetts, on April 11, 2026. Flames spread from trailer to trailer before firefighters arrived.",
+    "credit": "WCVB Boston"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-12T18:19:49.445164",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "82b204d1ce6d",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "380570e96887",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "56b46bc9a89d",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "733fe8dc6b07",
+      "_ref": "the-fourth-fire-queens",
+      "_type": "reference"
+    },
+    {
+      "_key": "00a5b618eec1",
+      "_ref": "0bzv6vDb5M9RssFkIn3Egp",
+      "_type": "reference"
+    },
+    {
+      "_key": "1cab73006f6f",
+      "_ref": "amazon-solar-panels-fire-ohio",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seo",
+    "metaDescription": "Sixth fire in five days: 6 tractor-trailers burn in Brockton MA, 2 acres of woodland destroyed.\n",
+    "metaTitle": "Brockton Tractor-Trailer Fire Massachusetts"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-sixth-fire-six-trailers-two-acres-and-the-corporate-media-is-tone-deaf"
+  },
+  "tags": [
+    "brockton-fire",
+    "tractor-trailer-fire",
+    "massachusetts",
+    "dw-fields-park",
+    "brush-fire"
+  ],
+  "title": "The Sixth Fire: Six Trailers, Two Acres, and the Corporate Media is Tone Deaf",
+  "updatedAt": null,
+  "videoLink": null
+}

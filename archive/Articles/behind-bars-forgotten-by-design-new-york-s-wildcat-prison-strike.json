@@ -1,0 +1,135 @@
+{
+  "_id": "ny-prison-strike-forgotten-by-design-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "etc0su0f",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "dacptalz",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A deep examination of New York's February-March 2026 wildcat prison strike that exposed systemic abandonment of incarcerated people. The piece documents minimal staffing, denial of basic services, the state's failed response calling in National Guard, and the human cost of conditions violating UN standards for treatment of prisoners.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-ba2qsf0k",
+      "_type": "faqItem",
+      "answer": "The wildcat strike is a labor action by New York State corrections officers that began February 21, 2026. Officers refused to enter their posts at multiple prisons, leading to minimal staffing. The strike protests inadequate pay, dangerous working conditions, and the state's reliance on militarized responses to labor disputes.",
+      "question": "What is the wildcat strike?"
+    },
+    {
+      "_key": "faq-ib7r1hqp",
+      "_type": "faqItem",
+      "answer": "Thousands of incarcerated people across New York State prisons have been affected. With minimal staffing, access to showers has been denied, recreation halted, visitation suspended, and educational programs stopped. The state's budget to post National Guard in prisons since the strike began is approaching $1 billion.",
+      "question": "How many people are affected by the strike?"
+    },
+    {
+      "_key": "faq-0tbwnhsy",
+      "_type": "faqItem",
+      "answer": "As of late March 2026, the strike continues. The state reached a tentative deal with the guards' union on March 10, but thousands of guards refused to return to work on March 27. The administration continues to rely on National Guard troops and supervisors to maintain basic prison operations instead of negotiating in good faith with corrections officers.",
+      "question": "Has the strike ended?"
+    },
+    {
+      "_key": "faq-faucnkvb",
+      "_type": "faqItem",
+      "answer": "Prisoners have faced extended lockdowns with 23-hour confinement, denial of showers for weeks, suspension of all rehabilitative programs, severely reduced medical care, and restricted or eliminated family visitation. These conditions violate UN Standard Minimum Rules for the Treatment of Prisoners, which the U.S. has ratified.",
+      "question": "What conditions are prisoners facing during the strike?"
+    },
+    {
+      "_key": "faq-jgqlylw2",
+      "_type": "faqItem",
+      "answer": "The state has refused to negotiate in good faith, instead calling in National Guard troops to staff prisons — militarizing a labor dispute. Governor Hochul's administration has blamed officers while ignoring systemic issues with prison conditions. The state's strategy has been denial, blame, and reinforcement rather than addressing the root causes.",
+      "question": "How has the state responded?"
+    },
+    {
+      "_key": "faq-zqsw4quy",
+      "_type": "faqItem",
+      "answer": "Reform advocates call for genuine collective bargaining rights for corrections officers, investment in rehabilitative and mental health programs, independent oversight through an empowered Board of Corrections and Commission on Correction, and development of community-based alternatives to incarceration that address the social drivers of crime rather than expanding prisons.",
+      "question": "What are the long-term solutions?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "New York prison strike",
+    "wildcat strike",
+    "prison conditions",
+    "human rights",
+    "corrections officers",
+    "incarceration"
+  ],
+  "leadParagraph": "For three weeks, New York State prisons have operated with minimal staff as thousands of incarcerated people were left without showers, recreation, or visitors. The state has done nothing but call it a \"success.\" The strike exposes a system built to fail incarcerated people.",
+  "linkedPitch": null,
+  "location": "New York State",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Wildkat Strike protester outside of NY State Prison",
+    "asset": {
+      "_ref": "image-161aeefbed6b9d83264f2a5225ae95d0497dba73-1892x2048-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-03T06:45:08.640Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": [
+    {
+      "_key": "f0984141fe40",
+      "_ref": "bddcld7vr4o",
+      "_type": "reference"
+    },
+    {
+      "_key": "cbfa311c90b2",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "ab231726611a",
+      "_ref": "article-bcb451f2-8057-404b-8888-bcb84f7cf51b",
+      "_type": "reference"
+    },
+    {
+      "_key": "a08a05131e23",
+      "_ref": "article-c2671233-75b9-41e5-888d-df294a2affbb",
+      "_type": "reference"
+    },
+    {
+      "_key": "463b22550595",
+      "_ref": "bddcld7vr4o",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "behind-bars-forgotten-by-design-new-york-s-wildcat-prison-strike"
+  },
+  "tags": [
+    "us-news",
+    "prisons",
+    "new-york"
+  ],
+  "title": "Behind Bars, Forgotten by Design: New York's Wildcat Prison Strike",
+  "updatedAt": null,
+  "videoLink": null
+}

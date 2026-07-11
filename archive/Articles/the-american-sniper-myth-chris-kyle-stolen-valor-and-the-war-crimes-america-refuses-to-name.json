@@ -1,0 +1,151 @@
+{
+  "_id": "chris-kyle-american-liar",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Chris Kyle lied about his medals, fabricated kills, and called Iraqis savages. America made him a hero. This is the story the movies will not tell you.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Yes. Internal Navy documents obtained by The Intercept in 2016 confirmed that Kyle earned one Silver Star and three Bronze Stars with Valor, not the two Silver Stars and five Bronze Stars he claimed in his autobiography. He was warned about the discrepancy before publication but published the false numbers anyway.",
+      "question": "Did Chris Kyle actually lie about his military medals?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Kyle fabricated at least two major stories: that he was deployed to New Orleans during Hurricane Katrina and killed 30 looters from atop the Superdome, and that he shot and killed two carjackers at a Texas gas station in 2009. Both claims have been thoroughly debunked with zero evidence supporting either.",
+      "question": "What fabricated stories did Chris Kyle tell?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "In his own autobiography, American Sniper, Kyle wrote: I hate the damn savages. I could not give a flying fuck about the Iraqis. He described killing as fun and something he loved. Max Blumenthal reported that Kyle boasted of looting Iraqi families apartments in Fallujah.",
+      "question": "What did Chris Kyle say about Iraqis?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Yes. In 2014, a Minnesota federal jury found that Chris Kyle fabricated a story about punching former Governor Jesse Ventura at a bar. Ventura was awarded $1.8 million in damages. Ventura called Kyle an American Liar and the factual finding that Kyle lied was never overturned on appeal.",
+      "question": "Did Chris Kyle lose a lawsuit for lying?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Stolen valor is the act of falsely claiming military decorations, awards, or combat experience, particularly when done for personal or financial gain. It is a federal offense under the Stolen Valor Act. Kyles embellishment of his medal count and fabrication of combat stories constitute textbook stolen valor.",
+      "question": "What is stolen valor?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "chris kyle",
+    "american sniper",
+    "stolen valor",
+    "iraq war",
+    "navy seals",
+    "jesse ventura",
+    "war crimes",
+    "fabricated kills",
+    "hurricane katrina",
+    "military lies",
+    "clint eastwood",
+    "iraqi civilians",
+    "empire",
+    "imperialism"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Chris Kyle, retired Navy SEAL, holding a sniper rifle in a 2012 file photo",
+    "asset": {
+      "_ref": "image-3d995224c6e05cd05d1a1990d5b84b48d1cc6e8c-800x573-webp",
+      "_type": "reference"
+    },
+    "caption": "Chris Kyle holding a .308 sniper rifle in an April 6, 2012 file photo. Kyle's autobiography and the Hollywood film adaptation built a heroic mythology around him that internal Navy documents later contradicted.",
+    "credit": "combatoperators.com"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-28T05:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "bea6ac7dd5bc",
+      "_ref": "salah-akram-the-streets-that-swallow-us",
+      "_type": "reference"
+    },
+    {
+      "_key": "df5c9d5f0fdd",
+      "_ref": "israel-flotilla-war-crime",
+      "_type": "reference"
+    },
+    {
+      "_key": "01f38bf2ac8c",
+      "_ref": "thiago-avila-mother-dies-israel-detention",
+      "_type": "reference"
+    },
+    {
+      "_key": "adf9ac5a7352",
+      "_ref": "gaza-nakba-day-2026-05-15",
+      "_type": "reference"
+    },
+    {
+      "_key": "b62a8a6148d7",
+      "_ref": "smotrich-icc-khan-al-ahmar-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "19ccc3df2928",
+      "_ref": "west-bank-burning-organized-settler-violence-state-backing-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Chris Kyle lied about his medals, fabricated murders, and called Iraqis savages. America made him a hero. The story the movies will not tell you.",
+    "title": "Chris Kyle: Stolen Valor, Fabricated Kills, and American Mythology"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-american-sniper-myth-chris-kyle-stolen-valor-and-the-war-crimes-america-refuses-to-name"
+  },
+  "tags": [
+    "chris-kyle",
+    "american-sniper",
+    "stolen-valor",
+    "iraq-war",
+    "military-fabrication",
+    "war-crimes",
+    "imperialism"
+  ],
+  "title": "The American Sniper Myth: Chris Kyle, Stolen Valor, and the War Crimes America Refuses to Name",
+  "updatedAt": null,
+  "videoLink": null
+}

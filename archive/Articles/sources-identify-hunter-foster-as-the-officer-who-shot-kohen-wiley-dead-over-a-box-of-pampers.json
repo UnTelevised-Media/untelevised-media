@@ -1,0 +1,137 @@
+{
+  "_id": "hunter-foster-identified-kohen-wiley-shooter",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-corruption",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-civil-unrest",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Sources identify Sergeant Hunter Foster of the DeSoto County Sheriff's Office as the officer who killed 1-year-old Kohen Wiley at a Senatobia Walmart. Weeks before the shooting, Foster was the subject of a racial slur complaint filed by a fellow officer — a complaint the department ignored.",
+  "eventDate": "2026-06-14T19:05:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Sources identify Hunter Foster as a Sergeant affiliated with the DeSoto County Sheriff's Office and the Senatobia Police Department, where he was hired in early 2025 and promoted to sergeant within months. He is publicly listed on the Mississippi Training for Impaired Driving Enforcement (MSTIDE) website as a DeSoto County representative.",
+      "question": "Who is Hunter Foster?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Multiple sources indicate that weeks before the June 14, 2026 shooting of Kohen Wiley, Foster was the subject of a formal complaint by a fellow officer alleging use of racial slurs on the job. The department is alleged to have taken no meaningful action on that complaint before deploying Foster on the call that killed Kohen Wiley.",
+      "question": "Was there a prior complaint against Hunter Foster?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "As of publication, Hunter Foster has been placed on administrative leave — standard procedure after an officer-involved shooting. He has not been charged with any crime. The Mississippi Bureau of Investigation is conducting the investigation and will submit findings to the Mississippi Attorney General's Office.",
+      "question": "Has Hunter Foster been charged?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Wiley family is represented by civil rights attorney Ben Crump, who stated that Kohen's mother tried to signal officers about the baby in the car and that 'they fired anyway, leading to the death of an innocent one-year-old.'",
+      "question": "Who is representing Kohen Wiley's family?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "When community members gathered outside the Senatobia Walmart on June 16, 2026 to demand justice for Kohen Wiley, law enforcement deployed tear gas against the protesters.",
+      "question": "What happened to the protesters outside the Walmart?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Hunter Foster",
+    "Kohen Wiley",
+    "Senatobia police shooting",
+    "DeSoto County Sheriff",
+    "Mississippi police killing",
+    "police accountability",
+    "racial slur complaint officer",
+    "MSTIDE Mississippi",
+    "baby killed by police"
+  ],
+  "leadParagraph": "Sources identify Sergeant Hunter Foster of the DeSoto County Sheriff's Office as the officer who shot and killed one-year-old Kohen Wiley on June 14, 2026, at a Senatobia, Mississippi Walmart. Multiple sources indicate that just weeks before the killing, Foster was the subject of a formal internal complaint by a fellow officer alleging he used racial slurs on the job — a complaint his department knew about and did nothing.",
+  "linkedPitch": null,
+  "location": "Senatobia, Mississippi",
+  "mainImage": {
+    "_type": "image",
+    "asset": {
+      "_ref": "image-63ddbd2fcd80709567a55f4c6bbf9e444890baff-805x1073-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Officer identification sourced from independent reporting by journalist Shannon Evans and corroborated by the publicly available MSTIDE.us team directory, which lists Hunter Foster as a representative of the DeSoto County Sheriff's Office. The internal racial slur complaint is sourced from multiple independent sources. All family quotes are drawn from WREG, Action News 5, Common Dreams, and TheGrio. This investigation is ongoing.",
+  "needsReview": null,
+  "publishedAt": "2026-06-17T08:00:00.000Z",
+  "readingTimeMinutes": 8,
+  "relatedArticles": [
+    {
+      "_key": "rel-kohen-1",
+      "_ref": "baby-kohen-wiley-senatobia-police-shooting",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-kohen-2",
+      "_ref": "two-calls-diapers-officer-buys-baby-executed-senatobia",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Sources identify Sergeant Hunter Foster of DeSoto County Sheriff's Office as the officer who shot and killed 1-year-old Kohen Wiley at a Senatobia, Mississippi Walmart over a box of Pampers.",
+    "metaTitle": "Hunter Foster Identified: The Officer Who Killed Baby Kohen Wiley",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "sources-identify-hunter-foster-as-the-officer-who-shot-kohen-wiley-dead-over-a-box-of-pampers"
+  },
+  "tags": [
+    "Hunter Foster",
+    "Kohen Wiley",
+    "Police Brutality",
+    "Mississippi",
+    "Senatobia",
+    "Police Accountability",
+    "Black Lives Matter",
+    "Police Violence",
+    "MBI",
+    "Ben Crump"
+  ],
+  "title": "Sources Identify Hunter Foster as the Officer Who Shot Kohen Wiley Dead Over a Box of Pampers",
+  "updatedAt": null,
+  "videoLink": null
+}

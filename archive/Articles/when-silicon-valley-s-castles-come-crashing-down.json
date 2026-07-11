@@ -1,0 +1,144 @@
+{
+  "_id": "when-silicon-valleys-castles-come-under-fire",
+  "allowComments": true,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Two attacks in 72 hours on Sam Altman's $27 million mansion. The media calls it 'AI anxiety.' It's actually a working class pushing back against an industry gambling with their future.",
+  "eventDate": "2026-04-10T00:00",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "No. In both the April 10 Molotov cocktail attack and the April 12 shooting incident, no injuries were reported. Altman was not at home during either attack, and no one was inside the targeted areas when they occurred.",
+      "question": "Was Sam Altman hurt in the attacks?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "For the Molotov cocktail attack on April 10, Daniel Alejandro Moreno-Gama, a 20-year-old from Texas, was arrested and charged with attempted murder, arson, and possession of an incendiary device. For the shooting on April 12, Amanda Tom, 25, and Muhamad Tarik Hussein, 23, were arrested and booked for negligent discharge of a firearm. Three firearms were seized from their residence.",
+      "question": "Who was arrested for the attacks?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Hours after the first attack, Altman posted a family photo on his personal blog, writing 'I love them more than anything' and hoping the image might 'dissuade the next person from throwing a Molotov cocktail at our house.' He called for de-escalation and 'fewer explosions in fewer homes, figuratively and literally.'",
+      "question": "What was Sam Altman's response?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "While the media frames this as 'AI anxiety' or fear about existential risk, there's a deeper economic dimension: working-class communities are resisting the infrastructure demands of AI — data centers that drive up electricity prices, consume water resources, and provide minimal local economic benefits. The attacks represent direct action against the tech elite perceived as gambling with ordinary people's futures.",
+      "question": "Why are people attacking Altman's home?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Yes. These attacks follow a wave of fires and sabotage targeting economic infrastructure across the United States — Amazon fulfillment centers, warehouses, lumber yards, and tractor-trailers. The common thread: the working class using direct action against institutions they believe are exploiting them, after conventional channels of protest and politics have failed.",
+      "question": "Is this part of a broader pattern?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "OpenAI confirmed the Molotov attack in an emailed statement: 'Early this morning, someone threw a Molotov cocktail at Sam Altman's home and also made threats at our San Francisco headquarters. Thankfully, no one was hurt.' The company told employees there was no immediate threat and announced increased security around its Mission Bay offices.",
+      "question": "What has OpenAI said?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "sam-altman",
+    "openai",
+    "ai-backlash",
+    "class-warfare",
+    "san-francisco",
+    "molotov-cocktail",
+    "gunfire",
+    "tech-elite",
+    "data-centers",
+    "electricity-prices",
+    "working-class",
+    "resistance",
+    "russian-hill",
+    "silicon-valley"
+  ],
+  "leadParagraph": "Two attacks in 72 hours on Sam Altman's $27 million mansion. The media calls it 'AI anxiety.' It's actually a working class pushing back against an industry gambling with their future.",
+  "linkedPitch": null,
+  "location": "Russian Hill, San Francisco, United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "San Francisco police officers and vehicle at the scene of an alleged shooting near Sam Altman's Russian Hill residence on April 12, 2026",
+    "asset": {
+      "_ref": "image-4e9b286c43eb68db286ee84d066be6e3ce4cfd7c-1242x828-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2026-04-13T00:00",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "the-fires-are-not-random",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "8cgpd47e3kq",
+      "_ref": "8cgpd47e3kq",
+      "_type": "reference"
+    },
+    {
+      "_key": "0bzv6vDb5M9RssFkIn3Egp",
+      "_ref": "0bzv6vDb5M9RssFkIn3Egp",
+      "_type": "reference"
+    },
+    {
+      "_key": "iwpoje4qjb",
+      "_ref": "iwpoje4qjb",
+      "_type": "reference"
+    },
+    {
+      "_key": "kimberly-clark-warehouse-fire",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "the-fourth-fire-queens",
+      "_ref": "the-fourth-fire-queens",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "when-silicon-valley-s-castles-come-crashing-down"
+  },
+  "tags": [
+    "ai-backlash",
+    "sam-altman",
+    "class-warfare",
+    "san-francisco",
+    "openai"
+  ],
+  "title": "When Silicon Valley's Castles Come Crashing Down",
+  "updatedAt": "2026-04-13T22:50:32.789Z",
+  "videoLink": ""
+}

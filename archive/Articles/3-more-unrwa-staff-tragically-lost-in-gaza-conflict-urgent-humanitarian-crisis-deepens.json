@@ -1,0 +1,64 @@
+{
+  "_id": "article-4f84a610-5d7d-4432-ac0d-d272e9567ef8",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "a2d24e359e5e",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "UNRWA mourns the loss of three staff members in ongoing Gaza strikes, bringing the toll to 67 since October 7. Amid escalating violence, the humanitarian situation worsens, leaving thousands displaced and in urgent need of assistance.\n",
+  "eventDate": "2023-10-31T16:15:37.491Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Israel",
+    "IDF",
+    "Gaza",
+    "Palestine",
+    "Hamas",
+    "UNRWA",
+    "humanitarian crisis",
+    "Palestinian refugees",
+    "Gaza Strip",
+    "Israeli-Palestinian conflict"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "United Nations workers arrive to distribute aid to Palestinians, who have fled their homes due to Israeli strikes and take shelter in a UN-run school, in Khan Younis in the southern Gaza Strip October 23, 2023",
+    "asset": {
+      "_ref": "image-81257d46b4807c02aadc9a0e11eb9011290016cc-953x644-png",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-10-31T16:26:15.250Z",
+  "readingTimeMinutes": 4,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "3-more-unrwa-staff-tragically-lost-in-gaza-conflict-urgent-humanitarian-crisis-deepens"
+  },
+  "tags": null,
+  "title": "3 More UNRWA Staff Tragically Lost in Gaza Conflict: Urgent Humanitarian Crisis Deepens",
+  "updatedAt": null,
+  "videoLink": null
+}

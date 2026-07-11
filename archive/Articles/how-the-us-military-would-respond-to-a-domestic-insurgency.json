@@ -1,0 +1,105 @@
+{
+  "_id": "BOAIKFRWNleR9aRm6RBNhU",
+  "allowComments": true,
+  "author": {
+    "_ref": "RYZn4iYE9ChjVaOaU8i41k",
+    "_type": "reference",
+    "name": "Justin King"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "7ONx74QMiI10eazwubikk1",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "4de427419ac7",
+      "_ref": "d21a73f5-a2fc-46fd-8801-f1f32e1f0b1f",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Two academics war-gamed a domestic insurgency scenario using US Army doctrine. Their scenario reveals the fundamental flaws in US counterinsurgency strategy — and why a real insurgency would play out very differently.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "td7bw5dy",
+      "_type": "faqItem",
+      "answer": "Full Spectrum Operations is the US Army's operational doctrine combining offensive, defensive, and stability or civil-support operations. The article argues the doctrine was designed for conventional warfare and is fundamentally inapplicable to a real domestic insurgency, as it assumes insurgents will make every strategic mistake possible.",
+      "question": "What is \"Full Spectrum Operations\" and why does it matter?"
+    },
+    {
+      "_key": "gedh5qt4",
+      "_type": "faqItem",
+      "answer": "The article identifies seven key advantages: mobility (no fixed positions to target), initiative (choosing when and where to fight), surprise, camouflage (no uniforms), unpredictability, factional independence (no single chain of command to decapitate), and civilian sympathy (no front lines means intelligence flows freely to the insurgency).",
+      "question": "What are the biggest advantages an insurgency has over a conventional military?"
+    },
+    {
+      "_key": "4gjxms4t",
+      "_type": "faqItem",
+      "answer": "The scenario's fictional insurgents surrender every real-world advantage an insurgency would have. They hold fixed territory, operate openly, use a static radio station, maintain unified command, and draw a clear front line — all of which play directly into conventional US military strengths. A competent insurgency would do the opposite.",
+      "question": "Why does the academics' scenario guarantee a US military victory?"
+    },
+    {
+      "_key": "iazy24ax",
+      "_type": "faqItem",
+      "answer": "The joint counterinsurgency publication states that the host-nation government should address the root causes of the insurgency through reform. In a US-based insurgency, the US government is the host-nation — meaning the doctrine itself calls for meeting the political demands of domestic insurgents rather than military suppression.",
+      "question": "What does the US counterinsurgency doctrine say the government should do?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "insurgency",
+    "US military",
+    "counterinsurgency",
+    "Full Spectrum Operations",
+    "domestic insurgency",
+    "COIN doctrine",
+    "unconventional warfare",
+    "militia",
+    "Justin King",
+    "TFC",
+    "analysis",
+    "civil war"
+  ],
+  "leadParagraph": "The American people don't have to guess how the US military would respond to a domestic insurgency. Two respected academics war-gamed exactly that scenario using the United States Operating Concept as a guide — and the results expose the fatal assumptions baked into US counterinsurgency doctrine.",
+  "linkedPitch": null,
+  "location": "Washington, DC",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Balitmore police throwing riot munitions at protestors after the death of Freddie Gray.",
+    "asset": {
+      "_ref": "image-64f4bf514dffde68369b695610538da4948e1127-1600x901-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Originally published via The Fifth Column (TFC). References the academic paper \"Full Spectrum Operations in the Homeland: A 'Vision' of the Future\" and US joint counterinsurgency doctrine. Republished with attribution.",
+  "needsReview": false,
+  "publishedAt": "2015-02-05T12:00:00Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "how-the-us-military-would-respond-to-a-domestic-insurgency"
+  },
+  "tags": [
+    "insurgency",
+    "military",
+    "analysis",
+    "counterinsurgency",
+    "civil-liberties",
+    "government",
+    "profiles-in-insurgency",
+    "us-news"
+  ],
+  "title": "How the US Military Would Respond to a Domestic Insurgency",
+  "updatedAt": null,
+  "videoLink": null
+}

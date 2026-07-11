@@ -1,0 +1,111 @@
+{
+  "_id": "banksy-flag-blind-patriotism-waterloo-place-london-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-2",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-1",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "In the predawn hours of April 30, Banksy installed a statue in Waterloo Place depicting a suited figure blinded by a flag, stepping off a plinth. Placed among monuments to imperial glory, it's a devastating critique of blind patriotism — and a reminder that when you can't see where you're marching, you walk off cliffs.",
+  "eventDate": "2026-05-01T04:23:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "A large statue depicting a suited man holding a flag that has blown completely into his face, obscuring his vision. The figure is shown walking forward off a plinth with one foot already in mid-air, suggesting he's about to fall. It was installed overnight in Waterloo Place, central London, on April 30, 2026.",
+      "question": "What is Banksy's new London statue?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Waterloo Place, St James's, central London — an area designed in the 1800s to celebrate imperialism and military dominance. It stands among monuments to King Edward VII, Florence Nightingale, Sidney Herbert, and the Crimean War Memorial, and is positioned in front of the gilded statue of Athena on the Athenaeum Club.",
+      "question": "Where is the Banksy statue located?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "The statue is widely interpreted as a critique of 'blind patriotism' — the idea that uncritical national pride can obscure reality and lead societies to walk off cliffs. The flag bears no national markings, making it a universal symbol of how patriotic fervor can blind leaders and nations to the consequences of their actions.",
+      "question": "What does the Banksy statue mean?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Banksy confirmed the work on Thursday, May 1, 2026, by posting a video to his Instagram account showing workers erecting the statue under cover of night. The statue itself appeared in the early hours of Wednesday morning, April 30, and was spotted by passersby later that day.",
+      "question": "When did Banksy confirm the statue?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Westminster City Council has said they welcome the statue and have no plans to remove it, calling it 'a striking addition to the city's vibrant public art scene.' However, like all Banksy public works, its future is uncertain — it could be vandalized, removed by authorities, or stolen, similar to his 2004 work 'The Drinker.'",
+      "question": "Will the Banksy statue remain in place?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "banksy statue london",
+    "blind patriotism",
+    "waterloo place",
+    "flag in face statue",
+    "imperialism critique",
+    "monument subversion",
+    "nationalism resurgent",
+    "westminster banksy",
+    "british empire",
+    "public art protest"
+  ],
+  "leadParagraph": "In the predawn hours of April 30, 2026, a low-loader truck pulled into Waterloo Place in central London. Workers unloaded a statue of a suited man, arms outstretched, flag in hand, walking forward with one foot already over the edge. The flag is billowing into his face. He can't see where he's going. He's about to walk off the plinth. By Thursday, Banksy had claimed it. By Friday, barriers were up to protect it. The statue is deceptively simple, but nothing about this placement is accidental.",
+  "linkedPitch": null,
+  "location": "Waterloo Place, London, United Kingdom",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Suited figure holds a large flag that completely obscures his face, shown walking forward with one foot suspended over the edge of the stone plinth",
+    "asset": {
+      "_ref": "image-ffc94f0a15ed4417177a249a5b8a64f3bd4ba8ef-5000x3334-webp",
+      "_type": "reference"
+    },
+    "caption": "Banksy's new statue in Waterloo Place, London, depicting a suited man with a flag blown into his face, one foot already off the plinth as if about to fall",
+    "credit": "GraffitiStreet via Brave Search"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-01T16:00:00Z",
+  "readingTimeMinutes": 13,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Banksy's new statue in Waterloo Place depicts a man blinded by his own flag, stepping off a plinth. A critique of blind patriotism and imperial narrative.",
+    "title": "Banksy's London Statue: Blind Patriotism in the Heart of Empire"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-blind-man-on-the-plinth-banksy-s-statue-of-flag-blind-patriotism-in-the-heart-of-empire"
+  },
+  "tags": [
+    "banksy",
+    "london",
+    "street-art",
+    "patriotism",
+    "nationalism",
+    "imperialism",
+    "monuments"
+  ],
+  "title": "The Blind Man on the Plinth: Banksy's Statue of Flag-Blind Patriotism in the Heart of Empire",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,86 @@
+{
+  "_id": "article-22bd04af-abdf-4250-a879-bbb96efa66d9",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "6aa768cd4bf7",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "5173d864af46",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A ruthless gang of Rankin County sheriff's deputies, known as the \"Goon Squad,\" terrorized residents for years through torture, illegal raids, and excessive force. Unmasking their reign of abuse and the ongoing fight for justice.",
+  "eventDate": "2024-01-09T19:25:00.000Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Rankin County",
+    "Goon Squad",
+    "Sheriff's deputies",
+    "Brutality",
+    "Torture",
+    "Excessive force",
+    "Civil rights abuses",
+    "Mississippi",
+    "Justice Department investigation",
+    "Michael Jenkins",
+    "Eddie Terrell Parker",
+    "Brian Howey",
+    "Nate Rosenfield."
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Goon Squad Wanted Poster",
+    "asset": {
+      "_ref": "image-beab424ff041879aac49fc7e670dd8e76cf097b3-1085x1232-png",
+      "_type": "reference"
+    },
+    "crop": {
+      "_type": "sanity.imageCrop",
+      "bottom": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0.2925161989684887
+    },
+    "hotspot": {
+      "_type": "sanity.imageHotspot",
+      "height": 0.7074838010315113,
+      "width": 1,
+      "x": 0.5,
+      "y": 0.6462580994842444
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2024-01-09T19:25:24.808Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "a-shadow-over-mississippi-the-devastating-story-of-rankin-county-s-goon-squad"
+  },
+  "tags": null,
+  "title": "A Shadow Over Mississippi: The Devastating Story of Rankin County's \"Goon Squad\"",
+  "updatedAt": null,
+  "videoLink": null
+}

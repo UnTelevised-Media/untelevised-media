@@ -1,0 +1,150 @@
+{
+  "_id": "kohen-wiley-autopsy-homicide-independent-finding",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-civil-unrest",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "An independent autopsy has ruled one-year-old Kohen Wiley's death a homicide caused by a shotgun wound to the torso. The findings prove the Senatobia police officer was not in harm's way when he fired into the vehicle — yet the MBI stalls, the officer remains unarrested, and the community demands justice.",
+  "eventDate": "2026-07-01T14:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "The autopsy, conducted by board-certified forensic pathologist Dr. Roger Mitchell, ruled Kohen Wiley's cause of death as a shotgun wound to the torso with the manner of death classified as a homicide. The bullet entered the right side of his chest through the passenger window and exited the left side, destroying vital organs including the heart, lungs, aorta, and esophagus.",
+      "question": "What did the independent autopsy find?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Yes. Police claimed the vehicle was driving toward the officer when he fired. But the entry wound on Kohen's right side — entering through the passenger window — proves the officer fired from the side of the vehicle, not the front. Attorney Ben Crump stated this means the officer was not in harm's way when he discharged his weapon.",
+      "question": "Does the autopsy contradict the police account?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The officer has not been officially identified by authorities. However, sources identified Sergeant Hunter Foster, a DeSoto County sheriff's deputy, as the officer who fired the fatal shot. Weeks before the shooting, Foster was the subject of a racial slur complaint filed by a fellow officer — a complaint the department reportedly ignored.",
+      "question": "Who is the officer who shot Kohen Wiley?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The officer was placed on paid administrative leave, standard procedure after a police shooting. The Mississippi Bureau of Investigation (MBI) has taken over the case and stated the investigation could take six to nine months — a timeline attorneys Ben Crump and Van Turner call unjustified given the available evidence.",
+      "question": "Why has the officer not been arrested?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Officers responded to an alleged shoplifting call at a Senatobia, Mississippi Walmart. The accusation involved a box of diapers. No shoplifting charges have been filed against anyone involved. Kohen's mother Vellesiya Wiley stated the diapers were paid for at self-checkout.",
+      "question": "What was the original police call about?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Kohen Wiley autopsy homicide",
+    "Senatobia Mississippi police shooting",
+    "independent autopsy shotgun wound",
+    "Hunter Foster officer",
+    "MBI investigation Kohen Wiley",
+    "police killing one-year-old",
+    "Mississippi Bureau Investigation",
+    "Ben Crump Kohen Wiley"
+  ],
+  "leadParagraph": "An independent autopsy commissioned by the family of one-year-old Kohen Wiley has ruled his death a homicide caused by a shotgun wound to the torso, with forensic evidence proving the Senatobia police officer who fired was not in the vehicle's path — demolishing the official police narrative and intensifying community demands for the officer's immediate arrest.",
+  "linkedPitch": null,
+  "location": "Senatobia, Mississippi / United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Vellesiya Wiley, a young Black woman in black clothing, stands with attorneys Ben Crump and Van Turner at outdoor microphones during a press conference in Senatobia, Mississippi",
+    "asset": {
+      "_ref": "image-922aef640abed16136a014a7f7b2b94270a959f3-2000x1333-webp",
+      "_type": "reference"
+    },
+    "caption": "Vellesiya Wiley, mother of 1-year-old Kohen Wiley, stands with attorneys Ben Crump and Van Turner during a press conference in Senatobia, Mississippi on June 22, 2026, demanding the release of video footage showing how police killed her son.",
+    "credit": "Andrew Bell / Mississippi Free Press"
+  },
+  "methodology": "Reported using independent autopsy findings released by civil rights attorneys Ben Crump and Van Turner on July 1, 2026, cross-referenced with Mississippi Department of Public Safety statements, Mississippi Free Press on-the-ground reporting, witness accounts from Vellesiya Wiley, and coverage from Action News 5, NBC News, USA Today, The Guardian, and WREG.",
+  "needsReview": null,
+  "publishedAt": "2026-07-02T22:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-3",
+      "_ref": "eb0d8576-6918-428b-b526-bfdd1b45876a",
+      "_type": "reference"
+    },
+    {
+      "_key": "6381224bd634",
+      "_ref": "two-calls-diapers-officer-buys-baby-executed-senatobia",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "baby-kohen-wiley-senatobia-police-shooting",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "hunter-foster-identified-kohen-wiley-shooter",
+      "_type": "reference"
+    },
+    {
+      "_key": "b065a9ac3076",
+      "_ref": "tripp-brazeale-arkansas-investigation-2026-05-12",
+      "_type": "reference"
+    },
+    {
+      "_key": "b90e3cb74361",
+      "_ref": "katelyn-hall-deserved-help-louisville-gave-her-bullets",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "independent-autopsy-rules-kohen-wiley-s-death-a-homicide-and-mississippi-is-still-protecting-his"
+  },
+  "tags": [
+    "Kohen Wiley",
+    "Mississippi",
+    "Police Violence",
+    "Senatobia",
+    "MBI",
+    "Ben Crump",
+    "Autopsy",
+    "Homicide",
+    "Hunter Foster",
+    "Walmart"
+  ],
+  "title": "Independent Autopsy Rules Kohen Wiley's Death a Homicide — And Mississippi Is Still Protecting His Killer",
+  "updatedAt": null,
+  "videoLink": null
+}

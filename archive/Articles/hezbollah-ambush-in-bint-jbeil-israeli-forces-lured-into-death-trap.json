@@ -1,0 +1,102 @@
+{
+  "_id": "hezbollah-ambush-in-bint-jbeil-israeli-forces-lured-into-death-trap",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Hezbollah executed a devastating ambush in Bint Jbeil, luring Israeli occupation forces into a booby-trapped building and detonating it with no survivors. Israel acknowledged a 'serious security incident' but provided no details.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "According to on-the-ground reports, Israeli occupation forces were lured into a building in Bint Jbeil that had been rigged with explosives by Hezbollah. Once the soldiers were inside, the entire structure was detonated, killing everyone inside. Israel acknowledged a 'serious security incident' but provided no casualty details.",
+      "question": "What happened in Bint Jbeil?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Bint Jbeil is the symbolic heart of Lebanese resistance. It's where Hassan Nasrallah delivered his famous 'spider web' speech in 2000, declaring Israel 'weaker than a spider's web' following its withdrawal from Lebanon. The town was the site of fierce fighting in the 2006 Lebanon War and remains a strategic stronghold for Hezbollah.",
+      "question": "Why is Bint Jbeil significant?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Israel has only acknowledged a 'serious security incident' without providing details on casualties or the specific circumstances. This vague language is standard protocol for the IOF when suffering significant losses — a pattern of minimizing or delaying confirmation of military deaths.",
+      "question": "What is Israel saying about the incident?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The ambush comes as Israeli forces have been attempting to encircle and capture Bint Jbeil for days, part of a broader offensive extending Israel's control over southern Lebanon. This occurs in the context of Israel's regional war of aggression, from the genocide in Gaza to the invasion of Lebanon, with resistance groups like Hezbollah responding to Israeli expansionism.",
+      "question": "How does this fit into the broader conflict?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Control of Bint Jbeil ensures control of the surrounding hills that provide commanding views of southern Lebanon, making it a key objective for any force seeking to dominate the region. Its capture would give Israel better control over Lebanon's southeastern border strip and demonstrate progress toward creating a buffer zone or annexation of territories south of the Litani River.",
+      "question": "What is the strategic importance of Bint Jbeil?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Hezbollah",
+    "Bint Jbeil",
+    "Lebanon",
+    "Israel",
+    "occupation",
+    "ambush",
+    "resistance",
+    "southern Lebanon",
+    "Nasrallah",
+    "spider web speech"
+  ],
+  "leadParagraph": "A devastating Hezbollah ambush in Bint Jbeil has delivered a severe blow to Israeli occupation forces, with reports that soldiers were lured into a booby-trapped building that was then detonated with no survivors. Israel acknowledged only a 'serious security incident' while providing no details — a familiar pattern when the IOF suffers significant casualties.",
+  "linkedPitch": null,
+  "location": " Bint Jbeil, Lebanon",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Lebanese soldiers at the scene of an explosion which left four Israeli Occupation soldiers injured, Wednesday, August 7, 2013",
+    "asset": {
+      "_ref": "image-9ca9a52d190b6529cb19d3ddf72e22db8964cbe8-816x459-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-14T22:24:36.434192+00:00",
+  "readingTimeMinutes": 4,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Hezbollah executed a devastating ambush in Bint Jbeil, luring Israeli forces into a booby-trapped building. Israel acknowledged a 'serious security incident.'",
+    "title": "Hezbollah Ambush in Bint Jbeil: Israeli Forces Lured Into De"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "hezbollah-ambush-in-bint-jbeil-israeli-forces-lured-into-death-trap"
+  },
+  "tags": [
+    "hezbollah",
+    "bint-jbeil",
+    "lebanon",
+    "israel",
+    "occupation"
+  ],
+  "title": "Hezbollah Ambush in Bint Jbeil: Israeli Forces Lured Into Death Trap",
+  "updatedAt": null,
+  "videoLink": null
+}

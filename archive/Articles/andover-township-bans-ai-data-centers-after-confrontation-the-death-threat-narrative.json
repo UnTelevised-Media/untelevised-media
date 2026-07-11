@@ -1,0 +1,121 @@
+{
+  "_id": "andover-ai-data-center-death-threats-2026-05-11",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "p0pb95WGg7xjqpGrCAMRFt",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "82e6262df9b1",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Andover, New Jersey officials announced a ban on AI data centers two days after a heated confrontation at a town meeting, claiming they were receiving death threats over the project. The timeline raises questions about when threats began and why community dissent was met with force.",
+  "eventDate": "2026-05-07T00:16:00.000Z",
+  "faqs": [
+    {
+      "_key": "p0pb95WGg7xjqpGrCAMRI2",
+      "answer": "A heated confrontation occurred where a resident was removed by police after swearing at officers and committee members. Mayor Thomas Walsh described the man as becoming very disruptive and resisting officers. The incident was captured on video that circulated widely on social media.",
+      "question": "What happened at Andover Township meeting on May 7, 2026?"
+    },
+    {
+      "_key": "p0pb95WGg7xjqpGrCAMRKB",
+      "answer": "Two days after May 7 confrontation, Mayor Thomas Walsh and Deputy Mayor Krista Gilchrist announced plans to rescind controversial zoning ordinances tied to a proposed AI data center and move forward with a complete ban on data centers in Andover Township. The announcement came after officials claimed they were receiving death threats.",
+      "question": "Why did Andover officials announce a ban on data centers?"
+    },
+    {
+      "_key": "p0pb95WGg7xjqpGrCAMRMK",
+      "answer": "Andover HPC Development is a Delaware-based company that registered to do business in New Jersey in December 2025 and lists 248 Stickles Pond Road (the former Newton Airport property) as its address. The company describes itself as being formed to develop high-performance computing data centers, though no formal application has been filed with the township's land use board and no developer has closed on purchasing the property.",
+      "question": "What is Andover HPC Development?"
+    },
+    {
+      "_key": "p0pb95WGg7xjqpGrCAMROT",
+      "answer": "Mayor Walsh told NJ.com that a data center could generate between 4.5 million and 5.2 million annually through a payment in lieu of taxes (PILOT) agreement. The 97-acre site currently generates roughly 29,000 a year in property taxes under a farmland assessment, making the potential revenue significantly higher than the current amount.",
+      "question": "How much tax revenue would an AI data center generate?"
+    },
+    {
+      "_key": "p0pb95WGg7xjqpGrCAMRQc",
+      "answer": "Attorney Anand Dash, representing Andover residents, filed a legal notice on April 24 challenging the ordinances. The notice alleges that the ordinances violate the state's Municipal Land Use Law and were tailored to benefit a single developer — Andover HPC Development. The legal challenge remains active as of May 2026.",
+      "question": "What legal challenge was filed against the zoning ordinances?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "andover new jersey",
+    "andover township",
+    "ai data center",
+    "artificial intelligence data center",
+    "newton airport",
+    "stickles pond road",
+    "thomas walsh mayor",
+    "krista gilchrist deputy mayor",
+    "andover hpc development",
+    "delaware data center company",
+    "anand dash attorney",
+    "zoning ordinances",
+    "height limit increase",
+    "payment in lieu of taxes pilot agreement",
+    "susan visibility brigade",
+    "sussex county",
+    "route 206 new jersey",
+    "town hall meeting confrontation",
+    "police removing resident",
+    "death threats municipal officials",
+    "community organizing vs development",
+    "nj news",
+    "news 12 new jersey",
+    "daily voice new jersey"
+  ],
+  "leadParagraph": "A proposed artificial intelligence data center at the site of a closed municipal airport has sparked a battle that is about more than local zoning — it is about how far a town will go for promised tax revenue, and what happens to residents who organize legally against it.",
+  "linkedPitch": null,
+  "location": "Andover, New Jersey, USA",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Andover resident body slammed by police",
+    "asset": {
+      "_ref": "image-4f435a958f965f0dfee71f48a9de001160ce1165-780x604-webp",
+      "_type": "reference"
+    },
+    "caption": "Julia Ward Howe, an American abolitionist and suffragist, issued the 1870 Mothers Day Proclamation in response to the carnage of the American Civil War. Her vision was a holiday dedicated to peace, not profit."
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-11T16:39:05.252Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "andover-township-bans-ai-data-centers-after-confrontation-the-death-threat-narrative"
+  },
+  "tags": [
+    "ai-data-centers",
+    "new-jersey",
+    "andover",
+    "community-protests",
+    "municipal-corruption",
+    "death-threats",
+    "civil-unrest"
+  ],
+  "title": "Andover Township Bans AI Data Centers After Confrontation — The Death Threat Narrative",
+  "updatedAt": null,
+  "videoLink": null
+}

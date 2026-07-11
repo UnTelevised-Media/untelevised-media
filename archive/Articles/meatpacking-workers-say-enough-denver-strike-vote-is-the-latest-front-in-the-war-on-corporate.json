@@ -1,0 +1,75 @@
+{
+  "_id": "denver-jbs-strike-authorization",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "1QOuL04Sp4WtuqMrqPHmb7",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "97% of union workers at a JBS-owned meat processing plant in Denver voted to authorize a strike, citing unfair labor practices, retaliation, and dangerous working conditions. The vote follows a historic three-week strike at JBS's Greeley plant — the first major meatpacking strike in 40 years.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "jbs strike",
+    "denver processing",
+    "ufcw local 7",
+    "meatpacking union",
+    "labor rights",
+    "corporate monopoly",
+    "big four meatpackers",
+    "immigrant workers",
+    "line speeds",
+    "unfair labor practices"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": "Denver, CO",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Group of striking meatpacking workers standing together holding protest signs outside the JBS plant",
+    "asset": {
+      "_ref": "image-6b1ae5555714da3dfe5f7a057e770dcfd5fbab24-1434x1224-webp",
+      "_type": "reference"
+    },
+    "caption": "Workers from the JBS beef plant in Colorado protest across the road from the facility during ongoing strike action",
+    "credit": "WRAL via Associated Press"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-26T16:00:00.000Z",
+  "readingTimeMinutes": 14,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "description": "97% of workers at JBS Denver plant authorize strike. First major meatpacking strikes in 40 years expose corporate abuse and monopoly power.",
+    "title": "Denver JBS Strike: Meatpacking Workers Fight Back"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "meatpacking-workers-say-enough-denver-strike-vote-is-the-latest-front-in-the-war-on-corporate"
+  },
+  "tags": [
+    "labor-strike",
+    "jbs",
+    "meatpacking",
+    "unions",
+    "workers-rights"
+  ],
+  "title": "Meatpacking Workers Say Enough: Denver Strike Vote Is the Latest Front in the War on Corporate Meat",
+  "updatedAt": null,
+  "videoLink": null
+}

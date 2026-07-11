@@ -1,0 +1,111 @@
+{
+  "_id": "may-day-2026-workers-over-billionaires-economic-blackout",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-3",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "More than 3,000 events across every U.S. state are mobilizing for May Day economic blackouts. From Chicago school closures to Los Angeles shutdowns, workers are building toward the largest coordinated day of labor action in generations.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "May Day 2026 is a nationwide economic blackout and day of labor action on International Workers' Day (May 1). Organizers are calling for 'No Work, No School, No Shopping' to protest Trump administration policies and economic inequality that prioritizes billionaires over workers. More than 3,000 events are planned across all 50 U.S. states.",
+      "question": "What is May Day 2026?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Visit maydaystrong.org to find events in your area using the interactive map. Take the economic blackout pledge by staying home from work and school and not shopping on May 1. Text 58910 for updates.",
+      "question": "How can I participate in May Day?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Three core demands: (1) Tax the rich so families, not fortunes, come first. (2) No ICE, no war, no private army. (3) Expand democracy, not corporate power. Hands off our vote.",
+      "question": "What are the demands of May Day Strong?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Not yet. May Day 2026 is a nationwide day of economic disruption and practice run for a general strike. The United Auto Workers has called for an actual general strike on May 1, 2028.",
+      "question": "Is May Day 2026 a general strike?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Major actions include city-wide economic blackouts in Chicago and Los Angeles, 'Kids Over Corporations' protests in North Carolina with 12+ school districts closed, and events in every U.S. state.",
+      "question": "Which cities are planning major May Day actions?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "may day 2026",
+    "economic blackout",
+    "no work no school no shopping",
+    "general strike",
+    "workers over billionaires",
+    "may day strong",
+    "labor unions",
+    "chicago teachers union",
+    "uaw general strike 2028",
+    "international workers day"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Mayday Protest Flyer",
+    "asset": {
+      "_ref": "image-9493bb06bd6defab12ff59dbd98acbc2173e4da0-186x271-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-30T03:00:00Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "description": "3,000+ events nationwide. No work, no school, no shopping. Workers over billionaires. Here's how to participate.",
+    "title": "May Day 2026: The Economic Blackout Begins"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "may-day-2026-no-work-no-school-no-shopping-the-general-strike-begins"
+  },
+  "tags": [
+    "may-day",
+    "general-strike",
+    "labor",
+    "economic-blackout",
+    "workers-rights",
+    "protests",
+    "trump"
+  ],
+  "title": "May Day 2026: 'No Work, No School, No Shopping' — The General Strike Begins",
+  "updatedAt": null,
+  "videoLink": null
+}

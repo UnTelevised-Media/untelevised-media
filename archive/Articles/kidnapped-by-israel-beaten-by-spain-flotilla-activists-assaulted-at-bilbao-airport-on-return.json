@@ -1,0 +1,87 @@
+{
+  "_id": "flotilla-bilbao-spain-police-brutality",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "PIeHoc6qbXEZCpAfP8tlAO",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "PIeHoc6qbXEZCpAfP8tlFL",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "PIeHoc6qbXEZCpAfP8tlKI",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "After surviving torture in Israeli custody, Global Sumud Flotilla activists returned to Spain only to be met with batons and arrests by Basque police at Bilbao airport. Four detained.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Global Sumud Flotilla",
+    "Bilbao airport",
+    "Ertzaintza",
+    "Israel torture",
+    "Ben Gvir",
+    "Spain police",
+    "Palestine solidarity"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Basque Ertzaintza police officers swinging batons at pro-Palestinian activists on the floor of Bilbao airport arrivals hall. Several people are on the ground. Others are scrambling away.",
+    "asset": {
+      "_ref": "image-4b39b21ade1f70e508613c04e0c7448b1b97eba8-4000x2250-webp",
+      "_type": "reference"
+    },
+    "caption": "RTVE — Basque Ertzaintza police charge and beat pro-Palestinian activists at Bilbao airport on May 23, 2026, as they welcome returning members of the Global Sumud Flotilla.",
+    "credit": "RTVE"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-23T18:00:00Z",
+  "readingTimeMinutes": 11,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "description": "After surviving torture in Israeli custody, Global Sumud Flotilla activists returned to Spain only to be met with batons and arrests by Basque police at Bilbao airport.",
+    "title": "Kidnapped by Israel, Beaten by Spain: Flotilla Activists Assaulted at Bilbao Airport"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "kidnapped-by-israel-beaten-by-spain-flotilla-activists-assaulted-at-bilbao-airport-on-return"
+  },
+  "tags": [
+    "flotilla",
+    "Gaza",
+    "Spain",
+    "Bilbao",
+    "police brutality",
+    "Israel",
+    "torture",
+    "Ben Gvir",
+    "Palestine",
+    "human rights"
+  ],
+  "title": "Kidnapped by Israel, Beaten by Spain: Flotilla Activists Assaulted at Bilbao Airport on Return Home",
+  "updatedAt": null,
+  "videoLink": null
+}

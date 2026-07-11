@@ -1,0 +1,138 @@
+{
+  "_id": "kimberly-clark-warehouse-fire",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "zOkJuNZVmyYz76wu4tInwE",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "zOkJuNZVmyYz76wu4tIo1H",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A 29-year-old warehouse worker set fire to a Kimberly-Clark distribution center in Ontario, California, filming himself as he ignited pallets of toilet paper and said, \"All you had to do was pay us enough to live.\" The incident reveals the breaking point of American workers under wage stagnation, inflation, and war-driven economic pressure.",
+  "eventDate": "2026-04-07T05:29:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "On April 7, 2026, 29-year-old Chamel Abdulkarim, an employee of NFI Industries, set fire to the 1.2 million square foot Kimberly-Clark distribution center. He filmed himself on Instagram igniting pallets of toilet paper while saying, \"All you had to do was pay us enough to live\" and \"There goes your inventory.\" The six-alarm fire required 175 firefighters to contain and destroyed the entire warehouse.",
+      "question": "What happened at the Kimberly-Clark warehouse in Ontario, California?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "Chamel A. Abdulkarim, 29, of Highland, California, was an employee of NFI Industries, the third-party logistics contractor operating the warehouse for Kimberly-Clark. He had previously sued PrimeFlight Aviation Services in 2024 for failing to provide meal periods, rest periods, and accurate wage statements. He was arrested on multiple felony arson charges and is being held without bail at the West Valley Detention Center.",
+      "question": "Who is Chamel Abdulkarim?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "According to Glassdoor salary data cited by Inland Valley Daily Bulletin, NFI Industries pays warehouse workers an average of about $18 an hour. Forklift operators earn between $39,000 and $49,000 annually, while truck drivers top out at $85,000. These wages have not kept pace with inflation, which has risen significantly since 2020, particularly in California's Inland Empire where rent is up 40%.",
+      "question": "What are the wages at NFI Industries?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "The article argues that the inflation crushing American workers is fed by U.S. militarism — over $8 trillion spent on war since 9/11, $200 billion in Pentagon budgets, and ongoing conflicts in the Middle East that drive up energy prices and disrupt supply chains. Workers are paying for imperialism twice: once in taxes, once in higher prices, while wages remain stagnant.",
+      "question": "How does the article connect this to war and imperialism?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The article frames the warehouse fire as a symptom of a broken system where workers are pushed past their breaking point by wage stagnation, inflation, and economic exploitation. It argues there are two crimes: Abdulkarim's arson, and the systemic crime of paying workers unlivable wages while corporations and defense contractors profit. The piece connects this to the history of worker sabotage and the IWW, suggesting this incident is a signal flare from the American working class.",
+      "question": "What is the article's main argument?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Kimberly-Clark warehouse fire",
+    "Chamel Abdulkarim",
+    "Ontario California",
+    "NFI Industries",
+    "wage theft",
+    "labor exploitation",
+    "sabotage",
+    "worker resistance",
+    "inflation 2026",
+    "war economy"
+  ],
+  "leadParagraph": "Chamel Abdulkarim stood in the Kimberly-Clark distribution center in Ontario, California, holding a lit Zippo lighter. He was filming himself on Instagram, walking through the 1.2 million square foot warehouse, past pallet after pallet of toilet paper wrapped in plastic. &quot;There goes your inventory,&quot; he said. Then he added the line that would echo across the country: &quot;All you had to do was pay us enough to live.&quot;",
+  "linkedPitch": null,
+  "location": "Ontario, CA",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Aerial photograph of a massive industrial warehouse building consumed by bright orange flames, with thick black smoke billowing into the night sky",
+    "asset": {
+      "_ref": "image-ba2539cc927a510e89adb02cacf9012afdf9cca6-840x560-webp",
+      "_type": "reference"
+    },
+    "caption": "An aerial view shows the massive Kimberly-Clark warehouse in Ontario, California fully engulfed in flames on April 7, 2026. The 1.2 million square foot distribution center was destroyed in a six-alarm fire that required 175 firefighters from across Southern California to contain. The incident sparked a national conversation about labor exploitation, wage stagnation, and the breaking point of workers under economic pressure.",
+    "credit": "latimes.com via Brave Search"
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2026-04-08T16:45:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "6e5660399525",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "ff2cc79bf06d",
+      "_ref": "the-fourth-fire-queens",
+      "_type": "reference"
+    },
+    {
+      "_key": "84d34c9abdc2",
+      "_ref": "amazon-solar-panels-fire-ohio",
+      "_type": "reference"
+    },
+    {
+      "_key": "38af84c475e7",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "31b904b726c8",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "beff95721250",
+      "_ref": "brockton-tractor-trailer-fire-massachusetts",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Chamel Abdulkarim set fire to a Kimberly-Clark warehouse in Ontario, California, saying \\\"All you had to do was pay us enough to live.\\\" The incident reveals the breaking point of American workers under wage stagnation and war-driven inflation."
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "should-have-paid-us-more-a-warehouse-fire-and-the-breaking-point-of-american-labor"
+  },
+  "tags": [
+    "labor",
+    "warehouse-fire",
+    "wages",
+    "class-war"
+  ],
+  "title": "\"Should Have Paid Us More\": A Warehouse Fire and the Breaking Point of American Labor",
+  "updatedAt": "2026-04-12T17:49:05.224Z",
+  "videoLink": ""
+}

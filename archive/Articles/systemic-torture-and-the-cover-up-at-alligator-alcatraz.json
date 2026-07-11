@@ -1,0 +1,137 @@
+{
+  "_id": "alligator-alcatraz-systemic-torture-cover-up",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "On April 2, 2026, guards at Florida's Alligator Alcatraz cut off detainee phones for an entire day in direct violation of a federal court order. When detainees complained, guards beat them, broke a wrist, pepper sprayed 32 men in a cage, and caused an elderly man to pass out. This is what systemic torture looks like.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "object",
+      "answer": "Alligator Alcatraz is a tent-based immigration detention center built by the state of Florida to house people detained by federal authorities. It opened July 3, 2025, at the Dade-Collier Training and Transition Airport in Ochopee, Florida — the eastern edge of Collier County, deep in the Everglades. The facility has capacity for thousands of people and held roughly 1,500 detainees in late January 2026.",
+      "question": "What is Alligator Alcatraz and where is it located?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "object",
+      "answer": "On April 2, 2026, guards cut off detainee phones for an entire day, denying them access to their families and attorneys. This was in direct violation of a federal court order issued just six days earlier on March 27, 2026. When detainees complained about the phone cutoff, guards retaliated with collective punishment: beating detainees, breaking one detainee's wrist, pepper-spraying all 32 men in the cage, and causing an elderly man to pass out from inability to breathe. Detainees barricaded their door out of fear that guards would return to beat them again.",
+      "question": "What happened on April 2, 2026 at the facility?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "object",
+      "answer": "U.S. District Court Judge Sheri Polster Chappell issued a preliminary injunction on March 27, 2026, ordering detention center officials to provide detainees with access to timely, free, confidential, unmonitored, and unrecorded outgoing legal calls. The order also required attorneys to be allowed to make unscheduled visits to see their clients, bypassing the facility's pre-scheduling requirement. The phone cutoff on April 2 was a direct violation of this court order.",
+      "question": "What did the federal court order require?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "object",
+      "answer": "The facility is run by a network of private contractors hired by the state of Florida. Critical Response Strategies, a Jacksonville-based consulting firm, has a $78.5 million contract to run the facility. The Nakamoto Group is subcontracted to provide legal access. The facility costs $1.2 million per day to operate, with a daily burn rate of $3 million during its earliest weeks. As of March 2026, Florida had spent $264.2 million on the facility over 259 days.",
+      "question": "Who runs Alligator Alcatraz and how much does it cost?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "object",
+      "answer": "In a December 2025 report titled 'Torture and Enforced Disappearances in the Sunshine State,' Amnesty International documented inhuman and unsanitary conditions at Alligator Alcatraz, including overflowing toilets with fecal matter seeping into where people are sleeping, limited access to showers, exposure to insects without protective measures, lights on 24 hours a day, poor quality food and water, and lack of privacy including cameras installed above toilets. The organization concluded these conditions amount to torture.",
+      "question": "What did Amnesty International find?"
+    },
+    {
+      "_key": "faq-6",
+      "_type": "object",
+      "answer": "The Nakamoto Group, subcontracted to provide legal access at Alligator Alcatraz, has a history of rubber-stamping ICE facility inspections. A 2018 Department of Homeland Security Office of Inspector General report found that even ICE's own staff considered Nakamoto's inspections 'useless' and 'very, very, very difficult to fail.' Nakamoto lost its decades-long federal contract to inspect ICE jails after these findings. Yet Florida's DeSantis administration entrusted them with ensuring detainees can contact their attorneys.",
+      "question": "Why is the Nakamoto Group controversial?"
+    },
+    {
+      "_key": "faq-7",
+      "_type": "object",
+      "answer": "ICE plans to buy warehouses nationwide to convert into eight mass detention sites, with 16 more feeder sites, to add 92,000 additional beds by November 2026. Floor plans to convert a warehouse in Social Circle, Georgia, show no location for people to meet with their lawyers. The ACLU has warned it is 'alarmed at the scale and pace' of this expansion with little transparency or oversight.",
+      "question": "What are ICE's plans for future detention facilities?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "alligator-alcatraz",
+    "ron-desantis",
+    "immigration-detention",
+    "ice",
+    "torture",
+    "human-rights",
+    "katie-blankenship",
+    "sanctuary-of-the-south",
+    "critical-response-strategies",
+    "nakamoto-group",
+    "amnesty-international",
+    "florida",
+    "trump-administration",
+    "deportation",
+    "civil-rights"
+  ],
+  "leadParagraph": "On April 2, 2026, guards at Florida's 'Alligator Alcatraz' immigration detention center did something the Trump administration would prefer you forget about. They cut off the phones. Not just for a few minutes. For an entire day. Then, when detainees complained, the guards did what prison guards do when they think no one is watching. They beat them.",
+  "linkedPitch": null,
+  "location": " Dade-Collier Training and Transition Airport, Big Cypress National Preserve, Ochopee, Florida, U.S",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Detainee from 'Alligator Alcatraz' appears on video call with black eye and battered face.",
+    "asset": {
+      "_ref": "image-5325e2b40eafaf599a91f82b7b8266b01d4fc01a-1500x1000-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-20T14:00:00.000Z",
+  "readingTimeMinutes": 15,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Guards cut off phones, beat detainees, pepper sprayed 32 men in a cage at Florida's Alligator Alcatraz. Amnesty International calls it torture. $1.2M/day spent on facility.",
+    "title": "Systemic Torture at Alligator Alcatraz: The Cover-Up"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "systemic-torture-and-the-cover-up-at-alligator-alcatraz"
+  },
+  "tags": [
+    "alligator-alcatraz",
+    "desantis",
+    "ice",
+    "torture",
+    "human-rights",
+    "immigration",
+    "florida",
+    "critical-response-strategies"
+  ],
+  "title": "Systemic Torture and the Cover-Up at Alligator Alcatraz",
+  "updatedAt": null,
+  "videoLink": null
+}

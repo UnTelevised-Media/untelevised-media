@@ -1,0 +1,138 @@
+{
+  "_id": "far-right-pressure-on-crook-county-schools",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "7WXAS6desaJeCbYHs6BcvQ",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "7WXAS6desaJeCbYHs6BczD",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A coordinated far-right campaign captured Crook County's school board in 2023, triggering two years of chaos — resignations, violated open meetings laws, and a community fightback that reveals a broader far-right takeover of rural Central Oregon.",
+  "eventDate": "2023-05-16T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Cheyenne Edgerly, Jennifer Knight, and Jessica Brumble ran as a slate called 'Crook County for Better Education' in 2023. They were backed by political consultant Bryan Iverson, who is married to Oregon House Minority Leader Vikki Breese-Iverson. They campaigned against LGBTQ and racial inclusion in school curriculum.",
+      "question": "Who are the 'Mama Bears' who took over the Crook County School Board?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Oregon Superintendent of the Year Dr. Sara Johnson resigned within weeks. The district cycled through an interim and a permanent superintendent (Melissa Skinner) who was pushed out after less than six months. Two of the three board members resigned under scandal, and the board was found to have violated Oregon's open meetings law.",
+      "question": "What happened after the far-right majority took control of the board?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The same region has seen militia groups infiltrate local police (documented by UTM in Prineville), Ammon Bundy's People's Rights Network capture local Republican party infrastructure, and Amazon data centers consume water resources after the coal plant closure. The school board takeover is one front in this coordinated campaign.",
+      "question": "How does the Crook County school board situation connect to the broader far-right takeover of rural Oregon?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Prineville Review discovered the board was holding executive sessions to discipline employees without providing the legally required written notice to those employees. The Oregon Government Ethics Commission confirmed there are no exceptions to this requirement. The violations likely extended back months or years.",
+      "question": "What open meetings law violations did the Crook County School Board commit?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Crook County school board",
+    "far-right Oregon schools",
+    "Prineville education takeover",
+    "Cheyenne Edgerly school board",
+    "Oregon open meetings law violation",
+    "rural Oregon far right",
+    "Mama Bears school board",
+    "Crook County superintendent resignation"
+  ],
+  "leadParagraph": "In 2023, three far-right candidates backed by a political consultant tied to Oregon House GOP leadership swept the Crook County School Board. Within months, the award-winning superintendent resigned. Within two years, two board members had resigned under scandal, multiple superintendents had cycled through, students walked out in protest, and investigations revealed the board was violating Oregon's open meetings law. This is the story of how a small rural district became the front line of a coordinated far-right takeover of Central Oregon's institutions.",
+  "linkedPitch": null,
+  "location": "Prineville, Crook County, Oregon",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Hundreds of Crook County parents and community members packed a school board meeting to support athletic director Rob Bonner amid the district leadership crisis",
+    "asset": {
+      "_ref": "image-b06b922186253fd4e9d988aa0f4858d80bef93a4-1920x1080-webp",
+      "_type": "reference"
+    },
+    "caption": "Hundreds of Crook County parents and community members packed a school board meeting to support athletic director Rob Bonner amid the district leadership crisis",
+    "credit": "Central Oregon Daily"
+  },
+  "methodology": "Reported using local and state-level news coverage from OPB, Central Oregon Daily, The Bulletin, Prineville Review, KTVZ, and The Guardian. Sources cross-referenced across multiple outlets. All claims supported by documented public records, board meeting coverage, and official statements.",
+  "needsReview": null,
+  "publishedAt": "2026-06-19T04:00:00Z",
+  "readingTimeMinutes": 16,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "amazon-solar-panels-fire-ohio",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "boardman-amazon-data-center-water-crisis",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "boardman-coal-aftermath-data-centers-water-crisis",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "brockton-tractor-trailer-fire-massachusetts",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "prineville-militia-police-racism",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "How a coordinated far-right campaign captured Crook County's school board, drove out superintendents, violated open meetings law — and how the community fought back.",
+    "metaTitle": "Far-Right Pressure on Crook County Schools: Rural Oregon Takeover",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "far-right-pressure-on-crook-county-schools-how-a-rural-oregon-district-became-the-front-line-of"
+  },
+  "tags": [
+    "Oregon",
+    "Crook County",
+    "Far Right",
+    "School Board",
+    "LGBTQ Rights",
+    "Prineville",
+    "Censorship",
+    "Education",
+    "Rural America",
+    "People's Rights Network"
+  ],
+  "title": "Far-Right Pressure on Crook County Schools: How a Rural Oregon District Became the Front Line of a Takeover",
+  "updatedAt": null,
+  "videoLink": null
+}

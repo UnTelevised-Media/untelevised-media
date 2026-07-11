@@ -1,0 +1,66 @@
+{
+  "_id": "article-c41420d9-8be5-4ee2-8dee-fa88e0e4ed81",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "b24081610dcb",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A recap of the recent events in the Israel-Hamas conflict. The Israel-Hamas conflict escalates with Israeli airstrikes causing casualties in Gaza, while Israeli forces intensify their operations, and the plight of affected civilians in Gaza. ",
+  "eventDate": "2023-10-30T23:50:46.038Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": true,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Israel",
+    "IDF",
+    "Gaza",
+    "Palestine",
+    "Hamas",
+    "Gaza Strip",
+    "Middle East",
+    "Conflict",
+    "Humanitarian Crisis",
+    "International Relations",
+    "War",
+    "Peace Efforts"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Smoke rises during Israeli bombardment of the Gaza Strip on Sunday amid ongoing battles between Israel and the Palestinian Hamas movement. Gaza, Palestine - Oct 29th, 2023",
+    "asset": {
+      "_ref": "image-84dfa5ea6a56765d8293752b4d7530bcb5f577ca-750x450-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-10-30T23:50:42.602Z",
+  "readingTimeMinutes": 6,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "israel-hamas-conflict-update-escalation-continues-in-gaza-and-surrounding-areas"
+  },
+  "tags": null,
+  "title": "Israel-Hamas Conflict Update: Escalation Continues in Gaza and Surrounding Areas",
+  "updatedAt": null,
+  "videoLink": "https://www.youtube.com/embed/fXz4xu1aRKs?si=zfXB8OujNYJEEfGt"
+}

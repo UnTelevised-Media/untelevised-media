@@ -1,0 +1,53 @@
+{
+  "_id": "article-96ecb20d-f9c5-40fd-a8e0-02ec77584478",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "962a0128edb4",
+      "_ref": "becf8b69-e651-4e6a-998b-96e0b734783e",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Explore the intricate ties between the Oil and Gas Industry and the escalation of climate-driven natural catastrophes in our thought-provoking article. Delve into the ways these industries contribute to climate change, propelling hurricanes, wildfires, and floods. Discover the urgent need for sustainable energy shifts and tighter regulations to avert future disasters. Join us in unraveling the connection between industry actions and environmental consequences.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Oil & Gas plant emiting large amounts of smog",
+    "asset": {
+      "_ref": "image-6a4f3534e36970eca17868f8eed37c8477b7911e-770x513-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2022-06-13T00:36:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "unveiling-the-nexus-the-oil-and-gas-industry-s-role-in-fueling-climate-change-related-natural"
+  },
+  "tags": null,
+  "title": "Unveiling the Nexus: The Oil and Gas Industry's Role in Fueling Climate Change-Related Natural Disasters",
+  "updatedAt": null,
+  "videoLink": null
+}

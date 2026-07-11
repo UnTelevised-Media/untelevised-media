@@ -1,0 +1,137 @@
+{
+  "_id": "shad-white-white-supremacist-mississippi-auditor",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Mississippi State Auditor Shad White, a Harvard Law grad and Federalist Society president, has systematically targeted immigrants, LGBTQ+ communities, and Black political representation through ICE partnerships, MOGE audits, and redistricting pushes. He's building a gubernatorial campaign on white supremacy dressed up as fiscal oversight.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "jqy7sptz",
+      "answer": "Shad White is the Mississippi State Auditor, appointed in 2018 by Gov. Phil Bryant. He's a Harvard Law School graduate, former Rhodes Scholar at Oxford, and served as President of the Harvard chapter of the Federalist Society. He's widely viewed as a likely Republican candidate for governor.",
+      "question": "Who is Shad White?"
+    },
+    {
+      "_key": "jp0t85cf",
+      "answer": "MOGE (Mississippi Office of Government Efficiency) is White's rebranding of his auditor's office, modeled after Elon Musk's DOGE. White called himself 'Mississippi's Musk' and used MOGE to audit and attack HIV/AIDS grants, specifically targeting a 'Queer-ceanara' Latinx pride event.",
+      "question": "What is MOGE?"
+    },
+    {
+      "_key": "xk5a71q5",
+      "answer": "White signed a 287(g) agreement with ICE, training his agents to execute immigration enforcement functions. His office praised 'Swamp Sweep,' a massive operation aiming to arrest 5,000 immigrants across Louisiana and Mississippi, with White stating his agents are 'honored to serve as state-level partners for ICE.'",
+      "question": "How is White involved with ICE?"
+    },
+    {
+      "_key": "to1iobaz",
+      "answer": "After the Supreme Court weakened Voting Rights Act protections in April 2026, White immediately called for redrawing Mississippi's 2nd Congressional District — the state's only majority-Black district, held by Democrat Bennie Thompson since 1993. White wrote on X: 'Mississippi might no longer have a district drawn to protect Bennie Thompson.'",
+      "question": "What is the redistricting controversy?"
+    },
+    {
+      "_key": "l6n873g3",
+      "answer": "White's audit claimed $10.5 million in Medicaid benefits went to undocumented immigrants between 2023-2025. He framed this as tax dollars serving 'as a magnet for illegal immigrants' and said 'anything would be better' than spending on healthcare for undocumented people.",
+      "question": "What did the Medicaid audit find?"
+    },
+    {
+      "_key": "6szu6muz",
+      "answer": "Every target of White's audits and initiatives is a minority group: immigrants (ICE partnership, Medicaid audit), LGBTQ+ people (HIV/AIDS grant audit attacking 'Queer-ceanara'), and Black political power (redistricting MS-2). The pattern suggests systematic use of state authority to protect white political dominance.",
+      "question": "What is the pattern in White's actions?"
+    },
+    {
+      "_key": "xiykxjxb",
+      "answer": "White supremacy doesn't require racial slurs. It requires using state power to protect white dominance while attacking minority communities. White targets immigrants, LGBTQ+ people, and Black representation while building a gubernatorial campaign. That's white supremacy with a Harvard degree.",
+      "question": "Why call this white supremacy?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "shad-white",
+    "mississippi-state-auditor",
+    "harvard-law",
+    "federalist-society",
+    "white-supremacy",
+    "ice-partnership",
+    "moge",
+    "redistricting",
+    "bennie-thompson",
+    "voting-rights-act",
+    "mississippi-governor",
+    "immigration-enforcement"
+  ],
+  "leadParagraph": "Mississippi State Auditor Shad White, a Harvard Law grad and Federalist Society president, has systematically targeted immigrants, LGBTQ+ communities, and Black political representation through ICE partnerships, MOGE audits, and redistricting pushes. He's building a gubernatorial campaign on white supremacy dressed up as fiscal oversight.",
+  "linkedPitch": null,
+  "location": "Mississippi, United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Shad White, a white man in his late 30s with dark hair and glasses, wears a dark suit and stands against a plain background with his arms crossed. He looks directly at the camera with a serious expression. This is an official portrait from his campaign website.",
+    "asset": {
+      "_ref": "image-7a69a54daeae8cd11782b5ce94dfc92c9a248268-683x1024-jpg",
+      "_type": "reference"
+    },
+    "crop": {
+      "_type": "sanity.imageCrop",
+      "bottom": 0.22050177762780396,
+      "left": 0,
+      "right": 0,
+      "top": 0.1298506748519846
+    },
+    "hotspot": {
+      "_type": "sanity.imageHotspot",
+      "height": 0.6496475475202115,
+      "width": 1,
+      "x": 0.5,
+      "y": 0.4546744486120903
+    }
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2026-05-08T18:00:00Z",
+  "readingTimeMinutes": 12,
+  "relatedArticles": [],
+  "reviewedBy": null,
+  "seo": {
+    "metaDescription": "Shad White uses state power to attack immigrants, LGBTQ+ people, and Black representation while building gubernatorial ambitions. It's white supremacy in a suit.",
+    "metaTitle": "Mississippi Auditor's Pattern of Racial Targeting"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-mississippi-musk-who-wants-to-erase-black-power-how-shad-white-uses-state-authority-to-target-mi"
+  },
+  "tags": [
+    "shad-white",
+    "mississippi",
+    "white-supremacy",
+    "redistricting",
+    "ice-partnership",
+    "moge",
+    "voting-rights"
+  ],
+  "title": "The 'Mississippi Musk' Who Wants to Erase Black Power: How Shad White Uses State Authority to Target Minorities",
+  "updatedAt": "2026-05-08T22:16:03.999Z",
+  "videoLink": ""
+}

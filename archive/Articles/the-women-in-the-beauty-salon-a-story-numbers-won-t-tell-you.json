@@ -1,0 +1,147 @@
+{
+  "_id": "358du4ton59",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "f5a2dc7b673d",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    },
+    {
+      "_key": "9569d02bdef5",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Three Palestinian women killed in West Bank beauty salon strike. Israeli military called it a direct hit. Their names: Mais Ghazi Masalmeh (17), Sahira Rizq Masalmeh (50), and Amal Sobhi Abdel Karim Matawa' Masalmeh (36).",
+  "eventDate": "2026-03-18T13:42:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "According to Palestinian news agency Wafa, the women were: Mais Ghazi Masalmeh (17), Sahira Rizq Masalmeh (50), and Amal Sobhi Abdel Karim Matawa' Masalmeh (36). They were killed when missile debris or possibly a cluster munition hit a beauty salon in Beit Awwa, near Hebron, in the occupied West Bank.",
+      "question": "Who were the women killed in the beauty salon strike?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The Israeli military said the women were killed by a direct hit from a cluster munition missile or by a direct impact of missile shrapnel. This framing reduces human beings to ballistics and impact points, treating Palestinian civilians as vectors and collateral damage rather than as people with names, stories, and families.",
+      "question": "Why did Israel call it a direct hit?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Palestinian Red Crescent Society reported significant difficulties reaching the scene because Israel had closed iron gates leading to Beit Awwa. These closures had a direct and critical impact on the time available to save injured victims, delaying emergency medical response when every minute counts.",
+      "question": "What were the obstacles to reaching survivors?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "No. According to Wafa, missile fragments landed on multiple locations including a metal caravan being used as a salon and several other parts of Hebron. This indicates the use of cluster munitions designed to fragment and scatter over a wide area — weapons that cause indiscriminate destruction.",
+      "question": "Was this a surgical strike?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "This strike is part of a pattern of Iranian-Israeli retaliation. Since the US and Israel launched their war on Iran on February 28, at least 36,000 Palestinians have been displaced in the West Bank by Israeli settlement drives accelerated under a renewed state of emergency. The beauty salon attack is one small example of how the war reaches civilians far from its primary battlefronts.",
+      "question": "How does this fit into the broader Iran-Israel war?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "West Bank",
+    "Hebron",
+    "Beit Awwa",
+    "Palestinian women",
+    "Iranian missile",
+    "beauty salon",
+    "Israeli strikes",
+    "PRCS",
+    "Wafa",
+    "Rory Challands",
+    "Al Jazeera",
+    "BBC",
+    "debris",
+    "cluster munitions",
+    "Moshav Adanim",
+    "human story",
+    "not numbers",
+    "occupation"
+  ],
+  "leadParagraph": "When an Iranian missile fell on a beauty salon in Beit Awwa near Hebron, killing three Palestinian women, Israeli military offered a different accounting. Here is what numbers won't tell you.",
+  "linkedPitch": null,
+  "location": "Beit Awwa, Hebron, Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "4 Palestinian women killed in West Bank by debris from projectile, a rescue worker searches the rubble of the salon.",
+    "asset": {
+      "_ref": "image-5ce7a4b9ee247afb8c0e328ecba0d2f4670503bb-864x486-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-03-19T15:32:22.208Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "40128c617c94",
+      "_ref": "c9yzsqzw5ic",
+      "_type": "reference"
+    },
+    {
+      "_key": "b3ef59a6869c",
+      "_ref": "article-d6a99359-2ce7-4fb1-a801-839bdd8956cd",
+      "_type": "reference"
+    },
+    {
+      "_key": "43de0bbb510b",
+      "_ref": "article-9992ca74-df44-40bf-9caf-45e5e56269c7",
+      "_type": "reference"
+    },
+    {
+      "_key": "3d4055096caf",
+      "_ref": "article-1343286e-dbf6-4d85-9fca-0fca3a494c76",
+      "_type": "reference"
+    },
+    {
+      "_key": "24a81228d817",
+      "_ref": "article-5e075088-6d89-41d5-a551-502e3ea5f852",
+      "_type": "reference"
+    },
+    {
+      "_key": "0d28819b650d",
+      "_ref": "article-82d5510e-acf9-4ca2-bd86-6cadc1592d74",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seo",
+    "metaDescription": "Three Palestinian women killed in West Bank beauty salon strike. Israeli military called it a 'direct hit.' Their names: Mais Ghazi Masalmeh (17), Sahira Rizq Masalmeh (50), Amal Sobhi Abdel Karim Matawa' Masalmeh (36).",
+    "metaTitle": "The Women in the Beauty Salon: A Story Numbers Won't Tell You",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-women-in-the-beauty-salon-a-story-numbers-won-t-tell-you"
+  },
+  "tags": null,
+  "title": "The Women in the Beauty Salon: A Story Numbers Won't Tell You",
+  "updatedAt": null,
+  "videoLink": null
+}

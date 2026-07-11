@@ -1,0 +1,161 @@
+{
+  "_id": "trinidad-texas-water-crisis-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "0dc03fc577fa143b92a0840b7d3ec385",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "39208cd0aab9d5bc370a277d5f893037",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "bdce9a45626f135f10d078634f981c58",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Trinidad, Texas arrested a woman for warning about contaminated water — then confirmed the water was contaminated. Now lawsuits, firings, and a town too afraid to speak.",
+  "eventDate": "2026-05-08T17:36:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Jennifer Combs is a resident of Kerens, Texas who runs the Facebook page Southern Belle Watch. She was arrested on May 8, 2026 on a felony charge of false alarm or report after posting about contaminated water in Trinidad, Texas. She had no prior criminal record, not even a speeding ticket.",
+      "question": "Who is Jennifer Combs?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Combs was arrested under Texas Penal Code Section 42.06 for posting on her Facebook page that Trinidad residents had been hospitalized due to bacteria in the water supply. The Trinidad Police Department escalated the charge to a state jail felony because the post involved a public water system. The charges were later dismissed by a Henderson County grand jury.",
+      "question": "Why was Jennifer Combs arrested?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Yes. The City of Trinidad issued a boil water notice on April 21, 2026 telling residents to boil water before drinking, cooking, or bathing. The Texas Commission on Environmental Quality confirmed it received complaints and has an ongoing investigation. Mayor Dennis Haws acknowledged the city's water pipes date back to the 1950s.",
+      "question": "Was the water in Trinidad, Texas actually contaminated?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "A Henderson County grand jury declined to indict Combs in a no-bill decision. A second arrestee, citizen journalist Winston Noles known as Otto the Watchdog, also had his charges dismissed by a municipal judge. Combs filed a 43-page federal civil rights lawsuit against the City of Trinidad, Police Chief Charles Gregory, another officer, and a city council member.",
+      "question": "What happened after the arrest?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "As of May 2026, the TCEQ investigation into Trinidad's water quality is ongoing. The federal civil rights lawsuit Combs v. Gregory, No. 6:26-cv-00235, is proceeding in the Eastern District of Texas. Trinidad City Hall briefly closed for unexplained reasons after the arrests drew national media attention.",
+      "question": "What is the current status of the case?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "Texas Penal Code Section 42.06 makes it a crime to knowingly make a false report involving an emergency. The offense is elevated to a state jail felony when the report involves a public water, gas, or power supply. Trinidad police used this felony enhancement provision against Combs for her Facebook post about water quality.",
+      "question": "What is Texas Penal Code Section 42.06?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Trinidad Texas water contamination",
+    "Jennifer Combs arrested Facebook post",
+    "Texas Penal Code 42.06 false alarm",
+    "boil water notice Henderson County",
+    "First Amendment retaliation lawsuit",
+    "Trinidad Police Department",
+    "Charles Gregory police chief",
+    "TCEQ water investigation",
+    "cast iron pipes 1950s infrastructure",
+    "citizen journalist arrested",
+    "Southern Belle Watch",
+    "Otto the Watchdog arrested",
+    "CJ Grisham civil rights attorney"
+  ],
+  "leadParagraph": "Trinidad, Texas arrested Jennifer Combs on a felony charge for a Facebook post warning residents about contaminated tap water. Two weeks later, the city issued a boil water notice confirming the water was unsafe. A grand jury dismissed the charges. Combs has filed a federal civil rights lawsuit alleging deliberate political retaliation.",
+  "linkedPitch": null,
+  "location": "Trinidad, Texas",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Bathtub filling with brown muddy water from faucet in Trinidad Texas",
+    "asset": {
+      "_ref": "image-0280d20e6c615050a39c4d217bb7ef9553fca861-1200x1146-webp",
+      "_type": "reference"
+    },
+    "caption": "Brown, muddy water fills a bathtub in Trinidad, Texas — residents reported discolored, sediment-filled water from their taps for weeks before the city issued a boil water notice",
+    "credit": "squaredtech.co via Brave Search"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-25T02:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "8b3f45925251",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "a06122efcd62",
+      "_ref": "katelyn-hall-deserved-help-louisville-gave-her-bullets",
+      "_type": "reference"
+    },
+    {
+      "_key": "b6b1ee1d069a",
+      "_ref": "andover-ai-data-center-death-threats-2026-05-11",
+      "_type": "reference"
+    },
+    {
+      "_key": "eedf867305ff",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "6d056ab25488",
+      "_ref": "insider-trading-iran-war-oil-futures-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "13ee26ff11d0",
+      "_ref": "banksy-flag-blind-patriotism-waterloo-place-london-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-crime-was-a-facebook-post-the-water-was-actually-poisoned"
+  },
+  "tags": [
+    "trinidad-texas",
+    "water-crisis",
+    "jennifer-combs",
+    "first-amendment",
+    "police-abuse",
+    "texas-penal-code",
+    "boil-water-notice",
+    "charles-gregory",
+    "tceq",
+    "citizen-journalism"
+  ],
+  "title": "The Crime Was a Facebook Post. The Water Was Actually Poisoned.",
+  "updatedAt": null,
+  "videoLink": null
+}

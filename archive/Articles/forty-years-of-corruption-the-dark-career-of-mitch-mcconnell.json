@@ -1,0 +1,149 @@
+{
+  "_id": "forty-years-corruption-dark-career-mitch-mcconnell",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "7fcd1cabdd5e",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-politics",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "687e04fcbf27",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "From tobacco's 'special friend' to the architect of dark money in American politics, Mitch McConnell spent forty years selling access, blocking reform, and corrupting American democracy from the United States Senate.",
+  "eventDate": "2026-06-14T08:36:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Internal industry documents revealed McConnell was called a 'special friend' by R.J. Reynolds. He received over $600,000 in tobacco campaign contributions — more than any other member of Congress — and repeatedly defended the industry on the Senate floor.",
+      "question": "What was McConnell's relationship with the tobacco industry?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "McConnell was the Senate's most vocal opponent of campaign finance reform for decades. He framed unlimited corporate spending as a First Amendment right, laying the intellectual groundwork for the Citizens United decision that opened the floodgates to billions in anonymous political spending.",
+      "question": "How did McConnell enable dark money in American politics?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "McConnell led the effort to lift sanctions on Russian oligarch Oleg Deripaska, who was under FBI investigation for 2016 election meddling. Months later, Deripaska's company promised a $200 million aluminum plant in Kentucky that was never built.",
+      "question": "What was the Deripaska connection?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "In 2016, McConnell blocked Merrick Garland's nomination for 14 months by inventing a new rule about election-year confirmations. In 2020, he abandoned his own rule to rush Amy Coney Barrett's confirmation 46 days before the election.",
+      "question": "How did McConnell manipulate the Supreme Court confirmation process?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "McConnell's wife Elaine Chao served as Transportation Secretary while her father's shipping company had deep ties to the Chinese Communist Party. An Inspector General investigation found her staff coordinated extensively with McConnell's office to direct grants to Kentucky.",
+      "question": "What was the Elaine Chao conflict of interest?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Mitch McConnell corruption",
+    "McConnell tobacco",
+    "dark money Citizens United",
+    "McConnell Deripaska",
+    "Supreme Court manipulation",
+    "Moscow Mitch",
+    "McConnell voting rights"
+  ],
+  "leadParagraph": "Mitch McConnell entered the Senate in 1985 and immediately began selling access, blocking reform, and using his power to enrich the industries that bought him. From tobacco to dark money to Russian oligarchs, this is the full accounting of the single most destructive force in the modern corruption of American governance.",
+  "linkedPitch": null,
+  "location": "Kentucky / Washington, D.C.",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Mitch McConnell walking down a hallway carrying a binder, with American flags in the background",
+    "asset": {
+      "_ref": "image-c8b35805e9d72a2fc336bf879abb271945489ab6-1440x907-webp",
+      "_type": "reference"
+    },
+    "caption": "Senate Minority Leader Mitch McConnell walks to his office after announcing he will step down from Republican leadership, February 2024.",
+    "credit": "Getty Images"
+  },
+  "methodology": "Reported using internal tobacco industry documents obtained through litigation, investigative reporting from NPR, Rolling Stone, the Center for Public Integrity, and the Lexington Herald-Leader, congressional records, and campaign finance disclosures spanning McConnell's 40-year Senate career.",
+  "needsReview": null,
+  "publishedAt": "2026-07-08T12:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-freeze",
+      "_ref": "article-61e19579-1c7f-4c60-8b09-062687b7d42e",
+      "_type": "reference"
+    },
+    {
+      "_key": "1392b2a880a0",
+      "_ref": "mitch-mcconnell-death-watch-gop-seat-cover-up",
+      "_type": "reference"
+    },
+    {
+      "_key": "914d276e8e15",
+      "_ref": "kash-patel-fbi-director-corruption",
+      "_type": "reference"
+    },
+    {
+      "_key": "754d24574b88",
+      "_ref": "todd-blanche-corrupt-ascent-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "9487b9fab83e",
+      "_ref": "trump-anti-weaponization-fund-heist",
+      "_type": "reference"
+    },
+    {
+      "_key": "34658c791a91",
+      "_ref": "insider-trading-iran-war-oil-futures-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "forty-years-of-corruption-the-dark-career-of-mitch-mcconnell"
+  },
+  "tags": [
+    "Mitch McConnell",
+    "corruption",
+    "tobacco",
+    "dark money",
+    "Citizens United",
+    "Supreme Court",
+    "Russia",
+    "Deripaska",
+    "voting rights",
+    "Kentucky"
+  ],
+  "title": "Forty Years of Corruption: The Dark Career of Mitch McConnell",
+  "updatedAt": null,
+  "videoLink": null
+}

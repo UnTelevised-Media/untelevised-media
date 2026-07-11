@@ -1,0 +1,118 @@
+{
+  "_id": "BOAIKFRWNleR9aRm6R2wrc",
+  "allowComments": true,
+  "author": {
+    "_ref": "DJ1Y76QLqJX8nukZ868jxy",
+    "_type": "reference",
+    "name": "Ash Fawkes"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "750913068e5b",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "db9de381e071",
+      "_ref": "ba1fee06-f18e-4906-ac79-28bdff1ea501",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Operation Israel continues as Redcult takes down a list of Israeli websites in advance of Eid al-Adha, an important Muslim holiday celebrated at the Al-Aqsa Mosque in Occupied Palestine. Also known as the \"Feast of Sacrifice\", it takes place over a four day period and is celebrated worldwide, making it the 2nd most important event in the Muslim calendar. ",
+  "eventDate": "2016-09-11T12:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "kxaidgc",
+      "_type": "faqItem",
+      "answer": "#OpAqsa is a component of #OpIsrael in which the Anonymous group Redcult targeted 41 Israeli government websites as a \"gentle reminder\" to respect the Muslim holiday of Eid al-Adha, celebrated at the Al-Aqsa Mosque in occupied Jerusalem.",
+      "question": "What is Operation Al-Aqsa (#OpAqsa)?"
+    },
+    {
+      "_key": "kxbci62",
+      "_type": "faqItem",
+      "answer": "Eid al-Adha, the \"Feast of Sacrifice,\" is the second most important holiday in the Muslim calendar, celebrated over four days. It is deeply connected to the Al-Aqsa Mosque in Jerusalem, which is the third holiest site in Islam.",
+      "question": "What is Eid al-Adha?"
+    },
+    {
+      "_key": "kxc043s",
+      "_type": "faqItem",
+      "answer": "Redcult announced they had taken down 41 Israeli government websites as part of #OpAqsa, releasing a full list of the affected domains.",
+      "question": "How many Israeli websites did Redcult target?"
+    },
+    {
+      "_key": "kxdob2b",
+      "_type": "faqItem",
+      "answer": "The Al-Aqsa Mosque compound (Temple Mount/Haram al-Sharif) in Jerusalem is the third holiest site in Islam and has been the site of recurring violence and political tension between Israeli forces and Palestinian worshippers, particularly during Muslim holidays.",
+      "question": "What is the historical significance of the Al-Aqsa Mosque?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Anon Resistance",
+    "ARM",
+    "Anon",
+    "Resistance",
+    "Movement",
+    "Anonymous",
+    "Anonymous 2017",
+    "the anon message",
+    "anonmessage",
+    "official anonymous website",
+    "official anonymous",
+    "anonymous channel",
+    "anonymous today",
+    "anonymous this week",
+    "anonymous 2017",
+    "today anonymous 2017 this week",
+    "anonymous 2017 latest",
+    "anonymous hackers",
+    "Anarchy",
+    "Anarchism"
+  ],
+  "leadParagraph": "Anonymous Redcult Takes Down Israeli Sites As A \"Gentle Reminder\" To Respect Muslim Holiday, #OpAqsa #OpIsrael Continues",
+  "linkedPitch": null,
+  "location": "Palestine / Global",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Op AL-Aqsa graphics",
+    "asset": {
+      "_ref": "image-8f30b05c2cd427c1752e381502baa63c8adc7aa7-445x297-png",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website (news.anonresistance.dx.am) and has been migrated to UnTelevised Media.",
+  "needsReview": false,
+  "publishedAt": "2016-09-11T12:00:00Z",
+  "readingTimeMinutes": 7,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "anonymous-redcult-takes-down-israeli-sites-as-a-gentle-reminder-to-respect-muslim-holiday-opaqsa"
+  },
+  "tags": [
+    "anonymous",
+    "operation-israel",
+    "al-aqsa",
+    "palestine",
+    "redcult",
+    "hacktivism",
+    "eid",
+    "freepalestine",
+    "freegaza",
+    "standwithpalestine"
+  ],
+  "title": "Anonymous Redcult Takes Down Israeli Sites As A \"Gentle Reminder\" To Respect Muslim Holiday, #OpAqsa #OpIsrael Continues",
+  "updatedAt": null,
+  "videoLink": null
+}

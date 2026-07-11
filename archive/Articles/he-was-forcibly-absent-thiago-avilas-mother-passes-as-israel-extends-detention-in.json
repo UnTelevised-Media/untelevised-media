@@ -1,0 +1,124 @@
+{
+  "_id": "thiago-avila-mother-dies-israel-detention",
+  "allowComments": true,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Brazilian activist Thiago Ávila's mother died while he remained in Israeli custody, unaware and isolated. He and Spanish activist Saif Abu Keshek were abducted in international waters while on a humanitarian mission to Gaza, beaten, tortured, and detained based on secret evidence.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "o6gk1d4r",
+      "answer": "Thiago Ávila is a Brazilian human rights activist and Saif Abu Keshek is a Spanish activist. Both were part of the Global Sumud Flotilla, a humanitarian mission attempting to break Israel's blockade of Gaza and deliver aid to the besieged Palestinian territory.",
+      "question": "Who are Thiago Ávila and Saif Abu Keshek?"
+    },
+    {
+      "_key": "4kso11q2",
+      "answer": "They were arrested by Israeli forces on April 30, 2026, in international waters more than 620 miles from Gaza. Israeli naval forces intercepted an Italian-flagged vessel from the flotilla off the Greek coast, dragged the activists off the boat, beat them, and transported them to Israel for interrogation.",
+      "question": "Where and how were they arrested?"
+    },
+    {
+      "_key": "d0qgdqud",
+      "answer": "Under the United Nations Convention on the Law of the Sea, only the flag state (Italy, in this case) has jurisdiction to detain or investigate a vessel on the high seas. Israel had no legal authority to arrest the men in international waters. Both Spain and Brazil have condemned the action as abduction and a violation of international law.",
+      "question": "Why was their arrest illegal?"
+    },
+    {
+      "_key": "emvutldm",
+      "answer": "Teresa Regina de Avila e Silva died in Brazil on May 5, 2026. Her son Thiago, imprisoned in Israeli custody, was not informed of her death and remained unaware due to his isolation. He was denied the chance to say goodbye or even learn she had died.",
+      "question": "What happened to Thiago Ávila's mother?"
+    },
+    {
+      "_key": "9ge6b23l",
+      "answer": "Israel accuses them of 'aiding the enemy,' 'contact with a foreign agent and a terrorist organization,' 'prohibited activity involving a terrorist component,' and 'providing means to a terrorist organization.' The allegations center on claimed links to the Popular Conference for Palestinians Abroad (PCPA), which the U.S. Treasury claims acts on behalf of Hamas. However, no formal charges have been filed, and the court extended their detention based on secret evidence defense lawyers could not review.",
+      "question": "What are the allegations against them?"
+    },
+    {
+      "_key": "jo0ys4rz",
+      "answer": "The UN human rights office called for their immediate and unconditional release, stating 'aid delivery is not a crime.' Brazilian President Lula condemned the detention as 'unjustifiable,' and Spain's government demanded the immediate release of its citizen, calling the detention illegal. Italy also condemned the interception as illegal.",
+      "question": "What has the international response been?"
+    },
+    {
+      "_key": "ctx78gm6",
+      "answer": "The Global Sumud Flotilla is a civil society initiative seeking to deliver aid to Gaza by sea. The spring 2026 mission featured nearly 80 vessels from multiple countries, including Greenpeace's Arctic Sunrise. The flotilla aims to break Israel's illegal blockade and deliver humanitarian assistance to Palestinians suffering under siege.",
+      "question": "What is the Global Sumud Flotilla?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "global-sumud-flotilla",
+    "thiago-avila",
+    "saif-abu-keshek",
+    "gaza-blockade",
+    "international-law-violation",
+    "humanitarian-aid",
+    "israel-detention",
+    "secret-evidence",
+    "torture-allegations",
+    "brazil-spain-condemnation",
+    "un-human-rights",
+    "greenpeace-arctic-sunrise"
+  ],
+  "leadParagraph": "Brazilian activist Thiago Ávila's mother died while he remained in Israeli custody, unaware and isolated. He and Spanish activist Saif Abu Keshek were abducted in international waters while on a humanitarian mission to Gaza, beaten, tortured, and detained based on secret evidence.",
+  "linkedPitch": null,
+  "location": "Beersheba, Occupied Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Saif Abu Keshek (left) and Thiago Ávila appear at a court in Beersheba, Israel, on May 5, 2026. Both were abducted by Israeli forces in international waters while on a humanitarian mission to deliver aid to Gaza.",
+    "asset": {
+      "_ref": "image-421c7082ce76091f9325a6aa2c67a86ef4acb6d0-5000x3333-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2026-05-08T22:00",
+  "readingTimeMinutes": null,
+  "relatedArticles": [],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Brazilian activist Thiago Ávila mourns mother's death while in Israeli custody. Abducted in international waters with Spanish activist on Gaza aid mission.",
+    "metaTitle": "Mother Dies as Israel Holds Son Captive"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "he-was-forcibly-absent-thiago-avilas-mother-passes-as-israel-extends-detention-in"
+  },
+  "tags": [
+    "gaza-flotilla",
+    "international-waters",
+    "human-rights",
+    "torture",
+    "secret-evidence"
+  ],
+  "title": "\"He Was Forcibly Absent\": Thiago Ávila's Mother Passes as Israel Extends Detention in International Waters Abduction",
+  "updatedAt": "2026-05-08T22:00",
+  "videoLink": ""
+}

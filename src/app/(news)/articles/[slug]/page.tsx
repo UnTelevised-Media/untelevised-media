@@ -124,7 +124,7 @@ export default async function ArticlePage({ params }: Props) {
       {/* Hero Section */}
       <section className='relative overflow-hidden'>
         {/* Background Image with Overlay */}
-        <div className='relative flex min-h-[60vh] flex-col'>
+        <div className='relative flex min-h-[60vh] flex-col justify-end'>
           <Image
             src={urlForImage(article.mainImage)?.url() ?? ''}
             alt={article.mainImage?.alt ?? 'Article image'}
@@ -144,7 +144,7 @@ export default async function ArticlePage({ params }: Props) {
 
           {/* Article Header Content */}
           <div className='relative flex items-end'>
-            <div className='mx-auto w-full px-4 pb-12 pt-18 sm:px-6 md:max-w-2xl lg:max-w-4xl lg:px-8 xl:max-w-5xl dxl:max-w-5xl hlg:max-w-5xl lxl:max-w-5xl xxl:max-w-5xl wide:max-w-6xl mxl:max-w-6xl 4k:max-w-7xl'>
+            <div className='mx-auto w-full px-4 pb-12 pt-4 sm:px-6 md:max-w-2xl lg:max-w-4xl lg:px-8 xl:max-w-5xl dxl:max-w-5xl hlg:max-w-5xl lxl:max-w-5xl xxl:max-w-5xl wide:max-w-6xl mxl:max-w-6xl 4k:max-w-7xl'>
               <div className='space-y-6'>
                 {/* Title */}
                 <h1
@@ -274,7 +274,7 @@ export default async function ArticlePage({ params }: Props) {
       {article.slug?.current && <ViewPing slug={article.slug.current} />}
 
       {/* Main wrapper — centers everything */}
-      <div className='mx-auto mt-6 flex w-full flex-auto justify-center'>
+      <div className='mx-auto mt-6 flex w-full max-w-[1920px] flex-auto justify-center px-4 sm:px-6 lg:px-8'>
         {/* LEFT SIDEBAR — outside flex container */}
         <aside className='hidden w-72 shrink-0 xl:sticky xl:top-[120px] xl:block'>
           <div className='space-y-8'>
@@ -299,9 +299,9 @@ export default async function ArticlePage({ params }: Props) {
         </aside>
 
         {/* Flex container — handles sizing and spacing */}
-        <div className='flex gap-8 px-4 sm:px-6 lg:px-8'>
-          {/* Article container — centered with responsive max-width */}
-          <div className='mx-auto w-full py-12 md:max-w-2xl xxl:max-w-3xl wide:max-w-4xl mxl:max-w-5xl 4k:max-w-6xl'>
+        <div className='flex min-w-0 gap-8 px-4 sm:px-6 md:max-w-3xl lg:max-w-4xl lg:px-8 xxl:max-w-5xl mxl:max-w-[100rem]'>
+          {/* Article container — matches header width */}
+          <div className='w-full min-w-0 py-12 md:max-w-2xl lg:max-w-4xl xxl:max-w-5xl mxl:max-w-[100rem]'>
             <div className='from-slate-/50 to-slate-/50 dark:from-slate-/50 dark:to-slate-/50 w-full rounded-lg bg-gradient-to-br via-slate-100/50 p-4 dark:via-slate-900/50 sm:p-6 lg:p-8'>
               {/* Article content column */}
               <main className='w-full'>

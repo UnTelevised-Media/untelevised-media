@@ -1,0 +1,65 @@
+{
+  "_id": "article-af4d7398-12ec-4e9e-8afc-38e9caaffd8a",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "1a9c65224a02",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israel's intelligence ministry has drafted a proposal to relocate Gaza's 2.3 million people to Egypt's Sinai Peninsula, sparking condemnation and raising tensions in the region. The controversial plan involves moving the civilian population to tent cities in northern Sinai, but faces strong opposition from Palestinians and Egypt.\n",
+  "eventDate": "2023-11-05T22:20:27.374Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Israel",
+    "IDF",
+    "Gaza",
+    "Palestine",
+    "Hamas",
+    "Egypt",
+    "Sinai Peninsula",
+    "Gaza relocation",
+    "Israeli government",
+    "Palestinian refugees",
+    "Middle East conflict"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Palestinians leave their homes following Israeli bombardment on Gaza City, Monday, Oct. 30, 2023. AP Photo Abed Khaled",
+    "asset": {
+      "_ref": "image-d42cc0ab1f3c745559ab72786d348469d06dd49b-1200x800-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-11-06T06:20:26.010Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "israeli-proposal-sparks-controversy-transfer-of-gaza-s-population-to-egypt-s-sinai-peninsula"
+  },
+  "tags": null,
+  "title": "Israeli Proposal Sparks Controversy: Transfer of Gaza's Population to Egypt's Sinai Peninsula",
+  "updatedAt": null,
+  "videoLink": null
+}

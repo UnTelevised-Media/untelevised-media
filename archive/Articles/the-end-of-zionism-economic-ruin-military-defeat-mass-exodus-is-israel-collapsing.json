@@ -1,0 +1,61 @@
+{
+  "_id": "article-7da4c05d-c947-4ada-bc5d-c82202975ff0",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "0248f8e4e56c",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israel faces an unprecedented crisis as it grapples with a mass exodus, military failures, and growing international isolation. As the Zionist project teeters on the brink of collapse, the nation's future as a state is increasingly in doubt.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Israeli Economy",
+    "Israeli Collapse",
+    "Zionism collapse",
+    "Israel exodus 2024",
+    "Israel military failure",
+    "Israel's economic decline",
+    "Israel Palestine conflict update"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Graphic illustrating a crashing economy and showing Netanyahu in despair",
+    "asset": {
+      "_ref": "image-16d11bd91e30f0321c7b0e5555376ac65cdb9b66-1000x564-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2024-08-27T17:33:44.532Z",
+  "readingTimeMinutes": 13,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-end-of-zionism-economic-ruin-military-defeat-mass-exodus-is-israel-collapsing"
+  },
+  "tags": null,
+  "title": "The End of Zionism: Economic Ruin, Military Defeat, Mass Exodus Is Israel Collapsing?",
+  "updatedAt": null,
+  "videoLink": null
+}

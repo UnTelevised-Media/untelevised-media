@@ -1,0 +1,160 @@
+{
+  "_id": "chavez-deremer-scandal-saga",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "5vcheZYr4uqdgSr8fi8SgM",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "5vcheZYr4uqdgSr8fi8Shl",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Former Labor Secretary Lori Chavez-DeRemer resigned after allegations of drinking on the job, strip club visits, travel fraud, an affair with a subordinate, and enabling her husband and father to sexually harass young female staffers.",
+  "eventDate": "2026-04-20T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "She was the U.S. Secretary of Labor under Trump from March 2025 until her resignation in April 2026. A former Republican congresswoman from Oregon, she was recommended by Teamsters President Sean O'Brien.",
+      "question": "Who is Lori Chavez-DeRemer?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Drinking on the job, an extramarital affair with her bodyguard, taking subordinates to a strip club on an official trip, fabricating government travel for personal trips, using staffers for personal errands, and directing female staff to tolerate sexual advances from her husband and father.",
+      "question": "What were the main allegations against her?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Dr. Shawn DeRemer was banned from Labor Department headquarters after at least two female staffers reported he inappropriately touched them. DC police, Federal Protective Service, and a federal prosecutor all declined to pursue charges.",
+      "question": "What happened to her husband?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Labor Department's independent Inspector General conducted the investigation, with initial reports leaked to and published by the New York Post beginning in January 2025.",
+      "question": "Who investigated Chavez-DeRemer?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Four officials were forced out: chief of staff Jihun Han, deputy chief of staff Rebecca Wright, bodyguard Brian Sloan, and director of advance Melissa Robey.",
+      "question": "What happened to her staff?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Lori Chavez-DeRemer",
+    "Labor Secretary",
+    "Trump Cabinet scandal",
+    "sexual harassment",
+    "travel fraud",
+    "strip club",
+    "Inspector General",
+    "government corruption",
+    "Shawn DeRemer",
+    "Women's Bureau"
+  ],
+  "leadParagraph": "Former U.S. Labor Secretary Lori Chavez-DeRemer resigned in April 2026 after a year of scandals involving drinking on the job, strip club visits on official trips, travel fraud, an affair with a subordinate, and allegations that she directed young female staffers to tolerate sexual harassment from her husband and father.",
+  "linkedPitch": null,
+  "location": "Washington, D.C.",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Official U.S. Department of Labor portrait of Secretary Lori Chavez-DeRemer, March 2025",
+    "asset": {
+      "_ref": "image-2fb677c6b1cc05eb16df282abbeb358deeb7c642-1200x1553-webp",
+      "_type": "reference"
+    },
+    "caption": "Official portrait of Secretary of Labor Lori Chavez-DeRemer, March 2025. Credit: Shawn T Moore, U.S. Department of Labor (public domain)",
+    "crop": {
+      "_type": "sanity.imageCrop",
+      "bottom": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0
+    },
+    "hotspot": {
+      "_type": "sanity.imageHotspot",
+      "height": 0.8,
+      "width": 0.8,
+      "x": 0.5,
+      "y": 0.5
+    }
+  },
+  "methodology": "Reported using open-source intelligence, Associated Press reporting, New York Times and New York Post investigation coverage, NW Labor Press analysis, and Willamette Week reporting. Sources include Labor Department Inspector General investigation materials and congressional testimony.",
+  "needsReview": null,
+  "publishedAt": "2026-05-30T04:19:10.989Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "pam-bondi-corruption-chronicle-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "kash-patel-fbi-director-corruption",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "todd-blanche-corrupt-ascent-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "trump-pardons-corrupt-officials-dismantles-justice-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "trump-second-term-justice-department-war-on-press",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "trump-hollowing-out-guardrails-op-ed",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "from-the-labor-department-to-the-strip-club-the-disgraceful-saga-of-lori-chavez-deremer"
+  },
+  "tags": [
+    "Lori Chavez-DeRemer",
+    "Labor Department",
+    "Trump Cabinet",
+    "corruption",
+    "sexual harassment",
+    "travel fraud",
+    "strip club",
+    "government scandal",
+    "worker protections",
+    "resignation"
+  ],
+  "title": "From the Labor Department to the Strip Club: The Disgraceful Saga of Lori Chavez-DeRemer",
+  "updatedAt": null,
+  "videoLink": null
+}

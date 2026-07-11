@@ -1,0 +1,66 @@
+{
+  "_id": "article-300926d2-9eaa-444b-8f51-3579e092f8eb",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "adf97b7a4d12",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The UK government intensifies its crackdown on dissent, detaining anti-Israel journalist Richard Medhurst under the Terrorism Act. Medhurst's arrest is another among the growing repression against voices critical of Israel and the broader effort to criminalize resistance against the state of Israel and its genocidal actions.",
+  "eventDate": "2024-08-21T08:37:00.000Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "UK terrorism act",
+    "Richard Medhurst arrest",
+    "anti-Israel journalist detained",
+    "UK crackdown on dissent",
+    "freedom of press UK",
+    "Palestine activism",
+    "repression in UK",
+    "Israel-Palestine conflict",
+    "political persecution UK",
+    "Richard Medhurst",
+    "Freedom of the Press",
+    "Free Press"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Richard Medhurst Arrested Under Terrorism Act",
+    "asset": {
+      "_ref": "image-464c1fde8e106e468e2ea0f264dd49553971a13a-653x400-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2024-08-21T17:37:12.761Z",
+  "readingTimeMinutes": 11,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "uk-escalates-crackdown-on-dissent-anti-israel-journalist-richard-medhurst-arrested-under"
+  },
+  "tags": null,
+  "title": "UK Escalates Crackdown on Dissent: Anti-Israel Journalist Richard Medhurst Arrested Under Terrorism Act",
+  "updatedAt": null,
+  "videoLink": null
+}

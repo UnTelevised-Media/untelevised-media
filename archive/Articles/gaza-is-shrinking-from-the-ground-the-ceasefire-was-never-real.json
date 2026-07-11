@@ -1,0 +1,147 @@
+{
+  "_id": "salah-akram-gaza-is-shrinking",
+  "allowComments": true,
+  "author": {
+    "_ref": "7941c4f9-9886-4ef9-92cf-45463ff3567c",
+    "_type": "reference",
+    "name": "Salah Akram"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-gaza",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "UnTelevised correspondent Salah Akram writes from Deir al-Balah as heavy strikes return to Gaza, tents burn, and Israel announces plans to seize 70% of the Strip — a ground-level account of what the ceasefire really looks like.",
+  "eventDate": "2026-05-28T14:15",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "Salah is reporting from Deir al-Balah in central Gaza, where heavy Israeli strikes hit near Al-Aqsa Martyrs Hospital on 28 May 2026, and fires burned through displacement tent camps.",
+      "question": "Where is Salah Akram reporting from?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "Israel's Prime Minister Netanyahu announced on 28 May 2026 that he ordered the military to seize control of 70% of the Gaza Strip — up from 53% at the time of the October 2025 ceasefire. According to leaked Channel 13 reports, the Southern Command is pressing for a 'decisive war' operation to occupy Gaza City and administer the Strip for two full years.",
+      "question": "What does Israel's 70% control plan mean for Gaza?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "As of 28 May 2026, heavy shaking and fires are raging across Gaza in what correspondents describe as the most violent escalation in weeks. Displacement tents have been set on fire. Strikes hit near Al-Aqsa Martyrs Hospital in Deir al-Balah. Evacuation orders have become a way of life rather than emergency warnings.",
+      "question": "What is happening on the ground in Gaza right now?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Dr. Ahmed Hamdan (@Ishara) is a Palestinian analyst whose commentary on Gaza's shrinking territory and the exhaustion of its people was cited in this article. He writes that people in Gaza have reached a point where they no longer dream of a homeland but only of a normal life.",
+      "question": "Who is Dr. Ahmed Hamdan?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Israel's Defense Minister Israel Katz announced plans for large-scale Palestinian departure from Gaza, described as 'voluntary migration.' Salah Akram writes that when life becomes unbearable — homes destroyed, land shrinking, survival a daily struggle — the 'voluntary' exit will feel like the only salvation, which is by design.",
+      "question": "What does 'voluntary emigration' mean in context?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "This article is ghostwritten from Salah Akram's field notes and communications sent to UnTelevised Media on 28 May 2026, including his direct observations from Deir al-Balah, reporting from journalist Muhannad Qashta, and analysis from Dr. Ahmed Hamdan. It is written in Salah's voice.",
+      "question": "How is this article sourced?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": true,
+  "keywords": [
+    "Gaza shrinking territory",
+    "Salah Akram Deir al-Balah",
+    "ceasefire violations Gaza May 2026",
+    "Netanyahu 70 percent Gaza",
+    "tents on fire Gaza",
+    "voluntary emigration Israel plan",
+    "Gaza ground report"
+  ],
+  "leadParagraph": "Heavy Israeli strikes hit near Al-Aqsa Martyrs Hospital in Deir al-Balah on the afternoon of 28 May 2026, with bombing so close that walls shook and families fled. Displacement tents were set on fire. By evening, the Strip was engulfed in the most violent escalation in weeks — all under the banner of a 'ceasefire' that has left over 900 Palestinians dead since October.",
+  "linkedPitch": null,
+  "location": "Deir al-Balah, Gaza, Occupied Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "The tents are burning in Gaza",
+    "asset": {
+      "_ref": "image-ad4f0ab9c1769c09f9e01d6117c3361a1546a003-736x910-webp",
+      "_type": "reference"
+    },
+    "caption": "Aerial view showing destruction in Rafah after Israeli forces withdrawal and as the ceasefire took hold, Gaza Strip.",
+    "credit": "Wikimedia Commons"
+  },
+  "methodology": "This article is written from direct field notes and communications sent by Salah Akram from Deir al-Balah, Gaza, on 28 May 2026. Source material includes Salah's real-time observations of Israeli strikes near Al-Aqsa Martyrs Hospital, eyewitness accounts of burning displacement tents, and analytical commentary on Israel's territorial expansion plans. Additional reporting from journalist Muhannad Qashta and analysis by Dr. Ahmed Hamdan (@Ishara) are incorporated.",
+  "needsReview": null,
+  "publishedAt": "2026-05-28T21:45:00Z",
+  "readingTimeMinutes": 11,
+  "relatedArticles": [
+    {
+      "_key": "related-0",
+      "_ref": "salah-akram-the-streets-that-swallow-us",
+      "_type": "reference"
+    },
+    {
+      "_key": "related-1",
+      "_ref": "gaza-nakba-day-2026-05-15",
+      "_type": "reference"
+    },
+    {
+      "_key": "related-2",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    },
+    {
+      "_key": "related-3",
+      "_ref": "bddcld7vr4o",
+      "_type": "reference"
+    },
+    {
+      "_key": "related-4",
+      "_ref": "thiago-avila-mother-dies-israel-detention",
+      "_type": "reference"
+    },
+    {
+      "_key": "related-5",
+      "_ref": "smotrich-icc-khan-al-ahmar-ethnic-cleansing",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Salah Akram reports from Deir al-Balah as heavy strikes return to Gaza, tents burn, and Israel announces plans to seize 70% of the Strip.",
+    "title": "Gaza Is Shrinking: The Ceasefire Was Never Real"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "gaza-is-shrinking-from-the-ground-the-ceasefire-was-never-real"
+  },
+  "tags": [
+    "Gaza",
+    "Palestine",
+    "ceasefire violations",
+    "Deir al-Balah",
+    "eyewitness",
+    "displacement",
+    "Netanyahu",
+    "territorial expansion",
+    "voluntary emigration",
+    "Al-Aqsa Hospital"
+  ],
+  "title": "Gaza Is Shrinking: From the Ground, the Ceasefire Was Never Real",
+  "updatedAt": "2026-05-28T21:45:00Z",
+  "videoLink": null
+}

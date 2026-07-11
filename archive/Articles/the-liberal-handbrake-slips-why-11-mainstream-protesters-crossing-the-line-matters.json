@@ -1,0 +1,137 @@
+{
+  "_id": "burlington-ice-arrests-liberal-radical-shift-2026-04-29",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "When ministers, lawyers, and therapists start getting arrested for blocking ICE facilities, something fundamental is shifting in how liberals view the system.",
+  "eventDate": "2026-04-28T14:07:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "Eleven people were arrested, including eight from Maine: two retired ministers (Jim Gertmenian and Rev. Mair Honan), a retired civil rights attorney (Kim Matthews), a family therapist (Minga Claggett-Borne), an artist and justice activist (Natasha Mayers), and several Jewish activists holding 'Never Again' signs. Also arrested were activists from Massachusetts including Rebecca Tabasky and Josh Model.",
+      "question": "Who was arrested at the Burlington ICE facility?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "They were attempting to deliver care packages containing food, hygiene products, and letters of support to detainees being held at the facility. They also brought gifts of maple syrup for ICE employees as a gesture of 'common humanity.' This was their third attempt, following actions in September and December 2025.",
+      "question": "What were they trying to do?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "All 11 were charged with criminal trespass and disturbing the peace. They were released after about three hours and will be summoned to appear in court at a later date. Federal Protective Services also issued them no-trespass orders.",
+      "question": "What charges are they facing?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The protesters are mainstream liberals — ministers, lawyers, therapists, Quakers — not typical radical activists. Several were first-time arrestees, including 72-year-old retired civil rights attorney Kim Matthews. Their willingness to cross from protest to civil disobedience signals a broader shift in how liberals view the system's ability to address immigration cruelty.",
+      "question": "Why is this significant?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Care Package 3.0: We Are All in This Together is a coalition effort by Quakers, multifaith groups, and Indivisible chapters to deliver humanitarian aid to ICE detainees. Previous attempts in September and December 2025 also resulted in arrests. The project aims to show solidarity with detainees while humanizing both the detainees and ICE employees through gestures like maple syrup gifts.",
+      "question": "What is the 'Care Package 3.0' project?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "ice arrests",
+    "civil disobedience",
+    "maine protesters",
+    "liberal radicalization",
+    "immigration detention",
+    "care packages",
+    "direct action",
+    "ministers arrested",
+    "quaker activism",
+    "Burlington maine"
+  ],
+  "leadParagraph": "When ministers, lawyers, and therapists start getting arrested for blocking ICE facilities, something fundamental is shifting in how liberals view the system. The people who spent their careers believing in institutional solutions are now crossing into civil disobedience — and that's what makes the Burlington arrests worth watching.",
+  "linkedPitch": null,
+  "location": "Burlington, Massachusetts, United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Activist removed from ICE facility in Burlington, Massachusetts",
+    "asset": {
+      "_ref": "image-1a6af61da1494060dd20214af7226dcc7c22aa85-3124x1599-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-29T22:00:00Z",
+  "readingTimeMinutes": 12,
+  "relatedArticles": [
+    {
+      "_key": "1f2a4a314b40",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "d8fa324dc5fd",
+      "_ref": "immigration-detention-system-expansion-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "e568a760c0ce",
+      "_ref": "alligator-alcatraz-systemic-torture-cover-up",
+      "_type": "reference"
+    },
+    {
+      "_key": "427e1eae1ac0",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "7f0cbe93f4df",
+      "_ref": "kash-patel-fbi-director-corruption",
+      "_type": "reference"
+    },
+    {
+      "_key": "3002cf9022d0",
+      "_ref": "when-silicon-valleys-castles-come-under-fire",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Ministers, lawyers, and therapists arrested at ICE facility signal a shift from liberal respectability to direct action.",
+    "title": "The Liberal Handbrake Slips: Mainstream Protesters Go Radical"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-liberal-handbrake-slips-why-11-mainstream-protesters-crossing-the-line-matters"
+  },
+  "tags": [
+    "ice",
+    "civil-disobedience",
+    "immigration",
+    "direct-action"
+  ],
+  "title": "The Liberal Handbrake Slips: Why 11 Mainstream Protesters Crossing the Line Matters",
+  "updatedAt": null,
+  "videoLink": null
+}

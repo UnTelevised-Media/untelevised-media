@@ -1,0 +1,161 @@
+{
+  "_id": "the-fires-are-not-random",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Three fires in three days across California - Sam Altman's home, a Kimberly-Clark warehouse, Ontario Mills mall. Not isolated incidents, but expressions of a working class that has run out of options. From AI billionaires to warehouse workers, the extraction machine is under attack.",
+  "eventDate": "2026-04-10T08:45:00.000Z",
+  "faqs": [
+    {
+      "_key": "a62ad81d6847",
+      "_type": "faqItem",
+      "answer": "A 20-year-old man threw a Molotov cocktail at Sam Altman's San Francisco home at 3:45 AM on April 10, 2026. The device burned the exterior gate of his $27 million Russian Hill compound. The suspect was later found at OpenAI headquarters threatening to burn the building down.\n",
+      "question": "What happened to Sam Altman?"
+    },
+    {
+      "_key": "c9ddc68e4d4c",
+      "_type": "faqItem",
+      "answer": "Chamel Abdulkarim, the warehouse arson suspect, explicitly compared himself to Luigi Mangione in text messages to coworkers. Mangione, accused of killing a health insurance CEO in December 2024, has become a symbol for some Americans frustrated by corporate power and income inequality.",
+      "question": "What was the connection to Luigi Mangione?"
+    },
+    {
+      "_key": "26bd77ba794b",
+      "_type": "faqItem",
+      "answer": "The Kimberly-Clark warehouse fire destroyed an estimated $500 million in paper products inventory and the warehouse building itself, valued at $150 million. The fire became a six-alarm blaze requiring 175 firefighters to extinguish, with smoke triggering an air quality warning.",
+      "question": "What was the damage from the warehouse fire?"
+    },
+    {
+      "_key": "7a4e253e485a",
+      "_type": "faqItem",
+      "answer": "Altman represents the AI industry that many fear will automate away millions of jobs while executives reap billions. OpenAI has deep ties to the Pentagon and its technology is being integrated into weapons systems and surveillance infrastructure. His home was chosen as the face of the extraction machine.",
+      "question": "Why was Sam Altman targeted?"
+    },
+    {
+      "_key": "b00eeea4aca4",
+      "_type": "faqItem",
+      "answer": "The third fire was at Ontario Mills mall in Ontario, California, on April 10, 2026. Luis Javier Gallegos, 28, set fires in multiple stores including Nordstrom Rack and True Religion using a small retail-type lighter. Fires were extinguished by a customer and the mall was evacuated.",
+      "question": "Where was the third fire?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "arson",
+    "California",
+    "civil war",
+    "civil unrest",
+    "class war",
+    "Sam Altman",
+    "OpenAI",
+    "Luigi Mangione",
+    "Kimberly-Clark",
+    "warehouse fire",
+    "Ontario Mills mall",
+    "Molotov cocktail",
+    "anti-capitalism",
+    "working class",
+    "class struggle",
+    "political violence",
+    "AI displacement",
+    "extraction machine"
+  ],
+  "leadParagraph": "At 3:45 AM on Friday, April 10, 2026, a Molotov cocktail burned through the exterior gate of Sam Altman's San Francisco home. The device lit a fire on the gate of the $27 million compound in Russian Hill, where the OpenAI CEO lives.",
+  "linkedPitch": null,
+  "location": "San Francisco, CA",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Sam Altman's House",
+    "asset": {
+      "_ref": "image-c20a8cc62b34ba0755e419134e27838ded146b03-636x382-webp",
+      "_type": "reference"
+    },
+    "caption": "Aerial view of the Kimberly-Clark warehouse fire in Ontario, California, on April 7, 2026. The six-alarm blaze destroyed $500 million in paper products and the warehouse itself.",
+    "credit": "Fox News"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-11T23:12:00Z",
+  "readingTimeMinutes": 15,
+  "relatedArticles": [
+    {
+      "_key": "0eb62bc30196",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "aa2431841399",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "1c78bf48b642",
+      "_ref": "8cgpd47e3kq",
+      "_type": "reference"
+    },
+    {
+      "_key": "e100e68a1a56",
+      "_ref": "the-fourth-fire-queens",
+      "_type": "reference"
+    },
+    {
+      "_key": "b0315d486723",
+      "_ref": "amazon-solar-panels-fire-ohio",
+      "_type": "reference"
+    },
+    {
+      "_key": "eeed027f3206",
+      "_ref": "brockton-tractor-trailer-fire-massachusetts",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Three fires in California. Sam Altman, warehouse arson, mall fires. Not random violence - expressions of a working class that has run out of options.",
+    "metaTitle": "\"The Fires Are Not Random - America Is Boiling Over\""
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-fires-are-not-random-america-is-boiling-over"
+  },
+  "tags": [
+    "civil-unrest",
+    "arson",
+    "working-class",
+    "california-fires",
+    "anti-capitalism",
+    "openai",
+    "sam-altman",
+    "luigi-mangione"
+  ],
+  "title": "The Fires Are Not Random - America Is Boiling Over",
+  "updatedAt": null,
+  "videoLink": null
+}

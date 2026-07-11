@@ -1,0 +1,143 @@
+{
+  "_id": "uaw-divests-israel-bonds",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "1cc12697048ac252162cdc2be4184a3e",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "8f24b149e445",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The UAW voted 321-287 at its Constitutional Convention to divest 00K+ in Israel Bonds, making it the first major US union to do so. The vote came from the rank and file, over leadership resistance, and joins a growing wave of divestment victories.",
+  "eventDate": "2026-06-23T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "The UAW voted 321-287 at its Constitutional Convention in Detroit to divest its holdings in Israel Bonds, making it the first major US union to do so. The UAW holds at least 00,000 in Israel Bonds.",
+      "question": "What did the UAW vote on?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Unite All Workers for Democracy (UAWD), the reform caucus within the UAW, and UAW Labor for Palestine, part of the Labor for Palestine network that has pushed US unions to endorse BDS for over 20 years.",
+      "question": "Who organized the divestment push?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Israel Bonds (Development Corporation for Israel) raise money for the Israeli treasury. Human rights group DAWN called them \"a sophisticated operation to enlist American public support for Israel's political projects\" and called on them to register as a foreign agent.",
+      "question": "Why are Israel Bonds controversial?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Michigan divested all state pension investments in Israel Bonds in 2025. Maryland forced divestment of $73.7 million. The UK's largest public pension fund sold $29.2 million in Israeli bonds in May 2026. Brooklyn's Park Slope Food Coop voted to boycott Israeli products in May 2026.",
+      "question": "What other divestment victories have happened?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "In 1973, Arab-American auto workers in Detroit walked off the job to protest the union's purchase of $300,000 in Israel Bonds. In 2014, UAW Local 2865 became the first major US labor union to endorse BDS by vote. In 2023, the UAW was the largest US union to back a ceasefire.",
+      "question": "What is the historical connection between the UAW and Palestine?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "UAW divest Israel bonds first major US union",
+    "UAW Constitutional Convention Detroit 321-287",
+    "UAWD UAW Labor for Palestine divestment",
+    "Israel Bonds foreign agent DAWN",
+    "Park Slope Food Coop boycott Israeli products",
+    "Michigan pension divest Israel Bonds 2025",
+    "Maryland UK pension divestment Israel bonds"
+  ],
+  "leadParagraph": "The United Auto Workers voted 321 to 287 at its Constitutional Convention in Detroit to divest its holdings in Israel Bonds — the first major US union to do so. The push came from the UAWD reform caucus and UAW Labor for Palestine. UAW leadership initially removed the amendment from the agenda; it took a motion from the floor by Olga Karounos to force a vote. The UAW holds at least 00,000 in Israel Bonds. Palestine trade unions praised the \"living conscience of the working class.\"",
+  "linkedPitch": null,
+  "location": "Detroit, Michigan",
+  "mainImage": {
+    "_type": "image",
+    "alt": "UAW union delegates at the 2026 Constitutional Convention in Detroit",
+    "asset": {
+      "_ref": "image-aedc8422a27f715469f7d4ccfe2c7748fe971f4b-600x400-webp",
+      "_type": "reference"
+    },
+    "caption": "Delegates at the 2026 UAW Constitutional Convention in Detroit, where the historic Israel Bond divestment vote took place.",
+    "credit": "UAW Region 9A"
+  },
+  "methodology": "Reported using Mondoweiss, Democracy Now, Truthout, Marc Kagan, the Zinn Education Project, DAWN, and Labor for Palestine. Historical context from Jeff Schuhrke, author of No Neutrals There: U.S. Labor, Zionism, and the Struggle for Palestine. Interlinked with 12 existing UTM articles on Israel/Palestine.",
+  "needsReview": null,
+  "publishedAt": "2026-07-07T22:15:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "park-slope-food-coop-israel-boycott",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "134e8b17b972",
+      "_ref": "israels-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "israel-yellow-line-gaza-expanding-de-facto-reoccupation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "west-bank-settlers-8000-sheep-goats-stolen-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-8",
+      "_ref": "bddcld7vr4o",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "uaw-divests-from-israel-bonds-the-first-major-us-union-breaks-the-silence"
+  },
+  "tags": [
+    "UAW",
+    "Israel Bonds",
+    "Divestment",
+    "BDS",
+    "Labor",
+    "Palestine",
+    "UAWD",
+    "Labor for Palestine",
+    "Solidarity"
+  ],
+  "title": "UAW Divests from Israel Bonds: The First Major US Union Breaks the Silence",
+  "updatedAt": null,
+  "videoLink": null
+}

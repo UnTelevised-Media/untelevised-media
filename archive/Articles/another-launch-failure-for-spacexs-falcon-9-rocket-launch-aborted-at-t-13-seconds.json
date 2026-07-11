@@ -1,0 +1,93 @@
+{
+  "_id": "ar2017-spacex-crs10-launch-failure",
+  "allowComments": false,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "ba5ca05a-5864-4918-bfc1-4eb2a99bd398",
+      "_ref": "ba5ca05a-5864-4918-bfc1-4eb2a99bd398",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "SpaceX was forced to abort the launch of mission CRS-10 at T-13 seconds on February 18, 2017. The abort was triggered by a concern over the positioning of the second stage engine nozzle. This comes after a year of failed launches in 2016, including the loss of 2 Falcon 9 rockets.",
+  "eventDate": "2017-02-18T10:35",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "The SpaceX Falcon 9 CRS-10 launch was aborted at T-13 seconds on February 18, 2017, to allow the SpaceX team to take a closer look at the positioning of the second stage engine nozzle. SpaceX and Elon Musk both indicated the problem appeared minor, and a backup launch window was maintained for 9:38am EST the following morning.",
+      "question": "Why was the SpaceX CRS-10 launch aborted?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "CRS-10 (Commercial Resupply Services-10) is SpaceX's tenth mission to resupply the International Space Station for NASA. The Dragon spacecraft was set to carry more than 5,000 pounds of supplies and payloads to support over 250 science and research investigations during Expeditions 50 and 51. It was also to be the first SpaceX launch from historic Launch Complex 39A at Kennedy Space Center.",
+      "question": "What is the CRS-10 mission?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "SpaceX suffered two notable failures in 2015-2016: the CRS-7 mission failure on June 28, 2015, when an overpressure event in the upper stage liquid oxygen tank caused loss of mission; and the September 1, 2016 pad explosion at Cape Canaveral that destroyed the AMOS-6 satellite during fueling. SpaceX successfully returned to flight on January 14, 2017 with the Iridium NEXT mission.",
+      "question": "What previous launch failures did SpaceX experience?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Despite the CRS-10 abort, SpaceX maintained a remarkably solid overall track record. The company successfully returned to flight in January 2017 after the September 2016 pad accident, launching 10 Iridium NEXT satellites. The Falcon 9 first stage was also planned to attempt a landing at SpaceX's Landing Zone 1 at Cape Canaveral Air Force Station as part of the CRS-10 mission.",
+      "question": "What was SpaceX's track record before CRS-10?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "SpaceX",
+    "Falcon9",
+    "CRS-10",
+    "LaunchAbort",
+    "RocketLaunch",
+    "ISS",
+    "NASA",
+    "ElonMusk",
+    "Dragon",
+    "CapeCanaveral"
+  ],
+  "leadParagraph": "Today SpaceX, a space exploration company in the private sector, was forced to abort launch of mission CRS-10. The launch was aborted at T-0:13 to allow the SpaceX team to take a closer look at positioning of the second stage engine nozzle. This comes after a year of failed launches in 2016, including the loss of 2 Falcon 9 rockets - the same model used for CRS-10, a mission to resupply the International Space Station for NASA.",
+  "linkedPitch": null,
+  "location": "Cape Canaveral",
+  "mainImage": {
+    "_type": "image",
+    "alt": "",
+    "asset": {
+      "_ref": "image-f9b24e2f88c80a498f04ef416b2c7705228cd36e-1024x569-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Breaking news coverage based on SpaceX livestream, official social media statements from SpaceX and Elon Musk, and publicly available mission documentation.",
+  "needsReview": false,
+  "publishedAt": "2017-02-18T09:00",
+  "readingTimeMinutes": 6,
+  "relatedArticles": [],
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "another-launch-failure-for-spacexs-falcon-9-rocket-launch-aborted-at-t-13-seconds"
+  },
+  "tags": [
+    "#SpaceX",
+    "#Falcon9",
+    "#CRS10",
+    "#FailedLaunch",
+    "#Aborted",
+    "#NASA",
+    "#ISS"
+  ],
+  "title": "Another Launch Failure for SpaceX's Falcon 9 Rocket - Launch Aborted at T-13 Seconds",
+  "updatedAt": "2017-02-18T09:00",
+  "videoLink": ""
+}

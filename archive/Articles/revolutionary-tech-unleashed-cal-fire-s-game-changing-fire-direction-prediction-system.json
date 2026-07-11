@@ -1,0 +1,53 @@
+{
+  "_id": "article-6dec1df3-1382-442b-a31f-e287e3961138",
+  "allowComments": null,
+  "author": {
+    "_ref": "dd27a18f-4d78-449d-a2fa-73fa6617816a",
+    "_type": "reference",
+    "name": "Harold Crowe"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "52570cd2d91f",
+      "_ref": "ba5ca05a-5864-4918-bfc1-4eb2a99bd398",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Cal Fire introduces cutting-edge tech for predicting fire behavior, providing real-time insights from air and satellite data. This innovation empowers ground teams to adapt strategies swiftly, enhancing firefighting effectiveness and community protection. Amid rising fire risks due to climate change, this advancement is crucial for combating wildfires and their impact.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "California's fire agency workers monitor high tech datafeeds",
+    "asset": {
+      "_ref": "image-0d5409ef63ca0c8f499c4496f0b37fab8a05ce6a-1024x682-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-08-19T00:34:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "revolutionary-tech-unleashed-cal-fire-s-game-changing-fire-direction-prediction-system"
+  },
+  "tags": null,
+  "title": "Revolutionary Tech Unleashed: Cal Fire’s Game-Changing Fire Direction Prediction System!",
+  "updatedAt": null,
+  "videoLink": null
+}

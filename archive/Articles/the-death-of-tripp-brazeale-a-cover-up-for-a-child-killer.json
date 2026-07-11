@@ -1,0 +1,109 @@
+{
+  "_id": "tripp-brazeale-arkansas-investigation-2026-05-12",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Fifteen-year-old Tripp Brazeale was found hanging from a rope in Arkansas woods. Two autopsies have ruled his death \"undetermined.\" But St. Francis County Sheriff's Office fired a deputy for turning off his body camera during the incident, and the timeline of events raises questions about what really happened in those 49 minutes.",
+  "eventDate": "2024-11-04T22:38",
+  "faqs": [
+    {
+      "_key": "hr5hJ4kXWKYQ5JXTNBqNHy",
+      "answer": "According to St. Francis County Sheriff's Office, Deputy Alvin Merle Bynum and Sgt. David Kinney were investigating a missing persons case when they heard ATVs in the distance near Crow Creek. They stopped the ATV riders Tripp was on and attempted to get him to stop.",
+      "question": "What happened on the morning Tripp Brazeale went missing?"
+    },
+    {
+      "_key": "hr5hJ4kXWKYQ5JXTNBqNLL",
+      "answer": "Tripp's body was found on November 7, 2024, hanging from a rope in the woods about 50 yards from where he was last seen alive. No signs of a struggle were documented in the sheriff's office report.",
+      "question": "How was Tripp Brazeale's body found?"
+    },
+    {
+      "_key": "hr5hJ4kXWKYQ5JXTNBqNOi",
+      "answer": "According to the sheriff's office, Deputy Alvin Merle Bynum was fired on November 8, 2024, for not activating his body camera until after the shooting took place. The sheriff later stated his actions didn't violate body camera policy.",
+      "question": "Why was Deputy Bynum fired?"
+    },
+    {
+      "_key": "hr5hJ4kXWKYQ5JXTNBqNS5",
+      "answer": "The first autopsy by the Arkansas State Medical Examiner listed the cause of death as \"suicide by ligature\" but noted the medical examiner couldn't rule out homicide. A second independent autopsy reportedly ruled the death \"undetermined\" entirely. Neither found evidence Tripp shot himself or fought anyone.",
+      "question": "What do the autopsies say?"
+    },
+    {
+      "_key": "hr5hJ4kXWKYQ5JXTNBqNVS",
+      "answer": "Multiple contradictions exist: Tripp called his mother on November 4 expressing fear of police, but the sheriff's office has presented his death as a suicide by hanging. Deputy Bynum was fired for not activating his body camera, but the sheriff admits there's no video of the actual shooting. Multiple witnesses described the pursuit as routine, not threatening or violent. The absence of body camera footage is the single most damning piece of evidence.",
+      "question": "What evidence contradicts the suicide narrative?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "tripp brazeale arkansas",
+    "st francis county sheriff",
+    "alvin merle bynum",
+    "forrest city arkansas",
+    "jennifer brazeale",
+    "body camera controversy",
+    "suicide by ligature",
+    "undetermined cause of death",
+    "independent autopsy",
+    "arkansas state medical examiner",
+    "police transparency",
+    "missing persons investigation",
+    "george floyd attorneys",
+    "devon jacob",
+    "benjamin crump",
+    "police narrative",
+    "evidence versus official story"
+  ],
+  "leadParagraph": "The body of 15-year-old Tripp Brazeale was found hanging from a rope in the woods 50 yards from where he was last seen alive. Two autopsies have ruled his death \"undetermined.\" But the facts tell a different story.",
+  "linkedPitch": null,
+  "location": "Forrest City, Arkansas, USA",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Photo of Tripp Brazeale",
+    "asset": {
+      "_ref": "image-e4f5f364c111127d7e43948d089d99e3959b625b-1021x1034-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2026-05-12T18:04",
+  "readingTimeMinutes": 13,
+  "relatedArticles": [],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-death-of-tripp-brazeale-a-cover-up-for-a-child-killer"
+  },
+  "tags": [
+    "police-accountability",
+    "body-camera-policy",
+    "arkansas",
+    "tripp-brazeale",
+    "missing-persons",
+    "autopsy-controversy",
+    "forensic-evidence",
+    "police-transparency"
+  ],
+  "title": "The Death of Tripp Brazeale: A Cover-up for a Child Killer",
+  "updatedAt": "2026-05-12T18:04",
+  "videoLink": ""
+}

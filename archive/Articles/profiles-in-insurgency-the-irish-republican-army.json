@@ -1,0 +1,102 @@
+{
+  "_id": "7ONx74QMiI10eazwubewlZ",
+  "allowComments": true,
+  "author": {
+    "_ref": "RYZn4iYE9ChjVaOaU8i41k",
+    "_type": "reference",
+    "name": "Justin King"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "BOAIKFRWNleR9aRm6RBxFo",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "An objective profile of the Irish Republican Army — its founding, structure, financing, goals, and major historical events from the Easter Rising through the Good Friday Agreement and beyond.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "ti2q6wag",
+      "_type": "faqItem",
+      "answer": "The IRA was founded in 1922 with the long-term goal of establishing a united, independent Ireland encompassing the entire island. Its short-term objective is commonly summarized as \"Brits out\" — the removal of British rule from Northern Ireland.",
+      "question": "What was the original goal of the Irish Republican Army?"
+    },
+    {
+      "_key": "2gstf4b9",
+      "_type": "faqItem",
+      "answer": "Bloody Sunday refers to January 30, 1972, when British Paratroopers opened fire on a civil rights march in Derry, killing 13 civilians. The event dramatically escalated IRA recruitment and violence, including the retaliatory bombings of Bloody Friday just months later.",
+      "question": "What was Bloody Sunday?"
+    },
+    {
+      "_key": "g8bj22ic",
+      "_type": "faqItem",
+      "answer": "Bobby Sands was an IRA prisoner at Maze Prison who led a hunger strike in 1981 to protest the removal of \"special category\" (prisoner-of-war) status for IRA inmates. While starving to death, he was elected to the British Parliament. He died on May 5, 1981; 100,000 people attended his funeral. Nine more IRA members died in the same hunger strike.",
+      "question": "Who was Bobby Sands and why is he significant?"
+    },
+    {
+      "_key": "hv1cki28",
+      "_type": "faqItem",
+      "answer": "The Good Friday Agreement of 1998 was a peace accord brokered between Republican and Loyalist political factions in Northern Ireland, effectively ending most organized IRA violence. It was rejected by many active combatants, and a splinter faction carried out the Omagh bombing — which killed 29 people — later that year.",
+      "question": "What was the Good Friday Agreement?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "IRA",
+    "Irish Republican Army",
+    "Northern Ireland",
+    "Provisional IRA",
+    "Bloody Sunday",
+    "Bloody Friday",
+    "Good Friday Agreement",
+    "Bobby Sands",
+    "Easter Rising",
+    "insurgency",
+    "terrorism",
+    "profiles in insurgency",
+    "Justin King",
+    "Anti-Media"
+  ],
+  "leadParagraph": "One man's terrorist is another man's freedom fighter. This profile of the Irish Republican Army traces its origins in the 1916 Easter Rising through a century of armed struggle, hunger strikes, and peace negotiations — presented without judgment.",
+  "linkedPitch": null,
+  "location": "Ireland",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Provisional IRA standing with guns and in matching fatigues",
+    "asset": {
+      "_ref": "image-3c470e29162e4574f869159d740faec096764c28-370x264-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Originally published January 29, 2015 via The Anti-Media. Republished with attribution.",
+  "needsReview": false,
+  "publishedAt": "2015-01-29T12:00:00Z",
+  "readingTimeMinutes": 8,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "profiles-in-insurgency-the-irish-republican-army"
+  },
+  "tags": [
+    "IRA",
+    "ireland",
+    "northern-ireland",
+    "insurgency",
+    "history",
+    "politics",
+    "profiles-in-insurgency",
+    "british-politics"
+  ],
+  "title": "Profiles in Insurgency: The Irish Republican Army",
+  "updatedAt": null,
+  "videoLink": null
+}

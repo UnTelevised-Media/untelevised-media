@@ -1,0 +1,53 @@
+{
+  "_id": "article-320d80cf-81af-4a6c-8f0f-7a4c5aa0d8d6",
+  "allowComments": null,
+  "author": {
+    "_ref": "853fcc99-ba9b-45d2-829f-b351cd182779",
+    "_type": "reference",
+    "name": "Dutch Caxton"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "97a651c97a29",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "As the one-year mark nears since the George Floyd protests, their global resonance persists, sparking vital conversations on justice and equality. Triggered by Floyd's tragic death, the protests have catalyzed change and exposed deep-rooted societal issues. From policy reforms to global solidarity, the enduring legacy underscores the ongoing need to dismantle injustice and foster an equitable world. The protests' powerful call for transformation remains, igniting a unifying pursuit of justice for all.\"",
+  "eventDate": "2020-05-28T16:53:00.000Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "MPD Burns in the distance as a crowd of protesters watch",
+    "asset": {
+      "_ref": "image-c8d42b2664284bc7fe3d5fa8f9651eec9fa63772-3000x1688-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2021-03-25T00:41:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "legacy-of-george-floyd-protests-a-catalyst-for-change-and-continued-challenges"
+  },
+  "tags": null,
+  "title": "Legacy of George Floyd Protests: A Catalyst for Change and Continued Challenges",
+  "updatedAt": null,
+  "videoLink": null
+}

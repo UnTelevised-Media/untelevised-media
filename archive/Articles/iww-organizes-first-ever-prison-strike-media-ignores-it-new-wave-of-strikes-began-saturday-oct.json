@@ -1,0 +1,149 @@
+{
+  "_id": "BOAIKFRWNleR9aRm6R2v0S",
+  "allowComments": true,
+  "author": {
+    "_ref": "DJ1Y76QLqJX8nukZ868jxy",
+    "_type": "reference",
+    "name": "Ash Fawkes"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "75226ca9833a",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "55245a4120d1",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Last month on the 45th anniversary of the Attica Prison Uprising, an international industrial labor union, organized a nationwide prison strike against prison labor. The famous Anarchist union, known as the IWW or Industrial Workers of the World, organized strikes that affected 29 different prisons. Despite this they were virtually ignored by the media. Now a new wave of strikes have begun, starting Saturday Oct. 15th.",
+  "eventDate": "2016-10-15T12:02:00.000Z",
+  "faqs": [
+    {
+      "_key": "km9oe6i",
+      "_type": "faqItem",
+      "answer": "The Industrial Workers of the World (IWW) organized a nationwide prison strike on the 45th anniversary of the Attica Prison Uprising. Prisoners in 29 facilities refused to work in protest of prison slave labor conditions, with a new wave of strikes beginning October 15, 2016.",
+      "question": "What is the IWW prison strike?"
+    },
+    {
+      "_key": "kmatfet",
+      "_type": "faqItem",
+      "answer": "The 13th Amendment abolished slavery \"except as a punishment for crime.\" This constitutional exception allows prisons to compel inmate labor — often for cents per hour supplied to corporations — which critics including the IWW call modern-day slavery.",
+      "question": "Why is prison labor considered a form of slavery?"
+    },
+    {
+      "_key": "kmbm1zr",
+      "_type": "faqItem",
+      "answer": "Despite affecting 29 prisons in a coordinated nationwide action, the prison strike received virtually no mainstream media coverage. The media silence was highlighted as part of the broader pattern of ignoring issues affecting incarcerated people.",
+      "question": "Why did the media largely ignore the prison strike?"
+    },
+    {
+      "_key": "kmc7bg2",
+      "_type": "faqItem",
+      "answer": "In a historic development, Alabama prison guards joined prisoners in a work stoppage, refusing to report to work in solidarity. This cross-class action between guards and prisoners was unprecedented in US prison history.",
+      "question": "What was unique about the Alabama prison guard strike?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Anon Resistance",
+    "ARM",
+    "Anon",
+    "Resistance",
+    "Movement",
+    "Anonymous",
+    "Anonymous 2017",
+    "the anon message",
+    "anonmessage",
+    "official anonymous website",
+    "official anonymous",
+    "anonymous channel",
+    "anonymous today",
+    "anonymous this week",
+    "anonymous 2017",
+    "today anonymous 2017 this week",
+    "anonymous 2017 latest",
+    "anonymous hackers",
+    "Anarchy",
+    "Anarchism"
+  ],
+  "leadParagraph": "Last month on the 45th anniversary of the Attica Prison Uprising, an international industrial labor union, organized a nationwide prison strike against prison labor. The famous Anarchist union, known as the IWW or Industrial Workers of the World, organized strikes that affected 29 different prisons. Despite this they were virtually ignored by the media. Now a new wave of strikes have begun, starti",
+  "linkedPitch": null,
+  "location": "United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Prison Strike Graffiti written on prison bathroom wall.",
+    "asset": {
+      "_ref": "image-50b5e28333a6388c1757d2b594bf09f22ceda5bd-600x400-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website (anonresistance.news) and has been migrated to UnTelevised Media.",
+  "needsReview": false,
+  "publishedAt": "2016-10-15T15:00:00.000Z",
+  "readingTimeMinutes": 13,
+  "relatedArticles": [
+    {
+      "_key": "ee3ab2918f05",
+      "_ref": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_type": "reference"
+    },
+    {
+      "_key": "cb386b29f29b",
+      "_ref": "ny-prison-strike-forgotten-by-design-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "370a435f435f",
+      "_ref": "denver-jbs-strike-authorization",
+      "_type": "reference"
+    },
+    {
+      "_key": "1d7eb7d9f24d",
+      "_ref": "may-day-2026-history-anarchist-origins-international-workers-day",
+      "_type": "reference"
+    },
+    {
+      "_key": "aa61c32e9ae4",
+      "_ref": "may-day-2026-global-uprising-workers-over-billionaires",
+      "_type": "reference"
+    },
+    {
+      "_key": "3c47d872aea9",
+      "_ref": "may-day-2026-workers-over-billionaires-economic-blackout",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "iww-organizes-first-ever-prison-strike-media-ignores-it-new-wave-of-strikes-began-saturday-oct"
+  },
+  "tags": [
+    "iww",
+    "prison-strike",
+    "prison-labor",
+    "slavery",
+    "attica",
+    "labor-rights",
+    "mass-incarceration",
+    "xfbml",
+    "industrialworkersoftheworld",
+    "incarceratedworkersoftheworld"
+  ],
+  "title": "IWW Organizes First Ever Prison Strike, Media Ignores It. New Wave Of Strikes Began Saturday, Oct. 15th",
+  "updatedAt": null,
+  "videoLink": null
+}

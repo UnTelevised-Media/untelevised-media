@@ -1,0 +1,63 @@
+{
+  "_id": "article-0088399c-4ebe-47aa-9f9c-ed30e08fac5c",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "5de733350146",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The recent visit to Moscow by representatives from Hamas and Iran raises questions about Russia's potential role as a mediator in the Israel-Hamas conflict. Despite its involvement in the Ukraine war, President Putin has expressed concerns about the escalating conflict in Gaza. With the UN Security Council divided and diplomatic solutions scarce, Russia's diplomatic ties with all parties involved suggest it could play a pivotal role in bringing peace to the Middle East.\n",
+  "eventDate": "2023-10-27T14:31:00.000Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Russia",
+    "Israel-Hamas conflict",
+    "Moscow visit",
+    "Hamas and Iran",
+    "peacemaker",
+    "regional war",
+    "UN Security Council",
+    "two-state solution",
+    "Middle East diplomacy"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Hamas and Iran Officials Meet in Moscow",
+    "asset": {
+      "_ref": "image-7e3b785c1ce9bf8fbb027e5c61af110f8766f474-1000x669-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-10-30T14:31:42.680Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "russia-s-role-in-israel-hamas-conflict-a-potential-peacemaker"
+  },
+  "tags": null,
+  "title": "Russia's Role in Israel-Hamas Conflict: A Potential Peacemaker?",
+  "updatedAt": null,
+  "videoLink": null
+}

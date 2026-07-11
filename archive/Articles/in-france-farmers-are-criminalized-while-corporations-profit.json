@@ -1,0 +1,113 @@
+{
+  "_id": "france-farmers-criminalized-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "f58x3sw5",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    },
+    {
+      "_key": "mweblujp",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Examination of two major underreported European stories from early 2026: the arrest of 52 French farmers during peaceful protests against budget cuts, and the continent-wide 'No Kings' anti-war movement protesting U.S.-Israel escalation in Iran. Both stories reveal systematic suppression of dissent and media marginalization of inconvenient narratives.",
+  "eventDate": "2025-03-31T22:31:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-im8hrfi8",
+      "_type": "faqItem",
+      "answer": "Fifty-two people, including agricultural trade union leaders, were arrested in Paris on January 25, 2026, during peaceful protests against the French government's 2026 budget plan. Their 'crime' was participating in a demonstration to defend rural livelihoods. UN experts have condemned the increasing tendency to criminalize peasant movements in France.",
+      "question": "Why were French farmers arrested?"
+    },
+    {
+      "_key": "faq-cmjc2rcm",
+      "_type": "faqItem",
+      "answer": "'No Kings' is a coordinated anti-war movement that emerged in response to U.S. President Donald Trump and the escalation of the U.S.-Israel war on Iran. The movement's slogan 'No Kings, No War' opposes endless military conflicts and weapons transfers. On March 1, 2026, millions marched across Europe, including in Paris where protesters held Israeli, American and Iranian flags alongside banners condemning war.",
+      "question": "What is the 'No Kings' movement?"
+    },
+    {
+      "_key": "faq-vpnv04am",
+      "_type": "faqItem",
+      "answer": "Corporate media largely ignored or underreported the 'No Kings' anti-war protests across Europe. The Project Censored annual list of underreported stories consistently highlights gaps where economic and political forces manipulate media landscapes. Movement organized largely through social media received minimal mainstream coverage despite millions participating.",
+      "question": "How did corporate media cover these stories?"
+    },
+    {
+      "_key": "faq-qu7jvs05",
+      "_type": "faqItem",
+      "answer": "France maintains a 'fine line' diplomatic approach to the U.S.-Iran war, condemning the conflict while continuing to sell weapons to Israel. This allows France to appear anti-war to domestic audiences and maintain economic ties with the U.S. and Israel, while avoiding direct confrontation. Critics call it hypocrisy and complicity.",
+      "question": "What is France's 'fine line' policy?"
+    },
+    {
+      "_key": "faq-ewn1boe1",
+      "_type": "faqItem",
+      "answer": "The Bloquons movement is a French coalition of unions calling for protests and strikes against the government's 2026 budget plan, which includes cuts to rural development and agricultural programs. The movement has organized multiple rounds of general strikes since September 2025, blocking roads in major French cities.",
+      "question": "What is the Bloquons movement?"
+    },
+    {
+      "_key": "faq-urvt0tcg",
+      "_type": "faqItem",
+      "answer": "These cases demonstrate how corporate media systems prioritize convenient narratives over inconvenient truths. Millions can mobilize across borders against war and yet receive minimal coverage. Simultaneously, individual peaceful protesters are arrested and criminalized while corporate media ignores their stories. This reflects systematic bias in whose stories get told.",
+      "question": "What does this reveal about European media?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "French farmers protests",
+    "52 farmers arrested",
+    "No Kings movement",
+    "Europe anti-war protests",
+    "Macron fine line",
+    "criminalization of dissent",
+    "media marginalization"
+  ],
+  "leadParagraph": "While French farmers protest budget cuts that threaten rural programs, police in Paris are arresting them for holding banners. Meanwhile, millions of Europeans march against war in 'No Kings' protests ignored by corporate media.",
+  "linkedPitch": null,
+  "location": "France",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Rows of farm tractors parked along Avenue des Champs-Elysees with the Arc de Triomphe in the background during the French farmers protest in Paris, January 2026",
+    "asset": {
+      "_ref": "image-fef7ca371eadc3a0c224b70ac6fe9c724646db86-2480x1653-webp",
+      "_type": "reference"
+    },
+    "caption": "French farmers park tractors in front of the Arc de Triomphe in Paris to protest the EU-Mercosur trade deal and government budget cuts threatening rural programs, January 8, 2026.",
+    "credit": "Reuters/Gonzalo Fuentes"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-03T22:32:09.128Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "in-france-farmers-are-criminalized-while-corporations-profit"
+  },
+  "tags": [
+    "protests",
+    "france",
+    "farmers",
+    "media-censorship"
+  ],
+  "title": "In France, Farmers Are Criminalized While Corporations Profit",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,113 @@
+{
+  "_id": "7ONx74QMiI10eazwub4zb7",
+  "allowComments": true,
+  "author": {
+    "_ref": "DJ1Y76QLqJX8nukZ8692lM",
+    "_type": "reference",
+    "name": "Tony Geren"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "c0cba0f722ca",
+      "_ref": "d21a73f5-a2fc-46fd-8801-f1f32e1f0b1f",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Buckminster Fuller once said, “You never change things by fighting the existing reality. To change something, build a new model that makes the existing model obsolete.”",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "kz3nlue",
+      "_type": "faqItem",
+      "answer": "The Unified City Project is a community organizing strategy based on counter-economics (agorism), affinity groups, and mutual aid networks to build parallel economies and community structures that operate outside the existing corrupt system.",
+      "question": "What is the Unified City Project?"
+    },
+    {
+      "_key": "kz4b1kh",
+      "_type": "faqItem",
+      "answer": "Agorism is a libertarian anarchist philosophy advocating building alternative markets and community systems outside of government and corporate control, as a way to make existing power structures obsolete rather than directly fighting them.",
+      "question": "What is agorism?"
+    },
+    {
+      "_key": "kz5dvs7",
+      "_type": "faqItem",
+      "answer": "Freedom cells are small, autonomous groups who organize for mutual aid, shared resources, and community self-governance, forming resilient community networks independent of centralized government control.",
+      "question": "What are \"freedom cells\" as discussed in the article?"
+    },
+    {
+      "_key": "kz6vovr",
+      "_type": "faqItem",
+      "answer": "The article opens with Fuller's famous quote: \"You never change things by fighting the existing reality. To change something, build a new model that makes the existing model obsolete.\" The Unified City Project is a practical application of this philosophy.",
+      "question": "How does the Unified City Project relate to Buckminster Fuller's philosophy?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Anon Resistance",
+    "ARM",
+    "Anon",
+    "Resistance",
+    "Movement",
+    "Anonymous",
+    "Anonymous 2017",
+    "the anon message",
+    "anonmessage",
+    "official anonymous website",
+    "official anonymous",
+    "anonymous channel",
+    "anonymous today",
+    "anonymous this week",
+    "anonymous 2017",
+    "today anonymous 2017 this week",
+    "anonymous 2017 latest",
+    "anonymous hackers",
+    "Anarchy",
+    "Anarchism"
+  ],
+  "leadParagraph": "“You never change things by fighting the existing reality. To change something, build a new model that makes the existing model obsolete.”",
+  "linkedPitch": null,
+  "location": "United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Agorism definition meme",
+    "asset": {
+      "_ref": "image-dea8a3a93f108551e519a311433644afd3c952c0-600x400-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website (news.anonresistance.dx.am) and has been migrated to UnTelevised Media.",
+  "needsReview": false,
+  "publishedAt": "2016-07-02T12:00:00Z",
+  "readingTimeMinutes": 12,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "DJ1Y76QLqJX8nukZ868jxy",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-unified-city-project-revolution-in-action"
+  },
+  "tags": [
+    "agorism",
+    "community-organizing",
+    "direct-action",
+    "counter-economics",
+    "anarchism",
+    "mutual-aid",
+    "xfbml",
+    "unifiedcity",
+    "freedomcell",
+    "affinitygroup"
+  ],
+  "title": "The Unified City Project: Revolution In Action",
+  "updatedAt": null,
+  "videoLink": null
+}

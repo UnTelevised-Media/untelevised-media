@@ -1,0 +1,65 @@
+{
+  "_id": "article-5e075088-6d89-41d5-a551-502e3ea5f852",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "6b8ee381f124",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Amidst the ongoing Israel-Hamas conflict, Gaza experiences its third communication blackout, leaving aid agencies in the dark. The situation worsens as Israeli forces encircle Gaza City, further intensifying the crisis in the region.",
+  "eventDate": "2023-11-06T02:14:01.939Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Israel",
+    "IDF",
+    "Gaza",
+    "Palestine",
+    "Hamas",
+    "communications blackout",
+    "Israel-Hamas war",
+    "Antony Blinken",
+    "Middle East diplomacy",
+    "aid efforts",
+    "Gaza conflict update"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "A fireball erupts from a massive Israeli airstrike in Gaza City Nov 5th 2023",
+    "asset": {
+      "_ref": "image-3d06956d8470a469027127fd66ac3818964ede32-750x563-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-11-06T07:13:59.242Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "gaza-communications-blackout-amid-escalating-israel-hamas-conflict-latest-updates"
+  },
+  "tags": null,
+  "title": "Gaza Communications Blackout Amid Escalating Israel-Hamas Conflict",
+  "updatedAt": null,
+  "videoLink": null
+}

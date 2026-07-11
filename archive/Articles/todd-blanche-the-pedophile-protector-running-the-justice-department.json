@@ -1,0 +1,143 @@
+{
+  "_id": "blanche-epstein-coverup-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "When Todd Blanche took over as acting Attorney General, he declared the Epstein files investigation over: 'There's nothing to investigate. No more charges. No more prosecutions.' The man now running the Justice Department is protecting Trump, his circle, and the Epstein orbit.",
+  "eventDate": "2026-04-03",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Yes. Blanche, as Deputy Attorney General, personally interviewed Epstein's convicted co-conspirator and business partner. During the interview, Maxwell said she'd never seen Trump behave inappropriately when he was friends with Epstein.",
+      "question": "Did Todd Blanche personally interview Ghislaine Maxwell?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "After Blanche's interview, Maxwell was transferred from high-security prison to a lower-security prison camp in Bryan, Texas. Blanche defended the transfer as necessary for Maxwell's safety due to threats against her life.",
+      "question": "What happened to Ghislaine Maxwell after the interview?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Blanche has stated publicly that no one—including President Trump—will face additional charges related to Epstein. He emphasized that 'it is not a crime to party with Mr. Epstein' and that the files didn't provide sufficient evidence for prosecution.",
+      "question": "Has anyone named in the Epstein files been prosecuted?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Paul Manafort was Trump's former campaign chair who Blanche represented. Manafort and Epstein were cellmates at the Metropolitan Correctional Center in 2019 while Manafort was serving a sentence for federal crimes. Epstein was awaiting trial on sex-trafficking charges at the time.",
+      "question": "What did Paul Manafort have to do with Jeffrey Epstein?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "No. Blanche announced the DOJ had released all required files, but about 200,000 documents were withheld or redacted for 'various legal reasons.' Reps. Thomas Massie and Ro Khanna have said this potentially violates the Epstein Files Transparency Act.",
+      "question": "Are all the Epstein files publicly available?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Todd Blanche",
+    "Epstein files",
+    "Jeffrey Epstein",
+    "DOJ",
+    "Trump",
+    "Paul Manafort",
+    "Ghislaine Maxwell",
+    "justice",
+    "accountability"
+  ],
+  "leadParagraph": "When Todd Blanche took over as acting Attorney General this week, he had a clear message about the Epstein files: \"There's nothing to investigate.\" No more charges. No more prosecutions. \"It is not a crime to party with Mr. Epstein.\"",
+  "linkedPitch": null,
+  "location": "Washington D.C., United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Todd Blanche says review of Jeffrey Epstein sex-trafficking case 'is over' | Fuck this guy.",
+    "asset": {
+      "_ref": "image-aa82ea5be4cb8056e07ef82046e63cbdfb6730b9-1200x1200-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-03T14:49:36.168182",
+  "readingTimeMinutes": 11,
+  "relatedArticles": [
+    {
+      "_key": "67af779b0305",
+      "_ref": "todd-blanche-corrupt-ascent-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "373d18cc7aab",
+      "_ref": "pam-bondi-corruption-chronicle-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "fdea1051d92f",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "fa33d49d29cf",
+      "_ref": "iwpoje4qjb",
+      "_type": "reference"
+    },
+    {
+      "_key": "7e3242e303d4",
+      "_ref": "trump-hollowing-out-guardrails-op-ed",
+      "_type": "reference"
+    },
+    {
+      "_key": "a4e5516dd688",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seo",
+    "description": "Acting AG Blanche protects Trump, Manafort, Epstein's powerful circle",
+    "title": "Todd Blanche: Epstein Cover-Up at DOJ"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "todd-blanche-the-pedophile-protector-running-the-justice-department"
+  },
+  "tags": [
+    "epstein-files",
+    "doj",
+    "todd-blanche",
+    "trump-administration",
+    "justice-department"
+  ],
+  "title": "Todd Blanche: The Pedophile Protector Running the Justice Department",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,164 @@
+{
+  "_id": "a-bullet-meant-for-no-one-the-murder-of-sam-fahd-abu-haikal",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-gg",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-hr",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-me",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "An Israeli soldier shot and killed seven-month-old Sam Fahd Abu Haikal through the windshield of his family's stationary car in Hebron. His father had stopped on the soldier's orders. The soldier was ten metres away. B'Tselem footage contradicts the IDF's account.",
+  "eventDate": "2026-06-05T19:30:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Sam Fahd Abu Haikal was a seven-month-old Palestinian baby boy killed by an Israeli soldier on June 5, 2026, in the Tel Rumeida area of Hebron in the occupied West Bank. He was shot through the windshield of his family's stationary car while in his mother's arms. His father, Fahd Abu Haikal, is a lecturer at Bethlehem University.",
+      "question": "Who was Sam Fahd Abu Haikal?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The IDF claims soldiers 'perceived a vehicle accelerating toward them' and that one soldier 'responded with single shots toward the vehicle.' An initial IDF inquiry acknowledged the injured were 'uninvolved civilians' and expressed 'deep sorrow.' B'Tselem released video footage that contradicts the IDF's claim, showing the car slowing to a near stop before the shot was fired.",
+      "question": "What does the Israeli military claim happened?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "B'Tselem released footage on June 9 showing two soldiers standing metres from the vehicle as it slowed and appeared to come to a near stop. The person who filmed it told B'Tselem the soldier opened fire just as the car was coming to a stop. B'Tselem stated the car 'was far from the soldiers and posed no danger to them whatsoever,' and that soldiers left the scene without providing aid to the wounded.",
+      "question": "What did B'Tselem's video footage show?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Since October 2023, more than 1,000 Palestinians have been killed in the West Bank and East Jerusalem, including at least 240 children. On June 11, 2026, Amnesty International released a 149-page report documenting what it called Israel's 'ethnic cleansing' of West Bank Palestinians — a concerted state policy of forced displacement affecting at least 117 communities and displacing more than 5,910 people between January 2023 and April 2026.",
+      "question": "What is the broader context of violence in the West Bank?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "According to Israeli rights group Yesh Din, Israeli soldiers accused of harming Palestinians were indicted in fewer than 1% of cases based on 2,427 complaints filed between 2016 and 2024. The Israeli Military Police opened an investigation into Sam's killing, but rights groups say such investigations rarely lead to accountability.",
+      "question": "How often are Israeli soldiers prosecuted for harming Palestinians?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "Sam's father Fahd was shot in the hand. His mother Dania was critically wounded with shrapnel lodged near her heart. The family's 11-year-old son Kinan was also in the car but survived with minor injuries. The grandmother, Feryal Abu Haikal, witnessed the shooting. Israeli soldiers confiscated the family's vehicle after the incident, according to B'Tselem.",
+      "question": "What happened to the rest of the Abu Haikal family?"
+    },
+    {
+      "_key": "faq-6",
+      "_type": "faqItem",
+      "answer": "Tel Rumeida is a neighbourhood in Hebron where Israeli settlers live among Palestinian residents. It has a heavy Israeli military presence to protect settlers, and is a persistent flashpoint for violence against Palestinians. The Abu Haikal family home is on the other side of an Israeli checkpoint from where the shooting occurred — they were almost home when the soldier opened fire.",
+      "question": "What is the Tel Rumeida area and why is it significant?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Sam Fahd Abu Haikal",
+    "Hebron shooting",
+    "West Bank baby killed",
+    "IOF kills child",
+    "Tel Rumeida checkpoint",
+    "Israeli ethnic cleansing",
+    "Palestinian baby murdered",
+    "West Bank violence 2026",
+    "B'Tselem video",
+    "IDF investigation"
+  ],
+  "leadParagraph": "On June 5, 2026, an Israeli soldier fired through the windshield of a stationary family car in Hebron, killing seven-month-old Sam Fahd Abu Haikal. The boy's father had stopped on the soldier's orders, hands raised. The soldier was ten metres away, in broad daylight. The IDF claims the car was accelerating. Video footage and the family's testimony tell a different story.",
+  "linkedPitch": null,
+  "location": "Hebron, Occupied West Bank",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Fahd Abu Haikal comforts his elder son Kinan after burying seven-month-old Sam in Hebron, June 6, 2026.",
+    "asset": {
+      "_ref": "image-d324e61929536cf66d466f29d12b22347acfd6bd-1200x800-webp",
+      "_type": "reference"
+    },
+    "caption": "Fahd Abu Haikal comforts his elder son Kinan after burying seven-month-old Sam in Hebron, occupied West Bank, June 6, 2026.",
+    "credit": "Getty Images"
+  },
+  "methodology": "Reported using direct testimony from the Abu Haikal family via Haaretz, AP, and CBS News; video evidence from B'Tselem; IDF statements; reporting from The Guardian, BBC News, and Times of Israel; and Amnesty International's June 2026 report on ethnic cleansing in the West Bank.",
+  "needsReview": null,
+  "publishedAt": "2026-06-16T04:00:00.000Z",
+  "readingTimeMinutes": 13,
+  "relatedArticles": [
+    {
+      "_key": "rel-2",
+      "_ref": "israeli-settlers-attack-west-bank-school-kill-children",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "west-bank-burning-organized-settler-violence-state-backing-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "smotrich-icc-khan-al-ahmar-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "menna-allah-abu-labda",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-8",
+      "_ref": "un-echoes-what-palestinians-have-said-for-decades-settler-violence-is-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "3754a9c1b605",
+      "_ref": "jalud-settlers-burn-electricity-cables-west-bank-terror-campaign",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "a-bullet-meant-for-no-one-a-life-taken-from-everyone-the-murder-of-sam-abu-haikal"
+  },
+  "tags": [
+    "West Bank",
+    "Hebron",
+    "Israeli Occupation",
+    "IOF",
+    "Palestinian Children",
+    "Ethnic Cleansing",
+    "Sam Abu Haikal",
+    "Tel Rumeida",
+    "B'Tselem",
+    "Settler Violence"
+  ],
+  "title": "A Bullet Meant for No One, a Life Taken from Everyone: The Murder of Sam Abu Haikal",
+  "updatedAt": null,
+  "videoLink": null
+}

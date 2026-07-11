@@ -1,0 +1,106 @@
+{
+  "_id": "may-day-2026-history-anarchist-origins-international-workers-day",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Everywhere in the world except the US and Canada, May 1 is International Workers' Day. It began in 1886 with the eight-hour day movement in Chicago, the Haymarket Affair, and the execution of anarchist labor organizers. This is the story you were never taught — the anarchist roots of May Day, why the US government tried to erase it, and what it means for you if you're new to the movement.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "May Day, or International Workers' Day, is a celebration of the international labor movement and the struggle for workers' rights. It commemorates the 1886 Haymarket Affair in Chicago, when anarchist labor organizers were fighting for the eight-hour workday. Today, it's an official holiday in 66 countries, marked by protests, rallies, and celebrations of workers' power.",
+      "question": "What is May Day?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "In 1887, President Grover Cleveland feared that commemorating Labor Day on May 1 would give Americans an opportunity to remember the anarchists who were executed after the Haymarket Affair. He supported moving Labor Day to September, which is the holiday the conservative Knights of Labor preferred. This effectively erased May Day from American memory, though it remained celebrated worldwide.",
+      "question": "Why doesn't the US celebrate May Day?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "On May 1, 1886, 400,000 workers in Chicago went on strike for the eight-hour day. On May 4, a bomb was thrown during a peaceful protest at Haymarket Square, killing one police officer. Police opened fire on the crowd. Eight anarchist labor organizers were arrested, convicted in a rigged trial, and four were executed — Albert Parsons, August Spies, Adolph Fischer, and George Engel. They were innocent but were killed for their beliefs and organizing.",
+      "question": "What was the Haymarket Affair?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Lucy Parsons was born enslaved in Texas around 1853 and became one of the most important figures in the anarchist labor movement. She organized sewing workers, spoke at rallies, and fought tirelessly for her husband Albert Parsons' defense after the Haymarket Affair. After his execution, she continued organizing for decades, becoming a legendary figure in the radical left and symbol of resistance.",
+      "question": "Who was Lucy Parsons?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Join the economic blackout: don't go to work, don't go to school, don't shop on May 1. Find events near you at maydaystrong.org. March, rally, or stand on an overpass with a sign. If you're not ready for public action, read the history of May Day and the Haymarket Affair. Join a union or organize your workplace. May Day is about building power year-round, not just one day.",
+      "question": "How can I participate in May Day?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "may day history",
+    "haymarket affair 1886",
+    "lucy parsons",
+    "albert parsons",
+    "anarchist origins may day",
+    "international workers day",
+    "eight hour day movement",
+    "chicago 1886 strikes",
+    "may day vs labor day",
+    "workers over billionaires"
+  ],
+  "leadParagraph": "Everywhere in the world except the United States and Canada, May 1 is International Workers' Day. It's a public holiday in 66 countries. Millions of workers take to the streets. In the United States, we celebrate Labor Day in September — because in 1887, the US government was afraid of what May Day represents. So let's talk about what it is. Where it comes from. Why the anarchist roots matter. And what it means for you, whether you're new to this movement or you've been in it for years.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Union members scuffle with Turkish police officers as they try to march towards Taksim square in Istanbul, Turkey, Friday, May 1, 2026",
+    "asset": {
+      "_ref": "image-16d715eb6a2cc33826cd0b5e02ad891457e1b26f-1200x900-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-01T17:00:00Z",
+  "readingTimeMinutes": 11,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "description": "The history of May Day, from the 1886 Chicago strikes and Haymarket Affair to International Workers' Day. What anarchists fought for and why it matters today.",
+    "title": "May Day Explained: Anarchist Origins and History for Newcomers"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "may-day-explained-the-anarchist-origins-1886-history-and-why-it-matters-for-newcomers"
+  },
+  "tags": [
+    "may-day",
+    "anarchism",
+    "labor-history",
+    "haymarket-affair",
+    "lucy-parsons",
+    "international-workers-day",
+    "eight-hour-day"
+  ],
+  "title": "May Day Explained: The Anarchist Origins, 1886 History, and Why It Matters for Newcomers",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,63 @@
+{
+  "_id": "article-82d5510e-acf9-4ca2-bd86-6cadc1592d74",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "9cac04cdfd7e",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "As conflict intensifies in Gaza, desperate civilians face exorbitant fees and exploitation in attempts to flee through Egypt, while those remaining confront dire humanitarian conditions and psychological trauma.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Gaza evacuation",
+    "Rafah border crossing",
+    "Palestinian refugees",
+    "humanitarian crisis",
+    "war profiteering",
+    "civilian displacement",
+    "Israel-Hamas conflict",
+    "Egyptian border",
+    "extortion"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Palestinians displaced by Israeli bombardments on the Gaza Strip, at the border with Egypt [Rafah (Gaza) -  Jan 14, 2024 - Fatima Shbair]",
+    "asset": {
+      "_ref": "image-fa6018b8d02a3421cee9210f7feeed93c73a6371-556x371-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2024-09-19T20:45:31.539Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "gaza-s-border-crisis-the-high-cost-of-escape-and-ongoing-struggle-for-survival"
+  },
+  "tags": null,
+  "title": "Gaza's Border Crisis: The High Cost of Escape and Ongoing Struggle for Survival",
+  "updatedAt": null,
+  "videoLink": null
+}

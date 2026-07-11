@@ -1,0 +1,145 @@
+{
+  "_id": "americas-man-child-in-chief-trump-tantrum-roast",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-op",
+      "_ref": "d21a73f5-a2fc-46fd-8801-f1f32e1f0b1f",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-rw",
+      "_ref": "048b3a77-f32f-4267-a2ae-0346d0bf80f1",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "On June 7, 2026, the President of the United States sat down for a television interview, got asked questions, ripped off his microphone, blamed the weather, and walked out. This is a roast of every single temper tantrum from the thinnest-skinned president in American history.",
+  "eventDate": "2026-06-07",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Trump walked out of a sit-down interview with Kristen Welker after she repeatedly fact-checked his claims about election fraud, the Jan. 6 attack, and his 1.8 billion dollar anti-weaponization fund. He ripped off his microphone, stomped on it, called Welker crooked and stupid, said \"thank you darling,\" and blamed the rain for his emotional collapse.",
+      "question": "What happened on Meet the Press on June 7, 2026?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "According to Axios and confirmed by Trump himself on a podcast, he told Netanyahu: \"You are fucking crazy. You would be in prison if it were not for me. I am saving your ass. Everybody hates you now.\" This happened three days before the Meet the Press meltdown.",
+      "question": "What did Trump say to Netanyahu on the leaked call?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Repeatedly. He revoked CNN reporter Jim Acostas White House credentials in 2018 after berating him at a press conference. He attacked NABJ moderators in 2024, leading to death threats against one. He has stormed out of or cut short multiple interviews when faced with fact-checking, including the June 2026 Meet the Press incident.",
+      "question": "Has Trump walked out of interviews before?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "In April 2026, after behind-the-scenes White House meltdowns over a Supreme Court loss, Rep. Dan Goldman and Rep. Yassamin Ansari publicly called for invoking the 25th Amendment, citing Trump being unwell. Similar calls followed multiple reported Oval Office tantrums throughout early 2026.",
+      "question": "What are the 25th Amendment calls about?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Trump tantrum",
+    "Meet the Press storm out",
+    "Donald Trump meltdown",
+    "Kristen Welker interview",
+    "Trump Netanyahu fucking crazy",
+    "25th Amendment Trump",
+    "Trump snowflake",
+    "Trump mic stomp",
+    "Trump weather excuse"
+  ],
+  "leadParagraph": "The President of the United States threw a temper tantrum on national television, ripped off his microphone, stomped on it, blamed the weather, and called the interviewer crooked for the crime of asking him to support his own claims with evidence. This is who is running the country.",
+  "linkedPitch": null,
+  "location": "Washington, D.C.",
+  "mainImage": {
+    "_type": "image",
+    "alt": "President Donald Trump sitting across from Meet the Press host Kristen Welker during their June 2026 interview.",
+    "asset": {
+      "_ref": "image-4f5a137b9d008d3c83dec6c46cb0c94355333cbe-1200x800-webp",
+      "_type": "reference"
+    },
+    "caption": "Trump storms out of his Meet the Press interview with Kristen Welker on June 7, 2026 after being fact-checked on his claims about election fraud and the January 6 attack.",
+    "credit": "NBC News / Los Angeles Times"
+  },
+  "methodology": "This op-ed draws on primary source video from the June 7, 2026 Meet the Press interview, Axios and Reuters reporting on the Netanyahu call, Daily Beast and HuffPost coverage of Trump meltdowns, and public statements from members of Congress calling for the 25th Amendment. All cited incidents are verified through multiple mainstream outlets.",
+  "needsReview": null,
+  "publishedAt": "2026-06-09T04:22:00.000Z",
+  "readingTimeMinutes": 12,
+  "relatedArticles": [
+    {
+      "_key": "f257e9db5fd4",
+      "_ref": "trump-hollowing-out-guardrails-op-ed",
+      "_type": "reference"
+    },
+    {
+      "_key": "77229c730f92",
+      "_ref": "trump-ballroom-donors-50b-federal-contracts",
+      "_type": "reference"
+    },
+    {
+      "_key": "d4d957815b5d",
+      "_ref": "trump-pardons-corrupt-officials-dismantles-justice-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "dcdfa987c9d0",
+      "_ref": "pam-bondi-corruption-chronicle-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "ac4cc7aa61a5",
+      "_ref": "todd-blanche-corrupt-ascent-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "8e0806d0f82b",
+      "_ref": "blanche-epstein-coverup-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "america-s-man-child-in-chief-a-roast-of-the-most-easily-triggered-president-in-history"
+  },
+  "tags": [
+    "Trump",
+    "temper tantrum",
+    "Meet the Press",
+    "thin skin",
+    "snowflake hypocrisy",
+    "Kristen Welker",
+    "25th Amendment",
+    "Netanyahu call",
+    "fact checking",
+    "walk out"
+  ],
+  "title": "America's Man-Child in Chief: A Roast of the Most Easily Triggered President in History",
+  "updatedAt": null,
+  "videoLink": null
+}

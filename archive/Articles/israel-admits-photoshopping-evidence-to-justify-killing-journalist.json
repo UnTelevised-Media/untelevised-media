@@ -1,0 +1,103 @@
+{
+  "_id": "fT4RkbtsUFo0w0XC0uOul5",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "1d41661e7993",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "6417d1ea4d68",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The Israeli military openly admitted to creating a fake photo of journalist Ali Shoaib to claim he was affiliated with Hezbollah.",
+  "eventDate": "2026-04-03T22:27:20.100Z",
+  "faqs": [
+    {
+      "_key": "nE3O1lobPG69YhI3z2wr9H",
+      "_type": "faqItem",
+      "answer": "The Israeli military admitted to posting a photoshopped image of journalist Ali Shoaib, showing him in a military uniform with Hezbollah, in an attempt to justify killing him. When Fox News correspondent Trey Yingst asked about the source of the photo, the military stated: 'Unfortunately there isn't really a picture of it, it was photoshopped.'",
+      "question": "What did Israel admit to?"
+    },
+    {
+      "_key": "nE3O1lobPG69YhI3z2wrDo",
+      "_type": "faqItem",
+      "answer": "Three journalists were killed on March 28, 2026, in a targeted Israeli strike on a clearly marked press car near Jezzine, southern Lebanon: Ali Shoaib (correspondent for Al-Manar TV), Fatima Ftouni (reporter for Al-Mayadeen TV), and her brother Mohamad Ftouni (freelance photojournalist).",
+      "question": "Who were the journalists killed in the strike?"
+    },
+    {
+      "_key": "nE3O1lobPG69YhI3z2wrIL",
+      "_type": "faqItem",
+      "answer": "According to Committee to Protect Journalists (CPJ) reporting cited by Time magazine, Israel has killed 209 Palestinian journalists in Gaza throughout its two-year war on the territory. 2025 was the deadliest year on record for journalists worldwide, with Israel responsible for 86 of the 129 killed—about two-thirds of all journalist deaths that year.",
+      "question": "How many journalists has Israel killed in Gaza?"
+    },
+    {
+      "_key": "nE3O1lobPG69YhI3z2wrMs",
+      "_type": "faqItem",
+      "answer": "According to a 2025 investigation by +972 Magazine and Local Call, the Israeli military operates a special unit called the 'Legitimization Cell' that exists to create propaganda justifying the military's targeting of civilian infrastructure and civilians, particularly journalists. The unit scours for material to bolster Israeli claims and maintain international legitimacy.",
+      "question": "What is the 'Legitimization Cell'?"
+    },
+    {
+      "_key": "nE3O1lobPG69YhI3z2wrRP",
+      "_type": "faqItem",
+      "answer": "No. The Committee to Protect Journalists explicitly states that 'international law draws a clear distinction between propaganda or media activity, which remains protected civilian work, and direct participation in hostilities.' Journalists are civilians protected by international humanitarian law regardless of the political affiliation or ownership of the media outlet they work for.",
+      "question": "Is it legal to target journalists working for Hezbollah-affiliated media?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "IOF",
+    "disinformation",
+    "Lebanon",
+    "Gaza",
+    "war crimes",
+    "legitimization cell"
+  ],
+  "leadParagraph": "The Israeli military openly admitted to creating a fake photo of journalist Ali Shoaib to claim he was affiliated with Hezbollah.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "A journalist carries burned safety gear from a car that was hit by an Israeli airstrike, which killed three journalists in south Lebanon on March 28, 2026.",
+    "asset": {
+      "_ref": "image-0c23cdcb8911648118e2057867d1a8f7f37d2cf2-2926x1986-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2025-04-28T15:27:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "israel-admits-photoshopping-evidence-to-justify-killing-journalist"
+  },
+  "tags": [
+    "israel-targets-journalists",
+    "war-on-journalists",
+    "disinformation"
+  ],
+  "title": "Israel Admits Photoshopping Evidence to Justify Killing Journalist",
+  "updatedAt": null,
+  "videoLink": null
+}

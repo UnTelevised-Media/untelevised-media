@@ -1,0 +1,101 @@
+{
+  "_id": "ar2019-paris-bakery-explosion",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    },
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "An explosion rocked the streets of Paris this morning. A gas leak was the official cause of an explosion that flipped over nearby cars, and left a Paris block looking like a war-zone, more-so than usual. The blast claimed the lives of 2 firefighters and a Spanish national, and injured more than 50 others leaving a dozen in critical condition. With the Yellow Vest Movement set to engage in a massive withdrawal of assets from the banking system during Acte IX, it seems Paris is on the brink of both economical and sociological collapse.",
+  "eventDate": "2019-01-12T10:28",
+  "faqs": [
+    {
+      "_key": "faq1a",
+      "answer": "A gas leak at a bakery on Rue de Trevise in central Paris triggered a massive explosion. Firefighters had responded to a gas leak alert at approximately 9:00am local time when the gas line detonated, killing two first responders and a Spanish national on holiday.",
+      "question": "What caused the Paris explosion on January 12, 2019?"
+    },
+    {
+      "_key": "faq1b",
+      "answer": "Two firefighters and a Spanish national on holiday were killed in the blast. More than 50 others were injured, with a dozen left in critical condition. Cars were flipped and windows blown out in the surrounding blocks.",
+      "question": "How many people were killed and injured in the Paris bakery explosion?"
+    },
+    {
+      "_key": "faq1c",
+      "answer": "Acte IX refers to the ninth consecutive weekend of Yellow Vest (Gilets Jaunes) protests across France. During this weekend the movement also called for a mass withdrawal of funds from French banks as an act of economic resistance against the Macron government.",
+      "question": "What is Acte IX of the Yellow Vest Movement?"
+    },
+    {
+      "_key": "faq1d",
+      "answer": "The Yellow Vest Movement called for a mass bank withdrawal during Acte IX, encouraging supporters to collectively pull their savings from French financial institutions as a form of economic disruption and protest against the government.",
+      "question": "What were the Yellow Vests planning during Acte IX alongside the street protests?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Yellow Vest",
+    "YellowVest",
+    "Gilets Jaunes",
+    "GiletsJaunes",
+    "Paris",
+    "France",
+    "Acte IX",
+    "Bakery Explosion",
+    "Gas Leak",
+    "Bank Withdrawal",
+    "Protest",
+    "AntiGlobalist",
+    "AntiCapitalist"
+  ],
+  "leadParagraph": "An explosion rocked the streets of Paris this morning. A gas leak was the official cause of an explosion that flipped over nearby cars, and left a Paris block looking like a war-zone, more-so than usual. The blast claimed the lives of 2 firefighters and a Spanish national, and injured more than 50 others leaving a dozen in critical condition.",
+  "linkedPitch": null,
+  "location": "Paris, France",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Scene of the Paris bakery explosion on Rue de Trevise, January 12, 2019",
+    "asset": {
+      "_ref": "image-66d0fc7e77150fd6e96003626ad0ac5ff8da42b2-600x400-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2019-01-12T06:00",
+  "readingTimeMinutes": 3,
+  "relatedArticles": [],
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "bakery-explosion-kills-three-in-paris-amidst-yellowvest-acteix-day-of-mass-bank-withdrawals-planned"
+  },
+  "tags": [
+    "yellow-vest",
+    "gilets-jaunes",
+    "paris",
+    "france",
+    "acte-ix",
+    "gas-explosion",
+    "bank-withdrawal"
+  ],
+  "title": "Bakery Explosion Kills Three in Paris Amidst #YellowVest #ActeIX: Day of Mass Bank Withdrawals Planned",
+  "updatedAt": "2019-01-12T06:00",
+  "videoLink": ""
+}

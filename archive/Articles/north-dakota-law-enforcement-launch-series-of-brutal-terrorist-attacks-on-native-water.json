@@ -1,0 +1,117 @@
+{
+  "_id": "7ONx74QMiI10eazwub4Jvt",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "44f53770067e",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "edc648dba38e",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Law enforcement in North Dakota, acting as the private army of the Dakota Access Pipeline launch a brutal series of terror attacks on peaceful Native Water Protectors. Use of tear gas and water canons is freezing temperatures, throwing concussion grenades directly at people, and shooting Protectors in the face with rubber ammunition, being some of the more heinous acts committed by MCSD over the past few weeks.",
+  "eventDate": "2016-11-21T12:07:00.000Z",
+  "faqs": [
+    {
+      "_key": "k5b0oh4",
+      "_type": "faqItem",
+      "answer": "Law enforcement used water cannons, tear gas, rubber bullets, and an LRAD sound cannon against peaceful water protectors in approximately 26-degree Fahrenheit weather, injuring 167 people including three elders and hospitalizing seven.",
+      "question": "What happened at Standing Rock on November 20, 2016?"
+    },
+    {
+      "_key": "k5corjz",
+      "_type": "faqItem",
+      "answer": "The Dakota Access Pipeline (DAPL) is an oil pipeline constructed through or near Native American treaty lands. Protesters, known as Water Protectors, opposed it over concerns about water contamination and violations of indigenous rights.",
+      "question": "What is the DAPL and why were people protesting?"
+    },
+    {
+      "_key": "k5dnxnv",
+      "_type": "faqItem",
+      "answer": "Law enforcement deployed water cannons, tear gas (CS gas), rubber bullets, bean bag rounds, stinger grenades, an LRAD (Long Range Acoustic Device), and pepper spray against peaceful protesters in freezing temperatures.",
+      "question": "What weapons were used against Water Protectors?"
+    },
+    {
+      "_key": "k5eogo4",
+      "_type": "faqItem",
+      "answer": "The resistance was organized across several camps including Oceti Sakowin, Sacred Stone Camp, and Red Warrior Camp, supported by the Standing Rock Sioux Tribe, Cheyenne River Sioux Tribe, and allied organizations worldwide.",
+      "question": "Who organized the resistance at Standing Rock?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Anon Resistance",
+    "Anon",
+    "Resistance",
+    "Movement",
+    "Anonymous",
+    "Anonymous 2017",
+    "the anon message",
+    "anonmessage",
+    "official anonymous website",
+    "official anonymous",
+    "anonymous channel",
+    "anonymous today",
+    "anonymous this week",
+    "anonymous 2017",
+    "today anonymous 2017 this week",
+    "anonymous 2017 latest",
+    "anonymous hackers",
+    "Anarchy",
+    "Anarchism"
+  ],
+  "leadParagraph": "On 11/27/16 at 11:15 am MT, Protectors observed riot officers moving in toward a group of people camping out near Highway 1806 near the town of Cannon Ball, N.D. Officers were in riot gear, some were armed and they arrived with soldiers driving trucks and military Humvees. They also deployed helicopters and an airplane that monitored them from above. The police operation came the day after the Mor",
+  "linkedPitch": null,
+  "location": "Standing Rock, North Dakota",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Massive cloud of tear gas behind large amount of law enforcement. ",
+    "asset": {
+      "_ref": "image-aa80c20fc353611758ea770cf6bb82bdf14e44f5-600x400-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website (anonresistance.news) and has been migrated to UnTelevised Media.",
+  "needsReview": false,
+  "publishedAt": "2016-11-21T12:00:00Z",
+  "readingTimeMinutes": 12,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "north-dakota-law-enforcement-launch-series-of-brutal-terrorist-attacks-on-native-water"
+  },
+  "tags": [
+    "standing-rock",
+    "nodapl",
+    "water-protectors",
+    "morton-county",
+    "police-brutality",
+    "indigenous-rights",
+    "xfbml",
+    "nodalp",
+    "standwithstandingrock",
+    "istandwithstandingrock"
+  ],
+  "title": "North Dakota Law Enforcement Launch Series of Brutal Terrorist Attacks on Native Water Protectors",
+  "updatedAt": null,
+  "videoLink": null
+}

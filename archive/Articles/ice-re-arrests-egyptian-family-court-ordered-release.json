@@ -1,0 +1,99 @@
+{
+  "_id": "ice-re-arrests-egyptian-family-court-ordered-release",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "An Egyptian family of six was taken back into ICE custody two days after federal judges ordered their release from a Texas detention facility, revealing the dangerous expansion of executive power where immigration enforcement operates as a law unto itself.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "406e33915d74fbbc45296b057a753de7",
+      "answer": "The family was detained after the father, Mohamed Sabry Soliman, was charged with attacking protesters at a 2025 event in Colorado. The mother and children were not charged with any crimes and have disavowed the father.",
+      "question": "Why was the El Gamal family detained?"
+    },
+    {
+      "_key": "eb24448404c0d2b5a4c7117d0d72cd90",
+      "answer": "The family was held for 10 months at the Dilley ICE detention center — believed to be the longest of any family during Trump's second administration.",
+      "question": "How long were they held?"
+    },
+    {
+      "_key": "1eeeeb4d51cd976564109b482fd5bb0b",
+      "answer": "Federal judges ordered their release on Thursday. ICE complied and released them, but re-arrested the family less than 48 hours later at their first check-in.",
+      "question": "What happened when they were released?"
+    },
+    {
+      "_key": "e4e479961d10613f21446ca8e0e42509",
+      "answer": "The family documented medical neglect: the mother was denied an ultrasound for a potentially cancerous lump, a 5-year-old was denied dental care for 13 cavities, and a 16-year-old with acute appendicitis was told to take Tylenol.",
+      "question": "What were conditions like at Dilley?"
+    },
+    {
+      "_key": "26eab5e92d55c393b5836006d2136e05",
+      "answer": "No. This is part of a pattern. The Trump administration previously deported Kilmar Abrego Garcia to El Salvador despite a court order barring his deportation.",
+      "question": "Is this the first time ICE has ignored court orders?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "ICE re-arrest",
+    "Egyptian family",
+    "Dilley detention center",
+    "court orders ignored",
+    "Trump administration immigration",
+    "due process violation",
+    "family detention",
+    "immigration rights"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Family photo of the Egyptian mother Hayam El Gamal and her five children who were held at the Dilley detention center",
+    "asset": {
+      "_ref": "image-4e22040191a607f1b0a9097d4e2066400b1d7421-2560x1688-webp",
+      "_type": "reference"
+    },
+    "caption": "The El Gamal family, detained for 10 months at the Dilley ICE facility before their ordered release and subsequent re-arrest"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-03T06:30:00Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "ice-re-arrests-egyptian-family-court-ordered-release"
+  },
+  "tags": [
+    "ice",
+    "immigration",
+    "deportation",
+    "court-orders",
+    "civil-rights",
+    "family-detention"
+  ],
+  "title": "The Courts Said They Were Free. ICE Said They Weren't.",
+  "updatedAt": null,
+  "videoLink": null
+}

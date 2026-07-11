@@ -1,0 +1,71 @@
+{
+  "_id": "article-2111c3b9-b724-4f2e-9fe5-a93193365f45",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "63ff75526b10",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The LECC has finalized its comprehensive investigation into the New South Wales Police Force's utilization of the STMP on children and young people, known as Operation Tepito. The report expresses significant concerns about the STMP's application, highlighting potential unlawful interactions with young individuals. Chief Commissioner Peter Johnson acknowledges the cessation of STMP use by the police force, emphasizing the need for lawful and youth-centric approaches in policing. This targeting of indigenous youth echo tactics used against other indigenous populations in North America. ",
+  "eventDate": "2023-10-30T12:04:00.000Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Law Enforcement Conduct Commission",
+    "NSW Police",
+    "Suspect Targeting Management Plan",
+    "Operation Tepito",
+    "youth policing",
+    "legal framework",
+    "Aboriginal",
+    "Torres Strait Islander",
+    "discriminatory",
+    "police reform",
+    "Chief Commissioner",
+    "Peter Johnson",
+    "surveillance",
+    "state",
+    "racist",
+    "racism",
+    "systemic"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "NSW Police are investigating an incident whereby an officer appears to handcuff and trip an Aboriginal teenager in Surry Hills.",
+    "asset": {
+      "_ref": "image-c1db3a6e9b33a55d199cfcdee69436a5ea75d61c-800x450-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2024-01-03T20:04:14.216Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "operation-tepito-nsw-police-s-suspect-targeting-management-plan-used-to-target-indigenous-youth"
+  },
+  "tags": null,
+  "title": "Operation Tepito: NSW Police's Suspect Targeting Management Plan Used to Target Indigenous Youth",
+  "updatedAt": null,
+  "videoLink": null
+}

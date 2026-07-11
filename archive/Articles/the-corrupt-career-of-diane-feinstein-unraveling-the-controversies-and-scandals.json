@@ -1,0 +1,53 @@
+{
+  "_id": "article-d810ebfe-3639-4251-ac3f-58d3105bcfca",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "925c4ba5d604",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Dianne Feinstein, a prominent name in American politics, has long been marred by controversy. From her early days in San Francisco to her tenure in the Senate, allegations of corruption and scandal have followed her every step. This exploration dives deep into her political odyssey, shedding light on the shadows that have darkened her legacy.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Senator Dianne Feinstein Political Cartoon RBG telling her dont stay too long.",
+    "asset": {
+      "_ref": "image-c73e5dd09294106725a540961b67039d1c562b89-640x427-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-09-29T17:38:00.000Z",
+  "readingTimeMinutes": 11,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-corrupt-career-of-diane-feinstein-unraveling-the-controversies-and-scandals"
+  },
+  "tags": null,
+  "title": "The Corrupt Career of Dianne Feinstein: Unraveling the Controversies and Scandals",
+  "updatedAt": null,
+  "videoLink": null
+}

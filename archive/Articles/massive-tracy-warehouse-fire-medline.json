@@ -1,0 +1,148 @@
+{
+  "_id": "massive-tracy-warehouse-fire-medline-2026-06-16",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-civil-unrest",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A 1-million-square-foot Medline Industries warehouse in Tracy, California was destroyed by fire in 40 minutes after its fire suppression system failed. The blaze — part of a wave of industrial fires across the U.S. — scattered toxic smoke across working-class neighborhoods and disrupted medical supply chains across the western United States.",
+  "eventDate": "2026-06-11T13:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "On June 11, 2026, a fire broke out on the roof of the 1-million-square-foot Medline Industries medical supply warehouse on Promontory Parkway in Tracy, California. The facility's sprinkler system failed to activate, fire hydrants on site had zero water pressure, and the building was fully consumed within 30 to 40 minutes. About 200 firefighters responded, the city declared a local state of emergency, and the blaze burned for multiple days.",
+      "question": "What happened at the Medline facility in Tracy, California?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The fire suppression system — including sprinklers and yard hydrants — was non-functional despite passing a mandated inspection in January. Deputy Chief Brian Bagley confirmed the fire pump room was reading at zero pressure. Combined with high-rack storage, hazardous chemicals, lithium-ion robot batteries, high winds, high temperatures, and low humidity, conditions allowed the fire to spread laterally across the facility in minutes.",
+      "question": "Why did the fire spread so quickly?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "San Joaquin County public health officials confirmed that the smoke contains respiratory irritants, toxic gases, carcinogens, and at least one neurotoxin. Hundreds of lithium-ion warehouse robots burned, releasing hydrogen fluoride gas. Sensitive populations — children, the elderly, and those with respiratory conditions — were advised to stay indoors and seek medical attention if they experienced headaches, dizziness, nausea, or throat irritation.",
+      "question": "What are the health risks from the fire's smoke?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Medline fire is one of at least 165 industrial fires and similar acts documented across the United States in 2026, spanning most states. The independent tracker at warehousefire.watch catalogs the full scope. It follows the Kimberly-Clark arson in Ontario, CA (where a worker cited wages as motive), warehouse fires in Miami Gardens, Queens, Newark, and dozens more across the country. As UnTelevised has documented, these fires reflect a system that pushes infrastructure, equipment, and workers to maximum capacity while underfunding safety.",
+      "question": "How does this fire connect to the broader pattern of warehouse fires in 2026?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Tracy California warehouse fire",
+    "Medline Industries fire 2026",
+    "medical supply warehouse blaze",
+    "fire suppression system failure",
+    "warehouse labor conditions 2026",
+    "industrial fire wave United States",
+    "San Joaquin Valley toxic smoke",
+    "working class infrastructure collapse"
+  ],
+  "leadParagraph": "A massive fire destroyed the 1-million-square-foot Medline Industries medical supply warehouse in Tracy, California on June 11, 2026, after the facility's fire suppression system failed to activate. The blaze — one of the largest warehouse fires in U.S. history — required 200 firefighters, triggered a local state of emergency, scattered toxic smoke containing carcinogens and neurotoxins across nearby communities, and disrupted medical supply chains serving hospitals across the western United States.",
+  "linkedPitch": null,
+  "location": "Tracy, California",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Aerial view of a massive fire engulfing the Medline Industries warehouse in Tracy, California on June 11, 2026. Thick black smoke rises from the burning facility.",
+    "asset": {
+      "_ref": "image-b710568c233e1d3d027e2a014ef36a84e81aa4e7-1240x1654-webp",
+      "_type": "reference"
+    },
+    "caption": "Black smoke pours from the Medline Industries medical supply warehouse in Tracy, California on June 11, 2026. The 1-million-square-foot facility was fully consumed within 40 minutes.",
+    "credit": "Zinus Inc./CBS Sacramento"
+  },
+  "methodology": "Reported using coverage from CBS Sacramento, KCRA 3, ABC7 San Francisco, KTVU, AP News, Los Angeles Times, and official updates from the City of Tracy. Cross-referenced with independent tracker data from warehousefire.watch, the UTM warehouse fire tracking database, and prior reporting on the 2026 industrial fire wave. Air quality and health risk data from San Joaquin County Public Health Services and the San Joaquin Valley Air Pollution Control District.",
+  "needsReview": null,
+  "publishedAt": "2026-06-16T20:00:00.000Z",
+  "readingTimeMinutes": 15,
+  "relatedArticles": [
+    {
+      "_key": "rel-2",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-0",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "nine-fires-seven-days-working-class-verdict",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "the-fire-in-miami-gardens-when-underpaid-workers-meet-cost-cutting-logistics",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "the-fourth-fire-queens",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "amazon-solar-panels-fire-ohio",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "A 1-million-square-foot Medline warehouse in Tracy, CA was destroyed in 40 minutes after its fire suppression system failed. One of at least 165 industrial fires across the U.S. in 2026.",
+    "metaTitle": "Medline Warehouse Fire in Tracy: 1 Million Sq Ft Burned",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "massive-tracy-warehouse-fire-medline"
+  },
+  "tags": [
+    "warehouse-fire",
+    "tracy-california",
+    "medline-industries",
+    "medical-supply",
+    "working-class",
+    "infrastructure-failure",
+    "supply-chain",
+    "labor-safety",
+    "fire-suppression",
+    "toxic-smoke"
+  ],
+  "title": "Massive Fire Destroys Medline Warehouse in Tracy — And the System That Built It",
+  "updatedAt": null,
+  "videoLink": null
+}

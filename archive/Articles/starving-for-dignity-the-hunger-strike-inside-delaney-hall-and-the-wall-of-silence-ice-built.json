@@ -1,0 +1,156 @@
+{
+  "_id": "starving-for-dignity-delaney-hall-hunger-strike",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "32e8726c0430282e938de3a455914c09",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "aa5695432ee73d71360bd074ef005d14",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "bb17b9f034dbb95007546f4ab74fe412",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "bacc1a448b7bc42f901d72dcd3406b24",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Between 300 and 400 detainees at Delaney Hall, a GEO Group-run ICE detention center in Newark, New Jersey, have entered their second week of a hunger and labor strike over worm-infested food, no air conditioning, untreated illness, and the denial of medical care to pregnant women — including one who miscarried alone inside the facility. A sitting U.S. senator was pepper-sprayed trying to enter. The governor was turned away. DHS insists everything is fine.",
+  "eventDate": "2026-05-23T12:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Delaney Hall is a 1,000-bed immigration detention center in Newark, New Jersey, operated by the private prison company GEO Group under a 15-year, approximately $1 billion contract with ICE. It reopened in May 2025 after operating as a halfway house until its closure in 2023.",
+      "question": "What is Delaney Hall?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The hunger strikers are demanding improved food, functional ventilation and air conditioning, adequate medical care including for pregnant women, due process for their immigration cases, the release of detainees without criminal records, and an end to retaliation against those who speak out.",
+      "question": "What are the detainees demanding?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "New Jersey Governor Mikie Sherrill was denied entry on Monday, May 26. Rep. Rob Menendez waited over 12 hours and was refused. State health inspectors were given only limited access on Thursday. However, a NY congressional delegation and Sen. Cory Booker were permitted to enter on Tuesday and Wednesday.",
+      "question": "Who has been denied access to the facility?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "DHS Secretary Markwayne Mullin has denied that a hunger strike is occurring and claimed there are 'no subprime conditions.' He called Democratic officials' visits 'political stunts' and accused them of 'spreading smears.' ICE has transferred strike organizers in violation of court orders and cut off family visitation.",
+      "question": "What has the Trump administration's response been?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Multiple advocacy organizations reported that ICE agents attacked hunger-striking detainees with batons and tear gas. Family members received phone calls from inside reporting screaming, unconscious detainees, and blood on surfaces. DHS acknowledged an 'incident' but claimed minimum force was used and no serious injuries occurred.",
+      "question": "What happened on May 28 inside the facility?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Delaney Hall hunger strike",
+    "ICE detention New Jersey",
+    "Delaney Hall conditions",
+    "GEO Group immigration",
+    "Andy Kim pepper spray",
+    "Martin Soto Delaney Hall",
+    "Delaney Hall protest",
+    "ICE hunger strike Newark",
+    "immigration detention human rights"
+  ],
+  "leadParagraph": "Between 300 and 400 detainees at Delaney Hall, a GEO Group-operated ICE detention center in Newark, NJ, have been on hunger and labor strike since May 23 over inhumane conditions including worm-infested food, no air conditioning, denied medical care for pregnant women, and a miscarriage that occurred without medical support. Elected officials including the governor have been denied entry, while a senator was pepper-sprayed during protests.",
+  "linkedPitch": null,
+  "location": "Newark, New Jersey",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Silhouette of a person visible through a window behind a razor-wire fence, with HUNGER STRIKE projected above him.",
+    "asset": {
+      "_ref": "image-3e5cba9481c8a77d6871e1b53ba387d3ea6ee8aa-1000x666-webp",
+      "_type": "reference"
+    },
+    "caption": "A person believed to be a detainee waves from a window inside Delaney Hall immigration detention center while ICE agents stand guard, Newark, New Jersey, May 25, 2026.",
+    "credit": "Reuters/Julius Constantine Motal"
+  },
+  "methodology": "Reported using open-source intelligence including on-scene reporting from The Guardian, Gothamist, CBS New York, WHYY, CNN, ABC7, NBC, TIME, The Independent, and the American Immigration Council. Congressional statements from Sen. Andy Kim, Sen. Cory Booker, Rep. Rob Menendez, and Gov. Mikie Sherrill. Advocacy organizations including ACLU-NJ, Make the Road New Jersey, and the New Jersey Alliance for Immigrant Justice. DHS official statements. Reporting period: May 23–30, 2026.",
+  "needsReview": null,
+  "publishedAt": "2026-05-30T19:04:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "97394dabeeeb",
+      "_ref": "siege-of-delaney-hall-protests-clashes-families",
+      "_type": "reference"
+    },
+    {
+      "_key": "e9b07f7e",
+      "_ref": "ice-re-arrests-egyptian-family-court-ordered-release",
+      "_type": "reference"
+    },
+    {
+      "_key": "93f479e2",
+      "_ref": "immigration-detention-system-expansion-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "6832ee7b",
+      "_ref": "ny-prison-strike-forgotten-by-design-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "82569f46",
+      "_ref": "veterans-arrested-protesting-iran-war",
+      "_type": "reference"
+    },
+    {
+      "_key": "d6927a4b",
+      "_ref": "burlington-ice-arrests-liberal-radical-shift-2026-04-29",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "starving-for-dignity-the-hunger-strike-inside-delaney-hall-and-the-wall-of-silence-ice-built"
+  },
+  "tags": [
+    "ICE",
+    "Delaney Hall",
+    "hunger strike",
+    "immigration detention",
+    "New Jersey",
+    "GEO Group",
+    "human rights",
+    "civil unrest",
+    "Markwayne Mullin",
+    "Mikie Sherrill"
+  ],
+  "title": "Starving for Dignity: The Hunger Strike Inside Delaney Hall and the Wall of Silence ICE Built Around It",
+  "updatedAt": null,
+  "videoLink": null
+}

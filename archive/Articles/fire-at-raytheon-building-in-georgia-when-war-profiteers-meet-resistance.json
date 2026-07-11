@@ -1,0 +1,109 @@
+{
+  "_id": "raytheon-building-fire-warner-robins-georgia-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "civil-unrest",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A fire at the Raytheon Company building in Warner Robins, Georgia, is part of a growing pattern of attacks on symbols of American power and capitalism. The target is unmistakable: one of the world's largest arms manufacturers, supplying bombs for wars abroad while the working class at home struggles to survive.",
+  "eventDate": "2026-04-13T01:00:00-04:00",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "Just after 1:00 a.m. on Monday, April 13, 2026, firefighters responded to a structure fire at the Raytheon Company building at 1230 Carl Vinson Parkway in Warner Robins, Georgia. Smoke poured from the front windows. The building was cleared after crews searched for anyone inside. Firefighters stayed until 4:00 a.m. The Warner Robins Fire Department and Police Department are investigating. No arrests have been made and the cause has not been determined.",
+      "question": "What happened at the Raytheon building in Warner Robins?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "No. This is the fourth major incident in April 2026. First, a Molotov was thrown at OpenAI CEO Sam Altman's home in San Francisco. Then, a warehouse worker set fire to a Kimberly-Clark distribution center in California, causing $600 million in damage. Then, a Molotov was thrown at a Tesla service center in New Orleans. Now, a fire at Raytheon in Georgia. The pattern is clear: targets are symbols of American power, capitalism, and war profiteering.",
+      "question": "Is this an isolated incident?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Raytheon Technologies is a defense and aerospace conglomerate that manufactures weapons, missiles, radar systems, and electronic warfare equipment. It's one of the world's largest arms dealers, supplying the U.S. military and foreign governments including Israel. In Georgia alone, Raytheon has $369.9 million in contracts at Robins Air Force Base. For anti-war activists and those frustrated with military spending, Raytheon is a symbol of the war machine that destroys lives abroad while draining resources from working people at home.",
+      "question": "What is Raytheon and why would it be a target?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The Raytheon building is located on Carl Vinson Parkway in Warner Robins, home to Robins Air Force Base — the largest single-site industrial complex in Georgia, employing nearly 24,000 people. Raytheon is a major mission partner at the base with $369.9 million in contracts. The Warner Robins Air Logistic Complex and Robins AFB form the largest industrial complex in the state. This makes the Raytheon building part of a massive defense infrastructure in Georgia.",
+      "question": "What's the connection to Robins Air Force Base?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "The fire at Raytheon represents the intersection of two crises: the crisis of endless war and the crisis of economic inequality. It's a response to a system that pours resources into war while neglecting the needs of working people at home. Every dollar spent on Raytheon's weapons is a dollar not spent on housing, healthcare, or education. The attack is a statement about a system that values profit over people and war over peace — a warning that the pressure is building and that people are finding new ways to resist.",
+      "question": "What are the broader implications of this fire?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "raytheon",
+    "war-protest",
+    "anti-war",
+    "georgia",
+    "civil-unrest",
+    "warner-robins",
+    "defense-contractor",
+    "arms-manufacturer",
+    "class-warfare",
+    "economic-desperation",
+    "gaza-genocide",
+    "iran-war"
+  ],
+  "leadParagraph": "Just after 1:00 a.m. on April 13, 2026, firefighters in Warner Robins, Georgia, responded to a fire at the Raytheon Company building. The target is unmistakable: one of the world's largest arms manufacturers. The fire is part of a growing pattern of resistance against war profiteering and economic exploitation.",
+  "linkedPitch": null,
+  "location": "Warner Robins, Georgia",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Drone aerial view of a warehouse fire with thick smoke and visible flames. Representative image of the type of fire that occurred at the Raytheon building in Warner Robins, Georgia on April 13, 2026.",
+    "asset": {
+      "_ref": "image-0879b4eda501d4931b337dc9cb8b1a7590ffba99-640x360-webp",
+      "_type": "reference"
+    },
+    "caption": "Representative image: Drone footage of a warehouse fire. The Raytheon building in Warner Robins, Georgia experienced a similar fire on April 13, 2026, with smoke visible from front windows.",
+    "credit": "CBS News (representative image)"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-16T00:00:00Z",
+  "readingTimeMinutes": 7,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "_type": "seo",
+    "description": "A fire at Raytheon in Warner Robins is part of a pattern of resistance against war profiteering. One of the world's largest arms manufacturers targeted.",
+    "title": "Raytheon Building Fire Georgia: War Profiteers Meet Resistance"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "fire-at-raytheon-building-in-georgia-when-war-profiteers-meet-resistance"
+  },
+  "tags": [
+    "raytheon",
+    "war-protest",
+    "anti-war",
+    "georgia",
+    "civil-unrest"
+  ],
+  "title": "Fire at Raytheon Building in Georgia: When War Profiteers Meet Resistance",
+  "updatedAt": null,
+  "videoLink": null
+}

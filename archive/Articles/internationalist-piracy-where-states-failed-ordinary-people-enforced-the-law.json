@@ -1,0 +1,141 @@
+{
+  "_id": "gaza-flotilla-diverts-msc-maya-weapons-ship",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "For the first time in history, civilians forced a 400-meter cargo ship carrying steel for Israeli weapons to change course. The Global Sumud Flotilla's unprecedented action proves the war machine can be disrupted — not by governments, but by people.",
+  "eventDate": "2026-04-20T12:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "The Global Sumud Flotilla is the largest humanitarian flotilla in history, consisting of dozens of boats and hundreds of participants from 70 countries. It launched from Catalonia on April 12, 2026, to break Israel's blockade of Gaza and deliver humanitarian aid. This is the third Global Sumud Flotilla.",
+      "question": "What is the Global Sumud Flotilla?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "On April 20, 2026, more than a dozen vessels from the flotilla encircled the MSC Maya — a 400-meter mega-cargo ship flying the Panamanian flag — in international waters. The flotilla transmitted a message to the crew and forced the ship to change course, disrupting its delivery of high-quality alloy steel destined for the manufacture of heavy artillery in Israel.",
+      "question": "What happened to the MSC Maya?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "This is the first time in history that civilians, workers, and activists carried out an action on the high seas to disrupt a state's military operations. It proves that the war machine's supply chain can be disrupted — not by governments, but by ordinary people. It's a proof of concept and blueprint for future actions.",
+      "question": "Why is this action significant?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "An investigation by Al Jazeera and the Palestinian Youth Movement revealed that MSC facilitated at least 957 shipments of goods from Israeli settlements to the US between January and November 2025. Of those, 529 transited through European ports. MSC is described as \"a key logistical hub for the Israeli occupation's military apparatus\" and transports steel used in the manufacture of heavy artillery.",
+      "question": "What is MSC's role in the genocide?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The flotilla uses the term 'internationalist piracy' to describe their action, reclaiming a word typically associated with criminality. As they put it: \"Where states have failed to uphold international law, ordinary people have stepped in to enforce it.\" The action frames civilians as enforcers of international law when governments refuse to do so.",
+      "question": "What is 'internationalist piracy'?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "gaza-genocide",
+    "palestine",
+    "global-sumud-flotilla",
+    "msc-maya",
+    "internationalist-piracy",
+    "direct-action",
+    "israeli-weapons",
+    "civil-disobedience",
+    "maritime-protest",
+    "bds-movement",
+    "nonviolent-resistance",
+    "mediterranean-sea",
+    "weapons-ship",
+    "genocide-supply-chain"
+  ],
+  "leadParagraph": "On April 20, 2026, more than a dozen vessels from the Global Sumud Flotilla encircled the MSC Maya — a 400-meter mega-cargo ship — in international waters, forcing it to divert from its course to Israeli ports. It was the first civilian maritime intervention in history to disrupt a state's military supply chain.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Maritime radar image and composite photo showing multiple small vessels from the Global Sumud Flotilla encircling the massive MSC Maya container ship in the Mediterranean Sea, forcing it to change course",
+    "asset": {
+      "_ref": "image-0f4502879917430509a97f6bc0d05df1a5fcf9f1-736x417-webp",
+      "_type": "reference"
+    },
+    "caption": "The Global Sumud Flotilla's civilian vessels surround the MSC Maya, a 400-meter mega-cargo ship, in the Mediterranean Sea on April 20, 2026, forcing it to change course and disrupting its delivery of steel for Israeli weapons production.",
+    "credit": "Global Sumud Flotilla"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-24T03:00:00.000Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": [
+    {
+      "_key": "1dbb1eb15df8",
+      "_ref": "west-bank-burning-organized-settler-violence-state-backing-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "43b70ff715fc",
+      "_ref": "tebnine-hospital-israel-lebanon-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "93c9f8793529",
+      "_ref": "4fsnkgml63i",
+      "_type": "reference"
+    },
+    {
+      "_key": "33316b146af3",
+      "_ref": "c9yzsqzw5ic",
+      "_type": "reference"
+    },
+    {
+      "_key": "13443875ccb8",
+      "_ref": "palestine-action-uk-zionist-lobby-israeli-embassy-interference",
+      "_type": "reference"
+    },
+    {
+      "_key": "e491e1ae9b6f",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "internationalist-piracy-where-states-failed-ordinary-people-enforced-the-law"
+  },
+  "tags": [
+    "gaza-genocide",
+    "palestine",
+    "flotilla",
+    "internationalist-piracy",
+    "direct-action"
+  ],
+  "title": "Internationalist Piracy: Where States Failed, Ordinary People Enforced the Law",
+  "updatedAt": null,
+  "videoLink": null
+}

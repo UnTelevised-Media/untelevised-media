@@ -1,0 +1,143 @@
+{
+  "_id": "gaza-city-strikes-tent-camp-family-wiped-out",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "GKqeDBYI5n6Pccwo1k1DI2",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "GKqeDBYI5n6Pccwo1k1DM9",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "In 72 hours, Israel killed at least 18 Palestinians in Gaza: a drone strike on a tent sheltering displaced families, simultaneous airstrikes wiping out entire families in their apartments, and naval fire that killed a 15-year-old fisherman. All of this during what the world calls a ceasefire.",
+  "eventDate": "2026-06-06T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "An Israeli drone struck a tent sheltering displaced Palestinians near Al-Rimal Boys' School in Gaza City, killing at least eight people and wounding more than 15, most of them children. A six-year-old girl, Mariam Abdullah Qaddoum, was among the dead.",
+      "question": "What happened in Gaza City on June 6, 2026?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Israel carried out simultaneous airstrikes on four residential apartments across Gaza City — in Sheikh Radwan, Al-Shati, and Tel al-Hawa — killing nine Palestinians and wounding 15. The Attaya family was found charred in the Abu Al-Amin area, and another family was completely wiped out except for a nine-year-old girl.",
+      "question": "What happened during the strikes on June 4, 2026?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Muhammad Musa Abu Giab, a 15-year-old fisherman from Deir al-Balah, was shot and killed by Israeli warships while fishing off the coast of central Gaza on June 7, 2026.",
+      "question": "Who was the 15-year-old fisherman killed by Israeli naval fire?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Israel has maintained that its strikes target military infrastructure, but the overwhelming majority of those killed in these attacks were women, children, and displaced civilians sheltering in tents and residential buildings. The so-called ceasefire has not stopped the bombing, the killing, or the destruction of civilian infrastructure.",
+      "question": "How can Israel claim there is a ceasefire while killing civilians?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Gaza drone strike tent camp",
+    "Israel naval fire Gaza fisherman",
+    "Gaza City airstrikes family wiped out",
+    "ceasefire violations Gaza 2026",
+    "Palestinian children killed Gaza",
+    "Israeli bombardment Gaza City June 2026",
+    "Muhammad Abu Giab fisherman killed",
+    "Gaza displaced tent strike"
+  ],
+  "leadParagraph": "In the span of three days during a so-called ceasefire, Israeli forces killed at least 18 Palestinians across Gaza: eight displaced people — including children — when a drone struck their tent near a school in Gaza City; nine more across four simultaneous apartment strikes that erased an entire family; and a 15-year-old fisherman shot dead by Israeli warships while trying to feed his community. This is not peace. This is genocide with a press release.",
+  "linkedPitch": null,
+  "location": "Gaza City / Deir al-Balah, Gaza, Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Tents burning after drone strike by IOF.",
+    "asset": {
+      "_ref": "image-d262f16c892ea5d3a548de2c6953a8a21a5372b5-1043x716-webp",
+      "_type": "reference"
+    },
+    "caption": "Palestinians mourn over the bodies of those killed in Israeli airstrikes on Gaza City. Nine Palestinians were killed and entire families erased in simultaneous strikes on four residential apartments.",
+    "credit": "AFP"
+  },
+  "methodology": "Reported using verified eyewitness accounts from Gaza Civil Defense and WAFA, cross-referenced across Al Jazeera, Middle East Eye, Middle East Monitor, CounterCurrents, Drop Site News, Reuters, and AFP. Casualty figures verified through Gaza Health Ministry and field hospital reports. All three events confirmed by multiple independent sources.",
+  "needsReview": null,
+  "publishedAt": "2026-06-15T21:30:00.000Z",
+  "readingTimeMinutes": 7,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "salah-akram-gaza-is-shrinking",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "four-apartments-nine-martyrs-one-girl-left-alive-israel-ceasefire-gaza-june-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "menna-allah-abu-labda",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "iran-israel-ceasefire-dead-direct-exchange-june-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "handala-leaks-israeli-navy-officers-sumud-flotilla",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "In 72 hours during a so-called ceasefire, Israel killed 18 Palestinians: a drone strike on a tent camp, apartment strikes that erased families, and naval fire that killed a 15-year-old fisherman.",
+    "metaTitle": "Israel Bombs Tent Camp, Wipes Out Family, Kills Teen at Sea in Gaza",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "israel-bombs-a-tent-camp-wipes-out-a-family-kills-a-child-at-sea-this-is-the-ceasefire"
+  },
+  "tags": [
+    "Gaza",
+    "Israel",
+    "Ceasefire",
+    "Drone Strike",
+    "Naval Fire",
+    "Tent Camp",
+    "Palestinians",
+    "Genocide",
+    "Gaza City",
+    "Fishermen"
+  ],
+  "title": "Israel Bombs a Tent Camp. Wipes Out a Family. Kills a Child at Sea. This Is the \"Ceasefire.\"",
+  "updatedAt": null,
+  "videoLink": null
+}

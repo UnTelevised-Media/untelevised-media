@@ -1,0 +1,34 @@
+{
+  "slug": "usd18-3-trillion-and-counting-how-billionaire-wealth-reaches-record-heights-while-the-world",
+  "totalImages": 3,
+  "downloadedAt": "2026-07-11T07:40:11.076Z",
+  "images": [
+    {
+      "index": 0,
+      "alt": "Chart from the World Inequality Report 2026 showing persistent and increasing extreme wealth inequality globally",
+      "caption": "Chart showing extreme wealth inequality is persistent and increasing globally",
+      "credit": "World Inequality Report 2026 / World Inequality Database",
+      "asset": "image-1ecc980e212cb1299193933345a9a1b14b70a66c-2560x1739-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Protesters demonstrate outside the World Economic Forum in Davos against billionaire wealth and inequality",
+      "caption": "Protesters gather outside the World Economic Forum in Davos demanding action on wealth inequality",
+      "credit": "Reuters",
+      "asset": "image-5f620eaf27dfc23df8d093e98b85144eb4211726-1080x720-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Global hunger and food insecurity affecting communities, with one in four people worldwide unable to regularly access enough food",
+      "caption": "Global hunger and food insecurity affect one in four people worldwide",
+      "credit": "Earth.org",
+      "asset": "image-5b5d4fcbb93ab03153f7060d800b3ca0102a5077-1024x683-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    }
+  ]
+}

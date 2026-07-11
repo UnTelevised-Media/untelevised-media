@@ -1,0 +1,67 @@
+{
+  "_id": "article-c25900e9-1347-402a-bcd0-0450ee151a05",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "abce65d3ccb4",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israel has announced a significant troop withdrawal from the Gaza Strip, marking a potential shift in its strategy against Hamas. The move comes amid growing international pressure and economic strains caused by the prolonged conflict. Some analysts suggest this withdrawal signals a transition to a more targeted approach, aligning with U.S. recommendations for a focused war on high-value Hamas targets. While others view it as the open stages of an Israeli exit strategy.",
+  "eventDate": "2024-01-01T11:04:50.509Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Israel",
+    "Troop Withdrawal",
+    "Gaza Conflict",
+    "Hamas",
+    "United States",
+    "Military Strategy",
+    "Houthi",
+    "Hezbollah",
+    "Lebanon",
+    "Yemen",
+    "Iran",
+    "Middle East",
+    "Conflict"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Israeli soldiers are seen in the Shejaia district of Gaza city - Dec 8th, 2023 [Yossi Zeliger Reuters]",
+    "asset": {
+      "_ref": "image-faab33105ca69f9e58c8423835d1327368ef3c34-780x439-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2024-01-01T22:14:47.828Z",
+  "readingTimeMinutes": 6,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "israel-initiates-large-troop-withdrawal-from-gaza-as-resistance-intensifies-on-all-fronts"
+  },
+  "tags": null,
+  "title": "Israel Initiates Large Troop Withdrawal from Gaza as Resistance Intensifies on All Fronts",
+  "updatedAt": null,
+  "videoLink": null
+}

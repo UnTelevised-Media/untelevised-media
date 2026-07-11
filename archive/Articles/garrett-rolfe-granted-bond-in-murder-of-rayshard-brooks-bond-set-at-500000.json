@@ -1,0 +1,110 @@
+{
+  "_id": "YaIZHdH8q4wcGB79HQ5Syk",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "YaIZHdH8q4wcGB79HQIizB",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "YaIZHdH8q4wcGB79HQIj0i",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "94ff1f0771dc",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Today Fulton County Superior Court Judge Jane Barwick granted bond to former officer Garrett Rolfe in the murder of Atlanta father Rayshard Brooks. Judge Barwick set bond at $500,000, with the conditions that Rolfe be placed upon an ankle monitor with a 6am-6pm curfew, Rolfe must surrender both his passport as well as all weapons, Rolfe is not to in anyway tamper with evidence, or have contact with any other Atlanta police officer. Rolfe's file shows 12 other incidents, one in which he discharged his weapon in 2015 which had no conclusion listed in his file. Rolfe faces the death penalty if convicted of the charges he faces.",
+  "eventDate": "2020-06-30T00:00:00Z",
+  "faqs": [
+    {
+      "_key": "k9sg59",
+      "_type": "faqItem",
+      "answer": "Rayshard Brooks was a 27-year-old Black man shot and killed by Atlanta police officer Garrett Rolfe on June 12, 2020, at a Wendy's drive-through. His death became a flashpoint for national protests demanding police accountability and justice.",
+      "question": "Who is Rayshard Brooks and why is his case significant?"
+    },
+    {
+      "_key": "kau4uk",
+      "_type": "faqItem",
+      "answer": "Brooks was asleep in his car at a Wendy's drive-through. When police arrived, a struggle ensued. Brooks ran from police, and officer Garrett Rolfe shot him in the back while Brooks was fleeing. The shooting sparked immediate outrage and large-scale protests in Atlanta.",
+      "question": "What were the circumstances of Rayshard Brooks' death?"
+    },
+    {
+      "_key": "kbnwn3",
+      "_type": "faqItem",
+      "answer": "Garrett Rolfe was charged with murder and released on a $500,000 bond, allowing him to remain free while awaiting trial. The relatively low bond (some believed it should be higher) for a murder charge sparked further protests and criticism of the justice system.",
+      "question": "What does the $500,000 bond mean for Garrett Rolfe?"
+    },
+    {
+      "_key": "kcl0a3",
+      "_type": "faqItem",
+      "answer": "The killing contributed to nationwide calls for police reform and defunding. It sparked protests in Atlanta and across the country, reinvigorated the Black Lives Matter movement, and led to demands for accountability and changes in police use-of-force policies.",
+      "question": "What was the broader impact of the Rayshard Brooks shooting?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Rayshard Brooks",
+    "Garrett Rolfe",
+    "Atlanta police shooting",
+    "police violence",
+    "murder charge",
+    "bond hearing",
+    "police accountability",
+    "June 2020",
+    "Black Lives Matter",
+    "criminal justice"
+  ],
+  "leadParagraph": "Today Fulton County Superior Court Judge Jane Barwick granted bond to former officer Garrett Rolfe in the murder of Atlanta father Rayshard Brooks. Judge Barwick set bond at $500,000, with the conditions that Rolfe be placed upon an ankle monitor with a 6am-6pm curfew, Rolfe must surrender both his passport as well as all weapons, Rolfe is not to in anyway tamper with evidence, or have contact wit",
+  "linkedPitch": null,
+  "location": "Atlanta, Georgia",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Tomika Miller widow of Brook's during her victim impact statement at the hearing",
+    "asset": {
+      "_ref": "image-991619648b15bbc9be447a85759b555789311154-579x386-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website and has been migrated to UnTelevised Media. This article was written using information obtained from transcripts of the hearing in combination with video reporting from Now This News and Article from The Atlanta Journal-Constitution",
+  "needsReview": false,
+  "publishedAt": "2020-06-30T12:00:00Z",
+  "readingTimeMinutes": 5,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "garrett-rolfe-granted-bond-in-murder-of-rayshard-brooks-bond-set-at-500000"
+  },
+  "tags": [
+    "atlanta",
+    "police-shooting",
+    "rayshard-brooks",
+    "garrett-rolfe",
+    "murder-charge",
+    "2020",
+    "criminal-justice"
+  ],
+  "title": "Garrett Rolfe Granted Bond in Murder of Rayshard Brooks. Bond Set at $500,000",
+  "updatedAt": null,
+  "videoLink": null
+}

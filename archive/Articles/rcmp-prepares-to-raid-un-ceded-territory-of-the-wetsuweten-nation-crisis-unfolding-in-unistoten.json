@@ -1,0 +1,107 @@
+{
+  "_id": "ar2019-rcmp-wetsuweten-raid",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "f46eb3f7-0006-4919-b64b-0ad526ebd1ee",
+      "_ref": "f46eb3f7-0006-4919-b64b-0ad526ebd1ee",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "RCMP has been working through the night and morning to prepare a massive law enforcement mobilization to the Unist'ot'en & Gidimt'en checkpoints of the Wet'suwet'en Nation located in so called British Colombia. B.C. Supreme Court Justice Marguerite Church expanded an injunction to include the Gidimt'en checkpoint. With this Injunction update RCMP's indicated that specially trained tactical forces will be deployed to forcibly remove Wet'suwet'en people from sovereign Wet'suwet'en territory. The RCMP's ultimatum, to allow TransCanada access to un-ceded Wet'suwet'en territory or face police invasion, is nothing short of an act of war on the sovereign, un-ceded nation.",
+  "eventDate": "2019-01-07T23:30",
+  "faqs": [
+    {
+      "_key": "faq3a",
+      "answer": "The Wet'suwet'en are an Indigenous nation of north-central British Columbia whose sovereignty over their unceded territory was affirmed by Canada's Supreme Court in the 1997 Delgamuukw decision. They have never signed treaties with Canada or sold their lands.",
+      "question": "Who are the Wet'suwet'en and why does their territory matter?"
+    },
+    {
+      "_key": "faq3b",
+      "answer": "A B.C. Supreme Court injunction, expanded to include the Gidimt'en checkpoint, gave TransCanada legal cover to access Wet'suwet'en territory for the Coastal GasLink pipeline. The RCMP was mobilizing with tactical forces to enforce this injunction by forcibly removing land defenders.",
+      "question": "Why were the RCMP mobilizing against the Wet'suwet'en in January 2019?"
+    },
+    {
+      "_key": "faq3c",
+      "answer": "The Hereditary Chiefs stated that the RCMP's ultimatum was nothing short of an act of war and a violation of human rights. They declared the threat to be an extension of the genocide that Wet'suwet'en people have survived since colonization, and affirmed they would not surrender their sovereignty.",
+      "question": "What did the Wet'suwet'en Hereditary Chiefs say in response to the RCMP threat?"
+    },
+    {
+      "_key": "faq3d",
+      "answer": "A call to action for an international day of solidarity went out from the Wet'suwet'en people, with solidarity actions planned at over 40 locations around the globe as the story was still developing.",
+      "question": "What international response did the Wet'suwet'en situation generate?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "RCMP",
+    "Wet'suwet'en",
+    "Wetsuweten",
+    "Unist'ot'en",
+    "Unistoten",
+    "Gidimt'en",
+    "Indigenous Rights",
+    "Pipeline",
+    "TransCanada",
+    "Coastal GasLink",
+    "British Columbia",
+    "OpBlackSnake",
+    "OpNoDAPL",
+    "OpKinderMorgan",
+    "NoAccess",
+    "StandWithUnistoten",
+    "WetsuwetenStrong"
+  ],
+  "leadParagraph": "RCMP has been working through the night and morning to prepare a massive law enforcement mobilization to the Unist'ot'en & Gidimt'en checkpoints of the Wet'suwet'en Nation. The RCMP's ultimatum, to allow TransCanada access to un-ceded Wet'suwet'en territory or face police invasion, is nothing short of an act of war on the sovereign, un-ceded nation.",
+  "linkedPitch": null,
+  "location": "British Columbia, Canada",
+  "mainImage": {
+    "_type": "image",
+    "alt": "RCMP convoy mobilizing toward Wet'suwet'en territory, January 2019",
+    "asset": {
+      "_ref": "image-622bedf39c61b02e4fb17f89482ca5569ded8468-600x400-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2019-01-07T12:00",
+  "readingTimeMinutes": 6,
+  "relatedArticles": [],
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "rcmp-prepares-to-raid-un-ceded-territory-of-the-wetsuweten-nation-crisis-unfolding-in-unistoten"
+  },
+  "tags": [
+    "rcmp",
+    "wetsuweten",
+    "unistoten",
+    "indigenous-rights",
+    "pipeline",
+    "transcanada",
+    "british-columbia",
+    "coastal-gaslink",
+    "land-defenders"
+  ],
+  "title": "RCMP Prepares to Raid Un-Ceded Territory of the Wet'suwet'en Nation: Crisis Unfolding in Unist'ot'en",
+  "updatedAt": "2019-01-07T12:00",
+  "videoLink": ""
+}

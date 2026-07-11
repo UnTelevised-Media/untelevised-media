@@ -1,0 +1,146 @@
+{
+  "_id": "bolivia-militant-resistance",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "civil-unrest",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "world-news",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Indigenous miners, workers, and community defense forces are using highway blockades, dynamite, and general strikes to shut down Bolivia's government. An educational deep-dive into militant popular resistance.",
+  "eventDate": "2026-05-14",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "Two government policies sparked the uprising: a December 2025 decree eliminating fuel subsidies that doubled fuel prices, and Law 1720 in April 2026 which reclassified Indigenous agricultural land as medium properties eligible for bank seizure. Indigenous communities and workers saw both as attacks on their survival.",
+      "question": "What triggered the Bolivia protests in May 2026?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "The resistance employs highway blockades (67 roads severed, 41 sustained blockade points), general strikes led by the COB labor federation, miner detonations of dynamite near government buildings, community defense by the Red Ponchos (Aymara Indigenous territorial forces), and occupation vigils around government buildings.",
+      "question": "What tactics are Bolivian protesters using?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "The Ponchos Rojos are an Aymara Indigenous community defense force numbering tens of thousands. They are a permanent territorial defense structure rooted in Indigenous self-governance — not an ad-hoc protest group. They have faced off against 3,500 police officers and counter-protesters who burned the Wiphala, Bolivia's Indigenous flag.",
+      "question": "Who are the Red Ponchos?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "President Paz has deployed 3,500 police with tear gas and rubber bullets, arrested over 90 people, killed at least 4 protesters, removed Indigenous symbols like the Wiphala from government buildings, used divide-and-conquer tactics to split union federations, and framed protesters as terrorists and drug traffickers. Vice President Lara has broken with Paz over the violence.",
+      "question": "What has the government done in response?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Yes. The government fully annulled Law 1720 (the land mortgage law), the capital La Paz is functionally paralyzed with government offices closed, demands have escalated from repealing specific laws to demanding the president's resignation, and the government is fracturing internally.",
+      "question": "Has the resistance achieved anything?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "US Secretary of State Marco Rubio has publicly denounced the protests, declaring the US will not allow 'criminals and drug traffickers to overthrow democratically elected leaders.' The government has also released 2019 coup plotters Jeanine Áñez and Luis Fernando Camacho, who were convicted for sedition, terrorism, and crimes against humanity.",
+      "question": "What role is the US playing in the Bolivia crisis?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Bolivia protests 2026",
+    "La Paz blockade",
+    "Red Ponchos Aymara",
+    "Bolivian miners dynamite",
+    "Rodrigo Paz austerity",
+    "COB general strike Bolivia",
+    "Law 1720 land mortgage",
+    "Indigenous resistance South America",
+    "highway blockade tactics",
+    "militant protest methods"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": "La Paz, Bolivia",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Flames rise from a street barricade during clashes between miners and riot police in La Paz, Bolivia, May 2026",
+    "asset": {
+      "_ref": "image-7c375a7ee48774a1c2d6bb08cce6060f05a7a024-3225x2147-webp",
+      "_type": "reference"
+    },
+    "caption": "Flames rise from a barricade as miners clash with riot police during anti-government protests in La Paz, Bolivia, May 2026.",
+    "credit": "Aizar Raldes/AFP via Al Jazeera"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-26T14:56:00.000Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": [
+    {
+      "_key": "7911e5ca826c",
+      "_ref": "may-day-2026-history-anarchist-origins-international-workers-day",
+      "_type": "reference"
+    },
+    {
+      "_key": "7998ccd8c7d8",
+      "_ref": "ny-prison-strike-forgotten-by-design-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "1b1e6f8f9cd3",
+      "_ref": "denver-jbs-strike-authorization",
+      "_type": "reference"
+    },
+    {
+      "_key": "7b2b69fc7f86",
+      "_ref": "france-farmers-criminalized-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "5b436fa151da",
+      "_ref": "may-day-2026-workers-over-billionaires-economic-blackout",
+      "_type": "reference"
+    },
+    {
+      "_key": "3205a75cf379",
+      "_ref": "may-day-2026-global-uprising-workers-over-billionaires",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "bolivia-is-under-siege-and-the-people-built-the-siege"
+  },
+  "tags": [
+    "Bolivia",
+    "militant resistance",
+    "popular uprising",
+    "Indigenous defense",
+    "blockades",
+    "anti-austerity",
+    "Red Ponchos",
+    "general strike",
+    "Rodrigo Paz"
+  ],
+  "title": "Bolivia Is Under Siege — And the People Built the Siege",
+  "updatedAt": null,
+  "videoLink": null
+}

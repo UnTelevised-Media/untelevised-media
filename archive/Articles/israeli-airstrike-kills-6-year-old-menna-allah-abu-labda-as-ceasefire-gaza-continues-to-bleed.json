@@ -1,0 +1,108 @@
+{
+  "_id": "menna-allah-abu-labda",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "gaza-israel-war",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Two Israeli helicopters struck a tent encampment for displaced families in Khan Younis, killing 6-year-old Menna Allah Abu Labda and 31-year-old Hanan Mahmoud. 17 wounded, including a 2-month-old baby with a severed leg. 900 Palestinians killed since the October ceasefire.",
+  "eventDate": "2026-05-25",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "Menna Allah Abu Labda was a 6-year-old Palestinian girl from Khan Younis, Gaza. She was killed on May 25, 2026, when Israeli helicopters struck a tent encampment for displaced families in the Mawasi area. Her name means 'the grace of God.' She was playing at the door of her home when the strike hit.",
+      "question": "Who was Menna Allah Abu Labda?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "Two Israeli helicopters opened fire on a tent encampment for displaced families in the Mawasi area of Khan Younis. The Israeli military told Reuters it had struck militants in the area and provided no further information. No independent verification has been possible because Israel has barred international press from Gaza.",
+      "question": "How did the strike happen?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "31-year-old Hanan Mahmoud was also killed. 17 others were wounded, including children — among them a 2-month-old baby who arrived at Nasser Hospital with a severed leg.",
+      "question": "Who else was killed or wounded?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "According to Gaza health officials, approximately 900 Palestinians have been killed in Israeli strikes since the October 2025 ceasefire brokered by the Trump administration came into effect.",
+      "question": "How many Palestinians have been killed since the ceasefire?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Mawasi is a stretch of coastline in southern Gaza that Israel designated as a 'safe zone' for displaced Palestinians. Hundreds of thousands of families who were ordered to flee their homes now live in tents there with no permanent structures or bomb shelters.",
+      "question": "What is the Mawasi area?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Menna Allah Abu Labda",
+    "Gaza airstrike child killed",
+    "Khan Younis tent camp strike",
+    "Israeli helicopter Gaza",
+    "Mawasi safe zone",
+    "Gaza ceasefire violations",
+    "Nasser Hospital",
+    "Nabil Abu Labda",
+    "Palestinian children killed 2026"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": "Khan Younis, Gaza",
+  "mainImage": {
+    "_type": "image",
+    "alt": "A Palestinian man carries the small shrouded body of a young girl through a hospital corridor during a funeral in Khan Younis",
+    "asset": {
+      "_ref": "image-91196d85a049cc333a2605cb96b54488faa1d0f3-640x427-webp",
+      "_type": "reference"
+    },
+    "caption": "Nabil Abu Labda carries the body of his 6-year-old daughter, Menna Allah Abu Labda, during her funeral at Nasser Hospital in Khan Younis, Gaza Strip, Monday, May 25, 2026.",
+    "credit": "Abdel Kareem Hana/AP"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-26T04:13:00.000Z",
+  "readingTimeMinutes": 5,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "israeli-airstrike-kills-6-year-old-menna-allah-abu-labda-as-ceasefire-gaza-continues-to-bleed"
+  },
+  "tags": [
+    "Gaza",
+    "Israel",
+    "airstrike",
+    "children killed",
+    "Khan Younis",
+    "Menna Allah Abu Labda",
+    "ceasefire",
+    "Mawasi",
+    "displaced families",
+    "war crimes",
+    "Palestine"
+  ],
+  "title": "Israeli Airstrike Kills 6-Year-Old Menna Allah Abu Labda as \"Ceasefire\" Gaza Continues to Bleed",
+  "updatedAt": null,
+  "videoLink": null
+}

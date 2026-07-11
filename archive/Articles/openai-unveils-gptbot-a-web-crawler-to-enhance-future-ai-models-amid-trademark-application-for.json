@@ -1,0 +1,47 @@
+{
+  "_id": "article-45344345-3aa3-4c4c-96c7-15fea0b5ac8c",
+  "allowComments": null,
+  "author": {
+    "_ref": "dd27a18f-4d78-449d-a2fa-73fa6617816a",
+    "_type": "reference",
+    "name": "Harold Crowe"
+  },
+  "breakingNews": null,
+  "categories": null,
+  "correction": null,
+  "deletionRequest": null,
+  "description": "OpenAI introduces GPTBot, a cutting-edge web crawler poised to propel the next generation of AI models. Delve into the innovation behind GPTBot and its potential to reshape AI dynamics. Explore the intriguing intersection as OpenAI concurrently navigates trademark applications for GPT-5, signaling leaps in AI evolution. Join us in uncovering the synergy between technology and trademark, as we set the stage for AI advancement like never before.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "An AI robot looks at a futuristic computer system",
+    "asset": {
+      "_ref": "image-de3a51c634f1cb5534f6ffb4abc5712150ce6875-6000x4000-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-08-23T00:34:00.000Z",
+  "readingTimeMinutes": 3,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "openai-unveils-gptbot-a-web-crawler-to-enhance-future-ai-models-amid-trademark-application-for"
+  },
+  "tags": null,
+  "title": "OpenAI Unveils GPTBot: A Web Crawler to Enhance Future AI Models, Amid Trademark Application for GPT-5",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,138 @@
+{
+  "_id": "turkey-forgotten-occupation-cyprus-ethnic-cleansing-erdogan-hypocrisy",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "0n0OYCjCnWy5IxG1eKXnzX",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Turkey has occupied northern Cyprus for 50 years, ethnically cleansing Greek Cypriots and importing settlers — while Erdogan condemns Israel for doing the same thing.",
+  "eventDate": "1974-07-20T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "On July 20, 1974, Turkish military forces invaded and occupied 36% of Cyprus, displacing 165,000-200,000 Greek Cypriots. Mass graves were found at Maratha, Sandalaris, and Aloa containing 126 civilians including women and children. 1,491 Greek Cypriots remain missing.",
+      "question": "What happened during Turkey's 1974 invasion of Cyprus?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The ECHR found Turkey guilty of displacement, ill treatment, deprivation of life, and ethnic cleansing. Greek Cypriots in the Karpas peninsula fell from ~20,000 to just 429. The court ordered Turkey to pay 90 million euros in damages, which Turkey refused.",
+      "question": "What did the European Court of Human Rights rule?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Yes. Turkey maintains 30,000-40,000 troops in the occupied north and continues importing mainland Turkish settlers. The TRNC is recognized by no country except Turkey. Multiple UN Security Council resolutions demand Turkish withdrawal.",
+      "question": "Is Turkey still occupying northern Cyprus?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Since 1974, Turkey has systematically transplanted hundreds of thousands of Anatolian settlers into the occupied north. Settlers now constitute roughly half the population, occupying property that legally belongs to displaced Greek Cypriots. The Council of Europe documented this as deliberate policy.",
+      "question": "What is the demographic engineering claim?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "The structural parallels are identical: military invasion, mass displacement, state-directed settlement, property confiscation, defiance of international law. Erdogan condemns Israel while maintaining his own 50-year occupation of Cyprus.",
+      "question": "How does this relate to Israel-Palestine?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Turkey occupation Cyprus",
+    "Erdogan hypocrisy",
+    "ethnic cleansing Cyprus 1974",
+    "TRNC unrecognized",
+    "Greek Cypriot missing persons",
+    "demographic engineering",
+    "Turkish settlers Cyprus",
+    "ECHR ruling Cyprus v Turkey"
+  ],
+  "leadParagraph": "Turkey has occupied northern Cyprus since 1974 — ethnically cleansing 200,000 Greek Cypriots, importing mainland settlers, and defying every international court ruling. Yet President Erdogan stands at the United Nations comparing Netanyahu to Hitler, condemning Israel for the same policies Turkey has practiced for five decades.",
+  "linkedPitch": null,
+  "location": "Cyprus / Turkey",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Bullet holes in buildings in Nicosia from the 1974 Turkish invasion",
+    "asset": {
+      "_ref": "image-0a3f8ebd6bc2558ee9fbfe5a41844acd258f1450-900x675-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Reported using European Court of Human Rights rulings, UN Security Council resolutions, Council of Europe Parliamentary Assembly findings, Reuters, Politico, Greek Reporter, and Times of Israel. All claims cross-referenced with primary legal sources.",
+  "needsReview": null,
+  "publishedAt": "2026-05-29T05:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "israel-colonization-cyprus-settler-enclaves-military-outposts",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "israeli-embryo-trafficking-cyprus-airport",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "smotrich-icc-khan-al-ahmar-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "west-bank-burning-organized-settler-violence-state-backing-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "yinon-plan-greater-israel-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "turkey-s-forgotten-occupation-fifty-years-of-ethnic-cleansing-in-cyprus"
+  },
+  "tags": [
+    "turkey",
+    "cyprus",
+    "ethnic-cleansing",
+    "erdogan",
+    "occupation",
+    "settler-colonialism",
+    "hypocrisy",
+    "ECHR",
+    "UN",
+    "human-rights"
+  ],
+  "title": "Turkey's Forgotten Occupation: Fifty Years of Ethnic Cleansing in Cyprus",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,53 @@
+{
+  "_id": "article-72def6c7-940a-44fd-a6b7-d168dd5e3890",
+  "allowComments": null,
+  "author": {
+    "_ref": "853fcc99-ba9b-45d2-829f-b351cd182779",
+    "_type": "reference",
+    "name": "Dutch Caxton"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "94201e05e5d7",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Amidst a global yearning for justice, the fusion of diverse advocates with the Black Lives Matter movement forms an astonishing narrative of shared struggles. Framed through a Black revolutionary's eyes, this coalition challenges privilege, empowers voices, and catalyzes institutional change. The foundation rests on recognizing common ground, where empathy transcends racial boundaries. The courage to confront privilege fuels equality's dance, while amplified voices form a symphony of inclusion, breaking cycles of silence. This alliance becomes a roaring force against injustice, not just in words, but through transformative actions. Together, white advocates and Black revolutionaries redefine allyship, weaving a tapestry of hope where justice and equality prevail—a testament to the enduring power of unity.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Young Black activist stand alongside wall with fist raised",
+    "asset": {
+      "_ref": "image-6a0b27a425fa9c05dd9f159f12ba4b883f0706ac-1680x1116-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2022-06-22T22:55:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "unified-voices-for-justice-white-advocacy-for-black-lives-through-the-lens-of-a-black"
+  },
+  "tags": null,
+  "title": "Unified Voices for Justice: White Advocacy for Black Lives through the Lens of a Black Revolutionary",
+  "updatedAt": null,
+  "videoLink": null
+}

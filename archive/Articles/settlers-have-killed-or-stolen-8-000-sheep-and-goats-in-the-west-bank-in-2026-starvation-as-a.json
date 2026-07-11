@@ -1,0 +1,146 @@
+{
+  "_id": "west-bank-settlers-8000-sheep-goats-stolen-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israeli settlers have killed or stolen 8,000 sheep and goats and destroyed 41,000 olive trees in the occupied West Bank in 2026, according to the PA Agriculture Ministry. Entire Palestinian farming communities are being driven from their land in a systematic campaign of settler violence enabled by the Israeli military and government.",
+  "eventDate": "2026-06-07T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "According to the Palestinian Authority's Agriculture Ministry spokesperson Mahmud Fatafta, Israeli settlers have killed or stolen 8,000 sheep and goats in the occupied West Bank since January 2026. Approximately 4,000 head of livestock have been stolen outright.",
+      "question": "How many sheep and goats have settlers killed or stolen in the West Bank?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "According to the PA Agriculture Ministry, 41,000 olive trees have been damaged or destroyed by settlers and the Israeli military in 2026. Olive cultivation is central to Palestinian agriculture and cultural identity.",
+      "question": "How many olive trees have been damaged or destroyed?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "According to UN OCHA data, there is an average of six settler attacks per day across the occupied West Bank in 2026. In the Jordan Valley, monthly incidents rose from two per month in 2020 to 27 per month in early 2026.",
+      "question": "How many settler attacks occur daily?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "A 2025 FAO report found that nearly two-thirds of the 72,000 farming and herding families in the occupied West Bank require emergency assistance due to settler violence and Israeli military restrictions.",
+      "question": "How many Palestinian farming families need emergency assistance?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "west bank settlers",
+    "sheep theft",
+    "goats stolen",
+    "olive trees destroyed",
+    "palestinian farmers",
+    "masafer yatta",
+    "settler violence 2026",
+    "ethnic cleansing",
+    "area c west bank",
+    "israeli occupation"
+  ],
+  "leadParagraph": "A systematic campaign of settler violence in the occupied West Bank has killed or stolen 8,000 sheep and goats and destroyed 41,000 olive trees since January 2026, according to the Palestinian Authority's Agriculture Ministry, as Israeli forces facilitate the displacement of Palestinian farming communities from their ancestral lands.",
+  "linkedPitch": null,
+  "location": "West Bank / Occupied Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "A Palestinian woman sitting on the ground next to a damaged vehicle near rural hills in the occupied West Bank",
+    "asset": {
+      "_ref": "image-afa2285c814e41f7295a607c8357b1591154e806-5500x3667-webp",
+      "_type": "reference"
+    },
+    "caption": "Palestinian woman sits near a vehicle damaged in a settler attack in the occupied West Bank, February 2026.",
+    "credit": "Reuters"
+  },
+  "methodology": "Reported using Al-Monitor/AFP, Al Jazeera, Arab News/Reuters, Human Rights Watch, UN OCHA, and B'Tselem documentation. Data sourced from the Palestinian Authority Agriculture Ministry, UN OCHA humanitarian situation reports, and direct testimony from displaced farmers and shepherds.",
+  "needsReview": null,
+  "publishedAt": "2026-06-08T03:00:00.000Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": [
+    {
+      "_key": "1efa0e6e433a",
+      "_ref": "salah-akram-gaza-is-shrinking",
+      "_type": "reference"
+    },
+    {
+      "_key": "dbf01b924f07",
+      "_ref": "salah-akram-the-streets-that-swallow-us",
+      "_type": "reference"
+    },
+    {
+      "_key": "2186a91f1469",
+      "_ref": "jalud-settlers-burn-electricity-cables-west-bank-terror-campaign",
+      "_type": "reference"
+    },
+    {
+      "_key": "6466340f5801",
+      "_ref": "israeli-settlers-attack-west-bank-school-kill-children",
+      "_type": "reference"
+    },
+    {
+      "_key": "06f9093902cc",
+      "_ref": "israel-colonization-cyprus-settler-enclaves-military-outposts",
+      "_type": "reference"
+    },
+    {
+      "_key": "c20bddb236e4",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "settlers-have-killed-or-stolen-8-000-sheep-and-goats-in-the-west-bank-in-2026-starvation-as-a"
+  },
+  "tags": [
+    "settler-violence",
+    "west-bank",
+    "palestine",
+    "livestock-theft",
+    "ethnic-cleansing",
+    "masafer-yatta",
+    "olive-trees",
+    "israel",
+    "agriculture",
+    "displacement"
+  ],
+  "title": "Settlers Have Killed or Stolen 8,000 Sheep and Goats in the West Bank in 2026 — Starvation as a Weapon",
+  "updatedAt": null,
+  "videoLink": null
+}

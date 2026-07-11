@@ -1,0 +1,151 @@
+{
+  "_id": "jake-lang-exposed",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "46339befe81c",
+      "_ref": "048b3a77-f32f-4267-a2ae-0346d0bf80f1",
+      "_type": "reference"
+    },
+    {
+      "_key": "153c002aa5e1",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Since being pardoned for his role in the January 6 Capitol attack, far-right agitator Jake Lang has traveled America staging racist provocations in Muslim and Black communities. UnTelevised investigates the man behind the hate tour — his Jewish heritage, IDF family ties, shadowy funding, and the unanswered question: who is paying for this?",
+  "eventDate": "2026-06-30T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Edward Jacob 'Jake' Lang is a far-right agitator and failed vape salesman from Narrowsburg, New York, who participated in the January 6 Capitol attack, served nearly four years in federal prison, and was pardoned by Donald Trump on his first day back in office in January 2025. Since his release, Lang has traveled across America staging racist and anti-Muslim provocations, leading to at least six arrests in multiple states.",
+      "question": "Who is Jake Lang?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Lang has been charged with felony property destruction (Minnesota), terroristic threats (Texas), contempt of court (Tennessee), possession of a controlled substance (Michigan), criminal trespass (Texas), and threatening a police officer (Washington, D.C.). He has been held on $1 million bond and sentenced to 10 days in jail, but has been released each time and continues to travel the country.",
+      "question": "What charges has Jake Lang faced since his pardon?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Lang has a Jewish mother, celebrated his bar mitzvah at the Western Wall in Jerusalem, and his sister reportedly served in the Israeli Defense Forces. He now publicly renounces Judaism and presents himself as a white Christian nationalist. His former J6 cellmate Tim Hale called him 'a plant' and a 'rat and a fraud,' while Michigan Republican candidate Anthony Hudson publicly labeled him a Zionist agitator.",
+      "question": "What are Jake Lang's connections to Israel and Zionism?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "This remains unanswered. Lang raised significant sums through GiveSendGo crowdfunding for J6 defendants while in prison, with reports suggesting over $1 million flowed through these campaigns. However, the travel, legal representation across multiple states, camera crews, rented trucks, props, and media infrastructure far exceed what a failed vape salesman with minimal campaign contributions could generate. No mainstream outlet has traced the full funding network.",
+      "question": "Who is funding Jake Lang's cross-country provocations?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "NAPALM stands for the North American Patriot and Liberty Militia, an armed nationwide militia network Lang founded from his prison cell in 2024 using Telegram. Its leadership council included QAnon promoter Ann Vandersteel, Cowboys for Trump leader Couy Griffin, and antisemitic podcaster Stew Peters. Independent researchers estimated membership at 2,500, far below Lang's claims of 20,000. The group drew a Congressional inquiry demanding FBI investigation.",
+      "question": "What is NAPALM?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Jake Lang",
+    "Jake Lang January 6",
+    "Jake Lang pardoned",
+    "Jake Lang arrest",
+    "Jake Lang Israel",
+    "Jake Lang BET Awards",
+    "Jake Lang Dearborn",
+    "Jake Lang terroristic threat",
+    "Jake Lang NAPALM militia",
+    "Jake Lang Jewish heritage"
+  ],
+  "leadParagraph": "Pardoned January 6 rioter Jake Lang has been arrested at least six times since Donald Trump wiped his criminal record clean in January 2025. He has burned Qurans outside mosques, threatened to lynch a Black teenager on trial, waved Nazi salutes at AIPAC, crashed the BET Awards with racist signs, and faced terroristic threat charges with a $1 million bond. Each time, he walks free and moves to the next city. UnTelevised Media investigates the Jewish provocateur with IDF family ties, shadowy funding sources, and a cross-country operation designed to incite racial violence across America.",
+  "linkedPitch": null,
+  "location": "United States (multiple cities: Los Angeles, Dallas, Minneapolis, New York, Dearborn, Clarksville)",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Jake Lang carrying racist signs outside the BET Awards venue in Los Angeles on June 28, 2026, before being confronted and chased away by the crowd",
+    "asset": {
+      "_ref": "image-417469abf44366fd5529ba472d9098ff40b6793b-2048x1151-webp",
+      "_type": "reference"
+    },
+    "caption": "Jake Lang arrives outside the Peacock Theater in Los Angeles for the BET Awards on June 28, 2026, carrying signs reading 'Black Parents Are Failures' before being driven away by an angry crowd",
+    "credit": "Complex via Getty Images"
+  },
+  "methodology": "Reported using verified court records, DOJ indictment documents, FEC campaign finance filings, law enforcement reports, 27 independent media sources including WIRED, NBC News, CBS News, the Dallas Morning News, Unicorn Riot, the Pocono Review, and the SPLC. Social media posts verified against archived captures. Multiple eyewitness accounts cross-referenced. All claims supported by at least 2-3 independent sources.",
+  "needsReview": null,
+  "publishedAt": "2026-07-01T04:00:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "01f048bcbc8e",
+      "_ref": "trump-ballroom-donors-50b-federal-contracts",
+      "_type": "reference"
+    },
+    {
+      "_key": "bde15c203865",
+      "_ref": "trump-pardons-corrupt-officials-dismantles-justice-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "f1dc54821a90",
+      "_ref": "trump-anti-weaponization-fund-heist",
+      "_type": "reference"
+    },
+    {
+      "_key": "6398d284d149",
+      "_ref": "todd-blanche-corrupt-ascent-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "a5671a2a54e1",
+      "_ref": "trump-second-term-justice-department-war-on-press",
+      "_type": "reference"
+    },
+    {
+      "_key": "8101798fe5e3",
+      "_ref": "americas-man-child-in-chief-trump-tantrum-roast",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Since his January 6 pardon, Jake Lang has traveled America staging racist provocations in Muslim and Black communities. A Jewish man with IDF family ties, no visible income, and a mysterious funding network — who is paying for his cross-country campaign of hate?",
+    "metaTitle": "The Manufactured Provocateur: Exposing Jake Lang's Hate Tour",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-manufactured-provocateur-exposing-jake-lang-s-cross-country-campaign-of-hate"
+  },
+  "tags": [
+    "Jake Lang",
+    "January 6",
+    "Far-Right Extremism",
+    "White Supremacy",
+    "Islamophobia",
+    "Anti-Black Racism",
+    "Trump Pardons",
+    "Domestic Terrorism",
+    "Zionism",
+    "Manufactured Provocateurs"
+  ],
+  "title": "The Manufactured Provocateur: Exposing Jake Lang's Cross-Country Campaign of Hate",
+  "updatedAt": null,
+  "videoLink": null
+}

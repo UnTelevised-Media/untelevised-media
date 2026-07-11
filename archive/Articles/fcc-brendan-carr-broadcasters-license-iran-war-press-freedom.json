@@ -1,0 +1,140 @@
+{
+  "_id": "iwpoje4qjb",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "dhzablw2",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "tqgggrq4",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "t5x8k070",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The FCC's threat to revoke broadcasters' licenses over Iran war coverage isn't an isolated incident — it's part of a systematic campaign to crush independent journalism in America.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq1",
+      "_type": "faqItem",
+      "answer": "Technically yes, but it would require a formal proceeding and would almost certainly face immediate First Amendment challenges. The FCC's 'public interest' standard has never been used to punish specific editorial content. Carr's threat is testing how far the agency can push before courts intervene.",
+      "question": "Can the FCC actually revoke a broadcaster's license over news coverage?"
+    },
+    {
+      "_key": "faq2",
+      "_type": "faqItem",
+      "answer": "Former CNN anchor Don Lemon was arrested covering an ICE protest in Minnesota. A Washington Post reporter had their home raided by the FBI in a leak investigation. An AP reporter was detained in Cameroon investigating Trump's deportation program. Multiple outlets face lawsuits filed by Trump himself.",
+      "question": "What specific journalists have been targeted by the Trump administration?"
+    },
+    {
+      "_key": "faq3",
+      "_type": "faqItem",
+      "answer": "According to the Committee to Protect Journalists, 330+ journalists were imprisoned globally at the end of 2025 — up from fewer than 200 a decade ago. Additionally, 129 press members were killed in 2025, the highest number since records began in 1992.",
+      "question": "How many journalists are imprisoned worldwide?"
+    },
+    {
+      "_key": "faq4",
+      "_type": "faqItem",
+      "answer": "The 'public interest' is a vague regulatory standard that has traditionally referred to technical compliance and community service requirements. The Trump FCC is attempting to redefine it to mean 'alignment with government narratives' — a radical departure from decades of precedent that would effectively give the government editorial control over broadcast news.",
+      "question": "What is the 'public interest' standard the FCC is using?"
+    },
+    {
+      "_key": "faq5",
+      "_type": "faqItem",
+      "answer": "If broadcasters self-censor to protect their licenses, the administration gains de facto control over war coverage, immigration reporting, and any topic where the government wants narrative control. The Iran war is the testing ground — compliance now sets the precedent for all future coverage.",
+      "question": "What happens if broadcasters comply with the FCC's demands?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "FCC",
+    "Brendan Carr",
+    "press freedom",
+    "First Amendment",
+    "Trump",
+    "Iran war",
+    "media censorship",
+    "broadcast licenses",
+    "journalism",
+    "Don Lemon",
+    "totalitarianism",
+    "free press"
+  ],
+  "leadParagraph": "When FCC Chair Brendan Carr posted on X that broadcasters who air 'fake news' about the Iran war should 'correct course before their license renewals come up,' he wasn't just echoing Trump's complaints. He was announcing a new front in the administration's war on the press — one that uses regulatory power to force compliance with state narratives.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Donald Trump & Brendan Carr, Chairman of the Federal Communications Commission in Trump's regime",
+    "asset": {
+      "_ref": "image-a488e41fc6b0aa1748e0ad5fb7f0523132afb58c-1200x675-png",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-03-16T10:00:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "ra1",
+      "_ref": "8cgpd47e3kq",
+      "_type": "reference"
+    },
+    {
+      "_key": "ra2",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "ra3",
+      "_ref": "article-300926d2-9eaa-444b-8f51-3579e092f8eb",
+      "_type": "reference"
+    },
+    {
+      "_key": "e96d206ee802",
+      "_ref": "article-61b13f50-5860-47f7-a3f1-cf622b1db135",
+      "_type": "reference"
+    },
+    {
+      "_key": "49f1b7c140f7",
+      "_ref": "e109199f-21e7-4784-8176-cfb9ad93bd58",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "FCC Chair Brendan Carr threatened to revoke broadcasters' licenses over Iran war coverage. It's part of a systematic campaign to crush independent journalism in America — FBI raids, journalist arrests, and now regulatory weapons.",
+    "metaTitle": "Trump's FCC Threatens Broadcasters: Press Freedom Under Attack",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "fcc-brendan-carr-broadcasters-license-iran-war-press-freedom"
+  },
+  "tags": null,
+  "title": "THE LICENSE TO KILL JOURNALISM: Trump's FCC Threatens Broadcasters as Part of a Broader War on the Press",
+  "updatedAt": null,
+  "videoLink": null
+}

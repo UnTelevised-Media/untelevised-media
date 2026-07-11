@@ -1,0 +1,106 @@
+{
+  "_id": "ar2017-4200-free-joints",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "What?!?! You mean to say The Donald actually pulled a fast one on us Anarchist and he is in fact that cool? He is passing out 4200 joints for his speech. Nope, sorry, The Donald still sucks, but don't worry there will still be 4200 free joints being passed out in protest of national marijuana prohibition.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq1",
+      "answer": "The #Trump420 event is organized by DCMJ, a local Washington D.C. marijuana advocacy group. Participants plan to gather on the west side of Dupont Circle at 8am, parade to the National Mall at 10am, and distribute 4,200 joints of legally grown cannabis. At exactly 4 minutes and 20 seconds into President Trump's inauguration speech, participants plan to light up in protest of the administration's silence on marijuana reform.",
+      "question": "What is the #Trump420 event?"
+    },
+    {
+      "_key": "faq2",
+      "answer": "Under Washington D.C.'s Initiative 71, adults 21 and over may possess up to two ounces of marijuana, transfer up to one ounce to another adult without payment, and use marijuana on private property. The distribution of joints as a gift is legal under D.C. law; however, smoking marijuana in public spaces -- such as streets, sidewalks, parks, or any place to which the public is invited -- remains illegal. DCMJ stated they would not be telling people to break the law.",
+      "question": "Is distributing marijuana at the inauguration legal?"
+    },
+    {
+      "_key": "faq3",
+      "answer": "DCMJ is a local advocacy group largely responsible for the legalization of marijuana in Washington D.C. through Initiative 71, which passed in November 2014 and took effect February 26, 2015. Led by Adam Eidinger, the group is particularly concerned about President Trump's nomination of Jeff Sessions for Attorney General, given Sessions' staunchly anti-legalization stance. At an April 2016 Senate hearing Sessions said 'good people don't smoke marijuana' and that it 'is not the kind of thing that ought to be legalized.'",
+      "question": "Who is DCMJ and what do they want?"
+    },
+    {
+      "_key": "faq4",
+      "answer": "The Metropolitan Police Department stated they are 'aware of the situation and monitoring it.' Anyone caught smoking marijuana in public could receive a citation, which typically carries a  fine or a summons to court. DCMJ leader Adam Eidinger offered to pay the fine for anyone arrested as a result of the group's plans, though he expected police to 'take a tolerance policy.' The group emphasized they would card participants to ensure no one under 21 received joints.",
+      "question": "What is the risk for participants who smoke publicly?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "DCMJ",
+    "Trump420",
+    "DisruptJ20",
+    "free joints",
+    "marijuana legalization",
+    "Washington DC",
+    "inauguration",
+    "Jeff Sessions",
+    "cannabis",
+    "civil disobedience",
+    "420",
+    "Adam Eidinger"
+  ],
+  "leadParagraph": "Local DC group DCMJ, largely responsible for marijuana legalization in D.C., plans to distribute 4,200 joints of legally grown cannabis along the inaugural parade route on January 20, 2017 -- lighting up exactly 4 minutes and 20 seconds into President Trump's inauguration speech as an act of civil disobedience against federal marijuana prohibition.",
+  "linkedPitch": null,
+  "location": "Washington, D.C.",
+  "mainImage": {
+    "_type": "image",
+    "alt": "",
+    "asset": {
+      "_ref": "image-8f0edbe5625d7ecf3e6c477db6200b173eca543a-600x400-png",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Compiled from DCMJ press releases, Metropolitan Police Department statements, and direct reporting on DCMJ's planned inauguration day event.",
+  "needsReview": false,
+  "publishedAt": "2017-01-05T00:00",
+  "readingTimeMinutes": null,
+  "relatedArticles": [],
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "did-someone-say-4200-free-joints-thats-right-4200-joints-to-be-smoked-420-into-trumps-inauguration-s"
+  },
+  "tags": [
+    "#Trump420",
+    "#DisruptJ20",
+    "#420BlazeIt",
+    "#DEschedule420",
+    "#LegalizeIt",
+    "#NotMySystem",
+    "#NotMyFlag",
+    "#NotMyPresident"
+  ],
+  "title": "Did Someone Say 4200 Free Joints? That's Right 4200 Joints To Be Smoked 4:20 into Trumps Inauguration Speech",
+  "updatedAt": "2026-05-12T04:00:00.620Z",
+  "videoLink": ""
+}

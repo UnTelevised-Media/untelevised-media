@@ -1,0 +1,116 @@
+{
+  "_id": "israeli-settlers-attack-west-bank-school-kill-children",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-3",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Aws Hamdi al-Naasan, 14, was shot in the head while trying to escape his school. Marzouq Abu Naim, 32, was killed while rushing to save children. The killers were Israeli settlers, firing at students with military-precision accuracy. And the world watches.",
+  "eventDate": "2026-04-21T10:46:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "Two Palestinians were killed: Aws Hamdi al-Naasan, 14, a ninth-grade student shot in the head; and Marzouq Abu Naim (also reported as Jihad Abu Naim), 32, a parent at the school who rushed to save children when he heard gunfire. Four others were wounded.",
+      "question": "Who was killed in the West Bank school attack?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "The attack occurred around noon on April 21, 2026, at a school in Al-Mughayyir village, northeast of Ramallah in the occupied West Bank. At least five armed settlers approached the village and opened fire on students.",
+      "question": "Where and when did the attack happen?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Video shows a settler in military fatigues advancing slowly toward the school and firing at least eight rounds at children. A paramedic described settlers firing at children escaping from classrooms from 50 meters away with sniping accuracy. Israeli forces arrived and protected the settlers rather than stopping the attack.",
+      "question": "What happened during the attack?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Since October 7, 2023, at least 1,152 Palestinians including 239 children have been killed in the West Bank, with more than 11,800 injured. Israeli forces and settlers have killed at least 1,079 Palestinians in the West Bank since October 2023, including at least 235 children.",
+      "question": "How many Palestinians have been killed in the West Bank?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "No. Israel has not prosecuted a single Israeli citizen for killing Palestinian civilians in the occupied West Bank since the start of this decade. While Israel claims to investigate, perpetrators face no consequences.",
+      "question": "Has Israel prosecuted anyone for these killings?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "west bank school attack",
+    "israeli settlers kill children",
+    "aws al-naasan",
+    "marzouq abu naim",
+    "al-mughayyir",
+    "israeli terrorism",
+    "occupation apartheid",
+    "palestinian education attacks",
+    "icj ruling west bank",
+    "settler violence"
+  ],
+  "leadParagraph": "A 14-year-old boy lay dying in the street, his ninth-grade classmates frantically trying to carry him to safety. A 32-year-old father, hearing the gunshots, rushed to the school to protect the children. He was shot and killed too. The killers were Israeli settlers, armed with rifles, advancing slowly on the school and firing at children as they tried to flee. This is what terrorism looks like when it's state-sponsored.",
+  "linkedPitch": null,
+  "location": "Al-Mughayyir, Ramallah, Occupied Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Palestinian relatives mourn over the bodies of two Palestinians killed during an Israeli settler attack on a West Bank school",
+    "asset": {
+      "_ref": "image-57f712fff8a6d6d37710bc789792be5494a36b75-2400x1600-webp",
+      "_type": "reference"
+    },
+    "caption": "Relatives mourn at a hospital in Ramallah, where their loved ones were taken after being killed during an Israeli settler attack on Al-Mughayyir village, April 21, 2026",
+    "credit": "Zain Jaafar/AFP/Getty Images via CNN"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-30T16:30:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Aws al-Naasan, 14, shot dead by Israeli settlers. Terror attack on West Bank school. No prosecutions for Israeli killers.",
+    "title": "Israeli Settlers Kill Child in West Bank School Attack"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "they-killed-a-child-in-a-school-israeli-settlers-terror-attack-on-west-bank-students"
+  },
+  "tags": [
+    "west-bank",
+    "israeli-settlers",
+    "palestine",
+    "children",
+    "terrorism",
+    "occupation",
+    "icj"
+  ],
+  "title": "They Killed a Child in a School: Israeli Settlers' Terror Attack on West Bank Students",
+  "updatedAt": null,
+  "videoLink": null
+}

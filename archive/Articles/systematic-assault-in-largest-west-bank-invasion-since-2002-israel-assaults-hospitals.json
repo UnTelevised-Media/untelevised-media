@@ -1,0 +1,66 @@
+{
+  "_id": "article-d6a99359-2ce7-4fb1-a801-839bdd8956cd",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "b13f6a5890d3",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israel has launched its largest incursion into the West Bank since 2002, leading to a humanitarian crisis as civilians and journalists are trapped inside hospitals under siege. Israeli military actions have escalated to the deliberate targeting of hospitals and medical infrastructure in Gaza and the West Bank. With nearly all hospitals in Gaza rendered inoperable and the assault extending into the West Bank, the Palestinian healthcare system is facing unprecedented destruction.",
+  "eventDate": "2024-09-04T03:49:00.000Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Isreal",
+    "Jenin",
+    "journalist",
+    "hospital",
+    "ceasefire",
+    "westbank",
+    "Israeli military targeting hospitals",
+    "Gaza hospital destruction",
+    "West Bank healthcare under attack",
+    "Palestinian medical infrastructure",
+    "deliberate attacks on civilians",
+    "Israeli-Palestinian conflict healthcare"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Israeli military forces seen during an operation [Jenin, occupied West Bank - September 2, 2024]",
+    "asset": {
+      "_ref": "image-8bcc83ce61681a7d6c01acc499ca34af79081e60-1200x802-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2024-09-04T15:49:37.176Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "systematic-assault-in-largest-west-bank-invasion-since-2002-israel-assaults-hospitals"
+  },
+  "tags": null,
+  "title": "Systematic Assault: In Largest West Bank Invasion Since 2002 Israel Assaults Hospitals & Journalist",
+  "updatedAt": null,
+  "videoLink": null
+}

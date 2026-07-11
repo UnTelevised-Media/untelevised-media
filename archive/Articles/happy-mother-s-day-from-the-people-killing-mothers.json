@@ -1,0 +1,126 @@
+{
+  "_id": "happy-mothers-day-2026-05-10",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "sII9hJaKsVVdnypRs2y0Rc",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "sII9hJaKsVVdnypRs2y0Ul",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "While both Republicans and Democrats post Mother's Day tributes, the same government is bombing mothers in Gaza and Venezuela, killing mothers in ICE raids, criminalizing miscarriages, suppressing women's votes, and covering up Epstein's crimes. Conservatives are twice as guilty - but liberals are not innocent.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "This article calls out hypocrisy of both Republican and Democratic officials posting Mother's Day tributes while simultaneously enacting or enabling policies that harm and kill mothers. It documents specific cases: mothers killed in Gaza and Venezuela airstrikes, Renee Good shot by ICE in Minneapolis, women criminalized for miscarriages, voting rights suppressed through SAVE America Act, and Epstein investigation cover-up.",
+      "question": "What is this article about?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Rosa Gonzalez was an 80-year-old grandmother who died from injuries after U.S. airstrikes hit a three-story apartment building in Caracas, Venezuela, in January 2026 during Operation Southern Spear. Her story exemplifies the civilian cost of U.S. military operations authorized by the Trump administration with insufficient Democratic opposition.",
+      "question": "Who is Rosa Gonzalez?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Renee Good was a 37-year-old mother of three and poet who was shot and killed by an ICE agent in Minneapolis on January 7, 2026. Trump administration official Kristi Noem called her actions an act of domestic terrorism, while Democratic response was muted and temporary.",
+      "question": "Who is Renee Good?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The SAVE America Act, passed by the House in February 2026, requires documentary proof of U.S. citizenship to register to vote. This disproportionately affects married women whose current names do not match their birth certificates. Republicans introduced it; Democrats have not made this a red-line fight.",
+      "question": "What is SAVE America Act?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Acting Attorney General Todd Blanche declared the review of the Jeffrey Epstein-Ghislaine Maxwell sex-trafficking case over in February 2026, despite millions of withheld documents. Blanche has conflicts of interest: he interviewed Ghislaine Maxwell in prison, and his former client Paul Manafort was Epstein's cellmate. Democrats have not launched a sustained investigation.",
+      "question": "What is happening with the Epstein investigation?"
+    },
+    {
+      "_key": "faq-6",
+      "answer": "Republicans actively write harmful laws and authorize attacks on mothers - they are twice as guilty. But Democrats are not innocent: they vote for weapons transfers to Israel, stay silent on Venezuela raids, accept ICE raids as necessary, treat voter suppression as a fundraising issue rather than emergency, and accept Epstein cover-up with performative oversight rather than real resistance.",
+      "question": "How are both parties complicit?"
+    },
+    {
+      "_key": "faq-7",
+      "answer": "The first Mother's Day in the United States, in 1870, was a protest against war. Abolitionist and suffragist Julia Ward Howe wrote the Mother's Day Proclamation calling for mothers to unite for peace. The article contrasts this original purpose with modern performative tributes from a bipartisan government waging war.",
+      "question": "What is the historical context of Mother's Day?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "mothers-day",
+    "gaza-genocide",
+    "reproductive-rights",
+    "voting-rights",
+    "ice-raids",
+    "venezuela",
+    "epstein-files",
+    "save-america-act",
+    "miscarriage-criminalization",
+    "women-rights",
+    "federal-government",
+    "hypocrisy",
+    "body-count",
+    "war-on-women",
+    "republicans",
+    "democrats",
+    "both-sides"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Mothers march at Buenos Aires’ Plaza de Mayo in 1985.",
+    "asset": {
+      "_ref": "image-d010f25621853456d32daadfb858821b2bf1a611-980x656-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-10T12:43:00.000Z",
+  "readingTimeMinutes": 12,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "While both Republicans and Democrats post Mother's Day tributes, the same government bombs mothers in Gaza and Venezuela, kills mothers in ICE raids, criminalizes miscarriages, suppresses women's votes, and covers up Epstein's crimes. Conservatives are twice as guilty - but liberals are not innocent.",
+    "title": "Happy Mother's Day From the People Killing Mothers"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "happy-mother-s-day-from-the-people-killing-mothers"
+  },
+  "tags": [
+    "mothers-day",
+    "gaza-genocide",
+    "reproductive-rights",
+    "voting-rights",
+    "ice-raids",
+    "venezuela",
+    "epstein"
+  ],
+  "title": "Happy Mother's Day From the People Killing Mothers",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,153 @@
+{
+  "_id": "turkey-cracks-down-dissent-nato-summit",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "frKYWhGpepKF4QvVhcsyvj",
+      "_ref": "7a3c6e44-cbd8-453f-9119-814348f6a9fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "frKYWhGpepKF4QvVhcsyxo",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    },
+    {
+      "_key": "frKYWhGpepKF4QvVhcsyzt",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "As NATO leaders gather in Ankara, Turkish authorities detained over 200 people in coordinated raids across eight cities, arrested journalists, jailed a comedian, and banned all demonstrations — while NATO said nothing.",
+  "eventDate": "2026-07-05T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Over 200 people were detained in coordinated pre-dawn raids across at least eight cities (Istanbul, Ankara, Izmir, Kocaeli, Antalya, Dersim, Urfa, Canakkale, Bursa). On July 5 alone, 145 TKP members were detained during anti-NATO protests. In late June, an additional 220+ people were detained, with 103 formally arrested.",
+      "question": "How many people were detained ahead of the NATO summit?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Three journalists were detained on July 5: Buse Söğütlü (international news editor at T24), Ceren Erdoğdu (journalist at OdaTV), and Abbas Vural (journalist at Nihaplus and Bianet contributor). All were denied access to lawyers for 24 hours.",
+      "question": "Which journalists were arrested?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Anti-NATO sentiment in Turkey has deep roots. Protesters cited NATO's role in orchestrating coups in Turkey (1960, 1971, 1980, 1997), the use of Turkish bases like Incirlik for US wars in the Middle East, the alliance's complicity in Israel's genocide in Gaza, and the US-Israeli war on Iran. The TKP called for Turkey to withdraw from NATO and close all foreign military bases on its soil.",
+      "question": "Why are Turks protesting NATO?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "NATO has made no public statement on Turkey's mass detention of protesters, journalists, and activists ahead of the summit. Human Rights Watch called the crackdown evidence of 'ruthless intolerance of freedom of speech and assembly.'",
+      "question": "What has NATO said about the crackdown?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Detainees include lawyer Ezgi Önalan (Progressive Lawyers Association Istanbul head), law students Boran Işıldak and Burhan Can, academic Sibel Özbudun, writer Temel Demirer, 75-year-old retired teacher Ayten Yakut, and dozens of activists from Halkevleri, TIP, EMEP, Kaldıraç Movement, and other groups across Turkey.",
+      "question": "Who else was detained beyond the journalists?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Turkey NATO summit crackdown Ankara",
+    "Buse Söğütlü Ceren Erdoğdu Abbas Vural arrested",
+    "TKP anti-NATO protest 145 detained",
+    "Turkey press freedom journalists detained NATO",
+    "Erdoğan NATO Ankara repression 2026",
+    "NATO complicity Turkey human rights",
+    "Turkey İncirlik base anti-imperialist protest"
+  ],
+  "leadParagraph": "Turkish authorities carried out one of the most sweeping crackdowns on dissent in the country's recent history ahead of the July 7-8 NATO summit in Ankara, detaining more than 200 people in coordinated pre-dawn raids spanning eight cities. Journalists Buse Söğütlü (T24), Ceren Erdoğdu (OdaTV), and Abbas Vural (Nihaplus/Bianet) were arrested. The Communist Party of Turkey had 145 members seized. Lawyer Ezgi Önalan of the Progressive Lawyers Association was detained. A 75-year-old retired teacher, Ayten Yakut, was imprisoned on fabricated terrorism charges. Comedian Deniz Göktaş was jailed for calling Erdoğan a dictator. HRW called it evidence of Turkey's 'ruthless intolerance of freedom of speech and assembly.'",
+  "linkedPitch": null,
+  "location": "Ankara, Turkey",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Turkish police clash with demonstrators during an anti-NATO protest in Ankara on July 5, 2026",
+    "asset": {
+      "_ref": "image-86803454ec544236348329fc13d061305472e88e-1110x624-webp",
+      "_type": "reference"
+    },
+    "caption": "Turkish police detain protesters during an anti-NATO demonstration in Ankara's Kizilay Square on July 5, 2026, as authorities cracked down ahead of the NATO summit.",
+    "credit": "Reuters/Dilara Senkaya"
+  },
+  "methodology": "Reported using cross-referenced coverage from The Guardian, Bianet, Turkish Minute, T24, Jacobin, Democracy Now, Human Rights Watch, the International and European Federations of Journalists, Bloomberg, The Media Line, Nordic Monitor, and the IFJ. Names and affiliations of detained individuals sourced from Bianet's original reporting on the raids. Analysis of anti-NATO sentiment grounded in Jacobin's historical analysis and Democracy Now's on-the-ground interviews.",
+  "needsReview": null,
+  "publishedAt": "2026-07-07T19:35:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "turkey-forgotten-occupation-cyprus-ethnic-cleansing-erdogan-hypocrisy",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-0",
+      "_ref": "7ONx74QMiI10eazwub4hwB",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "trump-iran-ship-blockade-war-crime",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "palestine-action-uk-zionist-lobby-israeli-embassy-interference",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-7",
+      "_ref": "israel-flotilla-war-crime",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Over 200 detained, journalists arrested, comedian jailed as Turkey suppresses all dissent before NATO summit in Ankara. Full names and details.",
+    "metaTitle": "Turkey Cracks Down Ahead of NATO Summit: 200+ Detained",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "turkey-cracks-down-on-dissent-ahead-of-nato-summit-over-200-detained-journalists-arrested"
+  },
+  "tags": [
+    "Turkey",
+    "NATO",
+    "Ankara",
+    "Press Freedom",
+    "Human Rights",
+    "TKP",
+    "Erdoğan",
+    "Anti-NATO",
+    "Journalists Arrested",
+    "Crackdown"
+  ],
+  "title": "Turkey Cracks Down on Dissent Ahead of NATO Summit: Over 200 Detained, Journalists Arrested",
+  "updatedAt": null,
+  "videoLink": null
+}

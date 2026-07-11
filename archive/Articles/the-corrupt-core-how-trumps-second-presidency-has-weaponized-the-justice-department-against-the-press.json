@@ -1,0 +1,104 @@
+{
+  "_id": "trump-second-term-justice-department-war-on-press",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Todd Blanch went from Trump's personal lawyer to Acting Attorney General, and his first act was to blame journalists for political violence. This is not just corruption — it's the authoritarianization of American democracy.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "Todd Blanch was Donald Trump's personal lawyer before being appointed Acting Attorney General. His appointment is controversial because it represents a clear conflict of interest — the nation's top law enforcement official owes his career to loyalty to the president rather than independent legal judgment. This undermines the independence of the Justice Department.",
+      "question": "Who is Todd Blanch and why is his appointment controversial?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "During the annual White House Correspondents' Dinner at the Washington Hilton, a shooting occurred elsewhere in the building. The assassination attempt against President Trump was foiled, and a suspect, Cole Tomas Allen, was charged with attempted assassination. The event highlighted the awkward relationship between the press and an administration that routinely vilifies journalists.",
+      "question": "What happened at the White House Correspondents' Dinner on April 25, 2026?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "BlueAnon is a left-wing conspiracy movement that emerged after assassination attempts against Trump, suggesting the attacks were staged for political advantage. It mirrors the far-right QAnon movement in spreading unfounded conspiracy theories, showing how conspiracy thinking has spread across the political spectrum.",
+      "question": "What is 'BlueAnon' and how is it related to QAnon?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Access journalism is a reporting style where journalists trade favorable coverage for proximity to power — exclusive interviews, inside information, and access to officials. It's problematic because it can compromise journalists' independence and ability to hold power to account, as they become dependent on maintaining good relationships with their sources.",
+      "question": "What is access journalism and why is it problematic?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "The Trump administration has attacked the press through multiple means: calling journalists 'enemies of the people,' dismissing accurate reporting as 'fake news,' threatening journalists with jail, restricting reporters' access to the White House press pool and the Pentagon, filing lawsuits against news outlets, and delegitimizing legitimate criticism as subversive.",
+      "question": "How has the Trump administration attacked the press?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Trump second term",
+    "Todd Blanch Attorney General",
+    "justice department corruption",
+    "media attacks",
+    "access journalism",
+    "White House Correspondents Dinner",
+    "BlueAnon conspiracy theories",
+    "press freedom",
+    "authoritarianism",
+    "First Amendment"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "asset": {
+      "_ref": "image-1ee83bcc7330e0436289e3d19da669be1c95b687-5000x3334-webp",
+      "_type": "reference"
+    },
+    "caption": "Acting Attorney General Todd Blanch speaks at a press conference following the shooting at the White House Correspondents' Dinner, blaming journalists for political violence"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-03T00:00:00.000Z",
+  "readingTimeMinutes": 17,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Todd Blanch, Trump's former personal lawyer turned AG, blames journalists for political violence. The Justice Department has been captured.",
+    "title": "Trump's DOJ Weaponization Against the Press"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-corrupt-core-how-trumps-second-presidency-has-weaponized-the-justice-department-against-the-press"
+  },
+  "tags": [
+    "trump",
+    "justice-department",
+    "media",
+    "corruption",
+    "todd-blanche",
+    "white-house-correspondents-dinner",
+    "authoritarianism"
+  ],
+  "title": "The Corrupt Core: How Trump's Second Presidency Has Weaponized the Justice Department Against the Press",
+  "updatedAt": null,
+  "videoLink": null
+}

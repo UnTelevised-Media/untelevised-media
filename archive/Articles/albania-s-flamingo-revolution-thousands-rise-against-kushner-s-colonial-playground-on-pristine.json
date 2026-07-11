@@ -1,0 +1,155 @@
+{
+  "_id": "albania-flamingo-revolution-kushner-resort-protests",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "ae7fd3cc5995934cf179de05b80377ab",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "c4c16f921b6dba933123a9289b36633f",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "e47bc364e09c07868a5c298ec027d9f9",
+      "_ref": "f46eb3f7-0006-4919-b64b-0ad526ebd1ee",
+      "_type": "reference"
+    },
+    {
+      "_key": "f98af9c17cbc2d860633efbf412be7c9",
+      "_ref": "7a3c6e44-cbd8-453f-9119-814348f6a9fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "For four consecutive days, thousands of Albanians have flooded the streets of Tirana in a swelling revolt against a luxury resort development linked to Jared Kushner and Ivanka Trump — a project that would carve hotels and villas into one of the Mediterranean's last unspoiled coastlines, a protected wildlife reserve home to flamingos and endangered monk seals.",
+  "eventDate": "2026-06-03T16:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Jared Kushner's firm, Affinity Partners, has been granted special investor status to develop a multi-billion euro luxury resort on Albania's southern coast, including the uninhabited island of Sazan and the protected Narta Lagoon area — home to flamingos, pelicans, and endangered Mediterranean monk seals.",
+      "question": "What is the Kushner-linked resort project in Albania?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Protesters are opposing the destruction of protected coastal habitats, the lack of transparency in the land deals, legislative changes that opened nature reserves to private development, and the use of private security forces against citizens on public beaches. Albania's anti-corruption prosecutor has opened an investigation into the land acquisitions.",
+      "question": "Why are Albanians protesting?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Protests began on May 31, 2026 at the Zvërnec coastal site where barbed wire fencing was erected around public beach. Private security guards injured several demonstrators. By June 3, thousands filled the streets of Tirana for a fourth consecutive day, with clashes involving water cannon, molotov cocktails, and police barricades. SPAK has opened a formal investigation.",
+      "question": "What happened during the protests?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Yes. Kushner previously pursued a similar luxury development in Belgrade, Serbia, which also required special legislation. Serbian prosecutors later charged four people including a government minister with abuse of office and document falsification. Kushner withdrew from that project after the criminal charges, but the same pattern has emerged in Albania.",
+      "question": "Is this connected to the Serbia resort project?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Albania protests",
+    "Kushner resort Albania",
+    "Ivanka Trump Albania",
+    "Edi Rama corruption",
+    "Sazan island development",
+    "Narta Lagoon",
+    "flamingo revolution",
+    "Albania environmental protest",
+    "special investor status",
+    "Mediterranean coastline development"
+  ],
+  "leadParagraph": "Thousands of Albanians have taken to the streets for four consecutive days to protest a multi-billion euro luxury resort development linked to Jared Kushner and Ivanka Trump, demanding an end to a project that would destroy protected coastal wetlands, rewrite environmental law, and hand pristine Mediterranean shoreline to foreign investors.",
+  "linkedPitch": null,
+  "location": "Tirana / Zvërnec, Albania",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Thousands of protesters crowd a street in Tirana holding pink flamingo cutouts above their heads in protest against a Kushner-linked resort development",
+    "asset": {
+      "_ref": "image-df1635b33e614a366044506e981ca6825340a44c-6960x4640-webp",
+      "_type": "reference"
+    },
+    "caption": "Protesters hold pink flamingo cutouts during a demonstration in Tirana, Albania, June 3, 2026, opposing a luxury coastal development project linked to Jared Kushner and Ivanka Trump. Credit: AP Photo/Hameraldi Agolli",
+    "credit": "AP Photo/Hameraldi Agolli"
+  },
+  "methodology": "Reported using wire service coverage from AP, Reuters, and AFP; analysis from The Guardian, Euronews, Politico, Al Jazeera, and the New York Times; and statements from BirdLife International, PPNEA, and Albania's anti-corruption prosecution body SPAK. Reporting period: June 1-4, 2026.",
+  "needsReview": null,
+  "publishedAt": "2026-06-04T23:30:00.000Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "trump-anti-weaponization-fund-heist",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "oxfam-billionaire-wealth-exploitation-deep-dive",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "trump-second-term-justice-department-war-on-press",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "bolivia-militant-resistance",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "thiel-argentina-escape",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "may-day-2026-global-uprising-workers-over-billionaires",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Thousands of Albanians protest for four days against a multi-billion euro luxury resort linked to Jared Kushner that would destroy protected Mediterranean coastline, flamingo habitats, and rewrite environmental law.",
+    "metaTitle": "Albania's Flamingo Revolution: Protests Erupt Against Kushner Resort",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "albania-s-flamingo-revolution-thousands-rise-against-kushner-s-colonial-playground-on-pristine"
+  },
+  "tags": [
+    "Albania",
+    "Jared Kushner",
+    "Ivanka Trump",
+    "protests",
+    "Edi Rama",
+    "colonialism",
+    "environment",
+    "corruption",
+    "luxury resort",
+    "Flamingo Revolution"
+  ],
+  "title": "Albania's Flamingo Revolution: Thousands Rise Against Kushner's Colonial Playground on Pristine Shores",
+  "updatedAt": null,
+  "videoLink": null
+}

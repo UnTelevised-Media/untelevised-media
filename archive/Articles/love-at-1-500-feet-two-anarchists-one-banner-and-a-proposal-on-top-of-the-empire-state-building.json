@@ -1,0 +1,164 @@
+{
+  "_id": "love-at-1500-feet-empire-state-building-proposal",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-civil-unrest",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Two rooftop climbers scaled the Empire State Building antenna spire, unfurled a peace banner, and got engaged 1,500 feet above New York City before being arrested on seven charges.",
+  "eventDate": "2026-07-01T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Angela Nikolau, 33, and Ivan Beerkus (also known as Ivan Kuznetsov), 32, of East Orange, New Jersey. They are prominent rooftop climbers who starred in the Netflix documentary Skywalkers: A Love Story.",
+      "question": "Who climbed the Empire State Building on July 1, 2026?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The banner read: 'When the power of love beats the love of power the world knows peace,' a quote commonly attributed to Jimi Hendrix but originally from 19th-century British politician William Gladstone.",
+      "question": "What did their banner say?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Both face nine criminal charges: burglary, reckless endangerment, criminal mischief, violation of local law, possession of burglar's tools, criminal tampering, criminal trespass, and disorderly conduct.",
+      "question": "What charges do they face?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Yes. During their descent, Beerkus got down on one knee on a platform below the spire and proposed to Nikolau. She said yes, and they kissed and shared photos of the ring. Nikolau confirmed the engagement on Instagram.",
+      "question": "Did they actually get engaged?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "The investigation is ongoing, but CBS New York reported witnesses saw them entering the spire area through a hatch on the 105th floor before climbing the transmission antenna.",
+      "question": "How did they access the antenna?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": {
+    "_type": "imageGallery",
+    "images": [
+      {
+        "_key": "ff271a74e7e8",
+        "_type": "image",
+        "alt": "Ivan proposes to Angela on top of a platform midway up the radio antenna spire.",
+        "asset": {
+          "_ref": "image-3a73cc44a5297e179b6b9adf2a906eadae67aaf6-1240x698-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "b78d85049f5b",
+        "_type": "image",
+        "alt": "Angela & Ivan atop the spire of the Empire State building with banner reading \"When the power love beats the love of power the will know peace\"",
+        "asset": {
+          "_ref": "image-7facf7f23e01ce8d67928a9b6445c169c650b0b5-700x391-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "7a8e0ea0b6c0",
+        "_type": "image",
+        "alt": "Two masked climbers perch on the Empire State Building antenna spire, holding a black-and-white peace banner, 1,454 feet above Midtown Manhattan on July 1, 2026.",
+        "asset": {
+          "_ref": "image-393a201a28d400dc02b37a667d54b52b6e13ff7b-1240x698-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "aa41fbc4de27",
+        "_type": "image",
+        "alt": "Angela & Ivan on top Empire State Building antenna spire, with their banner.",
+        "asset": {
+          "_ref": "image-0c9a1432ef0d704b062f2e6b0498e8385f86aa14-1240x698-webp",
+          "_type": "reference"
+        }
+      }
+    ]
+  },
+  "isFieldReport": null,
+  "keywords": [
+    "empire state building climb",
+    "Angela Nikolau",
+    "Ivan Beerkus",
+    "rooftopping",
+    "proposal",
+    "peace banner",
+    "NYPD arrest",
+    "Skywalkers",
+    "anarchist",
+    "New York City protest"
+  ],
+  "leadParagraph": "On July 1, 2026, Angela Nikolau and Ivan Beerkus climbed the Empire State Building antenna untethered, hung a banner reading 'When the power of love beats the love of power the world knows peace,' and got engaged at 1,454 feet above Midtown Manhattan before being taken into NYPD custody on seven criminal charges.",
+  "linkedPitch": null,
+  "location": "New York City, New York",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Two masked climbers perch on the Empire State Building antenna spire, holding a black-and-white peace banner, 1,454 feet above Midtown Manhattan on July 1, 2026.",
+    "asset": {
+      "_ref": "image-d6bdd7612d98fc65d021cf413776fb15abb02810-1240x698-webp",
+      "_type": "reference"
+    },
+    "caption": "Angela Nikolau and Ivan Beerkus on the Empire State Building antenna spire with their peace banner on July 1, 2026.",
+    "credit": "Getty Images"
+  },
+  "methodology": "Reported using on-scene coverage from amNewYork, The Independent, ABC7 New York, CBS New York, NBC New York, The Hill, and CNN. Sources include NYPD official statements, bodycam footage released by Police Commissioner Jessica Tisch, social media posts from the climbers, and witness accounts from Empire State Building workers.",
+  "needsReview": null,
+  "publishedAt": "2026-07-02T00:30:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Two rooftop climbers scaled the Empire State Building antenna, unfurled a peace banner, and got engaged 1,500 feet above NYC before facing nine criminal charges.",
+    "metaTitle": "Love at 1,500 Feet: Empire State Building Banner Drop and Proposal",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "love-at-1-500-feet-two-anarchists-one-banner-and-a-proposal-on-top-of-the-empire-state-building"
+  },
+  "tags": [
+    "empire state building",
+    "rooftopping",
+    "proposal",
+    "anarchism",
+    "resistance",
+    "love",
+    "peace",
+    "NYPD",
+    "New York City"
+  ],
+  "title": "Love at 1,500 Feet: Two Anarchists, One Banner, and a Proposal on Top of the Empire State Building",
+  "updatedAt": null,
+  "videoLink": null
+}

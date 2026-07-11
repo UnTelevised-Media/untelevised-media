@@ -1,0 +1,146 @@
+{
+  "_id": "pam-bondi-corruption-chronicle-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "mgjues3q",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "1q04ws6c",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Examination of Pam Bondi's 14-month tenure as U.S. attorney general, focusing on systematic corruption including the Epstein files cover-up, political weaponization of the DOJ, mass purges of career prosecutors, questionable merger approvals, and the 2013 Trump University bribery scandal that established her pattern of corrupt behavior.",
+  "eventDate": "2026-04-02T15:06:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-9z0rsdb4",
+      "_type": "faqItem",
+      "answer": "According to multiple reports from CNN, USA Today, and The New York Times, Trump fired Bondi on April 2, 2026, over her handling of the Epstein files, which became a political liability. The Justice Department's withholding of documents related to Epstein's co-conspirators, combined with Bondi's refusal to comply with congressional subpoenas, contributed to Trump's decision.",
+      "question": "Why was Pam Bondi fired as attorney general?"
+    },
+    {
+      "_key": "faq-ypz1dk2x",
+      "_type": "faqItem",
+      "answer": "Bondi's DOJ violated the Epstein Files Transparency Act by withholding documents, releasing victims' full names and nude photographs, deliberately obscuring co-conspirators' identities, and deleting documents from the DOJ website shortly after posting them. At a February 11, 2026 House Judiciary hearing, Bondi refused to commit to complying with a subpoena for her testimony.",
+      "question": "What was the Epstein files controversy?"
+    },
+    {
+      "_key": "faq-3e6gbhjr",
+      "_type": "faqItem",
+      "answer": "Bondi issued directives threatening to fire lawyers who refused to sign certain legal briefs, launched a 'Weaponization Working Group' to target Trump's political opponents, dismissed charges against Democratic officials, cut off police department investigations, and oversaw the firing of prosecutors who worked on January 6 cases and Trump investigations.",
+      "question": "How did Bondi weaponize the DOJ?"
+    },
+    {
+      "_key": "faq-39bkkpud",
+      "_type": "faqItem",
+      "answer": "In 2013, while Florida attorney general, Bondi personally solicited a $25,000 donation from Trump's foundation (illegal under federal law) and days later dropped the investigation into Trump University fraud. In 2019, Trump was ordered to pay $2 million in damages for misusing his foundation, including the illegal Bondi donation.",
+      "question": "What was the Trump University scandal?"
+    },
+    {
+      "_key": "faq-thuctw5f",
+      "_type": "faqItem",
+      "answer": "Potential charges include obstruction of Congress (18 U.S.C. § 1505) for refusing subpoenas, obstruction of justice (18 U.S.C. § 1512) for concealing Epstein evidence, honest services fraud (18 U.S.C. § 1346) for the Trump University quid pro quo, conspiracy to defraud the United States (18 U.S.C. § 371) for systematic DOJ weaponization, and violation of the Epstein Files Transparency Act.",
+      "question": "What criminal charges could Bondi face?"
+    },
+    {
+      "_key": "faq-bzyrnyt7",
+      "_type": "faqItem",
+      "answer": "Bondi's DOJ approved the HPE-Juniper Networks merger after firing two senior antitrust attorneys who opposed it, and faced questions about political favoritism in the Compass-Anywhere Real Estate merger approval. Sen. Blumenthal questioned Bondi about ties to her former employer Ballard Partners; she refused to answer.",
+      "question": "What were the questionable merger approvals?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Pam Bondi fired",
+    "Epstein files cover-up",
+    "DOJ weaponization",
+    "Trump University scandal",
+    "Bondi impeachment",
+    "DOJ purges",
+    "career prosecutors fired",
+    "merger approvals corruption",
+    "obstruction of Congress",
+    "Pam Bondi corruption charges"
+  ],
+  "leadParagraph": "Pam Bondi was fired as attorney general after 14 months of systematic corruption: Epstein files cover-up, DOJ purges, political weaponization, and a Trump University bribery scandal that should have ended her career before it began.",
+  "linkedPitch": null,
+  "location": "Washington D.C., United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Pam Bondi averts her eyes in shame as Epstein survivors raise hands if she has not interviewed them in the case.",
+    "asset": {
+      "_ref": "image-2da12bf09a4bd6d2045e45af569bcfe16dc35a92-1560x1040-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-02T18:56:11.234Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "0c12818d0669",
+      "_ref": "todd-blanche-corrupt-ascent-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "535a9f347aef",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "f43703516319",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "18b2b12164f9",
+      "_ref": "0bzv6vDb5M9RssFkIn3Egp",
+      "_type": "reference"
+    },
+    {
+      "_key": "61ca04a7b9ad",
+      "_ref": "iwpoje4qjb",
+      "_type": "reference"
+    },
+    {
+      "_key": "a20b344ac330",
+      "_ref": "article-c2671233-75b9-41e5-888d-df294a2affbb",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "pam-bondi-s-corruption-chronicle-14-months-of-weaponized-justice"
+  },
+  "tags": [
+    "corruption",
+    "doj",
+    "pam-bondi",
+    "trump-administration",
+    "justice-department"
+  ],
+  "title": "Pam Bondi's Corruption Chronicle: 14 Months of Weaponized Justice",
+  "updatedAt": null,
+  "videoLink": null
+}

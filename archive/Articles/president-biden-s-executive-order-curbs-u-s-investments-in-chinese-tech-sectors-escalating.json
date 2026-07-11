@@ -1,0 +1,53 @@
+{
+  "_id": "article-67234fd7-2568-40b4-ad91-6bad6e265eb8",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "26d2ba5e5157",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "President Biden's Order Limits Investment in Chinese Tech Dive into the latest developments as President Biden's executive order takes center stage, reining in U.S. investments within the Chinese tech arena. Uncover the ripple effects of this bold move, as economic tensions surge between the two global powerhouses. Explore the intricacies of this executive action and its potential implications, shaping the landscape of international trade and technology collaboration. Join us in understanding the shifting dynamics and implications of this pivotal decision.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Biden and other officals being showered in money with a Chinese flag background",
+    "asset": {
+      "_ref": "image-79ce9ace7c74bfa2bb188a4709ab26a7abf195a8-2000x1333-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-07-28T14:43:00.000Z",
+  "readingTimeMinutes": 4,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "president-biden-s-executive-order-curbs-u-s-investments-in-chinese-tech-sectors-escalating"
+  },
+  "tags": null,
+  "title": "President Biden's Executive Order Curbs U.S. Investments in Chinese Tech Sectors, Escalating Economic Tensions",
+  "updatedAt": null,
+  "videoLink": null
+}

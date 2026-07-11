@@ -1,0 +1,151 @@
+{
+  "_id": "boardman-coal-aftermath-data-centers-water-crisis",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-us",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-env",
+      "_ref": "f46eb3f7-0006-4919-b64b-0ad526ebd1ee",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-corr",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-hr",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Oregon's last coal plant closed in 2020. What replaced it — Amazon data centers — has poisoned the town's water, corrupted its government, and paid a fraction of a penny on the dollar in damages. The extraction never stopped. Only the name of the miner changed.",
+  "eventDate": "2026-06-07",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The Boardman Coal Plant closed in October 2020, two decades ahead of schedule under a landmark 2010 legal agreement between Portland General Electric, regulators, and environmental groups. The plant's 656-foot smokestack was demolished by controlled explosion in September 2022. The site is still undergoing environmental cleanup.",
+      "question": "When did the Boardman coal plant close?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The Lower Umatilla Basin aquifer, sole drinking water source for up to 45,000 residents, has dangerous levels of nitrate contamination. In 2022, Morrow County Commissioner Jim Doherty tested 70 private wells and found 68 exceeded federal safety limits, with average concentrations nearly four times the legal threshold. Residents have reported miscarriages, cancers, and organ failure at alarming rates.",
+      "question": "What is the water contamination crisis in Morrow County?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "OregonLive revealed in March 2026 that Amazon paid more than $100 million to a fiber-optic company called Windwave, owned by the same public officials who voted to grant Amazon billions in tax abatements and arranged land deals for data centers. The Oregon DOJ, Ethics Commission, and DEQ all issued sanctions.",
+      "question": "What was the corruption scandal involving Amazon and Morrow County officials?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Amazon agreed to a $20.5 million settlement in March 2026 for a class-action lawsuit over its role in nitrate contamination of the Lower Umatilla Basin aquifer. Amazon generated $107 billion in cloud revenue in 2024 — making the settlement approximately 0.02 percent of a single year's cloud revenue.",
+      "question": "How much did Amazon settle for over the water pollution?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Boardman Oregon",
+    "coal plant",
+    "Amazon data center",
+    "nitrate contamination",
+    "Morrow County corruption",
+    "Windwave scandal",
+    "Oregon water crisis",
+    "data center water use",
+    "Lower Umatilla Basin",
+    "class action settlement"
+  ],
+  "leadParagraph": "When the Boardman coal plant's smokestack was detonated in 2022, environmentalists celebrated the end of Oregon's coal era. But nobody asked what would replace it. What came next — an empire of Amazon data centers — has contaminated the drinking water of 45,000 residents, enriched corrupt public officials, and exposed the brutal truth: the clean energy transition is just extraction by another name.",
+  "linkedPitch": null,
+  "location": "Boardman, Morrow County, Oregon",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Aerial photograph of the Boardman Coal Plant showing the main power station building with its tall smokestack, surrounded by agricultural land near the Columbia River in eastern Oregon.",
+    "asset": {
+      "_ref": "image-8cbb9bd5901de70bab6fc32e5ff740b9d820d42a-2819x1639-webp",
+      "_type": "reference"
+    },
+    "caption": "The Boardman Coal Plant operated by Portland General Electric, photographed at Carty Reservoir. The 440-megawatt plant was Oregon's only coal-fired power plant and its single largest source of greenhouse gas pollution from 1980 until its closure in 2020.",
+    "credit": "Portland General Electric / Wikimedia Commons"
+  },
+  "methodology": "This article draws on investigative reporting from OregonLive, Rolling Stone, and the Oregon Capital Chronicle, as well as official records from the Oregon Department of Environmental Quality, the Oregon Government Ethics Commission, and federal court filings. Data center employment and acreage figures come from OregonLive's May 2026 investigation and the Port of Morrow.",
+  "needsReview": null,
+  "publishedAt": "2026-06-07T21:23:00.000Z",
+  "readingTimeMinutes": 12,
+  "relatedArticles": [
+    {
+      "_key": "a453ba0a798c",
+      "_ref": "tate-reeves-corruption-mississippi-sellout",
+      "_type": "reference"
+    },
+    {
+      "_key": "34a79c4fb696",
+      "_ref": "e109199f-21e7-4784-8176-cfb9ad93bd58",
+      "_type": "reference"
+    },
+    {
+      "_key": "3e22435452f0",
+      "_ref": "andover-ai-data-center-death-threats-2026-05-11",
+      "_type": "reference"
+    },
+    {
+      "_key": "985449894ee8",
+      "_ref": "oxfam-billionaire-wealth-exploitation-deep-dive",
+      "_type": "reference"
+    },
+    {
+      "_key": "b7f5efdc3c22",
+      "_ref": "0bzv6vDb5M9RssFkIn3Egp",
+      "_type": "reference"
+    },
+    {
+      "_key": "b1a16997da8d",
+      "_ref": "when-silicon-valleys-castles-come-under-fire",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "from-coal-to-code-how-boardman-traded-one-poison-for-another-and-a-town-is-paying-the-price"
+  },
+  "tags": [
+    "data centers",
+    "Amazon",
+    "water contamination",
+    "nitrates",
+    "Boardman Oregon",
+    "coal plant",
+    "environmental justice",
+    "Morrow County corruption",
+    "Windwave scandal",
+    "Lower Umatilla Basin"
+  ],
+  "title": "From Coal to Code: How Boardman Traded One Poison for Another — and a Town Is Paying the Price",
+  "updatedAt": null,
+  "videoLink": null
+}

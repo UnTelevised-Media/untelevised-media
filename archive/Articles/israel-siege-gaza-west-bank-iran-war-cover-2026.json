@@ -1,0 +1,140 @@
+{
+  "_id": "c9yzsqzw5ic",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "vtslc4k5",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "5c6e00jn",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "As the U.S. and Israel wage war on Iran, Israel has used the cover of regional conflict to impose a near-total siege on Gaza, seal off the West Bank, and escalate settler violence against Palestinians — all with minimal international scrutiny. This is not a coincidence. It is policy.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "6gdicqel",
+      "_type": "faqItem",
+      "answer": "Only 640 aid trucks have entered out of 6,000 expected — approximately 10% of actual humanitarian needs. The UN confirmed nearly all aid movements through Kerem Shalom crossing were denied on March 12-13, 2026.",
+      "question": "How much aid is Israel allowing into Gaza during the Iran war?"
+    },
+    {
+      "_key": "gp9le50l",
+      "_type": "faqItem",
+      "answer": "Yes. Seven U.S.-based physicians on a medical mission to Nasser Hospital have been trapped since March 10, 2026. The State Department arranged flights from Tel Aviv but cannot secure their passage out of Gaza.",
+      "question": "Are American citizens trapped in Gaza?"
+    },
+    {
+      "_key": "omroelyh",
+      "_type": "faqItem",
+      "answer": "Israel has imposed a near-total closure. Unemployment has reached 40% (up from 13%). Israeli settlers have killed 6 Palestinians since the Iran war began, including two brothers shot in Khirbet Abu Falah.",
+      "question": "What is happening in the West Bank?"
+    },
+    {
+      "_key": "43k41lly",
+      "_type": "faqItem",
+      "answer": "No. During the \"Twelve Day War\" in June 2025, Israel imposed similar restrictions. The pattern is clear: Israel uses regional conflicts as cover to accelerate its project in Palestine.",
+      "question": "Is this the first time Israel has used war with Iran to tighten the siege?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Gaza",
+    "West Bank",
+    "Israel",
+    "Iran war",
+    "siege",
+    "blockade",
+    "settler violence",
+    "humanitarian aid",
+    "Kerem Shalom",
+    "Nasser Hospital",
+    "COGAT",
+    "collective punishment",
+    "Operation Rising Lion",
+    "genocide",
+    "occupation"
+  ],
+  "leadParagraph": "On February 28, 2026, the United States and Israel launched a joint war on Iran. While cameras tracked explosions in Tehran, another war accelerated in the shadows. Israel used the cover of the Iran conflict to impose a near-total siege on Gaza, seal off the West Bank, and escalate settler violence against Palestinian communities — all with minimal international scrutiny.",
+  "linkedPitch": null,
+  "location": "Occupied Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Widespread destruction in Jabalia refugee camp, Gaza Strip, caused by Israeli bombardment",
+    "asset": {
+      "_ref": "image-b66dd5d8d745fce8ebe523cf3ff83ee07f6440ed-3432x2109-jpg",
+      "_type": "reference"
+    },
+    "caption": "Destruction in Jabalia refugee camp, Gaza. While the world watches Iran, Israel has tightened the siege, allowing only 640 aid trucks out of 6,000 needed. Photo: Wikimedia Commons"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-03-14T20:30:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "580c6679ee1f",
+      "_ref": "article-1343286e-dbf6-4d85-9fca-0fca3a494c76",
+      "_type": "reference"
+    },
+    {
+      "_key": "315ba86865c9",
+      "_ref": "article-d6a99359-2ce7-4fb1-a801-839bdd8956cd",
+      "_type": "reference"
+    },
+    {
+      "_key": "5e6cc01c1e69",
+      "_ref": "article-63716684-177e-4d27-a340-3d2e3c5eb45d",
+      "_type": "reference"
+    },
+    {
+      "_key": "600f16f0aadd",
+      "_ref": "article-61b13f50-5860-47f7-a3f1-cf622b1db135",
+      "_type": "reference"
+    },
+    {
+      "_key": "fe7348834b4a",
+      "_ref": "article-af4d7398-12ec-4e9e-8afc-38e9caaffd8a",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seoObject",
+    "metaDescription": "Israel has used the cover of the Iran war to impose a near-total siege on Gaza — allowing only 10% of needed aid, trapping 7 American doctors, and sealing off the West Bank.",
+    "metaTitle": "While the World Watches Iran, Israel Tightens the Siege on Gaza",
+    "ogImage": {
+      "_type": "image",
+      "asset": {
+        "_ref": "image-b66dd5d8d745fce8ebe523cf3ff83ee07f6440ed-3432x2109-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "israel-siege-gaza-west-bank-iran-war-cover-2026"
+  },
+  "tags": null,
+  "title": "While the World Watches Iran, Israel Tightens the Siege on Gaza and the West Bank",
+  "updatedAt": null,
+  "videoLink": null
+}

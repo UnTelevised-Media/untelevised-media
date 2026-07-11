@@ -1,0 +1,150 @@
+{
+  "_id": "825367d7-8854-4267-8560-1f6c5c803596",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Dr. Adam Hamawy — a retired U.S. Army combat surgeon who volunteered in Gaza, treated children maimed by Israeli bombardment, and was trapped when Israel closed the Rafah crossing — won the Democratic primary in New Jersey's 12th Congressional District. He ran on healthcare not bombs, an arms embargo on Israel, Medicare for All, and the abolition of ICE.",
+  "eventDate": "2026-06-03T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Dr. Adam Hamawy is a retired U.S. Army combat surgeon, plastic surgeon, and former volunteer doctor in Gaza. He saved Senator Tammy Duckworth's life after her helicopter was shot down in Iraq in 2004. He volunteered in Gaza in 2024-2025, treating Palestinian victims of Israeli bombardment.",
+      "question": "Who is Dr. Adam Hamawy?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Hamawy won the Democratic primary in New Jersey's 12th Congressional District, a Democratic stronghold being vacated by retiring Rep. Bonnie Watson Coleman. He faces Republican Gregg Mele in November and is the heavy favorite.",
+      "question": "What district did Hamawy win and what are his chances in November?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Medicare for All, cancel medical and student loan debt, end all arms sales to Israel, impose sanctions and arms embargo on Israel, abolish ICE, end apartheid, and redirect military spending to domestic needs. His slogan: healthcare, not bombs.",
+      "question": "What is Hamawy's platform?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "In the final days of the primary, the New York Times published a story examining Hamawy's past ties to Omar Abdel-Rahman. Hamawy was never accused of criminal wrongdoing. He addressed it in his victory speech: 'That era of American politics is over.'",
+      "question": "Was there a smear campaign against Hamawy?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Adam Hamawy New Jersey",
+    "NJ 12th congressional district primary",
+    "Gaza doctor Congress",
+    "Adam Hamawy Gaza volunteer",
+    "Bernie Sanders endorsement Hamawy",
+    "Tammy Duckworth Hamawy",
+    "AOC Hamawy endorsement",
+    "healthcare not bombs",
+    "Arms embargo Israel",
+    "progressive primary wins 2026"
+  ],
+  "leadParagraph": "Dr. Adam Hamawy, a retired U.S. Army combat surgeon who treated Palestinian children in Gaza during Israel's genocidal assault, won the Democratic primary in New Jersey's 12th Congressional District on June 3, 2026. Endorsed by Bernie Sanders, Tammy Duckworth, and Alexandria Ocasio-Cortez, Hamawy ran on a platform of Medicare for All, ending arms sales to Israel, and abolishing ICE.",
+  "linkedPitch": null,
+  "location": "New Jersey / United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Portrait of Dr. Adam Hamawy, who won the New Jersey Democratic primary for Congress",
+    "asset": {
+      "_ref": "image-14b4e74c6c7a59a609f7b32df0f114692e9ca8f0-983x1067-webp",
+      "_type": "reference"
+    },
+    "caption": "Dr. Adam Hamawy, U.S. Army veteran and Gaza volunteer surgeon, who won the Democratic primary for New Jersey's 12th Congressional District",
+    "credit": "Reddit"
+  },
+  "methodology": "Reported using election results from the New Jersey Division of Elections, campaign coverage from Al Jazeera, The Intercept, Democracy Now!, The Guardian, CNN, and the New York Times. Direct quotes from Hamawy's victory speech and prior interviews on Democracy Now! and Al Jazeera. All claims cross-referenced across multiple independent outlets.",
+  "needsReview": null,
+  "publishedAt": "2026-06-20T04:30:00.000Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "israel-yellow-line-gaza-expanding-de-facto-reoccupation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "gaza-city-strikes-tent-camp-family-wiped-out",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "the-paramilitary-behind-the-pogroms-settler-paramilitaries-state-backed-ethnic-cleansing-west-bank",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "a-bullet-meant-for-no-one-the-murder-of-sam-fahd-abu-haikal",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "west-bank-settlers-8000-sheep-goats-stolen-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "un-echoes-what-palestinians-have-said-for-decades-settler-violence-is-ethnic-cleansing",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Dr. Adam Hamawy, the U.S. Army veteran who treated Palestinian children in Gaza, won New Jersey's 12th district Democratic primary running on Medicare for All and ending arms to Israel.",
+    "metaTitle": "Gaza Surgeon Dr. Adam Hamawy Wins NJ Congressional Primary",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-surgeon-who-treated-genocide-s-victims-just-won-a-congressional-primary-dr-adam-hamawy-and"
+  },
+  "tags": [
+    "Adam Hamawy",
+    "Gaza",
+    "New Jersey",
+    "Congress",
+    "Democratic primary",
+    "Medicare for All",
+    "Palestine",
+    "Israel",
+    "genocide",
+    "anti-war"
+  ],
+  "title": "The Surgeon Who Treated Genocide's Victims Just Won a Congressional Primary: Dr. Adam Hamawy and the Politics of Witness",
+  "updatedAt": null,
+  "videoLink": null
+}

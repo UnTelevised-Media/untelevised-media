@@ -1,0 +1,117 @@
+{
+  "_id": "hind-rajab-eighth-birthday",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Hind Rajab was five years old when Israeli forces riddled her family's car with 335 bullets. She called for help. Help came — and was killed too. Today would have been her eighth birthday.",
+  "eventDate": "2026-05-03T23:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Hind Rajab, a five-year-old Palestinian girl, was killed on January 29, 2024, when Israeli Occupation Forces fired 335 bullets into the car she was in while fleeing Gaza City. She survived the initial attack, surrounded by the bodies of her family members, and called the Palestinian Red Crescent Society for help. Two paramedics — Yusuf Zeino and Ahmed al-Madhoun — were dispatched to rescue her and were also killed. Hind's body was found twelve days later.",
+      "question": "What happened to Hind Rajab?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Yusuf Zeino and Ahmed al-Madhoun were the two Palestinian Red Crescent Society paramedics killed by Israeli forces on January 29, 2024, while responding to Hind Rajab's call for help. Their clearly marked ambulance had shared coordinates with the IOF before traveling to Hind's location.",
+      "question": "Who were the paramedics killed trying to rescue Hind Rajab?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "No. An Israeli internal review confirmed that IOF tanks fired on the vehicle, but resulted in no criminal charges, no court-martial, and no accountability. Human Rights Watch and Forensic Architecture both concluded the killings constituted war crimes under international humanitarian law.",
+      "question": "Was Israel held accountable for killing Hind Rajab?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Hind Rajab would have turned eight years old in 2026. She was five years old when she was killed on January 29, 2024.",
+      "question": "How old would Hind Rajab be today?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "The case exposes the complete impunity enjoyed by Israeli forces — the deliberate targeting of civilians on evacuation routes, the killing of medical workers, and the US diplomatic cover and weapons support that shields Israel from international accountability.",
+      "question": "What does the Hind Rajab case reveal about the Gaza genocide?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "hind-rajab",
+    "gaza-genocide",
+    "israeli-war-crimes",
+    "iof",
+    "palestinian-children",
+    "prcs-paramedics",
+    "335-bullets",
+    "genocide-impunity",
+    "us-weapons-israel",
+    "yusuf-zeino",
+    "ahmed-al-madhoun",
+    "forensic-architecture",
+    "geneva-conventions",
+    "anti-imperialist"
+  ],
+  "leadParagraph": "Hind Rajab was five years old when she died in the back seat of a car in Gaza, surrounded by the bodies of her family, the phone still in her hand. Israeli Occupation Forces fired 335 bullets into that car. Two paramedics who answered her call for help were killed trying to reach her. This is a story about accountability — or more precisely, the total and deliberate absence of it.",
+  "linkedPitch": null,
+  "location": "Gaza, Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Hind Rajab on a playground swing, wearing a flower crown and smiling.",
+    "asset": {
+      "_ref": "image-32ecfb2b1fd95f914572fb38bf895807802e4ec9-678x455-jpg",
+      "_type": "reference"
+    },
+    "caption": "Hind Rajab. A child. This is who they killed."
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-03T12:00:00Z",
+  "readingTimeMinutes": 8,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Hind Rajab was five years old when Israeli forces riddled her family's car with 335 bullets. She called for help. Help came — and was killed too. Today would ha",
+    "title": "Hind Rajab Would Have Turned Eight | UnTelevised Media"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "she-was-five-hind-rajab-would-have-turned-eight-today"
+  },
+  "tags": [
+    "hind-rajab",
+    "gaza-genocide",
+    "israeli-occupation",
+    "war-crimes",
+    "impunity"
+  ],
+  "title": "She Was Five. Hind Rajab Would Have Turned Eight Today.",
+  "updatedAt": null,
+  "videoLink": null
+}

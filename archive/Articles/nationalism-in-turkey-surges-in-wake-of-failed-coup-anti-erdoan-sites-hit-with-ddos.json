@@ -1,0 +1,118 @@
+{
+  "_id": "7ONx74QMiI10eazwub4hwB",
+  "allowComments": true,
+  "author": {
+    "_ref": "DJ1Y76QLqJX8nukZ868jxy",
+    "_type": "reference",
+    "name": "Ash Fawkes"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "7f0bbc449f95",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "b149458c2ea9",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "As Turkish Nationalism surges through Istanbul in the wake of the failed coup, APK supporters take to the streets to target mirnorites, leaving many suspecting the coup to be a false flag operation of the Erdoğan Regime itself, with Fascism further embedding itself into the Turkish State. ",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "kk3gsok",
+      "_type": "faqItem",
+      "answer": "On July 15-16, 2016, a faction of the Turkish military attempted a coup against President Erdoğan. The coup failed within hours, after which Erdoğan used the event to consolidate power, declaring a state of emergency and arresting nearly 3,000 soldiers.",
+      "question": "What happened during the 2016 Turkish coup attempt?"
+    },
+    {
+      "_key": "kk4nuhj",
+      "_type": "faqItem",
+      "answer": "Fethullah Gulen is a Turkish Islamic cleric living in self-imposed exile in Pennsylvania. Erdoğan accused him of masterminding the coup attempt. Turkey demanded his extradition from the US, which Gulen denied any involvement.",
+      "question": "Who is Fethullah Gulen and why was he accused of involvement?"
+    },
+    {
+      "_key": "kk58q8p",
+      "_type": "faqItem",
+      "answer": "Analysts cite the coup's poor coordination, evidence Erdoğan was tipped off in advance, the speed with which prepared arrest lists were executed, and Erdoğan's description of it as \"a gift from God\" as indicators that the event may have been staged or allowed to unfold.",
+      "question": "Why do some analysts believe the 2016 Turkish coup was a false flag?"
+    },
+    {
+      "_key": "kk6j229",
+      "_type": "faqItem",
+      "answer": "Following the coup, AKP supporters took to the streets and targeted minorities in Istanbul. There were reports of fascist violence, with nationalist mobs attacking Kurdish communities and others perceived as political enemies of Erdoğan.",
+      "question": "What violence occurred against minorities in the wake of the coup?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Anon Resistance",
+    "ARM",
+    "Anon",
+    "Resistance",
+    "Movement",
+    "Anonymous",
+    "Anonymous 2017",
+    "the anon message",
+    "anonmessage",
+    "official anonymous website",
+    "official anonymous",
+    "anonymous channel",
+    "anonymous today",
+    "anonymous this week",
+    "anonymous 2017",
+    "today anonymous 2017 this week",
+    "anonymous 2017 latest",
+    "anonymous hackers",
+    "Anarchy",
+    "Anarchism"
+  ],
+  "leadParagraph": "As Turkish Nationalism surges through Istanbul in the wake of the failed coup, APK supporters take to the streets to target mirnorites, leaving many suspecting the coup to be a false flag operation of the Erdoğan Regime itself, with Fascism further embedding itself into the Turkish State.",
+  "linkedPitch": null,
+  "location": "Istanbul, Turkey",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Starwars meme about the coup attempt in Turkey",
+    "asset": {
+      "_ref": "image-1b2568b54a2aa7f8b5a80466e5e068966bc6147b-600x400-png",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website (news.anonresistance.dx.am) and has been migrated to UnTelevised Media.",
+  "needsReview": false,
+  "publishedAt": "2016-07-16T12:00:00Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "nationalism-in-turkey-surges-in-wake-of-failed-coup-anti-erdoan-sites-hit-with-ddos"
+  },
+  "tags": [
+    "turkey",
+    "erdogan",
+    "coup",
+    "gulen",
+    "false-flag",
+    "fascism",
+    "kurdistan",
+    "turkeycoup",
+    "xfbml",
+    "kudistan"
+  ],
+  "title": "Nationalism In Turkey Surges In Wake Of Failed Coup; Anti-Erdoğan Sites Hit With DDoS",
+  "updatedAt": null,
+  "videoLink": null
+}

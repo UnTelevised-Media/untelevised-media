@@ -1,0 +1,110 @@
+{
+  "_id": "immigration-detention-system-expansion-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "civil-liberties",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    },
+    {
+      "_key": "human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "With $45 billion in funding, ICE is building a detention system that will rival the entire federal criminal prison system by 2029. Detention has increased 75% to 66,000 people, with plans for 135,000 capacity. The goal: pressure people into giving up their rights.",
+  "eventDate": "2025-01-20T00:00:00-05:00",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "Congress authorized $45 billion for ICE detention through Fiscal Year 2029, with nearly $15 billion per year. This comes on top of the $4 billion appropriated for Fiscal Year 2025. The American Immigration Council calculates this funding could acquire enough beds to house 135,000 people — more than three times the capacity when Trump took office in January 2025.",
+      "question": "How much is the US spending on immigration detention?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Detention has exploded under Trump. From 40,000 people in January 2025 to nearly 66,000 by December 2025 — a 75% increase in less than a year. The administration plans to increase capacity by over 150% from January levels, targeting 135,000 people by 2029. On November 29, 2025, ICE was using 104 more facilities than at the start of the year — a 91% increase.",
+      "question": "How many people are being held in ICE detention?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "At least 32 people died in ICE custody in 2025 — the deadliest non-COVID year since 2004. December 2025 was the deadliest month on record with seven deaths. The ACLU found that 95% of these deaths were preventable. Conditions have worsened significantly as detention expanded: overcrowding, inadequate medical care, and psychological abuse are now the norm.",
+      "question": "How many people have died in ICE detention?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Alligator Alcatraz is the nickname for the Florida Soft-Sided Facility-South, the first state immigration detention facility not operating under contract with ICE. More than 6,700 men have been housed there. It costs $245 per day per bed — more than ICE's average of $187. The center can hold over 1,300 people. Amnesty International documented 'despicable and nauseating conditions' designed to dehumanize and punish detainees.",
+      "question": "What is 'Alligator Alcatraz'?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "The profile has changed dramatically under Trump. There's been a 2,450% increase in the number of people with no criminal record held in ICE detention. At-large arrests increased 600% in Trump's first nine months. Immigrants attending court hearings and check-ins have been re-detained without warning. These are not dangerous criminals — they're people showing up for court dates, going to work, living in communities they call home.",
+      "question": "Who is being detained?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "immigration",
+    "detention",
+    "mass-deportation",
+    "trump",
+    "ice",
+    "private-prisons",
+    "alligator-alcatraz",
+    "human-rights",
+    "civil-liberties",
+    "asylum",
+    "refugees",
+    "billionaire-prison-industrial-complex"
+  ],
+  "leadParagraph": "When President Trump took office in January 2025, roughly 40,000 people were being held in immigration detention. By December, that number had risen by almost 75 percent, with nearly 66,000 people locked up — the highest level in history. And this is just the beginning.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Donald Trump smirks as he poses in front of caged beds while touring a deportation detention facility.",
+    "asset": {
+      "_ref": "image-9ab9788cf9b322d45dd4c41fead2aac420c5ed08-1024x683-webp",
+      "_type": "reference"
+    },
+    "caption": "Protesters march against ICE in downtown Minneapolis on January 23, 2026. Tens of thousands turned out in subzero temperatures to oppose Trump's expansion of the immigration detention system, which is on track to rival the entire federal criminal prison system.",
+    "credit": "Fibonacci Blue, CC BY 4.0, via Wikimedia Commons (representative image)"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-18T00:00:00Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "_type": "seo",
+    "description": "ICE is building a $45 billion detention system to rival federal prisons. Detention up 75%, 135,000 capacity planned. 32 deaths in 2025. 95% preventable.",
+    "title": "ICE Detention System: $45 Billion for Mass Deportation"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-immigrant-prison-boom-billions-for-detention-nothing-for-justice"
+  },
+  "tags": [
+    "immigration",
+    "detention",
+    "mass-deportation",
+    "trump",
+    "ice",
+    "private-prisons"
+  ],
+  "title": "The Immigrant Prison Boom: Billions for Detention, Nothing for Justice",
+  "updatedAt": null,
+  "videoLink": null
+}

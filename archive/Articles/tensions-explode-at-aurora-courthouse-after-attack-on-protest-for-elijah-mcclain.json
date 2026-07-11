@@ -1,0 +1,115 @@
+{
+  "_id": "Ulg91jjPFgaBD1fUiNoHzK",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "8e23b9c864d6",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "YtJR1N6fGBsJu5O68Lm3Sm",
+      "_ref": "NIYNah6RoM2MjtNb6HiKPc",
+      "_type": "reference"
+    },
+    {
+      "_key": "cecdce2483b6",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A protest demanding justice for Elijah McClain in Aurora, CO erupted on Saturday. After a vehicle attack with gunfire exchange on I-225 already extremely high tensions were escalated by anger. Just before sunset the protest arrived back at the court house and was officially dispersed by the organizers, cutting the size of the crowd in half. Shortly after dark Anarchist groups began to fire mortar style fireworks at Aurora police. They began to tare down the newly installed fence and rip the plywood protecting the windows down, windows were smashed out and several fireworks were shot into the offices of the court house causing a few small fires that self extinguished.",
+  "eventDate": "2020-07-25T18:00:00Z",
+  "faqs": [
+    {
+      "_key": "k1lgxy",
+      "_type": "faqItem",
+      "answer": "A protest demanding justice for Elijah McClain was disrupted when a turquoise Jeep drove into the crowd on I-225, resulting in gunfire. After the vehicle attack and initial police aggression, protesters regrouped and marched to the Aurora courthouse where anarchists broke windows, destroyed property, and set fires.",
+      "question": "What happened at Aurora Courthouse on July 25, 2020?"
+    },
+    {
+      "_key": "k2p6pm",
+      "_type": "faqItem",
+      "answer": "Elijah McClain was a 23-year-old Black man killed by Aurora police in 2019 under disputed circumstances. His death sparked ongoing protests and calls for justice, becoming a symbol of police brutality and racial injustice.",
+      "question": "Who was Elijah McClain and why was he significant?"
+    },
+    {
+      "_key": "k4eibw",
+      "_type": "faqItem",
+      "answer": "Protesters broke through newly installed fencing and plywood protecting courthouse windows, smashed out windows, set fires inside the building (which self-extinguished), and spray-painted walls. The courthouse was a symbolic target representing the judicial system many felt had failed to hold police accountable.",
+      "question": "What was damaged at the Aurora Courthouse?"
+    },
+    {
+      "_key": "8a1f11ae3d1f",
+      "_type": "faqItem",
+      "answer": "Protesters smashed over 20 windows, and a small fire was started in a courthouse office. Portions of the newly erected protective fence were destroyed. The crowd caused more than $74,000 in property damage. ",
+      "question": "How much property damage was sustained at Aurora Courthouse?"
+    },
+    {
+      "_key": "k3jpc5",
+      "_type": "faqItem",
+      "answer": "A turquoise Jeep drove into the back of the protest march on I-225, resulting in shots being fired. Protesters believed the vehicle attack was coordinated with police action to escalate tensions and disrupt the march.",
+      "question": "What was the Jeep incident during the protest?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": true,
+  "keywords": [
+    "Aurora police",
+    "Elijah McClain",
+    "July 2020 protests",
+    "courthouse occupation",
+    "police violence",
+    "justice demand",
+    "property damage",
+    "vehicle attack",
+    "police confrontation"
+  ],
+  "leadParagraph": "A protest demanding justice for Elijah McClain in Aurora, CO erupted on Saturday. After a vehicle attack with gunfire exchange on I-225 already extremely high tensions were escalated by anger. Just before sunset the protest arrived back at the court house and was officially dispersed by the organizers, cutting the size of the crowd in half. Shortly after dark Anarchist began to fire mortar ",
+  "linkedPitch": null,
+  "location": "Aurora, Colorado",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Protesters square off against Aurora riot police before de-erecting the fence.",
+    "asset": {
+      "_ref": "image-9c175666deccbb0dfcc84548f55fd6b235386e50-905x605-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website and has been migrated to UnTelevised Media. This article is an on the scene, eye witness report from Radical Edward. Report is supplemented with livestream footage from 3 other on the ground independent journalist; Cut the Plastic AKA Brian Loma, Justin Roske & Unicorn Riot",
+  "needsReview": false,
+  "publishedAt": "2020-07-25T12:00:00Z",
+  "readingTimeMinutes": 6,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "tensions-explode-at-aurora-courthouse-after-attack-on-protest-for-elijah-mcclain"
+  },
+  "tags": [
+    "aurora",
+    "police-violence",
+    "elijah-mcclain",
+    "courthouse-action",
+    "2020",
+    "property-destruction",
+    "justice-demand"
+  ],
+  "title": "Tensions Explode at Aurora Courthouse After Attack On Protest for Elijah Mcclain",
+  "updatedAt": null,
+  "videoLink": null
+}

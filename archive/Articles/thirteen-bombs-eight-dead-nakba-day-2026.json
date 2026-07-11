@@ -1,0 +1,157 @@
+{
+  "_id": "gaza-nakba-day-2026-05-15",
+  "allowComments": null,
+  "author": {
+    "_ref": "7941c4f9-9886-4ef9-92cf-45463ff3567c",
+    "_type": "reference",
+    "name": "Salah Akram"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "e8qhp1xf",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "rje3k6vc",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "On the 78th anniversary of the Palestinian Nakba, Israeli warplanes struck the Al-Mu'taz residential building in Gaza City, killing eight civilians including three women and wounding more than 45 — the majority children and elderly. Israel declared the operation a success, claiming one Hamas commander was killed. Our correspondent Salah Akram was on the ground as it happened.",
+  "eventDate": "2026-05-15T18:49:00.000Z",
+  "faqs": [
+    {
+      "_key": "s6nb3b0i",
+      "_type": "faqItem",
+      "answer": "Israeli Occupation Forces dispatched three warplanes and dropped thirteen bombs on the Al-Mu'taz residential building in Gaza City. Eight civilians were killed — including three women — and more than 45 people were wounded, the majority of them children and the elderly. Six apartments were completely destroyed and the six-story building was rendered uninhabitable. In the blast radius, dozens of tents belonging to already-displaced Palestinian families were burned and torn apart. All documented in real time by UnTelevised Media correspondent Salah Akram, on the ground in Gaza City.",
+      "question": "What happened in Gaza on May 15, 2026?"
+    },
+    {
+      "_key": "7b4o767h",
+      "_type": "faqItem",
+      "answer": "May 15 is Nakba Day — the annual commemoration of the Palestinian catastrophe of 1948, when more than 700,000 Palestinians were expelled from their homeland, their villages depopulated and their land seized. The date matters because the IOF airstrike occurred on this anniversary, burning the tents of people who had already been displaced — people living as refugees within their own land. The Nakba is not a historical event. Today's bombing is evidence it is ongoing policy.",
+      "question": "What is Nakba Day and why does it matter for this story?"
+    },
+    {
+      "_key": "l5v94oq6",
+      "_type": "faqItem",
+      "answer": "The Israeli military described the strike as a \"successful military assassination operation,\" claiming it killed one Hamas commander using thirteen bombs dropped by three warplanes. Our reporting — sourced directly from Salah Akram on the ground — documents eight civilian deaths including three women, 45+ wounded mostly children and elderly, six apartments destroyed, a six-story building uninhabitable, and displaced people's tents burned. Israel's framing erases every one of those facts.",
+      "question": "What is Israel's official justification for the strike?"
+    },
+    {
+      "_key": "gxeorfzi",
+      "_type": "faqItem",
+      "answer": "Four civilians were killed in the bombing of a residential floor inside the Al-Mu'taz building in Gaza City. Three more were killed when a civilian vehicle on Al-Wahda Street was struck. A third location, confirmed by medical teams who could not identify dismembered remains, accounts for an eighth victim — one of three confirmed women killed in the strike.",
+      "question": "Where exactly were the civilians killed?"
+    },
+    {
+      "_key": "rdgobbki",
+      "_type": "faqItem",
+      "answer": "Salah Akram is an UnTelevised Media correspondent on the ground in Gaza City. He is a Palestinian journalist and survivor who has reported from inside the siege throughout the genocide. All information in this article comes directly from his first-hand, real-time testimony transmitted on May 15, 2026 — timestamps in Central Time. He is an eyewitness. His account is primary source reporting.",
+      "question": "Who is Salah Akram and how was this reported?"
+    },
+    {
+      "_key": "rfbtatt4",
+      "_type": "faqItem",
+      "answer": "More than 1.9 million Palestinians — nearly the entire population of Gaza — have been displaced, many multiple times, since October 2023. The majority are living in makeshift tents, shelters, and camps, often in areas Israel previously designated as \"safe zones.\" The burning of displaced tents in the May 15 strike is not an aberration: it fits a documented pattern of targeting civilian infrastructure and displacement camps that UN agencies and human rights organizations have repeatedly characterized as collective punishment and violations of international humanitarian law.",
+      "question": "What is the humanitarian situation for displaced Palestinians in Gaza?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": true,
+  "keywords": [
+    "Gaza",
+    "Nakba Day",
+    "Nakba",
+    "IOF airstrike",
+    "Al-Mu'taz building",
+    "Al-Wahda Street",
+    "Palestinian casualties",
+    "Israeli military",
+    "Hamas commander",
+    "Gaza bombing",
+    "displacement",
+    "civilian casualties",
+    "genocide",
+    "occupation",
+    "war crimes",
+    "May 15 2026",
+    "UnTelevised Media",
+    "Salah Akram"
+  ],
+  "leadParagraph": "Israel dispatched three warplanes, dropped thirteen bombs, and killed one Hamas official on Nakba Day. On the ground in Gaza, UnTelevised Media correspondent Salah Akram counted eight martyrs — three of them women — six apartments destroyed, a six-story residential building uninhabitable, and dozens of displaced people's tents burned to ash.",
+  "linkedPitch": null,
+  "location": "Gaza City, Occupied Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Gaza, May 15, 2026. Residential building burns after IOF airstrike on Nakba Day. [Salah Akram - UnTelevised Media]",
+    "asset": {
+      "_ref": "image-73637edaca9933504355656af342356bd3e8b682-1080x703-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-15T13:00:00.000Z",
+  "readingTimeMinutes": 5,
+  "relatedArticles": [
+    {
+      "_key": "ec0pcwz7",
+      "_ref": "hind-rajab-eighth-birthday",
+      "_type": "reference"
+    },
+    {
+      "_key": "ujj4iko6",
+      "_ref": "358du4ton59",
+      "_type": "reference"
+    },
+    {
+      "_key": "3dhai6ej",
+      "_ref": "death-to-the-idf-meaning-ideology-not-people",
+      "_type": "reference"
+    },
+    {
+      "_key": "k1tacfxd",
+      "_ref": "west-bank-burning-organized-settler-violence-state-backing-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "4hj882ft",
+      "_ref": "thiago-avila-mother-dies-israel-detention",
+      "_type": "reference"
+    },
+    {
+      "_key": "90586d584361",
+      "_ref": "yinon-plan-greater-israel-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "thirteen-bombs-eight-dead-nakba-day-2026"
+  },
+  "tags": [
+    "Gaza",
+    "Palestine",
+    "Nakba",
+    "Nakba Day",
+    "IOF Airstrikes",
+    "War Crimes",
+    "Genocide",
+    "Displacement"
+  ],
+  "title": "Thirteen Bombs. Eight Dead — On Nakba Day. Israel Downplays it as a Successful Operation",
+  "updatedAt": null,
+  "videoLink": null
+}

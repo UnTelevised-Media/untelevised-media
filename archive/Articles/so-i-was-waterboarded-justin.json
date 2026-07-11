@@ -1,0 +1,132 @@
+{
+  "_id": "rdM5N17yndW0HRB9lZPmvz",
+  "allowComments": true,
+  "author": {
+    "_ref": "RYZn4iYE9ChjVaOaU8i41k",
+    "_type": "reference",
+    "name": "Justin King"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "5df3f74548dc",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "5f0c5ec30b94",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "DJ1Y76QLqJX8nukZ86p9mU",
+      "_ref": "d21a73f5-a2fc-46fd-8801-f1f32e1f0b1f",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Justin King recounts being voluntarily waterboarded at an Ohio State Courthouse demonstration to refocus public attention on the CIA torture report — a program the four-year Senate investigation found produced \"no evidence that terror attacks were stopped, terrorists captured, or lives saved.\"",
+  "eventDate": "2015-02-02T16:43:00.000Z",
+  "faqs": [
+    {
+      "_key": "3xjfj9g4",
+      "_type": "faqItem",
+      "answer": "A coordinated series of demonstrations organized by journalist Derrick Broze of The Anti-Media, held on January 31, 2015, to refocus public attention on the Senate Intelligence Committee's summary of the CIA torture report — which had been largely ignored by mainstream media since its December 2014 release.",
+      "question": "What was the National Day of Action Against Torture?"
+    },
+    {
+      "_key": "3kpwqk8g",
+      "_type": "faqItem",
+      "answer": "The victim is positioned at an angle with their feet and lungs above their head. A wet cloth covers the face and mouth, and water is poured through it into the nose and throat. Though no fluid enters the lungs, the body's drowning response triggers an involuntary panic/flight reflex — an instinct that cannot be overcome by willpower.",
+      "question": "How does waterboarding actually work?"
+    },
+    {
+      "_key": "7vwl8kmv",
+      "_type": "faqItem",
+      "answer": "An officer pulled King upright mid-session, believing his life was in danger. Rather than be arrested, King used the officer's own words — that a normal person seeing this knows it is dangerous and harmful — to make the demonstration's point to the assembled crowd.",
+      "question": "What happened when the Ohio State Police intervened during the demonstration?"
+    },
+    {
+      "_key": "p8avsztc",
+      "_type": "faqItem",
+      "answer": "1 in 4 detainees was determined to be innocent; the CIA unknowingly tortured two of its own agents; the program included rectal feeding with no medical justification; detainees' family members were kidnapped to exert pressure; and a four-year investigation found \"no evidence that terror attacks were stopped, terrorists captured, or lives saved.\"",
+      "question": "What were the key findings of the CIA torture report?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": true,
+  "keywords": [
+    "waterboarding",
+    "torture",
+    "CIA torture report",
+    "Senate Intelligence Committee",
+    "National Day of Action Against Torture",
+    "Unite Ohio",
+    "Derrick Broze",
+    "The Anti-Media",
+    "Columbus Ohio",
+    "civil liberties",
+    "protest",
+    "PANDA",
+    "indefinite detention"
+  ],
+  "leadParagraph": "Without really thinking about it, I volunteered to be waterboarded. My intention was to refocus attention on the torture program in place by the United States government.",
+  "linkedPitch": null,
+  "location": "Columbus, OH",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Security forces at a political demonstration (public domain, U.S. Army)",
+    "asset": {
+      "_ref": "image-8ab751e57fe87511fda41d524894070e9f8c1f12-6720x4480-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "First-person account originally published February 2, 2015 via The Fifth Column (TFC). The demonstration described took place January 31, 2015 at the Ohio State Courthouse. The Senate Intelligence Committee's summary of the CIA's Detention and Interrogation Program was released December 9, 2014.",
+  "needsReview": false,
+  "publishedAt": "2015-02-02T12:00:00Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": [
+    {
+      "_key": "f63b745cf28d",
+      "_ref": "alligator-alcatraz-systemic-torture-cover-up",
+      "_type": "reference"
+    },
+    {
+      "_key": "31e1453e1a75",
+      "_ref": "bddcld7vr4o",
+      "_type": "reference"
+    },
+    {
+      "_key": "92d52bf59309",
+      "_ref": "flotilla-bilbao-spain-police-brutality",
+      "_type": "reference"
+    },
+    {
+      "_key": "15564a8ad08d",
+      "_ref": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "so-i-was-waterboarded-justin"
+  },
+  "tags": [
+    "waterboarding",
+    "torture",
+    "cia",
+    "civil-liberties",
+    "protest",
+    "ohio",
+    "firsthand-account",
+    "op-ed"
+  ],
+  "title": "So, I was waterboarded…",
+  "updatedAt": null,
+  "videoLink": null
+}

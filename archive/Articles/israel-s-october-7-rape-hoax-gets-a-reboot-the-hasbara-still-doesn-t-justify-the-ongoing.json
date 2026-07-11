@@ -1,0 +1,141 @@
+{
+  "_id": "oct7-rape-hoax-300-page-reboot",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "e0a10572ed14770e5c3eeb3d252d87b8",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A new 300-page Israeli report claiming systematic sexual violence on October 7 is being amplified by major media. But it is built on the same debunked witnesses, discredited sources, and a serially unreliable author.",
+  "eventDate": "2026-05-13T01:17:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "The UN Commission of Inquiry found 'reasonable grounds' to believe some sexual violence may have occurred during the October 7 attacks. However, it also found no credible evidence that militants received orders to commit sexual violence, and noted that some specific allegations were false. Israel obstructed the UN investigation. No criminal case for sexual violence from October 7 has ever been filed by Israeli prosecutors, and no forensic investigation was conducted at attack sites.",
+      "question": "Did sexual violence occur on October 7?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Elkayam-Levy is a legal scholar and founder of the Civil Commission, the Israeli NGO that produced the Silenced No More report. She is an ally of Benjamin Netanyahu, served in the IDF spokesperson unit, and has a documented history of spreading misinformation about October 7 — including misidentifying photos of dead Kurdish soldiers as Israeli victims, and repeating the debunked ZAKA claim about a fetus cut from a pregnant woman. Ruth Halperin-Kaddari, a prominent Israeli legal scholar who initially worked with the commission, left over Elkayam-Levy's methodology. An Israeli government official told Ynet the commission 'consists solely of Elkayam-Levy' and characterized her work as 'unreliable.'",
+      "question": "Who is Cochav Elkayam-Levy and why is she controversial?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The report draws on ZAKA volunteer testimony that has been discredited — most notably Chaim Otmazgin's claim about finding a teenage girl with her pants pulled down, which was later revealed to have been caused by Israeli soldiers dragging her body to check for explosives. It also relies on forced confessions from Palestinian detainees, including Manar Qassem's alleged rape confession. The IDF's video of Qassem was deleted and reposted multiple times after subtitle mistranslations and inconsistencies were noted. The victim he allegedly assaulted has never been identified. Human Rights Watch and Amnesty International refuse to consider such interrogation footage credible given Israel's documented use of torture.",
+      "question": "What debunked claims has the report relied on?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "No. The AP explicitly stated it 'could not independently verify the commission's findings.' CBC also noted that 'critics have challenged some of Elkayam-Levy's previous research.' Despite this lack of verification, major outlets including the New York Times, Le Monde, CBC, and Euronews amplified the report's conclusions with minimal scrutiny.",
+      "question": "Could the Associated Press independently verify the report's findings?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "No. As of January 2025, Moran Gaz, the former lead prosecutor in Israel's Southern District Prosecutor's Office responsible for October 7 cases, disclosed that no allegations of sexual violence had been filed. Her office contacted women's rights organizations, which reported 'no one had approached them.' The absence of forensic investigation — no rape kits processed, bodies not properly examined, crime scenes not preserved — means that the full extent of what happened may never be known independently.",
+      "question": "Has anyone been prosecuted for sexual violence from October 7?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "October 7",
+    "rape claims",
+    "mass rape",
+    "Silenced No More",
+    "Civil Commission",
+    "Cochav Elkayam-Levy",
+    "ZAKA",
+    "debunked",
+    "Gaza genocide",
+    "atrocity propaganda",
+    "media bias"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Vast landscape of destroyed multi-story buildings reduced to rubble in Khan Younis, Gaza, under clear sky",
+    "asset": {
+      "_ref": "image-e23bb5d4e702c1ce7bf142253f39862db0b417ab-5000x3334-webp",
+      "_type": "reference"
+    },
+    "caption": "Destroyed buildings in Khan Younis, southern Gaza, July 2024. Israel's atrocity narratives about October 7 have been used to manufacture consent for the ongoing destruction of Gaza, which has killed over 55,000 Palestinians.",
+    "credit": "Reuters/Mohammed Salem"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-18T01:17:00.000Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "gaza-nakba-day-2026-05-15",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "salah-akram-the-streets-that-swallow-us",
+      "_type": "reference"
+    },
+    {
+      "_key": "4aedfac7a6cb",
+      "_ref": "bddcld7vr4o",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "happy-mothers-day-2026-05-10",
+      "_type": "reference"
+    },
+    {
+      "_key": "f63474ebbaf9",
+      "_ref": "yinon-plan-greater-israel-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "cadb2cb95e4f",
+      "_ref": "nE3O1lobPG69YhI3z4zQbi",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "israel-s-october-7-rape-hoax-gets-a-reboot-the-hasbara-still-doesn-t-justify-the-ongoing"
+  },
+  "tags": [
+    "October 7",
+    "Gaza",
+    "genocide",
+    "propaganda",
+    "Israel",
+    "sexual violence",
+    "Civil Commission",
+    "media criticism"
+  ],
+  "title": "Israel's October 7 Rape Hoax Gets a Reboot, the Hasbara still Doesn’t Justify the Ongoing Genocide",
+  "updatedAt": null,
+  "videoLink": null
+}

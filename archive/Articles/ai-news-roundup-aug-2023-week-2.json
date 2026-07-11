@@ -1,0 +1,53 @@
+{
+  "_id": "article-d6556a36-94fa-4d3a-8cfd-874b12c1e861",
+  "allowComments": null,
+  "author": {
+    "_ref": "dd27a18f-4d78-449d-a2fa-73fa6617816a",
+    "_type": "reference",
+    "name": "Harold Crowe"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "dcc9b4270d8f",
+      "_ref": "63a5d961-e918-4dd2-877e-a08366bf106f",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Hollywood's crew union debates AI's role, while chatbot attacks raise concern. Warren Buffett's portfolio emphasizes AI investment; a new model predicts passwords via keystroke sounds. Elsevier's 'Scopus AI' speeds research, state-level AI regulations surge. Reinforcement learning advances underwater robotics, Google's robots evoke a futuristic reality. An insightful guide demystifies Transformer architecture, shaping sectors with the AI wave.",
+  "eventDate": null,
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "AI Robot reading the news",
+    "asset": {
+      "_ref": "image-91418c4d29dc0b4215f10906875ec55d328ef380-1200x628-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-08-18T10:32:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "ai-news-roundup-aug-2023-week-2"
+  },
+  "tags": null,
+  "title": "AI News Roundup Aug 2023 Week 2",
+  "updatedAt": null,
+  "videoLink": null
+}

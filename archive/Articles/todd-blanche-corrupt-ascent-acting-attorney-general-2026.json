@@ -1,0 +1,146 @@
+{
+  "_id": "todd-blanche-corrupt-ascent-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "qkxjix9p",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "ir16q90h",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Investigation of Todd Blanche's career and record as he becomes acting attorney general after Pam Bondi's firing. Covers his role in dismissing Eric Adams' corruption case, his 'war' comments at Federalist Society conference, his defense of Trump in hush money trial, his connections to Boris Epshteyn, and his role in DOJ politicization.",
+  "eventDate": "2026-04-02T16:02:53.260Z",
+  "faqs": [
+    {
+      "_key": "faq-47c97kis",
+      "_type": "faqItem",
+      "answer": "Todd Blanche is Trump's former personal lawyer who defended him in the 2024 hush money criminal trial where Trump was convicted on all 34 felony counts. Blanche was confirmed as deputy attorney general in March 2025 and became acting attorney general on April 2, 2026, after Pam Bondi was fired.",
+      "question": "Who is Todd Blanche?"
+    },
+    {
+      "_key": "faq-3zfdh8l9",
+      "_type": "faqItem",
+      "answer": "As deputy attorney general, Blanche personally ordered the dismissal of a federal corruption case against NYC Mayor Eric Adams. When three career prosecutors (Celia V. Cohen, Andrew Rohrbach, and Derek Wikstrom) refused to sign the dismissal documents, Blanche placed them on administrative leave and demanded they 'express regret and admit some wrongdoing.' They resigned instead.",
+      "question": "What was the Eric Adams corruption case controversy?"
+    },
+    {
+      "_key": "faq-kfnndvxi",
+      "_type": "faqItem",
+      "answer": "At the Federalist Society's November 2025 conference, Blanche declared war on federal judges, stating: 'They have a robe on but they are more political or certainly as political as the most liberal governor or district attorney... it's a war, man.' The New York State Bar Association denounced his 'declaration of war on the judiciary.'",
+      "question": "What did Blanche say about judges at the Federalist Society?"
+    },
+    {
+      "_key": "faq-p25q3aaf",
+      "_type": "faqItem",
+      "answer": "Blanche was Epshteyn's personal attorney before joining Trump's legal team. According to Vanity Fair, Epshteyn's 'people were taking the top legal slots' in the Trump administration, including Blanche as deputy attorney general and Emil Bove as principal deputy attorney general (later nominated to a federal judgeship).",
+      "question": "How is Blanche connected to Boris Epshteyn?"
+    },
+    {
+      "_key": "faq-vhjjx0pk",
+      "_type": "faqItem",
+      "answer": "At Cadwalader, Wickersham & Taft, Blanche represented Boris Epshteyn (Trump fixer), Paul Manafort (Trump campaign manager convicted of financial crimes), and Igor Furman (former Rudy Giuliani associate). He built his career defending controversial figures in Trump's orbit.",
+      "question": "Who did Blanche defend before representing Trump?"
+    },
+    {
+      "_key": "faq-xf5hpuma",
+      "_type": "faqItem",
+      "answer": "The Senate confirmed Blanche as deputy attorney general on March 2025 by a vote of 52-46. All 53 Republicans voted in favor, joined by no Democrats. At his February 12, 2025 confirmation hearing, he acknowledged remaining Trump's lawyer but claimed it wouldn't be a problem.",
+      "question": "What was Blanche's confirmation vote?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Todd Blanche acting attorney general",
+    "Eric Adams corruption case dismissal",
+    "Blanche Federalist Society war on judges",
+    "Trump hush money lawyer",
+    "Blanche Boris Epshteyn",
+    "DOJ politicization",
+    "career prosecutors resigned",
+    "Blanche confirmation hearing",
+    "white-collar crime enforcement",
+    "Trump justice department corruption"
+  ],
+  "leadParagraph": "Todd Blanche, who defended Trump in the hush money trial where he was convicted on all 34 counts, is now acting attorney general. His record: dismissing Eric Adams' corruption case, declaring 'war' on judges, and enabling DOJ politicization.",
+  "linkedPitch": null,
+  "location": "United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Todd Blanche and Donald Trump together.",
+    "asset": {
+      "_ref": "image-8f587019e24171471f4166de92baf5e7520c0898-711x400-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-03T00:02:49.636Z",
+  "readingTimeMinutes": 10,
+  "relatedArticles": [
+    {
+      "_key": "69cc13ff9a37",
+      "_ref": "pam-bondi-corruption-chronicle-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "af8484093a89",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "77f141d53ac4",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "5c34cb412084",
+      "_ref": "article-bcb451f2-8057-404b-8888-bcb84f7cf51b",
+      "_type": "reference"
+    },
+    {
+      "_key": "a88a2da40c56",
+      "_ref": "bddcld7vr4o",
+      "_type": "reference"
+    },
+    {
+      "_key": "f2e46c6cba9d",
+      "_ref": "iwpoje4qjb",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "todd-blanche-corrupt-ascent-acting-attorney-general-2026"
+  },
+  "tags": [
+    "corruption",
+    "doj",
+    "todd-blanche",
+    "trump-administration",
+    "federalist-society"
+  ],
+  "title": "From Trump's Hush Money Lawyer to Acting Attorney General: Todd Blanche's Corrupt Ascent",
+  "updatedAt": null,
+  "videoLink": null
+}

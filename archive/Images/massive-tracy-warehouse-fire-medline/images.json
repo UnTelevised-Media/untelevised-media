@@ -1,0 +1,25 @@
+{
+  "slug": "massive-tracy-warehouse-fire-medline",
+  "totalImages": 2,
+  "downloadedAt": "2026-07-11T07:38:50.924Z",
+  "images": [
+    {
+      "index": 0,
+      "alt": "Helicopter aerial view showing a massive warehouse fire at the Medline Industries distribution center with thick black smoke billowing across the sky in Tracy, California.",
+      "caption": "LiveCopter footage shows the scale of the Medline warehouse fire, with black smoke visible for miles across California's Central Valley.",
+      "credit": "KPIX/CBS News Bay Area via KCRA 3",
+      "asset": "image-975564f0744b0ffb49a17da3434db91cd7683ccf-1240x698-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "A massive plume of black smoke rises from the Medline warehouse fire, visible across the Tracy, California skyline as the fire continues to burn.",
+      "caption": "The smoke plume from the Medline fire remained visible for days, raising air quality concerns for communities across San Joaquin County.",
+      "credit": "KPIX/CBS News Bay Area",
+      "asset": "image-c6cefa4b1ec6dcbc912c69b86a685b7d35c6282b-1200x630-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    }
+  ]
+}

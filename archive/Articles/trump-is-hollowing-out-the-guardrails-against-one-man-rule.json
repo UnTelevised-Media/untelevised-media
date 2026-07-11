@@ -1,0 +1,114 @@
+{
+  "_id": "trump-hollowing-out-guardrails-op-ed",
+  "allowComments": null,
+  "author": {
+    "_ref": "169d84c0-ccdd-4d9c-8e39-c4e0261eb88d",
+    "_type": "reference",
+    "name": "Ryan Parker"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "d21a73f5-a2fc-46fd-8801-f1f32e1f0b1f",
+      "_ref": "d21a73f5-a2fc-46fd-8801-f1f32e1f0b1f",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Trump is not just pushing hard on policy—he's systematically weakening the institutions that keep any president from ruling as if the state were his alone. From civil service purges to press restrictions, from university pressure campaigns to law firm retaliation, the method is executive aggrandizement: hollowing out democracy from the inside while preserving its outward form.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Executive aggrandizement is when a leader uses the powers of office to weaken institutions that can check their authority. This includes sidelining independent officials, punishing critics, intimidating civil society, and turning neutral state capacity into personal power. It creates the shell of democracy while draining out the substance.",
+      "question": "What is executive aggrandizement?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Through multiple channels: creating Schedule Policy/Career to strip protections from civil servants, pressuring universities with funding cuts, restricting press access, targeting law firms that represent political opponents, attacking judges who rule against him, and deploying federal force in politically charged ways against jurisdictions led by opponents.",
+      "question": "How is Trump hollowing out democratic institutions?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Schedule Policy/Career is a new federal employee category that makes it easier to strip protections from career federal employees in policy-influencing roles. It allows replacing independence with loyalty to the president, turning the administrative state from a constitutional instrument into a personal one.",
+      "question": "What is Schedule Policy/Career and why does it matter?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Federal officers killed two U.S. citizens (Renee Good and Alex Pretti) during an immigration operation. Governor Tim Walz argued Minnesota was singled out, and the state sued federal agencies for access to evidence. The case raises concerns about federal force being used as a tool of partisan intimidation.",
+      "question": "What happened in Minnesota with the immigration surge?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "Support local journalism and watchdog groups, show up at public hearings, defend public servants who refuse unlawful orders, refuse language games that frame critics as traitors, vote in every election (not just presidential ones), and demand that Congress act as a coequal branch through oversight and restored protections.",
+      "question": "What can Americans do to protect democracy?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "executive aggrandizement",
+    "democratic backsliding",
+    "institutional hollowing",
+    "authoritarianism",
+    "civil service purge",
+    "Schedule Policy/Career",
+    "Trump administration",
+    "democratic institutions",
+    "rule of law",
+    "federal power",
+    "press freedom",
+    "judicial independence",
+    "universities under pressure",
+    "law firms retaliation",
+    "Minnesota immigration surge",
+    "constitutional crisis",
+    "authoritarian playbook",
+    "democracy at risk",
+    "congressional oversight",
+    "institutional solidarity"
+  ],
+  "leadParagraph": "Trump is not just pushing hard on policy. He is working to make the American state easier to bend around one man. That is the real danger. You do not need tanks in the street or a dramatic self-coup to move toward authoritarian rule. Modern democracies are more often broken from the inside. The method has a name: executive aggrandizement.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Trump Putin Maduro and Khamenei, over a background of their respective war fronts",
+    "asset": {
+      "_ref": "image-06a999e9c6c78fef4e2ede0168fbe6677f48094f-1024x1536-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-02T19:18:33.297124",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "trump-is-hollowing-out-the-guardrails-against-one-man-rule"
+  },
+  "tags": [
+    "trump",
+    "authoritarianism",
+    "democracy",
+    "executive-power",
+    "institutional-hollowing"
+  ],
+  "title": "Trump Is Hollowing Out the Guardrails Against One-Man Rule",
+  "updatedAt": null,
+  "videoLink": null
+}

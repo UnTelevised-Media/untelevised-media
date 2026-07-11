@@ -1,0 +1,146 @@
+{
+  "_id": "who-is-tyler-brown-memorial-drive-shooter",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-civilunrest",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-usnews",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Tyler E. Brown fired 60+ rounds on Memorial Drive in Cambridge, critically injuring two people. His 30-year criminal history includes shooting at Boston police in 2020, a 2014 knife attack, drug convictions, and institutional failures at every level. Here is his complete profile.",
+  "eventDate": "2026-05-11T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Tyler E. Brown, 46, of Boston, is the man accused of firing more than 60 rounds from a semi-automatic rifle on Memorial Drive in Cambridge, Massachusetts on May 11, 2026, critically injuring two people. He has a 30-year criminal history spanning Michigan, New Hampshire, and Massachusetts.",
+      "question": "Who is Tyler E. Brown?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Brown's record includes a 1994 armed robbery conviction in Michigan, a 1999 jail escape using violence, 2007 New Hampshire drug convictions, a 2008 Brockton firearms case (later dismissed due to the state drug lab scandal), a 2014 knife attack and witness intimidation conviction, and a 2020 shootout with Boston Police for which he served five to six years in state prison.",
+      "question": "What was Tyler Brown's prior criminal record?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Brown was accepted into the Tufts University Prison Initiative's MyTERN reentry program after his release from prison in 2025. He was featured as a speaker at TUPIT's annual Community Conversations Dinner in February 2026. He stopped attending the program in February, according to university officials.",
+      "question": "How was Tyler Brown connected to Tufts University?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The two victims were identified by family members as Casimir Bangoura, a Cambridge resident driving to the car wash, and a man known only as Felix, a father of eight who worked as an MBTA Ride Services driver. Both suffered life-threatening injuries.",
+      "question": "Who were the victims of the Memorial Drive shooting?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Prosecutors requested 10-12 years for shooting at four Boston police officers. Judge Janet Sanders imposed only 5-6 years, citing the Massachusetts drug lab scandal that reduced mandatory minimums, Brown's educational achievements, and letters of support from Boston City Hall's Office of Returning Citizens. One officer wrote that Brown would 'hurt, or worse, kill someone' if released.",
+      "question": "Why was Brown's 2020 sentence controversial?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Tyler Brown",
+    "Memorial Drive shooting",
+    "Cambridge",
+    "Boston police shootout",
+    "armed robbery",
+    "Tufts MyTERN",
+    "Judge Janet Sanders",
+    "Rachael Rollins",
+    "Massachusetts Parole Board",
+    "McLean Hospital"
+  ],
+  "leadParagraph": "A deep investigation into Tyler E. Brown — the man behind the Cambridge Memorial Drive shooting — his three-decade criminal history, the institutions connected to him, the systemic failures that kept him on the street, and the people who tried to help.",
+  "linkedPitch": null,
+  "location": "Boston / Cambridge, Massachusetts",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Tyler E. Brown shooting into traffic in Cambridge.",
+    "asset": {
+      "_ref": "image-adec5410ad6ae4a80cdf6a174362c5054ba7caca-1206x780-webp",
+      "_type": "reference"
+    },
+    "caption": "Tyler E. Brown appeared from a hospital bed for a virtual arraignment in Cambridge District Court on May 14, 2026, facing charges for the Memorial Drive shooting",
+    "credit": "WBUR / Cambridge District Court"
+  },
+  "methodology": "Reported using court records, police reports, sentencing transcripts, Suffolk County DA press releases, and investigative reporting from WBUR, the Boston Globe, Boston Herald, CBS Boston, WCVB, NBC Boston, Patch, and the Tufts Daily. All claims cross-referenced across multiple sources.",
+  "needsReview": null,
+  "publishedAt": "2026-07-03T20:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "killdozer-22-years-granby-colorado-man-built-his-own-justice",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "trump-pardons-corrupt-officials-dismantles-justice-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "prairieland-sentencing-450-years-antifa-crackdown-authoritarianism",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "south-carolina-jury-acquits-store-owner-who-killed-14-year-old-over-bottled-water",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "immigration-detention-system-expansion-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "who-is-tyler-e-brown-the-full-profile-of-the-cambridge-memorial-drive-gunman"
+  },
+  "tags": [
+    "Tyler Brown",
+    "Cambridge shooting",
+    "Memorial Drive",
+    "Boston crime",
+    "mass shooting",
+    "parole",
+    "mental health",
+    "criminal justice",
+    "Massachusetts"
+  ],
+  "title": "Who Is Tyler E. Brown? The Full Profile of the Cambridge Memorial Drive Gunman",
+  "updatedAt": null,
+  "videoLink": null
+}

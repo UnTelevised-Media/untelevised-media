@@ -1,0 +1,117 @@
+{
+  "_id": "7ONx74QMiI10eazwub4cRf",
+  "allowComments": true,
+  "author": {
+    "_ref": "RYZn4iYE9ChjVaOaU8i41k",
+    "_type": "reference",
+    "name": "Justin King"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "dbee775e8971",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    },
+    {
+      "_key": "60c14cea04b8",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Viyan Antar, 19, was killed fighting Islamic State forces in Northern Syria last month. Undoubtedly, Viyan, like many Kurdish fighters, was gorgeous. Western media outlets sought to capitalize on the death of the “Kurdish Angelina Jolie”. Her photo was plastered all over the media. Her death was used to further the march for war in Syria. Had this been a US soldier, the incident would have been forgotten before her body was cold. In this case, the media’s treatment of the young Kurdish fighter unleashed a firestorm of criticism and sparked multiple debates. ",
+  "eventDate": "2016-08-30T16:04:00.000Z",
+  "faqs": [
+    {
+      "_key": "kezsk29",
+      "_type": "faqItem",
+      "answer": "Viyan Antar was a 19-year-old Kurdish fighter who was killed fighting Islamic State forces in Northern Syria. Western media dubbed her the \"Kurdish Angelina Jolie\" — a characterization that drew fierce criticism for reducing her to her appearance.",
+      "question": "Who was Viyan Antar?"
+    },
+    {
+      "_key": "kf066d1",
+      "_type": "faqItem",
+      "answer": "Her death ignited debates about the sexualization of women fighters by Western media, Western military intervention in Syria, and the ethics of using a fighter's death to advance political agendas rather than honoring her sacrifice.",
+      "question": "What debates did Viyan Antar's death spark?"
+    },
+    {
+      "_key": "kf1auxe",
+      "_type": "faqItem",
+      "answer": "The YPJ (Women's Protection Units) and YPG (People's Protection Units) are Kurdish military forces fighting ISIS in Syria and defending Rojava — the Kurdish autonomous region in northern Syria based on principles of direct democracy, gender equality, and ecological sustainability.",
+      "question": "What are the YPJ and YPG?"
+    },
+    {
+      "_key": "kf24xhl",
+      "_type": "faqItem",
+      "answer": "Western media gave extensive coverage to Kurdish women fighters' physical appearance and romantic lives, while similar attention would never be paid to Western soldiers. The coverage was criticized for objectifying women who were fighting for a philosophy that explicitly rejects the objectification and sexualization of women.",
+      "question": "How did Western media coverage of Kurdish fighters differ from coverage of Western soldiers?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Anon Resistance",
+    "ARM",
+    "Anon",
+    "Resistance",
+    "Movement",
+    "Anonymous",
+    "Anonymous 2017",
+    "the anon message",
+    "anonmessage",
+    "official anonymous website",
+    "official anonymous",
+    "anonymous channel",
+    "anonymous today",
+    "anonymous this week",
+    "anonymous 2017",
+    "today anonymous 2017 this week",
+    "anonymous 2017 latest",
+    "anonymous hackers",
+    "Anarchy",
+    "Anarchism"
+  ],
+  "leadParagraph": "Viyan Antar, 19, was killed fighting Islamic State forces in Northern Syria last month. Undoubtedly, Viyan, like many Kurdish fighters, was gorgeous. Western media outlets sought to capitalize on the death of the “Kurdish Angelina Jolie”. Her photo was plastered all over the media. Her death was used to further the march for war in Syria. Had this been a US soldier, the incident would have been fo",
+  "linkedPitch": null,
+  "location": "Northern Syria",
+  "mainImage": {
+    "_type": "image",
+    "asset": {
+      "_ref": "image-7dc801513d2a870abb7293c9127c6855902bb586-600x400-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website (news.anonresistance.dx.am) and has been migrated to UnTelevised Media.",
+  "needsReview": false,
+  "publishedAt": "2016-09-16T12:00:00Z",
+  "readingTimeMinutes": 4,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "death-of-beautiful-teenage-kurdish-fighter-sparks-multiple-debates"
+  },
+  "tags": [
+    "kurdish",
+    "ypj",
+    "ypg",
+    "isis",
+    "syria",
+    "media-criticism",
+    "women-fighters",
+    "xfbml",
+    "kudistan",
+    "martyr"
+  ],
+  "title": "Death of beautiful teenage Kurdish fighter sparks multiple debates",
+  "updatedAt": null,
+  "videoLink": null
+}

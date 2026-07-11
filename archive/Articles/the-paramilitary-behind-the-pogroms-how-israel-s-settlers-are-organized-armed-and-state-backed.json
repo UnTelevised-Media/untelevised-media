@@ -1,0 +1,162 @@
+{
+  "_id": "the-paramilitary-behind-the-pogroms-settler-paramilitaries-state-backed-ethnic-cleansing-west-bank",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-0",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-1",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Amnesty International's 149-page report confirming state-led ethnic cleansing in the West Bank is the latest evidence of what Palestinians have documented for years: Israeli settlers are not civilians. They are a state-armed, IDF-trained paramilitary force carrying out organized pogroms, land theft, and agricultural destruction — all backed by Ben-Gvir, Smotrich, and full Israeli government machinery.",
+  "eventDate": "2026-06-10",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "Amnesty International's 149-page report, published June 10, 2026, concluded that Israel is conducting a state-led, state-sanctioned, and state-implemented campaign of ethnic cleansing against Palestinian Bedouin and herding communities in the occupied West Bank, displacing at least 117 communities and over 5,910 people since January 2023.",
+      "question": "What did Amnesty International's 2026 report on the West Bank conclude?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "According to Oxfam's analysis of UN data, 1,244 Palestinians — including 268 children — have been killed by Israeli forces or settlers in the West Bank between 2023 and the end of 2025, exceeding the total of 1,036 killed in the previous 17 years combined (2006–2022).",
+      "question": "How many Palestinians have been killed in the West Bank since October 2023?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Israeli National Security Minister Itamar Ben-Gvir has overseen the distribution of 10,000 assault rifles to settlers and issued 230,000 new firearm licenses since taking office. Settlers carry military-grade weapons including M16 and Tavor rifles, provided directly by the Israeli government.",
+      "question": "How are West Bank settlers armed and by whom?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Shepherding outposts are rudimentary tent-and-water-tank installations settlers erect on Palestinian agricultural land to claim it for 'grazing.' With IDF backing, settlers have seized enough land through outposts to double their holdings from 7% to 14% of the West Bank between 2022 and 2024 alone.",
+      "question": "What are shepherding outposts and how do settlers use them to steal land?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The Hagmar are IDF regional defense reserve units staffed entirely by West Bank settlers. They wear IDF uniforms, carry IDF weapons, and receive military pay, but function as what one reservist called 'armed militias doing what they want,' blurring the line between formal military and settler paramilitaries.",
+      "question": "What are the Hagmar units in the Israeli military?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "According to the Palestinian Authority's Agriculture Ministry, settlers have killed or stolen 8,000 sheep and goats in the West Bank in the first half of 2026 alone, systematically targeting Bedouin and herding communities to destroy their livelihoods and force displacement.",
+      "question": "How much livestock have settlers stolen from Palestinian farmers?"
+    },
+    {
+      "_key": "faq-6",
+      "answer": "On February 26, 2023, hundreds of Israeli settlers rampaged through the Palestinian town of Huwara near Nablus, killing one Palestinian, injuring over 100, and burning homes, cars, and businesses. Finance Minister Smotrich later said Huwara should be 'erased' by the state. The town was attacked again in June 2026.",
+      "question": "What was the Huwara pogrom?"
+    },
+    {
+      "_key": "faq-7",
+      "answer": "According to Israeli human rights organization Yesh Din, 97.4% of complaints submitted by Palestinians to Israeli police regarding settler violence are closed without any charges being filed. In November 2024, Israel also cancelled administrative detention for settlers accused of violent crimes.",
+      "question": "What is the impunity rate for settler violence in the West Bank?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "West Bank settler violence",
+    "ethnic cleansing West Bank",
+    "paramilitary settlers Israel",
+    "Huwara pogrom",
+    "settler arson",
+    "livestock theft West Bank",
+    "Ben-Gvir assault rifles",
+    "Hagmar units IDF",
+    "shepherding outposts",
+    "Amnesty report West Bank 2026"
+  ],
+  "leadParagraph": "On the same day the UK, Canada, France, and Norway announced sanctions on settler violence networks, Amnesty International released a 149-page report documenting what Palestinians have said for decades: the expulsion of Palestinians from the occupied West Bank is a state-led, state-sanctioned, state-implemented campaign of ethnic cleansing. The so-called \"settlers\" behind it are not civilians. They are former IDF soldiers, armed by the state, organized in military units, and deployed as the vanguard of territorial expansion.",
+  "linkedPitch": null,
+  "location": "West Bank, Occupied Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Israeli settlers and soldiers standing near a Palestinian village in the West Bank, August 2009",
+    "asset": {
+      "_ref": "image-c065f4578049d00602a86f988a057f9f6d19f596-3264x2448-webp",
+      "_type": "reference"
+    },
+    "caption": "Israeli settlers and soldiers confront Palestinians in the village of Iraq Burin, occupied West Bank, August 2009.",
+    "credit": "Wikimedia Commons / Activestills.org (CC BY-SA 2.0)"
+  },
+  "methodology": "Analysis of Amnesty International June 2026 report, Oxfam UN data analysis, UN OCHA documentation, Yesh Din legal tracking, Times of Israel reporting, Red Pepper investigative reporting, Human Rights Watch monitoring, Middle East Eye field reporting, and historical documentation of West Bank pogroms from 2015–2026.",
+  "needsReview": null,
+  "publishedAt": "2026-06-10T16:22:00.000Z",
+  "readingTimeMinutes": 18,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "un-echoes-what-palestinians-have-said-for-decades-settler-violence-is-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "west-bank-settlers-8000-sheep-goats-stolen-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "jalud-settlers-burn-electricity-cables-west-bank-terror-campaign",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "west-bank-burning-organized-settler-violence-state-backing-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "smotrich-icc-khan-al-ahmar-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "israel-colonization-cyprus-settler-enclaves-military-outposts",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-paramilitary-behind-the-pogroms-how-israel-s-settlers-are-organized-armed-and-state-backed"
+  },
+  "tags": [
+    "West Bank",
+    "settler violence",
+    "Ben-Gvir",
+    "Smotrich",
+    "pogroms",
+    "IDF",
+    "paramilitary",
+    "sanctions",
+    "Palestine",
+    "occupied territories"
+  ],
+  "title": "The Paramilitary Behind the Pogroms: How Israel's \"Settlers\" Are Organized, Armed, and State-Backed Engines of Ethnic Cleansing",
+  "updatedAt": null,
+  "videoLink": null
+}

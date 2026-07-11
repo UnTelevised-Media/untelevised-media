@@ -1,0 +1,53 @@
+{
+  "_id": "article-6bf75496-471d-432b-a783-3218aaf6dd5f",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "90e036ac29e9",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Amid rising tensions, Israel issues a revised evacuation deadline for Al-Quds Hospital in Gaza City. Get the latest updates on this developing situation and the humanitarian crisis unfolding in the region",
+  "eventDate": "2023-10-20T20:35:00.000Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "A man carries an elderly woman near Al Quds hospital after an Israeli airstrike",
+    "asset": {
+      "_ref": "image-10fbf6ef09f069ed5363b4ddf9a9cba58314e33d-800x533-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-10-20T21:40:56.296Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "israel-sets-new-evacuation-deadline-for-al-quds-hospital-in-gaza-city-amid-tensions"
+  },
+  "tags": null,
+  "title": "Israel Sets New Evacuation Deadline for Al-Quds Hospital in Gaza City Amid Tensions",
+  "updatedAt": null,
+  "videoLink": null
+}

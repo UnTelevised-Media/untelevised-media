@@ -1,0 +1,158 @@
+{
+  "_id": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-gaza",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-hr",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "UNRWA holds the Nakba registry — the property deeds, land titles, and family records that prove Palestine exists. Trump's Board of Peace just declared it has 'no place' in Gaza. This is not about aid. It is about destroying the evidence of a crime — and completing 78 years of ethnic cleansing with AI screening, concentration camps, and a $300 billion real estate scheme.",
+  "eventDate": "2026-07-06T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The Nakba registry refers to UNRWA's archives in Amman, Jordan, which contain property deeds from the British Mandate period, Ottoman-era land titles (kushan), identity papers, birth and death certificates, and family ledgers covering five generations and approximately 5.9 million registered Palestinian refugees. These documents are the evidentiary backbone of Palestinian land ownership and the right of return. Destroying UNRWA means destroying this proof.",
+      "question": "What is the Nakba registry and why does it matter?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Trump's Board of Peace was established in January 2026, led by Jared Kushner, Steve Witkoff, and other Trump allies. Its leaked Resolution 2026/3 grants sweeping legal immunity to all its personnel, seizes Palestinian property 'free of charge,' and creates a self-adjudicating system for claims. It has declared UNRWA has 'no place' in Gaza and plans 'Hamas-free' zones starting in Tel Sultan.",
+      "question": "What is the Board of Peace?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Gaza Reconstitution, Economic Acceleration and Transformation Trust is a 38-page plan that envisions 'voluntary' relocation of Gaza's 2 million people, six to eight AI-powered smart cities, and replacement of Palestinian property deeds with tradable digital tokens. It leases 30% of Gaza's public land for up to 99 years and claims $300 billion in asset value.",
+      "question": "What is the GREAT Trust?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "From May 27 to October 9, 2025, more than 2,600 Palestinian civilians seeking food were killed and thousands wounded when fired upon by the IDF, armed gangs, and GHF contractors at US-backed food distribution sites. HRW concluded these killings constitute war crimes.",
+      "question": "How many Palestinians were killed at GHF aid sites?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "The same erasure machine operates in parallel in the West Bank: 8,691 reported settler attacks through April 2026, 41 Palestinians killed by settlers, settler violence displacing more people in early 2026 than all of 2025, and Finance Minister Smotrich accelerating home demolitions and land seizures. The Board of Peace has said nothing about the West Bank pogroms.",
+      "question": "How does this connect to the West Bank?"
+    },
+    {
+      "_key": "faq-6",
+      "_type": "faqItem",
+      "answer": "On February 4, 2025, Trump said the US would 'take over' and 'own' Gaza, calling it the 'Riviera of the Middle East.' On February 10, he said Gazans 'would not be permitted to return.' His son-in-law Jared Kushner has described Gaza's post-war potential as luxury development and seaside resorts.",
+      "question": "What did Trump say about Gaza?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "UNRWA Nakba registry archives erased",
+    "Board of Peace Trump Gaza legal immunity",
+    "GREAT Trust digital tokens Gaza property deeds",
+    "Gaza Humanitarian Foundation contractors killed",
+    "Trump Gaza Riviera real estate plan",
+    "Israel UNRWA ban terrorist designation",
+    "Netanyahu 70 percent Gaza military control",
+    "Tel Sultan Hamas-free zone Board of Peace",
+    "West Bank settler violence 2026 statistics",
+    "Gaza death penalty law Palestinians hanging",
+    "AI concentration camps Gaza Lavender",
+    "Palestinian right of return UNRWA archives"
+  ],
+  "leadParagraph": "On July 1, 2026, Donald Trump's Board of Peace declared that UNRWA — the UN agency that holds the Nakba registry, 5.9 million refugee files, and the property deeds proving Palestinian land ownership — 'has no place in the new Gaza.' This was not a humanitarian announcement. It was the bureaucratic announcement of a plan to erase Palestine's entire documentary, legal, and historical claim to existence. From the GREAT Trust's digital tokens replacing ancestral deeds to Israel's AI concentration camps to the 2,600 Palestinians killed seeking food at US-backed distribution sites, every thread connects to a single architecture of erasure — and it is being built by the same people who profited $2.2 billion from insider trading on war.",
+  "linkedPitch": null,
+  "location": "Gaza Strip, Occupied Palestine",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Aerial photograph showing vast destruction of buildings in Rafah, Gaza, with rubble-filled lots and damaged structures stretching to the horizon",
+    "asset": {
+      "_ref": "image-672eff64ca33bb53505d69ce4a5734842be9f9b5-1024x683-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This analysis draws on primary documents including the Board of Peace's leaked Resolution 2026/3 (The Guardian, June 27, 2026), the GREAT Trust's 38-page redevelopment plan (disclosed by Washington Post, detailed by CNBC), Israeli Knesset legislation (October 28, 2024 UNRWA ban), HRW's August 2025 report on GHF war crimes, UN OHCHR casualty figures for aid distribution killings, Reuters and Al Jazeera reporting on Netanyahu's 70% Gaza seizure directive (May 28, 2026), OCHA data on West Bank settler violence, Israel Hayom reporting on Tel Sultan pilot zones, TruthOut analysis of Board of Peace humanitarian zones, Le Monde's exclusive access to UNRWA archives in Amman (August 2024), and Middle East Eye reporting on the Kushan Baladi land title system. Trump's Gaza takeover proposal timeline sourced from Wikipedia's compiled record. All interlinked UTM articles represent our own 3-year body of investigative reporting on the genocide.",
+  "needsReview": null,
+  "publishedAt": "2026-07-06T05:30:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "israels-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "salah-akram-gaza-is-shrinking",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "israel-yellow-line-gaza-expanding-de-facto-reoccupation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "bddcld7vr4o",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "smotrich-icc-khan-al-ahmar-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "salah-akram-the-streets-that-swallow-us",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "erasing-palestine-how-trump-netanyahu-and-the-board-of-peace-are-completing-the-nakba"
+  },
+  "tags": [
+    "UNRWA",
+    "Board of Peace",
+    "Trump",
+    "Netanyahu",
+    "Nakba",
+    "Gaza",
+    "GREAT Trust",
+    "GHF",
+    "West Bank",
+    "Settler Violence",
+    "Ethnic Cleansing",
+    "Concentration Camps",
+    "AI Targeting",
+    "Death Penalty",
+    "Kushner"
+  ],
+  "title": "Erasing Palestine: How Trump, Netanyahu, and the Board of Peace Are Completing the Nakba",
+  "updatedAt": null,
+  "videoLink": null
+}

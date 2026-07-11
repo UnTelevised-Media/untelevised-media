@@ -1,0 +1,116 @@
+{
+  "_id": "YtJR1N6fGBsJu5O68LOL54",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "76ed5b39d577",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "38f75ac9b1f7",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "8af4cdab5033",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": {
+    "_type": "correctionObject",
+    "detail": "Demonstrator Samuel Young shot at the blue Jeep. He fired at the vehicle as it sped through the crowd blocking I-225. The bullets missed the vehicle but struck two fellow protesters, Young was subsequently charged & convicted.",
+    "issuedAt": "2026-06-23T19:45:01.879Z",
+    "summary": "Samuel Young was identified as the shooter, and later charged and convicted.",
+    "type": "update"
+  },
+  "deletionRequest": null,
+  "description": "Protesters in Aurora, Colorado marched down I-225 demanding justice for Elijah McClain.  Aurora police had been blocking traffic onto the interstate, however after approx 30 minuets into the march on I-225 Aurora police released traffic onto the interstate. This resulted in a turquoise jeep driving into the back line of protesters. As the jeep drove through the crowd of protesters on the interstate, shots rang out. It is still unknown who all fired but it is currently believed that a protester fired shots at the tires of the jeep as it passed through the rear of the march, blowing out one of the tires, and striking one protester in the leg from ricochet. Another protester was grazed on the side of the head near the front of the march, eye witnesses report that these shots came from the jeep. Both are in stable condition. We will update as more details emerge.",
+  "eventDate": "2020-07-25T19:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "k5uurg",
+      "_type": "faqItem",
+      "answer": "A turquoise Jeep drove into a protest march on Interstate 225 in Aurora, Colorado, with marchers reporting gunfire. At least two protesters were hit - one struck in the leg by ricochet and another grazed in the head, both reported to be in stable condition.",
+      "question": "What happened when a Jeep drove through the I-225 protest?"
+    },
+    {
+      "_key": "k6771r",
+      "_type": "faqItem",
+      "answer": "It remains unclear who fired the shots. Eyewitnesses reported that protesters may have fired at the vehicle tires as it passed through, and there were also reports that some shots came from the Jeep itself, suggesting multiple parties may have been armed.\nUPDATE: It was determined that shots were fired by a protester at the jeep and he is facing charges from this event.",
+      "question": "Who fired the shots during the I-225 incident?"
+    },
+    {
+      "_key": "k7ft2h",
+      "_type": "faqItem",
+      "answer": "Protesters marching for Elijah McClain were demanding justice and blocking traffic. Aurora police initially blocked access to the interstate but then released traffic onto the roadway, leading to the vehicle driving into the crowd.",
+      "question": "Why were protesters on Interstate 225?"
+    },
+    {
+      "_key": "k8i3cj",
+      "_type": "faqItem",
+      "answer": "Police presence and the decision to release traffic onto the interstate where protesters were marching created the conditions for the vehicle attack. This raised questions about whether police coordination with the driver was involved.",
+      "question": "What role did police play in the I-225 incident?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": true,
+  "imageGallery": null,
+  "isFieldReport": true,
+  "keywords": [
+    "vehicle attack",
+    "Interstate 225",
+    "Aurora Colorado",
+    "gunfire",
+    "protest violence",
+    "police response",
+    "Elijah McClain march",
+    "armed conflict",
+    "July 2020",
+    "wounded protesters"
+  ],
+  "leadParagraph": "Protesters in Aurora, Colorado marched down I-225 demanding justice for Elijah McClain.  Aurora police had been blocking traffic onto the interstate, however after approx 30 minuets into the march on I-225 Aurora police released traffic onto the interstate. This resulted in a turquoise jeep driving into the back line of protesters. As the jeep drove through the crowd of protesters on the interstat",
+  "linkedPitch": null,
+  "location": "Aurora, Colorado. USA",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Blue jeep speeds towards back side of protest as several people throw items at the jeep. [Radical Edward - Untelevised Media]",
+    "asset": {
+      "_ref": "image-f2de88c49a3b489332d4bf072cdb9e77238d076a-579x386-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website and has been migrated to UnTelevised Media. This article is an on the scene, eye witness report from Radical Edward. Report is supplemented with livestream footage from 3 other on the ground independent journalist; Cut the Plastic AKA Brian Loma, Justin Roske & Unicorn Riot",
+  "needsReview": false,
+  "publishedAt": "2020-07-25T21:00:00.000Z",
+  "readingTimeMinutes": 4,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "jeep-drives-through-interstate-protest-in-aurora-colorado-shots-fired-hitting-two-protesters"
+  },
+  "tags": [
+    "vehicle-attack",
+    "aurora",
+    "interstate-225",
+    "gunfire",
+    "protest-safety",
+    "2020",
+    "police-role"
+  ],
+  "title": "Jeep Drives Through Interstate Protest in Aurora Colorado, Shots Fired Hitting Two Protesters",
+  "updatedAt": null,
+  "videoLink": "https://www.youtube.com/watch?v=ypAXtCqRCww"
+}

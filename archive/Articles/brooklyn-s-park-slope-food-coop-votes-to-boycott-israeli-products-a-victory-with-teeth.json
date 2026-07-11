@@ -1,0 +1,129 @@
+{
+  "_id": "park-slope-food-coop-israel-boycott",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-civil-unrest",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The Park Slope Food Coop voted 67% to boycott Israeli products after months of fierce internal campaigning. Here is why boycotts work and how BDS is following the South Africa blueprint.",
+  "eventDate": "2026-05-26T22:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "On May 26, 2026, members voted 67% in favor of boycotting nine Israeli products, including bell peppers, persimmons, olive oil, sesame products, Dorot frozen herb cubes, and Osem Bamba. The boycott will remain in effect until Israel complies with international law regarding its treatment of Palestinians.",
+      "question": "What did the Park Slope Food Coop vote on?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Roughly 7,000 of the coop's 17,000 members participated in the three-hour virtual meeting. Of the 6,772 votes cast, 67% voted in favor, 31% against, and 2% abstained.",
+      "question": "How many members voted?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "BDS stands for Boycott, Divestment, and Sanctions. Founded in 2005 by Palestinian civil society, it is a global nonviolent movement pressuring Israel to comply with international law, end the occupation, and grant full equality to Palestinian citizens of Israel. It is modeled on the anti-apartheid movement that helped dismantle South Africa's racist regime.",
+      "question": "What is the BDS movement?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Yes. BDS counts over 250 victories in the U.S. alone since 2004. Recent wins include Harvard Law passing a 73% divestment referendum, Yale students voting 76% to divest from weapons manufacturers, Sacramento State becoming California's first public university to divest from Israeli apartheid, and the Norwegian oil fund divesting from 23 Israeli companies.",
+      "question": "Has BDS been effective?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "The international boycott, divestment, and sanctions campaign against apartheid South Africa spanned decades. By the 1980s, major corporations had pulled out, university endowments worth billions had divested, and the U.S. Congress passed the Comprehensive Anti-Apartheid Act. The economic and political isolation was devastating to the regime and was cited by F.W. de Klerk as a key factor in negotiations to end apartheid.",
+      "question": "How did the boycott movement help end South African apartheid?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "Yes. The coop moved the vote entirely online after staff and members raised explicit safety concerns. The general manager cited threatening letters, suspicious substances sent through the mail, aggressive phone calls, hostile social media campaigns, and confrontations between members during the campaign.",
+      "question": "Were there security concerns during the vote?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "park slope food coop",
+    "bds",
+    "boycott israel",
+    "gaza",
+    "palestine",
+    "divestment",
+    "sanctions",
+    "brooklyn",
+    "south africa apartheid",
+    "harvard divestment",
+    "yale divestment",
+    "icj ruling",
+    "international law"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": "Brooklyn, New York",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Exterior of the Park Slope Food Coop in Brooklyn, New York",
+    "asset": {
+      "_ref": "image-38b7509c762293eb2ac080f11d0e961b6140f54e-1280x720-webp",
+      "_type": "reference"
+    },
+    "caption": "The Park Slope Food Coop in Brooklyn. Founded in 1973, it has a long history of socially conscious boycotts, including against apartheid South Africa and Pinochet's Chile.",
+    "credit": "JPost"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-28T05:30:00.000Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "description": "Brooklyn's Park Slope Food Coop voted 67% to boycott Israeli products. A look at why boycotts are one of the most powerful tools against apartheid and genocide.",
+    "title": "Park Slope Food Coop Boycotts Israel: Why Boycotts Work"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "brooklyn-s-park-slope-food-coop-votes-to-boycott-israeli-products-a-victory-with-teeth"
+  },
+  "tags": [
+    "bds",
+    "boycott",
+    "palestine",
+    "israel",
+    "park-slope",
+    "gaza-genocide",
+    "human-rights",
+    "sanctions",
+    "anti-apartheid"
+  ],
+  "title": "Brooklyn's Park Slope Food Coop Votes to Boycott Israeli Products — A Victory With Teeth",
+  "updatedAt": null,
+  "videoLink": null
+}

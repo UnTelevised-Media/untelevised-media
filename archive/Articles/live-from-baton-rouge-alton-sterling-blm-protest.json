@@ -1,0 +1,114 @@
+{
+  "_id": "7ONx74QMiI10eazwub4WiT",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "e246acd288d5",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "8c9da1bd07be",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Join Radical Edward on the streets of Baton Rouge during the aftermath of the Alton Sterling murder, a man who was gunned down in his own neighborhood by 2 pigs: Howie Lake II and Blane Salamoni. Hundreds where arrested Over the 9th & 11th. On the 12th Edward makes light of a video jamming technology the Baton Rouge PD is using to prevent live streaming of protests. ON the 13th Edward goes Live from the Triple-S in Baton Rouge Louisiana site of the Alton Sterling murder. Anon Resistance covers what's going on and give you a real perspective of what's actually happening and what the community is really like when the police are not in their face. -Radical Edward",
+  "eventDate": "2016-07-13T01:38:00.000Z",
+  "faqs": [
+    {
+      "_key": "kcd60xs",
+      "_type": "faqItem",
+      "answer": "Alton Sterling was a Black man shot and killed by Baton Rouge police officers Howie Lake II and Blane Salamoni on July 5, 2016, while selling CDs outside a convenience store. His death sparked widespread protests across Baton Rouge and the nation.",
+      "question": "Who is Alton Sterling and why was he significant?"
+    },
+    {
+      "_key": "kcebb0n",
+      "_type": "faqItem",
+      "answer": "On July 12, 2016, Radical Edward documented technology used by the Baton Rouge Police Department that appeared designed to prevent live streaming of protests — potentially a cell signal jammer or stingray device.",
+      "question": "What video jamming technology did Baton Rouge PD use?"
+    },
+    {
+      "_key": "kcfmh9h",
+      "_type": "faqItem",
+      "answer": "Alton Sterling was shot and killed at the Triple-S convenience store in Baton Rouge, Louisiana. Radical Edward later visited and livestreamed from that location on July 13th, providing community perspective.",
+      "question": "Where did the Alton Sterling shooting occur?"
+    },
+    {
+      "_key": "kcg9rou",
+      "_type": "faqItem",
+      "answer": "Hundreds of protesters were arrested over the July 9th and 11th protests in Baton Rouge following the killing of Alton Sterling.",
+      "question": "How many people were arrested during the Baton Rouge protests?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Anon Resistance",
+    "ARM",
+    "Anon",
+    "Resistance",
+    "Movement",
+    "Anonymous",
+    "Anonymous 2017",
+    "the anon message",
+    "anonmessage",
+    "official anonymous website",
+    "official anonymous",
+    "anonymous channel",
+    "anonymous today",
+    "anonymous this week",
+    "anonymous 2017",
+    "today anonymous 2017 this week",
+    "anonymous 2017 latest",
+    "anonymous hackers",
+    "Anarchy",
+    "Anarchism"
+  ],
+  "leadParagraph": "Join Radical Edward on the streets of Baton Rouge during the aftermath of the Alton Sterling murder, a man who was gunned down in his own neighborhood by 2 pigs: Howie Lake II and Blane Salamoni. Hundreds where arrested Over the 9th & 11th. On the 12th Edward makes light of a video jamming technology the Baton Rouge PD is using to prevent live streaming of protests. ON the 13th Edward goes Live fr",
+  "linkedPitch": null,
+  "location": "Baton Rouge, Louisiana",
+  "mainImage": {
+    "_type": "image",
+    "asset": {
+      "_ref": "image-083f06c99a4be3f2e8d3814036fda737fc7f711b-600x400-png",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website (news.anonresistance.dx.am) and has been migrated to UnTelevised Media.",
+  "needsReview": false,
+  "publishedAt": "2016-07-09T12:00:00Z",
+  "readingTimeMinutes": 2,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "live-from-baton-rouge-alton-sterling-blm-protest"
+  },
+  "tags": [
+    "baton-rouge",
+    "alton-sterling",
+    "police-brutality",
+    "protests",
+    "surveillance",
+    "black-lives-matter",
+    "blacklivesmatter",
+    "xfbml",
+    "batonrouge",
+    "altonsterling"
+  ],
+  "title": "Live From Baton Rouge Alton Sterling BLM Protest",
+  "updatedAt": null,
+  "videoLink": null
+}

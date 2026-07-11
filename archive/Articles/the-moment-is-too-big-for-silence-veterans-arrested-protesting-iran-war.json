@@ -1,0 +1,123 @@
+{
+  "_id": "veterans-arrested-protesting-iran-war",
+  "allowComments": true,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "About 120 U.S. military veterans stood in formation in the Cannon House Office Building rotunda on Capitol Hill, holding red tulips and conducting a flag-folding ceremony. At least 62 were arrested by U.S. Capitol Police, including Mike Prysner (CCW Executive Director) and Tyler Romero (conscientious objector). They demanded Speaker Mike Johnson stop funding Operation Epic Fury.",
+  "eventDate": "2026-04-20T15:11:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "About 120 U.S. military veterans and military family members staged a peaceful civil disobedience protest in the Cannon House Office Building rotunda on Capitol Hill. They stood in formation holding red tulips honoring Iranians killed by U.S. bombs, conducted a flag-folding ceremony for U.S. troops killed, and demanded Speaker Mike Johnson stop funding Operation Epic Fury. At least 62 were arrested by U.S. Capitol Police.",
+      "question": "What happened at the Capitol on April 20, 2026?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "The protest was organized by a coalition of veterans groups including About Face, Veterans For Peace, Common Defense, Center on Conscience and War (CCW), Fayetteville Resistance Coalition, Military Families Speak Out, and 50501 Veterans. The protest itself was named 'Veterans Against Fascism.'",
+      "question": "Who organized the protest?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "At least 62 people were arrested, including Mike Prysner (CCW Executive Director, Iraq War veteran, 4 years Army) and Tyler Romero (Navy corpsman, 7 years service, conscientious objector applicant). Also arrested were disabled veterans, mothers whose children are deployed to the Middle East, and wives whose husbands are fighting in Operation Epic Fury.",
+      "question": "Who was arrested and what are their backgrounds?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The veterans were demanding that Speaker Mike Johnson come meet them, accept the folded flag (symbolizing U.S. troops killed), and pledge to stop funding Operation Epic Fury. They wanted Johnson to publicly commit to not continuing funding for the war with Iran. They were arrested while waiting for Johnson to respond to their demands.",
+      "question": "What were the veterans' demands?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "The red tulips were held to honor Iranians killed by U.S. bombs during the war that began February 28, 2026. The flag-folding ceremony symbolized U.S. troops killed and who will continue to be killed if the war continues. These were powerful symbols representing both the victims of U.S. military action and the cost paid by American service members and their families.",
+      "question": "What is the significance of the red tulips and flag-folding ceremony?"
+    },
+    {
+      "_key": "faq-6",
+      "answer": "Conscientious objection is a legal right allowing service members to refuse military service based on moral or religious beliefs. The Center on Conscience and War is working with over 100 service members who have filed as COs. They've already prevented several troops from deploying to Operation Epic Fury. Service members can call (877) NO-2-WARS for free professional counseling on their options. Many qualify for CO without realizing it.",
+      "question": "What is conscientious objection and how are service members using it?"
+    },
+    {
+      "_key": "faq-7",
+      "answer": "Operation Epic Fury is the name of the U.S. military campaign in Iran that began February 28, 2026, when Israel launched a pre-emptive attack on Iranian targets. The U.S. is now deeply involved in what Trump calls this massive military campaign that has already cost billions of dollars. Trump has threatened to bomb Iranian civilian infrastructure including bridges and power plants, saying 'If they don't sign the deal, then the whole country is going to get blown up.'",
+      "question": "What is Operation Epic Fury?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "veterans",
+    "iran-war",
+    "protest",
+    "capitol",
+    "arrests",
+    "mike-prysner",
+    "tyler-romero",
+    "center-on-conscience-and-war",
+    "about-face",
+    "operation-epic-fury",
+    "anti-war",
+    "civil-disobedience",
+    "red-tulips",
+    "speaker-mike-johnson",
+    "cannon-house-office-building"
+  ],
+  "leadParagraph": "The moment is too big for silence. On Monday, April 20, 2026, about 120 U.S. military veterans stood in formation in the Cannon House Office Building rotunda, holding red tulips and demanding: No war with Iran. Not in our name. Not with our children. Not again.",
+  "linkedPitch": null,
+  "location": "US Capitol Washington D.C.",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Dozens of US veterans and family members of military personnel gather to protest the Iran war at the US Capitol.",
+    "asset": {
+      "_ref": "image-d973f9b288759ef7c4298c70d898a37263237095-730x410-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2026-04-21T05:00",
+  "readingTimeMinutes": null,
+  "relatedArticles": [],
+  "reviewedBy": null,
+  "seo": {
+    "description": "About 120 veterans protested Iran war at Cannon House Office Building. 62 arrested including Mike Prysner and Tyler Romero. Held red tulips, flag-folding ceremony.",
+    "title": "Veterans Arrested Protesting Iran War at Capitol"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-moment-is-too-big-for-silence-veterans-arrested-protesting-iran-war"
+  },
+  "tags": [
+    "veterans",
+    "iran-war",
+    "protest",
+    "capitol",
+    "mike-prysner",
+    "tyler-romero",
+    "conscientious-objector",
+    "operation-epic-fury",
+    "anti-war"
+  ],
+  "title": "The Moment Is Too Big For Silence: Veterans Arrested Protesting Iran War",
+  "updatedAt": "2026-05-24T03:10:44.382Z",
+  "videoLink": ""
+}

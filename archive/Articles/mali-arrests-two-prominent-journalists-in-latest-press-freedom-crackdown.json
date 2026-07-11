@@ -1,0 +1,120 @@
+{
+  "_id": "mali-arrests-journalists-press-freedom-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "7WXAS6desaJeCbYHrm2jtO",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "b7c84d7a3fdf",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Mali's military junta arrested journalists Chahana Takiou and Abdrahamane Keïta within 48 hours, using a vaguely worded cybercrime law to criminalize independent reporting. Three journalists are now imprisoned as the government systematically dismantles press freedom.",
+  "eventDate": "2026-06-08T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Chahana Takiou, a television presenter and editorial director of the newspaper 22 Septembre, was arrested on June 8, 2026. Abdrahamane Keïta, director of Le Témoin newspaper and host of the popular TV program Grand Jury, was arrested on June 9, 2026. Both were detained by Mali's National Cybercrime Unit.",
+      "question": "Who were the journalists arrested in Mali?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Mali's 2019 cybercrime law, which was expanded under the military government. The law contains vaguely worded provisions criminalizing undefined 'threats' and 'insults' online with penalties up to 10 years in prison. Article 54 allows prosecutors to bypass the 2000 press law, stripping journalists of their legal protections.",
+      "question": "What law is Mali using to prosecute journalists?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Keïta was arrested after stating on his TV program Grand Jury that the Al-Qaeda-linked JNIM group controls the northern city of Kidal. This is a verifiable fact — JNIM and separatist forces seized Kidal from Malian and Russian forces during coordinated attacks in April 2026 that killed Mali's defense minister.",
+      "question": "Why was Abdrahamane Keïta arrested?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Since the 2021 coup, Mali's junta has systematically dismantled press freedom: suspending media outlets, dissolving civil society organizations, banning French broadcasters (France24, TV5 Monde, RFI), and banning Pan-African magazine Jeune Afrique. Three journalists are currently imprisoned under the cybercrime law.",
+      "question": "What is the broader context of press freedom in Mali?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Mali, alongside Niger and Burkina Faso, formed the Alliance of Sahel States and pivoted away from France toward Russia for military support. Despite these partnerships, the security situation across all three countries has deteriorated with record extremist attacks.",
+      "question": "What international alliances has Mali's junta formed?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Mali journalist arrests",
+    "Chahana Takiou",
+    "Abdrahamane Keïta",
+    "Mali cybercrime law",
+    "press freedom Mali",
+    "Mali military junta",
+    "Bamako journalists",
+    "Alliance of Sahel States",
+    "JNIM Kidal",
+    "Youssouf Sissoko"
+  ],
+  "leadParagraph": "Mali's military junta arrested two prominent journalists in 48 hours under a cybercrime law designed to criminalize independent reporting. Chahana Takiou was jailed for criticizing the law itself, while Abdrahamane Keïta faces charges for stating that JNIM controls Kidal — a verifiable fact.",
+  "linkedPitch": null,
+  "location": "Bamako, Mali / West Africa",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Aerial view of Bamako, Mali, where the military junta arrested two prominent journalists in June 2026",
+    "asset": {
+      "_ref": "image-27bfb438ff69ca606ab8060edb1f5e24e82604e1-885x516-webp",
+      "_type": "reference"
+    },
+    "caption": "An aerial view of Bamako, Mali, the capital where two prominent journalists were arrested by the military junta's cybercrime unit in June 2026.",
+    "credit": "AP Photo via Washington Times"
+  },
+  "methodology": "Reported using AP News, Committee to Protect Journalists, Human Rights Watch, and Reporters Without Borders coverage. Source material cross-referenced across five independent outlets. All factual claims verified through multiple wire service and human rights organization reports.",
+  "needsReview": null,
+  "publishedAt": "2026-06-17T05:00:00.000Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": [],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Mali's military junta arrested Chahana Takiou and Abdrahamane Keïta within 48 hours, weaponizing a cybercrime law to imprison journalists who criticize the government.",
+    "metaTitle": "Mali Arrests Two Journalists in Press Freedom Crackdown",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "mali-arrests-two-prominent-journalists-in-latest-press-freedom-crackdown"
+  },
+  "tags": [
+    "Mali",
+    "Press Freedom",
+    "Journalism",
+    "Military Junta",
+    "Africa",
+    "Human Rights",
+    "Cybercrime Law",
+    "Censorship",
+    "Assimi Goita",
+    "Sahel"
+  ],
+  "title": "Mali Arrests Two Prominent Journalists in Latest Press Freedom Crackdown",
+  "updatedAt": null,
+  "videoLink": null
+}

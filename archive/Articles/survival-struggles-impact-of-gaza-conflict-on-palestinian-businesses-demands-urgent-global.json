@@ -1,0 +1,72 @@
+{
+  "_id": "article-63716684-177e-4d27-a340-3d2e3c5eb45d",
+  "allowComments": null,
+  "author": {
+    "_ref": "25ad05d2-cf78-425f-b5dd-888da831a2d1",
+    "_type": "reference",
+    "name": "Wall St Ape"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "5726011cb149",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "In the wake of the ongoing Gaza conflict, Palestinian businesses face unprecedented challenges. The once-vibrant startup scene now grapples with immense economic struggle, compounded by the destruction of infrastructure and livelihoods. International aid and global cooperation have become paramount, offering a glimmer of hope amid the devastation. The resilience of entrepreneurs is tested, emphasizing the urgent need for peace, stability, and immediate support from the international community.",
+  "eventDate": "2023-10-20T08:34:00.000Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Palestinian businesses",
+    "Gaza conflict",
+    "economic struggle",
+    "global cooperation",
+    "international aid",
+    "infrastructure destruction",
+    "entrepreneurship",
+    "war impact",
+    "peace and stability",
+    "global support",
+    "survival challenges",
+    "business",
+    "gaza",
+    "palestine",
+    "israel",
+    "war",
+    "hamas",
+    "siege"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "A street in the business district of Gaza City",
+    "asset": {
+      "_ref": "image-3166a7cdcfaddc529c9ec80157454ad6f1844cef-640x400-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-10-24T19:47:19.886Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "survival-struggles-impact-of-gaza-conflict-on-palestinian-businesses-demands-urgent-global"
+  },
+  "tags": null,
+  "title": "Survival Struggles: Impact of Gaza Conflict on Palestinian Businesses Demands Urgent Global Support",
+  "updatedAt": null,
+  "videoLink": null
+}

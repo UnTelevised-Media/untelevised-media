@@ -1,0 +1,131 @@
+{
+  "_id": "mississippi-delegation-food-assistance-cuts",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Since the One Big Beautiful Bill Act took effect, Mississippi has seen a 10.6% drop in SNAP enrollment — about 37,400 Mississippians who no longer receive benefits. Sen. Roger Wicker, Sen. Cindy Hyde-Smith, Rep. Trent Kelly, Rep. Michael Guest, and Rep. Mike Ezell all voted yes. They've taken money from AIPAC and used it to starve their own constituents.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "object",
+      "answer": "The One Big Beautiful Bill Act is a federal budget law passed in July 2025 that extended Trump's 2017 tax cuts and shifted administrative costs for programs like SNAP from the federal government to states. Since it took effect, Mississippi has seen a 10.6% drop in SNAP enrollment, with about 37,400 Mississippians losing their food assistance benefits.",
+      "question": "What is the One Big Beautiful Bill Act and how did it affect Mississippi?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "object",
+      "answer": "Sen. Roger Wicker, Sen. Cindy Hyde-Smith, Rep. Trent Kelly, Rep. Michael Guest, and Rep. Mike Ezell all voted for the One Big Beautiful Bill Act. Only Rep. Bennie Thompson voted against it. The Senate passed the bill 51-50 with Vice President JD Vance casting the tiebreaking vote, and the House passed it 218-214.",
+      "question": "Which Mississippi politicians voted for the bill that cut food assistance?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "object",
+      "answer": "The average recipient in Mississippi receives $183 per month in food assistance. At Mississippi's minimum wage after taxes, that's equivalent to about 27 hours of work. This benefit is not a handout but a lifeline for working families who cannot afford enough food.",
+      "question": "How much do Mississippians receive in SNAP benefits on average?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "object",
+      "answer": "A family of four must earn under $39,000 a year to qualify for SNAP. Applicants must document every dollar of income, verify expenses, and recertify regularly. More than 67% of Mississippi's SNAP participants are in households with children, and about 41% are in households with elderly adults or people with a disability.",
+      "question": "Who qualifies for SNAP in Mississippi?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "object",
+      "answer": "In Sharkey, Coahoma, Claiborne, and Humphreys counties, more than a third of all residents depend on SNAP to eat. Humphreys County has the highest participation rate at about 42% of residents. Mississippi leads the nation in food assistance reliance, with 13.1% of residents depending on the program compared to the 8.3% national average.",
+      "question": "Which Mississippi counties are most affected by SNAP?"
+    },
+    {
+      "_key": "faq-6",
+      "_type": "object",
+      "answer": "All five Mississippi Republicans who voted for the One Big Beautiful Bill Act have received campaign contributions from pro-Israel groups including AIPAC. AIPAC has been pouring millions into congressional races to buy loyalty. Critics argue these politicians prioritize their donors over their constituents, voting for policies that starve Mississippi families while accepting special interest money.",
+      "question": "What is the connection between these politicians and AIPAC?"
+    },
+    {
+      "_key": "faq-7",
+      "_type": "object",
+      "answer": "When Mississippi conducted a similar eligibility review for Medicaid, 75% of people who lost coverage did so due to paperwork errors, not because they didn't qualify. This pattern suggests that many SNAP recipients may have lost benefits for similar administrative reasons rather than actual ineligibility.",
+      "question": "How does this compare to Mississippi's Medicaid eligibility review?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "mississippi",
+    "snap",
+    "food-assistance",
+    "one-big-beautiful-bill-act",
+    "roger-wicker",
+    "cindy-hyde-smith",
+    "trent-kelly",
+    "michael-guest",
+    "mike-ezell",
+    "aipac",
+    "bennie-thompson",
+    "food-stamps",
+    "poverty",
+    "hunger",
+    "mississippi-congressional-delegation"
+  ],
+  "leadParagraph": "New data shows Mississippi's food assistance program is failing the families who need it most. Since last year's federal budget law took effect, Mississippi has seen a 10.6% drop in food assistance enrollment — about 37,400 Mississippians who no longer receive benefits. Every member of Mississippi's Republican congressional delegation voted for that bill.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "U.S. Sen. Cindy Hyde-Smith, right, claimed that the Inflation Reduction Act gives “tax breaks to wealthy Americans to buy electric vehicles” and U.S. Sen. Roger Wicker, left, two of Mississippi's most disgraceful senators ",
+    "asset": {
+      "_ref": "image-72852d421a6363f4f1f2c1e140babc5131807067-1200x800-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-20T14:00:00.000Z",
+  "readingTimeMinutes": 11,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "description": "Wicker, Hyde-Smith, Kelly, Guest, and Ezell voted for One Big Beautiful Bill Act, causing 37,400 Mississippians to lose SNAP benefits. They took AIPAC money and starved their constituents.",
+    "title": "Mississippi Delegation Cut Food Assistance for 37,400 People"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "five-mississippi-politicians-just-took-food-off-the-table-for-37-400-people"
+  },
+  "tags": [
+    "mississippi",
+    "snap",
+    "food-assistance",
+    "wicker",
+    "hyde-smith",
+    "kelly",
+    "guest",
+    "ezell",
+    "aipac",
+    "congress"
+  ],
+  "title": "Five Mississippi Politicians Just Took Food Off the Table for 37,400 People",
+  "updatedAt": null,
+  "videoLink": null
+}

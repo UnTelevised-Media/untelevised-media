@@ -1,0 +1,53 @@
+{
+  "_id": "article-bcb451f2-8057-404b-8888-bcb84f7cf51b",
+  "allowComments": null,
+  "author": {
+    "_ref": "08585a36-f730-4573-b2f1-a8fb6e1ee6ee",
+    "_type": "reference",
+    "name": "Amberly Taylor"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "5492ce6d9771",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Unveiling America's historical shift from rehabilitation-focused corrections to a system entrenched in mass incarceration. Discover how the legacy of slavery, the war on drugs, and punitive measures shape the current state of American justice. Explore the historical shifts in narrative, systemic flaws built into the system, and urgent calls for reform in the nation's corrections system.",
+  "eventDate": "2024-01-31T18:31:15.243Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": null,
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Image of Overcrowded Jail Conditions.",
+    "asset": {
+      "_ref": "image-35cf9010d0f8712f11ec93cc1b4a3694f5076a19-3748x2404-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2024-01-31T18:31:13.716Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "america-s-corrections-crisis-from-rehabilitation-to-mass-incarceration"
+  },
+  "tags": null,
+  "title": "America's Corrections Crisis: From Rehabilitation to Mass Incarceration",
+  "updatedAt": null,
+  "videoLink": null
+}

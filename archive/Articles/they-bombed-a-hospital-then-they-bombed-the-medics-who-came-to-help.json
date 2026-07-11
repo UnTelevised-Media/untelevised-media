@@ -1,0 +1,113 @@
+{
+  "_id": "tebnine-hospital-israel-lebanon-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "gaza-israel-war",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israel bombed Tebnine Government Hospital twice in two days, injuring 11 workers. Then they carried out a 'quadruple tap' attack that killed four medics and wounded six. This is the systematic destruction of Lebanon's healthcare infrastructure — a war crime the world ignores.",
+  "eventDate": "2026-04-14T00:00:00-03:00",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "Israel bombed Tebnine Government Hospital in southern Lebanon twice in two days — April 13 and April 14, 2026. The attacks destroyed the emergency department and injured 11 hospital workers. Tebnine was the only remaining public hospital in the area. The strikes are part of Israel's systematic destruction of Lebanon's healthcare infrastructure.",
+      "question": "What happened at Tebnine Government Hospital?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "A quadruple tap is when Israel carries out four consecutive strikes on rescuers. First, they bomb a target. Then they wait for medics and first responders to arrive. Then they strike again — and again, and again. On April 14, a quadruple tap attack killed four medics and wounded six in Mayfadoun, southern Lebanon. Fadel Sarhan, 43, was among the dead, survived by his eight-year-old daughter.",
+      "question": "What is a 'quadruple tap' attack?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "According to The Guardian, Israel has killed 91 healthcare workers and wounded 214 more in Lebanon since the Israel-Hezbollah war reignited on March 2, 2026. Al Jazeera reports 53 medical workers killed, 87 ambulances or medical centers destroyed, and five hospitals forced to evacuate. The World Health Organization has condemned these attacks as violations of international humanitarian law.",
+      "question": "How many healthcare workers has Israel killed in Lebanon?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Yes. Under international humanitarian law, hospitals, medical workers, and ambulances are protected. Even if militants were using a hospital — a claim Israel makes without providing evidence — international law still requires Israel to protect civilians and medical facilities. Deliberately targeting a hospital is a war crime. Human Rights Watch has described Israel's attacks on medics in Lebanon as 'apparently deliberate' and has documented a pattern of war crimes.",
+      "question": "Is targeting hospitals a war crime?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Doctors Without Borders, the WHO, and Human Rights Watch have documented that Israel is systematically destroying healthcare infrastructure in southern Lebanon to make the region uninhabitable. You can't live somewhere without basic medical care. By bombing hospitals, killing medics, and destroying ambulances, Israel is forcing 1.2 million people to flee. This is collective punishment — a war crime designed to depopulate southern Lebanon.",
+      "question": "What is Israel's strategy in targeting healthcare infrastructure?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "lebanon",
+    "hospital-attack",
+    "war-crimes",
+    "israel-hezbollah-war",
+    "healthcare-workers",
+    "tebnine",
+    "quadruple-tap",
+    "medics-killed",
+    "gaza-genocide",
+    "international-law",
+    "who",
+    "human-rights",
+    "collective-punishment"
+  ],
+  "leadParagraph": "On April 14, 2026, Israel bombed the Tebnine Government Hospital in southern Lebanon for the second time in two days. The emergency department was destroyed. Eleven hospital workers were injured. This wasn't an accident. This was a pattern.",
+  "linkedPitch": null,
+  "location": "Tebnine, Lebanon",
+  "mainImage": {
+    "_type": "image",
+    "alt": "An ambulance crew responds after housing was destroyed by an Israeli air strike in Nabatieh, southern Lebanon.",
+    "asset": {
+      "_ref": "image-af04158f50b7a16a49d9f49202c5e40d5c558f1d-812x456-webp",
+      "_type": "reference"
+    },
+    "caption": "Representative image: Destruction in Lebanon from Israeli airstrikes. The Tebnine Government Hospital was bombed twice in two days in April 2026, part of Israel's systematic destruction of Lebanon's healthcare infrastructure.",
+    "credit": "CNN (representative image)"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-17T00:00:00Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seo",
+    "description": "Israel bombed Tebnine Hospital twice, killed four medics in quadruple tap attack. 91 healthcare workers killed in Lebanon. War crimes the world ignores.",
+    "title": "Israel Bombs Lebanon Hospital: The Quadruple Tap Attack"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "they-bombed-a-hospital-then-they-bombed-the-medics-who-came-to-help"
+  },
+  "tags": [
+    "lebanon",
+    "hospital-attack",
+    "war-crimes",
+    "israel-hezbollah-war",
+    "healthcare-workers"
+  ],
+  "title": "They Bombed a Hospital. Then They Bombed the Medics Who Came to Help.",
+  "updatedAt": null,
+  "videoLink": null
+}

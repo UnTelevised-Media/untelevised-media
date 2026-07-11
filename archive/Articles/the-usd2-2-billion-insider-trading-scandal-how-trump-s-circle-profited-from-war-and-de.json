@@ -1,0 +1,119 @@
+{
+  "_id": "insider-trading-iran-war-oil-futures-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "97138419-e6dd-455a-888e-8e8b65a0bbbc",
+      "_ref": "97138419-e6dd-455a-888e-8e8b65a0bbbc",
+      "_type": "reference"
+    },
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A comprehensive investigation into the pattern of suspiciously well-timed oil futures trades preceding Trump's Iran policy announcements, totaling over $2.2 billion in bets that appear to reflect advance knowledge of material nonpublic information.",
+  "eventDate": "2026-04-17T12:24:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "On April 17, 2026, traders placed $760 million in oil shorts 20 minutes before Iran announced the Strait of Hormuz was open. On April 7, $950 million in bets were placed hours before a ceasefire announcement. On March 23, $500+ million in shorts were placed 15 minutes before Trump announced delayed strikes on Iran's energy infrastructure.",
+      "question": "What were the three major suspicious oil futures trades?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "No. Similar suspicious trading occurred before Trump's January 2026 announcement of the Venezuelan president's capture (a $35,000 bet turned into $400,000 on Polymarket) and before his April 2025 tariff pause announcement (Trump posted 'GREAT TIME TO BUY!!! DJT' 4 hours before announcing the pause).",
+      "question": "Is this pattern limited to the Iran war?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "The CFTC oversees futures markets and is reportedly investigating, but Chairman Michael Selig is a 36-year-old crypto booster focused on 'innovation task forces' for industries Trump has business interests in. The SEC's enforcement director resigned after 6 months for wanting to pursue cases too aggressively. The Justice Department's Public Integrity Section has been gutted from 36 lawyers to 2.",
+      "question": "What agencies are supposed to investigate this and what's their status?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The exact profits aren't publicly known, but given the timing and magnitude, the profits likely ran into the hundreds of millions. The April 7 trade alone — $950 million bet on falling oil prices before a 15% price drop — would have generated approximately $142.5 million in profit if fully realized.",
+      "question": "How much money was made from these trades?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Tag 50 is the data field in trading records that identifies the entities behind trades. The CFTC has requested Tag 50 identifications from exchanges, which will reveal whether these trades came from hedge funds, institutional investors, or offshore accounts tied to Trump insiders. This is the key to finding out who placed the bets.",
+      "question": "What is Tag 50 and why does it matter?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "insider-trading",
+    "trump-administration",
+    "iran-war",
+    "oil-futures",
+    "market-manipulation",
+    "corruption",
+    "cftc",
+    "sec",
+    "regulatory-capture",
+    "public-integrity-section",
+    "justice-department",
+    "suspicious-trading",
+    "war-profiteering",
+    "market-integrity"
+  ],
+  "leadParagraph": "Three suspiciously well-timed oil futures trades — $760 million on April 17, $950 million on April 7, and $500 million on March 23 — placed minutes before Trump's Iran policy announcements, have exposed a pattern of potential insider trading that regulators are struggling to investigate while their agencies are being systematically dismantled.",
+  "linkedPitch": null,
+  "location": "United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Donald Trump sits on top of oil barrels in front of a Brent crude chart.",
+    "asset": {
+      "_ref": "image-8159cd3a98b7b4f999076c347eacbb4805c5c10c-690x388-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-18T21:00:00.000Z",
+  "readingTimeMinutes": 13,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Investigative report on suspicious oil futures trades preceding Trump's Iran announcements, totaling over $2.2 billion in potential insider trading.\n",
+    "metaTitle": "The $2.2 Billion Insider Trading Scandal"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-usd2-2-billion-insider-trading-scandal-how-trump-s-circle-profited-from-war-and-de"
+  },
+  "tags": [
+    "insider-trading",
+    "trump",
+    "iran-war",
+    "oil-futures",
+    "corruption",
+    "cftc",
+    "sec",
+    "regulatory-capture"
+  ],
+  "title": "The $2.2 Billion Insider Trading Scandal: How Trump's Circle Profited from War and De-escalation",
+  "updatedAt": null,
+  "videoLink": null
+}

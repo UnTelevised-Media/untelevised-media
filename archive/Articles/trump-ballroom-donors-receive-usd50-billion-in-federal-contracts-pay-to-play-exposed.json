@@ -1,0 +1,146 @@
+{
+  "_id": "trump-ballroom-donors-50b-federal-contracts",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A new Public Citizen report reveals that corporations bankrolling Trump's $400 million White House ballroom have been rewarded with over $50 billion in federal contracts in six months. Fourteen of 27 known donors saw their government business surge — while the DOJ dropped enforcement actions against them.",
+  "eventDate": "2026-06-04T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "According to Public Citizen's Ballroom Billions report released June 4, 2026, fourteen of twenty-seven known corporate donors received over $50 billion in new or expanded federal contracts in just six months.",
+      "question": "How much have Trump's ballroom donors received in federal contracts?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Lockheed Martin received approximately $43.8 billion, Booz Allen Hamilton received over $4.2 billion, and Palantir received just over $1 billion. Other beneficiaries include Amazon, Microsoft, Google, Caterpillar, T-Mobile, Meta, Apple, and Nvidia.",
+      "question": "Which companies received the most in contracts?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Trump's $400 million vanity construction project to build a ballroom on the White House grounds after demolishing the East Wing. Americans oppose it 2-to-1. Corporate donors are funding it through a secret agreement that allows anonymous contributions.",
+      "question": "What is the White House ballroom project?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Sixteen of twenty-seven known corporate donors are facing federal enforcement actions, including antitrust reviews, securities charges, and labor disputes. Under the Trump DOJ, several of these cases have been dropped or reduced.",
+      "question": "Have any enforcement actions against these donors been dropped?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "trump ballroom",
+    "white house ballroom",
+    "federal contracts",
+    "pay to play",
+    "public citizen",
+    "lockheed martin",
+    "donor corruption",
+    "trump administration",
+    "government contracting",
+    "booz allen"
+  ],
+  "leadParagraph": "A watchdog report from Public Citizen has revealed that more than half of the corporate donors to Donald Trump's $400 million White House ballroom project have received over $50 billion in new or expanded federal contracts in just six months, while the Trump DOJ simultaneously dropped or reduced enforcement actions against many of those same companies.",
+  "linkedPitch": null,
+  "location": "Washington, D.C. / United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Construction equipment and scaffolding surround the partially demolished East Wing of the White House with exposed structural beams and debris",
+    "asset": {
+      "_ref": "image-b195a23dbb9db087e5d3247cc8f4778866d4a673-1024x683-webp",
+      "_type": "reference"
+    },
+    "caption": "Demolition continues on the East Wing of the White House in Washington, D.C., on October 21, 2025, to make way for President Trump's proposed $400 million ballroom project.",
+    "credit": "Reuters"
+  },
+  "methodology": "Reported using the Public Citizen 'Ballroom Billions' report (June 4, 2026), Washington Post coverage, The New Republic analysis, Common Dreams reporting, and Spokesman-Review coverage. All data sourced directly from Public Citizen's analysis of federal contracting records and corporate donation disclosures.",
+  "needsReview": null,
+  "publishedAt": "2026-06-08T02:50:00.000Z",
+  "readingTimeMinutes": 8,
+  "relatedArticles": [
+    {
+      "_key": "0bzv6vDb5M9RssFkIn3Egp",
+      "_ref": "0bzv6vDb5M9RssFkIn3Egp",
+      "_type": "reference"
+    },
+    {
+      "_key": "6aec37d2bcf2",
+      "_ref": "trump-pardons-corrupt-officials-dismantles-justice-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "7f223d65c9ef",
+      "_ref": "trump-anti-weaponization-fund-heist",
+      "_type": "reference"
+    },
+    {
+      "_key": "1f67ef2f8067",
+      "_ref": "trump-second-term-justice-department-war-on-press",
+      "_type": "reference"
+    },
+    {
+      "_key": "138af22a6c0d",
+      "_ref": "insider-trading-iran-war-oil-futures-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "9aa99f113358",
+      "_ref": "todd-blanche-corrupt-ascent-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "trump-ballroom-donors-receive-usd50-billion-in-federal-contracts-pay-to-play-exposed"
+  },
+  "tags": [
+    "trump",
+    "corruption",
+    "white-house",
+    "ballroom",
+    "federal-contracts",
+    "pay-to-play",
+    "lockheed-martin",
+    "public-citizen",
+    "lobbying",
+    "government-waste"
+  ],
+  "title": "Trump Ballroom Donors Receive $50 Billion in Federal Contracts — Pay-to-Play Exposed",
+  "updatedAt": null,
+  "videoLink": null
+}

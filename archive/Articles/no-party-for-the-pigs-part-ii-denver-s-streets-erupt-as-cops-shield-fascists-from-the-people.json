@@ -1,0 +1,278 @@
+{
+  "_id": "no-party-for-the-pigs-part-2",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "uRvGDPGrpkEmLur3bQLfvB",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "uRvGDPGrpkEmLur3bQLfqk",
+      "_ref": "NIYNah6RoM2MjtNb6HiKPc",
+      "_type": "reference"
+    },
+    {
+      "_key": "uRvGDPGrpkEmLur3bQLfzc",
+      "_ref": "048b3a77-f32f-4267-a2ae-0346d0bf80f1",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The second annual counter-protest to Denver's Police Appreciation Day devolved into hours of confrontation, a concussion grenade detonated feet from journalists, and police escorting fascists home. A first-person account from the streets.",
+  "eventDate": "2021-07-18T15:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "No Party for the Pigs was the annual counter-protest to Denver's Law Enforcement Appreciation Day, organized by local activists to confront and disrupt the celebration of policing. The second iteration took place on July 18, 2021 at Civic Center Park.",
+      "question": "What was No Party for the Pigs?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Lee Keltner was a man killed during a confrontation between dueling rallies at Denver's Civic Center Park on October 10, 2020, during a Patriot Muster that was met by a BLM-Antifa Soup Drive counter-protest. His death cast a shadow over the following year's events.",
+      "question": "Who was Lee Keltner?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "When pro-police attendees left the fenced event, antifascist groups followed and confronted the more aggressive far-right attendees. One fascist detonated a concussion grenade approximately four feet from where the author was filming. Police responded by clearing antifascist protesters — who were the victims of the explosion — and providing armed escorts to the fascists who had thrown the grenade.",
+      "question": "What happened when the event ended?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Activists distributed tiny squeeze toys shaped like pigs, each labeled with the name of a Denver police officer known for committing violence against protesters. The author received two pigs named Mendez and Nelsen — officers who had both shot him with large rubber projectiles at previous protests he was covering.",
+      "question": "What were the toy pigs?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": true,
+  "imageGallery": {
+    "_type": "imageGallery",
+    "images": [
+      {
+        "_key": "f21316b8fb0f",
+        "_type": "image",
+        "alt": "The aftermath: police clear antifascist protesters from the streets while the fascists who detonated a concussion grenade walk free under armed escort. This is not policing. This is a gang.",
+        "asset": {
+          "_ref": "image-d583d7deb350747bb69af5e9285b61020fa78d73-1920x1080-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "ef7ace3c9825",
+        "_type": "image",
+        "alt": "Local activist cracks jokes with toy pig on UnTelevised live stream broadcast.",
+        "asset": {
+          "_ref": "image-37cb1719734068c495e33c115d52e4584f665c2f-1920x1080-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "ff487ea4a182",
+        "_type": "image",
+        "alt": "Flashbang explodes at the feet of UnTelevised journalist Edward Tivrusky.",
+        "asset": {
+          "_ref": "image-0291635ffde4616d9fe3edd74e77a834ab2f8bdc-1920x1080-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "e39c19cc65c7",
+        "_type": "image",
+        "alt": "Protesters knock down poorly placed fencing prompting riot cops to scramble to re-erect it.",
+        "asset": {
+          "_ref": "image-03de43eaa898cec0c44382cc827cb576e5296f8b-1920x1080-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "70dfada22c1a",
+        "_type": "image",
+        "alt": "Flyers pasted onto a light pole outside the event.",
+        "asset": {
+          "_ref": "image-92573ecca5dd77c93a85864b64dc543521275f17-3914x5871-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "0507165a7eef",
+        "_type": "image",
+        "alt": "Protesters seek shade as they taunt riot police standing baking in the hot July sun.",
+        "asset": {
+          "_ref": "image-bcb8bf1c8a10b667cf41c360fc33a7139faef31b-1920x1080-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "e63385752c22",
+        "_type": "image",
+        "alt": "Through the chain-link: the police line faces outward, their backs to the people celebrating them. The architecture of control — fence on the outside, armor on the inside, the people they've hurt on the other side.",
+        "asset": {
+          "_ref": "image-4b8251835d47229229187f110b4b588cbe0cdb80-4826x3315-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "38acddaca9f7",
+        "_type": "image",
+        "alt": "A supporter waves an american flag at protesters from behind the fence.",
+        "asset": {
+          "_ref": "image-4969b1e2e1331705b2cb951bfdc9db82b4942754-4860x3671-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "859af91a26cd",
+        "_type": "image",
+        "alt": "Bootlickers look on as riot police stand between them a fence and about 500 protesters.",
+        "asset": {
+          "_ref": "image-a1de80d795fd9fd5f52432a6886533c8e81f5425-5652x3444-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "e4f731544b2c",
+        "_type": "image",
+        "alt": "Bootlicker walks away defeated draped in silly string.",
+        "asset": {
+          "_ref": "image-a321abdca2b30e5eef2ddfb2ddcd3845c52187f1-1920x1080-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "34d7dbd6e394",
+        "_type": "image",
+        "alt": "Protesters taunting and distracting pigs while attendees leave the pig party.",
+        "asset": {
+          "_ref": "image-8aa25fb81e3ee69a4469ba8d89004b50a530855f-1920x1080-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "40def85bfc52",
+        "_type": "image",
+        "alt": "Pig checks her watch looking as if she cannot wait to leave her own bootlicking party.",
+        "asset": {
+          "_ref": "image-1602cb15c0929cfe7cf5c8be28c5f475fd50325a-1920x1080-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "f4751c965c6f",
+        "_type": "image",
+        "alt": "Counter-protesters pushed back from entrance to Civic Center Park as Denver Police protect the Police Appreciation Day event, July 18, 2021.",
+        "asset": {
+          "_ref": "image-46e4560faad90715af3dc326561d0e3be0cae70e-1920x1080-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "4cd33e74ba86",
+        "_type": "image",
+        "alt": "Riot police behind the fence with weapons at the ready.",
+        "asset": {
+          "_ref": "image-e012db5f5947d984f6cfc8241bfd885aef304a58-1920x1080-webp",
+          "_type": "reference"
+        }
+      }
+    ]
+  },
+  "isFieldReport": true,
+  "keywords": [
+    "No Party for the Pigs",
+    "Denver Police Appreciation Day",
+    "Denver protest 2021",
+    "counter protest police",
+    "concussion grenade Denver",
+    "Lee Keltner",
+    "Civic Center Park Denver",
+    "antifa Denver",
+    "police brutality Denver",
+    "gonzo journalism"
+  ],
+  "leadParagraph": "On July 18, 2021, Denver's Civic Center Park became a militarized zone as police fenced off their own appreciation rally from counter-protesters. Hours of taunting through chain-link ended with a concussion grenade detonated four feet from an embedded journalist, police blaming the victims, and armed escorts for the fascists who threw it. This is what happens when the state celebrates its own violence.",
+  "linkedPitch": null,
+  "location": "Civic Center Park, Denver, Colorado",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Alt right bootlickers toss flash bang grenade approx. 4ft from me while I am filming & clearly labeled as Press. ",
+    "asset": {
+      "_ref": "image-0291635ffde4616d9fe3edd74e77a834ab2f8bdc-1920x1080-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "First-person gonzo journalism account based on direct eyewitness experience by Edward Tivrusky, who was embedded with counter-protesters at the July 18, 2021 event. The author was shot by Denver police officers Mendez and Nelsen with rubber projectiles at prior protests, and had a concussion grenade detonated approximately four feet from his position while filming. Supporting sources include 9NEWS, The Denver Post, NPR, The Independent, Fox News, and Denverite coverage of related Denver protest events.",
+  "needsReview": null,
+  "publishedAt": "2021-07-18T23:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "YtJR1N6fGBsJu5O68LOEJ4",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "Ulg91jjPFgaBD1fUiNoHzK",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "YaIZHdH8q4wcGB79HQ5Syk",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "7ONx74QMiI10eazwub4Jvt",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Counter-protesters faced concussion grenades and police escorts for fascists at Denver's second annual Police Appreciation Day. A gonzo first-person account.",
+    "metaTitle": "No Party for the Pigs Part II: Denver 2021",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "no-party-for-the-pigs-part-ii-denver-s-streets-erupt-as-cops-shield-fascists-from-the-people"
+  },
+  "tags": [
+    "Police Violence",
+    "Denver",
+    "Protest",
+    "Antifa",
+    "Fascism",
+    "Counter-Protest",
+    "Civil Unrest",
+    "Gonzo Journalism",
+    "Colorado",
+    "Police Brutality"
+  ],
+  "title": "No Party for the Pigs Part II: Denver's Streets Erupt as Cops Shield Fascists From the People They've Hurt",
+  "updatedAt": null,
+  "videoLink": "https://www.youtube.com/watch?v=4Ls00NTKa0o"
+}

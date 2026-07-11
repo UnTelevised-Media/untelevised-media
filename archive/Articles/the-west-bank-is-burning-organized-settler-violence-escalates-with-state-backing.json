@@ -1,0 +1,124 @@
+{
+  "_id": "west-bank-burning-organized-settler-violence-state-backing-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "uyufxjv2",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "gits5z2v",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "lsr9cl7x",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Since regional escalation began in February 2026, the West Bank has witnessed an acceleration of violence and displacement. OCHA has documented more than 150 settler attacks across 90 communities — an average of more than six attacks per day. Organized groups like Hilltop Youth and Ateret Cohanim carry out coordinated arson, livestock theft, and infrastructure attacks with state backing and police protection. Since January 2026, 1,697 Palestinians have been displaced due to settler violence and access restrictions — already surpassing the total for all of 2025. This piece examines the pattern of organized settler violence, state coordination, and the human cost of ongoing occupation. ",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "faq-5ebmm0n5",
+      "_type": "faqItem",
+      "answer": "'Price tag' is a term coined by extremist Israeli settlers to describe attacks against Palestinians that exact a 'price' for perceived actions against settler interests, such as outpost demolitions or anti-settler operations. These attacks typically involve arson, vandalism, and property destruction intended to intimidate and displace Palestinian communities. The U.S. Treasury has designated Hilltop Youth as a terrorist organization for conducting such attacks.",
+      "question": "What is 'price tag' violence?"
+    },
+    {
+      "_key": "faq-sq35mcwb",
+      "_type": "faqItem",
+      "answer": "Hilltop Youth is a violent extremist group of Haredi origin operating in illegal outposts across the West Bank. In October 2024, the U.S. Treasury designated them as a terrorist organization for their campaign of 'price tag' attacks, including killings, mass arson, assaults, and intimidation. Ateret Cohanim is a settler organization in East Jerusalem that has used Israeli courts to evict Palestinian families from Silwan, displacing dozens of households since 2024.",
+      "question": "Who are Hilltop Youth and Ateret Cohanim?"
+    },
+    {
+      "_key": "faq-wvxuaax5",
+      "_type": "faqItem",
+      "answer": "Since January 2026, 1,697 Palestinians from 33 communities have been displaced due to settler violence and access restrictions. This figure already exceeds the total displacement for all of 2025 (1,658). Since OCHA began systematically documenting displacement linked to settler violence in January 2023, more than 5,600 people, including over 2,600 children, have been displaced across 107 communities, with 38 communities completely emptied of their Palestinian residents.",
+      "question": "How many Palestinians have been displaced by settler violence in 2026?"
+    },
+    {
+      "_key": "faq-hfz1it1e",
+      "_type": "faqItem",
+      "answer": "Since the regional escalation began on February 28, 2026, OCHA has documented more than 150 settler attacks resulting in casualties or property damage across about 90 communities — an average of more than six attacks per day, with roughly four communities affected daily. Between March 17-23 alone, OCHA documented 46 settler attacks across 41 communities, with March 22 recording the highest single-day level since the beginning of the year at 16 attacks.",
+      "question": "How many settler attacks have been documented in 2026?"
+    },
+    {
+      "_key": "faq-vlyvtedw",
+      "_type": "faqItem",
+      "answer": "According to the UN High Commissioner for Human Rights, settler violence in the West Bank occurs 'with support and participation of Israeli security forces.' The Foundation for Middle East Peace reports that Israeli settlement expansion involves 'funding, political backing, military protection and orchestration, & police-granted impunity.' During settler rampages, Israeli forces and police are often present but do not intervene, or they protect settlers during their attacks and only arrest Palestinians who resist.",
+      "question": "How do settlers coordinate with Israeli forces?"
+    },
+    {
+      "_key": "faq-31ggfs0d",
+      "_type": "faqItem",
+      "answer": "Settlers have repeatedly attacked critical water infrastructure. In January 2026, settlers attacked the Ein Samiya wells in Ramallah governorate three times, destroying key components of the water network and cutting the main water supply for approximately 100,000 Palestinians for three days. On March 22, settlers cut a water pipeline supplying seven households (31 people including children) in Turmus'ayya and destroyed an electricity generator in Beita. These are not isolated incidents but systematic attacks on essential services.",
+      "question": "What infrastructure attacks have settlers carried out?"
+    },
+    {
+      "_key": "faq-l42i6qnz",
+      "_type": "faqItem",
+      "answer": "In March 2026, Israeli forces forcibly evicted 15 Palestinian households comprising 70 people including 29 children from the Batn al Hawa area of Silwan, handing properties to Ateret Cohanim settler organization. This follows a pattern of displacement in Silwan, where protection partners report a rapidly deteriorating protection environment. Many families face imminent risks of eviction and demolition with limited housing options within East Jerusalem.",
+      "question": "What is happening in Silwan?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "West Bank",
+    "Hilltop Youth",
+    "Ateret Cohanim",
+    "price tag attacks",
+    "OCHA West Bank",
+    "Palestinian displacement",
+    "organized settler groups",
+    "state-backed violence"
+  ],
+  "leadParagraph": "Since regional escalation began in February 2026, Israeli forces have carried out hundreds of raids while organized settler groups have launched more than 150 attacks across the West Bank. Groups like Hilltop Youth and Ateret Cohanim torch homes, steal livestock, and destroy infrastructure with near-total impunity.",
+  "linkedPitch": null,
+  "location": "West Bank, Occupied Palestinian Territory",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Palestinians stand inside a burned tent examining destroyed belongings after an Israeli settler attack in the village of Susya, Masafer Yatta, West Bank",
+    "asset": {
+      "_ref": "image-7892edfc4ea472647ea74abadfd711d43c62febc-4000x2667-webp",
+      "_type": "reference"
+    },
+    "caption": "Residents inspect damaged belongings inside a tent burned by Israeli settlers in the village of Susya, Masafer Yatta, south of Hebron, occupied West Bank, February 25, 2026.",
+    "credit": "AFP/Mosab Shawer"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-02T18:17:05Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-west-bank-is-burning-organized-settler-violence-escalates-with-state-backing"
+  },
+  "tags": [
+    "west-bank",
+    "settler-violence",
+    "hilltop-youth"
+  ],
+  "title": "The West Bank Is Burning: Organized Settler Violence Escalates With State Backing",
+  "updatedAt": null,
+  "videoLink": null
+}

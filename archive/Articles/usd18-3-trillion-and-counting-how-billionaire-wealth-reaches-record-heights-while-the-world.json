@@ -1,0 +1,152 @@
+{
+  "_id": "oxfam-billionaire-wealth-exploitation-deep-dive",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "DJ1Y76QLqJX8nukZ8LY2hg",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "DJ1Y76QLqJX8nukZ8LY2kc",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Billionaire wealth hit $18.3 trillion in 2025 — an 81% increase since 2020. Oxfam's latest report exposes the extraction machine: tax avoidance, regulatory capture, media ownership, and policy choices that starve billions while enriching the few.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "BOAIKFRWNleR9aRm6UnnPg",
+      "answer": "Billionaire wealth grew by $2.5 trillion in 2025 — a 16% increase that was three times faster than the five-year average. Total billionaire wealth reached $18.3 trillion, an 81% increase since 2020.",
+      "question": "How much did billionaire wealth increase in 2025?"
+    },
+    {
+      "_key": "BOAIKFRWNleR9aRm6UnnQM",
+      "answer": "The $2.5 trillion added to billionaire fortunes in 2025 is nearly equivalent to the total wealth held by the poorest 4.1 billion people on Earth — roughly half of humanity. That single year's gain could eradicate extreme poverty 26 times over.",
+      "question": "How does one year of billionaire wealth gains compare to the rest of humanity?"
+    },
+    {
+      "_key": "BOAIKFRWNleR9aRm6UnnR2",
+      "answer": "Yes. The wealthiest 400 Americans pay an effective income tax rate of just 24% — lower than the average for all other taxpayers. When all income including unrealized capital gains is counted, US billionaires pay approximately 11% of their true economic income. The tax code deliberately favors wealth over labor.",
+      "question": "Do billionaires actually pay less tax than ordinary workers?"
+    },
+    {
+      "_key": "BOAIKFRWNleR9aRm6UnnRi",
+      "answer": "Billionaires are 4,000 times more likely to hold political office than ordinary citizens. In a World Values Survey of 66 countries, almost half of respondents said the rich often buy elections. The Trump administration has pursued what Oxfam calls a 'pro-billionaire agenda' — slashing taxes, blocking global corporate minimum tax efforts, and easing antitrust enforcement.",
+      "question": "How much political power do billionaires wield?"
+    },
+    {
+      "_key": "BOAIKFRWNleR9aRm6UnnSO",
+      "answer": "Billionaires own more than half of the world's largest media companies and all major social media platforms. Jeff Bezos owns the Washington Post, Elon Musk owns X, Vincent Bolloré controls CNews in France, and in the UK four super-rich families control 75% of newspaper circulation. After Musk's acquisition of X, hate speech on the platform increased by approximately 50%.",
+      "question": "How much of the world's media is controlled by billionaires?"
+    },
+    {
+      "_key": "BOAIKFRWNleR9aRm6UnnT4",
+      "answer": "One in four people globally — approximately 2 billion — face food insecurity and regularly skip meals. Nearly half the world's population lives in poverty. The rate of poverty reduction has stagnated at 2019 levels, extreme poverty is rising again in Africa, and political decisions to slash aid budgets could cause more than 14 million additional deaths by 2030.",
+      "question": "How many people face hunger while billionaires accumulate record wealth?"
+    },
+    {
+      "_key": "BOAIKFRWNleR9aRm6UnnTk",
+      "answer": "Soaring AI company valuations in 2025 delivered extraordinary windfall gains to tech billionaires already among the world's wealthiest. The AI boom concentrated wealth further upward — the workers who trained models, labeled data, and built infrastructure saw no comparable gains. The Trump administration's AI deregulation directly benefited ultra-rich investors worldwide.",
+      "question": "What role has AI played in driving billionaire wealth?"
+    },
+    {
+      "_key": "BOAIKFRWNleR9aRm6UnnUQ",
+      "answer": "Oxfam proposes taxing the super-rich at high enough rates to reduce inequality, national inequality reduction plans with time-bound benchmarks, stronger firewalls between wealth and politics including curbs on lobbying and campaign financing, and stronger protections for civil society, trade unions, and freedoms of assembly and expression. The $18.3 trillion exists — the question has never been about capacity, only about political will.",
+      "question": "What would it actually take to fix this level of inequality?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "billionaire wealth 2025",
+    "Oxfam inequality report",
+    "$18.3 trillion",
+    "tax avoidance billionaires",
+    "oligarchy",
+    "wealth inequality"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Protesters demonstrate outside the World Economic Forum in Davos against billionaire wealth and inequality",
+    "asset": {
+      "_ref": "image-5f620eaf27dfc23df8d093e98b85144eb4211726-1080x720-webp",
+      "_type": "reference"
+    },
+    "caption": "Protesters gather outside the World Economic Forum in Davos demanding action on wealth inequality",
+    "credit": "Reuters"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-05-24T21:40:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "f6906f6c814b",
+      "_ref": "trump-anti-weaponization-fund-heist",
+      "_type": "reference"
+    },
+    {
+      "_key": "43e905705052",
+      "_ref": "insider-trading-iran-war-oil-futures-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "fe943491d604",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "a3113ebb2e86",
+      "_ref": "may-day-2026-history-anarchist-origins-international-workers-day",
+      "_type": "reference"
+    },
+    {
+      "_key": "e3d698defddc",
+      "_ref": "may-day-2026-workers-over-billionaires-economic-blackout",
+      "_type": "reference"
+    },
+    {
+      "_key": "33da8bc614f1",
+      "_ref": "may-day-2026-global-uprising-workers-over-billionaires",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Billionaire wealth surged 16% in 2025 to $18.3 trillion. Oxfam report exposes the tax avoidance, regulatory capture, and media control driving extreme inequality.",
+    "title": "Billionaire Wealth Hits $18.3 Trillion: The Exploitation Behind the Numbers"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "usd18-3-trillion-and-counting-how-billionaire-wealth-reaches-record-heights-while-the-world"
+  },
+  "tags": [
+    "Oxfam",
+    "Billionaire Wealth",
+    "Inequality",
+    "Tax Justice",
+    "Oligarchy",
+    "WEF Davos"
+  ],
+  "title": "$18.3 Trillion and Counting: How Billionaire Wealth Reaches Record Heights While the World Starves",
+  "updatedAt": null,
+  "videoLink": null
+}

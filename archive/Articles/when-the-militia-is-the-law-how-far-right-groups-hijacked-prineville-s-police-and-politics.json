@@ -1,0 +1,126 @@
+{
+  "_id": "prineville-militia-police-racism",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-politics",
+      "_ref": "048b3a77-f32f-4267-a2ae-0346d0bf80f1",
+      "_type": "reference"
+    },
+    {
+      "_key": "c4aefde9e67a",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "In Prineville, Oregon, armed far-right militias have infiltrated local police, government, and schools. The police chief publicly smeared a Black BLM organizer. Officers joined the Oath Keepers. Three Percenters brought assault rifles to protests — with police consent. This is the militia-to-school-board pipeline, fully operational — and the community fighting back against it.",
+  "eventDate": null,
+  "faqs": [],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Prineville Oregon",
+    "Oath Keepers",
+    "Three Percenters militia",
+    "far-right militias",
+    "Josie Stanfield",
+    "Crook County",
+    "Central Oregon Constitutional Guard",
+    "BLM protests Oregon",
+    "police militarization",
+    "militia in police"
+  ],
+  "leadParagraph": "An investigation into how the Oath Keepers, Three Percenters, and Central Oregon Constitutional Guard embedded themselves in Crook County's institutions — and what happened to the people who dared to resist.",
+  "linkedPitch": null,
+  "location": "Prineville, Oregon / United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Armed far-right militia members in tactical gear and camouflage at an Oregon protest",
+    "asset": {
+      "_ref": "image-79b6e3acd49b5559fb0090d5abf8d8612e21980f-1536x864-webp",
+      "_type": "reference"
+    },
+    "caption": {
+      "_type": "block",
+      "children": [
+        {
+          "_key": "HF6nYxVSLQJbsy7v16n02g",
+          "_type": "span",
+          "text": "Armed far-right militia members stand at a protest in Oregon in 2020, as far-right groups became increasingly visible in rural communities."
+        }
+      ],
+      "style": "normal"
+    },
+    "credit": "Stateline"
+  },
+  "methodology": "Investigative analysis using OPB reporting, Rural Organizing Project's 'Up In Arms' report, Oath Keepers leaked membership data, and court documents. Claims cross-referenced across multiple independent sources.",
+  "needsReview": null,
+  "publishedAt": "2026-06-01T01:15:00-05:00",
+  "readingTimeMinutes": 10,
+  "relatedArticles": [
+    {
+      "_key": "rel-siege-of-del",
+      "_ref": "siege-of-delaney-hall-protests-clashes-families",
+      "_type": "reference"
+    },
+    {
+      "_key": "52b3f08bfb24",
+      "_ref": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-katelyn-hall",
+      "_ref": "katelyn-hall-deserved-help-louisville-gave-her-bullets",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-tripp-brazea",
+      "_ref": "tripp-brazeale-arkansas-investigation-2026-05-12",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-trump-pardon",
+      "_ref": "trump-pardons-corrupt-officials-dismantles-justice-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-kash-patel-f",
+      "_ref": "kash-patel-fbi-director-corruption",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "when-the-militia-is-the-law-how-far-right-groups-hijacked-prineville-s-police-and-politics"
+  },
+  "tags": [
+    "Prineville",
+    "Oregon",
+    "militias",
+    "Oath Keepers",
+    "Three Percenters",
+    "far-right",
+    "police",
+    "racism",
+    "BLM",
+    "Crook County"
+  ],
+  "title": "When the Militia Is the Law: How Far-Right Groups Hijacked Prineville's Police and Politics",
+  "updatedAt": null,
+  "videoLink": null
+}

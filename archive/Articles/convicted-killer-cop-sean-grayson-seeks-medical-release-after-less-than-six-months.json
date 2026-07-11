@@ -1,0 +1,157 @@
+{
+  "_id": "sonya-massey-convicted-murderer-sean-grayson-system-justice",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-pv",
+      "_ref": "NIYNah6RoM2MjtNb6HiKPc",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-hr",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "4b4fc88343d4",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A jury found former deputy Sean Grayson guilty of second-degree murder for killing Sonya Massey. Now, after less than six months, the system is already working to free him.",
+  "eventDate": "2026-07-09T19:00:00Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Sonya Lynaye Massey was a 36-year-old unarmed Black woman and mother of two who was shot and killed by Sangamon County Deputy Sean Grayson inside her home in Springfield, Illinois on July 6, 2024, after calling 911 to report a suspected prowler.",
+      "question": "Who was Sonya Massey?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Grayson was convicted of second-degree murder on October 29, 2025, and sentenced to the maximum of 20 years in prison on January 29, 2026. The jury acquitted on first-degree murder charges.",
+      "question": "What was Sean Grayson convicted of?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Grayson's legal team has petitioned the Illinois Prisoner Review Board for release under the Joe Coleman Medical Release Act, citing his stage 3 colon cancer diagnosis. The hearing is scheduled for July 31, 2026.",
+      "question": "Why is Grayson seeking medical release?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Grayson worked for six police departments in four years, was discharged from the Army for serious misconduct, had two DUI convictions, falsely arrested a man by fabricating evidence, and led an unauthorized high-speed chase at 110 mph. None of these red flags prevented his hiring.",
+      "question": "What was Grayson's history before killing Sonya Massey?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "Illinois passed 'Sonya Massey's Law' in 2025, requiring police departments to disclose the employment histories of recruits to prevent 'wandering officers' with misconduct records from cycling between departments.",
+      "question": "What legislative changes resulted from Massey's death?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Sonya Massey",
+    "Sean Grayson",
+    "police violence",
+    "police murder",
+    "Sangamon County",
+    "Illinois",
+    "second-degree murder",
+    "medical release",
+    "wandering officers",
+    "police misconduct"
+  ],
+  "leadParagraph": "Former Sangamon County Deputy Sean Grayson was convicted of second-degree murder for killing Sonya Massey, an unarmed Black woman who called 911 for help. He was sentenced to 20 years in January 2026, but his legal team is now seeking medical release after less than six months served — the latest chapter in a case that exposed the systemic failures of American policing.",
+  "linkedPitch": null,
+  "location": "Springfield, Illinois",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Crowd of protesters holding signs demanding justice for Sonya Massey at a National Day of Mourning demonstration in Chicago",
+    "asset": {
+      "_ref": "image-ef82143be07811ce7c6dbb5d4e2368635e2b5d8e-1920x1080-webp",
+      "_type": "reference"
+    },
+    "caption": "Protesters gather during a National Day of Mourning for Sonya Massey in Chicago, Illinois, following her killing by Sangamon County Deputy Sean Grayson",
+    "credit": "Scott Olson / Getty Images via Essence"
+  },
+  "methodology": "This article was reported using court records, body camera footage descriptions, investigative reporting from the Invisible Institute, DOJ public statements, and coverage from USA Today, CBS Chicago, NPR Illinois, CNN, and the State Journal-Register. All factual claims are cross-referenced against multiple independent sources.",
+  "needsReview": null,
+  "publishedAt": "2026-07-09T19:00:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "55c9b0d1cfa0",
+      "_ref": "baby-kohen-wiley-senatobia-police-shooting",
+      "_type": "reference"
+    },
+    {
+      "_key": "e2d5191a59dd",
+      "_ref": "tripp-brazeale-arkansas-investigation-2026-05-12",
+      "_type": "reference"
+    },
+    {
+      "_key": "f31a4d80df7d",
+      "_ref": "two-calls-diapers-officer-buys-baby-executed-senatobia",
+      "_type": "reference"
+    },
+    {
+      "_key": "e965f57b4c78",
+      "_ref": "south-carolina-jury-acquits-store-owner-who-killed-14-year-old-over-bottled-water",
+      "_type": "reference"
+    },
+    {
+      "_key": "02dfa62acf41",
+      "_ref": "hunter-foster-identified-kohen-wiley-shooter",
+      "_type": "reference"
+    },
+    {
+      "_key": "945226db0cde",
+      "_ref": "kohen-wiley-autopsy-homicide-independent-finding",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "convicted-killer-cop-sean-grayson-seeks-medical-release-after-less-than-six-months"
+  },
+  "tags": [
+    "sonya-massey",
+    "sean-grayson",
+    "police-violence",
+    "police-murder",
+    "wandering-officers",
+    "qualified-immunity",
+    "systemic-racism",
+    "sangamon-county",
+    "illinois",
+    "doj-investigation"
+  ],
+  "title": "Convicted Killer Cop Sean Grayson Seeks Medical Release After Less Than Six Months",
+  "updatedAt": null,
+  "videoLink": null
+}

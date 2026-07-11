@@ -1,0 +1,112 @@
+{
+  "_id": "kash-patel-fbi-director-corruption",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A comprehensive investigation exposing Kash Patel's corruption, lack of qualifications, abuse of power, Epstein cover-up, financial conflicts with Chinese interests, and debauchery using taxpayer-funded government jets for personal leisure.",
+  "eventDate": "2026-04-18T18:18:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "Patel is refusing to release Epstein files that may contain information about Trump's relationship with Epstein. He has blocked subpoenas for bank CEOs, refused to answer whether Trump was on Epstein's client list, falsely claimed court orders prevent release (no such orders exist), and refused to say whether he's even reviewed all the files despite being FBI Director.",
+      "question": "What is Kash Patel covering up regarding the Epstein files?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Patel fired experienced agents including Brian Driscoll (20-year veteran, Medal of Valor), Steve Jensen (20-year veteran who ran terrorism/counterintelligence ops), and Steven Palmer (27-year veteran who oversaw FBI aviation). He gutted the Domestic Terrorism Operation Section, diverted child predator agents to immigration enforcement, and disbanded the Public Corruption Squad.",
+      "question": "How did Kash Patel purge the FBI?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Patel owns $1-5 million in stock from Elite Depot, the Cayman Islands parent company of Chinese ecommerce giant Shein. He received RSUs for consulting services starting April 2024. This creates a conflict as the FBI is charged with investigating CCP economic espionage, yet Patel holds significant stock in a CCP-linked company.",
+      "question": "What is Kash Patel's financial conflict of interest with China?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Patel has never served as an FBI agent or senior federal prosecutor. He has slim executive branch experience and very limited federal law enforcement experience. Past FBI directors served in high-ranking DOJ positions before leading the Bureau. Even high-ranking officials from the first Trump administration opposed his appointment to senior roles.",
+      "question": "Why is Kash Patel unqualified to be FBI Director?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Patel used the FBI's $60-62 million Gulfstream G550 for date nights with his girlfriend, golf trips to Scotland with friends, and luxury hunting retreats during the Republican shutdown. He fired 27-year FBI veteran Steven Palmer when the misuse became public. He also assigned SWAT teams to protect his girlfriend and is seeking an $80 million new jet.",
+      "question": "How has Kash Patel abused government resources for personal leisure?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "kash-patel",
+    "fbi-director",
+    "corruption",
+    "jeffrey-epstein",
+    "donald-trump",
+    "china-ccp",
+    "shein",
+    "conflict-of-interest",
+    "abuse-of-power",
+    "fbi-purge",
+    "government-jets",
+    "taxpayer-waste",
+    "unqualified",
+    "dangerous",
+    "public-corruption"
+  ],
+  "leadParagraph": "Kash Patel sits at the head of the Federal Bureau of Investigation with a $1-5 million stake in a Chinese ecommerce giant, a pattern of covering up Donald Trump's relationship with Jeffrey Epstein, and a trail of FBI purges so extensive it has left the nation's top domestic terrorism, cybersecurity, and public corruption units hollowed out.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Kash Patel the drunkard frat boy DEI hire of the FBI, issuing a challenge on X we couldn't help but answer.",
+    "asset": {
+      "_ref": "image-efa10e0bcc7c03abf2ce2f1277ddc3f4288dea12-1350x1688-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-18T22:00:00.000Z",
+  "readingTimeMinutes": 16,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "description": "Investigation into Kash Patel's corruption, Epstein cover-up, China financial conflicts, FBI purges, and abuse of government jets for personal leisure.",
+    "title": "Kash Patel: Corrupt FBI Director Exposed"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "kash-patel-the-most-corrupt-unqualified-and-dangerous-fbi-director-in-american-history"
+  },
+  "tags": [
+    "kash-patel",
+    "fbi",
+    "corruption",
+    "epstein",
+    "trump",
+    "china",
+    "abuse-of-power",
+    "government-waste"
+  ],
+  "title": "Kash Patel: The Most Corrupt, Unqualified, and Dangerous FBI Director in American History",
+  "updatedAt": null,
+  "videoLink": null
+}

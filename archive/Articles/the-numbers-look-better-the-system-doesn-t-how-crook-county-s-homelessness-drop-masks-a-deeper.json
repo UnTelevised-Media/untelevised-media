@@ -1,0 +1,135 @@
+{
+  "_id": "1d2c57dd-3172-4875-9127-beb35a595551",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "ef49c985a4ed",
+      "_ref": "048b3a77-f32f-4267-a2ae-0346d0bf80f1",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Central Oregon recorded a nearly 20% drop in homelessness — 402 fewer people without stable housing. In Crook County, Prineville went from 367 to 214. But the PIT count's one-night snapshot masks a fragile system running on temporary funding, political gridlock, and a working class one paycheck from crisis. Progress that depends on emergency funding is not progress — it is a pause.",
+  "eventDate": "2026-05-17T23:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Central Oregon recorded a 19.1% decline — 402 fewer people without stable housing compared to 2025. Crook County (Prineville) saw a 42% drop, from 367 individuals to 214. Madras saw more than a 50% decrease.",
+      "question": "How much did homelessness drop in Central Oregon?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Providers credit new shelters in Bend, Redmond, Prineville, and Madras, expanded rental assistance, and housing-focused case management. Emergency state funding under Governor Kotek's homelessness emergency declaration enabled the expansion.",
+      "question": "Why did homelessness decrease in Crook County?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The PIT count is a single-night snapshot, not a longitudinal measure. It undercounts children, families, and young people. Most single adults struggle to access family-prioritized resources. Winter counts likely miss people who are more accessible in warmer months.",
+      "question": "What are the limitations of the Point-in-Time count?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Unclear. Oregon's 2025 legislature chose temporary shelters over eviction prevention. Housing Stabilization and homelessness prevention funding were cut for the 2027-29 budget cycle. Providers warn of a funding gap that could reverse gains.",
+      "question": "Is the progress sustainable?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Crook County homelessness",
+    "Central Oregon PIT count 2026",
+    "Prineville housing crisis",
+    "Oregon homelessness decline",
+    "Point-in-Time count limitations",
+    "eviction prevention funding",
+    "Housing Works",
+    "NeighborImpact",
+    "Governor Kotek homelessness",
+    "homeless shelter expansion"
+  ],
+  "leadParagraph": "Central Oregon's homelessness count dropped nearly 20% this year, with Crook County seeing a 42% decline in Prineville. But beneath the headline numbers lies a fragile system built on temporary emergency funding that state lawmakers are already cutting, leaving the working poor one missed paycheck from crisis.",
+  "linkedPitch": null,
+  "location": "Prineville / Crook County, Oregon",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Emergency shelter building housing people experiencing homelessness in Central Oregon, showing shelter facilities and community members",
+    "asset": {
+      "_ref": "image-03ce8b8dc8ec0902afbe6574882dc359cf614290-4032x3024-webp",
+      "_type": "reference"
+    },
+    "caption": "Emergency shelter facility for people experiencing homelessness in Central Oregon",
+    "credit": "OPB"
+  },
+  "methodology": "Reported using official Point-in-Time count data from the Homeless Leadership Coalition (January 27–February 2, 2026), Portland State University's 2025 statewide homelessness report, and interviews with service providers including NeighborImpact, RootedHomes, and Housing Works. Sources cross-referenced across OPB, Madras Pioneer, KGW, Oregonian, and the Rural Organizing Project.",
+  "needsReview": null,
+  "publishedAt": "2026-06-20T04:00:00.000Z",
+  "readingTimeMinutes": 9,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "far-right-pressure-on-crook-county-schools",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "prineville-militia-police-racism",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "boardman-amazon-data-center-water-crisis",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Central Oregon recorded a 20% homelessness drop. But emergency funding is being cut, single adults are locked out of resources, and Oregon's political class keeps choosing austerity over solutions.",
+    "metaTitle": "Crook County Homelessness Drop Masks Deeper Crisis",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-numbers-look-better-the-system-doesn-t-how-crook-county-s-homelessness-drop-masks-a-deeper"
+  },
+  "tags": [
+    "homelessness",
+    "Crook County",
+    "Oregon",
+    "Prineville",
+    "housing crisis",
+    "Point-in-Time count",
+    "Central Oregon",
+    "eviction prevention",
+    "austerity",
+    "working class"
+  ],
+  "title": "The Numbers Look Better. The System Doesn't: How Crook County's Homelessness Drop Masks a Deeper Crisis",
+  "updatedAt": null,
+  "videoLink": null
+}

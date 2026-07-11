@@ -1,0 +1,71 @@
+{
+  "_id": "article-d8efaab9-7370-4014-a8b5-9a9a09c1c1e1",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "8b692dcac043",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Amidst the Israel-Gaza conflict, Google and Apple have disabled live traffic updates on Google Maps and Waze. This move prioritizes user safety and national security, underscoring the challenges faced by tech companies during crises.",
+  "eventDate": "2023-10-24T16:24:40.748Z",
+  "faqs": null,
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Google Maps",
+    "Waze",
+    "Live traffic updates",
+    "Israel-Gaza conflict",
+    "Israel Defense Forces",
+    "Real-time traffic data",
+    "Navigation apps",
+    "Google Maps and Waze suspension",
+    "Gaza ground invasion",
+    "Tech giants' response to conflict",
+    "Apple Maps",
+    "Israel-Gaza tension",
+    "Gaza",
+    "Israel",
+    "Conflict",
+    "War",
+    "Hamas"
+  ],
+  "leadParagraph": null,
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Google maps car in front of the Western Wall",
+    "asset": {
+      "_ref": "image-b91a70fb0e8350c7b62b6eb0869a84753dcac1be-800x662-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2023-10-24T18:52:38.800Z",
+  "readingTimeMinutes": 3,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "google-maps-and-waze-temporarily-halt-live-traffic-updates-in-israel-and-gaza-amidst-rising"
+  },
+  "tags": null,
+  "title": "Google Maps and Waze Temporarily Halt Live Traffic Updates in Israel and Gaza Amidst Rising Tensions",
+  "updatedAt": null,
+  "videoLink": null
+}

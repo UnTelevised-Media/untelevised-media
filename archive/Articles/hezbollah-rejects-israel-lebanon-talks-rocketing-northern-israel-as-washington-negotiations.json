@@ -1,0 +1,121 @@
+{
+  "_id": "hezbollah-lebanon-israel-talks-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    },
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "As Lebanese and Israeli ambassadors met for direct talks in Washington, Hezbollah launched rockets at 13 northern Israeli towns, rejecting negotiations it called a 'free concession' to Israel while demanding a ceasefire Israel refuses to discuss.",
+  "eventDate": "2026-04-14T15:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "The talks on April 14, 2026, were the first direct bilateral engagement between Lebanon and Israel since 1993. Lebanese Ambassador Nada Hamadeh and Israeli Ambassador Yechiel Leiter met at the US Department of State, with US Secretary of State Marco Rubio participating. Lebanon sought a ceasefire to halt Israel's attacks, while Israel came demanding Hezbollah's disarmament â€” fundamentally opposing agendas.",
+      "question": "What were the Israel-Lebanon talks in Washington about?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Hezbollah leader Naim Qassem called the negotiations 'futile' and a 'ploy to pressure Hezbollah into laying down its weapons.' The group argued that negotiating while Lebanon is under bombardment is capitulation, not diplomacy. Hezbollah also stated that disarmament is a Lebanese internal matter that can only be discussed after Israel completely withdraws from occupied territory, and accused the Lebanese government of lacking national consensus.",
+      "question": "Why did Hezbollah reject the Washington talks?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Israel proposed dividing southern Lebanon into three security zones: Zone 1 (0-8km from border) would have long-term Israeli military presence until Hezbollah is 'fully dismantled'; Zone 2 (up to the Litani River) would see continued Israeli operations with gradual handover to the Lebanese army; Zone 3 (north of the Litani River) would place the Lebanese army solely responsible for disarming Hezbollah.",
+      "question": "What is Israel's three-zone security plan for Lebanon?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "As the Washington talks began at 11am Eastern Time on April 14, Hezbollah launched rockets at 13 northern Israeli towns including Kiryat Shmona and Metula, saying it targeted them 'with simultaneous rocket salvos' at 6:15pm. Meanwhile, the Israeli military announced it had completely surrounded Bint Jbeil, a key southern town with deep symbolic significance for Hezbollah.",
+      "question": "What happened during the talks?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "Since Israel intensified its offensive in Lebanon in early March 2026, at least 2,089 people have been killed, including 165 children and 87 medical workers. More than 1.2 million people have been forced from their homes. The escalation began March 2, when Hezbollah launched rockets at Israel in retaliation for the US-Israel killing of Iran's Supreme Leader Ayatollah Ali Khamenei.",
+      "question": "What are the casualties in Lebanon?"
+    },
+    {
+      "_key": "faq-6",
+      "answer": "The US-Iran ceasefire agreed in April 2026 included Lebanon, but Netanyahu refused to abide by that provision and instead announced direct talks with the Lebanese government. Analysts say this was designed to prevent Tehran from claiming credit for halting the war in Lebanon. The US framed the talks as a 'historic opportunity,' but Hezbollah and many Lebanese view them as an attempt to force disarmament under continued bombardment.",
+      "question": "Why are these talks happening now?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "hezbollah",
+    "lebanon",
+    "israel",
+    "washington-talks",
+    "netanyahu",
+    "qassem",
+    "rubio",
+    "disarmament",
+    "ceasefire",
+    "bint-jbeil",
+    "iran-war",
+    "middle-east",
+    "diplomacy",
+    "resistance",
+    "occupation"
+  ],
+  "leadParagraph": "Hezbollah launched rockets at 13 northern Israeli towns Tuesday as Lebanese and Israeli diplomats met in Washington for 'historic' direct talks â€” but with opposing agendas. Lebanon sought a ceasefire; Israel came for Hezbollah's disarmament. Hezbollah called the negotiations 'futile' and refused to abide by any agreements reached.",
+  "linkedPitch": null,
+  "location": null,
+  "mainImage": {
+    "_type": "image",
+    "alt": "Crowd of Hezbollah supporters at a protest in Beirut, waving yellow Hezbollah flags and holding up printed images, with some people raising their fists in defiance.",
+    "asset": {
+      "_ref": "image-adc0cf6e2d28405f31fb6dc4b2da49f193d03717-6720x4480-webp",
+      "_type": "reference"
+    },
+    "caption": "Hezbollah supporters wave the party flag and hold up images during a protest against planned talks with Israel in Beirut, Lebanon, on April 11, 2026. Demonstrators urged the Lebanese government to pull out of Washington talks, calling them a 'free concession' to Israel and the US.",
+    "credit": "AFP via Al Jazeera"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-15T21:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": null,
+  "reviewedBy": null,
+  "seo": {
+    "description": "Hezbollah launched rockets at 13 northern Israeli towns as Lebanese and Israeli diplomats met in Washington. Hezbollah called talks 'futile' and demanded a ceasefire Israel refused to discuss.",
+    "title": "Hezbollah Rejects Israel-Lebanon Talks, Rockets Hit Northern Israel"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "hezbollah-rejects-israel-lebanon-talks-rocketing-northern-israel-as-washington-negotiations"
+  },
+  "tags": [
+    "hezbollah",
+    "lebanon-israel-talks",
+    "gaza-war-2026",
+    "us-diplomacy",
+    "middle-east-conflict"
+  ],
+  "title": "Hezbollah Rejects Israel-Lebanon Talks, Rocketing Northern Israel as Washington Negotiations Begin",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,138 @@
+{
+  "_id": "amazon-solar-panels-fire-ohio",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Seventy-five to a hundred solar panels caught fire on the roof of an Amazon fulfillment center in West Jefferson, Ohio. The fifth massive fire in five days.",
+  "eventDate": "2026-04-08",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "The official cause is under investigation, but fire officials believe 75-100 solar panels on the roof caught fire. Jefferson Township Fire Chief Dan Gatley stated they are in the early stages of determining the exact cause.",
+      "question": "What caused the Amazon warehouse fire in Ohio?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "No. The fire department reported no injuries. Thousands of employees were evacuated as a precaution and sent home for the rest of the day.",
+      "question": "Was anyone injured in the West Jefferson Amazon fire?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Jefferson Township Fire Chief Dan Gatley estimated that 75-100 solar panels on the roof caught fire. The fire was contained to the roof area.",
+      "question": "How many solar panels caught fire?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Fire damage was minimal. Chief Gatley reported the fire burned through a small section of the rubber roofing membrane and some insulation, affecting approximately two racks of product. Most of the damage was from water and the sprinkler system.",
+      "question": "What was the damage to the Amazon facility?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "The fire was reported at 12:10 PM on April 8, 2026. Fire crews confirmed the fire on the roof and began battling it immediately. The fire was contained, and employees were evacuated and sent home for the day.",
+      "question": "How long did it take to contain the fire?"
+    },
+    {
+      "_key": "faq-6",
+      "answer": "Multiple agencies responded, led by the Jefferson Township Fire Department. Approximately 10 fire engines responded along with mutual aid from nearby departments, including Madison Township and Pleasant Township fire departments.",
+      "question": "Which fire departments responded?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "amazon fire",
+    "solar panels fire",
+    "west jefferson",
+    "ohio warehouse fire",
+    "amazon fulfillment center",
+    "civil unrest",
+    "april 2026"
+  ],
+  "leadParagraph": "# The Fifth Fire: Amazon's \"Green\" Energy Goes Up in Smoke",
+  "linkedPitch": null,
+  "location": "West Jefferson, Ohio",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Aerial or elevated view of a large Amazon warehouse building with thick black smoke rising from the roof where solar panels are visible, with fire trucks and emergency vehicles positioned below on a clear day.",
+    "asset": {
+      "_ref": "image-885a5312ff927b462b0ca182f152408e99cf0dea-1920x1080-webp",
+      "_type": "reference"
+    },
+    "caption": "Black smoke pours from the roof of the Amazon fulfillment center in West Jefferson, Ohio, on April 8, 2026, as 75-100 solar panels catch fire, forcing the evacuation of thousands of employees.",
+    "credit": "10TV via WBNS Columbus"
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-04-12T17:13:45.997707",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "bae107ccb590",
+      "_ref": "kimberly-clark-warehouse-fire",
+      "_type": "reference"
+    },
+    {
+      "_key": "491badeb6b80",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    },
+    {
+      "_key": "23f4a5777e19",
+      "_ref": "o4fsp0a2oet",
+      "_type": "reference"
+    },
+    {
+      "_key": "dc3dd24d0bbf",
+      "_ref": "the-fourth-fire-queens",
+      "_type": "reference"
+    },
+    {
+      "_key": "d8c284bd7ceb",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "3c0670d307ca",
+      "_ref": "brockton-tractor-trailer-fire-massachusetts",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seo",
+    "metaDescription": "Fifth fire in five days: Amazon warehouse solar panels catch fire in Ohio. Thousands evacuated.\n",
+    "metaTitle": "Amazon Solar Panels Fire Ohio"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-fifth-fire-amazon-s-green-energy-goes-up-in-smoke"
+  },
+  "tags": [
+    "amazon-fire",
+    "solar-panels-fire",
+    "west-jefferson",
+    "warehouse-fire",
+    "ohio"
+  ],
+  "title": "The Fifth Fire: Amazon's Green Energy Goes Up in Smoke",
+  "updatedAt": null,
+  "videoLink": null
+}

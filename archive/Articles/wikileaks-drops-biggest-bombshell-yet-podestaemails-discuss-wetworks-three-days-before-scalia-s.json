@@ -1,0 +1,117 @@
+{
+  "_id": "7ONx74QMiI10eazwub4vTj",
+  "allowComments": true,
+  "author": {
+    "_ref": "DJ1Y76QLqJX8nukZ868jxy",
+    "_type": "reference",
+    "name": "Ash Fawkes"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "86af5fd43c5b",
+      "_ref": "719c58a9-cc8f-4c27-9b85-9dec7587b79a",
+      "_type": "reference"
+    },
+    {
+      "_key": "6d1c0fa2f6b4",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Once again it seems that conspiracy theorists have been proven right with the latest Wikileaks #PodestaEmails dump. An email between Podesta (Clinton's Campaign Chairman) and lobbyist Steve Elmendorf seems to discuss assassination three days before Scalia's suspicious death.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "ku7s0sl",
+      "_type": "faqItem",
+      "answer": "The email was sent from John Podesta to lobbyist Steve Elmendorf, referencing \"wetworks\" — a term meaning assassination or the spilling of blood — three days before Supreme Court Justice Antonin Scalia died under disputed circumstances at a Texas ranch.",
+      "question": "What is the \"wetworks\" Podesta email?"
+    },
+    {
+      "_key": "ku8qx5u",
+      "_type": "faqItem",
+      "answer": "John Podesta was Hillary Clinton's 2016 presidential campaign chairman. His emails were leaked by WikiLeaks during the campaign in a series of data dumps that became a major controversy in the election.",
+      "question": "Who is John Podesta?"
+    },
+    {
+      "_key": "ku9xlwb",
+      "_type": "faqItem",
+      "answer": "Justice Scalia died in February 2016 at a private ranch in Texas. Controversies include: no autopsy was ordered, a pillow was reportedly found over his face, questions arose about who controlled access to the scene, and the local justice of the peace ruled by phone without visiting.",
+      "question": "What are the disputed circumstances around Justice Scalia's death?"
+    },
+    {
+      "_key": "kuahiqj",
+      "_type": "faqItem",
+      "answer": "Steve Elmendorf is a major Washington D.C. lobbyist and Democratic Party operative. He served as chief of staff to House Minority Leader Dick Gephardt and has represented numerous corporate clients.",
+      "question": "Who is Steve Elmendorf?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Anon Resistance",
+    "ARM",
+    "Anon",
+    "Resistance",
+    "Movement",
+    "Anonymous",
+    "Anonymous 2017",
+    "the anon message",
+    "anonmessage",
+    "official anonymous website",
+    "official anonymous",
+    "anonymous channel",
+    "anonymous today",
+    "anonymous this week",
+    "anonymous 2017",
+    "today anonymous 2017 this week",
+    "anonymous 2017 latest",
+    "anonymous hackers",
+    "Anarchy",
+    "Anarchism"
+  ],
+  "leadParagraph": "Once again it seems that conspiracy theorists have been proven right with the latest Wikileaks #PodestaEmails dump. An email between Podesta (Clinton's Campaign Chairman) and lobbyist Steve Elmendorf seems to discuss assassination three days before Scalia's suspicious death.",
+  "linkedPitch": null,
+  "location": "Washington D.C.",
+  "mainImage": {
+    "_type": "image",
+    "asset": {
+      "_ref": "image-17b085cc08392b5c2859396d8411aefb92cda285-600x400-png",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article was originally published on the Anon Resistance News website (news.anonresistance.dx.am) and has been migrated to UnTelevised Media.",
+  "needsReview": false,
+  "publishedAt": "2016-10-13T12:00:00Z",
+  "readingTimeMinutes": 8,
+  "relatedArticles": null,
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "wikileaks-drops-biggest-bombshell-yet-podestaemails-discuss-wetworks-three-days-before-scalia-s"
+  },
+  "tags": [
+    "wikileaks",
+    "podesta",
+    "scalia",
+    "clinton",
+    "deep-state",
+    "assassination",
+    "podestaemails",
+    "xfbml",
+    "podestaemails4",
+    "hillaryclinton"
+  ],
+  "title": "Wikileaks Drops Biggest Bombshell Yet #PodestaEmails Discuss Wetworks Three Days Before Scalia's Death",
+  "updatedAt": null,
+  "videoLink": null
+}
