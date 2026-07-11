@@ -187,8 +187,8 @@ function portableTextToMarkdown(blocks: any[]): string {
     result.push(markdownLines[i]);
     if (i < markdownLines.length - 1) {
       const nextLine = markdownLines[i + 1];
-      const isCurrentList = markdownLines[i].trimStart().startsWith(/^[-*\d+.]/);
-      const isNextList = nextLine.trimStart().startsWith(/^[-*\d+.]/);
+      const isCurrentList = /^[-*\d+.]/.test(markdownLines[i].trimStart());
+      const isNextList = /^[-*\d+.]/.test(nextLine.trimStart());
 
       if (!(isCurrentList && isNextList)) {
         result.push('');

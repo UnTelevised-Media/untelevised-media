@@ -47,5 +47,5 @@
     "build-utilities/generateRobots.mjs",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "supabase/functions", "supabase/projects", ".supabase"]
+  "exclude": ["node_modules", "supabase/functions", "supabase/projects", ".supabase", "tools", "scripts"]
 }
