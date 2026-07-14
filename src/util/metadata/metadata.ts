@@ -62,8 +62,8 @@ export function truncate(str: string | undefined, maxLength: number): string {
 export function buildArticleMetadata(article: Article, slug: string): Metadata {
   const ogImageUrl = getSanityOgImageUrl(article.mainImage) ?? DEFAULT_OG_IMAGE;
   const canonicalUrl = getCanonicalUrl('articles', slug);
-  const title = truncate(article.title, 60);
-  const description = truncate(article.description, 160);
+  const title = article.title;
+  const description = article.description;
   const keywords = article.keywords?.length ? article.keywords : undefined;
 
   // Extract author name - handle both reference and populated author objects
