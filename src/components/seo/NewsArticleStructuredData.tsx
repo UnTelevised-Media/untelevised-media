@@ -15,6 +15,40 @@ function NewsArticleStructuredData({ article, slug }: Props) {
 
   // GROQ dereferences author-> and categories[]-> in article data
   // TypeScript sees these as references only, not populated objects
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const authorData = article.author as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const reviewerData = article.reviewedBy as any;
+
+  // Build author schema from Sanity data
+  const authorSchema = authorData
+    ? {
+        '@type': 'Person',
+        '@id': `https://untelevised.media/author/${authorData.slug?.current}/#person`,
+        name: authorData.name,
+        url: `https://untelevised.media/author/${authorData.slug?.current}/`,
+        ...(authorData.title ? { jobTitle: authorData.title } : {}),
+        ...(authorData.expertise?.length ? { knowsAbout: authorData.expertise } : {}),
+        ...(authorData.credentials?.length ? { hasCredential: authorData.credentials } : {}),
+        worksFor: {
+          '@type': 'NewsMediaOrganization',
+          '@id': 'https://untelevised.media/#organization',
+          name: 'UnTelevised Media',
+        },
+      }
+    : undefined;
+
+  // Build reviewer schema if present
+  const reviewerSchema = reviewerData
+    ? {
+        '@type': 'Person',
+        '@id': `https://untelevised.media/author/${reviewerData.slug?.current}/#person`,
+        name: reviewerData.name,
+        ...(reviewerData.title ? { jobTitle: reviewerData.title } : {}),
+        url: `https://untelevised.media/author/${reviewerData.slug?.current}/`,
+      }
+    : undefined;
+
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -29,17 +63,8 @@ function NewsArticleStructuredData({ article, slug }: Props) {
         image: ogImageUrl
           ? { '@type': 'ImageObject', url: ogImageUrl, width: 1200, height: 630 }
           : undefined,
-        author: article.author
-          ? {
-              '@type': 'Person',
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              '@id': `https://untelevised.media/author/${(article.author as any).slug?.current}/#person`,
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              name: (article.author as any).name,
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              url: `https://untelevised.media/author/${(article.author as any).slug?.current}/`,
-            }
-          : undefined,
+        author: authorSchema,
+        ...(reviewerSchema ? { reviewedBy: reviewerSchema } : {}),
         publisher: {
           '@type': 'NewsMediaOrganization',
           '@id': 'https://untelevised.media/#organization',

@@ -50,27 +50,20 @@ export function getSanityOgImageUrl(image: unknown): string | undefined {
   return urlForImage(image)?.width(1200).height(630).url() ?? undefined;
 }
 
-// Truncate strings for meta title/description limits
-export function truncate(str: string | undefined, maxLength: number): string {
-  if (!str) {
-    return '';
-  }
-  return str.length > maxLength ? `${str.slice(0, maxLength - 3)}...` : str;
-}
-
 // Build full article Metadata object
 export function buildArticleMetadata(article: Article, slug: string): Metadata {
   const ogImageUrl = getSanityOgImageUrl(article.mainImage) ?? DEFAULT_OG_IMAGE;
   const canonicalUrl = getCanonicalUrl('articles', slug);
   const title = article.title;
-  const description = article.description;
+  const description = article.description ?? '';
   const keywords = article.keywords?.length ? article.keywords : undefined;
 
   // Extract author name - handle both reference and populated author objects
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const authorData = article.author as any;
   const authorName =
     article.author && typeof article.author === 'object' && 'name' in article.author
-      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ((article.author as any).name ?? 'Author')
+      ? (authorData.name ?? 'Author')
       : 'Author';
 
   // Extract category title - handle both reference and populated category objects
@@ -118,12 +111,9 @@ export function buildLiveEventMetadata(liveEvent: LiveEvent, slug: string): Meta
   const seoOgImageUrl = getSanityOgImageUrl(liveEvent.seo?.ogImage);
   const ogImageUrl = seoOgImageUrl ?? getSanityOgImageUrl(liveEvent.mainImage) ?? DEFAULT_OG_IMAGE;
   const canonicalUrl = liveEvent.seo?.canonicalUrl ?? getCanonicalUrl('live-event', slug);
-  const computedTitle = truncate(
-    `${liveEvent.title}${liveEvent.isCurrentEvent ? ' — Live Updates' : ''}`,
-    60
-  );
-  const title = truncate(liveEvent.seo?.metaTitle ?? computedTitle, 60);
-  const description = truncate(liveEvent.seo?.metaDescription ?? liveEvent.description, 160);
+  const computedTitle = `${liveEvent.title}${liveEvent.isCurrentEvent ? ' — Live Updates' : ''}`;
+  const title = liveEvent.seo?.metaTitle ?? computedTitle;
+  const description = liveEvent.seo?.metaDescription ?? liveEvent.description;
   const keywords = liveEvent.keywords?.length ? liveEvent.keywords : undefined;
 
   return {
@@ -155,14 +145,12 @@ export function buildLiveEventMetadata(liveEvent: LiveEvent, slug: string): Meta
 // Build category Metadata object
 export function buildCategoryMetadata(category: Category, slug: string): Metadata {
   const canonicalUrl = category.seo?.canonicalUrl ?? getCanonicalUrl('category', slug);
-  const computedTitle = truncate(`${category.title} — Latest Coverage`, 60);
-  const title = truncate(category.seo?.metaTitle ?? computedTitle, 60);
-  const description = truncate(
+  const computedTitle = `${category.title} — Latest Coverage`;
+  const title = category.seo?.metaTitle ?? computedTitle;
+  const description =
     category.seo?.metaDescription ??
-      category.description ??
-      `Browse all ${category.title} coverage from UnTelevised Media.`,
-    160
-  );
+    category.description ??
+    `Browse all ${category.title} coverage from UnTelevised Media.`;
   // Category image is optional in Sanity schema
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const categoryImage = (category as any)?.image;
@@ -197,8 +185,8 @@ export function buildBreakingNewsMetadata(article: BreakingArticle, slug: string
   const ogImageUrl =
     getSanityOgImageUrl(article.heroImage ?? article.mainImage) ?? DEFAULT_OG_IMAGE;
   const canonicalUrl = getCanonicalUrl('breaking', slug);
-  const title = truncate(article.title, 60);
-  const description = truncate(article.summary ?? article.description ?? article.excerpt, 160);
+  const title = article.title ?? '';
+  const description = article.summary ?? article.description ?? article.excerpt ?? '';
 
   return {
     title,
@@ -233,8 +221,8 @@ export function buildBreakingNewsMetadata(article: BreakingArticle, slug: string
 export function buildFactCheckMetadata(factCheck: FactCheck, slug: string): Metadata {
   const ogImageUrl = getSanityOgImageUrl(factCheck.mainImage) ?? DEFAULT_OG_IMAGE;
   const canonicalUrl = getCanonicalUrl('fact-check', slug);
-  const title = truncate(`Fact Check: ${factCheck.title}`, 60);
-  const description = truncate(factCheck.ratingExplanation ?? factCheck.description, 160);
+  const title = `Fact Check: ${factCheck.title}`;
+  const description = factCheck.ratingExplanation ?? factCheck.description ?? '';
 
   return {
     title,
@@ -267,11 +255,12 @@ export function buildFactCheckMetadata(factCheck: FactCheck, slug: string): Meta
 export function buildAuthorMetadata(author: Author, slug: string): Metadata {
   const ogImageUrl = getSanityOgImageUrl(author.image) ?? DEFAULT_OG_IMAGE;
   const canonicalUrl = getCanonicalUrl('author', slug);
-  const title = truncate(`${author.name}${author.title ? ` — ${author.title}` : ''}`, 60);
-  const description = truncate(
-    `Independent journalist at UnTelevised Media. Read all coverage by ${author.name}.`,
-    160
-  );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const isAI = (author as any)?.isAIGenerated;
+  const title = `${author.name}${author.title ? ` — ${author.title}` : ''}`;
+  const description = isAI
+    ? `AI Editorial Agent at UnTelevised Media. Reviewed and fact-checked by human editors. Read all coverage by ${author.name}.`
+    : `Independent journalist at UnTelevised Media. Read all coverage by ${author.name}.`;
 
   return {
     title,

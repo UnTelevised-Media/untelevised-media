@@ -433,9 +433,14 @@ export const queryRecentSongs = groq`
 export const queryArticleBySlug = groq`
     *[_type == 'article' && slug.current == $slug][0] {
       ...,
-      author->,
+      author->{
+        ...,
+        "aiTransparencyPolicy": aiTransparencyPolicy,
+        "isAIGenerated": isAIGenerated,
+        "reviewerTeam": reviewerTeam[]->{ _id, name, slug, title, image }
+      },
       categories[]->,
-      reviewedBy->{ name, slug, title, image },
+      reviewedBy->{ _id, name, slug, title, image },
       seo,
       faqs,
       sources[]-> { label, type, url, description, isAnonymous },
@@ -559,6 +564,8 @@ export const queryAuthorBySlug = groq`
     twitter, instagram, facebook, tiktok, youtube, linkedin, website, email,
     credentials, expertise, sameAs, location, isActive, isLiteraryAuthor,
     tipStripeProductId, tipAmount,
+    isAIGenerated, aiTransparencyPolicy,
+    "reviewerTeam": reviewerTeam[]->{ _id, name, slug, title, image },
     'relatedArticles': *[_type == 'article' && author._ref == ^._id] | order(_createdAt desc) [0..49] {
       _id, title, slug, description, publishedAt, mainImage,
       'categories': categories[]->{ _id, title, slug },

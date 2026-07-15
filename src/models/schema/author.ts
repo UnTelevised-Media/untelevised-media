@@ -171,11 +171,53 @@ export default defineType({
       type: 'number',
       description: 'Default tip amount shown to buyers, e.g. 5. Buyers can change it freely.',
     }),
+    // AI/Automation fields
+    defineField({
+      name: 'isAIGenerated',
+      title: 'AI-Generated Author',
+      type: 'boolean',
+      initialValue: false,
+      description:
+        'Check if this is an AI agent or automated writer (e.g., "Tyler Durden - AI Editorial Agent"). Shows transparency badge on author page.',
+    }),
+    defineField({
+      name: 'aiTransparencyPolicy',
+      title: 'AI Transparency Policy',
+      type: 'array',
+      of: [
+        {
+          title: 'Block',
+          type: 'block',
+          styles: [{ title: 'Normal', value: 'normal' }],
+          lists: [],
+        },
+      ],
+      description:
+        'Explanation of how this AI agent works, what it does, and how humans review its output. Shown prominently on the author page.',
+      hidden: ({ document }) => !(document?.isAIGenerated as boolean),
+    }),
+    defineField({
+      name: 'reviewerTeam',
+      title: 'Review Team Members',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'author' }] }],
+      description:
+        'Human reviewers, fact-checkers, or editors who review content from this AI agent. Their names appear as "audited and approved by [names]" on article pages.',
+      hidden: ({ document }) => !(document?.isAIGenerated as boolean),
+    }),
   ],
   preview: {
     select: {
       title: 'name',
       media: 'image',
+      isAI: 'isAIGenerated',
+    },
+    prepare(selection) {
+      const { isAI } = selection;
+      return {
+        ...selection,
+        subtitle: isAI ? '🤖 AI Agent' : undefined,
+      };
     },
   },
 });

@@ -21,7 +21,6 @@ import { ArtistStructuredData } from '@/components/seo/StructuredData';
 import {
   getCanonicalUrl,
   getSanityOgImageUrl,
-  truncate,
   DEFAULT_OG_IMAGE,
   TWITTER_HANDLE,
 } from '@/util/metadata/metadata';
@@ -48,12 +47,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const displayName = artist.stageName ?? artist.name;
   const canonicalUrl = artist.seo?.canonicalUrl ?? getCanonicalUrl('music-artists', slug);
   const ogImageUrl = getSanityOgImageUrl(artist.image) ?? DEFAULT_OG_IMAGE;
-  const title = truncate(artist.seo?.metaTitle ?? `${displayName} | Music Artist`, 60);
-  const description = truncate(
-    artist.seo?.metaDescription ??
-      `Discover songs and albums by ${displayName} on UnTelevised Media.`,
-    160
-  );
+  const title = artist.seo?.metaTitle ?? `${displayName} | Music Artist`;
+  const description =
+    artist.seo?.metaDescription ?? `Discover songs and albums by ${displayName} on UnTelevised Media.`;
 
   return {
     title,

@@ -18,7 +18,7 @@ import { sanityFetch } from '@/lib/sanity/lib/fetch';
 import { querySongBySlug } from '@/lib/sanity/lib/queries';
 import { Music, Clock, Calendar, ExternalLink } from 'lucide-react';
 import SongStructuredData from '@/components/seo/StructuredData';
-import { getCanonicalUrl, truncate, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata/metadata';
+import { getCanonicalUrl, DEFAULT_OG_IMAGE, TWITTER_HANDLE } from '@/util/metadata/metadata';
 
 type Props = {
   params: Promise<{
@@ -54,12 +54,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const artworkInfo = getSongArtworkInfo(song);
   const canonicalUrl = song.seo?.canonicalUrl ?? getCanonicalUrl('lyrics', slug);
   const ogImage = artworkInfo.url ?? DEFAULT_OG_IMAGE;
-  const title = truncate(song.seo?.metaTitle ?? `${song.title} - ${artistNames} | Lyrics`, 60);
-  const description = truncate(
-    song.seo?.metaDescription ??
-      `Read the lyrics to "${song.title}" by ${artistNames} on UnTelevised Media.`,
-    160
-  );
+  const title = song.seo?.metaTitle ?? `${song.title} - ${artistNames} | Lyrics`;
+  const description =
+    song.seo?.metaDescription ?? `Read the lyrics to "${song.title}" by ${artistNames} on UnTelevised Media.`;
 
   return {
     title,

@@ -180,6 +180,11 @@ export default async function AuthorPage({ params }: Props) {
             {/* Author Info */}
             <div className='flex-1 text-center lg:text-left'>
               <div className='mb-1 flex flex-wrap items-center justify-center gap-2 lg:justify-start'>
+                {author?.isAIGenerated && (
+                  <span className='flex items-center gap-1 bg-cyan-600 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
+                    <span>🤖</span> AI Editorial Agent
+                  </span>
+                )}
                 {author?.isLiteraryAuthor && (
                   <span className='bg-untele px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-white'>
                     Literary Author
@@ -312,6 +317,65 @@ export default async function AuthorPage({ params }: Props) {
                       </a>
                     );
                   })}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* AI Transparency Policy Section */}
+      {author.isAIGenerated && (author.aiTransparencyPolicy || author.reviewerTeam?.length) && (
+        <section className='mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8'>
+          <div className='rounded-xl border-2 border-cyan-300 bg-gradient-to-br from-cyan-50 to-blue-50 p-8 shadow-lg dark:border-cyan-700 dark:from-cyan-950/30 dark:to-blue-950/30'>
+            <h2 className='mb-6 flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white'>
+              <span className='text-2xl'>🤖</span>
+              AI Editorial Agent Transparency Policy
+            </h2>
+
+            {/* Transparency Policy Text */}
+            {author.aiTransparencyPolicy && (
+              <div className='prose prose-lg prose-slate dark:prose-invert mb-6 max-w-none'>
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                <PortableText value={author.aiTransparencyPolicy} components={RichTextComponents as any} />
+              </div>
+            )}
+
+            {/* Reviewer Team */}
+            {author.reviewerTeam && author.reviewerTeam.length > 0 && (
+              <div className='border-t border-cyan-200 pt-6 dark:border-cyan-800'>
+                <h3 className='mb-4 text-lg font-semibold text-slate-900 dark:text-white'>
+                  ✓ Reviewed & Approved By
+                </h3>
+                <div className='flex flex-wrap gap-4'>
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  {author.reviewerTeam.map((reviewer: any) => (
+                    <Link
+                      key={reviewer._id}
+                      href={`/author/${reviewer.slug?.current || reviewer._id}`}
+                      className='inline-flex items-center gap-2 rounded-lg border border-cyan-400 bg-white/50 px-4 py-2 transition-all hover:border-untele hover:bg-white dark:border-cyan-600 dark:bg-slate-800/50'
+                    >
+                      {reviewer.image && (
+                        <Image
+                          src={urlForImage(reviewer.image).width(32).height(32).url()}
+                          alt={reviewer.name}
+                          width={32}
+                          height={32}
+                          className='h-8 w-8 rounded-full object-cover'
+                        />
+                      )}
+                      <div>
+                        <div className='font-semibold text-slate-900 dark:text-white'>
+                          {reviewer.name}
+                        </div>
+                        {reviewer.title && (
+                          <div className='text-xs text-slate-600 dark:text-slate-400'>
+                            {reviewer.title}
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             )}
