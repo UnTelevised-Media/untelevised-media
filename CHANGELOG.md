@@ -4,7 +4,44 @@ All notable changes to this project are documented here.
 
 ---
 
-# [3.0.4] — 2026-07-02 — Legal Compliance, Creator Marketplace, & Homepage Revalidation
+# [3.0.5] — 2026-07-14 — AI Article Transparency & Schema.org Reviewer Attribution
+
+## New
+
+### AI Editorial Agent Transparency System
+- **AI author schema fields** — Extended Author schema with:
+  - `isAIGenerated` (boolean) — Flag to mark AI-authored accounts
+  - `aiTransparencyPolicy` (rich text) — Public explanation of how the AI agent works and review process
+  - `reviewerTeam` (array of author references) — Link human reviewers/fact-checkers who approve AI content
+- **AI article tracking** — Added `isAIGenerated` flag to Article schema for editorial tracking and filtering
+- **Schema.org compliance** — NewsArticleStructuredData now includes:
+  - Author `jobTitle` field (e.g., "Automated AI Editorial Agent") from Sanity data
+  - `reviewedBy` field with reviewer name and job title for all articles
+  - Person schema type for both human and AI authors with proper attribution
+- **Author transparency page** — AI author profiles display:
+  - 🤖 AI Editorial Agent badge in hero section
+  - Dedicated "AI Editorial Agent Transparency Policy" section
+  - Clickable reviewer team cards with photos, names, and job titles
+  - Clear human oversight attribution
+
+### Metadata & SEO Enhancements
+- **Full metadata descriptions** — Removed all truncation from meta titles and descriptions
+- **Complete reviewer attribution** — All articles now show reviewer information in structured data
+- **GROQ query updates** — Enhanced queries to fetch AI transparency data and reviewer details with job titles
+- **Schema.org validation ready** — Implements Google's guidelines for transparent AI-generated content disclosure
+
+## Updated
+
+- **NewsArticleStructuredData component** — Uses Sanity data directly (no hard-coded values)
+- **GROQ queries** (`queryArticleBySlug`, `queryAuthorBySlug`) — Fetch AI transparency, reviewer team, and job title fields
+- **Author page component** — Renders AI transparency policy and reviewer team attribution
+- **Metadata builders** — All metadata functions now use complete, untruncated values
+- **Music pages** — Removed deprecated truncate function imports and calls
+
+## Fixed
+
+- **Build errors** — Removed all references to deleted `truncate()` helper function
+- **Music artist & lyrics pages** — Updated to use full metadata without truncation
 
 ## New
 
