@@ -592,8 +592,26 @@ export default async function ArticlePage({ params }: Props) {
 
               {/* Mobile/Tablet: Sidebars below content */}
               <div className='mt-10 space-y-6 xl:hidden'>
+                <div>
+                  <InFeedAd
+                    slot={AD_CONFIG.AD_SLOTS.IN_FEED}
+                    className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                  />
+                </div>
                 <RecentBreakingNews />
+                <div>
+                  <InFeedAd
+                    slot={AD_CONFIG.AD_SLOTS.IN_FEED}
+                    className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                  />
+                </div>
                 <TrendingSection />
+                <div>
+                  <InFeedAd
+                    slot={AD_CONFIG.AD_SLOTS.IN_FEED}
+                    className='rounded-lg border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-700 dark:bg-slate-900/50'
+                  />
+                </div>
               </div>
             </div>
           </div>
