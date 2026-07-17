@@ -4,6 +4,22 @@ All notable changes to this project are documented here.
 
 ---
 
+# [3.0.6] — 2026-07-17 — Portal Editor Crash Fixes
+
+## Fixed
+
+### Article Editor Crashes (portal /new and /edit pages)
+- **Unregistered embed blocks** — Articles containing Facebook, TikTok, or Vimeo embeds crashed the editor at document creation (`Cannot read properties of undefined (reading 'isInGroup')`). The serializer emitted `facebookEmbed` / `tiktokEmbed` / `vimeoEmbed` block types that were never registered in the BlockNote schema — all three are now registered with in-editor previews
+- **Duplicate ProseMirror packages** — Editor crashed at mount (`Cannot read properties of undefined (reading 'localsInner')`) because lockfile drift bundled two copies of `prosemirror-view` (1.41.7 / 1.41.8) and `prosemirror-model` (1.25.4 / 1.25.7); DecorationSets from one copy failed `instanceof` checks in the other. Pinned to single versions via `pnpm.overrides`. This was also the true root cause of Issue #105 — the earlier previewDrafts revert only changed which content loaded
+- **Degenerate tables** — Sanity tables containing empty rows crashed document creation (`Invalid content for node table/tableRow`); the serializer now drops empty rows and falls back to a single empty cell
+- **Unknown block safety net** — Any block type the editor schema doesn't recognize now renders as an italic `[type — edit in Sanity Studio]` placeholder instead of crashing the page
+- **Stuck error screen** — A crash on one page no longer leaves the "Something went wrong" fallback stuck on every page visited afterward; the root-layout ErrorBoundary now resets on client-side navigation
+- **Docker task misresolution** — VS Code npm-script detection could resolve `docker:*` tasks against the `package.json` copy inside `.next/standalone` and fail with `Cannot find module scripts/docker-clean.js`; `.next/**` is now excluded from task detection
+
+## New
+
+- **Facebook, TikTok, and Vimeo slash-menu items** — Authors can insert all three embed types directly from the editor's `/` menu, matching the existing YouTube / Twitter / Instagram embeds
+
 # [3.0.5] — 2026-07-14 — AI Article Transparency & Schema.org Reviewer Attribution
 
 ## New
