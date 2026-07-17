@@ -1,0 +1,7 @@
+{
+  // Next.js standalone output (.next/standalone) contains a copy of package.json
+  // with identical script names. Without this exclude, VS Code's npm-script task
+  // detection can resolve tasks against that copy and run them from the wrong
+  // cwd ("Cannot find module scripts/docker-clean.js").
+  "npm.exclude": "**/.next/**"
+}

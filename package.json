@@ -177,5 +177,11 @@
   "engines": {
     "node": ">=22.22.3",
     "npm": ">=9.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "prosemirror-view": "1.41.8",
+      "prosemirror-model": "1.25.7"
+    }
   }
 }

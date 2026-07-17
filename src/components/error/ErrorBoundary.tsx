@@ -16,6 +16,10 @@ interface ErrorBoundaryProps {
   children: React.ReactNode;
   fallback?: React.ComponentType<{ error: Error; retry: () => void }>;
   onError?: (_error: Error, _errorInfo: React.ErrorInfo) => void;
+  /** When this value changes while the fallback is showing, the boundary resets.
+   *  Without it a boundary mounted in a persistent layout stays stuck on the
+   *  fallback across client-side navigations. */
+  resetKey?: unknown;
 }
 
 export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
@@ -29,6 +33,14 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
+  }
+
+  componentDidUpdate(prevProps: ErrorBoundaryProps) {
+    const { resetKey } = this.props;
+    const { hasError } = this.state;
+    if (hasError && !Object.is(resetKey, prevProps.resetKey)) {
+      this.handleRetry();
+    }
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {

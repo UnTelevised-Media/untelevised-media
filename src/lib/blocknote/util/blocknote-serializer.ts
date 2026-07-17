@@ -385,12 +385,19 @@ function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (_ref: string) => str
 
       case 'table': {
         const rows = (b.rows as Array<{ cells: unknown[] }> | undefined) ?? [];
+        // ProseMirror's table schema requires at least one row and at least one
+        // cell per row (tableRow+ / tableCell+). Sanity tables can contain empty
+        // rows — passing those through crashes editor creation with
+        // "Invalid content for node table/tableRow". Drop empty rows and fall
+        // back to a single empty cell so the block stays visible and editable.
+        const nonEmptyRows = rows.filter((row) => (row?.cells ?? []).length > 0);
+        const safeRows = nonEmptyRows.length > 0 ? nonEmptyRows : [{ cells: [''] }];
         return {
           type: 'table',
           props: {},
           content: {
             type: 'tableContent',
-            rows: rows.map((row) => ({
+            rows: safeRows.map((row) => ({
               cells: (row.cells ?? []).map((cell) => {
                 const text = typeof cell === 'string' ? cell : String(cell ?? '');
                 // BlockNote 0.47 requires TableCell objects with `type: "tableCell"`.

@@ -7,6 +7,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
+import RouteErrorBoundary from '@/components/error/RouteErrorBoundary';
 import { Toaster } from '@/components/ui/toaster';
 import dynamic from 'next/dynamic';
 import { ConsentProvider } from '@/hooks/googleAdSense/useConsent';
@@ -136,7 +137,7 @@ function RootLayout({
               >
                 <div className='relative flex min-h-screen flex-col'>
                   <main id='main-content' className='flex-1'>
-                    <ErrorBoundary>{children}</ErrorBoundary>
+                    <RouteErrorBoundary>{children}</RouteErrorBoundary>
                   </main>
                 </div>
                 <Toaster />
