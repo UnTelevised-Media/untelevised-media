@@ -10,9 +10,11 @@ import { groq } from 'next-sanity';
 /** All fields needed for the dashboard article card/row. */
 const ARTICLE_LIST_PROJECTION = groq`{
   _id,
-  // Under 'drafts' perspective, _id contains the draft prefix for unpublished docs:
-  // Published: "articles.xyz"
-  // Draft: "drafts.articles.xyz"
+  // Under the 'drafts' perspective _id is ALWAYS normalized to the non-prefixed
+  // form, even for draft-only documents. _originalId carries the real stored ID
+  // ("drafts.xyz" when a draft was served) and must be projected explicitly —
+  // it is what all draft-detection and write mutations rely on.
+  _originalId,
   _createdAt,
   _updatedAt,
   title,
@@ -48,6 +50,13 @@ export const queryPortalAllArticles = groq`
   | order(_updatedAt desc)
 `;
 
+/** Editor/admin-only monitoring queue — every article with a pending removal request. */
+export const queryPortalDeletionRequests = groq`
+  *[_type == "article" && defined(deletionRequest)]
+  ${ARTICLE_LIST_PROJECTION}
+  | order(deletionRequest.requestedAt desc)
+`;
+
 // ---------------------------------------------------------------------------
 // Single article — full fields for the editor
 // ---------------------------------------------------------------------------
@@ -55,6 +64,9 @@ export const queryPortalAllArticles = groq`
 export const queryPortalArticleById = groq`
   *[_type == "article" && _id == $id][0]{
     _id,
+    // Real stored ID ("drafts.xyz" for drafts) — required by the editor form so
+    // save/publish/review actions target the correct Sanity document.
+    _originalId,
     _createdAt,
     _updatedAt,
     title,
@@ -68,6 +80,10 @@ export const queryPortalArticleById = groq`
     leadParagraph,
     body,
     mainImage{ asset->{ _id, url }, alt },
+    imageGallery{ images[]{ _key, asset->{ _id, url }, alt } },
+    isFieldReport,
+    isAIGenerated,
+    seo{ metaTitle, metaDescription, ogImage{ asset->{ _id, url } }, noIndex, canonicalUrl },
     "authorId": author._ref,
     author->{ _id, name, slug },
     categories[]->{ _id, title, slug },

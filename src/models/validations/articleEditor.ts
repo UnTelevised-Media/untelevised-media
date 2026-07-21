@@ -27,6 +27,25 @@ export const articleEditorFormSchema = z.object({
     .optional(),
   eventDate: z.string().optional(),
   methodology: z.string().max(2000).optional(),
+  isFieldReport: z.boolean().default(false),
+  isAIGenerated: z.boolean().default(false),
+  seo: z
+    .object({
+      metaTitle: z.string().max(60, 'Meta title should be under 60 characters').optional(),
+      metaDescription: z
+        .string()
+        .max(160, 'Meta description should be under 160 characters')
+        .optional(),
+      noIndex: z.boolean().default(false),
+      canonicalUrl: z
+        .union([
+          z.string().url('Canonical URL must be a full URL (https://…)'),
+          z.literal(''),
+          z.undefined(),
+        ])
+        .optional(),
+    })
+    .optional(),
 });
 
 export type ArticleEditorFormValues = z.infer<typeof articleEditorFormSchema>;

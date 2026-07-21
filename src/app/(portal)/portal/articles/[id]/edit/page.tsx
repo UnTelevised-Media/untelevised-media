@@ -24,6 +24,8 @@ type Category = { _id: string; title: string; slug?: { current: string } };
 type Author = { _id: string; name: string };
 type PortalArticleFull = ArticleWriteInput & {
   _id: string;
+  /** Real stored Sanity ID — "drafts.xyz" when the drafts perspective served a draft. */
+  _originalId?: string;
   authorId: string;
   author?: { _id: string; name: string };
   categories?: Array<{ _id: string; title: string }>;
@@ -33,6 +35,24 @@ type PortalArticleFull = ArticleWriteInput & {
     _type: 'image';
     asset?: { _id?: string; url?: string };
     alt?: string;
+  } | null;
+  imageGallery?: {
+    images?: Array<{ _key?: string; asset?: { _id?: string; url?: string }; alt?: string }>;
+  } | null;
+  isFieldReport?: boolean;
+  isAIGenerated?: boolean;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    ogImage?: { asset?: { _id?: string; url?: string } } | null;
+    noIndex?: boolean;
+    canonicalUrl?: string;
+  } | null;
+  deletionRequest?: {
+    reason: string;
+    requestedAt: string;
+    requestedByName: string;
+    originalPublishedAt?: string;
   } | null;
   linkedPitch?: PitchForModal | null;
 };
@@ -74,7 +94,10 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
           Edit Article
         </h1>
         <ArticleEditorForm
-          articleId={id}
+          // Pass the real stored ID ("drafts.xyz" for drafts) — updateArticle /
+          // publishArticle / submitArticleForReview patch exactly this document,
+          // and the form derives its published-vs-draft state from the prefix.
+          articleId={article._originalId ?? article._id}
           initialData={article}
           categories={categories}
           authors={authors}

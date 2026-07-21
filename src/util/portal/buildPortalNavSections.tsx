@@ -14,6 +14,7 @@ import {
   Users,
   UserCircle,
   Database,
+  Trash2,
 } from 'lucide-react';
 import type { PortalRole } from '@/lib/auth/roles-utils';
 
@@ -53,6 +54,13 @@ export default function buildPortalNavSections(
     { href: '/portal/articles', label: 'Articles', icon: <FileText className='h-3.5 w-3.5' /> },
     { href: '/portal/sources', label: 'Sources', icon: <Database className='h-3.5 w-3.5' /> },
   ];
+  if (isEditorPlus) {
+    newsLinks.push({
+      href: '/portal/articles/deletion-requests',
+      label: 'Deletion Requests',
+      icon: <Trash2 className='h-3.5 w-3.5' />,
+    });
+  }
 
   const booksLinks: NavLink[] = [
     { href: '/portal/library', label: 'Library', icon: <Library className='h-3.5 w-3.5' /> },

@@ -150,7 +150,15 @@ export default async function PortalDashboardPage() {
   // Fetch article data
   const sanityAuthorId = await getSanityAuthorIdForCurrentUser(clerkUserId);
 
-  type ArticleRow = { _id: string; needsReview?: boolean; deletionRequest?: unknown };
+  type ArticleRow = {
+    _id: string;
+    _originalId?: string;
+    needsReview?: boolean;
+    deletionRequest?: unknown;
+  };
+  // Under the 'drafts' perspective _id is always normalized — the real stored ID
+  // (with the "drafts." prefix for drafts) is only available via _originalId.
+  const isDraftDoc = (a: ArticleRow) => (a._originalId ?? a._id).startsWith('drafts.');
 
   const [briefRes, allBriefsRes] = await Promise.all([
     portalSanityFetch({ query: queryPortalLatestBrief }),
@@ -194,22 +202,23 @@ export default async function PortalDashboardPage() {
   const authors = (authorsRes?.data ?? []) as PortalAuthor[];
   const claimedPitches = (claimedPitchesRes?.data ?? []) as ClaimedPitchSummary[];
 
-  // My article stats — "drafts." prefix is the authoritative published/draft signal
-  const myPublished = myArticles.filter((a) => !a._id.startsWith('drafts.')).length;
+  // My article stats — the "drafts." prefix on _originalId is the authoritative
+  // published/draft signal
+  const myPublished = myArticles.filter((a) => !isDraftDoc(a)).length;
   const myInReview = myArticles.filter(
-    (a) => a._id.startsWith('drafts.') && (a.needsReview ?? !!a.deletionRequest)
+    (a) => isDraftDoc(a) && (a.needsReview ?? !!a.deletionRequest)
   ).length;
   const myDrafts = myArticles.filter(
-    (a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest
+    (a) => isDraftDoc(a) && !a.needsReview && !a.deletionRequest
   ).length;
 
   // Editor-wide article stats
-  const allPublished = allArticles.filter((a) => !a._id.startsWith('drafts.')).length;
+  const allPublished = allArticles.filter((a) => !isDraftDoc(a)).length;
   const allInReview = allArticles.filter(
-    (a) => a._id.startsWith('drafts.') && (a.needsReview ?? !!a.deletionRequest)
+    (a) => isDraftDoc(a) && (a.needsReview ?? !!a.deletionRequest)
   ).length;
   const allDrafts = allArticles.filter(
-    (a) => a._id.startsWith('drafts.') && !a.needsReview && !a.deletionRequest
+    (a) => isDraftDoc(a) && !a.needsReview && !a.deletionRequest
   ).length;
 
   // ── Bookstore visibility — based on role + Sanity literary author flag ───────

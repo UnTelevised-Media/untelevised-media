@@ -895,7 +895,12 @@ function ArticleActions({
   currentSanityAuthorId?: string;
 } & ActionHandlers) {
   const isOwn = article.authorId === currentSanityAuthorId;
-  const canRequestRemoval = !isEditorPlus && isOwn && !article.deletionRequest;
+  // Request/approve review only applies to already-published articles. A draft-only
+  // article was never public, so its owning author can just delete it directly.
+  const canRequestRemoval =
+    !isEditorPlus && isOwn && isPublished(article) && !article.deletionRequest;
+  const canDeleteOwnDraft =
+    !isEditorPlus && isOwn && !isPublished(article) && !article.deletionRequest;
 
   return (
     <DropdownMenu>
@@ -914,7 +919,7 @@ function ArticleActions({
           </a>
         </DropdownMenuItem>
 
-        {/* Author: request removal */}
+        {/* Author: request removal (published) */}
         {canRequestRemoval && (
           <>
             <DropdownMenuSeparator />
@@ -923,6 +928,16 @@ function ArticleActions({
               onClick={onRequestRemoval}
             >
               Request removal
+            </DropdownMenuItem>
+          </>
+        )}
+
+        {/* Author: delete own draft directly — never published, no review needed */}
+        {canDeleteOwnDraft && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className='text-red-600 focus:text-red-600' onClick={onDelete}>
+              Delete draft
             </DropdownMenuItem>
           </>
         )}

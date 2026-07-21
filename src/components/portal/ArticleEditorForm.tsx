@@ -32,11 +32,23 @@ import { Separator } from '@/components/ui/separator';
 import {
   createArticle,
   updateArticle,
+  deleteArticle,
+  requestArticleDeletion,
+  approveArticleDeletion,
+  denyArticleDeletion,
   publishArticle,
   submitArticleForReview,
   searchArticles,
   type ArticleWriteInput,
 } from '@/server/actions/portal/article';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { PitchQuickViewModal, type PitchForModal } from './PitchQuickViewModal';
 import {
   blockNoteToPortableText,
@@ -87,6 +99,22 @@ interface Props {
     sources?: SourceRef[];
     relatedArticles?: RelatedArticleRef[];
     mainImage?: { _type: 'image'; asset?: { _id?: string; url?: string }; alt?: string } | null;
+    imageGallery?: {
+      images?: Array<{ _key?: string; asset?: { _id?: string; url?: string }; alt?: string }>;
+    } | null;
+    seo?: {
+      metaTitle?: string;
+      metaDescription?: string;
+      ogImage?: { asset?: { _id?: string; url?: string } } | null;
+      noIndex?: boolean;
+      canonicalUrl?: string;
+    } | null;
+    deletionRequest?: {
+      reason: string;
+      requestedAt: string;
+      requestedByName: string;
+      originalPublishedAt?: string;
+    } | null;
   };
   categories: Category[];
   authors: Author[];
@@ -168,6 +196,36 @@ export default function ArticleEditorForm({
   });
   const [imageUploading, setImageUploading] = useState(false);
 
+  // Image gallery — carousel shown below the video, above the article body
+  const [galleryImages, setGalleryImages] = useState<
+    { _key: string; assetRef: string; url: string; alt: string }[]
+  >(() => {
+    const images = initialData?.imageGallery?.images as
+      | Array<{ _key?: string; asset?: { _id?: string; url?: string }; alt?: string }>
+      | undefined;
+    return (images ?? [])
+      .filter((img) => img.asset?.url)
+      .map((img) => ({
+        _key: img._key ?? Math.random().toString(36).slice(2, 10),
+        assetRef: img.asset!._id ?? '',
+        url: img.asset!.url!,
+        alt: img.alt ?? '',
+      }));
+  });
+  const [galleryUploading, setGalleryUploading] = useState(false);
+  const galleryInputRef = useRef<HTMLInputElement>(null);
+
+  // SEO — Social Share Image (Open Graph override)
+  const [ogImage, setOgImage] = useState<{ assetRef: string; url: string } | null>(() => {
+    const img = initialData?.seo?.ogImage as { asset?: { _id?: string; url?: string } } | null | undefined;
+    if (img?.asset?.url) {
+      return { assetRef: img.asset._id ?? '', url: img.asset.url };
+    }
+    return null;
+  });
+  const [ogImageUploading, setOgImageUploading] = useState(false);
+  const ogImageInputRef = useRef<HTMLInputElement>(null);
+
   // FAQ items
   const [faqs, setFaqs] = useState<{ _key: string; question: string; answer: string }[]>(() =>
     (
@@ -210,6 +268,14 @@ export default function ArticleEditorForm({
   // stored Sanity document ID), so checking it is the only reliable way to tell
   // whether this document is actually published vs. a draft.
   const isAlreadyPublished = !!articleId && !articleId.startsWith('drafts.');
+  // Read directly from the prop (never copied into local state) so a router.refresh()
+  // after approve/deny/request-removal reflects the fresh server data immediately.
+  const deletionRequest = initialData?.deletionRequest ?? null;
+  const isDraftOnly = !!articleId && !isAlreadyPublished;
+  const [deletePending, startDeleteTransition] = useTransition();
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showRemovalRequest, setShowRemovalRequest] = useState(false);
+  const [removalReason, setRemovalReason] = useState('');
   const isDirtyRef = useRef(false);
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -251,6 +317,14 @@ export default function ArticleEditorForm({
         ? new Date(initialData.eventDate as string).toISOString().slice(0, 16)
         : '',
       methodology: (initialData?.methodology as string) ?? '',
+      isFieldReport: (initialData?.isFieldReport as boolean) ?? false,
+      isAIGenerated: (initialData?.isAIGenerated as boolean) ?? false,
+      seo: {
+        metaTitle: initialData?.seo?.metaTitle ?? '',
+        metaDescription: initialData?.seo?.metaDescription ?? '',
+        noIndex: initialData?.seo?.noIndex ?? false,
+        canonicalUrl: initialData?.seo?.canonicalUrl ?? '',
+      },
     },
   });
 
@@ -319,7 +393,9 @@ export default function ArticleEditorForm({
         })),
         methodology: values.methodology,
         hasEmbeddedVideo: values.hasEmbeddedVideo,
-        videoLink: values.videoLink ?? undefined,
+        // '' is the field's empty/untouched state — only `??` would let it through
+        // to the server schema, which rejects '' as an invalid URL.
+        videoLink: values.videoLink || undefined,
         eventDate: values.eventDate ?? undefined,
         faqs: faqs
           .filter((f) => f.question.trim() || f.answer.trim())
@@ -334,17 +410,61 @@ export default function ArticleEditorForm({
               alt: mainImage.alt,
             }
           : null,
+        isFieldReport: values.isFieldReport,
+        isAIGenerated: values.isAIGenerated,
+        imageGallery:
+          galleryImages.length > 0
+            ? {
+                images: galleryImages.map((g) => ({
+                  _type: 'image' as const,
+                  _key: g._key,
+                  asset: { _type: 'reference' as const, _ref: g.assetRef },
+                  alt: g.alt,
+                })),
+              }
+            : null,
+        seo:
+          values.seo?.metaTitle ||
+          values.seo?.metaDescription ||
+          values.seo?.noIndex ||
+          values.seo?.canonicalUrl ||
+          ogImage?.assetRef
+            ? {
+                metaTitle: values.seo?.metaTitle || undefined,
+                metaDescription: values.seo?.metaDescription || undefined,
+                noIndex: values.seo?.noIndex ?? false,
+                canonicalUrl: values.seo?.canonicalUrl || undefined,
+                ogImage: ogImage?.assetRef
+                  ? {
+                      _type: 'image' as const,
+                      asset: { _type: 'reference' as const, _ref: ogImage.assetRef },
+                    }
+                  : undefined,
+              }
+            : null,
       };
     },
-    [selectedCategories, selectedSources, mainImage, faqs, relatedArticles, correction]
+    [selectedCategories, selectedSources, mainImage, faqs, relatedArticles, correction, galleryImages, ogImage]
   );
 
   // ---------------------------------------------------------------------------
   // Save handlers
   // ---------------------------------------------------------------------------
 
+  // Sanity requires alt text on every gallery image — check client-side with a
+  // clear message instead of letting the server's zod validation surface a
+  // generic "too small" error with no indication of which field failed.
+  const galleryMissingAlt = useCallback(
+    () => galleryImages.some((g) => !g.alt.trim()),
+    [galleryImages]
+  );
+
   const handleSaveDraft = useCallback(
     (values: ArticleEditorFormValues) => {
+      if (galleryMissingAlt()) {
+        toast.error('Add alt text to every gallery image before saving.');
+        return;
+      }
       setSaveStatus('saving');
       const input = buildInput(values);
       startTransition(async () => {
@@ -371,10 +491,14 @@ export default function ArticleEditorForm({
         }
       });
     },
-    [buildInput, articleId, linkedPitchId, router]
+    [buildInput, articleId, linkedPitchId, router, galleryMissingAlt]
   );
 
   function handleSubmitForReview(values: ArticleEditorFormValues) {
+    if (galleryMissingAlt()) {
+      toast.error('Add alt text to every gallery image before saving.');
+      return;
+    }
     startTransition(async () => {
       try {
         // createArticle now returns "drafts.xxx" — use that directly for the review
@@ -408,6 +532,10 @@ export default function ArticleEditorForm({
   }
 
   function handlePublish(values: ArticleEditorFormValues) {
+    if (galleryMissingAlt()) {
+      toast.error('Add alt text to every gallery image before saving.');
+      return;
+    }
     startTransition(async () => {
       try {
         let id = articleId;
@@ -440,6 +568,58 @@ export default function ArticleEditorForm({
         router.push('/portal/articles');
       } catch (err) {
         toast.error(err instanceof Error ? err.message : 'Publish failed. Please try again.');
+      }
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // Delete / request removal / approve / deny
+  // ---------------------------------------------------------------------------
+
+  function confirmDelete() {
+    if (!articleId) {return;}
+    const approvingRequest = isEditorPlus && !!deletionRequest;
+    setShowDeleteConfirm(false);
+    startDeleteTransition(async () => {
+      const result = approvingRequest
+        ? await approveArticleDeletion(articleId)
+        : await deleteArticle(articleId);
+      if (result.success) {
+        toast.success(
+          approvingRequest ? 'Removal approved — article deleted.' : 'Article deleted.'
+        );
+        router.push('/portal/articles');
+      } else {
+        toast.error(result.error);
+      }
+    });
+  }
+
+  function confirmRemovalRequest() {
+    if (!articleId || removalReason.trim().length < 10) {return;}
+    const reason = removalReason.trim();
+    setShowRemovalRequest(false);
+    setRemovalReason('');
+    startDeleteTransition(async () => {
+      const result = await requestArticleDeletion(articleId, reason);
+      if (result.success) {
+        toast.success('Removal request submitted. An editor will review it.');
+        router.refresh();
+      } else {
+        toast.error(result.error);
+      }
+    });
+  }
+
+  function handleDenyRemoval() {
+    if (!articleId) {return;}
+    startDeleteTransition(async () => {
+      const result = await denyArticleDeletion(articleId);
+      if (result.success) {
+        toast.success('Removal request denied — article restored.');
+        router.refresh();
+      } else {
+        toast.error(result.error);
       }
     });
   }
@@ -689,7 +869,7 @@ export default function ArticleEditorForm({
           </Label>
           <div className='space-y-3'>
             {mainImage?.url && (
-              <div className='relative max-h-48 w-full'>
+              <div className='relative h-48 w-full'>
                 <Image
                   src={mainImage.url}
                   alt={mainImage.alt || 'Article main image'}
@@ -773,6 +953,107 @@ export default function ArticleEditorForm({
                 />
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Image Gallery */}
+        <section>
+          <Label className='mb-2 block text-xs font-bold uppercase tracking-widest'>
+            Image Gallery
+            <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+              photo slideshow shown below the video and above the article body
+            </span>
+          </Label>
+          <div className='space-y-3'>
+            {galleryImages.length > 0 && (
+              <div className='grid gap-3 sm:grid-cols-2'>
+                {galleryImages.map((img, i) => (
+                  <div
+                    key={img._key}
+                    className='space-y-2 border border-slate-200 p-2 dark:border-slate-700'
+                  >
+                    <div className='relative h-32 w-full'>
+                      <Image src={img.url} alt={img.alt || 'Gallery image'} fill className='object-cover' />
+                      <button
+                        type='button'
+                        onClick={() =>
+                          setGalleryImages((prev) => prev.filter((_, j) => j !== i))
+                        }
+                        className='absolute right-2 top-2 bg-black/60 px-2 py-1 text-xs text-white hover:bg-black'
+                      >
+                        Remove
+                      </button>
+                    </div>
+                    <Input
+                      value={img.alt}
+                      onChange={(e) =>
+                        setGalleryImages((prev) =>
+                          prev.map((g, j) => (j === i ? { ...g, alt: e.target.value } : g))
+                        )
+                      }
+                      placeholder='Alt text / caption (required)…'
+                      className='text-sm'
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className='flex items-center gap-2'>
+              <input
+                ref={galleryInputRef}
+                type='file'
+                accept='image/jpeg,image/png,image/webp,image/gif,image/avif'
+                className='hidden'
+                disabled={galleryUploading || galleryImages.length >= 50}
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) {
+                    return;
+                  }
+                  setGalleryUploading(true);
+                  try {
+                    const fd = new FormData();
+                    fd.append('file', file);
+                    const res = await fetch('/api/portal/upload-image', {
+                      method: 'POST',
+                      body: fd,
+                    });
+                    const data = (await res.json()) as {
+                      assetId?: string;
+                      url?: string;
+                      error?: string;
+                    };
+                    if (!res.ok) {
+                      toast.error(data.error ?? 'Image upload failed');
+                      return;
+                    }
+                    setGalleryImages((prev) => [
+                      ...prev,
+                      {
+                        _key: Math.random().toString(36).slice(2, 10),
+                        assetRef: data.assetId!,
+                        url: data.url!,
+                        alt: '',
+                      },
+                    ]);
+                    isDirtyRef.current = true;
+                  } catch {
+                    toast.error('Image upload failed. Please try again.');
+                  } finally {
+                    setGalleryUploading(false);
+                    e.target.value = '';
+                  }
+                }}
+              />
+              <button
+                type='button'
+                disabled={galleryUploading || galleryImages.length >= 50}
+                onClick={() => galleryInputRef.current?.click()}
+                className={`border border-slate-300 px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:border-untele dark:border-slate-600 ${galleryUploading ? 'opacity-50' : ''}`}
+              >
+                {galleryUploading ? 'Uploading…' : '+ Add Image'}
+              </button>
+            </div>
           </div>
         </section>
 
@@ -1106,6 +1387,48 @@ export default function ArticleEditorForm({
             <Label htmlFor='allowComments'>Allow comments on this article</Label>
           </div>
 
+          {/* Field Report */}
+          <div className='flex items-center gap-3'>
+            <Controller
+              name='isFieldReport'
+              control={control}
+              render={({ field }) => (
+                <Checkbox
+                  id='isFieldReport'
+                  checked={field.value}
+                  onCheckedChange={(v) => field.onChange(!!v)}
+                />
+              )}
+            />
+            <Label htmlFor='isFieldReport'>
+              Field Report
+              <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+                appears in the dedicated Field Reports section on the homepage
+              </span>
+            </Label>
+          </div>
+
+          {/* AI-Generated */}
+          <div className='flex items-center gap-3'>
+            <Controller
+              name='isAIGenerated'
+              control={control}
+              render={({ field }) => (
+                <Checkbox
+                  id='isAIGenerated'
+                  checked={field.value}
+                  onCheckedChange={(v) => field.onChange(!!v)}
+                />
+              )}
+            />
+            <Label htmlFor='isAIGenerated'>
+              AI-Generated Article
+              <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+                adds a transparency badge and affects schema.org markup
+              </span>
+            </Label>
+          </div>
+
           {/* Featured Video — separate from inline body embeds */}
           <div className='space-y-3'>
             <Label className='block text-xs font-bold uppercase tracking-widest'>
@@ -1230,6 +1553,165 @@ export default function ArticleEditorForm({
               rows={3}
               placeholder='How was this story reported? Any FOIA requests, documents obtained, etc.'
             />
+          </div>
+
+          {/* SEO Settings */}
+          <div className='space-y-4 border border-slate-200 p-4 dark:border-slate-700'>
+            <Label className='block text-xs font-bold uppercase tracking-widest'>
+              SEO Settings
+            </Label>
+
+            <div>
+              <Label
+                htmlFor='seoMetaTitle'
+                className='mb-1 block text-xs font-bold uppercase tracking-widest'
+              >
+                Meta Title
+              </Label>
+              <p className='mb-1 text-[10px] text-slate-400'>
+                Override the page title for search engines (50–60 characters recommended)
+              </p>
+              <Input
+                id='seoMetaTitle'
+                {...register('seo.metaTitle')}
+                maxLength={60}
+                placeholder='Leave blank to use the article title'
+              />
+              {errors.seo?.metaTitle && (
+                <p className='mt-1 text-xs text-red-500'>{errors.seo.metaTitle.message}</p>
+              )}
+            </div>
+
+            <div>
+              <Label
+                htmlFor='seoMetaDescription'
+                className='mb-1 block text-xs font-bold uppercase tracking-widest'
+              >
+                Meta Description
+              </Label>
+              <p className='mb-1 text-[10px] text-slate-400'>
+                Override the page description for search engines (150–160 characters recommended)
+              </p>
+              <Textarea
+                id='seoMetaDescription'
+                {...register('seo.metaDescription')}
+                rows={3}
+                maxLength={160}
+                placeholder='Leave blank to use the excerpt/summary'
+              />
+              {errors.seo?.metaDescription && (
+                <p className='mt-1 text-xs text-red-500'>{errors.seo.metaDescription.message}</p>
+              )}
+            </div>
+
+            <div>
+              <Label className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+                Social Share Image
+              </Label>
+              <p className='mb-2 text-[10px] text-slate-400'>
+                Override the default Open Graph image (recommended: 1200×630)
+              </p>
+              <div className='space-y-3'>
+                {ogImage?.url && (
+                  <div className='relative h-40 w-full max-w-md'>
+                    <Image src={ogImage.url} alt='Social share preview' fill className='object-cover' />
+                    <button
+                      type='button'
+                      onClick={() => setOgImage(null)}
+                      className='absolute right-2 top-2 bg-black/60 px-2 py-1 text-xs text-white hover:bg-black'
+                    >
+                      Remove
+                    </button>
+                  </div>
+                )}
+                <input
+                  ref={ogImageInputRef}
+                  type='file'
+                  accept='image/jpeg,image/png,image/webp,image/gif,image/avif'
+                  className='hidden'
+                  disabled={ogImageUploading}
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) {
+                      return;
+                    }
+                    setOgImageUploading(true);
+                    try {
+                      const fd = new FormData();
+                      fd.append('file', file);
+                      const res = await fetch('/api/portal/upload-image', {
+                        method: 'POST',
+                        body: fd,
+                      });
+                      const data = (await res.json()) as {
+                        assetId?: string;
+                        url?: string;
+                        error?: string;
+                      };
+                      if (!res.ok) {
+                        toast.error(data.error ?? 'Image upload failed');
+                        return;
+                      }
+                      setOgImage({ assetRef: data.assetId!, url: data.url! });
+                      isDirtyRef.current = true;
+                    } catch {
+                      toast.error('Image upload failed. Please try again.');
+                    } finally {
+                      setOgImageUploading(false);
+                      e.target.value = '';
+                    }
+                  }}
+                />
+                <button
+                  type='button'
+                  disabled={ogImageUploading}
+                  onClick={() => ogImageInputRef.current?.click()}
+                  className={`border border-slate-300 px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:border-untele dark:border-slate-600 ${ogImageUploading ? 'opacity-50' : ''}`}
+                >
+                  {ogImageUploading ? 'Uploading…' : ogImage ? 'Replace Image' : 'Drag or paste image here'}
+                </button>
+              </div>
+            </div>
+
+            <div className='flex items-center gap-3'>
+              <Controller
+                name='seo.noIndex'
+                control={control}
+                render={({ field }) => (
+                  <Checkbox
+                    id='seoNoIndex'
+                    checked={field.value}
+                    onCheckedChange={(v) => field.onChange(!!v)}
+                  />
+                )}
+              />
+              <Label htmlFor='seoNoIndex'>
+                Hide from search engines
+                <span className='ml-2 text-[10px] font-normal normal-case text-slate-400'>
+                  if enabled, this page will not be indexed by search engines
+                </span>
+              </Label>
+            </div>
+
+            <div>
+              <Label
+                htmlFor='seoCanonicalUrl'
+                className='mb-1 block text-xs font-bold uppercase tracking-widest'
+              >
+                Canonical URL
+              </Label>
+              <p className='mb-1 text-[10px] text-slate-400'>
+                Override the canonical URL (only set if this content is republished elsewhere)
+              </p>
+              <Input
+                id='seoCanonicalUrl'
+                {...register('seo.canonicalUrl')}
+                placeholder='https://…'
+              />
+              {errors.seo?.canonicalUrl && (
+                <p className='mt-1 text-xs text-red-500'>{errors.seo.canonicalUrl.message}</p>
+              )}
+            </div>
           </div>
 
           {/* Corrections */}
@@ -1418,7 +1900,223 @@ export default function ArticleEditorForm({
             </section>
           </>
         )}
+
+        {/* ── Danger zone: delete / request removal / approve / deny ────────── */}
+        {articleId && (
+          <>
+            <Separator />
+            <section className='space-y-4'>
+              <h3 className='text-xs font-bold uppercase tracking-widest text-red-600'>
+                Danger Zone
+              </h3>
+
+              {deletionRequest ? (
+                <div className='space-y-3 border border-orange-300 bg-orange-50 p-4 dark:border-orange-700/50 dark:bg-orange-900/20'>
+                  <div>
+                    <p className='text-xs font-bold uppercase tracking-widest text-orange-700 dark:text-orange-400'>
+                      Deletion Request
+                    </p>
+                    <p className='text-xs text-slate-500'>
+                      Set when an author requests removal. Editors approve or deny via the
+                      portal.
+                    </p>
+                  </div>
+                  <div className='grid gap-3 sm:grid-cols-2'>
+                    <div>
+                      <p className='text-xs font-bold uppercase tracking-widest text-slate-500'>
+                        Reason for removal
+                      </p>
+                      <p className='text-sm'>{deletionRequest.reason}</p>
+                    </div>
+                    <div>
+                      <p className='text-xs font-bold uppercase tracking-widest text-slate-500'>
+                        Requested at
+                      </p>
+                      <p className='text-sm'>
+                        {new Date(deletionRequest.requestedAt).toLocaleString()}
+                      </p>
+                    </div>
+                    <div>
+                      <p className='text-xs font-bold uppercase tracking-widest text-slate-500'>
+                        Requested by
+                      </p>
+                      <p className='text-sm'>{deletionRequest.requestedByName}</p>
+                    </div>
+                    {deletionRequest.originalPublishedAt && (
+                      <div>
+                        <p className='text-xs font-bold uppercase tracking-widest text-slate-500'>
+                          Original published date
+                        </p>
+                        <p className='text-sm'>
+                          {new Date(deletionRequest.originalPublishedAt).toLocaleString()}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {isEditorPlus ? (
+                    <div className='flex gap-2 pt-2'>
+                      <Button
+                        type='button'
+                        variant='outline'
+                        size='sm'
+                        disabled={deletePending}
+                        onClick={handleDenyRemoval}
+                      >
+                        Deny Request
+                      </Button>
+                      <Button
+                        type='button'
+                        size='sm'
+                        className='bg-red-600 text-white hover:bg-red-700'
+                        disabled={deletePending}
+                        onClick={() => setShowDeleteConfirm(true)}
+                      >
+                        Approve &amp; Delete
+                      </Button>
+                    </div>
+                  ) : (
+                    <p className='pt-2 text-xs text-slate-500'>
+                      Pending editor review — no further action needed.
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <div className='flex items-center gap-3'>
+                  {isEditorPlus ? (
+                    <Button
+                      type='button'
+                      variant='outline'
+                      size='sm'
+                      className='border-red-300 text-red-600 hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-950/30'
+                      disabled={deletePending}
+                      onClick={() => setShowDeleteConfirm(true)}
+                    >
+                      Delete Article
+                    </Button>
+                  ) : isDraftOnly ? (
+                    <Button
+                      type='button'
+                      variant='outline'
+                      size='sm'
+                      className='border-red-300 text-red-600 hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-950/30'
+                      disabled={deletePending}
+                      onClick={() => setShowDeleteConfirm(true)}
+                    >
+                      Delete Draft
+                    </Button>
+                  ) : (
+                    <Button
+                      type='button'
+                      variant='outline'
+                      size='sm'
+                      className='border-orange-300 text-orange-600 hover:bg-orange-50 dark:border-orange-800 dark:hover:bg-orange-950/30'
+                      onClick={() => setShowRemovalRequest(true)}
+                    >
+                      Request Removal
+                    </Button>
+                  )}
+                </div>
+              )}
+            </section>
+          </>
+        )}
       </form>
+
+      {/* ── Delete / approve-removal confirmation ────────────────────────── */}
+      <Dialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {isEditorPlus && deletionRequest ? 'Approve removal request?' : 'Delete article?'}
+            </DialogTitle>
+            <DialogDescription asChild>
+              <div>
+                {isEditorPlus && deletionRequest ? (
+                  <>
+                    <p>
+                      <strong>{deletionRequest.requestedByName}</strong> requested removal of this
+                      article.
+                    </p>
+                    <blockquote className='mt-2 border-l-2 border-orange-400 pl-3 text-sm italic text-slate-600 dark:text-slate-400'>
+                      &ldquo;{deletionRequest.reason}&rdquo;
+                    </blockquote>
+                    <p className='mt-3 text-sm font-semibold text-red-600'>
+                      This will permanently delete the article and cannot be undone.
+                    </p>
+                  </>
+                ) : (
+                  <p>This article will be permanently deleted. This cannot be undone.</p>
+                )}
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant='outline' onClick={() => setShowDeleteConfirm(false)}>
+              Cancel
+            </Button>
+            <Button
+              className='bg-red-600 text-white hover:bg-red-700'
+              onClick={confirmDelete}
+              disabled={deletePending}
+            >
+              {deletePending ? 'Deleting…' : 'Delete permanently'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* ── Author removal request modal ─────────────────────────────────── */}
+      <Dialog
+        open={showRemovalRequest}
+        onOpenChange={(o) => {
+          setShowRemovalRequest(o);
+          if (!o) {setRemovalReason('');}
+        }}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Request article removal</DialogTitle>
+            <DialogDescription>
+              This article will be unpublished and an editor will review your request. You must
+              provide a reason.
+            </DialogDescription>
+          </DialogHeader>
+          <div className='py-2'>
+            <Label className='mb-1 block text-xs font-bold uppercase tracking-widest'>
+              Reason <span className='text-untele'>*</span>
+            </Label>
+            <Textarea
+              placeholder='Explain why this article should be removed…'
+              value={removalReason}
+              onChange={(e) => setRemovalReason(e.target.value)}
+              rows={4}
+              maxLength={1000}
+            />
+            <p className='mt-1 text-xs text-slate-400'>
+              Minimum 10 characters ({removalReason.length}/1000)
+            </p>
+          </div>
+          <DialogFooter>
+            <Button
+              variant='outline'
+              onClick={() => {
+                setShowRemovalRequest(false);
+                setRemovalReason('');
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              className='bg-untele text-white hover:opacity-90'
+              onClick={confirmRemovalRequest}
+              disabled={deletePending || removalReason.trim().length < 10}
+            >
+              {deletePending ? 'Submitting…' : 'Submit removal request'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Floating pitch notes button */}
       {linkedPitch && (

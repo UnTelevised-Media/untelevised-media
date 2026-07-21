@@ -33,9 +33,9 @@ export default async function PortalArticlesPage() {
     }
   }
 
-  // Under 'drafts' perspective, _id directly contains the draft prefix.
-  // Published: "articles.xyz" | Draft: "drafts.articles.xyz"
-  const isDraftDoc = (a: PortalArticle) => a._id.startsWith('drafts.');
+  // Under the 'drafts' perspective _id is always normalized (no "drafts."
+  // prefix, even for draft-only docs) — _originalId holds the real stored ID.
+  const isDraftDoc = (a: PortalArticle) => (a._originalId ?? a._id).startsWith('drafts.');
   const publishedCount = articles.filter((a) => !isDraftDoc(a)).length;
   const reviewCount = articles.filter(
     (a) => isDraftDoc(a) && (a.needsReview || !!a.deletionRequest)

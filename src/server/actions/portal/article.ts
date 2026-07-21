@@ -53,6 +53,44 @@ const articleWriteSchema = z.object({
     .optional()
     .nullable(),
   authorRef: z.string().optional(), // sanity author _id — editors can change, authors cannot
+  isFieldReport: z.boolean().optional(),
+  isAIGenerated: z.boolean().optional(),
+  imageGallery: z
+    .object({
+      images: z
+        .array(
+          z.object({
+            _type: z.literal('image'),
+            _key: z.string().optional(),
+            asset: z.object({ _type: z.literal('reference'), _ref: z.string() }),
+            alt: z.string().min(1, 'Gallery images require alt text').max(300),
+          })
+        )
+        .min(1)
+        .max(50)
+        .optional(),
+    })
+    .optional()
+    .nullable(),
+  seo: z
+    .object({
+      metaTitle: z.string().max(60).optional(),
+      metaDescription: z.string().max(160).optional(),
+      ogImage: z
+        .object({
+          _type: z.literal('image'),
+          asset: z.object({ _type: z.literal('reference'), _ref: z.string() }),
+        })
+        .optional()
+        .nullable(),
+      noIndex: z.boolean().optional(),
+      canonicalUrl: z
+        .union([z.string().url(), z.literal('')])
+        .optional()
+        .nullable(),
+    })
+    .optional()
+    .nullable(),
   sources: z
     .array(
       z.object({ _type: z.literal('reference'), _ref: z.string(), _key: z.string().optional() })
@@ -65,7 +103,13 @@ const articleWriteSchema = z.object({
     .optional(),
   methodology: z.string().max(2000).optional(),
   hasEmbeddedVideo: z.boolean().optional(),
-  videoLink: z.string().url().optional().nullable(),
+  // Mirrors the client form schema (articleEditor.ts): '' means "no link set" and
+  // must validate, not just undefined/null — otherwise every draft save with an
+  // empty Video Link field fails with a stray "Invalid URL" toast.
+  videoLink: z
+    .union([z.string().url(), z.literal('')])
+    .optional()
+    .nullable(),
   eventDate: z.string().optional().nullable(),
   faqs: z
     .array(
@@ -138,6 +182,23 @@ function sanitizeArticleInput(input: ArticleWriteInput): ArticleWriteInput {
     methodology: input.methodology ? sanitizeText(input.methodology) : input.methodology,
     tags: input.tags?.map(sanitizeText),
     keywords: input.keywords?.map(sanitizeText),
+    imageGallery: input.imageGallery?.images
+      ? {
+          images: input.imageGallery.images.map((img) => ({
+            ...img,
+            alt: sanitizeText(img.alt),
+          })),
+        }
+      : input.imageGallery,
+    seo: input.seo
+      ? {
+          ...input.seo,
+          metaTitle: input.seo.metaTitle ? sanitizeText(input.seo.metaTitle) : input.seo.metaTitle,
+          metaDescription: input.seo.metaDescription
+            ? sanitizeText(input.seo.metaDescription)
+            : input.seo.metaDescription,
+        }
+      : input.seo,
   };
 }
 
@@ -206,6 +267,10 @@ export async function createArticle(
     location: sanitized.location ?? '',
     allowComments: sanitized.allowComments ?? true,
     mainImage: sanitized.mainImage ?? undefined,
+    imageGallery: sanitized.imageGallery ?? undefined,
+    isFieldReport: sanitized.isFieldReport ?? false,
+    isAIGenerated: sanitized.isAIGenerated ?? false,
+    seo: sanitized.seo ?? undefined,
     ...(sanitized.publishedAt ? { publishedAt: sanitized.publishedAt } : {}),
     sources: sanitized.sources ?? [],
     relatedArticles: sanitized.relatedArticles ?? [],
@@ -289,6 +354,8 @@ export async function updateArticle(
     hasEmbeddedVideo: sanitized.hasEmbeddedVideo ?? false,
     videoLink: sanitized.videoLink ?? '',
     faqs: sanitized.faqs ?? [],
+    isFieldReport: sanitized.isFieldReport ?? false,
+    isAIGenerated: sanitized.isAIGenerated ?? false,
     updatedAt: new Date().toISOString(),
   };
 
@@ -323,6 +390,16 @@ export async function updateArticle(
   } else {
     fieldsToUnset.push('correction');
   }
+  if (sanitized.imageGallery !== null) {
+    setFields.imageGallery = sanitized.imageGallery;
+  } else {
+    fieldsToUnset.push('imageGallery');
+  }
+  if (sanitized.seo !== null) {
+    setFields.seo = sanitized.seo;
+  } else {
+    fieldsToUnset.push('seo');
+  }
 
   try {
     let patchBuilder = writeClient.patch(articleId).set(setFields);
@@ -345,11 +422,17 @@ export async function updateArticle(
 
 export async function deleteArticle(articleId: string): Promise<ActionResult> {
   const { id: clerkUserId, role } = await requireAuthor();
+  const isEditorPlus = hasRole(role, 'editor');
+  // Draft-only articles were never published — the author who owns one may delete it
+  // freely. Once published, deletion is an editor/admin-only action; authors must go
+  // through requestArticleDeletion → approveArticleDeletion instead.
+  const isDraftOnly = articleId.startsWith('drafts.');
 
-  if (!hasRole(role, 'editor')) {
+  if (!isEditorPlus && !isDraftOnly) {
     return {
       success: false,
-      error: 'Only editors can delete articles. Authors may submit a removal request.',
+      error:
+        'Published articles can only be deleted by an editor. Submit a removal request instead.',
     };
   }
 
@@ -383,6 +466,15 @@ export async function requestArticleDeletion(
   }
   if (trimmedReason.length > 1000) {
     return { success: false, error: 'Reason must be 1000 characters or fewer.' };
+  }
+
+  // Draft-only articles were never published — go through deleteArticle directly
+  // instead of the request/approve workflow, which exists for published content.
+  if (articleId.startsWith('drafts.')) {
+    return {
+      success: false,
+      error: 'Draft-only articles can be deleted directly — no removal request needed.',
+    };
   }
 
   const { canEdit, isEditorPlus } = await verifyArticleAccess(clerkUserId, articleId);

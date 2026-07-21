@@ -52,10 +52,13 @@ export function getSanityOgImageUrl(image: unknown): string | undefined {
 
 // Build full article Metadata object
 export function buildArticleMetadata(article: Article, slug: string): Metadata {
-  const ogImageUrl = getSanityOgImageUrl(article.mainImage) ?? DEFAULT_OG_IMAGE;
-  const canonicalUrl = getCanonicalUrl('articles', slug);
-  const title = article.title;
-  const description = article.description ?? '';
+  const ogImageUrl =
+    getSanityOgImageUrl(article.seo?.ogImage) ??
+    getSanityOgImageUrl(article.mainImage) ??
+    DEFAULT_OG_IMAGE;
+  const canonicalUrl = article.seo?.canonicalUrl ?? getCanonicalUrl('articles', slug);
+  const title = article.seo?.metaTitle ?? article.title;
+  const description = article.seo?.metaDescription ?? article.description ?? '';
   const keywords = article.keywords?.length ? article.keywords : undefined;
 
   // Extract author name - handle both reference and populated author objects
@@ -102,7 +105,7 @@ export function buildArticleMetadata(article: Article, slug: string): Metadata {
       images: [ogImageUrl],
     },
     alternates: { canonical: canonicalUrl },
-    robots: { index: true, follow: true },
+    robots: article.seo?.noIndex ? { index: false, follow: false } : { index: true, follow: true },
   };
 }
 
