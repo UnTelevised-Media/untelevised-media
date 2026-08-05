@@ -459,10 +459,29 @@ export default function ArticleEditorForm({
     [galleryImages]
   );
 
+  // An in-body image block still mid-upload has an empty `url`, which
+  // serializes to an empty asset _ref and fails on Sanity with an opaque
+  // "Reference is not a valid document ID" error. Block save until it resolves.
+  const bodyHasIncompleteImage = useCallback(() => {
+    const scan = (blocks: unknown[]): boolean =>
+      blocks.some((raw) => {
+        const block = raw as { type?: string; props?: { url?: string }; children?: unknown[] };
+        if (block.type === 'image' && !block.props?.url) {
+          return true;
+        }
+        return block.children?.length ? scan(block.children) : false;
+      });
+    return scan(editorContentRef.current);
+  }, []);
+
   const handleSaveDraft = useCallback(
     (values: ArticleEditorFormValues) => {
       if (galleryMissingAlt()) {
         toast.error('Add alt text to every gallery image before saving.');
+        return;
+      }
+      if (bodyHasIncompleteImage()) {
+        toast.error('Wait for the image upload in your article body to finish before saving.');
         return;
       }
       setSaveStatus('saving');
@@ -491,12 +510,16 @@ export default function ArticleEditorForm({
         }
       });
     },
-    [buildInput, articleId, linkedPitchId, router, galleryMissingAlt]
+    [buildInput, articleId, linkedPitchId, router, galleryMissingAlt, bodyHasIncompleteImage]
   );
 
   function handleSubmitForReview(values: ArticleEditorFormValues) {
     if (galleryMissingAlt()) {
       toast.error('Add alt text to every gallery image before saving.');
+      return;
+    }
+    if (bodyHasIncompleteImage()) {
+      toast.error('Wait for the image upload in your article body to finish before saving.');
       return;
     }
     startTransition(async () => {
@@ -534,6 +557,10 @@ export default function ArticleEditorForm({
   function handlePublish(values: ArticleEditorFormValues) {
     if (galleryMissingAlt()) {
       toast.error('Add alt text to every gallery image before saving.');
+      return;
+    }
+    if (bodyHasIncompleteImage()) {
+      toast.error('Wait for the image upload in your article body to finish before saving.');
       return;
     }
     startTransition(async () => {
@@ -631,7 +658,9 @@ export default function ArticleEditorForm({
   // Autosave every 60 seconds when there are unsaved changes (no redirect on success)
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!isDirtyRef.current) {
+      // Skip this tick (rather than error) if an in-body image is mid-upload —
+      // it'll pick up the completed upload on the next tick once dirty again.
+      if (!isDirtyRef.current || bodyHasIncompleteImage()) {
         return;
       }
       const values = getValues();
@@ -655,7 +684,7 @@ export default function ArticleEditorForm({
       });
     }, 60_000);
     return () => clearInterval(interval);
-  }, [articleId, buildInput, getValues]);
+  }, [articleId, buildInput, getValues, bodyHasIncompleteImage]);
 
   // ---------------------------------------------------------------------------
   // Leave warning

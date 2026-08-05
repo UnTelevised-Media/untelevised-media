@@ -4,6 +4,18 @@ All notable changes to this project are documented here.
 
 ---
 
+# [3.0.7] — 2026-08-05 — Sanity-Hosted Images & Iframe Embeds in Portal Editor
+
+## New
+
+### Article Editor (portal /new and /edit pages)
+- **Sanity-uploaded images** — The editor's `image` block now uploads files directly to Sanity via `/api/portal/upload-image` instead of accepting a pasted external URL, replacing BlockNote's default URL-based image block (same block type / prop shape, so the serializer needed no changes)
+- **Iframe Embed block** — New `/` slash-menu item and matching `iframeEmbed` Sanity schema type for embedding external players/widgets that don't have a dedicated block (src, width, height, title)
+
+## Fixed
+
+- **Save-while-uploading race** — Saving a draft, submitting for review, or publishing while an in-body image was still mid-upload produced an opaque "Reference is not a valid document ID" error from Sanity; the editor now blocks save and prompts the author to wait for the upload to finish. Autosave silently skips the tick instead of erroring, and retries automatically once the upload completes
+
 # [3.0.6] — 2026-07-17 — Portal Editor Crash Fixes
 
 ## Fixed

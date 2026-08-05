@@ -1,6 +1,8 @@
 // src/components/portal/RichTextEditor.tsx
 // BlockNote WYSIWYG editor with custom embed blocks for YouTube, Twitter,
-// Instagram, Facebook, TikTok, Vimeo and full table / code support.
+// Instagram, Facebook, TikTok, Vimeo, custom iframes, and full table / code
+// support. The default image block is overridden to upload to Sanity instead
+// of accepting a pasted URL.
 'use client';
 
 import '@blocknote/core/fonts/inter.css';
@@ -14,9 +16,19 @@ import {
   createReactBlockSpec,
 } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useTheme } from 'next-themes';
-import { Video, MessageSquare, Camera, Globe, Music, Play } from 'lucide-react';
+import { toast } from 'sonner';
+import {
+  Video,
+  MessageSquare,
+  Camera,
+  Globe,
+  Music,
+  Play,
+  Image as ImageIcon,
+  Frame,
+} from 'lucide-react';
 
 // ─── Utility: extract YouTube video ID from URL or bare ID ───────────────────
 
@@ -494,17 +506,252 @@ const VimeoBlock = createReactBlockSpec(
   }
 );
 
+// ─── Custom block: Sanity-hosted image (replaces BlockNote's URL-based image) ─
+// Same block type name ("image") and prop shape (url, caption) as BlockNote's
+// default image block, so the existing serializer's `image` case keeps working
+// unchanged — only the editing UI differs: authors upload a file through our
+// own Sanity asset endpoint instead of pasting an external URL.
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function SanityImageRenderer({ block, editor }: any) {
+  const [uploading, setUploading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  async function handleFile(file: File) {
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/portal/upload-image', { method: 'POST', body: fd });
+      const data = (await res.json()) as { assetId?: string; url?: string; error?: string };
+      if (!res.ok || !data.url) {
+        toast.error(data.error ?? 'Image upload failed');
+        return;
+      }
+      editor.updateBlock(block, { props: { url: data.url } });
+    } catch {
+      toast.error('Image upload failed. Please try again.');
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  const fileInput = (
+    <input
+      ref={inputRef}
+      type='file'
+      accept='image/jpeg,image/png,image/webp,image/gif,image/avif'
+      className='hidden'
+      onChange={(e) => {
+        const file = e.target.files?.[0];
+        if (file) {
+          void handleFile(file);
+        }
+        e.target.value = '';
+      }}
+    />
+  );
+
+  if (!block.props.url) {
+    return (
+      <div className='my-2 w-full rounded border border-dashed border-slate-300 bg-slate-50 p-3 dark:border-slate-600 dark:bg-slate-900'>
+        <p className='mb-2 text-xs font-bold uppercase tracking-widest text-slate-500'>Image</p>
+        {fileInput}
+        <button
+          type='button'
+          disabled={uploading}
+          onClick={() => inputRef.current?.click()}
+          className={`border border-slate-300 px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:border-untele dark:border-slate-600 ${uploading ? 'opacity-50' : ''}`}
+        >
+          {uploading ? 'Uploading…' : 'Upload Image'}
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className='my-2'>
+      {fileInput}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={block.props.url} alt={block.props.caption || ''} className='max-w-full' />
+      <input
+        value={block.props.caption}
+        onChange={(e) => editor.updateBlock(block, { props: { caption: e.target.value } })}
+        placeholder='Alt text / caption…'
+        className='mt-1 w-full border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
+      />
+      <div className='mt-1 flex gap-3'>
+        <button
+          type='button'
+          disabled={uploading}
+          onClick={() => inputRef.current?.click()}
+          className='text-xs text-slate-400 underline hover:text-untele'
+        >
+          {uploading ? 'Uploading…' : 'Replace image'}
+        </button>
+        <button
+          type='button'
+          onClick={() => editor.updateBlock(block, { props: { url: '', caption: '' } })}
+          className='text-xs text-slate-400 underline hover:text-red-500'
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const SanityImageBlock = createReactBlockSpec(
+  {
+    type: 'image' as const,
+    propSchema: { url: { default: '' }, caption: { default: '' } },
+    content: 'none',
+  },
+  {
+    render: (props) => <SanityImageRenderer {...props} />,
+  }
+);
+
+// ─── Custom block: Iframe embed ──────────────────────────────────────────────
+// Mirrors the `iframeEmbed` Sanity schema type (src, width, height, title) used
+// for embedding external players/widgets that don't have a dedicated block above.
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function IframeEmbedRenderer({ block, editor }: any) {
+  const [editing, setEditing] = useState(!block.props.src);
+  const [draftSrc, setDraftSrc] = useState(block.props.src);
+  const [draftWidth, setDraftWidth] = useState(String(block.props.width || 640));
+  const [draftHeight, setDraftHeight] = useState(String(block.props.height || 360));
+  const [draftTitle, setDraftTitle] = useState(block.props.title);
+
+  function handleSave() {
+    if (!draftSrc.trim()) {
+      return;
+    }
+    editor.updateBlock(block, {
+      props: {
+        src: draftSrc.trim(),
+        width: Number(draftWidth) || 640,
+        height: Number(draftHeight) || 360,
+        title: draftTitle.trim(),
+      },
+    });
+    setEditing(false);
+  }
+
+  if (editing || !block.props.src) {
+    return (
+      <div className='my-2 rounded border border-dashed border-slate-300 bg-slate-50 p-3 dark:border-slate-600 dark:bg-slate-900'>
+        <p className='mb-2 text-xs font-bold uppercase tracking-widest text-slate-500'>
+          Iframe Embed
+        </p>
+        <div className='space-y-2'>
+          <input
+            value={draftSrc}
+            onChange={(e) => setDraftSrc(e.target.value)}
+            placeholder='Embed URL (https://…)'
+            className='w-full border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
+          />
+          <div className='flex gap-2'>
+            <input
+              value={draftWidth}
+              onChange={(e) => setDraftWidth(e.target.value)}
+              placeholder='Width (px)'
+              inputMode='numeric'
+              className='w-1/2 border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
+            />
+            <input
+              value={draftHeight}
+              onChange={(e) => setDraftHeight(e.target.value)}
+              placeholder='Height (px)'
+              inputMode='numeric'
+              className='w-1/2 border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
+            />
+          </div>
+          <input
+            value={draftTitle}
+            onChange={(e) => setDraftTitle(e.target.value)}
+            placeholder='Title (for accessibility)'
+            className='w-full border border-slate-300 bg-white px-2 py-1 text-sm focus:border-untele focus:outline-none dark:border-slate-600 dark:bg-slate-800'
+          />
+          <button
+            type='button'
+            onClick={handleSave}
+            className='bg-untele px-3 py-1 text-xs font-black uppercase tracking-widest text-white'
+          >
+            Embed
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const width = block.props.width || 640;
+  const height = block.props.height || 360;
+
+  return (
+    <div className='my-2'>
+      <div
+        className='w-full border border-slate-300 dark:border-slate-700'
+        style={{ aspectRatio: `${width} / ${height}` }}
+      >
+        <iframe
+          src={block.props.src}
+          title={block.props.title || 'Embedded content'}
+          className='h-full w-full'
+          frameBorder='0'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen'
+          allowFullScreen
+        />
+      </div>
+      <button
+        type='button'
+        onClick={() => {
+          setDraftSrc(block.props.src);
+          setDraftWidth(String(block.props.width || 640));
+          setDraftHeight(String(block.props.height || 360));
+          setDraftTitle(block.props.title);
+          setEditing(true);
+        }}
+        className='mt-1 text-xs text-slate-400 underline hover:text-untele'
+      >
+        Edit embed
+      </button>
+    </div>
+  );
+}
+
+const IframeEmbedBlock = createReactBlockSpec(
+  {
+    type: 'iframeEmbed' as const,
+    propSchema: {
+      src: { default: '' },
+      width: { default: 640, type: 'number' },
+      height: { default: 360, type: 'number' },
+      title: { default: '' },
+    },
+    content: 'none',
+  },
+  {
+    render: (props) => <IframeEmbedRenderer {...props} />,
+  }
+);
+
 // ─── BlockNote schema with custom blocks ─────────────────────────────────────
 
 const schema = BlockNoteSchema.create({
   blockSpecs: {
     ...defaultBlockSpecs,
+    // Overrides BlockNote's default URL-based image block — same type/prop
+    // names, so the serializer's existing `image` mapping needs no changes.
+    image: SanityImageBlock(),
     youtubeEmbed: YouTubeBlock(),
     twitterEmbed: TwitterBlock(),
     instagramEmbed: InstagramBlock(),
     facebookEmbed: FacebookBlock(),
     tiktokEmbed: TikTokBlock(),
     vimeoEmbed: VimeoBlock(),
+    iframeEmbed: IframeEmbedBlock(),
   },
 });
 
@@ -540,6 +787,13 @@ function sanitizeUnknownBlocks(blocks: object[]): object[] {
     return raw;
   });
 }
+
+// DefaultReactSuggestionItem strips `key` from its public type even though
+// the runtime objects always carry one (used to identify which default block
+// each item inserts) — restore it here so filtering by key type-checks.
+type SlashMenuItemWithKey = ReturnType<typeof getDefaultReactSlashMenuItems>[number] & {
+  key?: string;
+};
 
 // ─── Component props ──────────────────────────────────────────────────────────
 
@@ -587,7 +841,28 @@ export default function RichTextEditor({
           getItems={async (query) =>
             filterSuggestionItems(
               [
-                ...getDefaultReactSlashMenuItems(editor),
+                // Drop BlockNote's built-in "Image" item — it inserts the
+                // default URL-based image block. Our own item below inserts
+                // the Sanity-upload-backed override registered under the
+                // same "image" type.
+                ...(getDefaultReactSlashMenuItems(editor) as SlashMenuItemWithKey[]).filter(
+                  (item) => item.key !== 'image'
+                ),
+                {
+                  title: 'Image',
+                  subtext: 'Upload an image from your device',
+                  onItemClick: () => {
+                    const cur = editor.getTextCursorPosition().block;
+                    editor.insertBlocks(
+                      [{ type: 'image' as const, props: { url: '', caption: '' } }],
+                      cur,
+                      'after'
+                    );
+                  },
+                  group: 'Media',
+                  icon: <ImageIcon size={18} />,
+                  aliases: ['image', 'photo', 'picture', 'upload'],
+                },
                 {
                   title: 'YouTube',
                   subtext: 'Embed a YouTube video',
@@ -677,6 +952,26 @@ export default function RichTextEditor({
                   group: 'Embeds',
                   icon: <Play size={18} />,
                   aliases: ['vimeo'],
+                },
+                {
+                  title: 'Iframe Embed',
+                  subtext: 'Embed external content via a custom iframe',
+                  onItemClick: () => {
+                    const cur = editor.getTextCursorPosition().block;
+                    editor.insertBlocks(
+                      [
+                        {
+                          type: 'iframeEmbed' as const,
+                          props: { src: '', width: 640, height: 360, title: '' },
+                        },
+                      ],
+                      cur,
+                      'after'
+                    );
+                  },
+                  group: 'Embeds',
+                  icon: <Frame size={18} />,
+                  aliases: ['iframe', 'embed', 'custom embed'],
                 },
               ],
               query

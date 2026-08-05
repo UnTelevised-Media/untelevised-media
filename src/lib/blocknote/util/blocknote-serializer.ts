@@ -6,9 +6,10 @@
 //
 // BlockNote block types we handle:
 //   paragraph, heading, quote, bulletListItem, numberedListItem,
-//   codeBlock, table, image, divider,
+//   codeBlock, table, image (Sanity-upload-backed, not URL-based), divider,
 //   youtubeEmbed (custom), twitterEmbed (custom), instagramEmbed (custom),
-//   facebookEmbed (custom), tiktokEmbed (custom), vimeoEmbed (custom)
+//   facebookEmbed (custom), tiktokEmbed (custom), vimeoEmbed (custom),
+//   iframeEmbed (custom)
 
 // ─── Local types (avoid coupling to BlockNote generics) ──────────────────────
 
@@ -258,6 +259,16 @@ function bnBlockToPT(block: BNBlock): SanityBlockAny | null {
         videoId: (block.props.videoId as string) ?? '',
       };
 
+    case 'iframeEmbed':
+      return {
+        _type: 'iframeEmbed',
+        _key: genKey(),
+        src: (block.props.src as string) ?? '',
+        width: (block.props.width as number) ?? 640,
+        height: (block.props.height as number) ?? 360,
+        title: (block.props.title as string) ?? '',
+      };
+
     default:
       return null;
   }
@@ -475,6 +486,19 @@ function ptBlockToBN(block: SanityBlock, resolveImageUrl?: (_ref: string) => str
         return {
           type: 'vimeoEmbed',
           props: { videoId: (b.videoId as string) ?? '' },
+          content: undefined,
+          children: [],
+        };
+
+      case 'iframeEmbed':
+        return {
+          type: 'iframeEmbed',
+          props: {
+            src: (b.src as string) ?? '',
+            width: (b.width as number) ?? 640,
+            height: (b.height as number) ?? 360,
+            title: (b.title as string) ?? '',
+          },
           content: undefined,
           children: [],
         };
