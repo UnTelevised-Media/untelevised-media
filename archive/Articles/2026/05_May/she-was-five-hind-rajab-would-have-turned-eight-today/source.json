@@ -1,0 +1,54 @@
+{
+  "slug": "she-was-five-hind-rajab-would-have-turned-eight-today",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-hind-rajab-eighth-birthday-prcs",
+      "description": "January–February 2024. Official PRCS documentation of the deaths of paramedics Yusuf Zeino and Ahmed al-Madhoun and of Hind Rajab, whose car was struck by 335 bullets by Israeli Occupation Forces.",
+      "isAnonymous": false,
+      "label": "Palestinian Red Crescent Society — Documentation of Hind Rajab and Paramedic Killings",
+      "type": "statement",
+      "url": "https://www.palestinercs.org"
+    },
+    {
+      "_id": "source-hind-rajab-eighth-birthday-forensic-arch",
+      "description": "2024. Forensic Architecture's reconstruction of the events of January 29, 2024, confirming IOF responsibility for the deaths of Hind Rajab and the two paramedics dispatched to rescue her.",
+      "isAnonymous": false,
+      "label": "Forensic Architecture — Investigation: Killing of Hind Rajab and PRCS Paramedics",
+      "type": "document",
+      "url": "https://forensic-architecture.org"
+    },
+    {
+      "_id": "source-hind-rajab-eighth-birthday-hrw",
+      "description": "April 2024. HRW investigation concluding that Israeli forces unlawfully killed Hind Rajab, Yusuf Zeino, and Ahmed al-Madhoun in Gaza City on January 29, 2024.",
+      "isAnonymous": false,
+      "label": "Human Rights Watch — Israeli Forces Killed Palestinian Child Hind Rajab and Paramedics",
+      "type": "document",
+      "url": "https://www.hrw.org"
+    },
+    {
+      "_id": "source-hind-rajab-eighth-birthday-972mag",
+      "description": "2024. +972 Magazine's investigative coverage of the Hind Rajab case, IOF internal review, and the deliberate targeting of the PRCS ambulance.",
+      "isAnonymous": false,
+      "label": "+972 Magazine — The Killing of Hind Rajab",
+      "type": "article",
+      "url": "https://www.972mag.com"
+    },
+    {
+      "_id": "source-hind-rajab-eighth-birthday-mee",
+      "description": "2024. Middle East Eye coverage documenting Hind's phone call to PRCS, the family members killed around her, and international response.",
+      "isAnonymous": false,
+      "label": "Middle East Eye — Hind Rajab: The Child the World Heard Die",
+      "type": "article",
+      "url": "https://www.middleeasteye.net"
+    },
+    {
+      "_id": "source-hind-rajab-eighth-birthday-ei",
+      "description": "2024. Electronic Intifada reporting on the Hind Rajab case, IOF denial and subsequent internal review, and ongoing impunity.",
+      "isAnonymous": false,
+      "label": "Electronic Intifada — Hind Rajab coverage and IOF accountability",
+      "type": "article",
+      "url": "https://electronicintifada.net"
+    }
+  ]
+}

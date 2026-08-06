@@ -1,0 +1,102 @@
+{
+  "slug": "the-yinon-plan-in-action-how-israel-is-redrawing-the-middle-east-map-under-war-cover",
+  "totalSources": 12,
+  "sources": [
+    {
+      "_id": "source-yinon-plan-1982",
+      "description": "Original 1982 strategy paper by Oded Yinon, published in Kivunim journal. Translated from Hebrew by Israel Shahak. Outlines blueprint for fragmenting Arab states into sectarian mini-states and expanding Israeli territory.",
+      "isAnonymous": false,
+      "label": "A Strategy for Israel in the Nineteen Eighties â€” The Yinon Plan",
+      "type": "document",
+      "url": "https://dn720006.ca.archive.org/0/items/yinon-plan/Yinon_Plan.pdf"
+    },
+    {
+      "_id": "source-netanyahu-un-map-2023",
+      "description": "Coverage of Netanyahu's September 2023 UN speech where he displayed a map showing no Palestine, with West Bank, East Jerusalem, and Gaza absorbed into Israel.",
+      "isAnonymous": false,
+      "label": "Netanyahu Shows Map of 'New Middle East'â€”Without Palestineâ€”to UN General Assembly",
+      "type": "media",
+      "url": "https://www.commondreams.org/news/netanyahu-map"
+    },
+    {
+      "_id": "source-netanyahu-offensive-strategy-2026",
+      "description": "March 29, 2026 announcement from Northern Command detailing three security belts: Syria (Mount Hermon to Yarmouk), Gaza (half the strip), and Lebanon (expanded buffer zone).",
+      "isAnonymous": false,
+      "label": "Netanyahu: IDF striking Iran and proxies, expanding security belts in Lebanon, Syria, and Gaza",
+      "type": "statement",
+      "url": "https://www.i24news.tv/en/news/israel/defense/artc-netanyahu-idf-striking-iran-and-proxies-expanding-security-belts-in-lebanon-syria-and-gaza"
+    },
+    {
+      "_id": "source-jairam-ramesh-2026",
+      "description": "March 28, 2026: Jairam Ramesh states 'The current West Asia war is providing cover for Israel to move ahead on its vision of Greater Israel and also finishing off any hope for a Palestinian state.'",
+      "isAnonymous": false,
+      "label": "Congress leader Jairam Ramesh statement on Greater Israel",
+      "type": "statement",
+      "url": "https://www.thehindu.com/news/national/pm-modi-lacks-courage-to-oppose-israels-actions-in-west-bank-congress-leader-jairam-ramesh/article70795441.ece"
+    },
+    {
+      "_id": "source-new-yorker-shaul-2026",
+      "description": "March 2026 interview with Yehuda Shaul (Breaking the Silence) documenting acceleration of annexation: 70 settlements approved 2023-2025, 1,828 settler violence incidents in 2025, 36,000+ Palestinians displaced.",
+      "isAnonymous": false,
+      "label": "How Israel Used the War in Gaza to Accelerate Settlements in the West Bank",
+      "type": "article",
+      "url": "https://www.newyorker.com/news/q-and-a/how-israel-used-the-war-in-gaza-to-accelerate-settlements-in-the-west-bank"
+    },
+    {
+      "_id": "source-india-today-greater-israel-2026",
+      "description": "April 1, 2026 comprehensive analysis of Greater Israel vision, Netanyahu's 'absolutely' and 'very much' support for the concept, Smotrich's Damascus expansion comment, Huckabee's 'fine to take over entire Middle East' remark.",
+      "isAnonymous": false,
+      "label": "What is the Greater Israel project and why the scare amid Iran war?",
+      "type": "article",
+      "url": "https://www.indiatoday.in/world/story/middle-east-war-news-greater-israel-project-us-iran-war-offensive-into-southern-lebanon-benjamin-netanyahu-2889730-2026-04-01"
+    },
+    {
+      "_id": "source-dw-expansionist-ambitions-2026",
+      "description": "April 2026 analysis of Greater Israel concept, Smotrich's 2023 Paris map, Ben Gvir's voluntary emigration proposal, Netanyahu family ties to Jabotinsky's Revisionist Zionism.",
+      "isAnonymous": false,
+      "label": "From the Nile to the Euphrates: Inside Israel's expansionist ambitions",
+      "type": "article",
+      "url": "https://www.dw.com/en/from-the-nile-to-the-euphrates-inside-israels-expansionist-ambitions/a-76711994"
+    },
+    {
+      "_id": "source-responsible-statecraft-2026",
+      "description": "March 2026 analysis of de facto annexation under war cover, settler violence surge, 700 Palestinians displaced in January 2026, US consular services in settlements legitimizing occupation.",
+      "isAnonymous": false,
+      "label": "With focus on Iran and Gaza, Israel is quietly annexing the West Bank",
+      "type": "article",
+      "url": "https://responsiblestatecraft.org/israel-annex-west-bank-2675538521/"
+    },
+    {
+      "_id": "source-un-ohchr-2026",
+      "description": "March 2026 UN Human Rights Office report: Israeli government accelerated unlawful settlement expansion and annexation, forcibly displacing over 36,000 Palestinians.",
+      "isAnonymous": false,
+      "label": "Israel's settlement expansion drives mass displacement in West Bank â€“ UN report",
+      "type": "statement",
+      "url": "https://www.ohchr.org/en/press-releases/2026/03/israels-settlement-expansion-drives-mass-displacement-west-bank-un-report"
+    },
+    {
+      "_id": "source-amnesty-2026",
+      "description": "February 2026 Amnesty International report: Since December 2025, Israeli authorities unleashed series of unlawful measures designed to dispossess Palestinians and make annexation irreversible.",
+      "isAnonymous": false,
+      "label": "Israel/OPT: Global impunity fueling Israel's unlawful annexation measures in the West Bank",
+      "type": "statement",
+      "url": "https://www.amnesty.org/en/latest/news/2026/02/israel-opt-global-impunity-fueling-israels-unlawful-annexation-measures-in-the-west-bank/"
+    },
+    {
+      "_id": "source-al-jazeera-lebanon-2026",
+      "description": "March 29, 2026: Netanyahu announces further expansion of security buffer zone in southern Lebanon to 'fundamentally change the situation in the north.'",
+      "isAnonymous": false,
+      "label": "Netanyahu orders military to expand invasion of southern Lebanon",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/3/29/netanyahu-announces-expansion-of-security-buffer-zone-in-south-lebanon"
+    },
+    {
+      "_id": "source-reuters-lebanon-2026",
+      "description": "March 29, 2026 Reuters coverage of multi-front campaign against Iran and allied groups, expansion into Lebanon to reduce Hezbollah rocket attacks.",
+      "isAnonymous": false,
+      "label": "Netanyahu orders expansion of security buffer zone in southern Lebanon",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/netanyahu-orders-expansion-security-buffer-zone-southern-lebanon-2026-03-29/"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "forty-years-of-corruption-the-dark-career-of-mitch-mcconnell",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "src-mcconnell-corruption-npr-tobacco",
+      "description": "NPR investigation into internal tobacco industry documents revealing McConnell decades-long relationship with the industry.",
+      "isAnonymous": null,
+      "label": "NPR - Tobacco Special Friend Internal Documents Investigation",
+      "type": "article",
+      "url": "https://www.npr.org/2019/06/07/tobaccos-special-friend-mitch-mcconnell"
+    },
+    {
+      "_id": "src-mcconnell-corruption-rolling-stone",
+      "description": "Rolling Stone deep investigation into McConnell career of selling access and blocking reform.",
+      "isAnonymous": null,
+      "label": "Rolling Stone - The Man Who Sold America",
+      "type": "article",
+      "url": "https://www.rollingstone.com/politics/politics-features/the-man-who-sold-america-mitch-mcconnell"
+    },
+    {
+      "_id": "src-mcconnell-corruption-public-integrity",
+      "description": "Center for Public Integrity investigation into the industries that funded McConnell career.",
+      "isAnonymous": null,
+      "label": "Center for Public Integrity - Fueled by Tobacco and Whiskey",
+      "type": "article",
+      "url": "https://publicintegrity.org/politics/mcconnell-tobacco-whiskey"
+    },
+    {
+      "_id": "src-mcconnell-corruption-npr-dark-money",
+      "description": "NPR report on McConnell decades-long crusade against campaign finance reform and for unlimited political spending.",
+      "isAnonymous": null,
+      "label": "NPR - McConnell Has Long Argued for More Money in Politics",
+      "type": "article",
+      "url": "https://www.npr.org/2019/02/mcconnell-money-in-politics-citizens-united"
+    },
+    {
+      "_id": "src-mcconnell-corruption-moscow-project",
+      "description": "Investigation into McConnell role in lifting sanctions on Russian oligarch Oleg Deripaska and the Kentucky aluminum plant deal.",
+      "isAnonymous": null,
+      "label": "The Moscow Project - McConnell Russia Sanctions and Deripaska",
+      "type": "article",
+      "url": "https://www.themoscowproject.org/reports/mcconnell-deripaska-russia-sanctions"
+    },
+    {
+      "_id": "src-mcconnell-corruption-herald-leader",
+      "description": "Lexington Herald-Leader yearlong investigative series examining McConnell career and ethical record.",
+      "isAnonymous": null,
+      "label": "Lexington Herald-Leader - Yearlong Investigation into McConnell",
+      "type": "article",
+      "url": "https://www.kentucky.com/news/mcconnell-investigation"
+    }
+  ]
+}

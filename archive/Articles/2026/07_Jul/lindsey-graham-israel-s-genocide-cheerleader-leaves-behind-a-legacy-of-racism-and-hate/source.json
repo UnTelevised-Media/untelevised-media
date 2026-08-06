@@ -1,0 +1,134 @@
+{
+  "slug": "lindsey-graham-israel-s-genocide-cheerleader-leaves-behind-a-legacy-of-racism-and-hate",
+  "totalSources": 16,
+  "sources": [
+    {
+      "_id": "source-the-guardian-lindsey-graham-dies-after-sudden-illness",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Lindsey Graham dies after sudden illness",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2026/jul/12/lindsey-graham-key-ally-of-donald-trump-has-died-after-sudden-illness-his-office-says"
+    },
+    {
+      "_id": "source-al-jazeera-what-made-lindsey-graham-a-controversial-figure",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — What made Lindsey Graham a controversial figure",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/7/12/what-made-us-republican-senator-lindsey-graham-a-controversial-figure"
+    },
+    {
+      "_id": "source-jfeed-marked-in-tehran-dead-in-south-carolina",
+      "description": null,
+      "isAnonymous": null,
+      "label": "JFeed — Marked in Tehran, Dead in South Carolina",
+      "type": "media",
+      "url": "https://www.jfeed.com/news-world/lindsey-graham-iran-threats"
+    },
+    {
+      "_id": "source-the-express-lindsey-grahams-defiant-final-message-to-iran",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Express — Lindsey Graham's defiant final message to Iran",
+      "type": "media",
+      "url": "https://www.the-express.com/news/us-news/211616/lindsey-graham-iran-death-threats"
+    },
+    {
+      "_id": "source-daily-mail-firebrand-senator-suffers-cardiac-arrest",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Daily Mail — Firebrand Senator suffers cardiac arrest",
+      "type": "media",
+      "url": "https://www.dailymail.com/news/article-15971431/US-Senator-Lindsey-Graham-dies-brief-sudden-illness.html"
+    },
+    {
+      "_id": "source-common-dreams-level-the-place-incitement-to-genocide",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Common Dreams — 'Level the Place' incitement to genocide",
+      "type": "media",
+      "url": "https://www.commondreams.org/news/lindsey-graham"
+    },
+    {
+      "_id": "source-new-republic-graham-under-fire-for-sick-post-about-greta-thunberg",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New Republic — Graham under fire for sick post about Greta Thunberg",
+      "type": "media",
+      "url": "https://newrepublic.com/post/195962/lindsey-graham-greta-thunberg-gaza-aid"
+    },
+    {
+      "_id": "source-truthout-graham-fantasizes-about-sinking-gaza-aid-ship",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Truthout — Graham fantasizes about sinking Gaza aid ship",
+      "type": "media",
+      "url": "https://truthout.org/articles/lindsey-graham-fantasizes-about-sinking-gaza-aid-ship-carrying-greta-thunberg/"
+    },
+    {
+      "_id": "source-truthout-1b-a-day-on-iran-war-is-best-money-ever-spent",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Truthout — $1B a day on Iran war is 'best money ever spent'",
+      "type": "media",
+      "url": "https://truthout.org/articles/lindsey-graham-says-1b-a-day-on-iran-war-is-best-money-ever-spent/"
+    },
+    {
+      "_id": "source-middle-east-monitor-a-warmonger-in-the-service-of-israel-and-the-defence-industr",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Monitor — A warmonger in the service of Israel and the defence industry",
+      "type": "media",
+      "url": "https://www.middleeastmonitor.com/20260313-lindsey-graham-a-devilish-warmonger-in-service-of-israel-and-defense-industry-at-americas-expense/"
+    },
+    {
+      "_id": "source-newsweek-graham-greta-thunberg-comment-sparks-outrage",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Newsweek — Graham Greta Thunberg comment sparks outrage",
+      "type": "media",
+      "url": "https://www.newsweek.com/lindsey-graham-greta-thunberg-gaza-ship-swim-2079813"
+    },
+    {
+      "_id": "source-democracy-now-greta-thunberg-speaks-from-aid-ship-heading-to-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Now — Greta Thunberg speaks from aid ship heading to Gaza",
+      "type": "media",
+      "url": "https://www.democracynow.org/2025/6/4/greta_thunberg_gaza_aid_flotilla"
+    },
+    {
+      "_id": "source-middle-east-monitor-graham-slammed-for-claiming-israel-wages-religious-war",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Monitor — Graham slammed for claiming Israel wages 'religious war'",
+      "type": "media",
+      "url": "https://www.middleeastmonitor.com/20231013-us-republican-senator-slammed-for-claiming-israel-is-waging-a-religious-war/"
+    },
+    {
+      "_id": "source-ap-news-graham-draws-tributes-for-support-of-ukraine-and-israel",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News — Graham draws tributes for support of Ukraine and Israel",
+      "type": "media",
+      "url": "https://apnews.com/article/lindsey-graham-death-reactions-30c9758bfc124c30e8e4db0e4dd719e2"
+    },
+    {
+      "_id": "source-the-atlantic-lindsey-graham-and-the-gops-islamophobia-problem",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Atlantic — Lindsey Graham and the GOP's Islamophobia Problem",
+      "type": "media",
+      "url": "https://www.theatlantic.com/politics/archive/2015/05/lindsey-graham-republican-islamophobia-2016/394070/"
+    },
+    {
+      "_id": "source-buzzfeed-maga-calling-out-grahams-soulless-iran-war-comments",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BuzzFeed — MAGA calling out Graham's 'soulless' Iran war comments",
+      "type": "media",
+      "url": "https://www.buzzfeed.com/morgansloss1/lindsey-graham-comments-iran-war-draw-backlash"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "the-immigrant-prison-boom-billions-for-detention-nothing-for-justice",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-aic-detention-expansion-2026-04",
+      "description": "April 2026 - Comprehensive analysis of ICE detention system expansion. Documents $45 billion in funding through 2029, 75% increase in detainees to 66,000, plans for 135,000 capacity. Details 91% increase in facilities, elimination of discretionary releases, 2,450% increase in non-criminals detained.",
+      "isAnonymous": false,
+      "label": "American Immigration Council - How ICE is Expanding Detention System to Rival Federal Prisons",
+      "type": "article",
+      "url": "https://www.americanimmigrationcouncil.org/blog/ice-expanding-detention-system/"
+    },
+    {
+      "_id": "source-iac-ice-deaths-2025",
+      "description": "2025 - Documents 32 deaths in ICE custody in 2025, the deadliest non-COVID year since 2004. December 2025 was deadliest month with 7 deaths. ACLU found 95% of deaths preventable. Reports worsening conditions: overcrowding, inadequate medical care, psychological abuse.",
+      "isAnonymous": false,
+      "label": "American Immigration Council - Deaths in ICE Detention 2025",
+      "type": "article",
+      "url": "https://www.americanimmigrationcouncil.org/report/immigration-detention/"
+    },
+    {
+      "_id": "source-amnesty-alligator-alcatraz-2025-12",
+      "description": "December 4, 2025 - Amnesty International report revealing human rights violations at Alligator Alcatraz and Krome detention centers. Documents 'despicable and nauseating conditions,' deliberate neglect designed to dehumanize and punish. Medical negligence confirmed at Krome despite on-site facilities.",
+      "isAnonymous": false,
+      "label": "Amnesty International - Human Rights Violations at Florida's Alligator Alcatraz",
+      "type": "article",
+      "url": "https://www.amnesty.org/en/latest/news/2025/12/estados-unidos-nuevas-investigaciones-revelan-violaciones-de-derechos-humanos-en-los-centros-de-detencion-de-alligator-alcatraz-y-krome-en-florida/"
+    },
+    {
+      "_id": "source-nbc-alligator-alcatraz-2025-12",
+      "description": "December 10, 2025 - Analysis of ICE data revealing details on more than 6,700 men housed at Florida Soft-Sided Facility-South (Alligator Alcatraz). Documents costs of $245 per day per bed, more than ICE average of $187. First state immigration detention facility not operating under ICE contract.",
+      "isAnonymous": false,
+      "label": "NBC6 Investigates - Secrets of 'Alligator Alcatraz' Revealed",
+      "type": "article",
+      "url": "https://www.nbcmiami.com/news/local/secrets-of-alligator-alcatraz-revealed-in-newly-released-data-analyzed-by-nbc6-investigates/3732176/"
+    },
+    {
+      "_id": "source-guardian-camp-east-montana-2026-04",
+      "description": "April 15, 2026 - Report on Camp East Montana, huge tent facility for immigration detention in west Texas. Detainees report dust covering blankets and clogging airways. Facility's giant generators consume energy, fueling climate crisis. Documents psychological torture and inhumane conditions.",
+      "isAnonymous": false,
+      "label": "The Guardian - 'Psychological torture': Outcry Over Conditions at ICE Desert Detention Camp",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/apr/15/ice-desert-detention-camp-east-montana"
+    },
+    {
+      "_id": "source-wiki-alligator-alcatraz-2026-04",
+      "description": "April 2026 - Wikipedia entry documenting Alligator Alcatraz, the first state-run immigration detention facility. Notes promised $608 million federal reimbursement to Florida, initial cost of $450 million per year. Can hold more than 1,300 people. Expansion plans in progress.",
+      "isAnonymous": false,
+      "label": "Wikipedia - Alligator Alcatraz (Florida Soft-Sided Facility-South)",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/Alligator_Alcatraz"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "_id": "sanaa-airport-bombed-yemen-front-reignites",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Saudi-backed Yemeni forces bombed Sanaa International Airport to prevent an Iranian plane from landing, shattering the four-year ceasefire. Ansarallah responded with missile strikes on Saudi Arabia and vowed to close the Bab al-Mandab strait — a chokepoint for global oil exports.",
+  "eventDate": "2026-07-13T05:00",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "The Saudi-backed, internationally recognized Yemeni government claimed responsibility, saying they targeted the runway to prevent an Iranian Mahan Air passenger plane carrying an Ansarallah delegation from landing.",
+      "question": "Who bombed Sanaa airport?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "The Mahan Air flight was carrying an Ansarallah delegation returning from Tehran, where they attended the funeral of Iran's assassinated Supreme Leader Ali Khamenei.",
+      "question": "What was the Iranian plane doing?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Ansarallah launched ballistic missiles and drones targeting Abha International Airport in Saudi Arabia. Military spokesman Yahya Saree declared the 'de-escalation phase' over and senior official Mohammed al-Bukhaiti threatened to close the Bab al-Mandab strait.",
+      "question": "How did Ansarallah respond?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "The Bab al-Mandab strait connects the Red Sea to the Gulf of Aden and Indian Ocean. Its closure would severely impact Saudi oil exports to Asian markets and compound the existing Strait of Hormuz disruption.",
+      "question": "What is the significance of Bab al-Mandab?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": false,
+  "keywords": [
+    "Yemen war",
+    "Sanaa airport bombing",
+    "Houthi missile attacks",
+    "Bab al-Mandab strait",
+    "Saudi coalition",
+    "ceasefire collapse",
+    "Iran-Yemen relations"
+  ],
+  "leadParagraph": "Saudi-backed forces bombed Sanaa airport on July 7, 2026, shattering Yemen's fragile four-year ceasefire. Ansarallah responded with ballistic missiles targeting Abha airport in Saudi Arabia and vowed to close the Bab al-Mandab strait — a vital chokepoint for global oil shipping. The escalation marks the return of active warfare to Yemen as the broader regional conflagration widens.",
+  "linkedPitch": null,
+  "location": "Sanaa, Yemen",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Smoke rising near Sanaa International Airport runway after airstrikes on July 13, 2026",
+    "asset": {
+      "_ref": "image-3153539033028b556172595f8ea4a5b37aee8c4b-2048x1365-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Reporting based on verified wire service reports from Al Jazeera, BBC, Al Mayadeen, Drop Site News, Palestine Chronicle, and Responsible Statecraft. Cross-referenced with official statements from Ansarallah military spokesman Yahya Saree, Saudi coalition spokesman Turki al-Maliki, UN Special Envoy Hans Grundberg, and Iran's Foreign Ministry.",
+  "needsReview": false,
+  "publishedAt": "2026-07-21T03:00",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "iran-israel-ceasefire-dead-israel-struck-first-and-the-media-is-lying-about-it",
+      "_ref": "iran-israel-ceasefire-dead-israel-struck-first-and-the-media-is-lying-about-it",
+      "_type": "reference"
+    },
+    {
+      "_key": "iran-israel-ceasefire-dead-direct-exchange-june-2026",
+      "_ref": "iran-israel-ceasefire-dead-direct-exchange-june-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "israel-yellow-line-gaza-expanding-de-facto-reoccupation",
+      "_ref": "israel-yellow-line-gaza-expanding-de-facto-reoccupation",
+      "_type": "reference"
+    },
+    {
+      "_key": "israels-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+      "_ref": "israels-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+      "_type": "reference"
+    },
+    {
+      "_key": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "salah-akram-gaza-is-shrinking",
+      "_ref": "salah-akram-gaza-is-shrinking",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "sanaa-airport-bombed-as-yemen-front-reignites-ansarallah-vows-to-close-bab-al-mandab"
+  },
+  "tags": [
+    "Yemen",
+    "Ansarallah",
+    "Houthis",
+    "Saudi Arabia",
+    "Iran",
+    "Bab al-Mandab",
+    "ceasefire",
+    "Sanaa airport",
+    "Abha airport",
+    "Yahya Saree"
+  ],
+  "title": "Sanaa Airport Bombed as Yemen Front Reignites — Ansarallah Vows to Close Bab al-Mandab",
+  "updatedAt": "2026-07-21T04:08:43.017Z",
+  "videoLink": ""
+}

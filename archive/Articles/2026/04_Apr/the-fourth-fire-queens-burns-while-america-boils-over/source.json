@@ -1,0 +1,38 @@
+{
+  "slug": "the-fourth-fire-queens-burns-while-america-boils-over",
+  "totalSources": 4,
+  "sources": [
+    {
+      "_id": "source-qns-queens-fire-2026",
+      "description": "Local Queens outlet reporting on the 5-alarm lumberyard fire in College Point, with extensive details on FDNY response, fire progression, and official statements from Assistant Chief Michael Meyers.",
+      "isAnonymous": null,
+      "label": "Local News QNS",
+      "type": "article",
+      "url": "https://qns.com/2026/04/five-alarm-fire-college-point/"
+    },
+    {
+      "_id": "source-amny-queens-fire-2026",
+      "description": "New York City news outlet covering the five-alarm Queens lumberyard fire with details on fire marshals' investigation, the building's contents, and FDNY's exterior attack strategy.",
+      "isAnonymous": null,
+      "label": "Local News AMNY",
+      "type": "article",
+      "url": "https://www.amny.com/new-york/queens-fire-lumberyard-04112026/"
+    },
+    {
+      "_id": "source-cbs-queens-fire-2026",
+      "description": "CBS News New York coverage of the massive factory fire in Queens, including resident quotes, FDNY response details, and information about the lumberyard and cabinetry business that operated in the building.",
+      "isAnonymous": null,
+      "label": "CBS New York",
+      "type": "article",
+      "url": "https://www.cbsnews.com/newyork/news/college-point-queens-factory-fire/"
+    },
+    {
+      "_id": "source-abc7-queens-fire-2026",
+      "description": "Eyewitness News coverage with details on smoke visibility reaching Westchester County, the 64,000-square-foot subdivided building, and FDNY Assistant Chief Mike Meyers' press conference statements.",
+      "isAnonymous": null,
+      "label": "ABC7 New York",
+      "type": "article",
+      "url": "https://abc7ny.com/post/college-point-fire-firefighters-continue-battling-flames-industrial-complex-queens-nyc/18870770/"
+    }
+  ]
+}

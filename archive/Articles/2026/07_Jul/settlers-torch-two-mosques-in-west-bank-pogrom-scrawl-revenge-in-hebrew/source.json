@@ -1,0 +1,62 @@
+{
+  "slug": "settlers-torch-two-mosques-in-west-bank-pogrom-scrawl-revenge-in-hebrew",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-times-of-israel-settlers-torch-two-mosques-scrawl-revenge-graffiti-in-overnight-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Times of Israel — Settlers torch two mosques, scrawl 'revenge' graffiti in overnight West Bank rampages",
+      "type": "media",
+      "url": "https://www.timesofisrael.com/settlers-torch-mosques-scrawl-revenge-graffiti-in-overnight-west-bank-rampages/"
+    },
+    {
+      "_id": "source-nbc-news-israeli-settlers-set-fire-to-west-bank-mosques-after-deadly-clash",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News — Israeli settlers set fire to West Bank mosques after deadly clash",
+      "type": "media",
+      "url": "https://www.nbcnews.com/world/israel/israeli-settlers-set-fire-west-bank-mosques-deadly-clash-rcna589389"
+    },
+    {
+      "_id": "source-bbc-israeli-settlers-set-fire-to-mosques-cars-and-farm-land-in-west-bank",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BBC — Israeli settlers set fire to mosques, cars and farm land in West Bank",
+      "type": "media",
+      "url": "https://www.bbc.com/news/articles/cjrv77gl4deo"
+    },
+    {
+      "_id": "source-al-jazeera-mapping-israeli-settler-violence-in-the-west-bank",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Mapping Israeli settler violence in the West Bank",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/7/27/mapping-israeli-settler-violence-in-the-west-bank"
+    },
+    {
+      "_id": "source-al-jazeera-why-are-israeli-settlers-on-a-rampage-in-the-occupied-west-bank",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Why are Israeli settlers on a rampage in the occupied West Bank?",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/7/26/why-are-israeli-settlers-on-a-rampage-in-the-occupied-west-bank"
+    },
+    {
+      "_id": "source-dw-israeli-settlers-torch-mosques-in-occupied-west-bank",
+      "description": null,
+      "isAnonymous": null,
+      "label": "DW — Israeli settlers torch mosques in occupied West Bank",
+      "type": "media",
+      "url": "https://www.dw.com/en/israeli-settlers-torch-mosques-in-occupied-west-bank/a-78120749"
+    },
+    {
+      "_id": "source-reuters-2-israelis-4-palestinians-killed-in-gunfight-sparked-by-settler-raid",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — 2 Israelis, 4 Palestinians killed in gunfight sparked by settler raid",
+      "type": "media",
+      "url": "https://www.timesofisrael.com/2-israelis-4-palestinians-killed-in-gunfight-sparked-by-settler-raid-of-palestinian-town/"
+    }
+  ]
+}

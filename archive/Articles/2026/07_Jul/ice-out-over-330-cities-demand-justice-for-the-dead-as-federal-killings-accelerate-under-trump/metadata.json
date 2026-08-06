@@ -1,0 +1,155 @@
+{
+  "_id": "ice-out-nationwide-protests-330-cities-demand-justice-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "2a6467208e8189f0d831edfa062441c1",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "ff155c563ecae30785f34039008507b1",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "1801396a84d74904d8ed827006a66b5d",
+      "_ref": "NIYNah6RoM2MjtNb6HiKPc",
+      "_type": "reference"
+    },
+    {
+      "_key": "bda86b550d4eb5b358c25032c8a04b86",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "On July 25, over 330 communities held vigils and protests honoring Lorenzo Salgado Araujo and Johan Sebastián Guerrero, killed by ICE earlier in July, and the 75+ people who have died at the hands of ICE since January 2025.",
+  "eventDate": "2026-07-25T12:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "On July 25, 2026, over 330 communities across the United States held vigils, protests, and demonstrations demanding justice for people killed by ICE, including Lorenzo Salgado Araujo and Johan Sebastián Guerrero. The day of action was organized by a coalition including Public Citizen, LULAC, and NDLON.",
+      "question": "What was the ICE Out national day of action?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "A 52-year-old Mexican immigrant who had lived in the US for 35 years. He was shot and killed by an ICE agent in Houston on July 7, 2026, while driving his construction crew to a job site. He was not the target of the ICE operation that killed him. He had no criminal record.",
+      "question": "Who was Lorenzo Salgado Araujo?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "A 25-year-old Colombian immigrant living in Biddeford, Maine, who worked as a cleaner and food delivery driver. He was fatally shot by an ICE officer during a traffic stop on July 14, 2026. His partner and 3-year-old daughter were present.",
+      "question": "Who was Johan Sebastián Guerrero?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "At least 75 people have died in ICE custody or during enforcement operations since January 2025, according to organizers tracking the deaths.",
+      "question": "How many people have died at the hands of ICE since January 2025?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "ICE Out protests",
+    "Lorenzo Salgado Araujo ICE killing",
+    "Johan Guerrero ICE Maine",
+    "ICE national day of action",
+    "immigration enforcement killings 2026",
+    "ICE vigil July 25 2026",
+    "75 deaths ICE custody",
+    "Pasadena ICE protest",
+    "Houston ICE shooting",
+    "Biddeford Maine ICE shooting"
+  ],
+  "leadParagraph": "More than 330 communities across the United States held vigils, protests, and demonstrations on July 25 under the banner #ICEOut, honoring Lorenzo Salgado Araujo and Johan Sebastián Guerrero — two men killed by ICE officers in July — and the at least 75 people who have died at the hands of ICE since January 2025.",
+  "linkedPitch": null,
+  "location": "Nationwide (330+ communities) / Houston, TX / Biddeford, ME / Pasadena, CA",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Woman embracing another person at a candlelit vigil for Lorenzo Salgado Araujo in Houston",
+    "asset": {
+      "_ref": "image-b4a62aae49fe9b1de47e8aec12b3a266bbef97c3-2560x1707-webp",
+      "_type": "reference"
+    },
+    "caption": "Sabrina Chavez hugs a stranger during a vigil for Lorenzo Salgado Araujo in Houston, July 8, 2026",
+    "credit": "Texas Tribune/Go Nakamura"
+  },
+  "methodology": "Reported using LA Times, Common Dreams, Public Citizen, CNN, New York Times, ABC News, Washington Post, PBS NewsHour, and Wikipedia coverage. Victim backgrounds cross-referenced across multiple sources. Death count verified through organizer tracking and media reports.",
+  "needsReview": null,
+  "publishedAt": "2026-07-28T17:30:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "ice-agent-kills-wrong-man-houston",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "ice-kills-again-two-fatal-shootings-halt-overturned",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "ice-550-assault-charges-crumbling",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "0c16c198-32c8-40ca-a5f3-4b0591cf3921",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "federal-plaza-ice-incendiary-device",
+      "_type": "reference"
+    },
+    {
+      "_key": "c2ddd0a36b93",
+      "_ref": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Over 330 communities held vigils for Lorenzo Salgado Araujo and Johan Guerrero, killed by ICE in July 2026. At least 75 have died since January 2025.",
+    "metaTitle": "ICE Out: 330+ Cities Demand Justice for People Killed by ICE",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "ice-out-over-330-cities-demand-justice-for-the-dead-as-federal-killings-accelerate-under-trump"
+  },
+  "tags": [
+    "ICE",
+    "immigration",
+    "Lorenzo Salgado Araujo",
+    "Johan Sebastián Guerrero",
+    "protests",
+    "vigils",
+    "police violence",
+    "Trump administration",
+    "Houston",
+    "Maine"
+  ],
+  "title": "'ICE Out': Over 330 Cities Demand Justice for the Dead as Federal Killings Accelerate Under Trump",
+  "updatedAt": null,
+  "videoLink": null
+}

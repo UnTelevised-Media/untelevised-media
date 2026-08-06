@@ -1,0 +1,30 @@
+{
+  "slug": "the-sixth-fire-six-trailers-two-acres-and-the-corporate-media-is-tone-deaf",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "source-wcvb-brockton-fire-2026",
+      "description": "Boston ABC affiliate covering the Brockton tractor-trailer fire with details from Fire Chief Brian Nardelli, witness quotes from Westgate Lanes employees, and information about the fire spreading to DW Fields Park.",
+      "isAnonymous": null,
+      "label": "WCVB Boston",
+      "type": "article",
+      "url": "https://www.wcvb.com/article/brockton-fire-westgate-black-smoke/70992823"
+    },
+    {
+      "_id": "source-cbs-brockton-fire-2026",
+      "description": "CBS Boston coverage with video of the tractor-trailer fire, Chief Nardelli's statement about the State Fire Marshal deploying accelerant-sniffing dogs, and details on 6 trailers damaged and 2 acres of woodland burned.",
+      "isAnonymous": null,
+      "label": "CBS Boston",
+      "type": null,
+      "url": "https://www.cbsnews.com/boston/news/brockton-tractor-trailer-fire-bowling-alley-video/"
+    },
+    {
+      "_id": "source-whdh-brockton-fire-2026",
+      "description": "Boston NBC affiliate covering the multi-alarm response, witness accounts of explosions and loud bangs, and the fire spreading from one trailer to another before firefighters arrived.",
+      "isAnonymous": null,
+      "label": "WHDH 7News",
+      "type": "article",
+      "url": "https://whdh.com/news/fire-crews-battle-multi-alarm-blaze-after-trailers-go-up-in-flames-in-brockton/"
+    }
+  ]
+}

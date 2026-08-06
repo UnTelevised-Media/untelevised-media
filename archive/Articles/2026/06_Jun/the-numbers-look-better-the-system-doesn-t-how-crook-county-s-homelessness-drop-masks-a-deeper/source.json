@@ -1,0 +1,62 @@
+{
+  "slug": "the-numbers-look-better-the-system-doesn-t-how-crook-county-s-homelessness-drop-masks-a-deeper",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-opb-central-oregon-homelessness-decline",
+      "description": null,
+      "isAnonymous": null,
+      "label": "OPB — Central Oregon Homelessness Decline",
+      "type": "media",
+      "url": "https://www.opb.org/article/2026/05/21/think-out-loud-cental-oregon-housing/"
+    },
+    {
+      "_id": "source-madras-pioneer-new-homelessness-data-shows-improvements-in-central-oregon",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Madras Pioneer — New Homelessness Data Shows Improvements in Central Oregon",
+      "type": "article",
+      "url": "https://madraspioneer.com/2026/05/22/new-homelessness-data-shows-improvements-in-central-oregon/"
+    },
+    {
+      "_id": "source-opb-homelessness-declined-nationally-in-2025-not-in-oregon",
+      "description": null,
+      "isAnonymous": null,
+      "label": "OPB — Homelessness Declined Nationally in 2025, Not in Oregon",
+      "type": "media",
+      "url": "https://www.opb.org/article/2026/06/02/homelessness-declined-nationally-in-2025-not-in-oregon/"
+    },
+    {
+      "_id": "source-kgw-oregon-homelessness-rose-34-in-two-years",
+      "description": null,
+      "isAnonymous": null,
+      "label": "KGW — Oregon Homelessness Rose 34% in Two Years",
+      "type": "article",
+      "url": "https://www.kgw.com/article/news/local/homeless/oregon-homeless-pit-count-psu-report-data-kotek-sheltered/283-a90de984-a6b6-46d2-aeab-1ceead5f1e43"
+    },
+    {
+      "_id": "source-oregonian-homelessness-in-oregon-rises-35",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Oregonian — Homelessness in Oregon Rises 35%",
+      "type": "article",
+      "url": "https://www.oregonlive.com/pacific-northwest-news/2026/01/homelessness-jumped-35-in-oregon-heres-why-its-unclear-how-the-state-ranks-nationally.html"
+    },
+    {
+      "_id": "source-homeless-leadership-coalition-point-in-time-count",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Homeless Leadership Coalition — Point in Time Count",
+      "type": "data",
+      "url": "https://cohomeless.org/what-we-do/point-in-time-count/"
+    },
+    {
+      "_id": "source-rural-organizing-project-addressing-homelessness-in-crook-county",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Rural Organizing Project — Addressing Homelessness in Crook County",
+      "type": "article",
+      "url": "https://rop.org/update/addressing-homelessness-in-crook-county/"
+    }
+  ]
+}

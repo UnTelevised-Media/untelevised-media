@@ -1,0 +1,134 @@
+{
+  "slug": "pam-bondi-s-corruption-chronicle-14-months-of-weaponized-justice",
+  "totalSources": 16,
+  "sources": [
+    {
+      "_id": "source-bondi-cnn-2026",
+      "description": "CNN reporting on Trump ousting Pam Bondi as attorney general",
+      "isAnonymous": false,
+      "label": "CNN - Bondi Ousted",
+      "type": "media",
+      "url": "https://www.cnn.com/2026/04/02/politics/pam-bondi-role-trump"
+    },
+    {
+      "_id": "source-bondi-usatoday-epstein-2026",
+      "description": "USA Today reporting on Bondi firing over Epstein documents controversy",
+      "isAnonymous": false,
+      "label": "USA Today - Epstein Docs",
+      "type": "media",
+      "url": "https://www.usatoday.com/story/news/politics/2026/04/02/pam-bondi-fired-attorney-general/89433774007/"
+    },
+    {
+      "_id": "source-bondi-nyt-2026",
+      "description": "New York Times live coverage of Bondi firing and Epstein files handling",
+      "isAnonymous": false,
+      "label": "New York Times - Bondi Out",
+      "type": "media",
+      "url": "https://www.nytimes.com/live/2026/04/02/us/trump-news"
+    },
+    {
+      "_id": "source-bondi-nbc-hearing-2026",
+      "description": "NBC News reporting on Democrats walking out of Bondi Epstein files briefing",
+      "isAnonymous": false,
+      "label": "NBC News - Epstein Hearing",
+      "type": "media",
+      "url": "https://www.nbcnews.com/politics/justice-department/democrats-walk-pam-bondi-briefing-epstein-files-subpoena-compliance-rcna264219"
+    },
+    {
+      "_id": "source-bondi-aljazeera-2026",
+      "description": "Al Jazeera reporting on lawmakers condemning Bondi's Epstein files handling",
+      "isAnonymous": false,
+      "label": "Al Jazeera - Lawmakers Slam Bondi",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/2/11/us-lawmakers-slam-pam-bondi-over-administrations-handling-of-epstein-files"
+    },
+    {
+      "_id": "source-bondi-cbs-2026",
+      "description": "CBS News reporting on Bondi's directives threatening lawyers",
+      "isAnonymous": false,
+      "label": "CBS News - Directives",
+      "type": "media",
+      "url": "https://www.cbsnews.com/news/trump-pam-bondi-attorney-general/"
+    },
+    {
+      "_id": "source-bondi-npr-purge-2026",
+      "description": "NPR reporting on Bondi overseeing firing of prosecutors and FBI officials",
+      "isAnonymous": false,
+      "label": "NPR - DOJ Purge",
+      "type": "media",
+      "url": "https://www.npr.org/2026/04/02/g-s1-115077/trump-bondi-attorney-general-departure"
+    },
+    {
+      "_id": "source-bondi-opb-exodus-2026",
+      "description": "OPB reporting on mass exodus of career DOJ employees under Bondi",
+      "isAnonymous": false,
+      "label": "OPB - Career Exodus",
+      "type": "media",
+      "url": "https://www.opb.org/article/2026/04/02/trump-says-pam-bondi-a-loyalist-who-oversaw-justice-department-upheaval-is-out-as-attorney-general/"
+    },
+    {
+      "_id": "source-bondi-warren-2026",
+      "description": "Senator Elizabeth Warren's statement on Bondi's merger approvals as political favors",
+      "isAnonymous": false,
+      "label": "Sen. Warren - Merger Corruption",
+      "type": "statement",
+      "url": "https://news.bloomberglaw.com/us-law-week/attorney-general-pam-bondi-was-ousted-trump-tells-fox-news"
+    },
+    {
+      "_id": "source-bondi-blumenthal-2025",
+      "description": "Senator Richard Blumenthal's questions about DOJ favorable terms to companies with ties to Bondi's former employer",
+      "isAnonymous": false,
+      "label": "Sen. Blumenthal - Corporate Coddling",
+      "type": "statement",
+      "url": "https://www.blumenthal.senate.gov/newsroom/press/release/video-bondi-hides-from-blumenthal-questions-about-doj-coddling-of-corporate-interests"
+    },
+    {
+      "_id": "source-bondi-crew-2021",
+      "description": "CREW investigation into illegal Trump Foundation donation to Bondi and dropped Trump University investigation",
+      "isAnonymous": false,
+      "label": "CREW - Trump Foundation Scandal",
+      "type": "document",
+      "url": "https://www.citizensforethics.org/reports-investigations/crew-investigations/the-trump-foundation-pam-bondi-scandal/"
+    },
+    {
+      "_id": "source-bondi-guardian-2016",
+      "description": "The Guardian reporting on Trump's donation to Bondi and dropped Trump University investigation",
+      "isAnonymous": false,
+      "label": "The Guardian - Trump Donation",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2016/09/07/donald-trump-donation-pam-bondi-florida-attorney-general"
+    },
+    {
+      "_id": "source-bondi-nyt-2024",
+      "description": "New York Times reporting on $25,000 donation to Bondi and Trump University investigation",
+      "isAnonymous": false,
+      "label": "New York Times - Trump University",
+      "type": "media",
+      "url": "https://www.nytimes.com/2024/11/22/us/politics/pam-bondi-trump-university.html"
+    },
+    {
+      "_id": "source-bondi-usatoday-impeachment-2026",
+      "description": "USA Today reporting on impeachment articles introduced against Bondi by Rep. Summer Lee",
+      "isAnonymous": false,
+      "label": "USA Today - Impeachment Articles",
+      "type": "media",
+      "url": "https://www.usatoday.com/story/news/politics/2026/03/22/pam-bondi-impeachment-articles-representative-summer-lee/89201090007/"
+    },
+    {
+      "_id": "source-bondi-thanedar-2026",
+      "description": "Congressman Shri Thanedar's press release on introducing impeachment articles against Bondi",
+      "isAnonymous": false,
+      "label": "Rep. Thanedar - Impeachment",
+      "type": "statement",
+      "url": "https://thanedar.house.gov/media/press-releases/congressman-shri-thanedar-introduces-articles-of-impeachment-against-attorney-general-pam-bondi"
+    },
+    {
+      "_id": "source-bondi-houston-2026",
+      "description": "Houston Public Media reporting on mass exodus from Civil Rights Division under Bondi",
+      "isAnonymous": false,
+      "label": "Houston Public Media - Civil Rights Exodus",
+      "type": "media",
+      "url": "https://www.houstonpublicmedia.org/npr/2026/04/02/g-s1-115077/attorney-general-pam-bondi-out-at-doj/"
+    }
+  ]
+}

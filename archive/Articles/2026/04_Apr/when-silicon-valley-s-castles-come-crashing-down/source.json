@@ -1,0 +1,62 @@
+{
+  "slug": "when-silicon-valley-s-castles-come-crashing-down",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "altman-attack-source-0",
+      "description": "April 12, 2026 - Reports on the second attack involving gunfire, arrests of Amanda Tom and Muhamad Tarik Hussein, and three firearms seized.",
+      "isAnonymous": null,
+      "label": "The San Francisco Standard - Sam Altman's Home Targeted in Second Attack",
+      "type": "article",
+      "url": "https://sfstandard.com/2026/04/12/sam-altman-s-home-targeted-second-attack/"
+    },
+    {
+      "_id": "altman-attack-source-1",
+      "description": "April 10, 2026 - Details on the first attack by Daniel Alejandro Moreno-Gama, threats to OpenAI headquarters, and OpenAI's response.",
+      "isAnonymous": null,
+      "label": "The Guardian - OpenAI CEO Sam Altman's Home Targeted with Molotov Cocktail",
+      "type": "article",
+      "url": "https://www.theguardian.com/technology/2026/apr/10/sam-altman-home-molotov-cocktail"
+    },
+    {
+      "_id": "altman-attack-source-2",
+      "description": "Comprehensive coverage of both attacks, Altman's blog response, and broader context of AI backlash and data center resistance.",
+      "isAnonymous": null,
+      "label": "ZeroHedge - Gunfire Strikes Sam Altman's San Francisco Home",
+      "type": "article",
+      "url": "https://www.zerohedge.com/political/gunfire-strikes-sam-altmans-san-francisco-home-days-after-molotov-cocktail-attack-signs"
+    },
+    {
+      "_id": "altman-attack-source-3",
+      "description": "San Francisco Police Department official statement on the April 12, 2026 shooting incident and arrests.",
+      "isAnonymous": null,
+      "label": "SFPD News Release - SFPD Arrests Suspects Involved in Shooting",
+      "type": "statement",
+      "url": "https://www.sanfranciscopolice.org/news/sfpd-arrests-suspects-involved-shooting-26-044"
+    },
+    {
+      "_id": "altman-attack-source-4",
+      "description": "Altman's personal response posting family photo and calling for de-escalation after the Molotov attack.",
+      "isAnonymous": null,
+      "label": "Sam Altman Personal Blog - Family Statement",
+      "type": "statement",
+      "url": "https://blog.samaltman.com/2279512"
+    },
+    {
+      "_id": "altman-attack-source-5",
+      "description": "Local reporting on the shooting incident, details on the Honda sedan, and Police Chief Derrick Lew's statement.",
+      "isAnonymous": null,
+      "label": "SF Chronicle - Gunfire Near Altman's Home",
+      "type": "article",
+      "url": "https://www.sfchronicle.com/bayarea/article/sam-altman-openai-gunfire-22202648.php"
+    },
+    {
+      "_id": "altman-attack-source-6",
+      "description": "Original reporting on the Friday April 10, 2026 Molotov cocktail incident at Altman's Russian Hill residence.",
+      "isAnonymous": null,
+      "label": "The San Francisco Standard - Altman Home Molotov Cocktail Attack",
+      "type": "article",
+      "url": "https://sfstandard.com/2026/04/10/sam-altman-russian-hill-molotov-cocktail/"
+    }
+  ]
+}

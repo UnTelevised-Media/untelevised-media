@@ -1,0 +1,86 @@
+{
+  "slug": "ai-policing-is-destroying-innocent-lives-and-police-are-letting-it-happen",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "nE3O1lobPG69YhI3yzowfz",
+      "description": "WDAY News reporting on Angela Lipps, Tennessee grandmother wrongfully arrested after AI facial recognition misidentification",
+      "isAnonymous": null,
+      "label": "WDAY News",
+      "type": "document",
+      "url": "https://www.inforum.com/news/fargo/ai-error-jails-innocent-grandmother-for-months-in-fargo-case"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkIn1qfn",
+      "description": "Tom's Hardware investigation of AI-driven misidentification, documenting Angela Lipps case and at least eight wrongful arrests across America",
+      "isAnonymous": null,
+      "label": "Tom's Hardware",
+      "type": "document",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/facial-recognition-is-jailing-the-wrong-people-police-keep-using-it-anyway"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkIn1qkF",
+      "description": "CBS News reporting on Harvey Eugene Murphy Jr., a 61-year-old grandfather wrongfully arrested by facial recognition and sexually assaulted in jail",
+      "isAnonymous": null,
+      "label": "CBS News",
+      "type": "document",
+      "url": "https://www.cbsnews.com/news/facial-recognition-mistaken-identity-sunglass-hut-robber-harvey-eugene-murphy-suing-after-sexually-assaulted-jail/"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkIn1qxb",
+      "description": "ACLU report on police receiving explicit warnings that FRT results don't constitute probable cause, but making arrests anyway",
+      "isAnonymous": null,
+      "label": "ACLU - Police Warnings",
+      "type": "document",
+      "url": "https://www.aclu.org/news/privacy-technology/police-say-a-simple-warning-will-prevent-face-recognition-wrongful-arrests-thats-just-not-true"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkIn1qt9",
+      "description": "ACLU case details on Robert Williams, first publicly reported FRT false-positive case, arrested in front of wife and daughters",
+      "isAnonymous": null,
+      "label": "American Civil Liberties Union",
+      "type": "document",
+      "url": "https://www.aclu.org/cases/williams-v-city-of-detroit-face-recognition-false-arrest"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkIn1wPv",
+      "description": "Wikipedia article on Flock Safety, covering ALPR cameras, Palantir integration, and privacy controversies",
+      "isAnonymous": null,
+      "label": "Wikipedia - Flock Safety",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/Flock_Safety"
+    },
+    {
+      "_id": "k1QYwAPp56GZ2DtatiBUW9",
+      "description": null,
+      "isAnonymous": false,
+      "label": "EFF",
+      "type": "other",
+      "url": "https://www.eff.org/deeplinks/2026/03/weasel-words-openais-pentagon-deal-wont-stop-ai-powered-surveillance"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkIn1whj",
+      "description": "EFF report on ICE using Palantir tool that feeds on Medicaid data to stalk people for arrest",
+      "isAnonymous": null,
+      "label": "EFF - Palantir Medicaid Data",
+      "type": "document",
+      "url": "https://www.eff.org/deeplinks/2026/01/report-ice-using-palantir-tool-feeds-medicaid-data"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkIn1wYp",
+      "description": "StopFlock.com tracking Palantir's  million contract with ICE to develop ImmigrationOS surveillance platform",
+      "isAnonymous": null,
+      "label": "StopFlock.com",
+      "type": "document",
+      "url": "https://stopflock.com/"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkIn1wdH",
+      "description": "Wired reporting on Palantir's  million award to build ImmigrationOS surveillance platform for ICE",
+      "isAnonymous": null,
+      "label": "Wired",
+      "type": "document",
+      "url": "https://www.wired.com/story/ice-palantir-immigrationos/"
+    }
+  ]
+}

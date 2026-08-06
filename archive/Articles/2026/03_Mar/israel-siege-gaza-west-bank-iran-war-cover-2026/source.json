@@ -1,0 +1,54 @@
+{
+  "slug": "israel-siege-gaza-west-bank-iran-war-cover-2026",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "jsyY1XXvTf1w09tARiRlfx",
+      "description": null,
+      "isAnonymous": false,
+      "label": "The Intercept — West Bank Lockdown",
+      "type": "other",
+      "url": "https://theintercept.com/2026/03/10/israel-iran-war-west-bank-lockdown/"
+    },
+    {
+      "_id": "nmRtoTHCG0rdpxUuvZo7I0",
+      "description": null,
+      "isAnonymous": false,
+      "label": "The Intercept — Doctors Trapped in Gaza",
+      "type": "other",
+      "url": "https://theintercept.com/2026/03/13/israel-blockade-gaza-iran-war-doctors/"
+    },
+    {
+      "_id": "jsyY1XXvTf1w09tARiRm5N",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Middle East Monitor — Aid Blockade",
+      "type": "other",
+      "url": "https://www.middleeastmonitor.com/20260313-humanitarian-aid-to-gaza-drops-sharply-amid-crossing-restrictions/"
+    },
+    {
+      "_id": "E2amU54KgQjBxBrVc2MGjB",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Middle East Monitor — UN on Kerem Shalom Denials",
+      "type": "other",
+      "url": "https://www.middleeastmonitor.com/20260313-most-humanitarian-aid-movements-through-gaza-crossing-denied-over-past-2-days-un-says/"
+    },
+    {
+      "_id": "E2amU54KgQjBxBrVc2MH1h",
+      "description": null,
+      "isAnonymous": false,
+      "label": "UN OCHA — Humanitarian Situation Report March 6, 2026",
+      "type": "other",
+      "url": "https://www.ochaopt.org/content/humanitarian-situation-report-6-march-2026"
+    },
+    {
+      "_id": "k1QYwAPp56GZ2DtatiBUq8",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Wikipedia — 2026 Iran War",
+      "type": "other",
+      "url": "https://en.wikipedia.org/wiki/2026_Iran_war"
+    }
+  ]
+}

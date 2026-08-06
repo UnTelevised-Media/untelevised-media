@@ -1,0 +1,70 @@
+{
+  "slug": "ice-out-over-330-cities-demand-justice-for-the-dead-as-federal-killings-accelerate-under-trump",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-los-angeles-times-ice-shootings-protested-in-pasadena-on-national-day-of-action",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Los Angeles Times — ICE shootings protested in Pasadena on National Day of Action",
+      "type": "media",
+      "url": "https://www.latimes.com/california/story/2026-07-25/pasadena-protests-ice-shootings-national-day-of-action-vigil"
+    },
+    {
+      "_id": "source-common-dreams-we-will-not-forget-them-nationwide-vigils-demand-justice-for-peopl",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Common Dreams — 'We Will Not Forget Them': Nationwide Vigils Demand Justice for People Killed by ICE",
+      "type": "media",
+      "url": "https://www.commondreams.org/news/day-of-action-for-people-killed-by-ice"
+    },
+    {
+      "_id": "source-public-citizen-hundreds-of-vigils-planned-for-lorenzo-johan-and-all-lives-taken-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Public Citizen — Hundreds of Vigils Planned for Lorenzo, Johan, and All Lives Taken by ICE",
+      "type": "media",
+      "url": "https://www.citizen.org/news/hundreds-of-vigils-planned-for-lorenzo-johan-and-all-lives-taken-by-ice/"
+    },
+    {
+      "_id": "source-cnn-lorenzo-salgado-araujo-mexican-man-fatally-shot-by-ice-was-not-target",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — Lorenzo Salgado Araujo: Mexican man fatally shot by ICE was not target",
+      "type": "media",
+      "url": "https://www.cnn.com/2026/07/09/us/lorenzo-salgado-araujo-houston-ice-shooting"
+    },
+    {
+      "_id": "source-new-york-times-ice-shot-lorenzo-salgado-araujo-through-open-passenger-window",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — ICE Shot Lorenzo Salgado Araujo Through Open Passenger Window",
+      "type": "media",
+      "url": "https://www.nytimes.com/2026/07/13/us/houston-ice-shooting-video-witnesses.html"
+    },
+    {
+      "_id": "source-cnn-what-we-know-about-johan-sebastian-guerrero-fatally-shot-by-ice-in-maine",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — What we know about Johan Sebastian Guerrero, fatally shot by ICE in Maine",
+      "type": "media",
+      "url": "https://www.cnn.com/2026/07/15/us/joan-sebastian-guerrero-ice-shooting-maine"
+    },
+    {
+      "_id": "source-abc-news-partner-of-man-fatally-shot-by-ice-in-maine-speaks-out",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ABC News — Partner of man fatally shot by ICE in Maine speaks out",
+      "type": "media",
+      "url": "https://abcnews.com/US/partner-man-fatally-shot-ice-agent-maine-speaks/story?id=134829083"
+    },
+    {
+      "_id": "source-washington-post-man-killed-in-maine-ice-shooting-was-a-25-year-old-colombian-fat",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Washington Post — Man killed in Maine ICE shooting was a 25-year-old Colombian father",
+      "type": "media",
+      "url": "https://www.washingtonpost.com/immigration/2026/07/14/man-killed-maine-ice-shooting-was-26-year-old-colombian-father/"
+    }
+  ]
+}

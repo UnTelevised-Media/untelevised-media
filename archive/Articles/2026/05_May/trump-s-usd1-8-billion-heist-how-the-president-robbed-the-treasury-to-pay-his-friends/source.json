@@ -1,0 +1,86 @@
+{
+  "slug": "trump-s-usd1-8-billion-heist-how-the-president-robbed-the-treasury-to-pay-his-friends",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "source-cbs-weaponization-fund-may19-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS News - Who could benefit from Trump anti-weaponization fund",
+      "type": "article",
+      "url": "https://www.cbsnews.com/news/who-could-benefit-from-trumps-1-7-billion-weaponization-fund/"
+    },
+    {
+      "_id": "source-usatoday-fund-backlash-may19-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "USA Today - Why Trumps 1.776 billion anti-weaponization fund caused a stir",
+      "type": "article",
+      "url": "https://www.usatoday.com/story/news/politics/2026/05/19/trump-anti-weaponization-fund-backlash/90156718007/"
+    },
+    {
+      "_id": "source-time-doj-fund-may18-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Time - What to Know About the DOJs 1.8B Anti-Weaponization Fund",
+      "type": "article",
+      "url": "https://time.com/article/2026/05/18/trump-doj-anti-weaponization-fund-irs-lawsuit-settlement/"
+    },
+    {
+      "_id": "source-abc-jan6-officers-sue-may20-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ABC News - 2 officers who defended Capitol on Jan 6 sue to stop fund",
+      "type": "article",
+      "url": "https://abcnews.com/US/2-officers-defended-capitol-jan-6-sue-stop/story?id=133151726"
+    },
+    {
+      "_id": "source-politico-jan6-sue-may20-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Politico - Jan 6 police officers sue to block Trump weaponization fund",
+      "type": "article",
+      "url": "https://www.politico.com/news/2026/05/20/trump-weaponization-fund-lawsuit-jan-6-00929342"
+    },
+    {
+      "_id": "source-axios-irs-settlement-may19-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Axios - Trump DOJ settlement prevents pending tax investigations of president",
+      "type": "article",
+      "url": "https://www.axios.com/2026/05/19/trump-tax-settlement-irs-anti-weaponization-fund-doj"
+    },
+    {
+      "_id": "source-doj-press-release-may18-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "DOJ - Justice Department Announces Anti-Weaponization Fund",
+      "type": "statement",
+      "url": "https://www.justice.gov/opa/pr/justice-department-announces-anti-weaponization-fund"
+    },
+    {
+      "_id": "source-forbes-caputo-may20-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Forbes - Ex-Trump Official Seeks 2.7 Million Payout From Anti-Weaponization Fund",
+      "type": "article",
+      "url": "https://www.forbes.com/sites/siladityaray/2026/05/20/ex-trump-official-seeks-27-million-payout-from-presidents-18-billion-anti-weaponization-fund/"
+    },
+    {
+      "_id": "source-guardian-jan6-sue-may20-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - January 6 officers sue Trump over 1.8bn fund alleging presidential corruption",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/may/20/jan-6-police-sue-trump-anti-weaponization-fund"
+    },
+    {
+      "_id": "source-democracynow-may19-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Now - Headlines May 19 2026",
+      "type": "article",
+      "url": "https://www.democracynow.org/2026/5/19/headlines"
+    }
+  ]
+}

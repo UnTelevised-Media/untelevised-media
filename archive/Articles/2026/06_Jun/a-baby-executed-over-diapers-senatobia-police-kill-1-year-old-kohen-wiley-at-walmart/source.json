@@ -1,0 +1,70 @@
+{
+  "slug": "a-baby-executed-over-diapers-senatobia-police-kill-1-year-old-kohen-wiley-at-walmart",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-wreg-mbi-investigates-senatobia-walmart-shooting",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WREG — MBI Investigates Senatobia Walmart Shooting",
+      "type": "article",
+      "url": "https://wreg.com/news/mbi-investigates-shooting-at-senatobia-walmart-parking-lot/"
+    },
+    {
+      "_id": "source-wreg-family-demands-answers-after-1-year-old-killed",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WREG — Family Demands Answers After 1-Year-Old Killed",
+      "type": "article",
+      "url": "https://wreg.com/news/its-just-not-right-family-of-1-year-old-killed-in-officer-involved-shooting-demands-answers/"
+    },
+    {
+      "_id": "source-wmc-action-news-5-family-demands-justice",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WMC Action News 5 — Family Demands Justice",
+      "type": "article",
+      "url": "https://www.actionnews5.com/2026/06/15/i-just-want-justice-family-demands-answers-after-one-year-old-boy-killed-following-officer-involved-shooting/"
+    },
+    {
+      "_id": "source-fox13-memphis-shoplifting-call-ends-in-gunfire",
+      "description": null,
+      "isAnonymous": null,
+      "label": "FOX13 Memphis — Shoplifting Call Ends in Gunfire",
+      "type": "article",
+      "url": "https://www.fox13memphis.com/news/child-dead-another-person-critically-injured-after-officer-involved-shooting-at-senatobia-walmart-mbi-says/article_40f41d42-afa5-463f-9f1f-55683feef569.html"
+    },
+    {
+      "_id": "source-abc-news-child-killed-after-officer-fires-at-car",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ABC News — Child Killed After Officer Fires at Car",
+      "type": "article",
+      "url": "https://abcnews.com/US/child-killed-after-officer-fires-car-reported-shoplifting/story?id=133891802"
+    },
+    {
+      "_id": "source-wjtv-child-dead-after-officer-involved-shooting-at-senatobia-walmart",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WJTV — Child Dead After Officer-Involved Shooting at Senatobia Walmart",
+      "type": "article",
+      "url": "https://www.wjtv.com/news/state/child-dead-after-officer-involved-shooting-at-senatobia-walmart/"
+    },
+    {
+      "_id": "source-tippah-news-juvenile-killed-in-officer-involved-shooting",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Tippah News — Juvenile Killed in Officer-Involved Shooting",
+      "type": "article",
+      "url": "https://tippahnews.com/mississippi-news/juvenile-killed-in-officer-involved-shooting-at-senatobia-walmart/"
+    },
+    {
+      "_id": "source-the-union-star-senatobia-child-killed-in-officer-involved-shooting",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Union Star — Senatobia Child Killed in Officer-Involved Shooting",
+      "type": "article",
+      "url": "https://www.theunionstar.com/senatobia-ms-child-killed-in-officer-involved-shooting-at-walmart-another-critically-injured/"
+    }
+  ]
+}

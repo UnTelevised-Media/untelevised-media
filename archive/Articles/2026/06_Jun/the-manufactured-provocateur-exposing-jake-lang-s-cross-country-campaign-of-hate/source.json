@@ -1,0 +1,230 @@
+{
+  "slug": "the-manufactured-provocateur-exposing-jake-lang-s-cross-country-campaign-of-hate",
+  "totalSources": 28,
+  "sources": [
+    {
+      "_id": "source-wired-a-january-6-rioter-is-leading-an-armed-national-militia-from-prison",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wired — A January 6 Rioter Is Leading an Armed National Militia From Prison",
+      "type": "media",
+      "url": "https://www.wired.com/story/january-6-rioter-leading-armed-national-militia-from-prison/"
+    },
+    {
+      "_id": "source-global-project-against-hate-and-extremism-racist-jan-6-rioter-jake-langs-crusade",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Global Project Against Hate and Extremism — Racist Jan. 6 Rioter Jake Lang's Crusade",
+      "type": "media",
+      "url": "https://globalextremism.org/post/jake-lang/"
+    },
+    {
+      "_id": "source-wikipedia-jake-lang",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Jake Lang",
+      "type": "media",
+      "url": "https://en.wikipedia.org/wiki/Jake_Lang"
+    },
+    {
+      "_id": "source-jerusalem-post-jan-6-protester-jake-lang-renounced-his-judaism",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jerusalem Post — Jan. 6 Protester Jake Lang Renounced His Judaism",
+      "type": "media",
+      "url": "https://www.jpost.com/international/article-890489"
+    },
+    {
+      "_id": "source-ny-daily-news-protesters-clash-over-jake-lang-pig-roast-at-anti-islamification-r",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NY Daily News — Protesters Clash Over Jake Lang Pig Roast at Anti-Islamification Rally",
+      "type": "media",
+      "url": "https://www.nydailynews.com/2026/03/07/photos-protesters-clash-over-jake-lang-pig-roast-at-anti-islamification-rally-in-new-york-city/"
+    },
+    {
+      "_id": "source-nbc-news-pardoned-capitol-rioter-who-said-jan-6-officer-needs-to-be-put-down-is-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News — Pardoned Capitol Rioter Who Said Jan. 6 Officer Needs to Be Put Down Is Charged",
+      "type": "media",
+      "url": "https://www.nbcnews.com/politics/politics-news/jan-6-rioter-jake-lang-arrested-threat-dc-police-officer-rcna261395"
+    },
+    {
+      "_id": "source-cbs-news-far-right-influencer-jake-lang-arrested-in-texas-on-terroristic-threats",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS News — Far-Right Influencer Jake Lang Arrested in Texas on Terroristic Threats",
+      "type": "media",
+      "url": "https://www.cbsnews.com/news/jake-lang-far-right-influencer-arrested-texas-charge-terroristic-threats/"
+    },
+    {
+      "_id": "source-dallas-morning-news-pardoned-jan-6-rioter-jake-lang-arrested-in-dallas-county",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Dallas Morning News — Pardoned Jan. 6 Rioter Jake Lang Arrested in Dallas County",
+      "type": "media",
+      "url": "https://www.dallasnews.com/news/crime/article/pardoned-jan-6-rioter-jake-lang-arrested-karmelo-22299064.php"
+    },
+    {
+      "_id": "source-unicorn-riot-the-continuing-humiliations-of-white-supremacist-jake-lang",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Unicorn Riot — The Continuing Humiliations of White Supremacist Jake Lang",
+      "type": "media",
+      "url": "https://unicornriot.ninja/2026/the-continuing-humiliations-of-white-supremacist-jake-lang/"
+    },
+    {
+      "_id": "source-pocono-review-from-milford-to-manhattan-the-jake-lang-terror-plot",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Pocono Review — From Milford to Manhattan: The Jake Lang Terror Plot",
+      "type": "media",
+      "url": "https://poconoreview.com/jake-lang-milford-terror-plot/"
+    },
+    {
+      "_id": "source-the-source-j6-racist-jake-lang-manhandled-at-bet-protest",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Source — J6 Racist Jake Lang Manhandled at BET Protest",
+      "type": "media",
+      "url": "https://thesource.com/2026/06/30/j6-racist-jake-lang-man-handled-at-bet-protest-after-holding-sign-black-parents-are-failures/"
+    },
+    {
+      "_id": "source-complex-pardoned-jan-6-rioter-chased-off-at-2026-bet-awards",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Complex — Pardoned Jan. 6 Rioter Chased Off at 2026 BET Awards",
+      "type": "media",
+      "url": "https://www.complex.com/pop-culture/a/backwoodsaltar/jake-lang-bet-awards-protest-jan-6-pardoned"
+    },
+    {
+      "_id": "source-minnesota-daily-pardoned-january-6-rioter-pleads-not-guilty-to-damaging-ice-scul",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Minnesota Daily — Pardoned January 6 Rioter Pleads Not Guilty to Damaging Ice Sculpture",
+      "type": "media",
+      "url": "https://mndaily.com/city/pardoned-january-6-rioter-pleads-not-guilty-to-damaging-6000-ice-sculpture-at-minnesota-capitol-last-month/03/06/2026/shill/"
+    },
+    {
+      "_id": "source-the-guardian-far-right-influencer-and-us-senate-candidate-arrested-for-damaging-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Far-Right Influencer and US Senate Candidate Arrested for Damaging Anti-ICE Sculpture",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2026/feb/06/jake-lang-arrested-jan-6-rioter-far-right"
+    },
+    {
+      "_id": "source-star-tribune-the-black-man-and-women-who-rescued-anti-islam-activist-jake-lang",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Star Tribune — The Black Man and Women Who Rescued Anti-Islam Activist Jake Lang",
+      "type": "media",
+      "url": "https://www.startribune.com/man-reveals-why-he-rescued-right-wing-influencer-jake-lang-from-mob-outside-minneapolis-city-hall/601566873"
+    },
+    {
+      "_id": "source-jta-pardoned-jan-6-protester-throws-chocolate-coins-nazi-salute-during-anti-aipa",
+      "description": null,
+      "isAnonymous": null,
+      "label": "JTA — Pardoned Jan. 6 Protester Throws Chocolate Coins, Nazi Salute During Anti-AIPAC Demonstration",
+      "type": "media",
+      "url": "https://www.jta.org/2026/01/07/united-states/pardoned-jan-6-protester-jake-lang-throws-chocolate-coins-nazi-salute-during-anti-aipac-demonstration-in-dc"
+    },
+    {
+      "_id": "source-splc-man-who-stormed-the-capitol-and-organized-a-militia-from-jail-seeks-trump-p",
+      "description": null,
+      "isAnonymous": null,
+      "label": "SPLC — Man Who Stormed the Capitol and Organized a Militia From Jail Seeks Trump Pardon",
+      "type": "media",
+      "url": "https://www.splcenter.org/resources/hatewatch/man-who-stormed-the-capitol-and-organized-a-militia-from-jail-seeks-trump-pardon/"
+    },
+    {
+      "_id": "source-house-and-whips-jake-langs-religion-is-he-jewish-israel-ties-explained",
+      "description": null,
+      "isAnonymous": null,
+      "label": "House and Whips — Jake Lang's Religion: Is He Jewish? Israel Ties Explained",
+      "type": "media",
+      "url": "https://houseandwhips.com/is-jake-lang-jewish/"
+    },
+    {
+      "_id": "source-rolling-stone-what-is-the-maga-militia-napalm-jake-langs-paramilitary-project",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Rolling Stone — What Is the MAGA Militia NAPALM, Jake Lang's Paramilitary Project",
+      "type": "media",
+      "url": "https://www.rollingstone.com/politics/politics-features/napalm-maga-militia-clown-car-1235042105/"
+    },
+    {
+      "_id": "source-media-matters-far-right-media-figures-using-social-media-to-recruit-for-militia",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Media Matters — Far-Right Media Figures Using Social Media to Recruit for Militia",
+      "type": "media",
+      "url": "https://www.mediamatters.org/january-6-insurrection/group-far-right-media-figures-using-social-media-recruit-its-newly-formed"
+    },
+    {
+      "_id": "source-ajc-jake-lang-january-6-rioter-who-fuels-antisemitism-islamophobia",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AJC — Jake Lang: January 6 Rioter Who Fuels Antisemitism, Islamophobia",
+      "type": "media",
+      "url": "https://www.ajc.org/news/jake-lang-january-6-rioter-who-fuels-antisemitism-islamophobia"
+    },
+    {
+      "_id": "source-dallas-morning-news-austin-metcalfs-father-tells-protect-white-americans-leader-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Dallas Morning News — Austin Metcalf's Father Tells Protect White Americans Leader He's Creating Racial Divide",
+      "type": "media",
+      "url": "https://www.dallasnews.com/news/crime/2025/04/19/protect-white-americans-protest-frisco/"
+    },
+    {
+      "_id": "source-new-york-times-gracie-mansion-attack-came-amid-chaos-of-influencers-anti-muslim-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — Gracie Mansion Attack Came Amid Chaos of Influencer's Anti-Muslim Rally",
+      "type": "media",
+      "url": "https://www.nytimes.com/2026/03/09/nyregion/jake-lang-protest-manhattan-minnesota.html"
+    },
+    {
+      "_id": "source-npr-trump-distorted-the-history-of-the-jan-6-riot",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR — Trump Distorted the History of the Jan. 6 Riot",
+      "type": "media",
+      "url": "https://www.npr.org/2026/01/06/nx-s1-5598467/trump-distorted-the-history-of-the-jan-6-riot-nprs-archive-preserves-the-evidence"
+    },
+    {
+      "_id": "source-doj-edward-jacob-lang-indictment",
+      "description": null,
+      "isAnonymous": null,
+      "label": "DOJ — Edward Jacob Lang Indictment",
+      "type": "official",
+      "url": "https://www.justice.gov/opa/page/file/1364166/dl"
+    },
+    {
+      "_id": "source-lawfare-prosecution-documents-edward-jacob-lang",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Lawfare — Prosecution Documents: Edward Jacob Lang",
+      "type": "official",
+      "url": "https://www.lawfaremedia.org/projects-series/the-jan.-6-project/prosecuting-the-insurrectionists/prosecution-documents"
+    },
+    {
+      "_id": "source-fec-jake-lang-candidate-overview",
+      "description": null,
+      "isAnonymous": null,
+      "label": "FEC — Jake Lang Candidate Overview",
+      "type": "official",
+      "url": "https://www.fec.gov/data/candidate/S6FL00657/"
+    },
+    {
+      "_id": "a4e4abc1-40be-4d4f-a5ea-d4e930a32261",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Jan. 6 Rioter’s ‘Christian Pig Crusade’ Disrupts EPIC Mosque’s Food Pantry",
+      "type": "article",
+      "url": "https://www.dallasobserver.com/news/plano-muslim-food-pantry-disrupted-by-white-nationalist-protest-40627029/"
+    }
+  ]
+}

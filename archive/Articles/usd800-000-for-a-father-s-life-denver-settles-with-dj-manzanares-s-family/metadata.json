@@ -1,0 +1,153 @@
+{
+  "_id": "800k-settlement-dj-manzanares-family-wrongful-death-denver",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "418773c16bd3",
+      "_ref": "NIYNah6RoM2MjtNb6HiKPc",
+      "_type": "reference"
+    },
+    {
+      "_key": "0e974e561455",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "0b912eeb0566",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Nearly four years after Denver police shot DJ Manzanares 11 times while his son fought leukemia, the city approved an $800,000 wrongful death settlement. No officers were ever charged. The family got a check. The system held.",
+  "eventDate": "2025-03-17T18:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The Denver City Council approved an $800,000 settlement for the estate of Duane Manzanares Jr. on March 17, 2025.",
+      "question": "How much did Denver settle for?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "No. DA Beth McCann cleared all three officers — Samuel Bailey, Ryan Nelson, and Steven Whiteman — of criminal charges in August 2021, ruling the shooting legally justified.",
+      "question": "Were the officers who killed DJ ever charged?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The family filed a civil wrongful death lawsuit in Denver District Court in June 2023, nearly two years after DJ was killed.",
+      "question": "When was the civil lawsuit filed?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Damien Manzanares was diagnosed with acute leukemia at age 8 and was in Children's Hospital Colorado's ICU when his father was killed. He has undergone years of chemotherapy and treatment without his father. The settlement funds will go to DJ's estate for Damien's ongoing care.",
+      "question": "What happened to DJ's son Damien?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "The Manzanares settlement is one of multiple police killing payouts approved by the Denver City Council. Denver has paid millions in settlements for police killings, while officers involved rarely face criminal consequences — a pattern of using financial payouts to replace genuine accountability.",
+      "question": "Where does this settlement fit in Denver's broader pattern?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Duane Manzanares settlement 800000",
+    "Denver wrongful death settlement police shooting",
+    "DJ Manzanares City Council settlement 2025",
+    "Denver police settlement Colfax shooting",
+    "Manzanares family civil lawsuit Denver",
+    "800000 settlement police killing Denver",
+    "Damien Manzanares leukemia father killed"
+  ],
+  "leadParagraph": "On March 17, 2025, the Denver City Council approved an $800,000 settlement for the family of Duane 'DJ' Manzanares Jr. — nearly four years after three Denver police officers shot him 11 times on a public sidewalk while his 8-year-old son fought leukemia in a hospital a mile away. The settlement was the city's acknowledgment that DJ's death was a wrongful killing. But the officers who killed him never faced criminal charges.",
+  "linkedPitch": null,
+  "location": "Denver, Colorado",
+  "mainImage": {
+    "_type": "image",
+    "alt": "DJ's family with other community activist who have lost loved ones to Denver & Aurora police.",
+    "asset": {
+      "_ref": "image-7deb696963f290ad1422d1331dc477c0fb7c1765-540x540-webp",
+      "_type": "reference"
+    },
+    "caption": "The Denver City Council chambers. On March 17, 2025, the council approved an $800,000 settlement for the family of Duane Manzanares Jr., nearly four years after Denver police killed him.",
+    "credit": "Denverite/Kevin J. Beaty"
+  },
+  "methodology": "This article was reported using Denver City Council records, civil court filings, Denver Post and Denverite coverage of the March 2025 settlement, DA decision letters, family statements, GoFundMe testimony, and prior UnTelevised reporting on the Manzanares case. All material facts were cross-referenced across multiple independent sources.",
+  "needsReview": null,
+  "publishedAt": "2025-03-17T12:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "2e1eba2d1a23",
+      "_ref": "justice-for-dj-duane-manzanares-police-killing-denver",
+      "_type": "reference"
+    },
+    {
+      "_key": "1f6d2f35fc69",
+      "_ref": "justice-for-dj-manzanares-the-fight-after-denver-police",
+      "_type": "reference"
+    },
+    {
+      "_key": "d630e33c5483",
+      "_ref": "YtJR1N6fGBsJu5O68LOEJ4",
+      "_type": "reference"
+    },
+    {
+      "_key": "2f356939584c",
+      "_ref": "YtJR1N6fGBsJu5O68LOL54",
+      "_type": "reference"
+    },
+    {
+      "_key": "45448ae8d614",
+      "_ref": "Ulg91jjPFgaBD1fUiNoHzK",
+      "_type": "reference"
+    },
+    {
+      "_key": "c391debdf779",
+      "_ref": "corey-ruiz-madison-police-killing",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Denver approved an $800,000 settlement for the family of DJ Manzanares, nearly four years after police shot him 11 times. No officers were ever charged.",
+    "metaTitle": "$800,000 for a Father's Life: Denver Settles DJ Manzanares Wrongful Death",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "usd800-000-for-a-father-s-life-denver-settles-with-dj-manzanares-s-family"
+  },
+  "tags": [
+    "police brutality",
+    "wrongful death settlement",
+    "Denver Police Department",
+    "Duane Manzanares",
+    "Denver City Council",
+    "police accountability",
+    "civil lawsuit",
+    "Colorado",
+    "police violence",
+    "institutional racism"
+  ],
+  "title": "$800,000 for a Father's Life: Denver Settles with DJ Manzanares's Family",
+  "updatedAt": null,
+  "videoLink": null
+}

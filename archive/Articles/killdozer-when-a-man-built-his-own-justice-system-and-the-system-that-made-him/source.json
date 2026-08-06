@@ -1,0 +1,46 @@
+{
+  "slug": "killdozer-when-a-man-built-his-own-justice-system-and-the-system-that-made-him",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-wiki-marvin-heemeyer",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Marvin Heemeyer",
+      "type": "encyclopedia",
+      "url": "https://en.wikipedia.org/wiki/Marvin_Heemeyer"
+    },
+    {
+      "_id": "source-denver7-killdozer-20",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Denver7 — Killdozer 20 Years Later",
+      "type": "news",
+      "url": "https://www.denver7.com/news/local-news/killdozer-20-years-later-how-and-why-a-man-went-on-a-rampage-through-granby-in-an-armored-bulldozer"
+    },
+    {
+      "_id": "source-cbs-killdozer-20",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS News Colorado — Granby Residents Reflect on Bulldozer Rampage 20 Years Later",
+      "type": "news",
+      "url": "https://www.cbsnews.com/colorado/news/granby-colorado-residents-reflect-bulldozer-rampage-20-years-later/"
+    },
+    {
+      "_id": "source-skyhi-gallery",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Sky-Hi News — Photo Gallery: Inside the Bulldozer's Devastation",
+      "type": "news",
+      "url": "https://www.skyhinews.com/news/photo-gallery-inside-the-bulldozers-devastation/"
+    },
+    {
+      "_id": "source-tread-documentary",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Tread (2020) — Documentary Film by Paul Solet",
+      "type": "media",
+      "url": "https://www.treadmovie.com/"
+    }
+  ]
+}

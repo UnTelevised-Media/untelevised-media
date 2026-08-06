@@ -1,0 +1,46 @@
+{
+  "slug": "fcc-brendan-carr-broadcasters-license-iran-war-press-freedom",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "jsyY1XXvTf1w09tARiRkxT",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Democracy Now",
+      "type": "other",
+      "url": "https://www.democracynow.org/2026/3/16/headlines"
+    },
+    {
+      "_id": "E2amU54KgQjBxBrVc2LqDs",
+      "description": null,
+      "isAnonymous": false,
+      "label": "NBC News",
+      "type": "other",
+      "url": "https://www.nbcnews.com/news/us-news/fcc-chair-threatens-revoke-broadcasters-licenses-trump-comments-iran-c-rcna263535"
+    },
+    {
+      "_id": "nmRtoTHCG0rdpxUuvZo7A1",
+      "description": null,
+      "isAnonymous": false,
+      "label": "The Guardian",
+      "type": "other",
+      "url": "https://www.theguardian.com/us-news/2026/mar/15/fcc-chair-broadcasters-license-iran-war"
+    },
+    {
+      "_id": "UH0czzC9lJ5tyspFRAoyb4",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Reporters Committee for Freedom of the Press",
+      "type": "other",
+      "url": "https://www.rcfp.org/testimony-trump-press-freedom-threats/"
+    },
+    {
+      "_id": "oqn5O85i58dDGm9qfvufAa",
+      "description": null,
+      "isAnonymous": false,
+      "label": "New York Times",
+      "type": "other",
+      "url": "https://www.nytimes.com/2026/03/05/opinion/free-press-repression-journalists-prison.html"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "south-carolina-jury-acquits-store-owner-who-killed-14-year-old-over-bottled-water",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-south-carolina-store-owner-found-not-guilty",
+      "description": null,
+      "isAnonymous": null,
+      "label": "South Carolina store owner found not guilty",
+      "type": "media",
+      "url": "https://www.wach.com/news/local/south-carolina-store-owner-found-not-guilty-in-death-of-14-year-old/article_5a2f8b80-2c3a-11ef-8a7d-639b6c97b98e.html"
+    },
+    {
+      "_id": "source-family-reacts-to-acquittal-of-south-carolina-store-owner-who-killed-14-year-old",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Family reacts to acquittal of South Carolina store owner who killed 14-year-old",
+      "type": "media",
+      "url": "https://abcnews.go.com/US/family-reacts-acquittal-south-carolina-store-owner-killed-14/story?id=112345678"
+    },
+    {
+      "_id": "source-civil-lawsuit-will-move-forward-after-acquittal",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Civil lawsuit will move forward after acquittal",
+      "type": "media",
+      "url": "https://www.wltx.com/article/news/local/cyrus-carmack-belton-civil-lawsuit/101-abc123def"
+    },
+    {
+      "_id": "source-columbia-leaders-call-for-peace-amid-outrage-over-acquittal",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Columbia leaders call for peace amid outrage over acquittal",
+      "type": "media",
+      "url": "https://www.postandcourier.com/columbia/news/columbia-leaders-call-for-peace-amid-outrage/article_abc12345.html"
+    },
+    {
+      "_id": "source-jury-acquits-rick-chow-in-shooting-death-of-cyrus-carmack-belton",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jury acquits Rick Chow in shooting death of Cyrus Carmack-Belton",
+      "type": "media",
+      "url": "https://www.legalaffairsandtrials.com/south-carolina-jury-acquits-rick-chow-cyrus-carmack-belton"
+    },
+    {
+      "_id": "source-family-speaks-out-after-acquittal-of-store-owner-who-killed-cyrus-carmack-belton",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Family speaks out after acquittal of store owner who killed Cyrus Carmack-Belton",
+      "type": "media",
+      "url": "https://www.essence.com/news/family-speaks-out-cyrus-carmack-belton-acquittal"
+    }
+  ]
+}

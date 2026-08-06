@@ -1,0 +1,34 @@
+{
+  "slug": "the-mississippi-musk-who-wants-to-erase-black-power-how-shad-white-uses-state-authority-to-target-mi",
+  "totalImages": 3,
+  "downloadedAt": "2026-08-05T20:50:42.904Z",
+  "mainImage": {
+    "alt": "Shad White, a white man in his late 30s with dark hair and glasses, wears a dark suit and stands against a plain background with his arms crossed. He looks directly at the camera with a serious expression. This is an official portrait from his campaign website.",
+    "caption": "",
+    "credit": "",
+    "asset": "image-7a69a54daeae8cd11782b5ce94dfc92c9a248268-683x1024-jpg",
+    "filename": "main.jpg",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "The Mississippi State Capitol building, a grand neoclassical structure with a large dome and columns, stands under a blue sky with white clouds. The building is made of light-colored stone and features American and Mississippi flags flying in front. It sits on a manicured lawn with trees framing the composition.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-6f6775ec8b90fa7a0a0b91b0e10353e1ce542190-1440x960-jpg",
+      "filename": "image-1.jpg",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "A split image showing Shad White, a white man in a dark suit, on the left, and Bennie Thompson, a Black man in a suit and tie, on the right. Both men appear to be captured in formal settings, likely official portraits or press conference photos. The image illustrates the political tension over redistricting Mississippi's 2nd Congressional District.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-128dcfc19e3716afcc9ce489837b5a04030bc87f-2000x1333-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    }
+  ]
+}

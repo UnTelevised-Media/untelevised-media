@@ -1,0 +1,134 @@
+{
+  "slug": "450-years-for-solidarity-the-prairieland-sentences-that-expose-america-s-slide-into",
+  "totalSources": 16,
+  "sources": [
+    {
+      "_id": "source-doj-press-release-sentencing-of-north-texas-antifa-cell-members",
+      "description": null,
+      "isAnonymous": null,
+      "label": "DOJ Press Release — Sentencing of North Texas Antifa Cell Members",
+      "type": "document",
+      "url": "https://www.justice.gov/opa/pr/leader-antifa-cell-members-north-texas-sentenced-100-years-prison-terrorist-attack-ice"
+    },
+    {
+      "_id": "source-doj-press-release-conviction-of-antifa-cell-members",
+      "description": null,
+      "isAnonymous": null,
+      "label": "DOJ Press Release — Conviction of Antifa Cell Members",
+      "type": "document",
+      "url": "https://www.justice.gov/opa/pr/antifa-cell-members-convicted-prairieland-ice-detention-center-shooting"
+    },
+    {
+      "_id": "source-ap-news-eight-sentenced-in-prairieland-shooting-case",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News — Eight Sentenced in Prairieland Shooting Case",
+      "type": "article",
+      "url": "https://apnews.com/article/prairieland-detention-center-shooting-sentencing-1eb7a8ac32dbb637e027709ae010f374"
+    },
+    {
+      "_id": "source-the-guardian-texas-anti-ice-protesters-sentenced-to-at-least-50-years",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Texas Anti-ICE Protesters Sentenced to at Least 50 Years",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/jun/23/prairieland-ice-protesters-texas-sentenced"
+    },
+    {
+      "_id": "source-the-intercept-prairieland-defendant-sentenced-to-30-years-for-moving-zines",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Intercept — Prairieland Defendant Sentenced to 30 Years for Moving Zines",
+      "type": "article",
+      "url": "https://theintercept.com/2026/06/23/prairieland-texas-ice-protest-prison-sentences/"
+    },
+    {
+      "_id": "source-talking-points-memo-prairieland-antifa-activists-sentenced-to-decades",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Talking Points Memo — Prairieland Antifa Activists Sentenced to Decades",
+      "type": "article",
+      "url": "https://talkingpointsmemo.com/news/prairieland-antifa-activists-sentenced-to-decades-in-prison-on-terrorism-charges"
+    },
+    {
+      "_id": "source-kera-news-prairieland-shooter-gets-100-years-others-30-70",
+      "description": null,
+      "isAnonymous": null,
+      "label": "KERA News — Prairieland Shooter Gets 100 Years, Others 30-70",
+      "type": "article",
+      "url": "https://www.keranews.org/criminal-justice/2026-06-23/prairieland-shooter-gets-100-years-others-30-70-in-ice-detention-center-antifa-protest"
+    },
+    {
+      "_id": "source-al-jazeera-protesters-sentenced-to-decades-over-alleged-antifa-ties",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Protesters Sentenced to Decades Over Alleged Antifa Ties",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/6/23/protesters-sentenced-to-decades-in-us-prison-over-alleged-antifa-ties"
+    },
+    {
+      "_id": "source-bbc-eight-sentenced-to-450-years-over-anti-ice-riot",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BBC — Eight Sentenced to 450 Years Over Anti-ICE Riot",
+      "type": "article",
+      "url": "https://www.bbc.com/news/articles/clyedgnyn4mo"
+    },
+    {
+      "_id": "source-nbc-5-dallas-fort-worth-sentencing-for-8-accused-of-antifa-ties",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC 5 Dallas-Fort Worth — Sentencing for 8 Accused of Antifa Ties",
+      "type": "article",
+      "url": "https://www.nbcdfw.com/news/local/sentencing-for-8-accused-of-antifa-ties-convicted-on-terrorism-charges-over-shooting-at-tx-immigration-facility/4039978/"
+    },
+    {
+      "_id": "source-cbs-texas-leader-of-group-convicted-in-antifa-inspired-attack",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS Texas — Leader of Group Convicted in Antifa-Inspired Attack",
+      "type": "article",
+      "url": "https://www.cbsnews.com/texas/news/ice-detention-attack-defendants-sentencing-6-23-2026/"
+    },
+    {
+      "_id": "source-pbs-newshour-eight-convicted-of-terrorism-charges-sentenced-to-decades",
+      "description": null,
+      "isAnonymous": null,
+      "label": "PBS NewsHour — Eight Convicted of Terrorism Charges Sentenced to Decades",
+      "type": "article",
+      "url": "https://www.pbs.org/newshour/nation/8-convicted-of-terrorism-charges-in-texas-immigration-center-shooting-sentenced-to-decades-in-prison"
+    },
+    {
+      "_id": "source-dfw-support-committee-official-support-website",
+      "description": null,
+      "isAnonymous": null,
+      "label": "DFW Support Committee — Official Support Website",
+      "type": "other",
+      "url": "https://prairielanddefendants.com/"
+    },
+    {
+      "_id": "source-wikipedia-2025-prairieland-ice-detention-center-incident",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — 2025 Prairieland ICE Detention Center Incident",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/2025_Prairieland_ICE_detention_center_incident"
+    },
+    {
+      "_id": "source-trump-executive-order-designating-antifa-as-domestic-terrorist-organization",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Trump Executive Order — Designating Antifa as Domestic Terrorist Organization",
+      "type": "document",
+      "url": "https://www.whitehouse.gov/presidential-actions/2025/09/designating-antifa-as-a-domestic-terrorist-organization/"
+    },
+    {
+      "_id": "source-utm-previous-article-guilty-of-terrorism-for-what-they-wore-the-prairieland-verd",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UTM Previous Article — Guilty of Terrorism for What They Wore: The Prairieland Verdict",
+      "type": "article",
+      "url": "https://untelevised.media/articles/prairieland-verdict-ice-protest-terrorism-conviction-2026/"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "slug": "the-committee-that-cannot-govern-how-the-board-of-peace-engineered-gaza-s-surrender-while-the",
+  "totalSources": 12,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-what-is-the-new-gaza-administration-as-hamas-dissolves-government",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — What is the new Gaza administration as Hamas dissolves government?",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/7/7/what-is-the-new-gaza-administration-as-hamas-dissolves-government"
+    },
+    {
+      "_id": "source-al-jazeera-hamas-announces-dissolution-of-gaza-governing-body",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Hamas announces dissolution of Gaza governing body",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/7/6/hamas-announces-dissolution-of-gaza-governing-body"
+    },
+    {
+      "_id": "source-arab-center-dc-hamas-dissolves-its-government-in-gaza-but-the-board-of-peace-rem",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Arab Center DC — Hamas Dissolves its Government in Gaza, but the Board of Peace Remains the Problem",
+      "type": "media",
+      "url": "https://arabcenterdc.org/resource/hamas-dissolves-its-government-in-gaza-but-the-board-of-peace-remains-the-problem/"
+    },
+    {
+      "_id": "source-france-24-trump-charges-1-billion-for-permanent-seat-on-gaza-board-of-peace",
+      "description": null,
+      "isAnonymous": null,
+      "label": "France 24 — Trump charges $1 billion for permanent seat on Gaza Board of Peace",
+      "type": "media",
+      "url": "https://www.france24.com/en/americas/20260119-trump-charges-1bn-for-permanent-seat-on-gaza-board-of-peace-invites-russia-s-putin"
+    },
+    {
+      "_id": "source-al-jazeera-trumps-board-of-peace-puts-rights-abusers-in-charge-of-global-order",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Trump's Board of Peace puts rights abusers in charge of global order",
+      "type": "media",
+      "url": "https://www.aljazeera.com/opinions/2026/1/27/trumps-board-of-peace-puts-rights-abusers-in-charge-of-global-order"
+    },
+    {
+      "_id": "source-al-jazeera-israels-smotrich-declares-revolution-in-west-bank-settlement-expansio",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Israel's Smotrich declares 'revolution' in West Bank settlement expansion",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/7/6/israels-smotrich-declares-revolution-in-west-bank-settlement-expansion"
+    },
+    {
+      "_id": "source-cnn-israels-far-right-openly-boasts-of-resettling-gaza-as-election-looms",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — Israel's far-right openly boasts of resettling Gaza as election looms",
+      "type": "media",
+      "url": "https://www.cnn.com/2026/07/20/middleeast/israel-far-right-settlements-gaza-intl"
+    },
+    {
+      "_id": "source-al-jazeera-from-settlements-to-blocked-recovery-israeli-strategy-taking-shape-in",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — From settlements to blocked recovery: Israeli strategy taking shape in Gaza",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/7/19/from-settlements-to-blocked-recovery-israeli-strategy-taking-shape-in-gaza"
+    },
+    {
+      "_id": "source-ap-news-more-than-1000-killed-in-gaza-since-ceasefire",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News — More than 1,000 killed in Gaza since ceasefire",
+      "type": "data",
+      "url": "https://apnews.com/article/israel-palestinians-hamas-war-gaza-death-toll-casualties-07ecc0f22a1fb8332466ffc87f928cf4"
+    },
+    {
+      "_id": "source-nbc-news-hamas-dissolves-gaza-governing-body-ahead-of-power-transfer",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News — Hamas dissolves Gaza governing body ahead of power transfer",
+      "type": "media",
+      "url": "https://www.nbcnews.com/world/gaza/hamas-dissolves-gaza-governing-body-ahead-power-transfer-rcna353116"
+    },
+    {
+      "_id": "source-wikipedia-national-committee-for-the-administration-of-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — National Committee for the Administration of Gaza",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/National_Committee_for_the_Administration_of_Gaza"
+    },
+    {
+      "_id": "source-france-24-hamas-dissolves-gaza-governing-body-clearing-way-for-technocratic-comm",
+      "description": null,
+      "isAnonymous": null,
+      "label": "France 24 — Hamas dissolves Gaza governing body, clearing way for technocratic committee",
+      "type": "media",
+      "url": "https://www.france24.com/en/middle-east/20260706-hamas-dissolves-gaza-governing-body-clearing-way-for-technocratic-committee"
+    }
+  ]
+}

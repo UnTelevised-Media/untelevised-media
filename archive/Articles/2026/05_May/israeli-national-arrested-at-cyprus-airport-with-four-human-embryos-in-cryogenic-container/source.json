@@ -1,0 +1,38 @@
+{
+  "slug": "israeli-national-arrested-at-cyprus-airport-with-four-human-embryos-in-cryogenic-container",
+  "totalSources": 4,
+  "sources": [
+    {
+      "_id": "source-ynet-embryo-cyprus-2026-05",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Ynet News - Israeli arrested in Cyprus embryo trafficking probe",
+      "type": "news",
+      "url": "https://www.ynetnews.com/article/ryufrtakfe"
+    },
+    {
+      "_id": "source-ibtimes-embryo-cyprus-2026-05",
+      "description": null,
+      "isAnonymous": null,
+      "label": "IBTimes UK - Israeli Man Arrested at Cyprus Airport With Four Human Embryos",
+      "type": "news",
+      "url": "https://www.ibtimes.co.uk/israeli-man-arrested-cyprus-airport-four-human-embryos-cryogenic-container-labelled-life-parcel-1798483"
+    },
+    {
+      "_id": "source-cyprus-mail-embryo-2026-05",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Cyprus Mail - North defends IVF clinic after embryo smuggling arrest at airport",
+      "type": "news",
+      "url": "https://cyprus-mail.com/2026/05/21/north-defends-ivf-clinic-after-embryo-smuggling-arrest-at-airport"
+    },
+    {
+      "_id": "source-hespress-embryo-cyprus-2026-05",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Hespress EN - Israeli traveler caught with human embryos at northern Cyprus airport",
+      "type": "news",
+      "url": "https://en.hespress.com/138524-israeli-traveler-caught-with-human-embryos-at-northern-cyprus-airport.html"
+    }
+  ]
+}

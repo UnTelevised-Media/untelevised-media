@@ -1,0 +1,152 @@
+{
+  "_id": "gaza-board-of-peace-ncag-governance-surrender-erasure-machine",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "EcCdPNkJ45UJzvqW3hqEH2",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "EcCdPNkJ45UJzvqW3hqELX",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    },
+    {
+      "_key": "EcCdPNkJ45UJzvqW3hqEQ2",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Hamas dissolved its government on July 6, 2026, handing power to a 15-member technocratic committee that Israel will not allow to enter Gaza. The Board of Peace controlling the process includes Netanyahu and Putin but zero Palestinians. Its charter mentions neither Gaza nor human rights. 73,098 are dead. 70% of Gaza is occupied. The machinery of erasure runs on schedule.",
+  "eventDate": "2026-07-06T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "The National Committee for the Administration of Gaza (NCAG) is a 15-member technocratic committee formed in January 2026 under UN Security Council Resolution 2803. Chaired by Ali Shaath, it is tasked with restoring civil services in Gaza — health, education, water, and law enforcement. Despite being formed six months ago, Israel has not allowed any of its members to enter Gaza.",
+      "question": "What is the NCAG?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Created by Trump in January 2026, the Board of Peace oversees Gaza's reconstruction. Permanent seats cost $1 billion. Members include Benjamin Netanyahu (under ICC arrest warrant) and Vladimir Putin (under ICC arrest warrant). The Board includes zero Palestinians. Its charter mentions neither Gaza nor human rights. Trump holds 'supreme authority' to adopt resolutions.",
+      "question": "What is the Board of Peace?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "No. At least 1,005 Palestinians have been killed since the ceasefire was announced in October 2025, bringing the total to 73,098+ since October 2023. Israel has expanded its military control from 53% to approximately 70% of the Gaza Strip during the 'ceasefire.' Settlement outposts are being built in northern Gaza.",
+      "question": "Has the ceasefire actually stopped the killing?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Hamas dissolved its Government Emergency Committee — the body that had administered Gaza since 2007 — and announced it would transfer authority to the NCAG. Mohammed al-Farra resigned as head of the emergency committee. The move was intended to demonstrate compliance with the ceasefire agreement's governance provisions and 'remove any pretexts for the occupation.'",
+      "question": "What did Hamas actually do on July 6?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "NCAG Gaza governance",
+    "Board of Peace Netanyahu Putin",
+    "Hamas dissolves government Gaza",
+    "Gaza ceasefire violations 1000 killed",
+    "Smotrich settlement revolution West Bank",
+    "Gaza 70 percent occupation Yellow Line",
+    "Mladenov Board of Peace director general",
+    "Ali Shaath National Committee Gaza",
+    "Gaza Nakba managed erasure",
+    "Gaza technocratic committee barred entry",
+    "Ben Gvir settlement throughout Gaza",
+    "Gaza Board of Peace charter no human rights"
+  ],
+  "leadParagraph": "Hamas dissolved its governing body on July 6, 2026, transferring authority to the National Committee for the Administration of Gaza — a 15-member technocratic committee trapped in Cairo because Israel refuses to let them enter. The NCAG answers to a Board of Peace that includes Benjamin Netanyahu and Vladimir Putin but no Palestinians, whose charter mentions neither Gaza nor human rights, and which charges $1 billion for a permanent seat. While the governance architecture was being built, Israel expanded its occupation to 70% of the Strip and killed 1,005 more Palestinians since the ceasefire began.",
+  "linkedPitch": null,
+  "location": "Gaza Strip / Cairo, Egypt / Davos, Switzerland",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Palestinian children pushing a water cart through destroyed displacement camp in Gaza City past tents and rubble",
+    "asset": {
+      "_ref": "image-73476b9ce949ea4472095cfe0611d64ccb01c818-3600x2400-webp",
+      "_type": "reference"
+    },
+    "caption": "Palestinian children transport water containers past tents and rubble at a displacement camp in Gaza City's Sheikh Radwan neighbourhood, July 6, 2026",
+    "credit": "AFP/Omar Al-Qattaa"
+  },
+  "methodology": "Reported using Al Jazeera (5 articles), France 24 (2), Arab Center DC, CNN, AP News, NBC News, and Wikipedia. Board of Peace charter analysis from France 24 and Al Jazeera. Settlement data from Al Jazeera and CNN. Death toll from AP. Governance structure from Al Jazeera explainer and Wikipedia. Cross-referenced with previously published UTM investigations on settlement construction, AI targeting systems, and UNRWA dismantlement.",
+  "needsReview": null,
+  "publishedAt": "2026-07-28T22:45:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "israels-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "israel-builds-settlements-on-gazas-graves-the-open-air-annexation-and-the-language-of-genocide-made-concrete",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "israel-yellow-line-gaza-expanding-de-facto-reoccupation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "gaza-chickenpox-crisis-9300-cases-khan-yunis-disease-siege",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "c9yzsqzw5ic",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Hamas dissolved its government. The Board of Peace includes Netanyahu and Putin but zero Palestinians. 73,098 dead. 70% of Gaza occupied. The machinery of erasure runs on schedule.",
+    "metaTitle": "The Committee That Cannot Govern: How the Board of Peace Engineered Gaza's Surrender",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-committee-that-cannot-govern-how-the-board-of-peace-engineered-gaza-s-surrender-while-the"
+  },
+  "tags": [
+    "Gaza",
+    "Board of Peace",
+    "NCAG",
+    "Netanyahu",
+    "Trump",
+    "Mladenov",
+    "Smotrich",
+    "Ben Gvir",
+    "genocide",
+    "UNRWA"
+  ],
+  "title": "The Committee That Cannot Govern: How the Board of Peace Engineered Gaza's Surrender While the Bombs Never Stopped",
+  "updatedAt": null,
+  "videoLink": null
+}

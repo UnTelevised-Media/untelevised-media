@@ -1,0 +1,70 @@
+{
+  "slug": "no-justice-for-dj-the-system-that-killed-duane-manzanares-and-protected-his-killers",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-denver-post-denver-da-releases-decision-letters-on-fatal-police-shootings-of-two",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Denver Post — Denver DA Releases Decision Letters on Fatal Police Shootings of Two Armed Men",
+      "type": "article",
+      "url": "https://www.denverpost.com/2021/08/04/denver-da-decision-letters-fatal-police-shootings/"
+    },
+    {
+      "_id": "source-denver-gazette-denver-officers-cleared-of-wrongdoing-in-2-fatal-shootings-of-sus",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Denver Gazette — Denver Officers Cleared of Wrongdoing in 2 Fatal Shootings of Suspects",
+      "type": "article",
+      "url": "https://denvergazette.com/news/crime/denver-officers-cleared-of-wrongdoing-in-2-fatal-shootings-of-suspects/article_89587140-f61f-11eb-a343-eb123936d5d3.html"
+    },
+    {
+      "_id": "source-krdo-family-of-pueblo-man-shot-by-denver-police-hold-rally-in-remembrance",
+      "description": null,
+      "isAnonymous": null,
+      "label": "KRDO — Family of Pueblo Man Shot by Denver Police Hold Rally in Remembrance",
+      "type": "article",
+      "url": "https://krdo.com/news/2021/08/01/family-of-pueblo-man-shot-by-denver-police-hold-rally-in-remembrance/"
+    },
+    {
+      "_id": "source-facebook-event-march-for-justice-for-duane-dj-manzanares-murdered-by-denver-poli",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Facebook Event — March for Justice for Duane 'DJ' Manzanares Murdered by Denver Police",
+      "type": "other",
+      "url": "https://www.facebook.com/events/9025-e-colfax-ave-aurora-co-80010-1722-united-states/march-for-justice-for-duane-dj-manzanares-murdered-by-denver-police/821261241925617/"
+    },
+    {
+      "_id": "source-denver-post-denver-will-pay-800000-settlement-in-fatal-police-shooting-of-pueblo",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Denver Post — Denver Will Pay $800,000 Settlement in Fatal Police Shooting of Pueblo Man",
+      "type": "article",
+      "url": "https://www.denverpost.com/2025/03/17/denver-police-settlement-2021-shooting-city-council/"
+    },
+    {
+      "_id": "source-cpr-news-2021-colorado-police-shootings-running-list",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CPR News — 2021 Colorado Police Shootings Running List",
+      "type": "data",
+      "url": "https://www.cpr.org/2021/01/19/2021-colorado-police-shootings/"
+    },
+    {
+      "_id": "source-everytown-colorado-among-five-states-with-highest-rates-of-fatal-police-shooting",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Everytown — Colorado Among Five States with Highest Rates of Fatal Police Shootings",
+      "type": "data",
+      "url": "https://www.everytown.org/press/colorado-is-among-five-states-with-the-highest-rates-of-fatal-police-shootings-in-the-country-heres-what-you-need-to-know-about-police-violence/"
+    },
+    {
+      "_id": "source-9news-no-charges-against-three-officers-involved-in-a-denver-shootout",
+      "description": null,
+      "isAnonymous": null,
+      "label": "9NEWS — No Charges Against Three Officers Involved in a Denver Shootout",
+      "type": "article",
+      "url": "https://www.9news.com/article/news/crime/man-shot-car-walked-away-colfax-weapon/73-f983bff5-3573-4d58-a5a6-b17ebe9eb57d"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "ice-raids-state-violence-and-community-resistance-in-oregon-how-federal-enforcement-came-to-main",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-the-guardian-ice-agents-in-oregon-cannot-arrest-without-warrants-judge-rules",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — ICE Agents in Oregon Cannot Arrest Without Warrants, Judge Rules",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2026/feb/05/ice-immigration-raids-oregon"
+    },
+    {
+      "_id": "source-opb-oregon-portland-ice-apprehensions-skyrocket-600",
+      "description": null,
+      "isAnonymous": null,
+      "label": "OPB — Oregon Portland ICE Apprehensions Skyrocket 600%",
+      "type": "media",
+      "url": "https://www.opb.org/article/2026/03/13/oregon-portland-ice-apprehensions-multnomah-washington-marion/"
+    },
+    {
+      "_id": "source-npr-ice-cant-make-warrantless-arrests-in-oregon",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR — ICE Can't Make Warrantless Arrests in Oregon",
+      "type": "media",
+      "url": "https://www.npr.org/2026/02/05/g-s1-108778/ice-agents-warrantless-arrests-oregon"
+    },
+    {
+      "_id": "source-wikipedia-2026-us-immigration-enforcement-protests",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — 2026 U.S. Immigration Enforcement Protests",
+      "type": "data",
+      "url": "https://en.wikipedia.org/wiki/2026_U.S._immigration_enforcement_protests"
+    },
+    {
+      "_id": "source-50501-movement-ice-activity-by-state",
+      "description": null,
+      "isAnonymous": null,
+      "label": "50501 Movement — ICE Activity by State",
+      "type": "article",
+      "url": "https://www.the50501movement.org/p/ice-activity-by-state"
+    },
+    {
+      "_id": "source-cnn-ice-warrantless-arrests-oregon-ruling",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — ICE Warrantless Arrests Oregon Ruling",
+      "type": "media",
+      "url": "https://www.cnn.com/2026/02/04/us/portland-ice-warrantless-arrests-oregon-ruling"
+    }
+  ]
+}

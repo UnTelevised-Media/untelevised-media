@@ -1,0 +1,46 @@
+{
+  "slug": "cop-city-atlanta-police-militarization-feedback-loop",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "vJkIwlnQvhC1FTH4YykVFJ",
+      "description": "AFSC report on how militarized policing threatens democratic institutions and civil liberties.",
+      "isAnonymous": null,
+      "label": "American Friends Service Committee - Militarized Policing is Threatening Democracy",
+      "type": "document",
+      "url": "https://afsc.org/news/militarized-policing-threatening-democracy"
+    },
+    {
+      "_id": "vJkIwlnQvhC1FTH4YykVHo",
+      "description": "ACLU resources on police militarization, 1033 program, and surveillance technology.",
+      "isAnonymous": null,
+      "label": "ACLU - Police Militarization",
+      "type": "document",
+      "url": "https://www.aclu.org/issues/criminal-law-reform/reforming-police/police-militarization"
+    },
+    {
+      "_id": "vJkIwlnQvhC1FTH4YykVKJ",
+      "description": "ABA analysis of police militarization impact on civil rights and constitutional protections.",
+      "isAnonymous": null,
+      "label": "American Bar Association - Police Militarization and the War on Citizens",
+      "type": "document",
+      "url": "https://www.americanbar.org/groups/crsj/resources/human-rights/archive/police-militarization-war-citizens/"
+    },
+    {
+      "_id": "vJkIwlnQvhC1FTH4YykVMo",
+      "description": "CIVIC report on how U.S. law enforcement militarization causes civilian harm at home and abroad.",
+      "isAnonymous": null,
+      "label": "Center for Civilians in Conflict - The Militarization of U.S. Law Enforcement",
+      "type": "document",
+      "url": "https://civiliansinconflict.org/blog/the-militarization-of-us-law-enforcement-and-civilian-harm/"
+    },
+    {
+      "_id": "vJkIwlnQvhC1FTH4YykVPJ",
+      "description": "New Lines Institute analysis of how U.S. police militarization affects international relations and human rights.",
+      "isAnonymous": null,
+      "label": "New Lines Institute - International Consequences of the Militarization of U.S. Policing",
+      "type": "document",
+      "url": "https://newlinesinstitute.org/political-systems/international-consequences-of-the-militarization-of-u-s-policing/"
+    }
+  ]
+}

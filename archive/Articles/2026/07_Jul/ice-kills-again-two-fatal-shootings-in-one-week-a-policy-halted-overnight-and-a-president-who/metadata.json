@@ -1,0 +1,139 @@
+{
+  "_id": "ice-kills-again-two-fatal-shootings-halt-overturned",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-0",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "20ec983c4185",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "ICE agents fatally shot Lorenzo Salgado Araujo in Houston and Joan Sebastián Durán Guerrero in Biddeford, Maine within six days. Neither was the target of their operation. DHS halted traffic stop arrests. Trump overturned the halt within 24 hours. Eleven people have been killed by immigration agents since January.",
+  "eventDate": "2026-07-13T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Lorenzo Salgado Araujo was shot and killed by ICE during a traffic stop in Houston on July 7. Joan Sebastián Durán Guerrero, a 26-year-old Colombian man, was shot and killed in Biddeford, Maine on July 13. Neither man was the target of the ICE operation that resulted in their death.",
+      "question": "Who were the two men killed by ICE in July 2026?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "DHS issued a temporary halt to traffic stop arrests on July 14 after the two killings, with an exception for 'egregious criminal aliens.' Trump overturned the directive within 24 hours via a Truth Social post, instructing agents to continue traffic stops.",
+      "question": "Did DHS actually halt ICE traffic stops?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "At least 11 people have been fatally shot by federal immigration officers since Trump took office. Five of those 11 were killed during traffic stops. In none of the cases were the agents wearing body cameras.",
+      "question": "How many people has ICE killed since Trump's second term?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "In Houston, witnesses in the van with Salgado said no officer was ever in the vehicle's path and shots came from the sides. In Maine, Durán told agents 'I tried to stop' before he died, and eyewitness video showed a car moving slowly while agents chased and fired.",
+      "question": "What did witnesses say contradicted DHS claims?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "ICE fatal shooting",
+    "Lorenzo Salgado Araujo",
+    "Joan Sebastian Duran Guerrero",
+    "Biddeford Maine ICE",
+    "traffic stop killing",
+    "DHS halt overturned"
+  ],
+  "leadParagraph": "In the span of six days, ICE agents shot and killed two unarmed men — neither the target of the operation that killed them. DHS halted traffic stop arrests nationwide. Trump overturned the halt within 24 hours. Eleven people have now been killed by federal immigration officers since Trump's second term began, five of them during traffic stops.",
+  "linkedPitch": null,
+  "location": "Biddeford, Maine / Houston, Texas",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Crowd of protesters holding signs against ICE in Biddeford, Maine after a fatal shooting by immigration agents",
+    "asset": {
+      "_ref": "image-ad47f6af9bd42b4afd7609f51d08d6f839f50f2e-5000x3333-webp",
+      "_type": "reference"
+    },
+    "caption": "Demonstrators protest a fatal ICE shooting in Biddeford, Maine on July 13, 2026",
+    "credit": "Boston Globe"
+  },
+  "methodology": "Reported using coverage from CNN, The Guardian, New York Times, Portland Press Herald, and ABC13 Houston. Eyewitness accounts cross-referenced with official DHS statements. Casualty statistics verified against Guardian tracking of ICE-involved killings.",
+  "needsReview": null,
+  "publishedAt": "2026-07-14T23:30:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "ice-agent-kills-wrong-man-houston",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "nolan-wells-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "sonya-massey-convicted-murderer-sean-grayson-system-justice",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "baby-kohen-wiley-senatobia-police-shooting",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "kohen-wiley-autopsy-homicide-independent-finding",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "patriot-front-july-4-dc-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "ICE agents killed two unarmed men in six days — neither was the arrest target. DHS halted traffic stops. Trump overturned the ban within a day. Eleven killed since January.",
+    "metaTitle": "ICE Kills Again: Two Fatal Shootings, a Halt Overturned in 24 Hours",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "ice-kills-again-two-fatal-shootings-in-one-week-a-policy-halted-overnight-and-a-president-who"
+  },
+  "tags": [
+    "ICE",
+    "Trump Administration",
+    "Police Violence",
+    "Immigration",
+    "Human Rights",
+    "Biddeford",
+    "Houston",
+    "Maine"
+  ],
+  "title": "ICE Kills Again: Two Fatal Shootings in One Week, a Policy Halted Overnight, and a President Who Demands More",
+  "updatedAt": null,
+  "videoLink": null
+}

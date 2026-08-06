@@ -1,0 +1,70 @@
+{
+  "slug": "four-apartments-nine-martyrs-one-nine-year-old-girl-left-alive-this-is-israel-s-ceasefire",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "src-qnn-gaza-strikes-jun4-2026",
+      "description": "On-scene footage and casualty reporting from Gaza City strikes on June 4, 2026.",
+      "isAnonymous": null,
+      "label": "Quds News Network — Gaza City Strike Coverage",
+      "type": "onscene",
+      "url": "https://x.com/QudsNen/status/2062449125191209190"
+    },
+    {
+      "_id": "src-countercurrents-gaza-nine-killed",
+      "description": "Detailed reporting on four simultaneous airstrikes targeting residential apartments in Gaza City.",
+      "isAnonymous": null,
+      "label": "Countercurrents — Israeli Strikes Kill Nine Palestinians",
+      "type": "article",
+      "url": "https://countercurrents.org/2026/06/israeli-strikes-kill-nine-palestinians-overnight-in-gaza-wiping-out-entire-family/"
+    },
+    {
+      "_id": "src-latimes-gaza-strikes-jun4",
+      "description": "AP reporting on Gaza City strikes with witness testimony from Al-Shifa Hospital.",
+      "isAnonymous": null,
+      "label": "Los Angeles Times — 9 Killed in Strikes in Gaza Overnight",
+      "type": "article",
+      "url": "https://www.latimes.com/world-nation/story/2026-06-04/9-killed-in-strikes-in-gaza-overnight-hospital-says"
+    },
+    {
+      "_id": "src-independent-gaza-airstrike-jun4",
+      "description": "UK outlet with Reuters footage of destroyed residential apartments.",
+      "isAnonymous": null,
+      "label": "The Independent — Israeli Pre-Dawn Airstrike Kills Nine",
+      "type": "article",
+      "url": "https://www.independent.co.uk/news/world/middle-east/gaza-israel-attack-ceasefire-palestine-b2989418.html"
+    },
+    {
+      "_id": "src-ypagency-gaza-jun4",
+      "description": "Family-by-family breakdown of victims including Labad, Ghoul, and Muhanna families.",
+      "isAnonymous": null,
+      "label": "Yemen Press Agency — Gaza City Residential Strikes",
+      "type": "article",
+      "url": "https://en.ypagency.net/394825"
+    },
+    {
+      "_id": "src-reuters-gaza-936-dead",
+      "description": "Ongoing coverage confirming 936+ Palestinians killed since ceasefire.",
+      "isAnonymous": null,
+      "label": "Reuters — Israeli Fire Kills Palestinians in Gaza",
+      "type": "article",
+      "url": "https://www.reuters.com/world/israel-hamas/"
+    },
+    {
+      "_id": "src-guardian-lebanon-ceasefire-jun4",
+      "description": "Live coverage confirming Gaza casualties amid Lebanon ceasefire.",
+      "isAnonymous": null,
+      "label": "The Guardian — Middle East Crisis Live",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/live/2026/jun/04/middle-east-crisis-israel-lebanon-hezbolllah-us-ceasefire-southern-military-attacks-continue-latest-news-updates"
+    },
+    {
+      "_id": "src-democracy-now-ceasefire-violations",
+      "description": "Reports documenting 11 ceasefire violations in 24 hours.",
+      "isAnonymous": null,
+      "label": "Democracy Now! — Israel Continues to Violate Gaza Ceasefire",
+      "type": "article",
+      "url": "https://www.democracynow.org/2026/6/2/headlines/israel_continues_to_violate_gaza_ceasefire_killing_3_more_palestinians"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "slug": "spain-crushes-argentina-to-claim-2026-world-cup-as-messi-s-dream-dies-in-new-jersey",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-fifa-spain-v-argentina-match-centre",
+      "description": null,
+      "isAnonymous": null,
+      "label": "FIFA — Spain v Argentina Match Centre",
+      "type": "media",
+      "url": "https://www.fifa.com/en/match-centre/match/17/285023/289292/400021543"
+    },
+    {
+      "_id": "source-yahoo-sports-spain-suffocates-lionel-messi-and-argentina-wins-world-cup-on-ferra",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Yahoo Sports — Spain suffocates Lionel Messi and Argentina, wins World Cup on Ferran Torres' extra-time winner",
+      "type": "media",
+      "url": "https://sports.yahoo.com/soccer/live/spain-argentina-world-cup-2026-score-result-schedule-live-updates-130000682.html"
+    },
+    {
+      "_id": "source-the-athletic-spain-win-2026-world-cup-to-end-messi-and-argentinas-dream",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Athletic — Spain win 2026 World Cup to end Messi and Argentina's dream",
+      "type": "media",
+      "url": "https://www.nytimes.com/athletic/live-blogs/spain-vs-argentina-live-updates-world-cup-2026-final-score-result/o7c5wGK8uury/"
+    },
+    {
+      "_id": "source-usa-today-spain-beats-argentina-in-2026-world-cup-final",
+      "description": null,
+      "isAnonymous": null,
+      "label": "USA Today — Spain beats Argentina in 2026 World Cup final",
+      "type": "media",
+      "url": "https://www.usatoday.com/story/sports/soccer/worldcup/2026/07/19/argentina-spain-world-cup-live-score-final-lineups-messi-watch-highlights/90970500007/"
+    },
+    {
+      "_id": "source-usa-today-argentina-and-spain-took-opposite-world-cup-paths-to-the-final",
+      "description": null,
+      "isAnonymous": null,
+      "label": "USA Today — Argentina and Spain took opposite World Cup paths to the final",
+      "type": "media",
+      "url": "https://www.usatoday.com/story/sports/soccer/worldcup/2026/07/18/argentina-spain-world-cup-final-knockout-paths/90967530007/"
+    }
+  ]
+}

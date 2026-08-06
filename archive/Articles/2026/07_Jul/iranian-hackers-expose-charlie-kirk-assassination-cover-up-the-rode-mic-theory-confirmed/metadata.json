@@ -1,0 +1,156 @@
+{
+  "_id": "iranian-hackers-charlie-kirk-rode-mic-theory",
+  "allowComments": null,
+  "author": {
+    "_ref": "DJ1Y76QLqJX8nukZ868jxy",
+    "_type": "reference",
+    "name": "Ash Fawkes"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "aca0a339ee4e",
+      "_ref": "719c58a9-cc8f-4c27-9b85-9dec7587b79a",
+      "_type": "reference"
+    },
+    {
+      "_key": "837a96c35580",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-politics",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-world-news",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Iranian hackers breached FBI Director Kash Patel's emails and Mossad communications, revealing evidence that Charlie Kirk was killed by a shaped explosive charge disguised as a RØDE microphone — not a sniper's bullet. The leaked files point to TPUSA-IDF coordination.",
+  "eventDate": "2026-04-03T12:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "The RØDE mic theory suggests Charlie Kirk was killed not by a sniper's bullet but by a miniature shaped explosive charge hidden inside his RØDE Wireless Pro microphone. The device was reportedly designed to detonate downward into his chest but malfunctioned, sending shrapnel upward into his neck.",
+      "question": "What is the RØDE mic theory?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "According to an anonymous source identifying as part of the Iranian hacking group, they obtained evidence from FBI Director Kash Patel's emails and Mossad communications showing the procurement, testing, and deployment of the explosive device — including a $500,000 DOD contract for a miniature demolition charge from Accurate Energetic Systems in Tennessee.",
+      "question": "What evidence do the Iranian hackers claim to have?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "On October 10, 2025, one month after Kirk's assassination, the Accurate Energetic Systems facility in McEwen, Tennessee exploded, killing 16 people. The hackers allege this was deliberate destruction of evidence. The official cause was ruled a chain reaction during commercial mining booster production.",
+      "question": "What happened at the AES plant in Tennessee?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Tyler James Robinson is the 22-year-old from Washington, Utah, charged with Kirk's aggravated murder and facing the death penalty. Ballistics analysis showed the bullet from the scene did not match his rifle. The Iranian hackers and independent researchers argue he is a patsy in a larger conspiracy.",
+      "question": "Who is Tyler Robinson?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Charlie Kirk assassination",
+    "Iranian hackers",
+    "RØDE microphone theory",
+    "shaped charge explosive",
+    "Mossad leaked files",
+    "TPUSA conspiracy",
+    "Kash Patel email hack",
+    "Accurate Energetic Systems",
+    "Fort Huachuca",
+    "inside job"
+  ],
+  "leadParagraph": "When Iranian hackers breached the email accounts of FBI Director Kash Patel and Mossad operatives, they found something the US government has spent months trying to bury: evidence that Charlie Kirk was not killed by a lone gunman, but by a miniature shaped explosive charge disguised as his RØDE Wireless Pro microphone, manufactured at a DOD facility in Tennessee — and the trail leads directly to Turning Point USA insiders and Israeli intelligence.",
+  "linkedPitch": null,
+  "location": "United States / Israel / Iran",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Police tape and emergency vehicles at Utah Valley University campus after Charlie Kirk was shot on September 10, 2025",
+    "asset": {
+      "_ref": "image-569a28578a59b6c049447e8d35205a101e40d3d2-1200x675-webp",
+      "_type": "reference"
+    },
+    "caption": "Law enforcement responds to the scene after Charlie Kirk was fatally shot at Utah Valley University in Orem, Utah on September 10, 2025",
+    "credit": "Fox News via Getty Images"
+  },
+  "methodology": "Reported using leaked documents from Iranian hacking operations targeting FBI Director Kash Patel's emails and Mossad communications, IBTimes UK coverage, public DOD procurement records, Wikipedia documentation of the AES Tennessee explosion, Candace Owens broadcast analysis, and open-source forensic discussion from r/conspiracy and other independent researchers. Claims presented as reported by sources; not independently verified by UnTelevised Media.",
+  "needsReview": null,
+  "publishedAt": "2026-07-12T20:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "40416b615c03",
+      "_ref": "handala-leaks-israeli-navy-officers-sumud-flotilla",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "BOAIKFRWNleR9aRm6R2wrc",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "DJ1Y76QLqJX8nukZ868vhy",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    },
+    {
+      "_key": "8003fe78f08c",
+      "_ref": "white-house-correspondents-dinner-shooting",
+      "_type": "reference"
+    },
+    {
+      "_key": "7b406870ba59",
+      "_ref": "veterans-arrested-protesting-iran-war",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "iranian-hackers-expose-charlie-kirk-assassination-cover-up-the-rode-mic-theory-confirmed"
+  },
+  "tags": [
+    "Charlie Kirk",
+    "Iranian Hackers",
+    "Mossad",
+    "TPUSA",
+    "Kash Patel",
+    "RØDE Mic Theory",
+    "Shaped Charge",
+    "AES Tennessee",
+    "Tyler Robinson",
+    "Candace Owens"
+  ],
+  "title": "Iranian Hackers Expose Charlie Kirk Assassination Cover-Up: The RØDE Mic Theory Confirmed",
+  "updatedAt": null,
+  "videoLink": null
+}

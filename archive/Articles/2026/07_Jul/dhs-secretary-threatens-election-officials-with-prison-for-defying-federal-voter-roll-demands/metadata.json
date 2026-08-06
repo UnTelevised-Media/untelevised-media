@@ -1,0 +1,135 @@
+{
+  "_id": "dhs-threatens-election-officials-prison",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Homeland Security Secretary Markwayne Mullin threatened state election officials in all 50 states with fines, penalties, and prison time if they refuse to feed voter rolls through a flawed federal database — a demand with zero legal basis that echoes Jim Crow-era voter suppression.",
+  "eventDate": "2026-07-17T00:00",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "No. Federal courts have repeatedly ruled that the executive branch has very limited authority to demand access to or changes in state voter rolls. The Constitution delegates election administration to the states.",
+      "question": "Can DHS legally force states to use the SAVE database?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "The Systematic Alien Verification for Entitlements was originally designed to verify citizenship for government benefit applications. The Trump administration retrofitted it as a voter screening tool, despite documented errors that falsely flag eligible citizens as noncitizens.",
+      "question": "What is the SAVE database?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Mullin did not claim any of them voted. The 250,000 figure was based on comparisons with commercial data — the kind used for marketing — and experts called the methodology 'irresponsible.'",
+      "question": "Did any of the alleged 250,000 noncitizens actually vote?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "California Governor Gavin Newsom said 'Try us.' Senate Minority Leader Chuck Schumer vowed to fight. Idaho's Republican officials also pushed back against DOJ threats. The resistance was bipartisan.",
+      "question": "Who pushed back?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": false,
+  "keywords": [
+    "voter roll purges",
+    "SAVE database errors",
+    "state election officials",
+    "criminal threats",
+    "voter suppression",
+    "Trump election fraud claims"
+  ],
+  "leadParagraph": "On July 17, 2026, DHS Secretary Markwayne Mullin stood before cameras and threatened to imprison state election officials who refuse to funnel voter data through the SAVE database — a system that has repeatedly misidentified eligible citizens. Governors, secretaries of state, and civil rights organizations pushed back. The question is whether the threats have any legal basis — or whether they're designed to intimidate regardless.",
+  "linkedPitch": null,
+  "location": "Washington, D.C.",
+  "mainImage": {
+    "_type": "image",
+    "alt": "DHS Secretary Markwayne Mullin at podium during press conference on election security, July 17, 2026",
+    "asset": {
+      "_ref": "image-dd05f0c6248c32b5ac75bc869071f52173b64c50-1024x682-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Reporting based on official statements from DHS Secretary Markwayne Mullin, analysis from the Brennan Center for Justice and Center for Election Innovation & Research, and reporting from NBC News, POLITICO, Democracy Docket, and Common Dreams.",
+  "needsReview": false,
+  "publishedAt": "2026-07-20T22:00",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "trump-hollowing-out-guardrails-op-ed",
+      "_ref": "trump-hollowing-out-guardrails-op-ed",
+      "_type": "reference"
+    },
+    {
+      "_key": "pam-bondi-corruption-chronicle-2026",
+      "_ref": "pam-bondi-corruption-chronicle-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "kash-patel-fbi-director-corruption",
+      "_ref": "kash-patel-fbi-director-corruption",
+      "_type": "reference"
+    },
+    {
+      "_key": "trump-pardons-corrupt-officials-dismantles-justice-investigation",
+      "_ref": "trump-pardons-corrupt-officials-dismantles-justice-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "todd-blanche-corrupt-ascent-2026",
+      "_ref": "todd-blanche-corrupt-ascent-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "pam-bondi-corruption-chronicle-2026",
+      "_ref": "pam-bondi-corruption-chronicle-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "dhs-secretary-threatens-election-officials-with-prison-for-defying-federal-voter-roll-demands"
+  },
+  "tags": [
+    "DHS",
+    "Markwayne Mullin",
+    "voter suppression",
+    "SAVE database",
+    "election security",
+    "Trump",
+    "voter purges",
+    "First Amendment",
+    "federalism"
+  ],
+  "title": "DHS Secretary Threatens Election Officials With Prison for Defying Federal Voter Roll Demands",
+  "updatedAt": "2026-07-27T17:26:52.221Z",
+  "videoLink": ""
+}

@@ -1,0 +1,102 @@
+{
+  "slug": "the-siege-of-delaney-hall-a-week-of-clashes-families-in-agony-and-the-machine-that-crushes",
+  "totalSources": 12,
+  "sources": [
+    {
+      "_id": "the-guardian--delaney-hall-hunger-strike-coverage",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Delaney Hall Hunger Strike Coverage",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/may/27/new-jersey-ice-immigration"
+    },
+    {
+      "_id": "time--what-to-know-about-delaney-hall-protests",
+      "description": null,
+      "isAnonymous": null,
+      "label": "TIME — What to Know About Delaney Hall Protests",
+      "type": "article",
+      "url": "https://time.com/article/2026/05/26/delaney-hall-ice-protests-new-jersey-dhs-geo-group-hunger-strike/"
+    },
+    {
+      "_id": "gothamist--ice-transfers-detainee-protesters-clash",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Gothamist — ICE Transfers Detainee, Protesters Clash",
+      "type": "article",
+      "url": "https://gothamist.com/news/congressmember-denied-entry-to-nj-ice-detention-facility-protestors-clash-with-officers"
+    },
+    {
+      "_id": "whyy--escalating-violence-at-delaney-hall",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WHYY — Escalating Violence at Delaney Hall",
+      "type": "article",
+      "url": "https://whyy.org/articles/delaney-hall-ice-facility-tensions/"
+    },
+    {
+      "_id": "cbs-new-york--state-police-clash-with-protesters",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS New York — State Police Clash with Protesters",
+      "type": "article",
+      "url": "https://www.cbsnews.com/newyork/news/delaney-hall-ice-detention-facility-protests-clashes/"
+    },
+    {
+      "_id": "cbs-new-york--dueling-rallies-at-delaney-hall",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS New York — Dueling Rallies at Delaney Hall",
+      "type": "article",
+      "url": "https://www.cbsnews.com/newyork/news/delaney-hall-protests-ice-rally-saturday-may-30/"
+    },
+    {
+      "_id": "abc7-new-york--state-police-set-up-protest-zone",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ABC7 New York — State Police Set Up Protest Zone",
+      "type": "article",
+      "url": "https://abc7ny.com/post/delaney-hall-protests-6-arrests-protesters-clash-ice-agents-outside-newark-nj/19192526/"
+    },
+    {
+      "_id": "nbc-new-york--protesters-clash-with-ice-agents",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC New York — Protesters Clash with ICE Agents",
+      "type": "article",
+      "url": "https://www.nbcnewyork.com/news/local/protesters-clash-ice-agents-delaney-hall-new-jersey/6506665/"
+    },
+    {
+      "_id": "the-independent--ice-retaliating-against-hunger-strikers",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Independent — ICE Retaliating Against Hunger Strikers",
+      "type": "article",
+      "url": "https://www.the-independent.com/news/world/americas/us-politics/delaney-hall-ice-protest-hunger-strike-b2983980.html"
+    },
+    {
+      "_id": "cnn--flashpoints-and-fury-at-nj-ice-facility",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — Flashpoints and Fury at NJ ICE Facility",
+      "type": "article",
+      "url": "https://www.cnn.com/2026/05/29/us/ice-protests-new-jersey"
+    },
+    {
+      "_id": "american-immigration-council--ice-detention-transparency",
+      "description": null,
+      "isAnonymous": null,
+      "label": "American Immigration Council — ICE Detention Transparency",
+      "type": "article",
+      "url": "https://www.americanimmigrationcouncil.org/blog/ice-what-happens-in-detention-centers/"
+    },
+    {
+      "_id": "dhs-press-release--debunking-smears-against-ice-may-25-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "DHS Press Release — Debunking Smears Against ICE (May 25, 2026)",
+      "type": "statement",
+      "url": "https://www.dhs.gov/news/2026/05/25/dhs-debunks-new-jersey-sanctuary-politicians-smears-against-ice-facility"
+    }
+  ]
+}

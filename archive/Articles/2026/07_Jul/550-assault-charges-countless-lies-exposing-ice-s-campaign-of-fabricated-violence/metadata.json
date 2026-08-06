@@ -1,0 +1,136 @@
+{
+  "_id": "ice-550-assault-charges-crumbling",
+  "allowComments": true,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A New York Times investigation found the Trump administration filed assault charges against more than 550 people caught in its immigration dragnet. Nearly half the resolved cases collapsed — agents destroyed evidence, lied in court, and attacked protesters. Meanwhile, ICE kills with impunity as the FBI is pulled from investigations.",
+  "eventDate": "2026-07-18T00:00",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "Of 400+ resolved cases, nearly half — roughly 200 — had charges thrown out, withdrawn, or ended in acquittal due to agent misconduct, destroyed evidence, or fabricated testimony.",
+      "question": "How many ICE assault cases have collapsed?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Johan Sebastián Durán Guerrero, 25, shot in Biddeford, Maine on July 13. Lorenzo Salgado Araujo, shot in Houston, Texas on July 7. Neither was the intended target of enforcement action.",
+      "question": "Who are the people killed by ICE recently?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "ICE agents were told the FBI will no longer investigate confrontations involving immigration agents. HSI — a unit within ICE — will investigate itself, despite having no jurisdiction over civil rights violations.",
+      "question": "What does the FBI pullback mean?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "ICE has arrested an average of more than 1,400 people per day in July 2026 — the highest rate under the Trump administration, with over 10,000 detained in the first five days of the month.",
+      "question": "How many people is ICE arresting?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": false,
+  "keywords": [
+    "ICE assault charges",
+    "NYT investigation",
+    "evidence destruction",
+    "victims of ICE",
+    "deportation machine",
+    "carceral capitalism"
+  ],
+  "leadParagraph": "A New York Times investigation has revealed that the Trump administration filed assault charges against over 550 people in its immigration dragnet — and nearly half the resolved cases have collapsed due to agent misconduct, destroyed evidence, and fabricated testimony. Two more people were killed by ICE in one week. The FBI has been told to stop investigating ICE confrontations. The machinery of impunity is now fully automated.",
+  "linkedPitch": null,
+  "location": "United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Protesters gather on a bridge in Houston demanding prosecution of ICE agents after fatal shootings",
+    "asset": {
+      "_ref": "image-8e57a7ddff2f6decb83db8ba594fe5c639b2ed50-2560x1707-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Reporting based on the New York Times investigation into ICE assault charges, Washington Post data on ICE arrest surges, Truthout and Guardian reporting on ICE killings and the FBI investigation pullback, and official statements from ICE and DOJ.",
+  "needsReview": false,
+  "publishedAt": "2026-07-20T22:00",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "ice-kills-again-two-fatal-shootings-halt-overturned",
+      "_ref": "ice-kills-again-two-fatal-shootings-halt-overturned",
+      "_type": "reference"
+    },
+    {
+      "_key": "ice-529-million-colorado-detention-center-geo-group",
+      "_ref": "ice-529-million-colorado-detention-center-geo-group",
+      "_type": "reference"
+    },
+    {
+      "_key": "immigration-detention-system-expansion-2026",
+      "_ref": "immigration-detention-system-expansion-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "ice-agent-kills-wrong-man-houston",
+      "_ref": "ice-agent-kills-wrong-man-houston",
+      "_type": "reference"
+    },
+    {
+      "_key": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_ref": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_type": "reference"
+    },
+    {
+      "_key": "0c16c198-32c8-40ca-a5f3-4b0591cf3921",
+      "_ref": "0c16c198-32c8-40ca-a5f3-4b0591cf3921",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "550-assault-charges-countless-lies-exposing-ice-s-campaign-of-fabricated-violence"
+  },
+  "tags": [
+    "ICE",
+    "Trump",
+    "assault charges",
+    "police brutality",
+    "immigration detention",
+    "deportation",
+    "Johan Guerrero",
+    "Lorenzo Salgado Araujo",
+    "FBI",
+    "private prisons"
+  ],
+  "title": "550+ Assault Charges, Countless Lies: Exposing ICE's Campaign of Fabricated Violence",
+  "updatedAt": "2026-07-27T17:28:15.239Z",
+  "videoLink": ""
+}

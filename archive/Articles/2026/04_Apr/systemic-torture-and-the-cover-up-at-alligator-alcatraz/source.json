@@ -1,0 +1,54 @@
+{
+  "slug": "systemic-torture-and-the-cover-up-at-alligator-alcatraz",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-usa-today-alcatraz-2026-04-16",
+      "description": "April 16, 2026 - Details the April 2, 2026 incident where guards beat detainees, broke a wrist, pepper sprayed everyone in the cage, and an elderly man passed out after phones were cut off in violation of court order.",
+      "isAnonymous": false,
+      "label": "USA Today — Alligator Alcatraz: Tales of Abuse, Attacks by Guards, Cutting Off Phones",
+      "type": "article",
+      "url": "https://www.usatoday.com/story/news/local/florida/2026/04/16/alligator-alcatraz-tales-of-abuse-attacks-by-guards-cutting-off-phones-more/89596431007/"
+    },
+    {
+      "_id": "source-miami-herald-alcatraz-2026-04-13",
+      "description": "April 13, 2026 - Katie Blankenship's sworn declaration about the April 2 incident: officers broke a detainee's wrist, pepper sprayed everyone in the cage, an elderly man passed out. Phone cutoff was direct violation of March 27 court order.",
+      "isAnonymous": false,
+      "label": "Miami Herald — Alligator Alcatraz Phones Were Cut Off. Then the Beatings Began.",
+      "type": "article",
+      "url": "https://www.miamiherald.com/news/local/immigration/article315375364.html"
+    },
+    {
+      "_id": "source-truthout-alcatraz-2026-04-13",
+      "description": "April 13, 2026 - Details on Nakamoto Group's history of rubber-stamping ICE inspections (called 'useless' by ICE staff in 2018 DHS OIG report). Mark Saunders testimony that policies were 'written rather quickly' and 'lag behind practices.'",
+      "isAnonymous": false,
+      "label": "Truthout — Judge's Order for 'Alligator Alcatraz' May Shape Legal Access at Other ICE Jails",
+      "type": "article",
+      "url": "https://truthout.org/articles/judges-order-for-alligator-alcatraz-may-shape-legal-access-at-other-ice-jails/"
+    },
+    {
+      "_id": "source-amnesty-alcatraz-2025-12-04",
+      "description": "December 4, 2025 - Comprehensive report documenting torture at Alligator Alcatraz: overflowing toilets with fecal matter seeping into sleeping areas, limited showers, 24-hour lights, cameras above toilets, poor food and water.",
+      "isAnonymous": false,
+      "label": "Amnesty International — Torture and Enforced Disappearances in the Sunshine State",
+      "type": "statement",
+      "url": "https://www.amnestyusa.org/reports/torture-and-enforced-disappearances-in-the-sunshine-state-human-rights-violations-at-alligator-alcatraz-and-krome-in-florida/"
+    },
+    {
+      "_id": "source-cbs12-alcatraz-2026-03-02",
+      "description": "March 2, 2026 - $264.2 million spent in 259 days ($1.2 million daily). $78.5 million contract to Critical Response Strategies. DeSantis announced $608 million FEMA reimbursement, but DOJ blocking funding. $1.49 billion grant requested.",
+      "isAnonymous": false,
+      "label": "CBS 12 — New Records Show Florida Officials Spent Over $1.2 Million Daily on 'Alligator Alcatraz'",
+      "type": "article",
+      "url": "https://cbs12.com/news/local/new-records-show-florida-officials-spent-over-12-million-a-day-on-alligator-alcatraz-fdem-149-billion-grant-federal-reimbursement-608-million-fema-award-daily-burn-rate-12-million-per-day-emergency-preparedness-response-fund-public-r"
+    },
+    {
+      "_id": "source-wusf-alcatraz-2026-04-15",
+      "description": "April 15, 2026 - Phone service was restored the next day without any explanation for why it was cut off. Blankenship's declaration was included in a court filing accusing state and federal officials of failing to comply with federal judge's preliminary injunction.",
+      "isAnonymous": false,
+      "label": "WUSF — Lawyer Says Guards Beat and Pepper-Sprayed Detainees at Florida's 'Alligator Alcatraz'",
+      "type": "article",
+      "url": "https://www.wusf.org/courts-law/2026-04-15/lawyer-says-guards-beat-pepper-sprayed-detainees-florida-alligator-alcatraz"
+    }
+  ]
+}

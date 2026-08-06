@@ -1,0 +1,62 @@
+{
+  "slug": "rural-communities-seize-bolivias-oil-field-halt-production-in-santa-cruz",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-bolivia-oil-field-seizure-democracynow",
+      "description": "Published June 4, 2026 — Democracy Now! reports on rural communities in Bolivia seizing the Humberto Suárez Roca oil field and calling for President Paz's resignation amid a general strike.",
+      "isAnonymous": false,
+      "label": "Democracy Now! — Rural Communities in Bolivia Seize Oil Field, Calling on President Paz to Resign",
+      "type": "article",
+      "url": "https://www.democracynow.org/2026/6/4/headlines/rural_communities_in_bolivia_seize_oil_field_calling_on_president_paz_to_resign"
+    },
+    {
+      "_id": "source-bolivia-oil-field-seizure-hotair",
+      "description": "Published June 5, 2026 — HotAir provides extensive coverage of Bolivia's protests, oil field seizures, and the political crisis.",
+      "isAnonymous": false,
+      "label": "HotAir — Bolivia Has Spent the Past Month in an Uproar",
+      "type": "article",
+      "url": "https://hotair.com/tree-hugging-sister/2026/06/05/bolivia-has-spent-the-past-month-in-an-uproar-n3815655"
+    },
+    {
+      "_id": "source-bolivia-oil-field-seizure-jacobin",
+      "description": "Published May 2026 — Jacobin explains the Land 1720 law and the march of peasant and Indigenous communities demanding Paz's resignation.",
+      "isAnonymous": false,
+      "label": "Jacobin — Bolivians Declare a General Strike Against Their President",
+      "type": "article",
+      "url": "https://jacobin.com/2026/05/bolivia-indigenous-land-rights-privatization-paz"
+    },
+    {
+      "_id": "source-bolivia-oil-field-seizure-wsws",
+      "description": "Published June 6, 2026 — World Socialist Web Site covers the sixth week of Bolivia's workers' insurrection and repression.",
+      "isAnonymous": false,
+      "label": "World Socialist Web Site — Bolivian workers' insurrection enters sixth week defying Paz-Trump counterrevolutionary conspiracy",
+      "type": "article",
+      "url": "https://www.wsws.org/en/articles/2026/06/06/mpkz-j06.html"
+    },
+    {
+      "_id": "source-bolivia-oil-field-seizure-reuters",
+      "description": "Published June 3, 2026 — Reuters reports on the resignation of ministers and government response to protests.",
+      "isAnonymous": false,
+      "label": "Reuters — Bolivia's new defense minister pledges to clear roadblocks as protests drag on",
+      "type": "article",
+      "url": "https://www.reuters.com/world/americas/bolivias-new-defense-minister-pledges-clear-roadblocks-protests-drag-on-2026-06-03/"
+    },
+    {
+      "_id": "source-bolivia-oil-field-seizure-commondreams",
+      "description": "Published May 2026 — Common Dreams covers the miners' and unions' march and the 20% wage demand.",
+      "isAnonymous": false,
+      "label": "Common Dreams — Miles and Miles of Protest in Bolivia as Miners and Unions March Against Privatization and Low Wages",
+      "type": "article",
+      "url": "https://www.commondreams.org/news/bolivia-protests"
+    },
+    {
+      "_id": "source-bolivia-oil-field-seizure-upi",
+      "description": "Published June 3, 2026 — UPI reports on the defense and education ministers' resignations and the state of emergency bill.",
+      "isAnonymous": false,
+      "label": "UPI — Bolivian president pushes state of emergency law as 2 ministers resign",
+      "type": "article",
+      "url": "https://www.upi.com/Top_News/World-News/2026/06/03/latam-bolivia-regulate-states-of-emergency-bill/6701780513248/"
+    }
+  ]
+}

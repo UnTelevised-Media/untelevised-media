@@ -1,0 +1,151 @@
+{
+  "_id": "justice-for-dj-duane-manzanares-police-killing-denver",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "98a2e238d52d",
+      "_ref": "NIYNah6RoM2MjtNb6HiKPc",
+      "_type": "reference"
+    },
+    {
+      "_key": "148ff25cb11e",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Duane 'DJ' Manzanares Jr., a 30-year-old father from Pueblo, was shot 11 times by Denver police on June 13, 2021 — while his 8-year-old son fought leukemia in Children's Hospital Colorado. The DPD waited 48 hours to notify his family.",
+  "eventDate": "2021-06-13T17:30:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Duane Edward Manzanares Jr., known as DJ, was a 30-year-old father from Pueblo, Colorado. He worked in landscaping and construction, raised his 8-year-old son Damien as a single father, and was described by family as having a brilliant smile and a big heart.",
+      "question": "Who was Duane 'DJ' Manzanares Jr.?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "His 8-year-old son Damien had been diagnosed with acute leukemia on June 11, 2021, and was flown via Flight for Life to Children's Hospital Colorado in Denver. DJ went to be at his son's bedside in the ICU.",
+      "question": "Why was DJ Manzanares in Denver when he was killed?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Three Denver police officers — Samuel Bailey, Ryan Nelson, and Steven Whiteman — encountered Manzanares near East Colfax Avenue and Yosemite Street. Police say he had a handgun in his waistband and was carrying a bottle of whiskey. After officers ordered him to put his hands up, they claim he reached toward his waistband and they opened fire, shooting 11 rounds. Manzanares was struck six times and pronounced dead at a hospital.",
+      "question": "How did the shooting happen?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "More than 48 hours. DJ's mother, Mary Ann Medina-Trujillo, discovered her son was dead from videos circulating on social media — not from the Denver Police Department. Police did not officially notify her until late Tuesday afternoon, despite DJ having identification and a registered vehicle at the scene.",
+      "question": "How long did it take police to notify his family?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "No. DJ Manzanares's killing was the fifth fatal police shooting in Denver in under a month. Between May 14 and June 13, 2021, Denver police killed five people. Colorado is among the five states with the highest rates of fatal police shootings in the country.",
+      "question": "Was this an isolated incident in Denver?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Duane Manzanares Jr",
+    "DJ Manzanares Denver police shooting",
+    "Denver police killing Colfax",
+    "police shot father leukemia son",
+    "Children's Hospital Denver police",
+    "Denver Police Department 11 rounds",
+    "East Colfax Yosemite shooting",
+    "police cover up Denver",
+    "officer involved shooting Denver 2021",
+    "Mary Ann Medina-Trujillo"
+  ],
+  "leadParagraph": "On June 13, 2021, three Denver police officers shot and killed Duane 'DJ' Manzanares Jr., a 30-year-old father from Pueblo, Colorado, who was in Denver because his 8-year-old son had just been diagnosed with acute leukemia. Officers fired 11 rounds into Manzanares on East Colfax Avenue. The Denver Police Department waited more than 48 hours to notify his family, who discovered his death from internet videos — not from police.",
+  "linkedPitch": null,
+  "location": "Denver, Colorado",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Police investigation at a shooting scene on a Denver street with evidence markers and emergency vehicles",
+    "asset": {
+      "_ref": "image-202044d90dc721aed1aed0505a2ea852fa66f9d2-1480x833-webp",
+      "_type": "reference"
+    },
+    "caption": "Police respond to a shooting on a Denver street. Duane Manzanares was killed by Denver police near East Colfax Avenue and Yosemite Street on June 13, 2021.",
+    "credit": "CNN"
+  },
+  "methodology": "This article was reported using public records, witness accounts, Denver Police Department press conference transcripts, Denver District Attorney decision letters, family statements, GoFundMe testimony, and coverage from the Denver Post, Denver7, CBS Colorado, KRDO, and the Denver Gazette. All material facts were cross-referenced across multiple independent sources.",
+  "needsReview": null,
+  "publishedAt": "2021-07-15T12:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "f037abd6c7d1",
+      "_ref": "800k-settlement-dj-manzanares-family-wrongful-death-denver",
+      "_type": "reference"
+    },
+    {
+      "_key": "03b30f71dfba",
+      "_ref": "justice-for-dj-manzanares-the-fight-after-denver-police",
+      "_type": "reference"
+    },
+    {
+      "_key": "cb131facd7ce",
+      "_ref": "YtJR1N6fGBsJu5O68LOEJ4",
+      "_type": "reference"
+    },
+    {
+      "_key": "7f0e0dab2548",
+      "_ref": "Ulg91jjPFgaBD1fUiNoHzK",
+      "_type": "reference"
+    },
+    {
+      "_key": "d0e858d1be0e",
+      "_ref": "YtJR1N6fGBsJu5O68LOL54",
+      "_type": "reference"
+    },
+    {
+      "_key": "082eb1a78077",
+      "_ref": "ice-529-million-colorado-detention-center-geo-group",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Duane 'DJ' Manzanares Jr. was shot 11 times by Denver police while his 8-year-old son fought leukemia in Children's Hospital Colorado. The DPD waited 48 hours to notify his family.",
+    "metaTitle": "Justice for DJ: Denver Police Kill Father Beside Son's Hospital Bed",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "justice-for-dj-denver-police-kill-a-father-beside-his-son-s-hospital-bed"
+  },
+  "tags": [
+    "police brutality",
+    "police killing",
+    "Denver Police Department",
+    "Duane Manzanares",
+    "police violence",
+    "Colorado",
+    "family separation",
+    "children's hospital",
+    "police accountability",
+    "Pueblo Colorado"
+  ],
+  "title": "Justice for DJ: Denver Police Kill a Father Beside His Son's Hospital Bed",
+  "updatedAt": null,
+  "videoLink": null
+}

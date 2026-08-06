@@ -1,0 +1,54 @@
+{
+  "slug": "trump-ballroom-donors-receive-usd50-billion-in-federal-contracts-pay-to-play-exposed",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "src-pc-ballroom-billions-june-2026",
+      "description": "Public Citizen watchdog report finding that corporate donors to Trump's White House ballroom received over $50 billion in new or expanded federal contracts in six months.",
+      "isAnonymous": null,
+      "label": "Public Citizen - Ballroom Billions Report (June 2026)",
+      "type": "document",
+      "url": "https://www.citizen.org/article/ballroom-billions/"
+    },
+    {
+      "_id": "src-wapo-ballroom-donors-50b-june-2026",
+      "description": "Washington Post report on Public Citizen findings that Trump ballroom donors received $50B+ in federal contracts.",
+      "isAnonymous": null,
+      "label": "Washington Post - Donors Won $50B in Contracts After Giving to Trump Ballroom",
+      "type": "article",
+      "url": "https://www.washingtonpost.com/politics/2026/06/04/donors-won-50b-contracts-after-giving-trump-ballroom-project-report-says/"
+    },
+    {
+      "_id": "src-new-republic-ballroom-donors-cashing-in",
+      "description": "The New Republic analysis of Public Citizen report on federal contracts awarded to Trump ballroom donors.",
+      "isAnonymous": null,
+      "label": "The New Republic - Trump Ballroom Donors Are Already Cashing In",
+      "type": "article",
+      "url": "https://newrepublic.com/post/211423/donald-trump-ballroom-donors-government-contracts"
+    },
+    {
+      "_id": "src-common-dreams-ballroom-pay-to-play",
+      "description": "Common Dreams coverage including Sen. Elizabeth Warren and Rep. Jason Crow response, and Sen. Blumenthal legislation to ban anonymous donations.",
+      "isAnonymous": null,
+      "label": "Common Dreams - Trump Ballroom Donors Handed $50B in Federal Contracts",
+      "type": "article",
+      "url": "https://www.commondreams.org/news/trump-ballroom-contracts"
+    },
+    {
+      "_id": "src-spokesman-ballroom-enforcement-suspended",
+      "description": "Spokesman-Review reporting on enforcement actions against ballroom donors and Blumenthal legislation.",
+      "isAnonymous": null,
+      "label": "Spokesman-Review - Ballroom Donors Won $50B, 16 Facing Federal Enforcement",
+      "type": "article",
+      "url": "https://www.spokesman.com/stories/2026/jun/04/ballroom-donors-won-50b-in-contracts-after-giving-/"
+    },
+    {
+      "_id": "src-abc-ballroom-polling-opposition",
+      "description": "ABC News polling data showing Americans oppose Trump's White House ballroom project by a 2-to-1 margin.",
+      "isAnonymous": null,
+      "label": "ABC News - Americans Oppose Trump Ballroom 2-to-1",
+      "type": "data",
+      "url": "https://abcnews.com/Politics/americans-oppose-trump-ballroom-2-1-oppose-signature/story?id=132503095"
+    }
+  ]
+}

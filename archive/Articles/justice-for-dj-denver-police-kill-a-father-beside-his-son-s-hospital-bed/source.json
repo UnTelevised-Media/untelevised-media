@@ -1,0 +1,62 @@
+{
+  "slug": "justice-for-dj-denver-police-kill-a-father-beside-his-son-s-hospital-bed",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-denver-post-pueblo-man-who-died-after-being-shot-multiple-times-by-denver-police",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Denver Post — Pueblo Man Who Died After Being Shot Multiple Times by Denver Police Identified",
+      "type": "article",
+      "url": "https://www.denverpost.com/2021/06/15/denver-police-shooting-east-colfax-man-identified/"
+    },
+    {
+      "_id": "source-denver7-police-defend-officers-actions-in-deadly-northeast-denver-shooting",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Denver7 — Police Defend Officers' Actions in Deadly Northeast Denver Shooting",
+      "type": "article",
+      "url": "https://www.denver7.com/news/local-news/police-defend-officers-actions-in-deadly-northeast-denver-shooting"
+    },
+    {
+      "_id": "source-krdo-family-of-pueblo-man-shot-by-denver-police-hold-rally-in-remembrance",
+      "description": null,
+      "isAnonymous": null,
+      "label": "KRDO — Family of Pueblo Man Shot by Denver Police Hold Rally in Remembrance",
+      "type": "article",
+      "url": "https://krdo.com/news/2021/08/01/family-of-pueblo-man-shot-by-denver-police-hold-rally-in-remembrance/"
+    },
+    {
+      "_id": "source-gofundme-justice-for-duane-damien-mary-ann-medina-trujillo",
+      "description": null,
+      "isAnonymous": null,
+      "label": "GoFundMe — Justice for Duane & Damien (Mary Ann Medina-Trujillo)",
+      "type": "other",
+      "url": "https://www.gofundme.com/f/justice-for-duane-damien"
+    },
+    {
+      "_id": "source-denver-post-denver-will-pay-800000-settlement-in-fatal-police-shooting-of-pueblo",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Denver Post — Denver Will Pay $800,000 Settlement in Fatal Police Shooting of Pueblo Man",
+      "type": "article",
+      "url": "https://www.denverpost.com/2025/03/17/denver-police-settlement-2021-shooting-city-council/"
+    },
+    {
+      "_id": "source-everytown-colorado-among-five-states-with-highest-rates-of-fatal-police-shooting",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Everytown — Colorado Among Five States with Highest Rates of Fatal Police Shootings",
+      "type": "data",
+      "url": "https://www.everytown.org/press/colorado-is-among-five-states-with-the-highest-rates-of-fatal-police-shootings-in-the-country-heres-what-you-need-to-know-about-police-violence/"
+    },
+    {
+      "_id": "source-denver-post-denver-records-highest-number-of-homicides-in-40-years-in-2021",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Denver Post — Denver Records Highest Number of Homicides in 40 Years in 2021",
+      "type": "data",
+      "url": "https://www.denverpost.com/2022/03/14/denver-homicides-2021/amp/"
+    }
+  ]
+}

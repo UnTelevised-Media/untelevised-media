@@ -1,0 +1,46 @@
+{
+  "slug": "he-was-forcibly-absent-thiago-avilas-mother-passes-as-israel-extends-detention-in",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-newarab-thiago-avila-2026-05-06",
+      "description": "May 6, 2026 - Reports on Israeli court extending detention of Thiago Ávila and Saif Abu Keshek, mother's death while son in custody, hunger strikes, and solitary confinement.",
+      "isAnonymous": false,
+      "label": "The New Arab - Thiago Avila mourns mother's death as Israel extends detention",
+      "type": "article",
+      "url": "https://www.newarab.com/news/thiago-avila-mourns-mothers-death-israel-extends-detention"
+    },
+    {
+      "_id": "source-reuters-gaza-flotilla-2026-05-05",
+      "description": "May 5, 2026 - Details on court extending detention of Saif Abu Keshek and Thiago Avila, accusations of aiding enemy and Hamas links, denials of torture, demands from Spain and Brazil.",
+      "isAnonymous": false,
+      "label": "Reuters - Israeli court extends detention of two Gaza flotilla activists until May 10",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/israeli-court-extends-detention-two-gaza-flotilla-activists-until-may-10-2026-05-05/"
+    },
+    {
+      "_id": "source-guardian-spain-demands-release-2026-05-03",
+      "description": "May 3, 2026 - Reports on Spain's foreign ministry demanding immediate release, accounts of extreme brutality and torture during capture, details on interception in international waters.",
+      "isAnonymous": false,
+      "label": "The Guardian - Spain demands release of Gaza flotilla activists 'held illegally' by Israel",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/may/03/gaza-flotilla-activists-spain-brazil-appear-israel-court"
+    },
+    {
+      "_id": "source-un-ohchr-aid-not-crime-2026-05-06",
+      "description": "May 6, 2026 - UN OHCHR statement calling for immediate and unconditional release, stating solidarity with Palestinians and aid delivery 'is not a crime', raising alarm over abuse allegations.",
+      "isAnonymous": false,
+      "label": "UN News - Gaza flotilla: Aid delivery 'not a crime', UN rights office tells Israel",
+      "type": "statement",
+      "url": "https://news.un.org/en/story/2026/05/1167450"
+    },
+    {
+      "_id": "source-greenpeace-sumud-flotilla-2026-04-06",
+      "description": "April 6, 2026 - Statement on Greenpeace's Arctic Sunrise joining the flotilla, framing mission as response to 'genocide, engineered starvation, and humanitarian blockade' in Gaza.",
+      "isAnonymous": false,
+      "label": "Greenpeace MENA - Joins the 2026 Global Sumud Flotilla to Support a Humanitarian Mission to Gaza",
+      "type": "statement",
+      "url": "https://www.greenpeace.org/mena/en/greenpeace-mena-joins-the-2026-global-sumud-flotilla-to-support-a-humanitarian-mission-to-gaza/"
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "_id": "ukraine-cardboard-maidan-zelensky-fires-fedorov-protests",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-3",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "7a3c6e44-cbd8-453f-9119-814348f6a9fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "After Zelensky dismissed popular defense minister Mykhailo Fedorov, Ukrainians took to the streets in the largest domestic protests since 2022 — holding cardboard signs and demanding the technocrat's return over the Soviet-trained general who got him fired.",
+  "eventDate": "2026-07-24T00:00:00Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Fedorov, 29, was Ukraine's defense minister from January to July 2026. He previously served as the country's first Minister of Digital Transformation, creating the Diia government services app. He founded the IT Army of Ukraine after the 2022 Russian invasion and pushed for drone-centric warfare and digital procurement reform at the Defense Ministry.",
+      "question": "Who is Mykhailo Fedorov?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Zelensky dismissed Fedorov on July 15, 2026, citing an 'irresolvable' feud between Fedorov and Gen. Oleksandr Syrskyi, the commander-in-chief of the armed forces. Fedorov had pushed for Syrskyi's removal, advocating for younger, tech-oriented commanders.",
+      "question": "Why was he fired?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "On July 21, Zelensky fired Syrskyi and appointed Gen. Mykhailo Drapatyi as the new commander-in-chief. However, Fedorov rejected Zelensky's offer of a 'prominent position' (reportedly deputy PM for technology), and protests continued demanding his full reinstatement as defense minister.",
+      "question": "What happened as a result of the protests?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "The nickname given to the protests because demonstrators used handmade cardboard signs — echoing the 2025 cardboard protests against anti-corruption agency gutting and referencing the 2014 Maidan Revolution that drove Ukraine's corrupt president from power.",
+      "question": "What is the 'Cardboard Maidan'?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Ukraine",
+    "Fedorov",
+    "Zelensky",
+    "Syrskyi",
+    "Cardboard Maidan",
+    "protests",
+    "drone warfare",
+    "defense minister",
+    "Kyiv",
+    "Kharkiv",
+    "Drapatyi",
+    "civil unrest",
+    "anti-corruption"
+  ],
+  "leadParagraph": "Volodymyr Zelensky fired his popular defense minister Mykhailo Fedorov on July 15, 2026, after a feud with the Soviet-trained army chief. Within hours, thousands of Ukrainians took to the streets of Kyiv, Kharkiv, Odesa, and Dnipro in the largest domestic protests since Russia's full-scale invasion — holding cardboard signs and demanding Fedorov's return. Within a week, Zelensky had fired the general too. But the protests haven't stopped.",
+  "linkedPitch": null,
+  "location": "Kyiv, Ukraine",
+  "mainImage": {
+    "_key": "img-0",
+    "_type": "image",
+    "alt": "Mykhailo Fedorov, Ukraine's young defense minister, in formal attire",
+    "asset": {
+      "_ref": "image-9c83a3ad87c2935e79171972cdf5e3a2ede0f435-1280x720-webp",
+      "_type": "reference"
+    },
+    "caption": "Mykhailo Fedorov, Ukraine's Minister of Defense, in January 2026.",
+    "credit": "The New York Times / The Economist"
+  },
+  "methodology": "This article draws on reporting from Foreign Policy, the Christian Science Monitor (with on-the-ground interviews in Kharkiv), the Guardian, Meduza, Kyiv Post, CBS News, Euromaidan Press, and the Wikipedia article on the Fedorov dismissal protests. All quotes are from named sources or attributed reporting. No fabricated data.",
+  "needsReview": null,
+  "publishedAt": "2026-07-27T19:45:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "4582bd636c48",
+      "_ref": "DJ1Y76QLqJX8nukZ868vhy",
+      "_type": "reference"
+    },
+    {
+      "_key": "bbab59fe823b",
+      "_ref": "forty-years-corruption-dark-career-mitch-mcconnell",
+      "_type": "reference"
+    },
+    {
+      "_key": "d6525161602a",
+      "_ref": "trump-second-term-justice-department-war-on-press",
+      "_type": "reference"
+    },
+    {
+      "_key": "2054b2d7d93f",
+      "_ref": "blanche-epstein-coverup-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "c6af4ac39666",
+      "_ref": "trump-anti-weaponization-fund-heist",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "ukraine-s-cardboard-maidan-how-zelensky-fired-the-wrong-man-and-the-streets-said-no"
+  },
+  "tags": [
+    "Ukraine",
+    "Zelensky",
+    "Mykhailo Fedorov",
+    "Oleksandr Syrskyi",
+    "Cardboard Maidan",
+    "Protests",
+    "Drone Warfare",
+    "Anti-Corruption"
+  ],
+  "title": "Ukraine's Cardboard Maidan: How Zelensky Fired the Wrong Man and the Streets Said No",
+  "updatedAt": null,
+  "videoLink": null
+}

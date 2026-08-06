@@ -1,0 +1,70 @@
+{
+  "slug": "the-fires-are-not-random-america-is-boiling-over",
+  "totalImages": 7,
+  "downloadedAt": "2026-08-05T20:51:26.047Z",
+  "mainImage": {
+    "alt": "Sam Altman's House",
+    "caption": "Aerial view of the Kimberly-Clark warehouse fire in Ontario, California, on April 7, 2026. The six-alarm blaze destroyed $500 million in paper products and the warehouse itself.",
+    "credit": "Fox News",
+    "asset": "image-c20a8cc62b34ba0755e419134e27838ded146b03-636x382-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "A screen displays OpenAI CEO Sam Altman speaking during the 2026 Infrastructure Summit of government officials, corporate executives, and labor leaders, in Washington, March 11, 2026.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-2e1726f7541cc698098f939ff67eb30c76cce90c-3500x2333-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Aerial shot of Kimbery-Clark warehouse ablaze.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-04923722e03e6fcca072a4ee89dd7ce4657f67c8-1200x675-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Graffiti featuring Luigi Mangione patron Saint of Resistance.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-d029b2da9ad1b13103a0e69992a8047f58b29aea-1200x800-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    },
+    {
+      "index": 3,
+      "alt": "Smoke engulfs an Ontario Mills Mall clothing store",
+      "caption": "",
+      "credit": "",
+      "asset": "image-4a24ffa0078884236b39e243d35a5af3bd73b3ea-1200x675-webp",
+      "filename": "image-4.webp",
+      "downloaded": true
+    },
+    {
+      "index": 4,
+      "alt": "Illustration by Tag Hartman-Simkins / Futurism.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-59233814e62aeac178b9cf591eb843a581ab441d-2400x1600-webp",
+      "filename": "image-5.webp",
+      "downloaded": true
+    },
+    {
+      "index": 5,
+      "alt": "The acting U.S. attorney for the Central District of California, Bill Essayli, left, and Vice President JD Vance during a news conference last month in Los Angeles.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-72aefc2ea412dd5698ca4739dacbe586afda165b-600x400-webp",
+      "filename": "image-6.webp",
+      "downloaded": true
+    }
+  ]
+}

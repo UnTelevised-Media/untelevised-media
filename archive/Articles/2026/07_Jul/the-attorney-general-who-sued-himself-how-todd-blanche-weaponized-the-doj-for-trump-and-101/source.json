@@ -1,0 +1,86 @@
+{
+  "slug": "the-attorney-general-who-sued-himself-how-todd-blanche-weaponized-the-doj-for-trump-and-101",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "source-judge-williams-order-trump-v-irs-sd-fla",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Judge Williams' order: Trump v. IRS (S.D. Fla.)",
+      "type": "document",
+      "url": "https://www.huffpost.com/entry/todd-blanche-irs-settlement-slush-fund_n_6a56d28fe4b0540b8c7b696f"
+    },
+    {
+      "_id": "source-slate-101-federal-judges-file-ethics-complaint-against-blanche",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Slate: 101 Federal Judges File Ethics Complaint Against Blanche",
+      "type": "article",
+      "url": "https://slate.com/news-and-politics/2026/07/101-judges-ethics-complaint-todd-blanche.html"
+    },
+    {
+      "_id": "source-democracy-docket-judges-appeal-grievance-committee-referral",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Docket: Judges Appeal Grievance Committee Referral",
+      "type": "article",
+      "url": "https://www.democracydocket.com/news/judges-appeal-nys-bar-committee-refusal-to-investigate-blanche/"
+    },
+    {
+      "_id": "source-new-republic-blanche-confirmed-as-tax-fraud-enabler",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New Republic: Blanche Confirmed as Tax Fraud Enabler",
+      "type": "article",
+      "url": "https://newrepublic.com/post/183795/todd-blanche-confirmed-tax-fraud-enabler"
+    },
+    {
+      "_id": "source-amny-durbin-calls-blanches-tax-exemption-not-much-of-a-defense",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AMNY: Durbin Calls Blanche's Tax Exemption 'Not Much of a Defense'",
+      "type": "article",
+      "url": "https://www.amny.com/news/politics/durbin-blanche-confirmation-hearing/"
+    },
+    {
+      "_id": "source-huffpost-blanche-irs-settlement-is-a-slush-fund",
+      "description": null,
+      "isAnonymous": null,
+      "label": "HuffPost: Blanche IRS Settlement Is a Slush Fund",
+      "type": "article",
+      "url": "https://www.huffpost.com/entry/todd-blanche-irs-settlement-slush-fund_n_6a56d28fe4b0540b8c7b696f"
+    },
+    {
+      "_id": "source-the-hill-1200-former-doj-employees-oppose-blanche-nomination",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Hill: 1,200 Former DOJ Employees Oppose Blanche Nomination",
+      "type": "article",
+      "url": "https://thehill.com/homenews/administration/5956374-blanche-nomination-faces-opposition/"
+    },
+    {
+      "_id": "source-justice-connection-letter-from-doj-alumni-on-blanche-ag-nomination",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Justice Connection: Letter from DOJ Alumni on Blanche AG Nomination",
+      "type": "document",
+      "url": "https://www.thejusticeconnection.org/news-and-press/1-200-former-doj-employees-oppose-todd-blanche%E2%80%99s-nomination"
+    },
+    {
+      "_id": "source-ap-news-blanche-senate-confirmation-hearing-july-15-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News: Blanche Senate Confirmation Hearing (July 15, 2026)",
+      "type": "article",
+      "url": "https://apnews.com/article/blanche-justice-department-senate-epstein-b01b56923edcba5722e89163684dbdbf"
+    },
+    {
+      "_id": "source-nyt-trump-owed-up-to-100m-from-decade-long-irs-audit",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NYT: Trump Owed Up to $100M From Decade-Long IRS Audit",
+      "type": "article",
+      "url": "https://www.nytimes.com/2020/10/30/us/politics/donald-trump-taxes.html"
+    }
+  ]
+}

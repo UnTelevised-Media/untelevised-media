@@ -1,0 +1,86 @@
+{
+  "slug": "the-disarmament-theater-50-killed-in-five-days-as-israel-bombs-gaza-while-the-world-negotiates",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-israel-defies-trumps-peace-plan-as-it-escalates-deadly-attacks-on-gaz",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Israel Defies Trump's Peace Plan as It Escalates Deadly Attacks on Gaza",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/8/3/israel-defies-trumps-peace-plan-as-it-escalates-deadly-attacks-on-gaza"
+    },
+    {
+      "_id": "source-al-jazeera-israel-kills-19-in-gaza-as-attacks-escalate-despite-latest-trump-plan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Israel Kills 19 in Gaza as Attacks Escalate Despite Latest Trump Plan",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/8/2/israel-kills-five-in-gaza-despite-trumps-hamas-disarmament-plan"
+    },
+    {
+      "_id": "source-al-jazeera-israeli-strikes-kill-seven-across-gaza-destroy-medical-supply-warehou",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Israeli Strikes Kill Seven Across Gaza, Destroy Medical Supply Warehouse",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/8/1/israeli-strikes-kill-four-across-gaza-destroy-medical-supply-warehouse"
+    },
+    {
+      "_id": "source-al-jazeera-israeli-strikes-kill-at-least-six-including-children-across-gaza-stri",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Israeli Strikes Kill At Least Six, Including Children, Across Gaza Strip",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/7/30/israeli-strikes-kill-at-least-four-including-children-across-gaza-strip"
+    },
+    {
+      "_id": "source-countercurrents-qnn-israeli-attacks-kill-ten-palestinians-including-three-childr",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Countercurrents / QNN — Israeli Attacks Kill Ten Palestinians, Including Three Children",
+      "type": "article",
+      "url": "https://countercurrents.org/2026/08/israeli-attacks-across-gaza-kill-ten-palestinians-including-three-children/"
+    },
+    {
+      "_id": "source-countercurrents-qnn-gaza-civil-defense-recovers-112-bodies-in-sabra",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Countercurrents / QNN — Gaza Civil Defense Recovers 112 Bodies in Sabra",
+      "type": "article",
+      "url": "https://countercurrents.org/2026/08/gaza-civil-defense-recovers-112-bodies-from-the-rubble-of-a-single-familys-homes-in-sabra/"
+    },
+    {
+      "_id": "source-al-jazeera-hamas-reaches-gaza-disarmament-agreement-with-board-of-peace",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Hamas Reaches Gaza Disarmament Agreement with Board of Peace",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/7/30/trump-says-board-of-peace-reaches-agreement-on-disarmament-of-hamas-in-gaza"
+    },
+    {
+      "_id": "source-the-hill-board-of-peace-outlines-15-point-roadmap-to-disarm-hamas",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Hill — Board of Peace Outlines 15-Point Roadmap to Disarm Hamas",
+      "type": "article",
+      "url": "https://thehill.com/policy/international/6002266-hamas-disarmament-roadmap-unveiled/"
+    },
+    {
+      "_id": "source-times-of-israel-2-children-reported-killed-in-gaza-strikes",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Times of Israel — 2 Children Reported Killed in Gaza Strikes",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/2-kids-reported-killed-in-gaza-strikes-hamas-said-nearing-deal-with-mediators-on-its-arms/"
+    },
+    {
+      "_id": "source-un-ohchr-report-on-israeli-assaults-against-children-in-gaza-june-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN OHCHR — Report on Israeli Assaults Against Children in Gaza (June 2026)",
+      "type": "document",
+      "url": "https://www.ohchr.org/sites/default/files/documents/hrbodies/hrcouncil/sessions-regular/session62/a-hrc-62-crp-2.pdf"
+    }
+  ]
+}

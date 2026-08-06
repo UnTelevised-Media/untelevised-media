@@ -1,0 +1,25 @@
+{
+  "slug": "trust-me-bro-openai-pentagon-contract",
+  "totalImages": 2,
+  "downloadedAt": "2026-08-05T20:51:58.861Z",
+  "mainImage": {
+    "alt": "Sam Altman in Washington DC",
+    "caption": "",
+    "credit": "",
+    "asset": "image-a0147700897a8b4945ef05419165c19965b1661b-1820x1213-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Image depicting AI intergration in the Pentagon",
+      "caption": "",
+      "credit": "",
+      "asset": "image-a3830eec8260ad94a0ca31ad1bbf987dffc10964-1800x1012-heif",
+      "filename": "image-1.avif",
+      "downloaded": true
+    }
+  ]
+}

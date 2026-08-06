@@ -1,0 +1,46 @@
+{
+  "slug": "the-fires-are-not-random-america-is-boiling-over",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-nyt-altman-molotov-2026",
+      "description": "April 10, 2026 report on Molotov attack at Sam Altman's San Francisco home, including details about the $27 million Russian Hill compound",
+      "isAnonymous": false,
+      "label": "The New York Times — Molotov Cocktail Is Hurled at Home of Sam Altman, OpenAI's CEO",
+      "type": "onscene",
+      "url": "https://www.nytimes.com/2026/04/10/us/open-ai-sam-altman-molotov-cocktail.html"
+    },
+    {
+      "_id": "source-nbc-warehouse-arson-2026",
+      "description": "April 10, 2026 report on Chamel Abdulkarim, 29, charged with arson of Kimberly-Clark warehouse, including his text messages and Mangione comparison",
+      "isAnonymous": false,
+      "label": "NBC News — Arson suspect in California warehouse fire allegedly compared himself to Luigi Mangione",
+      "type": "onscene",
+      "url": "https://www.nbcnews.com/news/us-news/arson-suspect-california-warehouse-fire-allegedly-compared-luigi-mangi-rcna273704"
+    },
+    {
+      "_id": "source-latimes-warehouse-arson-2026",
+      "description": "April 10, 2026 report with quotes from Abdulkarim about 'pay us enough to live' and details about the $500M in damage",
+      "isAnonymous": false,
+      "label": "Los Angeles Times — Warehouse arsonist compared himself to Luigi Mangione, wanted to send a message, prosecutors say",
+      "type": "onscene",
+      "url": "https://www.latimes.com/california/story/2026-04-10/warehouse-arson-charges-video"
+    },
+    {
+      "_id": "source-whittier-mall-fire-2026",
+      "description": "April 10, 2026 report on Luis Javier Gallegos, 28, setting fires in Nordstrom Rack and True Religion at Ontario Mills mall",
+      "isAnonymous": false,
+      "label": "Whittier Daily News — Ontario Mills mall closed after fires set in stores; man arrested",
+      "type": "onscene",
+      "url": "https://www.whittierdailynews.com/2026/04/10/ontario-mills-mall-closed-after-fire-in-true-religion-store/"
+    },
+    {
+      "_id": "source-cbs-warehouse-fire-2026",
+      "description": "April 9, 2026 report on warehouse fire requiring 175 firefighters, six-alarm blaze, air quality warning",
+      "isAnonymous": false,
+      "label": "CBS News — Arson suspect charged in fire at California Kimberly-Clark warehouse",
+      "type": "onscene",
+      "url": "https://www.cbsnews.com/losangeles/news/kimberly-clark-warehouse-fire-ontario-arson-charges-chamel-abdulkarim/"
+    }
+  ]
+}

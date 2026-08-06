@@ -1,0 +1,62 @@
+{
+  "slug": "meatpacking-workers-say-enough-denver-strike-vote-is-the-latest-front-in-the-war-on-corporate",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-cbs-denver-strike-authorization-2026-04-24",
+      "description": "April 24, 2026 - 97% of union workers at Denver Processing voted to authorize a strike. UFCW Local 7 filed Unfair Labor Practice charges citing retaliation and bad-faith bargaining. JBS offered wage increases and one-time bonus, warned strike may not achieve goals.",
+      "isAnonymous": false,
+      "label": "CBS Colorado - Union workers at Denver Processing vote to authorize strike",
+      "type": "article",
+      "url": "https://www.cbsnews.com/colorado/news/union-denver-processing-vote-authorize-strike/"
+    },
+    {
+      "_id": "source-9news-denver-strike-authorization-2026-04-24",
+      "description": "April 24, 2026 - Denver Processing is subsidiary of JBS where 4,000 workers walked off last month. Supplies Kroger stores throughout southwestern US. Quote from worker Natalia Gonzalez about company wasting time and retaliating.",
+      "isAnonymous": false,
+      "label": "9news - Union workers at Denver meat processing plant vote to authorize strike",
+      "type": "article",
+      "url": "https://www.9news.com/article/money/business/union-strike-denver-processing-vote/73-05f526fc-8a11-4ad8-8161-89e1e7de38db"
+    },
+    {
+      "_id": "source-north-forty-denver-strike-2026-04-25",
+      "description": "April 25, 2026 - Strike could affect distribution to grocery stores across Colorado including Fort Collins, Loveland. Follows heightened labor tensions including Greeley strike. Potential ripple effects on Kroger-owned brands.",
+      "isAnonymous": false,
+      "label": "North Forty News - Denver Meatpacking Strike Vote Signals Potential Supply Impacts",
+      "type": "article",
+      "url": "https://northfortynews.com/category/news/denver-meatpacking-strike-vote-signals-potential-supply-impacts-across-colorado"
+    },
+    {
+      "_id": "source-mother-jones-jbs-strike-2026-03-16",
+      "description": "March 16, 2026 - Comprehensive deep dive on JBS Greeley strike. First major meatpacking strike in 40+ years. Human trafficking scheme targeting Haitian workers. Line speeds 370-440 head/hour vs 300 on day shift. 7% of US beef from this plant. Big Four control 93% of market.",
+      "isAnonymous": false,
+      "label": "Mother Jones - Workers in Colorado Have Shut Down One of the Nation's Biggest Meatpacking Plants",
+      "type": "article",
+      "url": "https://www.motherjones.com/politics/2026/03/jbs-strike-union-local-7-beef-prices-meatpacking-greeley/"
+    },
+    {
+      "_id": "source-cpr-jbs-agreement-2026-04-10",
+      "description": "April 10, 2026 - Workers at Greeley meatpacking plant reached final collective bargaining agreement, ending weeks of friction with JBS USA. Three-week strike ended with new two-year contract ratified April 12.",
+      "isAnonymous": false,
+      "label": "CPR News - JBS workers reach a final agreement on a new contract at packing plant",
+      "type": "article",
+      "url": "https://www.cpr.org/2026/04/10/jbs-strike-nearing-an-end/"
+    },
+    {
+      "_id": "source-reuters-jbs-return-2026-04-05",
+      "description": "April 5, 2026 - Workers at JBS agreed to return to work at beef plant in Greeley after company agreed to resume negotiations, bringing three-week picket to an end.",
+      "isAnonymous": false,
+      "label": "Reuters - Striking JBS workers to return to Colorado plant on promise of talks",
+      "type": "article",
+      "url": "https://www.reuters.com/business/world-at-work/striking-jbs-workers-return-colorado-plant-promise-talks-2026-04-05/"
+    },
+    {
+      "_id": "source-democracy-now-jbs-strike-2026-04-01",
+      "description": "April 1, 2026 - More than 3,800 meatpacking workers in third week of strike. First major strike in meatpacking industry in 40 years. Workers protesting unfair and dangerous labor conditions at JBS USA.",
+      "isAnonymous": false,
+      "label": "Democracy Now! - Immigrant Workers in Colorado Lead 'Historic Strike' at JBS",
+      "type": "media",
+      "url": "https://www.democracynow.org/2026/4/1/meatpacking_strike_colorado"
+    }
+  ]
+}

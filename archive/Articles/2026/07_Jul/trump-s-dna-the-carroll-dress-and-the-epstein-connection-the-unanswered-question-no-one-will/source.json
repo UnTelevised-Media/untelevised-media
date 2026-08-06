@@ -1,0 +1,86 @@
+{
+  "slug": "trump-s-dna-the-carroll-dress-and-the-epstein-connection-the-unanswered-question-no-one-will",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "source-the-guardian-judge-rejects-trump-dna-offer-in-carroll-case",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Judge Rejects Trump DNA Offer in Carroll Case",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2023/feb/22/trump-jean-carroll-dna-offer-rejected"
+    },
+    {
+      "_id": "source-nbc-news-trumps-dna-will-not-be-used-in-e-jean-carroll-suit",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News — Trump's DNA Will Not Be Used in E. Jean Carroll Suit",
+      "type": "article",
+      "url": "https://www.nbcnews.com/politics/donald-trump/trumps-dna-wont-used-e-jean-carroll-suit-judge-rules-rcna71846"
+    },
+    {
+      "_id": "source-ap-news-trump-dna-sample-required-after-felony-conviction",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News — Trump DNA Sample Required After Felony Conviction",
+      "type": "article",
+      "url": "https://apnews.com/article/trump-hush-money-sentencing-dna-sample-felony-conviction"
+    },
+    {
+      "_id": "source-pbs-doj-releases-epstein-files-with-trump-allegations",
+      "description": null,
+      "isAnonymous": null,
+      "label": "PBS — DOJ Releases Epstein Files with Trump Allegations",
+      "type": "article",
+      "url": "https://www.pbs.org/newshour/politics/doj-epstein-files-trump-allegations"
+    },
+    {
+      "_id": "source-cnn-missing-epstein-files-related-to-trump-released-after-media-pressure",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — Missing Epstein Files Related to Trump Released After Media Pressure",
+      "type": "article",
+      "url": "https://www.cnn.com/2026/03/epstein-files-trump-documents-missing-released"
+    },
+    {
+      "_id": "source-usa-today-fbi-memo-epstein-victimized-over-1000-women",
+      "description": null,
+      "isAnonymous": null,
+      "label": "USA Today — FBI Memo: Epstein Victimized Over 1,000 Women",
+      "type": "article",
+      "url": "https://www.usatoday.com/story/news/2025/11/epstein-victims-fbi-memo-1000-women/7654830007/"
+    },
+    {
+      "_id": "source-npr-missing-epstein-files-related-to-trump",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR — Missing Epstein Files Related to Trump",
+      "type": "article",
+      "url": "https://www.npr.org/2026/03/epstein-files-trump-missing-documents"
+    },
+    {
+      "_id": "source-forbes-trump-dna-swab-upon-surrender",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Forbes — Trump DNA Swab Upon Surrender",
+      "type": "article",
+      "url": "https://www.forbes.com/sites/2023/04/trump-dna-swat-surrender-felony-charges/"
+    },
+    {
+      "_id": "source-wikipedia-e-jean-carroll-v-donald-j-trump",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — E. Jean Carroll v. Donald J. Trump",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/E._Jean_Carroll_v._Donald_J._Trump"
+    },
+    {
+      "_id": "source-politico-jane-doe-lawsuit-trump-and-epstein-allegations",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Politico — Jane Doe Lawsuit: Trump and Epstein Allegations",
+      "type": "article",
+      "url": "https://www.politico.com/story/2016/06/trump-epstein-lawsuit-jane-doe-224472"
+    }
+  ]
+}

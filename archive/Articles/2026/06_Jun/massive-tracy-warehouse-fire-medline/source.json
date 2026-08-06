@@ -1,0 +1,54 @@
+{
+  "slug": "massive-tracy-warehouse-fire-medline",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-abc7-san-francisco-tracy-warehouse-fire-live-updates",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ABC7 San Francisco — Tracy Warehouse Fire Live Updates",
+      "type": "article",
+      "url": "https://abc7news.com/live-updates/tracy-medline-warehouse-fire/1"
+    },
+    {
+      "_id": "source-ktvu-tracy-medline-warehouse-fire-disrupts-medical-supply-chain",
+      "description": null,
+      "isAnonymous": null,
+      "label": "KTVU — Tracy Medline Warehouse Fire Disrupts Medical Supply Chain",
+      "type": "article",
+      "url": "https://www.ktvu.com/news/tracy-medline-warehouse-fire"
+    },
+    {
+      "_id": "source-los-angeles-times-massive-california-warehouse-fire-ripple-effect",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Los Angeles Times — Massive California Warehouse Fire Ripple Effect",
+      "type": "article",
+      "url": "https://www.latimes.com/california/story/2026-06-12/tracy-warehouse-fire-medline"
+    },
+    {
+      "_id": "source-the-guardian-blaze-at-1m-sq-ft-california-warehouse-rages-into-third-day",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Blaze at 1m-sq-ft California Warehouse Rages Into Third Day",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/jun/13/tracy-california-warehouse-fire"
+    },
+    {
+      "_id": "source-city-of-tracy-fire-at-medline-facility-incident-update",
+      "description": null,
+      "isAnonymous": null,
+      "label": "City of Tracy — Fire at Medline Facility Incident Update",
+      "type": "statement",
+      "url": "https://www.tracy.ca.gov/fire-at-medline-facility-incident-update"
+    },
+    {
+      "_id": "source-nbc-news-fire-destroys-medical-supply-warehouse-in-tracy-california",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News — Fire Destroys Medical Supply Warehouse in Tracy, California",
+      "type": "article",
+      "url": "https://www.nbcnews.com/news/us-news/fire-destroys-medical-supply-warehouse-tracy-california"
+    }
+  ]
+}

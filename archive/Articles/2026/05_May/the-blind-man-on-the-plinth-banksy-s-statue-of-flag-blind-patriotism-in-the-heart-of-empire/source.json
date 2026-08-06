@@ -1,0 +1,30 @@
+{
+  "slug": "the-blind-man-on-the-plinth-banksy-s-statue-of-flag-blind-patriotism-in-the-heart-of-empire",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "source-cnn-banksy-statue-2026-05-01",
+      "description": "May 1, 2026 - Detailed coverage of Banksy's new statue in Waterloo Place, including description of the suited figure with flag obscuring face, the Instagram video confirmation, Westminster Council's response to protect the work, and context about Banksy's identity being revealed by Reuters in March 2026.",
+      "isAnonymous": null,
+      "label": "CNN - Banksy's new flag-wielding London statue satirizes blind patriotism",
+      "type": "article",
+      "url": "https://edition.cnn.com/2026/05/01/style/banksy-new-statue-london-intl-hnk"
+    },
+    {
+      "_id": "source-reuters-banksy-2026-04-30",
+      "description": "April 30, 2026 - Coverage of the statue installation near The Mall in London's ceremonial heart, details about the figure's posture (one foot in mid-air), the resin/fiberglass construction, Westminster City Council's welcome of the work, and the location near monuments to Edward VII, Florence Nightingale, and Sidney Herbert.",
+      "isAnonymous": null,
+      "label": "Reuters - London hails new Banksy statue of man blinded by flag",
+      "type": "article",
+      "url": "https://www.reuters.com/world/banksy-installs-statue-flag-wielding-man-central-london-2026-04-30/"
+    },
+    {
+      "_id": "source-bbc-banksy-2026-05-01",
+      "description": "May 1, 2026 - Extensive coverage including Banksy's quote 'There was a bit of a gap,' location context (Waterloo Place designed to celebrate imperialism in the 1800s), interviews with visitors including student Ollie Isaac's interpretation about 'resurgence of nationalism,' and James Peak's analysis of the statue as a 'brilliant comment on a bumptious, chest puffed out man in power.'",
+      "isAnonymous": null,
+      "label": "BBC - Banksy confirms he is behind new statue in central London",
+      "type": "article",
+      "url": "https://www.bbc.com/news/articles/c5y9wlnwl85o"
+    }
+  ]
+}

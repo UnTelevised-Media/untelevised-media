@@ -1,0 +1,54 @@
+{
+  "slug": "the-death-watch-mitch-mcconnell-s-vegetative-state-is-a-crisis-the-gop-is-desperate-to-hide-from",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "src-mcconnell-health-dispatch-audio-2026",
+      "description": "Dispatch audio obtained by journalist Desiree Townsend reveals paramedics responded to cardiac arrest at McConnell home on June 14, 2026.",
+      "isAnonymous": null,
+      "label": "NPR / The New Republic - Dispatch Audio: McConnell Found Unconscious",
+      "type": "media",
+      "url": "https://www.npr.org/2026/06/14/mcconnell-cardiac-arrest-dispatch"
+    },
+    {
+      "_id": "src-mcconnell-health-chao-china-trip",
+      "description": "Elaine Chao was photographed meeting Chinese Vice President Han Zheng in Beijing three days after McConnell cardiac arrest.",
+      "isAnonymous": null,
+      "label": "Daily Beast - Elaine Chao Traveled to China After McConnell CPR Drama",
+      "type": "article",
+      "url": "https://www.thedailybeast.com/elaine-chao-china-trip-mcconnell-cpr"
+    },
+    {
+      "_id": "src-mcconnell-health-paramedics-nbc",
+      "description": "NBC News confirmed paramedics responded to McConnell home for a reported unconscious person with CPR in progress.",
+      "isAnonymous": null,
+      "label": "NBC News - Paramedics Responded to Cardiac Arrest at McConnell Home",
+      "type": "article",
+      "url": "https://www.nbcnews.com/politics/mitch-mcconnell-cardiac-arrest-paramedics-june-2026"
+    },
+    {
+      "_id": "src-mcconnell-health-brain-dead-rumors",
+      "description": "Conservative activist Laura Loomer claimed McConnell was in a vegetative state, claims later echoed by other sources.",
+      "isAnonymous": null,
+      "label": "Daily Mail - Brain Dead Rumors and Vegetative State Claims",
+      "type": "article",
+      "url": "https://www.dailymail.co.uk/news/mitch-mcconnell-brain-dead-vegetative-state"
+    },
+    {
+      "_id": "src-mcconnell-health-the-hill-special-election",
+      "description": "The Hill reported on political implications of McConnell health crisis including special election scenarios in Kentucky.",
+      "isAnonymous": null,
+      "label": "The Hill - Health Emergency Sparks Special Election Questions",
+      "type": "article",
+      "url": "https://thehill.com/homenews/senate/mcconnell-health-special-election-kentucky"
+    },
+    {
+      "_id": "src-mcconnell-health-axios-rumor-mill",
+      "description": "Axios reported on the information vacuum surrounding McConnell condition and the political calculations driving the secrecy.",
+      "isAnonymous": null,
+      "label": "Axios - Inside the McConnell Health Rumor Mill",
+      "type": "article",
+      "url": "https://www.axios.com/2026/07/mcconnell-health-rumors-proof-of-life"
+    }
+  ]
+}

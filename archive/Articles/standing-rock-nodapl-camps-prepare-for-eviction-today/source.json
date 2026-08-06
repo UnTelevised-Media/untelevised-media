@@ -1,0 +1,22 @@
+{
+  "slug": "standing-rock-nodapl-camps-prepare-for-eviction-today",
+  "totalSources": 2,
+  "sources": [
+    {
+      "_id": "ar2017-src-standingrock-1",
+      "description": "Live video streams from water protectors and independent media at the Standing Rock encampment documenting the February 22, 2017 eviction.",
+      "isAnonymous": false,
+      "label": "Standing Rock live streams - Real-time event coverage",
+      "type": "media",
+      "url": null
+    },
+    {
+      "_id": "ar2017-src-standingrock-2",
+      "description": "Dedicated Anon Resistance Movement activist embedded at the Oceti Sakowin Camp providing first-hand accounts of the eviction proceedings.",
+      "isAnonymous": true,
+      "label": "Anonymous on-the-ground activist correspondent",
+      "type": "onscene",
+      "url": null
+    }
+  ]
+}

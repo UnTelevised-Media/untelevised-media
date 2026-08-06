@@ -1,0 +1,70 @@
+{
+  "slug": "kashmir-s-unbroken-revolution-the-mass-uprising-pakistan-doesn-t-want-you-to-see",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-inqilabi-communist-party-kashmir-revolution-video",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Inqilabi Communist Party — Kashmir Revolution Video",
+      "type": "media",
+      "url": "https://www.youtube.com/watch?v=J7xG4VNXP58"
+    },
+    {
+      "_id": "source-marxistcom-mass-movement-of-aac-in-pakistan-administered-kashmir",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Marxist.com — Mass Movement of AAC in Pakistan-Administered Kashmir",
+      "type": "article",
+      "url": "https://marxist.com/mass-movement-of-aac-in-pakistan-administered-kashmir-defies-brutal-state-repression-to-write-a-new-chapter-in-history.htm"
+    },
+    {
+      "_id": "source-frontline-pok-erupts-after-deadly-crackdown-on-protest-movement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Frontline — PoK Erupts After Deadly Crackdown on Protest Movement",
+      "type": "article",
+      "url": "https://frontline.thehindu.com/politics/why-pakistan-occupied-kashmir-is-witnessing-mass-protests/article71080112.ece"
+    },
+    {
+      "_id": "source-countercurrents-weaponising-the-london-kashmir-march",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Countercurrents — Weaponising the London Kashmir March",
+      "type": "article",
+      "url": "https://countercurrents.org/2026/07/weaponising-the-london-kashmir-march/"
+    },
+    {
+      "_id": "source-kashmir-times-london-kashmir-march-diaspora-protest",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Kashmir Times — London Kashmir March: Diaspora Protest",
+      "type": "article",
+      "url": "https://kashmirtimes.com/opinion/comment-articles/weaponising-the-london-kashmir-march"
+    },
+    {
+      "_id": "source-news18-jaac-writes-to-pak-pm-seeking-action",
+      "description": null,
+      "isAnonymous": null,
+      "label": "News18 — JAAC Writes to Pak PM Seeking Action",
+      "type": "article",
+      "url": "https://www.news18.com/world/jaac-writes-to-pak-pm-army-chief-seeking-action-against-officials-behind-pok-violence-ws-l-10197756.html"
+    },
+    {
+      "_id": "source-republic-world-violence-escalates-in-pok",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Republic World — Violence Escalates in PoK",
+      "type": "article",
+      "url": "https://www.republicworld.com/world-news/pojk-on-edge-pakistan-floods-mirpur-with-forces-as-protesters-vow-final-march-after-rawalakot-firing-2026-07-05-131279"
+    },
+    {
+      "_id": "source-amnesty-international-pakistan-human-rights-condemnation",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Amnesty International — Pakistan Human Rights Condemnation",
+      "type": "statement",
+      "url": "https://www.amnesty.org/"
+    }
+  ]
+}

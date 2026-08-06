@@ -1,0 +1,22 @@
+{
+  "slug": "live-from-baton-rouge-alton-sterling-blm-protest",
+  "totalSources": 2,
+  "sources": [
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2rG6",
+      "description": null,
+      "isAnonymous": null,
+      "label": "anonresistance.am.dx",
+      "type": "article",
+      "url": "http://anonresistance.am.dx"
+    },
+    {
+      "_id": "DJ1Y76QLqJX8nukZ868drI",
+      "description": null,
+      "isAnonymous": null,
+      "label": "twitter.com/anonyresistance",
+      "type": "article",
+      "url": "https://twitter.com/anonyresistance"
+    }
+  ]
+}

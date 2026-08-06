@@ -1,0 +1,149 @@
+{
+  "_id": "rubio-cuba-report-mccarthyite-pretext-invasion",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-politics",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-humanrights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-usnews",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The State Department's 100-page report claiming Cuba is the 'capital of 21st century communism' is a McCarthyite document designed to manufacture consent for military invasion while naming BLM, DSA, Code Pink, and the National Lawyers Guild as foreign intelligence assets.",
+  "eventDate": "2026-07-21T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Published July 21, 2026, the 100-page report titled 'Cuba: The Capital of 21st Century Communism' claims Cuba is the center of a global anti-American conspiracy that has infiltrated U.S. social movements, universities, and civil society organizations. It was released without a listed author but is widely attributed to Secretary of State Marco Rubio.",
+      "question": "What is the State Department's Cuba report?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The report names the Democratic Socialists of America, Code Pink, the National Lawyers Guild, Communist Party USA, Black Lives Matter, Antifa, Harvard University, and specific individuals including Hasan Piker, Christian Smalls, Isra Hirsi, Jeremy Corbyn, and Los Angeles Mayor Karen Bass.",
+      "question": "Which organizations does the report target?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Since Trump imposed a fuel blockade in January 2026, Cuba has suffered island-wide blackouts, the collapse of its power grid, food shortages, and economic devastation. Schools have shortened schedules, hospitals have lost refrigeration capacity for medicines, and the tourism economy has collapsed. Cuba has run out of diesel and fuel oil entirely at multiple points.",
+      "question": "What is the humanitarian situation in Cuba?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Reps. Ilhan Omar, Alexandria Ocasio-Cortez, Jim McGovern, Mark Pocan, Delia Ramirez, and 7 other progressive Democrats condemned it as a 'McCarthyite attack' on free speech. Pocan called it 'the stupidest, most fantastical, most biased thing I've ever read from a governmental agency.' Ramirez said it was 'intentionally designed to justify a military attack on Cuba.'",
+      "question": "What did members of Congress say about the report?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Cuba report",
+    "Marco Rubio State Department",
+    "Cuba invasion",
+    "McCarthyite",
+    "BLM Cuba",
+    "DSA",
+    "Code Pink",
+    "National Lawyers Guild",
+    "Cuba blockade",
+    "Cuba humanitarian crisis",
+    "manufacturing consent",
+    "foreign subversion",
+    "Trump Cuba"
+  ],
+  "leadParagraph": "Marco Rubio's State Department has produced a 100-page document blaming Cuba for Black Lives Matter, Antifa, and anti-ICE protests. Members of Congress call it a pretext for invasion. The organizations it names call it McCarthyism. The reality it ignores is that Cuba is being starved by a U.S. blockade — and this report is the paperwork for whatever comes next.",
+  "linkedPitch": null,
+  "location": "United States / Cuba",
+  "mainImage": {
+    "_type": "image",
+    "alt": "U.S. Secretary of State Marco Rubio speaks to reporters at the State Department in July 2026",
+    "asset": {
+      "_ref": "image-72ee67848ae3dad627ec72140c10827ae59314ed-1200x800-webp",
+      "_type": "reference"
+    },
+    "caption": "Secretary of State Marco Rubio speaks to reporters at the State Department in July 2026 as his office released a 100-page report claiming Cuba is the capital of 21st century communism",
+    "credit": "Photo: U.S. State Department / truthout.org"
+  },
+  "methodology": "Reported using primary sources including the State Department's 100-page report 'Cuba: The Capital of 21st Century Communism,' Congressional statements from Reps. Ilhan Omar, Mark Pocan, Delia Ramirez, and the Congressional Progressive Caucus, interviews from The Intercept and Common Dreams, expert commentary from Princeton historian Miriam Pensack and Harvard professor Alejandro de la Fuente, and reporting from Reuters, AP, Al Jazeera, The Guardian, and Forbes on Cuba's humanitarian crisis under the U.S. fuel blockade.",
+  "needsReview": null,
+  "publishedAt": "2026-08-04T12:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-cuba-crisis",
+      "_ref": "UH0czzC9lJ5tyspFR9p8hO",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-iran-war",
+      "_ref": "us-iran-war-day-142-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-section702",
+      "_ref": "section-702-surveillance-law-extension",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-prairieland",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "3329eb970fe5",
+      "_ref": "ecuadorian-prosecutor-alexandra-bravo-murdered-us-boat-bombings",
+      "_type": "reference"
+    },
+    {
+      "_key": "28d93234cd64",
+      "_ref": "bolivia-militant-resistance",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-manufactured-threat-how-rubio-s-cuba-report-builds-the-case-for-invasion-while-criminalizing"
+  },
+  "tags": [
+    "Cuba",
+    "Marco Rubio",
+    "State Department",
+    "McCarthyism",
+    "Trump Administration",
+    "Invasion",
+    "Sanctions",
+    "Blockade",
+    "Free Speech",
+    "COINTELPRO"
+  ],
+  "title": "The Manufactured Threat: How Rubio's Cuba Report Builds the Case for Invasion While Criminalizing Dissent at Home",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,154 @@
+{
+  "_id": "inside-tennessee-active-clubs-fascist-fight-network",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "048b3a77-f32f-4267-a2ae-0346d0bf80f1",
+      "_ref": "048b3a77-f32f-4267-a2ae-0346d0bf80f1",
+      "_type": "reference"
+    },
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A deep investigation into the Active Club movement operating out of Middle Tennessee — neo-Nazi fight clubs that infiltrate martial arts schools, recruit teenagers, and train for violence under the secret control of the white nationalist group Patriot Front.",
+  "eventDate": "2026-07-28T15:00",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "answer": "Active Clubs are a decentralized network of white nationalist fight clubs founded by Robert Rundo in 2021. They use combat sports and martial arts training as a recruitment tool to build what extremism researchers describe as a neo-Nazi militia, preparing members for politically motivated street violence.",
+      "question": "What is the Active Club movement?"
+    },
+    {
+      "_key": "faq-1",
+      "answer": "The Tennessee Active Club is led by Sean Kauffmann, a neo-Nazi and Holocaust denier with multiple domestic violence convictions. Kauffmann is currently jailed in Perry County, Tennessee awaiting trial. Leaked documents show the chapter operates as a 'subsidiary recruitment project' secretly controlled by Patriot Front.",
+      "question": "Who runs the Tennessee Active Club?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "The Southern Poverty Law Center revealed in May 2025 that Patriot Front secretly controls approximately a dozen Active Clubs across the country as 'subsidiary recruiting projects.' The Tennessee Active Club is described in leaked internal documents as 'ran by member. Heavily cooperative.' Both organizations share financial ties through the Will2Rise clothing brand and Media2Rise propaganda outlet.",
+      "question": "What is the connection between Active Clubs and Patriot Front?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "While no Tennessee Active Club member has been charged directly, Patriot Front member Nathaniel Noyce was arrested in April 2024 and charged with assaulting law enforcement officers during the January 6 attack on the Capitol. Noyce was pardoned by President Trump on January 20, 2025 along with all other January 6 defendants.",
+      "question": "Is there a January 6 connection to this network?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Yes. The Guardian revealed in June 2025 that the South Central Tennessee Active Club infiltrated Shelbyville BJJ Academy, a martial arts school offering classes to children as young as three years old. Active Club members were documented training at the facility with Nazi symbols displayed. After the Guardian's investigation, the academy banned the group and changed access codes.",
+      "question": "Are Active Clubs operating near children?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": false,
+  "keywords": [
+    "Tennessee Active Club",
+    "fascist fight clubs",
+    "Patriot Front Tennessee",
+    "Robert Rundo",
+    "Sean Kauffmann",
+    "neo-Nazi militia",
+    "white nationalist training",
+    "Middle Tennessee fascism",
+    "combat sports extremism",
+    "Tellico Plains compound"
+  ],
+  "leadParagraph": "The Active Club movement — a decentralized network of white nationalist fight clubs operating out of gyms, general stores, and private property across Middle Tennessee — has been steadily expanding for years. A new investigation reveals a network that blends combat sports with fascist ideology, recruits teenagers, and operates with alarming impunity in the Volunteer State.",
+  "linkedPitch": null,
+  "location": "Middle Tennessee / Nashville, Tennessee",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Rows of masked men in matching khaki outfits carrying flags and shields marching down a city street in formation",
+    "asset": {
+      "_ref": "image-6e844d486135e413b679e546076af3f76b9cf9de-3072x2304-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Reported using open-source intelligence, court records (DOJ sentencing docs, Washington County TN court records, Perry County TN arrest reports via MuckRock FOIA), leaked internal documents (SPLC/Unicorn Riot), and investigative journalism from NewsChannel 5 (Phil Williams), The Guardian, CNN, CBS News, WIRED, Raw Story, and Rolling Stone. All claims cross-referenced across multiple independent sources. Right of reply attempted with named subjects.",
+  "needsReview": false,
+  "publishedAt": "2026-08-02T00:02",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "patriot-front-july-4-dc-2026",
+      "_ref": "patriot-front-july-4-dc-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "brooklyn-no-more-ice-murders-metropolitan-detention-center-protest",
+      "_ref": "brooklyn-no-more-ice-murders-metropolitan-detention-center-protest",
+      "_type": "reference"
+    },
+    {
+      "_key": "trump-broadcast-license-revocation-abc-nbc",
+      "_ref": "trump-broadcast-license-revocation-abc-nbc",
+      "_type": "reference"
+    },
+    {
+      "_key": "todd-blanche-corruption-slush-fund-101-judges-constitution",
+      "_ref": "todd-blanche-corruption-slush-fund-101-judges-constitution",
+      "_type": "reference"
+    },
+    {
+      "_key": "ice-out-nationwide-protests-330-cities-demand-justice-2026",
+      "_ref": "ice-out-nationwide-protests-330-cities-demand-justice-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "corey-ruiz-madison-police-killing",
+      "_ref": "corey-ruiz-madison-police-killing",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "An investigation into the Active Club movement — neo-Nazi fight clubs secretly controlled by Patriot Front that recruits teens for street violence.",
+    "metaTitle": "Inside TN's Fascist Fight Clubs: A Neo-Nazi Militia Exposed",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "inside-the-fascist-fight-clubs-of-middle-tennessee-a-neo-nazi-militia-hiding-in-plain-sight"
+  },
+  "tags": [
+    "Active Clubs",
+    "Patriot Front",
+    "Robert Rundo",
+    "Sean Kauffmann",
+    "Tennessee",
+    "Neo-Nazi",
+    "White Nationalism",
+    "Fascism",
+    "Far Right",
+    "Domestic Extremism"
+  ],
+  "title": "Inside the Fascist Fight Clubs of Middle Tennessee: A Neo-Nazi Militia Hiding in Plain Sight",
+  "updatedAt": "2026-08-02T05:02:14.184Z",
+  "videoLink": ""
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "five-mississippi-politicians-just-took-food-off-the-table-for-37-400-people",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-wlbt-2025-10-29",
+      "description": "October 29, 2025 - In Humphreys County, about 42% of residents receive SNAP benefits. In Sharkey, Coahoma, and Claiborne counties, that represents about a third of their residents. Mississippi leads the nation in food assistance reliance.",
+      "isAnonymous": false,
+      "label": "WLBT — Analysis: In Some Miss. Counties, One in Three Residents Needs SNAP Benefits",
+      "type": "article",
+      "url": "https://www.wlbt.com/2025/10/29/analysis-some-miss-counties-one-three-residents-needs-snap-benefits-get-by/"
+    },
+    {
+      "_id": "source-ms-today-2025-12-23",
+      "description": "December 23, 2025 - Stricter work requirements for food stamps went into effect in November, putting 33,000 Mississippians at risk of losing their benefits, according to the Center for Budget and Policy Priorities.",
+      "isAnonymous": false,
+      "label": "Mississippi Today — Mississippians Navigate New SNAP Work Requirements",
+      "type": "article",
+      "url": "https://mississippitoday.org/2025/12/23/mississippi-snap-work-requirements/"
+    },
+    {
+      "_id": "source-splcenter-2025-12-22",
+      "description": "December 22, 2025 - The One Big Beautiful Bill Act passed in July 2025 shifts financial burden to states, increasing administrative costs from 50% to 75% in FY27. Food security programs like SNAP have been primarily funded by the federal government.",
+      "isAnonymous": false,
+      "label": "Southern Poverty Law Center — 2026 Policy Priorities for Mississippi",
+      "type": "article",
+      "url": "https://www.splcenter.org/policy-advocacy/mississippi-priorities/"
+    },
+    {
+      "_id": "source-census-2023-01-20",
+      "description": "January 20, 2023 - Mississippi had the nation's highest rate of individuals eligible for SNAP benefits in 2020 — nearly 1 in 3.",
+      "isAnonymous": false,
+      "label": "U.S. Census Bureau — Mississippians Eligible for Food Assistance",
+      "type": "data",
+      "url": "https://www.census.gov/library/stories/2023/01/mississippians-eligible-for-food-assistance.html"
+    },
+    {
+      "_id": "source-pns-2025-03-31",
+      "description": "March 31, 2025 - For nearly one in eight Mississippians, 13.1% of residents depend on SNAP, far above the 8.3% national average.",
+      "isAnonymous": false,
+      "label": "Public News Service — Proposed SNAP Cuts Would Hit Mississippi Especially Hard",
+      "type": "article",
+      "url": "https://www.publicnewsservice.org/2025-03-31/hunger-food-nutrition/proposed-snap-cuts-would-hit-mississippi-especially-hard/a96059-1"
+    },
+    {
+      "_id": "source-wikipedia-2025-07",
+      "description": "July 2025 - The Senate approved the bill 51-50 on July 1, 2025, with Vice President JD Vance casting the tiebreaking vote. It passed the House 218-214 on July 3, 2025.",
+      "isAnonymous": false,
+      "label": "Wikipedia — One Big Beautiful Bill Act",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/One_Big_Beautiful_Bill_Act"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "slug": "the-liberal-handbrake-slips-why-11-mainstream-protesters-crossing-the-line-matters",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-wbur-ice-arrests-2026-04-29",
+      "description": "April 29, 2026 - Coverage of the Burlington ICE facility protest, including details about care packages, Maine participants, and statements from Rev. Allison Smith and organizer Andy Burt.",
+      "isAnonymous": null,
+      "label": "WBUR News - 11 arrested after protesting outside Burlington ICE facility",
+      "type": "article",
+      "url": "https://www.wbur.org/news/2026/04/29/burlington-ice-detention-facility-arrests"
+    },
+    {
+      "_id": "source-boston-com-ice-civil-disobedience-2026-04-29",
+      "description": "April 29, 2026 - Detailed coverage of the civil disobedience action, including Rev. James Gertmenian's statement about maple syrup gifts and his response to police about being part of a larger resistance movement.",
+      "isAnonymous": null,
+      "label": "Boston.com - 11 arrested outside Burlington ICE facility in act of 'civil disobedience'",
+      "type": "article",
+      "url": "https://www.boston.com/news/local-news/2026/04/29/11-arrested-outside-burlington-ice-facility-in-act-of-civil-disobedience-police-say/"
+    },
+    {
+      "_id": "source-boston-globe-ice-care-packages-2026-04-29",
+      "description": "April 29, 2026 - Coverage identifying the arrested activists as including two retired ministers, a civil rights lawyer, a family therapist, and Jewish activists with 'Never Again' signs. Quotes from Minga Claggett-Borne about the evil of the deportation system.",
+      "isAnonymous": null,
+      "label": "Boston Globe - Eleven arrested delivering 'care packages' at Burlington ICE facility",
+      "type": "article",
+      "url": "https://www.bostonglobe.com/2026/04/29/metro/ice-activists-arrests-burlington-care-packages/"
+    },
+    {
+      "_id": "source-press-herald-mainers-ice-2026-04-28",
+      "description": "April 28, 2026 - Comprehensive coverage including the full letter read to detainees, quotes from Kim Matthews about her first arrest at age 72, and details about the Burlington facility's overcrowded conditions and lack of basic amenities.",
+      "isAnonymous": null,
+      "label": "Portland Press Herald - Mainers arrested after protesting at ICE facility: 'It's inhumane'",
+      "type": "article",
+      "url": "https://www.pressherald.com/2026/04/28/mainers-arrested-after-protesting-at-ice-facility-in-massachusetts-its-inhumane/"
+    },
+    {
+      "_id": "source-maine-wire-ice-arrests-2026-04-29",
+      "description": "April 29, 2026 - Coverage identifying the protest as organized primarily by Quakers from Maine, with full list of arrested individuals and context about 'Care Package 3.0' being the third attempt.",
+      "isAnonymous": null,
+      "label": "The Maine Wire - Protest at Massachusetts ICE Facility Leads to Arrests of Eight Mainers",
+      "type": "article",
+      "url": "https://www.themainewire.com/2026/04/protest-at-massachusetts-ice-facility-leads-to-arrests-of-eight-mainers/"
+    }
+  ]
+}

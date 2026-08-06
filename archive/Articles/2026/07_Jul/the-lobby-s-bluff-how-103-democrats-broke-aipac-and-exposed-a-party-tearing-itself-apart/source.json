@@ -1,0 +1,86 @@
+{
+  "slug": "the-lobby-s-bluff-how-103-democrats-broke-aipac-and-exposed-a-party-tearing-itself-apart",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "source-the-hill-aipac-halts-fundraising-for-endorsed-democrats",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Hill — AIPAC halts fundraising for endorsed Democrats",
+      "type": "article",
+      "url": "https://thehill.com/homenews/campaign/5975746-aipac-halts-democratic-donations/"
+    },
+    {
+      "_id": "source-the-guardian-house-defeats-bid-to-end-military-aid-to-israel",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — House defeats bid to end military aid to Israel",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/jul/15/house-democrats-israel-aid"
+    },
+    {
+      "_id": "source-los-angeles-times-more-than-half-of-house-democrats-vote-to-cut-israel-aid",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Los Angeles Times — More than half of House Democrats vote to cut Israel aid",
+      "type": "article",
+      "url": "https://www.latimes.com/world-nation/story/2026-07-16/more-than-half-of-house-democrats-vote-to-cut-israel-aid-in-growing-split"
+    },
+    {
+      "_id": "source-capitalism-institute-103-house-democrats-defy-jeffries",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Capitalism Institute — 103 House Democrats Defy Jeffries",
+      "type": "article",
+      "url": "https://capitalisminstitute.org/more-than-100-house-democrats-defy-jeffries-vote-to-strip-3-3-billion-in-israel-aid/"
+    },
+    {
+      "_id": "source-cnn-over-100-house-democrats-vote-to-block-billions-in-military-aid",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — Over 100 House Democrats vote to block billions in military aid",
+      "type": "article",
+      "url": "https://www.cnn.com/2026/07/15/politics/military-aid-israel-democrats-split-vote"
+    },
+    {
+      "_id": "source-new-york-times-aipac-closes-donor-portal-to-democrats",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — AIPAC Closes Donor Portal to Democrats",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/07/17/us/politics/aipac-donor-portal-democrats.html"
+    },
+    {
+      "_id": "source-aipac-spending-tracker-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AIPAC Spending Tracker 2026",
+      "type": "data",
+      "url": "https://gen-us.space/data/aipac-spending"
+    },
+    {
+      "_id": "source-rep-katherine-clark-statement-on-massie-amendment",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Rep. Katherine Clark — Statement on Massie Amendment",
+      "type": "statement",
+      "url": "https://thehill.com/homenews/campaign/5975746-aipac-halts-democratic-donations/"
+    },
+    {
+      "_id": "source-rep-robert-garcia-floor-statement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Rep. Robert Garcia — Floor Statement",
+      "type": "statement",
+      "url": "https://www.theguardian.com/us-news/2026/jul/15/house-democrats-israel-aid"
+    },
+    {
+      "_id": "source-rep-joaquin-castro-floor-statement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Rep. Joaquin Castro — Floor Statement",
+      "type": "statement",
+      "url": "https://capitalisminstitute.org/more-than-100-house-democrats-defy-jeffries-vote-to-strip-3-3-billion-in-israel-aid/"
+    }
+  ]
+}

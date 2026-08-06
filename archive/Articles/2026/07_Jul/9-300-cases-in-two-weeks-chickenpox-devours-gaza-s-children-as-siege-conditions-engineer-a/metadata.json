@@ -1,0 +1,144 @@
+{
+  "_id": "gaza-chickenpox-crisis-9300-cases-khan-yunis-disease-siege",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "9e1c1a6b3ea816430e59212c3fcc1d52",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "9a1bccb222763bf975e2b3c391351600",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "a510fdc2447bf04d68d4b9d4b4d4be2c",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "More than 9,300 suspected chickenpox cases recorded in two weeks across Gaza's displacement camps. Half concentrated in Khan Yunis. Children denied isolation, clean water, and vaccines in conditions engineered by siege.",
+  "eventDate": "2026-07-10T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "More than 9,300 suspected cases were recorded across 130+ health facilities in just two weeks in early July 2026. Over half were concentrated in Khan Yunis governorate. Doctors say the real number is likely far higher.",
+      "question": "How many chickenpox cases have been recorded in Gaza?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The outbreak is driven by extreme overcrowding in displacement camps housing 1.7 million people, lack of clean water, inability to isolate sick children, vaccine shortages for thousands of children born during the war, and severely damaged health infrastructure.",
+      "question": "Why is chickenpox spreading so rapidly in Gaza?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "In the same two-week period, health teams recorded more than 18,000 new cases of infectious skin diseases including scabies, head lice, and impetigo. UNICEF also reported respiratory infections, watery diarrhea, and flea infestations across more than half of households.",
+      "question": "What other diseases are spreading alongside chickenpox?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Gaza chickenpox outbreak",
+    "9300 cases Gaza",
+    "Khan Yunis disease",
+    "Gaza public health crisis",
+    "Gaza displacement camps",
+    "Gaza vaccine shortage",
+    "Gaza skin disease",
+    "Gaza siege health",
+    "UN OCHA Gaza",
+    "infectious disease Gaza 2026"
+  ],
+  "leadParagraph": "More than 9,300 suspected cases of chickenpox have been recorded in just two weeks across more than 130 health facilities in Gaza, with over half concentrated in Khan Yunis — where overcrowding, contaminated water, and vaccine shortages have turned a manageable childhood illness into a public health catastrophe.",
+  "linkedPitch": null,
+  "location": "Khan Yunis, Gaza Strip / Occupied Palestinian Territory",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Rows of tents in a crowded displacement camp with mud and water pooling between shelters in Gaza",
+    "asset": {
+      "_ref": "image-7dac7a7cba8a15150d1cdb9154d1a4c621e1baea-5500x3654-webp",
+      "_type": "reference"
+    },
+    "caption": "Displaced Palestinians shelter in a tent camp in Gaza City as skin diseases spread through overcrowded displacement sites",
+    "credit": "Reuters/Ibraheem Abu Mustafa"
+  },
+  "methodology": "Reported using Euronews, Al-Monitor, UN OCHA situation reports, Jerusalem Post, IMEMC, and fundsforNGOs coverage. Disease figures from UN Health Cluster and UNICEF. Casualty data from Gaza Ministry of Health and OCHA. Named victims and quotes cross-referenced across AFP, Euronews, and Al-Monitor reporting.",
+  "needsReview": null,
+  "publishedAt": "2026-07-28T17:45:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "5cf05f1d7eef",
+      "_ref": "israels-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-0",
+      "_ref": "palestinian-footballer-fadi-al-naasan-killed-west-bank-settler-attack",
+      "_type": "reference"
+    },
+    {
+      "_key": "02a7f3d0ab41",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "israel-builds-settlements-on-gazas-graves-the-open-air-annexation-and-the-language-of-genocide-made-concrete",
+      "_type": "reference"
+    },
+    {
+      "_key": "40f6839b1fbb",
+      "_ref": "salah-akram-gaza-is-shrinking",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "un-echoes-what-palestinians-have-said-for-decades-settler-violence-is-ethnic-cleansing",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Over 9,300 chickenpox cases recorded in Gaza displacement camps in two weeks. Children denied clean water, vaccines, and isolation in conditions engineered by siege.",
+    "metaTitle": "9,300 Chickenpox Cases in Two Weeks: Gaza's Public Health Catastrophe",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "9-300-cases-in-two-weeks-chickenpox-devours-gaza-s-children-as-siege-conditions-engineer-a"
+  },
+  "tags": [
+    "Gaza",
+    "chickenpox",
+    "Khan Yunis",
+    "public health",
+    "displacement",
+    "siege",
+    "UN",
+    "UNICEF",
+    "disease outbreak",
+    "vaccine crisis"
+  ],
+  "title": "9,300 Cases in Two Weeks: Chickenpox Devours Gaza's Children as Siege Conditions Engineer a Public Health Catastrophe",
+  "updatedAt": null,
+  "videoLink": null
+}

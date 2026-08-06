@@ -1,0 +1,70 @@
+{
+  "slug": "israel-s-war-crime-on-the-high-seas-and-the-global-resistance-it-failed-to-break",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-reuters-flotilla-may19-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters - Israeli forces fired shots at Gaza flotilla, all boats intercepted",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/gaza-aid-flotilla-says-israeli-forces-intercepted-41-vessels-10-still-sailing-2026-05-19/"
+    },
+    {
+      "_id": "source-aljazeera-flotilla-may19-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera - Gaza aid flotilla organisers say all boats intercepted by Israel",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/5/19/gaza-aid-flotilla-organisers-say-41-boats-intercepted-10-still-sailing"
+    },
+    {
+      "_id": "source-guardian-bengvir-may20-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - Ben Gvir stirs diplomatic outrage with flotilla activist abuse video",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/may/20/israeli-security-minister-itamar-ben-gvir-stirs-diplomatic-outrage-with-flotilla-activist-abuse-video"
+    },
+    {
+      "_id": "source-bbc-irish-pm-may19-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BBC - Israeli detention of President Connolly sister unacceptable - Irish PM",
+      "type": "article",
+      "url": "https://www.bbc.com/news/articles/cp8pz5nm6r8o"
+    },
+    {
+      "_id": "source-conversation-blockade-law-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Conversation - Clear laws on enforcing blockades, Israel interception raises serious questions",
+      "type": "article",
+      "url": "https://theconversation.com/there-are-clear-laws-on-enforcing-blockades-israels-interception-of-the-madleen-raises-serious-questions-258562"
+    },
+    {
+      "_id": "source-hrw-gaza-ceasefire-may19-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Human Rights Watch - Gaza: Israel Curbs Aid, Kills Civilians During Ceasefire",
+      "type": "statement",
+      "url": "https://www.hrw.org/news/2026/05/19/gaza-israel-curbs-aid-kills-civilians-during-ceasefire"
+    },
+    {
+      "_id": "source-crustnews-flotilla-connolly-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Crust News - Israel Kidnaps Irish Presidents Sister While US Media Remains Silent",
+      "type": "article",
+      "url": "https://www.crustnews.com/p/israel-kidnaps-irish-presidents-sister"
+    },
+    {
+      "_id": "source-rte-mcentee-may20-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "RTE - Minister Helen McEntee appalled by video of Gaza flotilla activists",
+      "type": "article",
+      "url": "https://www.rte.ie/news/middle-east/2026/0520/1574249-flotilla-gaza-israel/"
+    }
+  ]
+}

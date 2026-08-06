@@ -1,0 +1,134 @@
+{
+  "slug": "todd-blanche-corrupt-ascent-acting-attorney-general-2026",
+  "totalSources": 16,
+  "sources": [
+    {
+      "_id": "source-blanche-nyt-politicization-2026",
+      "description": "New York Times reporting on Blanche enabling wholesale politicization of DOJ",
+      "isAnonymous": false,
+      "label": "NY Times - DOJ Politicization",
+      "type": "media",
+      "url": "https://www.nytimes.com/2026/04/02/us/politics/todd-blanche-attorney-general-trump.html"
+    },
+    {
+      "_id": "source-blanche-nyt-adams-2025",
+      "description": "New York Times reporting on three Adams case prosecutors resigning rather than express regret",
+      "isAnonymous": false,
+      "label": "NY Times - Adams Prosecutors Resign",
+      "type": "media",
+      "url": "https://www.nytimes.com/2025/04/22/nyregion/eric-adams-prosecutors-resign.html"
+    },
+    {
+      "_id": "source-blanche-reuters-adams-2025",
+      "description": "Reuters reporting on three prosecutors resigning after refusing to dismiss Adams charges",
+      "isAnonymous": false,
+      "label": "Reuters - Adams Prosecutors Resign",
+      "type": "media",
+      "url": "https://www.reuters.com/world/us/three-prosecutors-corruption-case-against-nyc-mayor-eric-adams-resign-according-2025-04-22/"
+    },
+    {
+      "_id": "source-blanche-hill-adams-2026",
+      "description": "The Hill reporting on Blanche personally signing Eric Adams dismissal after prosecutors resigned",
+      "isAnonymous": false,
+      "label": "The Hill - Blanche Signed Adams Dismissal",
+      "type": "media",
+      "url": "https://thehill.com/homenews/administration/5813667-todd-blanche-donald-trump-justice-department/"
+    },
+    {
+      "_id": "source-blanche-rawstory-2025",
+      "description": "Raw Story reporting on Blanche declaring 'it's a war' at Federalist Society conference",
+      "isAnonymous": false,
+      "label": "Raw Story - War on Judges",
+      "type": "media",
+      "url": "https://www.rawstory.com/todd-blanche-2674277661/"
+    },
+    {
+      "_id": "source-blanche-politico-2025",
+      "description": "POLITICO reporting on Blanche's fiery Federalist Society speech",
+      "isAnonymous": false,
+      "label": "POLITICO - Federalist Society Speech",
+      "type": "media",
+      "url": "https://www.politico.com/news/2025/11/07/todd-blanche-justice-department-trump-policies-00643602"
+    },
+    {
+      "_id": "source-blanche-nysba-2025",
+      "description": "New York State Bar Association statement denouncing Blanche's 'declaration of war on the judiciary'",
+      "isAnonymous": false,
+      "label": "NYSBA - Denounces War Comments",
+      "type": "statement",
+      "url": "https://nysba.org/new-york-state-bar-association-denounces-attack-on-the-judiciary-and-bar-associations/"
+    },
+    {
+      "_id": "source-blanche-vanity-fair-2025",
+      "description": "Vanity Fair reporting on Boris Epshteyn's circle taking top legal slots in Trump administration",
+      "isAnonymous": false,
+      "label": "Vanity Fair - Epshteyn Circle",
+      "type": "media",
+      "url": "https://www.vanityfair.com/news/story/on-the-trail-with-trumps-inner-circle-of-suck-ups"
+    },
+    {
+      "_id": "source-blanche-politico-hired-2023",
+      "description": "POLITICO reporting on Trump hiring Blanche to defend hush money indictment",
+      "isAnonymous": false,
+      "label": "POLITICO - Trump Hires Blanche",
+      "type": "media",
+      "url": "https://www.politico.com/news/2023/04/03/trump-todd-blanche-indictment-attorney-00090157"
+    },
+    {
+      "_id": "source-blanche-as-usa-2024",
+      "description": "AS USA reporting on Blanche representing Epshteyn, Manafort, and Furman at Cadwalader",
+      "isAnonymous": false,
+      "label": "AS USA - Blanche Clients",
+      "type": "media",
+      "url": "https://en.as.com/latest_news/who-are-todd-blanche-and-susan-necheles-trumps-lawyers-in-ny-hush-money-trial-n/"
+    },
+    {
+      "_id": "source-blanche-above-law-2025",
+      "description": "Above the Law reporting on Blanche warning white-collar lawyers who criticize DOJ",
+      "isAnonymous": false,
+      "label": "Above the Law - White Collar Warning",
+      "type": "media",
+      "url": "https://abovethelaw.com/2025/12/todd-blanche-to-white-collar-lawyers-criticize-trump-administration-and-well-notice/"
+    },
+    {
+      "_id": "source-blanche-wikipedia-2026",
+      "description": "Wikipedia biography of Todd Blanche covering career and confirmation",
+      "isAnonymous": false,
+      "label": "Wikipedia - Todd Blanche",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/Todd_Blanche"
+    },
+    {
+      "_id": "source-blanche-usatoday-2026",
+      "description": "USA Today reporting on Blanche's 52-46 confirmation vote as deputy AG",
+      "isAnonymous": false,
+      "label": "USA Today - Confirmation Vote",
+      "type": "media",
+      "url": "https://eu.usatoday.com/story/news/politics/2026/04/02/who-is-todd-blanche-attorney-general/89437919007/"
+    },
+    {
+      "_id": "source-blanche-notus-2025",
+      "description": "NOTUS reporting on Blanche's February 12, 2025 Senate Judiciary Committee confirmation hearing",
+      "isAnonymous": false,
+      "label": "NOTUS - Confirmation Hearing",
+      "type": "media",
+      "url": "https://www.notus.org/senate/todd-blanche-senate-judiciary-hearing"
+    },
+    {
+      "_id": "source-blanche-fedsoc-2024",
+      "description": "Federalist Society biography of Todd Blanche",
+      "isAnonymous": false,
+      "label": "Federalist Society - Bio",
+      "type": "document",
+      "url": "https://fedsoc.org/bio/todd-blanche"
+    },
+    {
+      "_id": "source-blanche-independent-2026",
+      "description": "The Independent profile of Todd Blanche's rise from Trump lawyer to acting AG",
+      "isAnonymous": false,
+      "label": "The Independent - Blanche Profile",
+      "type": "media",
+      "url": "https://www.independent.co.uk/news/world/americas/us-politics/todd-blanche-attorney-general-pam-bondi-trump-b2951209.html"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "pardoned-by-trump-greeted-as-a-hero-the-narco-president-returns-to-honduras",
+  "totalSources": 2,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-hondurass-hernandez-returns-home-after-trump-pardon-how-it-happened",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Honduras's Hernandez returns home after Trump pardon: How it happened",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/7/27/hondurass-hernandez-returns-home-after-trump-pardon-how-it-happened"
+    },
+    {
+      "_id": "source-washington-times-former-honduran-president-returns-to-honduras-arrest-warrant-su",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Washington Times — Former Honduran President returns to Honduras, arrest warrant suspended",
+      "type": "media",
+      "url": "https://www.washingtontimes.com/news/2026/jul/26/juan-orlando-hernandez-former-president-returns-honduras-arrest/"
+    }
+  ]
+}

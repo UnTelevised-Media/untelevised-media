@@ -1,0 +1,151 @@
+{
+  "_id": "ecuadorian-prosecutor-alexandra-bravo-murdered-us-boat-bombings",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-world-news",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Alexandra Bravo, the Ecuadorian prosecutor investigating U.S. drone strikes on three civilian fishing boats and survivors' accounts of abduction and torture, was assassinated in Manta. Her murder exposes a pattern of U.S. imperial violence in Latin America and the silencing of those who dare investigate American war crimes.",
+  "eventDate": "2026-06-14T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Alexandra Bravo was an Ecuadorian prosecutor assigned to investigate U.S. drone strikes on three Ecuadorian fishing vessels — the Fiorella, Negra Francisca, and Don Maca — and the survivors' accounts of abduction, torture, and enforced disappearance at the hands of American forces. She was murdered in Manta on June 14, 2026.",
+      "question": "Who was Alexandra Bravo?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The Fiorella disappeared on January 20, 2026 with 8 crew members still missing. The Negra Francisca was bombed on March 17 and the Don Maca on March 26, 2026. Survivors from both vessels reported being abducted by men in U.S. military uniforms, blindfolded, starved, and tortured for eight days aboard a U.S.-flagged ship before being abandoned in El Salvador.",
+      "question": "What happened to the three fishing boats?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Operation Southern Spear is the Trump administration's drone bombing campaign targeting boats in the Caribbean Sea and eastern Pacific under the pretext of counter-narcotics operations. At least 66 strikes have killed 221 people since September 2025. Congress has never authorized military force in the region. Amnesty International has characterized it as a campaign of extrajudicial executions.",
+      "question": "What is Operation Southern Spear?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "No. The Pentagon, Coast Guard, and U.S. Southern Command have denied any involvement. Twenty House progressives sent a letter in May demanding answers by May 22. Reps. Castro and Keating sent a follow-up letter on June 13 with a July 10 deadline. None of the agencies have issued a public response. The UN Committee on Enforced Disappearances also demanded information by April 27 — the U.S. has not responded.",
+      "question": "Has the U.S. government responded to calls for investigation?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Ecuador",
+    "US boat bombings",
+    "Alexandra Bravo",
+    "Operation Southern Spear",
+    "fishing boats",
+    "drone strikes",
+    "extrajudicial killing",
+    "Manta",
+    "Chuy García",
+    "Daniel Noboa",
+    "war on drugs",
+    "Latin America imperialism",
+    "torture",
+    "enforced disappearance",
+    "Trump administration",
+    "Pete Hegseth",
+    "coast guard"
+  ],
+  "leadParagraph": "Alexandra Bravo, the Ecuadorian prosecutor investigating U.S. drone strikes on three civilian fishing boats and survivors' accounts of abduction and torture, was shot dead in the coastal city of Manta on June 14. Her murder — the 26th assassination of an Ecuadorian justice system member since 2020 — came as she faced systematic obstruction from both Ecuador's U.S.-backed government and Washington's own stonewalling. Rep. Chuy García now demands an independent investigation into what he called 'not a coincidence.'",
+  "linkedPitch": null,
+  "location": "Manta, Ecuador",
+  "mainImage": {
+    "_type": "image",
+    "alt": "The fishing vessel Negra Francisca Duarte II, bombed on March 17, 2026",
+    "asset": {
+      "_ref": "image-5187f5e1379a3118d132de6a90ee7f429e0c1216-1280x708-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "This article is based on primary reporting by Drop Site News (Camila Lourdes Galarza), including exclusive video evidence, NASA thermal imagery analysis by Airwars OSINT analyst Tomi McCluskey, vessel tracking data, police interviews with eyewitnesses, and interviews with survivors, family members, and Ecuadorian officials. Additional sourcing includes Amnesty International's Evidence Lab reconstruction using VMS data from Global Fishing Watch, Human Rights Watch interviews with the prosecutor, congressional letters and statements, and WOLA's historical analysis of the U.S. Forward Operating Location in Manta.",
+  "needsReview": null,
+  "publishedAt": "2026-07-28T05:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "8cgpd47e3kq",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "alligator-alcatraz-systemic-torture-cover-up",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "UH0czzC9lJ5tyspFR9p8hO",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "albania-flamingo-revolution-kushner-resort-protests",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "BOAIKFRWNleR9aRm6RBNhU",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "0bzv6vDb5M9RssFkIn3Egp",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "ecuadorian-prosecutor-investigating-us-boat-bombings-murdered-in-manta"
+  },
+  "tags": [
+    "Ecuador",
+    "US imperialism",
+    "Operation Southern Spear",
+    "drone strikes",
+    "Alexandra Bravo",
+    "Chuy García",
+    "fishing boats",
+    "extrajudicial killing",
+    "Manta",
+    "Hegseth"
+  ],
+  "title": "Ecuadorian Prosecutor Investigating US Boat Bombings Murdered in Manta",
+  "updatedAt": null,
+  "videoLink": null
+}

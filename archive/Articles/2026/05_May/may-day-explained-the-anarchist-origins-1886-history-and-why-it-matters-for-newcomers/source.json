@@ -1,0 +1,54 @@
+{
+  "slug": "may-day-explained-the-anarchist-origins-1886-history-and-why-it-matters-for-newcomers",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-libcom-may-day-history",
+      "description": "Comprehensive history of May Day from the 1886 eight-hour day movement in Chicago, the Haymarket Affair, the trial and execution of anarchist labor organizers, and how May Day became International Workers' Day through the Second International.",
+      "isAnonymous": null,
+      "label": "libcom.org - A short history of May Day",
+      "type": "article",
+      "url": "https://libcom.org/article/short-history-may-day"
+    },
+    {
+      "_id": "source-anarchist-federation-haymarket",
+      "description": "Detailed account of the Haymarket Affair including Lucy Parsons' role, the police attack on workers, the bomb thrown, the subsequent raids and trials, and the execution of Albert Parsons and other anarchist labor leaders.",
+      "isAnonymous": null,
+      "label": "Anarchist Federation - The Haymarket Affair (1886)",
+      "type": "article",
+      "url": "https://www.anarchistfederation.net/the-first-may-day-the-haymarket-affair-1886"
+    },
+    {
+      "_id": "source-wikipedia-lucy-parsons",
+      "description": "Biographical information on Lucy Parsons, born enslaved in Texas, who became a central figure in the anarchist labor movement, organized the May 4 meeting supporting striking sewing women, and continued organizing after her husband Albert Parsons was executed in the Haymarket Affair.",
+      "isAnonymous": null,
+      "label": "Wikipedia - Lucy Parsons",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/Lucy_Parsons"
+    },
+    {
+      "_id": "source-blackpast-lucy-parsons",
+      "description": "Historical account of Lucy Parsons' role in the Haymarket Affair, her speaking tour to raise money for her husband Albert Parsons' defense, and her continued activism in the anarchist movement after his execution.",
+      "isAnonymous": null,
+      "label": "BlackPast.org - Lucy Parsons, 'I am An Anarchist' (1886)",
+      "type": "article",
+      "url": "https://blackpast.org/african-american-history/1886-lucy-parsons-i-am-anarchist/"
+    },
+    {
+      "_id": "source-washington-post-may-day-2026",
+      "description": "April 30, 2026 coverage of global May Day rallies calling for peace, higher wages, and better working conditions as workers grapple with rising energy costs and shrinking purchasing power tied to the Iran war.",
+      "isAnonymous": null,
+      "label": "The Washington Post - What to know about May Day demonstrations as workers face rising energy costs",
+      "type": "article",
+      "url": "https://www.washingtonpost.com/world/2026/04/30/may-day-international-workers-rallies-demonstrations/57b3a6c6-44fa-11f1-b19d-32431046b5b4_story.html"
+    },
+    {
+      "_id": "source-aljazeera-may-day-2026",
+      "description": "May 1, 2026 coverage of May Day Strong coalition's 'workers over billionaires' protests with hundreds of demonstrations planned across the US, and global May Day rallies.",
+      "isAnonymous": null,
+      "label": "Al Jazeera - Rallies under way as workers gather for International Labour Day",
+      "type": "article",
+      "url": "https://www.aljazeera.com/economy/2026/5/1/rallies-under-way-as-workers-gather-for-international-labour-day"
+    }
+  ]
+}

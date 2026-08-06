@@ -1,0 +1,30 @@
+{
+  "slug": "garrett-rolfe-granted-bond-in-murder-of-rayshard-brooks-bond-set-at-500000",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "YtJR1N6fGBsJu5O68LOOZq",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.facebook.com/NowThisNews/videos/290274692336360/UzpfSTkwNDQ1MzM0MjkwNjQyMToz",
+      "type": "media",
+      "url": "https://www.facebook.com/NowThisNews/videos/290274692336360/UzpfSTkwNDQ1MzM0MjkwNjQyMTozMzc4NTE2NTk4ODMzNDA0/"
+    },
+    {
+      "_id": "YtJR1N6fGBsJu5O68LOOnO",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.ajc.com/news/crime--law/cop-who-shot-killed-rayshard-brooks-was-previously-r",
+      "type": "article",
+      "url": "https://www.ajc.com/news/crime--law/cop-who-shot-killed-rayshard-brooks-was-previously-reprimanded-for-use-force/dOTu99Lym4SjkmXmkt0P8M/"
+    },
+    {
+      "_id": "3f988496-67b5-4277-8449-9ccab016390f",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Bond Hearing Transcript",
+      "type": "document",
+      "url": "https://www.rev.com/transcripts/garrett-rolfe-bond-hearing-transcript-police-officer-who-shot-rayshard-brooks-hearing"
+    }
+  ]
+}

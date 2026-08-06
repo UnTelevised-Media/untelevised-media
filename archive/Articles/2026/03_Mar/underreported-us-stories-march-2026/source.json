@@ -1,0 +1,54 @@
+{
+  "slug": "underreported-us-stories-march-2026",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "0bzv6vDb5M9RssFkImdbB1",
+      "description": "Indianapolis has normalized 25,000 annual eviction filings.",
+      "isAnonymous": null,
+      "label": "WIBC - Indy Eviction Crisis: 25,000 Annual Filings Now 'New Normal'",
+      "type": "document",
+      "url": "https://wibc.com/882422/indy-eviction-crisis-annual-filings-now-the-new-normal/"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkImdbFT",
+      "description": "Rural healthcare access emerged as universal concern for governors.",
+      "isAnonymous": null,
+      "label": "National Governors Association - Healthcare priorities in 2026 State of the State addresses",
+      "type": "document",
+      "url": "https://www.nga.org/news/commentary/healthcare-priorities-in-governors-2026-state-of-the-state-addresses/"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkImdbJv",
+      "description": "Multiple California rural hospitals filed for bankruptcy.",
+      "isAnonymous": null,
+      "label": "California Advocate-News - California hospitals laying off thousands",
+      "type": "document",
+      "url": "https://www.advocate-news.com/2026/03/24/california-hospitals-laying-off-thousands-as-funding-cuts-trickle-down/"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkImdaxf",
+      "description": "LA Councilwoman Eunisses Hernandez says first three weeks of ICE deployments pushed city to brink of martial law.",
+      "isAnonymous": null,
+      "label": "NPR/OPB - ICE raids create chaos for cities, martial law fears",
+      "type": "document",
+      "url": "https://www.npr.org/2026/03/25/nx-s1-5752369/ice-surveillance-data-brokers-congress-anthropic"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkImdb27",
+      "description": "City workers attempted to weld shut storm drain with homeless person still inside.",
+      "isAnonymous": null,
+      "label": "Los Angeles Times - L.A. crews nearly seal manhole with person inside",
+      "type": "document",
+      "url": "https://www.latimes.com/california/story/2026-03-25/southla-sewer-homeless-residents-nearly-sealed-inside"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkImdb6Z",
+      "description": "Fargo police used Clearview AI to falsely arrest Tennessee grandmother on fake bank fraud charges.",
+      "isAnonymous": null,
+      "label": "Reason - Fargo police refuse to apologize to Tennessee grandma jailed on bogus AI evidence",
+      "type": "document",
+      "url": "https://reason.com/2026/03/30/fargo-police-refuse-to-apologize-to-tennessee-grandma-jailed-on-bogus-ai-evidence/"
+    }
+  ]
+}

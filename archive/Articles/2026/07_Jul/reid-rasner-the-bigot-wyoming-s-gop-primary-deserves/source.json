@@ -1,0 +1,70 @@
+{
+  "slug": "reid-rasner-the-bigot-wyoming-s-gop-primary-deserves",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-cowboy-state-daily-reid-rasner-fired-by-clearinghouse",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Cowboy State Daily — Reid Rasner Fired by Clearinghouse",
+      "type": "media",
+      "url": "https://cowboystatedaily.com/2026/06/24/wyoming-congressional-candidate-reid-rasner-fired-by-clearinghouse"
+    },
+    {
+      "_id": "source-semafor-gay-republican-sues-after-being-called-pedophile",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Semafor — Gay Republican Sues After Being Called Pedophile",
+      "type": "media",
+      "url": "https://www.semafor.com/article/07/10/2026/reid-rasner-wyoming-republican-gay-pedophile-lawsuit"
+    },
+    {
+      "_id": "source-wyoming-news-casper-star-tribune-rasners-viral-call-to-ban-sharia-law-misreprese",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wyoming News / Casper Star-Tribune — Rasner's Viral Call to Ban Sharia Law Misrepresents Islam",
+      "type": "media",
+      "url": "https://www.wyomingnews.com/news/local_news/rasners-viral-call-to-ban-sharia-law-misrepresents-islam-former-imam-says/article_90bddd9d-bc7d-4333-aa42-212886873395.html"
+    },
+    {
+      "_id": "source-daily-mail-congressional-candidate-discharged-from-job",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Daily Mail — Congressional Candidate Discharged From Job",
+      "type": "media",
+      "url": "https://www.dailymail.com/news/article-15929815/congressional-candidate-discharged-job-unapproved-activity-wyoming.html"
+    },
+    {
+      "_id": "source-wyoming-news-wyoming-tribune-eagle-rasner-condemns-death-threats-on-campaign-tra",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wyoming News / Wyoming Tribune Eagle — Rasner Condemns Death Threats on Campaign Trail (July 10, 2026)",
+      "type": "media",
+      "url": "https://www.wyomingnews.com/news/local_news/rasner-condemns-death-threats-on-campaign-trail/article_90bddd9d-bc7d-4333-aa42-212886873395.html"
+    },
+    {
+      "_id": "source-wyofile-whats-the-deal-with-reid-rasner",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WyoFile — What's the Deal with Reid Rasner?",
+      "type": "media",
+      "url": "https://www.wyofile.com/reid-rasner-wyoming-congress/"
+    },
+    {
+      "_id": "source-cowboy-state-daily-wyoming-politicos-say-reid-rasner-campaign-is-not-a-parody",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Cowboy State Daily — Wyoming Politicos Say Reid Rasner Campaign Is Not a Parody",
+      "type": "media",
+      "url": "https://cowboystatedaily.com/2026/05/29/wyoming-politicos-say-reid-rasner-campaign-is-not-a-parody/"
+    },
+    {
+      "_id": "source-cowboy-state-daily-iowa-man-sued-by-reid-rasner-admits-calling-him-names",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Cowboy State Daily — Iowa Man Sued by Reid Rasner Admits Calling Him Names",
+      "type": "media",
+      "url": "https://cowboystatedaily.com/2026/04/17/iowa-man-sued-by-reid-rasner-admits-calling-him-names-says-its-protected-speech/"
+    }
+  ]
+}

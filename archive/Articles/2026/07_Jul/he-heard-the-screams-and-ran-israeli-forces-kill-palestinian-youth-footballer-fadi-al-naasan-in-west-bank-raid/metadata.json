@@ -1,0 +1,142 @@
+{
+  "_id": "palestinian-footballer-fadi-al-naasan-killed-west-bank-settler-attack",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-gaza",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-hr",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-mideast",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Fadi Hamdallah al-Naasan, 17, was shot by Israeli forces during a settler attack on his West Bank village of al-Mughayyir. His leg was amputated. He died a week later. He is the 568th member of Palestine's football family killed since October 2023.",
+  "eventDate": "2026-07-11T18:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "According to the Palestine Football Association and multiple wire services, Israeli forces shot Fadi al-Naasan in the thigh during a settler attack on al-Mughayyir village on July 11, 2026. The Israeli military declined to comment when asked by AFP.",
+      "question": "Who shot Fadi al-Naasan?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Israeli settlers attacked the home of Mohammad Hamed Abu Alia, accompanied by Israeli soldiers who provided armed protection. Forces fired live ammunition, rubber-coated steel bullets, and stun grenades, wounding four Palestinians including a 10-year-old child struck in the head. Fadi was shot in the thigh with live ammunition. Ambulance crews were temporarily blocked from reaching the wounded.",
+      "question": "What happened during the July 11 raid on al-Mughayyir?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Palestine Football Association stated that as of July 18, 2026, 1,013 members of the Palestinian sports community have been killed since October 7, 2023, including 568 from the football family — players, coaches, referees, and administrators.",
+      "question": "How many Palestinian footballers have been killed?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "According to the UN (OCHA), 87 Palestinians have been killed in the West Bank in 2026 as of July 24, at least 18 by settlers. Settler attacks now account for 55% of Palestinian injuries in the West Bank and average three per day in 2026, up from one every three days in 2020. HRW has warned that impunity is turning the West Bank into a 'powder keg.'",
+      "question": "What is the broader pattern of settler violence in the West Bank?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Fadi al-Naasan",
+    "al-Mughayyir",
+    "West Bank settler violence",
+    "Palestinian football deaths",
+    "IDF settler cooperation",
+    "Israeli occupation",
+    "B'Tselem",
+    "OCHA statistics"
+  ],
+  "leadParagraph": "Fadi Hamdallah al-Naasan was 17 years old. He played for the Palestinian national youth team. When settlers attacked his village on July 11, he heard women screaming and ran to help. Israeli forces shot him in the thigh. His leg was amputated. He died on July 18. He was buried in al-Mughayyir with hundreds of mourners. His mother said everyone loved him.",
+  "linkedPitch": null,
+  "location": "al-Mughayyir, Ramallah and al-Bireh Governorate, Occupied West Bank",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Palestinian mourners in black carrying the body of 17-year-old Fadi al-Naasan on a stretcher through a dusty street during his funeral in al-Mughayyir, occupied West Bank, July 18, 2026",
+    "asset": {
+      "_ref": "image-46e368ea0b598c3bb913327a3808371286102d37-1200x800-webp",
+      "_type": "reference"
+    },
+    "caption": "Mourners carry the body of 17-year-old Fadi al-Naasan during his funeral in the village of al-Mughayyir, east of Ramallah in the Israeli-occupied West Bank, on July 18, 2026. Fadi died a week after being shot by Israeli forces during a settler attack on his village.",
+    "credit": "AFP/Jaafar Ashtiyeh"
+  },
+  "methodology": "Reporting based on wire service accounts from AFP, Reuters, and Xinhua; Palestinian official statements from WAFA and the Palestine Football Association; human rights documentation from Human Rights Watch, B'Tselem, and the UN Office for the Coordination of Humanitarian Affairs (OCHA); and on-the-ground reporting from Haaretz, the Guardian, and the Intercept. All statistics attributed to their original sources. No fabricated data or quotes.",
+  "needsReview": null,
+  "publishedAt": "2026-07-27T18:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "settler-drags-child-body-west-bank",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "west-bank-settlers-8000-sheep-goats-stolen-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "un-echoes-what-palestinians-have-said-for-decades-settler-violence-is-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "west-bank-burning-organized-settler-violence-state-backing-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "israeli-settlers-attack-west-bank-school-kill-children",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "israel-yellow-line-gaza-expanding-de-facto-reoccupation",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "he-heard-the-screams-and-ran-israeli-forces-kill-palestinian-youth-footballer-fadi-al-naasan-in-west-bank-raid"
+  },
+  "tags": [
+    "West Bank",
+    "settler violence",
+    "Palestine",
+    "al-Mughayyir",
+    "Fadi al-Naasan",
+    "IDF",
+    "Palestinian football",
+    "ethnic cleansing"
+  ],
+  "title": "He Heard the Screams and Ran: Israeli Forces Kill Palestinian Youth Footballer Fadi al-Naasan in West Bank Raid",
+  "updatedAt": null,
+  "videoLink": null
+}

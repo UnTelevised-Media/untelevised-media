@@ -1,0 +1,54 @@
+{
+  "slug": "settlers-burn-electricity-cables-jalud-west-bank-terror-campaign",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-times-of-israel-jalud-attack",
+      "description": "May 2, 2026 - Reports that settlers attacked the West Bank village of Jalud, setting fire to electricity cables and putting down road spikes to delay the arrival of security forces.",
+      "isAnonymous": null,
+      "label": "Times of Israel - Settlers Attack Jalud Village",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/liveblog-may-2-2026/"
+    },
+    {
+      "_id": "source-reuters-settlements-april-2026",
+      "description": "April 9, 2026 - Israel's cabinet approved 34 new settlements on April 1, the largest-ever recognition of unauthorized outposts in a single step. At least six Palestinians killed by settlers since start of 2026, with at least 700 Palestinians displaced from start of 2025 through February 2026.",
+      "isAnonymous": null,
+      "label": "Reuters - Israel Approves Dozens of New Settlements",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/israel-approves-dozens-new-settlements-west-bank-watchdog-says-2026-04-09/"
+    },
+    {
+      "_id": "source-un-experts-state-backed-terror",
+      "description": "March 19, 2026 - UN experts condemn Israel's accelerating campaign of ethnic cleansing and annexation in occupied West Bank. Reports reveal arms and vehicles provided to settler groups. At least 86 Israeli settler attacks across 60 communities between February 3-16, 2026.",
+      "isAnonymous": null,
+      "label": "UN Experts - State-Backed Terror Squads",
+      "type": "statement",
+      "url": "https://www.un.org/unispal/document/un-experts-state-backed-terror-squads-at-the-forefront-of-israels-ethnic-cleansing-and-annexation-policy-in-the-west-bank/"
+    },
+    {
+      "_id": "source-guardian-impunity-west-bank",
+      "description": "March 27, 2026 - Analysis reveals Israel has not prosecuted its citizens for killing Palestinian civilians in occupied West Bank since start of this decade, creating impunity for campaign of violence.",
+      "isAnonymous": null,
+      "label": "The Guardian - Israel Has Not Prosecuted Citizens for Killing Palestinians",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/mar/25/no-israel-prosecutions-for-killing-palestinian-civilians-in-occupied-west-bank-since-start-of-decade"
+    },
+    {
+      "_id": "source-al-jazeera-settler-rampage",
+      "description": "March 23, 2026 - Simultaneous attacks on at least six communities, including Jalud and Salfit south of Nablus. Settlers set homes and vehicles on fire, wounded Palestinians in coordinated raids.",
+      "isAnonymous": null,
+      "label": "Al Jazeera - Israeli Settlers Rampage Through West Bank Towns",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/3/23/israeli-settlers-rampage-through-west-bank-towns-for-second-night-in-a-row"
+    },
+    {
+      "_id": "source-trt-world-jalud-attack",
+      "description": "April 28, 2026 - Dozens injured as Israeli illegal settlers storm Jalud village and set house ablaze. Part of ongoing pattern of settler violence in West Bank.",
+      "isAnonymous": null,
+      "label": "TRT World - Dozens Injured as Settlers Storm Jalud",
+      "type": "media",
+      "url": "https://www.trtworld.com/article/ee177785e702"
+    }
+  ]
+}

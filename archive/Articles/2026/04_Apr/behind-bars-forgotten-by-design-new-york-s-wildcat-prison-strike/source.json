@@ -1,0 +1,46 @@
+{
+  "slug": "behind-bars-forgotten-by-design-new-york-s-wildcat-prison-strike",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-ny-prison-north-country",
+      "description": "March 25, 2026 report on one-year mark of NY wildcat strike. Documents thousands of guards refusing to return to work, deal reaching but failing. Notes ongoing impact on incarcerated people with limited access to programs, visitation, and basic services.",
+      "isAnonymous": false,
+      "label": "North Country Public Radio - One Year Later, Strike Continues",
+      "type": "media",
+      "url": "https://www.northcountrypublicradio.org/news/story/53108/20260309/one-year-later-new-yorks-prison-strike-continues-to-impact-incarcerated-people"
+    },
+    {
+      "_id": "source-ny-prison-gothamist",
+      "description": "January 29, 2026 report on NY prison strike costs. Documents state's bill to post National Guard in prisons approaching  billion. Notes strike began February 21, programs halted, and continued refusal by guards to return to work.",
+      "isAnonymous": false,
+      "label": "Gothamist - New York's Prison Strike Has  Billion Tab",
+      "type": "media",
+      "url": "https://gothamist.com/news/new-yorks-prison-strike-has-1-billion-tab-and-climbing"
+    },
+    {
+      "_id": "source-ny-prison-ny-focus",
+      "description": "January 26, 2026 report documenting halted prison programs. Notes administrator statement that programs haven't run at another prison since strike began due to staffing needs. Highlights continued inability to resume rehabilitative services despite deal reaching.",
+      "isAnonymous": false,
+      "label": "NY Focus - Keeping New Yorkers Stuck in Prison",
+      "type": "media",
+      "url": "https://nysfocus.com/2026/01/26/docs-prison-programs-early-release-parole-guard-strike"
+    },
+    {
+      "_id": "source-ny-prison-marshall",
+      "description": "Analysis of NY prison strike from incarceration reform advocacy perspective. Notes exploitation of incarcerated people during lockdown, lack of oversight, and calls for constitutional amendments to address prison conditions. Argues that strike was successful in exposing systemic failures.",
+      "isAnonymous": false,
+      "label": "The Marshall Project - We Thought Our Prison Strike Was a Success",
+      "type": "report",
+      "url": "https://www.themarshallproject.org/records/3597-prison-strike"
+    },
+    {
+      "_id": "source-ny-prison-nyt",
+      "description": "February 21, 2025 NY Times report documenting expansion of solitary confinement during wildcat strikes. Notes strike began with Collins and Elmira lockups, guards setting up picket lines. Reports loosening of rules that had been tightened in response to 2020 prison justice reform protests.",
+      "isAnonymous": false,
+      "label": "The New York Times - N.Y. Prisons Loosen Solitary Confinement Rules",
+      "type": "media",
+      "url": "https://www.nytimes.com/2025/02/20/nyregion/new-york-prison-strikes-solitary-confinement.html"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "ice-kills-again-two-fatal-shootings-in-one-week-a-policy-halted-overnight-and-a-president-who",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-cnn-ice-shootings-in-biddeford-maine-and-houston-spark-outcry",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — ICE Shootings in Biddeford, Maine, and Houston Spark Outcry",
+      "type": "media",
+      "url": "https://www.cnn.com/2026/07/14/us/live-news/ice-shootings-maine-houston"
+    },
+    {
+      "_id": "source-the-guardian-ice-agents-kill-man-in-maine-as-senator-says-victim-not-target",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — ICE Agents Kill Man in Maine as Senator Says Victim Not Target",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2026/jul/13/maine-ice-shooting-death"
+    },
+    {
+      "_id": "source-the-guardian-white-house-overturns-dhs-halt-to-ice-traffic-stops",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — White House Overturns DHS Halt to ICE Traffic Stops",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2026/jul/15/trump-ice-traffic-stops"
+    },
+    {
+      "_id": "source-cnn-ice-traffic-stops-halted-then-swiftly-reinstated",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — ICE Traffic Stops Halted, Then Swiftly Reinstated",
+      "type": "media",
+      "url": "https://www.cnn.com/2026/07/16/us/traffic-stops-ice-shootings-dhs"
+    },
+    {
+      "_id": "source-the-guardian-11-people-fatally-shot-by-ice-since-trump-took-office",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — 11 People Fatally Shot by ICE Since Trump Took Office",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2026/jul/09/ice-immigration-shooting-deaths-trump"
+    },
+    {
+      "_id": "source-new-york-times-trump-pressures-ice-to-resume-traffic-stops",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — Trump Pressures ICE to Resume Traffic Stops",
+      "type": "media",
+      "url": "https://www.nytimes.com/2026/07/15/us/politics/trump-ice-traffic-stops.html"
+    }
+  ]
+}

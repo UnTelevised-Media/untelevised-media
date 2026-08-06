@@ -1,0 +1,118 @@
+{
+  "slug": "oct-7th-a-false-flag-that-will-live-in-infamy",
+  "totalSources": 14,
+  "sources": [
+    {
+      "_id": "source-npr-israels-spy-agency-lists-failures-in-preventing-oct-7-attack",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR — Israel's Spy Agency Lists Failures in Preventing Oct. 7 Attack",
+      "type": "article",
+      "url": "https://www.npr.org/2025/03/05/nx-s1-5318591/israel-shin-bet-security-failure-october-7-attack"
+    },
+    {
+      "_id": "source-combating-terrorism-center-at-west-point-assessment-of-the-intelligence-failings",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Combating Terrorism Center at West Point — Assessment of the Intelligence Failings",
+      "type": "article",
+      "url": "https://ctc.westpoint.edu/the-october-7-attack-an-assessment-of-the-intelligence-failings/"
+    },
+    {
+      "_id": "source-the-canary-israeli-soldier-confirms-troops-ordered-to-stand-down-on-7-october",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Canary — Israeli Soldier Confirms Troops Ordered to Stand Down on 7 October",
+      "type": "article",
+      "url": "https://www.thecanary.co/skwawkbox/2025/09/25/7-october-israeli-troops/"
+    },
+    {
+      "_id": "source-al-jazeera-what-the-report-into-israeli-military-failures-on-october-7-says",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — What the Report Into Israeli Military Failures on October 7 Says",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2025/2/28/what-has-the-report-into-israeli-military-failures-on-october-7-said"
+    },
+    {
+      "_id": "source-jerusalem-post-netanyahu-idf-chief-delayed-israels-response-to-october-7",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jerusalem Post — Netanyahu, IDF Chief Delayed Israel's Response to October 7",
+      "type": "article",
+      "url": "https://www.jpost.com/israel-news/politics-and-diplomacy/article-886242"
+    },
+    {
+      "_id": "source-ndtv-ex-israel-army-chief-admits-using-hannibal-directive-against-own-soldiers",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NDTV — Ex Israel Army Chief Admits Using Hannibal Directive Against Own Soldiers",
+      "type": "article",
+      "url": "https://www.ndtv.com/world-news/yoav-gallant-admits-to-authorising-hannibal-directive-during-october-7-attack-7663931"
+    },
+    {
+      "_id": "source-electronic-intifada-how-israel-killed-hundreds-of-its-own-people-on-7-october",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Electronic Intifada — How Israel Killed Hundreds of Its Own People on 7 October",
+      "type": "article",
+      "url": "https://electronicintifada.net/content/how-israel-killed-hundreds-its-own-people-7-october/49216"
+    },
+    {
+      "_id": "source-reuters-israel-investigates-possible-trading-knowledge-ahead-of-oct-7-hamas-atta",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — Israel Investigates Possible Trading Knowledge Ahead of Oct 7 Hamas Attack",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/israel-investigates-possible-trading-knowledge-ahead-oct-7-hamas-attack-2023-12-04/"
+    },
+    {
+      "_id": "source-cnn-msci-israel-etf-unknown-traders-appear-to-have-anticipated-october-7-attack",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — MSCI Israel ETF: Unknown Traders Appear to Have Anticipated October 7 Attack",
+      "type": "article",
+      "url": "https://www.cnn.com/2023/12/04/business/some-traders-appear-to-have-anticipated-october-7-hamas-attack-research-finds/index.html"
+    },
+    {
+      "_id": "source-haaretz-idf-approved-extension-of-nova-festival-despite-officials-concern-over-p",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Haaretz — IDF Approved Extension of Nova Festival Despite Officials' Concern Over Proximity to Gaza",
+      "type": "article",
+      "url": "https://www.haaretz.com/israel-news/2025-09-04/ty-article/.premium/idf-approved-extension-of-nova-festival-despite-officials-concern-over-proximity-to-gaza/00000199-1431-dd6c-afdb-7db3b7860000"
+    },
+    {
+      "_id": "source-middle-east-monitor-israels-7-october-narrative-under-fresh-scrutiny-after-army-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Monitor — Israel's 7 October Narrative Under Fresh Scrutiny After Army Accused of Deleting Footage",
+      "type": "article",
+      "url": "https://www.middleeastmonitor.com/20260514-israels-7-october-narrative-under-fresh-scrutiny-after-army-accused-of-deleting-footage/"
+    },
+    {
+      "_id": "source-the-grayzone-israeli-authorities-refuse-to-return-massive-trove-of-oct-7-video",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Grayzone — Israeli Authorities Refuse to Return Massive Trove of Oct 7 Video",
+      "type": "article",
+      "url": "https://thegrayzone.com/2026/05/31/israeli-trove-oct-7-video-kibbutz/"
+    },
+    {
+      "_id": "source-the-cipher-brief-one-year-later-lessons-from-israels-october-7-intelligence-fail",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Cipher Brief — One Year Later, Lessons from Israel's October 7 Intelligence Failures",
+      "type": "article",
+      "url": "https://www.thecipherbrief.com/column_article/one-year-later-lessons-from-israels-october-7-intelligence-failures"
+    },
+    {
+      "_id": "source-deutsche-welle-idf-admits-grave-failures-ahead-of-october-7-hamas-attacks",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Deutsche Welle — IDF Admits Grave Failures Ahead of October 7 Hamas Attacks",
+      "type": "article",
+      "url": "https://www.dw.com/en/idf-admits-grave-failures-over-hamas-october-7-attack/a-71803612"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "slug": "israel-death-penalty-palestinians-torture-regime",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "zgDTurywGqDzKq6rxGxji4",
+      "description": null,
+      "isAnonymous": false,
+      "label": "The Guardian - Israel passes law to give death penalty to Palestinians",
+      "type": "document",
+      "url": "https://www.theguardian.com/world/2026/mar/30/israel-passes-law-death-penalty-palestinian-convicted-terrorists"
+    },
+    {
+      "_id": "zgDTurywGqDzKq6rxGxjkF",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Al Jazeera - World reacts to Israel passing death penalty law",
+      "type": "document",
+      "url": "https://www.aljazeera.com/news/2026/3/30/dangerous-escalation-world-reacts-to-israel-passing-death-penalty-law"
+    },
+    {
+      "_id": "zgDTurywGqDzKq6rxGxjmQ",
+      "description": null,
+      "isAnonymous": false,
+      "label": "UN OHCHR - Torture has become 'state doctrine' in Israel",
+      "type": "statement",
+      "url": "https://www.ohchr.org/en/press-releases/2026/03/un-expert-warns-torture-has-become-state-doctrine-israel-making-prisons"
+    },
+    {
+      "_id": "zgDTurywGqDzKq6rxGxjob",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Democracy Now! - Torture & Genocide: U.N. Expert Francesca Albanese",
+      "type": "media",
+      "url": "https://www.democracynow.org/2026/3/26/albanese_un_palestine_rapporteur"
+    },
+    {
+      "_id": "zgDTurywGqDzKq6rxGxjqm",
+      "description": null,
+      "isAnonymous": false,
+      "label": "UN Report - Torture and Genocide (A/HRC/61/71)",
+      "type": "document",
+      "url": "https://www.un.org/unispal/document/torture-and-genocide-report-of-the-special-rapporteur-on-the-situation-of-human-rights-in-the-palestinian-territories-occupied-since-1967-advance-edited-version-a-hrc-61-71/"
+    },
+    {
+      "_id": "zgDTurywGqDzKq6rxGxjsx",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Wikipedia - Camp 1391 (Israeli Guantanamo)",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/Camp_1391"
+    },
+    {
+      "_id": "zgDTurywGqDzKq6rxGxjv8",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Wikipedia - Sde Teiman detention camp",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/Sde_Teiman_detention_camp"
+    },
+    {
+      "_id": "zgDTurywGqDzKq6rxGxjxJ",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Al Jazeera - Israel holding more than half of Palestinian child detainees without charge",
+      "type": "document",
+      "url": "https://www.aljazeera.com/news/2026/3/18/israel-holding-more-than-half-of-palestinian-child-detainees-without-charge"
+    }
+  ]
+}

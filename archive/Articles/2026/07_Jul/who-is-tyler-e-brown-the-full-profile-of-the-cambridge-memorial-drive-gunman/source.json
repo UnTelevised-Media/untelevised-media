@@ -1,0 +1,102 @@
+{
+  "slug": "who-is-tyler-e-brown-the-full-profile-of-the-cambridge-memorial-drive-gunman",
+  "totalSources": 12,
+  "sources": [
+    {
+      "_id": "src-tyler-brown-wbur-cracks",
+      "description": "Deep investigation into Brown's history, sentencing, Brie's House, Stacey Borden, Kevin Sibley connections",
+      "isAnonymous": null,
+      "label": "WBUR - After Memorial Drive shootings, questions linger on how alleged gunman slipped through the cracks",
+      "type": "article",
+      "url": "https://www.wbur.org/news/2026/05/15/memorial-drive-shooting-tyler-brown-history-questions-parole"
+    },
+    {
+      "_id": "src-tyler-brown-wbur-hospital",
+      "description": "Details on McLean hospital discharge, parole officer call, FaceTime with rifle, timeline of shooting",
+      "isAnonymous": null,
+      "label": "WBUR - Alleged Cambridge gunman released from psychiatric hospital 3 days before shooting",
+      "type": "article",
+      "url": "https://www.wbur.org/news/2026/05/12/cambridge-memorial-drive-shooting-tyler-brown-history"
+    },
+    {
+      "_id": "src-tyler-brown-globe-life",
+      "description": "Comprehensive profile including family, fatherhood, custody case, TUPIT, judge's reasoning",
+      "isAnonymous": null,
+      "label": "Boston Globe - Memorial Drive shooting suspect's turbulent past reflected in records",
+      "type": "article",
+      "url": "https://www.bostonglobe.com/2026/05/13/metro/memorial-drive-shooting-life-story/"
+    },
+    {
+      "_id": "src-tyler-brown-globe-arraignment",
+      "description": "Arraignment details, dual supervision parole/probation charges, victims identified",
+      "isAnonymous": null,
+      "label": "Boston Globe - Memorial Drive shooting: Tyler E. Brown pleads not guilty",
+      "type": "article",
+      "url": "https://www.bostonglobe.com/2026/05/14/metro/tyler-brown-arraignment/"
+    },
+    {
+      "_id": "src-tyler-brown-herald-rapsheet",
+      "description": "Complete chronological rap sheet from 1996 Michigan through 2026",
+      "isAnonymous": null,
+      "label": "Boston Herald - Cambridge Memorial Drive shooting suspect Tyler Brown's lengthy rap sheet",
+      "type": "article",
+      "url": "https://www.bostonherald.com/2026/05/24/cambridges-memorial-drive-shooting-suspect-tyler-browns-lengthy-rap-sheet/"
+    },
+    {
+      "_id": "src-tyler-brown-cbs",
+      "description": "2020 shooting details, Rachael Rollins reaction, sentencing, parole release date",
+      "isAnonymous": null,
+      "label": "CBS Boston - Accused Memorial Drive gunman Tyler Brown tried to kill Boston police in 2020",
+      "type": "article",
+      "url": "https://www.cbsnews.com/boston/news/tyler-brown-cambridge-shooting-memorial-drive/"
+    },
+    {
+      "_id": "src-tyler-brown-wcvb",
+      "description": "5 Investigates piece on Brown's 2014 knife attack, Souza-Baranowski isolation, drug lab scandal",
+      "isAnonymous": null,
+      "label": "WCVB - Tyler Brown's dangerous history of violence, mental illness and drug abuse",
+      "type": "article",
+      "url": "https://www.wcvb.com/article/tyler-brown-criminal-history-cambridge-shooting/71286337"
+    },
+    {
+      "_id": "src-tyler-brown-nbc",
+      "description": "Criminal complaint charges, dual supervision, Joseph Bennet character witness",
+      "isAnonymous": null,
+      "label": "NBC Boston - Who is Cambridge gunman Tyler Brown?",
+      "type": "article",
+      "url": "https://www.nbcboston.com/news/local/new-details-revealed-about-cambridge-gunman-tyler-brown-when-will-he-appear-in-court/3948455/"
+    },
+    {
+      "_id": "src-tyler-brown-patch",
+      "description": "Rachael Rollins statement on sentencing, probation details",
+      "isAnonymous": null,
+      "label": "Patch - Details of Cambridge Shooter Tyler Brown's Criminal History and Controversial Prison Sentence",
+      "type": "article",
+      "url": "https://patch.com/massachusetts/cambridge/details-cambridge-shooter-tyler-browns-criminal-history-controversial-prison"
+    },
+    {
+      "_id": "src-tyler-brown-tufts",
+      "description": "TUPIT MyTERN program connection, Instagram post of Brown speaking at dinner, university statement",
+      "isAnonymous": null,
+      "label": "Tufts Daily - Suspect in Cambridge shooting participated in Tufts' MyTERN program",
+      "type": "article",
+      "url": "https://www.tuftsdaily.com/article/2026/05/suspect-in-cambridge-shooting-on-monday-participated-in-tufts-mytern-program"
+    },
+    {
+      "_id": "src-tyler-brown-suffolk-da",
+      "description": "Official DA sentencing press release with charges and statement from Rachael Rollins",
+      "isAnonymous": null,
+      "label": "Suffolk County DA - Man shot at police sentenced (August 2021)",
+      "type": "statement",
+      "url": "https://www.suffolkdistrictattorney.com/press-releases/items/man-shot-at-police-sentenced"
+    },
+    {
+      "_id": "src-tyler-brown-boston25",
+      "description": "Body camera footage, 'Finish this' quotes, expert analysis of mental health crisis",
+      "isAnonymous": null,
+      "label": "Boston 25 News - Body camera video sheds new light on 2020 Boston police shooting involving Tyler Brown",
+      "type": "article",
+      "url": "https://www.boston25news.com/news/local/body-camera-video-sheds-new-light-2020-boston-police-shooting-involving-tyler-brown/TN3A7IGAD5AGVCTBXSULNNHHLA/"
+    }
+  ]
+}

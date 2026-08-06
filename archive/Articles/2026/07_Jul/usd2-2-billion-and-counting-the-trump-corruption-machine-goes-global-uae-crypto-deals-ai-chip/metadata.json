@@ -1,0 +1,144 @@
+{
+  "_id": "trump-2-billion-corruption-uae-crypto-slush-fund-unprecedented",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "EcCdPNkJ45UJzvqW3fC66X",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "EcCdPNkJ45UJzvqW3fC5xX",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "EcCdPNkJ45UJzvqW3fC622",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Trump pulled in $2.2 billion last year while a UAE royal bought half his crypto firm for $500 million days before his inauguration — after which the administration approved AI chip sales to the Emirates and proposed a $1.8B slush fund for insurrectionists.",
+  "eventDate": "2026-07-27T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "According to a 927-page OGE disclosure released June 30, 2026, Trump earned more than $2.2 billion from real estate, golf, crypto ventures, meme coins, branded merchandise, and legal settlements.",
+      "question": "How much money did Trump make last year?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Four days before his inauguration, associates of UAE national security adviser Sheikh Tahnoon bin Zayed bought a 49% stake in Trump's World Liberty Financial for $500 million. Warren, Murphy, and Schiff have called for investigations, noting the administration subsequently approved AI chip sales to the UAE and took 10+ UAE-benefiting actions.",
+      "question": "What is the UAE crypto deal?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "A proposed DOJ 'anti-weaponization' fund of $1.776 billion that would have paid settlements to Trump allies including January 6 defendants. Raskin called it unconstitutional and illegal. The DOJ claimed to abandon it but court filings suggest otherwise.",
+      "question": "What was the $1.8 billion slush fund?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Trump 2.2 billion income",
+    "UAE crypto deal Trump",
+    "World Liberty Financial",
+    "Trump corruption unprecedented",
+    "Sheikh Tahnoon Trump",
+    "Trump AI chips UAE",
+    "Trump slush fund 1.8 billion",
+    "Trump meme coins",
+    "Trump reflecting pool",
+    "Trump emoluments UAE Saudi"
+  ],
+  "leadParagraph": "Sen. Mark Kelly called Trump's corruption 'unprecedented' on Meet the Press as a 927-page disclosure revealed the president earned $2.2 billion last year — including $500 million from a UAE-backed crypto deal followed by policy decisions benefiting the Emirates and a proposed $1.8 billion taxpayer slush fund for January 6 defendants.",
+  "linkedPitch": null,
+  "location": "Washington, DC / United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "President Donald J. Trump speaks with UAE President Sheikh Mohamed bin Zayed Al Nahyan during a bilateral meeting at Qasr al Watan (Palace of the Nation) on May 15, 2025, in Abu Dhabi, United Arab Emirates. ",
+    "asset": {
+      "_ref": "image-20006873ba9c962abb30175f4ff08def59d6a748-1920x1232-webp",
+      "_type": "reference"
+    },
+    "caption": "Donald Trump at the White House as scrutiny mounts over a $500 million UAE investment in his family's cryptocurrency firm",
+    "credit": "AP Photo/Alex Brandon"
+  },
+  "methodology": "Reported using Guardian, Breitbart, CNN, CNBC, Gizmodo, Sen. Murphy's office, Daily Beast, Atlantic, Time, House Judiciary Dems, and New Republic coverage. Financial data from 927-page OGE disclosure. UAE deal details from WSJ, CNN, and Warren staff report.",
+  "needsReview": null,
+  "publishedAt": "2026-07-28T18:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "federal-plaza-ice-incendiary-device",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "albania-flamingo-revolution-kushner-resort-protests",
+      "_type": "reference"
+    },
+    {
+      "_key": "a920f3c8eff4",
+      "_ref": "flamingo-revolution-50-days-kushner-resort-albania",
+      "_type": "reference"
+    },
+    {
+      "_key": "46058b5d8543",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "7a991fc9d101",
+      "_ref": "insider-trading-iran-war-oil-futures-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "48ef326f3e28",
+      "_ref": "trump-anti-weaponization-fund-heist",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Trump earned $2.2 billion as a UAE royal bought half his crypto firm for $500M, followed by AI chip approvals and a $1.8B slush fund for insurrectionists.",
+    "metaTitle": "Trump's $2.2 Billion Corruption: UAE Crypto Deals, AI Chips, and a $1.8B Slush Fund",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "usd2-2-billion-and-counting-the-trump-corruption-machine-goes-global-uae-crypto-deals-ai-chip"
+  },
+  "tags": [
+    "Trump",
+    "corruption",
+    "UAE",
+    "crypto",
+    "World Liberty Financial",
+    "slush fund",
+    "AI chips",
+    "Nvidia",
+    "January 6",
+    "emoluments"
+  ],
+  "title": "$2.2 Billion and Counting: The Trump Corruption Machine Goes Global — UAE Crypto Deals, AI Chip Sales, and a $1.8 Billion Slush Fund",
+  "updatedAt": null,
+  "videoLink": null
+}

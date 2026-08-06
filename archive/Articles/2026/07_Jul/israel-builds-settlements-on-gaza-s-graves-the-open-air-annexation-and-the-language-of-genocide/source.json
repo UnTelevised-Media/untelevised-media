@@ -1,0 +1,78 @@
+{
+  "slug": "israel-builds-settlements-on-gaza-s-graves-the-open-air-annexation-and-the-language-of-genocide",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "source-the-guardian-israeli-ministers-announce-plans-for-new-illegal-settlements-in-gaz",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Israeli ministers announce plans for new illegal settlements in Gaza and West Bank",
+      "type": "media",
+      "url": "https://www.theguardian.com/world/2026/jul/18/israel-plan-new-illegal-settlements-gaza-west-bank-occupied-palestine"
+    },
+    {
+      "_id": "source-middle-east-monitor-katz-boasts-of-gazas-destruction-announces-three-military-ou",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Monitor — Katz boasts of Gaza's destruction, announces three military outposts",
+      "type": "media",
+      "url": "https://www.middleeastmonitor.com/20260714-katz-boasts-of-gazas-destruction-says-it-is-the-result-of-a-well-thought-out-policy-and-announces-plan-for-three-military-outposts/"
+    },
+    {
+      "_id": "source-middle-east-eye-israeli-general-praises-illegal-outposts-driving-palestinian-eth",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Eye — Israeli general praises illegal outposts driving Palestinian ethnic cleansing",
+      "type": "media",
+      "url": "https://www.middleeasteye.net/news/israeli-general-praises-illegal-outposts-driving-palestinian-ethnic-cleansing"
+    },
+    {
+      "_id": "source-la-voce-di-new-york-gaza-outposts-scale-up-as-trumps-hollow-board-of-peace-aband",
+      "description": null,
+      "isAnonymous": null,
+      "label": "La Voce di New York — Gaza Outposts Scale Up as Trump's Hollow Board of Peace Abandons Its Mandate",
+      "type": "media",
+      "url": "https://lavocedinewyork.com/en/news/2026/07/18/gaza-outposts-scale-up-as-trumps-hollow-board-of-peace-abandons-its-mandate/"
+    },
+    {
+      "_id": "source-peace-and-justice-post-katz-says-israel-wont-withdraw-from-gaza-will-establish-n",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Peace and Justice Post — Katz Says Israel Won't Withdraw From Gaza, Will Establish Nahal Settlements",
+      "type": "media",
+      "url": "https://peaceandjusticepost.com/2026/07/15/katz-says-israel-wont-withdraw-from-gaza-even-if-hamas-disarms-and-will-establish-nahal-settlements/"
+    },
+    {
+      "_id": "source-un-ohchr-settler-violence-is-state-violence-report-july-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN OHCHR — Settler Violence is State Violence report, July 2026",
+      "type": "report",
+      "url": "https://un-human-rights-palestine.shorthandstories.com/three-reasons-why-settler-violence-is-state-violence/"
+    },
+    {
+      "_id": "source-peace-now-kerem-navot-120-farming-outposts-displace-118-palestinian-communities-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Peace Now & Kerem Navot — 120 farming outposts displace 118 Palestinian communities, July 7 2026",
+      "type": "report",
+      "url": "https://peacenow.org.il"
+    },
+    {
+      "_id": "source-icc-arrest-warrants-for-netanyahu-and-gallant-november-21-2024",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ICC — Arrest warrants for Netanyahu and Gallant, November 21 2024",
+      "type": "document",
+      "url": "https://www.icc-cpi.int/news/situation-state-palestine-icc-judge-confirms-individual-warrants-arrest-benjamin"
+    },
+    {
+      "_id": "source-common-dreams-why-israel-and-the-united-states-are-merging-their-militaries-us-3",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Common Dreams — Why Israel and the United States Are Merging Their Militaries (US $3.8B annual aid)",
+      "type": "media",
+      "url": "https://www.commondreams.org/opinion/israel-us-merge-militaries"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "slug": "turkey-cracks-down-on-dissent-ahead-of-nato-summit-over-200-detained-journalists-arrested",
+  "totalSources": 14,
+  "sources": [
+    {
+      "_id": "source-the-guardian-turkey-crackdown-ahead-of-nato-summit",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Turkey Crackdown Ahead of NATO Summit",
+      "type": "media",
+      "url": "https://www.theguardian.com/world/2026/jul/06/turkey-crackdown-public-life-run-up-nato-summit-ankara"
+    },
+    {
+      "_id": "source-bianet-turkey-detains-dozens-including-journalists-in-raids-ahead-of-nato-summit",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Bianet — Turkey Detains Dozens Including Journalists in Raids Ahead of NATO Summit",
+      "type": "media",
+      "url": "https://bianet.org/haber/turkey-detains-dozens-including-journalists-in-new-wave-of-raids-ahead-of-nato-summit-321198"
+    },
+    {
+      "_id": "source-bianet-75-year-old-retired-teacher-among-arrested-in-crackdown",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Bianet — 75-Year-Old Retired Teacher Among Arrested in Crackdown",
+      "type": "media",
+      "url": "https://bianet.org/haber/75-year-old-retired-teacher-among-arrested-in-terror-crackdown-ahead-of-ankara-nato-summit-321075"
+    },
+    {
+      "_id": "source-bianet-over-200-detained-in-ankara-raids-ahead-of-nato-summit",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Bianet — Over 200 Detained in Ankara Raids Ahead of NATO Summit",
+      "type": "media",
+      "url": "https://bianet.org/haber/over-200-detained-in-ankara-raids-ahead-of-nato-summit-320796"
+    },
+    {
+      "_id": "source-turkish-minute-100-detained-in-anti-nato-protests",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Turkish Minute — 100+ Detained in Anti-NATO Protests",
+      "type": "media",
+      "url": "https://www.turkishminute.com/2026/07/06/more-than-100-detained-in-turkey-during-anti-nato-protests-ahead-of-summit/"
+    },
+    {
+      "_id": "source-european-federation-of-journalists-turkey-press-crackdown",
+      "description": null,
+      "isAnonymous": null,
+      "label": "European Federation of Journalists — Turkey Press Crackdown",
+      "type": "media",
+      "url": "https://europeanjournalists.org/blog/2026/07/07/turkey-crackdown-on-press-freedom-intensifies-ahead-of-nato-summit/"
+    },
+    {
+      "_id": "source-international-federation-of-journalists-press-freedom-statement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "International Federation of Journalists — Press Freedom Statement",
+      "type": "media",
+      "url": "https://www.ifj.org/media-centre/news/detail/category/press-releases/article/tuerkiye-crackdown-on-press-freedom-intensifies-ahead-of-nato-summit"
+    },
+    {
+      "_id": "source-human-rights-watch-turkey-crackdown-ahead-of-nato-summit",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Human Rights Watch — Turkey Crackdown Ahead of NATO Summit",
+      "type": "report",
+      "url": "https://www.hrw.org/news/2026/06/25/turkiye-crackdown-ahead-of-nato-summit"
+    },
+    {
+      "_id": "source-jacobin-turkeys-key-role-in-nato-is-no-contradiction",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jacobin — Turkey's Key Role in NATO Is No Contradiction",
+      "type": "media",
+      "url": "https://jacobin.com/2026/07/turkey-nato-cold-war-imperialism"
+    },
+    {
+      "_id": "source-democracy-now-headlines-july-6-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Now — Headlines July 6, 2026",
+      "type": "media",
+      "url": "https://www.democracynow.org/2026/7/6/headlines"
+    },
+    {
+      "_id": "source-the-media-line-why-turkey-arrested-protesters",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Media Line — Why Turkey Arrested Protesters",
+      "type": "media",
+      "url": "https://themedialine.org/top-stories/why-did-turkey-arrest-protesters-before-the-nato-summit/"
+    },
+    {
+      "_id": "source-bloomberg-turkey-cracks-down-on-press-ahead-of-nato",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Bloomberg — Turkey Cracks Down on Press Ahead of NATO",
+      "type": "media",
+      "url": "https://www.bloomberg.com/news/articles/2026-07-06/turkey-cracks-down-on-press-as-nato-leaders-descend-on-ankara"
+    },
+    {
+      "_id": "source-t24-nato-summit-pre-raid-operations-turkish",
+      "description": null,
+      "isAnonymous": null,
+      "label": "T24 — NATO Summit Pre-Raid Operations (Turkish)",
+      "type": "media",
+      "url": "https://t24.com.tr/gundem/t24-dis-haberler-editoru-buse-sogutlu-gozaltina-alindi,1334135"
+    },
+    {
+      "_id": "source-nordic-monitor-nato-summit-becomes-erdogans-show-of-force",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Nordic Monitor — NATO Summit Becomes Erdogan's Show of Force",
+      "type": "media",
+      "url": "https://nordicmonitor.com/2026/07/nato-summit-becomes-erdogans-show-of-force-to-wipe-out-remaining-opposition-at-home/"
+    }
+  ]
+}

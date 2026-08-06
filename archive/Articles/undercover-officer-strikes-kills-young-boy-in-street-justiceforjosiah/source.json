@@ -1,0 +1,22 @@
+{
+  "slug": "undercover-officer-strikes-kills-young-boy-in-street-justiceforjosiah",
+  "totalSources": 2,
+  "sources": [
+    {
+      "_id": "source-josiah-family",
+      "description": "Information and exclusive photos provided directly by the family of Josiah Pinner following the incident on January 11, 2019.",
+      "isAnonymous": false,
+      "label": "Family of Josiah Pinner",
+      "type": "interview",
+      "url": null
+    },
+    {
+      "_id": "source-josiah-activist",
+      "description": "Exclusive photos and firsthand account from an anonymous activist present at the scene in Tampa, Florida.",
+      "isAnonymous": true,
+      "label": "Anonymous Activist on Scene - Tampa, FL",
+      "type": "onscene",
+      "url": null
+    }
+  ]
+}

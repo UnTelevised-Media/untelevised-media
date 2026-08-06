@@ -1,0 +1,150 @@
+{
+  "_id": "trump-dna-carroll-dress-epstein-codis",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-2",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "89c2ed9acb76",
+      "_ref": "85a1a6ac-6ac6-4041-94dd-504674b4564a",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-4",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The male DNA on E. Jean Carroll's dress was never tested against Trump. His three-year refusal, his Epstein connections, and the CODIS database raise a question the system refuses to answer.",
+  "eventDate": "2026-07-20",
+  "faqs": [
+    {
+      "_key": "4cq1PC5gN3p8OiRwiOMeg7",
+      "_type": "faqItem",
+      "answer": "Yes. A private lab found a DNA mixture on the black Donna Karan dress that included Carroll's DNA and at least one unidentified male contributor. Skin fragments and male DNA were detected on the shoulder and sleeves. No sperm cells were found.",
+      "question": "Was DNA found on E. Jean Carroll's dress?"
+    },
+    {
+      "_key": "4cq1PC5gN3p8OiRwiOMejA",
+      "_type": "faqItem",
+      "answer": "Trump refused to provide a DNA sample for three years. When he finally offered in February 2023, it was conditional on Carroll's lawyers turning over their full DNA report first. Judge Lewis Kaplan rejected the offer as a delay tactic and ruled that no DNA evidence would be introduced at trial.",
+      "question": "Why wasn't Trump's DNA compared to the dress evidence?"
+    },
+    {
+      "_key": "4cq1PC5gN3p8OiRwiOMemD",
+      "_type": "faqItem",
+      "answer": "Trump was socially connected to Jeffrey Epstein for decades. FBI 302 memos from 2019, released in 2026, reference a victim who identified Trump as one of her abusers starting at age 13. An FBI memo from July 2025 listed Trump's name at the top of a list of 14 men connected to the Epstein investigation, which documented over 1,000 victims.",
+      "question": "What is the connection to the Epstein case?"
+    },
+    {
+      "_key": "4cq1PC5gN3p8OiRwiOMepG",
+      "_type": "faqItem",
+      "answer": "Yes. New York State law requires DNA collection from all felony convicts. Trump was convicted of 34 felony counts in January 2025. If the NY County Sheriff collects his sample, it would be uploaded to CODIS, which would automatically cross-reference it against all crime scene DNA on file nationwide, including rape kits from the Epstein investigation.",
+      "question": "Could Trump's DNA be entered into the CODIS database?"
+    },
+    {
+      "_key": "4cq1PC5gN3p8OiRwiOMesJ",
+      "_type": "faqItem",
+      "answer": "No. The dress was tested by a private laboratory for the civil case and the results were never uploaded to the FBI's CODIS database. The DNA remains available for comparison if a court were to order Trump's sample.",
+      "question": "Was the Carroll dress DNA uploaded to CODIS?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Trump DNA",
+    "Carroll dress DNA",
+    "E. Jean Carroll lawsuit",
+    "Jeffrey Epstein files",
+    "CODIS database",
+    "FBI 302 memos",
+    "Trump felony conviction DNA",
+    "Jane Doe lawsuit",
+    "Katie Johnson",
+    "Kaplan ruling DNA"
+  ],
+  "leadParagraph": "Male DNA was found on the black Donna Karan dress at the center of E. Jean Carroll's sexual assault case against Donald Trump. Trump refused to provide a DNA sample for three years, then offered a quid pro quo the court rejected. But the deeper question connects that dress to the Epstein scandal and a national DNA database that could match Trump's genetic profile to evidence in cases involving over 1,000 victims.",
+  "linkedPitch": null,
+  "location": "United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "E. Jean Carroll walking outside Manhattan federal courthouse following her defamation trial victory",
+    "asset": {
+      "_ref": "image-d2577d6619d54dc64d5909c3c49e0b9644fb76f1-880x644-webp",
+      "_type": "reference"
+    },
+    "caption": "E. Jean Carroll leaves federal court in Manhattan following a winning verdict in her defamation trial against Donald Trump, January 2024.",
+    "credit": "TPR/NPR via Getty Images"
+  },
+  "methodology": "This article draws on court filings from E. Jean Carroll v. Donald J. Trump (Southern District of New York), FBI 302 interview memos released by the Department of Justice in January-March 2026, FBI memoranda from July-November 2025, and published reporting from The Guardian, NBC News, NPR, CNN, AP, USA Today, Forbes, Politico, and other outlets. Legal timelines were cross-referenced with court dockets. DNA and CODIS procedures are based on New York State law and FBI NDIS/CODIS program documentation. No classified or unreleased material was used.",
+  "needsReview": null,
+  "publishedAt": "2026-07-20T06:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "ffee683e0176",
+      "_ref": "epstein-israel-intelligence-web",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "9da6XzhbxB5orQuKiNcjXX",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "israel-builds-settlements-on-gazas-graves-the-open-air-annexation-and-the-language-of-genocide-made-concrete",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "the-lobbys-bluff-how-103-democrats-broke-aipac",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "ice-529-million-colorado-detention-center-geo-group",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "fergie-chambers-arrested-spain-palestine-solidarity-criminalized",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "trump-s-dna-the-carroll-dress-and-the-epstein-connection-the-unanswered-question-no-one-will"
+  },
+  "tags": [
+    "Trump",
+    "E. Jean Carroll",
+    "Epstein",
+    "CODIS",
+    "DNA Evidence",
+    "Sexual Assault",
+    "FBI",
+    "DOJ"
+  ],
+  "title": "Trump's DNA, the Carroll Dress, and the Epstein Connection: The Unanswered Question No One Will Compel Him to Answer",
+  "updatedAt": null,
+  "videoLink": null
+}

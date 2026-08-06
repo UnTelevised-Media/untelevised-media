@@ -1,0 +1,54 @@
+{
+  "slug": "gaza-is-shrinking-from-the-ground-the-ceasefire-was-never-real",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "src-salah-field-notes-may28",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Salah Akram - Field notes and communications, 28 May 2026 (via Edward Tivrusky)",
+      "type": "onscene",
+      "url": "https://untelevised.media"
+    },
+    {
+      "_id": "src-ahmed-hamdan-ishara-may28",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Dr. Ahmed Hamdan (@Ishara) - Analysis on Gaza shrinking, 28 May 2026",
+      "type": "statement",
+      "url": "https://untelevised.media"
+    },
+    {
+      "_id": "src-reuters-netanyahu-70-may28",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters - Netanyahu directs Israeli forces to expand Gaza control to 70 percent, 28 May 2026",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/netanyahu-directs-israeli-forces-expand-gaza-control-70-percent-2026-05-28/"
+    },
+    {
+      "_id": "src-guardian-netanyahu-70-may28",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - Netanyahu orders Israeli army to seize 70% of Gaza Strip, 28 May 2026",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/may/28/netanyahu-orders-israeli-army-seize-70-gaza-strip-violating-ceasefire-deal"
+    },
+    {
+      "_id": "src-guardian-katz-expulsion-may28",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - Israeli minister confirms goal of large-scale expulsion of Palestinians, 28 May 2026",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/may/28/israels-defence-minister-says-large-scale-palestinian-migration-from-gaza-will-go-ahead"
+    },
+    {
+      "_id": "src-channel13-southern-command-leak",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Israel Channel 13 - Southern Command leak on decisive war operation plan (cited by Salah Akram)",
+      "type": "media",
+      "url": "https://untelevised.media"
+    }
+  ]
+}

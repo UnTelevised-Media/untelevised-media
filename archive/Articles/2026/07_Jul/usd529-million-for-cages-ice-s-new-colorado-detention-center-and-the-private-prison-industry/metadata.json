@@ -1,0 +1,139 @@
+{
+  "_id": "ice-529-million-colorado-detention-center-geo-group",
+  "allowComments": null,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-0",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "51bfccb3b31a",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The GEO Group — a private prison corporation with a history of slave labor, medical neglect, and abuse — signed a $528.6 million contract to reopen a shuttered prison in Hudson, Colorado as a 1,188-bed ICE detention center. The acting ICE director is a former GEO executive. Colorado's detention capacity will nearly double to 2,720 beds.",
+  "eventDate": "2026-07-09T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "The former Hudson Correctional Facility, a shuttered state prison 30 miles northeast of Denver, is being reopened as the 'Big Horn Contract Detention Facility' — a 1,188-bed ICE detention center operated by the GEO Group under a $528.6 million contract through 2031.",
+      "question": "What is the Hudson detention center?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The GEO Group is a private prison corporation that holds roughly one-third of all ICE detainees nationwide across 19+ facilities. In 2025, it reported $250 million in profit — a 700% increase. The company has faced repeated lawsuits for slave labor, medical neglect, and detainee abuse.",
+      "question": "Who is the GEO Group?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "ICE acting director David Venturella worked at the GEO Group from 2012 to 2023 and was paid as a company consultant until 2025. The official overseeing ICE detention contracts is a former GEO executive.",
+      "question": "What is the connection between ICE and the GEO Group?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The facility will nearly double Colorado's immigrant detention capacity to 2,720 beds. The town of Hudson says it was kept in the dark about operational details. Local advocates and the ACLU have raised concerns about medical care, emergency response, and GEO's record of abuse.",
+      "question": "How does this affect Colorado?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "ICE Hudson Colorado",
+    "GEO Group detention center",
+    "Big Horn Contract Detention Facility",
+    "private prison $529 million",
+    "Colorado immigrant detention",
+    "David Venturella GEO Group"
+  ],
+  "leadParagraph": "The GEO Group has signed a $528.6 million contract with ICE to reopen a shuttered prison in Hudson, Colorado as a 1,188-bed immigrant detention center, nearly doubling the state's detention capacity. The company reported $250 million in profit last year. The acting ICE director is a former GEO executive. The facility opens August 1.",
+  "linkedPitch": null,
+  "location": "Hudson, Colorado",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Protesters holding signs outside the fenced gates of the Hudson Correctional Facility",
+    "asset": {
+      "_ref": "image-90ed62b12227af2adf2fe67ba99d409ff4c02506-2000x1416-webp",
+      "_type": "reference"
+    },
+    "caption": "Demonstrators protest in front of the shuttered Hudson Correctional Facility in Hudson, Colorado, July 2026",
+    "credit": "Fort Morgan Times"
+  },
+  "methodology": "Reported using coverage from the Denver Post, Colorado Times Recorder, Colorado Sun, Denver Gazette, and NPR. Federal contracting data from SAM.gov. Securities filings from Highlands REIT and GEO Group. ACLU of Colorado FOIA litigation records.",
+  "needsReview": null,
+  "publishedAt": "2026-07-14T00:30:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "ice-agent-kills-wrong-man-houston",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "ice-re-arrests-egyptian-family-court-ordered-release",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "nolan-wells-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "sonya-massey-convicted-murderer-sean-grayson-system-justice",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "baby-kohen-wiley-senatobia-police-shooting",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "kohen-wiley-autopsy-homicide-independent-finding",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "The GEO Group signed a $529M contract to reopen a Colorado prison as a 1,188-bed ICE detention center. The acting ICE director is a former GEO executive. Profit: $250M last year.",
+    "metaTitle": "$529M for Cages: ICE's New Colorado Detention Center and the GEO Group",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "usd529-million-for-cages-ice-s-new-colorado-detention-center-and-the-private-prison-industry"
+  },
+  "tags": [
+    "ICE",
+    "Private Prisons",
+    "GEO Group",
+    "Colorado",
+    "Immigration",
+    "Detention",
+    "Human Rights",
+    "Hudson"
+  ],
+  "title": "$529 Million for Cages: ICE's New Colorado Detention Center and the Private Prison Industry That Profits From Human Suffering",
+  "updatedAt": null,
+  "videoLink": null
+}

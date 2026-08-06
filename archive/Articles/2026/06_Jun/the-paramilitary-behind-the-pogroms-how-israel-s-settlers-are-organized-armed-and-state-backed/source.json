@@ -1,0 +1,110 @@
+{
+  "slug": "the-paramilitary-behind-the-pogroms-how-israel-s-settlers-are-organized-armed-and-state-backed",
+  "totalSources": 13,
+  "sources": [
+    {
+      "_id": "source-amnesty-international",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Amnesty International",
+      "type": "report",
+      "url": "https://www.amnesty.org/en/latest/research/2026/06/israel-west-bank-ethnic-cleansing/"
+    },
+    {
+      "_id": "source-oxfam-international",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Oxfam International",
+      "type": "press_release",
+      "url": "https://www.oxfam.org/en/press-releases/more-palestinians-killed-israeli-military-and-settlers-across-occupied-west-bank"
+    },
+    {
+      "_id": "source-the-guardian",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/jan/30/settler-only-idf-units-functioning-as-vigilante-militias-in-west-bank"
+    },
+    {
+      "_id": "source-middle-east-eye",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Eye",
+      "type": "article",
+      "url": "https://www.middleeasteye.net/news/settlers-are-control-how-west-bank-being-ethnically-cleansed"
+    },
+    {
+      "_id": "source-middle-east-eye",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Eye",
+      "type": "article",
+      "url": "https://www.middleeasteye.net/news/settlers-are-control-how-west-bank-being-ethnically-cleansed"
+    },
+    {
+      "_id": "source-al-jazeera",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/6/10/sanctions-on-settlers-not-enough-target-israeli-govt-say-campaigners"
+    },
+    {
+      "_id": "source-red-pepper",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Red Pepper",
+      "type": "article",
+      "url": "https://www.redpepper.org.uk/global-politics/palestine-middle-east/zionist-pogroms-and-shepherding-outposts-in-the-west-bank/"
+    },
+    {
+      "_id": "source-the-straits-times",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Straits Times",
+      "type": "article",
+      "url": "https://www.straitstimes.com/world/middle-east/facing-settler-violence-palestinian-farmers-race-to-harvest"
+    },
+    {
+      "_id": "source-human-rights-watch",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Human Rights Watch",
+      "type": "report",
+      "url": "https://www.hrw.org/news/2026/03/13/in-the-shadow-of-war-settler-violence-against-palestinians-intensifies"
+    },
+    {
+      "_id": "source-project-censored",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Project Censored",
+      "type": "article",
+      "url": "https://www.projectcensored.org/israel-displaces-palestinians-agricultural-terrorism/"
+    },
+    {
+      "_id": "source-times-of-israel",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Times of Israel",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/nine-palestinians-reported-wounded-in-settler-rampage-through-hawara/"
+    },
+    {
+      "_id": "source-mondoweiss",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Mondoweiss",
+      "type": "article",
+      "url": "https://mondoweiss.net/2026/03/mowed-down-with-firearms-settler-terror-in-west-bank-leaves-palestinians-humiliated-after-killing-3-men-in-village/"
+    },
+    {
+      "_id": "source-un-ocha",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN OCHA",
+      "type": "database",
+      "url": "https://www.ochaopt.org/"
+    }
+  ]
+}

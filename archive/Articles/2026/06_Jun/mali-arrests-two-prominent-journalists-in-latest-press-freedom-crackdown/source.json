@@ -1,0 +1,46 @@
+{
+  "slug": "mali-arrests-two-prominent-journalists-in-latest-press-freedom-crackdown",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-ap-news",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News",
+      "type": "wire",
+      "url": "https://apnews.com/article/mali-junta-arrest-journalist-press-takiou-c331e7000ae40647cfd82e615bc1b9f3"
+    },
+    {
+      "_id": "source-committee-to-protect-journalists",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Committee to Protect Journalists",
+      "type": "press freedom",
+      "url": "https://cpj.org/2026/06/in-mali-2-more-journalists-arrested-under-cybercrime-law-for-criticizing-authorities/"
+    },
+    {
+      "_id": "source-human-rights-watch",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Human Rights Watch",
+      "type": "report",
+      "url": "https://www.hrw.org/news/2026/03/13/in-the-shadow-of-war-settler-violence-against-palestinians-intensifies"
+    },
+    {
+      "_id": "source-reporters-without-borders-via-srn-news",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reporters Without Borders (via SRN News)",
+      "type": "press freedom",
+      "url": "https://srnnews.com/malian-authorities-arrest-2-prominent-journalists-in-latest-crackdown-on-freedom-of-expression/"
+    },
+    {
+      "_id": "source-the-washington-times",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Washington Times",
+      "type": "wire",
+      "url": "https://www.washingtontimes.com/news/2026/jun/10/rights-groups-denounce-arrest-two-malian-journalists-latest-crackdown/"
+    }
+  ]
+}

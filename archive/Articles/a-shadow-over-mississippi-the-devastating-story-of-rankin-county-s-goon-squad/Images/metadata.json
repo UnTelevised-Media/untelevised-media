@@ -1,0 +1,34 @@
+{
+  "slug": "a-shadow-over-mississippi-the-devastating-story-of-rankin-county-s-goon-squad",
+  "totalImages": 3,
+  "downloadedAt": "2026-08-05T20:52:24.505Z",
+  "mainImage": {
+    "alt": "Goon Squad Wanted Poster",
+    "caption": "",
+    "credit": "",
+    "asset": "image-beab424ff041879aac49fc7e670dd8e76cf097b3-1085x1232-png",
+    "filename": "main.png",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Recovery of Micheal Corey Jenkins - January 24, 2023 [U.S. District Court - Photo]",
+      "caption": "",
+      "credit": "",
+      "asset": "image-1301133f998e222b91a04770a143a8c90925d5bd-700x468-jpg",
+      "filename": "image-1.jpg",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Reflections of an Anti-Police Brutality Activist Rankin County Sheriff’s Office, Brandon, Miss. - July 5, 2023 [AP Photo Rogelio V. Solis]",
+      "caption": "",
+      "credit": "",
+      "asset": "image-43acfb0d0979b1180409e9c4b173a9e0f4764253-640x360-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    }
+  ]
+}

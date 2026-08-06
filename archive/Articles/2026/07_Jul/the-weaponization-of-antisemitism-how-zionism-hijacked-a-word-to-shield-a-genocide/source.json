@@ -1,0 +1,150 @@
+{
+  "slug": "the-weaponization-of-antisemitism-how-zionism-hijacked-a-word-to-shield-a-genocide",
+  "totalSources": 18,
+  "sources": [
+    {
+      "_id": "source-wikipedia-weaponization-of-antisemitism",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Weaponization of Antisemitism",
+      "type": "media",
+      "url": "https://en.wikipedia.org/wiki/Weaponization_of_antisemitism"
+    },
+    {
+      "_id": "source-the-nation-how-the-ihra-definition-has-been-weaponized-sahar-aziz",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Nation — How the IHRA Definition Has Been Weaponized (Sahar Aziz)",
+      "type": "media",
+      "url": "https://www.thenation.com/article/society/ihra-definition-antisemitism/"
+    },
+    {
+      "_id": "source-mondoweiss-how-the-new-antisemitism-was-used-to-shield-israel-and-attack-the-lef",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Mondoweiss — How the 'New Antisemitism' Was Used to Shield Israel and Attack the Left",
+      "type": "media",
+      "url": "https://mondoweiss.net/2025/04/how-the-creation-of-the-new-antisemitism-was-used-to-shield-israel-and-attack-the-left/"
+    },
+    {
+      "_id": "source-adl-audit-of-antisemitic-incidents-2024",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ADL — Audit of Antisemitic Incidents 2024",
+      "type": "report",
+      "url": "https://www.adl.org/resources/report/audit-antisemitic-incidents-2024"
+    },
+    {
+      "_id": "source-adl-new-fbi-data-reflects-record-high-anti-jewish-hate-crimes",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ADL — New FBI Data Reflects Record-High Anti-Jewish Hate Crimes",
+      "type": "report",
+      "url": "https://www.adl.org/resources/press-release/new-fbi-data-reflects-record-high-number-anti-jewish-hate-crimes"
+    },
+    {
+      "_id": "source-cnn-historic-spike-in-antisemitic-incidents-across-the-us",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — Historic Spike in Antisemitic Incidents Across the US",
+      "type": "media",
+      "url": "https://www.cnn.com/2024/10/06/us/anti-jewish-threats-us-adl"
+    },
+    {
+      "_id": "source-fbi-2023-hate-crime-statistics",
+      "description": null,
+      "isAnonymous": null,
+      "label": "FBI — 2023 Hate Crime Statistics",
+      "type": "data",
+      "url": "https://www.fbi.gov/services/cjis/ucr/hate-crime"
+    },
+    {
+      "_id": "source-jewish-telegraphic-agency-antisemitic-incidents-jumped-63-in-2023",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jewish Telegraphic Agency — Antisemitic Incidents Jumped 63% in 2023",
+      "type": "media",
+      "url": "https://www.jta.org/2024/09/23/united-states/antisemitic-incidents-jumped-63-in-2023-according-to-fbi-data"
+    },
+    {
+      "_id": "source-encyclopedia-britannica-semite-definition",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Encyclopedia Britannica — Semite Definition",
+      "type": "document",
+      "url": "https://www.britannica.com/topic/Semite"
+    },
+    {
+      "_id": "source-wikipedia-christian-zionism",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Christian Zionism",
+      "type": "media",
+      "url": "https://en.wikipedia.org/wiki/Christian_Zionism"
+    },
+    {
+      "_id": "source-pew-research-center-evangelical-support-for-israel",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Pew Research Center — Evangelical Support for Israel",
+      "type": "data",
+      "url": "https://www.pewresearch.org/"
+    },
+    {
+      "_id": "source-al-jazeera-gaza-death-toll-exceeds-75000",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Gaza Death Toll Exceeds 75,000",
+      "type": "media",
+      "url": "https://www.aljazeera.com/features/2026/2/18/gaza-death-toll-exceeds-75000-as-independent-data-verify-loss"
+    },
+    {
+      "_id": "source-max-planck-institute-gaza-mortality-study",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Max Planck Institute — Gaza Mortality Study",
+      "type": "academic",
+      "url": "https://www.mpg.de/25778228/1125-defo-gaza-study-reveals-unprecedented-losses-of-life-and-life-expectancy-154642-x"
+    },
+    {
+      "_id": "source-lancet-global-health-gaza-mortality-survey-gms",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Lancet Global Health — Gaza Mortality Survey (GMS)",
+      "type": "academic",
+      "url": "https://gh.bmj.com/content/"
+    },
+    {
+      "_id": "source-brown-university-costs-of-war-human-toll-of-gaza-war",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Brown University Costs of War — Human Toll of Gaza War",
+      "type": "academic",
+      "url": "https://costsofwar.watson.brown.edu/paper/HumanTollGaza"
+    },
+    {
+      "_id": "source-institute-for-the-critical-study-of-zionism-no-ihra-toolkit",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Institute for the Critical Study of Zionism — No IHRA Toolkit",
+      "type": "document",
+      "url": "https://criticalzionismstudies.org/noihratoolkit/"
+    },
+    {
+      "_id": "source-ihra-adoptions-endorsements-tracker",
+      "description": null,
+      "isAnonymous": null,
+      "label": "IHRA Adoptions & Endorsements Tracker",
+      "type": "data",
+      "url": "https://ihra.combatantisemitism.org/"
+    },
+    {
+      "_id": "source-the-guardian-ihra-definition-target-in-anti-zionist-campaigns",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — IHRA Definition Target in Anti-Zionist Campaigns",
+      "type": "media",
+      "url": "https://www.theguardian.com/news/2025/aug/13/ihra-definition-of-antisemitism-has-long-been-a-target-in-anti-zionist-campaigns"
+    }
+  ]
+}

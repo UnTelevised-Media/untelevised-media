@@ -1,0 +1,43 @@
+{
+  "slug": "from-coal-to-code-how-boardman-traded-one-poison-for-another-and-a-town-is-paying-the-price",
+  "totalImages": 4,
+  "downloadedAt": "2026-08-05T20:49:52.767Z",
+  "mainImage": {
+    "alt": "Aerial photograph of the Boardman Coal Plant showing the main power station building with its tall smokestack, surrounded by agricultural land near the Columbia River in eastern Oregon.",
+    "caption": "The Boardman Coal Plant operated by Portland General Electric, photographed at Carty Reservoir. The 440-megawatt plant was Oregon's only coal-fired power plant and its single largest source of greenhouse gas pollution from 1980 until its closure in 2020.",
+    "credit": "Portland General Electric / Wikimedia Commons",
+    "asset": "image-8cbb9bd5901de70bab6fc32e5ff740b9d820d42a-2819x1639-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Explosive demolition of the Boardman coal plant smokestack showing a massive plume of dust and debris as the 656-foot tower collapses in September 2022.",
+      "caption": "Explosive demolition of the Boardman coal plant's 656-foot smokestack in September 2022. The controlled detonation marked the physical end of Oregon's coal-fired power generation era.",
+      "credit": "KGW / Nexstar Media Group",
+      "asset": "image-210d3fcf355f9bfbd8cae3dc9f7f5fa8c03de34d-1920x1080-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "An Amazon Web Services data center facility in Boardman, Oregon, showing large industrial buildings in the rural landscape of Morrow County.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-9d94947c2ba9656a65386bf806c134d7e3ab3404-1080x607-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Aerial view of Amazon data center construction near Boardman, Oregon in February 2026 showing massive warehouse buildings and surrounding farmland.",
+      "caption": "An aerial view of an Amazon data center construction site near Boardman, Oregon in February 2026. One of ten Amazon campuses in Morrow County.",
+      "credit": "Mike Rogoway / The Oregonian",
+      "asset": "image-76c0339a20f66c9e3eb58ac87eebf4a870a17780-2500x1666-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    }
+  ]
+}

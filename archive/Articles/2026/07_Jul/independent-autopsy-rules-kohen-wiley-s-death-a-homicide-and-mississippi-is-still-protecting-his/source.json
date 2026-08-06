@@ -1,0 +1,70 @@
+{
+  "slug": "independent-autopsy-rules-kohen-wiley-s-death-a-homicide-and-mississippi-is-still-protecting-his",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "src-kohen-action-news-5-autopsy",
+      "description": "Coverage of Ben Crump press conference releasing independent autopsy findings",
+      "isAnonymous": null,
+      "label": "Action News 5 - Independent Autopsy Rules Kohen Wiley Death Homicide",
+      "type": "article",
+      "url": "https://www.actionnews5.com/2026/07/01/shotgun-wound-independent-autopsy-rules-1-year-old-kohen-wileys-death-homicide/"
+    },
+    {
+      "_id": "src-kohen-usatoday-autopsy",
+      "description": "National coverage of independent autopsy findings and community response",
+      "isAnonymous": null,
+      "label": "USA Today - Autopsy Heightens Scrutiny of Police Shooting That Killed 1-Year-Old",
+      "type": "article",
+      "url": "https://www.usatoday.com/story/news/nation/2026/07/02/autopsy-police-shooting-kohen-wiley/90777905007/"
+    },
+    {
+      "_id": "src-kohen-guardian-protest",
+      "description": "Coverage of protests, Vellesiya Wiley's account, and community demands",
+      "isAnonymous": null,
+      "label": "The Guardian - Release the Footage: Mississippi Protest Over Police Killing of One-Year-Old",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/jun/26/kohen-wiley-mississippi-police-killing-protest"
+    },
+    {
+      "_id": "src-kohen-mfp-anger",
+      "description": "On-the-ground reporting on community protests, police response with tear gas and snipers",
+      "isAnonymous": null,
+      "label": "Mississippi Free Press - Anger Mounts in Senatobia Over Police Killing of Kohen Wiley",
+      "type": "article",
+      "url": "https://www.mississippifreepress.org/anger-mounts-in-senatobia-over-police-killing-of-1-year-old-kohen-wiley/"
+    },
+    {
+      "_id": "src-kohen-mfp-shooting",
+      "description": "Initial breaking coverage of the shooting, witness accounts, family statements",
+      "isAnonymous": null,
+      "label": "Mississippi Free Press - Mississippi Police Officer Shoots and Kills 1-Year-Old Child",
+      "type": "article",
+      "url": "https://www.mississippifreepress.org/mississippi-police-officer-shoots-and-kills-1-year-old-child-in-response-to-senatobia-shoplifting-call/"
+    },
+    {
+      "_id": "src-kohen-mfp-documents",
+      "description": "Public records identifying Sgt Hunter Foster, his hiring date and rapid promotion",
+      "isAnonymous": null,
+      "label": "Mississippi Free Press - Documents Identify Officer Present at Kohen Wiley Shooting",
+      "type": "article",
+      "url": "https://www.mississippifreepress.org/documents-identify-one-of-the-officers-present-at-the-police-shooting-of-1-year-old-kohen-wiley/"
+    },
+    {
+      "_id": "src-kohen-nbc-funeral",
+      "description": "Funeral coverage and Vellesiya Wiley's account of raising her baby to show officers",
+      "isAnonymous": null,
+      "label": "NBC News - Mississippi Family Mourns 1-Year-Old Boy Fatally Shot by Police",
+      "type": "article",
+      "url": "https://www.nbcnews.com/news/us-news/kohen-wiley-senatobia-mississippi-funeral-police-shooting-rcna351609"
+    },
+    {
+      "_id": "src-kohen-wreg-answers",
+      "description": "Local Memphis coverage including witness accounts and family statements",
+      "isAnonymous": null,
+      "label": "WREG - Mississippi Town Looks for Answers After Walmart Shooting That Killed 1-Year-Old",
+      "type": "article",
+      "url": "https://wreg.com/news/local/ms-town-looks-for-answers-after-walmart-shooting-that-killed-1-year-old/"
+    }
+  ]
+}

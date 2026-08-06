@@ -1,0 +1,54 @@
+{
+  "slug": "settlers-have-killed-or-stolen-8-000-sheep-and-goats-in-the-west-bank-in-2026-starvation-as-a",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "src-al-monitor-palestinian-farmers-race-harvest",
+      "description": "Al-Monitor/AFP report on settler violence against Palestinian farmers, including 8,000 sheep killed/stolen stat from PA Agriculture Ministry.",
+      "isAnonymous": null,
+      "label": "Al-Monitor - Facing Settler Violence, Palestinian Farmers Race to Harvest",
+      "type": "article",
+      "url": "https://www.al-monitor.com/originals/2026/06/facing-settler-violence-palestinian-farmers-race-harvest"
+    },
+    {
+      "_id": "src-al-jazeera-settlers-driving-shepherds-from-grazing-lands",
+      "description": "Al Jazeera feature on systematic settler displacement of Palestinian shepherding communities.",
+      "isAnonymous": null,
+      "label": "Al Jazeera - Israeli Settlers Driving Palestinian Shepherds From Grazing Lands",
+      "type": "article",
+      "url": "https://www.aljazeera.com/features/2026/6/3/israeli-settlers-are-driving-palestinian-shepherds-from-their-grazing-lands"
+    },
+    {
+      "_id": "src-arab-news-sheep-theft-ruins-eid",
+      "description": "Reuters reporting on Sameeha Rasheed losing 45 sheep to settler raid in Masafer Yatta before Eid Al-Adha.",
+      "isAnonymous": null,
+      "label": "Arab News / Reuters - Sheep Theft Ruins Festivities for Palestinian Shepherd",
+      "type": "article",
+      "url": "https://www.arabnews.com/node/2645042/amp"
+    },
+    {
+      "_id": "src-hrw-settler-violence-intensifies-2026",
+      "description": "HRW report on intensification of settler violence in the occupied West Bank since October 2023.",
+      "isAnonymous": null,
+      "label": "Human Rights Watch - Settler Violence Against Palestinians Intensifies",
+      "type": "statement",
+      "url": "https://www.hrw.org/news/2026/03/13/in-the-shadow-of-war-settler-violence-against-palestinians-intensifies"
+    },
+    {
+      "_id": "src-ocha-west-bank-situation-update-337",
+      "description": "UN OCHA data on settler violence incidents and restrictions on Palestinian agricultural access.",
+      "isAnonymous": null,
+      "label": "UN OCHA - Humanitarian Situation Update #337, West Bank",
+      "type": "data",
+      "url": "https://www.ochaopt.org/content/humanitarian-situation-update-337-west-bank"
+    },
+    {
+      "_id": "src-btselem-settler-violence-updates",
+      "description": "B'Tselem documentation of ongoing settler violence including arson, livestock theft, and expulsion of shepherds.",
+      "isAnonymous": null,
+      "label": "B'Tselem - Settler Violence Updates and Documentation",
+      "type": "onscene",
+      "url": "https://www.btselem.org/settler_violence_updates_list"
+    }
+  ]
+}

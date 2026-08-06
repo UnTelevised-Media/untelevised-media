@@ -1,0 +1,46 @@
+{
+  "slug": "the-deportation-plane-and-the-strike-line-how-world-cup-workers-are-fighting-the-carceral-state",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-truthout-workers-in-world-cup-host-cities-strike-over-ice-and-wages",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Truthout — Workers in World Cup Host Cities Strike Over ICE and Wages",
+      "type": "article",
+      "url": "https://truthout.org/articles/workers-in-world-cup-host-cities-strike-or-retain-right-to-over-ice-and-wages/"
+    },
+    {
+      "_id": "source-the-guardian-fifa-flies-portugals-world-cup-team-on-plane-used-for-ice-deportati",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — FIFA flies Portugal's World Cup team on plane used for ICE deportations",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/jul/17/portugal-world-cup-team-ice-deportation-planes"
+    },
+    {
+      "_id": "source-jacobin-la-stadium-workers-won-the-right-to-strike-over-ice",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jacobin — LA Stadium Workers Won the Right to Strike Over ICE",
+      "type": "article",
+      "url": "https://jacobin.com/2026/07/stadium-workers-world-cup-ice"
+    },
+    {
+      "_id": "source-the-guardian-france-national-team-uses-ice-deportation-planes-for-world-cup-trav",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — France national team uses ICE deportation planes for World Cup travel",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/jul/09/french-national-team-ice-deportation-planes-world-cup"
+    },
+    {
+      "_id": "source-ice-flight-monitor-human-rights-first",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ICE Flight Monitor / Human Rights First",
+      "type": "data",
+      "url": "https://www.humanrightsfirst.org/ice-flight-monitor"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "a-bullet-meant-for-no-one-a-life-taken-from-everyone-the-murder-of-sam-abu-haikal",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-the-guardian",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/jan/30/settler-only-idf-units-functioning-as-vigilante-militias-in-west-bank"
+    },
+    {
+      "_id": "source-cbs-news-ap",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS News / AP",
+      "type": "media",
+      "url": "https://www.cbsnews.com/news/israel-west-bank-gaza-war-sam-fahd-abu-haikal/"
+    },
+    {
+      "_id": "source-bbc-news",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BBC News",
+      "type": "media",
+      "url": "https://www.bbc.com/news/articles/cly8lgn0x30o"
+    },
+    {
+      "_id": "source-ibtimes-uk-btselem",
+      "description": null,
+      "isAnonymous": null,
+      "label": "IBTimes UK / B'Tselem",
+      "type": "media",
+      "url": "https://www.ibtimes.co.uk/video-contradicts-idf-account-palestinian-baby-death-1802525"
+    },
+    {
+      "_id": "source-amnesty-international",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Amnesty International",
+      "type": "report",
+      "url": "https://www.amnesty.org/en/latest/research/2026/06/israel-west-bank-ethnic-cleansing/"
+    },
+    {
+      "_id": "source-times-of-israel",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Times of Israel",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/nine-palestinians-reported-wounded-in-settler-rampage-through-hawara/"
+    }
+  ]
+}

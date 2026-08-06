@@ -1,0 +1,70 @@
+{
+  "slug": "boardman-amazon-s-data-center-empire-vs-a-town-s-drinking-water",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-the-oregonian-boomtown-and-battleground-small-oregon-county-grapples-with-data-c",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Oregonian — Boomtown and Battleground: Small Oregon County Grapples With Data Centers' Impact",
+      "type": "media",
+      "url": "https://www.oregonlive.com/silicon-forest/2026/05/boomtown-and-battleground-small-oregon-county-grapples-with-data-centers-impact.html"
+    },
+    {
+      "_id": "source-opb-federal-judge-clears-path-for-eastern-oregon-nitrate-pollution-lawsuit",
+      "description": null,
+      "isAnonymous": null,
+      "label": "OPB — Federal Judge Clears Path for Eastern Oregon Nitrate Pollution Lawsuit",
+      "type": "media",
+      "url": "https://www.opb.org/article/2026/06/09/federal-judge-clears-path-for-eastern-oregon-nitrate-pollution-lawsuit/"
+    },
+    {
+      "_id": "source-oregon-capital-chronicle-via-central-oregon-daily-amazon-to-pay-205m-settlement-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Oregon Capital Chronicle (via Central Oregon Daily) — Amazon to Pay $20.5M Settlement Over Northeast Oregon Nitrate Pollution",
+      "type": "media",
+      "url": "https://www.centraloregondaily.com/news/regional/amazon-to-pay-20-5-million-settlement-over-northeast-oregon-nitrate-pollution/article_72996182-fe2a-4255-9b5d-5350d91885ea.html"
+    },
+    {
+      "_id": "source-rain-intelligence-the-courthouse-backstop-data-center-water-pollution-and-amazon",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Rain Intelligence — The Courthouse Backstop: Data-Center Water Pollution and Amazon's $20.5M Nitrate Settlement",
+      "type": "media",
+      "url": "https://www.rainintelligence.com/blog/data-center-water-pollution-litigation"
+    },
+    {
+      "_id": "source-opb-amazon-will-pay-205-million-to-settle-oregon-data-center-pollution-allegatio",
+      "description": null,
+      "isAnonymous": null,
+      "label": "OPB — Amazon Will Pay $20.5 Million to Settle Oregon Data Center Pollution Allegations",
+      "type": "media",
+      "url": "https://www.opb.org/article/2026/03/31/amazon-fine-northeast-oregon-boardman-nitrate-pollution-well/"
+    },
+    {
+      "_id": "source-oregon-capital-chronicle-powerful-port-pollutes-water-for-years-with-little-stat",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Oregon Capital Chronicle — Powerful Port Pollutes Water for Years With Little State Action",
+      "type": "media",
+      "url": "https://oregoncapitalchronicle.com/2022/05/05/powerful-port-pollutes-water-for-years-with-little-state-action/"
+    },
+    {
+      "_id": "source-hagens-berman-205m-settlement-press-release",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Hagens Berman — $20.5M Settlement Press Release",
+      "type": "official",
+      "url": "https://www.hbsslaw.com/press/oregon-groundwater-contamination/205m-settlement-reached-with-amazon-data-services-inc-over-alleged-nitrate-groundwater-contamination-in-oregons-lubgwma"
+    },
+    {
+      "_id": "source-us-district-court-order-on-motion-to-dismiss-pearson-v-port-of-morrow",
+      "description": null,
+      "isAnonymous": null,
+      "label": "U.S. District Court — Order on Motion to Dismiss (Pearson v. Port of Morrow)",
+      "type": "official",
+      "url": "https://www.hbsslaw.com/sites/default/files/case-downloads/morrow-and-umatilla-county-oregon-groundwater-contamination/2026-06-05-order-on-mtd.pdf"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "_id": "disarmament-theater-50-killed-five-days-gaza-slaughter-ceasefire",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israel killed more than 50 Palestinians in five days as Hamas signed a disarmament deal. 1,250+ killed under the so-called ceasefire. 73,500+ total since October 2023. Named victims, data tables, and the ceasefire that never was.",
+  "eventDate": "2026-07-30T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Since the ceasefire took effect on October 10, 2025, Israel has killed at least 1,222 Palestinians and wounded more than 4,053, according to Gaza's Health Ministry. The Gaza Government Media Office has documented over 3,690 ceasefire violations.",
+      "question": "How many Palestinians has Israel killed since the 'ceasefire' began?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "On July 30, 2026, Trump's Board of Peace and the International Stabilization Force announced Hamas had accepted a 15-point roadmap for Gaza's second phase, linking Hamas's phased disarmament to Israel's withdrawal. Israel has rejected key provisions and continued bombing.",
+      "question": "What is the Board of Peace disarmament agreement?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Civil Defense teams recovered 112 bodies from the ruins of the al-Hasayna and Abu Sharia family homes in Sabra, south of Gaza City. The dead included 40 children and 38 women. Around 200 family members were killed when Israel bombed their homes. The recovery took 136 hours, mostly using bare hands.",
+      "question": "What happened in Sabra neighborhood?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "As of August 2026, the overall death toll has surpassed 73,349 Palestinians, with more than 174,000 wounded, according to Gaza's Health Ministry.",
+      "question": "What is the total death toll from Israel's war on Gaza?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Gaza ceasefire violations",
+    "Hamas disarmament deal",
+    "Board of Peace",
+    "Israel Gaza August 2026",
+    "Palestinian casualties",
+    "Benjamin Netanyahu",
+    "Trump Gaza plan"
+  ],
+  "leadParagraph": "The same week Hamas signed a disarmament agreement the White House called a monumental step toward peace, Israel killed more than 50 Palestinians across Gaza. 1,250+ Palestinians have now been killed under the so-called ceasefire. 73,500+ total since October 2023. The numbers keep rising. The world keeps looking away.",
+  "linkedPitch": null,
+  "location": "Gaza Strip, Palestine",
+  "mainImage": {
+    "_key": "img-0",
+    "_type": "image",
+    "alt": "Palestinians inspect the site of an overnight Israeli strike on a medical supply warehouse near Al-Aqsa Martyrs Hospital in Deir el-Balah, central Gaza Strip, August 1, 2026",
+    "asset": {
+      "_ref": "image-489813d0bd4fd1c36f837c7b5950bc2663be3b71-800x533-webp",
+      "_type": "reference"
+    },
+    "caption": "Palestinians inspect the site of an overnight Israeli strike on a medical supply warehouse near Al-Aqsa Martyrs Hospital in Deir el-Balah, August 1, 2026. The attack destroyed four medicine warehouses holding IV fluids, dialysis supplies, and intensive care equipment.",
+    "credit": "Reuters via Yahoo News"
+  },
+  "methodology": "Reported using wire service reports from Al Jazeera, Reuters, Anadolu Agency, Quds News Network, and Countercurrents. Named victims sourced from Al Jazeera medical source reporting and Gaza Health Ministry data. Ceasefire violation statistics from Gaza Government Media Office and Gaza Health Ministry. UN statements from OHCHR. Israeli government positions sourced from Times of Israel and Al Jazeera reporting.",
+  "needsReview": null,
+  "publishedAt": "2026-08-03T19:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-3",
+      "_ref": "israels-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "israel-builds-settlements-on-gazas-graves-the-open-air-annexation-and-the-language-of-genocide-made-concrete",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "gaza-board-of-peace-ncag-governance-surrender-erasure-machine",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "four-apartments-nine-martyrs-one-girl-left-alive-israel-ceasefire-gaza-june-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-disarmament-theater-50-killed-in-five-days-as-israel-bombs-gaza-while-the-world-negotiates"
+  },
+  "tags": [
+    "Gaza",
+    "ceasefire violations",
+    "Hamas disarmament",
+    "Board of Peace",
+    "Israeli airstrikes",
+    "genocide",
+    "Gaza health crisis"
+  ],
+  "title": "The Disarmament Theater: 50 Killed in Five Days as Israel Bombs Gaza While the World Negotiates Its Surrender",
+  "updatedAt": null,
+  "videoLink": null
+}

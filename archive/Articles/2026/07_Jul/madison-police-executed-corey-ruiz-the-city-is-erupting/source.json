@@ -1,0 +1,94 @@
+{
+  "slug": "madison-police-executed-corey-ruiz-the-city-is-erupting",
+  "totalSources": 11,
+  "sources": [
+    {
+      "_id": "source-ap-news-no-bodycam-footage-in-fatal-madison-police-shooting",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News — No bodycam footage in fatal Madison police shooting",
+      "type": "article",
+      "url": "https://apnews.com/article/bodycam-footage-madison-wisconsin-police-shooting-4885071da142ae0b225873dbb36aa10b"
+    },
+    {
+      "_id": "source-ap-news-attorney-says-officer-who-shot-corey-ruiz-should-be-charged",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News — Attorney says officer who shot Corey Ruiz should be charged",
+      "type": "article",
+      "url": "https://apnews.com/article/corey-ruiz-death-madison-wisconsin-police-7ea2c187227243cb1c7988514d1091ac"
+    },
+    {
+      "_id": "source-ap-news-wisconsins-capital-city-cancels-signature-events-grapples-with-fallout-f",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News — Wisconsin's capital city cancels signature events, grapples with fallout from police shooting",
+      "type": "article",
+      "url": "https://apnews.com/article/madison-police-shooting-farmers-market-d7372475c1823a5b10580c6481bbfbe7"
+    },
+    {
+      "_id": "source-nbc-news-madison-police-shooting-victim-identified-as-corey-ruiz-as-protests-con",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News — Madison police shooting victim identified as Corey Ruiz as protests continue",
+      "type": "article",
+      "url": "https://www.nbcnews.com/news/us-news/madison-wisconsin-police-shooting-corey-ruiz-rcna588925"
+    },
+    {
+      "_id": "source-newsweek-what-videos-reveal-about-officer-shooting-in-wisconsin",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Newsweek — What Videos Reveal About Officer Shooting in Wisconsin",
+      "type": "article",
+      "url": "https://www.newsweek.com/what-videos-reveal-about-officer-shooting-corey-ruiz-12233600"
+    },
+    {
+      "_id": "source-truthout-madison-residents-protest-after-police-shoot-kill-a-black-man-in-broad-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Truthout — Madison Residents Protest After Police Shoot, Kill a Black Man in Broad Daylight",
+      "type": "article",
+      "url": "https://truthout.org/articles/madison-residents-protest-after-police-shoot-kill-a-black-man-in-broad-daylight/"
+    },
+    {
+      "_id": "source-madison365-protesters-shut-down-concerts-on-the-square",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Madison365 — Protesters shut down Concerts on the Square",
+      "type": "article",
+      "url": "https://madison365.com/in-response-to-police-shooting-protesters-shut-down-concerts-on-the-square/"
+    },
+    {
+      "_id": "source-wmtv15-news-demonstrators-march-through-madison-for-third-day",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WMTV15 News — Demonstrators march through Madison for third day",
+      "type": "article",
+      "url": "https://www.wmtv15news.com/2026/07/25/demonstrators-march-through-madison-third-day-after-fatal-madison-officer-involved-shooting/"
+    },
+    {
+      "_id": "source-fight-back-news-justice-for-corey-ruiz-naarpr-statement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Fight Back! News — Justice for Corey Ruiz (NAARPR statement)",
+      "type": "statement",
+      "url": "https://fightbacknews.org/articles/justice-for-corey-ruiz"
+    },
+    {
+      "_id": "source-wisconsin-examiner-madison-police-shooting-briefing-devolves-into-shouting-match",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wisconsin Examiner — Madison police shooting briefing devolves into shouting match",
+      "type": "article",
+      "url": "https://wisconsinexaminer.com/2026/07/24/update-on-madison-police-shooting-devolves-into-shouting-match-between-protest-groups/"
+    },
+    {
+      "_id": "source-city-of-madison-police-department-official-incident-report",
+      "description": null,
+      "isAnonymous": null,
+      "label": "City of Madison Police Department — Official incident report",
+      "type": "official",
+      "url": "https://www.cityofmadison.com/police/incident-reports/2026-07-22/man-fatally-shot-during-altercation-with-police"
+    }
+  ]
+}

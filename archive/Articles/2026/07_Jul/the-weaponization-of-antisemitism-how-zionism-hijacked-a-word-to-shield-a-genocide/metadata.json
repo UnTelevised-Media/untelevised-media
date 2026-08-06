@@ -1,0 +1,161 @@
+{
+  "_id": "the-weaponization-of-antisemitism",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "Ghv0vRm8LV3rkQJ86CezAf",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    },
+    {
+      "_key": "Ghv0vRm8LV3rkQJ86CezEw",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "Ghv0vRm8LV3rkQJ86CezJD",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "Ghv0vRm8LV3rkQJ86CezNU",
+      "_ref": "d21a73f5-a2fc-46fd-8801-f1f32e1f0b1f",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "How Zionists hijacked the term 'antisemitism' to shield Israel's genocide in Gaza from accountability — and how the conflation of Judaism with Zionism endangers Jews worldwide.",
+  "eventDate": "2026-07-15T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "The International Holocaust Remembrance Alliance (IHRA) working definition of antisemitism, adopted in 2016, includes 11 illustrative examples — seven of which reference Israel. It has been adopted by 47 countries and over 1,300 entities worldwide. Critics argue it is routinely weaponized to label legitimate criticism of Israel as antisemitic, chilling free speech and Palestinian rights advocacy.",
+      "question": "What is the IHRA definition of antisemitism?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "No. Anti-Zionism is opposition to Zionism as a political ideology. Zionism is a nationalist movement founded in the 19th century — it is distinct from Judaism, which is a 3,000-year-old religion. Not all Jews are Zionists, and not all Zionists are Jews. The largest Zionist organization in the world, Christians United for Israel, is Christian, with 10 million members. Over 200 Jewish studies scholars signed the Jerusalem Declaration affirming that anti-Zionism is not inherently antisemitic.",
+      "question": "Is anti-Zionism the same as antisemitism?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "By insisting that Israel's actions represent Judaism itself, Zionist advocates create a framework where criticism of Israeli atrocities — including the ongoing genocide in Gaza — is redirected as hatred of Jews. FBI data shows anti-Jewish hate crimes surged 63% in 2023 and hit record highs again in 2024. Experts argue that the deliberate conflation of Judaism with Israeli state violence fuels the very antisemitism it claims to combat.",
+      "question": "How has the conflation of Judaism and Zionism endangered Jews?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Yes. The term 'Semite' was coined in 1781 to describe any people speaking a Semitic language, including Arabic, Hebrew, Amharic, and Aramaic. Arabs are linguistically and genealogically Semitic peoples, descended from the same populations as Hebrews according to both biblical tradition and linguistic classification. The term 'antisemitism,' however, has a specific historical meaning referring to hatred of Jews.",
+      "question": "Are Arabs Semites?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Independent estimates vary due to the difficulty of accurate counting during active conflict. The Lancet Global Health's Gaza Mortality Survey estimated at least 75,200 violent deaths between October 7, 2023 and January 2025. The Max Planck Institute estimated over 78,000 by end of 2024, with some analyses suggesting the true toll exceeds 100,000. Gaza's pre-war population was approximately 2.3 million, meaning over 10% of the population has been killed or injured.",
+      "question": "How many Palestinians have been killed in Gaza?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "weaponization of antisemitism",
+    "IHRA definition antisemitism",
+    "anti-Zionism vs antisemitism",
+    "Zionism not Judaism",
+    "Christian Zionism CUFI",
+    "Gaza genocide death toll",
+    "antisemitic hate crimes 2024",
+    "Jerusalem Declaration antisemitism",
+    "free speech Israel criticism",
+    "conflation Judaism Israel"
+  ],
+  "leadParagraph": "The term 'antisemitism' has been weaponized by Zionist advocates to silence all criticism of Israel's actions — from the genocide in Gaza to the ethnic cleansing of the West Bank. By deliberately conflating Judaism with Zionism, this strategy has endangered Jewish communities worldwide while providing political cover for atrocities that independent researchers estimate have killed over 100,000 Palestinians since October 2023.",
+  "linkedPitch": null,
+  "location": "Global — United States, Palestine, Europe",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Aerial photograph showing widespread destruction of buildings in Rafah, Gaza Strip",
+    "asset": {
+      "_ref": "image-672eff64ca33bb53505d69ce4a5734842be9f9b5-1024x683-webp",
+      "_type": "reference"
+    },
+    "caption": "Aerial view of destruction in Rafah after Israeli forces withdrew from Gaza",
+    "credit": "Wikimedia Commons"
+  },
+  "methodology": "Reported using verified data from the ADL, FBI hate crime statistics, the Lancet Global Health Gaza Mortality Survey, Max Planck Institute for Demographic Research, Brown University Costs of War project, and historical documentation from Wikipedia, Mondoweiss, The Nation, and The Guardian. Sources include IHRA adoption tracking, Pew Research Center surveys on Christian Zionism, and Britannica linguistic references on Semitic peoples. All statistical claims cross-referenced across multiple independent sources.",
+  "needsReview": null,
+  "publishedAt": "2026-07-15T19:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "article-7da4c05d-c947-4ada-bc5d-c82202975ff0",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "lindsey-graham-israel-s-genocide-cheerleader-leaves-behind-a-legacy-of-racism-and-hate",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "palestine-action-uk-zionist-lobby-israeli-embassy-interference",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "salah-akram-gaza-is-shrinking",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "uaw-divests-israel-bonds",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "How Zionist advocates weaponized the term 'antisemitism' to silence criticism of Israel's genocide in Gaza — and how conflating Judaism with Zionism endangers Jews worldwide. Data, history, and analysis.",
+    "metaTitle": "The Weaponization of Antisemitism: How Zionism Hijacked a Word to Shield Genocide",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-weaponization-of-antisemitism-how-zionism-hijacked-a-word-to-shield-a-genocide"
+  },
+  "tags": [
+    "Antisemitism",
+    "Zionism",
+    "IHRA Definition",
+    "Gaza Genocide",
+    "Israel",
+    "Palestine",
+    "Judaism",
+    "Christian Zionism",
+    "Free Speech",
+    "Hasbara"
+  ],
+  "title": "The Weaponization of Antisemitism: How Zionism Hijacked a Word to Shield a Genocide",
+  "updatedAt": null,
+  "videoLink": null
+}

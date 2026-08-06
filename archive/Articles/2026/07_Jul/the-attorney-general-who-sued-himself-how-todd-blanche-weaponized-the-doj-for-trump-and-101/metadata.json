@@ -1,0 +1,146 @@
+{
+  "_id": "todd-blanche-corruption-slush-fund-101-judges-constitution",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-3",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "More than 100 federal judges filed ethics complaints against Acting Attorney General Todd Blanche after he gave Trump a $1.8B slush fund, exempted his family from IRS audits, and was condemned by a federal judge as acting in 'bad faith.'",
+  "eventDate": "2026-07-25T00:00:00Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "A fund proposed in Blanche's 'settlement' of Trump's $10B IRS lawsuit that would compensate those who alleged the Biden administration weaponized the legal system — primarily January 6 defendants. It would be funded by the Treasury. After bipartisan backlash and a court injunction, Blanche claimed the DOJ would not move forward, but refused to rule out reviving it.",
+      "question": "What is the $1.776 billion 'anti-weaponization' fund?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The bipartisan coalition of current and former federal and state judges alleged roughly a dozen instances of professional misconduct, including conflict of interest in the Epstein investigation, throwing the IRS lawsuit, and violating professional ethics by continuing to represent a former client (Trump) while serving as Attorney General.",
+      "question": "Why did 101 judges file an ethics complaint?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Judge Williams found there was 'never adverseness' between the parties because Trump controlled the defendant (his own administration). She called the settlement an attempt to create 'a slush fund disguised as a settlement,' ordered monetary sanctions, barred Trump from describing the deal as a legitimate settlement, and referred the case to the NY and DC Bars for disciplinary proceedings.",
+      "question": "What did Judge Williams find in her July 14 ruling?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Yes. Blanche has been acting AG since April 2, 2026, after Trump fired Pam Bondi. His confirmation hearing for the permanent role was held July 15-16, 2026. The Senate Judiciary Committee had not yet scheduled a vote as of late July.",
+      "question": "Is Blanche still acting Attorney General?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Todd Blanche",
+    "Attorney General",
+    "DOJ",
+    "IRS",
+    "Trump",
+    "slush fund",
+    "ethics complaint",
+    "federal judges",
+    "Senate confirmation",
+    "Kathleen Williams",
+    "Justice Department corruption"
+  ],
+  "leadParagraph": "Todd Blanche — Trump's former personal defense attorney, now acting Attorney General — gave the president's allies $1.8 billion in taxpayer money through a 'settlement' a federal judge called an act of 'bad faith,' exempted Trump's family from IRS audits with an order no IRS official signed, and oversaw the Epstein investigation while his former client appears in it thousands of times. Now 101 judges, 1,200 former DOJ employees, and the NYC Bar have all said: this man has no business running the Justice Department.",
+  "linkedPitch": null,
+  "location": "Washington, D.C.",
+  "mainImage": {
+    "_key": "img-0",
+    "_type": "image",
+    "alt": "Official DOJ portrait of Todd Blanche wearing a dark suit and tie",
+    "asset": {
+      "_ref": "image-09d4434606ad3c643a676ea4ff65356ab0a2aa83-4119x5497-webp",
+      "_type": "reference"
+    },
+    "caption": "Official portrait of Todd Blanche, 2025, as Deputy Attorney General of the United States.",
+    "credit": "U.S. Department of Justice"
+  },
+  "methodology": "This article is based on primary source documents including federal court filings (Trump v. IRS, S.D. Fla.), the 73-page ethics complaint filed with the NY State Attorney Grievance Committee by 100+ federal judges, the Justice Connection letter signed by 1,200+ former DOJ employees, AP News live hearing coverage, and investigative reporting by HuffPost, Slate, New Republic, and Democracy Docket. All figures and quotes are directly sourced from these materials.",
+  "needsReview": null,
+  "publishedAt": "2026-07-27T17:30:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "10e6e8d6e44b",
+      "_ref": "trump-dna-carroll-dress-epstein-codis",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "blanche-epstein-coverup-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "trump-second-term-justice-department-war-on-press",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "trump-pardons-corrupt-officials-dismantles-justice-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "trump-ballroom-donors-50b-federal-contracts",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "forty-years-corruption-dark-career-mitch-mcconnell",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-attorney-general-who-sued-himself-how-todd-blanche-weaponized-the-doj-for-trump-and-101"
+  },
+  "tags": [
+    "Todd Blanche",
+    "Department of Justice",
+    "Trump Administration",
+    "IRS",
+    "Senate Confirmation",
+    "Federal Judges",
+    "Ethics Complaint",
+    "Corruption"
+  ],
+  "title": "The Attorney General Who Sued Himself: How Todd Blanche Weaponized the DOJ for Trump — and 101 Judges Said Enough",
+  "updatedAt": null,
+  "videoLink": null
+}

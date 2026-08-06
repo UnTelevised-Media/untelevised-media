@@ -1,0 +1,46 @@
+{
+  "slug": "when-the-militia-is-the-law-how-far-right-groups-hijacked-prineville-s-police-and-politics",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "src-opb-prineville-blm-2020",
+      "description": "OPB investigation into racist threats and police indifference during Prineville BLM protests.",
+      "isAnonymous": null,
+      "label": "OPB - Rural Oregon Backlash to BLM Protests",
+      "type": "article",
+      "url": "https://www.opb.org/article/2020/08/24/in-rural-oregon-a-backlash-to-black-lives-matter-includes-threats-of-violence-racist-speech-and-indifference-from-local-police/"
+    },
+    {
+      "_id": "src-opb-oregon-cops-oath-keepers",
+      "description": "OPB investigation revealing dozens of Oregon police officers joined the Oath Keepers militia.",
+      "isAnonymous": null,
+      "label": "OPB - Oregon Law Enforcement in Oath Keepers",
+      "type": "article",
+      "url": "https://www.opb.org/article/2021/10/15/dozens-of-oregon-law-enforcement-officers-joined-far-right-oath-keepers-militia/"
+    },
+    {
+      "_id": "src-rop-crook-deschutes",
+      "description": "ROP report documenting COCG, COP, and Oath Keepers as intertwined far-right groups in Prineville-Redmond area.",
+      "isAnonymous": null,
+      "label": "Rural Organizing Project - Crook and Deschutes Counties",
+      "type": "article",
+      "url": "https://rop.org/uia/section-i/oregons-patriot-movement-today/crook-deschutes-counties/"
+    },
+    {
+      "_id": "src-opb-crook-county-lgbtq",
+      "description": "OPB investigation into superintendent coordinating with conservative activist on anti-LGBTQ agenda.",
+      "isAnonymous": null,
+      "label": "OPB - Anti-LGBTQ Activism in Crook County Schools",
+      "type": "article",
+      "url": "https://www.opb.org/article/2023/02/24/anti-lgbtq-activism-books-crook-county-oregon-schools/"
+    },
+    {
+      "_id": "src-bend-bulletin-ice-prineville",
+      "description": "Bend Bulletin coverage of ICE resistance protests including Prineville.",
+      "isAnonymous": null,
+      "label": "Bend Bulletin - ICE Protests Across Central Oregon",
+      "type": "article",
+      "url": "https://bendbulletin.com/2026/01/10/more-than-500-protest-ice-in-downtown-bend/"
+    }
+  ]
+}

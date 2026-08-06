@@ -1,0 +1,46 @@
+{
+  "slug": "the-arrest-of-fergie-chambers-when-humanitarian-aid-becomes-terrorism-financing",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-the-grayzone-fergie-chambers-facing-us-extradition-over-dubious-terrorism-financ",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Grayzone — Fergie Chambers Facing US Extradition Over Dubious Terrorism Financing Charges",
+      "type": "media",
+      "url": "https://thegrayzone.com/2026/07/12/fergie-chambers-extradition-terrorism-financing/"
+    },
+    {
+      "_id": "source-the-guardian-arrest-of-american-who-gave-1m-in-aid-to-palestine-prompts-fears-of",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Arrest of American Who Gave $1m in Aid to Palestine Prompts Fears of Trump Repression",
+      "type": "media",
+      "url": "https://www.theguardian.com/world/2026/jul/15/james-fergie-chambers-arrest-palestine-aid-trump"
+    },
+    {
+      "_id": "source-the-worker-spain-arrests-pro-palestine-donor-fergie-chambers-directed-by-trump-a",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Worker — Spain Arrests Pro-Palestine Donor Fergie Chambers Directed by Trump Administration",
+      "type": "media",
+      "url": "https://theworker.news/2026/07/13/spain-arrests-pro-palestine-donor-fergie-chambers-directed-by-trump-administration/"
+    },
+    {
+      "_id": "source-washington-post-may-day-2026",
+      "description": "April 30, 2026 coverage of global May Day rallies calling for peace, higher wages, and better working conditions as workers grapple with rising energy costs and shrinking purchasing power tied to the Iran war.",
+      "isAnonymous": null,
+      "label": "The Washington Post - What to know about May Day demonstrations as workers face rising energy costs",
+      "type": "article",
+      "url": "https://www.washingtonpost.com/world/2026/04/30/may-day-international-workers-rallies-demonstrations/57b3a6c6-44fa-11f1-b19d-32431046b5b4_story.html"
+    },
+    {
+      "_id": "source-rolling-stone-cox-enterprises-heir-fergie-chambers-funding-palestine-action",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Rolling Stone — Cox Enterprises Heir Fergie Chambers Funding Palestine Action",
+      "type": "media",
+      "url": "https://www.rollingstone.com/culture/culture-features/fergie-chambers-cox-enterprises-heir-overthrow-us-1234983156/"
+    }
+  ]
+}

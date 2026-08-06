@@ -1,0 +1,166 @@
+{
+  "slug": "erasing-palestine-how-trump-netanyahu-and-the-board-of-peace-are-completing-the-nakba",
+  "totalSources": 20,
+  "sources": [
+    {
+      "_id": "source-le-monde-unrwa-archives-access",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Le Monde — UNRWA Archives Access",
+      "type": "article",
+      "url": "https://www.lemonde.fr/en/international/article/2024/08/24/from-nakba-to-present-day-unrwa-archives-hold-the-personal-histories-of-palestinian-refugees_6720877_4.html"
+    },
+    {
+      "_id": "source-middle-east-eye-kushan-baladi-land-title-system",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Eye — Kushan Baladi Land Title System",
+      "type": "article",
+      "url": "https://www.middleeasteye.net/news/israel-palestine-land-titles-kushan-baladi-right-return"
+    },
+    {
+      "_id": "source-the-guardian-board-of-peace-legal-immunity-resolution",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Board of Peace Legal Immunity Resolution",
+      "type": "article",
+      "url": "https://www.theguardian.com/law/2026/jun/27/board-of-peace-legal-immunity-un"
+    },
+    {
+      "_id": "source-truthout-board-of-peace-hamas-free-zones",
+      "description": null,
+      "isAnonymous": null,
+      "label": "TruthOut — Board of Peace Hamas-Free Zones",
+      "type": "article",
+      "url": "https://truthout.org/articles/the-board-of-peace-is-planning-to-concentrate-gazans-in-hamas-free-enclaves/"
+    },
+    {
+      "_id": "source-middle-east-eye-board-of-peace-launches-hamas-free-shelters",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Eye — Board of Peace Launches Hamas-Free Shelters",
+      "type": "article",
+      "url": "https://www.middleeasteye.net/news/trumps-board-peace-launch-hamas-free-shelters-while-israel-tightens-grip-gaza"
+    },
+    {
+      "_id": "source-countercurrents-board-of-peace-unrwa-erasure-analysis",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CounterCurrents — Board of Peace UNRWA Erasure Analysis",
+      "type": "article",
+      "url": "https://countercurrents.org/2026/07/trumps-so-called-board-of-peace-says-unrwa-has-no-place-in-the-new-gaza-what-to-know/"
+    },
+    {
+      "_id": "source-cnbc-great-trust-gaza-riviera-plan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNBC — GREAT Trust Gaza Riviera Plan",
+      "type": "article",
+      "url": "https://www.cnbc.com/2025/09/01/gaza-riviera-trump-administration-weighs-post-war-redevelopment-plan.html"
+    },
+    {
+      "_id": "source-wikipedia-2025-trump-gaza-takeover-proposal-timeline",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — 2025 Trump Gaza Takeover Proposal Timeline",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/2025_Donald_Trump_Gaza_Strip_takeover_proposal"
+    },
+    {
+      "_id": "source-wikipedia-2025-gaza-aid-distribution-killings",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — 2025 Gaza Aid Distribution Killings",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/2025_Gaza_Strip_aid_distribution_killings"
+    },
+    {
+      "_id": "source-wikipedia-gaza-humanitarian-foundation",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Gaza Humanitarian Foundation",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/Gaza_Humanitarian_Foundation"
+    },
+    {
+      "_id": "source-human-rights-watch-gaza-food-site-killings-are-war-crimes",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Human Rights Watch — Gaza Food Site Killings Are War Crimes",
+      "type": "document",
+      "url": "https://www.hrw.org/news/2025/08/01/gaza-israeli-killings-of-palestinians-seeking-food-are-war-crimes"
+    },
+    {
+      "_id": "source-amnesty-international-ghf-illegitimate-aid-scheme",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Amnesty International — GHF Illegitimate Aid Scheme",
+      "type": "document",
+      "url": "https://www.amnesty.org.au/israel-and-us-backed-gaza-humanitarian-foundation-is-an-illegitimate-and-inhumane-aid-scheme-that-risks-violating-international-law/"
+    },
+    {
+      "_id": "source-the-guardian-israeli-parliament-votes-to-ban-unrwa",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Israeli Parliament Votes to Ban UNRWA",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2024/oct/28/israeli-lawmakers-pass-bill-that-could-halt-unwra-relief-work-in-gaza"
+    },
+    {
+      "_id": "source-abc-news-israel-passes-unrwa-ban-legislation",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ABC News — Israel Passes UNRWA Ban Legislation",
+      "type": "article",
+      "url": "https://www.abc.net.au/news/2024-10-29/israel-passes-legislation-restricting-unrwa/104529954"
+    },
+    {
+      "_id": "source-reuters-netanyahu-directs-idf-to-seize-70-of-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — Netanyahu Directs IDF to Seize 70% of Gaza",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/netanyahu-directs-israeli-forces-expand-gaza-control-70-percent-2026-05-28/"
+    },
+    {
+      "_id": "source-al-jazeera-netanyahu-directs-army-to-seize-70-of-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Netanyahu Directs Army to Seize 70% of Gaza",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/5/28/israels-netanyahu-directs-army-to-seize-70-percent-of-gaza-strip"
+    },
+    {
+      "_id": "source-unocha-settler-violence-displaces-more-palestinians-in-2026-than-all-of-2025",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN/OCHA — Settler Violence Displaces More Palestinians in 2026 Than All of 2025",
+      "type": "document",
+      "url": "https://www.un.org/unispal/document/ocha-settler-violence-displaces-more-palestinians-in-2026-than-in-all-of-2025/"
+    },
+    {
+      "_id": "source-palestine-information-center-8691-settler-attacks",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Palestine Information Center — 8,691 Settler Attacks",
+      "type": "data",
+      "url": "https://english.palinfo.com/news/2026/04/21/361697/"
+    },
+    {
+      "_id": "source-hrw-in-the-shadow-of-war-settler-violence-intensifies",
+      "description": null,
+      "isAnonymous": null,
+      "label": "HRW — In the Shadow of War, Settler Violence Intensifies",
+      "type": "document",
+      "url": "https://www.hrw.org/news/2026/03/13/in-the-shadow-of-war-settler-violence-against-palestinians-intensifies"
+    },
+    {
+      "_id": "source-israel-hayom-board-of-peace-hamas-free-zones",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Israel Hayom — Board of Peace Hamas-Free Zones",
+      "type": "article",
+      "url": "https://www.israelhayom.co.il/"
+    }
+  ]
+}

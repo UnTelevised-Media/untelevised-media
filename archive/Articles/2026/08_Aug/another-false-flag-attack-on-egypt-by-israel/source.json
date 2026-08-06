@@ -1,0 +1,110 @@
+{
+  "slug": "another-false-flag-attack-on-egypt-by-israel",
+  "totalSources": 13,
+  "sources": [
+    {
+      "_id": "source-cnbc-egypt-says-drone-hit-two-ships-at-mediterranean-port-as-attacks-on-energy-i",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNBC — Egypt Says Drone Hit Two Ships at Mediterranean Port as Attacks on Energy Infrastructure Widen",
+      "type": "article",
+      "url": "https://www.cnbc.com/2026/07/30/egypt-drone-gas-ship-damietta-port-iran-war.html"
+    },
+    {
+      "_id": "source-new-york-times-two-tankers-hit-in-apparent-drone-strike-in-egypt",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — Two Tankers Hit in Apparent Drone Strike in Egypt",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/07/29/world/middleeast/ships-drone-strike-egypt.html"
+    },
+    {
+      "_id": "source-euronews-drone-hits-us-lng-vessel-at-damietta-in-first-attack-on-egyptian-soil",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Euronews — Drone Hits US LNG Vessel at Damietta in First Attack on Egyptian Soil",
+      "type": "article",
+      "url": "https://www.euronews.com/2026/07/30/drone-hits-us-lng-vessel-at-damietta-in-first-attack-on-egyptian-soil"
+    },
+    {
+      "_id": "source-the-war-zone-drone-strike-on-egyptian-port-stokes-concerns-iran-conflict-will-wi",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The War Zone — Drone Strike on Egyptian Port Stokes Concerns Iran Conflict Will Widen",
+      "type": "article",
+      "url": "https://www.twz.com/news-features/drone-strike-on-egyptian-port-on-mediterranean-stokes-concerns-iran-conflict-will-widen"
+    },
+    {
+      "_id": "source-anadolu-agency-iran-warns-of-israeli-false-flag-operations-after-drone-attack-at",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Anadolu Agency — Iran Warns of Israeli False-Flag Operations After Drone Attack at Egypt's Damietta Port",
+      "type": "article",
+      "url": "https://www.aa.com.tr/en/middle-east/iran-warns-of-israeli-false-flag-operations-after-drone-attack-at-egypt-s-damietta-port/4014378"
+    },
+    {
+      "_id": "source-zerohedge-iran-fm-accuses-israel-of-false-flag-after-mystery-drone-strike-on-egy",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ZeroHedge — Iran FM Accuses Israel of False Flag After Mystery Drone Strike on Egyptian Port",
+      "type": "article",
+      "url": "https://www.zerohedge.com/geopolitical/iran-fm-accuses-israel-false-flag-after-mystery-drone-strike-egyptian-port"
+    },
+    {
+      "_id": "source-ynet-news-drone-hits-us-owned-gas-tanker-at-egyptian-port-named-in-iranian-threa",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Ynet News — Drone Hits US-Owned Gas Tanker at Egyptian Port Named in Iranian Threat",
+      "type": "article",
+      "url": "https://www.ynetnews.com/article/syc1100sdbgx"
+    },
+    {
+      "_id": "source-reuters-iran-says-ukrainian-attack-on-vessel-in-caspian-sea-killed-sailor",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — Iran says Ukrainian attack on vessel in Caspian Sea killed sailor",
+      "type": "media",
+      "url": "https://www.reuters.com/world/europe/iran-says-ukrainian-attack-vessel-caspian-sea-killed-sailor-2026-07-25/"
+    },
+    {
+      "_id": "source-bbc-ukraine-dismisses-iranian-threats-as-caspian-sea-strike-directly-links-wars",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BBC — Ukraine Dismisses Iranian Threats as Caspian Sea Strike Directly Links Wars",
+      "type": "article",
+      "url": "https://www.bbc.com/news/articles/cwyj7yl0xndo"
+    },
+    {
+      "_id": "source-reuters-alternative-routes-for-middle-east-oil-and-gas-due-to-hormuz-disruption",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — Alternative Routes for Middle East Oil and Gas Due to Hormuz Disruption",
+      "type": "article",
+      "url": "https://www.reuters.com/business/energy/alternative-routes-middle-east-oil-gas-due-hormuz-disruption-2026-04-21/"
+    },
+    {
+      "_id": "source-sudan-tribune-sudan-condemns-drone-attack-on-ships-at-egypt-damietta-port",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Sudan Tribune — Sudan Condemns Drone Attack on Ships at Egypt Damietta Port",
+      "type": "article",
+      "url": "https://sudantribune.com/article/316847"
+    },
+    {
+      "_id": "source-the-media-line-drone-strikes-us-owned-lng-tanker-at-egypts-damietta-port",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Media Line — Drone Strikes US-Owned LNG Tanker at Egypt's Damietta Port",
+      "type": "article",
+      "url": "https://themedialine.org/headlines/drone-strikes-us-owned-lng-tanker-at-egypts-damietta-port/"
+    },
+    {
+      "_id": "source-windward-iranian-retaliation-reaches-damietta-a-new-front-opens-beyond-the-gulf",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Windward — Iranian Retaliation Reaches Damietta: A New Front Opens Beyond the Gulf",
+      "type": "article",
+      "url": "https://windward.ai/blog/iranian-retaliation-reaches-damietta-as-a-third-front-opens/"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "slug": "ecuadorian-prosecutor-investigating-us-boat-bombings-murdered-in-manta",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-drop-site-news-prosecutor-investigating-us-boat-strikes-and-claims-of-torture-wa",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Drop Site News — Prosecutor Investigating U.S. Boat Strikes and Claims of Torture Was Murdered in Ecuador",
+      "type": "media",
+      "url": "https://www.dropsitenews.com/p/prosecutor-investigating-ecuador-boat-strikes-murdered"
+    },
+    {
+      "_id": "source-common-dreams-calls-for-independent-probe-into-reported-us-bombing-of-ecuadorian",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Common Dreams — Calls for Independent Probe Into Reported US Bombing of Ecuadorian Boats Grow After Murder of Investigator",
+      "type": "media",
+      "url": "https://www.commondreams.org/news/trump-ecuador"
+    },
+    {
+      "_id": "source-amnesty-international-ecuadorusa-the-role-of-the-united-states-in-the-attack-on-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Amnesty International — Ecuador/USA: The role of the United States in the attack on an Ecuadorian vessel must be investigated",
+      "type": "document",
+      "url": "https://www.amnesty.org/en/latest/news/2026/07/ecuador-estados-unidos-debe-investigarse-el-papel-de-estados-unidos-en-el-ataque-contra-una-embarcacion-ecuatoriana/"
+    },
+    {
+      "_id": "source-common-dreams-us-ecuador-military-partnership-brings-torture-deadly-drone-strike",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Common Dreams — US-Ecuador Military Partnership Brings Torture, Deadly Drone Strikes, and Disappearances",
+      "type": "media",
+      "url": "https://www.commondreams.org/news/us-ecuador-military-torture"
+    },
+    {
+      "_id": "source-common-dreams-house-progressives-demand-pentagon-answer-for-alleged-abuse-in-us-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Common Dreams — House Progressives Demand Pentagon Answer for Alleged Abuse in US-Ecuador Operation",
+      "type": "media",
+      "url": "https://www.commondreams.org/news/ecuador-us-troops"
+    },
+    {
+      "_id": "source-castro-keating-letter-to-hegseth-rubio-and-lunday-demand-full-audit-of-us-involv",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Castro-Keating Letter to Hegseth, Rubio, and Lunday — Demand full audit of US involvement in Ecuador boat strikes",
+      "type": "document",
+      "url": "https://castro.house.gov/imo/media/doc/20260611ecuadorstrikescastrokeating.pdf"
+    },
+    {
+      "_id": "source-wola-the-us-forward-operating-location-in-manta-historical-background-on-us-mili",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WOLA — The US Forward Operating Location in Manta (historical background on US military presence in Manta)",
+      "type": "document",
+      "url": "https://www.wola.org/sites/default/files/downloadable/Andes/Ecuador/past/March%202007%20Manta%20Memo.pdf"
+    },
+    {
+      "_id": "source-the-guardian-ecuadorean-whistleblower-investigating-presidents-family-business-m",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Ecuadorean whistleblower investigating president's family business murdered",
+      "type": "media",
+      "url": "https://www.theguardian.com/world/2026/jun/23/monika-silva-koniuszek-ecuador-president-family-business"
+    }
+  ]
+}

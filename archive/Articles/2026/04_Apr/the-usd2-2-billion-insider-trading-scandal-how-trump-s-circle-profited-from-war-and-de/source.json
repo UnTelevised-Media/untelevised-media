@@ -1,0 +1,70 @@
+{
+  "slug": "the-usd2-2-billion-insider-trading-scandal-how-trump-s-circle-profited-from-war-and-de",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-reuters-hormuz-2026-04-17",
+      "description": "April 17, 2026 - Investors placed a bet worth about $760 million on a falling oil price around 20 minutes before Iran's foreign minister announced that the Strait of Hormuz was open. Oil prices fell up to 11% following the announcement.",
+      "isAnonymous": false,
+      "label": "Reuters - Traders place $760 million bet on falling oil ahead of Hormuz announcement",
+      "type": "article",
+      "url": "https://www.reuters.com/sustainability/boards-policy-regulation/traders-place-760-million-bet-falling-oil-ahead-hormuz-announcement-2026-04-17/"
+    },
+    {
+      "_id": "source-reuters-ceasefire-2026-04-08",
+      "description": "April 8, 2026 - Investors placed an approximately $950 million bet on oil prices falling just hours before the U.S. and Iran announced a ceasefire. Oil prices plunged 15% following the announcement.",
+      "isAnonymous": false,
+      "label": "Reuters - Traders place large $950 million bet on oil price falling hours ahead of ceasefire",
+      "type": "article",
+      "url": "https://www.reuters.com/business/energy/traders-place-large-950-million-bet-oil-price-falling-hours-ahead-ceasefire-2026-04-08/"
+    },
+    {
+      "_id": "source-reuters-cftc-probe-2026-04-15",
+      "description": "April 15, 2026 - The CFTC is examining a series of trades in oil futures placed shortly before major shifts in Trump's Iran war policy, focusing on trading on CME Group and ICE platforms.",
+      "isAnonymous": false,
+      "label": "Reuters - US probes suspicious oil trades made before Trump Iran pivots, source says",
+      "type": "article",
+      "url": "https://www.reuters.com/business/energy/us-probes-suspicious-oil-trades-made-before-trump-iran-pivots-source-says-2026-04-15/"
+    },
+    {
+      "_id": "source-new-yorker-2026-03",
+      "description": "March 2026 - Investigation into the March 23, 2026 trading surge where $500+ million in oil futures were sold 15 minutes before Trump announced delayed strikes. Trading volume was 9 times the average for that time of day.",
+      "isAnonymous": false,
+      "label": "The New Yorker - Who Struck It Rich in the Markets When Trump Postponed Bombing Iran?",
+      "type": "article",
+      "url": "https://www.newyorker.com/news/the-financial-page/who-struck-it-rich-in-the-markets-when-trump-postponed-bombing-iran"
+    },
+    {
+      "_id": "source-notus-doj-2025-09",
+      "description": "September 22, 2025 - Investigation into how the DOJ's Public Integrity Section was gutted from 36 lawyers to 2 under the Trump administration, effectively ending its ability to investigate corrupt officials.",
+      "isAnonymous": false,
+      "label": "NOTUS - The Justice Department Had 36 Lawyers Fighting Corruption Full-Time. Under Trump, It's Down to Two.",
+      "type": "article",
+      "url": "https://www.notus.org/courts/doj-public-integrity"
+    },
+    {
+      "_id": "source-torres-letter-2026-04",
+      "description": "April 2026 - Congressional letter calling for formal investigation into the March 22 oil futures trades, describing the activity as 'potentially the largest instance of insider trading in history.'",
+      "isAnonymous": false,
+      "label": "Rep. Ritchie Torres - Letter Demanding SEC and CFTC Investigate Suspicious Oil Futures Trade",
+      "type": "document",
+      "url": "https://ritchietorres.house.gov/posts/rep-torres-demands-sec-and-cftc-investigate-suspicious-oil-futures-trade-made-ahead-of-trump-iran-announcement"
+    },
+    {
+      "_id": "source-guardian-tariff-2025-04",
+      "description": "April 10, 2025 - Trump posted 'GREAT TIME TO BUY!!! DJT' just hours before announcing a 90-day pause on tariffs. S&P 500 rose 9%, Nasdaq 12%, Trump Media stock jumped 22%.",
+      "isAnonymous": false,
+      "label": "The Guardian - Trump ignites 'insider trading' accusations after global tariffs U-turn",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2025/apr/10/donald-trump-ignites-insider-trading-accusations-after-global-tariffs-u-turn"
+    },
+    {
+      "_id": "source-new-republic-venezuela-2026-01",
+      "description": "January 3, 2026 - A mysterious new user on Polymarket turned $35,000 into $400,000 betting on Maduro's capture hours before Trump announced it. Account was created December 27 and only bet on Venezuela intervention.",
+      "isAnonymous": false,
+      "label": "The New Republic - Was Someone Insider Trading Right Before Trump's Attack on Venezuela?",
+      "type": "article",
+      "url": "https://newrepublic.com/post/204885/insider-trading-trump-attack-venezuela-maduro-polymarket"
+    }
+  ]
+}

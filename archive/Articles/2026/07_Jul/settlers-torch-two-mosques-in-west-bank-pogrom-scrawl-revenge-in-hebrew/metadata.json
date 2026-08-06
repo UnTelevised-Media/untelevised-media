@@ -1,0 +1,144 @@
+{
+  "_id": "settlers-torch-mosques-west-bank-pogrom-revenge-graffiti-july-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "EcCdPNkJ45UJzvqW3gZyG2",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "EcCdPNkJ45UJzvqW3gZyKX",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "EcCdPNkJ45UJzvqW3gZyBX",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israeli settlers carried out a coordinated overnight rampage across the occupied West Bank, burning two mosques, a home, and multiple vehicles while spraying Hebrew graffiti demanding 'revenge' for the killing of an Israeli in a deadly clash.",
+  "eventDate": "2026-07-26T06:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Israeli settlers carried out coordinated overnight attacks across multiple Palestinian villages, burning two mosques, a home, and several vehicles, and spraying Hebrew graffiti reading 'revenge' and 'Jewish blood is not free.'",
+      "question": "What happened in the West Bank on July 26, 2026?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "A deadly confrontation on July 25 in the village of Tell, southwest of Nablus, in which two Israelis (including a settler security member and an IDF officer) and four Palestinians were killed. Settlers spray-painted 'Benayahu's Revenge' — referring to one of the Israelis killed.",
+      "question": "What triggered the settler rampage?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "According to Al Jazeera, at least 45 mosques have been vandalized or burned by Israeli settlers in the West Bank in 2025 alone.",
+      "question": "How many mosques have settlers attacked in 2025?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "West Bank mosque burning",
+    "settler pogrom July 2026",
+    "Qusra mosque attack",
+    "Benayahu revenge graffiti",
+    "West Bank settler violence 2026",
+    "Israeli settlers arson",
+    "occupied West Bank pogroms",
+    "Al-Rahma Mosque Qusra",
+    "Kur village mosque",
+    "price tag attacks mosques"
+  ],
+  "leadParagraph": "Israeli settlers burned two mosques to the ground in the occupied West Bank overnight, sprayed Hebrew graffiti demanding 'revenge,' set fire to a Palestinian home and vehicles, and assaulted workers at a stone-cutting facility in a coordinated pogrom following a deadly clash that left six dead.",
+  "linkedPitch": null,
+  "location": "Qusra, Kur, Beit Furik, al-Mughayyir, West Bank / Occupied Palestinian Territory",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Burned mosque entrance with fire damage and Hebrew graffiti in Qusra village",
+    "asset": {
+      "_ref": "image-cd2eef9f8fdfdb178cbbf908d5d61088c0d1e05b-1200x800-webp",
+      "_type": "reference"
+    },
+    "caption": "Fire damage at the entrance of Al-Rahma Mosque in Qusra after settlers set it ablaze, July 26, 2026",
+    "credit": "AFP/Middle East Monitor"
+  },
+  "methodology": "Reported using Times of Israel, NBC News, BBC, Al Jazeera, DW, Reuters, and Middle East Monitor coverage. Attack details cross-referenced across multiple wire services and WAFA reporting. Settler violence statistics from Al Jazeera interactive mapping project and UN monitoring.",
+  "needsReview": null,
+  "publishedAt": "2026-07-28T17:15:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "settler-drags-child-body-west-bank",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "the-paramilitary-behind-the-pogroms-settler-paramilitaries-state-backed-ethnic-cleansing-west-bank",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "west-bank-burning-organized-settler-violence-state-backing-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "un-echoes-what-palestinians-have-said-for-decades-settler-violence-is-ethnic-cleansing",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "palestinian-footballer-fadi-al-naasan-killed-west-bank-settler-attack",
+      "_type": "reference"
+    },
+    {
+      "_key": "0c0e596e5537",
+      "_ref": "israels-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Israeli settlers burned two mosques, a home, and vehicles in coordinated West Bank rampage, spraying 'revenge' graffiti after deadly clash killed six.",
+    "metaTitle": "Settlers Torch Two Mosques in West Bank Pogrom, Spray 'Revenge' Graffiti",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "settlers-torch-two-mosques-in-west-bank-pogrom-scrawl-revenge-in-hebrew"
+  },
+  "tags": [
+    "West Bank",
+    "settler violence",
+    "mosque",
+    "pogrom",
+    "Palestine",
+    "Nablus",
+    "Qusra",
+    "price tag attacks",
+    "Benayahu Mellet",
+    "Israeli occupation"
+  ],
+  "title": "Settlers Torch Two Mosques in West Bank Pogrom, Scrawl 'Revenge' in Hebrew",
+  "updatedAt": null,
+  "videoLink": null
+}

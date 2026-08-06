@@ -1,0 +1,38 @@
+{
+  "slug": "morton-county-sheriffs-remove-facebook-page-in-effort-to-scrub-evidence-and-silence-resistance",
+  "totalSources": 4,
+  "sources": [
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2vug",
+      "description": null,
+      "isAnonymous": null,
+      "label": "anonresistance.am.dx",
+      "type": "article",
+      "url": "http://anonresistance.am.dx"
+    },
+    {
+      "_id": "DJ1Y76QLqJX8nukZ868xvw",
+      "description": null,
+      "isAnonymous": null,
+      "label": "twitter.com/anonyresistance",
+      "type": "article",
+      "url": "https://twitter.com/anonyresistance"
+    },
+    {
+      "_id": "7ONx74QMiI10eazwub4svD",
+      "description": null,
+      "isAnonymous": null,
+      "label": "thedailyhaze.com/morton-county-sheriffs-facebook-page",
+      "type": "article",
+      "url": "http://thedailyhaze.com/morton-county-sheriffs-facebook-page/"
+    },
+    {
+      "_id": "7ONx74QMiI10eazwub4t6x",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.change.org/p/remove-sheriff-kyle-kirchmeier-from-the-morton-county-sheriff-s",
+      "type": "article",
+      "url": "https://www.change.org/p/remove-sheriff-kyle-kirchmeier-from-the-morton-county-sheriff-s-office"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "sanaa-airport-bombed-as-yemen-front-reignites-ansarallah-vows-to-close-bab-al-mandab",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-tension-rising-as-yemen-govt-attacks-sanaa-airport",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Tension rising as Yemen gov't attacks Sanaa airport",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/7/13/yemen-govt-says-its-forces-attacked-sanaa-airport"
+    },
+    {
+      "_id": "source-drop-site-news-ansarallah-vows-to-block-saudi-access-to-bab-al-mandab",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Drop Site News — Ansarallah Vows to Block Saudi Access to Bab al-Mandab",
+      "type": "article",
+      "url": "https://www.dropsitenews.com/p/yemen-sanaa-airport-ansarallah-saudi-houthis-bab-al-mandab-bukhaiti"
+    },
+    {
+      "_id": "source-bbc-yemens-houthis-launch-missiles-at-saudi-arabia-after-sanaa-strikes",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BBC — Yemen's Houthis launch missiles at Saudi Arabia after Sanaa strikes",
+      "type": "article",
+      "url": "https://www.bbc.com/news/articles/cp9ldle3d3xo"
+    },
+    {
+      "_id": "source-palestine-chronicle-yemen-targets-abha-airport-after-saudi-strike",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Palestine Chronicle — Yemen Targets Abha Airport After Saudi Strike",
+      "type": "article",
+      "url": "https://www.palestinechronicle.com/yemen-targets-abha-airport-after-saudi-strike-ansarallah-warns-of-escalation/"
+    },
+    {
+      "_id": "source-responsible-statecraft-the-houthis-are-increasingly-setting-their-own-agenda",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Responsible Statecraft — The Houthis are increasingly setting their own agenda",
+      "type": "article",
+      "url": "https://responsiblestatecraft.org/houthis-saudi-arabia/"
+    },
+    {
+      "_id": "source-the-guardian-saudi-arabia-intercepts-houthi-missile-attack",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Saudi Arabia intercepts Houthi missile attack",
+      "type": "article",
+      "url": "https://www.jpost.com/middle-east/article-902397"
+    }
+  ]
+}

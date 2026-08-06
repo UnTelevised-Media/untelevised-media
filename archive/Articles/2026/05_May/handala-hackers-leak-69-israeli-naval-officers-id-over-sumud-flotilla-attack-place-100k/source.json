@@ -1,0 +1,78 @@
+{
+  "slug": "handala-hackers-leak-69-israeli-naval-officers-id-over-sumud-flotilla-attack-place-100k",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "src-mehr-handala-navy-officers",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Mehr News Agency - Handala leaks identities of 69 Israeli officers",
+      "type": "article",
+      "url": "https://en.mehrnews.com/news/244796/Handala-leaks-identities-of-69-Israeli-officers"
+    },
+    {
+      "_id": "src-presstv-handala-flotilla-expose",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Press TV - Handala hacktivists expose identities of Israeli forces involved in attack on Gaza aid flotilla",
+      "type": "article",
+      "url": "https://www.presstv.ir/Detail/2026/05/25/769267/Handala-Israeli-forces-Gaza-flotilla-attack"
+    },
+    {
+      "_id": "src-i24-handala-navy-leak",
+      "description": null,
+      "isAnonymous": null,
+      "label": "i24NEWS - Pro-Palestinian hackers leak Israeli Navy officers allegedly involved in Gaza Flotilla interception",
+      "type": "article",
+      "url": "https://www.i24news.tv/en/news/international/europe/artc-pro-palestinian-hackers-leak-israeli-navy-officers-allegedly-involved-in-gaza-flotilla-interception"
+    },
+    {
+      "_id": "src-reuters-flotilla-activists-kneel",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters - Israeli police force Gaza flotilla activists to kneel with hands bound",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/gaza-flotilla-activists-detained-israel-after-interception-rights-group-says-2026-05-20/"
+    },
+    {
+      "_id": "src-ap-bengvir-flotilla-videos",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News - Netanyahu scolds Israeli security minister for releasing videos taunting detained flotilla activists",
+      "type": "article",
+      "url": "https://apnews.com/article/gaza-flotilla-detained-activists-ben-gvir-israel-527601e141723e217cb283392a06649b"
+    },
+    {
+      "_id": "src-pbs-flotilla-interception",
+      "description": null,
+      "isAnonymous": null,
+      "label": "PBS News - Israeli forces intercept the remaining activist flotilla vessels headed for Gaza",
+      "type": "article",
+      "url": "https://www.pbs.org/newshour/world/israeli-forces-intercept-the-remaining-activist-flotilla-vessels-headed-for-gaza"
+    },
+    {
+      "_id": "src-wikipedia-handala",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia - Handala Hack Team",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/Handala_Hack_Team"
+    },
+    {
+      "_id": "src-toi-flotilla-interception",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Times of Israel - IDF intercepts all ships in Gaza-bound flotilla",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/idf-intercepts-all-ships-in-gaza-bound-flotilla-over-400-activists-being-transferred-to-israel/"
+    },
+    {
+      "_id": "src-aljazeera-flotilla-deportations",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera - Israel deports hundreds of Gaza aid flotilla activists amid global outcry",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/5/21/israel-begins-deporting-gaza-aid-flotilla-activists-amid-global-outcry"
+    }
+  ]
+}

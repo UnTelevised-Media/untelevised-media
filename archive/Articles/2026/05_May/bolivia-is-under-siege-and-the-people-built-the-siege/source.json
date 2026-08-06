@@ -1,0 +1,54 @@
+{
+  "slug": "bolivia-is-under-siege-and-the-people-built-the-siege",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-bolivia-crisis-2026-05-22",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera - Bolivia in Crisis: Social Unrest, Demands for President to Resign Escalate",
+      "type": "article",
+      "url": "https://www.aljazeera.com/economy/2026/5/22/bolivia-in-crisis-social-unrest-demands-for-president-to-resign-escalate"
+    },
+    {
+      "_id": "source-france24-bolivia-unrest-2026-05-21",
+      "description": null,
+      "isAnonymous": null,
+      "label": "France24 - What is Behind the Social Unrest in Bolivia?",
+      "type": "article",
+      "url": "https://www.france24.com/en/live-news/20260521-what-s-behind-the-social-unrest-in-bolivia"
+    },
+    {
+      "_id": "source-counterpunch-bolivia-lawfare-2026-05-20",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CounterPunch - Bolivia: Paz Government Using Lawfare Against Protesters",
+      "type": "article",
+      "url": "https://www.counterpunch.org/2026/05/20/bolivia-paz-government-using-lawfare-against-protesters-terrorists-and-drug-traffickers/"
+    },
+    {
+      "_id": "source-globalresearch-bolivia-protests-2026-05",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Global Research - Why Bolivia Protests Persist Even After Government Partially Backed Down",
+      "type": "article",
+      "url": "https://www.globalresearch.ca/bolivia-protests-persist-even-after-government-partially-backed-down/5926977"
+    },
+    {
+      "_id": "source-npr-bolivia-siege-2026-05-20",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR - Bolivia Capital Under Siege as Protests Deepen Crisis for President Paz",
+      "type": "article",
+      "url": "https://www.npr.org/2026/05/20/nx-s1-5828203/bolivia-capital-protests-crisis"
+    },
+    {
+      "_id": "source-apnews-bolivia-protests-2026-05",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Associated Press - Mass Protests, Road Blockades Choking Bolivian Capital (Photo Gallery)",
+      "type": "media",
+      "url": "https://apnews.com/photo-gallery/photos-mass-protests-road-blockades-choking-bolivian-capital-af56d3c07be84f9bab0da2bb7a58c8ef"
+    }
+  ]
+}

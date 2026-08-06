@@ -1,0 +1,30 @@
+{
+  "slug": "did-someone-say-4200-free-joints-thats-right-4200-joints-to-be-smoked-420-into-trumps-inauguration-s",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "ar2017-src-joints-1",
+      "description": "Washington DC police department's official marijuana information and regulations page.",
+      "isAnonymous": false,
+      "label": "DC Metropolitan Police - Marijuana information page",
+      "type": "document",
+      "url": "http://mpdc.dc.gov/marijuana"
+    },
+    {
+      "_id": "ar2017-src-joints-2",
+      "description": "RT USA reporting on the DCMJ 4,200 free joints inauguration protest.",
+      "isAnonymous": false,
+      "label": "RT USA - US inauguration marijuana protest coverage",
+      "type": "article",
+      "url": "https://www.rt.com/usa/372645-us-inauguration-marijuana-protest/"
+    },
+    {
+      "_id": "ar2017-src-joints-3",
+      "description": "Daily Dot coverage of the DCMJ plan to hand out 4,200 free joints at Trump's inauguration.",
+      "isAnonymous": false,
+      "label": "Daily Dot - Trump inauguration free weed joints coverage",
+      "type": "article",
+      "url": "http://www.dailydot.com/layer8/trump-inaguration-free-weed-joints/"
+    }
+  ]
+}

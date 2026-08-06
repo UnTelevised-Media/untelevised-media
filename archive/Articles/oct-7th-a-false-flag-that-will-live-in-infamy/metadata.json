@@ -1,0 +1,173 @@
+{
+  "_id": "2ff7dd72-806f-4128-bec5-409e1bb0feee",
+  "allowComments": true,
+  "author": {
+    "_ref": "DJ1Y76QLqJX8nukZ868jxy",
+    "_type": "reference",
+    "name": "Ash Fawkes"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-3",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "88a8d01a073e",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Months of ignored warnings, a stand-down order during the attack, insider trading days before, a festival relocated to the kill zone, and systematic evidence destruction — the evidence that October 7 was either allowed to happen or engineered by design.",
+  "eventDate": "2023-10-07T06:30:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Israeli intelligence agencies, including Shin Bet, had months of detailed warnings about Hamas's planned attack. The IDF's own inquiry acknowledged that intelligence was systematically ignored. Troops near the border were ordered to stand down during the hours of the attack, and it took eight hours for the first soldiers to arrive at the Nova festival.",
+      "question": "What evidence suggests October 7 was not a surprise attack?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The Hannibal Directive is a controversial Israeli military protocol that permits using overwhelming force, including potentially lethal force against Israeli soldiers and civilians, to prevent their capture by enemy forces. Former Defense Minister Yoav Gallant admitted to authorizing it on October 7. UN reports and Israeli media investigations found that Israeli helicopters fired on civilians at the Nova festival.",
+      "question": "What is the Hannibal Directive and how was it used on October 7?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Law professors Robert Jackson Jr. (NYU) and Joshua Mitts (Columbia) found that short-selling on the MSCI Israel ETF (EIS) surged to 99% of total volume on October 2, 2023 — five days before the attack. Israeli authorities opened an official investigation into the unusual trading patterns.",
+      "question": "What insider trading evidence exists before the October 7 attack?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Nova Festival was originally scheduled for the Negev Desert, approximately 60 miles from the Gaza border. In the weeks before October 7, it was moved to Re'im, only 5 kilometers from the Gaza perimeter fence. A top IDF officer who led the Gaza Division said it would be the last such festival he would approve due to the dangerous proximity.",
+      "question": "Why was the Nova Festival relocated near Gaza?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Yes. The Israeli army secretly seized and deleted portions of October 7 security camera footage according to a 2026 Israel Hayom report. Israeli authorities are still refusing to return a massive trove of video evidence collected by kibbutz residents nearly three years later, claiming ongoing investigations.",
+      "question": "Has evidence from October 7 been destroyed?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": {
+    "images": [
+      {
+        "_key": "pqkb07vb",
+        "_type": "image",
+        "alt": "Oct. 7th Hostage Poster",
+        "asset": {
+          "_ref": "image-d0271f40d0f7762264dc2983826ba8c3380b53b5-1300x878-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "nhwqzou0",
+        "_type": "image",
+        "alt": "The same slogan as 911",
+        "asset": {
+          "_ref": "image-4dd9d865a9364f1f67f14dfbf0b300f1f8d2ceb9-474x300-webp",
+          "_type": "reference"
+        }
+      }
+    ]
+  },
+  "isFieldReport": false,
+  "keywords": [
+    "October 7 false flag",
+    "Israel intelligence failure",
+    "Hannibal Directive October 7",
+    "Nova festival relocation",
+    "insider trading October 7 Israel ETF",
+    "stand down order October 7",
+    "IDF friendly fire civilians",
+    "Israel deleted evidence October 7",
+    "Shin Bet ignored warnings",
+    "Netanyahu delayed response October 7"
+  ],
+  "leadParagraph": "On October 7, 2023, Hamas launched an unprecedented attack on southern Israel. But months of buried intelligence warnings, a stand-down order for border troops, suspicious insider trading days before the attack, the unexplained relocation of the Nova Festival to the Gaza border, and systematic evidence destruction afterward suggest the Israeli government either allowed or engineered the attack that it used to justify the genocide of Gaza.",
+  "linkedPitch": null,
+  "location": "Israel / Gaza border",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Wide shot of abandoned cars scattered across a dusty field with personal belongings and debris at the Nova music festival site near Re'im, Israel",
+    "asset": {
+      "_ref": "image-7955e7e1c7f6a3e31d7012e83350a8743d34ee06-3072x2048-webp",
+      "_type": "reference"
+    },
+    "caption": "Abandoned cars, personal belongings, and debris at the site of the Nova music festival in Re'im, Israel, on October 12, 2023, days after Hamas fighters killed 364 people at the open-air festival near the Gaza border.",
+    "credit": "Getty Images via ABC News"
+  },
+  "methodology": "Reported using official Israeli government inquiries including the IDF's February 2025 internal report, Shin Bet's March 2025 self-assessment, UN findings on Israeli helicopter fire at the Nova festival, academic research by law professors Robert Jackson Jr. (NYU) and Joshua Mitts (Columbia) on suspicious short-selling, reporting by Haaretz, Al Jazeera, NDTV, The Electronic Intifada, The Grayzone, The Canary, Reuters, CNN, Deutsche Welle, The Cipher Brief, and the Combating Terrorism Center at West Point.",
+  "needsReview": true,
+  "publishedAt": null,
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "israel-builds-settlements-on-gazas-graves-the-open-air-annexation-and-the-language-of-genocide-made-concrete",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "the-weaponization-of-antisemitism",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "israels-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "the-paramilitary-behind-the-pogroms-settler-paramilitaries-state-backed-ethnic-cleansing-west-bank",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "oct-7th-a-false-flag-that-will-live-in-infamy"
+  },
+  "tags": [
+    "October 7",
+    "False Flag",
+    "Israel",
+    "Hamas",
+    "Hannibal Directive",
+    "Nova Festival",
+    "Insider Trading",
+    "Intelligence Failure",
+    "Gaza Genocide",
+    "IDF Cover-Up"
+  ],
+  "title": "Oct. 7th: A False Flag That Will Live In Infamy",
+  "updatedAt": "2026-07-31T14:17:09.024Z",
+  "videoLink": ""
+}

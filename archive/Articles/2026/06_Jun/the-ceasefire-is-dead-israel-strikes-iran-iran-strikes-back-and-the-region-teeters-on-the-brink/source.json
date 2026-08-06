@@ -1,0 +1,62 @@
+{
+  "slug": "the-ceasefire-is-dead-israel-strikes-iran-iran-strikes-back-and-the-region-teeters-on-the-brink",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-iran-and-israel-bomb-each-other-is-the-ceasefire-over",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Iran and Israel Bomb Each Other: Is the Ceasefire Over?",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/6/8/iran-and-israel-bomb-each-other-is-the-ceasefire-over"
+    },
+    {
+      "_id": "source-the-guardian-israel-and-iran-exchange-strikes-as-middle-east-crisis-threatens-to",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Israel and Iran Exchange Strikes as Middle East Crisis Threatens to Escalate",
+      "type": "media",
+      "url": "https://www.theguardian.com/world/2026/jun/08/israel-netanyahu-airstrikes-iran-retaliation-defies-trump"
+    },
+    {
+      "_id": "source-al-jazeera-iran-and-israel-halt-attacks-but-sabre-rattling-continues",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Iran and Israel Halt Attacks But Sabre-Rattling Continues",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/6/8/israel-and-iran-exchange-attacks-as-ceasefire-falters"
+    },
+    {
+      "_id": "source-the-guardian-us-and-iran-exchange-strikes-for-second-day-as-ceasefire-appears-cl",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — US and Iran Exchange Strikes for Second Day, as Ceasefire Appears Close to Collapse",
+      "type": "media",
+      "url": "https://www.theguardian.com/world/2026/jun/10/middle-east-peace-talks-iran-strikes"
+    },
+    {
+      "_id": "source-reuters-iran-and-israel-halt-strikes-for-now-after-first-direct-attacks-since-ce",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — Iran and Israel Halt Strikes for Now After First Direct Attacks Since Ceasefire",
+      "type": "media",
+      "url": "https://www.reuters.com/world/iran-war-live-israel-iran-strike-each-other-first-time-since-ceasefire-2026-06-08/"
+    },
+    {
+      "_id": "source-time-netanyahu-says-israel-has-halted-strikes-but-warns-it-will-respond-with-for",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Time — Netanyahu Says Israel Has Halted Strikes, But Warns It Will Respond With Force",
+      "type": "media",
+      "url": "https://time.com/article/2026/06/08/israel-iran-war-direct-attacks-latest-ceasefire-trump-netanyahu-lebanon/"
+    },
+    {
+      "_id": "source-cnbc-trump-insists-negotiations-are-continuing-despite-israel-and-iran-trading-s",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNBC — Trump Insists Negotiations Are Continuing Despite Israel and Iran Trading Strikes",
+      "type": "media",
+      "url": "https://www.cnbc.com/2026/06/07/iran-fires-missiles-israel-ceasefire-strains.html"
+    }
+  ]
+}

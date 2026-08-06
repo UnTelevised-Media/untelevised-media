@@ -1,0 +1,54 @@
+{
+  "slug": "the-mother-s-day-they-erased",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-peacealliance-julia-ward-howe-1870",
+      "description": "History of Mother's Day as a Day of Peace by Julia Ward Howe, 1870. Includes full text of original Mother's Day Proclamation calling for disarmament and peace after Civil War carnage.",
+      "isAnonymous": false,
+      "label": "The Peace Alliance - History of Mother's Day as a Day of Peace: Julia Ward Howe",
+      "type": "article",
+      "url": "https://peacealliance.org/history-of-mothers-day-as-a-day-of-peace-julia-ward-howe/"
+    },
+    {
+      "_id": "source-loc-julia-ward-howe-1870",
+      "description": "Library of Congress record of Julia Ward Howe's Mother's Day Proclamation from 1870. Historical document archive.",
+      "isAnonymous": false,
+      "label": "Library of Congress - Julia Ward Howe, Boston 1870",
+      "type": "document",
+      "url": "https://www.loc.gov/resource/rbpe.07400300/"
+    },
+    {
+      "_id": "source-foundingmothers-anna-jarvis",
+      "description": "Story of Anna Jarvis (died 1905) who founded modern Mother's Day in 1914 to honor her mother, Ann Reeves Jarvis, who died in 1858 from tuberculosis while working for better sanitation and to reduce appalling infant mortality in West Virginia.",
+      "isAnonymous": false,
+      "label": "Finding Mothers - Anna Jarvis and the Founding of Mother's Day",
+      "type": "article",
+      "url": "https://www.zinnedproject.org/news/tdih/mothers-day-for-peace/"
+    },
+    {
+      "_id": "source-msmagazine-1870-protest",
+      "description": "May 8, 2026 - Article by Ms. Magazine on how abolitionist and suffragist Julia Ward Howe called for an international movement of mothers as a way to protest the carnage of war abroad nearly 40 years before it became an official U.S. holiday.",
+      "isAnonymous": false,
+      "label": "Ms. Magazine - The First Mother's Day Was a Protest",
+      "type": "article",
+      "url": "https://msmagazine.com/2026/05/08/mothers-day-history-protest-war/"
+    },
+    {
+      "_id": "source-julia-ward-howe-photo-1870",
+      "description": "Portrait photograph of Julia Ward Howe, circa 1870. Abolitionist, suffragist, poet, and author of The Battle Hymn of the Republic who issued the original Mother's Day Proclamation for peace in 1870.",
+      "isAnonymous": false,
+      "label": "The Peace Alliance - Julia Ward Howe Portrait",
+      "type": "media",
+      "url": "https://peacealliance.org/wp-content/uploads/2015/05/Julia-Ward-howe-2015.png"
+    },
+    {
+      "_id": "source-anna-jarvis-wikipedia",
+      "description": "Wikipedia entry on Anna Jarvis (1832-1905), founder of modern Mother's Day. Covers her life, work with Mother's Day Work Clubs in Grafton, West Virginia, her death in 1905, and how the holiday became official through Anna Jarvis's efforts to honor her mother, Ann Reeves Jarvis.",
+      "isAnonymous": false,
+      "label": "Wikipedia - Anna Jarvis",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/Anna_Jarvis"
+    }
+  ]
+}

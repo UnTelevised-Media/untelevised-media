@@ -1,0 +1,70 @@
+{
+  "slug": "israel-bombs-a-tent-camp-wipes-out-a-family-kills-a-child-at-sea-this-is-the-ceasefire",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-palestine-weekly-wrap-gaza-strikes-during-ceasefire",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Palestine Weekly Wrap: Gaza Strikes During Ceasefire",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/6/9/palestine-weekly-wrap-israel-presses-deeper-into-gaza-as-cairo-talks-begin"
+    },
+    {
+      "_id": "source-countercurrents-israeli-strikes-kill-nine-in-gaza-wiping-out-entire-family",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CounterCurrents — Israeli Strikes Kill Nine in Gaza, Wiping Out Entire Family",
+      "type": "media",
+      "url": "https://countercurrents.org/2026/06/israeli-strikes-kill-nine-palestinians-overnight-in-gaza-wiping-out-entire-family/"
+    },
+    {
+      "_id": "source-middle-east-monitor-palestinian-teen-killed-by-israeli-naval-fire-in-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Monitor — Palestinian Teen Killed by Israeli Naval Fire in Gaza",
+      "type": "media",
+      "url": "https://www.middleeastmonitor.com/20260607-palestinian-teen-killed-by-israeli-naval-fire-in-gaza/"
+    },
+    {
+      "_id": "source-wafa-israeli-strike-on-tent-sheltering-displaced-palestinians-kills-6-in-gaza-ci",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WAFA — Israeli Strike on Tent Sheltering Displaced Palestinians Kills 6 in Gaza City",
+      "type": "media",
+      "url": "https://english.wafa.ps/Pages/Details/171244"
+    },
+    {
+      "_id": "source-middle-east-eye-israel-kills-nine-in-overnight-gaza-bombardment",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Eye — Israel Kills Nine in Overnight Gaza Bombardment",
+      "type": "media",
+      "url": "https://www.middleeasteye.net/news/israel-kills-nine-palestinians-overnight-gaza-bombardment"
+    },
+    {
+      "_id": "source-drop-site-news-israel-intensifies-the-killing-in-gaza-as-the-world-looks-away",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Drop Site News — Israel Intensifies the Killing in Gaza as the World Looks Away",
+      "type": "media",
+      "url": "https://www.dropsitenews.com/p/gaza-genocide-yellow-line-israel-killing-palestinians-ceasefire"
+    },
+    {
+      "_id": "source-al-jazeera-video-shows-gaza-teen-fisherman-before-israeli-forces-killed-him-at-s",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Video Shows Gaza Teen Fisherman Before Israeli Forces Killed Him at Sea",
+      "type": "media",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/6/11/video-shows-gaza-teen-fisherman-before-israeli-forces-killed-him-at-sea"
+    },
+    {
+      "_id": "source-trt-world-israeli-naval-fire-kills-15-year-old-fisherman-in-central-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "TRT World — Israeli Naval Fire Kills 15-Year-Old Fisherman in Central Gaza",
+      "type": "media",
+      "url": "https://www.trtworld.com/article/d25b26858601"
+    }
+  ]
+}

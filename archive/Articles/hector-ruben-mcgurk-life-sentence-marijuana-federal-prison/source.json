@@ -1,0 +1,54 @@
+{
+  "slug": "hector-ruben-mcgurk-life-sentence-marijuana-federal-prison",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-hector-420mag",
+      "description": "April 2026 coverage of Hector Ruben McGurk's parole denial and life without parole sentence for non-violent marijuana offenses.",
+      "isAnonymous": false,
+      "label": "420 Magazine - Marijuana Smuggler Gets Life In Prison",
+      "type": "media",
+      "url": "https://www.420magazine.com/community/threads/marijuana-smuggler-gets-life-in-prison.62531/"
+    },
+    {
+      "_id": "source-hector-adela",
+      "description": "Profile and advocacy for Hector Ruben McGurk, a federal marijuana prisoner serving life without parole.",
+      "isAnonymous": false,
+      "label": "Adela Wisdom - Hector McGurk Life for Pot",
+      "type": "media",
+      "url": "https://www.adelawisdom.com/hector_mcgurk_life_for_pot"
+    },
+    {
+      "_id": "source-hector-pow420",
+      "description": "Coverage of Hector's 2007 conviction and life sentence, with background on his case timeline.",
+      "isAnonymous": false,
+      "label": "POW420.com - Hector McGurk ~ Life for Pot",
+      "type": "media",
+      "url": "http://www.pow420.com/hector_mcgurk"
+    },
+    {
+      "_id": "source-hector-wistv",
+      "description": "July 2020 coverage of Hector Ruben McGurk's life sentence, with Charlotte, NC context.",
+      "isAnonymous": false,
+      "label": "WISTV.com - Man described as drug kingpin sentenced to life in prison",
+      "type": "media",
+      "url": "https://www.wistv.com/story/6191754/man-described-as-drug-kingpin-sentenced-to-life-in-prison/"
+    },
+    {
+      "_id": "source-hector-veterans",
+      "description": "Profile of Hector as a veteran of the war on drugs, with health issues and incarceration details.",
+      "isAnonymous": false,
+      "label": "Veterans of the War on Drugs - Hector McGurk Profile",
+      "type": "media",
+      "url": "https://www.veteransofthewarondrugs.com/Hector-McGurk.html"
+    },
+    {
+      "_id": "source-hector-lastprisonerproject",
+      "description": "Advocacy and case information for Hector Ruben McGurk from the Last Prisoner Project.",
+      "isAnonymous": false,
+      "label": "The Last Prisoner Project - Hector Ruben McGurk",
+      "type": "organization",
+      "url": "https://www.lastprisonerproject.org/prisoners-of-prohibition"
+    }
+  ]
+}

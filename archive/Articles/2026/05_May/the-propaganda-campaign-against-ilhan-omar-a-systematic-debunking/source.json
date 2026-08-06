@@ -1,0 +1,54 @@
+{
+  "slug": "the-propaganda-campaign-against-ilhan-omar-a-systematic-debunking",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "src-snopes-omar-father-2025",
+      "description": "Snopes investigation concluding no evidence ties Omar father to war crimes.",
+      "isAnonymous": null,
+      "label": "Snopes - No Evidence Omar Father Committed War Crimes",
+      "type": "article",
+      "url": "https://www.snopes.com/news/2025/04/02/father-ilhan-omar-war-crimes/"
+    },
+    {
+      "_id": "src-hrw-somalia-1990",
+      "description": "1990 HRW report documenting Barre regime war crimes and genocide against Isaaq clan.",
+      "isAnonymous": null,
+      "label": "Human Rights Watch - Somalia Government At War With Its Own People",
+      "type": "document",
+      "url": "https://www.hrw.org/sites/default/files/reports/somalia_1990.pdf"
+    },
+    {
+      "_id": "src-wiki-isaaq-genocide",
+      "description": "Encyclopedia documentation of the Isaaq genocide by Siad Barre regime.",
+      "isAnonymous": null,
+      "label": "Wikipedia - Isaaq Genocide",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/Isaaq_genocide"
+    },
+    {
+      "_id": "src-yale-somalia-genocide",
+      "description": "Yale documentation estimating hundreds of thousands killed by Somali government 1960-1991.",
+      "isAnonymous": null,
+      "label": "Yale MacMillan Center - Somalia Isaaq Genocide",
+      "type": "data",
+      "url": "https://macmillan.yale.edu/gsp/somalia-isaaq-genocide"
+    },
+    {
+      "_id": "src-dailymail-omar-morgan",
+      "description": "Daily Mail coverage of claims about Omar family. Acknowledged no documents tie father to specific crimes.",
+      "isAnonymous": null,
+      "label": "Daily Mail - Omar Ties To Butcher Of Hargeisa",
+      "type": "article",
+      "url": "https://www.dailymail.co.uk/news/article-15371663/Ilhan-Omar-family-Somalia-war-crime.html"
+    },
+    {
+      "_id": "src-pulitzer-somaliland-genocide",
+      "description": "Pulitzer Center reporting estimating 200000 Isaaq killed 1987-1989.",
+      "isAnonymous": null,
+      "label": "Pulitzer Center - Somaliland Forgotten Genocide",
+      "type": "article",
+      "url": "https://pulitzercenter.org/stories/valley-death-somalilands-forgotten-genocide"
+    }
+  ]
+}

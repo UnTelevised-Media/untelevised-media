@@ -1,0 +1,138 @@
+{
+  "_id": "geo-group-guard-shoots-emma-landis-aurora-ice-facility-protest",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "54ed5ec45090",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "245aca9a1dea",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "GEO Group employee Brandon Booth shot Emma Landis, 22, in the back as she walked away from a protest at Aurora ICE Processing Center. He told police he meant to 'scare' her. The private prison industry calls it an individual incident.",
+  "eventDate": "2026-07-10T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Brandon Booth, 42, a GEO Group employee working at the Aurora ICE Processing Center in Colorado. He was arrested and charged with attempted second-degree murder, first-degree assault, attempted first-degree assault, felony menacing, and unlawful carrying of a concealed weapon.",
+      "question": "Who shot Emma Landis?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "No. She was shot in the foot and hospitalized. She returned to protest outside the facility three days later on crutches. She told CBS Colorado she would continue protesting: 'I got shot for it. Yeah, I care.'",
+      "question": "Was Emma Landis killed?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "A $2.3 billion private prison corporation that operates 130+ detention centers and prisons worldwide. It runs the Aurora ICE Processing Center under contract with ICE, housing approximately 1,500 detainees. The company has faced multiple lawsuits over medical neglect, forced labor, and abuse in its facilities.",
+      "question": "What is GEO Group?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "GEO Group placed Booth on unpaid administrative leave and said it would 'fully cooperate with law enforcement.' DHS stated 'No ICE personnel were involved.'",
+      "question": "What did GEO Group say about the shooting?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "GEO Group shooting Aurora ICE",
+    "Emma Landis protester shot",
+    "Brandon Booth attempted murder",
+    "private prison guard violence",
+    "ICE detention center protest",
+    "Aurora Colorado ICE facility",
+    "privatized state violence"
+  ],
+  "leadParagraph": "A GEO Group employee fired a personal firearm at two unarmed protesters walking away from the Aurora ICE Processing Center in Colorado, shooting Emma Landis, 22, in the foot. Brandon Booth was charged with attempted second-degree murder. GEO Group called it an 'individual incident.' This is the privatization of state violence reaching its logical endpoint.",
+  "linkedPitch": null,
+  "location": "Aurora, Colorado, United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Exterior view of the Aurora ICE Processing Center detention facility showing fencing and security infrastructure",
+    "asset": {
+      "_ref": "image-d3b2d54f8e4d0f575fe18d15db8851a499c014cf-2048x1365-webp",
+      "_type": "reference"
+    },
+    "caption": "The Aurora ICE Processing Center, operated by GEO Group under contract with ICE, in Aurora, Colorado, July 2026.",
+    "credit": "CPR News / Kevin J. Beaty"
+  },
+  "methodology": "Reported using arrest affidavit details from Aurora Police Department, interview with victim Emma Landis (CBS Colorado), reporting from CPR News, NBC News, Colorado Times Recorder, and Fight Back! News. GEO Group financial data from public SEC filings and OpenSecrets lobbying records.",
+  "needsReview": null,
+  "publishedAt": "2026-08-03T23:30:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "dc5f4adede27",
+      "_ref": "ice-kills-again-two-fatal-shootings-halt-overturned",
+      "_type": "reference"
+    },
+    {
+      "_key": "5ca178265811",
+      "_ref": "ice-agent-kills-wrong-man-houston",
+      "_type": "reference"
+    },
+    {
+      "_key": "c9c3f269a2ee",
+      "_ref": "brooklyn-no-more-ice-murders-metropolitan-detention-center-protest",
+      "_type": "reference"
+    },
+    {
+      "_key": "e420b532a35c",
+      "_ref": "ice-out-nationwide-protests-330-cities-demand-justice-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "161cce5a1982",
+      "_ref": "ice-550-assault-charges-crumbling",
+      "_type": "reference"
+    },
+    {
+      "_key": "4113cd0ffa2c",
+      "_ref": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "a-corporate-guard-shot-a-protester-at-an-ice-facility-and-the-private-prison-industry-barely"
+  },
+  "tags": [
+    "private prisons",
+    "GEO Group",
+    "ICE",
+    "Emma Landis",
+    "Brandon Booth",
+    "Aurora",
+    "immigration detention",
+    "protest",
+    "police violence",
+    "corporate accountability"
+  ],
+  "title": "A Corporate Guard Shot a Protester at an ICE Facility — and the Private Prison Industry Barely Flinched",
+  "updatedAt": null,
+  "videoLink": null
+}

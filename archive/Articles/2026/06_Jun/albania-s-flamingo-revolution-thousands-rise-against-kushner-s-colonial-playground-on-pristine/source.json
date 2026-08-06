@@ -1,0 +1,78 @@
+{
+  "slug": "albania-s-flamingo-revolution-thousands-rise-against-kushner-s-colonial-playground-on-pristine",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "source-ap-albania-kushner-june4-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News - Jared Kushner Coastal Project in Albania Faces Opposition",
+      "type": "article",
+      "url": "https://apnews.com/article/albania-kushner-trump-development-protest-tourism-sazan-8d7d0e216c28d23fe1b2e51cbb05b926"
+    },
+    {
+      "_id": "source-guardian-albania-kushner-june4-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - Protests in Albania Grow Over Jared Kushner-Backed Luxury Resort",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/jun/04/protests-in-albania-grow-over-jared-kushner-backed-luxury-resort"
+    },
+    {
+      "_id": "source-euronews-albania-kushner-june3-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Euronews - Edi Rama Pushes Back as Trump Family-Linked Resort Protests Continue in Albania",
+      "type": "article",
+      "url": "https://www.euronews.com/my-europe/2026/06/03/protests-continue-for-third-day-over-controversial-trump-family-linked-resort-in-albania"
+    },
+    {
+      "_id": "source-aljazeera-albania-kushner-june4-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera - Thousands Protest in Albania Against Coastal Resort Linked to Jared Kushner",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/6/4/thousands-protest-kushner-linked-coastal-resort-project-in-albania"
+    },
+    {
+      "_id": "source-reuters-albania-kushner-june3-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters - Albanians Protest Over Kushner-Linked Luxury Resort on Pristine Coastline",
+      "type": "article",
+      "url": "https://www.reuters.com/world/albanians-protest-over-kushner-linked-luxury-resort-pristine-coastline-2026-06-03/"
+    },
+    {
+      "_id": "source-nyt-albania-kushner-june2-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times - Protests Grow in Albania Over Kushner-Linked Project",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/06/02/world/europe/albania-kushner-protests-hotel.html"
+    },
+    {
+      "_id": "source-timesofisrael-albania-kushner-june3-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Times of Israel - Thousands Protest in Albania Against Jared Kushner-Linked Resort Project",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/thousands-protest-in-albania-against-jared-kushner-linked-resort-project/"
+    },
+    {
+      "_id": "source-politico-albania-flamingo-june4-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Politico - Albania's Growing Flamingo Revolution Targets Jared Kushner Resort",
+      "type": "article",
+      "url": "https://www.politico.eu/article/jared-kushner-resort-albania-flamingo-revolution-protest/"
+    },
+    {
+      "_id": "source-birdlife-albania-kushner-june2-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BirdLife International - Albania Destroying Protected Wild Coast for Trump Son-in-Law",
+      "type": "article",
+      "url": "https://www.birdlife.org/news/2026/06/02/albania-is-destroying-a-protected-wild-coast-for-president-trumps-son-in-law-and-lying-to-parliament-about-it/"
+    }
+  ]
+}

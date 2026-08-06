@@ -1,0 +1,78 @@
+{
+  "slug": "sources-identify-hunter-foster-as-the-officer-who-shot-kohen-wiley-dead-over-a-box-of-pampers",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "source-shannon-evans-hunter-foster-trail-of-violence",
+      "description": "Independent investigative report identifying Sergeant Hunter Foster as the officer who killed Kohen Wiley, documenting his history of escalatory tactics across multiple jurisdictions and his employment at DeSoto County Sheriff's Office and Senatobia Police Department.",
+      "isAnonymous": null,
+      "label": "Shannon Evans (Substack) — Hunter Foster: The Trail of Violence",
+      "type": "article",
+      "url": "https://pshannonevans.substack.com/p/hunter-foster-the-trail-of-violence"
+    },
+    {
+      "_id": "source-mstide-team-directory-hunter-foster",
+      "description": "Mississippi Training for Impaired Driving Enforcement official team roster publicly listing Hunter Foster as a representative of the DeSoto County Sheriff's Office, corroborating his law enforcement affiliation.",
+      "isAnonymous": null,
+      "label": "MSTIDE — Official Team Directory (Hunter Foster, DeSoto County Sheriff's Office)",
+      "type": "document",
+      "url": "https://www.mstide.us/our-team/all"
+    },
+    {
+      "_id": "source-common-dreams-kohen-wiley-family-seeks-answers",
+      "description": "National coverage of the Kohen Wiley killing including family statements from grandfather Carlos Haynes, attorney Ben Crump's statement that officers 'fired anyway,' and grandmother Lasandra Williams demanding full accountability.",
+      "isAnonymous": null,
+      "label": "Common Dreams — Family Seeks Answers, Justice After Mississippi Cop Kills Toddler Kohen Wiley",
+      "type": "article",
+      "url": "https://www.commondreams.org/news/kohen-wiley"
+    },
+    {
+      "_id": "source-mississippi-free-press-kohen-wiley-shooting",
+      "description": "Mississippi Free Press reporting on the June 14, 2026 Senatobia Walmart shooting, including the timeline of events, official MBI account, family dispute of the police narrative, and great-grandmother Carolyn Stokes' statement about the Senatobia Police Department.",
+      "isAnonymous": null,
+      "label": "Mississippi Free Press — Mississippi Police Officer Shoots and Kills 1-Year-Old Child",
+      "type": "article",
+      "url": "https://www.mississippifreepress.org/mississippi-police-officer-shoots-and-kills-1-year-old-child-in-response-to-senatobia-shoplifting-call/"
+    },
+    {
+      "_id": "source-action-news-5-officer-placed-on-leave",
+      "description": "Confirms the officer involved in the killing of Kohen Wiley was placed on administrative leave following the June 14 shooting. Officer's name not released by department. Body cam, dash cam, and Walmart surveillance footage under MBI review.",
+      "isAnonymous": null,
+      "label": "Action News 5 — Officer Placed on Administrative Leave After Kohen Wiley Shooting",
+      "type": "article",
+      "url": "https://www.actionnews5.com/2026/06/17/police-officer-involved-1-year-olds-shooting-death-during-walmart-shoplifting-call-placed-leave/"
+    },
+    {
+      "_id": "source-thegrio-kohen-wiley-mississippi",
+      "description": "TheGrio coverage of the Kohen Wiley killing documenting the police account that the driver 'drove in the direction of officers,' the family's account that the mother tried to signal officers about the baby, and the windshield bullet holes consistent with shots fired into the vehicle.",
+      "isAnonymous": null,
+      "label": "TheGrio — Mississippi Family Demands Answers After 1-Year-Old Boy Killed by Police",
+      "type": "article",
+      "url": "https://thegrio.com/2026/06/16/mississippi-police-shoot-kill-one-year-old-kohen-wiley/"
+    },
+    {
+      "_id": "source-wbir-protests-senatobia-kohen-wiley",
+      "description": "Wire report on community protests in Senatobia following the killing of Kohen Wiley. Documents that his mother was holding him in the front passenger seat while his aunt drove, and that the family denied any shoplifting occurred.",
+      "isAnonymous": null,
+      "label": "WBIR/KTVB — Protests in Mississippi After Police Shoot into Vehicle, Killing One-Year-Old Boy",
+      "type": "article",
+      "url": "https://www.wbir.com/article/news/nation-world/senatobia-mississippi-police-shooting-into-vehicle-killing-baby-protests/507-906671aa-f7e6-44d2-aeab-a00c30812174"
+    },
+    {
+      "_id": "source-action-news-5-tear-gas-protesters-senatobia",
+      "description": "Documents law enforcement's use of tear gas against community members gathered outside the Senatobia Walmart on June 16, 2026 to demand accountability for the killing of 1-year-old Kohen Wiley.",
+      "isAnonymous": null,
+      "label": "Action News 5 — Police Deploy Tear Gas on Protesters Outside Senatobia Walmart",
+      "type": "article",
+      "url": "https://www.actionnews5.com/2026/06/16/community-rally-planned-after-officer-shoots-kills-1-year-old-senatobia/"
+    },
+    {
+      "_id": "source-wreg-witness-diapers-senatobia-walmart",
+      "description": "WREG witness account placing two women exiting the Walmart, one carrying diapers and one carrying infant Kohen Wiley, heading to their vehicle — directly contradicting the framing of a violent confrontation and supporting the family's account.",
+      "isAnonymous": null,
+      "label": "WREG — Witness Saw Women Carrying Diapers at Fatal MS Walmart Shooting",
+      "type": "article",
+      "url": "https://wreg.com/news/local/ms-town-looks-for-answers-after-walmart-shooting-that-killed-1-year-old/"
+    }
+  ]
+}

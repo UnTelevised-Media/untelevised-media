@@ -1,0 +1,46 @@
+{
+  "slug": "usd529-million-for-cages-ice-s-new-colorado-detention-center-and-the-private-prison-industry",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-denver-post-ice-signs-529m-contract-for-colorado-detention-center",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Denver Post — ICE Signs $529M Contract for Colorado Detention Center",
+      "type": "media",
+      "url": "https://www.denverpost.com/2026/07/13/colorado-new-ice-detention-center-hudson/"
+    },
+    {
+      "_id": "source-colorado-times-recorder-ice-awards-529-million-contract-for-new-colorado-detenti",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Colorado Times Recorder — ICE Awards $529 Million Contract for New Colorado Detention Center",
+      "type": "media",
+      "url": "https://coloradotimesrecorder.com/2026/07/new-ice-awards-529-million-contract-to-open-new-colorado-detention-center/80275/"
+    },
+    {
+      "_id": "source-colorado-sun-ice-contractor-to-open-new-colorado-detention-center",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Colorado Sun — ICE Contractor to Open New Colorado Detention Center",
+      "type": "media",
+      "url": "https://coloradosun.com/2026/07/13/ice-contractor-to-open-new-detention-center/"
+    },
+    {
+      "_id": "source-denver-gazette-529m-ice-contract-will-nearly-double-colorado-detention-capacity",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Denver Gazette — $529M ICE Contract Will Nearly Double Colorado Detention Capacity",
+      "type": "media",
+      "url": "https://www.denvergazette.com/2026/07/13/529m-ice-contract-will-nearly-double-colorados-immigrant-detention-capacity-to-2720-beds/"
+    },
+    {
+      "_id": "source-npr-geo-group-private-prisons-and-ice-close-ties-250m-profit",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR — GEO Group Private Prisons and ICE Close Ties, $250M Profit",
+      "type": "media",
+      "url": "https://www.npr.org/2026/06/03/nx-s1-5836625/geo-group-private-prisons-ice-close-ties"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "slug": "a-baby-killed-over-diapers-the-murder-of-kohen-wiley-and-the-violence-america-accepts",
+  "totalSources": 14,
+  "sources": [
+    {
+      "_id": "source-mississippi-bureau-of-investigation-official-statement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Mississippi Bureau of Investigation Official Statement",
+      "type": "primary",
+      "url": "https://www.mississippifreepress.org/mississippi-police-officer-shoots-and-kills-1-year-old-child-in-response-to-senatobia-shoplifting-call/"
+    },
+    {
+      "_id": "source-vellesiya-wiley-video-statement-via-ben-crump-law",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Vellesiya Wiley Video Statement via Ben Crump Law",
+      "type": "primary",
+      "url": "https://x.com/AttorneyCrump/status/2067365814240411788"
+    },
+    {
+      "_id": "source-nbc-news-senatobia-police-scrutiny",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News - Senatobia Police Scrutiny",
+      "type": "secondary",
+      "url": "https://www.nbcnews.com/news/us-news/shooting-1-year-old-mississippi-boy-puts-scrutiny-police-department-rcna350520"
+    },
+    {
+      "_id": "source-mississippi-free-press-anger-mounts-in-senatobia",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Mississippi Free Press - Anger Mounts in Senatobia",
+      "type": "primary",
+      "url": "https://www.mississippifreepress.org/anger-mounts-in-senatobia-over-police-killing-of-1-year-old-kohen-wiley/"
+    },
+    {
+      "_id": "source-mississippi-free-press-hunter-foster-identified",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Mississippi Free Press - Hunter Foster Identified",
+      "type": "primary",
+      "url": "https://www.mississippifreepress.org/documents-identify-one-of-the-officers-present-at-the-police-shooting-of-1-year-old-kohen-wiley/"
+    },
+    {
+      "_id": "source-action-news-5-memphis-officer-records",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Action News 5 Memphis - Officer Records",
+      "type": "primary",
+      "url": "https://www.actionnews5.com/2026/06/19/records-reveal-name-senatobia-officer-involved-shooting-that-killed-1-year-old/"
+    },
+    {
+      "_id": "source-fox13-memphis-tear-gas-on-protesters",
+      "description": null,
+      "isAnonymous": null,
+      "label": "FOX13 Memphis - Tear Gas on Protesters",
+      "type": "secondary",
+      "url": "https://www.fox13memphis.com/news/tear-gas-deployed-as-demonstrators-protest-deadly-police-shooting-of-toddler-outside-mississippi-walmart/article_c874498b-919a-4e24-8e7e-d661548d4cd7.html"
+    },
+    {
+      "_id": "source-the-guardian-mississippi-officer-on-leave",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - Mississippi Officer on Leave",
+      "type": "secondary",
+      "url": "https://www.theguardian.com/us-news/2026/jun/17/mississippi-police-walmart-shooting"
+    },
+    {
+      "_id": "source-cbs-news-rick-chow-acquitted",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS News - Rick Chow Acquitted",
+      "type": "secondary",
+      "url": "https://www.cbsnews.com/news/chikei-rick-chow-south-carolina-store-owner-murder-cyrus-belton/"
+    },
+    {
+      "_id": "source-ap-news-south-carolina-jury-verdict",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News - South Carolina Jury Verdict",
+      "type": "secondary",
+      "url": "https://apnews.com/article/store-owner-shooting-black-teen-south-carolina-d1d6534afe8cb98a5e4fc153290d480b"
+    },
+    {
+      "_id": "source-hindustan-times-hunter-foster-profile",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Hindustan Times - Hunter Foster Profile",
+      "type": "secondary",
+      "url": "https://www.hindustantimes.com/world-news/us-news/kohen-wiley-shooting-who-is-hunter-foster-5-things-on-senatobia-police-department-officer-who-killed-oneyearold-101781860497007.html"
+    },
+    {
+      "_id": "source-commercial-appeal-walmart-memorial",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Commercial Appeal - Walmart Memorial",
+      "type": "secondary",
+      "url": "https://www.commercialappeal.com/story/news/local/mississippi/2026/06/18/senatobia-ms-walmart-shooting-residents-mourn-baby/90611387007/"
+    },
+    {
+      "_id": "source-wapt-officer-placed-on-leave",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WAPT - Officer Placed on Leave",
+      "type": "secondary",
+      "url": "https://www.wapt.com/article/senatobia-officer-placed-on-leave-tear-gas-deployed-as-hundreds-protest-death-of-1-year-old-kohen-wiley/71608163"
+    },
+    {
+      "_id": "source-democracy-now-headlines-june-17-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Now - Headlines June 17 2026",
+      "type": "secondary",
+      "url": "https://www.democracynow.org/2026/6/17/headlines"
+    }
+  ]
+}

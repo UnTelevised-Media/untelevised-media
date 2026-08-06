@@ -1,0 +1,54 @@
+{
+  "slug": "from-the-labor-department-to-the-strip-club-the-disgraceful-saga-of-lori-chavez-deremer",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "src-ap-chavez-deremer-resigns",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP - Chavez-DeRemer resigns",
+      "type": "article",
+      "url": "https://apnews.com/article/lori-chavez-deremer-resigns-trump-cabinet-926a5d655890fe5ec348cbf959233481"
+    },
+    {
+      "_id": "src-nwlaborpress-chavez-deremer-scandal",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NW Labor Press - Labor Secretary Chavez-DeRemer steps down amid scandal",
+      "type": "article",
+      "url": "https://nwlaborpress.org/2026/05/labor-secretary-chavez-deremer-steps-down-amid-scandal/"
+    },
+    {
+      "_id": "src-wweek-strip-club-chavez-deremer",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Willamette Week - Foster Road Strip Club That Lured Chavez-DeRemer",
+      "type": "article",
+      "url": "https://www.wweek.com/news/2026/05/13/we-visited-the-foster-road-strip-club-that-allegedly-lured-lori-chavez-deremer/"
+    },
+    {
+      "_id": "src-nyt-chavez-deremer-family",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times - Chavez-DeRemer family texted young female staff",
+      "type": "article",
+      "url": null
+    },
+    {
+      "_id": "src-ny-post-chavez-scandals",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Post - Chavez-DeRemer strip club, drinking, travel fraud",
+      "type": "article",
+      "url": null
+    },
+    {
+      "_id": "src-wiki-chavez-deremer",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia - Lori Chavez-DeRemer",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/Lori_Chavez-DeRemer"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "slug": "convicted-killer-cop-sean-grayson-seeks-medical-release-after-less-than-six-months",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "source-wikipedia-murder-of-sonya-massey",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Murder of Sonya Massey",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/Murder_of_Sonya_Massey"
+    },
+    {
+      "_id": "source-cbs-chicago-grayson-guilty-of-2nd-degree-murder-family-disappointed",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS Chicago — Grayson guilty of 2nd-degree murder; family disappointed",
+      "type": "article",
+      "url": "https://www.cbsnews.com/chicago/news/sean-grayson-trial-sonya-massey-shooting-verdict/"
+    },
+    {
+      "_id": "source-usa-today-ex-deputy-found-guilty-of-murder-in-fatal-shooting-of-sonya-massey",
+      "description": null,
+      "isAnonymous": null,
+      "label": "USA Today — Ex-deputy found guilty of murder in fatal shooting of Sonya Massey",
+      "type": "article",
+      "url": "https://www.usatoday.com/story/news/nation/2025/10/29/sonya-massey-trial-verdict-sean-grayson/86943884007/"
+    },
+    {
+      "_id": "source-invisible-institute-sean-graysons-history-of-misconduct",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Invisible Institute — Sean Grayson's History of Misconduct",
+      "type": "article",
+      "url": "https://invisible.institute/sean-grayson-misconduct"
+    },
+    {
+      "_id": "source-npr-illinois-former-sangamon-county-deputy-sean-grayson-seeks-medical-release",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR Illinois — Former Sangamon County deputy Sean Grayson seeks medical release",
+      "type": "article",
+      "url": "https://www.nprillinois.org/sangamon-county/2026-07-02/former-sangamon-county-deputy-sean-grayson-seeks-medical-release"
+    },
+    {
+      "_id": "source-cnn-doj-opens-civil-rights-investigation-of-illinois-sheriffs-office",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — DOJ opens civil rights investigation of Illinois sheriff's office",
+      "type": "article",
+      "url": "https://www.cnn.com/2024/11/16/us/sonya-massey-shooting-investigation-doj/index.html"
+    },
+    {
+      "_id": "source-usa-today-doj-and-illinois-sheriff-agree-to-policing-upgrades-after-sonya-massey",
+      "description": null,
+      "isAnonymous": null,
+      "label": "USA Today — DOJ and Illinois sheriff agree to policing upgrades after Sonya Massey killing",
+      "type": "article",
+      "url": "https://www.usatoday.com/story/news/nation/2025/01/19/sonya-massey-death-justice-department-agreement/77830749007/"
+    },
+    {
+      "_id": "source-state-journal-register-union-drops-grievance-filed-by-sean-grayson",
+      "description": null,
+      "isAnonymous": null,
+      "label": "State Journal-Register — Union drops grievance filed by Sean Grayson",
+      "type": "article",
+      "url": "https://www.sj-r.com/story/news/crime/2024/07/30/a-grievance-by-a-former-sangamon-county-deputy-was-dropped-tuesday/74594770007/"
+    },
+    {
+      "_id": "source-cnn-illinois-law-requiring-disclosure-of-police-recruits-backgrounds",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — Illinois law requiring disclosure of police recruits' backgrounds",
+      "type": "article",
+      "url": "https://amp.cnn.com/cnn/2025/08/13/us/illinois-police-recruit-law-sean-grayson"
+    }
+  ]
+}

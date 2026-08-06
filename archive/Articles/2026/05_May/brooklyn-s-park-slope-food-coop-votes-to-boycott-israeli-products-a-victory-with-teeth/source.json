@@ -1,0 +1,86 @@
+{
+  "slug": "brooklyn-s-park-slope-food-coop-votes-to-boycott-israeli-products-a-victory-with-teeth",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "source-theguardian-2026-psfc-boycott",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - Park Slope Food Coop Votes to Boycott Israeli Products",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/may/27/park-slope-food-coop-israel-boycott"
+    },
+    {
+      "_id": "source-nytimes-2026-psfc-boycott",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NY Times - Park Slope Food Co-op Votes to Boycott Israeli Products",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/05/26/nyregion/park-slope-food-coop-boycott.html"
+    },
+    {
+      "_id": "source-forward-2026-psfc-vote",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Forward - Brooklyn's Park Slope Food Coop Votes to Boycott Israeli Products",
+      "type": "article",
+      "url": "https://forward.com/fast-forward/827365/brooklyns-park-slope-food-coop-votes-to-boycott-israeli-products/"
+    },
+    {
+      "_id": "source-jta-2026-psfc-products",
+      "description": null,
+      "isAnonymous": null,
+      "label": "JTA - Park Slope Food Coop Votes for Israel Boycott",
+      "type": "article",
+      "url": "https://www.jta.org/2026/05/26/ny/park-slope-food-coop-votes-for-israel-boycott"
+    },
+    {
+      "_id": "source-ynetnews-2026-psfc-vote",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Ynet News - Famous Park Slope Food Coop Votes to Boycott Israeli Products",
+      "type": "article",
+      "url": "https://www.ynetnews.com/article/b1fnt114emg"
+    },
+    {
+      "_id": "source-brooklyneagle-2026-psfc",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Brooklyn Eagle - Park Slope Food Co-op Members Vote to Boycott Products Made in Israel",
+      "type": "article",
+      "url": "https://brooklyneagle.com/389840/food-co-op-members-vote-to-boycott-products-made-in-israel/"
+    },
+    {
+      "_id": "source-aljazeera-2016-bds-south-africa",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera - BDS Movement: Lessons from the South Africa Boycott",
+      "type": "article",
+      "url": "https://www.aljazeera.com/features/2016/2/23/bds-movement-lessons-from-the-south-africa-boycott"
+    },
+    {
+      "_id": "source-uscpr-2025-bds-wins",
+      "description": null,
+      "isAnonymous": null,
+      "label": "USCPR - US BDS Victories",
+      "type": "article",
+      "url": "https://uscpr.org/activist-resource/boycott-divestment-and-sanctions/bdswins/"
+    },
+    {
+      "_id": "source-bdsmovement-2025-norway-divest",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BDS Movement - Recent Important Divestment Wins in Europe",
+      "type": "article",
+      "url": "https://bdsmovement.net/news/bds-unstoppable-recent-important-divestment-wins-europe"
+    },
+    {
+      "_id": "source-analystnews-2024-bds-wins",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Analyst News - The BDS Movement's Biggest Wins Since Oct 7",
+      "type": "article",
+      "url": "https://www.analystnews.org/posts/divest-israel-bds-movements-biggest-wins-since-oct-7"
+    }
+  ]
+}

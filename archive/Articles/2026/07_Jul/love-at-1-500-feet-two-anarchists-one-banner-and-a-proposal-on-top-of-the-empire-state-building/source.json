@@ -1,0 +1,78 @@
+{
+  "slug": "love-at-1-500-feet-two-anarchists-one-banner-and-a-proposal-on-top-of-the-empire-state-building",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "src-empire-state-amny-2026-07-01",
+      "description": "On-scene reporting including witness accounts, timeline, and arrest details.",
+      "isAnonymous": null,
+      "label": "amNewYork - Empire State Building Couple Charged",
+      "type": "article",
+      "url": "https://www.amny.com/news/protesters-scale-empire-state-building-needle-07012026/"
+    },
+    {
+      "_id": "src-empire-state-independent-2026-07-01",
+      "description": "Identifies Angela Nikolau and Vanya Beerkus, their rooftopping backgrounds, and the Netflix documentary Skywalkers: A Love Story.",
+      "isAnonymous": null,
+      "label": "The Independent - Daredevil Couple Arrested After Scaling Empire State Building",
+      "type": "article",
+      "url": "https://www.independent.co.uk/news/world/americas/empire-state-building-people-protest-banner-nyc-b3006972.html"
+    },
+    {
+      "_id": "src-empire-state-hill-2026-07-01",
+      "description": "NYPD statement, banner text, heat wave conditions, and World Cup tourist evacuation details.",
+      "isAnonymous": null,
+      "label": "The Hill - 2 Protesters Arrested After Scaling Empire State Building Antenna",
+      "type": "article",
+      "url": "https://thehill.com/homenews/5949813-empire-state-peace-banner/"
+    },
+    {
+      "_id": "src-empire-state-abc7-2026-07-01",
+      "description": "Full charge list, NYPD bodycam footage, ESU officer details, and Instagram posts.",
+      "isAnonymous": null,
+      "label": "ABC7 New York - Daredevil Couple Empire State Building Engagement",
+      "type": "media",
+      "url": "https://abc7ny.com/post/2-people-climb-top-empire-state-building-pro-peace-banner/19429181/"
+    },
+    {
+      "_id": "src-empire-state-instagram-2026-07-01",
+      "description": "Angela Nikolau's own Instagram post confirming the engagement with photos from the climb and ring.",
+      "isAnonymous": null,
+      "label": "Angela Nikolau Instagram - Engagement Post",
+      "type": "media",
+      "url": "https://www.instagram.com/p/DaQhEGbjbHT/"
+    },
+    {
+      "_id": "src-empire-state-nypd-bodycam-2026-07-01",
+      "description": "Official NYPD bodycam footage released by Police Commissioner Jessica Tisch showing ESU officers arresting the couple.",
+      "isAnonymous": null,
+      "label": "NYPD Commissioner Jessica Tisch - Bodycam Footage Release",
+      "type": "statement",
+      "url": "https://x.com/NYPDPC/status/2072414397910172072"
+    },
+    {
+      "_id": "src-empire-state-cbs-2026-07-01",
+      "description": "Video coverage from CBS New York showing the proposal on the antenna spire.",
+      "isAnonymous": null,
+      "label": "CBS New York - Empire State Building Climbers Engagement Video",
+      "type": "media",
+      "url": "https://www.cbsnews.com/newyork/news/empire-state-building-climbers-banner-nyc/"
+    },
+    {
+      "_id": "src-empire-state-youtube-2026-07-01",
+      "description": "Compiled video of the climb, banner drop, and proposal at the top of the Empire State Building.",
+      "isAnonymous": null,
+      "label": "YouTube - Couple Climbs Empire State Building Gets Engaged",
+      "type": "media",
+      "url": "https://www.youtube.com/watch?v=rSfR9MVCy3U"
+    },
+    {
+      "_id": "src-empire-state-newsweek-2026-07-01",
+      "description": "Newsweek coverage of the newly engaged climbers, the peace banner, and police custody.",
+      "isAnonymous": null,
+      "label": "Newsweek - Empire State Building Climbers Couple Arrested",
+      "type": "article",
+      "url": "https://www.newsweek.com/empire-state-building-protest-climb-spire-nyc-12147370"
+    }
+  ]
+}

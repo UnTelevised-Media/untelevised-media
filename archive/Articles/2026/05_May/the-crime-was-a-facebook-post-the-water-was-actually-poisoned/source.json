@@ -1,0 +1,62 @@
+{
+  "slug": "the-crime-was-a-facebook-post-the-water-was-actually-poisoned",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-watchtower-trinidad",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Watchtower CI — Jennifer Combs Arrest Timeline",
+      "type": null,
+      "url": "https://watchtowerci.com/2026/05/jennifer-combs-arrest-trinidad-water-timeline/"
+    },
+    {
+      "_id": "source-fox4-arrest",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Fox 4 Dallas — Woman Arrested After Facebook Post Over Water Concerns",
+      "type": null,
+      "url": "https://www.fox4news.com/news/woman-arrested-facebook-post-concerning-trinidad-water-poisoning"
+    },
+    {
+      "_id": "source-fox4-dismissed",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Fox 4 Dallas — Charges Dismissed Against Trinidad Water Protestors",
+      "type": null,
+      "url": "https://www.fox4news.com/news/trinidad-texas-water-controversy-charges-dismissed-facebook-post"
+    },
+    {
+      "_id": "source-expressnews-lawsuit",
+      "description": null,
+      "isAnonymous": null,
+      "label": "San Antonio Express-News — Texas Woman Sues Trinidad Over Arrest",
+      "type": null,
+      "url": "https://www.expressnews.com/news/article/trinidad-texas-water-arrest-lawsuit-22273575.php"
+    },
+    {
+      "_id": "source-carol-countryman",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Carol Countryman — Everybody's a Reporter Now. Trinidad, Texas",
+      "type": null,
+      "url": "https://carolcountryman.substack.com/p/everybodys-a-reporter-now-trinidad"
+    },
+    {
+      "_id": "source-texas-penal-code",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Texas Penal Code §42.06 — False Alarm or Report",
+      "type": null,
+      "url": "https://statutes.capitol.texas.gov/Docs/PE/htm/PE.42.htm"
+    },
+    {
+      "_id": "source-tceq",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Texas Commission on Environmental Quality",
+      "type": null,
+      "url": "https://www.tceq.texas.gov/"
+    }
+  ]
+}

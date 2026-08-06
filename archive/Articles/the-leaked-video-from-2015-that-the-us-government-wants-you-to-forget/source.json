@@ -1,0 +1,86 @@
+{
+  "slug": "the-leaked-video-from-2015-that-the-us-government-wants-you-to-forget",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "DJ1Y76QLqJX8nukZ868txM",
+      "description": "This is the article from this source reposted",
+      "isAnonymous": null,
+      "label": "anonresistance.news",
+      "type": "article",
+      "url": "http://anonresistance.news"
+    },
+    {
+      "_id": "DJ1Y76QLqJX8nukZ868ufO",
+      "description": null,
+      "isAnonymous": null,
+      "label": "twitter.com/anonyresistance",
+      "type": "article",
+      "url": "https://twitter.com/anonyresistance"
+    },
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2vKm",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.mccain.senate.gov/public/index.cfm/2015/6/statement-by-sasc-chairman-john-mc",
+      "type": "article",
+      "url": "http://www.mccain.senate.gov/public/index.cfm/2015/6/statement-by-sasc-chairman-john-mccain-on-congressional-delegation-trip-to-eastern-ukraine"
+    },
+    {
+      "_id": "7ONx74QMiI10eazwub4qyr",
+      "description": null,
+      "isAnonymous": null,
+      "label": "thefreethoughtproject.com/pentagon-fake-terrorist-videos",
+      "type": "article",
+      "url": "http://thefreethoughtproject.com/pentagon-fake-terrorist-videos/#Zuq4qssVjiE7H4JG.99"
+    },
+    {
+      "_id": "7ONx74QMiI10eazwub4rDX",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.cyber-berkut.ru/en",
+      "type": "article",
+      "url": "http://www.cyber-berkut.ru/en/"
+    },
+    {
+      "_id": "DJ1Y76QLqJX8nukZ868vQM",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.youtube.com/watch",
+      "type": "article",
+      "url": "https://www.youtube.com/watch?v=scD3oYQuigk"
+    },
+    {
+      "_id": "7ONx74QMiI10eazwub4rPH",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.youtube.com/watch",
+      "type": "article",
+      "url": "https://www.youtube.com/watch?v=umkh3WvCJ8s"
+    },
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2vSu",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.rt.com/news/220079-mccain-syria-visit-illegal",
+      "type": "article",
+      "url": "https://www.rt.com/news/220079-mccain-syria-visit-illegal/"
+    },
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2vWy",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.rt.com/usa/mccain-visits-syria-rebels-865",
+      "type": "article",
+      "url": "https://www.rt.com/usa/mccain-visits-syria-rebels-865/"
+    },
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2vb2",
+      "description": null,
+      "isAnonymous": null,
+      "label": "twitter.com/SenJohnMcCain/status/339455679800700928/photo/1",
+      "type": "article",
+      "url": "https://twitter.com/SenJohnMcCain/status/339455679800700928/photo/1"
+    }
+  ]
+}

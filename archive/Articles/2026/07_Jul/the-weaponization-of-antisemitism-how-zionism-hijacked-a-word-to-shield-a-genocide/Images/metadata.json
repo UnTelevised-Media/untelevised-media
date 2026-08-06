@@ -1,0 +1,34 @@
+{
+  "slug": "the-weaponization-of-antisemitism-how-zionism-hijacked-a-word-to-shield-a-genocide",
+  "totalImages": 3,
+  "downloadedAt": "2026-08-05T20:48:54.811Z",
+  "mainImage": {
+    "alt": "Aerial photograph showing widespread destruction of buildings in Rafah, Gaza Strip",
+    "caption": "Aerial view of destruction in Rafah after Israeli forces withdrew from Gaza",
+    "credit": "Wikimedia Commons",
+    "asset": "image-672eff64ca33bb53505d69ce4a5734842be9f9b5-1024x683-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Exterior of the Oldenburg Synagogue showing fire damage from an attempted arson",
+      "caption": "Damage to the Oldenburg Synagogue following an attempted arson attack",
+      "credit": "ADL",
+      "asset": "image-b92d748cf6110235d5a51718b47b288edc852912-1020x680-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Jewish Voice for Peace protesters with linked arms at a campus demonstration",
+      "caption": "Jewish Voice for Peace protesters demonstrate against Israel's genocide in Gaza",
+      "credit": "AP/Al Jazeera",
+      "asset": "image-7f2033095e58065847b6a156ca21862fbecf5b16-7889x5259-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    }
+  ]
+}

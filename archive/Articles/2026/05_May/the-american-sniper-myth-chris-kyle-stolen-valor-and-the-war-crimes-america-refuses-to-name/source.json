@@ -1,0 +1,70 @@
+{
+  "slug": "the-american-sniper-myth-chris-kyle-stolen-valor-and-the-war-crimes-america-refuses-to-name",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-intercept-2016-kyle-medals",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Intercept - Chris Kyle Distorted His Military Record",
+      "type": "article",
+      "url": "https://theintercept.com/2016/05/25/american-sniper-chris-kyle-distorted-his-military-record-documents-show/"
+    },
+    {
+      "_id": "source-navytimes-2016-kyle-doubt",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Navy Times - New Questions Cast Doubt on Chris Kyle Combat Record",
+      "type": "article",
+      "url": "https://www.navytimes.com/news/your-navy/2016/05/25/new-questions-cast-doubt-on-american-sniper-chris-kyle-s-combat-record/"
+    },
+    {
+      "_id": "source-nydailynews-2016-kyle-stolen-valor",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NY Daily News - American Sniper Chris Kyle Lied About Military Accomplishments",
+      "type": "article",
+      "url": "https://www.nydailynews.com/2016/05/25/american-sniper-chris-kyle-lied-about-his-military-accomplishments-navy-seals-knew-but-chose-not-to-correct-it/"
+    },
+    {
+      "_id": "source-navytimes-2017-ventura",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Navy Times - Jesse Ventura Legal Battle Against American Sniper",
+      "type": "article",
+      "url": "https://www.navytimes.com/news/your-navy/2017/12/05/ventura-glad-legal-battle-against-american-sniper-is-over/"
+    },
+    {
+      "_id": "source-snopes-2015-kyle-hoax",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Snopes - Chris Kyle Carjacking Claim Fact Check",
+      "type": "article",
+      "url": "https://www.snopes.com/fact-check/kyle-file/"
+    },
+    {
+      "_id": "source-theguardian-2015-kyle-racist",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - The Real American Sniper Was a Hate-Filled Killer",
+      "type": "article",
+      "url": "https://www.theguardian.com/commentisfree/2015/jan/06/real-american-sniper-hate-filled-killer-why-patriots-calling-hero-chris-kyle"
+    },
+    {
+      "_id": "source-usatoday-2016-kyle-medals",
+      "description": null,
+      "isAnonymous": null,
+      "label": "USA Today - Navy Probing Discrepancy With Chris Kyle Medals",
+      "type": "article",
+      "url": "https://www.usatoday.com/story/news/nation/2016/05/25/chris-kyle-american-sniper-navy-medals/84932154/"
+    },
+    {
+      "_id": "source-cleburne-2013-kyle-hoax",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Cleburne Times-Review - Sniper Shooting in Cleburne a Hoax",
+      "type": "article",
+      "url": "https://www.cleburnetimesreview.com/news/local_news/sniper-shooting-in-cleburne-a-hoax/article_aee96836-789e-55dd-aa5c-1d88329ef6be.html"
+    }
+  ]
+}

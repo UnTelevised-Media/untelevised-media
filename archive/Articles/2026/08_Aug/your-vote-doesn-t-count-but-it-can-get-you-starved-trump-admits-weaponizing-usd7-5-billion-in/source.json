@@ -1,0 +1,78 @@
+{
+  "slug": "your-vote-doesn-t-count-but-it-can-get-you-starved-trump-admits-weaponizing-usd7-5-billion-in",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "source-the-new-republic-trump-team-admits-defunding-states-that-didnt-vote-for-him",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The New Republic — Trump Team Admits Defunding States That Didn't Vote for Him",
+      "type": "article",
+      "url": "https://newrepublic.com/post/213526/trump-team-admits-defunding-states-didnt-vote-for-him"
+    },
+    {
+      "_id": "source-the-independent-federal-officials-admit-withholding-grants-from-states-over-voti",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Independent — Federal Officials Admit Withholding Grants from States Over Voting",
+      "type": "article",
+      "url": "https://www.the-independent.com/news/world/americas/us-politics/trump-cancel-federal-funding-democratic-states-b3021307.html"
+    },
+    {
+      "_id": "source-calmatters-white-house-admits-using-keywords-to-kill-billions-in-uc-research-gra",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CalMatters — White House Admits Using Keywords to Kill Billions in UC Research Grants",
+      "type": "article",
+      "url": "https://calmatters.org/education/higher-education/2026/07/research-grants-california-2/"
+    },
+    {
+      "_id": "source-new-republic-trump-denies-disaster-aid-for-four-states-that-didnt-vote-for-him",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New Republic — Trump Denies Disaster Aid for Four States That Didn't Vote for Him",
+      "type": "article",
+      "url": "https://newrepublic.com/post/212851/trump-denies-disaster-aid-four-democratic-states"
+    },
+    {
+      "_id": "source-politico-trump-overrode-his-own-agencies-to-deny-4-democratic-disaster-requests",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Politico — Trump Overrode His Own Agencies to Deny 4 Democratic Disaster Requests",
+      "type": "article",
+      "url": "https://www.politico.com/news/2026/07/29/fema-democratic-disaster-requests-trump-01013938"
+    },
+    {
+      "_id": "source-pbs-trump-taking-longer-to-approve-disaster-aid-denying-democratic-states-more",
+      "description": null,
+      "isAnonymous": null,
+      "label": "PBS — Trump Taking Longer to Approve Disaster Aid, Denying Democratic States More",
+      "type": "article",
+      "url": "https://www.pbs.org/newshour/politics/trump-is-taking-longer-to-approve-disaster-aid-and-denying-democratic-states-more-frequently"
+    },
+    {
+      "_id": "source-npr-white-house-aims-to-give-political-appointees-more-power-over-research-fundi",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR — White House Aims to Give Political Appointees More Power Over Research Funding",
+      "type": "article",
+      "url": "https://www.npr.org/2026/07/13/nx-s1-5888656/the-white-house-aims-to-give-political-appointees-more-power-over-research-funding"
+    },
+    {
+      "_id": "source-department-of-energy-court-filing-stipulation-on-grant-terminations",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Department of Energy Court Filing — Stipulation on Grant Terminations",
+      "type": "document",
+      "url": "https://storage.courtlistener.com/recap/gov.uscourts.cand.450653/gov.uscourts.cand.450653.211.6.pdf"
+    },
+    {
+      "_id": "source-sf-chronicle-white-house-admits-keyword-driven-grant-cancellations",
+      "description": null,
+      "isAnonymous": null,
+      "label": "SF Chronicle — White House Admits Keyword-Driven Grant Cancellations",
+      "type": "article",
+      "url": "https://www.sfchronicle.com/california/article/keywords-targeted-uc-research-grants-22354483.php"
+    }
+  ]
+}

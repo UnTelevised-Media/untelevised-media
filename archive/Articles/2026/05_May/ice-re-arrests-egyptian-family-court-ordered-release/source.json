@@ -1,0 +1,30 @@
+{
+  "slug": "ice-re-arrests-egyptian-family-court-ordered-release",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "source-guardian-egyptian-family-ice-2026-04-25",
+      "description": "April 25, 2026 - Coverage of the re-arrest of Hayam El Gamal and her five children by ICE just days after a federal judge ordered their release. Details on the 10-month detention at Dilley facility, medical neglect allegations, and the emergency motion to block deportation.",
+      "isAnonymous": null,
+      "label": "The Guardian - Egyptian Family of Six Taken Back into ICE Custody Days After Release",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/apr/25/egyptian-family-ice-custody"
+    },
+    {
+      "_id": "source-texas-tribune-egyptian-family-ice-2026-04-25",
+      "description": "April 25, 2026 - Comprehensive coverage of the El Gamal family's re-arrest and subsequent release after judicial intervention. Includes details on the 10-month detention, court rulings by Judge Fred Biery and Magistrate Judge Elizabeth Chestney, and the family's statements about treatment at Dilley.",
+      "isAnonymous": null,
+      "label": "Texas Tribune - ICE Releases El Gamal Family After Re-Arresting Mother and 5 Children",
+      "type": "article",
+      "url": "https://www.texastribune.org/2026/04/25/el-gamal-family-dilley-family-detention-texas-redetained-egypt/"
+    },
+    {
+      "_id": "source-tpr-egyptian-family-ice-2026-04-25",
+      "description": "April 25, 2026 - Coverage of the family's re-arrest and attempt to deport them to Egypt on a private plane. Reports on emergency appeal to Fifth Circuit and DHS spokesperson's statement about the family as 'national security threats.'",
+      "isAnonymous": null,
+      "label": "Texas Public Radio - ICE Re-Arrests Egyptian Family After Texas Judges Freed Them",
+      "type": "article",
+      "url": "https://www.tpr.org/news/2026-04-25/ice-re-arrests-egyptian-family-after-texas-judges-freed-them-following-10-months-in-detention"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "_id": "justice-for-dj-manzanares-the-fight-after-denver-police",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "c8f83157359e",
+      "_ref": "NIYNah6RoM2MjtNb6HiKPc",
+      "_type": "reference"
+    },
+    {
+      "_key": "7698a8af6c64",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "7c8d1901ce3e",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Denver DA Beth McCann cleared three officers who killed DJ Manzanares in August 2021. The family's fight for answers — protests, rallies, and a civil lawsuit — exposed how Colorado's criminal legal system shields police from accountability while grieving families are left with settlement checks and silence.",
+  "eventDate": "2021-08-04T16:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "District Attorney Beth McCann ruled on August 4, 2021, that the shooting was legally justified and no criminal charges would be filed against officers Samuel Bailey, Ryan Nelson, or Steven Whiteman. McCann concluded the officers made a 'split-second decision' based on their safety.",
+      "question": "What did the Denver DA decide about DJ Manzanares's killing?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The family held rallies and protests in Pueblo and Denver, demanded body camera footage release and officer identification, launched a GoFundMe campaign for funeral expenses and Damien's treatment, and filed a civil lawsuit in Denver District Court in June 2023.",
+      "question": "What did the family do to demand accountability?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "All three officers were placed on modified duty assignment — essentially administrative leave with full pay. They faced no criminal charges, no public discipline, and their identities were shielded for nearly two months. The department never publicly released the full body camera footage.",
+      "question": "What happened to the officers who killed DJ?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "No. The case was investigated entirely by the Denver District Attorney's office — the same office that works with Denver police daily. No independent prosecutor, grand jury, or external law enforcement agency reviewed the evidence.",
+      "question": "Was there an independent investigation?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "In March 2025, Denver City Council approved an $800,000 settlement with Manzanares's estate. While the family pursued civil litigation, no criminal accountability has ever been achieved for DJ's killing.",
+      "question": "Did the family receive any compensation?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Beth McCann no charges Manzanares",
+    "Denver DA police killing justified",
+    "Duane Manzanares protest rally",
+    "Denver police officers Bailey Nelson Whiteman",
+    "police accountability Colorado",
+    "modified duty police shooting",
+    "body camera footage withheld Denver",
+    "police cover up Denver Colorado",
+    "civil lawsuit police killing Denver",
+    "Manzanares family justice"
+  ],
+  "leadParagraph": "On August 4, 2021, Denver District Attorney Beth McCann ruled that the police killing of Duane 'DJ' Manzanares Jr. was legally justified, clearing all three officers of criminal charges. The family's demands for body camera footage, officer names, and transparency were met with institutional silence, modified duty with pay for the shooters, and a system that investigates itself.",
+  "linkedPitch": null,
+  "location": "Denver, Colorado",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Family of DJ protest for justice in his murder by Denver PD.",
+    "asset": {
+      "_ref": "image-34f966df26c6c71875346d1560bcfc08639e30d1-1440x811-webp",
+      "_type": "reference"
+    },
+    "caption": "Denver District Attorney Beth McCann addresses reporters. McCann cleared three officers of criminal charges in the killing of Duane Manzanares on August 4, 2021.",
+    "credit": "Denverite/Kevin J. Beaty"
+  },
+  "methodology": "This article was reported using Denver District Attorney decision letters, family statements, protest coverage from KRDO and local outlets, Denver Post and Denver Gazette reporting, Colorado legal records, civil court filings, Denver City Council settlement records, police reform tracking from CPR News, and Mapping Police Violence data. All material facts were cross-referenced across multiple independent sources.",
+  "needsReview": null,
+  "publishedAt": "2021-09-20T12:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "97d7068ee17d",
+      "_ref": "800k-settlement-dj-manzanares-family-wrongful-death-denver",
+      "_type": "reference"
+    },
+    {
+      "_key": "657d23639b9a",
+      "_ref": "justice-for-dj-duane-manzanares-police-killing-denver",
+      "_type": "reference"
+    },
+    {
+      "_key": "368d4ac102c0",
+      "_ref": "YtJR1N6fGBsJu5O68LOEJ4",
+      "_type": "reference"
+    },
+    {
+      "_key": "0050d152dca6",
+      "_ref": "YtJR1N6fGBsJu5O68LOL54",
+      "_type": "reference"
+    },
+    {
+      "_key": "7711413fbb55",
+      "_ref": "Ulg91jjPFgaBD1fUiNoHzK",
+      "_type": "reference"
+    },
+    {
+      "_key": "c0c73c08d6a1",
+      "_ref": "denver-jbs-strike-authorization",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Denver DA Beth McCann cleared three officers who killed DJ Manzanares. The family's fight for answers exposed how Colorado shields police from accountability.",
+    "metaTitle": "No Justice for DJ: The System That Killed Manzanares and Protected His Killers",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "no-justice-for-dj-the-system-that-killed-duane-manzanares-and-protected-his-killers"
+  },
+  "tags": [
+    "police accountability",
+    "district attorney",
+    "Beth McCann",
+    "police brutality",
+    "Denver Police Department",
+    "Duane Manzanares",
+    "police reform",
+    "qualified immunity",
+    "civil rights",
+    "family justice"
+  ],
+  "title": "No Justice for DJ: The System That Killed Duane Manzanares and Protected His Killers",
+  "updatedAt": null,
+  "videoLink": null
+}

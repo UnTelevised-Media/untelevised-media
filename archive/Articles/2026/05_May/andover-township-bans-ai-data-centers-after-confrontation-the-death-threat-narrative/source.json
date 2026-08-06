@@ -1,0 +1,38 @@
+{
+  "slug": "andover-township-bans-ai-data-centers-after-confrontation-the-death-threat-narrative",
+  "totalSources": 4,
+  "sources": [
+    {
+      "_id": "source-nj-andover-ai-data-center-2026-05-10",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NJ.com - Andover Officials Plan Ban on AI Data Centers After Tense Meeting",
+      "type": "article",
+      "url": "https://www.nj.com/news/2026/05/a-huge-ai-data-center-could-be-coming-to-an-old-nj-airport-but-some-residents-are-fighting-back.html"
+    },
+    {
+      "_id": "source-news12-andover-ai-meeting-2026-05-10",
+      "description": null,
+      "isAnonymous": null,
+      "label": "News 12 - Andover Plans Ban on AI Data Centers After Tense Meeting",
+      "type": "article",
+      "url": "https://newjersey.news12.com/2026/05/10/andover-plans-ban-on-ai-data-centers-after-tense-meeting-and-viral-video/5ouXiKxrUSaKWwCIz4Fflg"
+    },
+    {
+      "_id": "source-dailyvoice-andover-ban-2026-05-09",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Newton-Andover Daily Voice - Andover to Ban AI Data Center After Township Meeting Turns Violent",
+      "type": "article",
+      "url": "https://dailyvoice.com/nj/newton-andover/video-andover-to-ban-ai-data-center-after-township-meeting-turns-violent/"
+    },
+    {
+      "_id": "source-nj-chaos-andover-2026-05-08",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NJ.com - Chaos Erupts at NJ Town Meeting as Cops Wrestle Resident Over Data Center Fight",
+      "type": "article",
+      "url": "https://www.nj.com/business/2026/05/chaos-erupts-at-heated-nj-meeting-about-ai-data-center-as-cops-forcibly-remove-speaker.html"
+    }
+  ]
+}

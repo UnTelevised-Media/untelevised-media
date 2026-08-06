@@ -1,0 +1,38 @@
+{
+  "slug": "surveillance-state-wins-another-round-section-702-gets-temporary-extension",
+  "totalSources": 4,
+  "sources": [
+    {
+      "_id": "source-reason-section-702-extension-2026-04-24",
+      "description": "April 24, 2026 - Reason article on Section 702's temporary extension to April 30, with detailed analysis of civil liberties concerns, Trump's reversal from opponent to supporter, FBI searches tripling, and Sen. Wyden's warning about a 'secret law' aspect that would 'stun' the American public.",
+      "isAnonymous": false,
+      "label": "Reason — Congress still has a chance to curb Section 702 surveillance abuses",
+      "type": "article",
+      "url": "https://reason.com/2026/04/24/congress-still-has-a-chance-to-curb-section-702-surveillance-abuses/"
+    },
+    {
+      "_id": "source-cnbc-section-702-vote-2026-04-17",
+      "description": "April 17, 2026 - CNBC report on Congress approving a short-term extension of Section 702, noting GOP hard-liners spiked five-year and 18-month proposals, Trump's call for a clean 18-month extension, and the need for reforms to protect Americans' privacy.",
+      "isAnonymous": false,
+      "label": "CNBC — Three things to know about FISA Section 702: Congress passes short-term extension",
+      "type": "article",
+      "url": "https://www.cnbc.com/2026/04/17/section-702-fisa-congress-surveillance.html"
+    },
+    {
+      "_id": "source-npr-section-702-extension-2026-04-17",
+      "description": "April 17, 2026 - NPR report on Section 702's 10-day extension, noting nearly 350,000 targets under the program, the long-running debate over requiring court approval for reviewing Americans' information, and the risk of lawsuits if the law lapses.",
+      "isAnonymous": false,
+      "label": "NPR — Congress extends controversial surveillance powers for 10 days",
+      "type": "article",
+      "url": "https://www.npr.org/2026/04/17/nx-s1-5788573/house-extends-surveillance-powers-for-10-days"
+    },
+    {
+      "_id": "source-al-jazeera-section-702-2026-04-17",
+      "description": "April 17, 2026 - Al Jazeera report on the temporary extension, describing Section 702 as a 'backdoor search' that circumvents existing privacy laws, with quotes from Senate Majority Leader John Thune and Rep. Thomas Massie opposing reauthorization without reforms.",
+      "isAnonymous": false,
+      "label": "Al Jazeera — US Congress extends controversial surveillance power under FISA for 10 days",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/4/17/us-congress-temporarily-extends-controversial-surveillance-power-under-fisa"
+    }
+  ]
+}

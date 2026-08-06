@@ -1,0 +1,46 @@
+{
+  "slug": "usd18-3-trillion-and-counting-how-billionaire-wealth-reaches-record-heights-while-the-world",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-oxfam-rule-of-rich-2026-01",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Oxfam - Resisting the Rule of the Rich: Protecting Freedom from Billionaire Power",
+      "type": "report",
+      "url": "https://www.oxfam.org/en/research/resisting-rule-rich"
+    },
+    {
+      "_id": "source-reuters-billions-peak-2026-01",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters - Billionaires wealth hits new peak as their clout grows, Oxfam says",
+      "type": "news",
+      "url": "https://www.reuters.com/business/davos/billionaires-wealth-hits-new-peak-their-clout-grows-oxfam-says-2026-01-19/"
+    },
+    {
+      "_id": "source-oxfam-press-billions-2026-01",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Oxfam Press Release - Billionaire wealth jumps three times faster in 2025",
+      "type": "press-release",
+      "url": "https://www.oxfam.org/en/press-releases/billionaire-wealth-jumps-three-times-faster-2025-highest-peak-ever-sparking"
+    },
+    {
+      "_id": "source-cbs-billionaire-tax-2025",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS News - Billionaires pay a lower tax rate than the rest of America taxpayers",
+      "type": "news",
+      "url": "https://www.cbsnews.com/news/income-taxes-billionaire-tax-rate-irs/"
+    },
+    {
+      "_id": "source-oxfam-uk-inequality-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Oxfam GB - Oxfam Global Inequality Report 2026",
+      "type": "report",
+      "url": "https://www.oxfam.org.uk/get-involved/campaign-with-oxfam/fight-inequality/oxfams-global-inequality-report/"
+    }
+  ]
+}

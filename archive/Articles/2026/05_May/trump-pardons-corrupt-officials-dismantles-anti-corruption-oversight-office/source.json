@@ -1,0 +1,46 @@
+{
+  "slug": "trump-pardons-corrupt-officials-dismantles-anti-corruption-oversight-office",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-newyorker-trump-pardon-economy-2026-05-04",
+      "description": "April 27, 2026 - In-depth investigation by Ruth Marcus exposing Trump's pardon economy, including Rod Blagojevich's pardon lobbying, million-dollar Mar-a-Lago dinners, Trevor Milton's $3.6M political donations, Paul Walczak case, Binance pardon connections, and Liz Oyer's analysis that Trump's pardons have erased at least $1.5 billion in penalties.",
+      "isAnonymous": false,
+      "label": "The New Yorker - Donald Trump's Pardon Economy",
+      "type": "article",
+      "url": "https://www.newyorker.com/magazine/2026/05/04/donald-trumps-pardon-economy"
+    },
+    {
+      "_id": "source-cbsnews-pay-to-play-investigation-2026-05-06",
+      "description": "May 6, 2026 - Reports that Senate and House Democrats launched investigation into whether Trump's pardons were driven by 'pay-to-play dynamics.' Probing whether clemency recipients obtained favorable treatment through intermediaries, financial contributions, or other forms of influence.",
+      "isAnonymous": false,
+      "label": "CBS News - Trump Pardon Recipients Face Congressional Investigation Over 'Pay-to-Play' Questions",
+      "type": "article",
+      "url": "https://www.cbsnews.com/news/trump-pardon-recipients-democrats-congressional-investigation-pay-to-play/"
+    },
+    {
+      "_id": "source-thehill-min-welch-investigation-2026-05-07",
+      "description": "May 7, 2026 - Reports that Sen. Peter Welch (D-Vt.) and Rep. Dave Min (D-Calif.) sent letters to 17 Trump pardon recipients, asking whether clemency was granted through intermediaries, financial contributions, or other forms of influence.",
+      "isAnonymous": false,
+      "label": "The Hill - Welch and Min Launch Probe on Whether Trump Pardons Were 'Pay-to-Play'",
+      "type": "article",
+      "url": "https://thehill.com/homenews/senate/5868520-trump-pardons-investigation/"
+    },
+    {
+      "_id": "source-wikipedia-trump-pardons-2026-05-08",
+      "description": "Comprehensive Wikipedia entry documenting more than 1,500 pardons by Trump since January 2025. Lists recipients including Rod Blagojevich, Steve Bannon, Jeremy Hutchinson, Adriana Camberos, George Santos, Todd and Julie Chrisley, Juan Orlando Hernández, Changpeng Zhao, Trevor Milton, and Paul Walczak.",
+      "isAnonymous": false,
+      "label": "Wikipedia - List of People Granted Executive Clemency in the Second Trump Presidency",
+      "type": "article",
+      "url": null
+    },
+    {
+      "_id": "source-campaignlegal-trump-pardon-abuses",
+      "description": "Campaign Legal Center analysis documenting three types of Trump pardons: reward pardons for donors/allies, corrupt pardons for public officials who abused office, and brokered pardons for wealthy defendants who hire well-connected lobbyists.",
+      "isAnonymous": false,
+      "label": "Campaign Legal - Inside the Pardon Playbook: Analysis of President Trump's Clemency Abuses",
+      "type": "article",
+      "url": null
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "nine-fires-in-seven-days-the-working-class-has-handed-down-its-verdict",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-nj-chemical-2026",
+      "description": "New Jersey outlet covering the five-alarm fire at the vacant Galaxie Chemical Corporation plant in Paterson, a Superfund site abandoned since 2006, with details on squatters' debris fueling the blaze, low water pressure challenges, and the building's demolition after the fire.",
+      "isAnonymous": null,
+      "label": "NJ.com",
+      "type": "article",
+      "url": "https://www.nj.com/passaic-county/2026/04/photos-video-show-massive-blaze-that-destroyed-vacant-chemical-factory-in-nj-city.html"
+    },
+    {
+      "_id": "source-wkyc-lumber-2026",
+      "description": "Ohio outlet covering the five-alarm fire at Southwood Lumber Pallet Inc. in Apple Creek, requiring 24 fire departments, 75+ personnel, and 500,000 gallons of water to extinguish, with roof collapse forcing defensive operations.",
+      "isAnonymous": null,
+      "label": "WKYC 3News",
+      "type": "article",
+      "url": "https://www.wkyc.com/article/news/local/wayne-county-fire-lumberyard-southwood-pallet-inc-east-lincoln-apple-creek/95-036d2a07-dbb7-4b6c-8f76-a6288e21f276"
+    },
+    {
+      "_id": "source-wsb-atlanta-2026",
+      "description": "Atlanta radio station covering the business fire near Seaboard Industrial Boulevard and Hosea Road in Lawrenceville, Georgia, with minimal detail provided in the initial report.",
+      "isAnonymous": null,
+      "label": "WSB Radio Atlanta",
+      "type": "article",
+      "url": "https://www.wsbradio.com/news/local/fire-metro-atlanta-business-under-investigation/VLZRUIXWSJD7XIHRSPJCEI7X7I/"
+    },
+    {
+      "_id": "source-dispatch-amazon-fire-2026",
+      "description": "Ohio outlet reporting on the Amazon warehouse fire in West Jefferson, with details from Fire Chief Dan Gatley about 75-100 solar panels catching fire, the evacuation of thousands of employees, and minimal damage to the facility.",
+      "isAnonymous": null,
+      "label": "The Columbus Dispatch",
+      "type": "article",
+      "url": "https://www.dispatch.com/story/news/local/2026/04/08/amazon-warehouse-west-jefferson-ohio-fire/89518809007/"
+    },
+    {
+      "_id": "source-wcvb-brockton-fire-2026",
+      "description": "Boston ABC affiliate covering the Brockton tractor-trailer fire with details from Fire Chief Brian Nardelli, witness quotes from Westgate Lanes employees, and information about the fire spreading to DW Fields Park.",
+      "isAnonymous": null,
+      "label": "WCVB Boston",
+      "type": "article",
+      "url": "https://www.wcvb.com/article/brockton-fire-westgate-black-smoke/70992823"
+    },
+    {
+      "_id": "source-qns-queens-fire-2026",
+      "description": "Local Queens outlet reporting on the 5-alarm lumberyard fire in College Point, with extensive details on FDNY response, fire progression, and official statements from Assistant Chief Michael Meyers.",
+      "isAnonymous": null,
+      "label": "Local News QNS",
+      "type": "article",
+      "url": "https://qns.com/2026/04/five-alarm-fire-college-point/"
+    }
+  ]
+}

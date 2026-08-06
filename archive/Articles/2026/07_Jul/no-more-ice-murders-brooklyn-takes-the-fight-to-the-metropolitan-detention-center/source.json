@@ -1,0 +1,38 @@
+{
+  "slug": "no-more-ice-murders-brooklyn-takes-the-fight-to-the-metropolitan-detention-center",
+  "totalSources": 4,
+  "sources": [
+    {
+      "_id": "source-fight-back-news-new-yorkers-speak-out-against-ice-murders-at-the-brooklyn-detent",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Fight Back! News — New Yorkers speak out against ICE murders at the Brooklyn detention center",
+      "type": "media",
+      "url": "https://fightbacknews.org/articles/new-yorkers-speak-out-against-ice-murders-at-the-brooklyn-detention-center"
+    },
+    {
+      "_id": "source-ny-senate-electeds-and-advocates-call-for-end-to-ice-detention-at-inhumane-feder",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NY Senate — Electeds and Advocates Call for End to ICE Detention at Inhumane Federal Jail",
+      "type": "statement",
+      "url": "https://www.nysenate.gov/newsroom/press-releases/2025/andrew-gounardes/electeds-advocates-call-end-ice-detention-inhumane"
+    },
+    {
+      "_id": "source-fox-news-dhs-says-ice-arrested-nigerian-national-in-brooklyn-sparking-protests",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Fox News — DHS says ICE arrested Nigerian national in Brooklyn, sparking protests",
+      "type": "media",
+      "url": "https://www.foxnews.com/us/anti-ice-demonstrators-detained-protesting-arrest-illegal-immigrant-facing-assault-drug-charges"
+    },
+    {
+      "_id": "source-nyclu-ice-and-bop-deny-lawmakers-access-to-mdc-brooklyn-amid-reports-of-inhumane",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NYCLU — ICE and BOP Deny Lawmakers Access to MDC Brooklyn Amid Reports of Inhumane Conditions",
+      "type": "statement",
+      "url": "https://www.nyclu.org/press-release/ice-and-bop-deny-lawmakers-access-to-mdc-brooklyn-amid-reports-of-inhumane-conditions"
+    }
+  ]
+}

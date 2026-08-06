@@ -1,0 +1,78 @@
+{
+  "slug": "ice-agents-kill-an-innocent-man-in-houston-and-nobody-in-power-seems-to-care",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "source-the-guardian-man-killed-by-ice-agents-not-intended-target-of-immigration-arrest",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Man killed by ICE agents not intended target of immigration arrest",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2026/jul/09/houston-man-killed-ice-agents"
+    },
+    {
+      "_id": "source-the-guardian-he-did-not-deserve-to-die-family-of-man-fatally-shot-by-ice-agent-s",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — 'He did not deserve to die': family of man fatally shot by ICE agent speaks out",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2026/jul/08/texas-ice-shooting-victim-son"
+    },
+    {
+      "_id": "source-the-guardian-10-people-fatally-shot-by-immigration-officials-in-trumps-second-te",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — 10 people fatally shot by immigration officials in Trump's second term",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2026/jul/09/ice-immigration-shooting-deaths-trump"
+    },
+    {
+      "_id": "source-cnn-lorenzo-salgado-araujo-mexican-man-fatally-shot-by-ice-was-not-target",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — Lorenzo Salgado Araujo: Mexican man fatally shot by ICE was not target",
+      "type": "media",
+      "url": "https://www.cnn.com/2026/07/09/us/lorenzo-salgado-araujo-houston-ice-shooting"
+    },
+    {
+      "_id": "source-ap-news-ice-shooting-in-houston-prompts-calls-for-an-independent-probe",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News — ICE shooting in Houston prompts calls for an independent probe",
+      "type": "media",
+      "url": "https://apnews.com/article/ice-houston-shooting-lorenzo-salgado-araujo-2d01ba69caf2445f05005096891ba5b2"
+    },
+    {
+      "_id": "source-houston-public-media-hundreds-march-in-protest-of-fatal-ice-shooting-in-houstons",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Houston Public Media — Hundreds march in protest of fatal ICE shooting in Houston's Magnolia Park",
+      "type": "media",
+      "url": "https://www.houstonpublicmedia.org/articles/civil-rights/protests/2026/07/09/556600/protest-houston-ice-shooting-lorenzo-salgado-araujo/"
+    },
+    {
+      "_id": "source-houston-public-media-mexico-preparing-legal-action-after-ice-fatally-shot-mexica",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Houston Public Media — Mexico preparing legal action after ICE fatally shot Mexican national in Houston",
+      "type": "media",
+      "url": "https://www.houstonpublicmedia.org/articles/news/international/2026/07/09/556601/mexico-is-preparing-legal-action-after-ice-fatally-shot-a-mexican-national-in-houston/"
+    },
+    {
+      "_id": "source-abc13-houston-family-says-dad-was-scared-before-deadly-ice-shooting",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ABC13 Houston — Family says dad was scared before deadly ICE shooting",
+      "type": "media",
+      "url": "https://abc13.com/live-updates/lorenzo-salgado-araujo-shot-killed-ice-agent-houston-authorities-confirm-live-updates/19477523/entry/19477644/"
+    },
+    {
+      "_id": "source-click2houston-family-demands-answers-after-deadly-ice-shooting",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Click2Houston — Family demands answers after deadly ICE shooting",
+      "type": "media",
+      "url": "https://www.click2houston.com/news/local/2026/07/08/family-community-leaders-demand-answers-after-ice-officer-fatally-shoots-man-in-houstons-magnolia-park-neighborhood/"
+    }
+  ]
+}

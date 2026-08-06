@@ -1,0 +1,118 @@
+{
+  "slug": "the-slaughter-pipeline-how-gulf-arms-israeli-spycraft-and-global-impunity-are-fueling-sudan-s",
+  "totalSources": 14,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-el-obeid-under-siege",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — El-Obeid Under Siege",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/7/6/el-obeid-under-siege-by-rsf-could-this-be-sudans-next-el-fasher"
+    },
+    {
+      "_id": "source-al-jazeera-us-raises-concern-on-el-obeid",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — US Raises Concern on El-Obeid",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/6/22/us-raises-concern-as-rsf-forces-encircle-sudanese-city-of-el-obeid"
+    },
+    {
+      "_id": "source-irc-rsf-offensive-pushing-north-kordofan-toward-catastrophe",
+      "description": null,
+      "isAnonymous": null,
+      "label": "IRC — RSF Offensive Pushing North Kordofan Toward Catastrophe",
+      "type": "document",
+      "url": "https://www.rescue.org/press-release/sudan-imminent-rsf-offensive-pushing-north-kordofan-toward-humanitarian-catastrophe"
+    },
+    {
+      "_id": "source-france-24-el-fasher-massacre-photos-and-videos-analysis",
+      "description": null,
+      "isAnonymous": null,
+      "label": "France 24 — El-Fasher Massacre Photos and Videos Analysis",
+      "type": "media",
+      "url": "https://www.france24.com/en/africa/20251031-sudan-photos-videos-el-fasher-massacres-rsf"
+    },
+    {
+      "_id": "source-the-guardian-rsf-massacres-left-el-fasher-a-slaughterhouse",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — RSF Massacres Left El-Fasher a 'Slaughterhouse'",
+      "type": "article",
+      "url": "https://www.theguardian.com/global-development/2025/dec/05/rsf-massacres-sudanese-city-el-fasher-slaughterhouse-satellite-images"
+    },
+    {
+      "_id": "source-refugees-international-uae-fueling-genocide-in-sudan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Refugees International — UAE Fueling Genocide in Sudan",
+      "type": "document",
+      "url": "https://www.refugeesinternational.org/statements-and-news/refugees-international-calls-for-action-new-evidence-of-united-arab-emirates-fueling-genocide-in-sudan/"
+    },
+    {
+      "_id": "source-human-rights-watch-from-bogota-to-el-fasher",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Human Rights Watch — From Bogota to El-Fasher",
+      "type": "document",
+      "url": "https://www.hrw.org/report/2026/05/25/from-bogota-to-el-fasher/the-uaes-role-in-the-deployment-of-colombian-fighters"
+    },
+    {
+      "_id": "source-noonpost-what-role-is-israel-playing-in-sudan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NoonPost — What Role Is Israel Playing in Sudan?",
+      "type": "article",
+      "url": "https://english.noonpost.com/p/what-role-is-israel-playing-in-sudans"
+    },
+    {
+      "_id": "source-responsible-statecraft-israel-a-behind-the-scenes-powerbroker-in-sudan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Responsible Statecraft — Israel, a Behind-the-Scenes Powerbroker in Sudan",
+      "type": "article",
+      "url": "https://responsiblestatecraft.org/sudan-war/"
+    },
+    {
+      "_id": "source-merip-the-abraham-accords-and-sudans-global-counterrevolution",
+      "description": null,
+      "isAnonymous": null,
+      "label": "MERIP — The Abraham Accords and Sudan's Global Counterrevolution",
+      "type": "article",
+      "url": "https://www.merip.org/2025/10/the-abraham-accords-and-sudans-global-counterrevolution/"
+    },
+    {
+      "_id": "source-the-guardian-uk-military-equipment-used-by-rsf-in-sudan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — UK Military Equipment Used by RSF in Sudan",
+      "type": "article",
+      "url": "https://www.theguardian.com/global-development/2025/oct/28/uk-military-equipment-rapid-support-forces-rsf-militia-accused-genocide-found-sudan-united-nations"
+    },
+    {
+      "_id": "source-yale-humanitarian-research-lab-satellite-evidence-of-mass-killings",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Yale Humanitarian Research Lab — Satellite Evidence of Mass Killings",
+      "type": "data",
+      "url": "https://ysph.yale.edu/news-article/un-concludes-rsf-conducted-genocide-in-el-fasher-yale-lab-provided-key-evidence/"
+    },
+    {
+      "_id": "source-bbc-uae-transit-point-for-colombian-mercenaries",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BBC — UAE Transit Point for Colombian Mercenaries",
+      "type": "article",
+      "url": "https://www.bbc.com/news/articles/c1422nrgm1jo"
+    },
+    {
+      "_id": "source-sudan-tribune-army-foils-rsf-attack-on-el-obeid",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Sudan Tribune — Army Foils RSF Attack on El-Obeid",
+      "type": "article",
+      "url": "https://sudantribune.com/article/315279"
+    }
+  ]
+}

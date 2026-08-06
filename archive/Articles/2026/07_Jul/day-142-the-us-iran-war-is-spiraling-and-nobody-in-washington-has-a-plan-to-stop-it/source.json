@@ -1,0 +1,110 @@
+{
+  "slug": "day-142-the-us-iran-war-is-spiraling-and-nobody-in-washington-has-a-plan-to-stop-it",
+  "totalSources": 13,
+  "sources": [
+    {
+      "_id": "source-npr-the-us-and-iran-blow-past-red-lines",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR — The U.S. and Iran Blow Past Red Lines",
+      "type": "article",
+      "url": "https://www.npr.org/2026/07/18/nx-s1-5898916/us-iran-escalate-strikes"
+    },
+    {
+      "_id": "source-ap-news-us-launches-more-airstrikes-after-service-member-death",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News — US Launches More Airstrikes After Service Member Death",
+      "type": "article",
+      "url": "https://apnews.com/article/iran-us-hormuz-strait-war-july-19-2026-63996576847424ab5f22887f38037ce8"
+    },
+    {
+      "_id": "source-new-york-times-another-us-service-member-is-killed-as-iran-war-expands",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — Another U.S. Service Member Is Killed as Iran War Expands",
+      "type": "article",
+      "url": "https://www.nytimes.com/live/2026/07/19/world/iran-war-strikes-trump-hormuz"
+    },
+    {
+      "_id": "source-wikipedia-2026-iran-war",
+      "description": "Comprehensive timeline and casualty data for the 2026 Iran war, including the April 8 ceasefire and June 7 escalation.",
+      "isAnonymous": null,
+      "label": "Wikipedia — 2026 Iran War",
+      "type": "other",
+      "url": "https://en.wikipedia.org/wiki/2026_Iran_war"
+    },
+    {
+      "_id": "source-wikipedia-casualties-of-the-2026-iran-war",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Casualties of the 2026 Iran War",
+      "type": "data",
+      "url": "https://en.wikipedia.org/wiki/Casualties_of_the_2026_Iran_war"
+    },
+    {
+      "_id": "source-wikipedia-economic-impact-of-the-2026-iran-war",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Economic Impact of the 2026 Iran War",
+      "type": "data",
+      "url": "https://en.wikipedia.org/wiki/Economic_impact_of_the_2026_Iran_war"
+    },
+    {
+      "_id": "source-wikipedia-2026-strait-of-hormuz-crisis",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — 2026 Strait of Hormuz Crisis",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis"
+    },
+    {
+      "_id": "source-cnbc-oil-rises-as-us-iran-hostilities-threaten-strait-of-hormuz",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNBC — Oil Rises as US-Iran Hostilities Threaten Strait of Hormuz",
+      "type": "article",
+      "url": "https://www.cnbc.com/2026/07/17/oil-price-today-brent-wti.html"
+    },
+    {
+      "_id": "source-al-jazeera-oil-hits-1-month-high",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Oil Hits 1-Month High",
+      "type": "article",
+      "url": "https://www.aljazeera.com/economy/2026/7/14/oil-hits-1-month-high-as-us-iran-fighting-clouds-strait-of-hormuz-outlook"
+    },
+    {
+      "_id": "source-wikipedia-timeline-of-the-2026-iran-war",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Timeline of the 2026 Iran War",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/Timeline_of_the_2026_Iran_war"
+    },
+    {
+      "_id": "source-cnn-us-begins-ninth-night-of-strikes",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — US Begins Ninth Night of Strikes",
+      "type": "article",
+      "url": "https://www.cnn.com/2026/07/19/world/live-news/iran-war-trump"
+    },
+    {
+      "_id": "source-globalsecurityorg-iran-war-day-142-update",
+      "description": null,
+      "isAnonymous": null,
+      "label": "GlobalSecurity.org — Iran War Day 142 Update",
+      "type": "article",
+      "url": "https://www.globalsecurity.org/military/ops/iran-war-oprep.htm"
+    },
+    {
+      "_id": "source-pbs-as-us-strikes-bridges-in-iran-it-targets-a-water-desalination-plant-in-kuwai",
+      "description": null,
+      "isAnonymous": null,
+      "label": "PBS — As US Strikes Bridges in Iran, It Targets a Water Desalination Plant in Kuwait",
+      "type": "article",
+      "url": "https://www.pbs.org/newshour/world/as-u-s-strikes-bridges-in-iran-it-targets-a-water-desalination-plant-in-kuwait"
+    }
+  ]
+}

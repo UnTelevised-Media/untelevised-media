@@ -1,0 +1,132 @@
+{
+  "_id": "world-cup-worker-strikes-ice-wages",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Workers at World Cup venues are striking over poverty wages and the threat of ICE presence — while FIFA flies national teams on the same planes used to deport Venezuelans to a Salvadoran mega-prison. The tournament's glossy image collides with the carceral state beneath it.",
+  "eventDate": "2026-07-18T00:00",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "A 30% increase in automatic tips for bartenders and servers, a $9/hour raise for non-tipped workers, and the right to walk off the job if ICE poses a threat to their safety.",
+      "question": "What did SoFi Stadium workers win?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "FIFA chartered Global Crossing Airlines to fly Portugal's team. The same aircraft (tail number N837VA) has conducted 1,580+ deportation flights for ICE and was used to deport Venezuelans to El Salvador's CECOT prison in violation of a federal judge's order.",
+      "question": "What is the connection between FIFA and ICE deportation flights?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "Los Angeles (SoFi Stadium), Philadelphia (Sheraton and Warwick hotels), and Seattle (Hilton Embassy Suites). Restaurant workers at The Walrus and the Carpenter in Seattle also struck under an independent union.",
+      "question": "Which cities have seen World Cup-related strikes?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "Yes. The Guardian reported that France's national team also flew GlobalX for at least three flights during the World Cup, using the same airline that operates as an arm of ICE's deportation program.",
+      "question": "Is France also involved in the deportation plane controversy?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": false,
+  "keywords": [
+    "World Cup labor strikes",
+    "FIFA deportation planes",
+    "ICE stadium presence",
+    "UNITE HERE strike",
+    "GlobalX airline",
+    "worker wages",
+    "carceral state"
+  ],
+  "leadParagraph": "Concessions workers at SoFi Stadium voted 96 percent to authorize a strike over wages and ICE presence. Hotel workers in Philadelphia won $30/hour contracts. Seattle hotel workers have been striking since June 18. And FIFA flew Portugal's team on the same Global Crossing Airlines plane that carried Venezuelans to CECOT mega-prison. The World Cup is built on exploited labor — and workers are demanding the world see it.",
+  "linkedPitch": null,
+  "location": "United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Stadium workers celebrating after authorizing a strike at SoFi Stadium in Los Angeles during World Cup preparations",
+    "asset": {
+      "_ref": "image-cfbff8654fd561241f3c31d19a8692115cd83aae-1024x647-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Reporting based on Truthout's investigation of World Cup labor actions, The Guardian's investigation into FIFA's use of deportation planes, Jacobin's reporting on the SoFi Stadium strike authorization, ICE Flight Monitor data from Human Rights First, and worker testimonies from UNITE HERE members.",
+  "needsReview": false,
+  "publishedAt": "2026-07-20T22:00",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "strike-wave-workers-withdrawing-labor",
+      "_ref": "strike-wave-workers-withdrawing-labor",
+      "_type": "reference"
+    },
+    {
+      "_key": "denver-jbs-strike-authorization",
+      "_ref": "denver-jbs-strike-authorization",
+      "_type": "reference"
+    },
+    {
+      "_key": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_ref": "starving-for-dignity-delaney-hall-hunger-strike",
+      "_type": "reference"
+    },
+    {
+      "_key": "may-day-2026-global-uprising-workers-over-billionaires",
+      "_ref": "may-day-2026-global-uprising-workers-over-billionaires",
+      "_type": "reference"
+    },
+    {
+      "_key": "ny-prison-strike-forgotten-by-design-2026",
+      "_ref": "ny-prison-strike-forgotten-by-design-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "bolivia-oil-field-seizure-santa-cruz-neoliberalism-2026",
+      "_ref": "bolivia-oil-field-seizure-santa-cruz-neoliberalism-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-deportation-plane-and-the-strike-line-how-world-cup-workers-are-fighting-the-carceral-state"
+  },
+  "tags": [
+    "World Cup 2026",
+    "FIFA",
+    "strikes",
+    "ICE",
+    "deportations",
+    "SoFi Stadium",
+    "Global Crossing Airlines",
+    "CECOT",
+    "labor organizing",
+    "immigrant rights"
+  ],
+  "title": "The Deportation Plane and the Strike Line: How World Cup Workers Are Fighting the Carceral State",
+  "updatedAt": "2026-07-22T05:48:41.207Z",
+  "videoLink": ""
+}

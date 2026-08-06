@@ -1,0 +1,54 @@
+{
+  "slug": "when-the-president-demands-obedience-trumps-broadcast-license-threats-and-the-war-on-a-free-press",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-politico-trump-calls-for-revocation-of-abc-nbc-licenses-over-speech-snub",
+      "description": null,
+      "isAnonymous": null,
+      "label": "POLITICO — Trump calls for revocation of ABC, NBC licenses over speech snub",
+      "type": "article",
+      "url": "https://www.politico.com/news/2026/07/16/trump-calls-for-revocation-of-abc-nbc-licenses-over-speech-snub-01002580"
+    },
+    {
+      "_id": "source-forbes-trump-threatens-abc-and-nbc-broadcast-licenses-for-snubbing-his-speech",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Forbes — Trump Threatens ABC And NBC Broadcast Licenses For Snubbing His Speech",
+      "type": "article",
+      "url": "https://www.forbes.com/sites/siladityaray/2026/07/17/trump-threatens-to-revoke-abc-and-nbc-broadcast-licenses-for-not-carrying-his-speech-live/"
+    },
+    {
+      "_id": "source-washington-post-trump-says-abc-nbc-licenses-should-be-revoked",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Washington Post — Trump says ABC, NBC licenses should be revoked",
+      "type": "article",
+      "url": "https://www.washingtonpost.com/business/2026/07/16/trump-says-abc-nbc-licenses-should-be-revoked-over-refusal-air-speech-election-integrity/"
+    },
+    {
+      "_id": "source-time-why-trump-is-calling-for-these-major-tv-networks-to-lose-their-licenses",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Time — Why Trump Is Calling For These Major TV Networks to Lose Their Licenses",
+      "type": "article",
+      "url": "https://time.com/article/2026/07/17/trump-demands-major-tv-networks-lose-licenses-speech-broadcast-row/"
+    },
+    {
+      "_id": "source-politico-trumps-threats-to-revoke-tv-licenses-get-serious",
+      "description": null,
+      "isAnonymous": null,
+      "label": "POLITICO — Trump's threats to revoke TV licenses get serious",
+      "type": "article",
+      "url": "https://www.politico.com/news/2026/07/17/trump-carr-fcc-broadcast-licenses-01003605"
+    },
+    {
+      "_id": "source-los-angeles-times-fcc-will-vote-on-lifting-tv-ownership-cap-next-month",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Los Angeles Times — FCC will vote on lifting TV ownership cap next month",
+      "type": "article",
+      "url": "https://www.latimes.com/entertainment-arts/business/story/2026-07-15/fcc-will-vote-on-lifting-tv-ownership-cap-next-month"
+    }
+  ]
+}

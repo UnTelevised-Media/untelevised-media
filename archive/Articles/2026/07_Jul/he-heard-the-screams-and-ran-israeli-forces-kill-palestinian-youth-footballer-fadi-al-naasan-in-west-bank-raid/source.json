@@ -1,0 +1,86 @@
+{
+  "slug": "he-heard-the-screams-and-ran-israeli-forces-kill-palestinian-youth-footballer-fadi-al-naasan-in-west-bank-raid",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-palestinian-teenage-footballer-dies-a-week-after-israeli-settler-atta",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Palestinian teenage footballer dies a week after Israeli settler attack",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/7/18/palestinian-teenage-footballer-dies-a-week-after-israeli-settler-attack"
+    },
+    {
+      "_id": "source-times-of-israel-palestinian-teen-soccer-player-succumbs-to-wounds",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Times of Israel — Palestinian teen soccer player succumbs to wounds",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/palestinian-teen-soccer-player-succumbs-to-wounds-sustained-in-clash-with-settlers/"
+    },
+    {
+      "_id": "source-the-guardian-idf-accused-of-working-with-settlers-after-latest-deadly-west-bank-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — IDF accused of working with settlers after latest deadly West Bank raid",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/jul/20/israeli-settlers-partnership-army-palestinians-bury-dead-west-bank"
+    },
+    {
+      "_id": "source-wafa-israeli-colonists-attack-village-northeast-of-ramallah",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WAFA — Israeli colonists attack village northeast of Ramallah",
+      "type": "article",
+      "url": "https://english.wafa.ps/Pages/Details/172551"
+    },
+    {
+      "_id": "source-imemc-israeli-forces-injure-4-palestinians-near-ramallah",
+      "description": null,
+      "isAnonymous": null,
+      "label": "IMEMC — Israeli Forces Injure 4 Palestinians Near Ramallah",
+      "type": "article",
+      "url": "https://imemc.org/article/israeli-forces-injure-4-palestinians-near-ramallah/"
+    },
+    {
+      "_id": "source-haaretz-settler-attacks-are-now-routine-at-this-palestinian-village",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Haaretz — Settler Attacks Are Now Routine at This Palestinian Village",
+      "type": "article",
+      "url": "https://www.haaretz.com/west-bank/2026-07-22/ty-article-magazine/.premium/settler-raids-are-now-routine-at-this-palestinian-village-another-teen-is-dead/0000019f-79c0-de20-addf-7bca17010000"
+    },
+    {
+      "_id": "source-human-rights-watch-west-bank-surge-in-settler-violence-threatens-mass-atrocities",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Human Rights Watch — West Bank: Surge in Settler Violence Threatens Mass Atrocities",
+      "type": "document",
+      "url": "https://www.hrw.org/news/2026/07/24/west-bank-surge-in-settler-violence-threatens-mass-atrocities"
+    },
+    {
+      "_id": "source-un-news-israeli-attacks-on-gaza-intensify-amid-surge-of-west-bank-settler-violen",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN News — Israeli attacks on Gaza intensify amid surge of West Bank settler violence",
+      "type": "document",
+      "url": "https://news.un.org/en/story/2026/07/1167991"
+    },
+    {
+      "_id": "source-the-intercept-on-a-west-bank-eviction-tour-israeli-settlers-advertise-no-arabs-h",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Intercept — On a West Bank Eviction Tour, Israeli Settlers Advertise 'No Arabs Here'",
+      "type": "article",
+      "url": "https://theintercept.com/2026/07/23/west-bank-israeli-settlers-palestine/"
+    },
+    {
+      "_id": "source-afpjaafar-ashtiyeh-funeral-photos-of-fadi-al-naasan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AFP/Jaafar Ashtiyeh — Funeral photos of Fadi al-Naasan",
+      "type": "media",
+      "url": "https://thepeninsulaqatar.com/article/18/07/2026/palestinian-teen-footballer-dies-after-shot-during-settler-attack-officials-relatives"
+    }
+  ]
+}

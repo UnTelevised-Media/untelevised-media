@@ -1,0 +1,70 @@
+{
+  "slug": "ukraine-s-cardboard-maidan-how-zelensky-fired-the-wrong-man-and-the-streets-said-no",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-wikipedia-protests-against-the-dismissal-of-mykhailo-fedorov",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia: Protests Against the Dismissal of Mykhailo Fedorov",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/Dismissal_of_Mykhailo_Fedorov"
+    },
+    {
+      "_id": "source-guardian-zelenskyy-fires-ukraines-army-chief-and-offers-fedorov-prominent-positi",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Guardian: Zelenskyy Fires Ukraine's Army Chief and Offers Fedorov 'Prominent Position'",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/jul/21/zelenskyy-replaces-military-leader-and-brings-back-defence-minister-he-sacked"
+    },
+    {
+      "_id": "source-foreign-policy-ukraines-cardboard-maidan-shows-that-the-people-still-matter",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Foreign Policy: Ukraine's Cardboard Maidan Shows That the People Still Matter",
+      "type": "article",
+      "url": "https://foreignpolicy.com/2026/07/24/protest-fedorov-zelensky-firing-ukraine/"
+    },
+    {
+      "_id": "source-christian-science-monitor-why-ukrainians-are-up-in-arms-over-firing-of-defense-m",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Christian Science Monitor: Why Ukrainians Are Up in Arms Over Firing of Defense Minister",
+      "type": "article",
+      "url": "https://www.csmonitor.com/World/Europe/2026/0720/ukraine-drone-war-defense-minister-fedorov-general-syrskyi"
+    },
+    {
+      "_id": "source-meduza-protests-over-dismissal-of-ukraines-defense-minister-continue-over-weeken",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Meduza: Protests Over Dismissal of Ukraine's Defense Minister Continue Over Weekend",
+      "type": "article",
+      "url": "https://meduza.io/en/news/2026/07/20/protests-over-ukraine-s-new-defense-minister-continue-over-weekend"
+    },
+    {
+      "_id": "source-kyiv-post-protests-intensify-after-fedorov-rejects-return-to-government-on-zelen",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Kyiv Post: Protests Intensify After Fedorov Rejects Return to Government on Zelensky's Terms",
+      "type": "article",
+      "url": "https://www.kyivpost.com/post/81048"
+    },
+    {
+      "_id": "source-cbs-news-zelenskyy-replaces-ukraines-top-general-after-days-of-protests",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS News: Zelenskyy Replaces Ukraine's Top General After Days of Protests",
+      "type": "article",
+      "url": "https://www.cbsnews.com/news/ukraine-zelenskyy-fires-general-after-protests/"
+    },
+    {
+      "_id": "source-euromaidan-press-cardboard-protests-against-zelenskys-firing-of-fedorov-erupt-ac",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Euromaidan Press: Cardboard Protests Against Zelensky's Firing of Fedorov Erupt Across Ukraine",
+      "type": "article",
+      "url": "https://euromaidanpress.com/2026/07/16/cardboard-protests-against-zelenskyys-firing-of-fedorov-erupt-across-ukraine/"
+    }
+  ]
+}

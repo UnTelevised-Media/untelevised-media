@@ -1,0 +1,54 @@
+{
+  "slug": "israel-kills-11-including-police-chief-in-jabaliya-strike-and-a-defense-minister-brags-about-the",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-middle-east-monitor-israel-kills-11-palestinians-including-police-chief",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Monitor — Israel Kills 11 Palestinians Including Police Chief",
+      "type": "media",
+      "url": "https://www.middleeastmonitor.com/20260714-israel-kills-11-palestinians-including-police-chief-in-gaza/"
+    },
+    {
+      "_id": "source-middle-east-monitor-katz-boasts-of-gazas-destruction-and-announces-military-outp",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Monitor — Katz Boasts of Gaza's Destruction and Announces Military Outposts",
+      "type": "media",
+      "url": "https://www.middleeastmonitor.com/20260714-katz-boasts-of-gazas-destruction-says-it-is-the-result-of-a-well-thought-out-policy-and-announces-plan-for-three-military-outposts/"
+    },
+    {
+      "_id": "source-npr-over-1000-people-killed-during-gaza-ceasefire",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR — Over 1,000 People Killed During Gaza Ceasefire",
+      "type": "media",
+      "url": "https://www.npr.org/2026/06/18/g-s1-128734/over-1-000-people-killed-during-gaza-ceasefire-palestinian-authorities-say"
+    },
+    {
+      "_id": "source-al-jazeera-death-toll-in-gaza-since-ceasefire-passes-1000",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Death Toll in Gaza Since Ceasefire Passes 1,000",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/6/17/death-toll-in-gaza-since-ceasefire-with-israel-goes-past-1000"
+    },
+    {
+      "_id": "source-pbs-newshour-israeli-strikes-kill-at-least-a-dozen-in-gaza-including-police-offi",
+      "description": null,
+      "isAnonymous": null,
+      "label": "PBS NewsHour — Israeli Strikes Kill at Least a Dozen in Gaza Including Police Officers",
+      "type": "media",
+      "url": "https://www.pbs.org/newshour/world/israels-latest-strikes-kill-at-least-a-dozen-people-in-gaza-including-police-officers"
+    },
+    {
+      "_id": "source-new-york-times-israel-strikes-police-post-killing-7-gaza-officials-say",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — Israel Strikes Police Post Killing 7, Gaza Officials Say",
+      "type": "media",
+      "url": "https://www.nytimes.com/2026/07/14/world/middleeast/israel-strikes-gaza-police-force-hamas.html"
+    }
+  ]
+}

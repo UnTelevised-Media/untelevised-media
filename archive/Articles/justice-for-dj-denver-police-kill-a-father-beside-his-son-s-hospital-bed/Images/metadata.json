@@ -1,0 +1,34 @@
+{
+  "slug": "justice-for-dj-denver-police-kill-a-father-beside-his-son-s-hospital-bed",
+  "totalImages": 3,
+  "downloadedAt": "2026-08-05T20:53:39.520Z",
+  "mainImage": {
+    "alt": "Police investigation at a shooting scene on a Denver street with evidence markers and emergency vehicles",
+    "caption": "Police respond to a shooting on a Denver street. Duane Manzanares was killed by Denver police near East Colfax Avenue and Yosemite Street on June 13, 2021.",
+    "credit": "CNN",
+    "asset": "image-202044d90dc721aed1aed0505a2ea852fa66f9d2-1480x833-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Police investigation at a shooting scene on a Denver street with evidence markers and emergency vehicles",
+      "caption": "Police respond to a shooting on a Denver street. Duane Manzanares was killed by Denver police near East Colfax Avenue and Yosemite Street on June 13, 2021.",
+      "credit": "CNN",
+      "asset": "image-69125466b4dc9a396275742118d104087833c18b-2048x1440-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Family and friends of DJ march demanding justice for his murder by Denver Police.",
+      "caption": "Denver Police display body-worn cameras during a press conference. Body camera footage from the Manzanares shooting was withheld from his family for weeks.",
+      "credit": "The Denver Post",
+      "asset": "image-34f966df26c6c71875346d1560bcfc08639e30d1-1440x811-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    }
+  ]
+}

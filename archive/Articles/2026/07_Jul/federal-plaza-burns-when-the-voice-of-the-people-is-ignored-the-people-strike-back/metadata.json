@@ -1,0 +1,124 @@
+{
+  "_id": "federal-plaza-ice-incendiary-device",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-politics",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-civil-unrest",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A man described as a known anti-ICE activist set off an incendiary device outside the federal building housing ICE offices and immigration courts in Manhattan. The act is the latest flashpoint in escalating tensions over the Trump administration's immigration enforcement apparatus.",
+  "eventDate": "2026-07-20T12:30:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "A man described as a known anti-ICE activist set off fireworks and a flammable accelerant outside the Jacob K. Javits Federal Building at 26 Federal Plaza in Lower Manhattan. The device produced heavy black smoke. Two people suffered minor injuries.",
+      "question": "What happened at 26 Federal Plaza?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "A man identified as a known anti-ICE activist was taken into custody at the scene. The FBI's Joint Terrorism Task Force is leading the investigation and has classified the incident as an 'anti-government attack on a federal facility.'",
+      "question": "Who is the suspect?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "26 Federal Plaza, also known as the Jacob K. Javits Federal Building, houses U.S. Immigration and Customs Enforcement (ICE) field offices, federal immigration courts, and other federal agencies in Lower Manhattan.",
+      "question": "What building was targeted?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Two people sustained minor injuries in the incident. No fatalities have been reported.",
+      "question": "How many people were injured?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "The FBI's Joint Terrorism Task Force is leading the investigation. The NYPD and federal protective services are also involved. The incident has been classified as an 'anti-government attack on a federal facility.'",
+      "question": "What agencies are investigating?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "ICE federal plaza attack",
+    "incendiary device Manhattan",
+    "anti-ICE protest",
+    "immigration enforcement resistance",
+    "26 Federal Plaza"
+  ],
+  "leadParagraph": "A man with a history of anti-ICE activism set off fireworks and a flammable accelerant outside 26 Federal Plaza in Lower Manhattan, the building that houses U.S. Immigration and Customs Enforcement field offices and federal immigration courts. Two people suffered minor injuries. The FBI's Joint Terrorism Task Force is investigating what officials called an \"anti-government attack on a federal facility.\" The incident is the latest eruption of rage against an immigration enforcement system that has escalated to mass raids, detention camps, and family separations with little meaningful political opposition.",
+  "linkedPitch": null,
+  "location": "26 Federal Plaza, Lower Manhattan, New York City",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Black smoke rises from an incendiary device detonated outside 26 Federal Plaza federal building in Lower Manhattan",
+    "asset": {
+      "_ref": "image-d6792d2c83fc519defffb6cf1c14a304abcefe27-3000x2000-webp",
+      "_type": "reference"
+    },
+    "caption": "Black smoke rises from an incendiary device detonated outside 26 Federal Plaza in Lower Manhattan, home to ICE offices and immigration courts",
+    "credit": "AP via Newsweek"
+  },
+  "methodology": "Reported using live law enforcement statements, FBI confirmation, local news footage, and wire service coverage. Sources cross-referenced across ABC News, CNBC/MS NOW, Forbes, CBS, Fox News, and the New York Times.",
+  "needsReview": null,
+  "publishedAt": "2026-07-20T16:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seoObject",
+    "metaDescription": "A known anti-ICE activist set off fireworks outside 26 Federal Plaza, home to ICE offices and immigration courts. Two injured. FBI investigating.",
+    "metaTitle": "Federal Plaza Burns: Anti-ICE Activist Ignites Device at NYC Federal Building"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "federal-plaza-burns-when-the-voice-of-the-people-is-ignored-the-people-strike-back"
+  },
+  "tags": [
+    "ICE",
+    "immigration enforcement",
+    "resistance",
+    "federal plaza",
+    "New York City",
+    "direct action",
+    "Trump administration",
+    "detention",
+    "civil disobedience"
+  ],
+  "title": "Federal Plaza Burns: When the Voice of the People Is Ignored, the People Strike Back",
+  "updatedAt": null,
+  "videoLink": null
+}

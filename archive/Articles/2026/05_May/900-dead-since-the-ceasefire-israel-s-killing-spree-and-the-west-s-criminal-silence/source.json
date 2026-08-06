@@ -1,0 +1,198 @@
+{
+  "slug": "900-dead-since-the-ceasefire-israel-s-killing-spree-and-the-west-s-criminal-silence",
+  "totalSources": 24,
+  "sources": [
+    {
+      "_id": "src-reuters-netanyahu-70-gaza-may28",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters - Netanyahu directs Israeli forces to expand Gaza control to 70 percent",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/netanyahu-directs-israeli-forces-expand-gaza-control-70-percent-2026-05-28/"
+    },
+    {
+      "_id": "src-guardian-netanyahu-seize-70-gaza-may28",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - Netanyahu orders Israeli army to seize 70% of Gaza Strip, violating ceasefire deal",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/may/28/netanyahu-orders-israeli-army-seize-70-gaza-strip-violating-ceasefire-deal"
+    },
+    {
+      "_id": "src-guardian-katz-expulsion-may28",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - Israeli minister confirms goal of large-scale expulsion of Palestinians, 28 May 2026",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/may/28/israels-defence-minister-says-large-scale-palestinian-migration-from-gaza-will-go-ahead"
+    },
+    {
+      "_id": "src-newarab-900-killed-may23",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The New Arab - Israel kills almost 900 Palestinians during Gaza ceasefire",
+      "type": "article",
+      "url": "https://www.newarab.com/news/israel-kills-almost-900-palestinians-during-gaza-ceasefire"
+    },
+    {
+      "_id": "src-un-press-sc16364-may21",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN Press - Ceasefire, Far from Perfect, Remains Basis for Gaza Recovery",
+      "type": "statement",
+      "url": "https://press.un.org/en/2026/sc16364.doc.htm"
+    },
+    {
+      "_id": "src-guardian-board-of-peace-may23",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - Board of Peace focus on Hamas risks return to war in Gaza",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/may/23/board-of-peace-focus-on-hamas-risks-return-to-war-in-gaza-critics-say"
+    },
+    {
+      "_id": "src-reuters-palestinians-mourn-may27",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters - Palestinians mourn slain Hamas militant chief as Israel escalates Gaza attacks",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/israel-says-it-killed-hamas-new-armed-wing-chief-gaza-2026-05-27/"
+    },
+    {
+      "_id": "src-un-news-palestine-killings-may",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN News - Palestine: Killings, destruction and settler encroachment continues",
+      "type": "article",
+      "url": "https://news.un.org/en/story/2026/05/1167538"
+    },
+    {
+      "_id": "src-utm-menna-allah",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - Israeli Airstrike Kills 6-Year-Old Menna Allah Abu Labda",
+      "type": "article",
+      "url": "https://untelevised.media/israeli-airstrike-kills-6-year-old-menna-allah-abu-labda-as-ceasefire-gaza-continues-to-bleed"
+    },
+    {
+      "_id": "src-utm-streets-swallow-us",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - The Streets That Swallow Us: A Day in the Annihilation of Gaza",
+      "type": "article",
+      "url": "https://untelevised.media/the-streets-that-swallow-us-a-day-in-the-annihilation-of-gaza"
+    },
+    {
+      "_id": "src-utm-nakba-day-bombs",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - Thirteen Bombs. Eight Dead - On Nakba Day",
+      "type": "article",
+      "url": "https://untelevised.media/thirteen-bombs-eight-dead-nakba-day-2026"
+    },
+    {
+      "_id": "src-utm-death-penalty",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - Israel Legalizes Death Penalty for Palestinians as Torture Regime Expands",
+      "type": "article",
+      "url": "https://untelevised.media/israel-death-penalty-palestinians-torture-regime"
+    },
+    {
+      "_id": "src-utm-flotilla-war-crime",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - Israel War Crime on the High Seas",
+      "type": "article",
+      "url": "https://untelevised.media/israel-s-war-crime-on-the-high-seas-and-the-global-resistance-it-failed-to-break"
+    },
+    {
+      "_id": "src-utm-thiago-avila",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - He Was Forcibly Absent: Thiago Avila Mother Passes",
+      "type": "article",
+      "url": "https://untelevised.media/he-was-forcibly-absent-thiago-avilas-mother-passes-as-israel-extends-detention-in"
+    },
+    {
+      "_id": "src-utm-flotilla-bilbao",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - Kidnapped by Israel, Beaten by Spain",
+      "type": "article",
+      "url": "https://untelevised.media/flotilla-bilbao-spain-police-brutality"
+    },
+    {
+      "_id": "src-utm-internationalist-piracy",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - Internationalist Piracy: Where States Failed",
+      "type": "article",
+      "url": "https://untelevised.media/internationalist-piracy-where-states-failed-ordinary-people-enforced-the-law"
+    },
+    {
+      "_id": "src-utm-west-bank-burning",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - The West Bank Is Burning: Organized Settler Violence Escalates",
+      "type": "article",
+      "url": "https://untelevised.media/the-west-bank-is-burning-organized-settler-violence-escalates-with-state-backing"
+    },
+    {
+      "_id": "src-utm-child-school",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - They Killed a Child in a School: Israeli Settlers Terror Attack",
+      "type": "article",
+      "url": "https://untelevised.media/they-killed-a-child-in-a-school-israeli-settlers-terror-attack-on-west-bank-students"
+    },
+    {
+      "_id": "src-utm-jalud-cables",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - Settlers Burn Electricity Cables in Jalud",
+      "type": "article",
+      "url": "https://untelevised.media/settlers-burn-electricity-cables-jalud-west-bank-terror-campaign"
+    },
+    {
+      "_id": "src-utm-land-day-silwan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - On Land Day 50th Anniversary, Israel Demolishes Palestinian Homes",
+      "type": "article",
+      "url": "https://untelevised.media/on-land-day-s-50th-anniversary-israel-demolishes-palestinian-homes-in-silwan-while-settlers-celebrate-land-day"
+    },
+    {
+      "_id": "src-utm-smotrich-khan-al-ahmar",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - Blatant Ethnic Cleansing: ICC Warrant for Smotrich Triggered Khan al-Ahmar",
+      "type": "article",
+      "url": "https://untelevised.media/blatant-ethnic-cleansing-how-an-icc-warrant-for-smotrich-triggered-the-erasure-of-khan-al-ahmar"
+    },
+    {
+      "_id": "src-utm-photoshop-journalist",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - Israel Admits Photoshopping Evidence to Justify Killing Journalist",
+      "type": "article",
+      "url": "https://untelevised.media/israel-admits-photoshopping-evidence-to-justify-killing-journalist"
+    },
+    {
+      "_id": "src-utm-siege-iran-cover",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - While the World Watches Iran, Israel Tightens the Siege",
+      "type": "article",
+      "url": "https://untelevised.media/israel-siege-gaza-west-bank-iran-war-cover-2026"
+    },
+    {
+      "_id": "src-utm-cats-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UnTelevised Media - In Northern Gaza, One Man Refuses to Let the Cats Starve",
+      "type": "article",
+      "url": "https://untelevised.media/in-northern-gaza-one-man-refuses-to-let-the-cats-starve"
+    }
+  ]
+}

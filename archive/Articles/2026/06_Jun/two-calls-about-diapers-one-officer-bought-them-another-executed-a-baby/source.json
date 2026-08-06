@@ -1,0 +1,46 @@
+{
+  "slug": "two-calls-about-diapers-one-officer-bought-them-another-executed-a-baby",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "src-diapers-499f2e74",
+      "description": "Report on Officer Bennet Johns of Laurel Police Department buying diapers for a shoplifting suspect in 2017.",
+      "isAnonymous": null,
+      "label": "WBAL-TV - Officer Buys Diapers for Shoplifting Suspect",
+      "type": "article",
+      "url": "https://www.wbaltv.com/article/officer-buys-diapers-for-shoplifting-suspect-accused-of-stealing-them/10397334"
+    },
+    {
+      "_id": "src-diapers-bc1a5763",
+      "description": "Original UTM coverage of the Senatobia police killing of 1-year-old Kohen Wiley.",
+      "isAnonymous": null,
+      "label": "UnTelevised Media - A Baby Executed Over Diapers",
+      "type": "article",
+      "url": "https://untelevised.media/articles/a-baby-executed-over-diapers-senatobia-police-kill-1-year-old-kohen-wiley-at-walmart/"
+    },
+    {
+      "_id": "src-diapers-89966e5e",
+      "description": "AP coverage of the Senatobia Walmart shooting that killed Kohen Wiley.",
+      "isAnonymous": null,
+      "label": "AP News - 1-year-old child killed after Mississippi police shot at car",
+      "type": "article",
+      "url": "https://apnews.com/article/mississippi-child-shooting-police-8d5906c36cbd3d3e52fb226c1ee32f46"
+    },
+    {
+      "_id": "src-diapers-683a9d08",
+      "description": "Mississippi Free Press coverage of the killing of Kohen Wiley.",
+      "isAnonymous": null,
+      "label": "Mississippi Free Press - Mississippi Police Officer Shoots and Kills 1-Year-Old Child",
+      "type": "article",
+      "url": "https://www.mississippifreepress.org/mississippi-police-officer-shoots-and-kills-1-year-old-child-in-response-to-senatobia-shoplifting-call/"
+    },
+    {
+      "_id": "src-diapers-2c3e84ec",
+      "description": "Local WREG coverage including witness accounts from the Senatobia Walmart shooting.",
+      "isAnonymous": null,
+      "label": "WREG News - Witness saw women carrying diapers at fatal MS Walmart shooting",
+      "type": "article",
+      "url": "https://wreg.com/news/local/ms-town-looks-for-answers-after-walmart-shooting-that-killed-1-year-old/"
+    }
+  ]
+}

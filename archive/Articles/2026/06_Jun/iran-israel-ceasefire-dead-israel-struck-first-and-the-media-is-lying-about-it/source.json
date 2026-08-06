@@ -1,0 +1,62 @@
+{
+  "slug": "iran-israel-ceasefire-dead-israel-struck-first-and-the-media-is-lying-about-it",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-ap-iran-israel-june7-2026",
+      "description": "Israel struck Beirut southern suburbs without warning on June 7. Iran responded with ballistic missile attacks. Israel then struck western and central Iran. AP documented the escalation chain with photo evidence.",
+      "isAnonymous": null,
+      "label": "AP News",
+      "type": "article",
+      "url": "https://apnews.com/article/iran-us-ceasefire-hezbollah-israel-28d80744e192ae0d5cce73a5a08af906"
+    },
+    {
+      "_id": "source-usatoday-iran-june7-2026",
+      "description": "Iran missile attack came after Israel struck the outskirts of Beirut on June 7 — the first such exchange since the April 8 ceasefire.",
+      "isAnonymous": null,
+      "label": "USA Today / AP",
+      "type": "article",
+      "url": "https://www.usatoday.com/story/news/world/2026/06/07/israel-iran-fired-missiles-attack-united-states-trump-ceasefire-war/90449121007/"
+    },
+    {
+      "_id": "source-toi-liveblog-june8-2026",
+      "description": "Live coverage of June 8 events: Netanyahu-Trump communications, far-right pressure to defy Trump, Smotrich advocating Beirut model strikes.",
+      "isAnonymous": null,
+      "label": "Times of Israel",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/liveblog-june-8-2026/"
+    },
+    {
+      "_id": "source-twz-iran-missiles-june7-2026",
+      "description": "Technical analysis of Iranian ballistic missile attacks on Israel on June 7.",
+      "isAnonymous": null,
+      "label": "The War Zone",
+      "type": "article",
+      "url": "https://www.twz.com/news-features/iran-launches-ballistic-missile-attacks-on-israel"
+    },
+    {
+      "_id": "source-wikipedia-2026-iran-war",
+      "description": "Comprehensive timeline and casualty data for the 2026 Iran war, including the April 8 ceasefire and June 7 escalation.",
+      "isAnonymous": null,
+      "label": "Wikipedia — 2026 Iran War",
+      "type": "other",
+      "url": "https://en.wikipedia.org/wiki/2026_Iran_war"
+    },
+    {
+      "_id": "source-iranfocus-june2026",
+      "description": "IRGC statement claiming Israel used air-launched ballistic missiles to strike targets inside Iran during the June 7-8 exchange.",
+      "isAnonymous": null,
+      "label": "Iran Focus",
+      "type": "article",
+      "url": "https://iranfocus.com/iran/58052-iran-regime-and-israel-resume-intense-reciprocal-attacks/"
+    },
+    {
+      "_id": "source-uk-parliament-iran-israel-2026",
+      "description": "UK parliamentary research briefing on the 2026 US-Israel/Iran conflict background and UK response.",
+      "isAnonymous": null,
+      "label": "UK House of Commons Library",
+      "type": "document",
+      "url": "https://commonslibrary.parliament.uk/research-briefings/cbp-10521/"
+    }
+  ]
+}

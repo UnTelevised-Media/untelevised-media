@@ -1,0 +1,46 @@
+{
+  "slug": "deadly-terror-attack-on-mosque-in-quebec-leaves-5-dead-many-more-injured-2-out-of-3-gunmen",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "ar2017-src-quebec-1",
+      "description": "Time Magazine news coverage of the Quebec City mosque attack, January 29, 2017.",
+      "isAnonymous": false,
+      "label": "Time Magazine - Quebec City mosque shooting coverage",
+      "type": "article",
+      "url": "http://time.com/4653003/canada-quebec-mosque-shooting/"
+    },
+    {
+      "_id": "ar2017-src-quebec-2",
+      "description": "HuffPost Canada reporting on the Quebec City mosque shooting.",
+      "isAnonymous": false,
+      "label": "HuffPost Canada - Quebec City mosque shooting",
+      "type": "article",
+      "url": "http://www.huffingtonpost.ca/2017/01/29/shooting-quebec-city-mosque_n_14485332.html"
+    },
+    {
+      "_id": "ar2017-src-quebec-3",
+      "description": "AFP Twitter feed providing live updates on the Quebec City mosque attack.",
+      "isAnonymous": false,
+      "label": "AFP (Agence France-Presse) - Twitter live updates",
+      "type": "media",
+      "url": "https://twitter.com/AFP"
+    },
+    {
+      "_id": "d8ad37bb-7483-4701-b3ca-0ad96013bc8f",
+      "description": null,
+      "isAnonymous": false,
+      "label": "CBC Canada ",
+      "type": "article",
+      "url": "https://www.cbc.ca/news/canada/montreal/quebec-city-mosque-gun-shots-1.3957686"
+    },
+    {
+      "_id": "74afd6f5-7723-4265-9c8c-72169a68ae38",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Heavy.com Photoset [deleted]",
+      "type": "media",
+      "url": "http://heavy.com/news/2017/01/quebec-city-canada-mosque-shooting-victims-shooter-gunman-photos-video-injuries-deaths/"
+    }
+  ]
+}

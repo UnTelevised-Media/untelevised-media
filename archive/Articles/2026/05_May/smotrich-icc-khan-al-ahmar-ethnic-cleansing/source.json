@@ -1,0 +1,70 @@
+{
+  "slug": "smotrich-icc-khan-al-ahmar-ethnic-cleansing",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-reuters-smotrich-icc-2026-05-19",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters - Israeli far-right minister Smotrich says ICC prosecutor seeks his arrest",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/israeli-far-right-minister-smotrich-says-icc-requested-warrant-his-arrest-2026-05-19/"
+    },
+    {
+      "_id": "source-guardian-smotrich-icc-2026-05-19",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian - Far-right Israeli minister Bezalel Smotrich says ICC is seeking his arrest",
+      "type": "article",
+      "url": "https://www.theguardian.com/law/2026/may/19/far-right-israeli-minister-bezalel-smotrich-icc-seeking-arrest"
+    },
+    {
+      "_id": "source-timesofisrael-smotrich-2026-05-19",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Times of Israel - Smotrich says ICC prosecutor has requested warrant, orders demolition",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/smotrich-says-icc-has-issued-warrant-for-his-arrest-promptly-orders-demolition-of-west-bank-hamlet/"
+    },
+    {
+      "_id": "source-newarab-khan-al-ahmar-2026-05-21",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The New Arab - We are all afraid: Palestinians in Khan al-Ahmar fear expulsion",
+      "type": "article",
+      "url": "https://www.newarab.com/news/were-all-afraid-palestinians-khan-al-ahmar-fear-expulsion"
+    },
+    {
+      "_id": "source-ibtimes-smotrich-2026-05-19",
+      "description": null,
+      "isAnonymous": null,
+      "label": "IBTimes UK - Israeli Finance Minister responds to ICC arrest warrant by vowing war",
+      "type": "article",
+      "url": "https://www.ibtimes.co.uk/israeli-minister-village-demolition-icc-warrant-1797929"
+    },
+    {
+      "_id": "source-wafa-khan-al-ahmar-2026-05-19",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WAFA - Palestinian human rights organization warns of declaration of war over Khan al-Ahmar",
+      "type": "article",
+      "url": "https://english.wafa.ps/Pages/Details/170690"
+    },
+    {
+      "_id": "source-commondreams-smotrich-2026-05-20",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Common Dreams - Israel Smotrich responds to ICC warrant by announcing more war crimes",
+      "type": "article",
+      "url": "https://www.commondreams.org/news/smotrich-icc-warrant"
+    },
+    {
+      "_id": "source-national-khan-al-ahmar-2026-05-20",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The National - Residents of West Bank village file legal objection",
+      "type": "article",
+      "url": "https://www.thenationalnews.com/news/mena/2026/05/20/residents-of-west-bank-village-file-legal-objection-after-israeli-minister-orders-them-out/"
+    }
+  ]
+}

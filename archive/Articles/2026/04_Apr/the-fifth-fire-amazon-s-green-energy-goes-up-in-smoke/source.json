@@ -1,0 +1,30 @@
+{
+  "slug": "the-fifth-fire-amazon-s-green-energy-goes-up-in-smoke",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "source-dispatch-amazon-fire-2026",
+      "description": "Ohio outlet reporting on the Amazon warehouse fire in West Jefferson, with details from Fire Chief Dan Gatley about 75-100 solar panels catching fire, the evacuation of thousands of employees, and minimal damage to the facility.",
+      "isAnonymous": null,
+      "label": "The Columbus Dispatch",
+      "type": "article",
+      "url": "https://www.dispatch.com/story/news/local/2026/04/08/amazon-warehouse-west-jefferson-ohio-fire/89518809007/"
+    },
+    {
+      "_id": "source-fireengineering-amazon-fire-2026",
+      "description": "Fire industry publication covering the Amazon warehouse fire, reporting on the large-scale evacuation, approximately 75-100 solar panels involved, mutual aid response from multiple departments, and water damage from sprinkler systems exceeding fire damage.",
+      "isAnonymous": null,
+      "label": "Fire Engineering",
+      "type": "article",
+      "url": "https://www.fireengineering.com/firefighting/oh-firefighters-tackle-fire-at-amazon-warehouse-rooftop-solar-panels-suspected-cause/"
+    },
+    {
+      "_id": "source-10tv-amazon-fire-2026",
+      "description": "Columbus television station covering the Amazon facility fire in West Jefferson, with details on the 12:10 PM response, evacuation by police and sheriff's office, confirmed containment, and road closures affecting Enterprise Parkway and truck access.",
+      "isAnonymous": null,
+      "label": "10TV (Columbus)",
+      "type": "article",
+      "url": "https://www.10tv.com/article/news/local/amazon-fire-west-jefferson/530-277bbf96-6cf9-4ed9-be88-72416f683a4c"
+    }
+  ]
+}

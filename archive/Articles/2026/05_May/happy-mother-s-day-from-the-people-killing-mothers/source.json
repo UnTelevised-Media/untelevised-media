@@ -1,0 +1,110 @@
+{
+  "slug": "happy-mother-s-day-from-the-people-killing-mothers",
+  "totalSources": 13,
+  "sources": [
+    {
+      "_id": "source-nyt-venezuela-grandmother-2026-01-06",
+      "description": "January 6, 2026 - Report on the funeral of Rosa González, an 80-year-old grandmother who died from injuries after U.S. airstrikes hit a three-story apartment building in Caracas during Operation Southern Spear. The piece documents civilian casualties in the raid to capture Venezuelan President Nicolás Maduro.",
+      "isAnonymous": false,
+      "label": "The New York Times - Funeral Held for Rosa González, 80, Killed in U.S. Strikes on Venezuela",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/01/06/world/americas/venezuela-airstrike-civilian-deaths.html"
+    },
+    {
+      "_id": "source-pbs-renee-good-2026-01-08",
+      "description": "January 8, 2026 - Report on Renee Good, a 37-year-old mother of three and poet who was shot and killed by a U.S. Immigration and Customs Enforcement officer in Minneapolis on January 7, 2026. The piece details her background as an artist and the circumstances of her death.",
+      "isAnonymous": false,
+      "label": "PBS NewsHour - Woman Killed by ICE Agent Was Mother of 3, Poet and New to Minneapolis",
+      "type": "article",
+      "url": "https://www.pbs.org/newshour/nation/woman-killed-by-ice-agent-was-mother-of-3-poet-and-new-to-minneapolis"
+    },
+    {
+      "_id": "source-npr-ice-terrorism-claim-2026-01-09",
+      "description": "January 9, 2026 - Reports that Trump administration official Kristi Noem alleged Renee Good's actions amounted to 'an act of domestic terrorism,' a characterization disputed by Minnesota Attorney General Keith Ellison. Documents the conflicting narratives around Good's death.",
+      "isAnonymous": false,
+      "label": "NPR - Frictions Emerge After ICE Agent Fatally Shoots Minneapolis Woman",
+      "type": "article",
+      "url": "https://www.npr.org/2026/01/09/nx-s1-5672502/minneapolis-portland-ice-shootings"
+    },
+    {
+      "_id": "source-pbs-gaza-pregnant-woman-2026-03-16",
+      "description": "March 16, 2026 - Hospital officials report at least 12 Palestinians, including two boys, a pregnant woman and eight police officers, were killed by Israeli airstrikes in the war-torn Gaza Strip. Documents civilian casualties in ongoing bombardment.",
+      "isAnonymous": false,
+      "label": "PBS NewsHour - Israeli Strikes in Gaza Killed 12, Including 2 Children and a Pregnant Woman",
+      "type": "article",
+      "url": "https://www.pbs.org/newshour/world/israeli-strikes-in-gaza-killed-12-people-including-2-children-and-a-pregnant-woman-hospital-officials-say"
+    },
+    {
+      "_id": "source-guardian-blanche-epstein-2026-02-01",
+      "description": "February 1, 2026 - Deputy US Attorney General Todd Blanche, the point person on the Trump administration's Epstein files release, tells ABC News that prosecutors' review of the Jeffrey Epstein-Ghislaine Maxwell sex-trafficking case 'is over,' despite millions of documents still being withheld.",
+      "isAnonymous": false,
+      "label": "The Guardian - Todd Blanche Says Review of Jeffrey Epstein Sex-Trafficking Case 'Is Over'",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/feb/01/epstein-files-todd-blanche-deputy-ag"
+    },
+    {
+      "_id": "source-marshall-miscarriage-2025-04-02",
+      "description": "April 2, 2025 - Investigative report on how women across multiple states (South Carolina, Georgia, Ohio, Arkansas, Texas, Mississippi, Oklahoma) have faced criminal charges for miscarriages and stillbirths. Documents prosecutions despite statutory limitations against charging pregnant individuals.",
+      "isAnonymous": false,
+      "label": "The Marshall Project - Miscarriages Illegal? These States Investigated Them as Crimes",
+      "type": "article",
+      "url": "https://www.themarshallproject.org/2025/04/02/law-pregnancy-california-ohio-georgia-alabama"
+    },
+    {
+      "_id": "source-regreview-save-act-2026-04-23",
+      "description": "April 23, 2026 - Analysis of the SAVE America Act, which passed the House in February 2026 and requires 'documentary proof of United States citizenship' from individuals registering to vote. The piece examines how citizenship documentation requirements disproportionately affect married women who changed their names.",
+      "isAnonymous": false,
+      "label": "The Regulatory Review - Consequences of the SAVE America Act",
+      "type": "article",
+      "url": "https://www.theregreview.org/2026/04/23/odonnell-consequences-of-the-save-america-act/"
+    },
+    {
+      "_id": "source-voteriders-married-women-2026-03-06",
+      "description": "March 6, 2026 - Explains how the SAVE Act's requirement for birth certificates or citizenship documentation to register to vote creates barriers for millions of married women whose current names don't match their birth certificates. Documents the practical impact on women's voting access.",
+      "isAnonymous": false,
+      "label": "VoterRiders - Yes, The SAVE Act Could Hurt Married Women",
+      "type": "article",
+      "url": "https://voteriders.org/article/the-save-acts-impact-on-married-women/"
+    },
+    {
+      "_id": "source-aljazeera-gaza-mothers-day-2026-03-21",
+      "description": "March 21, 2026 - Report from Gaza City on Mother's Day marked by mourning rather than celebration. Features Em Rami Dawwas, a mother who lost three sons in Israeli attacks and keeps their photos under her pillow. UNICEF estimates 64,000 children have been killed or wounded in Israeli attacks since October 2023. Amnesty International report highlights the 'brutal price' women and girls have paid during the war.",
+      "isAnonymous": false,
+      "label": "Al Jazeera - 'Tears and Grief': Mother's Day in Gaza Marked by Mourning",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/3/21/tears-and-grief-mothers-day-in-gaza-marked-by-mourning"
+    },
+    {
+      "_id": "source-ms-magazine-mothers-day-2026-05-09",
+      "description": "May 9, 2026 - Report on Mother's Day arriving amid legal and political upheaval over reproductive freedom, voting rights, and economic survival of mothers. Documents White House Mother's Day luncheon photo (Jim Watson/AFP via Getty Images) showing the contrast between performative celebration and ongoing attacks on women's rights. Between January and August 2025, more than 455,000 women left the workforce.",
+      "isAnonymous": false,
+      "label": "Ms. Magazine - This Mother's Day, Women Are Fighting for Healthcare, Democracy and Survival",
+      "type": "article",
+      "url": "https://msmagazine.com/2026/05/09/this-mothers-day-women-are-fighting-for-healthcare-democracy-and-survival/"
+    },
+    {
+      "_id": "image-white-house-mothers-day-2026-05-08",
+      "description": "May 8, 2026 - AP Photo/Jacquelyn Martin via Getty Images. President Donald Trump and White House officials host Mother's Day luncheon in the Rose Garden. Smiling officials and flowers on display as both Republican and Democratic officials post Mother's Day tributes while simultaneously enacting or enabling policies that harm and kill mothers.",
+      "isAnonymous": false,
+      "label": "White House Mother's Day Luncheon - Rose Garden",
+      "type": "media",
+      "url": "https://www.reuters.com/world/us/trump-deliver-remarks-rose-garden-friday-white-house-says-2026-05-08/"
+    },
+    {
+      "_id": "image-gaza-mothers-day-mourning-2026-03-21",
+      "description": "March 21, 2026 - Al Jazeera photo reporting from Gaza City. Em Rami Dawwas sits in her tent, mourning her three sons killed in Israeli attacks. She keeps their photos under her pillow, looking at them every day 'as if holding on will keep their memory alive.' Represents the brutal price Palestinian women pay during the war.",
+      "isAnonymous": false,
+      "label": "Al Jazeera - Em Rami Dawwas Mourning Her Sons in Gaza Tent Camp",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/3/21/tears-and-grief-mothers-day-in-gaza-marked-by-mourning"
+    },
+    {
+      "_id": "image-abortion-rights-protest-2026",
+      "description": "Abortion rights activists holding signs reading 'My Body, My Choice' during Women's March. Represents women fighting for reproductive freedom while conservative lawmakers criminalize miscarriages and Democratic resistance remains insufficient. Both parties failing to protect women's bodies.",
+      "isAnonymous": false,
+      "label": "Abortion Rights Protest - My Body My Choice",
+      "type": "media",
+      "url": "https://www.istockphoto.com/photos/abortion-protest"
+    }
+  ]
+}

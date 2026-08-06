@@ -1,0 +1,159 @@
+{
+  "_id": "corey-ruiz-madison-police-killing",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-0",
+      "_ref": "NIYNah6RoM2MjtNb6HiKPc",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-1",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-3",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A Madison police officer fired three shots into Corey Ruiz at point-blank range in broad daylight. Four days of protests have shut down the city's signature summer events. The George Floyd movement has come home to roost.",
+  "eventDate": "2026-07-22T13:30:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Corey Durell Ruiz was a 38-year-old Black/Latino man, a father, and a Madison, Wisconsin resident who was experiencing homelessness and mental health struggles at the time of his death. He was known and loved in the community.",
+      "question": "Who was Corey Ruiz?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Ruiz was shot three times at point-blank range by a Madison police officer on July 22, 2026, after a brief struggle at the intersection of South Baldwin and Williamson Streets. A Taser was deployed but failed. The officer, described as a veteran, fired three rounds into Ruiz's head and upper chest area.",
+      "question": "How did Corey Ruiz die?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "No. The Madison Police Department does not require officers to wear body cameras, making it one of the few major departments in Wisconsin without a body camera program. The only visual record comes from bystander cellphone videos.",
+      "question": "Was the shooting captured on body camera?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Protests began within hours of the July 22 killing and have continued for four consecutive days. Demonstrators have shut down concerts, festivals, and the city's farmers market, with no signs of stopping.",
+      "question": "How long have the protests been going?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "The intersection where Ruiz was killed is near where Tony Robinson was shot and killed by Madison police in 2015 and Paul Heenan in 2012. It is the third police killing in the same neighborhood since 2012.",
+      "question": "What is the history of police killings in this neighborhood?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Corey Ruiz police shooting",
+    "Madison Wisconsin police killing",
+    "Corey Durell Ruiz",
+    "Madison protests July 2026",
+    "police execution Madison",
+    "BLM protests 2026",
+    "no body cameras Madison PD",
+    "Ben Crump Corey Ruiz"
+  ],
+  "leadParagraph": "Corey Durell Ruiz, a 38-year-old homeless father experiencing a mental health crisis, was shot three times in the head at point-blank range by a Madison, Wisconsin police officer on July 22, 2026. Four days of protests have shut down concerts, festivals, and the city's farmers market. The killing — the third by Madison police in the same neighborhood since 2012 — has ignited a movement demanding community control over policing.",
+  "linkedPitch": null,
+  "location": "Madison, Wisconsin / United States",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Protesters march past the Wisconsin state Capitol holding signs after the police killing of Corey Ruiz",
+    "asset": {
+      "_ref": "image-7e2f1f96054af7ca85eb8af4da35238895e1cedf-3000x2000-webp",
+      "_type": "reference"
+    },
+    "caption": "Protesters march past the Wisconsin state Capitol on July 23, 2026, in Madison, Wis., after a Madison police officer shot and killed Corey Durell Ruiz.",
+    "credit": "AP Photo/Kayla Wolf"
+  },
+  "methodology": "Reported using verified bystander video accounts, AP News reporting, NBC News, Truthout, Madison365, WMTV15 News, Wisconsin Examiner, Fight Back! News (NAARPR statement), official Madison Police Department incident reports, and statements from civil rights attorney Ben Crump, Urban Triage, Freedom Inc., and the NAARPR. Witness testimony cross-referenced across multiple independent sources.",
+  "needsReview": null,
+  "publishedAt": "2026-07-26T03:30:00Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "article-320d80cf-81af-4a6c-8f0f-7a4c5aa0d8d6",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "two-calls-diapers-officer-buys-baby-executed-senatobia",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "alligator-alcatraz-systemic-torture-cover-up",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "article-22bd04af-abdf-4250-a879-bbb96efa66d9",
+      "_type": "reference"
+    },
+    {
+      "_key": "e951d71392a5",
+      "_ref": "ice-kills-again-two-fatal-shootings-halt-overturned",
+      "_type": "reference"
+    },
+    {
+      "_key": "7bedb841523d",
+      "_ref": "nolan-wells-investigation",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "A Madison police officer shot Corey Ruiz three times in the head at point-blank range. Four days of protests have shut down the city. This is a BLM watershed moment.",
+    "metaTitle": "Madison Police Executed Corey Ruiz — The City Is Erupting",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "madison-police-executed-corey-ruiz-the-city-is-erupting"
+  },
+  "tags": [
+    "Corey Ruiz",
+    "Madison Wisconsin",
+    "police killing",
+    "BLM",
+    "police violence",
+    "protests",
+    "Ben Crump",
+    "body cameras",
+    "Tony Robinson",
+    "George Floyd"
+  ],
+  "title": "Madison Police Executed Corey Ruiz. The City Is Erupting.",
+  "updatedAt": null,
+  "videoLink": null
+}

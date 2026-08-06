@@ -1,0 +1,70 @@
+{
+  "slug": "in-france-farmers-are-criminalized-while-corporations-profit",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-france-ohchr-2026",
+      "description": "January 26, 2026 UN OHCHR statement expressing alarm at arrests of 52 people including agricultural trade union leaders during peaceful farmer protests in Paris. Notes 'increasing tendency to criminalize peasant movements and to arrest their leaders' in France.",
+      "isAnonymous": false,
+      "label": "UN Office of High Commissioner for Human Rights - Farmers Arrests",
+      "type": "document",
+      "url": "https://www.ohchr.org/en/press-releases/2026/01/france-un-experts-alarmed-farmers-arrests-and-growing-criminalisation"
+    },
+    {
+      "_id": "source-france-euronews-2026",
+      "description": "March 28, 2026 report on Paris 'No Kings' rally against Trump and U.S.-Iran war. Notes hundreds gathered at Place de la Bastille with banners denouncing authoritarianism and 'endless wars' while Israeli flags, American flags and Iranian flags were present.",
+      "isAnonymous": false,
+      "label": "EuroNews - France Hosts 'No Kings' March",
+      "type": "media",
+      "url": "https://www.euronews.com/video/2026/03/28/france-hosts-no-kings-march-as-anti-trump-protests-spread"
+    },
+    {
+      "_id": "source-france-cbs-2026",
+      "description": "March 1, 2026 CBS News report documenting 'No Kings' protests across multiple countries including France. Notes movement focused on stopping endless wars, with banners reading 'No Kings, No War' and participation across European capitals from Berlin to London.",
+      "isAnonymous": false,
+      "label": "CBS News - Millions Turn Out for 'No Kings'",
+      "type": "media",
+      "url": "https://www.cbsnews.com/news/no-kings-rallies-protest-trump-millions/"
+    },
+    {
+      "_id": "source-france-aljazeera-2026",
+      "description": "March 12, 2026 Al Jazeera analysis of France's diplomatic response to U.S.-Iran war. Documents demonstration in Paris on March 1 with Israeli, American and Iranian flags protesting France's continued arms sales to Israel while criticizing its actions diplomatically. Examines 'fine line' strategy.",
+      "isAnonymous": false,
+      "label": "Al Jazeera - France Walks Fine Line on Iran War",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/3/12/france-walks-a-fine-line-as-war-in-us-israel-war-on-iran-escalates"
+    },
+    {
+      "_id": "source-france-bloquons-wiki",
+      "description": "Background on 'Bloquons' movement, a coalition of French unions calling for protests and strikes. Notes general strike announced September 18, 2025, blocking roads in cities like Bordeaux, Rennes, Nantes, and Caen, with third wave of protests October 2, 2025 responding to 2026 budget plan.",
+      "isAnonymous": false,
+      "label": "Wikipedia - Bloquons Tout",
+      "type": "reference",
+      "url": "https://en.wikipedia.org/wiki/Bloquons_tout"
+    },
+    {
+      "_id": "source-france-project-censored",
+      "description": "Annual report documenting 25 most underreported stories of the year from 200+ researchers across U.S. colleges. Highlights systematic suppression of information by economic and political forces, with focus on stories that corporate media has marginalized.",
+      "isAnonymous": false,
+      "label": "Project Censored - Essential Stories Ignored",
+      "type": "report",
+      "url": "https://www.projectcensored.org/"
+    },
+    {
+      "_id": "source-france-inlander-2020",
+      "description": "December 10, 2020 report noting ongoing gap in coverage of missing Black women and girls stories. Project Censored cited as an example of how certain communities receive attention while others are ignored. Illustrates media bias in coverage patterns.",
+      "isAnonymous": false,
+      "label": "The Inlander - Missing Black Women Stories Underreported",
+      "type": "media",
+      "url": "https://www.inlander.com/news/ten-important-stories-being-underreported-by-the-mainstream-media-20766119"
+    },
+    {
+      "_id": "source-france-caroline-2020",
+      "description": "Analysis of international narratives gaining traction abroad but receiving minimal coverage in U.S. media. Notes stories from Africa, Asia, Europe that have global implications but slip under American news radar. Highlights parochial nature of U.S. media coverage.",
+      "isAnonymous": false,
+      "label": "Caroline Progress - Global Stories Overlooked in U.S.",
+      "type": "media",
+      "url": "https://www.carolineprogress.com/9321-15-global-stories-overlooked-in-the-us-some-hit-closer-to-home/"
+    }
+  ]
+}

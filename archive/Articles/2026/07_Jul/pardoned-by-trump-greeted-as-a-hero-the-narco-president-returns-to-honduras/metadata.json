@@ -1,0 +1,137 @@
+{
+  "_id": "honduras-hernandez-return-trump-pardon-narco-president-hero-welcome",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "usopav5CBnH5LDMX5vi1b4",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "usopav5CBnH5LDMX5vi1ea",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Convicted drug trafficker and former Honduran President Juan Orlando Hernández received a 45-year sentence, was pardoned by Trump, and returned home to a hero's welcome as his party's candidate — backed by Trump — controls the presidency.",
+  "eventDate": "2026-07-26T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Hernández was convicted in a US federal court of accepting millions in bribes from drug-trafficking organizations over 18 years, using the money to fuel his political rise. Prosecutors said he facilitated the importation of over 400 tons of cocaine into the US. He was sentenced to 45 years.",
+      "question": "Why was Juan Orlando Hernández in prison?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Trump claimed Hernández did not receive a fair trial and that it was a 'setup' by the Biden administration. The pardon came shortly before Trump backed Hernández's party colleague Nasry Asfura in Honduras's presidential election.",
+      "question": "Why did Trump pardon him?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Yes, he faces corruption charges related to the Pandora I case alleging $10.8 million in diverted state funds. However, a judge suspended his arrest warrant in June, and experts expect his party's control of the presidency to ensure his impunity.",
+      "question": "Does Hernández still face charges in Honduras?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Hernández Honduras return",
+    "Trump pardon drug trafficker",
+    "Juan Orlando Hernández narcotrafficking",
+    "Honduras National Party",
+    "Pandora I corruption",
+    "400 tons cocaine Honduras",
+    "Nasry Asfura Honduras election",
+    "Hernández impunity Honduras",
+    "Central America US imperialism"
+  ],
+  "leadParagraph": "Former Honduran President Juan Orlando Hernández, convicted of drug trafficking and sentenced to 45 years in a US federal prison, returned to Honduras on Sunday after Donald Trump pardoned him — landing at Palmerola Airport to a hero's welcome from supporters of his National Party, which now controls the presidency with Trump's backing.",
+  "linkedPitch": null,
+  "location": "Tegucigalpa, Honduras",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Juan Orlando Hernandez greeted by supporters at airport in Honduras after Trump pardon",
+    "asset": {
+      "_ref": "image-c32acd9a3cdaa5a26a987971b2b623fef4e02c74-780x520-webp",
+      "_type": "reference"
+    },
+    "caption": "Former Honduran President Hernandez greets supporters at Palmerola Airport after returning from the US following his Trump pardon, July 26, 2026",
+    "credit": "Reuters/Orlin Valle"
+  },
+  "methodology": "Reported using Al Jazeera, Los Angeles Times, AP News, and Washington Times coverage. Trial details from DOJ sentencing statement. Corruption case details from UFERCO. Quotes from Joaquín Mejía (Reflection) and Luis Javier Santos (former UFERCO head). Timeline verified across multiple wire services.",
+  "needsReview": null,
+  "publishedAt": "2026-07-28T18:15:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "trump-2-billion-corruption-uae-crypto-slush-fund-unprecedented",
+      "_type": "reference"
+    },
+    {
+      "_key": "43b435d4300d",
+      "_ref": "trump-pardons-corrupt-officials-dismantles-justice-investigation",
+      "_type": "reference"
+    },
+    {
+      "_key": "22ebb090975a",
+      "_ref": "jake-lang-exposed",
+      "_type": "reference"
+    },
+    {
+      "_key": "a2f3dbb4cc5e",
+      "_ref": "blanche-epstein-coverup-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "1cee2134eaf2",
+      "_ref": "kash-patel-fbi-director-corruption",
+      "_type": "reference"
+    },
+    {
+      "_key": "ce2e84b827ff",
+      "_ref": "trump-second-term-justice-department-war-on-press",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Juan Orlando Hernández, convicted of trafficking 400 tons of cocaine and sentenced to 45 years, returned to Honduras after Trump's pardon to a hero's welcome.",
+    "metaTitle": "Pardoned by Trump: Convicted Drug Lord Returns to Honduras as Hero",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "pardoned-by-trump-greeted-as-a-hero-the-narco-president-returns-to-honduras"
+  },
+  "tags": [
+    "Honduras",
+    "Juan Orlando Hernández",
+    "Trump pardon",
+    "drug trafficking",
+    "corruption",
+    "Nasry Asfura",
+    "imperialism",
+    "Pandora Papers",
+    "Latin America"
+  ],
+  "title": "Pardoned by Trump, Greeted as a Hero: The Narco-President Returns to Honduras",
+  "updatedAt": null,
+  "videoLink": null
+}

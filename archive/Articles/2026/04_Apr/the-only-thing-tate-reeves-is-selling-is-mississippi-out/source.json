@@ -1,0 +1,54 @@
+{
+  "slug": "the-only-thing-tate-reeves-is-selling-is-mississippi-out",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-reuters-xai-lawsuit-2026-04-14",
+      "description": "NAACP lawsuit against xAI for illegally operating 27 gas turbines without air permits at Southaven data center with full backing of Governor Tate Reeves",
+      "isAnonymous": false,
+      "label": "Reuters - NAACP Sues Musk's xAI for Illegal Gas Turbines",
+      "type": "article",
+      "url": "https://www.reuters.com/sustainability/climate-energy/naacp-sues-musks-xai-alleging-illegal-operation-gas-turbines-2026-04-14/"
+    },
+    {
+      "_id": "source-ap-tanf-scandal-2023-05-16",
+      "description": "Financial documents show no sign that Gov. Tate Reeves fulfilled pledge to give away campaign donations from people charged in $77 million TANF welfare misspending scandal",
+      "isAnonymous": false,
+      "label": "AP News - Reeves Campaign Funds from Welfare Scandal",
+      "type": "article",
+      "url": "https://apnews.com/article/mississippi-governor-reeves-presley-welfare-money-0d830a43a0b2202c128070baec653b5a"
+    },
+    {
+      "_id": "source-mississippi-today-medicaid-2024-03-15",
+      "description": "Gov. Tate Reeves summoned state senators and privately told them he will veto any Medicaid expansion bill sent to his desk in 2024",
+      "isAnonymous": false,
+      "label": "Mississippi Today - Reeves Will Veto Any Medicaid Expansion",
+      "type": "article",
+      "url": "https://mississippitoday.org/2024/03/12/tate-reeves-senators-medicaid-expansion-veto/"
+    },
+    {
+      "_id": "source-washington-post-2026-03-10",
+      "description": "Mississippi ranked at the bottom of national rankings for income, education, and health outcomes for decades",
+      "isAnonymous": false,
+      "label": "Washington Post - Mississippi Ranked at Bottom",
+      "type": "article",
+      "url": "https://www.washingtonpost.com/ripple/2026/03/10/mississippi-governor-tate-reeves-investment-growth/"
+    },
+    {
+      "_id": "source-nbc-xai-2026-02-24",
+      "description": "xAI data center in Southaven, Mississippi, generating noise and pollution complaints from residents with full backing of Gov. Tate Reeves",
+      "isAnonymous": false,
+      "label": "NBC News - Musk's AI Power Plant Controversy",
+      "type": "article",
+      "url": "https://www.nbcnews.com/news/us-news/musks-ai-power-plant-generates-sound-fury-mississippi-rcna258594"
+    },
+    {
+      "_id": "source-clarion-ledger-2026-04-16",
+      "description": "Mississippi Legislature failed to override Gov. Tate Reeves vetoes during 2026 session including rural healthcare bill",
+      "isAnonymous": false,
+      "label": "Clarion Ledger - Legislature Fails Override Vetoes",
+      "type": "article",
+      "url": "https://www.clarionledger.com/story/news/politics/2026/04/16/mississippi-legislature-meets-to-override-governor-vetoes-fails-to-agree/89609718007/"
+    }
+  ]
+}

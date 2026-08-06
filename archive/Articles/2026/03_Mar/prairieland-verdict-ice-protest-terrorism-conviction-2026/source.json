@@ -1,0 +1,70 @@
+{
+  "slug": "prairieland-verdict-ice-protest-terrorism-conviction-2026",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "UH0czzC9lJ5tyspFRAoyvu",
+      "description": null,
+      "isAnonymous": false,
+      "label": "The Intercept — Verdict Report",
+      "type": "other",
+      "url": "https://theintercept.com/2026/03/13/ice-protesters-terrorism-prairieland-antifa/"
+    },
+    {
+      "_id": "jsyY1XXvTf1w09tARiRpsV",
+      "description": null,
+      "isAnonymous": false,
+      "label": "The Intercept — Trial Coverage (Black Bloc)",
+      "type": "other",
+      "url": "https://theintercept.com/2026/03/12/antifa-ice-protest-texas-trial-terrorism/"
+    },
+    {
+      "_id": "nmRtoTHCG0rdpxUuvZo7Vn",
+      "description": null,
+      "isAnonymous": false,
+      "label": "The Guardian",
+      "type": "other",
+      "url": "https://www.theguardian.com/us-news/2026/mar/13/texas-terrorism-trial"
+    },
+    {
+      "_id": "E2amU54KgQjBxBrVc2MHzs",
+      "description": null,
+      "isAnonymous": false,
+      "label": "AP — Verdict",
+      "type": "other",
+      "url": "https://apnews.com/article/prairieland-detention-center-shooting-antifa-trial-5650d9c3db0592671a1d5b5b27a47d2d"
+    },
+    {
+      "_id": "UH0czzC9lJ5tyspFRAoz5m",
+      "description": null,
+      "isAnonymous": false,
+      "label": "KERA News — Full Timeline",
+      "type": "other",
+      "url": "https://www.keranews.org/criminal-justice/2026-02-24/prairieland-ice-detention-center-shooting-alvarado-timeline"
+    },
+    {
+      "_id": "UH0czzC9lJ5tyspFRAozAA",
+      "description": null,
+      "isAnonymous": false,
+      "label": "The Texas Observer — Trial Analysis",
+      "type": "other",
+      "url": "https://www.texasobserver.org/antifa-scare-prairieland-19-trial-ice-detention/"
+    },
+    {
+      "_id": "UH0czzC9lJ5tyspFRAozHq",
+      "description": null,
+      "isAnonymous": false,
+      "label": "DOJ Press Release",
+      "type": "other",
+      "url": "https://www.justice.gov/opa/pr/antifa-cell-members-convicted-prairieland-ice-detention-center-shooting"
+    },
+    {
+      "_id": "oqn5O85i58dDGm9qfvufVl",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Wikipedia — 2025 Alvarado ICE facility incident",
+      "type": "other",
+      "url": "https://en.wikipedia.org/wiki/2025_Alvarado_ICE_facility_incident"
+    }
+  ]
+}

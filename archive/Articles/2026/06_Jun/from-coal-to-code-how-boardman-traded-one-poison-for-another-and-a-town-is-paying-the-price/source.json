@@ -1,0 +1,54 @@
+{
+  "slug": "from-coal-to-code-how-boardman-traded-one-poison-for-another-and-a-town-is-paying-the-price",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-e18ef089",
+      "description": null,
+      "isAnonymous": null,
+      "label": null,
+      "type": null,
+      "url": "https://www.oregonlive.com/silicon-forest/2026/05/boomtown-and-battleground-small-oregon-county-grapples-with-data-centers-impact.html"
+    },
+    {
+      "_id": "source-7210070c",
+      "description": null,
+      "isAnonymous": null,
+      "label": null,
+      "type": null,
+      "url": "https://www.rollingstone.com/culture/culture-features/data-center-water-pollution-amazon-oregon-1235466613/"
+    },
+    {
+      "_id": "source-c6acfb16",
+      "description": null,
+      "isAnonymous": null,
+      "label": null,
+      "type": null,
+      "url": "https://www.oregonlive.com/silicon-forest/2026/03/amazon-paid-oregon-officials-company-more-than-100-million-while-seeking-data-center-deals.html"
+    },
+    {
+      "_id": "source-41eccdc5",
+      "description": null,
+      "isAnonymous": null,
+      "label": null,
+      "type": null,
+      "url": "https://oregoncapitalchronicle.com/2026/03/31/amazon-to-pay-20-5-million-settlement-over-northeast-oregon-nitrate-pollution/"
+    },
+    {
+      "_id": "source-4e55f23a",
+      "description": null,
+      "isAnonymous": null,
+      "label": null,
+      "type": null,
+      "url": "https://www.kgw.com/article/news/local/boardman-coal-plant-closes-oregon/283-b7eee8a4-0ec7-4c8f-88ea-9d7e42b2516b"
+    },
+    {
+      "_id": "source-1d77c4f9",
+      "description": null,
+      "isAnonymous": null,
+      "label": null,
+      "type": null,
+      "url": "https://www.geekwire.com/2026/report-amazon-buys-1300-acres-near-columbia-river-that-could-become-a-giant-data-center/"
+    }
+  ]
+}

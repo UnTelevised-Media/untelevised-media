@@ -1,0 +1,78 @@
+{
+  "slug": "cuba-crisis-isn-t-a-failure-of-socialism-it-s-what-65-years-of-economic-warfare-looks-like",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "cuba-source-correct-0",
+      "description": "June 17, 2015 - Comprehensive analysis of the 55-year US embargo on Cuba, including economic impact estimates of $1.1 trillion.",
+      "isAnonymous": null,
+      "label": "Al Jazeera - El Bloqueo: 55 Years of Obstructing the Cuban People",
+      "type": "article",
+      "url": "https://www.aljazeera.com/features/2015/6/17/el-bloqueo-55-years-of-obstructing-the-cuban-people"
+    },
+    {
+      "_id": "cuba-source-correct-1",
+      "description": "May 9, 2018 - Reports UN ECLAC estimate that embargo has cost Cuba $130 billion over nearly six decades.",
+      "isAnonymous": null,
+      "label": "Reuters - U.S. Trade Embargo Has Cost Cuba $130 Billion, U.N. Says",
+      "type": "article",
+      "url": "https://www.reuters.com/article/world/us-trade-embargo-has-cost-cuba-130-billion-un-says-idUSKBN1I93JM/"
+    },
+    {
+      "_id": "cuba-source-correct-2",
+      "description": "November 1, 2023 - UN General Assembly press release on Cuba embargo resolution; reports $4.87 billion in damages from 2022-2023.",
+      "isAnonymous": null,
+      "label": "UN Press Release - GA12552",
+      "type": "statement",
+      "url": "https://press.un.org/en/2023/ga12552.doc.htm"
+    },
+    {
+      "_id": "cuba-source-correct-3",
+      "description": "September 30, 2025 - Reports new Cuban government assessment: $170.7 billion in damages, $2.1 trillion with inflation.",
+      "isAnonymous": null,
+      "label": "People's World - New Cuban Report Confirms U.S. Blockade Is War",
+      "type": "article",
+      "url": "https://www.peoplesworld.org/article/new-cuban-report-confirms-u-s-blockade-is-war/"
+    },
+    {
+      "_id": "cuba-source-correct-4",
+      "description": "February 2, 2022 - Declassified documents on the origins and evolution of US economic sanctions against Cuba.",
+      "isAnonymous": null,
+      "label": "National Security Archive - Cuba Embargoed: U.S. Trade Sanctions Turn Sixty",
+      "type": "document",
+      "url": "https://nsarchive.gwu.edu/briefing-book/cuba/2022-02-02/cuba-embargoed-us-trade-sanctions-turn-sixty"
+    },
+    {
+      "_id": "cuba-source-correct-5",
+      "description": "1997 - Comprehensive study finding the embargo contributed to malnutrition, poor water access, and lack of medicine in Cuba.",
+      "isAnonymous": null,
+      "label": "American Association for World Health - 1997 Report on U.S. Embargo Impact",
+      "type": "document",
+      "url": "https://www.medicc.org/resources/documents/embargo/The%20impact%20of%20the%20U.S.%20Embargo%20on%20Health%20&%20Nutrition%20in%20Cuba.pdf"
+    },
+    {
+      "_id": "cuba-source-correct-6",
+      "description": "UN background documentation on the annual General Assembly resolution condemning the US embargo.",
+      "isAnonymous": null,
+      "label": "UN General Assembly - Necessity of Ending the Embargo Imposed by USA Against Cuba",
+      "type": "document",
+      "url": "https://www.un.org/en/ga/62/plenary/cuba/bkg.shtml"
+    },
+    {
+      "_id": "cuba-source-correct-7",
+      "description": "Energy data firm reporting Cuba had 15-20 days of oil reserves after US fuel blockade began in January 2026.",
+      "isAnonymous": null,
+      "label": "Kpler - Cuba Oil Supply Data (January 2026)",
+      "type": "data",
+      "url": "https://kpler.com"
+    },
+    {
+      "_id": "cuba-source-correct-8",
+      "description": "February 2026 - UN special procedures condemn Trump's fuel blockade as 'serious violation of international law.'",
+      "isAnonymous": null,
+      "label": "UN Experts - February 2026 Statement on Cuba Fuel Blockade",
+      "type": "statement",
+      "url": "https://www.ohchr.org/en"
+    }
+  ]
+}

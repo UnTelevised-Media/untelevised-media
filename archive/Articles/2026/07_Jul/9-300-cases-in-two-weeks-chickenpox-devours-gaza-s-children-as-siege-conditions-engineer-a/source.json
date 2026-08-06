@@ -1,0 +1,46 @@
+{
+  "slug": "9-300-cases-in-two-weeks-chickenpox-devours-gaza-s-children-as-siege-conditions-engineer-a",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-euronews-chickenpox-sweeps-gaza-camps-as-thousands-of-cases-emerge-in-two-weeks",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Euronews — Chickenpox sweeps Gaza camps as thousands of cases emerge in two weeks",
+      "type": "media",
+      "url": "https://www.euronews.com/2026/07/26/chickenpox-sweeps-gaza-camps-as-thousands-of-cases-emerge-in-two-weeks"
+    },
+    {
+      "_id": "source-al-monitor-all-these-rashes-chickenpox-surges-in-gaza-camps",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al-Monitor — 'All these rashes': chickenpox surges in Gaza camps",
+      "type": "media",
+      "url": "https://www.al-monitor.com/originals/2026/07/all-these-rashes-chickenpox-surges-gaza-camps"
+    },
+    {
+      "_id": "source-un-ocha-humanitarian-situation-report-3-july-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN OCHA — Humanitarian Situation Report, 3 July 2026",
+      "type": "data",
+      "url": "https://www.ochaopt.org/content/humanitarian-situation-report-3-july-2026"
+    },
+    {
+      "_id": "source-jerusalem-post-un-reports-nearly-9300-chickenpox-cases-amid-overcrowding-in-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jerusalem Post — UN reports nearly 9,300 chickenpox cases amid overcrowding in Gaza",
+      "type": "media",
+      "url": "https://www.jpost.com/health-and-wellness/article-903259"
+    },
+    {
+      "_id": "source-fundsforngos-chickenpox-outbreak-spreads-rapidly-across-gaza-displacement-sites",
+      "description": null,
+      "isAnonymous": null,
+      "label": "fundsforNGOs — Chickenpox Outbreak Spreads Rapidly Across Gaza Displacement Sites",
+      "type": "media",
+      "url": "https://news.fundsforngos.org/2026/07/14/chickenpox-outbreak-spreads-rapidly-across-overcrowded-displacement-sites-in-gaza/"
+    }
+  ]
+}

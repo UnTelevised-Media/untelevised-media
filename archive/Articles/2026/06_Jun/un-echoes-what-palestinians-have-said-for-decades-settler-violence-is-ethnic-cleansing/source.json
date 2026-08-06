@@ -1,0 +1,78 @@
+{
+  "slug": "un-echoes-what-palestinians-have-said-for-decades-settler-violence-is-ethnic-cleansing",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "src-un-ohchr-settler-terror-jun2026",
+      "description": "Joint statement by 14 UN Special Rapporteurs warning of unprecedented settler violence serving as instrument of ethnic cleansing in the occupied West Bank",
+      "isAnonymous": null,
+      "label": "UN OHCHR — UN Experts Alarmed by Escalating Settler Terror and Displacement",
+      "type": "statement",
+      "url": "https://www.ohchr.org/en/press-releases/2026/06/occupied-palestinian-territory-un-experts-alarmed-escalating-settler-terror"
+    },
+    {
+      "_id": "src-un-unispal-settler-terror-jun2026",
+      "description": "Official UN publication of the Special Rapporteurs joint statement on escalating settler violence and displacement",
+      "isAnonymous": null,
+      "label": "UN UNISPAL — UN Experts Press Release on Settler Terror (June 1, 2026)",
+      "type": "statement",
+      "url": "https://www.un.org/unispal/document/un-experts-press-release-1jun26/"
+    },
+    {
+      "_id": "src-ocha-humanitarian-situation-may2026",
+      "description": "UN humanitarian data on settler violence casualties in the occupied West Bank through 2026",
+      "isAnonymous": null,
+      "label": "UN OCHA — Humanitarian Situation Report (May 7, 2026)",
+      "type": "data",
+      "url": "https://www.ochaopt.org/content/humanitarian-situation-report-7-may-2026"
+    },
+    {
+      "_id": "src-toi-smotrich-khan-ahmar-may2026",
+      "description": "Report on Smotrich ordering demolition of Khan al-Ahmar in response to ICC warrant",
+      "isAnonymous": null,
+      "label": "Times of Israel — Smotrich Orders Demolition of Khan al-Ahmar",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/smotrich-says-icc-has-issued-warrant-for-his-arrest-promptly-orders-demolition-of-west-bank-hamlet/"
+    },
+    {
+      "_id": "src-common-dreams-smotrich-icc-may2026",
+      "description": "Analysis of Smotrich ordering ethnic cleansing of Khan al-Ahmar as retaliation for ICC arrest warrant",
+      "isAnonymous": null,
+      "label": "Common Dreams — Smotrich Responds to ICC Warrant by Announcing War Crimes",
+      "type": "article",
+      "url": "https://www.commondreams.org/news/smotrich-icc-warrant"
+    },
+    {
+      "_id": "src-un-ohchr-khan-ahmar-may2026",
+      "description": "UN statement calling for immediate halt to forcible displacement of Khan al-Ahmar and E1 settlement expansion",
+      "isAnonymous": null,
+      "label": "UN OHCHR — Israel Must Halt Forcible Displacement of Khan al-Ahmar",
+      "type": "statement",
+      "url": "https://www.un.org/unispal/document/ohchr-israel-must-halt-forcible-displacement-of-khan-al-ahmar-and-settlement-expansion-in-e1/"
+    },
+    {
+      "_id": "src-palinfo-khan-ahmar-ethnic-cleansing",
+      "description": "Report on Hamas describing Khan al-Ahmar displacement as systematic ethnic cleansing",
+      "isAnonymous": null,
+      "label": "Palestine Info — Warnings Over Khan al-Ahmar Displacement Plan",
+      "type": "article",
+      "url": "https://english.palinfo.com/news/2026/05/19/363459/"
+    },
+    {
+      "_id": "src-reuters-settler-coordinate-attacks-dec2025",
+      "description": "Reuters investigation into coordinated settler attacks designed to expel Palestinian communities",
+      "isAnonymous": null,
+      "label": "Reuters — How Israel Hilltop Settlers Coordinate Attacks to Expel Palestinians",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/how-israels-hilltop-settlers-coordinate-attacks-expel-palestinians-2025-12-24/"
+    },
+    {
+      "_id": "src-un-icj-occupation-unlawful",
+      "description": "International Court of Justice advisory opinion declaring Israeli occupation of West Bank unlawful",
+      "isAnonymous": null,
+      "label": "ICJ — Advisory Opinion on Lawful Consequences of Israeli Occupation",
+      "type": "document",
+      "url": "https://www.icj-cij.org/node/204160"
+    }
+  ]
+}

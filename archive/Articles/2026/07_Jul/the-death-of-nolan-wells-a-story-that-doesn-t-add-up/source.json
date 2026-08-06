@@ -1,0 +1,102 @@
+{
+  "slug": "the-death-of-nolan-wells-a-story-that-doesn-t-add-up",
+  "totalSources": 12,
+  "sources": [
+    {
+      "_id": "source-cnn-nolan-wells-investigation-overview",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN - Nolan Wells Investigation Overview",
+      "type": "article",
+      "url": "https://www.cnn.com/2026/07/09/us/nolan-xavier-wells-what-we-know"
+    },
+    {
+      "_id": "source-cbs-news-parents-say-he-wouldnt-stay-behind",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS News - Parents Say He Wouldn't Stay Behind",
+      "type": "article",
+      "url": "https://www.cbsnews.com/news/nolan-wells-parents-mississippi-missing-horn-island/"
+    },
+    {
+      "_id": "source-abc-news-altercation-deleted-phone-evidence",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ABC News - Altercation, Deleted Phone Evidence",
+      "type": "article",
+      "url": "https://abcnews.com/US/parents-nolan-wells-call-investigation-seek-answers-mysterious/story?id=134627407"
+    },
+    {
+      "_id": "source-npr-family-retains-ben-crump",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR - Family Retains Ben Crump",
+      "type": "article",
+      "url": "https://www.npr.org/2026/07/08/g-s1-132521/nolan-wells-mississippi-ben-crump"
+    },
+    {
+      "_id": "source-the-cut-comprehensive-timeline-and-details",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Cut - Comprehensive Timeline and Details",
+      "type": "article",
+      "url": "https://www.thecut.com/article/what-we-know-about-nolan-xavier-wellss-death.html"
+    },
+    {
+      "_id": "source-wlox-judge-statement-and-boat-timeline",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WLOX - Judge Statement and Boat Timeline",
+      "type": "article",
+      "url": "https://www.wlox.com/2026/07/08/parent-nolan-wells-friend-naacp-leader-speak-out-about-social-media-rumors/"
+    },
+    {
+      "_id": "source-newsone-judge-dispels-rumors",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NewsOne - Judge Dispels Rumors",
+      "type": "article",
+      "url": "https://newsone.com/6865581/nolan-wells-chancery-judge-ashlee-cole-statement/"
+    },
+    {
+      "_id": "source-biloxi-sun-herald-parents-speak-contradictions",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Biloxi Sun Herald - Parents Speak, Contradictions",
+      "type": "article",
+      "url": "https://www.sunherald.com/news/local/counties/jackson-county/article316457873.html"
+    },
+    {
+      "_id": "source-tmz-family-doesnt-trust-mississippi-authorities",
+      "description": null,
+      "isAnonymous": null,
+      "label": "TMZ - Family Doesn't Trust Mississippi Authorities",
+      "type": "article",
+      "url": "https://www.tmz.com/2026/07/09/nolan-wells-attorney-ben-crump-slams-mississippi/"
+    },
+    {
+      "_id": "source-thegrio-mississippi-judge-speaks-out",
+      "description": null,
+      "isAnonymous": null,
+      "label": "TheGrio - Mississippi Judge Speaks Out",
+      "type": "article",
+      "url": "https://thegrio.com/2026/07/08/nolan-wells-judge-investigation/"
+    },
+    {
+      "_id": "source-newsweek-independent-autopsy-ordered",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Newsweek - Independent Autopsy Ordered",
+      "type": "article",
+      "url": "https://www.newsweek.com/nolan-wells-independent-autopsy-questions-remain-death-12175251"
+    },
+    {
+      "_id": "source-supertalk-mississippi-dps-commissioner-dismisses-race",
+      "description": null,
+      "isAnonymous": null,
+      "label": "SuperTalk Mississippi - DPS Commissioner Dismisses Race",
+      "type": "article",
+      "url": "https://www.supertalk.fm/dps-commissioner-no-indication-race-played-a-role-in-death-of-nolan-wells/"
+    }
+  ]
+}

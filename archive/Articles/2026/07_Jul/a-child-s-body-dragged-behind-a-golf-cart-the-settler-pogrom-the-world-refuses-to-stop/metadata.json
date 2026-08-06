@@ -1,0 +1,149 @@
+{
+  "_id": "settler-drags-child-body-west-bank",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-gaza-israel-war",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-world-news",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Video shows an Israeli settler dragging a Palestinian child's body behind a golf cart in the occupied West Bank — the product of a system built on impunity, dehumanization, and state-backed ethnic cleansing.",
+  "eventDate": "2026-07-14T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The video shows an Israeli settler driving a golf cart with a rope trailing behind it, attached to the body of a Palestinian child. The settler stops, touches the body, and moves on without urgency, suggesting he does not expect to face consequences.",
+      "question": "What exactly does the video show?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "According to UN OCHA, over 5,330 settler attacks resulting in casualties or property damage have been recorded since October 2023, with over 1,000 attacks in the first half of 2026 alone — averaging roughly six per day. Sixty-four Palestinians have been killed and over 5,170 injured. Yesh Din reports that 97.4% of complaints filed by Palestinians against settlers result in no prosecution.",
+      "question": "What is the broader context of settler violence in the West Bank?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "At least 117 predominantly Bedouin and herding communities have been fully or partially displaced between January 2023 and April 2026 — over 5,900 people driven from ancestral land. More than 100 villages have been emptied. Settler violence is now the number one cause of Palestinian displacement in the West Bank according to OCHA.",
+      "question": "How many Palestinians have been displaced by settler violence?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Yes. A June 2026 UN commission found Israel is deliberately targeting children in its genocide against Palestinians. Documented cases include settlers abducting two siblings under five at knifepoint, and abducting, beating, blindfolding, stripping, and sexually assaulting two 15-year-old boys. On the same day the golf cart video circulated, a six-year-old boy was struck by a settler-driven car in Hebron.",
+      "question": "Have children been specifically targeted by settlers?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "Settlement expansion constitutes the war crime of transferring a civilian population into occupied territory under the Rome Statute. The ICC has jurisdiction over the occupied Palestinian territory. The Leahy Law prohibits US military assistance to units committing gross human rights violations. The 2019 European Court of Justice ruling classifies settlement goods as distinct from Israeli goods.",
+      "question": "What international legal frameworks apply to settler violence?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "West Bank settler violence",
+    "Palestinian child killed",
+    "settler drags child body",
+    "Israeli settler pogrom",
+    "West Bank ethnic cleansing",
+    "OCHA settler attacks",
+    "Palestinian displacement",
+    "settlement expansion"
+  ],
+  "leadParagraph": "Video surfaced this week showing an Israeli settler in the occupied West Bank dragging the lifeless body of a Palestinian child with a rope behind a golf cart — an act of pure racial hatred made possible by decades of dehumanization, militarization, and near-total impunity.",
+  "linkedPitch": null,
+  "location": "West Bank, occupied Palestinian territory",
+  "mainImage": {
+    "_key": "body-img-susya-violence",
+    "_type": "image",
+    "alt": "Damaged structures and belongings scattered in a Palestinian community area in the occupied West Bank after a settler attack",
+    "asset": {
+      "_ref": "image-38e6fd710d53997cb60584f169abb12e85b3be43-1501x790-webp",
+      "_type": "reference"
+    },
+    "caption": "Documented settler violence in Susya, occupied West Bank, showing aftermath of attacks on Palestinian property and communities, March 2026.",
+    "credit": "Human Rights Watch"
+  },
+  "methodology": "This article draws on video evidence circulated on social media, UN OCHA data on settler violence and displacement, reports from Human Rights Watch, Amnesty International, and Yesh Din, and reporting from Middle East Monitor, Middle East Eye, Al Jazeera, and Reuters. Cross-referenced with UTM's prior investigations into the settler paramilitary infrastructure, colonization models, and documented attacks on Palestinian communities.",
+  "needsReview": null,
+  "publishedAt": "2026-07-16T18:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "the-paramilitary-behind-the-pogroms-settler-paramilitaries-state-backed-ethnic-cleansing-west-bank",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "israel-colonization-cyprus-settler-enclaves-military-outposts",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "jalud-settlers-burn-electricity-cables-west-bank-terror-campaign",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "west-bank-settlers-8000-sheep-goats-stolen-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "israeli-settlers-attack-west-bank-school-kill-children",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "article-d6a99359-2ce7-4fb1-a801-839bdd8956cd",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "a-child-s-body-dragged-behind-a-golf-cart-the-settler-pogrom-the-world-refuses-to-stop"
+  },
+  "tags": [
+    "West Bank",
+    "settler violence",
+    "Palestinian children",
+    "Israeli settlers",
+    "West Bank pogroms",
+    "ethnic cleansing",
+    "golf cart incident",
+    "occupied territories"
+  ],
+  "title": "A Child's Body Dragged Behind a Golf Cart: The Settler Pogrom the World Refuses to Stop",
+  "updatedAt": null,
+  "videoLink": null
+}

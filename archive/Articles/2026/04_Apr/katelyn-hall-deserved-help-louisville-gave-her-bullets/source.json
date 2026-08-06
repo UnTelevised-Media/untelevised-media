@@ -1,0 +1,38 @@
+{
+  "slug": "katelyn-hall-deserved-help-louisville-gave-her-bullets",
+  "totalSources": 4,
+  "sources": [
+    {
+      "_id": "source-katelyn-wlky",
+      "description": "Coverage of Katelyn Hall's death, including family statements and details about the mental health crisis call that ended in her shooting by LMPD officers Robert Baker and Robert Gabbart.",
+      "isAnonymous": false,
+      "label": "WLKY - Family mourns woman having mental health crisis killed by LMPD",
+      "type": "document",
+      "url": "https://www.wlky.com/article/family-mourns-woman-mental-health-crisis-killed-lmpd-katelyn-hall/70887545"
+    },
+    {
+      "_id": "source-katelyn-whas11",
+      "description": "Detailed account of the bodycam footage, including timeline of the 13-minute encounter and Deputy Chief Emily McKinley's explanation of why tasers were not deployed.",
+      "isAnonymous": false,
+      "label": "WHAS11 - LMPD releases bodycam days after woman in mental health crisis fatally shot",
+      "type": "document",
+      "url": "https://www.whas11.com/article/news/local/lmpd-bodycam-katelyn-hall-police-shooting-mental-health-crisis/417-73a330bc-051d-4fbe-b87c-671f2a87f881"
+    },
+    {
+      "_id": "source-katelyn-wdrb",
+      "description": "Coverage of the bodycam release, including Deputy Chief McKinley's 'extremely lethal situation' description and family cousin's reaction after watching the footage.",
+      "isAnonymous": false,
+      "label": "WDRB - Louisville police release 'heartbreaking' body camera video showing officers kill suicidal woman",
+      "type": "document",
+      "url": "https://www.wdrb.com/news/louisville-police-release-heartbreaking-body-camera-video-showing-officers-kill-suicidal-woman/article_45cd746c-7d0c-49a0-81da-d71c020a8a8b.html"
+    },
+    {
+      "_id": "source-katelyn-gofundme",
+      "description": "Family's memorial fund for funeral expenses.",
+      "isAnonymous": false,
+      "label": "GoFundMe - In Loving Memory of Katelyn Hall",
+      "type": "other",
+      "url": "https://www.gofundme.com/f/in-loving-memory-of-katelyn-hall"
+    }
+  ]
+}

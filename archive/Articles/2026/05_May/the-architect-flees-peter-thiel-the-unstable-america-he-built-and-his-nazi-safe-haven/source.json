@@ -1,0 +1,54 @@
+{
+  "slug": "the-architect-flees-peter-thiel-the-unstable-america-he-built-and-his-nazi-safe-haven",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-nyt-thiel-argentina-2026-05-28",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times - Peter Thiel Finds An Escape in Argentina",
+      "type": "media",
+      "url": "https://www.nytimes.com/2026/05/28/world/americas/peter-thiel-argentina.html"
+    },
+    {
+      "_id": "source-independent-thiel-argentina-2026-05-28",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Independent - The $687 million irony of Peter Thiel's reported plan to ditch the US for Argentina",
+      "type": "media",
+      "url": "https://www.independent.co.uk/news/world/americas/us-politics/peter-thiel-argentina-billionaire-tax-b2985632.html"
+    },
+    {
+      "_id": "source-cascade-dark-enlightenment-2025-05",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Cascade Institute - Anti-democratic Dark Enlightenment ideas have spread from Silicon Valley to Washington",
+      "type": "media",
+      "url": "https://cascadeinstitute.org/dark-enlightenment/"
+    },
+    {
+      "_id": "source-time-dark-enlightenment-2026-03",
+      "description": null,
+      "isAnonymous": null,
+      "label": "TIME - What We Must Understand About the Dark Enlightenment Movement",
+      "type": "media",
+      "url": "https://time.com/7269166/dark-enlightenment-history-essay/"
+    },
+    {
+      "_id": "source-history-nazi-haven-south-america-2025-05",
+      "description": null,
+      "isAnonymous": null,
+      "label": "History.com - How South America Became a Nazi Haven",
+      "type": "media",
+      "url": "https://www.history.com/articles/how-south-america-became-a-nazi-haven"
+    },
+    {
+      "_id": "source-jacobin-thiel-democracy-2025-10",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jacobin - Peter Thiel, Would-Be Philosopher King, Takes on Democracy",
+      "type": "media",
+      "url": "https://jacobin.com/2025/10/peter-thiel-would-be-philosopher-king-takes-on-democracy"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "slug": "israel-admits-photoshopping-evidence-to-justify-killing-journalist",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "fT4RkbtsUFo0w0XC0uOJra",
+      "description": "Report on Israeli military admitting to posting a photoshopped image of journalist Ali Shoaib to justify killing him",
+      "isAnonymous": null,
+      "label": "Truthout - Israel Admits Photoshopping Evidence",
+      "type": "document",
+      "url": "https://truthout.org/articles/israel-admits-it-used-faked-photo-to-say-slain-journalist-was-part-of-hezbollah/"
+    },
+    {
+      "_id": "nE3O1lobPG69YhI3z2hs6o",
+      "description": "Report on Israeli targeting of journalists, including 209 Palestinian journalists killed in Gaza",
+      "isAnonymous": null,
+      "label": "Time Magazine - Journalists Killed Since Iran War",
+      "type": "document",
+      "url": "https://time.com/article/2026/03/30/these-are-the-journalists-israel-has-killed-since-the-start-of-the-iran-war/"
+    },
+    {
+      "_id": "nE3O1lobPG69YhI3z2hsBL",
+      "description": "Committee to Protect Journalists statement on Israeli strike killing three journalists in southern Lebanon",
+      "isAnonymous": null,
+      "label": "CPJ Statement - Lebanese Journalists Killed",
+      "type": "statement",
+      "url": "https://cpj.org/2026/03/israeli-strike-on-media-car-targets-kills-3-journalists-in-south-lebanon/"
+    },
+    {
+      "_id": "nE3O1lobPG69YhI3z2hsFs",
+      "description": "ABC News Verify report on IDF posting fake image, with expert commentary from Associate Professor Timothy Graham",
+      "isAnonymous": null,
+      "label": "ABC News - IDF Misinformation Expert Commentary",
+      "type": "media",
+      "url": "https://www.abc.net.au/news/2026-03-30/idf-misinformation-on-lebanese-journalist/106511282"
+    },
+    {
+      "_id": "nE3O1lobPG69YhI3z2hsKP",
+      "description": "Investigation into Israeli military's 'Legitimization Cell' unit that creates propaganda to justify targeting journalists",
+      "isAnonymous": null,
+      "label": "Truthout - Israeli 'Legitimization Cell' Report",
+      "type": "document",
+      "url": "https://truthout.org/articles/report-israeli-military-has-unit-that-exists-to-justify-targeting-journalists/"
+    }
+  ]
+}

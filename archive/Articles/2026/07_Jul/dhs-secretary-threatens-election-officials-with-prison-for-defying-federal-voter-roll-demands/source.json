@@ -1,0 +1,46 @@
+{
+  "slug": "dhs-secretary-threatens-election-officials-with-prison-for-defying-federal-voter-roll-demands",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-nbc-news-homeland-security-secretary-markwayne-mullin-threatens-states-over-elec",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News — Homeland Security Secretary Markwayne Mullin threatens states over elections",
+      "type": "article",
+      "url": "https://www.nbcnews.com/politics/elections/homeland-security-secretary-markwayne-mullin-threatens-states-election-rcna588002"
+    },
+    {
+      "_id": "source-politico-dhs-secretary-vows-fines-and-even-prison-time-for-election-officials",
+      "description": null,
+      "isAnonymous": null,
+      "label": "POLITICO — DHS secretary vows fines and even prison time for election officials",
+      "type": "article",
+      "url": "https://www.politico.com/news/2026/07/17/dhs-secretary-vows-fines-and-even-prison-time-for-election-officials-that-dont-comply-01003116"
+    },
+    {
+      "_id": "source-democracy-docket-dhs-secretary-mullin-threatens-to-prosecute-election-chiefs",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Docket — DHS Secretary Mullin threatens to prosecute election chiefs",
+      "type": "article",
+      "url": "https://www.democracydocket.com/news-alerts/homeland-security-mullin-threaten-state-election-officials-voter-registration-save/"
+    },
+    {
+      "_id": "source-common-dreams-dhs-chief-threatens-prison-time-for-state-election-officials",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Common Dreams — DHS Chief Threatens Prison Time for State Election Officials",
+      "type": "article",
+      "url": "https://www.commondreams.org/news/markwayne-mullin-election-threats"
+    },
+    {
+      "_id": "source-los-angeles-times-trump-allies-seek-to-sow-mistrust-about-election-security",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Los Angeles Times — Trump allies seek to sow mistrust about election security",
+      "type": "article",
+      "url": "https://www.latimes.com/politics/story/2026-07-17/trump-allies-seek-to-sow-mistrust-about-election-security-ahead-of-midterms"
+    }
+  ]
+}

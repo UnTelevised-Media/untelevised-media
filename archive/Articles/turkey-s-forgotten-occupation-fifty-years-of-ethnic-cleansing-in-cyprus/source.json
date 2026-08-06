@@ -1,0 +1,86 @@
+{
+  "slug": "turkey-s-forgotten-occupation-fifty-years-of-ethnic-cleansing-in-cyprus",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "src-turkey-cyprus-echr-2001",
+      "description": "ECHR Grand Chamber ruling finding Turkey responsible for ethnic cleansing of Greek Cypriots",
+      "isAnonymous": null,
+      "label": "ECHR — Cyprus v. Turkey (2001)",
+      "type": "document",
+      "url": "https://hudoc.echr.coe.int/eng?i=001-59454"
+    },
+    {
+      "_id": "src-turkey-cyprus-echr-2014",
+      "description": "ECHR ordered Turkey to pay €90M for missing persons and enclaved Greek Cypriots",
+      "isAnonymous": null,
+      "label": "ECHR — Just Satisfaction (2014)",
+      "type": "document",
+      "url": "https://hudoc.echr.coe.int/eng?i=001-3213"
+    },
+    {
+      "_id": "src-turkey-cyprus-unscr-541",
+      "description": "UNSC declared TRNC independence legally invalid",
+      "isAnonymous": null,
+      "label": "UNSC Resolution 541 (1983)",
+      "type": "document",
+      "url": "http://unscr.com/en/resolutions/541"
+    },
+    {
+      "_id": "src-turkey-cyprus-greekreporter",
+      "description": "Mass graves and missing Greek Cypriots from the 1974 Turkish invasion",
+      "isAnonymous": null,
+      "label": "Greek Reporter — Missing Persons 1974",
+      "type": "article",
+      "url": "https://greekreporter.com/2022/07/20/identifying-remains-missing-turkish-invasion-cyprus/"
+    },
+    {
+      "_id": "src-turkey-cyprus-wiki-casualties",
+      "description": "Maratha-Sandalaris-Aloa massacre documentation",
+      "isAnonymous": null,
+      "label": "Wikipedia — Civilian Casualties Cyprus Conflict",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/Civilian_casualties_and_displacements_during_the_Cyprus_conflict"
+    },
+    {
+      "_id": "src-turkey-cyprus-politico-unga",
+      "description": "Erdogan September 2024 UNGA speech comparing Netanyahu to Hitler",
+      "isAnonymous": null,
+      "label": "Politico — Erdogan Compares Netanyahu to Hitler at UNGA",
+      "type": "article",
+      "url": "https://www.politico.eu/article/turkey-recep-tayyip-erdogan-compare-israel-benjamin-netanyahu-adolf-hitler-unga/"
+    },
+    {
+      "_id": "src-turkey-cyprus-greekreporter-diplo",
+      "description": "Israeli FM Saar calls out Erdogan's hypocrisy over Cyprus occupation",
+      "isAnonymous": null,
+      "label": "Greek Reporter — Israel Condemns Turkey Cyprus (2025)",
+      "type": "article",
+      "url": "https://greekreporter.com/2025/06/19/israel-condemns-turkey-occupation-cyprus-fiery-diplomatic-row/"
+    },
+    {
+      "_id": "src-turkey-cyprus-toi-hitler",
+      "description": "Erdogan escalating rhetoric 2025",
+      "isAnonymous": null,
+      "label": "Times of Israel — Erdogan: Netanyahu Surpassed Hitler",
+      "type": "article",
+      "url": "https://www.timesofisrael.com/erdogan-says-netanyahus-genocidal-methods-would-make-hitler-jealous/"
+    },
+    {
+      "_id": "src-turkey-cyprus-meforum",
+      "description": "Analysis of Turkey's double standard on occupation",
+      "isAnonymous": null,
+      "label": "Middle East Forum — Erdogan Hypocrisy Gaza Cyprus",
+      "type": "article",
+      "url": "https://www.meforum.org/mef-observer/israel-should-challenge-erdogans-hypocrisy-on-gaza-and-cyprus"
+    },
+    {
+      "_id": "src-turkey-cyprus-reuters",
+      "description": "ECHR €90M compensation ruling",
+      "isAnonymous": null,
+      "label": "Reuters — ECHR Orders Turkey to Pay Cyprus",
+      "type": "article",
+      "url": "https://www.reuters.com/article/us-cyprus-turkey-courts/european-court-orders-turkey-to-compensate-cyprus-for-1974-invasion-idUSBREA4B0K520140512/"
+    }
+  ]
+}

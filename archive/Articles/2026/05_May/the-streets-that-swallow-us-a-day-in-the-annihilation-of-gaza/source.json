@@ -1,0 +1,22 @@
+{
+  "slug": "the-streets-that-swallow-us-a-day-in-the-annihilation-of-gaza",
+  "totalSources": 2,
+  "sources": [
+    {
+      "_id": "IiAJyG0U3TUo0O3OCvCqdh",
+      "description": "First-hand real-time testimony from UnTelevised Media correspondent Salah Akram, on the ground in Gaza City during the IOF airstrike on the Al-Mu'taz building and Al-Wahda Street. All timestamps Central Time.",
+      "isAnonymous": null,
+      "label": "Salah Akram — Eyewitness, Gaza City (May 15, 2026)",
+      "type": "eyewitness",
+      "url": ""
+    },
+    {
+      "_id": "source-salah-gaza-may17-2026",
+      "description": "First-hand real-time testimony from UnTelevised Media correspondent Salah Akram, on the ground near Khan Younis during escalated Israeli bombardment across Gaza, Khan Younis, Deir al-Balah, and Al-Mawasi. Kitchen strike near Al-Aqsa Martyrs Hospital kills 3. Civilian casualties in Khan Younis. Artillery, gunboats, and drone strikes across the Strip. All timestamps Central Time.",
+      "isAnonymous": null,
+      "label": "Salah Akram — Eyewitness, Khan Younis (May 17, 2026)",
+      "type": "onscene",
+      "url": ""
+    }
+  ]
+}

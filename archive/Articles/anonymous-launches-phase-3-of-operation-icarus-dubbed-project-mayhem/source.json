@@ -1,0 +1,54 @@
+{
+  "slug": "anonymous-launches-phase-3-of-operation-icarus-dubbed-project-mayhem",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2w2o",
+      "description": null,
+      "isAnonymous": null,
+      "label": "anonresistance.am.dx",
+      "type": "article",
+      "url": "http://anonresistance.am.dx"
+    },
+    {
+      "_id": "DJ1Y76QLqJX8nukZ868yb2",
+      "description": null,
+      "isAnonymous": null,
+      "label": "twitter.com/anonyresistance",
+      "type": "article",
+      "url": "https://twitter.com/anonyresistance"
+    },
+    {
+      "_id": "7ONx74QMiI10eazwub4u9X",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.facebook.com/Anonymous-OpIcarus-Shut-Down-The-Banks-1092056780854948",
+      "type": "article",
+      "url": "https://www.facebook.com/Anonymous-OpIcarus-Shut-Down-The-Banks-1092056780854948/"
+    },
+    {
+      "_id": "7ONx74QMiI10eazwub4uLH",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.facebook.com/events/253290365030536",
+      "type": "article",
+      "url": "https://www.facebook.com/events/253290365030536/"
+    },
+    {
+      "_id": "DJ1Y76QLqJX8nukZ868zOw",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.rt.com/news/anonymous-leaks-fight-club-057",
+      "type": "article",
+      "url": "https://www.rt.com/news/anonymous-leaks-fight-club-057/"
+    },
+    {
+      "_id": "7ONx74QMiI10eazwub4uZx",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.stock-trading-infocentre.com/list-of-stock-exchanges.html",
+      "type": "article",
+      "url": "http://www.stock-trading-infocentre.com/list-of-stock-exchanges.html"
+    }
+  ]
+}

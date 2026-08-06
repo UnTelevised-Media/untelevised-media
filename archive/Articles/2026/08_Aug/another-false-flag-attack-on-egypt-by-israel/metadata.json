@@ -1,0 +1,160 @@
+{
+  "_id": "29803114-066a-403d-a340-9c7ff0c473c2",
+  "allowComments": true,
+  "author": {
+    "_ref": "DJ1Y76QLqJX8nukZ868jxy",
+    "_type": "reference",
+    "name": "Ash Fawkes"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-3",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "A drone struck two LNG vessels at Egypt's Damietta port. No one claimed it. Iranian FM Araghchi called it an Israeli false flag — and the logic holds: Iran has nothing to gain from attacking Egypt.",
+  "eventDate": "2026-07-29T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "A drone struck the Energos Winter, a U.S.-owned LNG vessel docked at Egypt's Port of Damietta on July 29, 2026. The fire spread to a second tanker, the GasLog Salem. No fatalities were reported and no group claimed responsibility.",
+      "question": "What happened at Damietta port?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Iranian Foreign Minister Araghchi stated that Iran has been rebuilding relations with Egypt and has no interest in attacking Egyptian territory. He accused Israel of conducting a false flag operation designed to undermine regional peace and drag Egypt into the wider conflict.",
+      "question": "Why does Iran blame Israel for the attack?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Two days before the Damietta strike, Ukrainian drones hit an Iranian cargo vessel in the Caspian Sea, killing an Iranian sailor. Iranian state television named Damietta as a possible retaliation target — which Western media cited as evidence of Iranian involvement, but which Araghchi argues is evidence of a pre-planned false narrative.",
+      "question": "What is the connection to the Caspian Sea attack?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "With the Red Sea paralyzed by Houthi attacks and the Strait of Hormuz in crisis since the U.S.-Iran war, the Suez Canal is the last functional route for energy shipments between the Middle East and Europe. An attack on infrastructure near the canal threatens global shipping and could be used to justify foreign military intervention in Egypt.",
+      "question": "Why does the Suez Canal matter in this context?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": false,
+  "imageGallery": {
+    "images": [
+      {
+        "_key": "l1q71gr5",
+        "_type": "image",
+        "alt": "Mossad Slogan",
+        "asset": {
+          "_ref": "image-a0647881db627c2ad924ba7d208969c92fabf0b4-590x256-webp",
+          "_type": "reference"
+        }
+      }
+    ]
+  },
+  "isFieldReport": false,
+  "keywords": [
+    "Damietta drone attack Egypt",
+    "Israel false flag Egypt",
+    "Suez Canal energy attack",
+    "Araghchi false flag Israel",
+    "Energos Winter LNG",
+    "GasLog Salem tanker",
+    "Iran Egypt relations",
+    "Caspian Sea Ukraine strike",
+    "regional war expansion Egypt",
+    "LNG hub drone strike"
+  ],
+  "leadParagraph": "On July 29, 2026, a drone struck the Energos Winter, a U.S.-owned LNG vessel at Egypt's Port of Damietta, triggering a fire that spread to a second tanker. No group claimed responsibility. Iranian Foreign Minister Araghchi immediately accused Israel of a false flag operation — pointing out that Iran has been rebuilding relations with Egypt and has no strategic interest in attacking its territory.",
+  "linkedPitch": null,
+  "location": "Damietta, Egypt",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Smoke and fire visible on two large industrial vessels at a port facility during the drone attack aftermath at Damietta, Egypt",
+    "asset": {
+      "_ref": "image-99b50af30b1dc71d5f13ef2d8eaec66a0b1d1015-1024x572-webp",
+      "_type": "reference"
+    },
+    "caption": "Smoke and fire visible on vessels at the Port of Damietta, Egypt, on July 29, 2026, after a drone strike damaged two LNG tankers.",
+    "credit": "Discovery Alert"
+  },
+  "methodology": "Reported using coverage from CNBC, the New York Times, Euronews, The War Zone, Anadolu Agency, ZeroHedge, Ynet News, Reuters, BBC, Al Jazeera, The Media Line, Sudan Tribune, and Windward maritime intelligence.",
+  "needsReview": false,
+  "publishedAt": null,
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "iran-israel-ceasefire-dead-direct-exchange-june-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "rsf-el-obeid-next-fasher",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "ukraine-strikes-iranian-vessel-caspian-sea-one-sailor-killed",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "israel-builds-settlements-on-gazas-graves-the-open-air-annexation-and-the-language-of-genocide-made-concrete",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "the-weaponization-of-antisemitism",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "another-false-flag-attack-on-egypt-by-israel"
+  },
+  "tags": [
+    "Egypt",
+    "Israel",
+    "False Flag",
+    "Drone Attack",
+    "Damietta",
+    "Suez Canal",
+    "Iran",
+    "LNG Tanker",
+    "Seyyed Abbas Araghchi",
+    "US-Iran War"
+  ],
+  "title": "Another False Flag Attack on Egypt by Israel",
+  "updatedAt": "2026-08-01T21:41:19.895Z",
+  "videoLink": ""
+}

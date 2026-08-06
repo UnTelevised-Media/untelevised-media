@@ -1,0 +1,46 @@
+{
+  "slug": "550-assault-charges-countless-lies-exposing-ice-s-campaign-of-fabricated-violence",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-new-york-times-they-were-charged-with-assaulting-ice-agents-the-cases-are-crumbl",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — They Were Charged With Assaulting ICE Agents. The Cases Are Crumbling.",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/07/18/us/ice-assaults-protesters.html"
+    },
+    {
+      "_id": "source-new-york-times-fbi-will-no-longer-investigate-ice-confrontations",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — FBI Will No Longer Investigate ICE Confrontations",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/07/19/us/politics/fbi-ice-agents-investigations-shootings.html"
+    },
+    {
+      "_id": "source-truthout-federal-agents-reportedly-told-fbi-will-no-longer-investigate-ice-confr",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Truthout — Federal Agents Reportedly Told FBI Will No Longer Investigate ICE Confrontations",
+      "type": "article",
+      "url": "https://truthout.org/articles/federal-agents-reportedly-told-fbi-will-no-longer-investigate-ice-confrontations/"
+    },
+    {
+      "_id": "source-washington-post-ice-arrests-have-surged-in-july-reaching-a-high-under-trump",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Washington Post — ICE arrests have surged in July, reaching a high under Trump",
+      "type": "article",
+      "url": "https://www.washingtonpost.com/immigration/2026/07/17/ice-arrests-have-surged-july-reaching-high-under-trump/"
+    },
+    {
+      "_id": "source-the-guardian-calls-mount-to-remove-ice-from-us-streets-after-agents-killed-two-m",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Calls mount to remove ICE from US streets after agents killed two men",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/jul/15/remove-ice-us-streets-joan-sebastian-duran-guerrero-lorenzo-salgado-araujo"
+    }
+  ]
+}

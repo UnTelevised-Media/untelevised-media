@@ -1,0 +1,173 @@
+{
+  "_id": "us-iran-war-day-142-2026",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "a51e0b3744d5",
+      "_ref": "c469bb8e-7593-476f-8a80-fcef4fe39430",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-politics",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us-news",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "142 days into the US-Iran war, airstrikes have entered their 10th consecutive night. 17 Americans dead, thousands of Iranians killed, oil tankers burning in the Strait of Hormuz, and the ceasefire deal in ruins. The war of choice nobody will admit to.",
+  "eventDate": "2026-07-20",
+  "faqs": [
+    {
+      "_key": "7K2Pz7AtCJRG52kfOs6ebn",
+      "_type": "faqItem",
+      "answer": "The war began on February 28, 2026, when the US and Israel launched joint airstrikes codenamed 'Operation Epic Fury' that killed Supreme Leader Ayatollah Ali Khamenei and at least 40 other Iranian officials.",
+      "question": "When did the US-Iran war start?"
+    },
+    {
+      "_key": "7K2Pz7AtCJRG52kfOs6ecS",
+      "_type": "faqItem",
+      "answer": "As of July 20, 2026, 20 American service members have been killed (17 soldiers and 1 contractor, plus additional coalition casualties), with 583 wounded.",
+      "question": "How many Americans have died in the Iran war?"
+    },
+    {
+      "_key": "7K2Pz7AtCJRG52kfOs6ed7",
+      "_type": "faqItem",
+      "answer": "Iran has effectively closed the Strait of Hormuz, which carries 20% of the world's traded oil. Two oil tankers have been hit and exploded, and shipping has nearly ground to a halt, causing Brent crude prices to spike to $88/barrel.",
+      "question": "What is happening in the Strait of Hormuz?"
+    },
+    {
+      "_key": "7K2Pz7AtCJRG52kfOs6edm",
+      "_type": "faqItem",
+      "answer": "Yes. A preliminary deal was signed June 17, and attacks stopped June 28. But the deal collapsed on July 8 after mutual attacks, and fighting has escalated every day since. The US has now entered its 10th consecutive night of strikes.",
+      "question": "Was there a ceasefire deal?"
+    },
+    {
+      "_key": "7K2Pz7AtCJRG52kfOs6eeR",
+      "_type": "faqItem",
+      "answer": "At least 8,080 people have been killed and 49,241 wounded across all parties — including Iran, Lebanon, Israel, the US, Iraq, and Gulf states.",
+      "question": "How many total casualties are there across all countries?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "US Iran war",
+    "Trump Iran strikes",
+    "Strait of Hormuz closure",
+    "Operation Epic Fury",
+    "Iran oil blockade",
+    "US military escalation",
+    "Middle East war 2026",
+    "IRGC",
+    "ceasefire collapse",
+    "Iran nuclear program",
+    "oil prices spike",
+    "Gulf shipping attacks"
+  ],
+  "leadParagraph": "The United States military entered its 10th consecutive night of airstrikes on Iran on July 20, 2026 — marking 142 days of a war that was supposed to be over in a week. Seventeen American service members are dead. More than 400 Iranians have been killed in the latest escalation alone. Two oil tankers exploded in the Strait of Hormuz after Iran warned ships not to use alternate routes. The ceasefire deal that was supposed to end this has collapsed into dust.",
+  "linkedPitch": null,
+  "location": "Iran / Strait of Hormuz / United States / Middle East",
+  "mainImage": {
+    "_type": "image",
+    "alt": "People standing on a collapsed section of a highway bridge destroyed by US military airstrikes in Hormozgan province, southern Iran",
+    "asset": {
+      "_ref": "image-2e0315d38b997fceb83259053a97fe28d9a96a8d-808x539-webp",
+      "_type": "reference"
+    },
+    "caption": "A destroyed bridge in Hormozgan province, southern Iran, after US airstrikes on July 18, 2026",
+    "credit": "AP Photo/Amirhosein Khorgooi via ISNA",
+    "crop": {
+      "_type": "sanity.imageCrop",
+      "bottom": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0
+    },
+    "hotspot": {
+      "_type": "sanity.imageHotspot",
+      "height": 1,
+      "width": 1,
+      "x": 0.5,
+      "y": 0.5
+    }
+  },
+  "methodology": "Casualty figures compiled from Iranian state media (IRNA), the NGO Human Rights Activists in Iran (HRANA), US Central Command, Hengaw Organization for Human Rights, and Lebanese Health Ministry. Oil price data sourced from CNBC, Al Jazeera, and the New York Times. Economic impact data from the UN Development Programme, International Energy Agency, and the European Central Bank. Timeline reconstructed from NPR, AP News, CNN, PBS, Euronews, and Britannica. All sources are cited in the article body.",
+  "needsReview": null,
+  "publishedAt": "2026-07-21T03:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "c9yzsqzw5ic",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "hezbollah-lebanon-israel-talks-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "erasing-palestine-trump-netanyahu-board-of-peaces-final-solution",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "insider-trading-iran-war-oil-futures-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "article-7da4c05d-c947-4ada-bc5d-c82202975ff0",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "day-142-the-us-iran-war-is-spiraling-and-nobody-in-washington-has-a-plan-to-stop-it"
+  },
+  "tags": [
+    "Iran War 2026",
+    "US Military",
+    "Strait of Hormuz",
+    "Oil Prices",
+    "Trump",
+    "Imperialism",
+    "Israel",
+    "Hezbollah",
+    "War of Aggression",
+    "Khamenei"
+  ],
+  "title": "Day 142: The US-Iran War Is Spiraling — And Nobody in Washington Has a Plan to Stop It",
+  "updatedAt": null,
+  "videoLink": null
+}

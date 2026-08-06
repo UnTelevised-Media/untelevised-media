@@ -1,0 +1,78 @@
+{
+  "slug": "kidnapped-by-israel-beaten-by-spain-flotilla-activists-assaulted-at-bilbao-airport-on-return",
+  "totalSources": 9,
+  "sources": [
+    {
+      "_id": "source-el-pais-bilbao-2026-05-23",
+      "description": null,
+      "isAnonymous": null,
+      "label": "El País — Cuatro detenidos en los incidentes sucedidos en el aeropuerto de Bilbao",
+      "type": "media",
+      "url": "https://elpais.com/internacional/2026-05-23/los-activistas-de-la-flotilla-llegan-al-aeropuerto-del-prat-con-denuncias-de-agresiones-y-violaciones-de-los-soldados-de-israel.html"
+    },
+    {
+      "_id": "source-democrata-torture-flotilla-2026-05-22",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Demócrata — Activists denounce torture and escalation of violence by Israel",
+      "type": "media",
+      "url": "https://www.democrata.es/en/politics/activists-of-the-flotilla-denounce-an-escalation-of-violence-by-israel-with-beatings-and-electric-shocks/"
+    },
+    {
+      "_id": "source-asatunews-bilbao-clash-2026-05-23",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Asatu News — Police Clash with Gaza Flotilla Activists at Bilbao Airport",
+      "type": "media",
+      "url": "https://www.asatunews.co.id/en/police-clash-gaza-flotilla-activists-bilbao-airport"
+    },
+    {
+      "_id": "source-infobae-bilbao-barcelona-2026-05-23",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Infobae — Los activistas de la Flotilla regresan a España con incidentes",
+      "type": "media",
+      "url": "https://www.infobae.com/espana/2026/05/23/los-activistas-de-la-flotilla-regresan-a-espana-con-incidentes-y-cuatro-detenidos-por-desobediencia-en-su-llegada-a-bilbao/"
+    },
+    {
+      "_id": "source-democracy-now-abukeshek-2026-05-12",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Now! — I Was Kidnapped by Israel in Int'l Waters: Saif Abukeshek",
+      "type": "media",
+      "url": "https://www.democracynow.org/2026/5/12/saif_abukeshek"
+    },
+    {
+      "_id": "source-aljazeera-sexual-assault-2026-05-22",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Gaza flotilla activists allege abuse, sexual assault in Israeli detention",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/5/22/gaza-flotilla-activists-allege-abuse-sexual-assault-in-israeli-detention"
+    },
+    {
+      "_id": "source-times-of-israel-ben-gvir-2026-05-20",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Times of Israel — Ben Gvir posts video of himself taunting bound flotilla activists",
+      "type": "media",
+      "url": "https://www.timesofisrael.com/ben-gvir-posts-video-of-himself-taunting-bound-and-detained-gaza-flotilla-activists/"
+    },
+    {
+      "_id": "source-rtve-bilbao-clash-2026-05-23",
+      "description": null,
+      "isAnonymous": null,
+      "label": "RTVE — La Ertzaintza carga contra activistas de la Global Sumud Flotilla en Bilbao",
+      "type": "media",
+      "url": "https://www.rtve.es/noticias/20260523/cargas-ertzaintza-llegada-miembros-global-sumud-flotilla-aeropuerto-bilbao/17082962.shtml"
+    },
+    {
+      "_id": "source-jacobin-spain-palestine-2025-10",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jacobin — Making Spanish Support for Palestine Real",
+      "type": "media",
+      "url": "https://jacobin.com/2025/10/spain-western-sanchez-palestine-israel"
+    }
+  ]
+}

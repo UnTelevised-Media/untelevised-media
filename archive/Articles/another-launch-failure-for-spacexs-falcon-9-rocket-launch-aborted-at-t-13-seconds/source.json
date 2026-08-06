@@ -1,0 +1,54 @@
+{
+  "slug": "another-launch-failure-for-spacexs-falcon-9-rocket-launch-aborted-at-t-13-seconds",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "ar2017-src-spacex-1",
+      "description": "SpaceX official livestream of the CRS-10 launch attempt on February 18, 2017, documenting the T-13 second abort.",
+      "isAnonymous": false,
+      "label": "SpaceX - CRS-10 launch webcast",
+      "type": "media",
+      "url": "http://www.spacex.com/webcast"
+    },
+    {
+      "_id": "ar2017-src-spacex-2",
+      "description": "SpaceX official about page providing context on the company's mission and history.",
+      "isAnonymous": false,
+      "label": "SpaceX - About page",
+      "type": "document",
+      "url": "http://www.spacex.com/about"
+    },
+    {
+      "_id": "ar2017-src-spacex-3",
+      "description": "SpaceX official investigation update on the June 28, 2015 CRS-7 Falcon 9 mission failure.",
+      "isAnonymous": false,
+      "label": "SpaceX - CRS-7 investigation update",
+      "type": "document",
+      "url": "http://www.spacex.com/news/2015/07/20/crs-7-investigation-update"
+    },
+    {
+      "_id": "ar2017-src-spacex-4",
+      "description": "Wikipedia comprehensive list of all Falcon 9 and Falcon Heavy launches providing launch history context.",
+      "isAnonymous": false,
+      "label": "Wikipedia - List of Falcon 9 and Falcon Heavy launches",
+      "type": "data",
+      "url": "https://en.wikipedia.org/wiki/List_of_Falcon_9_and_Falcon_Heavy_launches"
+    },
+    {
+      "_id": "ar2017-src-spacex-5",
+      "description": "SpaceX official CRS-10 mission press kit PDF providing mission specifications and objectives.",
+      "isAnonymous": false,
+      "label": "SpaceX - CRS-10 press kit",
+      "type": "document",
+      "url": "http://www.spacex.com/sites/spacex/files/crs10presskitfinal.pdf"
+    },
+    {
+      "_id": "ar2017-src-spacex-6",
+      "description": "The Verge article explaining what happened and why in the SpaceX Falcon 9 pad explosion.",
+      "isAnonymous": false,
+      "label": "The Verge - SpaceX Falcon 9 rocket launch explosion explainer",
+      "type": "article",
+      "url": "http://www.theverge.com/2017/1/18/14256534/spacex-falcon-9-rocket-launch-explosion-what-happened-why"
+    }
+  ]
+}

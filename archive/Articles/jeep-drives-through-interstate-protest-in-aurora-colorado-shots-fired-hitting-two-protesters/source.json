@@ -1,0 +1,30 @@
+{
+  "slug": "jeep-drives-through-interstate-protest-in-aurora-colorado-shots-fired-hitting-two-protesters",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "Ulg91jjPFgaBD1fUiNoH45",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Cut the Plastic Live Stream from Aurora Courthouse",
+      "type": "media",
+      "url": "https://www.youtube.com/watch?v=ypAXtCqRCww"
+    },
+    {
+      "_id": "23865779-6908-41a1-9e6d-fdc941a449b0",
+      "description": null,
+      "isAnonymous": false,
+      "label": "Unicorn Riot Livestream",
+      "type": "media",
+      "url": "https://www.youtube.com/watch?v=I1n6C8Joue8"
+    },
+    {
+      "_id": "Ulg91jjPFgaBD1fUiNoHhi",
+      "description": "Events witnessed by Edward are documented in this report.",
+      "isAnonymous": null,
+      "label": "Radical Edward - On the Ground Reporting",
+      "type": "onscene",
+      "url": null
+    }
+  ]
+}

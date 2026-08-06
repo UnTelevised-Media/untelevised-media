@@ -1,0 +1,62 @@
+{
+  "slug": "oct-7th-a-false-flag-that-will-live-in-infamy",
+  "totalImages": 6,
+  "downloadedAt": "2026-08-05T20:48:00.795Z",
+  "mainImage": {
+    "alt": "Wide shot of abandoned cars scattered across a dusty field with personal belongings and debris at the Nova music festival site near Re'im, Israel",
+    "caption": "Abandoned cars, personal belongings, and debris at the site of the Nova music festival in Re'im, Israel, on October 12, 2023, days after Hamas fighters killed 364 people at the open-air festival near the Gaza border.",
+    "credit": "Getty Images via ABC News",
+    "asset": "image-7955e7e1c7f6a3e31d7012e83350a8743d34ee06-3072x2048-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [
+    {
+      "index": 0,
+      "alt": "Oct. 7th Hostage Poster",
+      "caption": "",
+      "credit": "",
+      "asset": "image-d0271f40d0f7762264dc2983826ba8c3380b53b5-1300x878-jpg",
+      "filename": "gallery-1.jpg",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "The same slogan as 911",
+      "caption": "",
+      "credit": "",
+      "asset": "image-4dd9d865a9364f1f67f14dfbf0b300f1f8d2ceb9-474x300-webp",
+      "filename": "gallery-2.webp",
+      "downloaded": true
+    }
+  ],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Wide shot of abandoned cars scattered across a dusty field with personal belongings and debris at the Nova music festival site near Re'im, Israel",
+      "caption": "Abandoned cars, personal belongings, and debris at the site of the Nova music festival in Re'im, Israel, on October 12, 2023, days after Hamas fighters killed 364 people at the open-air festival near the Gaza border.",
+      "credit": "Getty Images via ABC News",
+      "asset": "image-7955e7e1c7f6a3e31d7012e83350a8743d34ee06-3072x2048-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Israeli AH-64 Apache helicopter flying over open terrain near the Gaza border firing defensive flares",
+      "caption": "An Israeli AH-64 Apache attack helicopter fires flares near the Gaza border in October 2023. Israeli helicopters were later reported to have fired on civilians at the Nova music festival during the October 7 attack.",
+      "credit": "Getty Images via The War Zone",
+      "asset": "image-a2aeafd83d88bef8115cc8652dea41a69d94baae-3500x2333-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Israeli Apache helicopter firing a missile with smoke trail seen from ground near the Israel-Gaza border",
+      "caption": "An Israeli Apache helicopter fires a missile toward Gaza on May 14, 2024. Israeli attack helicopters were reported to have fired on civilians at the Nova festival during the October 7, 2023 attack under the Hannibal Directive.",
+      "credit": "Reuters via Al Jazeera",
+      "asset": "image-fa19ded03e33dc4216750abe9565e6e4eeef92eb-3804x2594-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    }
+  ]
+}

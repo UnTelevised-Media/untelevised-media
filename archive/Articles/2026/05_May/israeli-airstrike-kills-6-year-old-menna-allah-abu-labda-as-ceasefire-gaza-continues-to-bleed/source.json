@@ -1,0 +1,30 @@
+{
+  "slug": "israeli-airstrike-kills-6-year-old-menna-allah-abu-labda-as-ceasefire-gaza-continues-to-bleed",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "source-ap-killed-girl-gaza-2026-05-25",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News - Palestinian Woman and Girl Killed in Israeli Airstrike",
+      "type": "article",
+      "url": "https://apnews.com/article/israel-palestinians-gaza-hamas-war-430e371619cdb2053b0acd7b3076c449"
+    },
+    {
+      "_id": "source-arabnews-gaza-girl-killed-2026-05-25",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Arab News - Israeli Fire Kills Six-Year-Old Girl and Woman in Gaza",
+      "type": "article",
+      "url": "https://www.arabnews.com/node/2644904/middle-east"
+    },
+    {
+      "_id": "source-democracynow-headlines-2026-05-26",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Now - Headlines for May 26, 2026",
+      "type": "media",
+      "url": "https://www.democracynow.org/2026/5/26/headlines"
+    }
+  ]
+}

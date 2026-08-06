@@ -1,0 +1,254 @@
+{
+  "slug": "trump-is-hollowing-out-the-guardrails-against-one-man-rule",
+  "totalSources": 31,
+  "sources": [
+    {
+      "_id": "source-oped-journalofdemocracy",
+      "description": "Academic article on democratic backsliding",
+      "isAnonymous": null,
+      "label": "Journal of Democracy",
+      "type": "article",
+      "url": "https://www.journalofdemocracy.org/articles/on-democratic-backsliding/"
+    },
+    {
+      "_id": "source-oped-brookings",
+      "description": "Analysis of executive aggrandizement in democratic erosion",
+      "isAnonymous": null,
+      "label": "Brookings Institution",
+      "type": "other",
+      "url": "https://www.brookings.edu/articles/democratic-erosion-the-role-of-executive-aggrandizement/"
+    },
+    {
+      "_id": "source-oped-vdem",
+      "description": "Democracy Report 2026",
+      "isAnonymous": null,
+      "label": "V-Dem Institute",
+      "type": "data",
+      "url": "https://www.v-dem.net/documents/75/V-Dem_Institute_Democracy_Report_2026_lowres.pdf"
+    },
+    {
+      "_id": "source-oped-wh1",
+      "description": "April 2025: Creates Schedule Policy/Career federal employee category",
+      "isAnonymous": null,
+      "label": "White House Fact Sheet",
+      "type": "data",
+      "url": "https://www.whitehouse.gov/fact-sheets/2025/04/fact-sheet-president-donald-j-trump-creates-new-federal-employee-category-to-enhance-accountability/"
+    },
+    {
+      "_id": "source-oped-opm",
+      "description": "OPM finalizes Schedule Policy/Career rule",
+      "isAnonymous": null,
+      "label": "Office of Personnel Management",
+      "type": "statement",
+      "url": "https://www.opm.gov/news/news-releases/opm-finalizes-schedule-policycareer-rule-to-strengthen-accountability/"
+    },
+    {
+      "_id": "source-oped-ap1",
+      "description": "Coverage of Columbia University funding pressure",
+      "isAnonymous": null,
+      "label": "Associated Press",
+      "type": "article",
+      "url": "https://apnews.com/article/columbia-university-funding-trump-fa70143c715df8fd4ef337c0e1ccf872"
+    },
+    {
+      "_id": "source-oped-reuters1",
+      "description": "Columbia research hit by Trump funding cuts",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/world/us/columbia-research-takes-immediate-hit-trump-funding-cuts-2025-03-21/"
+    },
+    {
+      "_id": "source-oped-doj1",
+      "description": "DOJ sues Harvard University (March 20, 2026)",
+      "isAnonymous": null,
+      "label": "Department of Justice",
+      "type": "statement",
+      "url": "https://www.justice.gov/opa/pr/justice-department-sues-harvard-university-antisemitism"
+    },
+    {
+      "_id": "source-oped-doj2",
+      "description": "DOJ complaint against Harvard",
+      "isAnonymous": null,
+      "label": "Department of Justice",
+      "type": "statement",
+      "url": "https://www.justice.gov/crt/media/1432096/dl"
+    },
+    {
+      "_id": "source-oped-ap2",
+      "description": "Harvard antisemitism demands and Columbia",
+      "isAnonymous": null,
+      "label": "Associated Press",
+      "type": "article",
+      "url": "https://apnews.com/article/harvard-antisemitism-demands-columbia-84d6265d2fbfcd5534006edff638160e"
+    },
+    {
+      "_id": "source-oped-reuters2",
+      "description": "White House appeal over AP access restrictions",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/legal/trump-white-house-appeal-ruling-ap-access-restrictions-2025-04-09/"
+    },
+    {
+      "_id": "source-oped-reuters3",
+      "description": "Judge blocks Pentagon press access policy (March 2026)",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/legal/government/us-judge-blocks-restrictive-pentagon-press-access-policy-2026-03-20/"
+    },
+    {
+      "_id": "source-oped-wh2",
+      "description": "Addressing risks from Perkins Coie LLP",
+      "isAnonymous": null,
+      "label": "White House",
+      "type": "statement",
+      "url": "https://www.whitehouse.gov/presidential-actions/2025/03/addressing-risks-from-perkins-coie-llp/"
+    },
+    {
+      "_id": "source-oped-wh3",
+      "description": "Suspension of security clearances and evaluation of government contracts",
+      "isAnonymous": null,
+      "label": "White House",
+      "type": "statement",
+      "url": "https://www.whitehouse.gov/presidential-actions/2025/02/suspension-of-security-clearances-and-evaluation-of-government-contracts/"
+    },
+    {
+      "_id": "source-oped-wh4",
+      "description": "Addressing risks from Jenner & Block",
+      "isAnonymous": null,
+      "label": "White House",
+      "type": "statement",
+      "url": "https://www.whitehouse.gov/presidential-actions/2025/03/addressing-risks-from-jenner-block/"
+    },
+    {
+      "_id": "source-oped-wh5",
+      "description": "Addressing risks from WilmerHale",
+      "isAnonymous": null,
+      "label": "White House",
+      "type": "statement",
+      "url": "https://www.whitehouse.gov/presidential-actions/2025/03/addressing-risks-from-wilmerhale/"
+    },
+    {
+      "_id": "source-oped-reuters4",
+      "description": "Trump admin drops defense law firm sanctions (March 2026)",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/world/us/trump-administration-drop-defense-law-firm-sanctions-wsj-reports-2026-03-02/"
+    },
+    {
+      "_id": "source-oped-reuters5",
+      "description": "Chief Justice Roberts on judicial impeachment (March 2025)",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/legal/us-chief-justice-roberts-calls-judges-impeachment-are-inappropriate-after-trump-2025-03-18/"
+    },
+    {
+      "_id": "source-oped-reuters6",
+      "description": "DOJ seeks examples of 'egregious' judges (February 2026)",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/legal/government/trumps-doj-seeks-examples-egregious-judges-congress-review-2026-02-10/"
+    },
+    {
+      "_id": "source-oped-reuters7",
+      "description": "Trump pushing Supreme Court to weaken federal judges (March 2026)",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/world/us/how-donald-trump-is-pushing-supreme-court-weaken-federal-judges-2026-03-07/"
+    },
+    {
+      "_id": "source-oped-ap3",
+      "description": "Minnesota immigration surge: Renee Good and Alex Pretti killed",
+      "isAnonymous": null,
+      "label": "Associated Press",
+      "type": "article",
+      "url": "https://apnews.com/article/minnesota-twin-cities-immigration-trump-pretti-good-7090ef32c1c8f166617d82466535d760"
+    },
+    {
+      "_id": "source-oped-reuters8",
+      "description": "Federal agent involved in Minneapolis shooting during immigration surge",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/world/us/us-federal-agent-involved-minneapolis-shooting-during-immigration-surge-city-2026-01-07/"
+    },
+    {
+      "_id": "source-oped-reuters9",
+      "description": "Governor Walz on Trump immigration crackdown in Minnesota",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/legal/government/governor-walz-says-trump-immigration-crackdown-minnesota-may-end-within-days-2026-02-10/"
+    },
+    {
+      "_id": "source-oped-reuters10",
+      "description": "Walz proposes tackling fraud after Trump allegations",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/legal/government/minnesota-governor-proposes-tackle-fraud-after-trump-allegations-led-immigration-2026-02-26/"
+    },
+    {
+      "_id": "source-oped-reuters11",
+      "description": "Minnesota sues US agencies for evidence in killings (March 24, 2026)",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/legal/government/minnesota-sues-us-agencies-access-evidence-killings-rene-good-alex-pretti-2026-03-24/"
+    },
+    {
+      "_id": "source-oped-mpr",
+      "description": "Trump call with Walz over Twin Cities ICE surge",
+      "isAnonymous": null,
+      "label": "MPR News",
+      "type": "article",
+      "url": "https://www.mprnews.org/story/2026/01/26/trump-takes-positive-tone-following-call-with-walz-over-twin-cities-ice-surge"
+    },
+    {
+      "_id": "source-oped-reformer1",
+      "description": "Minnesota sues Trump admin over evidence access",
+      "isAnonymous": null,
+      "label": "Minnesota Reformer",
+      "type": "article",
+      "url": "https://minnesotareformer.com/2026/03/24/minnesota-sues-trump-administration-over-access-to-evidence-in-shootings-by-federal-agents/"
+    },
+    {
+      "_id": "source-oped-reformer2",
+      "description": "Minnesota prosecutors demand evidence in Alex Pretti killing",
+      "isAnonymous": null,
+      "label": "Minnesota Reformer",
+      "type": "article",
+      "url": "https://minnesotareformer.com/2026/02/18/minnesota-prosecutors-demand-evidence-from-federal-government-in-alex-pretti-killing/"
+    },
+    {
+      "_id": "source-oped-uic",
+      "description": "Academic freedom in Hungary: Piecemeal devourment",
+      "isAnonymous": null,
+      "label": "University of Illinois Chicago Law Review",
+      "type": "data",
+      "url": "https://lawreview.law.uic.edu/piecemeal-devourment-academic-freedom-in-hungary/"
+    },
+    {
+      "_id": "source-oped-reuters12",
+      "description": "Russian outlets ask Putin to call off foreign agent media crackdown",
+      "isAnonymous": null,
+      "label": "Reuters",
+      "type": "article",
+      "url": "https://www.reuters.com/world/russian-news-outlets-ask-putin-call-off-foreign-agent-media-crackdown-2021-08-27/"
+    },
+    {
+      "_id": "source-oped-uscc",
+      "description": "Xi Jinping's centralization of authority",
+      "isAnonymous": null,
+      "label": "U.S.-China Economic and Security Review Commission",
+      "type": "data",
+      "url": "https://www.uscc.gov/sites/default/files/2022-11/Chapter_1--CCP_Decision-Making_and_Xi_Jinpings_Centralization_of_Authority.pdf"
+    }
+  ]
+}

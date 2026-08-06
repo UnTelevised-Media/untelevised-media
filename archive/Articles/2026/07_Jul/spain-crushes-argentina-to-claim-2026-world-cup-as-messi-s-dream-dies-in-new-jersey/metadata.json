@@ -1,0 +1,117 @@
+{
+  "_id": "9da6XzhbxB5orQuKiNcjXX",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "cat-0",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-1",
+      "_ref": "7a3c6e44-cbd8-453f-9119-814348f6a9fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Spain defeated Argentina 1-0 in extra time to win the 2026 FIFA World Cup, ending Lionel Messi's bid for a second consecutive title as Ferran Torres scored the decisive goal in the 106th minute at MetLife Stadium.",
+  "eventDate": "2026-07-19T19:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Spain won the 2026 FIFA World Cup, defeating Argentina 1-0 in extra time in the final at MetLife Stadium in East Rutherford, New Jersey. It is Spain's second World Cup title, their first since 2010.",
+      "question": "Who won the 2026 FIFA World Cup?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Ferran Torres scored the winning goal in the 106th minute of extra time, finishing from 8 yards after Nico Williams headed the ball back across goal.",
+      "question": "Who scored the winning goal in the 2026 World Cup final?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "At 39 years old, Messi has not confirmed his international retirement, but the match is widely expected to be his final World Cup appearance. He was awarded the Silver Ball as the tournament's second-best player.",
+      "question": "Was this Lionel Messi's last World Cup?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Enzo Fernández received a second yellow card in stoppage time at the end of regulation for a late challenge on Spain's Pau Cubarsí, reducing Argentina to 10 players for all of extra time.",
+      "question": "Why was Argentina down to 10 men?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Rodri won the Golden Ball (best player), Pau Cubarsí won the Young Player award, Unai Simón won the Golden Glove (best goalkeeper), and Kylian Mbappé won the Golden Boot (top scorer with 10 goals).",
+      "question": "Who won individual awards at the 2026 World Cup?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "2026 World Cup final",
+    "Spain vs Argentina",
+    "Ferran Torres goal",
+    "Messi last World Cup",
+    "Spain wins World Cup 2026",
+    "MetLife Stadium final",
+    "extra time World Cup"
+  ],
+  "leadParagraph": "Spain claimed their second FIFA World Cup title with a 1-0 extra-time victory over defending champions Argentina at MetLife Stadium in East Rutherford, New Jersey. Ferran Torres scored the decisive goal in the 106th minute after Spain dominated the match from the opening whistle, holding Argentina to just two shots in 120 minutes. The defeat likely marks the end of Lionel Messi's World Cup career.",
+  "linkedPitch": null,
+  "location": "MetLife Stadium, East Rutherford, New Jersey",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Spain forward Ferran Torres shoots the ball past Argentina goalkeeper Emiliano Martinez to score the winning goal in the 106th minute of extra time during the 2026 FIFA World Cup Final",
+    "asset": {
+      "_ref": "image-ae52862dde82c9a15a9457045d02dfd282c457e5-2636x1577-webp",
+      "_type": "reference"
+    },
+    "caption": "Spain's Ferran Torres scores the winning goal past Argentina's Emiliano Martinez during the 2026 FIFA World Cup Final at MetLife Stadium in East Rutherford, New Jersey",
+    "credit": "Reuters"
+  },
+  "methodology": "Reported using FIFA Match Centre data, live match reporting from Yahoo Sports, The Athletic, and USA Today. Statistics and match events cross-referenced across multiple outlets. Image credits: Reuters, Getty Images.",
+  "needsReview": null,
+  "publishedAt": "2026-07-19T22:53:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Spain defeated Argentina 1-0 in extra time to claim the 2026 FIFA World Cup. Ferran Torres scored the 106th-minute winner as Messi's bid for back-to-back titles ended in heartbreak.",
+    "metaTitle": "Spain Crushes Argentina to Win 2026 World Cup as Messi's Dream Dies",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "spain-crushes-argentina-to-claim-2026-world-cup-as-messi-s-dream-dies-in-new-jersey"
+  },
+  "tags": [
+    "World Cup",
+    "Spain",
+    "Argentina",
+    "Lionel Messi",
+    "Ferran Torres",
+    "FIFA",
+    "Soccer",
+    "MetLife Stadium",
+    "Extra Time",
+    "2026 World Cup"
+  ],
+  "title": "Spain Crushes Argentina to Claim 2026 World Cup as Messi's Dream Dies in New Jersey",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,86 @@
+{
+  "slug": "iranian-hackers-expose-charlie-kirk-assassination-cover-up-the-rode-mic-theory-confirmed",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "source-ibtimes-uk-iranian-hacker-exploding-pen-mic-claim",
+      "description": null,
+      "isAnonymous": null,
+      "label": "IBTimes UK - Iranian Hacker Exploding Pen Mic Claim",
+      "type": "article",
+      "url": "https://www.ibtimes.co.uk/charlie-kirk-was-never-shot-bullet-murdered-exploding-pen-mic-iranian-hacker-claims-1790165"
+    },
+    {
+      "_id": "source-ibtimes-uk-candace-owens-rode-mic-evidence",
+      "description": "Coverage of Candace Owens analysis of SUV images showing RODE microphone fragments from the Charlie Kirk scene.",
+      "isAnonymous": null,
+      "label": "IBTimes UK - Candace Owens RODE Mic Evidence",
+      "type": "article",
+      "url": "https://www.ibtimes.co.uk/candace-owens-charlie-kirk-microphone-theory-1804841"
+    },
+    {
+      "_id": "source-the-spectator-iranian-hackers-breach-kash-patels-email",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Spectator - Iranian Hackers Breach Kash Patel's Email",
+      "type": "article",
+      "url": "https://spectator.com/article/iranian-hackers-breach-the-gates-of-kashs-valhalla/"
+    },
+    {
+      "_id": "source-planet-today-dod-contract-for-shaped-charge-device",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Planet Today - DOD Contract for Shaped Charge Device",
+      "type": "article",
+      "url": "https://www.planet-today.com/2026/04/iranian-hacker-claims-charlie-kirk-was.html"
+    },
+    {
+      "_id": "source-wikipedia-assassination-of-charlie-kirk",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia - Assassination of Charlie Kirk",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/Assassination_of_Charlie_Kirk"
+    },
+    {
+      "_id": "source-wikipedia-2025-tennessee-aes-plant-explosion",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia - 2025 Tennessee AES Plant Explosion",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/2025_Tennessee_manufacturing_plant_explosion"
+    },
+    {
+      "_id": "source-tpv-sean-x-leaked-mossad-files-tpusa-idf-coordination",
+      "description": null,
+      "isAnonymous": null,
+      "label": "TPV Sean (X) - Leaked Mossad Files TPUSA-IDF Coordination",
+      "type": "media",
+      "url": "https://x.com/tpvsean/status/2075291838156542356"
+    },
+    {
+      "_id": "source-youtube-shorts-iranian-hacker-interview-on-charlie-kirk",
+      "description": null,
+      "isAnonymous": null,
+      "label": "YouTube Shorts - Iranian Hacker Interview on Charlie Kirk",
+      "type": "media",
+      "url": "https://www.youtube.com/shorts/clMPEwrOZ-w"
+    },
+    {
+      "_id": "source-politico-candace-owens-becoming-tpusas-worst-enemy",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Politico - Candace Owens Becoming TPUSA's Worst Enemy",
+      "type": "article",
+      "url": "https://www.politico.com/news/magazine/2026/07/11/candace-owens-charlie-kirk-conspiracy-tpusa-tyler-robinson-trial-00989161"
+    },
+    {
+      "_id": "source-axios-iran-linked-hackers-threaten-trump-aide-emails",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Axios - Iran-Linked Hackers Threaten Trump Aide Emails",
+      "type": "article",
+      "url": "https://www.axios.com/2025/07/01/iran-trump-aides-email-hack-threat"
+    }
+  ]
+}

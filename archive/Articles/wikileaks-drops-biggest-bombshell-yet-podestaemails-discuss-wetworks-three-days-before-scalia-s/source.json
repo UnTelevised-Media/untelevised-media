@@ -1,0 +1,150 @@
+{
+  "slug": "wikileaks-drops-biggest-bombshell-yet-podestaemails-discuss-wetworks-three-days-before-scalia-s",
+  "totalSources": 18,
+  "sources": [
+    {
+      "_id": "src-a643d0428248c0fb5ec0a320",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WikiLeaks Verified Twitter — Podesta Emails Part 4 (RE: Thanks)",
+      "type": "media",
+      "url": "https://twitter.com/wikileaks/status/788417558591721472"
+    },
+    {
+      "_id": "src-44d74eab61ee9d867894fefc",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WikiLeaks — Podesta Emails: RE: Thanks (Email 4539)",
+      "type": "document",
+      "url": "https://wikileaks.org/podesta-emails/emailid/4539"
+    },
+    {
+      "_id": "src-47749693c3ce4dc4d0ba9858",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WikiLeaks Verified Twitter — Podesta Emails Part 4 (Re: Apple ID)",
+      "type": "media",
+      "url": "https://twitter.com/wikileaks/status/788417788268998656"
+    },
+    {
+      "_id": "src-883c40ccbb4340ce42684a78",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Washington Post — Antonin Scalia, Supreme Court Justice, Dies at 79",
+      "type": "article",
+      "url": "https://www.washingtonpost.com/politics/courts_law/scalia-found-dead-in-bedroom-at-west-texas-ranch/2016/02/13/cc344568-d114-11e5-88cd-753e80cd29ad_story.html"
+    },
+    {
+      "_id": "src-491b2ed98d09da30446e7b7b",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Wetwork",
+      "type": "other",
+      "url": "https://en.wikipedia.org/wiki/Wetwork"
+    },
+    {
+      "_id": "src-bc6d51eb1ac99e2d52c10c98",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Antonin Scalia",
+      "type": "other",
+      "url": "https://en.wikipedia.org/wiki/Antonin_Scalia"
+    },
+    {
+      "_id": "src-00c5f0790dded7a0152551b1",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Steve Elmendorf",
+      "type": "other",
+      "url": "https://en.wikipedia.org/wiki/Steve_Elmendorf"
+    },
+    {
+      "_id": "src-e801ac6031c4546c42795cd5",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — John Podesta",
+      "type": "other",
+      "url": "https://en.wikipedia.org/wiki/John_Podesta"
+    },
+    {
+      "_id": "src-3601ac53d1f13c19821210fb",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Your News Wire — Days Before Scalia Death",
+      "type": "article",
+      "url": "https://www.yournewswire.com/days-before-scalias-death/"
+    },
+    {
+      "_id": "src-f9952857f7fea9c7e73e8f71",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Washington Post — Why Some People Believe Scalia Was Murdered",
+      "type": "article",
+      "url": "https://www.washingtonpost.com/news/the-intersect/wp/2016/02/15/why-some-people-believe-scalia-was-murdered/"
+    },
+    {
+      "_id": "src-aa136f57164565ea3baf2e46",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Michael Savage — Was Scalia Murdered? (Radio)",
+      "type": "media",
+      "url": null
+    },
+    {
+      "_id": "src-0de812a00851cb0d5b4a3265",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Washington Post — The Leading Conspiracy Theory About Antonin Scalia Death",
+      "type": "article",
+      "url": "https://www.washingtonpost.com/news/the-intersect/wp/2016/02/16/the-leading-conspiracy-theory-about-antonin-scalias-death/"
+    },
+    {
+      "_id": "src-12c8ecb21d1897281afd11dc",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Politico — Washington Most Powerful, Least Famous People",
+      "type": "article",
+      "url": "https://www.politico.com/magazine/story/2015/10/washingtons-most-powerful-least-famous-people-213064"
+    },
+    {
+      "_id": "src-508e822b0cedb205a200e30f",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Los Angeles Times — Death of Antonin Scalia: Chaos, Confusion and Conflicting Reports",
+      "type": "article",
+      "url": "https://www.latimes.com/nation/la-me-scalia-death-20160214-story.html"
+    },
+    {
+      "_id": "src-92b71ec75084b202ee290862",
+      "description": null,
+      "isAnonymous": null,
+      "label": "John Podesta Twitter (@podesta)",
+      "type": "media",
+      "url": "https://twitter.com/podesta"
+    },
+    {
+      "_id": "src-01c2db285568384d521fd1af",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — FBI Suspects Russia in Hack of John Podesta Emails",
+      "type": "article",
+      "url": "https://www.cnn.com/2016/10/19/politics/fbi-russia-podesta-emails/index.html"
+    },
+    {
+      "_id": "src-4a1728c79323851ffab7de00",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Politico — Long Strange History of John Podesta Space Alien Obsession",
+      "type": "article",
+      "url": "https://www.politico.com/story/2016/05/john-podesta-space-alien-obsession-223516"
+    },
+    {
+      "_id": "src-24ee47645d69aa7ca6646a47",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Hill — Clinton Campaign Chair: American People Can Handle the Truth on UFOs",
+      "type": "article",
+      "url": "https://thehill.com/policy/technology/279712-clinton-campaign-chair-the-american-people-can-handle-the"
+    }
+  ]
+}

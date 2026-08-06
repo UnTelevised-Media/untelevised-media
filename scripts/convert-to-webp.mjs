@@ -20,6 +20,7 @@ import { execSync } from 'child_process';
 const CONVERTIBLE_EXTENSIONS = new Set([
   '.jpg',
   '.jpeg',
+  '.jfif',
   '.png',
   '.gif',
   '.bmp',

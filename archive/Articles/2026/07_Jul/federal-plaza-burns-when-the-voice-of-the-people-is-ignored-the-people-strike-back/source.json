@@ -1,0 +1,70 @@
+{
+  "slug": "federal-plaza-burns-when-the-voice-of-the-people-is-ignored-the-people-strike-back",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-ms-now-cnbc-anti-ice-activist-sets-off-fireworks-outside-nyc-immigration-court",
+      "description": null,
+      "isAnonymous": null,
+      "label": "MS NOW / CNBC — Anti-ICE activist sets off fireworks outside NYC immigration court",
+      "type": "media",
+      "url": "https://www.cnbc.com/2026/07/20/new-york-nyc-fbi-incendiary-device.html"
+    },
+    {
+      "_id": "source-forbes-explosion-outside-nyc-federal-building-suspect-in-custody",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Forbes — Explosion Outside NYC Federal Building: Suspect In Custody",
+      "type": "media",
+      "url": "https://www.forbes.com/sites/alisondurkee/2026/07/20/suspect-arrested-after-explosion-outside-new-york-city-ice-fbi-headquarters/"
+    },
+    {
+      "_id": "source-abc7-new-york-man-in-custody-after-fire-set-outside-26-federal-plaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ABC7 New York — Man in custody after fire set outside 26 Federal Plaza",
+      "type": "media",
+      "url": "https://abc7ny.com/post/makeshift-incendiary-device-emits-smoke-outside-26-federal-plaza-1-custody/19543707/"
+    },
+    {
+      "_id": "source-abc-news-man-in-custody-after-setting-off-incendiary-device-outside-federal-buil",
+      "description": null,
+      "isAnonymous": null,
+      "label": "ABC News — Man in custody after setting off incendiary device outside federal building in Manhattan",
+      "type": "media",
+      "url": "https://abcnews.com/US/man-custody-after-setting-off-incendiary-device-federal/story?id=134916208"
+    },
+    {
+      "_id": "source-cbs-new-york-explosion-outside-new-york-federal-building-apparently-caused-by-fi",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS New York — Explosion outside New York federal building apparently caused by fireworks",
+      "type": "media",
+      "url": "https://www.cbsnews.com/newyork/news/incendiary-device-federal-building-nyc-manhattan/"
+    },
+    {
+      "_id": "source-newsweek-fbi-investigating-device-deployed-near-federal-plaza-in-nyc",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Newsweek — FBI Investigating Device Deployed Near Federal Plaza in NYC",
+      "type": "media",
+      "url": "https://www.newsweek.com/nyc-explosion-federal-plaza-smoke-fbi-building-fireworks-12218223"
+    },
+    {
+      "_id": "source-fox-news-fbi-alleges-suspect-deployed-incendiary-device-outside-federal-building",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Fox News — FBI Alleges Suspect Deployed Incendiary Device Outside Federal Building",
+      "type": "media",
+      "url": "https://www.foxnews.com/us/fbi-alleges-suspect-deployed-incendiary-device-outside-federal-building"
+    },
+    {
+      "_id": "source-new-york-times-man-sets-off-explosive-device-outside-26-federal-plaza-in-nyc",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — Man Sets Off Explosive Device Outside 26 Federal Plaza in NYC",
+      "type": "media",
+      "url": "https://www.nytimes.com/2026/07/20/nyregion/nyc-explosion-federal-plaza-manhattan.html"
+    }
+  ]
+}

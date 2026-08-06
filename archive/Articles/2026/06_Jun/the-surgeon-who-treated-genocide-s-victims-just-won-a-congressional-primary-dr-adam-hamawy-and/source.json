@@ -1,0 +1,62 @@
+{
+  "slug": "the-surgeon-who-treated-genocide-s-victims-just-won-a-congressional-primary-dr-adam-hamawy-and",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-who-is-adam-hamawy-doctor-who-served-in-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Who Is Adam Hamawy? Doctor Who Served in Gaza",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/6/3/who-is-adam-hamawy-doctor-who-served-in-gaza-is-on-the-path-to-us-congress"
+    },
+    {
+      "_id": "source-the-intercept-adam-hamawy-poised-to-become-pro-palestine-rep",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Intercept — Adam Hamawy Poised to Become Pro-Palestine Rep",
+      "type": "article",
+      "url": "https://theintercept.com/2026/06/02/new-jersey-primary-results-adam-hamawy/"
+    },
+    {
+      "_id": "source-democracy-now-adam-hamawy-wins-nj-house-primary",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Now! — Adam Hamawy Wins NJ House Primary",
+      "type": "media",
+      "url": "https://www.democracynow.org/2026/6/5/adam_hamawy_wins_nj_12"
+    },
+    {
+      "_id": "source-the-guardian-army-doctor-leading-nj-congressional-race",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Army Doctor Leading NJ Congressional Race",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2026/may/31/new-jersey-congress-adam-hamawy"
+    },
+    {
+      "_id": "source-cnn-adam-hamawy-to-win-democratic-house-primary-in-nj",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — Adam Hamawy to Win Democratic House Primary in NJ",
+      "type": "media",
+      "url": "https://www.cnn.com/2026/06/03/politics/adam-hamawy-new-jersey-house-democrat"
+    },
+    {
+      "_id": "source-new-york-times-adam-hamawy-wins-democratic-primary",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — Adam Hamawy Wins Democratic Primary",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/06/02/nyregion/new-jersey-house-primary-hamawy.html"
+    },
+    {
+      "_id": "source-common-dreams-surgeon-who-treated-victims-of-us-backed-genocide-wins-primary",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Common Dreams — Surgeon Who Treated Victims of US-Backed Genocide Wins Primary",
+      "type": "article",
+      "url": "https://www.commondreams.org/news/adam-hamawy"
+    }
+  ]
+}

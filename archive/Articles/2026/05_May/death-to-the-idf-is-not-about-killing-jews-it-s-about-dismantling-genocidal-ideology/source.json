@@ -1,0 +1,54 @@
+{
+  "slug": "death-to-the-idf-is-not-about-killing-jews-it-s-about-dismantling-genocidal-ideology",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-wikipedia-death-idf-2026-05-08",
+      "description": "Comprehensive overview of the 'death, death to the IDF' chant, its origin at Glastonbury 2025 led by Bob Vylan, reactions including accusations of antisemitism, and support from various artists and commentators.",
+      "isAnonymous": false,
+      "label": "Wikipedia - Death, death to the IDF",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/Death,_death_to_the_IDF"
+    },
+    {
+      "_id": "source-hollywoodreporter-bob-vylan-statement-2025-07-01",
+      "description": "July 1, 2025 - Bob Vylan's full statement denying antisemitism: 'We are for the dismantling of a violent military machine... A machine that has destroyed much of Gaza.' Details on US visa revocation, UTA dropping them, BBC regret.",
+      "isAnonymous": false,
+      "label": "Hollywood Reporter - Bob Vylan Addresses Glastonbury Controversy: 'We Are Not for the Death of Jews'",
+      "type": "article",
+      "url": "https://www.hollywoodreporter.com/music/music-news/bob-vylan-addresses-glastonbury-death-to-idf-controversy-1236303698/"
+    },
+    {
+      "_id": "source-middleeasteye-death-idf-2025-10-07",
+      "description": "October 7, 2025 - In-depth analysis arguing the chant targets a military, not Jews. Quotes Naomi Wimborne-Idrissi: 'He didn't say death to Israelis [civilians], he said death to the IDF, a murderous armed force.' Documents Israeli war crimes and manufactured outrage.",
+      "isAnonymous": false,
+      "label": "Middle East Eye - 'Death to the IDF' is not antisemitic. Reserve your outrage for Israeli crimes in Gaza",
+      "type": "article",
+      "url": "https://www.middleeasteye.net/opinion/death-death-idf-not-antisemitic-reserve-your-outrage-israeli-crimes-gaza"
+    },
+    {
+      "_id": "source-jvp-zionism-2026-02-27",
+      "description": "February 27, 2026 - Comprehensive statement from Jewish Voice for Peace opposing Zionism as 'a settler-colonial movement, establishing an apartheid state where Jews have more rights than others.' Documents Jewish anti-Zionist tradition across political and religious spectrum.",
+      "isAnonymous": false,
+      "label": "Jewish Voice for Peace - Our Approach to Zionism",
+      "type": "article",
+      "url": "https://www.jewishvoiceforpeace.org/resource/zionism/"
+    },
+    {
+      "_id": "source-crescent-judaism-zionism-2019-12-01",
+      "description": "December 1, 2019 - Explains key distinction: 'Judaism is a revealed religion. Zionism is a political ideology.' Notes Zionism's adherents include Jews, Christians, Hindus, atheists, and Muslims. Warns against conflating criticism of Israel with antisemitism.",
+      "isAnonymous": false,
+      "label": "Crescent International - Distinction between Judaism and Zionism",
+      "type": "article",
+      "url": "https://crescent.icit-digital.org/articles/distinction-between-judaism-and-zionism"
+    },
+    {
+      "_id": "source-annefrank-are-all-jews-zionists",
+      "description": "Educational resource clarifying that 'Zionists believe in the right of existence of a Jewish state' and that 'They can be both religious and non-religious Jews, as well as non-Jews.' Documents that not all Jews are Zionists.",
+      "isAnonymous": false,
+      "label": "Anne Frank House - Are all Jews Zionists?",
+      "type": "article",
+      "url": "https://www.annefrank.org/en/topics/antisemitism/are-all-jews-zionists/"
+    }
+  ]
+}

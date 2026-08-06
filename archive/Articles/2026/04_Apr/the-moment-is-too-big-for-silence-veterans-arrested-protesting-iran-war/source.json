@@ -1,0 +1,54 @@
+{
+  "slug": "the-moment-is-too-big-for-silence-veterans-arrested-protesting-iran-war",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-common-dreams-2026-04-21",
+      "description": "April 21, 2026 - Dozens of veterans were arrested by US Capitol Police after occupying the Cannon House Office Building to protest Trump's illegal war on Iran. Demonstrators held red tulips and chanted anti-war slogans. Mike Prysner and Tyler Romero arrested.",
+      "isAnonymous": false,
+      "label": "Common Dreams — As Trump Threatens Iran, Veterans Arrested Protesting 'War Machine' at US Capitol",
+      "type": "article",
+      "url": "https://www.commondreams.org/news/veterans-protest-iran-war"
+    },
+    {
+      "_id": "source-ccw-2026-04-20",
+      "description": "April 20, 2026 - At noon Monday, Mike Prysner and Tyler Romero were arrested alongside 60 veterans and military family members in civil disobedience at Cannon Rotunda demanding 'No War on Iran'. Veterans held red tulips, conducted flag-folding ceremony.",
+      "isAnonymous": false,
+      "label": "Center on Conscience and War — CCW Executive Director and CO Client Arrested",
+      "type": "statement",
+      "url": "https://centeronconscience.org/breaking-ccw-executive-director-with-conscientious-objector-client-arrested-alongside-vets-military-families-protesting-iran-war/"
+    },
+    {
+      "_id": "source-usa-today-2026-04-20",
+      "description": "April 20, 2026 - Capitol Police detained nearly 120 veterans protesting the war with Iran at the Capitol building. Video shows Capitol Police restraining veterans and taking them into custody one by one.",
+      "isAnonymous": false,
+      "label": "USA Today — Capitol Police Detain Dozens of Veterans Protesting Iran War",
+      "type": "article",
+      "url": "https://www.usatoday.com/videos/news/2026/04/20/capitol-police-detain-dozens-of-veterans-protesting-iran-war/89702514007/"
+    },
+    {
+      "_id": "source-aol-2026-04-20",
+      "description": "April 20, 2026 - At least 62 people were arrested during the demonstration. Organized by About Face, Center on Conscience and War, Veterans For Peace, Common Defense, Fayetteville Resistance Coalition, Military Families Speak Out and 50501 Veterans.",
+      "isAnonymous": false,
+      "label": "AOL — Dozens of Veterans Arrested at Capitol During Protest",
+      "type": "article",
+      "url": "https://www.aol.com/articles/dozens-veterans-arrested-capitol-during-232754690.html"
+    },
+    {
+      "_id": "source-reuters-2026-04-20",
+      "description": "April 20, 2026 - Video published by Reuters shows Capitol Police restraining the veterans and taking them into custody one by one at the Cannon House Office Building rotunda.",
+      "isAnonymous": false,
+      "label": "Reuters — Video Shows Capitol Police Arresting Veterans",
+      "type": "media",
+      "url": "https://x.com/Reuters/status/2046256690748866997"
+    },
+    {
+      "_id": "source-bernama-2026-04-21",
+      "description": "April 21, 2026 - Roughly five dozen protesters arrested by US Capitol Police for civil disobedience. Several seen holding red tulip flowers honoring Iranians killed during the war that Trump and Netanyahu began on Feb 28.",
+      "isAnonymous": false,
+      "label": "BERNAMA — Dozens Of US Military Veterans Protesting Iran War Arrested On Capitol Hill",
+      "type": "article",
+      "url": "https://www.bernama.com/en/world/news.php?id=2547303"
+    }
+  ]
+}

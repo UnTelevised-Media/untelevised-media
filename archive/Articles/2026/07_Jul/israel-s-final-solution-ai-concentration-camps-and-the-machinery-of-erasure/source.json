@@ -1,0 +1,134 @@
+{
+  "slug": "israel-s-final-solution-ai-concentration-camps-and-the-machinery-of-erasure",
+  "totalSources": 16,
+  "sources": [
+    {
+      "_id": "source-972-magazine-lavender-ai-investigation",
+      "description": null,
+      "isAnonymous": null,
+      "label": "+972 Magazine — Lavender AI Investigation",
+      "type": "article",
+      "url": "https://www.972mag.com/lavender-ai-israeli-army-gaza/"
+    },
+    {
+      "_id": "source-972-magazine-human-agency-in-ai-warfare",
+      "description": null,
+      "isAnonymous": null,
+      "label": "+972 Magazine — Human Agency in AI Warfare",
+      "type": "article",
+      "url": "https://www.972mag.com/israel-gaza-lavender-ai-human-agency/"
+    },
+    {
+      "_id": "source-euro-med-human-rights-monitor-rafah-camp-plan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Euro-Med Human Rights Monitor — Rafah Camp Plan",
+      "type": "article",
+      "url": "https://www.euromedmonitor.org/en/articles/details/8395"
+    },
+    {
+      "_id": "source-al-jazeera-israels-gaza-camp-plan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Israel's Gaza Camp Plan",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2025/6/29/israel-plan-gaza-rafah-camp"
+    },
+    {
+      "_id": "source-the-guardian-ai-targeting-in-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — AI Targeting in Gaza",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2024/apr/03/israel-used-ai-system-to-identify-gaza-strike-targets-report"
+    },
+    {
+      "_id": "source-time-magazine-ai-in-gaza-and-ukraine",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Time Magazine — AI in Gaza and Ukraine",
+      "type": "article",
+      "url": "https://time.com/7202584/gaza-ukraine-ai-warfare/"
+    },
+    {
+      "_id": "source-lieber-institute-west-point-ai-dss-and-facial-recognition-in-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Lieber Institute West Point — AI-DSS and Facial Recognition in Gaza",
+      "type": "document",
+      "url": "https://lieber.westpoint.edu/israels-use-ai-dss-facial-recognition-technology-erosion-civilian-protection-gaza/"
+    },
+    {
+      "_id": "source-un-special-rapporteur-domicide-report-february-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN Special Rapporteur — Domicide Report (February 2026)",
+      "type": "document",
+      "url": "https://www.un.org/unispal/document/domicide-report-26feb26/"
+    },
+    {
+      "_id": "source-iiss-proliferation-of-ai-enabled-military-technology",
+      "description": null,
+      "isAnonymous": null,
+      "label": "IISS — Proliferation of AI-Enabled Military Technology",
+      "type": "document",
+      "url": "https://www.iiss.org/online-analysis/charting-middle-east/2026/04/the-proliferation-of-ai-enabled-military-technology-in-the-middle-east/"
+    },
+    {
+      "_id": "source-gaza-humanitarian-foundation-camp-framework",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Gaza Humanitarian Foundation — Camp Framework",
+      "type": "document",
+      "url": "https://www.theghf.org/"
+    },
+    {
+      "_id": "source-business-insider-wheres-daddy-system",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Business Insider — Where's Daddy? System",
+      "type": "article",
+      "url": "https://www.businessinsider.com/israel-ai-system-wheres-daddy-strikes-hamas-family-homes-2024"
+    },
+    {
+      "_id": "source-middle-east-eye-israels-ai-killing-machine",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Eye — Israel's AI Killing Machine",
+      "type": "article",
+      "url": "https://middleeasteye.net/news/israel-ai-targeting-gaza-lavender-gospel"
+    },
+    {
+      "_id": "source-middle-east-monitor-gaza-camp-concentration-plan",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Monitor — Gaza Camp Concentration Plan",
+      "type": "article",
+      "url": "https://www.middleeastmonitor.com/"
+    },
+    {
+      "_id": "source-democracy-now-lavender-and-wheres-daddy",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Now! — Lavender and Where's Daddy",
+      "type": "media",
+      "url": "https://www.democracynow.org/2024/4/5/israel_ai"
+    },
+    {
+      "_id": "source-knesset-death-penalty-law-march-30-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Knesset — Death Penalty Law (March 30, 2026)",
+      "type": "document",
+      "url": "https://main.knesset.gov.il/"
+    },
+    {
+      "_id": "source-gaza-ministry-of-health-casualty-figures-april-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Gaza Ministry of Health — Casualty Figures (April 2026)",
+      "type": "data",
+      "url": "https://www.moq.ps/"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "slug": "todd-blanche-the-pedophile-protector-running-the-justice-department",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-newsweek-blanche-epstein",
+      "description": "Blanche says Epstein files should not be part of anything going forward; released only small fraction of promised files; 200,000 documents held back",
+      "isAnonymous": false,
+      "label": "Newsweek - What New Acting AG Todd Blanche Has Said About Epstein Files",
+      "type": "document",
+      "url": "https://www.newsweek.com/what-new-acting-ag-todd-blanche-has-said-about-epstein-files-11778993"
+    },
+    {
+      "_id": "source-nbc-blanche-epstein",
+      "description": "Blanche personally interviewed Ghislaine Maxwell in prison; Maxwell said she never saw Trump behave inappropriately; Maxwell moved to lower-security prison camp after interview",
+      "isAnonymous": false,
+      "label": "NBC News - From Trump's attorney to the Epstein files: Todd Blanche's rise to attorney general",
+      "type": "document",
+      "url": "https://www.nbcnews.com/politics/justice-department/todd-blanche-interim-attorney-general-pam-bondi-firing-what-know-rcna266451"
+    },
+    {
+      "_id": "source-cnn-blanche-profile-epstein",
+      "description": "Blanche faced criticism after Maxwell interview; Maxwell upgraded to minimum-security prison; Blanche hadn't asked about documents Congress subpoenaed from Epstein estate",
+      "isAnonymous": false,
+      "label": "CNN - Todd Blanche takes over the Justice Department, where there's no escaping the Epstein files shadow",
+      "type": "document",
+      "url": "https://www.cnn.com/2026/04/02/politics/todd-blanche-profile-interim-attorney-general"
+    },
+    {
+      "_id": "source-pbs-epstein-names",
+      "description": "Detailed list of powerful men in Epstein files including Prince Andrew, Trump, Bill Clinton, Elon Musk; Trump-Epstein friendship spanned late 1980s-early 2000s; they partied at Mar-a-Lago",
+      "isAnonymous": false,
+      "label": "PBS NewsHour - A list of powerful men named in the Epstein files",
+      "type": "document",
+      "url": "https://www.pbs.org/newshour/nation/a-list-of-powerful-men-named-in-the-epstein-files-from-elon-musk-to-former-prince-andrew"
+    },
+    {
+      "_id": "source-businessinsider-epstein-manafort",
+      "description": "Epstein was booked into MCC as inmate 76318-054; sharing facility with Paul Manafort and El Chapo; high-profile inmates held in 10 South unit",
+      "isAnonymous": false,
+      "label": "Business Insider - Jeffrey Epstein is at Metropolitan Correctional Center with El Chapo",
+      "type": "document",
+      "url": "https://www.businessinsider.com/jeffrey-epstein-metropolitan-correctional-center-el-chapo-paul-manafort-2019-7"
+    }
+  ]
+}

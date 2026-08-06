@@ -1,0 +1,46 @@
+{
+  "slug": "the-ballroom-blitz-white-house-correspondents-dinner-shooting-marks-escalation-in-infrastructure",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-deadline-whcd-shooting-2026-04-25",
+      "description": "April 25, 2026 - Deadline report on the White House Correspondents' Dinner shooting, including accounts from CNN's Wolf Blitzer who was 'a few feet away from the gunman,' confirmation that the shooter is dead from Education Secretary Linda McMahon's security, and Ted Johnson's account of hearing what sounded like four shots from the hall near his table.",
+      "isAnonymous": false,
+      "label": "Deadline — Shots Fired At White House Correspondents Dinner, Trump Evacuated, Guests On The Floor",
+      "type": "article",
+      "url": "https://deadline.com/2026/04/trump-shots-fired-white-house-correspondents-dinner-1236872282/"
+    },
+    {
+      "_id": "source-cnn-whcd-shooting-2026-04-25",
+      "description": "April 25, 2026 - CNN report on Trump being swiftly escorted off stage by Secret Service after possible shots were fired at the White House Correspondents' Dinner, with Vice President JD Vance and Cabinet members also rushed out. Wolf Blitzer reported being 'a few feet away from a gunman' as he was shooting with a 'very, very serious weapon.'",
+      "isAnonymous": false,
+      "label": "CNN — Trump rushed off stage after shots fired at White House Correspondents' Dinner",
+      "type": "article",
+      "url": "https://www.cnn.com/2026/04/25/politics/trump-rushed-white-house-correspondents-dinner"
+    },
+    {
+      "_id": "source-cbs-whcd-shooting-2026-04-25",
+      "description": "April 25, 2026 - CBS News live coverage of the White House Correspondents' Dinner shooting, including details that the suspect had a shotgun and handgun, 5-8 shots fired, a Secret Service agent was injured but wearing a bulletproof vest, and the gunman is alive but injured and hospitalized.",
+      "isAnonymous": false,
+      "label": "CBS News — Live Updates: Trump safe after shots fired at White House Correspondents' Dinner; suspect in custody",
+      "type": "media",
+      "url": "https://www.cbsnews.com/live-updates/trump-evacuated-white-house-correspondents-dinner-security-incident/"
+    },
+    {
+      "_id": "source-substack-2026-fires-2026-04-24",
+      "description": "April 24, 2026 - Comprehensive report documenting 25+ major fires and infrastructure attacks in 2026, from the $600 million Kimberly-Clark warehouse fire to Elbit Systems facilities in Czech Republic and UK, Tesla's Berlin Gigafactory attack, Leonardo Edinburgh facility, Barclays branches across UK, and French high-speed rail sabotage during Paris Olympics.",
+      "isAnonymous": false,
+      "label": "HR Studios — 2026 Already Saw 25 Major Fires and Attacks on Infrastructure",
+      "type": "article",
+      "url": "https://hrnews1.substack.com/p/2026-already-saw-25-major-fires-and"
+    },
+    {
+      "_id": "source-eric-spracklen-x-tweet-whcd-2026-04-25",
+      "description": "April 25, 2026 - Verified user Eric Spracklen calls out Fox News for cutting the call to Karoline Leavitt mid-sentence, not a dropped connection. Retweeted Chris Menahan's coverage showing the moment the broadcast cut away.",
+      "isAnonymous": false,
+      "label": "Eric Spracklen (@EricSpracklen) - X Tweet: 'The phone call didn't drop, Fox News cut it'",
+      "type": "media",
+      "url": "https://x.com/EricSpracklen/status/2048239456813998526"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "slug": "the-strike-wave-is-here-workers-across-america-are-withdrawing-their-labor-and-the-system-is",
+  "totalSources": 14,
+  "sources": [
+    {
+      "_id": "source-whyy-peco-workers-strike-on-july-fourth-for-first-time-in-145-year-history",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WHYY — PECO Workers Strike on July Fourth for First Time in 145-Year History",
+      "type": "media",
+      "url": "https://whyy.org/articles/peco-workers-strike-july-fourth-philadelphia/"
+    },
+    {
+      "_id": "source-whyy-peco-strike-continues-company-wont-budge",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WHYY — PECO Strike Continues, Company Won't Budge",
+      "type": "media",
+      "url": "https://whyy.org/articles/peco-union-strike-ibew-continues/"
+    },
+    {
+      "_id": "source-whyy-peco-strike-ends-with-tentative-agreement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WHYY — PECO Strike Ends with Tentative Agreement",
+      "type": "media",
+      "url": "https://whyy.org/articles/peco-strike-ends-tentative-agreement/"
+    },
+    {
+      "_id": "source-labor-notes-strike-six-new-orleans-nurses-fight-for-first-contract",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Labor Notes — Strike Six: New Orleans Nurses Fight for First Contract",
+      "type": "media",
+      "url": "https://labornotes.org/2026/07/strike-six-new-orleans-nurses-fight-first-contract"
+    },
+    {
+      "_id": "source-nurseorg-2026-nurse-strikes-complete-list",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Nurse.org — 2026 Nurse Strikes: Complete List",
+      "type": "media",
+      "url": "https://nurse.org/articles/nurse-strikes-list/"
+    },
+    {
+      "_id": "source-nurseorg-nurse-strikes-have-nearly-quadrupled-since-2017",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Nurse.org — Nurse Strikes Have Nearly Quadrupled Since 2017",
+      "type": "media",
+      "url": "https://nurse.org/news/nurse-strikes-rising-2026/"
+    },
+    {
+      "_id": "source-cbs-minnesota-allina-hospice-workers-strike",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS Minnesota — Allina Hospice Workers Strike",
+      "type": "media",
+      "url": "https://www.cbsnews.com/minnesota/news/minneapolis-allina-health-hospice-workers-seiu-strike/"
+    },
+    {
+      "_id": "source-mpr-news-allina-hospice-workers-one-day-strike",
+      "description": null,
+      "isAnonymous": null,
+      "label": "MPR News — Allina Hospice Workers One-Day Strike",
+      "type": "media",
+      "url": "https://www.mprnews.org/story/2026/07/06/allina-hospice-workers-on-oneday-strike-as-bargaining-continues"
+    },
+    {
+      "_id": "source-wbur-brigham-and-womens-nurses-prepare-for-largest-strike-in-ma-history",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WBUR — Brigham and Women's Nurses Prepare for Largest Strike in MA History",
+      "type": "media",
+      "url": "https://www.wbur.org/news/2026/07/03/brigham-womens-hospital-nurses-strike"
+    },
+    {
+      "_id": "source-gbh-largest-nursing-strike-in-state-history-this-week",
+      "description": null,
+      "isAnonymous": null,
+      "label": "GBH — Largest Nursing Strike in State History This Week",
+      "type": "media",
+      "url": "https://www.wgbh.org/news/local/2026-07-06/brigham-and-womens-could-see-the-largest-nurse-strike-state-history-this-week"
+    },
+    {
+      "_id": "source-gothamist-montefiore-replaces-12-nurses-with-ai",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Gothamist — Montefiore Replaces 12 Nurses with AI",
+      "type": "media",
+      "url": "https://gothamist.com/news/a-dozen-montefiore-nurses-in-the-bronx-are-being-pushed-out-by-ai-union-says"
+    },
+    {
+      "_id": "source-crains-new-york-montefiore-replaces-nurses-with-ai-after-strike",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Crain's New York — Montefiore Replaces Nurses with AI After Strike",
+      "type": "media",
+      "url": "https://www.crainsnewyork.com/health-care/cny-montefiore-nurses-laid-off-ai-20260702/"
+    },
+    {
+      "_id": "source-ajmc-historic-nyc-nursing-strike-ends-with-3-year-contract-wins",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AJMC — Historic NYC Nursing Strike Ends With 3-Year Contract Wins",
+      "type": "media",
+      "url": "https://www.ajmc.com/view/historic-nyc-nursing-strike-ends-with-3-year-contract-wins"
+    },
+    {
+      "_id": "source-phillyvoice-peco-strike-enters-third-day-during-heat-wave",
+      "description": null,
+      "isAnonymous": null,
+      "label": "PhillyVoice — PECO Strike Enters Third Day During Heat Wave",
+      "type": "media",
+      "url": "https://www.phillyvoice.com/peco-strike-enters-third-day-after-widespread-storms-and-historic-heat/"
+    }
+  ]
+}

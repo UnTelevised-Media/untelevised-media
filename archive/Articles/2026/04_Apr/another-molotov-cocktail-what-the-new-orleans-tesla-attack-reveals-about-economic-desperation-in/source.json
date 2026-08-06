@@ -1,0 +1,54 @@
+{
+  "slug": "another-molotov-cocktail-what-the-new-orleans-tesla-attack-reveals-about-economic-desperation-in",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-nola-tesla-2026-04-15",
+      "description": "April 15, 2026 - Local coverage of the New Orleans Tesla service center Molotov attack with ATF confirmation.",
+      "isAnonymous": false,
+      "label": "NOLA.com - Tesla Fire New Orleans Molotov",
+      "type": "article",
+      "url": "https://www.nola.com/news/crime_police/tesla-fire-new-orleans-molotov/article_a25064c6-b0f6-4da2-a37d-0d125fa5eca8.html"
+    },
+    {
+      "_id": "source-fox8-tesla-2026-04-15",
+      "description": "April 15, 2026 - TV news coverage confirming Molotov cocktail incendiary device used at Tesla sales office.",
+      "isAnonymous": false,
+      "label": "FOX 8 New Orleans - Molotov Cocktail Used to Start Fire",
+      "type": "article",
+      "url": "https://www.fox8live.com/2026/04/15/molotov-cocktail-used-start-fire-new-orleans-tesla-sales-office-atf-says/"
+    },
+    {
+      "_id": "source-nyt-altman-2026-04-10",
+      "description": "April 10, 2026 - Report on 20-year-old arrested after throwing Molotov at OpenAI CEO's San Francisco home.",
+      "isAnonymous": false,
+      "label": "New York Times - Molotov Cocktail Hurled at Sam Altman Home",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/04/10/us/open-ai-sam-altman-molotov-cocktail.html"
+    },
+    {
+      "_id": "source-abc7-kimberly-2026-04-08",
+      "description": "April 8, 2026 - Report on Chamel Abdulkarim, 29, arrested for Kimberly-Clark warehouse arson in Ontario, CA.",
+      "isAnonymous": false,
+      "label": "ABC7 Los Angeles - Warehouse Employee Accused of Arson",
+      "type": "article",
+      "url": "https://abc7.com/post/employee-arrested-arson-kimberly-clark-distribition-center-destroyed-massive-fire-ontario/18851549/"
+    },
+    {
+      "_id": "source-nyt-kimberly-2026-04-10",
+      "description": "April 10, 2026 - Report on $600 million in damages and suspect's reference to Luigi Mangione.",
+      "isAnonymous": false,
+      "label": "New York Times - Warehouse Fire Suspect Invoked Luigi Mangione",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/04/10/us/kimberly-clark-warehouse-fire-suspect-mangione.html"
+    },
+    {
+      "_id": "source-wiki-kimberly-2026-04",
+      "description": "April 2026 - Overview of the Kimberly-Clark warehouse fire with total building loss and $600 million damages.",
+      "isAnonymous": false,
+      "label": "Wikipedia - 2026 Kimberly-Clark Distribution Center Fire",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/2026_Kimberly-Clark_Distribution_Center_fire"
+    }
+  ]
+}

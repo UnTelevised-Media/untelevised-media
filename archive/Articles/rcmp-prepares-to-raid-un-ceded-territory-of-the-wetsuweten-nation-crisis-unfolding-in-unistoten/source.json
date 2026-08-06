@@ -1,0 +1,30 @@
+{
+  "slug": "rcmp-prepares-to-raid-un-ceded-territory-of-the-wetsuweten-nation-crisis-unfolding-in-unistoten",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "source-rcmp-wetsuweten-nation",
+      "description": "Official statements and updates from the Wet'suwet'en Hereditary Chiefs and Unist'ot'en Camp regarding the RCMP mobilization.",
+      "isAnonymous": false,
+      "label": "Wet'suwet'en Nation - Official Statement & Updates",
+      "type": "statement",
+      "url": "https://unistoten.camp"
+    },
+    {
+      "_id": "source-rcmp-submedia",
+      "description": "Sub Media video journalism from the Unist'ot'en and Gidimt'en checkpoints during the RCMP mobilization.",
+      "isAnonymous": false,
+      "label": "Sub Media: Crisis at Unistoten",
+      "type": "media",
+      "url": "https://sub.media/video/crisis-at-unistoten/"
+    },
+    {
+      "_id": "source-rcmp-activist",
+      "description": "Field correspondent and dedicated activist present at the Gidimt'en and Unist'ot'en checkpoints during the RCMP mobilization on January 7, 2019.",
+      "isAnonymous": true,
+      "label": "Anonymous Correspondent - Gidimt'en / Unist'ot'en Territory",
+      "type": "onscene",
+      "url": null
+    }
+  ]
+}

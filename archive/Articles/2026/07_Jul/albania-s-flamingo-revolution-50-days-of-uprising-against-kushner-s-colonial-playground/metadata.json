@@ -1,0 +1,150 @@
+{
+  "_id": "flamingo-revolution-50-days-kushner-resort-albania",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "usopav5CBnH5LDMX5u0K2i",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "usopav5CBnH5LDMX5u0K6E",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "usopav5CBnH5LDMX5u0K9k",
+      "_ref": "7a3c6e44-cbd8-453f-9119-814348f6a9fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "For 50 consecutive days, tens of thousands have flooded Tirana demanding cancellation of a Kushner-backed megaresort on protected Albanian coastline — the biggest uprising since communism fell in 1991.",
+  "eventDate": "2026-07-28T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "A mass protest movement in Albania that began on May 23, 2026, opposing a multibillion-dollar luxury resort backed by Jared Kushner on protected coastline. Named for the flamingos that shelter in the Narta Lagoon that the project threatens.",
+      "question": "What is the Flamingo Revolution?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Five demands: non-negotiable resignation of PM Edi Rama, formation of a 12-month technical transitional government, constitutional reforms including a two-term prime minister limit, cancellation of the Sazan-Zvërnec resort project, and full repeal of Law 21/2024.",
+      "question": "What are the protesters' demands?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The project spans two sites: approximately $1.4 billion for Sazan Island and $4.7 billion for Zvërnec, totaling $6.1 billion. Plans include 600 townhouses, 520 villas, 1,400 apartments, a 350-superyacht marina, and a golf course across 13 million square feet.",
+      "question": "How big is the Kushner resort project?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "An amendment to Albania's Protected Areas Law passed in 2024 that created exceptions allowing five-star tourism developments in environmentally protected areas. It was passed shortly before the resort project was announced.",
+      "question": "What is Law 21/2024?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Albania Flamingo Revolution",
+    "Jared Kushner resort Albania",
+    "Sazan Island development",
+    "Edi Rama corruption",
+    "Albania protests 2026",
+    "Albania environmental protection",
+    "Kushner Trump Albania",
+    "Narta Lagoon",
+    "Albanian revolution",
+    "EU accession Albania"
+  ],
+  "leadParagraph": "Albania's Flamingo Revolution has entered its 50th day as tens of thousands protest a multibillion-dollar luxury resort backed by Jared Kushner and Ivanka Trump. The movement has expanded from environmental defense into a demand for the resignation of Prime Minister Edi Rama and an end to systemic corruption.",
+  "linkedPitch": null,
+  "location": "Tirana, Albania / Zvërnec, Sazan Island",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Thousands of protesters in Tirana hold pink inflatable flamingos during the Flamingo Revolution against the Kushner-linked resort",
+    "asset": {
+      "_ref": "image-4f09ee28197e8f8d86422ea06e69b8104fa64f95-800x450-webp",
+      "_type": "reference"
+    },
+    "caption": "Protesters hold inflatable flamingos during mass demonstrations against the Kushner-linked luxury resort in Tirana, Albania",
+    "credit": "France 24/Reuters"
+  },
+  "methodology": "Reported using Foreign Policy investigation, Democracy Now! broadcast, AP, Reuters, CBS, NBC, Financial Times, BirdLife International, Guardian, DW, and Middle East Eye coverage. Protest details cross-referenced across multiple wire services. Timeline verified through Wikipedia and Albanian media.",
+  "needsReview": null,
+  "publishedAt": "2026-07-28T17:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-2",
+      "_ref": "albania-flamingo-revolution-kushner-resort-protests",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "kashmir-revolution-aac-pakistan-state-repression-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "aaa7c25cbe52",
+      "_ref": "bolivia-militant-resistance",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-0",
+      "_ref": "federal-plaza-ice-incendiary-device",
+      "_type": "reference"
+    },
+    {
+      "_key": "028346862f64",
+      "_ref": "israel-colonization-cyprus-settler-enclaves-military-outposts",
+      "_type": "reference"
+    },
+    {
+      "_key": "7a9b8ea844c3",
+      "_ref": "turkey-forgotten-occupation-cyprus-ethnic-cleansing-erdogan-hypocrisy",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Tens of thousands protest for 50 days in Albania against a $6.1 billion Kushner-backed luxury resort on protected coastline. The biggest uprising since communism.",
+    "metaTitle": "Albania's Flamingo Revolution: 50 Days Against Kushner's Resort",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "albania-s-flamingo-revolution-50-days-of-uprising-against-kushner-s-colonial-playground"
+  },
+  "tags": [
+    "Albania",
+    "Flamingo Revolution",
+    "Jared Kushner",
+    "Ivanka Trump",
+    "Edi Rama",
+    "protests",
+    "corruption",
+    "environment",
+    "Sazan Island",
+    "European Union"
+  ],
+  "title": "Albania's Flamingo Revolution: 50 Days of Uprising Against Kushner's Colonial Playground",
+  "updatedAt": null,
+  "videoLink": null
+}

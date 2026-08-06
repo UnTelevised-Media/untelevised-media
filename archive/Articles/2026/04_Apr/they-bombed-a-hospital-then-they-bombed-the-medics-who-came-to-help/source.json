@@ -1,0 +1,46 @@
+{
+  "slug": "they-bombed-a-hospital-then-they-bombed-the-medics-who-came-to-help",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-guardian-quadruple-tap-2026-04-16",
+      "description": "April 16, 2026 - Detailed report on the quadruple tap attack that killed four medics and wounded six. Documents the bombing of Tebnine Government Hospital twice in two days, injuring 11 hospital workers. Reports that 91 healthcare workers have been killed and 214 wounded since March 2, 2026.",
+      "isAnonymous": false,
+      "label": "The Guardian - Israel escalates attacks on medics in Lebanon with deadly 'quadruple tap'",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/apr/16/israel-escalates-attacks-on-medics-in-lebanon-with-deadly-quadruple-tap"
+    },
+    {
+      "_id": "source-aljazeera-healthcare-2026-04-03",
+      "description": "April 3, 2026 - Comprehensive analysis of Israel's systematic destruction of Lebanon's healthcare system. Reports 53 medical workers killed, 87 ambulances or medical centers destroyed, five hospitals forced to evacuate, 1.2 million people displaced. Documents the strategy of making south Lebanon uninhabitable.",
+      "isAnonymous": false,
+      "label": "Al Jazeera - How Israel is destroying healthcare infrastructure in southern Lebanon",
+      "type": "article",
+      "url": "https://www.aljazeera.com/features/2026/4/3/how-israel-is-destroying-healthcare-infrastructure-in-southern-lebanon"
+    },
+    {
+      "_id": "source-aljazeera-tyre-hospital-2026-04-04",
+      "description": "April 4, 2026 - Reports on Israeli strike that killed two girls in Habbush and wounded 18 in al-Hawsh including a child, three women, and three paramedics. Documents damage to Lebanese Italian Hospital near Tyre. Reports 1,368 killed and 4,138 wounded in total attacks.",
+      "isAnonymous": false,
+      "label": "Al Jazeera - Israeli attacks on southern Lebanon kill two girls, damage hospital",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/4/4/israeli-strikes-damage-hospital-in-lebanons-tyre"
+    },
+    {
+      "_id": "source-un-healthcare-2026-04-15",
+      "description": "April 15, 2026 - WHO report on Lebanon airstrikes. Reports 300 killed and 1,150 injured in April 8 strikes (highest single-day death toll). Documents Israel's warning that ambulances will be attacked. Evacuation warnings for two major hospitals in Beirut (Rafik Hariri and Al Zahra) with 450 patients including 50 in intensive care.",
+      "isAnonymous": false,
+      "label": "UN News - Lebanon airstrike casualties 'still under the rubble' as ambulances, hospitals face new threats",
+      "type": "article",
+      "url": "https://news.un.org/en/story/2026/04/1167280"
+    },
+    {
+      "_id": "source-wiki-8april-2026",
+      "description": "Wikipedia entry documenting the April 8, 2026 Lebanon attacks. Notes casualty count was among the highest of the 2026 Lebanon war. Lebanon called the attacks Black Wednesday and accused Israel of carrying out a massacre. Attacks occurred in civilian areas including Beirut where hospitals were damaged.",
+      "isAnonymous": false,
+      "label": "Wikipedia - 8 April 2026 Lebanon attacks (Black Wednesday)",
+      "type": "document",
+      "url": "https://en.wikipedia.org/wiki/8_April_2026_Lebanon_attacks"
+    }
+  ]
+}

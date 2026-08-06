@@ -1,0 +1,62 @@
+{
+  "slug": "as-yet-another-pipeline-explodes-we-must-ask-when-is-enough-enough",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2rX2",
+      "description": null,
+      "isAnonymous": null,
+      "label": "anonresistance.am.dx",
+      "type": "article",
+      "url": "http://anonresistance.am.dx"
+    },
+    {
+      "_id": "DJ1Y76QLqJX8nukZ868fki",
+      "description": null,
+      "isAnonymous": null,
+      "label": "twitter.com/anonyresistance",
+      "type": "article",
+      "url": "https://twitter.com/anonyresistance"
+    },
+    {
+      "_id": "DJ1Y76QLqJX8nukZ868g2K",
+      "description": null,
+      "isAnonymous": null,
+      "label": "yosemite.epa.gov/opa/admpress.nsf/8b770facf5edf6f185257359003fb69e/2388eb6343454",
+      "type": "article",
+      "url": "https://yosemite.epa.gov/opa/admpress.nsf/8b770facf5edf6f185257359003fb69e/2388eb6343454fd785257a0d005e5dcf!OpenDocument"
+    },
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2reU",
+      "description": null,
+      "isAnonymous": null,
+      "label": "submedia.tv",
+      "type": "article",
+      "url": "https://submedia.tv/"
+    },
+    {
+      "_id": "7ONx74QMiI10eazwub4ZPn",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.hayspost.com/2016/11/29/crews-fight-fire-after-a-gas-pipeline-ruptured-near-",
+      "type": "article",
+      "url": "https://www.hayspost.com/2016/11/29/crews-fight-fire-after-a-gas-pipeline-ruptured-near-kci/"
+    },
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2rsi",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.kmbc.com/article/large-fire-reported-near-kansas-city-international-airport/",
+      "type": "article",
+      "url": "http://www.kmbc.com/article/large-fire-reported-near-kansas-city-international-airport/8380884"
+    },
+    {
+      "_id": "BOAIKFRWNleR9aRm6R2rw6",
+      "description": null,
+      "isAnonymous": null,
+      "label": "www.kctv5.com/story/33820608/large-fire-north-of-kci-after-reported-pipeline-exp",
+      "type": "article",
+      "url": "http://www.kctv5.com/story/33820608/large-fire-north-of-kci-after-reported-pipeline-explosion"
+    }
+  ]
+}

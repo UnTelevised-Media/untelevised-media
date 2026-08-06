@@ -1,0 +1,94 @@
+{
+  "slug": "the-west-bank-is-burning-organized-settler-violence-escalates-with-state-backing",
+  "totalSources": 11,
+  "sources": [
+    {
+      "_id": "source-wb-ocha-march27",
+      "description": "March 27, 2026 UN comprehensive report documenting West Bank escalation, settler violence, and displacement. Key findings: more than 150 settler attacks since February 2026, 1,697 displaced in Q1 2026 alone, 46 settler attacks between March 17-23, 2026, organized displacement of entire Palestinian communities.",
+      "isAnonymous": false,
+      "label": "UN OCHA - Humanitarian Situation Report | 27 March 2026",
+      "type": "data",
+      "url": "https://www.ochaopt.org/content/humanitarian-situation-report-27-march-2026"
+    },
+    {
+      "_id": "source-wb-ocha-feb5",
+      "description": "February 5, 2026 UN report documenting early 2026 West Bank situation. Details: 130+ Israeli raids between Jan 20-Feb 2, 52 settler attacks with 134 displaced, demolition of 69 structures displacing 131 Palestinians, water infrastructure attacks by settlers on Ein Samiya cutting supply to 100,000 people.",
+      "isAnonymous": false,
+      "label": "UN OCHA - Humanitarian Situation Update #356 | West Bank",
+      "type": "data",
+      "url": "https://www.ochaopt.org/content/humanitarian-situation-update-356-west-bank"
+    },
+    {
+      "_id": "source-wb-treasury-hilltop",
+      "description": "October 1, 2024 U.S. Treasury designation of Hilltop Youth as a terrorist organization. Documents Hilltop Youth's campaign of 'price tag' attacks against Palestinians, including killings, arson, assaults, and intimidation intended to drive Palestinian communities out of West Bank areas slated for settlement expansion.",
+      "isAnonymous": false,
+      "label": "U.S. Treasury - Designates Extremist Settler Group Hilltop Youth",
+      "type": "document",
+      "url": "https://home.treasury.gov/news/press-releases/jy2622"
+    },
+    {
+      "_id": "source-wb-ocha-jan7",
+      "description": "January 7, 2026 UN report documenting 44 settler attacks between Dec 23, 2025-Jan 5, 2026 that injured 33 Palestinians including 11 children. Documents expansion of settler violence from Atara outpost and attacks on herding communities including grazing of livestock, property damage, and displacement.",
+      "isAnonymous": false,
+      "label": "UN OCHA - Humanitarian Situation Update #352 | West Bank",
+      "type": "data",
+      "url": "https://www.ochaopt.org/content/humanitarian-situation-update-352-west-bank"
+    },
+    {
+      "_id": "source-wb-ohchr-feb6",
+      "description": "February 6, 2026 UN OHCHR statement noting that 'relentless violence by Israeli settlers - with support and participation of Israeli security forces - as well as movement restrictions are accelerating forcible transfer of Palestinians in the West Bank.'",
+      "isAnonymous": false,
+      "label": "UN Office of High Commissioner for Human Rights - New Israeli Operations Raise Concerns",
+      "type": "document",
+      "url": "https://www.ohchr.org/en/press-briefing-notes/2026/02/new-israeli-operations-occupied-west-bank-raise-serious-concerns"
+    },
+    {
+      "_id": "source-wb-haaretz-silwan",
+      "description": "March 26, 2026 report on evictions of 15 Palestinian families from homes in Batn al Hawa area of Silwan, East Jerusalem. Properties handed to Ateret Cohanim settler organization after Israeli court upheld ownership claims based on pre-1948 Jewish ownership. Details ongoing displacement campaign in Silwan.",
+      "isAnonymous": false,
+      "label": "Haaretz - 11 Palestinian Families Evicted from East Jerusalem After Legal Battle",
+      "type": "media",
+      "url": "https://www.haaretz.com/israel-news/israel-politics/2026-03-26/ty-article/.premium/15-palestinian-families-evicted-from-east-jlem-homes-transferred-to-settlers/0000019d-2922-d836-a1dd-b97adb710000"
+    },
+    {
+      "_id": "source-wb-ocha-feb19",
+      "description": "February 19, 2026 UN report documenting escalation. 90% of Palestinians displaced due to settler attacks and access restrictions in 2026 to date have been in Jordan Valley area. Records 48+ Israeli settler attacks between Feb 3-16, 2026 resulting in casualties, property damage, and forced displacement of villagers.",
+      "isAnonymous": false,
+      "label": "UN OCHA - Humanitarian Situation Update #358 | West Bank",
+      "type": "data",
+      "url": "https://www.unocha.org/publications/report/occupied-palestinian-territory/humanitarian-situation-update-358-west-bank"
+    },
+    {
+      "_id": "source-wb-wafa-raids",
+      "description": "March 5, 2026 WAFA report on sixth consecutive day of escalating Israeli military raids across West Bank governorates. Documents policy of turning Palestinian homes into military outposts, movement restrictions via closures and iron gates, and large-scale detentions with 100+ Palestinians arrested in six days.",
+      "isAnonymous": false,
+      "label": "Wafa News Agency - Israeli Forces Continue Escalating Raids Across West Bank",
+      "type": "media",
+      "url": "https://english.wafa.ps/Pages/Details/168049"
+    },
+    {
+      "_id": "source-wb-silwanic-evictions",
+      "description": "Local Silwan reporting on eviction of 13 apartments in Batn al Hawa after long legal battle with Ateret Cohanim. Notes that Ateret previously took control of entire apartment buildings, not just individual apartments. Documents comprehensive nature of the displacement affecting dozens of families.",
+      "isAnonymous": false,
+      "label": "Silwanic - Mass Displacement in Silwan: 13 Apartments Evicted",
+      "type": "media",
+      "url": "https://www.silwanic.net/article/news/79941/mass-displacement-in-silwan-13-apartments-evicted-leaving-dozens-of-families-homeless"
+    },
+    {
+      "_id": "source-wb-fmep-dec2025",
+      "description": "December 2025 FMEP report documenting Israeli settlement expansion. Key finding: 'The success of the settler farm model in ethnically cleansing large swaths of land in the West Bank is a direct result of this state support, which takes the form of funding, political backing, military protection and orchestration, & police-granted impunity.'",
+      "isAnonymous": false,
+      "label": "Foundation for Middle East Peace - Settlement & Annexation Report December 2025",
+      "type": "report",
+      "url": "https://fmep.org/resource/settlement-annexation-report-december-13-2025"
+    },
+    {
+      "_id": "source-wb-aljazeera-opinion",
+      "description": "February 26, 2024 Al Jazeera opinion piece analyzing settler violence as state policy. Cites that 'settler violence...is a central part of Israel's state's policy and plan to ethnically cleanse occupied Palestinian territory in order to establish full control' with 'government backing and military support'.",
+      "isAnonymous": false,
+      "label": "Al Jazeera - Settler Violence: Israel's Ethnic Cleansing Plan for the West Bank",
+      "type": "media",
+      "url": "https://www.aljazeera.com/opinions/2024/2/26/settler-violence-israels-ethnic-cleansing-plan-for-the-west-bank"
+    }
+  ]
+}

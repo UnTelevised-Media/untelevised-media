@@ -1,0 +1,54 @@
+{
+  "slug": "in-northern-gaza-one-man-refuses-to-let-the-cats-starve",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "0fa3226e-f18c-46e5-8667-9540a1580adc",
+      "description": "Report on how Israel's forced starvation policy in northern Gaza has caused animals to resort to feeding on carcasses of their own kind and bodies of Palestinians killed in attacks that could not be retrieved.",
+      "isAnonymous": false,
+      "label": "Anadolu Agency - Israel's forced starvation in Gaza affects both humans and animals",
+      "type": "onscene",
+      "url": "https://www.aa.com.tr/en/middle-east/israels-forced-starvation-in-gaza-affects-both-humans-and-animals/3126734"
+    },
+    {
+      "_id": "f735fae5-5398-4e89-8d1a-1a4268d8ec10",
+      "description": "Photo story and report by Saeed Jaras of Anadolu Agency on Abdullah al-Zemili's cat shelter in Al-Karame, northern Gaza, caring for stray and injured cats with amputated limbs, burns, and facial injuries.",
+      "isAnonymous": false,
+      "label": "Reuters Connect - Young Palestinian establishes shelter for injured cats in northern Gaza",
+      "type": "other",
+      "url": "https://www.reutersconnect.com/item/young-palestinian-establishes-shelter-for-injured-cats-in-northern-gaza"
+    },
+    {
+      "_id": "d15ac113-4a54-4f18-bcde-9aca876bae52",
+      "description": "Social media post with photos showing Abdullah al-Zemili caring for cats at his makeshift shelter in Al-Karame, northern Gaza, with images of multiple cats and kittens receiving care.",
+      "isAnonymous": false,
+      "label": "Yeni Şafak - A 21-year-old resident of northern Gaza has been caring for stray and injured cats",
+      "type": "other",
+      "url": "https://www.facebook.com/YeniSafakEnglish/posts/pfbid036ht7a9LWCBBL8vTg6yVAv3fM5zqf3MCF6fnGfjCStWEemgiGLFYT5FdftKBDkl"
+    },
+    {
+      "_id": "fffc6361-2541-4162-98d6-93b46f723cb5",
+      "description": "Turkish-language report on Abdullah al-Zemili establishing a shelter to rescue, feed, and treat stray cats in northern Gaza's Al-Karame area, with many cats suffering from severe injuries like jaw damage and limb loss.",
+      "isAnonymous": false,
+      "label": "İslami Analiz - Gazze'nin kuzeyinde sahipsiz kedilere barınak açıldı",
+      "type": "onscene",
+      "url": "https://islamianaliz.com/haber/27697788/gazzenin-kuzeyinde-sahipsiz-kedilere-barinak-acildi"
+    },
+    {
+      "_id": "d911b4c3-f344-4ee4-a1aa-07c95d5d5046",
+      "description": "Exploration of the deep cultural relationship between Gaza's residents and cats, including the cat shortage of 2005 and how Islamic tradition honors cats through stories like Abu Hurayrah and hadith teachings on animal welfare.",
+      "isAnonymous": false,
+      "label": "HuffPost - Cats in Gaza and Cats in Islam",
+      "type": "other",
+      "url": "https://www.huffpost.com/entry/of-cats-and-muslims-a-gaz_b_1373336"
+    },
+    {
+      "_id": "b3f7504a-c9ca-472f-8b26-401885c011a5",
+      "description": "Feature on Sulala Animal Rescue in Deir al-Balah, operating out of a tent since 2006, caring for approximately 70 dogs and 50 cats with severe injuries from the war. Workers shared their own scarce rice, pasta, and canned tuna with animals during aid shortages.",
+      "isAnonymous": false,
+      "label": "NBC News - At Gaza's only animal shelter, workers share what food they have with hungry dogs and cats (December 29, 2025)",
+      "type": "other",
+      "url": "https://www.nbcnews.com/world/gaza/gazas-animal-shelter-workers-share-food-hungry-dogs-cats-rcna251111"
+    }
+  ]
+}

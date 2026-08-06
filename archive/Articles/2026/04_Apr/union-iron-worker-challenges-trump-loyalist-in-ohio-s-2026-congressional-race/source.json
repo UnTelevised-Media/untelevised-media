@@ -1,0 +1,54 @@
+{
+  "slug": "union-iron-worker-challenges-trump-loyalist-in-ohio-s-2026-congressional-race",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-guardian-poindexter-2026-04-18",
+      "description": "April 18, 2026 - Comprehensive coverage of Brian Poindexter's campaign against Max Miller, highlighting the contrast between the union ironworker's working-class background and Miller's inherited wealth as grandson of Forest City Realty Trust co-chair.",
+      "isAnonymous": false,
+      "label": "The Guardian - An iron worker takes on one of Trump's most loyal followers in Congress",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/apr/18/brian-poindexter-ohio-congress-candidate"
+    },
+    {
+      "_id": "source-cleveland-democrats-2026-04-18",
+      "description": "April 18, 2026 - Detailed profiles of all eight Democratic candidates challenging Max Miller, including their positions on economy, healthcare, immigration, and the Iran war. Includes Miller's campaign finances and voting record.",
+      "isAnonymous": false,
+      "label": "cleveland.com - From ironworker to ex-county executive, eight Democrats are gunning for Max Miller's seat",
+      "type": "article",
+      "url": "https://www.cleveland.com/news/2026/04/from-ironworker-to-ex-county-executive-eight-democrats-are-gunning-for-max-millers-seat.html"
+    },
+    {
+      "_id": "source-signal-ohio-2026-01-14",
+      "description": "January 14, 2026 - Analysis of Democratic offensive strategy in Ohio, including Poindexter's campaign launch. Discusses district competitiveness and Cook Political Report ratings.",
+      "isAnonymous": false,
+      "label": "Signal Ohio - Democrats test Ohio's congressional map; lawmakers balk at pricey park project",
+      "type": "article",
+      "url": "https://signalohio.org/democrats-test-the-congressional-map-in-ohio-lawmakers-balk-at-pricey-park-project-marijuana-law-election-2026/"
+    },
+    {
+      "_id": "source-britbrief-2026-04-18",
+      "description": "April 18, 2026 - British perspective on the Ohio congressional race, highlighting the class divide between Poindexter (union ironworker) and Miller (grandson of $6.8 billion real estate empire).",
+      "isAnonymous": false,
+      "label": "BritBrief - Union Iron Worker Takes on Trump Loyalist in Ohio 2026 Race",
+      "type": "article",
+      "url": "https://britbrief.co.uk/politics/elections/union-iron-worker-takes-on-trump-loyalist-in-ohio-2026-race.html"
+    },
+    {
+      "_id": "source-cleveland-miller-wealth-2022-11-09",
+      "description": "November 9, 2022 - Coverage of Miller's 2022 election, including his $1 million personal loan to campaign and connection to Forest City Enterprises fortune.",
+      "isAnonymous": false,
+      "label": "cleveland.com - Republican Max Miller wins reconfigured 7th district congressional seat",
+      "type": "article",
+      "url": "https://www.cleveland.com/news/2022/11/republican-max-miller-wins-reconfigured-7th-district-congressional-seat.html"
+    },
+    {
+      "_id": "source-cook-political-2026",
+      "description": "2026 - Political analysis giving Republicans a 5 percentage point edge in Ohio's 7th District, which backed Trump by 11 points. Notes Miller won last election by 51%.",
+      "isAnonymous": false,
+      "label": "Cook Political Report - House Race Ratings: Ohio's 7th Congressional District",
+      "type": "data",
+      "url": "https://www.cookpolitical.com/house/race/483811"
+    }
+  ]
+}

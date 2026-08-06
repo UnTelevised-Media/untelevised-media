@@ -1,0 +1,148 @@
+{
+  "_id": "brooklyn-no-more-ice-murders-metropolitan-detention-center-protest",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "U5jaPewV4O7tyQ9Pafiq8p",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "U5jaPewV4O7tyQ9PafiqCU",
+      "_ref": "NIYNah6RoM2MjtNb6HiKPc",
+      "_type": "reference"
+    },
+    {
+      "_key": "fb500d44321a",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "U5jaPewV4O7tyQ9Pafiq5A",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Community members gathered outside Brooklyn's Metropolitan Detention Center under the banner 'No more ICE murders,' naming Lorenzo Salgado Araujo, Johan Guerrero, and Juan Coronilla Duran as organizers demanded an end to ICE violence and the release of 200+ detained immigrants.",
+  "eventDate": "2026-07-17T18:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "On July 17, 2026, community members gathered outside the Metropolitan Detention Center in Sunset Park, Brooklyn, for a speak-out protest under the banner 'No more ICE murders!' organized by NYAARPR, Brooklyn Against War, NYC ICE Watch, and the Freedom Road Socialist Organization.",
+      "question": "What happened at the Brooklyn MDC protest?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The facility holds 200+ immigrants, many uncharged. Documented conditions include overcrowding, mold, fungus, poor food, non-functioning toilets, inadequate medical care, and unsanitary conditions. Lawmakers have been denied access to inspect the facility.",
+      "question": "What are conditions like inside the MDC Brooklyn?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Organizers named Lorenzo Salgado Araujo, killed by ICE in Houston; Johan Sebastián Durán Guerrero, killed by ICE in Maine; and Juan Jairo Coronilla Duran, who died in ICE custody.",
+      "question": "Who did protesters name as ICE victims?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Brooklyn MDC protest",
+    "No More ICE Murders Brooklyn",
+    "NYAARPR ICE protest",
+    "Metropolitan Detention Center conditions",
+    "ICE detention Brooklyn",
+    "Ruby Doswell",
+    "Jamie Kowalski",
+    "Briony Smith",
+    "Brooklyn Against War",
+    "ICE violence New York 2026"
+  ],
+  "leadParagraph": "On July 17, community members gathered outside Brooklyn's Metropolitan Detention Center for a speak-out protest demanding justice for ICE killing victims, freedom for 200+ detained immigrants, and the removal of ICE from New York City.",
+  "linkedPitch": null,
+  "location": "Metropolitan Detention Center, Sunset Park, Brooklyn, New York City",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Crowd of protesters with signs and banners demonstrating against ICE in New York City",
+    "asset": {
+      "_ref": "image-7a7dd8d04114df5274634afdcac2a0e24ead93b7-1024x683-webp",
+      "_type": "reference"
+    },
+    "caption": "Protesters demonstrate near the US immigration court in Manhattan against ICE raids and enforcement operations",
+    "credit": "Reuters/Brendan McDermid"
+  },
+  "methodology": "Reported using Fight Back! News primary coverage, NY Senate press release, Fox News, and NYCLU documentation. Organizer quotes from Fight Back! News direct reporting. MDC conditions from NYCLU and NY Senate. Interlinked with previously published UTM reporting on ICE killings.",
+  "needsReview": null,
+  "publishedAt": "2026-07-28T18:30:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "ice-agent-kills-wrong-man-houston",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "ice-kills-again-two-fatal-shootings-halt-overturned",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "federal-plaza-ice-incendiary-device",
+      "_type": "reference"
+    },
+    {
+      "_key": "db8ff446543c",
+      "_ref": "ice-out-nationwide-protests-330-cities-demand-justice-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "c562c8d56a01",
+      "_ref": "0c16c198-32c8-40ca-a5f3-4b0591cf3921",
+      "_type": "reference"
+    },
+    {
+      "_key": "c935d10d4baf",
+      "_ref": "ice-550-assault-charges-crumbling",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "Community members gathered at Brooklyn's MDC to demand justice for ICE killing victims and freedom for 200+ detained immigrants under the banner 'No More ICE Murders.'",
+    "metaTitle": "'No More ICE Murders': Brooklyn Protests at Metropolitan Detention Center",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "no-more-ice-murders-brooklyn-takes-the-fight-to-the-metropolitan-detention-center"
+  },
+  "tags": [
+    "ICE",
+    "Brooklyn",
+    "Metropolitan Detention Center",
+    "protest",
+    "immigration",
+    "NYAARPR",
+    "No More ICE Murders",
+    "detention",
+    "New York City"
+  ],
+  "title": "'No More ICE Murders': Brooklyn Takes the Fight to the Metropolitan Detention Center",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -3,13 +3,25 @@
  * UNIFIED ARTICLE ARCHIVER
  *
  * Archives a single article (or all) with:
- * - Markdown body (converted from Portable Text)
+ * - Markdown body (converted from Portable Text, with images and social
+ *   embeds tagged inline as HTML comment markers)
  * - JSON metadata (with author name)
- * - Downloaded images (organized in subfolder)
+ * - Downloaded images: mainImage, imageGallery, and images embedded in the
+ *   body (organized in a per-article subfolder)
+ *
+ * Output layout:
+ *   <output-dir>/<slug>/body.md
+ *   <output-dir>/<slug>/metadata.json
+ *   <output-dir>/<slug>/source.json           Dereferenced source-library citations
+ *   <output-dir>/<slug>/Images/main.ext          (article's mainImage)
+ *   <output-dir>/<slug>/Images/gallery-N.ext      (imageGallery items)
+ *   <output-dir>/<slug>/Images/image-N.ext        (images embedded in body)
+ *   <output-dir>/<slug>/Images/metadata.json
  *
  * Usage:
  *   node scripts/archive-article.mjs [slug]              # Archive one article
  *   node scripts/archive-article.mjs                      # Archive all articles
+ *   node scripts/archive-article.mjs --sources-only        # Backfill source.json only
  *   node scripts/archive-article.mjs --help               # Show help
  */
 
@@ -38,6 +50,24 @@ if (fs.existsSync(envPath)) {
 // ─────────────────────────────────────────────────────────────────────────────
 // PORTABLE TEXT TO MARKDOWN CONVERTER
 // ─────────────────────────────────────────────────────────────────────────────
+
+// Social embed block types → { platform label, field holding the embed's
+// content }. Some platforms store a bare ID (youtube/vimeo/twitter/instagram),
+// others store a full URL (facebook/tiktok/iframe) — the marker just carries
+// whatever Sanity has, verbatim.
+const EMBED_TYPE_MAP = {
+  youtubeEmbed: { platform: 'youtube', field: 'videoId' },
+  vimeoEmbed: { platform: 'vimeo', field: 'videoId' },
+  twitterEmbed: { platform: 'twitter', field: 'tweetId' },
+  instagramEmbed: { platform: 'instagram', field: 'postId' },
+  facebookEmbed: { platform: 'facebook', field: 'postUrl' },
+  tiktokEmbed: { platform: 'tiktok', field: 'videoUrl' },
+  iframeEmbed: { platform: 'iframe', field: 'src' },
+};
+
+function escapeAttr(value) {
+  return String(value ?? '').replace(/"/g, '&quot;');
+}
 
 function portableTextToMarkdown(blocks) {
   if (!blocks || blocks.length === 0) return '';
@@ -148,12 +178,26 @@ function portableTextToMarkdown(blocks) {
       const caption = block.caption || '';
       const credit = block.credit || '';
 
-      const parts = [`alt="${alt}"`];
-      if (assetRef) parts.push(`asset="${assetRef}"`);
-      if (caption) parts.push(`caption="${caption}"`);
-      if (credit) parts.push(`credit="${credit}"`);
+      // `asset` is always emitted (even empty) so extractImages() always
+      // captures the block — a block with a broken/missing asset ref should
+      // surface as a failed download, not silently disappear from the count.
+      const parts = [`alt="${escapeAttr(alt)}"`, `asset="${escapeAttr(assetRef)}"`];
+      if (caption) parts.push(`caption="${escapeAttr(caption)}"`);
+      if (credit) parts.push(`credit="${escapeAttr(credit)}"`);
 
       return `<!-- IMAGE ${parts.join(' ')} -->`;
+    }
+
+    if (blockType in EMBED_TYPE_MAP) {
+      const { platform, field } = EMBED_TYPE_MAP[blockType];
+      const content = block[field] || '';
+
+      const parts = [`platform="${escapeAttr(platform)}"`, `content="${escapeAttr(content)}"`];
+      if (blockType === 'iframeEmbed' && block.title) {
+        parts.push(`title="${escapeAttr(block.title)}"`);
+      }
+
+      return `<!-- EMBED ${parts.join(' ')} -->`;
     }
 
     if (blockType === 'code') {
@@ -224,7 +268,7 @@ function portableTextToMarkdown(blocks) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// IMAGE EXTRACTION & DOWNLOAD
+// IMAGE & EMBED EXTRACTION
 // ─────────────────────────────────────────────────────────────────────────────
 
 function extractImages(markdownContent) {
@@ -242,6 +286,22 @@ function extractImages(markdownContent) {
   }
 
   return images;
+}
+
+function extractEmbeds(markdownContent) {
+  const embedPattern = /<!-- EMBED platform="([^"]*)" content="([^"]*)"(?: title="([^"]*)")? -->/g;
+  const embeds = [];
+  let match;
+
+  while ((match = embedPattern.exec(markdownContent)) !== null) {
+    embeds.push({
+      platform: match[1],
+      content: match[2],
+      title: match[3] || ''
+    });
+  }
+
+  return embeds;
 }
 
 async function getImageUrl(assetId, projectId, dataset, token, apiVersion) {
@@ -316,9 +376,12 @@ function getFileExtension(assetId, mimeType, originalFilename) {
   return '.jpg';
 }
 
-async function downloadImages(slug, images, imagesDir, projectId, dataset, token, apiVersion) {
-  if (images.length === 0) {
-    return { downloaded: 0, failed: 0, images: [] };
+// `requests` is a flat list of { category, filenameBase, alt, caption, credit,
+// asset } — category is 'main' | 'gallery' | 'body', filenameBase is the
+// output filename without extension (e.g. "main", "gallery-1", "image-1").
+async function downloadImages(requests, imagesDir, projectId, dataset, token, apiVersion) {
+  if (requests.length === 0) {
+    return { downloaded: 0, failed: 0, results: [] };
   }
 
   if (!fs.existsSync(imagesDir)) {
@@ -327,49 +390,50 @@ async function downloadImages(slug, images, imagesDir, projectId, dataset, token
 
   let downloaded = 0;
   let failed = 0;
-  const downloadedImages = [];
+  const results = [];
 
-  for (let idx = 0; idx < images.length; idx++) {
-    const img = images[idx];
-    const assetId = img.asset;
+  for (const req of requests) {
+    const assetId = req.asset;
+
+    if (!assetId) {
+      results.push({ ...req, downloaded: false, filename: null });
+      failed++;
+      console.log(`      ✗ ${req.filenameBase} (missing asset reference)`);
+      continue;
+    }
 
     const imageData = await getImageUrl(assetId, projectId, dataset, token, apiVersion);
     if (!imageData) {
-      img.downloaded = false;
-      img.filename = null;
-      downloadedImages.push(img);
+      results.push({ ...req, downloaded: false, filename: null });
       failed++;
+      console.log(`      ✗ ${req.filenameBase} (asset not found in Sanity)`);
       continue;
     }
 
     const ext = getFileExtension(assetId, imageData.mimeType, imageData.originalFilename);
-    const filename = `image-${idx + 1}${ext}`;
+    const filename = `${req.filenameBase}${ext}`;
     const outputPath = path.join(imagesDir, filename);
 
     const success = await downloadImage(imageData.url, outputPath);
     if (success) {
-      img.downloaded = true;
-      img.filename = filename;
+      results.push({ ...req, downloaded: true, filename });
       downloaded++;
       console.log(`      ✓ ${filename}`);
     } else {
-      img.downloaded = false;
-      img.filename = filename;
+      results.push({ ...req, downloaded: false, filename });
       failed++;
       console.log(`      ✗ ${filename}`);
     }
-
-    downloadedImages.push(img);
   }
 
-  return { downloaded, failed, images: downloadedImages };
+  return { downloaded, failed, results };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ARCHIVE ARTICLE
 // ─────────────────────────────────────────────────────────────────────────────
 
-async function archiveArticle(article, archiveDir, imagesDir, projectId, dataset, token, apiVersion, authorMap) {
+async function archiveArticle(article, outputDir, projectId, dataset, token, apiVersion, authorMap) {
   const slug = article.slug?.current;
   if (!slug) {
     console.error(`⚠️  Article has no slug: ${article._id}`);
@@ -379,18 +443,24 @@ async function archiveArticle(article, archiveDir, imagesDir, projectId, dataset
   console.log(`\n📄 ${article.title}`);
   console.log(`   Slug: ${slug}`);
 
-  // Create directories
-  if (!fs.existsSync(archiveDir)) {
-    fs.mkdirSync(archiveDir, { recursive: true });
+  // Create per-article directory: <outputDir>/<slug>/
+  const articleDir = path.join(outputDir, slug);
+  const imagesDir = path.join(articleDir, 'Images');
+  if (!fs.existsSync(articleDir)) {
+    fs.mkdirSync(articleDir, { recursive: true });
   }
 
-  // 1. Convert body to markdown
+  // 1. Convert body to markdown (images and social embeds tagged inline)
   const body = article.body || [];
   const markdownContent = portableTextToMarkdown(body);
 
-  // 2. Extract images from markdown
+  // 2. Extract images & embeds from markdown
   const images = extractImages(markdownContent);
+  const embeds = extractEmbeds(markdownContent);
   console.log(`   Images found: ${images.length}`);
+  if (embeds.length > 0) {
+    console.log(`   Embeds found: ${embeds.length} (${embeds.map(e => e.platform).join(', ')})`);
+  }
 
   // 3. Prepare metadata
   const metadata = {};
@@ -411,45 +481,101 @@ async function archiveArticle(article, archiveDir, imagesDir, projectId, dataset
   }
 
   // 4. Save markdown file
-  const mdFile = path.join(archiveDir, `${slug}.md`);
+  const mdFile = path.join(articleDir, 'body.md');
   fs.writeFileSync(mdFile, markdownContent, 'utf-8');
-  console.log(`   ✓ Markdown: ${slug}.md`);
+  console.log(`   ✓ body.md`);
 
   // 5. Save metadata JSON
-  const jsonFile = path.join(archiveDir, `${slug}.json`);
+  const jsonFile = path.join(articleDir, 'metadata.json');
   fs.writeFileSync(jsonFile, JSON.stringify(metadata, null, 2), 'utf-8');
-  console.log(`   ✓ Metadata: ${slug}.json`);
+  console.log(`   ✓ metadata.json`);
 
-  // 6. Download images
+  // 5b. Save sources (dereferenced source-library documents this article cites)
+  const sources = article.sources || [];
+  const sourcesFile = path.join(articleDir, 'source.json');
+  fs.writeFileSync(sourcesFile, JSON.stringify({ slug, totalSources: sources.length, sources }, null, 2), 'utf-8');
+  console.log(`   ✓ source.json (${sources.length} source${sources.length === 1 ? '' : 's'})`);
+
+  // 6. Build the full image download list: mainImage + imageGallery + body images
+  const requests = [];
+
+  if (article.mainImage?.asset?._ref) {
+    requests.push({
+      category: 'main',
+      filenameBase: 'main',
+      alt: article.mainImage.alt || '',
+      caption: article.mainImage.caption || '',
+      credit: article.mainImage.credit || '',
+      asset: article.mainImage.asset._ref
+    });
+  }
+
+  const galleryImages = article.imageGallery?.images || [];
+  galleryImages.forEach((img, idx) => {
+    requests.push({
+      category: 'gallery',
+      filenameBase: `gallery-${idx + 1}`,
+      alt: img.alt || '',
+      caption: img.caption || '',
+      credit: img.credit || '',
+      asset: img.asset?._ref || ''
+    });
+  });
+
+  images.forEach((img, idx) => {
+    requests.push({
+      category: 'body',
+      filenameBase: `image-${idx + 1}`,
+      alt: img.alt,
+      caption: img.caption,
+      credit: img.credit,
+      asset: img.asset
+    });
+  });
+
+  console.log(
+    `   Main image: ${article.mainImage?.asset?._ref ? 'yes' : 'no'} | Gallery: ${galleryImages.length} | Body: ${images.length}`
+  );
+
+  // 7. Download images
   let imageSummary = '';
-  if (images.length > 0) {
+  if (requests.length > 0) {
     console.log(`   Downloading images...`);
-    const slugImagesDir = path.join(imagesDir, slug);
-    const result = await downloadImages(slug, images, slugImagesDir, projectId, dataset, token, apiVersion);
+    const result = await downloadImages(requests, imagesDir, projectId, dataset, token, apiVersion);
 
-    // Save image metadata
+    const toPublic = (r) => ({
+      alt: r.alt,
+      caption: r.caption,
+      credit: r.credit,
+      asset: r.asset,
+      filename: r.filename,
+      downloaded: r.downloaded
+    });
+
+    // Save image metadata, grouped by where each image came from
     const imgMetadata = {
       slug,
-      totalImages: images.length,
+      totalImages: requests.length,
       downloadedAt: new Date().toISOString(),
-      images: result.images.map((img, idx) => ({
-        index: idx,
-        alt: img.alt,
-        caption: img.caption,
-        credit: img.credit,
-        asset: img.asset,
-        filename: img.filename,
-        downloaded: img.downloaded
-      }))
+      mainImage: (() => {
+        const r = result.results.find((r) => r.category === 'main');
+        return r ? toPublic(r) : null;
+      })(),
+      gallery: result.results
+        .filter((r) => r.category === 'gallery')
+        .map((r, idx) => ({ index: idx, ...toPublic(r) })),
+      body: result.results
+        .filter((r) => r.category === 'body')
+        .map((r, idx) => ({ index: idx, ...toPublic(r) }))
     };
 
-    const imgMetaFile = path.join(slugImagesDir, 'images.json');
+    const imgMetaFile = path.join(imagesDir, 'metadata.json');
     fs.writeFileSync(imgMetaFile, JSON.stringify(imgMetadata, null, 2), 'utf-8');
-    console.log(`   ✓ Images: ${result.downloaded}/${images.length} downloaded`);
+    console.log(`   ✓ Images: ${result.downloaded}/${requests.length} downloaded`);
     if (result.failed > 0) {
       console.log(`   ⚠️  ${result.failed} image(s) failed`);
     }
-    imageSummary = ` (${result.downloaded}/${images.length} images)`;
+    imageSummary = ` (${result.downloaded}/${requests.length} images)`;
   } else {
     console.log(`   ℹ️  No images to download`);
   }
@@ -457,10 +583,80 @@ async function archiveArticle(article, archiveDir, imagesDir, projectId, dataset
   return {
     slug,
     title: article.title,
-    markdown: mdFile,
-    metadata: jsonFile,
+    dir: articleDir,
     imagesSummary: imageSummary
   };
+}
+
+// Recursively finds an existing article folder (a directory containing
+// metadata.json) named `slug`, anywhere under `dir`. Used by --sources-only
+// to locate already-archived folders regardless of whether they're flat
+// (archive-article.mjs layout) or nested under <year>/<MM>_<Mon>/ (archive-year.mjs layout).
+function findArticleDir(dir, slug) {
+  if (!fs.existsSync(dir)) return null;
+  const entries = fs.readdirSync(dir, { withFileTypes: true }).filter((e) => e.isDirectory());
+  for (const entry of entries) {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.name === slug && fs.existsSync(path.join(entryPath, 'metadata.json'))) {
+      return entryPath;
+    }
+    const found = findArticleDir(entryPath, slug);
+    if (found) return found;
+  }
+  return null;
+}
+
+// Lightweight backfill: pulls only { slug, sources } and writes source.json
+// into whatever folder that slug is already archived in, without touching
+// body.md, metadata.json, or downloading any images.
+async function backfillSources(outputDir, projectId, dataset, token, apiVersion, slugFilter) {
+  console.log(`\n${'═'.repeat(60)}`);
+  console.log(`SOURCES BACKFILL`);
+  console.log(`${'═'.repeat(60)}`);
+  console.log(`Output dir: ${outputDir}\n`);
+
+  console.log('🔍 Querying Sanity for sources...');
+  let query = '*[_type == "article" && defined(slug.current)';
+  if (slugFilter) query += ` && slug.current == "${slugFilter}"`;
+  query += '] {"slug": slug.current, "sources": sources[]->{_id, label, type, url, description, isAnonymous}}';
+
+  const encodedQuery = encodeURIComponent(query);
+  const url = `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodedQuery}`;
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const response = await fetch(url, { headers });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(`Sanity API error: ${error.message || response.statusText}`);
+  }
+
+  const result = await response.json();
+  const articles = result.result || [];
+  console.log(`✓ Found ${articles.length} article(s) in Sanity\n`);
+
+  let written = 0;
+  let noFolder = 0;
+
+  for (const article of articles) {
+    const articleDir = findArticleDir(outputDir, article.slug);
+    if (!articleDir) {
+      noFolder++;
+      continue;
+    }
+
+    const sources = article.sources || [];
+    const sourcesFile = path.join(articleDir, 'source.json');
+    fs.writeFileSync(sourcesFile, JSON.stringify({ slug: article.slug, totalSources: sources.length, sources }, null, 2), 'utf-8');
+    written++;
+    console.log(`  ✓ ${article.slug} (${sources.length} source${sources.length === 1 ? '' : 's'})`);
+  }
+
+  console.log(`\n${'═'.repeat(60)}`);
+  console.log(`✅ COMPLETE`);
+  console.log(`${'═'.repeat(60)}`);
+  console.log(`source.json written: ${written}`);
+  console.log(`Skipped (no archived folder found): ${noFolder}\n`);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -470,8 +666,8 @@ async function archiveArticle(article, archiveDir, imagesDir, projectId, dataset
 async function main() {
   const args = process.argv.slice(2);
   let slug = null;
-  let archiveDir = 'archive/Articles';
-  let imagesDir = 'archive/Images';
+  let outputDir = 'archive/Articles';
+  let sourcesOnly = false;
 
   // Parse arguments
   for (let i = 0; i < args.length; i++) {
@@ -483,6 +679,8 @@ UNIFIED ARTICLE ARCHIVER
 Usage:
   node scripts/archive-article.mjs [slug]           Archive a single article
   node scripts/archive-article.mjs                  Archive all articles
+  node scripts/archive-article.mjs --sources-only   Backfill source.json into
+                                                     already-archived folders
   node scripts/archive-article.mjs --help           Show this help
 
 Examples:
@@ -492,39 +690,37 @@ Examples:
   # Archive all articles
   node scripts/archive-article.mjs
 
-Options:
-  --archive-dir PATH    Markdown & metadata output directory
-  --images-dir PATH     Images output directory
+  # Just backfill source.json everywhere without re-downloading anything
+  node scripts/archive-article.mjs --sources-only
 
-What gets archived:
-  ✓ Article body (Portable Text → Markdown)
-  ✓ Article metadata (JSON with author name)
-  ✓ All body images (downloaded from Sanity)
+Options:
+  --output-dir PATH     Output directory (default: archive/Articles)
+  --sources-only        Only fetch+write source.json into existing article
+                         folders (searched recursively under --output-dir).
+                         No body/metadata re-fetch, no image downloads.
+
+Output layout:
+  <output-dir>/<slug>/body.md               Article body (Portable Text → Markdown,
+                                             images & social embeds tagged inline)
+  <output-dir>/<slug>/metadata.json         Article metadata (with author name)
+  <output-dir>/<slug>/source.json           Dereferenced source-library citations
+  <output-dir>/<slug>/Images/main.ext       Downloaded mainImage
+  <output-dir>/<slug>/Images/gallery-N.ext  Downloaded imageGallery images
+  <output-dir>/<slug>/Images/image-N.ext    Downloaded body images
+  <output-dir>/<slug>/Images/metadata.json  Image metadata (mainImage/gallery/body)
       `);
       process.exit(0);
+    } else if (arg.startsWith('--output-dir=')) {
+      outputDir = arg.split('=')[1];
+    } else if ((arg === '--output-dir' || arg === '--archive-dir') && i + 1 < args.length) {
+      outputDir = args[++i];
     } else if (arg.startsWith('--archive-dir=')) {
-      archiveDir = arg.split('=')[1];
-    } else if (arg === '--archive-dir' && i + 1 < args.length) {
-      archiveDir = args[++i];
-    } else if (arg.startsWith('--images-dir=')) {
-      imagesDir = arg.split('=')[1];
-    } else if (arg === '--images-dir' && i + 1 < args.length) {
-      imagesDir = args[++i];
+      outputDir = arg.split('=')[1];
+    } else if (arg === '--sources-only') {
+      sourcesOnly = true;
     } else if (!arg.startsWith('--')) {
       slug = arg;
     }
-  }
-
-  console.log(`\n${'═'.repeat(60)}`);
-  console.log(`UNIFIED ARTICLE ARCHIVER`);
-  console.log(`${'═'.repeat(60)}`);
-  console.log(`Archive dir: ${archiveDir}`);
-  console.log(`Images dir:  ${imagesDir}`);
-
-  if (slug) {
-    console.log(`Target: Single article (${slug})\n`);
-  } else {
-    console.log(`Target: All articles\n`);
   }
 
   // Validate Sanity config
@@ -538,6 +734,28 @@ What gets archived:
     process.exit(1);
   }
 
+  if (sourcesOnly) {
+    try {
+      await backfillSources(outputDir, projectId, dataset, token, apiVersion, slug);
+    } catch (error) {
+      console.error(`\n❌ Error: ${error.message}`);
+      if (process.env.DEBUG) console.error(error);
+      process.exit(1);
+    }
+    return;
+  }
+
+  console.log(`\n${'═'.repeat(60)}`);
+  console.log(`UNIFIED ARTICLE ARCHIVER`);
+  console.log(`${'═'.repeat(60)}`);
+  console.log(`Output dir: ${outputDir}`);
+
+  if (slug) {
+    console.log(`Target: Single article (${slug})\n`);
+  } else {
+    console.log(`Target: All articles\n`);
+  }
+
   try {
     // Fetch articles
     console.log('🔍 Querying Sanity...');
@@ -545,7 +763,7 @@ What gets archived:
     if (slug) {
       query += ` && slug.current == "${slug}"`;
     }
-    query += '] | order(publishedAt desc) {_id, title, slug, description, leadParagraph, body, mainImage, hasEmbeddedVideo, videoLink, imageGallery, author, publishedAt, updatedAt, eventDate, location, categories, tags, keywords, featured, breakingNews, isFieldReport, needsReview, allowComments, relatedArticles, linkedPitch, deletionRequest, methodology, correction, reviewedBy, seo, faqs, readingTimeMinutes}';
+    query += '] | order(publishedAt desc) {_id, title, slug, description, leadParagraph, body, mainImage, hasEmbeddedVideo, videoLink, imageGallery, author, publishedAt, updatedAt, eventDate, location, categories, tags, keywords, featured, breakingNews, isFieldReport, needsReview, allowComments, relatedArticles, linkedPitch, deletionRequest, methodology, correction, reviewedBy, seo, faqs, readingTimeMinutes, "sources": sources[]->{_id, label, type, url, description, isAnonymous}}';
 
     const encodedQuery = encodeURIComponent(query);
     const url = `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodedQuery}`;
@@ -588,7 +806,7 @@ What gets archived:
     console.log(`${'─'.repeat(60)}`);
     const archived = [];
     for (const article of articles) {
-      const result = await archiveArticle(article, archiveDir, imagesDir, projectId, dataset, token, apiVersion, authorMap);
+      const result = await archiveArticle(article, outputDir, projectId, dataset, token, apiVersion, authorMap);
       if (result) {
         archived.push(result);
       }
@@ -599,8 +817,7 @@ What gets archived:
     console.log(`✅ COMPLETE`);
     console.log(`${'═'.repeat(60)}`);
     console.log(`Archived: ${archived.length} article(s)`);
-    console.log(`Directory: ${archiveDir}`);
-    console.log(`Images:   ${imagesDir}\n`);
+    console.log(`Directory: ${outputDir}\n`);
 
     for (const item of archived) {
       console.log(`  ✓ ${item.slug}${item.imagesSummary}`);

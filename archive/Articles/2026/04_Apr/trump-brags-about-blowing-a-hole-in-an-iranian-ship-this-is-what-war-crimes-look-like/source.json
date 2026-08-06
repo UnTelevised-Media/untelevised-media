@@ -1,0 +1,54 @@
+{
+  "slug": "trump-brags-about-blowing-a-hole-in-an-iranian-ship-this-is-what-war-crimes-look-like",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-nytimes-live-2026-04-19",
+      "description": "April 19, 2026 - Live coverage of US-Iran tensions. Oil prices shot higher and stocks sank after a weekend of renewed conflict around the Strait of Hormuz. US Navy destroyer attacked and seized an Iranian-flagged cargo ship that Trump said tried to evade the US blockade.",
+      "isAnonymous": false,
+      "label": "New York Times — Live Updates: Trump Says Navy Struck and Seized Iranian Ship",
+      "type": "article",
+      "url": "https://www.nytimes.com/live/2026/04/19/world/iran-us-war-trump-hormuz"
+    },
+    {
+      "_id": "source-cnn-live-2026-04-19",
+      "description": "April 19, 2026 - US Navy fired on and seized an Iranian-flagged cargo ship that tried to bypass the US naval blockade in the Gulf of Oman. Marking latest escalation in tensions over the region's waterways.",
+      "isAnonymous": false,
+      "label": "CNN — Live Updates: Tehran Vows Retaliation After US Seizes Vessel",
+      "type": "article",
+      "url": "https://www.cnn.com/2026/04/19/world/live-news/iran-war-us-trump-hormuz"
+    },
+    {
+      "_id": "source-guardian-netanyahu-2026-04-06",
+      "description": "April 6, 2026 - Senior US officials consider Netanyahu's pitch to be overblown, creating far-reaching consequences for Israel. Questioning whether Trump understood the realities of the war Netanyahu promised would be easy.",
+      "isAnonymous": false,
+      "label": "The Guardian — Was Trump Oblivious to Realities of Netanyahu's 'Easy' War?",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/apr/06/trump-iran-war-netanyahu-israel"
+    },
+    {
+      "_id": "source-reuters-blockade-2026-04-19",
+      "description": "April 19, 2026 - Iran said if US were to attack its civilian infrastructure it would hit power stations and desalination plants of Gulf Arab neighbours. Brent crude futures jumped 7% to $96.85 a barrel.",
+      "isAnonymous": false,
+      "label": "Reuters — US Seizes Iranian Cargo Ship, Tehran Vows Retaliation",
+      "type": "article",
+      "url": "https://www.reuters.com/world/asia-pacific/trump-iran-cite-progress-talks-uncertainty-hangs-over-strait-2026-04-19/"
+    },
+    {
+      "_id": "source-nytimes-blockade-2026-04-13",
+      "description": "April 13, 2026 - Under international law, a naval blockade of a nation is an act of war. Trump administration has carried out blockades of Venezuela and Cuba but those targeted oil shipments and did not approach the totality of the blockade on Iran.",
+      "isAnonymous": false,
+      "label": "New York Times — Iran Proposes Suspending Nuclear Activity for Up to 5 Years",
+      "type": "article",
+      "url": "https://www.nytimes.com/live/2026/04/13/world/iran-war-trump-news"
+    },
+    {
+      "_id": "source-bbc-diplomacy-2026-04-19",
+      "description": "April 19, 2026 - Iran's ambassador to Pakistan posted on social media: You cannot keep violating international law, double down on your blockade, threaten Iran with further war crimes, insist on unreasonable demands, pace out with rhetoric and pretend to be pursuing Diplomacy.",
+      "isAnonymous": false,
+      "label": "BBC — Iran War: US Navy Intercepts and Seizes Iranian-Flagged Cargo Ship",
+      "type": "article",
+      "url": "https://www.bbc.com/news/live/cly90l3ln30t"
+    }
+  ]
+}

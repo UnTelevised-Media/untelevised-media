@@ -1,0 +1,30 @@
+{
+  "slug": "should-have-paid-us-more-a-warehouse-fire-and-the-breaking-point-of-american-labor",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "9NQW6JHNW1JgGoLJxBSGkI",
+      "description": "CBS News Los Angeles coverage of the Kimberly-Clark warehouse fire and the video showing the suspect igniting the blaze.",
+      "isAnonymous": null,
+      "label": "CBS Los Angeles",
+      "type": "article",
+      "url": "https://www.cbsnews.com/losangeles/news/ontario-kimberly-clark-fire-alleged-suspect-video-start-warehouse/"
+    },
+    {
+      "_id": "9NQW6JHNW1JgGoLJxBSHNI",
+      "description": "In-depth reporting on the Kimberly-Clark warehouse fire, including suspect background, NFI Industries operations, and fire response.",
+      "isAnonymous": null,
+      "label": "FireRescue1 / Inland Valley Daily Bulletin",
+      "type": "article",
+      "url": "https://www.firerescue1.com/Arson-Investigation/there-goes-your-inventory-arson-suspect-filmed-himself-igniting-massive-calif-warehouse-fire"
+    },
+    {
+      "_id": "9NQW6JHNW1JgGoLJxBSIFI",
+      "description": "Employee salary data showing warehouse worker wages at NFI Industries and third-party logistics contractors.",
+      "isAnonymous": null,
+      "label": "Glassdoor Salary Data",
+      "type": "data",
+      "url": "https://www.glassdoor.com/"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "slug": "internationalist-piracy-where-states-failed-ordinary-people-enforced-the-law",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-gaza-flotilla-freedom-news-2026-04-21",
+      "description": "April 21, 2026 - Freedom News report on the Global Sumud Flotilla's action against MSC Maya, including details on MSC's role as a logistical hub for Israeli military operations and the Al Jazeera/Palestinian Youth Movement investigation revealing 957 shipments from Israeli settlements to the US.",
+      "isAnonymous": false,
+      "label": "Freedom News — Gaza flotilla blocks ship carrying steel for Israeli munitions",
+      "type": "article",
+      "url": "https://freedomnews.org.uk/2026/04/21/gaza-flotilla-blocks-ship-carrying-steel-for-israeli-munitions/"
+    },
+    {
+      "_id": "source-democracy-now-greenpeace-flotilla-2026-04-22",
+      "description": "April 22, 2026 - Democracy Now! interview with Pujarini Sen (Greenpeace project lead) and Saif Abukeshek (Palestinian Global Sumud Flotilla steering committee) on board the Arctic Sunrise, discussing the MSC Maya disruption and why Greenpeace joined the flotilla.",
+      "isAnonymous": false,
+      "label": "Democracy Now! — Greenpeace Sends Ship to Support Global Sumud Flotilla",
+      "type": "media",
+      "url": "https://www.democracynow.org/2026/4/22/gaza_flotilla_greenpeace_arctic_sunrise_sumud"
+    },
+    {
+      "_id": "source-left-voice-gaza-flotilla-2026-04-20",
+      "description": "April 20, 2026 - Left Voice report including the radio message transmitted to MSC Maya crew, quotes from Leandro Lanfredi (Rio de Janeiro oil workers' union) and Mariona Tasquer (University of Barcelona student), and details on MSC's ship-sharing agreements with ZIM.",
+      "isAnonymous": false,
+      "label": "Left Voice — Solidarity with Gaza Makes Headway at Sea",
+      "type": "article",
+      "url": "https://www.leftvoice.org/solidarity-with-gaza-makes-headway-at-sea-global-sumud-flotilla-forces-a-cargo-ship-carrying-weapons-to-change-route/"
+    },
+    {
+      "_id": "source-contre-attaque-gaza-flotilla-2026-04-20",
+      "description": "April 20, 2026 - Contre-Attaque report in French on the MSC Maya disruption, highlighting the Mediterranean as both a graveyard for refugees and a lawless zone for weapons trafficking, and framing the action as 'internationalist piracy.'",
+      "isAnonymous": false,
+      "label": "Contre-Attaque — La flottille pour Gaza bloque un navire transportant des armes vers Israël",
+      "type": "article",
+      "url": "https://contre-attaque.net/2026/04/20/la-flottille-pour-gaza-bloque-un-navire-transportant-des-armes-vers-israel/"
+    },
+    {
+      "_id": "source-global-sumud-flotilla-press-2026-04-20",
+      "description": "April 20, 2026 - Official Global Sumud Flotilla press release announcing the unprecedented civilian intervention at sea that disrupted the MSC Maya cargo vessel en route to Ashdod and Haifa ports.",
+      "isAnonymous": false,
+      "label": "Global Sumud Flotilla — Civilians Seize the Sea: MSC Maya Disruption Press Release",
+      "type": "statement",
+      "url": "https://globalsumudflotilla.org/press/"
+    }
+  ]
+}

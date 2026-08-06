@@ -1,0 +1,62 @@
+{
+  "slug": "the-corrupt-core-how-trumps-second-presidency-has-weaponized-the-justice-department-against-the-press",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-listening-post-trump-media-2026",
+      "description": "April 2026 - Analysis of Trump's second presidency, media corruption, Todd Blanch's attacks on journalism, White House Correspondents' Dinner chaos, conspiracy theories, and the collapse of trust in American media.",
+      "isAnonymous": false,
+      "label": "Al Jazeera - The Listening Post: The United States of Conspiracy",
+      "type": "media",
+      "url": "https://www.youtube.com/watch?v=JmC5nrcUK4g"
+    },
+    {
+      "_id": "source-abc-todd-blanche-acting-ag-2026",
+      "description": "April 2026 - Report on Todd Blanche's first appearance as acting AG and his attacks on the media, blaming them for political violence.",
+      "isAnonymous": false,
+      "label": "ABC News - Todd Blanche as Acting Attorney General",
+      "type": "article",
+      "url": "https://abcnews.com/US/todd-blanche-1st-appearance-acting-ag-shrugs-off/story?id=131803038"
+    },
+    {
+      "_id": "source-justice-whca-shooting-charges-2026",
+      "description": "April 25, 2026 - Official charges against Cole Tomas Allen for attempting to assassinate President Trump at the White House Correspondents' Dinner.",
+      "isAnonymous": false,
+      "label": "DOJ - Suspect in White House Correspondents' Dinner Shooting Charged",
+      "type": "document",
+      "url": "https://www.justice.gov/opa/pr/suspect-white-house-correspondents-dinner-shooting-charged-attempt-assassinate-president"
+    },
+    {
+      "_id": "source-wikipedia-whca-shooting-2026",
+      "description": "Comprehensive documentation of the assassination attempt at the White House Correspondents' Dinner, including media criticism and Trump's contentious relationship with journalists.",
+      "isAnonymous": false,
+      "label": "Wikipedia - 2026 White House Correspondents' Dinner Shooting",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/2026_White_House_Correspondents'_dinner_shooting"
+    },
+    {
+      "_id": "source-wikipedia-blueanon-2026",
+      "description": "Documentation of the left-wing conspiracy movement BlueAnon, including theories that Trump staged assassination attempts for sympathy.",
+      "isAnonymous": false,
+      "label": "Wikipedia - BlueAnon Conspiracy Movement",
+      "type": "article",
+      "url": "https://en.wikipedia.org/wiki/BlueAnon"
+    },
+    {
+      "_id": "source-reuters-whca-gala-concerns-2026",
+      "description": "April 29, 2026 - Analysis of Trump's restrictions on press access and criticism of the White House Correspondents' Dinner in the wake of the assassination attempt.",
+      "isAnonymous": false,
+      "label": "Reuters - Foiled Attack Intensifies Concerns About White House Press Gala",
+      "type": "article",
+      "url": "https://www.reuters.com/business/media-telecom/foiled-attack-intensifies-concerns-about-white-house-press-gala-2026-04-29/"
+    },
+    {
+      "_id": "source-poynter-whca-cringe-2026",
+      "description": "April 2026 - Criticism of the White House Correspondents' Dinner as access journalism that compromises journalists' ability to hold power to account.",
+      "isAnonymous": false,
+      "label": "Poynter - The White House Correspondents' Dinner Has Always Been a Cringefest",
+      "type": "article",
+      "url": "https://www.poynter.org/commentary/2026/white-house-correspondents-dinner-trump-criticism/"
+    }
+  ]
+}

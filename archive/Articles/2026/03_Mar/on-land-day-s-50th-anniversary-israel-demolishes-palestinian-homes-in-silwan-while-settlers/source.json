@@ -1,0 +1,62 @@
+{
+  "slug": "on-land-day-s-50th-anniversary-israel-demolishes-palestinian-homes-in-silwan-while-settlers",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "fT4RkbtsUFo0w0XC0uwG9i",
+      "description": "March 30, 2026 report on Israeli military demolition of Palestinian homes in Silwan, occupied East Jerusalem, on Land Day.",
+      "isAnonymous": null,
+      "label": "Middle East Monitor - Israeli forces demolish two Palestinian homes in East Jerusalem",
+      "type": "document",
+      "url": "https://www.middleeastmonitor.com/20260330-israeli-forces-demolish-two-palestinian-homes-in-east-jerusalem/"
+    },
+    {
+      "_id": "nE3O1lobPG69YhI3z4qgUU",
+      "description": "March 24, 2026 coverage of West Bank violence surge, settler attacks following Yehuda Sherman death, and Iran war context.",
+      "isAnonymous": null,
+      "label": "Al Jazeera - Palestine weekly wrap: West Bank attacks surge",
+      "type": "document",
+      "url": "https://www.aljazeera.com/news/2026/3/24/amid-muted-eid-celebrations-violence-surges-across-the-west-bank"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkIrgjEd",
+      "description": "March 23, 2026 detailed report on Yehuda Sherman death, settler rampages in Jalud and Deir al-Hatab, arson attacks, and Israeli security response.",
+      "isAnonymous": null,
+      "label": "The Times of Israel - Death of ATV driver unleashes settler attacks",
+      "type": "document",
+      "url": "https://www.timesofisrael.com/death-of-atv-driver-unleashes-new-outburst-of-settler-attacks-on-palestinians/"
+    },
+    {
+      "_id": "nE3O1lobPG69YhI3z4qmqn",
+      "description": "March 22, 2026 report on settler rampages in four Nablus-area villages following Yehuda Sherman funeral.",
+      "isAnonymous": null,
+      "label": "Los Angeles Times - Israeli settlers smash cars, set fires in the West Bank",
+      "type": "document",
+      "url": "https://www.latimes.com/world-nation/story/2026-03-22/israeli-settlers-smash-cars-set-fires-in-west-bank-4-palestinians-killed-in-gaza"
+    },
+    {
+      "_id": "nE3O1lobPG69YhI3z4qrEj",
+      "description": "October 9, 2025 comprehensive UN report on West Bank casualties, settler violence, demolitions, and humanitarian situation since October 7, 2023.",
+      "isAnonymous": null,
+      "label": "UN OCHA - Humanitarian Situation Update #330: West Bank",
+      "type": "data",
+      "url": "https://www.ochaopt.org/content/humanitarian-situation-update-330-west-bank"
+    },
+    {
+      "_id": "0bzv6vDb5M9RssFkIrgtrT",
+      "description": "March 30, 2026 historical explainer on the origins of Land Day, the 1976 protests, and ongoing land confiscation.",
+      "isAnonymous": null,
+      "label": "Al Jazeera - Land Day: What happened in Palestine on March 30, 1976?",
+      "type": "document",
+      "url": "https://www.aljazeera.com/news/2026/3/30/land-day-what-happened-in-palestine-on-march-30-1976"
+    },
+    {
+      "_id": "nE3O1lobPG69YhI3z4rF4F",
+      "description": "Legal analysis of Land Day historical significance and ongoing land confiscation by Israeli authorities.",
+      "isAnonymous": null,
+      "label": "Al-Haq - Land Day: Commemorating Historical and Ongoing Land Expropriation",
+      "type": "document",
+      "url": "https://www.alhaq.org/blog/18123.html"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "hezbollah-ambush-in-bint-jbeil-israeli-forces-lured-into-death-trap",
+  "totalSources": 1,
+  "sources": [
+    {
+      "_id": "source-mintpress-bintjbeil-trap-2026-04-14",
+      "description": "April 14, 2026 - Breaking news report that a large number of Israeli soldiers were lured into a trap by Hezbollah in Bint Jbeil, with the building detonated and no survivors.",
+      "isAnonymous": false,
+      "label": "MintPressNews - Breaking: Hezbollah Trap in Bint Jbeil",
+      "type": "article",
+      "url": "https://twitter.com/MintPressNews"
+    }
+  ]
+}

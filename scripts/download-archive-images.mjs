@@ -1,10 +1,23 @@
 #!/usr/bin/env node
 /**
- * Archive Image Downloader
- * Extracts image references from archived markdown files and downloads them from Sanity
+ * Archive Image Downloader (repair/retry utility)
+ *
+ * Re-scans already-archived articles and (re-)downloads any missing images
+ * from Sanity — mainImage + imageGallery (read from metadata.json) and
+ * body images (read from body.md's IMAGE markers) — without re-fetching
+ * article bodies/metadata. Useful for retrying failed downloads from a
+ * prior `archive-article.mjs` run.
+ *
+ * Expects the archive-article.mjs layout:
+ *   <archive-dir>/<slug>/body.md
+ *   <archive-dir>/<slug>/metadata.json
+ *   <archive-dir>/<slug>/Images/main.ext
+ *   <archive-dir>/<slug>/Images/gallery-N.ext
+ *   <archive-dir>/<slug>/Images/image-N.ext
+ *   <archive-dir>/<slug>/Images/metadata.json
  *
  * Usage:
- *   node scripts/download-archive-images.mjs [--archive-dir archive/Articles] [--output-dir archive/Images]
+ *   node scripts/download-archive-images.mjs [--archive-dir archive/Articles]
  */
 
 import fs from 'fs';
@@ -145,24 +158,47 @@ function getFileExtension(assetId, mimeType, originalFilename) {
 }
 
 /**
- * Create metadata file for images
+ * Build the mainImage + imageGallery + body image request list for one
+ * archived article, mirroring archive-article.mjs's request shape.
  */
-function createImageMetadata(slug, images) {
-  const metadata = {
-    slug,
-    totalImages: images.length,
-    downloadedAt: new Date().toISOString(),
-    images: images.map((img, idx) => ({
-      index: idx,
+function buildRequests(metadata, bodyImages) {
+  const requests = [];
+
+  if (metadata?.mainImage?.asset?._ref) {
+    requests.push({
+      category: 'main',
+      filenameBase: 'main',
+      alt: metadata.mainImage.alt || '',
+      caption: metadata.mainImage.caption || '',
+      credit: metadata.mainImage.credit || '',
+      asset: metadata.mainImage.asset._ref
+    });
+  }
+
+  const galleryImages = metadata?.imageGallery?.images || [];
+  galleryImages.forEach((img, idx) => {
+    requests.push({
+      category: 'gallery',
+      filenameBase: `gallery-${idx + 1}`,
+      alt: img.alt || '',
+      caption: img.caption || '',
+      credit: img.credit || '',
+      asset: img.asset?._ref || ''
+    });
+  });
+
+  bodyImages.forEach((img, idx) => {
+    requests.push({
+      category: 'body',
+      filenameBase: `image-${idx + 1}`,
       alt: img.alt,
       caption: img.caption,
       credit: img.credit,
-      asset: img.asset,
-      filename: img.filename,
-      downloaded: img.downloaded
-    }))
-  };
-  return metadata;
+      asset: img.asset
+    });
+  });
+
+  return requests;
 }
 
 /**
@@ -170,7 +206,6 @@ function createImageMetadata(slug, images) {
  */
 async function main() {
   let archiveDir = 'archive/Articles';
-  let outputDir = 'archive/Images';
 
   // Parse arguments
   for (let i = 2; i < process.argv.length; i++) {
@@ -179,15 +214,10 @@ async function main() {
       archiveDir = arg.split('=')[1];
     } else if (arg === '--archive-dir' && i + 1 < process.argv.length) {
       archiveDir = process.argv[++i];
-    } else if (arg.startsWith('--output-dir=')) {
-      outputDir = arg.split('=')[1];
-    } else if (arg === '--output-dir' && i + 1 < process.argv.length) {
-      outputDir = process.argv[++i];
     }
   }
 
-  console.log(`📁 Archive directory: ${archiveDir}`);
-  console.log(`📸 Output directory: ${outputDir}\n`);
+  console.log(`📁 Archive directory: ${archiveDir}\n`);
 
   // Get Sanity config
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -200,87 +230,115 @@ async function main() {
     process.exit(1);
   }
 
-  // Find all markdown files
+  // Find all archived article folders (each containing a body.md)
   if (!fs.existsSync(archiveDir)) {
     console.error(`❌ Archive directory not found: ${archiveDir}`);
     process.exit(1);
   }
 
-  const mdFiles = fs.readdirSync(archiveDir).filter(f => f.endsWith('.md'));
-  console.log(`📄 Found ${mdFiles.length} markdown files\n`);
+  const slugs = fs
+    .readdirSync(archiveDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(archiveDir, entry.name, 'body.md')))
+    .map((entry) => entry.name);
+
+  console.log(`📄 Found ${slugs.length} archived article(s)\n`);
 
   let totalImages = 0;
   let downloadedImages = 0;
   const results = [];
 
-  for (const mdFile of mdFiles) {
-    const slug = mdFile.replace('.md', '');
-    const mdPath = path.join(archiveDir, mdFile);
+  for (const slug of slugs) {
+    const mdPath = path.join(archiveDir, slug, 'body.md');
     const markdownContent = fs.readFileSync(mdPath, 'utf-8');
+    const bodyImages = extractImages(markdownContent);
 
-    // Extract images
-    const images = extractImages(markdownContent);
-    if (images.length === 0) {
+    const metaPath = path.join(archiveDir, slug, 'metadata.json');
+    const metadata = fs.existsSync(metaPath) ? JSON.parse(fs.readFileSync(metaPath, 'utf-8')) : null;
+
+    const requests = buildRequests(metadata, bodyImages);
+    if (requests.length === 0) {
       continue;
     }
 
-    totalImages += images.length;
+    totalImages += requests.length;
     console.log(`\n📄 ${slug}`);
-    console.log(`   Found ${images.length} image(s)`);
+    console.log(`   Found ${requests.length} image(s) (main/gallery/body)`);
 
-    // Create slug folder
-    const slugFolder = path.join(outputDir, slug);
-    if (!fs.existsSync(slugFolder)) {
-      fs.mkdirSync(slugFolder, { recursive: true });
+    // Images live alongside body.md, in <archiveDir>/<slug>/Images/
+    const imagesDir = path.join(archiveDir, slug, 'Images');
+    if (!fs.existsSync(imagesDir)) {
+      fs.mkdirSync(imagesDir, { recursive: true });
     }
 
     // Download each image
-    const downloadedImagesList = [];
-    for (let idx = 0; idx < images.length; idx++) {
-      const img = images[idx];
-      const assetId = img.asset;
+    const downloadedList = [];
+    for (let idx = 0; idx < requests.length; idx++) {
+      const req = requests[idx];
+      const assetId = req.asset;
+
+      if (!assetId) {
+        console.log(`   ⚠️  [${idx + 1}/${requests.length}] ${req.filenameBase}: missing asset reference`);
+        downloadedList.push({ ...req, downloaded: false, filename: null });
+        continue;
+      }
 
       // Get image URL from Sanity
       const imageData = await getImageUrl(assetId, projectId, dataset, token, apiVersion);
       if (!imageData) {
-        console.log(`   ⚠️  [${idx + 1}/${images.length}] Failed to fetch metadata for ${assetId}`);
-        img.downloaded = false;
-        img.filename = null;
-        downloadedImagesList.push(img);
+        console.log(`   ⚠️  [${idx + 1}/${requests.length}] Failed to fetch metadata for ${assetId}`);
+        downloadedList.push({ ...req, downloaded: false, filename: null });
         continue;
       }
 
       // Determine filename
       const ext = getFileExtension(assetId, imageData.mimeType, imageData.originalFilename);
-      const filename = `image-${idx + 1}${ext}`;
-      const outputPath = path.join(slugFolder, filename);
+      const filename = `${req.filenameBase}${ext}`;
+      const outputPath = path.join(imagesDir, filename);
 
       // Download image
       const success = await downloadImage(imageData.url, outputPath);
       if (success) {
-        console.log(`   ✓ [${idx + 1}/${images.length}] ${filename}`);
+        console.log(`   ✓ [${idx + 1}/${requests.length}] ${filename}`);
         downloadedImages++;
-        img.downloaded = true;
-        img.filename = filename;
+        downloadedList.push({ ...req, downloaded: true, filename });
       } else {
-        console.log(`   ✗ [${idx + 1}/${images.length}] Failed to download ${filename}`);
-        img.downloaded = false;
-        img.filename = filename;
+        console.log(`   ✗ [${idx + 1}/${requests.length}] Failed to download ${filename}`);
+        downloadedList.push({ ...req, downloaded: false, filename });
       }
-
-      downloadedImagesList.push(img);
     }
 
-    // Save metadata
-    const metadata = createImageMetadata(slug, downloadedImagesList);
-    const metadataFile = path.join(slugFolder, 'images.json');
-    fs.writeFileSync(metadataFile, JSON.stringify(metadata, null, 2), 'utf-8');
+    // Save metadata, grouped by where each image came from (matches archive-article.mjs)
+    const toPublic = (r) => ({
+      alt: r.alt,
+      caption: r.caption,
+      credit: r.credit,
+      asset: r.asset,
+      filename: r.filename,
+      downloaded: r.downloaded
+    });
+    const imgMetadata = {
+      slug,
+      totalImages: requests.length,
+      downloadedAt: new Date().toISOString(),
+      mainImage: (() => {
+        const r = downloadedList.find((r) => r.category === 'main');
+        return r ? toPublic(r) : null;
+      })(),
+      gallery: downloadedList
+        .filter((r) => r.category === 'gallery')
+        .map((r, idx) => ({ index: idx, ...toPublic(r) })),
+      body: downloadedList
+        .filter((r) => r.category === 'body')
+        .map((r, idx) => ({ index: idx, ...toPublic(r) }))
+    };
+    const metadataFile = path.join(imagesDir, 'metadata.json');
+    fs.writeFileSync(metadataFile, JSON.stringify(imgMetadata, null, 2), 'utf-8');
 
     results.push({
       slug,
-      total: images.length,
-      downloaded: downloadedImagesList.filter(i => i.downloaded).length,
-      failed: downloadedImagesList.filter(i => !i.downloaded).length
+      total: requests.length,
+      downloaded: downloadedList.filter((i) => i.downloaded).length,
+      failed: downloadedList.filter((i) => !i.downloaded).length
     });
   }
 
@@ -292,7 +350,7 @@ async function main() {
   console.log(`Successfully downloaded: ${downloadedImages}`);
   console.log(`Failed: ${totalImages - downloadedImages}`);
   console.log(`Articles with images: ${results.length}`);
-  console.log(`Output directory: ${outputDir}\n`);
+  console.log(`Archive directory: ${archiveDir}\n`);
 
   // Detailed summary
   console.log('Summary by article:');

@@ -1,0 +1,54 @@
+{
+  "slug": "the-mississippi-musk-who-wants-to-erase-black-power-how-shad-white-uses-state-authority-to-target-mi",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-mississippifreepress-swamp-sweep-2025-11-21",
+      "description": "November 21, 2025 - Reports on Operation Swamp Sweep aiming to arrest 5,000 immigrants across southeast Louisiana and Mississippi. Includes Shad White's Facebook post praising ICE and stating his office is 'honored to serve as state-level partners for ICE.'",
+      "isAnonymous": false,
+      "label": "Mississippi Free Press - Border Agents Target Mississippi Communities in 'Swamp Sweep'",
+      "type": "article",
+      "url": "https://www.mississippifreepress.org/border-agents-target-mississippi-communities-in-swamp-sweep-aiming-to-arrest-thousands-of-immigrants/"
+    },
+    {
+      "_id": "source-foxnews-moge-hiv-aids-2025-05-05",
+      "description": "May 5, 2025 - Shad White audit of HIV/AIDS grants finding funds spent on 'Queer-ceanara' Latinx pride event and cab rides in NYC. White calls spending 'a slap in the face to taxpayers' and says his office follows DOGE model.",
+      "isAnonymous": false,
+      "label": "Fox News - 'MOGE' audit uncovers nonprofits' 'incredibly wasteful' spending of HIV/AIDS grants",
+      "type": "article",
+      "url": "https://www.foxnews.com/politics/moge-audit-uncovers-nonprofits-incredibly-wasteful-spending-taxpayer-funds-state-official"
+    },
+    {
+      "_id": "source-dailysignal-medicaid-illegals-2026-04-27",
+      "description": "April 27, 2026 - Shad White audit claiming $10.5 million in Medicaid benefits went to undocumented immigrants 2023-2025. White quotes: 'anything would be better than serving as a magnet for illegal immigrants' and 'Mississippi taxpayers deserve to know the cost of illegal immigrants... even if it makes some folks uncomfortable.'",
+      "isAnonymous": false,
+      "label": "The Daily Signal - $10.5 Million in Medicaid Given to Illegal Aliens in Mississippi",
+      "type": "article",
+      "url": "https://www.dailysignal.com/2026/04/27/10-5-million-in-medicaid-given-to-illegals-in-mississippi/"
+    },
+    {
+      "_id": "source-actionnews5-redistricting-2026-05-07",
+      "description": "May 7, 2026 - Reports on Mississippi redistricting committee formation. Notes Shad White has been 'vocal on social media in calling for that to expand to congressional redistricting' and his quote: 'There is nothing stopping them from doing that. The big question is, will they have the courage to do that?'",
+      "isAnonymous": false,
+      "label": "Action News 5 - New redistricting committee announced for Mississippi",
+      "type": "article",
+      "url": "https://www.actionnews5.com/2026/05/07/new-redistricting-committee-announced-mississippi/"
+    },
+    {
+      "_id": "source-cbsnews-redistricting-2026-05-01",
+      "description": "May 1, 2026 - Reports on Supreme Court ruling rolling back Voting Rights Act protections. Quotes Shad White on X: 'Mississippi might no longer have a district drawn to protect Bennie Thompson.' Thompson is MS's only Democratic congressman representing the majority-Black 2nd District.",
+      "isAnonymous": false,
+      "label": "CBS News - These states could try to redistrict and add more GOP seats after Supreme Court decision",
+      "type": "article",
+      "url": "https://www.cbsnews.com/news/redistricting-2026-midterm-elections-supreme-court/"
+    },
+    {
+      "_id": "source-shadwhite-about-2023-06-20",
+      "description": "Shad White's official biography page. States he holds a law degree from Harvard Law School and served as President of the Federalist Society there. Background includes Rhodes Scholarship at Oxford, University of Mississippi degree. Positions himself as conservative fiscal hawk.",
+      "isAnonymous": false,
+      "label": "Shad White - About page (official campaign site)",
+      "type": "other",
+      "url": "https://shadwhite.com/about/"
+    }
+  ]
+}

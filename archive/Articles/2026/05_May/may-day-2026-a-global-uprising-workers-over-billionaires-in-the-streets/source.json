@@ -1,0 +1,54 @@
+{
+  "slug": "may-day-2026-a-global-uprising-workers-over-billionaires-in-the-streets",
+  "totalSources": 6,
+  "sources": [
+    {
+      "_id": "source-guardian-may-day-2026-protests",
+      "description": "Comprehensive coverage of May Day 2026 protests across the United States, including details on NYSE action, San Francisco arrests, and coordinated economic blackout strategy.",
+      "isAnonymous": null,
+      "label": "The Guardian - May Day 2026 Economic Blackout",
+      "type": "article",
+      "url": "https://www.theguardian.com/us-news/2026/may/01/may-day-strong-economic-protests"
+    },
+    {
+      "_id": "source-dailymail-may-day-europe-clashes",
+      "description": "Detailed reporting on May Day clashes in Turkey, France, Italy and Spain, including arrest counts from Istanbul and tear gas use in Lyon.",
+      "isAnonymous": null,
+      "label": "Daily Mail - May Day Violence in Europe",
+      "type": "article",
+      "url": "https://www.dailymail.com/news/article-15782429/Labour-day-violence-erupts-Europe-riot-police-clash-protesters-France-Italy-Spain-Turkey.html"
+    },
+    {
+      "_id": "source-fox-news-may-day-global",
+      "description": "Coverage of May Day 2026 protests from Paris to Istanbul, Madrid, Manila and Seoul, highlighting how protests expanded beyond labor rights to include anti-war activism.",
+      "isAnonymous": null,
+      "label": "Fox News - May Day Protests Across Europe and Asia",
+      "type": "article",
+      "url": "https://www.foxnews.com/world/may-day-protests-across-europe-asia-turn-anti-american-anti-israel-political-battlegrounds"
+    },
+    {
+      "_id": "source-ap-photo-gallery-may-day-2026",
+      "description": "Comprehensive photo gallery of May Day 2026 protests from over 25 cities worldwide, including New York, Paris, Lyon, Istanbul, Manila, Seoul, Chicago, and Washington D.C.",
+      "isAnonymous": null,
+      "label": "AP News - Workers Demonstrate on May Day in Photos",
+      "type": "media",
+      "url": "https://apnews.com/photo-gallery/may-day-workers-protests-international-photos-ad06b3699bd5148a2ad8f10ebb34d6a9"
+    },
+    {
+      "_id": "source-ap-may-day-article",
+      "description": "Global coverage of May Day 2026 protests, including demonstrations in Venezuela, Cuba, Ecuador, Argentina, Mexico, Chile, and the Philippines.",
+      "isAnonymous": null,
+      "label": "AP News - May Day International Workers' Day Rallies",
+      "type": "article",
+      "url": "https://apnews.com/article/may-day-international-workers-rallies-demonstrations-e681138b292048ef190e3cb9588649dc"
+    },
+    {
+      "_id": "source-pix11-nysie-arrests",
+      "description": "Local New York coverage of May Day protests at the New York Stock Exchange, including details on multiple arrests.",
+      "isAnonymous": null,
+      "label": "PIX11 - Multiple Arrested Outside NY Stock Exchange",
+      "type": "article",
+      "url": "https://pix11.com/news/multiple-arrested-outside-new-york-stock-exchange-during-may-day-protest/"
+    }
+  ]
+}

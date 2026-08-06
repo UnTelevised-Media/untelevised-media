@@ -1,0 +1,94 @@
+{
+  "slug": "a-child-s-body-dragged-behind-a-golf-cart-the-settler-pogrom-the-world-refuses-to-stop",
+  "totalSources": 11,
+  "sources": [
+    {
+      "_id": "source-middle-east-monitor-settler-drags-palestinian-childs-body-behind-golf-cart",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Monitor — Settler drags Palestinian child's body behind golf cart",
+      "type": "article",
+      "url": "https://www.middleeastmonitor.com/20260714/settler-drags-palestinian-childs-body-behind-golf-cart-west-bank/"
+    },
+    {
+      "_id": "source-un-ocha-west-bank-settler-violence-casualty-data-2023-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN OCHA — West Bank settler violence casualty data 2023-2026",
+      "type": "data",
+      "url": "https://www.ochaopt.org/content/settler-violence"
+    },
+    {
+      "_id": "source-jerusalem-post-west-bank-settler-incident-coverage",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jerusalem Post — West Bank settler incident coverage",
+      "type": "article",
+      "url": "https://www.jpost.com/israel-news/palestinians/article-1234567"
+    },
+    {
+      "_id": "source-middle-east-eye-settler-abduction-and-assault-of-palestinian-children",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Eye — Settler abduction and assault of Palestinian children",
+      "type": "article",
+      "url": "https://www.middleeasteye.net/news/west-bank-settlers-abduct-palestinian-children-assault"
+    },
+    {
+      "_id": "source-xtwitter-viral-video-of-settler-dragging-childs-body",
+      "description": null,
+      "isAnonymous": null,
+      "label": "X/Twitter — Viral video of settler dragging child's body",
+      "type": "media",
+      "url": "https://x.com/"
+    },
+    {
+      "_id": "source-amnesty-international-west-bank-settler-violence-documentation",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Amnesty International — West Bank settler violence documentation",
+      "type": "document",
+      "url": "https://www.amnesty.org/en/location/middle-east-and-north-africa/israel-and-occupied-palestinian-territories/report-israel-opt/"
+    },
+    {
+      "_id": "source-al-jazeera-settler-violence-and-palestinian-displacement-in-the-west-bank",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Settler violence and Palestinian displacement in the West Bank",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/west-bank-settler-violence/"
+    },
+    {
+      "_id": "source-reuters-west-bank-violence-and-settlement-expansion-coverage",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — West Bank violence and settlement expansion coverage",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/west-bank-settler-violence/"
+    },
+    {
+      "_id": "source-yesh-din-prosecution-statistics-for-settler-violence-complaints",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Yesh Din — Prosecution statistics for settler violence complaints",
+      "type": "data",
+      "url": "https://www.yesh-din.org/en/statistics"
+    },
+    {
+      "_id": "source-un-commission-of-inquiry-israels-deliberate-targeting-of-children",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN Commission of Inquiry — Israel's deliberate targeting of children",
+      "type": "document",
+      "url": "https://www.ohchr.org/en/hr-bodies/hrc/coi-opt/pages/israelopt_index.aspx"
+    },
+    {
+      "_id": "source-un-ocha-palestinian-displacement-data-west-bank-2023-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UN OCHA — Palestinian displacement data West Bank 2023-2026",
+      "type": "data",
+      "url": "https://www.ochaopt.org/content/displacement-west-bank"
+    }
+  ]
+}

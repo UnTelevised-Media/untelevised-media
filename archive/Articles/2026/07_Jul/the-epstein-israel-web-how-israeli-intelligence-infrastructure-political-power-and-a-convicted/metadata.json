@@ -1,0 +1,151 @@
+{
+  "_id": "epstein-israel-intelligence-web",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "0b5dd6675371",
+      "_ref": "d2404bfc-c9c3-440e-aed4-cb119f8ff947",
+      "_type": "reference"
+    },
+    {
+      "_key": "4104e24d33c5eddcacf69fc763324701",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The Epstein files reveal a documented network connecting Israeli military intelligence, Unit 8200 surveillance firms, Mossad veterans, and a convicted sex offender — now being permanently fused into U.S. defense law.",
+  "eventDate": "2026-07-15T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "The DOJ-released Epstein files show Epstein had daily correspondence with former Israeli PM Ehud Barak for years, invested $1M in Israeli surveillance startup Carbyne (staffed by Unit 8200 veterans), funded Barak's political comeback to the tune of $2.3M, and paid for the cancer treatment of Mossad veteran Yoni Koren who regularly stayed at Epstein's townhouse.",
+      "question": "What is the documented connection between Epstein and Israel?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "No definitive proof exists. A 2020 FBI memo reported a source claiming Epstein was a 'co-opted Mossad agent,' but the source's credibility was later heavily contested. The broader pattern of documented connections to Israeli intelligence figures, however, remains substantial regardless of any formal intelligence asset designation.",
+      "question": "Was Epstein confirmed to be a Mossad agent?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Carbyne is an Israeli 911 emergency communications startup staffed by Unit 8200 (IDF signals intelligence) veterans and chaired by Ehud Barak. Epstein invested $1M through Barak's vehicle. Peter Thiel's Founders Fund also invested. Axon acquired Carbyne for $625 million in 2025, integrating Israeli surveillance tech into American emergency response systems.",
+      "question": "What is Carbyne and why does it matter?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "On the Joe Rogan Experience on July 15, 2026, Vice President Vance said Epstein 'clearly had connections to the upper levels of American intelligence' and 'clearly had connections to the highest levels of Israeli intelligence,' adding 'Mossad or CIA or some other deep state.' He also admitted the Trump administration 'absolutely screwed up' the Epstein files release.",
+      "question": "What did JD Vance say about Epstein and Israel?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Section 224 (now renumbered) of the FY2027 NDAA would permanently fuse American and Israeli military capability across AI, drones, cyber operations, weapons manufacturing, and intelligence-sharing. A bipartisan Massie-Khanna amendment to strip it was blocked from a floor vote. It would do more to entangle the two militaries than $200 billion in aid since 1948.",
+      "question": "What is NDAA Section 224 and why is it relevant?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": true,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Epstein files Israel",
+    "Ehud Barak Epstein",
+    "Carbyne surveillance Unit 8200",
+    "Mossad Epstein connection",
+    "JD Vance Epstein Israel",
+    "Israeli intelligence surveillance",
+    "Epstein island security system",
+    "Peter Thiel Palantir Epstein",
+    "NDAA Israel defense fusion",
+    "Ghislaine Maxwell Robert Maxwell Mossad"
+  ],
+  "leadParagraph": "The 3.5 million pages of DOJ-released Epstein files expose a documented web connecting former Israeli PM Ehud Barak, Unit 8200 surveillance startup Carbyne, Mossad veteran Yoni Koren, and Peter Thiel's Palantir — all while Congress quietly moves to permanently fuse American and Israeli defense technology without a floor vote.",
+  "linkedPitch": null,
+  "location": "Washington, D.C. / Tel Aviv / U.S. Virgin Islands",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Former Israeli Prime Minister Ehud Barak and Jeffrey Epstein in a photo released by the U.S. House Oversight Committee",
+    "asset": {
+      "_ref": "image-ca012fae6f048cab59250c3649704b7cf5cec525-1200x675-webp",
+      "_type": "reference"
+    },
+    "caption": "Former Israeli Prime Minister Ehud Barak and Jeffrey Epstein in an undated photograph released by the U.S. House Oversight Committee, December 2025.",
+    "credit": "U.S. House Oversight Committee / DOJ Epstein Files"
+  },
+  "methodology": "Reported using DOJ-released Epstein files (3.5 million pages), FBI memoranda, verified hacked email correspondence, House Oversight Committee releases, and original reporting from Al Jazeera, Drop Site News, Hunterbrook Media, Eastern Herald, Mondoweiss, and Middle East Monitor. All claims attributed to named sources. Intelligence asset allegations distinguished from documented financial and personal connections.",
+  "needsReview": null,
+  "publishedAt": "2026-07-20T03:30:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "israel-builds-settlements-on-gazas-graves-the-open-air-annexation-and-the-language-of-genocide-made-concrete",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "the-lobbys-bluff-how-103-democrats-broke-aipac",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "israel-kills-police-chief-jabaliya-gaza-strike",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "the-weaponization-of-antisemitism",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "lindsey-graham-israel-s-genocide-cheerleader-leaves-behind-a-legacy-of-racism-and-hate",
+      "_type": "reference"
+    },
+    {
+      "_key": "ef6e402d5e6c",
+      "_ref": "blanche-epstein-coverup-2026",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "metaDescription": "The Epstein files expose a documented network connecting Israeli military intelligence, Unit 8200 surveillance firms, Mossad veterans, and a convicted sex offender — now being permanently fused into U.S. defense law.",
+    "metaTitle": "The Epstein-Israel Web: Intelligence, Surveillance, and Power",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-epstein-israel-web-how-israeli-intelligence-infrastructure-political-power-and-a-convicted"
+  },
+  "tags": [
+    "Epstein",
+    "Israel",
+    "Mossad",
+    "Intelligence",
+    "Surveillance",
+    "Unit 8200",
+    "Ehud Barak",
+    "Carbyne",
+    "Peter Thiel",
+    "Palantir"
+  ],
+  "title": "The Epstein-Israel Web: How Israeli Intelligence Infrastructure, Political Power, and a Convicted Sex Offender Became Indistinguishable",
+  "updatedAt": null,
+  "videoLink": "https://www.youtube.com/watch?v=y0f1sUK3e50"
+}

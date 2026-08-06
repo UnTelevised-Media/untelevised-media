@@ -1,0 +1,70 @@
+{
+  "slug": "albania-s-flamingo-revolution-50-days-of-uprising-against-kushner-s-colonial-playground",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-foreign-policy-albanias-flamingo-revolution-against-billionaires-and-autocrats",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Foreign Policy — Albania's Flamingo Revolution Against Billionaires and Autocrats",
+      "type": "media",
+      "url": "https://foreignpolicy.com/2026/07/20/albania-flamingo-revolution-jared-kushner-sazan-island-resort/"
+    },
+    {
+      "_id": "source-democracy-now-albanias-flamingo-revolution-protests-could-bring-down-govt",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Democracy Now! — Albania's Flamingo Revolution: Protests Could Bring Down Gov't",
+      "type": "media",
+      "url": "https://www.democracynow.org/2026/7/9/albania_protests"
+    },
+    {
+      "_id": "source-nbc-news-kushner-luxury-resort-plan-sparks-mass-protests-in-albania",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News — Kushner luxury resort plan sparks mass protests in Albania",
+      "type": "media",
+      "url": "https://www.nbcnews.com/world/europe/kushner-luxury-resort-plan-protests-albania-rcna348612"
+    },
+    {
+      "_id": "source-cbs-news-jared-kushner-backed-luxury-resort-stokes-days-of-protests-in-albania",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS News — Jared Kushner-backed luxury resort stokes days of protests in Albania",
+      "type": "media",
+      "url": "https://www.cbsnews.com/news/jared-kushner-backed-luxury-resort-stokes-days-of-protests-in-albania/"
+    },
+    {
+      "_id": "source-financial-times-albanias-rama-vows-to-push-on-with-kushner-linked-resort",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Financial Times — Albania's Rama vows to push on with Kushner-linked resort",
+      "type": "media",
+      "url": "https://www.ft.com/content/3cb689e3-8c00-486a-bd21-ffc9349ddbf8"
+    },
+    {
+      "_id": "source-birdlife-international-when-a-government-sells-off-a-wetland-its-selling-off-dem",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BirdLife International — When a government sells off a wetland, it's selling off democracy too",
+      "type": "media",
+      "url": "https://www.birdlife.org/news/2026/06/04/albanias-flamingo-protests-when-a-government-sells-off-a-wetland-its-selling-off-democracy-too/"
+    },
+    {
+      "_id": "source-the-guardian-albania-warned-eu-accession-at-risk-over-kushner-resort-plans",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Albania warned EU accession at risk over Kushner resort plans",
+      "type": "media",
+      "url": "https://www.theguardian.com/world/2026/jul/01/albania-warned-eu-accession-at-risk-jared-kushner-resort-plans"
+    },
+    {
+      "_id": "source-middle-east-eye-dua-lipa-backs-albanias-flamingo-revolution",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Eye — Dua Lipa backs Albania's Flamingo Revolution",
+      "type": "media",
+      "url": "https://www.middleeasteye.net/trending/dua-lipa-backs-albanias-flamingo-revolution-against-resort"
+    }
+  ]
+}

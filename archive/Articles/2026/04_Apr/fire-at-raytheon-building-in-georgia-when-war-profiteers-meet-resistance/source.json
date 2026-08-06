@@ -1,0 +1,46 @@
+{
+  "slug": "fire-at-raytheon-building-in-georgia-when-war-profiteers-meet-resistance",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-wgxa-raytheon-2026-04-13",
+      "description": "April 13, 2026 - Local coverage of the Raytheon building fire in Warner Robins, Georgia. Firefighters responded at 1:00 a.m., smoke from front windows, investigation underway by Warner Robins Fire and Police Departments.",
+      "isAnonymous": false,
+      "label": "WGXA - Investigation underway after overnight fire at Raytheon building in Warner Robins",
+      "type": "article",
+      "url": "https://wgxa.tv/news/local/investigation-underway-after-early-morning-fire-at-raytheon-building-in-warner-robins-engineering-company-specializing-in-us-defense-systems-aerospace-rtx-corporation"
+    },
+    {
+      "_id": "source-newsbreak-raytheon-2026-04-13",
+      "description": "April 13, 2026 - Additional coverage of the Raytheon building fire. Confirms 1:00 a.m. response, building cleared, crews on scene until 4:00 a.m.",
+      "isAnonymous": false,
+      "label": "NewsBreak - Investigation underway after overnight fire at Raytheon building in Warner Robins",
+      "type": "article",
+      "url": "https://www.newsbreak.com/news/4589907025222-investigation-underway-after-overnight-fire-at-raytheon-building-in-warner-robins"
+    },
+    {
+      "_id": "source-robins-afb-2026",
+      "description": "Robins Air Force Base fact sheet showing Raytheon as major mission partner with $369.9M in contracts. The Warner Robins Air Logistic Complex is the largest single-site industrial complex in Georgia.",
+      "isAnonymous": false,
+      "label": "Robins Air Force Base - Mission Partners and Economic Impact",
+      "type": "document",
+      "url": "https://www.robins.af.mil/Portals/59/documents/Home/Robins%20At%20a%20Glance.pdf"
+    },
+    {
+      "_id": "source-nyt-altman-2026-04-10",
+      "description": "April 10, 2026 - Report on 20-year-old arrested after throwing Molotov at OpenAI CEO's San Francisco home.",
+      "isAnonymous": false,
+      "label": "New York Times - Molotov Cocktail Hurled at Sam Altman Home",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/04/10/us/open-ai-sam-altman-molotov-cocktail.html"
+    },
+    {
+      "_id": "source-abc7-kimberly-2026-04-08",
+      "description": "April 8, 2026 - Report on Chamel Abdulkarim, 29, arrested for Kimberly-Clark warehouse arson in Ontario, CA.",
+      "isAnonymous": false,
+      "label": "ABC7 Los Angeles - Warehouse Employee Accused of Arson",
+      "type": "article",
+      "url": "https://abc7.com/post/employee-arrested-arson-kimberly-clark-distribition-center-destroyed-massive-fire-ontario/18851549/"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "slug": "israel-s-yellow-line-is-expanding-across-gaza-a-de-facto-reoccupation-is-underway",
+  "totalSources": 8,
+  "sources": [
+    {
+      "_id": "source-middle-east-eye-for-gazas-palestinians-israels-ever-expanding-buffer-zone-means-",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Middle East Eye — For Gaza's Palestinians, Israel's ever-expanding buffer zone means endless displacement",
+      "type": "media",
+      "url": "https://www.middleeasteye.net/news/gaza-palestinians-israel-buffer-zone-displacement-yellow-line"
+    },
+    {
+      "_id": "source-the-guardian-gazas-yellow-line-creeps-forward-as-israeli-forces-expand-zone-of-c",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Gaza's yellow line creeps forward as Israeli forces expand zone of control",
+      "type": "media",
+      "url": "https://www.theguardian.com/world/2026/jun/18/gaza-yellow-line-israeli-forces-expand-zone-of-control"
+    },
+    {
+      "_id": "source-foreign-policy-is-israel-annexing-more-than-half-of-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Foreign Policy — Is Israel Annexing More Than Half of Gaza?",
+      "type": "media",
+      "url": "https://foreignpolicy.com/2026/06/16/israel-annexing-half-gaza-yellow-line-buffer-zone/"
+    },
+    {
+      "_id": "source-al-jazeera-yellow-line-de-facto-israeli-buffer-zone-shaping-life-in-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera — Yellow line: de facto Israeli buffer zone shaping life in Gaza",
+      "type": "media",
+      "url": "https://www.aljazeera.com/program/inside-story/2026/6/15/yellow-line-de-facto-israeli-buffer-zone-shaping-life-in-gaza"
+    },
+    {
+      "_id": "source-al-shabaka-via-al-jazeera-israels-yellow-line-in-gaza-annexation-without-legal-b",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al-Shabaka via Al Jazeera — Israel's yellow line in Gaza: annexation without legal burden",
+      "type": "academic",
+      "url": "https://www.aljazeera.com/opinions/2026/6/14/israels-yellow-line-in-gaza-annexation-without-legal-burden"
+    },
+    {
+      "_id": "source-reuters-israeli-maps-outline-expanded-zone-of-military-control-in-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — Israeli maps outline expanded zone of military control in Gaza",
+      "type": "media",
+      "url": "https://www.reutersconnect.com/media/editorial/israeli-maps-outline-expanded-zone-of-military-control-in-gaza"
+    },
+    {
+      "_id": "source-indian-express-israels-yellow-line-explained-buffer-zone-gaza-model-and-lebanon",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Indian Express — Israel's Yellow Line Explained: Buffer Zone, Gaza Model and Lebanon",
+      "type": "media",
+      "url": "https://indianexpress.com/article/explained/israels-yellow-line-explained-buffer-zone-gaza-model-lebanon/"
+    },
+    {
+      "_id": "source-gisha-between-the-yellow-and-orange-lines-224-palestinians-killed-near-gaza-buff",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Gisha — Between the Yellow and Orange Lines: 224 Palestinians killed near Gaza buffer zone",
+      "type": "report",
+      "url": "https://www.gisha.org/reports/between-yellow-orange-lines-gaza-buffer-zone-killings"
+    }
+  ]
+}
