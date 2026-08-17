@@ -1,0 +1,102 @@
+{
+  "slug": "the-siege-for-a-siege-ansarallah-closes-the-bab-al-mandeb-and-saudi-arabia-s-last-export-route",
+  "totalSources": 12,
+  "sources": [
+    {
+      "_id": "src-guardian-houthi-red-sea-saudi-blockade",
+      "description": "Detailed reporting on the Houthi warning to shipping companies, tanker U-turns near Bab el-Mandeb, and Trump's response. Includes analysis from Atlantic Council's Allison Minor on implications for Saudi oil exports.",
+      "isAnonymous": false,
+      "label": "The Guardian — Houthis threaten to attack shipping tankers if they use Saudi Arabian ports on Red Sea",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/jul/21/houthis-threaten-attack-tankers-saudi-arabian-ports-red-sea-shipping"
+    },
+    {
+      "_id": "src-cnbc-houthis-deploy-missiles-bab-mandeb",
+      "description": "JMIC warning on Houthi missile/drone deployment near Bab el-Mandeb, EU naval mission advisory, Kpler data showing 34% traffic decline, Windward data on tanker reroutes, and IMO tally of Hormuz casualties.",
+      "isAnonymous": false,
+      "label": "CNBC — Houthis deploy missiles and drones to attack ships in southern Red Sea",
+      "type": "article",
+      "url": "https://www.cnbc.com/2026/07/22/houthis-red-sea-bab-el-mandeb-saudi-oil-iran.html"
+    },
+    {
+      "_id": "src-cnbc-saudi-strikes-houthi-yemen",
+      "description": "Saudi coalition strikes on Houthi military targets, interception of ballistic missiles targeting Yanbu refineries, Trump's Truth Social threat, and CENTCOM strikes on Iran.",
+      "isAnonymous": false,
+      "label": "CNBC — Saudi military strikes Houthi targets in Yemen after tanker attacks",
+      "type": "article",
+      "url": "https://www.cnbc.com/2026/07/25/saudi-military-strikes-iran-backed-houthi-targets-yemen.html"
+    },
+    {
+      "_id": "src-aljazeera-un-envoy-yemen-alarmed",
+      "description": "UN envoy Hans Grundberg's warning about renewed conflict, 22 million Yemenis needing aid, 18.3 million facing food insecurity, and call for negotiations.",
+      "isAnonymous": false,
+      "label": "Al Jazeera — UN envoy for Yemen 'alarmed' by Houthis' Red Sea attacks",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/7/24/un-envoy-for-yemen-alarmed-by-houthis-red-sea-attacks-calls-for-talks"
+    },
+    {
+      "_id": "src-bbc-houthi-attacks-wider-conflict",
+      "description": "BBC analysis on the convergence of Hormuz and Bab al-Mandeb disruptions, Saudi reliance on East-West Pipeline, historical context on Houthi resilience, and implications for global economy.",
+      "isAnonymous": false,
+      "label": "BBC — Houthi attacks raise fears of wider Middle East conflict",
+      "type": "article",
+      "url": "https://www.bbc.com/news/articles/cvgve0vxy1yo"
+    },
+    {
+      "_id": "src-bbc-houthis-attack-saudi-tanker",
+      "description": "Reporting on the Encelia and Layla attacks, fire on Encelia's bow, BBC Verify tracking data, oil prices hitting $100, Trump/Rubio statements, and context on the 2023-2025 Red Sea campaign.",
+      "isAnonymous": false,
+      "label": "BBC — Yemen's Houthis attack Saudi tanker as US launches more Iran strikes",
+      "type": "article",
+      "url": "https://www.bbc.com/news/articles/cpw9xzx9r4ko"
+    },
+    {
+      "_id": "src-aljazeera-houthi-blockade-explained",
+      "description": "Comprehensive explainer on the blockade declaration, Sanaa airport bombing context, Bab al-Mandeb geography, and Kpler/Signal Ocean data on Saudi oil rerouting through Yanbu.",
+      "isAnonymous": false,
+      "label": "Al Jazeera — Yemen's Houthis declare naval blockade of Saudi Arabia: What to know",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/7/20/yemens-houthis-declare-naval-blockade-of-saudi-arabia-what-to-know"
+    },
+    {
+      "_id": "src-ap-houthis-block-saudi-red-sea",
+      "description": "AP reporting on the maritime embargo declaration, Bab al-Mandeb context (12% of world trade, 25% of container trade), and historical Red Sea disruption data.",
+      "isAnonymous": false,
+      "label": "AP News — Yemen's Iranian-backed Houthis say they will block Saudi shipping",
+      "type": "media",
+      "url": "https://apnews.com/article/yemen-saudi-arabia-maritime-embargo-fd7c4a3911f7eee18251483fc8af768c"
+    },
+    {
+      "_id": "src-twz-houthis-expand-northern-red-sea",
+      "description": "Breaking report on the August 5 NCC Wafa attack off Yanbu, Saree's statement on northern Red Sea operations, Suez Canal implications, and Axios reporting on potential Hormuz interim deal.",
+      "isAnonymous": false,
+      "label": "The War Zone — Houthis To Expand Shipping Attacks To Northern Red Sea",
+      "type": "article",
+      "url": "https://www.twz.com/news-features/houthis-to-expand-shipping-attacks-to-northern-red-sea"
+    },
+    {
+      "_id": "src-aljazeera-houthi-claim-ncc-ghazal",
+      "description": "Report on Saree's claim of the NCC Ghazal strike with ballistic missiles, the fourth tanker attacked since the blockade declaration.",
+      "isAnonymous": false,
+      "label": "Al Jazeera — Yemen's Houthis claim missile attack on Saudi oil tanker NCC Ghazal",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/7/28/yemens-houthis-claim-missile-attack-on-saudi-arabia-oil-tanker"
+    },
+    {
+      "_id": "src-wikipedia-red-sea-crisis",
+      "description": "Timeline reference for the 2023-2025 Red Sea campaign, 100+ vessel attacks, four ships sunk, nine crew killed, and the timeline of the July 2026 blockade declaration.",
+      "isAnonymous": false,
+      "label": "Wikipedia — Red Sea crisis",
+      "type": "other",
+      "url": "https://en.wikipedia.org/wiki/Red_Sea_crisis"
+    },
+    {
+      "_id": "src-guardian-oil-prices-fall-strikes-pause",
+      "description": "Data on Brent crude price movements — hitting $100 during Houthi attacks, falling to $88 after US strike pause.",
+      "isAnonymous": false,
+      "label": "The Guardian — Oil prices fall as US pauses strikes on Iran",
+      "type": "article",
+      "url": "https://www.theguardian.com/business/2026/jul/27/oil-prices-fall-us-strikes-iran-brent-crude-bp-shell-ftse-100"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "slug": "the-conspiracy-charge-how-the-doj-is-turning-immigration-solidarity-into-a-federal-crime",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-npr-she-protested-ice-raids-then-agents-showed-up-at-her-door",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR — She Protested ICE Raids. Then Agents Showed Up at Her Door",
+      "type": "article",
+      "url": "https://www.npr.org/2026/08/03/nx-s1-5886263/ice-dhs-immigration-enforcement-conspiracy-arrests"
+    },
+    {
+      "_id": "source-npr-the-doj-is-increasingly-charging-ice-protesters-with-criminal-conspiracy",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NPR — The DOJ is Increasingly Charging ICE Protesters With Criminal Conspiracy",
+      "type": "article",
+      "url": "https://www.nprillinois.org/2026-08-03/the-doj-is-increasingly-charging-ice-protesters-with-criminal-conspiracy"
+    },
+    {
+      "_id": "source-reuters-prosecutors-told-to-prioritize-trump-immigration-protest-cases",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — Prosecutors Told to Prioritize Trump Immigration Protest Cases",
+      "type": "article",
+      "url": "https://www.reuters.com/world/us/prosecutors-told-prioritize-publicize-cases-tied-trump-immigration-protests-2025-06-12/"
+    },
+    {
+      "_id": "source-doj-pam-bondi-memo-on-prosecuting-immigration-protesters",
+      "description": null,
+      "isAnonymous": null,
+      "label": "DOJ — Pam Bondi Memo on Prosecuting Immigration Protesters",
+      "type": "document",
+      "url": "https://www.justice.gov/ag/media/1415691/dl"
+    },
+    {
+      "_id": "source-new-york-times-federal-case-will-test-if-protesters-are-conspirators",
+      "description": null,
+      "isAnonymous": null,
+      "label": "New York Times — Federal Case Will Test if Protesters Are Conspirators",
+      "type": "article",
+      "url": "https://www.nytimes.com/2026/05/17/us/a-federal-case-will-test-if-protesters-are-conspirators.html"
+    },
+    {
+      "_id": "source-cornell-law-18-usc-372-conspiracy-to-impede-or-injure-officer",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Cornell Law — 18 U.S.C. § 372: Conspiracy to Impede or Injure Officer",
+      "type": "document",
+      "url": "https://www.law.cornell.edu/uscode/text/18/372"
+    },
+    {
+      "_id": "source-spokane-public-radio-at-least-30-arrested-at-spokane-immigration-protest",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Spokane Public Radio — At Least 30 Arrested at Spokane Immigration Protest",
+      "type": "article",
+      "url": "https://www.spokanepublicradio.org/regional-news/2025-06-12/at-least-30-people-arrested-at-spokane-immigration-protest"
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "_id": "prairieland-nine-562-years-anarchists-terrorism-sentencing-authoritarianism",
+  "allowComments": null,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "cat-civil",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-humanrights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-politics",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-us",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Fifteen people connected to a July 4, 2025 protest at a Texas ICE detention center have been sentenced to a combined 562 years in federal prison — the longest sentence ever given to a group of political defendants. Autumn Hill, one of three trans defendants, gives her first jailhouse interview.",
+  "eventDate": "2026-07-06T10:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Fifteen people in total received sentences ranging from 22 months to 100 years, for a combined 562 years. Eight defendants from the March trial were sentenced June 23, 2026. The ninth trial defendant was sentenced July 1. Six additional defendants who pleaded guilty received sentences July 1 and July 6.",
+      "question": "How many people were sentenced in the Prairieland case?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Autumn Hill attended the protest and left hours before shots were fired — confirmed by the trial transcript and the inability of FBI and police witnesses to contradict this. She was acquitted of attempted murder and firearms charges but convicted of riot, material support, and explosives conspiracy for attending a protest where fireworks were set off. She received 50 years.",
+      "question": "What was Autumn Hill's role and why was she sentenced to 50 years?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "The Proud Boys leader Enrique Tarrio received 22 years for seditious conspiracy, and Oath Keepers founder Stewart Rhodes received 18 years. Both were pardoned by Trump. The Prairieland defendants — who attended a protest with fireworks — received sentences five to ten times longer than the leaders of an actual armed insurrection.",
+      "question": "How do these sentences compare to January 6 sentences?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "The government's evidence of an organized cell consisted of: Signal group chats discussing fireworks, zines produced on a small printing press, attendance at an Emma Goldman Book Club, the books they read (entered as evidence of ideology), legally-owned firearms, dark clothing, and testimony from a Center for Security Policy expert who has warned of an 'anarcho-communist insurgency.' No ballistic or medical evidence was submitted at trial.",
+      "question": "What evidence did the government use to prove a 'terrorist cell'?"
+    },
+    {
+      "_key": "faq-5",
+      "_type": "faqItem",
+      "answer": "Donate through the DFW Support Committee at givesendgo.com/supportDFWprotestors, write letters to the defendants at prairielanddefendants.com/meet-the-defendants/, or organize fundraisers and noise demonstrations at local detention centers. The defendants are pursuing appeals.",
+      "question": "How can I support the Prairieland defendants?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Prairieland sentencing 562 years",
+    "15 Prairieland defendants sentenced",
+    "Autumn Hill jailhouse interview",
+    "antifa terrorism charges Texas",
+    "Trump war on antifa",
+    "political prisoners Texas 2026",
+    "ICE detention center protest",
+    "material support terrorists protest",
+    "Fort Worth federal court sentencing",
+    "Emma Goldman Book Club terrorism",
+    "National Lawyers Guild criminalization of protest",
+    "anarchist defendants longest sentence"
+  ],
+  "leadParagraph": "Fifteen people who attended or were connected to a July 4, 2025 protest outside a Texas immigration detention center have been sentenced to a combined 562 years in federal prison. Three received 50 years each for crimes requiring no proof of violence. One received 30 years for moving a box of books despite never attending the protest. The leader received a century. No ballistic evidence was submitted. No defense witnesses were called. This is the machinery of counter-dissent, and it is now pointed at anyone who shows up.",
+  "linkedPitch": null,
+  "location": "Fort Worth, Texas",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Distressed red-and-teal collage juxtaposing a Prairieland Detention Center facade and two hooded figures with a stack of activist zine covers, including \"Taking the Offensive\" and \"The Do-It-Yourself Occupation Guide.\"",
+    "asset": {
+      "_ref": "image-949db0fbed44298480e69bc949fce6248f847142-980x653-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "Reporting based on DOJ press releases, trial testimony reported by KERA News, AP, The Guardian, The Intercept, Al Jazeera, BBC, and Salon. Autumn Hill jailhouse interview from Uncloseted Media (July 25, 2026). Complete sentencing data from Unicorn Riot, WSWS, TPR, and KERA. Court notes and defendant profiles from DFW Support Committee. Support committee information verified via official website.",
+  "needsReview": null,
+  "publishedAt": "2026-08-04T04:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "ice-529-million-colorado-detention-center-geo-group",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "immigration-detention-system-expansion-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "the-fires-are-not-random",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "562-years-for-showing-up-the-prairieland-sentences-and-the-war-the-state-is-waging-against-the"
+  },
+  "tags": [
+    "Prairieland Nine",
+    "antifa",
+    "terrorism charges",
+    "ICE",
+    "political prisoners",
+    "sentencing",
+    "dissent",
+    "authoritarianism",
+    "Texas",
+    "anarchism"
+  ],
+  "title": "562 Years for Showing Up: The Prairieland Sentences and the War the State Is Waging Against the Left",
+  "updatedAt": null,
+  "videoLink": null
+}

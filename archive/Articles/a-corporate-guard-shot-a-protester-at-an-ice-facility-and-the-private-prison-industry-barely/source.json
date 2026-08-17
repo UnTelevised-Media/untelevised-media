@@ -1,0 +1,62 @@
+{
+  "slug": "a-corporate-guard-shot-a-protester-at-an-ice-facility-and-the-private-prison-industry-barely",
+  "totalSources": 7,
+  "sources": [
+    {
+      "_id": "source-cpr-news-geo-employee-arrested-in-shooting-of-protester-outside-aurora-ice-facil",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CPR News — GEO Employee Arrested in Shooting of Protester Outside Aurora ICE Facility",
+      "type": "article",
+      "url": "https://www.cpr.org/2026/07/17/ice-jail-employee-arrested-in-protester-shooting/"
+    },
+    {
+      "_id": "source-cbs-colorado-injured-protester-shares-story-after-shooting-at-geo-ice-facility",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS Colorado — Injured Protester Shares Story After Shooting at GEO ICE Facility",
+      "type": "article",
+      "url": "https://www.cbsnews.com/colorado/news/injured-protester-shares-story-shooting-geo-ice-aurora-detention-center/"
+    },
+    {
+      "_id": "source-cpr-news-ice-facility-employee-realized-he-did-some-dumb-sht-after-shooting",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CPR News — ICE Facility Employee Realized He 'Did Some Dumb Sh*t' After Shooting",
+      "type": "article",
+      "url": "https://www.cpr.org/2026/07/22/aurora-geo-ice-detention-facility-shooting-affidavit/"
+    },
+    {
+      "_id": "source-nbc-news-geo-group-worker-charged-with-assault-in-shooting-of-ice-protester",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News — GEO Group Worker Charged With Assault in Shooting of ICE Protester",
+      "type": "article",
+      "url": "https://www.nbcnews.com/news/us-news/geo-group-worker-charged-assault-shooting-ice-protester-colorado-rcna588873"
+    },
+    {
+      "_id": "source-colorado-times-recorder-ice-awards-529-million-contract-for-new-colorado-detenti",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Colorado Times Recorder — ICE Awards $529 Million Contract for New Colorado Detention Center",
+      "type": "media",
+      "url": "https://coloradotimesrecorder.com/2026/07/new-ice-awards-529-million-contract-to-open-new-colorado-detention-center/80275/"
+    },
+    {
+      "_id": "source-fight-back-news-aurora-rallies-for-victims-of-ice-and-fbi-repression",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Fight Back! News — Aurora Rallies for Victims of ICE and FBI Repression",
+      "type": "article",
+      "url": "https://fightbacknews.org/articles/aurora-rallies-for-victims-of-ice-and-fbi-repression-demands-hands-off-nadia"
+    },
+    {
+      "_id": "source-cpr-news-activist-confronts-lawyers-for-aurora-detention-center",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CPR News — Activist Confronts Lawyers for Aurora Detention Center",
+      "type": "article",
+      "url": "https://www.cpr.org/2026/07/31/immigration-activist-ice-detention-center-lawyers/"
+    }
+  ]
+}

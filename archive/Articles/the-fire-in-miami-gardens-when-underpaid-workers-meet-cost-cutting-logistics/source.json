@@ -1,0 +1,30 @@
+{
+  "slug": "the-fire-in-miami-gardens-when-underpaid-workers-meet-cost-cutting-logistics",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "source-miami-herald-warehouse-fire-2026-03-05",
+      "description": "March 6, 2026 - Detailed report on the Global Warehouse Solutions fire, listing the contents and structure of the 548,000-square-foot warehouse.",
+      "isAnonymous": false,
+      "label": "Miami Herald - What's in the burning Miami-Dade warehouse?",
+      "type": "article",
+      "url": "https://www.miamiherald.com/news/business/article314947821.html"
+    },
+    {
+      "_id": "source-cbs-miami-warehouse-fire-2026-03-06",
+      "description": "March 6, 2026 - Coverage of the five-alarm fire with details about firefighting efforts and ongoing investigation.",
+      "isAnonymous": false,
+      "label": "CBS Miami - More than 200 firefighters battle massive warehouse fire",
+      "type": "article",
+      "url": "https://www.cbsnews.com/miami/news/warehouse-fire-video-northwest-miami-dade-march-5-2026/"
+    },
+    {
+      "_id": "source-indeed-warehouse-wages-2026",
+      "description": "2026 - Average warehouse worker salary in Florida is $17.89 per hour.",
+      "isAnonymous": false,
+      "label": "Indeed - Warehouse worker salary in Florida",
+      "type": "data",
+      "url": "https://www.indeed.com/career/warehouse-worker/salaries/FL"
+    }
+  ]
+}

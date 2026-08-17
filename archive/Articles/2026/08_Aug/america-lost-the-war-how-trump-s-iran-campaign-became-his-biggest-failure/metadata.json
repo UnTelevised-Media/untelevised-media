@@ -1,0 +1,147 @@
+{
+  "_id": "america-lost-the-war-how-trump-s-iran-campaign-became-israel-s-fight",
+  "allowComments": true,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "cat-1",
+      "_ref": "c469bb8e-7593-476f-8a80-fcef4fe39430",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-2",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "The US launched Operation Epic Fury against Iran on February 28, 2026 — the largest military assault since Iraq 2003. Five months, $113 billion, and nearly 9,000 dead later, John Mearsheimer's verdict is in: America lost. This investigative deep dive traces the war's three failed strategies, the Islamabad surrender document, and why Israel's war was fought with American blood.",
+  "eventDate": "2026-08-05T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Operation Epic Fury was the codename for the joint US-Israeli military campaign launched against Iran on February 28, 2026. It involved 40,000 troops, multiple carrier strike groups, B-2 stealth bombers, and coordinated strikes on over 2,500 Iranian military and government facilities.",
+      "question": "What was Operation Epic Fury?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The US and Israel had four stated objectives: regime change in Iran, destruction of Iran's uranium enrichment capability, elimination of Iran's ballistic missile program, and severing Iran's support for Hamas, Hezbollah, and the Houthis. None were achieved.",
+      "question": "What were America's four goals in the Iran war?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The Islamabad Memorandum of Understanding was signed on June 17, 2026, at the Palace of Versailles. Brokered by Pakistan with Qatar, Saudi Arabia, Turkey, and Egypt, it provided for a ceasefire, reopening of the Strait of Hormuz, an end to the US naval blockade, sanctions waivers on Iranian oil, release of frozen assets, and reparations to Iran. Analysts including John Mearsheimer called it a surrender document.",
+      "question": "What is the Islamabad Memorandum?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Total estimated deaths across all parties range from 8,976 to 18,310 as of August 2026. This includes 18-20 US military killed, 1,701-3,636 Iranian civilians, 4,328 Lebanese civilians, 1,000-2,500 Hezbollah fighters, 28 Israeli civilians, and 1,800-7,650 Iranian military personnel.",
+      "question": "How many people died in the US-Iran war?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "The first six days alone cost $11.3 billion ($1.9 billion per day). Total estimated war cost reached $113 billion by August 2026. US equipment losses exceeded $5.14 billion including four F-15E Strike Eagles and 24 MQ-9 Reaper drones.",
+      "question": "How much did the Iran war cost?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": false,
+  "keywords": [
+    "Operation Epic Fury US Iran war 2026",
+    "John Mearsheimer US lost Iran war analysis",
+    "Islamabad Memorandum Trump Iran surrender",
+    "Strait of Hormuz crisis oil prices 2026",
+    "US Iran war casualties 9000 dead cost 113 billion",
+    "Khamenei killed decapitation strike Iran",
+    "Iran war legality war crimes international law",
+    "Israel Iran war US attack dog proxy",
+    "Minab Girls School strike 168 schoolgirls",
+    "Trump Iran cease fire blockade failure"
+  ],
+  "leadParagraph": "On February 28, 2026, the United States launched Operation Epic Fury against Iran — the largest military assault since Iraq 2003. Five months, $113 billion, and nearly 9,000 dead later, political scientist John Mearsheimer's verdict is clear: America lost the war. None of the four stated objectives — regime change, nuclear dismantlement, missile elimination, or severing Iran's regional alliances — were achieved. The June 17 Islamabad Memorandum was, by Mearsheimer's assessment, a surrender document in which the United States conceded every key issue.",
+  "linkedPitch": null,
+  "location": "United States / Iran",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Smoke and explosion plumes rising over the Tehran skyline during Operation Epic Fury airstrikes on February 28, 2026",
+    "asset": {
+      "_ref": "image-59c33b36df5e3a56ab31e8fb69ac7542b4645444-599x399-webp",
+      "_type": "reference"
+    },
+    "caption": "Smoke rises over Tehran on February 28, 2026, as US and Israeli forces launched Operation Epic Fury against over 2,500 Iranian targets in the opening salvo of the war.",
+    "credit": "AP Photo"
+  },
+  "methodology": "Reported using the Mearsheimer transcript (Deep Dive with Danny Davis, July 2026), Mearsheimer's Substack analysis, WarCosts.org casualty and cost tracker, MilitarySpend.org casualty tracker with 205 sources, Wikipedia analysis pages, the full text of the Islamabad Memorandum (Arab Center DC), CGTN, BBC (Jeremy Bowen), The Economist, Just Security (100+ international law experts), CounterPunch (Algiers Accords), and the International Crisis Group. casualty ranges reflect low-high sourced estimates from conflicting official and independent sources.",
+  "needsReview": false,
+  "publishedAt": "2026-08-06T00:26:25.817673",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-0",
+      "_ref": "us-iran-war-day-142-2026",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-1",
+      "_ref": "ukraine-strikes-iranian-vessel-caspian-sea-one-sailor-killed",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "29803114-066a-403d-a340-9c7ff0c473c2",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "honduras-hernandez-return-trump-pardon-narco-president-hero-welcome",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "chris-kyle-american-liar",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "ecuadorian-prosecutor-alexandra-bravo-murdered-us-boat-bombings",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "america-lost-the-war-how-trump-s-iran-campaign-became-his-biggest-failure"
+  },
+  "tags": [
+    "Iran",
+    "US-Iran War",
+    "Operation Epic Fury",
+    "Trump",
+    "Israel",
+    "Mearsheimer",
+    "Islamabad Memorandum",
+    "Strait of Hormuz",
+    "War Crimes",
+    "Imperialism"
+  ],
+  "title": "America Lost the War: How Trump's Iran Campaign Became His Biggest Failure",
+  "updatedAt": null,
+  "videoLink": null
+}

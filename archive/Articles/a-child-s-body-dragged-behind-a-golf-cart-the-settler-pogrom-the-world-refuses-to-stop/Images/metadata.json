@@ -1,0 +1,43 @@
+{
+  "slug": "a-child-s-body-dragged-behind-a-golf-cart-the-settler-pogrom-the-world-refuses-to-stop",
+  "totalImages": 4,
+  "downloadedAt": "2026-08-07T01:55:29.025Z",
+  "mainImage": {
+    "alt": "Damaged structures and belongings scattered in a Palestinian community area in the occupied West Bank after a settler attack",
+    "caption": "Documented settler violence in Susya, occupied West Bank, showing aftermath of attacks on Palestinian property and communities, March 2026.",
+    "credit": "Human Rights Watch",
+    "asset": "image-38e6fd710d53997cb60584f169abb12e85b3be43-1501x790-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Damaged structures and belongings scattered in a Palestinian community area in the occupied West Bank after a settler attack",
+      "caption": "Documented settler violence in Susya, occupied West Bank, showing aftermath of attacks on Palestinian property and communities, March 2026.",
+      "credit": "Human Rights Watch",
+      "asset": "image-7821d564c5ed430c3499824803009e6a310f7980-4000x2667-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "A group of Palestinian children and adults standing near a barbed-wire fence across a dirt road in an arid landscape in the occupied West Bank",
+      "caption": "Palestinian students gather near a barbed-wire fence erected by Israeli settlers blocking their route to school in Umm al-Khair, Hebron governorate, occupied West Bank, April 2026.",
+      "credit": "Reuters",
+      "asset": "image-5ad4c9871117422a9df090ee4195bf52ccc7f00d-5184x3456-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Armed men in military and civilian clothing standing near a bulldozer in a dusty landscape in the occupied West Bank",
+      "caption": "Israeli forces and armed settlers stand guard near a bulldozer reportedly operating in a Palestinian area of the occupied West Bank, June 2026.",
+      "credit": "AFP",
+      "asset": "image-6547df3e754ea4dad8d6975ca6ee58ebd440363f-3122x2081-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    }
+  ]
+}

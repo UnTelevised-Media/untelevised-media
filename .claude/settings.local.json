@@ -35,7 +35,10 @@
       "Bash(docker login *)",
       "Bash(docker push *)",
       "PowerShell(ffmpeg *)",
-      "PowerShell(docker push *)"
+      "PowerShell(docker push *)",
+      "Bash(pandoc --version)",
+      "Bash(npx --version)",
+      "Bash(npm ls *)"
     ],
     "additionalDirectories": [
       "C:\\Windows\\Temp"

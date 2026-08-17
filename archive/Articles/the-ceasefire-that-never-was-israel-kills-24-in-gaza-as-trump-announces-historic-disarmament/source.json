@@ -1,0 +1,86 @@
+{
+  "slug": "the-ceasefire-that-never-was-israel-kills-24-in-gaza-as-trump-announces-historic-disarmament",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "source-al-jazeera-gaza-july30",
+      "description": "Reports on July 30 Israeli strikes killing at least six including an 8-year-old in Khan Younis tent encampment and 18-month-old in Bureij. Gaza Health Ministry figures and Al Jazeera correspondent reporting from Shati camp.",
+      "isAnonymous": false,
+      "label": "Al Jazeera — Israeli Strikes Kill at Least Six, Including Children, Across Gaza Strip",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/7/30/israeli-strikes-kill-at-least-four-including-children-across-gaza-strip"
+    },
+    {
+      "_id": "source-al-jazeera-palestine-weekly",
+      "description": "Comprehensive weekly roundup documenting 19 killed Aug 3, 26 killed over the weekend. Names victims: Abdullah Abu Taif (33), Abeer Anan (29, pregnant), Azzam (5), Mahmoud al-Hams (38), Fatima al-Hams (37), Kamal Abu Muailiq (68), Huda Abu Muailiq (59). Also covers medicine warehouse destruction and 112 bodies recovered from Sabra.",
+      "isAnonymous": false,
+      "label": "Al Jazeera — Palestine Weekly: Israel Kills Dozens in Gaza After Hamas Disarmament Deal",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/8/4/palestine-weekly-israel-kills-dozens-in-gaza-after-hamas-disarmament-deal"
+    },
+    {
+      "_id": "source-middle-east-monitor-18-killed",
+      "description": "Anadolu Agency reporting on August 2 killings: 18 Palestinians including three children and unborn baby. Names Al-Hams family, Abu Muailiq couple, Abu Taif family. Reports cumulative ceasefire toll: 1,230 killed, 4,076 injured.",
+      "isAnonymous": false,
+      "label": "Middle East Monitor — Israeli Attacks Kill 18 Palestinians Across Gaza Despite Ceasefire",
+      "type": "media",
+      "url": "https://middleeastmonitor.com/20260802-israeli-attacks-kill-18-palestinians-across-gaza-despite-ceasefire/"
+    },
+    {
+      "_id": "source-haaretz-18-killed",
+      "description": "Israeli outlet confirming 18 killed on August 2 including children. Medics-sourced casualty figures.",
+      "isAnonymous": false,
+      "label": "Haaretz — IDF Strikes Across Gaza Kill at Least 18 Palestinians, Including Two Children",
+      "type": "media",
+      "url": "https://www.haaretz.com/gaza/2026-08-02/ty-article/.premium/reports-at-least-nine-killed-in-gaza-including-two-children-in-idf-strikes/0000019f-c060-de7a-afff-cff662240000"
+    },
+    {
+      "_id": "source-al-jazeera-trump-disarmament",
+      "description": "Reports on Trump's 'historic' disarmament announcement. Hamas negotiator Ghazi Hamad says group won't implement deal unless Israel halts attacks and withdraws.",
+      "isAnonymous": false,
+      "label": "Al Jazeera — Hamas Reaches Gaza Disarmament Agreement with Trump's Board of Peace",
+      "type": "media",
+      "url": "https://www.aljazeera.com/news/2026/7/30/trump-says-board-of-peace-reaches-agreement-on-disarmament-of-hamas-in-gaza"
+    },
+    {
+      "_id": "source-axios-trump-breakthrough",
+      "description": "Reports Trump's Truth Social announcement of 'HISTORIC agreement for COMPLETE DISARMAMENT.' Coverage of Board of Peace framework.",
+      "isAnonymous": false,
+      "label": "Axios — Trump Touts 'Historic' Agreement to Disarm Hamas, Rebuild Gaza",
+      "type": "media",
+      "url": "https://www.axios.com/2026/07/30/hamas-weapons-gaza-deal-israel-board-peace"
+    },
+    {
+      "_id": "source-irishtimes-gaza-july30",
+      "description": "Confirms 18-month-old killed in Bureij airstrike, eight wounded. Israeli military claims both strikes targeted Hamas militants.",
+      "isAnonymous": false,
+      "label": "The Irish Times — Israeli Strikes Kill Three in Gaza, Including Two Children, Amid New Ceasefire Push",
+      "type": "media",
+      "url": "https://www.irishtimes.com/world/middle-east/2026/07/30/israeli-strikes-kill-three-in-gaza-including-two-children-amid-new-ceasefire-push/"
+    },
+    {
+      "_id": "source-turkiyetoday-netanyahu-peace",
+      "description": "Reports 18 killed August 2 including children and unborn baby. Türkiye's statement that attacks prove Netanyahu has no intention of peace.",
+      "isAnonymous": false,
+      "label": "Türkiye Today — Israel's Gaza Attacks Prove Netanyahu Has 'No Intention of Peace'",
+      "type": "media",
+      "url": "https://www.turkiyetoday.com/nation/israels-gaza-attacks-prove-netanyahu-has-no-intention-of-peace-turkiye-3225235"
+    },
+    {
+      "_id": "source-anews-medicine-warehouse",
+      "description": "Reports on medicine warehouse destruction at Al-Aqsa Hospital, Mladenov condemnation statement, and 18 killed August 2.",
+      "isAnonymous": false,
+      "label": "Anadolu Agency — Israeli Strikes Kill Civilians, Destroy Medical Supplies After Gaza Ceasefire Roadmap",
+      "type": "media",
+      "url": "https://www.anews.com.tr/middle-east/2026/08/03/israeli-strikes-kill-civilians-destroy-medical-supplies-after-gaza-ceasefire-roadmap-peace-board-envoy"
+    },
+    {
+      "_id": "source-timesofisrael-gaza-july30",
+      "description": "Israeli outlet confirming children killed in Khan Younis and Bureij on July 30. Reports Hamas nearing deal with mediators.",
+      "isAnonymous": false,
+      "label": "Times of Israel — 2 Children Reported Killed in Gaza Strikes",
+      "type": "media",
+      "url": "https://www.timesofisrael.com/2-kids-reported-killed-in-gaza-strikes-hamas-said-nearing-deal-with-mediators-on-its-arms/"
+    }
+  ]
+}

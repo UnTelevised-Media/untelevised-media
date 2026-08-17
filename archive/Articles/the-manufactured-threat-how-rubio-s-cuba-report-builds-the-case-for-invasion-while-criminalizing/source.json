@@ -1,0 +1,102 @@
+{
+  "slug": "the-manufactured-threat-how-rubio-s-cuba-report-builds-the-case-for-invasion-while-criminalizing",
+  "totalSources": 12,
+  "sources": [
+    {
+      "_id": "source-the-intercept-rubios-cuba-report-investigation",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Intercept: Rubio's Cuba Report Investigation",
+      "type": "article",
+      "url": "https://theintercept.com/2026/07/26/cuba-marco-rubio-state-department-report/"
+    },
+    {
+      "_id": "source-common-dreams-mccarthyite-rubio-report",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Common Dreams: McCarthyite Rubio Report",
+      "type": "article",
+      "url": "https://www.commondreams.org/news/marco-rubio-against-cuba"
+    },
+    {
+      "_id": "source-congressional-progressive-caucus-statement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Congressional Progressive Caucus Statement",
+      "type": "statement",
+      "url": "https://progressives.house.gov/2026/7/rep-omar-leads-progressive-members-of-congress-in-statement-condemning-trump-state-department-s-mccarthyite-attack-on-americans-free-speech-rights-and-collective-punishment-of-cubans"
+    },
+    {
+      "_id": "source-state-department-cuba-report-full-pdf",
+      "description": null,
+      "isAnonymous": null,
+      "label": "State Department: Cuba Report (Full PDF)",
+      "type": "document",
+      "url": "https://www.state.gov/wp-content/uploads/2026/07/Cuba-Report.pdf"
+    },
+    {
+      "_id": "source-al-jazeera-cuba-blackouts-under-trump-blockade",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Al Jazeera: Cuba Blackouts Under Trump Blockade",
+      "type": "article",
+      "url": "https://www.aljazeera.com/news/2026/7/10/cuba-suffers-second-island-wide-blackout-in-a-week-amid-trump-fuel-blockade"
+    },
+    {
+      "_id": "source-forbes-rubio-sanctions-deepen-energy-crisis",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Forbes: Rubio Sanctions Deepen Energy Crisis",
+      "type": "article",
+      "url": "https://www.forbes.com/sites/richardfowler/2026/05/11/rubios-new-cuba-sanctions-deepen-energy-crisis-and-raise-fears-of-regional-instability/"
+    },
+    {
+      "_id": "source-the-guardian-cuba-power-outages",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian: Cuba Power Outages",
+      "type": "article",
+      "url": "https://www.theguardian.com/world/2026/jun/08/cuba-power-outages-electricity"
+    },
+    {
+      "_id": "source-ap-news-cuba-island-wide-blackout",
+      "description": null,
+      "isAnonymous": null,
+      "label": "AP News: Cuba Island-wide Blackout",
+      "type": "article",
+      "url": "https://apnews.com/article/cuba-blackout-fuel-shortage-economic-crisis-a169e410e90e5cea6f9dd1dc859d6dd5"
+    },
+    {
+      "_id": "source-international-bar-association-blockade-violation",
+      "description": null,
+      "isAnonymous": null,
+      "label": "International Bar Association: Blockade Violation",
+      "type": "document",
+      "url": "https://www.ibanet.org/US-presidency-executive-order-pushing-Cuba-into-energy-crisis-is-serious-violation-of-international-law"
+    },
+    {
+      "_id": "source-foreign-policy-cuba-blockade-analysis",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Foreign Policy: Cuba Blockade Analysis",
+      "type": "article",
+      "url": "https://foreignpolicy.com/2026/06/30/cuba-us-blockade-sanctions-trump-humanitarian-crisis/"
+    },
+    {
+      "_id": "source-rep-mark-pocan-official-statement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Rep. Mark Pocan Official Statement",
+      "type": "statement",
+      "url": "https://pocan.house.gov/media-center/press-releases/pocan-reacts-state-departments-cuba-report"
+    },
+    {
+      "_id": "source-rep-delia-ramirez-cuba-oversight-visit-statement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Rep. Delia Ramirez: Cuba Oversight Visit Statement",
+      "type": "statement",
+      "url": "https://ramirez.house.gov/media/press-releases/ramirez-statement-oversight-visit-cuba-and-humanitarian-crisis-island"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "slug": "hanging-in-the-woods-the-death-of-jerard-jackson-and-the-investigation-that-isn-t",
+  "totalSources": 12,
+  "sources": [
+    {
+      "_id": "source-msp-press-release-jun30",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Michigan State Police — Press Release: Update on Jerard R. Jackson Investigation",
+      "type": "statement",
+      "url": "https://x.com/mspwestmi/status/2071979168108085327"
+    },
+    {
+      "_id": "source-atlanta-black-star-family-jul9",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Atlanta Black Star — Family of Illinois Man Who Was Found Dead After Music Festival Suggests Friends Know Something",
+      "type": "media",
+      "url": "https://atlantablackstar.com/2026/07/09/family-of-illinois-man-who-was-found-dead-after-music-festival-suggests-friends-know-something/"
+    },
+    {
+      "_id": "source-atlanta-black-star-prettyman-jul11",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Atlanta Black Star — White Friend Tries to Clear His Name After Black Illinois Man's Death",
+      "type": "media",
+      "url": "https://atlantablackstar.com/2026/07/11/white-friend-tries-to-clear-his-name-after-black-illinois-mans-death-at-music-festival-family-remains-skeptical/"
+    },
+    {
+      "_id": "source-billboard-jul7",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Billboard — Body of Illinois Man Reported Missing After Electric Forest Found in Wooded Area Near Festival",
+      "type": "media",
+      "url": "https://www.billboard.com/music/music-news/electric-forest-body-man-missing-found-dead-baby-investigation-1236288854/"
+    },
+    {
+      "_id": "source-oceana-county-press-jun30",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Oceana County Press — Police ID Body Found Near Bike Trail as Missing Electric Forest Festival Attendee",
+      "type": "media",
+      "url": "https://oceanacountypress.com/2026/06/30/police-id-body-found-near-bike-trail-as-missing-electric-forest-festival-attendee/"
+    },
+    {
+      "_id": "source-oceana-county-press-doa-jun30",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Oceana County Press — Emergency Crews Respond to Scene of 'Electric Forest DOA'",
+      "type": "media",
+      "url": "https://oceanacountypress.com/2026/06/30/emergency-crews-respond-to-scene-of-electric-forest-doa/"
+    },
+    {
+      "_id": "source-chicago-defender",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Chicago Defender — Friends Left Jay Jackson Behind — Police Say He Died By Suicide",
+      "type": "media",
+      "url": "https://chicagodefender.com/friends-left-jay-jackson-behind-police-say-he-died-by-suicide/"
+    },
+    {
+      "_id": "source-thegrio-jul8",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Grio — Electric Forest Festival Investigation Continues After Missing Man Found Dead",
+      "type": "media",
+      "url": "https://thegrio.com/2026/07/08/electric-forest-festival-investigation-continues/"
+    },
+    {
+      "_id": "source-stage-hoppers-investigation",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Stage Hoppers — The Unfolding Investigation Into Jerard Jackson's Death After Electric Forest",
+      "type": "media",
+      "url": "https://stagehoppers.com/the-unfolding-investigation-into-jerard-jacksons-death-after-electric-forest/"
+    },
+    {
+      "_id": "source-bin-news",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BIN News Network — Friends Left Jay Jackson Behind — Police Say He Died By Suicide",
+      "type": "media",
+      "url": "https://ohio.binnews.com/content/2026-07-09-friends-left-jay-jackson-behind-police-say-he-died-by-suicide/"
+    },
+    {
+      "_id": "source-gofundme",
+      "description": null,
+      "isAnonymous": null,
+      "label": "GoFundMe — Jared Jackson Memorial",
+      "type": "media",
+      "url": "https://www.gofundme.com/f/jared-jackson-memorial"
+    },
+    {
+      "_id": "source-msp-tip-line",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Michigan State Police — MichTip Anonymous Tip Line",
+      "type": "other",
+      "url": "https://www.michigan.gov/michtip"
+    }
+  ]
+}

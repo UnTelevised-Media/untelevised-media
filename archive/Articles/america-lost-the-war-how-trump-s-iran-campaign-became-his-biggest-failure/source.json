@@ -1,0 +1,126 @@
+{
+  "slug": "america-lost-the-war-how-trump-s-iran-campaign-became-his-biggest-failure",
+  "totalSources": 15,
+  "sources": [
+    {
+      "_id": "source-mearsheimer-substack-the-us-cannot-defeat-iran",
+      "description": null,
+      "isAnonymous": null,
+      "label": "John Mearsheimer (Substack) — The US Cannot Defeat Iran",
+      "type": "media",
+      "url": "https://mearsheimer.substack.com/p/the-us-cannot-defeat-iran"
+    },
+    {
+      "_id": "source-deep-dive-youtube-mearsheimer-iran-analysis",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Deep Dive with Danny Davis (YouTube) — Iran Bombs Tel Aviv. Israel's Top General Is Dead. Mearsheimer Speaks.",
+      "type": "media",
+      "url": "https://www.youtube.com/watch?v=9vRV2Utf0GY"
+    },
+    {
+      "_id": "source-wikipedia-analysis-of-the-2026-iran-war",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Analysis of the 2026 Iran War",
+      "type": "media",
+      "url": "https://en.wikipedia.org/wiki/Analysis_of_the_2026_Iran_war"
+    },
+    {
+      "_id": "source-wikipedia-islamabad-memorandum",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — Islamabad Memorandum",
+      "type": "media",
+      "url": "https://en.wikipedia.org/wiki/Islamabad_Memorandum"
+    },
+    {
+      "_id": "source-warcosts-iran-war-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WarCosts — Iran War (2026): Cost, Casualties & Analysis",
+      "type": "data",
+      "url": "https://www.warcosts.org/conflicts/iran-2026"
+    },
+    {
+      "_id": "source-militaryspend-iran-war-casualties-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "MilitarySpend — Iran War Casualties 2026: US, Iran & Civilian Death Toll",
+      "type": "data",
+      "url": "https://militaryspend.org/iran-war-casualties"
+    },
+    {
+      "_id": "source-wikipedia-iran-war-fuel-crisis",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Wikipedia — 2026 Iran War Fuel Crisis",
+      "type": "media",
+      "url": "https://en.wikipedia.org/wiki/2026_Iran_war_fuel_crisis"
+    },
+    {
+      "_id": "source-just-security-100-lawyers-war-crimes-letter",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Just Security — 100+ International Law Experts: Profound Concern Over US-Iran War Violations",
+      "type": "document",
+      "url": "https://www.justsecurity.org/"
+    },
+    {
+      "_id": "source-cgtn-mearsheimer-trump-missed-chances-end-war",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CGTN — Mearsheimer: Trump Missed Chances to End War as US Position Weakens",
+      "type": "media",
+      "url": "https://news.cgtn.com/news/2026-07-31/Mearsheimer-Trump-missed-chances-to-end-war-as-US-position-weakens-1Pe8FLQxJZK/p.html"
+    },
+    {
+      "_id": "source-international-crisis-group-iran-hormuz",
+      "description": null,
+      "isAnonymous": null,
+      "label": "International Crisis Group — Ali Vaez on Iran's Strait of Hormuz Leverage",
+      "type": "media",
+      "url": "https://www.crisisgroup.org/"
+    },
+    {
+      "_id": "source-guardian-iran-decapitation-strike-legality",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — US-Iran Strikes Illegal Under International Law",
+      "type": "article",
+      "url": "https://www.theguardian.com/"
+    },
+    {
+      "_id": "source-bbc-bowen-iran-deal-ends-trumps-war",
+      "description": null,
+      "isAnonymous": null,
+      "label": "BBC — Jeremy Bowen: Iran Deal Ends Trump's War That Revealed Limit of US Dominance",
+      "type": "media",
+      "url": "https://www.bbc.com/"
+    },
+    {
+      "_id": "source-the-economist-iran-lost-fear-of-war",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Economist — 'Iran Has Lost Its Fear of War'",
+      "type": "media",
+      "url": "https://www.economist.com/"
+    },
+    {
+      "_id": "source-counter-punch-algiers-accords-iran-mou",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CounterPunch — We Have Been There Before: The US-Iran MOU and the Algiers Accords",
+      "type": "article",
+      "url": "https://www.counterpunch.org/2026/07/17/we-have-been-there-before-the-us-iran-mou-and-the-algiers-accords/"
+    },
+    {
+      "_id": "source-arab-center-dc-full-text-memorandum",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Arab Center DC — Full Text of the Memorandum of Understanding Between the US and Iran",
+      "type": "document",
+      "url": "https://arabcenterdc.org/resource/memorandum-of-understanding-between-the-united-states-of-america-and-the-islamic-republic-of-iran/"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "slug": "the-women-in-the-beauty-salon-a-story-numbers-won-t-tell-you",
+  "totalSources": 5,
+  "sources": [
+    {
+      "_id": "source-reuters-hebron-2026",
+      "description": "March 18, 2026 Reuters report on the Iranian missile attack near Hebron that killed three Palestinian women. Cites Palestinian Red Crescent and confirms the location as a beauty salon in Beit Awwa.",
+      "isAnonymous": null,
+      "label": "Reuters Report - Three women killed in Iranian missile attack",
+      "type": "document",
+      "url": "https://www.reuters.com/world/middle-east/least-two-women-killed-iranian-missile-attack-near-hebron-palestinian-red-2026-03-18/"
+    },
+    {
+      "_id": "source-bbc-direct-hit",
+      "description": "BBC coverage including Israeli military statement that women were killed 'by a direct hit from a cluster munition missile'. Reports 13 injured total.",
+      "isAnonymous": null,
+      "label": "BBC Report - Israeli military statement",
+      "type": "document",
+      "url": "https://www.bbc.com/news/articles/c0ljl23plpzo"
+    },
+    {
+      "_id": "source-aljazeera-march19",
+      "description": "Al Jazeera coverage of the missile strike, citing Wafa. Reports women killed and 13 injured. Notes debris or possibly a cluster bomblet hit the beauty salon near Hebron.",
+      "isAnonymous": null,
+      "label": "Al Jazeera - March 19, 2026 coverage",
+      "type": "document",
+      "url": "https://www.aljazeera.com/news/2026/3/19/three-palestinian-women-killed-during-iranian-missile-attack-in-west-bank"
+    },
+    {
+      "_id": "source-timesnow-prcs-gates",
+      "description": "Contains PRCS statement that iron gates leading to Beit Awwa were closed, forcing ambulances to take alternative routes and critically impacting response time.",
+      "isAnonymous": null,
+      "label": "Times Now - PRCS statement on iron gates",
+      "type": "statement",
+      "url": "https://www.timesnownews.com/world/middle-east/iran-israel-war-reaches-west-bank-as-missile-strike-kills-at-least-4-palestine-women-article-153867781"
+    },
+    {
+      "_id": "source-wafa-names",
+      "description": "Cited by multiple outlets including Al Jazeera and BBC as source for identifying the three victims: Mais Ghazi Masalmeh (17), Sahira Rizq Masalmeh (50), and Amal Sobhi Abdel Karim Matawa' Masalmeh (36).",
+      "isAnonymous": null,
+      "label": "Wafa News Agency - Victim identification",
+      "type": "document",
+      "url": "https://english.wafa.ps/"
+    }
+  ]
+}

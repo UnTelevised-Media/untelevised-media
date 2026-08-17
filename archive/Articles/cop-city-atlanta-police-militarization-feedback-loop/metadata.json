@@ -1,0 +1,143 @@
+{
+  "_id": "o4fsp0a2oet",
+  "allowComments": true,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": null,
+  "categories": [
+    {
+      "_key": "0bd941e77f63",
+      "_ref": "7802c11d-4e66-46f0-ba16-b0620302344d",
+      "_type": "reference"
+    },
+    {
+      "_key": "9c44cd1210bc",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "98a5f8989d2f",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "While the U.S. wages wars abroad, the same counterinsurgency tactics, equipment, and mindset return home to police communities of color. Cop City in Atlanta and expanding surveillance state show how empire polices its own population.",
+  "eventDate": null,
+  "faqs": [
+    {
+      "_key": "r4wiqa8l",
+      "_type": "faqItem",
+      "answer": "Cop City is a $90 million police training center planned for Atlanta designed to teach officers extreme military tactics and \"urban warfare\" skills. Critics argue it institutionalizes the mindset of treating neighborhoods as occupied territory.",
+      "question": "What is Cop City in Atlanta?"
+    },
+    {
+      "_key": "7kg8rhy9",
+      "_type": "faqItem",
+      "answer": "Created by Congress in 1997 as the Law Enforcement Support Office program, 1033 transfers surplus military equipment to local police departments. Since 1997, it has moved over $7 billion in equipment including MRAP armored vehicles, assault rifles, bayonets, night vision gear, and helicopters to more than 8,000 law enforcement agencies across the U.S.",
+      "question": "What is the Pentagon's 1033 program?"
+    },
+    {
+      "_key": "1s4mqesa",
+      "_type": "faqItem",
+      "answer": "Stop Cop City is a sustained resistance movement in Atlanta that has organized protests, legal challenges, and direct action against the proposed $90 million police training center. The movement includes Black community organizers, environmental activists defending the Weelaunee Forest, abolitionists, students, and local residents.",
+      "question": "What is the Stop Cop City movement?"
+    },
+    {
+      "_key": "z76ltwhp",
+      "_type": "faqItem",
+      "answer": "Stingray devices are suitcase-sized surveillance tools that mimic cell towers, allowing police to track citizens' locations and intercept calls and text messages without warrants or judicial oversight. Only a handful of states (Minnesota, Utah, Virginia, Washington) currently require warrants for their use.",
+      "question": "What are Stingray surveillance devices?"
+    }
+  ],
+  "featured": null,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Cop City",
+    "Atlanta",
+    "police militarization",
+    "surveillance state",
+    "ACLU",
+    "Stingray devices",
+    "counterinsurgency",
+    "police violence",
+    "imperial feedback loop",
+    "anti-imperialism"
+  ],
+  "leadParagraph": "There is no firewall between the wars the U.S. fights abroad and the policing it conducts at home. The $90 million Cop City training center in Atlanta—designed to teach officers extreme military tactics—continues moving forward despite sustained resistance. Meanwhile, the ACLU reports that military-style surveillance technology like Stingray devices has expanded from drug raids into everyday policing. What the War on Drugs did for police militarization, the War on Terror is doing for police intelligence gathering. The feedback loop is clear: wars abroad create the tactics, equipment, and mindset that come home to police communities of color, immigrants, and anyone who resists.",
+  "linkedPitch": null,
+  "location": "Atlanta, GA",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Activist block the forest enterance to the cop city construction zone",
+    "asset": {
+      "_ref": "image-b7d45803c33c2c1ab4133f4ff3b241d4bff1d736-1440x810-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": null,
+  "needsReview": null,
+  "publishedAt": "2026-03-20T09:00:00Z",
+  "readingTimeMinutes": 11,
+  "relatedArticles": [
+    {
+      "_key": "e4d2af04a907",
+      "_ref": "article-bcb451f2-8057-404b-8888-bcb84f7cf51b",
+      "_type": "reference"
+    },
+    {
+      "_key": "5d5a2313e0f1",
+      "_ref": "8cgpd47e3kq",
+      "_type": "reference"
+    },
+    {
+      "_key": "0adae9a17365",
+      "_ref": "a9qza8kg3jk",
+      "_type": "reference"
+    },
+    {
+      "_key": "fc02153ed933",
+      "_ref": "article-c2671233-75b9-41e5-888d-df294a2affbb",
+      "_type": "reference"
+    },
+    {
+      "_key": "fe8a00f92305",
+      "_ref": "article-320d80cf-81af-4a6c-8f0f-7a4c5aa0d8d6",
+      "_type": "reference"
+    },
+    {
+      "_key": "a899c722c85a",
+      "_ref": "article-22bd04af-abdf-4250-a879-bbb96efa66d9",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seoObject",
+    "metaDescription": "Cop City in Atlanta shows how U.S. imperial wars abroad feed domestic policing at home. $90 million for police military training, Stingray surveillance, and the feedback loop of empire targeting communities of color.",
+    "metaTitle": "Cop City: How War Comes Home to Police Black Communities | UnTelevised Media",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "cop-city-atlanta-police-militarization-feedback-loop"
+  },
+  "tags": [
+    "police-brutality",
+    "cop-city",
+    "atlanta",
+    "militarized-police"
+  ],
+  "title": "Cop City and the Feedback Loop of Empire: How War Comes Home",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,147 @@
+{
+  "_id": "houthis-blockade-saudi-shipping-red-sea-siege",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": true,
+  "categories": [
+    {
+      "_key": "cat-politics",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Yemen's Ansarallah movement declared a maritime embargo on Saudi Arabia on July 20, 2026, closing the Bab al-Mandeb Strait to Saudi shipping and striking multiple oil tankers. With the Strait of Hormuz already closed, 25% of global oil and gas supply is now choked at both ends.",
+  "eventDate": "2026-07-20T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "Ansarallah declared a formal maritime embargo on Saudi Arabia, closing the Bab al-Mandeb Strait to all vessels loading or discharging cargo at Saudi ports. The group said the embargo was in retaliation for a Saudi-led blockade on Ansarallah-controlled ports and airports in Yemen, and specifically for a July 13 bombing of Sanaa International Airport's runway.",
+      "question": "What did Ansarallah announce on July 20, 2026?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "Ansarallah forces have struck at least four Saudi-linked oil tankers: the Encelia (fire on the bow, confirmed by Saudi authorities), the Layla, the NCC Ghazal (ballistic missiles), and the NCC Wafa (claimed strike off Yanbu in the northern Red Sea on August 5). Multiple other tankers reversed course to avoid the strait.",
+      "question": "Which ships have been attacked since the blockade declaration?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "The Strait of Hormuz — through which 25% of the world's oil and gas passes — was already effectively closed due to the US-Israel war on Iran. Saudi Arabia had been rerouting oil through its East-West Pipeline to the Red Sea terminal at Yanbu. The Ansarallah embargo closed that alternative route at Bab al-Mandeb. Combined, the two closures affect roughly a quarter of global energy shipments.",
+      "question": "Why does this matter for global oil supplies?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "Ansarallah says it is imposing a 'blockade for a blockade' — retaliating against Saudi Arabia's years-long land, sea, and air blockade on Ansarallah-controlled territory in Yemen. The group wants the Saudi blockade lifted, an end to bombings of Yemeni infrastructure, and leverage for future negotiations over Yemen's political future.",
+      "question": "What is Ansarallah's stated goal?"
+    },
+    {
+      "_key": "faq-4",
+      "_type": "faqItem",
+      "answer": "Ansarallah — commonly called the Houthis after their founding leader Hussein Badreddin al-Houthi — is a Zaidi political and military movement that seized Yemen's capital Sanaa in 2014. They control most of Yemen's populated territory and have survived nearly 12 years of war against a Saudi-led, Western-armed coalition. They are allied with Iran but operate with significant autonomous political and military agency.",
+      "question": "Who are the Houthis/Ansarallah?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Houthi blockade Saudi shipping",
+    "Bab al-Mandeb closed 2026",
+    "Ansarallah Red Sea attacks",
+    "Saudi oil tanker strikes",
+    "Yemen maritime embargo",
+    "Hormuz closure",
+    "Brent crude $100",
+    "Saudi East-West Pipeline",
+    "Trump Iran war",
+    "Yemen humanitarian crisis"
+  ],
+  "leadParagraph": "Yemen's Ansarallah movement has declared a formal maritime embargo on Saudi Arabia, closing the Bab al-Mandeb Strait to all Saudi-linked vessels and striking multiple oil tankers with missiles and drones. Coming weeks after the US-Israel war effectively closed the Strait of Hormuz, the move means 25% of the world's oil and gas shipments are now blocked at both major Middle Eastern chokepoints simultaneously, pushing Brent crude above $100 a barrel and threatening to drag Yemen back into full-scale war.",
+  "linkedPitch": null,
+  "location": "Sanaa, Yemen / Red Sea / Washington, DC",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Large crowd of Houthi supporters gathered at a nighttime rally in Sanaa, Yemen, many holding flags and placards",
+    "asset": {
+      "_ref": "image-e0b617b26d6abe9a87518e2c594ce5456098147b-2560x1707-webp",
+      "_type": "reference"
+    },
+    "caption": "Supporters of Yemen's Ansarallah movement gather during a rally against the Saudi-led coalition in Sanaa, Yemen, July 17, 2026.",
+    "credit": "Khaled Ziad/AFP/Getty Images"
+  },
+  "methodology": "Reporting based on cross-referenced wire service reports (Reuters, AP, AFP) published via BBC, CNBC, Al Jazeera, The Guardian, and The War Zone between July 20 and August 6, 2026. Maritime data from Kpler, Windward, and the Joint Maritime Information Center (JMIC). Oil price data from multiple financial outlets. UN humanitarian figures from UNHCR and UN envoy Hans Grundberg's public statements. All claims verified against at least two independent sources.",
+  "needsReview": null,
+  "publishedAt": "2026-08-06T19:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "america-lost-the-war-how-trump-s-iran-campaign-became-israel-s-fight",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "ukraine-strikes-iranian-vessel-caspian-sea-one-sailor-killed",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "gaza-board-of-peace-ncag-governance-surrender-erasure-machine",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "doj-conspiracy-charges-ice-protesters-federal-crime-solidarity",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "trump-admits-weaponizing-federal-funds-punish-blue-states-voting-patterns",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-6",
+      "_ref": "ecuadorian-prosecutor-alexandra-bravo-murdered-us-boat-bombings",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-siege-for-a-siege-ansarallah-closes-the-bab-al-mandeb-and-saudi-arabia-s-last-export-route"
+  },
+  "tags": [
+    "Yemen",
+    "Ansarallah",
+    "Houthis",
+    "Saudi Arabia",
+    "Red Sea",
+    "Bab al-Mandeb",
+    "Strait of Hormuz",
+    "maritime blockade",
+    "oil",
+    "US-Iran war"
+  ],
+  "title": "The Siege for a Siege: Ansarallah Closes the Bab al-Mandeb and Saudi Arabia's Last Export Route Dies",
+  "updatedAt": null,
+  "videoLink": null
+}

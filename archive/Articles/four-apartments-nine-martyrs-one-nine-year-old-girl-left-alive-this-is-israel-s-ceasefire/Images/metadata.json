@@ -1,0 +1,43 @@
+{
+  "slug": "four-apartments-nine-martyrs-one-nine-year-old-girl-left-alive-this-is-israel-s-ceasefire",
+  "totalImages": 4,
+  "downloadedAt": "2026-08-07T01:56:29.908Z",
+  "mainImage": {
+    "alt": "",
+    "caption": "",
+    "credit": "",
+    "asset": "image-f3ebc35325c0cf5729538396535876202b7be231-5592x3728-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Palestinian men standing in a circle praying over shrouded bodies on the ground near damaged buildings after Israeli airstrikes in Gaza City on June 4, 2026",
+      "caption": "[object Object]",
+      "credit": "AFP",
+      "asset": "image-3cdb14670cdfcd354270c1eb761bcae8aa95311e-1024x640-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Mourners carry shrouded bodies wrapped in Palestinian flags during a funeral procession in Gaza following Israeli airstrikes",
+      "caption": "",
+      "credit": "",
+      "asset": "image-635bd88e5b19e23c08a4615e70accf9abf208cb0-1024x688-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Palestinian men standing amid concrete rubble and twisted rebar from a destroyed multi-story residential building after an Israeli airstrike in Gaza City",
+      "caption": "[object Object]",
+      "credit": "Reuters",
+      "asset": "image-851054cd881e2465d198d2a804f16b02d40b3889-1024x616-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    }
+  ]
+}

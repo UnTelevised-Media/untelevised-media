@@ -1,0 +1,122 @@
+{
+  "_id": "yinon-plan-greater-israel-2026",
+  "allowComments": true,
+  "author": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference",
+    "name": "Radical Edward"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    },
+    {
+      "_key": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_ref": "78f98a64-80f6-4507-9566-a6d28d4c25fe",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Israel is implementing the 1982 Yinon Plan blueprint: fragmenting Arab states into sectarian mini-states while expanding territory under cover of Gaza and Iran wars. Netanyahu's 'offensive strategy' expands into Syria, Lebanon, and Gaza â€” Greater Israel is no longer a vision, it's operational.",
+  "eventDate": "2026-03-29T00:00",
+  "faqs": [
+    {
+      "_key": "faq-1",
+      "answer": "The Yinon Plan is a 1982 strategy paper by Oded Yinon, a former Israeli Foreign Ministry official, published in the World Zionist Organization's Kivunim journal. It called for fragmenting all Arab states into smaller, sectarian mini-states (Lebanon into 5 provinces, Syria into cantons, Iraq into Kurdish/Shia/Sunni states) to weaken them and establish Israel as the regional superpower. The document was translated from Hebrew to English by Israeli Holocaust survivor and human rights activist Israel Shahak.",
+      "question": "What is the Yinon Plan?"
+    },
+    {
+      "_key": "faq-2",
+      "answer": "Yes. Evidence includes: Netanyahu's March 2026 'offensive strategy' expanding 'security lines' into Syria, Lebanon, and Gaza; accelerated West Bank annexation (70 settlements approved 2023-2025 vs. handful in 27 years); 1,828 settler violence incidents in 2025 (tenfold increase); 36,000+ Palestinians displaced since December 2025; and Netanyahu, Smotrich, Ben Gvir, and US Ambassador Huckabee all openly supporting 'Greater Israel' expansion.",
+      "question": "Is the Yinon Plan being implemented today?"
+    },
+    {
+      "_key": "faq-3",
+      "answer": "In September 2023, Netanyahu displayed a map titled 'The New Middle East' at the UN General Assembly that showed no Palestine. The West Bank, East Jerusalem, and Gaza were all absorbed into Israel on the map. Palestinian Ambassador to Germany Laith Arafeh called it 'no greater insult to every foundational principle of the United Nations' â€” a visual declaration that Palestine no longer exists as a political entity.",
+      "question": "What did Netanyahu's 2023 UN map show?"
+    },
+    {
+      "_key": "faq-4",
+      "answer": "On March 28, 2026, senior Congress leader Jairam Ramesh stated on X: 'The current West Asia war is providing cover for Israel to move ahead on its vision of Greater Israel and also finishing off any hope for a Palestinian state.' This is significant because it's a major political figure from the world's largest democracy explicitly naming the expansionist project and identifying war as the cover for its implementation.",
+      "question": "What did India's Congress party say about Greater Israel?"
+    },
+    {
+      "_key": "faq-5",
+      "answer": "De jure annexation is a formal declaration that occupied territory is now part of Israel, which would trigger massive international sanctions. De facto annexation achieves the same result â€” permanent control through settlements, military presence, settler violence, land theft, and legal framework â€” without the formal declaration. Israel prefers de facto annexation because it can continue claiming to support a 'two-state solution' while making it impossible on the ground. The US opening 'pop-up' consulates in West Bank settlements legitimizes this de facto annexation.",
+      "question": "What is the difference between de jure and de facto annexation?"
+    },
+    {
+      "_key": "faq-6",
+      "answer": "Netanyahu announced three 'security belts' from the Northern Command: 1) Syria â€” from Mount Hermon to the Yarmouk River; 2) Gaza â€” across more than half of the Gaza Strip; 3) Lebanon â€” expanded buffer zone to push Hezbollah back from the border. Critics like journalist Mehdi Hasan called these 'not expanding security lines, this is Greater Israel in action' â€” bureaucratic language for territorial expansion.",
+      "question": "What are the 'security belts' Netanyahu announced in March 2026?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "greater-israel",
+    "yinon-plan",
+    "oded-yinon",
+    "west-bank-annexation",
+    "israel-expansionism",
+    "benjamin-netanyahu",
+    "israeli-settlements",
+    "gaza-war",
+    "iran-israel-war",
+    "lebanon-invasion",
+    "syria-occupation",
+    "palestinian-territories",
+    "arab-fragmentation",
+    "zionist-strategy",
+    "middle-east-geopolitics"
+  ],
+  "leadParagraph": "The Yinon Plan isn't conspiracy theory. It's a 1982 blueprint for fragmenting Arab states and expanding Israeli territory â€” and it's being implemented right now under the cover of multiple wars.",
+  "linkedPitch": null,
+  "location": "",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Benjamin Netanyahu stands at a podium holding up a map that shows Israel extending across the entire territory, with no indication of Palestinian territories. He points to the map with his right hand while addressing the UN General Assembly.",
+    "asset": {
+      "_ref": "image-6746319c82bb83b7a8b422489817e00d717d58aa-2814x1876-webp",
+      "_type": "reference"
+    }
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2026-04-15T04:00",
+  "readingTimeMinutes": 14,
+  "relatedArticles": [],
+  "reviewedBy": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference"
+  },
+  "seo": {
+    "description": "Israel implements 1982 Yinon Plan to fragment Arab states and expand territory under war cover. Netanyahu's offensive strategy expands into Syria, Lebanon, Gaza while West Bank annexation accelerates.",
+    "title": "Yinon Plan 2026: Israel's Greater Israel Strategy in Action"
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "the-yinon-plan-in-action-how-israel-is-redrawing-the-middle-east-map-under-war-cover"
+  },
+  "tags": [
+    "greater-israel",
+    "yinon-plan",
+    "west-bank-annexation",
+    "israel-expansionism",
+    "middle-east-war"
+  ],
+  "title": "The Yinon Plan in Action: How Israel Is Redrawing the Middle East Map Under War Cover",
+  "updatedAt": "2026-04-15T04:05:14.797Z",
+  "videoLink": ""
+}

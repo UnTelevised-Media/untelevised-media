@@ -1,0 +1,43 @@
+{
+  "slug": "ice-agents-kill-an-innocent-man-in-houston-and-nobody-in-power-seems-to-care",
+  "totalImages": 4,
+  "downloadedAt": "2026-08-07T01:55:42.509Z",
+  "mainImage": {
+    "alt": "Scene where ICE agents murdered Lorenzo Salgado Araujo, taped off with crime scene tape.",
+    "caption": "Ronaldo Salgado holds a photograph of his father during a press conference in Houston, Texas, on July 8, 2026.",
+    "credit": "AP Photo/David J. Phillip",
+    "asset": "image-2be14b4c85b079c1668bbe112d822cbeb1ab5951-860x573-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Ronaldo Salgado, son of Lorenzo Salgado Araujo, holds up a photograph of his father during a press conference alongside his brother in Houston",
+      "caption": "Ronaldo Salgado holds a photograph of his father during a press conference in Houston, Texas, on July 8, 2026.",
+      "credit": "AP Photo/David J. Phillip",
+      "asset": "image-fffe599656944bf655528791771ea986ab328704-7903x5268-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Community members honor Lorenzo Salgado Araujo at vigil.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-16fe954429cc336822e76e503b17b23ad1d27180-1440x958-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Hundreds of protesters march through Houston's Magnolia Park neighborhood protesting the ICE shooting of Lorenzo Salgado Araujo",
+      "caption": "Hundreds of Houstonians marched through Magnolia Park on July 8, 2026, protesting the fatal shooting of Lorenzo Salgado Araujo by a federal immigration agent.",
+      "credit": "Michael Adkison/Houston Public Media",
+      "asset": "image-e23b36d7f395d1421d6adcacd04df1ed70d4a2b5-2000x1334-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "_id": "UH0czzC9lJ5tyspFR9p8hO",
+  "allowComments": true,
+  "author": {
+    "_ref": "1aec96b4-0f2f-4096-86fe-3d0883309158",
+    "_type": "reference",
+    "name": "Hunter Duke"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_ref": "3f5d4f6a-c117-42b8-9108-91c690f05952",
+      "_type": "reference"
+    },
+    {
+      "_key": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_ref": "df42a50e-896c-4b20-898c-4ace0e838dcd",
+      "_type": "reference"
+    }
+  ],
+  "correction": {
+    "_type": "correctionObject",
+    "detail": "Economic impact & UN embargo vote data tables had become corrupted, tables were updated to match new schema & data was added back.  Some source documents were missing titles, they were added for easier clarification for readers.",
+    "issuedAt": "2026-04-13T19:26:00.000Z",
+    "summary": "Corrected corrupted data tables., Source document titles",
+    "type": "clarification"
+  },
+  "deletionRequest": null,
+  "description": "When protesters torched a Communist Party office in Morón, US media cheered. But the blackouts and food shortages aren't failures of Cuban policy — they're the intended outcome of a 65-year US blockade designed to inflict hunger and desperation.",
+  "eventDate": "2026-03-14T00:00:00Z",
+  "faqs": [
+    {
+      "_key": "280xd8wd",
+      "answer": "The US embargo has been in place since 1960 — over 65 years. It's the longest-standing trade embargo in modern history, originally imposed after Cuba nationalized US-owned oil refineries and other American corporate assets following the 1959 revolution.",
+      "question": "How long has the US embargo against Cuba been in place?"
+    },
+    {
+      "_key": "4syqemy0",
+      "answer": "Yes, severely. While the 2000 Trade Sanctions Reform Act technically allows food and medicine sales, Cuba must pay cash upfront — no credit allowed. Medical equipment containing any US-patented components is blocked. The result: chronic shortages of everything from insulin to surgical supplies to soap. The American Association for World Health concluded in 1997 that a humanitarian catastrophe was only averted because Cuba's government prioritized healthcare spending.",
+      "question": "Does the embargo actually affect food and medicine?"
+    },
+    {
+      "_key": "4u1gyo6s",
+      "answer": "In January 2026, US forces abducted Venezuelan President Nicolás Maduro. Venezuela was Cuba's primary oil supplier, providing roughly 33% of Cuba's fuel imports. With Venezuela's government toppled and the US threatening tariffs on any country supplying oil to Cuba, Mexico also halted shipments. Within weeks, Cuba's fuel reserves dropped to 15-20 days of supply.",
+      "question": "What did the US do to Venezuela and how does it affect Cuba?"
+    },
+    {
+      "_key": "o14awgjt",
+      "answer": "A 1960 State Department memo by Lester D. Mallory explicitly stated the goal: 'to deny money and supplies to Cuba, to decrease monetary and real wages, to bring about hunger, desperation and overthrow of government.' That's not a conspiracy theory — it's the documented policy objective. Starvation as a political weapon.",
+      "question": "What is the stated purpose of the embargo?"
+    },
+    {
+      "_key": "ass3b1hc",
+      "answer": "The UN General Assembly has voted to condemn the embargo every year since 1992 — over 30 consecutive resolutions. In 2024, 187 countries voted against the US; only the US and Israel supported the embargo. UN experts called the 2026 fuel blockade 'a serious violation of international law and a grave threat to a democratic and equitable international order.'",
+      "question": "What has the international community said about the embargo?"
+    },
+    {
+      "_key": "24ykdoax",
+      "answer": "The UN estimates the total damage in the 'trillions of dollars' since 1960. The Cuban government calculated $933 billion by 2018. From 2022-2023 alone, the embargo caused an estimated $4.87 billion in damage. Cuba's GDP collapsed 34% after the Soviet Union fell — not because of Cuban policy failures, but because the embargo blocked alternative trade partnerships.",
+      "question": "How much economic damage has the embargo caused?"
+    }
+  ],
+  "featured": false,
+  "hasEmbeddedVideo": false,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "blackouts",
+    "blockade",
+    "caribbean",
+    "cuba-embargo",
+    "cuban-democracy-act",
+    "cuban-revolution",
+    "economic-warfare",
+    "executive-order-14380",
+    "food-shortages",
+    "fuel-crisis",
+    "helms-burton-act",
+    "human-rights",
+    "humanitarian-crisis",
+    "international-law",
+    "latin-america",
+    "lester-mallory",
+    "mallory-memo",
+    "mexico",
+    "moron-protests",
+    "oil-blockade",
+    "regime-change",
+    "sanctions",
+    "special-period",
+    "trump-administration",
+    "united-nations",
+    "us-foreign-policy",
+    "venezuela"
+  ],
+  "leadParagraph": "Blackouts. Food shortages. Medical scarcity. The US media calls it the failure of communism. But Cuba&#39;s crisis was manufactured — the intended outcome of a 65-year blockade designed to starve a nation into submission.",
+  "linkedPitch": null,
+  "location": "Moron, Cuba",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Cuba: Protesters set fire to the ruling party's office amid blackouts",
+    "asset": {
+      "_ref": "image-86b0965c3df6202857132b24e4c70fd562483b4c-1199x674-jpg",
+      "_type": "reference"
+    }
+  },
+  "methodology": "",
+  "needsReview": false,
+  "publishedAt": "2026-03-16T19:39",
+  "readingTimeMinutes": 14,
+  "relatedArticles": [
+    {
+      "_key": "article-1343286e-dbf6-4d85-9fca-0fca3a494c76",
+      "_ref": "article-1343286e-dbf6-4d85-9fca-0fca3a494c76",
+      "_type": "reference"
+    },
+    {
+      "_key": "article-9992ca74-df44-40bf-9caf-45e5e56269c7",
+      "_ref": "article-9992ca74-df44-40bf-9caf-45e5e56269c7",
+      "_type": "reference"
+    },
+    {
+      "_key": "article-82d5510e-acf9-4ca2-bd86-6cadc1592d74",
+      "_ref": "article-82d5510e-acf9-4ca2-bd86-6cadc1592d74",
+      "_type": "reference"
+    },
+    {
+      "_key": "article-63716684-177e-4d27-a340-3d2e3c5eb45d",
+      "_ref": "article-63716684-177e-4d27-a340-3d2e3c5eb45d",
+      "_type": "reference"
+    },
+    {
+      "_key": "article-96ecb20d-f9c5-40fd-a8e0-02ec77584478",
+      "_ref": "article-96ecb20d-f9c5-40fd-a8e0-02ec77584478",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": {
+    "_type": "seo",
+    "metaDescription": "Blackouts. Food shortages. Medical scarcity. The US media calls it the failure of communism. But Cuba's crisis was manufactured — the intended outcome of a 65-year blockade designed to starve a nation into submission.",
+    "metaTitle": "Cuba's Crisis: 65 Years of US Economic Warfare, Not a Failure of Socialism",
+    "noIndex": false
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "cuba-crisis-isn-t-a-failure-of-socialism-it-s-what-65-years-of-economic-warfare-looks-like"
+  },
+  "tags": [
+    "cuba-embargo",
+    "economic-warfare",
+    "trump-administration"
+  ],
+  "title": "Cuba Crisis Isn't a Failure of Socialism — It's What 65 Years of Economic Warfare Looks Like",
+  "updatedAt": "2026-04-13T20:58:02.412Z",
+  "videoLink": ""
+}

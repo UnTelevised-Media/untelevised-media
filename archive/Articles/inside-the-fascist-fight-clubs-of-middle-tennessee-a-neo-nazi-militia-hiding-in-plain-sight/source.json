@@ -1,0 +1,126 @@
+{
+  "slug": "inside-the-fascist-fight-clubs-of-middle-tennessee-a-neo-nazi-militia-hiding-in-plain-sight",
+  "totalSources": 15,
+  "sources": [
+    {
+      "_id": "source-us-department-of-justice-rundo-sentencing",
+      "description": null,
+      "isAnonymous": null,
+      "label": "U.S. Department of Justice — Rundo Sentencing",
+      "type": "official",
+      "url": "https://www.justice.gov/usao-cdca/pr/former-orange-county-resident-linked-white-supremacy-group-sentenced-2-years-prison"
+    },
+    {
+      "_id": "source-newschannel-5-fascist-fight-club-movement-surfaces-in-tennessee",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NewsChannel 5 — Fascist Fight Club Movement Surfaces in Tennessee",
+      "type": "media",
+      "url": "https://www.newschannel5.com/news/newschannel-5-investigates/franklin-politics/tentacles-of-fascist-fight-club-reach-into-tennessee-critics-call-active-clubs-a-neo-nazi-militia"
+    },
+    {
+      "_id": "source-southern-poverty-law-center-patriot-front-hidden-hand-behind-active-clubs",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Southern Poverty Law Center — Patriot Front Hidden Hand Behind Active Clubs",
+      "type": "report",
+      "url": "https://www.splcenter.org/resources/hatewatch/patriot-front-active-clubs-network-influence/"
+    },
+    {
+      "_id": "source-the-guardian-neo-nazi-cell-infiltrated-tennessee-martial-arts-school",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Neo-Nazi Cell Infiltrated Tennessee Martial Arts School",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2025/jun/21/tennessee-neo-nazi-martial-arts"
+    },
+    {
+      "_id": "source-the-guardian-federal-contractor-hired-white-supremacist-leader",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Federal Contractor Hired White Supremacist Leader",
+      "type": "media",
+      "url": "https://www.theguardian.com/world/2026/feb/09/patriot-front-agriculture-department-contractor"
+    },
+    {
+      "_id": "source-splc-active-clubs-extremist-file",
+      "description": null,
+      "isAnonymous": null,
+      "label": "SPLC — Active Clubs Extremist File",
+      "type": "report",
+      "url": "https://www.splcenter.org/resources/extremist-files/active-clubs/"
+    },
+    {
+      "_id": "source-splc-violent-white-nationalist-leader-menacing-tennessee",
+      "description": null,
+      "isAnonymous": null,
+      "label": "SPLC — Violent White Nationalist Leader Menacing Tennessee",
+      "type": "report",
+      "url": "https://www.splcenter.org/hatewatch/2023/12/15/were-not-scared-these-parasites-violent-white-nationalist-leader-menacing-tennessee"
+    },
+    {
+      "_id": "source-nbc-news-wcyb-rettke-verdict",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NBC News / WCYB — Rettke Verdict",
+      "type": "media",
+      "url": "https://www.nbcnews.com/news/nbcblk/student-arrested-wearing-gorilla-mask-black-lives-matter-rally-cleared-n1030961"
+    },
+    {
+      "_id": "source-newschannel-5-white-supremacist-group-delivers-show-of-force-for-gabrielle-hanso",
+      "description": null,
+      "isAnonymous": null,
+      "label": "NewsChannel 5 — White Supremacist Group Delivers Show of Force for Gabrielle Hanson",
+      "type": "media",
+      "url": "https://www.newschannel5.com/news/newschannel-5-investigates/white-supremacist-group-delivers-show-of-force-for-franklin-mayoral-candidate-gabrielle-hanson"
+    },
+    {
+      "_id": "source-doj-nathaniel-noyce-january-6-charges",
+      "description": null,
+      "isAnonymous": null,
+      "label": "DOJ — Nathaniel Noyce January 6 Charges",
+      "type": "official",
+      "url": "https://www.wric.com/news/local-news/richmond/doj-richmond-man-patriot-front-member-arrested-in-connection-to-jan-6-insurrection/"
+    },
+    {
+      "_id": "source-cnn-inside-patriot-front-tennessee-compound",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CNN — Inside Patriot Front Tennessee Compound",
+      "type": "media",
+      "url": "https://www.cnn.com/2025/12/15/us/patriot-front-white-supremacists-tennessee"
+    },
+    {
+      "_id": "source-counter-extremism-project-active-clubs",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Counter Extremism Project — Active Clubs",
+      "type": "report",
+      "url": "https://www.counterextremism.com/extremists/robert-rundo"
+    },
+    {
+      "_id": "source-cbs-news-combat-sport-clubs-boost-white-nationalist-recruitment",
+      "description": null,
+      "isAnonymous": null,
+      "label": "CBS News — Combat Sport Clubs Boost White Nationalist Recruitment",
+      "type": "media",
+      "url": "https://www.cbsnews.com/news/combat-sport-clubs-boost-recruitment-white-nationalist-hate-group-report/"
+    },
+    {
+      "_id": "source-wired-rundo-sentencing-and-active-clubs-movement",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WIRED — Rundo Sentencing and Active Clubs Movement",
+      "type": "media",
+      "url": "https://www.wired.com/story/robert-rundo-sentencing-active-clubs/"
+    },
+    {
+      "_id": "source-the-guardian-russian-street-fight-club-expanded-into-us",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Guardian — Russian Street Fight Club Expanded Into US",
+      "type": "media",
+      "url": "https://www.theguardian.com/us-news/2025/oct/17/russia-street-fight-club-far-right-active-club"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "slug": "the-conspiracy-charge-how-the-doj-is-turning-immigration-solidarity-into-a-federal-crime",
+  "totalImages": 4,
+  "downloadedAt": "2026-08-07T01:54:41.926Z",
+  "mainImage": {
+    "alt": "Federal agents in tactical gear standing outside a government building in Minneapolis during immigration enforcement operations",
+    "caption": "Federal immigration agents stand guard outside a building in Minneapolis, Minnesota, January 10, 2026, during immigration enforcement operations that sparked widespread protests.",
+    "credit": "Reuters",
+    "asset": "image-14ac431038117ea2fcc1e3a000babf37265f395e-3000x2000-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "ICE agents detaining a protester on the ground outside a federal building during a demonstration in Newark, New Jersey",
+      "caption": "[object Object]",
+      "credit": "Reuters",
+      "asset": "image-512e5f3c8d980713359519ba28afac08a2fdae5e-3000x2000-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Protesters facing off with federal ICE agents outside a detention facility in Newark, New Jersey",
+      "caption": "[object Object]",
+      "credit": "Reuters",
+      "asset": "image-41dbeb3d2d264a9f48ebe3ff1b72efa39eab7f7d-3000x1687-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Protester holding megaphone facing line of ICE agents outside federal building during demonstration",
+      "caption": "[object Object]",
+      "credit": "Reuters",
+      "asset": "image-f5e45c4f284ace31277f1ec0f97694541532c684-3000x2000-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    }
+  ]
+}

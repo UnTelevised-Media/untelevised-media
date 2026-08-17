@@ -1,0 +1,43 @@
+{
+  "slug": "ukraine-s-cardboard-maidan-how-zelensky-fired-the-wrong-man-and-the-streets-said-no",
+  "totalImages": 4,
+  "downloadedAt": "2026-08-07T01:55:00.910Z",
+  "mainImage": {
+    "alt": "Mykhailo Fedorov, Ukraine's young defense minister, in formal attire",
+    "caption": "Mykhailo Fedorov, Ukraine's Minister of Defense, in January 2026.",
+    "credit": "The New York Times / The Economist",
+    "asset": "image-9c83a3ad87c2935e79171972cdf5e3a2ede0f435-1280x720-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Crowd of protesters in central Kyiv holding cardboard signs near Ivan Franko Theater",
+      "caption": "[object Object]",
+      "credit": "Mezha / Bukvy",
+      "asset": "image-3f710c4a82671904310b19557a00b0a09b75e68d-1023x575-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Protesters in Odesa holding signs and Ukrainian flags in support of Fedorov",
+      "caption": "[object Object]",
+      "credit": "Suspilne Odesa / Euromaidan Press",
+      "asset": "image-f31aeebe9ffa4fbabba6ef91e1070fca5bb5832d-1040x585-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Large crowd of young protesters holding cardboard signs outside the Presidential Office in Kyiv at night",
+      "caption": "[object Object]",
+      "credit": "Sergii Kostezh / Kyiv Post",
+      "asset": "image-536665eeeee093046a83c7459dc9c71d693b79aa-1280x960-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    }
+  ]
+}

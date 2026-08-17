@@ -1,0 +1,43 @@
+{
+  "slug": "federal-plaza-burns-when-the-voice-of-the-people-is-ignored-the-people-strike-back",
+  "totalImages": 4,
+  "downloadedAt": "2026-08-07T01:55:16.330Z",
+  "mainImage": {
+    "alt": "Black smoke rises from an incendiary device detonated outside 26 Federal Plaza federal building in Lower Manhattan",
+    "caption": "Black smoke rises from an incendiary device detonated outside 26 Federal Plaza in Lower Manhattan, home to ICE offices and immigration courts",
+    "credit": "AP via Newsweek",
+    "asset": "image-d6792d2c83fc519defffb6cf1c14a304abcefe27-3000x2000-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Shopping cart engulfed in flames outside of the federal building seen from above.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-4d3c4fb6b6ae269a6e7cf1651edbbb1ae2853b41-1920x1080-png",
+      "filename": "image-1.jfif",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Suspect being taken into custody after the incident.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-7cdc6849fa99bae0365c79b75ec65a4074250f32-1600x900-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Officers tackle suspect of the shopping cart fire as smoke fills the sidewalk.",
+      "caption": "",
+      "credit": "",
+      "asset": "image-b5daaeebb44f7ed4809fd7aff3b42090feddfff5-1174x660-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "_id": "the-ceasefire-that-never-was-israel-kills-24-in-gaza-as-trump-announces-historic-disarmament-deal",
+  "allowComments": null,
+  "author": {
+    "_ref": "6f0d81b5-46c8-4c7a-a1fd-05ef547b3a6e",
+    "_type": "reference",
+    "name": "Tyler Durden"
+  },
+  "breakingNews": false,
+  "categories": [
+    {
+      "_key": "cat-gaza",
+      "_ref": "d4f4b7a7-8a5c-42fa-9b71-52588173e5e3",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-human-rights",
+      "_ref": "e126f20a-7b65-42a5-96a0-32bb460e803d",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-middle-east",
+      "_ref": "be568b10-e3c4-4db5-b3a1-d52edf97c77d",
+      "_type": "reference"
+    }
+  ],
+  "correction": null,
+  "deletionRequest": null,
+  "description": "Two days after Trump announced a 'historic' disarmament deal, Israel killed 24 Palestinians in 48 hours — including an 8-year-old, an 18-month-old, and a pregnant woman whose unborn child was recovered from rubble. The ceasefire is a cover for continued genocide.",
+  "eventDate": "2026-07-30T00:00:00.000Z",
+  "faqs": [
+    {
+      "_key": "faq-0",
+      "_type": "faqItem",
+      "answer": "According to Gaza's Health Ministry and multiple monitoring organizations, at least 1,250 Palestinians have been killed and more than 4,100 wounded since the ceasefire took effect on October 10, 2025. July 2026 was the deadliest single month of the ceasefire period, with 152 killed.",
+      "question": "How many Palestinians has Israel killed since the 'ceasefire' began in October 2025?"
+    },
+    {
+      "_key": "faq-1",
+      "_type": "faqItem",
+      "answer": "The Board of Peace is a body established by Trump to oversee post-war reconstruction and governance of Gaza. On July 30, 2026, Trump announced via Truth Social that it had reached a 'historic' agreement for the complete disarmament of Hamas and all armed groups in Gaza. Hamas negotiator Ghazi Hamad said the group would not implement the deal unless Israel halted attacks and withdrew troops — conditions Israel has not met.",
+      "question": "What is Trump's Board of Peace and what did it announce?"
+    },
+    {
+      "_key": "faq-2",
+      "_type": "faqItem",
+      "answer": "Named victims include Abdullah Abu Taif (33), his pregnant wife Abeer Anan (29), their son Azzam (5), and their unborn child, killed in Gaza City's al-Sousi Tower. Mahmoud al-Hams (38), his wife Fatima (37), and their young daughter were killed in al-Qarara. Kamal Abu Muailiq (68) and his wife Huda (59) were killed near Deir el-Balah. Zaid Nofal (1) was killed in Bureij. Ratil Abdullah (8) was killed in Khan Younis.",
+      "question": "Who were the named victims of the August 2 attacks?"
+    },
+    {
+      "_key": "faq-3",
+      "_type": "faqItem",
+      "answer": "On the night of August 1, Israeli strikes destroyed the medicine warehouse attached to Al-Aqsa Hospital in Deir el-Balah, wiping out two of four storage facilities and severely damaging two more. Gaza's Minister of Health Director-General Munir al-Bursh said the strike 'turns medicine and illness itself into a tool of war.' Israel claimed it was targeting a Hamas weapons depot next to the hospital.",
+      "question": "What happened to Al-Aqsa Hospital's medicine warehouse?"
+    }
+  ],
+  "featured": true,
+  "hasEmbeddedVideo": null,
+  "imageGallery": null,
+  "isFieldReport": null,
+  "keywords": [
+    "Gaza ceasefire violations August 2026",
+    "Israel kills Palestinians during ceasefire",
+    "Trump Hamas disarmament deal",
+    "Gaza casualties 2026",
+    "Board of Peace Gaza",
+    "Abdullah Abu Taif Abeer Anan killed",
+    "al-Sousi Tower Gaza strike",
+    "Gaza medicine warehouse destroyed",
+    "Israel Gaza ceasefire deaths",
+    "Palestinian children killed Gaza"
+  ],
+  "leadParagraph": "Two days after Donald Trump announced what he called a 'historic' agreement for the complete disarmament of Hamas in Gaza, Israeli forces killed at least 24 Palestinians across the strip in 48 hours — including an eight-year-old girl, an 18-month-old baby, a pregnant woman, and her unborn child. The ceasefire that took effect in October 2025 has already cost 1,250 Palestinian lives.",
+  "linkedPitch": null,
+  "location": "Gaza Strip",
+  "mainImage": {
+    "_type": "image",
+    "alt": "Palestinians inspect destroyed buildings at the scene of an Israeli airstrike in Nuseirat, central Gaza Strip, August 1, 2026",
+    "asset": {
+      "_ref": "image-3ce289c3a3ae199af70fb30babd41ed8963da7f3-599x399-webp",
+      "_type": "reference"
+    },
+    "caption": "Palestinians inspect the scene of an Israeli airstrike in Nuseirat in the central Gaza Strip on August 1, 2026, the same day Trump announced a 'historic' disarmament deal",
+    "credit": "AP Photo/Abdel Kareem Hana"
+  },
+  "methodology": "This article was reported using verified casualty figures from Gaza's Ministry of Health, Al Jazeera, Middle East Monitor, Haaretz, and Times of Israel. Named victims were confirmed through Anadolu Agency and Al Jazeera field reporting. Disarmament deal reporting cross-referenced across Al Jazeera, Axios, BBC, and CNN. Cumulative ceasefire casualty data sourced from Middle East Monitor and Palestinian Information Center. All claims attributed to Israeli military noted as such. Article written August 6, 2026.",
+  "needsReview": null,
+  "publishedAt": "2026-08-06T15:00:00.000Z",
+  "readingTimeMinutes": null,
+  "relatedArticles": [
+    {
+      "_key": "rel-1",
+      "_ref": "900-dead-since-the-ceasefire-israel-killing-spree-and-the-wests-criminal-silence",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-2",
+      "_ref": "4fsnkgml63i",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-3",
+      "_ref": "825367d7-8854-4267-8560-1f6c5c803596",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-4",
+      "_ref": "29803114-066a-403d-a340-9c7ff0c473c2",
+      "_type": "reference"
+    },
+    {
+      "_key": "rel-5",
+      "_ref": "2ff7dd72-806f-4128-bec5-409e1bb0feee",
+      "_type": "reference"
+    },
+    {
+      "_key": "6de78597585e",
+      "_ref": "america-lost-the-war-how-trump-s-iran-campaign-became-israel-s-fight",
+      "_type": "reference"
+    }
+  ],
+  "reviewedBy": {
+    "_ref": "f3b73982-1984-465c-8c06-061367920a78",
+    "_type": "reference"
+  },
+  "seo": null,
+  "slug": {
+    "_type": "slug",
+    "current": "the-ceasefire-that-never-was-israel-kills-24-in-gaza-as-trump-announces-historic-disarmament"
+  },
+  "tags": [
+    "Gaza",
+    "Israel",
+    "ceasefire violations",
+    "Trump",
+    "Board of Peace",
+    "Hamas disarmament",
+    "Palestinian casualties",
+    "genocide",
+    "Netanyahu",
+    "Gaza Health Ministry"
+  ],
+  "title": "The Ceasefire That Never Was: Israel Kills 24 in Gaza as Trump Announces 'Historic' Disarmament Deal",
+  "updatedAt": null,
+  "videoLink": null
+}

@@ -1,0 +1,43 @@
+{
+  "slug": "rural-communities-seize-bolivias-oil-field-halt-production-in-santa-cruz",
+  "totalImages": 4,
+  "downloadedAt": "2026-08-07T01:56:21.697Z",
+  "mainImage": {
+    "alt": "Bolivian rural workers at the seized Humberto Suárez Roca oil field in Santa Rosa del Sara, Santa Cruz department",
+    "caption": "Bolivian rural workers at the seized Humberto Suárez Roca oil field in Santa Rosa del Sara",
+    "credit": "Democracy Now!",
+    "asset": "image-018d6f3a705ac3003e23e98a0ed0d4bb65265e79-960x540-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Central Obrera Boliviana (COB) union members marching during the national general strike",
+      "caption": "Central Obrera Boliviana (COB) union members during the national general strike",
+      "credit": "People's Dispatch",
+      "asset": "image-7086b571ae717c58f62529d1e1a7d02dac7e8580-1035x582-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Bolivian police in riot gear clash with protesters blocking roads during the general strike",
+      "caption": "Bolivian police clash with protesters blocking roads during the general strike",
+      "credit": "France 24",
+      "asset": "image-64f1abb1bc8a6707f3d433dacb59d5d61f3c5ebc-1024x576-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    },
+    {
+      "index": 2,
+      "alt": "Mass protests fill the streets of Bolivia during the 2026 general strike against neoliberal austerity measures",
+      "caption": "Mass protests fill the streets of Bolivia during the 2026 general strike against neoliberal austerity",
+      "credit": "T3Pedia",
+      "asset": "image-26020c64ac04786832be24ced4919e65dfeb855c-1280x853-webp",
+      "filename": "image-3.webp",
+      "downloaded": true
+    }
+  ]
+}

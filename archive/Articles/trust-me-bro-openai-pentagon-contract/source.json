@@ -1,0 +1,30 @@
+{
+  "slug": "trust-me-bro-openai-pentagon-contract",
+  "totalSources": 3,
+  "sources": [
+    {
+      "_id": "UH0czzC9lJ5tyspFRAoyhe",
+      "description": null,
+      "isAnonymous": false,
+      "label": "The Intercept",
+      "type": "other",
+      "url": "https://theintercept.com/2026/03/08/openai-anthropic-military-contract-ethics-surveillance/"
+    },
+    {
+      "_id": "k1QYwAPp56GZ2DtatiBUKj",
+      "description": null,
+      "isAnonymous": false,
+      "label": "The Guardian",
+      "type": "other",
+      "url": "https://www.theguardian.com/technology/2026/feb/28/openai-us-military-anthropic"
+    },
+    {
+      "_id": "k1QYwAPp56GZ2DtatiBUW9",
+      "description": null,
+      "isAnonymous": false,
+      "label": "EFF",
+      "type": "other",
+      "url": "https://www.eff.org/deeplinks/2026/03/weasel-words-openais-pentagon-deal-wont-stop-ai-powered-surveillance"
+    }
+  ]
+}

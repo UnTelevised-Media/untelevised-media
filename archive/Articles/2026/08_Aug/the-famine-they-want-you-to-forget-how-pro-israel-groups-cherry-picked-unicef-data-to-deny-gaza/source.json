@@ -1,0 +1,86 @@
+{
+  "slug": "the-famine-they-want-you-to-forget-how-pro-israel-groups-cherry-picked-unicef-data-to-deny-gaza",
+  "totalSources": 10,
+  "sources": [
+    {
+      "_id": "source-jp-unicef-survey-aug2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Jerusalem Post — 'Facts prevail over fiction,' Danon says as new UNICEF-led survey challenges Gaza famine claims",
+      "type": "article",
+      "url": "https://www.jpost.com/middle-east/article-904834"
+    },
+    {
+      "_id": "source-who-famine-confirmed-aug2025",
+      "description": null,
+      "isAnonymous": null,
+      "label": "WHO — Famine confirmed for first time in Gaza",
+      "type": "statement",
+      "url": "https://www.who.int/news/item/22-08-2025-famine-confirmed-for-first-time-in-gaza"
+    },
+    {
+      "_id": "source-ipc-famine-review-aug2025",
+      "description": null,
+      "isAnonymous": null,
+      "label": "IPC — Famine Review Committee Report Gaza Aug 2025",
+      "type": "document",
+      "url": "https://www.ipcinfo.org/fileadmin/user_upload/ipcinfo/docs/IPC_Famine_Review_Committee_Report_Gaza_Aug2025.pdf"
+    },
+    {
+      "_id": "source-unrwa-lancet-malnutrition-oct2025",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UNRWA — Lancet Study Reveals Alarming Surge in Child Malnutrition",
+      "type": "article",
+      "url": "https://www.unrwa.org/newsroom/news-releases/gaza-unrwa%E2%80%99s-lancet-study-reveals-alarming-surge-child-malnutrition"
+    },
+    {
+      "_id": "source-unicef-midyear-2026",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UNICEF — Humanitarian Situation Update: Mid-Year Analysis 2026",
+      "type": "document",
+      "url": "https://www.unicef.org/sop/reports/humanitarian-situation-update-analysis-response-needs-children-mid-year-2026"
+    },
+    {
+      "_id": "source-reuters-malnutrition-aug2025",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — Gaza's hungry children slide towards starvation as emergency treatments dwindle",
+      "type": "media",
+      "url": "https://www.reuters.com/world/middle-east/gazas-hungry-children-slide-towards-starvation-emergency-treatments-dwindle-2025-08-22/"
+    },
+    {
+      "_id": "source-prism-reports-aid-sites-2025",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Prism Reports — Aid sites were Gaza's compulsory 'Squid Game'",
+      "type": "article",
+      "url": "https://prismreports.org/2025/12/03/gaza-aid-sites-death/"
+    },
+    {
+      "_id": "source-unicefusa-famine-gaza",
+      "description": null,
+      "isAnonymous": null,
+      "label": "UNICEF USA — Desperate Situation for Gaza's 1 Million Children",
+      "type": "article",
+      "url": "https://www.unicefusa.org/stories/desperate-situation-gazas-1-million-children"
+    },
+    {
+      "_id": "source-jc-famine-narrative",
+      "description": null,
+      "isAnonymous": null,
+      "label": "The Jewish Chronicle — How a United Nations study shatters the Gaza starvation narrative",
+      "type": "article",
+      "url": "https://www.thejc.com/opinion/analysis/how-a-united-nations-study-shatters-the-gaza-starvation-narrative-v0lzthdp"
+    },
+    {
+      "_id": "source-reuters-gaza-no-longer-famine-dec2025",
+      "description": null,
+      "isAnonymous": null,
+      "label": "Reuters — Gaza no longer in famine after aid access improves, hunger monitor says",
+      "type": "article",
+      "url": "https://www.reuters.com/world/middle-east/gaza-no-longer-has-famine-says-global-hunger-monitor-2025-12-19/"
+    }
+  ]
+}

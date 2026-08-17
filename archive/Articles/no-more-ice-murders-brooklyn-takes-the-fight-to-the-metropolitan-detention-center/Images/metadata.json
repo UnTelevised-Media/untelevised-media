@@ -1,0 +1,34 @@
+{
+  "slug": "no-more-ice-murders-brooklyn-takes-the-fight-to-the-metropolitan-detention-center",
+  "totalImages": 3,
+  "downloadedAt": "2026-08-07T01:54:51.870Z",
+  "mainImage": {
+    "alt": "Crowd of protesters with signs and banners demonstrating against ICE in New York City",
+    "caption": "Protesters demonstrate near the US immigration court in Manhattan against ICE raids and enforcement operations",
+    "credit": "Reuters/Brendan McDermid",
+    "asset": "image-7a7dd8d04114df5274634afdcac2a0e24ead93b7-1024x683-webp",
+    "filename": "main.webp",
+    "downloaded": true
+  },
+  "gallery": [],
+  "body": [
+    {
+      "index": 0,
+      "alt": "Exterior view of the Metropolitan Detention Center in Brooklyn, a large modern prison building with fencing along the street in Sunset Park",
+      "caption": "The Metropolitan Detention Center in Brooklyn's Sunset Park, a federal facility that holds at least 200 immigrants, many without criminal charges.",
+      "credit": "AP Photo/Ted Shaffrey",
+      "asset": "image-c3de0fda4669c9d17d49c53f3ede71e7f0df4859-4351x2448-webp",
+      "filename": "image-1.webp",
+      "downloaded": true
+    },
+    {
+      "index": 1,
+      "alt": "Large crowd of protesters marching across the Brooklyn Bridge carrying signs and banners during an anti-ICE demonstration on January 19, 2026",
+      "caption": "Over 100 demonstrators march across the Brooklyn Bridge in an anti-ICE protest on January 19, 2026.",
+      "credit": "Brooklyn Eagle/Gus D'Agostino",
+      "asset": "image-abd17b203e6beda66e0a33a92c75068fc0523844-2560x1708-webp",
+      "filename": "image-2.webp",
+      "downloaded": true
+    }
+  ]
+}
